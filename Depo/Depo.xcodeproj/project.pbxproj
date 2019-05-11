@@ -33,12 +33,12 @@
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
 		170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
-		17589F642275E33900A5DB37 /* SignUpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SignUpSupportView.swift */; };
-		17589F652275E33900A5DB37 /* SignUpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SignUpSupportView.swift */; };
+		17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
+		17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
 		17589F672275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
-		17589F682275E33900A5DB37 /* SignUpErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F632275E33800A5DB37 /* SignUpErrorView.swift */; };
-		17589F692275E33900A5DB37 /* SignUpErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F632275E33800A5DB37 /* SignUpErrorView.swift */; };
+		17589F682275E33900A5DB37 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F632275E33800A5DB37 /* ErrorBannerView.swift */; };
+		17589F692275E33900A5DB37 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F632275E33800A5DB37 /* ErrorBannerView.swift */; };
 		17589F722276336800A5DB37 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */; };
 		17589F732276336800A5DB37 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */; };
 		17589F742276336800A5DB37 /* PhoneCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F6C2276336700A5DB37 /* PhoneCodeInputView.swift */; };
@@ -3991,9 +3991,9 @@
 		17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldView.swift; sourceTree = "<group>"; };
 		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
 		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
-		17589F612275E33800A5DB37 /* SignUpSupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpSupportView.swift; sourceTree = "<group>"; };
+		17589F612275E33800A5DB37 /* SupportBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBannerView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
-		17589F632275E33800A5DB37 /* SignUpErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpErrorView.swift; sourceTree = "<group>"; };
+		17589F632275E33800A5DB37 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
 		17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhoneEnterView.swift; sourceTree = "<group>"; };
 		17589F6C2276336700A5DB37 /* PhoneCodeInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneCodeInputView.swift; sourceTree = "<group>"; };
 		17589F6D2276336700A5DB37 /* ProfileTextPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextPickerView.swift; sourceTree = "<group>"; };
@@ -6502,9 +6502,9 @@
 		17589F602275E33800A5DB37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17589F612275E33800A5DB37 /* SignUpSupportView.swift */,
+				17589F612275E33800A5DB37 /* SupportBannerView.swift */,
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
-				17589F632275E33800A5DB37 /* SignUpErrorView.swift */,
+				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -16122,7 +16122,7 @@
 				8C0E8EE11FDEBDFF00789C91 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C0E8EE31FDEBDFF00789C91 /* PhotoVideoDetailInteractorInput.swift in Sources */,
-				17589F652275E33900A5DB37 /* SignUpSupportView.swift in Sources */,
+				17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */,
 				8C0B919920170E5200A5BA81 /* DuplicatedContactsViewInput.swift in Sources */,
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				FA9ED11D201B7EFC00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */,
@@ -16376,7 +16376,7 @@
 				7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */,
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
-				17589F692275E33900A5DB37 /* SignUpErrorView.swift in Sources */,
+				17589F692275E33900A5DB37 /* ErrorBannerView.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				17589F672275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */,
 				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
@@ -17538,7 +17538,7 @@
 				E7C61128665828354AB0EBDC /* SplashViewOutput.swift in Sources */,
 				97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */,
 				EC32900C7F5F20B659B549BE /* SplashModuleInput.swift in Sources */,
-				17589F682275E33900A5DB37 /* SignUpErrorView.swift in Sources */,
+				17589F682275E33900A5DB37 /* ErrorBannerView.swift in Sources */,
 				8C00970E1F6BDA0A00FA069C /* MoreFilesActionsPresenter.swift in Sources */,
 				4DD676109D535EB5797F2580 /* SplashPresenter.swift in Sources */,
 				8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */,
@@ -17603,7 +17603,7 @@
 				78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */,
 				7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
-				17589F642275E33900A5DB37 /* SignUpSupportView.swift in Sources */,
+				17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */,
 				7C4988171F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				4AD1A81A208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				4A56D5BE202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SignUpErrorView.swift
+//  ErrorBannerView.swift
 //  Depo
 //
 //  Created by Raman Harhun on 4/24/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpErrorView: UIView {
+class ErrorBannerView: UIView {
 
     private let messageLabel: UILabel = {
         let newValue = UILabel()

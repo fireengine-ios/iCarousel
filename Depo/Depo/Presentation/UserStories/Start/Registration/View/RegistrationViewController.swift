@@ -116,15 +116,15 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
     
-    private let supportView: SignUpSupportView = {
-        let newValue = SignUpSupportView()
+    private let supportView: SupportBannerView = {
+        let newValue = SupportBannerView()
         newValue.isHidden = true
         
         return newValue
     }()
 
-    private let errorView: SignUpErrorView = {
-        let newValue = SignUpErrorView()
+    private let errorView: ErrorBannerView = {
+        let newValue = ErrorBannerView()
         newValue.isHidden = true
 
         return newValue
@@ -395,8 +395,8 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - RegistrationInteractorOutput
-extension RegistrationViewController: SignUpSupportViewDelegate {
+// MARK: - SupportBannerViewDelegate
+extension RegistrationViewController: SupportBannerViewDelegate {
     func openSupport() {
         output.openSupport()
     }

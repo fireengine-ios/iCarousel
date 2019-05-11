@@ -1,5 +1,5 @@
 //
-//  SignUpSupportView.swift
+//  SupportBannerView.swift
 //  Depo
 //
 //  Created by Raman Harhun on 4/23/19.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol SignUpSupportViewDelegate: class {
+protocol SupportBannerViewDelegate: class {
     func openSupport()
 }
 
-final class SignUpSupportView: UIView {
+final class SupportBannerView: UIView {
     
     private let messageLabel: UILabel = {
         let newValue = UILabel()
@@ -50,7 +50,7 @@ final class SignUpSupportView: UIView {
         return CAGradientLayer.self
     }
     
-    weak var delegate: SignUpSupportViewDelegate?
+    weak var delegate: SupportBannerViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
