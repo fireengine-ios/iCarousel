@@ -24,13 +24,13 @@ class LoginInteractor: LoginInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
-    private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
     private lazy var accountService = AccountService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
     private let contactsService = ContactService()
-    
+    private let storageVars: StorageVars
+
     private var rememberMe: Bool = true
     
     private var attempts: Int = 0
@@ -48,10 +48,9 @@ class LoginInteractor: LoginInteractorInput {
     private var atachedCaptcha: CaptchaParametrAnswer?
     private lazy var captchaService = CaptchaService()
     
-    private let blockedUsersKey = "BlockedUsers"
     private var blockedUsers: [String : Date] {
         willSet {
-            UserDefaults.standard.set(newValue, forKey: blockedUsersKey)
+            storageVars.blockedUsers = newValue
         }
     }
     
@@ -61,7 +60,9 @@ class LoginInteractor: LoginInteractorInput {
     private let maxAttemps: Int = 11
     
     init() {
-        blockedUsers = (UserDefaults.standard.value(forKey: blockedUsersKey) as? [String : Date]) ?? [:]
+        let storageVars: StorageVars = factory.resolve()
+        blockedUsers = storageVars.blockedUsers
+        self.storageVars = storageVars
     }
     
     func rememberMe(state: Bool) {
