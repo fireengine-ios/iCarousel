@@ -14,4 +14,10 @@ public extension Array where Element: Equatable {
             self.remove(at: index)
         }
     }
+    
+    public mutating func append(_ newElement: Element?) {
+        if let element = newElement {
+            self.append(element)
+        }
+    }
 }

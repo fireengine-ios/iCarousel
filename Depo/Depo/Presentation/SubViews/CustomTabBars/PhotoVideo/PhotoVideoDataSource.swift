@@ -12,7 +12,7 @@ protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
     func contentDidChange(_ fetchedObjects: [MediaItem])
-    func convertFetchedObjectsDidStart()
+    func convertFetchedObjectsInProgress()
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -62,6 +62,12 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
     
+    private lazy var insertedItemsIds = [Int64]()
+    private lazy var deletedItemsIds = [Int64]()
+    private lazy var updatedItemsIds = [Int64]()
+    private var lastFetchObjectCompetion: WrapObjectsCallBack?
+    private var isConverting = false
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
@@ -107,7 +113,7 @@ final class PhotoVideoDataSource: NSObject {
     func performFetch() {
         try? fetchedResultsController.performFetch()
         //need for update year view on scrollBar
-        updateLastFetchedObjects()
+        updateLastFetchedObjects(deletedIds: [], updatedIds: [], insertedIds: [])
     }
     
     func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
@@ -130,27 +136,102 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) {
-        if !lastWrapedObjects.isEmpty {
-            completion(lastWrapedObjects.getArray())
+        if isConverting {
+            delegate?.convertFetchedObjectsInProgress()
+            lastFetchObjectCompetion = completion
         } else {
-            delegate?.convertFetchedObjectsDidStart()
-            convertFetchedObjects(completion)
+            completion(lastWrapedObjects.getArray())
         }
     }
     
-    private func convertFetchedObjects(_ completion: WrapObjectsCallBack? = nil) {
+    private func convertFetchedObjects() {
+        isConverting = true
         DispatchQueue.toBackground { [weak self] in
-            let ids = self?.lastFetchedObjects?.map { $0.idValue } ?? []
+            guard let self = self else {
+                return
+            }
+            
+            let ids = self.lastFetchedObjects?.map { $0.idValue } ?? []
+            guard !ids.isEmpty else {
+                self.finishConverting(items: self.lastWrapedObjects.getArray())
+                return
+            }
+            
             MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
                 let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
-                completion?(wrapedObjects)
+                self.finishConverting(items: wrapedObjects)
                 self.lastWrapedObjects.removeAll()
                 self.lastWrapedObjects.append(wrapedObjects)
             }
         }
+    }
+    
+    private func mergeFetchedObjects(deletedIds: [Int64], updatedIds: [Int64], insertedIds: [Int64]) {
+        isConverting = true
+        DispatchQueue.toBackground { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let ids = deletedIds + updatedIds + insertedIds
+            guard !ids.isEmpty else {
+                self.finishConverting(items: self.lastWrapedObjects.getArray())
+                return
+            }
+            
+            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+                guard let self = self else {
+                    return
+                }
+                
+                for mediaItem in items {
+                    guard let uuid = mediaItem.uuid else {
+                        continue
+                    }
+                    
+                    if deletedIds.contains(mediaItem.idValue) {
+                        self.lastWrapedObjects.remove(where: {$0.uuid == uuid})
+                    } else {
+                        if updatedIds.contains(mediaItem.idValue) {
+                            self.lastWrapedObjects.remove(where: {$0.uuid == uuid})
+                        }
+                        
+                        let wrappedObject = WrapData(mediaItem: mediaItem)
+                        self.lastWrapedObjects.append(wrappedObject)
+                    }
+                }
+
+                self.lastWrapedObjects.sortItself(by: { obj1, obj2 -> Bool in
+                    if let date1 = obj1.metaData?.takenDate ?? obj1.creationDate,
+                        let date2 = obj2.metaData?.takenDate ?? obj2.creationDate,
+                        date1 > date2
+                    {
+                        return true
+                    }
+                    return false
+                })
+                self.finishConverting(items: self.lastWrapedObjects.getArray())
+            }
+        }
+    }
+    
+    private func finishConverting(items: [WrapData]) {
+        DispatchQueue.main.async {
+            self.lastFetchObjectCompetion?(items)
+            self.lastFetchObjectCompetion = nil
+            self.isConverting = false
+        }
+    }
+    
+    private func cleanChanges() {
+        sectionChanges.removeAll()
+        objectChanges.removeAll()
+        insertedItemsIds.removeAll()
+        deletedItemsIds.removeAll()
+        updatedItemsIds.removeAll()
     }
 }
 
@@ -178,10 +259,7 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
 extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        sectionChanges.removeAll()
-        objectChanges.removeAll()
-        lastWrapedObjects.removeAll()
-        
+        cleanChanges()
         saveOffset()
     }
     
@@ -203,6 +281,8 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
+        let objectId = (anObject as? MediaItem)?.idValue
+        
         switch type {
         case .insert:
             if let indexPath = newIndexPath {
@@ -210,18 +290,21 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                     self.collectionView.insertItems(at: [indexPath])
                 }
             }
+            insertedItemsIds.append(objectId)
         case .delete:
             if let indexPath = indexPath {
                 self.objectChanges.append { [unowned self] in
                     self.collectionView.deleteItems(at: [indexPath])
                 }
             }
+            deletedItemsIds.append(objectId)
         case .update:
             if let indexPath = indexPath {
                 self.objectChanges.append { [unowned self] in
                     self.collectionView.reloadItems(at: [indexPath])
                 }
             }
+            updatedItemsIds.append(objectId)
         case .move:
             if let indexPath = indexPath, let newIndexPath = newIndexPath {
                 self.objectChanges.append { [unowned self] in
@@ -229,14 +312,18 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                     self.collectionView.insertItems(at: [newIndexPath])
                 }
             }
+            updatedItemsIds.append(objectId)
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         let sectionChangesStatic = sectionChanges
         let objectChangesStatic = objectChanges
-        sectionChanges.removeAll()
-        objectChanges.removeAll()
+        let deletedIdsStatic = deletedItemsIds
+        let updatedIdsStatic = updatedItemsIds
+        let insertedIdsStatic = insertedItemsIds
+        
+        cleanChanges()
         
         if !collectionView.isDragging, let firstVisibleItem = firstVisibleItem {
             focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
@@ -252,7 +339,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             }
             
             self.reloadSupplementaryViewsIfNeeded()
-            self.updateLastFetchedObjects()
+            self.updateLastFetchedObjects(deletedIds: deletedIdsStatic, updatedIds: updatedIdsStatic, insertedIds: insertedIdsStatic)
             
             UIView.setAnimationsEnabled(true)
         })
@@ -281,11 +368,19 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         }
     }
     
-    private func updateLastFetchedObjects() {
+    private func updateLastFetchedObjects(deletedIds: [Int64], updatedIds: [Int64], insertedIds: [Int64]) {
         thresholdService.execute { [weak self] in
-            self?.lastFetchedObjects = self?.fetchedOriginalObjects
-            self?.delegate?.contentDidChange(self?.fetchedOriginalObjects ?? [])
-            self?.convertFetchedObjects()
+            guard let self = self else {
+                return
+            }
+            
+            self.lastFetchedObjects = self.fetchedOriginalObjects
+            self.delegate?.contentDidChange(self.fetchedOriginalObjects)
+            if self.lastWrapedObjects.isEmpty {
+                self.convertFetchedObjects()
+            } else {
+                self.mergeFetchedObjects(deletedIds: deletedIds, updatedIds: updatedIds, insertedIds: insertedIds)
+            }
         }
     }
     
