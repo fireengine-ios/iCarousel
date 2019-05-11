@@ -81,14 +81,40 @@ class LoginPresenter: BasePresenter {
         optInController?.stopActivityIndicator()
         optInController?.resignFirstResponder()
     }
+    
+    private func failLogin(message: String) {
+        showMessageHideSpinner(text: message)
+        if captchaShowed {
+            view.refreshCaptcha()
+        }
+    }
+    
+    private func failedBlockError() {
+        completeAsyncOperationEnableScreen()
+        view.failedBlockError()
+    }
+    
+    private func openEmptyPhone() {
+        completeAsyncOperationEnableScreen()
+        tokenStorage.isClearTokens = true
+        
+        let action: TextEnterHandler = { [weak self] enterText, vc in
+            self?.newPhone = enterText
+            self?.interactor.getTokenToUpdatePhone(for: enterText)
+            vc.startLoading()
+        }
+        
+        router.openTextEnter(buttonAction: action)
+    }
 
 }
 
 //MARK: - LoginViewOutput
 extension LoginPresenter: LoginViewOutput {
     func viewIsReady() {
-        interactor.trackScreen()
         startAsyncOperation()
+
+        interactor.trackScreen()
         interactor.checkCaptchaRequerement()
     }
     
@@ -137,12 +163,41 @@ extension LoginPresenter: LoginInteractorOutput {
         MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
-    
-    func failLogin(message: String) {
-        showMessageHideSpinner(text: message)
-        if captchaShowed {
-            view.refreshCaptcha()
+
+    func processLoginError(_ loginError: LoginResponseError, errorText: String) {
+        
+        switch loginError {
+        case .block:
+            failedBlockError()
+            
+        case .needCaptcha:
+            needShowCaptcha()
+            
+        case .authenticationDisabledForAccount:
+            failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
+            
+        case .needSignUp:
+            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
+            
+        case .incorrectUsernamePassword:
+            failLogin(message: TextConstants.loginScreenCredentialsError)
+            
+        case .incorrectCaptcha:
+            fieldError(type: .captchaIsIncorrect)
+            
+        case .networkError, .serverError:
+            failLogin(message: errorText)
+            
+        case .unauthorized:
+            failLogin(message: TextConstants.loginScreenCredentialsError)
+            
+        case .noInternetConnection:
+            failLogin(message: TextConstants.errorConnectedToNetwork)
+            
+        case .emptyPhone:
+            openEmptyPhone()
         }
+        
     }
     
     func needSignUp(message: String) {
@@ -158,11 +213,6 @@ extension LoginPresenter: LoginInteractorOutput {
         completeAsyncOperationEnableScreen()
         captchaShowed = true
         view.showCaptcha()
-    }
-    
-    func failedBlockError() {
-        completeAsyncOperationEnableScreen()
-        view.failedBlockError()
     }
     
     func foundCoutryPhoneCode(code: String, plus: Bool) {
@@ -228,19 +278,6 @@ extension LoginPresenter: LoginInteractorOutput {
         completeAsyncOperationEnableScreen()
         view.refreshCaptcha()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
-    }
-    
-    func openEmptyPhone() {
-        completeAsyncOperationEnableScreen()
-        tokenStorage.isClearTokens = true
-        
-        let action: TextEnterHandler = { [weak self] enterText, vc in
-            self?.newPhone = enterText
-            self?.interactor.getTokenToUpdatePhone(for: enterText)
-            vc.startLoading()
-        }
-        
-        router.openTextEnter(buttonAction: action)
     }
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {

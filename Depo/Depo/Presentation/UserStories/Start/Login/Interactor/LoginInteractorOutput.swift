@@ -12,7 +12,8 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func succesLogin()
     func successedSilentLogin()
-    func failLogin(message: String)
+    
+    func processLoginError(_ loginError: LoginResponseError, errorText: String)
 
     func foundCoutryPhoneCode(code: String, plus: Bool)
     
@@ -23,12 +24,8 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func preparedTimePassed(date: Date, forUserName name: String)
     
-    func failedBlockError()
     func userStillBlocked(user: String)
     func allAttemtsExhausted(user: String)
-
-    func openEmptyPhone()
-    func needSignUp(message: String)
 
     func successed(tokenUpdatePhone: SignUpSuccessResponse)
     func failedUpdatePhone(errorResponse: ErrorResponse)
@@ -42,7 +39,6 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
     
-    func needShowCaptcha()
     func captchaRequred(requred: Bool)
     func captchaRequredFailed()
     func captchaRequredFailed(with message: String)
