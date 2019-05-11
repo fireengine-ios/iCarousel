@@ -8,16 +8,16 @@
 
 import SDWebImage
 
-class SingleThumbnailAlbumCell: SimpleSliderCell {
+final class SingleThumbnailAlbumCell: SimpleSliderCell {
     
-    @IBOutlet var noItemsBackgroundImage: UIImageView! {
+    @IBOutlet private var noItemsBackgroundImage: UIImageView! {
         willSet {
             newValue.layer.borderWidth = 1.0
             newValue.contentMode = .center
         }
     }
     
-    @IBOutlet var thumbnailsContainer: UIView! {
+    @IBOutlet private var thumbnailsContainer: UIView! {
         willSet {
             newValue.backgroundColor = .white
         }
@@ -25,7 +25,7 @@ class SingleThumbnailAlbumCell: SimpleSliderCell {
     
     @IBOutlet private var thumbnail: UIImageView!
     
-    @IBOutlet weak var name: UILabel! {
+    @IBOutlet private weak var name: UILabel! {
         didSet {
             name.text = " "
             name.font = UIFont.TurkcellSaturaMedFont(size: 14)

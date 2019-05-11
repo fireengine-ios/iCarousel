@@ -14,6 +14,6 @@ protocol SimpleSliderCellSetupProtocol {
 
 class SimpleSliderCell: UICollectionViewCell, SimpleSliderCellSetupProtocol {
     func setup(withItem item: SliderItem) {
-        debugPrint("😱OVERRIDE SETUP METHOD FOR THIS CELL😱")
+        assertionFailure("😱OVERRIDE SETUP METHOD FOR THIS CELL😱")
     }
 }
