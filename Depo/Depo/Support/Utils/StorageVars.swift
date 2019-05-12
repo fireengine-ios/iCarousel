@@ -21,6 +21,7 @@ protocol StorageVars: class {
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
     var deepLink: String? {get set}
     var interruptedSyncVideoQueueItems: [String] { get set }
+    var blockedUsers: [String : Date] { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -116,5 +117,11 @@ final class UserDefaultsVars: StorageVars {
     var interruptedSyncVideoQueueItems: [String] {
         get { return userDefaults.object(forKey: interruptedSyncVideoQueueItemsKey) as? [String] ?? []}
         set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
+    }
+    
+    private let blockedUsersKey = "BlockedUsers"
+    var blockedUsers: [String : Date] {
+        get { return userDefaults.object(forKey: blockedUsersKey) as? [String : Date] ?? [:]}
+        set { userDefaults.set(newValue, forKey: blockedUsersKey)}
     }
 }

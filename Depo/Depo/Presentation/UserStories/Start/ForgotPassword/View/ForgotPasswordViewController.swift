@@ -28,6 +28,10 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     fileprivate let keyboard = Typist.shared
 
     // MARK: Life cycle
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
