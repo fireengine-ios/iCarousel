@@ -115,6 +115,7 @@ class SliderItem {
     convenience init(asFirAlbum album: AlbumItem) {
         self.init(withAlbum: album)
         setType(.firAlbum)
+        name = album.name
     }
     
     init(withThumbnails items: [URL?], type: MyStreamType) {
