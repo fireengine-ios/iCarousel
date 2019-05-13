@@ -386,6 +386,8 @@ extension LoginViewController: LoginViewInput {
         
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)
+        
+        captchaView.updateCaptcha()
     }
     
     func hideErrorMessage() {
