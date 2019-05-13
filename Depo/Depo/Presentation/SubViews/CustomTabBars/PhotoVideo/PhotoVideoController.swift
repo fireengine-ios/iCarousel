@@ -189,12 +189,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         trackClickOnPhotoOrVideo(isPhoto: true)
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
-            guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
+            guard let currentMediaItem = self?.dataSource.object(at: indexPath),
+                let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
                 self?.canShowDetail = true
                 self?.hideSpinner()
                 return
             }
-            let currentObject = WrapData(mediaItem: currentMediaItem)
             
             DispatchQueue.toMain {
                 self?.hideSpinner()
@@ -730,7 +730,7 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         }
     }
     
-    func convertFetchedObjectsDidStart() {
+    func convertFetchedObjectsInProgress() {
         showSpinner()
     }
 }
