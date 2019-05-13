@@ -70,6 +70,7 @@ final class RegistrationViewController: ViewController {
     //MARK: Vars
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
+    private let updateScrollDelay: DispatchTime = .now() + 0.3
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -232,11 +233,22 @@ final class RegistrationViewController: ViewController {
         self.scrollView.contentInset = insets
         self.scrollView.scrollIndicatorInsets = insets
         
+        scrollToFirstResponder()
+    }
+    
+    private func scrollToFirstResponder() {
         guard let firstResponser = self.view.firstResponder as? UIView else {
             return
         }
         
-        let rectToShow = self.view.convert(firstResponser.frame, to: self.view)
+        let rectToShow: CGRect
+        ///FE-1124 requerments (show nextButton if rePasswordField become first responder)
+        if firstResponser == rePasswordEnterView.textField || firstResponser == captchaView.captchaAnswerTextField {
+            rectToShow = self.view.convert(nextButton.frame, to: self.view)
+        } else {
+            rectToShow = self.view.convert(firstResponser.frame, to: self.view)
+        }
+        
         let rectToShowWithInset = rectToShow.offsetBy(dx: 0, dy: NumericConstants.firstResponderBottomOffset)
         self.scrollView.scrollRectToVisible(rectToShowWithInset, animated: true)
     }
@@ -391,6 +403,11 @@ extension RegistrationViewController: UITextFieldDelegate {
             rePasswordEnterView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
+            
+            ///need to scroll to nextButton(in some cases typist not worked)
+            DispatchQueue.main.asyncAfter(deadline: updateScrollDelay) {
+                self.scrollToFirstResponder()
+            }
         default:
             assertionFailure()
         }
