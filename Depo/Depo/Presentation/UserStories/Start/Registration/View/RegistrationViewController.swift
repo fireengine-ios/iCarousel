@@ -312,6 +312,8 @@ extension RegistrationViewController: RegistrationViewInput {
         
         let errorRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorRect, animated: true)
+        
+        updateCaptcha()
     }
     
     func setupCaptcha() {
