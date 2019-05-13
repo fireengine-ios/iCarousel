@@ -54,7 +54,7 @@ final class RegistrationViewController: ViewController {
         willSet {
             ///need to hide content
             newValue.layer.masksToBounds = true
-            newValue.errorLabel.text = TextConstants.loginScreenInvalidCaptchaError
+            newValue.errorLabel.text = TextConstants.captchaIsEmpty
         }
     }
     
