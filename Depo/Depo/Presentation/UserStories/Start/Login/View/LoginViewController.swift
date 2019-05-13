@@ -306,6 +306,30 @@ extension LoginViewController: UITextFieldDelegate {
         
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            if string == " " {
+                return false
+            } else if textField.text?.count == 0 {
+                if string == "+" {
+                    output.startedEnteringPhoneNumber(withPlus: true)
+                    return false
+                } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
+                    output.startedEnteringPhoneNumber(withPlus: false)
+                }
+            }
+            
+        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
+            break
+            
+        default:
+            assertionFailure()
+        }
+        
+        return true
+    }
 }
 
 // MARK: - LoginViewInput

@@ -19,8 +19,7 @@ protocol LoginViewOutput {
     
     func onForgotPasswordTap()
     
-    func startedEnteringPhoneNumber()
-    func startedEnteringPhoneNumberPlus()
+    func startedEnteringPhoneNumber(withPlus: Bool)
     
     func openSupport()
 }
