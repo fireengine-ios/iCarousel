@@ -141,12 +141,8 @@ extension LoginPresenter: LoginViewOutput {
         router.goToForgotPassword()
     }
     
-    func startedEnteringPhoneNumberPlus() {
-        interactor.findCoutryPhoneCode(plus: true)
-    }
-    
-    func startedEnteringPhoneNumber() {
-        interactor.findCoutryPhoneCode(plus: false)
+    func startedEnteringPhoneNumber(withPlus: Bool) {
+        interactor.findCoutryPhoneCode(plus: withPlus)
     }
     
     func openSupport() {
@@ -216,9 +212,8 @@ extension LoginPresenter: LoginInteractorOutput {
     }
     
     func foundCoutryPhoneCode(code: String, plus: Bool) {
-        let countryCode = code.isEmpty ? "+" : code
-        
         if plus {
+            let countryCode = code.isEmpty ? "+" : code
             view.enterPhoneCountryCode(countryCode: countryCode)
         } else {
             view.insertPhoneCountryCode(countryCode: code)

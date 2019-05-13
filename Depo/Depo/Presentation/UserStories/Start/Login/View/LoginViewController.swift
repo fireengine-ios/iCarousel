@@ -52,7 +52,7 @@ final class LoginViewController: ViewController {
             let normalImage = UIImage(named: "checkBoxNotSelected")
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "checkboxSelected")
+            let selectedImage = UIImage(named: "checkbox_active")
             newValue.setImage(selectedImage, for: .selected)
         }
     }
@@ -306,6 +306,30 @@ extension LoginViewController: UITextFieldDelegate {
         
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            if string == " " {
+                return false
+            } else if textField.text?.count == 0 {
+                if string == "+" {
+                    output.startedEnteringPhoneNumber(withPlus: true)
+                    return false
+                } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
+                    output.startedEnteringPhoneNumber(withPlus: false)
+                }
+            }
+            
+        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
+            break
+            
+        default:
+            assertionFailure()
+        }
+        
+        return true
+    }
 }
 
 // MARK: - LoginViewInput
@@ -362,6 +386,8 @@ extension LoginViewController: LoginViewInput {
         
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)
+        
+        captchaView.updateCaptcha()
     }
     
     func hideErrorMessage() {
