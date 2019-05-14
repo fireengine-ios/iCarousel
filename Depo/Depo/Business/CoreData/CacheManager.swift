@@ -44,9 +44,9 @@ final class CacheManager {
     }
     
     func actualizeCache(completion: VoidHandler?) {
-        if !isProcessing || processingLocalItems || processingRemoteItems {
-            CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
-        }
+//        if !isProcessing || processingLocalItems || processingRemoteItems {
+//            CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+//        }
         
         isCacheActualized = false
         isProcessing = true
@@ -57,14 +57,20 @@ final class CacheManager {
                 return
             }
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
                 self.startAppendingAllRemotes(completion: { [weak self] in
-                    self?.userDefaultsVars.currentRemotesPage = 0
-                    self?.startAppendingAllLocals(completion: { [weak self] in
+                    guard let `self` = self,
+                        !self.processingRemoteItems else {
+                        return
+                    }
+                    self.userDefaultsVars.currentRemotesPage = 0
+                    self.startAppendingAllLocals(completion: { [weak self] in
                         guard let `self` = self,
                             !self.processingLocalItems else {
                             completion?()
                             return
                         }
+                        //FIXME: need handling if we logouted and locals still in progress
                         self.isProcessing = false
                         self.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
@@ -77,6 +83,7 @@ final class CacheManager {
                     completion?()
                     return
                 }
+                CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
                 self.startAppendingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
@@ -114,6 +121,7 @@ final class CacheManager {
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
+                
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
                     completion()///means all files are downloaded
@@ -128,7 +136,6 @@ final class CacheManager {
                 completion()
                 return
             }
-            
             guard self.processingRemoteItems else {
                 return
             }
@@ -183,12 +190,19 @@ final class CacheManager {
     }
     
     func dropAllRemotes(completion: VoidHandler?) {
+        
         userDefaultsVars.currentRemotesPage = 0
         processingRemoteItems = false
         isCacheActualized = false
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
             completion?()
         }
+    }
+    
+    func logout(completion: VoidHandler?) {
+        delegates.removeAll()
+        stopRemotesActualizeCache()
+        dropAllRemotes(completion: completion)
     }
     
     //TODO: move method of QS DB update here.
