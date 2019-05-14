@@ -914,13 +914,9 @@
 "this_text_is_empty" = "Bu alan boş.";
 "password_changed_successfully" = "Şifren başarılı bir şekilde değiştirildi.";
 "password_changed_successfully_relogin" = "Şifren başarılı bir şekilde değiştirildi. Lütfen yeni şifren ile tekrar giriş yap.";
-"captcha_answer_placeholder" = "";
-"birthday" = "";
-"user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
 "captcha_answer_placeholder" = "Görselde yer alan yazıyı girin.";
 "birthday" = "Doğum Tarihi";
-"user_profile_turkcell_gsm_alert" = "";
+"user_profile_turkcell_gsm_alert" = "Telefon numaranı değiştiremezsin, detaylı bilgi için: %@";
 "user_profile_birthday_placeholder" = "GG AA YYYY";
 "send_link" = "";
 "reset_password" = "";
@@ -954,6 +950,19 @@
 "enter_your_old_password" = "Eski şifreni gir";
 "enter_your_new_password" = "Yeni şifreni gir";
 "enter_your_repeat_password" = "Yeni şifreni tekrar gir";
-"user_profile_day_placeholder" = "";
-"user_profile_month_placeholder" = "";
-"user_profile_year_placeholder" = "";
+"user_profile_day_placeholder" = "GG";
+"user_profile_month_placeholder" = "AA";
+"user_profile_year_placeholder" = "YYYY";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Sıkça Sorulan Sorular";
+"captcha_is_empty" = "Lütfen görselde görünen karakterleri girin";
+"enter_your_password" = "";
+"re_enter_your_password" = "";
+"signup_support_info" = "";
+"missing_information" = "";
+"please_enter_your_missing_account_information" = "";
+"login_email_or_phone_placeholder" = "";
+"login_password_placeholder" = "";
+"login_email_or_phone_error" = "";
+"login_password_error" = "";
