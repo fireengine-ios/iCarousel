@@ -146,7 +146,7 @@ final class RegistrationViewController: ViewController {
         setupNavBar()
 
         if !captchaView.isHidden {
-            captchaView.updateCaptcha()
+            updateCaptcha()
         }
     }
     
@@ -257,10 +257,6 @@ final class RegistrationViewController: ViewController {
         self.errorView.isHidden = true
     }
     
-    private func updateCaptcha() {
-        captchaView.updateCaptcha()
-    }
-    
     private func presentCaptcha() {
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.captchaView.isHidden = false
@@ -324,8 +320,6 @@ extension RegistrationViewController: RegistrationViewInput {
         
         let errorRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorRect, animated: true)
-        
-        updateCaptcha()
     }
     
     func setupCaptcha() {
@@ -354,6 +348,10 @@ extension RegistrationViewController: RegistrationViewDelegate {
     
     func showCaptcha() {
         presentCaptcha()
+    }
+    
+    func updateCaptcha() {
+        captchaView.updateCaptcha()
     }
 }
 
