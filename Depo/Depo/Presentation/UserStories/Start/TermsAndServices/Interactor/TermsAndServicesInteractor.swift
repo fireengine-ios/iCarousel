@@ -21,9 +21,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var phoneNumber: String?
     
-    var etkAuth: Bool? = nil {
+    var etkAuth: Bool? {
         didSet {
-            dataStorage.signUpResponse.etkAuth = self.etkAuth == true
+            let isEtkAuth = self.etkAuth == true
+            dataStorage.signUpResponse.etkAuth = isEtkAuth
         }
     }
     
