@@ -56,6 +56,10 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
                                                     sucess: { [weak self] response in
             DispatchQueue.main.async {
+                if let response = response as? SignUpSuccessResponse {
+                    self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
+                    self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
+                }
                 self?.output.resendCodeRequestSuccesed()
             }
         }, fail: { [weak self] errorResponse in

@@ -21,7 +21,11 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var phoneNumber: String?
     
-    var etkAuth: Bool?
+    var etkAuth: Bool? = nil {
+        didSet {
+            dataStorage.signUpResponse.etkAuth = self.etkAuth == true
+        }
+    }
     
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
