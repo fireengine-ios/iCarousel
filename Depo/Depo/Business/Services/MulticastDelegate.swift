@@ -25,6 +25,10 @@ class MulticastDelegate <T> {
         weakDelegates = weakDelegates.filter { $0.value !== delegate as AnyObject }
     }
     
+    func removeAll() {
+        weakDelegates.removeAll()
+    }
+    
     func invoke(invocation: (T) -> Void) {
         /// Enumerating in reverse order prevents a race condition from happening when removing elements.
         for (index, delegate) in weakDelegates.enumerated().reversed() {

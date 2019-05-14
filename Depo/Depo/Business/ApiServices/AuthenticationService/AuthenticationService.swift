@@ -399,8 +399,7 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             self.storageVars.emptyEmailUp = false
             
-            CacheManager.shared.stopRemotesActualizeCache()
-            CacheManager.shared.dropAllRemotes {
+            CacheManager.shared.logout {
                 success?()
             }
         }
