@@ -35,4 +35,5 @@ struct DispatchQueueLabels {
     static let itemsRepositoryBackgroundQueueConcurent = "com.lifebox.itemsRepositoryBackgroundQueueConcurent"
     static let filesDataSourceCacheQueue = "com.lifebox.filesDataSourceCache"
     static let blurServiceQueue = "com.lifebox.blurServiceQueue"
+    static let photoVideoMergeQueue = "com.lifebox.photoVideoMergeQueue"
 }
