@@ -275,10 +275,10 @@ final class MediaItemOperationsService {
     
     // MARK: MediaItem
     
-    func mediaItemsByIDs(ids: [Int64],
+    func mediaItemsByIDs(ids: [NSManagedObjectID],
                          context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
                          mediaItemsCallBack: @escaping MediaItemsCallBack) {
-        let predicate = NSPredicate(format: "idValue IN %@", ids)
+        let predicate = NSPredicate(format: "self IN %@", ids)
         executeSortedRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
 

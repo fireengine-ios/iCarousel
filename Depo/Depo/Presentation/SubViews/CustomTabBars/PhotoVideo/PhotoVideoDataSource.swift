@@ -20,6 +20,8 @@ final class PhotoVideoDataSource: NSObject {
     
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
+    private let mergeQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoMergeQueue)
+    
     var isSelectingMode = false {
         didSet {
             delegate?.selectedModeDidChange(isSelectingMode)
@@ -62,9 +64,9 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
     
-    private lazy var insertedItemsIds = [Int64]()
-    private lazy var deletedItemsIds = [Int64]()
-    private lazy var updatedItemsIds = [Int64]()
+    private lazy var insertedItemsIds = [NSManagedObjectID]()
+    private lazy var deletedItemsIds = [NSManagedObjectID]()
+    private lazy var updatedItemsIds = [NSManagedObjectID]()
     private var lastFetchObjectCompetion: WrapObjectsCallBack?
     private var isConverting = false
     
@@ -146,12 +148,12 @@ final class PhotoVideoDataSource: NSObject {
     
     private func convertFetchedObjects() {
         isConverting = true
-        DispatchQueue.toBackground { [weak self] in
+        mergeQueue.async { [weak self] in
             guard let self = self else {
                 return
             }
             
-            let ids = self.lastFetchedObjects?.map { $0.idValue } ?? []
+            let ids = self.lastFetchedObjects?.map { $0.objectID } ?? []
             guard !ids.isEmpty else {
                 self.finishConverting(items: self.lastWrapedObjects.getArray())
                 return
@@ -169,9 +171,9 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    private func mergeFetchedObjects(deletedIds: [Int64], updatedIds: [Int64], insertedIds: [Int64]) {
+    private func mergeFetchedObjects(deletedIds: [NSManagedObjectID], updatedIds: [NSManagedObjectID], insertedIds: [NSManagedObjectID]) {
         isConverting = true
-        DispatchQueue.toBackground { [weak self] in
+        mergeQueue.async { [weak self] in
             guard let self = self else {
                 return
             }
@@ -188,15 +190,24 @@ final class PhotoVideoDataSource: NSObject {
                 }
                 
                 for mediaItem in items {
-                    guard let uuid = mediaItem.uuid else {
+                    let itemUuid = mediaItem.isLocalItemValue ? mediaItem.trimmedLocalFileID : mediaItem.uuid
+                    guard let uuid = itemUuid else {
                         continue
                     }
                     
-                    if deletedIds.contains(mediaItem.idValue) {
-                        self.lastWrapedObjects.remove(where: {$0.uuid == uuid})
-                    } else {
-                        if updatedIds.contains(mediaItem.idValue) {
+                    let deleteItem = {
+                        if mediaItem.isLocalItemValue {
+                            self.lastWrapedObjects.remove(where: {$0.isLocalItem && $0.getTrimmedLocalID() == uuid})
+                        } else {
                             self.lastWrapedObjects.remove(where: {$0.uuid == uuid})
+                        }
+                    }
+                    
+                    if deletedIds.contains(mediaItem.objectID) {
+                        deleteItem()
+                    } else {
+                        if updatedIds.contains(mediaItem.objectID) {
+                            deleteItem()
                         }
                         
                         let wrappedObject = WrapData(mediaItem: mediaItem)
@@ -281,7 +292,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        let objectId = (anObject as? MediaItem)?.idValue
+        let objectId = (anObject as? MediaItem)?.objectID
         
         switch type {
         case .insert:
@@ -368,8 +379,8 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         }
     }
     
-    private func updateLastFetchedObjects(deletedIds: [Int64], updatedIds: [Int64], insertedIds: [Int64]) {
-        thresholdService.execute { [weak self] in
+    private func updateLastFetchedObjects(deletedIds: [NSManagedObjectID], updatedIds: [NSManagedObjectID], insertedIds: [NSManagedObjectID]) {
+        mergeQueue.async { [weak self] in
             guard let self = self else {
                 return
             }
