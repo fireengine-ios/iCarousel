@@ -1222,4 +1222,5 @@ struct TextConstants {
     static let loginPasswordError = NSLocalizedString("login_password_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let captchaIsEmpty = NSLocalizedString("captcha_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginUsernameNotValid = NSLocalizedString("login_username_not_valid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
