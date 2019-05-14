@@ -72,6 +72,7 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     func signUpFailed(errorResponce: ErrorResponse) {
         completeAsyncOperationEnableScreen()
         view.showErrorTitle(withText: errorResponce.description)
+        view.updateCaptcha()
     }
     
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {

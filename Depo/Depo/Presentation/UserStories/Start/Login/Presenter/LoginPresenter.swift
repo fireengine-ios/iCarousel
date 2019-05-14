@@ -234,7 +234,7 @@ extension LoginPresenter: LoginInteractorOutput {
             view.passwordFieldError(TextConstants.loginPasswordError)
             
         case .captchaIsEmpty:
-            view.captchaFieldError(TextConstants.loginScreenInvalidCaptchaError)
+            view.captchaFieldError(TextConstants.captchaIsEmpty)
             
         case .captchaIsIncorrect:
             view.captchaFieldError(TextConstants.invalidCaptcha)

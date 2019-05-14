@@ -989,3 +989,5 @@
 
 "login_email_or_phone_error" = "You have to fill in your e-mail or phone";
 "login_password_error" = "You have to fill in your password";
+
+"captcha_is_empty" = "You have to fill in captcha text.";
