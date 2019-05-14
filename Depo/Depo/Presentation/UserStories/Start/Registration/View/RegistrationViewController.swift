@@ -71,6 +71,7 @@ final class RegistrationViewController: ViewController {
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
+    private var isPasswordsNotMatchError = false
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -302,6 +303,7 @@ extension RegistrationViewController: RegistrationViewInput {
         case .repasswordIsEmpty:
             rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderReFillPassword)
         case .passwodsNotMatch:
+            isPasswordsNotMatchError = true
             passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
         case .phoneIsEmpty:
             phoneEnterView.showTextAnimated(text: TextConstants.registrationCellPlaceholderPhone)
@@ -398,6 +400,10 @@ extension RegistrationViewController: UITextFieldDelegate {
         case passwordEnterView.textField:
             passwordEnterView.hideSubtitleAnimated()
         case rePasswordEnterView.textField:
+            if isPasswordsNotMatchError {
+                passwordEnterView.hideSubtitleAnimated()
+                isPasswordsNotMatchError = false
+            }
             rePasswordEnterView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
