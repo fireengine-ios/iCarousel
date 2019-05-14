@@ -67,11 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
-    let watchdog = Watchdog(threshold: 0.05, strictMode: false)
+    var watchdog: Watchdog?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
-        
+        #if DEBUG
+            watchdog = Watchdog(threshold: 0.05, strictMode: false)
+        #endif
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
