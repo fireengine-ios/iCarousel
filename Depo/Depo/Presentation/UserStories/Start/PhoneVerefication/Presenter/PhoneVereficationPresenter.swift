@@ -24,7 +24,6 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func configure() {
-        view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )
         view.setupPhoneLable(with: interactor.phoneNumber)
     }
