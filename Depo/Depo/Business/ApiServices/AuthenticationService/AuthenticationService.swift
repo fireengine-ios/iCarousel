@@ -449,7 +449,7 @@ class AuthenticationService: BaseRequestService {
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService resendVerificationSMS")
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     

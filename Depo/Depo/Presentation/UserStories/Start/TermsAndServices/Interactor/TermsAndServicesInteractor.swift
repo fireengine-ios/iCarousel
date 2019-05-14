@@ -21,7 +21,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var phoneNumber: String?
     
-    var etkAuth: Bool?
+    var etkAuth: Bool? {
+        didSet {
+            /// if etkAuth changes, i have to update dataStorage because it will be passed to the next screen where this value will be needed
+            let isEtkAuth = self.etkAuth == true
+            dataStorage.signUpResponse.etkAuth = isEtkAuth
+        }
+    }
     
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
