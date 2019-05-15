@@ -63,7 +63,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
         
-        newValue.dateFormat = "dd MM YYYY"
+        newValue.dateFormat = "dd MM yyyy"
 
         return newValue
     }()

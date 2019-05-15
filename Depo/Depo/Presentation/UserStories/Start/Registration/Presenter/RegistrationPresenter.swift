@@ -87,7 +87,6 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         if requred {
             view.setupCaptcha()
         }
-        
         asyncOperationSuccess()
     }
     

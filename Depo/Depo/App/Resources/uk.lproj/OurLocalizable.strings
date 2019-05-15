@@ -662,7 +662,7 @@
 "please_try_again_later" = "Будь ласка, спробуйте ще пізніше";
 "Back up with Original Quality" = "Зберігайте резервні копії в оригінальній якості";
 "Remove Duplicate Contacts from Your Directory" = "Видаляйте дублікати контактів з вашого телефону";
-"Face Recognition to reach your loved one's memories" = "Видаляйте дублікати контактів з вашого телефону";
+"Face Recognition to reach your loved one's memories" = "Знаходьте найулюбленіші спогади з функцією Розпізнавання обличчь";
 "Place Recognition to beam you up to the memories" = "Повертайтеся у спогади з функцією Розпізнавання місць";
 "Object Recognition to remember with things you love" = "Пам'ятайте улюблені речі з функцією Розпізнавання об'єктів";
 "Become Premium" = "Станьте Преміум користувачем";
@@ -914,6 +914,7 @@
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
 "user_profile_birthday_placeholder" = "";
+"user_profile_turkcell_gsm_alert" = "Ви не можете оновити свій номер телефону, щоб отримати докладнішу інформацію: %@";
 "user_profile_birthday_placeholder" = "ДД ММ РРРР";
 "send_link" = "";
 "reset_password" = "";
@@ -947,6 +948,9 @@
 "enter_your_old_password" = "Введіть старий пароль";
 "enter_your_new_password" = "Введіть новий пароль";
 "enter_your_repeat_password" = "Введіть новий пароль ще раз";
-"user_profile_day_placeholder" = "";
-"user_profile_month_placeholder" = "";
-"user_profile_year_placeholder" = "";
+"user_profile_day_placeholder" = "ДД";
+"user_profile_month_placeholder" = "ММ";
+"user_profile_year_placeholder" = "РРРР";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Допомога та підтримка";

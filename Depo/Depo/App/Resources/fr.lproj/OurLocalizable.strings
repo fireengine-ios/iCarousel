@@ -1215,6 +1215,7 @@ Please check I have understood the intended command here*/
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
 "user_profile_birthday_placeholder" = "";
+"user_profile_turkcell_gsm_alert" = "Vous ne pouvez pas mettre à jour votre numéro de téléphone, pour plus de détails: %@";
 "user_profile_birthday_placeholder" = "JJ MM AAAA";
 "send_link" = "";
 "reset_password" = "";
@@ -1248,6 +1249,9 @@ Please check I have understood the intended command here*/
 "enter_your_old_password" = "Entrez votre ancien mot de passe";
 "enter_your_new_password" = "Entrez votre nouveau mot de passe";
 "enter_your_repeat_password" = "Ressaisissez votre nouveau mot de passe";
-"user_profile_day_placeholder" = "";
-"user_profile_month_placeholder" = "";
-"user_profile_year_placeholder" = "";
+"user_profile_day_placeholder" = "JJ";
+"user_profile_month_placeholder" = "MM";
+"user_profile_year_placeholder" = "AAAA";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Foire Aux Questions";
