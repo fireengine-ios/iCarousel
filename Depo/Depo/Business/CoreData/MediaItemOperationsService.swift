@@ -349,6 +349,23 @@ final class MediaItemOperationsService {
             //WARNING:- DO we need notify ItemOperationManager here???
         }
     }
+    
+    func updateRemoteItems(remoteItems: [WrapData], completion: @escaping VoidHandler) {
+        let remoteIds = remoteItems.compactMap { $0.uuid }
+        let context = CoreDataStack.default.newChildBackgroundContext
+        
+        let predicate = NSPredicate(format: "isLocalItemValue = false AND (uuid IN %@)", remoteIds)
+        executeRequest(predicate: predicate, context: context) { mediaItems in
+            for newItem in remoteItems {
+                if let existed = mediaItems.first(where: {$0.uuid == newItem.uuid}) {
+                    existed.copyInfo(item: newItem, context: context)
+                }
+            }
+            context.saveAsyncWithParantMerge(async: true, completion: { _ in
+                completion()
+            })
+        }
+    }
 
     func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
