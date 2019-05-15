@@ -350,20 +350,18 @@ final class MediaItemOperationsService {
         }
     }
     
-    func updateRemoteItems(remoteItems: [WrapData], completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData]) {
         let remoteIds = remoteItems.compactMap { $0.uuid }
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let predicate = NSPredicate(format: "isLocalItemValue = false AND (uuid IN %@)", remoteIds)
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false AND (\(#keyPath(MediaItem.uuid)) IN %@)", remoteIds)
         executeRequest(predicate: predicate, context: context) { mediaItems in
             for newItem in remoteItems {
                 if let existed = mediaItems.first(where: {$0.uuid == newItem.uuid}) {
                     existed.copyInfo(item: newItem, context: context)
                 }
             }
-            context.saveAsyncWithParantMerge(async: true, completion: { _ in
-                completion()
-            })
+            context.saveAsyncWithParantMerge(async: true)
         }
     }
 

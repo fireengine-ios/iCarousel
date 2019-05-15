@@ -229,9 +229,7 @@ class WrapItemFileService: WrapItemFileOperations {
             } else {
                 ItemOperationManager.default.removeFileFromFavorites(items: files)
             }
-            MediaItemOperationsService.shared.updateRemoteItems(remoteItems: files, completion: {
-                debugPrint("favorite statuses updated")
-            })
+            MediaItemOperationsService.shared.updateRemoteItems(remoteItems: files)
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
