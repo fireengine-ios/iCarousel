@@ -13,7 +13,6 @@ enum LoginFieldError {
     case passwordIsEmpty
     
     case captchaIsEmpty
-    case captchaIsIncorrect
 }
 
 class LoginInteractor: LoginInteractorInput {
