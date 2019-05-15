@@ -50,6 +50,7 @@ final class PhotoVideoNavBarManager {
         delegate?.setTitle("")
         delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
+        threeDotsButton.isEnabled = true
     }
     
     @objc private func onCancelSelectionButton() {

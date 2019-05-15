@@ -24,10 +24,12 @@ extension SegmentedChildController where Self: UIViewController {
     }
 
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+        parentVC?.navigationItem.leftBarButtonItems = nil
         parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)
     }
 
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+        parentVC?.navigationItem.rightBarButtonItems = nil
         parentVC?.navigationItem.setRightBarButtonItems(items, animated: animated)
     }
 }

@@ -87,12 +87,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        homePageNavigationBarStyle()
-        
         if !selectedItems.isEmpty {
+            setupNavigationBar(editingMode: true)
             onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
-            navBarManager.setSelectionMode()
-            navigationBarWithGradientStyle()
+        } else {
+            setupNavigationBar(editingMode: false)
         }
     }
 
@@ -143,9 +142,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
         }
         
+        setupNavigationBar(editingMode: true)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
-        navBarManager.setSelectionMode()
-        navigationBarWithGradientStyle()
     }
     
     private func stopEditingMode() {
@@ -153,13 +151,23 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.selectedIndexPaths.removeAll()
         deselectVisibleCells()
         bottomBarManager.hide()
-        navBarManager.setDefaultMode()
-        homePageNavigationBarStyle()
+        setupNavigationBar(editingMode: false)
     }
     
     private func deselectVisibleCells() {
         collectionView.visibleCells.forEach { cell in
             (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        }
+    }
+    
+    private func setupNavigationBar(editingMode: Bool) {
+        //be sure to configure navbar items after setup navigation bar
+        if editingMode {
+            navigationBarWithGradientStyle()
+            navBarManager.setSelectionMode()
+        } else {
+            homePageNavigationBarStyle()
+            navBarManager.setDefaultMode()
         }
     }
     
