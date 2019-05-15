@@ -127,7 +127,7 @@ extension Error {
     var description: String {
         if isNetworkError {
             switch urlErrorCode {
-            case .notConnectedToInternet:
+            case .notConnectedToInternet, .networkConnectionLost:
                 return TextConstants.errorConnectedToNetwork
             default:
                 return TextConstants.errorBadConnection
