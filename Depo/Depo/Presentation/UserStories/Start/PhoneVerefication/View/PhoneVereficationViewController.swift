@@ -130,7 +130,6 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         mainTitle.textColor = .black
         mainTitle.text = TextConstants.enterSecurityCode
         infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        changeInfoTextState(state: true)
         infoTitle.text = TextConstants.phoneVereficationInfoTitleText
         timerLabel.isHidden = true
         
