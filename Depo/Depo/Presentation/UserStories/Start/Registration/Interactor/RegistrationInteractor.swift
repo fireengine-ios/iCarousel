@@ -31,35 +31,21 @@ class RegistrationInteractor: RegistrationInteractorInput {
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
         
         let validationResult: [UserValidationResults]
-        if captchaRequred  {
-            validationResult = validationService.validateUserInfo(mail: email,
-                                                                  code: code,
-                                                                  phone: phone,
-                                                                  password: password,
-                                                                  repassword: repassword,
-                                                                  captchaAnswer: captchaAnswer)
-        } else {
-            validationResult = validationService.validateUserInfo(mail: email,
-                                                                  code: code,
-                                                                  phone: phone,
-                                                                  password: password,
-                                                                  repassword: repassword)
-        }
+        validationResult = validationService.validateUserInfo(mail: email,
+                                                              code: code,
+                                                              phone: phone,
+                                                              password: password,
+                                                              repassword: repassword,
+                                                              captchaAnswer: captchaRequred ? captchaAnswer : nil)
         
         if validationResult.count == 0 {//== .allValid {
             
             let signUpInfo: RegistrationUserInfoModel
-            if captchaRequred  {
-                signUpInfo = RegistrationUserInfoModel(mail: email,
-                                                       phone: code + phone,
-                                                       password: password,
-                                                       captchaID: captchaID,
-                                                       captchaAnswer: captchaAnswer)
-            } else {
-                signUpInfo = RegistrationUserInfoModel(mail: email,
-                                                       phone: code + phone,
-                                                       password: password)
-            }
+            signUpInfo = RegistrationUserInfoModel(mail: email,
+                                                   phone: code + phone,
+                                                   password: password,
+                                                   captchaID: captchaRequred ? captchaID : nil,
+                                                   captchaAnswer: captchaRequred ? captchaAnswer : nil)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             

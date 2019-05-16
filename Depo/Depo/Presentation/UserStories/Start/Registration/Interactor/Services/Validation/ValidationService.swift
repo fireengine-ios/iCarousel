@@ -24,7 +24,7 @@ class UserValidator {
                           phone: String,
                           password: String,
                           repassword: String,
-                          captchaAnswer: String? = nil) -> [UserValidationResults] {
+                          captchaAnswer: String?) -> [UserValidationResults] {
         
         let regularExpressionPassword: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionSimplePass,
                                                                                        options: .dotMatchesLineSeparators)

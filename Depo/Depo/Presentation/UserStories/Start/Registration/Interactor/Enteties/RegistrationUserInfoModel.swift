@@ -10,15 +10,15 @@ struct RegistrationUserInfoModel {
     let mail: String
     let phone: String
     let password: String
-    var captchaID: String?
-    var captchaAnswer: String?
+    let captchaID: String?
+    let captchaAnswer: String?
     
     
     init(mail: String,
          phone: String,
          password: String,
-         captchaID: String? = nil,
-         captchaAnswer: String? = nil) {
+         captchaID: String?,
+         captchaAnswer: String?) {
         
         self.mail = mail
         self.phone = phone
