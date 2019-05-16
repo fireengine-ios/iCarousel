@@ -34,6 +34,8 @@ final class ServerStatusError {
         static let TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
         static let EMAIL_IS_INVALID = "EMAIL_IS_INVALID"
         static let EMAIL_IS_ALREADY_EXIST = "EMAIL_IS_ALREADY_EXIST"
+        static let invalidCaptcha = "Invalid captcha."
+        static let captchaRequired = "Captcha required."
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -86,6 +88,12 @@ extension ServerStatusError: LocalizedError {
             
         case ErrorKeys.EMAIL_IS_ALREADY_EXIST:
             return TextConstants.EMAIL_IS_ALREADY_EXIST
+            
+        case ErrorKeys.invalidCaptcha:
+            return TextConstants.invalidCaptcha
+            
+        case ErrorKeys.captchaRequired:
+            return TextConstants.captchaRequired
             
         default:
             return status

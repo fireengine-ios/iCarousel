@@ -14,6 +14,7 @@ enum MyStreamType: Int {
     case story
     case albums
     case album
+    case firAlbum
     
     var title: String {
         switch self {
@@ -35,6 +36,7 @@ enum MyStreamType: Int {
         case .people: return #imageLiteral(resourceName: "people")
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
+        case .firAlbum: return #imageLiteral(resourceName: "places")
         default: return UIImage()
         }
     }
@@ -52,7 +54,7 @@ enum MyStreamType: Int {
         switch self {
         case .albums, .story, .people, .things, .places, .instaPick:
             return true
-        case .album:
+        case .album, .firAlbum:
             return false
         }
     }
@@ -108,6 +110,12 @@ class SliderItem {
         name = album.name
         previewItems = [PathForItem.remoteUrl(album.preview?.tmpDownloadUrl)]
         albumItem = album
+    }
+    
+    convenience init(asFirAlbum album: AlbumItem) {
+        self.init(withAlbum: album)
+        setType(.firAlbum)
+        name = album.name
     }
     
     init(withThumbnails items: [URL?], type: MyStreamType) {

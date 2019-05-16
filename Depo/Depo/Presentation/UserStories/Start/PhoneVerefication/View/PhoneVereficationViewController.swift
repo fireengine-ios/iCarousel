@@ -129,6 +129,10 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
         mainTitle.textColor = .black
         mainTitle.text = TextConstants.enterSecurityCode
+        infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        changeInfoTextState(state: true)
+        infoTitle.text = TextConstants.phoneVereficationInfoTitleText
+        timerLabel.isHidden = true
         
         infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
         infoTitle.textColor = ColorConstants.blueGrey
@@ -146,6 +150,7 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
+        timerLabel.isHidden = false
         timerLabel.setupTimer(withTimeInterval: 1.0,
                                    timerLimit: remainingTime)
         timerLabel.delegate = self

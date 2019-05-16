@@ -330,6 +330,25 @@ extension LoginViewController: UITextFieldDelegate {
         
         return true
     }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            
+            let countryCodeWithZero = "+(90)0"
+            if var text = textField.text, text.starts(with: countryCodeWithZero) {
+                text.remove(at: text[countryCodeWithZero.count - 1])
+                textField.text = text
+            }
+        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
+            break
+            
+        default:
+            assertionFailure()
+        }
+        
+        return true
+    }
 }
 
 // MARK: - LoginViewInput

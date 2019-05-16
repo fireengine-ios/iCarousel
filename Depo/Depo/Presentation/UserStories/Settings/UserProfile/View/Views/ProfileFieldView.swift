@@ -36,14 +36,18 @@ class ProfileFieldView: UIView {
         return newValue
     }()
     
-    private let alertLabel: UILabel = {
-        let newValue = UILabel()
+    private let alertTextView: UITextView = {
+        let newValue = UITextView()
         
         newValue.text = TextConstants.userProfileTurkcellGSMAlert
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.textColor = ColorConstants.orangeGradient
         newValue.isHidden = true
         newValue.isOpaque = true
+        newValue.isEditable = false
+        newValue.isScrollEnabled = false
+        newValue.linkTextAttributes = [:]
+        newValue.translatesAutoresizingMaskIntoConstraints = true
 
         return newValue
     }()
@@ -122,7 +126,7 @@ class ProfileFieldView: UIView {
     private func setupViews() {
         addSubview(textFieldStackView)
         addSubview(descriptionLabel)
-        addSubview(alertLabel)
+        addSubview(alertTextView)
         addSubview(textField)
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -139,7 +143,7 @@ class ProfileFieldView: UIView {
         
         textFieldStackView.addArrangedSubview(textField)
 
-        stackView.addArrangedSubview(alertLabel)
+        stackView.addArrangedSubview(alertTextView)
         stackView.addArrangedSubview(textFieldStackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -175,6 +179,28 @@ class ProfileFieldView: UIView {
             return
         }
         
+        let alertText = String(format: TextConstants.userProfileTurkcellGSMAlert,
+                               TextConstants.myProfileFAQ)
+        let attributedText = NSMutableAttributedString(string: alertText, attributes: [
+            .font : UIFont.TurkcellSaturaDemFont(size: 16),
+            .foregroundColor : ColorConstants.orangeGradient
+        ])
+        
+        if let range = alertText.range(of: TextConstants.myProfileFAQ) {
+            let nsRange = NSRange(range, in: alertText)
+            
+            let attributes: [NSAttributedStringKey : Any] = [
+                .link : TextConstants.NotLocalized.FAQ,
+                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .foregroundColor : ColorConstants.orangeGradient
+            ]
+            
+            attributedText.addAttributes(attributes, range: nsRange)
+        }
+        
+        alertTextView.attributedText = attributedText
+        alertTextView.delegate = self
+        
         blockFieldIfNeeded = { [weak self] in
             guard let `self` = self else {
                 return
@@ -188,7 +214,7 @@ class ProfileFieldView: UIView {
                 guard let `self` = self else {
                     return
                 }
-                self.alertLabel.isHidden = !self.isEditState
+                self.alertTextView.isHidden = !self.isEditState
                 ///need to follow the design
                 self.stackViewTopConstraint?.constant = self.isEditState ? 0 : self.stackViewTopOffset
                 /// https://stackoverflow.com/a/46412621/5893286
@@ -221,4 +247,23 @@ class ProfileFieldView: UIView {
     override func resignFirstResponder() -> Bool {
         return textField.resignFirstResponder()
     }
+    
+    private func openFAQ() {
+        let router = RouterVC()
+        if let controller = router.helpAndSupport {
+            router.pushViewController(viewController: controller)
+        }
+    }
+}
+
+extension ProfileFieldView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        
+        if URL.absoluteString == TextConstants.NotLocalized.FAQ {
+            openFAQ()
+        }
+        
+        return true
+    }
+    
 }
