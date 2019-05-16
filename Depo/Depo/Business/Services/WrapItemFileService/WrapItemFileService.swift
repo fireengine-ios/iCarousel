@@ -208,27 +208,28 @@ class WrapItemFileService: WrapItemFileOperations {
     // MARK: favourits
     
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
-        metadataFile(files: files, favouritse: true, success: success, fail: fail)
+        metadataFile(files: files, favorites: true, success: success, fail: fail)
     }
     
     func removeFromFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
-        metadataFile(files: files, favouritse: false, success: success, fail: fail)
+        metadataFile(files: files, favorites: false, success: success, fail: fail)
     }
     
-    private func metadataFile(files: [WrapData], favouritse: Bool, success: FileOperationSucces?, fail: FailResponse?) {
+    private func metadataFile(files: [WrapData], favorites: Bool, success: FileOperationSucces?, fail: FailResponse?) {
         
         let items = remoteItemsUUID(files: files)
-        let param = MetaDataFile(items: items, addToFavourit: favouritse)
+        let param = MetaDataFile(items: items, addToFavourit: favorites)
         let success_: FileOperationSucces = {
             success?()
             files.forEach {
-                $0.favorites = favouritse
+                $0.favorites = favorites
             }
-            if (favouritse) {
+            if favorites {
                 ItemOperationManager.default.addFilesToFavorites(items: files)
             } else {
                 ItemOperationManager.default.removeFileFromFavorites(items: files)
             }
+            MediaItemOperationsService.shared.updateRemoteItems(remoteItems: files)
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)

@@ -45,10 +45,16 @@ final class PhotoVideoThreeDotMenuManager {
             
             /// local and remotes or remotes only
         } else {
-            actionTypes = [.createStory, .print, .deleteDeviceOriginal, .addToFavorites]
+            actionTypes = [.createStory, .print, .deleteDeviceOriginal]
             
-            /// remove .removeFromFavorites if need
-            let thereIsFavorite = (remoteItems.first(where: { $0.favorites }) != nil)
+            /// add .addToFavorites if need
+            let thereIsNoFavorite = remoteItems.first(where: { !$0.favorites }) != nil
+            if thereIsNoFavorite {
+                actionTypes.append(.addToFavorites)
+            }
+            
+            /// add .removeFromFavorites if need
+            let thereIsFavorite = remoteItems.first(where: { $0.favorites }) != nil
             if thereIsFavorite {
                 actionTypes.append(.removeFromFavorites)
             }
