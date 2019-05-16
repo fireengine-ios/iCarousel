@@ -98,8 +98,6 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextViewEnterView()
         newValue.titleLabel.text = TextConstants.yourProblem
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourProblemShortly
-//        newValue.textField.placeholder = TextConstants.explainYourProblemShortly
-//        newValue.textField.returnKeyType = .done
         return newValue
     }()
     
@@ -121,7 +119,6 @@ final class SupportFormController: ViewController, KeyboardHandler {
         surnameView.textField.delegate = self
         emailView.textField.delegate = self
         subjectView.textField.delegate = self
-        //problemView.textView.delegate = self
         
         phoneView.numberTextField.delegate = self
         phoneView.codeTextField.delegate = self
@@ -250,9 +247,6 @@ extension SupportFormController: UITextFieldDelegate {
             
         case subjectView.textField:
             subjectView.hideSubtitleAnimated()
-            
-//        case problemView.textField:
-//            problemView.hideSubtitleAnimated()
 
         case phoneView.numberTextField, phoneView.codeTextField:
             phoneView.hideSubtitleAnimated()
@@ -288,9 +282,6 @@ extension SupportFormController: UITextFieldDelegate {
         case subjectView.textField:
             problemView.textView.becomeFirstResponder()
             
-//        case problemView.textField:
-//            openEmail()
-            
         default:
             assertionFailure()
         }
@@ -298,19 +289,6 @@ extension SupportFormController: UITextFieldDelegate {
         return true
     }
 }
-
-//extension SupportFormController: UITextViewDelegate {
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        
-//        switch textView {
-//        case problemView.textView:
-//            problemView.hideSubtitleAnimated()
-//            
-//        default:
-//            assertionFailure()
-//        }
-//    }
-//}
 
 enum SupportFormErrors {
     case emptyName
