@@ -179,7 +179,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
                                    UIDevice.current.modelName,
                                    UIDevice.current.systemVersion,
                                    Device.locale,
-                                   ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
+                                   ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: subject,

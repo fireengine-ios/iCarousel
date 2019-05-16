@@ -61,18 +61,6 @@ class LoginPresenter: BasePresenter {
         router.openEmptyEmail(successHandler: onSuccess)
     }
     
-<<<<<<< HEAD
-    func viewAppeared() {
-        CardsManager.default.stopAllOperations()
-        CardsManager.default.clear()
-    }
-    
-    func captchaRequred(requred: Bool) {
-        asyncOperationSuccess()
-        if requred {
-            captchaShowed = true
-            view.showCapcha()
-=======
     private func openAutoSyncIfNeeded() {
         view.showSpinner()
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
@@ -84,7 +72,6 @@ class LoginPresenter: BasePresenter {
             }
         }) { [weak self] error in
             self?.view.hideSpinner()
->>>>>>> develop_v2_and_storeDev
         }
     }
     
