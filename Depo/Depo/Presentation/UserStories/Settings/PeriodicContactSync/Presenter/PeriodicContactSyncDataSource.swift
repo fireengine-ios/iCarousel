@@ -118,7 +118,6 @@ extension PeriodicContactSyncDataSource: UITableViewDataSource {
             let syncSetting = timeSettingModel.syncSetting {
             autoSyncCell.setup(with: timeSettingModel, setting: syncSetting)
         }
-        autoSyncCell.setColors(isFromSettings: true)
         return autoSyncCell
     }
     
