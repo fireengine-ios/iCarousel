@@ -3156,6 +3156,8 @@
 		CE2BA7CE1FC70B1100AA3EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */; };
 		CE2DBA192059043200D08C5E /* ShareDataImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA182059043200D08C5E /* ShareDataImageLoader.swift */; };
+		CE2DD340228D4B1300D68A61 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DD33F228D4B1300D68A61 /* ProfileTextViewEnterView.swift */; };
+		CE2DD341228D4B9E00D68A61 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DD33F228D4B1300D68A61 /* ProfileTextViewEnterView.swift */; };
 		CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F51F75515C00F49DA1 /* PlanType.swift */; };
 		CE2F55F81F7551A100F49DA1 /* SubscriptionPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F61F75515C00F49DA1 /* SubscriptionPlan.swift */; };
 		CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F91F7551CD00F49DA1 /* AccountService.swift */; };
@@ -5736,6 +5738,7 @@
 		CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewInput.swift; sourceTree = "<group>"; };
 		CE2DBA182059043200D08C5E /* ShareDataImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataImageLoader.swift; sourceTree = "<group>"; };
+		CE2DD33F228D4B1300D68A61 /* ProfileTextViewEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextViewEnterView.swift; sourceTree = "<group>"; };
 		CE2F55F51F75515C00F49DA1 /* PlanType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanType.swift; sourceTree = "<group>"; };
 		CE2F55F61F75515C00F49DA1 /* SubscriptionPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlan.swift; sourceTree = "<group>"; };
 		CE2F55F91F7551CD00F49DA1 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
@@ -6525,6 +6528,7 @@
 				17589F6C2276336700A5DB37 /* PhoneCodeInputView.swift */,
 				17589F6D2276336700A5DB37 /* ProfileTextPickerView.swift */,
 				17589F6F2276336700A5DB37 /* ProfileTextEnterView.swift */,
+				CE2DD33F228D4B1300D68A61 /* ProfileTextViewEnterView.swift */,
 				17589F702276336700A5DB37 /* ProfilePhoneEnterView.xib */,
 				17589F6E2276336700A5DB37 /* SupportFormController.xib */,
 				17589F712276336700A5DB37 /* SupportFormController.swift */,
@@ -14962,7 +14966,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -14992,7 +14995,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15050,7 +15052,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -15080,7 +15081,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15169,7 +15169,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -15199,7 +15198,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -16074,6 +16072,7 @@
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				8C0E8EB41FDEBDFF00789C91 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
+				CE2DD341228D4B9E00D68A61 /* ProfileTextViewEnterView.swift in Sources */,
 				8C0E8EB51FDEBDFF00789C91 /* KeyboardHideManager.swift in Sources */,
 				8C0E8EB61FDEBDFF00789C91 /* BaseFilesGreedPresenter.swift in Sources */,
 				8C0E8EB71FDEBDFF00789C91 /* BaseFilesGreedInteractorInput.swift in Sources */,
@@ -17598,6 +17597,7 @@
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */,
+				CE2DD340228D4B1300D68A61 /* ProfileTextViewEnterView.swift in Sources */,
 				CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */,
 				CE0EA624220B2072000EF616 /* InstapickAnalyze.swift in Sources */,
 				9224936821BC14890086CB6A /* AuthorityType.swift in Sources */,
