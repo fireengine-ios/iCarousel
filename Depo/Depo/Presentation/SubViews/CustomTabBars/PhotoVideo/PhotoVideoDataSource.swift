@@ -69,6 +69,7 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var updatedItemsIds = [NSManagedObjectID]()
     private var lastFetchObjectCompetion: WrapObjectsCallBack?
     private var isConverting = false
+    private var isMerging = false
     
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
@@ -138,7 +139,7 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) {
-        if isConverting {
+        if isConverting || isMerging {
             delegate?.convertFetchedObjectsInProgress()
             lastFetchObjectCompetion = completion
         } else {
@@ -155,7 +156,7 @@ final class PhotoVideoDataSource: NSObject {
             
             let ids = self.lastFetchedObjects?.map { $0.objectID } ?? []
             guard !ids.isEmpty else {
-                self.finishConverting(items: self.lastWrapedObjects.getArray())
+                self.finishConverting(needSorting: false)
                 return
             }
             
@@ -163,16 +164,23 @@ final class PhotoVideoDataSource: NSObject {
                 guard let self = self else {
                     return
                 }
-                let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
-                self.finishConverting(items: wrapedObjects)
-                self.lastWrapedObjects.removeAll()
-                self.lastWrapedObjects.append(wrapedObjects)
+
+                items.forEach({ mediaItem in
+                    autoreleasepool {
+                        self.lastWrapedObjects.append(WrapData(mediaItem: mediaItem))
+                    }
+                })
+                
+                self.isConverting = false
+                if !self.isMerging {
+                    self.finishConverting(needSorting: true)
+                }
             }
         }
     }
     
     private func mergeFetchedObjects(deletedIds: [NSManagedObjectID], updatedIds: [NSManagedObjectID], insertedIds: [NSManagedObjectID]) {
-        isConverting = true
+        isMerging = true
         mergeQueue.async { [weak self] in
             guard let self = self else {
                 return
@@ -180,7 +188,7 @@ final class PhotoVideoDataSource: NSObject {
             
             let ids = deletedIds + updatedIds + insertedIds
             guard !ids.isEmpty else {
-                self.finishConverting(items: self.lastWrapedObjects.getArray())
+                self.finishConverting(needSorting: false)
                 return
             }
             
@@ -215,25 +223,32 @@ final class PhotoVideoDataSource: NSObject {
                     }
                 }
 
-                self.lastWrapedObjects.sortItself(by: { obj1, obj2 -> Bool in
-                    if let date1 = obj1.metaData?.takenDate ?? obj1.creationDate,
-                        let date2 = obj2.metaData?.takenDate ?? obj2.creationDate,
-                        date1 > date2
-                    {
-                        return true
-                    }
-                    return false
-                })
-                self.finishConverting(items: self.lastWrapedObjects.getArray())
+                self.isMerging = false
+                if !self.isConverting {
+                    self.finishConverting(needSorting: true)
+                }
             }
         }
     }
     
-    private func finishConverting(items: [WrapData]) {
+    private func finishConverting(needSorting: Bool) {
+        if needSorting {
+            lastWrapedObjects.sortItself(by: { obj1, obj2 -> Bool in
+                if let date1 = obj1.metaData?.takenDate ?? obj1.creationDate,
+                    let date2 = obj2.metaData?.takenDate ?? obj2.creationDate,
+                    date1 > date2
+                {
+                    return true
+                }
+                return false
+            })
+        }
+        
         DispatchQueue.main.async {
-            self.lastFetchObjectCompetion?(items)
+            self.lastFetchObjectCompetion?(self.lastWrapedObjects.getArray())
             self.lastFetchObjectCompetion = nil
             self.isConverting = false
+            self.isMerging = false
         }
     }
     
@@ -387,7 +402,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             
             self.lastFetchedObjects = self.fetchedOriginalObjects
             self.delegate?.contentDidChange(self.fetchedOriginalObjects)
-            if self.lastWrapedObjects.isEmpty {
+            if self.lastWrapedObjects.isEmpty, !self.isConverting {
                 self.convertFetchedObjects()
             } else {
                 self.mergeFetchedObjects(deletedIds: deletedIds, updatedIds: updatedIds, insertedIds: insertedIds)
