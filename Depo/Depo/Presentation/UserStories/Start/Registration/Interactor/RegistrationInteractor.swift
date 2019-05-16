@@ -14,6 +14,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
     
+    var captchaRequred = false
     private var  retriesCount = 0 {
         didSet {
             if retriesCount > 2 {
@@ -29,18 +30,36 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
         
-        let validationResult = validationService.validateUserInfo(mail: email,
+        let validationResult: [UserValidationResults]
+        if captchaRequred  {
+            validationResult = validationService.validateUserInfo(mail: email,
                                                                   code: code,
                                                                   phone: phone,
                                                                   password: password,
                                                                   repassword: repassword,
-                                                                  captchaAnswer: captchaAnswer ?? "")
+                                                                  captchaAnswer: captchaAnswer)
+        } else {
+            validationResult = validationService.validateUserInfo(mail: email,
+                                                                  code: code,
+                                                                  phone: phone,
+                                                                  password: password,
+                                                                  repassword: repassword)
+        }
+        
         if validationResult.count == 0 {//== .allValid {
-            let signUpInfo = RegistrationUserInfoModel(mail: email,
+            
+            let signUpInfo: RegistrationUserInfoModel
+            if captchaRequred  {
+                signUpInfo = RegistrationUserInfoModel(mail: email,
                                                        phone: code + phone,
                                                        password: password,
                                                        captchaID: captchaID,
                                                        captchaAnswer: captchaAnswer)
+            } else {
+                signUpInfo = RegistrationUserInfoModel(mail: email,
+                                                       phone: code + phone,
+                                                       password: password)
+            }
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -56,6 +75,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
+                self?.captchaRequred = boolResult
                 self?.output.captchaRequred(requred: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
@@ -107,12 +127,13 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 DispatchQueue.main.async { [weak self] in
                     switch errorResponce {
                     case .error(let error):
-                        if let statusError = error as? ServerStatusError,
+                        if let statusError = error as? ServerValueError,
                             let signUpError = SignupResponseError(with: statusError) {
                             
                             self?.analyticsService.trackSignupEvent(error: signUpError)
                             
                             if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
+                                self?.captchaRequred = true
                                 self?.output.captchaRequred(requred: true)
                             }
                         }
