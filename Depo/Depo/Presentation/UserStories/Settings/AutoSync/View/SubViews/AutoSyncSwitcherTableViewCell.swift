@@ -28,13 +28,12 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .clear
         
-        titleLabel.textColor = ColorConstants.whiteColor
         titleLabel.font = .TurkcellSaturaDemFont(size: 18)
-        
-        subTitleLabel.textColor = ColorConstants.whiteColor
         subTitleLabel.font = .TurkcellSaturaBolFont(size: 14)
         
         separatorView.isHidden = true
+        
+        setColors()
     }
     
     func setup(with model: AutoSyncModel, setting: AutoSyncSetting) {
@@ -47,10 +46,12 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         switcher.isSelected = model.isSelected
     }
     
-    func setColors(isFromSettings: Bool) {
-        titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+    // MARK: Private
+    
+    private func setColors() {
+        titleLabel.textColor = ColorConstants.textGrayColor
+        subTitleLabel.textColor = ColorConstants.textGrayColor
+        separatorView.backgroundColor = ColorConstants.textGrayColor
     }
     
     @IBAction func onSwitcherValueChanged() {

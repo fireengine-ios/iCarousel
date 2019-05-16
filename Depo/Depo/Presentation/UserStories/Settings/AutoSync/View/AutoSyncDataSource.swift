@@ -118,14 +118,12 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             if let syncSetting = model.syncSetting {
                 autoSyncCell.setup(with: model, setting: syncSetting)
             }
-            autoSyncCell.setColors(isFromSettings: isFromSettings)
             return autoSyncCell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
             autoSyncCell.setup(with: model)
-            autoSyncCell.setColors(isFromSettings: isFromSettings)
             autoSyncCell.delegate = self
             return autoSyncCell
         }
