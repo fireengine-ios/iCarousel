@@ -81,6 +81,7 @@ class SignUpSuccessResponse: ObjectRequestResponse {
     
     /// not from server
     var etkAuth: Bool?
+    var eulaId: Int?
     
     override func mapping() {
         if (isOkStatus && valueDict != nil) {

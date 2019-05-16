@@ -13,6 +13,8 @@ class PackagesPresenter {
     
     var availableOffers: [SubscriptionPlan] = []
     
+    private var quotaInfo: QuotaInfoResponse?
+
     private var accountType = AccountType.all
 
     private var referenceToken = ""
@@ -34,6 +36,12 @@ class PackagesPresenter {
         view?.startActivityIndicator()
         interactor.getAvailableOffers(with: accountType)
     }
+    
+    func tuneUpQuota(quotaInfo: QuotaInfoResponse?) {
+        if let quota = quotaInfo{
+            self.quotaInfo = quota
+        }
+    }
 }
 
 // MARK: PackagesViewOutput
@@ -53,7 +61,7 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.getAccountType()
         
         view?.startActivityIndicator()
-        interactor.getStorageCapacity()
+        setMemoryPercentage()
     }
     
     func viewWillAppear() {
@@ -183,10 +191,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         interactor.getAvailableOffers(with: accountType)
     }
     
-    func successed(usage: UsageResponse) {
+    func setMemoryPercentage() {
         view?.stopActivityIndicator()
-        storageUsage = usage
-        if let used = usage.usedBytes, let total = usage.quotaBytes {
+
+        if let used = quotaInfo?.bytesUsed, let total = quotaInfo?.bytes {
             percentage = 100 * CGFloat(used) / CGFloat(total)
             view?.setupStackView(with: percentage)
         }

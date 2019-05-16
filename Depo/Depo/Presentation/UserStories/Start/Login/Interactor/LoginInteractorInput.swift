@@ -9,9 +9,7 @@
 import Foundation
 
 protocol LoginInteractorInput {
-    
-    func prepareModels()
-    
+        
     func rememberMe(state: Bool)
     
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)

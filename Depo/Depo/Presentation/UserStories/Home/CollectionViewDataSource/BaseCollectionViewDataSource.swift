@@ -396,6 +396,7 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource {
     }
 }
 
+//MARK UICollectionView delegate
 extension BaseCollectionViewDataSource: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         if (isPopUpCell(path: indexPath)) {

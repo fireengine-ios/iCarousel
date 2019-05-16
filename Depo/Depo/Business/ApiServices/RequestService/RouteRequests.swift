@@ -203,6 +203,7 @@ struct RouteRequests {
         static let accountApi = baseUrl +/ "account"
         
         static let updatePassword = accountApi +/ "updatePassword"
+        static let updateBirthday = accountApi +/ "birthday"
         
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end

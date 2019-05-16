@@ -31,4 +31,12 @@ extension UIBarButtonItem {
             setTitleTextAttributes([.font : font], for: .selected)
         }
     }
+    
+    /// if you use the properties for the buttons there is a bug only on ios 11 with the replacement of buttons by clicking on them
+    /// https://forums.developer.apple.com/thread/75521
+    func fixEnabledState() {
+        isEnabled = false
+        isEnabled = true
+    }
+    
 }

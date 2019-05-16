@@ -149,8 +149,11 @@ class StorageCard: BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        let backgroundViewHeight = backgroundView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        
         let bottomSpace : CGFloat = 0.0
-        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        let h = backgroundViewHeight + bottomButton.frame.size.height + bottomSpace
         if calculatedH != h{
             calculatedH = h
             layoutIfNeeded()

@@ -53,6 +53,12 @@ struct ColorConstants {
     static let orangeGradient = UIColor(red: 255 / 255, green: 159 / 255, blue: 8 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
     static let removeConnection = UIColor(red: 130 / 255, green: 150 / 255, blue: 161 / 255, alpha: 1.0)
     static let connectedAs = UIColor(red: 10 / 255, green: 50 / 255, blue: 71 / 255, alpha: 1.0)
+    
+    static let errorOrangeGradientStart = UIColor(red: 255 / 255, green: 163 / 255, blue:  0, alpha: 1.0)
+    static let errorOrangeGradientEnd = UIColor(red: 255 / 255, green: 98 / 255, blue: 0, alpha: 1.0)
+    
+    static let alertBlueGradientStart = UIColor(red: 82 / 255, green: 120 / 255, blue:  243 / 255, alpha: 1.0)
+    static let alertBlueGradientEnd = UIColor(red: 41 / 255, green: 201 / 255, blue: 236 / 255, alpha: 1.0)
 }
 
 extension UIColor {

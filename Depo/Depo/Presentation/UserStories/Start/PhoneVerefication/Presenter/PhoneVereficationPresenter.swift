@@ -20,10 +20,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.setupInitialState()
         configure()
         view.setupButtonsInitialState()
+        interactor.resendCode()
     }
     
     func configure() {
-        view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )
         view.setupPhoneLable(with: interactor.phoneNumber)
     }
@@ -69,7 +69,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         } else {
             router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
         }
-        
+        view.dropTimer()
     }
     
     func resendCodeRequestSuccesed() {

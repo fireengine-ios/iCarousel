@@ -8,36 +8,25 @@
 
 import UIKit
 
-enum LoginViewInputField {
-    case login, password
-}
-
 protocol LoginViewInput: class, Waiting {
-    
-    var captchaViewController: CaptchaViewController! { get set }
-    
-    func setupInitialState(array: [BaseCellModel])
-    
-    func showCapcha()
-    
+        
+    func showCaptcha()
     func refreshCaptcha()
+
+    func loginFieldError(_ error: String)
+    func passwordFieldError(_ error: String)
+    func captchaFieldError(_ error: String)
     
+    func showSupportView()
     func showErrorMessage(with text: String)
-    func showInfoButton(in field: LoginViewInputField)
-    func showNeedSignUp(message: String)
     
     func hideErrorMessage()
     
-    func highlightLoginTitle()
-    func highlightPasswordTitle()
     func dehighlightTitles()
 
     func enterPhoneCountryCode(countryCode: String)
-    func incertPhoneCountryCode(countryCode: String) //at the begining of the field
-    
-    func blockUI()
-    func unblockUI()
+    func insertPhoneCountryCode(countryCode: String) //at the begining of the field
     
     func failedBlockError()
-    
+
 }
