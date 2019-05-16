@@ -1583,7 +1583,6 @@
 		8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
 		8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
 		8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
-		8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
 		8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786961F3F38EF005CB432 /* VisualMusicPlayerRouter.swift */; };
 		8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864A1F3EFBE200F50C95 /* ImportPhotosInteractor.swift */; };
@@ -2443,6 +2442,8 @@
 		8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
 		8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
+		8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
+		8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -3266,7 +3267,6 @@
 		CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3E5216B756D004AB6D7 /* YearsView.swift */; };
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
-		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
 		CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D81F4EB153000157AF /* FetchService.swift */; };
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
@@ -5309,6 +5309,9 @@
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C4780A0228D7BD4003EE471 /* LifeBoxModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		8C4780A1228D7BD4003EE471 /* LifeBoxModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeBoxModel.xcdatamodel; sourceTree = "<group>"; };
+		8C4780A2228D7BD4003EE471 /* LifeBoxModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
 		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
@@ -5862,7 +5865,6 @@
 		CE39D3E5216B756D004AB6D7 /* YearsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearsView.swift; sourceTree = "<group>"; };
 		CE3A3002200F4B030028C900 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CE3AA9AE1F4D686D000157AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeBoxModel.xcdatamodel; sourceTree = "<group>"; };
 		CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE3AA9D81F4EB153000157AF /* FetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
 		CE3AF76F1F01D63D002AD17C /* EULAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAService.swift; sourceTree = "<group>"; };
@@ -11846,13 +11848,13 @@
 		CE3AA9831F4D648C000157AF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */,
 				8C208670228D4FF1000BEDAD /* Extensions */,
 				CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */,
 				CEE1D1EE1F714DEA0008F4CF /* PredicateRules.swift */,
 				8C20867D228D5021000BEDAD /* MediaItemOperationsService.swift */,
 				8C20867A228D5012000BEDAD /* CacheManager.swift */,
 				CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */,
-				CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */,
 				CE3AA9B21F4D6B44000157AF /* Models */,
 			);
 			path = CoreData;
@@ -15590,7 +15592,6 @@
 				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
 				B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
-				8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
 				8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */,
@@ -16387,6 +16388,7 @@
 				8C0E8F211FDEBDFF00789C91 /* PasscodeInputView.swift in Sources */,
 				8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */,
 				8C0E8F231FDEBDFF00789C91 /* SettingsPresenter.swift in Sources */,
+				8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */,
 				8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */,
 				8C0B919F20170E6A00A5BA81 /* DuplicatedContactsInteractorOutput.swift in Sources */,
@@ -16870,7 +16872,6 @@
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
-				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
@@ -17005,6 +17006,7 @@
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
 				B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
+				8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
 				4A0AC1442087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CE51ABF91EF90853005DCEE0 /* IntroduceDataStorage.swift in Sources */,
@@ -19884,12 +19886,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */ = {
+		8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */,
+				8C4780A0228D7BD4003EE471 /* LifeBoxModel 2.xcdatamodel */,
+				8C4780A1228D7BD4003EE471 /* LifeBoxModel.xcdatamodel */,
+				8C4780A2228D7BD4003EE471 /* LifeBoxModel 3.xcdatamodel */,
 			);
-			currentVersion = CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */;
+			currentVersion = 8C4780A2228D7BD4003EE471 /* LifeBoxModel 3.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
