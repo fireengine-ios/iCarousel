@@ -150,6 +150,10 @@ final class ProfileTextViewEnterView: UIView {
         textView.text = placeHolderText
         textView.textColor = placeHolderColor
     }
+    
+    var isTextEmpty: Bool {
+        return textView.textColor == placeHolderColor || textView.text.isEmpty
+    }
 }
 
 // MARK: - UITextViewDelegate

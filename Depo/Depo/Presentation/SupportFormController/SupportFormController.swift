@@ -161,22 +161,25 @@ final class SupportFormController: ViewController, KeyboardHandler {
             actionOnError(.invalidEmail)
         } else if subject.isEmpty {
             actionOnError(.emptySubject)
-        } else if problem.isEmpty {
+            
+        /// bcz of placeholder use isTextEmpty
+        } else if problemView.isTextEmpty {
             actionOnError(.emptyProblem)
         } else {
             
             let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            let emailBody = String(format: TextConstants.supportFormEmailBody,
-                                   name,
-                                   surname,
-                                   email,
-                                   "\(phoneCode)\(phoneNumber)",
-                                   versionString,
-                                   CoreTelephonyService().operatorName() ?? "",
-                                   UIDevice.current.modelName,
-                                   UIDevice.current.systemVersion,
-                                   Device.locale,
-                                   ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
+            let emailBody = problem + "\n\n" +
+                String(format: TextConstants.supportFormEmailBody,
+                       name,
+                       surname,
+                       email,
+                       "\(phoneCode)\(phoneNumber)",
+                        versionString,
+                        CoreTelephonyService().operatorName() ?? "",
+                        UIDevice.current.modelName,
+                        UIDevice.current.systemVersion,
+                        Device.locale,
+                        ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
             
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: subject,
