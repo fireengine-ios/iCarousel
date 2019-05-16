@@ -23,7 +23,11 @@ class TermsAndServicesModuleInitializer: NSObject {
                      phoneNumber: String?) {
         
         let configurator = TermsAndServicesModuleConfigurator(delegate: delegate)
-        configurator.configureModuleForViewInput(viewInput: controller, fromLogin: fromLogin, phoneNumber: phoneNumber)
+        configurator.configureModuleForViewInput(viewInput: controller,
+                                                 fromLogin: fromLogin,
+                                                 phoneNumber: phoneNumber,
+                                                 signUpSuccessResponse: withSignUpSuccessResponse,
+                                                 userInfo: userInfo)
     }
     
 }

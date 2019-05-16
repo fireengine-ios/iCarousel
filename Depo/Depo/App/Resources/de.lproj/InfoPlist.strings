@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
-"NSLocationAlwaysUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung verwendet";
-"NSPhotoLibraryAddUsageDescription" = "Ihre Erlaubnis für den Zugriff auf die Fotobibliothek ist erforderlich, um Ihre Fotos und Videos zu speichern";
-"NSPhotoLibraryUsageDescription" = "Ihre Erlaubnis für den Zugriff auf die Fotobibliothek ist erforderlich, um Fotos und Videos in der Anwendung anzuzeigen";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung verwendet";
+"NSLocationAlwaysUsageDescription" = "Um ein Backup im Hintergrund zu erstellen wird Ihr Standort verwendet.";
+"NSPhotoLibraryAddUsageDescription" = "Damit die App auf die Gerätegalerie zugreifen kann, wird Ihr Erlaubnis benötigt.";
+"NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der App gezeigt werden kann, wird Ihr Erlaubnis benötigt.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Um ein Backup im Hintergrund zu erstellen wird Ihr Standort verwendet.";

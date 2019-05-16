@@ -66,6 +66,10 @@ final class OptInController: ViewController, NibInit {
         navigationBarWithGradientStyle()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     func setupTimer(withRemainingTime remainingTime: Int) {
         timerLabel.setupTimer(withTimeInterval: 1.0,
                               timerLimit: remainingTime)

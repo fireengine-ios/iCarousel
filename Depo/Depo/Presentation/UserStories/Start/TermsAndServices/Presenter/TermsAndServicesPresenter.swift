@@ -29,12 +29,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func startUsing() {
         if confirmAgreements {
-            if interactor.cameFromLogin {
-                interactor.applyEula()
-            } else {
-                interactor.signUpUser()
-            }
-            startAsyncOperationDisableScreen()
+            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
+                                         userInfo: interactor.userInfo)
         } else {
             view.noConfirmAgreements(errorString: TextConstants.termsAndUseCheckboxErrorText)
         }
@@ -61,42 +57,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.closeModule()
     }
     
-    func signUpSuccessed() {
-        completeAsyncOperationEnableScreen()
-        
-        if interactor.cameFromLogin {
-            router.goToHomePage()
-        } else {
-            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
-                                         userInfo: interactor.userInfo)
-        }
-    }
-    
-    func signupFailed(errorResponce: ErrorResponse) {
-        completeAsyncOperationEnableScreen()
-        delegate?.show(errorString: errorResponce.description)
-        router.closeModule()
-    }
-    
     func signupFailedCaptchaRequired() {
         delegate?.showCaptcha()
-    }
-    
-    func eulaApplied() {
-        MenloworksEventsService.shared.onApporveEulaPageClicked()
-         completeAsyncOperationEnableScreen()
-        //theoreticaly we should add coredata update/append here also
-        if interactor.cameFromLogin, storageVars.autoSyncSet {
-            router.goToHomePage()
-        } else {
-            openAutoSyncIfNeeded()
-        }
-    }
-    
-    func applyEulaFaild(errorResponce: ErrorResponse) {
-        completeAsyncOperationEnableScreen()
-        delegate?.show(errorString: errorResponce.description)
-        router.closeModule()
     }
     
     func popUpPressed() {

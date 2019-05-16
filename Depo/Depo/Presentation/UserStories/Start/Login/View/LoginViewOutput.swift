@@ -7,22 +7,19 @@
 //
 
 protocol LoginViewOutput {
+    
+    var isPresenting: Bool { get set }
 
     func viewIsReady()
     
+    func rememberMe(remember: Bool)
+
     func sendLoginAndPassword(login: String, password: String)
-    
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
     
-    func onCantLoginButton()
+    func onForgotPasswordTap()
     
-    func onOpenSignUp()
+    func startedEnteringPhoneNumber(withPlus: Bool)
     
-    func rememberMe(remember: Bool)
-    
-    func startedEnteringPhoneNumber()
-    func startedEnteringPhoneNumberPlus()
-    
-    func viewAppeared()
-    
+    func openSupport()
 }

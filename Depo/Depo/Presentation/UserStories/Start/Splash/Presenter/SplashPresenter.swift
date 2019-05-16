@@ -108,7 +108,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openApp() {
-        storageVars.emptyEmailUp = false
         
         if turkcellLogin {
             if storageVars.autoSyncSet {
@@ -142,9 +141,13 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openEmptyEmail() {
-        storageVars.emptyEmailUp = true
+        /// guard for two controller due to interactor.startLoginInBackground()
+        if UIApplication.topController() is EmailEnterController {
+            return
+        }
+        
         let vc = EmailEnterController.initFromNib()
-        vc.approveCancelHandler = { [weak self] in
+        vc.successHandler = { [weak self] in
             self?.openApp()
         }
         let navVC = NavigationController(rootViewController: vc)

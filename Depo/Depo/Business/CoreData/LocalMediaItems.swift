@@ -10,7 +10,6 @@ import Foundation
 import Photos
 
 typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
-typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
 
 extension CoreDataStack {
 

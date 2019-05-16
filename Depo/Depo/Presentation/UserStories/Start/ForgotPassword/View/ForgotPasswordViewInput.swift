@@ -12,5 +12,7 @@ protocol ForgotPasswordViewInput: class, Waiting {
     
     func showCapcha()
     
-    func setupVisableSubTitle() 
+    func setupVisableSubTitle()
+    
+    func setupVisableTexts()
 }

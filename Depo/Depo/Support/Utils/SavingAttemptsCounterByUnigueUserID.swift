@@ -47,10 +47,3 @@ final class SavingAttemptsCounterByUnigueUserID {
         attempts = 0
     }
 }
-
-extension SavingAttemptsCounterByUnigueUserID {
-    static var emptyEmailCounter: SavingAttemptsCounterByUnigueUserID {
-        return SavingAttemptsCounterByUnigueUserID(limit: NumericConstants.emptyEmailUserCloseLimit,
-                                                   userDefaultsKey: Keys.emailSavingAttemptsCounter)
-    }
-}
