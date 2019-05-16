@@ -262,7 +262,7 @@ final class RegistrationViewController: ViewController {
     
     private func presentCaptcha() {
         ///fix animation if appears captcha and error both
-        UIView.animate(withDuration: 0) {
+        UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
         }
     }

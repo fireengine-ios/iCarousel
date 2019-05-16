@@ -359,7 +359,7 @@ extension LoginViewController: LoginViewInput {
     //MARK: Captcha field processing
     func showCaptcha() {
         ///fix animation if appears captcha and error both
-        UIView.animate(withDuration: 0) {
+        UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
         }
     }
