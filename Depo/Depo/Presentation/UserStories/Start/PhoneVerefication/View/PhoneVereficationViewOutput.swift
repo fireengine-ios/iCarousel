@@ -14,5 +14,6 @@ protocol PhoneVereficationViewOutput {
     func vereficationCodeEntered()
     func vereficationCodeNotReady()
     func currentSecurityCodeChanged(with newNumeric: String)
+    func currentSecurityCodeRemoveCharacter()
     func clearCurrentSecurityCode()
 }

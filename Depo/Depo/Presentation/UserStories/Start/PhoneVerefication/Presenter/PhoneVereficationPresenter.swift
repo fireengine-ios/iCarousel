@@ -118,6 +118,12 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         currentSecurityCode.append(contentsOf: newNumeric)
     }
     
+    func currentSecurityCodeRemoveCharacter() {
+        if !currentSecurityCode.isEmpty {
+            currentSecurityCode.removeLast()
+        }
+    }
+    
     func clearCurrentSecurityCode() {
         currentSecurityCode = ""
     }

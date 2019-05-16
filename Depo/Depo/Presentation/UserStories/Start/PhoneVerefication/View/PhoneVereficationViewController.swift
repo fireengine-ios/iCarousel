@@ -17,11 +17,11 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     
     var output: PhoneVereficationViewOutput!
         
-    @IBOutlet weak var timerLabel: SmartTimerLabel!
+    @IBOutlet private weak var timerLabel: SmartTimerLabel!
         
-    @IBOutlet weak var mainTitle: UILabel!
+    @IBOutlet private weak var mainTitle: UILabel!
     
-    @IBOutlet weak var infoTitle: UILabel!
+    @IBOutlet private weak var infoTitle: UILabel!
     
     @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
     
@@ -43,6 +43,8 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
         
     private let keyboard = Typist()
+    
+    private var isRemoveLetter: Bool = false
     
     // MARK: Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -70,11 +72,18 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     }
     
     @objc private func textFieldDidChange(_ sender: UITextField) {
-        let nextTag = sender.tag + 1
-        if let nextResponder = sender.superview?.viewWithTag(nextTag) {
-            nextResponder.becomeFirstResponder()
+        if isRemoveLetter {
+            let previosTag = sender.tag - 1
+            if let nextResponder = codeTextFields[safe: previosTag] {
+                nextResponder.becomeFirstResponder()
+            }
         } else {
-            hideKeyboard()
+            let nextTag = sender.tag + 1
+            if let nextResponder = codeTextFields[safe: nextTag] {
+                nextResponder.becomeFirstResponder()
+            } else {
+                hideKeyboard()
+            }
         }
     }
     
@@ -122,7 +131,6 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         mainTitle.text = TextConstants.enterSecurityCode
         
         infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
-        infoTitle.text = TextConstants.resendCode
         infoTitle.textColor = ColorConstants.blueGrey
         
         timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
@@ -157,7 +165,14 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     }
     
     func setupPhoneLable(with number: String) {
-        infoTitle.text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+        let range = (text as NSString).range(of: number)
+        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaMedFont(size: 15),
+                                                        NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor]
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(attr, range: range)
+        infoTitle.attributedText = attributedString
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -187,10 +202,28 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     
 }
 
+// MARK: - UITextFieldDelegate, SmartTimerLabelDelegate
 extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        /// if the string is empty, then when deleting, the delegate method does not work
+        textField.text = " "
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        isRemoveLetter = string.isEmpty
+
+        if string.isEmpty {
+            output.currentSecurityCodeRemoveCharacter()
+            
+            return true
+        } 
+        
+        /// clear the space that we added to work delegate methods with an empty string
+        textField.text = ""
+        
         hiddenError()
+        
         let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
         if ( result != nil) {
@@ -199,12 +232,12 @@ extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelD
         
         let currentStr = output.currentSecurityCode + string
         
-        if ((currentStr as String?)?.count)! == inputTextLimit,
+        if currentStr.count == inputTextLimit,
                 !timerLabel.isDead {
             output.currentSecurityCodeChanged(with: string)
             output.vereficationCodeEntered()
             return true
-        } else if ((currentStr as String?)?.count)! > inputTextLimit {
+        } else if currentStr.count > inputTextLimit {
             return false
         } else {
             output.vereficationCodeNotReady()

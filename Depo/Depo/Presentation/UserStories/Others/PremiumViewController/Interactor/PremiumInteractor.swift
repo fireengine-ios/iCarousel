@@ -236,7 +236,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                                     }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.failed(with: errorResponse.description)
+                    self?.output.failedResendToken(with: errorResponse.description)
                 }
         })
     }

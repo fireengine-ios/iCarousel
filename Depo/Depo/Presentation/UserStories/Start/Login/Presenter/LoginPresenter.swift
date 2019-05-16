@@ -305,11 +305,13 @@ extension LoginPresenter: LoginInteractorOutput {
         optInController?.stopActivityIndicator()
         optInController?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInController?.startEnterCode()
+        optInController?.hiddenError()
         optInController?.hideResendButton()
     }
     
     func failedResendUpdatePhone(errorResponse: ErrorResponse) {
         router.optInController?.stopActivityIndicator()
+        router.optInController?.showError(errorResponse.description)
         router.emptyPhoneController?.showErrorAlert(message: errorResponse.description)
     }
     
@@ -334,12 +336,8 @@ extension LoginPresenter: LoginInteractorOutput {
         optInController?.view.endEditing(true)
         
         if optInController?.increaseNumberOfAttemps() == false {
-            let popUp = PopUpController.with(title: TextConstants.checkPhoneAlertTitle,
-                                          message: TextConstants.promocodeInvalid,
-                                          image: .error,
-                                          buttonTitle: TextConstants.ok)
-            
-            optInController?.present(popUp, animated: false, completion: nil)
+            optInController?.startEnterCode()
+            optInController?.showError(TextConstants.promocodeInvalid)
         }
     }
     
@@ -391,7 +389,7 @@ extension LoginPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
+        optInVC.showError(TextConstants.promocodeBlocked)
     }
 
     func optInNavigationTitle() -> String {
