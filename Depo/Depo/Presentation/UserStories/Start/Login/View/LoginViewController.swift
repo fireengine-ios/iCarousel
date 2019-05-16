@@ -169,6 +169,8 @@ final class LoginViewController: ViewController {
     }
     
     private func setupDelegates() {
+        output.prepareCaptcha(captchaView)
+        
         supportView.delegate = self
         
         loginEnterView.textField.delegate = self
@@ -356,12 +358,14 @@ extension LoginViewController: LoginViewInput {
     
     //MARK: Captcha field processing
     func showCaptcha() {
-        captchaView.isHidden = false
+        ///fix animation if appears captcha and error both
+        UIView.animate(withDuration: 0) {
+            self.captchaView.isHidden = false
+        }
     }
     
     func refreshCaptcha() {
         captchaView.updateCaptcha()
-        captchaView.captchaAnswerTextField.text = ""
     }
     
     //MARK: Fields alerts processing
@@ -404,9 +408,7 @@ extension LoginViewController: LoginViewInput {
         }
         
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
-        scrollView.scrollRectToVisible(errorViewRect, animated: true)
-        
-        captchaView.updateCaptcha()
+        scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
     func hideErrorMessage() {
