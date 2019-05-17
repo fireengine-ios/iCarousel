@@ -9,10 +9,21 @@
 import UIKit
 
 final class SecurityCodeTextField: UITextField {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-                
+    
+    private enum Constants {
+        static let heightBottomLine: CGFloat = 3
+    }
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupDesign()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
         setupDesign()
     }
     
@@ -30,9 +41,9 @@ final class SecurityCodeTextField: UITextField {
     private func addBottomBorder() {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 6.0,
-                                  y: frame.height - 3.0,
+                                  y: frame.height - Constants.heightBottomLine,
                                   width: 18.0,
-                                  height: 3.0)
+                                  height: Constants.heightBottomLine)
         bottomLine.backgroundColor = ColorConstants.coolGrey.cgColor
         bottomLine.cornerRadius = 2
         layer.addSublayer(bottomLine)

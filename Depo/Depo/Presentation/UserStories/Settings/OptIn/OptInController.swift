@@ -132,9 +132,9 @@ final class OptInController: ViewController, NibInit {
         firstSecurityCodeTextField.becomeFirstResponder()
     }
     
-    func showError(_ error: String) {
+    func showError(_ showTextError: String) {
         errorLabel.isHidden = false
-        errorLabel.text = error
+        errorLabel.text = showTextError
     }
     
     func hiddenError() {
@@ -178,8 +178,8 @@ final class OptInController: ViewController, NibInit {
     func setupPhoneLable(with number: String) {
         let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
         let range = (text as NSString).range(of: number)
-        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaMedFont(size: 15),
-                                                        NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor]
+        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+                                                  .foregroundColor: ColorConstants.textGrayColor]
         
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)
@@ -193,13 +193,13 @@ final class OptInController: ViewController, NibInit {
                 
                 self?.view.layoutIfNeeded()
             }
-            }.on(event: .willHide) { [weak self] (options) in
-                UIView.animate(withDuration: options.animationDuration) {
-                    self?.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
+        }.on(event: .willHide) { [weak self] (options) in
+            UIView.animate(withDuration: options.animationDuration) {
+                self?.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
                     
-                    self?.view.layoutIfNeeded()
-                }
-            }.start()
+                self?.view.layoutIfNeeded()
+            }
+        }.start()
     }
     
     private func endEnterCode() {
@@ -279,18 +279,18 @@ extension OptInController: UITextFieldDelegate {
         hiddenError()
         let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
-        if ( result != nil) {
+        if result != nil {
             return false
         }
         
-        let currentStr = currentSecurityCode + string
+        let currentСodeEntered = currentSecurityCode + string
         
-        if currentStr.count == inputTextLimit,
+        if currentСodeEntered.count == inputTextLimit,
             !timerLabel.isDead {
-            currentSecurityCode = currentSecurityCode + string
+            currentSecurityCode = currentСodeEntered
             verify(code: currentSecurityCode)
             return true
-        } else if currentStr.count > inputTextLimit {
+        } else if currentСodeEntered.count > inputTextLimit {
             return false
         }
         
