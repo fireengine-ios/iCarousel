@@ -113,18 +113,25 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 DispatchQueue.main.async { [weak self] in
                     switch errorResponce {
                     case .error(let error):
-                        if let statusError = error as? ServerValueError,
-                            let signUpError = SignupResponseError(with: statusError) {
+                        if let valueError = error as? ServerValueError,
+                            let signUpError = SignupResponseError(with: valueError) {
                             
                             self?.analyticsService.trackSignupEvent(error: signUpError)
                             
+                            ///only with this error type captcha required error is processing
                             if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
                                 self?.captchaRequred = true
                                 self?.output.captchaRequred(requred: true)
                             }
+                        } else if let statusError = error as? ServerStatusError,
+                            let signUpError = SignupResponseError(with: statusError) {
+                            
+                            self?.analyticsService.trackSignupEvent(error: signUpError)
                         }
+                        
                     default:
                         self?.analyticsService.trackSignupEvent(error: .serverError)
+                        
                     }
 
                     self?.output.signUpFailed(errorResponce: errorResponce)

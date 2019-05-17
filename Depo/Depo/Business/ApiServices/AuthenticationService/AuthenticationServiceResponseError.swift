@@ -83,6 +83,7 @@ enum LoginResponseError {
 
 enum SignupResponseError {
     case invalidEmail
+    case invalidPhoneNumber
     case emailAlreadyExists
     case gsmAlreadyExists
     case invalidPassword
@@ -123,6 +124,8 @@ enum SignupResponseError {
             self = .incorrectCaptcha
         case "Captcha required.":
             self = .captchaRequired
+        case "PHONE_NUMBER_IS_INVALID":
+            self = .invalidPhoneNumber
         default:
             return nil
         }
@@ -132,6 +135,8 @@ enum SignupResponseError {
         switch self {
         case .invalidEmail:
             return GADementionValues.signUpError.invalidEmail.text
+        case .invalidPhoneNumber:
+            return GADementionValues.signUpError.invalidPhoneNumber.text
         case .emailAlreadyExists:
             return GADementionValues.signUpError.emailAlreadyExists.text
         case .gsmAlreadyExists:
