@@ -192,6 +192,8 @@ final class RegistrationViewController: ViewController {
     }
     
     private func prepareFields() {
+        output.prepareCaptcha(captchaView)
+        
         emailEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
         rePasswordEnterView.textField.delegate = self
@@ -259,10 +261,9 @@ final class RegistrationViewController: ViewController {
     }
     
     private func presentCaptcha() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
+        ///fix animation if appears captcha and error both
+        UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
-            
-            self.view.layoutIfNeeded()
         }
     }
     

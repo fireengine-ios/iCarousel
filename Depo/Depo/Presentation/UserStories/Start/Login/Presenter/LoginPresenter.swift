@@ -35,8 +35,8 @@ class LoginPresenter: BasePresenter {
     }
     
     private func showMessageHideSpinner(text: String) {
-        view.showErrorMessage(with: text)
         completeAsyncOperationEnableScreen()
+        view.showErrorMessage(with: text)
     }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
@@ -84,6 +84,7 @@ class LoginPresenter: BasePresenter {
     
     private func failLogin(message: String) {
         showMessageHideSpinner(text: message)
+        
         if captchaShowed {
             view.refreshCaptcha()
         }
@@ -116,6 +117,10 @@ extension LoginPresenter: LoginViewOutput {
 
         interactor.trackScreen()
         interactor.checkCaptchaRequerement()
+    }
+    
+    func prepareCaptcha(_ view: CaptchaView) {
+        view.delegate = self
     }
     
     func rememberMe(remember: Bool) {
@@ -168,6 +173,7 @@ extension LoginPresenter: LoginInteractorOutput {
             
         case .needCaptcha:
             needShowCaptcha()
+            failLogin(message: TextConstants.captchaRequired)
             
         case .authenticationDisabledForAccount:
             failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
@@ -351,6 +357,7 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func captchaRequred(requred: Bool) {
         asyncOperationSuccess()
+
         if requred {
             captchaShowed = true
             view.showCaptcha()
@@ -399,5 +406,13 @@ extension LoginPresenter: OptInControllerDelegate {
         optInVC.startActivityIndicator()
         self.router.renewOptIn(with: optInVC)
         interactor.verifyPhoneNumber(token: referenceToken ?? "", code: code)
+    }
+}
+
+extension LoginPresenter: CaptchaViewErrorDelegate {
+    
+    func showCaptchaError(error: Error) {
+        
+        view.showErrorMessage(with: error.description)
     }
 }

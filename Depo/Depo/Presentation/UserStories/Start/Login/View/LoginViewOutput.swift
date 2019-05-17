@@ -12,6 +12,8 @@ protocol LoginViewOutput {
 
     func viewIsReady()
     
+    func prepareCaptcha(_ view: CaptchaView)
+    
     func rememberMe(remember: Bool)
 
     func sendLoginAndPassword(login: String, password: String)

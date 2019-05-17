@@ -12,4 +12,18 @@ struct RegistrationUserInfoModel {
     let password: String
     let captchaID: String?
     let captchaAnswer: String?
+    
+    
+    init(mail: String,
+         phone: String,
+         password: String,
+         captchaID: String?,
+         captchaAnswer: String?) {
+        
+        self.mail = mail
+        self.phone = phone
+        self.password = password
+        self.captchaID = captchaID
+        self.captchaAnswer = captchaAnswer
+    }
 }
