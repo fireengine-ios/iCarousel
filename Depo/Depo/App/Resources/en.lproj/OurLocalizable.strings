@@ -442,6 +442,10 @@
 "%d Duplicated Contacts Deleted" = "%d Duplicated Contact(s) Deleted from your device contact list";
 "You have %d numbers on your contacts backup." = "You have %d contacts in your lifebox";
 "This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
+"enter_security_code" = "Enter Security Code";
+"enter_code_get_code_on_phone" = "Please enter 6-digit security code that we sent to this phone number: %@";
+"time_is_up_for_code" = "Time is up, please request a new code.";
+"resend_code" = "Resend Code";
 "Upgrade" = "Upgrade";
 "Creation date" = "Creation date";
 "Folder Info" = "Folder Info";

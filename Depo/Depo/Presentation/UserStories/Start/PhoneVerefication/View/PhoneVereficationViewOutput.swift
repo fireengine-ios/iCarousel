@@ -7,9 +7,13 @@
 //
 
 protocol PhoneVereficationViewOutput {
+    var currentSecurityCode: String { get }
     func viewIsReady()
-    func timerFinishedRunning()
+    func timerFinishedRunning(with isShowMessageWithDropTimer: Bool)
     func resendButtonPressed()
-    func vereficationCodeEntered(code: String)
+    func vereficationCodeEntered()
     func vereficationCodeNotReady()
+    func currentSecurityCodeChanged(with newNumeric: String)
+    func currentSecurityCodeRemoveCharacter()
+    func clearCurrentSecurityCode()
 }

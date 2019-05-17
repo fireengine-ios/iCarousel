@@ -59,6 +59,10 @@ struct ColorConstants {
     
     static let alertBlueGradientStart = UIColor(red: 82 / 255, green: 120 / 255, blue:  243 / 255, alpha: 1.0)
     static let alertBlueGradientEnd = UIColor(red: 41 / 255, green: 201 / 255, blue: 236 / 255, alpha: 1.0)
+    
+    static let cloudyBlue = UIColor(red: 197 / 255.0, green: 200.0 / 255.0, blue: 216 / 255.0, alpha: 1.0)
+    static let blueGrey = UIColor(red: 139 / 255.0, green: 143 / 255.0, blue: 164 / 255.0, alpha: 1.0)
+    static let coolGrey = UIColor(red: 179 / 255.0, green: 181 / 255.0, blue: 191 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {
