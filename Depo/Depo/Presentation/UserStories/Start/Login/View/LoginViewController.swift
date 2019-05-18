@@ -14,7 +14,7 @@ final class LoginViewController: ViewController {
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill

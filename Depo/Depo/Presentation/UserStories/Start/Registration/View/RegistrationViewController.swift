@@ -34,7 +34,7 @@ final class RegistrationViewController: ViewController {
     
     @IBOutlet weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -54,6 +54,7 @@ final class RegistrationViewController: ViewController {
         willSet {
             ///need to hide content
             newValue.layer.masksToBounds = true
+            newValue.isHidden = true
             newValue.errorLabel.text = TextConstants.captchaIsEmpty
         }
     }
