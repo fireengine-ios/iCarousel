@@ -29,10 +29,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQn-yz-ygb" userLabel="Container View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="604"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JO9-w0-uO5" userLabel="Alerts Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <rect key="frame" x="16" y="0.0" width="343" height="0.0"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ5-DB-pO9">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="0.0"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" id="Xes-rH-gWf"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVV-xV-h3m">
                                     <rect key="frame" x="0.0" y="16" width="375" height="400"/>
@@ -42,16 +51,15 @@
                                     <rect key="frame" x="20" y="16" width="335" height="400"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="94P-4Q-I5x">
-                                    <rect key="frame" x="20" y="440" width="335" height="0.0"/>
+                                    <rect key="frame" x="20" y="440" width="335" height="72"/>
                                     <subviews>
-                                        <view hidden="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="lBm-t6-08H" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="lBm-t6-08H" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="72"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Qg-JRc" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="84.5" y="464" width="206" height="44"/>
+                                    <rect key="frame" x="84.5" y="536" width="206" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="hPb-59-wQd"/>
                                     </constraints>
@@ -68,7 +76,6 @@
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="ExF-XE-8Tk"/>
                                 <constraint firstItem="Iei-Qg-JRc" firstAttribute="top" secondItem="94P-4Q-I5x" secondAttribute="bottom" constant="24" id="FkR-pN-D8s"/>
                                 <constraint firstItem="P2f-Nq-OPJ" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="GAc-ra-eVd"/>
-                                <constraint firstItem="JO9-w0-uO5" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" id="HuQ-zD-nrJ"/>
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="top" secondItem="P2f-Nq-OPJ" secondAttribute="bottom" constant="24" id="Kgq-3h-C0K"/>
                                 <constraint firstAttribute="bottom" secondItem="Iei-Qg-JRc" secondAttribute="bottom" constant="24" id="Pcd-TK-dKr"/>
                                 <constraint firstItem="JO9-w0-uO5" firstAttribute="top" secondItem="LQn-yz-ygb" secondAttribute="top" id="Xuz-df-Jsy"/>
@@ -78,6 +85,7 @@
                                 <constraint firstItem="P2f-Nq-OPJ" firstAttribute="top" secondItem="JO9-w0-uO5" secondAttribute="bottom" constant="16" id="mfp-d3-9wY"/>
                                 <constraint firstItem="Iei-Qg-JRc" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" multiplier="0.55" id="n2f-DD-ajh"/>
                                 <constraint firstItem="Iei-Qg-JRc" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="s1E-Z6-Wdu"/>
+                                <constraint firstItem="JO9-w0-uO5" firstAttribute="leading" secondItem="LQn-yz-ygb" secondAttribute="leading" constant="16" id="xKy-it-ymg"/>
                                 <constraint firstItem="P2f-Nq-OPJ" firstAttribute="top" secondItem="bVV-xV-h3m" secondAttribute="top" id="ycU-I7-v3n"/>
                             </constraints>
                         </view>
