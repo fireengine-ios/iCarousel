@@ -122,6 +122,9 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     func setup(with mediaItem: MediaItem) {
+        /// reset all except thumbnail and cellId
+        reset()
+        
         accessibilityLabel = mediaItem.nameValue ?? ""
         favoriteImageView.isHidden = !mediaItem.favoritesValue
         
@@ -142,9 +145,18 @@ final class PhotoVideoCell: UICollectionViewCell {
             videoDurationLabel.isHidden = true
         }
         
+        trimmedLocalFileID = mediaItem.trimmedLocalFileID
+        
         let assetIdentifier = mediaItem.isLocalItemValue ? mediaItem.localFileID : mediaItem.relatedLocal?.localFileID
+        
+        guard cellId != assetIdentifier else {
+            print("--- cellImageManagerUniqueId")
+            return
+        }
+        
         if let assetIdentifier = assetIdentifier {
             cellId = assetIdentifier
+            resetImage()
             
             FilesDataSource.cacheQueue.async { [weak self] in
                 guard
@@ -168,13 +180,21 @@ final class PhotoVideoCell: UICollectionViewCell {
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
         }
         
-        trimmedLocalFileID = mediaItem.trimmedLocalFileID
+        
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {
         let cacheKey = mediumUrl?.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
+        
+        guard uuid != cellImageManager?.uniqueId else {
+            print("--- cellImageManagerUniqueId")
+            return
+        }
+        
         uuid = cellImageManager?.uniqueId
+        resetImage()
+        
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
             DispatchQueue.toMain {
                 guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
@@ -238,13 +258,8 @@ final class PhotoVideoCell: UICollectionViewCell {
         
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        cancelImageLoading()
-        cancelledUploadForObject()
-        reset()
-    }
+    /// not working for cell update (become favorite)
+    /// override func prepareForReuse() {}
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
         DispatchQueue.toMain {
@@ -289,12 +304,16 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     private func reset() {
         cellImageManager = nil
-        thumbnailImageView.image = nil
         favoriteImageView.isHidden = true
         checkmarkImageView.isHidden = true
         uuid = nil
-        cellId = ""
         trimmedLocalFileID = nil
+    }
+    
+    private func resetImage() {
+        thumbnailImageView.image = nil
+        cancelImageLoading()
+        cancelledUploadForObject()
     }
 
     deinit {
