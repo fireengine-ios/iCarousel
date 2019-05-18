@@ -11,7 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import Curio_iOS_SDK
 import Fabric
 import Crashlytics
 
@@ -40,7 +39,6 @@ final class AppConfigurator {
         setupIAPObserver()
         startMenloworks(with: launchOptions)
         setupCropy()
-        startCurio(with: launchOptions)
         dropboxManager.start()
         analyticsManager.start()
         
@@ -135,31 +133,6 @@ final class AppConfigurator {
         UserDefaults.standard.set(version, forKey: "version_preference")
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         UserDefaults.standard.set(build, forKey: "build_preference")
-    }
-    
-    private static func startCurio(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        guard let appLaunchOptions = launchOptions else {
-            return
-        }
-        
-        let serverURL = "http://curio.turkcell.com.tr/api/v2"
-        
-        //let apiKey = "8fb5c84a549711e881e1d5b6432746d5" /// another test
-        let apiKey = "cab314f33df2514764664e5544def586"
-
-        #if DEBUG
-        let trackingCode = "20AW4ELA"
-
-        #else
-        let trackingCode = "KL2XNFIE"
-        #endif
-        
-        
-        CurioSDK.shared().startSession(serverURL, apiKey: apiKey, trackingCode: trackingCode, sessionTimeout: 30, periodicDispatchEnabled: true, dispatchPeriod: 5, maxCachedActivitiyCount: 10, loggingEnabled: false, logLevel: 0, fetchLocationEnabled: false, maxValidLocationTimeInterval: 600, appLaunchOptions: appLaunchOptions)
-    }
-    
-    static func stopCurio() {
-        CurioSDK.shared().endSession()
     }
     
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
