@@ -16,7 +16,7 @@ class SubPlussButtonView: UIView {
     
     static let nibName = "SubPlusButtons"
     
-    var actionDelegate: SubPlussButtonViewDelegate?
+    weak var actionDelegate: SubPlussButtonViewDelegate?
     
     var bottomConstraintOrigialConstant: CGFloat = 0
     var centerXConstraintOriginalConstant: CGFloat = 0
