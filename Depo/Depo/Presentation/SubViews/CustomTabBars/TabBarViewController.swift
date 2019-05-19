@@ -275,6 +275,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if topConstraint.constant >= 0 {
             topConstraint.constant = -statusBarBG.frame.size.height
             bottomConstraint.constant = bottomBGView.frame.size.height
+            debugLog("TabBarVC fullScreenOn about to layout")
             view.layoutSubviews()
         }
     }
@@ -283,6 +284,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if topConstraint.constant != 0 {
             topConstraint.constant = 0
             bottomConstraint.constant = 0
+            debugLog("TabBarVC fullScreenOff about to layout")
             view.layoutSubviews()
         }
     }
@@ -298,6 +300,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
+                debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
             }, completion: { _ in
@@ -315,6 +318,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
+                debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.tabBar.isHidden = true
@@ -630,6 +634,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     func frameForTabAtIndex(index: Int) -> CGRect {
+        debugLog("TabBarVC frameForTabAtIndex about to layout")
         view.layoutIfNeeded()
         
         var frames = tabBar.subviews.flatMap { view -> CGRect? in
