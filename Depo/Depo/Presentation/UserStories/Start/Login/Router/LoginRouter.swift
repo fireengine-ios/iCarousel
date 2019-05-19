@@ -51,8 +51,8 @@ class LoginRouter: LoginRouterInput {
     
     func openTextEnter(buttonAction: @escaping TextEnterHandler) {
 
-        let textEnterVC = TextEnterController.with(title: TextConstants.loginAddGSM,
-                                                   buttonTitle: TextConstants.save,
+        let textEnterVC = TextEnterController.with(title: TextConstants.missingInformation,
+                                                   buttonTitle: TextConstants.createStoryPhotosContinue,
                                                    buttonAction: buttonAction)
         let navVC = NavigationController(rootViewController: textEnterVC)
         
