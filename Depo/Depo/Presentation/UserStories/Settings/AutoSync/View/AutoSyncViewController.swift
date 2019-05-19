@@ -13,9 +13,17 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var startButton: WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var bacgroundImage: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var startButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
+            newValue.backgroundColor = UIColor.lrTealish
+            newValue.isOpaque = true
+        }
+    }
     
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -36,17 +44,15 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        titleLabel.text =  fromSettings ? TextConstants.autoSyncFromSettingsTitle : TextConstants.autoSyncTitle
-        titleLabel.font = fromSettings ? UIFont.TurkcellSaturaDemFont(size: 16) : UIFont.TurkcellSaturaDemFont(size: 18)
+        titleLabel.text =  TextConstants.autoSyncFromSettingsTitle
+        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         titleLabel.textAlignment = .left
         if Device.isIpad {
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
             titleLabel.textAlignment = .center
         }
         
-        titleLabel.textColor = fromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        
-        startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
+        titleLabel.textColor = ColorConstants.textGrayColor
         
         dataSource.setup(table: tableView)
         dataSource.delegate = self
@@ -75,15 +81,12 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         super.viewWillAppear(animated)
         navigationItem.hidesBackButton = !fromSettings
         startButton.isHidden = fromSettings
-        bacgroundImage.isHidden = fromSettings
         dataSource.isFromSettings = fromSettings
         
         
         if fromSettings {
-            view.backgroundColor = ColorConstants.whiteColor
             navigationBarWithGradientStyle()
         } else {
-            view.backgroundColor = UIColor.lrTiffanyBlue
             hidenNavigationBarStyle()
             topConstraint.constant = 64
             view.layoutIfNeeded()

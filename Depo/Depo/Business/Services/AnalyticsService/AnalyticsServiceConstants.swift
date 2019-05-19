@@ -876,6 +876,7 @@ enum GADementionValues {
     
     enum signUpError {
         case invalidEmail
+        case invalidPhoneNumber
         case emailAlreadyExists
         case gsmAlreadyExists
         case invalidPassword
@@ -892,6 +893,8 @@ enum GADementionValues {
             switch self {
             case .invalidEmail:
                 return "INVALID_EMAIL"
+            case .invalidPhoneNumber:
+                return "PHONE_NUMBER_IS_INVALID"
             case .emailAlreadyExists:
                 return "EMAIL_ALREADY_EXISTS"
             case .gsmAlreadyExists:

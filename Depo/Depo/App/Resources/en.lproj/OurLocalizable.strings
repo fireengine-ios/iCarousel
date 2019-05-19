@@ -443,6 +443,10 @@
 "%d Duplicated Contacts Deleted" = "%d Duplicated Contact(s) Deleted from your device contact list";
 "You have %d numbers on your contacts backup." = "You have %d contacts in your lifebox";
 "This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
+"enter_security_code" = "Enter Security Code";
+"enter_code_get_code_on_phone" = "Please enter 6-digit security code that we sent to this phone number: %@";
+"time_is_up_for_code" = "Time is up, please request a new code.";
+"resend_code" = "Resend Code";
 "Upgrade" = "Upgrade";
 "Creation date" = "Creation date";
 "Folder Info" = "Folder Info";
@@ -968,7 +972,6 @@
 "support_form_subject_4" = "Security text";
 "support_form_subject_5" = "Turkcell Password";
 "support_form_subject_6" = "Automatic Log-in";
-"support_form_subject_7" = "Other";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";

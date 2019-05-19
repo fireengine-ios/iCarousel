@@ -134,7 +134,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        view?.display(error: ErrorResponse.string(TextConstants.promocodeBlocked))
+        optInVC.showError(TextConstants.promocodeBlocked)
     }
     
     func optInNavigationTitle() -> String {
@@ -178,6 +178,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.stopActivityIndicator()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
+        optInVC?.hiddenError()
         optInVC?.hideResendButton()
     }
     
@@ -233,14 +234,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
-            optInVC?.present(vc, animated: false, completion: nil)
+            optInVC?.startEnterCode()
+            optInVC?.showError(TextConstants.promocodeInvalid)
         }
     }
     
     func failedUsage(with error: ErrorResponse) {
-        view?.stopActivityIndicator()
-        view?.display(error: error)
+        optInVC?.stopActivityIndicator()
+        optInVC?.startEnterCode()
+        optInVC?.showError(error.description)
     }
 
     func failed(with errorMessage: String) {

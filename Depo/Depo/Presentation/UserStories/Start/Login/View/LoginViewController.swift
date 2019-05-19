@@ -14,7 +14,7 @@ final class LoginViewController: ViewController {
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -169,6 +169,8 @@ final class LoginViewController: ViewController {
     }
     
     private func setupDelegates() {
+        output.prepareCaptcha(captchaView)
+        
         supportView.delegate = self
         
         loginEnterView.textField.delegate = self
@@ -356,12 +358,14 @@ extension LoginViewController: LoginViewInput {
     
     //MARK: Captcha field processing
     func showCaptcha() {
-        captchaView.isHidden = false
+        ///fix animation if appears captcha and error both
+        UIView.performWithoutAnimation {
+            self.captchaView.isHidden = false
+        }
     }
     
     func refreshCaptcha() {
         captchaView.updateCaptcha()
-        captchaView.captchaAnswerTextField.text = ""
     }
     
     //MARK: Fields alerts processing
@@ -404,9 +408,7 @@ extension LoginViewController: LoginViewInput {
         }
         
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
-        scrollView.scrollRectToVisible(errorViewRect, animated: true)
-        
-        captchaView.updateCaptcha()
+        scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
     func hideErrorMessage() {

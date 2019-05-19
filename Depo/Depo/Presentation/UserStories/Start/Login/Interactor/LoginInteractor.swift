@@ -13,7 +13,6 @@ enum LoginFieldError {
     case passwordIsEmpty
     
     case captchaIsEmpty
-    case captchaIsIncorrect
 }
 
 class LoginInteractor: LoginInteractorInput {
@@ -86,14 +85,17 @@ class LoginInteractor: LoginInteractorInput {
         }
         
         if login.isEmpty || password.isEmpty || (isCaptchaRequired && (atachedCaptcha?.answer ?? "").isEmpty) {
+            loginRetries += 1
             return
         }
         
         if isBlocked(userName: login) {
             output?.userStillBlocked(user: login)
+            loginRetries += 1
             return
         } else if (maxAttemps <= attempts) {
             output?.allAttemtsExhausted(user: login)
+            loginRetries += 1
             return
         }
         

@@ -16,7 +16,7 @@ protocol BaseCollectionViewDataSourceDelegate {
     func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
-class BaseCollectionViewDataSource: NSObject, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
+class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
     
     var collectionView: UICollectionView!
     var viewController: UIViewController!
@@ -34,7 +34,7 @@ class BaseCollectionViewDataSource: NSObject, CollectionViewLayoutDelegate, Base
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
-        self.collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = self
         self.delegate = delegate
         
@@ -46,7 +46,8 @@ class BaseCollectionViewDataSource: NSObject, CollectionViewLayoutDelegate, Base
                 layout.numberOfColumns = 1
             }
         }
-        
+        let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
         collectionView.reloadData()
@@ -354,8 +355,8 @@ class BaseCollectionViewDataSource: NSObject, CollectionViewLayoutDelegate, Base
         }
     }    
 }
-//MARK UICollectionView datasource
-extension BaseCollectionViewDataSource: UICollectionViewDataSource {
+//MARK UICollectionView datasource/delegate
+extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return popUps.count
@@ -396,8 +397,8 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource {
     }
 }
 
-//MARK UICollectionView delegate
-extension BaseCollectionViewDataSource: UICollectionViewDelegate {
+//MARK UICollectionView Layout delegate
+extension BaseCollectionViewDataSource: CollectionViewLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         if (isPopUpCell(path: indexPath)) {
             let popUpView = popUps[indexPath.row]

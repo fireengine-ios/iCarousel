@@ -11,6 +11,8 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     weak var view: PhoneVereficationViewInput!
     var interactor: PhoneVereficationInteractorInput!
     var router: PhoneVereficationRouterInput!
+    
+    var currentSecurityCode = ""
 
     private lazy var customProgressHUD = CustomProgressHUD()
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
@@ -28,20 +30,26 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.setupPhoneLable(with: interactor.phoneNumber)
     }
     
-    func timerFinishedRunning() {
+    func timerFinishedRunning(with isShowMessageWithDropTimer: Bool) {
+        if isShowMessageWithDropTimer {
+            view.showError(TextConstants.timeIsUpForCode)
+        }
+        
         view.resendButtonShow(show: true)
+        view.updateEditingState()
     }
     
     func resendButtonPressed() {
         view.resendButtonShow(show: false)
+        view.updateEditingState()
         startAsyncOperationDisableScreen()
         interactor.resendCode()
         
     }
     
-    func vereficationCodeEntered(code: String) {
+    func vereficationCodeEntered() {
         startAsyncOperationDisableScreen()
-        interactor.verifyCode(code: code)
+        interactor.verifyCode(code: currentSecurityCode)
     }
     
     func vereficationCodeNotReady() {
@@ -56,19 +64,22 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func vereficationFailed(with error: String) {
-        view.heighlightInfoTitle()
         completeAsyncOperationEnableScreen()
-        router.presentErrorPopUp(with: error)
+        view.updateEditingState()
+        view.showError(error)
     }
     
     func resendCodeRequestFailed(with error: ErrorResponse) {
         completeAsyncOperationEnableScreen()
         view.resendButtonShow(show: true)
+        view.updateEditingState()
+        
         if error.description == TextConstants.TOO_MANY_REQUESTS {
-            router.presentErrorPopUp(with: error.description)
+            view.showError(error.description)
         } else {
-            router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
+            view.showError(TextConstants.phoneVereficationResendRequestFailedErrorText)
         }
+        
         view.dropTimer()
     }
     
@@ -98,8 +109,24 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     
     func reachedMaxAttempts() {
         view.resendButtonShow(show: true)
+        view.updateEditingState()
         view.dropTimer()
     }
+    
+    func currentSecurityCodeChanged(with newNumeric: String) {
+        currentSecurityCode.append(contentsOf: newNumeric)
+    }
+    
+    func currentSecurityCodeRemoveCharacter() {
+        if !currentSecurityCode.isEmpty {
+            currentSecurityCode.removeLast()
+        }
+    }
+    
+    func clearCurrentSecurityCode() {
+        currentSecurityCode = ""
+    }
+
     
     // MARK: - Utility methods
     private func openAutoSyncIfNeeded() {

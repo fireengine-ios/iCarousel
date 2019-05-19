@@ -34,7 +34,7 @@ final class RegistrationViewController: ViewController {
     
     @IBOutlet weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -54,6 +54,7 @@ final class RegistrationViewController: ViewController {
         willSet {
             ///need to hide content
             newValue.layer.masksToBounds = true
+            newValue.isHidden = true
             newValue.errorLabel.text = TextConstants.captchaIsEmpty
         }
     }
@@ -192,6 +193,8 @@ final class RegistrationViewController: ViewController {
     }
     
     private func prepareFields() {
+        output.prepareCaptcha(captchaView)
+        
         emailEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
         rePasswordEnterView.textField.delegate = self
@@ -259,10 +262,9 @@ final class RegistrationViewController: ViewController {
     }
     
     private func presentCaptcha() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
+        ///fix animation if appears captcha and error both
+        UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
-            
-            self.view.layoutIfNeeded()
         }
     }
     

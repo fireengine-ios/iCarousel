@@ -89,17 +89,14 @@ final class SupportFormController: ViewController, KeyboardHandler {
                            TextConstants.supportFormSubject3,
                            TextConstants.supportFormSubject4,
                            TextConstants.supportFormSubject5,
-                           TextConstants.supportFormSubject6,
-                           TextConstants.supportFormSubject7]
+                           TextConstants.supportFormSubject6]
         return newValue
     }()
     
-    let problemView: ProfileTextEnterView = {
-        let newValue = ProfileTextEnterView()
+    let problemView: ProfileTextViewEnterView = {
+        let newValue = ProfileTextViewEnterView()
         newValue.titleLabel.text = TextConstants.yourProblem
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourProblemShortly
-        newValue.textField.placeholder = TextConstants.explainYourProblemShortly
-        newValue.textField.returnKeyType = .done
         return newValue
     }()
     
@@ -121,13 +118,12 @@ final class SupportFormController: ViewController, KeyboardHandler {
         surnameView.textField.delegate = self
         emailView.textField.delegate = self
         subjectView.textField.delegate = self
-        problemView.textField.delegate = self
         
         phoneView.numberTextField.delegate = self
         phoneView.codeTextField.delegate = self
         
         phoneView.responderOnNext = subjectView.textField
-        subjectView.responderOnNext = problemView.textField
+        subjectView.responderOnNext = problemView.textView
     }
     
     @IBAction private func onSendButton(_ sender: UIButton) {
@@ -148,7 +144,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
             let phoneCode = phoneView.codeTextField.text,
             let phoneNumber = phoneView.numberTextField.text,
             let subject = subjectView.textField.text,
-            let problem = problemView.textField.text
+            let problem = problemView.textView.text
         else {
             assertionFailure("all fields should not be nil")
             return
@@ -164,22 +160,25 @@ final class SupportFormController: ViewController, KeyboardHandler {
             actionOnError(.invalidEmail)
         } else if subject.isEmpty {
             actionOnError(.emptySubject)
-        } else if problem.isEmpty {
+            
+        /// bcz of placeholder use isTextEmpty
+        } else if problemView.isTextEmpty {
             actionOnError(.emptyProblem)
         } else {
             
             let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            let emailBody = String(format: TextConstants.supportFormEmailBody,
-                                   name,
-                                   surname,
-                                   email,
-                                   "\(phoneCode)\(phoneNumber)",
-                                   versionString,
-                                   CoreTelephonyService().operatorName() ?? "",
-                                   UIDevice.current.modelName,
-                                   UIDevice.current.systemVersion,
-                                   Device.locale,
-                                   ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
+            let emailBody = problem + "\n\n" +
+                String(format: TextConstants.supportFormEmailBody,
+                       name,
+                       surname,
+                       email,
+                       "\(phoneCode)\(phoneNumber)",
+                        versionString,
+                        CoreTelephonyService().operatorName() ?? "",
+                        UIDevice.current.modelName,
+                        UIDevice.current.systemVersion,
+                        Device.locale,
+                        ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: subject,
@@ -215,7 +214,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
             
         case .emptyProblem:
             problemView.showSubtitleAnimated()
-            problemView.textField.becomeFirstResponder()
+            problemView.textView.becomeFirstResponder()
             scrollToView(problemView)
             
         case .invalidEmail:
@@ -250,9 +249,6 @@ extension SupportFormController: UITextFieldDelegate {
             
         case subjectView.textField:
             subjectView.hideSubtitleAnimated()
-            
-        case problemView.textField:
-            problemView.hideSubtitleAnimated()
 
         case phoneView.numberTextField, phoneView.codeTextField:
             phoneView.hideSubtitleAnimated()
@@ -286,10 +282,7 @@ extension SupportFormController: UITextFieldDelegate {
         /// only for simulator.
         /// setup by responderOnNext:
         case subjectView.textField:
-            problemView.textField.becomeFirstResponder()
-            
-        case problemView.textField:
-            openEmail()
+            problemView.textView.becomeFirstResponder()
             
         default:
             assertionFailure()
