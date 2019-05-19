@@ -63,6 +63,7 @@ final class PhotoVideoDataSource: NSObject {
     
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
+    private lazy var objectUpdates = [IndexPath]()
     
     private lazy var insertedItemsIds = [NSManagedObjectID]()
     private lazy var deletedItemsIds = [NSManagedObjectID]()
@@ -258,6 +259,7 @@ final class PhotoVideoDataSource: NSObject {
         insertedItemsIds.removeAll()
         deletedItemsIds.removeAll()
         updatedItemsIds.removeAll()
+        objectUpdates.removeAll()
     }
 }
 
@@ -326,9 +328,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             deletedItemsIds.append(objectId)
         case .update:
             if let indexPath = indexPath {
-                self.objectChanges.append { [unowned self] in
-                    self.collectionView.reloadItems(at: [indexPath])
-                }
+                self.objectUpdates.append(indexPath)
             }
             updatedItemsIds.append(objectId)
         case .move:
@@ -348,12 +348,20 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         let deletedIdsStatic = deletedItemsIds
         let updatedIdsStatic = updatedItemsIds
         let insertedIdsStatic = insertedItemsIds
+        let objectUpdatesStatic = objectUpdates
         
         cleanChanges()
         
         if !collectionView.isDragging, let firstVisibleItem = firstVisibleItem {
             focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
+        }
+        
+        /// reload cells manually
+        objectUpdatesStatic.forEach { indexPath in
+            if let cell = self.collectionView.cellForItem(at: indexPath) {
+                self.collectionView.delegate?.collectionView?(self.collectionView, willDisplay: cell, forItemAt: indexPath)
+            }
         }
         
         collectionView.performBatchUpdates({
