@@ -17,7 +17,7 @@ final class PhoneCodeInputView: UIPickerView {
     }
     
     func setValuePickerView(with gsmCode: String) {
-        for (index, gsmModel) in gsmModels.enumerated() where gsmModel.gsmCode == gsmCode {
+        if let index = gsmModels.firstIndex(where: { $0.gsmCode == gsmCode }) {
             selectRow(index, inComponent: 0, animated: false)
         }
     }
