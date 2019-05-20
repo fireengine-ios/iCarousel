@@ -120,8 +120,6 @@ final class CacheManager {
 
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
-            debugPrint("--- page is \(self.photoVideoService.currentPage) recieved remotes \(remoteItems.count)")
-            
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 
                 if remoteItems.count < CacheManager.pageSize {
@@ -134,12 +132,10 @@ final class CacheManager {
             }
             
         }, fail: { [weak self] in
-            debugPrint("---+ FAILED page is \(self?.photoVideoService.currentPage)")
             guard let self = self else {
                 completion()
                 return
             }
-            
             guard self.processingRemoteItems else {
                 return
             }

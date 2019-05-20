@@ -32,10 +32,10 @@ public class MediaItem: NSManagedObject {
         isLocalItemValue = wrapData.isLocalItem
         creationDateValue = wrapData.creationDate as NSDate?
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
-        if !isLocalItemValue {
-             sortingDate = wrapData.metaData?.takenDate as NSDate?
-        } else {
+        if isLocalItemValue {
             sortingDate = wrapData.creationDate as NSDate?
+        } else {
+            sortingDate = wrapData.metaData?.takenDate as NSDate?
         }
        
         urlToFileValue = wrapData.urlToFile?.absoluteString
