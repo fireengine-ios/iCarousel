@@ -22,6 +22,27 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ha8-dW-lGP">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
                     </imageView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TmD-it-Oee">
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oB2-yd-AiV">
+                            <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AwM-ng-18C">
+                                    <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="0o2-0Y-10v">
+                                        <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <vibrancyEffect>
+                                        <blurEffect style="light"/>
+                                    </vibrancyEffect>
+                                </visualEffectView>
+                            </subviews>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
                     <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrF-OZ-70O">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gXr-ST-V2P">
@@ -80,6 +101,7 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="TmD-it-Oee" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0yg-35-CVW"/>
                 <constraint firstAttribute="trailing" secondItem="Rtp-Ce-5Aw" secondAttribute="trailing" id="2Zi-jd-uEz"/>
                 <constraint firstItem="5aj-uE-NFD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="2dm-zn-67t"/>
                 <constraint firstItem="LrF-OZ-70O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2pF-C4-qp6"/>
@@ -90,12 +112,14 @@
                 <constraint firstItem="3QP-J6-7Bi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="ISV-oz-f8E"/>
                 <constraint firstItem="LrF-OZ-70O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JFJ-s6-19G"/>
                 <constraint firstItem="Vz7-W6-1DU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="OZ3-gm-3oy"/>
+                <constraint firstAttribute="trailing" secondItem="TmD-it-Oee" secondAttribute="trailing" id="Pni-5e-TzX"/>
                 <constraint firstItem="Shs-Gd-W9e" firstAttribute="leading" secondItem="Vz7-W6-1DU" secondAttribute="trailing" constant="3" id="WOY-8m-Sxs"/>
                 <constraint firstItem="ha8-dW-lGP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Wjh-Ca-gb9"/>
                 <constraint firstAttribute="bottom" secondItem="Rtp-Ce-5Aw" secondAttribute="bottom" id="Z56-7g-0sw"/>
                 <constraint firstItem="Rtp-Ce-5Aw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aX9-hc-XVH"/>
                 <constraint firstAttribute="trailing" secondItem="ha8-dW-lGP" secondAttribute="trailing" id="ckG-Z0-t0q"/>
                 <constraint firstItem="2HJ-NZ-h8K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="dQr-O3-JyM"/>
+                <constraint firstAttribute="bottom" secondItem="TmD-it-Oee" secondAttribute="bottom" id="eUQ-SA-MOR"/>
                 <constraint firstItem="3QP-J6-7Bi" firstAttribute="top" secondItem="D6a-f1-mPS" secondAttribute="bottom" constant="4" id="jtJ-qK-zSE"/>
                 <constraint firstAttribute="bottom" secondItem="3QP-J6-7Bi" secondAttribute="bottom" constant="3" id="mLe-5J-glr"/>
                 <constraint firstAttribute="trailing" secondItem="3QP-J6-7Bi" secondAttribute="trailing" constant="2" id="pbf-VH-c45"/>
@@ -106,17 +130,19 @@
                 <constraint firstAttribute="bottom" secondItem="LrF-OZ-70O" secondAttribute="bottom" id="vVR-qQ-508"/>
                 <constraint firstAttribute="trailing" secondItem="5aj-uE-NFD" secondAttribute="trailing" constant="4" id="wdI-YV-Gup"/>
                 <constraint firstAttribute="bottom" secondItem="Shs-Gd-W9e" secondAttribute="bottom" constant="2" id="wre-hI-VEJ"/>
+                <constraint firstItem="TmD-it-Oee" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z4c-3Q-Cb5"/>
                 <constraint firstAttribute="trailing" secondItem="LrF-OZ-70O" secondAttribute="trailing" id="zuP-X3-Oeo"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="186" height="165"/>
             <connections>
-                <outlet property="blurVisualEffectView" destination="LrF-OZ-70O" id="Ida-GF-ibF"/>
                 <outlet property="checkmarkImageView" destination="5aj-uE-NFD" id="CSl-mz-aLF"/>
                 <outlet property="cloudStatusImageView" destination="D6a-f1-mPS" id="vnb-sw-Z4p"/>
                 <outlet property="favoriteImageView" destination="2HJ-NZ-h8K" id="tjT-zV-keu"/>
+                <outlet property="opacityBlurVisualEffectView" destination="LrF-OZ-70O" id="Ida-GF-ibF"/>
                 <outlet property="progressView" destination="3QP-J6-7Bi" id="L5d-Bw-CY5"/>
                 <outlet property="selectionStateView" destination="Rtp-Ce-5Aw" id="kXL-56-QJN"/>
+                <outlet property="thumbnailBlurVisualEffectView" destination="TmD-it-Oee" id="ruQ-8G-FCL"/>
                 <outlet property="thumbnailImageView" destination="ha8-dW-lGP" id="Wvo-Ho-LOQ"/>
                 <outlet property="videoDurationLabel" destination="Shs-Gd-W9e" id="C4p-Jd-y5B"/>
                 <outlet property="videoPlayIcon" destination="Vz7-W6-1DU" id="zzc-iG-sZV"/>

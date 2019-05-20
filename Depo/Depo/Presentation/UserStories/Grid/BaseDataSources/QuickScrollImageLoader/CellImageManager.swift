@@ -10,7 +10,7 @@ import Foundation
 import SDWebImage
 import MetalPetal
 
-typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ uuid: String?)->Void
+typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ shouldBeBlurred: Bool, _ uuid: String?)->Void
 
 
 final class CellImageManager {
@@ -99,7 +99,7 @@ final class CellImageManager {
     private func setupOperations(thumbnail: URL?, url: URL?) {
         ///check if image is already downloaded with url
         if let image = getImageFromCache(url: url) {
-            completionBlock?(image, true, uniqueId)
+            completionBlock?(image, true, false, uniqueId)
             return
         }
         
@@ -108,7 +108,7 @@ final class CellImageManager {
             guard let `self` = self else { return }
 
             guard let url = url else {
-                self.completionBlock?(nil, false, self.uniqueId)
+                self.completionBlock?(nil, false, false, self.uniqueId)
                 return
             }
             
@@ -118,7 +118,7 @@ final class CellImageManager {
                 guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
                 
                 self.cache(image: outputImage, url: url)
-                self.completionBlock?(outputImage, false, self.uniqueId)
+                self.completionBlock?(outputImage, false, false, self.uniqueId)
             }
             
             self.start(operation: downloadOperation)
@@ -130,8 +130,8 @@ final class CellImageManager {
             return
         }
         
-        if let image = getImageFromCache(url: thumbnail) {
-            completionBlock?(image, true, uniqueId)
+        if let cachedThumbnail = getImageFromCache(url: thumbnail) {
+            completionBlock?(cachedThumbnail, true, true, uniqueId)
             downloadImage()
             return
         }
@@ -139,30 +139,15 @@ final class CellImageManager {
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.processingQueue)
         //DEVELOP let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
-            guard let outputImage = outputImage as? UIImage else {
+            guard let self = self, let outputImage = outputImage as? UIImage else {
                 downloadImage()
                 return
             }
-            
-            CellImageManager.blurService.blur(image: outputImage, completion: { [weak self] blurredImage in
-                self?.processingQueue.async { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    ///another guard in case if we want to save an unblurred thumbnail image
-                    guard let blurredImage = blurredImage else {
-                        self.completionBlock?(outputImage, false, self.uniqueId)
-                        downloadImage()
-                        return
-                    }
-                    
-                    self.cache(image: blurredImage, url: thumbnail)
-                    self.completionBlock?(blurredImage, false, self.uniqueId)
-                    
-                    downloadImage()
-                }
-            })
+
+            self.cache(image: outputImage, url: thumbnail)
+            self.completionBlock?(outputImage, false, true, self.uniqueId)
+
+            downloadImage()
         }
         downloadThumbnailOperation.queuePriority = .high
         start(operation: downloadThumbnailOperation)
