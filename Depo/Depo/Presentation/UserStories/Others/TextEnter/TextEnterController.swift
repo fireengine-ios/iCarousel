@@ -167,8 +167,4 @@ extension TextEnterController: UITextFieldDelegate {
         phoneEnterView.hideSubtitleAnimated()
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return true
-    }
-    
 }
