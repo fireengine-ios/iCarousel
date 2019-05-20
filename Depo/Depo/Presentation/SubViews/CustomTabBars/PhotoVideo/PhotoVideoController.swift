@@ -86,13 +86,18 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if !selectedItems.isEmpty {
-            setupNavigationBar(editingMode: true)
-            onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
-        } else {
-            setupNavigationBar(editingMode: false)
+        dataSource.getSelectedObjects { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            if !selectedItems.isEmpty {
+                self.setupNavigationBar(editingMode: true)
+                self.onChangeSelectedItemsCount(selectedItemsCount: self.dataSource.selectedIndexPaths.count)
+            } else {
+                self.setupNavigationBar(editingMode: false)
+            }
         }
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -174,17 +179,22 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - helpers
     
     private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        bottomBarManager.update(for: dataSource.selectedObjects)
-        
-        if selectedItemsCount == 0 {
-            navBarManager.threeDotsButton.isEnabled = false
-            bottomBarManager.hide()
-        } else {
-            navBarManager.threeDotsButton.isEnabled = true
-            bottomBarManager.show()
+        dataSource.getSelectedObjects{ [weak self] selectedObjects in
+            guard let self = self else {
+                return
+            }
+            self.bottomBarManager.update(for: selectedObjects)
+            
+            if selectedItemsCount == 0 {
+                self.navBarManager.threeDotsButton.isEnabled = false
+                self.bottomBarManager.hide()
+            } else {
+                self.navBarManager.threeDotsButton.isEnabled = true
+                self.bottomBarManager.show()
+            }
+            
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
         }
-        
-        setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
     }
     
     private func showDetail(at indexPath: IndexPath) {
@@ -197,20 +207,22 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         trackClickOnPhotoOrVideo(isPhoto: true)
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
-            guard let currentMediaItem = self?.dataSource.object(at: indexPath),
+            self?.dataSource.getObject(at: indexPath) { [weak self] object in
+                guard let currentMediaItem = object,
                 let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
-                self?.canShowDetail = true
-                self?.hideSpinner()
-                return
-            }
-            
-            DispatchQueue.toMain {
-                self?.hideSpinner()
-                let router = RouterVC()
-                let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
-                let nController = NavigationController(rootViewController: controller)
-                router.presentViewController(controller: nController)
-                self?.canShowDetail = true
+                    self?.canShowDetail = true
+                    self?.hideSpinner()
+                    return
+                }
+                
+                DispatchQueue.toMain {
+                    self?.hideSpinner()
+                    let router = RouterVC()
+                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
+                    let nController = NavigationController(rootViewController: controller)
+                    router.presentViewController(controller: nController)
+                    self?.canShowDetail = true
+                }
             }
         }
     }
@@ -251,11 +263,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         
-        guard let mediaItem = dataSource.object(at: indexPath), let date = mediaItem.sortingDate as Date? else {
-            return
+        dataSource.getObject(at: indexPath) { [weak self] object in
+            guard let mediaItem = object, let date = mediaItem.sortingDate as Date? else {
+                return
+            }
+            let title = date.getDateInTextForCollectionViewHeader()
+            self?.scrollBarManager.scrollBar.setText(title)
         }
-        let title = date.getDateInTextForCollectionViewHeader()
-        scrollBarManager.scrollBar.setText(title)
     }
 }
 
@@ -315,69 +329,83 @@ extension PhotoVideoController: UIScrollViewDelegate {
         }
         
         guard
-            let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <),
-            let topAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.first),
-            let bottomAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.last)
+            let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <)
         else {
             return
         }
-
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-
-            var startId: Int64?
-            var endId: Int64?
-            if topAPIInfo.date == bottomAPIInfo.date {
-                startId = topAPIInfo.id
-                endId = bottomAPIInfo.id
-            }
-            
-            let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
-            let fileType: FileType = self.isPhoto ? .image : .video
-            self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
-                switch response {
-                case .success(let quckScrollResponse):
-                    self.dispatchQueue.async {
-                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
-                            debugPrint("appended and updated")
-                        })
+        rangeAPIInfo(at: workaroundVisibleIndexes.first) { [weak self] topAPIInfo in
+            self?.self.rangeAPIInfo(at: workaroundVisibleIndexes.last) { [weak self] bottomAPIInfo in
+                guard let topAPIInfo = topAPIInfo,
+                    let bottomAPIInfo = bottomAPIInfo else {
+                    return
+                }
+                self?.dispatchQueue.async { [weak self] in
+                    guard let `self` = self else {
+                        return
                     }
-                case .failed(let error):
-                    ///may be canceled request
-                    break///TODO: popup here?
+                    
+                    var startId: Int64?
+                    var endId: Int64?
+                    if topAPIInfo.date == bottomAPIInfo.date {
+                        startId = topAPIInfo.id
+                        endId = bottomAPIInfo.id
+                    }
+                    
+                    let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
+                    let fileType: FileType = self.isPhoto ? .image : .video
+                    self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+                        switch response {
+                        case .success(let quckScrollResponse):
+                            self.dispatchQueue.async {
+                                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
+                                    debugPrint("appended and updated")
+                                })
+                            }
+                        case .failed(_):
+                            ///may be canceled request
+                            break///TODO: popup here?
+                        }
+                    }
                 }
             }
         }
     }
     
-    private func rangeAPIInfo(at index: IndexPath?) -> RangeAPIInfo? {
+    private func rangeAPIInfo(at index: IndexPath?, rangeApiInfo: @escaping (RangeAPIInfo?) -> Void) {
         guard let objectIndex = index else {
-            return nil
+            return
         }
         
-        let object = dataSource.object(at: objectIndex)
-        let objectId = object?.idValue
-        let isLastIndex = isLast(indexPath: objectIndex)
-        let isFirstIndex = (objectIndex.section == 0 && objectIndex.row == 0)
-
-        if isFirstIndex {
-            /// return Date.distantFuture to have the top items, because user may have wrong date on his device.
-            return RangeAPIInfo(date: Date.distantFuture, id: nil)
+        dataSource.getObject(at: objectIndex) { [weak self] object in
+            guard let self = self else {
+                return
+            }
+            
+            let objectId = object?.idValue
+            let isLastIndex = self.isLast(indexPath: objectIndex)
+            let isFirstIndex = (objectIndex.section == 0 && objectIndex.row == 0)
+            
+            guard !isFirstIndex else {
+                /// return Date.distantFuture to have the top items, because user may have wrong date on his device.
+                rangeApiInfo(RangeAPIInfo(date: Date.distantFuture, id: nil))
+                return
+            }
+            
+            guard !isLastIndex else {
+                /// return Date.distantPast to have the bottom items
+                rangeApiInfo(RangeAPIInfo(date: Date.distantPast, id: nil))
+                return
+            }
+            
+            /// check if it's one of missing dates
+            guard object?.monthValue != nil, let sortingDate = object?.sortingDate as Date? else {
+                rangeApiInfo(RangeAPIInfo(date: Date.distantPast, id: nil))
+                return
+            }
+            
+            rangeApiInfo( RangeAPIInfo(date: sortingDate, id: objectId))
         }
         
-        if isLastIndex {
-            /// return Date.distantPast to have the bottom items
-            return RangeAPIInfo(date: Date.distantPast, id: nil)
-        }
-        
-        /// check if it's one of missing dates
-        guard object?.monthValue != nil, let sortingDate = object?.sortingDate as Date? else {
-            return RangeAPIInfo(date: Date.distantPast, id: nil)
-        }
-        
-        return RangeAPIInfo(date: sortingDate, id: objectId)
     }
     
     private func isLast(indexPath: IndexPath) -> Bool {
@@ -399,27 +427,32 @@ extension PhotoVideoController: UICollectionViewDelegate {
         cell.delegate = self
         cell.filesDataSource = filesDataSource
         
-        guard let object = dataSource.object(at: indexPath) else {
-            return
+        //Questinable
+        dataSource.getObject(at: indexPath) { [weak self] object in
+            guard let self = self,
+                let object = object else {
+                return
+            }
+            
+            cell.setup(with: object)
+            
+            if let trimmedLocalFileID = object.trimmedLocalFileID, let progress = self.uploadProgress[trimmedLocalFileID] {
+                cell.setProgressForObject(progress: progress, blurOn: true)
+            } else {
+                cell.cancelledUploadForObject()
+            }
+            
+            let isSelectedCell = self.dataSource.selectedIndexPaths.contains(indexPath)
+            cell.set(isSelected: isSelectedCell, isSelectionMode: self.dataSource.isSelectingMode, animated: true)
+            
+            if let uuid = object.trimmedLocalFileID, self.uploadedObjectID.index(of: uuid) != nil {
+                cell.finishedUploadForObject()
+            }
+            
+            //        else {
+            //            cell.resetCloudImage()
+            //        }
         }
-        
-        cell.setup(with: object)
-        
-        if let trimmedLocalFileID = object.trimmedLocalFileID, let progress = uploadProgress[trimmedLocalFileID] {
-            cell.setProgressForObject(progress: progress, blurOn: true)
-        } else {
-            cell.cancelledUploadForObject()
-        }
-        
-        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
-        cell.set(isSelected: isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
-        
-        if let uuid = object.trimmedLocalFileID, uploadedObjectID.index(of: uuid) != nil {
-            cell.finishedUploadForObject()
-        }
-//        else {
-//            cell.resetCloudImage()
-//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -449,8 +482,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
-        if let mediaItem = dataSource.object(at: indexPath) {
-            view.setup(with: mediaItem)
+        dataSource.getObject(at: indexPath) { [weak self] object in
+            if let mediaItem = object {
+                view.setup(with: mediaItem)
+            }
         }
     }
 }
@@ -474,8 +509,10 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         }
     }
     
-    var selectedItems: [BaseDataSourceItem] {
-        return dataSource.selectedObjects
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        dataSource.getSelectedObjects { items in
+            selectedItemsCallback(items)
+        }
     }
     
     func stopModeSelected() {
@@ -491,14 +528,20 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func selectAllModeSelected() {}
     func deSelectAll() {}
     func printSelected() {
-        let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
-        
-        if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
-            let router = RouterVC()
-            let vc = PrintInitializer.viewController(data: itemsToPrint)
-            router.pushOnPresentedView(viewController: vc)
+        dataSource.getSelectedObjects { [weak self] selectedObjects in
+            guard let self = self else {
+                return
+            }
+            let syncPhotos = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
+            
+            if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
+                let router = RouterVC()
+                let vc = PrintInitializer.viewController(data: itemsToPrint)
+                router.pushOnPresentedView(viewController: vc)
+            }
+            self.stopEditingMode()
         }
-        stopEditingMode()
+        
     }
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
@@ -512,7 +555,13 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     }
     
     func onThreeDotsButton() {
-        threeDotMenuManager.showActions(for: dataSource.selectedObjects, isSelectingMode: dataSource.isSelectingMode, sender: navBarManager.threeDotsButton)
+        dataSource.getSelectedObjects { [weak self] selectedObjects in
+            guard let self = self else {
+                return
+            }
+            self.threeDotMenuManager.showActions(for: selectedObjects, isSelectingMode: self.dataSource.isSelectingMode, sender: self.navBarManager.threeDotsButton)
+        }
+        
     }
     
     func onSearchButton() {
@@ -596,17 +645,19 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                 guard let self = self else {
                     return
                 }
-                
                 if let path = self.getIndexPathForObject(itemUUID: uuid),
-                    self.collectionView.indexPathsForVisibleItems.contains(path),
-                    let object = self.dataSource.object(at: path),
-                    let cell = self.collectionView.cellForItem(at: path) as? PhotoVideoCell {
-
-                    if object.isLocalItemValue {
-                        cell.showCloudImage()                        
-                    } else {
-                        cell.resetCloudImage()
-                    }
+                    self.collectionView.indexPathsForVisibleItems.contains(path) {
+                    self.dataSource.getObject(at: path, mediaItemCallback: { [weak self] object in
+                        guard let self = self, let object = object,
+                            let cell = self.collectionView.cellForItem(at: path) as? PhotoVideoCell else {
+                                return
+                        }
+                        if object.isLocalItemValue {
+                            cell.showCloudImage()
+                        } else {
+                            cell.resetCloudImage()
+                        }
+                    })
                 }
                 
                 if let index = self.uploadedObjectID.index(of: uuid) {
@@ -696,19 +747,6 @@ extension PhotoVideoController {
     }
 }
 
-
-extension PhotoVideoController {
-    private var itemProviderClosure: ItemProviderClosure {
-        return { [weak self] indexPath in
-            if let mediaItem = self?.dataSource.object(at: indexPath), let assetId = mediaItem.localFileID {
-                return LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId) ??
-                    PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject
-            }
-            return nil
-        }
-    }
-}
-
 //MARK: - ScrollBarViewDelegate
 
 extension PhotoVideoController: ScrollBarViewDelegate {
@@ -731,11 +769,12 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func fetchPredicateCreated() { }
     
     func contentDidChange(_ fetchedObjects: [MediaItem]) {
-        DispatchQueue.toMain {
+//        DispatchQueue.toMain {
+        ///Already called from context
             self.scrollBarManager.updateYearsView(with: fetchedObjects,
                                                   cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
                                                   numberOfColumns: Int(self.collectionViewManager.collectionViewLayout.columns))
-        }
+//        }
     }
     
     func convertFetchedObjectsInProgress() {

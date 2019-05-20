@@ -742,8 +742,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: subModule presenter
     
-    var selectedItems: [BaseDataSourceItem] {
-        return dataSource.getSelectedItems()
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        selectedItemsCallback(dataSource.getSelectedItems())
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
@@ -773,11 +773,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func printSelected() {
         debugLog("BaseFilesGreedPresenter printSelected")
-
-        let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
-        if !syncPhotos.isEmpty {
-            router.showPrint(items: syncPhotos)
+        
+        getSelectedItems { [weak self] selectedItems in
+            let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
+            if !syncPhotos.isEmpty {
+                self?.router.showPrint(items: syncPhotos)
+            }
         }
+        
+        
     }
     
     func selectAllModeSelected() {

@@ -32,7 +32,12 @@ public class MediaItem: NSManagedObject {
         isLocalItemValue = wrapData.isLocalItem
         creationDateValue = wrapData.creationDate as NSDate?
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
-        sortingDate = (wrapData.metaData?.takenDate ?? wrapData.creationDate) as NSDate?
+        if isLocalItemValue {
+            sortingDate = wrapData.creationDate as NSDate?
+        } else {
+            sortingDate = wrapData.metaData?.takenDate as NSDate?
+        }
+       
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
@@ -94,14 +99,14 @@ public class MediaItem: NSManagedObject {
         
         
         //empty monthValue for missing dates section
-        switch wrapData.patchToPreview {
-        case .remoteUrl(let url):
-            if url != nil || localFileID != nil {
-                fallthrough
-            }
-        default:
+//        switch wrapData.patchToPreview {
+//        case .remoteUrl(let url):
+//            if url != nil || localFileID != nil {
+//                fallthrough
+//            }
+//        default:
             monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
-        }
+//        }
         
         updateMissingDateRelations()
     }

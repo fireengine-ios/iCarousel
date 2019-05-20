@@ -451,8 +451,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseFilesGreedModuleInput
     
-    var selectedItems: [BaseDataSourceItem] {
-        return dataSource.getSelectedItems()
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        selectedItemsCallback(dataSource.getSelectedItems())
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
