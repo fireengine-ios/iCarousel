@@ -445,7 +445,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     
                 default:
                     action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
-                        
+                        assertionFailure("👆PLEASE add your new type into switch in constractActions( method in BottomSelectionTabBarPresenter class👆")
                     })
                 }
                 return action
