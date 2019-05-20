@@ -10,7 +10,9 @@ import Foundation
 import Photos
 
 typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
+typealias BaseDataSourceItems = (_ baseDSItems: [BaseDataSourceItem]) -> Void
 typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
+typealias MediaItemCallback = (_ mediaItem: MediaItem?) -> Void
 typealias PhotoAssetsCallback = (_ assets: [PHAsset]) -> Void
 typealias AppendingLocaclItemsFinishCallback = () -> Void
 typealias AppendingLocaclItemsProgressCallback = (Float) -> Void

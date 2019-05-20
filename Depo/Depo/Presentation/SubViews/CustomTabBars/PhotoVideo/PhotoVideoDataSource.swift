@@ -30,25 +30,6 @@ final class PhotoVideoDataSource: NSObject {
     
     var selectedIndexPaths = Set<IndexPath>()
     
-    var selectedObjects: [WrapData] {
-        return selectedIndexPaths.compactMap { indexPath in
-            if let object = self.object(at: indexPath) {
-                return WrapData(mediaItem: object)
-            }
-            return nil
-        }
-    }
-    
-    var fetchedOriginalObjects: [MediaItem] {
-        return fetchedResultsController.fetchedObjects ?? []
-    }
-    
-    var fetchedObjects: [WrapData] {
-        return fetchedResultsController.fetchedObjects?.map { object in
-            return WrapData(mediaItem: object)
-        } ?? []
-    }
-    
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
     var lastFetchedObjects: [MediaItem]?
     
@@ -102,15 +83,70 @@ final class PhotoVideoDataSource: NSObject {
         self.delegate = delegate
     }
     
-    func object(at indexPath: IndexPath) -> MediaItem? {
-        if let section = fetchedResultsController.sections?[safe: indexPath.section],
-            section.numberOfObjects > indexPath.row {
-            return fetchedResultsController.object(at: indexPath)
+    
+    func getFetchedOriginalObjects(mediaItemsCallback: @escaping MediaItemsCallBack) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            mediaItemsCallback(self?.fetchedResultsController.fetchedObjects ?? [])
         }
-        return nil
     }
     
+    func getFetchedObjects(wrapDataCallBack: @escaping WrapObjectsCallBack) {
+        //FIXME: this implementation would cause significant freeze on large accounts
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            wrapDataCallBack(self?.fetchedResultsController.fetchedObjects?.map { object in
+                WrapData(mediaItem: object)
+            } ?? [])
+        }
+    }
+    
+    func getSelectedObjects(wrapDataCallBack: @escaping WrapObjectsCallBack) {
+        getConvertedObjects(at: Array(selectedIndexPaths), wrapItemsCallback: wrapDataCallBack)
+    }
+    
+    func getObject(at indexPath: IndexPath, mediaItemCallback: @escaping MediaItemCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
+                section.numberOfObjects > indexPath.row else {
+                mediaItemCallback(nil)
+                    return
+            }
+            mediaItemCallback(self.fetchedResultsController.object(at: indexPath))
+        }
+    }
+    
+    func getObjects(at indexPaths: [IndexPath], mediaItemsCallback: @escaping MediaItemsCallBack) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            mediaItemsCallback(indexPaths.compactMap { indexPath in
+                guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
+                    section.numberOfObjects > indexPath.row else {
+                        return nil
+                }
+                return self.fetchedResultsController.object(at: indexPath)
+            })
+        }
+    }
+    
+    func getConvertedObjects(at indexPaths: [IndexPath], wrapItemsCallback: @escaping WrapObjectsCallBack) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            wrapItemsCallback(indexPaths.compactMap { indexPath in
+                guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
+                    section.numberOfObjects > indexPath.row else {
+                        return nil
+                }
+                return WrapData(mediaItem:self.fetchedResultsController.object(at: indexPath))
+            })
+        }
+    }
+    
+    
+    ///this one is fine without a callback, beacause this method already SHOULD be called from the right context
     func indexPath(forObject object: MediaItem) -> IndexPath? {
+        #if DEBUG
+        ///Also this check is not totally 100% correct, because context of fetch controller can be different from main thred.
+        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
+            assertionFailure("👉 CALL THIS FROM MAIN THREAD (if fetch controller uses not main context then delete this code)")
+        }
+        #endif
         return fetchedResultsController.indexPath(forObject: object)
     }
     
@@ -395,7 +431,9 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         focusedIndexPath = nil
         
         if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
-            firstVisibleItem = self.object(at: indexPath)
+            self.getObject(at: indexPath) { [weak self] mediaObject in
+                self?.firstVisibleItem = mediaObject
+            }
             if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
             }
@@ -403,13 +441,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     private func updateLastFetchedObjects(deletedIds: [NSManagedObjectID], updatedIds: [NSManagedObjectID], insertedIds: [NSManagedObjectID]) {
-        mergeQueue.async { [weak self] in
+        self.getFetchedOriginalObjects { [weak self] fetchedObjects in
             guard let self = self else {
                 return
             }
-            
-            self.lastFetchedObjects = self.fetchedOriginalObjects
-            self.delegate?.contentDidChange(self.fetchedOriginalObjects)
+            self.lastFetchedObjects = fetchedObjects
+            self.delegate?.contentDidChange(fetchedObjects)
             if self.lastWrapedObjects.isEmpty, !self.isConverting {
                 self.convertFetchedObjects()
             } else {
