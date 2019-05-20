@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,49 +29,56 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="p3m-gu-hpT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G71-fS-dIW">
-                    <rect key="frame" x="0.0" y="64" width="375" height="748"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-2Q-UcS">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="178" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-15-NB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
+                                    <rect key="frame" x="16" y="0.0" width="382" height="178"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCN-Fn-UUh">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" id="SlY-z7-gFl"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="7zb-pm-eRh" customClass="SupportBannerView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="50" width="375" height="128"/>
+                                            <rect key="frame" x="0.0" y="50" width="382" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-SY-yH4">
-                                    <rect key="frame" x="0.0" y="194" width="375" height="318"/>
+                                    <rect key="frame" x="0.0" y="194" width="414" height="318"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7">
-                                    <rect key="frame" x="20" y="194" width="335" height="318"/>
+                                    <rect key="frame" x="20" y="194" width="374" height="318"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="96" width="335" height="80"/>
+                                            <rect key="frame" x="0.0" y="96" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-rH-Hwu" userLabel="captcha" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="192" width="335" height="80"/>
+                                            <rect key="frame" x="0.0" y="192" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ">
-                                            <rect key="frame" x="0.0" y="288" width="335" height="30"/>
+                                            <rect key="frame" x="0.0" y="288" width="374" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqg-tP-cJg">
                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -82,7 +93,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zp4-cQ-sFI">
-                                                    <rect key="frame" x="38" y="0.0" width="297" height="30"/>
+                                                    <rect key="frame" x="38" y="0.0" width="336" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -92,7 +103,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="84.5" y="562" width="206" height="44"/>
+                                    <rect key="frame" x="93" y="562" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
                                     </constraints>
@@ -102,7 +113,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
-                                    <rect key="frame" x="164.5" y="629" width="46" height="30"/>
+                                    <rect key="frame" x="184" y="629" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="c4a-Kf-3Ex"/>
@@ -113,7 +124,7 @@
                             <constraints>
                                 <constraint firstItem="JEG-SY-yH4" firstAttribute="bottom" secondItem="3pB-Lp-wU7" secondAttribute="bottom" id="3EM-cp-fe4"/>
                                 <constraint firstItem="AWM-PX-Ia2" firstAttribute="centerX" secondItem="ufk-2Q-UcS" secondAttribute="centerX" id="ENW-zg-K6M"/>
-                                <constraint firstAttribute="trailing" secondItem="IUh-15-NB0" secondAttribute="trailing" id="FTD-vo-ohD"/>
+                                <constraint firstAttribute="trailing" secondItem="IUh-15-NB0" secondAttribute="trailing" constant="16" id="FTD-vo-ohD"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AWM-PX-Ia2" secondAttribute="bottom" constant="16" id="Rnx-L2-CiT"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="width" secondItem="ufk-2Q-UcS" secondAttribute="width" multiplier="0.55" id="Rp3-g8-WN0"/>
                                 <constraint firstItem="AWM-PX-Ia2" firstAttribute="top" secondItem="dhc-pL-wnH" secondAttribute="bottom" constant="23" id="TjA-wO-mmJ"/>
@@ -121,7 +132,7 @@
                                 <constraint firstItem="IUh-15-NB0" firstAttribute="top" secondItem="ufk-2Q-UcS" secondAttribute="top" id="ay0-2B-jlA"/>
                                 <constraint firstAttribute="trailing" secondItem="JEG-SY-yH4" secondAttribute="trailing" id="fQS-aI-NzQ"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="20" id="icQ-Vn-UCI"/>
-                                <constraint firstItem="IUh-15-NB0" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" id="k3d-jh-4iy"/>
+                                <constraint firstItem="IUh-15-NB0" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="16" id="k3d-jh-4iy"/>
                                 <constraint firstItem="AWM-PX-Ia2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="16" id="l14-aT-1Vg"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="top" secondItem="IUh-15-NB0" secondAttribute="bottom" constant="16" id="ng8-DS-Hak"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="centerX" secondItem="ufk-2Q-UcS" secondAttribute="centerX" id="olA-u9-38w"/>
@@ -151,7 +162,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="4uw-Fd-t08"/>
-            <point key="canvasLocation" x="-793" y="51"/>
+            <point key="canvasLocation" x="-794.20289855072474" y="50.892857142857139"/>
         </view>
     </objects>
     <resources>

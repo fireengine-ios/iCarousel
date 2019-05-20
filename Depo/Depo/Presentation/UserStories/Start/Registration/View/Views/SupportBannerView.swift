@@ -65,6 +65,9 @@ final class SupportBannerView: UIView {
     }
     
     private func setup() {
+        
+        layer.cornerRadius = 5
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openSupport))
         self.addGestureRecognizer(tapGesture)
         
@@ -90,22 +93,22 @@ final class SupportBannerView: UIView {
     private func setupLayout() {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
-        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
+        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
 
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         
         symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         symbolImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7).isActive = true
-        symbolImageView.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 16).isActive = true
+        symbolImageView.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 8).isActive = true
         symbolImageView.widthAnchor.constraint(equalTo: symbolImageView.heightAnchor, multiplier: 0.6).isActive = true
         
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
         
         arrowButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
         arrowButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        arrowButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        arrowButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
         arrowButton.heightAnchor.constraint(equalTo: arrowButton.widthAnchor, multiplier: 2).isActive = true
         arrowButton.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 8).isActive = true
     }

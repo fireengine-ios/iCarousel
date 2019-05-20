@@ -143,6 +143,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         optInVC?.stopActivityIndicator()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
+        optInVC?.hiddenError()
         optInVC?.hideResendButton()
     }
     
@@ -166,7 +167,8 @@ extension PremiumPresenter: PremiumInteractorOutput {
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            router.showPromocodInvalideAlert(for: optInVC)
+            optInVC?.startEnterCode()
+            optInVC?.showError(TextConstants.promocodeInvalid)
         }
     }
     
@@ -177,6 +179,12 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func failed(with errorMessage: String) {
         view?.stopActivityIndicator()
         router.displayError(with: errorMessage)
+    }
+    
+    func failedResendToken(with errorMessage: String) {
+        optInVC?.stopActivityIndicator()
+        optInVC?.startEnterCode()
+        optInVC?.showError(errorMessage)
     }
 
     //MARK: finish purchase
@@ -204,8 +212,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        let error = CustomErrors.text(TextConstants.promocodeBlocked)
-        router.displayError(with: error.description)
+        optInVC.showError(TextConstants.promocodeBlocked)
     }
     
     func optInNavigationTitle() -> String {

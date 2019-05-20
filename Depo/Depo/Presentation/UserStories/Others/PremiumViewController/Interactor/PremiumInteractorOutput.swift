@@ -20,6 +20,7 @@ protocol PremiumInteractorOutput: class {
     func successedGotAppleInfo()
     
     func failed(with errorMessage: String)
+    func failedResendToken(with errorMessage: String)
     func switchToTextWithoutPrice(isError: Bool)
     func failedVerifyOffer()
 

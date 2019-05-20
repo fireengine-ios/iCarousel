@@ -25,6 +25,7 @@ class SmartTimerLabel: UILabel {
     private var timerCycle: Int = 0
     
     var isDead: Bool = true
+    var isShowMessageWithDropTimer: Bool = true
     
     var startDate: Date?
     
@@ -45,6 +46,7 @@ class SmartTimerLabel: UILabel {
     }
     
     func dropTimer() {
+        isShowMessageWithDropTimer = false
         timerCycle = lifeLimit   
     }
     

@@ -51,6 +51,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
         backgroundColor = contentView.backgroundColor
         updateViews()
+        setColors()
     }
 
     
@@ -63,22 +64,6 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         }
         
         updateViews()
-    }
-    
-    func setColors(isFromSettings: Bool) {
-        let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        optionLabel.textColor = textColor
-        cellSeparator.backgroundColor = textColor
-        dropDownArrow.tintColor = textColor
-        titleLabel.textColor = textColor
-        
-        for view in optionsViews {
-            view.setColors(isFromSettings: isFromSettings)
-        }
-        
-        for separator in optionSeparators {
-            separator.backgroundColor = isFromSettings ? ColorConstants.lightGrayColor : ColorConstants.whiteColor
-        }
     }
     
     // MARK: - Private
@@ -109,6 +94,19 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         optionLabel.text = isSelected ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.localizedText
         optionsStackView.isHidden = !isSelected
     }
+    
+    private func setColors() {
+        let textColor = ColorConstants.textGrayColor
+        optionLabel.textColor = textColor
+        cellSeparator.backgroundColor = textColor
+        dropDownArrow.tintColor = textColor
+        titleLabel.textColor = textColor
+        
+        for separator in optionSeparators {
+            separator.backgroundColor = ColorConstants.lightGrayColor
+        }
+    }
+    
 }
 
 extension AutoSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {

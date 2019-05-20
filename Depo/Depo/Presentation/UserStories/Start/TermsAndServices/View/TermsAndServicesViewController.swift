@@ -26,33 +26,26 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var etkTextView: UITextView!
     @IBOutlet private weak var etkTopSpaceConstraint: NSLayoutConstraint!
     
-    private var userWebContentController: WKUserContentController {
+    private let webView: WKWebView = {
         let contentController = WKUserContentController()
-        let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
+         let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
         let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         contentController.addUserScript(script)
         
-        return contentController
-    }
-    
-    private var webViewConfiguration: WKWebViewConfiguration {
         let webConfig = WKWebViewConfiguration()
-        webConfig.userContentController = self.userWebContentController
+        webConfig.userContentController = contentController
         if #available(iOS 10.0, *) {
             webConfig.dataDetectorTypes = [.phoneNumber, .link]
         }
         
-        return webConfig
-    }
-    
-    private lazy var webView: WKWebView = {
-        let web = WKWebView(frame: .zero, configuration: self.webViewConfiguration)
-        web.isOpaque = false
-        web.backgroundColor = .clear
-        web.scrollView.backgroundColor = .clear
-//        web.scrollView.layer.masksToBounds = false
-        web.navigationDelegate = self
-        return web
+        let webView = WKWebView(frame: .zero, configuration: webConfig)
+        webView.isOpaque = false
+//        webView.backgroundColor = UIColor.white
+        
+        /// there is a bug for iOS 9
+        /// https://stackoverflow.com/a/32843700/5893286
+        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        return webView
     }()
     
     
@@ -73,7 +66,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        webView.navigationDelegate = self
         contentView.addSubview(webView)
         
         if !Device.isIpad {
@@ -88,6 +81,11 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         configureUI()
         output.viewIsReady()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hideSpinnerIncludeNavigationBar()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {

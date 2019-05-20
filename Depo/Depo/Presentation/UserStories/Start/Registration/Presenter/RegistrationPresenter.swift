@@ -29,6 +29,10 @@ extension RegistrationPresenter: RegistrationViewOutput {
         interactor.checkCaptchaRequerement()
     }
     
+    func prepareCaptcha(_ view: CaptchaView) {
+        view.delegate = self
+    }
+    
     func nextButtonPressed() {
         view.collectInputedUserInfo()
     }
@@ -72,7 +76,10 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     func signUpFailed(errorResponce: ErrorResponse) {
         completeAsyncOperationEnableScreen()
         view.showErrorTitle(withText: errorResponce.description)
-        view.updateCaptcha()
+        
+        if interactor.captchaRequred {
+            view.updateCaptcha()
+        }
     }
     
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
@@ -101,5 +108,13 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func showSupportView() {
         view.showSupportView()
+    }
+}
+
+extension RegistrationPresenter: CaptchaViewErrorDelegate {
+    
+    func showCaptchaError(error: Error) {
+        
+        view.showErrorTitle(withText: error.description)
     }
 }
