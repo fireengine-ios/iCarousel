@@ -176,6 +176,7 @@ final class PhotoVideoCell: UICollectionViewCell {
                 }
             }
         } else if let metadata = mediaItem.metadata {
+            cellId = ""
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
         }
