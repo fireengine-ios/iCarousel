@@ -39,13 +39,19 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet private weak var blurVisualEffectView: UIVisualEffectView! {
+    @IBOutlet private weak var opacityBlurVisualEffectView: UIVisualEffectView! {
         willSet {
             newValue.tintColor = ColorConstants.blueColor
             newValue.alpha = 0.75
         }
     }
-    
+
+    @IBOutlet private weak var thumbnailBlurVisualEffectView: UIVisualEffectView! {
+        willSet {
+            newValue.alpha = 0.9
+        }
+    }
+
     @IBOutlet weak var videoPlayIcon: UIImageView!
     
     @IBOutlet weak var videoDurationLabel: UILabel! {
@@ -107,9 +113,9 @@ final class PhotoVideoCell: UICollectionViewCell {
             cellId = local.asset.localIdentifier
             
             filesDataSource?.getAssetThumbnail(asset: local.asset) { [weak self] image in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if self?.cellId == local.asset.localIdentifier, let image = image {
-                        self?.setImage(image: image, animated:  false)
+                        self?.setImage(image: image, shouldBeBlurred: false, animated: false)
                     }
                 }
             }
@@ -170,7 +176,7 @@ final class PhotoVideoCell: UICollectionViewCell {
                 self.filesDataSource?.getAssetThumbnail(asset: asset) { [weak self] image in
                     DispatchQueue.main.async {
                         if self?.cellId == asset.localIdentifier, let image = image {
-                            self?.setImage(image: image, animated:  false)
+                            self?.setImage(image: image, shouldBeBlurred: false, animated: false)
                         }
                     }
                 }
@@ -193,23 +199,24 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
         
         uuid = cellImageManager?.uniqueId
+
         resetImage()
         
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             DispatchQueue.toMain {
                 guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
                     return
                 }
                 
                 let needAnimate = !cached && (self?.thumbnailImageView.image == nil)
-                self?.setImage(image: image, animated: needAnimate)
+                self?.setImage(image: image, shouldBeBlurred: shouldBeBlurred, animated: needAnimate)
             }
         }
         
         cellImageManager?.loadImage(thumbnailUrl: smalUrl, url: mediumUrl, completionBlock: imageSetBlock)
     }
     
-    private func setImage(image: UIImage, animated: Bool) {
+    private func setImage(image: UIImage, shouldBeBlurred: Bool, animated: Bool) {
         if animated {
             thumbnailImageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
             thumbnailImageView.image = image
@@ -219,20 +226,9 @@ final class PhotoVideoCell: UICollectionViewCell {
         } else {
             thumbnailImageView.image = image
         }
+        thumbnailBlurVisualEffectView.isHidden = !shouldBeBlurred
     }
-    
-    private func setImage(with url: URL) {
-        thumbnailImageView.sd_setImage(with: url, placeholderImage: nil, options:[.queryDiskSync, .avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
-            
-            guard let `self` = self, let image = image else {
-                return
-            }
-            
-            let shouldAnimate = (cacheType == .none)
-            self.setImage(image: image, animated: shouldAnimate)
-        }
-    }
-    
+
     @objc private func onLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             
@@ -255,7 +251,6 @@ final class PhotoVideoCell: UICollectionViewCell {
         } else {
             selectionStateView.alpha = selection ? 1 : 0
         }
-        
     }
 
     /// not working for cell update (become favorite)
@@ -263,7 +258,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
         DispatchQueue.toMain {
-            self.blurVisualEffectView.isHidden = !blurOn
+            self.opacityBlurVisualEffectView.isHidden = !blurOn
             self.progressView.isHidden = false
             self.progressView.setProgress(progress, animated: false)
         }
@@ -271,7 +266,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     func finishedUploadForObject() {
         DispatchQueue.toMain {
-            self.blurVisualEffectView.isHidden = true
+            self.opacityBlurVisualEffectView.isHidden = true
             self.progressView.isHidden = true
             self.cloudStatusImageView.image = UIImage(named: "objectInCloud")
         }
@@ -279,7 +274,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     func cancelledUploadForObject() {
         DispatchQueue.toMain {
-            self.blurVisualEffectView.isHidden = true
+            self.opacityBlurVisualEffectView.isHidden = true
             self.progressView.isHidden = true
         }
     }
