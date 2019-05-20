@@ -86,7 +86,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getSelectedItems { [weak self] selectedItems in
+        dataSource.getSelectedObjects { [weak self] selectedItems in
             guard let self = self else {
                 return
             }
@@ -528,7 +528,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func selectAllModeSelected() {}
     func deSelectAll() {}
     func printSelected() {
-        getSelectedItems{ [weak self] selectedObjects in
+        dataSource.getSelectedObjects { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
