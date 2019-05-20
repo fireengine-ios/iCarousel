@@ -16,27 +16,43 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     
     // MARK: - Outlets
     
-    @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var shadowView: UIView!
-    @IBOutlet private weak var pickerContainer: UIView!
-    @IBOutlet private weak var pickerView: UIPickerView!
-    @IBOutlet private weak var pickerBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var changeButton: BlueButtonWithWhiteText! {
+    @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            changeButton.isExclusiveTouch = true
-            changeButton.setTitle(doneButtonTitle, for: .normal)
+            titleLabel.text = TextConstants.pleaseEnterYourMissingAccountInformation
+            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         }
     }
     
+    @IBOutlet private weak var changeButton: RoundedInsetsButton! {
+        didSet {
+            changeButton.isExclusiveTouch = true
+            changeButton.setTitle(doneButtonTitle, for: .normal)
+            changeButton.setTitleColor(UIColor.white, for: .normal)
+            changeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            changeButton.backgroundColor = UIColor.lrTealish
+            changeButton.isOpaque = true
+            changeButton.isEnabled = false
+        }
+    }
     
-    private let dataSource = TextEnterDataSource()
-    private let gsmCompositor = CounrtiesGSMCodeCompositor()
-    private let dataStorage = DataStorage()
+    @IBOutlet private weak var phoneEnterView: ProfilePhoneEnterView! {
+        didSet {
+            phoneEnterView.numberTextField.enablesReturnKeyAutomatically = true
+        
+            phoneEnterView.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
+            phoneEnterView.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
+            
+            phoneEnterView.numberTextField.addToolBarWithButton(title: TextConstants.userProfileDoneButton,
+                                          target: self,
+                                          selector: #selector(hideKeyboard))
+            phoneEnterView.numberTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        }
+    }
     
     private var alertTitle = ""
     private var doneButtonTitle = ""
-    private var textPlaceholder: String?
     
     private lazy var doneAction: TextEnterHandler = { [weak self] _, _ in
         self?.close(completion: nil)
@@ -44,12 +60,12 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     
     private var phone: String? {
         guard
-            let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? GSMUserInputCell,
-            let code = cell.gsmCountryCodeLabel.text,
-            let number = cell.inputTextField?.text
+            let code = phoneEnterView.codeTextField.text,
+            let number = phoneEnterView.numberTextField.text
         else {
             return nil
         }
+        
         return code + number
     }
     
@@ -62,7 +78,6 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
         
         shadowView.isHidden = true
         shadowView.isUserInteractionEnabled = false
-        shadowView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hidePicker)))
         
         setupDelegates()
     }
@@ -74,22 +89,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     }
     
     private func setupDelegates() {
-        dataSource.setupCells(withModels: dataStorage.getModels())
-        dataSource.setupPickerCells(withModels: gsmCompositor.getGSMCCModels())
-        dataSource.output = self
-        
-        tableView.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
-        tableView.dataSource = dataSource
-        tableView.delegate = dataSource
-        
-        let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
-                                         target: self,
-                                         selector: #selector(donePicker))
-        let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
-        doneButton.tintColor = UIColor.lrTealish
-        pickerContainer.addSubview(pickerToolBar)
-        pickerView.dataSource = dataSource
-        pickerView.delegate = dataSource
+       phoneEnterView.numberTextField.delegate = self
     }
 
     func startLoading() {
@@ -113,10 +113,6 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
         dismiss(animated: true, completion: completion)
     }
     
-    @objc func donePicker() {
-        chooseButtonPressed()
-    }
-    
     private func verifyPhone() -> Bool {
         guard let phone = phone?.replacingOccurrences(of: "+", with: "") else {
             return false
@@ -133,54 +129,18 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
         return true
     }
     
-    // MARK: - Picker
-    
-    @objc private func hidePicker() {
-        changePickerState(state: false)
+    private func updateChangeButtonState() {
+        changeButton.isEnabled = verifyPhone()
     }
     
-    private func showPicker() {
-        changePickerState(state: true)
-    }
-    
-    private func changePickerState(state isActive: Bool) {
-        shadowView.isHidden = !isActive
-        shadowView.isUserInteractionEnabled = isActive
-        if isActive {
-            pickerBottomConstraint.constant = 0
-        } else {
-            pickerBottomConstraint.constant = -271
-        }
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func chooseButtonPressed() {
-        hidePicker()
-        let currentRow = pickerView.selectedRow(inComponent: 0)
-        dataSource.changeGSMCodeLabel(withRow: currentRow)
-        tableView.reloadData()
-    }
-}
-
-extension TextEnterController: DataSourceOutput {
-    func pickerGotTapped() {
+    @objc private func hideKeyboard() {
         view.endEditing(true)
-        showPicker()
     }
     
-    func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
-        
+    @objc private func textFieldDidChange(_ sender: UITextField) {
+        updateChangeButtonState()
     }
     
-    func protoCellTextStartedEditing(cell: ProtoInputTextCell) {
-        hidePicker()
-    }
-    
-    func infoButtonGotPressed(withType: UserValidationResults) {
-
-    }
 }
 
 // MARK: - Static
@@ -198,4 +158,13 @@ extension TextEnterController {
         
         return vc
     }
+}
+
+// MARK: - UITextFieldDelegate
+extension TextEnterController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        phoneEnterView.hideSubtitleAnimated()
+    }
+    
 }
