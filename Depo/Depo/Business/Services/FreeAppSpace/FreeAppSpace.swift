@@ -159,20 +159,29 @@ final class FreeAppSpace: NSObject {
 
 extension FreeAppSpace: ItemOperationManagerViewProtocol {
     func finishedUploadFile(file: WrapData) {
-        print("uploaded object with uuid - ", file.uuid)
-        if isSearchRunning {
-            needSearchAgain = true
-            return
-        }
-
-        if !self.duplicatesArray.contains(file) {
-            self.duplicatesArray.append(file)
-        }
-        
-        self.sortDuplicatesArray()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.showFreeAppSpaceCard()
+        MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: [file.getTrimmedLocalID()]) { [weak self] localDuplicates in
+            
+            /// must be only one local duplicate for one remote
+            guard let self = self, let duplicate = localDuplicates.first else {
+                return
+            }
+            
+            print("uploaded object with uuid - ", duplicate.uuid)
+            
+            if self.isSearchRunning {
+                self.needSearchAgain = true
+                return
+            }
+            
+            if !self.duplicatesArray.contains(duplicate) {
+                self.duplicatesArray.append(duplicate)
+            }
+            
+            self.sortDuplicatesArray()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.showFreeAppSpaceCard()
+            }
         }
     }
     
