@@ -55,7 +55,7 @@ final class CellImageManager {
     
     //MARK: - Instance vars
     
-    let uniqueId: String = UUID().uuidString
+    let uniqueId: String
     private let key: URL
     
     private lazy var dispatchQueue = CellImageManager.globalDispatchQueue//DispatchQueue(label: "\(uniqueId)")
@@ -73,6 +73,7 @@ final class CellImageManager {
     
     required init(with key: URL) {
         self.key = key
+        uniqueId = key.absoluteString
     }
     
     func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {

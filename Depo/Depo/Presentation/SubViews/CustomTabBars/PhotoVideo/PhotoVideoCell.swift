@@ -156,11 +156,12 @@ final class PhotoVideoCell: UICollectionViewCell {
         let assetIdentifier = mediaItem.isLocalItemValue ? mediaItem.localFileID : mediaItem.relatedLocal?.localFileID
         
         guard cellId != assetIdentifier else {
-            print("--- cellImageManagerUniqueId")
+            /// image will not be loaded
             return
         }
         
         if let assetIdentifier = assetIdentifier {
+            uuid = nil
             cellId = assetIdentifier
             resetImage()
             
@@ -195,7 +196,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         
         guard uuid != cellImageManager?.uniqueId else {
-            print("--- cellImageManagerUniqueId")
+            /// image will not be loaded
             return
         }
         
@@ -299,11 +300,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     private func reset() {
-        cellImageManager = nil
-        favoriteImageView.isHidden = true
         checkmarkImageView.isHidden = true
-        uuid = nil
-        trimmedLocalFileID = nil
     }
     
     private func resetImage() {
