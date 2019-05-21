@@ -81,10 +81,12 @@ final class AppConfigurator {
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
-                
-                if let loginScreen = router.loginScreen {
-                    router.setNavigationController(controller: router.onboardingScreen)
-                    router.pushViewControllerWithoutAnimation(viewController: loginScreen)
+                if let viewControllers = router.navigationController?.viewControllers {
+                    for viewController in viewControllers {
+                        if viewController is LoginViewController {
+                            router.popToViewController(viewController)
+                        }
+                    }
                 }
             }
         }
