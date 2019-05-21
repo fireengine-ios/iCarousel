@@ -30,7 +30,7 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
         let newItemsCount = newItems.count
         let totalItemsCount = prevItemsCount + newItemsCount
         
-        let indexPaths = Array(prevItemsCount..<totalItemsCount).map { IndexPath(item: $0, section: 0) }
+        let indexPaths = (prevItemsCount..<totalItemsCount).map { IndexPath(item: $0, section: 0) }
         insertItems(indexPaths: indexPaths)
     }
     
@@ -39,9 +39,6 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
             guard let self = self, let collectionView = self.collectionView else {
                 return
             }
-            
-            debugLog("UploadFilesSelectionDataSource insertItems")
-            debugPrint("UploadFilesSelectionDataSource insertItems")
             
             collectionView.performBatchUpdates({
                 collectionView.insertItems(at: indexPaths)
