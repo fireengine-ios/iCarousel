@@ -870,7 +870,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             
             guard let `self` = self, let collectionView = self.collectionView else {
                 return
@@ -899,7 +899,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         displayingType = type
         
         debugPrint("Reload updateDisplayngType")
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             CellImageManager.clear()
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
