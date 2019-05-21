@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PeriodicContactSyncSettingsTableViewCellDelegate {
+protocol PeriodicContactSyncSettingsTableViewCellDelegate: class {
     func didChangeTime(setting: PeriodicContactsSyncSetting)
     func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell)
 }
@@ -28,7 +28,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     private var isFromSettings: Bool = false
     
-    var delegate: PeriodicContactSyncSettingsTableViewCellDelegate?
+    weak var delegate: PeriodicContactSyncSettingsTableViewCellDelegate?
     
     private var periodicContactSyncSetting = PeriodicContactsSyncSetting(option: .daily) {
         didSet {
