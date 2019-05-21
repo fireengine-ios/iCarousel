@@ -373,6 +373,14 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func successedSilentLogin() {
         stopOptInVC()
+        let optInController = router.optInController
+        if optInController != nil {
+            router.dismissEmptyPhoneController { [weak self] in
+                self?.succesLogin()
+            }
+        } else {
+            succesLogin()
+        }
     }
     
     func showSupportView() {

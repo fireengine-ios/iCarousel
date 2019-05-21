@@ -110,7 +110,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     
     @objc func close(completion: VoidHandler? = nil) {
         view.endEditing(true)
-        dismiss(animated: true, completion: completion)
+        completion?()
     }
     
     private func verifyPhone() -> Bool {
