@@ -35,4 +35,6 @@ protocol LoginRouterInput {
     func showNeedSignUp(message: String, onClose: @escaping VoidHandler)
     
     func openSupport()
+    
+    func dismissEmptyPhoneController(successHandler: @escaping VoidHandler)
 }

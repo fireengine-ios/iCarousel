@@ -65,7 +65,7 @@ class LoginRouter: LoginRouterInput {
         let optInController = OptInController.with(phone: phone)
         self.optInController = optInController
         
-        router.pushViewController(viewController: optInController)
+        emptyPhoneController?.navigationController?.pushViewController(optInController, animated: true)
     }
     
     func showNeedSignUp(message: String, onClose: @escaping VoidHandler) {
@@ -81,5 +81,9 @@ class LoginRouter: LoginRouterInput {
     func openSupport() {
         let controller = router.supportFormController
         router.pushViewController(viewController: controller)
+    }
+    
+    func dismissEmptyPhoneController(successHandler: @escaping VoidHandler) {
+        emptyPhoneController?.dismiss(animated: true, completion: successHandler)
     }
 }
