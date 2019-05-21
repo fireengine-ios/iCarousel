@@ -41,7 +41,7 @@ final class ScrollBarView: UIView {
     // TODO: need to create pan gester with begin on tap
     private var handleExclusiveInteractionEnabled = true
     
-    private weak var scrollView: UIScrollView?
+    private var scrollView: UIScrollView?
     
     private lazy var handleView: UIImageView = {
         return UIImageView(image: ScrollBarView.scrollBarHandleImage)
@@ -135,7 +135,7 @@ final class ScrollBarView: UIView {
             return
         }
         
-        restore(scrollView: self.scrollView)
+        freeScrollView()
         self.scrollView = scrollView
         
         config(scrollView: scrollView)
@@ -154,17 +154,15 @@ final class ScrollBarView: UIView {
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: [.new], context: nil)
     }
     
-    private func restore(scrollView: UIScrollView?) {
+    /// https://stackoverflow.com/a/51800670/5893286
+    func freeScrollView() {
         guard let scrollView = scrollView else {
             return
         }
         scrollView.showsVerticalScrollIndicator = true
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
-    }
-    
-    deinit {
-        restore(scrollView: scrollView)
+        self.scrollView = nil
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

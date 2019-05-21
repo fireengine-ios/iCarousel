@@ -18,6 +18,11 @@ final class PhotoVideoScrollBarManager {
     
     private var isScrollBarAdded = false
     
+    deinit {
+        yearsView.freeScrollView()
+        scrollBar.freeScrollView()
+    }
+    
     func addScrollBar(to collectionView: UICollectionView?, delegate: ScrollBarViewDelegate?) {
         guard !isScrollBarAdded, let collectionView = collectionView else {
             return

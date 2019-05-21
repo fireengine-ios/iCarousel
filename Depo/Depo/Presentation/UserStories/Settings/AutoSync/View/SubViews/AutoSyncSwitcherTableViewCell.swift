@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AutoSyncSwitcherTableViewCellDelegate {
+protocol AutoSyncSwitcherTableViewCellDelegate: class {
     func onValueChanged(model: AutoSyncModel)
 }
 
@@ -21,7 +21,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     
     var model: AutoSyncModel?
     
-    var delegate: AutoSyncSwitcherTableViewCellDelegate?
+    weak var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
     
     override func awakeFromNib() {
