@@ -179,9 +179,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .authorized:
             photoLibrary.register(self)
             if (Device.operationSystemVersionLessThen(10)) {
-                PHPhotoLibrary.requestAuthorization({ authStatus in
+                PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
                     let isAuthorized = authStatus == .authorized
-                    self.isWaitingForPhotoPermission = false
+                    self?.isWaitingForPhotoPermission = false
                     completion(isAuthorized, authStatus)
                 })
             } else {
@@ -242,7 +242,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
         debugLog("LocalMediaStorage getAllAlbums")
-        askPermissionForPhotoFramework(redirectToSettings: true) { accessGranted, _ in
+        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             guard accessGranted else {
                 completion([])
                 return
@@ -259,7 +259,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
-                        self.numberOfItems(in: object) { itemsCount, fromCoreData  in
+                        self?.numberOfItems(in: object) { itemsCount, fromCoreData  in
                             if itemsCount > 0 {
                                 let item = AlbumItem(uuid: object.localIdentifier,
                                                      name: object.localizedTitle,
@@ -426,10 +426,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         passcodeStorage.systemCallOnScreen = true
         
         var assetPlaceholder: PHObjectPlaceholder?
-        PHPhotoLibrary.shared().performChanges({
+        PHPhotoLibrary.shared().performChanges({ [weak self] in
             switch type {
                 case .image:
-                    assetPlaceholder = self.createRequestAppendImageToAlbum(fileUrl: fileUrl)
+                    assetPlaceholder = self?.createRequestAppendImageToAlbum(fileUrl: fileUrl)
                 case .video:
                     let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
                     assetPlaceholder = request?.placeholderForCreatedAsset
@@ -532,10 +532,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
-        askPermissionForPhotoFramework(redirectToSettings: true, completion: { accessGranted, _ in
+        askPermissionForPhotoFramework(redirectToSettings: true, completion: { [weak self] accessGranted, _ in
             if accessGranted {
                 let operation = AddAssetToCollectionOperation(albumName: album, assetIdentifier: assetIdentifier)
-                self.addAssetToCollectionQueue.addOperation(operation)
+                self?.addAssetToCollectionQueue.addOperation(operation)
             }
         })
     }
@@ -633,13 +633,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: photoManager,
-                                                  asset: asset) { avAsset, aVAudioMix, Dict in
+                                                  asset: asset) { [weak self] avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         let file = UUID().uuidString
                                                         url = Device.tmpFolderUrl(withComponent: file)
 
-                                                        self.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
+                                                        self?.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
                                                             switch result {
                                                             case .success(_):
                                                                 break
