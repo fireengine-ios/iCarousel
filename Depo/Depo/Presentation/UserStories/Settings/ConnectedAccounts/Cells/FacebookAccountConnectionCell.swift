@@ -16,7 +16,7 @@ protocol SocialConnectionCellDelegate: class, ActivityIndicator {
 
 protocol SocialConnectionCell: class, ActivityIndicator {
     var section: Section? { get }
-    weak var delegate: SocialConnectionCellDelegate? { get set }
+    var delegate: SocialConnectionCellDelegate? { get set }
     
     func setup(with: Section?)
     func disconnect()

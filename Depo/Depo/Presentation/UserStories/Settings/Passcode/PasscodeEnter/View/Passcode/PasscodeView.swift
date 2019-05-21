@@ -26,7 +26,7 @@ protocol PasscodeInput: class {
     var passcode: Passcode { get set }
     func clearPasscode()
     func animateError()
-    weak var delegate: PasscodeInputViewDelegate? { get set }
+    var delegate: PasscodeInputViewDelegate? { get set }
     func animatePasscodeFullEnter()
 }
 
