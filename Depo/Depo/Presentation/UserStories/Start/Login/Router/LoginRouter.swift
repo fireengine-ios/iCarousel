@@ -83,7 +83,7 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    func dismissEmptyPhoneController(successHandler: @escaping VoidHandler) {
+    func dismissEmptyPhoneController(successHandler: VoidHandler?) {
         emptyPhoneController?.dismiss(animated: true, completion: successHandler)
     }
 }

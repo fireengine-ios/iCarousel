@@ -326,9 +326,7 @@ extension LoginPresenter: LoginInteractorOutput {
                                            image: .none,
                                            buttonTitle: TextConstants.ok) { [weak self] vc in
                                             vc.close {
-                                                self?.router.dismissEmptyPhoneController {
-                                                    AppConfigurator.logoutAndOpenLogin()
-                                                }
+                                                self?.router.dismissEmptyPhoneController(successHandler: nil)
                                             }
         }
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)

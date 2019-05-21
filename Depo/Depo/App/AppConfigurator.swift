@@ -77,21 +77,6 @@ final class AppConfigurator {
         }
     }
     
-    static func logoutAndOpenLogin() {
-        AuthenticationService().logout {
-            DispatchQueue.main.async {
-                let router = RouterVC()
-                if let viewControllers = router.navigationController?.viewControllers {
-                    for viewController in viewControllers {
-                        if viewController is LoginViewController {
-                            router.popToViewController(viewController)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
