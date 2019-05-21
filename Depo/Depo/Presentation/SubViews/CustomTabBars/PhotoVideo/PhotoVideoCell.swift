@@ -300,10 +300,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     private func reset() {
-//        cellImageManager = nil
-//        favoriteImageView.isHidden = true
         checkmarkImageView.isHidden = true
-//        trimmedLocalFileID = nil
     }
     
     private func resetImage() {
