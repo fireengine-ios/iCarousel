@@ -161,6 +161,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
         
         if let assetIdentifier = assetIdentifier {
+            uuid = nil
             cellId = assetIdentifier
             resetImage()
             
@@ -299,11 +300,10 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     private func reset() {
-        cellImageManager = nil
-        favoriteImageView.isHidden = true
+//        cellImageManager = nil
+//        favoriteImageView.isHidden = true
         checkmarkImageView.isHidden = true
-        uuid = nil
-        trimmedLocalFileID = nil
+//        trimmedLocalFileID = nil
     }
     
     private func resetImage() {
