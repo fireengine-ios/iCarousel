@@ -156,7 +156,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         let assetIdentifier = mediaItem.isLocalItemValue ? mediaItem.localFileID : mediaItem.relatedLocal?.localFileID
         
         guard cellId != assetIdentifier else {
-            print("--- cellImageManagerUniqueId")
+            /// image will not be loaded
             return
         }
         
@@ -196,7 +196,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         
         guard uuid != cellImageManager?.uniqueId else {
-            print("--- cellImageManagerUniqueId")
+            /// image will not be loaded
             return
         }
         
