@@ -326,7 +326,7 @@ extension LoginPresenter: LoginInteractorOutput {
                                            image: .none,
                                            buttonTitle: TextConstants.ok) { vc in
                                             vc.close {
-                                                AppConfigurator.logout()
+                                                AppConfigurator.logoutAndOpenLogin()
                                             }
         }
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)

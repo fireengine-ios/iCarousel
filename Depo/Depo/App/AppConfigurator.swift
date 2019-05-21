@@ -77,6 +77,19 @@ final class AppConfigurator {
         }
     }
     
+    static func logoutAndOpenLogin() {
+        AuthenticationService().logout {
+            DispatchQueue.main.async {
+                let router = RouterVC()
+                
+                if let loginScreen = router.loginScreen {
+                    router.setNavigationController(controller: router.onboardingScreen)
+                    router.pushViewControllerWithoutAnimation(viewController: loginScreen)
+                }
+            }
+        }
+    }
+    
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
