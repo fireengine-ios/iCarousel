@@ -36,5 +36,5 @@ protocol LoginRouterInput {
     
     func openSupport()
     
-    func dismissEmptyPhoneController(successHandler: @escaping VoidHandler)
+    func dismissEmptyPhoneController(successHandler: VoidHandler?)
 }
