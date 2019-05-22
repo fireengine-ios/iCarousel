@@ -33,7 +33,6 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
             changeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             changeButton.backgroundColor = UIColor.lrTealish
             changeButton.isOpaque = true
-            changeButton.isEnabled = false
         }
     }
     
@@ -47,7 +46,6 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
             phoneEnterView.numberTextField.addToolBarWithButton(title: TextConstants.userProfileDoneButton,
                                           target: self,
                                           selector: #selector(hideKeyboard))
-            phoneEnterView.numberTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         }
     }
     
@@ -122,25 +120,17 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
             return false
         }
         
-        guard phone.count > 8 else {
+        guard phone.count > 3 else {
+            UIApplication.showErrorAlert(message: TextConstants.invalidPhoneNumberText)
             return false
         }
         
         return true
     }
     
-    private func updateChangeButtonState() {
-        changeButton.isEnabled = verifyPhone()
-    }
-    
     @objc private func hideKeyboard() {
         view.endEditing(true)
     }
-    
-    @objc private func textFieldDidChange(_ sender: UITextField) {
-        updateChangeButtonState()
-    }
-    
 }
 
 // MARK: - Static
