@@ -13,8 +13,10 @@ protocol TermsAndServicesInteractorInput {
     var signUpSuccessResponse: SignUpSuccessResponse { get }
     var userInfo: RegistrationUserInfoModel { get }
     var cameFromLogin: Bool { get }
+    var cameFromRegistration: Bool { get }
     var etkAuth: Bool?  { get set }
     func loadTermsAndUses()
     func trackScreen()
     func checkEtk()
+    func applyEula()
 }
