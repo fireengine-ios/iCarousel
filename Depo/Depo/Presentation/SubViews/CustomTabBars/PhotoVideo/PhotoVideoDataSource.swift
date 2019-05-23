@@ -31,9 +31,10 @@ final class PhotoVideoDataSource: NSObject {
     var selectedIndexPaths = Set<IndexPath>()
     
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
-    var lastFetchedObjects: [MediaItem]?
     
-    private var firstVisibleItem: MediaItem?
+    private var lastUpdateFetchedObjects: [MediaItem]?
+    private var firstOffsetSavedVisibleItem: MediaItem?
+    
     private var cellTopOffset: CGFloat = 0
     private(set) var focusedIndexPath: IndexPath?
     
@@ -138,7 +139,6 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    
     ///this one is fine without a callback, beacause this method already SHOULD be called from the right context
     func indexPath(forObject object: MediaItem) -> IndexPath? {
         #if DEBUG
@@ -148,6 +148,27 @@ final class PhotoVideoDataSource: NSObject {
         }
         #endif
         return fetchedResultsController.indexPath(forObject: object)
+    }
+    
+    func getIndexPathForRemoteObject(itemUUID: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemUUID }) else {
+                indexCallBack(nil)
+                return
+            }
+            indexCallBack(self?.indexPath(forObject: findedObject))
+        }
+    }
+    
+    func getIndexPathForLocalObject(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
+                indexCallBack(nil)
+                return
+            }
+            
+            indexCallBack(self?.indexPath(forObject: findedObject))
+        }
     }
     
     func performFetch() {
@@ -186,31 +207,36 @@ final class PhotoVideoDataSource: NSObject {
     
     private func convertFetchedObjects() {
         isConverting = true
-        mergeQueue.async { [weak self] in
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
             guard let self = self else {
                 return
             }
             
-            let ids = self.lastFetchedObjects?.map { $0.objectID } ?? []
-            guard !ids.isEmpty else {
-                self.finishConverting(needSorting: false)
-                return
-            }
-            
-            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+            let ids = self.lastUpdateFetchedObjects?.map { $0.objectID } ?? []
+            self.mergeQueue.async { [weak self] in
                 guard let self = self else {
                     return
                 }
-
-                items.forEach({ mediaItem in
-                    autoreleasepool {
-                        self.lastWrapedObjects.append(WrapData(mediaItem: mediaItem))
-                    }
-                })
+                guard !ids.isEmpty else {
+                    self.finishConverting(needSorting: false)
+                    return
+                }
                 
-                self.isConverting = false
-                if !self.isMerging {
-                    self.finishConverting(needSorting: true)
+                MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    items.forEach({ mediaItem in
+                        autoreleasepool {
+                            self.lastWrapedObjects.append(WrapData(mediaItem: mediaItem))
+                        }
+                    })
+                    
+                    self.isConverting = false
+                    if !self.isMerging {
+                        self.finishConverting(needSorting: true)
+                    }
                 }
             }
         }
@@ -388,7 +414,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         
         cleanChanges()
         
-        if !collectionView.isDragging, let firstVisibleItem = firstVisibleItem {
+        if !collectionView.isDragging, let firstVisibleItem = firstOffsetSavedVisibleItem {
             focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
@@ -426,13 +452,13 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     private func saveOffset() {
-        firstVisibleItem = nil
+        firstOffsetSavedVisibleItem = nil
         cellTopOffset = 0
         focusedIndexPath = nil
         
         if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
             self.getObject(at: indexPath) { [weak self] mediaObject in
-                self?.firstVisibleItem = mediaObject
+                self?.firstOffsetSavedVisibleItem = mediaObject
             }
             if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
@@ -445,7 +471,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             guard let self = self else {
                 return
             }
-            self.lastFetchedObjects = fetchedObjects
+            self.lastUpdateFetchedObjects = fetchedObjects
             self.delegate?.contentDidChange(fetchedObjects)
             if self.lastWrapedObjects.isEmpty, !self.isConverting {
                 self.convertFetchedObjects()
