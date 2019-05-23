@@ -22,16 +22,6 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var phoneNumber: String?
     
-    init() {        
-        if dataStorage.signUpResponse == nil {
-            dataStorage.signUpResponse = SignUpSuccessResponse(withJSON: nil)
-        }
-        
-        if dataStorage.signUpUserInfo == nil {
-            dataStorage.signUpUserInfo = RegistrationUserInfoModel(mail: "", phone: "", password: "", captchaID: nil, captchaAnswer: nil)
-        }
-    }
-    
     var etkAuth: Bool? {
         didSet {
             /// if etkAuth changes, i have to update dataStorage because it will be passed to the next screen where this value will be needed
@@ -59,7 +49,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func applyEula() {
-        guard let eula = eula, let eulaID = eula.id else {
+        guard let eulaID = eula?.id else {
             assertionFailure()
             return
         }
@@ -69,9 +59,9 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.eulaApplied()
             }
         }, fail: { [weak self] errorResponce in
-                DispatchQueue.main.async {
-                    self?.output.applyEulaFaild(errorResponce: errorResponce)
-                }
+            DispatchQueue.main.async {
+                self?.output.applyEulaFaild(errorResponce: errorResponce)
+            }
         })
     }
 
