@@ -14,4 +14,6 @@ protocol TermsAndServicesInteractorOutput: class {
     func popUpPressed()
     func signupFailedCaptchaRequired()
     func setupEtk(isShowEtk: Bool)
+    func applyEulaFaild(errorResponce: ErrorResponse)
+    func eulaApplied()
 }
