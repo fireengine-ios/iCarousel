@@ -59,7 +59,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func applyEula() {
-        guard let eula_ = eula, let eulaID = eula_.id else {
+        guard let eula = eula, let eulaID = eula.id else {
+            assertionFailure()
             return
         }
     
@@ -67,7 +68,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
-            }, fail: { [weak self] errorResponce in
+        }, fail: { [weak self] errorResponce in
                 DispatchQueue.main.async {
                     self?.output.applyEulaFaild(errorResponce: errorResponce)
                 }
