@@ -120,7 +120,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
             return false
         }
         
-        guard phone.count > 3 else {
+        guard let number = phoneEnterView.numberTextField.text, number.count > 3 else {
             UIApplication.showErrorAlert(message: TextConstants.invalidPhoneNumberText)
             return false
         }
