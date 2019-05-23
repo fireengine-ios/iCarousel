@@ -315,7 +315,6 @@ extension LoginPresenter: LoginInteractorOutput {
     func failedResendUpdatePhone(errorResponse: ErrorResponse) {
         router.optInController?.stopActivityIndicator()
         router.optInController?.showError(errorResponse.description)
-        router.emptyPhoneController?.showErrorAlert(message: errorResponse.description)
     }
     
     func successedVerifyPhone() {
