@@ -457,9 +457,8 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         focusedIndexPath = nil
         
         if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
-            self.getObject(at: indexPath) { [weak self] mediaObject in
-                self?.firstOffsetSavedVisibleItem = mediaObject
-            }
+            //call only in main thread
+            firstOffsetSavedVisibleItem = fetchedResultsController.object(at: indexPath)
             if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
             }
