@@ -8,14 +8,10 @@
 
 import UIKit
 
-// TODO: items storage with remotes
-
-// TODO: CheckBoxViewDelegate logic
-// TODO: video controller
-// TODO: duplicated files correct representation on collection
-// TODO: items operations (progress)
 // TODO: todos in file
 // TODO: clear code -
+
+typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
 
@@ -637,29 +633,33 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         uploadProgress.removeValue(forKey: uuid)
     
         DispatchQueue.toMain {
-            if let cell = self.getCellForFile(objectUUID: uuid) {
-                cell.finishedUploadForObject()
+            self.getCellForFile(objectUUID: uuid) { cell in
+                cell?.finishedUploadForObject()
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
                 guard let self = self else {
                     return
                 }
-                if let path = self.getIndexPathForObject(itemUUID: uuid),
-                    self.collectionView.indexPathsForVisibleItems.contains(path) {
-                    self.dataSource.getObject(at: path, mediaItemCallback: { [weak self] object in
-                        guard let self = self, let object = object,
-                            let cell = self.collectionView.cellForItem(at: path) as? PhotoVideoCell else {
-                                return
-                        }
-                        if object.isLocalItemValue {
-                            cell.showCloudImage()
-                        } else {
-                            cell.resetCloudImage()
-                        }
-                    })
+                self.dataSource.getIndexPathForRemoteObject(itemUUID: uuid) { [weak self] indexPath in
+                    guard let self = self else {
+                        return
+                    }
+                    if let path = indexPath,
+                        self.collectionView.indexPathsForVisibleItems.contains(path) {
+                        self.dataSource.getObject(at: path, mediaItemCallback: { [weak self] object in
+                            guard let self = self, let object = object,
+                                let cell = self.collectionView.cellForItem(at: path) as? PhotoVideoCell else {
+                                    return
+                            }
+                            if object.isLocalItemValue {
+                                cell.showCloudImage()
+                            } else {
+                                cell.resetCloudImage()
+                            }
+                        })
+                    }
                 }
-                
                 if let index = self.uploadedObjectID.index(of: uuid) {
                     self.uploadedObjectID.remove(at: index)
                 }
@@ -672,8 +672,8 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         uploadProgress.removeValue(forKey: uuid)
         
         DispatchQueue.toMain {
-            if let cell = self.getCellForFile(objectUUID: uuid) {
-                cell.cancelledUploadForObject()
+            self.getCellForFile(objectUUID: uuid) { cell in
+                cell?.cancelledUploadForObject()
             }
         }
     }
@@ -687,8 +687,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         DispatchQueue.toMain {
             let visibleCells = self.collectionView.visibleCells
             uuids.forEach({ uuid in
-                if let cell = self.getCellForFile(objectUUID: uuid), visibleCells.contains(cell) {
-                    cell.cancelledUploadForObject()
+                self.getCellForFile(objectUUID: uuid) { cell in
+                    if let cell = cell, visibleCells.contains(cell) {
+                         cell.cancelledUploadForObject()
+                    }
                 }
             })
             self.uploadProgress.removeAll()
@@ -699,35 +701,26 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         stopEditingMode()
     }
     
-    private func getCellForFile(objectUUID: String) -> PhotoVideoCell? {
-        guard let path = getIndexPathForObject(itemUUID: objectUUID),
-            let cell = collectionView?.cellForItem(at: path) as? PhotoVideoCell
-            else { return nil }
-        return cell
-    }
-    
-    private func getIndexPathForObject(itemUUID: String) -> IndexPath? {
-        if let findedObject = dataSource.lastFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemUUID }) {
-            return dataSource.indexPath(forObject: findedObject)
+    private func getCellForFile(objectUUID: String, completion: @escaping (_ cell: PhotoVideoCell?) -> Void)
+{
+        dataSource.getIndexPathForRemoteObject(itemUUID: objectUUID) { [weak self] indexPath in
+            guard let path = indexPath,
+            let cell = self?.collectionView?.cellForItem(at: path) as? PhotoVideoCell else {
+                completion(nil)
+                return
+            }
+            completion(cell)
         }
-
-        return nil
     }
     
     private func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
-        guard let path = self.getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
-            completion(nil)
-            return
+        dataSource.getIndexPathForLocalObject(itemTrimmedLocalID: objectTrimmedLocalID) { [weak self] indexPath in
+            guard let path = indexPath else {
+                completion(nil)
+                return
+            }
+             completion(self?.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
         }
-        completion(self.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
-    }
-    
-    private func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
-        if let findedObject = dataSource.lastFetchedObjects?.first(where: { $0.trimmedLocalFileID == objectTrimmedLocalID && $0.isLocalItemValue }) {
-            return dataSource.indexPath(forObject: findedObject)
-        }
-        
-        return nil
     }
 }
 
