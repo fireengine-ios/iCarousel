@@ -110,6 +110,7 @@
 		488897342288EBCA004D0B90 /* SecurityCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488897332288EBCA004D0B90 /* SecurityCodeTextField.swift */; };
 		488897352288EBCA004D0B90 /* SecurityCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488897332288EBCA004D0B90 /* SecurityCodeTextField.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
+		48D10737229C0B9600790458 /* FileProviderWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D10736229C0B9600790458 /* FileProviderWormholeListener.swift */; };
 		4A02B7FE21A0550F00635694 /* PremiumInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02B7FD21A0550F00635694 /* PremiumInfoCard.swift */; };
 		4A02B80021A0552000635694 /* PremiumInfoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A02B7FF21A0552000635694 /* PremiumInfoCard.xib */; };
 		4A0AC135208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */; };
@@ -4064,6 +4065,7 @@
 		486F7B56208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncDataStorage.swift; sourceTree = "<group>"; };
 		486F7B59208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncRouterInput.swift; sourceTree = "<group>"; };
 		488897332288EBCA004D0B90 /* SecurityCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityCodeTextField.swift; sourceTree = "<group>"; };
+		48D10736229C0B9600790458 /* FileProviderWormholeListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderWormholeListener.swift; sourceTree = "<group>"; };
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
@@ -12734,6 +12736,7 @@
 				CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */,
 				CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */,
 				CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */,
+				48D10736229C0B9600790458 /* FileProviderWormholeListener.swift */,
 				B54BFF46202B43DF0018AF82 /* WidgetService.swift */,
 			);
 			path = Wormhole;
@@ -16564,6 +16567,7 @@
 				CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */,
 				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
 				CE1B7621204D335300B5E12A /* Error+Network.swift in Sources */,
+				48D10737229C0B9600790458 /* FileProviderWormholeListener.swift in Sources */,
 				CE4D281F207E2421003AE4FB /* PasscodeStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
