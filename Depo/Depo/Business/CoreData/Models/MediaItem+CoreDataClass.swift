@@ -199,6 +199,21 @@ public class MediaItem: NSManagedObject {
             hasMissingDateRemotes = relatedRemotes.filter { $0.monthValue == nil }.count == relatedRemotes.count
         }
     }
+    
+    func regenerateSecondPartOfUUID() {
+        let firstPart: String
+        if let uuid = uuid {
+            if uuid.contains("~"){
+                firstPart = uuid.components(separatedBy: "~").first ?? trimmedLocalFileID ?? uuid
+            } else {
+                firstPart = trimmedLocalFileID ?? uuid
+            }
+        } else {
+            firstPart = trimmedLocalFileID ?? UUID().uuidString
+        }
+        
+        uuid = firstPart + "~" + UUID().uuidString
+    }
 }
 
 //MARK: - relations
