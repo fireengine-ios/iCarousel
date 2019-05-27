@@ -82,6 +82,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
             }
             self?.authService.logout { [weak self] in
+                WormholePoster().logout()
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
             }

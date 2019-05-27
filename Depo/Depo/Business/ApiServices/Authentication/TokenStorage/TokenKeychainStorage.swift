@@ -16,7 +16,7 @@ final class TokenKeychainStorage: TokenStorage {
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
     
-    private var keychain = KeychainSwift()
+    private let keychain = KeychainSwift()
     
     private (set) var savedAccessToken: String?
     var accessToken: String? {

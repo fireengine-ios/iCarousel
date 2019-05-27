@@ -21,7 +21,8 @@ class FileProviderEnumerator: NSObject {
     private var page = 0
     
     private let passcodeStorage: PasscodeStorage = factory.resolve()
-    
+    private let tokenStorage: TokenStorage = factory.resolve()
+
     private var isPasscodeOn: Bool {
         return !passcodeStorage.isEmpty
     }
@@ -62,13 +63,14 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
             folderUUID = ""
         }
         
-        if TokenKeychainStorage().accessToken == nil {
+        if tokenStorage.accessToken == nil {
             let authenticationError = NSError(domain: NSFileProviderErrorDomain,
                                               code: NSFileProviderError.notAuthenticated.rawValue,
                                               userInfo: [NSLocalizedDescriptionKey: ErrorIdentificators.authentication])
             observer.finishEnumeratingWithError(authenticationError)
             return
         }
+        
         fileService.getFiles(folderUUID: folderUUID, page: self.page) { result in
             switch result {
             case .success( let newItems):

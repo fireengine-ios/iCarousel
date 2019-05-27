@@ -24,12 +24,17 @@ final class FileProviderExtension: NSFileProviderExtension {
         return !passcodeStorage.isEmpty
     }
     
-    private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
+    private let wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
     
     override init() {
         super.init()
+        listenMessageAboutLogout()
+    }
+    
+    // On some devices (Iphone 6 plus 11.2, Iphone 6s plus 11.2), the NSFileProviderEnumerator protocol methods were not called when logging into the application from the background, the signalEnumerator method provokes a call to the protocol methods.
+    
+    func listenMessageAboutLogout() {
         wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeLogout) { _ in
-
             NSFileProviderManager.default.signalEnumerator(for: NSFileProviderItemIdentifier.rootContainer, completionHandler: { (error) in })
         }
     }
