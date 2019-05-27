@@ -403,7 +403,8 @@ class AuthenticationService: BaseRequestService {
             self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
-            
+            WormholePoster().didLogout()
+
             success?()
         }
         if async {
