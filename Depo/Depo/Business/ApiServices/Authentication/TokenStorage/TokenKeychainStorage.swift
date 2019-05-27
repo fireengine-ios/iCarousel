@@ -16,7 +16,7 @@ final class TokenKeychainStorage: TokenStorage {
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
     
-    private lazy var keychain = KeychainSwift()
+    private var keychain = KeychainSwift()
     
     private (set) var savedAccessToken: String?
     var accessToken: String? {
@@ -60,6 +60,7 @@ final class TokenKeychainStorage: TokenStorage {
     }
     
     init() {
+        keychain.synchronizable = true
         savedAccessToken = accessToken
     }
     

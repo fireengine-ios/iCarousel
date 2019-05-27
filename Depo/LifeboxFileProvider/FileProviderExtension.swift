@@ -8,8 +8,10 @@
 
 import FileProvider
 import MobileCoreServices
+import MMWormhole
 
 let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: [:])
+
 
 final class FileProviderExtension: NSFileProviderExtension {
     
@@ -22,8 +24,14 @@ final class FileProviderExtension: NSFileProviderExtension {
         return !passcodeStorage.isEmpty
     }
     
+    private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
+    
     override init() {
         super.init()
+        wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeLogout) { _ in
+
+            NSFileProviderManager.default.signalEnumerator(for: NSFileProviderItemIdentifier.rootContainer, completionHandler: { (error) in })
+        }
     }
     
     /// ready

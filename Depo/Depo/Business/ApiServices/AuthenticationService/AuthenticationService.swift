@@ -379,6 +379,9 @@ class AuthenticationService: BaseRequestService {
     func logout(async: Bool = true, success: SuccessLogout?) {
         func logout() {
             debugLog("AuthenticationService logout")
+            if (self.tokenStorage.accessToken != nil) {
+                WormholePoster().logout()
+            }
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()

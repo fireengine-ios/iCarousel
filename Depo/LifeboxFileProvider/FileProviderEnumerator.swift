@@ -62,6 +62,13 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
             folderUUID = ""
         }
         
+        if TokenKeychainStorage().accessToken == nil {
+            let authenticationError = NSError(domain: NSFileProviderErrorDomain,
+                                              code: NSFileProviderError.notAuthenticated.rawValue,
+                                              userInfo: [NSLocalizedDescriptionKey: ErrorIdentificators.authentication])
+            observer.finishEnumeratingWithError(authenticationError)
+            return
+        }
         fileService.getFiles(folderUUID: folderUUID, page: self.page) { result in
             switch result {
             case .success( let newItems):
