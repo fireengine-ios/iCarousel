@@ -60,10 +60,8 @@ final class TokenKeychainStorage: TokenStorage {
     }
     
     init() {
-        keychain.synchronizable = true
         savedAccessToken = accessToken
     }
-    
     
     func clearTokens() {
         accessToken = nil
