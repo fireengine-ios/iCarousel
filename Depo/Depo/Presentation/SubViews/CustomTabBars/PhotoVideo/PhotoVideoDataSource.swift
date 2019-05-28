@@ -431,6 +431,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         
         debugLog("PhotoVideoDataSource collectionView batchUpdates start")
         collectionView.performBatchUpdates({
+            debugLog("PhotoVideoDataSource collectionView batchUpdates in process")
             sectionChangesStatic.forEach { $0() }
             objectChangesStatic.forEach { $0() }
         }, completion: { [weak self] _ in
