@@ -112,10 +112,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
     }
     
-    func onDeinit() {
-        interactor.startOperation(operationType: .cancel)
-    }
-    
     func showNoBackUp() {
         view.setStateWithoutBackUp()
     }

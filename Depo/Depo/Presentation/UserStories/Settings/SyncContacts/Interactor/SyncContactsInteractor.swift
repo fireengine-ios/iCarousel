@@ -32,6 +32,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private let contactService: ContactService = ContactService()
     private let accountService: AccountService = AccountService()
     
+    deinit {
+        contactsSyncService.cancelAnalyze()
+    }
+    
     func startOperation(operationType: SyncOperationType) {
         updateAccessToken { [weak self] in
             guard let `self` = self else {
