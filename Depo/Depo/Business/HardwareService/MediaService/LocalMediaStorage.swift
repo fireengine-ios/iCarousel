@@ -499,8 +499,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     mediaItem.md5Value = wrapData.md5
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
-                    mediaItem.regenerateSecondPartOfUUID()
                     mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()
+                    mediaItem.regenerateSecondPartOfUUID()
                     mediaItem.md5Value = item.md5
                 }
                 
