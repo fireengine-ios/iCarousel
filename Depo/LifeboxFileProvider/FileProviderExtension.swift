@@ -19,6 +19,7 @@ final class FileProviderExtension: NSFileProviderExtension {
     private let fileCoordinator = NSFileCoordinator()
     
     private let passcodeStorage: PasscodeStorage = factory.resolve()
+    private let tokenStorage: TokenStorage = factory.resolve()
     
     private var isPasscodeOn: Bool {
         return !passcodeStorage.isEmpty
@@ -32,10 +33,10 @@ final class FileProviderExtension: NSFileProviderExtension {
     }
     
     func listenMessageAboutLogout() {
-        fileProviderWormholeListener.listenDidLogout { 
-            
+        fileProviderWormholeListener.listenDidLogout { [weak self] in
+            self?.tokenStorage.clearTokens()
             /// On some devices (Iphone 6 plus 11.2, Iphone 6s plus 11.2), the NSFileProviderEnumerator protocol methods were not called when logging into the application from the background, the signalEnumerator method provokes a call to the protocol methods.
-            NSFileProviderManager.default.signalEnumerator(for: NSFileProviderItemIdentifier.rootContainer, completionHandler: { ( _) in })
+            NSFileProviderManager.default.signalEnumerator(for: NSFileProviderItemIdentifier.rootContainer) { _ in }
         }
     }
     
