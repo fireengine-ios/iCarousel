@@ -328,9 +328,11 @@ final class PhotoVideoDataSource: NSObject {
 // MARK: - UICollectionViewDataSource
 extension PhotoVideoDataSource: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        debugLog("PhotoVideoDataSource numberOfSections")
         return fetchedResultsController.sections?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        debugLog("PhotoVideoDataSource numberOfItemsInSection")
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
@@ -349,6 +351,7 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
 extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        debugLog("PhotoVideoDataSource controllerWillChangeContent")
         cleanChanges()
         saveOffset()
     }
@@ -426,10 +429,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             }
         }
         
+        debugLog("PhotoVideoDataSource collectionView batchUpdates start")
         collectionView.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
             objectChangesStatic.forEach { $0() }
         }, completion: { [weak self] _ in
+            debugLog("PhotoVideoDataSource collectionView batchUpdates completion")
             guard let self = self else {
                 return
             }
