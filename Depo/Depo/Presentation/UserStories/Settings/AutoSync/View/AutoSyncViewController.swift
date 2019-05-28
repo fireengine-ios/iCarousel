@@ -87,7 +87,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         if fromSettings {
             navigationBarWithGradientStyle()
         } else {
-            hidenNavigationBarStyle()
+            navigationController?.setNavigationBarHidden(true, animated: false)
+            
             topConstraint.constant = 64
             view.layoutIfNeeded()
         }
