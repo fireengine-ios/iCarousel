@@ -493,12 +493,15 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let context = CoreDataStack.default.newChildBackgroundContext
             MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS:  [item.getTrimmedLocalID()], context: context) { fetchedMediaItems in
                 let mediaItem: MediaItem
-                if let existingMediaItem = fetchedMediaItems.first {//(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
+                if let existingMediaItem = fetchedMediaItems.first {
                     mediaItem = existingMediaItem
                     mediaItem.trimmedLocalFileID = wrapData.getTrimmedLocalID()
                     mediaItem.md5Value = wrapData.md5
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
+                    mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()
+                    mediaItem.regenerateSecondPartOfUUID()
+                    mediaItem.md5Value = item.md5
                 }
                 
                 mediaItem.localFileID = assetIdentifier

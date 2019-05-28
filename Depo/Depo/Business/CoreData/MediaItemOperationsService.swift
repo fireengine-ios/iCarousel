@@ -707,8 +707,6 @@ final class MediaItemOperationsService {
             
             let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
-                remoteItems.forEach { context.delete($0) }
-                
                 let remoteItemsSet = NSSet(array: remoteItems)
                 
                 self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
