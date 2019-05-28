@@ -67,7 +67,6 @@ class LoginPresenter: BasePresenter {
             self?.view.hideSpinner()
             
             if needToOpenAutoSync {
-                self?.isPresenting = true
                 self?.router.goToSyncSettingsView()
             }
         }) { [weak self] error in
