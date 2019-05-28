@@ -73,6 +73,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             #endif
             
             let phoneCodeInputView = PhoneCodeInputView()
+            phoneCodeInputView.setValuePickerView(with: CoreTelephonyService().callingCountryCode())
             phoneCodeInputView.didSelect = { [weak newValue] gsmModel in
                 newValue?.text = gsmModel.gsmCode
             }

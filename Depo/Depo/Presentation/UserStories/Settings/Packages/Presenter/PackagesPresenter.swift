@@ -241,7 +241,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func failedUsage(with error: ErrorResponse) {
         optInVC?.stopActivityIndicator()
-        optInVC?.startEnterCode()
         optInVC?.showError(error.description)
     }
 

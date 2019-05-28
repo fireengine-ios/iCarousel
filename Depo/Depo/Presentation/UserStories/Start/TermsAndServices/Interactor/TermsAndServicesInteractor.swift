@@ -16,6 +16,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var isFromLogin = false
+    var isFromRegistration = false
     
     var eula: Eula?
     
@@ -47,10 +48,27 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         })
     }
     
+    func applyEula() {
+        guard let eulaID = eula?.id else {
+            assertionFailure()
+            return
+        }
+    
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
+            DispatchQueue.main.async {
+                self?.output.eulaApplied()
+            }
+        }, fail: { [weak self] errorResponce in
+            DispatchQueue.main.async {
+                self?.output.applyEulaFaild(errorResponce: errorResponce)
+            }
+        })
+    }
+
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
-        
+        isFromRegistration = true
         dataStorage.signUpResponse.etkAuth = etkAuth
     }
     
@@ -71,6 +89,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var cameFromLogin: Bool {
         return isFromLogin
+    }
+    
+    var cameFromRegistration: Bool {
+        return isFromRegistration
     }
     
     func checkEtk() {
