@@ -183,7 +183,6 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func failedResendToken(with errorMessage: String) {
         optInVC?.stopActivityIndicator()
-        optInVC?.startEnterCode()
         optInVC?.showError(errorMessage)
     }
 

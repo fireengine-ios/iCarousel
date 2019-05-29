@@ -408,6 +408,7 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             
             CacheManager.shared.logout {
+                WormholePoster().didLogout()
                 success?()
             }
         }

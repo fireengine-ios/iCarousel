@@ -73,7 +73,7 @@ final class OptInController: ViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        setupNavBar()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -143,6 +143,11 @@ final class OptInController: ViewController, NibInit {
     }
     
     // MARK: - Utility methods
+    private func setupNavBar() {
+        navigationBarWithGradientStyle()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
     private func setupInitialState() {
         codeTextFields.forEach({
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

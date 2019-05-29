@@ -194,7 +194,6 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 self.tokenStorage.isRememberMe = self.rememberMe
                 self.output?.successedSilentLogin()
-                self.output?.succesLogin()
             }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async { [weak self] in

@@ -28,12 +28,26 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     func startUsing() {
-        if confirmAgreements {
+        if confirmAgreements, interactor.cameFromRegistration {
             router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
                                          userInfo: interactor.userInfo)
+        } else if confirmAgreements {
+            interactor.applyEula()
         } else {
             view.noConfirmAgreements(errorString: TextConstants.termsAndUseCheckboxErrorText)
         }
+    }
+    
+    func eulaApplied() {
+        if interactor.cameFromLogin {
+            router.goToAutoSync()
+        } else {
+            router.goToHomePage()
+        }
+    }
+    
+    func applyEulaFaild(errorResponce: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponce.description)
     }
     
     func confirmAgreements(_ confirm: Bool) {

@@ -7,7 +7,12 @@
 //
 
 class TermsAndServicesDataStorage {
-    var signUpResponse: SignUpSuccessResponse!
+    var signUpResponse: SignUpSuccessResponse
     
-    var signUpUserInfo: RegistrationUserInfoModel!
+    var signUpUserInfo: RegistrationUserInfoModel
+    
+    init() {
+        signUpResponse = SignUpSuccessResponse(withJSON: nil)
+        signUpUserInfo = RegistrationUserInfoModel(mail: "", phone: "", password: "", captchaID: nil, captchaAnswer: nil)
+    }
 }

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextEnterController" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="changeButton" destination="WZa-Y7-yKk" id="IWs-C1-cCS"/>
-                <outlet property="pickerBottomConstraint" destination="F58-28-veO" id="3Pb-Ff-hWk"/>
-                <outlet property="pickerContainer" destination="iSi-KE-raL" id="NiT-gl-v6N"/>
-                <outlet property="pickerView" destination="AbI-P8-rCK" id="l0I-cN-fvi"/>
+                <outlet property="changeButton" destination="WZa-Y7-yKk" id="bMg-7u-Kd0"/>
+                <outlet property="phoneEnterView" destination="w6N-rX-U5n" id="dJL-8L-JNU"/>
                 <outlet property="shadowView" destination="Bpc-2K-Ib5" id="gUe-5J-cEa"/>
-                <outlet property="tableView" destination="4uR-bf-zAS" id="Vfw-Ei-Kvq"/>
+                <outlet property="titleLabel" destination="d5c-zP-tmo" id="dkn-9V-HM1"/>
                 <outlet property="view" destination="6V6-VG-ZMj" id="mgv-b6-od1"/>
             </connections>
         </placeholder>
@@ -26,18 +24,28 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4uR-bf-zAS">
-                    <rect key="frame" x="0.0" y="40" width="375" height="84"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5c-zP-tmo">
+                    <rect key="frame" x="20" y="20" width="335" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oft-D5-eBu">
+                    <rect key="frame" x="20" y="60.5" width="335" height="60"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6N-rX-U5n" customClass="ProfilePhoneEnterView" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="kkk-dh-JZm"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZa-Y7-yKk" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="75" y="150.5" width="225" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="84" id="UQs-ko-lck"/>
-                    </constraints>
-                </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZa-Y7-yKk" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="116" y="159" width="142" height="54"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="142" id="2cC-1u-oqI"/>
-                        <constraint firstAttribute="height" constant="54" id="PqL-hB-ida"/>
+                        <constraint firstAttribute="height" constant="44" id="yjQ-5Y-4Ms"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -69,21 +77,25 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="4uR-bf-zAS" firstAttribute="top" secondItem="AX3-H7-wCy" secondAttribute="top" constant="20" id="8fu-wf-bde"/>
+                <constraint firstItem="WZa-Y7-yKk" firstAttribute="top" secondItem="oft-D5-eBu" secondAttribute="bottom" constant="30" id="26L-ck-JTV"/>
                 <constraint firstItem="AX3-H7-wCy" firstAttribute="bottom" secondItem="iSi-KE-raL" secondAttribute="bottom" constant="-261" id="F58-28-veO"/>
                 <constraint firstItem="Bpc-2K-Ib5" firstAttribute="leading" secondItem="AX3-H7-wCy" secondAttribute="leading" id="QdK-9F-QTL"/>
-                <constraint firstItem="4uR-bf-zAS" firstAttribute="trailing" secondItem="AX3-H7-wCy" secondAttribute="trailing" id="XYH-yi-luh"/>
+                <constraint firstItem="WZa-Y7-yKk" firstAttribute="width" secondItem="6V6-VG-ZMj" secondAttribute="width" multiplier="0.6" id="RPv-hN-hwI"/>
+                <constraint firstItem="oft-D5-eBu" firstAttribute="leading" secondItem="AX3-H7-wCy" secondAttribute="leading" constant="20" id="SCd-x5-Ubw"/>
+                <constraint firstItem="oft-D5-eBu" firstAttribute="top" secondItem="d5c-zP-tmo" secondAttribute="bottom" constant="20" id="W6p-BM-O8A"/>
+                <constraint firstItem="d5c-zP-tmo" firstAttribute="leading" secondItem="6V6-VG-ZMj" secondAttribute="leading" constant="20" id="ZSb-0c-Dnu"/>
                 <constraint firstItem="iSi-KE-raL" firstAttribute="top" secondItem="Bpc-2K-Ib5" secondAttribute="bottom" id="aHT-1i-1r0"/>
                 <constraint firstAttribute="trailing" secondItem="iSi-KE-raL" secondAttribute="trailing" id="ahZ-ul-isa"/>
-                <constraint firstItem="4uR-bf-zAS" firstAttribute="leading" secondItem="AX3-H7-wCy" secondAttribute="leading" id="gL8-La-l66"/>
+                <constraint firstAttribute="trailing" secondItem="d5c-zP-tmo" secondAttribute="trailing" constant="20" id="ffA-KP-pPa"/>
                 <constraint firstItem="WZa-Y7-yKk" firstAttribute="centerX" secondItem="6V6-VG-ZMj" secondAttribute="centerX" id="gwR-R2-WHc"/>
                 <constraint firstItem="Bpc-2K-Ib5" firstAttribute="top" secondItem="AX3-H7-wCy" secondAttribute="top" id="hMY-wA-RDH"/>
                 <constraint firstItem="iSi-KE-raL" firstAttribute="leading" secondItem="6V6-VG-ZMj" secondAttribute="leading" id="mHN-ni-CC7"/>
-                <constraint firstItem="WZa-Y7-yKk" firstAttribute="top" secondItem="4uR-bf-zAS" secondAttribute="bottom" constant="35" id="rkm-gu-fPD"/>
+                <constraint firstItem="d5c-zP-tmo" firstAttribute="top" secondItem="6V6-VG-ZMj" secondAttribute="top" constant="20" id="oG9-08-FVp"/>
                 <constraint firstItem="Bpc-2K-Ib5" firstAttribute="trailing" secondItem="AX3-H7-wCy" secondAttribute="trailing" id="sLG-zH-ZrF"/>
+                <constraint firstItem="AX3-H7-wCy" firstAttribute="trailing" secondItem="oft-D5-eBu" secondAttribute="trailing" constant="20" id="yTY-Ws-Qhg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="AX3-H7-wCy"/>
-            <point key="canvasLocation" x="25.5" y="51.5"/>
+            <point key="canvasLocation" x="24.800000000000001" y="50.824587706146929"/>
         </view>
     </objects>
 </document>

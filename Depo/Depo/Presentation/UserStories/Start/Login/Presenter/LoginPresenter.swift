@@ -67,7 +67,6 @@ class LoginPresenter: BasePresenter {
             self?.view.hideSpinner()
             
             if needToOpenAutoSync {
-                self?.isPresenting = true
                 self?.router.goToSyncSettingsView()
             }
         }) { [weak self] error in
@@ -315,7 +314,6 @@ extension LoginPresenter: LoginInteractorOutput {
     func failedResendUpdatePhone(errorResponse: ErrorResponse) {
         router.optInController?.stopActivityIndicator()
         router.optInController?.showError(errorResponse.description)
-        router.emptyPhoneController?.showErrorAlert(message: errorResponse.description)
     }
     
     func successedVerifyPhone() {
@@ -324,9 +322,9 @@ extension LoginPresenter: LoginInteractorOutput {
         let popupVC = PopUpController.with(title: nil,
                                            message: TextConstants.phoneUpdatedNeedsLogin,
                                            image: .none,
-                                           buttonTitle: TextConstants.ok) { vc in
+                                           buttonTitle: TextConstants.ok) { [weak self] vc in
                                             vc.close {
-                                                AppConfigurator.logout()
+                                                self?.router.dismissEmptyPhoneController(successHandler: nil)
                                             }
         }
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
@@ -373,6 +371,14 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func successedSilentLogin() {
         stopOptInVC()
+        let optInController = router.optInController
+        if optInController != nil {
+            router.dismissEmptyPhoneController { [weak self] in
+                self?.succesLogin()
+            }
+        } else {
+            succesLogin()
+        }
     }
     
     func showSupportView() {
