@@ -951,6 +951,8 @@
 "password_changed_successfully_relogin" = "Keni ndryshuar me sukses fjalëkalimin tuaj. Ju lutemi, hyni përsëri me fjalëkalimin tuaj të ri.";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
 "user_profile_turkcell_gsm_alert" = "Ju nuk mund ta përditësoni numrin tuaj të telefonit, për detaje: %@";
 "user_profile_birthday_placeholder" = "DD MM VVVV";
 "send_link" = "";

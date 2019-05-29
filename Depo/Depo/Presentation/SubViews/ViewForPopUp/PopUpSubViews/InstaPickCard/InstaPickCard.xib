@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,23 +70,10 @@
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-bk-6LK">
-                                    <rect key="frame" x="381" y="0.0" width="33" height="33"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="33" id="nZP-Kd-eBM"/>
-                                        <constraint firstAttribute="height" constant="33" id="sNg-Ui-zF3"/>
-                                    </constraints>
-                                    <state key="normal" image="CloseCardIconWhite"/>
-                                    <connections>
-                                        <action selector="onCloseTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="DzF-1e-lUg"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="lYl-LZ-HIN" secondAttribute="bottom" constant="12" id="1LA-PI-AtU"/>
-                                <constraint firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" id="2zg-B2-iq6"/>
-                                <constraint firstItem="aLx-bk-6LK" firstAttribute="top" secondItem="IjD-Y9-jpH" secondAttribute="top" id="5pt-8N-0kL"/>
                                 <constraint firstItem="lYl-LZ-HIN" firstAttribute="top" secondItem="IjD-Y9-jpH" secondAttribute="top" constant="14" id="63b-Dh-Xcf"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lbu-Gd-J8h" secondAttribute="bottom" id="Suq-pK-96f"/>
                                 <constraint firstItem="lYl-LZ-HIN" firstAttribute="leading" secondItem="IjD-Y9-jpH" secondAttribute="leading" constant="13" id="iw1-0R-twj"/>
@@ -105,45 +92,55 @@
                                         <constraint firstAttribute="height" constant="1" id="g4e-aQ-MgW"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp2-ic-ya5">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="CId-IH-1rD"/>
-                                    </constraints>
-                                    <connections>
-                                        <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="Sxv-n4-5Jf"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gU-Tzr">
                                     <rect key="frame" x="14" y="0.0" width="386" height="44"/>
-                                    <connections>
-                                        <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="H59-l8-NnD"/>
-                                    </connections>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="PeV-Mo-4pi"/>
+                                    </constraints>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="mKd-gU-Tzr" firstAttribute="leading" secondItem="xZH-RR-F4x" secondAttribute="leading" constant="14" id="6zK-Aw-SG7"/>
-                                <constraint firstItem="dp2-ic-ya5" firstAttribute="leading" secondItem="xZH-RR-F4x" secondAttribute="leading" id="NcF-hE-59P"/>
+                                <constraint firstItem="mKd-gU-Tzr" firstAttribute="top" secondItem="xZH-RR-F4x" secondAttribute="top" id="Qxd-d8-RTn"/>
                                 <constraint firstAttribute="trailing" secondItem="mKd-gU-Tzr" secondAttribute="trailing" constant="14" id="dvO-Ra-pFT"/>
-                                <constraint firstItem="mKd-gU-Tzr" firstAttribute="bottom" secondItem="dp2-ic-ya5" secondAttribute="bottom" id="gDk-GP-bBq"/>
                                 <constraint firstAttribute="trailing" secondItem="uM4-ra-ziZ" secondAttribute="trailing" id="mOk-6b-1O2"/>
-                                <constraint firstItem="dp2-ic-ya5" firstAttribute="top" secondItem="xZH-RR-F4x" secondAttribute="top" id="mPW-Qf-vQp"/>
-                                <constraint firstAttribute="trailing" secondItem="dp2-ic-ya5" secondAttribute="trailing" id="qvs-wY-W64"/>
-                                <constraint firstItem="mKd-gU-Tzr" firstAttribute="top" secondItem="dp2-ic-ya5" secondAttribute="top" id="rnp-9V-9hG"/>
-                                <constraint firstAttribute="bottom" secondItem="dp2-ic-ya5" secondAttribute="bottom" id="ssY-dU-Dfk"/>
                                 <constraint firstItem="uM4-ra-ziZ" firstAttribute="leading" secondItem="xZH-RR-F4x" secondAttribute="leading" id="tI1-cH-9VV"/>
+                                <constraint firstAttribute="bottom" secondItem="mKd-gU-Tzr" secondAttribute="bottom" id="weT-om-5Xd"/>
                                 <constraint firstItem="uM4-ra-ziZ" firstAttribute="top" secondItem="xZH-RR-F4x" secondAttribute="top" id="zh8-nJ-fxP"/>
                             </constraints>
                         </view>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp2-ic-ya5">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+                    <connections>
+                        <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="DbZ-pk-Has"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-bk-6LK">
+                    <rect key="frame" x="381" y="0.0" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="33" id="nZP-Kd-eBM"/>
+                        <constraint firstAttribute="height" constant="33" id="sNg-Ui-zF3"/>
+                    </constraints>
+                    <state key="normal" image="CloseCardIconWhite"/>
+                    <connections>
+                        <action selector="onCloseTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="DzF-1e-lUg"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="F2C-4y-q5u"/>
+                <constraint firstItem="Fhy-Rz-zex" firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" id="LW6-pB-svR"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="trailing" secondItem="976-Lr-wiL" secondAttribute="trailing" id="PzT-u1-5QD"/>
+                <constraint firstAttribute="bottom" secondItem="dp2-ic-ya5" secondAttribute="bottom" id="Vpw-rl-mC4"/>
+                <constraint firstItem="dp2-ic-ya5" firstAttribute="leading" secondItem="Fhy-Rz-zex" secondAttribute="leading" id="h0d-S5-j0n"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="leading" secondItem="976-Lr-wiL" secondAttribute="leading" id="sIb-fb-qN3"/>
+                <constraint firstItem="dp2-ic-ya5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="tuC-7Q-00Z"/>
+                <constraint firstItem="aLx-bk-6LK" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="vgy-mM-34s"/>
+                <constraint firstItem="dp2-ic-ya5" firstAttribute="trailing" secondItem="Fhy-Rz-zex" secondAttribute="trailing" id="z7a-Rd-9Jn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Fhy-Rz-zex"/>

@@ -19,10 +19,18 @@ class UserValidator {
     let regularExpressionMail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,}$"
     let regularExpressionSimplePass = "^(?=.).{\(passwordMinLength),\(passwordMaxLength)}$"
     
-    func validateUserInfo(mail: String, code: String, phone: String, password: String, repassword: String) -> [UserValidationResults] {
-
-        let regularExpressionPassword: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionSimplePass, options: .dotMatchesLineSeparators)
-        let regularExpressionMailVer: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionMail, options: .dotMatchesLineSeparators)
+    func validateUserInfo(mail: String,
+                          code: String,
+                          phone: String,
+                          password: String,
+                          repassword: String,
+                          captchaAnswer: String?) -> [UserValidationResults] {
+        
+        let regularExpressionPassword: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionSimplePass,
+                                                                                       options: .dotMatchesLineSeparators)
+        
+        let regularExpressionMailVer: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionMail,
+                                                                                      options: .dotMatchesLineSeparators)
             
         var warningsArray: [UserValidationResults] = []
         
@@ -48,6 +56,10 @@ class UserValidator {
             warningsArray.append(.repasswordIsEmpty)
         } else if password != repassword {
             warningsArray.append(.passwodsNotMatch)
+        }
+        
+        if let captchaAnswer = captchaAnswer, captchaAnswer.isEmpty {
+            warningsArray.append(.captchaIsEmpty)
         }
         
         if warningsArray.isEmpty {

@@ -1,326 +1,451 @@
 //
-//  LoginLoginViewController.swift
+//  LoginViewController.swift
 //  Depo
 //
-//  Created by Oleg on 08/06/2017.
-//  Copyright © 2017 LifeTech. All rights reserved.
+//  Created by Raman Harhun on 5/2/19.
+//  Copyright © 2019 LifeTech. All rights reserved.
 //
 
 import UIKit
-class LoginViewController: ViewController, LoginViewInput, LoginDataSourceActionsDelegate {
+import Typist
+
+final class LoginViewController: ViewController {
+
+    //MARK: IBOutlets
+    @IBOutlet private weak var alertsStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 16
+            newValue.alignment = .fill
+            newValue.axis = .vertical
+            newValue.distribution = .fill
+        }
+    }
     
-    var captchaViewController: CaptchaViewController!
+    @IBOutlet private weak var fieldsStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 16
+            newValue.alignment = .fill
+            newValue.axis = .vertical
+            newValue.distribution = .fill
+        }
+    }
+
+    @IBOutlet private weak var rememberMeLabel: UILabel! {
+        willSet {
+            newValue.textColor = .black
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.text = TextConstants.loginRememberMyCredential
+        }
+    }
     
+    @IBOutlet private weak var scrollView: UIScrollView! {
+        willSet {
+            let dismissKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(stopEditing))
+            newValue.addGestureRecognizer(dismissKeyboardGuesture)
+            newValue.delaysContentTouches = false
+        }
+    }
+    
+    @IBOutlet private weak var rememberMeButton: UIButton! {
+        willSet {
+            let normalImage = UIImage(named: "checkBoxNotSelected")
+            newValue.setImage(normalImage, for: .normal)
+            
+            let selectedImage = UIImage(named: "checkbox_active")
+            newValue.setImage(selectedImage, for: .selected)
+        }
+    }
+    
+    @IBOutlet private weak var loginButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle(TextConstants.loginTitle, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.backgroundColor = UIColor.lrTealish
+            newValue.isOpaque = true
+        }
+    }
+    
+    @IBOutlet private weak var forgotPasswordButton: UIButton! {
+        willSet {
+            let attributes: [NSAttributedStringKey : Any] = [
+                .foregroundColor : UIColor.lrTealish,
+                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .font : UIFont.TurkcellSaturaDemFont(size: 16)
+            ]
+            
+            let attributedTitle = NSAttributedString(string: TextConstants.loginCantLoginButtonTitle,
+                                                     attributes: attributes)
+            newValue.setAttributedTitle(attributedTitle, for: .normal)
+            newValue.isOpaque = true
+        }
+    }
+    
+    @IBOutlet private weak var loginEnterView: ProfileTextEnterView! {
+        willSet {
+            newValue.textField.enablesReturnKeyAutomatically = true
+            newValue.textField.autocapitalizationType = .none
+            newValue.textField.autocorrectionType = .no
+            newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
+            
+            newValue.titleLabel.text = TextConstants.loginCellTitleEmail
+        }
+    }
+    
+    @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
+        willSet {
+            newValue.textField.enablesReturnKeyAutomatically = true
+
+            newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
+
+            newValue.titleLabel.text = TextConstants.loginCellTitlePassword
+        }
+    }
+    
+    @IBOutlet private weak var captchaView: CaptchaView! {
+        willSet {
+            ///need to hide content
+            newValue.layer.masksToBounds = true
+            newValue.isHidden = true
+        }
+    }
+    
+    @IBOutlet private weak var supportView: SupportBannerView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
+    @IBOutlet private weak var errorView: ErrorBannerView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
+    //MARK: Vars
     var output: LoginViewOutput!
-    var dataSource: LoginDataSource = LoginDataSource()
     
-    var tableDataMArray: Array<UITableViewCell> = Array()
+    private let keyboard = Typist.shared
     
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var loginButton: WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var cantLoginButton: ButtonWithCorner!
-    @IBOutlet weak var rememberLoginLabel: UILabel!
-    @IBOutlet weak var viewForCaptcha: UIView!
-    @IBOutlet weak var captchaViewH: NSLayoutConstraint!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var iPadLogoImage: UIImageView!
-    
-    private let capthcaVC = CaptchaViewController.initFromXib()    
-    
-    // MARK: Life cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        hidenNavigationBarStyle()
-        
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideKeyboard),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configurateView()
-        
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
-        dataSource.actionsDelegate = self
-        dataSource.setupTableView(tableView: tableView)
-        
-        captchaViewH.constant = 0
-        viewForCaptcha.addSubview(capthcaVC.view)
-        capthcaVC.view.frame = viewForCaptcha.bounds
-        viewForCaptcha.isHidden = true
-        
-        output.viewIsReady()
-                
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        view.layoutSubviews()
-        output.viewAppeared()
-    }
-    
+    //MARK: Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
-    
-    func configurateView() {
-        tableView.backgroundColor = UIColor.clear
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setup()
         
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 22)
-        titleLabel.textColor = ColorConstants.whiteColor
-        errorLabel.font = UIFont.TurkcellSaturaItaFont(size: 18)
-//        errorLabel.minimumScaleFactor = 0.5
-        errorLabel.textColor = ColorConstants.yellowColor
-        errorLabel.text = TextConstants.loginScreenCredentialsError
-        errorLabel.isHidden = true
-        if (Device.isIpad) {
-            titleLabel.text = TextConstants.loginTableTitle
-        } else {
-            setNavigationTitle(title: TextConstants.loginTitle)
-            iPadLogoImage.isHidden = true
-            titleLabel.text = ""
-        }
+        output.viewIsReady()
         
-        loginButton.setTitle(TextConstants.loginTitle, for: UIControlState.normal)
-        cantLoginButton.setTitle(TextConstants.loginCantLoginButtonTitle, for: UIControlState.normal)
-        
-        rememberLoginLabel.text = TextConstants.loginRememberMyCredential
-        rememberLoginLabel.textColor = ColorConstants.whiteColor
-        rememberLoginLabel.font = UIFont.TurkcellSaturaBolFont(size: 15)
+        #if DEBUG
+        loginEnterView.textField.text = "qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
+
+        passwordEnterView.textField.text = "qwerty"// "zxcvbn"//".FsddQ646"
+        #endif
     }
     
-    @objc func showKeyBoard(notification: NSNotification) {
-        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavBar()
         
-        let yNextButton = getMainYForView(view: cantLoginButton) + cantLoginButton.frame.size.height
-        if (view.frame.size.height - yNextButton < keyboardHeight) {
-            
-            scrollView.contentInset.bottom = keyboardHeight + 40
-            
-            let textField = searchActiveTextField(view: self.view)
-            if (textField != nil) {
-                var yOfTextField: CGFloat = 0
-                if (textField?.tag == 33) {
-                    yOfTextField = getMainYForView(view: loginButton) + loginButton.frame.size.height + 20
-                } else {
-                    yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
+        if !captchaView.isHidden {
+            captchaView.updateCaptcha()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        prepareForDisappear()
+    }
+    
+    //MARK: Utility methods
+    private func setup() {
+        setupDelegates()
+        configureKeyboard()
+    }
+    
+    private func setupDelegates() {
+        output.prepareCaptcha(captchaView)
+        
+        supportView.delegate = self
+        
+        loginEnterView.textField.delegate = self
+        passwordEnterView.textField.delegate = self
+        captchaView.captchaAnswerTextField.delegate = self
+    }
+    
+    private func configureKeyboard() {
+        keyboard
+            .on(event: .willShow) { [weak self] options in
+                guard let `self` = self else {
+                    return
                 }
-                if (yOfTextField > view.frame.size.height - keyboardHeight) {
-                    let dy = yOfTextField - (view.frame.size.height - keyboardHeight)
-                    
-                    let point = CGPoint(x: 0, y: dy + 10)
-                    scrollView.setContentOffset(point, animated: true)
-                }
+                
+                self.updateScroll(with: options.endFrame)
             }
-        }
+            .on(event: .willHide) { [weak self] _ in
+                guard let `self` = self else {
+                    return
+                }
+                
+                var inset = self.scrollView.contentInset
+                inset.bottom = 0
+                self.scrollView.contentInset = inset
+                self.scrollView.scrollIndicatorInsets = inset
+            }
+            .start()
     }
     
-    @objc private func hideKeyboard() {
+    private func setupNavBar() {
+        navigationBarWithGradientStyle()
+        setNavigationTitle(title: TextConstants.loginTitle)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    private func prepareForDisappear() {
+        ///rootViewControlller's navBar is hidden. But on push we shouldn't hide it
+        if !output.isPresenting {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        
+        output.isPresenting = false
+    }
+    
+    private func updateScroll(with keyboardFrame: CGRect) {
+        var bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
+        
+        if #available(iOS 11.0, *) {
+            bottomInset -= scrollView.safeAreaInsets.bottom
+        }
+        
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        self.scrollView.contentInset = insets
+        self.scrollView.scrollIndicatorInsets = insets
+        
+        guard let firstResponser = self.view.firstResponder as? UIView else {
+            return
+        }
+        
+        let rectToShow = self.view.convert(firstResponser.frame, to: self.view)
+        let rectToShowWithInset = rectToShow.offsetBy(dx: 0, dy: NumericConstants.firstResponderBottomOffset)
+        self.scrollView.scrollRectToVisible(rectToShowWithInset, animated: true)
+    }
+    
+    @objc private func stopEditing() {
         view.endEditing(true)
-        scrollView.contentInset = .zero
     }
     
-    private func searchActiveTextField(view: UIView) -> UITextField? {
+    //MARK: IBActions
+    @IBAction func onRememberMeTap(_ sender: UIButton) {
+        sender.isSelected.toggle()
         
-        if let textField = view as? UITextField {
-            if textField.isFirstResponder {
-                return textField
-            }
-        }
-        for subView in view.subviews {
-            let textField = searchActiveTextField(view: subView)
-            if (textField != nil) {
-                return textField
-            }
-        }
-        return nil
+        output.rememberMe(remember: sender.isSelected)
     }
     
-    private func getMainYForView(view: UIView) -> CGFloat {
-        if (view.superview == self.view) {
-            return view.frame.origin.y
+    @IBAction func onLoginTap(_ sender: Any) {
+        stopEditing()
+        
+        if captchaView.isHidden {
+            output.sendLoginAndPassword(login: loginEnterView.textField.text ?? "",
+                                        password: passwordEnterView.textField.text ?? "")
         } else {
-            if (view.superview != nil) {
-                return view.frame.origin.y + getMainYForView(view: view.superview!)
+            output.sendLoginAndPasswordWithCaptcha(login: loginEnterView.textField.text ?? "",
+                                                   password: passwordEnterView.textField.text ?? "",
+                                                   captchaID: captchaView.currentCaptchaUUID,
+                                                   captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
+        }
+    }
+    
+    @IBAction func onForgotPasswordTap(_ sender: Any) {
+        output.onForgotPasswordTap()
+    }
+    
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case loginEnterView.textField:
+            passwordEnterView.textField.becomeFirstResponder()
+            
+        case passwordEnterView.textField:
+            if captchaView.isHidden {
+                passwordEnterView.textField.resignFirstResponder()
             } else {
-                return 0
+                captchaView.captchaAnswerTextField.becomeFirstResponder()
             }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        hideKeyboard()
-    }
-    
-    func showErrorMessage(with text: String) {
-        errorLabel.text = text
-        errorLabel.isHidden = false
-    }
-    
-    func showInfoButton(in field: LoginViewInputField) {
-        switch field {
-        case .login:
-            guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? BaseUserInputCellView else {
-                return
-            }
-            cell.changeInfoButtonTo(hidden: false)
-        case .password:
-            guard let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PasswordCell else {
-                return
-            }
-            cell.changeInfoButtonTo(hidden: false)
+            
+        case captchaView.captchaAnswerTextField:
+            captchaView.captchaAnswerTextField.resignFirstResponder()
+            
+        default:
+            assertionFailure()
         }
         
+        return true
     }
     
-    func showNeedSignUp(message: String) {
-        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok) { [weak self] controller in
-            controller.close { [weak self] in
-                self?.output.onOpenSignUp()
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case loginEnterView.textField:
+            loginEnterView.hideSubtitleAnimated()
+            
+        case passwordEnterView.textField:
+            passwordEnterView.hideSubtitleAnimated()
+            
+        case captchaView.captchaAnswerTextField:
+            captchaView.hideErrorAnimated()
+            
+        default:
+            assertionFailure()
+        }
+        
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            if string == " " {
+                return false
+            } else if textField.text?.count == 0 {
+                if string == "+" {
+                    output.startedEnteringPhoneNumber(withPlus: true)
+                    return false
+                } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
+                    output.startedEnteringPhoneNumber(withPlus: false)
+                }
             }
-        }
-        present(vc, animated: true, completion: nil)
-    }
-    
-    func hideErrorMessage() {
-        errorLabel.text = ""
-        errorLabel.isHidden = true
-    }
-    
-    func highlightLoginTitle() {
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? BaseUserInputCellView else {
-            return
-        }
-        cell.changeTitleHeighlight(heighlight: true)
-    }
-    
-    func highlightPasswordTitle() {
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PasswordCell else {
-            return
-        }
-        cell.changeTitleHeighlight(heighlight: true)
-    }
-    
-    func dehighlightTitles() {
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? BaseUserInputCellView else {
-            return
-        }
-        cell.changeTitleHeighlight(heighlight: true)
-        
-        guard let cellPassword = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PasswordCell else {
-            return
-        }
-        cellPassword.changeTitleHeighlight(heighlight: true)
-    }
-
-    
-    // MARK: - DATA SOURCE DELEGATES
-    
-    func textStrtedEditing() {
-        self.hideErrorMessage()
-    }
-
-    func loginCellFistEnteringPhone() {
-        output.startedEnteringPhoneNumber()
-    }
-    
-    func loginCellFistEnteringPhonePlus() {
-        output.startedEnteringPhoneNumberPlus()
-    }
-    
-    func enterPhoneCountryCode(countryCode: String) {
-        guard let loginCell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? LoginPhoneMailCell else {
-            return
-        }
-        loginCell.enterPhoneCode(code: countryCode)
-    }
-    
-    func incertPhoneCountryCode(countryCode: String) {
-        guard let loginCell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? LoginPhoneMailCell else {
-            return
-        }
-        loginCell.incertPhoneCode(code: countryCode)
-    }
-    
-    
-    // MARK: Buttons action
-    
-    @IBAction func onLoginButton() {        
-        let password = dataSource.getPassword()
-        let login = dataSource.getLogin()
-        hideKeyboard()
-        if !viewForCaptcha.isHidden {
-            output.sendLoginAndPasswordWithCaptcha(login: login, password: password, captchaID: capthcaVC.currentCaptchaID, captchaAnswer: capthcaVC.inputTextField.text ?? "")
-        } else {
-            output.sendLoginAndPassword(login: login, password: password)
+            
+        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
+            break
+            
+        default:
+            assertionFailure()
         }
         
+        return true
     }
     
-    @IBAction func onCantLoginButton() {
-        output.onCantLoginButton()
-    }
-    
-    @IBAction func rememberMe(_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            
+            let countryCodeWithZero = "+(90)0"
+            if var text = textField.text, text.starts(with: countryCodeWithZero) {
+                text.remove(at: text[countryCodeWithZero.count - 1])
+                textField.text = text
+            }
+        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
+            break
+            
+        default:
+            assertionFailure()
         }
-        button.isSelected = !button.isSelected
-
-        output.rememberMe(remember: button.isSelected)
+        
+        return true
     }
+}
 
+// MARK: - LoginViewInput
+extension LoginViewController: LoginViewInput {
     
-    // MARK: LoginViewInput
-    
-    func setupInitialState(array: [BaseCellModel]) {
-        dataSource.setupCellsWithModels(models: array)
-    }
-    
-    func showCapcha() {
-        captchaViewH.constant = 150
-        viewForCaptcha.isHidden = false
+    //MARK: Captcha field processing
+    func showCaptcha() {
+        ///fix animation if appears captcha and error both
+        UIView.performWithoutAnimation {
+            self.captchaView.isHidden = false
+        }
     }
     
     func refreshCaptcha() {
-        capthcaVC.refreshCapthcha()
-        capthcaVC.inputTextField.text = ""
+        captchaView.updateCaptcha()
     }
     
-    func blockUI() {
-        loginButton.isEnabled = false
-        cantLoginButton.isEnabled = false
+    //MARK: Fields alerts processing
+    func loginFieldError(_ error: String) {
+        loginEnterView.showSubtitleTextAnimated(text: error)
     }
     
-    func unblockUI() {
-        loginButton.isEnabled = true
-        cantLoginButton.isEnabled = true
+    func passwordFieldError(_ error: String) {
+        passwordEnterView.showSubtitleTextAnimated(text: error)
     }
     
+    func captchaFieldError(_ error: String) {
+        captchaView.showErrorAnimated(text: error)
+    }
+    
+    func dehighlightTitles() {
+        loginEnterView.hideSubtitleAnimated()
+        passwordEnterView.hideSubtitleAnimated()
+        captchaView.hideErrorAnimated()
+    }
+    
+    //MARK: Alerts processing
+    func showSupportView() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.supportView.isHidden = false
+            
+            self.view.layoutIfNeeded()
+        }
+        
+        let supportViewRect = self.view.convert(supportView.frame, to: self.view)
+        scrollView.scrollRectToVisible(supportViewRect, animated: true)
+    }
+    
+    func showErrorMessage(with text: String) {
+        errorView.message = text
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.errorView.isHidden = false
+            
+            self.view.layoutIfNeeded()
+        }
+        
+        let errorViewRect = self.view.convert(errorView.frame, to: self.view)
+        scrollView.scrollRectToVisible(errorViewRect, animated: true)        
+    }
+    
+    func hideErrorMessage() {
+        errorView.isHidden = true
+    }
+    
+    //MARK: login textField processing
+    func enterPhoneCountryCode(countryCode: String) {
+        var loginText = ""
+        
+        if let text = loginEnterView.textField.text {
+            loginText = text
+        }
+        
+        loginText = loginText + countryCode
+        loginEnterView.textField.text = loginText
+    }
+    
+    func insertPhoneCountryCode(countryCode: String) {
+        var loginText = countryCode
+        
+        if let text = loginEnterView.textField.text {
+            loginText = loginText + text
+        }
+        
+        loginEnterView.textField.text = loginText
+    }
+    
+    //MARK: block user processing
     func failedBlockError() {
         showErrorMessage(with: TextConstants.hourBlockLoginError)
+    }
+}
+
+// MARK: - SupportBannerViewDelegate
+extension LoginViewController: SupportBannerViewDelegate {
+    func openSupport() {
+        output?.openSupport()
     }
 }

@@ -1,5 +1,10 @@
 import UIKit
 
+protocol CaptchaViewErrorDelegate: class {
+    
+    func showCaptchaError(error: Error)
+}
+
 final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var captchaImageView: UIImageView! {
@@ -37,14 +42,14 @@ final class CaptchaView: UIView, FromNib {
         }
     }
     
-    @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
+    @IBOutlet weak var captchaAnswerTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.placeholder = TextConstants.captchaAnswerPlaceholder
+            newValue.quickDismissPlaceholder = TextConstants.captchaAnswerPlaceholder
             
             newValue.returnKeyType = .done
             
@@ -54,7 +59,6 @@ final class CaptchaView: UIView, FromNib {
             /// removed useless features
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
-            newValue.autocapitalizationType = .none
             newValue.enablesReturnKeyAutomatically = true
             if #available(iOS 11.0, *) {
                 newValue.smartQuotesType = .no
@@ -80,6 +84,7 @@ final class CaptchaView: UIView, FromNib {
     }
     
     var currentCaptchaUUID = ""
+    weak var delegate: CaptchaViewErrorDelegate?
     
     private let captchaService = CaptchaService()
     private var player: AVAudioPlayer?
@@ -131,13 +136,18 @@ final class CaptchaView: UIView, FromNib {
                 }
             }
             
-        }, fail: { error in
-            /// When you open the LoginViewController, another request is made to the server, which will already show 503 error
-            if !error.isServerUnderMaintenance || !(UIApplication.topController() is LoginViewController) {
-                DispatchQueue.main.async {
-                    UIApplication.showErrorAlert(message: error.description)
+            }, fail: { [weak self] error in
+                self?.delegate?.showCaptchaError(error: error)
+                
+                /// When you open the LoginViewController, another request is made to the server, which will already show 503 error
+                let topController = UIApplication.topController()
+                if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
+                    if !error.isServerUnderMaintenance {
+                        DispatchQueue.main.async {
+                            UIApplication.showErrorAlert(message: error.description)
+                        }
+                    }
                 }
-            }
         })
     }
     
@@ -151,10 +161,15 @@ final class CaptchaView: UIView, FromNib {
                     self?.playCaptchaAudio(from: captchaData)
                 }
             }
-        }, fail: { error in
-            DispatchQueue.main.async {
-                UIApplication.showErrorAlert(message: error.description)
-            }
+            }, fail: { [weak self] error in
+                self?.delegate?.showCaptchaError(error: error)
+                
+                 let topController = UIApplication.topController()
+                if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
+                    DispatchQueue.main.async {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
+                }
         })
     }
     

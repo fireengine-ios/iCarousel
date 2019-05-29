@@ -1180,6 +1180,7 @@ Please check I have understood the intended command here*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
 "package_renew_date" = "Sera renouvelé le: %@";
 "percentage_used" = "%.0f%% utilisé";
+"used_and_left_space" = "\n%1$@ / %2$@ utilisé\n";
 "used_and_left_space" = "%1$@ / %2$@ utilisé\n";
 "percentage_used_two_lines" = "%.0f%%\nutilisé";
 "my_usage_storage" = "Mon utilisation de data";
@@ -1212,6 +1213,8 @@ Please check I have understood the intended command here*/
 "password_changed_successfully_relogin" = "Vous avez changé votre mot de passe avec succès. Veuillez vous reconnecter avec votre nouveau mot de passe.";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
 "user_profile_turkcell_gsm_alert" = "Vous ne pouvez pas mettre à jour votre numéro de téléphone, pour plus de détails: %@";
 "user_profile_birthday_placeholder" = "JJ MM AAAA";
 "send_link" = "";

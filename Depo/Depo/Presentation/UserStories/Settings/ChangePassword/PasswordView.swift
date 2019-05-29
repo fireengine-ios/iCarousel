@@ -2,6 +2,9 @@ import UIKit
 
 final class PasswordView: UIView, NibInit {
     
+    private let openedEyeImage = UIImage(named: "ic_eye_show")
+    private let closedEyeImage = UIImage(named: "ic_eye_hide")
+
     @IBOutlet private weak var showPasswordButton: UIButton! {
         willSet {
             /// in IB: UIButton(type: .custom)
@@ -36,6 +39,7 @@ final class PasswordView: UIView, NibInit {
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.isSecureTextEntry = true
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
@@ -56,18 +60,19 @@ final class PasswordView: UIView, NibInit {
     
     /// can be optmized with one check of "passwordTextField.isSecureTextEntry"
     private func toggleSecureType() {
-        passwordTextField.isSecureTextEntry.toggle()
-        
-        passwordTextField.clearButtonMode = passwordTextField.isSecureTextEntry ? .never : .whileEditing
-        
-        let showPasswordButtonIconName = passwordTextField.isSecureTextEntry ? "ic_eye_show" : "ic_eye_hide"
-        showPasswordButton.setImage(UIImage(named: showPasswordButtonIconName), for: .normal)
+        passwordTextField.toggleTextFieldSecureType()
+        showPasswordButton.isSelected.toggle()
+    }
+    
+    private func configureButton() {
+        showPasswordButton.setImage(openedEyeImage, for: .normal)
+        showPasswordButton.setImage(closedEyeImage, for: .selected)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        toggleSecureType()
+        configureButton()
     }
     
     func showUnderlineAnimated() {

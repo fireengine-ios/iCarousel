@@ -11,6 +11,17 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     weak var view: UserProfileViewInput!
     var interactor: UserProfileInteractorInput!
     var router: UserProfileRouterInput!
+    
+    // MARK: Utility methods
+    private func getPhoneWithAddedCodeIfNeeded() -> String {
+        var phoneNumber = view.getPhoneNumber()
+        
+        if !phoneNumber.contains("+") {
+            phoneNumber = CoreTelephonyService().callingCountryCode() + phoneNumber
+        } 
+        
+        return phoneNumber
+    }
 
     // interactor out
     
@@ -30,7 +41,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.endSaving()
         view.setupEditState(false)
         if let navigationController = view.getNavigationController() {
-            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
+            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: getPhoneWithAddedCodeIfNeeded())
         }
     }
     

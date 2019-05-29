@@ -908,6 +908,9 @@
 "password_changed_successfully_relogin" = "Ai schimbat cu succes parola, te rugăm să te conectezi cu datele tale";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "DD MM AAAA";
 "user_profile_turkcell_gsm_alert" = "Nu puteți actualiza numărul de telefon, pentru detalii: %@";
 "user_profile_birthday_placeholder" = "ZZ LL AAAA";
 "send_link" = "";

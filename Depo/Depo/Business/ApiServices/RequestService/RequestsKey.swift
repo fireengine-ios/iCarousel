@@ -19,6 +19,7 @@ struct LbRequestkeys {
     static let off = "off"
     static let language = "language"
     static let eulaId = "eulaId"
+    static let sendOtp = "sendOtp"
     static let referenceToken = "referenceToken"
     static let otp = "otp"
     static let processPersonalData = "processPersonalData"

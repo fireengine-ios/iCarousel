@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SupportFormController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="2pQ-Xv-lt4" id="ttU-FV-q58"/>
+                <outlet property="sendButton" destination="CHb-qr-U2J" id="GCh-vx-Gos"/>
+                <outlet property="stackView" destination="6Tq-17-xxS" id="akV-8I-pPg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pQ-Xv-lt4">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qei-N7-1wp">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="102" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Tq-17-xxS">
+                                    <rect key="frame" x="20" y="20" width="280" height="102"/>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHb-qr-U2J" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="72" y="142" width="176" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="SG8-PV-DDT"/>
+                                    </constraints>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onSendButton:" destination="-1" eventType="touchUpInside" id="5KL-TO-tSf"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="6Tq-17-xxS" firstAttribute="top" secondItem="qei-N7-1wp" secondAttribute="top" constant="20" id="bwd-kA-PgP"/>
+                                <constraint firstItem="6Tq-17-xxS" firstAttribute="leading" secondItem="qei-N7-1wp" secondAttribute="leading" constant="20" id="fsx-lf-5RX"/>
+                                <constraint firstItem="CHb-qr-U2J" firstAttribute="top" secondItem="6Tq-17-xxS" secondAttribute="bottom" constant="20" id="hFt-kd-eQz"/>
+                                <constraint firstItem="CHb-qr-U2J" firstAttribute="centerX" secondItem="qei-N7-1wp" secondAttribute="centerX" id="lei-cn-c53"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CHb-qr-U2J" secondAttribute="bottom" constant="20" id="yDH-pB-4pf"/>
+                                <constraint firstAttribute="trailing" secondItem="6Tq-17-xxS" secondAttribute="trailing" constant="20" id="zKx-BI-Pw5"/>
+                                <constraint firstItem="CHb-qr-U2J" firstAttribute="width" secondItem="qei-N7-1wp" secondAttribute="width" multiplier="0.55" id="zlX-cz-NQW"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="qei-N7-1wp" firstAttribute="leading" secondItem="2pQ-Xv-lt4" secondAttribute="leading" id="GHd-fX-QxI"/>
+                        <constraint firstItem="qei-N7-1wp" firstAttribute="width" secondItem="2pQ-Xv-lt4" secondAttribute="width" id="ZxN-Mc-lrB"/>
+                        <constraint firstAttribute="trailing" secondItem="qei-N7-1wp" secondAttribute="trailing" id="lIH-vw-0bm"/>
+                        <constraint firstItem="qei-N7-1wp" firstAttribute="top" secondItem="2pQ-Xv-lt4" secondAttribute="top" id="uJf-RH-fKB"/>
+                        <constraint firstAttribute="bottom" secondItem="qei-N7-1wp" secondAttribute="bottom" id="v7X-e6-Pxu"/>
+                        <constraint firstItem="qei-N7-1wp" firstAttribute="height" secondItem="2pQ-Xv-lt4" secondAttribute="height" priority="250" id="zsz-xw-eG5"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2pQ-Xv-lt4" secondAttribute="trailing" id="Bty-pq-2Mz"/>
+                <constraint firstItem="2pQ-Xv-lt4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KgB-sx-pNo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2pQ-Xv-lt4" secondAttribute="bottom" id="SGK-ot-CnU" customClass="KeyboardLayoutConstraint" customModule="lifebox" customModuleProvider="target"/>
+                <constraint firstItem="2pQ-Xv-lt4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f5F-OL-SgI"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

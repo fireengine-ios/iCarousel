@@ -93,6 +93,12 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
 		my_gym
 		diawi
 	end
+	
+	lane :beta_diawi_preprod do
+		switch_to_preprod
+		beta_diawi
+		switch_to_prod
+	end
 
 	lane :beta_fabric do
 		my_gym

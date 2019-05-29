@@ -861,6 +861,8 @@
 "delete_duplicated_contacts" = "Eliminar los contactos repetidos en su guía telefónica.";
 "leave_middle_membership" = "Terminar la membresía Estándar+";
 "leave_middle_turkcell" = "Para cancelar el paquete por favor escribir CANCELACIÓN LIFEBOX ESTÁNDAR+ y enviarlo a 2200.";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
 "package_FWI_cancel_text" = "Puede cancelar o administrar su suscripción a Digicel desde la aplicación My Digicel, Atención al cliente o En la tienda";
 "package_jamaica_cancel_text" = "Puede cancelar o administrar su suscripción a Digicel desde la aplicación My Digicel, Atención al cliente o En la tienda";
 "feature_digicell_cancel_text" = "Ya que eres el usuario de Digicell puede seguir utilizando gratuito las características Premium.";
@@ -908,6 +910,8 @@
 "password_changed_successfully_relogin" = "Se ha cambiado con éxito tu contraseña. Por favor entrar de nuevo con tu nueva contraseña.";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
 "user_profile_turkcell_gsm_alert" = "No puede actualizar su número de teléfono, para detalles: %@";
 "user_profile_birthday_placeholder" = "DD MM AAAA";
 "send_link" = "";

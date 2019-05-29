@@ -76,8 +76,6 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
     
-    static let emptyEmailUserCloseLimit = 3
-    
     static let logDuration: TimeInterval = 24 * 60 * 60 * 3
     static let logMaxSize: UInt64 = 5_242_880
     
@@ -150,6 +148,8 @@ struct NumericConstants {
     
     static let maxStringLengthForUserProfile = 255
     
+    static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
+    static let profileStackViewShowSubtitleSpacing: CGFloat = 2
     static let firstResponderBottomOffset: CGFloat = 50
 }
 

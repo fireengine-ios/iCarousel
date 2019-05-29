@@ -869,6 +869,8 @@
 "delete_duplicated_contacts" = "Удалить дубликаты контактов в вашей телефонной книге";
 "leave_middle_membership" = "Оставить подписку Стандарт+";
 "leave_middle_turkcell" = "Чтобы отменить ваш пакет, пожалуйста, отправьте СМС на 2200 с текстом IPTAL LIFEBOX STANDART+";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
 "package_FWI_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
 "package_jamaica_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
 "feature_digicell_cancel_text" = "Вы можете продолжать использовать функции Премиум пользователя, поскольку вы являетесь абонентом Digicell";
@@ -916,6 +918,8 @@
 "password_changed_successfully_relogin" = "Ваш пароль успешно изменен. Пожалуйста, войдите в приложение с вашим новым паролем";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
 "user_profile_turkcell_gsm_alert" = "Вы не можете обновить свой номер телефона, для деталей: %@";
 "user_profile_birthday_placeholder" = "ДД ММ ГГГГ";
 "send_link" = "";

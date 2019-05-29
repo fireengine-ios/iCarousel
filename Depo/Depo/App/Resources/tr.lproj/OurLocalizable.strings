@@ -956,3 +956,13 @@
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Sıkça Sorulan Sorular";
+"captcha_is_empty" = "Lütfen görselde görünen karakterleri girin";
+"enter_your_password" = "";
+"re_enter_your_password" = "";
+"signup_support_info" = "";
+"missing_information" = "";
+"please_enter_your_missing_account_information" = "";
+"login_email_or_phone_placeholder" = "";
+"login_password_placeholder" = "";
+"login_email_or_phone_error" = "";
+"login_password_error" = "";

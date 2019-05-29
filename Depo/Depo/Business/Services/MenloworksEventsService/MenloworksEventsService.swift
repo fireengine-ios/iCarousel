@@ -6,10 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-//FIXME: Menloworks and Curio should be added to the AnalyticsService
-import Curio_iOS_SDK
-
-
+//FIXME: Menloworks should be added to the AnalyticsService
 class MenloworksEventsService {
 
     private init() { }
@@ -21,7 +18,6 @@ class MenloworksEventsService {
     
     private func mergedHit(event: String) {
         MPush.hitEvent(event)
-        CurioSDK.shared().sendEvent(event, eventValue: "")
     }
     
     func onFirstLaunch() {
@@ -253,13 +249,11 @@ class MenloworksEventsService {
     
     func onDownloadItem(with type: String, success: Bool) {
         let eventName = String(format: MenloworksEventsConstants.downloadedItemFormat, type)
-        CurioSDK.shared().sendEvent(eventName, eventValue: success ? "Success" : "Fail")
     }
     
     func onShareItem(with type: FileType, toApp: String) {
         let itemType = (type == .image) ? "Photo" : "Video"
         let eventName = String(format: MenloworksEventsConstants.sharedItemFormat, itemType, toApp)
-        CurioSDK.shared().sendEvent(eventName, eventValue: "Success")
     }
     
     func profileName(isEmpty: Bool) {

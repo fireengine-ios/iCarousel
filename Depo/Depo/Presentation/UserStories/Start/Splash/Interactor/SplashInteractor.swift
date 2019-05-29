@@ -60,18 +60,18 @@ class SplashInteractor: SplashInteractorInput {
         
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
-                isTryingToLogin = false
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
+                isTryingToLogin = false
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
 //                    ItemsRepository.sharedSession.updateCache()
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                        self?.isTryingToLogin = false
 //                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
+                        self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
@@ -84,7 +84,6 @@ class SplashInteractor: SplashInteractorInput {
                         }
                     })
                 }, fail: { [weak self] response in
-                    self?.isTryingToLogin = false
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
                     self?.output.asyncOperationSuccess()
@@ -93,23 +92,23 @@ class SplashInteractor: SplashInteractorInput {
                     } else {
                         self?.failLogin()
                     }
+                    self?.isTryingToLogin = false
                 })
             }
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                self?.isTryingToLogin = false
                 self?.successLogin()
             }, fail: { [weak self] error in
                 /// we don't need logout here
                 /// only internet error
                 //self?.failLogin()
                 DispatchQueue.toMain {
-                    self?.isTryingToLogin = false
                     if ReachabilityService().isReachable {
                         self?.output.onFailGetAccountInfo(error: error)
                     } else {
                         self?.output.onNetworkFail()
                     }
+                    self?.isTryingToLogin = false
                 }
             })
         }
@@ -130,6 +129,7 @@ class SplashInteractor: SplashInteractorInput {
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()
+            self.isTryingToLogin = false
         }
     }
     

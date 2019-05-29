@@ -873,6 +873,8 @@
 "delete_duplicated_contacts" = "احذف الاسماء المتكررة في الدليل الخاص بي!";
 "leave_middle_membership" = "انهي العضوية القياسية + ";
 "leave_middle_turkcell" = "من أجل الغاء الحزمة الرجاء اكتب IPTAL LIFEBOX STANDART+ وارسلها على الرقم 2200.";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
 "package_FWI_cancel_text" = "يمكنك إلغاء أو إدارة اشتراك Digicel من تطبيق My Digicel أو خدمة العملاء أو في المتجر.";
 "package_jamaica_cancel_text" = "يمكنك إلغاء أو إدارة اشتراك Digicel من تطبيق My Digicel أو خدمة العملاء أو في المتجر.";
 "feature_digicell_cancel_text" = "نظرًا لأنك مستخدم لخدمة Digicell ، فلا يزال بإمكانك استخدام ميزات Premium مجانًا.";
@@ -920,6 +922,8 @@
 "password_changed_successfully_relogin" = "تم تغيير كلمة المرور بنجاح. يرجى تسجيل الدخول مرة أخرى باستخدام كلمة المرور الجديدة.";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
 "user_profile_turkcell_gsm_alert" = "لا يمكنك تحديث رقم هاتفك ، للحصول على التفاصيل :٪@";
 "user_profile_birthday_placeholder" = "يوم/شهر/سنة";
 "send_link" = "";

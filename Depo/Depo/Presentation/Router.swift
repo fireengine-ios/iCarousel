@@ -326,12 +326,16 @@ class RouterVC: NSObject {
     
     // MARK: Terms
     
-    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?) -> UIViewController {
+    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) -> UIViewController {
         let conf = TermsAndServicesModuleInitializer(delegate: delegate)
         let viewController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen",
                                                              bundle: nil)
         
-        conf.setupConfig(withViewController: viewController, fromLogin: login, phoneNumber: phoneNumber)
+        if let signUpResponse = signUpResponse, let userInfo = userInfo {
+            conf.setupConfig(withViewController: viewController, fromLogin: login, withSignUpSuccessResponse: signUpResponse, userInfo: userInfo, phoneNumber: phoneNumber)
+        } else {
+            conf.setupConfig(withViewController: viewController, fromLogin: login, phoneNumber: phoneNumber )
+        }
         return viewController
     }
     
@@ -894,5 +898,9 @@ class RouterVC: NSObject {
         controller.configure(with: models, analyzesCount: analyzesCount, isShowTabBar: isShowTabBar)
         
         return controller
+    }
+    
+    var supportFormController: UIViewController {
+        return SupportFormController()
     }
 }
