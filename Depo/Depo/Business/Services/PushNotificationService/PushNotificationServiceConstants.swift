@@ -46,5 +46,6 @@ enum PushNotificationAction: String {
     case changePassword = "change_password"
     case photopickHistory = "photopick_history"
     case myStorage = "my_storage"
+    case becomePremium = "become_premium"
 }
 

@@ -91,6 +91,7 @@ final class PushNotificationService {
         case .changePassword: openChangePassword()
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
+        case .becomePremium: openBecomePremium()
         }
         notificationAction = nil
     }
@@ -303,5 +304,9 @@ final class PushNotificationService {
     
     private func openMyStorage() {
         pushTo(router.myStorage(usageStorage: nil))
+    }
+    
+    private func openBecomePremium() {
+        pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
     }
 }
