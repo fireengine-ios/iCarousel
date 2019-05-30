@@ -106,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let urlHost = url.host {
             if PushNotificationService.shared.assignDeepLink(innerLink: urlHost){
                 PushNotificationService.shared.openActionScreen()
+                storageVars.deepLink = urlHost
             }
         }
         
