@@ -104,25 +104,24 @@ final class PhotoVideoDataSource: NSObject {
         getConvertedObjects(at: Array(selectedIndexPaths), wrapItemsCallback: wrapDataCallBack)
     }
     
+    private func getObject(at indexPath: IndexPath) -> MediaItem? {
+        guard let section = fetchedResultsController.sections?[safe: indexPath.section],
+            section.numberOfObjects > indexPath.row else {
+                return nil
+        }
+        return fetchedResultsController.object(at: indexPath)
+    }
+    
     func getObject(at indexPath: IndexPath, mediaItemCallback: @escaping MediaItemCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
-                section.numberOfObjects > indexPath.row else {
-                mediaItemCallback(nil)
-                    return
-            }
-            mediaItemCallback(self.fetchedResultsController.object(at: indexPath))
+            mediaItemCallback(self?.getObject(at: indexPath))
         }
     }
     
     func getObjects(at indexPaths: [IndexPath], mediaItemsCallback: @escaping MediaItemsCallBack) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
             mediaItemsCallback(indexPaths.compactMap { indexPath in
-                guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
-                    section.numberOfObjects > indexPath.row else {
-                        return nil
-                }
-                return self.fetchedResultsController.object(at: indexPath)
+                self?.getObject(at: indexPath)
             })
         }
     }
@@ -130,11 +129,10 @@ final class PhotoVideoDataSource: NSObject {
     func getConvertedObjects(at indexPaths: [IndexPath], wrapItemsCallback: @escaping WrapObjectsCallBack) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
             wrapItemsCallback(indexPaths.compactMap { indexPath in
-                guard let self = self, let section = self.fetchedResultsController.sections?[safe: indexPath.section],
-                    section.numberOfObjects > indexPath.row else {
-                        return nil
+                guard let mediaItem = self?.getObject(at: indexPath) else {
+                    return nil
                 }
-                return WrapData(mediaItem:self.fetchedResultsController.object(at: indexPath))
+                return WrapData(mediaItem: mediaItem)
             })
         }
     }
@@ -418,7 +416,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         cleanChanges()
         
         if !collectionView.isDragging, let firstVisibleItem = firstOffsetSavedVisibleItem {
-            focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
+            focusedIndexPath = indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
         
@@ -468,7 +466,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 assertionFailure("👉 CALL THIS FROM MAIN THREAD")
             }
             #endif
-            firstOffsetSavedVisibleItem = fetchedResultsController.object(at: indexPath)
+            firstOffsetSavedVisibleItem = getObject(at: indexPath)
             if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
             }
