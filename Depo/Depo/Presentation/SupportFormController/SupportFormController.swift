@@ -89,7 +89,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
                            TextConstants.supportFormSubject3,
                            TextConstants.supportFormSubject4,
                            TextConstants.supportFormSubject5,
-                           TextConstants.supportFormSubject6]
+                           TextConstants.supportFormSubject6,
+                           TextConstants.supportFormSubject7]
         return newValue
     }()
     
