@@ -828,13 +828,13 @@ enum GADementionValues {
         var text: String {
             switch self {
             case .gsm:
-                return "Login with Password - GSM"
+                return "GSM no ile şifreli giriş"
             case .email:
-                return "Login with Password – Email"
+                return "Email ile giriş"
             case .rememberLogin:
-                return "Remember Me Login"
+                return "Beni hatırla ile giriş"
             case .turkcellGSM:
-                return "3G - LTE Login"
+                return "Header Enrichment (cellular) ile giriş"
             }
         }
     }
