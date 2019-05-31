@@ -48,7 +48,7 @@ final class PhotoVideoCell: UICollectionViewCell {
 
     @IBOutlet private weak var thumbnailBlurVisualEffectView: UIVisualEffectView! {
         willSet {
-            newValue.alpha = 0.9
+            newValue.alpha = 0.5
         }
     }
 
