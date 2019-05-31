@@ -13,7 +13,7 @@ final class CoreDataStack: NSObject {
     
     static let `default` = CoreDataStack()
     
-    private let modelName = "LifeboxDataModel"
+    private let modelName = "LifeBoxModel"
     private let persistentStoreName = "DataModel"
     
     
