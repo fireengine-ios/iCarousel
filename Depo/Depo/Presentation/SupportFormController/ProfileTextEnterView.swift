@@ -8,6 +8,7 @@ class ProfileTextEnterView: UIView {
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
+        newValue.numberOfLines = 0
         return newValue
     }()
     

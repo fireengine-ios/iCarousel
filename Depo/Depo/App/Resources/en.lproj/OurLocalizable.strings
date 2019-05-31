@@ -972,6 +972,7 @@
 "support_form_subject_4" = "Security text";
 "support_form_subject_5" = "Turkcell Password";
 "support_form_subject_6" = "Automatic Log-in";
+"support_form_subject_7" = "Other";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
