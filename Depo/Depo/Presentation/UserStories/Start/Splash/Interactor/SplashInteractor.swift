@@ -17,6 +17,7 @@ class SplashInteractor: SplashInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var reachabilityService = Reachability()
+    private lazy var authorizationRepository: AuthorizationRepository = factory.resolve()
     
     private var isTryingToLogin = false
     private var isReachabilityStarted = false
@@ -50,12 +51,32 @@ class SplashInteractor: SplashInteractorInput {
             assertionFailure("\(#function): can't start reachability notifier")
         }
     }
-
+    
     func startLoginInBackground() {
         if isTryingToLogin {
             return
         }
         isTryingToLogin = true
+        refreshAccessToken { [weak self] in
+            /// self can be nil due logout
+            self?.loginInBackground()
+        }
+    }
+    
+    private func refreshAccessToken(complition: @escaping VoidHandler) {
+        if tokenStorage.refreshToken == nil {
+            failLogin()
+        }
+        authorizationRepository.refreshTokens { _, accessToken, _  in
+            if let accessToken = accessToken {
+                let tokenStorage: TokenStorage = factory.resolve()
+                tokenStorage.accessToken = accessToken
+            }
+            complition()
+        }
+    }
+    
+    private func loginInBackground() {
         setupReachabilityIfNeed()
         
         if tokenStorage.accessToken == nil {
@@ -67,9 +88,7 @@ class SplashInteractor: SplashInteractorInput {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
-//                    ItemsRepository.sharedSession.updateCache()
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-//                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
