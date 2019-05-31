@@ -40,7 +40,10 @@ extension NSPersistentStoreCoordinator {
         }
         
         do {
-            let url = documents.appendingPathComponent("\(name).sqlite")
+            //FIXME: check if migration is needed
+            let migrationIsNeeded = true
+            let persistentStoreName = migrationIsNeeded ? "DataModel" : name
+            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
