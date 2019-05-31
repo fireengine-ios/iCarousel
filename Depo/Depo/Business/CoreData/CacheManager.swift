@@ -21,7 +21,7 @@ final class CacheManager {
     
     static let shared = CacheManager()
     
-    private static let pageSize: Int = 1000
+    private static let pageSize: Int = 500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
 
