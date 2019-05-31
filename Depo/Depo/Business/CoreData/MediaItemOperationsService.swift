@@ -855,7 +855,7 @@ final class MediaItemOperationsService {
         }
         
         CoreDataStack.default.performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0 OR hasMissingDateRemotes = true OR relatedRemotes.@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
             self?.executeRequest(predicate: predicate, context: context) { mediaItems in
                 completion(mediaItems)
             }
@@ -871,7 +871,7 @@ final class MediaItemOperationsService {
             let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@) AND isLocalItemValue == true", actualPhotoLibItemsIDs)
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 mediaItems.forEach {
-                        context.delete($0)
+                    context.delete($0)
                 }
                 CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
                     /// put notification here that item deleted
