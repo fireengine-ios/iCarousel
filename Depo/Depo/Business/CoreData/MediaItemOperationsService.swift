@@ -855,7 +855,7 @@ final class MediaItemOperationsService {
         }
         
         CoreDataStack.default.performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0 OR hasMissingDateRemotes = true OR relatedRemotes.@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0 AND hasMissingDateRemotes = false AND relatedRemotes.@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
             self?.executeRequest(predicate: predicate, context: context) { mediaItems in
                 completion(mediaItems)
             }
