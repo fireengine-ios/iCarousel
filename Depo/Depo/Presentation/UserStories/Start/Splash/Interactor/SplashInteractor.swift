@@ -63,6 +63,7 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
+    /// refresh access token on app start
     private func refreshAccessToken(complition: @escaping VoidHandler) {
         if tokenStorage.refreshToken == nil {
             failLogin()
