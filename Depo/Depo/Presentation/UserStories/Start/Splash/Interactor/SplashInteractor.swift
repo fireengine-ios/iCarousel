@@ -68,6 +68,7 @@ class SplashInteractor: SplashInteractorInput {
             failLogin()
         }
         authorizationRepository.refreshTokens { _, accessToken, _  in
+            // TODO: create new func refreshTokens to save and return token
             if let accessToken = accessToken {
                 let tokenStorage: TokenStorage = factory.resolve()
                 tokenStorage.accessToken = accessToken
