@@ -44,22 +44,11 @@ final class CoreDataStack: NSObject {
     @available(iOS 10.0, *)
     private lazy var persistentContainer: NSPersistentContainer = {
         let modelName = "LifeBoxModel"
+        let storeName = "DataModel"
+        
         let container = NSPersistentContainer(name: modelName)
         
-        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            return container
-//            throw NSPersistentStoreCoordinator.CoordinatorError.storePathNotFound
-        }
-        
-        do {
-            //FIXME: check if migration is needed
-            let migrationIsNeeded = true
-            let persistentStoreName = migrationIsNeeded ? "DataModel" : modelName
-            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                           NSInferMappingModelAutomaticallyOption: true]
-            try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
+        let loadDefaultStore = {
             container.loadPersistentStores { (storeDescription, error) in
                 print("CoreData: Inited \(storeDescription)")
                 if let error = error {
@@ -67,6 +56,20 @@ final class CoreDataStack: NSObject {
                     return
                 }
             }
+        }
+        
+        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            loadDefaultStore()
+            return container
+        }
+        
+        do {
+            let url = documents.appendingPathComponent("\(storeName).sqlite")
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                           NSInferMappingModelAutomaticallyOption: true]
+            try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
+        } catch {
+            loadDefaultStore()
         }
         
         return container

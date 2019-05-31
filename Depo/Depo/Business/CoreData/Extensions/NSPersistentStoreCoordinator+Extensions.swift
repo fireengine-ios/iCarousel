@@ -33,6 +33,7 @@ extension NSPersistentStoreCoordinator {
     
     /// Return NSPersistentStoreCoordinator with set coordinator
     static func coordinator(name: String) throws -> NSPersistentStoreCoordinator? {
+        let storeName = "DataModel"
         let coordinator = try NSPersistentStoreCoordinator(name: name)
         
         guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
@@ -40,10 +41,7 @@ extension NSPersistentStoreCoordinator {
         }
         
         do {
-            //FIXME: check if migration is needed
-            let migrationIsNeeded = true
-            let persistentStoreName = migrationIsNeeded ? "DataModel" : name
-            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
+            let url = documents.appendingPathComponent("\(storeName).sqlite")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
