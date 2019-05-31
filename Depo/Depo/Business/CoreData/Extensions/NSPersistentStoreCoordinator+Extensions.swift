@@ -32,15 +32,15 @@ extension NSPersistentStoreCoordinator {
     }
     
     /// Return NSPersistentStoreCoordinator with set coordinator
-    static func coordinator(name: String) throws -> NSPersistentStoreCoordinator? {
-        let coordinator = try NSPersistentStoreCoordinator(name: name)
+    static func coordinator(modelName: String, persistentStoreName: String) throws -> NSPersistentStoreCoordinator? {
+        let coordinator = try NSPersistentStoreCoordinator(name: modelName)
         
         guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
             throw CoordinatorError.storePathNotFound
         }
         
         do {
-            let url = documents.appendingPathComponent("\(name).sqlite")
+            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
