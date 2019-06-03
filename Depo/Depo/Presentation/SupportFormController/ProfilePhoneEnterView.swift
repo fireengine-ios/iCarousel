@@ -66,14 +66,17 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
             
+            let telephonyService = CoreTelephonyService()
+            
             /// empty for simulator
-            newValue.text = CoreTelephonyService().callingCountryCode()
+            newValue.text = telephonyService.callingCountryCode()
+
             #if targetEnvironment(simulator)
             newValue.text = "+375"
             #endif
             
             let phoneCodeInputView = PhoneCodeInputView()
-            phoneCodeInputView.setValuePickerView(with: CoreTelephonyService().callingCountryCode())
+            phoneCodeInputView.setValuePickerView(with: telephonyService.callingCountryCode())
             phoneCodeInputView.didSelect = { [weak newValue] gsmModel in
                 newValue?.text = gsmModel.gsmCode
             }
