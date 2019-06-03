@@ -71,10 +71,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// empty for simulator
             newValue.text = telephonyService.callingCountryCode()
 
-            if newValue.text?.isEmpty ?? true {
-                newValue.text = telephonyService.countryCodeByLang()
-            } 
-
             #if targetEnvironment(simulator)
             newValue.text = "+375"
             #endif
