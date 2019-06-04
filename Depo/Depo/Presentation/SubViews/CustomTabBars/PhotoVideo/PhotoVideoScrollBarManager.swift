@@ -36,7 +36,6 @@ final class PhotoVideoScrollBarManager {
     }
     
     func updateYearsView(with allItems: [MediaItem], cellHeight: CGFloat, numberOfColumns: Int) {
-        print("+ a")
         if allItems.isEmpty {
             return
         }
