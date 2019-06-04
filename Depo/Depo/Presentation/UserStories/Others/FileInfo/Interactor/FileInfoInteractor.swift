@@ -26,6 +26,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     func viewIsReady() {
         if let item = item {
             output.setObject(object: item)
+            AnalyticsService().logScreen(screen: .info(item.fileType))
         }
     }
     
