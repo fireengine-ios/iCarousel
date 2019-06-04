@@ -134,6 +134,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     
                     MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
                     
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                              eventActions: .share,
+                                                              eventLabel: .shareViaApp(activityTypeString.knownAppName()))
+
                     do {
                         try FileManager.default.removeItem(at: directoryURL)
                     } catch {
@@ -164,6 +168,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
+        
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                 eventActions: .share,
+                                                 eventLabel: .shareViaLink)
+        
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
