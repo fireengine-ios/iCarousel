@@ -100,8 +100,8 @@ final class YearsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        lock.lock()
-        defer { lock.unlock() }
+//        lock.lock()
+//        defer { lock.unlock() }
         
         var lastLabelOffset: CGFloat = 0
         
@@ -139,18 +139,16 @@ final class YearsView: UIView {
     
     // MARK: - Dates
     
-    func update(by dates: [Date]) {
-        lock.lock()
-        defer { lock.unlock() }
-        let dates = dates /// guard for dates changing 
+    func update(by yearMonthValues: [YearMonthTuple]) {
+//        lock.lock()
+//        defer { lock.unlock() }
         
-        if dates.isEmpty {
+        if yearMonthValues.isEmpty {
             return
         }
         
-        let yearsArray = getYearsArray(from: dates)
-        
-        let newYearsArray = updateLabelsOffsetRatio(from: yearsArray, dates: dates)
+        let yearsArray = getYearsArray(from: yearMonthValues)
+        let newYearsArray = updateLabelsOffsetRatio(from: yearsArray)
         udpateLabels(from: newYearsArray)
     }
     
@@ -167,17 +165,13 @@ final class YearsView: UIView {
         self.additionalSections = additionalSections
     }
     
-    private func getYearsArray(from dates: [Date]) -> YearsArray {
+    private func getYearsArray(from yearMonthValues: [YearMonthTuple]) -> YearsArray {
         var yearByMonthNumberOfDays: [Int: [Int: Int]] = [:]
         
-        for date in dates {
+        for date in yearMonthValues {
             
-            let componets = Calendar.current.dateComponents([.year, .month], from: date)
-            
-            guard let year = componets.year, let month = componets.month else {
-                assertionFailure()
-                return []
-            }
+            let year = date.year
+            let month = date.month
             
             if yearByMonthNumberOfDays[year] == nil {
                 yearByMonthNumberOfDays[year] = [month: 1]
@@ -210,7 +204,7 @@ final class YearsView: UIView {
         return yearsArray
     }
     
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) -> YearsArray {        
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray) -> YearsArray {
         
         let totalLines = yearsArray.reduce(0) { sum, arg in
             sum + arg.value.lines
@@ -256,12 +250,13 @@ final class YearsView: UIView {
             previusOffsetRation = yearContentRatio
             labelsOffsetRatio.append(yearContentRatio)
         }
+        
         return yearsArray
     }
     
     private func udpateLabels(from yearsArray: YearsArray) {
         DispatchQueue.main.async {
-            self.lock.lock()
+//            self.lock.lock()
             
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
@@ -277,8 +272,7 @@ final class YearsView: UIView {
                 self.addSubview(label)
                 self.labels.append(label)
             }
-            
-            self.lock.unlock()
+//            self.lock.unlock()
         }
     }
     
