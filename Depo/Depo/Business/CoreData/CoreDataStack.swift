@@ -65,10 +65,10 @@ final class CoreDataStack: NSObject {
         
         do {
             let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
-//            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-//                           NSInferMappingModelAutomaticallyOption: true]
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                           NSInferMappingModelAutomaticallyOption: false]
             try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
+        } catch let error {
             loadDefaultStore()
         }
         

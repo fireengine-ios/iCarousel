@@ -9,8 +9,8 @@
 import Foundation
 
 
-class MigrationPolicy_1_3: NSEntityMigrationPolicy {
-    func uuid(with trimmedLocalFileID: String) -> String {
+class MediaItemMigrationPolicy_1_3: NSEntityMigrationPolicy {
+    @objc func uuidWith(_ trimmedLocalFileID:String) -> String {
         return trimmedLocalFileID.appending("~\(UUID().uuidString)")
     }
 }

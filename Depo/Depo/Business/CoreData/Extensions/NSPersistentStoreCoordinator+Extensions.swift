@@ -41,8 +41,8 @@ extension NSPersistentStoreCoordinator {
         
         do {
             let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
-//            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-//                           NSInferMappingModelAutomaticallyOption: true]
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                           NSInferMappingModelAutomaticallyOption: false]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch {
             throw error
