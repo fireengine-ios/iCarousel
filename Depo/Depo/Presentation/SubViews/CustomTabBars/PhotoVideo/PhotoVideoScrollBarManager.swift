@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias YearMonthTuple = (year: Int, month: Int)
+
 final class PhotoVideoScrollBarManager {
     
     let scrollBar = ScrollBarView()
@@ -40,16 +42,28 @@ final class PhotoVideoScrollBarManager {
     
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
         //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
-        let dates = allItems.compactMap { $0.sortingDate as Date? }
         scrollBar.updateLayout(by: cellHeight)
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
         
-        let emptyMetaItems = allItems.filter {$0.monthValue == nil}
+        let emptyMetaItems = allItems.filter { $0.monthValue == nil }
         if !emptyMetaItems.isEmpty {
             yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
         }
         
-        yearsView.update(by: dates)
+        
+        
+        let yearMonthValues: [YearMonthTuple] = allItems.compactMap {
+            if let split = $0.monthValue?.split(separator: " "),
+                split.count == 2,
+                let year = Int(split[0]),
+                let mounth = Int(split[1])
+            {
+                return (year, mounth)
+            }
+            return nil
+        }
+        
+        yearsView.update(by: yearMonthValues)
     }
     
     func scrollViewDidScroll() {
