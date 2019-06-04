@@ -10,10 +10,6 @@ import Foundation
 
 
 class MigrationPolicy_1_3: NSEntityMigrationPolicy {
-    func sortingDate(for creationDate: NSDate?) -> NSDate? {
-        return creationDate
-    }
-    
     func uuid(with trimmedLocalFileID: String) -> String {
         return trimmedLocalFileID.appending("~\(UUID().uuidString)")
     }
