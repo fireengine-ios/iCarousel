@@ -44,26 +44,30 @@ final class PhotoVideoScrollBarManager {
         //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
         scrollBar.updateLayout(by: cellHeight)
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-        
-        let emptyMetaItems = allItems.filter { $0.monthValue == nil }
-        if !emptyMetaItems.isEmpty {
-            yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
-        }
-        
-        
-        
-        let yearMonthValues: [YearMonthTuple] = allItems.compactMap {
-            if let split = $0.monthValue?.split(separator: " "),
-                split.count == 2,
-                let year = Int(split[0]),
-                let mounth = Int(split[1])
-            {
-                return (year, mounth)
+    
+        let ids = allItems.compactMap { $0.objectID }
+        MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] mediaItems in
+            guard let self = self else {
+                return
             }
-            return nil
+            
+            let emptyMetaItems = mediaItems.filter { $0.monthValue == nil }
+            if !emptyMetaItems.isEmpty {
+                self.yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
+            }
+            
+            let yearMonthValues: [YearMonthTuple] = allItems.compactMap {
+                if let split = $0.monthValue?.components(separatedBy: " "),
+                    split.count == 2,
+                    let year = Int(split[0]),
+                    let mounth = Int(split[1])
+                {
+                    return (year, mounth)
+                }
+                return nil
+            }
+            self.yearsView.update(by: yearMonthValues)
         }
-        
-        yearsView.update(by: yearMonthValues)
     }
     
     func scrollViewDidScroll() {
