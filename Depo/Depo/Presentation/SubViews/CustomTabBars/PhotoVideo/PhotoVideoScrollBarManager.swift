@@ -57,7 +57,7 @@ final class PhotoVideoScrollBarManager {
             }
             
             let yearMonthValues: [YearMonthTuple] = allItems.compactMap {
-                if let split = $0.monthValue?.components(separatedBy: " "),
+                if let split = $0.monthValue?.split(separator: " "),
                     split.count == 2,
                     let year = Int(split[0]),
                     let mounth = Int(split[1])
