@@ -12,6 +12,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     
     private let showPasswordImage = UIImage(named: "ic_eye_show")
     private let hidePasswordImage = UIImage(named: "ic_eye_hide")
+    private let eyeSize: CGFloat = 24
     
     private let eyeButton = UIButton()
     
@@ -49,6 +50,8 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         
         topStackView.addArrangedSubview(titleLabel)
         topStackView.addArrangedSubview(eyeButton)
+        
+        eyeButton.widthAnchor.constraint(equalToConstant: eyeSize).isActive = true
         
         stackView.addArrangedSubview(topStackView)
         stackView.addArrangedSubview(subtitleLabel)
