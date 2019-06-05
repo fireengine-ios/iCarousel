@@ -1711,7 +1711,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             var recentlyDeletedIndexes = [IndexPath]()
             var recentlyDeletedSections =  IndexSet()
             
-            if idsForRemove.isEmpty { idsForRemove = items.map{ $0.uuid } }
+            if idsForRemove.isEmpty { 
+                idsForRemove = items.map{ $0.uuid } 
+            }
 
             for (index, array) in self.allItems.enumerated() {
                 var newSectionArray = [WrapData]()
