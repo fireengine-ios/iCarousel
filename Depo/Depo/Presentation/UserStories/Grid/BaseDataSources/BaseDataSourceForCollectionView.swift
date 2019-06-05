@@ -1719,17 +1719,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
-                        continue
-                    }
-                    if !newSectionArray.isEmpty {
-                        newArray.append(newSectionArray)
                     } else {
-                        recentlyDeletedSections.insert(index)
+                        newSectionArray.append(object)
                     }
                 }
                 
+                if newSectionArray.isEmpty {
+                    recentlyDeletedSections.insert(index)
+                } else {
+                    newArray.append(newSectionArray)
+                }
+                
+                self.allItems = newArray
+
                 DispatchQueue.toMain {
-                    self.allItems = newArray
                     CellImageManager.clear()
                     self.collectionView?.reloadData()
 //                    //change performBatchUpdates to the reladData() in case of crash
