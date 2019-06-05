@@ -1648,9 +1648,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 guard !items.isEmpty else {
                     return
                 }
-            
-                let semaphore = DispatchSemaphore(value: 0)
-            
+                        
                 var idsForRemove = [String]()
                 var objectsForReplaceDict = [String : Item]()
                 
@@ -1678,6 +1676,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let localIDs = serverObjects.map {
                     $0.getTrimmedLocalID()
                 }
+                    
+                let semaphore = DispatchSemaphore(value: 0)
+
                 MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
                     let foundedLocalID = localObjectsForReplace.map {
                         $0.getTrimmedLocalID()
@@ -1700,14 +1701,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                     semaphore.signal()
                 }  
+                semaphore.wait()
             } else {
                 idsForRemove = items.map{
                     $0.uuid
                 }
-                semaphore.signal()
             }
-            
-            semaphore.wait()
             
             self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
 
