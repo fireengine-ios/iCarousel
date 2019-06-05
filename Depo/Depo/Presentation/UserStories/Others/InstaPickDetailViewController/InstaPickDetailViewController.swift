@@ -60,7 +60,8 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     private var analyzesCount: InstapickAnalyzesCount?
     
     private lazy var activityManager = ActivityIndicatorManager()
-        
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -313,6 +314,8 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
             showErrorWith(message: error.localizedDescription)
             return
         }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickShare)
         
         let shareButtonRect = self.shareButton.convert(self.shareButton.bounds, to: self.view)
 
