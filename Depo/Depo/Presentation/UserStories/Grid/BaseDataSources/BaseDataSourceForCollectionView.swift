@@ -1649,6 +1649,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     return
                 }
             
+                let semaphore = DispatchSemaphore(value: 0)
+            
                 var idsForRemove = [String]()
                 var objectsForReplaceDict = [String : Item]()
                 
@@ -1696,12 +1698,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             idsForRemove.append(object.uuid)
                         }
                     }
+                    semaphore.signal()
                 }  
             } else {
                 idsForRemove = items.map{
                     $0.uuid
                 }
+                semaphore.signal()
             }
+            
+            semaphore.wait()
             
             self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
 
@@ -1710,10 +1716,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             var recentlyUpdatedIndexes = [IndexPath]()
             var recentlyDeletedIndexes = [IndexPath]()
             var recentlyDeletedSections =  IndexSet()
-            
-            if idsForRemove.isEmpty { 
-                idsForRemove = items.map{ $0.uuid } 
-            }
 
             for (index, array) in self.allItems.enumerated() {
                 var newSectionArray = [WrapData]()
