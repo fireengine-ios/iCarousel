@@ -710,6 +710,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             return
         }
         
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
+        
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
         } else {

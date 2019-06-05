@@ -47,12 +47,18 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
                 self.analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneBookBackUp)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                         eventActions: .phonebook,
+                                                         eventLabel: .contact(.backup))
+                
                 self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .backup)
             case .restore:
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneRestore)
                 MenloworksAppEvents.onContactDownloaded()
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                         eventActions: .phonebook,
+                                                         eventLabel: .contact(.restore))
+                
                 self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .restore)
             case .cancel:
@@ -64,6 +70,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.contactsSyncService.cancelAnalyze()
                 self.analyze()
             case .deleteDuplicated:
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                         eventActions: .phonebook,
+                                                         eventLabel: .contact(.deleteDuplicates))
+                
                 self.deleteDuplicated()
             }
             
@@ -93,24 +103,35 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             }
         }
     }
+    
     func performOperation(forType type: SYNCMode) {
         if type == .backup {
             analyticsService.logScreen(screen: .contactSyncBackUp)
             analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
         }
         // TODO: clear NumericConstants.limitContactsForBackUp
-        contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
+        contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
-                self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
+                self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: opertionType)
             }
-        }, finishCallback: { [weak self] result, type in
+        }, finishCallback: { [weak self] result, opertionType in
+            
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                      eventActions: .contactOperation(type),
+                                                      eventLabel: .success)
+            
             debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
             DispatchQueue.main.async {
-                self?.output?.success(response: result, forOperation: type)
+                self?.output?.success(response: result, forOperation: opertionType)
                 CardsManager.default.stopOperationWithType(type: .contactBacupOld)
                 CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
             }
-        }, errorCallback: { [weak self] errorType, type in
+        }, errorCallback: { [weak self] errorType, opertionType in
+            
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                      eventActions: .contactOperation(type),
+                                                      eventLabel: .failure)
+
             debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
