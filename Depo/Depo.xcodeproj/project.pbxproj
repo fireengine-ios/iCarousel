@@ -2897,6 +2897,9 @@
 		B5AB5B7221F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
 		B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
 		B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */; };
+		B5B6543022A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
+		B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
+		B5B6543222A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
@@ -7441,6 +7444,7 @@
 		B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAccountConnectionCell.swift; sourceTree = "<group>"; };
 		B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstagramAccountConnectionCell.xib; sourceTree = "<group>"; };
 		B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LifedriveImages.xcassets; sourceTree = "<group>"; };
+		B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedImages.xcassets; sourceTree = "<group>"; };
 		B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
 		B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
@@ -12868,6 +12872,7 @@
 			children = (
 				B54BFF4B202C73790018AF82 /* SharedConstants.swift */,
 				B54BFF4E202C74090018AF82 /* SharedEnums.swift */,
+				B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -16095,6 +16100,7 @@
 				8C06B11D2008AD72003D8E05 /* t_buyuk_selected.png in Resources */,
 				8C06B19B2008AD72003D8E05 /* vintage@3x.png in Resources */,
 				8C06B0852008AD71003D8E05 /* paylas_mail@2x.png in Resources */,
+				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
 				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
 				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
@@ -16458,6 +16464,7 @@
 				8C06B0562008AD71003D8E05 /* parlaklik_secili@3x.png in Resources */,
 				CEAE3FEF1EFD517300A405B2 /* CustomNavBar~iphone.xib in Resources */,
 				CE44714E1F6962F00017B4F0 /* ActivityTimelineViewController.xib in Resources */,
+				B5B6543022A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				8C06B02C2008AD71003D8E05 /* ok_btn_kucuk@3x.png in Resources */,
 				7CF6BDE21F0B97050066709E /* CollectionViewCellForAudio.xib in Resources */,
 				8C06B1962008AD72003D8E05 /* vintage.png in Resources */,
@@ -17353,6 +17360,7 @@
 				CE784EE722A685FB00662219 /* rotate@3x.png in Resources */,
 				CE784EE822A685FB00662219 /* header_icon.png in Resources */,
 				CE784EE922A685FB00662219 /* LeavePremiumHeaderView.xib in Resources */,
+				B5B6543222A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				CE784EEA22A685FB00662219 /* target@2x.png in Resources */,
 				CE784EEB22A685FB00662219 /* vintage@3x.png in Resources */,
 				CE784EEC22A685FB00662219 /* success_icon@2x.png in Resources */,
