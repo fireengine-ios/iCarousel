@@ -57,10 +57,7 @@ class SplashInteractor: SplashInteractorInput {
             return
         }
         isTryingToLogin = true
-        refreshAccessToken { [weak self] in
-            /// self can be nil due logout
-            self?.loginInBackground()
-        }
+        loginInBackground()
     }
     
     /// refresh access token on app start
@@ -90,6 +87,7 @@ class SplashInteractor: SplashInteractorInput {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
+                    
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
@@ -117,21 +115,25 @@ class SplashInteractor: SplashInteractorInput {
                 })
             }
         } else {
-            SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                self?.successLogin()
-            }, fail: { [weak self] error in
-                /// we don't need logout here
-                /// only internet error
-                //self?.failLogin()
-                DispatchQueue.toMain {
-                    if ReachabilityService().isReachable {
-                        self?.output.onFailGetAccountInfo(error: error)
-                    } else {
-                        self?.output.onNetworkFail()
+            refreshAccessToken { [weak self] in
+                /// self can be nil due logout
+                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    self?.successLogin()
+                }, fail: { error in
+                    /// we don't need logout here
+                    /// only internet error
+                    //self?.failLogin()
+                    DispatchQueue.toMain {
+                        if ReachabilityService().isReachable {
+                            self?.output.onFailGetAccountInfo(error: error)
+                        } else {
+                            self?.output.onNetworkFail()
+                        }
+                        self?.isTryingToLogin = false
                     }
-                    self?.isTryingToLogin = false
-                }
-            })
+                })
+            }
+
         }
     }
     
