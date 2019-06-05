@@ -2896,6 +2896,7 @@
 		B5AB5B7121F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */; };
 		B5AB5B7221F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
 		B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
+		B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */; };
 		B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
@@ -7439,6 +7440,7 @@
 		B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookAccountConnectionCell.xib; sourceTree = "<group>"; };
 		B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAccountConnectionCell.swift; sourceTree = "<group>"; };
 		B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstagramAccountConnectionCell.xib; sourceTree = "<group>"; };
+		B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LifedriveImages.xcassets; sourceTree = "<group>"; };
 		B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
 		B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
@@ -8210,6 +8212,7 @@
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
 				B54BFF4A202C734C0018AF82 /* Shared */,
+				B5B6542C22A7A744000E2FA9 /* Lifedrive */,
 				B54BFF32202B20250018AF82 /* autosync-widget */,
 				CE58FAF020444493007F3F54 /* LifeboxShared */,
 				CE1BE923204831CE0074BDDC /* LifeboxFileProvider */,
@@ -12965,6 +12968,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		B5B6542C22A7A744000E2FA9 /* Lifedrive */ = {
+			isa = PBXGroup;
+			children = (
+				B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */,
+			);
+			path = Lifedrive;
+			sourceTree = "<group>";
+		};
 		B5B6B14E2170A01E00463260 /* PrepareToQuickScroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -17135,6 +17146,7 @@
 				CE784E1922A685FB00662219 /* TurkcellSecurityViewController.xib in Resources */,
 				CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */,
 				CE784E1B22A685FB00662219 /* checkbox_secili@2x.png in Resources */,
+				B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */,
 				CE784E1C22A685FB00662219 /* PeriodicContactSyncViewController.xib in Resources */,
 				CE784E1D22A685FB00662219 /* EditinglBar.xib in Resources */,
 				CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */,
