@@ -117,18 +117,20 @@ final class CacheManager {
             guard self.processingRemoteItems else {
                 return
             }
-
-            self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
+                guard let self = self else {
+                    completion()
+                    return
+                }
                 
                 if remoteItems.count < CacheManager.pageSize {
-                    self?.photoVideoService.currentPage = 0
+                    self.photoVideoService.currentPage = 0
                     completion()///means all files are downloaded
-                } else
-                //FIXME: When BackEnd would fix duplication problem we should remove else part
-                {
-                    self?.addNextRemoteItemsPage(completion: completion)
+                } else {
+                    //FIXME: When BackEnd would fix duplication problem we should remove else part
+                    self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
+                    self.addNextRemoteItemsPage(completion: completion)
                 }
             }
             //FIXME: When BackEnd would fix duplication problem we should uncomment this
