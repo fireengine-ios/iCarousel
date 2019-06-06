@@ -77,8 +77,8 @@ final class CellImageManager {
     }
     
     func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
+        isCancelled = false
         dispatchQueue.async { [weak self] in
-            self?.isCancelled = false
             self?.completionBlock = completionBlock
             self?.setupOperations(thumbnail: thumbnailUrl, url: url)
         }
@@ -86,9 +86,9 @@ final class CellImageManager {
     
     func cancelImageLoading() {
         CellImageManager.instances.removeValue(forKey: key)
+        isCancelled = true
         
         dispatchQueue.async { [weak self] in
-            self?.isCancelled = true
             self?.currentOperation?.cancel()
             self?.currentOperation = nil
         }
