@@ -44,10 +44,6 @@ final class CacheManager {
     }
     
     func actualizeCache(completion: VoidHandler?) {
-//        if !isProcessing || processingLocalItems || processingRemoteItems {
-//            CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
-//        }
-        
         isCacheActualized = false
         isProcessing = true
 
@@ -57,7 +53,7 @@ final class CacheManager {
                 return
             }
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+                self.showPreparationCardAfterDelay()
                 self.startAppendingAllRemotes(completion: { [weak self] in
                     guard let `self` = self,
                         !self.processingRemoteItems else {
@@ -73,7 +69,7 @@ final class CacheManager {
                         //FIXME: need handling if we logouted and locals still in progress
                         self.isProcessing = false
                         self.isCacheActualized = true
-                        CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
+                        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
                         self.delegates.invoke { $0.didCompleteCacheActualization() }
                         completion?()
                     })
@@ -83,16 +79,25 @@ final class CacheManager {
                     completion?()
                     return
                 }
-                CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+                self.showPreparationCardAfterDelay()
                 self.startAppendingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
-                    CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
+                    CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
                     self?.delegates.invoke { $0.didCompleteCacheActualization() }
                     completion?()
                 })
             }
         }
+    }
+    
+    private func showPreparationCardAfterDelay() {
+        ///prevent blinking
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            if self.isProcessing {
+                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+            }
+        })
     }
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
