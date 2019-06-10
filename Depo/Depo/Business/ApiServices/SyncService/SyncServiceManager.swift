@@ -301,7 +301,7 @@ extension SyncServiceManager {
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
-            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+//            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
