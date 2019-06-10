@@ -13,8 +13,9 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
-    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
-    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
+    case prepareQuickScroll   = "prepareQuickScroll"
+//    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
+//    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
     
@@ -58,7 +59,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .preparePhotosQuickScroll, .prepareVideosQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -363,10 +364,12 @@ class CardsManager: NSObject {
             cardView = popUp
         case .prepareToAutoSync:
             cardView = PrepareToAutoSync.initFromNib()
-        case .preparePhotosQuickScroll:
+        case .prepareQuickScroll:
             cardView = PrepareQuickScroll.initFromNib()
-        case .prepareVideosQuickScroll:
-            cardView = PrepareQuickScroll.initFromNib()
+//        case .preparePhotosQuickScroll:
+//            cardView = PrepareQuickScroll.initFromNib()
+//        case .prepareVideosQuickScroll:
+//            cardView = PrepareQuickScroll.initFromNib()
         case .autoUploadIsOff:
             cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
