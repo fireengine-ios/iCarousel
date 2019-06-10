@@ -30,11 +30,12 @@ final class CoreDataStack: NSObject {
         
         do {
             let storeURL = Device.documentsFolderUrl(withComponent: "DataModel.sqlite")
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                           NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                                 configurationName: nil,
                                                 at: storeURL,
-                                                options: [NSMigratePersistentStoresAutomaticallyOption: true,
-                                                          NSInferMappingModelAutomaticallyOption: true])
+                                                options: options)
         } catch {
             fatalError("Error migrating store: \(error)")
         }
