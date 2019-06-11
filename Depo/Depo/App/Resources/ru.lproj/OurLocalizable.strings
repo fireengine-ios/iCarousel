@@ -869,8 +869,6 @@
 "delete_duplicated_contacts" = "Удалить дубликаты контактов в вашей телефонной книге";
 "leave_middle_membership" = "Оставить подписку Стандарт+";
 "leave_middle_turkcell" = "Чтобы отменить ваш пакет, пожалуйста, отправьте СМС на 2200 с текстом IPTAL LIFEBOX STANDART+";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
 "package_FWI_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
 "package_jamaica_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
 "feature_digicell_cancel_text" = "Вы можете продолжать использовать функции Премиум пользователя, поскольку вы являетесь абонентом Digicell";
@@ -916,41 +914,45 @@
 "this_text_is_empty" = "Текст отсутствует";
 "password_changed_successfully" = "Ваш пароль успешно изменен";
 "password_changed_successfully_relogin" = "Ваш пароль успешно изменен. Пожалуйста, войдите в приложение с вашим новым паролем";
-"captcha_answer_placeholder" = "";
-"birthday" = "";
-"user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"captcha_answer_placeholder" = "Введите текст на картинке";
+"birthday" = "Дата рождения";
 "user_profile_turkcell_gsm_alert" = "Вы не можете обновить свой номер телефона, для деталей: %@";
 "user_profile_birthday_placeholder" = "ДД ММ ГГГГ";
-"send_link" = "";
-"reset_password" = "";
-"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
-"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "";
-"your_account_email" = "";
-"enter_your_account_email" = "";
-"enter_the_text_shown_in_the_image" = "";
-"support_form_email_body" = "";
-"profile_phone_number_title" = "";
-"profile_phone_number_placeholder" = "";
-"please_enter_your_name" = "";
-"enter_your_name" = "";
-"please_enter_your_surname" = "";
-"enter_your_surname" = "";
-"enter_your_email_address" = "";
-"subject" = "";
-"please_enter_your_subject" = "";
-"please_choose_subject" = "";
-"your_problem" = "";
-"please_enter_your_problem_shortly" = "";
-"explain_your_problem_shortly" = "";
-"please_enter_msisdn_or_email" = "";
-"support_form_subject_1" = "";
-"support_form_subject_2" = "";
-"support_form_subject_3" = "";
-"support_form_subject_4" = "";
-"support_form_subject_5" = "";
-"support_form_subject_6" = "";
-"support_form_subject_7" = "";
+"send_link" = "Отправить ссылку";
+"reset_password" = "Сбросить пароль";
+"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "Вы можете легко сбросить пароль по ссылке, которую мы отправим на e-mail аккаунта";
+"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "Для сброса пароля мы отправим на e-mail вашего аккаунта ссылку";
+"your_account_email" = "E-mail  вашего аккаунта";
+"enter_your_account_email" = "Введите e-mail  вашего аккаунта";
+"enter_the_text_shown_in_the_image" = "Введите текст на картинке";
+"support_form_email_body" = "Пожалуйста, не удаляйте информацию ниже. Данные будут использованы для решения проблем.\nИмя: %@\nФамилия: %@\nE-mail: %@\nНомер телефона: %@\nВерсия приложения: %@\nОператор: %@\nУстройство: %@\nОС устройства: %@\nЯзык: %@\nСтатус сети: %@\n";
+"profile_phone_number_title" = "Номер телефона";
+"profile_phone_number_placeholder" = "Введите ваш номер телефона";
+"please_enter_your_name" = "Пожалуйста, введите ваше имя";
+"enter_your_name" = "Введите ваше имя";
+"please_enter_your_surname" = "Пожалуйста, введите вашу фамилию";
+"enter_your_surname" = "Введите вашу фамилию";
+"enter_your_email_address" = "Введите ваш e-mail";
+
+/*What kind of subject is meant here?*/
+"subject" = "Тема запроса";
+
+/*What is the context?*/
+"please_enter_your_subject" = "Пожалуйста, введите тему запроса";
+
+/*What is the context?*/
+"please_choose_subject" = "Пожалуйста, выберите тему запроса";
+"your_problem" = "Ваша сложность";
+"please_enter_your_problem_shortly" = "Пожалуйста, опишите вашу сложность";
+"explain_your_problem_shortly" = "Объясните коротко вашу сложность";
+"please_enter_msisdn_or_email" = "Пожалуйста, введите в поле номер телефона или e-mail";
+"support_form_subject_1" = "Lifebox/Я не могу войти со своим e-mail";
+"support_form_subject_2" = "Lifebox/Я не могу войти со своим номером телефона";
+"support_form_subject_3" = "Lifebox/Я не могу войти со своим паролем";
+"support_form_subject_4" = "Lifebox/Текст проверки не совпадает";
+"support_form_subject_5" = "Lifebox/проблема с паролем Turkcell";
+"support_form_subject_6" = "Lifebox/проблема с паролем Turkcell";
+"support_form_subject_7" = "Lifebox/Я не могу загрузить приложение lifebox";
 "enter_your_old_password" = "Введите старый пароль";
 "enter_your_new_password" = "Введите новый пароль";
 "enter_your_repeat_password" = "Введите новый пароль еще раз";
@@ -960,3 +962,21 @@
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Помощь и поддержка";
+"captcha_is_empty" = "Пожалуйста, введите символы на картинке";
+"enter_your_password" = "Введите пароль";
+"re_enter_your_password" = "Введите пароль еще раз";
+"signup_support_info" = "Свяжитесь с нами в случае сложности с входом в приложение";
+"missing_information" = "Недостаточно информации";
+"please_enter_your_missing_account_information" = "Пожалуйста, введите недостающую информацию";
+"login_email_or_phone_placeholder" = "Введите ваш e-mail  или номер телефона";
+"login_password_placeholder" = "Введите ваш пароль";
+"login_email_or_phone_error" = "Укажите e-mail или номер телефона";
+"login_password_error" = "Укажите ваш пароль";
+"enter_security_code" = "Введите код безопасности";
+"enter_code_get_code_on_phone" = "Пожалуйста, введите 6 цифр кода безопасности, который мы отправили на этот номер: %@";
+"time_is_up_for_code" = "Время истекло. Пожалуйста, отправьте запрос на новый код";
+"resend_code" = "Повторно отправить код";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Вопросы и ответы";
+"login_username_not_valid" = "Пожалуйста, проверьте имя пользователя";
