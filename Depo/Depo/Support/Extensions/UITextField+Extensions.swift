@@ -2,9 +2,7 @@ import UIKit
 
 extension UITextField {
     var placeholderLabel: UILabel? {
-        return subviews
-            .compactMap { $0 as? UILabel }
-            .first { $0.text == placeholder || $0.attributedText == attributedPlaceholder}
+        return subviews.first(where: { $0 is UILabel }) as? UILabel
     }
     
     func toggleTextFieldSecureType() {
