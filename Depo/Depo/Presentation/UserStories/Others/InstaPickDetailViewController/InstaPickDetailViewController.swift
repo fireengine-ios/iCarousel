@@ -315,8 +315,6 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
             return
         }
         
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickShare)
-        
         let shareButtonRect = self.shareButton.convert(self.shareButton.bounds, to: self.view)
 
         let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 50)
@@ -326,6 +324,19 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
         downloader.getFiles(filesForDownload: [fileForDownload], response: { [weak self] urls, path in
             self?.stopActivityIndicator()
             let activityVC = UIActivityViewController(activityItems: urls, applicationActivities: nil)
+            
+            activityVC.completionWithItemsHandler = { [weak self] activityType, _, _, _ in
+                guard
+                    let activityType = activityType,
+                    let activityTypeString = (activityType as NSString?) as String?
+                else {
+                    return
+                }
+                
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                          eventActions: .photopickShare,
+                                                          eventLabel: .shareViaApp(activityTypeString.knownAppName()))
+            }
             
             ///works only on iPad
             activityVC.popoverPresentationController?.sourceRect = rect
