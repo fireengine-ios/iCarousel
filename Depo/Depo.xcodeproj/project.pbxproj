@@ -2998,6 +2998,10 @@
 		B5CDB34121787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
 		B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
+		B5D2883822A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */; };
+		B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */; };
+		B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
+		B5D2883E22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -5690,6 +5694,8 @@
 		B5CDB32E21787FEF006CFA50 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
 		B5CDB32F21787FEF006CFA50 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
+		B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
+		B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -11237,6 +11243,15 @@
 			path = TurkcellUpdaterService;
 			sourceTree = "<group>";
 		};
+		B5D2883B22A5109C00051F3A /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */,
+				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
 			isa = PBXGroup;
 			children = (
@@ -11841,6 +11856,7 @@
 		CE3AA9831F4D648C000157AF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B5D2883B22A5109C00051F3A /* Migration */,
 				8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */,
 				8C208670228D4FF1000BEDAD /* Extensions */,
 				CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */,
@@ -15450,6 +15466,7 @@
 				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
+				B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */,
 				CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */,
@@ -15645,6 +15662,7 @@
 				7CA4A172207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				8C0E8CE71FDEBDFF00789C91 /* LoginViewOutput.swift in Sources */,
 				B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */,
+				B5D2883E22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */,
 				8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */,
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
 				B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */,
@@ -17484,6 +17502,7 @@
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
 				9849B5B621FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
+				B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
 				A22A3BEE2215A5B700FF03C1 /* Error+Alamofire.swift in Sources */,
@@ -17852,6 +17871,7 @@
 				CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */,
 				8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */,
 				D94776BCD48BA8014675541C /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
+				B5D2883822A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				8C208681228D5118000BEDAD /* Double+Extensions.swift in Sources */,
 				8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */,
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,

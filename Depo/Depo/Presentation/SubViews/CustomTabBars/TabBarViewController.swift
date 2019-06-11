@@ -710,6 +710,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             return
         }
         
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
+        
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
         } else {
@@ -779,7 +781,14 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
-            let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
+            var folderUUID = getFolderUUID()
+            
+            /// If the user is on the "Documents" screen, I pass folderUUID to avoid opening the default "AllFiles" screen.
+            if folderUUID == nil, selectedIndex == 3 {
+                folderUUID = ""
+            }
+            
+            let controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             

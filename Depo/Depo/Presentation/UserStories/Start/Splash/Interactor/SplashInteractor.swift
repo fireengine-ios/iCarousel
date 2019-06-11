@@ -17,6 +17,7 @@ class SplashInteractor: SplashInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var reachabilityService = ReachabilityService.shared
+    private lazy var authorizationRepository: AuthorizationRepository = factory.resolve()
     
     private var isTryingToLogin = false
     private var isReachabilityStarted = false
@@ -37,12 +38,31 @@ class SplashInteractor: SplashInteractorInput {
         
         reachabilityService.delegates.add(self)
     }
-
+    
     func startLoginInBackground() {
         if isTryingToLogin {
             return
         }
         isTryingToLogin = true
+        loginInBackground()
+    }
+    
+    /// refresh access token on app start
+    private func refreshAccessToken(complition: @escaping VoidHandler) {
+        if tokenStorage.refreshToken == nil {
+            failLogin()
+        }
+        authorizationRepository.refreshTokens { _, accessToken, _  in
+            // TODO: create new func refreshTokens to save and return token
+            if let accessToken = accessToken {
+                let tokenStorage: TokenStorage = factory.resolve()
+                tokenStorage.accessToken = accessToken
+            }
+            complition()
+        }
+    }
+    
+    private func loginInBackground() {
         setupReachabilityIfNeed()
         
         if tokenStorage.accessToken == nil {
@@ -55,9 +75,8 @@ class SplashInteractor: SplashInteractorInput {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
-//                    ItemsRepository.sharedSession.updateCache()
+                    
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-//                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -84,24 +103,26 @@ class SplashInteractor: SplashInteractorInput {
                 })
             }
         } else {
-            SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                CacheManager.shared.actualizeCache(completion: nil)
-                self?.isTryingToLogin = false
-                self?.successLogin()
-            }, fail: { [weak self] error in
-                /// we don't need logout here
-                /// only internet error
-                //self?.failLogin()
-                DispatchQueue.toMain {
+            refreshAccessToken { [weak self] in
+                /// self can be nil due logout
+                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
                     self?.isTryingToLogin = false
-                    if self?.reachabilityService.isReachable == true {
-                        self?.output.onFailGetAccountInfo(error: error)
-                    } else {
-                        self?.output.onNetworkFail()
+                    self?.successLogin()
+                }, fail: { error in
+                    /// we don't need logout here
+                    /// only internet error
+                    //self?.failLogin()
+                    DispatchQueue.toMain {
+                        if self?.reachabilityService.isReachable == true {
+                            self?.output.onFailGetAccountInfo(error: error)
+                        } else {
+                            self?.output.onNetworkFail()
+                        }
+                        self?.isTryingToLogin = false
                     }
-                    self?.isTryingToLogin = false
-                }
-            })
+                })
+            }
         }
     }
     

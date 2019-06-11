@@ -60,7 +60,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         guard CacheManager.shared.isCacheActualized else {
             /// don't need to change status because it's fake preparation until CoreData processing is done
-            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+//            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
         

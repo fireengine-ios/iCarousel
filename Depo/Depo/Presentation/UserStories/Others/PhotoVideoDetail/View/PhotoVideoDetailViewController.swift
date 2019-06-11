@@ -244,6 +244,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         needToScrollAfterRotation = true
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        collectionView.reloadData()
     }
     
     override func getBackgroundColor() -> UIColor {

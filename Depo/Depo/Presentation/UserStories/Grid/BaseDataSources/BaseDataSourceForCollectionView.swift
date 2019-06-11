@@ -1648,7 +1648,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 guard !items.isEmpty else {
                     return
                 }
-            
+                        
                 var idsForRemove = [String]()
                 var objectsForReplaceDict = [String : Item]()
                 
@@ -1676,6 +1676,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let localIDs = serverObjects.map {
                     $0.getTrimmedLocalID()
                 }
+                    
+                let semaphore = DispatchSemaphore(value: 0)
+
                 MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
                     let foundedLocalID = localObjectsForReplace.map {
                         $0.getTrimmedLocalID()
@@ -1696,7 +1699,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             idsForRemove.append(object.uuid)
                         }
                     }
+                    semaphore.signal()
                 }  
+                semaphore.wait()
             } else {
                 idsForRemove = items.map{
                     $0.uuid
@@ -1710,7 +1715,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             var recentlyUpdatedIndexes = [IndexPath]()
             var recentlyDeletedIndexes = [IndexPath]()
             var recentlyDeletedSections =  IndexSet()
-            
+
             for (index, array) in self.allItems.enumerated() {
                 var newSectionArray = [WrapData]()
                 for object in array {
@@ -1719,19 +1724,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
-                        continue
-                    }
-                    if !newSectionArray.isEmpty {
-                        newArray.append(newSectionArray)
                     } else {
-                        recentlyDeletedSections.insert(index)
+                        newSectionArray.append(object)
                     }
                 }
                 
-                DispatchQueue.toMain {
-                    self.allItems = newArray
-                    CellImageManager.clear()
-                    self.collectionView?.reloadData()
+                if newSectionArray.isEmpty {
+                    recentlyDeletedSections.insert(index)
+                } else {
+                    newArray.append(newSectionArray)
+                }
+            }
+
+            DispatchQueue.toMain {
+                CellImageManager.clear()
+                self.allItems = newArray
+                self.collectionView?.reloadData()
 //                    //change performBatchUpdates to the reladData() in case of crash
 //                                    self.collectionView?.performBatchUpdates({
 //                    //                    self.allItems = newArray
@@ -1740,19 +1748,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                    //                    self.collectionView?.deleteSections(recentlyDeletedSections)
 //
 //                                    }, completion: { _ in
-                    //update folder items count
-                    if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                        self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
-                    }
-                    
-                    recentlyDeletedIndexes.removeAll()
-                    recentlyDeletedSections.removeAll()
-                    recentlyUpdatedIndexes.removeAll()
-                    
-                    self.delegate?.didDelete(items: items)
-                    
-                    self.updateCoverPhoto()
+                //update folder items count
+                if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                    self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
                 }
+                    
+                recentlyDeletedIndexes.removeAll()
+                recentlyDeletedSections.removeAll()
+                recentlyUpdatedIndexes.removeAll()
+                    
+                self.delegate?.didDelete(items: items)
+                    
+                self.updateCoverPhoto()
             }
         }
     }

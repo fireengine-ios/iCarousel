@@ -83,6 +83,8 @@ final class CaptchaView: UIView, FromNib {
         clearCaptchaAnswer()
     }
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     var currentCaptchaUUID = ""
     weak var delegate: CaptchaViewErrorDelegate?
     
@@ -123,6 +125,10 @@ final class CaptchaView: UIView, FromNib {
     }
     
     private func getImageCaptcha() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .captcha,
+                                            eventLabel: .captcha(.changeClick))
+        
         generateCaptchaUUID()
         
         captchaService.getCaptcha(uuid: currentCaptchaUUID, type: .image, sucess: { [weak self] response in
@@ -152,7 +158,12 @@ final class CaptchaView: UIView, FromNib {
     }
     
     private func getAudioCaptcha() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .captcha,
+                                            eventLabel: .captcha(.voiceClick))
+        
         generateCaptchaUUID()
+        
         captchaService.getCaptcha(uuid: currentCaptchaUUID, type: .audio, sucess: { [weak self] response in
             if let captchaResponse = response as? CaptchaResponse,
                 let _ = captchaResponse.type,
