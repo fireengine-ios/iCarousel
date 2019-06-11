@@ -1,7 +1,7 @@
-"Welcome1Info" = "En Temps Réél, Conserver, Se souvenir";
+"Welcome1Info" = "Vivre et garder le meilleur ";
 
 /*Suggested: "Collect your photos, videos and files on lifebox! Access  whenever you like, wherever you are".*/
-"Welcome1SubInfo" = "Recueillir vos photos, vos vidéos et vos fichiers dans lifebox! Accéder à vos souvenirs à tout moment et en tout lieu.";
+"Welcome1SubInfo" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre lifebox. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
 
 /*Suggested: "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under "Settings - Privacy - Location Services" menu."*/
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de lifebox, vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
@@ -643,7 +643,7 @@ English is correct. GSM may be confusing to the customer*/
 /*Fuzzy*/
 "Shows that a response operation is done for the given receipt." = "Cela montre qu’une opération de réponse est effectuée pour le reçu donné.";
 "Auto Upload is off." = "Le téléchargement automatique est désactivé";
-"Photos and videos waiting to be synced" = "Photos et vidéos en attente de synchro";
+"Photos and videos waiting to be synced" = "Photos et vidéos en attente de synchronisation";
 "Wi-Fi and Cellular" = "Wi-Fi et Données mobiles";
 "Video album is automatically created, therefore cannot be deleted" = "L'album de vidéos est créé automatiquement et ne peut donc pas être supprimé.";
 "You cannot upload any video to auto generated video album" = "Vous ne pouvez télécharger aucune vidéo dans un album vidéo généré automatiquement.";
@@ -894,7 +894,7 @@ Please check I have understood the intended command here*/
 "standard_banner_title" = "lifebox Premium";
 "premium_banner_title" = "Bienvenue à Lifebox Premium!";
 "back_up_short" = "Sauvegardez avec la qualité d'origine";
-"remove_duplicate_short" = "Supprimer les contacts en doublon de votre annulaire téléphonique";
+"remove_duplicate_short" = "Supprimer les contacts en doublon de votre réperrtoire";
 
 /*Suggested: "Use Place Recognition to group your memories from the same location"
 
@@ -1180,7 +1180,6 @@ Please check I have understood the intended command here*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
 "package_renew_date" = "Sera renouvelé le: %@";
 "percentage_used" = "%.0f%% utilisé";
-"used_and_left_space" = "\n%1$@ / %2$@ utilisé\n";
 "used_and_left_space" = "%1$@ / %2$@ utilisé\n";
 "percentage_used_two_lines" = "%.0f%%\nutilisé";
 "my_usage_storage" = "Mon utilisation de data";
@@ -1211,41 +1210,39 @@ Please check I have understood the intended command here*/
 "this_text_is_empty" = "Ce texte est vide";
 "password_changed_successfully" = "Votre mot de passe a été changé avec succès";
 "password_changed_successfully_relogin" = "Vous avez changé votre mot de passe avec succès. Veuillez vous reconnecter avec votre nouveau mot de passe.";
-"captcha_answer_placeholder" = "";
-"birthday" = "";
-"user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"captcha_answer_placeholder" = "Entrez le texte affiché dans l'image";
+"birthday" = "Anniversaire";
 "user_profile_turkcell_gsm_alert" = "Vous ne pouvez pas mettre à jour votre numéro de téléphone, pour plus de détails: %@";
 "user_profile_birthday_placeholder" = "JJ MM AAAA";
-"send_link" = "";
-"reset_password" = "";
-"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
-"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "";
-"your_account_email" = "";
-"enter_your_account_email" = "";
-"enter_the_text_shown_in_the_image" = "";
-"support_form_email_body" = "";
-"profile_phone_number_title" = "";
-"profile_phone_number_placeholder" = "";
-"please_enter_your_name" = "";
-"enter_your_name" = "";
-"please_enter_your_surname" = "";
-"enter_your_surname" = "";
-"enter_your_email_address" = "";
-"subject" = "";
-"please_enter_your_subject" = "";
-"please_choose_subject" = "";
-"your_problem" = "";
-"please_enter_your_problem_shortly" = "";
-"explain_your_problem_shortly" = "";
-"please_enter_msisdn_or_email" = "";
-"support_form_subject_1" = "";
-"support_form_subject_2" = "";
-"support_form_subject_3" = "";
-"support_form_subject_4" = "";
-"support_form_subject_5" = "";
-"support_form_subject_6" = "";
-"support_form_subject_7" = "";
+"send_link" = "Envoyer le Lien";
+"reset_password" = "Réinitialiser Le Mot De Passe";
+"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "Vous pouvez facilement réinitialiser votre mot de passe en cliquant sur le lien de réinitialisation du mot de passe que nous enverrons à votre compte par courrier électronique.";
+"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "Pour réinitialiser le mot de passe de votre compte, nous vous enverrons un lien de réinitialisation de mot de passe à l'adresse de messagerie de votre compte:";
+"your_account_email" = "Votre compte courriel électronique";
+"enter_your_account_email" = "Entrer votre compte courriel électronique";
+"enter_the_text_shown_in_the_image" = "Entrez le texte affiché dans l'image";
+"support_form_email_body" = "Ne pas supprimer s’il vous plaît.\nL'information sera utilisée pour résoudre le problème.\nNom : %@ \nPrénom : %@ \nCourriel : %@ \nMsisdn : %@ \nVersion de l'Application : %@\nOpérateur : %@\nDispositif : %@\nDispositif du Système d’Exploitation : %@\nLangage : %@\nÉtat du Réseau : %@";
+"profile_phone_number_title" = "Numéro de Téléphone";
+"profile_phone_number_placeholder" = "Entrer votre numéro de téléphone mobile";
+"please_enter_your_name" = "Entrer votre nom s’il vous plaît";
+"enter_your_name" = "Entrer votre nom";
+"please_enter_your_surname" = "Entrer votre prénom s’il vous plaît";
+"enter_your_surname" = "Entrer votre prénom s’il vous plaît";
+"enter_your_email_address" = "Entrer votre adresse courriel";
+"subject" = "Objet";
+"please_enter_your_subject" = "Entrer votre objet s’il vous plaît";
+"please_choose_subject" = "Sélectionner un objet s’il vous plaît";
+"your_problem" = "Votre problème";
+"please_enter_your_problem_shortly" = "Entrer votre problème courtement s’il vous plaît";
+"explain_your_problem_shortly" = "Expliquer votre problème courtement";
+"please_enter_msisdn_or_email" = "Entrer votre numéro de téléphone ou champ Courriel s’il vous plaît";
+"support_form_subject_1" = "Lifebox / Je ne peux pas me connecter mon Courriel";
+"support_form_subject_2" = "Lifebox / Je ne peux pas me connecter mon numéro de téléphone";
+"support_form_subject_3" = "Lifebox / Je ne peux pas me connecter mon mot de passe";
+"support_form_subject_4" = "Lifebox / Texte de sécurité ne correspond pas";
+"support_form_subject_5" = "Lifebox / Problème de mot de passe Turkcell";
+"support_form_subject_6" = "Lifebox / Problème de connexion automatique";
+"support_form_subject_7" = "Lifebox / Je n'arrive pas à télécharger l'application Lifebox";
 "enter_your_old_password" = "Entrez votre ancien mot de passe";
 "enter_your_new_password" = "Entrez votre nouveau mot de passe";
 "enter_your_repeat_password" = "Ressaisissez votre nouveau mot de passe";
@@ -1255,3 +1252,21 @@ Please check I have understood the intended command here*/
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Foire Aux Questions";
+"captcha_is_empty" = "Entrer les caractères affichés dans l'image s’il vous plaît";
+"enter_your_password" = "Entrer votre mot de passe";
+"re_enter_your_password" = "Entrer de nouveau votre mot de passe";
+"signup_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
+"missing_information" = "Informations Manquantes";
+"please_enter_your_missing_account_information" = "Entrer vos informations de compte manquantes s’il vous plaît :";
+"login_email_or_phone_placeholder" = "Entrer votre courriel ou votre numéro de téléphone mobile";
+"login_password_placeholder" = "Entrer votre mot de passe";
+"login_email_or_phone_error" = "Il vous suffit de remplir votre email ou votre numéro de téléphone";
+"login_password_error" = "Il vous suffit de remplir votre mot de passe";
+"enter_security_code" = "Entrer le code de sécurité";
+"enter_code_get_code_on_phone" = "Entrer s’il vous plaît le code de sécurité à 6 chiffres que nous avons envoyés à ce numéro de téléphone : %@";
+"time_is_up_for_code" = "Le temps est écoulé, veuillez demander un nouveau code.";
+"resend_code" = "Renvoyer le code";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Questions Fréquemment Posées";
+"login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
