@@ -65,11 +65,12 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     func setupVisableSubTitle() {
-        setupSubTitle()
+        updateSubTitleForTurkcell()
     }
     
     func setupVisableTexts() {
         setupInfoTitle()
+        setupSubTitle()
         setupEmailTitle()
         setupEmailField()
         setupButton()
@@ -77,15 +78,10 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     private func setupSubTitle() {
-        subTitle.isHidden = false
-        
-        if Locale.current.languageCode == "en" || Locale.current.languageCode == "tr" {
-            subTitle.text = String(format: "%@ \n \n %@", TextConstants.forgotPasswordSubTitle, TextConstants.resetPasswordSubTitle)
-        } else {
-            subTitle.text = ""
-        }
+        subTitle.text = TextConstants.resetPasswordSubTitle
         
         subTitle.textColor = ColorConstants.removeConnection
+        
         if Device.isIpad {
             subTitle.font = UIFont.TurkcellSaturaRegFont(size: 24)
             subTitle.textAlignment = .center
@@ -93,6 +89,10 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
             subTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
             subTitle.textAlignment = .left
         }
+    }
+    
+    private func updateSubTitleForTurkcell() {        
+        subTitle.text = TextConstants.forgotPasswordSubTitle
     }
     
     private func setupInfoTitle() {
