@@ -100,8 +100,8 @@ final class YearsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        lock.lock()
-//        defer { lock.unlock() }
+        lock.lock()
+        defer { lock.unlock() }
         
         var lastLabelOffset: CGFloat = 0
         
@@ -140,8 +140,8 @@ final class YearsView: UIView {
     // MARK: - Dates
     
     func update(by yearMonthValues: [YearMonthTuple]) {
-//        lock.lock()
-//        defer { lock.unlock() }
+        lock.lock()
+        defer { lock.unlock() }
         
         if yearMonthValues.isEmpty {
             return
@@ -256,7 +256,7 @@ final class YearsView: UIView {
     
     private func udpateLabels(from yearsArray: YearsArray) {
         DispatchQueue.main.async {
-//            self.lock.lock()
+            self.lock.lock()
             
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
@@ -272,7 +272,7 @@ final class YearsView: UIView {
                 self.addSubview(label)
                 self.labels.append(label)
             }
-//            self.lock.unlock()
+            self.lock.unlock()
         }
     }
     

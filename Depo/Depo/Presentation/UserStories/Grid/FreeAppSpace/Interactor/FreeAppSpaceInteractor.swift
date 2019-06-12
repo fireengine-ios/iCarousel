@@ -10,7 +10,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     var isDeleteRequestRunning = false
     
-    private lazy var freeAppSpace = FreeAppSpace.default
+    private lazy var freeAppSpace = FreeAppSpace.session
     private lazy var wrapFileService = WrapItemFileService()
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
@@ -30,7 +30,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             if let presenter = self.output as? FreeAppSpacePresenter {
                 DispatchQueue.main.async {
                     presenter.onItemDeleted(count: selectedItems.count)
-                    if FreeAppSpace.default.getDuplicatesObjects().isEmpty {
+                    if FreeAppSpace.session.getDuplicatesObjects().isEmpty {
                         CardsManager.default.stopOperationWithType(type: .freeAppSpace)
                         CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
                     }
