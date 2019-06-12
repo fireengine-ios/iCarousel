@@ -39,7 +39,7 @@ final class PhotoVideoDataSource: NSObject {
     private(set) var focusedIndexPath: IndexPath?
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
-    private weak var collectionView: UICollectionView!
+    private weak var collectionView: UICollectionView?
     
     private let predicateManager = PhotoVideoPredicateManager()
     
@@ -358,9 +358,9 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         sectionChanges.append { [unowned self] in
             switch type {
             case .insert:
-                self.collectionView.insertSections(section)
+                self.collectionView?.insertSections(section)
             case .delete:
-                self.collectionView.deleteSections(section)
+                self.collectionView?.deleteSections(section)
             default:
                 break
             }
@@ -373,16 +373,16 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         
         switch type {
         case .insert:
-            if let indexPath = newIndexPath {
+            if let collectionView = collectionView, let indexPath = newIndexPath {
                 self.objectChanges.append { [unowned self] in
-                    self.collectionView.insertItems(at: [indexPath])
+                    collectionView.insertItems(at: [indexPath])
                 }
             }
             insertedItemsIds.append(objectId)
         case .delete:
-            if let indexPath = indexPath {
+            if let collectionView = collectionView, let indexPath = indexPath {
                 self.objectChanges.append { [unowned self] in
-                    self.collectionView.deleteItems(at: [indexPath])
+                    collectionView.deleteItems(at: [indexPath])
                 }
             }
             deletedItemsIds.append(objectId)
@@ -392,10 +392,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             }
             updatedItemsIds.append(objectId)
         case .move:
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+            if let collectionView = collectionView, let indexPath = indexPath, let newIndexPath = newIndexPath {
                 self.objectChanges.append { [unowned self] in
-                    self.collectionView.deleteItems(at: [indexPath])
-                    self.collectionView.insertItems(at: [newIndexPath])
+                    collectionView.deleteItems(at: [indexPath])
+                    collectionView.insertItems(at: [newIndexPath])
                 }
             }
             updatedItemsIds.append(objectId)
@@ -412,19 +412,19 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         
         cleanChanges()
         
-        if !collectionView.isDragging, let firstVisibleItem = firstOffsetSavedVisibleItem {
+        if let collectionView = collectionView, !collectionView.isDragging, let firstVisibleItem = firstOffsetSavedVisibleItem {
             focusedIndexPath = indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
         
         /// reload cells manually
         objectUpdatesStatic.forEach { indexPath in
-            if let cell = self.collectionView.cellForItem(at: indexPath) {
-                self.collectionView.delegate?.collectionView?(self.collectionView, willDisplay: cell, forItemAt: indexPath)
+            if let collectionView = collectionView, let cell = collectionView.cellForItem(at: indexPath) {
+                collectionView.delegate?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
             }
         }
 
-        collectionView.performBatchUpdates({
+        collectionView?.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
             objectChangesStatic.forEach { $0() }
         }, completion: { [weak self] _ in
@@ -440,9 +440,9 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func focusedOffset() -> CGPoint? {
-        if !collectionView.isDragging,
+        if let collectionView = collectionView, !collectionView.isDragging,
             let indexPath = focusedIndexPath,
-            let attributes = self.collectionView.layoutAttributesForItem(at: indexPath) {
+            let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
         
             return CGPoint(x: 0, y: attributes.frame.origin.y - cellTopOffset)
         }
@@ -454,14 +454,14 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         cellTopOffset = 0
         focusedIndexPath = nil
         
-        if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
+        if let indexPath = collectionView?.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
             #if DEBUG
             if !DispatchQueue.isMainQueue || !Thread.isMainThread {
                 assertionFailure("👉 CALL THIS FROM MAIN THREAD")
             }
             #endif
             firstOffsetSavedVisibleItem = getObject(at: indexPath)
-            if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
+            if let collectionView = collectionView, let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
             }
         }
@@ -485,8 +485,8 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     private func reloadSupplementaryViewsIfNeeded() {
         if !sectionChanges.isEmpty || !objectChanges.isEmpty {
             CellImageManager.clear()
-            collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
+            collectionView?.reloadData()
+            collectionView?.collectionViewLayout.invalidateLayout()
         }
     }
     
