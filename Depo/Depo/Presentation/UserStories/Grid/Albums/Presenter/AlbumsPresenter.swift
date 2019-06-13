@@ -114,7 +114,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         
         if let router = router as? AlbumsRouter {
             if let interactor = interactor as? AlbumsInteractor {
-                router.onCreateAlbum(moduleOutput: interactor.photos?.isEmpty ?? true ? nil : self)
+                router.onCreateAlbum(moduleOutput: interactor.photos?.isEmpty == true ? nil : self)
             } else if interactor is StoriesInteractor {
                 router.onCreateStory()
             }

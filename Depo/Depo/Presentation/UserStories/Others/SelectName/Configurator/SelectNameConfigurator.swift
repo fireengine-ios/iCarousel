@@ -28,9 +28,7 @@ class SelectNameModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
             
-        if let output = moduleOutput {
-            presenter.selectNameModuleOutput = output
-        }
+        presenter.selectNameModuleOutput = output
         
         let interactor = SelectNameInteractor()
         interactor.output = presenter
