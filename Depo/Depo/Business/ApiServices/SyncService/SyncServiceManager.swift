@@ -308,7 +308,7 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {

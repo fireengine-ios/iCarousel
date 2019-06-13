@@ -385,7 +385,8 @@ class AuthenticationService: BaseRequestService {
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
             CellImageManager.clear()
-            FreeAppSpace.default.clear()
+            FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
+            FreeAppSpace.session.handleLogout()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()

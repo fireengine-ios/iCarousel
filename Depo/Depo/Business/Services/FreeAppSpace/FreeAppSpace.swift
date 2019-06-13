@@ -11,13 +11,20 @@ import UIKit
 final class FreeAppSpace: NSObject {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var cacheManager: CacheManager = {
-        let manager = CacheManager.shared
-        manager.delegates.add(self)
-        return manager
-    }()
-    
-    static let `default` = FreeAppSpace()
+    private let cacheManager = CacheManager.shared
+//    FIXME: currently we had floating problem when we saw items from previos account and also cache manger delegate currently is setuping on lazy var. So temporal solution is to use Seesion Singleton that we set to nil on logout.
+//    static let `default` = FreeAppSpace()
+    private static var instance: FreeAppSpace?
+    static var session: FreeAppSpace {
+        if let instance = instance {
+            return instance
+        } else {
+            let newInstance = FreeAppSpace()
+            newInstance.cacheManager.delegates.add(newInstance)
+            instance = newInstance
+            return newInstance
+        }
+    }
     
     private var isSearchRunning = false
     private var needSearchAgain = false
@@ -58,6 +65,10 @@ final class FreeAppSpace: NSObject {
     func clear() {
         duplicatesArray.removeAll()
         isSearchRunning = false
+    }
+    
+    func handleLogout() {
+        FreeAppSpace.instance = nil
     }
     
     func checkFreeAppSpaceAfterAutoSync() {
@@ -260,7 +271,7 @@ class FreeAppService: RemoteItemsService {
             return
         } else {
             isGotAll = true
-            FreeAppSpace.default.getDuplicatesItems { array in
+            FreeAppSpace.session.getDuplicatesItems { array in
                 success?(array)
             }
         }

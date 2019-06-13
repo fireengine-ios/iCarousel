@@ -28,7 +28,7 @@ class HomePageInteractor: HomePageInteractorInput {
     }
 
     func homePagePresented() {
-        FreeAppSpace.default.checkFreeAppSpace()
+        FreeAppSpace.session.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         

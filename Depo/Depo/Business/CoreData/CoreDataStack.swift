@@ -136,8 +136,8 @@ final class CoreDataStack: NSObject {
     // TODO: do we need save main context for compounder
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
                                   savedCallBack: VoidHandler?) {
-        context.saveAsyncWithParantMerge(async: !saveAndWait, completion: { _ in
+        context.save(async: !saveAndWait) { _ in
             savedCallBack?()
-        })
+        }
     }
 }

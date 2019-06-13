@@ -252,7 +252,7 @@ final class MediaItemOperationsService {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
                 }
-                context.saveAsyncWithParantMerge(async: true, completion: nil)
+                CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
             }
         }
     }
@@ -342,9 +342,8 @@ final class MediaItemOperationsService {
                         _ = MediaItem(wrapData: item, context: context)
                     }
                 }
-                context.saveAsyncWithParantMerge(async: true, completion: { _ in
-                    completion()
-                })
+                
+                CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: completion)
             }
             
             //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
@@ -363,7 +362,7 @@ final class MediaItemOperationsService {
                     existed.copyInfo(item: newItem, context: context)
                 }
             }
-            context.saveAsyncWithParantMerge(async: true)
+            CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
         }
     }
 
@@ -408,9 +407,7 @@ final class MediaItemOperationsService {
                         _ = MediaItem(wrapData: $0, context: context)
                     }
                     
-                    context.saveAsyncWithParantMerge(async: true, completion: { _ in
-                        completion()
-                    })
+                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
                 })  
             })
         }
@@ -586,15 +583,11 @@ final class MediaItemOperationsService {
                         }
                     }
                     
-                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-//                        self?.pageAppendedCallBack?(addedObjects)
-                        
+                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
                         print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
                         self?.saveLocalMediaItemsPaged(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                     })
-                    
-                    
                 }
             })
         }
@@ -717,9 +710,7 @@ final class MediaItemOperationsService {
                     
                     remoteItems.forEach { context.delete($0) }
                     
-                    context.saveAsync(completion: { _ in
-                        completion()
-                    })
+                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
                 })
             })
         }

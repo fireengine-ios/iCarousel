@@ -1,6 +1,10 @@
 import UIKit
 
 extension UITextField {
+    var placeholderLabel: UILabel? {
+        return subviews.first(where: { $0 is UILabel }) as? UILabel
+    }
+    
     func toggleTextFieldSecureType() {
         isSecureTextEntry.toggle()
         
