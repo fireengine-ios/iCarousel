@@ -518,8 +518,8 @@ class RouterVC: NSObject {
     
     // MARK: Create Album
     
-    func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
+    func createNewAlbum() -> UIViewController {
+        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName)
         return controller
     }
     
