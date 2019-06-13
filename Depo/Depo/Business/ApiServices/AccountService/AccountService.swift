@@ -440,17 +440,21 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in
+                
+                func errorHandler() {
+                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+                    handler(defaultFaqUrl)
+                }
+                
                 switch response.result {
                 case .success(let json):
                     if let json = json as? [String: String], let faqUrl = json["value"] {
                         handler(faqUrl)
                     } else {
-                        let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-                        handler(defaultFaqUrl)
+                        errorHandler()
                     }
                 case .failure(_):
-                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-                    handler(defaultFaqUrl)
+                    errorHandler()
                 }
         }
     }
