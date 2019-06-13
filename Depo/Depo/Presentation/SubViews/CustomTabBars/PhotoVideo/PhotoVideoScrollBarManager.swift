@@ -56,13 +56,13 @@ final class PhotoVideoScrollBarManager {
                 self.yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
             }
             
-            let yearMonthValues: [YearMonthTuple] = allItems.compactMap {
+            let yearMonthValues: [YearMonthTuple] = mediaItems.compactMap {
                 if let split = $0.monthValue?.split(separator: " "),
                     split.count == 2,
                     let year = Int(split[0]),
-                    let mounth = Int(split[1])
+                    let month = Int(split[1])
                 {
-                    return (year, mounth)
+                    return (year, month)
                 }
                 return nil
             }
