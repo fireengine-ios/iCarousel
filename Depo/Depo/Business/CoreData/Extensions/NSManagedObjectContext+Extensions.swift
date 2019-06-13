@@ -77,21 +77,21 @@ extension NSManagedObjectContext {
     }
     
     // TODO: need to test without NSManagedObjectContextDidSave notification
-    func saveAsyncWithParantMerge(async: Bool, completion: CoreDataSaveStatusHandler? = nil) {
-        save(async: async) { [weak self] status in
-            switch status {
-            case .saved:
-                let mainContext = CoreDataStack.default.mainContext
-                if self != mainContext, self?.parent == mainContext {
-                    mainContext.saveAsync(completion: completion)
-                } else {
-                    completion?(.saved)
-                }
-            default:
-                completion?(status)
-            }
-        }
-    }
+//    func saveAsyncWithParantMerge(async: Bool, completion: CoreDataSaveStatusHandler? = nil) {
+//        save(async: async) { [weak self] status in
+//            switch status {
+//            case .saved:
+//                let mainContext = CoreDataStack.default.mainContext
+//                if self != mainContext, self?.parent == mainContext {
+//                    mainContext.saveAsync(completion: completion)
+//                } else {
+//                    completion?(.saved)
+//                }
+//            default:
+//                completion?(status)
+//            }
+//        }
+//    }
     
     @discardableResult
     func saveSyncUnsafe() -> CoreDataSaveStatus {
