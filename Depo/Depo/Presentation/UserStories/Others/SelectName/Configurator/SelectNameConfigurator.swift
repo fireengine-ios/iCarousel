@@ -10,25 +10,23 @@ import UIKit
 
 class SelectNameModuleConfigurator {
     
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, rootFolderID: String?, isFavorites: Bool = false, moduleOutput: SelectNameModuleOutput?) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, rootFolderID: String?, isFavorites: Bool = false) {
         
         if let viewController = viewInput as? SelectNameViewController {
             configure(viewController: viewController,
                       moduleType: viewType,
                       rootFolderID: rootFolderID,
-                      isFavorites: isFavorites, moduleOutput: moduleOutput)
+                      isFavorites: isFavorites)
         }
     }
     
-    private func configure(viewController: SelectNameViewController, moduleType: SelectNameScreenType, rootFolderID: String?, isFavorites: Bool = false, moduleOutput: SelectNameModuleOutput?) {
+    private func configure(viewController: SelectNameViewController, moduleType: SelectNameScreenType, rootFolderID: String?, isFavorites: Bool = false) {
         
         let router = SelectNameRouter()
         
         let presenter = SelectNamePresenter()
         presenter.view = viewController
         presenter.router = router
-            
-        presenter.selectNameModuleOutput = output
         
         let interactor = SelectNameInteractor()
         interactor.output = presenter

@@ -113,22 +113,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         debugLog("AlbumsPresenter onStartCreatingPhotoAndVideos")
         
         if let router = router as? AlbumsRouter {
-            if let interactor = interactor as? AlbumsInteractor {
-                router.onCreateAlbum(moduleOutput: interactor.photos?.isEmpty == true ? nil : self)
+            if interactor is AlbumsInteractor {
+                router.onCreateAlbum()
             } else if interactor is StoriesInteractor {
                 router.onCreateStory()
-            }
-        }
-    }
-}
-
-extension AlbumsPresenter: SelectNameModuleOutput {
-    func didCreateAlbum(item: AlbumItem) {
-        if let interact = interactor as? AlbumsInteractor {
-            if item.readOnly == true {
-                UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
-            } else {
-                interact.onAddPhotosToAlbum(selectedAlbumUUID: item.uuid)
             }
         }
     }
