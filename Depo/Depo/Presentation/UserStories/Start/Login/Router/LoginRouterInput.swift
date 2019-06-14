@@ -9,12 +9,16 @@
 import Foundation
 
 protocol LoginRouterInput {
+    
+    var optInController: OptInController? { get }
+    
+    var emptyPhoneController: TextEnterController? { get }
+    
+    func renewOptIn(with optIn: OptInController)
 
     func goToForgotPassword()
     
     func goToHomePage()
-    
-    func getCapcha() -> CaptchaViewController?
     
     func goToTermsAndServices()
     
@@ -22,4 +26,15 @@ protocol LoginRouterInput {
     
     func goToRegistration()
 
+    func openEmptyEmail(successHandler: @escaping VoidHandler)
+    
+    func openTextEnter(buttonAction: @escaping TextEnterHandler)
+    
+    func openOptIn(phone: String)
+
+    func showNeedSignUp(message: String, onClose: @escaping VoidHandler)
+    
+    func openSupport()
+    
+    func dismissEmptyPhoneController(successHandler: VoidHandler?)
 }

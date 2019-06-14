@@ -17,18 +17,17 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
     
-    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .image) { items in
+    override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
+        MediaItemOperationsService.shared.allLocalItemsForSync(video: false, image: true) { items in
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
         }
-        getUnsyncedOperationQueue.addOperation(operation)
     }
     
     override func start(newItems: Bool) {
         super.start(newItems: newItems)
         
         // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService().isReachableViaWiFi
+//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
 //        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
         
     }

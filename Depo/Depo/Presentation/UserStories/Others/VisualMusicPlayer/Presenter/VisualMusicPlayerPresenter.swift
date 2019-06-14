@@ -18,11 +18,12 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func stopModeSelected() {}
     func printSelected() {}
     func openInstaPick() { }
-    var selectedItems: [BaseDataSourceItem] {
-        if let currentItem = view.player.currentItem {
-            return [currentItem]
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        guard let currentItem = view.player.currentItem else {
+            selectedItemsCallback([])
+            return
         }
-        return []
+        selectedItemsCallback([currentItem])
     }
 
     weak var view: VisualMusicPlayerViewInput!

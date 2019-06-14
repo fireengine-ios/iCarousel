@@ -60,7 +60,8 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     private var analyzesCount: InstapickAnalyzesCount?
     
     private lazy var activityManager = ActivityIndicatorManager()
-        
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -323,6 +324,19 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
         downloader.getFiles(filesForDownload: [fileForDownload], response: { [weak self] urls, path in
             self?.stopActivityIndicator()
             let activityVC = UIActivityViewController(activityItems: urls, applicationActivities: nil)
+            
+            activityVC.completionWithItemsHandler = { [weak self] activityType, _, _, _ in
+                guard
+                    let activityType = activityType,
+                    let activityTypeString = (activityType as NSString?) as String?
+                else {
+                    return
+                }
+                
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                          eventActions: .photopickShare,
+                                                          eventLabel: .shareViaApp(activityTypeString.knownAppName()))
+            }
             
             ///works only on iPad
             activityVC.popoverPresentationController?.sourceRect = rect

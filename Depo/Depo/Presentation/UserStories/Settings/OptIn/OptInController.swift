@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Typist
 
 protocol OptInControllerDelegate: class {
     func optInNavigationTitle() -> String
@@ -23,47 +24,60 @@ final class OptInController: ViewController, NibInit {
         return vc
     }
     
-    @IBOutlet private var keyboardHideManager: KeyboardHideManager!
-    
-    @IBOutlet private weak var codeTextField: CodeTextField!
+    private enum Constants {
+        static let timerLabelBottomOffset: CGFloat = 8
+    }
+        
     @IBOutlet private weak var timerLabel: SmartTimerLabel!
-    @IBOutlet private weak var resendButton: BlueButtonWithWhiteText!
-    @IBOutlet private weak var titleLabel: UILabel!
+    
+    @IBOutlet private weak var mainTitle: UILabel!
+    
+    @IBOutlet private weak var infoTitle: UILabel!
+    
+    @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
+    
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
+    
+    @IBOutlet private weak var resendCodeButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle(TextConstants.resendCode, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.backgroundColor = UIColor.lrTealish
+            newValue.isOpaque = true
+        }
+    }
     
     private lazy var activityManager = ActivityIndicatorManager()
     private var phone = ""
     private var attempts: Int = 0
+    private let keyboard = Typist()
+    private var currentSecurityCode = ""
+    private var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
+    private var isRemoveLetter: Bool = false
+
     
     weak var delegate: OptInControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        automaticallyAdjustsScrollViewInsets = false
-        
-        codeTextField.becomeFirstResponder()
+        setupKeyboard()
+        setupButtonsInitialState()
         setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
-        
-        hideResendButton()
-        resendButton.setTitle(TextConstants.otpResendButton, for: .normal)
-        
-        titleLabel.text = String(format: TextConstants.otpTitleText, phone)
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        
-        timerLabel.textColor = ColorConstants.darkText
-        timerLabel.font = UIFont.TurkcellSaturaBolFont(size: 39)
-        
-        if let delegate = delegate {
-            setTitle(withString: delegate.optInNavigationTitle())
-        }
-        
-        activityManager.delegate = self
+        setupInitialState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        setupNavBar()
+    }
+    
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
@@ -76,13 +90,6 @@ final class OptInController: ViewController, NibInit {
         timerLabel.dropTimer()
     }
     
-    /// maybe will be need vereficationCodeNotReady in else
-    @IBAction func changedCodeTextField(_ sender: CodeTextField) {
-        if let code = sender.text, code.count >= sender.inputTextLimit, !timerLabel.isDead {
-            verify(code: code)
-        }
-    }
-    
     @IBAction func actionResendButton(_ sender: UIButton) {
         attempts = 0
         delegate?.optInResendPressed(self)
@@ -93,15 +100,20 @@ final class OptInController: ViewController, NibInit {
     }
     
     func clearCode() {
-        codeTextField.text = ""
+        codeTextFields.forEach({
+            $0.text = ""
+        })
+        currentSecurityCode = ""
     }
     
     func showResendButton() {
-        resendButton.isHidden = false
+        resendCodeButton.isHidden = false
+        hideKeyboard()
     }
     
     func hideResendButton() {
-        resendButton.isHidden = true
+        resendCodeButton.isHidden = true
+        firstSecurityCodeTextField.becomeFirstResponder()
     }
     
     func increaseNumberOfAttemps() -> Bool {
@@ -116,15 +128,109 @@ final class OptInController: ViewController, NibInit {
         return false
     }
     
-    private func endEnterCode() {
-        keyboardHideManager.dismissKeyboard()
-        codeTextField.isEnabled = false
+    func startEnterCode() {
+        firstSecurityCodeTextField.becomeFirstResponder()
     }
     
-    func startEnterCode() {
-        codeTextField.isEnabled = true
-        codeTextField.becomeFirstResponder()
+    func showError(_ showTextError: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = showTextError
     }
+    
+    func hiddenError() {
+        errorLabel.text = ""
+        errorLabel.isHidden = true
+    }
+    
+    // MARK: - Utility methods
+    private func setupNavBar() {
+        navigationBarWithGradientStyle()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    private func setupInitialState() {
+        codeTextFields.forEach({
+            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        })
+        
+        startEnterCode()
+        
+        setupPhoneLable(with: phone)
+        
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.enterSecurityCode)
+        }
+        navigationItem.backBarButtonItem?.title = TextConstants.backTitle
+        
+        mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
+        mainTitle.textColor = .black
+        mainTitle.text = TextConstants.enterSecurityCode
+        
+        infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
+        infoTitle.textColor = ColorConstants.blueGrey
+        
+        timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
+        timerLabel.textColor = ColorConstants.cloudyBlue
+        
+        errorLabel.textColor = ColorConstants.textOrange
+        errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+    }
+    
+    private func setupButtonsInitialState() {
+        resendCodeButton.isHidden = true
+    }
+    
+    func setupPhoneLable(with number: String) {
+        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+        let range = (text as NSString).range(of: number)
+        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+                                                  .foregroundColor: ColorConstants.textGrayColor]
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(attr, range: range)
+        infoTitle.attributedText = attributedString
+    }
+    
+    private func setupKeyboard() {
+        keyboard.on(event: .willShow) { [weak self] (options) in
+            UIView.animate(withDuration: options.animationDuration) {
+                self?.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
+                
+                self?.view.layoutIfNeeded()
+            }
+        }.on(event: .willHide) { [weak self] (options) in
+            UIView.animate(withDuration: options.animationDuration) {
+                self?.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
+                    
+                self?.view.layoutIfNeeded()
+            }
+        }.start()
+    }
+    
+    private func endEnterCode() {
+        hideKeyboard()
+    }
+    
+    fileprivate func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func textFieldDidChange(_ sender: UITextField) {
+        if isRemoveLetter {
+            let previosTag = sender.tag - 1
+            if let nextResponder = codeTextFields[safe: previosTag] {
+                nextResponder.becomeFirstResponder()
+            }
+        } else {
+            let nextTag = sender.tag + 1
+            if let nextResponder = codeTextFields[safe: nextTag] {
+                nextResponder.becomeFirstResponder()
+            } else {
+                hideKeyboard()
+            }
+        }
+    }
+    
 }
 
 // MARK: - SmartTimerLabelDelegate
@@ -133,6 +239,12 @@ extension OptInController: SmartTimerLabelDelegate {
         endEnterCode()
         clearCode()
         showResendButton()
+        
+        if timerLabel.isShowMessageWithDropTimer {
+            showError(TextConstants.timeIsUpForCode)
+        }
+
+        timerLabel.isShowMessageWithDropTimer = true
     }
 }
 
@@ -146,3 +258,51 @@ extension OptInController: ActivityIndicator {
         activityManager.stop()
     }
 }
+
+// MARK: - UITextFieldDelegate
+extension OptInController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        /// if the string is empty, then when deleting, the delegate method does not work
+        textField.text = " "
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        isRemoveLetter = string.isEmpty
+
+        if string.isEmpty {
+            if !currentSecurityCode.isEmpty {
+                currentSecurityCode.removeLast()
+            }
+            
+            return true
+        } 
+        
+        /// clear the space that we added to work delegate methods with an empty string
+        textField.text = ""
+        
+        hiddenError()
+        let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
+        let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
+        if result != nil {
+            return false
+        }
+        
+        let currentСodeEntered = currentSecurityCode + string
+        
+        if currentСodeEntered.count == inputTextLimit,
+            !timerLabel.isDead {
+            currentSecurityCode = currentСodeEntered
+            verify(code: currentSecurityCode)
+            return true
+        } else if currentСodeEntered.count > inputTextLimit {
+            return false
+        }
+        
+        currentSecurityCode = currentSecurityCode + string
+        
+        return true
+    }
+    
+}
+

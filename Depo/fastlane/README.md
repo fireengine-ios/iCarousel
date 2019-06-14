@@ -30,6 +30,11 @@ fastlane beta_jenkins_preprod
 fastlane beta_diawi
 ```
 
+### beta_diawi_preprod
+```
+fastlane beta_diawi_preprod
+```
+
 ### beta_fabric
 ```
 fastlane beta_fabric

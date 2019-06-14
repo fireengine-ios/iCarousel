@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol PeriodicContactSyncDataSourceDelegate {
+protocol PeriodicContactSyncDataSourceDelegate: class {
     func onValueChanged()
 }
 
@@ -19,7 +19,7 @@ final class PeriodicContactSyncDataSource: NSObject {
     
     private var periodContactsSyncSettings: PeriodicContactsSyncSettings?
     
-    var delegate: PeriodicContactSyncDataSourceDelegate?
+    weak var delegate: PeriodicContactSyncDataSourceDelegate?
         
     func setup(table: UITableView) {
         tableView = table
@@ -118,7 +118,6 @@ extension PeriodicContactSyncDataSource: UITableViewDataSource {
             let syncSetting = timeSettingModel.syncSetting {
             autoSyncCell.setup(with: timeSettingModel, setting: syncSetting)
         }
-        autoSyncCell.setColors(isFromSettings: true)
         return autoSyncCell
     }
     

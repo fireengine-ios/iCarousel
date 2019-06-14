@@ -17,6 +17,10 @@ final class WormholePoster {
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeLogout)
     }
     
+    func didLogout() {
+        wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeDidLogout)
+    }
+    
     func offTurkcellPassword() {
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeOffTurkcellPassword)
     }

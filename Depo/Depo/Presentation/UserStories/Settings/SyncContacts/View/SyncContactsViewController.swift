@@ -110,10 +110,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         MenloworksAppEvents.onContactSyncPageOpen()
     }
     
-    deinit {
-        output.onDeinit()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if tabBarSetup {

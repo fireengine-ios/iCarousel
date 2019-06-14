@@ -10,67 +10,45 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     var isDeleteRequestRunning = false
     
-    private let fileService = FileService.shared
+    private lazy var freeAppSpace = FreeAppSpace.session
+    private lazy var wrapFileService = WrapItemFileService()
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
-        if (isDeleteRequestRunning) {
+        if isDeleteRequestRunning {
             return
         }
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
-        FreeAppSpace.default.getUIDSForObjects(itemsArray: selectedItems){ [weak self] uuids in
-            self?.fileService.details(uuids: uuids, success: { [weak self] objects in
-                if (selectedItems.isEmpty) {
-                    guard let self_ = self else {
-                        return
+        
+        wrapFileService.deleteLocalFiles(deleteFiles: selectedItems, success: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.isDeleteRequestRunning = false
+            
+            if let presenter = self.output as? FreeAppSpacePresenter {
+                DispatchQueue.main.async {
+                    presenter.onItemDeleted(count: selectedItems.count)
+                    if FreeAppSpace.session.getDuplicatesObjects().isEmpty {
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
                     }
-                    if let presenter = self_.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.goBack()
-                        }
-                        return
-                    }
+                    presenter.goBack()
                 }
-                let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: objects, localObjects: selectedItems)
-                let fileService = WrapItemFileService()
-                fileService.deleteLocalFiles(deleteFiles: array, success: {
-                    
-                    guard let self_ = self else {
-                        return
-                    }
-                    
-                    if let service = self_.remoteItems as? FreeAppService {
-                        service.clear()
-                    }
-                    self_.isDeleteRequestRunning = false
-                    if let presenter = self_.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
-                                presenter.onItemDeleted(count: array.count)
-                                if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
-                                    CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                                    CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
-                                }
-                                presenter.goBack()
-                            }
-                        }
-                    }, fail: { [weak self] error in
-                        self?.isDeleteRequestRunning = false
-                        if let presenter = self?.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
-                                presenter.canceled()
-                            }
-                        }
-                    })
-                }, fail: { [weak self] error in
-                    self?.isDeleteRequestRunning = false
-                    if let presenter = self?.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.canceled()
-                        }
-                    }
-                    UIApplication.showErrorAlert(message: error.description)
-            })
-        }
+            }
+        }, fail: { [weak self] error in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.isDeleteRequestRunning = false
+            if let presenter = self.output as? FreeAppSpacePresenter {
+                DispatchQueue.main.async {
+                    presenter.canceled()
+                }
+            }
+        })
     }
     
     override func trackScreen() {

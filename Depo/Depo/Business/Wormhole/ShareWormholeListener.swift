@@ -21,7 +21,7 @@ final class ShareWormholeListener {
     
     func listenLogout(logoutHandler: @escaping VoidHandler) {
         self.logoutHandler = logoutHandler
-        wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeLogout) { [weak self] _ in
+        wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeDidLogout) { [weak self] _ in
             guard let `self` = self else {
                 return
             }

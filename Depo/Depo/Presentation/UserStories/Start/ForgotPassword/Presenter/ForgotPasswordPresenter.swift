@@ -14,11 +14,13 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
 
     // MARK: input
     func viewIsReady() {
-        checkLanguadge()
+        view.setupVisableTexts()
+        checkLanguage()
     }
     
-    private func checkLanguadge() {
+    private func checkLanguage() {
         let langCode = Device.locale
+        
         if langCode == "en" || langCode == "tr" {
             view.setupVisableSubTitle()
         }

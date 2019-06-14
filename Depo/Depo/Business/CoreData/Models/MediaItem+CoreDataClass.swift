@@ -21,23 +21,27 @@ public class MediaItem: NSManagedObject {
         self.init(entity: entityDescr, insertInto: context)
         
         idValue = wrapData.id ?? -1
+        
+        uuid = wrapData.uuid
 
         nameValue = wrapData.name
-
-        let char: Character = nameValue?.first ?? " "
-        
-        fileNameFirstChar = String(describing: char).uppercased()
         
         fileTypeValue = wrapData.fileType.valueForCoreDataMapping()
         fileSizeValue = wrapData.fileSize
-        syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         favoritesValue = wrapData.favorites
         isLocalItemValue = wrapData.isLocalItem
         creationDateValue = wrapData.creationDate as NSDate?
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
+        if isLocalItemValue {
+            sortingDate = wrapData.creationDate as NSDate?
+        } else {
+            sortingDate = wrapData.metaData?.takenDate as NSDate?
+        }
+       
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
+        isTranscoded = wrapData.status == .active
         
         parent = wrapData.parent
         
@@ -47,15 +51,16 @@ public class MediaItem: NSManagedObject {
         case let .localMediaContent(assetContent):
             let localID = assetContent.asset.localIdentifier
             localFileID = localID
-            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID
             patchToPreviewValue = nil
         }
         
         md5Value = wrapData.md5
+        trimmedLocalFileID = wrapData.getTrimmedLocalID()
         
-        let dateValue = self.creationDateValue as Date?
-        
-        monthValue = dateValue?.getDateForSortingOfCollectionView()
+        if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
+            (md5.isEmpty || trimmedID.isEmpty) {
+            debugPrint("!!! REMOTE ITEM MD5 EMPTY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
+        }
         
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
@@ -67,19 +72,180 @@ public class MediaItem: NSManagedObject {
         })
         self.albums = NSOrderedSet(array: albums ?? [])
 
+        syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
+        
         let syncStatuses = convertToMediaItems(syncStatuses: wrapData.syncStatuses, context: context)
         objectSyncStatus = syncStatuses
+        
+        if isLocalItemValue {
+            let savedRelatedRemotes = getRelatedRemotes(for: wrapData, context: context)
+            if !savedRelatedRemotes.isEmpty {
+                addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
+                savedRelatedRemotes.forEach { $0.localFileID = localFileID }
+                relatedRemotes = NSSet(array: savedRelatedRemotes)
+                updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
+            }
+        } else {
+            let savedRelatedLocals = getRelatedLocals(for: wrapData, context: context)
+            if !savedRelatedLocals.isEmpty {
+                savedRelatedLocals.forEach {
+                    $0.addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
+                }
+                relatedLocal = savedRelatedLocals.first
+                localFileID = relatedLocal?.localFileID
+                updateRemoteRelated(localMediaItems: savedRelatedLocals)
+            }
+        }
+        
+        
+        //empty monthValue for missing dates section
+//        switch wrapData.patchToPreview {
+//        case .remoteUrl(let url):
+//            if url != nil || localFileID != nil {
+//                fallthrough
+//            }
+//        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+//        }
+        
+        updateMissingDateRelations()
+    }
+    
+    private func getRemoteTrimmedID(json: JSON) -> String  {
+        let uuid = json[SearchJsonKey.uuid].stringValue
+        if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
     }
     
     private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
-        return  NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+        return NSSet(array: syncStatuses.compactMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
     }
-    
+
     var wrapedObject: WrapData {
         return WrapData(mediaItem: self)
     }
     
     func wrapedObject(with asset: PHAsset) -> WrapData {
         return WrapData(mediaItem: self, asset: asset)
+    }
+    
+    func copyInfo(item: WrapData, context: NSManagedObjectContext) {
+        ///FOR NOW we copy everything, could downgrated to just urls and name
+        
+        metadata?.copyInfo(metaData: item.metaData)
+        
+        creationDateValue = item.creationDate as NSDate?
+        lastModifiDateValue = item.lastModifiDate as NSDate?
+        sortingDate = (item.metaData?.takenDate ?? item.creationDate) as NSDate?
+        
+        urlToFileValue = item.tmpDownloadUrl?.absoluteString
+        
+        switch item.patchToPreview {
+        case let .remoteUrl(url):
+            patchToPreviewValue = url?.absoluteString
+        case let .localMediaContent(assetContent):
+            let localID = assetContent.asset.localIdentifier
+            localFileID = localID
+            patchToPreviewValue = nil
+        }
+        
+        trimmedLocalFileID = item.getTrimmedLocalID()
+        parent = item.parent
+        md5Value = item.md5
+        isFolder = item.isFolder ?? false
+        favoritesValue = item.favorites
+        fileTypeValue = item.fileType.valueForCoreDataMapping()
+        fileSizeValue = item.fileSize
+        nameValue = item.name
+        idValue = item.id ?? -1
+        uuid = item.uuid
+        
+        //empty monthValue for missing dates section
+        switch item.patchToPreview {
+        case .remoteUrl(let url):
+            if url != nil || localFileID != nil {
+                fallthrough
+            }
+        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        }
+        
+        
+        //
+        self.albums?.forEach { album in
+            if let savedAlbum = album as? MediaItemsAlbum {
+                context.delete(savedAlbum)
+            }
+        }
+        //
+        let albums = item.albums?.map({ albumUuid -> MediaItemsAlbum in
+            MediaItemsAlbum(uuid: albumUuid, context: context)
+        })
+        self.albums = NSOrderedSet(array: albums ?? [])
+        
+        isTranscoded = item.status == .active
+        updateMissingDateRelations()
+    }
+    
+    func updateMissingDateRelations() {
+        guard isLocalItemValue else {
+            relatedLocal?.updateMissingDateRelations()
+            return
+        }
+        
+        if let relatedRemotes = relatedRemotes as? Set<MediaItem> {
+            hasMissingDateRemotes = relatedRemotes.filter { $0.monthValue == nil }.count == relatedRemotes.count
+        }
+    }
+    
+    func regenerateSecondPartOfUUID() {
+        let firstPart: String
+        if let uuid = uuid {
+            if uuid.contains("~"){
+                firstPart = uuid.components(separatedBy: "~").first ?? trimmedLocalFileID ?? uuid
+            } else {
+                firstPart = trimmedLocalFileID ?? uuid
+            }
+        } else {
+            firstPart = trimmedLocalFileID ?? UUID().uuidString
+        }
+        
+        uuid = firstPart + "~" + UUID().uuidString
+    }
+}
+
+//MARK: - relations
+extension MediaItem {
+
+    private func getRelatedPredicate(item: WrapData, local: Bool) -> NSPredicate {
+        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5)
+    }
+    
+    func getRelatedLocals(for wrapItem: WrapData, context: NSManagedObjectContext)  -> [MediaItem] {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = getRelatedPredicate(item: wrapItem, local: true)
+        let relatedLocals = try? context.fetch(request)
+        return relatedLocals ?? []
+    }
+    
+    func getRelatedRemotes(for wrapItem: WrapData, context: NSManagedObjectContext)  -> [MediaItem] {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = getRelatedPredicate(item: wrapItem, local: false)
+        let relatedLocals = try? context.fetch(request)
+        return relatedLocals ?? []
+    }
+    
+    private func updateLocalRelated(remotesMediaItems: [MediaItem]) {
+        remotesMediaItems.forEach {
+            $0.relatedLocal = self
+        }
+    }
+    
+    private func updateRemoteRelated(localMediaItems: [MediaItem]) {
+        localMediaItems.forEach {
+            $0.addToRelatedRemotes(self)
+        }
     }
 }

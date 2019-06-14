@@ -12,9 +12,6 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
-#if DEBUG
-import netfox
-#endif
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -70,13 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
+    var watchdog: Watchdog?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        #if DEBUG
-        NFX.sharedInstance().start()
-        #endif
-        
         AppConfigurator.applicationStarted(with: launchOptions)
+        #if DEBUG
+            watchdog = Watchdog(threshold: 0.05, strictMode: false)
+        #endif
+        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        print("Documents: \(documents)")
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
@@ -112,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let urlHost = url.host {
             if PushNotificationService.shared.assignDeepLink(innerLink: urlHost){
                 PushNotificationService.shared.openActionScreen()
+                storageVars.deepLink = urlHost
             }
         }
         
@@ -165,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
-            CoreDataStack.default.appendLocalMediaItems(completion: nil)
+            CacheManager.shared.actualizeCache(completion: nil)
         }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
@@ -251,8 +251,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillTerminate")
         
-        AppConfigurator.stopCurio()
-        
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
@@ -291,7 +289,11 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
+//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+            
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

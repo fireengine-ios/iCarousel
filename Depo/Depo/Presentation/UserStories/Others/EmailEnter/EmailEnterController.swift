@@ -1,50 +1,32 @@
-//
-//  EmailEnterController.swift
-//  Depo_LifeTech
-//
-//  Created by Bondar Yaroslav on 3/16/18.
-//  Copyright © 2018 LifeTech. All rights reserved.
-//
-
 import UIKit
 
-/// doc https://wiki.life.com.by/display/LTFizy/Empty+e-mail+iOS
 final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     
-    @IBOutlet private var customizator: EmailEnterCustomizator!
-    @IBOutlet private weak var emailTextField: UnderlineTextField!
+    var successHandler: VoidHandler?
     
-    private lazy var attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
+    @IBOutlet private var designer: EmailEnterDesigner!
+    @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var emailView: ProfileTextEnterView!
+    @IBOutlet private weak var continueButton: RoundedInsetsButton!
     
     private lazy var authService = AuthenticationService()
-    var approveCancelHandler: VoidHandler?
     
-    @IBAction private func actionApproveButton(_ sender: UIButton) {
-        verifyMail()
+    private var email: String {
+        return emailView.textField.text ?? ""
     }
     
-    @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
-        let isUpped = attemptsCounter.up(limitHandler: { [weak self] in
-            self?.view.endEditing(true)
-            self?.dismiss(animated: true) { 
-                AppConfigurator.logout()
-            }
-        })
-        
-        if isUpped {
-            closeAnimated()
-        }
+    private var isEmailValid: Bool {
+        return !email.isEmpty && Validator.isValid(email: email)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextField.becomeFirstResponder()
-        title = TextConstants.emptyEmailTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.exitWhite,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(actionCloseButton))
+        title = TextConstants.missingInformation
+        emailView.becomeFirstResponder()
+        emailView.textField.delegate = self
+        emailView.textField.addTarget(self, action: #selector(emailDidChnaged), for: .editingChanged)
+        updateButtonState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,39 +34,32 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         navigationBarWithGradientStyle()
     }
     
-    private func closeAnimated() {
-        view.endEditing(true)
-        dismiss(animated: true) {
-            self.approveCancelHandler?()
-        }
+    @IBAction func onContinueButton(_ sender: UIButton) {
+        updateEmail()
     }
     
-    private func verifyMail() {
-        guard let email = emailTextField.text, !email.isEmpty else {
-            showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
-            return
-        }
-        
-        guard Validator.isValid(email: email) else {
-            showErrorAlert(message: TextConstants.notCorrectEmail)
-            return
-        }
-        
+    @objc private func emailDidChnaged() {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        continueButton.isEnabled = isEmailValid
+    }
+    
+    private func updateEmail() {
+        assert(isEmailValid)
         showSpinner()
         
-        /// to test popup sucess close without email update
-        /// also comment "authService.updateEmail..."
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-//            self?.hideSpiner()
-//            self?.showEmailConfirmation(for: email)
-//        }
-        
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
-            sucess: { [weak self] response in
-                DispatchQueue.main.async {
-                    self?.hideSpinner()
-                    self?.showEmailConfirmation(for: email)
-                }
+                                sucess: { [weak self] response in
+                                    
+                                    /// email updating without "SingletonStorage.shared.getAccountInfoForUser(forceReload: true"
+                                    SingletonStorage.shared.accountInfo?.email = self?.email
+                                    
+                                    DispatchQueue.main.async {
+                                        self?.hideSpinner()
+                                        self?.showEmailConfirmation()
+                                    }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.showErrorAlert(message: error.description)
@@ -93,7 +68,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         })
     }
     
-    private func showEmailConfirmation(for email: String) {
+    private func showEmailConfirmation() {
         let message = String(format: TextConstants.registrationEmailPopupMessage, email)
         
         let controller = PopUpController.with(
@@ -107,5 +82,22 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
                 }
         })
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func closeAnimated() {
+        view.endEditing(true)
+        dismiss(animated: true) {
+            self.successHandler?()
+        }
+    }
+}
+
+extension EmailEnterController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if isEmailValid {
+            updateEmail()
+        }
+        return false
     }
 }

@@ -133,6 +133,7 @@
 
 /*I cant understand*/
 "Auto Sync Preparation" = "Auto Sync Preparation";
+"Quick Scroll Preparation" = "Quick Scroll Preparation";
 "Sync with data plan" = "Sync with data plan";
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
 "Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to settings to auto sync";
@@ -672,6 +673,7 @@
 "facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_import" = "Please enable \"Import from Facebook\" option to use \"Facebook Tag Transfer\" feature";
+"facebook_tags_import" = "Please enable \"Facebook Import\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
 "TermsOfUseLinkText" = "TapHere";
 "launch_campaign_card_detail" = "Details";
 "launch_campaign_card_title" = "Prague Campaign";
@@ -945,9 +947,9 @@
 "your_account_email" = "Your Account E-mail";
 "enter_your_account_email" = "Enter your account e-mail";
 "enter_the_text_shown_in_the_image" = "Enter the text shown in the image";
-"support_form_email_body" = "Please do not delete the information below. The information will be used to address the problem.\n\nName: %@\nSurname: %@\nE-mail: %@Msisdn: %@\nApplication Version: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@";
+"support_form_email_body" = "Please do not delete the information below. The information will be used to address the problem.\nName: %@\nSurname: %@\nE-mail: %@\nMsisdn: %@\nApplication Version: %@\nCarrier: %@\nDevice: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@";
 "profile_phone_number_title" = "Phone Number";
-"profile_phone_number_placeholder" = "Enter your 10-digit mobile number";
+"profile_phone_number_placeholder" = "Enter your mobile number";
 "please_enter_your_name" = "Please enter your name";
 "enter_your_name" = "Enter your name";
 "please_enter_your_surname" = "Please enter your surname";
@@ -955,18 +957,18 @@
 "enter_your_email_address" = "Enter your e-mail address";
 "subject" = "Subject";
 "please_enter_your_subject" = "Please enter your subject";
-"please_choose_subject" = "Please choose a subject...";
+"please_choose_subject" = "Please choose a subject";
 "your_problem" = "Your Problem";
 "please_enter_your_problem_shortly" = "Please enter your problem shortly";
 "explain_your_problem_shortly" = "Explain your problem shortly";
-"please_enter_msisdn_or_email" = "Please enter msisdn or email field in order to proceed";
-"support_form_subject_1" = "E-mail";
-"support_form_subject_2" = "Phone Number";
-"support_form_subject_3" = "Password";
-"support_form_subject_4" = "Security text";
-"support_form_subject_5" = "Turkcell Password";
-"support_form_subject_6" = "Automatic Log-in";
-"support_form_subject_7" = "Other";
+"please_enter_msisdn_or_email" = "Please enter phone number or email field";
+"support_form_subject_1" = "Lifebox / I can't login with my e-mail";
+"support_form_subject_2" = "Lifebox / I can't login with my phone number";
+"support_form_subject_3" = "Lifebox / I can't login with my password";
+"support_form_subject_4" = "Lifebox / Security text doesn't match";
+"support_form_subject_5" = "Lifebox / Turkcell Password problem";
+"support_form_subject_6" = "Lifebox / Automatic Log-in problem";
+"support_form_subject_7" = "Lifebox / I can't download lifebox app";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
@@ -976,3 +978,21 @@
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
+"captcha_is_empty" = "Please enter the characters shown in the image";
+"enter_your_password" = "Enter your password";
+"re_enter_your_password" = "Re-enter your password";
+"signup_support_info" = "If you are having difficulty signing up, contact us for support.";
+"missing_information" = "Missing Information";
+"please_enter_your_missing_account_information" = "Please enter your missing account information:";
+"login_email_or_phone_placeholder" = "Enter your e-mail or mobile number";
+"login_password_placeholder" = "Enter your password";
+"login_email_or_phone_error" = "You have to fill in your e-mail or phone";
+"login_password_error" = "You have to fill in your password";
+"enter_security_code" = "Enter Security Code";
+"enter_code_get_code_on_phone" = "Please enter 6-digit security code that we sent to this phone number: %@";
+"time_is_up_for_code" = "Time is up, please request a new code.";
+"resend_code" = "Resend Code";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "FAQ";
+"login_username_not_valid" = "Please check your username";

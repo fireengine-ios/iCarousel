@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextFieldDelegate {
+class SelectNameViewController: BaseViewController, SelectNameViewInput {
     
     var output: SelectNameViewOutput!
     
@@ -62,22 +62,25 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
-    
     // MARK: Buttons actions
     
     @objc func onNextButton() {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        textField.resignFirstResponder()
+        disableCancelButtonIfNeeded()
         output.onNextButton(name: textField.text ?? "")
     }
     
-    
-    // MARK: UITextFieldDelegate
-    
+    private func disableCancelButtonIfNeeded() {
+        let textFieldIsEmpty = textField.text?.isEmpty ?? false
+        navigationItem.rightBarButtonItem?.isEnabled = textFieldIsEmpty
+    }
+}
+
+// MARK: UITextFieldDelegate
+
+extension SelectNameViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         onNextButton()
         return true
     }
-    
 }

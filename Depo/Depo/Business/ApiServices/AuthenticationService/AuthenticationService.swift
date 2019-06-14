@@ -102,7 +102,7 @@ class SignUpUser: BaseRequestParametrs {
     let phone: String
     let mail: String
     let password: String
-    let eulaId: Int
+    let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
     
@@ -112,14 +112,14 @@ class SignUpUser: BaseRequestParametrs {
             LbRequestkeys.phoneNumber: phone,
             LbRequestkeys.password: password,
             LbRequestkeys.language: Device.locale,
-            LbRequestkeys.eulaId: eulaId
+            LbRequestkeys.sendOtp: sendOtp
         ]
     }
 
     override var header: RequestHeaderParametrs {
         guard let unwrapedCaptchaID = captchaID,
             let unwrapedCaptchaAnswer = captchaAnswer else {
-              return RequestHeaders.authification()
+                return RequestHeaders.authification()
         }
         return RequestHeaders.authificationWithCaptcha(id: unwrapedCaptchaID, answer: unwrapedCaptchaAnswer)
     }
@@ -128,13 +128,22 @@ class SignUpUser: BaseRequestParametrs {
         return URL(string: RouteRequests.signUp, relativeTo: super.patch)!
     }
 
-    init(phone: String, mail: String, password: String, eulaId: Int, captchaID: String? = nil, captchaAnswer: String? = nil) {
+    init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
-        self.eulaId = eulaId
+        self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
+    }
+    
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool) {
+        self.phone = registrationUserInfo.phone
+        self.mail = registrationUserInfo.mail
+        self.password = registrationUserInfo.password
+        self.sendOtp = sentOtp
+        self.captchaID = registrationUserInfo.captchaID
+        self.captchaAnswer = registrationUserInfo.captchaAnswer
     }
 }
 
@@ -145,16 +154,10 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     
     let token: String
     let otp: String
-    let processPersonalData: Bool
-    let etkAuth: Bool?
     
     var requestParametrs: Any {
-        var dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp,
-                                   LbRequestkeys.processPersonalData : processPersonalData]
-        if let etkAuth = etkAuth {
-            dict[LbRequestkeys.etkAuth] = etkAuth
-        }
+        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+                                   LbRequestkeys.otp                 : otp]
 
         return dict
     }
@@ -242,9 +245,15 @@ struct ResendVerificationSMS: RequestParametrs {
     }
     
     let refreshToken: String
+    let eulaId: Int
+    let processPersonalData: Bool
+    let etkAuth: Bool
     
     var requestParametrs: Any {
-        return [LbRequestkeys.referenceToken : refreshToken]
+        return [LbRequestkeys.referenceToken : refreshToken,
+                LbRequestkeys.eulaId : eulaId,
+                LbRequestkeys.processPersonalData : processPersonalData,
+                LbRequestkeys.etkAuth : etkAuth]
     }
     
     var patch: URL {
@@ -322,6 +331,7 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                            CacheManager.shared.actualizeCache(completion: nil)
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -352,6 +362,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -373,10 +384,9 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            CoreDataStack.default.clearDataBase()
-            FreeAppSpace.default.clear()
-            CardsManager.default.stopAllOperations()
-            CardsManager.default.clear()
+            CellImageManager.clear()
+            FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
+            FreeAppSpace.session.handleLogout()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()
@@ -390,13 +400,18 @@ class AuthenticationService: BaseRequestService {
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
+            CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
+            
             self.player.stop()
             self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
-            self.storageVars.emptyEmailUp = false
             
-            success?()
+            CacheManager.shared.logout {
+                WormholePoster().didLogout()
+                success?()
+            }
         }
         if async {
             DispatchQueue.main.async {
@@ -441,7 +456,7 @@ class AuthenticationService: BaseRequestService {
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService resendVerificationSMS")
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     

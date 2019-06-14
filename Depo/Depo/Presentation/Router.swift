@@ -26,6 +26,12 @@ class RouterVC: NSObject {
         let nController = navigationController
         let viewController = nController?.viewControllers.last
         
+        if let segmentedVC = viewController as? SegmentedController,
+            let vc = segmentedVC.currentController as? BaseViewController
+        {
+            return vc.floatingButtonsArray
+        }
+        
         if let baseViewController = viewController as? BaseViewController {
             return baseViewController.floatingButtonsArray
         }
@@ -326,12 +332,16 @@ class RouterVC: NSObject {
     
     // MARK: Terms
     
-    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?) -> UIViewController {
+    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) -> UIViewController {
         let conf = TermsAndServicesModuleInitializer(delegate: delegate)
         let viewController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen",
                                                              bundle: nil)
         
-        conf.setupConfig(withViewController: viewController, fromLogin: login, phoneNumber: phoneNumber)
+        if let signUpResponse = signUpResponse, let userInfo = userInfo {
+            conf.setupConfig(withViewController: viewController, fromLogin: login, withSignUpSuccessResponse: signUpResponse, userInfo: userInfo, phoneNumber: phoneNumber)
+        } else {
+            conf.setupConfig(withViewController: viewController, fromLogin: login, phoneNumber: phoneNumber )
+        }
         return viewController
     }
     
@@ -383,18 +393,25 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func segmentedMedia() -> SegmentedController {
+        let photos = PhotoVideoController.initPhotoFromNib()
+        let videos = PhotoVideoController.initVideoFromNib()
+        
+        return SegmentedController.initWithControllers([photos, videos])
+    }
+    
     
     // MARK: Photos and Videos
     
-    var photosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
-        return controller
-    }
+//    var photosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
+//        return controller
+//    }
     
-    var videosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
-        return controller
-    }
+//    var videosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
+//        return controller
+//    }
     
     // MARK: Music
     
@@ -531,8 +548,10 @@ class RouterVC: NSObject {
     
     // MARK: - SearchView
     
-    func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
-        let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+    func searchView(navigationController: UINavigationController?, output: SearchModuleOutput? = nil) -> UIViewController {
+        let controller = SearchViewInitializer.initializeSearchViewController(with: "SearchView", output: output)
+        navigationController?.delegate = controller
+        controller.transitioningDelegate = controller
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         return controller
@@ -894,5 +913,9 @@ class RouterVC: NSObject {
         controller.configure(with: models, analyzesCount: analyzesCount, isShowTabBar: isShowTabBar)
         
         return controller
+    }
+    
+    var supportFormController: UIViewController {
+        return SupportFormController()
     }
 }

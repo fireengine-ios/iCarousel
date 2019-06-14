@@ -21,8 +21,7 @@ enum FloatingButtonsType {
 enum TabScreenIndex: Int {
     case homePageScreenIndex = 0
     case photosScreenIndex = 1
-    case videosScreenIndex = 2
-    case musicScreenIndex = 3
+    case contactsSyncScreenIndex = 3
     case documentsScreenIndex = 4
 }
 
@@ -235,9 +234,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showVideosScreen(_ sender: Any) {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
-        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+//        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -360,11 +359,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         syncContactsVC.tabBarSetup = true
         
         let list = [router.homePageScreen,
-                    router.photosScreen,
-                    router.videosScreen,
+                    router.segmentedMedia(),
                     syncContactsVC,
                     router.segmentedFiles]
-        customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -611,8 +609,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
             }
-        case .musicScreenIndex:
-            MenloworksAppEvents.onMusicOpen()
+        case .contactsSyncScreenIndex:
+            MenloworksAppEvents.onContactSyncPageOpen()
         case .documentsScreenIndex:
             MenloworksAppEvents.onDocumentsOpen()
         default:
@@ -658,25 +656,31 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
             
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
-                    lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue
+            {
                 tabbarSelectedIndex = lastPhotoVideoIndex
                 tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
             } else {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue,
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.contactsSyncScreenIndex.rawValue,
                                                                 TabScreenIndex.documentsScreenIndex.rawValue,
                                                                 TabScreenIndex.homePageScreenIndex.rawValue]
+            
+            if tabbarSelectedIndex > 2 {
+                tabbarSelectedIndex -= 1
+            }
+            
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
-            selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
                 log(for: tabScreenIndex)
             }
+
+            selectedIndex = tabbarSelectedIndex
         }
     }
 }
@@ -705,6 +709,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         default:
             return
         }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
         
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
@@ -775,7 +781,14 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
-            let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
+            var folderUUID = getFolderUUID()
+            
+            /// If the user is on the "Documents" screen, I pass folderUUID to avoid opening the default "AllFiles" screen.
+            if folderUUID == nil, selectedIndex == 3 {
+                folderUUID = ""
+            }
+            
+            let controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             

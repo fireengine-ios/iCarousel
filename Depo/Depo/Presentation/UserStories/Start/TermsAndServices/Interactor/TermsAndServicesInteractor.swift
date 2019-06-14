@@ -16,21 +16,30 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var isFromLogin = false
+    var isFromRegistration = false
     
     var eula: Eula?
     
     var phoneNumber: String?
     
-    var etkAuth: Bool?
+    var etkAuth: Bool? {
+        didSet {
+            /// if etkAuth changes, i have to update dataStorage because it will be passed to the next screen where this value will be needed
+            let isEtkAuth = self.etkAuth == true
+            dataStorage.signUpResponse.etkAuth = isEtkAuth
+        }
+    }
     
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
-            guard let eulaR = eula as? Eula else {
+            guard let `self` = self, let eulaR = eula as? Eula else {
                 return
             }
-            self?.eula = eulaR
+            self.eula = eulaR
+            self.dataStorage.signUpResponse.eulaId = eulaR.id
+            
             DispatchQueue.toMain {
-                self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
+                self.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.toMain {
@@ -39,10 +48,27 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         })
     }
     
+    func applyEula() {
+        guard let eulaID = eula?.id else {
+            assertionFailure()
+            return
+        }
+    
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
+            DispatchQueue.main.async {
+                self?.output.eulaApplied()
+            }
+        }, fail: { [weak self] errorResponce in
+            DispatchQueue.main.async {
+                self?.output.applyEulaFaild(errorResponce: errorResponce)
+            }
+        })
+    }
+
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
-        
+        isFromRegistration = true
         dataStorage.signUpResponse.etkAuth = etkAuth
     }
     
@@ -65,76 +91,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         return isFromLogin
     }
     
-    func signUpUser() {
-        guard let sigUpInfo = SingletonStorage.shared.signUpInfo,
-            let eulaId = eula?.id
-            else { return }
-        
-        let signUpUser = SignUpUser(phone: sigUpInfo.phone,
-                                    mail: sigUpInfo.mail,
-                                    password: sigUpInfo.password,
-                                    eulaId: eulaId,
-                                    captchaID: sigUpInfo.captchaID,
-                                    captchaAnswer: sigUpInfo.captchaAnswer)
-        
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
-                guard let t = result as? SignUpSuccessResponse else {
-                    return
-                }
-                self?.dataStorage.signUpResponse = t
-                self?.dataStorage.signUpResponse.etkAuth = self?.etkAuth
-                self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
-                SingletonStorage.shared.referenceToken = t.referenceToken
-                
-                self?.analyticsService.track(event: .signUp)
-                self?.analyticsService.trackSignupEvent()
-                
-                self?.output.signUpSuccessed()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                if case ErrorResponse.error(let error) = errorResponce,
-                    let statusError = error as? ServerStatusError,
-                    let signUpError = SignupResponseError(with: statusError) {
-                    
-                    self?.analyticsService.trackSignupEvent(error: signUpError)
-                    
-                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                        self?.output.signupFailedCaptchaRequired()
-                    }
-                } else if case ErrorResponse.error(let error) = errorResponce,
-                    let valueError = error as? ServerValueError,
-                    let signUpError = SignupResponseError(with: valueError) {
-                    
-                    self?.analyticsService.trackSignupEvent(error: signUpError)
-                    
-                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                        self?.output.signupFailedCaptchaRequired()
-                    }
-                } else {
-                    self?.analyticsService.trackSignupEvent(error: .serverError)
-                }
-
-                self?.output.signupFailed(errorResponce: errorResponce)
-            }
-        })
-    }
-    
-    func applyEula() {
-        guard let eula_ = eula, let eulaID = eula_.id else {
-            return
-        }
-        
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
-            DispatchQueue.main.async {
-                self?.output.eulaApplied()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                self?.output.applyEulaFaild(errorResponce: errorResponce)
-            }
-        })
+    var cameFromRegistration: Bool {
+        return isFromRegistration
     }
     
     func checkEtk() {

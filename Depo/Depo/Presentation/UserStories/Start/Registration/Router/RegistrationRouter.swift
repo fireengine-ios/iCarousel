@@ -17,12 +17,14 @@ class RegistrationRouter: RegistrationRouterInput {
         router.pushViewController(viewController: phoneVerification)
     }
     
-    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String, phoneNumber: String) {
+    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String, phoneNumber: String, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) {
         
         let okHandler: VoidHandler = { [weak self] in
-            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false, delegate: delegate, phoneNumber: phoneNumber) else {
-                return
-            }
+            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false,
+                                                                             delegate: delegate,
+                                                                             phoneNumber: phoneNumber,
+                                                                             signUpResponse: signUpResponse,
+                                                                             userInfo: userInfo) else { return }
             self?.router.pushViewController(viewController: termsAndServices)
         }
         
@@ -38,8 +40,8 @@ class RegistrationRouter: RegistrationRouterInput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func getCapcha() -> CaptchaViewController? {
-        let capcha = router.capcha
-        return capcha
+    func openSupport() {
+        let controller = router.supportFormController
+        router.pushViewController(viewController: controller)
     }
 }

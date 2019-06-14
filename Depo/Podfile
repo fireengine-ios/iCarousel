@@ -16,7 +16,6 @@ def core_pods
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
-  pod 'Curio_iOS_SDK', :git => 'https://github.com/KonstDevelop/Curio_iOS_SDK.git', :branch => 'pod-issue'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
@@ -50,10 +49,9 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
-  pod 'GPUImage', '~> 0.1'
+  pod 'MetalPetal', '~> 1.0'
+  pod 'GPUImage'
 
-  #network debugging
-  pod 'netfox', :configurations => ['Debug']
 end
 
 target 'Depo_LifeTech' do
@@ -67,6 +65,7 @@ end
 
 target 'LifeboxFileProvider' do
     shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
 end
 
 target 'LifeboxFileProviderUI' do

@@ -91,6 +91,7 @@ final class PushNotificationService {
         case .changePassword: openChangePassword()
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
+        case .becomePremium: openBecomePremium()
         }
         notificationAction = nil
     }
@@ -118,13 +119,11 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex, .musicScreenIndex, .documentsScreenIndex:
+            case .homePageScreenIndex, .contactsSyncScreenIndex, .documentsScreenIndex:
                 tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
                 tabBarVC.selectedIndex = index.rawValue
             case .photosScreenIndex:
                 tabBarVC.showPhotosScreen(self)
-            case .videosScreenIndex:
-                tabBarVC.showVideosScreen(self)
             }
         }
     }
@@ -160,7 +159,7 @@ final class PushNotificationService {
     }
     
     private func openVideos() {
-        openTabBarItem(index: .videosScreenIndex)
+//        openTabBarItem(index: .videosScreenIndex)
     }
     
     private func openAlbums() {
@@ -176,7 +175,7 @@ final class PushNotificationService {
     }
     
     private func openMusic() {
-        openTabBarItem(index: .musicScreenIndex)
+        pushTo(router.musics)
     }
     
     private func openDocuments() {
@@ -184,7 +183,7 @@ final class PushNotificationService {
     }
     
     private func openContactSync() {
-        pushTo(router.syncContacts)
+        openTabBarItem(index: .contactsSyncScreenIndex)
     }
     
     private func openPeriodicContactSync() {
@@ -262,9 +261,7 @@ final class PushNotificationService {
     
     private func openSearch() {
         let output = router.getViewControllerForPresent()
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         pushTo(controller)
     }
     
@@ -303,5 +300,9 @@ final class PushNotificationService {
     
     private func openMyStorage() {
         pushTo(router.myStorage(usageStorage: nil))
+    }
+    
+    private func openBecomePremium() {
+        pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
     }
 }

@@ -244,6 +244,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         needToScrollAfterRotation = true
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        collectionView.reloadData()
     }
     
     override func getBackgroundColor() -> UIColor {
@@ -347,7 +348,9 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
 
 extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.bounds.size
+        ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+        ///seems like this bug may occur on iOS 12+ when it returns negative value
+        return CGSize(width: max(collectionView.bounds.size.width, 0), height: max(collectionView.bounds.size.height, 0))
     }
 }
 

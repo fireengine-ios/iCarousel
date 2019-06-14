@@ -100,12 +100,12 @@ class PredicateRules {
             case .all:
                 return nil
             }
-        case .duplicates:
-            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)", FileType.image.valueForCoreDataMapping())
-            let serverList = CoreDataStack.default.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
-            let list = serverList.map { $0.md5Value }
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
-            return predicate
+//        case .duplicates:
+//            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)", FileType.image.valueForCoreDataMapping())
+//            let serverList = MediaItemOperationsService.shared.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
+//            let list = serverList.map { $0.md5Value }
+//            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
+//            return predicate
         case .rootFolder(let rootUUID):
             let rootFolderPredicate = NSPredicate(format: "parent = %@", rootUUID)
             return rootFolderPredicate
@@ -122,7 +122,7 @@ class PredicateRules {
     
     func predicate(filters: [GeneralFilesFiltrationType]? = nil) -> NSPredicate? {
         var filtersPredicates: [NSPredicate]?
-        filtersPredicates = filters?.flatMap {
+        filtersPredicates = filters?.compactMap {
             self.predicateFromGeneralFilterType(type: $0)
         }
         

@@ -166,6 +166,12 @@ struct RouteRequests {
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
+    // MARK: - Quick Scroll
+
+    static let quickScrollGroups = "scroll/groups"
+    static let quickScrollGroupsList = "scroll/groups/list"
+    static let quickScrollRangeList = "scroll/range/list"
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {

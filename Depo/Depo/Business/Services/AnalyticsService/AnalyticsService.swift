@@ -202,15 +202,12 @@ extension AnalyticsService: AnalyticsGA {
             let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
             
             autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
-            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) also a is firstAutosync set \(autoSyncStorageSettings.isAutosyncSettingsApplied)")
             
             let photoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
-            debugPrint("!!!! autoSyncStatus is \(autoSyncStatus)")
-
         }
         
         
@@ -218,7 +215,7 @@ extension AnalyticsService: AnalyticsGA {
         
         group.notify(queue: privateQueue) { 
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
-                platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+                platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
                 service: "Lifebox", developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),

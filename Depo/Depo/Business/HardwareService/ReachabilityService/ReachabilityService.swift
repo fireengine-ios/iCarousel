@@ -9,7 +9,6 @@
 import Foundation
 import Reachability
 
-
 protocol ReachabilityProtocol {
     
     var isReachableViaWWAN: Bool { get }
@@ -19,54 +18,97 @@ protocol ReachabilityProtocol {
     var isReachable: Bool { get }
 }
 
-class ReachabilityService: ReachabilityProtocol {
+protocol ReachabilityServiceDelegate: class {
+    func reachabilityDidChanged(_ service: ReachabilityService)
+}
+
+final class ReachabilityService: ReachabilityProtocol {
     
-    private let reachability = Reachability()
+    static let shared = ReachabilityService()
+    
+    private lazy var reachability = Reachability()
+    private lazy var apiReachability = APIReachabilityService()
     
     var isReachableViaWiFi: Bool {
-        return self.reachability?.connection == .wifi
+        return self.reachability?.connection == .wifi && apiReachability.connection == .reachable
     }
     
     var isReachableViaWWAN: Bool {
-        return self.reachability?.connection == .cellular
+        return self.reachability?.connection == .cellular && apiReachability.connection == .reachable
     }
     
     var isReachable: Bool {
         ///If you just .none, then compares not with the right enum
-        return self.reachability?.connection != Reachability.Connection.none
+        return self.reachability?.connection != Reachability.Connection.none && apiReachability.connection == .reachable
     }
     
     var status: String {
         return self.reachability?.connection.description ?? Reachability.Connection.none.description
     }
     
-    init() {
-        ///DO WE NEED THIS?
-//        self.reachability?.whenReachable = { Reachability in
-//            //
-//        }
-//
-//        self.reachability?.whenUnreachable = { Reachability in
-//            //
-//        }
+    let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
+    
+    private var updatingApiStatus = false
+    
+    private init() {
+        setupObservers()
         
         do {
-            try self.reachability?.startNotifier()
+            try reachability?.startNotifier()
         } catch {
             print("Can't start REACHABILITY_NOTIFIER")
+        }
+        apiReachability.startNotifier()
+    }
+    
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: reachability, queue: .main) { [weak self] notification in
+            guard let self = self else {
+                return
+            }
+            if let connection = (notification.object as? Reachability)?.connection {
+                debugPrint("ReachabilityService: new connection status \(connection.description)")
+            
+                if connection == .none {
+                    self.notifyDelegates()
+                    return
+                }
+            }
+            
+            guard !self.updatingApiStatus else {
+                return
+            }
+            
+            self.updatingApiStatus = true
+            self.apiReachability.checkAPI { [weak self] in
+                self?.updatingApiStatus = false
+                self?.notifyDelegates()
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .apiReachabilityDidChange, object: nil, queue: .main) { [weak self] _ in
+            if let connection = self?.apiReachability.connection {
+                debugPrint("ReachabilityService: new api connection status \(connection)")
+            }
+            self?.notifyDelegates()
         }
     }
     
     deinit {
-        self.reachability?.stopNotifier()
+        apiReachability.stopNotifier()
+        reachability?.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func notifyDelegates() {
+        delegates.invoke { $0.reachabilityDidChanged(self) }
     }
 }
 
 
 typealias APIReachabilityHandler = (_ isAvailable: Bool) -> Void
 
-
-class APIReachabilityService {
+private final class APIReachabilityService {
     
     enum Connection {
         case unreachable
@@ -88,19 +130,13 @@ class APIReachabilityService {
     }
     private let pingInterval: TimeInterval = 30.0
     
-    
-    init() {
-        
-    }
-    
     // MARK: - Public
     
     func startNotifier() {
         guard timer == nil else {
             return
         }
-
-        self.timer = Timer.scheduledTimer(timeInterval: pingInterval, target: self, selector: #selector(checkAPI), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: pingInterval, target: self, selector: #selector(pingApi), userInfo: nil, repeats: true)
         self.timer?.fire()
     }
     
@@ -117,20 +153,24 @@ class APIReachabilityService {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func checkAPI() {
+    @objc private func pingApi() {
+        checkAPI()
+    }
+    
+    func checkAPI(_ completion: VoidHandler? = nil) {
         requestService.sendPingRequest { [weak self] isReachable in
             guard let `self` = self else {
                 return
             }
             
             self.connection = isReachable ? .reachable : .unreachable
+            completion?()
         }
     }
 
 }
 
-
-class APIHostReachabilityRequestParameters: BaseRequestParametrs {
+final class APIHostReachabilityRequestParameters: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: "https://adepo.turkcell.com.tr/")!
     }
@@ -140,7 +180,7 @@ class APIHostReachabilityRequestParameters: BaseRequestParametrs {
     }
 }
 
-class APIReachabilityRequestService: BaseRequestService {
+final class APIReachabilityRequestService: BaseRequestService {
     func sendPingRequest(handler: @escaping APIReachabilityHandler) {
         let parameters = APIHostReachabilityRequestParameters()
         let responseHandler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in

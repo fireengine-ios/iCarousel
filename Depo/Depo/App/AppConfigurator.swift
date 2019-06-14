@@ -11,7 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import Curio_iOS_SDK
 import Fabric
 import Crashlytics
 
@@ -32,7 +31,6 @@ final class AppConfigurator {
         
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
-        emptyEmailUpIfNeed()
         clearTokensIfNeed()
         logoutIfNeed()
         prepareSessionManager()
@@ -41,7 +39,6 @@ final class AppConfigurator {
         setupIAPObserver()
         startMenloworks(with: launchOptions)
         setupCropy()
-        startCurio(with: launchOptions)
         dropboxManager.start()
         analyticsManager.start()
         
@@ -67,17 +64,6 @@ final class AppConfigurator {
             KeychainSwift().clear()
             /// call migrate after Keychain clear
             AppMigrator.migrateAll()
-        }
-    }
-    
-    private static func emptyEmailUpIfNeed() {
-        if storageVars.emptyEmailUp {
-            debugLog("emptyEmailUpIfNeed")
-            storageVars.emptyEmailUp = false
-            let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
-            attemptsCounter.up(limitHandler: {
-                AuthenticationService().logout(async: false, success: nil)
-            })
         }
     }
     
@@ -149,31 +135,6 @@ final class AppConfigurator {
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
     
-    private static func startCurio(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        guard let appLaunchOptions = launchOptions else {
-            return
-        }
-        
-        let serverURL = "http://curio.turkcell.com.tr/api/v2"
-        
-        //let apiKey = "8fb5c84a549711e881e1d5b6432746d5" /// another test
-        let apiKey = "cab314f33df2514764664e5544def586"
-
-        #if DEBUG
-        let trackingCode = "20AW4ELA"
-
-        #else
-        let trackingCode = "KL2XNFIE"
-        #endif
-        
-        
-        CurioSDK.shared().startSession(serverURL, apiKey: apiKey, trackingCode: trackingCode, sessionTimeout: 30, periodicDispatchEnabled: true, dispatchPeriod: 5, maxCachedActivitiyCount: 10, loggingEnabled: false, logLevel: 0, fetchLocationEnabled: false, maxValidLocationTimeInterval: 600, appLaunchOptions: appLaunchOptions)
-    }
-    
-    static func stopCurio() {
-        CurioSDK.shared().endSession()
-    }
-    
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         func setupMenloworks() {
             DispatchQueue.toMain {
@@ -228,7 +189,13 @@ final class AppConfigurator {
                 ///call appendLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
-                CoreDataStack.default.appendLocalMediaItems(completion: nil)
+                
+                /// start photos logic after notification permission
+                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
+//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+                    
+                }
             }
         } else {
             setupMenloworks()

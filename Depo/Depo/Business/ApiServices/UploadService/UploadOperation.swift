@@ -9,13 +9,14 @@
 import Foundation
 
 
-typealias UploadOperationSuccess = (_ uploadOperation: UploadOperations) -> Void
-typealias UploadOperationHandler = (_ uploadOperation: UploadOperations, _ value: ErrorResponse?) -> Void
+typealias UploadOperationSuccess = (_ uploadOperation: UploadOperation) -> Void
+typealias UploadOperationHandler = (_ uploadOperation: UploadOperation, _ value: ErrorResponse?) -> Void
 
 
-final class UploadOperations: Operation {
+final class UploadOperation: Operation {
     
-    let item: WrapData
+    let inputItem: WrapData
+    private(set) var outputItem: WrapData?
     var uploadType: UploadType?
     private let uploadStategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
@@ -33,7 +34,7 @@ final class UploadOperations: Operation {
     //MARK: - Init
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping UploadOperationHandler) {
-        self.item = item
+        self.inputItem = item
         self.uploadType = uploadType
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
@@ -62,7 +63,7 @@ final class UploadOperations: Operation {
     override func main() {
         BackgroundTaskService.shared.beginBackgroundTask()
         
-        ItemOperationManager.default.startUploadFile(file: item)
+        ItemOperationManager.default.startUploadFile(file: inputItem)
         
         SingletonStorage.shared.progressDelegates.add(self)
         attempmtUpload()
@@ -122,7 +123,7 @@ final class UploadOperations: Operation {
                     return
                 }
                 
-                let uploadParam = Upload(item: self.item,
+                let uploadParam = Upload(item: self.inputItem,
                                          destitantion: responseURL,
                                          uploadStategy: self.uploadStategy,
                                          uploadTo: self.uploadTo,
@@ -138,7 +139,9 @@ final class UploadOperations: Operation {
                     let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                         fileUUID: uploadParam.tmpUUId )
                     
-                    self?.item.uuid = uploadParam.tmpUUId
+//                    self?.inputItem.uuid = uploadParam.tmpUUId
+                    self?.inputItem.syncStatus = .synced
+                    self?.inputItem.setSyncStatusesAsSyncedForCurrentUser()
                     
                     self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                         self?.dispatchQueue.async { [weak self] in
@@ -147,28 +150,32 @@ final class UploadOperations: Operation {
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
+                                self.outputItem = WrapData(remote: response)
                                 self.addPhotoToTheAlbum(with: uploadParam, response: response)
-                                self.item.tmpDownloadUrl = response.tempDownloadURL
+                                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                                MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                             }
                             
                             customSucces()
                         }
-                        }, fail: customFail)
+                    }, fail: customFail)
                     
-                    }, fail: { [weak self] error in
-                        guard let `self` = self else {
-                            return
-                        }
-                        
-                        if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                            let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                            self.dispatchQueue.asyncAfter(deadline: delay, execute: {
-                                self.attemptsCount += 1
-                                self.attempmtUpload()
-                            })
-                        } else {
-                            customFail(error)
-                        }
+                }, fail: { [weak self] error in
+                    guard let `self` = self else {
+                        return
+                    }
+                    
+                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                        self.dispatchQueue.asyncAfter(deadline: delay, execute: {
+                            self.attemptsCount += 1
+                            self.attempmtUpload()
+                        })
+                    } else {
+                        customFail(error)
+                    }
                 })
                 
                 ///If upload service can't create upload request task for some reason
@@ -218,15 +225,15 @@ final class UploadOperations: Operation {
 
 //MARK: - OperationProgressServiceDelegate
 
-extension UploadOperations: OperationProgressServiceDelegate {
+extension UploadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, for url: URL) {
         guard isExecuting else {
             return
         }
 
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
-            CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: item)
-            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+            CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
+            ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: ratio)
         }
     }
 }

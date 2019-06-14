@@ -153,6 +153,8 @@ enum AnalyticsAppScreens {
     case myStorage
     case changePassword
     
+    case info(FileType)
+    
     var name: String {
         switch self {
         ///authorization
@@ -270,6 +272,23 @@ enum AnalyticsAppScreens {
             return "My Storage"
         case .changePassword:
             return "Change Password"
+        case .info(let fileType):
+            switch fileType {
+            case .image:
+                return "Photo_Info"
+            case .video:
+                return "Video_Info"
+            case .application:
+                return "Document_Info"
+            case .audio:
+                return "Music_Info"
+            case .photoAlbum:
+                return "Album_Info"
+            case .folder:
+                return "Folder_Info"
+            default:
+                return "Info"
+            }
         }
     }
 }
@@ -382,6 +401,7 @@ enum GAEventAction {
             }
         }
     }
+    
     case purchase
     case login
     case logout
@@ -418,7 +438,11 @@ enum GAEventAction {
     case photopickAnalysis
     case firstAutoSync
     case settingsAutoSync
-    
+    case captcha
+    case photopickShare
+    case contactOperation(SYNCMode)
+    case plus
+
     var text: String {
         switch self {
         case .purchase:
@@ -493,6 +517,19 @@ enum GAEventAction {
             return "First Auto Sync"
         case .settingsAutoSync:
             return "Auto Sync"
+        case .captcha:
+            return "Captcha"
+        case .photopickShare:
+            return "Photopick Share"
+        case .contactOperation(let operation):
+            switch operation {
+            case .backup:
+                return "Contact Backup"
+            case .restore:
+                return "Contact Restore"
+            }
+        case .plus:
+            return "Plus"
         }
     }
 }
@@ -517,6 +554,7 @@ enum GAEventLabel {
             }
         }
     }
+    
     enum ShareType {
         case facebook
         case twitter
@@ -556,6 +594,37 @@ enum GAEventLabel {
         }
     }
     
+    enum CaptchaEvent {
+        case changeClick
+        case voiceClick
+        
+        var text: String {
+            switch self {
+            case .changeClick:
+                return "Change Click"
+            case .voiceClick:
+                return "Voice Click"
+            }
+        }
+    }
+    
+    enum ContactEvent {
+        case backup
+        case restore
+        case deleteDuplicates
+        
+        var text: String {
+            switch self {
+            case .backup:
+                return "Backup"
+            case .restore:
+                return "Restore"
+            case .deleteDuplicates:
+                return "Delete of Duplicate"
+            }
+        }
+    }
+    
     case empty
     
     case success
@@ -572,8 +641,6 @@ enum GAEventLabel {
     case sort(SortedRules)
     case search(String) ///searched word
     case clickOtherTurkcellServices ///This event should be sent after each login (just send after login)
-    case phoneBookBackUp
-    case phoneRestore
     //
     case importDropbox
     case importFacebook
@@ -608,8 +675,13 @@ enum GAEventLabel {
     case videosNever
     case videosWifi
     case videosWifiLTE
-    
-    var text: String {
+    case captcha(CaptchaEvent)
+    case contact(ContactEvent)
+    case plusAction(TabBarViewController.Action)
+    case shareViaLink
+    case shareViaApp(String)
+
+        var text: String {
         switch self {
         case .empty:
             return ""
@@ -654,10 +726,6 @@ enum GAEventLabel {
             return searchText
         case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
             return "lifebox"
-        case .phoneBookBackUp:
-            return "Backup"
-        case .phoneRestore:
-            return "Restore"
         //
         case .importDropbox:
             return "Dropbox"
@@ -715,6 +783,31 @@ enum GAEventLabel {
             return "Videos - Wifi"
         case .videosWifiLTE:
             return "Videos - Wifi&LTE"
+        case .captcha(let captchaEvent):
+            return captchaEvent.text
+        case .contact(let contantEvent):
+            return contantEvent.text
+        case .plusAction(let action):
+            switch action {
+            case .createAlbum:
+                return "Create Album"
+            case .createFolder:
+                return "New Folder"
+            case .createStory:
+                return "Create Story"
+            case .takePhoto:
+                return "Use Camera"
+            case .upload:
+                return "Upload"
+            case .uploadFromLifeBox:
+                return "Upload from Lifebox"
+            case .uploadFromLifeboxFavorites:
+                return "Upload from Lifebox Favorites"
+            }
+        case .shareViaLink:
+            return "Share via Link"
+        case .shareViaApp(let appName):
+            return appName
         }
     }
     
@@ -828,13 +921,13 @@ enum GADementionValues {
         var text: String {
             switch self {
             case .gsm:
-                return "Login with Password - GSM"
+                return "GSM no ile şifreli giriş"
             case .email:
-                return "Login with Password – Email"
+                return "Email ile giriş"
             case .rememberLogin:
-                return "Remember Me Login"
+                return "Beni hatırla ile giriş"
             case .turkcellGSM:
-                return "3G - LTE Login"
+                return "Header Enrichment (cellular) ile giriş"
             }
         }
     }
@@ -876,6 +969,7 @@ enum GADementionValues {
     
     enum signUpError {
         case invalidEmail
+        case invalidPhoneNumber
         case emailAlreadyExists
         case gsmAlreadyExists
         case invalidPassword
@@ -892,6 +986,8 @@ enum GADementionValues {
             switch self {
             case .invalidEmail:
                 return "INVALID_EMAIL"
+            case .invalidPhoneNumber:
+                return "PHONE_NUMBER_IS_INVALID"
             case .emailAlreadyExists:
                 return "EMAIL_ALREADY_EXISTS"
             case .gsmAlreadyExists:

@@ -15,7 +15,6 @@ protocol AutoSyncSettingsOptionViewDelegate: class {
 
 final class AutoSyncSettingsOptionView: UIView {
     weak var delegate: AutoSyncSettingsOptionViewDelegate?
-    private var isFromSettings: Bool = false
     
     @IBOutlet private weak var button: UIButton! {
         didSet { button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 16.5) }
@@ -44,6 +43,12 @@ final class AutoSyncSettingsOptionView: UIView {
             }
         }
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setColors()
+    }
 
     
     // MARK: - Public
@@ -53,15 +58,13 @@ final class AutoSyncSettingsOptionView: UIView {
         self.isSelected = isSelected
     }
     
-    func setColors(isFromSettings: Bool) {
-        self.isFromSettings = isFromSettings
-        let textColor = isFromSettings ? UIColor.darkGray : ColorConstants.whiteColor
-        button.setTitleColor(textColor, for: .normal)
-        checkboxImageView.tintColor = isFromSettings ? UIColor.darkGray : ColorConstants.whiteColor
-    }
-    
-    
     // MARK: - Private
+    
+    private func setColors() {
+        let textColor = UIColor.darkGray
+        button.setTitleColor(textColor, for: .normal)
+        checkboxImageView.tintColor = UIColor.darkGray
+    }
     
     private func setCheckmark(selected: Bool) {
         UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
