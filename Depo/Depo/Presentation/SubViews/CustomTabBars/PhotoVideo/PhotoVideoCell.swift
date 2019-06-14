@@ -185,10 +185,8 @@ final class PhotoVideoCell: UICollectionViewCell {
         } else if let metadata = mediaItem.metadata {
             cellId = ""
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
-                     mediumUrl: URL(string: metadata.mediumUrl ?? ""))
-        }
-        
-        
+                     mediumUrl: URL(string: metadata.mediumUrl ?? mediaItem.urlToFileValue ?? ""))
+        } 
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {
