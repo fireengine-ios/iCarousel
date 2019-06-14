@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 enum FloatingButtonsType {
     case takePhoto
@@ -731,7 +732,11 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
             else { return }
         
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        SDWebImageManager.shared().saveImage(toCache: image, for: url)
+        
         let wrapData = WrapData(imageData: data)
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
         let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
