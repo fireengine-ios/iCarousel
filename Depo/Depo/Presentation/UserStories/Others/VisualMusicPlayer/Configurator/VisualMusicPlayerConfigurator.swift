@@ -19,11 +19,12 @@ class VisualMusicPlayerModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
     
-        let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupMusicModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
-        viewController.editingTabBar = botvarBarVC
-        presenter.bottomBarPresenter = bottomBarVCmodule.presenter
-        bottomBarVCmodule.presenter?.basePassingPresenter = presenter
+        // TODO: - Commented to clarify the exact requirements
+//        let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
+//        let botvarBarVC = bottomBarVCmodule.setupMusicModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
+//        viewController.editingTabBar = botvarBarVC
+//        presenter.bottomBarPresenter = bottomBarVCmodule.presenter
+//        bottomBarVCmodule.presenter?.basePassingPresenter = presenter
         
         let interactor = VisualMusicPlayerInteractor()
         interactor.output = presenter
