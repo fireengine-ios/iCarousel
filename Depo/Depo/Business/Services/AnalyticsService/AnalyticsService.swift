@@ -336,6 +336,7 @@ extension AnalyticsService: AnalyticsGA {
         DispatchQueue.main.async {
             self.innerTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timerStep), userInfo: userInfo, repeats: true)
             ///fire at least once
+            self.innerTimer?.tolerance = timeInterval * 0.1
             self.innerTimer?.fire()
         }
     }

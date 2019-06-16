@@ -85,6 +85,8 @@ final class CellImageManager {
     }
     
     func cancelImageLoading() {
+        guard CellImageManager.instances.index(forKey: key) != nil else { return }
+        
         CellImageManager.instances.removeValue(forKey: key)
         isCancelled = true
         
