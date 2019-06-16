@@ -155,6 +155,12 @@ final class UploadOperation: Operation {
                                 self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
                                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
                                 self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                                
+                                //case for upload photo from camera
+                                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                                    self.outputItem?.metaData?.mediumUrl = preview
+                                }
+
                                 MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                             }
                             

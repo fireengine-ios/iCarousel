@@ -89,7 +89,7 @@ final class MediaItemOperationsService {
         }
         fetchRequest.predicate = predicate
         let context = CoreDataStack.default.newChildBackgroundContext
-        self.deleteObjects(fromFetch: fetchRequest, context: context, completion: nil)
+        self.deleteObjects(fromFetch: fetchRequest, context: context, completion: completion)
         
     }
     

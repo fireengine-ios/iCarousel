@@ -186,9 +186,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             cellId = ""
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
-        }
-        
-        
+        } 
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {

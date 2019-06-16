@@ -136,7 +136,9 @@ private final class APIReachabilityService {
         guard timer == nil else {
             return
         }
+        
         self.timer = Timer.scheduledTimer(timeInterval: pingInterval, target: self, selector: #selector(pingApi), userInfo: nil, repeats: true)
+        self.timer?.tolerance = pingInterval * 0.1
         self.timer?.fire()
     }
     
