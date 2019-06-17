@@ -17,6 +17,8 @@
                 <outlet property="contentView" destination="aLj-Qo-ocB" id="vmZ-Wx-V8R"/>
                 <outlet property="etkCheckboxButton" destination="10w-4A-KrN" id="byK-M1-eqr"/>
                 <outlet property="etkTextView" destination="fhl-UV-ahb" id="7Is-JS-zNg"/>
+                <outlet property="etkTopSpaceConstraint" destination="Pen-nO-dsP" id="uKQ-EW-Mt6"/>
+                <outlet property="introdactionTextView" destination="6DN-qU-jCo" id="aPB-jn-ONy"/>
                 <outlet property="topContraintIOS10" destination="WpD-kj-ClX" id="671-Iu-QVs"/>
                 <outlet property="topContraintIOS11" destination="ezh-vD-O0c" id="IJ3-te-37Y"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
@@ -44,10 +46,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-Qo-ocB">
-                            <rect key="frame" x="23" y="56" width="330" height="172.5"/>
+                            <rect key="frame" x="23" y="56" width="330" height="164.5"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tQP-Dq-V3d">
-                                    <rect key="frame" x="0.0" y="0.0" width="330" height="172.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="164.5"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +72,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmJ-vl-JLz">
-                            <rect key="frame" x="23" y="238.5" width="18" height="18"/>
+                            <rect key="frame" x="23" y="230.5" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="U8I-YI-lpw"/>
                                 <constraint firstAttribute="height" constant="18" id="ffy-CK-bY9"/>
@@ -133,7 +135,7 @@
                         <constraint firstItem="9Kb-k9-w6Q" firstAttribute="centerX" secondItem="heF-JQ-sC2" secondAttribute="centerX" id="hGm-ro-4kj"/>
                         <constraint firstItem="kkM-36-uGV" firstAttribute="centerX" secondItem="heF-JQ-sC2" secondAttribute="centerX" id="m4Y-iP-gpD"/>
                         <constraint firstAttribute="trailing" secondItem="aLj-Qo-ocB" secondAttribute="trailing" constant="22" id="njc-xS-4io"/>
-                        <constraint firstItem="6DN-qU-jCo" firstAttribute="top" secondItem="aLj-Qo-ocB" secondAttribute="bottom" constant="2" id="vVd-bp-3A1"/>
+                        <constraint firstItem="6DN-qU-jCo" firstAttribute="top" secondItem="aLj-Qo-ocB" secondAttribute="bottom" constant="10" id="vVd-bp-3A1"/>
                         <constraint firstItem="pmJ-vl-JLz" firstAttribute="top" secondItem="aLj-Qo-ocB" secondAttribute="bottom" constant="10" id="wug-LC-shl"/>
                         <constraint firstItem="fhl-UV-ahb" firstAttribute="leading" secondItem="10w-4A-KrN" secondAttribute="trailing" constant="8" id="x5L-KI-bHB"/>
                     </constraints>

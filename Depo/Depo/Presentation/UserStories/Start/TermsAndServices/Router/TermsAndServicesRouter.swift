@@ -35,4 +35,9 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
         let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
         RouterVC().pushViewController(viewController: vc)
     }
+    
+    func goToPrivacyPolicyDescriptionController() {
+        print("Hello")
+    }
+    
 }
