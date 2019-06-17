@@ -723,6 +723,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
              completion(self?.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
         }
     }
+    
+    func deleteItems(items: [Item]) {
+        stopEditingMode()
+    }
 }
 
 extension PhotoVideoController {
