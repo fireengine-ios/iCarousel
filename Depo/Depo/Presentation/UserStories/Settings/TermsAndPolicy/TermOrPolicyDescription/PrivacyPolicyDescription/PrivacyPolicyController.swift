@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-final class PrivacyPolicyWebView: UIViewController {
+final class PrivacyPolicyController: UIViewController {
     
     private let langCode = Device.locale
     private var urlPath =  RouteRequests.privacyPolicy
@@ -99,7 +99,7 @@ final class PrivacyPolicyWebView: UIViewController {
 }
 
 // MARK: - WKNavigationDelegate
-extension PrivacyPolicyWebView: WKNavigationDelegate {
+extension PrivacyPolicyController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         switch navigationAction.navigationType {

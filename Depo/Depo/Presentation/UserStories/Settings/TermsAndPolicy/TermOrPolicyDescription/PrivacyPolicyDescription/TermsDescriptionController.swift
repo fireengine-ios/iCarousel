@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class TermsDescriptionTextView: UIViewController {
+final class TermsDescriptionController: UIViewController {
     
     var textToPresent: String = ""
 

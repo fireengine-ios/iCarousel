@@ -86,7 +86,7 @@ extension TermsAndPolicyViewController {
                     assertionFailure()
                     return
                 }
-                let newViewController = TermsDescriptionTextView(text: content)
+                let newViewController = TermsDescriptionController(text: content)
                 self?.router.pushViewController(viewController: newViewController)
                 
             case .failed(_):
@@ -96,7 +96,7 @@ extension TermsAndPolicyViewController {
     }
     
     private func goToPrivacyPolicy() {
-        let newViewController = PrivacyPolicyWebView()
+        let newViewController = PrivacyPolicyController()
         router.pushViewController(viewController: newViewController)
     }
 }

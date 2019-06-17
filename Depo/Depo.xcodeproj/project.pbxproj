@@ -272,8 +272,8 @@
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
-		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyWebView.swift */; };
-		73C0440022B3BDFD005DE312 /* TermsDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionTextView.swift */; };
+		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
+		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
 		766F7C491E77AB6EAA0B0AF1 /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
@@ -4176,9 +4176,9 @@
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
-		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyWebView.swift; sourceTree = "<group>"; };
+		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
-		73C043FF22B3BDFD005DE312 /* TermsDescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionTextView.swift; path = PrivacyPolicyDescription/TermsDescriptionTextView.swift; sourceTree = "<group>"; };
+		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
 		73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsEULAResponse.swift; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorOutput.swift; sourceTree = "<group>"; };
@@ -7490,7 +7490,7 @@
 		73A63F8222B28D1D0062DDE5 /* PrivacyPolicyDescription */ = {
 			isa = PBXGroup;
 			children = (
-				73A63F8E22B394BF0062DDE5 /* PrivacyPolicyWebView.swift */,
+				73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */,
 			);
 			path = PrivacyPolicyDescription;
 			sourceTree = "<group>";
@@ -7498,7 +7498,7 @@
 		73A63F8722B380D90062DDE5 /* TermsDescription */ = {
 			isa = PBXGroup;
 			children = (
-				73C043FF22B3BDFD005DE312 /* TermsDescriptionTextView.swift */,
+				73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */,
 			);
 			name = TermsDescription;
 			sourceTree = "<group>";
@@ -16750,7 +16750,7 @@
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
-				73C0440022B3BDFD005DE312 /* TermsDescriptionTextView.swift in Sources */,
+				73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				92004B5721AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
@@ -17332,7 +17332,7 @@
 				922C24FD224A7E6400FD00D9 /* CircleProgressView.swift in Sources */,
 				7C6E2FA01F31FC6500536DB6 /* CreateStorySelectionInteractorOutput.swift in Sources */,
 				CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */,
-				73A63F8F22B394BF0062DDE5 /* PrivacyPolicyWebView.swift in Sources */,
+				73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */,
 				7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */,
 				CE2976E01FD58E2000350F3A /* LocalAlbumConfigurator.swift in Sources */,
 				7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
