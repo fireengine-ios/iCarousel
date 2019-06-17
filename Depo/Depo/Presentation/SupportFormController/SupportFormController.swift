@@ -74,8 +74,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
         //newValue.subtitleLabel.text
         newValue.textField.placeholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
-        newValue.textField.autocorrectionType = .none
-        newValue.textField.autocapitalizationType = .no
+        newValue.textField.autocorrectionType = .no
+        newValue.textField.autocapitalizationType = .none
         return newValue
     }()
     
