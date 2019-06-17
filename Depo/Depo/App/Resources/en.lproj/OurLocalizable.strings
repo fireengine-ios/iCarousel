@@ -980,6 +980,7 @@
 "enter_your_password" = "Enter your password";
 "re_enter_your_password" = "Re-enter your password";
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
+"login_support_info" = "Login Support Info";
 "missing_information" = "Missing Information";
 "please_enter_your_missing_account_information" = "Please enter your missing account information:";
 "login_email_or_phone_placeholder" = "Enter your e-mail or phone number";
