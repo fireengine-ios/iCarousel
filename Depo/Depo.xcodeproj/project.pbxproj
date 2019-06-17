@@ -22943,6 +22943,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DLIFEBOX\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
@@ -22999,6 +23000,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DLIFEBOX\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -23053,6 +23055,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DLIFEBOX\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -23108,6 +23111,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DLIFEBOX\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -23301,6 +23305,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
@@ -23357,6 +23362,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -23411,6 +23417,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -23466,6 +23473,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
