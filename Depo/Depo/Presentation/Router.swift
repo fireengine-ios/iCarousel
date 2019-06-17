@@ -753,11 +753,17 @@ class RouterVC: NSObject {
         return containerController
     }
     
-
     // MARK: Help and support
     
     var helpAndSupport: UIViewController? {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
+        return controller
+    }
+    
+    // MARK: Terms and policy
+    
+    var termsAndPolicy: UIViewController? {
+        let controller = TermsAndPolicyModuleInitializer.setupModule()
         return controller
     }
     

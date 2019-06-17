@@ -266,6 +266,7 @@
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
 "Help & Support" = "FAQ";
+"terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Lifebox Touch ID and Passcode" = "lifebox Touch ID and Passcode";
 "Usage Info and Packages" = "Account & Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
@@ -678,7 +679,8 @@
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
 "Quick Scroll Preparation" = "Preparing your photos and videos";
-
+"terms_of_use" = "Terms of Use";
+"privacy_policy" = "Privacy Policy";
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features, become a Premium member!";

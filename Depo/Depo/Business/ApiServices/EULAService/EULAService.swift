@@ -60,6 +60,7 @@ struct EULAGet: RequestParametrs {
     }
 }
 
+
 struct EULACheck: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -132,7 +133,6 @@ class EulaService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: eula, handler: handler)
 
-        
     }
     
     private let sessionManager: SessionManager = factory.resolve()
@@ -164,6 +164,35 @@ class EulaService: BaseRequestService {
                     }
                 case .failure(let error):
                     handler(.failed(error))
+                }
+        }
+    }
+    
+    
+    func getTermOfUse(handler: @escaping (ResponseResult<TermsEULAResponse>) -> Void) {
+        
+        let patch = String(format: RouteRequests.eulaGetTerms, Device.locale)
+        guard let url = URL(string: patch, relativeTo: RouteRequests.baseUrl) else {
+            assertionFailure()
+           return
+        }
+        
+        sessionManager
+            .request(url)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let content = TermsEULAResponse(json: JSON(data: data)) else {
+                        assertionFailure()
+                        let error = CustomErrors.serverError("failed parsing TermsEULAResponse")
+                        handler(.failed(error))
+                        return
+                    }
+                    handler(.success(content))
+                   
+                case .failure(let error):
+                    handler(.failed(CustomErrors.serverError("Failed request getTermOfUse, \(error.localizedDescription)")))
                 }
         }
     }

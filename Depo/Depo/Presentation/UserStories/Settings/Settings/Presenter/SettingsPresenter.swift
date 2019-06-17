@@ -89,6 +89,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToHelpAndSupport()
     }
     
+    func goToTermsAndPolicy() {
+        router.goToTermsAndPolicy() 
+    }
+    
     func goToUsageInfo() {
         router.goToUsageInfo()
     }

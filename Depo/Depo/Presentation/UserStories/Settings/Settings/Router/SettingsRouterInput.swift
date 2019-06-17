@@ -24,6 +24,8 @@ protocol SettingsRouterInput {
     
     func goToHelpAndSupport()
     
+    func goToTermsAndPolicy()
+    
     func goToUsageInfo()
     
     func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
