@@ -28,35 +28,26 @@ final class CellImageManager {
         return queue
     }()
     
-    private static var instances = [URL : CellImageManager]()
-    
     private static let blurService = BlurService()
     
     static func instance(by url: URL?) -> CellImageManager? {
         guard let url = url else {
             return nil
         }
-        
-        if let instance = instances[url] {
-            return instance
-        }
-        
+
         let newInstance = CellImageManager(with: url)
-        instances[url] = newInstance
         return newInstance
     }
     
     static func clear() {
         globalDispatchQueue.async {
             globalOperationQueue.cancelAllOperations()
-            instances.removeAll()
         }
     }
     
     //MARK: - Instance vars
     
     let uniqueId: String
-    private let key: URL
     
     private lazy var dispatchQueue = CellImageManager.globalDispatchQueue//DispatchQueue(label: "\(uniqueId)")
     private lazy var operationQueue = CellImageManager.globalOperationQueue
@@ -72,7 +63,6 @@ final class CellImageManager {
     //MARK: - Interface
     
     required init(with key: URL) {
-        self.key = key
         uniqueId = key.absoluteString
     }
     
@@ -85,9 +75,6 @@ final class CellImageManager {
     }
     
     func cancelImageLoading() {
-        guard CellImageManager.instances.index(forKey: key) != nil else { return }
-        
-        CellImageManager.instances.removeValue(forKey: key)
         isCancelled = true
         
         dispatchQueue.async { [weak self] in
