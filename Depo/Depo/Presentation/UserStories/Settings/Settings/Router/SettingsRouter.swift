@@ -40,6 +40,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.helpAndSupport!)
     }
     
+    func goToTermsAndPolicy() {
+        router.pushViewController(viewController: router.termsAndPolicy!)
+    }
+    
     func goToUsageInfo() {
         router.pushViewController(viewController: router.usageInfo!)
     }

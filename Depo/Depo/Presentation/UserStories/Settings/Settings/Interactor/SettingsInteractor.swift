@@ -52,6 +52,7 @@ class SettingsInteractor: SettingsInteractorInput {
                      importAccountsCells,
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellPrivacyAndTerms,
                       TextConstants.settingsViewCellLogout]]
         
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
