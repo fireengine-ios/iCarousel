@@ -171,8 +171,8 @@ class EulaService: BaseRequestService {
     
     func getTermOfUse(handler: @escaping (ResponseResult<TermsEULAResponse>) -> Void) {
         
-        let patch = String(format: RouteRequests.eulaGetTerms, Device.locale)
-        guard let url = URL(string: patch, relativeTo: RouteRequests.baseUrl) else {
+        let path = String(format: RouteRequests.eulaGetTerms, Device.locale)
+        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
             assertionFailure()
            return
         }
