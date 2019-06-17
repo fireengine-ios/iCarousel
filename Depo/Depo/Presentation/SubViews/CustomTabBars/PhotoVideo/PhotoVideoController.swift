@@ -479,7 +479,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
-        dataSource.getObject(at: indexPath) { [weak self] object in
+        dataSource.getObject(at: indexPath) { object in
             if let mediaItem = object {
                 view.setup(with: mediaItem)
             }
