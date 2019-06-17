@@ -432,4 +432,29 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func updateBrandType() {
+        
+        var params = [String: Any]()
+#if LIFEBOX
+        params["brandType"] = "LIFEBOX"
+#elseif LIFEDRIVE
+        params["brandType"] = "LIFEDRIVE"
+#endif
+        
+        sessionManager.request(RouteRequests.Account.Settings.settingsApi,
+                               method: .post,
+                               parameters: params,
+                               encoding: JSONEncoding.prettyPrinted,
+                               headers: RequestHeaders.authification())
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let result):
+                    let resultString = String(data: result, encoding: .utf8) ?? "Error on encoding updateBrandType response"
+                    debugLog(resultString)
+                case .failure(let error):
+                    debugLog(error.localizedDescription)
+                 }
+        }
+    }
 }
