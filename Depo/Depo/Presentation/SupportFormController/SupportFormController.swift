@@ -74,6 +74,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
         //newValue.subtitleLabel.text
         newValue.textField.placeholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
+        newValue.textField.autocorrectionType = .none
+        newValue.textField.autocapitalizationType = .no
         return newValue
     }()
     
@@ -150,23 +152,36 @@ final class SupportFormController: ViewController, KeyboardHandler {
             assertionFailure("all fields should not be nil")
             return
         }
+        
+        var problems = [SupportFormErrors]()
 
         if name.isEmpty {
-            actionOnError(.emptyName)
-        } else if surname.isEmpty {
-            actionOnError(.emptySurname)
-        } else if email.isEmpty && phoneNumber.isEmpty {
-            actionOnError(.emptyCredentials)
-        } else if !email.isEmpty && !Validator.isValid(email: email) {
-            actionOnError(.invalidEmail)
-        } else if subject.isEmpty {
-            actionOnError(.emptySubject)
-            
+            problems.append(.emptyName)
+        }
+        
+        if surname.isEmpty {
+            problems.append(.emptySurname)
+        }
+        
+        if email.isEmpty && phoneNumber.isEmpty {
+            problems.append(.emptyCredentials)
+        }
+        
+        if !email.isEmpty && !Validator.isValid(email: email) {
+            problems.append(.invalidEmail)
+        }
+        
+        if subject.isEmpty {
+            problems.append(.emptySubject)
+        }
+        
         /// bcz of placeholder use isTextEmpty
-        } else if problemView.isTextEmpty {
-            actionOnError(.emptyProblem)
-        } else {
-            
+        if problemView.isTextEmpty {
+            problems.append(.emptyProblem)
+        }
+        
+        
+        if problems.isEmpty {
             let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
             let emailBody = problem + "\n\n" +
                 String(format: TextConstants.supportFormEmailBody,
@@ -188,38 +203,66 @@ final class SupportFormController: ViewController, KeyboardHandler {
             }, fail: { error in
                 UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
             })
+        } else {
+            problems = problems.sorted(by: { $0.rawValue < $1.rawValue })
+            
+            problems.forEach {
+                showError($0)
+            }
+            
+            actionOnTopError(problems.first)
         }
     }
     
-    private func actionOnError(_ error: SupportFormErrors) {
+    private func showError(_ error: SupportFormErrors) {
         switch error {
         case .emptyName:
             nameView.showSubtitleAnimated()
+            
+        case .emptySurname:
+            surnameView.showSubtitleAnimated()
+            
+        case .emptyCredentials:
+            showEmptyCredentialsPopup()
+            
+        case .emptySubject:
+            subjectView.showSubtitleAnimated()
+            
+        case .emptyProblem:
+            problemView.showSubtitleAnimated()
+            
+        case .invalidEmail:
+            emailView.showSubtitleTextAnimated(text: TextConstants.EMAIL_IS_INVALID)
+        }
+    }
+    
+    private func actionOnTopError(_ error: SupportFormErrors?) {
+        guard let error = error else {
+            return
+        }
+        
+        switch error {
+        case .emptyName:
             nameView.textField.becomeFirstResponder()
             scrollToView(nameView)
             
         case .emptySurname:
-            surnameView.showSubtitleAnimated()
             surnameView.textField.becomeFirstResponder()
             scrollToView(surnameView)
             
         case .emptyCredentials:
             emailView.textField.becomeFirstResponder()
             scrollToView(emailView)
-            showEmptyCredentialsPopup()
             
         case .emptySubject:
-            subjectView.showSubtitleAnimated()
             subjectView.textField.becomeFirstResponder()
             scrollToView(subjectView)
             
         case .emptyProblem:
-            problemView.showSubtitleAnimated()
             problemView.textView.becomeFirstResponder()
             scrollToView(problemView)
             
         case .invalidEmail:
-            emailView.showSubtitleTextAnimated(text: TextConstants.EMAIL_IS_INVALID)
             emailView.textField.becomeFirstResponder()
             scrollToView(emailView)
         }
@@ -293,7 +336,7 @@ extension SupportFormController: UITextFieldDelegate {
     }
 }
 
-enum SupportFormErrors {
+enum SupportFormErrors: Int {
     case emptyName
     case emptySurname
     case emptyCredentials
