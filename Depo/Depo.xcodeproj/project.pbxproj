@@ -270,19 +270,8 @@
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
-		73A63F6422B23ECF0062DDE5 /* TermsAndPolicyViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6322B23ECF0062DDE5 /* TermsAndPolicyViewInput.swift */; };
-		73A63F6622B23F560062DDE5 /* TermsAndPolicyViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6522B23F560062DDE5 /* TermsAndPolicyViewOutput.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
-		73A63F6C22B240F40062DDE5 /* TermsAndPolicyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6B22B240F40062DDE5 /* TermsAndPolicyRouter.swift */; };
-		73A63F6E22B241110062DDE5 /* TermsAndPolicyRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6D22B241110062DDE5 /* TermsAndPolicyRouterInput.swift */; };
-		73A63F7022B242B10062DDE5 /* TermsAndPolicyModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6F22B242B10062DDE5 /* TermsAndPolicyModuleInput.swift */; };
-		73A63F7222B243020062DDE5 /* TermsAndPolicyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7122B243020062DDE5 /* TermsAndPolicyPresenter.swift */; };
-		73A63F7422B2443E0062DDE5 /* TermsAndPolicyInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7322B2443E0062DDE5 /* TermsAndPolicyInteractorInput.swift */; };
-		73A63F7622B244630062DDE5 /* TermsAndPolicyInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7522B244630062DDE5 /* TermsAndPolicyInteractorOutput.swift */; };
-		73A63F7822B245180062DDE5 /* TermsAndPolicyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7722B245180062DDE5 /* TermsAndPolicyConfigurator.swift */; };
-		73A63F7A22B246CC0062DDE5 /* TermsAndPolicyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7922B246CC0062DDE5 /* TermsAndPolicyInteractor.swift */; };
-		73A63F7C22B24B450062DDE5 /* TermsAndPolicyModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F7B22B24B450062DDE5 /* TermsAndPolicyModuleInitializer.swift */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyWebView.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionTextView.swift */; };
 		73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */; };
@@ -4185,19 +4174,8 @@
 		70774C24E3E356684A692557 /* UploadFilesSelectionInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInitializer.swift; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
-		73A63F6322B23ECF0062DDE5 /* TermsAndPolicyViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewInput.swift; sourceTree = "<group>"; };
-		73A63F6522B23F560062DDE5 /* TermsAndPolicyViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewOutput.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
-		73A63F6B22B240F40062DDE5 /* TermsAndPolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyRouter.swift; sourceTree = "<group>"; };
-		73A63F6D22B241110062DDE5 /* TermsAndPolicyRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyRouterInput.swift; sourceTree = "<group>"; };
-		73A63F6F22B242B10062DDE5 /* TermsAndPolicyModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyModuleInput.swift; sourceTree = "<group>"; };
-		73A63F7122B243020062DDE5 /* TermsAndPolicyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyPresenter.swift; sourceTree = "<group>"; };
-		73A63F7322B2443E0062DDE5 /* TermsAndPolicyInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyInteractorInput.swift; sourceTree = "<group>"; };
-		73A63F7522B244630062DDE5 /* TermsAndPolicyInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyInteractorOutput.swift; sourceTree = "<group>"; };
-		73A63F7722B245180062DDE5 /* TermsAndPolicyConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyConfigurator.swift; sourceTree = "<group>"; };
-		73A63F7922B246CC0062DDE5 /* TermsAndPolicyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyInteractor.swift; sourceTree = "<group>"; };
-		73A63F7B22B24B450062DDE5 /* TermsAndPolicyModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyModuleInitializer.swift; sourceTree = "<group>"; };
 		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyWebView.swift; sourceTree = "<group>"; };
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionTextView.swift; path = PrivacyPolicyDescription/TermsDescriptionTextView.swift; sourceTree = "<group>"; };
@@ -7486,10 +7464,6 @@
 			isa = PBXGroup;
 			children = (
 				73A63F5E22B23CEE0062DDE5 /* View */,
-				73A63F5F22B23CFB0062DDE5 /* Presenter */,
-				73A63F6022B23D0B0062DDE5 /* Interactor */,
-				73A63F6122B23D1F0062DDE5 /* Router */,
-				73A63F6222B23D590062DDE5 /* Configuretor */,
 				73A63F7D22B283840062DDE5 /* TermOrPolicyDescription */,
 			);
 			path = TermsAndPolicy;
@@ -7500,47 +7474,8 @@
 			children = (
 				73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */,
 				73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */,
-				73A63F6322B23ECF0062DDE5 /* TermsAndPolicyViewInput.swift */,
-				73A63F6522B23F560062DDE5 /* TermsAndPolicyViewOutput.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		73A63F5F22B23CFB0062DDE5 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				73A63F6F22B242B10062DDE5 /* TermsAndPolicyModuleInput.swift */,
-				73A63F7122B243020062DDE5 /* TermsAndPolicyPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		73A63F6022B23D0B0062DDE5 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				73A63F7922B246CC0062DDE5 /* TermsAndPolicyInteractor.swift */,
-				73A63F7322B2443E0062DDE5 /* TermsAndPolicyInteractorInput.swift */,
-				73A63F7522B244630062DDE5 /* TermsAndPolicyInteractorOutput.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		73A63F6122B23D1F0062DDE5 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				73A63F6B22B240F40062DDE5 /* TermsAndPolicyRouter.swift */,
-				73A63F6D22B241110062DDE5 /* TermsAndPolicyRouterInput.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		73A63F6222B23D590062DDE5 /* Configuretor */ = {
-			isa = PBXGroup;
-			children = (
-				73A63F7722B245180062DDE5 /* TermsAndPolicyConfigurator.swift */,
-				73A63F7B22B24B450062DDE5 /* TermsAndPolicyModuleInitializer.swift */,
-			);
-			path = Configuretor;
 			sourceTree = "<group>";
 		};
 		73A63F7D22B283840062DDE5 /* TermOrPolicyDescription */ = {
@@ -16994,7 +16929,6 @@
 				2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */,
 				A2079912219F13A800AD5037 /* PremiumInteractorInput.swift in Sources */,
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
-				73A63F6C22B240F40062DDE5 /* TermsAndPolicyRouter.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
 				2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */,
@@ -17119,7 +17053,6 @@
 				CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
 				7CDABD081F1E3A6300C8CC16 /* UserProfileInteractorInput.swift in Sources */,
-				73A63F6622B23F560062DDE5 /* TermsAndPolicyViewOutput.swift in Sources */,
 				CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */,
 				8C06AC0C20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
 				CE51ACB01EF90853005DCEE0 /* AutoSyncDataSource.swift in Sources */,
@@ -17207,7 +17140,6 @@
 				A2079902219F131B00AD5037 /* PremiumViewController.swift in Sources */,
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
-				73A63F7422B2443E0062DDE5 /* TermsAndPolicyInteractorInput.swift in Sources */,
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
 				92004B6F21AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				CE51ACD71EF90853005DCEE0 /* TermsAndServicesInteractorOutput.swift in Sources */,
@@ -17380,7 +17312,6 @@
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,
 				78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */,
 				7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
-				73A63F7A22B246CC0062DDE5 /* TermsAndPolicyInteractor.swift in Sources */,
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				4A0AC1412087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
@@ -17568,7 +17499,6 @@
 				93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */,
 				5A3FFF1FDAD804A4043F9E5F /* PhotoVideoDetailConfigurator.swift in Sources */,
 				A217E44621A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
-				73A63F7022B242B10062DDE5 /* TermsAndPolicyModuleInput.swift in Sources */,
 				DC071DDDCA7525DF55B43B69 /* PhotoVideoDetailInitializer.swift in Sources */,
 				B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */,
 				50B49D2A3AAA1794872FF8D2 /* UserInfoSubViewViewInput.swift in Sources */,
@@ -17605,7 +17535,6 @@
 				87FB97AE2008CBA0000D8E2B /* TitleView.swift in Sources */,
 				2F4FBBADE418935193F54EBB /* SyncContactsInteractorInput.swift in Sources */,
 				97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */,
-				73A63F7C22B24B450062DDE5 /* TermsAndPolicyModuleInitializer.swift in Sources */,
 				555C0C8351470D02E705873D /* SyncContactsInteractor.swift in Sources */,
 				CE2F56181F7552A900F49DA1 /* PackagesInteractorInput.swift in Sources */,
 				EFA74FB31FBF378F00CF946E /* PrintModuleConfigurator.swift in Sources */,
@@ -17674,13 +17603,11 @@
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,
 				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
-				73A63F6422B23ECF0062DDE5 /* TermsAndPolicyViewInput.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				17589F742276336800A5DB37 /* PhoneCodeInputView.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
 				B5AB5B6A21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				D47863F91F3F18FA00EFDC6D /* UsageInfoRouterInput.swift in Sources */,
-				73A63F7622B244630062DDE5 /* TermsAndPolicyInteractorOutput.swift in Sources */,
 				4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */,
 				B5390D82216605F600A02002 /* CellImageManager.swift in Sources */,
 				CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */,
@@ -17739,7 +17666,6 @@
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
 				B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */,
-				73A63F6E22B241110062DDE5 /* TermsAndPolicyRouterInput.swift in Sources */,
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
@@ -17826,7 +17752,6 @@
 				B56FBB1A2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
 				B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
-				73A63F7822B245180062DDE5 /* TermsAndPolicyConfigurator.swift in Sources */,
 				17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,
@@ -17870,7 +17795,6 @@
 				78D9BA382007E7F100F2233F /* DuplicatedContactsInteractorOutput.swift in Sources */,
 				7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */,
 				78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */,
-				73A63F7222B243020062DDE5 /* TermsAndPolicyPresenter.swift in Sources */,
 				7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */,
 				6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */,
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,

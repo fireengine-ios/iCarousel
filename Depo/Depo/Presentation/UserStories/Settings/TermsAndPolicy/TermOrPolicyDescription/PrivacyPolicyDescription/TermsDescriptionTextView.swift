@@ -11,9 +11,9 @@ import UIKit
 
 final class TermsDescriptionTextView: UIViewController {
     
-    var textToPresent: NSAttributedString = NSMutableAttributedString(string: "")
-    
-    init(text: NSAttributedString) {
+    var textToPresent: String = ""
+
+    init(text: String) {
         textToPresent = text
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +42,7 @@ final class TermsDescriptionTextView: UIViewController {
         
         view.backgroundColor = .white
         setupLayout()
-        textView.attributedText = textToPresent
+        textView.attributedText = makeHtmlAttributedSring(contentString: textToPresent)
         setTitle(withString: TextConstants.termsOfUseCell)
     }
     
@@ -62,4 +62,16 @@ final class TermsDescriptionTextView: UIViewController {
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
     }
+    
+    private func makeHtmlAttributedSring(contentString: String) -> NSAttributedString? {
+        guard let data = contentString.data(using: .utf8) else { return NSAttributedString() }
+        
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return NSAttributedString()
+        }
+    }
 }
+
+

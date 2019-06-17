@@ -8,23 +8,18 @@
 
 import UIKit
 
-final class TermsAndPolicyViewController: BaseViewController {
+final class TermsAndPolicyViewController: BaseViewController, NibInit {
     
-    var output: TermsAndPolicyViewOutput!
-    typealias NameOfListItem = String
-
     @IBOutlet weak var tableView: UITableView!
-    private var listOfItems: [NameOfListItem] = []
+    private var listOfItems = [TextConstants.termsOfUseCell, TextConstants.privacyPolicyCell]
+    
+    private let router = RouterVC()
+    private let eulaService = EulaService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setTitle(withString: TextConstants.settingsViewCellPrivacyAndTerms)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        output.viewWillBecomeActive()
     }
     
     private func setupTableView() {
@@ -33,16 +28,6 @@ final class TermsAndPolicyViewController: BaseViewController {
         tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.settingTableViewCellID)
         tableView.backgroundColor = UIColor.clear
     }
-}
-
-extension TermsAndPolicyViewController: TermsAndPolicyViewInput {
-    
-    func showCellsData(array: [String]) {
-        listOfItems.removeAll()
-        listOfItems.append(contentsOf: array)
-        tableView.reloadData()
-    }
-    
 }
 
 extension TermsAndPolicyViewController: UITableViewDataSource {
@@ -54,7 +39,7 @@ extension TermsAndPolicyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let settingCell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath)
-    
+        
         guard let cell = settingCell as? SettingsTableViewCell else {
             assertionFailure("Unexpected cell type")
             return UITableViewCell()
@@ -62,7 +47,7 @@ extension TermsAndPolicyViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         let item = listOfItems[indexPath.row]
         cell.setTextForLabel(titleText: item, needShowSeparator: indexPath.row == listOfItems.count - 1)
-
+        
         return cell
     }
 }
@@ -74,19 +59,46 @@ extension TermsAndPolicyViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
-            output.didPressTermsCell()
+            goToTermsOfUse()
         case 1:
-            output.didPressPolicyCell()
+            goToPrivacyPolicy()
         default:
             assertionFailure()
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-         return UIView()
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
     }
 }
+
+extension TermsAndPolicyViewController {
+    
+    private func goToTermsOfUse() {
+        eulaService.getTermOfUse { [weak self] response in
+            switch response {
+            case .success(let text):
+                guard let content = text.contentOut else {
+                    assertionFailure()
+                    return
+                }
+                let newViewController = TermsDescriptionTextView(text: content)
+                self?.router.pushViewController(viewController: newViewController)
+                
+            case .failed(_):
+                assertionFailure("Failed move to Terms Description ")
+            }
+        }
+    }
+    
+    private func goToPrivacyPolicy() {
+        let newViewController = PrivacyPolicyWebView()
+        router.pushViewController(viewController: newViewController)
+    }
+}
+
+

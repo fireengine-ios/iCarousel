@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 final class TermsEULAResponse {
-    var contentOut = ""
+    var contentOut: String?
     fileprivate let content = "content"
 }
 

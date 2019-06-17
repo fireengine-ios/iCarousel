@@ -763,8 +763,7 @@ class RouterVC: NSObject {
     // MARK: Terms and policy
     
     var termsAndPolicy: UIViewController? {
-        let controller = TermsAndPolicyModuleInitializer.setupModule()
-        return controller
+        return TermsAndPolicyViewController.initFromNib()
     }
     
     // MARK: Turkcell Security

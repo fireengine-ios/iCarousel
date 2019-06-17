@@ -12,8 +12,7 @@ import WebKit
 final class PrivacyPolicyWebView: UIViewController {
     
     private let langCode = Device.locale
-    
-    var urlPath =  RouteRequests.privacyPolicy
+    private var urlPath =  RouteRequests.privacyPolicy
     
     private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
