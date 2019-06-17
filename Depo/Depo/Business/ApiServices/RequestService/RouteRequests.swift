@@ -71,6 +71,14 @@ struct RouteRequests {
         }
     }()
     
+    static let target: String = {
+        #if lifedrive
+        return "LIFEDRIVE"
+        #else
+        return "LIFEBOX"
+        #endif
+    }()
+    
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
@@ -86,7 +94,7 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@"
+    static let eulaGet     = "eula/get/%@?brand=" + target
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
