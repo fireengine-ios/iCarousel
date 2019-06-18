@@ -21,6 +21,8 @@ protocol SettingsDelegate: class {
     
     func goToHelpAndSupport()
     
+    func goToTermsAndPolicy() 
+    
     func goToUsageInfo()
     
     func goToActivityTimeline()
@@ -47,7 +49,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         super.viewDidLoad()
         
         leaveFeedbackButton.setTitle(TextConstants.settingsViewLeaveFeedback,
-                              for: .normal)
+                                     for: .normal)
         
         let nib = UINib.init(nibName: CellsIdConstants.settingTableViewCellID,
                              bundle: nil)
@@ -152,7 +154,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let array = tableDataArray[indexPath.section]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
@@ -244,6 +246,12 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                     output.goToHelpAndSupport()
                 }
             case 1:
+                if (settingsDelegate != nil) {
+                    settingsDelegate!.goToTermsAndPolicy()
+                } else {
+                    output.goToTermsAndPolicy()
+                }
+            case 2:
                 output.onLogout()
             default:
                 break

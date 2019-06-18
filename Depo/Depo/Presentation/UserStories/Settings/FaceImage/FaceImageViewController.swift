@@ -36,7 +36,7 @@ final class FaceImageViewController: ViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        displayManager.applyConfiguration(.initial)
+        displayManager.applyConfiguration(authorityStorage.accountType.isPremium ? .initialPremium : .initialStandart) 
 
         navigationBarWithGradientStyle()
         checkFaceImageAndFacebokIsAllowed()
@@ -121,7 +121,7 @@ final class FaceImageViewController: ViewController, NibInit {
                             self?.displayManager.applyConfiguration(.facebookTagsOff)
                         }
                     } else {
-                        self?.displayManager.applyConfiguration(.initial)
+                        self?.displayManager.applyConfiguration(self?.authorityStorage.accountType.isPremium == true ? .initialPremium : .initialStandart)
                     }
                     
                     self?.view.layoutIfNeeded()
@@ -151,7 +151,7 @@ final class FaceImageViewController: ViewController, NibInit {
             } else if self.faceImageAllowedSwitch.isOn {
                 self.displayManager.applyConfiguration(.faceImagePremium)
             } else {
-                self.displayManager.applyConfiguration(.initial)
+                self.displayManager.applyConfiguration(self.authorityStorage.accountType.isPremium ? .initialPremium : .initialStandart)
             }
             
             self.view.layoutIfNeeded()

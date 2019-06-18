@@ -518,8 +518,8 @@ class RouterVC: NSObject {
     
     // MARK: Create Album
     
-    func createNewAlbum() -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName)
+    func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
+        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -753,12 +753,17 @@ class RouterVC: NSObject {
         return containerController
     }
     
-
     // MARK: Help and support
     
     var helpAndSupport: UIViewController? {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
+    }
+    
+    // MARK: Terms and policy
+    
+    var termsAndPolicy: UIViewController? {
+        return TermsAndPolicyViewController.initFromNib()
     }
     
     // MARK: Turkcell Security

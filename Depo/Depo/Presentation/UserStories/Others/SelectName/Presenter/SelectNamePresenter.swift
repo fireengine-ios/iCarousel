@@ -11,6 +11,8 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     var interactor: SelectNameInteractorInput!
     var router: SelectNameRouterInput!
     
+    weak var selectNameModuleOutput: SelectNameModuleOutput?
+
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
         
@@ -71,7 +73,11 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         
         guard let item = item else { return }
         
-        router.moveToAlbumPage(presenter: self, item: item)
+        if selectNameModuleOutput != nil {
+            selectNameModuleOutput?.didCreateAlbum(item: item)
+        } else {
+            router.moveToAlbumPage(presenter: self, item: item)
+        }
     }
     
     func operationFailedWithError(errorMessage: String) {

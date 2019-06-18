@@ -266,6 +266,7 @@
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
 "Help & Support" = "FAQ";
+"terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Lifebox Touch ID and Passcode" = "lifebox Touch ID and Passcode";
 "Usage Info and Packages" = "Account & Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
@@ -672,13 +673,15 @@
 "facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_import" = "Please enable \"Import from Facebook\" option to use \"Facebook Tag Transfer\" feature";
+"face_tags_description_premium" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh";
 "TermsOfUseLinkText" = "TapHere";
 "launch_campaign_card_detail" = "Details";
 "launch_campaign_card_title" = "Prague Campaign";
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
 "Quick Scroll Preparation" = "Preparing your photos and videos";
-
+"terms_of_use" = "Terms of Use";
+"privacy_policy" = "Privacy Policy";
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features, become a Premium member!";
@@ -758,6 +761,7 @@
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
+"face_tags_description_standart" = "Eula text will be here Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem.";
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
@@ -996,3 +1000,5 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
+
+"photo_pick_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus.";

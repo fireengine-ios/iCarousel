@@ -63,6 +63,14 @@ struct RouteRequests {
         }
     }()
     
+    static let privacyPolicy: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .production: return "https://mylifebox.com/policy/?lang="
+        }
+    }()
+    
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
@@ -82,6 +90,7 @@ struct RouteRequests {
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetTerms = "eula/get/%@?brand=LIFEDRIVE"
     
     
     //MARK: Social Connections
@@ -179,7 +188,6 @@ struct RouteRequests {
         }
     }
     
-    
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
         static func card(with id: Int) -> URL {
@@ -198,6 +206,7 @@ struct RouteRequests {
         
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
