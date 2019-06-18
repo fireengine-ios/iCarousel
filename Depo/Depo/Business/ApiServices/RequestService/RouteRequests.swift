@@ -214,6 +214,7 @@ struct RouteRequests {
         
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end

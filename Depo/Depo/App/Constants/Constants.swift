@@ -984,6 +984,7 @@ struct TextConstants {
     static let facebookTagsOn = NSLocalizedString("facebook_tags_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsOff = NSLocalizedString("facebook_tags_off", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsImport = NSLocalizedString("facebook_tags_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceTagsDescriptionPremium = NSLocalizedString("face_tags_description_premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1080,6 +1081,7 @@ struct TextConstants {
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceTagsDescriptionStandart = NSLocalizedString("face_tags_description_standart", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let homePagePopup = NSLocalizedString("home_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncPopup = NSLocalizedString("sync_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1234,4 +1236,6 @@ struct TextConstants {
     static let captchaIsEmpty = NSLocalizedString("captcha_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginUsernameNotValid = NSLocalizedString("login_username_not_valid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myProfileFAQ = NSLocalizedString("frequently_asked_questions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoPickDescription = NSLocalizedString("photo_pick_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -432,4 +432,30 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    
+    func faqUrl(_ handler: @escaping (String) -> Void) {
+        debugLog("AccountService faqUrl")
+        
+        sessionManager
+            .request(RouteRequests.Account.getFaqUrl)
+            .customValidate()
+            .responseJSON(queue: .global()) { response in
+                
+                func errorHandler() {
+                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+                    handler(defaultFaqUrl)
+                }
+                
+                switch response.result {
+                case .success(let json):
+                    if let json = json as? [String: String], let faqUrl = json["value"] {
+                        handler(faqUrl)
+                    } else {
+                        errorHandler()
+                    }
+                case .failure(_):
+                    errorHandler()
+                }
+        }
+    }
 }

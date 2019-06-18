@@ -652,6 +652,7 @@
 "facebook_tags_on" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
 "facebook_tags_off" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
 "facebook_tags_import" = "Facebook fotoğraf etiketlerinin lifebox’ta da gözükmesi için “Facebook’tan Taşı” özelliğini aktif hale getirmelisin.";
+"face_tags_description_premium" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh";
 "TermsOfUseLinkText" = "Tıklayın";
 "launch_campaign_card_detail" = "Detaylar";
 "launch_campaign_card_title" = "Prag Kampanyası";
@@ -738,6 +739,7 @@
 "see_details" = "Detaylar";
 "face_image_description" = "Standart kullanıcı olduğun için fotoğrafların arasından sadece 100 tanesi işlenebilecek. Sana özel oluşturulacak akıllı albümlerde sadece 3 kişi, nesne ve lokasyon klasörü görebileceksin.";
 "face_image_upgrade" = "Bu özelliği fotoğraf limiti olmadan kullanmak için sen de hemen Premium ol!";
+"face_tags_description_standart" = "Eula text will be here Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem.";
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "Fotoğraflarındaki tüm %@ ulaşmak ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
