@@ -37,7 +37,8 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     }
     
     func goToPrivacyPolicyDescriptionController() {
-        print("Hello")
+        let newViewController = PrivacyPolicyController()
+        RouterVC().pushViewController(viewController: newViewController)
     }
     
 }
