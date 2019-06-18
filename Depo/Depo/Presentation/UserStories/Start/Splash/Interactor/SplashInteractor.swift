@@ -90,8 +90,6 @@ class SplashInteractor: SplashInteractorInput {
                     
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         
-                        self?.updateBrandTypeIfNeeded()
-                        
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -121,7 +119,6 @@ class SplashInteractor: SplashInteractorInput {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    self?.updateBrandTypeIfNeeded()
                     self?.successLogin()
                 }, fail: { error in
                     /// we don't need logout here
@@ -138,17 +135,6 @@ class SplashInteractor: SplashInteractorInput {
                 })
             }
 
-        }
-    }
-    
-    private static let kUpdateBrandType = "kUpdateBrandType"
-    
-    private func updateBrandTypeIfNeeded() {
-        if UserDefaults.standard.bool(forKey: SplashInteractor.kUpdateBrandType) {
-            let accountService = AccountService()
-            accountService.updateBrandType()
-            
-            UserDefaults.standard.set(false, forKey: SplashInteractor.kUpdateBrandType)
         }
     }
     
