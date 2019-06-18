@@ -978,3 +978,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "التعليمات";
 "login_username_not_valid" = "يرجى التحقق من اسم المستخدم الخاص بك";
+"login_support_info" = "إذا كنت تواجه صعوبة أثناء تسجيل الدخول ، اتصل بنا للحصول على الدعم.";

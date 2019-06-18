@@ -968,3 +968,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Запитання та відповіді";
 "login_username_not_valid" = "Будь ласка перевірте ім'я користувача";
+"login_support_info" = "Якщо у вас виникли труднощі під час входу, зв'яжіться з нами для підтримки";

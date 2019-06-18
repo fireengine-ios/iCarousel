@@ -316,7 +316,7 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
         return fetchedResultsController.sections?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.sections?[safe: section]?.numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -361,14 +361,14 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             if let collectionView = collectionView, let indexPath = newIndexPath {
-                self.objectChanges.append { [unowned self] in
+                self.objectChanges.append {
                     collectionView.insertItems(at: [indexPath])
                 }
             }
             insertedItemsIds.append(objectId)
         case .delete:
             if let collectionView = collectionView, let indexPath = indexPath {
-                self.objectChanges.append { [unowned self] in
+                self.objectChanges.append {
                     collectionView.deleteItems(at: [indexPath])
                 }
             }
@@ -380,7 +380,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             updatedItemsIds.append(objectId)
         case .move:
             if let collectionView = collectionView, let indexPath = indexPath, let newIndexPath = newIndexPath {
-                self.objectChanges.append { [unowned self] in
+                self.objectChanges.append {
                     collectionView.deleteItems(at: [indexPath])
                     collectionView.insertItems(at: [newIndexPath])
                 }
