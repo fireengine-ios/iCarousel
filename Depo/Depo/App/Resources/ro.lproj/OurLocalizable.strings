@@ -969,3 +969,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Te rugăm să verifici numele tău de utilizator";
+"login_support_info" = "Dacă întîmpini dificultăți la înregistrare, contactează-ne.";

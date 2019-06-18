@@ -439,7 +439,13 @@ final class MediaItemOperationsService {
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "isLocalItemValue = false")
         executeRequest(predicate: predicate, context: CoreDataStack.default.newChildBackgroundContext, mediaItemsCallBack: allRemotes)
-        
+    }
+    
+    func getRemotesMediaItems(trimmedLocalIds: [String],
+                              context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
+                              mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false AND \(#keyPath(MediaItem.trimmedLocalFileID)) IN %@", trimmedLocalIds)
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
     func isNoRemotesInDB(result: @escaping (_ noRemotes: Bool) -> Void) {

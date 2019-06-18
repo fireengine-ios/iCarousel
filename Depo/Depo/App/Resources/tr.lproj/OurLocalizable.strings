@@ -981,3 +981,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Sıkça Sorulan Sorular";
 "login_username_not_valid" = "Lütfen kullanıcı adını kontrol et.";
+"login_support_info" = "Giriş yapmakta zorluk çekiyorsan, destek için bizimle iletişime geçebilirsin.";

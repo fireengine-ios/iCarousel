@@ -832,7 +832,7 @@
 "work_will_introduced" = "На данный момент ведутся технические работы. Пожалуйста, попробуйте позже";
 "facebook_remove_connection_warning_title" = "Вы отменяете соединение с Facebook";
 "dropbox_remove_connection_warning_title" = "Вы отменяете соединение с Dropbox";
-"facebook_remove_connection_warning_message" = "Вы действительно хотите отменить соединение с Facebook? ";
+"facebook_remove_connection_warning_message" = "Вы действительно хотите отменить соединение с Facebook?\n\n";
 "dropbox_remove_connection_warning_message" = "Вы действительно хотите отменить соединение с Dropbox?";
 "remove_connection" = "Удалить связывание";
 
@@ -890,9 +890,9 @@
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "";
 "package_space_details" = "%1$@ / %2$@ Интернет трафика использовано";
 "package_renew_date" = "Дата возобновления: %@";
-"percentage_used" = "%.из%% использовано";
+"percentage_used" = "%.0f%% использовано";
 "used_and_left_space" = "%1$@ / %2$@ использовано";
-"percentage_used_two_lines" = "%.из%%\nиспользовано";
+"percentage_used_two_lines" = "%.0f%%\nиспользовано";
 "my_usage_storage" = "Потребление Интернет трафика";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше местоположение будет использовано для фоновой синхронизации";
 "name" = "Имя";
@@ -902,7 +902,7 @@
 
 /*Packages*/
 "packages_i_have" = "Пакеты";
-"account_details" = "Класс учетной записи";
+"account_details" = "Детали учетной записи";
 "my_profile" = "Мой профиль";
 "account_type" = "Тип учетной записи";
 "standard_plus" = "lifebox Стандарт+";
@@ -949,16 +949,16 @@
 
 /*What is the context?*/
 "please_choose_subject" = "Пожалуйста, выберите тему запроса";
-"your_problem" = "Ваша сложность";
-"please_enter_your_problem_shortly" = "Пожалуйста, опишите вашу сложность";
-"explain_your_problem_shortly" = "Объясните коротко вашу сложность";
+"your_problem" = "Ваша проблема";
+"please_enter_your_problem_shortly" = "Пожалуйста, опишите вашу проблему";
+"explain_your_problem_shortly" = "Объясните коротко вашу проблему";
 "please_enter_msisdn_or_email" = "Пожалуйста, введите в поле номер телефона или e-mail";
 "support_form_subject_1" = "Lifebox/Я не могу войти со своим e-mail";
 "support_form_subject_2" = "Lifebox/Я не могу войти со своим номером телефона";
 "support_form_subject_3" = "Lifebox/Я не могу войти со своим паролем";
 "support_form_subject_4" = "Lifebox/Текст проверки не совпадает";
-"support_form_subject_5" = "Lifebox/проблема с паролем Turkcell";
-"support_form_subject_6" = "Lifebox/проблема с паролем Turkcell";
+"support_form_subject_5" = "Lifebox/Проблема с паролем Turkcell";
+"support_form_subject_6" = "Lifebox/Проблема с автоматическим входом";
 "support_form_subject_7" = "Lifebox/Я не могу загрузить приложение lifebox";
 "enter_your_old_password" = "Введите старый пароль";
 "enter_your_new_password" = "Введите новый пароль";
@@ -987,3 +987,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Вопросы и ответы";
 "login_username_not_valid" = "Пожалуйста, проверьте имя пользователя";
+"login_support_info" = "Свяжитесь с нами, если у вас возникли сложности с регистрацией";
