@@ -275,7 +275,7 @@
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
-		73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */; };
+		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
 		766F7C491E77AB6EAA0B0AF1 /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
@@ -4181,7 +4181,7 @@
 		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
-		73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsEULAResponse.swift; sourceTree = "<group>"; };
+		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorOutput.swift; sourceTree = "<group>"; };
 		76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesPresenter.swift; sourceTree = "<group>"; };
@@ -11799,7 +11799,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3AF76F1F01D63D002AD17C /* EULAService.swift */,
-				73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */,
+				73C0440122B3CB44005DE312 /* EULAResponse.swift */,
 			);
 			path = EULAService;
 			sourceTree = "<group>";
@@ -16721,7 +16721,7 @@
 				CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */,
 				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				A217E42B21A5B00B0084AA37 /* LeavePremiumViewController.swift in Sources */,
-				73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */,
+				73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,

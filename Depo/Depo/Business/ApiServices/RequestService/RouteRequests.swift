@@ -99,8 +99,6 @@ struct RouteRequests {
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
-    static let eulaGetTerms = "eula/get/%@?brand=LIFEDRIVE"
-    
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"

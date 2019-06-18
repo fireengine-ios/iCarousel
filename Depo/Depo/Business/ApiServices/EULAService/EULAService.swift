@@ -10,57 +10,6 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-struct EULAResponseKey {
-    static let id = "id"
-    static let createDate = "createDate"
-    static let locale = "locale"
-    static let content = "content"
-}
-
-class Eula: ObjectRequestResponse {
-   
-    var id: Int?
-   
-    var createDate: Date?
-    
-    var locale: String?
-    
-    var content: String?
-    
-    override func mapping() {
-        
-        id = json?[EULAResponseKey.id].int
-        locale = json?[EULAResponseKey.locale].string
-        content = json?[EULAResponseKey.content].string
-        
-        guard  let date = json?[EULAResponseKey.createDate].double else {
-            return
-        }
-        
-        createDate = Date(timeIntervalSince1970: date)
-    }
-}
-
-struct EULAGet: RequestParametrs {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    var requestParametrs: Any {
-        return ""
-    }
-    
-    var patch: URL {
-        let patch = String(format: RouteRequests.eulaGet, Device.locale)
-        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.base()
-    }
-}
-
-
 struct EULACheck: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -107,15 +56,6 @@ struct EULAApprove: RequestParametrs {
 }
 
 class EulaService: BaseRequestService {
-
-
-    func eulaGet(sucess: SuccessResponse?, fail: FailResponse? ) {
-        debugLog("EulaService eulaGet")
-
-        let eula = EULAGet()
-        let handler = BaseResponseHandler<Eula, ObjectRequestResponse>(success: sucess, fail: fail)
-        executeGetRequest(param: eula, handler: handler)
-    }
     
     func eulaCheck(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("EulaService eulaCheck")
@@ -169,9 +109,9 @@ class EulaService: BaseRequestService {
     }
     
     
-    func getTermOfUse(handler: @escaping (ResponseResult<TermsEULAResponse>) -> Void) {
+    func eulaGet(handler: @escaping (ResponseResult<EULAResponse>) -> Void) {
         
-        let path = String(format: RouteRequests.eulaGetTerms, Device.locale)
+        let path = String(format: RouteRequests.eulaGet, Device.locale)
         guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
             assertionFailure()
            return
@@ -183,16 +123,17 @@ class EulaService: BaseRequestService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let content = TermsEULAResponse(json: JSON(data: data)) else {
+                    
+                    guard let content = EULAResponse(json: JSON(data: data)) else {
                         assertionFailure()
-                        let error = CustomErrors.serverError("failed parsing TermsEULAResponse")
+                        let error = CustomErrors.serverError("failed parsing EULAResponse")
                         handler(.failed(error))
                         return
                     }
                     handler(.success(content))
                    
                 case .failure(let error):
-                    handler(.failed(CustomErrors.serverError("Failed request getTermOfUse, \(error.localizedDescription)")))
+                    handler(.failed(CustomErrors.serverError("Failed request eulaGet, \(error.localizedDescription)")))
                 }
         }
     }
