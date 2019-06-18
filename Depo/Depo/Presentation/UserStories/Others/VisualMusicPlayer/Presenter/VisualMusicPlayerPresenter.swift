@@ -32,7 +32,8 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
 
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
 
-    func viewIsReady(view: UIView) {
+    func viewIsReady(view: UIView, alert: AlertFilesActionsSheetPresenter) {
+        alert.basePassingPresenter = self
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
