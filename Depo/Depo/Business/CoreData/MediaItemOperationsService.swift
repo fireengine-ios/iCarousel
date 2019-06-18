@@ -392,7 +392,13 @@ final class MediaItemOperationsService {
                 for newItem in remoteItems {
                     if let existed = allSavedItems.first(where: { $0.uuid == newItem.uuid }) {
                         if newItem != existed {
-                            existed.coreDataObject?.copyInfo(item: newItem, context: context)
+                            if let objectId = existed.coreDataObjectId {
+                                MediaItemOperationsService.shared.mediaItemsByIDs(ids: [objectId], context: context, mediaItemsCallBack: { items in
+                                    if let item = items.first {
+                                        item.copyInfo(item: newItem, context: context)
+                                    }
+                                })
+                            }
                         }
                         allSavedItems.remove(existed)
                     } else {
