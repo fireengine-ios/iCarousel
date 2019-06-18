@@ -243,7 +243,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKAppEvents.activateApp()
     }
     
-    private static let kUpdateBrandType = "kUpdateBrandType"
     func applicationWillTerminate(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillTerminate")
         
@@ -254,7 +253,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        UserDefaults.standard.set(true, forKey: AppDelegate.kUpdateBrandType)
         UserDefaults.standard.synchronize()
         
         player.stop()
