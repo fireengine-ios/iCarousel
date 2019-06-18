@@ -72,11 +72,12 @@ struct RouteRequests {
     }()
     
     static let target: String = {
-        #if lifedrive
-        return "LIFEDRIVE"
-        #else
-        return "LIFEBOX"
-        #endif
+        var currentTarget = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
+        if currentTarget == "lifebox" {
+            return "LIFEBOX"
+        } else {
+            return "LIFEDRIVE"
+        }
     }()
     
     // MARK: Authentication

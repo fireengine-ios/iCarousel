@@ -51,12 +51,8 @@ struct EULAGet: RequestParametrs {
     }
     
     var patch: URL {
-        let path = String(format: RouteRequests.eulaGet, Device.locale)
-        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
-            assertionFailure()
-           return 
-        }
-        return url
+        let patch = String(format: RouteRequests.eulaGet, Device.locale)
+        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
