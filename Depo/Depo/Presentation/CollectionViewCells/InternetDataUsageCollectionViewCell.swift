@@ -29,7 +29,8 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var usageDetailLabel: UILabel! {
         didSet {
-            usageDetailLabel.numberOfLines = 0
+            usageDetailLabel.numberOfLines = 1
+            usageDetailLabel.minimumScaleFactor = 0.5
         }
     }
     
