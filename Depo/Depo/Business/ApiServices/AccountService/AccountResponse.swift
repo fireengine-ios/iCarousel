@@ -126,6 +126,29 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     }
 }
 
+final class SettingsPermissionsResponse: ObjectRequestResponse {
+
+    var type: PermissionType?
+    var isAllowed: Bool?
+    var isApproved: Bool?
+    
+    private enum ResponseKeys {
+        static let type = "type"
+        static let isAllowed = "allowed"
+        static let isApproved = "approved"
+    }
+    
+    override func mapping() {
+        guard let typeString = json?[ResponseKeys.type].string else {
+            return
+        }
+        
+        type = PermissionType(rawValue: typeString)
+        isAllowed = json?[ResponseKeys.isAllowed].bool
+        isApproved = json?[ResponseKeys.isApproved].bool
+    }
+}
+
 class QuotaInfoResponse: ObjectRequestResponse {
     
     var bytes: Int64?

@@ -211,6 +211,9 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
+            
+            static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionsUpdate = Account.accountApi +/ "permission/update"
         }
     }
     

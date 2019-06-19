@@ -230,6 +230,16 @@
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
+		4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
+		4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
+		4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
+		4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
+		4BF3A68E22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
+		4BF3A69422B3822E0082130F /* PermissionsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */; };
+		4BF3A69522B3822E0082130F /* PermissionsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */; };
+		4BF3A69722B38C590082130F /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69622B38C590082130F /* PermissionsView.swift */; };
+		4BF3A69822B38C590082130F /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69622B38C590082130F /* PermissionsView.swift */; };
 		4BF7CF4B223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		4BF7CF4D223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
@@ -4125,6 +4135,11 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4BA61F6D22B7D60400D66031 /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
+		4BF3A68322B23F4F0082130F /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		4BF3A68C22B2690A0082130F /* PermissionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsView.xib; sourceTree = "<group>"; };
+		4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDesigner.swift; sourceTree = "<group>"; };
+		4BF3A69622B38C590082130F /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownTableViewCell.xib; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownTableViewCell.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		4BF7CF4A223103E2002DAF37 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownView.swift; sourceTree = SOURCE_ROOT; };
@@ -7239,6 +7254,17 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		4BF3A67A22B23CCE0082130F /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				4BF3A68C22B2690A0082130F /* PermissionsView.xib */,
+				4BF3A69622B38C590082130F /* PermissionsView.swift */,
+				4BF3A68322B23F4F0082130F /* PermissionViewController.swift */,
+				4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
 		5115CDE56AE25D3FDC1D4BA6 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -8077,6 +8103,7 @@
 				B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */,
 				4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */,
 				9224936721BC14890086CB6A /* AuthorityType.swift */,
+				4BA61F6D22B7D60400D66031 /* PermissionType.swift */,
 				CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */,
 				CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */,
 			);
@@ -11797,6 +11824,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4BF3A67A22B23CCE0082130F /* Permissions */,
 				B5AB5B5321F9A90C003AABB4 /* ConnectedAccounts */,
 				B56FBB102122C191004F4A59 /* TermsOfUse */,
 				4A0AC12E2087367A00032CC7 /* PeriodicContactSync */,
@@ -13770,6 +13798,7 @@
 				8C06AF3B2008AD70003D8E05 /* close_icon@2x.png in Resources */,
 				8C0E901F1FDEBDFF00789C91 /* PrintViewController.xib in Resources */,
 				8C06AFF92008AD71003D8E05 /* kontrast@2x.png in Resources */,
+				4BF3A68E22B2690A0082130F /* PermissionsView.xib in Resources */,
 				8C0E90201FDEBDFF00789C91 /* CaptchaViewController.xib in Resources */,
 				7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */,
 				8C06AF012008AD70003D8E05 /* caps2_selected.png in Resources */,
@@ -14487,6 +14516,7 @@
 				7C257B4020174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */,
 				8C7786891F3F38D9005CB432 /* MusicBar.xib in Resources */,
 				CE51AEEB1EF90853005DCEE0 /* inputCell.xib in Resources */,
+				4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */,
 				8C06AF302008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
 				8C06AFC82008AD71003D8E05 /* header_icon@2x.png in Resources */,
 				8C06AF2A2008AD70003D8E05 /* cizgi_2_selected@3x.png in Resources */,
@@ -15614,6 +15644,7 @@
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
 				8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */,
+				4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
@@ -15832,6 +15863,7 @@
 				8C0E8DEA1FDEBDFF00789C91 /* IntroduceInteractor.swift in Sources */,
 				8C0E8DEB1FDEBDFF00789C91 /* PrintPresenter.swift in Sources */,
 				8C0E8DEC1FDEBDFF00789C91 /* IntroduceRouterInput.swift in Sources */,
+				4BF3A69522B3822E0082130F /* PermissionsDesigner.swift in Sources */,
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
 				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
@@ -16091,6 +16123,7 @@
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
+				4BF3A69822B38C590082130F /* PermissionsView.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
@@ -16226,6 +16259,7 @@
 				8C0B91A920170EB000A5BA81 /* ManageContactsRouter.swift in Sources */,
 				8C0E8F2B1FDEBDFF00789C91 /* SettingsRouterInput.swift in Sources */,
 				8C0E8F2C1FDEBDFF00789C91 /* SettingsRouter.swift in Sources */,
+				4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */,
 				92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				8C0E8F2D1FDEBDFF00789C91 /* SettingsConfigurator.swift in Sources */,
 				921E7C352201CB9F00341F75 /* InstaPickPhotoView.swift in Sources */,
@@ -16628,6 +16662,7 @@
 				B56FBB2E2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
+				4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
 				CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */,
@@ -17089,6 +17124,7 @@
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
+				4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */,
 				984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
 				CE3435E9224A5A4700AFAABB /* WebViewController.swift in Sources */,
@@ -17181,6 +17217,7 @@
 				92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
+				4BF3A69722B38C590082130F /* PermissionsView.swift in Sources */,
 				8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
@@ -17766,6 +17803,7 @@
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
+				4BF3A69422B3822E0082130F /* PermissionsDesigner.swift in Sources */,
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,

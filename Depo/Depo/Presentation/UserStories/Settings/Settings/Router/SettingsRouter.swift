@@ -24,6 +24,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.connectedAccounts!)
     }
     
+    func goToPermissions() {
+        router.pushViewController(viewController: router.permissions)
+    }
+    
     func goToAutoApload() {
         router.pushViewController(viewController: router.autoUpload)
     }
