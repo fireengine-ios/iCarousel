@@ -602,13 +602,15 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             return
         }
         
-        let id = file.getTrimmedLocalID()
-        uploadProgress[id] = progress
-        
+        let localUUId = file.getUUIDAsLocal()
+        let localID = file.getTrimmedLocalID()
+
         collectionView.visibleCells.forEach { cell in
-            if let cell = cell as? PhotoVideoCell, cell.trimmedLocalFileID == id {
-                cell.setProgressForObject(progress: progress, blurOn: true)
-                return
+            if let cell = cell as? PhotoVideoCell, let cellTrimmedLocalId = cell.trimmedLocalFileID {
+                if cellTrimmedLocalId == localUUId || cellTrimmedLocalId == localID {
+                    cell.setProgressForObject(progress: progress, blurOn: true)
+                    return
+                }
             }
         }
     }

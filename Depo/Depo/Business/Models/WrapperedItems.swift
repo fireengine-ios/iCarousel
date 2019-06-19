@@ -558,7 +558,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    var coreDataObject: MediaItem?
+    var coreDataObjectId: NSManagedObjectID?
     
     var id: Int64?
 
@@ -951,7 +951,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
-        coreDataObject = mediaItem
+        coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
         status = mediaItem.isTranscoded ? .active : .unknown

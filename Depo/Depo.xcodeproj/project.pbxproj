@@ -1616,7 +1616,6 @@
 		8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
 		8C0E8CD81FDEBDFF00789C91 /* PlanType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F51F75515C00F49DA1 /* PlanType.swift */; };
 		8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
-		8C0E8CDB1FDEBDFF00789C91 /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D81F4EB153000157AF /* FetchService.swift */; };
 		8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		8C0E8CDE1FDEBDFF00789C91 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */; };
@@ -3272,7 +3271,6 @@
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
-		CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D81F4EB153000157AF /* FetchService.swift */; };
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
@@ -5867,7 +5865,6 @@
 		CE3A3002200F4B030028C900 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CE3AA9AE1F4D686D000157AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItem+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CE3AA9D81F4EB153000157AF /* FetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
 		CE3AF76F1F01D63D002AD17C /* EULAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAService.swift; sourceTree = "<group>"; };
 		CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		CE3B3AF0202888240002558C /* OrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
@@ -6793,7 +6790,6 @@
 				6AB5841F2876C2921CCBAA0B /* Interactor */,
 				7C77B6709747A566080885C4 /* Router */,
 				43005FB6B91BB7BC1974F3A6 /* Configurator */,
-				CE3AA9D81F4EB153000157AF /* FetchService.swift */,
 			);
 			path = BaseFilesGreed;
 			sourceTree = "<group>";
@@ -15643,7 +15639,6 @@
 				CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */,
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0B919520170E3E00A5BA81 /* DuplicatedContactTableViewCell.swift in Sources */,
-				8C0E8CDB1FDEBDFF00789C91 /* FetchService.swift in Sources */,
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8CF6A9C9207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
 				8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */,
@@ -16933,7 +16928,6 @@
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
 				CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */,
-				CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */,
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CEE1D1FE1F714F300008F4CF /* CoreDataStack.swift in Sources */,
