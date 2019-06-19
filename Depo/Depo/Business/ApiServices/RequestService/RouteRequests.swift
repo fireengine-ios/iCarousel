@@ -158,6 +158,9 @@ struct RouteRequests {
     //MARK : Share
     static let share = "share/%@"
     
+    //MARK: Feedback
+    static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    
     //MARK : Faq 
     static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
 
