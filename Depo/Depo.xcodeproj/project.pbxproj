@@ -269,7 +269,13 @@
 		6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D98FA6676880774156BB995 /* FeedbackViewInteractorInput.swift */; };
 		6F1E64C890D98AD859149D80 /* UploadFilesSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD57D30BE3EDADF17A957953 /* UploadFilesSelectionRouter.swift */; };
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
+		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
+		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
+		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
+		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
+		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
+		73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
 		766F7C491E77AB6EAA0B0AF1 /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
@@ -2274,7 +2280,6 @@
 		8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9219CACA0900FD1E03 /* AddressBook.framework */; };
 		8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E8E19CAC9F400FD1E03 /* libz.dylib */; };
 		8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */; };
-		8C0E8FFB1FDEBDFF00789C91 /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
 		8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FD51EFD500B00A405B2 /* HomeViewTopView.xib */; };
 		8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */; };
 		8C0E8FFF1FDEBDFF00789C91 /* OptInController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6DE75B1FCC3ECF00C23CBD /* OptInController.xib */; };
@@ -2801,7 +2806,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
-		B543FB0E211C847C00E009C4 /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
+		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -3991,6 +3996,7 @@
 		17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldView.swift; sourceTree = "<group>"; };
 		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
 		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
+		17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17589F612275E33800A5DB37 /* SupportBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBannerView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
 		17589F632275E33800A5DB37 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
@@ -4170,7 +4176,12 @@
 		70774C24E3E356684A692557 /* UploadFilesSelectionInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInitializer.swift; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
+		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
+		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
+		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
+		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
+		73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsEULAResponse.swift; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorOutput.swift; sourceTree = "<group>"; };
 		76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesPresenter.swift; sourceTree = "<group>"; };
@@ -5637,7 +5648,6 @@
 		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
 		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
 		C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.debug.xcconfig"; sourceTree = "<group>"; };
-		C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.release.xcconfig"; sourceTree = "<group>"; };
 		CA3578DCC250EB72513FBF71 /* SyncContactsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewOutput.swift; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
@@ -6207,7 +6217,6 @@
 				8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */,
 				8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */,
 				8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */,
-				8C0E8FFB1FDEBDFF00789C91 /* Pods_Depo_LifeTech.framework in Frameworks */,
 				67B8FB316FA350B626995CE9 /* Pods_TC_Depo_LifeTech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6241,7 +6250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B543FB0E211C847C00E009C4 /* Pods_Depo_LifeTech.framework in Frameworks */,
+				B543FB0E211C847C00E009C4 /* (null) in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -6271,6 +6280,7 @@
 				CE51AD171EF90853005DCEE0 /* libz.dylib in Frameworks */,
 				B56E0DD720B414510082044D /* StoreKit.framework in Frameworks */,
 				CE51AD1A1EF90853005DCEE0 /* CoreGraphics.framework in Frameworks */,
+				6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6370,13 +6380,13 @@
 				051E1E8E19CAC9F400FD1E03 /* libz.dylib */,
 				051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */,
 				05C850A21ACD63F700F976DE /* NotificationCenter.framework */,
-				C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */,
 				71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */,
 				7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */,
 				9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */,
 				FA34640A7E6FCBDBE92CF11C /* Pods_LifeboxFileProvider.framework */,
 				8E88FF64676BA040D2DC438A /* Pods_LifeboxFileProviderUI.framework */,
 				FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */,
+				17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -7451,6 +7461,49 @@
 				86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		73A63F5D22B23AEC0062DDE5 /* TermsAndPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				73A63F5E22B23CEE0062DDE5 /* View */,
+				73A63F7D22B283840062DDE5 /* TermOrPolicyDescription */,
+			);
+			path = TermsAndPolicy;
+			sourceTree = "<group>";
+		};
+		73A63F5E22B23CEE0062DDE5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */,
+				73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		73A63F7D22B283840062DDE5 /* TermOrPolicyDescription */ = {
+			isa = PBXGroup;
+			children = (
+				73A63F8722B380D90062DDE5 /* TermsDescription */,
+				73A63F8222B28D1D0062DDE5 /* PrivacyPolicyDescription */,
+			);
+			path = TermOrPolicyDescription;
+			sourceTree = "<group>";
+		};
+		73A63F8222B28D1D0062DDE5 /* PrivacyPolicyDescription */ = {
+			isa = PBXGroup;
+			children = (
+				73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */,
+			);
+			path = PrivacyPolicyDescription;
+			sourceTree = "<group>";
+		};
+		73A63F8722B380D90062DDE5 /* TermsDescription */ = {
+			isa = PBXGroup;
+			children = (
+				73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */,
+			);
+			name = TermsDescription;
 			sourceTree = "<group>";
 		};
 		74D4CADE839AEFCD33F588EA /* Presenter */ = {
@@ -11746,6 +11799,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3AF76F1F01D63D002AD17C /* EULAService.swift */,
+				73C0440122B3CB44005DE312 /* TermsEULAResponse.swift */,
 			);
 			path = EULAService;
 			sourceTree = "<group>";
@@ -11821,6 +11875,7 @@
 				92004B2221AD0E5400582C45 /* MyStorage */,
 				05A75126899674B79F6FA6F9 /* SyncContacts */,
 				CE95ED301F516736002F923A /* HelpAndSupport */,
+				73A63F5D22B23AEC0062DDE5 /* TermsAndPolicy */,
 				5E26BCF377F078459F09451C /* FeedbackView */,
 				D68883816EC3361501EB6861 /* ActivityTimeline */,
 				CE3EB3111FC7F84E000B70D6 /* Passcode */,
@@ -14510,6 +14565,7 @@
 				B5AB5B6C21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				8C06B0C02008AD71003D8E05 /* sag_ok.png in Resources */,
 				8C06B1682008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
+				73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */,
 				8C06AF602008AD70003D8E05 /* daire_selected@3x.png in Resources */,
 				7C3A74331F04DDD300124DF5 /* BaseFilesGreedViewController.xib in Resources */,
 				8C06B1362008AD72003D8E05 /* t_orta_selected@2x.png in Resources */,
@@ -14920,7 +14976,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14977,7 +15033,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
@@ -15004,7 +15060,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -15061,7 +15117,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -15070,7 +15126,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -15079,7 +15135,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -15119,7 +15175,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -15176,7 +15232,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
@@ -15211,7 +15267,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -15220,7 +15276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -15278,7 +15334,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -15287,7 +15343,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -16665,6 +16721,7 @@
 				CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */,
 				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				A217E42B21A5B00B0084AA37 /* LeavePremiumViewController.swift in Sources */,
+				73C0440222B3CB44005DE312 /* TermsEULAResponse.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,
@@ -16696,6 +16753,7 @@
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
+				73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				92004B5721AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
@@ -17019,6 +17077,7 @@
 				A2079908219F134B00AD5037 /* PremiumRouter.swift in Sources */,
 				9219B19A21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				7C6E2F9E1F31E7C000536DB6 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
+				73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
 				B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
@@ -17277,6 +17336,7 @@
 				922C24FD224A7E6400FD00D9 /* CircleProgressView.swift in Sources */,
 				7C6E2FA01F31FC6500536DB6 /* CreateStorySelectionInteractorOutput.swift in Sources */,
 				CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */,
+				73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */,
 				7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */,
 				CE2976E01FD58E2000350F3A /* LocalAlbumConfigurator.swift in Sources */,
 				7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
