@@ -126,8 +126,9 @@ final class UsageInfoViewController: ViewController {
         }
     }
     
-    private static let constantForCell: CGFloat = 28
-    
+    private static let totalSpacesForCell: CGFloat = 35 /// total vertical spaces between labels including bar
+    private static let offsetForCellLabels: CGFloat = 8 /// left and right offset
+
     //MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,10 +177,10 @@ final class UsageInfoViewController: ViewController {
     private func calculateHeightForCollectionView(with models: [InternetDataUsage]) {
         var biggerHeight: CGFloat = 0
         
-        let commonWidth = collectionView.frame.width
+        let commonWidth = collectionView.frame.width - UsageInfoViewController.offsetForCellLabels
         
         models.forEach { model in
-            var cellHeight = UsageInfoViewController.constantForCell
+            var cellHeight = UsageInfoViewController.totalSpacesForCell
             
             let usedVolume: CGFloat
             if let remaining = model.remaining, let total = model.total {
@@ -189,18 +190,17 @@ final class UsageInfoViewController: ViewController {
             }
             
             let textHeight: CGFloat = 25
-            let widthForName = commonWidth - String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
-                .width(for: textHeight, font: .TurkcellSaturaDemFont(size: 16))
+            let usagePercentage = String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
+            let widthForName = commonWidth - usagePercentage.width(for: textHeight, font: .TurkcellSaturaDemFont(size: 16))
             
-            cellHeight += model.offerName?
-                .height(for: widthForName, font: .TurkcellSaturaMedFont(size: 18)) ?? 0
+            cellHeight += model.offerName?.height(for: widthForName, font: .TurkcellSaturaMedFont(size: 18)) ?? 0
             
-            cellHeight += String(format: TextConstants.packageSpaceDetails, model.usedString, model.totalString)
-                .height(for: commonWidth, font: UIFont.TurkcellSaturaRegFont(size: 18))
+            let packageSpaceDetails = String(format: TextConstants.packageSpaceDetails, model.usedString, model.totalString)
+            cellHeight += packageSpaceDetails.height(for: commonWidth, font: .TurkcellSaturaRegFont(size: 18))
 
             if let dateString = model.expiryDate?.getDateInFormat(format: "dd MMM YYYY") {
                 cellHeight += String(format: TextConstants.renewDate, dateString)
-                    .height(for: commonWidth, font: UIFont.TurkcellSaturaRegFont(size: 14))
+                    .height(for: commonWidth, font: .TurkcellSaturaRegFont(size: 14))
             }
             
             biggerHeight = max(biggerHeight, cellHeight)
