@@ -71,7 +71,7 @@ struct RouteRequests {
         }
     }()
     
-    static let target: String = {
+    static var applicationTarget: String = {
         #if LIFEDRIVE
         return "LIFEDRIVE"
         #else
@@ -94,7 +94,7 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@?brand=" + target
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
