@@ -18,6 +18,13 @@ struct TextConstants {
         static let privacyPolicyConditions = "privacy_policy_conditions_link_1"
         static let termsAndUseEtkLinkCommercialEmailMessages = "terms_and_use_etk_link_2"
         static let FAQ = "frequently_asked_questions"
+        static let appName: String = {
+            #if LIFEDRIVE
+            return "LIFEDRIVE"
+            #else
+            return "LIFEBOX"
+            #endif
+            }()
     }
     
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

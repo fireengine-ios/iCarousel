@@ -19,6 +19,7 @@ struct RouteRequests {
     // MARK: Environment
     
     private static let currentServerEnvironment = ServerEnvironment.production
+    private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -86,12 +87,10 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@"
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
-    static let eulaGetTerms = "eula/get/%@?brand=LIFEDRIVE"
-    
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
