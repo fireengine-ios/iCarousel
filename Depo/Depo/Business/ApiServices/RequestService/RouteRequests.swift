@@ -19,6 +19,7 @@ struct RouteRequests {
     // MARK: Environment
     
     private static let currentServerEnvironment = ServerEnvironment.production
+    private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -69,14 +70,6 @@ struct RouteRequests {
         case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
         case .production: return "https://mylifebox.com/policy/?lang="
         }
-    }()
-    
-    static var applicationTarget: String = {
-        #if LIFEDRIVE
-        return "LIFEDRIVE"
-        #else
-        return "LIFEBOX"
-        #endif
     }()
     
     // MARK: Authentication
