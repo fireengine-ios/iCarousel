@@ -403,13 +403,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             focusedIndexPath = indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
-        
-        /// reload cells manually
-        objectUpdatesStatic.forEach { indexPath in
-            if let collectionView = collectionView, let cell = collectionView.cellForItem(at: indexPath) {
-                collectionView.delegate?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
-            }
-        }
 
         collectionView?.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
@@ -419,6 +412,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             
+            // reload cells manually
+            objectUpdatesStatic.forEach { indexPath in
+                if let collectionView = self.collectionView, let cell = collectionView.cellForItem(at: indexPath) {
+                    collectionView.delegate?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
+                }
+            }
             self.reloadSupplementaryViewsIfNeeded()
             self.updateLastFetchedObjects(deletedIds: deletedIdsStatic, updatedIds: updatedIdsStatic, insertedIds: insertedIdsStatic)
             
