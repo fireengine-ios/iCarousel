@@ -16,11 +16,13 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var welcomeLabel: UILabel!
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var checkboxButton: UIButton!
-    @IBOutlet private weak var checkboxLabel: UILabel!
+
     @IBOutlet private weak var acceptButton: BlueButtonWithWhiteText!
     
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
     @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
+    
+    @IBOutlet private weak var introdactionTextView: UITextView!
     
     @IBOutlet private weak var etkCheckboxButton: UIButton!
     @IBOutlet private weak var etkTextView: UITextView!
@@ -62,6 +64,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
 
         hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        setupIntroductionTextView()
     }
     
     override func viewDidLoad() {
@@ -97,17 +100,17 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
         welcomeLabel.textColor = ColorConstants.darkBlueColor
         
-        checkboxLabel.text = TextConstants.termsAndUseCheckboxText
-        checkboxLabel.font = UIFont.TurkcellSaturaRegFont(size: 12)
-        checkboxLabel.textColor = ColorConstants.darkText
-        
         /// to remove insets
         /// https://stackoverflow.com/a/42333832/5893286
         etkTextView.textContainer.lineFragmentPadding = 0
         etkTextView.textContainerInset = .zero
-        
         etkTextView.text = ""
         etkTextView.delegate = self
+        
+        introdactionTextView.textContainer.lineFragmentPadding = 0
+        introdactionTextView.textContainerInset = .zero
+        introdactionTextView.text = ""
+        introdactionTextView.delegate = self
         
         // TODO: change this logic for StackView one
         etkTextView.isHidden = true
@@ -159,6 +162,23 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
         
         etkTextView.attributedText = baseText
+    }
+    
+    private func setupIntroductionTextView() {
+        introdactionTextView.linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+        ]
+        
+        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
+                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                              .foregroundColor: ColorConstants.darkText])
+        
+        let rangeLink = baseText.mutableString.range(of: TextConstants.privacyPolicyCondition)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
+        
+        introdactionTextView.attributedText = baseText
     }
 
     // MARK: Buttons action
@@ -248,6 +268,10 @@ extension TermsAndServicesViewController: UITextViewDelegate {
         case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
             DispatchQueue.toMain {
                 self.output.openCommercialEmailMessages()
+            }
+        case TextConstants.NotLocalized.privacyPolicyConditions:
+            DispatchQueue.toMain {
+                self.output.openPrivacyPolicyDescriptionController()
             }
         default:
            UIApplication.shared.open(URL, options: [:], completionHandler: nil)
