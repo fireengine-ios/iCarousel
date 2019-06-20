@@ -79,10 +79,10 @@ extension TermsAndPolicyViewController: UITableViewDelegate {
 extension TermsAndPolicyViewController {
     
     private func goToTermsOfUse() {
-        eulaService.getTermOfUse { [weak self] response in
+        eulaService.eulaGet { [weak self] response in
             switch response {
             case .success(let text):
-                guard let content = text.contentOut else {
+                guard let content = text.content else {
                     assertionFailure()
                     return
                 }

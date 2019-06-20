@@ -20,6 +20,13 @@ struct TextConstants {
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "support-digicel@digicel.com"
         static let supportEmail = "DESTEK-LIFEBOX@TURKCELL.COM.TR"
+        static let appName: String = {
+            #if LIFEDRIVE
+            return "LIFEDRIVE"
+            #else
+            return "LIFEBOX"
+            #endif
+            }()
     }
     
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
