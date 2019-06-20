@@ -370,6 +370,7 @@
 "E-mail Usage Information" = "Informacion i Përdorimit të E-mail ";
 "Password fields do not match." = "Fjalëkalimet nuk përputhen.";
 "Please check the e-mail address." = "Ju lutem, kontrolloni adresën e e-mail.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Ju lutem, vendosni një fjalëkalim që nuk përfshin shkronja e numra të njëpasnjëshëm, minimumi 6 e maksimumi 16 karaktere.";
 "Please check the GSM number" = "Ju lutem, kontrolloni numrin tuaj të Telefonit";
 "Login denied. Please check your credentials." = "Hyrja juaj u refezua. Ju lutem, kontrolloni kredencialet tuaja.";

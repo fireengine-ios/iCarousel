@@ -447,6 +447,7 @@ Is it "Use "this" to be the album cover?*/
 "E-mail Usage Information" = "Informations sur l'utilisation  de l'email";
 "Password fields do not match." = "Les mots de passe ne correspondent pas";
 "Please check the e-mail address." = "Veuillez vérifier l'e-mail.";
+"Temporary error occurred. Please try again later." = "";
 
 /*Suggested: "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters."*/
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Veuillez choisir un mot de passe comprenant des lettres et des chiffres non consécutifs, de 6 caractères au minimum et 16 au maximum";
