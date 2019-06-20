@@ -397,7 +397,7 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
     
     override func mapping() {
         status = json?[ResponseKey.status].string
-        value = json?[ResponseKey.status].string
+        value = json?[ResponseKey.value].string
     }
 }
 

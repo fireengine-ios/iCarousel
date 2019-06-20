@@ -18,8 +18,7 @@ struct TextConstants {
         static let privacyPolicyConditions = "privacy_policy_conditions_link_1"
         static let termsAndUseEtkLinkCommercialEmailMessages = "terms_and_use_etk_link_2"
         static let FAQ = "frequently_asked_questions"
-        static let feedbackEmail = "support-digicel@digicel.com"
-        static let supportEmail = "DESTEK-LIFEBOX@TURKCELL.COM.TR"
+        static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
         static let appName: String = {
             #if LIFEDRIVE
             return "LIFEDRIVE"
