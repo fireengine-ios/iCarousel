@@ -435,9 +435,8 @@ struct TextConstants {
     static let fileInfoSave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: ETK Permissions
-    static let etkPermissionTitleLabel = NSLocalizedString("etk_permission", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    //TODO: change to localized
-    static let etkPermissionDescriptionLabel = NSLocalizedString("Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let etkPermissionTitleLabel = NSLocalizedString("etk_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let etkPermissionDescriptionLabel = NSLocalizedString("etk_permissiom_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     
