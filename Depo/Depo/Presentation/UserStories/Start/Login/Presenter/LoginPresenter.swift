@@ -186,7 +186,7 @@ extension LoginPresenter: LoginInteractorOutput {
         case .incorrectCaptcha:
             failLogin(message: TextConstants.invalidCaptcha)
             
-        case .networkError, .serverError:
+        case .networkError:
             failLogin(message: errorText)
             
         case .unauthorized:
@@ -197,6 +197,9 @@ extension LoginPresenter: LoginInteractorOutput {
             
         case .emptyPhone:
             openEmptyPhone()
+            
+        case .serverError:
+            failLogin(message: TextConstants.loginScreenServerError)
         }
         
     }

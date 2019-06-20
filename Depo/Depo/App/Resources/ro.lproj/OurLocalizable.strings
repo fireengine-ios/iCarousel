@@ -367,6 +367,7 @@
 "E-mail Usage Information" = "Informație de utilizare e-mail";
 "Password fields do not match." = "Parolele nu coincid";
 "Please check the e-mail address." = "Verifică adresa e-mail.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Setează o parolă din 6 -16 caractere, ce ar conține litere și numere neconsecutive.";
 "Please check the GSM number" = "Verifică numărul tău de telefon";
 "Login denied. Please check your credentials." = "Conectarea refuzată. Verifică datele tale de conectare.";

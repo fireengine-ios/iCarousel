@@ -373,6 +373,7 @@
 "E-mail Usage Information" = "E-Posta Kullanım Bilgisi";
 "Password fields do not match." = "Şifreler eşleşmiyor";
 "Please check the e-mail address." = "Lütfen e-posta adresini kontrol edin";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Lütfen ardışık olmayan harf ve sayılardan oluşan en az 6 en fazla 16 karakterli bir şifre belirleyin.";
 "Please check the GSM number" = "Lütfen telefon numaranı kontrol et";
 "Login denied. Please check your credentials." = "Giriş reddedildi. Lütfen giriş bilgilerini kontrol et.";

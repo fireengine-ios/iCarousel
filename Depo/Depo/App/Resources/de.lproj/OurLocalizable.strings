@@ -367,6 +367,7 @@
 "E-mail Usage Information" = "E-Mail-Verwendungsinformationen";
 "Password fields do not match." = "Passwörter stimmen nicht überein";
 "Please check the e-mail address." = "Bitte überprüfen Sie die E-Mail-Adresse.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Bitte geben Sie ein Passwort einschließlich nicht aufeinanderfolgender Buchstaben und Ziffern ein, mindestens 6 maximal 16 Zeichen.";
 "Please check the GSM number" = "Bitte überprüfen Sie Ihre Telefonnummer";
 "Login denied. Please check your credentials." = "Anmeldung abgelehnt. Bitte überprüfen Sie Ihre Zugangsdaten.";
