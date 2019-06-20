@@ -503,4 +503,21 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
         }
     }
+    
+    func feedbackEmail(_ handler: @escaping (ResponseResult<FeedbackEmailResponse>) -> Void) {
+        debugLog("AccountService feedbackEmail")
+        
+        sessionManager
+            .request(RouteRequests.feedbackEmail)
+            .customValidate()
+            .responseData(queue: .global(), completionHandler: { response in
+                switch response.result {
+                case .success(let data):
+                    let feedbackResponse = FeedbackEmailResponse(json: data, headerResponse: nil)
+                    handler(.success(feedbackResponse))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
+    }
 }
