@@ -10,13 +10,21 @@ import UIKit
 
 final class QuickDismissPlaceholderTextField: UnderlineTextField {
     
-    var placeholderColor: UIColor = UIColor.lightGray {
+    override var attributedPlaceholder: NSAttributedString? {
+        didSet {
+            let label = placeholderLabel
+            label?.minimumScaleFactor = 0.5
+            label?.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    var placeholderColor = UIColor.lightGray {
         didSet {
             changePlaceholderColor()
         }
     }
-    
-    var quickDismissPlaceholder: String = "" {
+        
+    var quickDismissPlaceholder = "" {
         didSet {
             self.attributedPlaceholder = NSAttributedString(string: quickDismissPlaceholder)
             changePlaceholderColor()
