@@ -726,6 +726,10 @@ final class MediaItemOperationsService {
                     mediaItems.forEach {
                         $0.removeFromRelatedRemotes(remoteItemsSet)
                         $0.updateMissingDateRelations()
+                        
+                        if $0.relatedRemotes.count == 0 {
+                            $0.regenerateTrimmedLocalFileID()
+                        }
                     }
                     
                     remoteItems.forEach { context.delete($0) }

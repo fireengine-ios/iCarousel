@@ -214,6 +214,19 @@ public class MediaItem: NSManagedObject {
         
         uuid = firstPart + "~" + UUID().uuidString
     }
+    
+    func regenerateTrimmedLocalFileID() {
+        guard let localFileID = localFileID?.components(separatedBy: "/").first, localFileID != trimmedLocalFileID else {
+            return
+        }
+        
+        if trimmedLocalFileID?.contains("~") == true, let secondPart = trimmedLocalFileID?.split(separator: "~").last {
+            trimmedLocalFileID = localFileID + "~" + secondPart
+            return
+        }
+        
+        trimmedLocalFileID = localFileID
+    }
 }
 
 //MARK: - relations
