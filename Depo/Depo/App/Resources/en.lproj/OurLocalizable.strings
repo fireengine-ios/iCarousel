@@ -1002,3 +1002,6 @@
 "login_username_not_valid" = "Please check your username";
 
 "photo_pick_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus.";
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "ETK Permission";
+"etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";

@@ -1270,3 +1270,7 @@ Please check I have understood the intended command here*/
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Questions Fréquemment Posées";
 "login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "";
+"etk_permissiom_description" = "";
