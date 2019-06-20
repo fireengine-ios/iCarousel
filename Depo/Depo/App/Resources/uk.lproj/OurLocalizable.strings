@@ -366,6 +366,7 @@
 "E-mail Usage Information" = "Інформація про використання електронної пошти";
 "Password fields do not match." = "Паролі не збігаються";
 "Please check the e-mail address." = "Будь-ласка, перевірте адресу електронної пошти.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Будь-ласка, встановіть пароль, що включає несумісні літери та цифри, щонайменше 6 максимум 16 символів.";
 "Please check the GSM number" = "Будь ласка, перевірте свій номер телефону";
 "Login denied. Please check your credentials." = "Вхід відхилено. Перевірте свої облікові дані.";

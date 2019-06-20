@@ -391,6 +391,7 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Passwords do not match";
 "Please check the e-mail address." = "Please check the e-mail address.";
+"Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
 "Please check the GSM number" = "Please check your Phone number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";

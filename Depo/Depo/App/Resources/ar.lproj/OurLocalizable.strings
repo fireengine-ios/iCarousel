@@ -374,6 +374,7 @@
 "E-mail Usage Information" = "معلومات استعمال البريد الإلكتروني";
 "Password fields do not match." = "كلمتا المرور غير متطابقتين";
 "Please check the e-mail address." = "يرجى التحقق من عنوان البريد الإلكتروني.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "يرجى تعيين كلمة مرور تحوي أحرفاً وأرقاماً غير متعاقبة حدّها الأدنى 6 أحرف وحدّها الأقصى 12 حرفاً.";
 "Please check the GSM number" = " يرجى التحقق من رقم الهاتف.";
 "Login denied. Please check your credentials." = "رُفِضَ تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.";
