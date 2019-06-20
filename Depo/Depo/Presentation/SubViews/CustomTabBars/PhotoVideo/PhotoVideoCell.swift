@@ -128,7 +128,6 @@ final class PhotoVideoCell: UICollectionViewCell {
 //    }
     
     func setup(with mediaItem: MediaItem) {
-        print("-- CELL SETUP \(mediaItem.uuid) : \(mediaItem.isLocalItemValue) : \(mediaItem.nameValue ?? "")")
         /// reset all except thumbnail and cellId
         reset()
         
@@ -187,7 +186,13 @@ final class PhotoVideoCell: UICollectionViewCell {
             cellId = ""
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
-        } 
+        } else {
+            /// nothing to show (missing dates)
+            uuid = nil
+            cellId = ""
+            thumbnailImageView.image = nil
+        }
+        
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {
