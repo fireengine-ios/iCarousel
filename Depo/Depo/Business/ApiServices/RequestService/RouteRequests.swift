@@ -19,6 +19,7 @@ struct RouteRequests {
     // MARK: Environment
     
     private static let currentServerEnvironment = ServerEnvironment.production
+    private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -63,6 +64,14 @@ struct RouteRequests {
         }
     }()
     
+    static let privacyPolicy: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .production: return "https://mylifebox.com/policy/?lang="
+        }
+    }()
+    
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
@@ -78,11 +87,10 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@"
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
-    
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -158,6 +166,9 @@ struct RouteRequests {
     //MARK : Share
     static let share = "share/%@"
     
+    //MARK: Feedback
+    static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    
     //MARK : Faq 
     static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
 
@@ -179,7 +190,6 @@ struct RouteRequests {
         }
     }
     
-    
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
         static func card(with id: Int) -> URL {
@@ -198,6 +208,7 @@ struct RouteRequests {
         
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
@@ -211,6 +222,9 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
+            
+            static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionsUpdate = Account.accountApi +/ "permission/update"
         }
     }
     

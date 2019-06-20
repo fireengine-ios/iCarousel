@@ -126,6 +126,29 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     }
 }
 
+final class SettingsPermissionsResponse: ObjectRequestResponse {
+
+    var type: PermissionType?
+    var isAllowed: Bool?
+    var isApproved: Bool?
+    
+    private enum ResponseKeys {
+        static let type = "type"
+        static let isAllowed = "allowed"
+        static let isApproved = "approved"
+    }
+    
+    override func mapping() {
+        guard let typeString = json?[ResponseKeys.type].string else {
+            return
+        }
+        
+        type = PermissionType(rawValue: typeString)
+        isAllowed = json?[ResponseKeys.isAllowed].bool
+        isApproved = json?[ResponseKeys.isApproved].bool
+    }
+}
+
 class QuotaInfoResponse: ObjectRequestResponse {
     
     var bytes: Int64?
@@ -383,6 +406,22 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
     }
     
+}
+
+final class FeedbackEmailResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: String?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        value = json?[ResponseKey.value].string
+    }
 }
 
 /// MAYBE WILL BE USED

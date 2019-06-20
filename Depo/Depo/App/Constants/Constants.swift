@@ -15,8 +15,17 @@ struct TextConstants {
         static let instagramLoginCanceled = "Instagram Login canceled"
         static let termsOfUseLink = "termsOfUseLink"
         static let termsAndUseEtkLinkTurkcellAndGroupCompanies = "terms_and_use_etk_link_1"
+        static let privacyPolicyConditions = "privacy_policy_conditions_link_1"
         static let termsAndUseEtkLinkCommercialEmailMessages = "terms_and_use_etk_link_2"
         static let FAQ = "frequently_asked_questions"
+        static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
+        static let appName: String = {
+            #if LIFEDRIVE
+            return "LIFEDRIVE"
+            #else
+            return "LIFEBOX"
+            #endif
+            }()
     }
     
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -71,7 +80,9 @@ struct TextConstants {
     static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxText = NSLocalizedString("I have read and accepted terms of use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckbox = NSLocalizedString("terms_and_use_etk_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseIntroductionCheckbox = NSLocalizedString("terms_and_use_introduction_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkTurkcellAndGroupCompanies = NSLocalizedString("terms_and_use_etk_link_turkcell_and_group_companies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCondition = NSLocalizedString("privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkCommercialEmailMessages = NSLocalizedString("terms_and_use_etk_link_commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseWelcomeText = NSLocalizedString("Welcome to Lifebox!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -357,8 +368,10 @@ struct TextConstants {
     static let settingsViewCellUsageInfo = NSLocalizedString("Usage Info and Packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPasscode = NSLocalizedString("Lifebox %@ and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellPrivacyAndTerms = NSLocalizedString("terms_and_privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
+    static let settingsViewCellPermissions = NSLocalizedString("Permissions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: FAQ
@@ -376,6 +389,10 @@ struct TextConstants {
     
     static let dropboxLastUpdatedFile = NSLocalizedString("dropboxLastUpdatedFile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let dropboxLastUpdatedFiles = NSLocalizedString("dropboxLastUpdatedFiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    // MARK: Terms of Use and Privacy Policy
+     static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+     static let privacyPolicyCell = NSLocalizedString("privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: Face Image
@@ -432,6 +449,12 @@ struct TextConstants {
     static let fileInfoAlbumNameTitle = NSLocalizedString("Album Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoAlbumInfoTitle = NSLocalizedString("Album Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoSave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: ETK Permissions
+    static let etkPermissionTitleLabel = NSLocalizedString("etk_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let etkPermissionDescriptionLabel = NSLocalizedString("etk_permissiom_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     
     // MARK: settings User info view
     static let settingsUserInfoViewUpgradeButtonText = NSLocalizedString("UPGRADE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -587,7 +610,6 @@ struct TextConstants {
     static let feedbackViewLanguageLabel = NSLocalizedString("You need to specify your language preference so that we can serve you better.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feedbackViewSendButton = NSLocalizedString("Send", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feedbackViewSelect = NSLocalizedString("Please select a language option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let feedbackEmail = NSLocalizedString("DESTEK-LIFEBOX@TURKCELL.COM.TR", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feedbackEmailError = NSLocalizedString("Please configurate email client", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feedbackErrorTextError = NSLocalizedString("Please type your message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feedbackErrorLanguageError = NSLocalizedString("You need to specify your language preference so that we can serve you better.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -979,6 +1001,7 @@ struct TextConstants {
     static let facebookTagsOn = NSLocalizedString("facebook_tags_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsOff = NSLocalizedString("facebook_tags_off", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsImport = NSLocalizedString("facebook_tags_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceTagsDescriptionPremium = NSLocalizedString("face_tags_description_premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1075,6 +1098,7 @@ struct TextConstants {
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceTagsDescriptionStandart = NSLocalizedString("face_tags_description_standart", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let homePagePopup = NSLocalizedString("home_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncPopup = NSLocalizedString("sync_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1229,4 +1253,6 @@ struct TextConstants {
     static let captchaIsEmpty = NSLocalizedString("captcha_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginUsernameNotValid = NSLocalizedString("login_username_not_valid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myProfileFAQ = NSLocalizedString("frequently_asked_questions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoPickDescription = NSLocalizedString("photo_pick_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

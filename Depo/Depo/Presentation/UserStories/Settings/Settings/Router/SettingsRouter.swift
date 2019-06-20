@@ -24,6 +24,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.connectedAccounts!)
     }
     
+    func goToPermissions() {
+        router.pushViewController(viewController: router.permissions)
+    }
+    
     func goToAutoApload() {
         router.pushViewController(viewController: router.autoUpload)
     }
@@ -38,6 +42,10 @@ class SettingsRouter: SettingsRouterInput {
 
     func goToHelpAndSupport() {
         router.pushViewController(viewController: router.helpAndSupport!)
+    }
+    
+    func goToTermsAndPolicy() {
+        router.pushViewController(viewController: router.termsAndPolicy!)
     }
     
     func goToUsageInfo() {

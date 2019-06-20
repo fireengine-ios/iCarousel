@@ -115,6 +115,13 @@ extension UIColor {
         return UIColor(red: 248.0 / 255.0, green: 194.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0)
     }
     
+    class var lrBrownishGrey: UIColor {
+        return UIColor(red: 95 / 255.0, green: 95 / 255.0, blue: 95 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrLightBrownishGrey: UIColor {
+        return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
+    }
 }
 
 // Text Font
@@ -139,5 +146,9 @@ extension UIFont {
     
     static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaMed", size: size)!
+    }
+    
+    static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
+        return UIFont(name: "TurkcellSatura", size: size)!
     }
 }
