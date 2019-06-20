@@ -791,6 +791,12 @@ class RouterVC: NSObject {
         return ConnectedAccountsViewController.initFromNib()
     }
     
+    // MARK: - Permissions
+    
+    var permissions: UIViewController {
+        return PermissionViewController()
+    }
+    
     // MARK: Face image
     
     var faceImage: UIViewController {

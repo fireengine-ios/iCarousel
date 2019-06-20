@@ -240,6 +240,51 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func getPermissionsAllowanceInfo(handler: @escaping (ResponseResult<[SettingsPermissionsResponse]>) -> Void) {
+        debugLog("AccountService getPermissionsAllowance")
+        
+        let url = RouteRequests.Account.Permissions.permissionsList
+        sessionManager
+            .request(url)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let jsonArray = JSON(data: data).array else {
+                        let error = CustomErrors.serverError("\(RouteRequests.Account.Permissions.permissionsList) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    
+                    let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
+                    
+                    handler(.success(results))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func changePermissionsAllowed(type: PermissionType, isApproved: Bool, handler: @escaping (ResponseResult<Void>) -> Void) {
+        debugLog("AccountService changePermissionsAllowed")
+        
+        let url = RouteRequests.Account.Permissions.permissionsUpdate
+        let params: [[String: Any]] = [["type": type.rawValue,
+                                        "approved": isApproved]]
+        
+        let urlRequest = sessionManager.request(url, method: .post).request
+        
+        if var request = urlRequest {
+            request = try! params.encode(request, with: nil)
+            
+            sessionManager
+                .request(request)
+                .customValidate()
+                .responseVoid(handler)
+        }
+    }
+    
     func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeInstapickAllowed")
         

@@ -73,6 +73,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToConnectedAccounts()
     }
     
+    func goToPermissions() {
+        router.goToPermissions()
+    }
+    
     func goToAutoApload() {
         router.goToAutoApload()
     }

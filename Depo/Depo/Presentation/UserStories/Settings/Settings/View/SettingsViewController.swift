@@ -27,6 +27,8 @@ protocol SettingsDelegate: class {
     
     func goToActivityTimeline()
     
+    func goToPermissions()
+    
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 }
 
@@ -212,9 +214,17 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                 } else {
                     output.goToConnectedAccounts()
                 }
+            case 1:
+                // permissions
+                if let delegate = settingsDelegate {
+                    delegate.goToPermissions()
+                } else {
+                    output.goToPermissions()
+                }
             default:
                 break
             }
+            break
         case 2:
             switch indexPath.row {
             case 0: // my activity timeline

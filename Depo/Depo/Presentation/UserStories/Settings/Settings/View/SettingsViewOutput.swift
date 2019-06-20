@@ -29,6 +29,8 @@ protocol SettingsViewOutput {
     func goToTermsAndPolicy()
     
     func goToUsageInfo()
+    
+    func goToPermissions()
     //Photo related methods - below
     func onChangeUserPhoto()
     

@@ -369,7 +369,8 @@ struct TextConstants {
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPrivacyAndTerms = NSLocalizedString("terms_and_privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
+    static let settingsViewCellPermissions = NSLocalizedString("Permissions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: FAQ
@@ -447,6 +448,13 @@ struct TextConstants {
     static let fileInfoAlbumNameTitle = NSLocalizedString("Album Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoAlbumInfoTitle = NSLocalizedString("Album Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoSave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: ETK Permissions
+    static let etkPermissionTitleLabel = NSLocalizedString("etk_permission", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //TODO: change to localized
+    static let etkPermissionDescriptionLabel = NSLocalizedString("Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     
     // MARK: settings User info view
     static let settingsUserInfoViewUpgradeButtonText = NSLocalizedString("UPGRADE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
