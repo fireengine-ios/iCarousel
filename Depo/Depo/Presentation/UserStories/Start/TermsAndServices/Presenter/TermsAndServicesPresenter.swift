@@ -7,6 +7,7 @@
 //
 
 class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, TermsAndServicesViewOutput, TermsAndServicesInteractorOutput {
+    
 
     weak var view: TermsAndServicesViewInput!
     var interactor: TermsAndServicesInteractorInput!
@@ -87,6 +88,9 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.goToCommercialEmailMessages()
     }
     
+    func openPrivacyPolicyDescriptionController() {
+        router.goToPrivacyPolicyDescriptionController()
+    }
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
         view.showSpinner()

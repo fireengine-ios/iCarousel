@@ -80,6 +80,21 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
         }
     }
 
+    @IBOutlet private weak var descriptionLabel: UILabel! {
+        didSet {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 1.8
+            
+            let attributes: [NSAttributedStringKey : Any] = [
+                .foregroundColor : ColorConstants.darkBorder,
+                .font : UIFont.TurkcellSaturaRegFont(size: 16),
+                .paragraphStyle : paragraphStyle
+            ]
+            
+            descriptionLabel.attributedText = NSAttributedString(string: TextConstants.photoPickDescription,
+                                                                 attributes: attributes)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

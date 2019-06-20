@@ -13,4 +13,5 @@ protocol TermsAndServicesViewOutput {
     func openTurkcellAndGroupCompanies()
     func openCommercialEmailMessages()
     func confirmEtk(_ etk: Bool)
+    func openPrivacyPolicyDescriptionController()
 }

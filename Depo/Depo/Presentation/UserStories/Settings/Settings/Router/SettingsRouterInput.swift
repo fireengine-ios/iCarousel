@@ -16,6 +16,8 @@ protocol SettingsRouterInput {
     
     func goToConnectedAccounts()
     
+    func goToPermissions()
+    
     func goToAutoApload()
     
     func goToPeriodicContactSync()
@@ -23,6 +25,8 @@ protocol SettingsRouterInput {
     func goToFaceImage()
     
     func goToHelpAndSupport()
+    
+    func goToTermsAndPolicy()
     
     func goToUsageInfo()
     
