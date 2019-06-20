@@ -99,7 +99,7 @@
 		46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8913479D5236DDD47EE0E6 /* UploadFilesSelectionInteractorOutput.swift */; };
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
-		481691A022BA61620087B07F /* SharedLifeDriveImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4816919922BA5A8F0087B07F /* SharedLifeDriveImages.xcassets */; };
+		481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		486F7B53208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B52208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift */; };
@@ -5927,7 +5927,6 @@
 		46A596955202672C10F193CA /* Pods-lifedrive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.debug.xcconfig"; sourceTree = "<group>"; };
 		46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewInput.swift; sourceTree = "<group>"; };
 		4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
-		4816919922BA5A8F0087B07F /* SharedLifeDriveImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedLifeDriveImages.xcassets; sourceTree = "<group>"; };
 		482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		486F7B52208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncSettingsOptionView.swift; sourceTree = "<group>"; };
 		486F7B56208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncDataStorage.swift; sourceTree = "<group>"; };
@@ -12874,7 +12873,6 @@
 				B54BFF4B202C73790018AF82 /* SharedConstants.swift */,
 				B54BFF4E202C74090018AF82 /* SharedEnums.swift */,
 				B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */,
-				4816919922BA5A8F0087B07F /* SharedLifeDriveImages.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -17156,7 +17154,6 @@
 				CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */,
 				CE784E1B22A685FB00662219 /* checkbox_secili@2x.png in Resources */,
 				B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */,
-				481691A022BA61620087B07F /* SharedLifeDriveImages.xcassets in Resources */,
 				CE784E1C22A685FB00662219 /* PeriodicContactSyncViewController.xib in Resources */,
 				CE784E1D22A685FB00662219 /* EditinglBar.xib in Resources */,
 				CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */,
@@ -17320,6 +17317,7 @@
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				CE784EBE22A685FB00662219 /* daire_selected.png in Resources */,
+				481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */,
 				CE784EBF22A685FB00662219 /* paylas_kaydet@3x.png in Resources */,
 				CE784EC022A685FB00662219 /* duz_cizgi.png in Resources */,
 				CE784EC122A685FB00662219 /* UsageInfoViewController.xib in Resources */,
@@ -23268,7 +23266,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchLifeDriveImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -23327,7 +23325,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchLifeDriveImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
@@ -23383,7 +23381,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchLifeDriveImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
@@ -23438,7 +23436,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchLifeDriveImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
