@@ -182,10 +182,9 @@ final class PhotoVideoCell: UICollectionViewCell {
                     }
                 }
             }
-        } else if let metadata = mediaItem.metadata {
+        } else if let smallURL = mediaItem.metadata?.smalURl, let mediumURL = mediaItem.metadata?.mediumUrl {
             cellId = ""
-            setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
-                     mediumUrl: URL(string: metadata.mediumUrl ?? ""))
+            setImage(smalUrl: URL(string: smallURL), mediumUrl: URL(string: mediumURL))
         } else {
             /// nothing to show (missing dates)
             uuid = nil
