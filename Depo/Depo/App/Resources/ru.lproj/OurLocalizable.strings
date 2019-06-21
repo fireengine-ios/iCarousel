@@ -368,6 +368,7 @@
 "E-mail Usage Information" = "Информация об использовании адреса электронной почты";
 "Password fields do not match." = "Пароли не совпадают";
 "Please check the e-mail address." = "Пожалуйста, проверьте электронный адрес.";
+"Temporary error occurred. Please try again later." = "";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Пожалуйста, установите пароль, состоящий из непоследовательных букв и цифр, длиной не менее 6 и не более 16 символов.";
 "Please check the GSM number" = "Пожалуйста, проверьте номер телефона";
 "Login denied. Please check your credentials." = "Вход запрещён. Пожалуйста, проверьте учётные данные";
