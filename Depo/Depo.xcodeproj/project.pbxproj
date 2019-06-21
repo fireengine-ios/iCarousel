@@ -13433,6 +13433,7 @@
 				8C679AF51FBC244F00B78873 /* ShellScript */,
 				B51FD6381FD13C93000344BD /* Embed App Extensions */,
 				8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */,
+				73DC62B822BB93B300CD495E /* Run Script - Localizable */,
 			);
 			buildRules = (
 			);
@@ -15065,6 +15066,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		73DC62B822BB93B300CD495E /* Run Script - Localizable */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Localizable";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./scripts/clean_localizable.py\n";
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
