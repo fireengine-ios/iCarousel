@@ -87,45 +87,45 @@ final class PhotoVideoCell: UICollectionViewCell {
         addGestureRecognizer(longPressRecognizer)
     }
     
-    func setup(with wraped: WrapData) {
-        
-        accessibilityLabel = wraped.name
-        favoriteImageView.isHidden = !wraped.favorites
-        
-        if wraped.isLocalItem, wraped.fileSize < NumericConstants.fourGigabytes {
-            cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
-        } else {
-            cloudStatusImageView.image = nil
-        }
-        
-        switch wraped.fileType {
-        case .video:
-            videoDurationLabel.text = wraped.duration
-            videoPlayIcon.isHidden = false
-            videoDurationLabel.isHidden = false
-        default:
-            videoPlayIcon.isHidden = true
-            videoDurationLabel.isHidden = true
-        }
-        
-        switch wraped.patchToPreview {
-        case .localMediaContent(let local):
-            cellId = local.asset.localIdentifier
-            
-            filesDataSource?.getAssetThumbnail(asset: local.asset) { [weak self] image in
-                DispatchQueue.toMain {
-                    if self?.cellId == local.asset.localIdentifier, let image = image {
-                        self?.setImage(image: image, shouldBeBlurred: false, animated: false)
-                    }
-                }
-            }
-            
-        case .remoteUrl(_):
-            if let meta = wraped.metaData {
-                setImage(smalUrl: meta.smalURl, mediumUrl: meta.mediumUrl)
-            }
-        }
-    }
+//    func setup(with wraped: WrapData) {
+//
+//        accessibilityLabel = wraped.name
+//        favoriteImageView.isHidden = !wraped.favorites
+//
+//        if wraped.isLocalItem, wraped.fileSize < NumericConstants.fourGigabytes {
+//            cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
+//        } else {
+//            cloudStatusImageView.image = nil
+//        }
+//
+//        switch wraped.fileType {
+//        case .video:
+//            videoDurationLabel.text = wraped.duration
+//            videoPlayIcon.isHidden = false
+//            videoDurationLabel.isHidden = false
+//        default:
+//            videoPlayIcon.isHidden = true
+//            videoDurationLabel.isHidden = true
+//        }
+//
+//        switch wraped.patchToPreview {
+//        case .localMediaContent(let local):
+//            cellId = local.asset.localIdentifier
+//
+//            filesDataSource?.getAssetThumbnail(asset: local.asset) { [weak self] image in
+//                DispatchQueue.toMain {
+//                    if self?.cellId == local.asset.localIdentifier, let image = image {
+//                        self?.setImage(image: image, shouldBeBlurred: false, animated: false)
+//                    }
+//                }
+//            }
+//
+//        case .remoteUrl(_):
+//            if let meta = wraped.metaData {
+//                setImage(smalUrl: meta.smalURl, mediumUrl: meta.mediumUrl)
+//            }
+//        }
+//    }
     
     func setup(with mediaItem: MediaItem) {
         /// reset all except thumbnail and cellId
@@ -186,7 +186,13 @@ final class PhotoVideoCell: UICollectionViewCell {
             cellId = ""
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
-        } 
+        } else {
+            /// nothing to show (missing dates)
+            uuid = nil
+            cellId = ""
+            thumbnailImageView.image = nil
+        }
+        
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {

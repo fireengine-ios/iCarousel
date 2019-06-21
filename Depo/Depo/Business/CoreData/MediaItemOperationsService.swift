@@ -389,10 +389,18 @@ final class MediaItemOperationsService {
                 var deletedItems = [WrapData]()
                 var newSavedItems = [WrapData]()
                 
+                let group = DispatchGroup()
+                
                 for newItem in remoteItems {
                     if let existed = allSavedItems.first(where: { $0.uuid == newItem.uuid }) {
-                        if newItem != existed {
-                            existed.coreDataObject?.copyInfo(item: newItem, context: context)
+                        if newItem != existed, let objectId = existed.coreDataObjectId {
+                            group.enter()
+                            MediaItemOperationsService.shared.mediaItemsByIDs(ids: [objectId], context: context, mediaItemsCallBack: { items in
+                                if let item = items.first {
+                                    item.copyInfo(item: newItem, context: context)
+                                    group.leave()
+                                }
+                            })
                         }
                         allSavedItems.remove(existed)
                     } else {
@@ -401,14 +409,20 @@ final class MediaItemOperationsService {
                 }
 
                 deletedItems.append(contentsOf: allSavedItems)
+                
+                group.enter()
                 self.deleteItems(deletedItems, completion: {
                     newSavedItems.forEach {
                         ///Relations being setuped in the MediaItem init
                         _ = MediaItem(wrapData: $0, context: context)
                     }
-                    
+                    group.leave()
+                })
+                
+                group.notify(queue: DispatchQueue.global(), execute: {
                     CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
-                })  
+                })
+                
             })
         }
     }
@@ -712,6 +726,10 @@ final class MediaItemOperationsService {
                     mediaItems.forEach {
                         $0.removeFromRelatedRemotes(remoteItemsSet)
                         $0.updateMissingDateRelations()
+                        
+                        if $0.relatedRemotes.count == 0 {
+                            $0.regenerateTrimmedLocalFileID()
+                        }
                     }
                     
                     remoteItems.forEach { context.delete($0) }

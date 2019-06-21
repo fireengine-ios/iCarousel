@@ -247,10 +247,18 @@ final class PhotoVideoDataSource: NSObject {
                 return
             }
             
-            let ids = deletedIds + updatedIds + insertedIds
-            guard !ids.isEmpty else {
+            let ids = updatedIds + insertedIds
+            guard !updatedIds.isEmpty || !insertedIds.isEmpty || !deletedIds.isEmpty else {
                 self.finishConverting(needSorting: false)
                 return
+            }
+            
+            deletedIds.forEach { id in
+                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
+            }
+            
+            updatedIds.forEach { id in
+                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
             }
             
             MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
@@ -259,31 +267,10 @@ final class PhotoVideoDataSource: NSObject {
                 }
                 
                 for mediaItem in items {
-                    let itemUuid = mediaItem.isLocalItemValue ? mediaItem.trimmedLocalFileID : mediaItem.uuid
-                    guard let uuid = itemUuid else {
-                        continue
-                    }
-                    
-                    let deleteItem = {
-                        if mediaItem.isLocalItemValue {
-                            self.lastWrapedObjects.remove(where: {$0.isLocalItem && $0.getTrimmedLocalID() == uuid})
-                        } else {
-                            self.lastWrapedObjects.remove(where: {$0.uuid == uuid})
-                        }
-                    }
-                    
-                    if deletedIds.contains(mediaItem.objectID) {
-                        deleteItem()
-                    } else {
-                        if updatedIds.contains(mediaItem.objectID) {
-                            deleteItem()
-                        }
-                        
-                        let wrappedObject = WrapData(mediaItem: mediaItem)
-                        self.lastWrapedObjects.append(wrappedObject)
-                    }
+                    let wrappedObject = WrapData(mediaItem: mediaItem)
+                    self.lastWrapedObjects.append(wrappedObject)
                 }
-
+                
                 self.isMerging = false
                 if !self.isConverting {
                     self.finishConverting(needSorting: true)
@@ -416,13 +403,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             focusedIndexPath = indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
-        
-        /// reload cells manually
-        objectUpdatesStatic.forEach { indexPath in
-            if let collectionView = collectionView, let cell = collectionView.cellForItem(at: indexPath) {
-                collectionView.delegate?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
-            }
-        }
 
         collectionView?.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
@@ -432,6 +412,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             
+            // reload cells manually
+            objectUpdatesStatic.forEach { indexPath in
+                if let collectionView = self.collectionView, let cell = collectionView.cellForItem(at: indexPath) {
+                    collectionView.delegate?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
+                }
+            }
             self.reloadSupplementaryViewsIfNeeded()
             self.updateLastFetchedObjects(deletedIds: deletedIdsStatic, updatedIds: updatedIdsStatic, insertedIds: insertedIdsStatic)
             
