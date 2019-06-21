@@ -23477,7 +23477,7 @@
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -23512,7 +23512,7 @@
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23546,7 +23546,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23580,7 +23580,7 @@
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23611,7 +23611,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -23646,7 +23646,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23680,7 +23680,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23714,7 +23714,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23747,7 +23747,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -23782,7 +23782,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23816,7 +23816,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23850,7 +23850,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23883,7 +23883,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -23918,7 +23918,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23952,7 +23952,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -23986,7 +23986,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -24802,7 +24802,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/LifeDrive-AppStore-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/lifedrive.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24859,7 +24859,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/LifeDrive-AppStore-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24914,7 +24914,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/LifeDrive-AppStore-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24970,7 +24970,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/LifeDrive-Enterprise-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

@@ -78,11 +78,11 @@ target 'TC_Depo_LifeTech' do
 	core_pods
 end
 
-target 'lifedrive' do
+target 'LifeboxUnitTests' do
 	core_pods
 end
 
-target 'LifeboxUnitTests' do
+target 'lifedrive' do
 	core_pods
 end
 
