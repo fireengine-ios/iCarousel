@@ -101,6 +101,7 @@
 		46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8913479D5236DDD47EE0E6 /* UploadFilesSelectionInteractorOutput.swift */; };
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
+		481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		4812D8EA22B25942007089BA /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
 		482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
@@ -3110,7 +3111,6 @@
 		B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */; };
 		B5B6543022A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
-		B5B6543222A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
@@ -17905,6 +17905,7 @@
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				CE784EBE22A685FB00662219 /* daire_selected.png in Resources */,
+				481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */,
 				CE784EBF22A685FB00662219 /* paylas_kaydet@3x.png in Resources */,
 				CE784EC022A685FB00662219 /* duz_cizgi.png in Resources */,
 				CE784EC122A685FB00662219 /* UsageInfoViewController.xib in Resources */,
@@ -17948,7 +17949,6 @@
 				CE784EE722A685FB00662219 /* rotate@3x.png in Resources */,
 				CE784EE822A685FB00662219 /* header_icon.png in Resources */,
 				CE784EE922A685FB00662219 /* LeavePremiumHeaderView.xib in Resources */,
-				B5B6543222A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				CE784EEA22A685FB00662219 /* target@2x.png in Resources */,
 				CE784EEB22A685FB00662219 /* vintage@3x.png in Resources */,
 				CE784EEC22A685FB00662219 /* success_icon@2x.png in Resources */,
