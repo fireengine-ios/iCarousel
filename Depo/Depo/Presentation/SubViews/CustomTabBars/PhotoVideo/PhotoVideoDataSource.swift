@@ -281,15 +281,61 @@ final class PhotoVideoDataSource: NSObject {
     
     private func finishConverting(needSorting: Bool) {
         if needSorting {
-            lastWrapedObjects.sortItself(by: { obj1, obj2 -> Bool in
-                if let date1 = obj1.metaData?.takenDate ?? obj1.creationDate,
-                    let date2 = obj2.metaData?.takenDate ?? obj2.creationDate,
-                    date1 > date2
-                {
+            lastWrapedObjects.sortItself { item1, item2 -> Bool in
+                if let date1 = item1.isLocalItem ? item1.creationDate : item1.metaData?.takenDate {
+                    if let date2 = item2.isLocalItem ? item2.creationDate : item2.metaData?.takenDate {
+                        /// both dates are non-nil
+                        if date1 == date2 {
+                            if let itemId1 = item1.id, let itemId2 = item2.id {
+                                return itemId1 > itemId2
+                            }
+                            /// shouldn't be there ever
+                            return false
+                        }
+                        return date1 > date2
+                    }
+                    /// date2 is nil
                     return true
+                } else if let _ = item2.isLocalItem ? item2.creationDate : item2.metaData?.takenDate {
+                    /// date1 is nil
+                    return false
+                } else {
+                    /// both dates are nil
+                    if let itemId1 = item1.id, let itemId2 = item2.id {
+                        return itemId1 > itemId2
+                    }
+                    /// shouldn't be there ever
+                    return false
                 }
-                return false
-            })
+            }
+//            var mutableArray = lastWrapedObjects.getArray()
+//
+//            ///separate missing dates
+//            let partitionIndex = mutableArray.partition { item -> Bool in
+//                (item.isLocalItem && item.creationDate == nil) ||
+//                    (!item.isLocalItem && item.metaData?.takenDate == nil)
+//            }
+//            var missingDates = Array(mutableArray.suffix(from: partitionIndex))
+//            var ordinaryItems = Array(mutableArray.prefix(upTo: partitionIndex))
+//
+//            /// sort differentely
+//            ordinaryItems.sort(by: { obj1, obj2 -> Bool in
+//                if let date1 = obj1.metaData?.takenDate ?? obj1.creationDate,
+//                    let date2 = obj2.metaData?.takenDate ?? obj2.creationDate {
+//                    return date1 > date2
+//                }
+//                return false
+//            })
+//            missingDates.sort(by: { obj1, obj2 -> Bool in
+//                if let id1 = obj1.id, let id2 = obj2.id {
+//                    return id1 > id2
+//                }
+//                return false
+//            })
+//
+//            /// update lastWrapedObjects
+//            lastWrapedObjects.removeAll()
+//            lastWrapedObjects.append(ordinaryItems + missingDates)
         }
         
         DispatchQueue.main.async {
