@@ -37,10 +37,10 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     override func cancel() {
         super.cancel()
         
-        task?.cancel()
-        task = nil
-        outputBlock?(nil)
-        semaphore.signal()
+        DispatchQueue.main.async {
+            self.task?.cancel()
+            self.task = nil
+        }
     }
     
     override func main() {
@@ -52,6 +52,8 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             outputBlock?(nil)
             return
         }
+        
+        var outputImage: UIImage? = nil
         
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
@@ -65,16 +67,16 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                 }
                 
                 guard let data = dataResponse.value, let image = UIImage(data: data) else {
-                    self.outputBlock?(nil)
                     self.semaphore.signal()
                     return
                 }
                 
-                self.outputBlock?(image)
+                outputImage = image
                 self.semaphore.signal()
             })
             //.task
         
         semaphore.wait()
+        outputBlock?(outputImage)
     }
 }
