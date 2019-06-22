@@ -16,8 +16,8 @@ class MediaItemMigrationPolicy_1_3: NSEntityMigrationPolicy {
 }
 
 class MediaItemMetaDataMigrationPolicy_1_3: NSEntityMigrationPolicy {
-    @objc func durationWith(_ duration: Double, assetId:String?) -> Double {
-        guard duration == -1.0 else {
+    @objc func durationWith(_ duration: NSNumber, assetId:String?) -> NSNumber {
+        guard duration.doubleValue == -1.0 else {
             return duration
         }
         
@@ -25,9 +25,9 @@ class MediaItemMetaDataMigrationPolicy_1_3: NSEntityMigrationPolicy {
             let assetId = assetId,
             let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject
         {
-            return asset.duration
+            return NSNumber(value: asset.duration)
         }
         
-        return Double(0.0)
+        return NSNumber(value: 0.0)
     }
 }
