@@ -14,3 +14,20 @@ class MediaItemMigrationPolicy_1_3: NSEntityMigrationPolicy {
         return trimmedLocalFileID.appending("~\(UUID().uuidString)")
     }
 }
+
+class MediaItemMetaDataMigrationPolicy_1_3: NSEntityMigrationPolicy {
+    @objc func durationWith(_ duration: Double, assetId:String?) -> Double {
+        guard duration == -1.0 else {
+            return duration
+        }
+        
+        if LocalMediaStorage.default.photoLibraryIsAvailible(),
+            let assetId = assetId,
+            let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject
+        {
+            return asset.duration
+        }
+        
+        return Double(0.0)
+    }
+}
