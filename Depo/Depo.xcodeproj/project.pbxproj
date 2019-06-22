@@ -2388,6 +2388,10 @@
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
+		8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72EF22BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72F022BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8C23F28E2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F2912286C95600C5BF9E /* SingleThumbnailAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */; };
@@ -2403,7 +2407,6 @@
 		8C3BA2BF22B3CC32006D901E /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		8C3BA2C022B3CC32006D901E /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C3BA2C122B3CC32006D901E /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		8C3BA2C222B3CC32006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA2C322B3CC32006D901E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		8C3BA2C422B3CC32006D901E /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		8C3BA2C522B3CC32006D901E /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
@@ -2444,7 +2447,6 @@
 		8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
-		8C3BA2FA22B3CC45006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
 		8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
@@ -2537,7 +2539,6 @@
 		8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		8C3BA36222B3CC49006D901E /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
 		8C3BA36322B3CC49006D901E /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
-		8C3BA36422B3CC49006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA36522B3CC49006D901E /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
 		8C3BA36622B3CC49006D901E /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
 		8C3BA36722B3CC49006D901E /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
@@ -4673,7 +4674,6 @@
 		CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */; };
 		CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */; };
 		CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
-		CE784BA022A685FB00662219 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
 		CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
 		CE784BA322A685FB00662219 /* SplashRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */; };
@@ -7334,6 +7334,7 @@
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
+		8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleThumbnailAlbumCell.swift; sourceTree = "<group>"; };
 		8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleThumbnailAlbumCell.xib; sourceTree = "<group>"; };
@@ -13432,6 +13433,7 @@
 			isa = PBXGroup;
 			children = (
 				CE784F2222A68CEB00662219 /* lifedrive.plist */,
+				8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */,
 				8C3BA3B022B3D597006D901E /* LifeDrive-AppStore-Info.plist */,
 				8C3BA3B122B3D597006D901E /* LifeDrive-Enterprise-Info.plist */,
 				8C3BA3B322B3D8B3006D901E /* LifeDrive_LifeTech.entitlements */,
@@ -20005,9 +20007,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA2BF22B3CC32006D901E /* WidgetService.swift in Sources */,
+				8C1E72EF22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA2C022B3CC32006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2C122B3CC32006D901E /* AppResponsivenessService.swift in Sources */,
-				8C3BA2C222B3CC32006D901E /* SharedConstants.swift in Sources */,
 				8C3BA2C322B3CC32006D901E /* TodayViewController.swift in Sources */,
 				8C3BA2C422B3CC32006D901E /* UIImage+JPEG.swift in Sources */,
 				8C3BA2C522B3CC32006D901E /* SharedEnums.swift in Sources */,
@@ -20043,7 +20045,6 @@
 				8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */,
 				8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */,
-				8C3BA2FA22B3CC45006D901E /* SharedConstants.swift in Sources */,
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
@@ -20077,6 +20078,7 @@
 				8C3BA31922B3CC45006D901E /* UIColor+Adjust.swift in Sources */,
 				8C3BA31A22B3CC45006D901E /* MD5.swift in Sources */,
 				8C3BA31B22B3CC45006D901E /* PasscodeInputView.swift in Sources */,
+				8C1E72F022BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA31C22B3CC45006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C3BA31D22B3CC45006D901E /* PasscodeStorage.swift in Sources */,
 				8C3BA31E22B3CC45006D901E /* URL+Video.swift in Sources */,
@@ -20116,6 +20118,7 @@
 				8C3BA35322B3CC49006D901E /* Error+Alamofire.swift in Sources */,
 				8C3BA35422B3CC49006D901E /* MD5.swift in Sources */,
 				8C3BA35522B3CC49006D901E /* UIViewController+NavBar.swift in Sources */,
+				8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA35622B3CC49006D901E /* AuthorizationURLs.swift in Sources */,
 				8C3BA35722B3CC49006D901E /* SharedFactory.swift in Sources */,
 				8C3BA35822B3CC49006D901E /* Device.swift in Sources */,
@@ -20130,7 +20133,6 @@
 				8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */,
 				8C3BA36222B3CC49006D901E /* KeychainSwift+Optional.swift in Sources */,
 				8C3BA36322B3CC49006D901E /* URL+Path.swift in Sources */,
-				8C3BA36422B3CC49006D901E /* SharedConstants.swift in Sources */,
 				8C3BA36522B3CC49006D901E /* ShareConfigurator.swift in Sources */,
 				8C3BA36622B3CC49006D901E /* RouteRequests.swift in Sources */,
 				8C3BA36722B3CC49006D901E /* DeviceExtension.swift in Sources */,
@@ -22491,7 +22493,6 @@
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
 				CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
-				CE784BA022A685FB00662219 /* SharedConstants.swift in Sources */,
 				CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */,
 				CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */,
 				CE784BA322A685FB00662219 /* SplashRouterInput.swift in Sources */,
@@ -22682,6 +22683,7 @@
 				CE784C5A22A685FB00662219 /* FeedbackViewInput.swift in Sources */,
 				CE784C5B22A685FB00662219 /* FaceImageItemsInitializer.swift in Sources */,
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
+				8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				CE784C5D22A685FB00662219 /* ItemSyncOperation.swift in Sources */,
 				CE784C5E22A685FB00662219 /* FeedbackViewOutput.swift in Sources */,
 				CE784C5F22A685FB00662219 /* CreateStoryPreviyInteractorIO.swift in Sources */,
