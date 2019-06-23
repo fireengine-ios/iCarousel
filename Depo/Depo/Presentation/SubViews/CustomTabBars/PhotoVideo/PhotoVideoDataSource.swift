@@ -183,6 +183,7 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     func changeSourceFilter(syncOnly: Bool, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+        lastWrapedObjects.removeAll()
         if syncOnly {
             fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
             newPredicateSetupedCallback()
