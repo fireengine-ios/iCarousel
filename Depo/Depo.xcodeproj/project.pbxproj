@@ -104,6 +104,8 @@
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
 		4812D8EA22B25942007089BA /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
+		4815689322BCF2E400376DFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4815689022BCF2E300376DFC /* GoogleService-Info.plist */; };
+		4815689422BCF2E400376DFC /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4815689222BCF2E300376DFC /* GoogleService-Info-ent.plist */; };
 		481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
@@ -5088,7 +5090,6 @@
 		CE784D3E22A685FB00662219 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		CE784D3F22A685FB00662219 /* crop_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC772008AD6F003D8E05 /* crop_icon.png */; };
 		CE784D4022A685FB00662219 /* polaroid_yeni.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD1F2008AD6F003D8E05 /* polaroid_yeni.png */; };
-		CE784D4122A685FB00662219 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
 		CE784D4222A685FB00662219 /* yesil.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ADA32008AD6F003D8E05 /* yesil.png */; };
 		CE784D4322A685FB00662219 /* Buyuk_Selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC4E2008AD6F003D8E05 /* Buyuk_Selected@3x.png */; };
 		CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA74FA51FBF378F00CF946E /* PrintViewController.xib */; };
@@ -5316,7 +5317,6 @@
 		CE784E2222A685FB00662219 /* kirmizi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACCE2008AD6F003D8E05 /* kirmizi@2x.png */; };
 		CE784E2322A685FB00662219 /* paylas_linkedin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD142008AD6F003D8E05 /* paylas_linkedin@2x.png */; };
 		CE784E2422A685FB00662219 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
-		CE784E2522A685FB00662219 /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		CE784E2622A685FB00662219 /* kirmizi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACCF2008AD6F003D8E05 /* kirmizi@3x.png */; };
 		CE784E2722A685FB00662219 /* Turkcell_Satura_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEB12008AD6F003D8E05 /* Turkcell_Satura_Bold.ttf */; };
 		CE784E2822A685FB00662219 /* CustomNavBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE31EFD517300A405B2 /* CustomNavBar~ipad.xib */; };
@@ -5397,7 +5397,6 @@
 		CE784E7422A685FB00662219 /* paylas_fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD0E2008AD6F003D8E05 /* paylas_fb@2x.png */; };
 		CE784E7522A685FB00662219 /* PackagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2F560F1F7552A900F49DA1 /* PackagesViewController.xib */; };
 		CE784E7622A685FB00662219 /* serbest_cizgi_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD4E2008AD6F003D8E05 /* serbest_cizgi_selected.png */; };
-		CE784E7722A685FB00662219 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
 		CE784E7822A685FB00662219 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACA62008AD6F003D8E05 /* frame.png */; };
 		CE784E7922A685FB00662219 /* LocalAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */; };
 		CE784E7A22A685FB00662219 /* check-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC582008AD6F003D8E05 /* check-mark.png */; };
@@ -6161,6 +6160,8 @@
 		46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewInput.swift; sourceTree = "<group>"; };
 		4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNameModuleOutput.swift; sourceTree = "<group>"; };
+		4815689022BCF2E300376DFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4815689222BCF2E300376DFC /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		486F7B52208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncSettingsOptionView.swift; sourceTree = "<group>"; };
 		486F7B56208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncDataStorage.swift; sourceTree = "<group>"; };
@@ -9188,6 +9189,41 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		48103CDA22BCF09700624743 /* LifedrivePlists */ = {
+			isa = PBXGroup;
+			children = (
+				4815689122BCF2E300376DFC /* Ent_iOS */,
+				4815688F22BCF2E300376DFC /* Store_iOS */,
+			);
+			path = LifedrivePlists;
+			sourceTree = "<group>";
+		};
+		4815688E22BCF23900376DFC /* LifeboxPlists */ = {
+			isa = PBXGroup;
+			children = (
+				8CD7D8E7211193C00019B4F3 /* debug_iOS */,
+				8C3930EB2100668300C1D82D /* Ent_iOS */,
+				8C3930ED2100668300C1D82D /* Store_iOS */,
+			);
+			path = LifeboxPlists;
+			sourceTree = "<group>";
+		};
+		4815688F22BCF2E300376DFC /* Store_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4815689022BCF2E300376DFC /* GoogleService-Info.plist */,
+			);
+			path = Store_iOS;
+			sourceTree = "<group>";
+		};
+		4815689122BCF2E300376DFC /* Ent_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4815689222BCF2E300376DFC /* GoogleService-Info-ent.plist */,
+			);
+			path = Ent_iOS;
+			sourceTree = "<group>";
+		};
 		486F7B55208D10A8009EB73F /* PeriodicContactSyncDataStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -12166,9 +12202,8 @@
 		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7D8E7211193C00019B4F3 /* debug_iOS */,
-				8C3930EB2100668300C1D82D /* Ent_iOS */,
-				8C3930ED2100668300C1D82D /* Store_iOS */,
+				4815688E22BCF23900376DFC /* LifeboxPlists */,
+				48103CDA22BCF09700624743 /* LifedrivePlists */,
 			);
 			path = googleAnalytics;
 			sourceTree = "<group>";
@@ -17640,7 +17675,6 @@
 				CE784D3E22A685FB00662219 /* MailVerificationViewController.xib in Resources */,
 				CE784D3F22A685FB00662219 /* crop_icon.png in Resources */,
 				CE784D4022A685FB00662219 /* polaroid_yeni.png in Resources */,
-				CE784D4122A685FB00662219 /* GoogleService-Info-debug.plist in Resources */,
 				CE784D4222A685FB00662219 /* yesil.png in Resources */,
 				CE784D4322A685FB00662219 /* Buyuk_Selected@3x.png in Resources */,
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
@@ -17809,6 +17843,7 @@
 				CE784DE622A685FB00662219 /* paylas_kaydet.png in Resources */,
 				CE784DE722A685FB00662219 /* paylas_linkedin.png in Resources */,
 				CE784DE822A685FB00662219 /* paylas_kaydet@2x.png in Resources */,
+				4815689422BCF2E400376DFC /* GoogleService-Info-ent.plist in Resources */,
 				CE784DE922A685FB00662219 /* kontrast@2x.png in Resources */,
 				CE784DEA22A685FB00662219 /* CRYPopupViewController.nib in Resources */,
 				CE784DEB22A685FB00662219 /* share_icon@3x.png in Resources */,
@@ -17870,10 +17905,10 @@
 				CE784E2222A685FB00662219 /* kirmizi@2x.png in Resources */,
 				CE784E2322A685FB00662219 /* paylas_linkedin@2x.png in Resources */,
 				CE784E2422A685FB00662219 /* PremiumViewController.xib in Resources */,
-				CE784E2522A685FB00662219 /* GoogleService-Info-ent.plist in Resources */,
 				CE784E2622A685FB00662219 /* kirmizi@3x.png in Resources */,
 				CE784E2722A685FB00662219 /* Turkcell_Satura_Bold.ttf in Resources */,
 				CE784E2822A685FB00662219 /* CustomNavBar~ipad.xib in Resources */,
+				4815689322BCF2E400376DFC /* GoogleService-Info.plist in Resources */,
 				CE784E2922A685FB00662219 /* paylas_twitter.png in Resources */,
 				CE784E2A22A685FB00662219 /* underline_sari.png in Resources */,
 				CE784E2B22A685FB00662219 /* CRYColorCell.nib in Resources */,
@@ -17953,7 +17988,6 @@
 				CE784E7422A685FB00662219 /* paylas_fb@2x.png in Resources */,
 				CE784E7522A685FB00662219 /* PackagesViewController.xib in Resources */,
 				CE784E7622A685FB00662219 /* serbest_cizgi_selected.png in Resources */,
-				CE784E7722A685FB00662219 /* GoogleService-Info.plist in Resources */,
 				CE784E7822A685FB00662219 /* frame.png in Resources */,
 				CE784E7922A685FB00662219 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				CE784E7A22A685FB00662219 /* check-mark.png in Resources */,
