@@ -58,10 +58,12 @@
 		1ED9B13C12D56CE8CD6FD4BA /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */; };
+		22040186C82066550911C97C /* Pods_LifeDriveProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F576D23A839A4C38D5F1573 /* Pods_LifeDriveProviderUI.framework */; };
 		227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4791A4280C1ADF5C180FB /* AlbumDetailRouterInput.swift */; };
 		228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */; };
 		2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30889CD8C0EE339E19DF61B6 /* ActivityTimelineInteractorOutput.swift */; };
 		23C013C53919B6111BA5B06C /* FileInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */; };
+		2576F3B60903F3AB3594887C /* Pods_LifeDriveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F64241948BFF1FDDAA4027CA /* Pods_LifeDriveShared.framework */; };
 		2A1CBA93F5950F76EF480D84 /* SyncContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */; };
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
@@ -101,8 +103,8 @@
 		46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8913479D5236DDD47EE0E6 /* UploadFilesSelectionInteractorOutput.swift */; };
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
-		481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		4812D8EA22B25942007089BA /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
+		481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
 		482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482509D82061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift */; };
 		486F7B53208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B52208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift */; };
@@ -257,6 +259,7 @@
 		4D19E8403C8694B3328BB3D2 /* BaseFilesGreedModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */; };
 		4DD676109D535EB5797F2580 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */; };
 		4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */; };
+		4FB3C7D5D657196684D51C7B /* Pods_LifeDrive_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D1AC12AD5D42BD432D00AF /* Pods_LifeDrive_widget.framework */; };
 		50B49D2A3AAA1794872FF8D2 /* UserInfoSubViewViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E50FCBA00A2EB5EF92BED07 /* UserInfoSubViewViewInput.swift */; };
 		5210C459503480584B037B25 /* FileInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55EC0735060540CE5E23E4 /* FileInfoRouter.swift */; };
 		5362D573ACB91FF20AF99896 /* SettingsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8DE4160DD052B7FC7C3B0F /* SettingsInteractorInput.swift */; };
@@ -2385,6 +2388,10 @@
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
+		8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72EF22BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72F022BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8C23F28E2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F2912286C95600C5BF9E /* SingleThumbnailAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */; };
@@ -2400,7 +2407,6 @@
 		8C3BA2BF22B3CC32006D901E /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		8C3BA2C022B3CC32006D901E /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C3BA2C122B3CC32006D901E /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		8C3BA2C222B3CC32006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA2C322B3CC32006D901E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		8C3BA2C422B3CC32006D901E /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		8C3BA2C522B3CC32006D901E /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
@@ -2412,8 +2418,6 @@
 		8C3BA2CE22B3CC32006D901E /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
 		8C3BA2CF22B3CC32006D901E /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
 		8C3BA2D022B3CC32006D901E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
-		8C3BA2D122B3CC32006D901E /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
-		8C3BA2D222B3CC32006D901E /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8C3BA2D322B3CC32006D901E /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
 		8C3BA2D422B3CC32006D901E /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		8C3BA2D522B3CC32006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
@@ -2443,7 +2447,6 @@
 		8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
-		8C3BA2FA22B3CC45006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
 		8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
@@ -2536,7 +2539,6 @@
 		8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		8C3BA36222B3CC49006D901E /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
 		8C3BA36322B3CC49006D901E /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
-		8C3BA36422B3CC49006D901E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C3BA36522B3CC49006D901E /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
 		8C3BA36622B3CC49006D901E /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
 		8C3BA36722B3CC49006D901E /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
@@ -2631,6 +2633,34 @@
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
 		8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
+		8C8610EC22BCC08000108958 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E622BCC07F00108958 /* Info-AppStore.plist */; };
+		8C8610ED22BCC08000108958 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E722BCC07F00108958 /* Info-Enterprise.plist */; };
+		8C8610F622BCD27C00108958 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F122BCD27C00108958 /* Info-AppStore.plist */; };
+		8C8610F722BCD27C00108958 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F322BCD27C00108958 /* Info-Enterprise.plist */; };
+		8C8610F822BCD27C00108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F522BCD27C00108958 /* Info.plist */; };
+		8C86110022BCD41800108958 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FB22BCD41700108958 /* InfoEnterprise.plist */; };
+		8C86110122BCD41800108958 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FC22BCD41700108958 /* InfoAppStore.plist */; };
+		8C86110222BCD41800108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FF22BCD41700108958 /* Info.plist */; };
+		8C86110A22BCD46800108958 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110422BCD46700108958 /* InfoEnterprise.plist */; };
+		8C86110B22BCD46800108958 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110622BCD46700108958 /* InfoAppStore.plist */; };
+		8C86110C22BCD46800108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110922BCD46700108958 /* Info.plist */; };
+		8C86110D22BCF27300108958 /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
+		8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
+		8C86110F22BCF28000108958 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
+		8C86111022BCF28100108958 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
+		8C86111122BCF28600108958 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
+		8C86111222BCF28900108958 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
+		8C86111322BCF2D100108958 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
+		8C86111422BCF2D300108958 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
+		8C86111522BCF31E00108958 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		8C86111622BCF31F00108958 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		8C86111722BCF36A00108958 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
+		8C86111822BCF36C00108958 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
+		8C86111922BCFDA700108958 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
+		8C86111A22BCFDEB00108958 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
+		8C86111B22BCFDEF00108958 /* PermissionsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */; };
+		8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A69622B38C590082130F /* PermissionsView.swift */; };
+		8C86111D22BCFDF800108958 /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
 		8C8711701FDFF35800F66396 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		8C8711711FDFF47000F66396 /* DarkPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57DFA61FDE663C0065B688 /* DarkPopUpController.swift */; };
 		8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
@@ -3002,7 +3032,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
-		B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -3151,6 +3181,7 @@
 		B7E371A4D0FFEFC85648EF2B /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
 		B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E5B07CCA1DEE8EE3F7BCD /* LBAlbumLikePreviewSliderPresenter.swift */; };
 		BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */; };
+		BFDD971E8B2F6A5FCE9CC425 /* Pods_LifeDriveFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929313B6E9007A5C98220A6C /* Pods_LifeDriveFileProvider.framework */; };
 		C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
 		C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26225A3A888399391D9BFF /* OTPViewInteractor.swift */; };
 		C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA76EDE6C0F51A2CCD2694D /* FeedbackViewPresenter.swift */; };
@@ -4643,7 +4674,6 @@
 		CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */; };
 		CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */; };
 		CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
-		CE784BA022A685FB00662219 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
 		CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
 		CE784BA322A685FB00662219 /* SplashRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */; };
@@ -4903,7 +4933,7 @@
 		CE784CA122A685FB00662219 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
 		CE784CA222A685FB00662219 /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
-		CE784CA522A685FB00662219 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		CE784CA522A685FB00662219 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D81EFBDDC700E25989 /* AdSupport.framework */; };
 		CE784CA722A685FB00662219 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		CE784CA822A685FB00662219 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
@@ -6043,11 +6073,13 @@
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
 		09A6A5A047D25FE5E736FC54 /* LBAlbumLikePreviewSliderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInitializer.swift; sourceTree = "<group>"; };
 		0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsInitializer.swift; sourceTree = "<group>"; };
+		0CA5BFBDE2E5A1D7EABE7865 /* Pods-LifeDrive-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		0E1CC5DC67F2371ACE4EC131 /* UserInfoSubViewInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorInput.swift; sourceTree = "<group>"; };
 		0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorInput.swift; sourceTree = "<group>"; };
 		0F26225A3A888399391D9BFF /* OTPViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInteractor.swift; sourceTree = "<group>"; };
 		0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewController.swift; sourceTree = "<group>"; };
 		10F040044EA7ABA90A56F70F /* BaseFilesGreedRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedRouterInput.swift; sourceTree = "<group>"; };
+		137C3389C09DB19D8B560C80 /* Pods-LifeDrive-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.release.xcconfig"; sourceTree = "<group>"; };
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		15E8BD598C8F921FBB4E79C1 /* Pods-LifeboxFileProviderUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProviderUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProviderUI/Pods-LifeboxFileProviderUI.release.xcconfig"; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
@@ -6069,9 +6101,11 @@
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		1F576D23A839A4C38D5F1573 /* Pods_LifeDriveProviderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDriveProviderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB7C07A080A85C63EAA4DC4 /* Pods-Depo_LifeTech-autosync-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderConfigurator.swift; sourceTree = "<group>"; };
 		20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractor.swift; sourceTree = "<group>"; };
+		20C1A1C0F45BA53CB598CB0A /* Pods-LifeDriveFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.release.xcconfig"; sourceTree = "<group>"; };
 		22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInitializer.swift; sourceTree = "<group>"; };
 		23E94DACC511DD694E3200D4 /* LBAlbumLikePreviewSliderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderViewController.swift; sourceTree = "<group>"; };
 		23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsRouterInput.swift; sourceTree = "<group>"; };
@@ -6083,6 +6117,7 @@
 		27FAC31E7C059BFB2F435773 /* AlbumsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsInteractor.swift; sourceTree = "<group>"; };
 		282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailRouter.swift; sourceTree = "<group>"; };
 		284E2CF83DB7FBCE9558A617 /* UserInfoSubViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewPresenter.swift; sourceTree = "<group>"; };
+		2AF6EA7379C6E839E5731B75 /* Pods-LifeDriveShared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.release.xcconfig"; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
 		2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewInput.swift; sourceTree = "<group>"; };
 		2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverViewController.swift; sourceTree = "<group>"; };
@@ -6191,6 +6226,7 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4B7D5AAAF94401583E438FF4 /* Pods-LifeDriveProviderUI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.appstore.xcconfig"; sourceTree = "<group>"; };
 		4BA61F6D22B7D60400D66031 /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
 		4BF3A68322B23F4F0082130F /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4BF3A68C22B2690A0082130F /* PermissionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsView.xib; sourceTree = "<group>"; };
@@ -6236,6 +6272,7 @@
 		6798035E9D982957494A8509 /* SyncContactsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractor.swift; sourceTree = "<group>"; };
 		6A39C1E5382710E645BA6C3A /* Pods-LifeboxShared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.release.xcconfig"; sourceTree = "<group>"; };
 		6BA785FD67C48E257A4E2A03 /* RegistrationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationConfigurator.swift; sourceTree = "<group>"; };
+		6BF74C3CF6CC2F298090241F /* Pods-LifeDriveProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		6DACE5077952A63A5E027093 /* Pods-LifeboxShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelinePresenter.swift; sourceTree = "<group>"; };
 		7014166EB1AECFEBA1E0ECD5 /* IntroduceViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewOutput.swift; sourceTree = "<group>"; };
@@ -6243,6 +6280,7 @@
 		70774C24E3E356684A692557 /* UploadFilesSelectionInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInitializer.swift; sourceTree = "<group>"; };
 		7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.debug.xcconfig"; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -6250,6 +6288,7 @@
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
+		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorOutput.swift; sourceTree = "<group>"; };
 		76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesPresenter.swift; sourceTree = "<group>"; };
@@ -6287,6 +6326,7 @@
 		78B2D34C204AA5F500D096DC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		78B2D34E204AA5F500D096DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78B2D357204AA69D00D096DC /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
+		78D1AC12AD5D42BD432D00AF /* Pods_LifeDrive_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDrive_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
 		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
@@ -6335,6 +6375,7 @@
 		7AFAB3762073ADCB00C54C9B /* InfoEnterprise.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoEnterprise.plist; sourceTree = "<group>"; };
 		7AFAB37A2073AE2B00C54C9B /* InfoAppStore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoAppStore.plist; sourceTree = "<group>"; };
 		7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoEnterprise.plist; sourceTree = "<group>"; };
+		7B8B434D1F181F5DFD6AF14D /* Pods-LifeDriveShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		7C00FE161F5957570041D041 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
 		7C00FE171F5957570041D041 /* AppRater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRater.h; sourceTree = "<group>"; };
 		7C00FE181F5957570041D041 /* AppRater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRater.m; sourceTree = "<group>"; };
@@ -6589,6 +6630,8 @@
 		7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameModuleInput.swift; sourceTree = "<group>"; };
 		7DC575D9B71AAF95E3625985 /* SyncContactsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsModuleInput.swift; sourceTree = "<group>"; };
 		7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_autosync_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EE623CB8A3E2EBED729AD20 /* Pods-LifeDriveShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		7FBE6016E02DD1CDCE0667EC /* Pods-LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		80F1FD97D6FA54C9C0C10996 /* AlbumDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailInitializer.swift; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
 		82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractorInput.swift; sourceTree = "<group>"; };
@@ -7291,6 +7334,7 @@
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
+		8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleThumbnailAlbumCell.swift; sourceTree = "<group>"; };
 		8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleThumbnailAlbumCell.xib; sourceTree = "<group>"; };
@@ -7360,6 +7404,30 @@
 		8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewOutput.swift; sourceTree = "<group>"; };
 		8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueLabels.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
+		8C8610E622BCC07F00108958 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		8C8610E722BCC07F00108958 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		8C8610E822BCC07F00108958 /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
+		8C8610E922BCC07F00108958 /* autosync-widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
+		8C8610EA22BCC07F00108958 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
+		8C8610EB22BCC07F00108958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C8610F022BCD27C00108958 /* LifeboxShared.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
+		8C8610F122BCD27C00108958 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		8C8610F222BCD27C00108958 /* LifeboxShared-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxShared-appstore.entitlements"; sourceTree = "<group>"; };
+		8C8610F322BCD27C00108958 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		8C8610F422BCD27C00108958 /* LifeboxShared-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxShared-enterprise.entitlements"; sourceTree = "<group>"; };
+		8C8610F522BCD27C00108958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C8610FA22BCD41700108958 /* LifeboxFileProvider.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProvider.entitlements; sourceTree = "<group>"; };
+		8C8610FB22BCD41700108958 /* InfoEnterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoEnterprise.plist; sourceTree = "<group>"; };
+		8C8610FC22BCD41700108958 /* InfoAppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoAppStore.plist; sourceTree = "<group>"; };
+		8C8610FD22BCD41700108958 /* LifeboxFileProvider-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProvider-appstore.entitlements"; sourceTree = "<group>"; };
+		8C8610FE22BCD41700108958 /* LifeboxFileProvider-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProvider-enterprise.entitlements"; sourceTree = "<group>"; };
+		8C8610FF22BCD41700108958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C86110422BCD46700108958 /* InfoEnterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoEnterprise.plist; sourceTree = "<group>"; };
+		8C86110522BCD46700108958 /* LifeboxFileProviderUI.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProviderUI.entitlements; sourceTree = "<group>"; };
+		8C86110622BCD46700108958 /* InfoAppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoAppStore.plist; sourceTree = "<group>"; };
+		8C86110722BCD46700108958 /* LifeboxFileProviderUI-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProviderUI-enterprise.entitlements"; sourceTree = "<group>"; };
+		8C86110822BCD46700108958 /* LifeboxFileProviderUI-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProviderUI-appstore.entitlements"; sourceTree = "<group>"; };
+		8C86110922BCD46700108958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlTabBarProtocol.swift; sourceTree = "<group>"; };
@@ -7453,6 +7521,7 @@
 		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableLayer.swift; sourceTree = "<group>"; };
 		925B96D621E79BAF00B39415 /* RadialGradientableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableView.swift; sourceTree = "<group>"; };
+		929313B6E9007A5C98220A6C /* Pods_LifeDriveFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDriveFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A745FF21B91A4F00386C37 /* PackageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageService.swift; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
@@ -7461,6 +7530,7 @@
 		94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractor.swift; sourceTree = "<group>"; };
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
+		963AC0978F72D1FB3A2303A5 /* Pods-LifeDrive-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
@@ -7706,6 +7776,7 @@
 		B82D89618225F753C7AEEF59 /* SplashViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewInput.swift; sourceTree = "<group>"; };
 		B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractor.swift; sourceTree = "<group>"; };
 		B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorOutput.swift; sourceTree = "<group>"; };
+		BA2D4ADB8C655B5BDBE74323 /* Pods-LifeDriveProviderUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.release.xcconfig"; sourceTree = "<group>"; };
 		BA59581EF081C4DC02D79ABE /* Pods-LifeboxShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		BAF33FDE763AFBAF8B14EC86 /* SelectNameViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewInput.swift; sourceTree = "<group>"; };
 		BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewOutput.swift; sourceTree = "<group>"; };
@@ -7714,7 +7785,9 @@
 		BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationPresenter.swift; sourceTree = "<group>"; };
 		BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorOutput.swift; sourceTree = "<group>"; };
 		BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuViewInput.swift; sourceTree = "<group>"; };
+		BC2C7270EA7E53BE00EEEEFC /* Pods-LifeDriveFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		BDC8E61911303EB96B2BA99C /* SyncContactsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsConfigurator.swift; sourceTree = "<group>"; };
+		BDCC6317BD8FA064CCBF36D1 /* Pods-LifeDriveFileProvider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.debug.xcconfig"; sourceTree = "<group>"; };
 		BDD32A1C9ACDD7741231E880 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE6D3FB3E4C7EB14424F6C4B /* Pods-LifeboxShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.debug.xcconfig"; sourceTree = "<group>"; };
 		C025086696F56A3B76A70336 /* SettingsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsModuleInput.swift; sourceTree = "<group>"; };
@@ -7960,7 +8033,7 @@
 		CE7466FE1FD6B35400D0885D /* ServerValueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerValueError.swift; sourceTree = "<group>"; };
 		CE7467001FD6B61600D0885D /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		CE784F1C22A685FB00662219 /* lifedrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifedrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE784F2222A68CEB00662219 /* lifedrive.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lifedrive.plist; sourceTree = SOURCE_ROOT; };
+		CE784F2222A68CEB00662219 /* lifedrive.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = lifedrive.plist; path = Lifedrive/lifedrive.plist; sourceTree = SOURCE_ROOT; };
 		CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Depo_LifeTechUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depo_LifeTechUITests.swift; sourceTree = "<group>"; };
 		CE79E4A91F695DA200C1F151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -8205,6 +8278,7 @@
 		E00FE251E51EBFC0964EF22A /* Pods-lifedrive.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		E40E1BD211278D025B3C9A56 /* FileInfoViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoViewOutput.swift; sourceTree = "<group>"; };
+		E43A0392A8A342E38934A129 /* Pods-LifeDriveFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E500943E503755A25C4E6B64 /* SettingsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		E52F5296568EE7BCE2BF46A4 /* IntroduceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouter.swift; sourceTree = "<group>"; };
 		E5F0F170EDB776DE7E055F18 /* TermsAndServicesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewController.swift; sourceTree = "<group>"; };
@@ -8239,6 +8313,7 @@
 		F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewController.swift; sourceTree = "<group>"; };
 		F62E6075722A7C68AB366E0F /* SelectNameInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractor.swift; sourceTree = "<group>"; };
 		F64007ACBE141535B47058DF /* IntroduceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewController.swift; sourceTree = "<group>"; };
+		F64241948BFF1FDDAA4027CA /* Pods_LifeDriveShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDriveShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9490A7550A6D3619929A250 /* UserInfoSubViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewModuleInput.swift; sourceTree = "<group>"; };
 		F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInitializer.swift; sourceTree = "<group>"; };
 		F9ACD7C82C97B84CF13A1A92 /* PhotoVideoDetailInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractorInput.swift; sourceTree = "<group>"; };
@@ -8312,6 +8387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA2CA22B3CC32006D901E /* NotificationCenter.framework in Frameworks */,
+				4FB3C7D5D657196684D51C7B /* Pods_LifeDrive_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8319,6 +8395,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2576F3B60903F3AB3594887C /* Pods_LifeDriveShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8326,6 +8403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDD971E8B2F6A5FCE9CC425 /* Pods_LifeDriveFileProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8333,6 +8411,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22040186C82066550911C97C /* Pods_LifeDriveProviderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8368,7 +8447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */,
+				B543FB0E211C847C00E009C4 /* (null) in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -8415,7 +8494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE784CA522A685FB00662219 /* BuildFile in Frameworks */,
+				CE784CA522A685FB00662219 /* (null) in Frameworks */,
 				CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */,
 				CE784CA722A685FB00662219 /* Photos.framework in Frameworks */,
 				CE784CA822A685FB00662219 /* Social.framework in Frameworks */,
@@ -8555,6 +8634,10 @@
 				FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */,
 				32FA4B85304984839135F8BF /* Pods_lifedrive.framework */,
 				17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */,
+				78D1AC12AD5D42BD432D00AF /* Pods_LifeDrive_widget.framework */,
+				929313B6E9007A5C98220A6C /* Pods_LifeDriveFileProvider.framework */,
+				1F576D23A839A4C38D5F1573 /* Pods_LifeDriveProviderUI.framework */,
+				F64241948BFF1FDDAA4027CA /* Pods_LifeDriveShared.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -8590,12 +8673,6 @@
 				0555EF2B19F938DA0068F4CC /* Depo-Enterprise-Info.plist */,
 				051E1DFE19CAC2F900FD1E03 /* Depo-Info.plist */,
 				7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */,
-				CE784F2222A68CEB00662219 /* lifedrive.plist */,
-				8C3BA3B022B3D597006D901E /* LifeDrive-AppStore-Info.plist */,
-				8C3BA3B122B3D597006D901E /* LifeDrive-Enterprise-Info.plist */,
-				8C3BA3B322B3D8B3006D901E /* LifeDrive_LifeTech.entitlements */,
-				8C3BA3B422B3D8B4006D901E /* LifeDrive-AppStore.entitlements */,
-				8C3BA3B222B3D8B3006D901E /* LifeDrive-Enterprise.entitlements */,
 				0592FC311ACEC6740083A6C6 /* Depo-AppStore.entitlements */,
 				0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */,
 				05BB0EB31ACD91B100D90C98 /* Depo.entitlements */,
@@ -12286,6 +12363,58 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8C8610E522BCC07F00108958 /* LifeDrive */ = {
+			isa = PBXGroup;
+			children = (
+				8C8610E622BCC07F00108958 /* Info-AppStore.plist */,
+				8C8610E722BCC07F00108958 /* Info-Enterprise.plist */,
+				8C8610E822BCC07F00108958 /* autosync-widget-appstore.entitlements */,
+				8C8610E922BCC07F00108958 /* autosync-widget.entitlements */,
+				8C8610EA22BCC07F00108958 /* autosync-widget-enterprise.entitlements */,
+				8C8610EB22BCC07F00108958 /* Info.plist */,
+			);
+			path = LifeDrive;
+			sourceTree = "<group>";
+		};
+		8C8610EF22BCD27C00108958 /* LifeDrive */ = {
+			isa = PBXGroup;
+			children = (
+				8C8610F022BCD27C00108958 /* LifeboxShared.entitlements */,
+				8C8610F122BCD27C00108958 /* Info-AppStore.plist */,
+				8C8610F222BCD27C00108958 /* LifeboxShared-appstore.entitlements */,
+				8C8610F322BCD27C00108958 /* Info-Enterprise.plist */,
+				8C8610F422BCD27C00108958 /* LifeboxShared-enterprise.entitlements */,
+				8C8610F522BCD27C00108958 /* Info.plist */,
+			);
+			path = LifeDrive;
+			sourceTree = "<group>";
+		};
+		8C8610F922BCD41700108958 /* LifeDrive */ = {
+			isa = PBXGroup;
+			children = (
+				8C8610FA22BCD41700108958 /* LifeboxFileProvider.entitlements */,
+				8C8610FB22BCD41700108958 /* InfoEnterprise.plist */,
+				8C8610FC22BCD41700108958 /* InfoAppStore.plist */,
+				8C8610FD22BCD41700108958 /* LifeboxFileProvider-appstore.entitlements */,
+				8C8610FE22BCD41700108958 /* LifeboxFileProvider-enterprise.entitlements */,
+				8C8610FF22BCD41700108958 /* Info.plist */,
+			);
+			path = LifeDrive;
+			sourceTree = "<group>";
+		};
+		8C86110322BCD46700108958 /* LifeDrive */ = {
+			isa = PBXGroup;
+			children = (
+				8C86110422BCD46700108958 /* InfoEnterprise.plist */,
+				8C86110522BCD46700108958 /* LifeboxFileProviderUI.entitlements */,
+				8C86110622BCD46700108958 /* InfoAppStore.plist */,
+				8C86110722BCD46700108958 /* LifeboxFileProviderUI-enterprise.entitlements */,
+				8C86110822BCD46700108958 /* LifeboxFileProviderUI-appstore.entitlements */,
+				8C86110922BCD46700108958 /* Info.plist */,
+			);
+			path = LifeDrive;
+			sourceTree = "<group>";
+		};
 		8C881BD01FCFF86B00C86236 /* MailVerification */ = {
 			isa = PBXGroup;
 			children = (
@@ -13179,6 +13308,7 @@
 		B54BFF32202B20250018AF82 /* autosync-widget */ = {
 			isa = PBXGroup;
 			children = (
+				8C8610E522BCC07F00108958 /* LifeDrive */,
 				B5A84524212DA325007EA795 /* images.xcassets */,
 				8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */,
 				8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */,
@@ -13302,6 +13432,13 @@
 		B5B6542C22A7A744000E2FA9 /* Lifedrive */ = {
 			isa = PBXGroup;
 			children = (
+				CE784F2222A68CEB00662219 /* lifedrive.plist */,
+				8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */,
+				8C3BA3B022B3D597006D901E /* LifeDrive-AppStore-Info.plist */,
+				8C3BA3B122B3D597006D901E /* LifeDrive-Enterprise-Info.plist */,
+				8C3BA3B322B3D8B3006D901E /* LifeDrive_LifeTech.entitlements */,
+				8C3BA3B422B3D8B4006D901E /* LifeDrive-AppStore.entitlements */,
+				8C3BA3B222B3D8B3006D901E /* LifeDrive-Enterprise.entitlements */,
 				B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */,
 			);
 			path = Lifedrive;
@@ -13580,6 +13717,7 @@
 		CE1BE923204831CE0074BDDC /* LifeboxFileProvider */ = {
 			isa = PBXGroup;
 			children = (
+				8C8610F922BCD41700108958 /* LifeDrive */,
 				CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */,
 				CE1BE926204831CE0074BDDC /* FileProviderItem.swift */,
 				CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */,
@@ -13599,6 +13737,7 @@
 		CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */ = {
 			isa = PBXGroup;
 			children = (
+				8C86110322BCD46700108958 /* LifeDrive */,
 				B5A84526212DA339007EA795 /* images.xcassets */,
 				CE18CC7E204E858000FA3F44 /* Presentation */,
 				CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */,
@@ -14252,6 +14391,7 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
+				8C8610EF22BCD27C00108958 /* LifeDrive */,
 				B5A84522212DA314007EA795 /* images.xcassets */,
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
@@ -15487,6 +15627,22 @@
 				5B17786ADB8DE0385062EC8B /* Pods-autosync-widget.release.xcconfig */,
 				042E10BDD19640C84898F3EB /* Pods-autosync-widget.appstore.xcconfig */,
 				7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */,
+				963AC0978F72D1FB3A2303A5 /* Pods-LifeDrive-widget.debug.xcconfig */,
+				137C3389C09DB19D8B560C80 /* Pods-LifeDrive-widget.release.xcconfig */,
+				7FBE6016E02DD1CDCE0667EC /* Pods-LifeDrive-widget.appstore.xcconfig */,
+				0CA5BFBDE2E5A1D7EABE7865 /* Pods-LifeDrive-widget.enterprise.xcconfig */,
+				BDCC6317BD8FA064CCBF36D1 /* Pods-LifeDriveFileProvider.debug.xcconfig */,
+				20C1A1C0F45BA53CB598CB0A /* Pods-LifeDriveFileProvider.release.xcconfig */,
+				BC2C7270EA7E53BE00EEEEFC /* Pods-LifeDriveFileProvider.appstore.xcconfig */,
+				E43A0392A8A342E38934A129 /* Pods-LifeDriveFileProvider.enterprise.xcconfig */,
+				73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */,
+				BA2D4ADB8C655B5BDBE74323 /* Pods-LifeDriveProviderUI.release.xcconfig */,
+				4B7D5AAAF94401583E438FF4 /* Pods-LifeDriveProviderUI.appstore.xcconfig */,
+				6BF74C3CF6CC2F298090241F /* Pods-LifeDriveProviderUI.enterprise.xcconfig */,
+				725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */,
+				2AF6EA7379C6E839E5731B75 /* Pods-LifeDriveShared.release.xcconfig */,
+				7EE623CB8A3E2EBED729AD20 /* Pods-LifeDriveShared.appstore.xcconfig */,
+				7B8B434D1F181F5DFD6AF14D /* Pods-LifeDriveShared.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -15542,6 +15698,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA2DA22B3CC32006D901E /* Build configuration list for PBXNativeTarget "LifeDrive-widget" */;
 			buildPhases = (
+				D3D8861611D1E0D1CBD7F137 /* [CP] Check Pods Manifest.lock */,
 				8C3BA2BE22B3CC32006D901E /* Sources */,
 				8C3BA2C922B3CC32006D901E /* Frameworks */,
 				8C3BA2CC22B3CC32006D901E /* Resources */,
@@ -15559,6 +15716,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA33922B3CC45006D901E /* Build configuration list for PBXNativeTarget "LifeDriveShared" */;
 			buildPhases = (
+				756FA13F5036A12E2C72B76E /* [CP] Check Pods Manifest.lock */,
 				8C3BA2E322B3CC45006D901E /* Sources */,
 				8C3BA32922B3CC45006D901E /* Frameworks */,
 				8C3BA32B22B3CC45006D901E /* Resources */,
@@ -15576,6 +15734,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA37322B3CC49006D901E /* Build configuration list for PBXNativeTarget "LifeDriveFileProvider" */;
 			buildPhases = (
+				4F3E68B52ED51EB258C3850F /* [CP] Check Pods Manifest.lock */,
 				8C3BA34222B3CC49006D901E /* Sources */,
 				8C3BA36D22B3CC49006D901E /* Frameworks */,
 				8C3BA36F22B3CC49006D901E /* Resources */,
@@ -15593,6 +15752,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA39D22B3CC53006D901E /* Build configuration list for PBXNativeTarget "LifeDriveProviderUI" */;
 			buildPhases = (
+				78050BF4937EC2935846C51B /* [CP] Check Pods Manifest.lock */,
 				8C3BA37C22B3CC53006D901E /* Sources */,
 				8C3BA38D22B3CC53006D901E /* Frameworks */,
 				8C3BA38F22B3CC53006D901E /* Resources */,
@@ -15808,18 +15968,50 @@
 					8C3BA2BC22B3CC32006D901E = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					8C3BA2E122B3CC45006D901E = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					8C3BA34022B3CC49006D901E = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					8C3BA37A22B3CC53006D901E = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B54BFF2F202B20250018AF82 = {
 						CreatedOnToolsVersion = 9.2;
@@ -15839,6 +16031,9 @@
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};
@@ -15897,6 +16092,17 @@
 					CE7847EC22A685FB00662219 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					CE79E4A41F695DA200C1F151 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -16083,6 +16289,7 @@
 				8C06B04D2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06B0B12008AD71003D8E05 /* rotate.png in Resources */,
 				8C06B1092008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
+				8C86111122BCF28600108958 /* TermsAndPolicyViewController.xib in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
 				4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
@@ -16566,8 +16773,8 @@
 				8C3BA2CE22B3CC32006D901E /* TurkcellSaturaDem.ttf in Resources */,
 				8C3BA2CF22B3CC32006D901E /* images.xcassets in Resources */,
 				8C3BA2D022B3CC32006D901E /* MainInterface.storyboard in Resources */,
-				8C3BA2D122B3CC32006D901E /* Info-Enterprise.plist in Resources */,
-				8C3BA2D222B3CC32006D901E /* Info-AppStore.plist in Resources */,
+				8C8610ED22BCC08000108958 /* Info-Enterprise.plist in Resources */,
+				8C8610EC22BCC08000108958 /* Info-AppStore.plist in Resources */,
 				8C3BA2D322B3CC32006D901E /* TurkcellSaturaIta.ttf in Resources */,
 				8C3BA2D422B3CC32006D901E /* TurkcellSaturaReg.ttf in Resources */,
 				8C3BA2D522B3CC32006D901E /* OurLocalizable.strings in Resources */,
@@ -16582,10 +16789,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8610F822BCD27C00108958 /* Info.plist in Resources */,
 				8C3BA32C22B3CC45006D901E /* TurkcellSaturaBol.ttf in Resources */,
 				8C3BA32D22B3CC45006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
 				8C3BA32E22B3CC45006D901E /* images.xcassets in Resources */,
+				8C8610F722BCD27C00108958 /* Info-Enterprise.plist in Resources */,
 				8C3BA32F22B3CC45006D901E /* TurkcellSaturaDem.ttf in Resources */,
+				8C8610F622BCD27C00108958 /* Info-AppStore.plist in Resources */,
 				8C3BA33022B3CC45006D901E /* PasscodeEnterViewController.xib in Resources */,
 				8C3BA33122B3CC45006D901E /* PasscodeViewImp.xib in Resources */,
 				8C3BA33222B3CC45006D901E /* TurkcellSaturaDemIta.ttf in Resources */,
@@ -16604,7 +16814,10 @@
 			files = (
 				8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */,
 				8C3BA37122B3CC49006D901E /* InfoAppStore.plist in Resources */,
+				8C86110222BCD41800108958 /* Info.plist in Resources */,
 				8C3BA37222B3CC49006D901E /* InfoEnterprise.plist in Resources */,
+				8C86110022BCD41800108958 /* InfoEnterprise.plist in Resources */,
+				8C86110122BCD41800108958 /* InfoAppStore.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16612,15 +16825,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C86110C22BCD46800108958 /* Info.plist in Resources */,
 				8C3BA39022B3CC53006D901E /* InfoEnterprise.plist in Resources */,
 				8C3BA39122B3CC53006D901E /* TurkcellSaturaBol.ttf in Resources */,
 				8C3BA39222B3CC53006D901E /* images.xcassets in Resources */,
 				8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
+				8C86110B22BCD46800108958 /* InfoAppStore.plist in Resources */,
 				8C3BA39422B3CC53006D901E /* OurLocalizable.strings in Resources */,
 				8C3BA39522B3CC53006D901E /* TurkcellSaturaDem.ttf in Resources */,
 				8C3BA39622B3CC53006D901E /* TurkcellSaturaDemIta.ttf in Resources */,
 				8C3BA39722B3CC53006D901E /* TurkcellSaturaIta.ttf in Resources */,
 				8C3BA39822B3CC53006D901E /* TurkcellSaturaMed.ttf in Resources */,
+				8C86110A22BCD46800108958 /* InfoEnterprise.plist in Resources */,
 				8C3BA39922B3CC53006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C3BA39A22B3CC53006D901E /* TurkcellSaturaReg.ttf in Resources */,
 				8C3BA39B22B3CC53006D901E /* InfoAppStore.plist in Resources */,
@@ -17719,6 +17935,7 @@
 				CE784E6422A685FB00662219 /* info_icon.png in Resources */,
 				CE784E6522A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				CE784E6622A685FB00662219 /* lookup_soft_elegance_2.png in Resources */,
+				8C86111D22BCFDF800108958 /* PermissionsView.xib in Resources */,
 				CE784E6722A685FB00662219 /* Kucuk_Selected@2x.png in Resources */,
 				CE784E6822A685FB00662219 /* kup@3x.png in Resources */,
 				CE784E6922A685FB00662219 /* target.png in Resources */,
@@ -17880,6 +18097,7 @@
 				CE784F0422A685FB00662219 /* paylas_whatsapp@2x.png in Resources */,
 				CE784F0522A685FB00662219 /* slider_thumb.png in Resources */,
 				CE784F0622A685FB00662219 /* Kucuk@2x.png in Resources */,
+				8C86111222BCF28900108958 /* TermsAndPolicyViewController.xib in Resources */,
 				CE784F0722A685FB00662219 /* polaroid_yeni@3x.png in Resources */,
 				CE784F0822A685FB00662219 /* VisualMusicPlayerViewController.xib in Resources */,
 				CE784F0922A685FB00662219 /* InstaPickHashtagCell.xib in Resources */,
@@ -17937,6 +18155,28 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-autosync-widget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F3E68B52ED51EB258C3850F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeDriveFileProvider-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -18027,6 +18267,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		756FA13F5036A12E2C72B76E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeDriveShared-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -18039,6 +18301,28 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-LifeboxShared-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78050BF4937EC2935846C51B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeDriveProviderUI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -18432,6 +18716,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D3D8861611D1E0D1CBD7F137 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeDrive-widget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D5C963CD9D99F1A9B08F55B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -18650,6 +18956,7 @@
 				B5AB2F0C2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */,
 				92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
+				8C86110F22BCF28000108958 /* TermsAndPolicyViewController.swift in Sources */,
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
 				8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */,
@@ -18765,6 +19072,7 @@
 				8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				8C0E8D231FDEBDFF00789C91 /* ViewForPopUp.swift in Sources */,
 				8C0E8D241FDEBDFF00789C91 /* CreateStoryPreviewPresenter.swift in Sources */,
+				8C86111722BCF36A00108958 /* TermsDescriptionController.swift in Sources */,
 				B5390D792164F0F800A02002 /* ScrollBarView.swift in Sources */,
 				8C0E8D251FDEBDFF00789C91 /* InstagramParametrs.swift in Sources */,
 				8C0E8D261FDEBDFF00789C91 /* CameraService.swift in Sources */,
@@ -19358,9 +19666,12 @@
 				C65DCBDF204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				8C0E8F0B1FDEBDFF00789C91 /* SyncContactsPresenter.swift in Sources */,
 				8C0E8F0C1FDEBDFF00789C91 /* UserProfileViewInput.swift in Sources */,
+				8C86111522BCF31E00108958 /* EULAResponse.swift in Sources */,
 				922C24FE224A7E6400FD00D9 /* CircleProgressView.swift in Sources */,
 				8C0E8F0D1FDEBDFF00789C91 /* SyncContactsInteractorInput.swift in Sources */,
+				8C86110D22BCF27300108958 /* SelectNameModuleOutput.swift in Sources */,
 				CE292C1521BE5C54004FC745 /* Text+Size.swift in Sources */,
+				8C86111322BCF2D100108958 /* PrivacyPolicyController.swift in Sources */,
 				8C0E8F0E1FDEBDFF00789C91 /* SyncContactsInteractorOutput.swift in Sources */,
 				17589F772276336800A5DB37 /* ProfileTextPickerView.swift in Sources */,
 				8C0E8F0F1FDEBDFF00789C91 /* SyncContactsInteractor.swift in Sources */,
@@ -19696,9 +20007,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA2BF22B3CC32006D901E /* WidgetService.swift in Sources */,
+				8C1E72EF22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA2C022B3CC32006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2C122B3CC32006D901E /* AppResponsivenessService.swift in Sources */,
-				8C3BA2C222B3CC32006D901E /* SharedConstants.swift in Sources */,
 				8C3BA2C322B3CC32006D901E /* TodayViewController.swift in Sources */,
 				8C3BA2C422B3CC32006D901E /* UIImage+JPEG.swift in Sources */,
 				8C3BA2C522B3CC32006D901E /* SharedEnums.swift in Sources */,
@@ -19734,7 +20045,6 @@
 				8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */,
 				8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */,
-				8C3BA2FA22B3CC45006D901E /* SharedConstants.swift in Sources */,
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
@@ -19768,6 +20078,7 @@
 				8C3BA31922B3CC45006D901E /* UIColor+Adjust.swift in Sources */,
 				8C3BA31A22B3CC45006D901E /* MD5.swift in Sources */,
 				8C3BA31B22B3CC45006D901E /* PasscodeInputView.swift in Sources */,
+				8C1E72F022BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA31C22B3CC45006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C3BA31D22B3CC45006D901E /* PasscodeStorage.swift in Sources */,
 				8C3BA31E22B3CC45006D901E /* URL+Video.swift in Sources */,
@@ -19807,6 +20118,7 @@
 				8C3BA35322B3CC49006D901E /* Error+Alamofire.swift in Sources */,
 				8C3BA35422B3CC49006D901E /* MD5.swift in Sources */,
 				8C3BA35522B3CC49006D901E /* UIViewController+NavBar.swift in Sources */,
+				8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA35622B3CC49006D901E /* AuthorizationURLs.swift in Sources */,
 				8C3BA35722B3CC49006D901E /* SharedFactory.swift in Sources */,
 				8C3BA35822B3CC49006D901E /* Device.swift in Sources */,
@@ -19821,7 +20133,6 @@
 				8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */,
 				8C3BA36222B3CC49006D901E /* KeychainSwift+Optional.swift in Sources */,
 				8C3BA36322B3CC49006D901E /* URL+Path.swift in Sources */,
-				8C3BA36422B3CC49006D901E /* SharedConstants.swift in Sources */,
 				8C3BA36522B3CC49006D901E /* ShareConfigurator.swift in Sources */,
 				8C3BA36622B3CC49006D901E /* RouteRequests.swift in Sources */,
 				8C3BA36722B3CC49006D901E /* DeviceExtension.swift in Sources */,
@@ -21296,6 +21607,7 @@
 				CE78482E22A685FB00662219 /* SubPlussButtonView.swift in Sources */,
 				CE78482F22A685FB00662219 /* VisualMusicPlayerViewController.swift in Sources */,
 				CE78483022A685FB00662219 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
+				8C86111422BCF2D300108958 /* PrivacyPolicyController.swift in Sources */,
 				CE78483122A685FB00662219 /* PasscodeSettingsViewController.swift in Sources */,
 				CE78483222A685FB00662219 /* HomePageViewOutput.swift in Sources */,
 				CE78483322A685FB00662219 /* UIScrollView+Refresh.swift in Sources */,
@@ -21376,6 +21688,7 @@
 				CE78487E22A685FB00662219 /* ImportPhotosInteractorInput.swift in Sources */,
 				CE78487F22A685FB00662219 /* AlbumSelectionPresenter.swift in Sources */,
 				CE78488022A685FB00662219 /* PrintInteractorOutput.swift in Sources */,
+				8C86111922BCFDA700108958 /* PermissionType.swift in Sources */,
 				CE78488122A685FB00662219 /* MoreActionsConfig.swift in Sources */,
 				CE78488222A685FB00662219 /* ServerValueError.swift in Sources */,
 				CE78488322A685FB00662219 /* CreateStoryNameInteractorInput.swift in Sources */,
@@ -21485,6 +21798,7 @@
 				CE7848EB22A685FB00662219 /* LeavePremiumRouterInput.swift in Sources */,
 				CE7848EC22A685FB00662219 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				CE7848ED22A685FB00662219 /* CameraService.swift in Sources */,
+				8C86111A22BCFDEB00108958 /* PermissionViewController.swift in Sources */,
 				CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */,
 				CE7848EF22A685FB00662219 /* TurkcellSecurityInitializer.swift in Sources */,
 				CE7848F022A685FB00662219 /* HelpAndSupportConfigurator.swift in Sources */,
@@ -21671,6 +21985,7 @@
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
 				CE7849A722A685FB00662219 /* ArrayDataSourceForCollectionView.swift in Sources */,
+				8C86111022BCF28100108958 /* TermsAndPolicyViewController.swift in Sources */,
 				CE7849A822A685FB00662219 /* InstaPickBigPhotoView.swift in Sources */,
 				CE7849A922A685FB00662219 /* CreateStoryPhotosOrderInteractor.swift in Sources */,
 				CE7849AA22A685FB00662219 /* ImportPhotosInteractorOutput.swift in Sources */,
@@ -21767,6 +22082,7 @@
 				CE784A0522A685FB00662219 /* DarkPopUpController.swift in Sources */,
 				CE784A0622A685FB00662219 /* PasscodeStorage.swift in Sources */,
 				CE784A0722A685FB00662219 /* PeriodicContactSyncViewInput.swift in Sources */,
+				8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */,
 				CE784A0822A685FB00662219 /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				CE784A0922A685FB00662219 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CE784A0A22A685FB00662219 /* ActivityTimelineHeader.swift in Sources */,
@@ -21926,6 +22242,7 @@
 				CE784AA422A685FB00662219 /* PeriodicContactSyncInteractor.swift in Sources */,
 				CE784AA522A685FB00662219 /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				CE784AA622A685FB00662219 /* InstagramAuthViewController.swift in Sources */,
+				8C86111622BCF31F00108958 /* EULAResponse.swift in Sources */,
 				CE784AA722A685FB00662219 /* FromNib.swift in Sources */,
 				CE784AA822A685FB00662219 /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				CE784AA922A685FB00662219 /* PackagesViewOutput.swift in Sources */,
@@ -22121,6 +22438,7 @@
 				CE784B6722A685FB00662219 /* ConnectedAccountsViewController.swift in Sources */,
 				CE784B6822A685FB00662219 /* SearchViewConfigurator.swift in Sources */,
 				CE784B6922A685FB00662219 /* VisualMusicPlayerInitializer.swift in Sources */,
+				8C86111B22BCFDEF00108958 /* PermissionsDesigner.swift in Sources */,
 				CE784B6A22A685FB00662219 /* HelpAndSupportViewInput.swift in Sources */,
 				CE784B6B22A685FB00662219 /* ContactUtil.m in Sources */,
 				CE784B6C22A685FB00662219 /* MyStorageInteractorOutput.swift in Sources */,
@@ -22175,7 +22493,6 @@
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
 				CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
-				CE784BA022A685FB00662219 /* SharedConstants.swift in Sources */,
 				CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */,
 				CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */,
 				CE784BA322A685FB00662219 /* SplashRouterInput.swift in Sources */,
@@ -22282,10 +22599,12 @@
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
 				CE784C0922A685FB00662219 /* BaseView.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
+				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
 				CE784C0B22A685FB00662219 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */,
 				CE784C0D22A685FB00662219 /* SelectNameInteractorInput.swift in Sources */,
 				CE784C0E22A685FB00662219 /* ImageScrollView.swift in Sources */,
+				8C86111822BCF36C00108958 /* TermsDescriptionController.swift in Sources */,
 				CE784C0F22A685FB00662219 /* SelectNameInteractorOutput.swift in Sources */,
 				CE784C1022A685FB00662219 /* SelectNameInteractor.swift in Sources */,
 				CE784C1122A685FB00662219 /* SearchDataSource.swift in Sources */,
@@ -22364,6 +22683,7 @@
 				CE784C5A22A685FB00662219 /* FeedbackViewInput.swift in Sources */,
 				CE784C5B22A685FB00662219 /* FaceImageItemsInitializer.swift in Sources */,
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
+				8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				CE784C5D22A685FB00662219 /* ItemSyncOperation.swift in Sources */,
 				CE784C5E22A685FB00662219 /* FeedbackViewOutput.swift in Sources */,
 				CE784C5F22A685FB00662219 /* CreateStoryPreviyInteractorIO.swift in Sources */,
@@ -23164,6 +23484,7 @@
 		};
 		8C3BA2DB22B3CC32006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 963AC0978F72D1FB3A2303A5 /* Pods-LifeDrive-widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23171,7 +23492,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -23179,14 +23500,14 @@
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox autosync widget dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -23197,6 +23518,7 @@
 		};
 		8C3BA2DC22B3CC32006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 137C3389C09DB19D8B560C80 /* Pods-LifeDrive-widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23204,7 +23526,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
@@ -23213,14 +23535,14 @@
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox auto sync widget adhoc";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 4.0;
@@ -23230,6 +23552,7 @@
 		};
 		8C3BA2DD22B3CC32006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FBE6016E02DD1CDCE0667EC /* Pods-LifeDrive-widget.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23237,7 +23560,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -23246,11 +23569,11 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
@@ -23263,6 +23586,7 @@
 		};
 		8C3BA2DE22B3CC32006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CA5BFBDE2E5A1D7EABE7865 /* Pods-LifeDrive-widget.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23270,7 +23594,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_STYLE = Manual;
@@ -23279,11 +23603,11 @@
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "f8c921bc-7fcf-47b1-b71f-bbe6f4e83977";
 				SKIP_INSTALL = YES;
@@ -23295,6 +23619,7 @@
 		};
 		8C3BA33A22B3CC45006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23302,21 +23627,21 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeDrive/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b7e0199-968b-4d57-b6f3-356e454a654b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox share extension dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23328,6 +23653,7 @@
 		};
 		8C3BA33B22B3CC45006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2AF6EA7379C6E839E5731B75 /* Pods-LifeDriveShared.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23335,7 +23661,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeDrive/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
@@ -23343,14 +23669,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "68880b9b-87e8-48f9-92b0-2121180b9dd0";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox share extension adhoc";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23361,6 +23687,7 @@
 		};
 		8C3BA33C22B3CC45006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EE623CB8A3E2EBED729AD20 /* Pods-LifeDriveShared.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23368,7 +23695,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeDrive/LifeboxShared-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -23376,11 +23703,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
 				PROVISIONING_PROFILE_SPECIFIER = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
@@ -23394,6 +23721,7 @@
 		};
 		8C3BA33D22B3CC45006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B8B434D1F181F5DFD6AF14D /* Pods-LifeDriveShared.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23401,7 +23729,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeDrive/LifeboxShared-enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_STYLE = Manual;
@@ -23409,11 +23737,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
 				PROVISIONING_PROFILE_SPECIFIER = "8107529c-5196-4e29-94f9-97e071863fbb";
@@ -23427,6 +23755,7 @@
 		};
 		8C3BA37422B3CC49006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDCC6317BD8FA064CCBF36D1 /* Pods-LifeDriveFileProvider.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23434,21 +23763,21 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeDrive/LifeboxFileProvider.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b4c90355-f149-4574-9699-754432dedc4a";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox files extension dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23460,6 +23789,7 @@
 		};
 		8C3BA37522B3CC49006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C1A1C0F45BA53CB598CB0A /* Pods-LifeDriveFileProvider.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23467,7 +23797,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeDrive/LifeboxFileProvider.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
@@ -23475,14 +23805,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox files extension adhoc";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23493,6 +23823,7 @@
 		};
 		8C3BA37622B3CC49006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC2C7270EA7E53BE00EEEEFC /* Pods-LifeDriveFileProvider.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23500,7 +23831,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeDrive/LifeboxFileProvider-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -23508,11 +23839,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
 				PROVISIONING_PROFILE_SPECIFIER = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
@@ -23526,6 +23857,7 @@
 		};
 		8C3BA37722B3CC49006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E43A0392A8A342E38934A129 /* Pods-LifeDriveFileProvider.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23533,7 +23865,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeDrive/LifeboxFileProvider-enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_STYLE = Manual;
@@ -23541,11 +23873,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProvider copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.files;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
 				PROVISIONING_PROFILE_SPECIFIER = "02ead11f-d9db-4511-8315-88c4907cf536";
@@ -23559,6 +23891,7 @@
 		};
 		8C3BA39E22B3CC53006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23566,21 +23899,21 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeboxFileProviderUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
-				PROVISIONING_PROFILE_SPECIFIER = "files UI dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive files UI dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23592,6 +23925,7 @@
 		};
 		8C3BA39F22B3CC53006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA2D4ADB8C655B5BDBE74323 /* Pods-LifeDriveProviderUI.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23599,7 +23933,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeboxFileProviderUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
@@ -23607,14 +23941,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
-				PROVISIONING_PROFILE_SPECIFIER = "files UI adhoc";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider UI adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23625,6 +23959,7 @@
 		};
 		8C3BA3A022B3CC53006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B7D5AAAF94401583E438FF4 /* Pods-LifeDriveProviderUI.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23632,7 +23967,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -23640,11 +23975,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
 				PROVISIONING_PROFILE_SPECIFIER = "8195c797-2345-4b62-bc99-9cda2b33d902";
@@ -23658,6 +23993,7 @@
 		};
 		8C3BA3A122B3CC53006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BF74C3CF6CC2F298090241F /* Pods-LifeDriveProviderUI.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -23665,7 +24001,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI-enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_STYLE = Manual;
@@ -23673,11 +24009,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxFileProviderUI copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.filesui;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
 				PROVISIONING_PROFILE_SPECIFIER = "93c0aa13-4fef-491e-b0af-01e2b00931a0";
@@ -24466,7 +24802,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Lifedrive/LifeDrive_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
@@ -24489,7 +24825,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/lifedrive.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/lifedrive.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24504,10 +24840,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
-				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive dev";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -24525,7 +24861,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Lifedrive/LifeDrive_LifeTech.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
@@ -24546,7 +24882,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/lifedrive.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24561,10 +24897,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
+				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive adhoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -24581,8 +24917,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_ENTITLEMENTS = "Lifedrive/LifeDrive-AppStore.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
@@ -24601,7 +24937,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/lifedrive.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24616,10 +24952,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -24636,9 +24972,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_ENTITLEMENTS = "Lifedrive/LifeDrive-Enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
@@ -24657,7 +24993,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/lifedrive.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -24672,10 +25008,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
