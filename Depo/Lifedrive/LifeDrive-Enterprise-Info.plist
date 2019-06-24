@@ -7,11 +7,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifebox</string>
+	<string>lifedrive</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.turkcell.akillidepo</string>
+	<string>com.turkcell.akillideponew.ent</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>20.152</string>
+	<string>20.151</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -50,6 +50,10 @@
 		<string>fetch</string>
 		<string>audio</string>
 		<string>location</string>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -98,6 +102,20 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<string>YES</string>
 			</dict>
+			<key>http://tcloudstb.turkcell.com.tr</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
+			<key>http://adepotest.turkcell.com.tr</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
 			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -117,25 +135,23 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string></string>
 	<key>NSContactsUsageDescription</key>
-	<string>To backup your contacts to lifebox</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>To offer campaigns specific to you</string>
+	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photos will be backed up to lifebox</string>
 	<key>MenloApplicationKey</key>
 	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 	<key>MenloPushSandboxMode</key>
-	<false/>
+	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
