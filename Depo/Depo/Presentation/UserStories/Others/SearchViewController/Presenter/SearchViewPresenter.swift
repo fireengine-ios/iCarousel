@@ -333,7 +333,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
                     
-                    CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                    MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
                         if localDuplicates.count == 0 {
                             //selectedItems = localDuplicates
@@ -451,8 +451,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseFilesGreedModuleInput
     
-    var selectedItems: [BaseDataSourceItem] {
-        return dataSource.getSelectedItems()
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        selectedItemsCallback(dataSource.getSelectedItems())
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {

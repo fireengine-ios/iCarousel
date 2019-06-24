@@ -9,12 +9,12 @@
 import UIKit
 
 protocol ScrollBarViewDelegate: class {
-    func scrollBarViewBeganDraggin()
-    func scrollBarViewDidEndDraggin()
+    func scrollBarViewBeganDragging()
+    func scrollBarViewDidEndDragging()
 }
 
 /// https://github.com/TimOliver/TOScrollBar
-final class ScrollBarView: UIView {    
+final class ScrollBarView: UIView {
     
     weak var delegate: ScrollBarViewDelegate?
     
@@ -41,7 +41,7 @@ final class ScrollBarView: UIView {
     // TODO: need to create pan gester with begin on tap
     private var handleExclusiveInteractionEnabled = true
     
-    private weak var scrollView: UIScrollView?
+    private var scrollView: UIScrollView?
     
     private lazy var handleView: UIImageView = {
         return UIImageView(image: ScrollBarView.scrollBarHandleImage)
@@ -110,19 +110,19 @@ final class ScrollBarView: UIView {
     }
     
     private func hideLabelAnimated() {
-        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: { 
+        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: {
             self.insetsLabel.alpha = 0
         }, completion: nil)
     }
     
     private func showLabelAnimated() {
-        UIView.animate(withDuration: self.animationDuration) { 
+        UIView.animate(withDuration: self.animationDuration) {
             self.insetsLabel.alpha = 1
         }
     }
     
     private func setup() {
-//        addSubview(trackView)
+        //        addSubview(trackView)
         addSubview(handleView)
         addSubview(insetsLabel)
         
@@ -135,7 +135,7 @@ final class ScrollBarView: UIView {
             return
         }
         
-        restore(scrollView: self.scrollView)
+        freeScrollView()
         self.scrollView = scrollView
         
         config(scrollView: scrollView)
@@ -154,17 +154,15 @@ final class ScrollBarView: UIView {
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: [.new], context: nil)
     }
     
-    private func restore(scrollView: UIScrollView?) {
+    /// https://stackoverflow.com/a/51800670/5893286
+    func freeScrollView() {
         guard let scrollView = scrollView else {
             return
         }
         scrollView.showsVerticalScrollIndicator = true
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
-    }
-    
-    deinit {
-        restore(scrollView: scrollView)
+        self.scrollView = nil
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -193,14 +191,14 @@ final class ScrollBarView: UIView {
         let halfWidth = scrollBarWidth * 0.5
         
         /// maybe will be need for instes
-//        let contentInset: UIEdgeInsets
-//        if #available(iOS 11.0, *) {
-//            contentInset = scrollView.adjustedContentInset
-//        } else {
-//            contentInset = scrollView.contentInset
-//        }
+        //        let contentInset: UIEdgeInsets
+        //        if #available(iOS 11.0, *) {
+        //            contentInset = scrollView.adjustedContentInset
+        //        } else {
+        //            contentInset = scrollView.contentInset
+        //        }
         
-//        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
+        //        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
         let largeTitleDelta: CGFloat
         if isInsetForLargeTitles {
@@ -229,7 +227,7 @@ final class ScrollBarView: UIView {
             frame.origin.y = originalYOffset
         } else {
             frame.origin.y = verticalInset.top
-//            frame.origin.y += contentInset.top
+            //            frame.origin.y += contentInset.top
             frame.origin.y += largeTitleDelta
         }
         
@@ -257,7 +255,7 @@ final class ScrollBarView: UIView {
                                  y: 0, width: handleWidth, height: heightOfHandleForContentSize)
         
         // Work out the y offset of the handle
-        // TODO: check other scrollView.contentInset for 
+        // TODO: check other scrollView.contentInset for
         let contentInset: UIEdgeInsets
         if #available(iOS 11.0, *) {
             contentInset = scrollView.safeAreaInsets
@@ -285,7 +283,7 @@ final class ScrollBarView: UIView {
         //        guard let scrollView = scrollView else {
         //            return scrollBarHandleMinHeight
         //        }
-        //        
+        //
         //        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
         //        let height = frame.height * heightRatio
         //        return max(floor(height), scrollBarHandleMinHeight)
@@ -310,13 +308,13 @@ final class ScrollBarView: UIView {
         case .began:
             gestureBegan(at: touchPoint)
             showLabelAnimated()
-            delegate?.scrollBarViewBeganDraggin()
+            delegate?.scrollBarViewBeganDragging()
         case .changed:
             gestureMoved(to: touchPoint)
         case .ended, .cancelled, .failed:
             gestureEnded()
             hideLabelAnimated()
-            delegate?.scrollBarViewDidEndDraggin()
+            delegate?.scrollBarViewDidEndDragging()
         case .possible:
             break
         }
@@ -443,7 +441,7 @@ final class ScrollBarView: UIView {
         scrollView?.isScrollEnabled = true
         isDragging = false
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { 
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: {
             self.layoutInScrollView()
             self.layoutIfNeeded()
         }, completion: nil)
@@ -462,7 +460,7 @@ final class ScrollBarView: UIView {
         scrollView?.isScrollEnabled = result != self
         return result
         
-    }    
+    }
 }
 
 private extension UIImage {

@@ -122,6 +122,7 @@ final class RegistrationViewController: ViewController {
     private let supportView: SupportBannerView = {
         let newValue = SupportBannerView()
         newValue.isHidden = true
+        newValue.message = TextConstants.signupSupportInfo
         
         return newValue
     }()

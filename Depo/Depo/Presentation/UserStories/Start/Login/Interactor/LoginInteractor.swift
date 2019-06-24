@@ -45,6 +45,7 @@ class LoginInteractor: LoginInteractorInput {
     private var password: String?
     
     private lazy var captchaService = CaptchaService()
+    private let cacheManager = CacheManager.shared
     
     private var blockedUsers: [String : Date] {
         willSet {

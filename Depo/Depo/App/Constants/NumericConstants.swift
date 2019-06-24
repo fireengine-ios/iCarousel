@@ -26,7 +26,7 @@ struct NumericConstants {
     static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 2
     static let iPadGreedHorizontalSpace: CGFloat = 1
-    static let numerCellInLineOnIpad: CGFloat = 8
+    static let numerCellInLineOnIpad: CGFloat = 6
     static let numerCellInDocumentLineOnIpad: CGFloat = 4
     static let maxNumberPhotosInStory: Int = 20
     static let maxNumberAudioInStory: Int = 1
@@ -154,7 +154,7 @@ struct NumericConstants {
 }
 
 struct RequestSizeConstant {
-    
     static let faceImageItemsRequestSize = 100
+    static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
     
 }

@@ -8,20 +8,29 @@
 
 import Foundation
 import Alamofire
+import SDWebImage
 
 
-final class ImageDownloadOperation: Operation {
-    
-    var outputBlock: ((AnyObject?) -> Void)?
+final class ImageDownloadOperation: Operation, SDWebImageOperation {
+    typealias ImageDownloadOperationCallback = ((AnyObject?) -> Void)
+    var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
-    private var task: URLSessionTask?
+    ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
+    private var task: DataRequest?//URLSessionTask?
     private let queue: DispatchQueue
     
     init(url: URL?, queue: DispatchQueue) {
         self.url = url
         self.queue = queue
+        super.init()
+    }
+    
+    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?) {
+        self.url = url
+        self.queue = queue
+        self.outputBlock = completion
         super.init()
     }
     
@@ -47,7 +56,11 @@ final class ImageDownloadOperation: Operation {
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
             .responseData(queue: queue, completionHandler: { [weak self] dataResponse in
-                guard let self = self, !self.isCancelled else {
+                guard let self = self else {
+                    return
+                }
+                guard !self.isCancelled else {
+                    self.semaphore.signal()
                     return
                 }
                 
@@ -60,8 +73,8 @@ final class ImageDownloadOperation: Operation {
                 self.outputBlock?(image)
                 self.semaphore.signal()
             })
-            .task
-
+            //.task
+        
         semaphore.wait()
     }
 }

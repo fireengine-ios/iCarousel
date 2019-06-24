@@ -189,7 +189,13 @@ final class AppConfigurator {
                 ///call appendLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
-                CoreDataStack.default.appendLocalMediaItems(completion: nil)
+                
+                /// start photos logic after notification permission
+                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
+//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+                    
+                }
             }
         } else {
             setupMenloworks()

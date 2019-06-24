@@ -25,7 +25,7 @@ enum LoginResponseError {
         if errorResponse.description.contains("LDAP account is locked") {
             self = .block
         }
-        else if !ReachabilityService().isReachable {
+        else if !ReachabilityService.shared.isReachable {
             self = .noInternetConnection
         }
         else if errorResponse.description.contains("Captcha required") {

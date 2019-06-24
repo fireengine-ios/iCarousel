@@ -960,7 +960,7 @@
 "your_account_email" = " E-maili i llogarisë suaj";
 "enter_your_account_email" = "Vendosni e-mailin tuaj të llogarisë";
 "enter_the_text_shown_in_the_image" = "Vendosni tekstin e treguar në figurë.";
-"support_form_email_body" = "Ju lutemi mos e fshini informacionin e mëposhtëm. Ky Informacion do të përdoret për të adresuar problemin.\nEmri:% @\nMbiemri:% @\nE-mail:% @\nMsisdn:% @\nVersioni i aplikacionit:% @\nOperatori:% @\nPajisja:% @\nSO i Pajisjes:% @\nGjuha: %@\nStatusi i Rrjetit:% @";
+"support_form_email_body" = "Ju lutemi mos e fshini informacionin e mëposhtëm. Ky Informacion do të përdoret për të adresuar problemin.\nEmri:%@\nMbiemri:%@\nE-mail:%@\nMsisdn:%@\nVersioni i aplikacionit:%@\nOperatori:%@\nPajisja:%@\nSO i Pajisjes:%@\nGjuha: %@\nStatusi i Rrjetit:%@";
 "profile_phone_number_title" = "Numri i telefonit";
 "profile_phone_number_placeholder" = "Vendosni numrin tuaj mobile";
 "please_enter_your_name" = "Ju lutem vendosni emrin tuaj.";
@@ -1002,10 +1002,11 @@
 "login_email_or_phone_error" = "Ju duhet të plotësoni e-mailin ose telefonin tuaj.";
 "login_password_error" = "Ju duhet të plotësoni fjalëkalimin tuaj.";
 "enter_security_code" = "Vendosni kodin e sigurisë.";
-"enter_code_get_code_on_phone" = "Ju lutem, vendosni kodin 6-shifror të sigurisë që ju kemi dërguar në këtë numër telefoni: % @";
+"enter_code_get_code_on_phone" = "Ju lutem, vendosni kodin 6-shifror të sigurisë që ju kemi dërguar në këtë numër telefoni: %@";
 "time_is_up_for_code" = "Erdhi koha! Ju lutem, kërkoni një kod të ri.";
 "resend_code" = "Ridërgoni kodin.";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Pyetje të shpeshta";
 "login_username_not_valid" = "Ju lutem, kontrolloni emrin tuaj të përdoruesit.";
+"login_support_info" = "Nëse hasni vështirësi gjatë identifikimit, na kontaktoni për ndihmë.";

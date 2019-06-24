@@ -57,7 +57,7 @@ import CoreTelephony
     }
     
     func callingCountryCode() -> String {
-//        guard ReachabilityService().isReachableViaWWAN else {
+//        guard ReachabilityService.shared.isReachableViaWWAN else {
 //            return ""
 //        }
         

@@ -971,10 +971,11 @@
 "login_email_or_phone_error" = "عليك ملء بريدك الإلكتروني أو رقم هاتفك";
 "login_password_error" = "عليك ملء كلمة المرور الخاصة بك";
 "enter_security_code" = "أدخل رمز الحماية";
-"enter_code_get_code_on_phone" = "الرجاء إدخال رمز الحماية المكون من 6 أرقام الذي أرسلناه إلى رقم الهاتف هذا:٪ @";
+"enter_code_get_code_on_phone" = "الرجاء إدخال رمز الحماية المكون من 6 أرقام الذي أرسلناه إلى رقم الهاتف هذا:٪@";
 "time_is_up_for_code" = "انتهى الوقت ، يرجى طلب رمز جديد.";
 "resend_code" = "أعد إرسال الرمز";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "التعليمات";
 "login_username_not_valid" = "يرجى التحقق من اسم المستخدم الخاص بك";
+"login_support_info" = "إذا كنت تواجه صعوبة أثناء تسجيل الدخول ، اتصل بنا للحصول على الدعم.";

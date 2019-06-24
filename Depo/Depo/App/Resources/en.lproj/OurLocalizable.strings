@@ -947,7 +947,7 @@
 "enter_the_text_shown_in_the_image" = "Enter the text shown in the image";
 "support_form_email_body" = "Please do not delete the information below. The information will be used to address the problem.\nName: %@\nSurname: %@\nE-mail: %@\nMsisdn: %@\nApplication Version: %@\nCarrier: %@\nDevice: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@";
 "profile_phone_number_title" = "Phone Number";
-"profile_phone_number_placeholder" = "Enter your mobile number";
+"profile_phone_number_placeholder" = "Enter your phone number";
 "please_enter_your_name" = "Please enter your name";
 "enter_your_name" = "Enter your name";
 "please_enter_your_surname" = "Please enter your surname";
@@ -982,7 +982,7 @@
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
 "missing_information" = "Missing Information";
 "please_enter_your_missing_account_information" = "Please enter your missing account information:";
-"login_email_or_phone_placeholder" = "Enter your e-mail or mobile number";
+"login_email_or_phone_placeholder" = "Enter your e-mail or phone number";
 "login_password_placeholder" = "Enter your password";
 "login_email_or_phone_error" = "You have to fill in your e-mail or phone";
 "login_password_error" = "You have to fill in your password";
@@ -994,3 +994,4 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
+"login_support_info" = "If you are having difficulty during login, contact us for support.";

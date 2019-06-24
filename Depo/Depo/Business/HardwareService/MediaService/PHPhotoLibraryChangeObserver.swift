@@ -37,7 +37,8 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     phChanges[.removed] = removedAssets
                     debugLog("photoLibraryDidChange - removed \(removedAssets.count) items")
                     UploadService.default.cancelOperations(with: removedAssets)
-                    CoreDataStack.default.remove(localMediaItems: removedAssets) { 
+                    
+                    MediaItemOperationsService.shared.remove(localMediaItems: removedAssets) { 
                         notify()
                     }
                 } else {
@@ -50,7 +51,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 phChanges[.added] = newAssets
                 debugLog("photoLibraryDidChange - added \(newAssets.count) items")
                 
-                CoreDataStack.default.append(localMediaItems: newAssets) {
+                MediaItemOperationsService.shared.append(localMediaItems: newAssets) {
                     checkDeleteIndexes()
                 }
             } else {

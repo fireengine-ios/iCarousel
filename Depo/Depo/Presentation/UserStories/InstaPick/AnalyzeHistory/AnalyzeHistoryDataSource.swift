@@ -309,12 +309,14 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section = sections[indexPath.section]
-        
+        ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+        ///seems like this bug may occur on iOS 12+ when it returns negative value
         switch section {
         case .cards:
-            return CGSize(width: collectionView.bounds.width, height: cards[indexPath.item].cellHeight)
+            return CGSize(width: max(collectionView.bounds.width, 0), height: cards[indexPath.item].cellHeight)
         case .photos:
-            let width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
+            var width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
+            width = max(width, 0)
             return CGSize(width: width, height: width + InstapickAnalyzeHistoryPhotoCell.underPhotoOffset)
         }
     }

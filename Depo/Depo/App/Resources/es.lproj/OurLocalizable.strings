@@ -917,7 +917,7 @@
 "your_account_email" = "Correo electrónico de su cuenta";
 "enter_your_account_email" = "Insertar el correo electrónico de su cuenta";
 "enter_the_text_shown_in_the_image" = "Insertar el texto que se muestra en el imagen";
-"support_form_email_body" = "Por favor, no borre la siguiente información. La información se utilizará para resolver el problema.\nNombre: @%\nApellido: @%\nCorreo electrónico: @%\nMsisdn: @%\nVersión de aplicación: @%\nPortador: @%\nDispositivo: @%\nOS dispositivo: @%\nIdioma: @%\nEstado de la red: @%";
+"support_form_email_body" = "Por favor, no borre la siguiente información. La información se utilizará para resolver el problema.\nNombre: %@\nApellido: %@\nCorreo electrónico: %@\nMsisdn: %@\nVersión de aplicación: %@\nPortador: %@\nDispositivo: %@\nOS dispositivo: %@\nIdioma: %@\nEstado de la red: %@";
 "profile_phone_number_title" = "Número de teléfono";
 "profile_phone_number_placeholder" = "Ingresar su número de teléfono";
 "please_enter_your_name" = "Por favor ingresar su nombre";
@@ -959,10 +959,11 @@
 "login_email_or_phone_error" = "Tiene que rellenar su e-mail o teléfono.";
 "login_password_error" = "Tiene que rellenar su contraseña";
 "enter_security_code" = "Insertar su código de seguridad";
-"enter_code_get_code_on_phone" = "Por favor ingresar el código de seguridad de 6 dígitos que enviamos a este número de teléfono: @%";
+"enter_code_get_code_on_phone" = "Por favor ingresar el código de seguridad de 6 dígitos que enviamos a este número de teléfono: %@";
 "time_is_up_for_code" = "Se acabó el tiempo, por favor solicitar un nuevo código.";
 "resend_code" = "Reenviar el código";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Por favor verificar su nombre de usuario";
+"login_support_info" = "Si tiene dificultades para registrarse, contáctenos para obtener ayuda.";

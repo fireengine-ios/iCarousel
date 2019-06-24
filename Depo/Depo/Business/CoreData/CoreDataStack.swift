@@ -11,213 +11,133 @@ import CoreData
 
 final class CoreDataStack: NSObject {
     
-    typealias AppendingLocaclItemsFinishCallback = () -> Void
-    typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
+    static let `default` = CoreDataStack()
     
-    typealias AppendingLocalItemsPageAppended = ([Item])->Void
+    private let modelName = "LifeBoxModel"
+    private let persistentStoreName = "DataModel"
     
-    static let notificationNewLocalPageAppendedFilesKey = "notificationNewLocalPageAppendedFilesKey"
     
-    @objc static let `default` = CoreDataStack()
-    
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    private override init() {
+        super.init()
         
-        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension: "momd"),
-            let mom = NSManagedObjectModel(contentsOf: modelURL)
-            else { fatalError("Error loading model from bundle") }
-
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
-        
-        do {
-            let storeURL = Device.documentsFolderUrl(withComponent: "DataModel.sqlite")
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                           NSInferMappingModelAutomaticallyOption: true]
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
-                                                configurationName: nil,
-                                                at: storeURL,
-                                                options: options)
-        } catch {
-            fatalError("Error migrating store: \(error)")
+        if #available(iOS 10.0, *) {
+            mainContext.automaticallyMergesChangesFromParent = true
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
         }
         
-        return coordinator
-    }()
-    
-    var mainContext: NSManagedObjectContext
-    
-    var newChildBackgroundContext: NSManagedObjectContext {
-        let children = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        children.parent = mainContext
-        return children
+        /// for tests
+        //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
     }
     
-    var backgroundContext: NSManagedObjectContext
-    
-    let privateQueue = DispatchQueue(label: DispatchQueueLabels.coreDataStack, attributes: .concurrent)
-    
-    var inProcessAppendingLocalFiles = false
-    
-    var originalAssetsBeingAppended = AssetsCache()
-    var nonCloudAlreadySavedAssets = AssetsCache()
-    
-    override init() {
-        
-        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        
-        super.init()
-        mainContext.persistentStoreCoordinator = persistentStoreCoordinator
-        backgroundContext.parent = mainContext
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func clearDataBase() {
-        deleteRemoteFiles()
-    }
-    
-    func deleteRemoteFiles() {
-        // Album has remote status by default for now
-        let albumFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItemsAlbum.Identifier)
-        
-        let mediaItemFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        let predicateRules = PredicateRules()
-        guard let predicate = predicateRules.predicate(filters: [.localStatus(.nonLocal)]) else {
+    @objc func managedObjectContextDidSave(_ notification: Notification) {
+        guard let context = notification.object as? NSManagedObjectContext else {
             return
         }
-        mediaItemFetchRequest.predicate = predicate
-        
-        self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest])
-    }
-
-    func deleteLocalFiles() {
-        
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-            let predicateRules = PredicateRules()
-            guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
-                return
-            }
-            fetchRequest.predicate = predicate
-            self.deleteObjects(fromFetch: fetchRequest)
-        
-    }
-    
-    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
-        var remoteMd5s = [String]()
-        var trimmedIDs = [String]()
-        remoteItems.forEach {
-            remoteMd5s.append($0.md5)
-            trimmedIDs.append($0.getTrimmedLocalID())
-        }
-
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "(md5Value IN %@) OR (trimmedLocalFileID IN %@)", remoteMd5s, trimmedIDs)
-        let sort = NSSortDescriptor(key: "creationDateValue", ascending: false)
-        fetchRequest.sortDescriptors = [sort]
-        
-        let context = CoreDataStack.default.newChildBackgroundContext
-        context.perform {
-            guard let localDuplicatesMediaItems = (try? context.fetch(fetchRequest)) as? [MediaItem] else {
-                duplicatesCallBack([])
-                return
-            }
-            var array = [Item]()
-            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
-
-            duplicatesCallBack(array)
-        }
-    }
-
-    func getLocalFilteredItem(remoteOriginalItem: Item, localFilteredPhotosCallBack: @escaping (Item?) -> Void) {
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "(md5Value = %@) AND (isFiltered == true)", remoteOriginalItem.md5, remoteOriginalItem.getTrimmedLocalID())
-        
-        let context = CoreDataStack.default.newChildBackgroundContext
-        context.perform {
-            guard let localDuplicatesMediaItems = (try? context.fetch(fetchRequest)) as? [MediaItem] else {
-                localFilteredPhotosCallBack(nil)
-                return
-            }
-            var array = [Item]()
-            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
-            localFilteredPhotosCallBack(array.first)
-        }
-        
-    }
-    
-    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
-        for fetchRequest in fetchRequests {
-            self.deleteObjects(fromFetch: fetchRequest)
+        if context != mainContext, context.parent == mainContext {
+            /// will be called on background queue
+            mainContext.saveAsync()
         }
     }
     
-    private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let context = newChildBackgroundContext
-        context.perform { [weak self] in
-            guard let fetchResult = try? context.fetch(fetchRequest),
-                let unwrapedObjects = fetchResult as? [NSManagedObject],
-                unwrapedObjects.count > 0 else {
-                    
+    @available(iOS 10.0, *)
+    private lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: modelName)
+        
+        let loadDefaultStore = {
+            container.loadPersistentStores { (storeDescription, error) in
+                print("CoreData: Inited \(storeDescription)")
+                if let error = error {
+                    print("CoreData: Unresolved error \(error)")
                     return
-            }
-            for object in unwrapedObjects {
-                context.delete(object)
-            }
-            self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
-                debugPrint("Data base deleted objects")
-            })
-            
-        }
-    }
-    
-    private func saveMainContext(savedMainCallBack: VoidHandler?) {
-        if mainContext.hasChanges {
-            mainContext.perform { [weak self] in
-                do {
-                    try self?.mainContext.save()
-                    
-                    self?.privateQueue.async {
-                        savedMainCallBack?()
-                    }
-                } catch {
-                    debugLog("Error saving context mainContext.save()()")
-                    print("Error saving context ___ ")
                 }
             }
-        } else {
-            privateQueue.async {
-                savedMainCallBack?()
-            }
-        }
-    }
-    
-    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
-                                  savedCallBack: VoidHandler?) {
-        let saveBlock: VoidHandler = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            do {
-                try context.save()
-            } catch {
-                debugLog("saveDataForContext() save() Error saving contex")
-                print("Error saving context ___ ")
-            }
-            
-            if context.parent == self.mainContext, context != self.mainContext {
-                self.saveMainContext(savedMainCallBack: {
-                    savedCallBack?()
-                })
-                return
-            }
         }
         
-        if context.hasChanges {
-            context.perform(saveBlock)
+        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            loadDefaultStore()
+            return container
+        }
+        
+        do {
+            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                           NSInferMappingModelAutomaticallyOption: false]
+            try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
+        } catch let error {
+            loadDefaultStore()
+        }
+        
+        return container
+    }()
+
+    
+    ///--- available iOS 9
+    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        do {
+            return try NSPersistentStoreCoordinator.coordinator(modelName: modelName, persistentStoreName: persistentStoreName)
+        } catch {
+            print("CoreData: Unresolved error \(error)")
+        }
+        return nil
+    }()
+    
+    private lazy var managedObjectContext: NSManagedObjectContext = {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        return managedObjectContext
+    }()
+    ///---
+    
+    // MARK: Public methods
+    
+    var newChildBackgroundContext: NSManagedObjectContext {
+        if #available(iOS 10.0, *) {
+            /// don't set parent for newBackgroundContext(), it will crash
+            /// with error "Context already has a coordinator; cannot replace"
+            return persistentContainer.newBackgroundContext()
         } else {
-            privateQueue.async {
-                savedCallBack?()
+            let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            context.parent = mainContext
+            return context
+        }
+        /// for tests
+        //        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        //        context.parent = mainContext
+        //        return context
+    }
+    
+    var mainContext: NSManagedObjectContext {
+        if #available(iOS 10.0, *) {
+            return persistentContainer.viewContext
+        } else {
+            return managedObjectContext
+        }
+    }
+    
+    /// for background fetch
+    //lazy var backgroundContext = newBackgroundContext
+    
+    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        if #available(iOS 10.0, *) {
+            persistentContainer.performBackgroundTask(block)
+        } else {
+            let context = newChildBackgroundContext
+            context.perform { 
+                block(context)
             }
         }
     }
     
+    // TODO: do we need save main context for compounder
+    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
+                                  savedCallBack: VoidHandler?) {
+        context.save(async: !saveAndWait) { _ in
+            savedCallBack?()
+        }
+    }
 }
