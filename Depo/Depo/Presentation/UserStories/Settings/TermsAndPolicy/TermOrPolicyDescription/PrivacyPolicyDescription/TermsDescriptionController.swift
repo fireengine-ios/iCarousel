@@ -11,8 +11,8 @@ import UIKit
 
 final class TermsDescriptionController: UIViewController {
     
-    var textToPresent: String = ""
-
+    private var textToPresent: String = ""
+   
     init(text: String) {
         textToPresent = text
         super.init(nibName: nil, bundle: nil)
@@ -29,7 +29,7 @@ final class TermsDescriptionController: UIViewController {
         textView.textColor = .black
         
         let edgeInset: CGFloat = 16
-        textView.contentInset = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
+        textView.contentInset = UIEdgeInsets(top: edgeInset, left: 0, bottom: edgeInset, right: 0)
         return textView
     }()
     

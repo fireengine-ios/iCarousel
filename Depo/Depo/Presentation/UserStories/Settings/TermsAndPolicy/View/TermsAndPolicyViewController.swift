@@ -55,7 +55,7 @@ extension TermsAndPolicyViewController: UITableViewDataSource {
 extension TermsAndPolicyViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.allowsSelection = false
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
@@ -63,6 +63,7 @@ extension TermsAndPolicyViewController: UITableViewDelegate {
         case 1:
             goToPrivacyPolicy()
         default:
+            tableView.allowsSelection = true
             assertionFailure()
         }
     }
@@ -88,8 +89,9 @@ extension TermsAndPolicyViewController {
                 }
                 let newViewController = TermsDescriptionController(text: content)
                 self?.router.pushViewController(viewController: newViewController)
-                
+                self?.tableView.allowsSelection = true
             case .failed(_):
+                self?.tableView.allowsSelection = true
                 assertionFailure("Failed move to Terms Description ")
             }
         }
@@ -98,6 +100,7 @@ extension TermsAndPolicyViewController {
     private func goToPrivacyPolicy() {
         let newViewController = PrivacyPolicyController()
         router.pushViewController(viewController: newViewController)
+        self.tableView.allowsSelection = true
     }
 }
 
