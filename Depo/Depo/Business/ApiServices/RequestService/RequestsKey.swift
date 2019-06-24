@@ -26,6 +26,7 @@ struct LbRequestkeys {
     static let token = "token"
     static let appVersion = "appVersion"
     static let osVersion = "osVersion"
+    static let brandType = "brandType"
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"

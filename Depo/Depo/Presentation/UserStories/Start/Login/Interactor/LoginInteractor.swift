@@ -133,6 +133,8 @@ class LoginInteractor: LoginInteractorInput {
             
             self.loginRetries = 0
             
+            self.accountService.updateBrandType()
+            
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
@@ -191,6 +193,9 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
+                
+                self.accountService.updateBrandType()
+                
                 self.tokenStorage.isRememberMe = self.rememberMe
                 self.output?.successedSilentLogin()
             }

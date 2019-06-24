@@ -254,6 +254,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         UserDefaults.standard.synchronize()
+        
         player.stop()
     }
     

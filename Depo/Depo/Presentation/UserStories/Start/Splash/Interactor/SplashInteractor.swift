@@ -89,6 +89,7 @@ class SplashInteractor: SplashInteractorInput {
                     self?.tokenStorage.isRememberMe = true
                     
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
