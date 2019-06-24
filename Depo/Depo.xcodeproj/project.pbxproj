@@ -24858,7 +24858,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
+				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\" $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
@@ -24915,7 +24915,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -24970,7 +24970,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
@@ -25026,7 +25026,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
