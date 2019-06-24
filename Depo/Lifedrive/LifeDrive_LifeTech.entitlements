@@ -14,6 +14,8 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive</string>
 		<string>$(AppIdentifierPrefix)by.com.life.LifeDrive</string>
 	</array>
 </dict>

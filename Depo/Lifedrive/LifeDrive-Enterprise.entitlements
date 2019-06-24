@@ -10,9 +10,9 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)by.com.life.LifeDrive</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive</string>
 	</array>
 </dict>
 </plist>
