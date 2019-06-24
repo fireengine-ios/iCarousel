@@ -3032,7 +3032,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
-		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -4933,7 +4933,7 @@
 		CE784CA122A685FB00662219 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
 		CE784CA222A685FB00662219 /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
-		CE784CA522A685FB00662219 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		CE784CA522A685FB00662219 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D81EFBDDC700E25989 /* AdSupport.framework */; };
 		CE784CA722A685FB00662219 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		CE784CA822A685FB00662219 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
@@ -8447,7 +8447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B543FB0E211C847C00E009C4 /* (null) in Frameworks */,
+				B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -8494,7 +8494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE784CA522A685FB00662219 /* (null) in Frameworks */,
+				CE784CA522A685FB00662219 /* BuildFile in Frameworks */,
 				CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */,
 				CE784CA722A685FB00662219 /* Photos.framework in Frameworks */,
 				CE784CA822A685FB00662219 /* Social.framework in Frameworks */,
@@ -15716,7 +15716,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA33922B3CC45006D901E /* Build configuration list for PBXNativeTarget "LifeDriveShared" */;
 			buildPhases = (
-				756FA13F5036A12E2C72B76E /* [CP] Check Pods Manifest.lock */,
+				5B1919D41BC522999F1EC871 /* [CP] Check Pods Manifest.lock */,
 				8C3BA2E322B3CC45006D901E /* Sources */,
 				8C3BA32922B3CC45006D901E /* Frameworks */,
 				8C3BA32B22B3CC45006D901E /* Resources */,
@@ -15833,6 +15833,7 @@
 				8C679AF51FBC244F00B78873 /* ShellScript */,
 				B51FD6381FD13C93000344BD /* Embed App Extensions */,
 				8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */,
+				73DC62B822BB93B300CD495E /* Run Script - Localizable */,
 			);
 			buildRules = (
 			);
@@ -18267,7 +18268,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		756FA13F5036A12E2C72B76E /* [CP] Check Pods Manifest.lock */ = {
+		5B1919D41BC522999F1EC871 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -18288,6 +18289,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		73DC62B822BB93B300CD495E /* Run Script - Localizable */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Localizable";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./scripts/clean_localizable.py\n";
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
