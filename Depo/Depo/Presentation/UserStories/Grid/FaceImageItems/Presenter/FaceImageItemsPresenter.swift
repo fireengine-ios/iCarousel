@@ -95,7 +95,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             filteredItems = items.filter { $0.urlToFile != nil }
         }
         
-        dataSource.dropData()
         super.getContentWithSuccess(items: filteredItems)
         
         print("filteredItems count = \(filteredItems.count)")
