@@ -19,10 +19,10 @@ struct SharedConstants {
     static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
     
     #elseif DEBUG
-    static let groupIdentifier = "group.by.com.life.LifeDrive"
+    static let groupIdentifier = "group.come.life.Lifebox"
     
     #else
-    static let groupIdentifier = "group.by.com.life.LifeDrive"
+    static let groupIdentifier = "group.come.life.Lifebox"
     #endif
     
     
