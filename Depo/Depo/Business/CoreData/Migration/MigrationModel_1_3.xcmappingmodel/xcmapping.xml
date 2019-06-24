@@ -241,6 +241,9 @@ EwcIExQZGiInLC0wMTU6Oz5CRkhVJG51bGzVCQoLDA0ODxAREllOU09wZXJhbmReTlNTZWxlY3Rvck5h
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z113"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z143">
+        <attribute name="valueexpressiondata" type="binary">YnBsaXN0MDDUAQIDBAUGW1xYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8Q
+GAcIExQZGiIoLS4xMjY7PD9DR0xPU1ZXWVUkbnVsbNUJCgsMDQ4PEBESWU5TT3BlcmFuZF5OU1NlbGVjdG9yTmFtZV8QEE5TRXhwcmVzc2lvblR5cGVbTlNBcmd1bWVudHNWJGNsYXNzgAOAAhAEgAaAF18QFWR1cmF0aW9uV2l0aDphc3NldElkOtMVCw0WFxhaTlNWYXJpYWJsZYAEEAKABVxlbnRpdHlQb2xpY3nSGxwdHlokY2xhc3NuYW1lWCRjbGFzc2VzXxAUTlNWYXJpYWJsZUV4cHJlc3Npb26jHyAhXxAUTlNWYXJpYWJsZUV4cHJlc3Npb25cTlNFeHByZXNzaW9uWE5TT2JqZWN00iMNJCdaTlMub2JqZWN0c6IlJoAHgBGAFtUJCgsMDSkqECssgAmACIALgBBfEBB2YWx1ZUZvcktleVBhdGg60xULDS8XGIAKgAVWc291cmNl0iMNMzWhNIAMgA/TDQs3ODk6WU5TS2V5UGF0aIAOEAqADVhkdXJhdGlvbtIbHD0+XxAcTlNLZXlQYXRoU3BlY2lmaWVyRXhwcmVzc2lvbqM9ICHSGxxAQV5OU011dGFibGVBcnJheaNAQiFXTlNBcnJhedIbHERFXxATTlNLZXlQYXRoRXhwcmVzc2lvbqRERiAhXxAUTlNGdW5jdGlvbkV4cHJlc3Npb27VCQoLDA1IKhBKLIASgAiAE4AQ0xULDS8XGIAKgAXSIw1QNaFRgBSAD9MNCzc4OVWADoAVXxAQaXRlbS5sb2NhbEZpbGVJRNIbHEJYokIh0hscRlqjRiAhXxAPTlNLZXllZEFyY2hpdmVy0V1eVHJvb3SAAQAIABEAGgAjAC0AMgA3AFIAWABjAG0AfACPAJsAogCkAKYAqACqAKwAxADLANYA2ADaANwA6QDuAPkBAgEZAR0BNAFBAUoBTwFaAV0BXwFhAWMBbgFwAXIBdAF2AYkBkAGSAZQBmwGgAaIBpAGmAa0BtwG5AbsBvQHGAcsB6gHuAfMCAgIGAg4CEwIpAi4CRQJQAlICVAJWAlgCXwJhAmMCaAJqAmwCbgJ1AncCeQKMApEClAKZAp0CrwKyArcAAAAAAAACAQAAAAAAAABfAAAAAAAAAAAAAAAAAAACuQ==
+</attribute>
         <attribute name="name" type="string">duration</attribute>
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z160"></relationship>
     </object>
@@ -321,13 +324,14 @@ EwcIExQZGiInLC0wMTU6Oz5CRkhVJG51bGzVCQoLDA0ODxAREllOU09wZXJhbmReTlNTZWxlY3Rvck5h
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z146"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z160">
+        <attribute name="migrationpolicyclassname" type="string">lifebox.MediaItemMetaDataMigrationPolicy_1_3</attribute>
         <attribute name="sourcename" type="string">MediaItemsMetaData</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">1</attribute>
         <attribute name="destinationname" type="string">MediaItemsMetaData</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z118"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z112 z138 z123 z151 z107 z121 z143 z128 z135 z156 z145 z110"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z128 z121 z123 z135 z151 z107 z112 z143 z138 z156 z145 z110"></relationship>
         <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z131"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z161">
