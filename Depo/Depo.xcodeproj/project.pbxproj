@@ -2581,7 +2581,6 @@
 		8C3BA39A22B3CC53006D901E /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		8C3BA39B22B3CC53006D901E /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37A2073AE2B00C54C9B /* InfoAppStore.plist */; };
 		8C3BA39C22B3CC53006D901E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1BE934204831CE0074BDDC /* MainInterface.storyboard */; };
-		8C3BA3AC22B3CE24006D901E /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA33E22B3CC45006D901E /* LifeDriveShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA37822B3CC49006D901E /* LifeDriveFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -2685,6 +2684,9 @@
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
+		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
 		8CCA070620C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
 		8CCA070B20C455DB00558AB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
@@ -3034,7 +3036,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
-		B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -4935,7 +4937,7 @@
 		CE784CA122A685FB00662219 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
 		CE784CA222A685FB00662219 /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
-		CE784CA522A685FB00662219 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		CE784CA522A685FB00662219 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D81EFBDDC700E25989 /* AdSupport.framework */; };
 		CE784CA722A685FB00662219 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		CE784CA822A685FB00662219 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
@@ -5919,13 +5921,6 @@
 			remoteGlobalIDString = CE1BE92F204831CE0074BDDC;
 			remoteInfo = LifeboxFileProviderUI;
 		};
-		8C3BA3A422B3CDBA006D901E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C3BA2BC22B3CC32006D901E;
-			remoteInfo = "LifeDrive-widget";
-		};
 		8C3BA3A622B3CDBE006D901E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -5946,6 +5941,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8C3BA37A22B3CC53006D901E;
 			remoteInfo = LifeDriveProviderUI;
+		};
+		8CC301E522C0E6F8005EA404 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C3BA2BC22B3CC32006D901E;
+			remoteInfo = "LifeDrive-widget";
 		};
 		B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -6026,7 +6028,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8C3BA3AC22B3CE24006D901E /* LifeDrive-widget.appex in Embed App Extensions */,
+				8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
 				8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */,
@@ -8448,7 +8450,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */,
+				B543FB0E211C847C00E009C4 /* (null) in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -8495,7 +8497,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE784CA522A685FB00662219 /* BuildFile in Frameworks */,
+				CE784CA522A685FB00662219 /* (null) in Frameworks */,
 				CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */,
 				CE784CA722A685FB00662219 /* Photos.framework in Frameworks */,
 				CE784CA822A685FB00662219 /* Social.framework in Frameworks */,
@@ -15918,10 +15920,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				8CC301E622C0E6F8005EA404 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
 				8C3BA3A922B3CDC2006D901E /* PBXTargetDependency */,
 				8C3BA3A722B3CDBE006D901E /* PBXTargetDependency */,
-				8C3BA3A522B3CDBA006D901E /* PBXTargetDependency */,
 			);
 			name = lifedrive;
 			productName = Depo;
@@ -20214,6 +20216,7 @@
 				8C3BA38722B3CC53006D901E /* MD5.swift in Sources */,
 				8C3BA38822B3CC53006D901E /* FromNib.swift in Sources */,
 				8C3BA38922B3CC53006D901E /* ErrorIdentificators.swift in Sources */,
+				8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */,
 				8C3BA38A22B3CC53006D901E /* TitleView.swift in Sources */,
 				8C3BA38B22B3CC53006D901E /* String+Subscript.swift in Sources */,
 				8C3BA38C22B3CC53006D901E /* Constants.swift in Sources */,
@@ -20303,6 +20306,7 @@
 				CEF371B020887DAC007AD36E /* MD5.swift in Sources */,
 				CE4D2817207E0A2B003AE4FB /* FromNib.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
+				8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */,
 				CEF3719E20873B12007AD36E /* TitleView.swift in Sources */,
 				8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */,
 				CE4D27F8207E024B003AE4FB /* Constants.swift in Sources */,
@@ -22850,11 +22854,6 @@
 			target = CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */;
 			targetProxy = 7A3E0C0C206273CE00F79A1C /* PBXContainerItemProxy */;
 		};
-		8C3BA3A522B3CDBA006D901E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8C3BA2BC22B3CC32006D901E /* LifeDrive-widget */;
-			targetProxy = 8C3BA3A422B3CDBA006D901E /* PBXContainerItemProxy */;
-		};
 		8C3BA3A722B3CDBE006D901E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8C3BA2E122B3CC45006D901E /* LifeDriveShared */;
@@ -22869,6 +22868,11 @@
 			isa = PBXTargetDependency;
 			target = 8C3BA37A22B3CC53006D901E /* LifeDriveProviderUI */;
 			targetProxy = 8C3BA3AA22B3CDC4006D901E /* PBXContainerItemProxy */;
+		};
+		8CC301E622C0E6F8005EA404 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C3BA2BC22B3CC32006D901E /* LifeDrive-widget */;
+			targetProxy = 8CC301E522C0E6F8005EA404 /* PBXContainerItemProxy */;
 		};
 		B5E1D981202DB4800022F0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -24935,7 +24939,7 @@
 					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/lifedrive.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
