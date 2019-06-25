@@ -32,6 +32,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         return gesture
     }()
     
+    var isNeedToUpdateWebView = true
+    
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
     
     override func awakeFromNib() {
@@ -78,7 +80,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.image = nil
         playVideoButton.isHidden = true
         
-        
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
             playVideoButton.isHidden = (object.fileType != .video)
@@ -96,6 +97,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 webView.load(URLRequest(url: url))
             }
         }
+        isNeedToUpdateWebView = false
     }
     
     @IBAction private func onPlayVideoButton() {

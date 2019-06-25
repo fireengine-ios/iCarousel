@@ -336,13 +336,17 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objects.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeue(cell: PhotoVideoDetailCell.self, for: indexPath)
     }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoDetailCell else { return }
         cell.delegate = self
-        cell.setObject(object: objects[indexPath.row])
+        if cell.isNeedToUpdateWebView {
+            cell.setObject(object: objects[indexPath.row])
+        }
     }
 }
 
