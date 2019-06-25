@@ -95,6 +95,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             filteredItems = items.filter { $0.urlToFile != nil }
         }
         
+        //FIXME: remove other reload methods to avoid duplicates on view appear and made code below unneeded
+        if interactor.requestPageNum == 1 {
+            dataSource.dropData()
+        }
+        
         super.getContentWithSuccess(items: filteredItems)
         
         print("filteredItems count = \(filteredItems.count)")
