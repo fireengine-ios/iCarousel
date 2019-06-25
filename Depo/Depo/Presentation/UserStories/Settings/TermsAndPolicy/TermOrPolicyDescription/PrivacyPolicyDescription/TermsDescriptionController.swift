@@ -55,11 +55,11 @@ final class TermsDescriptionController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(textView)
-        
+
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        textView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).activate()
+        textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).activate()
+        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).activate()
         textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
     }
     
