@@ -11,6 +11,8 @@ import CoreGraphics
 
 struct NumericConstants {
     
+    static let maximumApiConnections = 10
+    
     static let vereficationCharacterLimit = 6
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
