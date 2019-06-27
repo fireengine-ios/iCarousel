@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 "NSLocationAlwaysUsageDescription" = "Um ein Backup im Hintergrund zu erstellen wird Ihr Standort verwendet.";
-"NSPhotoLibraryAddUsageDescription" = "Damit die App auf die Gerätegalerie zugreifen kann, wird Ihr Erlaubnis benötigt.";
-"NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der App gezeigt werden kann, wird Ihr Erlaubnis benötigt.";
+"NSPhotoLibraryAddUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
+"NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Um ein Backup im Hintergrund zu erstellen wird Ihr Standort verwendet.";

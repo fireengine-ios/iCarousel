@@ -1173,8 +1173,8 @@ Please check I have understood the intended command here*/
 
 /*No french translation suggestion provided.*/
 "NSLocationAlwaysUsageDescription" = "Votre localisation sera utilisée pour synchroniser les données";
-"NSPhotoLibraryAddUsageDescription" = "Un accès à votre compte est nécessaire afin de pouvoir sauvegarder vos photos et vos vidéos";
-"NSPhotoLibraryUsageDescription" = "Un accès à votre compte est nécessaire afin de pouvoir afficher vos photos et vos vidéos dans l'application";
+"NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
+"NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
 
 /*Usage Info*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
@@ -1271,3 +1271,16 @@ Please check I have understood the intended command here*/
 "frequently_asked_questions" = "Questions Fréquemment Posées";
 "login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
 "login_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
+"terms_and_privacy_policy" = "";
+"Temporary error occurred. Please try again later." = "";
+"face_tags_description_premium" = "";
+"terms_of_use" = "";
+"privacy_policy" = "";
+"face_tags_description_standart" = "";
+"terms_and_use_introduction_checkbox" = "";
+"privacy_policy_condition" = "";
+"photo_pick_description" = "";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "";
+"etk_permissiom_description" = "";
