@@ -304,7 +304,6 @@ class CardsManager: NSObject {
         case .autoUploadIsOff:
             stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .sync)
-            stopOperationWithType(type: .upload)
         default:
             break
         }
