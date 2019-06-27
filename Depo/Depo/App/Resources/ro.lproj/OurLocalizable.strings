@@ -945,6 +945,9 @@
 "user_profile_day_placeholder" = "ZZ";
 "user_profile_month_placeholder" = "LL";
 "user_profile_year_placeholder" = "AAAA";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";

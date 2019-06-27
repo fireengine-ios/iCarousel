@@ -979,6 +979,10 @@
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
+"restore_purchases" = "Restore Purchases";
+"restore_purchases_info" = "If you want to restore your previous purchases lorem ipsum pellentesque tincidunt eleifend nibh, at suscipit arcu con.";
+"attributed_restore_word" = "restore";
+
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
