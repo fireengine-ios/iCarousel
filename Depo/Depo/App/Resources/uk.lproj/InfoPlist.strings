@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "Ця програма використовує Face ID для підвищення вашої безпеки";
-"NSLocationAlwaysUsageDescription" = "Ваше місцезнаходження буде використано для синхронізації у фоновому режимі";
-"NSPhotoLibraryAddUsageDescription" = "Дозвольте додатку lifebox доступ до галереї, щоб зберігати фото та відео";
-"NSPhotoLibraryUsageDescription" = "Дозвольте додатку lifebox доступ до галереї, щоб відображати фото та відео у додатку";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше місцезнаходження буде використано для фотової синхронізації";
+"NSLocationAlwaysUsageDescription" = "Ваше місцезнаходження буде використано для автосинхронізації";
+"NSPhotoLibraryAddUsageDescription" = "Щоб показати свої фотографії та відео в програмі та створити резервну копію їх, lifebox потребує доступу до бібліотеки фотографій.";
+"NSPhotoLibraryUsageDescription" = "Щоб показати свої фотографії та відео в програмі та створити резервну копію їх, lifebox потребує доступу до бібліотеки фотографій.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше місцезнаходження буде використано для автосинхронізації";

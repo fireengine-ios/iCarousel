@@ -869,8 +869,8 @@
 "terms_and_use_etk_link_commercial_email_messages" = "kommerzielle E-Mails";
 "commercial_email_messages" = "SCHRIFTLICHE ZUSTIMMUNG FÜR KOMMERZIELLE E-MAILS\n\nHiermit erkläre ich mich damit einverstanden, dass ich Turkcell und seinen Konzerngesellschaften mein Einverständnis erteile, kommerzielle E-Mails (die Daten beinhaltenden Nachrichten, Stimmen und Videos, die zu kommerziellen Zwecken gesendet und auf elektronischem Wege mit Mitteln wie Telefon, Call-Center, Faxübertragung, Autodialing-Gerät, Smart Sound Recorder, E-Mail, Kurzmitteilungssystem übertragen werden) über meine Kontaktdaten, die ich bei der Anmeldung von lifebox angegeben habe oder bereits bei Turkcell und ihren Konzerngesellschaften im Besitz sind, an mich zu senden, um verschiedene neue Produkte und Dienstleistungen zu bewerben und zu vermarkten, sowie allgemeine/besondere Möglichkeiten anzukündigen, die Turkcell und seine Konzerngesellschaften und/oder Drittunternehmen anbieten, mit denen sie gemäß der Gesetzesnummer 6563 über die Regulierung des elektronischen Geschäftsverkehrs (\"das Gesetz\") zusammenarbeiten sowie die Bestimmungen über kommerzielle Kommunikation und kommerzielle elektronische Postnachrichten (\"die Verordnung\") auf unbefristeter Basis, bis ich von meinem Recht Gebrauch mache, solche Nachrichten zu verweigern, selbst wenn mein Abonnementvertrag läuft ab.\n\nKommerzielle E-Mails, die von Betreibern, die dem Gesetz Nr. 5809  über elektronische Kommunikation unterliegen, an ihre Abonnenten und Benutzer ausschließlich zur Werbung und Vermarktung ihrer eigenen Produkte und Dienstleistungen oder zur Einführung ihres Geschäfts gesendet werden, sind gemäß den Verordnungen ausgenommen. Daher stimme ich hiermit zu, dass die Einwilligung, die ich oben gegeben habe, unabhängig von der Einwilligung ist, die ich dem Betreiber, bei dem ich Abonnent/Nutzer bin, im Zusammenhang mit der Werbung für seine Produkte und Dienstleistungen gegeben hat und dass dieser Betreiber dies tun muss berechtigt sein, kommerzielle E-Mail-Nachrichten zu Zwecken wie Werbung, Vermarktung seiner eigenen Produkte und Dienstleistungen im Rahmen der Einwilligung zu versenden, die ich dem Betreiber, bei dem ich Abonnent bin, erteilte, auch wenn ich die unter diesem Dokument erteilte Einwilligung widerrufe Ich über mein Recht aus, solche Nachrichten gemäß dem Gesetz und den Vorschriften abzulehnen, und dass mir bekannt ist, dass ich auch die kommerziellen E-Mails meines Betreibers ablehnen kann.";
 "NSLocationAlwaysUsageDescription" = "Um ein Backup im Hintergrund zu erstellen wird Ihr Standort verwendet.";
-"NSPhotoLibraryAddUsageDescription" = "Damit die App auf die Gerätegalerie zugreifen kann, wird Ihr Erlaubnis benötigt.";
-"NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der App gezeigt werden kann, wird Ihr Erlaubnis benötigt.";
+"NSPhotoLibraryAddUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
+"NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ Internet verwendet (zur Verwendung der lifebox)";
@@ -967,3 +967,16 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Bitte überprüfen Sie Ihren Benutzernamen";
 "login_support_info" = "Wenn Sie Probleme beim Anmelden haben, wenden Sie sich an uns, um Unterstützung zu erhalten.";
+"terms_and_privacy_policy" = "";
+"Temporary error occurred. Please try again later." = "";
+"face_tags_description_premium" = "";
+"terms_of_use" = "";
+"privacy_policy" = "";
+"face_tags_description_standart" = "";
+"terms_and_use_introduction_checkbox" = "";
+"privacy_policy_condition" = "";
+"photo_pick_description" = "";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "";
+"etk_permissiom_description" = "";
