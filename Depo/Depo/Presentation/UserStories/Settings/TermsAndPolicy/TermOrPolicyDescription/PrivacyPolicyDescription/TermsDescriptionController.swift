@@ -42,7 +42,7 @@ final class TermsDescriptionController: UIViewController {
         
         view.backgroundColor = .white
         setupLayout()
-        textView.attributedText = makeHtmlAttributedSring(contentString: textToPresent)
+        textView.attributedText = textToPresent.htmlAttributedForPrivacyPolicy(using: UIFont.TurkcellSaturaFont(size: 15))
         setTitle(withString: TextConstants.termsOfUseCell)
     }
     
@@ -61,16 +61,6 @@ final class TermsDescriptionController: UIViewController {
         textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).activate()
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).activate()
         textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-    }
-    
-    private func makeHtmlAttributedSring(contentString: String) -> NSAttributedString? {
-        guard let data = contentString.data(using: .utf8) else { return NSAttributedString() }
-        
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return NSAttributedString()
-        }
     }
 }
 
