@@ -933,6 +933,9 @@
 "please_enter_your_surname" = "Пожалуйста, введите вашу фамилию";
 "enter_your_surname" = "Введите вашу фамилию";
 "enter_your_email_address" = "Введите ваш e-mail";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
 
 /*What kind of subject is meant here?*/
 "subject" = "Тема запроса";

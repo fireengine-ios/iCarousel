@@ -947,6 +947,9 @@
 "user_profile_day_placeholder" = "ДД";
 "user_profile_month_placeholder" = "ММ";
 "user_profile_year_placeholder" = "РРРР";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Допомога та підтримка";
