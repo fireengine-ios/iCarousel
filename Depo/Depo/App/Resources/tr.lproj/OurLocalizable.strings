@@ -877,8 +877,8 @@
 "terms_and_use_etk_link_commercial_email_messages" = "ticari elektronik ileti";
 "commercial_email_messages" = "TİCARİ ELEKTRONİK İLETİ İZNİ HAKKINDA BİLGİLENDİRME\n\nlifebox uygulamasına üyelik sırasında verdiğim veya Turkcell ve Grup Şirketleri nezdinde bulunan iletişim bilgilerim aracılığı ile Turkcell ve Grup Şirketleri’ne ve/veya işbirliği içerisinde olduğu kuruluşlara ilişkin çeşitli ve yeni ürün-hizmetlerin tanıtım ve pazarlanması amacıyla ve genel/özel imkanların duyurulması için Turkcell ve Grup Şirketleri’nce tarafıma 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun ( “Kanun”) ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik ( “Yönetmelik”) çerçevesince ticari elektronik iletiler (telefon, çağrı merkezleri, faks, otomatik arama makineleri, akıllı ses kaydedici sistemler, elektronik posta, kısa mesaj hizmeti gibi vasıtalar kullanılarak elektronik ortamda gerçekleştirilen ve ticari amaçla gönderilen veri, ses ve görüntü içerikli iletileri)  gönderilmesine  kullanıcı sözleşmesi sona erse dahi reddetme hakkımı kullanıncaya kadar süresiz olarak geçerli şekilde onayım olduğunu kabul ederim.\n \nYönetmelik uyarınca 5809 sayılı Elektronik Haberleşme Kanunu kapsamındaki işletmecilerin abone ve kullanıcılarına; münhasıran kendi mal ve hizmetlerini tanıtmak, pazarlamak ya da işletmesini tanıtmak amacıyla gönderdiği ticari elektronik iletiler istisna kapsamındadır. Bu sebeple yukarıda verdiğim onayın abonesi/kullanıcısı olduğum işletmeci şirkete verdiğim kendi ürün ve hizmetlerinin tanıtımına ilişkin onaydan bağımsız ve ayrı bir onay olduğunu ve reddetme hakkımı kullanarak Kanun ve Yönetmelik kapsamında işbu metin ile vermekte olduğum onayı iptal etsem bile abonesi olduğum  işletmeciye verdiğim onay dahilinde, bu işletmeciden kendi mal ve hizmetlerine ilişkin tanıtım, pazarlama vb. amaçları içeren ticari elektronik ileti gelebileceğini, işbu ticari elektronik iletileri de ayrıca reddetme imkanım olduğunu bildiğimi kabul ederim.";
 "NSLocationAlwaysUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
-"NSPhotoLibraryAddUsageDescription" = "Uygulamanın, cihaz galerine ulaşabilmesi için iznin gerekiyor.";
-"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek için iznin gerekiyor.";
+"NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ internet kullanıldı (lifebox kullanımı için)";
@@ -975,3 +975,16 @@
 "frequently_asked_questions" = "Sıkça Sorulan Sorular";
 "login_username_not_valid" = "Lütfen kullanıcı adını kontrol et.";
 "login_support_info" = "Giriş yapmakta zorluk çekiyorsan, destek için bizimle iletişime geçebilirsin.";
+"terms_and_privacy_policy" = "";
+"Temporary error occurred. Please try again later." = "";
+"face_tags_description_premium" = "";
+"terms_of_use" = "";
+"privacy_policy" = "";
+"face_tags_description_standart" = "";
+"terms_and_use_introduction_checkbox" = "";
+"privacy_policy_condition" = "";
+"photo_pick_description" = "";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "";
+"etk_permissiom_description" = "";

@@ -912,8 +912,8 @@
 "terms_and_use_etk_link_commercial_email_messages" = "mesazheve elektronike komerciale";
 "commercial_email_messages" = "INFORMIM NË LIDHJE ME MIRATIMIN NË LIDHJE ME MARRJEN E MESAZHEVE ELEKTRONIKE KOMERCIALE\n\nUnë jap pëlqimin tim për marrjen e mesazheve elektronike komerciale nga Turkcell dhe kompanitë e grupit të tij, (mesazhe që përmbajnë të dhëna, zë dhe video të cilat dërgohen për qëllime komerciale dhe transmetohen në mënyrë elektronike duke përdorur mjete siç janë telefoni, qendra e thirrjeve, pajisje për transmetimin e zërit, regjistrues smart të zërit, postë elektronike, sisteme të  mesazhit të shkurtër) nëpërmjet informacionit të kontaktit që kam dhënë kur kam nënshkruar aplikacionin Lifebox ose që tashmë disponohet nga Turkcell dhe kompanitë e grupit të tij, pët qëllime reklamimi dhe marketingu të produkteve  dhe shërbimeve të ofruara si dhe për qëllime njoftimi të mundësive të përgjithshme/të veçanta të ofruara nga Turkcell dhe kompanitë e grupit të tij dhe/ose subjektet e palët e treta me të cilën ato bashkëpunojnë, në përputhje me Ligjin Nr. 6563 për Rregullimin e Tregtisë Elektronike (\"Ligji\"), Rregulloren për Komunikimin Tregtar dhe Mesazhet e Postës Elektronike (\"Rregullorja\"), në mënyrë të përhershme derisa unë të ushtroj të drejtën time për të refuzuar marrjen e  mesazheve të tilla, edhe në qoftë se skadon afati i abonimit tim për aplikimin e lartpërmendur.\n\nMesazhet komerciale të postës elektronike të dërguara nga operatorët, të cilët i nënshtrohen Ligjit Nr.5809 mbi Komunikimin Elektronik, për abonentët dhe shfrytëzuesit e tyre, ekskluzivisht për reklamimin dhe marketingun e produkteve dhe shërbimeve të tyre ose prezantimin e biznesit të tyre konsiderohen si përjashtime, në pajtim me Rregulloret në fuqi. Unë bie dakord që miratim i mësipërm është dhënë në mënyrë të pavarur nga miratimi që unë i kam dhënë operatorit tim në të cilin jam abonuar/ tek i cili jam përdorues, në lidhje me reklamimin e produkteve dhe shërbimeve të tij; dhe se ky operator ka të drejtë të dërgojë mesazhe elektronike komerciale për qëllime të tilla si reklamimi, marketingu i produkteve dhe shërbimeve të tij brenda fushëveprimit të miratimit që i kam dhënë operatorit në të cilin jam abonuar, edhe nëse unë revokoj miratimin e dhënë në këtë dokument duke ushtruar të drejtën time për të refuzuar mesazhe të tilla në pajtim me Ligjin dhe rregulloret e sipërpërmendura; unë deklaroj gjithashtu se unë jam i vetëdijshëm për të drejtën time për të refuzuar mesazhet komerciale të operatorit tim.";
 "NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit";
-"NSPhotoLibraryAddUsageDescription" = "Për të ruajtur fotot dhe videot tuaja, nevojitet leja juaj e aksesit në librarinë e fotove.";
-"NSPhotoLibraryUsageDescription" = "Për të shfaqur fotot dhe videot ne aplikacion, nevojitet leja juaj e aksesit në librarinë e fotove.";
+"NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
 
 /*Usage Info*/
 "package_space_details" = "% 1$@ / %2$@ internet i përdorur (vetëm për përdorim në lifebox)";
@@ -1010,3 +1010,16 @@
 "frequently_asked_questions" = "Pyetje të shpeshta";
 "login_username_not_valid" = "Ju lutem, kontrolloni emrin tuaj të përdoruesit.";
 "login_support_info" = "Nëse hasni vështirësi gjatë identifikimit, na kontaktoni për ndihmë.";
+"terms_and_privacy_policy" = "";
+"Temporary error occurred. Please try again later." = "";
+"face_tags_description_premium" = "";
+"terms_of_use" = "";
+"privacy_policy" = "";
+"face_tags_description_standart" = "";
+"terms_and_use_introduction_checkbox" = "";
+"privacy_policy_condition" = "";
+"photo_pick_description" = "";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "";
+"etk_permissiom_description" = "";
