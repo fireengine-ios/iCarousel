@@ -289,6 +289,9 @@
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
+		73027C2C22C60A0600334C2F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73027C2B22C60A0600334C2F /* String + Extension.swift */; };
+		73027C2D22C60A0600334C2F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73027C2B22C60A0600334C2F /* String + Extension.swift */; };
+		73027C2E22C60A0600334C2F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73027C2B22C60A0600334C2F /* String + Extension.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -6284,6 +6287,7 @@
 		7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.debug.xcconfig"; sourceTree = "<group>"; };
+		73027C2B22C60A0600334C2F /* String + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -14066,6 +14070,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				73027C2B22C60A0600334C2F /* String + Extension.swift */,
 				8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */,
 				8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */,
 				CECD4E521FE114FC00978BE7 /* Color */,
@@ -18244,7 +18249,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18301,7 +18306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B1919D41BC522999F1EC871 /* [CP] Check Pods Manifest.lock */ = {
@@ -18390,7 +18395,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18447,7 +18452,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -18456,7 +18461,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18465,7 +18470,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -18505,7 +18510,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18562,7 +18567,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
@@ -18597,7 +18602,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18606,7 +18611,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -18680,7 +18685,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18737,7 +18742,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE784F1022A685FB00662219 /* ShellScript */ = {
@@ -18759,7 +18764,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18768,7 +18773,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D3D8861611D1E0D1CBD7F137 /* [CP] Check Pods Manifest.lock */ = {
@@ -18817,7 +18822,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18826,7 +18831,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -19457,6 +19462,7 @@
 				B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */,
 				8C0E8E1A1FDEBDFF00789C91 /* ForgotPasswordViewInput.swift in Sources */,
 				486F7B54208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
+				73027C2D22C60A0600334C2F /* String + Extension.swift in Sources */,
 				8C0E8E1B1FDEBDFF00789C91 /* ActivityTimelineTableBackView.swift in Sources */,
 				7C379F3E202C35DD0050C055 /* SynchronizedArray.swift in Sources */,
 				8C0B91AF20170ECC00A5BA81 /* ManageContactsModels.swift in Sources */,
@@ -20551,6 +20557,7 @@
 				FA793D842018725400A02B46 /* ThingsService.swift in Sources */,
 				8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */,
 				7CFE92FA1F601E36008A3B72 /* Mail.swift in Sources */,
+				73027C2C22C60A0600334C2F /* String + Extension.swift in Sources */,
 				A20CDBA8219D6C1E00CA9A67 /* PremiumHeaderView.swift in Sources */,
 				CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */,
 				CE51ABFD1EF90853005DCEE0 /* LoginRouterInput.swift in Sources */,
@@ -21840,6 +21847,7 @@
 				CE7848DC22A685FB00662219 /* InfoButtonCellProtocol.swift in Sources */,
 				CE7848DD22A685FB00662219 /* Mail.swift in Sources */,
 				CE7848DE22A685FB00662219 /* PremiumHeaderView.swift in Sources */,
+				73027C2E22C60A0600334C2F /* String + Extension.swift in Sources */,
 				CE7848DF22A685FB00662219 /* UIApplication+Settings.swift in Sources */,
 				CE7848E022A685FB00662219 /* LoginRouterInput.swift in Sources */,
 				CE7848E122A685FB00662219 /* AlbumDetailResponce.swift in Sources */,
