@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre lifebox";
-"NSLocationAlwaysUsageDescription" = "Votre localisation sera utilisée pour synchroniser les données";
+"NSLocationAlwaysUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
 "NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
 "NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre localisation sera utilisée pour synchroniser les données";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";

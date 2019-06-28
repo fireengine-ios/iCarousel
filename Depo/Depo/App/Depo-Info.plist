@@ -131,6 +131,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>343434</string>
 	<key>NSContactsUsageDescription</key>
 	<string></string>
 	<key>NSLocationAlwaysUsageDescription</key>

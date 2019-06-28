@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "Esta aplicación está diseñada para usar Face ID para aumentar tu seguridad";
-"NSLocationAlwaysUsageDescription" = "Se usará tu localización para poder recapitular en el segundo plano.";
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
 "NSPhotoLibraryAddUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
 "NSPhotoLibraryUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Se usará tu localización para poder recapitular en el segundo plano.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";

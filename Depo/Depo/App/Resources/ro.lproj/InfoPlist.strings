@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "Această aplicație a fost proiectată să utilizeze Face ID pentru a-ți spori securitatea";
-"NSLocationAlwaysUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSLocationAlwaysUsageDescription" = "Locația dvs. va fi utilizată pentru sincronizarea de fundal și pentru organizarea și căutarea fotografiilor.";
 "NSPhotoLibraryAddUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
 "NSPhotoLibraryUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația dvs. va fi utilizată pentru sincronizarea de fundal și pentru organizarea și căutarea fotografiilor.";
