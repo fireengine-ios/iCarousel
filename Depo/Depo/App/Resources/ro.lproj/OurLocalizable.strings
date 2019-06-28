@@ -868,7 +868,7 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
 "terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
 "commercial_email_messages" = "INFORMARE PRIVIND APROBAREA MESAJELOR ELECTRONICE COMERCIALE\n\nAccept că mi-am exprimat consimțământul pe termen nelimitat inclusiv şi ulterior expirării contractului de utilizator, până la exercitarea dreptului de respingere, pentru a-mi fi trimise din partea lui Turkcell ve Grup Şirketleri prin intermediul datelor de contact furnizate de mine în momentul autentificării în aplicația lifebox sau a  celorlalte date de contact  care îmi aparțin, existente la Turkcell  şi Grup Şirketleri,  mesaje  electronice comerciale cu scop publicitar şi  de marketing aferente diverselor şi noilor produse-servicii şi anunțării  cu privire la posibilitățile generale/speciale ale lui Turkcell şi Grup Şirketleri şi/sau la întreprinderile cu care acesta din urmă colaborează   (comunicări cu conținut de date, audio şi video, efectuate în mediu electronic  şi trimise în scop comercial prin intermediul mijloacelor cum ar fi telefon, centre  de apel, fax, aparate automate de apelare, sisteme inteligente de înregistrare audio, poștă electronică, sms)  cu respectarea prevederilor Legii numărul 6563 cu Privire la Reglementarea Comerţului Electronic („Lege”)  şi Regulamentul cu Privire la Comunicări Comerciale şi Mesaje  Electronice Comerciale („Regulament”)\n\nConform Regulamentului, mesajele electronice ale operatoriilor economici care se încadrează în incidența Legii Comunicațiilor Electronice numărul 5809, trimise abonaților şi utilizatorilor săi în scopul promovării şi  marketingul produselor lor individuale sau publicității întreprinderilor sale, sunt scutite de prevederile legii. Din acest motiv, aprob faptul că acceptul acordat de mine în rândurile precedente este independent şi separat de acceptul acordat societăţii operatoare al cărui abonat/utilizator sunt, cu privire la promovarea produselor şi serviciilor sale şi chiar şi în cazul anulării prin exercitarea  dreptului de respingere prevăzut de Lege şi  Regulament a aprobării mele  acordate prin prezentul  text, în baza aprobării mele acordate operatorului al cărui abonat  s-ar putea să primesc de la operatorul respectiv mesaje electronice comerciale care conțin scopuri precum promovarea, negocierea etc. cu privire la mărfurile şi serviciile proprii, de asemenea cunosc faptul că dețin dreptul de a respinge şi aceste mesaje electronice comerciale.";
-"NSLocationAlwaysUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSLocationAlwaysUsageDescription" = "Locația dvs. va fi utilizată pentru sincronizarea de fundal și pentru organizarea și căutarea fotografiilor.";
 "NSPhotoLibraryAddUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
 "NSPhotoLibraryUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
 
@@ -879,7 +879,7 @@
 "used_and_left_space" = "%1$@ / %2$@ utilizat";
 "percentage_used_two_lines" = "%.0f%%\nutilizat";
 "my_usage_storage" = "Spațiul de stocare de utilizare";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația dvs. va fi utilizată pentru sincronizarea de fundal și pentru organizarea și căutarea fotografiilor.";
 "name" = "Nume";
 "surname" = "Prenume";
 "change password" = "Modificare Parolă";
@@ -980,3 +980,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Pentru a face fotografii cu camera foto și pentru a le crea în siguranță în caseta de salvare, este necesară permisiunea dvs. pentru accesul camerei";

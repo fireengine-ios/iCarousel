@@ -868,7 +868,7 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell y las Compañias del Grupo";
 "terms_and_use_etk_link_commercial_email_messages" = "correo electrónico comercial";
 "commercial_email_messages" = "INFORMACIÓN SOBRE LA AUTORIZACIÓN DE MENSAJE ELECTRÓNICO COMERCIAL\n\nACEPTO Y APRUEBO  válidamente que la información que proporciono durante la suscripción de la aplicación Lifebox o que constan en el banco de datos de Turkcell y las Compañias del Grupo puede ser utilizado con el fin de promover y comercializar novedades, productos y servicios de Turkcell y las Compañias del Grupo, así como para el anuncio de las oportunidades exclusivas o generales por parte de Turkcell y las Compañias del Grupo mediante el envío de mensajes electrónicos comerciales (mensajes de datos, audio y video enviados electrónicamente y enviados con fines comerciales por teléfono, centros de llamadas, fax, máquinas de búsqueda automática, sistemas inteligentes de grabación de voz, correo electrónico, servicios de mensajería de texto, etc.) de conformidad con la Ley N° 6563 del Reglamento de Comercio Electrónico (“La Ley”) y dentro del marco del Reglamento sobre comunicación comercial y mensajes electrónicos comerciales (“El Reglamento”) y indefinidamente, hasta que haya usado mi derecho a rechazar.  \nSegún el Reglamento, los mensajes electrónicos comerciales que se envían a los suscriptores y usuarios exclusivamente por parte de los Operadores dentro del ámbito de la Ley 5809 de Comunicación Electrónica, para promocionar sus propios bienes y servicios, para comercializar o para promocionar sus negocios están cubiertos por la excepción. Por este motivo, ACEPTO que la aprobación concedad en el anterior es independiente de la aprobación que he dado para la promoción de los productos y servicios ofertados por la empresa que de la cual soy un suscriptor /usuario, y según mi previa aprobación podría recibir mensajes electrónicos comerciales, promocionales acerca de los  productos y servicios de esta empresa con este texto en el ámbito de la Ley y el Reglamento incluso si cancelo la aprobación que he concedido anteriormente; y también puedo rechazar dichos mensajes electrónicos comerciales.";
-"NSLocationAlwaysUsageDescription" = "Se usará tu localización para poder recapitular en el segundo plano.";
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
 "NSPhotoLibraryAddUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
 "NSPhotoLibraryUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
 
@@ -879,7 +879,7 @@
 "used_and_left_space" = "Se ha utilizado %1$@ / %2$@";
 "percentage_used_two_lines" = "Se ha utilizado %.0f%%";
 "my_usage_storage" = "Mi uso de internet";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Se usará tu localización para poder recapitular en el segundo plano.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
 "name" = "Nombre";
 "surname" = "Apellido";
 "change password" = "Cambiar la contraseña";
@@ -980,3 +980,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Para tomar fotos con su cámara y hacer una copia de seguridad de ellas en la caja de vida, se necesita su permiso de acceso a la cámara";
