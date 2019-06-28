@@ -117,9 +117,9 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string>To take pictures with your camera and to back up them to lifebox, your camera access permission is needed</string>
 	<key>NSContactsUsageDescription</key>
 	<string>To backup your contacts to lifebox</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
@@ -129,7 +129,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To save lifebox photos to your device</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photos will be backed up to lifebox</string>
 	<key>MenloApplicationKey</key>

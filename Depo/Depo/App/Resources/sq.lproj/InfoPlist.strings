@@ -1,5 +1,5 @@
 "NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
-"NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit";
+"NSLocationAlwaysUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
 "NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
 "NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
