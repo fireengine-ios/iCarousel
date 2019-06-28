@@ -34,6 +34,16 @@ class ViewController: UIViewController {
         return .gradient
     }
     
+    // MARK: -
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    // MARK: - Helpers
+    
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
         if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
             statusBarHidden = true
