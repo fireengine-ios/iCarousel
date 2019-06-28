@@ -33,15 +33,6 @@ class ViewController: UIViewController {
     var preferredNavigationBarStyle: NavigationBarStyle {
         return .gradient
     }
-    
-    // MARK: -
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        setNeedsStatusBarAppearanceUpdate()
-    }
-    
     // MARK: - Helpers
     
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {

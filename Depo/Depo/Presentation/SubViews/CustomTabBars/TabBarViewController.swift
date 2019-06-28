@@ -752,11 +752,15 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             
         }
         
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: {
+            self.statusBarHidden = false
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: {
+            self.statusBarHidden = false
+        })
     }
 }
 
