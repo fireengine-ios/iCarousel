@@ -1023,3 +1023,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";

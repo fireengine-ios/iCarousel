@@ -992,3 +992,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Para tomar fotos con su cámara y hacer una copia de seguridad de ellas en la caja de vida, se necesita su permiso de acceso a la cámara";

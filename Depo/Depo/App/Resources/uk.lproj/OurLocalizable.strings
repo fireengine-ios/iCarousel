@@ -989,3 +989,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Щоб фотографувати камерою та створити резервну копію їх у lifebox, потрібен дозвіл доступу до камери";

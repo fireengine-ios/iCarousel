@@ -995,3 +995,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Cihaz kamerası ile fotoğraf çekmek ve çekilen fotoğrafları lifebox'a yedeklemek için cihaz kamerasına erişim iznin gerekiyor";

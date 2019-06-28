@@ -3,3 +3,4 @@
 "NSPhotoLibraryAddUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
 "NSPhotoLibraryUsageDescription" = "Pentru a afișa fotografiile și videoclipurile în aplicație și pentru a le crea copii de rezervă, căsuța de salvare are nevoie de accesul la biblioteca foto.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația dvs. va fi utilizată pentru sincronizarea de fundal și pentru organizarea și căutarea fotografiilor.";
+"NSCameraUsageDescription" = "Pentru a face fotografii cu camera foto și pentru a le crea în siguranță în caseta de salvare, este necesară permisiunea dvs. pentru accesul camerei";

@@ -3,3 +3,4 @@
 "NSPhotoLibraryAddUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
 "NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung sowie für die Organisation und Suche Ihrer Fotos verwendet.";
+"NSCameraUsageDescription" = "Zum Aufnehmen von Bildern mit Ihrer Kamera und zum Sichern dieser Bilder in der Lifebox benötigen Sie Ihre Kamera-Zugriffsberechtigung";

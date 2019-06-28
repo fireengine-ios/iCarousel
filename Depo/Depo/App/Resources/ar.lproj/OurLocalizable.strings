@@ -1010,3 +1010,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "لالتقاط الصور بالكاميرا ولنسخها احتياطيًا إلى صندوق الإنقاذ ، يلزم الحصول على إذن بالوصول إلى الكاميرا";

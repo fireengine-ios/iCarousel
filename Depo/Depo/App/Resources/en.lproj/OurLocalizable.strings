@@ -1008,3 +1008,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "ETK Permission";
 "etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
+"NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";

@@ -990,3 +990,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Zum Aufnehmen von Bildern mit Ihrer Kamera und zum Sichern dieser Bilder in der Lifebox benötigen Sie Ihre Kamera-Zugriffsberechtigung";

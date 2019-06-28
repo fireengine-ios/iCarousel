@@ -984,3 +984,4 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "Pentru a face fotografii cu camera foto și pentru a le crea în siguranță în caseta de salvare, este necesară permisiunea dvs. pentru accesul camerei";
