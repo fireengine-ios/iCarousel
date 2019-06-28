@@ -9,9 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.turkcell.akillidepo.todayextension</string>
+	<string>com.turkcell.lifedrive.todayextension</string>
 	<key>GroupBundleId</key>
-	<string>group.com.turkcell.akillidepo</string>
+	<string>group.com.turkcell.lifedrive</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.turkcell.akillideponew.ent</string>
+		<string>group.com.turkcell.lifedrive.ent</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
