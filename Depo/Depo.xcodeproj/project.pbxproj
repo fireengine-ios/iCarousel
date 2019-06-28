@@ -18244,7 +18244,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18301,7 +18301,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B1919D41BC522999F1EC871 /* [CP] Check Pods Manifest.lock */ = {
@@ -18390,7 +18390,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18447,7 +18447,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -18456,7 +18456,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18465,7 +18465,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -18505,7 +18505,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18562,7 +18562,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
@@ -18597,7 +18597,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18606,7 +18606,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -18680,7 +18680,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18737,7 +18737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE784F1022A685FB00662219 /* ShellScript */ = {
@@ -18759,7 +18759,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18768,7 +18768,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D3D8861611D1E0D1CBD7F137 /* [CP] Check Pods Manifest.lock */ = {
@@ -18817,7 +18817,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18826,7 +18826,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -23618,12 +23618,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-AppStore.plist";
@@ -23633,7 +23633,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
+				PROVISIONING_PROFILE_SPECIFIER = "533c6a55-6f3e-4a7d-ae1e-618887ec0969";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -23652,8 +23652,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -23666,7 +23666,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "f8c921bc-7fcf-47b1-b71f-bbe6f4e83977";
+				PROVISIONING_PROFILE_SPECIFIER = "80832aad-8f26-41c9-a500-51f53276bcc9";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_VERSION = 4.0;
@@ -23753,8 +23753,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeDrive/LifeboxShared-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -23767,7 +23767,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
+				PROVISIONING_PROFILE_SPECIFIER = "2c368f6b-4d52-4ed9-ab40-9f5a4a95bb2d";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23787,8 +23787,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeDrive/LifeboxShared-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -23801,7 +23801,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
-				PROVISIONING_PROFILE_SPECIFIER = "8107529c-5196-4e29-94f9-97e071863fbb";
+				PROVISIONING_PROFILE_SPECIFIER = "589c1cbb-3838-45e7-9e45-3b25738ab9da";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23889,12 +23889,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeDrive/LifeboxFileProvider-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -23903,7 +23903,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
+				PROVISIONING_PROFILE_SPECIFIER = "6d6fc946-289f-46d4-879e-192850c9d713";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -23923,8 +23923,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeDrive/LifeboxFileProvider-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -23937,7 +23937,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
-				PROVISIONING_PROFILE_SPECIFIER = "02ead11f-d9db-4511-8315-88c4907cf536";
+				PROVISIONING_PROFILE_SPECIFIER = "91c9d80d-48a5-485a-b78c-37f6749a33b4";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24025,12 +24025,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -24039,7 +24039,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "8195c797-2345-4b62-bc99-9cda2b33d902";
+				PROVISIONING_PROFILE_SPECIFIER = "7190a693-e87f-4117-a98b-13e88a657ffb";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24059,8 +24059,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeDrive/LifeboxFileProviderUI-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -24073,7 +24073,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
-				PROVISIONING_PROFILE_SPECIFIER = "93c0aa13-4fef-491e-b0af-01e2b00931a0";
+				PROVISIONING_PROFILE_SPECIFIER = "cac7fd03-7412-4434-95a8-9967771a9c3d";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24978,7 +24978,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25012,7 +25012,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "666f2249-3f2d-4442-8f49-4ca00c3a853c";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -25034,7 +25034,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25068,7 +25068,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "82957fd9-2507-4a24-801d-e2832d4d654a";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
