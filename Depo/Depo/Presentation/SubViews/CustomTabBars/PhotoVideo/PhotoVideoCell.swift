@@ -61,13 +61,13 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
     
-    
     weak var delegate: PhotoVideoCellDelegate?
     private var cellId = ""
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     private(set) var trimmedLocalFileID: String?
+    private var requestImageID: PHImageRequestID?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -173,14 +173,17 @@ final class PhotoVideoCell: UICollectionViewCell {
                 else {
                     return
                 }
-                
-                self.filesDataSource?.getAssetThumbnail(asset: asset) { [weak self] image in
+                self.filesDataSource?.getAssetThumbnail(asset: asset, requestID: { [weak self] requestID in
+                    DispatchQueue.main.async {
+                        self?.requestImageID = requestID
+                    }
+                }, completion: { [weak self] image in
                     DispatchQueue.main.async {
                         if self?.cellId == asset.localIdentifier, let image = image {
                             self?.setImage(image: image, shouldBeBlurred: false, animated: false)
                         }
                     }
-                }
+                })
             }
         } else if let smallURL = mediaItem.metadata?.smalURl, let mediumURL = mediaItem.metadata?.mediumUrl {
             cellId = ""
@@ -310,9 +313,18 @@ final class PhotoVideoCell: UICollectionViewCell {
         thumbnailImageView.image = nil
         cancelImageLoading()
         cancelledUploadForObject()
+        cancelLocalRequest()
+    }
+    
+    private func cancelLocalRequest() {
+        if let requestID = requestImageID {
+            filesDataSource?.cancelImageRequest(requestImageID: requestID)
+            requestImageID = nil
+        }
     }
 
     deinit {
         cancelImageLoading()
+        cancelLocalRequest()
     }
 }
