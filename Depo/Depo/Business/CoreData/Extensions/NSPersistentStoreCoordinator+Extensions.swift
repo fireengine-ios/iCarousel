@@ -22,13 +22,34 @@ extension NSPersistentStoreCoordinator {
     
     /// Return NSPersistentStoreCoordinator
     private convenience init(name: String) throws {
-        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
-            throw CoordinatorError.modelFileNotFound
+        do {
+            let model = try NSPersistentStoreCoordinator.managedObjectModel(name: name)
+            self.init(managedObjectModel: model)
         }
-        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
+        catch {
             throw CoordinatorError.modelCreationError
         }
-        self.init(managedObjectModel: model)
+    }
+    
+    class func managedObjectModel(name: String) throws -> NSManagedObjectModel {
+        let modelBundle = Bundle.main
+        let omoURL = modelBundle.url(forResource: name, withExtension: "omo", subdirectory: "\(name).momd")
+        let momURL = modelBundle.url(forResource: name, withExtension: "mom", subdirectory: "\(name).momd")
+        guard var url = omoURL ?? momURL else {
+            debugLog("modelFileNotFound")
+            throw CoordinatorError.modelFileNotFound
+        }
+        /// Use unoptimized model version < iOS 11
+        if #available(iOS 11, *) {
+            //
+        } else if let momURL = momURL {
+            url = momURL
+        }
+        guard let model = NSManagedObjectModel(contentsOf: url) else {
+            debugLog("modelFile can not be opened")
+            fatalError("cannot open model at \(url)")
+        }
+        return model
     }
     
     /// Return NSPersistentStoreCoordinator with set coordinator
