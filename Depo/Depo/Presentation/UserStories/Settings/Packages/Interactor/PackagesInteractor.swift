@@ -319,6 +319,23 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
+    
+    func getQuotaInfo() {
+        
+        AccountService().quotaInfo(success: { [weak self] response in
+            
+            guard let response = response as? QuotaInfoResponse else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.output.setQuotaInfo(quotoInfo: (response))
+            }
+            }, fail: { [weak self] error in
+                assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
+        })
+    }
+    
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
         analyticsService.trackPackageClick(package:
             packages, packageIndex: planIndex)
