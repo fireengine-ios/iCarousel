@@ -23638,7 +23638,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "f6f34b76-2e45-4814-99a1-484265b14aba";
@@ -23672,7 +23672,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "13567de5-0be1-4673-ae5c-d5fe36fb3aad";
 				SKIP_INSTALL = YES;
@@ -23772,7 +23772,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
 				PROVISIONING_PROFILE_SPECIFIER = "6d9fe92f-e7bb-47ca-8843-e8fc8ebb4409";
@@ -23806,7 +23806,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
 				PROVISIONING_PROFILE_SPECIFIER = "897ed3b6-3b9b-47c5-a788-6e3a847d99bf";
@@ -23908,7 +23908,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
 				PROVISIONING_PROFILE_SPECIFIER = "54f94d78-6316-4368-bc3b-01d1c8d0a1b8";
@@ -23942,7 +23942,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
 				PROVISIONING_PROFILE_SPECIFIER = "1b16950b-9a2f-4f31-a5af-e9e2180f0b24";
@@ -24044,7 +24044,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
 				PROVISIONING_PROFILE_SPECIFIER = "be153dfa-1141-418b-9f2a-77c0c844cc7c";
@@ -24078,7 +24078,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
 				PROVISIONING_PROFILE_SPECIFIER = "be726b73-5f07-497f-8d7c-020b35a68f3e";
@@ -25017,7 +25017,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
 				PROVISIONING_PROFILE_SPECIFIER = "5bffab77-d054-4749-8477-df22d8d698dd";
@@ -25073,7 +25073,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
 				PROVISIONING_PROFILE_SPECIFIER = "2bee469e-845a-4848-9654-967ba8e7fb42";
