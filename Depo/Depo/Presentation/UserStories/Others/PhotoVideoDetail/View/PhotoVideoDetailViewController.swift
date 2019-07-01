@@ -325,9 +325,18 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
                 return
             }
             
+            self.replaceUploaded(file)
             self.output.replaceUploaded(file)
             self.output.updateBars()
             self.setupNavigationBar()
+        }
+    }
+    
+    private func replaceUploaded(_ item: WrapData) {
+        if let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
+            //need for display local image
+            item.patchToPreview = objects[indexToChange].patchToPreview
+            objects[indexToChange] = item
         }
     }
 }

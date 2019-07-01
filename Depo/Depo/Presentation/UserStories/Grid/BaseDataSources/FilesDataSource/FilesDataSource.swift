@@ -150,13 +150,20 @@ extension FilesDataSource {
         
     }
     
-    func getAssetThumbnail(asset: PHAsset, completion: @escaping (_ image: UIImage?) -> Void) {
+    func getAssetThumbnail(asset: PHAsset, requestID: @escaping (_ requestID: PHImageRequestID?) -> Void, completion: @escaping (_ image: UIImage?) -> Void) {
         FilesDataSource.cacheQueue.async { [weak self] in
             guard let self = self else { return }
             
-            self.assetCache?.requestImage(for: asset, targetSize: self.targetSize, contentMode: .default, options: self.defaultImageRequestOptions, resultHandler: { image, _ in
+            let requestImageID = self.assetCache?.requestImage(for: asset, targetSize: self.targetSize, contentMode: .default, options: self.defaultImageRequestOptions, resultHandler: { image, _ in
                 completion(image)
             })
+            requestID(requestImageID)
+        }
+    }
+    
+    func cancelImageRequest(requestImageID: PHImageRequestID) {
+        FilesDataSource.cacheQueue.async { [weak self] in
+            self?.assetCache?.cancelImageRequest(requestImageID)
         }
     }
 }
