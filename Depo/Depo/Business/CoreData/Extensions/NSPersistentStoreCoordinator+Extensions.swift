@@ -33,8 +33,8 @@ extension NSPersistentStoreCoordinator {
     
     class func managedObjectModel(name: String) throws -> NSManagedObjectModel {
         let modelBundle = Bundle.main
-        let omoURL = modelBundle.url(forResource: name, withExtension: "omo", subdirectory: "\(name).momd")
-        let momURL = modelBundle.url(forResource: name, withExtension: "mom", subdirectory: "\(name).momd")
+        let omoURL = modelBundle.url(forResource: "\(name) 3", withExtension: "omo", subdirectory: "\(name).momd")
+        let momURL = modelBundle.url(forResource: "\(name) 3", withExtension: "mom", subdirectory: "\(name).momd")
         guard var url = omoURL ?? momURL else {
             debugLog("modelFileNotFound")
             throw CoordinatorError.modelFileNotFound
