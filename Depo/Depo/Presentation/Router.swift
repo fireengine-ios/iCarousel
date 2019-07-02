@@ -173,8 +173,8 @@ class RouterVC: NSObject {
             var index: Int? = nil
             
             for (i, viewController) in viewControllers.enumerated() {
-                if viewController is CreateStoryPhotoSelectionViewController
-                    || viewController is CreateStoryPhotosOrderViewController {
+                if viewController is CreateStorySelectionController
+                    || viewController is CreateStoryViewController {
                     index = i
                     break
                 }
