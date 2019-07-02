@@ -197,7 +197,8 @@ final class PushNotificationService {
     }
     
     private func openCreateStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
     private func openContactUs() {
