@@ -88,7 +88,10 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     }
     
     override func loadView() {
-        self.view = InstaPickSelectionSegmentedView()
+        let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
+        self.view = InstaPickSelectionSegmentedView(buttonText: TextConstants.analyzeWithInstapick,
+                                                    maxReachedText: String(format: formatedAnalyzesLeft, selectingLimit),
+                                                    needShowSegmentedControll: true)
     }
     
     private lazy var vcView: InstaPickSelectionSegmentedView = {
@@ -96,7 +99,10 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
             return view
         } else {
             assertionFailure("override func loadView")
-            return InstaPickSelectionSegmentedView()
+            let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
+            return InstaPickSelectionSegmentedView(buttonText: TextConstants.analyzeWithInstapick,
+                                                   maxReachedText: String(format: formatedAnalyzesLeft, selectingLimit),
+                                                   needShowSegmentedControll: true)
         }
     }()
     

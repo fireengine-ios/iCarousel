@@ -32,7 +32,8 @@ final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
     }
     
     func onCreateStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
     func onCreateAlbum(moduleOutput: SelectNameModuleOutput?) {

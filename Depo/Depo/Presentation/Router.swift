@@ -914,4 +914,12 @@ class RouterVC: NSObject {
     var supportFormController: UIViewController {
         return SupportFormController()
     }
+    
+    func createStory(navTitle: String) -> UIViewController {
+        return CreateStorySelectionController(title: navTitle)
+    }
+    
+    func createStory(items: [Item]) -> UIViewController {
+        return CreateStoryViewController(images: items)
+    }
 }
