@@ -1,5 +1,6 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
-"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing";
-"NSPhotoLibraryAddUsageDescription" = "Your permission for photo library access is needed to save your photos&videos";
-"NSPhotoLibraryUsageDescription" = "Your permission for photo library access is needed to display photos&videos in the application";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location will be used for background syncing";
+"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
+"NSPhotoLibraryAddUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
+"NSPhotoLibraryUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
+"NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";

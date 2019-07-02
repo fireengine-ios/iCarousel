@@ -30,7 +30,30 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
         array.append(contentsOf: items)
-        selectedIndex = array.index(of: fileObject) ?? 0
+        
+        /// old logic
+        //selectedIndex = array.index(of: fileObject) ?? 0
+        
+        /// new logic
+        if fileObject.isLocalItem {
+            let localId = fileObject.getLocalID()
+            for (index, item) in items.enumerated() {
+                if localId == item.getLocalID() {
+                    selectedIndex = index
+                    break
+                }
+            }
+        } else {
+            for (index, item) in items.enumerated() {
+                guard let id = fileObject.id else {
+                    continue
+                }
+                if id == item.id {
+                    selectedIndex = index
+                    break
+                }
+            }
+        }
     }
     
     func onViewIsReady() {

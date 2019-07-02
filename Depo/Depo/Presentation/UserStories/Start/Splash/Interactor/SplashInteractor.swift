@@ -16,7 +16,7 @@ class SplashInteractor: SplashInteractorInput {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var reachabilityService = Reachability()
+    private lazy var reachabilityService = ReachabilityService.shared
     private lazy var authorizationRepository: AuthorizationRepository = factory.resolve()
     
     private var isTryingToLogin = false
@@ -27,7 +27,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     deinit {
-        reachabilityService?.stopNotifier()
+        reachabilityService.delegates.remove(self)
     }
     
     private func setupReachabilityIfNeed() {
@@ -36,20 +36,7 @@ class SplashInteractor: SplashInteractorInput {
         }
         isReachabilityStarted = true
         
-        guard let reachability = reachabilityService else {
-            assertionFailure()
-            return
-        }
-        
-        reachability.whenReachable = { [weak self] reachability in
-            self?.startLoginInBackground()
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            assertionFailure("\(#function): can't start reachability notifier")
-        }
+        reachabilityService.delegates.add(self)
     }
     
     func startLoginInBackground() {
@@ -79,10 +66,11 @@ class SplashInteractor: SplashInteractorInput {
         setupReachabilityIfNeed()
         
         if tokenStorage.accessToken == nil {
-            if ReachabilityService().isReachableViaWiFi {
+            if reachabilityService.isReachableViaWiFi {
+                isTryingToLogin = false
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
-                isTryingToLogin = false
+//                isTryingToLogin = false
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
@@ -119,13 +107,15 @@ class SplashInteractor: SplashInteractorInput {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
+                    self?.isTryingToLogin = false
                     self?.successLogin()
                 }, fail: { error in
                     /// we don't need logout here
                     /// only internet error
                     //self?.failLogin()
                     DispatchQueue.toMain {
-                        if ReachabilityService().isReachable {
+                        if self?.reachabilityService.isReachable == true {
                             self?.output.onFailGetAccountInfo(error: error)
                         } else {
                             self?.output.onNetworkFail()
@@ -134,7 +124,6 @@ class SplashInteractor: SplashInteractorInput {
                     }
                 })
             }
-
         }
     }
     
@@ -160,7 +149,7 @@ class SplashInteractor: SplashInteractorInput {
     func failLogin() {
         DispatchQueue.toMain {
             self.output.onFailLogin()
-            if !ReachabilityService().isReachable {
+            if !self.reachabilityService.isReachable {
                 self.output.onNetworkFail()
             }
         }
@@ -196,10 +185,6 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func clearAllPreviouslyStoredInfo() {
-        CoreDataStack.default.clearDataBase()
-    }
-    
     func updateUserLanguage() {
         authenticationService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.toMain {
@@ -210,6 +195,15 @@ class SplashInteractor: SplashInteractorInput {
                     self?.output.updateUserLanguageFailed(error: error)
                 }
             }
+        }
+    }
+}
+
+//MARK: - ReachabilityServiceDelegate
+extension SplashInteractor: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        if service.isReachable {
+            startLoginInBackground()
         }
     }
 }

@@ -130,7 +130,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         let cacheKey = metaData.mediumUrl?.byTrimmingQuery?.appendingPathComponent(identifier)
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             guard  let `self` = self else {
                 return
             }

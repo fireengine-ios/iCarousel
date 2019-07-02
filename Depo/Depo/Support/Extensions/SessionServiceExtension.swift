@@ -12,6 +12,7 @@ public extension SessionManager {
     static let customDefault: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
+        configuration.httpMaximumConnectionsPerHost = NumericConstants.maximumApiConnections
 
         return SessionManager(configuration: configuration)
     }()

@@ -49,7 +49,9 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
-  pod 'GPUImage', '~> 0.1'
+  pod 'MetalPetal', '~> 1.0'
+  pod 'GPUImage'
+
 end
 
 target 'Depo_LifeTech' do

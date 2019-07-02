@@ -267,8 +267,7 @@ extension InstapickServiceImpl: InstapickService {
                 let router = RouterVC()
                 (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
                 let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
-                                                                                      analyzesCount: analyzesCount,
-                                                                                      isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
+                                                                                      analyzesCount: analyzesCount,                            isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
                 currentController.present(instapickDetailControlller, animated: true, completion: nil)
             } else {
                 /// nothing to show
@@ -276,4 +275,12 @@ extension InstapickServiceImpl: InstapickService {
             }
         })
     }
+    
+    private func isGridRelatedController(controller: UIViewController?) -> Bool {
+        guard let controller = controller else {
+            return false
+        }
+        return (controller is BaseFilesGreedViewController || controller is SegmentedController)
+    }
+    
 }

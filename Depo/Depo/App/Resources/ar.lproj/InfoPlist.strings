@@ -1,5 +1,6 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
-"NSLocationAlwaysUsageDescription" = "سيتم استخدام الموقع لعمل نسخ احتياطية في الخلفية.";
-"NSPhotoLibraryAddUsageDescription" = "يحتاج التطبيق إلى إذن منك للوصول إلى معرض الجهاز";
-"NSPhotoLibraryUsageDescription" = "تحتاج إلى إذنك لإظهار الصور ومقاطع الفيديو الخاصة بك.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام الموقع لعمل نسخ احتياطية في الخلفية.";
+"NSLocationAlwaysUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
+"NSPhotoLibraryAddUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifebox إلى الوصول إلى مكتبة الصور الخاصة بك.";
+"NSPhotoLibraryUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifebox إلى الوصول إلى مكتبة الصور الخاصة بك.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
+"NSCameraUsageDescription" = "لالتقاط الصور بالكاميرا ولنسخها احتياطيًا إلى صندوق الإنقاذ ، يلزم الحصول على إذن بالوصول إلى الكاميرا";

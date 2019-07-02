@@ -18,16 +18,25 @@ public class MediaItemsMetaData: NSManagedObject {
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsMetaData.Identifier,
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
-        self.album = metadata?.album
-        self.artist = metadata?.artist
-        self.duration = metadata?.duration ?? Double(-1.0)
-        self.genre = metadata?.genre
-        self.height = Int16(metadata?.height ?? 0)
-        self.width = Int16(metadata?.width ?? 0)
-        self.largeUrl = metadata?.largeUrl?.absoluteString
-        self.mediumUrl = metadata?.mediumUrl?.absoluteString
-        self.smalURl = metadata?.smalURl?.absoluteString
-        self.title = metadata?.title
+        copyInfo(metaData: metadata)
     }
-
+ 
+    func copyInfo(metaData: BaseMetaData?) {
+        guard let metaData = metaData else {
+            return
+        }
+        
+        self.takenDate = metaData.takenDate as NSDate?
+        self.title = metaData.title
+        self.album = metaData.album
+        self.artist = metaData.artist
+        self.duration = metaData.duration
+        self.genre = metaData.genre
+        self.height = Int16(metaData.height)
+        self.width = Int16(metaData.width)
+        self.largeUrl = metaData.largeUrl?.absoluteString
+        self.mediumUrl = metaData.mediumUrl?.absoluteString
+        self.smalURl = metaData.smalURl?.absoluteString
+        self.videoPreviewUrl = metaData.videoPreviewURL?.absoluteString
+    }
 }

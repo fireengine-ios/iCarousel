@@ -95,6 +95,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             filteredItems = items.filter { $0.urlToFile != nil }
         }
         
+        //FIXME: remove other reload methods to avoid duplicates on view appear and made code below unneeded
+        if interactor.requestPageNum == 1 {
+            dataSource.dropData()
+        }
+        
         super.getContentWithSuccess(items: filteredItems)
         
         print("filteredItems count = \(filteredItems.count)")
@@ -370,16 +375,21 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
     }
     
     func saveVisibilityChanges() {
-        if let interactor = interactor as? FaceImageItemsInteractor,
-            !selectedItems.isEmpty {
-            
-            let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
-            interactor.onSaveVisibilityChanges(peopleItems)
-            
-        } else {
-            view.stopSelection()
-            
-            switchVisibilityMode(!isChangeVisibilityMode)
+        getSelectedItems { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            if let interactor = self.interactor as? FaceImageItemsInteractor,
+                !selectedItems.isEmpty {
+                
+                let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
+                interactor.onSaveVisibilityChanges(peopleItems)
+                
+            } else {
+                self.view.stopSelection()
+                
+                self.switchVisibilityMode(!self.isChangeVisibilityMode)
+            }
         }
     }
     

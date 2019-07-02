@@ -70,7 +70,7 @@ final class ThingsItemsService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .image)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getThingsPage(param: param, success: { [weak self] response in

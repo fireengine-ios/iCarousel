@@ -8,14 +8,16 @@
 
 import Foundation
 import Alamofire
+import SDWebImage
 
 
-final class ImageDownloadOperation: Operation {
-    
-    var outputBlock: ((AnyObject?) -> Void)?
+final class ImageDownloadOperation: Operation, SDWebImageOperation {
+    typealias ImageDownloadOperationCallback = ((AnyObject?) -> Void)
+    var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
+    ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
     private var task: URLSessionTask?
     private let queue: DispatchQueue
     
@@ -25,13 +27,21 @@ final class ImageDownloadOperation: Operation {
         super.init()
     }
     
+    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?) {
+        self.url = url
+        self.queue = queue
+        self.outputBlock = completion
+        super.init()
+    }
+    
     override func cancel() {
         super.cancel()
         
-        task?.cancel()
-        task = nil
-        outputBlock?(nil)
-        semaphore.signal()
+        DispatchQueue.main.async {
+            self.task?.cancel()
+            self.task = nil
+        }
+//        semaphore.signal()
     }
     
     override func main() {
@@ -44,24 +54,37 @@ final class ImageDownloadOperation: Operation {
             return
         }
         
+        var outputImage: UIImage? = nil
+        
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
             .responseData(queue: queue, completionHandler: { [weak self] dataResponse in
-                guard let self = self, !self.isCancelled else {
+                guard let self = self else {
                     return
                 }
-                
-                guard let data = dataResponse.value, let image = UIImage(data: data) else {
-                    self.outputBlock?(nil)
+                guard !self.isCancelled else {
                     self.semaphore.signal()
                     return
                 }
                 
-                self.outputBlock?(image)
+                guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                    self.semaphore.signal()
+                    return
+                }
+                
+                outputImage = image
                 self.semaphore.signal()
             })
             .task
-
+        
+        task?.priority = URLSessionTask.lowPriority
+        
         semaphore.wait()
+        
+        defer {
+            task?.cancel()
+            outputBlock?(outputImage)
+            semaphore.signal()
+        }
     }
 }

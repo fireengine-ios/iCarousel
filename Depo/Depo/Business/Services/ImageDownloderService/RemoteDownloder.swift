@@ -13,7 +13,7 @@ class ImageDownloder {
     
     private let downloder: SDWebImageDownloader
     
-    private var tokenList = [URL : SDWebImageDownloadToken]()
+    private var tokenList = [URL : SDWebImageOperation]()
     
     init() {
         downloder = SDWebImageManager.shared().imageDownloader!
@@ -27,8 +27,8 @@ class ImageDownloder {
             }
             return
         }
-
-
+        
+        
         if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
             DispatchQueue.main.async {
                 completeImage(image)
@@ -36,10 +36,9 @@ class ImageDownloder {
             return
         }
         
-        
         let item = downloder.downloadImage(with: patch,
                                            options: [.lowPriority/*,.useNSURLCache*/],
-                                           progress: nil) { image, data, error, bool in 
+                                           progress: nil) { image, data, error, bool in
                                             if let image = image {
                                                 SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
                                             }
@@ -53,6 +52,41 @@ class ImageDownloder {
         
         tokenList = tokenList + [path : downloadItem]
         
+    }
+    
+    func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
+        guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
+            DispatchQueue.main.async {
+                completeImage(nil)
+            }
+            return
+        }
+        
+        let cachePath = trimmedUrl.absoluteString
+        
+        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
+            DispatchQueue.main.async {
+                completeImage(image)
+            }
+            return
+        }
+        
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
+        operation.outputBlock = { [weak self] image in
+            guard let `self` = self, let image = image as? UIImage else {
+                completeImage(nil)
+                return
+            }
+            self.tokenList[trimmedUrl] = nil
+            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+            completeImage(image)
+        }
+        
+        tokenList = tokenList + [trimmedUrl : operation]
+        
+        DispatchQueue.toBackground {
+            operation.start()
+        }
     }
     
     func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Void) {
@@ -94,7 +128,7 @@ class ImageDownloder {
     
     func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
         var cachePath: String?
-        if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {            
+        if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {
             cachePath = path.replacingOccurrences(of: "?"+query, with: "")
             
             imageCache.removeImage(forKey: cachePath, withCompletion: {
@@ -106,10 +140,17 @@ class ImageDownloder {
     }
     
     func cancelRequest(path: URL) {
-        guard let item = tokenList[path] else {
-            return
+        if let item = tokenList[path] {
+            cancel(operation: item, url: path)
+        } else if let trimmedUrl = path.byTrimmingQuery, let item = tokenList[trimmedUrl] {
+            cancel(operation: item, url: trimmedUrl)
         }
-        downloder.cancel(item)
+        //        downloder.cancel(item)
+    }
+    
+    private func cancel(operation: SDWebImageOperation, url: URL) {
+        operation.cancel()
+        tokenList[url] = nil
     }
 }
 
@@ -165,7 +206,7 @@ class FilesDownloader {
         }
         
         group.notify(queue: DispatchQueue.main) {
-            if let error = self.error, localURLs.isEmpty { 
+            if let error = self.error, localURLs.isEmpty {
                 fail(error.description)
             } else {
                 response(localURLs, tmpDirectoryURL)

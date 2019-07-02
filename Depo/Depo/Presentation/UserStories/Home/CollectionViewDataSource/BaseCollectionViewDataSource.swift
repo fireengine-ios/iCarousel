@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewDataSourceDelegate {
+protocol BaseCollectionViewDataSourceDelegate: class {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -21,7 +21,7 @@ class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDel
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
-    var delegate: BaseCollectionViewDataSourceDelegate?
+    weak var delegate: BaseCollectionViewDataSourceDelegate?
     
     var viewsByType = [OperationType: [BaseView]]()
     
@@ -396,6 +396,7 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
         baseCell.didEndDisplay()
     }
 }
+
 //MARK UICollectionView Layout delegate
 extension BaseCollectionViewDataSource: CollectionViewLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
