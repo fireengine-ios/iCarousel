@@ -106,6 +106,13 @@ public extension SynchronizedArray {
         }
     }
     
+    ///Sync sort itself
+    func syncSortItself(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+        queue.sync {
+            self.array.sort(by: areInIncreasingOrder)
+        }
+    }
+    
     /// Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
     ///
     /// - Parameter transform: A closure that accepts an element of this sequence as its argument and returns an optional value.
