@@ -523,16 +523,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: CreateStory name
-    
-    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
-        controller.output.items = items
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
-    }
-    
     // MARK: - SearchView
     
     func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
@@ -560,14 +550,6 @@ class RouterVC: NSObject {
     
     func audioSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
-        return controller
-    }
-    
-    
-    // MARK: CreateStory photos order 
-    
-    func photosOrder(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryPhotosOrderModuleInitializer.initializeViewController(with: "CreateStoryPhotosOrderViewController", story: story)
         return controller
     }
     

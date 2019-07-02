@@ -104,10 +104,10 @@ enum AnalyticsAppScreens {
     case upload
     case search
     ///Create Story
-    case createStoryName
     case createStoryPhotosSelection
     case createStoryMusicSelection
     case createStoryPreview
+    case createStoryDetails
     ///Albums
     case albums
     case myStories
@@ -205,14 +205,14 @@ enum AnalyticsAppScreens {
         case .search:
             return "Search"
         ///Create Story
-        case .createStoryName:
-            return "Create Story - Name"
         case .createStoryPhotosSelection:
             return "Create Story - Photo Selection"
         case .createStoryMusicSelection:
             return "Create Story - Music Selection"
         case .createStoryPreview:
             return "Create Story - Preview"
+        case .createStoryDetails:
+            return "Create Story - Details"
         ///Albums
         case .albums:
             return "Albums"

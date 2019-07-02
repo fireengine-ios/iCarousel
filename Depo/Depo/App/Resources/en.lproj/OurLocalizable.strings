@@ -1010,3 +1010,13 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "ETK Permission";
 "etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
+
+"create_story_photos_selected" = "%d Selected";
+
+"create_story_press_and_hold" = "Press and hold";
+"create_story_press_and_hold_description" = "%@ on the image you would like to rearrange the order of your story video.";
+"create_story_name_title" = "Story Name";
+
+"create_story_pop_up_title" = "You created a story! \n %@";
+"create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
+"create_story_path_to_story" = "Photos & Videos > My Stories";
