@@ -113,10 +113,10 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
             subscriptionPlanAuthorities = authorities.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) })
         }
         if let type = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string {
-            if type == "DIGICELL", let role = subscriptionPlanRole {
-                if role.uppercased().contains(PackageType.FWI.rawValue) {
+            if type.uppercased().contains("DIGICELL"), let role = subscriptionPlanRole {
+                if role.uppercased().contains(AccountType.FWI.rawValue) && type == PackageType.FWI.rawValue {
                     subscriptionPlanType = .FWI
-                } else if role.uppercased().contains(PackageType.jamaica.rawValue) {
+                } else if role.uppercased().contains(AccountType.jamaica.rawValue) && type == PackageType.jamaica.rawValue {
                     subscriptionPlanType = .jamaica
                 }
             } else {

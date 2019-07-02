@@ -61,4 +61,9 @@ extension Date: Components {
         let time = floor(timeIntervalSinceReferenceDate / 60.0) * 60.0
         return Date(timeIntervalSinceReferenceDate: time)
     }
+    
+    var millisecondsSince1970: Int {
+        return (timeIntervalSince1970 * 1000.0).toInt() ?? 0
+    }
+    
 }

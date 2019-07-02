@@ -15,3 +15,11 @@ public extension Array where Element: Equatable {
         }
     }
 }
+
+public extension Array {
+    public mutating func append(_ newElement: Element?) {
+        if let element = newElement {
+            self.append(element)
+        }
+    }
+}

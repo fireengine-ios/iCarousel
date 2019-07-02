@@ -18,7 +18,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 
     var contactSyncResponse: ContactSync.SyncResponse?
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
-    let reachability = ReachabilityService()
+    let reachability = ReachabilityService.shared
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -110,10 +110,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                 self.router.goToManageContacts(moduleOutput: self)
             }
         }
-    }
-    
-    func onDeinit() {
-        interactor.startOperation(operationType: .cancel)
     }
     
     func showNoBackUp() {

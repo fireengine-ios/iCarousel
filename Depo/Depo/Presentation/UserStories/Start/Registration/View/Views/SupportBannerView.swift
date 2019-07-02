@@ -19,7 +19,6 @@ final class SupportBannerView: UIView {
         
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         newValue.textColor = ColorConstants.whiteColor
-        newValue.text = TextConstants.signupSupportInfo
         newValue.numberOfLines = 0
         newValue.isOpaque = true
 
@@ -48,6 +47,12 @@ final class SupportBannerView: UIView {
     
     override class var layerClass: Swift.AnyClass {
         return CAGradientLayer.self
+    }
+    
+    var message: String = TextConstants.signupSupportInfo {
+        willSet {
+            messageLabel.text = newValue
+        }
     }
     
     weak var delegate: SupportBannerViewDelegate?

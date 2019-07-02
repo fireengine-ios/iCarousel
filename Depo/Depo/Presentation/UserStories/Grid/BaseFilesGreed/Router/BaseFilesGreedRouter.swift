@@ -67,9 +67,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func showSearchScreen(output: UIViewController?) {
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         router.pushViewController(viewController: controller)
     }
     

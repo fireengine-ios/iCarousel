@@ -25,7 +25,7 @@ protocol BaseItemInputPassingProtocol: class {
     
     func openInstaPick()
     
-    var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems)
 }
 
 protocol BaseItemOuputPassingProtocol: class {

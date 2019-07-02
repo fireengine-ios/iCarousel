@@ -28,8 +28,8 @@ final class PrepareToAutoSync: BaseView {
         progressView.progressTintColor = ColorConstants.blueColor
         progressView.setProgress(0, animated: false)
         
-        let isWiFi = ReachabilityService().isReachableViaWiFi
-        if (isWiFi) {
+        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
+        if isWiFi {
             titleImageView.image = UIImage(named: "SyncingViaWiFiPopUpImage")
         } else {
             titleImageView.image = UIImage(named: "SyncingPopUpImage")

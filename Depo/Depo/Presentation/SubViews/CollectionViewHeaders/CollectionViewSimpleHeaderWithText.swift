@@ -27,6 +27,16 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         backgroundColor = ColorConstants.bottomViewGrayColor
     }
     
+    func setup(with object: MediaItem) {
+        let title: String
+        if object.monthValue != nil, let date = object.sortingDate as Date? {
+            title = date.getDateInTextForCollectionViewHeader()
+        } else {
+            title = TextConstants.photosVideosViewMissingDatesHeaderText
+        }
+        setText(text: title)
+    }
+    
     func setText(text: String?) {
         labelForTitle.text = text
     }

@@ -22,6 +22,7 @@ final class AppResponsivenessService {
     
     #if MAIN_APP
     func startMainAppUpdate() {
+        timer.tolerance = updateInterval * 0.1
         timer.fire()
     }
     #endif

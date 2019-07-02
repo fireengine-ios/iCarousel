@@ -339,6 +339,7 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                            CacheManager.shared.actualizeCache(completion: nil)
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -369,6 +370,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -390,10 +392,9 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            CoreDataStack.default.clearDataBase()
-            FreeAppSpace.default.clear()
-            CardsManager.default.stopAllOperations()
-            CardsManager.default.clear()
+            CellImageManager.clear()
+            FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
+            FreeAppSpace.session.handleLogout()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()
@@ -407,13 +408,18 @@ class AuthenticationService: BaseRequestService {
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
+            CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
+            
             self.player.stop()
             self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
-            WormholePoster().didLogout()
-
-            success?()
+            
+            CacheManager.shared.logout {
+                WormholePoster().didLogout()
+                success?()
+            }
         }
         if async {
             DispatchQueue.main.async {
