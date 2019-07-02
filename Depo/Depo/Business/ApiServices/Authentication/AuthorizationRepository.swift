@@ -104,7 +104,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         
         #if MAIN_APP
         if let url = request.request?.url?.absoluteString {
-            debugLog("401 for \(url)")
+            debugLog("401 for an URL that is hidden because of the safety requirements")
         } else {
             debugLog("request.request?.url?.absoluteString is nil")
         }

@@ -58,9 +58,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         debugLog("ItemSyncServiceImpl start")
         
-        guard !CoreDataStack.default.inProcessAppendingLocalFiles else {
+        guard CacheManager.shared.isCacheActualized else {
             /// don't need to change status because it's fake preparation until CoreData processing is done
-            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+//            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
         
@@ -90,7 +90,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
-        CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
+        MediaItemOperationsService.shared.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
             guard let `self` = self else {
                 return
             }
@@ -224,6 +224,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     // MARK: - Override me
     
-    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {}
+    func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {}
 
 }

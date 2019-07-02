@@ -15,7 +15,7 @@ class SyncServiceManager {
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.autosync)
     
-    private let reachabilityService = Reachability()
+    private let reachabilityService = ReachabilityService.shared
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -75,7 +75,7 @@ class SyncServiceManager {
     }
     
     deinit {
-        reachabilityService?.stopNotifier()
+        reachabilityService.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -129,32 +129,6 @@ class SyncServiceManager {
     
     // MARK: - Private
     
-    private func setupAPIReachability() {
-        APIReachabilityService.shared.startNotifier()
-    }
-    
-    private func setupReachability() {
-        guard let reachability = reachabilityService else {
-            return
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("\(#function): can't start reachability notifier")
-        }
-        
-        reachability.whenReachable = { reachability in
-            debugPrint("AUTOSYNC: is reachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
-        }
-        
-        reachability.whenUnreachable = { reachability in
-            debugPrint("AUTOSYNC: is unreachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
-        }
-    }
-    
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         debugPrint("AUTOSYNC: checkReachabilityAndSettings")
         dispatchQueue.async { [weak self] in
@@ -172,25 +146,19 @@ class SyncServiceManager {
             
             CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
             
-            guard let reachability = self.reachabilityService else {
-                print("\(#function): reachabilityService is nil")
-                return
-            }
-            
             let photoOption = self.settings.photoSetting.option
             let videoOption = self.settings.videoSetting.option
-            let serverIsReachable = (reachability.connection != .none && APIReachabilityService.shared.connection != .unreachable)
             
-            if serverIsReachable {
-                let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
-                    (reachability.connection == .cellular && photoOption == .wifiAndCellular)
+            if self.reachabilityService.isReachable {
+                let photoEnabled = (self.reachabilityService.isReachableViaWiFi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (self.reachabilityService.isReachableViaWWAN && photoOption == .wifiAndCellular)
                 
-                let videoEnabled = (reachability.connection == .wifi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
-                    (reachability.connection == .cellular && videoOption == .wifiAndCellular)
+                let videoEnabled = (self.reachabilityService.isReachableViaWiFi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (self.reachabilityService.isReachableViaWWAN && videoOption == .wifiAndCellular)
                 
-                let photoServiceWaitingForWiFi = reachability.connection == .cellular && photoOption == .wifiOnly
+                let photoServiceWaitingForWiFi = self.reachabilityService.isReachableViaWWAN && photoOption == .wifiOnly
                 //                itemsSortedToUpload if 0 then no
-                let videoServiceWaitingForWiFi = reachability.connection == .cellular && videoOption == .wifiOnly
+                let videoServiceWaitingForWiFi = self.reachabilityService.isReachableViaWWAN && videoOption == .wifiOnly
                 
                 let shoudStopPhotoSync = !photoEnabled && !photoServiceWaitingForWiFi
                 let shouldStopVideoSync = !videoEnabled && !videoServiceWaitingForWiFi
@@ -262,8 +230,7 @@ extension SyncServiceManager {
             return
         }
         isSubscribeForNotifications = true
-        setupReachability()
-        setupAPIReachability()
+        reachabilityService.delegates.add(self)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
@@ -274,11 +241,6 @@ extension SyncServiceManager {
         notificationCenter.addObserver(self,
                                        selector: #selector(onAutoSyncStatusDidChange),
                                        name: .autoSyncStatusDidChange,
-                                       object: nil)
-        
-        notificationCenter.addObserver(self,
-                                       selector: #selector(onAPIReachabilityDidChange),
-                                       name: .apiReachabilityDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
@@ -322,10 +284,6 @@ extension SyncServiceManager {
         }
     }
     
-    @objc private func onAPIReachabilityDidChange() {
-        self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
-    }
-    
     @objc private func onLocalFilesHaveBeenLoaded() {
         self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
@@ -340,22 +298,20 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .sync)
         
-        ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
-            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+//            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
-        ItemOperationManager.default.syncFinished()
+        FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, !CoreDataStack.default.inProcessAppendingLocalFiles {
+        if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }
@@ -404,3 +360,18 @@ extension SyncServiceManager {
         }
     }
 }
+
+//MARK: - ReachabilityServiceDelegate
+
+extension SyncServiceManager: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        if service.isReachable {
+            debugPrint("AUTOSYNC: is reachable")
+            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
+        } else {
+            debugPrint("AUTOSYNC: is unreachable")
+            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
+        }
+    }
+}
+

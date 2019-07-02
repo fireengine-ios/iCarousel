@@ -154,7 +154,9 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func cancelAnalyze() {
-        ContactSyncSDK.cancelAnalyze()
+        if ContactSyncSDK.isRunning() {
+            ContactSyncSDK.cancelAnalyze()
+        }
     }
     
     func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?, errorCallback: ErrorCallback?) {

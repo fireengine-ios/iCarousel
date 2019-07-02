@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PeriodicContactSyncSettingsTableViewCellDelegate {
+protocol PeriodicContactSyncSettingsTableViewCellDelegate: class {
     func didChangeTime(setting: PeriodicContactsSyncSetting)
     func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell)
 }
@@ -28,7 +28,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     private var isFromSettings: Bool = false
     
-    var delegate: PeriodicContactSyncSettingsTableViewCellDelegate?
+    weak var delegate: PeriodicContactSyncSettingsTableViewCellDelegate?
     
     private var periodicContactSyncSetting = PeriodicContactsSyncSetting(option: .daily) {
         didSet {
@@ -43,7 +43,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .clear
         
-        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.font = .TurkcellSaturaDemFont(size: 18)
         
         ///iPad, iOS < 10, prevent white color
@@ -66,20 +66,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         optionsStackView.isHidden = !model.isSelected
         separatorView.isHidden = !model.isSelected
         periodicContactSyncSetting = setting
-    }
-    
-    func setColors(isFromSettings: Bool) {
-        self.isFromSettings = isFromSettings
-        titleLabel.textColor = ColorConstants.textGrayColor
-        
-        for view in optionsViews {
-            view.delegate = self
-            view.setColors()
-        }
-        
-        for separator in optionSeparators {
-            separator.backgroundColor = ColorConstants.lightGrayColor
-        }
     }
     
     private func updateViews() {

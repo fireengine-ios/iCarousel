@@ -22,10 +22,10 @@ final class VideoSyncService: ItemSyncServiceImpl {
         self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
 
-    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
+    override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
+        MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
             ///reversed video sync interruption fix
-//            let isMobileData = ReachabilityService().isReachableViaWWAN
+            //            let isMobileData = ReachabilityService.shared.isReachableViaWWAN
             let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
             
             completion(items.filter { item in
@@ -34,22 +34,21 @@ final class VideoSyncService: ItemSyncServiceImpl {
                 }
                 
                 ///reversed video sync interruption fix
-//                if isMobileData {
-//                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
-//                }
-
+                //                if isMobileData {
+                //                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
+                //                }
+                
                 ///is WIFI
                 return true
-            }.sorted(by: { $0.fileSize < $1.fileSize }))
+            })
         }
-        getUnsyncedOperationQueue.addOperation(operation)
     }
     
     override func start(newItems: Bool) {
         super.start(newItems: newItems)
         
         // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService().isReachableViaWiFi
+//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
 //        isWiFi ? MenloworksTagsService.shared.onAutosyncVideoViaWifi() : MenloworksTagsService.shared.onAutosyncVideoViaLte()
         
     }
@@ -81,13 +80,14 @@ final class VideoSyncService: ItemSyncServiceImpl {
 
 extension VideoSyncService: BackgroundTaskServiceDelegate {
     func backgroundTaskWillExpire() {
-        if status == .executing, ReachabilityService().isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
+        if status == .executing, ReachabilityService.shared.isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
             debugLog("Interrupted autosync queue:")
-            CoreDataStack.default.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { localItems in
-                localItems.forEach { debugLog($0.name ?? "") }
-            }            
-            stop()
+            
+            MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { [weak self] mediaItems in
+                mediaItems.forEach { debugLog($0.name ?? "") }
+                self?.stop()
+            }
         }
     }
 }

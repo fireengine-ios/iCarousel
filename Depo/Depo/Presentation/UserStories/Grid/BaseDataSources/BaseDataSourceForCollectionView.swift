@@ -166,6 +166,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var currentTopSection: Int?
     
+    private var assetFilesCacheManager = AssetFileCacheManager()
+    
+    
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
         super.init()
@@ -867,7 +870,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             
             guard let `self` = self, let collectionView = self.collectionView else {
                 return
@@ -881,14 +884,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             if self.numberOfSections(in: collectionView) == 0 {
                 self.updateVisibleCells()
-                self.resetCachedAssets()
+                self.assetFilesCacheManager.resetCachedAssets()
                 return
             }
-            
-//            collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
-            self.updateVisibleCells()
-//            })
-            self.resetCachedAssets()
+
+            collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
+                self?.updateVisibleCells()
+            })
+            self.assetFilesCacheManager.resetCachedAssets()
         }
     }
     
@@ -896,7 +899,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         displayingType = type
         
         debugPrint("Reload updateDisplayngType")
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             CellImageManager.clear()
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
@@ -1085,7 +1088,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
         
-        updateCachedAssets()
+        assetFilesCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         
         if needShowCustomScrollIndicator {
             let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
@@ -1638,20 +1641,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func deleteItems(items: [Item]) {
         dispatchQueue.async { [weak self] in
-            let deleteOperation = BlockOperation{ [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                
-                let semaphore = DispatchSemaphore(value: 0)
-                
-                if self.allItems.isEmpty { /// no need for signals here, cuz we never reach semaphore wait
-                    return
-                }
+
                 guard !items.isEmpty else {
                     return
                 }
-                
+                        
                 var idsForRemove = [String]()
                 var objectsForReplaceDict = [String : Item]()
                 
@@ -1675,78 +1672,74 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         }
                     }
                     
-                    let localIDs = serverObjects.map {
+                    
+                let localIDs = serverObjects.map {
+                    $0.getTrimmedLocalID()
+                }
+                    
+                let semaphore = DispatchSemaphore(value: 0)
+
+                MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
+                    let foundedLocalID = localObjectsForReplace.map {
                         $0.getTrimmedLocalID()
                     }
-                    //FIXME: check new compounder for locals
-                    CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs, completion: { localItems in
-                        var localObjectsForReplace = localItems
-                        let foundedLocalID = localObjectsForReplace.map {
-                            $0.getTrimmedLocalID()
-                        }
-                        for object in serverObjects {
-                            let trimmedID = object.getTrimmedLocalID()
-                            if let index = foundedLocalID.index(of: trimmedID) {
-                                let objForReplace = localObjectsForReplace[index]
-                                if let index = allItemsIDs.index(of: trimmedID){
-                                    allItemsIDs.remove(at: index)
-                                    if allItemsIDs.contains(trimmedID) {
-                                        idsForRemove.append(object.uuid)
-                                    } else {
-                                        objectsForReplaceDict[object.uuid] = objForReplace
-                                    }
+                    for object in serverObjects {
+                        let trimmedID = object.getTrimmedLocalID()
+                        if let index = foundedLocalID.index(of: trimmedID) {
+                            let objForReplace = localObjectsForReplace[index]
+                            if let index = allItemsIDs.index(of: trimmedID){
+                                allItemsIDs.remove(at: index)
+                                if allItemsIDs.contains(trimmedID) {
+                                    idsForRemove.append(object.uuid)
+                                } else {
+                                    objectsForReplaceDict[object.uuid] = objForReplace
                                 }
-                            } else {
-                                idsForRemove.append(object.uuid)
                             }
+                        } else {
+                            idsForRemove.append(object.uuid)
                         }
-                        semaphore.signal()
-                    })
-                } else {
-                    idsForRemove = items.map{
-                        $0.uuid
                     }
                     semaphore.signal()
-                }
-                
+                }  
                 semaphore.wait()
-                
-                self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
-                
-                var newArray = [[WrapData]]()
-                
-                var recentlyUpdatedIndexes = [IndexPath]()
-                var recentlyDeletedIndexes = [IndexPath]()
-                var recentlyDeletedSections =  IndexSet()
-                
-                for (index, array) in self.allItems.enumerated() {
-                    var newSectionArray = [WrapData]()
-                    for object in array {
-                        
-                        if let index = idsForRemove.index(of: object.getLocalID()) {
-                            self.allMediaItems.remove(object)
-                            idsForRemove.remove(at: index)
-                            recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
-                            continue
-                        }
-                        if let obj = objectsForReplaceDict[object.uuid] {
-                            newSectionArray.append(obj)
-                            recentlyUpdatedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))
-                            continue
-                        }
+            } else {
+                idsForRemove = items.map{
+                    $0.uuid
+                }
+            }
+            
+            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+
+            var newArray = [[WrapData]]()
+            
+            var recentlyUpdatedIndexes = [IndexPath]()
+            var recentlyDeletedIndexes = [IndexPath]()
+            var recentlyDeletedSections =  IndexSet()
+
+            for (index, array) in self.allItems.enumerated() {
+                var newSectionArray = [WrapData]()
+                for object in array {
+                    
+                    if let index = idsForRemove.index(of: object.getLocalID()) {
+                        self.allMediaItems.remove(object)
+                        idsForRemove.remove(at: index)
+                        recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
+                    } else {
                         newSectionArray.append(object)
                     }
-                    if !newSectionArray.isEmpty {
-                        newArray.append(newSectionArray)
-                    } else {
-                        recentlyDeletedSections.insert(index)
-                    }
                 }
                 
-                DispatchQueue.toMain {
-                    self.allItems = newArray
-                    CellImageManager.clear()
-                    self.collectionView?.reloadData()
+                if newSectionArray.isEmpty {
+                    recentlyDeletedSections.insert(index)
+                } else {
+                    newArray.append(newSectionArray)
+                }
+            }
+
+            DispatchQueue.toMain {
+                CellImageManager.clear()
+                self.allItems = newArray
+                self.collectionView?.reloadData()
 //                    //change performBatchUpdates to the reladData() in case of crash
 //                                    self.collectionView?.performBatchUpdates({
 //                    //                    self.allItems = newArray
@@ -1755,24 +1748,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                    //                    self.collectionView?.deleteSections(recentlyDeletedSections)
 //
 //                                    }, completion: { _ in
-                    //update folder items count
-                    if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                        self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
-                    }
-                    
-                    recentlyDeletedIndexes.removeAll()
-                    recentlyDeletedSections.removeAll()
-                    recentlyUpdatedIndexes.removeAll()
-                    
-                    self.delegate?.didDelete(items: items)
-                    
-                    self.updateCoverPhoto()
-                    semaphore.signal()
+                //update folder items count
+                if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                    self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
                 }
-                semaphore.wait()
+                    
+                recentlyDeletedIndexes.removeAll()
+                recentlyDeletedSections.removeAll()
+                recentlyUpdatedIndexes.removeAll()
+                    
+                self.delegate?.didDelete(items: items)
+                    
+                self.updateCoverPhoto()
             }
-            deleteOperation.queuePriority = .high
-            self?.batchOperations.addOperation(deleteOperation)
         }
     }
     
@@ -1974,95 +1962,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
 
 extension BaseDataSourceForCollectionView {
-
-    fileprivate func resetCachedAssets() {
-        filesDataSource.stopCahcingAllImages()
-        previousPreheatRect = .zero
-    }
     
-    fileprivate func updateCachedAssets() {
-        // Update only if the view is visible.
-        guard
-            let collectionView = collectionView,
-            let view = collectionView.superview,
-            view.window != nil,
-            !allItems.isEmpty
-        else {
-            return
-        }
-        
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            return
-        }
-        
-        // The preheat window is twice the height of the visible rect.
-        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
-        let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.5 * visibleRect.height)
-        
-        // Update only if the visible area is significantly different from the last preheated area.
-        let delta = abs(preheatRect.midY - previousPreheatRect.midY)
-        guard delta > view.bounds.height / 3 else { return }
-        
-        // Compute the assets to start caching and to stop caching.
-        let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
-        let addedAssets = addedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap { (indexPath) -> PHAsset? in
-                var asset: PHAsset?
-                if let item = itemForIndexPath(indexPath: indexPath) as? Item {
-                    if case let PathForItem.localMediaContent(local) = item.patchToPreview {
-                        asset = local.asset
-                    }
-                }
-                return asset
-        }
-        let removedAssets = removedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap {  (indexPath) -> PHAsset? in
-                var asset: PHAsset?
-                if let item = itemForIndexPath(indexPath: indexPath) as? Item {
-                    if case let PathForItem.localMediaContent(local) = item.patchToPreview {
-                        asset = local.asset
-                    }
-                }
-                return asset
-        }
-        
-        // Update the assets the PHCachingImageManager is caching.
-        filesDataSource.startCahcingImages(for: addedAssets)
-//        print("Started \(addedAssets.count) request(s) of images")
-        filesDataSource.stopCahcingImages(for: removedAssets)
-//        print("Removed \(removedAssets.count) request(s) of images")
-        
-        // Store the preheat rect to compare against in the future.
-        previousPreheatRect = preheatRect
-    }
-    
-    fileprivate func differencesBetweenRects(_ old: CGRect, _ new: CGRect) -> (added: [CGRect], removed: [CGRect]) {
-        if old.intersects(new) {
-            var added = [CGRect]()
-            if new.maxY > old.maxY {
-                added += [CGRect(x: new.origin.x, y: old.maxY,
-                                 width: new.width, height: new.maxY - old.maxY)]
+    private var itemProviderClosure: ItemProviderClosure {
+        return { [weak self] indexPath in
+            if let item = self?.itemForIndexPath(indexPath: indexPath) as? Item {
+                return item.asset
             }
-            if old.minY > new.minY {
-                added += [CGRect(x: new.origin.x, y: new.minY,
-                                 width: new.width, height: old.minY - new.minY)]
-            }
-            var removed = [CGRect]()
-            if new.maxY < old.maxY {
-                removed += [CGRect(x: new.origin.x, y: new.maxY,
-                                   width: new.width, height: old.maxY - new.maxY)]
-            }
-            if old.minY < new.minY {
-                removed += [CGRect(x: new.origin.x, y: old.minY,
-                                   width: new.width, height: new.minY - old.minY)]
-            }
-            return (added, removed)
-        } else {
-            return ([new], [old])
+            return nil
         }
     }
-
 }
 

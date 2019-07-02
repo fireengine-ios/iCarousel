@@ -24,8 +24,10 @@ extension MediaItemsMetaData {
     @NSManaged public var largeUrl: String?
     @NSManaged public var mediumUrl: String?
     @NSManaged public var smalURl: String?
+    @NSManaged public var videoPreviewUrl: String?
     @NSManaged public var title: String?
     @NSManaged public var width: Int16
     @NSManaged public var item: MediaItem?
+    @NSManaged public var takenDate: NSDate?
 
 }

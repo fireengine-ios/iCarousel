@@ -75,8 +75,8 @@ enum PackageType: String {
     case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
     case paycellSLCM                = "PAYCELL_SLCM"
     case albanian                   = "ALBTELECOM"
-    case FWI                        = "FWI"
-    case jamaica                    = "JAMAICA"
+    case FWI                        = "DIGICELL_FWI"
+    case jamaica                    = "DIGICELL_JAMAICA"
 
     var cancelText: String {
         switch self {

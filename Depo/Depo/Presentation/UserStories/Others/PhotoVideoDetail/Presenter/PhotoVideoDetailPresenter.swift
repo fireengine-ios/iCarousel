@@ -56,12 +56,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
         view.onShowSelectedItem(at: index, from: items)
-
-        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
-
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
-        bottomBarPresenter?.setupTabBarWith(config: barConfig)
-        view.onItemSelected(at: index, from: items)
+        getSelectedItems { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+            
+            let barConfig = self.prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
+            self.bottomBarPresenter?.setupTabBarWith(config: barConfig)
+            self.view.onItemSelected(at: index, from: items)
+        }
     }
     
     func setSelectedItemIndex(selectedIndex: Int) {
@@ -139,9 +143,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     // MARK: presenter output
     
-    var selectedItems: [BaseDataSourceItem] {
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
-        return [currentItem]
+        selectedItemsCallback([currentItem])
     }
     
 

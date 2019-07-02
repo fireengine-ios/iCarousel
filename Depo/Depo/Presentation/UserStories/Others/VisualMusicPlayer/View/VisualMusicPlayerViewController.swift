@@ -66,7 +66,7 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         
         editingTabBar?.view.layoutIfNeeded()
         
-        output.viewIsReady(view: bottomView)
+        output.viewIsReady(view: bottomView, alert: alert)
         hidenNavigationBarStyle()
     }
     

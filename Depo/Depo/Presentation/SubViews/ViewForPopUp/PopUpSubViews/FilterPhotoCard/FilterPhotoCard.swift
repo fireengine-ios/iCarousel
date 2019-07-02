@@ -85,7 +85,7 @@ final class FilterPhotoCard: BaseView {
         }
         bottomButton.isHidden = true
         DispatchQueue.toBackground {
-            CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
+            MediaItemOperationsService.shared.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
                 guard let `self` = self else {
                     return
                 }
@@ -218,7 +218,7 @@ final class FilterPhotoCard: BaseView {
 //        bottomButton.isEnabled = false
         LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped, success: { [weak self] in
             self?.cardType = .display
-        }, fail: {
+        }, fail: { _ in
             ///PH access popup
             LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true, completion: { granted,_  in
                 debugPrint("granted \(granted)")

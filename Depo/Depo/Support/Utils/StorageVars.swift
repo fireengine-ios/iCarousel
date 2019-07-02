@@ -119,6 +119,11 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
     }
     
+    var currentRemotesPage: Int {
+        get { return UserDefaults.standard.integer(forKey: Keys.lastRemotesPageSaved) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.lastRemotesPageSaved) }
+    }
+    
     private let blockedUsersKey = "BlockedUsers"
     var blockedUsers: [String : Date] {
         get { return userDefaults.object(forKey: blockedUsersKey) as? [String : Date] ?? [:]}

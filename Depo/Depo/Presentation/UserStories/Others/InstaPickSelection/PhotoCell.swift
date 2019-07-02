@@ -137,7 +137,7 @@ final class PhotoCell: UICollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             DispatchQueue.toMain {
                 guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
                     return
@@ -165,7 +165,7 @@ final class PhotoCell: UICollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             DispatchQueue.toMain {
                 guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
                     return
