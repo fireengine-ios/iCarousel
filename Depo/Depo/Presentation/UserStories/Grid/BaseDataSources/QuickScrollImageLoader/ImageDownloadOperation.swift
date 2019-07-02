@@ -18,7 +18,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
     ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
-    private var task: DataRequest?//URLSessionTask?
+    private var task: URLSessionTask?
     private let queue: DispatchQueue
     
     init(url: URL?, queue: DispatchQueue) {
@@ -37,10 +37,11 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     override func cancel() {
         super.cancel()
         
-        task?.cancel()
-        task = nil
-        outputBlock?(nil)
-        semaphore.signal()
+        DispatchQueue.main.async {
+            self.task?.cancel()
+            self.task = nil
+        }
+//        semaphore.signal()
     }
     
     override func main() {
@@ -52,6 +53,8 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             outputBlock?(nil)
             return
         }
+        
+        var outputImage: UIImage? = nil
         
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
@@ -65,16 +68,23 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                 }
                 
                 guard let data = dataResponse.value, let image = UIImage(data: data) else {
-                    self.outputBlock?(nil)
                     self.semaphore.signal()
                     return
                 }
                 
-                self.outputBlock?(image)
+                outputImage = image
                 self.semaphore.signal()
             })
-            //.task
+            .task
+        
+        task?.priority = URLSessionTask.lowPriority
         
         semaphore.wait()
+        
+        defer {
+            task?.cancel()
+            outputBlock?(outputImage)
+            semaphore.signal()
+        }
     }
 }
