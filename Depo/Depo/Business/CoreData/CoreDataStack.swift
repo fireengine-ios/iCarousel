@@ -13,8 +13,8 @@ final class CoreDataStack: NSObject {
     
     static let `default` = CoreDataStack()
     
-    private let modelName = "LifeBoxModel"
-    private let persistentStoreName = "DataModel"
+    private static let modelName = "LifeBoxModel"
+    private static let persistentStoreName = "DataModel"
     
     
     private override init() {
@@ -46,7 +46,7 @@ final class CoreDataStack: NSObject {
     
     @available(iOS 10.0, *)
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: modelName)
+        let container = NSPersistentContainer(name: CoreDataStack.modelName)
         
         let loadDefaultStore = {
             container.loadPersistentStores { (storeDescription, error) in
@@ -64,7 +64,7 @@ final class CoreDataStack: NSObject {
         }
         
         do {
-            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
+            let url = documents.appendingPathComponent("\(CoreDataStack.persistentStoreName).sqlite")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: false]
             try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
@@ -77,9 +77,9 @@ final class CoreDataStack: NSObject {
 
     
     ///--- available iOS 9
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    private let persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         do {
-            return try NSPersistentStoreCoordinator.coordinator(modelName: modelName, persistentStoreName: persistentStoreName)
+            return try NSPersistentStoreCoordinator.coordinator(modelName: CoreDataStack.modelName, persistentStoreName: CoreDataStack.persistentStoreName)
         } catch {
             print("CoreData: Unresolved error \(error)")
         }
