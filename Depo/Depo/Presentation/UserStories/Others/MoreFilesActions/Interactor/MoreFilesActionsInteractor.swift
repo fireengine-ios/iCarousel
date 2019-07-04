@@ -488,9 +488,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func createStory(items: [BaseDataSourceItem]) {
-        sync(items: items, action: { [weak self] in
+        sync(items: items, action: {
             DispatchQueue.main.async {
-                self?.router.createStoryName(items: items)
+                guard let items = items as? [Item] else {
+                    let error = CustomErrors.text("An error has occured while images converting.")
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    return
+                }
+                
+                let router = RouterVC()
+                let controller = router.createStory(items: items)
+                router.pushViewController(viewController: controller)
             }
             }, cancel: {}, fail: { errorResponse in
                 UIApplication.showErrorAlert(message: errorResponse.description)

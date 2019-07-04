@@ -45,19 +45,25 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     var player: AVPlayer?
     var playerController: FixedAVPlayerViewController?
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .black
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         blackNavigationBarStyle()
+        
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
+                                                             style: .plain,
+                                                             target: nil,
+                                                             action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
                                                             target: self,
                                                             selector: #selector(onSaveButton))
         
         output.viewIsReady()
-    }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .black
     }
     
     @IBAction func onPlayButton() {

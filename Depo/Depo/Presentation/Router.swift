@@ -179,8 +179,8 @@ class RouterVC: NSObject {
             var index: Int? = nil
             
             for (i, viewController) in viewControllers.enumerated() {
-                if viewController is CreateStoryPhotoSelectionViewController
-                    || viewController is CreateStoryPhotosOrderViewController {
+                if viewController is CreateStorySelectionController
+                    || viewController is CreateStoryViewController {
                     index = i
                     break
                 }
@@ -536,16 +536,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: CreateStory name
-    
-    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
-        controller.output.items = items
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
-    }
-    
     // MARK: - SearchView
     
     func searchView(navigationController: UINavigationController?, output: SearchModuleOutput? = nil) -> UIViewController {
@@ -575,14 +565,6 @@ class RouterVC: NSObject {
     
     func audioSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
-        return controller
-    }
-    
-    
-    // MARK: CreateStory photos order 
-    
-    func photosOrder(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryPhotosOrderModuleInitializer.initializeViewController(with: "CreateStoryPhotosOrderViewController", story: story)
         return controller
     }
     
@@ -928,5 +910,13 @@ class RouterVC: NSObject {
     
     var supportFormController: UIViewController {
         return SupportFormController()
+    }
+    
+    func createStory(navTitle: String) -> UIViewController {
+        return CreateStorySelectionController(title: navTitle)
+    }
+    
+    func createStory(items: [Item]) -> UIViewController {
+        return CreateStoryViewController(images: items)
     }
 }

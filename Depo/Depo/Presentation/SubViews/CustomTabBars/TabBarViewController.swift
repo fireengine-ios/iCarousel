@@ -803,9 +803,9 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .createStory:
 //            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.click)) //FE-55
-            let isFavorites = router.isOnFavoritesView()
-            router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
-            
+            let controller = router.createStory(navTitle: TextConstants.createStory)
+            router.pushViewController(viewController: controller)
+
         case .upload:
             guard !checkReadOnlyPermission() else { return }
             

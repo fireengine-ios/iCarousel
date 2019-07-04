@@ -499,10 +499,6 @@ struct TextConstants {
     static let isPeriodicContactsSyncEnabledKey = NSLocalizedString("isPeriodicContactsSyncEnabledKey", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Name
-    static let createStoryNameTitle = NSLocalizedString("Create a Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryNamePlaceholder = NSLocalizedString("Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryNameSave = NSLocalizedString("SAVE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryEmptyTextError = NSLocalizedString("Sorry, but story name should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Photos
@@ -512,11 +508,8 @@ struct TextConstants {
     static let createStoryPhotosHeaderTitle = NSLocalizedString("Please Choose 20 files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosMaxCountAllert = NSLocalizedString("Please choose %d files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryNoSelectedPhotosError = NSLocalizedString("Sorry, but story photos should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryCreated = NSLocalizedString("Story created", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryNotCreated = NSLocalizedString("Story not created", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let failWhileAddingToAlbum = NSLocalizedString("Fail while adding to album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryMusicEmpty = NSLocalizedString("You did not choose music for your story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryAddMusic = NSLocalizedString("Add music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Audio
     static let createStoryNoSelectedAudioError = NSLocalizedString("Sorry, but story audio should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -524,12 +517,10 @@ struct TextConstants {
     static let createStoryAudioMusics = NSLocalizedString("Musics", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryAudioYourUploads = NSLocalizedString("Your Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    
     // MARK: Create story Photo Order
     static let createStoryPhotosOrderNextButton = NSLocalizedString("Create", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStorySave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosOrderTitle = NSLocalizedString("You can change the sequence ", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryCancel = NSLocalizedString("Canceled Create Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Stories View
     static let storiesViewNoStoriesTitleText = NSLocalizedString("You don’t have any stories  on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1261,4 +1252,13 @@ struct TextConstants {
     static let myProfileFAQ = NSLocalizedString("frequently_asked_questions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let photoPickDescription = NSLocalizedString("photo_pick_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let createStoryPhotosSelected = NSLocalizedString("create_story_photos_selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPressAndHoldDescription = NSLocalizedString("create_story_press_and_hold_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPressAndHold = NSLocalizedString("create_story_press_and_hold", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryNameTitle = NSLocalizedString("create_story_name_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let createStoryPopUpTitle = NSLocalizedString("create_story_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPopUpMessage = NSLocalizedString("create_story_pop_up_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPathToStory = NSLocalizedString("create_story_path_to_story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

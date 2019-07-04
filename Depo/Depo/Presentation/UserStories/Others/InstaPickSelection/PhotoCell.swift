@@ -151,6 +151,34 @@ final class PhotoCell: UICollectionViewCell {
         cellImageManager?.loadImage(thumbnailUrl: metadata.smalURl, url: metadata.mediumUrl, completionBlock: imageSetBlock)
     }
     
+    func setup(by item: Item) {
+        guard let metadata = item.metaData else {
+            return
+        }
+        
+        if let isFavourite = metadata.favourite {
+            favouriteImageView.isHidden = !isFavourite
+        }
+        
+        // image
+        let cacheKey = metadata.mediumUrl?.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                let needAnimate = !cached && (self?.imageView.image == nil)
+                self?.setImage(image: image, animated: needAnimate)
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: metadata.smalURl, url: metadata.mediumUrl, completionBlock: imageSetBlock)
+    }
+    
     private func setImage(image: UIImage?, animated: Bool) {
         if animated {
             imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity

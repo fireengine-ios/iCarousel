@@ -1,10 +1,10 @@
 "Welcome1Info" = "Jetoni, Grumbulloni, Kujtoni";
-"Welcome1SubInfo" = "Grumbulloni fotot, videot dhe skedarët tuaja në lifebox! Aksesojini kujtimet kurdoherë e kudo që të jeni.";
-"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Shërbimet e vendndodhjes janë të çaktivizuara tek Rregullimet e pajisjes suaj. Për të përdorur funksionin e sinkronizimit të sfondit të lifebox, ju duhet të aktivizoni shërbimet e vendndodhjes nën menunë \"Rregullime - Privatësia - Shërbimet e Vendndodhjes\".";
+"Welcome1SubInfo" = "Grumbulloni fotot, videot dhe skedarët tuaja në lifedrive! Aksesojini kujtimet kurdoherë e kudo që të jeni.";
+"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Shërbimet e vendndodhjes janë të çaktivizuara tek Rregullimet e pajisjes suaj. Për të përdorur funksionin e sinkronizimit të sfondit të lifedrive, ju duhet të aktivizoni shërbimet e vendndodhjes nën menunë \"Rregullime - Privatësia - Shërbimet e Vendndodhjes\".";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Ky skedar do të hiqet vetëm nga albumi juaj. Ju mund ta aksesoni këtë skedar nga tab-i i Fotove";
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Fshirja e këtij albumi nuk do t'i heqë skedarët nga lifebox. Ju mund t'i aksesoni këto skedarë nga tab-i i Fotove. A jeni i sigurt që dëshironi t'i fshini?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Fshirja e këtij skedari do t'i heqë ato çka ajo pëmban nga lifebox. Ju nuk do të keni mundësi t'i aksesoni ato pasi të jenë fshirë. A jeni i sigurt se dëshironi ta fshini?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Fshirja e këtyre skedarëve do t'i heqë ato nga lifebox. Ju nuk do të keni mundësi t'i aksesoni ato pasi të jenë fshirë.";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Fshirja e këtij albumi nuk do t'i heqë skedarët nga lifedrive. Ju mund t'i aksesoni këto skedarë nga tab-i i Fotove. A jeni i sigurt që dëshironi t'i fshini?";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Fshirja e këtij skedari do t'i heqë ato çka ajo pëmban nga lifedrive. Ju nuk do të keni mundësi t'i aksesoni ato pasi të jenë fshirë. A jeni i sigurt se dëshironi ta fshini?";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Fshirja e këtyre skedarëve do t'i heqë ato nga lifedrive. Ju nuk do të keni mundësi t'i aksesoni ato pasi të jenë fshirë.";
 "Purchase" = "Blini";
 "Packages" = "Paketa";
 "Verification code is blocked.\nPlease request a new code" = "Kodi i Verifikimit është i bllokuar. Ju lutem, kërkoni një kod të ri.";
@@ -13,7 +13,7 @@
 "Please enter your promo code" = "Ju lutem, vendosni kodin e aktivizimit të paketës suaj.";
 "This package activation code is invalid" = "Ky kod aktivizimi për paketën është i pavlefshëm.";
 "Enter your promo code" = "Vendosni kodin e aktivizimit të paketës suaj.";
-"Lifebox campaign" = "Fushatë e lifebox";
+"Lifebox campaign" = "Fushatë e lifedrive";
 "Success" = "Me sukses";
 "Apply" = "Aplikoni";
 "Invalid passcode. %@ attempts left. Please try again" = "Kod kalimi i pavlefshëm. %@ përpjekje të mbetura. Ju lutem, provoni përsëri.";
@@ -21,14 +21,14 @@
 "Face ID" = "Identifikim me fytyrë";
 "Enable" = "Mundësoni";
 "Please activate %@ from your device settings to use this feature" = "Ju lutem, aktivizoni %@ nga Cilësimet e pajisjes suaj për ta përdorur këtë funksion.";
-"To enter passcode" = "Vendosni kodin e kalimit të lifebox.";
-"Set a Passcode" = "Përcaktoni një kod kalimi për lifebox.";
+"To enter passcode" = "Vendosni kodin e kalimit të lifedrive.";
+"Set a Passcode" = "Përcaktoni një kod kalimi për lifedrive.";
 "Passcodes don't match, please try again" = "Kodet e kalimit nuk përputhen. Ju lutem, provoni përseri.";
 "You successfully set your passcode" = "Ju përcaktuat me sukses kodin tuaj të kalimit.";
 "Passcode is changed successfully" = "Kodi i kalimit u ndryshua me sukses.";
-"Please repeate your new lifebox passcode" = "Ju lutem, rivendosni kodin tuaj të ri të kalimit për lifebox";
-"Please enter your lifebox passcode" = "Ju lutem, vendosni kodin tuaj të kalimit të lifebox";
-"lifebox Passcode" = "Kodi i kalimit për lifebox";
+"Please repeate your new lifebox passcode" = "Ju lutem, rivendosni kodin tuaj të ri të kalimit për lifedrive";
+"Please enter your lifebox passcode" = "Ju lutem, vendosni kodin tuaj të kalimit të lifedrive";
+"lifebox Passcode" = "Kodi i kalimit për lifedrive";
 "Change Passcode" = "Ndryshoni kodin e kalimit";
 "Passcode" = "Kodi i kalimit";
 "The package activation code is not active" = "Kodi i aktivizimit të paketës nuk është aktiv.";
@@ -67,13 +67,13 @@
 "Cancel" = "Anuloni";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Për të anuluar paketën, ju lutem dergoni tekstin \"IPTAL LIFEBOX %@\" në numrin 2200";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Për të anuluar paketën, ju lutem dergoni tekstin \"IPTAL LIFEDRIVE %@\" në numrin 2200";
 "You can visit iTunes to cancel your subscription" = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
-"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; abonentët e tjerë mund të dërgojnë LIFEBOX CANCEL në numrin 3030 për të anuluar anëtarësimet e tyre.";
-"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni SMS me tekst 50VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
-"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Për të filluar anëtarësimet e tyre, klientët platinum dhe lifecell mund të dërgojnë LIFE; klientët e tjerë mund të dërgojnë LIFEBOX 50GB për paketën lifebox 50GB, LIFEBOX 500GB për paketën lifebox 500GB dhe LIFEBOX 2.5TB për paketën lifebox 2.5TB; në numrin 3030. ";
-"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Çmime speciale për të gjithë përdoruesit lifecell! Për të aktivizuar lifebox 50GB për 24,99UAH/30 ditë, dërgoni SMS me tekst  50VKL; për lifebox 500GB për 52,99UAH/30 ditë, dërgoni SMS me tekst 500VKL në numrin 8080.";
+"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; abonentët e tjerë mund të dërgojnë LIFEDRIVE CANCEL në numrin 3030 për të anuluar anëtarësimet e tyre.";
+"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Për të çaktivizuar lifedrive 50GB, ju lutem dërgoni SMS me tekst 50VYKL; për lifedrive 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Për të filluar anëtarësimet e tyre, klientët platinum dhe lifecell mund të dërgojnë LIFE; klientët e tjerë mund të dërgojnë LIFEDRIVE 50GB për paketën lifedrive 50GB, LIFEDRIVE 500GB për paketën lifedrive 500GB dhe LIFEDRIVE 2.5TB për paketën lifedrive 2.5TB; në numrin 3030. ";
+"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Çmime speciale për të gjithë përdoruesit lifecell! Për të aktivizuar lifedrive 50GB për 24,99UAH/30 ditë, dërgoni SMS me tekst  50VKL; për lifedrive 500GB për 52,99UAH/30 ditë, dërgoni SMS me tekst 500VKL në numrin 8080.";
 "%ld docs" = "Dokumente %ld";
 "Quota info" = "Info përdorimi";
 "%@ of %@ has remained" = "Ka mbetur %1$@ of %2$@ ";
@@ -90,8 +90,8 @@
 "You have free space for %d more items." = "%d njësi të fshira nga pajisja juaj për të liruar arkivën e pajisjes suaj.";
 "Delete" = "Fshini";
 "Some photos will also be deleted from an album." = "Disa fotografi do të fshihen nga një album gjithashtu.";
-"Allow lifebox to delete %d photos?" = "E lejoni lifebox-in të fshijë %d foto?";
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "Ka %d foto të përsëritura në pajisjen e në lifebox-in tuaj. Pastroni pak hapësirë duke përzgjedhur fotot që dëshironi të fshini.";
+"Allow lifebox to delete %d photos?" = "E lejoni lifedrive-in të fshijë %d foto?";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "Ka %d foto të përsëritura në pajisjen e në lifedrive-in tuaj. Pastroni pak hapësirë duke përzgjedhur fotot që dëshironi të fshini.";
 "Download to Camera Roll" = "Shkarkoni Galerinë e Pajisjes. ";
 "Share Album" = "Shpërndani Albumin";
 "Album Details" = "Detajet e Albumit ";
@@ -102,7 +102,7 @@
 "Select All" = "Përzgjidhini të gjitha ";
 "Select" = "Përzgjidhini ";
 "More" = "Më shumë ";
-"lifebox" = "lifebox";
+"lifebox" = "lifedrive";
 "iCloud Drive" = "Hard disku iCloud";
 "Photos" = "Fotot ";
 "Choose From Library" = "Zgjidhni nga Galeria e Pajisjes ";
@@ -135,7 +135,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Lironi hapësirë ";
 "Your device memory is almost full" = "Memorja e pajisjes suaj është pothuajse plot. ";
-"There are some duplicated items both in your device and lifebox" = "Keni disa njësi të përsëritura në pajisje e në lifebox-in tuaj.";
+"There are some duplicated items both in your device and lifebox" = "Keni disa njësi të përsëritura në pajisje e në lifedrive-in tuaj.";
 "Operation is complete" = "Operacioni u përmbush. ";
 "Download is complete" = "Shkarkimi u krye.";
 "Deleting is complete" = "Fshirja u krye ";
@@ -148,7 +148,7 @@
 "Error" = "Gabim ";
 "Please configurate email client" = "Ju lutem, konfiguroni e-mail-in e klientit. ";
 "Send" = "Dërgoni";
-"%@ about Lifebox" = "%@ rreth Lifebox";
+"%@ about Lifebox" = "%@ rreth Lifedrive";
 "Complaint" = "Ankesë ";
 "Suggestion" = "Sugjerim ";
 "Feedback Form" = "Për çdo sugjerim apo ankesë, ju lutem na kontaktoni:";
@@ -184,7 +184,7 @@
 /*Fuzzy*/
 "Fail while uploading from LifeBox" = "Dështim gjatë ngarkimit në lifeBox";
 "Sorry, but photos not selected" = "Na vjen keq, por nuk janë përzgjedhur foto.";
-"Upload from lifebox" = "Ngarkoni nga lifebox";
+"Upload from lifebox" = "Ngarkoni nga lifedrive";
 "Upload failed" = "Ngarkimi dështoi.";
 "Upload was successful" = "U ngarkua me sukses ";
 "Nothing to upload" = "Asgje për të ngarkuar.";
@@ -212,8 +212,8 @@
 "Restore" = "Rivendosni";
 "Back-Up" = "Krijoni kopje rezervë";
 "Your last back up was a few seconds ago." = "Kopja juaj e fundit rezervë u krijua pak sekonda më parë.";
-"You never backed up your contacts" = "Ju ende nuk keni ndonjë informacion kontakti në lifebox-in tuaj.";
-"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Ju mund të krijoni një kopje rezerve të kontakteve tuaja në lifebox e mund ta menaxhoni listen tuaj të kontakteve kudo e nga çdo pajisje.";
+"You never backed up your contacts" = "Ju ende nuk keni ndonjë informacion kontakti në lifedrive-in tuaj.";
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Ju mund të krijoni një kopje rezerve të kontakteve tuaja në lifedrive e mund ta menaxhoni listen tuaj të kontakteve kudo e nga çdo pajisje.";
 "Backed up %d Contacts" = "Ju keni %d numra në kopjen tuaj rezervë të kontakteve.";
 "Removed" = "E Hequr ";
 "Updated" = "E përditësuar";
@@ -237,7 +237,7 @@
 "Done" = "Kryer";
 "I want to change my password" = "Dua të ndryshoj fjalëkalimin ";
 "We promise, we won’t sent you spam." = "Ju premtojmë se nuk do ju dërgojmë spam.";
-"I’d like hear about news and promotions about lifebox occasionally." = "Do të doja të informohesha rreth të rejave apo ofertave të lifebox-it sipas rastit.";
+"I’d like hear about news and promotions about lifebox occasionally." = "Do të doja të informohesha rreth të rejave apo ofertave të lifedrive-it sipas rastit.";
 "GSM Number" = "Numri i Telefonit ";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Emri dhe Mbiemri";
@@ -251,28 +251,28 @@
 "Auto-login" = "Logim automatik";
 "Logout" = "Dalje";
 "Help & Support" = "Pyetje të shpeshta";
-"Lifebox Touch ID and Passcode" = "ID me prekje dhe kodi i kalimit të lifebox";
+"Lifebox Touch ID and Passcode" = "ID me prekje dhe kodi i kalimit të lifedrive";
 "Usage Info and Packages" = "Llogaria & detajet e përdorimit";
 "Recently Deleted Files" = "Skedarët e fshirë së fundmi";
 "Auto Sync" = "Vetësinkronizim ";
 "Back-up my contacts" = "Krijoni kopje rezervë për Kontaktet e Mia ";
 "Leave feedback" = "Kontakt";
 "Upload Photo" = "Ngarkoni Foton ";
-"Back to Lifebox" = "Kthehuni tek lifebox";
+"Back to Lifebox" = "Kthehuni tek lifedrive";
 "Start adding your documents" = "Filloni shtimin e dokumenteve tuaja.";
-"You don’t have any documents on your Lifebox yet." = "Ju ende nuk keni asnjë dokument në lifebox.";
+"You don’t have any documents on your Lifebox yet." = "Ju ende nuk keni asnjë dokument në lifedrive.";
 "Start adding your music" = "Filloni të shtoni muzikën tuaj. ";
-"You don’t have any music on your Lifebox yet." = "Ju ende nuk keni shtuar muzikë në lifebox-in tuaj.";
+"You don’t have any music on your Lifebox yet." = "Ju ende nuk keni shtuar muzikë në lifedrive-in tuaj.";
 "info" = "Info";
 "Enable photo permissions in settings" = "Mundëso lejet e fotove tek Rregullimet. ";
 "Start adding your photos" = "Filloni të shtoni fotot tuaja.";
-"You don’t have anything on your photo roll." = "Ju ende nuk keni asnjë foto apo video në lifebox-in tuaj.";
+"You don’t have anything on your photo roll." = "Ju ende nuk keni asnjë foto apo video në lifedrive-in tuaj.";
 "View All Pictures" = "Shikoni të Gjitha Fotot ";
 "View All My Stream" = "Shikoni të Gjitha Regjistrimet e Mia ";
 "%d Photos" = "%d Foto";
 "You’ve uploaded %@ two days ago!" = "Ju keni ngarkuar  %@ dy ditë më parë!";
 "Expand My Storage" = "Përmirësoni Planin Tim të Arkivimit ";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur %85 të kuotës suaj në lifebox! Është momenti i duhur për të shtuar sasinë e arkivës suaj.";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur %85 të kuotës suaj në lifedrive! Është momenti i duhur për të shtuar sasinë e arkivës suaj.";
 "Your storage is almost full!" = "Arkiva e pajisjes suaj është thuajse plot!";
 "Change filter" = "Ndryshoni filtrin ";
 "Save this photo" = "Ruani ";
@@ -286,7 +286,7 @@
 "No" = "Jo";
 "Access to Gallery is denied. Please change it from the settings menu of the device" = "Aksesi në Galeri u refuzua. Ju lutem, ndryshojeni atë nga menuja e rregullimeve të pajisjes. ";
 "Caution!" = "Kujdes!";
-"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Ju mund të aksesoni çdo gjë të lifebox-it nga faqja kryesore. Filloni të përdorni lifebox-in tuaj sipas sugjerimeve tona. Ju mund të kaloni me rrëshqitje kartat që nuk ju pëlqejnë.";
+"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Ju mund të aksesoni çdo gjë të lifedrive-it nga faqja kryesore. Filloni të përdorni lifedrive-in tuaj sipas sugjerimeve tona. Ju mund të kaloni me rrëshqitje kartat që nuk ju pëlqejnë.";
 "Welcome! Let’s get you started!" = "Mirë se vini! Le të fillojmë!";
 "Videos" = "Video";
 "Folder" = "Dosje";
@@ -347,18 +347,18 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Jeni duke anashkaluar rregullimet e vetëngarkimit. Këtë mund ta aktivizoni më vonë tek Rregullimet.";
 "Skip setting Auto-Sync?" = "Dëshironi t'i anashkaloni rregullimet e vetëngarkimit?";
 "Skip for now" = "Anashkaloni";
-"Let’s start using Lifebox" = "Le të fillojmë përdorimin e lifebox";
+"Let’s start using Lifebox" = "Le të fillojmë përdorimin e lifedrive";
 "Select the items to sync with mobile data." = "Përzgjidhni njësitë për sinkronizim me të dhënat mobile.";
 "Mobile Data" = "Të Dhënat Mobile ";
 "Wi-fi" = "Wi-Fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox mund t'i sinkronizojë fotot dhe videot tuaja automatikisht. Doni ta aktivizoni funksionin e ngarkimit automatik tani?";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifedrive mund t'i sinkronizojë fotot dhe videot tuaja automatikisht. Doni ta aktivizoni funksionin e ngarkimit automatik tani?";
 "You have to fill in a password" = "Ju duhet të plotësoni fjalëkalimin tuaj ";
 "You have to fill in your mail or GSM Number" = "Plotësoni adresën tuaj të e-mail ose numrin tuaj mobile. ";
 "Password" = "Fjalëkalim";
 "E-Mail or GSM Number" = "E-mail ose Numër Telefoni";
 "Remember my credentials" = "Kujtoni fjalëkalimin tim";
 "I can't login" = "Kam harruar fjalëkalimin.";
-"Register to lifebox and get a 5 GB of storage for free!" = "Regjistrohuni në lifebox dhe merrni dhuratë 5 GB arkivë!";
+"Register to lifebox and get a 5 GB of storage for free!" = "Regjistrohuni në lifedrive dhe merrni dhuratë 5 GB arkivë!";
 "Login" = "Hyni";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "Kam lexuar e pranuar termat e përdorimit.";
@@ -418,7 +418,7 @@
 "%%%d Backed up…" = "%%%d Krijuar rezervë…";
 "Restored %d Contacts" = "Rivendosur  %d Kontakte ";
 "%d Duplicated Contacts Deleted" = "%d Kontakt(e) të përsëritura të fshira nga lista e kontakteve në pajisjen tuaj.";
-"You have %d numbers on your contacts backup." = "Ju keni %d kontakte në lifebox-in tuaj.";
+"You have %d numbers on your contacts backup." = "Ju keni %d kontakte në lifedrive-in tuaj.";
 "This contact will be deleted from your contacts." = "Ky kontakt do të fshihet nga lista juaj e kontakteve.";
 "Upgrade" = "Përditësoni";
 "Creation date" = "Data e krijimit ";
@@ -437,8 +437,8 @@
 "Backup" = "Kopje Rezervë ";
 "Last update:" = "Përditësimi i fundit:";
 "Your storage is empty!" = "Arkiva juaj është bosh!";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur%d%% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
-"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Ju nuk keni ende asnjë skedar në lifebox-in tuaj. Filloni ngarkimin e kujtimeve tua në lifebox!";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur%d%% të kuotës suaj të lifedrive. Është moment i duhur për të zgjeruar arkivën tuaj.";
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Ju nuk keni ende asnjë skedar në lifedrive-in tuaj. Filloni ngarkimin e kujtimeve tua në lifedrive!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Ju jeni duke përdorur %d%% të arkivës së pajisjes suaj. Erdhi momenti të lironi hapesirë në të.";
 "Upload Files" = "Ngarkoni Skedarët";
 "Free Up Space" = "Lironi Hapësirë ";
@@ -456,12 +456,12 @@
 "Your latest uploads" = "Ngarkimet tuaja të fundit ";
 "View Recent Activities" = "Shikoni Aktivitetet e kohëve të fundit ";
 "View All Photos" = "Shikoni të Gjitha Fotot ";
-"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Arkiva juaj e Lifebox është thuajse plot!\nLe t'u hedhim një sy mundësive për shtim kapaciteti!";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Arkiva juaj e Lifedrive është thuajse plot!\nLe t'u hedhim një sy mundësive për shtim kapaciteti!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Gjatë aksesimit të fotove tuaja ka ndodhur një gabim. Ju lutem, kontrolloni rregullimet tuaja.";
 "localFilesBeingProcessed" = "Duke procesuar skedarët lokalë.";
-"TurkcellSecurityPasscodeWarningText" = "Paralajmërim: Ju e keni aktivizuar njëherë kodin e kalimit/funksionin ID me prekje. Për sigurimin e skedarëve tuaj me kod kalimi/ID me prekje në lifebox, ju rekomandojmë të mos e aktivizoni hyrjen me fjalëkalimin e Turkcell.";
-"TurkcellSecurityAutologinText" = "Paralajmërim: Ju e keni aktivizuar njëherë kodin e kalimit/funksionin ID me prekje. Për sigurimin e skedarëve tuaj me kod kalimi/ID me prekje në lifebox, ju rekomandojmë të mos e aktivizoni hyrjen automatike me funksionin 3G/LTE.";
-"PasscodeActivationWhileTurkcellActivated" = "Hyrja automatike në lifebox me 3G/LTE është çaktivizuar në mënyrë që ju të përdorni të sigurt kodin e kalimit dhe funksionin ID me prekje. Ju mund ta riaktivizoni atë në çdo kohë.";
+"TurkcellSecurityPasscodeWarningText" = "Paralajmërim: Ju e keni aktivizuar njëherë kodin e kalimit/funksionin ID me prekje. Për sigurimin e skedarëve tuaj me kod kalimi/ID me prekje në lifedrive, ju rekomandojmë të mos e aktivizoni hyrjen me fjalëkalimin e Turkcell.";
+"TurkcellSecurityAutologinText" = "Paralajmërim: Ju e keni aktivizuar njëherë kodin e kalimit/funksionin ID me prekje. Për sigurimin e skedarëve tuaj me kod kalimi/ID me prekje në lifedrive, ju rekomandojmë të mos e aktivizoni hyrjen automatike me funksionin 3G/LTE.";
+"PasscodeActivationWhileTurkcellActivated" = "Hyrja automatike në lifedrive me 3G/LTE është çaktivizuar në mënyrë që ju të përdorni të sigurt kodin e kalimit dhe funksionin ID me prekje. Ju mund ta riaktivizoni atë në çdo kohë.";
 
 /*the word "constraction" has been wrongly spelled. Please rewrite "construction"; otherwise provide us with the right word you intended to use.*/
 "Error Handling Under Constraction" = "Trajtimi i Gabimeve po vijon";
@@ -476,8 +476,8 @@
 "Please type the text" = "Ju lutem, shkruani tekstin";
 "You have performed too many attempts. Please try again later." = "Ju keni bërë shumë prova. Llogaria juaj u bllokua. Ju lutem, provoni përsëri më vonë.";
 "The Internet connection appears to be offline." = "Lidhje e internetit duket të jetë jashtë shërbimit.";
-"Authentication with Turkcell Password is disabled for the account" = "Ju nuk mund të hyni në lifebox me fjalëkalimin tuaj të Turkcell pasi hyrja juaj me fjalëkalim të Turkcell është e çaktivizuar. Ju lutem, provoni të hyni me fjalëkalimin tuaj të lifebox.";
-"You don't have any lifebox account. Please signup before using the application" = "Ju nuk keni llogari në lifebox. Ju lutem, regjistrohuni përpara se të përdorni aplikacionin.";
+"Authentication with Turkcell Password is disabled for the account" = "Ju nuk mund të hyni në lifedrive me fjalëkalimin tuaj të Turkcell pasi hyrja juaj me fjalëkalim të Turkcell është e çaktivizuar. Ju lutem, provoni të hyni me fjalëkalimin tuaj të lifedrive.";
+"You don't have any lifebox account. Please signup before using the application" = "Ju nuk keni llogari në lifedrive. Ju lutem, regjistrohuni përpara se të përdorni aplikacionin.";
 "This text doesn't match. Please try again." = "Ky tekst nuk përputhet. Ju lutem, provoni përsëri.";
 "Email field is invalid" = "Fusha e Email nuk është e vlefshme.";
 " You have to fill in GSM number" = "Ju duhet të plotësoni numrin tuaj mobile.";
@@ -506,7 +506,7 @@
 "Successful purchase." = "Blerje e suksesshme";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Blerje e pavlefshme. AppStore nuk e verifikon blerjen për parametrat e dhëna.";
 "A temporary error has occurred due to technical reasons." = "Një gabim i përkohshëm ka ndodhur për arsye teknike.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifebox. Merrni parasysh që përdorimi I llogarive të ndryshme lifebox me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifedrive. Merrni parasysh që përdorimi I llogarive të ndryshme lifedrive me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
 "Shows that a response operation is done for the given receipt." = "Tregon se një operacion është ndërmarrë si përgjigje e faturës së dhënë.";
 "Auto Upload is off." = "Ngarkimi automatik është i çaktivizuar";
 "Photos and videos waiting to be synced" = "Fotot dhe videot në pritje për t'u sinkronizuar";
@@ -514,25 +514,25 @@
 "Video album is automatically created, therefore cannot be deleted" = "Albumi i videove krijohet automatikisht, prandaj nuk mund të fshihet.";
 "You cannot upload any video to auto generated video album" = "Nuk mund të ngarkoni asnjë video në albumin e vetëgjeneruar të videove.";
 "You have no any files" = "Nuk keni asnjë skedar.";
-"You don’t have any albums on your Lifebox yet." = "Ju ende nuk keni asnjë album në lifebox-in tuaj.";
+"You don’t have any albums on your Lifebox yet." = "Ju ende nuk keni asnjë album në lifedrive-in tuaj.";
 "Start creating albums" = "Filloni të krijoni albume";
-"You don’t have any stories  on your Lifebox yet." = "Ju ende nuk keni asnjë histori në lifebox-in tuaj.";
+"You don’t have any stories  on your Lifebox yet." = "Ju ende nuk keni asnjë histori në lifedrive-in tuaj.";
 "Start creating stories" = "Filloni të krijoni histori.";
 "Help and Support" = "Ndimë dhe Suport";
 "Album is Empty" = "Albumi është bosh.";
-"You don’t have any files on your Lifebox yet." = "Ju ende nuk keni asnjë skedar në lifebox-in tuaj.";
-"You don’t have any favorited files on your Lifebox yet." = "Ju ende nuk keni asnjë skedar të preferuar në lifebox-in tuaj.";
+"You don’t have any files on your Lifebox yet." = "Ju ende nuk keni asnjë skedar në lifedrive-in tuaj.";
+"You don’t have any favorited files on your Lifebox yet." = "Ju ende nuk keni asnjë skedar të preferuar në lifedrive-in tuaj.";
 "Start adding your files" = "Filloni të shtoni skedarët tuaj.";
 "Suggestions" = "Sugjerime";
 "Recent Searches" = "Kërkimet e fundit";
-"Lifebox can sync your files automatically." = "lifebox-i mund të sinkronizojë automatikisht fotot dhe videot tuaja.";
+"Lifebox can sync your files automatically." = "lifedrive-i mund të sinkronizojë automatikisht fotot dhe videot tuaja.";
 "Get Started" = "Filloni";
 "I have read and accepted terms of use" = "Unë i kam lexuar dhe pranuar kushtet e përdorimit.";
-"Welcome to Lifebox!" = "Mirë se vini në lifebox!";
+"Welcome to Lifebox!" = "Mirë se vini në lifedrive!";
 "You need to confirm the User Agreement to continue." = "Për të vazhduar, ju duhet të konfirmoni Marrëveshjen e Përdoruesit.";
 "PhotosAndViedos" = "Fotot dhe Videot";
 "Are these the same person?" = "A janë këta i njëjti person?";
-"We couldn't find anybody on your Lifebox yet." = "Ne nuk gjetëm askënd në lifebox-in tuaj.";
+"We couldn't find anybody on your Lifebox yet." = "Ne nuk gjetëm askënd në lifedrive-in tuaj.";
 "Grouping of your photos will take some time. Please wait and then check the albums." = "Grupimi i fotove tuaja do të marrë pak kohë. Ju lutem, prisni e më pas kontrolloni albumet.";
 "Never" = "Kurrë";
 "Approve" = "Aprovoni";
@@ -550,7 +550,7 @@
 "We have created an animation from your photos!" = "Kemi krijuar një animacion me fotot tuaja!";
 "Save Animation" = "Ruani Animacionin ";
 "Delete Duplicated" = "Fshini njësitë e përsëritura";
-"Lifebox %@ and Passcode" = "Lifebox %@ dhe Kodi i Kalimit ";
+"Lifebox %@ and Passcode" = "Lifedrive %@ dhe Kodi i Kalimit ";
 "We make easier to manage your memories with homepage" = "Ju lehtësojmë menaxhimin e kujtimeve tuaja nëpërmjet faqes kryesore.";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Mund t'i aksesoni aktivitetet tuaja të fundit dhe sugjerimet që i keni për zemër nga kjo faqe.";
 "Discover your first story" = "Zbuloni historinë tuaj të parë";
@@ -558,21 +558,21 @@
 "Discover your first collage" = "Zbuloni kolazhin tuaj të parë";
 "Discover your first animation" = "Zbuloni animacionin tuaj të parë";
 "Discover your first filtered photo" = "Zbuloni foton tuaj të parë me filtër";
-"You have reached your lifebox memory limit" = "Keni arritur kufirin e memories për lifebox-in tuaj. ";
+"You have reached your lifebox memory limit" = "Keni arritur kufirin e memories për lifedrive-in tuaj. ";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Ka ndodhur një gabim gjatë aksesimit të kontakteve tuaja.\nJu lutem, kontrolloni rregullimet tuaja.";
-"Manage Contacts" = "Menaxhoni Kontaktet e lifebox";
+"Manage Contacts" = "Menaxhoni Kontaktet e lifedrive";
 "Import fearture is totally free of charge and does not affect your internet package" = "Funksioni i Importimit është totalisht falas dhe ai nuk ndikon në paketen tuaj të internetit. ";
 "Your last backup was on %@" = "Kopjimi juaj i fundit rezervë është kryer më  %@";
 "Contacts Sync" = "Sinkronizimi i Kontakteve";
 "Sort By" = "Klasifikoni sipas ";
-"LifeboxLargePopUpTitle100" = "Arkiva juaj e lifebox është plot.";
-"LifeboxLargePopUpTitle90" = "Jeni duke përdorur 90% të hapësirës së arkivës së lifebox. ";
-"LifeboxLargePopUpTitle80" = "Jeni duke përdorur 80% të hapësirës së arkivës së lifebox.";
+"LifeboxLargePopUpTitle100" = "Arkiva juaj e lifedrive është plot.";
+"LifeboxLargePopUpTitle90" = "Jeni duke përdorur 90% të hapësirës së arkivës së lifedrive. ";
+"LifeboxLargePopUpTitle80" = "Jeni duke përdorur 80% të hapësirës së arkivës së lifedrive.";
 "LifeboxLargePopUpSubTitle" = "Ju lutem, u hidhni një sy mundësive të shtimit të arkivës suaj.";
 "LifeboxLargePopUpExpandButtonTitle" = "Zgjeroni Arkivën Time";
 "LifeboxLargePopUpSkipButtonTitle" = "Anashkaloni ";
-"Lifebox can sync your contacts automatically." = "lifebox mund t'i sinkronizojë automatikisht kontaktet tuaja.";
-"error_login" = "Ju duhet të hyni në lifebox për të ngarkuar skedarët.";
+"Lifebox can sync your contacts automatically." = "lifedrive mund t'i sinkronizojë automatikisht kontaktet tuaja.";
+"error_login" = "Ju duhet të hyni në lifedrive për të ngarkuar skedarët.";
 "uploading" = "Duke u ngarkuar";
 "widgetBottomTitleLastSyncFormat" = "Ngarkimi iI fundit: %@";
 "widgetBottomTitleNewerSyncronized" = "Kurrë";
@@ -580,8 +580,8 @@
 "widgetTopTitleInactive" = "Vetësinkronizimi është i çaktivizuar.";
 "widgetTopTitleInProgress" = "Vetësinkronizimi po vijon.";
 "error_authentication_message" = "Ju lutem, hapeni aplikacionin dhe hyni për të vazhduar.";
-"error_authentication_title" = "Hyni në lifebox";
-"error_passcode_message" = "Aplikacioni i skedarëve nuk mund të përdoret me kod kalimi. Ju lutem, hapni lifebox-in dhe çaktivizoni kodin e kalimit për të vazhduar.";
+"error_authentication_title" = "Hyni në lifedrive";
+"error_passcode_message" = "Aplikacioni i skedarëve nuk mund të përdoret me kod kalimi. Ju lutem, hapni lifedrive-in dhe çaktivizoni kodin e kalimit për të vazhduar.";
 "error_passcode_title" = "Mbyllja e kodit të kalimit është aktivizuar.";
 "Successfully purchased" = "Blerë me sukses";
 "Cancel Analyzing" = "Anuloni Analizimin";
@@ -596,7 +596,7 @@
 "landingTitle0" = "Jetoni, Grumbulloni, Kujtoni";
 
 /*Fuzzy*/
-"landingSubTitle0" = "Grumbulloni fotot, videot, kontaktet dhe skedarët e tjerë në lifebox ! Aksesoni dhe kujtoni kurdo dhe kudo që të jeni.";
+"landingSubTitle0" = "Grumbulloni fotot, videot, kontaktet dhe skedarët e tjerë në lifedrive ! Aksesoni dhe kujtoni kurdo dhe kudo që të jeni.";
 "landingTitle1" = "Sinkronizim automatik ";
 "landingSubTitle1" = "Krijoni kopje rezervë automatikisht për të gjitha fotot dhe videot tuaja dhe aksesojini ato nga kudo.";
 "landingTitle2" = "Njohja e Fytyrës/Imazhit";
@@ -608,9 +608,9 @@
 "landingTitle3" = "Sinkronizim kontakti";
 "landingSubTitle3" = "Krijoni kopje rezervë për kontaktet. Mos i humbisni asnjëherë ato. ";
 "landingTitle6" = "Media sociale";
-"landingSubTitle6" = "Transferoni të gjithë arkiven tuaj të mediave sociale me lehtësi në lifebox.";
+"landingSubTitle6" = "Transferoni të gjithë arkiven tuaj të mediave sociale me lehtësi në lifedrive.";
 "Add GSM Number" = "Shtoni Numrin Mobile ";
-"The videos larger than 4GB can not be uploaded to lifebox" = "Videot më të mëdha se 4GB nuk mund të ngarkohen në lifebox.";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Videot më të mëdha se 4GB nuk mund të ngarkohen në lifedrive.";
 "You have not enough memory in your device" = "Nuk keni memorie të mjaftueshme në pajisjen tuaj. ";
 "The purchase was canceled" = "Blerja është anuluar. ";
 "The purchase in progress" = "Blerja po vijon ";
@@ -619,12 +619,12 @@
 "Weekly" = "Javore";
 "Monthly" = "Mujore";
 "Up to 5000 contacts can be backed up." = "Krijimi i kopjes rezervë të kontakteve dështoi pasi ju keni më shumë kontakte nga sa lejon kufiri maksimal.  ";
-"LifeboxSmallPopUpTitle" = "Arkiva e lifebox-it tuaj është pothuajse plot!";
+"LifeboxSmallPopUpTitle" = "Arkiva e lifedrive-it tuaj është pothuajse plot!";
 "LifeboxSmallPopUpSubTitle" = "Shikoni mundësitë e shtimit!";
 "LifeboxSmallPopUpCheckBoxTex" = "Mos e Shfaq Përsëri";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "PËRMIRËSO";
-"has_remained_lifebox_usage" = "\"%@ of %@ ka mbetur (vetëm për përdorim në lifebox)";
+"has_remained_lifebox_usage" = "\"%@ of %@ ka mbetur (vetëm për përdorim në lifedrive)";
 "Renewal Date: %@" = "Data e rinovimit: %@";
 "created" = "krijuar";
 "uploaded" = "ngarkuar";
@@ -639,29 +639,29 @@
 "Bad internet connection" = "Lidhje e keqe interneti";
 "download_error_unsupported_extension" = "Shkarkimi nuk është i lejuar për këtë lloj skedari.";
 "Show only synced items" = "Tregoni vetëm artikujt e sinkronizuar";
-"Your lifebox storage is almost full!" = "Arkiva juaj në lifebox është pothuajse plot!";
+"Your lifebox storage is almost full!" = "Arkiva juaj në lifedrive është pothuajse plot!";
 "This edited photo will be saved as a new photo in your device gallery" = "Kjo foto e ndryshuar do të ruhet si foto e re në galerinë e pajisjes suaj.";
-"We couldn’t find any place on your Lifebox yet." = "Nuk mundëm të gjenim ndonje vend në lifebox-in tuaj.";
+"We couldn’t find any place on your Lifebox yet." = "Nuk mundëm të gjenim ndonje vend në lifedrive-in tuaj.";
 "*Average figure. Total number of documents depends on the size of each document." = "*Shifër mesatare. Numri total i dokumenteve varet nga madhësia e secilit dokumenti.";
-"We couldn’t find anything on your Lifebox yet." = "Nuk mundëm të gjenim asgjë në lifebox-in tuaj.";
+"We couldn’t find anything on your Lifebox yet." = "Nuk mundëm të gjenim asgjë në lifedrive-in tuaj.";
 "Expiration Date: %@" = "Data e Skadencës: %@";
 "Failed to get albums" = "Marrja e albumeve dështoi";
 
 /*does it have to be translated? please specify text correctly*/
 "termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
-"offersCancelLife" = "Për të çaktivizuar lifebox 25GB, ju lutem dërgoni një SMS me text \"Stop1\"; për lifebox 100GB, ju lutem dërgoni SMS me text \"Stop2\"; për lifebox 500GB ju lutem dërgoni SMS me text \"Stop3\", në numrin 6767.";
+"offersCancelLife" = "Për të çaktivizuar lifedrive 25GB, ju lutem dërgoni një SMS me text \"Stop1\"; për lifedrive 100GB, ju lutem dërgoni SMS me text \"Stop2\"; për lifedrive 500GB ju lutem dërgoni SMS me text \"Stop3\", në numrin 6767.";
 "Please enter a valid login." = "Hyrja u refezua. Kontrolloni kredencialet tuaja.";
 "Please enter the text below" = "Ju lutem, vendosni tekstin e mëposhtëm. ";
 "facebook_photo_tags" = "Etiketimet e Fototve të Facebook";
-"facebook_tags_on" = "Ju do të merrni etiketimet tuaja të Facebook në lifebox kur ju e aktivizoni këtë funksion.";
+"facebook_tags_on" = "Ju do të merrni etiketimet tuaja të Facebook në lifedrive kur ju e aktivizoni këtë funksion.";
 
 /*In English, it is written as fb tags on - while below, with the grey small font, it shows the off-feature. Translated as off. Please change in English version as well.*/
-"facebook_tags_off" = "Ju nuk do t'i merrni etiketimet tuaja të Facebook në lifebox kur e çaktivizoni këtë funksion.";
+"facebook_tags_off" = "Ju nuk do t'i merrni etiketimet tuaja të Facebook në lifedrive kur e çaktivizoni këtë funksion.";
 "facebook_tags_import" = "Ju lutem, aktivizoni mundësinë \"Importo nga Facebook\" për të përdorur funksionin \"Transferim etiketimi nga Facebook\"";
 "TermsOfUseLinkText" = "PrekKëtu";
 "launch_campaign_card_detail" = "Detaje";
 "launch_campaign_card_title" = "Fushata Pragë ";
-"launch_campaign_card_message" = "Praga po ju pret! Filloni të eksploroni lifebox-in tani për të qënë një nga 10 çiftet me fat.";
+"launch_campaign_card_message" = "Praga po ju pret! Filloni të eksploroni lifedrive-in tani për të qënë një nga 10 çiftet me fat.";
 "%d same contacts" = "%d i njejti kontakt/e ";
 "Quick Scroll Preparation" = "Duke përgatitur fotot dhe videot tuaja";
 
@@ -682,16 +682,16 @@
 "Become Premium" = "Bëhuni Premium";
 "Become Premium Member!" = "Bëhuni anëtar Premium!";
 "leave_premium_membership" = "Ndërprisni abonimin Premium";
-"Standard User" = "lifebox Standard";
-"Premium User" = "lifebox Premium";
-"lifebox Premium" = "lifebox Premium";
+"Standard User" = "lifedrive Standard";
+"Premium User" = "lifedrive Premium";
+"lifebox Premium" = "lifedrive Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Për të fshirë të gjitha kontaktet e përsëritura nga numëratori telefonik e për shumë më tepër mundësi, bëhuni anëtar Premium!";
 
 /*PremiumBanner*/
 "standard_banner_message" = "Zbuloni mundësitë tona Premium për një përvojë më të mirë në hapsirën arkivuese virtuale!";
 "premium_banner_message" = "Zbuloni mundësitë tona Premium për një përvojë më të mirë në hapsirën arkivuese virtuale!";
-"standard_banner_title" = "lifebox Premium";
-"premium_banner_title" = "Mirë se vini në lifebox Premium!";
+"standard_banner_title" = "lifedrive Premium";
+"premium_banner_title" = "Mirë se vini në lifedrive Premium!";
 "back_up_short" = "Krijoni kopje reservë në cilësinë origjinale";
 "remove_duplicate_short" = "Hiqni kontaktet e përsëritura nga Numëratori juaj telefonik.";
 "places_recognition_short" = "Njohja e Vendit për t'ju shëtitur nëpër kujtimet tuaja";
@@ -710,24 +710,24 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@/%@";
 "package_apple_cancel_text" = "Për të anuluar paketën tuaj, ju lutem përdorni menunë iTunes & App Store në pajisjen tuaj";
-"package_slcm_cancel_text" = "Për të anuluar paketën, ju lutem dergoni një SMS me tekst \"IPTAL LIFEBOX në numrin 2200 %@\"";
+"package_slcm_cancel_text" = "Për të anuluar paketën, ju lutem dergoni një SMS me tekst \"IPTAL LIFEDRIVE në numrin 2200 %@\"";
 "package_google_cancel_text" = "Për të anuluar paketën tuaj, ju lutem përdorni Google Play Store";
 "package_free_of_charge_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar që të përpunojmë kërkesën tuaj.";
-"package_lifecell_cancel_text" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni një SMS me tekst 50 VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
+"package_lifecell_cancel_text" = "Për të çaktivizuar lifedrive 50GB, ju lutem dërgoni një SMS me tekst 50 VYKL; për lifedrive 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
 "package_promo_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar që të përpunojmë kërkesën tuaj.";
-"package_kktcell_cancel_text" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; klientët e tjerë mund të dërgojnë LIFEBOX CANCEL tek 3030 për të anuluar abonimin e tyre.";
+"package_kktcell_cancel_text" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; klientët e tjerë mund të dërgojnë LIFEDRIVE CANCEL tek 3030 për të anuluar abonimin e tyre.";
 "package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
-"package_life_cancel_text" = "Për të çaktivizuar lifebox 25GB, ju lutem dërgoni një SMS me tekst \"Stop1\"; për lifebox 100GB, ju lutem dërgoni SMS me tekst \"Stop2\"; për lifebox 500GB, ju lutem dërgoni SMS me tekst \"Stop3\"; në numrin 6767.";
-"package_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
-"package_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
-"package_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
+"package_life_cancel_text" = "Për të çaktivizuar lifedrive 25GB, ju lutem dërgoni një SMS me tekst \"Stop1\"; për lifedrive 100GB, ju lutem dërgoni SMS me tekst \"Stop2\"; për lifedrive 500GB, ju lutem dërgoni SMS me tekst \"Stop3\"; në numrin 6767.";
+"package_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
+"package_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
+"package_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
 "package_default_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar, që të përpunojmë kërkesën tuaj";
 
 /*Leave Premium*/
-"leave_premium_premium_description" = "Ju mund të përdorni të gjitha mundësitë e avancuara të lifebox me abonimin tuaj Premium.";
+"leave_premium_premium_description" = "Ju mund të përdorni të gjitha mundësitë e avancuara të lifedrive me abonimin tuaj Premium.";
 "leave_premium_cancel_description" = "Ju nuk do të mund të përfitoni privilegjet Premium nëse e anuloni abonimin tuaj.";
 "feature_apple_cancel_text" = "Për të anuluar paketën tuaj, ju lutem përdorni menunë iTunes & App Store në pajisjen tuaj.";
-"feature_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS me tekst: LIFEBOX PREMIUM IPTAL në numrin 2200.";
+"feature_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS me tekst: LIFEDRIVE PREMIUM IPTAL në numrin 2200.";
 "feature_google_cancel_text" = "Për të anuluar paketën tuaj, ju lutem përdorni Google Play Store";
 "feature_free_of_charge_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar, që të përpunojmë kërkesën tuaj.";
 "feature_lifecell_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni një përdorues lifecell.";
@@ -735,10 +735,10 @@
 "feature_kktcell_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni një përdorues KKTCELL.";
 "feature_moldcell_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni një përdorues Moldcell.";
 "feature_life_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni një përdorues life:)";
-"feature_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
-"feature_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
-"feature_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
-"feature_all_access_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
+"feature_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
+"feature_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
+"feature_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
+"feature_all_access_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifedrive.com";
 "feature_default_cancel_text" = "Ju lutem përdorni menunë Kontakt për të na informuar, që të përpunojmë kërkesën tuaj.";
 
 /*PackageInfoView*/
@@ -747,7 +747,7 @@
 "face_image_description" = "Me qënë se ju keni një llogari standarde, 100 prej fotove tuaja do të përpunohen. Ju do të shihni vetëm 3 persona, objekte dhe vende në albumin tuaj smart.";
 
 /*Fuzzy*/
-"face_image_upgrade" = "Kaloni në lifebox Premium për ta përdorur këtë mundësi pa asnjë kufizim.";
+"face_image_upgrade" = "Kaloni në lifedrive Premium për ta përdorur këtë mundësi pa asnjë kufizim.";
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "Për t'i parë të gjitha %@ në galerinë tuaj e për më shumë mundësi bëhuni anëtar Premium!";
@@ -839,7 +839,7 @@
 
 /*InstapickUpgradePopup*/
 /*Fuzzy*/
-"instapick_upgrade_popup_text" = "Në mënyrë që të blini paketën PhotoPick, ju duhet të përditësoni aplikacionin tuaj lifebox.";
+"instapick_upgrade_popup_text" = "Në mënyrë që të blini paketën PhotoPick, ju duhet të përditësoni aplikacionin tuaj lifedrive.";
 
 /*update or upgrade?*/
 "instapick_upgrade_popup_button" = "Përditësoni";
@@ -864,7 +864,7 @@
 "free_trial_detail_label" = "Zbuloni cila foto do të marrë vlerësimin më të lartë; analizoni me PhotoPick për më shumë pëlqime! Pa limit, vetëm për ju!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
-"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
+"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifedrive. Ju lutem, provoni përsëri më vonë.";
 "facebook_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Facebook";
 "dropbox_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Dropbox";
 "facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";
@@ -879,14 +879,14 @@
 "additional_data_advantage" = "Avantazh të dhënash shtesë";
 "connection_problem_occured" = "Ka një gabim lidhjeje. Ju lutem, provoni më vonë. ";
 "turkcell_purchase_popup_title" = "%@";
-"mid_user" = "lifebox Standard+";
+"mid_user" = "lifedrive Standard+";
 "instapick_no_available_units_left" = "Nuk ka asnjë analizë";
-"middle_user" = "lifebox Standard+";
-"lifebox_middle" = "lifebox Standard+";
-"lifebox_standart" = "lifebox Standard";
-"account_detail_middle_title" = "Me anëtarësimin tuaj lifebox Standard+, ju mund të përdorni funksionalitete të avancuara.";
+"middle_user" = "lifedrive Standard+";
+"lifebox_middle" = "lifedrive Standard+";
+"lifebox_standart" = "lifedrive Standard";
+"account_detail_middle_title" = "Me anëtarësimin tuaj lifedrive Standard+, ju mund të përdorni funksionalitete të avancuara.";
 "account_detail_middle_description" = "Nëse e anuloni anëtarësimin tuaj, ju nuk do të mund të përfitoni nga privilegjet Standard+.";
-"account_detail_standart_title" = "Jeni duke e përdorur lifebox-in si përdorues Standard. ";
+"account_detail_standart_title" = "Jeni duke e përdorur lifedrive-in si përdorues Standard. ";
 "account_detail_standart_description" = "Me anëtarësimin tuaj, ju mund të përdorni funksionalitete standarde. ";
 
 /*AnalyzeHistoryController*/
@@ -897,7 +897,7 @@
 "data_package_for_turkcell" = "Avantazh të dhënash shtesë";
 "delete_duplicated_contacts" = "Hiqni kontaktet e përsëritura nga Direktoria e Telefonit tuaj.";
 "leave_middle_membership" = "Largohuni nga Anëtarësimi Standard+";
-"leave_middle_turkcell" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS drejt 2200 me tekst: IPTAL LIFEBOX STANDART+";
+"leave_middle_turkcell" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS drejt 2200 me tekst: IPTAL LIFEDRIVE STANDART+";
 
 /*If this shall be translated, please refer to my version*/
 "package_FWI_cancel_text" = "Ju mund ta anuloni apo menaxhoni abonimin tuaj Digicel nëpërmjet aplikacionit My Digicel, Kujdesit të Klientit apo në dyqan.";
@@ -910,13 +910,13 @@
 "terms_and_use_etk_checkbox" = "Deri në një vendim të ndryshëm nga ana ime, Unë jap miratimin tim për marrjen e mesazheve elektronike komerciale në mënyrë që të informohem për produktet dhe shërbimet e favorshme të Turkcell dhe kompanive të grupit të tij, në pajtim me ligjin nr. 6563 dhe legjislacionin në fuqi";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell dhe kompanive të grupit të tij";
 "terms_and_use_etk_link_commercial_email_messages" = "mesazheve elektronike komerciale";
-"commercial_email_messages" = "INFORMIM NË LIDHJE ME MIRATIMIN NË LIDHJE ME MARRJEN E MESAZHEVE ELEKTRONIKE KOMERCIALE\n\nUnë jap pëlqimin tim për marrjen e mesazheve elektronike komerciale nga Turkcell dhe kompanitë e grupit të tij, (mesazhe që përmbajnë të dhëna, zë dhe video të cilat dërgohen për qëllime komerciale dhe transmetohen në mënyrë elektronike duke përdorur mjete siç janë telefoni, qendra e thirrjeve, pajisje për transmetimin e zërit, regjistrues smart të zërit, postë elektronike, sisteme të  mesazhit të shkurtër) nëpërmjet informacionit të kontaktit që kam dhënë kur kam nënshkruar aplikacionin Lifebox ose që tashmë disponohet nga Turkcell dhe kompanitë e grupit të tij, pët qëllime reklamimi dhe marketingu të produkteve  dhe shërbimeve të ofruara si dhe për qëllime njoftimi të mundësive të përgjithshme/të veçanta të ofruara nga Turkcell dhe kompanitë e grupit të tij dhe/ose subjektet e palët e treta me të cilën ato bashkëpunojnë, në përputhje me Ligjin Nr. 6563 për Rregullimin e Tregtisë Elektronike (\"Ligji\"), Rregulloren për Komunikimin Tregtar dhe Mesazhet e Postës Elektronike (\"Rregullorja\"), në mënyrë të përhershme derisa unë të ushtroj të drejtën time për të refuzuar marrjen e  mesazheve të tilla, edhe në qoftë se skadon afati i abonimit tim për aplikimin e lartpërmendur.\n\nMesazhet komerciale të postës elektronike të dërguara nga operatorët, të cilët i nënshtrohen Ligjit Nr.5809 mbi Komunikimin Elektronik, për abonentët dhe shfrytëzuesit e tyre, ekskluzivisht për reklamimin dhe marketingun e produkteve dhe shërbimeve të tyre ose prezantimin e biznesit të tyre konsiderohen si përjashtime, në pajtim me Rregulloret në fuqi. Unë bie dakord që miratim i mësipërm është dhënë në mënyrë të pavarur nga miratimi që unë i kam dhënë operatorit tim në të cilin jam abonuar/ tek i cili jam përdorues, në lidhje me reklamimin e produkteve dhe shërbimeve të tij; dhe se ky operator ka të drejtë të dërgojë mesazhe elektronike komerciale për qëllime të tilla si reklamimi, marketingu i produkteve dhe shërbimeve të tij brenda fushëveprimit të miratimit që i kam dhënë operatorit në të cilin jam abonuar, edhe nëse unë revokoj miratimin e dhënë në këtë dokument duke ushtruar të drejtën time për të refuzuar mesazhe të tilla në pajtim me Ligjin dhe rregulloret e sipërpërmendura; unë deklaroj gjithashtu se unë jam i vetëdijshëm për të drejtën time për të refuzuar mesazhet komerciale të operatorit tim.";
+"commercial_email_messages" = "INFORMIM NË LIDHJE ME MIRATIMIN NË LIDHJE ME MARRJEN E MESAZHEVE ELEKTRONIKE KOMERCIALE\n\nUnë jap pëlqimin tim për marrjen e mesazheve elektronike komerciale nga Turkcell dhe kompanitë e grupit të tij, (mesazhe që përmbajnë të dhëna, zë dhe video të cilat dërgohen për qëllime komerciale dhe transmetohen në mënyrë elektronike duke përdorur mjete siç janë telefoni, qendra e thirrjeve, pajisje për transmetimin e zërit, regjistrues smart të zërit, postë elektronike, sisteme të  mesazhit të shkurtër) nëpërmjet informacionit të kontaktit që kam dhënë kur kam nënshkruar aplikacionin Lifedrive ose që tashmë disponohet nga Turkcell dhe kompanitë e grupit të tij, pët qëllime reklamimi dhe marketingu të produkteve  dhe shërbimeve të ofruara si dhe për qëllime njoftimi të mundësive të përgjithshme/të veçanta të ofruara nga Turkcell dhe kompanitë e grupit të tij dhe/ose subjektet e palët e treta me të cilën ato bashkëpunojnë, në përputhje me Ligjin Nr. 6563 për Rregullimin e Tregtisë Elektronike (\"Ligji\"), Rregulloren për Komunikimin Tregtar dhe Mesazhet e Postës Elektronike (\"Rregullorja\"), në mënyrë të përhershme derisa unë të ushtroj të drejtën time për të refuzuar marrjen e  mesazheve të tilla, edhe në qoftë se skadon afati i abonimit tim për aplikimin e lartpërmendur.\n\nMesazhet komerciale të postës elektronike të dërguara nga operatorët, të cilët i nënshtrohen Ligjit Nr.5809 mbi Komunikimin Elektronik, për abonentët dhe shfrytëzuesit e tyre, ekskluzivisht për reklamimin dhe marketingun e produkteve dhe shërbimeve të tyre ose prezantimin e biznesit të tyre konsiderohen si përjashtime, në pajtim me Rregulloret në fuqi. Unë bie dakord që miratim i mësipërm është dhënë në mënyrë të pavarur nga miratimi që unë i kam dhënë operatorit tim në të cilin jam abonuar/ tek i cili jam përdorues, në lidhje me reklamimin e produkteve dhe shërbimeve të tij; dhe se ky operator ka të drejtë të dërgojë mesazhe elektronike komerciale për qëllime të tilla si reklamimi, marketingu i produkteve dhe shërbimeve të tij brenda fushëveprimit të miratimit që i kam dhënë operatorit në të cilin jam abonuar, edhe nëse unë revokoj miratimin e dhënë në këtë dokument duke ushtruar të drejtën time për të refuzuar mesazhe të tilla në pajtim me Ligjin dhe rregulloret e sipërpërmendura; unë deklaroj gjithashtu se unë jam i vetëdijshëm për të drejtën time për të refuzuar mesazhet komerciale të operatorit tim.";
 "NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
-"NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
-"NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifedrive ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifedrive ka nevojë për aksesin tuaj të bibliotekës së fotove.";
 
 /*Usage Info*/
-"package_space_details" = "% 1$@ / %2$@ internet i përdorur (vetëm për përdorim në lifebox)";
+"package_space_details" = "% 1$@ / %2$@ internet i përdorur (vetëm për përdorim në lifedrive)";
 "package_renew_date" = "Do të rinovohet më:% @";
 "percentage_used" = "% .0f%% përdorur";
 "used_and_left_space" = "%1$@  /%2$@ përdorur";
@@ -933,9 +933,9 @@
 "account_details" = "Detajet e llogarisë";
 "my_profile" = "Profili Im";
 "account_type" = "Lloji i Llogarisë";
-"standard_plus" = "lifebox Standard+";
-"standard" = "lifebox Standard";
-"premium" = "lifebox Premium";
+"standard_plus" = "lifedrive Standard+";
+"standard" = "lifedrive Standard";
+"premium" = "lifedrive Premium";
 "old_password" = "Fjalëkalimi i vjetër";
 "new_password" = "Fjalëkalim i ri";
 "repeat_password" = "Rifresko fjalëkalimin";
@@ -975,13 +975,13 @@
 "please_enter_your_problem_shortly" = "Shkruani shkurtimisht rreth problemit tuaj.";
 "explain_your_problem_shortly" = "Shpjegoni shkurtimisht problemin tuaj.";
 "please_enter_msisdn_or_email" = "Vendosni numrin e telefonit ose emailin.";
-"support_form_subject_1" = "Lifebox / Unë nuk mund të identifikohem me e-mailin tim.";
-"support_form_subject_2" = "Lifebox / Unë nuk mund të identifikohem me numrin tim të telefonit.";
-"support_form_subject_3" = "Lifebox / Unë nuk mund të identifikohem me fjalëkalimin tim.";
-"support_form_subject_4" = "Lifebox / Teksti i sigurisë nuk përputhet.";
-"support_form_subject_5" = "Lifebox / Problemi me fjalëkalimin e Turkcell";
-"support_form_subject_6" = "Lifebox / Problem i identifikimit automatik.";
-"support_form_subject_7" = "Lifebox / Unë nuk mund ta shkarkoj aplikacionin lifebox.";
+"support_form_subject_1" = "Lifedrive / Unë nuk mund të identifikohem me e-mailin tim.";
+"support_form_subject_2" = "Lifedrive / Unë nuk mund të identifikohem me numrin tim të telefonit.";
+"support_form_subject_3" = "Lifedrive / Unë nuk mund të identifikohem me fjalëkalimin tim.";
+"support_form_subject_4" = "Lifedrive / Teksti i sigurisë nuk përputhet.";
+"support_form_subject_5" = "Lifedrive / Problemi me fjalëkalimin e Turkcell";
+"support_form_subject_6" = "Lifedrive / Problem i identifikimit automatik.";
+"support_form_subject_7" = "Lifedrive / Unë nuk mund ta shkarkoj aplikacionin lifedrive.";
 "enter_your_old_password" = "Vendosni fjalëkalimin e vjetër";
 "enter_your_new_password" = "Vendosni fjalëkalimin e ri";
 "enter_your_repeat_password" = "Rivendosni fjalëkalimin e ri";

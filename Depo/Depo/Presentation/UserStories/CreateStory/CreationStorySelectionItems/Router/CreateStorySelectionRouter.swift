@@ -15,9 +15,7 @@ class CreateStorySelectionRouter: BaseFilesGreedRouter, CreateStoryRouterInput {
     }
     
     func goToSelectionOrderPhotosFor(story: PhotoStory) {
-        let router = RouterVC()
-        let controller = router.photosOrder(forStory: story)
-        router.pushViewController(viewController: controller)
+        //TODO: wait for refactor create story music
     }
     
 }
