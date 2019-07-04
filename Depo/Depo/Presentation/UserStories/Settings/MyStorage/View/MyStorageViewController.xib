@@ -115,6 +115,9 @@
                                         <constraint firstAttribute="height" constant="27" id="70E-NT-Wuk"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="restorePurhases" destination="-1" eventType="touchUpInside" id="q9k-Eu-8oQ"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DP-Zp-Hlc">
                                     <rect key="frame" x="13" y="281" width="297" height="39.5"/>

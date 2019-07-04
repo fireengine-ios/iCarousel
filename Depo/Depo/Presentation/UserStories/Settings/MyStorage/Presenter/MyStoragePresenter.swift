@@ -117,9 +117,6 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         if let accountTypeString = accountInfo.accountType {
             accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
         }
-        if accountType == .all {
-            view?.showRestoreButton()
-        }
         interactor.getAllOffers(with: accountType)
     }
     
