@@ -282,7 +282,7 @@ final class PhotoVideoDataSource: NSObject {
     
     private func finishConverting(needSorting: Bool) {
         if needSorting {
-            lastWrapedObjects.syncSortItself { item1, item2 -> Bool in
+            lastWrapedObjects.sortItself { item1, item2 -> Bool in
                 if let date1 = item1.isLocalItem ? item1.creationDate : item1.metaData?.takenDate {
                     if let date2 = item2.isLocalItem ? item2.creationDate : item2.metaData?.takenDate {
                         /// both dates are non-nil
