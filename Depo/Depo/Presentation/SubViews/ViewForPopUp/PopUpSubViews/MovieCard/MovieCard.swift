@@ -124,7 +124,10 @@ final class MovieCard: BaseView {
     }
     
     private func showPhotoVideoDetail(hideActions: Bool) {
-        guard let item = item else { return }
+        debugLog("movie card open video")
+        guard let item = item else {
+            return
+        }
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
