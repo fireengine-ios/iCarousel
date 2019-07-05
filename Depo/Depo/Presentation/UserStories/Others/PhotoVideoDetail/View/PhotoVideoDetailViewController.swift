@@ -285,7 +285,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         playerController?.player = localPlayer
         ///needs to expend from everywhere
         playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
-        debugLog("about to play video item with isEmptycCntroller \(playerController == nil) and \(playerController?.player == nil)")
+        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
         present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player?.play()
             self?.output.videoStarted()
