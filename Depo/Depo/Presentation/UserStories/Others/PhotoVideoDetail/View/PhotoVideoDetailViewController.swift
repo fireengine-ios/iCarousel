@@ -353,9 +353,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoDetailCell else { return }
         cell.delegate = self
-        if cell.isNeedToUpdateWebView {
-            cell.setObject(object: objects[indexPath.row])
-        }
+        cell.setObject(object: objects[indexPath.row])
     }
 }
 
