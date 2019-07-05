@@ -31,13 +31,14 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         return viewController
     }
     
-    class func initializeAudioSelectionViewControllerForStory(with nibName: String, story: PhotoStory) -> UIViewController {
-        let viewController = CreateStoryAudioSelectionViewController(nibName: nibName, bundle: nil)
-        viewController.scrollablePopUpView.isEnable = false
-        let configurator = CreateStorySelectionConfigurator()
-
-        configurator.configure(viewController: viewController, remoteServices: CreateStoryMusicService(),
-                               filters: [.fileType(.audio)], story: story)
+    class func initializeAudioSelectionViewControllerForStory(with story: PhotoStory) -> UIViewController {
+//        let viewController = CreateStoryAudioSelectionViewController()
+//        viewController.scrollablePopUpView.isEnable = false
+//        let configurator = CreateStorySelectionConfigurator()
+//
+//        configurator.configure(viewController: viewController, remoteServices: CreateStoryMusicService(),
+//                               filters: [.fileType(.audio)], story: story)
+        let viewController = CreateStoryAudioSelectionItemViewController(forStory: story)
         return viewController
     }
 

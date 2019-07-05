@@ -289,6 +289,21 @@
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
+		73265A2322CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A1E22CB65F300120FC9 /* CreateStoryAudioSelectionItemViewController.swift */; };
+		73265A2422CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A1E22CB65F300120FC9 /* CreateStoryAudioSelectionItemViewController.swift */; };
+		73265A2522CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A1E22CB65F300120FC9 /* CreateStoryAudioSelectionItemViewController.swift */; };
+		73265A2622CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73265A1F22CB65F400120FC9 /* CreateStoryAudioSelectionItemViewController.xib */; };
+		73265A2722CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73265A1F22CB65F400120FC9 /* CreateStoryAudioSelectionItemViewController.xib */; };
+		73265A2822CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73265A1F22CB65F400120FC9 /* CreateStoryAudioSelectionItemViewController.xib */; };
+		73265A2922CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A2022CB65F400120FC9 /* CreateStoryAudioSelectionItemDesigner.swift */; };
+		73265A2A22CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A2022CB65F400120FC9 /* CreateStoryAudioSelectionItemDesigner.swift */; };
+		73265A2B22CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73265A2022CB65F400120FC9 /* CreateStoryAudioSelectionItemDesigner.swift */; };
+		7339FF8B22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339FF8922CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift */; };
+		7339FF8C22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339FF8922CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift */; };
+		7339FF8D22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339FF8922CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift */; };
+		7339FF8E22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7339FF8A22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib */; };
+		7339FF8F22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7339FF8A22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib */; };
+		7339FF9022CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7339FF8A22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -6287,6 +6302,11 @@
 		7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.debug.xcconfig"; sourceTree = "<group>"; };
+		73265A1E22CB65F300120FC9 /* CreateStoryAudioSelectionItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateStoryAudioSelectionItemViewController.swift; path = Depo/Presentation/UserStories/CreateStory/CreationStorySelectionItems/CreateNew/CreateStoryAudioSelectionItemViewController.swift; sourceTree = SOURCE_ROOT; };
+		73265A1F22CB65F400120FC9 /* CreateStoryAudioSelectionItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateStoryAudioSelectionItemViewController.xib; path = Depo/Presentation/UserStories/CreateStory/CreationStorySelectionItems/CreateNew/CreateStoryAudioSelectionItemViewController.xib; sourceTree = SOURCE_ROOT; };
+		73265A2022CB65F400120FC9 /* CreateStoryAudioSelectionItemDesigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateStoryAudioSelectionItemDesigner.swift; path = Depo/Presentation/UserStories/CreateStory/CreationStorySelectionItems/CreateNew/CreateStoryAudioSelectionItemDesigner.swift; sourceTree = SOURCE_ROOT; };
+		7339FF8922CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioItemCell.swift; sourceTree = "<group>"; };
+		7339FF8A22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryAudioItemCell.xib; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -9758,6 +9778,26 @@
 			path = OTPView;
 			sourceTree = "<group>";
 		};
+		73265A3222CB66C100120FC9 /* CreateNew */ = {
+			isa = PBXGroup;
+			children = (
+				7339FF8822CE0D7B006C3EA6 /* Cell */,
+				73265A1F22CB65F400120FC9 /* CreateStoryAudioSelectionItemViewController.xib */,
+				73265A1E22CB65F300120FC9 /* CreateStoryAudioSelectionItemViewController.swift */,
+				73265A2022CB65F400120FC9 /* CreateStoryAudioSelectionItemDesigner.swift */,
+			);
+			path = CreateNew;
+			sourceTree = "<group>";
+		};
+		7339FF8822CE0D7B006C3EA6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7339FF8922CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift */,
+				7339FF8A22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		736085110D7EF2A078645693 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -10721,6 +10761,7 @@
 		7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */ = {
 			isa = PBXGroup;
 			children = (
+				73265A3222CB66C100120FC9 /* CreateNew */,
 				7C6E2F721F31E4C900536DB6 /* View */,
 				7C6E2F6D1F31E4C900536DB6 /* Presenter */,
 				7C6E2F6B1F31E4C900536DB6 /* Interactor */,
@@ -16255,6 +16296,7 @@
 				8C06AC292008AB9B003D8E05 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				8C06AFAF2008AD71003D8E05 /* frekans.png in Resources */,
 				8C06B09B2008AD71003D8E05 /* refresh.png in Resources */,
+				7339FF8F22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */,
 				8C06AF3F2008AD70003D8E05 /* crop.png in Resources */,
 				8C06B0052008AD71003D8E05 /* Kucuk@3x.png in Resources */,
 				CE3E4D11201B69A900173045 /* PVViewerController.xib in Resources */,
@@ -16417,6 +16459,7 @@
 				7CA4A174207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				8C06B1952008AD72003D8E05 /* undo@3x.png in Resources */,
 				8C0E90281FDEBDFF00789C91 /* ActivityTimelineHeader.xib in Resources */,
+				73265A2722CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				8C06B0472008AD71003D8E05 /* oval_siyah.png in Resources */,
 				8C06B0012008AD71003D8E05 /* Kucuk.png in Resources */,
 				8C06AEE52008AD70003D8E05 /* bottomright@2x.png in Resources */,
@@ -17044,6 +17087,7 @@
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
 				8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */,
+				7339FF8E22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */,
 				7C6E2FA41F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				8C06AF402008AD70003D8E05 /* crop@2x.png in Resources */,
@@ -17158,6 +17202,7 @@
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
 				78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */,
 				78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */,
+				73265A2622CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */,
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
@@ -17816,6 +17861,7 @@
 				CE784DC422A685FB00662219 /* cizgi_3@3x.png in Resources */,
 				CE784DC522A685FB00662219 /* header_icon@2x.png in Resources */,
 				CE784DC622A685FB00662219 /* cizgi_2_selected@3x.png in Resources */,
+				7339FF9022CE0EB4006C3EA6 /* CreateStoryAudioItemCell.xib in Resources */,
 				CE784DC722A685FB00662219 /* ok_selected.png in Resources */,
 				CE784DC822A685FB00662219 /* refreshicon@2x.png in Resources */,
 				CE784DC922A685FB00662219 /* sample_bw@3x.png in Resources */,
@@ -17834,6 +17880,7 @@
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
 				CE784DD822A685FB00662219 /* daire_selected@3x.png in Resources */,
+				73265A2822CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				CE784DD922A685FB00662219 /* BaseFilesGreedViewController.xib in Resources */,
 				CE784DDA22A685FB00662219 /* t_orta_selected@2x.png in Resources */,
 				CE784DDB22A685FB00662219 /* geri@2x.png in Resources */,
@@ -18249,7 +18296,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18306,7 +18353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B1919D41BC522999F1EC871 /* [CP] Check Pods Manifest.lock */ = {
@@ -18395,7 +18442,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18452,7 +18499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -18461,7 +18508,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18470,7 +18517,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -18510,7 +18557,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18567,7 +18614,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
@@ -18602,7 +18649,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18611,7 +18658,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -18685,7 +18732,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -18742,7 +18789,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE784F1022A685FB00662219 /* ShellScript */ = {
@@ -18764,7 +18811,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18773,7 +18820,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lifedrive/Pods-lifedrive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D3D8861611D1E0D1CBD7F137 /* [CP] Check Pods Manifest.lock */ = {
@@ -18822,7 +18869,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -18831,7 +18878,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -18972,6 +19019,7 @@
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
 				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
+				73265A2422CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
@@ -18998,6 +19046,7 @@
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
 				4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
+				7339FF8C22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */,
 				B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
@@ -19668,6 +19717,7 @@
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				FA9ED11D201B7EFC00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
+				73265A2A22CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
 				B56FBB2C2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
 				8C0E8EE61FDEBDFF00789C91 /* CreateStoryNameModuleInput.swift in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
@@ -20538,6 +20588,7 @@
 				EFA74FB41FBF378F00CF946E /* PrintInitializer.swift in Sources */,
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
 				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
+				73265A2322CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
 				4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
@@ -20709,6 +20760,7 @@
 				B53DCE8E20EF634900400DBA /* GZIP.m in Sources */,
 				CEDFECAF1F11C294003D1A75 /* SearchService.swift in Sources */,
 				CEE1D1F91F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
+				73265A2922CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
 				CE51ACA91EF90853005DCEE0 /* AutoSyncInteractorInput.swift in Sources */,
 				CEAE3FEC1EFD517300A405B2 /* CustomNavBarButton.swift in Sources */,
 				A217E44921A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */,
@@ -21014,6 +21066,7 @@
 				CEE1D2001F714F370008F4CF /* PredicateRules.swift in Sources */,
 				CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */,
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
+				7339FF8B22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */,
 				8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
 				CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */,
 				9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
@@ -21828,6 +21881,7 @@
 				CE7848C922A685FB00662219 /* UserProfileInitializer.swift in Sources */,
 				CE7848CA22A685FB00662219 /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE7848CB22A685FB00662219 /* BaseCellModel.swift in Sources */,
+				73265A2522CB65F500120FC9 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				CE7848CC22A685FB00662219 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE7848CD22A685FB00662219 /* MappingError.swift in Sources */,
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
@@ -21999,6 +22053,7 @@
 				CE78497222A685FB00662219 /* GZIP.m in Sources */,
 				CE78497322A685FB00662219 /* SearchService.swift in Sources */,
 				CE78497422A685FB00662219 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
+				73265A2B22CB65F500120FC9 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
 				CE78497522A685FB00662219 /* AutoSyncInteractorInput.swift in Sources */,
 				CE78497622A685FB00662219 /* CustomNavBarButton.swift in Sources */,
 				CE78497722A685FB00662219 /* LeavePremiumConfigurator.swift in Sources */,
@@ -22304,6 +22359,7 @@
 				CE784AA122A685FB00662219 /* DispatchQueueLabels.swift in Sources */,
 				CE784AA222A685FB00662219 /* OrientationManager.swift in Sources */,
 				CE784AA322A685FB00662219 /* CustomScrollIndicator.swift in Sources */,
+				7339FF8D22CE0EB4006C3EA6 /* CreateStoryAudioItemCell.swift in Sources */,
 				CE784AA422A685FB00662219 /* PeriodicContactSyncInteractor.swift in Sources */,
 				CE784AA522A685FB00662219 /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				CE784AA622A685FB00662219 /* InstagramAuthViewController.swift in Sources */,
