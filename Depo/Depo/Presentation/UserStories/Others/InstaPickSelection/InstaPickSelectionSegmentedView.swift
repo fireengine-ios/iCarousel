@@ -48,12 +48,25 @@ final class InstaPickSelectionSegmentedView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private let buttonText: String
+    private let maxReachedText: String
+    private let needShowSegmentedControll: Bool
+
+    init(buttonText: String, maxReachedText: String, needShowSegmentedControll: Bool) {
+        self.buttonText = buttonText
+        self.maxReachedText = maxReachedText
+        self.needShowSegmentedControll = needShowSegmentedControll
+        
+        super.init(frame: .zero)
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        assertionFailure()
+
+        self.buttonText = ""
+        self.maxReachedText = ""
+        self.needShowSegmentedControll = false
         super.init(coder: aDecoder)
         setup()
     }
@@ -62,6 +75,9 @@ final class InstaPickSelectionSegmentedView: UIView {
         topView.backgroundColor = .white
         containerView.backgroundColor = .white
         setupLayout()
+        
+        analyzeButton.setTitle(buttonText, for: .normal)
+        analyzesLeftLabel.text = maxReachedText
     }
     
     private func setupLayout() {
@@ -90,7 +106,9 @@ final class InstaPickSelectionSegmentedView: UIView {
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).activate()
+        
+        let topAnchor = needShowSegmentedControll ? topView.bottomAnchor : view.topAnchor
+        containerView.topAnchor.constraint(equalTo: topAnchor).activate()
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
@@ -99,30 +117,24 @@ final class InstaPickSelectionSegmentedView: UIView {
         transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
         transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        transparentGradientView.heightAnchor
-            .constraint(equalToConstant: transparentGradientViewHeight).activate()
+        transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).activate()
         
         analyzeButton.translatesAutoresizingMaskIntoConstraints = false
         
-        analyzeButton.leadingAnchor
-            .constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 10).activate()
-        analyzeButton.trailingAnchor
-            .constraint(lessThanOrEqualTo: view.trailingAnchor, constant: 10).activate()
+        analyzeButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 10).activate()
         analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
         analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
         analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
-        
-        
+        analyzeButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 206).activate()
+
         analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
         analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
                                                   constant: Device.isIpad ? -20 : 0).activate()
         if Device.isIpad {
             analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
         } else {
-            analyzesLeftLabel.leadingAnchor
-                .constraint(equalTo: topView.leadingAnchor, constant: 14).activate()
-            analyzesLeftLabel.trailingAnchor
-                .constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
+            analyzesLeftLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 14).activate()
+            analyzesLeftLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
         }
     }
 }

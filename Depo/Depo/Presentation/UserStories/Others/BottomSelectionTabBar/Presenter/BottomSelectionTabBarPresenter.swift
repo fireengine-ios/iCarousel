@@ -96,6 +96,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.hideBar(animated: animated)
     }
     
+    func dismissWithNotification() {
+        dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+    }
+    
     func show(animated: Bool, onView sourceView: UIView?) {
         let router = RouterVC()
         guard let rootVC = router.rootViewController else {
@@ -116,81 +121,82 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
-        guard let selectedItems = basePassingPresenter?.selectedItems else {
-            return
-        }
-        
-        guard let bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput,
-            let types = bottomBarInteractor.currentBarcongfig?.elementsConfig else {
-            return
-        }
-        
-        let type = types[index]
-        
-        switch type {
-        case .delete:
-            MenloworksAppEvents.onDeleteClicked()
-            interactor.delete(item: selectedItems)
-            basePassingPresenter?.stopModeSelected()
-        case .deleteFaceImage:
-            MenloworksAppEvents.onDeleteClicked()
-            interactor.delete(item: selectedItems)
-            basePassingPresenter?.stopModeSelected()
-        case .download:
-            MenloworksAppEvents.onDownloadClicked()
-            basePassingPresenter?.stopModeSelected()
-            interactor.download(item: selectedItems)
-        case .edit:
-            MenloworksTagsService.shared.onEditClicked()
-            RouterVC().getViewControllerForPresent()?.showSpinner()
-            self.interactor.edit(item: selectedItems, complition: {
-                RouterVC().getViewControllerForPresent()?.hideSpinner()
-            })
-        case .info:
-            if let firstSelected = selectedItems.first as? Item {
-                router.onInfo(object: firstSelected)
+        basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
+            guard let self = self,
+                let bottomBarInteractor = self.interactor as? BottomSelectionTabBarInteractorInput,
+                let types = bottomBarInteractor.currentBarcongfig?.elementsConfig else {
+                    return
             }
             
-            view.unselectAll()
-        case .move:
-            interactor.move(item: selectedItems, toPath: "")
-        case .share:
-            let onlyLink = selectedItems.contains(where: {
-                $0.fileType != .image && $0.fileType != .video
-            })
-
-            if onlyLink {
-                interactor.shareViaLink(item: selectedItems, sourceRect: middleTabBarRect)
-            } else {
-                interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
+            let type = types[index]
+            
+            switch type {
+            case .delete:
+                MenloworksAppEvents.onDeleteClicked()
+                self.interactor.delete(item: selectedItems)
+                self.basePassingPresenter?.stopModeSelected()
+            case .deleteFaceImage:
+                MenloworksAppEvents.onDeleteClicked()
+                self.interactor.delete(item: selectedItems)
+                self.basePassingPresenter?.stopModeSelected()
+            case .download:
+                MenloworksAppEvents.onDownloadClicked()
+                self.basePassingPresenter?.stopModeSelected()
+                self.interactor.download(item: selectedItems)
+            case .edit:
+                MenloworksTagsService.shared.onEditClicked()
+                RouterVC().getViewControllerForPresent()?.showSpinner()
+                self.interactor.edit(item: selectedItems, complition: {
+                    RouterVC().getViewControllerForPresent()?.hideSpinner()
+                })
+            case .info:
+                if let firstSelected = selectedItems.first as? Item {
+                    self.router.onInfo(object: firstSelected)
+                }
+                
+                self.view.unselectAll()
+            case .move:
+                self.interactor.move(item: selectedItems, toPath: "")
+            case .share:
+                let onlyLink = selectedItems.contains(where: {
+                    $0.fileType != .image && $0.fileType != .video
+                })
+                
+                if onlyLink {
+                    self.interactor.shareViaLink(item: selectedItems, sourceRect: self.middleTabBarRect)
+                } else {
+                    self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
+                }
+                self.basePassingPresenter?.stopModeSelected()
+            case .sync:
+                MenloworksAppEvents.onSyncClicked()
+                self.basePassingPresenter?.stopModeSelected()
+                self.interactor.sync(item: selectedItems)
+            case .removeFromAlbum:
+                MenloworksAppEvents.onRemoveFromAlbumClicked()
+                self.interactor.removeFromAlbum(items: selectedItems)
+                self.basePassingPresenter?.stopModeSelected()
+            case .removeFromFaceImageAlbum:
+                self.basePassingPresenter?.stopModeSelected()
+                self.basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
+            case .addToAlbum:
+                self.interactor.addToAlbum(items: selectedItems)
+            case .print:
+                self.interactor.trackEvent(elementType: .print)
+                MenloworksAppEvents.onPrintClicked()
+                self.router.showPrint(items: selectedItems)
+            case .removeAlbum:
+                self.interactor.delete(item: selectedItems)
+            default:
+                break
             }
-            basePassingPresenter?.stopModeSelected()
-        case .sync:
-            MenloworksAppEvents.onSyncClicked()
-            basePassingPresenter?.stopModeSelected()
-            interactor.sync(item: selectedItems)
-        case .removeFromAlbum:
-            MenloworksAppEvents.onRemoveFromAlbumClicked()
-            interactor.removeFromAlbum(items: selectedItems)
-            basePassingPresenter?.stopModeSelected()
-        case .removeFromFaceImageAlbum:
-            self.basePassingPresenter?.stopModeSelected()
-            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
-        case .addToAlbum:
-            interactor.addToAlbum(items: selectedItems)
-        case .print:
-            interactor.trackEvent(elementType: .print)
-            MenloworksAppEvents.onPrintClicked()
-            router.showPrint(items: selectedItems)
-        case .removeAlbum:
-            interactor.delete(item: selectedItems)
-        default:
-            break
         }
     }
 
     func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        presentAlertSheet(withActions: constractActions(withTypes: types, forItem: nil), presentedBy: sender)
+        constractActions(withTypes: types, forItem: nil) { [weak self] actions in
+            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
+        }
     }
     
     func showAlertSheet(withItems items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
@@ -200,8 +206,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         guard let items = items as? [Item] else {
             return
         }
-        let actions = constractActions(withTypes: adjastActionTypes(forItems: items), forItem: nil)
-        presentAlertSheet(withActions: actions, presentedBy: sender)
+        constractActions(withTypes: adjastActionTypes(forItems: items), forItem: nil) { [weak self] actions in
+            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
+        }
     }
     
     func showSpecifiedAlertSheet(withItem item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?) {
@@ -219,9 +226,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
         types.append(.delete)
         
-        let actions = constractActions(withTypes: types, forItem: [item])
-        
-        presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
+        constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
+            self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
+        }
     }
     
     private func adjastActionTypes(forItems items: [Item]) -> [ElementTypes] {
@@ -277,7 +284,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         return actionTypes
     }
 
-    private func constractActions(withTypes types: [ElementTypes], forItem items: [Item]?) -> [UIAlertAction] {
+    private func constractActions(withTypes types: [ElementTypes], forItem items: [Item]?,
+                                  actionsCallback: @escaping AlertActionsCallback) {
         
         var filteredTypes = types
         let langCode = Device.locale
@@ -285,157 +293,164 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             filteredTypes = types.filter({ $0 != .print })
         }
         
-        var tempoItems = items
-        if tempoItems == nil {
-            guard let wrappedArray = basePassingPresenter?.selectedItems as? [Item] else {
-                return []
+        basePassingPresenter?.getSelectedItems { [weak self] selectedIntems in
+            guard let self = self else {
+                return
             }
-            tempoItems = wrappedArray
-        }
-        
-        guard let currentItems = tempoItems else {
-            return []
-        }
-        return filteredTypes.map {
-            var action: UIAlertAction
-            switch $0 {
-            case .info:
-                action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-                    self.router.onInfo(object: currentItems.first!)
-                    self.view.unselectAll()
-                })
-                
-            case .edit:
-                action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    RouterVC().tabBarVC?.showSpinner()
-                    self.interactor.edit(item: currentItems, complition: {
-                        RouterVC().tabBarVC?.hideSpinner()
+            var tempoItems = items
+            if tempoItems == nil {
+                guard let wrappedArray = selectedIntems as? [Item] else {
+                    actionsCallback([])
+                    return
+                }
+                tempoItems = wrappedArray
+            }
+            
+            guard let currentItems = tempoItems else {
+                actionsCallback([])
+                return
+            }
+            actionsCallback(filteredTypes.map {
+                var action: UIAlertAction
+                switch $0 {
+                case .info:
+                    action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
+                        self.router.onInfo(object: currentItems.first!)
+                        self.view.unselectAll()
                     })
-                })
-            case .download:
-                action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                    MenloworksAppEvents.onDownloadClicked()
-                    self.interactor.download(item: currentItems)
-                })
-            case .delete:
-                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    MenloworksAppEvents.onDeleteClicked()
-                    self.interactor.delete(item: currentItems)
-                })
-            case .deleteFaceImage:
-                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    MenloworksAppEvents.onDeleteClicked()
-                    self.interactor.delete(item: currentItems)
-                })
-            case .move:
-                action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
-                    self.interactor.move(item: currentItems, toPath: "")
-                })
-            case .share:
-                action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                    MenloworksAppEvents.onShareClicked()
-                    self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
-                })
-            //Photos and albumbs
-            case .photos:
-                action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in
-                    self.interactor.photos(items: currentItems)
-                })
-            case .addToAlbum:
-                action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
-                    self.interactor.addToAlbum(items: currentItems)
-                })
-            case .albumDetails:
-                action = UIAlertAction(title: TextConstants.actionSheetAlbumDetails, style: .default, handler: { _ in
-                    self.interactor.albumDetails(items: currentItems)
-                })
-            case .shareAlbum:
-                action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                    MenloworksAppEvents.onShareClicked()
-                    self.interactor.shareAlbum(items: currentItems)
-                })
-            case .makeAlbumCover:
-                action = UIAlertAction(title: TextConstants.actionSheetMakeAlbumCover, style: .default, handler: { _ in
-                    self.interactor.makeAlbumCover(items: currentItems)
-                })
-            case .removeFromAlbum:
-                action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                    MenloworksAppEvents.onRemoveFromAlbumClicked()
-                    self.interactor.removeFromAlbum(items: currentItems)
-                })
-            case .backUp:
-                action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
-
-                    self.interactor.backUp(items: currentItems)
-                })
-            case .copy:
-                action = UIAlertAction(title: TextConstants.actionSheetCopy, style: .default, handler: { _ in
-                    self.interactor.copy(item: currentItems, toPath: "")
-                })
-            case .createStory:
-                action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                    self.interactor.createStory(items: currentItems)
-                })
-            case .iCloudDrive:
-                action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
-                    self.interactor.iCloudDrive(items: currentItems)
-                })
-            case .lifeBox:
-                action = UIAlertAction(title: TextConstants.actionSheetLifeBox, style: .default, handler: { _ in
-                    self.interactor.lifeBox(items: currentItems)
-                })
-            case .more:
-                action = UIAlertAction(title: TextConstants.actionSheetMore, style: .default, handler: { _ in
-                    self.interactor.more(items: currentItems)
-                })
-            case .musicDetails:
-                action = UIAlertAction(title: TextConstants.actionSheetMusicDetails, style: .default, handler: { _ in
-                    self.interactor.musicDetails(items: currentItems)
-                })
-            case .addToPlaylist:
-                action = UIAlertAction(title: TextConstants.actionSheetAddToPlaylist, style: .default, handler: { _ in
-                    self.interactor.addToPlaylist(items: currentItems)
-                })
-            case .addToCmeraRoll:
-                action = UIAlertAction(title: TextConstants.actionSheetDownloadToCameraRoll, style: .default, handler: { _ in
-                    self.interactor.downloadToCmeraRoll(items: currentItems)
-                })
-            case .addToFavorites:
-                action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                    MenloworksEventsService.shared.onAddToFavoritesClicked()
-                    self.interactor.addToFavorites(items: currentItems)
-                })
-            case .removeFromFavorites:
-                action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
                     
-                    self.interactor.removeFromFavorites(items: currentItems)
-                })
-            case .documentDetails:
-                action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in
-                    self.interactor.documentDetails(items: currentItems)
-                })
-                
-            case .select:
-                action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-//                    self.interactor.//TODO: select and select all pass to grid's presenter
-                })
-            case .selectAll:
-                action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
-//                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
-                })
-            case .print:
+                case .edit:
+                    action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
+                        RouterVC().tabBarVC?.showSpinner()
+                        self.interactor.edit(item: currentItems, complition: {
+                            RouterVC().tabBarVC?.hideSpinner()
+                        })
+                    })
+                case .download:
+                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                        MenloworksAppEvents.onDownloadClicked()
+                        self.interactor.download(item: currentItems)
+                    })
+                case .delete:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                        MenloworksAppEvents.onDeleteClicked()
+                        self.interactor.delete(item: currentItems)
+                    })
+                case .deleteFaceImage:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                        MenloworksAppEvents.onDeleteClicked()
+                        self.interactor.delete(item: currentItems)
+                    })
+                case .move:
+                    action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
+                        self.interactor.move(item: currentItems, toPath: "")
+                    })
+                case .share:
+                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                        MenloworksAppEvents.onShareClicked()
+                        self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                    })
+                //Photos and albumbs
+                case .photos:
+                    action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in
+                        self.interactor.photos(items: currentItems)
+                    })
+                case .addToAlbum:
+                    action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
+                        self.interactor.addToAlbum(items: currentItems)
+                    })
+                case .albumDetails:
+                    action = UIAlertAction(title: TextConstants.actionSheetAlbumDetails, style: .default, handler: { _ in
+                        self.interactor.albumDetails(items: currentItems)
+                    })
+                case .shareAlbum:
+                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                        MenloworksAppEvents.onShareClicked()
+                        self.interactor.shareAlbum(items: currentItems)
+                    })
+                case .makeAlbumCover:
+                    action = UIAlertAction(title: TextConstants.actionSheetMakeAlbumCover, style: .default, handler: { _ in
+                        self.interactor.makeAlbumCover(items: currentItems)
+                    })
+                case .removeFromAlbum:
+                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                        MenloworksAppEvents.onRemoveFromAlbumClicked()
+                        self.interactor.removeFromAlbum(items: currentItems)
+                    })
+                case .backUp:
+                    action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
+                        
+                        self.interactor.backUp(items: currentItems)
+                    })
+                case .copy:
+                    action = UIAlertAction(title: TextConstants.actionSheetCopy, style: .default, handler: { _ in
+                        self.interactor.copy(item: currentItems, toPath: "")
+                    })
+                case .createStory:
+                    action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
+                        self.interactor.createStory(items: currentItems)
+                    })
+                case .iCloudDrive:
+                    action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
+                        self.interactor.iCloudDrive(items: currentItems)
+                    })
+                case .lifeBox:
+                    action = UIAlertAction(title: TextConstants.actionSheetLifeBox, style: .default, handler: { _ in
+                        self.interactor.lifeBox(items: currentItems)
+                    })
+                case .more:
+                    action = UIAlertAction(title: TextConstants.actionSheetMore, style: .default, handler: { _ in
+                        self.interactor.more(items: currentItems)
+                    })
+                case .musicDetails:
+                    action = UIAlertAction(title: TextConstants.actionSheetMusicDetails, style: .default, handler: { _ in
+                        self.interactor.musicDetails(items: currentItems)
+                    })
+                case .addToPlaylist:
+                    action = UIAlertAction(title: TextConstants.actionSheetAddToPlaylist, style: .default, handler: { _ in
+                        self.interactor.addToPlaylist(items: currentItems)
+                    })
+                case .addToCmeraRoll:
+                    action = UIAlertAction(title: TextConstants.actionSheetDownloadToCameraRoll, style: .default, handler: { _ in
+                        self.interactor.downloadToCmeraRoll(items: currentItems)
+                    })
+                case .addToFavorites:
+                    action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
+                        MenloworksEventsService.shared.onAddToFavoritesClicked()
+                        self.interactor.addToFavorites(items: currentItems)
+                    })
+                case .removeFromFavorites:
+                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
+                        
+                        self.interactor.removeFromFavorites(items: currentItems)
+                    })
+                case .documentDetails:
+                    action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in
+                        self.interactor.documentDetails(items: currentItems)
+                    })
+                    
+                case .select:
+                    action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
+                        //                    self.interactor.//TODO: select and select all pass to grid's presenter
+                    })
+                case .selectAll:
+                    action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
+                        //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
+                    })
+                case .print:
                     action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
                         MenloworksAppEvents.onPrintClicked()
-                      //TODO: will be implemented in the next package
+                        //TODO: will be implemented in the next package
                     })
-
-            default:
-                action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
                     
-                })
-            }
-            return action
+                default:
+                    assertionFailure("👆PLEASE add your new type into switch in constractActions( method in BottomSelectionTabBarPresenter class👆")
+                    action = UIAlertAction(title: "TEST", style: .default, handler: nil)
+                }
+                return action
+            })
         }
+        
     }
     
     private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil) {

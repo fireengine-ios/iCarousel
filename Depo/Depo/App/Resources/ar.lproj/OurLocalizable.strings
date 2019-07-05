@@ -69,12 +69,12 @@
 "Cancel" = "إلغاء الأمر";
 "Info" = "معلومات";
 "You can open settings and cancel subscption." = "يمكن إلغاء الاشتراك بفتح الإعدادات.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "يرجى إرسال \"Iptal LIFEBOX %@\" إلى 2222 لإلغاء الحزمة.";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "يرجى إرسال \"Iptal LIFEDRIVE %@\" إلى 2222 لإلغاء الحزمة.";
 "You can visit iTunes to cancel your subscription" = "يمكن زيارة iTunes لإلغاء الحزمة.";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
-"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم إرسال كلمة LIFE CANCEL إلى 3030 لإلغاء عضويتهم، أما باقي الزبائن، فيمكنهم إرسال LIFEBOX CANCEL إلى الرقم نفسه 3030 لإلغاء عضويتهم.";
+"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم إرسال كلمة LIFE CANCEL إلى 3030 لإلغاء عضويتهم، أما باقي الزبائن، فيمكنهم إرسال LIFEDRIVE CANCEL إلى الرقم نفسه 3030 لإلغاء عضويتهم.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "لإلغاء حزمة لايف بوكس 50 غيغابايت، أرسل 50VYLK فى رسالة نصيّة قصيرة إلى 8080، ولإلغاء حزمة لايف بوكس 500 غيغابايت ارسل 500VYLK فى رسالة نصيّة قصيرة إلى 8080.";
-"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم الاكتفاء بإرسال كلمة LIFE يليها مساحة التخزين التي يرغبون بها إلى الرقم 3030، أما باقي الزبائن فيمكنهم إرسال LIFEBOX 50GB للحصول على حزمة لايف بوكس 50 غيغابايت، وإرسال LIFEBOX 500GB للحصول على حزمة لايف بوكس 500 غيغابايت، وإرسال LIFEBOX 2.5TB للحصول على حزمة لايف بوكس 2.5 تيرابايت، وذلك كله إلى الرقم 3030 لتفعيل عضويتهم.";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم الاكتفاء بإرسال كلمة LIFE يليها مساحة التخزين التي يرغبون بها إلى الرقم 3030، أما باقي الزبائن فيمكنهم إرسال LIFEDRIVE 50GB للحصول على حزمة لايف بوكس 50 غيغابايت، وإرسال LIFEDRIVE 500GB للحصول على حزمة لايف بوكس 500 غيغابايت، وإرسال LIFEDRIVE 2.5TB للحصول على حزمة لايف بوكس 2.5 تيرابايت، وذلك كله إلى الرقم 3030 لتفعيل عضويتهم.";
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "أسعار خاصة لمشتركي لايف سل! إن رغبت بتنشيط لايف بوكس 50 غيغابايت مقابل 24,99 هريفنا أوكرانية /كل 30 يوماً، أرسل 50VKL برسالة نصية قصيرة SMS إلى 8080، وإن رغبت بلايف بوكس 500 غيغابايت مقابل 52,99 هريفنا أوكرانية/كل 30 يوماً، أرسل 500VKL برسالة نصية قصيرة SMS إلى 8080.";
 "%ld docs" = "%ld مستند";
 "Quota info" = "معلومات الاستعمال";
@@ -578,7 +578,7 @@
 "LifeboxLargePopUpExpandButtonTitle" = "توسيع مساحة التخزين";
 "LifeboxLargePopUpSkipButtonTitle" = "تخطّي";
 "Lifebox can sync your contacts automatically." = "يمكن للايف بوكس مزامنة جهات الاتصال تلقائياً";
-"error_login" = "تحتاج إلى تسجيل الدخول إلى lifebox لتحميل الملفات";
+"error_login" = "تحتاج إلى تسجيل الدخول إلى lifedrive لتحميل الملفات";
 "uploading" = "جاري التحميل";
 "widgetBottomTitleLastSyncFormat" = "آخر تحميل:%@";
 "widgetBottomTitleNewerSyncronized" = "لا يتم أبدًا استخدام المزامنة التلقائية";
@@ -587,7 +587,7 @@
 "widgetTopTitleInProgress" = "المزامنة الآلية قيد التقدم";
 "error_authentication_message" = "يرجى فتح التطبيق وتسجيل الدخول للمتابعة";
 "error_authentication_title" = "تسجيل الدخول";
-"error_passcode_message" = "الرجاء فتح lifebox وتعطيل رمز المرور للمتابعة";
+"error_passcode_message" = "الرجاء فتح lifedrive وتعطيل رمز المرور للمتابعة";
 "error_passcode_title" = "تم تمكين قفل رمز المرور";
 "Successfully purchased" = "تم الشراء بنجاح";
 "Cancel Analyzing" = "إلغاء";
@@ -628,7 +628,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "لا تظهر مرة أخرى";
 "LifeboxSmallPopUpFirstButtonText" = "موافق";
 "LifeboxSmallPopUpSecondButtonText" = "ترقية";
-"has_remained_lifebox_usage" = "%@ of %@ بقيت (فقط لاستخدام Lifebox)";
+"has_remained_lifebox_usage" = "%@ of %@ بقيت (فقط لاستخدام Lifedrive)";
 "Renewal Date: %@" = "تاريخ التجديد: %@";
 "created" = "تم الإنشاء";
 "uploaded" = "تم التحميل";
@@ -649,17 +649,17 @@
 "Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";
 "Failed to get albums" = "فشل في الحصول على ألبومات";
 "termsAndUseEtkCheckboxText" = "termsanduse";
-"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"offersCancelLife" = "To deactivate lifedrive 25GB please send SMS with the text “Stop1”, for lifedrive 100GB please send SMS with the text “Stop2\", for lifedrive 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "رُفِضَ تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.";
 "Please enter the text below" = "يرجى إدخال النص أدناه";
 "facebook_photo_tags" = "Facebook صور العلامات";
-"facebook_tags_on" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
-"facebook_tags_off" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
+"facebook_tags_on" = "ستحصل على علامات Facebook الخاصة بك على lifedrive عند تمكين هذا الخيار\n";
+"facebook_tags_off" = "ستحصل على علامات Facebook الخاصة بك على lifedrive عند تمكين هذا الخيار\n";
 "facebook_tags_import" = "يرجى تمكين خيار \"استيراد من Facebook\" لاستخدام ميزة \"نقل علامة Facebook\".\n";
 "TermsOfUseLinkText" = "انقر";
 "launch_campaign_card_detail" = "تفاصيل";
 "launch_campaign_card_title" = "حملة براغ";
-"launch_campaign_card_message" = "براغ في انتظارك! ابدأ باستكشاف Lifebox الآن وكن أحد الأزواج الـ10 المحظوظين\n";
+"launch_campaign_card_message" = "براغ في انتظارك! ابدأ باستكشاف Lifedrive الآن وكن أحد الأزواج الـ10 المحظوظين\n";
 "%d same contacts" = "%d جهات الاتصال نفسها";
 "Quick Scroll Preparation" = "يمكنك إعداد صورك وفيديوهاتك";
 
@@ -706,24 +706,24 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  %@ IPTAL LIFEBOX.";
+"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  %@ IPTAL LIFEDRIVE.";
 "package_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور.";
 "package_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "package_lifecell_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 8080، وتكتب فيها “50VYKL” من أجل إلغاء لايف بوكس 50 جيجا، ولإلغاء لايف بوكس 500 جيجا أرسل رسالة مكتوب بها“500VYKL” ";
 "package_promo_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
-"package_kktcell_cancel_text" = "عملاء بلاتينيوم ولايف سيل يمكنهم إرسال \" LIFE CANCEL\"، والعملاء الآخرين يمكنهم إرسال \" LIFEBOX CANCEL\" إلى 3030.";
+"package_kktcell_cancel_text" = "عملاء بلاتينيوم ولايف سيل يمكنهم إرسال \" LIFE CANCEL\"، والعملاء الآخرين يمكنهم إرسال \" LIFEDRIVE CANCEL\" إلى 3030.";
 "package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
 "package_life_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 6767، وتكتب فيها “Stop1” من أجل إلغاء لايف بوكس 25 جيجا، أما“Stop2” من أجل إلغاء لايف بوكس 100 جيجا، أما“Stop3” من أجل إلغاء لايف بوكس 500 جيجا";
-"package_paycell_all_access_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
-"package_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
-"package_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
+"package_paycell_all_access_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
+"package_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
+"package_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
 "package_default_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "يمكنك استخدام جميع المزايا المتقدمة من لايف بوكس من خلال العضوية البريميوم.";
 "leave_premium_cancel_description" = "لن تتمكن من الاستفادة من امتيازات البريميوم إذا ألغيت عضويتك";
 "feature_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"feature_slcm_cancel_text" = "للإلغاء يمكنك إرسال (LIFEBOX PREMIUM IPTAL) إلى 2200.";
+"feature_slcm_cancel_text" = "للإلغاء يمكنك إرسال (LIFEDRIVE PREMIUM IPTAL) إلى 2200.";
 "feature_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور";
 "feature_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "feature_lifecell_cancel_text" = "لأنك مستخدم lifecell  يمكنك الاستمرار في استخدام مميزات العضوية البريميوم مجانًا.";
@@ -731,10 +731,10 @@
 "feature_kktcell_cancel_text" = "لأنك مستخدم  lifecell-KKTCيمكنك الاستمرار في استخدام مميزات العضوية البريميوم مجانًا.";
 "feature_moldcell_cancel_text" = "لأنك مستخدم  Moldcellيمكنك الاستمرار في استخدام مميزات العضوية البريميوم مجانًا.";
 "feature_life_cancel_text" = "لأنك مستخدم  لايف:) يمكنك الاستمرار في استخدام مميزات العضوية البريميوم مجانًا.";
-"feature_paycell_all_access_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
-"feature_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
-"feature_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
-"feature_all_access_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
+"feature_paycell_all_access_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
+"feature_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
+"feature_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
+"feature_all_access_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifedrive.com.";
 "feature_default_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا لمعالجة طلبك.";
 
 /*PackageInfoView*/
@@ -818,7 +818,7 @@
 "analyze_history_free_text" = "غير محدود بالنسبة لك";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "من أجل شراء حزمة PhotoPick تحتاج الى ترقية تطبيق lifebox ";
+"instapick_upgrade_popup_text" = "من أجل شراء حزمة PhotoPick تحتاج الى ترقية تطبيق lifedrive ";
 "instapick_upgrade_popup_button" = "ترقية";
 "instapick_upgrade_popup_no" = "لا";
 "instapick_analysis_left" = "يوجد تحليل متبق:%1$d/%2$d";
@@ -872,26 +872,26 @@
 "data_package_for_turkcell" = "حزمة بيانات إضافية";
 "delete_duplicated_contacts" = "احذف الاسماء المتكررة في الدليل الخاص بي!";
 "leave_middle_membership" = "انهي العضوية القياسية + ";
-"leave_middle_turkcell" = "من أجل الغاء الحزمة الرجاء اكتب IPTAL LIFEBOX STANDART+ وارسلها على الرقم 2200.";
+"leave_middle_turkcell" = "من أجل الغاء الحزمة الرجاء اكتب IPTAL LIFEDRIVE STANDART+ وارسلها على الرقم 2200.";
 "package_FWI_cancel_text" = "يمكنك إلغاء أو إدارة اشتراك Digicel من تطبيق My Digicel أو خدمة العملاء أو في المتجر.";
 "package_jamaica_cancel_text" = "يمكنك إلغاء أو إدارة اشتراك Digicel من تطبيق My Digicel أو خدمة العملاء أو في المتجر.";
 "feature_digicell_cancel_text" = "نظرًا لأنك مستخدم لخدمة Digicell ، فلا يزال بإمكانك استخدام ميزات Premium مجانًا.";
 "terms_and_use_etk_checkbox" = "أرغب في الحصول على رسائل إلكترونية تجارية من أجل الإطلاع على المنتجات والخدمات المميزة من تركسال وشركات المجموعة لغاية بإبلاغ عكس ذلك من قبلي وفق القانون رقم 6553 واللوائح الأخرى ذات الصلة.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "تركسال وشركات المجموعة";
 "terms_and_use_etk_link_commercial_email_messages" = "رسائل إلكترونية تجارية";
-"commercial_email_messages" = " \nأوافق بأني أقبل إرسال رسائل إلكترونية تجارية (الرسائل التي تحتوي على بيانات وصوت وفيديو يتم إرسالها بهدف تجاري وتتم في بيئة إلكتروينة بإستخدام الوسائل مثل الهاتف، مراكز الإتصال، الفاكس، ماكينات الإتصال الآلي، أنظمة تسجيل الصوت الذكية، البريد الإلكتروني، خدمة الرسائل القصيرة) في إطارة القانون المتعلق بتنظيم التجارة الإلكترونية رقم 6563 (\"القانون\") و اللوائح بخصوص الإتصالات التجارية و الرسائل الإلكترونية التجارية (\"اللوائح\") من قبل تركسال و شركات المجموعة من أجل التعريف بالمنتجات – الخدمات الجديدة وأنواعها و تسوقيها و إعلان الفرص العامة / الخاصة المتعلقة بتركسل و شركات المجموعة و / أو المؤسسات الموجودة ضمن التعاون بواسطة إستخدام بيانات الإتصال الخاصة بي والتي قدمتها إثناء عضويتي في تطبيق Lifebox أو موجودة لدى تركسل و شركات المجموعة وذلك بشكل دائم حتى ولو إنتها إتفاقية الإستخدام لحين قيامي بإستخدام حقي في الرفض.\nالرسائل الإلكترونية التجارية التي يتم إرسالها بهدف تعريف وتسويق أو تعريف إستخدام البضائع والخدمات الحصرية إلى أعضاء ومستخدمي المؤسسات ضمن إطار قانون التواصل الإلكتروني رقم 5809 تقم خارج الإستثناء. لهذا السبب الموافقة التي أدليت بها أعلاه هي مستقلة عن الموافقة المتعلقة بتعريف المنتجات والخدمات للشركات التي أكون عضو/ مستخدم فيها وأوافق بأني أقبل الرسائل الإلكترونية التجارية التي يتحتوي على أهداف التعريف والتسويق المتعلقة بالبضائع والخدمات من هذه المؤسسات ضمن الموافقة التي أدليت بها إلى المؤسسات التي أكون عضوا بها حتى ولو قمت بإلغاء الموافقة التي أدليت بها في هذا النص ضمن القانون واللوائح باستخدام حقي في الرفض و أنه يوجد حق لي في رفض الرسائل الإلكترونية التجارية هذه.\n";
-"NSLocationAlwaysUsageDescription" = "سيتم استخدام الموقع لعمل نسخ احتياطية في الخلفية.";
-"NSPhotoLibraryAddUsageDescription" = "يحتاج التطبيق إلى إذن منك للوصول إلى معرض الجهاز";
-"NSPhotoLibraryUsageDescription" = "تحتاج إلى إذنك لإظهار الصور ومقاطع الفيديو الخاصة بك.";
+"commercial_email_messages" = " \nأوافق بأني أقبل إرسال رسائل إلكترونية تجارية (الرسائل التي تحتوي على بيانات وصوت وفيديو يتم إرسالها بهدف تجاري وتتم في بيئة إلكتروينة بإستخدام الوسائل مثل الهاتف، مراكز الإتصال، الفاكس، ماكينات الإتصال الآلي، أنظمة تسجيل الصوت الذكية، البريد الإلكتروني، خدمة الرسائل القصيرة) في إطارة القانون المتعلق بتنظيم التجارة الإلكترونية رقم 6563 (\"القانون\") و اللوائح بخصوص الإتصالات التجارية و الرسائل الإلكترونية التجارية (\"اللوائح\") من قبل تركسال و شركات المجموعة من أجل التعريف بالمنتجات – الخدمات الجديدة وأنواعها و تسوقيها و إعلان الفرص العامة / الخاصة المتعلقة بتركسل و شركات المجموعة و / أو المؤسسات الموجودة ضمن التعاون بواسطة إستخدام بيانات الإتصال الخاصة بي والتي قدمتها إثناء عضويتي في تطبيق Lifedrive أو موجودة لدى تركسل و شركات المجموعة وذلك بشكل دائم حتى ولو إنتها إتفاقية الإستخدام لحين قيامي بإستخدام حقي في الرفض.\nالرسائل الإلكترونية التجارية التي يتم إرسالها بهدف تعريف وتسويق أو تعريف إستخدام البضائع والخدمات الحصرية إلى أعضاء ومستخدمي المؤسسات ضمن إطار قانون التواصل الإلكتروني رقم 5809 تقم خارج الإستثناء. لهذا السبب الموافقة التي أدليت بها أعلاه هي مستقلة عن الموافقة المتعلقة بتعريف المنتجات والخدمات للشركات التي أكون عضو/ مستخدم فيها وأوافق بأني أقبل الرسائل الإلكترونية التجارية التي يتحتوي على أهداف التعريف والتسويق المتعلقة بالبضائع والخدمات من هذه المؤسسات ضمن الموافقة التي أدليت بها إلى المؤسسات التي أكون عضوا بها حتى ولو قمت بإلغاء الموافقة التي أدليت بها في هذا النص ضمن القانون واللوائح باستخدام حقي في الرفض و أنه يوجد حق لي في رفض الرسائل الإلكترونية التجارية هذه.\n";
+"NSLocationAlwaysUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
+"NSPhotoLibraryAddUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifedrive إلى الوصول إلى مكتبة الصور الخاصة بك.";
+"NSPhotoLibraryUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifedrive إلى الوصول إلى مكتبة الصور الخاصة بك.";
 
 /*Usage Info*/
-"package_space_details" = "%1$@ / %2$@ استخدام الانترنيت (لاستخدام lifebox)";
+"package_space_details" = "%1$@ / %2$@ استخدام الانترنيت (لاستخدام lifedrive)";
 "package_renew_date" = "تاريخ التجديد: %@";
 "percentage_used" = "استخدام %.0f%% ";
 "used_and_left_space" = "استخدام  %1$@ / %2$@";
 "percentage_used_two_lines" = "استخدام %.0f%%";
 "my_usage_storage" = "استخدامي للانترنيت";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام الموقع لعمل نسخ احتياطية في الخلفية.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
 "name" = "الاسم";
 "surname" = "اسم العائلة";
 "change password" = "تغيير كلمة المرور";
@@ -902,9 +902,9 @@
 "account_details" = "تفاصيل الحساب";
 "my_profile" = "معلومات ملفي الشخصي";
 "account_type" = "نوع الحساب";
-"standard_plus" = "lifebox Standart+";
-"standard" = "lifebox Standart";
-"premium" = "lifebox Premium";
+"standard_plus" = "lifedrive Standart+";
+"standard" = "lifedrive Standart";
+"premium" = "lifedrive Premium";
 "old_password" = "كلمة المرور القديمة";
 "new_password" = "كلمة المرور الجديدة";
 "repeat_password" = "تكرار كلمة المرور الجديدة";
@@ -944,13 +944,13 @@
 "please_enter_your_problem_shortly" = "الرجاء إدخال مشكلتك بإيجاز";
 "explain_your_problem_shortly" = "اشرح مشكلتك بإيجاز";
 "please_enter_msisdn_or_email" = "الرجاء إدخال رقم الهاتف أو حقل البريد الإلكتروني";
-"support_form_subject_1" = "Lifebox / لا أستطيع الدخول عن طريق البريد الإلكتروني الخاص بي";
-"support_form_subject_2" = "Lifebox / لا يمكنني تسجيل الدخول باستخدام رقم هاتفي";
-"support_form_subject_3" = "Lifebox / لا يمكنني تسجيل الدخول باستخدام كلمة المرور الخاصة بي";
-"support_form_subject_4" = "Lifebox / نص الأمان غير متوافق";
-"support_form_subject_5" = "Lifebox / مشكلة كلمة مرور Turkcell";
-"support_form_subject_6" = "Lifebox / مشكلة تسجيل الدخول التلقائي";
-"support_form_subject_7" = "Lifebox / لا أستطيع تحميل تطبيق   Lifebox";
+"support_form_subject_1" = "Lifedrive / لا أستطيع الدخول عن طريق البريد الإلكتروني الخاص بي";
+"support_form_subject_2" = "Lifedrive / لا يمكنني تسجيل الدخول باستخدام رقم هاتفي";
+"support_form_subject_3" = "Lifedrive / لا يمكنني تسجيل الدخول باستخدام كلمة المرور الخاصة بي";
+"support_form_subject_4" = "Lifedrive / نص الأمان غير متوافق";
+"support_form_subject_5" = "Lifedrive / مشكلة كلمة مرور Turkcell";
+"support_form_subject_6" = "Lifedrive / مشكلة تسجيل الدخول التلقائي";
+"support_form_subject_7" = "Lifedrive / لا أستطيع تحميل تطبيق   Lifedrive";
 "enter_your_old_password" = "أدخل كلمة المرور القديمة";
 "enter_your_new_password" = "أدخل كلمة المرور الجديدة";
 "enter_your_repeat_password" = "أعد إدخال كلمة المرور الجديدة";
@@ -974,14 +974,25 @@
 "login_email_or_phone_error" = "عليك ملء بريدك الإلكتروني أو رقم هاتفك";
 "login_password_error" = "عليك ملء كلمة المرور الخاصة بك";
 "enter_security_code" = "أدخل رمز الحماية";
-"enter_code_get_code_on_phone" = "الرجاء إدخال رمز الحماية المكون من 6 أرقام الذي أرسلناه إلى رقم الهاتف هذا:٪ @";
+"enter_code_get_code_on_phone" = "الرجاء إدخال رمز الحماية المكون من 6 أرقام الذي أرسلناه إلى رقم الهاتف هذا:٪@";
 "time_is_up_for_code" = "انتهى الوقت ، يرجى طلب رمز جديد.";
 "resend_code" = "أعد إرسال الرمز";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "التعليمات";
 "login_username_not_valid" = "يرجى التحقق من اسم المستخدم الخاص بك";
+"login_support_info" = "إذا كنت تواجه صعوبة أثناء تسجيل الدخول ، اتصل بنا للحصول على الدعم.";
+"terms_and_privacy_policy" = "";
+"Temporary error occurred. Please try again later." = "";
+"face_tags_description_premium" = "";
+"terms_of_use" = "";
+"privacy_policy" = "";
+"face_tags_description_standart" = "";
+"terms_and_use_introduction_checkbox" = "";
+"privacy_policy_condition" = "";
+"photo_pick_description" = "";
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
+"NSCameraUsageDescription" = "لالتقاط الصور بالكاميرا ولنسخها احتياطيًا إلى صندوق الإنقاذ ، يلزم الحصول على إذن بالوصول إلى الكاميرا";

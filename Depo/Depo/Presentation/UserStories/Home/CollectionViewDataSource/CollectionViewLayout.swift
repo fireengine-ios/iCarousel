@@ -16,7 +16,7 @@ protocol CollectionViewLayoutDelegate: UICollectionViewDelegate {
 
 class CollectionViewLayout: UICollectionViewLayout {
     
-    var delegate: CollectionViewLayoutDelegate!
+    weak var delegate: CollectionViewLayoutDelegate?
     
     var numberOfColumns = 1
     var cellPadding: CGFloat = 6.0
@@ -106,8 +106,8 @@ class CollectionViewLayout: UICollectionViewLayout {
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
-        let headerH = delegate.collectionView(collectionView: collectionView!, heightForHeaderinSection: indexPath.section)
-        headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH)
+        let headerH = delegate?.collectionView(collectionView: collectionView!, heightForHeaderinSection: indexPath.section)
+        headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH ?? 0)
         return headerAttribute
     }
     

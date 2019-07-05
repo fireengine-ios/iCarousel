@@ -13,7 +13,8 @@ class CreateStoryPreviewModuleConfigurator {
  func configure(viewController: CreateStoryPreviewViewController, story: PhotoStory, responce: CreateStoryResponce) {
 
         let router = CreateStoryPreviewRouter()
-
+        router.view = viewController
+    
         let presenter = CreateStoryPreviewPresenter()
         presenter.view = viewController
         presenter.router = router

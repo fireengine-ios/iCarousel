@@ -47,13 +47,12 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func moveToCreationStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
     func moveToSearchScreen(output: UIViewController?) {
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         router.pushViewController(viewController: controller)
     }
     

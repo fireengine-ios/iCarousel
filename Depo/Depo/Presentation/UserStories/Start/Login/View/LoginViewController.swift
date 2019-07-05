@@ -114,6 +114,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var supportView: SupportBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.message = TextConstants.loginSupportInfo
         }
     }
     

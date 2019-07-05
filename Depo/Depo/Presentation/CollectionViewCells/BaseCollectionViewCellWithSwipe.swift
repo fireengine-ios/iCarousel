@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewCellWithSwipeDelegate {
+protocol BaseCollectionViewCellWithSwipeDelegate: class {
     func onCellDeleted(cell: UICollectionViewCell)
 }
 
@@ -18,7 +18,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     private var isTouch = false
     var isSwipeEnable = true
     
-    var cellDelegate: BaseCollectionViewCellWithSwipeDelegate?
+    weak var cellDelegate: BaseCollectionViewCellWithSwipeDelegate?
     
 
     override func awakeFromNib() {

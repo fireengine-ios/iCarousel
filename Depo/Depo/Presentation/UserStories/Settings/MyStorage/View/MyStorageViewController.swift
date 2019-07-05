@@ -83,10 +83,8 @@ final class MyStorageViewController: BaseViewController {
         }
     }
     
-    private lazy var restoreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
-    
     // MARK: - View lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,7 +98,15 @@ final class MyStorageViewController: BaseViewController {
         output.viewDidAppear()
     }
     
-    //MARK: UtilityMethods
+    // MARK: - IBActions
+    
+    @IBAction private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
+    }
+    
+    // MARK: - UtilityMethods
+    
     private func setup() {
         setTitle(withString: output.title)
 
@@ -129,16 +135,6 @@ extension MyStorageViewController: MyStorageViewInput {
     func reloadCollectionView() {
         collectionView.reloadData()
     }
-    
-    func showRestoreButton() {
-        //IF THE USER NON CELL USER
-        navigationItem.rightBarButtonItem = restoreButton
-    }
-    
-    @objc private func restorePurhases() {
-        startActivityIndicator()
-        output.restorePurchasesPressed()
-    }
 }
 
 //MARK: UICollectionViewDataSource
@@ -158,9 +154,11 @@ extension MyStorageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Device.isIpad {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, height: NumericConstants.heightForPackageCell)
+            ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+            ///seems like this bug may occur on iOS 12+ when it returns negative value
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, 0), height: NumericConstants.heightForPackageCell)
         } else {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.packageSumInset, height: NumericConstants.heightForPackageCell)
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.packageSumInset, 0), height: NumericConstants.heightForPackageCell)
         }
     }
     

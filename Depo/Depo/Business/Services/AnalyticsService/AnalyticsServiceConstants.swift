@@ -104,10 +104,10 @@ enum AnalyticsAppScreens {
     case upload
     case search
     ///Create Story
-    case createStoryName
     case createStoryPhotosSelection
     case createStoryMusicSelection
     case createStoryPreview
+    case createStoryDetails
     ///Albums
     case albums
     case myStories
@@ -122,7 +122,7 @@ enum AnalyticsAppScreens {
     case activityTimeline
     case usageInfo
     case packages
-    case lifeBoxTouchIdPasscode
+    case appTouchIdPasscode
     case turkcellSecurity
     case FAQ
     case contactUS
@@ -205,14 +205,14 @@ enum AnalyticsAppScreens {
         case .search:
             return "Search"
         ///Create Story
-        case .createStoryName:
-            return "Create Story - Name"
         case .createStoryPhotosSelection:
             return "Create Story - Photo Selection"
         case .createStoryMusicSelection:
             return "Create Story - Music Selection"
         case .createStoryPreview:
             return "Create Story - Preview"
+        case .createStoryDetails:
+            return "Create Story - Details"
         ///Albums
         case .albums:
             return "Albums"
@@ -238,7 +238,7 @@ enum AnalyticsAppScreens {
             return "Usage Info"
         case .packages:
             return "Packages"
-        case .lifeBoxTouchIdPasscode:
+        case .appTouchIdPasscode:
             return "Passcode"
         case .turkcellSecurity:
             return "Login Settings"
@@ -725,7 +725,7 @@ enum GAEventLabel {
         case .search(let searchText): ///searched word
             return searchText
         case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
-            return "lifebox"
+            return TextConstants.NotLocalized.appName
         //
         case .importDropbox:
             return "Dropbox"
@@ -799,10 +799,10 @@ enum GAEventLabel {
                 return "Use Camera"
             case .upload:
                 return "Upload"
-            case .uploadFromLifeBox:
-                return "Upload from Lifebox"
-            case .uploadFromLifeboxFavorites:
-                return "Upload from Lifebox Favorites"
+            case .uploadFromApp:
+                return "Upload from \(TextConstants.NotLocalized.appName)"
+            case .uploadFromAppFavorites:
+                return "Upload from \(TextConstants.NotLocalized.appName) Favorites"
             }
         case .shareViaLink:
             return "Share via Link"

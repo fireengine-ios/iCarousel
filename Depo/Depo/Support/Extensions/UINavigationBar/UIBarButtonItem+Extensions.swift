@@ -24,9 +24,11 @@ extension UIBarButtonItem {
         self.accessibilityLabel = accessibilityLabel
 
         if let font = font {
-            self.setTitleTextAttributes([.font : font], for: .normal)
-            self.setTitleTextAttributes([.font : font], for: .highlighted)
-            self.setTitleTextAttributes([.font : font], for: .disabled)
+            /// not working setTitleTextAttributes([.font : font], for: [.normal, .highlighted])
+            setTitleTextAttributes([.font : font], for: .normal)
+            setTitleTextAttributes([.font : font], for: .highlighted)
+            setTitleTextAttributes([.font : font], for: .disabled)
+            setTitleTextAttributes([.font : font], for: .selected)
         }
     }
     

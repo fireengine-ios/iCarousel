@@ -19,7 +19,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
-            self?.interactor.clearAllPreviouslyStoredInfo()
             self?.showPasscodeIfNeed()
         }
     }

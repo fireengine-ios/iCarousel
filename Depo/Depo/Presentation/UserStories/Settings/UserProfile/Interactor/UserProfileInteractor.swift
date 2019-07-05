@@ -106,6 +106,17 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateBirthdayIfNeeded(_ birthday: String) {
+        /// Lines below are more correct but they're commented because of 400 error
+        /// https://jira.turkcell.com.tr/browse/FE-1277
+///        let oldBirthdayIsEmpty = (userInfo?.dob ?? "").isEmpty
+        let newBirthdayIsEmpty = birthday.trimmingCharacters(in: .whitespaces).isEmpty
+        
+///        if oldBirthdayIsEmpty && newBirthdayIsEmpty {
+        if newBirthdayIsEmpty {
+            allUpdated()
+            return
+        }
+        
         if userInfo?.dob == birthday {
             allUpdated()
         } else {

@@ -26,6 +26,12 @@ class RouterVC: NSObject {
         let nController = navigationController
         let viewController = nController?.viewControllers.last
         
+        if let segmentedVC = viewController as? SegmentedController,
+            let vc = segmentedVC.currentController as? BaseViewController
+        {
+            return vc.floatingButtonsArray
+        }
+        
         if let baseViewController = viewController as? BaseViewController {
             return baseViewController.floatingButtonsArray
         }
@@ -173,8 +179,8 @@ class RouterVC: NSObject {
             var index: Int? = nil
             
             for (i, viewController) in viewControllers.enumerated() {
-                if viewController is CreateStoryPhotoSelectionViewController
-                    || viewController is CreateStoryPhotosOrderViewController {
+                if viewController is CreateStorySelectionController
+                    || viewController is CreateStoryViewController {
                     index = i
                     break
                 }
@@ -387,18 +393,25 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func segmentedMedia() -> SegmentedController {
+        let photos = PhotoVideoController.initPhotoFromNib()
+        let videos = PhotoVideoController.initVideoFromNib()
+        
+        return SegmentedController.initWithControllers([photos, videos])
+    }
+    
     
     // MARK: Photos and Videos
     
-    var photosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
-        return controller
-    }
+//    var photosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
+//        return controller
+//    }
     
-    var videosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
-        return controller
-    }
+//    var videosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
+//        return controller
+//    }
     
     // MARK: Music
     
@@ -523,20 +536,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: CreateStory name
-    
-    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
-        controller.output.items = items
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
-    }
-    
     // MARK: - SearchView
     
-    func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
-        let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+    func searchView(navigationController: UINavigationController?, output: SearchModuleOutput? = nil) -> UIViewController {
+        let controller = SearchViewInitializer.initializeSearchViewController(with: "SearchView", output: output)
+        navigationController?.delegate = controller
+        controller.transitioningDelegate = controller
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         return controller
@@ -560,14 +565,6 @@ class RouterVC: NSObject {
     
     func audioSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: story)
-        return controller
-    }
-    
-    
-    // MARK: CreateStory photos order 
-    
-    func photosOrder(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryPhotosOrderModuleInitializer.initializeViewController(with: "CreateStoryPhotosOrderViewController", story: story)
         return controller
     }
     
@@ -913,5 +910,13 @@ class RouterVC: NSObject {
     
     var supportFormController: UIViewController {
         return SupportFormController()
+    }
+    
+    func createStory(navTitle: String) -> UIViewController {
+        return CreateStorySelectionController(title: navTitle)
+    }
+    
+    func createStory(items: [Item]) -> UIViewController {
+        return CreateStoryViewController(images: items)
     }
 }

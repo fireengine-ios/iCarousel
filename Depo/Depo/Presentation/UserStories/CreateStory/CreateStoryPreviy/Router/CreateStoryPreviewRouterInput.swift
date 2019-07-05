@@ -10,4 +10,12 @@ import Foundation
 
 protocol CreateStoryPreviewRouterInput {
     func goToMain()
+    func presentFinishPopUp(image: PopUpImage,
+                            title: String,
+                            storyName: String,
+                            titleDesign: DesignText,
+                            message: String,
+                            messageDesign: DesignText,
+                            buttonTitle: String,
+                            buttonAction: @escaping VoidHandler)
 }
