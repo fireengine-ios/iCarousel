@@ -171,7 +171,7 @@ final class CreateStoryViewController: BaseViewController {
         let hour = calendar.component(.hour, from: currentDate)
         let minutes = calendar.component(.minute, from: currentDate)
         
-        let defaultNameCarcass = "%d%d%d_%d%d"
+        let defaultNameCarcass = "%d%02d%02d_%02d%02d"
         let name = String(format: defaultNameCarcass,
                           year,
                           month,
