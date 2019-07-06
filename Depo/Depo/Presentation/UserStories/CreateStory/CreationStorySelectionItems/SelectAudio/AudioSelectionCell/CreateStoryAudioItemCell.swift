@@ -21,7 +21,6 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     @IBOutlet private weak var separateLine: UIView!
     
     private var cellIndexPath: Int?
-    var isPlaying = false
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
     
@@ -69,7 +68,6 @@ final class CreateStoryAudioItemCell: UITableViewCell {
 
         }
     }
-    
     
     func isPlaying(playing: Bool) {
         if playing {
