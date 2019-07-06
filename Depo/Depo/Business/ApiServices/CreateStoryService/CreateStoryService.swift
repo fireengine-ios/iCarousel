@@ -139,20 +139,10 @@ class CreateStoryMusicService: RemoteItemsService {
         let requestService = BaseRequestService(transIdLogging: true)
         let handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: { [weak self] response in
             
-            
-//            guard let `self` = self else {
-//                return
-//            }
-//
-//            if (self?.isGotAll)! {
-//                debugLog("CreateStoryMusicService allItems success with empty result")
-//
-//                success?([])
-//            } else
                 if let response = response as? CreateStoryMusicListResponse,
                 let list = response.list {
-                let result = list.flatMap { WrapData(musicForCreateStory: $0) }
-//                self!.isGotAll = true
+                    let result = list.compactMap { WrapData(musicForCreateStory: $0) }
+
                 success?(result)
                 
                 debugLog("CreateStoryMusicService allItems success")
