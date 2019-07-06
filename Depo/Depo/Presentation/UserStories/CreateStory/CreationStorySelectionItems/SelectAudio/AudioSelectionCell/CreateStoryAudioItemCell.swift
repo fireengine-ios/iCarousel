@@ -20,7 +20,7 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     @IBOutlet private weak var selectButton: UIButton!
     @IBOutlet private weak var separateLine: UIView!
     
-    var cellIndexPath: Int?
+    private var cellIndexPath: Int?
     var isPlaying = false
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
@@ -70,17 +70,20 @@ final class CreateStoryAudioItemCell: UITableViewCell {
         }
     }
     
-    func selectItem() {
-            selectButton.setTitleColor(self.choosenSelectedButtonColor, for: .normal)
-            selectButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            selectButton.titleLabel?.text = TextConstants.createStoryAudioSelectedItem
+    
+    func isPlaying(playing: Bool) {
+        if playing {
+            playButton.setImage(UIImage(named: "creationStoryItemPause"), for: .normal)
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        } else {
+            playButton.setImage(UIImage(named: "creationStroryItemPlay"), for: .normal)
+            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        }
     }
     
-    func deselectItem() {
-            selectButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            selectButton.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            selectButton.titleLabel?.text = TextConstants.createStoryAudioSelectItem
-    }
+    
+    
+    
     
     func onPlay() {
             playButton.setImage(UIImage(named: "creationStoryItemPause"), for: .normal)

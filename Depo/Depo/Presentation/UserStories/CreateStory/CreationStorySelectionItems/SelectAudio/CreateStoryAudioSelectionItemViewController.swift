@@ -22,7 +22,8 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     var audioItemSelectedDelegate: AudioItemSelectedDelegate?
     
     private lazy var smallPlayer: MediaPlayer = MediaPlayer()
-    private lazy var isSomethingPlaing = false
+    private var plaingCell: Int?
+
     
     private var itemsArray: [WrapData] = [] {
         didSet {
@@ -89,7 +90,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     @objc private func onNextButton() {
         setMusicItemForPhotoStory { [weak self] story in
-                self?.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
+            self?.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
         }
         smallPlayer.stop()
         hideViewController()
@@ -191,9 +192,11 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         cell.isSelectedItem(selected: setSelected(index: indexPath.row))
         
         let item = itemsArray[indexPath.row].name
+        
         if let name = item {
             cell.setTextForLabel(titleText: name, needShowSeparator: indexPath.row == itemsArray.count - 1)
         }
+        cell.isPlaying(playing: setPlaing(index: indexPath.row))
         
         return cell
     }
@@ -214,6 +217,13 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         }
     }
     
+    private func setPlaing(index: Int) -> Bool {
+        if plaingCell == index {
+            return true
+        }
+        return false
+    }
+    
     private func setSelectedItem() {
         let index = designer.segmentedControl.selectedSegmentIndex == 1 ? selectedIndexForMusic : selectedIndexForUploads
         if itemsArray.count >= index {
@@ -226,15 +236,15 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
 extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellDelegate {
     
     func playButtonPressed(cell index: Int) {
-        if isSomethingPlaing {
-            unselectPlayingCell()
+        if plaingCell == index {
+            unselectPlayingCell {
+                self.tableView.reloadData()
+            }
         } else {
             unselectPlayingCell {
-                let cell = self.tableView.visibleCells[index]
-                if let audioCell = cell as? CreateStoryAudioItemCell {
-                    audioCell.onPlay()
-                    self.playItem(playItem: index)
-                }
+                self.plaingCell = index
+                self.tableView.reloadData()
+                self.playItem(playItem: index)
             }
         }
     }
@@ -254,16 +264,10 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     
     private func unselectPlayingCell(completion: (() -> Void)? = nil) {
         smallPlayer.stop()
-        isSomethingPlaing = false
-        tableView.visibleCells.forEach {
-            if let audioCell = $0 as? CreateStoryAudioItemCell {
-                audioCell.isStopped()
-            }
-        }
+        plaingCell = nil
         completion?()
     }
 }
-
 
 extension CreateStoryAudioSelectionItemViewController {
     
@@ -271,8 +275,7 @@ extension CreateStoryAudioSelectionItemViewController {
         guard !itemsArray.isEmpty else {
             return
         }
-        isSomethingPlaing = true
-        smallPlayer.play(list: itemsArray, startAt: index)
+        smallPlayer.play(list: [itemsArray[index]], startAt: 0)
     }
     
 }

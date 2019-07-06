@@ -39,6 +39,7 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
             newValue.text = TextConstants.audioViewNoAudioTitleText
         }
     }
+    
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
             let nib = UINib.init(nibName: CellsIdConstants.createStoryAudioItemCell,
@@ -47,4 +48,5 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
             newValue.backgroundColor = UIColor.clear
         }
     }
+    
 }
