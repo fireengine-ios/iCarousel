@@ -19,11 +19,10 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     private var selectedIndexForMusic: Int = 0
     private var selectedIndexForUploads: Int = 0
     
-    var audioItemSelectedDelegate: AudioItemSelectedDelegate?
-    
     private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     private var plaingCell: Int?
 
+    var audioItemSelectedDelegate: AudioItemSelectedDelegate?
     
     private var itemsArray: [WrapData] = [] {
         didSet {
@@ -53,6 +52,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         super.viewDidLoad()
         showSpinner()
         getMusics()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +105,8 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     }
     
     @objc private func onCancelButton() {
+        
+        smallPlayer.stop()
         hideViewController()
     }
     
