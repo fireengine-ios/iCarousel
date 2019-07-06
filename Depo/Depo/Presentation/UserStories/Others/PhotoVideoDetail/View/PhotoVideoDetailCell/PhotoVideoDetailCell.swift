@@ -32,7 +32,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         return gesture
     }()
     
-    var isNeedToUpdateWebView = true
+    private var isNeedToUpdateWebView = true
+    private var currentItemId = ""
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
     
@@ -76,9 +77,15 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
     
     func setObject(object: Item) {
+        if isNeedToUpdateWebView, object.uuid == currentItemId {
+            return
+        }
+        
         webView.isHidden = true
         imageScrollView.image = nil
         playVideoButton.isHidden = true
+        isNeedToUpdateWebView = false
+        currentItemId = object.uuid
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
@@ -86,6 +93,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             tapGesture.isEnabled = (object.fileType != .video)
             
         } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
+            isNeedToUpdateWebView = true
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             webView.clearPage()
@@ -97,7 +105,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 webView.load(URLRequest(url: url))
             }
         }
-        isNeedToUpdateWebView = false
     }
     
     @IBAction private func onPlayVideoButton() {

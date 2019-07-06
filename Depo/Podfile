@@ -49,8 +49,8 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
-  pod 'MetalPetal', '~> 1.0'
-  pod 'GPUImage'
+#  pod 'MetalPetal', '~> 1.0'
+#  pod 'GPUImage'
 
 end
 

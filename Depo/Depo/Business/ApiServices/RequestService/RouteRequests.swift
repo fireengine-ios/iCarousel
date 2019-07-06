@@ -21,13 +21,15 @@ struct RouteRequests {
     private static let currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
-    static let baseUrl: URL = {
+    static let baseShortUrlString: String = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
-        case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
-        case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://adepo.turkcell.com.tr/"
         }
     }()
+    
+    static let baseUrl: URL =  URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -56,14 +58,6 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String = {
-        switch currentServerEnvironment {
-        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        }
-    }()
-    
     static let privacyPolicy: String = {
         switch currentServerEnvironment {
         case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
@@ -71,6 +65,8 @@ struct RouteRequests {
         case .production: return "https://mylifebox.com/policy/?lang="
         }
     }()
+    
+    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -186,14 +182,16 @@ struct RouteRequests {
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
-        switch currentServerEnvironment {
-        case .preProduction:
-            return "https://adepotest.turkcell.com.tr/download/update_ios.json"
-        case .production:
-            return "https://adepo.turkcell.com.tr/download/update_ios.json"
-        case .test:
-            return "https://tcloudstb.turkcell.com.tr/download/update_ios.json"
-        }
+        #if LIFEBOX
+            let jsonName = "update_ios.json"
+        #elseif LIFEDRIVE
+            let jsonName = "update_lifedrive_ios.json"
+        #else
+            let jsonName = "unknown"
+            debugPrint("⚠️: unknown turkcell updater url")
+        #endif
+        
+        return baseShortUrlString + jsonName
     }
     
     struct HomeCards {
