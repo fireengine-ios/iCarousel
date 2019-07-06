@@ -55,7 +55,6 @@ final class CreateStoryAudioItemCell: UITableViewCell {
         createStoryAudioItemCellDelegate?.selectButtonPressed(cell: index)
     }
     
-    
     func isSelectedItem(selected: Bool) {
         if selected {
             selectButton.setTitleColor(self.choosenSelectedButtonColor, for: .normal)
@@ -79,17 +78,4 @@ final class CreateStoryAudioItemCell: UITableViewCell {
         }
     }
     
-    
-    
-    
-    
-    func onPlay() {
-            playButton.setImage(UIImage(named: "creationStoryItemPause"), for: .normal)
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-    }
-    
-    func isStopped() {
-        playButton.setImage(UIImage(named: "creationStroryItemPlay"), for: .normal)
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-    }
 }
