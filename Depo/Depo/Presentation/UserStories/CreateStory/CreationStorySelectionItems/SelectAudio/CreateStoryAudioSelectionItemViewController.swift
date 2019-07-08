@@ -18,7 +18,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     private var selectedItem: WrapData?
     private var selectedIndexForMusic: Int = 0
     private var selectedIndexForUploads: Int = 0
-    private let musicsSegmentedControlIndex = 1
+    private let musicSegmentedControlIndex = 1
     
     private lazy var smallPlayer = MediaPlayer()
     private var plaingCellRowIndex: Int?
@@ -67,7 +67,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     @IBAction private func segmentedControlChanged(_ sender: UISegmentedControl) {
         unselectPlayingCell()
-        onChangeSource(isYourUpload: sender.selectedSegmentIndex == musicsSegmentedControlIndex)
+        onChangeSource(isYourUpload: sender.selectedSegmentIndex == musicSegmentedControlIndex)
     }
     
     private func configureNavBarActions() {
@@ -198,7 +198,7 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func isSelected(index: Int) -> Bool {
-        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
+        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
             return selectedIndexForMusic == index
         } else {
             return selectedIndexForUploads == index
@@ -211,9 +211,9 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     
     private func setSelectedItem() {
         
-        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
+        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
             if itemsArray.count >= selectedIndexForMusic {
-                selectedItem = itemsArray[musicsSegmentedControlIndex]
+                selectedItem = itemsArray[musicSegmentedControlIndex]
             }
         } else {
             if itemsArray.count >= selectedIndexForUploads {
@@ -240,7 +240,7 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     }
     
     func selectButtonPressed(cell index: Int) {
-        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
+        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
             selectedIndexForMusic = index
         } else {
             selectedIndexForUploads = index
