@@ -1110,8 +1110,11 @@ extension WrapData {
             md5 == wrapData.md5 &&
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
+            tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            !(tmpDownloadUrl?.isExpired ?? false) &&
             metaData == wrapData.metaData
     }
+
 }
 
 
