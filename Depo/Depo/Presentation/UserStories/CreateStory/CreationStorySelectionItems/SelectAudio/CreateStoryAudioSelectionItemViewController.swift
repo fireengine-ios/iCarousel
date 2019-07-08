@@ -163,10 +163,6 @@ extension CreateStoryAudioSelectionItemViewController {
 
 extension CreateStoryAudioSelectionItemViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
     }
@@ -193,36 +189,27 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         cell.setCellIndexPath(index: indexPath.row)
         cell.createStoryAudioItemCellDelegate = self
         cell.selectionStyle = .none
-        cell.setSelected(selected: setSelectedIndex(index: indexPath.row))
-        cell.setPlaying(playing: setPlaing(index: indexPath.row))
+        cell.setSelected(selected: isSelected(index: indexPath.row))
+        cell.setPlaying(playing: isPlaying(index: indexPath.row))
 
         if let name = itemsArray[indexPath.row].name {
-            cell.setTextForLabel(titleText: name, needShowSeparator: indexPath.row == itemsArray.count - 1)
+            cell.setTextForLabel(titleText: name)
         }
         
         return cell
     }
     
-    private func setSelectedIndex(index: Int) -> Bool {
+    private func isSelected(index: Int) -> Bool {
         
         if segmentedControl.selectedSegmentIndex == 1 {
-            if selectedIndexForMusic == index {
-                return true
-            }
-            return false
+            return selectedIndexForMusic == index
         } else {
-            if selectedIndexForUploads == index {
-                return true
-            }
-            return false
+            return selectedIndexForUploads == index
         }
     }
     
-    private func setPlaing(index: Int) -> Bool {
-        if plaingCellRowIndex == index {
-            return true
-        }
-        return false
+    private func isPlaying(index: Int) -> Bool {
+        return plaingCellRowIndex == index
     }
     
     private func setSelectedItem() {
@@ -237,16 +224,15 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
 extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellDelegate {
     
     func playButtonPressed(cell index: Int) {
+        
         if plaingCellRowIndex == index {
-            unselectPlayingCell {
-                self.tableView.reloadData()
-            }
+            unselectPlayingCell()
+            self.tableView.reloadData()
         } else {
-            unselectPlayingCell {
-                self.plaingCellRowIndex = index
-                self.tableView.reloadData()
-                self.playItem(playItem: index)
-            }
+            unselectPlayingCell()
+            self.plaingCellRowIndex = index
+            self.tableView.reloadData()
+            self.playItem(playItem: index)
         }
     }
     
@@ -263,10 +249,9 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
         }
     }
     
-    private func unselectPlayingCell(completion: (() -> Void)? = nil) {
+    private func unselectPlayingCell() {
         smallPlayer.stop()
         plaingCellRowIndex = nil
-        completion?()
     }
 }
 

@@ -23,15 +23,13 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     }
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var selectButton: UIButton!
-    @IBOutlet private weak var separateLine: UIView!
     
     private var cellIndexPathRow: Int?
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
     
-    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
+    func setTextForLabel(titleText: String) {
         titleLabel.text = titleText
-        separateLine.isHidden = !needShowSeparator
     }
 
     func setCellIndexPath(index: Int) {

@@ -44,6 +44,7 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
         willSet {
             newValue.register(nibCell: CreateStoryAudioItemCell.self)
             newValue.backgroundColor = UIColor.clear
+            newValue.tableFooterView = UIView()
         }
     }
     

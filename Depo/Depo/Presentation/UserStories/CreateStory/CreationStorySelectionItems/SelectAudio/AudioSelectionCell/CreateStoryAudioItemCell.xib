@@ -49,25 +49,15 @@
                             <action selector="selectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MYr-DX-Udt"/>
                         </connections>
                     </button>
-                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGd-HQ-kjK">
-                        <rect key="frame" x="14" y="41.5" width="305" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="RV4-GV-kdG"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="LGd-HQ-kjK" secondAttribute="trailing" constant="1" id="1kc-1o-Lp1"/>
                     <constraint firstItem="zTv-Cx-9Ar" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9PJ-x6-XdP"/>
                     <constraint firstAttribute="trailing" secondItem="kzy-5N-7Kx" secondAttribute="trailing" constant="13" id="DoO-YQ-3Vj"/>
                     <constraint firstItem="p23-e0-Roa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="E01-MF-B6Y"/>
                     <constraint firstItem="kzy-5N-7Kx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IPj-Z2-kCk"/>
                     <constraint firstItem="p23-e0-Roa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NTH-8i-41Q"/>
-                    <constraint firstItem="LGd-HQ-kjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="SZK-pa-R3o"/>
                     <constraint firstItem="zTv-Cx-9Ar" firstAttribute="leading" secondItem="p23-e0-Roa" secondAttribute="trailing" constant="10" id="TuZ-bM-x5f"/>
                     <constraint firstItem="kzy-5N-7Kx" firstAttribute="leading" secondItem="zTv-Cx-9Ar" secondAttribute="trailing" constant="20" id="Twm-K6-Bj6"/>
-                    <constraint firstAttribute="bottom" secondItem="LGd-HQ-kjK" secondAttribute="bottom" constant="1" id="nhm-8b-RAC"/>
                     <constraint firstItem="p23-e0-Roa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="wtq-bg-JoW"/>
                 </constraints>
             </tableViewCellContentView>
@@ -75,7 +65,6 @@
             <connections>
                 <outlet property="playButton" destination="p23-e0-Roa" id="iG9-5V-kO6"/>
                 <outlet property="selectButton" destination="kzy-5N-7Kx" id="Qw6-dc-ib4"/>
-                <outlet property="separateLine" destination="LGd-HQ-kjK" id="Tta-jj-XGk"/>
                 <outlet property="titleLabel" destination="zTv-Cx-9Ar" id="ubh-Jc-p6J"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="123.23838080959521"/>
