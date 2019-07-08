@@ -338,7 +338,8 @@ extension CreateStoryViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        selectedImages.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        let element = selectedImages.remove(at: sourceIndexPath.row)
+        selectedImages.insert(element, at: destinationIndexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
