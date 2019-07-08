@@ -24,8 +24,6 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
     
-    private let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.textColor = ColorConstants.textGrayColor
@@ -57,7 +55,7 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     
     func isSelectedItem(selected: Bool) {
         if selected {
-            selectButton.setTitleColor(self.choosenSelectedButtonColor, for: .normal)
+            selectButton.setTitleColor(ColorConstants.choosenSelectedButtonColor, for: .normal)
             selectButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 21)
             selectButton.setTitle(TextConstants.createStoryAudioSelectedItem, for: .normal)
         } else {
