@@ -18,6 +18,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     private var selectedItem: WrapData?
     private var selectedIndexForMusic: Int = 0
     private var selectedIndexForUploads: Int = 0
+    private let musicsSegmentedControlIndex = 1
     
     private lazy var smallPlayer = MediaPlayer()
     private var plaingCellRowIndex: Int?
@@ -66,7 +67,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     @IBAction private func segmentedControlChanged(_ sender: UISegmentedControl) {
         unselectPlayingCell()
-        onChangeSource(isYourUpload: sender.selectedSegmentIndex == 1)
+        onChangeSource(isYourUpload: sender.selectedSegmentIndex == musicsSegmentedControlIndex)
     }
     
     private func configureNavBarActions() {
@@ -93,23 +94,20 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     }
     
     @objc private func onNextButton() {
-        setMusicItemForPhotoStory { [weak self] story in
-            self?.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
-        }
+        setMusicItemForPhotoStory()
         smallPlayer.stop()
         hideViewController()
     }
     
-    private func setMusicItemForPhotoStory(completion: ((PhotoStory)-> Void)? = nil) {
+    private func setMusicItemForPhotoStory() {
         guard let item = selectedItem, let story = photoStory else {
             return
         }
         story.music = item
-        completion?(story)
+        self.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
     }
     
     @objc private func onCancelButton() {
-        
         smallPlayer.stop()
         hideViewController()
     }
@@ -200,8 +198,7 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func isSelected(index: Int) -> Bool {
-        
-        if segmentedControl.selectedSegmentIndex == 1 {
+        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
             return selectedIndexForMusic == index
         } else {
             return selectedIndexForUploads == index
@@ -213,9 +210,15 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func setSelectedItem() {
-        let index = segmentedControl.selectedSegmentIndex == 1 ? selectedIndexForMusic : selectedIndexForUploads
-        if itemsArray.count >= index {
-            selectedItem = itemsArray[index]
+        
+        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
+            if itemsArray.count >= selectedIndexForMusic {
+                selectedItem = itemsArray[musicsSegmentedControlIndex]
+            }
+        } else {
+            if itemsArray.count >= selectedIndexForUploads {
+                selectedItem = itemsArray[selectedIndexForUploads]
+            }
         }
     }
     
@@ -232,12 +235,12 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
             unselectPlayingCell()
             self.plaingCellRowIndex = index
             self.tableView.reloadData()
-            self.playItem(playItem: index)
+            self.playItem(at: index)
         }
     }
     
     func selectButtonPressed(cell index: Int) {
-        if segmentedControl.selectedSegmentIndex == 1 {
+        if segmentedControl.selectedSegmentIndex == musicsSegmentedControlIndex {
             selectedIndexForMusic = index
         } else {
             selectedIndexForUploads = index
@@ -246,6 +249,7 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
         tableView.reloadData()
         if itemsArray.count >= index {
             selectedItem = itemsArray[index]
+            
         }
     }
     
@@ -257,8 +261,9 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
 
 extension CreateStoryAudioSelectionItemViewController {
     
-    private func playItem(playItem index: Int) {
+    private func playItem(at index: Int) {
         guard !itemsArray.isEmpty else {
+            assertionFailure()
             return
         }
         smallPlayer.play(list: [itemsArray[index]], startAt: 0)
