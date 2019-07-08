@@ -547,25 +547,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    // MARK: CreateStory photos selection
-    
-    func photoSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
-        return controller
-    }
-    
-    func favoritePhotoSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeFavoritePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
-        return controller
-    }
-    
-    
     // MARK: CreateStory audio selection
     
-    func audioSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
-        return controller
+    func audioSelection(forStory story: PhotoStory) -> CreateStoryAudioSelectionItemViewController {
+        let viewController = CreateStoryAudioSelectionItemViewController(forStory: story)
+        return viewController
     }
     
     // MARK: CreateStory preview

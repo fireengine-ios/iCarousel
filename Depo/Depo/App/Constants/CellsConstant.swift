@@ -27,6 +27,7 @@ struct CellsIdConstants {
     static let dropboxAccountConnectionCell = "DropboxAccountConnectionCell"
     static let instagramAccountConnectionCell = "InstagramAccountConnectionCell"
     static let socialAccountRemoveConnectionCell = "SocialAccountRemoveConnectionCell"
+    static let createStoryAudioItemCell = "CreateStoryAudioItemCell"
 }
 
 struct CollectionViewCellsIdsConstant {

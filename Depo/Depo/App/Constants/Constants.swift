@@ -516,6 +516,8 @@ struct TextConstants {
     static let createStoryAudioSelected = NSLocalizedString("Add Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryAudioMusics = NSLocalizedString("Musics", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryAudioYourUploads = NSLocalizedString("Your Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryAudioSelectItem = NSLocalizedString("Select", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryAudioSelectedItem = NSLocalizedString("Selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Photo Order
     static let createStoryPhotosOrderNextButton = NSLocalizedString("Create", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

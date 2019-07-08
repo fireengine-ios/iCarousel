@@ -312,10 +312,8 @@ extension CreateStoryViewController {
         
         let router = RouterVC()
         let controller = router.audioSelection(forStory: story)
-        let navigation = NavigationController(rootViewController: controller)
-        navigation.navigationBar.isHidden = false
-
-        present(navigation, animated: true, completion: nil)
+        controller.audioItemSelectedDelegate = self
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     private func openPreview(responce: CreateStoryResponce) {
@@ -369,5 +367,11 @@ extension CreateStoryViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension CreateStoryViewController: AudioItemSelectedDelegate {
+    func photoStoryWithSelectedAudioItem(story: PhotoStory) {
+        self.story = story
     }
 }

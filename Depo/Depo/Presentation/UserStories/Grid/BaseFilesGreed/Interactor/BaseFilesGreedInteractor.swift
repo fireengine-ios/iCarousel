@@ -113,10 +113,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     guard let output = self?.output else { return }
                     if items.count == 0 {
                         output.getContentWithSuccessEnd()
-                    } else if let out = output as? CreateStorySelectionInteractorOutput {
-                        var array = [[WrapData]]()
-                        array.append(items)
-                        out.getContentWithSuccess(array: array)
                     } else if items.count > 0 {
                         output.getContentWithSuccess(items: items)
                     }
