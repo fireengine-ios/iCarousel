@@ -398,8 +398,8 @@ final class MediaItemOperationsService {
                             MediaItemOperationsService.shared.mediaItemsByIDs(ids: [objectId], context: context, mediaItemsCallBack: { items in
                                 if let item = items.first {
                                     item.copyInfo(item: newItem, context: context)
-                                    group.leave()
                                 }
+                                group.leave()
                             })
                         }
                         allSavedItems.remove(existed)
