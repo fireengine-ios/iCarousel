@@ -201,7 +201,7 @@ extension BaseMetaData {
             largeUrl?.byTrimmingQuery == metaData.largeUrl?.byTrimmingQuery &&
             mediumUrl?.byTrimmingQuery == metaData.mediumUrl?.byTrimmingQuery &&
             smalURl?.byTrimmingQuery == metaData.smalURl?.byTrimmingQuery &&
-            videoPreviewURL?.byTrimmingQuery == metaData.videoPreviewURL?.byTrimmingQuery &&
+            videoPreviewURL == metaData.videoPreviewURL &&
             documentPreviewURL?.byTrimmingQuery == metaData.documentPreviewURL?.byTrimmingQuery &&
             title == metaData.title &&
             duration.toInt() == metaData.duration.toInt() &&
