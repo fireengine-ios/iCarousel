@@ -44,6 +44,6 @@ extension URL {
             return false
         }
         
-        return true//Date() >= expirationDate
+        return Date() >= expirationDate
     }
 }
