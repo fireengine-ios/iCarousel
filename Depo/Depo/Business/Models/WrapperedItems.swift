@@ -1110,8 +1110,7 @@ extension WrapData {
             md5 == wrapData.md5 &&
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
-            metaData == wrapData.metaData &&
-            urlToFile == wrapData.urlToFile
+            metaData == wrapData.metaData
     }
 }
 
