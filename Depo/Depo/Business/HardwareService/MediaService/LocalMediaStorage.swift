@@ -276,10 +276,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                                 fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
                                 
-                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject,
+                                    let info = self?.compactInfoAboutAsset(asset: asset), info.isValid {
+                                    
                                     item.preview = WrapData(asset: asset)
+                                    albums.append(item)
                                 }
-                                albums.append(item)
                             }
                             dispatchGroup.leave()
                         }
