@@ -25,11 +25,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05W-1P-KTC">
-                    <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WvP-6C-fk1">
-                    <rect key="frame" x="0.0" y="152" width="375" height="515"/>
+                    <rect key="frame" x="0.0" y="88" width="375" height="579"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="eid-Qc-yBg"/>
@@ -64,14 +64,14 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9X-ur-vVj">
-                    <rect key="frame" x="0.0" y="84" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" id="Cl8-b0-efY"/>
                     </constraints>
                 </view>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SBL-5S-wVd">
-                    <rect key="frame" x="78" y="97" width="219" height="29"/>
+                    <rect key="frame" x="78" y="33" width="219" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="219" id="3rp-5r-l1F"/>
                         <constraint firstAttribute="height" constant="28" id="eCY-s8-CzV"/>
@@ -90,7 +90,7 @@
                 <constraint firstItem="CaV-tJ-vhx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5XS-GW-ekY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CaV-tJ-vhx" secondAttribute="trailing" constant="16" id="9Mf-V8-JQs"/>
                 <constraint firstItem="SBL-5S-wVd" firstAttribute="top" secondItem="05W-1P-KTC" secondAttribute="top" constant="13" id="DYn-8H-3k6"/>
-                <constraint firstItem="v9X-ur-vVj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="64" id="G7r-tr-31K"/>
+                <constraint firstItem="v9X-ur-vVj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="G7r-tr-31K"/>
                 <constraint firstItem="05W-1P-KTC" firstAttribute="top" secondItem="v9X-ur-vVj" secondAttribute="top" id="Gmu-Zt-cWK"/>
                 <constraint firstItem="WvP-6C-fk1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="RCC-qc-QFI"/>
                 <constraint firstItem="WvP-6C-fk1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TTa-0o-oIA"/>
@@ -113,7 +113,6 @@
                 <outlet property="emtyListView" destination="CaV-tJ-vhx" id="paS-i2-7VL"/>
                 <outlet property="segmentedControl" destination="SBL-5S-wVd" id="7EJ-fa-U5P"/>
                 <outlet property="tableView" destination="WvP-6C-fk1" id="D1U-S8-0Hk"/>
-                <outlet property="topIOS10Constraint" destination="G7r-tr-31K" id="PVF-ff-gtw"/>
             </connections>
         </customObject>
     </objects>

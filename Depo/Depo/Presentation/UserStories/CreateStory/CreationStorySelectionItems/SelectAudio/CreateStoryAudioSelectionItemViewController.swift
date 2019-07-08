@@ -210,10 +210,13 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func setSelectedItem() {
+        guard !itemsArray.isEmpty else {
+            return
+        }
         
         if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
             if itemsArray.count >= selectedIndexForMusic {
-                selectedItem = itemsArray[musicSegmentedControlIndex]
+                selectedItem = itemsArray[selectedIndexForMusic]
             }
         } else {
             if itemsArray.count >= selectedIndexForUploads {
