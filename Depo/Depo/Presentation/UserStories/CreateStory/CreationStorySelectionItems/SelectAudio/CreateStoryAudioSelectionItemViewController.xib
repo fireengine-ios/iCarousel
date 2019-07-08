@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateStoryAudioSelectionItemViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="designer" destination="l4I-xA-B6y" id="w9g-ok-XNl"/>
+                <outlet property="emtyListView" destination="CaV-tJ-vhx" id="Cix-uH-tAT"/>
+                <outlet property="segmentedControl" destination="SBL-5S-wVd" id="MXk-1J-uCc"/>
                 <outlet property="tableView" destination="WvP-6C-fk1" id="0t0-ir-JXP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

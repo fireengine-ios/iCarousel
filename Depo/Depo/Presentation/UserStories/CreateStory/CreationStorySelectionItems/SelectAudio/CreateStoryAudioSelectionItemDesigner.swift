@@ -26,13 +26,13 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
         }
     }
     
-    @IBOutlet weak var emtyListView: UIView! {
+    @IBOutlet private weak var emtyListView: UIView! {
         willSet {
             newValue.isHidden = true
         }
     }
     
-    @IBOutlet weak var emtyListLabel: UILabel! {
+    @IBOutlet private weak var emtyListLabel: UILabel! {
         willSet{
             newValue.textColor = ColorConstants.textGrayColor
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
@@ -42,9 +42,7 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
-            let nib = UINib.init(nibName: CellsIdConstants.createStoryAudioItemCell,
-                                 bundle: nil)
-            newValue.register(nib, forCellReuseIdentifier: CellsIdConstants.createStoryAudioItemCell)
+            newValue.register(nibCell: CreateStoryAudioItemCell.self)
             newValue.backgroundColor = UIColor.clear
         }
     }

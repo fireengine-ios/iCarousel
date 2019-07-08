@@ -313,7 +313,7 @@ extension CreateStoryViewController {
         let router = RouterVC()
         let controller = router.audioSelection(forStory: story)
         controller.audioItemSelectedDelegate = self
-        self.navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     private func openPreview(responce: CreateStoryResponce) {

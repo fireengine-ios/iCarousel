@@ -15,20 +15,19 @@ protocol CreateStoryAudioItemCellDelegate {
 
 final class CreateStoryAudioItemCell: UITableViewCell {
 
-    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        }
+    }
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var selectButton: UIButton!
     @IBOutlet private weak var separateLine: UIView!
     
-    private var cellIndexPath: Int?
+    private var cellIndexPathRow: Int?
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-    }
     
     func setTextForLabel(titleText: String, needShowSeparator: Bool) {
         titleLabel.text = titleText
@@ -36,24 +35,26 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     }
 
     func setCellIndexPath(index: Int) {
-        self.cellIndexPath = index
+        self.cellIndexPathRow = index
     }
     
     @IBAction private func playButtonTapped(_ sender: UIButton) {
-        guard let index = cellIndexPath else {
+        guard let index = cellIndexPathRow else {
+            assertionFailure()
             return
         }
         createStoryAudioItemCellDelegate?.playButtonPressed(cell: index)
     }
     
     @IBAction private func selectButtonPressed(_ sender: UIButton) {
-        guard let index = cellIndexPath else {
+        guard let index = cellIndexPathRow else {
+            assertionFailure()
             return
         }
         createStoryAudioItemCellDelegate?.selectButtonPressed(cell: index)
     }
     
-    func isSelectedItem(selected: Bool) {
+    func setSelected(selected: Bool) {
         if selected {
             selectButton.setTitleColor(ColorConstants.choosenSelectedButtonColor, for: .normal)
             selectButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 21)
@@ -62,11 +63,10 @@ final class CreateStoryAudioItemCell: UITableViewCell {
             selectButton.setTitleColor(ColorConstants.blueColor, for: .normal)
             selectButton.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 18)
             selectButton.setTitle(TextConstants.createStoryAudioSelectItem, for: .normal)
-
         }
     }
     
-    func isPlaying(playing: Bool) {
+    func setPlaying(playing: Bool) {
         if playing {
             playButton.setImage(UIImage(named: "creationStoryItemPause"), for: .normal)
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)

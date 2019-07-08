@@ -19,8 +19,8 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     private var selectedIndexForMusic: Int = 0
     private var selectedIndexForUploads: Int = 0
     
-    private lazy var smallPlayer: MediaPlayer = MediaPlayer()
-    private var plaingCell: Int?
+    private lazy var smallPlayer = MediaPlayer()
+    private var plaingCellRowIndex: Int?
 
     var audioItemSelectedDelegate: AudioItemSelectedDelegate?
     
@@ -32,6 +32,9 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     @IBOutlet private var designer: CreateStoryAudioSelectionItemDesigner!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var emtyListView: UIView!
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+    
     
     init(forStory story: PhotoStory) {
         photoStory = story
@@ -40,7 +43,9 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
+        assertionFailure()
         super.init(coder: aDecoder)
     }
     
@@ -52,7 +57,6 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         super.viewDidLoad()
         showSpinner()
         getMusics()
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,7 +128,6 @@ extension CreateStoryAudioSelectionItemViewController {
             self?.setSelectedItem()
             self?.hideSpinner()
         }) {
-            assertionFailure("Failure with get getMusic request ")
             self.hideSpinner()
         }
     }
@@ -141,7 +144,6 @@ extension CreateStoryAudioSelectionItemViewController {
                                         self?.hideSpinner()
                                     }
             }, fail: {
-                assertionFailure("Failure with getUpload music request")
                 self.hideSpinner()
         })
     }
@@ -149,11 +151,11 @@ extension CreateStoryAudioSelectionItemViewController {
     private func showEmtyView<T>(array: [T]) {
         if array.isEmpty {
             DispatchQueue.main.async {
-                self.designer.emtyListView.isHidden = false
+                self.emtyListView.isHidden = false
             }
         } else {
             DispatchQueue.main.async {
-                self.designer.emtyListView.isHidden = true
+                self.emtyListView.isHidden = true
             }
         }
     }
@@ -191,22 +193,19 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         cell.setCellIndexPath(index: indexPath.row)
         cell.createStoryAudioItemCellDelegate = self
         cell.selectionStyle = .none
-        cell.isSelectedItem(selected: setSelected(index: indexPath.row))
-        
-        let item = itemsArray[indexPath.row].name
-        
-        if let name = item {
+        cell.setSelected(selected: setSelectedIndex(index: indexPath.row))
+        cell.setPlaying(playing: setPlaing(index: indexPath.row))
+
+        if let name = itemsArray[indexPath.row].name {
             cell.setTextForLabel(titleText: name, needShowSeparator: indexPath.row == itemsArray.count - 1)
         }
-        cell.isPlaying(playing: setPlaing(index: indexPath.row))
         
         return cell
     }
     
-    
-    private func setSelected(index: Int) -> Bool {
+    private func setSelectedIndex(index: Int) -> Bool {
         
-        if designer.segmentedControl.selectedSegmentIndex == 1 {
+        if segmentedControl.selectedSegmentIndex == 1 {
             if selectedIndexForMusic == index {
                 return true
             }
@@ -220,14 +219,14 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func setPlaing(index: Int) -> Bool {
-        if plaingCell == index {
+        if plaingCellRowIndex == index {
             return true
         }
         return false
     }
     
     private func setSelectedItem() {
-        let index = designer.segmentedControl.selectedSegmentIndex == 1 ? selectedIndexForMusic : selectedIndexForUploads
+        let index = segmentedControl.selectedSegmentIndex == 1 ? selectedIndexForMusic : selectedIndexForUploads
         if itemsArray.count >= index {
             selectedItem = itemsArray[index]
         }
@@ -238,13 +237,13 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
 extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellDelegate {
     
     func playButtonPressed(cell index: Int) {
-        if plaingCell == index {
+        if plaingCellRowIndex == index {
             unselectPlayingCell {
                 self.tableView.reloadData()
             }
         } else {
             unselectPlayingCell {
-                self.plaingCell = index
+                self.plaingCellRowIndex = index
                 self.tableView.reloadData()
                 self.playItem(playItem: index)
             }
@@ -252,7 +251,7 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     }
     
     func selectButtonPressed(cell index: Int) {
-        if designer.segmentedControl.selectedSegmentIndex == 1 {
+        if segmentedControl.selectedSegmentIndex == 1 {
             selectedIndexForMusic = index
         } else {
             selectedIndexForUploads = index
@@ -266,7 +265,7 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     
     private func unselectPlayingCell(completion: (() -> Void)? = nil) {
         smallPlayer.stop()
-        plaingCell = nil
+        plaingCellRowIndex = nil
         completion?()
     }
 }
