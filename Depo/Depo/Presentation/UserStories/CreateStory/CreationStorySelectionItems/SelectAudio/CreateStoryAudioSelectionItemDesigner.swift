@@ -10,14 +10,6 @@ import UIKit
 
 final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
-    @IBOutlet private weak var topIOS10Constraint: NSLayoutConstraint! {
-        willSet {
-            if #available(iOS 11.0, *) {
-                newValue.constant = 0
-            }
-        }
-    }
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.setTitle(TextConstants.createStoryAudioMusics, forSegmentAt: 0)
