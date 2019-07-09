@@ -95,8 +95,6 @@ final class CreateStoryViewController: BaseViewController {
     private var story: PhotoStory?
     
     private var selectedImages: [Item]
-    private var musicUUID: String?
-    private var musicID: Int64?
     
     private lazy var createStoryService = CreateStoryService(transIdLogging: true)
     private lazy var activityManager = ActivityIndicatorManager()
@@ -127,7 +125,7 @@ final class CreateStoryViewController: BaseViewController {
         
         setupNavigation()
 
-        updateMusicIfNeeded(story?.music)
+        updateStoryIfNeeded(story?.music)
         
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryDetails)
@@ -187,7 +185,7 @@ final class CreateStoryViewController: BaseViewController {
         startActivityIndicator()
         dataSource.allItems(success: { [weak self] songs in
             self?.stopActivityIndicator()
-            self?.updateMusicIfNeeded(songs.first)
+            self?.updateStoryIfNeeded(songs.first)
 
         }, fail: { [weak self] in
             self?.stopActivityIndicator()
@@ -196,15 +194,14 @@ final class CreateStoryViewController: BaseViewController {
         })
     }
     
-    private func updateMusicIfNeeded(_ song: Item?) {
+    private func updateStoryIfNeeded(_ song: Item?) {
         guard let music = song else {
             return
         }
         
+        story?.storyName = storyNameView.textField.text ?? ""
         story?.music = music
         musicSelectView.textField.text = music.name ?? ""
-        musicUUID = music.uuid
-        musicID = music.id
     }
         
     private func updateItemSize() {
@@ -265,6 +262,8 @@ extension CreateStoryViewController: ActivityIndicator {
     }
     
     private func createStory() {
+        
+        updateStoryIfNeeded(story?.music)
         
         if let parameter = story?.photoStoryRequestParameter() {
             let storyPreview = CreateStoryPreview(name: parameter.title,
