@@ -108,7 +108,7 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
 //        playVideoByURLString(urlSting: urlString) //Left this in case if requrements would change again(start automaticaly)
     }
     
-    @objc func prepareToDismiss() {
+    func prepareToDismiss() {
         navigationBarWithGradientStyle()
     }
 }
