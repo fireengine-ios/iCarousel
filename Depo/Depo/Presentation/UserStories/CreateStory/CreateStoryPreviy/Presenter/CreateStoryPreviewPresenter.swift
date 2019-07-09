@@ -16,6 +16,10 @@ class CreateStoryPreviewPresenter: BasePresenter {
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
+    
+    private func prepareToDismiss() {
+        view?.prepareToDismiss()
+    }
 }
 
 // MARK: CreateStoryPreviewViewOutput
@@ -66,6 +70,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
                                   message: message,
                                   messageDesign: .partly(parts: [message : messageFullAttributes, path : messagePathAttributes]),
                                   buttonTitle: TextConstants.ok) { [weak self] in
+                                    self?.prepareToDismiss()
                                     self?.router.goToMain()
         }
     }
@@ -90,6 +95,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
                                   message: TextConstants.createStoryNotCreated,
                                   messageDesign: messageDesign,
                                   buttonTitle: TextConstants.ok) { [weak self] in
+                                    self?.prepareToDismiss()
                                     self?.router.goToMain()
         }
     }
