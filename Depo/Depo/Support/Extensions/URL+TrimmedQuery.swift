@@ -25,8 +25,8 @@ extension URL {
         guard
             let expirationDateString = queryParameterValue(name: URL.tempURLExpirationDateKey),
             let expirationDate = Date.from(string: expirationDateString)
-            else {
-                return false
+        else {
+            return false
         }
         
         return Date() >= expirationDate
