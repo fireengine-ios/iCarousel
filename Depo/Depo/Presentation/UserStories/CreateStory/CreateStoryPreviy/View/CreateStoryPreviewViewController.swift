@@ -52,6 +52,11 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         blackNavigationBarStyle()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didEnterBackground),
+                                               name: .UIApplicationDidEnterBackground,
+                                               object: nil)
         
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
                                                              style: .plain,
@@ -64,6 +69,10 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
                                                             selector: #selector(onSaveButton))
         
         output.viewIsReady()
+    }
+    
+    @objc private func didEnterBackground() {
+        player?.pause()
     }
     
     @IBAction func onPlayButton() {
@@ -86,6 +95,9 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         return viewForPlayer.backgroundColor ?? UIColor.black
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: CreateStoryPreviewViewInput
