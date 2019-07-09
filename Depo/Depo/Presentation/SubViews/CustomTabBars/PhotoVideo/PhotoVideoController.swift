@@ -163,7 +163,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func setupNavigationBar(editingMode: Bool) {
-        //be sure to configure navbar items after setup navigation bar
+        /// don't let vc to change navBar if vc is not visible at this moment
+        guard viewIfLoaded?.window != nil else {
+            return
+        }
+        
+        /// be sure to configure navbar items after setup navigation bar
         if editingMode {
             navigationBarWithGradientStyle()
             navBarManager.setSelectionMode()
