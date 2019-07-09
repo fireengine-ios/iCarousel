@@ -938,6 +938,8 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
+/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
+
 Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -970,6 +972,8 @@ Please check I have understood the intended command here*/
 "feature_paycell_slcm_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_slcm_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_all_access_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
+
+/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
