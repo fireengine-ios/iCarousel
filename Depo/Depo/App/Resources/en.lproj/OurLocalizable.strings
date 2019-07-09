@@ -1,10 +1,10 @@
 "Welcome1Info" = "Live, Collect, Remember";
-"Welcome1SubInfo" = "Collect your photos, videos, contacts and other files at lifedrive! Access and remember whenever and wherever you are.";
-"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Location services are disabled in your device settings. To use the background sync feature of lifedrive, you need to enable location services under \"Settings - Privacy - Location Services\" menu.";
+"Welcome1SubInfo" = "Collect your photos, videos, contacts and other files at lifebox! Access and remember whenever and wherever you are.";
+"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifedrive. You can access these files from the Photos tab. Are you sure you want to delete?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Deleting these files will remove them from lifedrive. You won't be able to access them once deleted. Are you sure you want to delete?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifedrive. You won't be able to access them once deleted";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
@@ -13,7 +13,7 @@
 "Please enter your promo code" = "Please enter your package activation code";
 "This package activation code is invalid" = "This package activation code is invalid";
 "Enter your promo code" = "Enter your package activation code";
-"Lifebox campaign" = "lifedrive campaign";
+"Lifebox campaign" = "lifebox campaign";
 "Success" = "Success";
 "Apply" = "Apply";
 "Invalid passcode. %@ attempts left. Please try again" = "Invalid passcode. %@ attempts left. Please try again";
@@ -21,14 +21,14 @@
 "Face ID" = "Face ID";
 "Enable" = "Enable";
 "Please activate %@ from your device settings to use this feature" = "Please activate %@ from your device settings to use this feature";
-"To enter passcode" = "Enter lifedrive passcode";
-"Set a Passcode" = "Set a lifedrive passcode";
+"To enter passcode" = "Enter lifebox passcode";
+"Set a Passcode" = "Set a lifebox passcode";
 "Passcodes don't match, please try again" = "Passcodes don't match, please try again";
 "You successfully set your passcode" = "You successfully set your passcode";
 "Passcode is changed successfully" = "Passcode is changed successfully";
-"Please repeate your new lifebox passcode" = "Please re-enter your new lifedrive passcode";
-"Please enter your lifebox passcode" = "Please enter your lifedrive passcode";
-"lifebox Passcode" = "lifedrive Passcode";
+"Please repeate your new lifebox passcode" = "Please re-enter your new lifebox passcode";
+"Please enter your lifebox passcode" = "Please enter your lifebox passcode";
+"lifebox Passcode" = "lifebox Passcode";
 "Change Passcode" = "Change Passcode";
 "Passcode" = "Passcode";
 "The package activation code is not active" = "The package activation code is not active";
@@ -73,13 +73,13 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "You can visit iTunes to cancel your package.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEDRIVE %@\"";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
-"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEDRIVE CANCEL to 3030 to cancel their memberships";
-"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "To deactivate lifedrive 50GB please send SMS with the text 50VYKL, for lifedrive 500GB please send SMS with the text 500VYKL to the number 8080.";
-"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum and lifecell customers can send LIFE, other customers can send LIFEDRIVE 50GB for lifedrive 50GB package, LIFEDRIVE 500GB for lifedrive 500GB package and LIFEDRIVE 2.5TB for lifedrive 2.5TB package to 3030 to start their memberships";
-"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Special prices for lifecell users! lifedrive 50GB for 24,99 UAH/30 days, lifedrive 500GB for 52,99 UAH/30 days.  To order: *888#";
+"Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
+"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships";
+"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Special prices for lifecell users! lifebox 50GB for 24,99 UAH/30 days, lifebox 500GB for 52,99 UAH/30 days.  To order: *888#";
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
 "%@ of %@ has remained" = "%1$@ of %2$@ has remained";
@@ -96,8 +96,8 @@
 "You have free space for %d more items." = "%d items deleted from your device to free up storage on your device.";
 "Delete" = "Delete";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
-"Allow lifebox to delete %d photos?" = "Allow lifedrive to delete %d photos?";
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifedrive. Clear some space by selecting the photos that you want to delete.";
+"Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifebox. Clear some space by selecting the photos that you want to delete.";
 "Download to Camera Roll" = "Download to Device Gallery";
 "Share Album" = "Share Album";
 "Album Details" = "Album Details";
@@ -108,7 +108,7 @@
 "Select All" = "Select All";
 "Select" = "Select";
 "More" = "More";
-"lifebox" = "lifedrive";
+"lifebox" = "lifebox";
 "iCloud Drive" = "iCloud Drive";
 "Photos" = "Photos";
 "Choose From Library" = "Choose From Device Gallery";
@@ -143,7 +143,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
-"There are some duplicated items both in your device and lifebox" = "There are some duplicated items both on your device and lifedrive";
+"There are some duplicated items both in your device and lifebox" = "There are some duplicated items both on your device and lifebox";
 
 /*which operation??*/
 "Operation is complete" = "Operation completed";
@@ -157,8 +157,9 @@
 "Please type your message" = "Please type your message";
 "Error" = "Error";
 "Please configurate email client" = "Please configurate e-mail client";
+"DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
 "Send" = "Send";
-"%@ about Lifebox" = "%@ about Lifedrive";
+"%@ about Lifebox" = "%@ about Lifebox";
 "Complaint" = "Complaint";
 "Suggestion" = "Suggestion";
 "Feedback Form" = "For any suggestions or complaints, please contact us:";
@@ -190,11 +191,11 @@
 "Ok" = "Ok";
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
-"Fail while uploading from LifeBox" = "Upload from lifedrive failed";
+"Fail while uploading from LifeBox" = "Upload from lifebox failed";
 
 /*I don't understand*/
 "Sorry, but photos not selected" = "Photos are not selected";
-"Upload from lifebox" = "Upload from lifedrive";
+"Upload from lifebox" = "Upload from lifebox";
 "Upload failed" = "Upload failed";
 "Upload was successful" = "Uploaded successfully";
 "Nothing to upload" = "Nothing to upload";
@@ -224,8 +225,8 @@
 "Restore" = "Restore";
 "Back-Up" = "Back Up";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
-"You never backed up your contacts" = "You don't have any contact information in your lifedrive yet.";
-"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifedrive. You can easily manage your contact list from any device and anywhere.";
+"You never backed up your contacts" = "You don't have any contact information in your lifebox yet.";
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. You can easily manage your contact list from any device and anywhere.";
 "Backed up %d Contacts" = "You have %d numbers in your contact backup";
 "Removed" = "Removed";
 "Updated" = "Updated";
@@ -251,7 +252,7 @@
 
 /*?????*/
 "We promise, we won’t sent you spam." = "We promise, we won’t sent you spam.";
-"I’d like hear about news and promotions about lifebox occasionally." = "I’d like to occasionally hear about lifedrive news and promotions.";
+"I’d like hear about news and promotions about lifebox occasionally." = "I’d like to occasionally hear about lifebox news and promotions.";
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
@@ -265,29 +266,28 @@
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
 "Help & Support" = "FAQ";
-"terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
-"Lifebox Touch ID and Passcode" = "lifedrive Touch ID and Passcode";
+"Lifebox Touch ID and Passcode" = "lifebox Touch ID and Passcode";
 "Usage Info and Packages" = "Account & Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
-"Back to Lifebox" = "Back to lifedrive";
+"Back to Lifebox" = "Back to lifebox";
 "Start adding your documents" = "Start adding your documents";
-"You don’t have any documents on your Lifebox yet." = "You don’t have any documents in your lifedrive yet.";
+"You don’t have any documents on your Lifebox yet." = "You don’t have any documents in your lifebox yet.";
 "Start adding your music" = "Start adding your music";
-"You don’t have any music on your Lifebox yet." = "You don’t have any music in your lifedrive yet.";
+"You don’t have any music on your Lifebox yet." = "You don’t have any music in your lifebox yet.";
 "info" = "info";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
 "Start adding your photos" = "Start adding your photos";
-"You don’t have anything on your photo roll." = "You don’t have any photos or videos in your lifedrive yet.";
+"You don’t have anything on your photo roll." = "You don’t have any photos or videos in your lifebox yet.";
 "View All Pictures" = "View All Photos";
 "View All My Stream" = "View All My Stream";
 "%d Photos" = "%d Photos";
 "You’ve uploaded %@ two days ago!" = "You’ve uploaded %@ two days ago!";
 "Expand My Storage" = "Upgrade My Storage Plan";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "You are using %85 of your lifedrive qutoa! It’s a great time to upgrade your storage.";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "You are using %85 of your lifebox qutoa! It’s a great time to upgrade your storage.";
 "Your storage is almost full!" = "Your device storage is almost full!";
 "Change filter" = "Change filter";
 "Save this photo" = "Save";
@@ -301,7 +301,7 @@
 "No" = "No";
 "Access to Gallery is denied. Please change it from the settings menu of the device" = "Access to Gallery is denied. Please change it from the settings menu of the device";
 "Caution!" = "Caution!";
-"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "You can access everything about lifedrive from home page. Start using your lifedrive with our suggestions. You can swipe the cards that you don't like.";
+"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "You can access everything about lifebox from home page. Start using your lifebox with our suggestions. You can swipe the cards that you don't like.";
 "Welcome! Let’s get you started!" = "Welcome! Let’s get started!";
 "Videos" = "Videos";
 "Folder" = "Folder";
@@ -366,18 +366,18 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "You’re skipping auto-upload settings. You can activate this later in settings.";
 "Skip setting Auto-Sync?" = "Do you want to skip auto upload settings?";
 "Skip for now" = "Skip";
-"Let’s start using Lifebox" = "Let’s start using lifedrive";
+"Let’s start using Lifebox" = "Let’s start using lifebox";
 "Select the items to sync with mobile data." = "Select the items to sync with mobile data.";
 "Mobile Data" = "Mobile Data";
 "Wi-fi" = "Wi-Fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifedrive can sync your photos and videos automatically. Would you like to enable Auto-sync feature now?";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox can sync your photos and videos automatically. Would you like to enable Auto-sync feature now?";
 "You have to fill in a password" = "You have to fill in your password";
 "You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
 "Password" = "Password";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
 "I can't login" = "I forgot my password";
-"Register to lifebox and get a 5 GB of storage for free!" = "Register to lifedrive and get a 5 GB of storage for free!";
+"Register to lifebox and get a 5 GB of storage for free!" = "Register to lifebox and get a 5 GB of storage for free!";
 "Login" = "Login";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "I have read and accepted terms of use";
@@ -391,7 +391,6 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Passwords do not match";
 "Please check the e-mail address." = "Please check the e-mail address.";
-"Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
 "Please check the GSM number" = "Please check your Phone number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
@@ -425,8 +424,6 @@
 "Things" = "Things";
 "Places" = "Places";
 "Musics" = "Musics";
-"Select" = "Select";
-"Selected" = "Selected";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
@@ -443,7 +440,7 @@
 "%%%d Backed up…" = "%%%d Backed up…";
 "Restored %d Contacts" = "Restored %d Contacts";
 "%d Duplicated Contacts Deleted" = "%d Duplicated Contact(s) Deleted from your device contact list";
-"You have %d numbers on your contacts backup." = "You have %d contacts in your lifedrive";
+"You have %d numbers on your contacts backup." = "You have %d contacts in your lifebox";
 "This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
 "Upgrade" = "Upgrade";
 "Creation date" = "Creation date";
@@ -464,8 +461,8 @@
 "Your storage is empty!" = "Your storage is empty!";
 
 /*free up spce card or storage full card? which one?*/
-"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifedrive quota! It’s a great time to upgrade your storage.";
-"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifedrive, yet. Start uploading your memories on lifedrive!";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
 "Upload Files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
@@ -483,12 +480,12 @@
 "Your latest uploads" = "Your latest uploads";
 "View Recent Activities" = "View Recent Activities";
 "View All Photos" = "View All Photos";
-"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Lifedrive storage is almost full!\nLet’s have a look for upgrade options!";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Lifebox storage is almost full!\nLet’s have a look for upgrade options!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
 "localFilesBeingProcessed" = "Processing local files.";
-"TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifedrive safely with passcode/touch id features, we recommend not activating login with Turkcell password feature.";
-"TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifedrive safely with passcode/touch id features, we recommend not activating the autologin with 3G/LTE feature.";
-"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifedrive with 3G/LTE has been deactivated for you to use lifedrive passcode and touch id features safely, you can reactivate from login settings anytime you wish.";
+"TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating login with Turkcell password feature.";
+"TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating the autologin with 3G/LTE feature.";
+"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE has been deactivated for you to use lifebox passcode and touch id features safely, you can reactivate from login settings anytime you wish.";
 "Error Handling Under Constraction" = "Error Handling Under Construction";
 "This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "Account not found for email" = "Account not found for email";
@@ -501,8 +498,8 @@
 "Please type the text" = "Please type the text";
 "You have performed too many attempts. Please try again later." = "You have performed too many attempts. Account blocked. Please, try again later.";
 "The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
-"Authentication with Turkcell Password is disabled for the account" = "You can not login to lifedrive with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifedrive password.";
-"You don't have any lifebox account. Please signup before using the application" = "You don't have a lifedrive account. Please signup before using the application.";
+"Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
+"You don't have any lifebox account. Please signup before using the application" = "You don't have a lifebox account. Please signup before using the application.";
 "This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Email field is invalid" = "Email field is invalid";
 " You have to fill in GSM number" = "You have to fill in your phone number";
@@ -531,7 +528,7 @@
 "Successful purchase." = "Successful purchase.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Invalid purchase. AppStore does not verify purchase for the given parameters.";
 "A temporary error has occurred due to technical reasons." = "A temporary error has occurred due to technical reasons.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifedrive user. Note that using different lifedrive accounts with the same Apple or Google ID might result with this situation.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
 "Shows that a response operation is done for the given receipt." = "Shows that a response operation is done for the given receipt.";
 "Auto Upload is off." = "Auto Upload is off";
 "Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";
@@ -539,25 +536,25 @@
 "Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";
 "You cannot upload any video to auto generated video album" = "You cannot upload any video to auto generated video album";
 "You have no any files" = "You don't have any files.";
-"You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your lifedrive yet.";
+"You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your lifebox yet.";
 "Start creating albums" = "Start creating albums";
-"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories on your lifedrive yet.";
+"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories on your lifebox yet.";
 "Start creating stories" = "Start creating stories";
 "Help and Support" = "Help and Support";
 "Album is Empty" = "Album is empty";
-"You don’t have any files on your Lifebox yet." = "You don’t have any files on your lifedrive yet.";
-"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorite files on your lifedrive yet.";
+"You don’t have any files on your Lifebox yet." = "You don’t have any files on your lifebox yet.";
+"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorite files on your lifebox yet.";
 "Start adding your files" = "Start adding your files";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
-"Lifebox can sync your files automatically." = "lifedrive can sync your files, photos and videos automatically.";
+"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
-"Welcome to Lifebox!" = "Welcome to lifedrive!";
+"Welcome to Lifebox!" = "Welcome to lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "PhotosAndViedos" = "Photos and Videos";
 "Are these the same person?" = "Are these the same person?";
-"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody in your lifedrive yet.";
+"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody in your lifebox yet.";
 "Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Never" = "Never";
 "Approve" = "Approve";
@@ -575,7 +572,7 @@
 "We have created an animation from your photos!" = "We have created an animation from your photos!";
 "Save Animation" = "Save Animation";
 "Delete Duplicated" = "Delete Duplicate";
-"Lifebox %@ and Passcode" = "Lifedrive %@ and Passcode";
+"Lifebox %@ and Passcode" = "Lifebox %@ and Passcode";
 "We make easier to manage your memories with homepage" = "We make it easier to manage your memories with homepage";
 "You can reach your recent activites and suggestions that are special for you from this page" = "You can reach your recent activites and suggestions that are special for you from this page.";
 "Discover your first story" = "Discover your first story";
@@ -583,21 +580,21 @@
 "Discover your first collage" = "Discover your first collage";
 "Discover your first animation" = "Discover your first animation";
 "Discover your first filtered photo" = "Discover your first filtered photo";
-"You have reached your lifebox memory limit" = "You have reached your lifedrive memory limit";
+"You have reached your lifebox memory limit" = "You have reached your lifebox memory limit";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Error occurred while accessing your contacts.\nPlease check your settings.";
-"Manage Contacts" = "Manage lifedrive Contacts";
+"Manage Contacts" = "Manage lifebox Contacts";
 "Import fearture is totally free of charge and does not affect your internet package" = "Import fearture is totally free of charge and does not affect your internet package";
 "Your last backup was on %@" = "Your last backup was on %@";
 "Contacts Sync" = "Contacts Sync";
 "Sort By" = "Sort by";
-"LifeboxLargePopUpTitle100" = "Your lifedrive storage is full";
-"LifeboxLargePopUpTitle90" = "You are using 90% of lifedrive storage";
-"LifeboxLargePopUpTitle80" = "You are using 80% of lifedrive storage";
+"LifeboxLargePopUpTitle100" = "Your lifebox storage is full";
+"LifeboxLargePopUpTitle90" = "You are using 90% of lifebox storage";
+"LifeboxLargePopUpTitle80" = "You are using 80% of lifebox storage";
 "LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
 "LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
 "LifeboxLargePopUpSkipButtonTitle" = "Skip";
-"Lifebox can sync your contacts automatically." = "lifedrive can sync your contacts automatically.";
-"error_login" = "You need to login to lifedrive to upload files";
+"Lifebox can sync your contacts automatically." = "lifebox can sync your contacts automatically.";
+"error_login" = "You need to login to lifebox to upload files";
 "uploading" = "Uploading";
 "widgetBottomTitleLastSyncFormat" = "Last upload: %@";
 "widgetBottomTitleNewerSyncronized" = "Never";
@@ -605,8 +602,8 @@
 "widgetTopTitleInactive" = "Auto-Sync is inactive";
 "widgetTopTitleInProgress" = "Auto-Sync is in progress";
 "error_authentication_message" = "Please open app and login to continue";
-"error_authentication_title" = "Login to lifedrive";
-"error_passcode_message" = "Files application can not be used with a passcode. Please open lifedrive and disable passcode to continue";
+"error_authentication_title" = "Login to lifebox";
+"error_passcode_message" = "Files application can not be used with a passcode. Please open lifebox and disable passcode to continue";
 "error_passcode_title" = "Passcode lock is enabled";
 "Successfully purchased" = "Successfully purchased";
 "Cancel Analyzing" = "Cancel Analyzing";
@@ -619,7 +616,7 @@
 "%d%% Analyzed…" = "%d%% Analyzed…";
 "START USING" = "Get Started";
 "landingTitle0" = "Live, Collect, Remember";
-"landingSubTitle0" = "Collect your photos, videos, contacts and other files at lifedrive! Access and remember whenever and wherever you are.";
+"landingSubTitle0" = "Collect your photos, videos, contacts and other files at lifebox! Access and remember whenever and wherever you are.";
 "landingTitle1" = "Auto-sync";
 "landingSubTitle1" = "Back up all your photos and videos automatically and access them from everywhere.";
 "landingTitle2" = "Face/image recognition";
@@ -631,9 +628,9 @@
 "landingTitle3" = "Contact-sync";
 "landingSubTitle3" = "Back up your contacts, never lose them";
 "landingTitle6" = "Social media";
-"landingSubTitle6" = "Transfer all your social meadia archives easily to lifedrive";
+"landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
 "Add GSM Number" = "Add Phone Number";
-"The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifedrive";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
 "You have not enough memory in your device" = "You don't have enough memory on your device";
 "The purchase was canceled" = "The purchase is canceled.";
 "The purchase in progress" = "The purchase is in progress.";
@@ -642,12 +639,12 @@
 "Weekly" = "Weekly";
 "Monthly" = "Monthly";
 "Up to 5000 contacts can be backed up." = "Contact backup failed as you have more contacts than the maximum allowed.";
-"LifeboxSmallPopUpTitle" = "Your lifedrive storage is almost full!";
+"LifeboxSmallPopUpTitle" = "Your lifebox storage is almost full!";
 "LifeboxSmallPopUpSubTitle" = "Let's have a look at upgrade options!";
 "LifeboxSmallPopUpCheckBoxTex" = "Never show again";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "UPGRADE";
-"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifedrive usage)";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "Renewal Date: %@" = "Renewal date: %@";
 "created" = "created";
 "uploaded" = "uploaded";
@@ -660,30 +657,28 @@
 "Bad internet connection" = "Bad internet connection";
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
-"Your lifebox storage is almost full!" = "Your lifedrive storage is almost full!";
+"Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
-"We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifedrive yet.";
+"We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
 "*Average figure. Total number of documents depends on the size of each document." = "*Average figure. Total number of documents depends on the size of each document.";
-"We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifedrive yet.";
+"We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifebox yet.";
 "Expiration Date: %@" = "Expiration Date: %@";
 "Failed to get albums" = "Failed to get albums";
 "termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
-"offersCancelLife" = "To deactivate lifedrive 25GB please send SMS with the text “Stop1”, for lifedrive 100GB please send SMS with the text “Stop2\", for lifedrive 500GB please send SMS with the text “Stop3\" to the number 6767";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Login denied. Please check your credentials.";
 "Please enter the text below" = "Please enter the text below";
 "facebook_photo_tags" = "Facebook Photo Tags";
-"facebook_tags_on" = "You will import your Facebook tags to lifedrive when you enable this option.";
-"facebook_tags_off" = "You will import your Facebook tags to lifedrive when you enable this option.";
+"facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
+"facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_import" = "Please enable \"Import from Facebook\" option to use \"Facebook Tag Transfer\" feature";
-"face_tags_description_premium" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh";
 "TermsOfUseLinkText" = "TapHere";
 "launch_campaign_card_detail" = "Details";
 "launch_campaign_card_title" = "Prague Campaign";
-"launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifedrive right now and be one of the 10 lucky couples";
+"launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
 "Quick Scroll Preparation" = "Preparing your photos and videos";
-"terms_of_use" = "Terms of Use";
-"privacy_policy" = "Privacy Policy";
+
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features, become a Premium member!";
@@ -701,16 +696,16 @@
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become a Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
-"Standard User" = "lifedrive Standard";
-"Premium User" = "lifedrive Premium";
-"lifebox Premium" = "lifedrive Premium";
+"Standard User" = "lifebox Standard";
+"Premium User" = "lifebox Premium";
+"lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 
 /*PremiumBanner*/
 "standard_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
 "premium_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
-"standard_banner_title" = "lifedrive Premium";
-"premium_banner_title" = "Welcome to lifedrive Premium!";
+"standard_banner_title" = "lifebox Premium";
+"premium_banner_title" = "Welcome to lifebox Premium!";
 "back_up_short" = "Back Up With Original Quality";
 "remove_duplicate_short" = "Remove Duplicated Contacts from Your Phone Directory";
 "places_recognition_short" = "Place Recognition to beam you up to the memories";
@@ -727,24 +722,24 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
-"package_slcm_cancel_text" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEDRIVE %@\"";
+"package_slcm_cancel_text" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "package_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "package_free_of_charge_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
-"package_lifecell_cancel_text" = "To deactivate lifedrive 50GB please send SMS with the text 50VYKL, for lifedrive 500GB please send SMS with the text 500VYKL to the number 8080.";
+"package_lifecell_cancel_text" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
 "package_promo_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
-"package_kktcell_cancel_text" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEDRIVE CANCEL to 3030 to cancel their memberships";
+"package_kktcell_cancel_text" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
 "package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
-"package_life_cancel_text" = "To deactivate lifedrive 25GB please send SMS with the text “Stop1”, for lifedrive 100GB please send SMS with the text “Stop2\", for lifedrive 500GB please send SMS with the text “Stop3\" to the number 6767";
-"package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
-"package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
-"package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
+"package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it'";
 
 /*Leave Premium*/
-"leave_premium_premium_description" = "You can use all the advanced features of lifedrive with your Premium membership.";
+"leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
 "feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
-"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEDRIVE PREMIUM IPTAL";
+"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "feature_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_lifecell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell user";
@@ -752,18 +747,17 @@
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
-"feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
-"feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
-"feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
-"feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifedrive.com";
+"feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_default_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
-"face_image_upgrade" = "Upgrade to lifedrive Premium to use this feature without any limitation.";
-"face_tags_description_standart" = "Eula text will be here Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem.";
+"face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
@@ -840,7 +834,7 @@
 "analyze_history_free_text" = "Unlimited for You";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "In order to purchase a PhotoPick package, you need to update your lifedrive application.";
+"instapick_upgrade_popup_text" = "In order to purchase a PhotoPick package, you need to update your lifebox application.";
 "instapick_upgrade_popup_button" = "Update";
 "instapick_upgrade_popup_no" = "No";
 "instapick_analysis_left" = "Analysis Left: %1$d / %2$d";
@@ -861,7 +855,7 @@
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Unlimited just for you!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "The photos you selected are in an unsupported format. You can continue the PhotoPick experience by selecting other photos.";
-"work_will_introduced" = "There is currently maintenance ongoing on lifedrive, please try again later.\n";
+"work_will_introduced" = "There is currently maintenance ongoing on lifebox, please try again later.\n";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
 "facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
@@ -870,20 +864,20 @@
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
-"server_under_maintenance" = "There is currently maintenance ongoing on lifedrive, please try again later.";
+"server_under_maintenance" = "There is currently maintenance ongoing on lifebox, please try again later.";
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
 "data_advantage_short" = "Additional Data Advantage";
 "additional_data_advantage" = "Additional Data Advantage";
 "connection_problem_occured" = "There is a connection error now, please try again later";
 "turkcell_purchase_popup_title" = "%@";
-"mid_user" = "lifedrive Standard+";
+"mid_user" = "lifebox Standard+";
 "instapick_no_available_units_left" = "No analysis left";
-"middle_user" = "lifedrive Standard+";
-"lifebox_middle" = "lifedrive Standard+";
-"lifebox_standart" = "lifedrive Standard";
-"account_detail_middle_title" = "You can use advanced features with your lifedrive Standard+ membership";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "You can use advanced features with your lifebox Standard+ membership";
 "account_detail_middle_description" = "You will not be able to benefit from Standard+ privileges if you cancel your membership";
-"account_detail_standart_title" = "You are using lifedrive as a Standard user";
+"account_detail_standart_title" = "You are using lifebox as a Standard user";
 "account_detail_standart_description" = "You can use standard features with your membership";
 
 /*AnalyzeHistoryController*/
@@ -894,23 +888,20 @@
 "data_package_for_turkcell" = "Additional data advantage";
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
-"leave_middle_turkcell" = "To cancel your package, please send an SMS to 2200 with this text: IPTAL LIFEDRIVE STANDART+";
+"leave_middle_turkcell" = "To cancel your package, please send an SMS to 2200 with this text: IPTAL LIFEBOX STANDART+";
 "package_FWI_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "package_jamaica_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "feature_digicell_cancel_text" = "You can continue to use Premium features for free since you are a Digicell user";
 "terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
-"terms_and_use_introduction_checkbox" = "I have read and agree to the Terms of Use Agreement and Conditions of Privacy Policy";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";
-"privacy_policy_condition" = "Privacy Policy";
-"privacy_policy_head_line" = "TERMS OF USE AGREEMENT FOR LIFEDRIVE END USERS";
 "terms_and_use_etk_link_commercial_email_messages" = "commercial e-mail messages";
-"commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifedrive application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
+"commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
 "NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
-"NSPhotoLibraryAddUsageDescription" = "To show your photos&videos in the application and to back up them, lifedrive needs your photo library access.";
-"NSPhotoLibraryUsageDescription" = "To show your photos&videos in the application and to back up them, lifedrive needs your photo library access.";
+"NSPhotoLibraryAddUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
+"NSPhotoLibraryUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
 
 /*Usage Info*/
-"package_space_details" = "%1$@ / %2$@ internet used (only for lifedrive usage)";
+"package_space_details" = "%1$@ / %2$@ internet used (only for lifebox usage)";
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
 "used_and_left_space" = "%1$@ / %2$@ used";
@@ -927,9 +918,9 @@
 "account_details" = "Account Details";
 "my_profile" = "My Profile";
 "account_type" = "Account Type";
-"standard_plus" = "lifedrive Standard+";
-"standard" = "lifedrive Standard";
-"premium" = "lifedrive Premium";
+"standard_plus" = "lifebox Standard+";
+"standard" = "lifebox Standard";
+"premium" = "lifebox Premium";
 "old_password" = "Old Password";
 "new_password" = "New Password";
 "repeat_password" = "Re-Enter Password";
@@ -969,23 +960,19 @@
 "please_enter_your_problem_shortly" = "Please enter your problem shortly";
 "explain_your_problem_shortly" = "Explain your problem shortly";
 "please_enter_msisdn_or_email" = "Please enter phone number or email field";
-"support_form_subject_1" = "Lifedrive / I can't login with my e-mail";
-"support_form_subject_2" = "Lifedrive / I can't login with my phone number";
-"support_form_subject_3" = "Lifedrive / I can't login with my password";
-"support_form_subject_4" = "Lifedrive / Security text doesn't match";
-"support_form_subject_5" = "Lifedrive / Turkcell Password problem";
-"support_form_subject_6" = "Lifedrive / Automatic Log-in problem";
-"support_form_subject_7" = "Lifedrive / I can't download lifedrive app";
+"support_form_subject_1" = "Lifebox / I can't login with my e-mail";
+"support_form_subject_2" = "Lifebox / I can't login with my phone number";
+"support_form_subject_3" = "Lifebox / I can't login with my password";
+"support_form_subject_4" = "Lifebox / Security text doesn't match";
+"support_form_subject_5" = "Lifebox / Turkcell Password problem";
+"support_form_subject_6" = "Lifebox / Automatic Log-in problem";
+"support_form_subject_7" = "Lifebox / I can't download lifebox app";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
-"restore_purchases" = "Restore Purchases";
-"restore_purchases_info" = "If you want to restore your previous purchases lorem ipsum pellentesque tincidunt eleifend nibh, at suscipit arcu con.";
-"attributed_restore_word" = "restore";
-
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
@@ -1007,21 +994,6 @@
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
-
-"photo_pick_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus.";
-/*Permission screen in Settings*/
-"etk_permission_title_label" = "ETK Permission";
-"etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
-
-"create_story_photos_selected" = "%d Selected";
-
-"create_story_press_and_hold" = "Press and hold";
-"create_story_press_and_hold_description" = "%@ on the image you would like to rearrange the order of your story video.";
-"create_story_name_title" = "Story Name";
-
-"create_story_pop_up_title" = "You created a story! \n %@";
-"create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
-"create_story_path_to_story" = "Photos & Videos > My Stories";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
@@ -1036,4 +1008,15 @@
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "ETK Permission";
 "etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
-"NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifedrive, your camera access permission is needed";
+"NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
+"restore_purchases" = "Restore Purchases";
+"restore_purchases_info" = "If you want to restore your previous purchases lorem ipsum pellentesque tincidunt eleifend nibh, at suscipit arcu con.";
+"attributed_restore_word" = "restore";
+"privacy_policy_head_line" = "TERMS OF USE AGREEMENT FOR LIFEDRIVE END USERS";
+"create_story_photos_selected" = "%d Selected";
+"create_story_press_and_hold" = "Press and hold";
+"create_story_press_and_hold_description" = "%@ on the image you would like to rearrange the order of your story video.";
+"create_story_name_title" = "Story Name";
+"create_story_pop_up_title" = "You created a story! \n %@";
+"create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
+"create_story_path_to_story" = "Photos & Videos > My Stories";
