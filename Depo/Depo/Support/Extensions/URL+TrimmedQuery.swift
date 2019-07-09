@@ -10,6 +10,9 @@ import Foundation
 
 
 extension URL {
+    private static let tempURLExpirationDateKey = "temp_url_expires"
+    
+    
     var byTrimmingQuery: URL? {
         if let substring = absoluteString.split(separator: "?").first {
             let stringValue = String(substring)
@@ -18,7 +21,18 @@ extension URL {
         return nil
     }
     
-    var queryParameters: [String: String]? {
+    var isExpired: Bool {
+        guard
+            let expirationDateString = queryParameterValue(name: URL.tempURLExpirationDateKey),
+            let expirationDate = Date.from(string: expirationDateString)
+            else {
+                return false
+        }
+        
+        return Date() >= expirationDate
+    }
+    
+    private var queryParameters: [String: String]? {
         guard
             let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
             let queryItems = components.queryItems
@@ -31,19 +45,10 @@ extension URL {
         }
     }
     
-    func queryParameterValue(name: String) -> String? {
+    
+    private func queryParameterValue(name: String) -> String? {
         return queryParameters?[name]
     }
     
-    var isExpired: Bool {
-        let expirationDateKey = "temp_url_expires"
-        guard
-            let expirationDateString = queryParameterValue(name: expirationDateKey),
-            let expirationDate = Date.from(string: expirationDateString)
-        else {
-            return false
-        }
-        
-        return Date() >= expirationDate
-    }
+    
 }

@@ -211,8 +211,7 @@ extension BaseMetaData {
 //            videoHLSPreview?.byTrimmingQuery == metaData.videoHLSPreview?.byTrimmingQuery &&
             favourite == metaData.favourite &&
             height == metaData.height &&
-            width == metaData.width &&
-            !(videoPreviewURL?.isExpired ?? false)
+            width == metaData.width
     }
     
     func copy(metaData: BaseMetaData?) {

@@ -128,8 +128,7 @@ final class PhotoVideoCell: UICollectionViewCell {
 //    }
     
     func setup(with mediaItem: MediaItem) {
-        /// reset all except thumbnail and cellId
-        reset()
+        checkmarkImageView.isHidden = true
         
         accessibilityLabel = mediaItem.nameValue ?? ""
         favoriteImageView.isHidden = !mediaItem.favoritesValue
@@ -201,7 +200,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         let cacheKey = mediumUrl?.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         
-        guard uuid != cellImageManager?.uniqueId else {
+        if uuid == cellImageManager?.uniqueId && thumbnailImageView.image != nil {
             /// image will not be loaded
             return
         }
@@ -303,10 +302,6 @@ final class PhotoVideoCell: UICollectionViewCell {
     private func cancelImageLoading() {
         thumbnailImageView.sd_cancelCurrentImageLoad()
         cellImageManager?.cancelImageLoading()
-    }
-    
-    private func reset() {
-        checkmarkImageView.isHidden = true
     }
     
     private func resetImage() {
