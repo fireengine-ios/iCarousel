@@ -160,14 +160,34 @@ final class PhotoCell: UICollectionViewCell {
             favouriteImageView.isHidden = !isFavourite
         }
         
-        ///in case server after syncing didn’t had time to create thumbnail
-        FilesDataSource().getImage(for: item, isOriginal: false, completeImage: { image in
-            if let image = image {
-                DispatchQueue.toMain {
-                    self.setImage(image: image, animated: false)
+        if let asset = item.asset {
+            LocalMediaStorage.default.getPreviewImage(asset: asset) { [weak self] image in
+                if let image = image {
+                    DispatchQueue.toMain {
+                        self?.setImage(image: image, animated: false)
+                    }
                 }
             }
-        })
+
+        } else if let smallURL = item.metaData?.smalURl, let mediumURL = item.metaData?.mediumUrl {
+            let cacheKey = metadata.mediumUrl?.byTrimmingQuery
+            cellImageManager = CellImageManager.instance(by: cacheKey)
+            uuid = cellImageManager?.uniqueId
+            
+            let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                let needAnimate = !cached && (self?.imageView.image == nil)
+                
+                DispatchQueue.toMain {
+                    self?.setImage(image: image, animated: needAnimate)
+                }
+            }
+
+            cellImageManager?.loadImage(thumbnailUrl: smallURL, url: mediumURL, completionBlock: imageSetBlock)
+        }
     }
     
     private func setImage(image: UIImage?, animated: Bool) {
