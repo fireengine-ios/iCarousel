@@ -265,33 +265,36 @@ extension CreateStoryViewController: ActivityIndicator {
     }
     
     private func createStory() {
-        let storyPreview = CreateStoryPreview(name: storyNameView.textField.text ?? "",
-                                              imageuuid: selectedImages.compactMap { $0.uuid },
-                                              musicUUID: musicUUID,
-                                              musicId: musicID)
         
-        startActivityIndicator()
-        createStoryService.getPreview(preview: storyPreview, success: { [weak self] responce in
-            guard let `self` = self else {
-                return
-            }
+        if let parameter = story?.photoStoryRequestParameter() {
+            let storyPreview = CreateStoryPreview(name: parameter.title,
+                                                  imageuuid: parameter.imageUUids,
+                                                  musicUUID: parameter.audioUuid,
+                                                  musicId: parameter.musicId)
             
-            self.stopActivityIndicator()
-
-            DispatchQueue.main.async {
-                self.openPreview(responce: responce)
-            }
-            
-        }, fail: { error in
-            DispatchQueue.main.async { [weak self] in
+            startActivityIndicator()
+            createStoryService.getPreview(preview: storyPreview, success: { [weak self] responce in
                 guard let `self` = self else {
                     return
                 }
                 
                 self.stopActivityIndicator()
-                self.showError(text: error.errorDescription)
-            }
-        })
+                
+                DispatchQueue.main.async {
+                    self.openPreview(responce: responce)
+                }
+                
+                }, fail: { error in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let `self` = self else {
+                            return
+                        }
+                        
+                        self.stopActivityIndicator()
+                        self.showError(text: error.errorDescription)
+                    }
+            })
+        }
     }
     
     private func showError(text: String?) {
