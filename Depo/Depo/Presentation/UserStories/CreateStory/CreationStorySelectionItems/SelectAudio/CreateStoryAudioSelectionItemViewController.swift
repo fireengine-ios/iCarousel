@@ -58,7 +58,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         super.viewDidLoad()
         selectedIndexForMusic = 0
         showSpinner()
-        getMusics()
+        getMusic()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +88,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         itemsArray.removeAll()
         showSpinner()
         if isYourMusic {
-            getMusics()
+            getMusic()
         } else {
             getUploads()
         }
@@ -120,7 +120,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
 
 extension CreateStoryAudioSelectionItemViewController {
     
-    private func getMusics() {
+    private func getMusic() {
         CreateStoryMusicService().allItems(success: { [weak self] items in
             self?.showEmtyView(array: items)
             self?.itemsArray = items
