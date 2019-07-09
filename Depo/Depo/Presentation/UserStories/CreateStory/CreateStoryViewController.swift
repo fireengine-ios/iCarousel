@@ -22,6 +22,7 @@ final class CreateStoryViewController: BaseViewController {
             
             newValue.textField.returnKeyType = .done
             newValue.textField.delegate = self
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -250,6 +251,10 @@ final class CreateStoryViewController: BaseViewController {
     
     @IBAction func onCreateTap(_ sender: Any) {
         createStory()
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        story?.storyName = textField.text ?? ""
     }
 }
 
