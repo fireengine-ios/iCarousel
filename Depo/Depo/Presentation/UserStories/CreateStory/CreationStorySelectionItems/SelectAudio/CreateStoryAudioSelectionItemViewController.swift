@@ -16,13 +16,14 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     private var photoStory: PhotoStory?
     private var selectedItem: WrapData?
-    private var selectedIndexForMusic: Int = 0
-    private var selectedIndexForUploads: Int = 0
-    private let musicSegmentedControlIndex = 1
+    private let musicSegmentedControlIndex = 0
+    
+    private var selectedIndexForMusic: Int?
+    private var selectedIndexForUploads: Int?
     
     private lazy var smallPlayer = MediaPlayer()
     private var plaingCellRowIndex: Int?
-
+    
     var audioItemSelectedDelegate: AudioItemSelectedDelegate?
     
     private var itemsArray: [WrapData] = [] {
@@ -35,7 +36,6 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var emtyListView: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
-    
     
     init(forStory story: PhotoStory) {
         photoStory = story
@@ -56,6 +56,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedIndexForMusic = 0
         showSpinner()
         getMusics()
     }
@@ -67,7 +68,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     @IBAction private func segmentedControlChanged(_ sender: UISegmentedControl) {
         unselectPlayingCell()
-        onChangeSource(isYourUpload: sender.selectedSegmentIndex == musicSegmentedControlIndex)
+        onChangeSource(isYourMusic: sender.selectedSegmentIndex == musicSegmentedControlIndex)
     }
     
     private func configureNavBarActions() {
@@ -83,13 +84,13 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
                                                            selector: #selector(onCancelButton))
     }
     
-    private func onChangeSource(isYourUpload: Bool) {
+    private func onChangeSource(isYourMusic: Bool) {
         itemsArray.removeAll()
         showSpinner()
-        if isYourUpload {
-            getUploads()
-        } else {
+        if isYourMusic {
             getMusics()
+        } else {
+            getUploads()
         }
     }
     
@@ -189,7 +190,7 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.setSelected(selected: isSelected(index: indexPath.row))
         cell.setPlaying(playing: isPlaying(index: indexPath.row))
-
+        
         if let name = itemsArray[indexPath.row].name {
             cell.setTextForLabel(titleText: name)
         }
@@ -215,16 +216,23 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
         }
         
         if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
-            if itemsArray.count >= selectedIndexForMusic {
-                selectedItem = itemsArray[selectedIndexForMusic]
-            }
+            setItem(index: selectedIndexForMusic)
         } else {
-            if itemsArray.count >= selectedIndexForUploads {
-                selectedItem = itemsArray[selectedIndexForUploads]
-            }
+            setItem(index: selectedIndexForUploads)
         }
     }
     
+    private func setItem(index: Int?) {
+       
+        guard let index = index else {
+            return
+        }
+        
+        if itemsArray.count >= index {
+            selectedItem = itemsArray[index]
+            tableView.reloadData()
+        }
+    }
 }
 
 extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellDelegate {
@@ -245,8 +253,10 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     func selectButtonPressed(cell index: Int) {
         if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
             selectedIndexForMusic = index
+            selectedIndexForUploads = nil
         } else {
             selectedIndexForUploads = index
+            selectedIndexForMusic = nil
         }
         
         tableView.reloadData()
