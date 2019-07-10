@@ -3162,6 +3162,12 @@
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
+		B577AE2022D4B8F600D074BA /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		B577AE2122D4B8F700D074BA /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		B577AE2222D4B8FA00D074BA /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		B577AE2322D4B8FB00D074BA /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		B577AE2422D4B91100D074BA /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		B577AE2622D4B91300D074BA /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
 		B5781BD0210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
@@ -20172,10 +20178,12 @@
 				CE4D281C207E0A73003AE4FB /* ColorConstants.swift in Sources */,
 				CE4D2816207E0A25003AE4FB /* FromNib.swift in Sources */,
 				CE1B7628204D34B900B5E12A /* Error+Alamofire.swift in Sources */,
+				B577AE2222D4B8FA00D074BA /* DateExtension.swift in Sources */,
 				8C9CE3B3229DA611004B5C73 /* FileProviderWormholeListener.swift in Sources */,
 				CEF371AF20887DAA007AD36E /* MD5.swift in Sources */,
 				CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
+				B577AE2122D4B8F700D074BA /* URL+TrimmedQuery.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
 				CE4D281A207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE4D2820207E2435003AE4FB /* BiometricsManager.swift in Sources */,
@@ -20192,6 +20200,7 @@
 				CE1BE94A20492C5E0074BDDC /* SharedConstants.swift in Sources */,
 				CE1BE94B20492C800074BDDC /* ShareConfigurator.swift in Sources */,
 				CE1BE95020492CB70074BDDC /* RouteRequests.swift in Sources */,
+				B577AE2622D4B91300D074BA /* Double+Extensions.swift in Sources */,
 				8CCA070F20C4639600558AB0 /* DeviceExtension.swift in Sources */,
 				CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */,
 				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
@@ -21443,9 +21452,11 @@
 				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
 				CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */,
 				CE4D282F207E4A14003AE4FB /* ShareWormholeListener.swift in Sources */,
+				B577AE2022D4B8F600D074BA /* URL+TrimmedQuery.swift in Sources */,
 				CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */,
 				CE4D2822207E2493003AE4FB /* Equatable+Contains.swift in Sources */,
 				CE4D281E207E23F7003AE4FB /* PasscodeEnterViewController.swift in Sources */,
+				B577AE2322D4B8FB00D074BA /* DateExtension.swift in Sources */,
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
@@ -21482,6 +21493,7 @@
 				CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */,
 				CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
+				B577AE2422D4B91100D074BA /* Double+Extensions.swift in Sources */,
 				CE4D2814207E0997003AE4FB /* PasscodeViewImp.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
@@ -23380,7 +23392,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
+				PROVISIONING_PROFILE_SPECIFIER = "77271b70-e1c8-4128-adfd-7de4fb2012e4";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -23571,7 +23583,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "13567de5-0be1-4673-ae5c-d5fe36fb3aad";
+				PROVISIONING_PROFILE_SPECIFIER = "b3d703e9-09d3-4229-80b6-54e4f7b66df5";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_VERSION = 4.0;
@@ -24215,7 +24227,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
+				PROVISIONING_PROFILE_SPECIFIER = "83b3721d-7e9a-4467-9456-1f39153cd058";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24351,7 +24363,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "8195c797-2345-4b62-bc99-9cda2b33d902";
+				PROVISIONING_PROFILE_SPECIFIER = "a01d25c5-6907-456e-9c7f-9daa7fe7c1a8";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24713,7 +24725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
+				PROVISIONING_PROFILE_SPECIFIER = "2a5fd615-c5f1-4bcd-a8cd-b652117a8933";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";

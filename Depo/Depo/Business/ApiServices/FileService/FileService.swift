@@ -354,7 +354,10 @@ class FileService: BaseRequestService {
         allOperationsCount = allOperationsCount + supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
-            BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
+            guard let downloadUrl = $0.urlToFile?.byTrimmingQuery, let fileName = $0.name else {
+                return nil
+            }
+            return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         
         let operations = downloadRequests.compactMap { baseDownloadRequest in
