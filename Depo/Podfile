@@ -49,8 +49,8 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
-  pod 'MetalPetal', '~> 1.0'
-  pod 'GPUImage'
+#  pod 'MetalPetal', '~> 1.0'
+#  pod 'GPUImage'
 
 end
 
@@ -84,6 +84,27 @@ target 'LifeboxUnitTests' do
 	core_pods
 end
 
+target 'lifedrive' do
+	core_pods
+end
+
+target 'LifeDriveShared' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeDriveFileProvider' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeDriveProviderUI' do
+    shared_pods
+end
+
+target 'LifeDrive-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

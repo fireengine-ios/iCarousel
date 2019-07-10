@@ -25,8 +25,8 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     }
     
     func trackScreen() {
-        analyticsManager.logScreen(screen: .lifeBoxTouchIdPasscode)
-        analyticsManager.trackDimentionsEveryClickGA(screen: .lifeBoxTouchIdPasscode)
+        analyticsManager.logScreen(screen: .appTouchIdPasscode)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .appTouchIdPasscode)
     }
     
     var biometricsStatus: BiometricsStatus {

@@ -35,7 +35,15 @@ class SeacrhViewRouter: SearchViewRouterInput {
     }
     
     func createStoryWithItems(_ items: [BaseDataSourceItem]) {
-        RouterVC().createStoryName(items: items, needSelectionItems: true, isFavorites: false)
+        guard let items = items as? [Item] else {
+            let error = CustomErrors.text("An error has occured while images converting.")
+            UIApplication.showErrorAlert(message: error.localizedDescription)
+            return
+        }
+        
+        let router = RouterVC()
+        let controller = router.createStory(items: items)
+        router.pushViewController(viewController: controller)
     }
     
     func showNoFilesToCreateStoryAlert() {

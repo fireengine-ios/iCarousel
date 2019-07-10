@@ -981,3 +981,14 @@
 "etk_permission_title_label" = "";
 "etk_permissiom_description" = "";
 "NSCameraUsageDescription" = "Para tomar fotos con su cámara y hacer una copia de seguridad de ellas en la caja de vida, se necesita su permiso de acceso a la cámara";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
+"privacy_policy_head_line" = "";
+"create_story_photos_selected" = "";
+"create_story_press_and_hold" = "";
+"create_story_press_and_hold_description" = "";
+"create_story_name_title" = "";
+"create_story_pop_up_title" = "";
+"create_story_pop_up_message" = "";
+"create_story_path_to_story" = "";

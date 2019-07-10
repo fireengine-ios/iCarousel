@@ -40,3 +40,19 @@ extension NSAttributedString {
         return boundingBox.width
     }
 }
+
+/// Design for a string and its substring inside one UILabel
+extension NSAttributedString {
+    static func attributedText(text: String, word: String, textFont: UIFont, wordFont: UIFont) -> NSAttributedString {
+        let textAttrs: [NSAttributedStringKey: Any] = [.foregroundColor: UIColor.lrBrownishGrey, .font: textFont]
+        let wordAttrs: [NSAttributedStringKey: Any] = [.foregroundColor: UIColor.black, .font: wordFont]
+        
+        let attrString = NSMutableAttributedString(string: text)
+        attrString.addAttributes(textAttrs, range: NSRange(location: 0, length: text.count))
+        
+        let wordRange = (text as NSString).range(of: word)
+        attrString.addAttributes(wordAttrs, range: wordRange)
+        
+        return attrString
+    }
+}

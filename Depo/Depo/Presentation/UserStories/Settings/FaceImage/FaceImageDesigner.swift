@@ -58,6 +58,14 @@ final class FaceImageDesigner: NSObject {
         }
     }
     
+    @IBOutlet private weak var threeFaceImageLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.text = TextConstants.faceTagsDescriptionStandart
+        }
+    }
+    
     @IBOutlet private weak var facebookImportButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)

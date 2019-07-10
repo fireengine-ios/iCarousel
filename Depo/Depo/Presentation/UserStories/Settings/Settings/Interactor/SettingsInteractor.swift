@@ -43,15 +43,15 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              passcodeCellTitle]
         
-        let importAccountsCells = [TextConstants.settingsViewCellConnectedAccounts]
-        
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
-                     importAccountsCells,
+                     [TextConstants.settingsViewCellConnectedAccounts,
+                      TextConstants.settingsViewCellPermissions],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellPrivacyAndTerms,
                       TextConstants.settingsViewCellLogout]]
         
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in

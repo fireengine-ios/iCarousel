@@ -273,11 +273,11 @@ extension FeedbackViewController: FeedbackViewInput {
         UIApplication.showErrorAlert(message: text)
     }
     
-    func languageRequestSended(text: String) {
+    func languageRequestSended(email: String, text: String) {
         if Mail.canSendEmail() {
             let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
             self.dismiss(animated: true, completion: nil)
-            Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
+            Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [email], success: {
                 //
             }, fail: { error in
                 UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
