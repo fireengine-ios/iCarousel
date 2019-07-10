@@ -1096,6 +1096,17 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         return tempoString
     }
+    
+    func hasExpiredUrl() -> Bool {
+        let urlsToCheck = [tmpDownloadUrl, metaData?.videoPreviewURL]
+        for url in urlsToCheck {
+            if let url = url, url.isExpired {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 extension WrapData {
@@ -1110,9 +1121,10 @@ extension WrapData {
             md5 == wrapData.md5 &&
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
-            metaData == wrapData.metaData &&
-            urlToFile == wrapData.urlToFile
+            tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            metaData == wrapData.metaData
     }
+
 }
 
 
