@@ -68,6 +68,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     private var uuid: String?
     private(set) var trimmedLocalFileID: String?
     private var requestImageID: PHImageRequestID?
+    private var isBlurred = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -192,6 +193,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             uuid = nil
             cellId = ""
             thumbnailImageView.image = nil
+            isBlurred = false
         }
         
     }
@@ -200,7 +202,10 @@ final class PhotoVideoCell: UICollectionViewCell {
         let cacheKey = mediumUrl?.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         
-        if uuid == cellImageManager?.uniqueId && thumbnailImageView.image != nil {
+        if uuid == cellImageManager?.uniqueId,
+            thumbnailImageView.image != nil,
+            !isBlurred
+        {
             /// image will not be loaded
             return
         }
@@ -234,6 +239,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             thumbnailImageView.image = image
         }
         thumbnailBlurVisualEffectView.isHidden = !shouldBeBlurred
+        isBlurred = shouldBeBlurred
     }
 
     @objc private func onLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -306,6 +312,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     private func resetImage() {
         thumbnailImageView.image = nil
+        isBlurred = false
         cancelImageLoading()
         cancelledUploadForObject()
         cancelLocalRequest()
