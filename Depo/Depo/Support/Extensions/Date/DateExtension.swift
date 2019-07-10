@@ -66,4 +66,11 @@ extension Date: Components {
         return (timeIntervalSince1970 * 1000.0).toInt() ?? 0
     }
     
+    static func from(string: String) -> Date? {
+        guard let timeInterval = Double(string) else {
+            return nil
+        }
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+    
 }
