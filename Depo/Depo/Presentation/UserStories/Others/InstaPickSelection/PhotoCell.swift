@@ -160,23 +160,34 @@ final class PhotoCell: UICollectionViewCell {
             favouriteImageView.isHidden = !isFavourite
         }
         
-        // image
-        let cacheKey = metadata.mediumUrl?.byTrimmingQuery
-        cellImageManager = CellImageManager.instance(by: cacheKey)
-        uuid = cellImageManager?.uniqueId
-        
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
-            DispatchQueue.toMain {
+        if let asset = item.asset {
+            LocalMediaStorage.default.getPreviewImage(asset: asset) { [weak self] image in
+                if let image = image {
+                    DispatchQueue.toMain {
+                        self?.setImage(image: image, animated: false)
+                    }
+                }
+            }
+
+        } else if let smallURL = item.metaData?.smalURl, let mediumURL = item.metaData?.mediumUrl {
+            let cacheKey = metadata.mediumUrl?.byTrimmingQuery
+            cellImageManager = CellImageManager.instance(by: cacheKey)
+            uuid = cellImageManager?.uniqueId
+            
+            let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
                 guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
                     return
                 }
                 
                 let needAnimate = !cached && (self?.imageView.image == nil)
-                self?.setImage(image: image, animated: needAnimate)
+                
+                DispatchQueue.toMain {
+                    self?.setImage(image: image, animated: needAnimate)
+                }
             }
+
+            cellImageManager?.loadImage(thumbnailUrl: smallURL, url: mediumURL, completionBlock: imageSetBlock)
         }
-        
-        cellImageManager?.loadImage(thumbnailUrl: metadata.smalURl, url: metadata.mediumUrl, completionBlock: imageSetBlock)
     }
     
     private func setImage(image: UIImage?, animated: Bool) {
