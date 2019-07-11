@@ -135,6 +135,11 @@ extension PremiumInteractor: PremiumInteractorInput {
             }
             
             if status == .success {
+                
+                if let product = self?.iapManager.product(for: productId) {
+                    self?.analyticsService.trackInAppPurchase(product: product)
+                }
+                
                 DispatchQueue.toMain {
                     self?.output.purchaseFinished()
                 }
@@ -245,6 +250,9 @@ extension PremiumInteractor: PremiumInteractorInput {
         offersService.verifyOffer(otp: otp, referenceToken: token,
                                   success: { [weak self] response in
                                     /// delay stay for server perform request (android logic)
+                                    
+                                    self?.analyticsService.trackInnerPurchase(offer)
+                                    
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                         self?.output.successedVerifyOffer()
                                     }

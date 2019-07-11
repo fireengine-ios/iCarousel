@@ -71,12 +71,16 @@ final class AnalyticsService {
     }
     
     func trackInAppPurchase(product: SKProduct) {
-        let name = product.localizedTitle
+        let name = product.localizedTitle.lowercased()
         let price = product.localizedPrice
         let currency = product.priceLocale.currencyCode ?? "USD"
         
-        if name.contains("500") {
+        if product.productIdentifier.contains("feature") {
+            logPurchase(event: .purchaseNonTurkcellPremium, price: price, currency: currency)
+        } else if name.contains("500") {
             logPurchase(event: .purchaseNonTurkcell500, price: price, currency: currency)
+        } else if name.contains("100") {
+            logPurchase(event: .purchaseNonTurkcell100, price: price, currency: currency)
         } else if name.contains("50") {
             logPurchase(event: .purchaseNonTurkcell50, price: price, currency: currency)
         } else if name.contains("2.5") || name.contains("2,5") {
@@ -89,8 +93,12 @@ final class AnalyticsService {
             return
         }
         
-        if name.contains("500") {
+        if let authorities = offer.authorities, authorities.contains(where: { $0.authorityType == .premiumUser }) {
+            logPurchase(event: .purchaseTurkcellPremium, price: String(price))
+        } else if name.contains("500") {
             logPurchase(event: .purchaseTurkcell500, price: String(price))
+        } else if name.contains("100") {
+            logPurchase(event: .purchaseTurkcell100, price: String(price))
         } else if name.contains("50") {
             logPurchase(event: .purchaseTurkcell50, price: String(price))
         } else if name.contains("2.5") || name.contains("2,5") {
