@@ -99,6 +99,7 @@ final class FeedbackViewController: ViewController {
         
         languageLabel.text = TextConstants.feedbackViewLanguageLabel
         languageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        languageLabel.adjustsFontSizeToFitWidth()
         languageLabel.textColor = ColorConstants.textGrayColor
         
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
