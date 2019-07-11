@@ -174,12 +174,15 @@
                 <constraint firstItem="yKZ-qH-VVG" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="3D6-Vw-nOa"/>
                 <constraint firstItem="BaH-JO-rG7" firstAttribute="top" secondItem="hNw-Pj-QXr" secondAttribute="bottom" constant="10" id="737-Kf-0am"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="vcu-gc-WA6" secondAttribute="trailing" constant="20" id="8BU-g5-aV4"/>
+                <constraint firstItem="rTe-cC-LX9" firstAttribute="top" secondItem="yKZ-qH-VVG" secondAttribute="bottom" priority="250" constant="5" id="AKg-Mx-LCj"/>
+                <constraint firstItem="cgP-Cu-WBb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rTe-cC-LX9" secondAttribute="bottom" constant="10" id="EVT-Nv-fCa"/>
                 <constraint firstItem="yKZ-qH-VVG" firstAttribute="top" secondItem="vcu-gc-WA6" secondAttribute="bottom" constant="10" id="Lh8-pY-bS5"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="hNw-Pj-QXr" secondAttribute="trailing" constant="20" id="NSb-Fi-wY4"/>
+                <constraint firstItem="rTe-cC-LX9" firstAttribute="top" secondItem="yKZ-qH-VVG" secondAttribute="bottom" priority="750" constant="20" id="NXc-1R-xFO"/>
+
                 <constraint firstItem="BaH-JO-rG7" firstAttribute="leading" secondItem="h4B-P5-Rce" secondAttribute="leading" id="Ntx-Zi-nfX"/>
                 <constraint firstItem="Idq-Q9-sbe" firstAttribute="top" secondItem="BaH-JO-rG7" secondAttribute="bottom" constant="10" id="PQi-Ma-Jjv"/>
                 <constraint firstItem="rTe-cC-LX9" firstAttribute="centerX" secondItem="cgP-Cu-WBb" secondAttribute="centerX" id="Ve2-RV-VFi"/>
-                <constraint firstItem="rTe-cC-LX9" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="3:4" id="Vp4-kT-6Wi"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="WVE-Js-Pbf"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="top" secondItem="Idq-Q9-sbe" secondAttribute="bottom" constant="10" id="cxQ-zz-WqP"/>
                 <constraint firstItem="Idq-Q9-sbe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="h8f-te-bkd"/>
