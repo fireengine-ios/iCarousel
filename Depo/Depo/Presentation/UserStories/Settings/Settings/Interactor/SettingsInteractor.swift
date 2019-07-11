@@ -73,7 +73,8 @@ class SettingsInteractor: SettingsInteractorInput {
                 
                 switch result {
                 case .success(let result):
-                    if result.first(where: { $0.isAllowed ?? false }) == nil {
+                    let hasAllowedPersmission = result.first(where: { $0.isAllowed ?? false }) != nil
+                    if !hasAllowedPersmission {
                         /// hide Permission setting
                         array[permissionsSettingsRow].remove(TextConstants.settingsViewCellPermissions)
                     }
