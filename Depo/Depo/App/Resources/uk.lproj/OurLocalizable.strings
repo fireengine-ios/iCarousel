@@ -981,7 +981,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Щоб фотографувати камерою та створити резервну копію їх у lifebox, потрібен дозвіл доступу до камери";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

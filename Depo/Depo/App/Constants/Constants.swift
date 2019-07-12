@@ -454,7 +454,9 @@ struct TextConstants {
     
     //MARK: ETK Permissions
     static let etkPermissionTitleLabel = NSLocalizedString("etk_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let etkPermissionDescriptionLabel = NSLocalizedString("etk_permissiom_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let etkPermissionDescriptionLabel = NSLocalizedString("etk_permission_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let globalPermissionTitleLabel = NSLocalizedString("global_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let globalPermissionDescriptionLabel = NSLocalizedString("global_permission_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     

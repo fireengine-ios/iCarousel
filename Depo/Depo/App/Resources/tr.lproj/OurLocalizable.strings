@@ -988,7 +988,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Cihaz kamerası ile fotoğraf çekmek ve çekilen fotoğrafları lifebox'a yedeklemek için cihaz kamerasına erişim iznin gerekiyor";
 "restore_purchases" = "";
 "restore_purchases_info" = "";
