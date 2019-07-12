@@ -67,7 +67,13 @@ struct TextConstants {
     static let registrationEmailPopupMessage = NSLocalizedString("You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let authificateCaptchaRequired = NSLocalizedString("You have successfully registered, please log in with your credentials", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let captchaRequired = NSLocalizedString("Please enter the text below", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let twoFactorAuthenticationNewDeviceReason = NSLocalizedString("extra_auth_new_divice_reason", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationAccountSettingReason = NSLocalizedString("extra_auth_account_setting_reason", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationNavigationTitle = NSLocalizedString("extra_auth_account_navigation_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationDescribeLabel = NSLocalizedString("extra_auth_account_describe_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationChooseTypeLabel = NSLocalizedString("extra_auth_account_choose_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationPhoneNumberCell = NSLocalizedString("extra_auth_account_phone_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFactorAuthenticationEmailCell = NSLocalizedString("extra_auth_account_email_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Registration Error Messages
     static let invalidMailErrorText = NSLocalizedString("Please enter a valid email address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
