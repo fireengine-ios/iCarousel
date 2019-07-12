@@ -39,18 +39,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     
     var delegate: TwoFactorAuthenticationCellDelegate?
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        
-        if selected {
-            guard let index = cellIndexPathRow else {
-                assertionFailure()
-                return
-            }
-            delegate?.selectButtonPressed(cell: index)
-        }
-    }
-    
-    func setCellOutlets(typeDescription: String, userData: String, isNeedToShowSeparator: Bool) {
+    func setupCell(typeDescription: String, userData: String, isNeedToShowSeparator: Bool) {
         typeAuthorizationLabel.text = typeDescription
         userDataLabel.text = userData
         separatorView.isHidden = !isNeedToShowSeparator
