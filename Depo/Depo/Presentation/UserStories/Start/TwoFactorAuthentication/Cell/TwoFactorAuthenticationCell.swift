@@ -51,19 +51,11 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     
     func setSelected(selected: Bool) {
         
-        UIView.transition(with: selectButton, duration: 1.25, options: .transitionCrossDissolve, animations: {
-            if selected {
-                self.selectButton.setImage(UIImage(named: "selectedRectangle"), for: .normal)
-            } else {
-                self.selectButton.setImage(UIImage(named: "emtyRectangle"), for: .normal)
-            }
-        }, completion: nil)
-        
-//        if selected {
-//            selectButton.setImage(UIImage(named: "selectedRectangle"), for: .normal)
-//        } else {
-//            selectButton.setImage(UIImage(named: "emtyRectangle"), for: .normal)
-//        }
+        if selected {
+            selectButton.setImage(UIImage(named: "selectedRectangle"), for: .normal)
+        } else {
+            selectButton.setImage(UIImage(named: "emtyRectangle"), for: .normal)
+        }
     }
     
     @IBAction private func selectedButtonTapped(_ sender: Any) {
