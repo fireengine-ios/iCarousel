@@ -285,6 +285,21 @@
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
+		730A997122D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997422D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997822D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A997922D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A997A22D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A998222D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998322D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -6295,6 +6310,11 @@
 		7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.debug.xcconfig"; sourceTree = "<group>"; };
+		730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
+		730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationViewController.xib; sourceTree = "<group>"; };
+		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
+		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
+		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -9759,6 +9779,26 @@
 				CC77BB694679750437F54C58 /* Configurator */,
 			);
 			path = OTPView;
+			sourceTree = "<group>";
+		};
+		730A996E22D71D120037ABA9 /* TwoFactorAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				730A997B22D7344D0037ABA9 /* Cell */,
+				730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */,
+				730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */,
+				730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */,
+			);
+			path = TwoFactorAuthentication;
+			sourceTree = "<group>";
+		};
+		730A997B22D7344D0037ABA9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */,
+				730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		736085110D7EF2A078645693 /* Configurator */ = {
@@ -14147,6 +14187,7 @@
 				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
 				17589F6A2276336700A5DB37 /* SupportFormController */,
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
+				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -16563,6 +16604,7 @@
 				7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */,
 				8C06AF312008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
 				8C06AEED2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
+				730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				8C06AF4D2008AD70003D8E05 /* crop_selected@2x.png in Resources */,
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
@@ -16591,6 +16633,7 @@
 				8C06AF552008AD70003D8E05 /* cropy_icon@3x.png in Resources */,
 				8C06B08D2008AD71003D8E05 /* paylas_twitter@3x.png in Resources */,
 				8C06B0492008AD71003D8E05 /* oval_siyah@2x.png in Resources */,
+				730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				8C06AED12008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
 				8C06B1212008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
@@ -16896,6 +16939,7 @@
 				8C06AEF82008AD70003D8E05 /* cancel_buton@3x.png in Resources */,
 				8C06AF2E2008AD70003D8E05 /* cizgi_3@2x.png in Resources */,
 				CE5921D822564465005882CE /* PasswordView.xib in Resources */,
+				730A997422D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				8C06AEEE2008AD70003D8E05 /* Buyuk_Selected.png in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
@@ -16944,6 +16988,7 @@
 				8C06AFA42008AD71003D8E05 /* frame@2x.png in Resources */,
 				CE4851ED2018B029006B8854 /* FilterPhotoCard.xib in Resources */,
 				8C06B1B22008AD72003D8E05 /* CRYSchemeCell.nib in Resources */,
+				730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
 				8C06AF262008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
 				8C06B09A2008AD71003D8E05 /* refresh.png in Resources */,
@@ -17516,6 +17561,7 @@
 				CE784CD922A685FB00662219 /* cancel_buton@3x.png in Resources */,
 				CE784CDA22A685FB00662219 /* cizgi_3@2x.png in Resources */,
 				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
+				730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CE784CDC22A685FB00662219 /* Buyuk_Selected.png in Resources */,
 				CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */,
 				CE784CDE22A685FB00662219 /* AppRater.bundle in Resources */,
@@ -17564,6 +17610,7 @@
 				CE784D0922A685FB00662219 /* FilterPhotoCard.xib in Resources */,
 				CE784D0A22A685FB00662219 /* CRYSchemeCell.nib in Resources */,
 				CE784D0B22A685FB00662219 /* SplashViewController.xib in Resources */,
+				730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				CE784D0C22A685FB00662219 /* cizgi_2_selected.png in Resources */,
 				CE784D0D22A685FB00662219 /* refresh.png in Resources */,
 				CE784D0E22A685FB00662219 /* CollageCard.xib in Resources */,
@@ -19368,6 +19415,7 @@
 				8C0E8E1E1FDEBDFF00789C91 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */,
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
+				730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
@@ -19603,6 +19651,7 @@
 				8C0E8F021FDEBDFF00789C91 /* BasePresentor.swift in Sources */,
 				8C0E8F031FDEBDFF00789C91 /* UploadHelpers.swift in Sources */,
 				8C0E8F041FDEBDFF00789C91 /* UserProfileRouterInput.swift in Sources */,
+				730A997922D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				925B59A622C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
 				8C20865E228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				8C0E8F051FDEBDFF00789C91 /* SyncContactsViewInput.swift in Sources */,
@@ -19853,6 +19902,7 @@
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				89E51D4322CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				730A998322D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				A217E43821A5B0480084AA37 /* LeavePremiumRouterInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				B56FBB1B2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
@@ -20425,6 +20475,7 @@
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
 				2BA37C3D202837C800660394 /* FaceImageChangeCoverInitializer.swift in Sources */,
+				730A997122D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				A217E44021A5B0A80084AA37 /* LeavePremiumInteractor.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
@@ -20912,6 +20963,7 @@
 				CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */,
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
 				8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
+				730A997822D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */,
 				8C20865D228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
@@ -21058,6 +21110,7 @@
 				CE95ED4F1F516736002F923A /* HelpAndSupportInteractor.swift in Sources */,
 				8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C208641228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
+				730A998222D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
@@ -21779,6 +21832,7 @@
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CE7848F922A685FB00662219 /* MenloworksAppEvents.swift in Sources */,
 				CE7848FA22A685FB00662219 /* ManageContactsRouterInput.swift in Sources */,
 				CE7848FB22A685FB00662219 /* DuplicatedContactTableViewCell.swift in Sources */,
@@ -22079,11 +22133,13 @@
 				CE784A2122A685FB00662219 /* PrintService.swift in Sources */,
 				CE784A2222A685FB00662219 /* UpdatePasswordErrors.swift in Sources */,
 				CE784A2322A685FB00662219 /* WrapperedItemUtil.swift in Sources */,
+				730A997A22D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				CE784A2422A685FB00662219 /* ImageDownloadOperation.swift in Sources */,
 				CE784A2522A685FB00662219 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				CE784A2722A685FB00662219 /* UIAlertController+Action.swift in Sources */,
 				CE784A2822A685FB00662219 /* Filter.m in Sources */,
 				CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */,
+				730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				CE784A2A22A685FB00662219 /* PhoneVereficationViewOutput.swift in Sources */,
 				CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */,
 				CE784A2C22A685FB00662219 /* PhoneVereficationViewController.swift in Sources */,
