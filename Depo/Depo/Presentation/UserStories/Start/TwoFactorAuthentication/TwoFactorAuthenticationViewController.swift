@@ -145,7 +145,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
-        
         if let type = selectedTypeOfAuth?.type {
             delegate?.didSelectType(type: type)
         }
@@ -167,10 +166,6 @@ extension TwoFactorAuthenticationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -33,6 +33,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
+            newValue.allowsSelection = false
             newValue.register(nibCell: TwoFactorAuthenticationCell.self)
             newValue.backgroundColor = UIColor.clear
             newValue.tableFooterView = UIView()
