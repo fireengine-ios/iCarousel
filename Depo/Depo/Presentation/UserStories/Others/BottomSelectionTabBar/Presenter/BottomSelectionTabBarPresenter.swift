@@ -158,6 +158,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
+                if let albumItems = selectedItems as? Array<AlbumItem> {
+                    if albumItems.filter({ $0.allContentCount != 0}).isEmpty {
+                        self.needShowErrorShareEmptyAlbums()
+                        return
+                    }
+                }
+                
                 let onlyLink = selectedItems.contains(where: {
                     $0.fileType != .image && $0.fileType != .video
                 })
@@ -517,6 +524,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func deleteMusic(_ completion: @escaping VoidHandler) {
         router.showDeleteMusic(completion)
+    }
+    
+    func needShowErrorShareEmptyAlbums() {
+        router.showErrorShareEmptyAlbums()
     }
     
     // MARK: base presenter

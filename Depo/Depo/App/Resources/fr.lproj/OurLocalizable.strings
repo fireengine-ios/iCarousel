@@ -545,6 +545,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Album Card" = "Carte d’Albums";
 "We have created an album for you." = "Nous avons créé un album pour vous.";
 "Save Album" = "Sauvegarder Album";
+"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Avez-vous aimé cette Story que nous avons créée pour vous?";
 "Save This Story" = "Sauvegarder Cette Story";

@@ -445,6 +445,7 @@
 "Album Card" = "Tarjeta de álbum";
 "We have created an album for you." = "Hemos creado un álbum para usted.";
 "Save Album" = "Guardar álbum";
+"You can not share empty album" = "";
 "Movie" = "Película";
 "Did you like this story that we created for you?" = "¿Le gustó esta historia que creamos para usted?";
 "Save This Story" = "Guardar esta historia";

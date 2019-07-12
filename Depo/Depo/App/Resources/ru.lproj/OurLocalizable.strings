@@ -447,6 +447,7 @@
 "Album Card" = "Карточка альбома";
 "We have created an album for you." = "Мы создали альбом для вас!";
 "Save Album" = "Сохранить";
+"You can not share empty album" = "";
 "Movie" = "Фильм";
 "Did you like this story that we created for you?" = "Вам понравилась история, которую мы создали для вас?";
 "Save This Story" = "Сохранить";

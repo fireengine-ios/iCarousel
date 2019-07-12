@@ -17,6 +17,10 @@ class AlbumItem: BaseDataSourceItem {
     
     let audioCount: Int?
     
+    var allContentCount: Int {
+        return (imageCount ?? 0) + (videoCount ?? 0) + (audioCount ?? 0)
+    }
+    
     var preview: Item?
     
     let readOnly: Bool?
