@@ -64,7 +64,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         createAvailableTypesArray(email: email, phoneNumber: phoneNumber)
-        setSelectedItem(index: availableAuthTypes.startIndex)
         setReasonDescriptionLabel()
     }
     
@@ -114,36 +113,31 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
             let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: phoneNumber)
             availableAuthTypes.append(phoneType)
         }
+        
+        if !availableAuthTypes.isEmpty {
+            selectedCellIndex = availableAuthTypes.startIndex
+            updateCellsAfterSelection()
+        }
     }
     
-    private func setSelectedItem(index: Int) {
-        
-        guard !availableAuthTypes.isEmpty, availableAuthTypes.count >= index else {
+    private func updateCellsAfterSelection() {
+        guard let selectedCellIndex = selectedCellIndex else {
             assertionFailure()
             return
         }
         
-        guard index != selectedCellIndex else {
-            return
-        }
-        
-        selectedTypeOfAuth = availableAuthTypes[index]
-        
-        guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TwoFactorAuthenticationCell else {
+        guard let cell = tableView.cellForRow(at: IndexPath(row: selectedCellIndex, section: 0)) as? TwoFactorAuthenticationCell else {
             assertionFailure()
             return
-        }
-        
-        tableView.visibleCells.filter { $0 != cell }.forEach { cell in
-            guard let cell = cell as? TwoFactorAuthenticationCell else {
-                assertionFailure()
-                return
-            }
-            
-            cell.setSelected(selected: false)
         }
         
         cell.setSelected(selected: true)
+        
+        /// deselect cells
+        tableView.visibleCells
+            .filter { $0 != cell }
+            .compactMap { $0 as? TwoFactorAuthenticationCell }
+            .forEach { $0.setSelected(selected: false) }
     }
     
     private func isSelected(index: Int) -> Bool {
@@ -165,22 +159,8 @@ extension TwoFactorAuthenticationViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeue(reusable: TwoFactorAuthenticationCell.self, for: indexPath)
-        cell.selectionStyle = .none
-        cell.delegate = self
-        cell.setCellIndexPath(index: indexPath.row)
-        
-        let item = availableAuthTypes[indexPath.row]
-        cell.setupCell(typeDescription: item.typeDescription,
-                       userData: item.userData,
-                       isNeedToShowSeparator: indexPath.row == availableAuthTypes.startIndex)
-        
-        cell.setSelected(selected: isSelected(index: indexPath.row))
-        
-        return cell
+        return tableView.dequeue(reusable: TwoFactorAuthenticationCell.self, for: indexPath)
     }
-    
 }
 
 extension TwoFactorAuthenticationViewController: UITableViewDelegate {
@@ -195,11 +175,18 @@ extension TwoFactorAuthenticationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        guard let index = selectedCellIndex else {
+        guard let cell = cell as? TwoFactorAuthenticationCell else {
+            assertionFailure()
             return
         }
-
-        setSelectedItem(index: index)
+        cell.selectionStyle = .none
+        cell.delegate = self
+        cell.setCellIndexPath(index: indexPath.row)
+        
+        let item = availableAuthTypes[indexPath.row]
+        cell.setupCell(typeDescription: item.typeDescription,
+                       userData: item.userData,
+                       isNeedToShowSeparator: indexPath.row == availableAuthTypes.startIndex)
     }
 }
 
@@ -207,13 +194,12 @@ extension TwoFactorAuthenticationViewController: TwoFactorAuthenticationCellDele
     
     func selectButtonPressed(cell index: Int) {
         
-        guard let visibleCells = tableView?.indexPathsForVisibleRows else {
-            assertionFailure()
+        guard index != selectedCellIndex else {
             return
         }
         
         selectedCellIndex = index
-        tableView.reloadRows(at: visibleCells, with: UITableViewRowAnimation.none)
+        updateCellsAfterSelection()
     }
 }
 
