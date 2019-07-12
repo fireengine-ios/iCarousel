@@ -412,7 +412,18 @@ final class MediaItemOperationsService {
                 deletedItems.append(contentsOf: allSavedItems)
                 
                 group.enter()
-                self.deleteItems(deletedItems, completion: {
+                
+                #if DEBUG
+                let contextQueue = DispatchQueue.currentQueueLabelAsserted
+                #endif
+                
+                self.deleteItems(context: context, deletedItems, completion: {
+                    
+                    #if DEBUG
+                    let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+                    assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+                    #endif
+                    
                     newSavedItems.forEach {
                         ///Relations being setuped in the MediaItem init
                         _ = MediaItem(wrapData: $0, context: context)
@@ -421,7 +432,12 @@ final class MediaItemOperationsService {
                 })
                 
                 group.notify(queue: DispatchQueue.global(), execute: {
-                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
+                    /// we don't need check contextQueue for saveDataForContext bcz save() used in perform block
+                    ///
+                    /// "context.perform" added for the guard
+                    context.perform {
+                        CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
+                    }
                 })
                 
             })
@@ -746,6 +762,51 @@ final class MediaItemOperationsService {
         //        delete(type: MediaItem.self, predicate: predicate, mergeChanges: true, { _ in
         //            completion()
         //        })
+        
+    }
+    
+    func deleteItems(context: NSManagedObjectContext, _ items: [WrapData], completion: @escaping VoidHandler) {
+        guard !items.isEmpty else {
+            completion()
+            return
+        }
+        
+        let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
+        
+        #if DEBUG
+        let contextQueue = DispatchQueue.currentQueueLabelAsserted
+        #endif
+        
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
+            
+            #if DEBUG
+            let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+            assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+            #endif
+                        
+            let remoteItemsSet = NSSet(array: remoteItems)
+            
+            self.mediaItemByLocalID(trimmedLocalIDS: items.map { $0.getTrimmedLocalID() }, context: context, mediaItemsCallBack: { mediaItems in
+                
+                #if DEBUG
+                let contextQueue3 = DispatchQueue.currentQueueLabelAsserted
+                assert(contextQueue == contextQueue3, "\(contextQueue) != \(contextQueue3)")
+                #endif
+                
+                mediaItems.forEach {
+                    $0.removeFromRelatedRemotes(remoteItemsSet)
+                    $0.updateMissingDateRelations()
+                    
+                    if $0.relatedRemotes.count == 0 {
+                        $0.regenerateTrimmedLocalFileID()
+                    }
+                }
+                
+                remoteItems.forEach { context.delete($0) }
+                
+                CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
+            })
+        })
         
     }
     
