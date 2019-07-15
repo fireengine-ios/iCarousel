@@ -35,9 +35,7 @@ final class LoginSettingsViewController: ViewController {
         tableView.dataSource = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 600
-        
-        tableView.reloadData()
+        tableView.estimatedRowHeight = 600        
     }
 }
 

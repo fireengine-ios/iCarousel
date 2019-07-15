@@ -75,36 +75,6 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
             else {
                 return
             }
-                                                    
-            debugPrint("response")
-
-            self?.turkcellPassword = turkCellPasswordOn
-            self?.turkcellLogin = turkCellAutoLogin
-            self?.twoFactorAuthEnabled = twoFactorAuth
-                
-            DispatchQueue.main.async {
-                self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn,
-                                                            autoLogin: turkCellAutoLogin,
-                                                            twoFactorAuth: twoFactorAuth)
-            }
-        }) { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output?.changeTurkcellSecurityFailed(error: error)
-            }
-        }
-        
-        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode,
-                                                mobileNetworkAuthEnabled: autoLogin,
-                                                twoFactorAuthEnabled: twoFactorAuth,
-                                                success: { [weak self] response in
-            guard
-                let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled,
-                let twoFactorAuth = unwrapedSecurityresponse.twoFactorAuthEnabled
-            else {
-                return
-            }
             
             debugPrint("response")
             
