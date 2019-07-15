@@ -32,6 +32,7 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     
     @IBOutlet private weak var resendCodeButton: RoundedInsetsButton! {
         willSet {
+            newValue.adjustsFontSizeToFitWidth()
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
@@ -138,7 +139,8 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         
         timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
         timerLabel.textColor = ColorConstants.cloudyBlue
-        
+        timerLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+      
         errorLabel.textColor = ColorConstants.textOrange
         errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
     }
