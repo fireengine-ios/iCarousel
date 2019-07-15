@@ -239,9 +239,9 @@ final class PushNotificationService {
     }
     
     private func openLoginSettings() {
-        if SingletonStorage.shared.accountInfo?.accountType == "TURKCELL" {
-            pushTo(router.turkcellSecurity)            
-        }
+        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
+        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
+        pushTo(controller)
     }
     
     private func openFaceImageRecognition() {

@@ -751,8 +751,8 @@ class RouterVC: NSObject {
     
     // MARK: Turkcell Security
     
-    var turkcellSecurity: UIViewController {
-        return TurkcellSecurityModuleInitializer.viewController
+    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
+        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
     }
     
     // MARK: Auto Upload

@@ -40,7 +40,18 @@ final class AppWormholeListener {
     
     private func listenOffTurkcellPassword() {
         wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeOffTurkcellPassword) { [weak self] _ in
-            self?.accountService.securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false, success: nil, fail: nil)
+            
+            self?.accountService.securitySettingsInfo(success: { [weak self] response in
+                
+                if let twoFactorAuthEnabled = (response as? SecuritySettingsInfoResponse)?.twoFactorAuthEnabled {
+                    self?.accountService.securitySettingsChange(turkcellPasswordAuthEnabled: true,
+                                                                mobileNetworkAuthEnabled: false,
+                                                                twoFactorAuthEnabled: twoFactorAuthEnabled,
+                                                                success: nil,
+                                                                fail: nil)
+                }
+            }, fail: nil)
         }
     }
+    
 }
