@@ -28,9 +28,12 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var etkTextView: UITextView!
     @IBOutlet private weak var etkTopSpaceConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var contenViewHeightConstraint: NSLayoutConstraint!
+    
     private let webView: WKWebView = {
         let contentController = WKUserContentController()
-         let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
+         let scriptSource = "document.body.style.webkitTextSizeAdjust = 'auto';"
+        //document.body.style.color = 'white';
         let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         contentController.addUserScript(script)
         
@@ -76,6 +79,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
             setNavigationTitle(title: TextConstants.termsAndUsesTitile)
         }
 
+        contenViewHeightConstraint.constant = Device.winSize.height * 0.5
         if #available(iOS 11.0, *) {
             topContraintIOS10.isActive = false
         } else {
