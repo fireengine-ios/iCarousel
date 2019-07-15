@@ -234,8 +234,8 @@ final class PushNotificationService {
     }
     
     private func openPasscode() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
-        pushTo(router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: false))
+        let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
+        pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
     
     private func openLoginSettings() {

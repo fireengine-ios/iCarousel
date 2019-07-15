@@ -42,6 +42,7 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled,
                 let twoFactorAuthEnabled = unwrapedSecurityresponse.twoFactorAuthEnabled
             else {
+                assertionFailure("server returned wrong/updated response")
                 return
             }
             
@@ -73,11 +74,10 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled,
                 let twoFactorAuth = unwrapedSecurityresponse.twoFactorAuthEnabled
             else {
+                assertionFailure("server returned wrong/updated response")
                 return
             }
-            
-            debugPrint("response")
-            
+                        
             self?.turkcellPassword = turkCellPasswordOn
             self?.turkcellLogin = turkCellAutoLogin
             self?.twoFactorAuthEnabled = twoFactorAuth

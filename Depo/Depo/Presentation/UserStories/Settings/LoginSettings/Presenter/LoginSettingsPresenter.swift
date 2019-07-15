@@ -11,21 +11,18 @@ final class LoginSettingsPresenter: BasePresenter {
     var interactor: LoginSettingsInteractorInput!
     var router: LoginSettingsRouterInput!
     
-    private let isTurkcell: Bool
-    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     var cellsData = [SettingsTableViewSwitchCell.CellType: Bool]()
-    var cellTypes: [SettingsTableViewSwitchCell.CellType] {
-        if isTurkcell {
-            return [.securityPasscode, .securityAutologin, .twoFactorAuth]
-        } else {
-            return [.twoFactorAuth]
-        }
-    }
+    let cellTypes: [SettingsTableViewSwitchCell.CellType]
     
     init(isTurkcell: Bool) {
-        self.isTurkcell = isTurkcell
+        if isTurkcell {
+            cellTypes = [.securityPasscode, .securityAutologin, .twoFactorAuth]
+        } else {
+            cellTypes = [.twoFactorAuth]
+        }
+        
         super.init()
     }
     

@@ -362,7 +362,7 @@ struct TextConstants {
     static let settingsViewCellLoginSettings = NSLocalizedString("Login Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellTurkcellPassword = NSLocalizedString("Turkcell Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCell2FactorAuth = NSLocalizedString("2_factor_auth", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTwoFactorAuth = NSLocalizedString("2_factor_auth", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
 
     static let settingsViewUploadPhotoLabel = NSLocalizedString("Upload Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

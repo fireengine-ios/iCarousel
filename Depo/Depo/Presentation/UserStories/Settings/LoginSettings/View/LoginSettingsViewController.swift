@@ -10,7 +10,15 @@ import UIKit
 
 final class LoginSettingsViewController: ViewController {
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!  {
+        willSet {
+            newValue.register(nibCell: SettingsTableViewSwitchCell.self)
+            newValue.dataSource = self
+            
+            newValue.rowHeight = UITableViewAutomaticDimension
+            newValue.estimatedRowHeight = 160
+        }
+    }
 
     var output: LoginSettingsViewOutput!
     
@@ -18,7 +26,6 @@ final class LoginSettingsViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        setup()
         output.viewIsReady()
     }
     
@@ -26,16 +33,6 @@ final class LoginSettingsViewController: ViewController {
         super.viewWillAppear(animated)
         setTitle(withString: TextConstants.settingsViewCellLoginSettings)
         navigationBarWithGradientStyle()
-    }
-    
-    //MARK: Utility Methods
-    private func setup() {
-        let nib = UINib(nibName: CellsIdConstants.settingsTableViewSwitchCellID, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.settingsTableViewSwitchCellID)
-        tableView.dataSource = self
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 600        
     }
 }
 
@@ -59,15 +56,15 @@ extension LoginSettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let settingsCell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID,
-                                                         for: indexPath) as? SettingsTableViewSwitchCell
+        let settingsCell = tableView.dequeue(reusable: SettingsTableViewSwitchCell.self,
+                                             for: indexPath)
         
         ///setup here instead of willDisplayCell because of estimatedRowHeight
         if let type = output.cellTypes[safe: indexPath.row], let params = output.cellsData.first(where: { $0.key == type }) {
-            settingsCell?.setup(params: params, delegate: self)
+            settingsCell.setup(params: params, delegate: self)
         }
         
-        return settingsCell ?? UITableViewCell()
+        return settingsCell
     }
 }
 

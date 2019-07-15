@@ -26,7 +26,7 @@ final class SettingsTableViewSwitchCell: UITableViewCell {
             case .securityAutologin:
                 return TextConstants.settingsViewCellTurkcellAutoLogin
             case .twoFactorAuth:
-                return TextConstants.settingsViewCell2FactorAuth
+                return TextConstants.settingsViewCellTwoFactorAuth
             }
         }
         

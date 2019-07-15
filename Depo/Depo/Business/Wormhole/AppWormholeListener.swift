@@ -49,6 +49,8 @@ final class AppWormholeListener {
                                                                 twoFactorAuthEnabled: twoFactorAuthEnabled,
                                                                 success: nil,
                                                                 fail: nil)
+                } else {
+                    assertionFailure("server returned wrong/updated response")
                 }
             }, fail: nil)
         }
