@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-final class TwoFactorAuthErrorResponseChallengeType {
+final class TwoFactorAuthErrorResponseChallengeType: Map {
     
     private enum TwoFactorAuthErrorResponseChallengeTypeKey {
         static let token = "token"
@@ -25,8 +25,7 @@ final class TwoFactorAuthErrorResponseChallengeType {
     var displayName: String?
     var otpCode: Int?
     
-    convenience init(json: JSON) {
-        self.init()
+    init(json: JSON) {
         token = json[TwoFactorAuthErrorResponseChallengeTypeKey.token].intValue
         type = AvailableTypesOfAuth(rawValue: json[TwoFactorAuthErrorResponseChallengeTypeKey.type].stringValue)
         authenticatorId = json[TwoFactorAuthErrorResponseChallengeTypeKey.authenticatorId].stringValue
@@ -35,7 +34,7 @@ final class TwoFactorAuthErrorResponseChallengeType {
     }
 }
 
-final class TwoFactorAuthErrorResponse {
+final class TwoFactorAuthErrorResponse: Map {
     
     private enum TwoFactorAuthErrorResponseKey {
         static let reason = "reason"
@@ -49,15 +48,12 @@ final class TwoFactorAuthErrorResponse {
     var twoFAToken: String?
     var challengeTypes: [TwoFactorAuthErrorResponseChallengeType]?
     
-}
-
-extension TwoFactorAuthErrorResponse: Map {
-    
-    convenience init?(json: JSON) {
-        self.init()
+    init(json: JSON) {
+        
         reason = ReasonForExtraAuth(rawValue: json[TwoFactorAuthErrorResponseKey.reason].stringValue)
         error = json[TwoFactorAuthErrorResponseKey.error].stringValue
         twoFAToken = json[TwoFactorAuthErrorResponseKey.twoFAToken].stringValue
         challengeTypes = json[TwoFactorAuthErrorResponseKey.challengeTypes].arrayValue.map { TwoFactorAuthErrorResponseChallengeType(json: $0)}
     }
 }
+
