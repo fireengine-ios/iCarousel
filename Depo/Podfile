@@ -49,6 +49,7 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
+  pod 'SwipeSelectingCollectionView'
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 
