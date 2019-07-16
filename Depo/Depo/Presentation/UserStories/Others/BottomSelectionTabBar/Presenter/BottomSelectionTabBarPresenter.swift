@@ -158,7 +158,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
-                if let albumItems = selectedItems as? Array<AlbumItem>, albumItems.filter({ $0.allContentCount != 0}).isEmpty {
+                /// if albums are selected and in this albums not have filled album show error
+                if let albumItems = selectedItems as? [AlbumItem], albumItems.first(where: { $0.allContentCount != 0 } ) == nil {
                         self.needShowErrorShareEmptyAlbums()
                         return
                 }
