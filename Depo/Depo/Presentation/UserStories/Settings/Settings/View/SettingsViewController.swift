@@ -234,8 +234,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                     output.goToActivityTimeline()
                 }
             case 1: // usage info
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToUsageInfo()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToUsageInfo()
                 } else {
                     output.goToUsageInfo()
                 }
@@ -250,14 +250,14 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         case 3:
             switch indexPath.row {
             case 0:
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToHelpAndSupport()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToHelpAndSupport()
                 } else {
                     output.goToHelpAndSupport()
                 }
             case 1:
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToTermsAndPolicy()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToTermsAndPolicy()
                 } else {
                     output.goToTermsAndPolicy()
                 }
@@ -346,10 +346,6 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
 extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     func changePhotoPressed() {
         output.onChangeUserPhoto()
-    }
-    
-    func updateUserProfile(userInfo: AccountInfoResponse) {
-        output.onUpdatUserInfo(userInfo: userInfo)
     }
     
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {

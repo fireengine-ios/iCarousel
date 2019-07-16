@@ -38,6 +38,7 @@ struct AccountJSONConstants {
     
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
+    static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -91,10 +92,12 @@ class AccountInfoResponse: ObjectRequestResponse {
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?
     var mobileNetworkAuthEnabled: Bool?
+    var twoFactorAuthEnabled: Bool?
     
     override func mapping() {
         turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
         mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        twoFactorAuthEnabled = json?[AccountJSONConstants.twoFactorAuthEnabled].bool
     }
     
 }
