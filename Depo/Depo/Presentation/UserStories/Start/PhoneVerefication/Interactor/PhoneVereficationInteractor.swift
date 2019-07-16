@@ -141,6 +141,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 }
             }
             }, twoFactorAuth: {twoFARequered in
+                /// As a result of the meeting, the logic of showing the screen of two factorial authorization is added only with a direct login and is not used with other authorization methods.
                 assertionFailure()
                 
         })
