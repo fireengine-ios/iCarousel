@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeSelectingCollectionView
 
 // TODO: todos in file
 // TODO: clear code -
@@ -15,7 +16,7 @@ typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
 
-    @IBOutlet private weak var collectionView: UICollectionView! {
+    @IBOutlet private weak var collectionView: SwipeSelectingCollectionView! {
         didSet {
             collectionView.dataSource = dataSource
             collectionView.delegate = self
