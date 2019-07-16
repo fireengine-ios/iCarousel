@@ -8,24 +8,24 @@
 
 import UIKit
 
-enum ReasonForExtraAuth {
-    case accountSetting
-    case newDevice
+enum ReasonForExtraAuth: String {
+    case accountSetting = "ACCOUNT_SETTING"
+    case newDevice = "NEW_DEVICE"
 }
 
-enum SelectedTypeOfAuth {
-    case phone
-    case email
+enum AvailableTypesOfAuth: String {
+    case phone = "EMAIL_OTP"
+    case email = "SMS_OTP"
 }
 
 protocol TwoFactorAuthenticationViewControllerDelegate {
-    func didSelectType(type: SelectedTypeOfAuth)
+    func didSelectType(type: AvailableTypesOfAuth)
 }
 
 final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private struct AuthType {
-        let type: SelectedTypeOfAuth
+        let type: AvailableTypesOfAuth
         let typeDescription: String
         let userData: String
     }
@@ -40,6 +40,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         }
     }
     
+    private var twoFactorAuthResponse: TwoFactorAuthErrorResponse?
     private var reasonForAuth: ReasonForExtraAuth?
     private var phoneNumber: String?
     private var email: String?
@@ -48,10 +49,9 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private var selectedCellIndex: Int?
     var delegate: TwoFactorAuthenticationViewControllerDelegate?
     
-    init(email: String?, phoneNumber: String?, reason: ReasonForExtraAuth) {
-        self.reasonForAuth = reason
-        self.email = email
-        self.phoneNumber = phoneNumber
+    init(response: TwoFactorAuthErrorResponse) {
+        self.twoFactorAuthResponse = response
+        self.reasonForAuth = response.reason
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,7 +63,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createAvailableTypesArray(email: email, phoneNumber: phoneNumber)
+        createAvailableTypesArray(availableTypes: twoFactorAuthResponse?.challengeTypes)
         setReasonDescriptionLabel()
     }
     
@@ -75,6 +75,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private func configureNavBarActions() {
         navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
                                                            target: self,
@@ -86,10 +87,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     private func hideViewController() {
-        // TODO: Delete unused method
-        
-        //        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     private func setReasonDescriptionLabel() {
@@ -103,17 +101,26 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         }
     }
     
-    private func createAvailableTypesArray(email: String?, phoneNumber: String?) {
-        if let email = email {
-            let emailType = AuthType(type: .email, typeDescription: TextConstants.twoFactorAuthenticationEmailCell, userData: email)
-            availableAuthTypes.append(emailType)
+    private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {
+        
+        guard let types = availableTypes else {
+            assertionFailure()
+            return
         }
         
-        if let phoneNumber = phoneNumber {
-            let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: phoneNumber)
-            availableAuthTypes.append(phoneType)
+        for item in types {
+            switch item.type {
+            case .phone?:
+                let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
+                availableAuthTypes.append(phoneType)
+            case .email?:
+                let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
+                availableAuthTypes.append(phoneType)
+            default:
+                assertionFailure()
+            }
         }
-        
+    
         if !availableAuthTypes.isEmpty {
             selectedCellIndex = availableAuthTypes.startIndex
             updateCellsAfterSelection()
