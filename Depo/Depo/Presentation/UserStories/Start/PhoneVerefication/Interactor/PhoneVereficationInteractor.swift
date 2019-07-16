@@ -140,6 +140,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                     self.output.failLogin(message: errorResponse.description)
                 }
             }
+            }, twoFactorAuth: {twoFARequered in
+                assertionFailure()
+                
         })
     }
 

@@ -153,6 +153,8 @@ class LoginInteractor: LoginInteractorInput {
             }
             
             errorHandler(loginError, errorResponse.description)
+            }, twoFactorAuth: { [weak self] response in
+                self?.output?.showTwoFactorAuthViewController(response: response)
         })
     }
     
@@ -218,7 +220,6 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
-                
                 self.output?.successedVerifyPhone()
             }
         }

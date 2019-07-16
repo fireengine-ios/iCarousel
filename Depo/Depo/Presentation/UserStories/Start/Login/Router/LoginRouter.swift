@@ -7,7 +7,7 @@
 //
 
 class LoginRouter: LoginRouterInput {
-    
+  
     let router = RouterVC()
     
     var optInController: OptInController?
@@ -47,6 +47,11 @@ class LoginRouter: LoginRouterInput {
         vc.successHandler = successHandler
         let navVC = NavigationController(rootViewController: vc)
         router.presentViewController(controller: navVC)
+    }
+    
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        let vc = TwoFactorAuthenticationViewController(response: response)
+        router.pushViewController(viewController: vc)
     }
     
     func openTextEnter(buttonAction: @escaping TextEnterHandler) {

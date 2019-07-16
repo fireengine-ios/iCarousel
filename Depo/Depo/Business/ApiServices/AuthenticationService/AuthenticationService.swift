@@ -12,6 +12,7 @@ import Alamofire
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
+typealias TwoFactorAuthResponce = (_ value: TwoFactorAuthErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -290,7 +291,7 @@ class AuthenticationService: BaseRequestService {
 
     // MARK: - Login
     
-    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
+    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponce?) {
         debugLog("AuthenticationService loginUser")
         
         storageVars.currentUserID = user.login
@@ -329,12 +330,23 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
+                        
                         if let statusCode = response.response?.statusCode,
-                            statusCode >= 300,
+                            statusCode >= 300, statusCode != 403,
                             let data = response.data,
                             let jsonString = String(data: data, encoding: .utf8) {
                             
                             fail?(ErrorResponse.string(jsonString))
+                            return
+                        }
+                        
+                        if let statusCode = response.response?.statusCode, statusCode == 403 {
+                            
+                            guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
+                                assertionFailure()
+                                return
+                            }
+                            twoFactorAuth?(resp)
                             return
                         }
                         

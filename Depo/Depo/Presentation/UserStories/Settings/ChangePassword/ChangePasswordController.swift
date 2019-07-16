@@ -193,6 +193,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             } else {
                 self?.showError(errorResponse)
             }
+            }, twoFactorAuth: { twoFARequered in
+                assertionFailure()
         })
     }
     

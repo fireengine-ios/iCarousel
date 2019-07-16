@@ -158,6 +158,11 @@ extension LoginPresenter: LoginViewOutput {
 //MARK: - LoginInteractorOutput
 extension LoginPresenter: LoginInteractorOutput {
     
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        completeAsyncOperationEnableScreen()
+        router.goToTwoFactorAuthViewController(response: response)
+    }
+    
     func succesLogin() {
         tokenStorage.isClearTokens = false
         MenloworksTagsService.shared.onStartWithLogin(true)
