@@ -16,12 +16,13 @@ protocol PermissionsViewProtocol: class {
     
     var delegate: PermissionViewDelegate? { get set }
     var type: PermissionType! { get set }
-    func turnPermissionOn(isOn: Bool, isDisabled: Bool)
+    func turnPermissionOn(isOn: Bool, isPendingApproval: Bool)
     func togglePermissionSwitch()
 }
 
 class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
+    @IBOutlet private weak var hud: UIActivityIndicatorView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var permissionSwitch: UISwitch!
@@ -49,9 +50,17 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     // MARK: - Actions
     
-    func turnPermissionOn(isOn: Bool, isDisabled: Bool) {
-        permissionSwitch.isOn = isOn
-        permissionSwitch.isEnabled = !isDisabled
+    func turnPermissionOn(isOn: Bool, isPendingApproval: Bool) {
+        /// change switch status according to user actions
+        if isPendingApproval {
+            permissionSwitch.isOn = !isOn
+            permissionSwitch.isEnabled = false
+            hud.startAnimating()
+        } else {
+            permissionSwitch.isOn = isOn
+            permissionSwitch.isEnabled = true
+            hud.hidesWhenStopped = true
+        }
     }
     
     func togglePermissionSwitch() {

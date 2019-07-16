@@ -46,12 +46,17 @@
                         <constraint firstAttribute="height" constant="1" id="Jwb-vk-S6y"/>
                     </constraints>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ggo-W8-2Uj">
+                    <rect key="frame" x="171" y="38" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="DFv-Jj-fAS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="22" id="IUP-2V-vnk"/>
                 <constraint firstItem="ZWH-sE-qE0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="Lx7-f5-sQ2"/>
+                <constraint firstItem="ggo-W8-2Uj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Nx1-u2-kcV"/>
                 <constraint firstItem="XhQ-9N-Hd4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="V6C-RM-exF"/>
+                <constraint firstItem="ggo-W8-2Uj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="a59-06-a14"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XhQ-9N-Hd4" secondAttribute="trailing" constant="18" id="fGF-UP-ot3"/>
                 <constraint firstItem="ZWH-sE-qE0" firstAttribute="top" secondItem="emJ-Mc-VhK" secondAttribute="bottom" constant="15" id="npU-ft-tB2"/>
                 <constraint firstItem="XhQ-9N-Hd4" firstAttribute="leading" secondItem="DFv-Jj-fAS" secondAttribute="trailing" constant="7" id="q1r-BQ-n0f"/>
@@ -66,6 +71,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="descriptionLabel" destination="emJ-Mc-VhK" id="oOk-Ox-kJc"/>
+                <outlet property="hud" destination="ggo-W8-2Uj" id="4V9-jq-kWX"/>
                 <outlet property="permissionSwitch" destination="XhQ-9N-Hd4" id="30U-sf-DRk"/>
                 <outlet property="titleLabel" destination="DFv-Jj-fAS" id="qR1-AL-PEU"/>
             </connections>
