@@ -231,15 +231,22 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func select(cell: PhotoVideoCell, at indexPath: IndexPath) {
-        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
-        
-        if isSelectedCell {
-            dataSource.selectedIndexPaths.remove(indexPath)
-        } else {
+//        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
+
+//        if isSelectedCell {
+//            dataSource.selectedIndexPaths.remove(indexPath)
+//        } else {
             dataSource.selectedIndexPaths.insert(indexPath)
-        }
+//        }
         
-        cell.set(isSelected: !isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        cell.set(isSelected: true, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+    }
+    
+    private func deselect(cell: PhotoVideoCell, at indexPath: IndexPath) {
+        dataSource.selectedIndexPaths.remove(indexPath)
+        
+        cell.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
     
@@ -471,8 +478,17 @@ extension PhotoVideoController: UICollectionViewDelegate {
         if dataSource.isSelectingMode {
             select(cell: cell, at: indexPath)
         } else {
-            showDetail(at: indexPath)
+            startEditingMode(at: indexPath)
+//            showDetail(at: indexPath)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell else {
+            return
+        }
+        
+        deselect(cell: cell, at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
