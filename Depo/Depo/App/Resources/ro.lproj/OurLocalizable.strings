@@ -979,7 +979,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Pentru a face fotografii cu camera foto și pentru a le crea în siguranță în caseta de salvare, este necesară permisiunea dvs. pentru accesul camerei";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

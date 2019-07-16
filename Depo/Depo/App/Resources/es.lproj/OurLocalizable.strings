@@ -979,7 +979,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Para tomar fotos con su cámara y hacer una copia de seguridad de ellas en la caja de vida, se necesita su permiso de acceso a la cámara";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

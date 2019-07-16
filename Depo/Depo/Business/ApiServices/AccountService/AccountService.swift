@@ -251,14 +251,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 switch response.result {
                 case .success(let data):
                     guard let jsonArray = JSON(data: data).array else {
-                        let error = CustomErrors.serverError("\(RouteRequests.Account.Permissions.permissionsList) not array in response")
+                        let error = CustomErrors.serverError("\(url) not array in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
                         return
                     }
                     
                     let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
-                    
+                   
                     handler(.success(results))
                 case .failure(let error):
                     handler(.failed(error))
