@@ -1031,3 +1031,8 @@
 "create_story_pop_up_title" = "You created a story! \n %@";
 "create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
+
+"2_factor_auth" = "2-Factor Authentication";
+"login_settings_security_passcode_description" = "Login with Turkcell Password allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
+"login_settings_security_autologin_description" = "Autologin with 3G/LTE allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+"login_settings_two_factor_auth_description" = "2-Factor Authentication allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
