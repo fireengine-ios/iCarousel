@@ -227,6 +227,10 @@ final class MediaItemOperationsService {
     //TODO: check the usefullness of it/or need of refactor
     func updateLocalItemSyncStatus(item: Item, newRemote: WrapData? = nil) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
+            #if DEBUG
+            let contextQueue = DispatchQueue.currentQueueLabelAsserted
+            #endif
+
             guard let `self` = self else {
                 return
             }
@@ -248,10 +252,17 @@ final class MediaItemOperationsService {
                     savedItem.objectSyncStatus = NSSet(array: array)
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
+                
+                #if DEBUG
+                let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+                assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+                #endif
+                
                 if let newRemoteItem = newRemote {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
                 }
+
                 CoreDataStack.default.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
             }
         }
@@ -602,6 +613,10 @@ final class MediaItemOperationsService {
             return
         }
         
+        #if DEBUG
+        let contextQueue = DispatchQueue.currentQueueLabelAsserted
+        #endif
+        
         print("LOCAL_ITEMS: \(items.count) local files to add")
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
@@ -609,6 +624,12 @@ final class MediaItemOperationsService {
             
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
                 context.perform { [weak self] in
+                    
+                    #if DEBUG
+                    let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+                    assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+                    #endif
+                    
                     var addedObjects = [WrapData]()
                     let assetsInfo = info.filter { $0.isValid }
                     assetsInfo.forEach { element in
