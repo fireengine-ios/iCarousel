@@ -20,7 +20,7 @@ final class TwoFactorAuthErrorResponseChallengeType {
     }
     
     var token: Int?
-    var type: AvailableTypes?
+    var type: AvailableTypesOfAuth?
     var authenticatorId: String?
     var displayName: String?
     var otpCode: Int?
@@ -28,7 +28,7 @@ final class TwoFactorAuthErrorResponseChallengeType {
     convenience init(json: JSON) {
         self.init()
         token = json[TwoFactorAuthErrorResponseChallengeTypeKey.token].intValue
-        type = AvailableTypes(rawValue: json[TwoFactorAuthErrorResponseChallengeTypeKey.type].stringValue)
+        type = AvailableTypesOfAuth(rawValue: json[TwoFactorAuthErrorResponseChallengeTypeKey.type].stringValue)
         authenticatorId = json[TwoFactorAuthErrorResponseChallengeTypeKey.authenticatorId].stringValue
         displayName = json[TwoFactorAuthErrorResponseChallengeTypeKey.displayName].stringValue
         otpCode = json[TwoFactorAuthErrorResponseChallengeTypeKey.otpCode].intValue

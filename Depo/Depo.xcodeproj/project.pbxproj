@@ -305,6 +305,9 @@
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
+		73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
+		73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73FE51EE22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51EF22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
@@ -6321,6 +6324,7 @@
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
+		73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthErrorResponse.swift; sourceTree = "<group>"; };
 		73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryAudioSelectionItemViewController.xib; sourceTree = "<group>"; };
 		73FE51EB22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemViewController.swift; sourceTree = "<group>"; };
 		73FE51EC22CF5D8700270448 /* CreateStoryAudioSelectionItemDesigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemDesigner.swift; sourceTree = "<group>"; };
@@ -10489,6 +10493,7 @@
 				CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */,
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
 				CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */,
+				73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */,
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
@@ -19751,6 +19756,7 @@
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
 				8C0E8F3E1FDEBDFF00789C91 /* SplashRouterInput.swift in Sources */,
+				73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				8C208640228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift in Sources */,
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
@@ -20779,6 +20785,7 @@
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
 				CE51ACDF1EF90853005DCEE0 /* IntroduceViewController.swift in Sources */,
+				73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				CE51ACE01EF90853005DCEE0 /* IntroduceModuleInput.swift in Sources */,
 				B56FBB342122C85D004F4A59 /* TermsOfUseInteractorOutput.swift in Sources */,
 				7C6945E420039F4A00152344 /* FreeAppSpaceViewController.swift in Sources */,
@@ -22656,6 +22663,7 @@
 				CE784C2B22A685FB00662219 /* PackageInfoView.swift in Sources */,
 				CE784C2C22A685FB00662219 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE784C2D22A685FB00662219 /* HelpAndSupportInitializer.swift in Sources */,
+				73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				CE784C2E22A685FB00662219 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				CE784C2F22A685FB00662219 /* PrepareQuickScroll.swift in Sources */,
 				CE784C3022A685FB00662219 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,

@@ -13,19 +13,19 @@ enum ReasonForExtraAuth: String {
     case newDevice = "NEW_DEVICE"
 }
 
-enum AvailableTypes: String {
+enum AvailableTypesOfAuth: String {
     case phone = "EMAIL_OTP"
     case email = "SMS_OTP"
 }
 
 protocol TwoFactorAuthenticationViewControllerDelegate {
-    func didSelectType(type: AvailableTypes)
+    func didSelectType(type: AvailableTypesOfAuth)
 }
 
 final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private struct AuthType {
-        let type: AvailableTypes
+        let type: AvailableTypesOfAuth
         let typeDescription: String
         let userData: String
     }
@@ -109,18 +109,18 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         }
         
         for item in types {
-            if item.type == .phone {
+            switch item.type {
+            case .phone?:
                 let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
                 availableAuthTypes.append(phoneType)
-            }
-            
-            if item.type == .email {
-                let emailType = AuthType(type: .email, typeDescription: TextConstants.twoFactorAuthenticationEmailCell, userData: item.displayName ?? "")
-                availableAuthTypes.append(emailType)
+            case .email?:
+                let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
+                availableAuthTypes.append(phoneType)
+            default:
+                assertionFailure()
             }
         }
-        
-        
+    
         if !availableAuthTypes.isEmpty {
             selectedCellIndex = availableAuthTypes.startIndex
             updateCellsAfterSelection()

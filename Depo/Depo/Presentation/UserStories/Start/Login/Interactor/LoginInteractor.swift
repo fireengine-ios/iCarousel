@@ -153,8 +153,8 @@ class LoginInteractor: LoginInteractorInput {
             }
             
             errorHandler(loginError, errorResponse.description)
-            }, twoFactorAuth: { [weak self] response in
-                self?.output?.showTwoFactorAuthViewController(response: response)
+        }, twoFactorAuth: { [weak self] response in
+            self?.output?.showTwoFactorAuthViewController(response: response)
         })
     }
     
