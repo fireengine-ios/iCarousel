@@ -158,11 +158,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
-                if let albumItems = selectedItems as? Array<AlbumItem> {
-                    if albumItems.filter({ $0.allContentCount != 0}).isEmpty {
+                if let albumItems = selectedItems as? Array<AlbumItem>, albumItems.filter({ $0.allContentCount != 0}).isEmpty {
                         self.needShowErrorShareEmptyAlbums()
                         return
-                    }
                 }
                 
                 let onlyLink = selectedItems.contains(where: {
