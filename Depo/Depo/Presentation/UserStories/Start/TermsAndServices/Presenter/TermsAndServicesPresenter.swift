@@ -26,6 +26,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         }
         startAsyncOperationDisableScreen()
         interactor.checkEtk()
+        interactor.checkGlobalPerm()
     }
     
     func startUsing() {
@@ -57,6 +58,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmEtk(_ etk: Bool) {
         interactor.etkAuth = etk
+    }
+    
+    func confirmGlobalPerm(_ globalPerm: Bool) {
+        interactor.globalPermAuth = globalPerm
     }
     
     // MARK: OUT
@@ -115,6 +120,13 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func setupEtk(isShowEtk: Bool) {
         if isShowEtk {
             view.showEtk()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupGlobalPerm(isShowGlobalPerm: Bool) {
+        if isShowGlobalPerm {
+            view.showGlobalPermission()
         }
         interactor.loadTermsAndUses()
     }

@@ -30,6 +30,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
     }
     
+    var globalPermAuth: Bool? {
+        didSet {
+            let isGlobalPerm = self.globalPermAuth == true
+            dataStorage.signUpResponse.globalPermAuth = isGlobalPerm
+        }
+    }
+    
     func loadTermsAndUses() {
         
         DispatchQueue.toBackground { [weak self] in
@@ -99,7 +106,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func checkEtk() {
-        /// phoneNumber will be exists only for signup
+        /// phoneNumber will exist only for signup
         checkEtk(for: phoneNumber)
     }
     
@@ -120,6 +127,30 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     }
                 case .failed(_):
                     self.output.setupEtk(isShowEtk: false)
+                }
+            }
+        }
+    }
+    
+    func checkGlobalPerm() {
+        checkGlobalPerm(for: phoneNumber)
+    }
+    
+    private func checkGlobalPerm(for phoneNumber: String?) {
+        eulaService.getGlobalPermAuth(for: phoneNumber) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                switch result {
+                case .success(let isShowGlobalPerm):
+                    self.output.setupGlobalPerm(isShowGlobalPerm: isShowGlobalPerm)
+                    
+                    if isShowGlobalPerm {
+                        self.globalPermAuth = false
+                    }
+                case .failed(_):
+                    self.output.setupGlobalPerm(isShowGlobalPerm: false)
                 }
             }
         }

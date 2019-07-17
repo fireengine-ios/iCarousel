@@ -108,7 +108,6 @@ class EulaService: BaseRequestService {
         }
     }
     
-    
     func eulaGet(handler: @escaping (ResponseResult<EULAResponse>) -> Void) {
         
         let path = String(format: RouteRequests.eulaGet, Device.locale)
@@ -134,6 +133,37 @@ class EulaService: BaseRequestService {
                    
                 case .failure(let error):
                     handler(.failed(CustomErrors.serverError("Failed request eulaGet, \(error.localizedDescription)")))
+                }
+        }
+    }
+    
+    func getGlobalPermAuth(for phoneNumber: String?, handler: @escaping ResponseBool) {
+        debugLog("EulaService getGlobalPermissionAuth")
+        
+        let params: Parameters?
+        if let phoneNumber = phoneNumber {
+            params = ["phoneNumber": phoneNumber]
+        } else {
+            params = [:]
+        }
+        
+        sessionManager
+            .request(RouteRequests.eulaGetGlobalPermAuth,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseString { response in
+                switch response.result {
+                case .success(let text):
+                    if let isShowGlobalPerm = Bool(string: text) {
+                        handler(.success(isShowGlobalPerm))
+                    } else {
+                        let error = CustomErrors.serverError(text)
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
                 }
         }
     }

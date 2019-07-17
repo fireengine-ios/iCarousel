@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput {
+class TermsAndServicesViewController: ViewController {
 
     var output: TermsAndServicesViewOutput!
 
@@ -22,11 +22,15 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
     @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
     
-    @IBOutlet private weak var introdactionTextView: UITextView!
+    @IBOutlet private weak var introductionTextView: UITextView!
     
     @IBOutlet private weak var etkCheckboxButton: UIButton!
     @IBOutlet private weak var etkTextView: UITextView!
     @IBOutlet private weak var etkTopSpaceConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var globalPermCheckBoxButton: UIButton!
+    @IBOutlet private weak var globalPermTextView: UITextView!
+    @IBOutlet private weak var globalPermTopSpaceConstraint: NSLayoutConstraint!
     
     private let webView: WKWebView = {
         let contentController = WKUserContentController()
@@ -50,8 +54,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         return webView
     }()
     
-    
-    // MARK: Life cycle
+    //MARK: - Life cycle
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -107,10 +110,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         etkTextView.text = ""
         etkTextView.delegate = self
         
-        introdactionTextView.textContainer.lineFragmentPadding = 0
-        introdactionTextView.textContainerInset = .zero
-        introdactionTextView.text = ""
-        introdactionTextView.delegate = self
+        introductionTextView.textContainer.lineFragmentPadding = 0
+        introductionTextView.textContainerInset = .zero
+        introductionTextView.text = ""
+        introductionTextView.delegate = self
         
         // TODO: change this logic for StackView one
         etkTextView.isHidden = true
@@ -132,6 +135,16 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         etkTextView.isHidden = false
         etkCheckboxButton.isHidden = false
         etkTopSpaceConstraint.constant = 16 //magic number for design
+        
+        view.layoutIfNeeded()
+        updateWebViewInsets()
+    }
+    
+    func showGlobalPermission() {
+        setupGlobalPermText()
+        globalPermTextView.isHidden = false
+        globalPermCheckBoxButton.isHidden = false
+//        etkTopSpaceConstraint.constant = 16 ???
         
         view.layoutIfNeeded()
         updateWebViewInsets()
@@ -164,8 +177,26 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         etkTextView.attributedText = baseText
     }
     
+    private func setupGlobalPermText() {
+        //TODO:
+        
+        ////////
+        
+//        let attributedString = NSMutableAttributedString(string: "Turkcell Genel Veri İşleme İzni\'ni kabul ediyorum 
+//Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero. ", attributes: [
+//            .font: UIFont(name: "TurkcellSatura", size: 12.0)!,
+//            .foregroundColor: UIColor(white: 142.0 / 255.0, alpha: 1.0),
+//            .kern: 0.0
+//            ])
+//        attributedString.addAttributes([
+//            .font: UIFont(name: "TurkcellSatura", size: 15.0)!,
+//            .foregroundColor: UIColor(white: 0.0, alpha: 1.0)
+//            ], range: NSRange(location: 0, length: 49))
+        ///////
+    }
+    
     private func setupIntroductionTextView() {
-        introdactionTextView.linkTextAttributes = [
+        introductionTextView.linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
             NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
             NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
@@ -178,10 +209,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         let rangeLink = baseText.mutableString.range(of: TextConstants.privacyPolicyCondition)
         baseText.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        introdactionTextView.attributedText = baseText
+        introductionTextView.attributedText = baseText
     }
 
-    // MARK: Buttons action
+    // MARK: - IBActions
     
     @IBAction func onStartUsing(_ sender: Any) {
         output.startUsing()
@@ -204,10 +235,25 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         output.confirmEtk(button.isSelected)
     }
-
-    // MARK: TermsAndServicesViewInput
-    func setupInitialState() {
+    
+    @IBAction func onGlobalPermCheckbox (_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        button.isSelected = !button.isSelected
         
+        output.confirmGlobalPerm(button.isSelected)
+    }
+    
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
+}
+
+// MARK: - TermsAndServicesViewInput
+extension TermsAndServicesViewController: TermsAndServicesViewInput {
+    func setupInitialState() {
     }
     
     func showLoadedTermsAndUses(eula: String) {
@@ -233,13 +279,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     func popNavigationVC() {
         navigationController?.popViewController(animated: true)
     }
-    
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-    }
 }
-
 
 extension TermsAndServicesViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
