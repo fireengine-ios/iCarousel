@@ -21,6 +21,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     internal var selectionState: PhotoSelectionState = .selecting
     
     private var selectingLimit = NumericConstants.createStoryImagesCountLimit
+    private var isFavouritePictures: Bool = false
     
     private let navTitle: String
     
@@ -31,8 +32,9 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     }
     
     //MARK: lifecycle
-    init(title: String) {
+    init(title: String, isFavouritePictures: Bool) {
         navTitle = title
+        self.isFavouritePictures = isFavouritePictures
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -81,7 +83,8 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     }
     
     private func addChildVC() {
-        let dataSource = AllPhotosSelectionDataSource(pageSize: 100)
+        let dataSource: PhotoSelectionDataSourceProtocol = isFavouritePictures ? FavoritePhotosSelectionDataSource(pageSize: 100) : AllPhotosSelectionDataSource(pageSize: 100)
+        
         let childController = PhotoSelectionController(title: "",
                                                        selectingLimit: selectingLimit,
                                                        delegate: self,
