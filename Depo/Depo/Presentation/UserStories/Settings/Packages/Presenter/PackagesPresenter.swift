@@ -23,7 +23,6 @@ class PackagesPresenter {
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
     private var percentage: CGFloat = 0
-    private var storageUsage: UsageResponse?
     
     private func refreshPage() {
         availableOffers = []
