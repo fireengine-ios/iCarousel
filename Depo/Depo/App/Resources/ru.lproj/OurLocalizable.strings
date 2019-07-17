@@ -447,6 +447,7 @@
 "Album Card" = "Карточка альбома";
 "We have created an album for you." = "Мы создали альбом для вас!";
 "Save Album" = "Сохранить";
+"You can not share empty album" = "";
 "Movie" = "Фильм";
 "Did you like this story that we created for you?" = "Вам понравилась история, которую мы создали для вас?";
 "Save This Story" = "Сохранить";
@@ -993,7 +994,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Чтобы делать снимки с помощью камеры и выполнять их резервное копирование в lifebox, необходимо разрешение на доступ к камере";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

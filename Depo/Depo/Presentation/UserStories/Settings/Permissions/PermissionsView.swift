@@ -13,9 +13,10 @@ protocol PermissionViewDelegate: class {
 }
 
 protocol PermissionsViewProtocol: class {
+    
     var delegate: PermissionViewDelegate? { get set }
     var type: PermissionType! { get set }
-    func turnPermissionOn(isOn: Bool)
+    func turnPermissionOn(isOn: Bool, isDisabled: Bool)
     func togglePermissionSwitch()
 }
 
@@ -33,6 +34,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             case .etk:
                 titleLabel.text = TextConstants.etkPermissionTitleLabel
                 descriptionLabel.text = TextConstants.etkPermissionDescriptionLabel
+            case .globalPermission:
+                titleLabel.text = TextConstants.globalPermissionTitleLabel
+                descriptionLabel.text = TextConstants.globalPermissionDescriptionLabel
             }
         }
     }
@@ -45,8 +49,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     // MARK: - Actions
     
-    func turnPermissionOn(isOn: Bool) {
+    func turnPermissionOn(isOn: Bool, isDisabled: Bool) {
         permissionSwitch.isOn = isOn
+        permissionSwitch.isEnabled = !isDisabled
     }
     
     func togglePermissionSwitch() {

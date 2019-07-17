@@ -134,11 +134,13 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
     var type: PermissionType?
     var isAllowed: Bool?
     var isApproved: Bool?
+    var isApprovalPending: Bool?
     
     private enum ResponseKeys {
         static let type = "type"
         static let isAllowed = "allowed"
         static let isApproved = "approved"
+        static let isApprovalPending = "approvalPending"
     }
     
     override func mapping() {
@@ -149,6 +151,7 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
         type = PermissionType(rawValue: typeString)
         isAllowed = json?[ResponseKeys.isAllowed].bool
         isApproved = json?[ResponseKeys.isApproved].bool
+        isApprovalPending = json?[ResponseKeys.isApprovalPending].bool
     }
 }
 

@@ -545,6 +545,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Album Card" = "Carte d’Albums";
 "We have created an album for you." = "Nous avons créé un album pour vous.";
 "Save Album" = "Sauvegarder Album";
+"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Avez-vous aimé cette Story que nous avons créée pour vous?";
 "Save This Story" = "Sauvegarder Cette Story";
@@ -1287,7 +1288,9 @@ Please check I have understood the intended command here*/
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox, une autorisation d'accès de votre appareil photo est nécessaire.";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

@@ -22,6 +22,7 @@ APP_NAME = 'lifebox-LIFE'
 PROJECT = "Depo.xcodeproj"
 TARGET = "Depo_LifeTech"
 BUILD_FOLDER_NAME = "builds"
+
 # TEAM_ID = ""
 # DEV_NAME = "" #mayby need Team Name
 
@@ -95,10 +96,46 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
 	end
 	
 	lane :beta_diawi_preprod do
-		switch_to_preprod
+    #only for preprod builds
+    #switch to branch manually and then run the lane
+    
+    git_pull
+    create_new_branch
+    increment_version
+    switch_to_preprod
 		beta_diawi
 		switch_to_prod
+    git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+    push_to_git_remote(local_branch: "version_up")
 	end
+  
+  lane :beta_diawi_prod do
+    #only for prod builds
+    #switch to branch manually and then run the lane
+    
+    git_pull
+    create_new_branch
+    increment_version
+    switch_to_prod
+    beta_diawi
+    git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+    push_to_git_remote(local_branch: "version_up")
+  end
+  
+  lane :build_prod_and_preprod do
+    #create two prod and preprod builds at a time
+    #switch to branch manually and then run the lane
+    
+     git_pull
+     create_new_branch
+     increment_version
+     switch_to_preprod
+ 		 beta_diawi
+ 	   switch_to_prod
+     beta_diawi
+     git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+     push_to_git_remote(local_branch: "version_up")
+  end
 
 	lane :beta_fabric do
 		my_gym
@@ -161,7 +198,6 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
 
     )
   end
-
 
   #--------------- distribute ---------------
 
@@ -251,9 +287,22 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     end
   end
 
-
+  lane :fix_build_number do
+    buildNum = BUILD_NUMBER
+    preprodSuffix = "_preprod"
+    
+    while buildNum.include?(preprodSuffix) do
+      buildNum = buildNum.chomp(preprodSuffix)
+    end
+    
+    set_build_number(build: buildNum)
+  end
+  
   lane :switch_to_preprod do
-    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
+    fix_build_number
+    
+    set_build_number(build: BUILD_NUMBER + "_preprod")
+    
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
@@ -262,7 +311,10 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
   end
 
   lane :switch_to_prod do
-    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
+    fix_build_number
+    
+    set_build_number(build: BUILD_NUMBER)
+    
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
@@ -280,8 +332,36 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     File.write(file_path, new_contents)
     # To write changes to the file, use:
     # File.open(file_name, "w") { |file| file.puts new_contents }
+  end 
+  
+  lane :create_new_branch do |params|
+    branchName = params[:name] ? params[:name] : "version_up"
+    
+    sh("git", "branch", branchName)
+    sh("git", "checkout", branchName)
   end
-
+  
+  lane :increment_version do 
+    version = BUILD_NUMBER
+    versionComps = version.split(".")
+    lastPartIndex = versionComps.count - 1
+    increasedVersion = versionComps[lastPartIndex].to_i + 1
+    versionComps[lastPartIndex] = increasedVersion.to_s
+    finalVersion = versionComps.join(".")
+    
+    puts "old version: #{version}"
+    puts "new version: #{finalVersion}"
+    
+    set_build_number(build: finalVersion)
+  end
+  
+  lane :set_build_number do |params|
+    buildNumber = params[:build]
+    
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: buildNumber)
+    BUILD_NUMBER = buildNumber
+  end
+ 
 #--------------------- build_number functions ---------------------
 
   desc "fastlane-plugin-versioning required. also it needs more time that my class"
@@ -299,7 +379,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     build_number = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "version: #{build_number}"
 
-    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
+    set_build_number(build: build_number + "_preprod")
 
     build_number = Fastlane::VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "new version: #{build_number}"

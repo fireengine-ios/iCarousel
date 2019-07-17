@@ -455,6 +455,7 @@
 "Album Card" = "بطاقة الألبوم";
 "We have created an album for you." = "تم إنشاء الألبوم.";
 "Save Album" = "حفظ الألبوم";
+"You can not share empty album" = "";
 "Movie" = "فيلم";
 "Did you like this story that we created for you?" = "هل أعجبك عرض الشرائح الذي أنشأناه من أجلك؟";
 "Save This Story" = "حفظ عرض شرائح الفيديو";
@@ -991,7 +992,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "لالتقاط الصور بالكاميرا ولنسخها احتياطيًا إلى صندوق الإنقاذ ، يلزم الحصول على إذن بالوصول إلى الكاميرا";
 "restore_purchases" = "";
 "restore_purchases_info" = "";

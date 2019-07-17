@@ -99,6 +99,7 @@ final class FeedbackViewController: ViewController {
         
         languageLabel.text = TextConstants.feedbackViewLanguageLabel
         languageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        languageLabel.adjustsFontSizeToFitWidth()
         languageLabel.textColor = ColorConstants.textGrayColor
         
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
@@ -155,7 +156,7 @@ final class FeedbackViewController: ViewController {
         if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, dy + 10, 0)
-            let yText = feedbackTextView.frame.size.height + getMainYForView(view: feedbackTextView)
+            let yText = alertView.frame.size.height + getMainYForView(view: alertView)
             let dyText = keyboardHeight - (view.frame.size.height - yText) + 10
             if (dyText > 0) {
                 let point = CGPoint(x: 0, y: dyText)
