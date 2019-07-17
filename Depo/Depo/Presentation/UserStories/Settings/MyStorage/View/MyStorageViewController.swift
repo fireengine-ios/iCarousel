@@ -92,12 +92,6 @@ final class MyStorageViewController: BaseViewController {
         output.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        output.viewDidAppear()
-    }
-    
     // MARK: - IBActions
     
     @IBAction private func restorePurhases() {
