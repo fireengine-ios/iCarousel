@@ -899,7 +899,7 @@ class RouterVC: NSObject {
     }
     
     func createStory(navTitle: String) -> UIViewController {
-        return CreateStorySelectionController(title: navTitle)
+        return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
     }
     
     func createStory(items: [Item]) -> UIViewController {
