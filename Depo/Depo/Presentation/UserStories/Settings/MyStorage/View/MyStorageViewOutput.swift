@@ -8,7 +8,6 @@
 
 protocol MyStorageViewOutput {
     func viewDidLoad()
-    func viewDidAppear()
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int)    
     func restorePurchasesPressed()
