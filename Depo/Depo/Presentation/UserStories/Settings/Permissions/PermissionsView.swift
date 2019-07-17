@@ -22,7 +22,12 @@ protocol PermissionsViewProtocol: class {
 
 class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
-    @IBOutlet private weak var hud: UIActivityIndicatorView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView! {
+        willSet {
+            newValue.hidesWhenStopped = true
+        }
+    }
+    
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var permissionSwitch: UISwitch!
@@ -55,11 +60,12 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         if isPendingApproval {
             permissionSwitch.isOn = !isOn
             permissionSwitch.isEnabled = false
-            hud.startAnimating()
+            activityIndicator.startAnimating()
         } else {
             permissionSwitch.isOn = isOn
             permissionSwitch.isEnabled = true
-            hud.hidesWhenStopped = true
+            activityIndicator.stopAnimating()
+            
         }
     }
     

@@ -70,8 +70,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="activityIndicator" destination="ggo-W8-2Uj" id="4V9-jq-kWX"/>
                 <outlet property="descriptionLabel" destination="emJ-Mc-VhK" id="oOk-Ox-kJc"/>
-                <outlet property="hud" destination="ggo-W8-2Uj" id="4V9-jq-kWX"/>
                 <outlet property="permissionSwitch" destination="XhQ-9N-Hd4" id="30U-sf-DRk"/>
                 <outlet property="titleLabel" destination="DFv-Jj-fAS" id="qR1-AL-PEU"/>
             </connections>
