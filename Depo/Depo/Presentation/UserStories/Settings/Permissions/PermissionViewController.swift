@@ -85,7 +85,7 @@ final class PermissionViewController: ViewController {
             
             stackView.addArrangedSubview(permissionView)
             permissionView.turnPermissionOn(isOn: permission.isApproved ?? false,
-                                            isDisabled: permission.isApprovalPending ?? false)
+                                            isPendingApproval: permission.isApprovalPending ?? false)
         }
     }
     
@@ -109,7 +109,7 @@ extension PermissionViewController: PermissionViewDelegate {
             
             switch response {
             case .success(_):
-                break
+                self?.checkPermissionState()
             case .failed(let error):
                 permissionView.togglePermissionSwitch()
                 UIApplication.showErrorAlert(message: error.description)
