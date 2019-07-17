@@ -285,6 +285,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         playerController?.player = localPlayer
         ///needs to expend from everywhere
         playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
+        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
         present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player?.play()
             self?.output.videoStarted()
@@ -345,9 +346,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objects.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeue(cell: PhotoVideoDetailCell.self, for: indexPath)
     }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoDetailCell else { return }
         cell.delegate = self
@@ -393,7 +396,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 let option = PHVideoRequestOptions()
                 
                 output.startCreatingAVAsset()
-                
+                debugLog("about to play local video item")
                 DispatchQueue.global(qos: .default).async { [weak self] in
                     PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
                         
@@ -403,13 +406,16 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                                 return
                             }
                             let playerItem = AVPlayerItem(asset: asset)
+                            debugLog("playerItem created \(playerItem.asset.isPlayable)")
                             self?.play(item: playerItem)
                         }   
                     }
                 }
                 
             case .remoteUrl(_):
+                debugLog("about to play remote video item")
                 let playerItem = AVPlayerItem(url: url)
+                debugLog("playerItem created \(playerItem.asset.isPlayable)")
                 play(item: playerItem)
             }
         }

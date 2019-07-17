@@ -138,7 +138,11 @@ final class AppConfigurator {
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         func setupMenloworks() {
             DispatchQueue.toMain {
+                #if LIFEBOX
                 MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
+                #elseif LIFEDRIVE
+                MPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
+                #endif
                 MPush.setServerURL("https://api.xtremepush.com")
                 
                 

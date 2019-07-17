@@ -9,6 +9,8 @@
 import Foundation
 
 protocol CreateStoryPreviewInteractorInput: class {
+    var story: PhotoStory? { get }
+    
     func viewIsReady()
     func onSaveStory()
 }

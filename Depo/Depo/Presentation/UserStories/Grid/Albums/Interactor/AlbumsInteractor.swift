@@ -52,8 +52,11 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     func onAddPhotosToAlbum(selectedAlbumUUID: String) {
         debugLog("AlbumsInteractor onAddPhotosToAlbum")
 
+        guard let photos = photos as? [Item] else { return }
+        
         output.startAsyncOperation()
-        let parameters = AddPhotosToAlbum(albumUUID: selectedAlbumUUID, photos: photos as! [Item])
+        let parameters = AddPhotosToAlbum(albumUUID: selectedAlbumUUID, photos: photos)
+        
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
             debugLog("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
 

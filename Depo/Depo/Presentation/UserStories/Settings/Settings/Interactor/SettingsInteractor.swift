@@ -43,29 +43,50 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              passcodeCellTitle]
         
-        let importAccountsCells = [TextConstants.settingsViewCellConnectedAccounts]
-        
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
-                     importAccountsCells,
+                     [TextConstants.settingsViewCellConnectedAccounts,
+                      TextConstants.settingsViewCellPermissions],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellPrivacyAndTerms,
                       TextConstants.settingsViewCellLogout]]
+        
+        let loginSettingsRow = 2
+        let permissionsSettingsRow = 1
         
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
             guard let `self` = self else {
                 return
             }
-            DispatchQueue.toMain {
-                self.userInfoResponse = response
-                if self.isTurkcellUser {
-                    /// add to the securityCells section
-                    array[2].append(TextConstants.settingsViewCellLoginSettings)
-                }
-                self.output.cellsDataForSettings(array: array)
+            self.userInfoResponse = response
+            if self.isTurkcellUser {
+                /// add to the securityCells section
+                array[loginSettingsRow].append(TextConstants.settingsViewCellLoginSettings)
             }
+            self.accountSerivese.getPermissionsAllowanceInfo(handler: { [weak self] result in
+                guard let `self` = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let result):
+                    let hasAllowedPersmission = result.first(where: { $0.isAllowed ?? false }) != nil
+                    if !hasAllowedPersmission {
+                        /// hide Permission setting
+                        array[permissionsSettingsRow].remove(TextConstants.settingsViewCellPermissions)
+                    }
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+                
+                DispatchQueue.toMain {
+                    self.output.cellsDataForSettings(array: array)
+                }
+            })
+            
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
                 self?.output.cellsDataForSettings(array: array)

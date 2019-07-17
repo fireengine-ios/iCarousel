@@ -281,8 +281,22 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     private func finishConverting(needSorting: Bool) {
+        let finish = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let objects = self.lastWrapedObjects.getArray()
+            DispatchQueue.main.async {
+                self.lastFetchObjectCompetion?(objects)
+                self.lastFetchObjectCompetion = nil
+                self.isConverting = false
+                self.isMerging = false
+            }
+        }
+        
         if needSorting {
-            lastWrapedObjects.syncSortItself { item1, item2 -> Bool in
+            lastWrapedObjects.sortItself(by: { item1, item2 -> Bool in
                 if let date1 = item1.isLocalItem ? item1.creationDate : item1.metaData?.takenDate {
                     if let date2 = item2.isLocalItem ? item2.creationDate : item2.metaData?.takenDate {
                         /// both dates are non-nil
@@ -308,7 +322,13 @@ final class PhotoVideoDataSource: NSObject {
                     /// shouldn't be there ever
                     return false
                 }
-            }
+            }, completion: {
+                finish()
+            })
+        } else {
+            finish()
+        }
+        
 //            var mutableArray = lastWrapedObjects.getArray()
 //
 //            ///separate missing dates
@@ -337,15 +357,6 @@ final class PhotoVideoDataSource: NSObject {
 //            /// update lastWrapedObjects
 //            lastWrapedObjects.removeAll()
 //            lastWrapedObjects.append(ordinaryItems + missingDates)
-        }
-        
-        let objects = lastWrapedObjects.getArray()
-        DispatchQueue.main.async {
-            self.lastFetchObjectCompetion?(objects)
-            self.lastFetchObjectCompetion = nil
-            self.isConverting = false
-            self.isMerging = false
-        }
     }
     
     private func cleanChanges() {

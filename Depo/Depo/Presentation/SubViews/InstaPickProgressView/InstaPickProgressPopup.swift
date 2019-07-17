@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 
-
 final class InstaPickProgressPopup: ViewController, NibInit {
 
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
@@ -127,6 +126,22 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     
     
     @IBAction func close(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            let instapickService: InstapickService = factory.resolve()
+            
+            instapickService.getAnalyzesCount { result in
+                switch result {
+                case .success(let analyzesCount):
+                    let router = RouterVC()
+                    let possibleAnalyzeHistoryVC = router.getViewControllerForPresent() as? AnalyzeHistoryViewController
+                    possibleAnalyzeHistoryVC?.updateAnalyzeCount(with: analyzesCount)
+                    
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                    
+                }
+            }
+
+        })
     }
 }

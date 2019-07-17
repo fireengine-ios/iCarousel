@@ -28,4 +28,6 @@ protocol PackagesInteractorOutput: class {
 
     func purchasesRestored(text: String)
     func refreshPackages()
+    
+    func setQuotaInfo(quotoInfo: QuotaInfoResponse)
 }

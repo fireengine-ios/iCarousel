@@ -47,7 +47,6 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
     
     private func changePlaceholderColor() {
         guard let placeholder = self.attributedPlaceholder?.string else {
-            assertionFailure()
             return
         }
         

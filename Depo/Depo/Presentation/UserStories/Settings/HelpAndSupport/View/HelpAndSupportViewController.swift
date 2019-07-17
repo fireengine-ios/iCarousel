@@ -11,6 +11,8 @@ import WebKit
 
 class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
     
+    private let accountSerivce = AccountService()
+    
     private var webView: WKWebView!
     
     // MARK: Life cycle
@@ -27,12 +29,15 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         
         self.title = TextConstants.faqViewTitle
         
-        if let url = URL(string: String(format: RouteRequests.faqContentUrl, Device.supportedLocale)) {
-            let request = URLRequest(url: url)
-            webView.load(request)
-            showSpinner()
+        accountSerivce.faqUrl { [weak self] faqUrl in
+            if let url = URL(string: faqUrl) {
+                let request = URLRequest(url: url)
+                DispatchQueue.toMain {
+                    self?.webView.load(request)
+                    self?.showSpinner()
+                }
+            }
         }
-        
     }
     
     // MARK: WKNavigationDelegate

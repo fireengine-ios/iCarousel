@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,7 +58,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcu-gc-WA6" userLabel="facebook View">
-                    <rect key="frame" x="20" y="178" width="335" height="31"/>
+                    <rect key="frame" x="20" y="208.5" width="335" height="31"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="facebook" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WSp-nP-Yha">
                             <rect key="frame" x="0.0" y="0.0" width="276" height="31"/>
@@ -87,7 +86,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yKZ-qH-VVG">
-                    <rect key="frame" x="20" y="219" width="335" height="103"/>
+                    <rect key="frame" x="20" y="249.5" width="335" height="103"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tU6-ga-vMe">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="41"/>
@@ -111,7 +110,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTe-cC-LX9">
-                    <rect key="frame" x="47" y="342" width="281" height="50"/>
+                    <rect key="frame" x="47" y="372.5" width="281" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="39i-gY-W2T"/>
                     </constraints>
@@ -121,14 +120,14 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idq-Q9-sbe" userLabel="line View">
-                    <rect key="frame" x="20" y="167" width="335" height="1"/>
+                    <rect key="frame" x="20" y="197.5" width="335" height="1"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="toA-kz-A5j"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-JO-rG7">
-                    <rect key="frame" x="20" y="61" width="335" height="96"/>
+                    <rect key="frame" x="20" y="61" width="335" height="126.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1f-4s-CY4">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
@@ -142,8 +141,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnL-jg-oC7">
+                            <rect key="frame" x="0.0" y="61" width="335" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-jN-8kF">
-                            <rect key="frame" x="0.0" y="61" width="335" height="35"/>
+                            <rect key="frame" x="0.0" y="91.5" width="335" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zth-QW-h0a" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="144.5" y="0.0" width="46" height="35"/>
@@ -169,16 +174,17 @@
                 <constraint firstItem="yKZ-qH-VVG" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="3D6-Vw-nOa"/>
                 <constraint firstItem="BaH-JO-rG7" firstAttribute="top" secondItem="hNw-Pj-QXr" secondAttribute="bottom" constant="10" id="737-Kf-0am"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="vcu-gc-WA6" secondAttribute="trailing" constant="20" id="8BU-g5-aV4"/>
+                <constraint firstItem="cgP-Cu-WBb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rTe-cC-LX9" secondAttribute="bottom" constant="10" id="EVT-Nv-fCa"/>
                 <constraint firstItem="yKZ-qH-VVG" firstAttribute="top" secondItem="vcu-gc-WA6" secondAttribute="bottom" constant="10" id="Lh8-pY-bS5"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="hNw-Pj-QXr" secondAttribute="trailing" constant="20" id="NSb-Fi-wY4"/>
+                <constraint firstItem="rTe-cC-LX9" firstAttribute="top" secondItem="yKZ-qH-VVG" secondAttribute="bottom" priority="750" constant="20" id="NXc-1R-xFO"/>
                 <constraint firstItem="BaH-JO-rG7" firstAttribute="leading" secondItem="h4B-P5-Rce" secondAttribute="leading" id="Ntx-Zi-nfX"/>
                 <constraint firstItem="Idq-Q9-sbe" firstAttribute="top" secondItem="BaH-JO-rG7" secondAttribute="bottom" constant="10" id="PQi-Ma-Jjv"/>
                 <constraint firstItem="rTe-cC-LX9" firstAttribute="centerX" secondItem="cgP-Cu-WBb" secondAttribute="centerX" id="Ve2-RV-VFi"/>
-                <constraint firstItem="rTe-cC-LX9" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="3:4" id="Vp4-kT-6Wi"/>
+                <constraint firstItem="rTe-cC-LX9" firstAttribute="width" secondItem="cgP-Cu-WBb" secondAttribute="width" multiplier="3:4" id="Vo5-EW-F1h"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="WVE-Js-Pbf"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="top" secondItem="Idq-Q9-sbe" secondAttribute="bottom" constant="10" id="cxQ-zz-WqP"/>
                 <constraint firstItem="Idq-Q9-sbe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="h8f-te-bkd"/>
-                <constraint firstItem="rTe-cC-LX9" firstAttribute="top" secondItem="yKZ-qH-VVG" secondAttribute="bottom" constant="20" id="jUA-3D-gKA"/>
                 <constraint firstItem="BaH-JO-rG7" firstAttribute="trailing" secondItem="hp4-RT-NAP" secondAttribute="trailing" id="lI6-et-dZk"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="yKZ-qH-VVG" secondAttribute="trailing" constant="20" id="lJW-Dk-GdN"/>
                 <constraint firstItem="hNw-Pj-QXr" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="lUX-C5-gIi"/>
@@ -201,6 +207,7 @@
                 <outlet property="labelsStackView" destination="yKZ-qH-VVG" id="wqO-m5-jX3"/>
                 <outlet property="secondFaceImageLabel" destination="hwc-CI-WuL" id="uFj-Zx-6Xl"/>
                 <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="ShG-XD-pO8"/>
+                <outlet property="threeFaceImageLabel" destination="vnL-jg-oC7" id="Woy-FS-jMI"/>
             </connections>
         </customObject>
         <customObject id="pu3-QY-bUD" customClass="FaceImageDesigner" customModule="lifebox" customModuleProvider="target">
@@ -213,6 +220,7 @@
                 <outlet property="firstFacebookLabel" destination="tU6-ga-vMe" id="XMU-z0-7OR"/>
                 <outlet property="secondFaceImageLabel" destination="hwc-CI-WuL" id="rx2-tA-gb7"/>
                 <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="YXK-YY-ajr"/>
+                <outlet property="threeFaceImageLabel" destination="vnL-jg-oC7" id="K0x-jm-Icq"/>
             </connections>
         </customObject>
     </objects>

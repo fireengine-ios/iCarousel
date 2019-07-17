@@ -445,6 +445,7 @@
 "Album Card" = "Card Album";
 "We have created an album for you." = "Am creat un album pentru tine";
 "Save Album" = "Salvează Albumul";
+"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Ți-a plăcut povestea ce am creat-o pentru tine?";
 "Save This Story" = "Salvează această Poveste";
@@ -979,5 +980,18 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Pentru a face fotografii cu camera foto și pentru a le crea în siguranță în caseta de salvare, este necesară permisiunea dvs. pentru accesul camerei";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
+"privacy_policy_head_line" = "";
+"create_story_photos_selected" = "";
+"create_story_press_and_hold" = "";
+"create_story_press_and_hold_description" = "";
+"create_story_name_title" = "";
+"create_story_pop_up_title" = "";
+"create_story_pop_up_message" = "";
+"create_story_path_to_story" = "";

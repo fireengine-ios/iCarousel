@@ -449,6 +449,7 @@
 "Album Card" = "Karte Albumi ";
 "We have created an album for you." = "Kemi krijuar një album për ju.";
 "Save Album" = "Ruani Albumin";
+"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Ju pëlqeu historia që krijuam për ju?";
 "Save This Story" = "Ruajeni Këtë Histori ";
@@ -1022,5 +1023,18 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
+"privacy_policy_head_line" = "";
+"create_story_photos_selected" = "";
+"create_story_press_and_hold" = "";
+"create_story_press_and_hold_description" = "";
+"create_story_name_title" = "";
+"create_story_pop_up_title" = "";
+"create_story_pop_up_message" = "";
+"create_story_path_to_story" = "";

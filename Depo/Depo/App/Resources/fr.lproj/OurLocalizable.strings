@@ -545,6 +545,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Album Card" = "Carte d’Albums";
 "We have created an album for you." = "Nous avons créé un album pour vous.";
 "Save Album" = "Sauvegarder Album";
+"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Avez-vous aimé cette Story que nous avons créée pour vous?";
 "Save This Story" = "Sauvegarder Cette Story";
@@ -938,6 +939,8 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
+/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
+
 Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -970,6 +973,8 @@ Please check I have understood the intended command here*/
 "feature_paycell_slcm_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_slcm_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_all_access_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
+
+/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
@@ -1283,5 +1288,18 @@ Please check I have understood the intended command here*/
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
 "NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox, une autorisation d'accès de votre appareil photo est nécessaire.";
+"restore_purchases" = "";
+"restore_purchases_info" = "";
+"attributed_restore_word" = "";
+"privacy_policy_head_line" = "";
+"create_story_photos_selected" = "";
+"create_story_press_and_hold" = "";
+"create_story_press_and_hold_description" = "";
+"create_story_name_title" = "";
+"create_story_pop_up_title" = "";
+"create_story_pop_up_message" = "";
+"create_story_path_to_story" = "";
