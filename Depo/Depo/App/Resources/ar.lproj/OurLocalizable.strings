@@ -455,6 +455,7 @@
 "Album Card" = "بطاقة الألبوم";
 "We have created an album for you." = "تم إنشاء الألبوم.";
 "Save Album" = "حفظ الألبوم";
+"You can not share empty album" = "";
 "Movie" = "فيلم";
 "Did you like this story that we created for you?" = "هل أعجبك عرض الشرائح الذي أنشأناه من أجلك؟";
 "Save This Story" = "حفظ عرض شرائح الفيديو";
