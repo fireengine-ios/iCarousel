@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="acceptButton" destination="kkM-36-uGV" id="Ue8-fu-Mch"/>
+                <outlet property="checkboxesStack" destination="aEZ-sm-9UL" id="K6f-Po-2eV"/>
                 <outlet property="contenViewHeightConstraint" destination="L0E-Uz-MQX" id="8iz-z7-x0m"/>
                 <outlet property="contentView" destination="aLj-Qo-ocB" id="vmZ-Wx-V8R"/>
                 <outlet property="topContraintIOS10" destination="Emx-2B-mwG" id="iRg-dw-zzO"/>
