@@ -8,4 +8,5 @@
 
 enum PermissionType: String {
     case etk = "ETK"
+    case globalPermission = "GLOBAL_PERMISSION"
 }

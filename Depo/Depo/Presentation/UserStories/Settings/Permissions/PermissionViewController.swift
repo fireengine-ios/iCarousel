@@ -12,8 +12,6 @@ final class PermissionViewController: ViewController {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -28,6 +26,13 @@ final class PermissionViewController: ViewController {
     private lazy var etkPermissionView: UIView & PermissionsViewProtocol = {
         let permissionView = PermissionsView.initFromNib()
         permissionView.type = .etk
+        permissionView.delegate = self
+        return permissionView
+    }()
+    
+    private lazy var globalPermissionView: UIView & PermissionsViewProtocol = {
+        let permissionView = PermissionsView.initFromNib()
+        permissionView.type = .globalPermission
         permissionView.delegate = self
         return permissionView
     }()
@@ -51,7 +56,10 @@ final class PermissionViewController: ViewController {
     
     private func setupLayout() {
         view.addSubview(stackView)
-        stackView.pinToSuperviewEdges()
+        
+        stackView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
     }
     
     private func checkPermissionState() {
@@ -62,13 +70,32 @@ final class PermissionViewController: ViewController {
             
             switch result {
             case .success(let result):
-                if let etk = result.first(where: { $0.type == .etk }), etk.isAllowed == true {
-                    self.stackView.insertArrangedSubview(self.etkPermissionView, at: 0)
-                    self.etkPermissionView.turnPermissionOn(isOn: etk.isApproved ?? false)
-                }
+                self.setupPermissionViewFromResult(result, type: .etk)
+                self.setupPermissionViewFromResult(result, type: .globalPermission)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
+        }
+    }
+    
+    private func setupPermissionViewFromResult(_ result: [SettingsPermissionsResponse], type: PermissionType) {
+        if let permission = result.first(where: { $0.type == type }),
+            permission.isAllowed == true,
+            let permissionView = viewForPermissionType(type) {
+            
+            stackView.addArrangedSubview(permissionView)
+            permissionView.turnPermissionOn(isOn: permission.isApproved ?? false,
+                                            isDisabled: permission.isApprovalPending ?? false)
+        }
+    }
+    
+    private func viewForPermissionType(_ type: PermissionType) -> (UIView & PermissionsViewProtocol)? {
+        if type == .etk {
+            return etkPermissionView
+        } else if type == .globalPermission {
+            return globalPermissionView
+        } else {
+            return nil
         }
     }
 }

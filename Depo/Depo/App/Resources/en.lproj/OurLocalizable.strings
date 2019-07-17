@@ -474,6 +474,7 @@
 "Album Card" = "Album Card";
 "We have created an album for you." = "We have created an album for you.";
 "Save Album" = "Save Album";
+"You can not share empty album" = "You can not share empty album";
 "Movie" = "Movie";
 "Did you like this story that we created for you?" = "Did you like this story that we created for you?";
 "Save This Story" = "Save This Story";
@@ -1018,7 +1019,9 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "ETK Permission";
-"etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
+"etk_permission_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
+"global_permission_title_label" = "Turkcell Genel Veri İşleme Permission";
+"global_permission_description" = "Liquam scelerisque eleifend enim, vel rhoncus eros dictum quis. Phasellus interdum ut velit in porttitor. Nam luctus ex nec erat cursus pellentesque. Nam et commodo.";
 "NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
 "restore_purchases" = "Restore Purchases";
 "restore_purchases_info" = "If you want to restore your previous purchases lorem ipsum pellentesque tincidunt eleifend nibh, at suscipit arcu con.";
