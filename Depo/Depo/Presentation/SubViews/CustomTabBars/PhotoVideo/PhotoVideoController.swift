@@ -237,6 +237,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 //            dataSource.selectedIndexPaths.remove(indexPath)
 //        } else {
             dataSource.selectedIndexPaths.insert(indexPath)
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
 //        }
         
         cell.set(isSelected: true, isSelectionMode: dataSource.isSelectingMode, animated: true)
@@ -245,7 +246,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func deselect(cell: PhotoVideoCell, at indexPath: IndexPath) {
         dataSource.selectedIndexPaths.remove(indexPath)
-        
+        collectionView.deselectItem(at: indexPath, animated: true)
         cell.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
@@ -478,8 +479,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         if dataSource.isSelectingMode {
             select(cell: cell, at: indexPath)
         } else {
-            startEditingMode(at: indexPath)
-//            showDetail(at: indexPath)
+            showDetail(at: indexPath)
         }
     }
     
@@ -488,7 +488,9 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
-        deselect(cell: cell, at: indexPath)
+        if dataSource.isSelectingMode {
+            deselect(cell: cell, at: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
