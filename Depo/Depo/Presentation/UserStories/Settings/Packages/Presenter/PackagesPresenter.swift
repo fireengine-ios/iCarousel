@@ -275,12 +275,10 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            
             let usage = UsageResponse()
             usage.usedBytes = quotaInfo?.bytesUsed
             usage.quotaBytes = quotaInfo?.bytes
             router.openMyStorage(storageUsage: usage)
-
         case .accountType(let accountType):
             router.openLeavePremium(type: accountType.leavePremiumType)
         case .myProfile:
