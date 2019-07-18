@@ -13,7 +13,7 @@ final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
         super.configurate()
 
         titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        titleLabel?.numberOfLines = 1
+        titleLabel?.numberOfLines = 2
         titleLabel?.textAlignment = .center
     }
 }
