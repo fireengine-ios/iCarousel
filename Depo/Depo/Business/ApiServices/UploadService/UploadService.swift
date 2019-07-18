@@ -137,7 +137,7 @@ final class UploadService: BaseRequestService {
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelUploadOperations()
                             self?.showOutOfSpaceAlert()
-                            filteredItems.forEach({ (wrapData) in
+                            filteredItems.forEach({ wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
                             })
                         }
