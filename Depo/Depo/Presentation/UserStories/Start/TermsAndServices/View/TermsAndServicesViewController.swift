@@ -28,10 +28,6 @@ class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var etkTextView: UITextView!
     @IBOutlet private weak var etkTopSpaceConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var globalPermCheckBoxButton: UIButton!
-    @IBOutlet private weak var globalPermTextView: UITextView!
-    @IBOutlet private weak var globalPermTopSpaceConstraint: NSLayoutConstraint!
-    
     private let webView: WKWebView = {
         let contentController = WKUserContentController()
          let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
@@ -140,16 +136,6 @@ class TermsAndServicesViewController: ViewController {
         updateWebViewInsets()
     }
     
-    func showGlobalPermission() {
-        setupGlobalPermText()
-        globalPermTextView.isHidden = false
-        globalPermCheckBoxButton.isHidden = false
-//        etkTopSpaceConstraint.constant = 16 ???
-        
-        view.layoutIfNeeded()
-        updateWebViewInsets()
-    }
-    
     /// fixing bug of WKWebView contentInset after relayout
     private func updateWebViewInsets() {
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height + etkTopSpaceConstraint.constant, right: 0)
@@ -175,24 +161,6 @@ class TermsAndServicesViewController: ViewController {
         baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
         
         etkTextView.attributedText = baseText
-    }
-    
-    private func setupGlobalPermText() {
-        //TODO:
-        
-        ////////
-        
-//        let attributedString = NSMutableAttributedString(string: "Turkcell Genel Veri İşleme İzni\'ni kabul ediyorum 
-//Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero. ", attributes: [
-//            .font: UIFont(name: "TurkcellSatura", size: 12.0)!,
-//            .foregroundColor: UIColor(white: 142.0 / 255.0, alpha: 1.0),
-//            .kern: 0.0
-//            ])
-//        attributedString.addAttributes([
-//            .font: UIFont(name: "TurkcellSatura", size: 15.0)!,
-//            .foregroundColor: UIColor(white: 0.0, alpha: 1.0)
-//            ], range: NSRange(location: 0, length: 49))
-        ///////
     }
     
     private func setupIntroductionTextView() {
@@ -236,15 +204,6 @@ class TermsAndServicesViewController: ViewController {
         output.confirmEtk(button.isSelected)
     }
     
-    @IBAction func onGlobalPermCheckbox (_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
-        }
-        button.isSelected = !button.isSelected
-        
-        output.confirmGlobalPerm(button.isSelected)
-    }
-    
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
@@ -253,6 +212,7 @@ class TermsAndServicesViewController: ViewController {
 
 // MARK: - TermsAndServicesViewInput
 extension TermsAndServicesViewController: TermsAndServicesViewInput {
+    
     func setupInitialState() {
     }
     

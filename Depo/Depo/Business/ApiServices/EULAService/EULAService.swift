@@ -36,11 +36,14 @@ struct EULAApprove: RequestParametrs {
     
     let id: Int
     let etkAuth: Bool?
+    let globalPermAuth: Bool?
     
     var requestParametrs: Any {
         var params: [String: Any] = [LbRequestkeys.eulaId: id]
-        if let etkAuth = etkAuth {
+        if let etkAuth = etkAuth,
+            let globalPermAuth = globalPermAuth {
             params[LbRequestkeys.etkAuth] = etkAuth
+            params[LbRequestkeys.globalPermAuth] = globalPermAuth
         }
         return params
     }
@@ -65,14 +68,13 @@ class EulaService: BaseRequestService {
         executeGetRequest(param: eula, handler: handler)
     }
 
-    func eulaApprove(eulaId: Int, etkAuth: Bool?, sucess: SuccessResponse?, fail: FailResponse? ) {
+    func eulaApprove(eulaId: Int, etkAuth: Bool?, globalPermAuth: Bool?, success: SuccessResponse?, fail: FailResponse? ) {
         debugLog("EulaService eulaApprove")
         
-        let eula = EULAApprove(id: eulaId, etkAuth: etkAuth)
+        let eula = EULAApprove(id: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth)
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: eula, handler: handler)
-
     }
     
     private let sessionManager: SessionManager = factory.resolve()

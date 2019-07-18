@@ -64,13 +64,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
-            }, fail: { [weak self] errorResponce in
+            }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.applyEulaFaild(errorResponce: errorResponce)
+                    self?.output.applyEulaFailed(errorResponse: errorResponse)
                 }
         })
     }

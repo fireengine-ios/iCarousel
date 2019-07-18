@@ -48,8 +48,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         }
     }
     
-    func applyEulaFaild(errorResponce: ErrorResponse) {
-        asyncOperationFail(errorMessage: errorResponce.description)
+    func applyEulaFailed(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
     }
     
     func confirmAgreements(_ confirm: Bool) {
@@ -126,7 +126,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func setupGlobalPerm(isShowGlobalPerm: Bool) {
         if isShowGlobalPerm {
-            view.showGlobalPermission()
+//            TODO: add logic with UI
+//            view.showGlobalPermission()
         }
         interactor.loadTermsAndUses()
     }
