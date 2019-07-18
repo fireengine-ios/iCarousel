@@ -52,7 +52,7 @@ class BaseDataSourceItem: NSObject {
         //super.init()
     }
     
-    override var hashValue: Int {
+    override var hash: Int {
         if isLocalItem {
             return name!.hashValue
         } else {

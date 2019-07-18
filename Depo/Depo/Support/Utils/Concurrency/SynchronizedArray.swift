@@ -100,9 +100,10 @@ public extension SynchronizedArray {
     }
     
     ///Sort itself without callback
-    func sortItself(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+    func sortItself(by areInIncreasingOrder: @escaping (Element, Element) -> Bool, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
             self.array.sort(by: areInIncreasingOrder)
+            completion?()
         }
     }
     

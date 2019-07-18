@@ -61,7 +61,6 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.getAccountType()
         
         view?.startActivityIndicator()
-        setMemoryPercentage()
     }
     
     func viewWillAppear() {
@@ -150,6 +149,12 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
+   
+    func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
+        self.quotaInfo = quotoInfo
+        setMemoryPercentage()
+    }
+    
     func successedPromocode() {
         MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()

@@ -19,14 +19,17 @@ struct RouteRequests {
     // MARK: Environment
     
     private static let currentServerEnvironment = ServerEnvironment.production
+    private static let applicationTarget = TextConstants.NotLocalized.appName
     
-    static let baseUrl: URL = {
+    static let baseShortUrlString: String = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
-        case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
-        case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://adepo.turkcell.com.tr/"
         }
     }()
+    
+    static let baseUrl: URL =  URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -55,13 +58,15 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String = {
+    static let privacyPolicy: String = {
         switch currentServerEnvironment {
-        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .production: return "https://mylifebox.com/policy/?lang="
         }
     }()
+    
+    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -78,11 +83,10 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@"
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
-    
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -158,6 +162,9 @@ struct RouteRequests {
     //MARK : Share
     static let share = "share/%@"
     
+    //MARK: Feedback
+    static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    
     //MARK : Faq 
     static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
 
@@ -175,16 +182,17 @@ struct RouteRequests {
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
-        switch currentServerEnvironment {
-        case .preProduction:
-            return "https://adepotest.turkcell.com.tr/download/update_ios.json"
-        case .production:
-            return "https://adepo.turkcell.com.tr/download/update_ios.json"
-        case .test:
-            return "https://tcloudstb.turkcell.com.tr/download/update_ios.json"
-        }
+        #if LIFEBOX
+            let jsonName = "update_ios.json"
+        #elseif LIFEDRIVE
+            let jsonName = "update_lifedrive_ios.json"
+        #else
+            let jsonName = "unknown"
+            debugPrint("⚠️: unknown turkcell updater url")
+        #endif
+        
+        return baseShortUrlString + jsonName
     }
-    
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
@@ -204,6 +212,7 @@ struct RouteRequests {
         
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
@@ -217,6 +226,9 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
+            
+            static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionsUpdate = Account.accountApi +/ "permission/update"
         }
     }
     

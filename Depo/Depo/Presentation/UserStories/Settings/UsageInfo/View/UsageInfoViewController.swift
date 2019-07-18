@@ -62,6 +62,7 @@ final class UsageInfoViewController: ViewController {
             usagePercentageLabel.numberOfLines = 0
             usagePercentageLabel.textColor = UIColor.lrTealish
             usagePercentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            usagePercentageLabel.adjustsFontSizeToFitWidth()
         }
     }
     

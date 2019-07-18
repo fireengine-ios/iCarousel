@@ -9,7 +9,8 @@
 import UIKit
 
 enum FaceImageDisplayConfigurations {
-    case initial /// faceImageOff
+    case initialStandart /// faceImageOff
+    case initialPremium
     case faceImageStandart
     case faceImagePremium
     case facebookTagsOff
@@ -27,22 +28,39 @@ final class FaceImageDisplayManager: NSObject {
     @IBOutlet private weak var faceImageStackView: UIStackView!
     @IBOutlet private weak var firstFaceImageLabel: UILabel!
     @IBOutlet private weak var secondFaceImageLabel: UILabel!
+    @IBOutlet private weak var threeFaceImageLabel: UILabel!
     @IBOutlet private weak var faceImagePremiumButton: GradientPremiumButton!
     @IBOutlet private weak var faceImageView: UIView!
     
-    var configuration = FaceImageDisplayConfigurations.initial
+    var configuration = FaceImageDisplayConfigurations.initialStandart
     
     func applyConfiguration(_ configuration: FaceImageDisplayConfigurations) {
         self.configuration = configuration
         
         switch configuration {
-        case .initial:
+        case .initialStandart:
             labelsStackView.isHidden = true
             facebookView.isHidden = true
             facebookImportButton.isHidden = true
-            faceImageStackView.isHidden = true
+            faceImageStackView.isHidden = false
             firstFaceImageLabel.isHidden = true
             secondFaceImageLabel.isHidden = true
+            threeFaceImageLabel.isHidden = false
+            threeFaceImageLabel.text = TextConstants.faceTagsDescriptionStandart
+            faceImagePremiumButton.isHidden = true
+            faceImageView.isHidden = true
+            /// face image switch is off
+            /// hide all
+        
+        case .initialPremium:
+            labelsStackView.isHidden = true
+            facebookView.isHidden = true
+            facebookImportButton.isHidden = true
+            faceImageStackView.isHidden = false
+            firstFaceImageLabel.isHidden = true
+            secondFaceImageLabel.isHidden = true
+            threeFaceImageLabel.isHidden = false
+            threeFaceImageLabel.text = TextConstants.faceTagsDescriptionPremium
             faceImagePremiumButton.isHidden = true
             faceImageView.isHidden = true
             /// face image switch is off
@@ -58,9 +76,11 @@ final class FaceImageDisplayManager: NSObject {
             /// StandartUser
             
         case .faceImagePremium:
-            faceImageStackView.isHidden = true
+            faceImageStackView.isHidden = false
             firstFaceImageLabel.isHidden = true
             secondFaceImageLabel.isHidden = true
+            threeFaceImageLabel.isHidden = false
+            threeFaceImageLabel.text = TextConstants.faceTagsDescriptionPremium
             faceImagePremiumButton.isHidden = true
             faceImageView.isHidden = true
             /// face image switch is on

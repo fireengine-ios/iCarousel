@@ -12,7 +12,6 @@ import Foundation
 final class TermsOfUseInteractor {
     
     weak var output: TermsOfUseInteractorOutput!
-    
     private let eulaService = EulaService()
     
 }
@@ -20,18 +19,22 @@ final class TermsOfUseInteractor {
 extension TermsOfUseInteractor: TermsOfUseInteractorInput {
     func getEulaHTML() {
         DispatchQueue.toBackground { [weak self] in
-            self?.eulaService.eulaGet(sucess: { [weak self] eula in
-                guard let eula = eula as? Eula, let eulaHtml = eula.content, !eulaHtml.isEmpty else {
-                    return
-                }
-                DispatchQueue.toMain {
-                    self?.output.showLoaded(eulaHTML: eulaHtml)
-                }
-                }, fail: { [weak self] errorResponse in
-                    DispatchQueue.toMain {
-                        self?.output.failLoadEula(errorString: errorResponse.description)
+            self?.eulaService.eulaGet { [weak self] response in
+                switch response {
+                case .success(let text):
+                    guard let content = text.content else {
+                        assertionFailure()
+                        return
                     }
-            })
+                    DispatchQueue.toMain {
+                        self?.output.showLoaded(eulaHTML: content)
+                    }
+                    
+                case .failed(let error):
+                    self?.output.failLoadEula(errorString: error.description)
+                    assertionFailure("Failed move to Terms Description ")
+                }
+            }
         }
     }
 }

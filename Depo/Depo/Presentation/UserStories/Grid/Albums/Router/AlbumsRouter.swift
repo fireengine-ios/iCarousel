@@ -8,7 +8,7 @@
 
 protocol AlbumRouterInput {
     func onCreateStory()
-    func onCreateAlbum()
+    func onCreateAlbum(moduleOutput: SelectNameModuleOutput?)
 }
 
 final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
@@ -32,11 +32,12 @@ final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
     }
     
     func onCreateStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
-    func onCreateAlbum() {
-        let controller = router.createNewAlbum()
+    func onCreateAlbum(moduleOutput: SelectNameModuleOutput?) {
+        let controller = router.createNewAlbum(moduleOutput: moduleOutput)
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }

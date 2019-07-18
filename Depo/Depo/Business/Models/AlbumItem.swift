@@ -12,14 +12,14 @@ import UIKit
 class AlbumItem: BaseDataSourceItem {
     
     var imageCount: Int?
-    
     let videoCount: Int?
-    
     let audioCount: Int?
-    
     var preview: Item?
-    
     let readOnly: Bool?
+    
+    var allContentCount: Int {
+        return (imageCount ?? 0) + (videoCount ?? 0) + (audioCount ?? 0)
+    }
     
     init (remote: AlbumServiceResponse, previewIconSize: PreviewIconSize = .medium) {
 

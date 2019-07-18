@@ -7,7 +7,7 @@
 //
 
 class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
-
+    
     weak var output: TermsAndServicesInteractorOutput!
     private let eulaService = EulaService()
     
@@ -18,7 +18,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     var isFromLogin = false
     var isFromRegistration = false
     
-    var eula: Eula?
+    var eula: EULAResponse?
     
     var phoneNumber: String?
     
@@ -31,21 +31,24 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func loadTermsAndUses() {
-        eulaService.eulaGet(sucess: { [weak self] eula in
-            guard let `self` = self, let eulaR = eula as? Eula else {
-                return
+        
+        DispatchQueue.toBackground { [weak self] in
+            self?.eulaService.eulaGet { [weak self] response in
+                switch response {
+                case .success(let eulaContent):
+                    self?.eula = eulaContent
+                    self?.dataStorage.signUpResponse.eulaId = eulaContent.id
+                    DispatchQueue.toMain {
+                        self?.output.showLoadedTermsAndUses(eula: eulaContent.content ?? "")
+                    }
+                case .failed(let error):
+                    DispatchQueue.toMain {
+                        self?.output.failLoadTermsAndUses(errorString: error.localizedDescription)
+                    }
+                    assertionFailure("Failed move to Terms Description ")
+                }
             }
-            self.eula = eulaR
-            self.dataStorage.signUpResponse.eulaId = eulaR.id
-            
-            DispatchQueue.toMain {
-                self.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
-            }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.toMain {
-                self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
-            }
-        })
+        }
     }
     
     func applyEula() {
@@ -53,18 +56,18 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             assertionFailure()
             return
         }
-    
+        
         eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                self?.output.applyEulaFaild(errorResponce: errorResponce)
-            }
+            }, fail: { [weak self] errorResponce in
+                DispatchQueue.main.async {
+                    self?.output.applyEulaFaild(errorResponce: errorResponce)
+                }
         })
     }
-
+    
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
@@ -78,12 +81,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     var signUpSuccessResponse: SignUpSuccessResponse {
-    
+        
         return dataStorage.signUpResponse
     }
     
     var userInfo: RegistrationUserInfoModel {
-    
+        
         return dataStorage.signUpUserInfo
     }
     

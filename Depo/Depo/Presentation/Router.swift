@@ -179,8 +179,8 @@ class RouterVC: NSObject {
             var index: Int? = nil
             
             for (i, viewController) in viewControllers.enumerated() {
-                if viewController is CreateStoryPhotoSelectionViewController
-                    || viewController is CreateStoryPhotosOrderViewController {
+                if viewController is CreateStorySelectionController
+                    || viewController is CreateStoryViewController {
                     index = i
                     break
                 }
@@ -531,19 +531,9 @@ class RouterVC: NSObject {
     
     // MARK: Create Album
     
-    func createNewAlbum() -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName)
+    func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
+        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
-    }
-    
-    // MARK: CreateStory name
-    
-    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
-        controller.output.items = items
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
     
     // MARK: - SearchView
@@ -557,33 +547,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    // MARK: CreateStory photos selection
-    
-    func photoSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
-        return controller
-    }
-    
-    func favoritePhotoSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeFavoritePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
-        return controller
-    }
-    
-    
     // MARK: CreateStory audio selection
     
-    func audioSelection(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
-        return controller
-    }
-    
-    
-    // MARK: CreateStory photos order 
-    
-    func photosOrder(forStory story: PhotoStory) -> UIViewController {
-        let controller = CreateStoryPhotosOrderModuleInitializer.initializeViewController(with: "CreateStoryPhotosOrderViewController", story: story)
-        return controller
+    func audioSelection(forStory story: PhotoStory) -> CreateStoryAudioSelectionItemViewController {
+        let viewController = CreateStoryAudioSelectionItemViewController(forStory: story)
+        return viewController
     }
     
     // MARK: CreateStory preview
@@ -768,12 +736,17 @@ class RouterVC: NSObject {
         return containerController
     }
     
-
     // MARK: Help and support
     
     var helpAndSupport: UIViewController? {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
+    }
+    
+    // MARK: Terms and policy
+    
+    var termsAndPolicy: UIViewController? {
+        return TermsAndPolicyViewController.initFromNib()
     }
     
     // MARK: Turkcell Security
@@ -799,6 +772,12 @@ class RouterVC: NSObject {
     
     var connectedAccounts: UIViewController? {
         return ConnectedAccountsViewController.initFromNib()
+    }
+    
+    // MARK: - Permissions
+    
+    var permissions: UIViewController {
+        return PermissionViewController()
     }
     
     // MARK: Face image
@@ -917,5 +896,13 @@ class RouterVC: NSObject {
     
     var supportFormController: UIViewController {
         return SupportFormController()
+    }
+    
+    func createStory(navTitle: String) -> UIViewController {
+        return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
+    }
+    
+    func createStory(items: [Item]) -> UIViewController {
+        return CreateStoryViewController(images: items)
     }
 }

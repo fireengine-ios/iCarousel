@@ -8,7 +8,7 @@
 
 import Foundation
 import SDWebImage
-import MetalPetal
+//import MetalPetal
 
 typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ shouldBeBlurred: Bool, _ uuid: String?)->Void
 
@@ -28,7 +28,7 @@ final class CellImageManager {
         return queue
     }()
     
-    private static let blurService = BlurService()
+//    private static let blurService = BlurService()
     
     static func instance(by url: URL?) -> CellImageManager? {
         guard let url = url else {
@@ -173,74 +173,74 @@ extension CellImageManager {
 }
 
 
-private final class BlurService {
-    
-    private static let blurQueue = DispatchQueue(label: DispatchQueueLabels.blurServiceQueue)
-    private var currentContext: MTIContext?
-    private func getCurrentContext() -> MTIContext? {
-        guard currentContext == nil else {
-            return currentContext
-        }
-
-        let options = MTIContextOptions()
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            return nil
-        }
-
-        currentContext = try? MTIContext(device: device, options: options)
-        return currentContext
-    }
-    
-    func blur(image: UIImage, radiusInPixels: Float = 2.0, completion: @escaping (_ image: UIImage?) -> Void) {
-        #if targetEnvironment(simulator)
-        completion(image)
-        #endif
-        
-        if MTIContext.defaultMetalDeviceSupportsMPS {
-            completion(blurWithMetal(image: image, radiusInPixels: radiusInPixels))
-        } else {
-            blurWithGPU(image: image, radiusInPixels: radiusInPixels, completion: completion)
-        }
-    }
-    
-    func blurWithMetal(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
-        guard let cgImage = image.cgImage,
-            let context = getCurrentContext()
-        else {
-            return nil
-        }
-        
-        let inputImage = MTIImage(cgImage: cgImage).unpremultiplyingAlpha()
-        
-        let filter = MTIMPSGaussianBlurFilter()
-        filter.radius = radiusInPixels
-        filter.inputImage = inputImage
-        
-        guard let filteredImage = filter.outputImage else {
-            return nil
-        }
-        
-        do {
-            let cgImage = try context.makeCGImage(from: filteredImage)
-            return UIImage(cgImage: cgImage)
-        } catch {
-            return nil
-        }
-    }
-    
-    func blurWithGPU(image: UIImage, radiusInPixels: Float = 2.0, completion: @escaping (_ image: UIImage?) -> Void) {
-        DispatchQueue.main.async {
-            //fix crash - https://developer.apple.com/library/archive/qa/qa1766/_index.html
-            guard UIApplication.shared.applicationState == .active else {
-                completion(image)
-                return
-            }
-            
-            BlurService.blurQueue.async {
-                let filter = GPUImageGaussianBlurFilter()
-                filter.blurRadiusInPixels = CGFloat(radiusInPixels)
-                completion(filter.image(byFilteringImage: image))
-            }
-        }
-    }
-}
+//private final class BlurService {
+//    
+//    private static let blurQueue = DispatchQueue(label: DispatchQueueLabels.blurServiceQueue)
+//    private var currentContext: MTIContext?
+//    private func getCurrentContext() -> MTIContext? {
+//        guard currentContext == nil else {
+//            return currentContext
+//        }
+//
+//        let options = MTIContextOptions()
+//        guard let device = MTLCreateSystemDefaultDevice() else {
+//            return nil
+//        }
+//
+//        currentContext = try? MTIContext(device: device, options: options)
+//        return currentContext
+//    }
+//    
+//    func blur(image: UIImage, radiusInPixels: Float = 2.0, completion: @escaping (_ image: UIImage?) -> Void) {
+//        #if targetEnvironment(simulator)
+//        completion(image)
+//        #endif
+//        
+//        if MTIContext.defaultMetalDeviceSupportsMPS {
+//            completion(blurWithMetal(image: image, radiusInPixels: radiusInPixels))
+//        } else {
+//            blurWithGPU(image: image, radiusInPixels: radiusInPixels, completion: completion)
+//        }
+//    }
+//    
+//    func blurWithMetal(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
+//        guard let cgImage = image.cgImage,
+//            let context = getCurrentContext()
+//        else {
+//            return nil
+//        }
+//        
+//        let inputImage = MTIImage(cgImage: cgImage).unpremultiplyingAlpha()
+//        
+//        let filter = MTIMPSGaussianBlurFilter()
+//        filter.radius = radiusInPixels
+//        filter.inputImage = inputImage
+//        
+//        guard let filteredImage = filter.outputImage else {
+//            return nil
+//        }
+//        
+//        do {
+//            let cgImage = try context.makeCGImage(from: filteredImage)
+//            return UIImage(cgImage: cgImage)
+//        } catch {
+//            return nil
+//        }
+//    }
+//    
+//    func blurWithGPU(image: UIImage, radiusInPixels: Float = 2.0, completion: @escaping (_ image: UIImage?) -> Void) {
+//        DispatchQueue.main.async {
+//            //fix crash - https://developer.apple.com/library/archive/qa/qa1766/_index.html
+//            guard UIApplication.shared.applicationState == .active else {
+//                completion(image)
+//                return
+//            }
+//            
+//            BlurService.blurQueue.async {
+//                let filter = GPUImageGaussianBlurFilter()
+//                filter.blurRadiusInPixels = CGFloat(radiusInPixels)
+//                completion(filter.image(byFilteringImage: image))
+//            }
+//        }
+//    }
+//}

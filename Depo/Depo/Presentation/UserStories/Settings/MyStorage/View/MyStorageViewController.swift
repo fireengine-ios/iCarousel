@@ -60,11 +60,31 @@ final class MyStorageViewController: BaseViewController {
             storageUsageProgressView.set(progress: 0, withAnimation: false)
         }
     }
+        
+    @IBOutlet private weak var restorePurchasesButton: UIButton! {
+        didSet {
+            restorePurchasesButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 11, bottom: 6, right: 11)
+            restorePurchasesButton.setTitle(TextConstants.restorePurchasesButton, for: .normal)
+            restorePurchasesButton.setTitleColor(.lrTealish, for: .normal)
+            restorePurchasesButton.titleLabel?.font = .TurkcellSaturaDemFont(size: 14)
+            restorePurchasesButton.adjustsFontSizeToFitWidth()
+            restorePurchasesButton.backgroundColor = .clear
+            restorePurchasesButton.clipsToBounds = true
+            restorePurchasesButton.layer.cornerRadius = restorePurchasesButton.bounds.height * 0.5
+            restorePurchasesButton.layer.borderColor = UIColor.lrTealish.cgColor
+            restorePurchasesButton.layer.borderWidth = 2
+        }
+    }
     
-    private lazy var restoreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+    @IBOutlet private weak var restoreDescriptionLabel: UILabel! {
+        didSet {
+            restoreDescriptionLabel.attributedText = NSAttributedString.attributedText(text: TextConstants.restorePurchasesInfo, word: TextConstants.attributedRestoreWord, textFont: .TurkcellSaturaFont(size: 15), wordFont: .TurkcellSaturaDemFont(size: 15))
+            restoreDescriptionLabel.numberOfLines = 0
+        }
+    }
     
     // MARK: - View lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,7 +98,15 @@ final class MyStorageViewController: BaseViewController {
         output.viewDidAppear()
     }
     
-    //MARK: UtilityMethods
+    // MARK: - IBActions
+    
+    @IBAction private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
+    }
+    
+    // MARK: - UtilityMethods
+    
     private func setup() {
         setTitle(withString: output.title)
 
@@ -106,16 +134,6 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadCollectionView() {
         collectionView.reloadData()
-    }
-    
-    func showRestoreButton() {
-        //IF THE USER NON CELL USER
-        navigationItem.rightBarButtonItem = restoreButton
-    }
-    
-    @objc private func restorePurhases() {
-        startActivityIndicator()
-        output.restorePurchasesPressed()
     }
 }
 

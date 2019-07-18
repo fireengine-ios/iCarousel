@@ -276,10 +276,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                                 fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
                                 
-                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject,
+                                    let info = self?.compactInfoAboutAsset(asset: asset), info.isValid {
+                                    
                                     item.preview = WrapData(asset: asset)
+                                    albums.append(item)
                                 }
-                                albums.append(item)
                             }
                             dispatchGroup.leave()
                         }
@@ -444,8 +446,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
                     success?()
-                }
-                if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
+                } else if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
                     self?.merge(asset: assetIdentifier, with: item, success: success, fail: fail)
                 }
             } else {

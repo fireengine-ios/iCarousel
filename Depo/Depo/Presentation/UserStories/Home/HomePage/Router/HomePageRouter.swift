@@ -47,7 +47,8 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func moveToCreationStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
     func moveToSearchScreen(output: UIViewController?) {

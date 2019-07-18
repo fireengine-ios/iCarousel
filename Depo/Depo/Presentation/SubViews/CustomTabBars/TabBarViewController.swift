@@ -704,9 +704,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         case albumBtn:
             action = .createAlbum
         case uploadFromLifebox:
-            action = .uploadFromLifeBox
+            action = .uploadFromApp
         case uploadFromLifeboxFavorites:
-            action = .uploadFromLifeboxFavorites
+            action = .uploadFromAppFavorites
         default:
             return
         }
@@ -803,9 +803,9 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .createStory:
 //            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.click)) //FE-55
-            let isFavorites = router.isOnFavoritesView()
-            router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
-            
+            let controller = router.createStory(navTitle: TextConstants.createStory)
+            router.pushViewController(viewController: controller)
+
         case .upload:
             guard !checkReadOnlyPermission() else { return }
             
@@ -819,7 +819,7 @@ extension TabBarViewController: TabBarActionHandler {
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
-        case .uploadFromLifeBox:
+        case .uploadFromApp:
             guard !checkReadOnlyPermission() else {
                 return
             }
@@ -836,7 +836,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
             
-        case .uploadFromLifeboxFavorites:
+        case .uploadFromAppFavorites:
             guard !checkReadOnlyPermission() else {
                 return
             }

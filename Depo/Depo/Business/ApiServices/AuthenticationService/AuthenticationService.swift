@@ -105,14 +105,22 @@ class SignUpUser: BaseRequestParametrs {
     let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
-    
+    var brandType: String {
+        #if LIFEDRIVE 
+            return "LIFEDRIVE"
+        #else
+            return "LIFEBOX"
+        #endif
+    }
+
     override var requestParametrs: Any {
         return [
             LbRequestkeys.email: mail,
             LbRequestkeys.phoneNumber: phone,
             LbRequestkeys.password: password,
             LbRequestkeys.language: Device.locale,
-            LbRequestkeys.sendOtp: sendOtp
+            LbRequestkeys.sendOtp: sendOtp,
+            LbRequestkeys.brandType: brandType
         ]
     }
 
