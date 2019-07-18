@@ -445,7 +445,6 @@
 "Album Card" = "Album-Karte";
 "We have created an album for you." = "Wir haben ein Album für dich erstellt.";
 "Save Album" = "Album speichern";
-"You can not share empty album" = "";
 "Movie" = "Film";
 "Did you like this story that we created for you?" = "Hat dir diese Geschichte gefallen, die wir für dich erstellt haben?";
 "Save This Story" = "Speichern Sie diese Geschichte";
@@ -980,9 +979,7 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "";
-"etk_permission_description" = "";
-"global_permission_title_label" = "";
-"global_permission_description" = "";
+"etk_permissiom_description" = "";
 "NSCameraUsageDescription" = "Zum Aufnehmen von Bildern mit Ihrer Kamera und zum Sichern dieser Bilder in der Lifebox benötigen Sie Ihre Kamera-Zugriffsberechtigung";
 "restore_purchases" = "";
 "restore_purchases_info" = "";
@@ -995,3 +992,7 @@
 "create_story_pop_up_title" = "";
 "create_story_pop_up_message" = "";
 "create_story_path_to_story" = "";
+"You can not share empty album" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
