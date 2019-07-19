@@ -35,4 +35,18 @@ class PhoneVereficationRouter: PhoneVereficationRouterInput {
    
         RouterVC().presentViewController(controller: popUp)
     }
+    
+    func popToLogin() {
+        let popUp = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: TextConstants.twoFAInvalidSessionErrorMessage,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok) { [weak self] controller in
+            controller.close { [weak self] in
+                self?.router.popTwoFactorAuth()
+            }
+        }
+        
+        router.presentViewController(controller: popUp)
+    }
+    
 }

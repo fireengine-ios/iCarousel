@@ -87,7 +87,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         completeAsyncOperationEnableScreen()
         asyncOperationSuccess()
         view.setupButtonsInitialState()
-        view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
+        view.setupTimer(withRemainingTime: interactor.remainingTimeInSeconds)
     }
     
     func succesLogin() {

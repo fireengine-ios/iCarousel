@@ -430,6 +430,25 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
     }
 }
 
+final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let remainingTimeInSeconds = "remainingTimeInSeconds"
+        static let expectedInputLength = "expectedInputLength"
+    }
+    
+    var status: String?
+    var remainingTimeInSeconds: Int?
+    var expectedInputLength: Int?
+
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
+        expectedInputLength = json?[ResponseKey.expectedInputLength].int
+    }
+}
+
 /// MAYBE WILL BE USED
 //class InternetDataUsageResponse: ObjectRequestResponse {
 //

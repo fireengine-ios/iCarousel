@@ -82,6 +82,9 @@ struct RouteRequests {
     static let mailVerefication = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
