@@ -142,7 +142,7 @@ class EulaService: BaseRequestService {
     func getGlobalPermAuth(for phoneNumber: String?, handler: @escaping ResponseBool) {
         debugLog("EulaService getGlobalPermissionAuth")
         
-        let params: Parameters?
+        let params: Parameters
         if let phoneNumber = phoneNumber {
             params = ["phoneNumber": phoneNumber]
         } else {
