@@ -1004,3 +1004,7 @@
 "create_story_pop_up_title" = "";
 "create_story_pop_up_message" = "";
 "create_story_path_to_story" = "";
+"You can not share empty album" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";

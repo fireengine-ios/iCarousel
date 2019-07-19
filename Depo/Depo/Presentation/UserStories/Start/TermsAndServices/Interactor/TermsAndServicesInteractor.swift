@@ -25,8 +25,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     var etkAuth: Bool? {
         didSet {
             /// if etkAuth changes, i have to update dataStorage because it will be passed to the next screen where this value will be needed
-            let isEtkAuth = self.etkAuth == true
-            dataStorage.signUpResponse.etkAuth = isEtkAuth
+            dataStorage.signUpResponse.etkAuth = etkAuth
+        }
+    }
+    
+    var globalPermAuth: Bool? {
+        didSet {
+            dataStorage.signUpResponse.globalPermAuth = globalPermAuth
         }
     }
     
@@ -57,13 +62,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
-            }, fail: { [weak self] errorResponce in
+            }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.applyEulaFaild(errorResponce: errorResponce)
+                    self?.output.applyEulaFailed(errorResponse: errorResponse)
                 }
         })
     }
@@ -99,7 +104,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func checkEtk() {
-        /// phoneNumber will be exists only for signup
+        /// phoneNumber will exist only for signup
         checkEtk(for: phoneNumber)
     }
     
@@ -120,6 +125,30 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     }
                 case .failed(_):
                     self.output.setupEtk(isShowEtk: false)
+                }
+            }
+        }
+    }
+    
+    func checkGlobalPerm() {
+        checkGlobalPerm(for: phoneNumber)
+    }
+    
+    private func checkGlobalPerm(for phoneNumber: String?) {
+        eulaService.getGlobalPermAuth(for: phoneNumber) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                switch result {
+                case .success(let isShowGlobalPerm):
+                    self.output.setupGlobalPerm(isShowGlobalPerm: isShowGlobalPerm)
+                    
+                    if isShowGlobalPerm {
+                        self.globalPermAuth = false
+                    }
+                case .failed(_):
+                    self.output.setupGlobalPerm(isShowGlobalPerm: false)
                 }
             }
         }

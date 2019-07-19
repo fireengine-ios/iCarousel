@@ -30,6 +30,7 @@ struct LbRequestkeys {
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"
+    static let globalPermAuth = "globalPermAuth"
 }
 
 struct LbResponseKey {

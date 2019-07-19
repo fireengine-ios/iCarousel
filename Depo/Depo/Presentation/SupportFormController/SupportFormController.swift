@@ -183,12 +183,14 @@ final class SupportFormController: ViewController, KeyboardHandler {
         
         if problems.isEmpty {
             let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+            let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
+            
             let emailBody = problem + "\n\n" +
                 String(format: TextConstants.supportFormEmailBody,
                        name,
                        surname,
                        email,
-                       "\(phoneCode)\(phoneNumber)",
+                       fullPhoneNumber,
                         versionString,
                         CoreTelephonyService().operatorName() ?? "",
                         UIDevice.current.modelName,
@@ -196,8 +198,15 @@ final class SupportFormController: ViewController, KeyboardHandler {
                         Device.locale,
                         ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
+            let emailSubject: String
+            if phoneNumber.isEmpty {
+                emailSubject = subject
+            } else {
+                emailSubject = "\(fullPhoneNumber) - \(subject)"
+            }
+            
             Mail.shared().sendEmail(emailBody: emailBody,
-                                    subject: subject,
+                                    subject: emailSubject,
                                     emails: [TextConstants.NotLocalized.feedbackEmail], success: {
                                         RouterVC().popViewController()
             }, fail: { error in

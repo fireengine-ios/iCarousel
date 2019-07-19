@@ -21,8 +21,7 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToLandingPages(isTurkCell: Bool) {
-        let landingVC = LandingPageViewController(nibName: "LandingPageViewController", bundle: nil)
-        landingVC.isTurkcell = isTurkCell
+        let landingVC = LandingPageViewController(isTurkcell: isTurkCell)
         router.setNavigationController(controller: landingVC)
     }
     
