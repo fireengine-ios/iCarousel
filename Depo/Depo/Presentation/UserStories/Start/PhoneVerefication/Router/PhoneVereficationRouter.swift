@@ -7,33 +7,36 @@
 //
 
 class PhoneVereficationRouter: PhoneVereficationRouterInput {
+    private lazy var router = RouterVC()
     
     private func goToSplash() {
-        AuthenticationService().logout(success: {
+        AuthenticationService().logout(success: { [weak self] in
             if let splash = RouterVC().splash {
-                RouterVC().pushViewController(viewController: splash)
+                self?.router.pushViewController(viewController: splash)
             }
         })
     }
     
     func goAutoSync() {
-        let router = RouterVC()
         router.pushViewController(viewController: router.synchronyseScreen)
     }
     
     func presentErrorPopUp(with message: String) {
         let controller = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: message, image: .error, buttonTitle: TextConstants.ok)
-        RouterVC().presentViewController(controller: controller)
+        router.presentViewController(controller: controller)
     }
     
     func showRedirectToSplash() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.authificateCaptchaRequired, image: .none, buttonTitle: TextConstants.ok, action: { vc in
+        let popUp = PopUpController.with(title: nil,
+                                         message: TextConstants.authificateCaptchaRequired,
+                                         image: .none,
+                                         buttonTitle: TextConstants.ok, action: { vc in
             vc.close(completion: { [weak self] in
                 self?.goToSplash()
             })
         })
    
-        RouterVC().presentViewController(controller: popUp)
+        router.presentViewController(controller: popUp)
     }
     
     func popToLogin() {

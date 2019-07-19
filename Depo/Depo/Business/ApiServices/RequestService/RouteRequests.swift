@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.preProduction
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -29,7 +29,7 @@ struct RouteRequests {
         }
     }()
     
-    static let baseUrl: URL =  URL(string: "\(baseShortUrlString)api/")!
+    static let baseUrl: URL = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -66,7 +66,7 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
