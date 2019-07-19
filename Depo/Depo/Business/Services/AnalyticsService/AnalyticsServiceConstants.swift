@@ -293,60 +293,60 @@ enum AnalyticsAppScreens {
     }
 }
 
-enum AnalyticsPackageProductParametrs {
-    case itemName
-    case itemID
-    case price
-    case itemBrand
-    case itemCategory
-    case itemVariant
-    case index
-    case quantity
-    
-    var text: String {
-        switch self {
-        case .itemName:
-            return "AnalyticsParameterItemName"
-        case .itemID:
-            return "AnalyticsParameterItemID"
-        case .price:
-            return "AnalyticsParameterPrice"
-        case .itemBrand:
-            return "AnalyticsParameterItemBrand"
-        case .itemCategory:
-            return "AnalyticsParameterItemCategory"
-        case .itemVariant:
-            return "AnalyticsParameterItemVariant"
-        case .index:
-            return "AnalyticsParameterIndex"
-        case .quantity:
-            return "AnalyticsParameterQuantity"
-        }
-    }
-}
+//enum AnalyticsPackageProductParametrs {
+//    case itemName
+//    case itemID
+//    case price
+//    case itemBrand
+//    case itemCategory
+//    case itemVariant
+//    case index
+//    case quantity
+//
+//    var text: String {
+//        switch self {
+//        case .itemName:
+//            return "AnalyticsParameterItemName"
+//        case .itemID:
+//            return "AnalyticsParameterItemID"
+//        case .price:
+//            return "AnalyticsParameterPrice"
+//        case .itemBrand:
+//            return "AnalyticsParameterItemBrand"
+//        case .itemCategory:
+//            return "AnalyticsParameterItemCategory"
+//        case .itemVariant:
+//            return "AnalyticsParameterItemVariant"
+//        case .index:
+//            return "AnalyticsParameterIndex"
+//        case .quantity:
+//            return "AnalyticsParameterQuantity"
+//        }
+//    }
+//}
 
 enum AnalyticsPackageEcommerce {
     case items
-    case itemList
-    case transactionID
-    case tax
-    case priceValue
-    case shipping
+//    case itemList
+//    case transactionID
+//    case tax
+//    case priceValue
+//    case shipping
     
     var text: String {
         switch self {
         case .items:
             return "items"
-        case .itemList:
-            return "AnalyticsParameterItemList"
-        case .transactionID:
-            return "AnalyticsParameterTransactionID"
-        case .tax:
-            return "AnalyticsParameterTax"
-        case .priceValue:
-            return "AnalyticsParameterValue"
-        case .shipping:
-            return "AnalyticsParameterShipping"
+//        case .itemList:
+//            return "AnalyticsParameterItemList"
+//        case .transactionID:
+//            return "AnalyticsParameterTransactionID"
+//        case .tax:
+//            return "AnalyticsParameterTax"
+//        case .priceValue:
+//            return "AnalyticsParameterValue"
+//        case .shipping:
+//            return "AnalyticsParameterShipping"
         }
     }
 }
