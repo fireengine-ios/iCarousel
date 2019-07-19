@@ -8,50 +8,65 @@
 
 import UIKit
 
-enum ReasonForExtraAuth: String {
+enum TwoFAChallengingReason: String {
     case accountSetting = "ACCOUNT_SETTING"
     case newDevice = "NEW_DEVICE"
 }
 
-enum AvailableTypesOfAuth: String {
+enum TwoFAChallengeType: String {
     case phone = "EMAIL_OTP"
     case email = "SMS_OTP"
+    
+    var typeDescription:String {
+        switch self {
+        case .phone:
+            return TextConstants.twoFactorAuthenticationPhoneNumberCell
+        case .email:
+            return TextConstants.twoFactorAuthenticationEmailCell
+        }
+    }
 }
 
-protocol TwoFactorAuthenticationViewControllerDelegate {
-    func didSelectType(type: AvailableTypesOfAuth)
+struct TwoFAChallengeModel {
+    let challengeType: TwoFAChallengeType
+    let typeDescription: String
+    let userData: String
+    let token: String
 }
 
 final class TwoFactorAuthenticationViewController: ViewController, NibInit {
-    
-    private struct AuthType {
-        let type: AvailableTypesOfAuth
-        let typeDescription: String
-        let userData: String
-    }
     
     @IBOutlet private var designer: TwoFactorAuthenticationDesigner!
     @IBOutlet private weak var reasonOfAuthLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     
-    private var availableAuthTypes: [AuthType] = [] {
+    private var availableChallenges: [TwoFAChallengeModel] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     
     private var twoFactorAuthResponse: TwoFactorAuthErrorResponse?
-    private var reasonForAuth: ReasonForExtraAuth?
+    private var challengingReason: TwoFAChallengingReason?
     private var phoneNumber: String?
     private var email: String?
     
-    private var selectedTypeOfAuth: AuthType?
+    private var selectedChallenge: TwoFAChallengeModel?
     private var selectedCellIndex: Int?
-    var delegate: TwoFactorAuthenticationViewControllerDelegate?
+    
+    private lazy var activityManager = ActivityIndicatorManager()
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var router = RouterVC()
+
+    //MARK: lifecycle
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
     
     init(response: TwoFactorAuthErrorResponse) {
         self.twoFactorAuthResponse = response
-        self.reasonForAuth = response.reason
+        self.challengingReason = response.reason
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,35 +78,32 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createAvailableTypesArray(availableTypes: twoFactorAuthResponse?.challengeTypes)
-        setReasonDescriptionLabel()
+        
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         configureNavBarActions()
     }
     
-    private func configureNavBarActions() {
-        navigationBarWithGradientStyle()
-        setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+    //MARK: Utility methods
+    private func setup() {
+        createAvailableTypesArray(availableTypes: twoFactorAuthResponse?.challengeTypes)
+        setReasonDescriptionLabel()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
-                                                           target: self,
-                                                           selector: #selector(onBackButton))
+        activityManager.delegate = self
     }
     
-    @objc private func onBackButton() {
-        hideViewController()
-    }
-    
-    private func hideViewController() {
-        navigationController?.popViewController(animated: true)
+    private func configureNavBarActions() {
+        setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
+
+        navigationBarWithGradientStyle()
     }
     
     private func setReasonDescriptionLabel() {
-        if let reason = reasonForAuth {
+        if let reason = challengingReason {
             switch reason {
             case .accountSetting:
                 reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationAccountSettingReason
@@ -102,27 +114,26 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {
-        
-        guard let types = availableTypes else {
+        guard let types = availableTypes, let token = twoFactorAuthResponse?.twoFAToken else {
             assertionFailure()
             return
         }
         
         for item in types {
-            switch item.type {
-            case .phone?:
-                let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
-                availableAuthTypes.append(phoneType)
-            case .email?:
-                let phoneType = AuthType(type: .phone, typeDescription: TextConstants.twoFactorAuthenticationPhoneNumberCell, userData: item.displayName ?? "")
-                availableAuthTypes.append(phoneType)
-            default:
-                assertionFailure()
+            guard let type = item.type else {
+                assertionFailure("2FA type is nil")
+                return
             }
+            
+            let authType = TwoFAChallengeModel(challengeType: type,
+                                    typeDescription: type.typeDescription,
+                                    userData: item.displayName ?? "",
+                                    token: token)
+            availableChallenges.append(authType)
         }
     
-        if !availableAuthTypes.isEmpty {
-            selectedCellIndex = availableAuthTypes.startIndex
+        if !availableChallenges.isEmpty {
+            selectedCellIndex = availableChallenges.startIndex
             updateCellsAfterSelection()
         }
     }
@@ -138,6 +149,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
             return
         }
         
+        selectedChallenge = availableChallenges[safe: selectedCellIndex]
+        
         cell.setSelected(selected: true)
         
         /// deselect cells
@@ -151,17 +164,46 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         return selectedCellIndex == index
     }
     
-    @IBAction func sendButtonTapped(_ sender: Any) {
-        if let type = selectedTypeOfAuth?.type {
-            delegate?.didSelectType(type: type)
+    private func openTwoFactorChallenge(with otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
+        let controller = router.twoFactorChallenge(otpParams: otpParams, challenge: challenge)
+        router.pushViewController(viewController: controller)
+    }
+    
+    private func prepareToTwoFactorChallenge(challenge: TwoFAChallengeModel) {
+        startActivityIndicator()
+        authenticationService.twoFactorAuthChallenge(token: challenge.token,
+                                                     authenticatorId: challenge.userData,
+                                                     type: challenge.challengeType.rawValue) { [weak self] response in
+            self?.stopActivityIndicator()
+            switch response {
+            case .success(let model):
+                DispatchQueue.main.async {
+                    self?.openTwoFactorChallenge(with: model, challenge: challenge)
+                }
+                
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+                
+            }
         }
-        hideViewController()
+    }
+    
+    //MARK: Action
+    @IBAction func sendButtonTapped(_ sender: Any) {
+        guard let challenge = self.selectedChallenge else {
+            assertionFailure()
+            return
+        }
+        
+        prepareToTwoFactorChallenge(challenge: challenge)
     }
 }
 
+//MARK: - UITableViewDataSource
 extension TwoFactorAuthenticationViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableAuthTypes.count
+        return availableChallenges.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -169,6 +211,7 @@ extension TwoFactorAuthenticationViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
 extension TwoFactorAuthenticationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -181,21 +224,25 @@ extension TwoFactorAuthenticationViewController: UITableViewDelegate {
             assertionFailure()
             return
         }
+        
         cell.selectionStyle = .none
         cell.delegate = self
         cell.setCellIndexPath(index: indexPath.row)
         
-        let item = availableAuthTypes[indexPath.row]
+        let item = availableChallenges[indexPath.row]
         cell.setupCell(typeDescription: item.typeDescription,
-                       userData: item.userData,
-                       isNeedToShowSeparator: indexPath.row == availableAuthTypes.startIndex)
+                       userData: item.userData)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectButtonPressed(cell: indexPath.row)
     }
 }
 
+//MARK: - TwoFactorAuthenticationCellDelegate
 extension TwoFactorAuthenticationViewController: TwoFactorAuthenticationCellDelegate {
     
     func selectButtonPressed(cell index: Int) {
-        
         guard index != selectedCellIndex else {
             return
         }
@@ -205,4 +252,14 @@ extension TwoFactorAuthenticationViewController: TwoFactorAuthenticationCellDele
     }
 }
 
-
+//MARK: - ActivityIndicator
+extension TwoFactorAuthenticationViewController: ActivityIndicator {
+    
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+}

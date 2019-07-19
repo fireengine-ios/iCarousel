@@ -160,6 +160,7 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
         completeAsyncOperationEnableScreen()
+        isPresenting = true
         router.goToTwoFactorAuthViewController(response: response)
     }
     
