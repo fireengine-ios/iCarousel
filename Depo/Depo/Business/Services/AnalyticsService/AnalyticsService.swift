@@ -89,16 +89,18 @@ final class AnalyticsService {
             return
         }
         
+        let currency = offer.currency ?? "TRY"
+        
         if name.contains("500") {
-            logPurchase(event: .purchaseTurkcell500, price: String(price))
+            logPurchase(event: .purchaseTurkcell500, price: String(price), currency: currency)
         } else if name.contains("50") {
-            logPurchase(event: .purchaseTurkcell50, price: String(price))
+            logPurchase(event: .purchaseTurkcell50, price: String(price), currency: currency)
         } else if name.contains("2.5") || name.contains("2,5") {
-            logPurchase(event: .purchaseTurkcell2500, price: String(price))
+            logPurchase(event: .purchaseTurkcell2500, price: String(price), currency: currency)
         }
     }
 
-    private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
+    private func logPurchase(event: AnalyticsEvent, price: String, currency: String) {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
         if let price = Double(price) {
