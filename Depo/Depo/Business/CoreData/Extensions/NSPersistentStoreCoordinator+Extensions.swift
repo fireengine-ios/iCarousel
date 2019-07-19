@@ -25,8 +25,8 @@ extension NSPersistentStoreCoordinator {
         do {
             let model = try NSPersistentStoreCoordinator.managedObjectModel(name: name)
             self.init(managedObjectModel: model)
-        }
-        catch {
+        } catch {
+            debugLog("failed NSPersistentStoreCoordinator init: \(error.localizedDescription)")
             throw CoordinatorError.modelCreationError
         }
     }
@@ -57,6 +57,7 @@ extension NSPersistentStoreCoordinator {
         let coordinator = try NSPersistentStoreCoordinator(name: modelName)
         
         guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            debugLog("failed urls(for: .documentDirectory")
             throw CoordinatorError.storePathNotFound
         }
         
@@ -66,6 +67,7 @@ extension NSPersistentStoreCoordinator {
                            NSInferMappingModelAutomaticallyOption: false]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch {
+            debugLog("failed addPersistentStore: \(error.localizedDescription)")
             throw error
         }
         

@@ -36,6 +36,7 @@ final class CoreDataStack: NSObject {
     
     @objc func managedObjectContextDidSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else {
+            assertionFailure()
             return
         }
         if context != mainContext, context.parent == mainContext {
@@ -50,11 +51,12 @@ final class CoreDataStack: NSObject {
         
         let loadDefaultStore = {
             container.loadPersistentStores { (storeDescription, error) in
-                print("CoreData: Inited \(storeDescription)")
+                debugLog("CoreData loadPersistentStores \(storeDescription)")
                 if let error = error {
-                    print("CoreData: Unresolved error \(error)")
+                    debugLog("CoreData loadPersistentStores error \(error)")
                     return
                 }
+                assertionFailure()
             }
         }
         
@@ -81,7 +83,8 @@ final class CoreDataStack: NSObject {
         do {
             return try NSPersistentStoreCoordinator.coordinator(modelName: CoreDataStack.modelName, persistentStoreName: CoreDataStack.persistentStoreName)
         } catch {
-            print("CoreData: Unresolved error \(error)")
+            debugLog("CoreData: Unresolved error \(error)")
+            assertionFailure()
         }
         return nil
     }()
