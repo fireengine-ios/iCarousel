@@ -29,7 +29,7 @@ struct RouteRequests {
         }
     }()
     
-    static let baseUrl: URL =  URL(string: "\(baseShortUrlString)api/")!
+    static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -87,6 +87,7 @@ struct RouteRequests {
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"

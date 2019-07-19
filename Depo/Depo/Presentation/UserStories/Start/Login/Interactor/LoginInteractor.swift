@@ -267,19 +267,28 @@ class LoginInteractor: LoginInteractorInput {
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
+//    func approveEULA(eulaId: Int, etkAuth: Bool, globalPermAuth: Bool) {
+//        eulaService.eulaApprove(eulaId: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
+//            //TODO:
+//        }) { [weak self] failResponse in {
+//            //TODO:
+//            }
+//        }
+//    }
+    
     func checkEULA() {
-        eulaService.eulaCheck(success: { [weak self] succesResponce in
+        eulaService.eulaCheck(success: { [weak self] successResponse in
             DispatchQueue.main.async {
                 self?.output?.onSuccessEULA()
             }
-        }) { [weak self] failResponce in
+        }) { [weak self] failResponse in
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
-                if failResponce.description == "EULA_APPROVE_REQUIRED" {
+                if failResponse.description == "EULA_APPROVE_REQUIRED" {
                     self?.output?.onFailEULA()
                 } else {
-                    UIApplication.showErrorAlert(message: failResponce.description)
+                    UIApplication.showErrorAlert(message: failResponse.description)
                 }
             }
         }
