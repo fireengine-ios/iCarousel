@@ -50,20 +50,16 @@ enum AnalyticsEvent {
         case .uploadDocument: return "jb1jc6"
 
         case .purchaseTurkcell50: return "trie85"
-//FIXME: wait for task update (https://jira.turkcell.com.tr/browse/FE-1321) tokens is missing
-        case .purchaseTurkcell100: return "PURCHASE_100_GB_TURKCELL"
+        case .purchaseTurkcell100: return "62s83p"
         case .purchaseTurkcell500: return "wdqlvk"
         case .purchaseTurkcell2500: return "7bf7gu"
-//FIXME: wait for task update (https://jira.turkcell.com.tr/browse/FE-1321) tokens is missing
-        case .purchaseTurkcellPremium: return "PURCHASE_PREMIUM_TURKCELL"
+        case .purchaseTurkcellPremium: return "qexub9"
 
         case .purchaseNonTurkcell50: return "q3ivog"
-//FIXME: wait for task update (https://jira.turkcell.com.tr/browse/FE-1321) tokens is missing
-        case .purchaseNonTurkcell100: return "PURCHASE_100_GB_NONTURKCELL"
+        case .purchaseNonTurkcell100: return "lbrusf"
         case .purchaseNonTurkcell500: return "x6zaly"
         case .purchaseNonTurkcell2500: return "zab8u6"
-//FIXME: wait for task update (https://jira.turkcell.com.tr/browse/FE-1321) tokens is missing
-        case .purchaseNonTurkcellPremium: return "PURCHASE_PREMIUM_NONTURKCELL"
+        case .purchaseNonTurkcellPremium: return "9pyt2d"
 
         case .importDropbox: return "tdvlrq"
         case .importFacebook: return "y5dz5j"

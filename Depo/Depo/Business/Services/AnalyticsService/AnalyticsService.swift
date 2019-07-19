@@ -75,6 +75,7 @@ final class AnalyticsService {
         let price = product.localizedPrice
         let currency = product.priceLocale.currencyCode ?? "USD"
         
+        ///for purchasing premium status
         if product.productIdentifier.contains("feature") {
             logPurchase(event: .purchaseNonTurkcellPremium, price: price, currency: currency)
         } else if name.contains("500") {
@@ -93,6 +94,7 @@ final class AnalyticsService {
             return
         }
         
+        ///for purchasing premium status
         if let authorities = offer.authorities, authorities.contains(where: { $0.authorityType == .premiumUser }) {
             logPurchase(event: .purchaseTurkcellPremium, price: String(price))
         } else if name.contains("500") {
