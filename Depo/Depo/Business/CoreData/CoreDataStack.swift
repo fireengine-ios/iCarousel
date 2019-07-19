@@ -15,7 +15,7 @@ final class CoreDataStack: NSObject {
     
     private static let modelName = "LifeBoxModel"
     private static let persistentStoreName = "DataModel"
-    
+    private static let modelVersion = "3"
     
     private override init() {
         super.init()
@@ -81,7 +81,10 @@ final class CoreDataStack: NSObject {
     ///--- available iOS 9
     private let persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         do {
-            return try NSPersistentStoreCoordinator.coordinator(modelName: CoreDataStack.modelName, persistentStoreName: CoreDataStack.persistentStoreName)
+            return try NSPersistentStoreCoordinator
+                .coordinator(modelName: CoreDataStack.modelName,
+                             persistentStoreName: CoreDataStack.persistentStoreName,
+                             version: CoreDataStack.modelVersion)
         } catch {
             debugLog("CoreData: Unresolved error \(error)")
             assertionFailure()

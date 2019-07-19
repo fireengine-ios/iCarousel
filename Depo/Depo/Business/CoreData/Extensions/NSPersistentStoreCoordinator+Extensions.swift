@@ -21,9 +21,9 @@ extension NSPersistentStoreCoordinator {
     }
     
     /// Return NSPersistentStoreCoordinator
-    private convenience init(name: String) throws {
+    private convenience init(name: String, version: String) throws {
         do {
-            let model = try NSPersistentStoreCoordinator.managedObjectModel(name: name)
+            let model = try NSPersistentStoreCoordinator.managedObjectModel(name: name, version: version)
             self.init(managedObjectModel: model)
         } catch {
             debugLog("failed NSPersistentStoreCoordinator init: \(error.localizedDescription)")
@@ -31,10 +31,10 @@ extension NSPersistentStoreCoordinator {
         }
     }
     
-    class func managedObjectModel(name: String) throws -> NSManagedObjectModel {
+    class func managedObjectModel(name: String, version: String) throws -> NSManagedObjectModel {
         let modelBundle = Bundle.main
-        let omoURL = modelBundle.url(forResource: "\(name) 3", withExtension: "omo", subdirectory: "\(name).momd")
-        let momURL = modelBundle.url(forResource: "\(name) 3", withExtension: "mom", subdirectory: "\(name).momd")
+        let omoURL = modelBundle.url(forResource: "\(name) \(version)", withExtension: "omo", subdirectory: "\(name).momd")
+        let momURL = modelBundle.url(forResource: "\(name) \(version)", withExtension: "mom", subdirectory: "\(name).momd")
         guard var url = omoURL ?? momURL else {
             debugLog("modelFileNotFound")
             throw CoordinatorError.modelFileNotFound
@@ -53,8 +53,8 @@ extension NSPersistentStoreCoordinator {
     }
     
     /// Return NSPersistentStoreCoordinator with set coordinator
-    static func coordinator(modelName: String, persistentStoreName: String) throws -> NSPersistentStoreCoordinator? {
-        let coordinator = try NSPersistentStoreCoordinator(name: modelName)
+    static func coordinator(modelName: String, persistentStoreName: String, version: String) throws -> NSPersistentStoreCoordinator? {
+        let coordinator = try NSPersistentStoreCoordinator(name: modelName, version: version)
         
         guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
             debugLog("failed urls(for: .documentDirectory")
