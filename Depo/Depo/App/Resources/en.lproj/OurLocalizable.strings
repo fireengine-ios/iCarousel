@@ -1024,3 +1024,4 @@
 "etk_permission_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
 "global_permission_title_label" = "Turkcell Genel Veri İşleme Permission";
 "global_permission_description" = "Liquam scelerisque eleifend enim, vel rhoncus eros dictum quis. Phasellus interdum ut velit in porttitor. Nam luctus ex nec erat cursus pellentesque. Nam et commodo.";
+"informative_description_label" = "In progress...";
