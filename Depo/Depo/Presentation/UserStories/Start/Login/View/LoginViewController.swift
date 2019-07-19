@@ -88,7 +88,7 @@ final class LoginViewController: ViewController {
             newValue.textField.autocapitalizationType = .none
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            
+            newValue.textField.adjustsFontSizeToFitWidth = true
             newValue.titleLabel.text = TextConstants.loginCellTitleEmail
         }
     }
