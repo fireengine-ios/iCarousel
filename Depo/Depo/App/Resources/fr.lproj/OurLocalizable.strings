@@ -1,4 +1,4 @@
-"Welcome1Info" = "Vivre et garder le meilleur ";
+"Welcome1Info" = "Vivre et garder le meilleur";
 
 /*Suggested: "Collect your photos, videos and files on lifebox! Access  whenever you like, wherever you are".*/
 "Welcome1SubInfo" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre lifebox. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
@@ -938,8 +938,6 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
-/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
-
 Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -972,8 +970,6 @@ Please check I have understood the intended command here*/
 "feature_paycell_slcm_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_slcm_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_all_access_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
-
-/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
@@ -1300,3 +1296,7 @@ Please check I have understood the intended command here*/
 "create_story_pop_up_title" = "";
 "create_story_pop_up_message" = "";
 "create_story_path_to_story" = "";
+"You can not share empty album" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";

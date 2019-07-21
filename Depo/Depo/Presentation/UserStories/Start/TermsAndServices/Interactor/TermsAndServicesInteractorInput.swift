@@ -15,8 +15,10 @@ protocol TermsAndServicesInteractorInput {
     var cameFromLogin: Bool { get }
     var cameFromRegistration: Bool { get }
     var etkAuth: Bool?  { get set }
+    var globalPermAuth: Bool?  { get set }
     func loadTermsAndUses()
     func trackScreen()
     func checkEtk()
     func applyEula()
+    func checkGlobalPerm()
 }

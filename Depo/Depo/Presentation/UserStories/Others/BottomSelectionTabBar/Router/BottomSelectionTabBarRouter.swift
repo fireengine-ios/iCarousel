@@ -39,4 +39,13 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     func showShare(rect: CGRect?, urls: [String]) { }
     
     func showDeleteMusic(_ completion: @escaping VoidHandler) { }
+    
+    func showErrorShareEmptyAlbums() {
+        let router = RouterVC()
+        let popUp = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: TextConstants.shareEmptyAlbumError,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok)
+        router.presentViewController(controller: popUp)
+    }
 }

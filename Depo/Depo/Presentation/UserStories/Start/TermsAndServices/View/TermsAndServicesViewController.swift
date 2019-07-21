@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput {
+class TermsAndServicesViewController: ViewController {
 
     var output: TermsAndServicesViewOutput!
 
@@ -22,7 +22,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
     @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
     
-    @IBOutlet private weak var introdactionTextView: UITextView!
+    @IBOutlet private weak var introductionTextView: UITextView!
     
     @IBOutlet private weak var etkCheckboxButton: UIButton!
     @IBOutlet private weak var etkTextView: UITextView!
@@ -53,8 +53,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         return webView
     }()
     
-    
-    // MARK: Life cycle
+    //MARK: - Life cycle
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -111,10 +110,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         etkTextView.text = ""
         etkTextView.delegate = self
         
-        introdactionTextView.textContainer.lineFragmentPadding = 0
-        introdactionTextView.textContainerInset = .zero
-        introdactionTextView.text = ""
-        introdactionTextView.delegate = self
+        introductionTextView.textContainer.lineFragmentPadding = 0
+        introductionTextView.textContainerInset = .zero
+        introductionTextView.text = ""
+        introductionTextView.delegate = self
         
         // TODO: change this logic for StackView one
         etkTextView.isHidden = true
@@ -169,7 +168,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     }
     
     private func setupIntroductionTextView() {
-        introdactionTextView.linkTextAttributes = [
+        introductionTextView.linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
             NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
             NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
@@ -182,10 +181,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         let rangeLink = baseText.mutableString.range(of: TextConstants.privacyPolicyCondition)
         baseText.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        introdactionTextView.attributedText = baseText
+        introductionTextView.attributedText = baseText
     }
 
-    // MARK: Buttons action
+    // MARK: - IBActions
     
     @IBAction func onStartUsing(_ sender: Any) {
         output.startUsing()
@@ -208,10 +207,17 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         output.confirmEtk(button.isSelected)
     }
+    
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
+}
 
-    // MARK: TermsAndServicesViewInput
+// MARK: - TermsAndServicesViewInput
+extension TermsAndServicesViewController: TermsAndServicesViewInput {
+    
     func setupInitialState() {
-        
     }
     
     func showLoadedTermsAndUses(eula: String) {
@@ -237,13 +243,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     func popNavigationVC() {
         navigationController?.popViewController(animated: true)
     }
-    
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-    }
 }
-
 
 extension TermsAndServicesViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

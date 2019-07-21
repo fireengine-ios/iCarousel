@@ -58,3 +58,18 @@ extension DispatchQueue {
         DispatchQueue.main.asyncAfter(deadline: .now() + time, execute: handler)
     }
 }
+
+// MARK: - current queue
+extension DispatchQueue {
+    static var currentQueueLabel: String? {
+        return String(validatingUTF8: __dispatch_queue_get_label(nil))
+    }
+    
+    static var currentQueueLabelAsserted: String {
+        guard let currentQueueLabel = currentQueueLabel else {
+            assertionFailure("something went wrong with: \(__dispatch_queue_get_label(nil))")
+            return ""
+        }
+        return currentQueueLabel
+    }
+}
