@@ -16,6 +16,7 @@
                 <outlet property="checkboxesStack" destination="aEZ-sm-9UL" id="K6f-Po-2eV"/>
                 <outlet property="contenViewHeightConstraint" destination="L0E-Uz-MQX" id="8iz-z7-x0m"/>
                 <outlet property="contentView" destination="aLj-Qo-ocB" id="vmZ-Wx-V8R"/>
+                <outlet property="scrollView" destination="wx0-Ty-pdf" id="2cr-dt-zJE"/>
                 <outlet property="topContraintIOS10" destination="Emx-2B-mwG" id="iRg-dw-zzO"/>
                 <outlet property="topContraintIOS11" destination="eAh-up-qSK" id="HXR-Yk-wax"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
@@ -30,7 +31,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="W6m-KL-HEi">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Ty-pdf">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Ty-pdf">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heF-JQ-sC2" userLabel="Container View">

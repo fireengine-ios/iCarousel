@@ -8,32 +8,115 @@
 
 import Foundation
 
-final class TermsCheckboxTextView: UIView {
+protocol TermsCheckboxTextViewDelegate: class {
+    func checkBoxPressed(isSelected: Bool, sender: TermsCheckboxTextView)
+    func tappedOnURL(url: URL) -> Bool
+}
+
+final class TermsCheckboxTextView: UIView, NibInit {
+    
+    weak var delegate: TermsCheckboxTextViewDelegate?
     
     @IBOutlet private weak var checkbox: UIButton!
     
-    @IBOutlet private weak var textView: UITextView! {
+    @IBOutlet private weak var titleView: UITextView! {
         willSet {
-            textView.linkTextAttributes = [
+            newValue.linkTextAttributes = [
                 NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
                 NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
                 NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
             ]
+            
+            newValue.isEditable = false
+            
+            /// to remove insets
+            /// https://stackoverflow.com/a/42333832/5893286
+            newValue.textContainer.lineFragmentPadding = 0
+            newValue.textContainerInset = .zero
+        }
+    }
+    
+    @IBOutlet private weak var descriptionView: UITextView! {
+        willSet {
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+            newValue.isEditable = false
+            
+            /// to remove insets
+            /// https://stackoverflow.com/a/42333832/5893286
+            newValue.textContainer.lineFragmentPadding = 0
+            newValue.textContainerInset = .zero
         }
     }
 
     override func awakeFromNib() {
-        textView.textContainer.lineFragmentPadding = 0
-        textView.textContainerInset = .zero
-        textView.text = ""
-        
+        setupDefaultTitleView()
+        setupDefaultTextView()
     }
     
-    func setup(text: String, delegate: UITextViewDelegate) {
-        textView.delegate = delegate
-        textView.text = text
-        
+    private func setupDefaultTitleView() {
+        setupDefaultTextViewState(textView: titleView)
+    }
+    
+    private func setupDefaultTextView() {
+        setupDefaultTextViewState(textView: descriptionView)
+    }
+    
+    private func setupDefaultTextViewState(textView: UITextView) {
+        textView.text = ""
+        textView.delegate = self
+    }
+    
+    func setup(title: String?, text: String?, delegate: TermsCheckboxTextViewDelegate) {
+        self.delegate = delegate
+        if let title = title {
+            titleView.text = title
+        } else {
+            //make height 0
+        }
+        if let text = text {
+            descriptionView.text = text
+        } else {
+            //make height 0
+        }
     }
   
+    func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate) {
+        self.delegate = delegate
+        if let atributedTitleText = atributedTitleText {
+            titleView.attributedText = atributedTitleText
+        } else {
+            //make height 0
+        }
+        if let atributedText = atributedText {
+            descriptionView.attributedText = atributedText
+        } else {
+            //make height 0
+        }
+    }
+    
+    @IBAction func checkBoxAction(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        button.isSelected = !button.isSelected
+        delegate?.checkBoxPressed(isSelected: button.isSelected, sender: self)
+    }
+    
+}
+
+extension TermsCheckboxTextView: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        return delegate?.tappedOnURL(url: URL) ?? true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return delegate?.tappedOnURL(url: URL) ?? true//UIApplication.shared.openURL(URL)
+    }
     
 }
