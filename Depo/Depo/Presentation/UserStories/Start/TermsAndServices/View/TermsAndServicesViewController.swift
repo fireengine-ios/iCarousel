@@ -276,11 +276,7 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
                 self.output.openGlobalDataPermissionDetails()
             }
         default:
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
+            UIApplication.shared.openSafely(url)
         }
         return true
     }
