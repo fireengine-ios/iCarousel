@@ -1,14 +1,27 @@
+//
+//  SwipeSelectingCollectionView.swift
+//  TileTime
+//
+//  Created by Shane Qi on 7/2/17.
+//  Copyright © 2017 Shane Qi. All rights reserved.
+//
+
 import UIKit
 
+protocol SwipeSelectingCollectionViewDelegate: class {
+    func didLongPress(at indexPath: IndexPath?)
+}
+
 public class SwipeSelectingCollectionView: UICollectionView {
+    
+    weak var longPressDelegate: SwipeSelectingCollectionViewDelegate?
     
     private var beginIndexPath: IndexPath?
     private var selectingRange: ClosedRange<IndexPath>?
     private var selectingMode: SelectingMode = .selecting
     private var selectingIndexPaths = Set<IndexPath>()
-    private var autoScrollOperationQueue = OperationQueue.main
     private var isAutoStartScroll = false
-    private var autoScrollSpeed: CGFloat = 20
+    private var autoScrollSpeed: CGFloat = 3
     private var autoScrollDirection: AutoScrollDirection?
     private enum AutoScrollDirection {
         case up, down
@@ -16,36 +29,56 @@ public class SwipeSelectingCollectionView: UICollectionView {
     private enum SelectingMode {
         case selecting, deselecting
     }
-
-    lazy private var panSelectingGestureRecognizer: UIPanGestureRecognizer = {
-        let gestureRecognizer = SwipeSelectingGestureRecognizer(
-            target: self,
-            action: #selector(SwipeSelectingCollectionView.didPanSelectingGestureRecognizerChange(gestureRecognizer:)))
-        return gestureRecognizer
-    } ()
-
+    
+    var isSelectionMode = false
+    private var scrollSpeed: CGFloat = 0
+    private var isScrolling = false
+    
+    private static let autoscrollOffset: CGFloat = 0.2
+    private var topAutoscrollInset = UIScreen.main.bounds.height * SwipeSelectingCollectionView.autoscrollOffset
+    private var bottomAutoscrollInset = UIScreen.main.bounds.height * (1 - SwipeSelectingCollectionView.autoscrollOffset)
+    
+    lazy private var longPressRecognizer: SwipeSelectingGestureRecognizer = {
+        let recognizer = SwipeSelectingGestureRecognizer(target: self, action: #selector(didPanSelectingGestureRecognizerChange(_:)))
+        recognizer.minimumPressDuration = 0.15
+        recognizer.delaysTouchesBegan = true
+        return recognizer
+    }()
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        gestureRecognizers?.append(panSelectingGestureRecognizer)
+        gestureRecognizers?.append(longPressRecognizer)
         allowsMultipleSelection = true
     }
-
+    
     override public init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        gestureRecognizers?.append(panSelectingGestureRecognizer)
+        gestureRecognizers?.append(longPressRecognizer)
         allowsMultipleSelection = true
     }
-
-    @objc private func didPanSelectingGestureRecognizerChange(gestureRecognizer: UIPanGestureRecognizer) {
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard let superview = superview else {
+            return
+        }
+        topAutoscrollInset = superview.bounds.height * SwipeSelectingCollectionView.autoscrollOffset
+        bottomAutoscrollInset = superview.bounds.height * (1 - SwipeSelectingCollectionView.autoscrollOffset)
+    }
+    
+    @objc private func didPanSelectingGestureRecognizerChange(_ gestureRecognizer: UILongPressGestureRecognizer) {
         let point = gestureRecognizer.location(in: self)
         switch gestureRecognizer.state {
         case .began:
             self.beginIndexPath = indexPathForItem(at: point)
-            if let indexPath = beginIndexPath,
+            longPressDelegate?.didLongPress(at: self.beginIndexPath)
+            if isSelectionMode, let indexPath = beginIndexPath,
                 let isSelected = cellForItem(at: indexPath)?.isSelected {
                 selectingMode = (isSelected ? .deselecting : .selecting)
                 setSelection(!isSelected, indexPath: indexPath)
             } else { selectingMode = .selecting }
+            isScrollEnabled = false
         case .changed:
             handleChangeOf(gestureRecognizer: gestureRecognizer)
         default:
@@ -53,37 +86,50 @@ public class SwipeSelectingCollectionView: UICollectionView {
             beginIndexPath = nil
             selectingRange = nil
             selectingIndexPaths.removeAll()
+            isScrollEnabled = true
         }
     }
+    
     @objc private func startScroll() {
-        guard autoScrollOperationQueue.operationCount == 0, isAutoStartScroll else { return }
-        let opration = BlockOperation { [weak self] in
-            guard let self = self else { return }
-            UIView.animate(withDuration: 0.1, animations: { [weak self] in
-                guard let self = self, let direction = self.autoScrollDirection else { return }
-                var targetY = self.contentOffset.y + (direction == .up ? -self.autoScrollSpeed : self.autoScrollSpeed)
-                targetY = max(0, targetY)
-                targetY = min(self.contentSize.height-self.bounds.height, targetY)
-                self.contentOffset = CGPoint(x: self.contentOffset.x, y: targetY)
-            })
-            self.perform(#selector(self.startScroll), with: nil, afterDelay: 0.1)
+        guard !isScrolling, isAutoStartScroll, scrollSpeed != 0 else {
+            return
         }
-        autoScrollOperationQueue.addOperation(opration)
+        isScrolling = true
+        UIView.animate(withDuration: 0.1, animations: {
+            var targetY = self.contentOffset.y + self.scrollSpeed
+            targetY = max(0, targetY)
+            targetY = min(self.contentSize.height - self.bounds.height, targetY)
+            self.contentOffset = CGPoint(x: 0, y: targetY)
+        }, completion: { [weak self] _ in
+            guard let self = self else { return }
+            self.isScrolling = false
+            self.startScroll()
+        })
     }
-
-    private func handleChangeOf(gestureRecognizer: UIPanGestureRecognizer) {
-        let point = gestureRecognizer.location(in: self)
-        if point.y - self.contentOffset.y >= self.bounds.size.height - 50, autoScrollOperationQueue.operationCount == 0 {
-            autoScrollDirection = .down
-            isAutoStartScroll = true
-            startScroll()
-        } else if point.y - self.contentOffset.y <= 50, autoScrollOperationQueue.operationCount == 0 {
+    
+    private func handleChangeOf(gestureRecognizer: UILongPressGestureRecognizer) {
+        guard let superview = self.superview else {
+            return
+        }
+        
+        let screenPoint = gestureRecognizer.location(in: superview)
+        if screenPoint.y < topAutoscrollInset {
             autoScrollDirection = .up
             isAutoStartScroll = true
+            scrollSpeed = -speed(at: topAutoscrollInset - screenPoint.y)
+            startScroll()
+        } else if screenPoint.y > bottomAutoscrollInset {
+            autoScrollDirection = .down
+            isAutoStartScroll = true
+            scrollSpeed = speed(at: screenPoint.y - bottomAutoscrollInset)
             startScroll()
         } else {
             isAutoStartScroll = false
+            scrollSpeed = 0
         }
+        
+        let point = gestureRecognizer.location(in: self)
+        
         guard var beginIndexPath = self.beginIndexPath,
             var endIndexPath = indexPathForItem(at: point) else { return }
         if endIndexPath < beginIndexPath {
@@ -125,7 +171,11 @@ public class SwipeSelectingCollectionView: UICollectionView {
         }
         selectingRange = range
     }
-
+    
+    private func speed(at pointHeight: CGFloat) -> CGFloat {
+        return autoScrollSpeed * pointHeight
+    }
+    
     private func doSelection(at indexPath: IndexPath, isPositive: Bool) {
         // Ignore the begin index path, it's already taken care of when the gesture recognizer began.
         guard indexPath != beginIndexPath else { return }
@@ -148,18 +198,18 @@ public class SwipeSelectingCollectionView: UICollectionView {
             }
         }
     }
-
+    
     private func setSelection(_ selected: Bool, indexPath: IndexPath) {
         switch selected {
         case true:
-            delegate?.collectionView?(self, didSelectItemAt: indexPath)
             selectItem(at: indexPath, animated: false, scrollPosition: [])
+            delegate?.collectionView?(self, didSelectItemAt: indexPath)
         case false:
-            delegate?.collectionView?(self, didDeselectItemAt: indexPath)
             deselectItem(at: indexPath, animated: false)
+            delegate?.collectionView?(self, didDeselectItemAt: indexPath)
         }
     }
-
+    
     private func indexPaths(in range: ClosedRange<IndexPath>) -> [IndexPath] {
         var indexPaths = [IndexPath]()
         let beginSection = range.lowerBound.section
@@ -176,7 +226,7 @@ public class SwipeSelectingCollectionView: UICollectionView {
         for row in 0...range.upperBound.row {
             indexPaths.append(IndexPath(row: row, section: endSection))
         }
-
+        
         for section in (range.lowerBound.section + 1)..<range.upperBound.section {
             for row in 0..<dataSource!.collectionView(self, numberOfItemsInSection: section) {
                 indexPaths.append(IndexPath(row: row, section: section))
