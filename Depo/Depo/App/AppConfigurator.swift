@@ -92,14 +92,22 @@ final class AppConfigurator {
         }
     }
     
-    static func prepareSessionManager() {
+   private static func prepareSessionManager() {
         var auth: AuthorizationRepository = factory.resolve()
-        auth.refreshFailedHandler =  RouterVC().isTwoFactorAuthViewControllers() ? logoutIfNeed : logout
+        auth.refreshFailedHandler = setRefreshFailedHandler
         
         let sessionManager = SessionManager.customDefault
         sessionManager.retrier = auth
         sessionManager.adapter = auth
     }
+    
+    static func setRefreshFailedHandler() {
+        let router = RouterVC()
+        if !router.isTwoFactorAuthViewControllers() {
+            logout()
+        }
+    }
+
     
     private static func configureSDWebImage() {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
@@ -213,3 +221,6 @@ final class AppConfigurator {
         }
     }
 }
+
+
+
