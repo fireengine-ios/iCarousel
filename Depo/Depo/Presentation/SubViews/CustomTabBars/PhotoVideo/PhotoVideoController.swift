@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwipeSelectingCollectionView
 
 // TODO: todos in file
 // TODO: clear code -
@@ -20,6 +19,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         didSet {
             collectionView.dataSource = dataSource
             collectionView.delegate = self
+            collectionView.longPressDelegate = self
         }
     }
     
@@ -158,8 +158,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func deselectVisibleCells() {
+        collectionView.indexPathsForSelectedItems?.forEach { collectionView.deselectItem(at: $0, animated: false) }
         collectionView.visibleCells.forEach { cell in
-            (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
+            (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: false)
         }
     }
     
@@ -236,19 +237,19 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 //        if isSelectedCell {
 //            dataSource.selectedIndexPaths.remove(indexPath)
 //        } else {
-            dataSource.selectedIndexPaths.insert(indexPath)
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+//            dataSource.selectedIndexPaths.insert(indexPath)
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
 //        }
         
-        cell.set(isSelected: true, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        cell.set(isSelected: true, isSelectionMode: dataSource.isSelectingMode, animated: false)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
     
     private func deselect(cell: PhotoVideoCell, at indexPath: IndexPath) {
         dataSource.selectedIndexPaths.remove(indexPath)
-        collectionView.deselectItem(at: indexPath, animated: true)
-        cell.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
-        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+        collectionView.deselectItem(at: indexPath, animated: false)
+        cell.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: false)
+        onChangeSelectedItemsCount(selectedItemsCount: collectionView.indexPathsForSelectedItems?.count ?? 0)//dataSource.selectedIndexPaths.count)
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
@@ -280,6 +281,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
             let title = date.getDateInTextForCollectionViewHeader()
             self?.scrollBarManager.scrollBar.setText(title)
+        }
+    }
+}
+
+extension PhotoVideoController: SwipeSelectingCollectionViewDelegate {
+    func didLongPress(at indexPath: IndexPath?) {
+        if !dataSource.isSelectingMode {
+            startEditingMode(at: indexPath)
         }
     }
 }
@@ -788,7 +797,9 @@ extension PhotoVideoController: ScrollBarViewDelegate {
 //MARK: - PhotoVideoDataSource
 
 extension PhotoVideoController: PhotoVideoDataSourceDelegate {
-    func selectedModeDidChange(_ selectingMode: Bool) { }
+    func selectedModeDidChange(_ selectingMode: Bool) {
+        collectionView.isSelectionMode = selectingMode
+    }
     
     func fetchPredicateCreated() { }
     

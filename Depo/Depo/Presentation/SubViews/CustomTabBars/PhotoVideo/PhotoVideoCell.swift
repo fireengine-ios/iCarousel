@@ -72,7 +72,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupLongPressRecognizer()
+//        setupLongPressRecognizer()
         
         thumbnailImageView.contentMode = .scaleAspectFill
         backgroundColor = ColorConstants.fileGreedCellColor
@@ -253,6 +253,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     func set(isSelected: Bool, isSelectionMode: Bool, animated: Bool) {
+        self.isSelected = isSelected
         checkmarkImageView.isHidden = !isSelectionMode
         checkmarkImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         
