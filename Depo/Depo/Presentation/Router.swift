@@ -201,9 +201,7 @@ class RouterVC: NSObject {
             return
         }
         
-        var index: Int?
-        
-        index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
+        let index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
         
         if let index = index {
             let viewController = viewControllers[index - 1]
