@@ -21,4 +21,5 @@ protocol TermsAndServicesInteractorInput {
     func checkEtk()
     func applyEula()
     func checkGlobalPerm()
+    func checkEtkAndGlobalPermissions()
 }

@@ -21,4 +21,6 @@ protocol TermsAndServicesViewInput: class, Waiting {
     func popNavigationVC()
     
     func showEtk()
+    
+    func showGlobalPermissions()
 }

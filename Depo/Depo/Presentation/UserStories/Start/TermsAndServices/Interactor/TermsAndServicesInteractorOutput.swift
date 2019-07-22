@@ -15,6 +15,7 @@ protocol TermsAndServicesInteractorOutput: class {
     func signupFailedCaptchaRequired()
     func setupEtk(isShowEtk: Bool)
     func setupGlobalPerm(isShowGlobalPerm: Bool)
+    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool)
     func applyEulaFailed(errorResponse: ErrorResponse)
     func eulaApplied()
 }

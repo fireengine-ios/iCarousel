@@ -103,38 +103,64 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         return isFromRegistration
     }
     
-    func checkEtk() {
-        /// phoneNumber will exist only for signup
-        checkEtk(for: phoneNumber)
+    func checkEtkAndGlobalPermissions() {
+        var isShowEtk = true
+        var isShowGlobalPerm = true
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        checkEtk(for: phoneNumber) { result in
+            isShowEtk = result
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        checkGlobalPerm(for: phoneNumber) { result in
+            isShowGlobalPerm = result
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.output.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
+        }
+        
     }
     
-    private func checkEtk(for phoneNumber: String?) {
+    func checkEtk() {
+        /// phoneNumber will exist only for signup
+        checkEtk(for: phoneNumber) { [weak self] isShowEtk in
+            self?.output.setupEtk(isShowEtk: isShowEtk)
+        }
+    }
+    
+    private func checkEtk(for phoneNumber: String?, completion: BoolHandler?) {
         eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                
                 switch result {
                 case .success(let isShowEtk):
-                    self.output.setupEtk(isShowEtk: isShowEtk)
-                    
+                    completion?(isShowEtk)
                     /// if we show etk default value must be false (user didn't check etk)
                     if isShowEtk {
                         self.etkAuth = false
                     }
                 case .failed(_):
-                    self.output.setupEtk(isShowEtk: false)
+                    completion?(false)
                 }
             }
         }
     }
     
     func checkGlobalPerm() {
-        checkGlobalPerm(for: phoneNumber)
+        checkGlobalPerm(for: phoneNumber) { [weak self] isShowGlobalPerm in
+            self?.output.setupGlobalPerm(isShowGlobalPerm: isShowGlobalPerm)
+        }
     }
     
-    private func checkGlobalPerm(for phoneNumber: String?) {
+    private func checkGlobalPerm(for phoneNumber: String?, completion: @escaping BoolHandler) {
         eulaService.getGlobalPermAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
@@ -142,13 +168,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 }
                 switch result {
                 case .success(let isShowGlobalPerm):
-                    self.output.setupGlobalPerm(isShowGlobalPerm: isShowGlobalPerm)
+                    completion(isShowGlobalPerm)
                     
                     if isShowGlobalPerm {
                         self.globalPermAuth = false
                     }
                 case .failed(_):
-                    self.output.setupGlobalPerm(isShowGlobalPerm: false)
+                    completion(false)
                 }
             }
         }

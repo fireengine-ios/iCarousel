@@ -246,4 +246,13 @@ struct RouteRequests {
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
+    
+    static var globalPermissionsDetails: String {
+        switch currentServerEnvironment {
+        case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+        case .test: return ""
+        }   
+    }
+    
 }
