@@ -31,8 +31,8 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
     
-    var remainingTimeInMinutes: Int {
-        return dataStorage.signUpResponse.remainingTimeInMinutes ?? 1
+    var remainingTimeInSeconds: Int {
+        return (dataStorage.signUpResponse.remainingTimeInMinutes ?? 1) * 60
     }
     
     var expectedInputLength: Int? {

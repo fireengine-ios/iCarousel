@@ -195,6 +195,22 @@ class RouterVC: NSObject {
         }
     }
     
+    func popTwoFactorAuth() {
+        guard let viewControllers = navigationController?.viewControllers else {
+            assertionFailure("nav bar is missing!")
+            return
+        }
+        
+        let index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
+        
+        if let index = index {
+            let viewController = viewControllers[index - 1]
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     func getViewControllerForPresent() -> UIViewController? {
         if let nController = navigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
@@ -904,5 +920,9 @@ class RouterVC: NSObject {
     
     func createStory(items: [Item]) -> UIViewController {
         return CreateStoryViewController(images: items)
+    }
+    
+    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
+        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
     }
 }

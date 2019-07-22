@@ -1039,3 +1039,8 @@
 "login_settings_security_passcode_description" = "Login with Turkcell Password allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
 "login_settings_security_autologin_description" = "Autologin with 3G/LTE allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 "login_settings_two_factor_auth_description" = "2-Factor Authentication allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
+
+"two_fa_invalid_session_error_message" = "Session expired for two factor authentication";
+"two_fa_invalid_challenge_error_message" = "Challenge has expired, please request a new code.";
+"two_fa_too_many_attempts_error_message" = "3 wrong trials. Please request a new code.";
+"two_fa_invalid_Otp_error_message" = "Security code is invalid, please try again.";

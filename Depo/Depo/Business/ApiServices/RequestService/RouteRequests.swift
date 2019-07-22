@@ -29,7 +29,7 @@ struct RouteRequests {
         }
     }()
     
-    static let baseUrl: URL =  URL(string: "\(baseShortUrlString)api/")!
+    static let baseUrl: URL = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -66,7 +66,7 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -82,6 +82,9 @@ struct RouteRequests {
     static let mailVerefication = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"

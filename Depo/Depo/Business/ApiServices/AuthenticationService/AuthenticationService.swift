@@ -571,4 +571,104 @@ class AuthenticationService: BaseRequestService {
                 self?.loginHandler(response, success, fail)
         }
     }
+    
+    func twoFactorAuthChallenge(token: String,
+                                authenticatorId: String,
+                                type: String,
+                                handler: @escaping (ResponseResult<TwoFAChallengeParametersResponse>) -> Void) {
+        debugLog("AuthenticationService twoFactorAuthChallenge")
+        
+        let params: [String: Any] = [
+            "token" : token,
+            "authenticatorId" : authenticatorId,
+            "type" : type,
+        ]
+        
+        SessionManager.customDefault
+            .request(RouteRequests.twoFactorAuthChallenge,
+                     method: .post,
+                      parameters: params,
+                     encoding: JSONEncoding.default)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+                        if let errorType = json?["errorCode"] as? Int {
+                            let error = ErrorResponse.string("\(errorType)")
+                            handler(.failed(error))
+                            
+                        } else {
+                            let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                            handler(.success(model))
+                        }
+                    } catch {
+                        handler(.failed(error))
+                    }
+                    
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func loginViaTwoFactorAuth(token: String,
+                               challengeType: String,
+                               otpCode: String,
+                               handler: @escaping ResponseVoid) {
+        debugLog("AuthenticationService loginViaTwoFactorAuth")
+        
+        let params: [String: Any] = [
+            "token"         : token,
+            "challengeType" : challengeType,
+            "otpCode"       : otpCode,
+        ]
+        
+        sessionManagerWithoutToken
+            .request(RouteRequests.twoFactorAuthLogin,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.default)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data: data)
+                    if let errorType = json["errorType"].string {
+                        handler(.failed(ErrorResponse.string(errorType)))
+                        
+                    } else {
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            handler(.failed(error))
+                            return
+                        }
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                            self.tokenStorage.accessToken = accessToken
+                        }
+                        
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                            self.tokenStorage.refreshToken = refreshToken
+                        }
+                        
+                        /// must be after accessToken save logic
+                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String,
+                            emptyPhoneFlag != HeaderConstant.emptyMSISDN {
+                                handler(.failed(ErrorResponse.string(HeaderConstant.emptyMSISDN)))
+                                return
+                        }
+                        
+                        guard self.tokenStorage.refreshToken != nil else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            handler(.failed(error))
+                            return
+                        }
+                        
+                        handler(.success(()))
+                    }
+                    
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
 }
