@@ -137,6 +137,7 @@ class TermsAndServicesViewController: ViewController {
     }
     
     private func setupIntroductionTextView() {
+        checkboxesStack.addArrangedSubview(generalTermsCheckboxView)
         
         let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
@@ -144,12 +145,19 @@ class TermsAndServicesViewController: ViewController {
         
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
-        checkboxesStack.addArrangedSubview(generalTermsCheckboxView)
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
         
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
     }
     
     private func setupEtkText() {
+        let etkChecboxView = TermsCheckboxTextView.initFromNib()
+        etkTermsCheckboxView = etkChecboxView
+        checkboxesStack.addArrangedSubview(etkChecboxView)
+        
+        let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
         let descriptionText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
                                                  attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
                                                               .foregroundColor: UIColor.lightGray])
@@ -159,24 +167,11 @@ class TermsAndServicesViewController: ViewController {
         
         let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
         descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
-        let etkChecboxView = TermsCheckboxTextView.initFromNib()
-        etkTermsCheckboxView = etkChecboxView
-        checkboxesStack.addArrangedSubview(etkChecboxView)
-        
-        let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
-        
+
         etkChecboxView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
     }
 
     func setupGlobalPermissionTextView() {
-        let descriptionText = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalDataPermCheckbox,
-                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                              .foregroundColor: UIColor.lightGray])
-        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
-        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
-        
         let globalPermissionsView = TermsCheckboxTextView.initFromNib()
         globalDataPermissionTermsCheckboxView = globalPermissionsView
         checkboxesStack.addArrangedSubview(globalPermissionsView)
@@ -184,6 +179,12 @@ class TermsAndServicesViewController: ViewController {
         let header = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalPermHeader,
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
+        
+        let descriptionText = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalDataPermCheckbox,
+                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
+                                                              .foregroundColor: UIColor.lightGray])
+        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
         
         globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
     }
