@@ -130,43 +130,57 @@ public class SwipeSelectingCollectionView: UICollectionView {
         
         let point = gestureRecognizer.location(in: self)
         
-        guard var beginIndexPath = self.beginIndexPath,
-            var endIndexPath = indexPathForItem(at: point) else { return }
+        guard
+            var beginIndexPath = beginIndexPath,
+            var endIndexPath = indexPathForItem(at: point)
+        else {
+            return
+        }
+        
         if endIndexPath < beginIndexPath {
             swap(&beginIndexPath, &endIndexPath)
         }
         let range = ClosedRange(uncheckedBounds: (beginIndexPath, endIndexPath))
-        guard range != selectingRange else { return }
-        var positiveIndexPaths: [IndexPath]!
-        var negativeIndexPaths: [IndexPath]!
+        guard range != selectingRange else {
+            return
+        }
+        
+        var positiveIndexPaths = [IndexPath]()
+        var negativeIndexPaths = [IndexPath]()
+        
         if let selectingRange = selectingRange {
-            if range.lowerBound == selectingRange.lowerBound {
-                if range.upperBound < selectingRange.upperBound {
-                    negativeIndexPaths = indexPaths(in:
-                        ClosedRange(uncheckedBounds: (range.upperBound, selectingRange.upperBound)))
-                    negativeIndexPaths.removeFirst()
-                } else {
-                    positiveIndexPaths = indexPaths(in: ClosedRange(uncheckedBounds: (selectingRange.upperBound, range.upperBound)))
-                }
-            } else if range.upperBound == selectingRange.upperBound {
-                if range.lowerBound > selectingRange.lowerBound {
-                    negativeIndexPaths = indexPaths(in:
-                        ClosedRange(uncheckedBounds: (selectingRange.lowerBound, range.lowerBound)))
-                    negativeIndexPaths.removeLast()
-                } else {
-                    positiveIndexPaths = indexPaths(in: ClosedRange(uncheckedBounds: (range.lowerBound, selectingRange.lowerBound)))
-                }
-            } else {
+            switch (range.lowerBound, range.upperBound) {
+            case (selectingRange.lowerBound, let upperBound) where upperBound < selectingRange.upperBound:
+                let neagtiveRange = ClosedRange(uncheckedBounds: (upperBound, selectingRange.upperBound))
+                negativeIndexPaths = indexPaths(in: neagtiveRange)
+                negativeIndexPaths.removeFirst()
+                
+            case (selectingRange.lowerBound, let upperBound) where upperBound > selectingRange.upperBound:
+                let positiveRange = ClosedRange(uncheckedBounds: (selectingRange.upperBound, upperBound))
+                positiveIndexPaths = indexPaths(in: positiveRange)
+                
+            case (let lowerBound, selectingRange.upperBound) where lowerBound > selectingRange.lowerBound:
+                let negativeRange = ClosedRange(uncheckedBounds: (selectingRange.lowerBound, lowerBound))
+                negativeIndexPaths = indexPaths(in: negativeRange)
+                negativeIndexPaths.removeLast()
+                
+            case (let lowerBound, selectingRange.upperBound) where lowerBound < selectingRange.lowerBound:
+                let positiveRange = ClosedRange(uncheckedBounds: (lowerBound, selectingRange.lowerBound))
+                positiveIndexPaths = indexPaths(in: positiveRange)
+                
+            default:
                 negativeIndexPaths = indexPaths(in: selectingRange)
                 positiveIndexPaths = indexPaths(in: range)
             }
+            
         } else {
             positiveIndexPaths = indexPaths(in: range)
         }
-        for indexPath in negativeIndexPaths ?? [] {
+        
+        for indexPath in negativeIndexPaths {
             doSelection(at: indexPath, isPositive: false)
         }
-        for indexPath in positiveIndexPaths ?? [] {
+        for indexPath in positiveIndexPaths {
             doSelection(at: indexPath, isPositive: true)
         }
         selectingRange = range
@@ -186,6 +200,7 @@ public class SwipeSelectingCollectionView: UICollectionView {
             case .deselecting: return !isPositive
             }
         } ()
+        
         if isSelected != expectedSelection {
             if isPositive {
                 selectingIndexPaths.insert(indexPath)
