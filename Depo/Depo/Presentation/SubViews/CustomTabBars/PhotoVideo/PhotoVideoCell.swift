@@ -81,6 +81,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         accessibilityTraits = UIAccessibilityTraitImage
     }
     
+    
     private func setupLongPressRecognizer() {
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPress))
         longPressRecognizer.minimumPressDuration = BaseCollectionViewCell.durationOfSelection
@@ -244,11 +245,10 @@ final class PhotoVideoCell: UICollectionViewCell {
 
     @objc private func onLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            
-            set(isSelected: true, isSelectionMode: true, animated: true)
             if let delegate = delegate {
                 delegate.onLongPressBegan(at: self)
             }
+//            set(isSelected: true, isSelectionMode: true, animated: true)
         }
     }
     
@@ -264,6 +264,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         } else {
             selectionStateView.alpha = selection ? 1 : 0
         }
+        self.isSelected = isSelected
     }
 
     /// not working for cell update (become favorite)

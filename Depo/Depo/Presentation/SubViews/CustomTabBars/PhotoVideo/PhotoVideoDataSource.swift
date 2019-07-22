@@ -28,7 +28,7 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    var selectedIndexPaths = Set<IndexPath>()
+//    var selectedIndexPaths = Set<IndexPath>()
     
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
     
@@ -100,8 +100,8 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getSelectedObjects(wrapDataCallBack: @escaping WrapObjectsCallBack) {
-        getConvertedObjects(at: Array(selectedIndexPaths), wrapItemsCallback: wrapDataCallBack)
+    func getSelectedObjects(at indexPaths: [IndexPath], wrapDataCallBack: @escaping WrapObjectsCallBack) {
+        getConvertedObjects(at: Array(indexPaths), wrapItemsCallback: wrapDataCallBack)
     }
     
     private func getObject(at indexPath: IndexPath) -> MediaItem? {

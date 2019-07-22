@@ -84,13 +84,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        dataSource.getSelectedObjects { [weak self] selectedItems in
+        dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedItems in
             guard let self = self else {
                 return
             }
             if !selectedItems.isEmpty {
                 self.setupNavigationBar(editingMode: true)
-                self.onChangeSelectedItemsCount(selectedItemsCount: self.dataSource.selectedIndexPaths.count)
+                self.onChangeSelectedItemsCount(selectedItemsCount: self.collectionViewManager.selectedIndexes.count)
             } else {
                 self.setupNavigationBar(editingMode: false)
             }
@@ -136,28 +136,28 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         dataSource.isSelectingMode = true
-        deselectVisibleCells()
+        deselectAllCells()
         
         if let indexPath = indexPath {
-            dataSource.selectedIndexPaths.insert(indexPath)
-            if let selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell {
-                selectedCell.set(isSelected: true, isSelectionMode: true, animated: true)
-            }
+        collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
+//            if let selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell {
+//                selectedCell.set(isSelected: true, isSelectionMode: true, animated: true)
+//            }
         }
         
         setupNavigationBar(editingMode: true)
-        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+        onChangeSelectedItemsCount(selectedItemsCount: collectionViewManager.selectedIndexes.count)
     }
     
     private func stopEditingMode() {
         dataSource.isSelectingMode = false
-        dataSource.selectedIndexPaths.removeAll()
-        deselectVisibleCells()
+        deselectAllCells()
         bottomBarManager.hide()
         setupNavigationBar(editingMode: false)
     }
     
-    private func deselectVisibleCells() {
+    private func deselectAllCells() {
+        collectionViewManager.deselectAll()
         collectionView.visibleCells.forEach { cell in
             (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
         }
@@ -182,7 +182,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - helpers
     
     private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        dataSource.getSelectedObjects{ [weak self] selectedObjects in
+        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
@@ -231,24 +231,17 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func select(cell: PhotoVideoCell, at indexPath: IndexPath) {
-//        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
-
-//        if isSelectedCell {
-//            dataSource.selectedIndexPaths.remove(indexPath)
-//        } else {
-            dataSource.selectedIndexPaths.insert(indexPath)
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-//        }
-        
         cell.set(isSelected: true, isSelectionMode: dataSource.isSelectingMode, animated: true)
-        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+        
+        let selectedIndexesCount = collectionViewManager.selectedIndexes.count
+        onChangeSelectedItemsCount(selectedItemsCount: selectedIndexesCount)
     }
     
     private func deselect(cell: PhotoVideoCell, at indexPath: IndexPath) {
-        dataSource.selectedIndexPaths.remove(indexPath)
-        collectionView.deselectItem(at: indexPath, animated: true)
         cell.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
-        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+        
+        let selectedIndexesCount = collectionViewManager.selectedIndexes.count
+        onChangeSelectedItemsCount(selectedItemsCount: selectedIndexesCount)
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
@@ -453,7 +446,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
                 cell.cancelledUploadForObject()
             }
             
-            let isSelectedCell = self.dataSource.selectedIndexPaths.contains(indexPath)
+            let isSelectedCell = cell.isSelected
             cell.set(isSelected: isSelectedCell, isSelectionMode: self.dataSource.isSelectingMode, animated: true)
             
             if let uuid = object.trimmedLocalFileID, self.uploadedObjectID.index(of: uuid) != nil {
@@ -531,7 +524,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        dataSource.getSelectedObjects { items in
+        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { items in
             selectedItemsCallback(items)
         }
     }
@@ -549,7 +542,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func selectAllModeSelected() {}
     func deSelectAll() {}
     func printSelected() {
-        dataSource.getSelectedObjects { [weak self] selectedObjects in
+        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
@@ -576,7 +569,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     }
     
     func onThreeDotsButton() {
-        dataSource.getSelectedObjects { [weak self] selectedObjects in
+        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
