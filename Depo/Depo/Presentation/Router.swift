@@ -52,6 +52,17 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last is AlbumDetailViewController
     }
     
+    func isTwoFactorAuthViewControllers() -> Bool {
+        
+        guard let currentViewController = navigationController?.viewControllers.last else {
+            assertionFailure()
+            return false
+        }
+        
+        return currentViewController is TwoFactorAuthenticationViewController ||
+               currentViewController is PhoneVerificationViewController
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -313,7 +324,7 @@ class RouterVC: NSObject {
     func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
         let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen",
+        let controller = PhoneVerificationViewController(nibName: "PhoneVereficationScreen",
                                                          bundle: nil)
         inicializer.phonevereficationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
