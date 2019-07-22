@@ -52,6 +52,11 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last is AlbumDetailViewController
     }
     
+    func isTwoFactorAuthViewControllers() -> Bool {
+        //:TODO Need to add here another view controllers responsible for 2FA
+        return navigationController?.viewControllers.last is TwoFactorAuthenticationViewController
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {

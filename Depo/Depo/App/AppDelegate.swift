@@ -243,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
-        
+        AppConfigurator.prepareSessionManager()
         checkPasscodeIfNeed()
         FBSDKAppEvents.activateApp()
     }

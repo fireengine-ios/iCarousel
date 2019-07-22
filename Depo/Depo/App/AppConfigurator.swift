@@ -92,9 +92,9 @@ final class AppConfigurator {
         }
     }
     
-    private static func prepareSessionManager() {
+    static func prepareSessionManager() {
         var auth: AuthorizationRepository = factory.resolve()
-        auth.refreshFailedHandler = logout
+        auth.refreshFailedHandler =  RouterVC().isTwoFactorAuthViewControllers() ? logoutIfNeed : logout
         
         let sessionManager = SessionManager.customDefault
         sessionManager.retrier = auth
