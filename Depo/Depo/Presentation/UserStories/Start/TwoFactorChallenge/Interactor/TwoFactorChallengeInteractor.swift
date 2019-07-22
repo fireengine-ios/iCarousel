@@ -42,7 +42,9 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
                 self?.output.resendCodeRequestSuccesed()
             case .failed(let error):
                 let errorResponse = ErrorResponse.error(error)
-                self?.output.resendCodeRequestFailed(with: errorResponse)
+                DispatchQueue.main.async {
+                    self?.output.resendCodeRequestFailed(with: errorResponse)
+                }
             }
         }
     }
@@ -50,11 +52,15 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
     override func verifyCode(code: String) {
         authenticationService.loginViaTwoFactorAuth(token: challenge.token,
                                                     challengeType: challenge.challengeType.rawValue,
-                                                    otpCode: code) { responseStatus in
-            if responseStatus.description == "200" {
-                self.output.verificationSucces()
-            } else {
-                self.output.vereficationFailed(with: responseStatus.localizedDescription)
+                                                    otpCode: code) { response in
+                                                        
+            DispatchQueue.main.async {
+                switch response {
+                case .success(_):
+                    self.output.verificationSucces()
+                case .failed(let error):
+                    self.output.vereficationFailed(with: error.localizedDescription)
+                }
             }
         }
         

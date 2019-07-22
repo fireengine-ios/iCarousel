@@ -196,22 +196,20 @@ class RouterVC: NSObject {
     }
     
     func popTwoFactorAuth() {
-        if let viewControllers = navigationController?.viewControllers {
-            var index: Int? = nil
-            
-            for (i, viewController) in viewControllers.enumerated() {
-                if viewController is TwoFactorAuthenticationViewController {
-                    index = i
-                    break
-                }
-            }
-            
-            if let ind = index {
-                let viewController = viewControllers[ind - 1]
-                navigationController?.popToViewController(viewController, animated: true)
-            } else {
-                navigationController?.popToRootViewController(animated: true)
-            }
+        guard let viewControllers = navigationController?.viewControllers else {
+            assertionFailure("nav bar is missing!")
+            return
+        }
+        
+        var index: Int?
+        
+        index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
+        
+        if let index = index {
+            let viewController = viewControllers[index - 1]
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
         }
     }
     
