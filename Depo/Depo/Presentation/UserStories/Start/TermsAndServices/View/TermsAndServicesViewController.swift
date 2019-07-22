@@ -93,10 +93,6 @@ class TermsAndServicesViewController: ViewController {
         
         configureUI()
         setupIntroductionTextView()
-        //remove me
-            setupEtkText()
-            setupGlobalPermissionTextView()
-        //remove me
         output.viewIsReady()
     }
     
@@ -109,6 +105,12 @@ class TermsAndServicesViewController: ViewController {
         return .clear
     }
     
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
+    
+    //MARK: - Configuration and Input
     private func configureUI() {
         welcomeLabel.text = TextConstants.termsAndUseWelcomeText
         welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
@@ -127,73 +129,69 @@ class TermsAndServicesViewController: ViewController {
     func showEtk() {
         setupEtkText()
         view.layoutIfNeeded()
-//        updateWebViewInsets()
     }
     
-    /// fixing bug of WKWebView contentInset after relayout
-    private func updateWebViewInsets() {
-        /*
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height + etkTopSpaceConstraint.constant, right: 0)
-        webView.scrollView.contentInset = insets
-        webView.scrollView.scrollIndicatorInsets = insets
- */
-    }
-    
-    private func setupEtkText() {
-        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
-                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                              .foregroundColor: ColorConstants.darkText])
-        
-        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-        
-        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
-        let etkChecboxView = TermsCheckboxTextView.initFromNib()
-        etkTermsCheckboxView = etkChecboxView
-        checkboxesStack.addArrangedSubview(etkChecboxView)
-        etkChecboxView.setup(atributedTitleText: NSMutableAttributedString(string: "!TEST!"), atributedText: baseText, delegate: self)
+    func showGlobalPermissions() {
+        setupGlobalPermissionTextView()
+        view.layoutIfNeeded()
     }
     
     private func setupIntroductionTextView() {
-
-        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
-                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                              .foregroundColor: ColorConstants.darkText])
         
-        let rangeLink = baseText.mutableString.range(of: TextConstants.privacyPolicyCondition)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
+        let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
+        let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
+        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         checkboxesStack.addArrangedSubview(generalTermsCheckboxView)
-        generalTermsCheckboxView.setup(atributedTitleText: baseText, atributedText: NSMutableAttributedString(string: ""), delegate: self)
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
         
+    }
+    
+    private func setupEtkText() {
+        let descriptionText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
+                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
+                                                              .foregroundColor: UIColor.lightGray])
+        
+        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
+        
+        let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
+        let etkChecboxView = TermsCheckboxTextView.initFromNib()
+        etkTermsCheckboxView = etkChecboxView
+        checkboxesStack.addArrangedSubview(etkChecboxView)
+        
+        let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
+        etkChecboxView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
     }
 
     func setupGlobalPermissionTextView() {
-        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
+        let descriptionText = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalDataPermCheckbox,
                                                  attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                              .foregroundColor: ColorConstants.darkText])
-        
-        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-        
-        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
+                                                              .foregroundColor: UIColor.lightGray])
+        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
         
         let globalPermissionsView = TermsCheckboxTextView.initFromNib()
         globalDataPermissionTermsCheckboxView = globalPermissionsView
         checkboxesStack.addArrangedSubview(globalPermissionsView)
-        globalPermissionsView.setup(atributedTitleText: NSMutableAttributedString(string: "!TEST!"), atributedText: baseText, delegate: self)
+        
+        let header = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalPermHeader,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
+        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
     }
     
     // MARK: Buttons action
     
     @IBAction func onStartUsing(_ sender: Any) {
         output.startUsing()
-    }
-
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
     }
 }
 
@@ -254,8 +252,7 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
             output.confirmEtk(isSelected)
         } else if let globalDataPermissionTermsCheckboxView = globalDataPermissionTermsCheckboxView,
             sender == globalDataPermissionTermsCheckboxView {
-            //TODO: ADD OUTPUT HERE
-            //output.confirmGlobalPermission
+            output.confirmGlobalPerm(isSelected)
         }
     }
     
@@ -272,6 +269,10 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
         case TextConstants.NotLocalized.privacyPolicyConditions:
             DispatchQueue.toMain {
                 self.output.openPrivacyPolicyDescriptionController()
+            }
+        case TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1:
+            DispatchQueue.toMain {
+                self.output.openGlobalDataPermissionDetails()
             }
         default:
             if #available(iOS 10.0, *) {

@@ -15,4 +15,5 @@ protocol TermsAndServicesViewOutput {
     func confirmEtk(_ etk: Bool)
     func confirmGlobalPerm(_ globalPerm: Bool)
     func openPrivacyPolicyDescriptionController()
+    func openGlobalDataPermissionDetails()
 }

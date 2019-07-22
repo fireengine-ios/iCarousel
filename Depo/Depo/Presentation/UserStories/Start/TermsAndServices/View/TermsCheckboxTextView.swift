@@ -51,7 +51,7 @@ final class TermsCheckboxTextView: UIView, NibInit {
             newValue.textContainerInset = .zero
         }
     }
-
+    
     override func awakeFromNib() {
         setupDefaultTitleView()
         setupDefaultTextView()
@@ -74,13 +74,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
         self.delegate = delegate
         if let title = title {
             titleView.text = title
-        } else {
-            //make height 0
         }
         if let text = text {
             descriptionView.text = text
-        } else {
-            //make height 0
         }
     }
   
@@ -88,20 +84,13 @@ final class TermsCheckboxTextView: UIView, NibInit {
         self.delegate = delegate
         if let atributedTitleText = atributedTitleText {
             titleView.attributedText = atributedTitleText
-        } else {
-            //make height 0
         }
         if let atributedText = atributedText {
             descriptionView.attributedText = atributedText
-        } else {
-            //make height 0
         }
     }
     
-    @IBAction func checkBoxAction(_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
-        }
+    @IBAction private func checkBoxAction(_ button: UIButton) {
         button.isSelected = !button.isSelected
         delegate?.checkBoxPressed(isSelected: button.isSelected, sender: self)
     }

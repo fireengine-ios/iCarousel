@@ -25,8 +25,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.checkEtk()
-        interactor.checkGlobalPerm()
+        interactor.checkEtkAndGlobalPermissions()
     }
     
     func startUsing() {
@@ -96,6 +95,11 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func openPrivacyPolicyDescriptionController() {
         router.goToPrivacyPolicyDescriptionController()
     }
+    
+    func openGlobalDataPermissionDetails() {
+        router.goToGlobalDataPermissionDetails()
+    }
+    
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
         view.showSpinner()
@@ -128,6 +132,16 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         if isShowGlobalPerm {
 //            TODO: add logic with UI
 //            view.showGlobalPermission()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool) {
+        if isShowEtk {
+            view.showEtk()
+        }
+        if isShowGlobalPerm {
+            view.showGlobalPermissions()
         }
         interactor.loadTermsAndUses()
     }

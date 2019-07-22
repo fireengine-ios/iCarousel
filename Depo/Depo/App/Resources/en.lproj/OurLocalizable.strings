@@ -892,10 +892,11 @@
 "package_FWI_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "package_jamaica_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "feature_digicell_cancel_text" = "You can continue to use Premium features for free since you are a Digicell user";
+"terms_and_use_etk_checkbox_header" = "place etk header here";
 "terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";
-"global_data_permission_agreement" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox.";
-"global_data_permission_link_cooperation_operators" = "cooperation operators";
+"global_data_permission_agreement" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox. Click for detailed information.";
+"global_data_permission_link" = "Click for detailed information";
 "global_permission_header" = "Some header text will be here";
 "privacy_policy_condition" = "Privacy Policy";
 "privacy_policy_head_line" = "TERMS OF USE AGREEMENT FOR LIFEBOX END USERS";
