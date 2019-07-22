@@ -53,8 +53,14 @@ class RouterVC: NSObject {
     }
     
     func isTwoFactorAuthViewControllers() -> Bool {
-        //:TODO Need to add here another view controllers responsible for 2FA
-        return navigationController?.viewControllers.last is TwoFactorAuthenticationViewController
+        
+        guard let currentViewController = navigationController?.viewControllers.last else {
+            assertionFailure()
+            return false
+        }
+        
+        return currentViewController is TwoFactorAuthenticationViewController ||
+               currentViewController is PhoneVerificationViewController
     }
     
     // MARK: Navigation controller
@@ -318,7 +324,7 @@ class RouterVC: NSObject {
     func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
         let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen",
+        let controller = PhoneVerificationViewController(nibName: "PhoneVereficationScreen",
                                                          bundle: nil)
         inicializer.phonevereficationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)

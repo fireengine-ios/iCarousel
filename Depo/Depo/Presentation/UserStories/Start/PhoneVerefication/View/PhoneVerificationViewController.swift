@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-class PhoneVereficationViewController: ViewController, PhoneVereficationViewInput {
+class PhoneVerificationViewController: ViewController, PhoneVereficationViewInput {
     
     private enum Constants {
         static let timerLabelBottomOffset: CGFloat = 8
@@ -257,7 +257,7 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
 }
 
 // MARK: - UITextFieldDelegate, SmartTimerLabelDelegate
-extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
+extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         /// if the string is empty, then when deleting, the delegate method does not work

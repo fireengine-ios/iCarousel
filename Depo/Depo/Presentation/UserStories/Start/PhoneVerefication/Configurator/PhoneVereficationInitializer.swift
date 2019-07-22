@@ -11,7 +11,7 @@ import UIKit
 class PhoneVereficationModuleInitializer: NSObject {
 
     //Connect with object on storyboard
-    @IBOutlet weak var phonevereficationViewController: PhoneVereficationViewController!
+    @IBOutlet weak var phonevereficationViewController: PhoneVerificationViewController!
     
     func setupConfig(with: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel ) {
         let configurator = PhoneVereficationModuleConfigurator()

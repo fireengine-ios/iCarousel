@@ -10,7 +10,7 @@ import UIKit
 
 final class TwoFactorChallengeConfigurator {
     
-    func configure(viewController: PhoneVereficationViewController,
+    func configure(viewController: PhoneVerificationViewController,
                    otpParams: TwoFAChallengeParametersResponse,
                    challenge: TwoFAChallengeModel) {
         

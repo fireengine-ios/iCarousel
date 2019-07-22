@@ -12,7 +12,7 @@ final class TwoFactorChallengeInitializer {
     
     class func viewController(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
         let nibName = "PhoneVereficationScreen"
-        let viewController = PhoneVereficationViewController(nibName: nibName, bundle: nil)
+        let viewController = PhoneVerificationViewController(nibName: nibName, bundle: nil)
         let configurator = TwoFactorChallengeConfigurator()
         configurator.configure(viewController: viewController, otpParams: otpParams, challenge: challenge)
         
