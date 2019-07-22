@@ -160,7 +160,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
     }
     
-    private func checkGlobalPerm(for phoneNumber: String?, completion: BoolHandler?) {
+    private func checkGlobalPerm(for phoneNumber: String?, completion: @escaping BoolHandler) {
         eulaService.getGlobalPermAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
@@ -168,13 +168,13 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 }
                 switch result {
                 case .success(let isShowGlobalPerm):
-                    completion?(isShowGlobalPerm)
+                    completion(isShowGlobalPerm)
                     
                     if isShowGlobalPerm {
                         self.globalPermAuth = false
                     }
                 case .failed(_):
-                    completion?(false)
+                    completion(false)
                 }
             }
         }
