@@ -33,6 +33,8 @@ final class TermsCheckboxTextView: UIView, NibInit {
             /// https://stackoverflow.com/a/42333832/5893286
             newValue.textContainer.lineFragmentPadding = 0
             newValue.textContainerInset = .zero
+            
+            setupDefaultTextViewState(textView: newValue)
         }
     }
     
@@ -49,20 +51,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
             /// https://stackoverflow.com/a/42333832/5893286
             newValue.textContainer.lineFragmentPadding = 0
             newValue.textContainerInset = .zero
+            
+            setupDefaultTextViewState(textView: newValue)
         }
-    }
-    
-    override func awakeFromNib() {
-        setupDefaultTitleView()
-        setupDefaultTextView()
-    }
-    
-    private func setupDefaultTitleView() {
-        setupDefaultTextViewState(textView: titleView)
-    }
-    
-    private func setupDefaultTextView() {
-        setupDefaultTextViewState(textView: descriptionView)
     }
     
     private func setupDefaultTextViewState(textView: UITextView) {
