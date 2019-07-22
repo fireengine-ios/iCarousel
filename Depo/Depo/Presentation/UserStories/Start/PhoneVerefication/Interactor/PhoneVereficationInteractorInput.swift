@@ -19,7 +19,7 @@ protocol PhoneVereficationInteractorInput {
     
     func trackScreen()
     
-    var remainingTimeInMinutes: Int { get }
+    var remainingTimeInSeconds: Int { get }
     
     var expectedInputLength: Int? { get }
     

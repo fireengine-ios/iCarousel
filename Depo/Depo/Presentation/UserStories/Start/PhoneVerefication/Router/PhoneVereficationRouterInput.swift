@@ -13,4 +13,7 @@ protocol PhoneVereficationRouterInput {
     func goAutoSync()
     func presentErrorPopUp(with message: String)
     func showRedirectToSplash()
+    
+    //TwoFactorAuth
+    func popToLogin()
 }

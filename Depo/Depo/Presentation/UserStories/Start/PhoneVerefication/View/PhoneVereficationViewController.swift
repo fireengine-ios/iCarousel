@@ -13,10 +13,13 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     
     private enum Constants {
         static let timerLabelBottomOffset: CGFloat = 8
+        static let timelLabelTopOffset: CGFloat = 56
     }
     
     var output: PhoneVereficationViewOutput!
         
+    @IBOutlet private weak var scrollView: UIScrollView!
+    
     @IBOutlet private weak var timerLabel: SmartTimerLabel!
         
     @IBOutlet private weak var mainTitle: UILabel!
@@ -93,19 +96,68 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     
     // MARK: Setup keyboard
     private func setupKeyboard() {
-        keyboard.on(event: .willShow) { [weak self] (options) in
-            UIView.animate(withDuration: options.animationDuration) {
-                self?.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
-                
-                self?.view.layoutIfNeeded()
-            }
-            }.on(event: .willHide) { [weak self] (options) in
-                UIView.animate(withDuration: options.animationDuration) {
-                    self?.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
-                    
-                    self?.view.layoutIfNeeded()
+        keyboard
+            .on(event: .willShow) { [weak self] options in
+                guard let `self` = self else {
+                    return
                 }
-            }.start()
+                
+                self.updateScroll(with: options.endFrame)
+            }
+            .on(event: .didShow) { [weak self] options in
+                guard let `self` = self else {
+                    return
+                }
+                
+                UIView.animate(withDuration: options.animationDuration) {
+                    self.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
+                    
+                    self.view.layoutIfNeeded()
+                }
+                
+                if let viewToScroll = (self.errorLabel.isHidden ? self.firstSecurityCodeTextField : self.errorLabel) {
+                    ///convertion work correctly with firstSecurityCodeTextField-firstSecurityCodeTextField pair
+                    ///and
+                    ///errorLabel-view pair
+                    let convertParent = viewToScroll is UILabel ? self.view : self.firstSecurityCodeTextField
+                    
+                    let rectToShow = convertParent?.convert(viewToScroll.frame, to: self.view) ?? .zero
+                    let rectToShowWithInset = rectToShow.offsetBy(dx: 0, dy: Constants.timelLabelTopOffset)
+                    
+                    self.scrollView.scrollRectToVisible(rectToShowWithInset, animated: true)
+                } else {
+                    assertionFailure()
+                }
+            }
+            .on(event: .willHide) { [weak self] options in
+                guard let `self` = self else {
+                    return
+                }
+                
+                UIView.animate(withDuration: options.animationDuration) {
+                    self.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
+                    
+                    var inset = self.scrollView.contentInset
+                    inset.bottom = 0
+                    self.scrollView.contentInset = inset
+                    self.scrollView.scrollIndicatorInsets = inset
+                    
+                    self.view.layoutIfNeeded()
+                }
+            }
+            .start()
+    }
+    
+    private func updateScroll(with keyboardFrame: CGRect) {
+        var bottomInset = keyboardFrame.height
+        
+        if #available(iOS 11.0, *) {
+            bottomInset -= scrollView.safeAreaInsets.bottom
+        }
+        
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        self.scrollView.contentInset = insets
+        self.scrollView.scrollIndicatorInsets = insets
     }
     
     private func hiddenError() {
@@ -113,7 +165,6 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         errorLabel.isHidden = true
     }
     // MARK: PhoneVereficationViewInput
-    
     func setupInitialState() {
         codeTextFields.forEach({
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -144,8 +195,7 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
     }
     
     func setupButtonsInitialState() {
-        resendCodeButton.isHidden = true
-        resendCodeButton.isEnabled = false
+        resendButtonShow(show: false)
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {

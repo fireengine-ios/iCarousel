@@ -20,14 +20,14 @@ final class TwoFactorAuthErrorResponseChallengeType: Map {
     }
     
     var token: Int?
-    var type: AvailableTypesOfAuth?
+    var type: TwoFAChallengeType?
     var authenticatorId: String?
     var displayName: String?
     var otpCode: Int?
     
     init(json: JSON) {
         token = json[TwoFactorAuthErrorResponseChallengeTypeKey.token].intValue
-        type = AvailableTypesOfAuth(rawValue: json[TwoFactorAuthErrorResponseChallengeTypeKey.type].stringValue)
+        type = TwoFAChallengeType(rawValue: json[TwoFactorAuthErrorResponseChallengeTypeKey.type].stringValue)
         authenticatorId = json[TwoFactorAuthErrorResponseChallengeTypeKey.authenticatorId].stringValue
         displayName = json[TwoFactorAuthErrorResponseChallengeTypeKey.displayName].stringValue
         otpCode = json[TwoFactorAuthErrorResponseChallengeTypeKey.otpCode].intValue
@@ -43,14 +43,14 @@ final class TwoFactorAuthErrorResponse: Map {
         static let challengeTypes = "challengeTypes"
     }
     
-    var reason: ReasonForExtraAuth?
+    var reason: TwoFAChallengingReason?
     var error: String?
     var twoFAToken: String?
     var challengeTypes: [TwoFactorAuthErrorResponseChallengeType]?
     
     init(json: JSON) {
         
-        reason = ReasonForExtraAuth(rawValue: json[TwoFactorAuthErrorResponseKey.reason].stringValue)
+        reason = TwoFAChallengingReason(rawValue: json[TwoFactorAuthErrorResponseKey.reason].stringValue)
         error = json[TwoFactorAuthErrorResponseKey.error].stringValue
         twoFAToken = json[TwoFactorAuthErrorResponseKey.twoFAToken].stringValue
         challengeTypes = json[TwoFactorAuthErrorResponseKey.challengeTypes].arrayValue.map { TwoFactorAuthErrorResponseChallengeType(json: $0)}
