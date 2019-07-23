@@ -12,6 +12,7 @@ struct TextConstants {
     
     struct NotLocalized {
         static let facebookLoginCanceled = "FB Login canceled"
+        static let facebookLoginFailed = "FB Login failed"
         static let instagramLoginCanceled = "Instagram Login canceled"
         static let termsOfUseLink = "termsOfUseLink"
         static let termsAndUseEtkLinkTurkcellAndGroupCompanies = "terms_and_use_etk_link_1"
