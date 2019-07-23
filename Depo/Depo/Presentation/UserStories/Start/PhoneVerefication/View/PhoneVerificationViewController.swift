@@ -164,6 +164,7 @@ class PhoneVerificationViewController: ViewController, PhoneVereficationViewInpu
         errorLabel.text = ""
         errorLabel.isHidden = true
     }
+    
     // MARK: PhoneVereficationViewInput
     func setupInitialState() {
         codeTextFields.forEach({

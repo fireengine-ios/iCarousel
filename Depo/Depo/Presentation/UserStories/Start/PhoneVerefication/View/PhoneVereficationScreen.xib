@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,26 +38,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dA-Bj-4aO">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="304.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="302.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g">
-                                    <rect key="frame" x="40" y="35" width="240" height="59"/>
+                                    <rect key="frame" x="40" y="35" width="334" height="57"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v4-fr-f41">
-                                            <rect key="frame" x="8.5" y="0.0" width="223.5" height="22.5"/>
+                                            <rect key="frame" x="70" y="0.0" width="194.5" height="21.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verefication code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccz-va-Sqj">
-                                            <rect key="frame" x="6" y="36.5" width="228" height="22.5"/>
+                                            <rect key="frame" x="74.5" y="35.5" width="185" height="21.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                                             <color key="textColor" red="1" green="0.94117647059999998" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -61,7 +65,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
-                                    <rect key="frame" x="40" y="130" width="240" height="50"/>
+                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
@@ -123,14 +127,18 @@
                                         </textField>
                                     </subviews>
                                 </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-6f-YoM" userLabel="barrier view">
+                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
-                                    <rect key="frame" x="38" y="200" width="244" height="20.5"/>
+                                    <rect key="frame" x="38" y="198" width="338" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="72" y="244.5" width="176" height="44"/>
+                                    <rect key="frame" x="93" y="242.5" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
                                     </constraints>
@@ -149,13 +157,17 @@
                                 <constraint firstAttribute="bottom" secondItem="IFw-4W-fGh" secondAttribute="bottom" priority="750" constant="16" id="BpS-mI-04p"/>
                                 <constraint firstItem="cYV-5x-qeY" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="24" id="Bzh-cx-agA"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cYV-5x-qeY" secondAttribute="bottom" constant="16" id="CJx-vC-94N"/>
+                                <constraint firstItem="OGS-6f-YoM" firstAttribute="leading" secondItem="ovo-An-V0t" secondAttribute="leading" id="Gqi-Ll-bVr"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="KFq-ey-u5n"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="centerX" secondItem="ovo-An-V0t" secondAttribute="centerX" id="Ldx-kx-EYW"/>
+                                <constraint firstItem="OGS-6f-YoM" firstAttribute="bottom" secondItem="ovo-An-V0t" secondAttribute="bottom" id="WJn-f7-7zp"/>
                                 <constraint firstAttribute="trailing" secondItem="IFw-4W-fGh" secondAttribute="trailing" constant="38" id="WOz-LE-LxW"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="40" id="YPT-X4-axA"/>
+                                <constraint firstItem="OGS-6f-YoM" firstAttribute="trailing" secondItem="ovo-An-V0t" secondAttribute="trailing" id="eCp-rX-Ehv"/>
                                 <constraint firstAttribute="trailing" secondItem="LGv-1U-f4g" secondAttribute="trailing" constant="40" id="gKr-pm-92r"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="38" id="ih2-hu-ILm"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="35" id="sP0-N6-S0V"/>
+                                <constraint firstItem="OGS-6f-YoM" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="top" id="tLd-OF-bnB"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -168,7 +180,7 @@
                     </constraints>
                 </scrollView>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="121" y="413" width="78" height="47"/>
+                    <rect key="frame" x="175" y="830.5" width="64" height="45.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
