@@ -90,7 +90,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
             if !selectedItems.isEmpty {
                 self.setupNavigationBar(editingMode: true)
-                self.onChangeSelectedItemsCount(selectedItemsCount: self.collectionViewManager.selectedIndexes.count)
+                self.updateSelectedItemsCount()
+                self.updateBarsForSelectedObjects()
             } else {
                 self.setupNavigationBar(editingMode: false)
             }
@@ -147,7 +148,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         
         setupNavigationBar(editingMode: true)
-        onChangeSelectedItemsCount(selectedItemsCount: collectionViewManager.selectedIndexes.count)
+        updateSelectedItemsCount()
+        updateBarsForSelectedObjects()
     }
     
     private func stopEditingMode() {
@@ -184,22 +186,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     // MARK: - helpers
     
-    private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
+    private func updateSelectedItemsCount() {
+        let selectedIndexesCount = collectionViewManager.selectedIndexes.count
+        self.setTitle("\(selectedIndexesCount) \(TextConstants.accessibilitySelected)")
+    }
+    
+    private func updateBarsForSelectedObjects() {
+        let selectedIndexes = collectionViewManager.selectedIndexes
+        dataSource.getSelectedObjects (at: selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
             self.bottomBarManager.update(for: selectedObjects)
             
-            if selectedItemsCount == 0 {
+            if selectedIndexes.count == 0 {
                 self.navBarManager.threeDotsButton.isEnabled = false
                 self.bottomBarManager.hide()
             } else {
                 self.navBarManager.threeDotsButton.isEnabled = true
                 self.bottomBarManager.show()
             }
-            
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
         }
     }
     
@@ -235,8 +241,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func updateSelection(cell: PhotoVideoCell) {
         cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: true)
-        let selectedIndexesCount = collectionViewManager.selectedIndexes.count
-        onChangeSelectedItemsCount(selectedItemsCount: selectedIndexesCount)
+        updateSelectedItemsCount()
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
@@ -276,6 +281,13 @@ extension PhotoVideoController: SwipeSelectingCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
         if !dataSource.isSelectingMode {
             startEditingMode(at: indexPath)
+        }
+    }
+    
+    func didEndLongPress(at indexPath: IndexPath?) {
+        if dataSource.isSelectingMode {
+            self.updateSelectedItemsCount()
+            self.updateBarsForSelectedObjects()
         }
     }
 }

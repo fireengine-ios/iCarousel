@@ -10,6 +10,7 @@ import UIKit
 
 protocol SwipeSelectingCollectionViewDelegate: class {
     func didLongPress(at indexPath: IndexPath?)
+    func didEndLongPress(at indexPath: IndexPath?)
 }
 
 public class SwipeSelectingCollectionView: UICollectionView {
@@ -81,6 +82,14 @@ public class SwipeSelectingCollectionView: UICollectionView {
             isScrollEnabled = false
         case .changed:
             handleChangeOf(gestureRecognizer: gestureRecognizer)
+        case .ended:
+            let point = gestureRecognizer.location(in: self)
+            let indexPath = indexPathForItem(at: point)
+            longPressDelegate?.didEndLongPress(at: indexPath)
+            isAutoStartScroll = false
+            beginIndexPath = nil
+            selectingRange = nil
+            isScrollEnabled = true
         default:
             isAutoStartScroll = false
             beginIndexPath = nil
