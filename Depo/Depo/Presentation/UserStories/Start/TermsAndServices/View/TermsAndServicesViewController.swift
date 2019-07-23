@@ -15,17 +15,19 @@ class TermsAndServicesViewController: ViewController {
 
     @IBOutlet private weak var welcomeLabel: UILabel!
     
-    @IBOutlet weak var contentView: UITextView! {
+    @IBOutlet private weak var contentView: UITextView! {
         willSet {
             newValue.text = ""
             newValue.backgroundColor = ColorConstants.bottomViewGrayColor
             newValue.layer.borderColor = ColorConstants.lightGrayColor.cgColor
             newValue.layer.borderWidth = 1
+            
             newValue.linkTextAttributes = [
                 NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
                 NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
                 NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
             ]
+            
             newValue.dataDetectorTypes = [.link, .phoneNumber]
             newValue.isEditable = false
             
@@ -191,18 +193,21 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
         guard !eula.isEmpty else {
             return
         }
+        
         DispatchQueue.global().async { [weak self] in
+            
             let font = UIFont.TurkcellSaturaRegFont(size: 14)
             /// https://stackoverflow.com/a/27422343
             let customFontEulaString = "<style>body{font-family: '\(font.familyName)'; font-size:\(font.pointSize);}</style>" + eula
+            
             guard let data = customFontEulaString.data(using: .utf8) else {
                 assertionFailure()
                 return
             }
+            
             /// https://stackoverflow.com/q/50969015/5893286
             /// fixed black screen
             /// and error "AttributedString called within transaction"
-
             do {
                 let attributedString = try NSAttributedString(data: data, options:
                     [.documentType: NSAttributedString.DocumentType.html,
