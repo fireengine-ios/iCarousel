@@ -17,12 +17,15 @@ public class SwipeSelectingCollectionView: UICollectionView {
     
     weak var longPressDelegate: SwipeSelectingCollectionViewDelegate?
     
+    private let maxSelection = 500
     private var beginIndexPath: IndexPath?
     private var selectingRange: ClosedRange<IndexPath>?
     private var selectingMode: SelectingMode = .selecting
-    private var selectingIndexPaths = Set<IndexPath>()
+    private var selectingIndexPaths: [IndexPath] {
+        return indexPathsForSelectedItems ?? []
+    }
     private var isAutoStartScroll = false
-    private var autoScrollSpeed: CGFloat = 3
+    private var autoScrollSpeed: CGFloat = 2
     private var autoScrollDirection: AutoScrollDirection?
     private enum AutoScrollDirection {
         case up, down
@@ -94,7 +97,7 @@ public class SwipeSelectingCollectionView: UICollectionView {
             isAutoStartScroll = false
             beginIndexPath = nil
             selectingRange = nil
-            selectingIndexPaths.removeAll()
+//            selectingIndexPaths.removeAll()
             isScrollEnabled = true
         }
     }
@@ -211,23 +214,25 @@ public class SwipeSelectingCollectionView: UICollectionView {
         } ()
         
         if isSelected != expectedSelection {
-            if isPositive {
-                selectingIndexPaths.insert(indexPath)
-            }
-            if selectingIndexPaths.contains(indexPath) {
+//            if isPositive, selectingIndexPaths.count <= maxSelection {
+//                selectingIndexPaths.insert(indexPath)
+//            }
+//            if selectingIndexPaths.contains(indexPath) {
                 setSelection(expectedSelection, indexPath: indexPath)
-                if !isPositive {
-                    selectingIndexPaths.remove(indexPath)
-                }
-            }
+//                if !isPositive {
+//                    selectingIndexPaths.remove(indexPath)
+//                }
+//            }
         }
     }
     
     private func setSelection(_ selected: Bool, indexPath: IndexPath) {
         switch selected {
         case true:
-            selectItem(at: indexPath, animated: false, scrollPosition: [])
-            delegate?.collectionView?(self, didSelectItemAt: indexPath)
+            if selectingIndexPaths.count <= maxSelection {
+                selectItem(at: indexPath, animated: false, scrollPosition: [])
+                delegate?.collectionView?(self, didSelectItemAt: indexPath)
+            }
         case false:
             deselectItem(at: indexPath, animated: false)
             delegate?.collectionView?(self, didDeselectItemAt: indexPath)
