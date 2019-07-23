@@ -2750,6 +2750,12 @@
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
+		8CBF58FD22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
+		8CBF58FE22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
+		8CBF58FF22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
+		8CBF590122DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
+		8CBF590222DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
+		8CBF590322DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -7460,6 +7466,8 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
+		8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsCheckboxTextView.xib; sourceTree = "<group>"; };
+		8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsCheckboxTextView.swift; sourceTree = "<group>"; };
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
@@ -9982,6 +9990,8 @@
 				BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */,
 				E5F0F170EDB776DE7E055F18 /* TermsAndServicesViewController.swift */,
 				8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */,
+				8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */,
+				8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -16373,6 +16383,7 @@
 				8C06AEFB2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06AF512008AD70003D8E05 /* cropy_icon.png in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
+				8CBF58FE22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				8C06AFB12008AD71003D8E05 /* frekans@2x.png in Resources */,
 				8C06B0312008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06B0892008AD71003D8E05 /* paylas_twitter.png in Resources */,
@@ -17042,6 +17053,7 @@
 				8C208653228D4B2E000BEDAD /* PhotoVideoCell.xib in Resources */,
 				4A9B3911201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
+				8CBF58FD22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				8C06B12A2008AD72003D8E05 /* t_kucuk_selected@2x.png in Resources */,
 				8C06B0302008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06AFE22008AD71003D8E05 /* italic_secili@3x.png in Resources */,
@@ -17662,6 +17674,7 @@
 				CE784D6A22A685FB00662219 /* SmartAlbumCell.xib in Resources */,
 				CE784D6B22A685FB00662219 /* t_kucuk_selected@2x.png in Resources */,
 				CE784D6C22A685FB00662219 /* ok_selected@2x.png in Resources */,
+				8CBF58FF22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				CE784D6D22A685FB00662219 /* italic_secili@3x.png in Resources */,
 				CE784D6E22A685FB00662219 /* t_kucuk.png in Resources */,
 				CE784D6F22A685FB00662219 /* slider_thumb2@2x.png in Resources */,
@@ -18876,6 +18889,7 @@
 				8C208650228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift in Sources */,
 				8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
+				8CBF590222DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
 				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
@@ -21405,6 +21419,7 @@
 				17589F7A2276336800A5DB37 /* ProfileTextEnterView.swift in Sources */,
 				92004B6021AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
+				8CBF590122DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				4BF3A69422B3822E0082130F /* PermissionsDesigner.swift in Sources */,
@@ -22650,6 +22665,7 @@
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
+				8CBF590322DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				CE784C5722A685FB00662219 /* UIView+Utils.swift in Sources */,
 				CE784C5822A685FB00662219 /* VolumeSlider.swift in Sources */,
 				CE784C5922A685FB00662219 /* StoriesDataSourceForCollectionView.swift in Sources */,

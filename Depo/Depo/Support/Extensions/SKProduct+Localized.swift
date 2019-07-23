@@ -20,4 +20,8 @@ extension SKProduct {
     var isFree: Bool {
         return price == .zero
     }
+    
+    var isPremiumPurchase: Bool {
+        return productIdentifier.contains("feature")
+    }
 }

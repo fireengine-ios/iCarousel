@@ -91,7 +91,7 @@ extension PremiumInteractor: PremiumInteractorInput {
         iapManager.purchase(product: product) { [weak self] result in
             switch result {
             case .success(let identifier):
-                self?.analyticsService.trackInAppPurchase(product: product)
+                self?.analyticsService.trackPurchase(offer: product)
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: 0)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
@@ -135,6 +135,11 @@ extension PremiumInteractor: PremiumInteractorInput {
             }
             
             if status == .success {
+                
+                if let product = self?.iapManager.product(for: productId) {
+                    self?.analyticsService.trackPurchase(offer: product)
+                }
+                
                 DispatchQueue.toMain {
                     self?.output.purchaseFinished()
                 }
@@ -245,6 +250,9 @@ extension PremiumInteractor: PremiumInteractorInput {
         offersService.verifyOffer(otp: otp, referenceToken: token,
                                   success: { [weak self] response in
                                     /// delay stay for server perform request (android logic)
+                                    
+                                    self?.analyticsService.trackPurchase(offer: offer)
+                                    
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                         self?.output.successedVerifyOffer()
                                     }
