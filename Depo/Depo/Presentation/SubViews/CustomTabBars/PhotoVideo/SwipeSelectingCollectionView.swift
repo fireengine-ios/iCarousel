@@ -21,11 +21,9 @@ public class SwipeSelectingCollectionView: UICollectionView {
     private var beginIndexPath: IndexPath?
     private var selectingRange: ClosedRange<IndexPath>?
     private var selectingMode: SelectingMode = .selecting
-    private var selectingIndexPaths: [IndexPath] {
-        return indexPathsForSelectedItems ?? []
-    }
+    private var selectingIndexPaths = Set<IndexPath>()
     private var isAutoStartScroll = false
-    private var autoScrollSpeed: CGFloat = 2
+    private var autoScrollSpeed: CGFloat = 1
     private var autoScrollDirection: AutoScrollDirection?
     private enum AutoScrollDirection {
         case up, down
@@ -71,6 +69,10 @@ public class SwipeSelectingCollectionView: UICollectionView {
         bottomAutoscrollInset = superview.bounds.height * (1 - SwipeSelectingCollectionView.autoscrollOffset)
     }
     
+    func clearSavedSelected() {
+        selectingIndexPaths.removeAll()
+    }
+    
     @objc private func didPanSelectingGestureRecognizerChange(_ gestureRecognizer: UILongPressGestureRecognizer) {
         let point = gestureRecognizer.location(in: self)
         switch gestureRecognizer.state {
@@ -81,7 +83,9 @@ public class SwipeSelectingCollectionView: UICollectionView {
                 let isSelected = cellForItem(at: indexPath)?.isSelected {
                 selectingMode = (isSelected ? .deselecting : .selecting)
                 setSelection(!isSelected, indexPath: indexPath)
-            } else { selectingMode = .selecting }
+            } else {
+                selectingMode = .selecting
+            }
             isScrollEnabled = false
         case .changed:
             handleChangeOf(gestureRecognizer: gestureRecognizer)
@@ -94,10 +98,10 @@ public class SwipeSelectingCollectionView: UICollectionView {
             selectingRange = nil
             isScrollEnabled = true
         default:
+            selectingIndexPaths.removeAll()
             isAutoStartScroll = false
             beginIndexPath = nil
             selectingRange = nil
-//            selectingIndexPaths.removeAll()
             isScrollEnabled = true
         }
     }
@@ -156,7 +160,7 @@ public class SwipeSelectingCollectionView: UICollectionView {
         guard range != selectingRange else {
             return
         }
-        
+    
         var positiveIndexPaths = [IndexPath]()
         var negativeIndexPaths = [IndexPath]()
         
@@ -204,25 +208,27 @@ public class SwipeSelectingCollectionView: UICollectionView {
     
     private func doSelection(at indexPath: IndexPath, isPositive: Bool) {
         // Ignore the begin index path, it's already taken care of when the gesture recognizer began.
-        guard indexPath != beginIndexPath else { return }
-        guard let isSelected = cellForItem(at: indexPath)?.isSelected else { return }
+        guard
+            indexPath != beginIndexPath,
+            let isSelected = cellForItem(at: indexPath)?.isSelected
+        else {
+            return
+        }
+        
         let expectedSelection: Bool = {
             switch selectingMode {
             case .selecting: return isPositive
             case .deselecting: return !isPositive
             }
         } ()
-        
+
         if isSelected != expectedSelection {
-//            if isPositive, selectingIndexPaths.count <= maxSelection {
-//                selectingIndexPaths.insert(indexPath)
-//            }
-//            if selectingIndexPaths.contains(indexPath) {
-                setSelection(expectedSelection, indexPath: indexPath)
-//                if !isPositive {
-//                    selectingIndexPaths.remove(indexPath)
-//                }
-//            }
+            if selectingIndexPaths.contains(indexPath) {
+                
+            } else {
+                selectingIndexPaths.insert(indexPath)
+            }
+            setSelection(expectedSelection, indexPath: indexPath)
         }
     }
     
@@ -230,6 +236,7 @@ public class SwipeSelectingCollectionView: UICollectionView {
         switch selected {
         case true:
             if selectingIndexPaths.count <= maxSelection {
+                selectingIndexPaths.insert(indexPath)
                 selectItem(at: indexPath, animated: false, scrollPosition: [])
                 delegate?.collectionView?(self, didSelectItemAt: indexPath)
             }

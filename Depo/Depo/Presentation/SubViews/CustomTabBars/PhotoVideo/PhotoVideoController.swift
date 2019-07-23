@@ -161,6 +161,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
 
     private func deselectAllCells() {
+        collectionView.clearSavedSelected()
         collectionViewManager.deselectAll()
         collectionView.visibleCells.forEach { cell in
             (cell as? PhotoVideoCell)?.updateSelection(isSelectionMode: dataSource.isSelectingMode, animated: false)
@@ -240,7 +241,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
-        cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: true)
+        cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
         updateSelectedItemsCount()
     }
     
