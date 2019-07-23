@@ -64,6 +64,9 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBarActions()
+        
+        let analyticsService = AnalyticsService()
+        analyticsService.logScreen(screen: .createStoryMusicSelection)
     }
     
     @IBAction private func segmentedControlChanged(_ sender: UISegmentedControl) {

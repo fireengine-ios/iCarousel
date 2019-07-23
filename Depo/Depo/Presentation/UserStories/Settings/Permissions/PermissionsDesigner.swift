@@ -27,4 +27,14 @@ final class PermissionsDesigner: NSObject {
             newValue.isOpaque = true
         }
     }
+    
+    @IBOutlet private weak var informativeLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.informativeDescription
+            newValue.textColor = UIColor.lrLightBrownishGrey
+            newValue.font = .TurkcellSaturaFont(size: 14)
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+        }
+    }
 }

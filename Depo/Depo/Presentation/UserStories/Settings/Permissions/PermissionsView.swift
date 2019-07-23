@@ -13,17 +13,18 @@ protocol PermissionViewDelegate: class {
 }
 
 protocol PermissionsViewProtocol: class {
+    
     var delegate: PermissionViewDelegate? { get set }
     var type: PermissionType! { get set }
-    func turnPermissionOn(isOn: Bool)
+    func turnPermissionOn(isOn: Bool, isPendingApproval: Bool)
     func togglePermissionSwitch()
 }
 
 class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
-    
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var permissionSwitch: UISwitch!
+    @IBOutlet private weak var inProgressLabel: UILabel!
     
     weak var delegate: PermissionViewDelegate?
     
@@ -33,6 +34,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             case .etk:
                 titleLabel.text = TextConstants.etkPermissionTitleLabel
                 descriptionLabel.text = TextConstants.etkPermissionDescriptionLabel
+            case .globalPermission:
+                titleLabel.text = TextConstants.globalPermissionTitleLabel
+                descriptionLabel.text = TextConstants.globalPermissionDescriptionLabel
             }
         }
     }
@@ -45,8 +49,17 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     // MARK: - Actions
     
-    func turnPermissionOn(isOn: Bool) {
-        permissionSwitch.isOn = isOn
+    func turnPermissionOn(isOn: Bool, isPendingApproval: Bool) {
+        /// change switch status according to user actions
+        if isPendingApproval {
+            permissionSwitch.isOn = !isOn
+            permissionSwitch.isEnabled = false
+            inProgressLabel.isHidden = false
+        } else {
+            permissionSwitch.isOn = isOn
+            permissionSwitch.isEnabled = true
+            inProgressLabel.isHidden = true
+        }
     }
     
     func togglePermissionSwitch() {

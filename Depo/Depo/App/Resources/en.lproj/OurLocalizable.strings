@@ -266,7 +266,6 @@
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
 "Help & Support" = "FAQ";
-"terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Lifebox Touch ID and Passcode" = "lifebox Touch ID and Passcode";
 "Usage Info and Packages" = "Account & Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
@@ -759,7 +758,6 @@
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
-"face_tags_description_standart" = "Eula text will be here Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem.";
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
@@ -896,8 +894,6 @@
 "feature_digicell_cancel_text" = "You can continue to use Premium features for free since you are a Digicell user";
 "terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";
-"privacy_policy_condition" = "Privacy Policy";
-"privacy_policy_head_line" = "TERMS OF USE AGREEMENT FOR LIFEBOX END USERS";
 "terms_and_use_etk_link_commercial_email_messages" = "commercial e-mail messages";
 "commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
 "NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
@@ -1001,26 +997,35 @@
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
-"face_tags_description_premium" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh";
+"face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";
 "privacy_policy" = "Privacy Policy";
-"face_tags_description_standart" = "Eula text will be here Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem.";
-"terms_and_use_introduction_checkbox" = "I have read and agree to the Terms of Use Agreement and Conditions of Privacy Policy";
+"face_tags_description_standart" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
+"terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use and Privacy Policy";
 "privacy_policy_condition" = "Privacy Policy";
-"photo_pick_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus.";
+"photo_pick_description" = "If you enable the button and connect your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick analysis.";
 
 /*Permission screen in Settings*/
-"etk_permission_title_label" = "ETK Permission";
-"etk_permissiom_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nMauris varius magna nunc. Nam non tincidunt sem, sit amet condimentum purus. Mauris vel aliquet nibh.";
+"etk_permission_title_label" = "Commercial Electronic Message";
+"etk_permissiom_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
 "restore_purchases" = "Restore Purchases";
-"restore_purchases_info" = "If you want to restore your previous purchases lorem ipsum pellentesque tincidunt eleifend nibh, at suscipit arcu con.";
+"restore_purchases_info" = "If you want to restore your existing purchases, click on the button.";
 "attributed_restore_word" = "restore";
-"privacy_policy_head_line" = "TERMS OF USE AGREEMENT FOR LIFEDRIVE END USERS";
+"privacy_policy_head_line" = "Privacy Policy";
 "create_story_photos_selected" = "%d Selected";
 "create_story_press_and_hold" = "Press and hold";
-"create_story_press_and_hold_description" = "%@ on the image you would like to rearrange the order of your story video.";
+"create_story_press_and_hold_description" = "%@ on the image to rearrange the order of your story.";
 "create_story_name_title" = "Story Name";
 "create_story_pop_up_title" = "You created a story! \n %@";
 "create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
+"You can not share empty album" = "You can not share empty album";
+"etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
+"global_permission_title_label" = "Global Data Permission";
+"global_permission_description" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox.";
+"terms_and_use_etk_checkbox_header" = "place etk header here";
+"global_data_permission_agreement" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox. Click for detailed information.";
+"global_data_permission_link" = "Click for detailed information";
+"global_permission_header" = "Some header text will be here";
+"informative_description_label" = "In progress...";

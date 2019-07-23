@@ -1,4 +1,4 @@
-"Welcome1Info" = "Vivre et garder le meilleur ";
+"Welcome1Info" = "Vivre et garder le meilleur";
 
 /*Suggested: "Collect your photos, videos and files on lifebox! Access  whenever you like, wherever you are".*/
 "Welcome1SubInfo" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre lifebox. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
@@ -7,23 +7,23 @@
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de lifebox, vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
 
 /*Suggested: "This file will be removed only from the album. You can access this file from the Photos tab"*/
-"This file will be removed only from your album. You can access this file from Photos tab" = "Ce fichier sera seul supprimé de votre album uniquement. Vous pouvez accéder à ce fichier dans l'onglet Photos";
+"This file will be removed only from your album. You can access this file from Photos tab" = "Ce fichier sera uniquement supprimé de votre album. Vous pouvez accéder à ce fichier à partir de l'onglet Photos.";
 
 /*Suggested: "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?"*/
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder continuer à accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à la suppression ?";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à la suppression ?";
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
 /*Fuzzy*/
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "La suppression de ce fichier est définitive.Une fois supprimé vous ne pourrez plus y accéder depuis Lifebox. Êtes-vous sûr de vouloir procéder à la suppression ?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La suppression de ces fichiers est définitive.Une fois supprimés vous ne pourrez plus y accéder depuis Lifebox.";
 "Purchase" = "Achat";
-"Packages" = "Offre";
+"Packages" = "Offre de stockage";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
 "Verification code is invalid.\nPlease try again" = "Le code de vérification est invalide. Veuillez essayer de nouveau.";
-"Your package is successfully defined" = "Votre offre a été activée avec succès.";
-"Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre.";
-"This package activation code is invalid" = "Ce code d’activation d'offre est invalide.";
-"Enter your promo code" = "Entrer le code d’activation de votre offre.";
+"Your package is successfully defined" = "Votre offre de stockage a été activée avec succès.";
+"Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre de stockage.";
+"This package activation code is invalid" = "Ce code d’activation pour l'offre de stockage est invalide.";
+"Enter your promo code" = "Entrer le code d’activation de votre offre de stockage.";
 "Lifebox campaign" = "Campagne de lifebox";
 "Success" = "Succès";
 "Apply" = "Appliquer";
@@ -42,27 +42,27 @@
 "lifebox Passcode" = "Mot de passe de lifebox";
 "Change Passcode" = "Changer le mot de passe";
 "Passcode" = "Mot de passe";
-"The package activation code is not active" = "Le code d’activation de cette offre n’est pas actif.";
+"The package activation code is not active" = "Le code d’activation de cette offre de stockage n’est pas actif.";
 
 /*Suggested: "This campaign's package activation code can only be used once. You have already activated it"*/
 "You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it" = "Ce code d'activation a déjà été utilisé, vous ne pouvez pas l'utiliser une seconde fois.";
 
 /*What does this mean?*/
-"This package activation code definition time has not yet begun" = "Ce Code d’activation de paquet n’a pas encore engagé";
-"This package activation code has not been activated  yet" = "Ce Code d’activation de paquet n’est pas encore activé";
+"This package activation code definition time has not yet begun" = "Ce Code d’activation d'offre de stockage n’a pas encore engagé";
+"This package activation code has not been activated  yet" = "Ce Code d’activation d'offre de stockage n’est pas encore activé";
 
 /*Suggested: "This package activation code has been used before, please try a different code"*/
-"This package activation code has been used before, please try different code" = "Ce Code d’activation de paquet a été utilisé auparavant, veuillez essayer un différent code";
-"Package activation process is in progress" = "Processus d’activation de paquet est en progression.";
+"This package activation code has been used before, please try different code" = "Ce Code d’activation d'offre de stockage a été utilisé auparavant, veuillez essayer un différent code";
+"Package activation process is in progress" = "Processus d’activation de l'offre de stockage est en progression.";
 
 /*Suggested: "This package activation code has been activated by a different user"
 
 Note: Please check I have understood the intended command here.*/
-"This package activation code is defined for different user" = "Ce Code d’activation de paquet est activé par des différents utilisateurs.";
-"This package activation code has expired" = "Ce Code d’activation d'offre a expiré.";
+"This package activation code is defined for different user" = "Ce Code d’activation d'offre de stockage est activé par des différents utilisateurs.";
+"This package activation code has expired" = "Ce Code d’activation d'offre de stockage a expiré.";
 "Account cannot be found" = "Ce compte est introuvable.";
 "Nothing to download" = "Rien à télécharger";
-"Can't get access to file system" = "Impossible d'accéder au système de fichiers";
+"Can't get access to file system" = "Impossible d'accéder au ficher système";
 "Server error" = "Erreur de serveur";
 "Unknown error" = "Erreur inconnue";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "Trop de tentatives de vérification OTP ont été effectuées. Veuillez essayer de nouveau.";
@@ -74,44 +74,44 @@ Note: Please check I have understood the intended command here.*/
 "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "Le mot de passe est trop long. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
 
 /*Suggested: "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters"*/
-"It is not allowed that the password consists of all the same characters." = "Votre mot de passe est composé des lettres ou des chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 au maximum 16 caractères.";
+"It is not allowed that the password consists of all the same characters." = "Votre mot de passe est composé de lettres ou de chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 au maximum 16 caractères.";
 
 /*Suggested: "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters"*/
-"It is not allowed that the password consists of consecutive characters." = "Votre mot de passe est composé des lettres ou des chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
+"It is not allowed that the password consists of consecutive characters." = "Votre mot de passe est composé de lettres ou de chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
 "Password is invalid" = "Le mot de passe est erroné.";
 "Phone number is in an invalid format." = "Le format du numéro de téléphone est incorrect.";
-"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "Noter que le courriel donné est utilisé déjà par plusieurs utilisateurs et login sera autorisé après la validation d’un adresse électronique.";
+"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "L'adresse mail donnée est déjà utilisée par un autre utilisateur  et la connexion sera autorisée après la validation de l'adresse mail.";
 
 /*Suggested: "This e-mail address is already registered. Please try a different e-mail address"*/
-"This e-mail address is already registered. Please enter another e-mail address." = "Cette adresse électronique est déjà enregistrée. Veuillez essayer une différente adresse électronique.";
-"E-mail address is in an invalid format." = "Cette adresse électronique est au format invalide.";
-"Specifies that the phone number parameter is sent  blank." = "Noter que le paramètre de numéro de téléphone est envoyé vide.";
-"Indicates that the password parameter is sent blank." = "Noter que le paramètre de mot de passe est envoyé vide";
-"Indicates that the e-mail parameter is sent blank." = "Noter que le paramètre de courriel est envoyé vide";
+"This e-mail address is already registered. Please enter another e-mail address." = "Cette adresse mail est déjà enregistrée. Veuillez essayer une différente adresse mail.";
+"E-mail address is in an invalid format." = "Cette adresse mail est dans un format invalide.";
+"Specifies that the phone number parameter is sent  blank." = "Le champ du numéro de téléphone est vide";
+"Indicates that the password parameter is sent blank." = "Le champ du mot de passe est vide";
+"Indicates that the e-mail parameter is sent blank." = "Le champ de l'adresse mail est vide";
 
 /*Suggested: "Enter the verification code
 sent to your phone number %@"*/
-"Enter the verification code\nsent to your number %@" = "Entrer le code de vérification, envoyer votre numéro de téléphone %@";
+"Enter the verification code\nsent to your number %@" = "Entrer le code de vérification envoyé sur votre numéro de téléphone %@";
 "Resend" = "Renvoyer";
 "Next" = "Suivant";
 "%.2f %@ / month" = "%.2f %@ / mois";
 "Settings" = "Paramètres";
 "OK" = "OK";
-"Buy" = "Acquisition";
+"Buy" = "Acheter";
 "Cancel" = "Annuler";
 "Info" = "Info";
-"You can open settings and cancel subscption." = "Vous pouvez ouvrir les paramètres et annuler votre souscription.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler votre paquet, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL LIFEBOX %@\"";
+"You can open settings and cancel subscption." = "Vous pouvez depuis iTunes annuler votre souscription.";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler offre de stockage, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "Vous pouvez visiter iTunes pour annuler votre paquet";
 
 /*Suggested: "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send “STOP” to 2"*/
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, incroyable que vous faites ça! Lorsque vous décidez de la réactiver, nous serons là pour vous :)  Si vous insistez, envoyer ‘‘STOP’’ à 2";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE CANCEL, les autres clients peuvent envoyer LIFEBOX CANCEL au 3030 pour annuler leur droits d’adhésion";
-"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver lifebox 50GB veuillez envoyer SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer SMS avec la mention 500VYKL au numéro 8080";
-"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE, les autres clients peuvent envoyer LIFEBOX 50GB pour le paquet 50GB,  LIFEBOX 500GB pour le paquet lifebox 500GB et LIFEBOX 2.5TB pour le paquet lifebox 2.5 TBau 3030 pour activer leurs droits d’adhésion";
-"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Prix spéciaux pour les souscripteurs lifecell! Envoyer SMS avec la mention 50VKL pour activer lifebox 50GB pour 24,99UAH/30 jours, envoyer SMS avec la mention 500VKL pour activer lifebox 500 GB pour 52,99UAH/30 jours, au numéro 8080";
+"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE, les autres clients peuvent envoyer LIFEBOX 50GB pour l'offre de stockage 50GB,  LIFEBOX 500GB pour l'offre de stockage lifebox 500GB et LIFEBOX 2.5TB pour l'offre de stockage lifebox 2.5 TB au 3030 pour activer leurs droits d’adhésion";
+"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Prix spéciaux pour les souscripteurs lifecell! Envoyer un SMS avec la mention 50VKL pour activer lifebox 50GB pour 24,99UAH/30 jours, envoyer un SMS avec la mention 500VKL pour activer lifebox 500 GB pour 52,99UAH/30 jours, au numéro 8080";
 "%ld docs" = "%ld documents";
-"Quota info" = "Usage info";
+"Quota info" = "Informations d'utilisation";
 "%@ of %@ has remained" = "%1$@ de %2$@ s’est maintenu";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld titres";
@@ -125,13 +125,13 @@ sent to your phone number %@"*/
 "My Stream" = "Albums Intelligents";
 
 /*Suggested: "%d items deleted from your device to free up storage on your device."*/
-"You have free space for %d more items." = "%d éléments supprimés de votre dispositif pour libérer de l'espace de stockage de votre dispositif";
+"You have free space for %d more items." = "%d éléments supprimés de votre appareil pour y libérer de l'espace de stockage.";
 "Delete" = "Supprimer";
 "Some photos will also be deleted from an album." = "Certaines photos seront également supprimées d'un album.";
 "Allow lifebox to delete %d photos?" = "Autorisez-vous lifebox à supprimer %d photos?";
 
 /*Suggested: "here are %d duplicated photos on your device and lifebox. Clear some space by selecting the photos that you want to delete."*/
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos reproduits sont disponibles à la fois dans votre dispositif et dans votre lifebox. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos reproduits sont disponibles à la fois dans votre appareil et dans votre lifebox. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
 "Download to Camera Roll" = "Télécharger dans la Galerie de l'appareil";
 "Share Album" = "Partager l’Album";
 "Album Details" = "Détails de l’Album";
@@ -141,7 +141,7 @@ sent to your phone number %@"*/
 "Music Dteails" = "Détails de la Musique";
 "Document Details" = "Détails du Document";
 "Rename" = "Changer le nom";
-"Select All" = "Sélectionner Tous";
+"Select All" = "Tout sélectionner";
 "Select" = "Sélectionner";
 "More" = "Plus";
 "lifebox" = "Lifebox";
@@ -161,15 +161,15 @@ sent to your phone number %@"*/
 "Original Size" = "Taille originale";
 "Small Size" = "Format réduit";
 "Download" = "Télécharger";
-"Sync" = "Synchro";
+"Sync" = "Synchroniser";
 "Move" = "Déplacer";
 "Edit" = "Éditer";
 "Share" = "Partager";
 "Wait for a Wi-Fi Connection" = "Attente d’une connexion Wi-Fi";
-"Auto Sync Preparation" = "Préparation de Synchronisation Automatique";
+"Auto Sync Preparation" = "Préparation de la Synchronisation Automatique";
 
 /*Could please detail the case when this is used ?*/
-"Sync with data plan" = "Synchroniser en utilisant le forfait data";
+"Sync with data plan" = "Synchroniser en utilisant les données mobiles";
 "Waiting for Wi-Fi connection to auto-sync" = "Attente d’une connexion Wi-Fi pour la synchronisation automatique";
 
 /*Suggested: "Auto sync is off. Go to settings to auto sync."*/
@@ -180,13 +180,13 @@ sent to your phone number %@"*/
 "2G" = "2G";
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Libérer de l’espace";
-"Your device memory is almost full" = "Votre espace disque est presque plein";
+"Your device memory is almost full" = "L'espace de stockage de votre appareil est presque plein";
 
 /*Suggested: "There are some duplicated items on your device and lifebox"*/
 "There are some duplicated items both in your device and lifebox" = "Certains éléments existent en double dans votre appareil et votre lifebox";
 "Operation is complete" = "Fin de l’opération";
 "Download is complete" = "Fin de téléchargement";
-"Deleting is complete" = "Fin de suppression";
+"Deleting is complete" = "Suppression terminée";
 "Downloading files" = "Téléchargement de fichiers";
 "Uploading files over" = "Téléchargement de fichiers sur %@";
 "Syncing files over" = "Synchroniser les fichiers avec %@";
@@ -194,7 +194,7 @@ sent to your phone number %@"*/
 "You need to specify your language preference so that we can serve you better." = "Vous devez choisir votre langue de préférence afin que nous puissions mieux vous servir.";
 "Please type your message" = "Veuillez taper votre message";
 "Error" = "Erreur";
-"Please configurate email client" = "Configurer s’il vous plaît le client de messagerie";
+"Please configurate email client" = "Veuillez configurer votre adresse mail";
 "DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
 "Send" = "Envoyer";
 "%@ about Lifebox" = "%@ à propos de Lifebox";
@@ -202,13 +202,13 @@ sent to your phone number %@"*/
 "Suggestion" = "Suggestion";
 "Feedback Form" = "Pour toutes suggestions ou réclamations, veuillez nous contacter:";
 "Thanks for leaving a comment!" = "Veuillez nous contacter";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre vorre problème. \n\nVersion d’Application: %@\nMsisdn: %@\nPorteur: %@\nDispositif: %@\nSystème d'explotation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage uilisé: %lld\nOffres: %@";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre vorre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'explotation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage uilisé: %lld\nOffres: %@";
 "Upload Photos" = "Télécharger des Photos";
 "Add" = "Ajouter";
 "Albums" = "Albums";
-"Sorry, but play list name should not be empty" = "Désolé, le nom de la liste de lecture ne doit pas être vide";
+"Sorry, but play list name should not be empty" = "Désolé, le nom de la playlist ne doit pas être vide";
 "Sorry, but album name should not be empty" = "Désolé, le nom de l’album ne doit pas être vide";
-"Sorry, but folder name should not be empty" = "Désolé, le nom de répertoire ne doit pas être vide";
+"Sorry, but folder name should not be empty" = "Désolé, le nom du dossier ne doit pas être vide";
 "Play List Name" = "Nom de la playlist";
 "Album Name" = "Nom de l’Album";
 "Folder Name" = "Nom de Dossier";
@@ -237,7 +237,7 @@ Is it "Use "this" to be the album cover?*/
 /*Suggested: "Upload from lifebox failed"*/
 "Fail while uploading from LifeBox" = "Le téléchargement depuis Lifebox a échoué";
 "Sorry, but photos not selected" = "Désolé, les photos n'ont pas été correctement sélectionnées";
-"Upload from lifebox" = "Télécharger deuis lifebox";
+"Upload from lifebox" = "Télécharger depuis lifebox";
 "Upload failed" = "Le téléchargement a échoué";
 "Upload was successful" = "Téléchargé avec succès";
 "Nothing to upload" = "Rien à télécharger";
@@ -251,7 +251,7 @@ Is it "Use "this" to be the album cover?*/
 /*Suggested: "Please choose music for your story"*/
 "Sorry, but story audio should not be empty" = "Veuillez choisir une musique pour votre story";
 "Add music" = "Ajouter de la musique";
-"You did not choose music for your story" = "Vous n’avez pas choisi une musique pour votre article";
+"You did not choose music for your story" = "Vous n’avez pas choisi une musique pour votre story";
 
 /*Suggested: "Failed while adding to album"*/
 "Fail while adding to album" = "Impossible d'ajouter à l'album";
@@ -264,7 +264,7 @@ Is it "Use "this" to be the album cover?*/
 "Continue" = "Continuer";
 
 /*story tbc*/
-"Sorry, but story name should not be empty" = "Veuillez donner un nom pour votre article";
+"Sorry, but story name should not be empty" = "Veuillez donner un nom pour votre storie";
 "SAVE" = "Sauvegarder";
 "Name" = "Nom";
 "Create a Name" = "Créer un Nom";
@@ -277,28 +277,30 @@ Is it "Use "this" to be the album cover?*/
 
 /*Suggested: "You can backup your contacts to lifebox. You can easily manage your contact list from any device and from anywhere."*/
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Vous pouvez sauvegarder vos contacts sur lifebox. Vous pouvez facilement gérer votre liste de contacts à tous moments depuis n'importe quel  appareil";
-"Backed up %d Contacts" = "Vous avez %d chiffres dans votre sauvegarde de contact";
+"Backed up %d Contacts" = "Vous avez %d contacts dans votre sauvegarde Lifebox.";
 "Removed" = "Supprimé";
 "Updated" = "Mis à jour";
 "New Contact" = "Nouveau Contact";
 "Back Up My Contacts" = "Sauvegarder Mes Contacts";
+
+/*Fuzzy*/
 "UPGRADE" = "MISE À NIVEAU";
-"Album Info" = "Informations Sur l’Album";
+"Album Info" = "Informations sur l’Album";
 "Title" = "Titre";
 "Artist" = "Artiste";
 "Album" = "Album";
 
 /*What's the context?*/
-"Taken date" = "Date à prendre";
+"Taken date" = "Date d'enregistrement";
 "Upload date" = "Date du téléchargement";
 "Date modified" = "Date de modification";
 "Duration" = "Durée";
 "File size" = "Taille de fichier";
 "Items" = "Articles";
 "Folder size" = "Taille du dossier";
-"File Info" = "Informations Sur le Fichier";
+"File Info" = "Informations sur le Fichier";
 "File Name" = "Nom du Fichier";
-"Data is not correct" = "La donnée n’est pas correcte";
+"Data is not correct" = "Les données ne sont pas correctes";
 "Done" = "Fait";
 "I want to change my password" = "Je souhaite changer mon mot de passe";
 "We promise, we won’t sent you spam." = "Promis, nous ne vous enverrons pas de spams.";
@@ -306,7 +308,7 @@ Is it "Use "this" to be the album cover?*/
 /*Suggesteed: "I’d like to occasionally hear about lifebox news and promotions"*/
 "I’d like hear about news and promotions about lifebox occasionally." = "J'aimerais recevoir des informations sur l'actualité de lifebox et être informées des offres promotionnelles disponibles.";
 "GSM Number" = "Numéro de Téléphone";
-"E-Mail" = "Email";
+"E-Mail" = "Adresse mail";
 "Name and Surname" = "Nom et Prénom";
 "Your Profile" = "Profil";
 "Import From Cropy" = "Importer depuis Cropy";
@@ -321,7 +323,7 @@ Is it "Use "this" to be the album cover?*/
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID et mot de passe";
 "Usage Info and Packages" = "Détails d'informatons";
 "Recently Deleted Files" = "Fichiers Récemment Supprimés";
-"Auto Sync" = "Auto Synchronisation";
+"Auto Sync" = "Synchronisation automatique";
 "Back-up my contacts" = "Sauvegarder Mes Contacts";
 "Leave feedback" = "Contactez-nous";
 "Upload Photo" = "Télécharger les Photos";
@@ -331,7 +333,7 @@ Is it "Use "this" to be the album cover?*/
 "Start adding your music" = "Commencez à ajouter votre musique";
 "You don’t have any music on your Lifebox yet." = "Vous n’avez encore aucune musique dans votre lifebox";
 "info" = "Info";
-"Enable photo permissions in settings" = "Activer les autorisations des photo dans les paramètres";
+"Enable photo permissions in settings" = "Activer les autorisations des photos dans les paramètres";
 "Start adding your photos" = "Commencer à ajouter vos photos";
 
 /*Suggested: "You don’t have any photos or videos in your lifebox yet."*/
@@ -340,10 +342,10 @@ Is it "Use "this" to be the album cover?*/
 "View All My Stream" = "Voir Tout Mon Flux";
 "%d Photos" = "%d Photos";
 "You’ve uploaded %@ two days ago!" = "Vous avez téléchargé %@ il y a deux jours!";
-"Expand My Storage" = "Mettre à Niveau Mon Plan de Stockage";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez le %85 de votre quota de lifebox! C’est le moment de mettre à niveau votre stockage.";
-"Your storage is almost full!" = "Le stockage de votre dispositif est presque plein!";
-"Change filter" = "Filtre de changement";
+"Expand My Storage" = "Mettre à Niveau Mon Offre de Stockage";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez %85 de votre quota de lifebox! C’est le moment de mettre à niveau votre stockage.";
+"Your storage is almost full!" = "Le stockage de votre appareil est presque plein!";
+"Change filter" = "Filtre";
 "Save this photo" = "Sauvegarder";
 "You can apply this filter and my more to your other picures as well" = "Vous pouvez également appliquer d'autres filtres pour vos photos";
 "Did you like this filter?" = "Découvrir les filtres";
@@ -352,10 +354,10 @@ Is it "Use "this" to be the album cover?*/
 /*Suggested: "You don’t have a profile picture, let’s upload a nice photo!"*/
 "You don’t have a profile picture, let’s upload a pretty photo!" = "Vous n’avez pas de photo de profil, ajoutons une jolie photo!";
 "Your profile looks empty" = "Votre profil a l'air vide";
-"Sync with Data Plan Now" = "Synchroniser avec le Plan de Données Maintenant";
-"Waiting for Wi-Fi to auto sync 14 items" = "En attente de la synchronisation automatique de Wi-Fi 14 éléments";
+"Sync with Data Plan Now" = "Synchroniser avec les données mobile maintenant";
+"Waiting for Wi-Fi to auto sync 14 items" = "En attente de la synchronisation automatique via Wi-Fi 14 éléments";
 "No" = "Non";
-"Access to Gallery is denied. Please change it from the settings menu of the device" = "L'accès à la galerie est refusé. Veuillez le changer depuis le menu des paramètres du dispositif.";
+"Access to Gallery is denied. Please change it from the settings menu of the device" = "L'accès à la galerie est refusé. Veuillez effectuer votre modification depuis le menu des paramètres de l'appareil.";
 "Caution!" = "Attention!";
 "You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Vous pouvez accéder à tout ce qui concerne Lifebox depuis la page d'accueil. Commencez à utiliser votre lifebox avec nos suggestions. Vous pouvez balayer les cartes que vous n’aimez pas.";
 "Welcome! Let’s get you started!" = "Bienvenue ! Commençons !";
@@ -365,9 +367,9 @@ Is it "Use "this" to be the album cover?*/
 "Video" = "Film";
 "Sorted by Size" = "Classé par Ordre de Taille";
 "Sorted by Time" = "Classé par Ordre de Date";
-"Alphabetically Sorted" = "Classé Alphabétiquement ";
-"Smallest" = "Plus Petits";
-"Largest" = "Plus Large";
+"Alphabetically Sorted" = "Classé Alphabétiquement";
+"Smallest" = "Plus Petit";
+"Largest" = "Plus Grand";
 "Size" = "Taille";
 "Newest" = "Plus Récent";
 "Oldest" = "Plus Ancien";
@@ -377,14 +379,15 @@ Is it "Use "this" to be the album cover?*/
 "List" = "Liste";
 "Selection Type" = "Type de Sélection";
 "File Type" = "Type de Fichier";
-"Sort Type" = "Type Non Trillé";
+"Sort Type" = "Type de Tri";
 "View Type" = "Type d’Affichage";
-"Sync Type" = "Type de Synchro";
+"Sync Type" = "Type de Synchronisation";
 "searchIcon" = "Icône de Recherche";
 "DeleteShareButton" = "Supprimer le Bouton de Partage";
 "search" = "recherche";
 
 /*What is the context ? in what cases is that used for?*/
+/*Fuzzy*/
 "cog" = "Denture";
 "more" = "plus";
 "Create album" = "Créer des albums";
@@ -407,7 +410,7 @@ Is it "Use "this" to be the album cover?*/
 "Overwrite backup?" = "Remplacer la sauvegarde existante?";
 "Verification code is invalid. Please try again." = "Le code de vérification est incorrect. Veuillez essayer une nouvelle fois.";
 "Type the text" = "Saisissez le texte affiché dans l'image";
-"E-MAIL" = "E-mail";
+"E-MAIL" = "Adresse mail";
 "Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
 "Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
@@ -416,7 +419,7 @@ Is it "Use "this" to be the album cover?*/
 
 /*Please explain context*/
 /*Fuzzy*/
-"Sync over data plan?" = "Synchronisation de plan de données?";
+"Sync over data plan?" = "Synchroniser avec les données mobiles?";
 "Skip Auto-Sync" = "Passer la Synchronisation Automatique";
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Vous ignorez les paramètres de téléchargement automatique. Vous pouvez les activer plus tard dans vos paramètres.";
 "Skip setting Auto-Sync?" = "Voulez-vous ignorer les paramètres de téléchargement automatique?";
@@ -431,9 +434,9 @@ Is it "Use "this" to be the album cover?*/
 "You have to fill in a password" = "Vous devez renseigner votre mot de passe.";
 
 /*Suggested: "Fill in your e-mail or Phone Number"*/
-"You have to fill in your mail or GSM Number" = "Saisissez votre email ou votre numéro de Mobile";
+"You have to fill in your mail or GSM Number" = "Saisissez votre adresse mail ou votre numéro de Mobile";
 "Password" = "Mot de Passe";
-"E-Mail or GSM Number" = "E-mail ou Numéro de Mobile";
+"E-Mail or GSM Number" = "Adresse mail ou Numéro de Mobile";
 "Remember my credentials" = "Se souvenir de mon mot de passe";
 "I can't login" = "J’ai oublié mon mot de passe";
 "Register to lifebox and get a 5 GB of storage for free!" = "Inscrivez-vous à lifebox et bénéfiicez de 5 Gigas de stockage offerts!";
@@ -443,11 +446,11 @@ Is it "Use "this" to be the album cover?*/
 "Password fields do not match" = "Les mots de passe ne correspondent pas";
 "Please enter your password" = "Veuillez entrer votre mot de passe.";
 "Please enter a valid GSM number." = "Veuillez entrer un numéro de mobile valide.";
-"Please enter a valid email address." = "Veuillez entrer un e-mail valide.";
-"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Vous êtes en train de finaliser le processus avec l'email %@ . Nous allons utiliser cet e-mail pour les opérations de mot de passe et l'envoi de notification.";
-"E-mail Usage Information" = "Informations sur l'utilisation  de l'email";
+"Please enter a valid email address." = "Veuillez entrer une adresse mail valide.";
+"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Vous êtes en train de finaliser le processus avec l'adresse mail %@ . Nous allons utiliser cette adresse pour les opérations de mot de passe et l'envoi de notification.";
+"E-mail Usage Information" = "Informations sur l'utilisation de l'adresse mail";
 "Password fields do not match." = "Les mots de passe ne correspondent pas";
-"Please check the e-mail address." = "Veuillez vérifier l'e-mail.";
+"Please check the e-mail address." = "Veuillez vérifier l'adresse mail.";
 
 /*Suggested: "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters."*/
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Veuillez choisir un mot de passe comprenant des lettres et des chiffres non consécutifs, de 6 caractères au minimum et 16 au maximum";
@@ -462,13 +465,13 @@ Is it "Use "this" to be the album cover?*/
 /*is it for a double checking to confirm the cart?
 If yes please use : veuillez confirmer votre achat*/
 "Verify Your Purchase" = "Vérifier votre achat";
-" You have to fill in a password" = "Vous devez remplir votre mot de passe";
+" You have to fill in a password" = "Vous devez entrer votre mot de passe";
 "Please enter valid Email" = "Veuillez entrer un e-mail valide";
-" You have to fill in your mail" = "Vous devez remplir votre e-mail";
+" You have to fill in your mail" = "Vous devez entrer votre adresse mail";
 "Re-Enter Password" = "Entrer de nouveau le Mot de Passe";
 "I have an account, let me log in" = "J’ai déjà un compte, je souhaite me connecter";
 "Start using Lifebox now!" = "Créer un Nouveau Compte";
-"E-mail field is invalid" = "Le champ e-mail est incorrect";
+"E-mail field is invalid" = "Le champ adresse mail est incorrect";
 "Delete Device Original" = "Supprimer l'appareil d'origine";
 "Please check your internet connection is active and Mobile Data is ON." = "Veuillez vérifier que votre connexion internet est active et que les donnés mobiles sont activées.";
 "cancelled" = "annulé";
@@ -476,7 +479,7 @@ If yes please use : veuillez confirmer votre achat*/
 "ServiceError" = "Erreur de Service";
 
 /*Suggested: "Too many verification code requests for this phone number. Please try again later"*/
-"Too many verification code requested for this msisdn. Please try again later" = "Trop de codes de vérification demandéspour ce numéro de mobile. Veuillez essayer de nouveau";
+"Too many verification code requested for this msisdn. Please try again later" = "Trop de codes de vérification demandés pour ce numéro de mobile. Veuillez essayer de nouveau";
 
 /*Suggested: "This Phone Number is already registered. Please enter another Phone Number"
 
@@ -495,12 +498,12 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Your Uploads" = "Vos Téléchargements";
 "Create a story" = "Créer une story";
 "Please Choose 20 files at most" = "Veuillez choisir 20 photos au maximum";
-"You need to enable access to Contacts to continue" = "Vous devez permettre l’accès aux Contacts pour continuer ";
+"You need to enable access to Contacts to continue" = "Vous devez permettre l’accès aux Contacts pour continuer";
 "Cancel BackUp" = "Annuler la Sauvegarde";
 "Clear BackUp" = "Effacer la Sauvegarde";
 
 /*Suggested: "There are %d duplicated contacts in your device's contact list"*/
-"There are %d duplicated contacts." = "Il ya des %d contacts en doublons dans la liste de contacts de votre appareil";
+"There are %d duplicated contacts." = "Il ya des %d contacts en doublon dans votre répertoire";
 "Are you sure you want to delete?" = "Êtes-vous sûr de vouloir supprimer?";
 
 /*Suggested: "These duplicated contacts will be removed from the contact list on your device"*/
@@ -509,7 +512,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 "%%%d Analyzed…" = "%%%d Analysé…";
 "%%%d Backed up…" = "%%%d Sauvegardé…";
 "Restored %d Contacts" = "%d Contacts Rétablis";
-"%d Duplicated Contacts Deleted" = "%d Contacts en doublon supprimés de lai liste de contacts de votre appareil";
+"%d Duplicated Contacts Deleted" = "%d Contacts en doublon supprimés de la liste de contacts de votre appareil";
 "You have %d numbers on your contacts backup." = "Vous avez %d contacts dans votre lifebox";
 "This contact will be deleted from your contacts." = "Ce contact sera supprimé de vos contacts";
 "Upgrade" = "Mise à jour";
@@ -938,8 +941,6 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
-/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
-
 Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -972,8 +973,6 @@ Please check I have understood the intended command here*/
 "feature_paycell_slcm_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_slcm_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 "feature_all_access_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
-
-/*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
@@ -1300,3 +1299,12 @@ Please check I have understood the intended command here*/
 "create_story_pop_up_title" = "";
 "create_story_pop_up_message" = "";
 "create_story_path_to_story" = "";
+"You can not share empty album" = "";
+"etk_permission_description" = "";
+"global_permission_title_label" = "";
+"global_permission_description" = "";
+"terms_and_use_etk_checkbox_header" = "";
+"global_data_permission_agreement" = "";
+"global_data_permission_link" = "";
+"global_permission_header" = "";
+"informative_description_label" = "";

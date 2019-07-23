@@ -25,7 +25,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.checkEtk()
+        interactor.checkEtkAndGlobalPermissions()
     }
     
     func startUsing() {
@@ -47,8 +47,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         }
     }
     
-    func applyEulaFaild(errorResponce: ErrorResponse) {
-        asyncOperationFail(errorMessage: errorResponce.description)
+    func applyEulaFailed(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
     }
     
     func confirmAgreements(_ confirm: Bool) {
@@ -57,6 +57,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmEtk(_ etk: Bool) {
         interactor.etkAuth = etk
+    }
+    
+    func confirmGlobalPerm(_ globalPerm: Bool) {
+        interactor.globalPermAuth = globalPerm
     }
     
     // MARK: OUT
@@ -91,6 +95,11 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func openPrivacyPolicyDescriptionController() {
         router.goToPrivacyPolicyDescriptionController()
     }
+    
+    func openGlobalDataPermissionDetails() {
+        router.goToGlobalDataPermissionDetails()
+    }
+    
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
         view.showSpinner()
@@ -115,6 +124,24 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func setupEtk(isShowEtk: Bool) {
         if isShowEtk {
             view.showEtk()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupGlobalPerm(isShowGlobalPerm: Bool) {
+        if isShowGlobalPerm {
+//            TODO: add logic with UI
+//            view.showGlobalPermission()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool) {
+        if isShowEtk {
+            view.showEtk()
+        }
+        if isShowGlobalPerm {
+            view.showGlobalPermissions()
         }
         interactor.loadTermsAndUses()
     }
