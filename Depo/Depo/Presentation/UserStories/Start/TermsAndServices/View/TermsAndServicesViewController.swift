@@ -14,7 +14,30 @@ class TermsAndServicesViewController: ViewController {
     var output: TermsAndServicesViewOutput!
 
     @IBOutlet private weak var welcomeLabel: UILabel!
-    @IBOutlet private weak var contentView: UIView!
+    
+    @IBOutlet weak var contentView: UITextView! {
+        willSet {
+            newValue.text = ""
+            newValue.backgroundColor = ColorConstants.bottomViewGrayColor
+            newValue.layer.borderColor = ColorConstants.lightGrayColor.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+            newValue.dataDetectorTypes = [.link, .phoneNumber]
+            newValue.isEditable = false
+            
+            /// to remove insets
+            /// https://stackoverflow.com/a/42333832/5893286
+            newValue.textContainer.lineFragmentPadding = 0
+            let defaultInset: CGFloat = 14
+            newValue.textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)
+            newValue.delegate = self
+        }
+    }
+    
     @IBOutlet private weak var acceptButton: BlueButtonWithWhiteText!
     @IBOutlet private weak var checkboxesStack: UIStackView! {
         willSet {
@@ -28,7 +51,6 @@ class TermsAndServicesViewController: ViewController {
         }
     }
     
-    
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
     @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
 
@@ -38,35 +60,7 @@ class TermsAndServicesViewController: ViewController {
     private var etkTermsCheckboxView: TermsCheckboxTextView?
     private var globalDataPermissionTermsCheckboxView: TermsCheckboxTextView?
     
-    private let webView: WKWebView = {
-        let contentController = WKUserContentController()
-         let scriptSource = "document.body.style.webkitTextSizeAdjust = 'auto';"
-    
-        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        contentController.addUserScript(script)
-        
-        let webConfig = WKWebViewConfiguration()
-        webConfig.userContentController = contentController
-        if #available(iOS 10.0, *) {
-            webConfig.dataDetectorTypes = [.phoneNumber, .link]
-        }
-        
-        let webView = WKWebView(frame: .zero, configuration: webConfig)
-        webView.isOpaque = false
-        
-        /// there is a bug for iOS 9
-        /// https://stackoverflow.com/a/32843700/5893286
-        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
-        return webView
-    }()
-    
     //MARK: - Life cycle
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        webView.frame = contentView.bounds
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,9 +71,7 @@ class TermsAndServicesViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
-        contentView.addSubview(webView)
-        
+
         if !Device.isIpad {
             setNavigationTitle(title: TextConstants.termsAndUsesTitile)
         }
@@ -105,11 +97,6 @@ class TermsAndServicesViewController: ViewController {
         return .clear
     }
     
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-    }
-    
     //MARK: - Configuration and Input
     private func configureUI() {
         welcomeLabel.text = TextConstants.termsAndUseWelcomeText
@@ -119,8 +106,6 @@ class TermsAndServicesViewController: ViewController {
         view.layoutIfNeeded()
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
-        
-        webView.clearPage()
         
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 10
@@ -206,8 +191,30 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
         guard !eula.isEmpty else {
             return
         }
-        
-        webView.loadHTMLString(eula, baseURL: nil)
+        DispatchQueue.global().async { [weak self] in
+            let font = UIFont.TurkcellSaturaRegFont(size: 14)
+            /// https://stackoverflow.com/a/27422343
+            let customFontEulaString = "<style>body{font-family: '\(font.familyName)'; font-size:\(font.pointSize);}</style>" + eula
+            guard let data = customFontEulaString.data(using: .utf8) else {
+                assertionFailure()
+                return
+            }
+            /// https://stackoverflow.com/q/50969015/5893286
+            /// fixed black screen
+            /// and error "AttributedString called within transaction"
+
+            do {
+                let attributedString = try NSAttributedString(data: data, options:
+                    [.documentType: NSAttributedString.DocumentType.html,
+                     .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                
+                DispatchQueue.main.async {
+                    self?.contentView.attributedText = attributedString
+                }
+            } catch {
+                assertionFailure()
+            }
+        }
     }
     
     func hideBackButton() {
@@ -224,19 +231,6 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     
     func popNavigationVC() {
         navigationController?.popViewController(animated: true)
-    }
-}
-
-extension TermsAndServicesViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        switch navigationAction.navigationType {
-        case .linkActivated:
-            UIApplication.shared.openSafely(navigationAction.request.url)
-            decisionHandler(.cancel)
-        default:
-            decisionHandler(.allow)
-        }
     }
 }
 
@@ -278,6 +272,14 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
         default:
             UIApplication.shared.openSafely(url)
         }
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension TermsAndServicesViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        UIApplication.shared.openSafely(URL)
         return true
     }
 }
