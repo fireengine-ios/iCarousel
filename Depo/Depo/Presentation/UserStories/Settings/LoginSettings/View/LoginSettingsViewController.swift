@@ -20,6 +20,8 @@ final class LoginSettingsViewController: ViewController {
         }
     }
 
+    @IBOutlet private weak var emptyView: UIView!
+    
     var output: LoginSettingsViewOutput!
     
     //MARK: lifecycle
@@ -44,6 +46,8 @@ extension LoginSettingsViewController: LoginSettingsViewInput {
             tableView.reloadRows(at: visibleCellIndexPaths, with: .none)
             tableView.endUpdates()
         }
+        
+        emptyView.isHidden = true
     }
     
 }
