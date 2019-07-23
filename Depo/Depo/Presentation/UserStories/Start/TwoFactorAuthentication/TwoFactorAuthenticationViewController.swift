@@ -14,8 +14,8 @@ enum TwoFAChallengingReason: String {
 }
 
 enum TwoFAChallengeType: String {
-    case phone = "EMAIL_OTP"
-    case email = "SMS_OTP"
+    case phone = "SMS_OTP"
+    case email = "EMAIL_OTP"
     
     var typeDescription:String {
         switch self {
