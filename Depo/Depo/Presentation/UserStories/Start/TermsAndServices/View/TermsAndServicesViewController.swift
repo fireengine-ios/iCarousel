@@ -18,8 +18,8 @@ class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var contentView: UITextView! {
         willSet {
             newValue.text = ""
-            newValue.backgroundColor = ColorConstants.bottomViewGrayColor
-            newValue.layer.borderColor = ColorConstants.lightGrayColor.cgColor
+            newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.layer.borderColor = ColorConstants.darkTintGray.cgColor
             newValue.layer.borderWidth = 1
             
             newValue.linkTextAttributes = [
@@ -198,7 +198,8 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
             
             let font = UIFont.TurkcellSaturaRegFont(size: 14)
             /// https://stackoverflow.com/a/27422343
-            let customFontEulaString = "<style>body{font-family: '\(font.familyName)'; font-size:\(font.pointSize);}</style>" + eula
+//            body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
+            let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
             
             guard let data = customFontEulaString.data(using: .utf8) else {
                 assertionFailure()
