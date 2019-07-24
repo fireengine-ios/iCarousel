@@ -799,7 +799,7 @@
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Не показывать это снова";
 "instapick_analyze" = "Оцените с PhotoPick!";
-"connected_account" = "Эта функция классно работает с объединенными учетками!";
+"connected_account" = "Вы можете проанализировать, какие из ваших фотографий могут получить больше лайков в Instagram, используя PhotoPick!";
 "instapick_description" = "Если вы свяжете ваш аккаунт с профилем в Instagram, мы сможем улучшить сервис, выполняя персонализированно каждую новую оценку PhotoPick";
 "connected_with_instagram" = "Связать с Instagram";
 "connected_with_instagram_name" = "Связать с Instagram как";
@@ -1010,3 +1010,9 @@
 "etk_permission_description" = "";
 "global_permission_title_label" = "";
 "global_permission_description" = "";
+"terms_and_use_etk_checkbox_header" = "";
+"global_data_permission_agreement" = "";
+"global_data_permission_link" = "";
+"global_permission_header" = "";
+"informative_description_label" = "";
+"global_permission_screen_title" = "";
