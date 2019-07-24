@@ -16,4 +16,5 @@ protocol TermsAndServicesRouterInput {
     func goToTurkcellAndGroupCompanies()
     func goToCommercialEmailMessages()
     func goToPrivacyPolicyDescriptionController()
+    func goToGlobalDataPermissionDetails()
 }

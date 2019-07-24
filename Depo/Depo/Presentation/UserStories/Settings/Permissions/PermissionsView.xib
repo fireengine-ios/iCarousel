@@ -18,63 +18,73 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="PermissionsView" customModule="lifebox" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="362" height="96"/>
+            <rect key="frame" x="0.0" y="0.0" width="362" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFv-Jj-fAS" userLabel="Title Label">
-                    <rect key="frame" x="13" y="22" width="275" height="19"/>
-                    <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWH-sE-qE0" userLabel="Separator View">
+                    <rect key="frame" x="14" y="124" width="348" height="1"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Jwb-vk-S6y"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="3sh-JM-h47">
+                    <rect key="frame" x="13" y="22" width="331" height="87"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-pQ-DLc" userLabel="Title Label">
+                            <rect key="frame" x="0.0" y="0.0" width="331" height="19"/>
+                            <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOm-67-OGW" userLabel="In Progress Label">
+                            <rect key="frame" x="0.0" y="36" width="331" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7P-EV-fhx" userLabel="Description Label">
+                            <rect key="frame" x="0.0" y="70" width="331" height="17"/>
+                            <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-9N-Hd4">
                     <rect key="frame" x="295" y="16" width="51" height="31"/>
                     <connections>
                         <action selector="permissionSwitchValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="IgA-WU-6Dt"/>
                     </connections>
                 </switch>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-Mc-VhK" userLabel="Description Label">
-                    <rect key="frame" x="13" y="58" width="328" height="17"/>
-                    <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="16"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWH-sE-qE0" userLabel="Separator View">
-                    <rect key="frame" x="14" y="90" width="348" height="1"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="Jwb-vk-S6y"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="DFv-Jj-fAS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="22" id="IUP-2V-vnk"/>
+                <constraint firstItem="3sh-JM-h47" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="22" id="7H3-ZZ-hhG"/>
+                <constraint firstItem="3sh-JM-h47" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Hno-nb-LLo"/>
                 <constraint firstItem="ZWH-sE-qE0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="Lx7-f5-sQ2"/>
                 <constraint firstItem="XhQ-9N-Hd4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="V6C-RM-exF"/>
+                <constraint firstAttribute="bottom" secondItem="3sh-JM-h47" secondAttribute="bottom" constant="21" id="aeK-Fn-Fqy"/>
+                <constraint firstAttribute="trailing" secondItem="3sh-JM-h47" secondAttribute="trailing" constant="18" id="en9-MY-8j7"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XhQ-9N-Hd4" secondAttribute="trailing" constant="18" id="fGF-UP-ot3"/>
-                <constraint firstItem="ZWH-sE-qE0" firstAttribute="top" secondItem="emJ-Mc-VhK" secondAttribute="bottom" constant="15" id="npU-ft-tB2"/>
-                <constraint firstItem="XhQ-9N-Hd4" firstAttribute="leading" secondItem="DFv-Jj-fAS" secondAttribute="trailing" constant="7" id="q1r-BQ-n0f"/>
-                <constraint firstItem="emJ-Mc-VhK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="qZA-mG-tLZ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="emJ-Mc-VhK" secondAttribute="trailing" constant="21" id="rRE-Tb-hTA"/>
-                <constraint firstItem="DFv-Jj-fAS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="u76-fM-nDs"/>
                 <constraint firstAttribute="trailing" secondItem="ZWH-sE-qE0" secondAttribute="trailing" id="ukq-GC-D5f"/>
-                <constraint firstItem="emJ-Mc-VhK" firstAttribute="top" secondItem="DFv-Jj-fAS" secondAttribute="bottom" constant="17" id="zLe-TB-yu4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZWH-sE-qE0" secondAttribute="bottom" constant="5" id="zYD-Mg-7cO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="descriptionLabel" destination="emJ-Mc-VhK" id="oOk-Ox-kJc"/>
+                <outlet property="descriptionLabel" destination="c7P-EV-fhx" id="Mug-aq-5pt"/>
+                <outlet property="inProgressLabel" destination="YOm-67-OGW" id="SNL-og-av6"/>
                 <outlet property="permissionSwitch" destination="XhQ-9N-Hd4" id="30U-sf-DRk"/>
-                <outlet property="titleLabel" destination="DFv-Jj-fAS" id="qR1-AL-PEU"/>
+                <outlet property="titleLabel" destination="4eH-pQ-DLc" id="Wz3-wc-aiz"/>
             </connections>
             <point key="canvasLocation" x="118" y="-35"/>
         </view>
         <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionLabel" destination="emJ-Mc-VhK" id="lx3-4L-aLv"/>
-                <outlet property="titleLabel" destination="DFv-Jj-fAS" id="6hK-N5-zJf"/>
+                <outlet property="descriptionLabel" destination="c7P-EV-fhx" id="rjg-lU-MQg"/>
+                <outlet property="informativeLabel" destination="YOm-67-OGW" id="g9j-Rd-qAt"/>
+                <outlet property="titleLabel" destination="4eH-pQ-DLc" id="hAa-BQ-25a"/>
             </connections>
         </customObject>
     </objects>

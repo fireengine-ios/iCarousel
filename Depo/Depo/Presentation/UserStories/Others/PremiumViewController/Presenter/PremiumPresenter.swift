@@ -109,6 +109,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
         interactor.getFeaturePacks()
     }
     

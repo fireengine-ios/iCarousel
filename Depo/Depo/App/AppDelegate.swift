@@ -85,9 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = router.vcForCurrentState()
         window?.makeKeyAndVisible()
             
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        FBSDKAppLinkUtility.fetchDeferredAppLink { url, error in
+        AppLinkUtility.fetchDeferredAppLink { url, error in
             if let url = url {
                 UIApplication.shared.openSafely(url)
             } else {
@@ -115,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
+        if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
             return true
@@ -244,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
-        FBSDKAppEvents.activateApp()
+        AppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -319,7 +319,7 @@ extension AppDelegate {
         debugLog("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
-        FBSDKAppEvents.logPushNotificationOpen(userInfo)
+        AppEvents.logPushNotificationOpen(userInfo)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

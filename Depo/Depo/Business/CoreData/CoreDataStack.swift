@@ -15,7 +15,7 @@ final class CoreDataStack: NSObject {
     
     private static let modelName = "LifeBoxModel"
     private static let persistentStoreName = "DataModel"
-    
+    private static let modelVersion = "3"
     
     private override init() {
         super.init()
@@ -36,6 +36,7 @@ final class CoreDataStack: NSObject {
     
     @objc func managedObjectContextDidSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else {
+            assertionFailure()
             return
         }
         if context != mainContext, context.parent == mainContext {
@@ -50,11 +51,12 @@ final class CoreDataStack: NSObject {
         
         let loadDefaultStore = {
             container.loadPersistentStores { (storeDescription, error) in
-                print("CoreData: Inited \(storeDescription)")
+                debugLog("CoreData loadPersistentStores \(storeDescription)")
                 if let error = error {
-                    print("CoreData: Unresolved error \(error)")
+                    debugLog("CoreData loadPersistentStores error \(error)")
                     return
                 }
+                assertionFailure()
             }
         }
         
@@ -78,12 +80,22 @@ final class CoreDataStack: NSObject {
     
     ///--- available iOS 9
     private let persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        do {
-            return try NSPersistentStoreCoordinator.coordinator(modelName: CoreDataStack.modelName, persistentStoreName: CoreDataStack.persistentStoreName)
-        } catch {
-            print("CoreData: Unresolved error \(error)")
+        /// use persistentContainer for iOS 10+
+        /// can be "lazy var" but there was problem with it
+        if #available(iOS 10.0, *) {
+            return nil
+        } else {
+            do {
+                return try NSPersistentStoreCoordinator
+                    .coordinator(modelName: CoreDataStack.modelName,
+                                 persistentStoreName: CoreDataStack.persistentStoreName,
+                                 version: CoreDataStack.modelVersion)
+            } catch {
+                debugLog("CoreData: Unresolved error \(error)")
+                assertionFailure()
+                return nil
+            }
         }
-        return nil
     }()
     
     private lazy var managedObjectContext: NSManagedObjectContext = {

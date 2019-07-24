@@ -9,20 +9,29 @@
 enum AnalyticsEvent {
     case signUp
     case login
+
     case uploadPhoto
     case uploadVideo
     case uploadFromCamera
     case uploadMusic
     case uploadDocument
+
     case purchaseTurkcell50
+    case purchaseTurkcell100
     case purchaseTurkcell500
     case purchaseTurkcell2500
+    case purchaseTurkcellPremium
+
     case purchaseNonTurkcell50
+    case purchaseNonTurkcell100
     case purchaseNonTurkcell500
     case purchaseNonTurkcell2500
+    case purchaseNonTurkcellPremium
+
     case importDropbox
     case importFacebook
     case importInstagram
+
     case turnOnAutosync
     case contactBackup
     case freeUpSpace
@@ -33,20 +42,29 @@ enum AnalyticsEvent {
         switch self {
         case .signUp: return "ese4q4"
         case .login: return "qqnm9p"
+
         case .uploadPhoto: return "esdqth"
         case .uploadVideo: return "noawdt"
         case .uploadFromCamera: return "yx3j4p"
         case .uploadMusic: return "ba947a"
         case .uploadDocument: return "jb1jc6"
+
         case .purchaseTurkcell50: return "trie85"
+        case .purchaseTurkcell100: return "62s83p"
         case .purchaseTurkcell500: return "wdqlvk"
         case .purchaseTurkcell2500: return "7bf7gu"
+        case .purchaseTurkcellPremium: return "qexub9"
+
         case .purchaseNonTurkcell50: return "q3ivog"
+        case .purchaseNonTurkcell100: return "lbrusf"
         case .purchaseNonTurkcell500: return "x6zaly"
         case .purchaseNonTurkcell2500: return "zab8u6"
+        case .purchaseNonTurkcellPremium: return "9pyt2d"
+
         case .importDropbox: return "tdvlrq"
         case .importFacebook: return "y5dz5j"
         case .importInstagram: return "jk78lq"
+
         case .turnOnAutosync: return "kwo7m3"
         case .contactBackup: return "u440dw"
         case .freeUpSpace: return "w9vvtl"
@@ -59,20 +77,29 @@ enum AnalyticsEvent {
         switch self {
         case .signUp: return "SIGNUP"
         case .login: return "LOGIN"
+
         case .uploadPhoto: return "UPLOAD_PHOTO"
         case .uploadVideo: return "UPLOAD_VIDEO"
         case .uploadFromCamera: return "UPLOAD_FROM_CAMERA"
         case .uploadMusic: return "UPLOAD_MUSIC"
         case .uploadDocument: return "UPLOAD_DOCUMENT"
+
         case .purchaseTurkcell50: return "PURCHASE_50_GB_TURKCELL"
+        case .purchaseTurkcell100: return "PURCHASE_100_GB_TURKCELL"
         case .purchaseTurkcell500: return "PURCHASE_500_GB_TURKCELL"
         case .purchaseTurkcell2500: return "PRUCHASE_25_TB_TURKCELL"
+        case .purchaseTurkcellPremium: return "PURCHASE_PREMIUM_TURKCELL"
+
         case .purchaseNonTurkcell50: return "PURCHASE_50_GB_NONTURKCELL"
+        case .purchaseNonTurkcell100: return "PURCHASE_100_GB_NONTURKCELL"
         case .purchaseNonTurkcell500: return "PURCHASE_500_GB_NONTURKCELL"
         case .purchaseNonTurkcell2500: return "PRUCHASE_25_TB_NONTURKCELL"
+        case .purchaseNonTurkcellPremium: return "PURCHASE_PREMIUM_NONTURKCELL"
+
         case .importDropbox: return "DROPBOX_IMPORT"
         case .importFacebook: return "FACEBOOK_IMPORT"
         case .importInstagram: return "INSTAGRAM_IMPORT"
+
         case .turnOnAutosync: return "TURN_ON_AUTOSYNC"
         case .contactBackup: return "CONTACT_BACKUP"
         case .freeUpSpace: return "FREE_UP_SPACE"
@@ -293,60 +320,60 @@ enum AnalyticsAppScreens {
     }
 }
 
-enum AnalyticsPackageProductParametrs {
-    case itemName
-    case itemID
-    case price
-    case itemBrand
-    case itemCategory
-    case itemVariant
-    case index
-    case quantity
-    
-    var text: String {
-        switch self {
-        case .itemName:
-            return "AnalyticsParameterItemName"
-        case .itemID:
-            return "AnalyticsParameterItemID"
-        case .price:
-            return "AnalyticsParameterPrice"
-        case .itemBrand:
-            return "AnalyticsParameterItemBrand"
-        case .itemCategory:
-            return "AnalyticsParameterItemCategory"
-        case .itemVariant:
-            return "AnalyticsParameterItemVariant"
-        case .index:
-            return "AnalyticsParameterIndex"
-        case .quantity:
-            return "AnalyticsParameterQuantity"
-        }
-    }
-}
+//enum AnalyticsPackageProductParametrs {
+//    case itemName
+//    case itemID
+//    case price
+//    case itemBrand
+//    case itemCategory
+//    case itemVariant
+//    case index
+//    case quantity
+//
+//    var text: String {
+//        switch self {
+//        case .itemName:
+//            return "AnalyticsParameterItemName"
+//        case .itemID:
+//            return "AnalyticsParameterItemID"
+//        case .price:
+//            return "AnalyticsParameterPrice"
+//        case .itemBrand:
+//            return "AnalyticsParameterItemBrand"
+//        case .itemCategory:
+//            return "AnalyticsParameterItemCategory"
+//        case .itemVariant:
+//            return "AnalyticsParameterItemVariant"
+//        case .index:
+//            return "AnalyticsParameterIndex"
+//        case .quantity:
+//            return "AnalyticsParameterQuantity"
+//        }
+//    }
+//}
 
 enum AnalyticsPackageEcommerce {
     case items
-    case itemList
-    case transactionID
-    case tax
-    case priceValue
-    case shipping
+//    case itemList
+//    case transactionID
+//    case tax
+//    case priceValue
+//    case shipping
     
     var text: String {
         switch self {
         case .items:
             return "items"
-        case .itemList:
-            return "AnalyticsParameterItemList"
-        case .transactionID:
-            return "AnalyticsParameterTransactionID"
-        case .tax:
-            return "AnalyticsParameterTax"
-        case .priceValue:
-            return "AnalyticsParameterValue"
-        case .shipping:
-            return "AnalyticsParameterShipping"
+//        case .itemList:
+//            return "AnalyticsParameterItemList"
+//        case .transactionID:
+//            return "AnalyticsParameterTransactionID"
+//        case .tax:
+//            return "AnalyticsParameterTax"
+//        case .priceValue:
+//            return "AnalyticsParameterValue"
+//        case .shipping:
+//            return "AnalyticsParameterShipping"
         }
     }
 }

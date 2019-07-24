@@ -24,13 +24,13 @@ final class IntrinsicTextView: UITextView {
         isScrollEnabled = false
     }
     
-    override var contentSize:CGSize {
+    override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
         }
     }
     
-    override func invalidateIntrinsicContentSize() {
-        super.invalidateIntrinsicContentSize()
+    override var intrinsicContentSize: CGSize {
+        return text.isEmpty ? .zero : super.intrinsicContentSize
     }
 }

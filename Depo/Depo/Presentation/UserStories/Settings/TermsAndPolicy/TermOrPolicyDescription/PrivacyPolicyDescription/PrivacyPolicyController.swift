@@ -14,7 +14,7 @@ final class PrivacyPolicyController: UIViewController {
     private let langCode = Device.locale
     private var urlPath =  RouteRequests.privacyPolicy
     
-    private lazy var webView: WKWebView = {
+    private let webView: WKWebView = {
         let contentController = WKUserContentController()
       
         let webConfig = WKWebViewConfiguration()
@@ -25,7 +25,6 @@ final class PrivacyPolicyController: UIViewController {
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false
-        webView.navigationDelegate = self
         webView.backgroundColor = UIColor.white
         
         /// there is a bug for iOS 9
@@ -68,7 +67,7 @@ final class PrivacyPolicyController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        webView.navigationDelegate = self
         view.addSubview(activityIndicator)
         
         guard let url = URL(string: urlPath) else {

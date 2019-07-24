@@ -119,7 +119,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
                 
                 if let offer = offer {
-                    self?.analyticsService.trackInnerPurchase(offer)
+                    self?.analyticsService.trackPurchase(offer: offer)
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
@@ -189,7 +189,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         iapManager.purchase(product: product) { [weak self] result in
             switch result {
             case .success(let identifier):
-                self?.analyticsService.trackInAppPurchase(product: product)
+                self?.analyticsService.trackPurchase(offer: product)
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
