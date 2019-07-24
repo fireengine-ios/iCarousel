@@ -17,9 +17,11 @@ final class LoginSettingsViewController: ViewController {
             
             newValue.rowHeight = UITableViewAutomaticDimension
             newValue.estimatedRowHeight = 160
+            
+            newValue.isHidden = true
         }
     }
-
+    
     var output: LoginSettingsViewOutput!
     
     //MARK: lifecycle
@@ -44,6 +46,8 @@ extension LoginSettingsViewController: LoginSettingsViewInput {
             tableView.reloadRows(at: visibleCellIndexPaths, with: .none)
             tableView.endUpdates()
         }
+        
+        tableView.isHidden = false
     }
     
 }

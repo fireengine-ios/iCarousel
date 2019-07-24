@@ -55,7 +55,6 @@ class RouterVC: NSObject {
     func isTwoFactorAuthViewControllers() -> Bool {
         
         guard let currentViewController = navigationController?.viewControllers.last else {
-            assertionFailure()
             return false
         }
         
