@@ -17,10 +17,10 @@ final class LoginSettingsViewController: ViewController {
             
             newValue.rowHeight = UITableViewAutomaticDimension
             newValue.estimatedRowHeight = 160
+            
+            newValue.isHidden = true
         }
     }
-
-    @IBOutlet private weak var emptyView: UIView!
     
     var output: LoginSettingsViewOutput!
     
@@ -47,7 +47,7 @@ extension LoginSettingsViewController: LoginSettingsViewInput {
             tableView.endUpdates()
         }
         
-        emptyView.isHidden = true
+        tableView.isHidden = false
     }
     
 }

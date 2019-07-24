@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginSettingsViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="emptyView" destination="rKj-PS-Jpn" id="unB-Tm-BUj"/>
                 <outlet property="tableView" destination="aYB-mT-5fi" id="ysE-H2-cfM"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bh7-TQ-6A8"/>
             </connections>
@@ -26,20 +25,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-PS-Jpn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="aYB-mT-5fi" secondAttribute="trailing" id="ONA-SM-trK"/>
-                <constraint firstItem="rKj-PS-Jpn" firstAttribute="top" secondItem="rBA-jI-8PP" secondAttribute="top" id="SAe-Xt-jVI"/>
-                <constraint firstItem="rBA-jI-8PP" firstAttribute="trailing" secondItem="rKj-PS-Jpn" secondAttribute="trailing" id="d8q-tI-QjR"/>
-                <constraint firstItem="rKj-PS-Jpn" firstAttribute="leading" secondItem="rBA-jI-8PP" secondAttribute="leading" id="i0P-Hq-qxO"/>
                 <constraint firstItem="aYB-mT-5fi" firstAttribute="bottom" secondItem="rBA-jI-8PP" secondAttribute="bottom" id="izS-oG-9LU"/>
                 <constraint firstItem="aYB-mT-5fi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rtV-Bf-8iv"/>
-                <constraint firstItem="rBA-jI-8PP" firstAttribute="bottom" secondItem="rKj-PS-Jpn" secondAttribute="bottom" id="vG8-1Z-5Hx"/>
                 <constraint firstItem="aYB-mT-5fi" firstAttribute="top" secondItem="rBA-jI-8PP" secondAttribute="top" id="wvd-T2-u9j"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
