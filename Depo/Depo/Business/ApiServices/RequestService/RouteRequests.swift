@@ -29,7 +29,7 @@ struct RouteRequests {
         }
     }()
     
-    static let baseUrl: URL = URL(string: "\(baseShortUrlString)api/")!
+    static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -90,6 +90,7 @@ struct RouteRequests {
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -248,4 +249,13 @@ struct RouteRequests {
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
+    
+    static var globalPermissionsDetails: String {
+        switch currentServerEnvironment {
+        case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+        case .test: return ""
+        }   
+    }
+    
 }

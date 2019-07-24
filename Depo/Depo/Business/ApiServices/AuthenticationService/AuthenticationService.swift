@@ -257,12 +257,14 @@ struct ResendVerificationSMS: RequestParametrs {
     let eulaId: Int
     let processPersonalData: Bool
     let etkAuth: Bool
+    let globalPermAuth: Bool
     
     var requestParametrs: Any {
         return [LbRequestkeys.referenceToken : refreshToken,
                 LbRequestkeys.eulaId : eulaId,
                 LbRequestkeys.processPersonalData : processPersonalData,
-                LbRequestkeys.etkAuth : etkAuth]
+                LbRequestkeys.etkAuth : etkAuth,
+                LbRequestkeys.globalPermAuth: globalPermAuth]
     }
     
     var patch: URL {

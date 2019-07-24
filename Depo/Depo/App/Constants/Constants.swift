@@ -12,6 +12,7 @@ struct TextConstants {
     
     struct NotLocalized {
         static let facebookLoginCanceled = "FB Login canceled"
+        static let facebookLoginFailed = "FB Login failed"
         static let instagramLoginCanceled = "Instagram Login canceled"
         static let termsOfUseLink = "termsOfUseLink"
         static let termsAndUseEtkLinkTurkcellAndGroupCompanies = "terms_and_use_etk_link_1"
@@ -19,6 +20,8 @@ struct TextConstants {
         static let termsAndUseEtkLinkCommercialEmailMessages = "terms_and_use_etk_link_2"
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
+        static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
+        
         static let appName: String = {
             #if LIFEDRIVE
             return "LIFEDRIVE"
@@ -87,6 +90,7 @@ struct TextConstants {
     static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxText = NSLocalizedString("I have read and accepted terms of use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckbox = NSLocalizedString("terms_and_use_etk_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseEtkCheckboxHeader = NSLocalizedString("terms_and_use_etk_checkbox_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseIntroductionCheckbox = NSLocalizedString("terms_and_use_introduction_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkTurkcellAndGroupCompanies = NSLocalizedString("terms_and_use_etk_link_turkcell_and_group_companies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicyCondition = NSLocalizedString("privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -95,6 +99,10 @@ struct TextConstants {
     static let termsAndUseWelcomeText = NSLocalizedString("Welcome to Lifebox!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let commercialEmailMessages = NSLocalizedString("commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsOfUseGlobalPermScreenTitle = NSLocalizedString("global_permission_screen_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsOfUseGlobalPermHeader = NSLocalizedString("global_permission_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsOfUseGlobalDataPermCheckbox = NSLocalizedString("global_data_permission_agreement", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsOfUseGlobalDataPermLinkSeeDetails = NSLocalizedString("global_data_permission_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let loginTitle = NSLocalizedString("Login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginTableTitle = NSLocalizedString("Register to lifebox and get a 5 GB of storage for free!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -460,12 +468,12 @@ struct TextConstants {
     static let fileInfoAlbumInfoTitle = NSLocalizedString("Album Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoSave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    //MARK: ETK Permissions
+    //MARK: Permissions in Settings
     static let etkPermissionTitleLabel = NSLocalizedString("etk_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let etkPermissionDescriptionLabel = NSLocalizedString("etk_permission_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let globalPermissionTitleLabel = NSLocalizedString("global_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let globalPermissionDescriptionLabel = NSLocalizedString("global_permission_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let informativeDescription = NSLocalizedString("informative_description_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: settings User info view

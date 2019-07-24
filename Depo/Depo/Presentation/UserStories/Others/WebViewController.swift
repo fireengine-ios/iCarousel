@@ -5,7 +5,7 @@ final class WebViewController: UIViewController {
     
     var urlString = ""
     
-    private lazy var webView: WKWebView = {
+    private let webView: WKWebView = {
         let contentController = WKUserContentController()
         let scriptSource = "document.body.style.webkitTextSizeAdjust = 'auto';"
         let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
@@ -19,7 +19,6 @@ final class WebViewController: UIViewController {
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false
-        webView.navigationDelegate = self
         webView.backgroundColor = UIColor.white
         
         /// there is a bug for iOS 9
@@ -62,6 +61,7 @@ final class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
         
         view.addSubview(activityIndicator)
         

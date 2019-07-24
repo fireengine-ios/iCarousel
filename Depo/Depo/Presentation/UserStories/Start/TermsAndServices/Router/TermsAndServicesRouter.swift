@@ -41,4 +41,9 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
         RouterVC().pushViewController(viewController: newViewController)
     }
     
+    func goToGlobalDataPermissionDetails() {
+        let vc = WebViewController(urlString: RouteRequests.globalPermissionsDetails)
+        vc.title = TextConstants.termsOfUseGlobalPermScreenTitle
+        RouterVC().pushViewController(viewController: vc)
+    }
 }

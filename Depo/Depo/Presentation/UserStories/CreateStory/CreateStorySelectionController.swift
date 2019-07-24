@@ -22,7 +22,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     
     private var selectingLimit = NumericConstants.createStoryImagesCountLimit
     private var isFavouritePictures: Bool = false
-    
+
     private let navTitle: String
     
     var selectionDelegate: InstaPickSelectionSegmentedControllerDelegate?
@@ -41,7 +41,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     
     required init?(coder aDecoder: NSCoder) {
         navTitle = TextConstants.createStory
-        
+
         super.init(coder: aDecoder)
     }
     
@@ -84,7 +84,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     
     private func addChildVC() {
         let dataSource: PhotoSelectionDataSourceProtocol = isFavouritePictures ? FavoritePhotosSelectionDataSource(pageSize: 100) : AllPhotosSelectionDataSource(pageSize: 100)
-        
+
         let childController = PhotoSelectionController(title: "",
                                                        selectingLimit: selectingLimit,
                                                        delegate: self,
