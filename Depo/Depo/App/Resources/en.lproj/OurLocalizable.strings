@@ -825,7 +825,7 @@
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Don't show this again";
 "instapick_analyze" = "Analyze with PhotoPick!";
-"connected_account" = "It works great with your connected account!";
+"connected_account" = "You can analyse which of your photos can get more likes on Instagram by using PhotoPick!";
 "instapick_description" = "If you choose to connect with your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick.";
 "connected_with_instagram" = "Connect with Instagram";
 "connected_with_instagram_name" = "Connect with Instagram as";
@@ -1024,9 +1024,9 @@
 "etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "global_permission_title_label" = "Global Data Permission";
 "global_permission_description" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox.";
-"terms_and_use_etk_checkbox_header" = "place etk header here";
+"terms_and_use_etk_checkbox_header" = "Commercial Electronic Message";
 "global_data_permission_agreement" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox. Click for detailed information.";
 "global_data_permission_link" = "Click for detailed information";
-"global_permission_header" = "Some header text will be here";
-"global_permission_screen_title" = "Place GP Screen Title Here";
+"global_permission_header" = "Global Data Permission";
 "informative_description_label" = "In progress...";
+"global_permission_screen_title" = "Place GP Screen Title Here";
