@@ -60,6 +60,20 @@ final class MyStorageViewController: BaseViewController {
             storageUsageProgressView.set(progress: 0, withAnimation: false)
         }
     }
+    
+    @IBOutlet private weak var restoreView: UIView!  {
+        willSet {
+            newValue.layer.masksToBounds = true
+        }
+    }
+    
+    @IBOutlet private weak var restoreViewHeight: NSLayoutConstraint! {
+        willSet {
+            //by default restore view is hidden
+            //show only for non cell users
+            newValue.constant = 0
+        }
+    }
         
     @IBOutlet private weak var restorePurchasesButton: UIButton! {
         didSet {
@@ -128,6 +142,11 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    func showRestoreButton() {
+        restoreViewHeight.isActive = false
+        view.layoutIfNeeded()
     }
 }
 

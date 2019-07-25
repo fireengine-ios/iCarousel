@@ -93,7 +93,7 @@
 "My Activity Timeline" = "Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "Smart Albums";
-"You have free space for %d more items." = "%d items deleted from your device to free up storage on your device.";
+"You have free space for %d more items." = "%d items deleted from your device to free up storage on your device. As the last step, delete photos from Recently Deleted album from your device.";
 "Delete" = "Delete";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
 "Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
@@ -549,13 +549,6 @@
 "Recent Searches" = "Recent Searches";
 "Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically.";
 "Get Started" = "Get Started";
-"extra_auth_new_divice_reason" = "You are logging into lifebox from different device";
-"extra_auth_account_setting_reason" = "You activated two factor authentication on your account";
-"extra_auth_account_navigation_title" = "Security Check";
-"extra_auth_account_describe_label" = "To secure your account and login safely, we’ll send you a security code to veriy your identity.";
-"extra_auth_account_choose_type" = "Send the security code:";
-"extra_auth_account_phone_cell" = "To my phone number:";
-"extra_auth_account_email_cell" = "To my e-mail:";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
@@ -1027,16 +1020,6 @@
 "create_story_pop_up_title" = "You created a story! \n %@";
 "create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
-
-"2_factor_auth" = "2-Factor Authentication";
-"login_settings_security_passcode_description" = "Login with Turkcell Password allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
-"login_settings_security_autologin_description" = "Autologin with 3G/LTE allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-"login_settings_two_factor_auth_description" = "2-Factor Authentication allows you to lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare in risus nec sagittis.";
-
-"two_fa_invalid_session_error_message" = "Session expired for two factor authentication";
-"two_fa_invalid_challenge_error_message" = "Challenge has expired, please request a new code.";
-"two_fa_too_many_attempts_error_message" = "3 wrong trials. Please request a new code.";
-"two_fa_invalid_Otp_error_message" = "Security code is invalid, please try again.";
 "You can not share empty album" = "You can not share empty album";
 "etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "global_permission_title_label" = "Global Data Permission";
@@ -1046,4 +1029,7 @@
 "global_data_permission_link" = "Click for detailed information";
 "global_permission_header" = "Global Data Permission";
 "informative_description_label" = "In progress...";
-"global_permission_screen_title" = "Place GP Screen Title Here";
+"global_permission_screen_title" = "Global Data Permission";
+
+/*Settings page*/
+"Permissions" = "";

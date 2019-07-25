@@ -10,4 +10,6 @@ protocol MyStorageViewInput: class, ActivityIndicator {
     func reloadCollectionView()
     
     func configureProgress(with full: Int64, used: Int64)
+    
+    func showRestoreButton()
 }
