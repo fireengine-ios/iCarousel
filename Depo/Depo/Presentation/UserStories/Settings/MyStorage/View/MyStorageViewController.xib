@@ -19,7 +19,6 @@
                 <outlet property="restoreDescriptionLabel" destination="7DP-Zp-Hlc" id="gNU-ty-ENF"/>
                 <outlet property="restorePurchasesButton" destination="aI9-w0-a5U" id="lvc-nX-mGP"/>
                 <outlet property="restoreView" destination="XnT-Yv-KXj" id="YZ0-AX-kEb"/>
-                <outlet property="restoreViewHeight" destination="wPv-tt-4U9" id="tsa-oE-mvp"/>
                 <outlet property="scrollView" destination="TRR-B7-lJ8" id="9B1-Tf-Bw6"/>
                 <outlet property="storageUsageProgressView" destination="N0J-13-NtK" id="xDb-K4-Go8"/>
                 <outlet property="usageLabel" destination="AVB-SD-Qn1" id="kCo-gf-E9N"/>
