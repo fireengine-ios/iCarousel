@@ -1001,4 +1001,7 @@
 "global_data_permission_link" = "Klicken Sie hier für ausführliche Informationen";
 "global_permission_header" = "Globale Datenerlaubnis";
 "informative_description_label" = "Der Vorgang dauert an...";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "Globale Datenerlaubnis";
+
+/*Settings page*/
+"Permissions" = "Genehmigungen";
