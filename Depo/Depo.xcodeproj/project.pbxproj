@@ -2486,6 +2486,12 @@
 		8C20868A228D5386000BEDAD /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208687228D5386000BEDAD /* QuickScrollService.swift */; };
 		8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208688228D5386000BEDAD /* QuickScrollItems.swift */; };
 		8C20868C228D5386000BEDAD /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208688228D5386000BEDAD /* QuickScrollItems.swift */; };
+		8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		8C2386B322E9AA0D004992C4 /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		8C2386B422E9AA21004992C4 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		8C2386B622E9AA4B004992C4 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		8C2386B722E9AA4C004992C4 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
 		8C23F28E2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F2912286C95600C5BF9E /* SingleThumbnailAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */; };
@@ -20104,9 +20110,11 @@
 				8C3BA2E822B3CC45006D901E /* UIImageView+Scale.swift in Sources */,
 				8C3BA2E922B3CC45006D901E /* Alamofire+Validate.swift in Sources */,
 				8C3BA2EA22B3CC45006D901E /* ShareWormholeListener.swift in Sources */,
+				8C2386B322E9AA0D004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA2EB22B3CC45006D901E /* UploadQueueService.swift in Sources */,
 				8C3BA2EC22B3CC45006D901E /* Equatable+Contains.swift in Sources */,
 				8C3BA2ED22B3CC45006D901E /* PasscodeEnterViewController.swift in Sources */,
+				8C2386B422E9AA21004992C4 /* DateExtension.swift in Sources */,
 				8C3BA2EF22B3CC45006D901E /* TokenStorage.swift in Sources */,
 				8C3BA2F022B3CC45006D901E /* SharedFactory.swift in Sources */,
 				8C1E5BCF22CB897B008FDA02 /* ShareViewController.swift in Sources */,
@@ -20143,6 +20151,7 @@
 				8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */,
 				8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */,
+				8C2386B622E9AA4B004992C4 /* Double+Extensions.swift in Sources */,
 				8C3BA31322B3CC45006D901E /* AuthorizationRepository.swift in Sources */,
 				8C3BA31422B3CC45006D901E /* ShareConfigurator.swift in Sources */,
 				8C3BA31522B3CC45006D901E /* UploadHelpers.swift in Sources */,
@@ -20193,6 +20202,7 @@
 				8C3BA35422B3CC49006D901E /* MD5.swift in Sources */,
 				8C3BA35522B3CC49006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */,
+				8C2386B722E9AA4C004992C4 /* Double+Extensions.swift in Sources */,
 				8C3BA35622B3CC49006D901E /* AuthorizationURLs.swift in Sources */,
 				8C3BA35722B3CC49006D901E /* SharedFactory.swift in Sources */,
 				8C1E5BCE22CB8935008FDA02 /* FileProviderWormholeListener.swift in Sources */,
@@ -20200,9 +20210,11 @@
 				8C3BA35922B3CC49006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA35A22B3CC49006D901E /* TokenStorage.swift in Sources */,
 				8C3BA35B22B3CC49006D901E /* String+Subscript.swift in Sources */,
+				8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA35C22B3CC49006D901E /* FileProviderItem.swift in Sources */,
 				8C3BA35D22B3CC49006D901E /* Mapping.swift in Sources */,
 				8C3BA35E22B3CC49006D901E /* NumericConstants.swift in Sources */,
+				8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */,
 				8C3BA35F22B3CC49006D901E /* Alamofire+Validate.swift in Sources */,
 				8C3BA36022B3CC49006D901E /* FileService.swift in Sources */,
 				8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */,
