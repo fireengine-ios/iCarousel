@@ -44,26 +44,26 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     
 }
 
-extension SpotifyAccountConnectionCell: SocialConnectionCell {
-    
-    var section: Section? {
-        <#code#>
-    }
-    
-    var delegate: SocialConnectionCellDelegate? {
-        get {
-            <#code#>
-        }
-        set {
-            <#code#>
-        }
-    }
-    
-    func setup(with: Section?) {
-        <#code#>
-    }
-    
-    func disconnect() {
-        <#code#>
-    }
-}
+//extension SpotifyAccountConnectionCell: SocialConnectionCell {
+//    
+//    var section: Section? {
+//        <#code#>
+//    }
+//    
+//    var delegate: SocialConnectionCellDelegate? {
+//        get {
+//            <#code#>
+//        }
+//        set {
+//            <#code#>
+//        }
+//    }
+//    
+//    func setup(with: Section?) {
+//        <#code#>
+//    }
+//    
+//    func disconnect() {
+//        <#code#>
+//    }
+//}

@@ -57,7 +57,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
                            CellsIdConstants.dropboxAccountConnectionCell,
-                           CellsIdConstants.socialAccountRemoveConnectionCell]
+                           CellsIdConstants.socialAccountRemoveConnectionCell,
+                           CellsIdConstants.spotifyAccountConnectionCell]
         
         for id in reusableIds {
             let nib = UINib(nibName: id, bundle: nil)
