@@ -261,6 +261,7 @@
 "Import From Instagram" = "Import from Instagram";
 "Import From Facebook" = "Import from Facebook";
 "Import From Dropbox" = "Import from Dropbox";
+"import_from_potify" = "Import from Spotify";
 "Import Photos" = "Import Photos";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
@@ -849,6 +850,7 @@
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
+"Spotify" = "Spotify";
 "connected_as_format" = "Connected account:  @%@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
 "instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";

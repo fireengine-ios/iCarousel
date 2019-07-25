@@ -11,6 +11,7 @@ import Foundation
 
 final class Section {
     enum SocialAccount: Int {
+        case spotify
         case instagram
         case facebook
         case dropbox
