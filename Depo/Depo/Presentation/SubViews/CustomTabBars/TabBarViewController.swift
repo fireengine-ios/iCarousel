@@ -736,6 +736,11 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         SDWebImageManager.shared().saveImage(toCache: image, for: url)
         
         let wrapData = WrapData(imageData: data)
+        /// usedUIImageJPEGRepresentation
+        if let wrapDataName = wrapData.name {
+            wrapData.name = wrapDataName + ".JPG"
+        }
+        
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
         let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
