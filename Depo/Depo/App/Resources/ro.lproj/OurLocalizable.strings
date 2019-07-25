@@ -1005,4 +1005,7 @@
 "global_data_permission_link" = "Click pentru informație detaliată";
 "global_permission_header" = "Permisiune Globală de Date";
 "informative_description_label" = "În proces...";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "Permisiune Globală de Date";
+
+/*Settings page*/
+"Permissions" = "Permisiuni";

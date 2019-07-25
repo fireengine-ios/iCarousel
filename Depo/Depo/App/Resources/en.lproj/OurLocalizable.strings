@@ -93,7 +93,7 @@
 "My Activity Timeline" = "Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "Smart Albums";
-"You have free space for %d more items." = "%d items deleted from your device to free up storage on your device.";
+"You have free space for %d more items." = "%d items deleted from your device to free up storage on your device. As the last step, delete photos from Recently Deleted album from your device.";
 "Delete" = "Delete";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
 "Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
@@ -1029,4 +1029,7 @@
 "global_data_permission_link" = "Click for detailed information";
 "global_permission_header" = "Global Data Permission";
 "informative_description_label" = "In progress...";
-"global_permission_screen_title" = "Place GP Screen Title Here";
+"global_permission_screen_title" = "Global Data Permission";
+
+/*Settings page*/
+"Permissions" = "";

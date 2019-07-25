@@ -1044,4 +1044,7 @@
 "global_data_permission_link" = "Klikoni për informacion të detajuar.";
 "global_permission_header" = "Leja e të dhënave globale";
 "informative_description_label" = "Në progress...";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "Leja e të dhënave globale";
+
+/*Settings page*/
+"Permissions" = "Lejimet";

@@ -1031,4 +1031,7 @@
 "global_data_permission_link" = ". انقر للحصول على معلومات مفصلة";
 "global_permission_header" = "إذن البيانات العالمية";
 "informative_description_label" = "... العملية جارية";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "إذن البيانات العالمية";
+
+/*Settings page*/
+"Permissions" = "تصاريح";
