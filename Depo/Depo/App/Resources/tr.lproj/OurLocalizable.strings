@@ -89,7 +89,7 @@
 "My Activity Timeline" = "Son Aktiviteler";
 "file(s)" = "öğe";
 "My Stream" = "Akıllı Albümlerim";
-"You have free space for %d more items." = "Cihazının depolama alanını boşaltmak için cihazından %d öğe silindi";
+"You have free space for %d more items." = "Cihazının depolama alanını boşaltmak için cihazından %d öğe silindi. Son adım olarak, cihazındaki Son Silinenler albümündeki öğeleri de lütfen sil.";
 "Delete" = "Sil";
 "Some photos will also be deleted from an album." = "Bazı fotoğraflar ayrıca bir albümden de silinecek.";
 "Allow lifebox to delete %d photos?" = "%d fotoğrafı silmek için lifedrive’a izin verilsin mi?";
@@ -1009,4 +1009,7 @@
 "global_data_permission_link" = "Detaylı bilgi için tıklayınız.";
 "global_permission_header" = "Global Veri Paylaşımı";
 "informative_description_label" = "İşlemin devam ediyor...";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "Global Veri Paylaşımı";
+
+/*Settings page*/
+"Permissions" = "İzinler";

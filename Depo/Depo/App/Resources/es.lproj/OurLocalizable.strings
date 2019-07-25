@@ -1001,4 +1001,7 @@
 "global_data_permission_link" = "Hacer clic para información detallada";
 "global_permission_header" = "Permiso de Datos Global";
 "informative_description_label" = "El proceso está en curso…";
-"global_permission_screen_title" = "";
+"global_permission_screen_title" = "Permiso de Datos Global";
+
+/*Settings page*/
+"Permissions" = "Permisos";
