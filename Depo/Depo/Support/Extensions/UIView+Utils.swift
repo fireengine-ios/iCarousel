@@ -30,4 +30,20 @@ extension UIView {
         leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: offset).activate()
         trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: offset).activate()
     }
+    
+    /// returns all subviews except self
+    func allSubviews() -> [UIView] {
+        var all = [UIView]()
+        
+        func getSubview(view: UIView) {
+            if view != self {
+                all.append(view)
+            }
+            guard !view.subviews.isEmpty else { return }
+            view.subviews.forEach { getSubview(view: $0) }
+        }
+        
+        getSubview(view: self)
+        return all
+    }
 }
