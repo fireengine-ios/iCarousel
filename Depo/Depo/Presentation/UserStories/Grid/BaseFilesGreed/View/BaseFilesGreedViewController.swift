@@ -121,11 +121,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         scrollablePopUpView.isActive = true
         CardsManager.default.updateAllProgressesInCardsForView(view: scrollablePopUpView)
         output.needToReloadVisibleCells()
+        configurateNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        configurateNavigationBar()
         configurateViewForPopUp()
         output.updateThreeDotsButton()
     }
