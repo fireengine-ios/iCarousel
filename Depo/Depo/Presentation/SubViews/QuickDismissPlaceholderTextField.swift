@@ -12,9 +12,9 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
     
     override var attributedPlaceholder: NSAttributedString? {
         didSet {
+            layoutIfNeeded()
             let label = placeholderLabel
-            label?.minimumScaleFactor = 0.5
-            label?.adjustsFontSizeToFitWidth = true
+            label?.adjustsFontSizeToFitWidth()
         }
     }
     
