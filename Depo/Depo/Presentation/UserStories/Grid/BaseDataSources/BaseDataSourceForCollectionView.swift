@@ -168,7 +168,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var assetFilesCacheManager = AssetFileCacheManager()
     
-    private var isDeleteFromMoved: Bool = false
+    private var isDeleteFromMoved = false
     
     
     init(sortingRules: SortedRules = .timeUp) {
@@ -1761,7 +1761,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     
                 if !self.isDeleteFromMoved {
                     self.delegate?.didDelete(items: items)
-                    
                 } else {
                     self.isDeleteFromMoved = false
                 }
