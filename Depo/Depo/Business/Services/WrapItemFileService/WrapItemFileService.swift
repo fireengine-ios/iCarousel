@@ -258,6 +258,12 @@ class WrapItemFileService: WrapItemFileOperations {
         return items
     }
     
+    private func uuidsOfItemsThatHaveRemoteURL(files: [WrapData]) -> [String] {
+        return files
+            .filter { $0.tmpDownloadUrl != nil }
+            .compactMap { $0.uuid }
+    }
+    
     static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
         let fileService = FileService.shared
         fileService.details(uuids: items.map({ $0.uuid }), success: { updatedItems in
