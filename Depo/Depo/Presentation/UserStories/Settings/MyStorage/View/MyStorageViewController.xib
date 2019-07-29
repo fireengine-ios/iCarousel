@@ -106,7 +106,7 @@
                                         <constraint firstItem="aI9-w0-a5U" firstAttribute="top" secondItem="XnT-Yv-KXj" secondAttribute="top" id="hCh-Pn-pRK"/>
                                         <constraint firstAttribute="trailing" secondItem="7DP-Zp-Hlc" secondAttribute="trailing" id="oIp-qK-sEd"/>
                                         <constraint firstItem="7DP-Zp-Hlc" firstAttribute="leading" secondItem="XnT-Yv-KXj" secondAttribute="leading" constant="1" id="vig-fM-wX9"/>
-                                        <constraint firstAttribute="height" constant="52.5" id="wPv-tt-4U9"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52.5" id="wPv-tt-4U9"/>
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hD8-yS-aMY" customClass="ResizableCollectionView" customModule="lifebox" customModuleProvider="target">

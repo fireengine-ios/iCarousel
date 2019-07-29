@@ -674,7 +674,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
-                    self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
                 } else {
                     self?.output?.operationFailed(type: elementType, message: value.description)
                 }
