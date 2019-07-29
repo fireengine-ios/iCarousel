@@ -840,10 +840,25 @@ class RouterVC: NSObject {
     // MARK: feedback subView
     
     func showFeedbackSubView() {
-        let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+        SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
+            let router = RouterVC()
+            let controller = router.supportFormPrefilledController
+            controller.title = "Support Form"
+            let config = SupportFormConfiguration(name: userInfo.name,
+                                                  surname: userInfo.surname,
+                                                  phone: userInfo.fullPhoneNumber,
+                                                  email: userInfo.email)
+            controller.config = config
+            router.pushViewController(viewController: controller)
+            
+        }, fail: { error in
+            UIApplication.showErrorAlert(message: error.description)
+        })
+        //        let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
+        //        controller.modalPresentationStyle = .overFullScreen
+        //        controller.modalTransitionStyle = .crossDissolve
+        //        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+
     }
     
     func vcForCurrentState() -> UIViewController? {
@@ -922,6 +937,10 @@ class RouterVC: NSObject {
     
     var supportFormController: UIViewController {
         return SupportFormController()
+    }
+    
+    var supportFormPrefilledController: SupportFormPrefilledController {
+        return SupportFormPrefilledController()
     }
     
     func createStory(navTitle: String) -> UIViewController {

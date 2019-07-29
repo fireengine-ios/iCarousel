@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class IntrinsicTextView: UITextView {
+class IntrinsicTextView: UITextView {
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -29,7 +29,9 @@ final class IntrinsicTextView: UITextView {
             invalidateIntrinsicContentSize()
         }
     }
-    
+}
+
+final class IntrinsicEmptiableTextView: IntrinsicTextView {
     override var intrinsicContentSize: CGSize {
         return text.isEmpty ? .zero : super.intrinsicContentSize
     }
