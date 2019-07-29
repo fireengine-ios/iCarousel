@@ -809,7 +809,7 @@
 /*InstaPickPopUp*/
 "dont_show_this_again" = "لاتظهر ذلك مرة أخرى";
 "instapick_analyze" = "حلل بواسطة PhotoPick";
-"connected_account" = "انها تعمل بشكل جيد مع حسابك المتصل";
+"connected_account" = "يمكنك تحليل أي من صورك يمكنه الحصول على المزيد من الإعجابات على Instagram باستخدام PhotoPick";
 "instapick_description" = "اذا قمت باختيار الاتصال بواسطة حسابك على الانستغرام, سنكون قادرين على منحك تجربة متخصصة افضل بكثير عن طريق القيام بتحليل متخصص على كل تحليل جديد في PhotoPick";
 "connected_with_instagram" = "اتصل بواسطة الانستغرام";
 "connected_with_instagram_name" = "اتصل بواسطة الانستغرام ك";
@@ -979,32 +979,41 @@
 "frequently_asked_questions" = "التعليمات";
 "login_username_not_valid" = "يرجى التحقق من اسم المستخدم الخاص بك";
 "login_support_info" = "إذا كنت تواجه صعوبة أثناء تسجيل الدخول ، اتصل بنا للحصول على الدعم.";
-"terms_and_privacy_policy" = "";
-"Temporary error occurred. Please try again later." = "";
-"face_tags_description_premium" = "";
-"terms_of_use" = "";
-"privacy_policy" = "";
-"face_tags_description_standart" = "";
-"terms_and_use_introduction_checkbox" = "";
-"privacy_policy_condition" = "";
-"photo_pick_description" = "";
+"terms_and_privacy_policy" = "شروط الاستخدام وسياسة الخصوصية";
+"Temporary error occurred. Please try again later." = ".حدث خطأ مؤقت. يرجى المحاولة مرة أخرى لاحقًا";
+"face_tags_description_premium" = "عند تفعيل خاصية التعرف بالوجه والصورة, يتم تصنيف الصور وفقا للأشياء والأشخاص.في حالة كون خدمة الموقع في الوضع النشط,فيتم تصنيف الصور وفقا لمعلومات الموقع.ويمكنكم تكوين قصص بشكل تلقائي خاصة بكم اعتمادا على هذا التصنيف.";
+"terms_of_use" = "شروط الاستخدام";
+"privacy_policy" = "سياسة الخصوصية";
+"face_tags_description_standart" = "عند تفعيل خاصية التعرف بالوجه والصورة, يتم تصنيف الصور وفقا للأشياء والأشخاص.في حالة كون خدمة الموقع في الوضع النشط,فيتم تصنيف الصور وفقا لمعلومات الموقع.ويمكنكم تكوين قصص بشكل تلقائي خاصة بكم اعتمادا على هذا التصنيف.";
+"terms_and_use_introduction_checkbox" = "قرأت وقبلت شروط الاستخدام وسياسة الخصوصية";
+"privacy_policy_condition" = "سياسة الخصوصية";
+"photo_pick_description" = "وإذا قمتم بتنشيط الزر وفتح حسابكم على الانستجرام, يمكننا أن نقدم تجربة متقدمة شخصية من تحاليل فوتو بيك بالقيام بتحاليل مميزة,";
 
 /*Permission screen in Settings*/
-"etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_title_label" = "رسالة إلكترونية تجارية";
+"etk_permissiom_description" = "وفقًا للقانون رقم 6563 والتشريعات الأخرى ذات الصلة بشأن المنتجات والخدمات المفيدة لشركات تركسل وشركات المجتمع ،أوافق على إرسال الرسائل التجارية الإلكترونية بهدف تبليغ المعلومات وهذا إذا لم يصدر من قبلي أمر بخلاف ذلك وفي حالة وجود طلب يخالف هذا";
 "NSCameraUsageDescription" = "لالتقاط الصور بالكاميرا ولنسخها احتياطيًا إلى صندوق الإنقاذ ، يلزم الحصول على إذن بالوصول إلى الكاميرا";
-"restore_purchases" = "";
-"restore_purchases_info" = "";
-"attributed_restore_word" = "";
-"privacy_policy_head_line" = "";
-"create_story_photos_selected" = "";
-"create_story_press_and_hold" = "";
-"create_story_press_and_hold_description" = "";
-"create_story_name_title" = "";
-"create_story_pop_up_title" = "";
-"create_story_pop_up_message" = "";
-"create_story_path_to_story" = "";
-"You can not share empty album" = "";
-"etk_permission_description" = "";
-"global_permission_title_label" = "";
-"global_permission_description" = "";
+"restore_purchases" = "إعادة تحميل المشتريات";
+"restore_purchases_info" = "بإعادة تحميل مشترياتكم الحالية اضغطوا على الزر إذا رغبتم ";
+"attributed_restore_word" = "إعادة تحميل";
+"privacy_policy_head_line" = "سياسة الخصوصية";
+"create_story_photos_selected" = "%d تم اختيار";
+"create_story_press_and_hold" = "اضغط مع الاستمرار";
+"create_story_press_and_hold_description" = " إذا ترغبون بتعديل ترتيب صوركم من جديد عليكم الضغط على المتواجدة  على الشاشة  %@";
+"create_story_name_title" = "اسم الحكاية";
+"create_story_pop_up_title" = "!%@ قمتم بتكوين حكاية";
+"create_story_pop_up_message" = "%@ نقوم بتجهيز حكايتكم عند الاكتمال يمكنكم العثور عليها أسفل";
+"create_story_path_to_story" = "الصور & الفيديوهات>حكاياتي";
+"You can not share empty album" = ". لا يمكنك مشاركة ألبوم فارغ";
+"etk_permission_description" = "وفقًا للقانون رقم 6563 والتشريعات الأخرى ذات الصلة بشأن المنتجات والخدمات المفيدة لشركات تركسل وشركات المجتمع ،أوافق على إرسال الرسائل التجارية الإلكترونية بهدف تبليغ المعلومات وهذا إذا لم يصدر من قبلي أمر بخلاف ذلك وفي حالة وجود طلب يخالف هذا";
+"global_permission_title_label" = "إذن البيانات العالمية";
+"global_permission_description" = "  أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس";
+"terms_and_use_etk_checkbox_header" = "رسالة إلكترونية تجارية";
+"global_data_permission_agreement" = "أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس";
+"global_data_permission_link" = ". انقر للحصول على معلومات مفصلة";
+"global_permission_header" = "إذن البيانات العالمية";
+"informative_description_label" = "... العملية جارية";
+"global_permission_screen_title" = "إذن البيانات العالمية";
+
+/*Settings page*/
+"Permissions" = "تصاريح";

@@ -1080,7 +1080,7 @@ Please check I have understood the intended command here*/
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Ne plus afficher ";
 "instapick_analyze" = "Analyser avec PhotoPick!";
-"connected_account" = "Vous obtenez de meilleurs résultats avec votre compte Instagram associé.";
+"connected_account" = "PhotoPick vous permet d'analyser lesquelles de vos photos peuvent obtenir davantage de mentions J'aime sur Instagram.";
 
 /*Suggested: "If you choose to connect with your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick."*/
 "instapick_description" = "Si vous choisissez d'ajouterr votre compte Instagram, nous pourrons fournir une expérience personnalisée bien meilleure en effectuant une analyse personnalisée à chaque nouvelle interrogation PhotoPick.";
@@ -1274,37 +1274,41 @@ Please check I have understood the intended command here*/
 "frequently_asked_questions" = "Questions Fréquemment Posées";
 "login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
 "login_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
-"terms_and_privacy_policy" = "";
-"Temporary error occurred. Please try again later." = "";
-"face_tags_description_premium" = "";
-"terms_of_use" = "";
-"privacy_policy" = "";
-"face_tags_description_standart" = "";
-"terms_and_use_introduction_checkbox" = "";
-"privacy_policy_condition" = "";
-"photo_pick_description" = "";
+"terms_and_privacy_policy" = "Conditions d'utilisation et politique de confidentialité";
+"Temporary error occurred. Please try again later." = "Une erreur temporaire s'est produite. Veuillez réessayer plus tard.";
+"face_tags_description_premium" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";
+"terms_of_use" = "Conditions d'utilisation";
+"privacy_policy" = "Politique de confidentialité";
+"face_tags_description_standart" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";
+"terms_and_use_introduction_checkbox" = "J'ai lu et j'accepte les conditions générales d'utilisation.";
+"privacy_policy_condition" = "Politique de confidentialité";
+"photo_pick_description" = "Si vous activez le bouton et connectez votre compte Instagram, nous pourrons offrir une expérience personnalisée et améliorée en effectuant une analyse personnalisée à chaque nouvelle analyse PhotoPick.";
 
 /*Permission screen in Settings*/
-"etk_permission_title_label" = "";
-"etk_permissiom_description" = "";
+"etk_permission_title_label" = "Message électronique commercial";
+"etk_permissiom_description" = "J'aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox, une autorisation d'accès de votre appareil photo est nécessaire.";
-"restore_purchases" = "";
-"restore_purchases_info" = "";
-"attributed_restore_word" = "";
-"privacy_policy_head_line" = "";
-"create_story_photos_selected" = "";
-"create_story_press_and_hold" = "";
-"create_story_press_and_hold_description" = "";
-"create_story_name_title" = "";
-"create_story_pop_up_title" = "";
-"create_story_pop_up_message" = "";
-"create_story_path_to_story" = "";
-"You can not share empty album" = "";
-"etk_permission_description" = "";
-"global_permission_title_label" = "";
-"global_permission_description" = "";
-"terms_and_use_etk_checkbox_header" = "";
-"global_data_permission_agreement" = "";
-"global_data_permission_link" = "";
-"global_permission_header" = "";
-"informative_description_label" = "";
+"restore_purchases" = "Restaurer les achats.";
+"restore_purchases_info" = "Si vous souhaitez restaurer vos achats existants, cliquez sur le bouton.";
+"attributed_restore_word" = "Restaurer";
+"privacy_policy_head_line" = "Politique de confidentialité";
+"create_story_photos_selected" = "%d sélectionnés";
+"create_story_press_and_hold" = "Appuyez et maintenez";
+"create_story_press_and_hold_description" = "%@ sur l'image pour réorganiser l'ordre de votre histoire.";
+"create_story_name_title" = "Nom de la story";
+"create_story_pop_up_title" = "Vous avez créé une histoire!\n %@.";
+"create_story_pop_up_message" = "Nous préparons votre story. Une fois terminé, vous pouvez le trouver sous\n%@";
+"create_story_path_to_story" = "Photos et Vidéos> Stories";
+"You can not share empty album" = "Vous ne pouvez pas partager un album vide";
+"etk_permission_description" = "Je consens par la présente à recevoir des courriels commerciaux afin d’être informé des produits et services avantageux de Turkcell et d'autres sociétés du groupe, à moins que et jusqu’à ce que je n’exige d’autre chose, conformément à la loi n ° 6563 et aux autres lois applicables.";
+"global_permission_title_label" = "Permission de données globale";
+"global_permission_description" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaires de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox.";
+"terms_and_use_etk_checkbox_header" = "Message électronique commercial";
+"global_data_permission_agreement" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaire de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox. Cliquez pour plus de détails.";
+"global_data_permission_link" = "Cliquez pour plus de détails";
+"global_permission_header" = "Permission de données globale";
+"informative_description_label" = "en cours..";
+"global_permission_screen_title" = "Permission de données globale";
+
+/*Settings page*/
+"Permissions" = "Autorisations";

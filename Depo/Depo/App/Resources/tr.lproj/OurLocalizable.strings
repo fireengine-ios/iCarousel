@@ -89,7 +89,7 @@
 "My Activity Timeline" = "Son Aktiviteler";
 "file(s)" = "öğe";
 "My Stream" = "Akıllı Albümlerim";
-"You have free space for %d more items." = "Cihazının depolama alanını boşaltmak için cihazından %d öğe silindi";
+"You have free space for %d more items." = "Cihazının depolama alanını boşaltmak için cihazından %d öğe silindi. Son adım olarak, cihazındaki Son Silinenler albümündeki öğeleri de lütfen sil.";
 "Delete" = "Sil";
 "Some photos will also be deleted from an album." = "Bazı fotoğraflar ayrıca bir albümden de silinecek.";
 "Allow lifebox to delete %d photos?" = "%d fotoğrafı silmek için lifebox’a izin verilsin mi?";
@@ -805,7 +805,7 @@
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Bir daha gösterme";
 "instapick_analyze" = "PhotoPick ile Analiz Et!";
-"connected_account" = "Bağladığın Instagram hesabınla daha iyi sonuçlar alırsın!";
+"connected_account" = "PhotoPick özelliğini kullanarak fotoğraflarını puanlayabilir, hangisinin Instagram’da daha fazla like alabileceğini sorgulayabilirsin";
 "instapick_description" = "Instagram hesabını bağlamayı tercih edersen, her yeni PhotoPick sorgunda hesabına özel analiz yaparak kişiselleştirilmiş, çok daha iyi bir deneyim sunabileceğiz.";
 "connected_with_instagram" = "Instagram'la Bağlan";
 "connected_with_instagram_name" = "Instagram'la Bağlan :";
@@ -1000,7 +1000,16 @@
 "create_story_pop_up_title" = "Hikayeni oluşturdun!\n%@";
 "create_story_pop_up_message" = "Hikayeni hazırlıyoruz. Hazır olduğunda %@ altında bulabilirsin.";
 "create_story_path_to_story" = "Fotoğraflar & Videolar > Hikayeler";
-"You can not share empty album" = "";
-"etk_permission_description" = "";
-"global_permission_title_label" = "";
-"global_permission_description" = "";
+"You can not share empty album" = "Boş bir albümü paylaşamazsın";
+"etk_permission_description" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
+"global_permission_title_label" = "Global Veri Paylaşımı";
+"global_permission_description" = "Kişisel verilerimin ilgili operatörün lifebox’a yönelik avantajlı hizmetlerinden faydalanabilmem için Turkcell tarafından bulunduğum ülkede işbirliği yapılan operatörle paylaşılmasına izin veriyorum.";
+"terms_and_use_etk_checkbox_header" = "Ticari Elektronik İleti";
+"global_data_permission_agreement" = "Kişisel verilerimin ilgili operatörün lifebox’a yönelik avantajlı hizmetlerinden faydalanabilmem için Turkcell tarafından bulunduğum ülkede işbirliği yapılan operatörle paylaşılmasına izin veriyorum. Detaylı bilgi için tıklayınız.";
+"global_data_permission_link" = "Detaylı bilgi için tıklayınız.";
+"global_permission_header" = "Global Veri Paylaşımı";
+"informative_description_label" = "İşlemin devam ediyor...";
+"global_permission_screen_title" = "Global Veri Paylaşımı";
+
+/*Settings page*/
+"Permissions" = "İzinler";

@@ -28,16 +28,18 @@ class FBService: BaseRequestService {
 
         let vc = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController!
 
-        let fbManager = FBSDKLoginManager()
+        let fbManager = LoginManager()
         fbManager.logOut()
-        fbManager.logIn(withReadPermissions: permissions, from: vc) { result, error in
+        fbManager.logIn(permissions: permissions, from: vc) { result, error in
             if let error = error {
                 fail?(.error(error))
             } else if let result = result {
                 if result.isCancelled {
                     fail?(.string(TextConstants.NotLocalized.facebookLoginCanceled))
+                } else if let token = result.token?.tokenString {
+                    success?(token)
                 } else {
-                    success?(result.token.tokenString)
+                    fail?(.string(TextConstants.NotLocalized.facebookLoginFailed))
                 }
             }
         }
