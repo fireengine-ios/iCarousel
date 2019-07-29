@@ -288,7 +288,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeInstapickAllowed")
         
-        let params: [String: Any] = ["instapickAllowed": isInstapickAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.instapick: isInstapickAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -310,8 +310,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
         
-        let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
-                                     "facebookTaggingEnabled": isFacebookAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.faceImage: isFaceImageAllowed,
+                                     SettingsInfoPermissionsJsonKeys.facebook: isFacebookAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -487,7 +487,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
 #endif
         
         sessionManager.request(RouteRequests.Account.Settings.settingsApi,
-                               method: .post,
+                               method: .patch,
                                parameters: params,
                                encoding: JSONEncoding.prettyPrinted,
                                headers: RequestHeaders.authification())
