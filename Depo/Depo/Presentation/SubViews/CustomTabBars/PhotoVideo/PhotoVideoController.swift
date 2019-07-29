@@ -15,7 +15,7 @@ typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
 
-    @IBOutlet private weak var collectionView: SwipeSelectingCollectionView! {
+    @IBOutlet private weak var collectionView: QuickSelectCollectionView! {
         didSet {
             collectionView.dataSource = dataSource
             collectionView.delegate = self
@@ -161,7 +161,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
 
     private func deselectAllCells() {
-        collectionView.clearSavedSelected()
         collectionViewManager.deselectAll()
         collectionView.visibleCells.forEach { cell in
             (cell as? PhotoVideoCell)?.updateSelection(isSelectionMode: dataSource.isSelectingMode, animated: false)
@@ -278,7 +277,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
 }
 
-extension PhotoVideoController: SwipeSelectingCollectionViewDelegate {
+extension PhotoVideoController: QuickSelectCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
         if !dataSource.isSelectingMode {
             startEditingMode(at: indexPath)
@@ -787,7 +786,7 @@ extension PhotoVideoController: ScrollBarViewDelegate {
 
 extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func selectedModeDidChange(_ selectingMode: Bool) {
-        collectionView.isSelectionMode = selectingMode
+        collectionView.isQuickSelectAllowed = selectingMode
     }
     
     func fetchPredicateCreated() { }
