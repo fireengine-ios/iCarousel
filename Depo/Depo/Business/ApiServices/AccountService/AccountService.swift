@@ -487,7 +487,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
 #endif
         
         sessionManager.request(RouteRequests.Account.Settings.settingsApi,
-                               method: .post,
+                               method: .patch,
                                parameters: params,
                                encoding: JSONEncoding.prettyPrinted,
                                headers: RequestHeaders.authification())
