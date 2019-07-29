@@ -227,8 +227,6 @@ final class FaceImageViewController: ViewController, NibInit {
                         self?.displayManager.applyConfiguration(.facebookTagsOff)
                         completion?()
                     }
-
-                    completion?()
                 case .failed(let error):
                     DispatchQueue.toMain {
                         /// revert state
