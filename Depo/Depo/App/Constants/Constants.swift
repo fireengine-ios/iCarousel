@@ -1242,6 +1242,7 @@ struct TextConstants {
     static let pleaseEnterYourProblemShortly = NSLocalizedString("please_enter_your_problem_shortly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let explainYourProblemShortly = NSLocalizedString("explain_your_problem_shortly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let pleaseEnterMsisdnOrEmail = NSLocalizedString("please_enter_msisdn_or_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormProblemDescription = NSLocalizedString("support_form_problem_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let supportFormSubject1 = NSLocalizedString("support_form_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let supportFormSubject2 = NSLocalizedString("support_form_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

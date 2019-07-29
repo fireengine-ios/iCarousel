@@ -960,6 +960,7 @@
 "please_enter_your_problem_shortly" = "Please enter your problem shortly";
 "explain_your_problem_shortly" = "Explain your problem shortly";
 "please_enter_msisdn_or_email" = "Please enter phone number or email field";
+"support_form_problem_description" = "We support you in Turkish, English, Arabic languages, so please write your comment in one of these languages";
 "support_form_subject_1" = "Lifebox / I can't login with my e-mail";
 "support_form_subject_2" = "Lifebox / I can't login with my phone number";
 "support_form_subject_3" = "Lifebox / I can't login with my password";

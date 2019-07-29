@@ -87,8 +87,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.textField.autocapitalizationType = .none
         
         newValue.textField.isUserInteractionEnabled = false
-        // TODO: 25
-        newValue.textField.textColor = UIColor.black.withAlphaComponent(0.25)
+        newValue.textField.textColor = ColorConstants.textDisabled
         return newValue
     }()
     
@@ -100,8 +99,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.textField.autocorrectionType = .no
         
         newValue.textField.isUserInteractionEnabled = false
-        // TODO: 25
-        newValue.textField.textColor = UIColor.black.withAlphaComponent(0.25)
+        newValue.textField.textColor = ColorConstants.textDisabled
         return newValue
     }()
     
@@ -126,8 +124,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.numberOfLines = 0
         newValue.textColor = ColorConstants.textGrayColor
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        // TODO: localize
-        newValue.text = "We support you in Turkish, English, Arabic languages, so please write your comment in one of these languages"
+        newValue.text = TextConstants.supportFormProblemDescription
         return newValue
     }()
     
