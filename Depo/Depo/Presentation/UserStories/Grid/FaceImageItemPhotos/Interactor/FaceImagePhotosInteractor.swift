@@ -64,9 +64,9 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 self?.output.startAsyncOperation()
 
                 PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                    
                     DispatchQueue.main.async {
+                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
+                        
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
