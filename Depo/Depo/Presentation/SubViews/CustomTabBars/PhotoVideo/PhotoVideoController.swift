@@ -561,7 +561,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
             guard let self = self else {
                 return
             }
-            self.threeDotMenuManager.showActions(for: selectedObjects, isSelectingMode: self.dataSource.isSelectingMode, sender: self.navBarManager.threeDotsButton)
+            self.threeDotMenuManager.showActions(for: selectedObjects, isSelectingMode: self.dataSource.isSelectingMode, isPhoto: self.isPhoto, sender: self.navBarManager.threeDotsButton)
         }
         
     }
