@@ -1033,3 +1033,7 @@
 
 /*Settings page*/
 "Permissions" = "Permissions";
+
+
+"selected_items_limit_download" = "You cannot download more than %d files";
+"selected_items_limit_delete" = "You cannot delete more than %d files";
