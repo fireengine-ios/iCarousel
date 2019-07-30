@@ -123,6 +123,7 @@ final class PackageInfoView: UIView, NibInit {
         detailLabel.textColor = ColorConstants.textGrayColor
         
         seeDetailsLabel.text = TextConstants.seeDetails
+        titleLabel.adjustsFontSizeToFitWidth()
     }
 
     private func setupShadow() {
