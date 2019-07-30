@@ -20,6 +20,7 @@ protocol Factory: SharedFactory {
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
     func resolve() -> InstapickService
+    func resolve() -> SpotifyService
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -50,6 +51,11 @@ final class FactoryMain: FactoryBase, Factory {
     private static let instapickService = InstapickServiceImpl()
     func resolve() -> InstapickService {
         return FactoryMain.instapickService
+    }
+    
+    private static let spotifyService = SpotifyServiceImpl()
+    func resolve() -> SpotifyService {
+        return FactoryMain.spotifyService
     }
 }
 

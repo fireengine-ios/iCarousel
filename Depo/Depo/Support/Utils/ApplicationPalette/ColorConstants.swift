@@ -67,6 +67,8 @@ struct ColorConstants {
     static let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
     static let lighterGray = UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
     static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
+    
+    static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

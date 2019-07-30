@@ -935,4 +935,10 @@ class RouterVC: NSObject {
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
         return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
     }
+    
+    // MARK: - Spotify
+    
+    func spotifyPlaylistsController() -> UIViewController {
+        return SpotifyPlaylistsViewController.initFromNib()
+    }
 }
