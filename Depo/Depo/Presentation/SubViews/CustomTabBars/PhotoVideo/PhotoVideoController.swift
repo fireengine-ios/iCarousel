@@ -528,8 +528,10 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { items in
-            selectedItemsCallback(items)
+        DispatchQueue.toMain {
+            self.dataSource.getSelectedObjects (at: self.collectionViewManager.selectedIndexes) { items in
+                selectedItemsCallback(items)
+            }
         }
     }
     

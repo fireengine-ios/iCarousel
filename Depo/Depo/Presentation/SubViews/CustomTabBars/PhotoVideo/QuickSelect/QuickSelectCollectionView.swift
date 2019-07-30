@@ -47,6 +47,11 @@ public class QuickSelectCollectionView: UICollectionView {
     private let scrollMinSpeed: CGFloat = 1.0
     private let scrollSpeedDelta: CGFloat = 16.0
     
+    private let autoScrollStepTime = 1.0/60.0
+    private let autoScrollStepsNumber = 8
+    
+    private var offsetRange: ClosedRange<CGFloat> = 0...0
+    
     // scroll triggering
     private let scrollTriggeringScreenRatio: CGFloat = 0.25
     private lazy var topScrollTriggeringInset = UIScreen.main.bounds.height * scrollTriggeringScreenRatio
@@ -65,12 +70,17 @@ public class QuickSelectCollectionView: UICollectionView {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        gestureRecognizers?.append(longPressRecognizer)
-        allowsMultipleSelection = true
+        
+        setup()
     }
     
     override public init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
+
+        setup()
+    }
+    
+    private func setup() {
         gestureRecognizers?.append(longPressRecognizer)
         allowsMultipleSelection = true
     }
@@ -78,11 +88,28 @@ public class QuickSelectCollectionView: UICollectionView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
+        updateTriggeringInsets()
+        updateOffsetRange()
+    }
+    
+    private func updateTriggeringInsets() {
         guard let superview = superview else {
             return
         }
         topScrollTriggeringInset = superview.bounds.height * scrollTriggeringScreenRatio
         bottomScrollTriggeringInset = superview.bounds.height * (1 - scrollTriggeringScreenRatio)
+    }
+    
+    private func updateOffsetRange() {
+        let inset: UIEdgeInsets
+        if #available(iOS 11.0, *) {
+            inset = adjustedContentInset
+        } else {
+            inset = contentInset
+        }
+        
+        let maxBottomOffset = contentSize.height + inset.bottom - frame.height
+        offsetRange = 0.0...max(0.0, maxBottomOffset)
     }
     
     @objc private func didLongTapChange(_ gestureRecognizer: UILongPressGestureRecognizer) {
@@ -107,8 +134,8 @@ public class QuickSelectCollectionView: UICollectionView {
                 selectionMode = .none
             }
         case .changed:
-                shouldAutoScroll = true
-                autoScroll()
+            shouldAutoScroll = true
+            autoScroll()
         default:
             longPressDelegate?.didEndLongPress(at: pointedIndexPath)
             shouldAutoScroll = false
@@ -211,22 +238,13 @@ public class QuickSelectCollectionView: UICollectionView {
 
         isScrolling = true
         
-        self.updateCurrentScrollSpeed()
+        updateCurrentScrollSpeed()
         
-        let numberOfPieces = 10
-        let dOffsetY = self.currentScrollSpeed / CGFloat(numberOfPieces)
-    
-        let group = DispatchGroup()
-        for _ in 0..<numberOfPieces {
-            group.enter()
-            let newContentOffset = CGPoint(x: self.contentOffset.x, y: self.contentOffset.y + dOffsetY)
-            self.setContentOffset(newContentOffset, animated: false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                group.leave()
+        scroll { [weak self] in
+            guard let self = self else {
+                return
             }
-        }
-        
-        group.notify(queue: DispatchQueue.main) {
+            
             self.isScrolling = false
             
             let point = self.longPressRecognizer.location(in: self)
@@ -238,6 +256,26 @@ public class QuickSelectCollectionView: UICollectionView {
                 self.autoScroll()
             }
         }
+    }
+    
+    private func scroll(completion: @escaping VoidHandler) {
+        /// breaking scroll offset into small steps allows us to have smooth scrolling
+        /// check if autoscroll is still allowed once in autoScrollStepTime * autoScrollStepsNumber seconds
+        let stepOffsetY = currentScrollSpeed / CGFloat(autoScrollStepsNumber)
+        
+        let group = DispatchGroup()
+        for _ in 0..<autoScrollStepsNumber {
+            group.enter()
+            let newContentOffset = CGPoint(x: contentOffset.x, y: contentOffset.y + stepOffsetY)
+            if offsetRange ~= newContentOffset.y {
+                setContentOffset(newContentOffset, animated: false)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + autoScrollStepTime) {
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main, execute: completion)
     }
     
     private func updateCurrentScrollSpeed() {
