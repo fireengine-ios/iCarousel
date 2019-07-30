@@ -119,8 +119,11 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex, .contactsSyncScreenIndex, .documentsScreenIndex:
+            case .homePageScreenIndex:
                 tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
+                tabBarVC.selectedIndex = index.rawValue
+            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+                tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue-1]
                 tabBarVC.selectedIndex = index.rawValue
             case .photosScreenIndex:
                 tabBarVC.showPhotosScreen(self)
