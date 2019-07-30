@@ -191,7 +191,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 self.navBarManager.threeDotsButton.isEnabled = false
                 self.bottomBarManager.hide()
             } else {
-                self.navBarManager.threeDotsButton.isEnabled = true
+                if self.isPhoto {
+                    self.navBarManager.threeDotsButton.isEnabled = true
+                } else {
+                    let hasRemote = selectedObjects.first { !$0.isLocalItem } != nil
+                    self.navBarManager.threeDotsButton.isEnabled = hasRemote
+                }
                 self.bottomBarManager.show()
             }
             
