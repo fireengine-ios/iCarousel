@@ -16,6 +16,7 @@ final class WaitingForWiFiPopUp: BaseView {
     override func configurateView() {
         super.configurateView()
         
+        canSwipe = false
         titleLabel?.text = TextConstants.waitingForWiFiPopUpTitle
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel?.textColor = ColorConstants.textGrayColor
