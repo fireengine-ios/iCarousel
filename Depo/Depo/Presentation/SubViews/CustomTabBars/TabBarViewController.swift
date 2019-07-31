@@ -17,6 +17,7 @@ enum FloatingButtonsType {
     case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
+    case importFromSpotify
 }
 
 enum TabScreenIndex: Int {
@@ -66,6 +67,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
@@ -441,6 +443,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         photoBtn = createSubButton(withText: TextConstants.takePhoto, imageName: "TakeFhoto", asLeft: true)
         photoBtn?.changeVisability(toHidden: true)
         
+        importFromSpotifyBtn = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "importFromSpotify", asLeft: true)
+        importFromSpotifyBtn.changeVisability(toHidden: true)
+        
         uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
         uploadBtn?.changeVisability(toHidden: true)
         
@@ -509,6 +514,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifebox)
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
+            case .importFromSpotify:
+                buttonsArray.append(importFromSpotifyBtn)
             }
         }
         
@@ -528,6 +535,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
+        buttonsArray.append(importFromSpotifyBtn)
         return buttonsArray
     }
     
@@ -707,6 +715,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromApp
         case uploadFromLifeboxFavorites:
             action = .uploadFromAppFavorites
+        case importFromSpotifyBtn:
+            action = .importFromSpotify
         default:
             return
         }
@@ -852,6 +862,34 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
+            
+        case .importFromSpotify:
+            
+            
+            
+            connectWithSpotify()
+        }
+    }
+    
+    private func connectWithSpotify() {
+        let service = SpotifyRoutingService()
+        service.connectToSpotify { [weak self] url, playLists  in
+            self?.authSpotify(url: url, playLists: playLists)
+        }
+    }
+    
+    private func authSpotify(url: URL?, playLists: [SpotifyPlaylist]?)  {
+        
+        if let url = url {
+            let router = RouterVC()
+            let controller = router.spotifyAuthWebViewController(url: url)
+            router.pushViewController(viewController: controller)
+
+        } else if let playLists = playLists {
+            // TODO: Temporary logic
+            print(playLists.count)
+        } else {
+            assertionFailure()
         }
     }
     

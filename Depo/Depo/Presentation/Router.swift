@@ -935,4 +935,10 @@ class RouterVC: NSObject {
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
         return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
     }
+    
+    func spotifyAuthWebViewController(url: URL) -> UIViewController {
+        let controller = SpotifyAuthViewController()
+        controller.configure(authpath: url)
+        return controller
+    }
 }

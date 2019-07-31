@@ -10,9 +10,12 @@ import UIKit
 
 final class SpotifyAccountConnectionCell: UITableViewCell  {
     
+    private(set) var section: Section?
+    weak var delegate: SocialConnectionCellDelegate?
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18.0)
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
             newValue.text = TextConstants.spotify
         }
     }
@@ -40,30 +43,35 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
+        let service = SpotifyRoutingService()
+        service.connectToSpotify { [weak self] url, playLists  in
+            self?.authSpotify(url: url, playLists: playLists)
+        }
     }
     
+    private func authSpotify(url: URL?, playLists: [SpotifyPlaylist]?) {
+        if let url = url {
+            let router = RouterVC()
+            let vc = router.spotifyAuthWebViewController(url: url)
+            router.pushViewController(viewController: vc)
+        } else if let playLists = playLists {
+            // TODO: Temporary logic
+            print(playLists.count)
+        } else {
+            assertionFailure()
+            return
+        }
+    }
 }
 
-//extension SpotifyAccountConnectionCell: SocialConnectionCell {
-//    
-//    var section: Section? {
-//        <#code#>
-//    }
-//    
-//    var delegate: SocialConnectionCellDelegate? {
-//        get {
-//            <#code#>
-//        }
-//        set {
-//            <#code#>
-//        }
-//    }
-//    
-//    func setup(with: Section?) {
-//        <#code#>
-//    }
-//    
-//    func disconnect() {
-//        <#code#>
-//    }
-//}
+extension SpotifyAccountConnectionCell: SocialConnectionCell {
+    
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        // TODO: Temporary logic
+        print("Disconnect")
+    }
+}
