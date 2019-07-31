@@ -285,10 +285,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                             }
                             dispatchGroup.leave()
                         }
-                        
                     }
                 }
                 dispatchGroup.notify(queue: .main) {
+                    /// Sort our albums by name AZ
+                    albums.sort(by: {
+                        $0.name! < $1.name!
+                    })
                     completion(albums)
                 }
             }
