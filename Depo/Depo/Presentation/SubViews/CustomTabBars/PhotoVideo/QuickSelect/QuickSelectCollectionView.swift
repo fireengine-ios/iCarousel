@@ -47,22 +47,22 @@ public class QuickSelectCollectionView: UICollectionView {
     private let scrollMinSpeed: CGFloat = 4.0
     private let scrollSpeedDelta: CGFloat = UIScreen.main.bounds.height
     
-    private let autoScrollStepTime = 1.0/60.0
+    private let autoScrollStepTime =  1.0/60.0 // 60 FPS
     private let autoScrollStepsNumber = 8
     
     private var offsetRange: ClosedRange<CGFloat> = 0...0
     
     // scroll triggering
     private let scrollTriggeringScreenRatio: CGFloat = 0.25
-    private let topScrollTriggeringInset = UIScreen.main.bounds.height * scrollTriggeringScreenRatio
-    private let bottomScrollTriggeringInset = UIScreen.main.bounds.height * (1 - scrollTriggeringScreenRatio)
+    private lazy var topScrollTriggeringInset = UIScreen.main.bounds.height * scrollTriggeringScreenRatio
+    private lazy var bottomScrollTriggeringInset = UIScreen.main.bounds.height * (1 - scrollTriggeringScreenRatio)
     
     private var shouldAutoScroll = false
     private var isScrolling = false
     
     
     lazy private var longPressRecognizer: UILongPressGestureRecognizer = {
-        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongTapChange(_:)))
+        let recognizer = QuickSelectGestureRecognizer(target: self, action: #selector(didLongTapChange(_:)))
         recognizer.minimumPressDuration = 0.15
         recognizer.delaysTouchesBegan = true
         return recognizer
@@ -125,8 +125,13 @@ public class QuickSelectCollectionView: UICollectionView {
                 selectionMode = .none
             }
         case .changed:
-            shouldAutoScroll = true
-            autoScroll()
+            /// preventing gaps in selection
+            if bounds.contains(point) {
+                shouldAutoScroll = true
+                autoScroll()
+            } else {
+                shouldAutoScroll = false
+            }
         default:
             longPressDelegate?.didEndLongPress(at: pointedIndexPath)
             shouldAutoScroll = false
@@ -276,12 +281,10 @@ public class QuickSelectCollectionView: UICollectionView {
         if pointY < topScrollTriggeringInset {
             let ratio = 1 - (pointY / topScrollTriggeringInset)
             currentScrollSpeed = -(scrollMinSpeed + scrollSpeedDelta * ratio)
-//            print("point: \(pointY), inset: \(topScrollTriggeringInset) speed: \(currentScrollSpeed), ratio: \(ratio)")
         } else if pointY > bottomScrollTriggeringInset {
             let deltaY = pointY - bottomScrollTriggeringInset
             let ratio = deltaY / bottomScrollTriggeringInset
             currentScrollSpeed = scrollMinSpeed + scrollSpeedDelta * ratio
-//            print("point: \(pointY), inset: \(bottomScrollTriggeringInset) speed: \(currentScrollSpeed), ratio: \(ratio)")
         } else {
             currentScrollSpeed = 0.0
         }
