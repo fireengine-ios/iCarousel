@@ -69,6 +69,8 @@ struct ColorConstants {
     static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
     
     static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
+    static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
+    static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

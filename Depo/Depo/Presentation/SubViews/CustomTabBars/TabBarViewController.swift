@@ -17,6 +17,7 @@ enum FloatingButtonsType {
     case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
+    case importFromSpotify
 }
 
 enum TabScreenIndex: Int {
@@ -72,6 +73,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
+    fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
@@ -459,6 +461,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
+        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotify, imageName: "ImportFromSpotify", asLeft: false)
+        importFromSpotify?.changeVisability(toHidden: true)
+        
         mainContentView.bringSubview(toFront: plussButton)
     }
     
@@ -509,6 +514,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifebox)
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
+            case .importFromSpotify:
+                buttonsArray.append(importFromSpotify)
             }
         }
         
@@ -528,6 +535,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
+        buttonsArray.append(importFromSpotify)
         return buttonsArray
     }
     
@@ -707,6 +715,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromApp
         case uploadFromLifeboxFavorites:
             action = .uploadFromAppFavorites
+        case importFromSpotify:
+            action = .importFromSpotify
         default:
             return
         }
@@ -854,6 +864,11 @@ extension TabBarViewController: TabBarActionHandler {
                 controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, isPhotoVideoOnly: true)
             }
             
+            let navigationController = NavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            router.presentViewController(controller: navigationController)
+        case .importFromSpotify:
+            let controller = router.spotifyPlaylistsController()
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)

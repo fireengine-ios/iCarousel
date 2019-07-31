@@ -15,8 +15,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     @IBOutlet private weak var topBarContainer: UIView!
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
-            //TODO: need localize
-            newValue.setTitle("Import Selected", for: .normal)
+            newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
         }
     }
     @IBOutlet private weak var importButtonBackView: UIView! {
@@ -31,15 +30,16 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         }
     }
 
-    private lazy var dataSource = SpotifyPlaylistsDataSource(collectionView: collectionView, delegate: self)
+    private lazy var dataSource: SpotifyCollectionViewDataSource<SpotifyPlaylist> = {
+        let dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
+        dataSource.canChangeSelectionState = false
+        dataSource.isSelectionStateActive = true
+        return dataSource
+    }()
     private lazy var sortingManager = SpotifyPlaylistsSortingManager(delegate: self)
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)
     
-    private lazy var alert: AlertFilesActionsSheetPresenter = {
-        let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
-        alert.basePassingPresenter = self
-        return alert
-    }()
+    private lazy var router = RouterVC()
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private var page = 0
@@ -52,10 +52,14 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         
         collectionView.contentInset.bottom = importButtonBackView.bounds.height
-        navigationBarWithGradientStyle()
-        navbarManager.setDefaultState()
+        navbarManager.setSelectionState()
         sortingManager.addBarView(to: topBarContainer)
         loadNextPage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
     }
     
     // MARK: -
@@ -84,41 +88,35 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         }
     }
     
-    private func startSelection(with count: Int) {
-        navbarManager.setSelectionState()
-        selectedItemsCountChange(with: count)
-    }
-    
-    private func stopSelection() {
-        navbarManager.setDefaultState()
-        dataSource.cancelSelection()
-        importButtonBackView.isHidden = true
-    }
-    
     private func selectedItemsCountChange(with count: Int) {
         navbarManager.changeSelectionItems(count: count)
         importButtonBackView.isHidden = count == 0
     }
     
     @IBAction private func importSelected(_ sender: UIButton) {
-        
+        let controller = router.spotifyImportController(playlists: dataSource.selectedItems)
+        let navigationController = NavigationController(rootViewController: controller)
+        navigationController.navigationBar.isHidden = false
+        present(navigationController, animated: true)
     }
 }
 
 // MARK: - SpotifyPlaylistsDataSourceDelegate
 
-extension SpotifyPlaylistsViewController: SpotifyPlaylistsDataSourceDelegate {
+extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
+    func onStartSelection() { }
     
+    func onSelect(item: SpotifyObject) {
+        guard let playlist = item as? SpotifyPlaylist else {
+            return
+        }
+        
+        let controller = router.spotifyTracksController(playlist: playlist)
+        show(controller, sender: nil)
+    }
+
     func needLoadNextPage() {
 //        loadNextPage()
-    }
-    
-    func onStartSelection() {
-        startSelection(with: 1)
-    }
-    
-    func onSelect(playlist: SpotifyPlaylist) {
-        
     }
     
     func didChangeSelectionCount(newCount: Int) {
@@ -139,53 +137,11 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsSortingManagerDelegate
 
 extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate {
     
-    func onCancelSelection() {
-        stopSelection()
+    func onCancel() {
+        dismiss(animated: true)
     }
     
     func onSelectAll() {
-        
-    }
-    
-    func onMore() {
-        if dataSource.isSelectionStateActive {
-            showAlertSheet(with: [.selectAll], sender: self)
-        } else {
-            showAlertSheet(with: [.select], sender: self)
-        }
-    }
-    
-    private func showAlertSheet(with types: [ElementTypes], sender: Any?) {
-        alert.show(with: types, for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
-    }
-}
-
-// MARK: - BaseItemInputPassingProtocol
-
-extension SpotifyPlaylistsViewController: BaseItemInputPassingProtocol {
-    
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        selectedItemsCallback([])
-    }
-    
-    func selectModeSelected() {
-        dataSource.startSelection()
-        startSelection(with: 0)
-    }
-    
-    func stopModeSelected() {
-        stopSelection()
-    }
-    
-    func selectAllModeSelected() {
         dataSource.selectAll()
     }
-    
-    func openInstaPick() {}
-    func operationFinished(withType type: ElementTypes, response: Any?) {}
-    func operationFailed(withType type: ElementTypes) {}
-    func deSelectAll() {}
-    func printSelected() {}
-    func changeCover() {}
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }

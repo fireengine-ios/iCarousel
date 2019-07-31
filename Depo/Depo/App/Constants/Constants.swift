@@ -220,6 +220,7 @@ struct TextConstants {
     static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFromLifebox = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let importFromSpotify = NSLocalizedString("Import From Spotify", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Searchbar img name
     
@@ -1291,4 +1292,22 @@ struct TextConstants {
     static let twoFAInvalidChallengeErrorMessage = NSLocalizedString("two_fa_invalid_challenge_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let twoFATooManyAttemptsErrorMessage = NSLocalizedString("two_fa_too_many_attempts_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let twoFAInvalidOtpErrorMessage = NSLocalizedString("two_fa_invalid_Otp_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - Spotify
+    
+    enum Spotify {
+        enum Import {
+            static let navBarTitle = NSLocalizedString("spotify_import_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let importing = NSLocalizedString("spotify_importing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let fromSpotify = NSLocalizedString("spotify_import_from", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let toLifebox = NSLocalizedString("spotify_import_to", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let description = NSLocalizedString("spotify_import_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let importInBackground = NSLocalizedString("spotify_import_in_background", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+        enum Playlist {
+            static let importButton = NSLocalizedString("spotify_playlist_import_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let navBarTitle = NSLocalizedString("spotify_playlist_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let songsCount = NSLocalizedString("spotify_playlist_songs_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+    }
 }

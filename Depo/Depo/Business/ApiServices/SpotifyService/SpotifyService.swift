@@ -71,17 +71,30 @@ struct SpotifyImage {
     }
 }
 
-final class SpotifyPlaylist {
+class SpotifyObject: Equatable {
+    
     let id: String
     let name: String
-    let count: Int
     let image: SpotifyImage?
     
-    init(id: String, name: String, count: Int, image: SpotifyImage?) {
+    init(id: String, name: String, image: SpotifyImage?) {
         self.id = id
         self.name = name
-        self.count = count
         self.image = image
+    }
+    
+    static func == (lhs: SpotifyObject, rhs: SpotifyObject) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+final class SpotifyPlaylist: SpotifyObject {
+
+    let count: Int
+    
+    init(id: String, name: String, count: Int, image: SpotifyImage?) {
+        self.count = count
+        super.init(id: id, name: name, image: image)
     }
     
     convenience init?(json: JSON) {
@@ -106,25 +119,15 @@ final class SpotifyPlaylist {
     }
 }
 
-extension SpotifyPlaylist: Equatable {
-    static func == (lhs: SpotifyPlaylist, rhs: SpotifyPlaylist) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
-final class SpotifyTrack {
-    let id: String
-    let name: String
+final class SpotifyTrack: SpotifyObject {
+    
     let albumName: String
     let artistName: String
-    let image: SpotifyImage?
     
     init(id: String, name: String, albumName: String, artistName: String, image: SpotifyImage?) {
-        self.id = id
-        self.name = name
         self.albumName = albumName
         self.artistName = artistName
-        self.image = image
+        super.init(id: id, name: name, image: image)
     }
     
     convenience init?(json: JSON) {
@@ -140,12 +143,6 @@ final class SpotifyTrack {
         
         let image = SpotifyImage(json: json["image"])
         self.init(id: id, name: name, albumName: albumName, artistName: artistName, image: image)
-    }
-}
-
-extension SpotifyTrack: Equatable {
-    static func == (lhs: SpotifyTrack, rhs: SpotifyTrack) -> Bool {
-        return lhs.id == rhs.id
     }
 }
 

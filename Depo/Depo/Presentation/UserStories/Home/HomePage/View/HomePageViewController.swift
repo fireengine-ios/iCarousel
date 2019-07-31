@@ -55,6 +55,23 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         output.homePagePresented()
         
         output.needCheckQuota()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.testService()
+        }
+    }
+    
+    private func testService() {
+        let service: SpotifyService = factory.resolve()
+        service.getAuthUrl { response in
+            debugPrint(response)
+        }
+        service.getStatus { response in
+            debugPrint(response)
+        }
+        service.getPlaylists(page: 0, size: 10) { result in
+            debugPrint(result)
+        }
     }
     
     private func configurateRefreshControl() {

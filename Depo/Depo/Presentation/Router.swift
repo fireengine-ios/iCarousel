@@ -941,4 +941,15 @@ class RouterVC: NSObject {
     func spotifyPlaylistsController() -> UIViewController {
         return SpotifyPlaylistsViewController.initFromNib()
     }
+    
+    func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {
+        let controller = SpotifyPlaylistViewController.initFromNib()
+        controller.playlist = playlist
+        return controller
+    }
+    
+    func spotifyImportController(playlists: [SpotifyPlaylist]) -> UIViewController {
+        let controller = SpotifyImportViewController.initFromNib()
+        return controller
+    }
 }

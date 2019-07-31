@@ -9,9 +9,8 @@
 import Foundation
 
 protocol SpotifyPlaylistsNavbarManagerDelegate: class {
-    func onCancelSelection()
+    func onCancel()
     func onSelectAll()
-    func onMore()
 }
 
 extension SpotifyPlaylistsNavbarManagerDelegate where Self: UIViewController {
@@ -35,11 +34,11 @@ final class SpotifyPlaylistsNavbarManager {
     
     private weak var delegate: (SpotifyPlaylistsNavbarManagerDelegate & UIViewController)?
     
-    private lazy var cancelSelectionButton: UIBarButtonItem = {
+    private lazy var cancelAsBackButton: UIBarButtonItem = {
         return UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
                                font: .TurkcellSaturaDemFont(size: 19.0),
                                target: self,
-                               selector: #selector(onCancelSelection))
+                               selector: #selector(onCancel))
     }()
     
     private lazy var selectAllButton: UIBarButtonItem = {
@@ -49,48 +48,30 @@ final class SpotifyPlaylistsNavbarManager {
                                selector: #selector(onSelectAll))
     }()
     
-    private lazy var moreButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
-                               style: .plain,
-                               target: self,
-                               action: #selector(onMore))
-    }()
-    
     // MARK: -
     
     required init(delegate: (SpotifyPlaylistsNavbarManagerDelegate & UIViewController)?) {
         self.delegate = delegate
-        delegate?.setRightBarButtonItems([moreButton], animated: false)
+    }
+    
+    func setSelectionState() {
+        delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
+        delegate?.setLeftBarButtonItems([cancelAsBackButton], animated: true)
+        delegate?.setRightBarButtonItems([selectAllButton], animated: false)
     }
     
     func changeSelectionItems(count: Int) {
-//        moreButton.isEnabled = count > 0
         if count == 0 {
-            //TODO: Need localize
-            delegate?.setTitle(withString: "Select Items")
+            delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
         } else {
             delegate?.setTitle(withString: "\(count) \(TextConstants.accessibilitySelected)")
         }
     }
     
-    func setSelectionState() {
-        delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
-    }
-    
-    func setDefaultState() {
-        //TODO: Need localize
-        delegate?.setTitle(withString: "Spotify Playlists")
-        delegate?.setLeftBarButtonItems(nil, animated: true)
-    }
-    
     // MARK: - Actions
     
-    @objc private func onCancelSelection() {
-        delegate?.onCancelSelection()
-    }
-    
-    @objc private func onMore() {
-        delegate?.onMore()
+    @objc private func onCancel() {
+        delegate?.onCancel()
     }
     
     @objc private func onSelectAll() {
