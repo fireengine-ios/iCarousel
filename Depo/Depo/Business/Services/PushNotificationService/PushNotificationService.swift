@@ -121,14 +121,14 @@ final class PushNotificationService {
             switch index {
             case .homePageScreenIndex:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[index.rawValue] else {
-                    assertionFailure("This index is non existed 😵")
+                    assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
             case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
                 guard let newSelectedItem = tabBarVC.tabBar.items?[index.rawValue-1] else {
-                    assertionFailure("This index is non existed 😵")
+                    assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
