@@ -44,8 +44,8 @@ public class QuickSelectCollectionView: UICollectionView {
     
     // scroll speed
     private var currentScrollSpeed: CGFloat = 0.0
-    private let scrollMinSpeed: CGFloat = 1.0
-    private let scrollSpeedDelta: CGFloat = 16.0
+    private let scrollMinSpeed: CGFloat = 4.0
+    private let scrollSpeedDelta: CGFloat = UIScreen.main.bounds.height
     
     private let autoScrollStepTime = 1.0/60.0
     private let autoScrollStepsNumber = 8
@@ -54,8 +54,8 @@ public class QuickSelectCollectionView: UICollectionView {
     
     // scroll triggering
     private let scrollTriggeringScreenRatio: CGFloat = 0.25
-    private lazy var topScrollTriggeringInset = UIScreen.main.bounds.height * scrollTriggeringScreenRatio
-    private lazy var bottomScrollTriggeringInset = UIScreen.main.bounds.height * (1 - scrollTriggeringScreenRatio)
+    private let topScrollTriggeringInset = UIScreen.main.bounds.height * scrollTriggeringScreenRatio
+    private let bottomScrollTriggeringInset = UIScreen.main.bounds.height * (1 - scrollTriggeringScreenRatio)
     
     private var shouldAutoScroll = false
     private var isScrolling = false
@@ -88,16 +88,7 @@ public class QuickSelectCollectionView: UICollectionView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        updateTriggeringInsets()
         updateOffsetRange()
-    }
-    
-    private func updateTriggeringInsets() {
-        guard let superview = superview else {
-            return
-        }
-        topScrollTriggeringInset = superview.bounds.height * scrollTriggeringScreenRatio
-        bottomScrollTriggeringInset = superview.bounds.height * (1 - scrollTriggeringScreenRatio)
     }
     
     private func updateOffsetRange() {
@@ -109,7 +100,7 @@ public class QuickSelectCollectionView: UICollectionView {
         }
         
         let maxBottomOffset = contentSize.height + inset.bottom - frame.height
-        offsetRange = 0.0...max(0.0, maxBottomOffset)
+        offsetRange = -inset.top...max(0.0, maxBottomOffset)
     }
     
     @objc private func didLongTapChange(_ gestureRecognizer: UILongPressGestureRecognizer) {
@@ -279,19 +270,18 @@ public class QuickSelectCollectionView: UICollectionView {
     }
     
     private func updateCurrentScrollSpeed() {
-        guard let superview = self.superview else {
-            currentScrollSpeed = 0.0
-            return
-        }
-        
-        let pointY = longPressRecognizer.location(in: superview).y
+        /// location in window
+        let pointY = longPressRecognizer.location(in: nil).y
         
         if pointY < topScrollTriggeringInset {
             let ratio = 1 - (pointY / topScrollTriggeringInset)
             currentScrollSpeed = -(scrollMinSpeed + scrollSpeedDelta * ratio)
+//            print("point: \(pointY), inset: \(topScrollTriggeringInset) speed: \(currentScrollSpeed), ratio: \(ratio)")
         } else if pointY > bottomScrollTriggeringInset {
-            let ratio = pointY / topScrollTriggeringInset
+            let deltaY = pointY - bottomScrollTriggeringInset
+            let ratio = deltaY / bottomScrollTriggeringInset
             currentScrollSpeed = scrollMinSpeed + scrollSpeedDelta * ratio
+//            print("point: \(pointY), inset: \(bottomScrollTriggeringInset) speed: \(currentScrollSpeed), ratio: \(ratio)")
         } else {
             currentScrollSpeed = 0.0
         }
