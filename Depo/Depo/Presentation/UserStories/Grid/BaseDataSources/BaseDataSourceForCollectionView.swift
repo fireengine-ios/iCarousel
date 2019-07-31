@@ -168,6 +168,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var assetFilesCacheManager = AssetFileCacheManager()
     
+    private var isDeleteFromMoved = false
+    
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -1757,7 +1759,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 recentlyDeletedSections.removeAll()
                 recentlyUpdatedIndexes.removeAll()
                     
-                self.delegate?.didDelete(items: items)
+                if !self.isDeleteFromMoved {
+                    self.delegate?.didDelete(items: items)
+                } else {
+                    self.isDeleteFromMoved = false
+                }
                     
                 self.updateCoverPhoto()
             }
@@ -1925,6 +1931,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             deleteItems(items: items)
         } else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
+            isDeleteFromMoved = true
             deleteItems(items: items)
         }
     }

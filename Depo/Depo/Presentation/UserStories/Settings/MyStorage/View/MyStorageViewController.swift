@@ -66,17 +66,11 @@ final class MyStorageViewController: BaseViewController {
             newValue.layer.masksToBounds = true
         }
     }
-    
-    @IBOutlet private weak var restoreViewHeight: NSLayoutConstraint! {
-        willSet {
-            //by default restore view is hidden
-            //show only for non cell users
-            newValue.constant = 0
-        }
-    }
         
     @IBOutlet private weak var restorePurchasesButton: UIButton! {
         didSet {
+            restorePurchasesButton.isHidden = true
+            restorePurchasesButton.isEnabled = false
             restorePurchasesButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 11, bottom: 6, right: 11)
             restorePurchasesButton.setTitle(TextConstants.restorePurchasesButton, for: .normal)
             restorePurchasesButton.setTitleColor(.lrTealish, for: .normal)
@@ -92,6 +86,7 @@ final class MyStorageViewController: BaseViewController {
     
     @IBOutlet private weak var restoreDescriptionLabel: UILabel! {
         didSet {
+            restoreDescriptionLabel.isHidden = true
             restoreDescriptionLabel.attributedText = NSAttributedString.attributedText(text: TextConstants.restorePurchasesInfo, word: TextConstants.attributedRestoreWord, textFont: .TurkcellSaturaFont(size: 15), wordFont: .TurkcellSaturaDemFont(size: 15))
             restoreDescriptionLabel.numberOfLines = 0
         }
@@ -145,7 +140,9 @@ extension MyStorageViewController: MyStorageViewInput {
     }
     
     func showRestoreButton() {
-        restoreViewHeight.isActive = false
+        restorePurchasesButton.isEnabled = true
+        restorePurchasesButton.isHidden = false
+        restoreDescriptionLabel.isHidden = false
         view.layoutIfNeeded()
     }
 }
