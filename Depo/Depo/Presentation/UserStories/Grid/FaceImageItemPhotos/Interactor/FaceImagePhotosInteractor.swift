@@ -89,9 +89,9 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 self?.output.startAsyncOperation()
 
                 ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                    
                     DispatchQueue.main.async {
+                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
+                    
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
@@ -114,9 +114,9 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 self?.output.startAsyncOperation()
 
                 PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
-                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                    
                     DispatchQueue.main.async {
+                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
+                    
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
