@@ -45,15 +45,13 @@ final class FreeAppSpace: NSObject {
     }
     
     func getDuplicatesItems(_ localItemsCallback: @escaping WrapObjectsCallBack) {
-//        if duplicatesArray.isEmpty {
+        ///For now changed to get info from DB every time we enter FreeUP screen
+        //TODO: optimize this class
             MediaItemOperationsService.shared.getLocalDuplicates { localItems in
                 localItemsCallback(localItems.map { WrapData(mediaItem: $0)}.sorted(by: {
                     $0.metaDate > $1.metaDate
                 }) )
             }
-//        } else {
-//            localItemsCallback(getDuplicatesObjects())
-//        }
     }
     
     func checkFreeAppSpace() {
