@@ -1008,7 +1008,7 @@
 "global_data_permission_agreement" = "Kişisel verilerimin ilgili operatörün lifebox’a yönelik avantajlı hizmetlerinden faydalanabilmem için Turkcell tarafından bulunduğum ülkede işbirliği yapılan operatörle paylaşılmasına izin veriyorum. Detaylı bilgi için tıklayınız.";
 "global_data_permission_link" = "Detaylı bilgi için tıklayınız.";
 "global_permission_header" = "Global Veri Paylaşımı";
-"informative_description_label" = "İşlemin devam ediyor...";
+"informative_description_label" = "İzin için bekleniyor";
 "global_permission_screen_title" = "Global Veri Paylaşımı";
 
 /*Settings page*/
