@@ -60,20 +60,7 @@ final class MediaItemOperationsService {
         let uuidsPredicate = NSPredicate(format: "\(#keyPath(MediaItem.uuid)) IN %@", uuids)
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [remoteMediaItemsPredicate, uuidsPredicate])
         
-        let elementsToDelete: [(type: NSManagedObject.Type, predicate: NSPredicate?)]
-        elementsToDelete = [(MediaItemsAlbum.self, nil),
-                            (MediaItem.self, compoundedPredicate)]
-        
-        let group = DispatchGroup()
-        
-        for element in elementsToDelete {
-            group.enter()
-            
-            delete(type: element.type, predicate: element.predicate, mergeChanges: false) { _ in
-                group.leave()
-            }
-        }
-        group.notify(queue: .main) {
+        delete(type: MediaItem.self, predicate: compoundedPredicate, mergeChanges: false) { _ in
             completion?(true)
         }
     }
