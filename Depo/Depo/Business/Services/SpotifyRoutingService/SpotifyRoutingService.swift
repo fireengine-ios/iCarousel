@@ -8,85 +8,59 @@
 
 import Foundation
 
+enum scenarioForSpotifyAuth {
+    case urlResponseResult(ResponseResult<URL>)
+    case playListsResponseResult(ResponseResult<[SpotifyPlaylist]>)
+    case error(Error)
+}
+
 final class SpotifyRoutingService {
     
     private lazy var spotifyService = SpotifyServiceImpl()
-    private func checkSpotifySocialStatus(completion: @escaping (Bool) -> Void){
-        
-        spotifyService.socialStatus(success: { [weak self] response in
-            
+    
+    private func checkSpotifySocialStatus(completion: @escaping (ResponseResult<Bool>) -> Void){
+        spotifyService.socialStatus(success: { response in
             guard let response = response as? SocialStatusResponse,
-                  let isConnected: Bool = response.spotifyConnected else {
-                    let error = CustomErrors.serverError("An error occurred while getting Spotify status.")
-                    let errorResponse = ErrorResponse.error(error)
-                    self?.showError(with: errorResponse)
-                    return
+                let isConnected: Bool = response.spotifyConnected else {
+                return
             }
-            completion(isConnected)
-        }) { [weak self] error in
-            self?.showError(with: error)
+            completion(.success(isConnected))
+        }) { error in
+            completion(.failed(error))
         }
     }
     
-    func connectToSpotify(completion: @escaping (URL?, [SpotifyPlaylist]?) -> Void) {
-        checkSpotifySocialStatus { isConnected in
-            if isConnected {
-                self.preparePlayListsController(completion: { playLists in
-                    completion(nil, playLists)
-                })
-            } else {
-                self.prepareAuthWebPage(completion: { url in
-                    completion(url, nil)
-                })
+    func connectToSpotify(completion: @escaping (scenarioForSpotifyAuth) -> Void) {
+        checkSpotifySocialStatus { response in
+            switch response {
+            case .success(let result):
+                if result {
+                    self.preparePlayListsController(completion: { completion(.playListsResponseResult($0))})
+                } else {
+                    self.prepareAuthWebPage(completion: { completion(.urlResponseResult($0)) })
+                }
+            case .failed(let error):
+                completion(.error(error))
             }
         }
     }
-    
-    func terminationAuthProcess(code: String, completion: @escaping ([SpotifyPlaylist]?) -> Void ) {
+        
+    func terminationAuthProcess(code: String, completion: @escaping (ResponseResult<[SpotifyPlaylist]>) -> Void ) {
         spotifyService.connect(code: code) { response in
             switch response {
-                
             case .success:
-                self.preparePlayListsController(completion: { playLists in
-                    completion(playLists)
-                })
-            case .failed(_):
-                let err = CustomErrors.serverError("An error occurred while getting PlayLists ")
-                let errorResponse = ErrorResponse.error(err)
-                self.showError(with: errorResponse)
-            }
-        }
-        
-    }
-    
-    private func prepareAuthWebPage(completion: @escaping (URL) -> Void) {
-        spotifyService.getAuthUrl { (response) in
-            switch response {
-            case .success(let response):
-                completion(response)
-            case .failed(_):
-                let error = CustomErrors.serverError("An error occurred while opening Spotify login page.")
-                let errorResponse = ErrorResponse.error(error)
-                self.showError(with: errorResponse)
+               self.spotifyService.getPlaylists(page: 0, size: 5, handler: completion)
+            case .failed(let error):
+                completion(.failed(error))
             }
         }
     }
     
-    private func preparePlayListsController(completion: @escaping ([SpotifyPlaylist]) -> Void) {
-        spotifyService.getPlaylists(page: 0, size: 5) {  response in
-            switch response {
-            case .success(let response):
-                completion(response)
-            case .failed(_):
-                let err = CustomErrors.serverError("An error occurred while getting PlayLists ")
-                let errorResponse = ErrorResponse.error(err)
-                self.showError(with: errorResponse)
-            }
-        }
+    private func prepareAuthWebPage(completion: @escaping (ResponseResult<URL>) -> Void) {
+        spotifyService.getAuthUrl(handler: completion)
     }
     
-    private func showError(with error: ErrorResponse) {
-        //TODO: Temporary logic for ErrorHandling
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+    private func preparePlayListsController(completion: @escaping (ResponseResult<[SpotifyPlaylist]>) -> Void) {
+        spotifyService.getPlaylists(page: 0, size: 5, handler: completion)
     }
 }

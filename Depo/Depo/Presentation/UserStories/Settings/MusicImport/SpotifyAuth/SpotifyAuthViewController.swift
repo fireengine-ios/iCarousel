@@ -18,14 +18,8 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
     
     private let spotifyRoutingService = SpotifyRoutingService()
     
-    private var webView = WKWebView(frame: .zero) {
-        willSet {
-            newValue.backgroundColor = UIColor.white
-            newValue.isOpaque = false
-        }
-    }
+    private let webView = WKWebView()
     
-    private var authPath: URL?    
     weak var delegate: SpotifyAuthViewControllerDelegate?
     
     override func loadView() {
@@ -35,30 +29,17 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        removeCache()
         showSpinner()
         setupNavigation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         handleBackButton()
     }
     
-    func configure(authpath: URL) {
-        self.authPath = authpath
-        loadWebView()
-    }
-    
-    
-    private func loadWebView() {
-        guard let authPath = authPath else {
-            assertionFailure()
-            return
-        }
-        var request = URLRequest(url: authPath)
-        request.httpShouldHandleCookies = false
+    func loadWebView(with url: URL) {
+        let request = URLRequest(url: url)
         webView.load(request)
     }
     
@@ -72,18 +53,6 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
     @objc private func spotifyAuthCancel() {
         delegate?.spotifyAuthCancel()
         navigationController?.popViewController(animated: true)
-    }
-    
-    private func removeCache() {
-        let dataStore = WKWebsiteDataStore.default()
-        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
-            records.forEach({ record in
-                dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
-                                     for: [record],
-                                     completionHandler: {})
-            })
-        }
-        
     }
     
     deinit {
@@ -102,13 +71,18 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
     }
     
     private func terminateAuthProcess(code: String) {
-        spotifyRoutingService.terminationAuthProcess(code: code) { [weak self] playLists in
-            // TODO: Present play lists screen
-            print(playLists?.count)
+        spotifyRoutingService.terminationAuthProcess(code: code) { [weak self] playListsRequestResult in
+            switch playListsRequestResult {
+            case .success(let playLists):
+                //Logic for present tableView with playLists
+                print(playLists.count)
+            case .failed(let error):
+                //Logic for error handling
+                print(error.localizedDescription)
+            }
         }
     }
 }
-
 
 extension SpotifyAuthViewController: WKNavigationDelegate {
     
@@ -127,23 +101,13 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
             return
         }
         
-        
-        if let index = currentUrl.range(of: "code=")?.upperBound {
-            var spotifyCode = String(currentUrl.suffix(from: index))
-            
-            print(spotifyCode)
-        
-            if let faceBook = spotifyCode.index(of: "&") {
-                 spotifyCode = String(spotifyCode.substring(to: faceBook))
+        if let startIndex = currentUrl.range(of: "code=")?.upperBound {
+            var spotifyCode = String(currentUrl.suffix(from: startIndex))
+            if let faceBookCode = spotifyCode.index(of: "&") {
+                 spotifyCode = String(spotifyCode[..<faceBookCode])
             }
-           
-            print(spotifyCode)
-            
-
             terminateAuthProcess(code: spotifyCode)
-            removeCache()
         }
-        
         decisionHandler(.allow)
     }
 }

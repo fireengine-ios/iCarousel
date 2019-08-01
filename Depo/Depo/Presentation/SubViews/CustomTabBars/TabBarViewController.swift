@@ -869,32 +869,45 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: navigationController)
             
         case .importFromSpotify:
-            
-            
-            
-            connectWithSpotify()
+            connectToSpotify()
         }
     }
     
-    private func connectWithSpotify() {
+    private func connectToSpotify() {
         let service = SpotifyRoutingService()
-        service.connectToSpotify { [weak self] url, playLists  in
-            self?.authSpotify(url: url, playLists: playLists)
+        service.connectToSpotify { [weak self] result in
+            switch result {
+            case .urlResponseResult(let urlResponseResult):
+                self?.urlResponseResultHandler(urlResponseResult: urlResponseResult)
+            case .playListsResponseResult(let playListResponseResult):
+                self?.playListResponseResultHandler(playListsResponseResult: playListResponseResult)
+            case .error(let error):
+                //Temporary logic for error handling
+                print(error.localizedDescription)
+            }
         }
     }
     
-    private func authSpotify(url: URL?, playLists: [SpotifyPlaylist]?)  {
-        
-        if let url = url {
-            let router = RouterVC()
-            let controller = router.spotifyAuthWebViewController(url: url)
-            router.pushViewController(viewController: controller)
-
-        } else if let playLists = playLists {
-            // TODO: Temporary logic
+    private func playListResponseResultHandler(playListsResponseResult: ResponseResult<[SpotifyPlaylist]> ) {
+        switch playListsResponseResult {
+        case .success(let playLists):
+            // Present list of play lists
             print(playLists.count)
-        } else {
-            assertionFailure()
+        case .failed(let error):
+            //Temporary logic for Error Handling
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func urlResponseResultHandler(urlResponseResult: ResponseResult<URL>) {
+        switch urlResponseResult {
+        case .success(let url):
+            let router = RouterVC()
+            let vc = router.spotifyAuthWebViewController(url: url)
+            router.pushViewController(viewController: vc)
+        case .failed(let error):
+            //Temporary logic for Error Handling
+            print(error.localizedDescription)
         }
     }
     

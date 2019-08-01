@@ -938,7 +938,7 @@ class RouterVC: NSObject {
     
     func spotifyAuthWebViewController(url: URL) -> UIViewController {
         let controller = SpotifyAuthViewController()
-        controller.configure(authpath: url)
+        controller.loadWebView(with: url)
         return controller
     }
 }

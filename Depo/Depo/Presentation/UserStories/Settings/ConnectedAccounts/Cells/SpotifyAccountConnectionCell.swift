@@ -41,25 +41,43 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
-
     @IBAction private func connectedButtonTapped(_ sender: Any) {
+        connectToSpotify()
+    }
+    
+    private func connectToSpotify() {
         let service = SpotifyRoutingService()
-        service.connectToSpotify { [weak self] url, playLists  in
-            self?.authSpotify(url: url, playLists: playLists)
+        service.connectToSpotify { [weak self] result in
+            switch result {
+            case .urlResponseResult(let urlResponseResult):
+                self?.urlResponseResultHandler(urlResponseResult: urlResponseResult)
+            case .playListsResponseResult(let playListResponseResult):
+                self?.playListResponseResultHandler(playListsResponseResult: playListResponseResult)
+            case .error(let error):
+                //Temporary logic for error handling
+                print(error.localizedDescription)
+            }
         }
     }
     
-    private func authSpotify(url: URL?, playLists: [SpotifyPlaylist]?) {
-        if let url = url {
+    private func playListResponseResultHandler(playListsResponseResult: ResponseResult<[SpotifyPlaylist]> ) {
+        switch playListsResponseResult {
+        case .success(let playLists):
+            // Present list of play lists
+            print(playLists.count)
+        case .failed(let error):
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func urlResponseResultHandler(urlResponseResult: ResponseResult<URL>) {
+        switch urlResponseResult {
+        case .success(let url):
             let router = RouterVC()
             let vc = router.spotifyAuthWebViewController(url: url)
             router.pushViewController(viewController: vc)
-        } else if let playLists = playLists {
-            // TODO: Temporary logic
-            print(playLists.count)
-        } else {
-            assertionFailure()
-            return
+        case .failed(let error):
+            print(error.localizedDescription)
         }
     }
 }

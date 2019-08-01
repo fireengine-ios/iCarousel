@@ -47,9 +47,9 @@ final class SpotifyStatus {
             let jobStatusString = json["jobStatus"].string,
             let jobStatus = JobStatus(rawValue: jobStatusString),
             let isConnected = json["connected"].bool
-            else {
-                assertionFailure()
-                return nil
+        else {
+            assertionFailure()
+            return nil
         }
         
         let lastModifiedDate = json["lastModifiedDate"].date
@@ -60,7 +60,7 @@ final class SpotifyStatus {
 }
 
 final class SpotifyPlaylist {
-    struct Image {
+    final class  Image {
         let height: Int?
         let width: Int?
         let url: URL?
