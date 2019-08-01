@@ -1280,7 +1280,7 @@ Please check I have understood the intended command here*/
 "terms_of_use" = "Conditions d'utilisation";
 "privacy_policy" = "Politique de confidentialité";
 "face_tags_description_standart" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";
-"terms_and_use_introduction_checkbox" = "J'ai lu et j'accepte les conditions générales d'utilisation.";
+"terms_and_use_introduction_checkbox" = "J'ai lu et accepté les conditions d'utilisation et Politique de confidentialité";
 "privacy_policy_condition" = "Politique de confidentialité";
 "photo_pick_description" = "Si vous activez le bouton et connectez votre compte Instagram, nous pourrons offrir une expérience personnalisée et améliorée en effectuant une analyse personnalisée à chaque nouvelle analyse PhotoPick.";
 
@@ -1307,7 +1307,7 @@ Please check I have understood the intended command here*/
 "global_data_permission_agreement" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaire de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox. Cliquez pour plus de détails.";
 "global_data_permission_link" = "Cliquez pour plus de détails";
 "global_permission_header" = "Permission de données globale";
-"informative_description_label" = "en cours..";
+"informative_description_label" = "en attente de permission";
 "global_permission_screen_title" = "Permission de données globale";
 
 /*Settings page*/
