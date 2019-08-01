@@ -1043,7 +1043,7 @@
 "global_data_permission_agreement" = "Unë pranoj që informacioni im personal të ndahet me operatorët e bashkëpunimit me Turkcell në mënyrë që unë të shfrytëzoj shërbimet e dobishme të operatorit përkatës në lidhje me Lifebox. Klikoni për informacion të detajuar.";
 "global_data_permission_link" = "Klikoni për informacion të detajuar.";
 "global_permission_header" = "Leja e të dhënave globale";
-"informative_description_label" = "Në progress...";
+"informative_description_label" = "duke pritur lejen";
 "global_permission_screen_title" = "Leja e të dhënave globale";
 
 /*Settings page*/
