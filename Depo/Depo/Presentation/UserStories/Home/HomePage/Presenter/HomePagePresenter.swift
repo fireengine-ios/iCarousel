@@ -139,6 +139,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
         guard !cards.isEmpty else {
+            if !isReloadAll {
+                view.stopRefresh()
+            }
             return
         }
         
