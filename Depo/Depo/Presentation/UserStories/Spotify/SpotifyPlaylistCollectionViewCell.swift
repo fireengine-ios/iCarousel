@@ -7,31 +7,7 @@
 //
 
 import UIKit
-
-final class SelectionButton: UIButton {
-    
-    override var isSelected: Bool {
-        didSet {
-            setImage(UIImage(named: isSelected ? "notSelected" : "selected"), for: .highlighted)
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        setImage(UIImage(named: "notSelected"), for: .normal)
-        setImage(UIImage(named: "selected"), for: .selected)
-        setImage(UIImage(named: "selected"), for: .highlighted)
-    }
-}
+import SDWebImage
 
 protocol SpotifyPlaylistCellDelegate: LBCellsDelegate {
     func onSelect(cell: SpotifyPlaylistCollectionViewCell)
@@ -47,8 +23,12 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet private weak var selectionButton: SelectionButton! {
+    @IBOutlet private weak var selectionButton: UIButton! {
         willSet {
+            newValue.setImage(UIImage(named: "notSelected"), for: .normal)
+            newValue.setImage(UIImage(named: "selected"), for: .selected)
+            newValue.setImage(UIImage(named: "selected"), for: .highlighted)
+            newValue.setImage(UIImage(named: "notSelected"), for: [.highlighted, .selected])
             newValue.addTarget(self, action: #selector(onSelectionButton(_:)), for: .touchUpInside)
         }
     }
@@ -78,12 +58,14 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
+    private var isSelectionStateActive = false
+    
     // MARK: -
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellImageManager?.cancelImageLoading()
+        imageView.sd_cancelCurrentImageLoad()
         imageView.image = nil
         uuid = nil
     }
@@ -94,42 +76,18 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
         if let playlist = item as? SpotifyPlaylist {
             titleLabel.text = playlist.name
             subtitleLabel.text = String(format: TextConstants.Spotify.Playlist.songsCount, playlist.count)
-            arrowImageView.isHidden = playlist.count == 0
-            setImage(with: playlist.image, placeholder: UIImage(named: "playlist"))
+            arrowImageView.isHidden = !isSelectionStateActive || playlist.count == 0
+            imageView.sd_setImage(with: playlist.image?.url, placeholderImage: UIImage(named: "playlist")!)
         } else if let track = item as? SpotifyTrack {
             titleLabel.text = track.name
             subtitleLabel.text = track.artistName
             arrowImageView.isHidden = true
-            setImage(with: track.image, placeholder: UIImage(named: "playlist_track"))
+            imageView.sd_setImage(with: track.image?.url, placeholderImage: UIImage(named: "playlist_track")!)
         }
-    }
-    
-    private func setImage(with image: SpotifyImage?, placeholder: UIImage?) {
-        imageView.image = placeholder
-        guard let url = image?.url else {
-            return
-        }
-        
-        let cacheKey = url.byTrimmingQuery
-        cellImageManager = CellImageManager.instance(by: cacheKey)
-        uuid = cellImageManager?.uniqueId
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
-            guard let self = self else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                guard let image = image, let uuid = self.uuid, uuid == uniqueId else {
-                    return
-                }
-                self.imageView.image = image
-            }
-        }
-        
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
     }
     
     func setSeletionMode(_ isActive: Bool, animation: Bool) {
+        isSelectionStateActive = isActive
         UIView.animate(withDuration: animation ? 0.1 : 0) {
             self.selectionButton.isHidden = !isActive
             self.imageLeftOffset.constant = isActive ? Constants.imageLeftOffset.selectionMode : Constants.imageLeftOffset.defaultMode

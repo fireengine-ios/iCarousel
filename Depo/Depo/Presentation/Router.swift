@@ -950,6 +950,11 @@ class RouterVC: NSObject {
     
     func spotifyImportController(playlists: [SpotifyPlaylist]) -> UIViewController {
         let controller = SpotifyImportViewController.initFromNib()
+        controller.playlists = playlists
         return controller
+    }
+    
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
+        return SpotifyOverwritePopup.with(importAction: importAction)
     }
 }

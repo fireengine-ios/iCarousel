@@ -11,8 +11,15 @@ import UIKit
 final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var successImportView: UIView!
+    @IBOutlet private weak var successImportLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.successImport
+            newValue.textColor = .white
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
+        }
+    }
+    @IBOutlet private weak var collectionViewTopOffset: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var topBarContainer: UIView!
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
@@ -36,7 +43,6 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         dataSource.isSelectionStateActive = true
         return dataSource
     }()
-    private lazy var sortingManager = SpotifyPlaylistsSortingManager(delegate: self)
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)
     
     private lazy var router = RouterVC()
@@ -48,13 +54,18 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     // MARK: - View lifecycle
     
+    deinit {
+        spotifyService.importDelegates.remove(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.contentInset.bottom = importButtonBackView.bounds.height
         navbarManager.setSelectionState()
-        sortingManager.addBarView(to: topBarContainer)
         loadNextPage()
+        
+        spotifyService.importDelegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +105,21 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     }
     
     @IBAction private func importSelected(_ sender: UIButton) {
+        if dataSource.isSelectionStateActive {
+            showOverwritePopup()
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    private func showOverwritePopup() {
+        let popup = router.spotifyOverwritePopup { [weak self] in
+            self?.importPlaylists()
+        }
+        present(popup, animated: true)
+    }
+    
+    private func importPlaylists() {
         let controller = router.spotifyImportController(playlists: dataSource.selectedItems)
         let navigationController = NavigationController(rootViewController: controller)
         navigationController.navigationBar.isHidden = false
@@ -116,20 +142,11 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     }
 
     func needLoadNextPage() {
-//        loadNextPage()
+        loadNextPage()
     }
     
     func didChangeSelectionCount(newCount: Int) {
         selectedItemsCountChange(with: newCount)
-    }
-}
-
-// MARK: - SortingManagerDelegate
-
-extension SpotifyPlaylistsViewController: SpotifyPlaylistsSortingManagerDelegate {
-    
-    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
-        
     }
 }
 
@@ -144,4 +161,33 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
     func onSelectAll() {
         dataSource.selectAll()
     }
+    
+    func onDone() {
+        dismiss(animated: true)
+    }
+}
+
+// MARK: -
+
+extension SpotifyPlaylistsViewController: SpotifyImportDelegate {
+    
+    func importDidComplete() {
+        importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
+        importButtonBackView.isHidden = false
+        
+        navbarManager.setSuccessImportState()
+        dataSource.isSelectionStateActive = false
+        dataSource.isHeaderless = true
+        
+        collectionView.reloadData()
+        collectionViewTopOffset.constant = successImportView.bounds.height
+        view.layoutIfNeeded()
+    }
+    
+    func sendImportToBackground() {
+        router.tabBarVC?.dismiss(animated: true)
+    }
+    
+    func importDidCanceled() { }
+    func importDidFailed(error: Error) { }
 }

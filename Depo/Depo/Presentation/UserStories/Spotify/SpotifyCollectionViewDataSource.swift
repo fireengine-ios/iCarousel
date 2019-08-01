@@ -15,7 +15,7 @@ protocol SpotifyCollectionDataSourceDelegate: class {
     func didChangeSelectionCount(newCount: Int)
 }
 
-class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     typealias SpotifyObjectGroup = (key: String, value: [T])
     
@@ -31,10 +31,12 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
         }
     }
 
-    var isSelectionStateActive = false
+    var isSelectionStateActive = false 
     var canChangeSelectionState = true
     
     var isPaginationDidEnd = false
+    
+    var isHeaderless = false
     
     // MARK: -
     
@@ -60,6 +62,9 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
     }
     
     private func item(for indexPath: IndexPath) -> T? {
+        if isHeaderless {
+            return allItems[safe: indexPath.row]
+        }
         return groups[safe: indexPath.section]?.value[safe: indexPath.row]
     }
     
@@ -78,7 +83,8 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
         
         let reload = allItems.isEmpty
         allItems.append(contentsOf: newItems)
-        groups = Dictionary(grouping: allItems, by: { String($0.name.first ?? Character("")) }).sorted {$0.0 < $1.0}
+        allItems.sort(by: { $0.name < $1.name })
+        groups = Dictionary(grouping: allItems, by: { String($0.name.first ?? Character("")) }).sorted(by: { $0.0 < $1.0 })
         
         if reload {
             collectionView.reloadData()
@@ -107,11 +113,11 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
     // MARK: - UICollectionViewDataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return groups.count
+        return isHeaderless ? 1 : groups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return groups[section].value.count
+        return isHeaderless ? allItems.count : groups[section].value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -123,6 +129,7 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
             let item = item(for: indexPath) else {
                 return
         }
+        cell.setSeletionMode(isSelectionStateActive, animation: false)
         cell.setup(with: item, isSelected: selectedItems.contains(item))
         cell.delegate = self
         
@@ -163,6 +170,10 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
         if let item = item(for: indexPath) {
             delegate?.onSelect(item: item)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: isHeaderless ? 0 : 50)
     }
 }
 

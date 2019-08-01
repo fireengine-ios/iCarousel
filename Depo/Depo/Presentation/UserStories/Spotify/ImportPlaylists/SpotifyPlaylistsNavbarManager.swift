@@ -11,6 +11,7 @@ import Foundation
 protocol SpotifyPlaylistsNavbarManagerDelegate: class {
     func onCancel()
     func onSelectAll()
+    func onDone()
 }
 
 extension SpotifyPlaylistsNavbarManagerDelegate where Self: UIViewController {
@@ -48,6 +49,13 @@ final class SpotifyPlaylistsNavbarManager {
                                selector: #selector(onSelectAll))
     }()
     
+    private lazy var doneAsBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: TextConstants.accessibilityDone,
+                               font: .TurkcellSaturaDemFont(size: 19.0),
+                               target: self,
+                               selector: #selector(onDone))
+    }()
+    
     // MARK: -
     
     required init(delegate: (SpotifyPlaylistsNavbarManagerDelegate & UIViewController)?) {
@@ -57,7 +65,13 @@ final class SpotifyPlaylistsNavbarManager {
     func setSelectionState() {
         delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
         delegate?.setLeftBarButtonItems([cancelAsBackButton], animated: true)
-        delegate?.setRightBarButtonItems([selectAllButton], animated: false)
+        delegate?.setRightBarButtonItems([selectAllButton], animated: true)
+    }
+    
+    func setSuccessImportState() {
+        delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
+        delegate?.setLeftBarButtonItems(nil, animated: true)
+        delegate?.setRightBarButtonItems([doneAsBackButton], animated: true)
     }
     
     func changeSelectionItems(count: Int) {
@@ -76,5 +90,9 @@ final class SpotifyPlaylistsNavbarManager {
     
     @objc private func onSelectAll() {
         delegate?.onSelectAll()
+    }
+    
+    @objc private func onDone() {
+        delegate?.onDone()
     }
 }

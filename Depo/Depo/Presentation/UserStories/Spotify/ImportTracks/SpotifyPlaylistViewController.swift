@@ -70,7 +70,7 @@ extension SpotifyPlaylistViewController: SpotifyCollectionDataSourceDelegate {
     func onSelect(item: SpotifyObject) { }
     
     func needLoadNextPage() {
-//        loadNextPage()
+        loadNextPage()
     }
     
     func didChangeSelectionCount(newCount: Int) { }

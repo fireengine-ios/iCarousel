@@ -73,6 +73,10 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         return gradientView
     }()
     
+    var playlists: [SpotifyPlaylist]!
+
+    private lazy var spotifyService: SpotifyService = factory.resolve()
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -81,6 +85,8 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         setupGradientBackground()
         navigationItem.leftBarButtonItem = cancelAsBackButton
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
+        
+        startImport()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,11 +101,44 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
 
     // MARK: - Action
     
-    @objc private func onCancel() {
+    private func startImport() {
+        let ids = playlists.map { $0.id }
+        spotifyService.start(playlistIds: ids) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(_):
+                self.hideView()
+            case .failed(let error):
+                let popup = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok, action: { popup in
+                    popup.close { [weak self] in
+                        self?.hideView()
+                    }
+                })
+                DispatchQueue.main.async {
+                    self.present(popup, animated: false, completion: nil)
+                }
+            }
+        }
+    }
+    
+    private func stopImport(completion: VoidHandler? = nil) {
+        spotifyService.stop { _ in
+            completion?()
+        }
+    }
+    
+    private func hideView() {
         dismiss(animated: true)
+    }
+
+    @objc private func onCancel() {
+        stopImport()
     }
     
     @objc private func onImportInBackground() {
-        dismiss(animated: true)
+        spotifyService.importDelegates.invoke(invocation: { $0.sendImportToBackground() })
     }
 }
