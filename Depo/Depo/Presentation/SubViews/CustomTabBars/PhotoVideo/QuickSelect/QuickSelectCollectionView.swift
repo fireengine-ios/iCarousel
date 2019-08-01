@@ -136,7 +136,7 @@ final class QuickSelectCollectionView: UICollectionView {
             shouldAutoScroll = false
             beginIndexPath = nil
             lastAffectedRange = nil
-            selectedOriginallyIndexPaths = []
+            selectedOriginallyIndexPaths.removeAll()
             currentScrollSpeed = 0.0
             selectionMode = .none
         }
