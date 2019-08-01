@@ -97,6 +97,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="PeV-Mo-4pi"/>
                                     </constraints>
+                                    <connections>
+                                        <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="f1D-E1-Du7"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -112,12 +115,6 @@
                         </view>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp2-ic-ya5">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
-                    <connections>
-                        <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="DbZ-pk-Has"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-bk-6LK">
                     <rect key="frame" x="381" y="0.0" width="33" height="33"/>
                     <constraints>
@@ -135,12 +132,8 @@
                 <constraint firstItem="17H-S8-FI5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="F2C-4y-q5u"/>
                 <constraint firstItem="Fhy-Rz-zex" firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" id="LW6-pB-svR"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="trailing" secondItem="976-Lr-wiL" secondAttribute="trailing" id="PzT-u1-5QD"/>
-                <constraint firstAttribute="bottom" secondItem="dp2-ic-ya5" secondAttribute="bottom" id="Vpw-rl-mC4"/>
-                <constraint firstItem="dp2-ic-ya5" firstAttribute="leading" secondItem="Fhy-Rz-zex" secondAttribute="leading" id="h0d-S5-j0n"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="leading" secondItem="976-Lr-wiL" secondAttribute="leading" id="sIb-fb-qN3"/>
-                <constraint firstItem="dp2-ic-ya5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="tuC-7Q-00Z"/>
                 <constraint firstItem="aLx-bk-6LK" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="vgy-mM-34s"/>
-                <constraint firstItem="dp2-ic-ya5" firstAttribute="trailing" secondItem="Fhy-Rz-zex" secondAttribute="trailing" id="z7a-Rd-9Jn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Fhy-Rz-zex"/>
