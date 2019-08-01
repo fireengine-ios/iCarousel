@@ -34,7 +34,6 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             assert(items.count == mediaItems.count)
 
             let relatedRemotesUuids = mediaItems
-                .filter { $0.relatedRemotes.count != 0 }
                 .compactMap { $0.relatedRemotes.allObjects as? [MediaItem] }
                 .flatMap { $0 }
                 .compactMap { $0.uuid }
