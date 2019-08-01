@@ -108,13 +108,18 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
         newValue.textField.placeholder = TextConstants.pleaseChooseSubject
-        newValue.models = [TextConstants.supportFormSubject1,
-                           TextConstants.supportFormSubject2,
-                           TextConstants.supportFormSubject3,
-                           TextConstants.supportFormSubject4,
-                           TextConstants.supportFormSubject5,
-                           TextConstants.supportFormSubject6,
-                           TextConstants.supportFormSubject7]
+        newValue.models = [TextConstants.contactUsSubject1,
+                           TextConstants.contactUsSubject2,
+                           TextConstants.contactUsSubject3,
+                           TextConstants.contactUsSubject4,
+                           TextConstants.contactUsSubject5,
+                           TextConstants.contactUsSubject6,
+                           TextConstants.contactUsSubject7,
+                           TextConstants.contactUsSubject8,
+                           TextConstants.contactUsSubject9,
+                           TextConstants.contactUsSubject10,
+                           TextConstants.contactUsSubject11,
+                           TextConstants.contactUsSubject12]
         // TODO: add new
         return newValue
     }()
