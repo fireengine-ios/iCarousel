@@ -45,13 +45,15 @@ final class FreeAppSpace: NSObject {
     }
     
     func getDuplicatesItems(_ localItemsCallback: @escaping WrapObjectsCallBack) {
-        if duplicatesArray.isEmpty {
+//        if duplicatesArray.isEmpty {
             MediaItemOperationsService.shared.getLocalDuplicates { localItems in
-                localItemsCallback(localItems.map { WrapData(mediaItem: $0)} )
+                localItemsCallback(localItems.map { WrapData(mediaItem: $0)}.sorted(by: {
+                    $0.metaDate > $1.metaDate
+                }) )
             }
-        } else {
-            localItemsCallback(getDuplicatesObjects())
-        }
+//        } else {
+//            localItemsCallback(getDuplicatesObjects())
+//        }
     }
     
     func checkFreeAppSpace() {
