@@ -1014,7 +1014,7 @@
 "global_data_permission_agreement" = "Я даю согласие на передачу моей личной информации операторам, сотрудничающим с Turkcell, чтобы я мог использовать выгодные услуги соответствующего оператора в отношении lifebox. Нажмите для подробной информации";
 "global_data_permission_link" = "Нажмите для подробной информации";
 "global_permission_header" = "Глобальное разрешение на передачу данных";
-"informative_description_label" = "В ходе выполнения...";
+"informative_description_label" = "в ожидании разрешения";
 "global_permission_screen_title" = "Глобальное разрешение на передачу данных";
 
 /*Settings page*/
