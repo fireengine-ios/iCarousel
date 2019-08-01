@@ -104,4 +104,8 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         
         reloadData()
     }
+    
+    override func updateThreeDotsButton() {
+        view?.setThreeDotsMenu(active: true)
+    }
 }

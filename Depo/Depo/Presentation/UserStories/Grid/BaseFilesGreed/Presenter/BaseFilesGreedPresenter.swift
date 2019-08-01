@@ -313,6 +313,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.isSelectionStateActive
     }
     
+    func stopSelectionWhenDisappear() {
+        dataSource.setSelectionState(selectionState: false)
+        view.stopSelection()
+    }
+    
     @objc func updateThreeDots(_ sender: Any) {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
@@ -617,8 +622,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: true)
-        dataSource.setSelectionState(selectionState: false)
-        view.stopSelection()
+        stopSelectionWhenDisappear()
     }
     
     func viewWillAppear() {
