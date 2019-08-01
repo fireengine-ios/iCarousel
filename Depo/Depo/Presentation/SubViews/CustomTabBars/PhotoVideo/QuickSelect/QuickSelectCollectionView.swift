@@ -193,29 +193,24 @@ public class QuickSelectCollectionView: UICollectionView {
             positiveIndexPaths = indexPaths(in: currentRange)
         }
         
-        positiveIndexPaths.forEach { updateSelection(at: $0, restoring: false) }
-        negativeIndexPaths.forEach { updateSelection(at: $0, restoring: true) }
-        
 //        print("positive range: \(positiveIndexPaths)")
 //        print("negative range: \(negativeIndexPaths)")
+        
+        positiveIndexPaths.forEach { updateSelection(at: $0, restoring: false) }
+        negativeIndexPaths.forEach { updateSelection(at: $0, restoring: true) }
         
         lastAffectedRange = currentRange
     }
     
     private func updateSelection(at indexPath: IndexPath, restoring: Bool) {
-        guard
-            let isSelected = cellForItem(at: indexPath)?.isSelected,
-            let expectedSelection = selectionMode.toBool
-        else {
+        guard let expectedSelection = selectionMode.toBool else {
             return
         }
     
         if restoring {
             let wasSelectedOriginally = selectedOriginallyIndexPaths.contains(indexPath)
-            if wasSelectedOriginally != isSelected {
-                setItem(isSelected: wasSelectedOriginally, indexPath: indexPath)
-            }
-        } else if isSelected != expectedSelection {
+            setItem(isSelected: wasSelectedOriginally, indexPath: indexPath)
+        } else {
             setItem(isSelected: expectedSelection, indexPath: indexPath)
         }
     }
