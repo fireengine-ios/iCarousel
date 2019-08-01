@@ -259,7 +259,7 @@
                                                         <action selector="onRestoreButton" destination="-1" eventType="touchUpInside" id="xww-re-r8O"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-Hc-WhS" customClass="AdjustsFontSizeInsetsRoundedDarkBlueButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-Hc-WhS" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
                                                     <rect key="frame" x="252.33333333333334" y="0.0" width="118.33333333333334" height="46"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
