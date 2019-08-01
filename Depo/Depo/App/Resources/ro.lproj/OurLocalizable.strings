@@ -1004,7 +1004,7 @@
 "global_data_permission_agreement" = "Îmi exprim consimțământul ca datele mele personale să fie împărtășite de către Turkcell cu operatorii cu care cooperează, pentru a putea beneficia de avantajele serviciilor oferite de operatorii respectivi, în ce privește lifebox. Click pentru informație detaliată";
 "global_data_permission_link" = "Click pentru informație detaliată";
 "global_permission_header" = "Permisiune Globală de Date";
-"informative_description_label" = "În proces...";
+"informative_description_label" = "așteptând permisiunea";
 "global_permission_screen_title" = "Permisiune Globală de Date";
 
 /*Settings page*/

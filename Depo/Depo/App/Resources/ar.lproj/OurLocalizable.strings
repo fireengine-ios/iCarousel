@@ -1027,10 +1027,10 @@
 "global_permission_title_label" = "إذن البيانات العالمية";
 "global_permission_description" = "  أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس";
 "terms_and_use_etk_checkbox_header" = "رسالة إلكترونية تجارية";
-"global_data_permission_agreement" = "أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس";
-"global_data_permission_link" = ". انقر للحصول على معلومات مفصلة";
+"global_data_permission_agreement" = "أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس  انقر للحصول على معلومات مفصلة";
+"global_data_permission_link" = "انقر للحصول على معلومات مفصلة";
 "global_permission_header" = "إذن البيانات العالمية";
-"informative_description_label" = "... العملية جارية";
+"informative_description_label" = "في انتظار إذن";
 "global_permission_screen_title" = "إذن البيانات العالمية";
 
 /*Settings page*/

@@ -986,7 +986,7 @@
 "privacy_policy" = "Política de Privacidad";
 "face_tags_description_standart" = "Cuando active el Reconocimiento de Rostro e Imagen, las fotos que sube se agrupan por caras y objetos. Si la opción del servicio de ubicación está activada, las fotos también se agrupan por información de ubicación. En la base de esta agrupación, podremos crear historias automáticas para usted.";
 "terms_and_use_introduction_checkbox" = "He leído y acepto las Condiciones de Uso y la Política de privacidad.";
-"privacy_policy_condition" = "Política de Privacidad.";
+"privacy_policy_condition" = "Política de privacidad";
 "photo_pick_description" = "Si activa el botón y conecta su cuenta de Instagram, podemos brindarle una experiencia avanzada y personalizada al realizar análisis privados en cada nuevo análisis de PhotoPick.";
 
 /*Permission screen in Settings*/
@@ -1012,7 +1012,7 @@
 "global_data_permission_agreement" = "Acepto que mis datos personalizados se comportan con los operadores que se coordinan con Turkcell para beneficiarme de los servicios ventajosos del operador relacionados con el operador “Lifebox”. Hacer clic para información detallada.";
 "global_data_permission_link" = "Hacer clic para información detallada";
 "global_permission_header" = "Permiso de Datos Global";
-"informative_description_label" = "El proceso está en curso…";
+"informative_description_label" = "esperando permiso";
 "global_permission_screen_title" = "Permiso de Datos Global";
 
 /*Settings page*/
