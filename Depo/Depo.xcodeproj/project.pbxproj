@@ -285,11 +285,29 @@
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		6FDA6EB01ED9D7AA87204F8C /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
+		730A997122D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
+		730A997422D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
+		730A997822D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A997922D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A997A22D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */; };
+		730A998222D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998322D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */; };
+		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
+		73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
+		73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73FE51EE22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51EF22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
@@ -618,6 +636,18 @@
 		89104BC822CBA039005B3F58 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
 		89104BC922CBA06F005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
+		892B014822DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
+		892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
+		892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
+		892B014C22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */; };
+		892B014D22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */; };
+		892B014E22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */; };
+		892B015122DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */; };
+		892B015222DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */; };
+		892B015322DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */; };
+		892B015622DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */; };
+		892B015722DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */; };
+		892B015822DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */; };
 		8930DDAD22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
 		8930DDAE22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
 		8930DDAF22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
@@ -682,28 +712,26 @@
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332972115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
-		8C06AC0820066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */; };
-		8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */; };
-		8C06AC0A20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */; };
-		8C06AC0B20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */; };
-		8C06AC0C20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* TurkcellSecurityInteractor.swift */; };
-		8C06AC0D20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* TurkcellSecurityInteractor.swift */; };
-		8C06AC0E20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* TurkcellSecurityInteractorIO.swift */; };
-		8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* TurkcellSecurityInteractorIO.swift */; };
-		8C06AC1020066641003D8E05 /* TurkcellSecurityModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFF20066640003D8E05 /* TurkcellSecurityModuleInput.swift */; };
-		8C06AC1120066641003D8E05 /* TurkcellSecurityModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFF20066640003D8E05 /* TurkcellSecurityModuleInput.swift */; };
-		8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* TurkcellSecurityPresenter.swift */; };
-		8C06AC1320066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* TurkcellSecurityPresenter.swift */; };
-		8C06AC1420066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* TurkcellSecurityRouter.swift */; };
-		8C06AC1520066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* TurkcellSecurityRouter.swift */; };
-		8C06AC1620066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */; };
-		8C06AC1720066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */; };
-		8C06AC1820066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* TurkcellSecurityViewController.swift */; };
-		8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* TurkcellSecurityViewController.swift */; };
-		8C06AC1A20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* TurkcellSecurityViewController.xib */; };
-		8C06AC1B20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* TurkcellSecurityViewController.xib */; };
-		8C06AC1C20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* TurkcellSecurityViewIO.swift */; };
-		8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* TurkcellSecurityViewIO.swift */; };
+		8C06AC0820066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* LoginSettingsConfigurator.swift */; };
+		8C06AC0920066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* LoginSettingsConfigurator.swift */; };
+		8C06AC0A20066641003D8E05 /* LoginSettingsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* LoginSettingsInitializer.swift */; };
+		8C06AC0B20066641003D8E05 /* LoginSettingsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* LoginSettingsInitializer.swift */; };
+		8C06AC0C20066641003D8E05 /* LoginSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* LoginSettingsInteractor.swift */; };
+		8C06AC0D20066641003D8E05 /* LoginSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* LoginSettingsInteractor.swift */; };
+		8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */; };
+		8C06AC0F20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */; };
+		8C06AC1220066641003D8E05 /* LoginSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* LoginSettingsPresenter.swift */; };
+		8C06AC1320066641003D8E05 /* LoginSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* LoginSettingsPresenter.swift */; };
+		8C06AC1420066641003D8E05 /* LoginSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* LoginSettingsRouter.swift */; };
+		8C06AC1520066641003D8E05 /* LoginSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* LoginSettingsRouter.swift */; };
+		8C06AC1620066641003D8E05 /* LoginSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* LoginSettingsRouterInput.swift */; };
+		8C06AC1720066641003D8E05 /* LoginSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* LoginSettingsRouterInput.swift */; };
+		8C06AC1820066641003D8E05 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
+		8C06AC1920066641003D8E05 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
+		8C06AC1A20066641003D8E05 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */; };
+		8C06AC1B20066641003D8E05 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */; };
+		8C06AC1C20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* LoginSettingsViewIO.swift */; };
+		8C06AC1D20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* LoginSettingsViewIO.swift */; };
 		8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		8C06AC1F2008AAC4003D8E05 /* FileForDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781839851FE9140E0046D73C /* FileForDownload.swift */; };
 		8C06AC202008AAD5003D8E05 /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
@@ -1874,7 +1902,7 @@
 		8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
 		8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B131F23931C0016CE0C /* WrapperedItemUtil.swift */; };
 		8C0E8E051FDEBDFF00789C91 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
-		8C0E8E061FDEBDFF00789C91 /* PhoneVereficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */; };
+		8C0E8E061FDEBDFF00789C91 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
 		8C0E8E071FDEBDFF00789C91 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
 		8C0E8E081FDEBDFF00789C91 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
 		8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
@@ -2458,6 +2486,12 @@
 		8C20868A228D5386000BEDAD /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208687228D5386000BEDAD /* QuickScrollService.swift */; };
 		8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208688228D5386000BEDAD /* QuickScrollItems.swift */; };
 		8C20868C228D5386000BEDAD /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208688228D5386000BEDAD /* QuickScrollItems.swift */; };
+		8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		8C2386B322E9AA0D004992C4 /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		8C2386B422E9AA21004992C4 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		8C2386B622E9AA4B004992C4 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		8C2386B722E9AA4C004992C4 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
 		8C23F28E2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F28D2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift */; };
 		8C23F2912286C95600C5BF9E /* SingleThumbnailAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C23F2902286C95600C5BF9E /* SingleThumbnailAlbumCell.xib */; };
@@ -3711,7 +3745,7 @@
 		CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */; };
 		CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */; };
 		CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
-		CE51ACEB1EF90853005DCEE0 /* PhoneVereficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */; };
+		CE51ACEB1EF90853005DCEE0 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
 		CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
 		CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
 		CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
@@ -4029,7 +4063,7 @@
 		CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976DA1FD58E1F00350F3A /* LocalAlbumInteractor.swift */; };
 		CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864E1F3EFBE200F50C95 /* ImportPhotosPresenter.swift */; };
-		CE7848D222A685FB00662219 /* TurkcellSecurityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* TurkcellSecurityRouter.swift */; };
+		CE7848D222A685FB00662219 /* LoginSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0220066640003D8E05 /* LoginSettingsRouter.swift */; };
 		CE7848D322A685FB00662219 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
 		CE7848D422A685FB00662219 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7467001FD6B61600D0885D /* ErrorResponse.swift */; };
 		CE7848D522A685FB00662219 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
@@ -4057,7 +4091,7 @@
 		CE7848EC22A685FB00662219 /* PeriodicContactSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */; };
 		CE7848ED22A685FB00662219 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24FB8A1F0B117B00C55188 /* CameraService.swift */; };
 		CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB272122C4BA004F4A59 /* TermsOfUseRouterInput.swift */; };
-		CE7848EF22A685FB00662219 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */; };
+		CE7848EF22A685FB00662219 /* LoginSettingsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* LoginSettingsInitializer.swift */; };
 		CE7848F022A685FB00662219 /* HelpAndSupportConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED351F516736002F923A /* HelpAndSupportConfigurator.swift */; };
 		CE7848F122A685FB00662219 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32D21787FEF006CFA50 /* Configuration.m */; };
 		CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
@@ -4200,7 +4234,7 @@
 		CE78498122A685FB00662219 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFBB6DA1F28A40F009C32D5 /* BaseCollectionViewCell.swift */; };
 		CE78498222A685FB00662219 /* UserProfileInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF81F1E3A6300C8CC16 /* UserProfileInteractorInput.swift */; };
 		CE78498322A685FB00662219 /* EULAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF76F1F01D63D002AD17C /* EULAService.swift */; };
-		CE78498422A685FB00662219 /* TurkcellSecurityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* TurkcellSecurityInteractor.swift */; };
+		CE78498422A685FB00662219 /* LoginSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFC20066640003D8E05 /* LoginSettingsInteractor.swift */; };
 		CE78498522A685FB00662219 /* AutoSyncDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814631EF7A93E001DFCF0 /* AutoSyncDataSource.swift */; };
 		CE78498622A685FB00662219 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
 		CE78498722A685FB00662219 /* RegistrationUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */; };
@@ -4269,7 +4303,7 @@
 		CE7849CA22A685FB00662219 /* PackagesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56061F7552A900F49DA1 /* PackagesInteractorOutput.swift */; };
 		CE7849CB22A685FB00662219 /* PeriodicContactSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC137208736FF00032CC7 /* PeriodicContactSyncRouter.swift */; };
 		CE7849CC22A685FB00662219 /* TermsAndServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0F170EDB776DE7E055F18 /* TermsAndServicesViewController.swift */; };
-		CE7849CD22A685FB00662219 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */; };
+		CE7849CD22A685FB00662219 /* LoginSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* LoginSettingsConfigurator.swift */; };
 		CE7849CE22A685FB00662219 /* TermsAndServicesModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD733F7347C546BBBAE9DF7D /* TermsAndServicesModuleInput.swift */; };
 		CE7849CF22A685FB00662219 /* LoginInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C731EEE8E7F0086DA84 /* LoginInteractorInput.swift */; };
 		CE7849D022A685FB00662219 /* YearsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3E5216B756D004AB6D7 /* YearsView.swift */; };
@@ -4359,13 +4393,13 @@
 		CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */; };
 		CE784A2A22A685FB00662219 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
 		CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
-		CE784A2C22A685FB00662219 /* PhoneVereficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */; };
+		CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
 		CE784A2D22A685FB00662219 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		CE784A2E22A685FB00662219 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
 		CE784A2F22A685FB00662219 /* SimpleSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F2932286EF5200C5BF9E /* SimpleSliderCell.swift */; };
 		CE784A3022A685FB00662219 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
 		CE784A3122A685FB00662219 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
-		CE784A3222A685FB00662219 /* TurkcellSecurityInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* TurkcellSecurityInteractorIO.swift */; };
+		CE784A3222A685FB00662219 /* LoginSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */; };
 		CE784A3322A685FB00662219 /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		CE784A3422A685FB00662219 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
 		CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
@@ -4374,7 +4408,7 @@
 		CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B56208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift */; };
 		CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */; };
 		CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */; };
-		CE784A3D22A685FB00662219 /* TurkcellSecurityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* TurkcellSecurityPresenter.swift */; };
+		CE784A3D22A685FB00662219 /* LoginSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0020066640003D8E05 /* LoginSettingsPresenter.swift */; };
 		CE784A3E22A685FB00662219 /* BottomSelectionMusicTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */; };
 		CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */; };
 		CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -4591,7 +4625,7 @@
 		CE784B1C22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
 		CE784B1E22A685FB00662219 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
-		CE784B1F22A685FB00662219 /* TurkcellSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* TurkcellSecurityViewController.swift */; };
+		CE784B1F22A685FB00662219 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
 		CE784B2022A685FB00662219 /* FaceImageChangeCoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */; };
 		CE784B2122A685FB00662219 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
 		CE784B2322A685FB00662219 /* CollectionViewStoryReorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */; };
@@ -4714,7 +4748,7 @@
 		CE784B9B22A685FB00662219 /* SplashInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */; };
 		CE784B9C22A685FB00662219 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
 		CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */; };
-		CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */; };
+		CE784B9E22A685FB00662219 /* LoginSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0320066640003D8E05 /* LoginSettingsRouterInput.swift */; };
 		CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
 		CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
 		CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
@@ -4733,7 +4767,7 @@
 		CE784BAF22A685FB00662219 /* ActionsMenuViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */; };
 		CE784BB022A685FB00662219 /* ActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */; };
 		CE784BB122A685FB00662219 /* AppWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */; };
-		CE784BB222A685FB00662219 /* TurkcellSecurityViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* TurkcellSecurityViewIO.swift */; };
+		CE784BB222A685FB00662219 /* LoginSettingsViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0720066640003D8E05 /* LoginSettingsViewIO.swift */; };
 		CE784BB322A685FB00662219 /* FileInfoViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE614464F9AF006585316BE /* FileInfoViewInput.swift */; };
 		CE784BB422A685FB00662219 /* FileInfoViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E1BD211278D025B3C9A56 /* FileInfoViewOutput.swift */; };
 		CE784BB522A685FB00662219 /* PeopleServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D7C2018725300A02B46 /* PeopleServiceResponse.swift */; };
@@ -4928,7 +4962,6 @@
 		CE784C7622A685FB00662219 /* ActivityTimelineViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570CF3888592E7C4D788AA3 /* ActivityTimelineViewOutput.swift */; };
 		CE784C7722A685FB00662219 /* ActivityTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E41009605793D3A14AA35 /* ActivityTimelineViewController.swift */; };
 		CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B18AA434F2832CFC8076AAA /* ActivityTimelineModuleInput.swift */; };
-		CE784C7922A685FB00662219 /* TurkcellSecurityModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFF20066640003D8E05 /* TurkcellSecurityModuleInput.swift */; };
 		CE784C7A22A685FB00662219 /* ActivityTimelinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */; };
 		CE784C7B22A685FB00662219 /* ActivityTimelineInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */; };
 		CE784C7C22A685FB00662219 /* PremiumFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98C86B219FF89F00C3B04F /* PremiumFeaturesView.swift */; };
@@ -5339,7 +5372,7 @@
 		CE784E1622A685FB00662219 /* cropy_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC7E2008AD6F003D8E05 /* cropy_icon@2x.png */; };
 		CE784E1722A685FB00662219 /* PremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20CDB9F219D60B800CA9A67 /* PremiumView.xib */; };
 		CE784E1822A685FB00662219 /* crop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC762008AD6F003D8E05 /* crop@3x.png */; };
-		CE784E1922A685FB00662219 /* TurkcellSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* TurkcellSecurityViewController.xib */; };
+		CE784E1922A685FB00662219 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */; };
 		CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
 		CE784E1B22A685FB00662219 /* checkbox_secili@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC5D2008AD6F003D8E05 /* checkbox_secili@2x.png */; };
 		CE784E1C22A685FB00662219 /* PeriodicContactSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F8E4D2087546500622A6C /* PeriodicContactSyncViewController.xib */; };
@@ -6307,6 +6340,11 @@
 		7168F883C28EFB8EDD69CB28 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TC_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		725DCA919CC8D9D9D3990A56 /* Pods-LifeDriveShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.debug.xcconfig"; sourceTree = "<group>"; };
+		730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
+		730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationViewController.xib; sourceTree = "<group>"; };
+		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
+		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
+		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -6316,6 +6354,7 @@
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
+		73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthErrorResponse.swift; sourceTree = "<group>"; };
 		73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryAudioSelectionItemViewController.xib; sourceTree = "<group>"; };
 		73FE51EB22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemViewController.swift; sourceTree = "<group>"; };
 		73FE51EC22CF5D8700270448 /* CreateStoryAudioSelectionItemDesigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemDesigner.swift; sourceTree = "<group>"; };
@@ -6644,6 +6683,10 @@
 		87FB97AD2008CBA0000D8E2B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		87FB97AF2008CBAF000D8E2B /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
+		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
+		892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInitializer.swift; sourceTree = "<group>"; };
+		892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengePresenter.swift; sourceTree = "<group>"; };
+		892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInteractor.swift; sourceTree = "<group>"; };
 		8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryViewController.swift; sourceTree = "<group>"; };
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
@@ -6682,17 +6725,16 @@
 		8C0572D51EF14C20005C69DA /* inputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inputCell.xib; sourceTree = "<group>"; };
 		8C0572D81EF1A723005C69DA /* PasswordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
 		8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
-		8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityConfigurator.swift; sourceTree = "<group>"; };
-		8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInitializer.swift; sourceTree = "<group>"; };
-		8C06ABFC20066640003D8E05 /* TurkcellSecurityInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInteractor.swift; sourceTree = "<group>"; };
-		8C06ABFD20066640003D8E05 /* TurkcellSecurityInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInteractorIO.swift; sourceTree = "<group>"; };
-		8C06ABFF20066640003D8E05 /* TurkcellSecurityModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityModuleInput.swift; sourceTree = "<group>"; };
-		8C06AC0020066640003D8E05 /* TurkcellSecurityPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityPresenter.swift; sourceTree = "<group>"; };
-		8C06AC0220066640003D8E05 /* TurkcellSecurityRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityRouter.swift; sourceTree = "<group>"; };
-		8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityRouterInput.swift; sourceTree = "<group>"; };
-		8C06AC0520066640003D8E05 /* TurkcellSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityViewController.swift; sourceTree = "<group>"; };
-		8C06AC0620066640003D8E05 /* TurkcellSecurityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TurkcellSecurityViewController.xib; sourceTree = "<group>"; };
-		8C06AC0720066640003D8E05 /* TurkcellSecurityViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityViewIO.swift; sourceTree = "<group>"; };
+		8C06ABF920066640003D8E05 /* LoginSettingsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsConfigurator.swift; sourceTree = "<group>"; };
+		8C06ABFA20066640003D8E05 /* LoginSettingsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsInitializer.swift; sourceTree = "<group>"; };
+		8C06ABFC20066640003D8E05 /* LoginSettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsInteractor.swift; sourceTree = "<group>"; };
+		8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsInteractorIO.swift; sourceTree = "<group>"; };
+		8C06AC0020066640003D8E05 /* LoginSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsPresenter.swift; sourceTree = "<group>"; };
+		8C06AC0220066640003D8E05 /* LoginSettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsRouter.swift; sourceTree = "<group>"; };
+		8C06AC0320066640003D8E05 /* LoginSettingsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsRouterInput.swift; sourceTree = "<group>"; };
+		8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsViewController.swift; sourceTree = "<group>"; };
+		8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSettingsViewController.xib; sourceTree = "<group>"; };
+		8C06AC0720066640003D8E05 /* LoginSettingsViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettingsViewIO.swift; sourceTree = "<group>"; };
 		8C06AC302008AD6F003D8E05 /* akilli_depo_beyaz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = akilli_depo_beyaz.png; sourceTree = "<group>"; };
 		8C06AC312008AD6F003D8E05 /* akilli_depo_beyaz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "akilli_depo_beyaz@2x.png"; sourceTree = "<group>"; };
 		8C06AC322008AD6F003D8E05 /* akilli_depo_beyaz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "akilli_depo_beyaz@3x.png"; sourceTree = "<group>"; };
@@ -8299,7 +8341,7 @@
 		D76D2FFE19D87AAD5758F830 /* Pods-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProviderUI/Pods-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewOutput.swift; sourceTree = "<group>"; };
 		D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorInput.swift; sourceTree = "<group>"; };
-		D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewController.swift; sourceTree = "<group>"; };
+		D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationConfigurator.swift; sourceTree = "<group>"; };
 		DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewInput.swift; sourceTree = "<group>"; };
 		DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailPresenter.swift; sourceTree = "<group>"; };
@@ -9777,6 +9819,26 @@
 			path = OTPView;
 			sourceTree = "<group>";
 		};
+		730A996E22D71D120037ABA9 /* TwoFactorAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				730A997B22D7344D0037ABA9 /* Cell */,
+				730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */,
+				730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */,
+				730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */,
+			);
+			path = TwoFactorAuthentication;
+			sourceTree = "<group>";
+		};
+		730A997B22D7344D0037ABA9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */,
+				730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		736085110D7EF2A078645693 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -10471,6 +10533,7 @@
 				CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */,
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
 				CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */,
+				73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */,
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
@@ -11181,6 +11244,41 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		8918540622DDEFB900AAB818 /* TwoFactorChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				892B014622DF155700BCECBC /* Configurator */,
+				892B014F22DF166800BCECBC /* Presenter */,
+				892B015422DF16EA00BCECBC /* Interactor */,
+			);
+			path = TwoFactorChallenge;
+			sourceTree = "<group>";
+		};
+		892B014622DF155700BCECBC /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */,
+				892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		892B014F22DF166800BCECBC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		892B015422DF16EA00BCECBC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		89E51D1B22CA0F0F007A7DBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -11329,7 +11427,7 @@
 			path = Password;
 			sourceTree = "<group>";
 		};
-		8C06ABF720066640003D8E05 /* TurkcellSecurity */ = {
+		8C06ABF720066640003D8E05 /* LoginSettings */ = {
 			isa = PBXGroup;
 			children = (
 				8C06ABF820066640003D8E05 /* Configurator */,
@@ -11338,14 +11436,14 @@
 				8C06AC0120066640003D8E05 /* Router */,
 				8C06AC0420066640003D8E05 /* View */,
 			);
-			path = TurkcellSecurity;
+			path = LoginSettings;
 			sourceTree = "<group>";
 		};
 		8C06ABF820066640003D8E05 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */,
-				8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */,
+				8C06ABF920066640003D8E05 /* LoginSettingsConfigurator.swift */,
+				8C06ABFA20066640003D8E05 /* LoginSettingsInitializer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -11353,8 +11451,8 @@
 		8C06ABFB20066640003D8E05 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				8C06ABFC20066640003D8E05 /* TurkcellSecurityInteractor.swift */,
-				8C06ABFD20066640003D8E05 /* TurkcellSecurityInteractorIO.swift */,
+				8C06ABFC20066640003D8E05 /* LoginSettingsInteractor.swift */,
+				8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -11362,8 +11460,7 @@
 		8C06ABFE20066640003D8E05 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				8C06ABFF20066640003D8E05 /* TurkcellSecurityModuleInput.swift */,
-				8C06AC0020066640003D8E05 /* TurkcellSecurityPresenter.swift */,
+				8C06AC0020066640003D8E05 /* LoginSettingsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -11371,8 +11468,8 @@
 		8C06AC0120066640003D8E05 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				8C06AC0220066640003D8E05 /* TurkcellSecurityRouter.swift */,
-				8C06AC0320066640003D8E05 /* TurkcellSecurityRouterInput.swift */,
+				8C06AC0220066640003D8E05 /* LoginSettingsRouter.swift */,
+				8C06AC0320066640003D8E05 /* LoginSettingsRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -11380,9 +11477,9 @@
 		8C06AC0420066640003D8E05 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C06AC0520066640003D8E05 /* TurkcellSecurityViewController.swift */,
-				8C06AC0620066640003D8E05 /* TurkcellSecurityViewController.xib */,
-				8C06AC0720066640003D8E05 /* TurkcellSecurityViewIO.swift */,
+				8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */,
+				8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */,
+				8C06AC0720066640003D8E05 /* LoginSettingsViewIO.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -14175,6 +14272,8 @@
 				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
 				17589F6A2276336700A5DB37 /* SupportFormController */,
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
+				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
+				8918540622DDEFB900AAB818 /* TwoFactorChallenge */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -14189,7 +14288,7 @@
 				4A8CC2F42019FFB600C040C4 /* FaceImage */,
 				78D9BA2B2007E73A00F2233F /* DuplicatedContacts */,
 				7859297620060D72003F8AB3 /* ManageContacts */,
-				8C06ABF720066640003D8E05 /* TurkcellSecurity */,
+				8C06ABF720066640003D8E05 /* LoginSettings */,
 				3C4921A13B9D2D3165521B9C /* Settings */,
 				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
@@ -15360,7 +15459,7 @@
 				8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */,
 				8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */,
 				F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */,
-				D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */,
+				D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -16256,7 +16355,7 @@
 				8C06B1612008AD72003D8E05 /* toolbar_ciz_icon@2x.png in Resources */,
 				7CD92DBC20750A4400010BFA /* AnimationCard.xib in Resources */,
 				8C06B0972008AD71003D8E05 /* polaroid_yeni@2x.png in Resources */,
-				8C06AC1B20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
+				8C06AC1B20066641003D8E05 /* LoginSettingsViewController.xib in Resources */,
 				8C06B1A32008AD72003D8E05 /* TOCropViewControllerLocalizable.strings in Resources */,
 				8C06B1872008AD72003D8E05 /* underline@2x.png in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
@@ -16592,6 +16691,7 @@
 				7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */,
 				8C06AF312008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
 				8C06AEED2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
+				730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				8C06AF4D2008AD70003D8E05 /* crop_selected@2x.png in Resources */,
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
@@ -16620,6 +16720,7 @@
 				8C06AF552008AD70003D8E05 /* cropy_icon@3x.png in Resources */,
 				8C06B08D2008AD71003D8E05 /* paylas_twitter@3x.png in Resources */,
 				8C06B0492008AD71003D8E05 /* oval_siyah@2x.png in Resources */,
+				730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				8C06AED12008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
 				8C06B1212008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
@@ -16925,6 +17026,7 @@
 				8C06AEF82008AD70003D8E05 /* cancel_buton@3x.png in Resources */,
 				8C06AF2E2008AD70003D8E05 /* cizgi_3@2x.png in Resources */,
 				CE5921D822564465005882CE /* PasswordView.xib in Resources */,
+				730A997422D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				8C06AEEE2008AD70003D8E05 /* Buyuk_Selected.png in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
@@ -16973,6 +17075,7 @@
 				8C06AFA42008AD71003D8E05 /* frame@2x.png in Resources */,
 				CE4851ED2018B029006B8854 /* FilterPhotoCard.xib in Resources */,
 				8C06B1B22008AD72003D8E05 /* CRYSchemeCell.nib in Resources */,
+				730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
 				8C06AF262008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
 				8C06B09A2008AD71003D8E05 /* refresh.png in Resources */,
@@ -17249,7 +17352,7 @@
 				8C06AF522008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
 				A20CDBA0219D60B800CA9A67 /* PremiumView.xib in Resources */,
 				8C06AF422008AD70003D8E05 /* crop@3x.png in Resources */,
-				8C06AC1A20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
+				8C06AC1A20066641003D8E05 /* LoginSettingsViewController.xib in Resources */,
 				921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */,
 				8C06AF102008AD70003D8E05 /* checkbox_secili@2x.png in Resources */,
 				4A9F8E4E2087546500622A6C /* PeriodicContactSyncViewController.xib in Resources */,
@@ -17546,6 +17649,7 @@
 				CE784CD922A685FB00662219 /* cancel_buton@3x.png in Resources */,
 				CE784CDA22A685FB00662219 /* cizgi_3@2x.png in Resources */,
 				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
+				730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CE784CDC22A685FB00662219 /* Buyuk_Selected.png in Resources */,
 				CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */,
 				CE784CDE22A685FB00662219 /* AppRater.bundle in Resources */,
@@ -17594,6 +17698,7 @@
 				CE784D0922A685FB00662219 /* FilterPhotoCard.xib in Resources */,
 				CE784D0A22A685FB00662219 /* CRYSchemeCell.nib in Resources */,
 				CE784D0B22A685FB00662219 /* SplashViewController.xib in Resources */,
+				730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				CE784D0C22A685FB00662219 /* cizgi_2_selected.png in Resources */,
 				CE784D0D22A685FB00662219 /* refresh.png in Resources */,
 				CE784D0E22A685FB00662219 /* CollageCard.xib in Resources */,
@@ -17867,7 +17972,7 @@
 				CE784E1622A685FB00662219 /* cropy_icon@2x.png in Resources */,
 				CE784E1722A685FB00662219 /* PremiumView.xib in Resources */,
 				CE784E1822A685FB00662219 /* crop@3x.png in Resources */,
-				CE784E1922A685FB00662219 /* TurkcellSecurityViewController.xib in Resources */,
+				CE784E1922A685FB00662219 /* LoginSettingsViewController.xib in Resources */,
 				CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */,
 				CE784E1B22A685FB00662219 /* checkbox_secili@2x.png in Resources */,
 				B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */,
@@ -18785,6 +18890,7 @@
 			files = (
 				CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
+				892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
 				B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
@@ -19068,7 +19174,7 @@
 				8C0E8D251FDEBDFF00789C91 /* InstagramParametrs.swift in Sources */,
 				8C0E8D261FDEBDFF00789C91 /* CameraService.swift in Sources */,
 				8C0E8D271FDEBDFF00789C91 /* HelpAndSupportConfigurator.swift in Sources */,
-				8C06AC1320066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
+				8C06AC1320066641003D8E05 /* LoginSettingsPresenter.swift in Sources */,
 				8C06AC1F2008AAC4003D8E05 /* FileForDownload.swift in Sources */,
 				8C0E8D281FDEBDFF00789C91 /* AutoSyncInteractor.swift in Sources */,
 				8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */,
@@ -19155,7 +19261,7 @@
 				8C0E8D7A1FDEBDFF00789C91 /* AuthenticationService.swift in Sources */,
 				8C0E8D7C1FDEBDFF00789C91 /* ReachabilityService.swift in Sources */,
 				B53DCE8320EF634900400DBA /* Contact.m in Sources */,
-				8C06AC1520066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
+				8C06AC1520066641003D8E05 /* LoginSettingsRouter.swift in Sources */,
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
 				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
 				89E51D4922CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -19185,7 +19291,7 @@
 				8C06AC282008AB97003D8E05 /* FreeAppSpaceViewController.swift in Sources */,
 				8C0E8D9A1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				8C0E8D9B1FDEBDFF00789C91 /* BaseCollectionViewCell.swift in Sources */,
-				8C06AC0B20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */,
+				8C06AC0B20066641003D8E05 /* LoginSettingsInitializer.swift in Sources */,
 				92004B6121AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				8C0E8D9C1FDEBDFF00789C91 /* UserProfileInteractorInput.swift in Sources */,
 				CEF371A920887806007AD36E /* UIViewController+NavBar.swift in Sources */,
@@ -19242,13 +19348,14 @@
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
 				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
-				8C06AC1720066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */,
+				8C06AC1720066641003D8E05 /* LoginSettingsRouterInput.swift in Sources */,
 				8C0E8DC41FDEBDFF00789C91 /* PurchaseResult.swift in Sources */,
 				8C0E8DC51FDEBDFF00789C91 /* RegistrationInitializer.swift in Sources */,
 				8C0B91A420170E9900A5BA81 /* ManageContactsViewController.swift in Sources */,
 				8C20867F228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
 				8C0E8DC61FDEBDFF00789C91 /* HelpAndSupportInteractorInput.swift in Sources */,
 				8C8711701FDFF35800F66396 /* OperationProgressService.swift in Sources */,
+				892B015222DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				8C0E8DC71FDEBDFF00789C91 /* TermsAndServicesViewInput.swift in Sources */,
 				CE58FB0120444525007F3F54 /* SharedFactory.swift in Sources */,
 				8C0E8DC91FDEBDFF00789C91 /* WhiteButtonWithRoundedCorner.swift in Sources */,
@@ -19358,9 +19465,9 @@
 				92004B5521AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
 				4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
-				8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
+				8C06AC1920066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
 				8C0E8E051FDEBDFF00789C91 /* PhoneVereficationViewOutput.swift in Sources */,
-				8C0E8E061FDEBDFF00789C91 /* PhoneVereficationViewController.swift in Sources */,
+				8C0E8E061FDEBDFF00789C91 /* PhoneVerificationViewController.swift in Sources */,
 				8C0E8E071FDEBDFF00789C91 /* PhoneVereficationModuleInput.swift in Sources */,
 				8C0E8E081FDEBDFF00789C91 /* PhoneVereficationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
@@ -19393,6 +19500,7 @@
 				8C0E8E1E1FDEBDFF00789C91 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */,
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
+				730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
@@ -19438,10 +19546,11 @@
 				8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */,
 				8C0E8E441FDEBDFF00789C91 /* BiometricsManager.swift in Sources */,
 				8CD2B3B21FE7B3BF00280547 /* UIImage+Color.swift in Sources */,
-				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
+				8C06AC1D20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
+				892B015722DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
 				CE85CFAD225E07FC009E4D11 /* UpdatePasswordErrors.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
@@ -19456,7 +19565,7 @@
 				4AD1A81B208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
 				4A0AC13F2087371A00032CC7 /* PeriodicContactSyncInteractor.swift in Sources */,
-				8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
+				8C06AC0920066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */,
 				8C0E8E621FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
@@ -19483,7 +19592,6 @@
 				8C0E8E811FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				8C0E8E831FDEBDFF00789C91 /* CollectionViewCellForVideo.swift in Sources */,
 				8C0E8E841FDEBDFF00789C91 /* BottomSelectionTabBarDataStorage.swift in Sources */,
-				8C06AC1120066641003D8E05 /* TurkcellSecurityModuleInput.swift in Sources */,
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
 				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
@@ -19598,6 +19706,7 @@
 				8C0E8EEC1FDEBDFF00789C91 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				8C0E8EED1FDEBDFF00789C91 /* PhotoVideoDetailRouter.swift in Sources */,
 				8C0E8EEE1FDEBDFF00789C91 /* PhotoVideoDetailConfigurator.swift in Sources */,
+				892B014D22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */,
 				8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */,
 				8C0E8EEF1FDEBDFF00789C91 /* PhotoVideoDetailInitializer.swift in Sources */,
 				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
@@ -19628,6 +19737,7 @@
 				8C0E8F021FDEBDFF00789C91 /* BasePresentor.swift in Sources */,
 				8C0E8F031FDEBDFF00789C91 /* UploadHelpers.swift in Sources */,
 				8C0E8F041FDEBDFF00789C91 /* UserProfileRouterInput.swift in Sources */,
+				730A997922D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				925B59A622C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
 				8C20865E228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				8C0E8F051FDEBDFF00789C91 /* SyncContactsViewInput.swift in Sources */,
@@ -19660,7 +19770,7 @@
 				92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
 				925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
-				8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				8C06AC0F20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
 				B53DCE9120EF634900400DBA /* ContactUtil.m in Sources */,
 				CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */,
@@ -19726,13 +19836,14 @@
 				8C0E8F3A1FDEBDFF00789C91 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				8C0E8F3B1FDEBDFF00789C91 /* SplashInteractorOutput.swift in Sources */,
 				8C0B919320170E0D00A5BA81 /* DuplicatedContactsPresenter.swift in Sources */,
-				8C06AC0D20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
+				8C06AC0D20066641003D8E05 /* LoginSettingsInteractor.swift in Sources */,
 				8C0E8F3C1FDEBDFF00789C91 /* SplashInteractor.swift in Sources */,
 				B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */,
 				B56E0DEA20B5644D0082044D /* NotificationName+Extensions.swift in Sources */,
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
 				8C0E8F3E1FDEBDFF00789C91 /* SplashRouterInput.swift in Sources */,
+				73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				8C208640228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift in Sources */,
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
@@ -19878,6 +19989,7 @@
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				89E51D4322CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				730A998322D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				A217E43821A5B0480084AA37 /* LeavePremiumRouterInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				B56FBB1B2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
@@ -20024,9 +20136,11 @@
 				8C3BA2E822B3CC45006D901E /* UIImageView+Scale.swift in Sources */,
 				8C3BA2E922B3CC45006D901E /* Alamofire+Validate.swift in Sources */,
 				8C3BA2EA22B3CC45006D901E /* ShareWormholeListener.swift in Sources */,
+				8C2386B322E9AA0D004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA2EB22B3CC45006D901E /* UploadQueueService.swift in Sources */,
 				8C3BA2EC22B3CC45006D901E /* Equatable+Contains.swift in Sources */,
 				8C3BA2ED22B3CC45006D901E /* PasscodeEnterViewController.swift in Sources */,
+				8C2386B422E9AA21004992C4 /* DateExtension.swift in Sources */,
 				8C3BA2EF22B3CC45006D901E /* TokenStorage.swift in Sources */,
 				8C3BA2F022B3CC45006D901E /* SharedFactory.swift in Sources */,
 				8C1E5BCF22CB897B008FDA02 /* ShareViewController.swift in Sources */,
@@ -20063,6 +20177,7 @@
 				8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */,
 				8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */,
+				8C2386B622E9AA4B004992C4 /* Double+Extensions.swift in Sources */,
 				8C3BA31322B3CC45006D901E /* AuthorizationRepository.swift in Sources */,
 				8C3BA31422B3CC45006D901E /* ShareConfigurator.swift in Sources */,
 				8C3BA31522B3CC45006D901E /* UploadHelpers.swift in Sources */,
@@ -20113,6 +20228,7 @@
 				8C3BA35422B3CC49006D901E /* MD5.swift in Sources */,
 				8C3BA35522B3CC49006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C1E72F122BEB65300DC57B6 /* SharedConstants.swift in Sources */,
+				8C2386B722E9AA4C004992C4 /* Double+Extensions.swift in Sources */,
 				8C3BA35622B3CC49006D901E /* AuthorizationURLs.swift in Sources */,
 				8C3BA35722B3CC49006D901E /* SharedFactory.swift in Sources */,
 				8C1E5BCE22CB8935008FDA02 /* FileProviderWormholeListener.swift in Sources */,
@@ -20120,9 +20236,11 @@
 				8C3BA35922B3CC49006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA35A22B3CC49006D901E /* TokenStorage.swift in Sources */,
 				8C3BA35B22B3CC49006D901E /* String+Subscript.swift in Sources */,
+				8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA35C22B3CC49006D901E /* FileProviderItem.swift in Sources */,
 				8C3BA35D22B3CC49006D901E /* Mapping.swift in Sources */,
 				8C3BA35E22B3CC49006D901E /* NumericConstants.swift in Sources */,
+				8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */,
 				8C3BA35F22B3CC49006D901E /* Alamofire+Validate.swift in Sources */,
 				8C3BA36022B3CC49006D901E /* FileService.swift in Sources */,
 				8C3BA36122B3CC49006D901E /* TokenKeychainStorage.swift in Sources */,
@@ -20451,6 +20569,7 @@
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
 				2BA37C3D202837C800660394 /* FaceImageChangeCoverInitializer.swift in Sources */,
+				730A997122D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				A217E44021A5B0A80084AA37 /* LeavePremiumInteractor.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
@@ -20469,11 +20588,12 @@
 				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
 				4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
+				892B015122DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
 				7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				CE2976E11FD58E2000350F3A /* LocalAlbumInteractor.swift in Sources */,
 				D498865C1F3EFBE200F50C95 /* ImportPhotosPresenter.swift in Sources */,
-				8C06AC1420066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
+				8C06AC1420066641003D8E05 /* LoginSettingsRouter.swift in Sources */,
 				89E51D5B22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
 				CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */,
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
@@ -20505,7 +20625,7 @@
 				4A0AC15C20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				CE24FB8B1F0B149D00C55188 /* CameraService.swift in Sources */,
 				B56FBB282122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
-				8C06AC0A20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */,
+				8C06AC0A20066641003D8E05 /* LoginSettingsInitializer.swift in Sources */,
 				CE95ED4B1F516736002F923A /* HelpAndSupportConfigurator.swift in Sources */,
 				B5CDB33E21787FEF006CFA50 /* Configuration.m in Sources */,
 				CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */,
@@ -20653,7 +20773,7 @@
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
 				7CDABD081F1E3A6300C8CC16 /* UserProfileInteractorInput.swift in Sources */,
 				CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */,
-				8C06AC0C20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
+				8C06AC0C20066641003D8E05 /* LoginSettingsInteractor.swift in Sources */,
 				CE51ACB01EF90853005DCEE0 /* AutoSyncDataSource.swift in Sources */,
 				7C00FE1A1F5957570041D041 /* AppRater.m in Sources */,
 				CE51ACB31EF90853005DCEE0 /* RegistrationUserInfoModel.swift in Sources */,
@@ -20728,7 +20848,7 @@
 				CE2F56191F7552A900F49DA1 /* PackagesInteractorOutput.swift in Sources */,
 				4A0AC138208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
 				CE51ACD21EF90853005DCEE0 /* TermsAndServicesViewController.swift in Sources */,
-				8C06AC0820066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
+				8C06AC0820066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */,
 				CE51ACD31EF90853005DCEE0 /* TermsAndServicesModuleInput.swift in Sources */,
 				CE51ACD41EF90853005DCEE0 /* LoginInteractorInput.swift in Sources */,
 				CE39D3E6216B756E004AB6D7 /* YearsView.swift in Sources */,
@@ -20746,6 +20866,7 @@
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
+				892B015622DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */,
 				984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
@@ -20761,6 +20882,7 @@
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
 				CE51ACDF1EF90853005DCEE0 /* IntroduceViewController.swift in Sources */,
+				73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				CE51ACE01EF90853005DCEE0 /* IntroduceModuleInput.swift in Sources */,
 				B56FBB342122C85D004F4A59 /* TermsOfUseInteractorOutput.swift in Sources */,
 				7C6945E420039F4A00152344 /* FreeAppSpaceViewController.swift in Sources */,
@@ -20822,13 +20944,13 @@
 				9216F57922493127008339F5 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
 				B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
-				CE51ACEB1EF90853005DCEE0 /* PhoneVereficationViewController.swift in Sources */,
+				CE51ACEB1EF90853005DCEE0 /* PhoneVerificationViewController.swift in Sources */,
 				8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */,
 				8C23F2942286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
 				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
-				8C06AC0E20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
@@ -20839,7 +20961,7 @@
 				92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
 				4BF3A69722B38C590082130F /* PermissionsView.swift in Sources */,
-				8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
+				8C06AC1220066641003D8E05 /* LoginSettingsPresenter.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				17052DEE2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
@@ -20939,11 +21061,13 @@
 				CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */,
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
 				8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
+				730A997822D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */,
 				8C20865D228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
 				4A0AC13E2087371A00032CC7 /* PeriodicContactSyncInteractor.swift in Sources */,
 				8C0097181F6BDACA00FA069C /* AlertFilesActionsSheetPresenter.swift in Sources */,
+				892B014C22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */,
 				CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */,
 				CEC3C22F1FB997A600C3D67F /* FromNib.swift in Sources */,
 				8C208689228D5386000BEDAD /* QuickScrollService.swift in Sources */,
@@ -21065,7 +21189,7 @@
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
-				8C06AC1820066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
+				8C06AC1820066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
 				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
 				8C208674228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift in Sources */,
@@ -21085,6 +21209,7 @@
 				CE95ED4F1F516736002F923A /* HelpAndSupportInteractor.swift in Sources */,
 				8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C208641228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
+				730A998222D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
@@ -21191,8 +21316,9 @@
 				8DCB21751F3C871600BAFE1E /* SearchViewInteractorOutput.swift in Sources */,
 				C31A7AB8B8824DB84111E8FB /* SplashInteractorInput.swift in Sources */,
 				8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */,
+				892B014822DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				3E9E7380965142B606376820 /* SplashInteractorOutput.swift in Sources */,
-				8C06AC1620066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */,
+				8C06AC1620066641003D8E05 /* LoginSettingsRouterInput.swift in Sources */,
 				CE61D1BD2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				B54BFF4C202C73790018AF82 /* SharedConstants.swift in Sources */,
 				C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */,
@@ -21212,7 +21338,7 @@
 				2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */,
 				ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */,
 				CE4D282A207E3D50003AE4FB /* AppWormholeListener.swift in Sources */,
-				8C06AC1C20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
+				8C06AC1C20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */,
 				F49D6CB617DCAACFFD246614 /* FileInfoViewInput.swift in Sources */,
 				38648D9D5A7F951F856B308B /* FileInfoViewOutput.swift in Sources */,
 				FA793D832018725400A02B46 /* PeopleServiceResponse.swift in Sources */,
@@ -21422,7 +21548,6 @@
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
 				0A2DCCF755BD78D7EE5ABDAB /* ActivityTimelineViewController.swift in Sources */,
 				FFEDDBBAD158A3ACC8251E35 /* ActivityTimelineModuleInput.swift in Sources */,
-				8C06AC1020066641003D8E05 /* TurkcellSecurityModuleInput.swift in Sources */,
 				EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */,
 				872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */,
 				4A98C86C219FF89F00C3B04F /* PremiumFeaturesView.swift in Sources */,
@@ -21700,6 +21825,7 @@
 				CE78488822A685FB00662219 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE78488922A685FB00662219 /* PlanType.swift in Sources */,
 				CE78488A22A685FB00662219 /* SearchViewInitializer.swift in Sources */,
+				892B015322DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */,
 				CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */,
 				CE78488D22A685FB00662219 /* BuildFile in Sources */,
@@ -21744,6 +21870,7 @@
 				CE7848B722A685FB00662219 /* CustomNavBarView.swift in Sources */,
 				CE7848B822A685FB00662219 /* CollectionViewCellForPhoto.swift in Sources */,
 				CE7848B922A685FB00662219 /* FaceImageChangeCoverInitializer.swift in Sources */,
+				892B015822DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				CE7848BA22A685FB00662219 /* RecentSearchesService.swift in Sources */,
 				CE7848BB22A685FB00662219 /* LeavePremiumInteractor.swift in Sources */,
 				CE7848BC22A685FB00662219 /* LoginInteractor.swift in Sources */,
@@ -21766,7 +21893,7 @@
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
-				CE7848D222A685FB00662219 /* TurkcellSecurityRouter.swift in Sources */,
+				CE7848D222A685FB00662219 /* LoginSettingsRouter.swift in Sources */,
 				CE7848D322A685FB00662219 /* PopUpController.swift in Sources */,
 				89E51D5922CA112E007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
 				CE7848D422A685FB00662219 /* ErrorResponse.swift in Sources */,
@@ -21799,7 +21926,7 @@
 				CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */,
 				8C1E5BEC22CB8D1C008FDA02 /* QuickScrollService.swift in Sources */,
 				B557674A22E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
-				CE7848EF22A685FB00662219 /* TurkcellSecurityInitializer.swift in Sources */,
+				CE7848EF22A685FB00662219 /* LoginSettingsInitializer.swift in Sources */,
 				CE7848F022A685FB00662219 /* HelpAndSupportConfigurator.swift in Sources */,
 				CE7848F122A685FB00662219 /* Configuration.m in Sources */,
 				CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */,
@@ -21809,6 +21936,7 @@
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CE7848F922A685FB00662219 /* MenloworksAppEvents.swift in Sources */,
 				CE7848FA22A685FB00662219 /* ManageContactsRouterInput.swift in Sources */,
 				CE7848FB22A685FB00662219 /* DuplicatedContactTableViewCell.swift in Sources */,
@@ -21948,7 +22076,7 @@
 				89104BC722CBA025005B3F58 /* UIButton+Image.swift in Sources */,
 				CE78498222A685FB00662219 /* UserProfileInteractorInput.swift in Sources */,
 				CE78498322A685FB00662219 /* EULAService.swift in Sources */,
-				CE78498422A685FB00662219 /* TurkcellSecurityInteractor.swift in Sources */,
+				CE78498422A685FB00662219 /* LoginSettingsInteractor.swift in Sources */,
 				CE78498522A685FB00662219 /* AutoSyncDataSource.swift in Sources */,
 				73FE51FE22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				CE78498622A685FB00662219 /* AppRater.m in Sources */,
@@ -21962,6 +22090,7 @@
 				CE78498E22A685FB00662219 /* PremiumInitializer.swift in Sources */,
 				CE78498F22A685FB00662219 /* RegistrationViewInput.swift in Sources */,
 				CE78499022A685FB00662219 /* RegistrationViewOutput.swift in Sources */,
+				892B014E22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */,
 				CE78499122A685FB00662219 /* ConnectedAccountsDataSource.swift in Sources */,
 				CE78499222A685FB00662219 /* RegistrationViewController.swift in Sources */,
 				CE78499322A685FB00662219 /* AlbumCard.swift in Sources */,
@@ -22021,7 +22150,7 @@
 				CE7849CA22A685FB00662219 /* PackagesInteractorOutput.swift in Sources */,
 				CE7849CB22A685FB00662219 /* PeriodicContactSyncRouter.swift in Sources */,
 				CE7849CC22A685FB00662219 /* TermsAndServicesViewController.swift in Sources */,
-				CE7849CD22A685FB00662219 /* TurkcellSecurityConfigurator.swift in Sources */,
+				CE7849CD22A685FB00662219 /* LoginSettingsConfigurator.swift in Sources */,
 				CE7849CE22A685FB00662219 /* TermsAndServicesModuleInput.swift in Sources */,
 				CE7849CF22A685FB00662219 /* LoginInteractorInput.swift in Sources */,
 				CE7849D022A685FB00662219 /* YearsView.swift in Sources */,
@@ -22110,20 +22239,22 @@
 				CE784A2122A685FB00662219 /* PrintService.swift in Sources */,
 				CE784A2222A685FB00662219 /* UpdatePasswordErrors.swift in Sources */,
 				CE784A2322A685FB00662219 /* WrapperedItemUtil.swift in Sources */,
+				730A997A22D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				CE784A2422A685FB00662219 /* ImageDownloadOperation.swift in Sources */,
 				CE784A2522A685FB00662219 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				CE784A2722A685FB00662219 /* UIAlertController+Action.swift in Sources */,
 				CE784A2822A685FB00662219 /* Filter.m in Sources */,
 				CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */,
+				730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				CE784A2A22A685FB00662219 /* PhoneVereficationViewOutput.swift in Sources */,
 				CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */,
-				CE784A2C22A685FB00662219 /* PhoneVereficationViewController.swift in Sources */,
+				CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */,
 				CE784A2D22A685FB00662219 /* AnalyticsPackageProductObject.swift in Sources */,
 				CE784A2E22A685FB00662219 /* PhoneVereficationModuleInput.swift in Sources */,
 				CE784A2F22A685FB00662219 /* SimpleSliderCell.swift in Sources */,
 				CE784A3022A685FB00662219 /* Alamofire+Response.swift in Sources */,
 				CE784A3122A685FB00662219 /* PhoneVereficationPresenter.swift in Sources */,
-				CE784A3222A685FB00662219 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				CE784A3222A685FB00662219 /* LoginSettingsInteractorIO.swift in Sources */,
 				CE784A3322A685FB00662219 /* InstaPickProgressPopup.swift in Sources */,
 				CE784A3422A685FB00662219 /* PhoneVereficationInteractorInput.swift in Sources */,
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
@@ -22132,7 +22263,7 @@
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
-				CE784A3D22A685FB00662219 /* TurkcellSecurityPresenter.swift in Sources */,
+				CE784A3D22A685FB00662219 /* LoginSettingsPresenter.swift in Sources */,
 				CE784A3E22A685FB00662219 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */,
 				CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */,
@@ -22360,7 +22491,7 @@
 				CE784B1C22A685FB00662219 /* BuildFile in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,
 				CE784B1E22A685FB00662219 /* Mapping.swift in Sources */,
-				CE784B1F22A685FB00662219 /* TurkcellSecurityViewController.swift in Sources */,
+				CE784B1F22A685FB00662219 /* LoginSettingsViewController.swift in Sources */,
 				CE784B2022A685FB00662219 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				CE784B2122A685FB00662219 /* ShadowView.swift in Sources */,
 				CE784B2322A685FB00662219 /* CollectionViewStoryReorderView.swift in Sources */,
@@ -22489,7 +22620,7 @@
 				8C1E5BE022CB8C20008FDA02 /* PhotoVideoNavBarManager.swift in Sources */,
 				CE784B9C22A685FB00662219 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
-				CE784B9E22A685FB00662219 /* TurkcellSecurityRouterInput.swift in Sources */,
+				CE784B9E22A685FB00662219 /* LoginSettingsRouterInput.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
 				CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */,
 				CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */,
@@ -22508,7 +22639,7 @@
 				CE784BAF22A685FB00662219 /* ActionsMenuViewInput.swift in Sources */,
 				CE784BB022A685FB00662219 /* ActionsMenuView.swift in Sources */,
 				CE784BB122A685FB00662219 /* AppWormholeListener.swift in Sources */,
-				CE784BB222A685FB00662219 /* TurkcellSecurityViewIO.swift in Sources */,
+				CE784BB222A685FB00662219 /* LoginSettingsViewIO.swift in Sources */,
 				CE784BB322A685FB00662219 /* FileInfoViewInput.swift in Sources */,
 				CE784BB422A685FB00662219 /* FileInfoViewOutput.swift in Sources */,
 				CE784BB522A685FB00662219 /* PeopleServiceResponse.swift in Sources */,
@@ -22598,6 +22729,7 @@
 				CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */,
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
 				CE784C0922A685FB00662219 /* BaseView.swift in Sources */,
+				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
 				CE784C0B22A685FB00662219 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
@@ -22638,6 +22770,7 @@
 				CE784C2B22A685FB00662219 /* PackageInfoView.swift in Sources */,
 				CE784C2C22A685FB00662219 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE784C2D22A685FB00662219 /* HelpAndSupportInitializer.swift in Sources */,
+				73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				CE784C2E22A685FB00662219 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				CE784C2F22A685FB00662219 /* PrepareQuickScroll.swift in Sources */,
 				CE784C3022A685FB00662219 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -22716,7 +22849,6 @@
 				CE784C7622A685FB00662219 /* ActivityTimelineViewOutput.swift in Sources */,
 				CE784C7722A685FB00662219 /* ActivityTimelineViewController.swift in Sources */,
 				CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */,
-				CE784C7922A685FB00662219 /* TurkcellSecurityModuleInput.swift in Sources */,
 				CE784C7A22A685FB00662219 /* ActivityTimelinePresenter.swift in Sources */,
 				CE784C7B22A685FB00662219 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CE784C7C22A685FB00662219 /* PremiumFeaturesView.swift in Sources */,

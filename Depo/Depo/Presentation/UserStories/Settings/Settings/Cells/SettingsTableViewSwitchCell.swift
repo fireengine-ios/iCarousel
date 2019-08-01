@@ -6,42 +6,104 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-
 protocol SettingsTableViewSwitchCellDelegate: class {
-    func switchToggled(positionOn: Bool, cell: SettingsTableViewSwitchCell)
+    func switchToggled(cell: SettingsTableViewSwitchCell)
 }
 
-class SettingsTableViewSwitchCell: UITableViewCell {
+final class SettingsTableViewSwitchCell: UITableViewCell {
     
-    weak var actionDelegate: SettingsTableViewSwitchCellDelegate?
+    typealias SettingsTableViewSwitchCellParam = (key: CellType, value: Bool)
 
-    @IBOutlet weak var stateSwitch: UISwitch!
+    enum CellType {
+        case twoFactorAuth
+        case securityPasscode
+        case securityAutologin
+        
+        var title: String {
+            switch self {
+            case .securityPasscode:
+                return TextConstants.settingsViewCellTurkcellPassword
+            case .securityAutologin:
+                return TextConstants.settingsViewCellTurkcellAutoLogin
+            case .twoFactorAuth:
+                return TextConstants.settingsViewCellTwoFactorAuth
+            }
+        }
+        
+        var description: String {
+            switch self {
+            case .securityPasscode:
+                return TextConstants.loginSettingsSecurityPasscodeDescription
+            case .securityAutologin:
+                return TextConstants.loginSettingsSecurityAutologinDescription
+            case .twoFactorAuth:
+                return TextConstants.loginSettingsTwoFactorAuthDescription
+            }
+        }
+    }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var separator: UIView!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = UIColor.black
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.numberOfLines = 0
+        }
+    }
     
+    @IBOutlet private weak var descriptionLabel: UILabel! {
+        willSet {
+            newValue.textColor = UIColor.black.withAlphaComponent(0.25)
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.numberOfLines = 0
+        }
+    }
 
+    @IBOutlet private weak var stateSwitch: UISwitch!
+    @IBOutlet private weak var separator: UIView!
+    
+    private weak var actionDelegate: SettingsTableViewSwitchCellDelegate?
+    
+    var toggle: Bool {
+        set {
+            self.stateSwitch.setOn(newValue, animated: false)
+        }
+        
+        get {
+            return stateSwitch.isOn
+        }
+    }
+    
+    var type: CellType?
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        setup()
+    }
+    
+    private func setup() {
         stateSwitch.addTarget(self, action: #selector(swichChanged), for: .touchUpInside)//valueChanged)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellGotTouched)))
     }
     
+    func setup(params: SettingsTableViewSwitchCellParam, delegate: SettingsTableViewSwitchCellDelegate, needShowSeparator: Bool = true) {
+        type = params.key
+        
+        titleLabel.text = params.key.title
+        descriptionLabel.text = params.key.description
+        toggle = params.value
+        
+        actionDelegate = delegate
+        separator.isHidden = !needShowSeparator
+    }
+    
     @objc func swichChanged() {
         debugPrint("swichChanged SettingsTableViewSwitchCells")
-        actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
+        actionDelegate?.switchToggled(cell: self)
     }
     
     @objc func cellGotTouched() {
-        stateSwitch.setOn(!stateSwitch.isOn, animated: true)
-        actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
+        toggle.toggle()
+        swichChanged()
     }
     
-    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
-        titleLabel.text = titleText
-        separator.isHidden = !needShowSeparator
-    }
 }

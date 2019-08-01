@@ -41,9 +41,10 @@ class SettingsInteractor: SettingsInteractorInput {
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
                              TextConstants.settingsViewCellUsageInfo,
-                             passcodeCellTitle]
+                             passcodeCellTitle,
+                             TextConstants.settingsViewCellLoginSettings]
         
-        var array = [[TextConstants.settingsViewCellBeckup,
+        let array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
@@ -54,45 +55,7 @@ class SettingsInteractor: SettingsInteractorInput {
                       TextConstants.settingsViewCellPrivacyAndTerms,
                       TextConstants.settingsViewCellLogout]]
         
-        let loginSettingsRow = 2
-        let permissionsSettingsRow = 1
-        
-        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-            guard let `self` = self else {
-                return
-            }
-            self.userInfoResponse = response
-            if self.isTurkcellUser {
-                /// add to the securityCells section
-                array[loginSettingsRow].append(TextConstants.settingsViewCellLoginSettings)
-            }
-            self.accountSerivese.getPermissionsAllowanceInfo(handler: { [weak self] result in
-                guard let `self` = self else {
-                    return
-                }
-                
-                switch result {
-                case .success(let result):
-                    let hasAllowedPersmission = result.first(where: { $0.isAllowed ?? false }) != nil
-                    if !hasAllowedPersmission {
-                        /// hide Permission setting
-                        array[permissionsSettingsRow].remove(TextConstants.settingsViewCellPermissions)
-                    }
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                }
-                
-                DispatchQueue.toMain {
-                    self.output.cellsDataForSettings(array: array)
-                }
-            })
-            
-        }, fail: { [weak self] error in
-            DispatchQueue.toMain {
-                self?.output.cellsDataForSettings(array: array)
-            }
-
-        })
+        self.output.cellsDataForSettings(array: array)
     }
 
     func onLogout() {
@@ -101,6 +64,7 @@ class SettingsInteractor: SettingsInteractorInput {
             if success {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
             }
+            
             self?.authService.logout { [weak self] in
                 self?.output.asyncOperationStoped()
                 MenloworksEventsService.shared.onLoggedOut()
@@ -144,7 +108,16 @@ class SettingsInteractor: SettingsInteractorInput {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
     
-    func getUserStatus() {
+    func getUserInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
+            self?.userInfoResponse = accountInfo
+            self?.getUserStatus()
+            }, fail: { [weak self] errorResponse in
+                self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
+        })
+    }
+    
+    private func getUserStatus() {
         accountSerivese.permissions { [weak self] response in
             switch response {
             case .success(let result):

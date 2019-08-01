@@ -38,6 +38,7 @@ struct AccountJSONConstants {
     
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
+    static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -91,10 +92,12 @@ class AccountInfoResponse: ObjectRequestResponse {
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?
     var mobileNetworkAuthEnabled: Bool?
+    var twoFactorAuthEnabled: Bool?
     
     override func mapping() {
         turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
         mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        twoFactorAuthEnabled = json?[AccountJSONConstants.twoFactorAuthEnabled].bool
     }
     
 }
@@ -424,6 +427,25 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
     override func mapping() {
         status = json?[ResponseKey.status].string
         value = json?[ResponseKey.value].string
+    }
+}
+
+final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let remainingTimeInSeconds = "remainingTimeInSeconds"
+        static let expectedInputLength = "expectedInputLength"
+    }
+    
+    var status: String?
+    var remainingTimeInSeconds: Int?
+    var expectedInputLength: Int?
+
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
+        expectedInputLength = json?[ResponseKey.expectedInputLength].int
     }
 }
 

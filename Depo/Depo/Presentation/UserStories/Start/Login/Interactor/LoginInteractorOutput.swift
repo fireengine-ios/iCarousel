@@ -44,4 +44,5 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func captchaRequredFailed(with message: String)
     
     func showSupportView()
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
 }

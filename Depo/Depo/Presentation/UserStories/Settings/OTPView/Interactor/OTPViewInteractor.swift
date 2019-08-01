@@ -12,12 +12,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     var userInfo: AccountInfoResponse?
     var phoneNumberString: String?
     
-    override var remainingTimeInMinutes: Int {
+    override var remainingTimeInSeconds: Int {
         if let resp = responce {
-            return resp.remainingTimeInMinutes ?? 1
+            return (resp.remainingTimeInMinutes ?? 1) * 60
         }
         
-        return 1
+        return 60
     }
     
     override func trackScreen() {

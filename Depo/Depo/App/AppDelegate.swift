@@ -243,7 +243,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
-        
         checkPasscodeIfNeed()
         AppEvents.activateApp()
     }

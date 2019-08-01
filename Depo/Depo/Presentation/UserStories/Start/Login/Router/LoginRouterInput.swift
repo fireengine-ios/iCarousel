@@ -37,4 +37,6 @@ protocol LoginRouterInput {
     func openSupport()
     
     func dismissEmptyPhoneController(successHandler: VoidHandler?)
+    
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
 }

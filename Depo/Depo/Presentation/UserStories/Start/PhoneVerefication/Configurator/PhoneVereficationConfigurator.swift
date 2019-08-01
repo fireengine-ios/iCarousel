@@ -12,12 +12,12 @@ class PhoneVereficationModuleConfigurator {
 
     func configureModuleForViewInput(viewInput: UIViewController, withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
 
-        if let viewController = viewInput as? PhoneVereficationViewController {
+        if let viewController = viewInput as? PhoneVerificationViewController {
             configure(viewController: viewController, withResponse: response, userInfo: userInfo)
         }
     }
 
-    private func configure(viewController: PhoneVereficationViewController, withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+    private func configure(viewController: PhoneVerificationViewController, withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
 
         let router = PhoneVereficationRouter()
 

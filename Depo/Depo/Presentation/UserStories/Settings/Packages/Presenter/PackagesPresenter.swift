@@ -23,7 +23,6 @@ class PackagesPresenter {
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
     private var percentage: CGFloat = 0
-    private var storageUsage: UsageResponse?
     
     private func refreshPage() {
         availableOffers = []
@@ -275,7 +274,10 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            router.openMyStorage(storageUsage: storageUsage)
+            let usage = UsageResponse()
+            usage.usedBytes = quotaInfo?.bytesUsed
+            usage.quotaBytes = quotaInfo?.bytes
+            router.openMyStorage(storageUsage: usage)
         case .accountType(let accountType):
             router.openLeavePremium(type: accountType.leavePremiumType)
         case .myProfile:

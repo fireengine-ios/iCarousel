@@ -187,7 +187,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     // MARK: - User Security
     
-    func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AccountService securitySettingsInfo")
 
         let parametres = SecuritySettingsInfoParametres()
@@ -195,12 +195,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: parametres, handler: handler)
     }
     
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
-                                success: SuccessResponse?, fail: FailResponse?) {
+    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
+                                mobileNetworkAuthEnabled: Bool,
+                                twoFactorAuthEnabled: Bool,
+                                success: SuccessResponse?,
+                                fail: FailResponse?) {
         debugLog("AccountService securitySettingsChange")
         
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
+        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
+                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
+                                                              twoFactorAuth: twoFactorAuthEnabled)
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parametres, handler: handler)
     }
