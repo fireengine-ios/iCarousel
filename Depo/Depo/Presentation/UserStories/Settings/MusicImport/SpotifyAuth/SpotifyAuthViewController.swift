@@ -103,7 +103,7 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
         
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
-            if let faceBookCode = spotifyCode.index(of: "&") {
+            if let facebookCode = spotifyCode.index(of: "&") {
                  spotifyCode = String(spotifyCode[..<faceBookCode])
             }
             terminateAuthProcess(code: spotifyCode)
