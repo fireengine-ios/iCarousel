@@ -33,12 +33,12 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             }
             assert(items.count == mediaItems.count)
 
-            let localItemsToRemove = mediaItems.filter({ $0.relatedRemotes.count != 0 })
-            let relatedRemotes = localItemsToRemove
+            let relatedRemotesUuids = mediaItems
+                .filter { $0.relatedRemotes.count != 0 }
                 .compactMap { $0.relatedRemotes.allObjects as? [MediaItem] }
                 .flatMap { $0 }
+                .compactMap { $0.uuid }
             
-            let relatedRemotesUuids = relatedRemotes.compactMap({ $0.uuid })
             self.deleteRemotesAndLocals(relatedRemotesUuids: relatedRemotesUuids,
                        localCoreDataObjectIds: localCoreDataObjectIds)
 
@@ -65,7 +65,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             
             MediaItemOperationsService.shared.deleteRemoteEntities(uuids: remoteUuidsToDelete, completion: { [weak self] _ in
                 
-                self?.foundLocalItemsToDelete(by: associatedRemoteItemsToDelete.compactMap { $0.uuid }, originalLocalItemsToDeleteIDs: localCoreDataObjectIds, completion: { [weak self] localItemsToDelete in
+                self?.findLocalItemsToDelete(by: associatedRemoteItemsToDelete.compactMap { $0.uuid }, originalLocalItemsToDeleteIDs: localCoreDataObjectIds, completion: { [weak self] localItemsToDelete in
                     
                     self?.deleteLocalItems(localItemsToDelete: localItemsToDelete)
                     
@@ -89,7 +89,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         })
     }
     
-    private func foundLocalItemsToDelete(by assosiatedRemotesUUIDS: [String], originalLocalItemsToDeleteIDs: [NSManagedObjectID], completion: @escaping WrapObjectsCallBack) {
+    private func findLocalItemsToDelete(by assosiatedRemotesUUIDS: [String], originalLocalItemsToDeleteIDs: [NSManagedObjectID], completion: @escaping WrapObjectsCallBack) {
         MediaItemOperationsService.shared.mediaItemsByIDs(ids: originalLocalItemsToDeleteIDs) { mediaItems in
             assert(originalLocalItemsToDeleteIDs.count == mediaItems.count)
             
