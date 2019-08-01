@@ -204,20 +204,6 @@ final class PhotoVideoCell: UICollectionViewCell {
             selectionStateView.alpha = selection ? 1 : 0
         }
     }
-    
-//    func set(isSelected: Bool, isSelectionMode: Bool, animated: Bool) {
-//        checkmarkImageView.isHidden = !isSelectionMode
-//        checkmarkImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
-//
-//        let selection = isSelectionMode && isSelected
-//        if animated {
-//            UIView.animate(withDuration: NumericConstants.animationDuration) {
-//                self.selectionStateView.alpha = selection ? 1 : 0
-//            }
-//        } else {
-//            selectionStateView.alpha = selection ? 1 : 0
-//        }
-//    }
 
     /// not working for cell update (become favorite)
     /// override func prepareForReuse() {}
