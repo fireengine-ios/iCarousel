@@ -843,7 +843,7 @@ class RouterVC: NSObject {
         SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
             let router = RouterVC()
             let controller = router.supportFormPrefilledController
-            controller.title = "Support Form"
+            controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
                                                   phone: userInfo.fullPhoneNumber,
@@ -854,10 +854,6 @@ class RouterVC: NSObject {
         }, fail: { error in
             UIApplication.showErrorAlert(message: error.description)
         })
-        //        let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
-        //        controller.modalPresentationStyle = .overFullScreen
-        //        controller.modalTransitionStyle = .crossDissolve
-        //        UIApplication.topController()?.present(controller, animated: true, completion: nil)
 
     }
     
