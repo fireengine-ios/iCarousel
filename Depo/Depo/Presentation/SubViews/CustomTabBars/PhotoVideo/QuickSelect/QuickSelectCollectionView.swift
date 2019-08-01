@@ -16,7 +16,7 @@ protocol QuickSelectCollectionViewDelegate: class {
 }
 
 
-public class QuickSelectCollectionView: UICollectionView {
+final class QuickSelectCollectionView: UICollectionView {
     
     private enum SelectionMode {
         case selecting, deselecting, none
@@ -73,13 +73,13 @@ public class QuickSelectCollectionView: UICollectionView {
         return indexPathForItem(at: point)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setup()
     }
     
-    override public init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
 
         setup()
@@ -90,7 +90,7 @@ public class QuickSelectCollectionView: UICollectionView {
         allowsMultipleSelection = true
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         updateOffsetRange()

@@ -15,7 +15,6 @@ protocol PhotoVideoDataSourceDelegate: class {
     func convertFetchedObjectsInProgress()
 }
 
-// TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
@@ -27,8 +26,6 @@ final class PhotoVideoDataSource: NSObject {
             delegate?.selectedModeDidChange(isSelectingMode)
         }
     }
-    
-//    var selectedIndexPaths = Set<IndexPath>()
     
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
     

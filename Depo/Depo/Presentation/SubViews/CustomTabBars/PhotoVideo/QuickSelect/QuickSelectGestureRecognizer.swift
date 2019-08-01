@@ -9,7 +9,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class QuickSelectGestureRecognizer: UILongPressGestureRecognizer {
+final class QuickSelectGestureRecognizer: UILongPressGestureRecognizer {
     
     private var beginPoint: CGPoint?
     
