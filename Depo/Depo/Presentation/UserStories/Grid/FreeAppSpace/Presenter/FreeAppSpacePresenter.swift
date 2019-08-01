@@ -105,5 +105,8 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         }
         super.getContentWithSuccess(items: items)
     }
-    
+
+    override func stopSelectionWhenDisappear() {
+        // we should not stop selection for FreeUpSpace screen so don't call 'super' logic
+    }
 }
