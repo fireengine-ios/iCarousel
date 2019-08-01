@@ -224,37 +224,46 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             problems.append(.emptyProblem)
         }
         
-        
         if problems.isEmpty {
-            let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
             
-            let emailBody = problem + "\n\n" +
-                String(format: TextConstants.supportFormEmailBody,
-                       name,
-                       surname,
-                       email,
-                       fullPhoneNumber,
-                       versionString,
-                       CoreTelephonyService().operatorName() ?? "",
-                       UIDevice.current.modelName,
-                       UIDevice.current.systemVersion,
-                       Device.locale,
-                       ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
-            
-            let emailSubject: String
-            if fullPhoneNumber.isEmpty {
-                emailSubject = subject
-            } else {
-                emailSubject = "\(fullPhoneNumber) - \(subject)"
+            getUserInfo { quota, quotaUsed, packages, feedbackEmail in
+                let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+                
+                let emailBody = problem + "\n\n" +
+                    String(format: TextConstants.feedbackMailTextFormat,
+                           versionString,
+                           fullPhoneNumber,
+                           CoreTelephonyService().operatorName() ?? "",
+                           UIDevice.current.modelName,
+                           UIDevice.current.systemVersion,
+                           Device.locale,
+                           ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
+                           packages,
+                           quota,
+                           quotaUsed,
+                           name,
+                           surname,
+                           email,
+                           subject)
+                
+                let emailSubject: String
+                if fullPhoneNumber.isEmpty {
+                    emailSubject = subject
+                } else {
+                    emailSubject = "\(fullPhoneNumber) - \(subject)"
+                }
+                
+                Mail.shared().sendEmail(emailBody: emailBody,
+                                        subject: emailSubject,
+                                        emails: [feedbackEmail],
+                                        success: {
+                                            RouterVC().popViewController()
+                }, fail: { error in
+                    UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
+                })
             }
             
-            Mail.shared().sendEmail(emailBody: emailBody,
-                                    subject: emailSubject,
-                                    emails: [TextConstants.NotLocalized.feedbackEmail], success: {
-                                        RouterVC().popViewController()
-            }, fail: { error in
-                UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
-            })
+
         } else {
             problems = problems.sorted(by: { $0.rawValue < $1.rawValue })
             
@@ -327,6 +336,61 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
     private func scrollToView(_ view: UIView) {
         let rect = scrollView.convert(view.frame, to: scrollView)
         scrollView.scrollRectToVisible(rect, animated: true)
+    }
+    
+    private func getUserInfo(_ handler: @escaping (_ quota: Int64, _ quotaUsed: Int64, _ packages: String, _ feedbackEmail: String) -> Void) {
+        
+        var quota: Int64 = 0
+        var quotaUsed: Int64 = 0
+        var packages = ""
+        var feedbackEmail = TextConstants.NotLocalized.feedbackEmail
+        
+        let group = DispatchGroup()
+        let accountService = AccountService()
+        
+        group.enter()
+        accountService.quotaInfo(success: { responce in
+            let quotaInfoResponse = responce as? QuotaInfoResponse
+            quota = quotaInfoResponse?.bytes ?? 0
+            quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
+            group.leave()
+        }, fail: { error in
+            group.leave()
+        })
+        
+        group.enter()
+        accountService.feedbackEmail { response in
+            switch response {
+            case .success(let feedbackResponse):
+                if let value = feedbackResponse.value {
+                    feedbackEmail = value
+                } else {
+                    assertionFailure()
+                }
+                group.leave()
+            case .failed(_):
+                group.leave()
+            }
+        }
+        
+        group.enter()
+        SubscriptionsServiceIml().activeSubscriptions(success: { response in
+            if let subscriptionsResponce = response as? ActiveSubscriptionResponse {
+                packages = subscriptionsResponce.list
+                    .compactMap { $0.subscriptionPlanDisplayName }
+                    .joined(separator: ", ")
+            } else {
+                assertionFailure()
+            }
+            
+            group.leave()
+        }, fail: { error in
+            group.leave()
+        })
+        
+        group.notify(queue: .main) {
+            handler(quota, quotaUsed, packages, feedbackEmail)
+        }
     }
 }
 
