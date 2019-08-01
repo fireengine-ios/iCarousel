@@ -13,7 +13,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     private lazy var freeAppSpace = FreeAppSpace.session
     private lazy var wrapFileService = WrapItemFileService()
     
-    let fileService = FileService()
+    private let fileService = FileService()
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
         if isDeleteRequestRunning {
