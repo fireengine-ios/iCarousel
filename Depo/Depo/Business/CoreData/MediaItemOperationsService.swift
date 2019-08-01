@@ -52,6 +52,19 @@ final class MediaItemOperationsService {
         }
     }
     
+    func deleteRemoteEntities(uuids: [String], completion: BoolHandler?) {
+        guard let remoteMediaItemsPredicate = PredicateRules().predicate(filters: [.localStatus(.nonLocal)]) else {
+            completion?(false)
+            return
+        }
+        let uuidsPredicate = NSPredicate(format: "\(#keyPath(MediaItem.uuid)) IN %@", uuids)
+        let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [remoteMediaItemsPredicate, uuidsPredicate])
+        
+        delete(type: MediaItem.self, predicate: compoundedPredicate, mergeChanges: false) { _ in
+            completion?(true)
+        }
+    }
+    
     private func delete(type: NSManagedObject.Type, predicate: NSPredicate?, mergeChanges: Bool, _ completion: BoolHandler?) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
@@ -294,7 +307,7 @@ final class MediaItemOperationsService {
         let predicate = NSPredicate(format: "self IN %@", ids)
         executeSortedRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
-
+    
     func mediaItemByLocalID(trimmedLocalIDS: [String],
                             context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {
