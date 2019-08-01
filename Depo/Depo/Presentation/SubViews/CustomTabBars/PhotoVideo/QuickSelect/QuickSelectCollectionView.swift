@@ -61,12 +61,17 @@ public class QuickSelectCollectionView: UICollectionView {
     private var isScrolling = false
     
     
-    lazy private var longPressRecognizer: UILongPressGestureRecognizer = {
+    private lazy var longPressRecognizer: QuickSelectGestureRecognizer = {
         let recognizer = QuickSelectGestureRecognizer(target: self, action: #selector(didLongTapChange(_:)))
         recognizer.minimumPressDuration = 0.15
         recognizer.delaysTouchesBegan = true
         return recognizer
     }()
+    
+    private var pointedIndexPath: IndexPath? {
+        let point = longPressRecognizer.location(in: self)
+        return indexPathForItem(at: point)
+    }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -104,21 +109,14 @@ public class QuickSelectCollectionView: UICollectionView {
     }
     
     @objc private func didLongTapChange(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        let point = gestureRecognizer.location(in: self)
-        let pointedIndexPath = indexPathForItem(at: point)
-        
-        guard isQuickSelectAllowed else {
-            if gestureRecognizer.state == .began, pointedIndexPath != nil {
-                longPressDelegate?.didLongPress(at: pointedIndexPath)
-            }
-            return
-        }
-        
         switch gestureRecognizer.state {
         case .began:
             if let indexPath = pointedIndexPath, let cellIsSelected = cellForItem(at: indexPath)?.isSelected {
-                beginIndexPath = indexPath
+                if !isQuickSelectAllowed {
+                    longPressDelegate?.didLongPress(at: pointedIndexPath)
+                }
                 setItem(isSelected: !cellIsSelected, indexPath: indexPath)
+                beginIndexPath = indexPath
                 selectedOriginallyIndexPaths = indexPathsForSelectedItems ?? []
                 selectionMode = cellIsSelected ? .deselecting : .selecting
             } else {
@@ -126,6 +124,7 @@ public class QuickSelectCollectionView: UICollectionView {
             }
         case .changed:
             /// preventing gaps in selection
+            let point = gestureRecognizer.location(in: self)
             if bounds.contains(point) {
                 shouldAutoScroll = true
                 autoScroll()
@@ -144,20 +143,24 @@ public class QuickSelectCollectionView: UICollectionView {
     }
     
 
-    private func updateSelection(till endIndexPath: IndexPath) {
-        guard let startIndexPath = beginIndexPath, startIndexPath != endIndexPath else {
+    private func updateSelection() {
+        guard
+            let startIndexPath = beginIndexPath,
+            let endIndexPath = pointedIndexPath
+        else {
             return
         }
         
-        let upperIndexPath = max(startIndexPath, endIndexPath)
         let lowerIndexPath = min(startIndexPath, endIndexPath)
+        let upperIndexPath = max(startIndexPath, endIndexPath)
+        
         let currentRange = ClosedRange(uncheckedBounds: (lowerIndexPath, upperIndexPath))
         
         guard currentRange != lastAffectedRange else {
             return
         }
         
-//        print(currentRange)
+//        print("range: \(currentRange)")
         
         var positiveIndexPaths = [IndexPath]()
         var negativeIndexPaths = [IndexPath]()
@@ -176,7 +179,7 @@ public class QuickSelectCollectionView: UICollectionView {
             case (let lowerBound, lastRange.upperBound) where lowerBound > lastRange.lowerBound:
                 let negativeRange = ClosedRange(uncheckedBounds: (lastRange.lowerBound, lowerBound))
                 negativeIndexPaths = indexPaths(in: negativeRange)
-//                negativeIndexPaths.removeLast()
+                negativeIndexPaths.removeLast()
                 
             case (let lowerBound, lastRange.upperBound) where lowerBound <= lastRange.lowerBound:
                 let positiveRange = ClosedRange(uncheckedBounds: (lowerBound, lastRange.lowerBound))
@@ -193,8 +196,8 @@ public class QuickSelectCollectionView: UICollectionView {
         positiveIndexPaths.forEach { updateSelection(at: $0, restoring: false) }
         negativeIndexPaths.forEach { updateSelection(at: $0, restoring: true) }
         
-//        print("positive: \(positiveIndexPaths)")
-//        print("negative: \(negativeIndexPaths)")
+//        print("positive range: \(positiveIndexPaths)")
+//        print("negative range: \(negativeIndexPaths)")
         
         lastAffectedRange = currentRange
     }
@@ -234,8 +237,9 @@ public class QuickSelectCollectionView: UICollectionView {
 
         isScrolling = true
         
-        updateCurrentScrollSpeed()
+        updateSelection()
         
+        updateCurrentScrollSpeed()
         scroll { [weak self] in
             guard let self = self else {
                 return
@@ -243,10 +247,7 @@ public class QuickSelectCollectionView: UICollectionView {
             
             self.isScrolling = false
             
-            let point = self.longPressRecognizer.location(in: self)
-            if let pointedIndexPath = self.indexPathForItem(at: point) {
-                self.updateSelection(till: pointedIndexPath)
-            }
+            self.updateSelection()
             
             if self.shouldAutoScroll {
                 self.autoScroll()
