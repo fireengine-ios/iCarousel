@@ -1028,7 +1028,7 @@
 "global_data_permission_agreement" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox. Click for detailed information.";
 "global_data_permission_link" = "Click for detailed information";
 "global_permission_header" = "Global Data Permission";
-"informative_description_label" = "In progress...";
+"informative_description_label" = "Waiting for permission";
 "global_permission_screen_title" = "Global Data Permission";
 
 /*Settings page*/
