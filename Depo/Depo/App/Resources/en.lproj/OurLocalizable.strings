@@ -164,7 +164,7 @@
 "Suggestion" = "Suggestion";
 "Feedback Form" = "For any suggestions or complaints, please contact us:";
 "Thanks for leaving a comment!" = "Contact Us";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nPackages: %@\nTotal Storage: %lld\nUsed Storage: %lld\nName: %@\nSurname: %@\nE-mail: %@\nSubject: %@\n";
 "Upload Photos" = "Upload Photos";
 "Add" = "Add";
 "Albums" = "Albums";
@@ -960,6 +960,7 @@
 "please_enter_your_problem_shortly" = "Please enter your problem shortly";
 "explain_your_problem_shortly" = "Explain your problem shortly";
 "please_enter_msisdn_or_email" = "Please enter phone number or email field";
+"support_form_problem_description" = "We support you in Turkish, English, Arabic languages, so please write your comment in one of these languages";
 "support_form_subject_1" = "Lifebox / I can't login with my e-mail";
 "support_form_subject_2" = "Lifebox / I can't login with my phone number";
 "support_form_subject_3" = "Lifebox / I can't login with my password";
@@ -973,6 +974,19 @@
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
+
+"contact_us_subject_1" = "Lifebox / Rehber  Sorunu";
+"contact_us_subject_2" = "Lifebox / Fotoğraf Sorunu";
+"contact_us_subject_3" = "Lifebox / Video Sorunu";
+"contact_us_subject_4" = "Lifebox / Dosyalar";
+"contact_us_subject_5" = "Lifebox / Kolaj Sorunu";
+"contact_us_subject_6" = "Lifebox / Photopick Sorunu";
+"contact_us_subject_7" = "Lifebox / Otomatik Yedekleme Sorunu";
+"contact_us_subject_8" = "Lifebox / Yüz - Nesne Gruplama";
+"contact_us_subject_9" = "Lifebox / Bağlı Hesaplar";
+"contact_us_subject_10" = "Lifebox / Paket - Kota";
+"contact_us_subject_11" = "Lifebox / Lifebox Dokunmatik ID ve şifre";
+"contact_us_subject_12" = "Lifebox / Bağlantı, Yavaşlık, Donma Sorunu";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
