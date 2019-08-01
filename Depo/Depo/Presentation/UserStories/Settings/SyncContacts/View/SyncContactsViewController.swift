@@ -73,6 +73,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         duplicatedSubTitleLabel.textColor = ColorConstants.textGrayColor
         duplicatedSubTitleLabel.text = TextConstants.settingsBackupContactsViewDuplicatesText
         duplicatedSubTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        duplicatedSubTitleLabel.adjustsFontSizeToFitWidth()
         
         removedCountLabel.textColor = ColorConstants.textLightGrayColor
         removedCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
