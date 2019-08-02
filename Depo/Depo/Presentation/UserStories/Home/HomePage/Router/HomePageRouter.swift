@@ -72,7 +72,10 @@ class HomePageRouter: HomePageRouterInput {
                                                 })
         })
         
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+        let topViewController = UIApplication.topController()
+        if !(topViewController is VerifyEmailPopUp) {
+            topViewController?.present(controller, animated: true, completion: nil)
+        }
     }
     
     // MARK: Utility methods
@@ -90,4 +93,35 @@ class HomePageRouter: HomePageRouterInput {
         }
     }
     
+    func presentEmailVerificationPopUp(delegate: VerifyEmailPopUpDelegate) {
+        let controller = router.verifyEmailPopUp
+        controller.delegate = delegate
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+    }
+    
+    private var ignoredQuotaPopUp: UIViewController?
+    func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType) {
+        let popUp = LargeFullOfQuotaPopUp.popUp(type: type)
+        presentPopUp(popUp)
+    }
+    
+    func presentSmallFullOfQuotaPopUp() {
+        let popUp = SmallFullOfQuotaPopUp()
+        presentPopUp(popUp)
+    }
+    
+    private func presentPopUp(_ popUp: UIViewController) {
+        let topContorller = UIApplication.topController()
+        if topContorller is VerifyEmailPopUp {
+            ignoredQuotaPopUp = popUp
+        } else {
+            topContorller?.present(popUp, animated: true, completion: nil)
+        }
+    }
+    
+    func showIgnoredQuotaPopUpIfNeeded() {
+        if let popUp = ignoredQuotaPopUp {
+            presentPopUp(popUp)
+        }
+    }
 }

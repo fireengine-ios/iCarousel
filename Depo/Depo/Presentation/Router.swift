@@ -950,4 +950,20 @@ class RouterVC: NSObject {
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
         return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
     }
+    
+    var verifyEmailPopUp: VerifyEmailPopUp {
+        let controller = VerifyEmailPopUp(nibName:String(describing: VerifyEmailPopUp.self), bundle: nil)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        return controller
+    }
+    
+    var changeEmailPopUp: ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp(nibName: String(describing: ChangeEmailPopUp.self), bundle: nil)
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        return controller
+    }
 }
