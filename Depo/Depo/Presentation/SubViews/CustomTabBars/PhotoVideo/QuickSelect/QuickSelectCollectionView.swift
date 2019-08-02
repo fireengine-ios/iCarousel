@@ -44,8 +44,8 @@ final class QuickSelectCollectionView: UICollectionView {
     
     // scroll speed
     private var currentScrollSpeed: CGFloat = 0.0
-    private let scrollMinSpeed: CGFloat = 4.0
-    private let scrollSpeedDelta: CGFloat = UIScreen.main.bounds.height
+    private let minScrollSpeed: CGFloat = 4.0
+    private let deltaScrollSpeed: CGFloat = UIScreen.main.bounds.height
     
     private let autoScrollStepTime =  1.0/60.0 // 60 FPS
     private let autoScrollStepsNumber = 8
@@ -276,11 +276,11 @@ final class QuickSelectCollectionView: UICollectionView {
         
         if pointY < topScrollTriggeringInset {
             let ratio = 1 - (pointY / topScrollTriggeringInset)
-            currentScrollSpeed = -(scrollMinSpeed + scrollSpeedDelta * ratio)
+            currentScrollSpeed = -(minScrollSpeed + deltaScrollSpeed * ratio)
         } else if pointY > bottomScrollTriggeringInset {
             let deltaY = pointY - bottomScrollTriggeringInset
             let ratio = deltaY / bottomScrollTriggeringInset
-            currentScrollSpeed = scrollMinSpeed + scrollSpeedDelta * ratio
+            currentScrollSpeed = minScrollSpeed + deltaScrollSpeed * ratio
         } else {
             currentScrollSpeed = 0.0
         }

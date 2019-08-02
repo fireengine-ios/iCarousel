@@ -23,6 +23,7 @@ final class QuickSelectGestureRecognizer: UILongPressGestureRecognizer {
             beginPoint = nil
         }
         
+        /// got through the guard after first move only
         guard
             let view = view,
             let touchPoint = touches.first?.location(in: view),
@@ -31,6 +32,7 @@ final class QuickSelectGestureRecognizer: UILongPressGestureRecognizer {
             return
         }
         
+        /// detect fast swipe
         let deltaY = abs(beginPoint.y - touchPoint.y)
         let deltaX = abs(beginPoint.x - touchPoint.x)
         if deltaY != 0 && deltaY / deltaX > 1 {
