@@ -24,10 +24,6 @@ final class SocialStatusResponse: ObjectRequestResponse {
     var twitter: Bool?
     var instagram: Bool?
     var instagramUsername: String?
-    var spotifyConnected: Bool?
-    var spotifyUserName: String?
-    var spotifyJobStatus: String?
-    var spotifyLastModifiedDate: String?
     var spotifyStatus: SpotifyStatus?
     //var dropbox: Bool?
     

@@ -1000,7 +1000,7 @@
 "global_data_permission_agreement" = "Ich bin damit einverstanden, dass Turkcell meine persönlichen Daten mit kooperierenden Betreibern teilt, damit ich bezüglich dem ‚Lifebox‘ Betreiber von den vorteilhaften Dienstleistungen des betreffenden Betreibers profitieren kann. Klicken Sie hier für ausführliche Informationen.";
 "global_data_permission_link" = "Klicken Sie hier für ausführliche Informationen";
 "global_permission_header" = "Globale Datenerlaubnis";
-"informative_description_label" = "Der Vorgang dauert an...";
+"informative_description_label" = "Warten auf Erlaubnis";
 "global_permission_screen_title" = "Globale Datenerlaubnis";
 
 /*Settings page*/

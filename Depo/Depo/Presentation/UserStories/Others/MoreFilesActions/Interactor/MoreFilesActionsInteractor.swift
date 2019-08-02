@@ -48,26 +48,28 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareSmallSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
+        if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
+            let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareSmallSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            
+            controler.addAction(smallAction)
+            
+            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareOrignalSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            controler.addAction(originalAction)
         }
-        
-        controler.addAction(smallAction)
-        
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareOrignalSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
-        }
-        controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()

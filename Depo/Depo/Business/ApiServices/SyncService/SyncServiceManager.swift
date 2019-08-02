@@ -51,7 +51,7 @@ class SyncServiceManager {
         return (photoSyncService.status == .prepairing || videoSyncService.status == .prepairing)
     }
     
-    private var hasExecutingSync: Bool {
+    var hasExecutingSync: Bool {
         return (photoSyncService.status == .executing || videoSyncService.status == .executing)
     }
     
@@ -312,7 +312,7 @@ extension SyncServiceManager {
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
-            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .waitingForWiFi)
             return
         }
         

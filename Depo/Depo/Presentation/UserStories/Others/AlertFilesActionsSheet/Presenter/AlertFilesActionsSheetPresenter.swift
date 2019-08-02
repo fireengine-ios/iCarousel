@@ -275,14 +275,28 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .download:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
                         MenloworksAppEvents.onDownloadClicked()
-                        self.interactor.download(item: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
+                        
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            self.interactor.download(item: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
                     })
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
+                        
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            self.interactor.delete(item: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
                     })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

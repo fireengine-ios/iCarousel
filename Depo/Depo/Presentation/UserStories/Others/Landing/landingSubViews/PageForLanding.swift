@@ -15,6 +15,7 @@ class PageForLanding: UIViewController {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 31.5)
             titleLabel.textColor = ColorConstants.whiteColor
             titleLabel.text = "Welcome! Let’s get started!"
+            titleLabel.adjustsFontSizeToFitWidth()
         }
     }
     

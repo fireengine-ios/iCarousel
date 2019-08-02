@@ -32,6 +32,11 @@ final class SpotifyAuthViewController: BaseViewController {
         view = webView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        removeCache()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showSpinner()
@@ -62,6 +67,17 @@ final class SpotifyAuthViewController: BaseViewController {
         let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(spotifyAuthCancel))
         navigationItem.leftBarButtonItem = cancelButton
     }
+
+    private func removeCache() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            records.forEach({ record in
+                dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+                                     for: [record],
+                                     completionHandler: {})
+            })
+        }
+    }
 }
 
 extension SpotifyAuthViewController: WKNavigationDelegate {
@@ -80,13 +96,14 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
             decisionHandler(.cancel)
             return
         }
-        
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
             if let facebookCode = spotifyCode.index(of: "&") {
                  spotifyCode = String(spotifyCode[..<facebookCode])
             }
+
             delegate?.spotifyAuthSuccess(with: spotifyCode)
+            removeCache()
         }
         decisionHandler(.allow)
         
