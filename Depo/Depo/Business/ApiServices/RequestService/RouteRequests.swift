@@ -18,7 +18,6 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -56,6 +55,7 @@ struct RouteRequests {
         static let status = spotifyApi +/ "status"
         static let playlists = spotifyApi +/ "playlist"
         static let tracks = spotifyApi +/ "playlist/track"
+        static let disconnect = spotifyApi +/ "disconnect"
     }
     
     static let launchCampaignDetail: URL? = {

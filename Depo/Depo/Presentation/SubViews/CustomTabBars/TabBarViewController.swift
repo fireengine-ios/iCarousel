@@ -882,7 +882,7 @@ extension TabBarViewController: TabBarActionHandler {
             case .playListsResponseResult(let playListResponseResult):
                 self?.playListResponseResultHandler(playListsResponseResult: playListResponseResult)
             case .error(let error):
-                //Temporary logic for error handling
+                //TODO: Temporary logic for error handling
                 print(error.localizedDescription)
             }
         }
@@ -891,10 +891,10 @@ extension TabBarViewController: TabBarActionHandler {
     private func playListResponseResultHandler(playListsResponseResult: ResponseResult<[SpotifyPlaylist]> ) {
         switch playListsResponseResult {
         case .success(let playLists):
-            // Present list of play lists
+            //TODO: Present list of play lists
             print(playLists.count)
         case .failed(let error):
-            //Temporary logic for Error Handling
+            //TODO: Temporary logic for Error Handling
             print(error.localizedDescription)
         }
     }
@@ -906,7 +906,7 @@ extension TabBarViewController: TabBarActionHandler {
             let vc = router.spotifyAuthWebViewController(url: url)
             router.pushViewController(viewController: vc)
         case .failed(let error):
-            //Temporary logic for Error Handling
+            //TODO: Temporary logic for Error Handling
             print(error.localizedDescription)
         }
     }

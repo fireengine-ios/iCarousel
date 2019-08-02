@@ -11,6 +11,7 @@ import SwiftyJSON
 
 protocol SpotifyService: class {
     func connect(code: String, handler: @escaping ResponseVoid)
+    func disconnect(handler: @escaping ResponseVoid)
     func start(playlistId: Int,  handler: @escaping ResponseVoid)
     func stop(handler: @escaping ResponseVoid)
     func getAuthUrl(handler: @escaping ResponseHandler<URL>)
@@ -245,6 +246,15 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                     handler(.failed(backendError ?? error))
                 }
         }
+    }
+    
+    func disconnect(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Spotify.disconnect,
+                     method: .post,
+                     encoding: URLEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
     }
 
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>) {

@@ -27,6 +27,11 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
         view = webView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        removeCache()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showSpinner()
@@ -70,18 +75,44 @@ final class SpotifyAuthViewController: ViewController, ControlTabBarProtocol {
         navigationItem.leftBarButtonItem = cancelButton
     }
     
-    private func terminateAuthProcess(code: String) {
-        spotifyRoutingService.terminationAuthProcess(code: code) { [weak self] playListsRequestResult in
-            switch playListsRequestResult {
-            case .success(let playLists):
-                //Logic for present tableView with playLists
-                print(playLists.count)
+    private func removeCache() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            records.forEach({ record in
+                dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+                                     for: [record],
+                                     completionHandler: {})
+            })
+        }
+        
+    }
+    
+    private func connect(code: String) {
+        spotifyRoutingService.connect(code: code) { response in
+            switch response {
+            case .success:
+            //TODO: show screen with playlists
+                print(response)
             case .failed(let error):
-                //Logic for error handling
-                print(error.localizedDescription)
+            //TODO: Add error handling
+                print(error)
             }
         }
     }
+    
+    //TODO: Delete if not needed
+//    private func finishAuthProcess(code: String) {
+//        spotifyRoutingService.terminationAuthProcess(code: code) { [weak self] playListsRequestResult in
+//            switch playListsRequestResult {
+//            case .success(let playLists):
+//                //TODO: Logic for present tableView with playLists
+//                print(playLists.count)
+//            case .failed(let error):
+//                //TODO: Logic for error handling
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
 }
 
 extension SpotifyAuthViewController: WKNavigationDelegate {
@@ -100,13 +131,15 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
             decisionHandler(.cancel)
             return
         }
-        
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
             if let facebookCode = spotifyCode.index(of: "&") {
                  spotifyCode = String(spotifyCode[..<facebookCode])
             }
-            terminateAuthProcess(code: spotifyCode)
+            //TODO: Delete if not needed
+//            finishAuthProcess(code: spotifyCode)
+            connect(code: spotifyCode)
+            removeCache()
         }
         decisionHandler(.allow)
     }
