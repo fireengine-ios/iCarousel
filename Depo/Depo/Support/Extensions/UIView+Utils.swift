@@ -32,18 +32,17 @@ extension UIView {
     }
     
     /// returns all subviews except self
-    func allSubviews<T>(where: T.Type) -> [T] {
-        var all = [T]()
+    func allSubviews<T: UIView>(of: T.Type) -> [T] {
+        var typeSubviews = [T]()
         
-        func getSubview(view: UIView) {
-            print(view)
-            if view != self, let view_ = view as? T {
-                all.append(view_)
+        func checkViewForType(_ view: UIView) {
+            if let view = view as? T {
+                typeSubviews.append(view)
             }
-            view.subviews.forEach { getSubview(view: $0) }
+            view.subviews.forEach { checkViewForType($0) }
         }
         
-        getSubview(view: self)
-        return all
+        subviews.forEach { checkViewForType($0) }
+        return typeSubviews
     }
 }

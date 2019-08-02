@@ -14,7 +14,7 @@ final class SegmentedControl: UISegmentedControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        allSubviews(where: UILabel.self)
+        allSubviews(of: UILabel.self)
             .forEach { $0.adjustsFontSizeToFitWidth() }
     }
 }
