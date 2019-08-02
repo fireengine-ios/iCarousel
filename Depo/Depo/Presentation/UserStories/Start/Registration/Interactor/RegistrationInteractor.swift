@@ -105,6 +105,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self?.analyticsService.track(event: .signUp)
                 self?.analyticsService.trackSignupEvent()
                 
+                SingletonStorage.shared.isJustRegistered = true
                 self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
             }
             }, fail: { [weak self] errorResponce in
