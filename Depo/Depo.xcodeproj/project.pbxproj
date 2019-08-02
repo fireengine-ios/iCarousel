@@ -3582,6 +3582,9 @@
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
+		CE3D5D6822F4793D009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		CE3D5D6922F479C0009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		CE3D5D6A22F479C1009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
 		CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
@@ -8050,6 +8053,7 @@
 		CE3AF76F1F01D63D002AD17C /* EULAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAService.swift; sourceTree = "<group>"; };
 		CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		CE3B3AF0202888240002558C /* OrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
+		CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		CE3E4D05201B11BF00173045 /* PVViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVViewerController.swift; sourceTree = "<group>"; };
 		CE3E4D06201B11BF00173045 /* PVViewerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PVViewerController.xib; sourceTree = "<group>"; };
 		CE3E4D0A201B63A800173045 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
@@ -15310,6 +15314,7 @@
 		CEFFA8F121AFC21C00B34F36 /* SegmentedController */ = {
 			isa = PBXGroup;
 			children = (
+				CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */,
 				CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */,
 				CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */,
 				CE292C2F21C2419C004FC745 /* PassthroughView.swift */,
