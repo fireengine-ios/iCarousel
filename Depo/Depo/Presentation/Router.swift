@@ -961,10 +961,17 @@ class RouterVC: NSObject {
     }
     
     var changeEmailPopUp: ChangeEmailPopUp {
-        let controller = ChangeEmailPopUp(nibName: String(describing: ChangeEmailPopUp.self), bundle: nil)
+        let controller = ChangeEmailPopUp()
         
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
+    }
+    
+    func spotifyAuthWebViewController(url: URL) -> UIViewController {
+        let controller = SpotifyAuthViewController()
+        controller.loadWebView(with: url)
         return controller
     }
 }

@@ -187,7 +187,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
 
     func verifyEmailIfNeeded() {
-        if true {//let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
+        if let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
             router.presentEmailVerificationPopUp(delegate: self)
         }
     }
