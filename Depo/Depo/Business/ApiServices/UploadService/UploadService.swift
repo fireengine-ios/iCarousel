@@ -174,7 +174,12 @@ final class UploadService: BaseRequestService {
     private func showSyncCardProgress() {
         WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
         
-        guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount, autoSyncStorage.settings.isAutoSyncEnabled else {
+        guard
+            allSyncOperationsCount != 0,
+            allSyncOperationsCount != finishedSyncOperationsCount,
+            autoSyncStorage.settings.isAutoSyncEnabled,
+            SyncServiceManager.shared.hasExecutingSync
+        else {
             clearSyncCounters()
             return
         }
