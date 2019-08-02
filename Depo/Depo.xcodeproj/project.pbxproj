@@ -3160,6 +3160,12 @@
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
+		B557674822E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */; };
+		B557674922E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */; };
+		B557674A22E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */; };
+		B557674C22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
+		B557674D22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
+		B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
@@ -7770,6 +7776,8 @@
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
+		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
+		B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectGestureRecognizer.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
@@ -12184,6 +12192,7 @@
 		8C20862D228D4B2E000BEDAD /* PhotoVideo */ = {
 			isa = PBXGroup;
 			children = (
+				B557674622E99F8500C86E2F /* QuickSelect */,
 				8C20862E228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift */,
 				8C20862F228D4B2E000BEDAD /* ScrollBarView.swift */,
 				8C208630228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift */,
@@ -13400,6 +13409,15 @@
 				B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		B557674622E99F8500C86E2F /* QuickSelect */ = {
+			isa = PBXGroup;
+			children = (
+				B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */,
+				B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */,
+			);
+			path = QuickSelect;
 			sourceTree = "<group>";
 		};
 		B56FBB102122C191004F4A59 /* TermsOfUse */ = {
@@ -18922,6 +18940,7 @@
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				8C208656228D4B2E000BEDAD /* AssetFileCacheManager.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
+				B557674922E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
@@ -20029,6 +20048,7 @@
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
+				B557674D22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				B56FBB262122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
 				9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
 				8C0E8FAB1FDEBDFF00789C91 /* AlbumDetailInitializer.swift in Sources */,
@@ -20699,6 +20719,7 @@
 				D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */,
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
+				B557674822E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
@@ -21510,6 +21531,7 @@
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
+				B557674C22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
 				4A9B390E201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
@@ -21918,6 +21940,7 @@
 				8C86111A22BCFDEB00108958 /* PermissionViewController.swift in Sources */,
 				CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */,
 				8C1E5BEC22CB8D1C008FDA02 /* QuickScrollService.swift in Sources */,
+				B557674A22E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
 				CE7848EF22A685FB00662219 /* LoginSettingsInitializer.swift in Sources */,
 				CE7848F022A685FB00662219 /* HelpAndSupportConfigurator.swift in Sources */,
 				CE7848F122A685FB00662219 /* Configuration.m in Sources */,
@@ -22022,6 +22045,7 @@
 				CE78495322A685FB00662219 /* LoginInitializer.swift in Sources */,
 				CE78495422A685FB00662219 /* PremiumInteractorOutput.swift in Sources */,
 				CE78495522A685FB00662219 /* FaceImageItemsRouter.swift in Sources */,
+				B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				CE78495622A685FB00662219 /* Factory.swift in Sources */,
 				CE78495722A685FB00662219 /* Contact.m in Sources */,
 				CE78495822A685FB00662219 /* UploadFromLifeBoxRouterInput.swift in Sources */,

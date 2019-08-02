@@ -133,16 +133,29 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
-                self.interactor.delete(item: selectedItems)
-                self.basePassingPresenter?.stopModeSelected()
+                
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.delete(item: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .deleteFaceImage:
                 MenloworksAppEvents.onDeleteClicked()
                 self.interactor.delete(item: selectedItems)
                 self.basePassingPresenter?.stopModeSelected()
             case .download:
                 MenloworksAppEvents.onDownloadClicked()
-                self.basePassingPresenter?.stopModeSelected()
-                self.interactor.download(item: selectedItems)
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.basePassingPresenter?.stopModeSelected()
+                    self.interactor.download(item: selectedItems)
+                } else {
+                    let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .edit:
                 MenloworksTagsService.shared.onEditClicked()
                 RouterVC().getViewControllerForPresent()?.showSpinner()
