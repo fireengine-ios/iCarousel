@@ -831,7 +831,7 @@ enum GAEventLabel {
             case .uploadFromAppFavorites:
                 return "Upload from \(TextConstants.NotLocalized.appName) Favorites"
             case .importFromSpotify:
-                return "Import from Spotify"
+                return "Import From Spotify"
             }
         case .shareViaLink:
             return "Share via Link"

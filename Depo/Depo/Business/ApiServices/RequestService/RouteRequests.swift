@@ -47,6 +47,17 @@ struct RouteRequests {
         }
     }()
     
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = spotifyApi +/ "playlist/track"
+    }
+    
     static let launchCampaignDetail: URL? = {
         switch currentServerEnvironment {
         case .test:

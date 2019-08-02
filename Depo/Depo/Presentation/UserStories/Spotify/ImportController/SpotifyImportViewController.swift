@@ -139,6 +139,6 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     }
     
     @objc private func onImportInBackground() {
-        spotifyService.importDelegates.invoke(invocation: { $0.sendImportToBackground() })
+        spotifyService.delegates.invoke(invocation: { $0.sendImportToBackground() })
     }
 }

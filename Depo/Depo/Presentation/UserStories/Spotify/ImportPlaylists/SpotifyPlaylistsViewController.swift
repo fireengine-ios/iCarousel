@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol SpotifyPlaylistsViewControllerDelegate: class {
+    func onOpenPlaylist(_ playlist: SpotifyPlaylist)
+    func onImport(playlists: [SpotifyPlaylist])
+    func onShowImported()
+}
+
 final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var successImportView: UIView!
@@ -52,10 +58,12 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     private let pageSize = 20
     private var isLoadingNextPage = false
     
+    weak var delegate: SpotifyPlaylistsViewControllerDelegate?
+    
     // MARK: - View lifecycle
     
     deinit {
-        spotifyService.importDelegates.remove(self)
+        spotifyService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
@@ -65,7 +73,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         navbarManager.setSelectionState()
         loadNextPage()
         
-        spotifyService.importDelegates.add(self)
+        spotifyService.delegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,24 +114,10 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     @IBAction private func importSelected(_ sender: UIButton) {
         if dataSource.isSelectionStateActive {
-            showOverwritePopup()
+            delegate?.onImport(playlists: dataSource.selectedItems)
         } else {
-            dismiss(animated: true)
+            delegate?.onShowImported()
         }
-    }
-    
-    private func showOverwritePopup() {
-        let popup = router.spotifyOverwritePopup { [weak self] in
-            self?.importPlaylists()
-        }
-        present(popup, animated: true)
-    }
-    
-    private func importPlaylists() {
-        let controller = router.spotifyImportController(playlists: dataSource.selectedItems)
-        let navigationController = NavigationController(rootViewController: controller)
-        navigationController.navigationBar.isHidden = false
-        present(navigationController, animated: true)
     }
 }
 
@@ -136,9 +130,7 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
         guard let playlist = item as? SpotifyPlaylist else {
             return
         }
-        
-        let controller = router.spotifyTracksController(playlist: playlist)
-        show(controller, sender: nil)
+        delegate?.onOpenPlaylist(playlist)
     }
 
     func needLoadNextPage() {
@@ -155,7 +147,7 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
 extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func onSelectAll() {
@@ -163,13 +155,13 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
     }
     
     func onDone() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
 
-// MARK: -
+// MARK: - SpotifyServiceDelegate
 
-extension SpotifyPlaylistsViewController: SpotifyImportDelegate {
+extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
@@ -184,10 +176,8 @@ extension SpotifyPlaylistsViewController: SpotifyImportDelegate {
         view.layoutIfNeeded()
     }
     
-    func sendImportToBackground() {
-        router.tabBarVC?.dismiss(animated: true)
-    }
-    
-    func importDidCanceled() { }
-    func importDidFailed(error: Error) { }
+    func sendImportToBackground() {}
+    func importDidCanceled() {}
+    func importDidFailed(error: Error) {}
+    func spotifyStatusDidChange() {}
 }

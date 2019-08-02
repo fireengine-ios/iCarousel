@@ -261,6 +261,7 @@
 "Import From Instagram" = "Import from Instagram";
 "Import From Facebook" = "Import from Facebook";
 "Import From Dropbox" = "Import from Dropbox";
+"import_from_spotify" = "Import from Spotify";
 "Import Photos" = "Import Photos";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
@@ -330,6 +331,8 @@
 "cog" = "cog";
 "more" = "more";
 "Create album" = "Create album";
+"import_from_spotify_btn" = "Import From Spotify";
+"import_from_spotify_title" = "Connect Spotify";
 "Sync Contacts" = "Contact Sync";
 "Favorites" = "Favorites";
 "All Files" = "All Files";
@@ -842,6 +845,7 @@
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
+"Spotify" = "Spotify";
 "connected_as_format" = "Connected account:  @%@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
 "instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
@@ -858,8 +862,10 @@
 "work_will_introduced" = "There is currently maintenance ongoing on lifebox, please try again later.\n";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
+"spotify_remove_connection_warning_title" = "You're about to remove your Spotify connection.";
 "facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
 "dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
+"spotify_remove_connection_warning_message" = "Are you sure you want to remove your Spotify connection?\n\n";
 "remove_connection" = "Remove Connection";
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";

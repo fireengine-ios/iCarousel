@@ -70,7 +70,7 @@ final class SpotifyPlaylistsNavbarManager {
     
     func setSuccessImportState() {
         delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
-        delegate?.setLeftBarButtonItems(nil, animated: true)
+        delegate?.setLeftBarButtonItems([UIBarButtonItem()], animated: false)
         delegate?.setRightBarButtonItems([doneAsBackButton], animated: true)
     }
     

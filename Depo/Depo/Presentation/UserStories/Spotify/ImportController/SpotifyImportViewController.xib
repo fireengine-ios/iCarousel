@@ -34,7 +34,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotiLogo" translatesAutoresizingMaskIntoConstraints="NO" id="apf-7Y-k6U">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify_logo" translatesAutoresizingMaskIntoConstraints="NO" id="apf-7Y-k6U">
                             <rect key="frame" x="76.5" y="240" width="64" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="apf-7Y-k6U" secondAttribute="height" multiplier="1:1" id="IUn-mw-QQ0"/>
@@ -118,6 +118,6 @@
     <resources>
         <image name="dark_logo" width="66" height="64"/>
         <image name="dot_arrow" width="68" height="14"/>
-        <image name="spotiLogo" width="1024" height="1024"/>
+        <image name="spotify_logo" width="1024" height="1024"/>
     </resources>
 </document>

@@ -67,6 +67,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
@@ -75,6 +76,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
     fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var spotifyRoutingService = SpotifyRoutingService()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -461,8 +463,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
-        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotify, imageName: "ImportFromSpotify", asLeft: false)
-        importFromSpotify?.changeVisability(toHidden: true)
+        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "ImportFromSpotify", asLeft: true)
+        importFromSpotify.changeVisability(toHidden: true)
         
         mainContentView.bringSubview(toFront: plussButton)
     }
@@ -868,12 +870,21 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
-            let controller = router.spotifyPlaylistsController()
-            let navigationController = NavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = false
-            router.presentViewController(controller: navigationController)
+            spotifyRoutingService.connectToSpotify()
         }
     }
+    
+//    private func connectToSpotify() {
+//        spotifyRoutingService.connectToSpotify { result in
+//            switch result {
+//            case .success(let controller):
+//                RouterVC().pushViewController(viewController: controller)
+//            case .failed(let error):
+//                //TODO: Temporary logic for Error Handling
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     private func checkReadOnlyPermission() -> Bool {
         if let currentVC = currentViewController as? AlbumDetailViewController,

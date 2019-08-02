@@ -89,7 +89,7 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return showOnlySelected ? selectedItems.count : items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
