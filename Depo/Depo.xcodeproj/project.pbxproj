@@ -303,11 +303,29 @@
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
+		73B4077122E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
+		73B4077222E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */; };
+		73B4077522E9C0E10033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
+		73B4077622E9C0E10033D317 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
+		73B4077722E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
+		73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
+		73B4077D22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077B22E9D9170033D317 /* SpotifyAuthViewController.swift */; };
+		73B4077E22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077B22E9D9170033D317 /* SpotifyAuthViewController.swift */; };
+		73B4077F22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077B22E9D9170033D317 /* SpotifyAuthViewController.swift */; };
+		73B4078022E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077C22E9D9170033D317 /* SpotifyAuthViewController.xib */; };
+		73B4078122E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077C22E9D9170033D317 /* SpotifyAuthViewController.xib */; };
+		73B4078222E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077C22E9D9170033D317 /* SpotifyAuthViewController.xib */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
 		73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
+		73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */; };
+		73EA16FD22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */; };
+		73EA16FE22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */; };
+		73EA170122EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */; };
+		73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */; };
+		73EA170322EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */; };
 		73FE51EE22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51EF22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
@@ -2784,12 +2802,6 @@
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
-		8CBF58FD22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
-		8CBF58FE22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
-		8CBF58FF22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */; };
-		8CBF590122DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
-		8CBF590222DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
-		8CBF590322DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -6356,11 +6368,19 @@
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
 		73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
+		73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAccountConnectionCell.swift; sourceTree = "<group>"; };
+		73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyAccountConnectionCell.xib; sourceTree = "<group>"; };
+		73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsCheckboxTextView.swift; path = Depo/Presentation/UserStories/Start/TermsAndServices/View/TermsCheckboxTextView.swift; sourceTree = SOURCE_ROOT; };
+		73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsCheckboxTextView.xib; path = Depo/Presentation/UserStories/Start/TermsAndServices/View/TermsCheckboxTextView.xib; sourceTree = SOURCE_ROOT; };
+		73B4077B22E9D9170033D317 /* SpotifyAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthViewController.swift; sourceTree = "<group>"; };
+		73B4077C22E9D9170033D317 /* SpotifyAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyAuthViewController.xib; sourceTree = "<group>"; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthErrorResponse.swift; sourceTree = "<group>"; };
+		73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyService.swift; sourceTree = "<group>"; };
+		73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyRoutingService.swift; sourceTree = "<group>"; };
 		73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryAudioSelectionItemViewController.xib; sourceTree = "<group>"; };
 		73FE51EB22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemViewController.swift; sourceTree = "<group>"; };
 		73FE51EC22CF5D8700270448 /* CreateStoryAudioSelectionItemDesigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryAudioSelectionItemDesigner.swift; sourceTree = "<group>"; };
@@ -7520,8 +7540,6 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
-		8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsCheckboxTextView.xib; sourceTree = "<group>"; };
-		8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsCheckboxTextView.swift; sourceTree = "<group>"; };
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
@@ -9901,6 +9919,39 @@
 			name = TermsDescription;
 			sourceTree = "<group>";
 		};
+		73B4077922E9D8B80033D317 /* MusicImport */ = {
+			isa = PBXGroup;
+			children = (
+				73B4077A22E9D8D80033D317 /* SpotifyAuth */,
+			);
+			path = MusicImport;
+			sourceTree = "<group>";
+		};
+		73B4077A22E9D8D80033D317 /* SpotifyAuth */ = {
+			isa = PBXGroup;
+			children = (
+				73B4077B22E9D9170033D317 /* SpotifyAuthViewController.swift */,
+				73B4077C22E9D9170033D317 /* SpotifyAuthViewController.xib */,
+			);
+			path = SpotifyAuth;
+			sourceTree = "<group>";
+		};
+		73EA16FA22EB26AB00BAD2D3 /* SpotifyService */ = {
+			isa = PBXGroup;
+			children = (
+				73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */,
+			);
+			path = SpotifyService;
+			sourceTree = "<group>";
+		};
+		73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */ = {
+			isa = PBXGroup;
+			children = (
+				73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */,
+			);
+			path = SpotifyRoutingService;
+			sourceTree = "<group>";
+		};
 		73FE51E922CF5D6A00270448 /* SelectAudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -10069,9 +10120,9 @@
 				E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */,
 				BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */,
 				E5F0F170EDB776DE7E055F18 /* TermsAndServicesViewController.swift */,
+				73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */,
+				73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */,
 				8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */,
-				8CBF58FC22DDE56300966E54 /* TermsCheckboxTextView.xib */,
-				8CBF590022DDF9F600966E54 /* TermsCheckboxTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10849,6 +10900,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
 				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
 				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
 				A222450D21D3C53A006EB432 /* PremiumService */,
@@ -13503,6 +13555,8 @@
 		B5AB5B6121F9AF95003AABB4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */,
+				73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */,
 				B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */,
 				B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */,
 				B5AB5B6821F9B029003AABB4 /* FacebookAccountConnectionCell.swift */,
@@ -14291,6 +14345,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				73B4077922E9D8B80033D317 /* MusicImport */,
 				4BF3A67A22B23CCE0082130F /* Permissions */,
 				B5AB5B5321F9A90C003AABB4 /* ConnectedAccounts */,
 				B56FBB102122C191004F4A59 /* TermsOfUse */,
@@ -14522,6 +14577,7 @@
 		CE6DE7421FCBE84000C23CBD /* Socials */ = {
 			isa = PBXGroup;
 			children = (
+				73EA16FA22EB26AB00BAD2D3 /* SpotifyService */,
 				CE6DE7431FCBE84000C23CBD /* DropboxService */,
 				CE6DE7481FCBE84100C23CBD /* InstagramService */,
 				CE6DE74C1FCBE84100C23CBD /* FBService */,
@@ -16341,6 +16397,7 @@
 				7CA4A168207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AF692008AD70003D8E05 /* duz_cizgi@3x.png in Resources */,
 				8C06B0DF2008AD71003D8E05 /* sample_red@3x.png in Resources */,
+				73B4078122E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */,
 				8C06B10D2008AD72003D8E05 /* status_badge@2x.png in Resources */,
 				8C06B1932008AD72003D8E05 /* undo@2x.png in Resources */,
 				8C06AC232008AAFB003D8E05 /* TextEnterController.xib in Resources */,
@@ -16511,7 +16568,6 @@
 				8C06AEFB2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06AF512008AD70003D8E05 /* cropy_icon.png in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
-				8CBF58FE22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				8C06AFB12008AD71003D8E05 /* frekans@2x.png in Resources */,
 				8C06B0312008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06B0892008AD71003D8E05 /* paylas_twitter.png in Resources */,
@@ -17069,12 +17125,14 @@
 				8C06AEFA2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06B17E2008AD72003D8E05 /* turuncu.png in Resources */,
 				8C06B00E2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
+				73B4077222E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib in Resources */,
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				8C06B1B82008AD72003D8E05 /* CRYUserContractViewController.nib in Resources */,
 				8C06AF822008AD70003D8E05 /* error_icon@3x.png in Resources */,
 				8C06B06A2008AD71003D8E05 /* paylas_diger.png in Resources */,
 				8C06B13E2008AD72003D8E05 /* tahta_yeni@3x.png in Resources */,
 				8C06B08C2008AD71003D8E05 /* paylas_twitter@3x.png in Resources */,
+				73B4078022E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */,
 				8C06AF782008AD70003D8E05 /* edit_selected.png in Resources */,
 				8C06B01C2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1082008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
@@ -17185,7 +17243,6 @@
 				8C208653228D4B2E000BEDAD /* PhotoVideoCell.xib in Resources */,
 				4A9B3911201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
-				8CBF58FD22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				8C06B12A2008AD72003D8E05 /* t_kucuk_selected@2x.png in Resources */,
 				8C06B0302008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06AFE22008AD71003D8E05 /* italic_secili@3x.png in Resources */,
@@ -17370,6 +17427,7 @@
 				4A9F8E4E2087546500622A6C /* PeriodicContactSyncViewController.xib in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
 				92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
+				73B4077622E9C0E10033D317 /* TermsCheckboxTextView.xib in Resources */,
 				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
 				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
@@ -17809,7 +17867,6 @@
 				CE784D6A22A685FB00662219 /* SmartAlbumCell.xib in Resources */,
 				CE784D6B22A685FB00662219 /* t_kucuk_selected@2x.png in Resources */,
 				CE784D6C22A685FB00662219 /* ok_selected@2x.png in Resources */,
-				8CBF58FF22DDE56300966E54 /* TermsCheckboxTextView.xib in Resources */,
 				CE784D6D22A685FB00662219 /* italic_secili@3x.png in Resources */,
 				CE784D6E22A685FB00662219 /* t_kucuk.png in Resources */,
 				CE784D6F22A685FB00662219 /* slider_thumb2@2x.png in Resources */,
@@ -18184,6 +18241,7 @@
 				CE784ED822A685FB00662219 /* ProfilePhoneEnterView.xib in Resources */,
 				CE784ED922A685FB00662219 /* toolbar_undo_icon.png in Resources */,
 				CE784EDA22A685FB00662219 /* lookup_soft_elegance_1.png in Resources */,
+				73B4078222E9D9170033D317 /* SpotifyAuthViewController.xib in Resources */,
 				CE784EDB22A685FB00662219 /* cizgi_1_selected@2x.png in Resources */,
 				CE784EDC22A685FB00662219 /* oval_siyah@2x.png in Resources */,
 				CE784EDD22A685FB00662219 /* paylas_akilli_depo@3x.png in Resources */,
@@ -19019,7 +19077,6 @@
 				8C208650228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift in Sources */,
 				8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
-				8CBF590222DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
 				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
@@ -19158,6 +19215,7 @@
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
 				8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				89E51D5A22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
+				73B4077E22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */,
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
@@ -19310,6 +19368,7 @@
 				8C0E8D9C1FDEBDFF00789C91 /* UserProfileInteractorInput.swift in Sources */,
 				CEF371A920887806007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
+				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				8C0E8D9E1FDEBDFF00789C91 /* AutoSyncDataSource.swift in Sources */,
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
@@ -19517,6 +19576,7 @@
 				730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
+				73EA16FD22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
 				8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */,
@@ -19844,6 +19904,7 @@
 				8C0E8F361FDEBDFF00789C91 /* SplashPresenter.swift in Sources */,
 				8C0B91AE20170ECA00A5BA81 /* ManageContactsInteractorOutput.swift in Sources */,
 				8C0E8F371FDEBDFF00789C91 /* GeneralFilesFiltration.swift in Sources */,
+				73B4077722E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */,
 				8C975E18220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */,
 				8C0E8F381FDEBDFF00789C91 /* SearchViewInteractorOutput.swift in Sources */,
 				8C0E8F391FDEBDFF00789C91 /* SplashInteractorInput.swift in Sources */,
@@ -20563,6 +20624,7 @@
 				2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */,
 				CE51ABC61EF90853005DCEE0 /* AutoSyncModel.swift in Sources */,
 				B5781BD0210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */,
+				73B4077D22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */,
 				CE23A0FA205FF5AE0048267D /* Images.swift in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
 				B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */,
@@ -20727,6 +20789,7 @@
 				8C20865F228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
 				CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */,
+				73EA170122EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				8C00971E1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
@@ -20823,6 +20886,7 @@
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				89E51D4F22CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
+				73B4077522E9C0E10033D317 /* TermsCheckboxTextView.swift in Sources */,
 				8C20865B228D4B2E000BEDAD /* PhotoVideoCell.swift in Sources */,
 				CE51ACCA1EF90853005DCEE0 /* RegistrationInteractorOutput.swift in Sources */,
 				7C0750F620BD83A800FD1FA2 /* MaskService.swift in Sources */,
@@ -21009,6 +21073,7 @@
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
+				73B4077122E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift in Sources */,
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
 				8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
@@ -21178,6 +21243,7 @@
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				A217E43421A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
+				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
@@ -21573,7 +21639,6 @@
 				17589F7A2276336800A5DB37 /* ProfileTextEnterView.swift in Sources */,
 				92004B6021AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
-				8CBF590122DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				4BF3A69422B3822E0082130F /* PermissionsDesigner.swift in Sources */,
@@ -21763,6 +21828,7 @@
 				CE78483C22A685FB00662219 /* SeacrhViewRouter.swift in Sources */,
 				CE78483D22A685FB00662219 /* AutoSyncRoutingService.swift in Sources */,
 				8C1E5BDB22CB8C09008FDA02 /* PhotoVideoCollectionViewManager.swift in Sources */,
+				73EA16FE22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
@@ -21951,6 +22017,7 @@
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				73B4077F22E9D9170033D317 /* SpotifyAuthViewController.swift in Sources */,
 				730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CE7848F922A685FB00662219 /* MenloworksAppEvents.swift in Sources */,
 				CE7848FA22A685FB00662219 /* ManageContactsRouterInput.swift in Sources */,
@@ -22123,6 +22190,7 @@
 				CE78499F22A685FB00662219 /* PremiumInfoCard.swift in Sources */,
 				CE7849A022A685FB00662219 /* RegistrationPresenter.swift in Sources */,
 				CE7849A122A685FB00662219 /* InstaPickDetailViewController.swift in Sources */,
+				73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */,
 				CE7849A222A685FB00662219 /* DuplicatedContactsInteractorInput.swift in Sources */,
 				CE7849A322A685FB00662219 /* RegistrationInteractorInput.swift in Sources */,
 				CE7849A422A685FB00662219 /* CollectionViewHeaderWithText.swift in Sources */,
@@ -22682,6 +22750,7 @@
 				CE784BC922A685FB00662219 /* DocumentsGreedPresenter.swift in Sources */,
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,
 				CE784BCB22A685FB00662219 /* PeopleService.swift in Sources */,
+				73EA170322EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				CE784BCC22A685FB00662219 /* UsageInfoRouter.swift in Sources */,
 				CE784BCD22A685FB00662219 /* AppConfigurator.swift in Sources */,
 				CE784BCE22A685FB00662219 /* InstaPickRoutingService.swift in Sources */,
@@ -22830,7 +22899,6 @@
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
-				8CBF590322DDF9F600966E54 /* TermsCheckboxTextView.swift in Sources */,
 				CE784C5722A685FB00662219 /* UIView+Utils.swift in Sources */,
 				CE784C5822A685FB00662219 /* VolumeSlider.swift in Sources */,
 				CE784C5922A685FB00662219 /* StoriesDataSourceForCollectionView.swift in Sources */,
@@ -23538,9 +23606,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -23591,8 +23659,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
@@ -24273,7 +24341,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "52b5918a-a4d4-46b1-8d0e-ea8dae0cf925";
+				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;

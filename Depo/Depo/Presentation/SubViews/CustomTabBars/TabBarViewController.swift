@@ -17,6 +17,7 @@ enum FloatingButtonsType {
     case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
+    case importFromSpotify
 }
 
 enum TabScreenIndex: Int {
@@ -66,6 +67,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
@@ -441,6 +443,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         photoBtn = createSubButton(withText: TextConstants.takePhoto, imageName: "TakeFhoto", asLeft: true)
         photoBtn?.changeVisability(toHidden: true)
         
+        importFromSpotifyBtn = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "importFromSpotify", asLeft: true)
+        importFromSpotifyBtn.changeVisability(toHidden: true)
+        
         uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
         uploadBtn?.changeVisability(toHidden: true)
         
@@ -509,6 +514,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifebox)
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
+            case .importFromSpotify:
+                buttonsArray.append(importFromSpotifyBtn)
             }
         }
         
@@ -528,6 +535,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
+        buttonsArray.append(importFromSpotifyBtn)
         return buttonsArray
     }
     
@@ -707,6 +715,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromApp
         case uploadFromLifeboxFavorites:
             action = .uploadFromAppFavorites
+        case importFromSpotifyBtn:
+            action = .importFromSpotify
         default:
             return
         }
@@ -857,6 +867,47 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
+            
+        case .importFromSpotify:
+            connectToSpotify()
+        }
+    }
+    
+    private func connectToSpotify() {
+        let service = SpotifyRoutingService()
+        service.connectToSpotify { [weak self] result in
+            switch result {
+            case .urlResponseResult(let urlResponseResult):
+                self?.urlResponseResultHandler(urlResponseResult: urlResponseResult)
+            case .playListsResponseResult(let playListResponseResult):
+                self?.playListResponseResultHandler(playListsResponseResult: playListResponseResult)
+            case .error(let error):
+                //TODO: Temporary logic for error handling
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func playListResponseResultHandler(playListsResponseResult: ResponseResult<[SpotifyPlaylist]> ) {
+        switch playListsResponseResult {
+        case .success(let playLists):
+            //TODO: Present list of play lists
+            print(playLists.count)
+        case .failed(let error):
+            //TODO: Temporary logic for Error Handling
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func urlResponseResultHandler(urlResponseResult: ResponseResult<URL>) {
+        switch urlResponseResult {
+        case .success(let url):
+            let router = RouterVC()
+            let vc = router.spotifyAuthWebViewController(url: url)
+            router.pushViewController(viewController: vc)
+        case .failed(let error):
+            //TODO: Temporary logic for Error Handling
+            print(error.localizedDescription)
         }
     }
     

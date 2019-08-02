@@ -96,6 +96,9 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         case .dropbox:
             return (TextConstants.dropboxRemoveConnectionWarning,
                     TextConstants.dropboxRemoveConnectionWarningMessage)
+        case .spotify:
+            return (TextConstants.spotifyRemoveConnectionWarning,
+                    TextConstants.spotifyRemoveConnectionWarningMessage)
         }
     }
 }

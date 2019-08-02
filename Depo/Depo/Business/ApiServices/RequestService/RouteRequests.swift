@@ -18,7 +18,6 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -46,6 +45,18 @@ struct RouteRequests {
         case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
         }
     }()
+    
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = spotifyApi +/ "playlist/track"
+        static let disconnect = spotifyApi +/ "disconnect"
+    }
     
     static let launchCampaignDetail: URL? = {
         switch currentServerEnvironment {
