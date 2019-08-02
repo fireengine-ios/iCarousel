@@ -41,7 +41,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
-    private lazy var service = SpotifyRoutingService()
+    private lazy var service: SpotifyRoutingService = factory.resolve()
     
     @IBAction private func connectedButtonTapped(_ sender: Any) {
         service.connectToSpotify()
@@ -55,7 +55,8 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     }
     
     func disconnect() {
-        // TODO: Temporary logic
-        print("Disconnect")
+        service.disconnectFromSpotify { [weak self] result in
+            //TODO: handle result
+        }
     }
 }

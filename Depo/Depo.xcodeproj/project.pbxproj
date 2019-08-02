@@ -3046,6 +3046,12 @@
 		98AA790622F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA790522F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift */; };
 		98AA790722F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA790522F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift */; };
 		98AA790822F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA790522F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift */; };
+		98AA791722F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA791622F45E0600FCE0F7 /* SpotifyStatusView.swift */; };
+		98AA791822F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA791622F45E0600FCE0F7 /* SpotifyStatusView.swift */; };
+		98AA791922F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA791622F45E0600FCE0F7 /* SpotifyStatusView.swift */; };
+		98AA791B22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA791A22F45F0600FCE0F7 /* SpotifyStatusView.xib */; };
+		98AA791C22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA791A22F45F0600FCE0F7 /* SpotifyStatusView.xib */; };
+		98AA791D22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA791A22F45F0600FCE0F7 /* SpotifyStatusView.xib */; };
 		98B01C76206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
@@ -7701,6 +7707,8 @@
 		98AA78FC22F1BE9E00FCE0F7 /* SpotifyImportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportViewController.xib; sourceTree = "<group>"; };
 		98AA790122F1DAFF00FCE0F7 /* SpotifyOverwritePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyOverwritePopup.xib; sourceTree = "<group>"; };
 		98AA790522F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyOverwritePopup.swift; sourceTree = "<group>"; };
+		98AA791622F45E0600FCE0F7 /* SpotifyStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyStatusView.swift; sourceTree = "<group>"; };
+		98AA791A22F45F0600FCE0F7 /* SpotifyStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
@@ -10357,6 +10365,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				98AA791522F45DE500FCE0F7 /* SpotifyStatusView */,
 				8C26008522919AAC0063E913 /* SecurityCodeTextField */,
 				9219B18E21ECA7FA00098021 /* InstaPickPhotoView */,
 				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
@@ -13079,6 +13088,15 @@
 				98AA790522F1DB1200FCE0F7 /* SpotifyOverwritePopup.swift */,
 			);
 			path = ImportOverwritePopup;
+			sourceTree = "<group>";
+		};
+		98AA791522F45DE500FCE0F7 /* SpotifyStatusView */ = {
+			isa = PBXGroup;
+			children = (
+				98AA791622F45E0600FCE0F7 /* SpotifyStatusView.swift */,
+				98AA791A22F45F0600FCE0F7 /* SpotifyStatusView.xib */,
+			);
+			path = SpotifyStatusView;
 			sourceTree = "<group>";
 		};
 		98B01C74206BCD4A00DD78C7 /* AnalyticsService */ = {
@@ -16534,6 +16552,7 @@
 				8C06AFF12008AD71003D8E05 /* kirmizi.png in Resources */,
 				8C06B0432008AD71003D8E05 /* oval_beyaz@2x.png in Resources */,
 				8C06B10B2008AD72003D8E05 /* status_badge.png in Resources */,
+				98AA791C22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */,
 				8C06B0C52008AD71003D8E05 /* sag_ok@3x.png in Resources */,
 				8C0E90161FDEBDFF00789C91 /* TermsAndServicesScreen.xib in Resources */,
 				8C06B1032008AD72003D8E05 /* slider_thumb2@2x.png in Resources */,
@@ -17273,6 +17292,7 @@
 				8C2600A32291E2320063E913 /* PhoneVereficationScreen.xib in Resources */,
 				8C06B19C2008AD72003D8E05 /* yesil.png in Resources */,
 				8C06AEF22008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
+				98AA791B22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				8C06AF022008AD70003D8E05 /* caps2_selected@2x.png in Resources */,
@@ -17783,6 +17803,7 @@
 				CE784CD122A685FB00662219 /* CRYFrameCell.nib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
+				98AA791D22F45F0600FCE0F7 /* SpotifyStatusView.xib in Resources */,
 				98AA78FF22F1BE9E00FCE0F7 /* SpotifyImportViewController.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD522A685FB00662219 /* paylas_mail@2x.png in Resources */,
@@ -19237,6 +19258,7 @@
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
+				98AA791822F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
@@ -21348,6 +21370,7 @@
 				17589F7E2276336800A5DB37 /* SupportFormController.swift in Sources */,
 				CEBB2DD81F7678DA00D725F0 /* Int64+Bytes.swift in Sources */,
 				4AD1A81E208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
+				98AA791722F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */,
 				B5CDB33821787FEF006CFA50 /* UpdateCheck.m in Sources */,
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
@@ -21943,6 +21966,7 @@
 				CE78485822A685FB00662219 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				CE78485922A685FB00662219 /* ButtonWithGrayCorner.swift in Sources */,
 				CE78485A22A685FB00662219 /* SubscriptionParameters.swift in Sources */,
+				98AA791922F45E0600FCE0F7 /* SpotifyStatusView.swift in Sources */,
 				CE78485B22A685FB00662219 /* ContactSyncResponse.swift in Sources */,
 				CE78485C22A685FB00662219 /* WidgetService.swift in Sources */,
 				CE78485D22A685FB00662219 /* TabBarViewController.swift in Sources */,

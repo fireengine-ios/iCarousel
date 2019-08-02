@@ -1324,5 +1324,10 @@ struct TextConstants {
             static let cancelButton = NSLocalizedString("spotify_overwrite_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let importButton = NSLocalizedString("spotify_overwrite_import_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
+        enum Card {
+            static let title = NSLocalizedString("spotify_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let importing = NSLocalizedString("spotify_card_importing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let lastUpdate = NSLocalizedString("spotify_card_last_update", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
     }
 }

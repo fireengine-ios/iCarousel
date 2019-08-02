@@ -14,6 +14,7 @@ protocol SpotifyService: class {
     
     func socialStatus(success: SuccessResponse?, fail: FailResponse?)
     func connect(code: String, handler: @escaping ResponseVoid)
+    func disconnect(handler: @escaping ResponseVoid)
     func start(playlistIds: [String],  handler: @escaping ResponseVoid)
     func stop(handler: @escaping ResponseVoid)
     func getAuthUrl(handler: @escaping ResponseHandler<URL>)
@@ -159,7 +160,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     private var importTask: DataRequest?
     var delegates = MulticastDelegate<SpotifyServiceDelegate>()
     
-    init(sessionManager: SessionManager = SessionManager.customDefault) {
+    required init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
     
@@ -175,6 +176,15 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
             .request(RouteRequests.Spotify.connect,
                      method: .post,
                      parameters: ["code": code],
+                     encoding: URLEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
+    func disconnect(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Spotify.disconnect,
+                     method: .post,
                      encoding: URLEncoding.default)
             .customValidate()
             .responseVoid(handler)
@@ -215,7 +225,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
             .request(RouteRequests.Spotify.stop, method: .post)
             .customValidate()
             .responseVoid(handler)
-        }
     }
     
     func getAuthUrl(handler: @escaping ResponseHandler<URL>) {
@@ -288,7 +297,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                                                                       response: response.response)
                     handler(.failed(backendError ?? error))
                 }
-        }
+            }
     }
     
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>) {
@@ -316,6 +325,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                                                                       response: response.response)
                     handler(.failed(backendError ?? error))
                 }
-        }
+            }
     }
 }

@@ -76,7 +76,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
     fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var spotifyRoutingService = SpotifyRoutingService()
+    private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()

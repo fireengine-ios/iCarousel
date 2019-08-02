@@ -11,10 +11,16 @@ import Foundation
 final class SpotifyRoutingService {
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
-    private(set) var lastSpotifyStatus: SpotifyStatus?
+    private(set) var lastSpotifyStatus: SpotifyStatus? {
+        didSet {
+            if let status = lastSpotifyStatus, status.isConnected {
+                CardsManager.default.startOperationWith(type: .spotify)
+            } else {
+                CardsManager.default.stopOperationWithType(type: .spotify)
+            }
+        }
+    }
     private lazy var router = RouterVC()
-    
-    private var connectHandler: ResponseHandler<SpotifyStatus>?
     
     deinit {
         spotifyService.delegates.remove(self)
@@ -63,6 +69,10 @@ final class SpotifyRoutingService {
                 debugPrint(error.localizedDescription)
             }
         }
+    }
+    
+    func disconnectFromSpotify(handler: @escaping ResponseVoid) {
+        spotifyService.disconnect(handler: handler)
     }
     
     private func prepareAuthWebPage() {

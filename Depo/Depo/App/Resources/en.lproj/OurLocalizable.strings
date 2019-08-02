@@ -1055,4 +1055,6 @@
 "spotify_overwrite_message_bold" = "overwrite your previously imported playlists";
 "spotify_overwrite_cancel_button" = "Cancel";
 "spotify_overwrite_import_button" = "Import";
-
+"spotify_card_title" = "Spotify Playlists";
+"spotify_card_importing" = "Importing playlists...";
+"spotify_card_last_update" = "Last Import %@";
