@@ -290,7 +290,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 dispatchGroup.notify(queue: .main) {
                     /// Sort our albums by name AZ
                     albums.sort(by: {
-                        $0.name! < $1.name!
+                        if let firstSortName = $0.name, let secondSortName = $1.name {
+                            return firstSortName < secondSortName
+                        } else {
+                            assertionFailure()
+                            return true
+                        }
                     })
                     completion(albums)
                 }
