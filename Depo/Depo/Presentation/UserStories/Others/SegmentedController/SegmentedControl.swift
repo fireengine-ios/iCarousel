@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-class SegmentedControl: UISegmentedControl {
+final class SegmentedControl: UISegmentedControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let labels = allSubviews().compactMap { $0 as? UILabel }
-        labels.forEach { $0.adjustsFontSizeToFitWidth() }
+        allSubviews(where: UILabel.self)
+            .forEach { $0.adjustsFontSizeToFitWidth() }
     }
 }
