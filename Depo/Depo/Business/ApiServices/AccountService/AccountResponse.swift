@@ -36,6 +36,8 @@ struct AccountJSONConstants {
     static let objectCount = "objectCount"
     static let projectID = "projectId"
     
+    static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
     static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
@@ -60,6 +62,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     var gapId: String?
+    
+    var emailVerificationRemainingDays: Int?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -86,6 +90,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
+        emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
     }
 }
 
