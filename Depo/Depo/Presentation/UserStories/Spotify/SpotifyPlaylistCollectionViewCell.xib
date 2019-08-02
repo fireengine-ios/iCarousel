@@ -71,7 +71,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcR-rh-0OZ" userLabel="line">
-                        <rect key="frame" x="50" y="69" width="301" height="1"/>
+                        <rect key="frame" x="50" y="69" width="325" height="1"/>
                         <color key="backgroundColor" red="0.85098039215686272" green="0.85490196078431369" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="NGf-Xm-Di1"/>
@@ -82,13 +82,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="pgb-mv-jpJ" firstAttribute="centerY" secondItem="Yva-BG-lfk" secondAttribute="centerY" id="5is-3u-hJl"/>
-                <constraint firstItem="pgb-mv-jpJ" firstAttribute="leading" secondItem="zcR-rh-0OZ" secondAttribute="trailing" id="81d-ma-1r7"/>
                 <constraint firstItem="djo-fS-4bR" firstAttribute="leading" secondItem="Yva-BG-lfk" secondAttribute="leading" constant="50" id="IUE-tP-qkH"/>
                 <constraint firstItem="djo-fS-4bR" firstAttribute="top" secondItem="Yva-BG-lfk" secondAttribute="top" id="ItU-2Q-l8j"/>
                 <constraint firstItem="pgb-mv-jpJ" firstAttribute="leading" secondItem="djo-fS-4bR" secondAttribute="trailing" constant="8" id="RoL-Ah-bMp"/>
                 <constraint firstAttribute="trailing" secondItem="pgb-mv-jpJ" secondAttribute="trailing" constant="15" id="SOD-70-Mzu"/>
                 <constraint firstItem="zcR-rh-0OZ" firstAttribute="leading" secondItem="djo-fS-4bR" secondAttribute="leading" id="ZcG-zI-mLs"/>
                 <constraint firstAttribute="bottom" secondItem="zcR-rh-0OZ" secondAttribute="bottom" id="eMN-x7-1Lh"/>
+                <constraint firstAttribute="trailing" secondItem="zcR-rh-0OZ" secondAttribute="trailing" id="i40-a8-wfl"/>
                 <constraint firstAttribute="bottom" secondItem="djo-fS-4bR" secondAttribute="bottom" id="kA7-BO-wQU"/>
                 <constraint firstItem="e7P-hk-sA7" firstAttribute="leading" secondItem="Yva-BG-lfk" secondAttribute="leading" constant="5" id="kv0-25-HpN"/>
                 <constraint firstItem="e7P-hk-sA7" firstAttribute="centerY" secondItem="Yva-BG-lfk" secondAttribute="centerY" id="tb8-oV-Iyz"/>

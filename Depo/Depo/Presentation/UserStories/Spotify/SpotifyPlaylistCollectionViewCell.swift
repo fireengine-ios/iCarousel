@@ -30,6 +30,9 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
             newValue.setImage(UIImage(named: "selected"), for: .highlighted)
             newValue.setImage(UIImage(named: "notSelected"), for: [.highlighted, .selected])
             newValue.addTarget(self, action: #selector(onSelectionButton(_:)), for: .touchUpInside)
+            
+            //TODO: remove when set correct images
+            newValue.imageEdgeInsets = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
         }
     }
     

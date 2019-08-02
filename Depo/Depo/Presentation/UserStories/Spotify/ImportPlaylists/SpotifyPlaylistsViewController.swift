@@ -177,7 +177,7 @@ extension SpotifyPlaylistsViewController: SpotifyImportDelegate {
         
         navbarManager.setSuccessImportState()
         dataSource.isSelectionStateActive = false
-        dataSource.isHeaderless = true
+        dataSource.showOnlySelected = true
         
         collectionView.reloadData()
         collectionViewTopOffset.constant = successImportView.bounds.height
