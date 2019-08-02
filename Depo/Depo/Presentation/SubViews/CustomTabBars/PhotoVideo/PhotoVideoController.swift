@@ -138,15 +138,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         dataSource.isSelectingMode = true
         deselectAllCells()
-        
-//        if let indexPath = indexPath {
-//            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-//            collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
-//            if let selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell {
-//                selectedCell.updateSelection(isSelectionMode: true, animated: true)
-//            }
-//        }
-        
+
         setupNavigationBar(editingMode: true)
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()

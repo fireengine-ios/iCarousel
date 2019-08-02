@@ -6,7 +6,6 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 final class QuickSelectGestureRecognizer: UILongPressGestureRecognizer {
