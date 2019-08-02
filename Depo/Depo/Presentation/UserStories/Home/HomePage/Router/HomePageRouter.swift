@@ -106,8 +106,9 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func presentSmallFullOfQuotaPopUp() {
-        let popUp = SmallFullOfQuotaPopUp()
-        presentPopUp(popUp)
+        if let popUp = SmallFullOfQuotaPopUp.popUp() {
+            presentPopUp(popUp)
+        }
     }
     
     private func presentPopUp(_ popUp: UIViewController) {
