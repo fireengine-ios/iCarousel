@@ -11,6 +11,8 @@ class HomePageRouter: HomePageRouterInput {
     private let router = RouterVC()
     weak var presenter: HomePagePresenter!
     
+    private var ignoredQuotaPopUp: UIViewController?
+
     func moveToSettingsScreen() {
         var controller: UIViewController?
         if (Device.isIpad) {
@@ -72,9 +74,8 @@ class HomePageRouter: HomePageRouterInput {
                                                 })
         })
         
-        let topViewController = UIApplication.topController()
-        if !(topViewController is VerifyEmailPopUp) {
-            topViewController?.present(controller, animated: true, completion: nil)
+        if let topViewController = UIApplication.topController(), !(topViewController is VerifyEmailPopUp) {
+            topViewController.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -99,7 +100,6 @@ class HomePageRouter: HomePageRouterInput {
         UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
     
-    private var ignoredQuotaPopUp: UIViewController?
     func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType) {
         let popUp = LargeFullOfQuotaPopUp.popUp(type: type)
         presentPopUp(popUp)

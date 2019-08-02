@@ -156,6 +156,7 @@ class HomePageInteractor: HomePageInteractorInput {
             DispatchQueue.toMain {
                 if let qresponce = response as? QuotaInfoResponse {
                     guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else {
+                        self?.output.didObtainQuotaInfo(usagePercentage: 0)
                         assertionFailure("quota info is missing")
                         return
                     }

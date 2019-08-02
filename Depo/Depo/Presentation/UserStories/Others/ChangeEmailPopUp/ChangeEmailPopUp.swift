@@ -45,6 +45,11 @@ final class ChangeEmailPopUp: UIViewController {
     @IBOutlet private weak var contentView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
+            
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowRadius = 4
+            newValue.layer.shadowColor = UIColor.black.cgColor
         }
     }
     
@@ -58,7 +63,7 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.textField.autocapitalizationType = .none
             
             newValue.textField.delegate = self
-            newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         }
     }
     
@@ -72,7 +77,7 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.textField.autocapitalizationType = .none
             
             newValue.textField.delegate = self
-            newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         }
     }
     
@@ -91,8 +96,9 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             newValue.setTitle(TextConstants.change, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.setBackgroundColor(UIColor.lrTealish.withAlphaComponent(0.5), for: .disabled)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
             newValue.isOpaque = true
         }
     }
@@ -159,17 +165,14 @@ final class ChangeEmailPopUp: UIViewController {
     }
     
     private func changeButtonStatus() {
-        if self.emailEnterView.textField.text != "" && self.confirmEmailEnterView.textField.text != "" {
-            changeButton.isEnabled = true
-            changeButton.layer.opacity = 1
-        } else {
-            changeButton.isEnabled = false
-            changeButton.layer.opacity = 0.5
-        }
+        let isButtonEnabled = self.emailEnterView.textField.text.isNotEmpty
+            && self.confirmEmailEnterView.textField.text.isNotEmpty
+        
+        changeButton.isEnabled = isButtonEnabled
     }
     
     private func compareFields() {
-        if let email = emailEnterView.textField.text, email == confirmEmailEnterView.textField.text, email != "" {
+        if let email = emailEnterView.textField.text, email == confirmEmailEnterView.textField.text, email.isNotEmpty {
             
             self.updateEmail(email: email)
             dismissKeyboard()

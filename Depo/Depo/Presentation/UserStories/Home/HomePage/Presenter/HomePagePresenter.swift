@@ -135,22 +135,25 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func didObtainQuotaInfo(usagePercentage: Float) {
         let storageVars: StorageVars = factory.resolve()
         
-        let isFirstTime = !storageVars.homePageFirstTimeLogin
-        if isFirstTime {
+        let isFirstLogin = !storageVars.homePageFirstTimeLogin
+        if isFirstLogin {
             storageVars.homePageFirstTimeLogin = true
         }
         
-        if isFirstTime {
-            var fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
+        if isFirstLogin {
+            let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
             
             if 0.8 <= usagePercentage && usagePercentage < 0.9 {
                 fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType80
-            }
-            else if 0.9 <= usagePercentage && usagePercentage < 1.0 {
+                
+            } else if 0.9 <= usagePercentage && usagePercentage < 1.0 {
                 fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType90
-            }
-            else if usagePercentage >= 1.0 {
+                
+            } else if usagePercentage >= 1.0 {
                 fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+                
+            } else {
+                fullOfQuotaPopUpType = nil
             }
             
             if let type = fullOfQuotaPopUpType {
@@ -184,7 +187,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
 
     func verifyEmailIfNeeded() {
-        if let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
+        if true {//let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
             router.presentEmailVerificationPopUp(delegate: self)
         }
     }

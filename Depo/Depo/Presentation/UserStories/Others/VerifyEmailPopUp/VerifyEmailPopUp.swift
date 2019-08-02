@@ -21,10 +21,10 @@ final class VerifyEmailPopUp: UIViewController {
         willSet {
             newValue.layer.cornerRadius = 4
             
-            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
-            newValue.layer.shadowRadius = 16
-            newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowOffset = .zero
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowRadius = 4
+            newValue.layer.shadowColor = UIColor.black.cgColor
         }
     }
     
@@ -126,7 +126,11 @@ final class VerifyEmailPopUp: UIViewController {
         
         activityManager.delegate = self
         
-        let email = SingletonStorage.shared.accountInfo?.email ?? ""
+        guard let email = SingletonStorage.shared.accountInfo?.email else {
+            assertionFailure()
+            return
+        }
+        
         let topText = String(format: TextConstants.verifyEmailTopTitle, TextConstants.enterTheSecurityCode, email)
         
         let attributes: [NSAttributedStringKey : Any] = [
@@ -245,7 +249,7 @@ final class VerifyEmailPopUp: UIViewController {
     
     private func clearCode() {
         currentSecurityCode.removeAll()
-        codeTextFields.forEach { $0.text?.removeAll() }
+        codeTextFields.forEach { $0.text = "" }
     }
     
     //MARK: Actions
@@ -315,6 +319,7 @@ extension VerifyEmailPopUp {
             
             switch response {
             case .success(_):
+                ///no extra logic just stop spinner
                 break
             case .failed(let error):
                 
@@ -350,8 +355,9 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
         textField.text = ""
         
         let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
+        
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
-        if ( result != nil) {
+        if result != nil {
             return false
         }
         

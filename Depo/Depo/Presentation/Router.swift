@@ -952,10 +952,11 @@ class RouterVC: NSObject {
     }
     
     var verifyEmailPopUp: VerifyEmailPopUp {
-        let controller = VerifyEmailPopUp(nibName:String(describing: VerifyEmailPopUp.self), bundle: nil)
+        let controller = VerifyEmailPopUp()
         
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
+        
         return controller
     }
     
