@@ -52,7 +52,7 @@ final class SettingsTableViewSwitchCell: UITableViewCell {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.black.withAlphaComponent(0.25)
+            newValue.textColor = ColorConstants.textDisabled
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
             newValue.numberOfLines = 0
         }
