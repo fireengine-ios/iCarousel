@@ -1035,3 +1035,4 @@
 
 /*Settings page*/
 "Permissions" = "تصاريح";
+"NSContactsUsageDescription" = "يحتاج lifebox إلى الوصول وتحميل جهات الاتصال الخاصة بك إلى خوادم lifebox للنسخ الاحتياطي وإدارتها.";

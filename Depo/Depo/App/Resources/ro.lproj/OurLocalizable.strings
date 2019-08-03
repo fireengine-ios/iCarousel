@@ -1009,3 +1009,4 @@
 
 /*Settings page*/
 "Permissions" = "Permisiuni";
+"NSContactsUsageDescription" = "lifebox trebuie să acceseze și să încarce contactele dvs. pe serverele lifebox pentru a le face backup și a le gestiona.";

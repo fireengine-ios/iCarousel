@@ -1026,3 +1026,4 @@
 
 /*Settings page*/
 "Permissions" = "Права доступа";
+"NSContactsUsageDescription" = "lifebox необходим доступ и загрузка ваших контактов на серверы lifebox для резервного копирования и управления ими.";

@@ -1015,3 +1015,4 @@
 
 /*Settings page*/
 "Permissions" = "Genehmigungen";
+"NSContactsUsageDescription" = "lifebox muss auf Ihre Kontakte zugreifen und diese auf Lifebox-Server hochladen, um sie zu sichern und zu verwalten.";

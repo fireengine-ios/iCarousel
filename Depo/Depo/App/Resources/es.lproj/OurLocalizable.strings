@@ -1017,3 +1017,4 @@
 
 /*Settings page*/
 "Permissions" = "Permisos";
+"NSContactsUsageDescription" = "lifebox necesita acceder y cargar sus contactos a los servidores de Lifebox para hacer una copia de seguridad y administrarlos.";

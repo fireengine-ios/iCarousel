@@ -1048,3 +1048,4 @@
 
 /*Settings page*/
 "Permissions" = "Lejimet";
+"NSContactsUsageDescription" = "lifebox duhet të ketë qasje dhe të ngarkojë kontaktet tuaja në serverat e kutisë së jetës për t'i kopjuar dhe menaxhuar ato.";
