@@ -1312,3 +1312,4 @@ Please check I have understood the intended command here*/
 
 /*Settings page*/
 "Permissions" = "Autorisations";
+"NSContactsUsageDescription" = "lifebox doit pouvoir accéder à vos contacts et les télécharger sur des serveurs lifebox pour les sauvegarder et les gérer.";

@@ -1033,3 +1033,4 @@
 
 /*Settings page*/
 "Permissions" = "Permissions";
+"NSContactsUsageDescription" = "lifebox needs to access and upload your contacts to lifebox servers to backup and manage them.";
