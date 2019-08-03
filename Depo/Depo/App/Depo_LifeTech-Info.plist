@@ -123,6 +123,8 @@
 	<string></string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
+    <key>NSContactsUsageDescription</key>
+    <string>To backup your contacts to lifebox</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSLocationAlwaysUsageDescription</key>
