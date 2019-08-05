@@ -79,7 +79,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-        
+    
+    private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
+        button.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -111,8 +118,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
-        
-        setupMoreButton()
         
         onStopPlay()
         rootNavController(vizible: true)
@@ -194,6 +199,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupNavigationBar() {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+        }
+
         if hideActions {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
@@ -204,16 +213,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
         }
     }
-    
-    private func setupMoreButton() {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: button)
-        
-        navigationItem.rightBarButtonItem = barButton
-    }
-    
+
     private func setupTitle() {
         guard !objects.isEmpty, selectedIndex < objects.count else {
             return
