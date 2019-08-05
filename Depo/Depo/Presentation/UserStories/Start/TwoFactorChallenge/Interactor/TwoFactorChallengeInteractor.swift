@@ -57,7 +57,9 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
             DispatchQueue.main.async {
                 switch response {
                 case .success(_):
+                    AccountService().updateBrandType()
                     self.output.verificationSucces()
+                    
                 case .failed(let error):
                     self.output.vereficationFailed(with: error.localizedDescription)
                 }

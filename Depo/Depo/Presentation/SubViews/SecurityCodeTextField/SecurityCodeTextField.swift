@@ -12,8 +12,10 @@ final class SecurityCodeTextField: UITextField {
     
     private enum Constants {
         static let heightBottomLine: CGFloat = 3
+        static let widthBottomLine: CGFloat = 18
     }
     
+    private let bottomLine = CALayer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +27,11 @@ final class SecurityCodeTextField: UITextField {
         super.init(coder: aDecoder)
         
         setupDesign()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLineFrame()
     }
     
     // MARK: Utility methods
@@ -39,14 +46,19 @@ final class SecurityCodeTextField: UITextField {
     }
     
     private func addBottomBorder() {
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 6.0,
-                                  y: frame.height - Constants.heightBottomLine,
-                                  width: 18.0,
-                                  height: Constants.heightBottomLine)
         bottomLine.backgroundColor = ColorConstants.coolGrey.cgColor
         bottomLine.cornerRadius = 2
+        
         layer.addSublayer(bottomLine)
+    }
+    
+    private func updateLineFrame() {
+        let x = bounds.midX - Constants.widthBottomLine / 2
+        
+        bottomLine.frame = CGRect(x: x,
+                                  y: frame.height - Constants.heightBottomLine,
+                                  width: Constants.widthBottomLine,
+                                  height: Constants.heightBottomLine)
     }
 
 }

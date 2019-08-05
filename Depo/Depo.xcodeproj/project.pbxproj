@@ -642,6 +642,18 @@
 		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		87FB97AE2008CBA0000D8E2B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FB97AF2008CBAF000D8E2B /* TitleView.xib */; };
+		890F736F22EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
+		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
+		890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
+		890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		890F737822EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
+		890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
+		890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
+		890F737B22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */; };
+		890F737C22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */; };
+		890F737D22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */; };
 		89104BC522CB9BDD005B3F58 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		89104BC622CB9F51005B3F58 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		89104BC722CBA025005B3F58 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
@@ -3621,6 +3633,9 @@
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
+		CE3D5D6822F4793D009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		CE3D5D6922F479C0009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		CE3D5D6A22F479C1009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
 		CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
@@ -6746,6 +6761,10 @@
 		87FB97AD2008CBA0000D8E2B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		87FB97AF2008CBAF000D8E2B /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
+		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
+		890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerifyEmailPopUp.xib; sourceTree = "<group>"; };
+		890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeEmailPopUp.xib; sourceTree = "<group>"; };
+		890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailPopUp.swift; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
 		892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInitializer.swift; sourceTree = "<group>"; };
 		892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengePresenter.swift; sourceTree = "<group>"; };
@@ -8102,6 +8121,7 @@
 		CE3AF76F1F01D63D002AD17C /* EULAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAService.swift; sourceTree = "<group>"; };
 		CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		CE3B3AF0202888240002558C /* OrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
+		CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		CE3E4D05201B11BF00173045 /* PVViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVViewerController.swift; sourceTree = "<group>"; };
 		CE3E4D06201B11BF00173045 /* PVViewerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PVViewerController.xib; sourceTree = "<group>"; };
 		CE3E4D0A201B63A800173045 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
@@ -11342,6 +11362,25 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */,
+				890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */,
+			);
+			name = VerifyEmailPopUp;
+			path = Depo/Presentation/UserStories/Others/VerifyEmailPopUp;
+			sourceTree = SOURCE_ROOT;
+		};
+		890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */,
+				890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */,
+			);
+			path = ChangeEmailPopUp;
+			sourceTree = "<group>";
+		};
 		8918540622DDEFB900AAB818 /* TwoFactorChallenge */ = {
 			isa = PBXGroup;
 			children = (
@@ -13766,6 +13805,8 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
+				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
 				CE00B27C2204261700A5A696 /* InstaPickSelection */,
 				9219B18721ECA21800098021 /* InstaPickDetailViewController */,
 				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
@@ -15407,6 +15448,7 @@
 		CEFFA8F121AFC21C00B34F36 /* SegmentedController */ = {
 			isa = PBXGroup;
 			children = (
+				CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */,
 				CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */,
 				CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */,
 				CE292C2F21C2419C004FC745 /* PassthroughView.swift */,
@@ -16464,6 +16506,7 @@
 				8C06B1172008AD72003D8E05 /* t_buyuk.png in Resources */,
 				4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				8C06AF592008AD70003D8E05 /* daire@2x.png in Resources */,
+				890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				8C06AFC12008AD71003D8E05 /* gonder_btn.png in Resources */,
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
@@ -16863,6 +16906,7 @@
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				8C06AF4D2008AD70003D8E05 /* crop_selected@2x.png in Resources */,
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
+				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				8C06AF872008AD70003D8E05 /* extraOptions@2x.png in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVereficationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
@@ -17585,6 +17629,7 @@
 				8C06AF8E2008AD70003D8E05 /* extraOptions_selected@3x.png in Resources */,
 				8C06B0CE2008AD71003D8E05 /* sample_green.png in Resources */,
 				8C06B1662008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
+				890F737822EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				CEBBDE091F01E69B00CDF527 /* TurkcellSaturaDem.ttf in Resources */,
 				8C06B0E02008AD71003D8E05 /* sample_vintage@2x.png in Resources */,
 				8C06B16E2008AD72003D8E05 /* toolbar_sekil_icon@3x.png in Resources */,
@@ -17660,6 +17705,7 @@
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				8C06B0BE2008AD71003D8E05 /* rotation_secili@3x.png in Resources */,
 				8C06B0AA2008AD71003D8E05 /* renk_selected@3x.png in Resources */,
+				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0DE2008AD71003D8E05 /* sample_red@3x.png in Resources */,
 				8C06B0742008AD71003D8E05 /* paylas_fb@3x.png in Resources */,
@@ -18214,6 +18260,7 @@
 				CE784E5322A685FB00662219 /* toolbar_crop_icon@2x.png in Resources */,
 				CE784E5422A685FB00662219 /* TurkcellSaturaDem.ttf in Resources */,
 				CE784E5522A685FB00662219 /* sample_vintage@2x.png in Resources */,
+				890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				CE784E5622A685FB00662219 /* toolbar_sekil_icon@3x.png in Resources */,
 				CE784E5722A685FB00662219 /* cizgi_3.png in Resources */,
 				CE784E5822A685FB00662219 /* FolderSelectionCollectionViewCell.xib in Resources */,
@@ -18289,6 +18336,7 @@
 				CE784E9C22A685FB00662219 /* ConnectWithInstaView.xib in Resources */,
 				CE784E9D22A685FB00662219 /* sample_red@3x.png in Resources */,
 				CE784E9E22A685FB00662219 /* paylas_fb@3x.png in Resources */,
+				890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				CE784E9F22A685FB00662219 /* kontrast.png in Resources */,
 				CE784EA022A685FB00662219 /* status_badge.png in Resources */,
 				CE784EA122A685FB00662219 /* rotation_secili@2x.png in Resources */,
@@ -19549,6 +19597,7 @@
 				8C0E8DCB1FDEBDFF00789C91 /* TermsAndServicesViewOutput.swift in Sources */,
 				8C0E8DCD1FDEBDFF00789C91 /* PackagesInteractorOutput.swift in Sources */,
 				8C0E8DCE1FDEBDFF00789C91 /* TermsAndServicesViewController.swift in Sources */,
+				890F737C22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */,
 				B5AB5B7121F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */,
 				8C0E8DCF1FDEBDFF00789C91 /* TermsAndServicesModuleInput.swift in Sources */,
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
@@ -20172,6 +20221,7 @@
 				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
+				890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
 				B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
 				B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
@@ -21093,6 +21143,7 @@
 				CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */,
 				CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */,
 				A2268EBD21A68BBC002F2611 /* LeavePremiumView.swift in Sources */,
+				890F737B22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */,
 				CE51ACE21EF90853005DCEE0 /* IntroduceInteractorInput.swift in Sources */,
 				7CFF0C8C1F4C0E6F00E72E6A /* AlbumServiceResponse.swift in Sources */,
 				CE51ACE31EF90853005DCEE0 /* IntroduceInteractorOutput.swift in Sources */,
@@ -21506,6 +21557,7 @@
 				A20CDBA3219D632D00CA9A67 /* PremiumListView.swift in Sources */,
 				D498865D1F3EFBE200F50C95 /* ImportPhotosRouter.swift in Sources */,
 				482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
+				890F736F22EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */,
 				0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */,
 				09492544A332F13F0C2E09B1 /* SettingsRouter.swift in Sources */,
@@ -22019,6 +22071,7 @@
 				CE78487622A685FB00662219 /* HomePagePresenter.swift in Sources */,
 				CE78487722A685FB00662219 /* LeavePremiumInitializer.swift in Sources */,
 				CE78487822A685FB00662219 /* DispatchQueue+Main.swift in Sources */,
+				890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				CE78487922A685FB00662219 /* PlacesServiceResponse.swift in Sources */,
 				CE78487A22A685FB00662219 /* ActivityIndicator.swift in Sources */,
 				CE78487B22A685FB00662219 /* SearchViewInteractor.swift in Sources */,
@@ -22745,6 +22798,7 @@
 				CE784B4522A685FB00662219 /* UserInfoSubViewModuleInput.swift in Sources */,
 				CE784B4622A685FB00662219 /* MoreFilesActionsInteractor.swift in Sources */,
 				CE784B4722A685FB00662219 /* BaseDataSourceItem.swift in Sources */,
+				890F737D22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */,
 				CE784B4822A685FB00662219 /* UserInfoSubViewPresenter.swift in Sources */,
 				CE784B4922A685FB00662219 /* UserInfoSubViewInteractorInput.swift in Sources */,
 				CE784B4A22A685FB00662219 /* SyncStatus.m in Sources */,

@@ -154,7 +154,12 @@ class LoginInteractor: LoginInteractorInput {
             
             errorHandler(loginError, errorResponse.description)
         }, twoFactorAuth: { [weak self] response in
-            self?.output?.showTwoFactorAuthViewController(response: response)
+            guard let self = self else {
+                return
+            }
+            
+            self.tokenStorage.isRememberMe = self.rememberMe
+            self.output?.showTwoFactorAuthViewController(response: response)
         })
     }
     

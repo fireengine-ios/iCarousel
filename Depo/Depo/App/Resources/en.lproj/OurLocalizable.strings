@@ -1075,3 +1075,21 @@
 
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
+"confirm" = "Confirm";
+"later" = "Later";
+"change" = "Change";
+"change_email" = "Change e-mail";
+"verify_email_top_title" = "Please %@ we sent to your e-mail %@ to verify your account:";
+"enter_the_security_code" = "enter the security code";
+"fields_are_not_matched" = "Fields are not matched";
+"your_email" = "Your E-mail";
+"confirm_your_email" = "Confirm Your E-mail";
+"enter_your_email" = "enter your e-mail";
+"change_email_pop_up_top_title" = "Please enter your e-mail in order to change your account info and get your security code";
+
+"no_account_found" = "No account found";
+"too_many_requests" = "Too many tries within a parametric duration of time";
+"invalid_otp" = "If OTP Code is not valid";
+"expired_otp" = "If there is no generated or valid OTP Code";
+"token_is_missing" = "If OTP is empty on request";
+"invalid_email" = "If account email is different with OTP Code sent";
