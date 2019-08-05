@@ -47,18 +47,6 @@ struct RouteRequests {
         }
     }()
     
-    enum Spotify {
-        static let spotifyApi = baseUrl +/ "migration/spotify"
-        static let connect = spotifyApi +/ "connect"
-        static let start = spotifyApi +/ "start"
-        static let stop = spotifyApi +/ "stop"
-        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
-        static let status = spotifyApi +/ "status"
-        static let playlists = spotifyApi +/ "playlist"
-        static let tracks = spotifyApi +/ "playlist/track"
-        static let disconnect = spotifyApi +/ "disconnect"
-    }
-    
     static let launchCampaignDetail: URL? = {
         switch currentServerEnvironment {
         case .test:
@@ -194,6 +182,20 @@ struct RouteRequests {
     static let quickScrollGroups = "scroll/groups"
     static let quickScrollGroupsList = "scroll/groups/list"
     static let quickScrollRangeList = "scroll/range/list"
+    
+    // MARK: - Spotify
+    
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let disconnect = spotifyApi +/ "disconnect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = spotifyApi +/ "playlist/track"
+    }
     
     //MARK: - Turkcell Updater
     

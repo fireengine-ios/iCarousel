@@ -17,11 +17,6 @@ final class SocialStatusResponse: ObjectRequestResponse {
         static let instagram = "instagram"
         static let instagramUsername = "instagramUsername"
         static let spotifyStatus = "spotifyStatus"
-        static let spotifyConnected = "connected"
-        static let spotifyUserName = "userName"
-        static let spotifyJobStatus = "jobStatus"
-        static let spotifyLastModifiedDate = "lastModifiedDate"
-
         //static let dropbox = "dropbox"
     }
     
@@ -29,10 +24,7 @@ final class SocialStatusResponse: ObjectRequestResponse {
     var twitter: Bool?
     var instagram: Bool?
     var instagramUsername: String?
-    var spotifyConnected: Bool?
-    var spotifyUserName: String?
-    var spotifyJobStatus: String?
-    var spotifyLastModifiedDate: String?
+    var spotifyStatus: SpotifyStatus?
     //var dropbox: Bool?
     
     override func mapping() {
@@ -41,12 +33,9 @@ final class SocialStatusResponse: ObjectRequestResponse {
         instagram = json?[SocialStatusKeys.instagram].bool
         instagramUsername = json?[SocialStatusKeys.instagramUsername].string
         
-        let spotifyStatus = json?[SocialStatusKeys.spotifyStatus]
-        
-        spotifyConnected = spotifyStatus?[SocialStatusKeys.spotifyConnected].bool
-        spotifyUserName = spotifyStatus?[SocialStatusKeys.spotifyUserName].string
-        spotifyJobStatus = spotifyStatus?[SocialStatusKeys.spotifyJobStatus].string
-        spotifyLastModifiedDate = spotifyStatus?[SocialStatusKeys.spotifyLastModifiedDate].string
+        if let statusJson = json?[SocialStatusKeys.spotifyStatus] {
+            spotifyStatus = SpotifyStatus(json: statusJson)
+        }
         //dropbox = json?[SocialStatusKeys.dropbox].bool
     }
 }

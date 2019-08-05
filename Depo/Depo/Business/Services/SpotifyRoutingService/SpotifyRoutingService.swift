@@ -8,70 +8,185 @@
 
 import Foundation
 
-enum scenarioForSpotifyAuth {
-    case urlResponseResult(ResponseResult<URL>)
-    case playListsResponseResult(ResponseResult<[SpotifyPlaylist]>)
-    case error(Error)
-}
-
 final class SpotifyRoutingService {
     
-    private lazy var spotifyService = SpotifyServiceImpl()
+    private lazy var spotifyService: SpotifyService = factory.resolve()
+    private(set) var lastSpotifyStatus: SpotifyStatus?
+    private lazy var router = RouterVC()
     
-    private func checkSpotifySocialStatus(completion: @escaping (ResponseResult<Bool>) -> Void){
-        spotifyService.socialStatus(success: { response in
-            guard let response = response as? SocialStatusResponse,
-                let isConnected: Bool = response.spotifyConnected else {
+    deinit {
+        spotifyService.delegates.remove(self)
+    }
+    
+    init() {
+        spotifyService.delegates.add(self)
+    }
+    
+    func updateStatus(completion: ResponseHandler<SpotifyStatus>?) {
+        spotifyService.getStatus { [weak self] result in
+            switch result {
+            case .success(let status):
+                self?.lastSpotifyStatus = status
+                completion?(.success(status))
+            case .failed(let error):
+                completion?(.failed(error))
+            }
+        }
+    }
+    
+    func getSpotifyStatus(completion: @escaping ResponseHandler<SpotifyStatus>) {
+        if let status = lastSpotifyStatus {
+            completion(.success(status))
+        } else {
+            updateStatus(completion: completion)
+        }
+    }
+    
+    func connectToSpotify() {
+        getSpotifyStatus { [weak self] result in
+            guard let self = self else {
                 return
             }
-            completion(.success(isConnected))
-        }) { error in
-            completion(.failed(error))
-        }
-    }
-    
-    func connectToSpotify(completion: @escaping (scenarioForSpotifyAuth) -> Void) {
-        checkSpotifySocialStatus { response in
-            switch response {
-            case .success(let result):
-                if result {
-                    self.preparePlayLists(completion: { playListsResponseResult in
-                        completion(.playListsResponseResult(playListsResponseResult))
-                    })
+            
+            switch result {
+            case .success(let status):
+                if status.isConnected {
+                    let controller = self.prepareImportPlaylistsController()
+                    self.router.pushViewController(viewController: controller)
                 } else {
-                    self.prepareAuthWebPage(completion: { urlResponseResult in
-                        completion(.urlResponseResult(urlResponseResult))
-                    })
+                    self.prepareAuthWebPage()
                 }
             case .failed(let error):
-                completion(.error(error))
+                //completion(.failed(error))
+                debugPrint(error.localizedDescription)
             }
         }
     }
-        //TODO: Delete if not needed
-//    func terminationAuthProcess(code: String, completion: @escaping (ResponseResult<[SpotifyPlaylist]>) -> Void ) {
-//        spotifyService.connect(code: code) { response in
-//            switch response {
-//            case .success:
-//                //TODO: Temporary logic
-//               self.spotifyService.getPlaylists(page: 0, size: 5, handler: completion)
-//            case .failed(let error):
-//                completion(.failed(error))
-//            }
-//        }
-//    }
     
-    
-    func connect(code: String, completion: @escaping ResponseVoid ) {
-        spotifyService.connect(code: code, handler: completion)
+    func disconnectFromSpotify(handler: @escaping ResponseHandler<SpotifyStatus>) {
+        spotifyService.disconnect { [weak self] result in
+            switch result {
+            case .success(_):
+               self?.updateStatus(completion: handler)
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        }
     }
     
-    private func prepareAuthWebPage(completion: @escaping (ResponseResult<URL>) -> Void) {
-        spotifyService.getAuthUrl(handler: completion)
+    private func prepareAuthWebPage() {
+        spotifyService.getAuthUrl { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let url):
+                let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
+                self.router.pushViewController(viewController: controller)
+            case .failed(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
     
-    private func preparePlayLists(completion: @escaping (ResponseResult<[SpotifyPlaylist]>) -> Void) {
-        //TODO: Temporary logic
-        spotifyService.getPlaylists(page: 0, size: 5, handler: completion)
+    private func prepareImportPlaylistsController() -> UIViewController {
+        return router.spotifyPlaylistsController(delegate: self)
+    }
+    
+    private func showOverwritePopup(handler: @escaping VoidHandler) {
+        let popup = router.spotifyOverwritePopup(importAction: handler)
+        router.presentViewController(controller: popup)
+    }
+    
+    private func importPlaylists(_ playlists: [SpotifyPlaylist]) {
+        let controller = router.spotifyImportController(playlists: playlists)
+        let navigationController = NavigationController(rootViewController: controller)
+        navigationController.navigationBar.isHidden = false
+        router.presentViewController(controller: navigationController)
+    }
+}
+
+// MARK: - SpotifyAuthViewControllerDelegate
+
+extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
+    
+    func spotifyAuthSuccess(with code: String) {
+        spotifyService.connect(code: code) { [weak self] result in
+            self?.updateStatus { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(_):
+                    let controller = self.prepareImportPlaylistsController()
+                    self.router.pushViewController(viewController: controller)
+                case .failed(let error):
+                    //TODO: Handle error
+                    debugPrint(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func spotifyAuthCancel() { }
+}
+
+// MARK: - SpotifyServiceDelegate
+
+extension SpotifyRoutingService: SpotifyServiceDelegate {
+    func importDidComplete() {
+        updateStatus(completion: nil)
+    }
+    
+    func importDidFailed(error: Error) {
+        
+    }
+    
+    func importDidCanceled() {
+        
+    }
+    
+    func sendImportToBackground() {
+        router.popViewController()
+    }
+    
+    func spotifyStatusDidChange() {
+        updateStatus(completion: nil)
+    }
+}
+
+// MARK: - SpotifyPlaylistsViewControllerDelegate
+
+extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
+    func onImport(playlists: [SpotifyPlaylist]) {
+        getSpotifyStatus { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let status):
+                if status.lastModifiedDate == nil {
+                    self.importPlaylists(playlists)
+                } else {
+                    self.showOverwritePopup { [weak self] in
+                        self?.importPlaylists(playlists)
+                    }
+                }
+            case .failed(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func onShowImported() {
+        router.popViewController()
+    }
+    
+    func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
+        let controller = router.spotifyTracksController(playlist: playlist)
+        router.pushViewController(viewController: controller)
     }
 }
