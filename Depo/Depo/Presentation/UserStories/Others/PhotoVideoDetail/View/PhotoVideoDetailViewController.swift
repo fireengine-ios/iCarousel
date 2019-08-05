@@ -360,15 +360,17 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
 
 extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellHeight = collectionView.frame.height
+        let cellWidth = collectionView.frame.width
         ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
         ///seems like this bug may occur on iOS 12+ when it returns negative value
-        return CGSize(width: max(collectionView.bounds.size.width, 0), height: max(collectionView.bounds.size.height, 0))
+        return CGSize(width: max(cellWidth, 0), height: max(cellHeight, 0))
     }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     func tapOnCellForFullScreen() {
-        isFullScreen = !isFullScreen
+        isFullScreen.toggle()
     }
     
     func tapOnSelectedItem() {
