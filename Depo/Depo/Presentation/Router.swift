@@ -951,6 +951,24 @@ class RouterVC: NSObject {
         return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
     }
     
+    var verifyEmailPopUp: VerifyEmailPopUp {
+        let controller = VerifyEmailPopUp()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    var changeEmailPopUp: ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp()
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
+    }
+    
     func spotifyAuthWebViewController(url: URL) -> UIViewController {
         let controller = SpotifyAuthViewController()
         controller.loadWebView(with: url)

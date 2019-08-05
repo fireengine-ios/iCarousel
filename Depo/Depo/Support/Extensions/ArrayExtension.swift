@@ -23,3 +23,15 @@ public extension Array {
         }
     }
 }
+
+public extension Array {
+    var hasItems: Bool {
+        return !self.isEmpty
+    }
+}
+
+extension Optional where Wrapped == Array<Any> {
+    var hasItems: Bool {
+        return !(self?.isEmpty ?? true)
+    }
+}

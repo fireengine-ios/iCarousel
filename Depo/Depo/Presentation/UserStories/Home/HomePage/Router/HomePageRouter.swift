@@ -11,6 +11,8 @@ class HomePageRouter: HomePageRouterInput {
     private let router = RouterVC()
     weak var presenter: HomePagePresenter!
     
+    private var ignoredQuotaPopUp: UIViewController?
+
     func moveToSettingsScreen() {
         var controller: UIViewController?
         if (Device.isIpad) {
@@ -72,7 +74,9 @@ class HomePageRouter: HomePageRouterInput {
                                                 })
         })
         
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+        if let topViewController = UIApplication.topController(), !(topViewController is VerifyEmailPopUp) {
+            topViewController.present(controller, animated: true, completion: nil)
+        }
     }
     
     // MARK: Utility methods
@@ -90,4 +94,35 @@ class HomePageRouter: HomePageRouterInput {
         }
     }
     
+    func presentEmailVerificationPopUp(delegate: VerifyEmailPopUpDelegate) {
+        let controller = router.verifyEmailPopUp
+        controller.delegate = delegate
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+    }
+    
+    func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType) {
+        let popUp = LargeFullOfQuotaPopUp.popUp(type: type)
+        presentPopUp(popUp)
+    }
+    
+    func presentSmallFullOfQuotaPopUp() {
+        if let popUp = SmallFullOfQuotaPopUp.popUp() {
+            presentPopUp(popUp)
+        }
+    }
+    
+    private func presentPopUp(_ popUp: UIViewController) {
+        let topContorller = UIApplication.topController()
+        if topContorller is VerifyEmailPopUp {
+            ignoredQuotaPopUp = popUp
+        } else {
+            topContorller?.present(popUp, animated: true, completion: nil)
+        }
+    }
+    
+    func showIgnoredQuotaPopUpIfNeeded() {
+        if let popUp = ignoredQuotaPopUp {
+            presentPopUp(popUp)
+        }
+    }
 }

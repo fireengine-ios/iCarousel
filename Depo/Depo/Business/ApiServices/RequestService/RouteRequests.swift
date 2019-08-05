@@ -270,4 +270,6 @@ struct RouteRequests {
         }   
     }
     
+    static let verifyEmail = baseUrl +/ "verify/emailAddress"
+    static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
 }

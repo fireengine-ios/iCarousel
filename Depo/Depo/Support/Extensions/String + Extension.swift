@@ -39,5 +39,14 @@ extension String {
             return NSMutableAttributedString()
         }
     }
+    
+    var hasCharacters: Bool {
+        return !self.isEmpty
+    }
 }
 
+extension Optional where Wrapped == String {
+    var hasCharacters: Bool {
+        return !(self?.isEmpty ?? true)
+    }
+}
