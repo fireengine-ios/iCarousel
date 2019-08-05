@@ -9,7 +9,6 @@
 import UIKit
 import WebKit
 
-
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
     func tapOnCellForFullScreen()
@@ -33,6 +32,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }()
     
     private var isNeedToUpdateWebView = true
+    private var oldFrame = CGRect.zero
     private var currentItemId = ""
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
@@ -61,11 +61,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         reset()
     }
     
-    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
-        delegate?.tapOnCellForFullScreen()
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
     }
-    
-    private var oldFrame = CGRect.zero
     
     override func layoutSubviews() {
         /// fixed bug in iOS 11: setNavigationBarHidden calls cell layout
