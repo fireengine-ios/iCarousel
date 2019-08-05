@@ -104,17 +104,17 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     @discardableResult
     func didShowPopupAboutPremium() -> Bool {
-        var willShow = false
+        var didShow = false
         if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                        title: TextConstants.lifeboxPremium,
                                        headerTitle: TextConstants.becomePremiumMember, completion: nil)
-            willShow = true
+            didShow = true
         }
         
-        return willShow
+        return didShow
     }
     
     func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {

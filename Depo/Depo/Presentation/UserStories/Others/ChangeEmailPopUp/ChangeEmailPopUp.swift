@@ -165,14 +165,14 @@ final class ChangeEmailPopUp: UIViewController {
     }
     
     private func changeButtonStatus() {
-        let isButtonEnabled = self.emailEnterView.textField.text.isNotEmpty
-            && self.confirmEmailEnterView.textField.text.isNotEmpty
+        let isButtonEnabled = self.emailEnterView.textField.text.hasCharacters
+            && self.confirmEmailEnterView.textField.text.hasCharacters
         
         changeButton.isEnabled = isButtonEnabled
     }
     
     private func compareFields() {
-        if let email = emailEnterView.textField.text, email == confirmEmailEnterView.textField.text, email.isNotEmpty {
+        if let email = emailEnterView.textField.text, email == confirmEmailEnterView.textField.text, email.hasCharacters {
             
             self.updateEmail(email: email)
             dismissKeyboard()

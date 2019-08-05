@@ -40,13 +40,13 @@ extension String {
         }
     }
     
-    var isNotEmpty: Bool {
+    var hasCharacters: Bool {
         return !self.isEmpty
     }
 }
 
 extension Optional where Wrapped == String {
-    var isNotEmpty: Bool {
+    var hasCharacters: Bool {
         return !(self?.isEmpty ?? true)
     }
 }

@@ -25,13 +25,13 @@ public extension Array {
 }
 
 public extension Array {
-    var isNotEmpty: Bool {
+    var hasItems: Bool {
         return !self.isEmpty
     }
 }
 
 extension Optional where Wrapped == Array<Any> {
-    var isNotEmpty: Bool {
+    var hasItems: Bool {
         return !(self?.isEmpty ?? true)
     }
 }
