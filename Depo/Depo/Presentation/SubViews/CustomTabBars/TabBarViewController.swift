@@ -74,7 +74,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
+    fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -443,9 +445,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         photoBtn = createSubButton(withText: TextConstants.takePhoto, imageName: "TakeFhoto", asLeft: true)
         photoBtn?.changeVisability(toHidden: true)
         
-        importFromSpotifyBtn = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "importFromSpotify", asLeft: true)
-        importFromSpotifyBtn.changeVisability(toHidden: true)
-        
         uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
         uploadBtn?.changeVisability(toHidden: true)
         
@@ -463,6 +462,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
+        
+        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "ImportFromSpotify", asLeft: true)
+        importFromSpotify.changeVisability(toHidden: true)
         
         mainContentView.bringSubview(toFront: plussButton)
     }
@@ -515,7 +517,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
             case .importFromSpotify:
-                buttonsArray.append(importFromSpotifyBtn)
+                buttonsArray.append(importFromSpotify)
             }
         }
         
@@ -535,7 +537,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
-        buttonsArray.append(importFromSpotifyBtn)
+        buttonsArray.append(importFromSpotify)
         return buttonsArray
     }
     
@@ -715,7 +717,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromApp
         case uploadFromLifeboxFavorites:
             action = .uploadFromAppFavorites
-        case importFromSpotifyBtn:
+        case importFromSpotify:
             action = .importFromSpotify
         default:
             return
@@ -867,49 +869,22 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
-            
         case .importFromSpotify:
-            connectToSpotify()
+            spotifyRoutingService.connectToSpotify()
         }
     }
     
-    private func connectToSpotify() {
-        let service = SpotifyRoutingService()
-        service.connectToSpotify { [weak self] result in
-            switch result {
-            case .urlResponseResult(let urlResponseResult):
-                self?.urlResponseResultHandler(urlResponseResult: urlResponseResult)
-            case .playListsResponseResult(let playListResponseResult):
-                self?.playListResponseResultHandler(playListsResponseResult: playListResponseResult)
-            case .error(let error):
-                //TODO: Temporary logic for error handling
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func playListResponseResultHandler(playListsResponseResult: ResponseResult<[SpotifyPlaylist]> ) {
-        switch playListsResponseResult {
-        case .success(let playLists):
-            //TODO: Present list of play lists
-            print(playLists.count)
-        case .failed(let error):
-            //TODO: Temporary logic for Error Handling
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func urlResponseResultHandler(urlResponseResult: ResponseResult<URL>) {
-        switch urlResponseResult {
-        case .success(let url):
-            let router = RouterVC()
-            let vc = router.spotifyAuthWebViewController(url: url)
-            router.pushViewController(viewController: vc)
-        case .failed(let error):
-            //TODO: Temporary logic for Error Handling
-            print(error.localizedDescription)
-        }
-    }
+//    private func connectToSpotify() {
+//        spotifyRoutingService.connectToSpotify { result in
+//            switch result {
+//            case .success(let controller):
+//                RouterVC().pushViewController(viewController: controller)
+//            case .failed(let error):
+//                //TODO: Temporary logic for Error Handling
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     private func checkReadOnlyPermission() -> Bool {
         if let currentVC = currentViewController as? AlbumDetailViewController,

@@ -969,9 +969,34 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func spotifyAuthWebViewController(url: URL) -> UIViewController {
+    // MARK: - Spotify
+    
+    func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyPlaylistsViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {
+        let controller = SpotifyPlaylistViewController.initFromNib()
+        controller.playlist = playlist
+        return controller
+    }
+    
+    func spotifyImportController(playlists: [SpotifyPlaylist]) -> UIViewController {
+        let controller = SpotifyImportViewController.initFromNib()
+        controller.playlists = playlists
+        return controller
+    }
+    
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
+        return SpotifyOverwritePopup.with(importAction: importAction)
+    }
+
+    func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
         let controller = SpotifyAuthViewController()
         controller.loadWebView(with: url)
+        controller.delegate = delegate
         return controller
     }
 }
