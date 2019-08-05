@@ -236,6 +236,9 @@
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
 		4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
+		4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		4BAF259222F8475000979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		4BAF259322F8475100979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
@@ -3633,9 +3636,6 @@
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
-		CE3D5D6822F4793D009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
-		CE3D5D6922F479C0009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
-		CE3D5D6A22F479C1009F4E0C /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
 		CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
@@ -19974,6 +19974,7 @@
 				4A6DBE8F21A6F9440003D1B4 /* PremiumFeaturesView.swift in Sources */,
 				8C06AC262008AB8C003D8E05 /* FreeAppSpaceConfigurator.swift in Sources */,
 				8C0E8F011FDEBDFF00789C91 /* OfferParameters.swift in Sources */,
+				4BAF259222F8475000979F19 /* SegmentedControl.swift in Sources */,
 				A217E44121A5B0A80084AA37 /* LeavePremiumInteractor.swift in Sources */,
 				8C0E8F021FDEBDFF00789C91 /* BasePresentor.swift in Sources */,
 				8C0E8F031FDEBDFF00789C91 /* UploadHelpers.swift in Sources */,
@@ -20634,6 +20635,7 @@
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
+				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
@@ -23046,6 +23048,7 @@
 				CE784C2C22A685FB00662219 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE784C2D22A685FB00662219 /* HelpAndSupportInitializer.swift in Sources */,
 				73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
+				4BAF259322F8475100979F19 /* SegmentedControl.swift in Sources */,
 				CE784C2E22A685FB00662219 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				CE784C2F22A685FB00662219 /* PrepareQuickScroll.swift in Sources */,
 				CE784C3022A685FB00662219 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
