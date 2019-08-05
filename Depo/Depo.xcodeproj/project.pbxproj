@@ -2998,6 +2998,9 @@
 		98570AFD208F7558002CCEBA /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98570AF8208F7556002CCEBA /* SpotlightViewController.xib */; };
 		98570AFE208F7558002CCEBA /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF9208F7557002CCEBA /* Spotlight.swift */; };
 		98570AFF208F7558002CCEBA /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF9208F7557002CCEBA /* Spotlight.swift */; };
+		9864296822F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
+		9864296922F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
+		9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
@@ -7695,6 +7698,7 @@
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
 		98570AF8208F7556002CCEBA /* SpotlightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightViewController.xib; sourceTree = "<group>"; };
 		98570AF9208F7557002CCEBA /* Spotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
+		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterDataSource.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
@@ -9971,6 +9975,7 @@
 			isa = PBXGroup;
 			children = (
 				73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */,
+				9864296722F834F10039811C /* SpotifyResponse.swift */,
 			);
 			path = SpotifyService;
 			sourceTree = "<group>";
@@ -13056,8 +13061,8 @@
 		989BDE2C22F47B1E001DDEB2 /* SpotifyAuth */ = {
 			isa = PBXGroup;
 			children = (
-				989BDE2D22F47B1E001DDEB2 /* SpotifyAuthViewController.swift */,
 				989BDE2E22F47B1E001DDEB2 /* SpotifyAuthViewController.xib */,
+				989BDE2D22F47B1E001DDEB2 /* SpotifyAuthViewController.swift */,
 			);
 			path = SpotifyAuth;
 			sourceTree = "<group>";
@@ -19807,6 +19812,7 @@
 				8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */,
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
+				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
@@ -21399,6 +21405,7 @@
 				7CED0B101F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift in Sources */,
 				CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */,
 				B56FBB2B2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
+				9864296822F834F10039811C /* SpotifyResponse.swift in Sources */,
 				D47863FA1F3F18FA00EFDC6D /* UsageInfoViewController.swift in Sources */,
 				8244D12DB4B058CBAB05E1A9 /* PhotoVideoDetailViewInput.swift in Sources */,
 				DEE642813D2C3E1B9FDC7D3C /* PhotoVideoDetailViewOutput.swift in Sources */,
@@ -22891,6 +22898,7 @@
 				CE784BD422A685FB00662219 /* UsageInfoViewInput.swift in Sources */,
 				CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */,
 				CE784BD722A685FB00662219 /* DuplicatedContactsViewController.swift in Sources */,
+				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
 				CE784BD822A685FB00662219 /* SupportBannerView.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,

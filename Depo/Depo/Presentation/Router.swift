@@ -954,9 +954,9 @@ class RouterVC: NSObject {
     // MARK: - Spotify
     
     func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
-        let contoller = SpotifyPlaylistsViewController.initFromNib()
-        contoller.delegate = delegate
-        return contoller
+        let controller = SpotifyPlaylistsViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
     }
     
     func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {

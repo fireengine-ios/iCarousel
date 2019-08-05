@@ -31,15 +31,11 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
         }
     }
-    @IBOutlet private weak var importButtonBackView: UIView! {
+    @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
             newValue.isHidden = true
-            newValue.backgroundColor = .clear
-            let gradientView = TransparentGradientView(style: .vertical, mainColor: .white)
-            gradientView.frame = newValue.bounds
-            newValue.addSubview(gradientView)
-            newValue.sendSubview(toBack: gradientView)
-            gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            newValue.backgroundColor = .white
+            newValue.style = .vertical
         }
     }
 
@@ -69,7 +65,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.contentInset.bottom = importButtonBackView.bounds.height
+        collectionView.contentInset.bottom = gradientView.bounds.height
         navbarManager.setSelectionState()
         loadNextPage()
         
@@ -109,7 +105,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private func selectedItemsCountChange(with count: Int) {
         navbarManager.changeSelectionItems(count: count)
-        importButtonBackView.isHidden = count == 0
+        gradientView.isHidden = count == 0
     }
     
     @IBAction private func importSelected(_ sender: UIButton) {
@@ -124,7 +120,6 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 // MARK: - SpotifyPlaylistsDataSourceDelegate
 
 extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
-    func onStartSelection() { }
     
     func onSelect(item: SpotifyObject) {
         guard let playlist = item as? SpotifyPlaylist else {
@@ -165,7 +160,7 @@ extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
-        importButtonBackView.isHidden = false
+        gradientView.isHidden = false
         
         navbarManager.setSuccessImportState()
         dataSource.isSelectionStateActive = false

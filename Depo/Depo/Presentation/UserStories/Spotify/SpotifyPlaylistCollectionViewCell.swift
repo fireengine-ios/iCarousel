@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-protocol SpotifyPlaylistCellDelegate: LBCellsDelegate {
+protocol SpotifyPlaylistCellDelegate: class {
     func onSelect(cell: SpotifyPlaylistCollectionViewCell)
     func onDeselect(cell: SpotifyPlaylistCollectionViewCell)
 }

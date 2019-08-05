@@ -65,7 +65,6 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
 // MARK: - SpotifyPlaylistsDataSourceDelegate
 
 extension SpotifyPlaylistViewController: SpotifyCollectionDataSourceDelegate {
-    func onStartSelection() { }
     
     func onSelect(item: SpotifyObject) { }
     

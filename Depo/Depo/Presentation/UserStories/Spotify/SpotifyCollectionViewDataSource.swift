@@ -10,12 +10,11 @@ import Foundation
 
 protocol SpotifyCollectionDataSourceDelegate: class {
     func needLoadNextPage()
-    func onStartSelection()
     func onSelect(item: SpotifyObject)
     func didChangeSelectionCount(newCount: Int)
 }
 
-class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let collectionView: UICollectionView
     private weak var delegate: SpotifyCollectionDataSourceDelegate?
@@ -129,18 +128,6 @@ class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionV
 // MARK: - SpotifyPlaylistCellDelegate
 
 extension SpotifyCollectionViewDataSource: SpotifyPlaylistCellDelegate {
-    func canLongPress() -> Bool {
-        return true
-    }
-    
-    func onLongPress(cell: UICollectionViewCell) {
-        if canChangeSelectionState, !isSelectionStateActive {
-            if let indexPath = collectionView.indexPath(for: cell) {
-//                startSelection(with: indexPath)
-            }
-            delegate?.onStartSelection()
-        }
-    }
     
     func onSelect(cell: SpotifyPlaylistCollectionViewCell) {
         if let indexPath = collectionView.indexPath(for: cell),

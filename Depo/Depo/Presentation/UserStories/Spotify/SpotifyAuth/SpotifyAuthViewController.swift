@@ -104,9 +104,8 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
 
             delegate?.spotifyAuthSuccess(with: spotifyCode)
             removeCache()
+            navigationController?.popViewController(animated: true)
         }
         decisionHandler(.allow)
-        
-        navigationController?.popViewController(animated: true)
     }
 }
