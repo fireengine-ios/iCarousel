@@ -29,11 +29,11 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
+            newValue.isHidden = true
         }
     }
     @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
-            newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.style = .vertical
         }
@@ -105,7 +105,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private func selectedItemsCountChange(with count: Int) {
         navbarManager.changeSelectionItems(count: count)
-        gradientView.isHidden = count == 0
+        importButton.isHidden = count == 0
     }
     
     @IBAction private func importSelected(_ sender: UIButton) {
@@ -160,7 +160,7 @@ extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
-        gradientView.isHidden = false
+        importButton.isHidden = false
         
         navbarManager.setSuccessImportState()
         dataSource.isSelectionStateActive = false
