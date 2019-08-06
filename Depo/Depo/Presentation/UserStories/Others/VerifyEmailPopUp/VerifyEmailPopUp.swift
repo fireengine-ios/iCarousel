@@ -261,7 +261,7 @@ final class VerifyEmailPopUp: UIViewController {
         var isTextFieldChosen = false
         
         for textField in codeTextFields {
-            if let text = textField.text, text.isEmpty || text == " " {
+            if let text = textField.text, text.removingWhiteSpaces().isEmpty {
                 isTextFieldChosen = true
                 textField.becomeFirstResponder()
                 break
