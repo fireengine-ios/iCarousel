@@ -478,9 +478,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
-            output?.startAsyncOperation()
+            router.navigationController?.topViewController?.showSpinnerIncludeNavigationBar()
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
-                self?.output?.asyncOperationSuccess()
+                self?.router.navigationController?.topViewController?.hideSpinnerIncludeNavigationBar()
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                            success: self?.succesAction(elementType: .download),
                                            fail: self?.failAction(elementType: .download))
