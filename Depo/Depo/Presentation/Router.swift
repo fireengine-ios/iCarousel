@@ -190,7 +190,8 @@ class RouterVC: NSObject {
             
             for (i, viewController) in viewControllers.enumerated() {
                 if viewController is CreateStorySelectionController
-                    || viewController is CreateStoryViewController {
+                    || viewController is CreateStoryViewController
+                    || viewController is CreateStoryPhotoSelectionController {
                     index = i
                     break
                 }
@@ -941,6 +942,10 @@ class RouterVC: NSObject {
     
     func createStory(navTitle: String) -> UIViewController {
         return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
+    }
+    
+    func createStory(searchItems: [Item]) -> UIViewController {
+        return CreateStoryPhotoSelectionController(photos: searchItems)
     }
     
     func createStory(items: [Item]) -> UIViewController {

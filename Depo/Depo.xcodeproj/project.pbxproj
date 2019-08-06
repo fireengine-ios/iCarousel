@@ -3016,6 +3016,9 @@
 		9864296822F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296922F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
+		9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
@@ -7718,6 +7721,7 @@
 		98570AF8208F7556002CCEBA /* SpotlightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightViewController.xib; sourceTree = "<group>"; };
 		98570AF9208F7557002CCEBA /* Spotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
+		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterDataSource.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
@@ -8979,6 +8983,7 @@
 				7C66E8991F979C3300D98F27 /* CreateStoryPreviy */,
 				89E51D1B22CA0F0F007A7DBC /* Views */,
 				7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */,
+				9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */,
 				925B59A422C3BF85004697F3 /* CreateStorySelectionController.swift */,
 				8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */,
 				8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */,
@@ -19788,6 +19793,7 @@
 				8C06AC1D20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
+				9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				892B015722DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -20928,6 +20934,7 @@
 				B53DCE9620EF634900400DBA /* SyncDBUtils.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				8C6EF8791F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
+				9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
@@ -22022,6 +22029,7 @@
 				CE78484622A685FB00662219 /* StorageCard.swift in Sources */,
 				CE78484722A685FB00662219 /* PhotoCell.swift in Sources */,
 				CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */,
+				9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				CE78484922A685FB00662219 /* MulticastDelegate.swift in Sources */,
 				CE78484A22A685FB00662219 /* PopUpSwipeCell.swift in Sources */,
 				CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */,
