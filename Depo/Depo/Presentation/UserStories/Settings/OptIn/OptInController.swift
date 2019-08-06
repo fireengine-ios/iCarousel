@@ -51,14 +51,12 @@ final class OptInController: ViewController, NibInit {
         }
     }
     
-    private lazy var activityManager = ActivityIndicatorManager()
     private var phone = ""
     private var attempts: Int = 0
     private let keyboard = Typist()
     private var currentSecurityCode = ""
     private var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
     private var isRemoveLetter: Bool = false
-
     
     weak var delegate: OptInControllerDelegate?
     
@@ -88,11 +86,6 @@ final class OptInController: ViewController, NibInit {
     
     func dropTimer() {
         timerLabel.dropTimer()
-    }
-    
-    @IBAction func actionResendButton(_ sender: UIButton) {
-        attempts = 0
-        delegate?.optInResendPressed(self)
     }
     
     func verify(code: String) {
@@ -142,6 +135,25 @@ final class OptInController: ViewController, NibInit {
         errorLabel.isHidden = true
     }
     
+    func setupPhoneLable(with number: String) {
+        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+        let range = (text as NSString).range(of: number)
+        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+                                                  .foregroundColor: ColorConstants.textGrayColor]
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(attr, range: range)
+        infoTitle.attributedText = attributedString
+    }
+    
+    func startLoading() {
+        showSpinner()
+    }
+    
+    func stopLoading() {
+        hideSpinner()
+    }
+    
     // MARK: - Utility methods
     private func setupNavBar() {
         navigationBarWithGradientStyle()
@@ -178,17 +190,6 @@ final class OptInController: ViewController, NibInit {
     
     private func setupButtonsInitialState() {
         resendCodeButton.isHidden = true
-    }
-    
-    func setupPhoneLable(with number: String) {
-        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
-        let range = (text as NSString).range(of: number)
-        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
-                                                  .foregroundColor: ColorConstants.textGrayColor]
-        
-        let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttributes(attr, range: range)
-        infoTitle.attributedText = attributedString
     }
     
     private func setupKeyboard() {
@@ -231,6 +232,11 @@ final class OptInController: ViewController, NibInit {
         }
     }
     
+    @IBAction func actionResendButton(_ sender: UIButton) {
+        attempts = 0
+        delegate?.optInResendPressed(self)
+    }
+    
 }
 
 // MARK: - SmartTimerLabelDelegate
@@ -245,17 +251,6 @@ extension OptInController: SmartTimerLabelDelegate {
         }
 
         timerLabel.isShowMessageWithDropTimer = true
-    }
-}
-
-// MARK: - ActivityIndicator
-extension OptInController: ActivityIndicator {
-    func startActivityIndicator() {
-        activityManager.start()
-    }
-    
-    func stopActivityIndicator() {
-        activityManager.stop()
     }
 }
 

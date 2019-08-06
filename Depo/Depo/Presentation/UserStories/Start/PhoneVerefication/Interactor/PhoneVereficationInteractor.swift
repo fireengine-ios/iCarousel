@@ -147,6 +147,10 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 
         })
     }
+    
+    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {}
+    
+    func stopUpdatePhone() {}
 
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Captcha required") ||

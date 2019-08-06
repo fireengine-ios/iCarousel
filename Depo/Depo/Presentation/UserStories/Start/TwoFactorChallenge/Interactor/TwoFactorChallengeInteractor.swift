@@ -10,6 +10,8 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
     
     private var otpParams: TwoFAChallengeParametersResponse
     private let challenge: TwoFAChallengeModel
+        
+    private var updatePhoneService: UpdatePhoneService?
     
     init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
         self.otpParams = otpParams
@@ -40,6 +42,7 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
             case .success(let parameters):
                 self?.otpParams = parameters
                 self?.output.resendCodeRequestSuccesed()
+                
             case .failed(let error):
                 let errorResponse = ErrorResponse.error(error)
                 DispatchQueue.main.async {
@@ -68,4 +71,12 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
         
     }
     
+    override func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {
+        updatePhoneService = UpdatePhoneService(delegate: delegate)
+        updatePhoneService?.start()
+    }
+    
+    override func stopUpdatePhone() {
+        updatePhoneService?.stop()
+    }
 }

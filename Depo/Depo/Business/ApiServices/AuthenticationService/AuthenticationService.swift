@@ -320,18 +320,17 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
-                        /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
-                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
-                            return
-                        }
-                        
                         if self?.tokenStorage.refreshToken == nil {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
                             return
                         }
                         
+                        /// must be after accessToken save logic
+                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
+                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
                         
                         if let statusCode = response.response?.statusCode,
                             statusCode >= 300, statusCode != 403,
