@@ -35,7 +35,7 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
         return uniqueInstance!
     }
     
-    func sendEmail(emailBody: String, subject: String, emails: [String], success: MailSuccessHandler?, fail: MailFailHandler?) {
+    func sendEmail(emailBody: String, subject: String, emails: [String], presentCompletion: VoidHandler? = nil, success: MailSuccessHandler?, fail: MailFailHandler?) {
         successHandler = success
         failHandler = fail
         
@@ -61,9 +61,7 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
         guard let contr_ = controller else {
             return
         }
-        contr_.present(mailController!, animated: true) { 
-            //
-        }
+        contr_.present(mailController!, animated: true, completion: presentCompletion)
     }
     
     // MARK: MFMailComposeViewControllerDelegate
