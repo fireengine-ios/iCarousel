@@ -15,5 +15,5 @@ protocol PhoneVereficationRouterInput {
     func showRedirectToSplash()
     
     //TwoFactorAuth
-    func popToLogin()
+    func popToLoginWithPopUp(title: String?, message: String, image: PopUpImage, onClose: VoidHandler?)
 }

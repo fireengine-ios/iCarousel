@@ -32,6 +32,9 @@
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
 		170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
+		173B144822F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
+		173B144922F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
+		173B144A22F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
 		17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
@@ -6218,6 +6221,7 @@
 		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
 		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
 		17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePhoneService.swift; sourceTree = "<group>"; };
 		17589F612275E33800A5DB37 /* SupportBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBannerView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
 		17589F632275E33800A5DB37 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
@@ -8922,6 +8926,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		173B144622F99F6000FAAC97 /* UpdatePhoneService */ = {
+			isa = PBXGroup;
+			children = (
+				173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */,
+			);
+			path = UpdatePhoneService;
+			sourceTree = "<group>";
+		};
 		17499C603204732CC217594D /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -10956,6 +10968,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				173B144622F99F6000FAAC97 /* UpdatePhoneService */,
 				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
 				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
 				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
@@ -19184,6 +19197,7 @@
 				73FE51F222CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
+				173B144922F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
@@ -20696,6 +20710,7 @@
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,
+				173B144822F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				CEAE3FB11EFD4F0D00A405B2 /* HomePageInitializer.swift in Sources */,
 				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
@@ -22569,6 +22584,7 @@
 				CE784A5E22A685FB00662219 /* DeviceExtension.swift in Sources */,
 				CE784A5F22A685FB00662219 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C1E5BE222CB8C26008FDA02 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				173B144A22F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				CE784A6022A685FB00662219 /* MyStorageModuleInput.swift in Sources */,
 				CE784A6122A685FB00662219 /* PackagesViewController.swift in Sources */,
 				CE784A6222A685FB00662219 /* PasscodeSettingsModuleInput.swift in Sources */,

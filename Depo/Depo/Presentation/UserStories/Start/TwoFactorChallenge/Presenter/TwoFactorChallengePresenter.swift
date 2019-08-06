@@ -8,6 +8,8 @@
 
 final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
     
+    private var isPhoneJustUpdated = false
+    
     override func viewIsReady() {
         view.setupButtonsInitialState()
         view.setupInitialState()
@@ -42,8 +44,22 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
 
         let errorText: String
         
-        if error == "INVALID_SESSION" {
-            router.popToLogin()
+        if isPhoneJustUpdated {
+            router.popToLoginWithPopUp(title: nil,
+                                       message: TextConstants.phoneUpdatedNeedsLogin,
+                                       image: .none) { [weak self] in
+                self?.interactor.stopUpdatePhone()
+            }
+            return
+            
+        } else  if error == "INVALID_SESSION" {
+            router.popToLoginWithPopUp(title: TextConstants.errorAlert,
+                                       message: TextConstants.twoFAInvalidSessionErrorMessage,
+                                       image: .error, onClose: nil)
+            return
+            
+        } else if error == HeaderConstant.emptyMSISDN {
+            updateEmptyPhone()
             return
             
         } else if error == "INVALID_CHALLENGE" {
@@ -66,4 +82,19 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         view.showError(errorText)
     }
 
+    private func updateEmptyPhone() {
+        interactor.updateEmptyPhone(delegate: self)
+    }
+}
+
+extension TwoFactorChallengePresenter: UpdatePhoneServiceDelegate {
+    func successedSilentLogin() {
+        verificationSucces()
+    }
+    
+    func needToRelogin() {
+        isPhoneJustUpdated = true
+        interactor.verifyCode(code: currentSecurityCode)
+    }
+    
 }
