@@ -261,9 +261,9 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
                 Mail.shared().sendEmail(emailBody: emailBody,
                                         subject: emailSubject,
                                         emails: [feedbackEmail],
-                                        success: {
+                                        presentCompletion: {
                                             RouterVC().popViewController()
-                }, fail: { error in
+                }, success: nil, fail: { error in
                     UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
                 })
             }
