@@ -65,6 +65,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         collectionView.contentInset.bottom = gradientView.bounds.height
         navbarManager.setSelectionState()
         loadNextPage()
