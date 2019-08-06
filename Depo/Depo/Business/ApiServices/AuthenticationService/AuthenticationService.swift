@@ -592,27 +592,28 @@ class AuthenticationService: BaseRequestService {
                      method: .post,
                       parameters: params,
                      encoding: JSONEncoding.default)
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-                        if let errorType = json?["errorCode"] as? Int {
-                            let error = ErrorResponse.string("\(errorType)")
-                            handler(.failed(error))
-                            
-                        } else {
-                            let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
-                            handler(.success(model))
-                        }
-                    } catch {
-                        handler(.failed(error))
-                    }
-                    
-                case .failure(let error):
+            .response(queue: .global()) { response in
+                if response.response?.statusCode == 401 {
+                    let error = ErrorResponse.httpCode(401)
                     handler(.failed(error))
+                    
+                } else if let error = response.error {
+                    handler(.failed(error))
+                    
+                } else if let data = response.data {
+                    let json = JSON(data: data)
+                    
+                    if let errorType = json["errorCode"].string {
+                        let error = ErrorResponse.string("\(errorType)")
+                        handler(.failed(error))
+
+                    } else {
+                        let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                        handler(.success(model))
+                        
+                    }
                 }
-        }
+            }
     }
     
     func loginViaTwoFactorAuth(token: String,
