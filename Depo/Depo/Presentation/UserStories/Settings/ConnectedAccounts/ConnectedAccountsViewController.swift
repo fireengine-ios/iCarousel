@@ -18,14 +18,16 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         manager.delegate = self
         return manager
     }()
+    
+    private lazy var spotyfyRouter: SpotifyRoutingService = factory.resolve()
+    
     private let analyticsService: AnalyticsService = factory.resolve()
-
+    
     private let dataSource = ConnectedAccountsDataSource()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        spotyfyRouter.delegate = self
         dataSource.view = self
         setupScreen()
         setupTableView()

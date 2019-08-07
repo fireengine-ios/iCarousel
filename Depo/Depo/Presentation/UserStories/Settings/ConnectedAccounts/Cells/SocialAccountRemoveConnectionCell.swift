@@ -9,14 +9,30 @@
 import UIKit
 
 protocol SocialRemoveConnectionCell: class {
-    func setup(with section: Section?)
+    func setup(with section: Section?)    
+    func spotifySetup(with section: Section?)
     func set(username: String?)
+    func setSpotify(username: String?, modifyedDate: Date?)
+    func setJobStatus(jobStatus: String?)
 }
 
-
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
-
+    
     private(set) var section: Section?
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+        return dateFormatter
+    }()
+    
+    @IBOutlet weak var jobStatusLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.textColor = ColorConstants.charcoalGrey
+        }
+    }
+    @IBOutlet private weak var connectConditionLabelHeight: NSLayoutConstraint!
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
@@ -41,6 +57,12 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     }
     
     func setup(with section: Section?) {
+        jobStatusLabel.isHidden = true
+        connectConditionLabelHeight.constant = 0
+        self.section = section
+    }
+    
+    func spotifySetup(with section: Section?) {
         self.section = section
     }
     
@@ -53,6 +75,25 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         }
     }
     
+    func setSpotify(username: String?, modifyedDate: Date?) {
+        if let username = username, !username.isEmpty {
+            DispatchQueue.toMain {
+                self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
+            }
+        }
+      
+        if let modifyedDate = modifyedDate {
+            DispatchQueue.toMain {
+                self.jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, self.dateFormatter.string(from: modifyedDate))
+            }
+        }
+    }
+    
+    func setJobStatus(jobStatus: String?) {
+        DispatchQueue.toMain {
+            self.jobStatusLabel.text = jobStatus
+        }
+    }
     
     @IBAction func removeConnection(_ sender: Any) {
         let localizedTexts = warningTexts()

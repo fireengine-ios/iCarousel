@@ -102,13 +102,20 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
     
     private func setup(cell: UITableViewCell, at indexPath: IndexPath) {
         let section = tableSections[safe: indexPath.section]
+        
         if let cell = cell as? SocialConnectionCell {
             section?.mediator.set(socialConnectionCell: cell)
             cell.setup(with: section)
             cell.delegate = view
         } else if let cell = cell as? SocialRemoveConnectionCell {
+            
+            if section?.account == Section.SocialAccount.spotify {
+                cell.spotifySetup(with: section)
+                
+            } else {
+                cell.setup(with: section)
+            }
             section?.mediator.set(removeConnectionCell: cell)
-            cell.setup(with: section)
         }
     }
 }

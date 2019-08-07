@@ -1207,6 +1207,8 @@ struct TextConstants {
     static let spotify = NSLocalizedString("Spotify", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instagramConnectedAsFormat = NSLocalizedString("connected_as_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotyfyLastImportFormat = NSLocalizedString("spotify_last_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let instagramRemoveConnectionWarning = NSLocalizedString("instagram_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookRemoveConnectionWarning = NSLocalizedString("facebook_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let dropboxRemoveConnectionWarning = NSLocalizedString("dropbox_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

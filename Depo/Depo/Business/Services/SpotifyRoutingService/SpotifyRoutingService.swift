@@ -11,8 +11,17 @@ import Foundation
 final class SpotifyRoutingService {
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
-    private(set) var lastSpotifyStatus: SpotifyStatus?
+//    private(set) var lastSpotifyStatus: SpotifyStatus?
     private lazy var router = RouterVC()
+    var section: Section?
+    
+    var delegate: SocialConnectionCellDelegate?
+    
+    private(set) var lastSpotifyStatus: SpotifyStatus? {
+        didSet {
+            spotifyService.delegates.invoke(invocation: { $0.spotifyStatusDidChange() })
+        }
+    }
     
     deinit {
         spotifyService.delegates.remove(self)
@@ -47,7 +56,6 @@ final class SpotifyRoutingService {
             guard let self = self else {
                 return
             }
-            
             switch result {
             case .success(let status):
                 if status.isConnected {
@@ -120,6 +128,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
                 
                 switch result {
                 case .success(_):
+                    self.delegate?.didConnectSuccessfully(section: self.section!)
                     let controller = self.prepareImportPlaylistsController()
                     self.router.pushViewController(viewController: controller)
                 case .failed(let error):
