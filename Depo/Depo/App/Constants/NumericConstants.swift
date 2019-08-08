@@ -157,6 +157,8 @@ struct NumericConstants {
     static let createStoryImagesCountLimit: Int = 20
     
     static let numberOfSelectedItemsBeforeLimits = 500
+    
+    static let spotifyImportMinShowTimeinterval = 3.0
 }
 
 struct RequestSizeConstant {

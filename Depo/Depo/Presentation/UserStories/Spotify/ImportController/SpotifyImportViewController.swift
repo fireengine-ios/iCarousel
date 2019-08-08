@@ -86,6 +86,9 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
 
     private lazy var spotifyService: SpotifyService = factory.resolve()
     
+    private var canAutoClose = false
+    private var isImportComplete = false
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -96,6 +99,15 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
         
         startImport()
+        
+        /// Minimum show time = spotifyImportMinShowTimeinterval
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyImportMinShowTimeinterval) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.canAutoClose = true
+            self.autoclose()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,10 +131,18 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
             
             switch result {
             case .success(_):
-                self.delegate?.importDidComplete(self)
+                self.isImportComplete = true
+                self.cancelAsBackButton.isEnabled = false
+                self.autoclose()
             case .failed(let error):
                 self.delegate?.importDidFailed(self, error: error)
             }
+        }
+    }
+    
+    private func autoclose() {
+        if canAutoClose && isImportComplete {
+            delegate?.importDidComplete(self)
         }
     }
     

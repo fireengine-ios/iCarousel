@@ -13127,8 +13127,8 @@
 		989BDE2F22F47B1E001DDEB2 /* ImportOverwritePopup */ = {
 			isa = PBXGroup;
 			children = (
-				989BDE3022F47B1E001DDEB2 /* SpotifyOverwritePopup.swift */,
 				989BDE3122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib */,
+				989BDE3022F47B1E001DDEB2 /* SpotifyOverwritePopup.swift */,
 			);
 			path = ImportOverwritePopup;
 			sourceTree = "<group>";
