@@ -125,6 +125,20 @@ class DropDownView: UIView {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    func updateConstraintsForDropDownView() {
+        guard let cornerView = cornerView else {
+            assertionFailure()
+            return
+        }
+        NSLayoutConstraint(item: cornerView,
+                           attribute: .width,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           multiplier: 1,
+                           constant: cornerView.frame.width).activate()
+    }
 
     func setTableDataObjects(objects: [String], defaultObject: String?) {
         tableDataArray.removeAll()

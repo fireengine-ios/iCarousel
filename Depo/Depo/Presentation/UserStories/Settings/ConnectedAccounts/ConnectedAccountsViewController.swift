@@ -57,7 +57,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
                            CellsIdConstants.dropboxAccountConnectionCell,
-                           CellsIdConstants.socialAccountRemoveConnectionCell]
+                           CellsIdConstants.socialAccountRemoveConnectionCell,
+                           CellsIdConstants.spotifyAccountConnectionCell]
         
         for id in reusableIds {
             let nib = UINib(nibName: id, bundle: nil)
@@ -76,11 +77,11 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 extension ConnectedAccountsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == Section.SocialAccount.instagram.rawValue) ? 0 : 14
+        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (section == Section.SocialAccount.instagram.rawValue) ? nil : SettingHeaderView.viewFromNib()
+        return (section == Section.SocialAccount.spotify.rawValue) ? nil : SettingHeaderView.viewFromNib()
     }
 }
 

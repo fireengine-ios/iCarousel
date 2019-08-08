@@ -74,6 +74,12 @@ final class FeedbackViewController: ViewController {
         animateView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dropDownView.updateConstraintsForDropDownView()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

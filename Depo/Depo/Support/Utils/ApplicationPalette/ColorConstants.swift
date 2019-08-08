@@ -39,6 +39,7 @@ struct ColorConstants {
     static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
     static let blackForLanding = UIColor(red: 12 / 255, green: 6 / 255, blue: 42 / 255, alpha: 1)
     static let darkGrayTransperentColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
+    static let lightGray = UIColor(red: 104.0 / 255.0, green: 108.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
     
     static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
@@ -66,6 +67,11 @@ struct ColorConstants {
     static let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
     static let lighterGray = UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
     static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
+    static let textDisabled = UIColor.black.withAlphaComponent(0.25)
+    
+    static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
+    static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
+    static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -150,11 +150,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zta-Hi-65l" customClass="DropDownView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="18" y="342.5" width="107" height="32"/>
+                                            <rect key="frame" x="18" y="342.5" width="273" height="32"/>
                                             <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="Kig-IM-Yit"/>
-                                                <constraint firstAttribute="width" priority="250" constant="107" id="ty1-uI-8Dw"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FW9-8h-wxD" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
@@ -194,7 +193,7 @@
                                         <constraint firstItem="mLm-Hf-o7Y" firstAttribute="leading" secondItem="yNf-ey-3Kc" secondAttribute="trailing" constant="15" id="g91-dH-dxf"/>
                                         <constraint firstAttribute="trailing" secondItem="mLm-Hf-o7Y" secondAttribute="trailing" constant="18" id="goi-gF-xxx"/>
                                         <constraint firstItem="zta-Hi-65l" firstAttribute="leading" secondItem="Aff-mw-B7R" secondAttribute="leading" constant="18" id="jfL-tw-kD9"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zta-Hi-65l" secondAttribute="trailing" constant="18" id="nXr-c7-Omj"/>
+                                        <constraint firstAttribute="trailing" secondItem="zta-Hi-65l" secondAttribute="trailing" constant="18" id="nXr-c7-Omj"/>
                                         <constraint firstItem="3HH-2a-5f1" firstAttribute="leading" secondItem="Aff-mw-B7R" secondAttribute="leading" id="sHP-c0-0Ri"/>
                                         <constraint firstItem="nBE-lt-ODA" firstAttribute="leading" secondItem="Kga-Ae-IFU" secondAttribute="trailing" constant="15" id="ud8-aL-8zZ"/>
                                         <constraint firstItem="Kga-Ae-IFU" firstAttribute="top" secondItem="yNf-ey-3Kc" secondAttribute="bottom" constant="21" id="vFE-rc-SCV"/>
@@ -236,6 +235,6 @@
         </view>
     </objects>
     <resources>
-        <image name="closeButton" width="53" height="53"/>
+        <image name="closeButton" width="17.666666030883789" height="17.666666030883789"/>
     </resources>
 </document>

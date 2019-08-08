@@ -9,7 +9,6 @@
 import UIKit
 import WebKit
 
-
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
     func tapOnCellForFullScreen()
@@ -33,6 +32,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }()
     
     private var isNeedToUpdateWebView = true
+    private var oldFrame = CGRect.zero
     private var currentItemId = ""
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
@@ -57,13 +57,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
         
         addGestureRecognizer(tapGesture)
+        
+        reset()
     }
     
-    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
-        delegate?.tapOnCellForFullScreen()
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
     }
-    
-    private var oldFrame = CGRect.zero
     
     override func layoutSubviews() {
         /// fixed bug in iOS 11: setNavigationBarHidden calls cell layout
@@ -76,45 +77,79 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        reset()
+    }
+    
+    private func reset() {
+        currentItemId = ""
+        isNeedToUpdateWebView = true
+
+        tapGesture.isEnabled = true
+        
+        if !webView.isHidden {
+            webView.navigationDelegate = nil
+            webView.scrollView.delegate = nil
+            
+            if webView.isLoading {
+                webView.stopLoading()
+            }
+            
+            webView.clearPage()
+            webView.isHidden = true
+        }
+        
+        playVideoButton.isHidden = true
+        imageScrollView.imageView.isHidden = true
+    }
+    
     func setObject(object: Item) {
         if isNeedToUpdateWebView, object.uuid == currentItemId {
             return
         }
         
-        webView.isHidden = true
-        imageScrollView.image = nil
-        playVideoButton.isHidden = true
         isNeedToUpdateWebView = false
+        
         currentItemId = object.uuid
         
         if object.fileType == .video || object.fileType == .image {
+            imageScrollView.imageView.isHidden = false
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
             
         } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
             isNeedToUpdateWebView = true
-            imageScrollView.imageView.isHidden = true
+            
             webView.isHidden = false
+            webView.navigationDelegate = self
             webView.clearPage()
+
+            let loadURL: URL?
             if object.fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
-                webView.navigationDelegate = self
-                webView.load(URLRequest(url: preview))
+                loadURL = preview
             } else if let url = object.urlToFile {
-                webView.navigationDelegate = self
+                loadURL = url
+            } else {
+                loadURL = nil
+            }
+            
+            if let url = loadURL {
                 webView.load(URLRequest(url: url))
             }
         }
     }
     
+    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
+        delegate?.tapOnCellForFullScreen()
+    }
+    
     @IBAction private func onPlayVideoButton() {
         delegate?.tapOnSelectedItem()
     }
-    
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-    }
+
 }
 
 extension PhotoVideoDetailCell: UIScrollViewDelegate {
@@ -138,6 +173,8 @@ extension PhotoVideoDetailCell: UIScrollViewDelegate {
 extension PhotoVideoDetailCell: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.scrollView.delegate = self
+
+        self.webView = webView
     }
 }
 

@@ -170,6 +170,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var isDeleteFromMoved = false
     
+    
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
         super.init()
@@ -1763,7 +1764,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 } else {
                     self.isDeleteFromMoved = false
                 }
-                
+                    
                 self.updateCoverPhoto()
             }
         }

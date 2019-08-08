@@ -78,6 +78,7 @@ class SplashInteractor: SplashInteractorInput {
                     
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         
+                        SingletonStorage.shared.isJustRegistered = false
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -109,6 +110,7 @@ class SplashInteractor: SplashInteractorInput {
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
                     CacheManager.shared.actualizeCache(completion: nil)
                     self?.isTryingToLogin = false
+                    SingletonStorage.shared.isJustRegistered = false
                     self?.successLogin()
                 }, fail: { error in
                     /// we don't need logout here

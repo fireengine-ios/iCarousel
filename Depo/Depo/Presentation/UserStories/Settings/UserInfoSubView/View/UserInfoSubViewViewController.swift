@@ -11,7 +11,6 @@ import SDWebImage
 
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed()
-    func updateUserProfile(userInfo: AccountInfoResponse)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
 }

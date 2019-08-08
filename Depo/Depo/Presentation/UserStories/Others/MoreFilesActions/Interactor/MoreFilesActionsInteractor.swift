@@ -48,26 +48,28 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareSmallSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
+        if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
+            let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareSmallSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            
+            controler.addAction(smallAction)
+            
+            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareOrignalSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            controler.addAction(originalAction)
         }
-        
-        controler.addAction(smallAction)
-        
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareOrignalSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
-        }
-        controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
@@ -468,9 +470,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         if let item = item as? [Item] {
             //FIXME: transform all to BaseDataSourceItem
-            if let item = item.first,
-                item.fileType.isFaceImageAlbum ||
-                    item.fileType.isFaceImageType {
+            if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
             } else {
                 fileService.download(items: item, toPath: "",
@@ -478,8 +478,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
-            
+            output?.startAsyncOperationDisableScreen()
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
+                self?.output?.completeAsyncOperationEnableScreen()
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                            success: self?.succesAction(elementType: .download),
                                            fail: self?.failAction(elementType: .download))

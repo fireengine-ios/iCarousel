@@ -132,7 +132,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         }
         
         emailTextField.attributedPlaceholder = NSAttributedString(string: TextConstants.resetPasswordEmailPlaceholder,
-                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.25),
+                                                               attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled,
                                                                             NSAttributedString.Key.font: font])
         
         emailTextField.textColor = UIColor.black

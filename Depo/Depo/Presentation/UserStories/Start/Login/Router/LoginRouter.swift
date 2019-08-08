@@ -7,15 +7,8 @@
 //
 
 class LoginRouter: LoginRouterInput {
-    
+  
     let router = RouterVC()
-    
-    var optInController: OptInController?
-    var emptyPhoneController: TextEnterController?
-    
-    func renewOptIn(with optIn: OptInController) {
-        optInController = optIn
-    }
     
     func goToForgotPassword() {
         let forgotPassword = router.forgotPasswordScreen
@@ -49,23 +42,9 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: navVC)
     }
     
-    func openTextEnter(buttonAction: @escaping TextEnterHandler) {
-
-        let textEnterVC = TextEnterController.with(title: TextConstants.missingInformation,
-                                                   buttonTitle: TextConstants.createStoryPhotosContinue,
-                                                   buttonAction: buttonAction)
-        let navVC = NavigationController(rootViewController: textEnterVC)
-        
-        self.emptyPhoneController = textEnterVC
-
-        router.presentViewController(controller: navVC)
-    }
-    
-    func openOptIn(phone: String) {
-        let optInController = OptInController.with(phone: phone)
-        self.optInController = optInController
-        
-        emptyPhoneController?.navigationController?.pushViewController(optInController, animated: true)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        let vc = TwoFactorAuthenticationViewController(response: response)
+        router.pushViewController(viewController: vc)
     }
     
     func showNeedSignUp(message: String, onClose: @escaping VoidHandler) {
@@ -83,7 +62,16 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    func dismissEmptyPhoneController(successHandler: VoidHandler?) {
-        emptyPhoneController?.dismiss(animated: true, completion: successHandler)
+    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?) {
+        let popupVC = PopUpController.with(title: nil,
+                                           message: TextConstants.phoneUpdatedNeedsLogin,
+                                           image: .none,
+                                           buttonTitle: TextConstants.ok) { vc in
+                                            vc.close {
+                                                onClose?()
+                                            }
+        }
+        
+        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
 }

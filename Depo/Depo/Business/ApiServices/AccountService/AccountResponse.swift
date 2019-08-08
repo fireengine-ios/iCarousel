@@ -36,8 +36,11 @@ struct AccountJSONConstants {
     static let objectCount = "objectCount"
     static let projectID = "projectId"
     
+    static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
+    static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -59,6 +62,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     var gapId: String?
+    
+    var emailVerificationRemainingDays: Int?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -85,16 +90,19 @@ class AccountInfoResponse: ObjectRequestResponse {
         emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
+        emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
     }
 }
 
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?
     var mobileNetworkAuthEnabled: Bool?
+    var twoFactorAuthEnabled: Bool?
     
     override func mapping() {
         turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
         mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        twoFactorAuthEnabled = json?[AccountJSONConstants.twoFactorAuthEnabled].bool
     }
     
 }
@@ -424,6 +432,25 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
     override func mapping() {
         status = json?[ResponseKey.status].string
         value = json?[ResponseKey.value].string
+    }
+}
+
+final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let remainingTimeInSeconds = "remainingTimeInSeconds"
+        static let expectedInputLength = "expectedInputLength"
+    }
+    
+    var status: String?
+    var remainingTimeInSeconds: Int?
+    var expectedInputLength: Int?
+
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
+        expectedInputLength = json?[ResponseKey.expectedInputLength].int
     }
 }
 

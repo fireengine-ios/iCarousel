@@ -136,12 +136,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         showSpinner()
     }
     
-    func needPresentPopUp(popUpView: UIViewController) {
-        DispatchQueue.toMain {
-            self.present(popUpView, animated: true, completion: nil)
-        }
-    }
-    
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
         cardTypes.append(contentsOf: homePageDataSource.popUps.flatMap { SpotlightType(cardView: $0) })
@@ -272,10 +266,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     // MARK: UICollectionViewDelegate
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:

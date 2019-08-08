@@ -36,6 +36,11 @@ final class PhotoVideoCollectionViewManager {
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
     let collectionViewLayout = PhotoVideoCollectionViewLayout()
     
+    var selectedIndexes: [IndexPath] {
+        return collectionView.indexPathsForSelectedItems ?? []
+    }
+    
+    
     init(collectionView: UICollectionView, delegate: PhotoVideoCollectionViewManagerDelegate) {
         self.collectionView = collectionView
         self.delegate = delegate
@@ -62,7 +67,6 @@ final class PhotoVideoCollectionViewManager {
     }
     
     func setup() {
-        
         setupCollectionView()
         setupPullToRefresh()
         
@@ -82,8 +86,15 @@ final class PhotoVideoCollectionViewManager {
         }
     }
     
+    func deselectAll() {
+        selectedIndexes.forEach { indexPath in
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
+    }
+    
     private func setupCollectionView() {
         collectionView.collectionViewLayout = collectionViewLayout
+        collectionView.allowsMultipleSelection = true
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         if #available(iOS 10.0, *) {

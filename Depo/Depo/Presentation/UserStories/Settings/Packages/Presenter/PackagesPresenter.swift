@@ -23,7 +23,6 @@ class PackagesPresenter {
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
     private var percentage: CGFloat = 0
-    private var storageUsage: UsageResponse?
     
     private func refreshPage() {
         availableOffers = []
@@ -123,7 +122,7 @@ extension PackagesPresenter: PackagesViewOutput {
 // MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         if let offer = offerToBuy {
             interactor.getResendToken(for: offer)
@@ -141,7 +140,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
@@ -161,7 +160,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         
         DispatchQueue.toMain {
@@ -180,7 +179,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
@@ -234,7 +233,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
@@ -245,7 +244,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.showError(error.description)
     }
 
@@ -275,7 +274,10 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            router.openMyStorage(storageUsage: storageUsage)
+            let usage = UsageResponse()
+            usage.usedBytes = quotaInfo?.bytesUsed
+            usage.quotaBytes = quotaInfo?.bytes
+            router.openMyStorage(storageUsage: usage)
         case .accountType(let accountType):
             router.openLeavePremium(type: accountType.leavePremiumType)
         case .myProfile:

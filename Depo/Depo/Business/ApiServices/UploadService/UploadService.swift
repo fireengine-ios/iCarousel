@@ -114,6 +114,10 @@ final class UploadService: BaseRequestService {
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelSyncToUseOperations()
                             self?.showOutOfSpaceAlert()
+                            ///In order to update the progress bar of the items which are not synchronized
+                            filteredItems.forEach { wrapData in
+                                ItemOperationManager.default.cancelledUpload(file: wrapData)
+                            }
                         }
                         
                         fail(errorResponse)
@@ -174,7 +178,12 @@ final class UploadService: BaseRequestService {
     private func showSyncCardProgress() {
         WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
         
-        guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount, autoSyncStorage.settings.isAutoSyncEnabled else {
+        guard
+            allSyncOperationsCount != 0,
+            allSyncOperationsCount != finishedSyncOperationsCount,
+            autoSyncStorage.settings.isAutoSyncEnabled,
+            SyncServiceManager.shared.hasExecutingSync
+        else {
             clearSyncCounters()
             return
         }
@@ -259,7 +268,7 @@ final class UploadService: BaseRequestService {
                             //                        checkIfFinished()
                             //                    } else {
                             //sync failed
-                            fail(.error(error))
+                            fail(error)
                             //                    }
                             return
                         }
