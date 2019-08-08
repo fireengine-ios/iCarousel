@@ -1,6 +1,7 @@
 import UIKit
 
 extension UITextField {
+    /// call layoutIfNeeded() if placeholderLabel is nil
     var placeholderLabel: UILabel? {
         return subviews.first(where: { $0 is UILabel }) as? UILabel
     }

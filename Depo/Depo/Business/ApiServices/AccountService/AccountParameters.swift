@@ -167,15 +167,18 @@ class FaceImageAllowedParameters: BaseRequestParametrs {
 class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
     let turkcellPasswordAuthEnabled: Bool
     let mobileNetworkAuthEnabled: Bool
-    
-    init(turkcellPasswordAuth: Bool, mobileNetworkAuth: Bool) {
+    let twoFactorAuthEnabled: Bool
+
+    init(turkcellPasswordAuth: Bool, mobileNetworkAuth: Bool, twoFactorAuth: Bool) {
         turkcellPasswordAuthEnabled = turkcellPasswordAuth
         mobileNetworkAuthEnabled = mobileNetworkAuth
+        twoFactorAuthEnabled = twoFactorAuth
     }
     
     override var requestParametrs: Any {
         return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
-                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled]
+                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled,
+                "twoFactorAuthEnabled": twoFactorAuthEnabled]
     }
     
     override var patch: URL {

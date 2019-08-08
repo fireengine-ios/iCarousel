@@ -141,7 +141,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
@@ -149,7 +149,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
         DispatchQueue.toMain {
@@ -163,7 +163,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     //MARK: Fail
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
@@ -183,7 +183,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func failedResendToken(with errorMessage: String) {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.showError(errorMessage)
     }
 
@@ -200,7 +200,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
 // MARK: - OptInControllerDelegate
 extension PremiumPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = feature else {
             self.failed(with: "Couldn't get feature offer for this authority type")
@@ -220,7 +220,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = feature else {
             self.failed(with: "Couldn't get feature offer for this authority type")

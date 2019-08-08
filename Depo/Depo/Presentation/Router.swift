@@ -52,6 +52,16 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last is AlbumDetailViewController
     }
     
+    func isTwoFactorAuthViewControllers() -> Bool {
+        
+        guard let currentViewController = navigationController?.viewControllers.last else {
+            return false
+        }
+        
+        return currentViewController is TwoFactorAuthenticationViewController ||
+               currentViewController is PhoneVerificationViewController
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -180,7 +190,8 @@ class RouterVC: NSObject {
             
             for (i, viewController) in viewControllers.enumerated() {
                 if viewController is CreateStorySelectionController
-                    || viewController is CreateStoryViewController {
+                    || viewController is CreateStoryViewController
+                    || viewController is CreateStoryPhotoSelectionController {
                     index = i
                     break
                 }
@@ -192,6 +203,22 @@ class RouterVC: NSObject {
             } else {
                 navigationController?.popToRootViewController(animated: true)
             }
+        }
+    }
+    
+    func popTwoFactorAuth() {
+        guard let viewControllers = navigationController?.viewControllers else {
+            assertionFailure("nav bar is missing!")
+            return
+        }
+        
+        let index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
+        
+        if let index = index {
+            let viewController = viewControllers[index - 1]
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -297,7 +324,7 @@ class RouterVC: NSObject {
     func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
         let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen",
+        let controller = PhoneVerificationViewController(nibName: "PhoneVereficationScreen",
                                                          bundle: nil)
         inicializer.phonevereficationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
@@ -751,8 +778,8 @@ class RouterVC: NSObject {
     
     // MARK: Turkcell Security
     
-    var turkcellSecurity: UIViewController {
-        return TurkcellSecurityModuleInitializer.viewController
+    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
+        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
     }
     
     // MARK: Auto Upload
@@ -814,10 +841,21 @@ class RouterVC: NSObject {
     // MARK: feedback subView
     
     func showFeedbackSubView() {
-        let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+        SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
+            let router = RouterVC()
+            let controller = router.supportFormPrefilledController
+            controller.title = TextConstants.feedbackViewTitle
+            let config = SupportFormConfiguration(name: userInfo.name,
+                                                  surname: userInfo.surname,
+                                                  phone: userInfo.fullPhoneNumber,
+                                                  email: userInfo.email)
+            controller.config = config
+            router.pushViewController(viewController: controller)
+            
+        }, fail: { error in
+            UIApplication.showErrorAlert(message: error.description)
+        })
+
     }
     
     func vcForCurrentState() -> UIViewController? {
@@ -898,11 +936,72 @@ class RouterVC: NSObject {
         return SupportFormController()
     }
     
+    var supportFormPrefilledController: SupportFormPrefilledController {
+        return SupportFormPrefilledController()
+    }
+    
     func createStory(navTitle: String) -> UIViewController {
         return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
     }
     
+    func createStory(searchItems: [Item]) -> UIViewController {
+        return CreateStoryPhotoSelectionController(photos: searchItems)
+    }
+    
     func createStory(items: [Item]) -> UIViewController {
         return CreateStoryViewController(images: items)
+    }
+    
+    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
+        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
+    }
+    
+    var verifyEmailPopUp: VerifyEmailPopUp {
+        let controller = VerifyEmailPopUp()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    var changeEmailPopUp: ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp()
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
+    }
+    
+    // MARK: - Spotify
+    
+    func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyPlaylistsViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {
+        let controller = SpotifyPlaylistViewController.initFromNib()
+        controller.playlist = playlist
+        return controller
+    }
+    
+    func spotifyImportController(playlists: [SpotifyPlaylist]) -> UIViewController {
+        let controller = SpotifyImportViewController.initFromNib()
+        controller.playlists = playlists
+        return controller
+    }
+    
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
+        return SpotifyOverwritePopup.with(importAction: importAction)
+    }
+
+    func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyAuthViewController()
+        controller.loadWebView(with: url)
+        controller.delegate = delegate
+        return controller
     }
 }

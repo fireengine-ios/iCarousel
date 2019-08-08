@@ -84,7 +84,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     
     private func addChildVC() {
         let dataSource: PhotoSelectionDataSourceProtocol = isFavouritePictures ? FavoritePhotosSelectionDataSource(pageSize: 100) : AllPhotosSelectionDataSource(pageSize: 100)
-    
+
         let childController = PhotoSelectionController(title: "",
                                                        selectingLimit: selectingLimit,
                                                        delegate: self,

@@ -20,6 +20,7 @@ class SingletonStorage {
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
+    var isJustRegistered: Bool?
     
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
         if let info = accountInfo, !forceReload {

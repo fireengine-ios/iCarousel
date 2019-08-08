@@ -74,13 +74,6 @@ class LoginPresenter: BasePresenter {
         }
     }
     
-    private func stopOptInVC() {
-        let optInController = router.optInController
-        
-        optInController?.stopActivityIndicator()
-        optInController?.resignFirstResponder()
-    }
-    
     private func failLogin(message: String) {
         showMessageHideSpinner(text: message)
         
@@ -95,16 +88,7 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openEmptyPhone() {
-        completeAsyncOperationEnableScreen()
-        tokenStorage.isClearTokens = true
-        
-        let action: TextEnterHandler = { [weak self] enterText, vc in
-            self?.newPhone = enterText
-            self?.interactor.getTokenToUpdatePhone(for: enterText)
-            vc.startLoading()
-        }
-        
-        router.openTextEnter(buttonAction: action)
+        interactor.updateEmptyPhone(delegate: self)
     }
 
 }
@@ -158,6 +142,12 @@ extension LoginPresenter: LoginViewOutput {
 //MARK: - LoginInteractorOutput
 extension LoginPresenter: LoginInteractorOutput {
     
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        completeAsyncOperationEnableScreen()
+        isPresenting = true
+        router.goToTwoFactorAuthViewController(response: response)
+    }
+    
     func succesLogin() {
         tokenStorage.isClearTokens = false
         MenloworksTagsService.shared.onStartWithLogin(true)
@@ -196,6 +186,7 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.errorConnectedToNetwork)
             
         case .emptyPhone:
+            completeAsyncOperationEnableScreen()
             openEmptyPhone()
             
         case .serverError:
@@ -280,68 +271,9 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
-    func successed(tokenUpdatePhone: SignUpSuccessResponse) {
-        referenceToken = tokenUpdatePhone.referenceToken
-        let textEnterVC = router.emptyPhoneController
-
-        textEnterVC?.stopLoading()
-        textEnterVC?.close { [weak self] in
-            guard let `self` = self, let newPhone = self.newPhone else {
-                return
-            }
-            
-            self.isPresenting = true
-            
-            self.router.openOptIn(phone: newPhone)
-            self.router.optInController?.delegate = self
-        }
-    }
-    
-    func failedUpdatePhone(errorResponse: ErrorResponse) {
-        let textEnterVC = router.emptyPhoneController
-        textEnterVC?.stopLoading()
-        textEnterVC?.showErrorAlert(message: errorResponse.description)
-    }
-    
-    func successed(resendUpdatePhone: SignUpSuccessResponse) {
-        referenceToken = resendUpdatePhone.referenceToken
-        let optInController = router.optInController
-
-        optInController?.stopActivityIndicator()
-        optInController?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
-        optInController?.startEnterCode()
-        optInController?.hiddenError()
-        optInController?.hideResendButton()
-    }
-    
-    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
-        router.optInController?.stopActivityIndicator()
-        router.optInController?.showError(errorResponse.description)
-    }
-    
-    func successedVerifyPhone() {
-        stopOptInVC()
-        
-        let popupVC = PopUpController.with(title: nil,
-                                           message: TextConstants.phoneUpdatedNeedsLogin,
-                                           image: .none,
-                                           buttonTitle: TextConstants.ok) { [weak self] vc in
-                                            vc.close {
-                                                self?.router.dismissEmptyPhoneController(successHandler: nil)
-                                            }
-        }
-        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
-    }
-    
-    func failedVerifyPhone(errorString: String) {
-        let optInController = router.optInController
-        optInController?.stopActivityIndicator()
-        optInController?.clearCode()
-        optInController?.view.endEditing(true)
-        
-        if optInController?.increaseNumberOfAttemps() == false {
-            optInController?.startEnterCode()
-            optInController?.showError(TextConstants.promocodeInvalid)
+    func successedVerifyPhone() {        
+        router.showPhoneVerifiedPopUp { [weak self] in
+            self?.interactor.stopUpdatePhone()
         }
     }
     
@@ -372,47 +304,8 @@ extension LoginPresenter: LoginInteractorOutput {
         view.showErrorMessage(with: message)
     }
     
-    func successedSilentLogin() {
-        stopOptInVC()
-        let optInController = router.optInController
-        if optInController != nil {
-            router.dismissEmptyPhoneController { [weak self] in
-                self?.succesLogin()
-            }
-        } else {
-            succesLogin()
-        }
-    }
-    
     func showSupportView() {
         view.showSupportView()
-    }
-}
-
-// MARK: - OptInControllerDelegate
-extension LoginPresenter: OptInControllerDelegate {
-    func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
-        self.router.renewOptIn(with: optInVC)
-        if let newPhone = newPhone {
-            interactor.getResendTokenToUpdatePhone(for: newPhone)
-        }
-    }
-
-    func optInReachedMaxAttempts(_ optInVC: OptInController) {
-        optInVC.showResendButton()
-        optInVC.dropTimer()
-        optInVC.showError(TextConstants.promocodeBlocked)
-    }
-
-    func optInNavigationTitle() -> String {
-        return TextConstants.confirmPhoneOptInNavigarionTitle
-    }
-
-    func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
-        self.router.renewOptIn(with: optInVC)
-        interactor.verifyPhoneNumber(token: referenceToken ?? "", code: code)
     }
 }
 
@@ -422,4 +315,15 @@ extension LoginPresenter: CaptchaViewErrorDelegate {
         
         view.showErrorMessage(with: error.description)
     }
+}
+
+extension LoginPresenter: UpdatePhoneServiceDelegate {
+    func successedSilentLogin() {
+        succesLogin()
+    }
+    
+    func needToRelogin() {
+        interactor.tryToRelogin()
+    }
+    
 }

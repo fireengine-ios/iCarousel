@@ -285,10 +285,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                             }
                             dispatchGroup.leave()
                         }
-                        
                     }
                 }
                 dispatchGroup.notify(queue: .main) {
+                    /// Sort our albums by name AZ
+                    albums.sort(by: {
+                        if let firstSortName = $0.name, let secondSortName = $1.name {
+                            return firstSortName < secondSortName
+                        } else {
+                            assertionFailure()
+                            return true
+                        }
+                    })
                     completion(albums)
                 }
             }

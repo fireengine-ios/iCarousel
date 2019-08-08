@@ -15,6 +15,7 @@ class PageForLanding: UIViewController {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 31.5)
             titleLabel.textColor = ColorConstants.whiteColor
             titleLabel.text = "Welcome! Let’s get started!"
+            titleLabel.adjustsFontSizeToFitWidth()
         }
     }
     
@@ -51,6 +52,7 @@ class PageForLanding: UIViewController {
         } else {
             bgImage.image = nil
             bgImageSmall.image = UIImage(named: bgImageName)
+            bgImageSmall.contentMode = UIViewContentMode.scaleAspectFill
             titleLabel.textColor = ColorConstants.blackForLanding
             subTitleLabel.textColor = ColorConstants.blackForLanding
         }

@@ -155,6 +155,8 @@ struct NumericConstants {
     static let firstResponderBottomOffset: CGFloat = 50
     
     static let createStoryImagesCountLimit: Int = 20
+    
+    static let numberOfSelectedItemsBeforeLimits = 500
 }
 
 struct RequestSizeConstant {

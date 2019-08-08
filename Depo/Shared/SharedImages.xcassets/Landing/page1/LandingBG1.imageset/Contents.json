@@ -10,7 +10,7 @@
     },
     {
       "idiom" : "iphone",
-      "filename" : "LandingBG1.png",
+      "filename" : "backgroundImage@3x.png",
       "scale" : "3x"
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "idiom" : "ipad",
-      "filename" : "LandingBG1-1.png",
+      "filename" : "backgroundImage@2x.png",
       "scale" : "2x"
     }
   ],

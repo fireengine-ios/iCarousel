@@ -187,7 +187,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     // MARK: - User Security
     
-    func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AccountService securitySettingsInfo")
 
         let parametres = SecuritySettingsInfoParametres()
@@ -195,12 +195,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: parametres, handler: handler)
     }
     
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
-                                success: SuccessResponse?, fail: FailResponse?) {
+    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
+                                mobileNetworkAuthEnabled: Bool,
+                                twoFactorAuthEnabled: Bool,
+                                success: SuccessResponse?,
+                                fail: FailResponse?) {
         debugLog("AccountService securitySettingsChange")
         
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
+        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
+                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
+                                                              twoFactorAuth: twoFactorAuthEnabled)
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parametres, handler: handler)
     }
@@ -541,6 +545,82 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     let feedbackResponse = FeedbackEmailResponse(json: data, headerResponse: nil)
                     handler(.success(feedbackResponse))
                 case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func verifyEmail(otpCode: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.verifyEmail,
+                     method: .post,
+                     parameters: ["otp" : otpCode],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "INVALID_OTP" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else if statusJSON == "EXPIRED_OTP" {
+                        errorText = TextConstants.expiredOTP
+                        
+                    } else if statusJSON == "REFERENCE_TOKEN_IS_EMPTY" {
+                        errorText = TextConstants.tokenIsMissing
+                        
+                    } else if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+                        
+                    } else if statusJSON == "INVALID_EMAIL" {
+                        errorText = TextConstants.invalidEmail
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func sendEmailVerificationCode(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.sendEmailVerificationCode,
+                     method: .post,
+                     parameters: nil,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
                     handler(.failed(error))
                 }
             })

@@ -15,7 +15,6 @@ protocol PhotoVideoDataSourceDelegate: class {
     func convertFetchedObjectsInProgress()
 }
 
-// TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
@@ -27,8 +26,6 @@ final class PhotoVideoDataSource: NSObject {
             delegate?.selectedModeDidChange(isSelectingMode)
         }
     }
-    
-    var selectedIndexPaths = Set<IndexPath>()
     
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
     
@@ -100,8 +97,8 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getSelectedObjects(wrapDataCallBack: @escaping WrapObjectsCallBack) {
-        getConvertedObjects(at: Array(selectedIndexPaths), wrapItemsCallback: wrapDataCallBack)
+    func getSelectedObjects(at indexPaths: [IndexPath], wrapDataCallBack: @escaping WrapObjectsCallBack) {
+        getConvertedObjects(at: Array(indexPaths), wrapItemsCallback: wrapDataCallBack)
     }
     
     private func getObject(at indexPath: IndexPath) -> MediaItem? {

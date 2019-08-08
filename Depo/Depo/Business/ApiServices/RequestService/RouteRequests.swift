@@ -66,7 +66,7 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -82,6 +82,9 @@ struct RouteRequests {
     static let mailVerefication = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
@@ -180,6 +183,20 @@ struct RouteRequests {
     static let quickScrollGroupsList = "scroll/groups/list"
     static let quickScrollRangeList = "scroll/range/list"
     
+    // MARK: - Spotify
+    
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let disconnect = spotifyApi +/ "disconnect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = spotifyApi +/ "playlist/track"
+    }
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
@@ -255,4 +272,6 @@ struct RouteRequests {
         }   
     }
     
+    static let verifyEmail = baseUrl +/ "verify/emailAddress"
+    static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
 }

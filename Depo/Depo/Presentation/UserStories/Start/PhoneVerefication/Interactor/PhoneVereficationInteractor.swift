@@ -31,8 +31,8 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
     
-    var remainingTimeInMinutes: Int {
-        return dataStorage.signUpResponse.remainingTimeInMinutes ?? 1
+    var remainingTimeInSeconds: Int {
+        return (dataStorage.signUpResponse.remainingTimeInMinutes ?? 1) * 60
     }
     
     var expectedInputLength: Int? {
@@ -141,8 +141,16 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                     self.output.failLogin(message: errorResponse.description)
                 }
             }
+            }, twoFactorAuth: {twoFARequered in
+                /// As a result of the meeting, the logic of showing the screen of two factorial authorization is added only with a direct login and is not used with other authorization methods.
+                assertionFailure()
+                
         })
     }
+    
+    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {}
+    
+    func stopUpdatePhone() {}
 
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Captcha required") ||
