@@ -40,6 +40,7 @@ final class VerifyEmailPopUp: UIViewController {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.textColor = ColorConstants.textOrange
             newValue.isHidden = true
+            newValue.numberOfLines = 0
         }
     }
     
@@ -242,6 +243,7 @@ final class VerifyEmailPopUp: UIViewController {
             if let nextResponder = codeTextFields[safe: nextTag] {
                 nextResponder.becomeFirstResponder()
             } else {
+                currentSecurityCode.removeLast()
                 hideKeyboard()
             }
         }
@@ -256,7 +258,19 @@ final class VerifyEmailPopUp: UIViewController {
     @IBAction func startEnteringCode(_ sender: Any) {
         errorLabel.isHidden = true
         
-        firstTextField.becomeFirstResponder()
+        var isTextFieldChosen = false
+        
+        for textField in codeTextFields {
+            if let text = textField.text, text.removingWhiteSpaces().isEmpty {
+                isTextFieldChosen = true
+                textField.becomeFirstResponder()
+                break
+            }
+        }
+        
+        if !isTextFieldChosen {
+            codeTextFields.last?.becomeFirstResponder()
+        }
     }
     
     
@@ -345,7 +359,7 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         isRemoveLetter = string.isEmpty
         
-        if string.isEmpty, !currentSecurityCode.isEmpty {
+        if isRemoveLetter, currentSecurityCode.hasCharacters {
             currentSecurityCode.removeLast()
             
             return true
@@ -367,8 +381,10 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
             currentSecurityCode.append(contentsOf: string)
             enableConfirmButtonIfNeeded()
             return true
+            
         } else if currentStr.count > NumericConstants.vereficationCharacterLimit {
             return false
+            
         }
         
         currentSecurityCode.append(contentsOf: string)
