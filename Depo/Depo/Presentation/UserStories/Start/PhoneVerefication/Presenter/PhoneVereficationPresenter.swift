@@ -75,7 +75,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.updateEditingState()
         
         if case ErrorResponse.error(let containedError) = error, let serverError = containedError as? ServerError, serverError.code == 401 {
-            router.popToLogin()
+            router.popToLoginWithPopUp(title: TextConstants.errorAlert, message: TextConstants.twoFAInvalidSessionErrorMessage, image: .error, onClose: nil)
             
         } else if error.description == TextConstants.TOO_MANY_REQUESTS {
             view.showError(error.description)
