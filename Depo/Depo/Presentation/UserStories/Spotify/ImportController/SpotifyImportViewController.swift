@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol SpotifyImportControllerDelegate: class {
+    func importDidComplete(_ controller: SpotifyImportViewController)
+    func importDidFailed(_ controller: SpotifyImportViewController, error: Error)
+    func importDidCancel(_ controller: SpotifyImportViewController)
+    func importSendToBackground()
+}
+
 final class SpotifyImportViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var importingLabel: UILabel! {
@@ -74,8 +81,13 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     }()
     
     var playlists: [SpotifyPlaylist]!
+    
+    weak var delegate: SpotifyImportControllerDelegate?
 
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    
+    private var canAutoClose = false
+    private var isImportComplete = false
     
     // MARK: - View lifecycle
     
@@ -87,6 +99,15 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
         
         startImport()
+        
+        /// Minimum show time = spotifyImportMinShowTimeinterval
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyImportMinShowTimeinterval) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.canAutoClose = true
+            self.autoclose()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,17 +131,18 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
             
             switch result {
             case .success(_):
-                self.hideView()
+                self.isImportComplete = true
+                self.cancelAsBackButton.isEnabled = false
+                self.autoclose()
             case .failed(let error):
-                let popup = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok, action: { popup in
-                    popup.close { [weak self] in
-                        self?.hideView()
-                    }
-                })
-                DispatchQueue.main.async {
-                    self.present(popup, animated: false, completion: nil)
-                }
+                self.delegate?.importDidFailed(self, error: error)
             }
+        }
+    }
+    
+    private func autoclose() {
+        if canAutoClose && isImportComplete {
+            delegate?.importDidComplete(self)
         }
     }
     
@@ -130,15 +152,11 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         }
     }
     
-    private func hideView() {
-        dismiss(animated: true)
-    }
-
     @objc private func onCancel() {
-        stopImport()
+        delegate?.importDidCancel(self)
     }
     
     @objc private func onImportInBackground() {
-        spotifyService.delegates.invoke(invocation: { $0.sendImportToBackground() })
+        delegate?.importSendToBackground()
     }
 }

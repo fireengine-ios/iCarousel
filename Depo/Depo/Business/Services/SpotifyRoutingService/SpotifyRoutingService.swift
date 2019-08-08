@@ -8,18 +8,27 @@
 
 import Foundation
 
+protocol SpotifyRoutingServiceDelegate: class {
+    func importDidComplete()
+    func importSendToBackground()
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus)
+}
+
 final class SpotifyRoutingService {
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
-    private(set) var lastSpotifyStatus: SpotifyStatus?
+    private(set) var lastSpotifyStatus: SpotifyStatus? {
+        didSet {
+            if let status = lastSpotifyStatus {
+                delegates.invoke(invocation: { $0.spotifyStatusDidChange(status)} )
+            }
+        }
+    }
     private lazy var router = RouterVC()
+    var delegates = MulticastDelegate<SpotifyRoutingServiceDelegate>()
     
     deinit {
-        spotifyService.delegates.remove(self)
-    }
-    
-    init() {
-        spotifyService.delegates.add(self)
+        delegates.removeAll()
     }
     
     func updateStatus(completion: ResponseHandler<SpotifyStatus>?) {
@@ -100,7 +109,7 @@ final class SpotifyRoutingService {
     }
     
     private func importPlaylists(_ playlists: [SpotifyPlaylist]) {
-        let controller = router.spotifyImportController(playlists: playlists)
+        let controller = router.spotifyImportController(playlists: playlists, delegate: self)
         let navigationController = NavigationController(rootViewController: controller)
         navigationController.navigationBar.isHidden = false
         router.presentViewController(controller: navigationController)
@@ -131,30 +140,6 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     }
     
     func spotifyAuthCancel() { }
-}
-
-// MARK: - SpotifyServiceDelegate
-
-extension SpotifyRoutingService: SpotifyServiceDelegate {
-    func importDidComplete() {
-        updateStatus(completion: nil)
-    }
-    
-    func importDidFailed(error: Error) {
-        
-    }
-    
-    func importDidCanceled() {
-        
-    }
-    
-    func sendImportToBackground() {
-        router.popViewController()
-    }
-    
-    func spotifyStatusDidChange() {
-        updateStatus(completion: nil)
-    }
 }
 
 // MARK: - SpotifyPlaylistsViewControllerDelegate
@@ -188,5 +173,43 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
         let controller = router.spotifyTracksController(playlist: playlist)
         router.pushViewController(viewController: controller)
+    }
+}
+
+// MARK: - SpotifyImportControllerDelegate
+
+extension SpotifyRoutingService: SpotifyImportControllerDelegate {
+    
+    func importDidComplete(_ controller: SpotifyImportViewController) {
+        delegates.invoke(invocation: { $0.importDidComplete() })
+        updateStatus(completion: nil)
+        controller.dismiss(animated: true)
+    }
+    
+    func importDidFailed(_ controller: SpotifyImportViewController, error: Error) {
+        let popup = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok, action: { popup in
+            popup.close {
+                controller.dismiss(animated: true)
+            }
+        })
+        router.presentViewController(controller: popup)
+    }
+    
+    func importDidCancel(_ controller: SpotifyImportViewController) {
+        controller.dismiss(animated: true)
+        
+        spotifyService.stop { result in
+            switch result {
+            case .success(_):
+                debugPrint("Spotify import cancelled")
+            case .failed(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func importSendToBackground() {
+        delegates.invoke(invocation: { $0.importSendToBackground() })
+        router.popToRootViewController()
     }
 }

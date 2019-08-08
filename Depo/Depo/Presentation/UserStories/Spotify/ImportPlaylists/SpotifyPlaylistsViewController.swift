@@ -49,6 +49,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     
+    private lazy var routingService: SpotifyRoutingService = factory.resolve()
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private var page = 0
     private let pageSize = 20
@@ -59,7 +60,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     // MARK: - View lifecycle
     
     deinit {
-        spotifyService.delegates.remove(self)
+        routingService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
@@ -70,7 +71,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         navbarManager.setSelectionState()
         loadNextPage()
         
-        spotifyService.delegates.add(self)
+        routingService.delegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,9 +156,9 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
     }
 }
 
-// MARK: - SpotifyServiceDelegate
+// MARK: - SpotifyRoutingServiceDelegate
 
-extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
+extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
@@ -172,8 +173,6 @@ extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
         view.layoutIfNeeded()
     }
     
-    func sendImportToBackground() {}
-    func importDidCanceled() {}
-    func importDidFailed(error: Error) {}
-    func spotifyStatusDidChange() {}
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) { }
+    func importSendToBackground() { }
 }

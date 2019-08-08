@@ -9,9 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SpotifyService: class {
-    var delegates: MulticastDelegate<SpotifyServiceDelegate> { get }
-    
+protocol SpotifyService: class {    
     func socialStatus(success: SuccessResponse?, fail: FailResponse?)
     func connect(code: String, handler: @escaping ResponseVoid)
     func disconnect(handler: @escaping ResponseVoid)
@@ -23,14 +21,6 @@ protocol SpotifyService: class {
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>)
 }
 
-protocol SpotifyServiceDelegate: class {
-    func importDidComplete()
-    func importDidFailed(error: Error)
-    func importDidCanceled()
-    func sendImportToBackground()
-    func spotifyStatusDidChange()
-}
-
 final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     
     private enum Keys {
@@ -39,7 +29,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     
     private let sessionManager: SessionManager
     private var importTask: DataRequest?
-    var delegates = MulticastDelegate<SpotifyServiceDelegate>()
     
     required init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
@@ -81,14 +70,12 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                     .responseData { [weak self] response in
                         switch response.result {
                         case .success(_):
-                            self?.delegates.invoke(invocation: { $0.importDidComplete() })
                             handler(.success(()))
                         case .failure(let error):
                             //import is not cancelled
                             guard self?.importTask != nil else {
                                 return
                             }
-                            self?.delegates.invoke(invocation: { $0.importDidFailed(error: error) })
                             handler(.failed(error))
                         }
                         
@@ -99,8 +86,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     func stop(handler: @escaping ResponseVoid) {
         importTask?.cancel()
         importTask = nil
-        
-        delegates.invoke(invocation: { $0.importDidCanceled() })
         
         sessionManager
             .request(RouteRequests.Spotify.stop, method: .post)
