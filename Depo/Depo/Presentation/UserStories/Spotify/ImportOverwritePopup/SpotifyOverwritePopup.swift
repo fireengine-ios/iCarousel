@@ -96,14 +96,23 @@ final class SpotifyOverwritePopup: BaseViewController, NibInit {
         }
     }
 
+    private func close(_ completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.contentView.alpha = 0
+            self.blurBackgroundView.effect = nil
+        }, completion: { _ in
+            self.dismiss(animated: false, completion: completion)
+        })
+    }
+    
     // MARK: - Actions
     
     @objc private func onCancel() {
-        dismiss(animated: true)
+        close()
     }
     
     @objc private func onImport() {
-        dismiss(animated: true) {
+        close {
             self.importAction?()
         }
     }
