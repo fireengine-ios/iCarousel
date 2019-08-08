@@ -184,11 +184,11 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                 
             case .failed(let error):
                 DispatchQueue.main.async {
-                    if error.localizedDescription == "401" {
+                    if let serverError = error as? ServerError, serverError.code == 401 {
                         self?.popToLogin()
                         
                     } else {
-                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                        UIApplication.showErrorAlert(message: error.description)
 
                     }
                 }

@@ -592,26 +592,21 @@ class AuthenticationService: BaseRequestService {
                      method: .post,
                       parameters: params,
                      encoding: JSONEncoding.default)
-            .response(queue: .global()) { response in
+            .responseData { response in
+                
+                ///with 401 server error response.result is success but data = nil
                 if response.response?.statusCode == 401 {
-                    let error = ErrorResponse.httpCode(401)
+                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                     handler(.failed(error))
-                    
-                } else if let error = response.error {
+                    return
+                }
+                
+                switch response.result {
+                case .success(let data):
+                    let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                    handler(.success(model))
+                case .failure(let error):
                     handler(.failed(error))
-                    
-                } else if let data = response.data {
-                    let json = JSON(data: data)
-                    
-                    if let errorType = json["errorCode"].string {
-                        let error = ErrorResponse.string("\(errorType)")
-                        handler(.failed(error))
-
-                    } else {
-                        let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
-                        handler(.success(model))
-                        
-                    }
                 }
             }
     }
