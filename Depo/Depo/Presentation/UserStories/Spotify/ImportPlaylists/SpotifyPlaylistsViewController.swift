@@ -60,7 +60,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     // MARK: - View lifecycle
     
     deinit {
-        routingService.delegates.removeAll()
+        routingService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
