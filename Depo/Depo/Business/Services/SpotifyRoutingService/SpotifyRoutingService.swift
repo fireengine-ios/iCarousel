@@ -105,7 +105,7 @@ final class SpotifyRoutingService {
     
     private func showOverwritePopup(handler: @escaping VoidHandler) {
         let popup = router.spotifyOverwritePopup(importAction: handler)
-        router.presentViewController(controller: popup)
+        router.presentViewController(controller: popup, animated: false)
     }
     
     private func importPlaylists(_ playlists: [SpotifyPlaylist]) {

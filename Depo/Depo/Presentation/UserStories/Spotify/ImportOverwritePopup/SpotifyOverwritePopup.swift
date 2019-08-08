@@ -10,6 +10,8 @@ import UIKit
 
 final class SpotifyOverwritePopup: BaseViewController, NibInit {
 
+    @IBOutlet private weak var blurBackgroundView: UIVisualEffectView!
+    
     @IBOutlet private weak var contentView: UIView! {
         willSet {
             newValue.layer.masksToBounds = true
@@ -77,15 +79,40 @@ final class SpotifyOverwritePopup: BaseViewController, NibInit {
         controller.modalPresentationStyle = .overFullScreen
         return controller
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        contentView.alpha = 0
+        blurBackgroundView.effect = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.contentView.alpha = 1
+            self.blurBackgroundView.effect = UIBlurEffect(style: .dark)
+        }
+    }
 
+    private func close(_ completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.contentView.alpha = 0
+            self.blurBackgroundView.effect = nil
+        }, completion: { _ in
+            self.dismiss(animated: false, completion: completion)
+        })
+    }
+    
     // MARK: - Actions
     
     @objc private func onCancel() {
-        dismiss(animated: true)
+        close()
     }
     
     @objc private func onImport() {
-        dismiss(animated: true) {
+        close {
             self.importAction?()
         }
     }
