@@ -230,14 +230,14 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last
     }
     
-    func presentViewController(controller: UIViewController, completion: VoidHandler? = nil) {
+    func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
             }
-            lastViewController.present(controller, animated: true, completion: {
+            lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
         }

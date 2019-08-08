@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyOverwritePopup" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="blurBackgroundView" destination="tVk-6A-wDv" id="Oqd-cb-Drc"/>
                 <outlet property="cancelButton" destination="B6O-UB-2dh" id="Kpy-jh-tE6"/>
                 <outlet property="contentView" destination="Eku-Eg-zYp" id="91a-WT-UMo"/>
                 <outlet property="importButton" destination="Tkn-j6-nY8" id="b7t-Ia-qW6"/>
