@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class PermissionViewController: ViewController, PermissionViewTextViewDelegate {
+final class PermissionViewController: ViewController {
     private let accountService = AccountService()
     
     private lazy var stackView: UIStackView = {
@@ -99,23 +99,6 @@ final class PermissionViewController: ViewController, PermissionViewTextViewDele
         }
     }
     
-// MARK: - PermissionViewTextViewDelegate
-    func tappedOnURL(url: URL) -> Bool {
-        switch url.absoluteString {
-        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
-            DispatchQueue.toMain {
-                self.openTurkcellAndGroupCompanies()
-            }
-        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
-            DispatchQueue.toMain {
-                self.openCommercialEmailMessages()
-            }
-        default:
-            UIApplication.shared.openSafely(url)
-        }
-        return true
-    }
-    
     private func openTurkcellAndGroupCompanies() {
         let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
         RouterVC().pushViewController(viewController: vc)
@@ -127,6 +110,7 @@ final class PermissionViewController: ViewController, PermissionViewTextViewDele
     }
 }
 
+//MARK: - PermissionViewDelegate
 extension PermissionViewController: PermissionViewDelegate {
     func permissionsView(_ permissionView: PermissionsView, didChangeValue isOn: Bool) {
         activityManager.start()
@@ -142,5 +126,24 @@ extension PermissionViewController: PermissionViewDelegate {
                 UIApplication.showErrorAlert(message: error.description)
             }
         }
+    }
+}
+
+//MARK: - PermissionViewTextViewDelegate
+extension PermissionViewController: PermissionViewTextViewDelegate {
+    func tappedOnURL(url: URL) -> Bool {
+        switch url.absoluteString {
+        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
+            DispatchQueue.toMain {
+                self.openTurkcellAndGroupCompanies()
+            }
+        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
+            DispatchQueue.toMain {
+                self.openCommercialEmailMessages()
+            }
+        default:
+            UIApplication.shared.openSafely(url)
+        }
+        return true
     }
 }
