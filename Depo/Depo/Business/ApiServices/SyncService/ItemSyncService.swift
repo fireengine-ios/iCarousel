@@ -138,7 +138,8 @@ class ItemSyncServiceImpl: ItemSyncService {
                     self.status = .synced
                     return
                 }
-                
+                debugLog("\(self.localItems.compactMap {$0.uuid})")
+                debugLog("\(self.localItems.compactMap {$0.getLocalID()})")
                 self.upload(items: self.localItems)
             }
         }
