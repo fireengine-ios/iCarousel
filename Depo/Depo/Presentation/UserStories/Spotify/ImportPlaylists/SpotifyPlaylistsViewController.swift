@@ -43,6 +43,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         let dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = true
+        dataSource.isHeaderless = true
         return dataSource
     }()
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)
@@ -137,6 +138,8 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     func didChangeSelectionCount(newCount: Int) {
         selectedItemsCountChange(with: newCount)
     }
+    
+    func onStartSelection() { }
 }
 
 // MARK: - SpotifyPlaylistsNavbarManagerDelegate

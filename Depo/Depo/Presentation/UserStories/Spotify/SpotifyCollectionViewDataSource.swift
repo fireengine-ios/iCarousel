@@ -12,14 +12,19 @@ protocol SpotifyCollectionDataSourceDelegate: class {
     func needLoadNextPage()
     func onSelect(item: SpotifyObject)
     func didChangeSelectionCount(newCount: Int)
+    func onStartSelection()
 }
 
 final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    typealias SpotifyObjectGroup = (key: String, value: [T])
+    
     private let collectionView: UICollectionView
     private weak var delegate: SpotifyCollectionDataSourceDelegate?
     
-    private var items = [T]()
+    private var allItems = [T]()
+    private var groups = [SpotifyObjectGroup]()
+    var sortedRule: SortedRules = .timeDown
     
     private(set) var selectedItems = [T]() {
         didSet {
@@ -32,7 +37,9 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     
     var isPaginationDidEnd = false
     
-    var showOnlySelected = false 
+    var showOnlySelected = false
+    
+    var isHeaderless = false
     
     // MARK: -
     
@@ -44,6 +51,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     }
     
     private func setupCollectionView() {
+        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(nibCell: SpotifyPlaylistCollectionViewCell.self)
@@ -57,38 +65,47 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         }
     }
     
-    func append(_ newItems: [T]) {
-        guard !newItems.isEmpty else {
-            isPaginationDidEnd = true
-            return
-        }
-    
-        if items.isEmpty {
-            items = newItems
-            collectionView.reloadData()
-        } else {
-            let insertedIndexPaths = (items.count..<items.count + newItems.count).map { IndexPath(row: $0, section: 0) }
-            
-            items.append(contentsOf: newItems)
-            collectionView.performBatchUpdates ({
-                collectionView.insertItems(at: insertedIndexPaths)
-            })
-        }
+    func reset() {
+        isPaginationDidEnd = false
+        allItems.removeAll()
     }
+    
+    // MARK: - Selection
     
     func selectAll() {
-        selectedItems = items
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        selectedItems = allItems
+        updateVisibleCells()
     }
     
-    private func item(for indexPath: IndexPath) -> T? {
-        return showOnlySelected ? selectedItems[safe: indexPath.row] : items[safe: indexPath.row]
+    func startSelection(indexPath: IndexPath? = nil) {
+        isSelectionStateActive = true
+        if let indexPath = indexPath, let item = item(for: indexPath) {
+            selectedItems.append(item)
+        }
+        updateVisibleCells()
+    }
+    
+    func cancelSelection() {
+        isSelectionStateActive = false
+        selectedItems.removeAll()
+        updateVisibleCells()
+    }
+    
+    private func updateVisibleCells() {
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 
     // MARK: - UICollectionViewDataSource
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return isHeaderless ? 1 : groups.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return showOnlySelected ? selectedItems.count : items.count
+        if isHeaderless {
+            return showOnlySelected ? selectedItems.count : allItems.count
+        }
+        return groups[safe: section]?.value.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -101,8 +118,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
                 return
         }
         cell.setSeletionMode(isSelectionStateActive, animation: false)
-        cell.setup(with: item, isSelected: selectedItems.contains(item))
-        cell.delegate = self
+        cell.setup(with: item, delegate: self, isSelected: selectedItems.contains(item))
         
         if isPaginationDidEnd {
             return
@@ -116,12 +132,115 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+        /// https://stackoverflow.com/a/46930410/5893286
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
+        }
+        guard let view = view as? CollectionViewSimpleHeaderWithText else {
+            return
+        }
+        
+        let headerText = groups[safe: indexPath.section]?.key ?? ""
+        view.setText(text: headerText)
+    }
+    
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let item = item(for: indexPath) {
             delegate?.onSelect(item: item)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return isHeaderless ? .zero : CGSize(width: UIScreen.main.bounds.width, height: 50)
+    }
+}
+
+// MARK: - Data processing
+
+extension SpotifyCollectionViewDataSource {
+    func append(_ newItems: [T]) {
+        guard !newItems.isEmpty else {
+            isPaginationDidEnd = true
+            return
+        }
+
+        let reloadCollectionView = allItems.isEmpty
+        allItems.append(contentsOf: newItems)
+        
+        if !isHeaderless {
+            updateGroupedItems()
+        }
+        
+        if reloadCollectionView {
+            collectionView.reloadData()
+        } else {
+            let updates = mergeUpdate(newItems)
+            if !updates.insertedIndexPaths.isEmpty {
+                collectionView.performBatchUpdates ({
+                    if let insertedSections = updates.insertedSections, !insertedSections.isEmpty {
+                        collectionView.insertSections(insertedSections)
+                    }
+                    collectionView.insertItems(at: updates.insertedIndexPaths)
+                })
+            }
+        }
+    }
+    
+    private func updateGroupedItems() {
+        var dict = [String: [T]]()
+        switch sortedRule.sortingRules {
+        case .name:
+            dict = Dictionary(grouping: allItems, by: { String($0.name.first ?? Character("")) })
+        case .date:
+            dict = Dictionary(grouping: allItems, by: { $0.monthValue })
+        default:
+            break
+        }
+        
+        switch sortedRule.sortOder {
+        case .asc:
+            groups = dict.sorted { $0.0 < $1.0 }
+        case .desc:
+            groups = dict.sorted { $0.0 > $1.0 }
+        }
+    }
+    
+    private func mergeUpdate(_ newItems: [T]) -> (insertedSections: IndexSet?, insertedIndexPaths: [IndexPath]) {
+        if isHeaderless {
+            let insertedIndexPaths = (allItems.count..<allItems.count + newItems.count).map { IndexPath(row: $0, section: 0) }
+            return (nil, insertedIndexPaths)
+        }
+        
+        let oldSectionNumbers = collectionView.numberOfSections
+        let newSectionNumbers = groups.count
+        let insertedSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+
+        var insertedIndexPaths = [IndexPath]()
+        groups.enumerated().forEach { section, array in
+            array.value.enumerated().forEach { row, item in
+                if newItems.contains(item) {
+                    insertedIndexPaths.append(IndexPath(row: row, section: section))
+                }
+            }
+        }
+        return (insertedSections, insertedIndexPaths)
+    }
+    
+    
+    private func item(for indexPath: IndexPath) -> T? {
+        if isHeaderless {
+            return showOnlySelected ? selectedItems[safe: indexPath.row] : allItems[safe: indexPath.row]
+        }
+        
+        return groups[safe: indexPath.section]?.value[safe: indexPath.row]
     }
 }
 
@@ -141,6 +260,19 @@ extension SpotifyCollectionViewDataSource: SpotifyPlaylistCellDelegate {
         if let indexPath = collectionView.indexPath(for: cell),
             let item = item(for: indexPath) {
             selectedItems.remove(item)
+        }
+    }
+    
+    func canLongPress() -> Bool {
+        return canChangeSelectionState
+    }
+    
+    func onLongPress(cell: UICollectionViewCell) {
+        if !isSelectionStateActive {
+            if let indexPath = collectionView.indexPath(for: cell) {
+                startSelection(indexPath: indexPath)
+            }
+            delegate?.onStartSelection()
         }
     }
 }

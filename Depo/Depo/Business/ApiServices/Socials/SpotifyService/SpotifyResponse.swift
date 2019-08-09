@@ -31,7 +31,9 @@ final class SpotifyStatus {
         self.lastModifiedDate = lastModifiedDate
         self.userName = userName
     }
-    
+}
+
+extension SpotifyStatus {
     convenience init?(json: JSON) {
         guard
             let jobStatusString = json["jobStatus"].string,
@@ -63,14 +65,34 @@ class SpotifyObject: Equatable {
         }
     }
     
-    let id: String
     let name: String
     let image: SpotifyImage?
     
-    init(id: String, name: String, image: SpotifyImage?) {
-        self.id = id
+    /// for imported objects
+    let id: Int?
+    let createdDate: Date?
+    let lastModifiedDate: Date?
+    let imagePath: URL?
+    
+    var monthValue: String {
+        if let date = lastModifiedDate {
+            return date.getDateInTextForCollectionViewHeader()
+        }
+        return ""
+    }
+    
+    required init?(json: JSON) {
+        guard let name = json["name"].string else {
+            assertionFailure()
+            return nil
+        }
+        
         self.name = name
-        self.image = image
+        self.image = SpotifyImage(json: json["image"])
+        self.id = json["id"].int
+        self.createdDate = json["createdDate"].date
+        self.lastModifiedDate = json["lastModifiedDate"].date
+        self.imagePath = json["imagePath"].url
     }
     
     static func == (lhs: SpotifyObject, rhs: SpotifyObject) -> Bool {
@@ -80,42 +102,37 @@ class SpotifyObject: Equatable {
 
 final class SpotifyPlaylist: SpotifyObject {
     
+    let playlistId: String
     let count: Int
     
-    init(id: String, name: String, count: Int, image: SpotifyImage?) {
-        self.count = count
-        super.init(id: id, name: name, image: image)
-    }
-    
-    convenience init?(json: JSON) {
+    required init?(json: JSON) {
         guard
-            let id = json["playlistId"].string,
-            let name = json["name"].string,
+            let playlistId = json["playlistId"].string,
             let count = json["count"].int
             else {
                 assertionFailure()
                 return nil
         }
-        let image = SpotifyImage(json: json["image"])
-        self.init(id: id, name: name, count: count, image: image)
+        self.playlistId = playlistId
+        self.count = count
+        
+        super.init(json: json)
+    }
+    
+    static func == (lhs: SpotifyPlaylist, rhs: SpotifyPlaylist) -> Bool {
+        return lhs.playlistId == rhs.playlistId
     }
 }
 
 final class SpotifyTrack: SpotifyObject {
     
+    let isrc: String
     let albumName: String
     let artistName: String
     
-    init(id: String, name: String, albumName: String, artistName: String, image: SpotifyImage?) {
-        self.albumName = albumName
-        self.artistName = artistName
-        super.init(id: id, name: name, image: image)
-    }
-    
-    convenience init?(json: JSON) {
+    required init?(json: JSON) {
         guard
-            let id = json["isrc"].string,
-            let name = json["name"].string,
+            let isrc = json["isrc"].string,
             let albumName = json["albumName"].string,
             let artistName = json["artistName"].string
             else {
@@ -123,7 +140,13 @@ final class SpotifyTrack: SpotifyObject {
                 return nil
         }
         
-        let image = SpotifyImage(json: json["image"])
-        self.init(id: id, name: name, albumName: albumName, artistName: artistName, image: image)
+        self.isrc = isrc
+        self.albumName = albumName
+        self.artistName = artistName
+        super.init(json: json)
+    }
+    
+    static func == (lhs: SpotifyTrack, rhs: SpotifyTrack) -> Bool {
+        return lhs.isrc == rhs.isrc
     }
 }

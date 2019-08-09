@@ -123,7 +123,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     // MARK: - Action
     
     private func startImport() {
-        let ids = playlists.map { $0.id }
+        let ids = playlists.map { $0.playlistId }
         spotifyService.start(playlistIds: ids) { [weak self] result in
             guard let self = self else {
                 return

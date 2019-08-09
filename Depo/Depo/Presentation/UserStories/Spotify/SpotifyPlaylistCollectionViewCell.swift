@@ -9,12 +9,12 @@
 import UIKit
 import SDWebImage
 
-protocol SpotifyPlaylistCellDelegate: class {
+protocol SpotifyPlaylistCellDelegate: LBCellsDelegate {
     func onSelect(cell: SpotifyPlaylistCollectionViewCell)
     func onDeselect(cell: SpotifyPlaylistCollectionViewCell)
 }
 
-final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
+final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
     
     private enum Constants {
         enum imageLeftOffset {
@@ -57,13 +57,27 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var arrowImageView: UIImageView!
     @IBOutlet private var imageLeftOffset: NSLayoutConstraint!
     
-    weak var delegate: SpotifyPlaylistCellDelegate?
+    private weak var cellDelegate: SpotifyPlaylistCellDelegate?
+    override weak var delegate: LBCellsDelegate? {
+        didSet {
+            if let compatableValue = delegate as? SpotifyPlaylistCellDelegate {
+                cellDelegate = compatableValue
+            }
+        }
+    }
+    
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
     private var isSelectionStateActive = false
     
     // MARK: -
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        contentView.backgroundColor = .white
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -73,19 +87,20 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
         uuid = nil
     }
     
-    func setup(with item: SpotifyObject, isSelected: Bool) {
+    func setup(with item: SpotifyObject, delegate: SpotifyPlaylistCellDelegate, isSelected: Bool) {
         selectionButton.isSelected = isSelected
+        self.delegate = delegate
         
         if let playlist = item as? SpotifyPlaylist {
             titleLabel.text = playlist.name
             subtitleLabel.text = String(format: TextConstants.Spotify.Playlist.songsCount, playlist.count)
             arrowImageView.isHidden = !isSelectionStateActive || playlist.count == 0
-            imageView.sd_setImage(with: playlist.image?.url, placeholderImage: UIImage(named: "playlist")!)
+            loadImage(item: item, placeholder: UIImage(named: "playlist")!)
         } else if let track = item as? SpotifyTrack {
             titleLabel.text = track.name
             subtitleLabel.text = track.artistName
             arrowImageView.isHidden = true
-            imageView.sd_setImage(with: track.image?.url, placeholderImage: UIImage(named: "playlist_track")!)
+            loadImage(item: track, placeholder: UIImage(named: "playlist_track")!)
         }
     }
     
@@ -98,13 +113,44 @@ final class SpotifyPlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func loadImage(item: SpotifyObject, placeholder: UIImage) {
+        if let spotifyUrl = item.image?.url {
+            imageView.sd_setImage(with: spotifyUrl, placeholderImage: placeholder)
+        } else if let imagePathUrl = item.imagePath {
+            let cacheKey = imagePathUrl.byTrimmingQuery
+            cellImageManager = CellImageManager.instance(by: cacheKey)
+            
+            if uuid == cellImageManager?.uniqueId {
+                /// image will not be loaded
+                return
+            }
+            
+            uuid = cellImageManager?.uniqueId
+            imageView.image = placeholder
+            
+            let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+                DispatchQueue.main.async {
+                    guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                        return
+                    }
+                    self?.imageView.image = image
+                }
+            }
+            
+            cellImageManager?.loadImage(thumbnailUrl: nil, url: imagePathUrl, completionBlock: imageSetBlock)
+        } else {
+            imageView.image = placeholder
+        }
+    }
+    
+    
     // MARK: - Actions
     
     @objc private func onSelectionButton(_ sender: UIButton) {
         if sender.isSelected {
-            delegate?.onDeselect(cell: self)
+            cellDelegate?.onDeselect(cell: self)
         } else {
-            delegate?.onSelect(cell: self)
+            cellDelegate?.onSelect(cell: self)
         }
         sender.isSelected.toggle()
     }

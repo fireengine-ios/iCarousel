@@ -16,6 +16,7 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
         let dataSource = SpotifyCollectionViewDataSource<SpotifyTrack>(collectionView: collectionView, delegate: self)
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = false
+        dataSource.isHeaderless = true
         return dataSource
     }()
     
@@ -44,7 +45,7 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
         
         isLoadingNextPage = true
         
-        spotifyService.getPlaylistTracks(playlistId: playlist.id, page: page, size: pageSize) { [weak self] result in
+        spotifyService.getPlaylistTracks(playlistId: playlist.playlistId, page: page, size: pageSize) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -73,4 +74,8 @@ extension SpotifyPlaylistViewController: SpotifyCollectionDataSourceDelegate {
     }
     
     func didChangeSelectionCount(newCount: Int) { }
+    
+    func onStartSelection() {
+        
+    }
 }

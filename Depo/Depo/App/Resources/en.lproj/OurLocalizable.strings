@@ -1063,6 +1063,7 @@
 "spotify_import_in_background" = "Import in Background";
 "spotify_playlist_import_button" = "Import Selected";
 "spotify_playlist_navbar_title" = "Spotify Playlists";
+"spotify_playlist_navbar_selection_title" = "Select Items";
 "spotify_playlist_songs_count" = "%d songs";
 "spotify_playlist_success_import" = "Playlists successfully imported!";
 "spotify_playlist_see_imported" = "See Imported Playlists";

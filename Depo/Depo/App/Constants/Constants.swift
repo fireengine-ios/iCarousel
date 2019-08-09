@@ -1330,6 +1330,7 @@ struct TextConstants {
         enum Playlist {
             static let importButton = NSLocalizedString("spotify_playlist_import_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let navBarTitle = NSLocalizedString("spotify_playlist_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let navBarSelectiontTitle = NSLocalizedString("spotify_playlist_navbar_selection_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let songsCount = NSLocalizedString("spotify_playlist_songs_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let successImport = NSLocalizedString("spotify_playlist_success_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let seeImported = NSLocalizedString("spotify_playlist_see_imported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
