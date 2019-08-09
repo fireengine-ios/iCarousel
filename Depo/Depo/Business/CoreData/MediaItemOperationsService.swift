@@ -247,9 +247,10 @@ final class MediaItemOperationsService {
             guard let `self` = self else {
                 return
             }
-            let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@ AND isLocalItemValue == true", item.getTrimmedLocalID())
             
-            self.executeRequest(predicate: predicateForRemoteFile, context: context) { alreadySavedMediaItems in
+            let predicateForLocalFile = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == true AND (\(#keyPath(MediaItem.localFileID)) == %@ OR \(#keyPath(MediaItem.trimmedLocalFileID)) == %@)", item.getLocalID(), item.getTrimmedLocalID())
+            
+            self.executeRequest(predicate: predicateForLocalFile, context: context) { alreadySavedMediaItems in
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
@@ -559,7 +560,7 @@ final class MediaItemOperationsService {
                 }
             }
             LocalMediaStorage.default.assetsCache.append(list: newAssets)
-            
+            debugLog("DUPLICATION_TEST - newAssets \(newAssets.compactMap { $0.originalFilename ?? ""})")
             self.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
         }
     }
@@ -638,10 +639,10 @@ final class MediaItemOperationsService {
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
                 context.perform { [weak self] in
                     
-                    #if DEBUG
-                    let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
-                    assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
-                    #endif
+//                    #if DEBUG
+//                    let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+//                    assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+//                    #endif
                     
                     var addedObjects = [WrapData]()
                     let assetsInfo = info.filter { $0.isValid }
@@ -653,9 +654,9 @@ final class MediaItemOperationsService {
                             addedObjects.append(wrapedItem)
                         }
                     }
-                    
                     CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                        debugLog("DUPLICATION_TEST - added \(addedObjects.compactMap { $0.name ?? ""})")
                         print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
                         self?.saveLocalMediaItemsPaged(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                     })
