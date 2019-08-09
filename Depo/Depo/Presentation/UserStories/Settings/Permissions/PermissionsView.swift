@@ -12,9 +12,13 @@ protocol PermissionViewDelegate: class {
     func permissionsView(_ view: PermissionsView, didChangeValue isOn: Bool)
 }
 
+protocol PermissionViewTextViewDelegate: class {
+    func tappedOnURL(url: URL) -> Bool
+}
+
 protocol PermissionsViewProtocol: class {
-    
     var delegate: PermissionViewDelegate? { get set }
+    var textviewDelegate: PermissionViewTextViewDelegate? { get set }
     var type: PermissionType! { get set }
     func turnPermissionOn(isOn: Bool, isPendingApproval: Bool)
     func togglePermissionSwitch()
@@ -22,21 +26,22 @@ protocol PermissionsViewProtocol: class {
 
 class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var permissionSwitch: UISwitch!
     @IBOutlet private weak var inProgressLabel: UILabel!
+    @IBOutlet private weak var descriptionView: UITextView!
+    @IBOutlet private weak var permissionSwitch: UISwitch!
     
     weak var delegate: PermissionViewDelegate?
+    weak var textviewDelegate: PermissionViewTextViewDelegate?
     
     var type: PermissionType! {
         didSet {
             switch type! {
             case .etk:
                 titleLabel.text = TextConstants.etkPermissionTitleLabel
-                descriptionLabel.text = TextConstants.etkPermissionDescriptionLabel
+                setupEtkDescription()
             case .globalPermission:
                 titleLabel.text = TextConstants.globalPermissionTitleLabel
-                descriptionLabel.text = TextConstants.globalPermissionDescriptionLabel
+                setupGlobalPermissionDescription()
             }
         }
     }
@@ -48,6 +53,35 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     }
     
     // MARK: - Actions
+    
+    private func setupEtkDescription() {
+        let descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
+                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                                     .foregroundColor: UIColor.lrLightBrownishGrey])
+        
+        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
+
+        let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
+        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
+
+        setup(attributedDescription: descriptionText, delegate: textviewDelegate)
+    }
+    
+    private func setupGlobalPermissionDescription() {
+        let descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
+                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                                     .foregroundColor: UIColor.lrLightBrownishGrey])
+        
+        setup(attributedDescription: descriptionText, delegate: textviewDelegate)
+    }
+    
+    func setup(attributedDescription: NSMutableAttributedString?, delegate: PermissionViewTextViewDelegate?) {
+        if let attributedDescription = attributedDescription {
+            descriptionView.attributedText = attributedDescription
+        }
+        descriptionView.delegate = self
+    }
     
     func turnPermissionOn(isOn: Bool, isPendingApproval: Bool) {
         /// change switch status according to user actions
@@ -64,5 +98,18 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     func togglePermissionSwitch() {
         permissionSwitch.isOn = !permissionSwitch.isOn
+    }
+}
+
+
+extension PermissionsView: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        return textviewDelegate?.tappedOnURL(url: URL) ?? true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return textviewDelegate?.tappedOnURL(url: URL) ?? true
     }
 }

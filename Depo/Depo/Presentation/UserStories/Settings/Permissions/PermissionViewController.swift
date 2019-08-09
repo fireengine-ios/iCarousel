@@ -6,8 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class PermissionViewController: ViewController {
-    
+final class PermissionViewController: ViewController, PermissionViewTextViewDelegate {
     private let accountService = AccountService()
     
     private lazy var stackView: UIStackView = {
@@ -27,6 +26,7 @@ final class PermissionViewController: ViewController {
         let permissionView = PermissionsView.initFromNib()
         permissionView.type = .etk
         permissionView.delegate = self
+        permissionView.textviewDelegate = self
         return permissionView
     }()
     
@@ -97,6 +97,33 @@ final class PermissionViewController: ViewController {
         } else {
             return nil
         }
+    }
+    
+// MARK: - PermissionViewTextViewDelegate
+    func tappedOnURL(url: URL) -> Bool {
+        switch url.absoluteString {
+        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
+            DispatchQueue.toMain {
+                self.openTurkcellAndGroupCompanies()
+            }
+        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
+            DispatchQueue.toMain {
+                self.openCommercialEmailMessages()
+            }
+        default:
+            UIApplication.shared.openSafely(url)
+        }
+        return true
+    }
+    
+    private func openTurkcellAndGroupCompanies() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openCommercialEmailMessages() {
+        let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
+        RouterVC().pushViewController(viewController: vc)
     }
 }
 
