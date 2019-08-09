@@ -40,11 +40,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    if accountType == .turkcell {
-                        self?.output.successed(allOffers: response)
-                    } else {
-                        self?.getInfoForAppleProducts(offers: response)
-                    }
+                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
                 DispatchQueue.toMain {

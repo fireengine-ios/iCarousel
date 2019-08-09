@@ -208,17 +208,27 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
         
+        let isTurkcell = (accountType != .turkcell)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
-            guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
+            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
+                return false
+            }
             
             ///show only offers with type slcm and apple(if apple sent offer info)
             switch type {
-            case .SLCM: return true
-            case .apple: return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
-            default: return false
+            case .SLCM:
+                return isTurkcell
+                
+            case .apple:
+                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+                
+            default:
+                return false
+                
             }
         })
+        
         view?.stopActivityIndicator()
         view?.reloadData()
     }
