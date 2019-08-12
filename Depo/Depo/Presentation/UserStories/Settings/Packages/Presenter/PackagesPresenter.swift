@@ -122,7 +122,7 @@ extension PackagesPresenter: PackagesViewOutput {
 // MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         if let offer = offerToBuy {
             interactor.getResendToken(for: offer)
@@ -140,7 +140,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
@@ -160,7 +160,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         
         DispatchQueue.toMain {
@@ -179,7 +179,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
@@ -208,17 +208,27 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
         
+        let isTurkcell = (accountType != .turkcell)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
-            guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
+            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
+                return false
+            }
             
             ///show only offers with type slcm and apple(if apple sent offer info)
             switch type {
-            case .SLCM: return true
-            case .apple: return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
-            default: return false
+            case .SLCM:
+                return isTurkcell
+                
+            case .apple:
+                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+                
+            default:
+                return false
+                
             }
         })
+        
         view?.stopActivityIndicator()
         view?.reloadData()
     }
@@ -233,7 +243,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
@@ -244,7 +254,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.showError(error.description)
     }
 

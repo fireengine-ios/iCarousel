@@ -19,16 +19,20 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    private let authService = AuthenticationService()
     
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var authenticationService = AuthenticationService()
-    private lazy var eulaService = EulaService()
-    private lazy var accountService = AccountService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var authService = AuthenticationService()
+    private lazy var contactsService = ContactService()
+    private lazy var accountService = AccountService()
+    private lazy var eulaService = EulaService()
+    
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
-    private let contactsService = ContactService()
     private let storageVars: StorageVars
+    
+    private var updatePhoneService: UpdatePhoneService?
 
     private var rememberMe: Bool = true
     
@@ -205,7 +209,7 @@ class LoginInteractor: LoginInteractorInput {
                 self.accountService.updateBrandType()
                 
                 self.tokenStorage.isRememberMe = self.rememberMe
-                self.output?.successedSilentLogin()
+                self.output?.succesLogin()
             }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async { [weak self] in
@@ -214,7 +218,7 @@ class LoginInteractor: LoginInteractorInput {
         })
     }
     
-    private func tryToRelogin() {
+    func tryToRelogin() {
         guard let login = login, let password = password else {
             assertionFailure()
             return
@@ -312,59 +316,6 @@ class LoginInteractor: LoginInteractorInput {
 //        dataStorage.blockDate = nil
     }
     
-    func getTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(tokenUpdatePhone: signUpResponce)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output?.failedUpdatePhone(errorResponse: error)
-            }
-        })
-    }
-    
-    func getResendTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(resendUpdatePhone: signUpResponce)
-            }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output?.failedResendUpdatePhone(errorResponse: error)
-                }
-        })
-    }
-    
-    func verifyPhoneNumber(token: String, code: String) {
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
-            
-            if let response = baseResponse as? ObjectRequestResponse,
-                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
-                
-                self?.silentLogin(token: silentToken)
-            } else {
-                DispatchQueue.main.async {
-                    self?.tryToRelogin()
-                }
-            }
-            
-        }) { [weak self] errorRespose in
-            DispatchQueue.main.async {
-                self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
-            }
-        }
-    }
-    
     func updateUserLanguage() {
         authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.main.async {
@@ -401,6 +352,15 @@ class LoginInteractor: LoginInteractorInput {
 //        }) { [weak self] errorResponse in
 //            self?.output?.captchaRequredFailed()
 //        }
+    }
+    
+    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {
+        updatePhoneService = UpdatePhoneService(delegate: delegate)
+        updatePhoneService?.start()
+    }
+    
+    func stopUpdatePhone() {
+        updatePhoneService?.stop()
     }
     
 }

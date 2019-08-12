@@ -27,7 +27,6 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        spotyfyRouter.delegate = self
         dataSource.view = self
         setupScreen()
         setupTableView()

@@ -1056,18 +1056,20 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     class func getDuration(duration: Double?) -> String {
-        if let d = duration {
-            let s = CGFloat(d)
-            let seconds = Int(s) % 60
-            let minutes = Int(s) / 60
-            
-            if (minutes < 100) {
-                return String(format: "%02i:%02i", minutes, seconds)
-            } else {
-                return String(format: "%i:%02i", minutes, seconds)
-            }
+        guard let duration = duration else {
+            return ""
         }
-        return ""
+        
+        let rounded = round(duration)
+        
+        let seconds = Int(rounded) % 60
+        let minutes = Int(duration) / 60
+        
+        if minutes < 100 {
+            return String(format: "%02i:%02i", minutes, seconds)
+        } else {
+            return String(format: "%i:%02i", minutes, seconds)
+        }
     }
     
     func getTrimmedLocalID() -> String {

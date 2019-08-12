@@ -320,18 +320,17 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
-                        /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
-                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
-                            return
-                        }
-                        
                         if self?.tokenStorage.refreshToken == nil {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
                             return
                         }
                         
+                        /// must be after accessToken save logic
+                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
+                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
                         
                         if let statusCode = response.response?.statusCode,
                             statusCode >= 300, statusCode != 403,
@@ -593,26 +592,22 @@ class AuthenticationService: BaseRequestService {
                       parameters: params,
                      encoding: JSONEncoding.default)
             .responseData { response in
+                
+                ///with 401 server error response.result is success but data = nil
+                if response.response?.statusCode == 401 {
+                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                    handler(.failed(error))
+                    return
+                }
+                
                 switch response.result {
                 case .success(let data):
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-                        if let errorType = json?["errorCode"] as? Int {
-                            let error = ErrorResponse.string("\(errorType)")
-                            handler(.failed(error))
-                            
-                        } else {
-                            let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
-                            handler(.success(model))
-                        }
-                    } catch {
-                        handler(.failed(error))
-                    }
-                    
+                    let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                    handler(.success(model))
                 case .failure(let error):
                     handler(.failed(error))
                 }
-        }
+            }
     }
     
     func loginViaTwoFactorAuth(token: String,

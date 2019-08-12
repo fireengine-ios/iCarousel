@@ -42,7 +42,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
         }
         
         let router = RouterVC()
-        let controller = router.createStory(items: items)
+        let controller = router.createStory(searchItems: items)
         router.pushViewController(viewController: controller)
     }
     

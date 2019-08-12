@@ -46,14 +46,9 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCell()
-        spotifyService.delegates.add(self)
     }
     
-    deinit {
-        spotifyService.delegates.remove(self)
-    }
-    
-    
+
     @IBAction private func connectedButtonTapped(_ sender: Any) {
         service.connectToSpotify() 
     }
@@ -90,7 +85,6 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     
     func setup(with section: Section?) {
         self.section = section
-        service.section = section
     }
     
     func disconnect() {
@@ -109,27 +103,4 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     }
 }
 
-extension SpotifyAccountConnectionCell: SpotifyServiceDelegate {
-   
-    func importDidComplete() {
-        <#code#>
-    }
-    
-    func importDidFailed(error: Error) {
-        <#code#>
-    }
-    
-    func importDidCanceled() {
-        <#code#>
-    }
-    
-    func sendImportToBackground() {
-        <#code#>
-    }
-    
-    func spotifyStatusDidChange() {
-        <#code#>
-    }
-    
-    
-}
+

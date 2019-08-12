@@ -29,11 +29,11 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
+            newValue.isHidden = true
         }
     }
     @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
-            newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.style = .vertical
         }
@@ -49,6 +49,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     
+    private lazy var routingService: SpotifyRoutingService = factory.resolve()
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private var page = 0
     private let pageSize = 20
@@ -59,17 +60,18 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     // MARK: - View lifecycle
     
     deinit {
-        spotifyService.delegates.remove(self)
+        routingService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         collectionView.contentInset.bottom = gradientView.bounds.height
         navbarManager.setSelectionState()
         loadNextPage()
         
-        spotifyService.delegates.add(self)
+        routingService.delegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +107,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private func selectedItemsCountChange(with count: Int) {
         navbarManager.changeSelectionItems(count: count)
-        gradientView.isHidden = count == 0
+        importButton.isHidden = count == 0
     }
     
     @IBAction private func importSelected(_ sender: UIButton) {
@@ -154,13 +156,13 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
     }
 }
 
-// MARK: - SpotifyServiceDelegate
+// MARK: - SpotifyRoutingServiceDelegate
 
-extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
+extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
-        gradientView.isHidden = false
+        importButton.isHidden = false
         
         navbarManager.setSuccessImportState()
         dataSource.isSelectionStateActive = false
@@ -171,8 +173,6 @@ extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
         view.layoutIfNeeded()
     }
     
-    func sendImportToBackground() {}
-    func importDidCanceled() {}
-    func importDidFailed(error: Error) {}
-    func spotifyStatusDidChange() {}
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) { }
+    func importSendToBackground() { }
 }

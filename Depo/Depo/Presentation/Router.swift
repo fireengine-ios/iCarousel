@@ -190,7 +190,8 @@ class RouterVC: NSObject {
             
             for (i, viewController) in viewControllers.enumerated() {
                 if viewController is CreateStorySelectionController
-                    || viewController is CreateStoryViewController {
+                    || viewController is CreateStoryViewController
+                    || viewController is CreateStoryPhotoSelectionController {
                     index = i
                     break
                 }
@@ -229,14 +230,14 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last
     }
     
-    func presentViewController(controller: UIViewController, completion: VoidHandler? = nil) {
+    func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
             }
-            lastViewController.present(controller, animated: true, completion: {
+            lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
         }
@@ -943,6 +944,10 @@ class RouterVC: NSObject {
         return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
     }
     
+    func createStory(searchItems: [Item]) -> UIViewController {
+        return CreateStoryPhotoSelectionController(photos: searchItems)
+    }
+    
     func createStory(items: [Item]) -> UIViewController {
         return CreateStoryViewController(images: items)
     }
@@ -983,9 +988,10 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func spotifyImportController(playlists: [SpotifyPlaylist]) -> UIViewController {
+    func spotifyImportController(playlists: [SpotifyPlaylist], delegate: SpotifyImportControllerDelegate?) -> UIViewController {
         let controller = SpotifyImportViewController.initFromNib()
         controller.playlists = playlists
+        controller.delegate = delegate
         return controller
     }
     

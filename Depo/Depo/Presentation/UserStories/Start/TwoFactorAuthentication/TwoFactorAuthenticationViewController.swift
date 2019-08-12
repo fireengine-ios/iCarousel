@@ -175,6 +175,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                                                      authenticatorId: challenge.userData,
                                                      type: challenge.challengeType.rawValue) { [weak self] response in
             self?.stopActivityIndicator()
+                                                        
             switch response {
             case .success(let model):
                 DispatchQueue.main.async {
@@ -182,10 +183,31 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                 }
                 
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-                
+                DispatchQueue.main.async {
+                    if let serverError = error as? ServerError, serverError.code == 401 {
+                        self?.popToLogin()
+                        
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+
+                    }
+                }
             }
+                                                        
         }
+    }
+    
+    private func popToLogin() {
+        let popUp = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: TextConstants.twoFAInvalidSessionErrorMessage,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok) { [weak self] controller in
+                                            controller.close { [weak self] in
+                                                self?.router.popTwoFactorAuth()
+                                            }
+        }
+        
+        router.presentViewController(controller: popUp)
     }
     
     //MARK: Action

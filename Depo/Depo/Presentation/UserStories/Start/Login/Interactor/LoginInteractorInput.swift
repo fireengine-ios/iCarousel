@@ -6,8 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
-
 protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
@@ -23,10 +21,6 @@ protocol LoginInteractorInput {
     
     func blockUser(user: String)
     
-    func getTokenToUpdatePhone(for phoneNumber: String)
-    func getResendTokenToUpdatePhone(for phoneNumber: String)
-    func verifyPhoneNumber(token: String, code: String)
-    
     var isShowEmptyEmail: Bool { get }
     
     func updateUserLanguage()
@@ -34,4 +28,10 @@ protocol LoginInteractorInput {
     func checkCaptchaRequerement()
     
     func trackScreen()
+    
+    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate)
+    
+    func tryToRelogin()
+    
+    func stopUpdatePhone()
 }

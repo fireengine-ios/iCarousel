@@ -71,29 +71,26 @@
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbs-pk-Dsx" customClass="TransparentGradientView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="581" width="375" height="86"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSE-yc-5fn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="84.5" y="26" width="206" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="9jk-vc-UWE"/>
-                                <constraint firstAttribute="width" constant="206" id="aZ0-hO-uyy"/>
-                            </constraints>
-                            <state key="normal" title="Import Selected"/>
-                            <connections>
-                                <action selector="importSelected:" destination="-1" eventType="touchUpInside" id="aau-Ci-xqE"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="tSE-yc-5fn" firstAttribute="centerX" secondItem="zbs-pk-Dsx" secondAttribute="centerX" id="JCk-pQ-CCY"/>
                         <constraint firstAttribute="height" constant="86" id="VrX-UB-uv7"/>
-                        <constraint firstAttribute="bottom" secondItem="tSE-yc-5fn" secondAttribute="bottom" constant="16" id="aAz-VI-bqr"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSE-yc-5fn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="84.5" y="607" width="206" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="9jk-vc-UWE"/>
+                        <constraint firstAttribute="width" constant="206" id="aZ0-hO-uyy"/>
+                    </constraints>
+                    <state key="normal" title="Import Selected"/>
+                    <connections>
+                        <action selector="importSelected:" destination="-1" eventType="touchUpInside" id="aau-Ci-xqE"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="tSE-yc-5fn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Bog-Fp-JLl"/>
                 <constraint firstItem="zbs-pk-Dsx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="G5H-nC-Jpb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2cB-kG-ROb" secondAttribute="trailing" id="PGo-tB-Hpb"/>
                 <constraint firstItem="J7f-oP-229" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="QAw-91-bik"/>
@@ -102,6 +99,7 @@
                 <constraint firstItem="2cB-kG-ROb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Z0M-JL-lrO"/>
                 <constraint firstItem="2cB-kG-ROb" firstAttribute="top" secondItem="J7f-oP-229" secondAttribute="bottom" placeholder="YES" id="eEU-p1-hbR"/>
                 <constraint firstItem="J7f-oP-229" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="i5a-pO-0LK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="tSE-yc-5fn" secondAttribute="bottom" constant="16" id="nLR-ov-Zgp"/>
                 <constraint firstItem="2cB-kG-ROb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" priority="999" id="sPQ-V9-DdF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="J7f-oP-229" secondAttribute="trailing" id="wCz-sl-7d8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="2cB-kG-ROb" secondAttribute="bottom" id="wEd-3e-Xrs"/>

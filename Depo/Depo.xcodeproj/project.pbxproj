@@ -32,6 +32,9 @@
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
 		170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
+		173B144822F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
+		173B144922F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
+		173B144A22F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */; };
 		17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
@@ -3016,6 +3019,9 @@
 		9864296822F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296922F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
+		9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
@@ -6218,6 +6224,7 @@
 		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
 		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
 		17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePhoneService.swift; sourceTree = "<group>"; };
 		17589F612275E33800A5DB37 /* SupportBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBannerView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
 		17589F632275E33800A5DB37 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
@@ -7718,6 +7725,7 @@
 		98570AF8208F7556002CCEBA /* SpotlightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightViewController.xib; sourceTree = "<group>"; };
 		98570AF9208F7557002CCEBA /* Spotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
+		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterDataSource.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
@@ -8922,6 +8930,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		173B144622F99F6000FAAC97 /* UpdatePhoneService */ = {
+			isa = PBXGroup;
+			children = (
+				173B144722F99F6000FAAC97 /* UpdatePhoneService.swift */,
+			);
+			path = UpdatePhoneService;
+			sourceTree = "<group>";
+		};
 		17499C603204732CC217594D /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -8979,6 +8995,7 @@
 				7C66E8991F979C3300D98F27 /* CreateStoryPreviy */,
 				89E51D1B22CA0F0F007A7DBC /* Views */,
 				7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */,
+				9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */,
 				925B59A422C3BF85004697F3 /* CreateStorySelectionController.swift */,
 				8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */,
 				8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */,
@@ -10956,6 +10973,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				173B144622F99F6000FAAC97 /* UpdatePhoneService */,
 				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
 				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
 				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
@@ -13109,8 +13127,8 @@
 		989BDE2F22F47B1E001DDEB2 /* ImportOverwritePopup */ = {
 			isa = PBXGroup;
 			children = (
-				989BDE3022F47B1E001DDEB2 /* SpotifyOverwritePopup.swift */,
 				989BDE3122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib */,
+				989BDE3022F47B1E001DDEB2 /* SpotifyOverwritePopup.swift */,
 			);
 			path = ImportOverwritePopup;
 			sourceTree = "<group>";
@@ -19184,6 +19202,7 @@
 				73FE51F222CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
+				173B144922F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
@@ -19788,6 +19807,7 @@
 				8C06AC1D20066641003D8E05 /* LoginSettingsViewIO.swift in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
+				9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				892B015722DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -20696,6 +20716,7 @@
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,
+				173B144822F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				CEAE3FB11EFD4F0D00A405B2 /* HomePageInitializer.swift in Sources */,
 				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
@@ -20928,6 +20949,7 @@
 				B53DCE9620EF634900400DBA /* SyncDBUtils.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				8C6EF8791F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
+				9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
@@ -22022,6 +22044,7 @@
 				CE78484622A685FB00662219 /* StorageCard.swift in Sources */,
 				CE78484722A685FB00662219 /* PhotoCell.swift in Sources */,
 				CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */,
+				9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				CE78484922A685FB00662219 /* MulticastDelegate.swift in Sources */,
 				CE78484A22A685FB00662219 /* PopUpSwipeCell.swift in Sources */,
 				CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */,
@@ -22569,6 +22592,7 @@
 				CE784A5E22A685FB00662219 /* DeviceExtension.swift in Sources */,
 				CE784A5F22A685FB00662219 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C1E5BE222CB8C26008FDA02 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				173B144A22F99F6100FAAC97 /* UpdatePhoneService.swift in Sources */,
 				CE784A6022A685FB00662219 /* MyStorageModuleInput.swift in Sources */,
 				CE784A6122A685FB00662219 /* PackagesViewController.swift in Sources */,
 				CE784A6222A685FB00662219 /* PasscodeSettingsModuleInput.swift in Sources */,
@@ -23722,6 +23746,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
@@ -23777,6 +23802,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
@@ -23830,10 +23856,11 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "77271b70-e1c8-4128-adfd-7de4fb2012e4";
+				PROVISIONING_PROFILE_SPECIFIER = "c262e825-0738-40c1-881e-7229850771c9";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -23884,6 +23911,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
@@ -24534,7 +24562,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
+				PROVISIONING_PROFILE_SPECIFIER = "e63758b3-539f-4480-9ae0-a615fdd0b93d";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -24668,7 +24696,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "83b3721d-7e9a-4467-9456-1f39153cd058";
+				PROVISIONING_PROFILE_SPECIFIER = "f8ce6fea-de1e-4b43-8ce6-bc6bb1a05c2b";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -24804,7 +24832,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "a01d25c5-6907-456e-9c7f-9daa7fe7c1a8";
+				PROVISIONING_PROFILE_SPECIFIER = "c4303710-c3d8-49fc-9035-e9f66d8349c8";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -25166,7 +25194,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "2a5fd615-c5f1-4bcd-a8cd-b652117a8933";
+				PROVISIONING_PROFILE_SPECIFIER = "0ca87cb5-829c-46ab-b443-75db824cdcce";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";

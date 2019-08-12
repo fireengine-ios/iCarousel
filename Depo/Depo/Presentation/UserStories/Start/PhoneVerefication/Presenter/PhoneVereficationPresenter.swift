@@ -74,10 +74,15 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.resendButtonShow(show: true)
         view.updateEditingState()
         
-        if error.description == TextConstants.TOO_MANY_REQUESTS {
+        if case ErrorResponse.error(let containedError) = error, let serverError = containedError as? ServerError, serverError.code == 401 {
+            router.popToLoginWithPopUp(title: TextConstants.errorAlert, message: TextConstants.twoFAInvalidSessionErrorMessage, image: .error, onClose: nil)
+            
+        } else if error.description == TextConstants.TOO_MANY_REQUESTS {
             view.showError(error.description)
+            
         } else {
             view.showError(TextConstants.phoneVereficationResendRequestFailedErrorText)
+            
         }
         
         view.dropTimer()
