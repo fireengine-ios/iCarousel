@@ -172,6 +172,17 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
+    func replaceTopViewControllerWithViewController(_ viewController: UIViewController, animated: Bool = true) {
+        var currentNavigationStack = navigationController?.viewControllers ?? []
+        
+        if currentNavigationStack.isEmpty {
+            pushViewController(viewController: viewController, animated: animated)
+        } else {
+            currentNavigationStack[currentNavigationStack.count - 1] = viewController
+            navigationController?.setViewControllers(currentNavigationStack, animated: true)
+        }
+    }
+    
     func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
