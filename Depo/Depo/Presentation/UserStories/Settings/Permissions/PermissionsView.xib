@@ -43,12 +43,12 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7P-EV-fhx" userLabel="Description Label">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0l-s5-sKr" userLabel="Description View" customClass="IntrinsicEmptiableTextView" customModule="lifebox" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="70" width="331" height="17"/>
-                            <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="16"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                     </subviews>
                 </stackView>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-9N-Hd4">
@@ -73,7 +73,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="descriptionLabel" destination="c7P-EV-fhx" id="Mug-aq-5pt"/>
+                <outlet property="descriptionView" destination="q0l-s5-sKr" id="dn9-ue-qhe"/>
                 <outlet property="inProgressLabel" destination="YOm-67-OGW" id="SNL-og-av6"/>
                 <outlet property="permissionSwitch" destination="XhQ-9N-Hd4" id="30U-sf-DRk"/>
                 <outlet property="titleLabel" destination="4eH-pQ-DLc" id="Wz3-wc-aiz"/>
@@ -82,7 +82,7 @@
         </view>
         <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionLabel" destination="c7P-EV-fhx" id="rjg-lU-MQg"/>
+                <outlet property="descriptionView" destination="q0l-s5-sKr" id="Utn-Ue-a50"/>
                 <outlet property="informativeLabel" destination="YOm-67-OGW" id="g9j-Rd-qAt"/>
                 <outlet property="titleLabel" destination="4eH-pQ-DLc" id="hAa-BQ-25a"/>
             </connections>

@@ -354,6 +354,11 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         /// if the string is empty, then when deleting, the delegate method does not work
         textField.text = " "
+        
+        ///if reenter the code we need to remove last letter
+        if currentSecurityCode.count == inputTextLimit {
+            currentSecurityCode.removeLast()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
