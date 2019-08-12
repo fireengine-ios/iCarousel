@@ -1027,7 +1027,6 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "Commercial Electronic Message";
-"etk_permissiom_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
 "restore_purchases" = "Restore Purchases";
 "restore_purchases_info" = "If you want to restore your existing purchases, click on the button.";
