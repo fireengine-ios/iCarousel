@@ -9,6 +9,12 @@
 import UIKit
 
 final class SpotifyStatusView: UIView, NibInit {
+    
+    enum State {
+        case empty
+        case inProgress
+        case finished(_ date: Date)
+    }
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -33,15 +39,53 @@ final class SpotifyStatusView: UIView, NibInit {
     }()
     
     private lazy var service: SpotifyRoutingService = factory.resolve()
+    private var status: SpotifyStatus?
     
-    func setup(with status: SpotifyStatus) {
-        if status.jobStatus == .pending || status.jobStatus == .running {
-            subtitleLabel.text = TextConstants.Spotify.Card.importing
-        } else if let date = status.lastModifiedDate {
-            let textString = dateFormatter.string(from: date)
-            subtitleLabel.text = String(format: TextConstants.Spotify.Card.lastUpdate, textString)
-        } else {
-            subtitleLabel.text = ""
+    var tapHandler: VoidHandler?
+    
+    var state: State = .empty {
+        didSet {
+            switch state {
+            case .empty:
+                subtitleLabel.text = ""
+            case .inProgress:
+                subtitleLabel.text = TextConstants.Spotify.Card.importing
+            case .finished(let date):
+                let dateString = dateFormatter.string(from: date)
+                subtitleLabel.text = String(format: TextConstants.Spotify.Card.lastUpdate, dateString)
+            }
+        }
+    }
+    
+    deinit {
+        service.delegates.remove(self)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        service.delegates.add(self)
+        
+        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onTap))
+        addGestureRecognizer(recognizer)
+    }
+    
+    @objc private func onTap() {
+        tapHandler?()
+    }
+}
+
+
+extension SpotifyStatusView: SpotifyRoutingServiceDelegate {
+    func importDidComplete() { }
+    
+    func importSendToBackground() {
+        state = .inProgress
+    }
+    
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) {
+        if let date = newStatus.lastModifiedDate {
+            state = .finished(date)
         }
     }
 }
