@@ -13,7 +13,6 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     private(set) var section: Section?
     weak var delegate: SocialConnectionCellDelegate?
     private lazy var service: SpotifyRoutingService = factory.resolve()
-    private lazy var spotifyService: SpotifyService = factory.resolve()
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -45,9 +44,12 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCell()
+        service.delegates.add(self)
     }
     
+    deinit {
+        service.delegates.remove(self)
+    }
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
         service.connectToSpotify() 
@@ -57,7 +59,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         service.getSpotifyStatus { response in
             switch response {
             case .success(let response):
-                self.isConnectHandler(isConnect: response.isConnected, username: response.userName, modifyedDate: response.lastModifiedDate)
+                self.isConnectHandler(isConnect: response.isConnected, username: response.userName, jobStatus: response.lastModifiedDate)
             case .failed(let error):
                 //TODO: create error handling
                 print(error)
@@ -65,19 +67,17 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
-    private func isConnectHandler(isConnect: Bool, username: String?, modifyedDate: Date?) {
+    private func isConnectHandler(isConnect: Bool, username: String?, jobStatus: Date?) {
         
         guard let section = section else {
             return
         }
         
-        if isConnect {
-            delegate?.didConnectSuccessfully(section: section)
-            section.mediator.setupSpotify(username: username, modifyedDate: modifyedDate)
-        } else {
-            delegate?.didDisconnectSuccessfully(section: section)
+        isConnect ? delegate?.didConnectSuccessfully(section: section) : delegate?.didDisconnectSuccessfully(section: section)
+
+        DispatchQueue.main.async {
+            section.mediator.setupSpotify(username: username, jobStatus: jobStatus)
         }
-        
     }
 }
 
@@ -85,11 +85,11 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     
     func setup(with section: Section?) {
         self.section = section
+        setupCell()
     }
     
     func disconnect() {
         service.disconnectFromSpotify { [weak self] result in
-           
             guard let section = self?.section else {
                 return
             }
@@ -103,4 +103,18 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     }
 }
 
-
+extension SpotifyAccountConnectionCell: SpotifyRoutingServiceDelegate {
+    
+    func importDidComplete() {
+        //TODO: Some logic will here
+    }
+    
+    func importSendToBackground() {
+        //TODO: Status will be here
+    }
+    
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) {
+        //TODO: Spotify job status should be here
+       isConnectHandler(isConnect: newStatus.isConnected, username: newStatus.userName, jobStatus: newStatus.lastModifiedDate)
+    }
+}

@@ -30,7 +30,6 @@ final class Section {
         return (state == .shrinked) ? 1 : 2
     }
     
-    
     init(account: SocialAccount, state: ExpandState) {
         self.account = account
         self.state = state
@@ -94,28 +93,23 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
             
         case (_, .expanded):
             cellId = CellsIdConstants.socialAccountRemoveConnectionCell
-     
         }
         
         return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
     
     private func setup(cell: UITableViewCell, at indexPath: IndexPath) {
-        let section = tableSections[safe: indexPath.section]
+        guard let section = tableSections[safe: indexPath.section] else {
+            return
+        }
         
         if let cell = cell as? SocialConnectionCell {
-            section?.mediator.set(socialConnectionCell: cell)
-            cell.setup(with: section)
+            section.mediator.set(socialConnectionCell: cell)
             cell.delegate = view
+            cell.setup(with: section)
         } else if let cell = cell as? SocialRemoveConnectionCell {
-            
-            if section?.account == Section.SocialAccount.spotify {
-                cell.spotifySetup(with: section)
-                
-            } else {
-                cell.setup(with: section)
-            }
-            section?.mediator.set(removeConnectionCell: cell)
+            section.mediator.set(removeConnectionCell: cell)
+            cell.setup(with: section)
         }
     }
 }

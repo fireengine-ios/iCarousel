@@ -17,19 +17,6 @@ protocol SpotifyRoutingServiceDelegate: class {
 final class SpotifyRoutingService {
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
-
-    private(set) var lastSpotifyStatus: SpotifyStatus?
-    private lazy var router = RouterVC()
-    var section: Section?
-    
-    var delegate: SocialConnectionCellDelegate?
-    
-    private(set) var lastSpotifyStatus: SpotifyStatus? {
-        didSet {
-            spotifyService.delegates.invoke(invocation: { $0.spotifyStatusDidChange() })
-        }
-    }
-
     private(set) var lastSpotifyStatus: SpotifyStatus? {
         didSet {
             if let status = lastSpotifyStatus {
@@ -39,7 +26,6 @@ final class SpotifyRoutingService {
     }
     private lazy var router = RouterVC()
     var delegates = MulticastDelegate<SpotifyRoutingServiceDelegate>()
->>>>>>> develop
     
     deinit {
         delegates.removeAll()
@@ -70,6 +56,7 @@ final class SpotifyRoutingService {
             guard let self = self else {
                 return
             }
+            
             switch result {
             case .success(let status):
                 if status.isConnected {
@@ -89,7 +76,7 @@ final class SpotifyRoutingService {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
-               self?.updateStatus(completion: handler)
+                self?.updateStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
             }
@@ -142,7 +129,6 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
                 
                 switch result {
                 case .success(_):
-                    self.delegate?.didConnectSuccessfully(section: self.section!)
                     let controller = self.prepareImportPlaylistsController()
                     self.router.pushViewController(viewController: controller)
                 case .failed(let error):

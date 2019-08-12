@@ -20,9 +20,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     }()
     
     private lazy var spotyfyRouter: SpotifyRoutingService = factory.resolve()
-    
     private let analyticsService: AnalyticsService = factory.resolve()
-    
     private let dataSource = ConnectedAccountsDataSource()
 
     override func viewDidLoad() {
@@ -32,13 +30,10 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         setupTableView()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         trackScreen()
     }
-    
     
     private func setupScreen() {
         setTitle(withString: TextConstants.settingsViewCellConnectedAccounts)
@@ -90,7 +85,8 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
         if section.set(expanded: true) {
-            DispatchQueue.toMain {
+            /// DispatchQueue.toMain invokes too fast
+            DispatchQueue.main.async {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.insertRows(at: [indexPath], with: .fade)
@@ -100,7 +96,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     
     func didDisconnectSuccessfully(section: Section) {
         if section.set(expanded: false) {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -122,6 +118,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
         activityManager.stop()
     }
 }
+
 
 
 

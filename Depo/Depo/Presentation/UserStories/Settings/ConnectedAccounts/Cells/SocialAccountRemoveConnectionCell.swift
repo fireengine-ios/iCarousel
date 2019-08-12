@@ -9,11 +9,9 @@
 import UIKit
 
 protocol SocialRemoveConnectionCell: class {
-    func setup(with section: Section?)    
-    func spotifySetup(with section: Section?)
+    func setup(with section: Section?)
     func set(username: String?)
-    func setSpotify(username: String?, modifyedDate: Date?)
-    func setJobStatus(jobStatus: String?)
+    func setSpotify(username: String?, jobStatus: Date?)
 }
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
@@ -32,7 +30,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             newValue.textColor = ColorConstants.charcoalGrey
         }
     }
-    @IBOutlet private weak var connectConditionLabelHeight: NSLayoutConstraint!
+    
+    @IBOutlet private weak var jobStatusLabelHeightConsrtaint: NSLayoutConstraint!
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
@@ -57,16 +56,11 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     }
     
     func setup(with section: Section?) {
-        jobStatusLabel.isHidden = true
-        connectConditionLabelHeight.constant = 0
-        self.section = section
-    }
-    
-    func spotifySetup(with section: Section?) {
         self.section = section
     }
     
     func set(username: String?) {
+        hideJobStatusLabel()
         guard let username = username, !username.isEmpty else {
             return
         }
@@ -75,24 +69,21 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         }
     }
     
-    func setSpotify(username: String?, modifyedDate: Date?) {
+    func setSpotify(username: String?, jobStatus: Date?) {
+
         if let username = username, !username.isEmpty {
-            DispatchQueue.toMain {
-                self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
-            }
+            self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
-      
-        if let modifyedDate = modifyedDate {
-            DispatchQueue.toMain {
-                self.jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, self.dateFormatter.string(from: modifyedDate))
-            }
+        
+        if let jobStatus = jobStatus {
+            self.jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, self.dateFormatter.string(from: jobStatus))
+        } else {
+            hideJobStatusLabel()
         }
     }
     
-    func setJobStatus(jobStatus: String?) {
-        DispatchQueue.toMain {
-            self.jobStatusLabel.text = jobStatus
-        }
+    private func hideJobStatusLabel() {
+        jobStatusLabelHeightConsrtaint.constant = 0
     }
     
     @IBAction func removeConnection(_ sender: Any) {
