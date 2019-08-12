@@ -320,15 +320,15 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
-                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                            fail?(ErrorResponse.error(error))
-                            return
-                        }
-                        
                         /// must be after accessToken save logic
                         if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
                             fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
+                        
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
                             return
                         }
                         
@@ -649,10 +649,10 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String,
-                            emptyPhoneFlag != HeaderConstant.emptyMSISDN {
-                                handler(.failed(ErrorResponse.string(HeaderConstant.emptyMSISDN)))
-                                return
+                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                            accountWarning == HeaderConstant.emptyMSISDN ||
+                            accountWarning == HeaderConstant.emptyEmail {
+                                handler(.failed(ErrorResponse.string(accountWarning)))
                         }
                         
                         guard self.tokenStorage.refreshToken != nil else {

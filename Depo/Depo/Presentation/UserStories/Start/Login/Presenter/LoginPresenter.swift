@@ -309,6 +309,8 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 }
 
+// MARK: - CaptchaViewErrorDelegate
+
 extension LoginPresenter: CaptchaViewErrorDelegate {
     
     func showCaptchaError(error: Error) {
@@ -317,7 +319,9 @@ extension LoginPresenter: CaptchaViewErrorDelegate {
     }
 }
 
-extension LoginPresenter: UpdatePhoneServiceDelegate {
+// MARK: - AccountWarningServiceDelegate
+
+extension LoginPresenter: AccountWarningServiceDelegate {
     func successedSilentLogin() {
         succesLogin()
     }

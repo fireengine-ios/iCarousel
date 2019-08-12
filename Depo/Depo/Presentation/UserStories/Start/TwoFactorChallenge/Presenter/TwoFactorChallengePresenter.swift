@@ -62,6 +62,10 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             updateEmptyPhone()
             return
             
+        } else if error == HeaderConstant.emptyEmail {
+            updateEmptyEmail()
+            return
+            
         } else if error == "INVALID_CHALLENGE" {
             errorText = TextConstants.twoFAInvalidChallengeErrorMessage
             timerFinishedRunning(with: true)
@@ -85,9 +89,15 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
     private func updateEmptyPhone() {
         interactor.updateEmptyPhone(delegate: self)
     }
+    
+    private func updateEmptyEmail() {
+        interactor.updateEmptyEmail()
+    }
 }
 
-extension TwoFactorChallengePresenter: UpdatePhoneServiceDelegate {
+// MARK: - AccountWarningServiceDelegate
+
+extension TwoFactorChallengePresenter: AccountWarningServiceDelegate {
     func successedSilentLogin() {
         verificationSucces()
     }

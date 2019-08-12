@@ -1,21 +1,21 @@
 //
-//  UpdatePhoneService.swift
+//  AccountWarningService.swift
 //  Depo
 //
 //  Created by Raman Harhun
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-protocol UpdatePhoneServiceDelegate: class {
+protocol AccountWarningServiceDelegate: class {
     
     func successedSilentLogin()
     
     func needToRelogin()
 }
 
-final class UpdatePhoneService {
+final class AccountWarningService {
         
-    var delegate: UpdatePhoneServiceDelegate?
+    var delegate: AccountWarningServiceDelegate?
     
     private var optInController: OptInController?
     private var emptyPhoneController: TextEnterController?
@@ -29,7 +29,7 @@ final class UpdatePhoneService {
     private var newPhone: String?
     private var referenceToken: String?
     
-    init(delegate: UpdatePhoneServiceDelegate? = nil) {
+    init(delegate: AccountWarningServiceDelegate? = nil) {
         self.delegate = delegate
     }
     
@@ -68,10 +68,17 @@ final class UpdatePhoneService {
         
         emptyPhoneController?.navigationController?.pushViewController(optInController, animated: true)
     }
+    
+    func openEmptyEmail(successHandler: @escaping VoidHandler) {
+        let emailEnterViewController = EmailEnterController.initFromNib()
+        emailEnterViewController.successHandler = successHandler
+        let navigationController = NavigationController(rootViewController: emailEnterViewController)
+        router.presentViewController(controller: navigationController)
+    }
 }
 
 //MARK: Requests
-extension UpdatePhoneService {
+extension AccountWarningService {
     
     private func getToken(for phoneNumber: String) {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
@@ -137,7 +144,7 @@ extension UpdatePhoneService {
 }
 
 //MARK: process response
-extension UpdatePhoneService {
+extension AccountWarningService {
     
     private func successed(token: SignUpSuccessResponse) {
         referenceToken = token.referenceToken
@@ -182,7 +189,7 @@ extension UpdatePhoneService {
 }
 
 // MARK: - OptInControllerDelegate
-extension UpdatePhoneService: OptInControllerDelegate {
+extension AccountWarningService: OptInControllerDelegate {
     
     func optInResendPressed(_ optInVC: OptInController) {
         self.optInController = optInVC
