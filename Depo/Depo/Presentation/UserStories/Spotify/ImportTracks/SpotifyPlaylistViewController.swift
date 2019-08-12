@@ -17,6 +17,7 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = false
         dataSource.isHeaderless = true
+        dataSource.selectionFullCell = false
         return dataSource
     }()
     

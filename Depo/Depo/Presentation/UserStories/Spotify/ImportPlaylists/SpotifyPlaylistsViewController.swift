@@ -44,6 +44,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = true
         dataSource.isHeaderless = true
+        dataSource.selectionFullCell = false
         return dataSource
     }()
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)

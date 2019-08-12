@@ -17,8 +17,10 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     private lazy var sortingManager = SpotifySortingManager(delegate: self)
     private lazy var navbarManager = SpotifyImportedPlaylistsNavbarManager(delegate: self)
-    
+    private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
+    private lazy var threeDotsManager = SpotifyThreeDotMenuManager(delegate: self)
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    private lazy var router = RouterVC()
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
@@ -37,12 +39,19 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
 
         navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
+        bottomBarManager.setup()
         loadNextPage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationBarWithGradientStyle()
+        bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+        
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
+        }
     }
 
     // MARK: -
@@ -79,8 +88,36 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     }
     
     private func openTracks(for playlist: SpotifyPlaylist) {
-        let controller = RouterVC().spotifyImportedTracksController(playlist: playlist)
+        let controller = router.spotifyImportedTracksController(playlist: playlist)
         navigationController?.show(controller, sender: nil)
+    }
+    
+    private func deleteSelectedPlaylists() {
+        
+    }
+    
+    // MARK: - Selection State
+    
+    private func startSelectionState() {
+        navigationItem.hidesBackButton = true
+        navbarManager.setSelectionState()
+    }
+    
+    private func stopSelectionState() {
+        navigationItem.hidesBackButton = false
+        dataSource.cancelSelection()
+        navbarManager.setDefaultState()
+        bottomBarManager.hide()
+    }
+    
+    private func updateBarsForSelectedObjects(count: Int) {
+        navbarManager.changeSelectionItems(count: count)
+
+        if count == 0 {
+            bottomBarManager.hide()
+        } else {
+            bottomBarManager.show()
+        }
     }
 }
 
@@ -99,11 +136,11 @@ extension SpotifyImportedPlaylistsViewController: SpotifyCollectionDataSourceDel
     }
     
     func didChangeSelectionCount(newCount: Int) {
-        navbarManager.changeSelectionItems(count: newCount)
+        updateBarsForSelectedObjects(count: newCount)
     }
     
     func onStartSelection() {
-        
+        startSelectionState()
     }
 }
 
@@ -121,14 +158,36 @@ extension SpotifyImportedPlaylistsViewController: SpotifySortingManagerDelegate 
 extension SpotifyImportedPlaylistsViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        
+        stopSelectionState()
     }
     
-    func onMore() {
-        
+    func onMore(_ sender: UIBarButtonItem) {
+        threeDotsManager.showActions(isSelectingMode: dataSource.isSelectionStateActive, sender: sender)
     }
     
     func onSearch() {
-        
+        let controller = router.searchView(navigationController: navigationController)
+        router.pushViewController(viewController: controller)
+    }
+}
+
+// MARK: - SpotifyBottomBarManagerDelegate
+
+extension SpotifyImportedPlaylistsViewController: SpotifyBottomBarManagerDelegate {
+    func onBottomBarManagerDelete() {
+        deleteSelectedPlaylists()
+    }
+}
+
+// MARK: - SpotifyThreeDotMenuManagerDelegate
+
+extension SpotifyImportedPlaylistsViewController: SpotifyThreeDotMenuManagerDelegate {
+    
+    func onThreeDotsManagerDelete() {
+        deleteSelectedPlaylists()
+    }
+    
+    func onThreeDotsManagerSelect() {
+        dataSource.startSelection()
     }
 }

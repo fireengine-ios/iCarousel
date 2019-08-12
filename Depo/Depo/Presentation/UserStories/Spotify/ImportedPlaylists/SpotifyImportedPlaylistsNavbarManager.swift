@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SpotifyImportedPlaylistsNavbarManagerDelegate: NavbarManagerDelegate {
-    func onMore()
+    func onMore(_ sender: UIBarButtonItem)
     func onSearch()
 }
 
@@ -53,6 +53,7 @@ class SpotifyImportedPlaylistsNavbarManager {
     }
     
     func changeSelectionItems(count: Int) {
+        moreButton.isEnabled = count > 0
         if count == 0 {
             delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarSelectiontTitle)
         } else {
@@ -67,7 +68,7 @@ class SpotifyImportedPlaylistsNavbarManager {
     }
     
     @objc private func onMore() {
-        delegate?.onMore()
+        delegate?.onMore(moreButton)
     }
     
     @objc private func onSearch() {

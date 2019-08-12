@@ -70,6 +70,11 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
     private var uuid: String?
     
     private var isSelectionStateActive = false
+    var isHiddenArrow = false {
+        didSet {
+            arrowImageView.isHidden = isHiddenArrow
+        }
+    }
     
     // MARK: -
     
@@ -94,7 +99,7 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
         if let playlist = item as? SpotifyPlaylist {
             titleLabel.text = playlist.name
             subtitleLabel.text = String(format: TextConstants.Spotify.Playlist.songsCount, playlist.count)
-            arrowImageView.isHidden = !isSelectionStateActive || playlist.count == 0
+            arrowImageView.isHidden = isHiddenArrow || playlist.count == 0
             loadImage(item: item, placeholder: UIImage(named: "playlist")!)
         } else if let track = item as? SpotifyTrack {
             titleLabel.text = track.name
@@ -104,9 +109,12 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func setSeletionMode(_ isActive: Bool, animation: Bool) {
+    func setSeletionMode(_ isActive: Bool, animated: Bool) {
         isSelectionStateActive = isActive
-        UIView.animate(withDuration: animation ? 0.1 : 0) {
+        if !isActive {
+            selectionButton.isSelected = false
+        }
+        UIView.animate(withDuration: animated ? 0.2 : 0) {
             self.selectionButton.isHidden = !isActive
             self.imageLeftOffset.constant = isActive ? Constants.imageLeftOffset.selectionMode : Constants.imageLeftOffset.defaultMode
             self.layoutIfNeeded()
@@ -147,11 +155,15 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Actions
     
     @objc private func onSelectionButton(_ sender: UIButton) {
-        if sender.isSelected {
-            cellDelegate?.onDeselect(cell: self)
-        } else {
+        reverseSelected()
+    }
+    
+    func reverseSelected() {
+        selectionButton.isSelected.toggle()
+        if selectionButton.isSelected {
             cellDelegate?.onSelect(cell: self)
+        } else {
+            cellDelegate?.onDeselect(cell: self)
         }
-        sender.isSelected.toggle()
     }
 }

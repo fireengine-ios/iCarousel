@@ -34,12 +34,16 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
 
     var isSelectionStateActive = false 
     var canChangeSelectionState = true
+    var selectionFullCell = true
     
     var isPaginationDidEnd = false
     
-    var showOnlySelected = false
+    var showOnlySelected = false // true for complete import state
     
     var isHeaderless = false
+    private var showGroups: Bool {
+        return !(isHeaderless || sortedRule == .sizeAZ || sortedRule == .sizeZA)
+    }
     
     // MARK: -
     
@@ -79,33 +83,44 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     
     func startSelection(indexPath: IndexPath? = nil) {
         isSelectionStateActive = true
+        updateVisibleCells(isSelectionStateActive)
+        
+        delegate?.onStartSelection()
+        
         if let indexPath = indexPath, let item = item(for: indexPath) {
             selectedItems.append(item)
+            collectionView.reloadItems(at: [indexPath])
         }
-        updateVisibleCells()
     }
     
     func cancelSelection() {
         isSelectionStateActive = false
         selectedItems.removeAll()
-        updateVisibleCells()
+        updateVisibleCells(isSelectionStateActive)
     }
     
-    private func updateVisibleCells() {
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    private func updateVisibleCells(_ isSelectionStateActive: Bool? = nil, animated: Bool = true) {
+        if let state = isSelectionStateActive {
+            collectionView.visibleCells.forEach {
+                ($0 as? SpotifyPlaylistCollectionViewCell)?.setSeletionMode(state, animated: animated)
+                ($0 as? SpotifyPlaylistCollectionViewCell)?.isHiddenArrow = state
+            }
+        } else {
+            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        }
     }
 
     // MARK: - UICollectionViewDataSource
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return isHeaderless ? 1 : groups.count
+        return showGroups ? groups.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isHeaderless {
-            return showOnlySelected ? selectedItems.count : allItems.count
+        if showGroups {
+            return groups[safe: section]?.value.count ?? 0
         }
-        return groups[safe: section]?.value.count ?? 0
+        return showOnlySelected ? selectedItems.count : allItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -117,7 +132,8 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
             let item = item(for: indexPath) else {
                 return
         }
-        cell.setSeletionMode(isSelectionStateActive, animation: false)
+        cell.isHiddenArrow = showOnlySelected
+        cell.setSeletionMode(isSelectionStateActive, animated: false)
         cell.setup(with: item, delegate: self, isSelected: selectedItems.contains(item))
         
         if isPaginationDidEnd {
@@ -153,13 +169,20 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let item = item(for: indexPath) {
+        if selectionFullCell && isSelectionStateActive {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SpotifyPlaylistCollectionViewCell else {
+                return
+            }
+            cell.reverseSelected()
+            
+        } else if let item = item(for: indexPath) {
             delegate?.onSelect(item: item)
         }
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return isHeaderless ? .zero : CGSize(width: UIScreen.main.bounds.width, height: 50)
+        return showGroups ? CGSize(width: UIScreen.main.bounds.width, height: 50) : .zero
     }
 }
 
@@ -175,7 +198,7 @@ extension SpotifyCollectionViewDataSource {
         let reloadCollectionView = allItems.isEmpty
         allItems.append(contentsOf: newItems)
         
-        if !isHeaderless {
+        if showGroups {
             updateGroupedItems()
         }
         
@@ -214,7 +237,7 @@ extension SpotifyCollectionViewDataSource {
     }
     
     private func mergeUpdate(_ newItems: [T]) -> (insertedSections: IndexSet?, insertedIndexPaths: [IndexPath]) {
-        if isHeaderless {
+        if !showGroups {
             let insertedIndexPaths = (allItems.count..<allItems.count + newItems.count).map { IndexPath(row: $0, section: 0) }
             return (nil, insertedIndexPaths)
         }
@@ -234,13 +257,11 @@ extension SpotifyCollectionViewDataSource {
         return (insertedSections, insertedIndexPaths)
     }
     
-    
     private func item(for indexPath: IndexPath) -> T? {
-        if isHeaderless {
-            return showOnlySelected ? selectedItems[safe: indexPath.row] : allItems[safe: indexPath.row]
+        if showGroups {
+            return groups[safe: indexPath.section]?.value[safe: indexPath.row]
         }
-        
-        return groups[safe: indexPath.section]?.value[safe: indexPath.row]
+        return showOnlySelected ? selectedItems[safe: indexPath.row] : allItems[safe: indexPath.row]
     }
 }
 
@@ -272,7 +293,6 @@ extension SpotifyCollectionViewDataSource: SpotifyPlaylistCellDelegate {
             if let indexPath = collectionView.indexPath(for: cell) {
                 startSelection(indexPath: indexPath)
             }
-            delegate?.onStartSelection()
         }
     }
 }

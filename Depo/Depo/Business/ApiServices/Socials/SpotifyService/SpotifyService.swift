@@ -174,7 +174,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
         let path = RouteRequests.Spotify.importedPlaylists
         sessionManager
             .request(path,
-                     parameters: ["sortBy": sortBy.description,
+                     parameters: ["sortBy": sortTypeString(from: sortBy),
                                   "sortOrder": sortOrder.description,
                                   "page": page,
                                   "size": size],
@@ -190,7 +190,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
         sessionManager
             .request(path,
                      parameters: ["playlistId": playlistId,
-                                  "sortBy": sortBy.description,
+                                  "sortBy": sortTypeString(from: sortBy),
                                   "sortOrder": sortOrder.description,
                                   "page": page,
                                   "size": size],
@@ -240,5 +240,12 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                                                               response: response.response)
             handler(.failed(backendError ?? error))
         }
+    }
+    
+    private func sortTypeString(from sortType: SortType) -> String {
+        if sortType == .size {
+            return "count"
+        }
+        return sortType.description
     }
 }
