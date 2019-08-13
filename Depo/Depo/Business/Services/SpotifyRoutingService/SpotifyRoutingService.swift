@@ -76,7 +76,7 @@ final class SpotifyRoutingService {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
-               self?.updateStatus(completion: handler)
+                self?.updateStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
             }

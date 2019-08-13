@@ -847,6 +847,7 @@
 "Instagram" = "Instagram";
 "Spotify" = "Spotify";
 "connected_as_format" = "Connected account:  @%@";
+"spotify_last_import" = "Last Import %@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
 "instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
 "instapick_selection_photos_selected" = "Photos Selected (%d)";
