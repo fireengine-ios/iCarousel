@@ -201,9 +201,9 @@ struct RouteRequests {
     
     static func updaterUrl() -> String {
         #if LIFEBOX
-            let jsonName = "update_ios.json"
+            let jsonName = "download/update_ios.json"
         #elseif LIFEDRIVE
-            let jsonName = "update_lifedrive_ios.json"
+            let jsonName = "download/update_lifedrive_ios.json"
         #else
             let jsonName = "unknown"
             debugPrint("⚠️: unknown turkcell updater url")
