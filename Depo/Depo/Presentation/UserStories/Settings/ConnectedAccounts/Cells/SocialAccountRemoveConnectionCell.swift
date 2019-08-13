@@ -31,8 +31,6 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         }
     }
     
-    @IBOutlet private weak var jobStatusLabelHeightConsrtaint: NSLayoutConstraint!
-    
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
             connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
@@ -70,20 +68,18 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     }
     
     func setSpotify(username: String?, jobStatus: Date?) {
-
+        hideJobStatusLabel()
         if let username = username, !username.isEmpty {
-            self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
+            connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
         
         if let jobStatus = jobStatus {
-            self.jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, self.dateFormatter.string(from: jobStatus))
-        } else {
-            hideJobStatusLabel()
+            jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, dateFormatter.string(from: jobStatus))
         }
     }
     
     private func hideJobStatusLabel() {
-        jobStatusLabelHeightConsrtaint.constant = 0
+        jobStatusLabel.text = ""
     }
     
     @IBAction func removeConnection(_ sender: Any) {

@@ -20,21 +20,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="q82-vh-WMH">
-                        <rect key="frame" x="16" y="11" width="285" height="52.5"/>
+                        <rect key="frame" x="16" y="11" width="285" height="46"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVA-Tl-N9H">
-                                <rect key="frame" x="0.0" y="0.0" width="285" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="285" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="73J-sd-oxW"/>
+                                    <constraint firstAttribute="height" constant="20" id="73J-sd-oxW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0y-K7-T3w">
-                                <rect key="frame" x="0.0" y="26.5" width="285" height="26"/>
+                                <rect key="frame" x="0.0" y="26" width="285" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="NYT-QU-WX2"/>
+                                    <constraint firstAttribute="height" constant="20" id="NYT-QU-WX2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -52,7 +52,7 @@
                         </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRE-7X-zPX">
-                        <rect key="frame" x="135.5" y="80.5" width="46" height="20"/>
+                        <rect key="frame" x="135.5" y="74" width="46" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="nnD-Zv-Rbw"/>
                         </constraints>
@@ -75,7 +75,6 @@
             <connections>
                 <outlet property="connectedAs" destination="G0y-K7-T3w" id="xxh-N2-HSn"/>
                 <outlet property="jobStatusLabel" destination="BVA-Tl-N9H" id="JFg-v9-NYs"/>
-                <outlet property="jobStatusLabelHeightConsrtaint" destination="73J-sd-oxW" id="2o0-ci-QvZ"/>
                 <outlet property="removeConnectionButton" destination="zRE-7X-zPX" id="ypk-S4-yQj"/>
             </connections>
             <point key="canvasLocation" x="-69.599999999999994" y="100.74962518740631"/>

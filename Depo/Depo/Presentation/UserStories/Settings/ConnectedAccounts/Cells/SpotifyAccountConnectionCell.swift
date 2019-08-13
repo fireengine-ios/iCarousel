@@ -70,6 +70,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     private func isConnectHandler(isConnect: Bool, username: String?, jobStatus: Date?) {
         
         guard let section = section else {
+            assertionFailure()
             return
         }
         
@@ -91,6 +92,7 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     func disconnect() {
         service.disconnectFromSpotify { [weak self] result in
             guard let section = self?.section else {
+                assertionFailure()
                 return
             }
             switch result {

@@ -100,6 +100,7 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
     
     private func setup(cell: UITableViewCell, at indexPath: IndexPath) {
         guard let section = tableSections[safe: indexPath.section] else {
+            assertionFailure()
             return
         }
         

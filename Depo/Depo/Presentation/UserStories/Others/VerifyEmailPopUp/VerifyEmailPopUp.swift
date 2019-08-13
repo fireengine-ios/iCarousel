@@ -243,7 +243,6 @@ final class VerifyEmailPopUp: UIViewController {
             if let nextResponder = codeTextFields[safe: nextTag] {
                 nextResponder.becomeFirstResponder()
             } else {
-                currentSecurityCode.removeLast()
                 hideKeyboard()
             }
         }
