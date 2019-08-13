@@ -10,8 +10,8 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
     
     private var otpParams: TwoFAChallengeParametersResponse
     private let challenge: TwoFAChallengeModel
-        
-    private var updatePhoneService: UpdatePhoneService?
+    private lazy var authService = AuthenticationService()
+    private var accountWarningService: AccountWarningService?
     
     init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
         self.otpParams = otpParams
@@ -62,7 +62,6 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
                 case .success(_):
                     AccountService().updateBrandType()
                     self.output.verificationSucces()
-                    
                 case .failed(let error):
                     self.output.vereficationFailed(with: error.localizedDescription)
                 }
@@ -71,12 +70,35 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
         
     }
     
-    override func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {
-        updatePhoneService = UpdatePhoneService(delegate: delegate)
-        updatePhoneService?.start()
+    override func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
+        accountWarningService = AccountWarningService(delegate: delegate)
+        accountWarningService?.start()
     }
     
     override func stopUpdatePhone() {
-        updatePhoneService?.stop()
+        accountWarningService?.stop()
+    }
+    
+    override func updateEmptyEmail() {
+        accountWarningService = AccountWarningService()
+
+        let onSuccess: VoidHandler = { [weak self] in
+            self?.updateUserLanguage()
+        }
+        
+        accountWarningService?.openEmptyEmail(successHandler: onSuccess)
+    }
+    
+    func updateUserLanguage() {
+        authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output.succesLogin()
+                case .failed(let error):
+                    self?.showPopUp(with: error.localizedDescription)
+                }
+            }
+        }
     }
 }
