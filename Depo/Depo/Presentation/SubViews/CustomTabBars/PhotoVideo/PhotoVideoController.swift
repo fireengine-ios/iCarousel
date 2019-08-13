@@ -241,7 +241,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         updateSelectedItemsCount()
         
         ///fix bottom bar update scrolling freeze on dragging
-        guard scrollBarManager.scrollBar.isDragging else {
+        guard !collectionView.isQuickSelecting else {
             return
         }
         
