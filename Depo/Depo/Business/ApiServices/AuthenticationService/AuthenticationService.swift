@@ -653,6 +653,7 @@ class AuthenticationService: BaseRequestService {
                             accountWarning == HeaderConstant.emptyMSISDN ||
                             accountWarning == HeaderConstant.emptyEmail {
                                 handler(.failed(ErrorResponse.string(accountWarning)))
+                                return
                         }
                         
                         guard self.tokenStorage.refreshToken != nil else {
