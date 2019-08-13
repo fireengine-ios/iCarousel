@@ -90,7 +90,41 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     }
     
     private func deleteSelectedTracks() {
+        let popup = router.spotifyDeletePopup(deleteAction: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.deleteItems(self.dataSource.selectedItems)
+        })
+        present(popup, animated: false)
+    }
+    
+    private func deleteItems(_ items: [SpotifyTrack]) {
+        let trackIds = items.compactMap { $0.id }
+        if trackIds.isEmpty {
+            return
+        }
         
+        showSpinner()
+        
+        spotifyService.deletePlaylistTracks(trackIds: trackIds) {  [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(_):
+                self.dataSource.remove(items) {
+                    self.hideSpinner()
+                    self.playlist.count -= items.count
+                    self.navbarManager.playlist = self.playlist
+                    self.stopSelectionState()
+                }
+            case .failed(let error):
+                self.hideSpinner()
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
+        }
     }
     
     // MARK: - Selection State
@@ -149,6 +183,10 @@ extension SpotifyImportedTracksViewController: SpotifySortingManagerDelegate {
 // MARK - SpotifyImportedPlaylistsNavbarManagerDelegate
 
 extension SpotifyImportedTracksViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
+    
+    func canShowDetails() -> Bool {
+        return false
+    }
     
     func onCancel() {
         stopSelectionState()

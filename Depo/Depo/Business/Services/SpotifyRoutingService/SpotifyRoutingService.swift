@@ -208,8 +208,9 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         }
     }
     
-    func importSendToBackground() {
+    func importSendToBackground(_ controller: SpotifyImportViewController) {
         delegates.invoke(invocation: { $0.importSendToBackground() })
-        router.popToRootViewController()
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true)
     }
 }

@@ -3105,6 +3105,21 @@
 		98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
 		98BCD714224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
+		98C2983F2302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
+		98C298402302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
+		98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
+		98C298442302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298432302B0F800C9811E /* SpotifyDeletePopup.swift */; };
+		98C298452302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298432302B0F800C9811E /* SpotifyDeletePopup.swift */; };
+		98C298462302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298432302B0F800C9811E /* SpotifyDeletePopup.swift */; };
+		98C2984A2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */; };
+		98C2984B2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */; };
+		98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */; };
+		98C2984E2302B13200C9811E /* SpotifyDeletePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */; };
+		98C2984F2302B13200C9811E /* SpotifyDeletePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */; };
+		98C298502302B13200C9811E /* SpotifyDeletePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */; };
+		98C298522302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */; };
+		98C298532302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */; };
+		98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */; };
 		98C878232074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878242074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878262074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
@@ -7784,6 +7799,11 @@
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
 		98BCD710224A615A0090C13D /* SmartAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartAlbumCell.xib; sourceTree = "<group>"; };
+		98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackgroundPopup.swift; sourceTree = "<group>"; };
+		98C298432302B0F800C9811E /* SpotifyDeletePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyDeletePopup.swift; sourceTree = "<group>"; };
+		98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyCancelImportPopup.swift; sourceTree = "<group>"; };
+		98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyDeletePopup.xib; sourceTree = "<group>"; };
+		98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyCancelImportPopup.xib; sourceTree = "<group>"; };
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
@@ -13149,10 +13169,10 @@
 		989BDE2622F47B1E001DDEB2 /* Spotify */ = {
 			isa = PBXGroup;
 			children = (
+				98C298422302AD1600C9811E /* Popups */,
 				989BDE2C22F47B1E001DDEB2 /* SpotifyAuth */,
 				989BDE2722F47B1E001DDEB2 /* ImportPlaylists */,
 				989BDE3622F47B1E001DDEB2 /* ImportTracks */,
-				989BDE2F22F47B1E001DDEB2 /* ImportOverwritePopup */,
 				989BDE3322F47B1E001DDEB2 /* ImportController */,
 				98792DCB22FD47EF000A77E5 /* ImportedPlaylists */,
 				98792DCC22FD480F000A77E5 /* ImportedTracks */,
@@ -13231,6 +13251,35 @@
 				8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */,
 			);
 			path = AnalyticsService;
+			sourceTree = "<group>";
+		};
+		98C2983D2302AC7100C9811E /* DeletePopup */ = {
+			isa = PBXGroup;
+			children = (
+				98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */,
+				98C298432302B0F800C9811E /* SpotifyDeletePopup.swift */,
+			);
+			path = DeletePopup;
+			sourceTree = "<group>";
+		};
+		98C298422302AD1600C9811E /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				989BDE2F22F47B1E001DDEB2 /* ImportOverwritePopup */,
+				98C2983D2302AC7100C9811E /* DeletePopup */,
+				98C298482302B10D00C9811E /* CancelImportPopup */,
+				98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
+		98C298482302B10D00C9811E /* CancelImportPopup */ = {
+			isa = PBXGroup;
+			children = (
+				98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */,
+				98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */,
+			);
+			path = CancelImportPopup;
 			sourceTree = "<group>";
 		};
 		98EAC9402080CBFF00AAD5B6 /* ContactService */ = {
@@ -16780,6 +16829,7 @@
 				8C06AF6B2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
 				B5AB5B5921F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				8C06B1692008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
+				98C298532302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
 				8C06AF6F2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
@@ -16873,6 +16923,7 @@
 				8C06B0532008AD71003D8E05 /* parlaklik_secili.png in Resources */,
 				4A6DBE8521A6F8EA0003D1B4 /* PackageInfoView.xib in Resources */,
 				8C06AF252008AD70003D8E05 /* cizgi_2@3x.png in Resources */,
+				98C2984F2302B13200C9811E /* SpotifyDeletePopup.xib in Resources */,
 				8C06AF0B2008AD70003D8E05 /* check-mark@3x.png in Resources */,
 				8C06AF992008AD71003D8E05 /* filtre_selected@2x.png in Resources */,
 				8C06B1052008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
@@ -17524,6 +17575,7 @@
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8C06AEC02008AD70003D8E05 /* alt_cizgili@3x.png in Resources */,
+				98C298522302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				7C00FE1E1F5982FA0041D041 /* FeedbackViewController.xib in Resources */,
 				7CA4A167207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AED42008AD70003D8E05 /* bold.png in Resources */,
@@ -17617,6 +17669,7 @@
 				8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */,
 				8C06B0362008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C06B09E2008AD71003D8E05 /* refresh@3x.png in Resources */,
+				98C2984E2302B13200C9811E /* SpotifyDeletePopup.xib in Resources */,
 				8C06B1C02008AD72003D8E05 /* lookup_miss_etikate.png in Resources */,
 				8C06B0542008AD71003D8E05 /* parlaklik_secili@2x.png in Resources */,
 				8C06AF7E2008AD70003D8E05 /* error_icon.png in Resources */,
@@ -17947,6 +18000,7 @@
 				CE784CD122A685FB00662219 /* CRYFrameCell.nib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
+				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD522A685FB00662219 /* paylas_mail@2x.png in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
@@ -18081,6 +18135,7 @@
 				CE784D5522A685FB00662219 /* kucuk_ucgen@3x.png in Resources */,
 				CE784D5622A685FB00662219 /* checkbox_secili@3x.png in Resources */,
 				CE784D5722A685FB00662219 /* ins_paylas.png in Resources */,
+				98C298502302B13200C9811E /* SpotifyDeletePopup.xib in Resources */,
 				CE784D5822A685FB00662219 /* rotation@2x.png in Resources */,
 				CE784D5922A685FB00662219 /* sample_oldie@2x.png in Resources */,
 				CE784D5A22A685FB00662219 /* Buyuk_Selected@2x.png in Resources */,
@@ -19206,6 +19261,7 @@
 			files = (
 				CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
+				98C298402302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
 				892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
@@ -19648,6 +19704,7 @@
 				927E508621E8AADA00E44CC0 /* InstaPickCard.swift in Sources */,
 				8C0E8DB51FDEBDFF00789C91 /* ImportPhotosInteractorOutput.swift in Sources */,
 				8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */,
+				98C2984B2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
 				CE00B24D2202FB3F00A5A696 /* InstapickAlbumSelectionViewController.swift in Sources */,
 				7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */,
 				8C20868A228D5386000BEDAD /* QuickScrollService.swift in Sources */,
@@ -19819,6 +19876,7 @@
 				8C65D18722C63B6F00CB1DBD /* String + Extension.swift in Sources */,
 				8C0E8E1B1FDEBDFF00789C91 /* ActivityTimelineTableBackView.swift in Sources */,
 				8C0B91AF20170ECC00A5BA81 /* ManageContactsModels.swift in Sources */,
+				98C298452302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				8C0E8E1C1FDEBDFF00789C91 /* ForgotPasswordViewOutput.swift in Sources */,
 				8C0E8E1D1FDEBDFF00789C91 /* ForgotPasswordViewController.swift in Sources */,
 				8C0E8E1E1FDEBDFF00789C91 /* ForgotPasswordModuleInput.swift in Sources */,
@@ -20891,6 +20949,7 @@
 				CE95ED521F516736002F923A /* HelpAndSupportModuleInput.swift in Sources */,
 				CEAFCF661F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				7CD1F8D21F014EF90028F51A /* CustomSwitch.swift in Sources */,
+				98C298442302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				CEE1D1F71F714DFE0008F4CF /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */,
 				CE51ABC61EF90853005DCEE0 /* AutoSyncModel.swift in Sources */,
@@ -21057,6 +21116,7 @@
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
+				98C2984A2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
 				B5AB5B7021F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */,
 				8C20865F228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
@@ -21381,6 +21441,7 @@
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
 				CE246A0E1F3D2CDE008DF705 /* SyncServiceManager.swift in Sources */,
 				7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */,
+				98C2983F2302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
 				98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
@@ -22118,6 +22179,7 @@
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
+				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
 				CE78484122A685FB00662219 /* UserProfileViewController.swift in Sources */,
 				CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */,
 				CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */,
@@ -22383,6 +22445,7 @@
 				CE78493822A685FB00662219 /* LoginInteractorOutput.swift in Sources */,
 				CE78493922A685FB00662219 /* ImageFormat.swift in Sources */,
 				CE78493A22A685FB00662219 /* PremiumView.swift in Sources */,
+				98C298462302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				CE78493B22A685FB00662219 /* UsageInfoInitializer.swift in Sources */,
 				CE78493C22A685FB00662219 /* PhoneVereficationDataStorage.swift in Sources */,
 				CE78493D22A685FB00662219 /* FaceImagePhotosConfigurator.swift in Sources */,
@@ -23188,6 +23251,7 @@
 				CE784C4422A685FB00662219 /* FreeAppSpaceRouter.swift in Sources */,
 				CE784C4522A685FB00662219 /* SingletonStorage.swift in Sources */,
 				CE784C4622A685FB00662219 /* HelpAndSupportViewOutput.swift in Sources */,
+				98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
 				CE784C4722A685FB00662219 /* ViewController.swift in Sources */,
 				CE784C4822A685FB00662219 /* AlbumDetailPresenter.swift in Sources */,
 				CE784C4922A685FB00662219 /* OfferServiceResponse.swift in Sources */,

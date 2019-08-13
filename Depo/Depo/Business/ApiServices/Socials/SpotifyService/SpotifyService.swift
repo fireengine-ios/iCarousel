@@ -21,8 +21,8 @@ protocol SpotifyService: class {
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>)
     func getImportedPlaylists(sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyPlaylist]>)
     func getImportedPlaylistTracks(playlistId: Int, sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>)
-    func deletePlaylist(playlistId: String, handler: @escaping ResponseVoid)
-    func deletePlaylistTrack(trackId: String, handler: @escaping ResponseVoid)
+    func deletePlaylists(playlistIds: [Int], handler: @escaping ResponseVoid)
+    func deletePlaylistTracks(trackIds: [Int], handler: @escaping ResponseVoid)
 }
 
 final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
@@ -201,22 +201,22 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
         }
     }
     
-    func deletePlaylist(playlistId: String, handler: @escaping ResponseVoid) {
+    func deletePlaylists(playlistIds: [Int], handler: @escaping ResponseVoid) {
         sessionManager
             .request(RouteRequests.Spotify.importedPlaylists,
                      method: .delete,
-                     parameters: ["playlistId": playlistId],
-                     encoding: URLEncoding.default)
+                     parameters: playlistIds.asParameters(),
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
     }
     
-    func deletePlaylistTrack(trackId: String, handler: @escaping ResponseVoid) {
+    func deletePlaylistTracks(trackIds: [Int], handler: @escaping ResponseVoid) {
         sessionManager
             .request(RouteRequests.Spotify.importedTracks,
                      method: .delete,
-                     parameters: ["trackId": trackId],
-                     encoding: URLEncoding.default)
+                     parameters: trackIds.asParameters(),
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
     }

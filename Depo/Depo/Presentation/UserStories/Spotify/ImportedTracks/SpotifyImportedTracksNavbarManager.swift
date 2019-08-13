@@ -10,7 +10,7 @@ import UIKit
 
 final class SpotifyImportedTracksNavbarManager: SpotifyImportedPlaylistsNavbarManager {
 
-    private var playlist: SpotifyPlaylist?
+    var playlist: SpotifyPlaylist?
 
     required init(delegate: (SpotifyImportedPlaylistsNavbarManagerDelegate & UIViewController)?) {
         super.init(delegate: delegate)

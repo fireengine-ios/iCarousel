@@ -125,6 +125,10 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 
 extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     
+    func canShowDetails() -> Bool {
+        return dataSource.isSelectionStateActive
+    }
+    
     func onSelect(item: SpotifyObject) {
         guard let playlist = item as? SpotifyPlaylist else {
             return

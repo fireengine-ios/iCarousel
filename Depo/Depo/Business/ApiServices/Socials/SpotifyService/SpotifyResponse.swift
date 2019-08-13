@@ -95,15 +95,19 @@ class SpotifyObject: Equatable {
         self.imagePath = json["imagePath"].url
     }
     
+    func equalTo(rhs: SpotifyObject) -> Bool {
+        return id == rhs.id
+    }
+    
     static func == (lhs: SpotifyObject, rhs: SpotifyObject) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.equalTo(rhs: rhs)
     }
 }
 
 final class SpotifyPlaylist: SpotifyObject {
     
     let playlistId: String
-    let count: Int
+    var count: Int
     
     required init?(json: JSON) {
         guard
@@ -119,8 +123,14 @@ final class SpotifyPlaylist: SpotifyObject {
         super.init(json: json)
     }
     
-    static func == (lhs: SpotifyPlaylist, rhs: SpotifyPlaylist) -> Bool {
-        return lhs.playlistId == rhs.playlistId
+    override func equalTo(rhs: SpotifyObject) -> Bool {
+        if id != nil, rhs.id != nil {
+            return super.equalTo(rhs: rhs)
+        }
+        guard let rhs_playlistId = (rhs as? SpotifyPlaylist)?.playlistId else {
+            return super.equalTo(rhs: rhs)
+        }
+        return playlistId == rhs_playlistId
     }
 }
 
@@ -145,8 +155,14 @@ final class SpotifyTrack: SpotifyObject {
         self.artistName = artistName
         super.init(json: json)
     }
-    
-    static func == (lhs: SpotifyTrack, rhs: SpotifyTrack) -> Bool {
-        return lhs.isrc == rhs.isrc
+ 
+    override func equalTo(rhs: SpotifyObject) -> Bool {
+        if id != nil, rhs.id != nil {
+            return super.equalTo(rhs: rhs)
+        }
+        guard let rhs_isrc = (rhs as? SpotifyTrack)?.isrc else {
+            return super.equalTo(rhs: rhs)
+        }
+        return isrc == rhs_isrc
     }
 }

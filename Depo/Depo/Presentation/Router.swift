@@ -995,8 +995,16 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
-        return SpotifyOverwritePopup.with(importAction: importAction)
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyOverwritePopup.with(action: importAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyDeletePopup(deleteAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyDeletePopup.with(action: deleteAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyCancelImportPopup(cancelAction: @escaping VoidHandler, continueAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyCancelImportPopup.with(action: cancelAction, dismissAction: continueAction)
     }
 
     func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {

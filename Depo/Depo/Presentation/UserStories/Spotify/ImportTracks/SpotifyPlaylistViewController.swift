@@ -68,6 +68,10 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
 
 extension SpotifyPlaylistViewController: SpotifyCollectionDataSourceDelegate {
     
+    func canShowDetails() -> Bool {
+        return false
+    }
+    
     func onSelect(item: SpotifyObject) { }
     
     func needLoadNextPage() {

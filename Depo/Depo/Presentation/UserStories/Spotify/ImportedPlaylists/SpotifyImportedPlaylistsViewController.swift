@@ -93,7 +93,39 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     }
     
     private func deleteSelectedPlaylists() {
+        let popup = router.spotifyDeletePopup(deleteAction: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.deleteItems(self.dataSource.selectedItems)
+        })
+        present(popup, animated: false)
+    }
+    
+    private func deleteItems(_ items: [SpotifyPlaylist]) {
+        let playlistIds = items.compactMap { $0.id }
+        if playlistIds.isEmpty {
+            return
+        }
         
+        showSpinner()
+        
+        spotifyService.deletePlaylists(playlistIds: playlistIds) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(_):
+                self.dataSource.remove(items) {
+                    self.hideSpinner()
+                    self.stopSelectionState()
+                }
+            case .failed(let error):
+                self.hideSpinner()
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
+        }
     }
     
     // MARK: - Selection State
@@ -124,6 +156,10 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
 // MARK: - SpotifyCollectionDataSourceDelegate
 
 extension SpotifyImportedPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
+    
+    func canShowDetails() -> Bool {
+        return true
+    }
 
     func needLoadNextPage() {
         loadNextPage()

@@ -13,6 +13,7 @@ protocol SpotifyCollectionDataSourceDelegate: class {
     func onSelect(item: SpotifyObject)
     func didChangeSelectionCount(newCount: Int)
     func onStartSelection()
+    func canShowDetails() -> Bool
 }
 
 final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -43,6 +44,10 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     var isHeaderless = false
     private var showGroups: Bool {
         return !(isHeaderless || sortedRule == .sizeAZ || sortedRule == .sizeZA)
+    }
+    
+    private var canShowDetails: Bool {
+        return delegate?.canShowDetails() ?? false
     }
     
     // MARK: -
@@ -103,7 +108,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         if let state = isSelectionStateActive {
             collectionView.visibleCells.forEach {
                 ($0 as? SpotifyPlaylistCollectionViewCell)?.setSeletionMode(state, animated: animated)
-                ($0 as? SpotifyPlaylistCollectionViewCell)?.isHiddenArrow = state
+                ($0 as? SpotifyPlaylistCollectionViewCell)?.isHiddenArrow = !canShowDetails
             }
         } else {
             collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
@@ -132,7 +137,8 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
             let item = item(for: indexPath) else {
                 return
         }
-        cell.isHiddenArrow = showOnlySelected
+
+        cell.isHiddenArrow = !canShowDetails
         cell.setSeletionMode(isSelectionStateActive, animated: false)
         cell.setup(with: item, delegate: self, isSelected: selectedItems.contains(item))
         
@@ -196,7 +202,13 @@ extension SpotifyCollectionViewDataSource {
         }
 
         let reloadCollectionView = allItems.isEmpty
-        allItems.append(contentsOf: newItems)
+        var filteredNewItems = [T]()
+        newItems.forEach { item in
+            if !allItems.contains(item) {
+                allItems.append(item)
+                filteredNewItems.append(item)
+            }
+        }
         
         if showGroups {
             updateGroupedItems()
@@ -205,7 +217,7 @@ extension SpotifyCollectionViewDataSource {
         if reloadCollectionView {
             collectionView.reloadData()
         } else {
-            let updates = mergeUpdate(newItems)
+            let updates = mergeUpdate(filteredNewItems)
             if !updates.insertedIndexPaths.isEmpty {
                 collectionView.performBatchUpdates ({
                     if let insertedSections = updates.insertedSections, !insertedSections.isEmpty {
@@ -215,6 +227,40 @@ extension SpotifyCollectionViewDataSource {
                 })
             }
         }
+    }
+    
+    func remove(_ items: [T], completion: @escaping VoidHandler) {
+        let indexPaths = items.compactMap { indexPath(for: $0) }
+        
+        if indexPaths.isEmpty {
+            return
+        }
+        
+        items.forEach { allItems.remove($0) }
+        
+        var deleteSections = IndexSet()
+        if showGroups {
+            let oldGroups = groups.map { $0.0 }
+            updateGroupedItems()
+            let newGroups = groups.map { $0.0 }
+            
+            var indexes = [Int]()
+            oldGroups.enumerated().forEach { index, group in
+                if !newGroups.contains(group) {
+                    indexes.append(index)
+                }
+            }
+            deleteSections = IndexSet(indexes)
+        }
+        
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: indexPaths)
+            if !deleteSections.isEmpty {
+                collectionView.deleteSections(deleteSections)
+            }
+        }, completion: { _ in
+            completion()
+        })
     }
     
     private func updateGroupedItems() {
@@ -238,7 +284,7 @@ extension SpotifyCollectionViewDataSource {
     
     private func mergeUpdate(_ newItems: [T]) -> (insertedSections: IndexSet?, insertedIndexPaths: [IndexPath]) {
         if !showGroups {
-            let insertedIndexPaths = (allItems.count..<allItems.count + newItems.count).map { IndexPath(row: $0, section: 0) }
+            let insertedIndexPaths = (allItems.count - newItems.count..<allItems.count).map { IndexPath(row: $0, section: 0) }
             return (nil, insertedIndexPaths)
         }
         
@@ -262,6 +308,31 @@ extension SpotifyCollectionViewDataSource {
             return groups[safe: indexPath.section]?.value[safe: indexPath.row]
         }
         return showOnlySelected ? selectedItems[safe: indexPath.row] : allItems[safe: indexPath.row]
+    }
+    
+    private func indexPath(for item: T) -> IndexPath? {
+        if showGroups {
+            var sectionKey = ""
+            switch sortedRule.sortingRules {
+            case .name:
+                sectionKey = String(item.name.first ?? Character(""))
+            case .date:
+                sectionKey = item.monthValue
+            default:
+                return nil
+            }
+            
+            let sections = groups.map { $0.0 }
+            if let section = sections.firstIndex(where: { $0 == sectionKey }) {
+                let items = groups[section].value
+                if let row = items.firstIndex(where: {$0 == item }) {
+                    return IndexPath(row: row, section: section)
+                }
+            }
+        } else if let row = allItems.firstIndex(where: { $0 == item }) {
+            return IndexPath(row: row, section: 0)
+        }
+        return nil
     }
 }
 
