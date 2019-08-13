@@ -59,7 +59,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         service.getSpotifyStatus { response in
             switch response {
             case .success(let response):
-                self.isConnectHandler(isConnect: response.isConnected, username: response.userName, jobStatus: response.lastModifiedDate)
+                self.isConnectHandler(spotifyStatus: response)
             case .failed(let error):
                 //TODO: create error handling
                 print(error)
@@ -67,17 +67,22 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
-    private func isConnectHandler(isConnect: Bool, username: String?, jobStatus: Date?) {
+    private func isConnectHandler(spotifyStatus: SpotifyStatus) {
         
         guard let section = section else {
             assertionFailure()
             return
         }
         
-        isConnect ? delegate?.didConnectSuccessfully(section: section) : delegate?.didDisconnectSuccessfully(section: section)
+        spotifyStatus.isConnected ? delegate?.didConnectSuccessfully(section: section) : delegate?.didDisconnectSuccessfully(section: section)
+        
+        if spotifyStatus.jobStatus == .failed {
+            delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
+        }
 
         DispatchQueue.main.async {
-            section.mediator.setupSpotify(username: username, jobStatus: jobStatus)
+            //TODO: JobStatus and lastModifyed date will handle here
+            section.mediator.setupSpotify(username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
         }
     }
 }
@@ -116,7 +121,6 @@ extension SpotifyAccountConnectionCell: SpotifyRoutingServiceDelegate {
     }
     
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus) {
-        //TODO: Spotify job status should be here
-       isConnectHandler(isConnect: newStatus.isConnected, username: newStatus.userName, jobStatus: newStatus.lastModifiedDate)
+        isConnectHandler(spotifyStatus: newStatus)
     }
 }
