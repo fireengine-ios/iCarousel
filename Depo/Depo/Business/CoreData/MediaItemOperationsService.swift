@@ -28,9 +28,6 @@ final class MediaItemOperationsService {
     
     var inProcessAppendingLocalFiles = false
     
-    var originalAssetsBeingAppended = AssetsCache()
-    var nonCloudAlreadySavedAssets = AssetsCache()
-    
     func deleteRemoteEntities(_ completion: BoolHandler?) {
         let remoteMediaItemsPredicate = PredicateRules().predicate(filters: [.localStatus(.nonLocal)])
         
@@ -548,18 +545,10 @@ final class MediaItemOperationsService {
                 completion()
                 return
             }
-            ///check which are new
-            var newAssets =  [PHAsset]()
-            var assetsToUpdate =  [PHAsset]()
-            localMediaItems.forEach {
-                if LocalMediaStorage.default.assetsCache.assetBy(identifier: $0.localIdentifier) != nil {
-                    //update
-                    assetsToUpdate.append($0) ///for now its useless
-                } else {
-                    newAssets.append($0)
-                }
-            }
-            LocalMediaStorage.default.assetsCache.append(list: newAssets)
+            let assetCahce = LocalMediaStorage.default.assetsCache
+            let newAssets = localMediaItems.filter { assetCahce.assetBy(identifier: $0.localIdentifier) == nil}
+            assetCahce.append(list: newAssets)
+            
             debugLog("DUPLICATION_TEST - newAssets \(newAssets.compactMap { $0.originalFilename ?? ""})")
             self.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
         }
@@ -591,6 +580,7 @@ final class MediaItemOperationsService {
         updateICloudStatus(for: assetsList)
         let context = CoreDataStack.default.newChildBackgroundContext
         listAssetIdIsNotSaved(allList: assetsList, context: context) { [weak self] notSavedAssets in
+            LocalMediaStorage.default.assetsCache.append(list: notSavedAssets)
             let start = Date()
             
             guard !notSavedAssets.isEmpty else {
@@ -602,15 +592,10 @@ final class MediaItemOperationsService {
             }
             
             print("All local files started  \((start)) seconds")
-            self?.originalAssetsBeingAppended.append(list: notSavedAssets)///tempo assets
-            self?.nonCloudAlreadySavedAssets.dropAll()
             self?.saveLocalMediaItemsPaged(items: notSavedAssets, context: context) { [weak self] in
-                self?.originalAssetsBeingAppended.dropAll()///tempo assets
                 print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
                 self?.inProcessAppendingLocalFiles = false
                 NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-                
-//                self?.pageAppendedCallBack?([])
                 completion?()
             }
         }
@@ -635,7 +620,6 @@ final class MediaItemOperationsService {
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
         privateQueue.async { [weak self] in
-            
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
                 context.perform { [weak self] in
                     
@@ -722,7 +706,8 @@ final class MediaItemOperationsService {
         let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
             let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
-            callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
+            let assetCache = LocalMediaStorage.default.assetsCache
+            callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) && assetCache.assetBy(identifier: $0.localIdentifier) == nil })
         })
     }
     
