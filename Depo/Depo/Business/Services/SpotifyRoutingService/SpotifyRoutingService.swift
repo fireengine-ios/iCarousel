@@ -130,7 +130,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
                 switch result {
                 case .success(_):
                     let controller = self.prepareImportPlaylistsController()
-                    self.router.pushViewController(viewController: controller)
+                    self.router.replaceTopViewControllerWithViewController(controller)
                 case .failed(let error):
                     //TODO: Handle error
                     debugPrint(error.localizedDescription)

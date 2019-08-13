@@ -99,13 +99,14 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
             if let facebookCode = spotifyCode.index(of: "&") {
-                 spotifyCode = String(spotifyCode[..<facebookCode])
+                spotifyCode = String(spotifyCode[..<facebookCode])
             }
-
             delegate?.spotifyAuthSuccess(with: spotifyCode)
             removeCache()
-            navigationController?.popViewController(animated: true)
+            
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
         }
-        decisionHandler(.allow)
     }
 }
