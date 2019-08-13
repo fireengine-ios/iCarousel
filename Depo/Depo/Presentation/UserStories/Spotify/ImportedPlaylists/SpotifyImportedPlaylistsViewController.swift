@@ -88,7 +88,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     }
     
     private func openTracks(for playlist: SpotifyPlaylist) {
-        let controller = router.spotifyImportedTracksController(playlist: playlist)
+        let controller = router.spotifyImportedTracksController(playlist: playlist, delegate: self)
         navigationController?.show(controller, sender: nil)
     }
     
@@ -225,5 +225,21 @@ extension SpotifyImportedPlaylistsViewController: SpotifyThreeDotMenuManagerDele
     
     func onThreeDotsManagerSelect() {
         dataSource.startSelection()
+    }
+}
+
+// MARK: - spotifyImportedTracksControllerDelegate
+
+extension SpotifyImportedPlaylistsViewController: SpotifyImportedTracksViewControllerDelegate {
+    func didDeleteTracks(playlist: SpotifyPlaylist) {
+        dataSource.update(playlist)
+        // TODO: need a detailed description of the case
+        // now only update playlist count
+        if playlist.count == 0 {
+            navigationController?.popViewController(animated: true)
+//            dataSource.remove([playlist], completion: {})
+        } else {
+//            dataSource.update(playlist)
+        }
     }
 }

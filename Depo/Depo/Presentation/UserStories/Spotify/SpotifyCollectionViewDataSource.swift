@@ -263,6 +263,24 @@ extension SpotifyCollectionViewDataSource {
         })
     }
     
+    func update(_ item: T) {
+        guard let path = indexPath(for: item) else {
+            return
+        }
+        
+        if showGroups {
+            groups[path.section].value[path.row] = item
+            
+            if let index = allItems.firstIndex(where: { $0 == item }) {
+                allItems[index] = item
+            }
+        } else {
+            allItems[path.row] = item
+        }
+        
+        collectionView.reloadItems(at: [path])
+    }
+    
     private func updateGroupedItems() {
         var dict = [String: [T]]()
         switch sortedRule.sortingRules {

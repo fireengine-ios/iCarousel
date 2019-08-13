@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SpotifyImportedTracksViewControllerDelegate: class {
+    func didDeleteTracks(playlist: SpotifyPlaylist)
+}
+
 final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -24,6 +28,8 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
+    
+    weak var delegate: SpotifyImportedTracksViewControllerDelegate?
     
     private var sortedRule: SortedRules = .timeDown {
         didSet {
@@ -119,6 +125,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
                     self.playlist.count -= items.count
                     self.navbarManager.playlist = self.playlist
                     self.stopSelectionState()
+                    self.delegate?.didDeleteTracks(playlist: self.playlist)
                 }
             case .failed(let error):
                 self.hideSpinner()
