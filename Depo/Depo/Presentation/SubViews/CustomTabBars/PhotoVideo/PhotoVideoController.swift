@@ -239,6 +239,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func updateSelection(cell: PhotoVideoCell) {
         cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
         updateSelectedItemsCount()
+        updateBarsForSelectedObjects()
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
