@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class OTPViewInteractor: PhoneVereficationInteractor {
+class OTPViewInteractor: PhoneVerificationInteractor {
     
     var responce: SignUpSuccessResponse?
     var userInfo: AccountInfoResponse?
@@ -68,9 +68,9 @@ class OTPViewInteractor: PhoneVereficationInteractor {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
-                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                    self.output.verificationFailed(with: TextConstants.promocodeBlocked)
                 } else {
-                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
+                    self.output.verificationFailed(with: TextConstants.phoneVerificationNonValidCodeErrorText)
                 }
             }
         }

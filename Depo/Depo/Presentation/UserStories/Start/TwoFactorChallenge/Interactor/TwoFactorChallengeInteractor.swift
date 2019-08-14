@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
+final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     private var otpParams: TwoFAChallengeParametersResponse
     private let challenge: TwoFAChallengeModel
@@ -64,7 +64,7 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
                     self.output.verificationSucces()
                     
                 case .failed(let error):
-                    self.output.vereficationFailed(with: error.localizedDescription)
+                    self.output.verificationFailed(with: error.localizedDescription)
                 }
             }
         }

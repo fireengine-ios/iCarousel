@@ -55,7 +55,7 @@ final class OptInController: ViewController, NibInit {
     private var attempts: Int = 0
     private let keyboard = Typist()
     private var currentSecurityCode = ""
-    private var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
+    private var inputTextLimit: Int = NumericConstants.verificationCharacterLimit
     private var isRemoveLetter: Bool = false
     
     weak var delegate: OptInControllerDelegate?
@@ -65,7 +65,7 @@ final class OptInController: ViewController, NibInit {
         
         setupKeyboard()
         setupButtonsInitialState()
-        setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
         setupInitialState()
     }
     
@@ -112,7 +112,7 @@ final class OptInController: ViewController, NibInit {
     func increaseNumberOfAttemps() -> Bool {
         attempts += 1
         
-        if attempts >= NumericConstants.maxVereficationAttempts {
+        if attempts >= NumericConstants.maxVerificationAttempts {
             attempts = 0
             endEnterCode()
             delegate?.optInReachedMaxAttempts(self)

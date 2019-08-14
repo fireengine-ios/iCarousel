@@ -296,13 +296,13 @@ final class VerifyEmailPopUp: UIViewController {
     
     @IBAction func onConfirmTap(_ sender: Any) {
         hideKeyboard()
-        vereficationCodeEntered()
+        verificationCodeEntered()
     }
 }
 
 //MARK: - Interactor
 extension VerifyEmailPopUp {
-    private func vereficationCodeEntered() {
+    private func verificationCodeEntered() {
         startActivityIndicator()
         
         accountService.verifyEmail(otpCode: currentSecurityCode) { [weak self] response in
@@ -386,7 +386,7 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
             enableConfirmButtonIfNeeded()
             return true
             
-        } else if currentStr.count > NumericConstants.vereficationCharacterLimit {
+        } else if currentStr.count > NumericConstants.verificationCharacterLimit {
             return false
             
         }

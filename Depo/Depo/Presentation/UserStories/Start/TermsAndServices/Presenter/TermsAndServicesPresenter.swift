@@ -30,7 +30,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func startUsing() {
         if confirmAgreements, interactor.cameFromRegistration {
-            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
+            router.goToPhoneVerification(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
                                          userInfo: interactor.userInfo)
         } else if confirmAgreements {
             interactor.applyEula()

@@ -106,7 +106,7 @@ extension UpdatePhoneService {
         }, fail: { [weak self] errorRespose in
             
             DispatchQueue.main.async { [weak self] in
-                self?.failedVerifyPhone(text: TextConstants.phoneVereficationNonValidCodeErrorText)
+                self?.failedVerifyPhone(text: TextConstants.phoneVerificationNonValidCodeErrorText)
             }
         })
     }
@@ -144,7 +144,7 @@ extension UpdatePhoneService {
         
         if let optInController = optInController {
             optInController.stopLoading()
-            optInController.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+            optInController.setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
             optInController.startEnterCode()
             optInController.hiddenError()
             optInController.hideResendButton()

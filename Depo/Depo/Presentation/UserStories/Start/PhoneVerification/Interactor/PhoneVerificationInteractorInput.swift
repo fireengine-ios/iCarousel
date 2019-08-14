@@ -1,5 +1,5 @@
 //
-//  PhoneVereficationPhoneVereficationInteractorInput.swift
+//  PhoneVerificationInteractorInput.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PhoneVereficationInteractorInput {
+protocol PhoneVerificationInteractorInput {
     
     var email: String { get }
     

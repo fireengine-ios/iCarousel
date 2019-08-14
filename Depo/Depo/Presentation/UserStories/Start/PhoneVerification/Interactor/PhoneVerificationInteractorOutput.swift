@@ -1,5 +1,5 @@
 //
-//  PhoneVereficationPhoneVereficationInteractorOutput.swift
+//  PhoneVerificationInteractorOutput.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol PhoneVereficationInteractorOutput: class {
+protocol PhoneVerificationInteractorOutput: class {
     
     func verificationSucces()
-    func vereficationFailed(with error: String)
+    func verificationFailed(with error: String)
     func verificationSilentSuccess()
     
     func resendCodeRequestFailed(with error: ErrorResponse)

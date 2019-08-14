@@ -1,12 +1,12 @@
 //
-//  PhoneVereficationPhoneVereficationRouter.swift
+//  PhoneVerificationRouter.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationRouter: PhoneVereficationRouterInput {
+class PhoneVerificationRouter: PhoneVerificationRouterInput {
     private lazy var router = RouterVC()
     
     private func goToSplash() {

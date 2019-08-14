@@ -1,5 +1,5 @@
 //
-//  PhoneVereficationPhoneVereficationRouterInput.swift
+//  PhoneVerificationRouterInput.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PhoneVereficationRouterInput {
+protocol PhoneVerificationRouterInput {
 //    func goToTermAndUses()
     func goAutoSync()
     func presentErrorPopUp(with message: String)

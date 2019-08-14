@@ -15,7 +15,7 @@ protocol PasscodeSettingsInteractorInput: class {
     var biometricsStatus: BiometricsStatus { get }
     var isBiometricsEnabled: Bool { get set }
     var isAvailableFaceID: Bool { get }
-    var inNeedOfMailVerefication: Bool { get set }
+    var inNeedOfMailVerification: Bool { get set }
     var isTurkcellUserFlag: Bool { get }
 }
 

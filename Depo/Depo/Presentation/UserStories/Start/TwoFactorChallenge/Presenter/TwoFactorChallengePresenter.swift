@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
+final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     private var isPhoneJustUpdated = false
     
@@ -39,7 +39,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         router.goAutoSync()
     }
     
-    override func vereficationFailed(with error: String) {
+    override func verificationFailed(with error: String) {
         completeAsyncOperationEnableScreen()
 
         let errorText: String

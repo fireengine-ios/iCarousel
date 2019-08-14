@@ -239,7 +239,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.mailVerefication, relativeTo: super.patch)!
+        return URL(string: RouteRequests.mailVerification, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {

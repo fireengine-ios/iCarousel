@@ -20,8 +20,8 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func changePasscode() {
-        if interactor.inNeedOfMailVerefication {
-            view?.presentMailVerefication()
+        if interactor.inNeedOfMailVerification {
+            view?.presentMailVerification()
         } else {
             router.changePasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
         }
@@ -29,8 +29,8 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func setTouchId(enable: Bool) {
-        if interactor.inNeedOfMailVerefication {
-            view?.presentMailVerefication()
+        if interactor.inNeedOfMailVerification {
+            view?.presentMailVerification()
         } else {
             isBiometricsEnabled = enable
         }
@@ -44,8 +44,8 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func setPasscode() {
-        if interactor.inNeedOfMailVerefication {
-            view?.presentMailVerefication()
+        if interactor.inNeedOfMailVerification {
+            view?.presentMailVerification()
         } else {
             let isTurkcell = interactor.isTurkcellUserFlag
             router.setPasscode(isTurkCellUser: isTurkcell, finishCallBack: {
@@ -76,7 +76,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func mailVerified() {
-        interactor.inNeedOfMailVerefication = false
+        interactor.inNeedOfMailVerification = false
     }
 }
 

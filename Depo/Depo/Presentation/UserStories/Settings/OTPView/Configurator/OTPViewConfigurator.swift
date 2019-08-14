@@ -12,7 +12,7 @@ class OTPViewModuleConfigurator {
 
     func configure(viewController: PhoneVerificationViewController, responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) {
 
-        let router = PhoneVereficationRouter()
+        let router = PhoneVerificationRouter()
 
         let presenter = OTPViewPresenter()
         presenter.view = viewController
