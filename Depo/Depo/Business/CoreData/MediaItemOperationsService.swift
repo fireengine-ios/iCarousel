@@ -548,9 +548,9 @@ final class MediaItemOperationsService {
                 completion()
                 return
             }
-            let assetCahce = LocalMediaStorage.default.assetsCache
-            let newAssets = localMediaItems.filter { assetCahce.assetBy(identifier: $0.localIdentifier) == nil}
-            assetCahce.append(list: newAssets)
+            let assetCache = LocalMediaStorage.default.assetsCache
+            let newAssets = localMediaItems.filter { assetCache.assetBy(identifier: $0.localIdentifier) == nil}
+            assetCache.append(list: newAssets)
             self.reservedAssets.append(list: newAssets)
             self.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
         }
