@@ -20,6 +20,8 @@ protocol Factory: SharedFactory {
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
     func resolve() -> InstapickService
+    func resolve() -> SpotifyService
+    func resolve() -> SpotifyRoutingService
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -63,5 +65,15 @@ extension FactoryMain {
     private static let analyticsService = AnalyticsService()
     func resolve() -> AnalyticsService {
         return FactoryMain.analyticsService
+    }
+    
+    private static let spotifyService = SpotifyServiceImpl()
+    func resolve() -> SpotifyService {
+        return FactoryMain.spotifyService
+    }
+    
+    private static let spotifyRoutingService = SpotifyRoutingService()
+    func resolve() -> SpotifyRoutingService {
+        return FactoryMain.spotifyRoutingService
     }
 }

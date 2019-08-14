@@ -9,6 +9,7 @@
 import Foundation
 import Photos
 import SDWebImage
+import SwiftyJSON
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
@@ -557,7 +558,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    var coreDataObject: MediaItem?
+    var coreDataObjectId: NSManagedObjectID?
     
     var id: Int64?
 
@@ -746,6 +747,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatus = .notSynced
         
         isFolder = false
+        
+        metaData = BaseMetaData()
+        /// metaData filling
+        metaData?.takenDate = baseModel.dateOfCreation
+        metaData?.favourite = false
+//        metaData?.album = mediaItem.metadata?.album
+//        metaData?.artist = mediaItem.metadata?.artist
+    
+        metaData?.duration = baseModel.asset.duration
+        
+//        metaData?.genre = mediaItem.metadata?.genre ?? []
+//        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
+        metaData?.title = baseModel.originalName
     }
     
     init(instaPickAnalyzeModel: InstapickAnalyze) {
@@ -803,7 +817,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isFolder = remote.folder
         syncStatus = .synced
         setSyncStatusesAsSyncedForCurrentUser()
-        creationDate = remote.createdDate
         
         parent = remote.parent
         
@@ -843,11 +856,75 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = remote.metadata?.favourite ?? false
         if let fileName = name {
             md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
-            debugPrint(md5)
+//            debugPrint(md5)
         }
         
         patchToPreview = .remoteUrl(url)
         id = remote.id
+    }
+    
+    init(searchResponse: JSON) {
+        let fileUUID = searchResponse[SearchJsonKey.uuid].string ?? ""
+        fileSize = searchResponse[SearchJsonKey.bytes].int64 ?? 0
+        patchToPreview = .remoteUrl(URL(string: ""))///????
+        status = Status(string:searchResponse[SearchJsonKey.status].string)
+        metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
+        favorites = metaData?.favourite ?? false
+        super.init(uuid: fileUUID)
+        
+        creationDate = searchResponse[SearchJsonKey.createdDate].date
+        lastModifiDate = searchResponse[SearchJsonKey.lastModifiedDate].date
+        id = searchResponse[SearchJsonKey.id].int64
+        md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
+        name = searchResponse[SearchJsonKey.name].string
+        uuid = fileUUID
+        
+        mimeType = searchResponse[SearchJsonKey.content_type].string
+        fileType = FileType(type: mimeType, fileName: name)
+        isFolder = searchResponse[SearchJsonKey.folder].bool
+//        uploaderDeviceType = searchResponse[SearchJsonKey.uploaderDeviceType].string
+        parent = searchResponse[SearchJsonKey.parent].string
+        tmpDownloadUrl = searchResponse[SearchJsonKey.tempDownloadURL].url
+        
+//        subordinates = searchResponse[SearchJsonKey.subordinates].array
+        albums = searchResponse[SearchJsonKey.album].array?.flatMap { $0.string }
+        childCount = searchResponse[SearchJsonKey.ChildCount].int64
+        
+        
+        
+        isLocalItem = false
+        syncStatus = .synced
+        setSyncStatusesAsSyncedForCurrentUser()
+        
+        var url: URL?
+        let previewIconSize: PreviewIconSize = .medium///
+        
+        switch fileType {
+        case .image, .audio, .video:
+            duration = WrapData.getDuration(duration: metaData?.duration)
+            durationValue = metaData?.duration
+            switch previewIconSize {
+            case .little : url = metaData?.smalURl
+            case .medium : url = metaData?.mediumUrl
+            case .large  : url = metaData?.largeUrl
+            } case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            if let mediumUrl = metaData?.mediumUrl {
+                url = mediumUrl
+            } else if let smallUrl = metaData?.smalURl {
+                url = smallUrl
+            } else {
+                url = nil
+            }
+        default:
+            break
+        }
+        
+        if let fileName = name {
+            md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
+//            debugPrint(md5)
+        }
+        
+        patchToPreview = .remoteUrl(url)
     }
     
     convenience init (remote: SearchItemResponse, parendfolderUUID: String?) {
@@ -874,10 +951,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
-//        coreDataObject = mediaItem
+        coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        status = .unknown
+        status = mediaItem.isTranscoded ? .active : .unknown
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
@@ -915,7 +992,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
         
-        if let localId = asset?.localIdentifier.components(separatedBy: "/").first {
+        if let mediaItemUuid = mediaItem.uuid {
+            uuid = mediaItemUuid
+        } else if let localId = asset?.localIdentifier.components(separatedBy: "/").first {
             uuid = localId + "~" + UUID().uuidString
         } else {
             uuid = (mediaItem.trimmedLocalFileID ?? "") + "~" + UUID().uuidString
@@ -938,15 +1017,18 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         metaData = BaseMetaData()
         /// metaData filling
+        metaData?.takenDate = mediaItem.metadata?.takenDate as Date?
         metaData?.favourite = mediaItem.favoritesValue
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
 
-        metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
+        
+        metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(0.0)
         
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
+
         
         if let largeUrl = mediaItem.metadata?.largeUrl {
             metaData?.largeUrl = URL(string: largeUrl)
@@ -957,7 +1039,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let smalURl = mediaItem.metadata?.smalURl {
             metaData?.smalURl = URL(string: smalURl)
         }
-        
+        if let videoUrl = mediaItem.metadata?.videoPreviewUrl {
+            metaData?.videoPreviewURL = URL(string: videoUrl)
+        }
     }
     
     func copyFileData(from item: WrapData) {
@@ -967,21 +1051,25 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = item.creationDate
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
+        tmpDownloadUrl = item.tmpDownloadUrl
+        metaData?.copy(metaData: item.metaData)
     }
     
-    private class func getDuration(duration: Double?) -> String {
-        if let d = duration {
-            let s = CGFloat(d)
-            let seconds = Int(s) % 60
-            let minutes = Int(s) / 60
-            
-            if (minutes < 100) {
-                return String(format: "%02i:%02i", minutes, seconds)
-            } else {
-                return String(format: "%i:%02i", minutes, seconds)
-            }
+    class func getDuration(duration: Double?) -> String {
+        guard let duration = duration else {
+            return ""
         }
-        return ""
+        
+        let rounded = round(duration)
+        
+        let seconds = Int(rounded) % 60
+        let minutes = Int(duration) / 60
+        
+        if minutes < 100 {
+            return String(format: "%02i:%02i", minutes, seconds)
+        } else {
+            return String(format: "%i:%02i", minutes, seconds)
+        }
     }
     
     func getTrimmedLocalID() -> String {
@@ -1010,6 +1098,35 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         return tempoString
     }
+    
+    func hasExpiredUrl() -> Bool {
+        let urlsToCheck = [tmpDownloadUrl, metaData?.videoPreviewURL]
+        for url in urlsToCheck {
+            if let url = url, url.isExpired {
+                return true
+            }
+        }
+        
+        return false
+    }
+}
+
+extension WrapData {
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let wrapData = object as? WrapData else {
+            return false
+        }
+        
+        return uuid == wrapData.uuid &&
+            id == wrapData.id &&
+            name == wrapData.name &&
+            md5 == wrapData.md5 &&
+            metaDate == wrapData.metaDate &&
+            lastModifiDate == wrapData.lastModifiDate &&
+            tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            metaData == wrapData.metaData
+    }
+
 }
 
 

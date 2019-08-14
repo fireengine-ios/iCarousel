@@ -41,47 +41,32 @@ class SettingsInteractor: SettingsInteractorInput {
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
                              TextConstants.settingsViewCellUsageInfo,
-                             passcodeCellTitle]
+                             passcodeCellTitle,
+                             TextConstants.settingsViewCellLoginSettings]
         
-        let importAccountsCells = [TextConstants.settingsViewCellConnectedAccounts]
-        
-        var array = [[TextConstants.settingsViewCellBeckup,
+        let array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
-                     importAccountsCells,
+                     [TextConstants.settingsViewCellConnectedAccounts,
+                      TextConstants.settingsViewCellPermissions],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellPrivacyAndTerms,
                       TextConstants.settingsViewCellLogout]]
         
-        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-            guard let `self` = self else {
-                return
-            }
-            DispatchQueue.toMain {
-                self.userInfoResponse = response
-                if self.isTurkcellUser {
-                    /// add to the securityCells section
-                    array[2].append(TextConstants.settingsViewCellLoginSettings)
-                }
-                self.output.cellsDataForSettings(array: array)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.toMain {
-                self?.output.cellsDataForSettings(array: array)
-            }
-
-        })
+        self.output.cellsDataForSettings(array: array)
     }
 
     func onLogout() {
         output.asyncOperationStarted()
         authService.serverLogout(complition: { [weak self] success in
-            self?.output.asyncOperationStoped()
             if success {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
             }
+            
             self?.authService.logout { [weak self] in
+                self?.output.asyncOperationStoped()
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
             }
@@ -107,7 +92,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func checkConnectedToNetwork() {
-        let reachability = ReachabilityService()
+        let reachability = ReachabilityService.shared
         let isWiFi = reachability.isReachable
         isWiFi ? onLogout() : output.connectToNetworkFailed()
     }
@@ -123,7 +108,16 @@ class SettingsInteractor: SettingsInteractorInput {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
     
-    func getUserStatus() {
+    func getUserInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
+            self?.userInfoResponse = accountInfo
+            self?.getUserStatus()
+            }, fail: { [weak self] errorResponse in
+                self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
+        })
+    }
+    
+    private func getUserStatus() {
         accountSerivese.permissions { [weak self] response in
             switch response {
             case .success(let result):

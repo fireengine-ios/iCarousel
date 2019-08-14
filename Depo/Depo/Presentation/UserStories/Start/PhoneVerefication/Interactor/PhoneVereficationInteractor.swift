@@ -6,14 +6,14 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationInteractor: PhoneVereficationInteractorInput {    
+class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private let dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()    
     lazy var authenticationService = AuthenticationService()
-    
+    private let cacheManager = CacheManager.shared
     
     weak var output: PhoneVereficationInteractorOutput!
     
@@ -31,8 +31,8 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
     
-    var remainingTimeInMinutes: Int {
-        return dataStorage.signUpResponse.remainingTimeInMinutes ?? 1
+    var remainingTimeInSeconds: Int {
+        return (dataStorage.signUpResponse.remainingTimeInMinutes ?? 1) * 60
     }
     
     var expectedInputLength: Int? {
@@ -48,9 +48,19 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
+        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken ?? "",
+                                                          eulaId: dataStorage.signUpResponse.eulaId ?? 0,
+                                                          processPersonalData: true,
+                                                          etkAuth: dataStorage.signUpResponse.etkAuth ?? false,
+                                                          globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false)
         attempts = 0
-        authenticationService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
+        authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
+                                                    sucess: { [weak self] response in
             DispatchQueue.main.async {
+                if let response = response as? SignUpSuccessResponse {
+                    self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
+                    self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
+                }
                 self?.output.resendCodeRequestSuccesed()
             }
         }, fail: { [weak self] errorResponse in
@@ -61,11 +71,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        let signUpProperties = SignUpUserPhoveVerification(
-            token: dataStorage.signUpResponse.referenceToken ?? "",
-            otp: code,
-            processPersonalData: true,
-            etkAuth: dataStorage.signUpResponse.etkAuth)
+        let signUpProperties = SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "",
+                                                           otp: code)
+        
         authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
             
             if let response = baseResponse as? ObjectRequestResponse,
@@ -133,8 +141,18 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                     self.output.failLogin(message: errorResponse.description)
                 }
             }
+            }, twoFactorAuth: {twoFARequered in
+                /// As a result of the meeting, the logic of showing the screen of two factorial authorization is added only with a direct login and is not used with other authorization methods.
+                assertionFailure()
+                
         })
     }
+    
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}
+    
+    func updateEmptyEmail() {}
+
+    func stopUpdatePhone() {}
 
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Captcha required") ||

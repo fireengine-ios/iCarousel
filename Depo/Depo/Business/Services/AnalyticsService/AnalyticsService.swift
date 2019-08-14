@@ -67,42 +67,28 @@ final class AnalyticsService {
     
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: FBSDKAppEventNameViewedContent, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
+        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
     }
     
-    func trackInAppPurchase(product: SKProduct) {
-        let name = product.localizedTitle
-        let price = product.localizedPrice
-        let currency = product.priceLocale.currencyCode ?? "USD"
-        
-        if name.contains("500") {
-            logPurchase(event: .purchaseNonTurkcell500, price: price, currency: currency)
-        } else if name.contains("50") {
-            logPurchase(event: .purchaseNonTurkcell50, price: price, currency: currency)
-        } else if name.contains("2.5") || name.contains("2,5") {
-            logPurchase(event: .purchaseNonTurkcell2500, price: price, currency: currency)
-        }
-    }
-    
-    func trackInnerPurchase(_ offer: PackageModelResponse) {
-        guard let name = offer.name, let price = offer.price else {
+    func trackPurchase(offer: Any) {
+        let packageService = PackageService()
+        guard
+            let event = packageService.getPurchaseEvent(for: offer),
+            let price = packageService.getOfferPrice(for: offer)
+        else {
             return
         }
         
-        if name.contains("500") {
-            logPurchase(event: .purchaseTurkcell500, price: String(price))
-        } else if name.contains("50") {
-            logPurchase(event: .purchaseTurkcell50, price: String(price))
-        } else if name.contains("2.5") || name.contains("2,5") {
-            logPurchase(event: .purchaseTurkcell2500, price: String(price))
-        }
+        ///only turkcell offer may has missing currency
+        let currency = packageService.getOfferCurrency(for: offer) ?? "TRY"
+        logPurchase(event: event, price: price, currency: currency)
     }
 
-    private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
+    private func logPurchase(event: AnalyticsEvent, price: String, currency: String) {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
         if let price = Double(price) {
-            FBSDKAppEvents.logPurchase(price, currency: currency, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
+            AppEvents.logPurchase(price, currency: currency, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
         }
     }
     
@@ -115,9 +101,9 @@ final class AnalyticsService {
         Adjust.trackEvent(event)
     }
     
-    private func logFacebookEvent(name: String, parameters: [AnyHashable: Any]? = nil) {
+    private func logFacebookEvent(name: String, parameters: [String: Any]? = nil) {
         if let parameters = parameters {
-            FBSDKAppEvents.logEvent(name, parameters: parameters)
+            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
         }
     }    
 }
@@ -140,12 +126,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
 extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let logScreenParametrs: [String: Any] = [
-                "screenName": screen.name,
-                "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ]
-            Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent("screenView", parameters: dimentionParametrs)
         }
     }
     
@@ -164,7 +146,8 @@ extension AnalyticsService: AnalyticsGA {
                                             errorType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
-        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let tokenStorage: TokenStorage = factory.resolve()
+        let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
@@ -193,11 +176,32 @@ extension AnalyticsService: AnalyticsGA {
             group.leave()
         })
         
+///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
+///        AutoSync --> True/False
+///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
+        var autoSyncState: String?
+        var autoSyncStatus: String?
+    
+        if loginStatus {
+            let autoSyncStorageSettings = AutoSyncDataStorage().settings
+            
+            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
+            
+            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
+            
+            let photoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
+            let videoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
+            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+        }
+        
+        
         let screenName: Any = screen?.name ?? NSNull()
         
         group.notify(queue: privateQueue) { 
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
-                platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+                platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
                 service: "Lifebox", developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
@@ -207,7 +211,9 @@ extension AnalyticsService: AnalyticsGA {
                 countOfDownloadMetric: downloadsMetrics,
                 gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
                 loginType: loginType,
-                errorType: errorType).productParametrs)
+                errorType: errorType,
+                autoSyncState: autoSyncState,
+                autoSyncStatus: autoSyncStatus).productParametrs)
         }
     }
     
@@ -316,6 +322,7 @@ extension AnalyticsService: AnalyticsGA {
         DispatchQueue.main.async {
             self.innerTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timerStep), userInfo: userInfo, repeats: true)
             ///fire at least once
+            self.innerTimer?.tolerance = timeInterval * 0.1
             self.innerTimer?.fire()
         }
     }

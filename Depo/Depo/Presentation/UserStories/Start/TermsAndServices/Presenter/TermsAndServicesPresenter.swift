@@ -7,6 +7,7 @@
 //
 
 class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, TermsAndServicesViewOutput, TermsAndServicesInteractorOutput {
+    
 
     weak var view: TermsAndServicesViewInput!
     var interactor: TermsAndServicesInteractorInput!
@@ -24,20 +25,30 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.checkEtk()
+        interactor.checkEtkAndGlobalPermissions()
     }
     
     func startUsing() {
-        if confirmAgreements {
-            if interactor.cameFromLogin {
-                interactor.applyEula()
-            } else {
-                interactor.signUpUser()
-            }
-            startAsyncOperationDisableScreen()
+        if confirmAgreements, interactor.cameFromRegistration {
+            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
+                                         userInfo: interactor.userInfo)
+        } else if confirmAgreements {
+            interactor.applyEula()
         } else {
             view.noConfirmAgreements(errorString: TextConstants.termsAndUseCheckboxErrorText)
         }
+    }
+    
+    func eulaApplied() {
+        if interactor.cameFromLogin {
+            router.goToAutoSync()
+        } else {
+            router.goToHomePage()
+        }
+    }
+    
+    func applyEulaFailed(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
     }
     
     func confirmAgreements(_ confirm: Bool) {
@@ -46,6 +57,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmEtk(_ etk: Bool) {
         interactor.etkAuth = etk
+    }
+    
+    func confirmGlobalPerm(_ globalPerm: Bool) {
+        interactor.globalPermAuth = globalPerm
     }
     
     // MARK: OUT
@@ -61,42 +76,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.closeModule()
     }
     
-    func signUpSuccessed() {
-        completeAsyncOperationEnableScreen()
-        
-        if interactor.cameFromLogin {
-            router.goToHomePage()
-        } else {
-            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
-                                         userInfo: interactor.userInfo)
-        }
-    }
-    
-    func signupFailed(errorResponce: ErrorResponse) {
-        completeAsyncOperationEnableScreen()
-        delegate?.show(errorString: errorResponce.description)
-        router.closeModule()
-    }
-    
     func signupFailedCaptchaRequired() {
         delegate?.showCaptcha()
-    }
-    
-    func eulaApplied() {
-        MenloworksEventsService.shared.onApporveEulaPageClicked()
-         completeAsyncOperationEnableScreen()
-        //theoreticaly we should add coredata update/append here also
-        if interactor.cameFromLogin, storageVars.autoSyncSet {
-            router.goToHomePage()
-        } else {
-            openAutoSyncIfNeeded()
-        }
-    }
-    
-    func applyEulaFaild(errorResponce: ErrorResponse) {
-        completeAsyncOperationEnableScreen()
-        delegate?.show(errorString: errorResponce.description)
-        router.closeModule()
     }
     
     func popUpPressed() {
@@ -109,6 +90,14 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func openCommercialEmailMessages() {
         router.goToCommercialEmailMessages()
+    }
+    
+    func openPrivacyPolicyDescriptionController() {
+        router.goToPrivacyPolicyDescriptionController()
+    }
+    
+    func openGlobalDataPermissionDetails() {
+        router.goToGlobalDataPermissionDetails()
     }
     
     // MARK: Utility Methods
@@ -135,6 +124,24 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func setupEtk(isShowEtk: Bool) {
         if isShowEtk {
             view.showEtk()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupGlobalPerm(isShowGlobalPerm: Bool) {
+        if isShowGlobalPerm {
+//            TODO: add logic with UI
+//            view.showGlobalPermission()
+        }
+        interactor.loadTermsAndUses()
+    }
+    
+    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool) {
+        if isShowEtk {
+            view.showEtk()
+        }
+        if isShowGlobalPerm {
+            view.showGlobalPermissions()
         }
         interactor.loadTermsAndUses()
     }

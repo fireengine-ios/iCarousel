@@ -12,6 +12,8 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
     
+    var quotaInfo: QuotaInfoResponse?
+    
     var isPremiumUser: Bool {
         return AuthoritySingleton.shared.accountType.isPremium
     }
@@ -29,6 +31,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     }
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
+        self.quotaInfo = quotoInfo
         view.setQuotaInfo(quotoInfo: quotoInfo)
     }
 

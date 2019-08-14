@@ -10,4 +10,5 @@ import Foundation
 
 protocol UserProfileRouterInput {
     func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, navigationController: UINavigationController, phoneNumber: String)
+    func goToChangePassword()
 }

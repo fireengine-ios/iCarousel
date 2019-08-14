@@ -86,10 +86,6 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
-    func needPresentPopUp(popUpView: UIViewController) {
-        view.needPresentPopUp(popUpView: popUpView)
-    }
-    
     func shownSpotlight(type: SpotlightType) {
         spotlightManager.shownSpotlight(type: type)
     }
@@ -106,14 +102,19 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         interactor.needCheckQuota()
     }
     
-    func didShowPopupAboutPremium() {
+    @discardableResult
+    func didShowPopupAboutPremium() -> Bool {
+        var didShow = false
         if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                        title: TextConstants.lifeboxPremium,
                                        headerTitle: TextConstants.becomePremiumMember, completion: nil)
+            didShow = true
         }
+        
+        return didShow
     }
     
     func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
@@ -131,6 +132,38 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         CardsManager.default.configureInstaPick(with: status)
     }
     
+    func didObtainQuotaInfo(usagePercentage: Float) {
+        let storageVars: StorageVars = factory.resolve()
+        
+        let isFirstLogin = !storageVars.homePageFirstTimeLogin
+        if isFirstLogin {
+            storageVars.homePageFirstTimeLogin = true
+        }
+        
+        if isFirstLogin {
+            let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
+            
+            if 0.8 <= usagePercentage && usagePercentage < 0.9 {
+                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType80
+                
+            } else if 0.9 <= usagePercentage && usagePercentage < 1.0 {
+                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType90
+                
+            } else if usagePercentage >= 1.0 {
+                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+                
+            } else {
+                fullOfQuotaPopUpType = nil
+            }
+            
+            if let type = fullOfQuotaPopUpType {
+                router.presentFullOfQuotaPopUp(with: type)
+            }
+        } else if usagePercentage >= 1.0 {
+            router.presentSmallFullOfQuotaPopUp()
+        }
+    }
+    
     func fillCollectionView(isReloadAll: Bool) {
         
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
@@ -139,6 +172,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
         guard !cards.isEmpty else {
+            if !isReloadAll {
+                view.stopRefresh()
+            }
             return
         }
         
@@ -150,6 +186,12 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
 
+    func verifyEmailIfNeeded() {
+        if let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
+            router.presentEmailVerificationPopUp(delegate: self)
+        }
+    }
+    
 }
 
 extension HomePagePresenter: SpotlightManagerDelegate {
@@ -158,5 +200,13 @@ extension HomePagePresenter: SpotlightManagerDelegate {
         if interactor.homeCardsLoaded {
             view.needShowSpotlight(type: type)
         }  
+    }
+}
+
+extension HomePagePresenter: VerifyEmailPopUpDelegate {
+    func popUpWillDismiss() {
+        if !didShowPopupAboutPremium() {
+            router.showIgnoredQuotaPopUpIfNeeded()
+        }
     }
 }

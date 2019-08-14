@@ -21,9 +21,13 @@ protocol SettingsDelegate: class {
     
     func goToHelpAndSupport()
     
+    func goToTermsAndPolicy() 
+    
     func goToUsageInfo()
     
     func goToActivityTimeline()
+    
+    func goToPermissions()
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 }
@@ -47,7 +51,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         super.viewDidLoad()
         
         leaveFeedbackButton.setTitle(TextConstants.settingsViewLeaveFeedback,
-                              for: .normal)
+                                     for: .normal)
         
         let nib = UINib.init(nibName: CellsIdConstants.settingTableViewCellID,
                              bundle: nil)
@@ -121,14 +125,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0) {
-            if output.isPremiumUser {
-                return 186
-            } else {
-                return 224
-            }
-        }
-        return 14
+        return section == 0 ? 201 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -159,7 +156,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let array = tableDataArray[indexPath.section]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
@@ -217,9 +214,17 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                 } else {
                     output.goToConnectedAccounts()
                 }
+            case 1:
+                // permissions
+                if let delegate = settingsDelegate {
+                    delegate.goToPermissions()
+                } else {
+                    output.goToPermissions()
+                }
             default:
                 break
             }
+            break
         case 2:
             switch indexPath.row {
             case 0: // my activity timeline
@@ -229,8 +234,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                     output.goToActivityTimeline()
                 }
             case 1: // usage info
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToUsageInfo()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToUsageInfo()
                 } else {
                     output.goToUsageInfo()
                 }
@@ -245,12 +250,18 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         case 3:
             switch indexPath.row {
             case 0:
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToHelpAndSupport()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToHelpAndSupport()
                 } else {
                     output.goToHelpAndSupport()
                 }
             case 1:
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToTermsAndPolicy()
+                } else {
+                    output.goToTermsAndPolicy()
+                }
+            case 2:
                 output.onLogout()
             default:
                 break
@@ -337,12 +348,8 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
         output.onChangeUserPhoto()
     }
     
-    func updateUserProfile(userInfo: AccountInfoResponse) {
-        output.onUpdatUserInfo(userInfo: userInfo)
-    }
-    
-    func upgradeButtonPressed() {
-        output.goToPackages()
+    func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {
+        output.goToPackagesWith(quotaInfo: quotaInfo)
     }
     
     func premiumButtonPressed() {

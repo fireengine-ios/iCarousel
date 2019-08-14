@@ -88,6 +88,10 @@ final class PushNotificationService {
         case .freeUpSpace: break
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
+        case .changePassword: openChangePassword()
+        case .photopickHistory: openPhotoPickHistory()
+        case .myStorage: openMyStorage()
+        case .becomePremium: openBecomePremium()
         }
         notificationAction = nil
     }
@@ -115,13 +119,22 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex, .musicScreenIndex, .documentsScreenIndex:
-                tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
+            case .homePageScreenIndex:
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
+            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue - 1
             case .photosScreenIndex:
                 tabBarVC.showPhotosScreen(self)
-            case .videosScreenIndex:
-                tabBarVC.showVideosScreen(self)
             }
         }
     }
@@ -157,7 +170,7 @@ final class PushNotificationService {
     }
     
     private func openVideos() {
-        openTabBarItem(index: .videosScreenIndex)
+//        openTabBarItem(index: .videosScreenIndex)
     }
     
     private func openAlbums() {
@@ -173,7 +186,7 @@ final class PushNotificationService {
     }
     
     private func openMusic() {
-        openTabBarItem(index: .musicScreenIndex)
+        pushTo(router.musics)
     }
     
     private func openDocuments() {
@@ -181,7 +194,7 @@ final class PushNotificationService {
     }
     
     private func openContactSync() {
-        pushTo(router.syncContacts)
+        openTabBarItem(index: .contactsSyncScreenIndex)
     }
     
     private func openPeriodicContactSync() {
@@ -193,7 +206,8 @@ final class PushNotificationService {
     }
     
     private func openCreateStory() {
-        router.createStoryName()
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
     }
     
     private func openContactUs() {
@@ -231,14 +245,14 @@ final class PushNotificationService {
     }
     
     private func openPasscode() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
-        pushTo(router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: false))
+        let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
+        pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
     
     private func openLoginSettings() {
-        if SingletonStorage.shared.accountInfo?.accountType == "TURKCELL" {
-            pushTo(router.turkcellSecurity)            
-        }
+        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
+        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
+        pushTo(controller)
     }
     
     private func openFaceImageRecognition() {
@@ -259,9 +273,7 @@ final class PushNotificationService {
     
     private func openSearch() {
         let output = router.getViewControllerForPresent()
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         pushTo(controller)
     }
     
@@ -288,5 +300,21 @@ final class PushNotificationService {
             /// we don't need error handling here
         }, fail: {_ in})
         
+    }
+    
+    private func openChangePassword() {
+        pushTo(router.changePassword)
+    }
+    
+    private func openPhotoPickHistory() {
+        pushTo(router.analyzesHistoryController())
+    }
+    
+    private func openMyStorage() {
+        pushTo(router.myStorage(usageStorage: nil))
+    }
+    
+    private func openBecomePremium() {
+        pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
     }
 }

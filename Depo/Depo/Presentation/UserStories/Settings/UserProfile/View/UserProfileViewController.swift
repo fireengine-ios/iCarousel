@@ -7,69 +7,75 @@
 //
 
 import UIKit
+import Typist
 
-class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
+final class UserProfileViewController: BaseViewController, UserProfileViewInput {
     var output: UserProfileViewOutput!
     
-    @IBOutlet var keyboardHideManager: KeyboardHideManager! /// not weak
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var viewForContent: UIView!
+    //MARK: IBOutlet
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var viewForContent: UIView!
     
-    @IBOutlet weak var nameSubTitle: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet private weak var nameDetailView: ProfileFieldView!
+    @IBOutlet private weak var surnameDetailView: ProfileFieldView!
+    @IBOutlet private weak var emailDetailView: ProfileFieldView!
+    @IBOutlet private weak var gsmDetailView: ProfileFieldView!
+    @IBOutlet private weak var birthdayDetailView: ProfileBirthdayFieldView!
+    @IBOutlet private weak var passwordDetailView: ProfileFieldView!
     
-    @IBOutlet weak var emailSubTitle: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet private weak var changePasswordButton: UIButton!
     
-    @IBOutlet weak var gsmNumberSubTitle: UILabel!
-    @IBOutlet weak var gsmNumberTextField: UITextField!
-    
-    var editButton: UIBarButtonItem?
-    var readyButton: UIBarButtonItem?
+    //MARK: Vars
+    private let keyboard = Typist.shared
     
     private var name: String?
+    private var surname: String?
     private var email: String?
     private var number: String?
+    private var birthday: String?
+
+    private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
+                                                  font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                  tintColor: .white,
+                                                  accessibilityLabel: TextConstants.userProfileEditButton,
+                                                  style: .plain,
+                                                  target: self,
+                                                  selector: #selector(onEditButtonAction))
     
-    // MARK: Life cycle
+    private lazy var readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
+                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                   tintColor: .white,
+                                                   accessibilityLabel: TextConstants.userProfileDoneButton,
+                                                   style: .plain,
+                                                   target: self,
+                                                   selector: #selector(onReadyButtonAction))
+
+    //MARK: init / deinit
+    deinit {
+        keyboard.stop()
+    }
+    
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         automaticallyAdjustsScrollViewInsets = false
         
-        nameSubTitle.text = TextConstants.userProfileNameAndSurNameSubTitle
-        nameSubTitle.textColor = ColorConstants.textLightGrayColor
-        nameSubTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        let attributedString = NSAttributedString(string: TextConstants.userProfileChangePassword,
+                                                  attributes: [
+                                                    .font : UIFont.TurkcellSaturaMedFont(size: 15),
+                                                    .foregroundColor : UIColor.lrTealish,
+                                                    .underlineStyle : NSUnderlineStyle.styleSingle.rawValue
+            ])
+    
+        changePasswordButton.setAttributedTitle(attributedString, for: .normal)
         
-        nameTextField.textColor = ColorConstants.textGrayColor
-        nameTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-        
-        emailSubTitle.text = TextConstants.userProfileEmailSubTitle
-        emailSubTitle.textColor = ColorConstants.textLightGrayColor
-        emailSubTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        emailTextField.textColor = ColorConstants.textGrayColor
-        emailTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-        
-        gsmNumberSubTitle.text = TextConstants.userProfileGSMNumberSubTitle
-        gsmNumberSubTitle.textColor = ColorConstants.textLightGrayColor
-        gsmNumberSubTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        gsmNumberTextField.textColor = ColorConstants.textGrayColor
-        gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-        
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
-                                     target: self,
-                                     selector: #selector(onEditButtonAction))
-        
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
-                                      target: self,
-                                      selector: #selector(onReadyButtonAction))
-        
+        setupFields()
+        configureKeyboard()
+
         configureNavBar()
         navigationBarWithGradientStyle()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         output.viewIsReady()
     }
@@ -79,38 +85,98 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         navigationBarWithGradientStyle()
     }
     
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.backTitle)
-        
-        navigationController?.navigationItem.title = TextConstants.backTitle
-    }
-
-    // MARK: ViewInput
-    func setupInitialState() {
-        
+    //MARK: Utility Methods(Private)
+    fileprivate func configureKeyboard() {
+        keyboard
+            .on(event: .willShow) { [weak self] options in
+                guard let `self` = self else {
+                    return
+                }
+                self.updateContentInsetWithKeyboardFrame(options.endFrame)
+                self.scrollToFirstResponderIfNeeded(animated: false)
+            }
+            .on(event: .willHide) { [weak self] _ in
+                guard let `self` = self else {
+                    return
+                }
+                var inset = self.scrollView.contentInset
+                inset.bottom = 0
+                
+                self.scrollView.contentInset = inset
+                self.scrollView.setContentOffset(.zero, animated: true)
+            }
+            .start()
     }
     
+    private func setupFields() {
+        nameDetailView.title = TextConstants.userProfileName
+        surnameDetailView.title = TextConstants.userProfileSurname
+        emailDetailView.title = TextConstants.userProfileEmailSubTitle
+        gsmDetailView.title = TextConstants.userProfileGSMNumberSubTitle
+        birthdayDetailView.title = TextConstants.userProfileBirthday
+
+        nameDetailView.responderOnNext = surnameDetailView
+        surnameDetailView.responderOnNext = emailDetailView
+        gsmDetailView.responderOnNext = birthdayDetailView
+        emailDetailView.responderOnNext = SingletonStorage.shared.isTurkcellUser ?
+            birthdayDetailView : gsmDetailView
+        
+        gsmDetailView.setupAsTurkcellGSMIfNeeded()
+        passwordDetailView.setupAsPassword()
+        emailDetailView.setupAsEmail()
+    }
+    
+    private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
+        let screenHeight = UIScreen.main.bounds.height
+        let bottomInset = keyboardFrame.height + screenHeight - keyboardFrame.maxY
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+    }
+    
+    private func scrollToFirstResponderIfNeeded(animated: Bool) {
+        guard let firstResponser = view.firstResponder as? UIView else {
+            return
+        }
+        
+        let rect = scrollView.convert(firstResponser.frame, to: scrollView)
+            .offsetBy(dx: 0.0, dy: NumericConstants.firstResponderBottomOffset)
+        scrollView.scrollRectToVisible(rect, animated: animated)
+    }
+    
+    private func configureNavBar() {
+        setTitle(withString: TextConstants.myProfile)
+    }
+    
+    private func saveFields() {
+        name = nameDetailView.editableText
+        surname = surnameDetailView.editableText
+        email = emailDetailView.editableText
+        number = gsmDetailView.editableText
+        birthday = birthdayDetailView.editableText
+    }
+
+    //MARK: Utility Methods(Public)
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
-        button?.isEnabled = true
+        button.fixEnabledState()
         navigationItem.setRightBarButton(button, animated: true)
-        nameTextField.isUserInteractionEnabled = isEdit
-        emailTextField.isUserInteractionEnabled = isEdit
-        gsmNumberTextField.isUserInteractionEnabled = isEdit
+        
+        nameDetailView.isEditState = isEdit
+        surnameDetailView.isEditState = isEdit
+        emailDetailView.isEditState = isEdit
+        gsmDetailView.isEditState = isEdit
+        birthdayDetailView.isEditState = isEdit
     }
     
     func configurateUserInfo(userInfo: AccountInfoResponse) {
-        var string = userInfo.name ?? ""
-        if let surname = userInfo.surname, !surname.isEmpty {
-            if !string.isEmpty {
-                string = string + " "
-            }
-            string = string + surname
-        }
-        
-        nameTextField.text = string
-        emailTextField.text = userInfo.email
-        gsmNumberTextField.text = userInfo.phoneNumber
+        nameDetailView.configure(with: userInfo.name, delegate: self)
+        surnameDetailView.configure(with: userInfo.surname, delegate: self)
+        emailDetailView.configure(with: userInfo.email, delegate: self)
+        gsmDetailView.configure(with: userInfo.phoneNumber, delegate: self)
+        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
+        birthdayDetailView.configure(with: birthday, delegate: self)
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -118,53 +184,48 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func getPhoneNumber() -> String {
-        return gsmNumberTextField.text ?? ""
+        return gsmDetailView.editableText ?? ""
     }
     
     func endSaving() {
-        readyButton?.isEnabled = true
+        navigationItem.rightBarButtonItem?.fixEnabledState()
     }
     
-    // MARK: ButtonsAction
+    //MARK: Actions
+    @IBAction private func onChangePasswordTap(_ sender: Any) {
+        output.tapChangePasswordButton()
+    }
     
-    @IBAction func onValueChanged() {}
-    
-    @objc func onEditButtonAction() {
-        nameTextField.becomeFirstResponder()
+    @objc private func onEditButtonAction() {
+        nameDetailView.becomeFirstResponder()
         output.tapEditButton()
         saveFields()
     }
     
-    /// save for "check for no changes" in onReadyButtonAction
-    private func saveFields() {
-        name = nameTextField.text
-        email = emailTextField.text
-        number = gsmNumberTextField.text
-    }
-    
-    @objc func onReadyButtonAction() {
-        /// check for no changes
-        if name == nameTextField.text, email == emailTextField.text, number == gsmNumberTextField.text {
-            setupEditState(false)
-            return
+    @objc private func onReadyButtonAction() {
+        guard name != nameDetailView.editableText ||
+            surname != surnameDetailView.editableText ||
+            email != emailDetailView.editableText ||
+            number != gsmDetailView.editableText ||
+            birthday != birthdayDetailView.editableText else {
+                setupEditState(false)
+                return
         }
         
-        if email != emailTextField.text {
-            
-            if emailTextField.text?.isEmpty == true {
+        readyButton.isEnabled = false
+        
+        if email != emailDetailView.editableText {
+            guard let email = emailDetailView.editableText, !email.isEmpty else {
                 output.showError(error: TextConstants.emptyEmail)
                 return
             }
             
-            guard Validator.isValid(email: emailTextField.text) else {
+            guard Validator.isValid(email: emailDetailView.editableText) else {
                 output.showError(error: TextConstants.notValidEmail)
                 return
             }
             
-            
-            readyButton?.isEnabled = false
-            
-            let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
+            let message = String(format: TextConstants.registrationEmailPopupMessage, emailDetailView.editableText ?? "")
             
             let controller = PopUpController.with(
                 title: TextConstants.registrationEmailPopupTitle,
@@ -173,49 +234,72 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
-                        self?.readyButton?.isEnabled = true
+                        self?.output.tapReadyButton(name: self?.nameDetailView.editableText ?? "",
+                                                    surname: self?.surnameDetailView.editableText ?? "",
+                                                    email: self?.emailDetailView.editableText ?? "",
+                                                    number: self?.gsmDetailView.editableText ?? "",
+                                                    birthday: self?.birthdayDetailView.editableText ?? "")
+                        self?.readyButton.fixEnabledState()
                     }
                 })
             
             self.present(controller, animated: true, completion: nil)
             
         } else {
-            readyButton?.isEnabled = false
-            output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+            output.tapReadyButton(name: nameDetailView.editableText ?? "",
+                                  surname: surnameDetailView.editableText ?? "",
+                                  email: emailDetailView.editableText ?? "",
+                                  number: gsmDetailView.editableText ?? "",
+                                  birthday: birthdayDetailView.editableText ?? "")
         }
-        
     }
-    
-    // MARK: UITextFieldDelegate
+}
+
+// MARK: - UITextFieldDelegate
+
+extension UserProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let tag = textField.tag
-        let view: UIView? = viewForContent.viewWithTag(tag + 1)
-        guard let nextTextField = view as! UITextField!  else {
-            return true
+        
+        switch textField {
+        case nameDetailView.getTextField():
+            nameDetailView.responderOnNext?.becomeFirstResponder()
+        case surnameDetailView.getTextField():
+            surnameDetailView.responderOnNext?.becomeFirstResponder()
+        case emailDetailView.getTextField():
+            emailDetailView.responderOnNext?.becomeFirstResponder()
+        case gsmDetailView.getTextField():
+            gsmDetailView.responderOnNext?.becomeFirstResponder()
+        case birthdayDetailView.getTextField():
+            ///last field
+            birthdayDetailView.resignFirstResponder()
+        default:
+            fatalError("Unknown responder")
         }
-        nextTextField.becomeFirstResponder()
         
         return true
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return !(textField == gsmNumberTextField && output.isTurkcellUser())
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text, textField == emailTextField {
-            textField.text = text.removingWhiteSpaces()
+        if let text = textField.text {
+            if textField == emailDetailView.getTextField() {
+                textField.text = text.removingWhiteSpaces()
+            } else if textField == nameDetailView.getTextField() ||
+                textField == nameDetailView.getTextField() {
+                    textField.text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == " " && textField == emailTextField {
+        if textField == nameDetailView.getTextField() ||
+            textField == surnameDetailView.getTextField(),
+            textField.text?.count == NumericConstants.maxStringLengthForUserProfile {
             return false
         }
         
-        return true
+        return !(string == " " && textField == emailDetailView.getTextField())
     }
-    
 }
+
+

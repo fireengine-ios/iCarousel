@@ -79,6 +79,9 @@ final class AutoSyncSettings {
     
     var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
     
+    var isAutosyncSettingsApplied: Bool {
+        return storageVars.autoSyncSet
+    }
     
     init() { }
     

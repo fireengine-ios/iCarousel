@@ -10,67 +10,135 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     var isDeleteRequestRunning = false
     
-    private let fileService = FileService.shared
+    private lazy var freeAppSpace = FreeAppSpace.session
+    private lazy var wrapFileService = WrapItemFileService()
+    
+    private let fileService = FileService()
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
-        if (isDeleteRequestRunning) {
+        if isDeleteRequestRunning {
             return
         }
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
-        FreeAppSpace.default.getUIDSForObjects(itemsArray: selectedItems){ [weak self] uuids in
-            self?.fileService.details(uuids: uuids, success: { [weak self] objects in
-                if (selectedItems.isEmpty) {
-                    guard let self_ = self else {
-                        return
-                    }
-                    if let presenter = self_.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.goBack()
-                        }
-                        return
+        checkAndDelete(items: selectedItems)
+    }
+    
+    private func checkAndDelete(items: [WrapData]) {
+        let localCoreDataObjectIds = items.compactMap { $0.coreDataObjectId }
+        
+        MediaItemOperationsService.shared.mediaItemsByIDs(ids: localCoreDataObjectIds) { [weak self] mediaItems in
+            guard let self = self else {
+                return
+            }
+            assert(items.count == mediaItems.count)
+
+            let relatedRemotesUuids = mediaItems
+                .compactMap { $0.relatedRemotes.allObjects as? [MediaItem] }
+                .flatMap { $0 }
+                .compactMap { $0.uuid }
+            
+            self.deleteRemotesAndLocals(relatedRemotesUuids: relatedRemotesUuids,
+                       localCoreDataObjectIds: localCoreDataObjectIds)
+
+        }
+        
+    }
+    
+    private func deleteRemotesAndLocals(relatedRemotesUuids: [String], localCoreDataObjectIds: [NSManagedObjectID]) {
+        self.fileService.details(uuids: relatedRemotesUuids, success: { [weak self] updatedRemoteItems in
+            
+            let avalableRemoteItems = updatedRemoteItems.filter { $0.status == .active }
+            
+            let associatedRemoteItemsToDelete = avalableRemoteItems.filter { avalableItem in
+                relatedRemotesUuids.contains(where: {
+                    $0 == avalableItem.uuid
+                })
+            }
+            
+            let remoteUuidsToDelete = relatedRemotesUuids.filter { relatedRemoteUUID in
+                !associatedRemoteItemsToDelete.contains(where: {
+                    $0.uuid == relatedRemoteUUID
+                })
+            }
+            
+            MediaItemOperationsService.shared.deleteRemoteEntities(uuids: remoteUuidsToDelete, completion: { [weak self] _ in
+                
+                self?.findLocalItemsToDelete(by: associatedRemoteItemsToDelete.compactMap { $0.uuid }, originalLocalItemsToDeleteIDs: localCoreDataObjectIds, completion: { [weak self] localItemsToDelete in
+                    
+                    self?.deleteLocalItems(localItemsToDelete: localItemsToDelete)
+                    
+                })
+            })
+        }, fail: { [weak self] error in
+            UIApplication.showErrorAlert(message: error.description)
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.isDeleteRequestRunning = false
+            if let output = self.output as? FreeAppSpacePresenter {
+                DispatchQueue.main.async {
+                    output.canceled()
+                }
+            } else {
+                assertionFailure()
+            }
+        })
+    }
+    
+    private func findLocalItemsToDelete(by assosiatedRemotesUUIDS: [String], originalLocalItemsToDeleteIDs: [NSManagedObjectID], completion: @escaping WrapObjectsCallBack) {
+        MediaItemOperationsService.shared.mediaItemsByIDs(ids: originalLocalItemsToDeleteIDs) { mediaItems in
+            assert(originalLocalItemsToDeleteIDs.count == mediaItems.count)
+            
+            let localMediaItemsForDeletion = mediaItems.filter{ localMediaItem in
+                guard let relatedRemotes = localMediaItem.relatedRemotes.allObjects as? [MediaItem] else {
+                    return false
+                }
+                for relatedRemote in relatedRemotes {
+                    if assosiatedRemotesUUIDS.contains(where: { $0 == relatedRemote.uuid }) {
+                        return true
                     }
                 }
-                let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: objects, localObjects: selectedItems)
-                let fileService = WrapItemFileService()
-                fileService.deleteLocalFiles(deleteFiles: array, success: {
-                    
-                    guard let self_ = self else {
-                        return
-                    }
-                    
-                    if let service = self_.remoteItems as? FreeAppService {
-                        service.clear()
-                    }
-                    self_.isDeleteRequestRunning = false
-                    if let presenter = self_.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
-                                presenter.onItemDeleted(count: array.count)
-                                if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
-                                    CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                                    CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
-                                }
-                                presenter.goBack()
-                            }
-                        }
-                    }, fail: { [weak self] error in
-                        self?.isDeleteRequestRunning = false
-                        if let presenter = self?.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
-                                presenter.canceled()
-                            }
-                        }
-                    })
-                }, fail: { [weak self] error in
-                    self?.isDeleteRequestRunning = false
-                    if let presenter = self?.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.canceled()
-                        }
-                    }
-                    UIApplication.showErrorAlert(message: error.description)
-            })
+                return false
+            }
+            completion(localMediaItemsForDeletion.map { WrapData(mediaItem: $0) })
         }
+        
+    }
+    
+    private func deleteLocalItems(localItemsToDelete: [WrapData]) {
+        wrapFileService.deleteLocalFiles(deleteFiles: localItemsToDelete, success: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.isDeleteRequestRunning = false
+            
+            if let presenter = self.output as? FreeAppSpacePresenter {
+                DispatchQueue.main.async {
+                    presenter.onItemDeleted(count: localItemsToDelete.count)
+                    if FreeAppSpace.session.getDuplicatesObjects().isEmpty {
+                        
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                    }
+                    presenter.goBack()
+                }
+            }
+            }, fail: { [weak self] error in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.isDeleteRequestRunning = false
+                if let presenter = self.output as? FreeAppSpacePresenter {
+                    DispatchQueue.main.async {
+                        presenter.canceled()
+                    }
+                }
+        })
     }
     
     override func trackScreen() {

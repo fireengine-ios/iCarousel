@@ -18,26 +18,22 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         manager.delegate = self
         return manager
     }()
+    
+    private lazy var spotyfyRouter: SpotifyRoutingService = factory.resolve()
     private let analyticsService: AnalyticsService = factory.resolve()
-
     private let dataSource = ConnectedAccountsDataSource()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dataSource.view = self
         setupScreen()
         setupTableView()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         trackScreen()
     }
-    
     
     private func setupScreen() {
         setTitle(withString: TextConstants.settingsViewCellConnectedAccounts)
@@ -57,7 +53,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
                            CellsIdConstants.dropboxAccountConnectionCell,
-                           CellsIdConstants.socialAccountRemoveConnectionCell]
+                           CellsIdConstants.socialAccountRemoveConnectionCell,
+                           CellsIdConstants.spotifyAccountConnectionCell]
         
         for id in reusableIds {
             let nib = UINib(nibName: id, bundle: nil)
@@ -76,11 +73,11 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 extension ConnectedAccountsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == Section.SocialAccount.instagram.rawValue) ? 0 : 14
+        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (section == Section.SocialAccount.instagram.rawValue) ? nil : SettingHeaderView.viewFromNib()
+        return (section == Section.SocialAccount.spotify.rawValue) ? nil : SettingHeaderView.viewFromNib()
     }
 }
 
@@ -88,7 +85,8 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
         if section.set(expanded: true) {
-            DispatchQueue.toMain {
+            /// DispatchQueue.toMain invokes too fast
+            DispatchQueue.main.async {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.insertRows(at: [indexPath], with: .fade)
@@ -98,7 +96,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     
     func didDisconnectSuccessfully(section: Section) {
         if section.set(expanded: false) {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -120,6 +118,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
         activityManager.stop()
     }
 }
+
 
 
 

@@ -22,7 +22,7 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             return
         }
         peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] albums in
-            self?.currentItems = albums.flatMap { SliderItem(withAlbum: AlbumItem(remote: $0)) }
+            self?.currentItems = albums.flatMap { SliderItem(asFirAlbum: AlbumItem(remote: $0)) }
             
             if let currentItems = self?.currentItems {
                 DispatchQueue.main.async {

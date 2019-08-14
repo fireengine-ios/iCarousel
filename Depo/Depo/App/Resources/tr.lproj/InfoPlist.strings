@@ -1,5 +1,7 @@
-"NSLocationAlwaysUsageDescription" = "Lokasyonunuz, arka planda yedekleme yapabilmek için kullanılacaktır.";
-"NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarınızı galerinize indirebilmek için izniniz gerekli";
-"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını yedekleyebilmek için galeri iznin gerekiyor";
 "NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Lokasyonunuz, arka planda yedekleme yapabilmek için kullanılacaktır.";
+"NSLocationAlwaysUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
+"NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
+"NSCameraUsageDescription" = "Cihaz kamerası ile fotoğraf çekmek ve çekilen fotoğrafları lifebox'a yedeklemek için cihaz kamerasına erişim iznin gerekiyor";
+"NSContactsUsageDescription" = "lifebox'un rehberine erişip yedeklemesi için kontaklarını lifebox sunucularına yüklemesi gerekir.";

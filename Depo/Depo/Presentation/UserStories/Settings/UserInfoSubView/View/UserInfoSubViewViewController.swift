@@ -11,28 +11,26 @@ import SDWebImage
 
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed()
-    func updateUserProfile(userInfo: AccountInfoResponse)
-    func upgradeButtonPressed()
+    func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
 }
 
-class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
+final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
 
     var output: UserInfoSubViewViewOutput!
     
-    @IBOutlet weak var userlogoImageView: UIImageView!
-    @IBOutlet weak var userIconImageView: LoadingImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userEmailLabel: UILabel!
-    @IBOutlet weak var userPhoneNumber: UILabel!
-    @IBOutlet weak var userStorrageInformationLabel: UILabel!
-    @IBOutlet weak var upgradeUserStorrageButton: InsetsButton!
-    @IBOutlet weak var usersStorrageUssesProgress: RoundedProgressView!
-    @IBOutlet weak var uplaodLabel: UILabel!
+    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var userEmailLabel: UILabel!
+    @IBOutlet private weak var userPhoneNumber: UILabel!
     @IBOutlet private weak var premiumButton: GradientPremiumButton!
     @IBOutlet private weak var statusLabel: UILabel!
-    @IBOutlet private weak var premiumView: UIView!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet private weak var accountDetailsButton: UIButton!
+    @IBOutlet private weak var accountDetailsLabel: UILabel!
+    @IBOutlet private weak var userStorrageInformationLabel: UILabel!
+    @IBOutlet private weak var usedAsPercentageLabel: UILabel!
+    @IBOutlet private weak var circleProgressView: CircleProgressView!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    
     weak var actionsDelegate: UserInfoSubViewViewControllerActionsDelegate?
     
     var userInfo: AccountInfoResponse?
@@ -43,66 +41,20 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNameLabel.textColor = ColorConstants.textGrayColor
-        userNameLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
-        
-        userEmailLabel.textColor = ColorConstants.textGrayColor
-        userEmailLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        
-        userPhoneNumber.textColor = ColorConstants.textGrayColor
-        userPhoneNumber.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        
-        userStorrageInformationLabel.textColor = ColorConstants.textGrayColor
-        userStorrageInformationLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        userStorrageInformationLabel.text = ""
-        
-        upgradeUserStorrageButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        upgradeUserStorrageButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        upgradeUserStorrageButton.setTitle(TextConstants.settingsUserInfoViewUpgradeButtonText, for: .normal)
-        let inset: CGFloat = 5
-        upgradeUserStorrageButton.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-        
-        uplaodLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        uplaodLabel.textColor = UIColor.lrTealish
-        uplaodLabel.text = TextConstants.settingsViewUploadPhotoLabel
-        
-        usersStorrageUssesProgress.progressTintColor = UIColor.lrTealish
-        usersStorrageUssesProgress.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
-        
-        usersStorrageUssesProgress.setProgress(0, animated: false)
-        
-        userIconImageView.layer.cornerRadius = userIconImageView.frame.size.width * 0.5
-        userIconImageView.layer.masksToBounds = true
-        
-        editButton.isHidden = true
-        
-        userIconImageView.sd_setShowActivityIndicatorView(true)
-        userIconImageView.sd_setIndicatorStyle(.gray)
+        setupDesign()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationBarWithGradientStyle()
         setupDesignByUserAuthority()
     }
-
-    private func setupDesignByUserAuthority() {
-        premiumButton.titleEdgeInsets = UIEdgeInsetsMake(5, 7, 5, 7)
-        premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
-        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        premiumButton.isHidden = output.isPremiumUser
-        premiumView.isHidden = output.isPremiumUser
-
-        if output.isPremiumUser {
-            statusLabel.text = TextConstants.premiumUser
-        } else if output.isMiddleUser {
-            statusLabel.text = TextConstants.midUser
-        } else {
-            statusLabel.text = TextConstants.standardUser
-        }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        statusLabel.textColor = ColorConstants.textGrayColor
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.height * 0.5
     }
         
     func reloadUserInfo() {
@@ -110,13 +62,10 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     }
     
     func updatePhoto(image: UIImage) {
-        userIconImageView.image = image
+        avatarImageView.image = image
         if let url = userInfo?.urlForPhoto {
             SDImageCache.shared().removeImage(forKey: url.absoluteString, withCompletion: nil)
         }
-        
-        dismissLoadingSpinner()
-        uplaodLabel.isHidden = true
     }
     
     func showLoadingSpinner() {
@@ -129,27 +78,26 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     func setUserInfo(userInfo: AccountInfoResponse) {
         self.userInfo = userInfo
-        editButton.isHidden = false
         var string = ""
         if let name_ = userInfo.name {
             string = name_
         }
-///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
-//        if let surName_ = userInfo.surname {
-//            if !string.isEmpty {
-//                string = string + " "
-//            }
-//            string = string + surName_
-//        }
-        userNameLabel.text = string
         
+        if let surname = userInfo.surname, !surname.isEmpty {
+            if let name = userInfo.name, !name.isEmpty {
+                string = string + " "
+            }
+            
+            string = string + surname
+        }
+        
+        userNameLabel.text = string
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
         
         if let url = userInfo.urlForPhoto, !isPhotoLoaded {
-            userIconImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+            avatarImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
                 self?.isPhotoLoaded = true
-                self?.uplaodLabel.isHidden = true
             }
         }
     }
@@ -158,11 +106,69 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { 
             return
         }
-        usersStorrageUssesProgress.progress = Float(usedBytes) / Float(quotaBytes)
-        
+        let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
+        circleProgressView.set(progress: usagePercentage, withAnimation: true)
+
+        let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
+        usedAsPercentageLabel.text = String(format: TextConstants.usagePercentage, percentage)
+
         let quotaString = quotaBytes.bytesString
         let usedString = usedBytes.bytesString
-        userStorrageInformationLabel.text = String(format: TextConstants.usedAndLeftSpace, usedString, quotaString)
+        userStorrageInformationLabel.text = String(format: TextConstants.leftSpace, usedString, quotaString)
+    }
+    
+    // MARK: Utility methods
+    
+    private func setupDesignByUserAuthority() {
+        premiumButton.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
+        premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
+        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        premiumButton.isHidden = output.isPremiumUser
+        
+        if output.isPremiumUser {
+            statusLabel.text = TextConstants.premiumUser
+        } else if output.isMiddleUser {
+            statusLabel.text = TextConstants.midUser
+        } else {
+            statusLabel.text = TextConstants.standardUser
+        }
+        
+        statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        statusLabel.textColor = .black
+    }
+    
+    private func setupDesign() {
+        userNameLabel.textColor = ColorConstants.textGrayColor
+        userNameLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+        
+        userEmailLabel.textColor = ColorConstants.textGrayColor
+        userEmailLabel.font = UIFont.TurkcellSaturaMedFont(size: 16)
+        
+        userPhoneNumber.textColor = ColorConstants.textGrayColor
+        userPhoneNumber.font = UIFont.TurkcellSaturaMedFont(size: 16)
+        
+        accountDetailsLabel.textColor = ColorConstants.blueColor
+        accountDetailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+        accountDetailsLabel.text = TextConstants.accountDetails
+        
+        userStorrageInformationLabel.textColor = ColorConstants.blueColor
+        userStorrageInformationLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        
+        usedAsPercentageLabel.textColor = ColorConstants.blueColor
+        usedAsPercentageLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        
+        circleProgressView.backWidth = NumericConstants.usageInfoProgressWidth
+        circleProgressView.progressWidth = NumericConstants.usageInfoProgressWidth
+        circleProgressView.progressRatio = 0.0
+        circleProgressView.progressColor = .lrTealish
+        circleProgressView.backColor = UIColor.lrTealish
+            .withAlphaComponent(NumericConstants.progressViewBackgroundColorAlpha)
+        circleProgressView.set(progress: 0, withAnimation: true)
+        circleProgressView.backWidth = 8
+        circleProgressView.progressWidth = 8
+        circleProgressView.layoutIfNeeded()
+        
+        avatarImageView.layer.masksToBounds = true
     }
 
     // MARK: UserInfoSubViewViewInput
@@ -170,20 +176,11 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     }
     
     // MARK: buttons actions
-    @IBAction func onEditUserInformationButton(_ sender: UIButton) {
-        sender.isEnabled = false
-        guard let userInfo_ = userInfo else {
-            return
-        }
-        actionsDelegate?.updateUserProfile(userInfo: userInfo_)
-        sender.isEnabled = true
+    @IBAction private func onEditUserInformationButton(_ sender: UIButton) {
+        actionsDelegate?.upgradeButtonPressed(quotaInfo: output.quotaInfo)
     }
     
-    @IBAction func onUpgradeUserStorrageButton() {
-        actionsDelegate?.upgradeButtonPressed()
-    }
-    
-    @IBAction func onUpdateUserPhoto() {
+    @IBAction private func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed()
     }
     

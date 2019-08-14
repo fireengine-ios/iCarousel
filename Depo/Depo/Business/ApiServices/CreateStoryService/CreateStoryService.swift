@@ -133,23 +133,16 @@ class CreateStoryMusicService: RemoteItemsService {
         super.init(requestSize: 9999, fieldValue: .audio)
     }
     
-    func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func allItems(success: ListRemoteItems?, fail: FailRemoteItems?) {
         debugLog("CreateStoryMusicService allItems")
      
         let requestService = BaseRequestService(transIdLogging: true)
         let handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: { [weak self] response in
-            guard let `self` = self else {
-                return
-            }
             
-            if self.isGotAll {
-                debugLog("CreateStoryMusicService allItems success with empty result")
-
-                success?([])
-            } else if let response = response as? CreateStoryMusicListResponse,
+                if let response = response as? CreateStoryMusicListResponse,
                 let list = response.list {
-                let result = list.flatMap { WrapData(musicForCreateStory: $0) }
-                self.isGotAll = true
+                    let result = list.compactMap { WrapData(musicForCreateStory: $0) }
+
                 success?(result)
                 
                 debugLog("CreateStoryMusicService allItems success")
@@ -172,7 +165,7 @@ class CreateStoryMusicService: RemoteItemsService {
         requestService.executeGetRequest(param: CreateStoryMusicList(), handler: handler)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("CreateStoryMusicService nextItems")
 
         allItems(success: success, fail: fail)

@@ -8,9 +8,11 @@
 
 import UIKit
 
-final class UnderlineTextField: UITextField {
+class UnderlineTextField: UITextField {
     
-    var underlineWidth: CGFloat = 1
+    var underlineWidth: CGFloat = 1 {
+        didSet { setNeedsDisplay() }
+    }
     
     var underlineColor = UIColor.white {
         didSet {
@@ -32,7 +34,6 @@ final class UnderlineTextField: UITextField {
     
     private func setup() {
         layer.addSublayer(underlineLayer)
-        contentVerticalAlignment = .bottom
     }
     
     override func layoutSubviews() {

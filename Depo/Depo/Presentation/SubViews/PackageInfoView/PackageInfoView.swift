@@ -9,11 +9,39 @@
 import UIKit
 
 enum ControlPackageType {
+    case myProfile
     case myStorage
     case premiumBanner
-    case standardUser
-    case middleUser
-    case premiumUser
+    
+    case accountType(ControlPackageType.AccountType)
+    
+    enum AccountType {
+        case standard
+        case middle
+        case premium
+        
+        var text: String {
+            switch self {
+            case .standard:
+                return TextConstants.standard
+            case .middle:
+                return TextConstants.standardPlus
+            case .premium:
+                return TextConstants.premium
+            }
+        }
+        
+        var leavePremiumType: LeavePremiumType {
+            switch self {
+            case .standard:
+                return .standard
+            case .middle:
+                return .middle
+            case .premium:
+                return .premium
+            }
+        }
+    }
 }
 
 protocol PackageInfoViewDelegate: class {
@@ -26,7 +54,7 @@ final class PackageInfoView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var seeDetailsLabel: UILabel!
     @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var storageSizeLabel: UILabel!
+    @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var shadowView: UIView!
 
     //MARK: vars
@@ -49,19 +77,20 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     //MARK: Utility methods(public)
-    func configure(with type: ControlPackageType, capacity: Int64? = nil) {
-
+    func configure(with type: ControlPackageType, percentage: CGFloat? = nil) {
         viewType = type
 
         switch type {
+        case .myProfile:
+            titleLabel.text = TextConstants.myProfile
+            detailLabel.isHidden = true
         case .myStorage:
             titleLabel.text = TextConstants.myStorage
-            seeDetailsLabel.text = TextConstants.seeDetails
-            if let capacity = capacity, capacity != 0 {
-                let capacityGB = capacity.bytesString
-                storageSizeLabel.text = capacityGB
+            if let percentage = percentage, percentage != 0 {
+                detailLabel.isHidden = false
+                detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
             } else {
-                storageSizeLabel.isHidden = true
+                detailLabel.isHidden = true
             }
         case .premiumBanner:
             let packagePremiumView = PackagePremiumView.initFromNib()
@@ -75,18 +104,11 @@ final class PackageInfoView: UIView, NibInit {
             packagePremiumView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             
             self.packagePremiumView = packagePremiumView
-        case .premiumUser:
-            titleLabel.text = TextConstants.premiumUser
-            seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.isHidden = true
-        case .standardUser:
-            titleLabel.text = TextConstants.standardUser
-            seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.isHidden = true
-        case .middleUser:
-            titleLabel.text = TextConstants.middleUser
-            seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.isHidden = true
+            seeDetailsLabel.isHidden = true
+        case .accountType(let accountType):
+            titleLabel.text = TextConstants.accountType
+            
+            detailLabel.text = accountType.text
         }
     }
 
@@ -94,11 +116,14 @@ final class PackageInfoView: UIView, NibInit {
     private func setupDesign() {
         titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         seeDetailsLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        storageSizeLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        detailLabel.font = UIFont.TurkcellSaturaMedFont(size: 16)
 
         titleLabel.textColor = ColorConstants.textGrayColor
         seeDetailsLabel.textColor = ColorConstants.blueColor
-        storageSizeLabel.textColor = ColorConstants.textGrayColor
+        detailLabel.textColor = ColorConstants.textGrayColor
+        
+        seeDetailsLabel.text = TextConstants.seeDetails
+        titleLabel.adjustsFontSizeToFitWidth()
     }
 
     private func setupShadow() {
@@ -126,7 +151,7 @@ final class PackageInfoView: UIView, NibInit {
 
     private func setupGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(onSeeDetailsTap))
-        bottomView.addGestureRecognizer(tap)
+        self.addGestureRecognizer(tap)
     }
 
     //MARK: objc

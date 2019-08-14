@@ -14,8 +14,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
     var output: CreateStoryPreviewViewOutput!
     
-    @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var viewForPlayer: UIView!
+    @IBOutlet private weak var previewImageView: UIImageView!
+    @IBOutlet private weak var viewForPlayer: UIView!
     
     var previewURLString: String? {
         didSet {
@@ -45,23 +45,36 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     var player: AVPlayer?
     var playerController: FixedAVPlayerViewController?
     
+    override func getBackgroundColor() -> UIColor {
+        return viewForPlayer.backgroundColor ?? UIColor.black
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        blackNavigationBarStyle()
+
+        setupNavigation()
+        output.viewIsReady()
+    }
+    
+    private func setupNavigation() {
+        hidenNavigationBarStyle()
+        statusBarColor = .black
+        setNavigationBackgroundColor(color: .black)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didEnterBackground),
+                                               name: .UIApplicationDidEnterBackground,
+                                               object: nil)
+        
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
+                                                             style: .plain,
+                                                             target: nil,
+                                                             action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
                                                             target: self,
                                                             selector: #selector(onSaveButton))
-        
-        output.viewIsReady()
-    }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .black
-    }
-    
-    @IBAction func onPlayButton() {
-        playVideoByURLString(urlSting: previewURLString)
     }
     
     func playVideoByURLString(urlSting: String?) {
@@ -72,14 +85,17 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         }
     }
     
-    @objc func onSaveButton() {
+    @objc private func onSaveButton() {
         output.onSaveStory()
     }
     
-    override func getBackgroundColor() -> UIColor {
-        return viewForPlayer.backgroundColor ?? UIColor.black
+    @objc private func didEnterBackground() {
+        player?.pause()
     }
     
+    @IBAction private func onPlayButton() {
+        playVideoByURLString(urlSting: previewURLString)
+    }
 }
 
 // MARK: CreateStoryPreviewViewInput
@@ -90,5 +106,9 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
         }
         previewURLString = urlString
 //        playVideoByURLString(urlSting: urlString) //Left this in case if requrements would change again(start automaticaly)
+    }
+    
+    func prepareToDismiss() {
+        navigationBarWithGradientStyle()
     }
 }

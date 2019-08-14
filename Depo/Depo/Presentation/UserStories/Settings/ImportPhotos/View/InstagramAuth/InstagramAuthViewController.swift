@@ -54,6 +54,7 @@ class InstagramAuthViewController: ViewController {
         var request = URLRequest(url: authPath!)
         request.httpShouldHandleCookies = false
         webView.load(request)
+        showSpinner()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,6 +63,7 @@ class InstagramAuthViewController: ViewController {
     }
     
     private func handleBackButton() {
+        hideSpinner()
         if isMovingFromParentViewController, !isLoginStarted, !isLoginCanceled {
             delegate?.instagramAuthCancel()
         }
@@ -112,6 +114,7 @@ class InstagramAuthViewController: ViewController {
 extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        hideSpinner()
         if isLoginStarted {
             ///server returns 500 if checkInstagramLogin immediately
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
@@ -124,6 +127,7 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        hideSpinner()
         delegate?.instagramAuthCancel()
     }
     

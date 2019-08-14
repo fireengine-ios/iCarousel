@@ -13,7 +13,7 @@ enum GSMUserInputCellStyle {
     case textEnter
 }
 
-protocol GSMCodeCellDelegate {
+protocol GSMCodeCellDelegate: class {
     func codeViewGotTapped()
     func phoneNumberChanged(toNumber number: String)
 }
@@ -23,7 +23,7 @@ final class GSMUserInputCell: BaseUserInputCellView {
     @IBOutlet weak var gsmCountryCodeLabel: UILabel!
     @IBOutlet weak var gsmCodeContainerView: UIView!
     @IBOutlet var separators: [UIView]!
-    var delegate: GSMCodeCellDelegate?
+    weak var delegate: GSMCodeCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

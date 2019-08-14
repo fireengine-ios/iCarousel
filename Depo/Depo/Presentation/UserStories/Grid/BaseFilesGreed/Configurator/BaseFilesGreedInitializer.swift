@@ -60,7 +60,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
+        viewController.floatingButtonsArray.append(contentsOf: [.importFromSpotify])
         viewController.scrollablePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],

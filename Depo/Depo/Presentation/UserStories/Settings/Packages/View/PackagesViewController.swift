@@ -11,14 +11,14 @@ import UIKit
 final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var cardsStackView: UIStackView!
 
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var policyTextView: UITextView!
+    @IBOutlet weak private var scrollView: UIScrollView!
+    @IBOutlet weak private var policyTextView: UITextView!
     
     @IBOutlet private weak var subtitleLabel: UILabel! {
         didSet {
@@ -37,17 +37,18 @@ final class PackagesViewController: BaseViewController {
         super.viewDidLoad()
 
         setupDesign()
+        setupCollectionView()
 
         automaticallyAdjustsScrollViewInsets = false
-        setTitle(withString: TextConstants.packages)
-        activityManager.delegate = self
-        promoView.deleagte = self
-        setupCollectionView()
+        
         policyTextView.text = ""
+        setTitle(withString: TextConstants.accountDetails)
+        descriptionLabel.text = TextConstants.descriptionLabelText
+
+        promoView.deleagte = self
+        activityManager.delegate = self
         
         output.viewIsReady()
-        
-        descriptionLabel.text = TextConstants.descriptionLabelText
         
         MenloworksAppEvents.onPackagesOpen()
     }
@@ -152,31 +153,36 @@ extension PackagesViewController: PackagesViewInput {
         present(vc, animated: false, completion: nil)
     }
 
-    func setupStackView(with storageCapacity: Int64) {
+    func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
-        let isPremium = AuthoritySingleton.shared.accountType.isPremium
-        
-        if !isPremium {
-            let premiumBannerCard = PackageInfoView.initFromNib()
-            premiumBannerCard.configure(with: .premiumBanner)
-            output.configureCard(premiumBannerCard)
-            cardsStackView.addArrangedSubview(premiumBannerCard)
+        ///premium banner if needed
+        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
+        if !isPremiumUser {
+            addNewCard(type: .premiumBanner)
         }
+        
+        ///my profile card
+        addNewCard(type: .myProfile)
 
-        let userDetailPageCard = PackageInfoView.initFromNib()
+        ///account type card
         let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
-        let type: ControlPackageType = isPremium ? .premiumUser : (isMiddleUser ? .middleUser : .standardUser)
-        userDetailPageCard.configure(with: type)
-        output.configureCard(userDetailPageCard)
-        cardsStackView.addArrangedSubview(userDetailPageCard)
+        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
 
-        let myStorageCard = PackageInfoView.initFromNib()
-        myStorageCard.configure(with: .myStorage, capacity: storageCapacity)
-        output.configureCard(myStorageCard)
-        cardsStackView.addArrangedSubview(myStorageCard)
+        addNewCard(type: .accountType(type))
+
+        ///my storage card
+        addNewCard(type: .myStorage, percentage: percentage)
+    }
+    
+    private func addNewCard(type: ControlPackageType, percentage: CGFloat? = nil) {
+        let card = PackageInfoView.initFromNib()
+        card.configure(with: type, percentage: percentage)
+
+        output.configureCard(card)
+        cardsStackView.addArrangedSubview(card)
     }
 }
 

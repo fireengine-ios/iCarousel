@@ -24,6 +24,7 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
         collectionView.delegate = self
         collectionView.register(nibCell: SmartAlbumCell.self)
         collectionView.register(nibCell: InstaPickSmartAlbumCell.self)
+        collectionView.register(nibCell: SingleThumbnailAlbumCell.self)
     }
     
     func setCollectionView(items: [SliderItem]) {
@@ -48,7 +49,15 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = allItems[indexPath.item]
-        let cellType = (item.type == .some(.instaPick)) ? InstaPickSmartAlbumCell.self : SmartAlbumCell.self
+        let cellType: SimpleSliderCell.Type
+        switch item.type {
+        case .some(.instaPick):
+            cellType = InstaPickSmartAlbumCell.self
+        case .some(.firAlbum):
+            cellType = SingleThumbnailAlbumCell.self
+        default:
+            cellType = SmartAlbumCell.self
+        }
         let cell = collectionView.dequeue(cell: cellType, for: indexPath)
         cell.setup(withItem: item)
         

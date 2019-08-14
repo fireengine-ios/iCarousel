@@ -24,6 +24,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.connectedAccounts!)
     }
     
+    func goToPermissions() {
+        router.pushViewController(viewController: router.permissions)
+    }
+    
     func goToAutoApload() {
         router.pushViewController(viewController: router.autoUpload)
     }
@@ -40,6 +44,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.helpAndSupport!)
     }
     
+    func goToTermsAndPolicy() {
+        router.pushViewController(viewController: router.termsAndPolicy!)
+    }
+    
     func goToUsageInfo() {
         router.pushViewController(viewController: router.usageInfo!)
     }
@@ -50,6 +58,11 @@ class SettingsRouter: SettingsRouterInput {
     
     func goToActivityTimeline() {
         router.pushViewController(viewController: router.vcActivityTimeline)
+    }
+    
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
+        let vc = router.packagesWith(quotoInfo: quotaInfo)
+        router.pushViewController(viewController: vc)
     }
     
     func goToPackages() {
@@ -86,8 +99,9 @@ class SettingsRouter: SettingsRouterInput {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
-    func goTurkcellSecurity() {
-        router.pushViewController(viewController: router.turkcellSecurity)
+    func goTurkcellSecurity(isTurkcell: Bool) {
+        let viewController = router.turkcellSecurity(isTurkcell: isTurkcell)
+        router.pushViewController(viewController: viewController)
     }
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {

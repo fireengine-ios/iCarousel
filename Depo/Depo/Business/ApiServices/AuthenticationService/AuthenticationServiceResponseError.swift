@@ -25,7 +25,7 @@ enum LoginResponseError {
         if errorResponse.description.contains("LDAP account is locked") {
             self = .block
         }
-        else if !ReachabilityService().isReachable {
+        else if !ReachabilityService.shared.isReachable {
             self = .noInternetConnection
         }
         else if errorResponse.description.contains("Captcha required") {
@@ -83,6 +83,7 @@ enum LoginResponseError {
 
 enum SignupResponseError {
     case invalidEmail
+    case invalidPhoneNumber
     case emailAlreadyExists
     case gsmAlreadyExists
     case invalidPassword
@@ -96,7 +97,15 @@ enum SignupResponseError {
     case unauthorized
     
     init?(with error: ServerStatusError) {
-        switch error.status {
+        self.init(with: error.status)
+    }
+    
+    init?(with error: ServerValueError) {
+        self.init(with: error.value)
+    }
+    
+    init?(with stringError: String) {
+        switch stringError {
         case "EMAIL_FIELD_IS_INVALID", "EMAIL_IS_INVALID":
             self = .invalidEmail
         case "EMAIL_IS_ALREADY_EXIST":
@@ -111,8 +120,12 @@ enum SignupResponseError {
             self = .invalidOtp
         case "TOO_MANY_INVALID_ATTEMPTS":
             self = .tooManyInvalidOtpAttempts
-        case "INVALID_CAPTCHA":
+        case "INVALID_CAPTCHA", "Invalid captcha.":
             self = .incorrectCaptcha
+        case "Captcha required.":
+            self = .captchaRequired
+        case "PHONE_NUMBER_IS_INVALID":
+            self = .invalidPhoneNumber
         default:
             return nil
         }
@@ -122,6 +135,8 @@ enum SignupResponseError {
         switch self {
         case .invalidEmail:
             return GADementionValues.signUpError.invalidEmail.text
+        case .invalidPhoneNumber:
+            return GADementionValues.signUpError.invalidPhoneNumber.text
         case .emailAlreadyExists:
             return GADementionValues.signUpError.emailAlreadyExists.text
         case .gsmAlreadyExists:

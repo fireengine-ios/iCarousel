@@ -1,4 +1,7 @@
-"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing";
-"NSPhotoLibraryAddUsageDescription" = "Need access to save your photo";
-"NSPhotoLibraryUsageDescription" = "Your photo library access is needed to display photos/videos in the application";
-"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
+"NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
+"NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
+"NSCameraUsageDescription" = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";
+"NSContactsUsageDescription" = "lifebox duhet të ketë qasje dhe të ngarkojë kontaktet tuaja në serverat e kutisë së jetës për t'i kopjuar dhe menaxhuar ato.";

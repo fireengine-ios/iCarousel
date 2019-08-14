@@ -52,8 +52,10 @@ class WrapItemFileService: WrapItemFileOperations {
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
         let successOperation: FileOperationSucces = {
-            success?()
-            ItemOperationManager.default.deleteItems(items: deleteFiles)
+            MediaItemOperationsService.shared.deleteItems(deleteFiles, completion: {
+                success?()
+                ItemOperationManager.default.deleteItems(items: deleteFiles)
+            })
         }
         
         let failOperation: FailResponse = {  value in
@@ -81,7 +83,7 @@ class WrapItemFileService: WrapItemFileOperations {
                 
                 let list: [String] = localAssetsW.map { $0.localIdentifier }
                 //                DispatchQueue.main.async {
-                CoreDataStack.default.removeLocalMediaItems(with: list, completion: {})
+                MediaItemOperationsService.shared.removeLocalMediaItems(with: list, completion: {})
                 ItemOperationManager.default.deleteItems(items: deleteFiles)
                 //                }
                 success?()
@@ -117,7 +119,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                      fail: fail, returnedUploadOperation: { _ in})
     }
     
-    func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperations]?) -> Void) {
+    func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperation]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
@@ -129,7 +131,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                      returnedUploadOperation: returnedUploadOperations)
     }
     
-    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperations]?) -> Void) {
+    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperation]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         guard localFiles.count > 0 else {
             success()
@@ -184,7 +186,18 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
-        let items = remoteItemsUUID(files: sharedFiles)
+        guard let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.errorServer))
+            return
+        }
+        
+        let items = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
+        
+        guard !items.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.errorServer))
+            return
+        }
+        
         let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
         let param = SharedServiceParam(filesList: items, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
@@ -197,7 +210,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.detail(uuids: item.uuid, success: success, fail: fail)
     }
     
-    func details(items: [WrapData], success: ListRemoveItems?, fail: FailResponse?) {
+    func details(items: [WrapData], success: ListRemoteItems?, fail: FailResponse?) {
         let items = remoteItemsUUID(files: items)
         remoteFileService.details(uuids: items, success: success, fail: fail)
     }
@@ -206,27 +219,28 @@ class WrapItemFileService: WrapItemFileOperations {
     // MARK: favourits
     
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
-        metadataFile(files: files, favouritse: true, success: success, fail: fail)
+        metadataFile(files: files, favorites: true, success: success, fail: fail)
     }
     
     func removeFromFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
-        metadataFile(files: files, favouritse: false, success: success, fail: fail)
+        metadataFile(files: files, favorites: false, success: success, fail: fail)
     }
     
-    private func metadataFile(files: [WrapData], favouritse: Bool, success: FileOperationSucces?, fail: FailResponse?) {
+    private func metadataFile(files: [WrapData], favorites: Bool, success: FileOperationSucces?, fail: FailResponse?) {
         
         let items = remoteItemsUUID(files: files)
-        let param = MetaDataFile(items: items, addToFavourit: favouritse)
+        let param = MetaDataFile(items: items, addToFavourit: favorites)
         let success_: FileOperationSucces = {
             success?()
             files.forEach {
-                $0.coreDataObject?.favoritesValue = favouritse
+                $0.favorites = favorites
             }
-            if (favouritse) {
+            if favorites {
                 ItemOperationManager.default.addFilesToFavorites(items: files)
             } else {
                 ItemOperationManager.default.removeFileFromFavorites(items: files)
             }
+            MediaItemOperationsService.shared.updateRemoteItems(remoteItems: files)
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
@@ -253,6 +267,12 @@ class WrapItemFileService: WrapItemFileOperations {
         let items: [String] = files.filter { !$0.isLocalItem }
             .flatMap { $0.uuid }
         return items
+    }
+    
+    private func uuidsOfItemsThatHaveRemoteURL(files: [WrapData]) -> [String] {
+        return files
+            .filter { $0.tmpDownloadUrl != nil }
+            .compactMap { $0.uuid }
     }
     
     static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {

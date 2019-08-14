@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
+class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
 
@@ -40,14 +40,13 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
         needToShowTabBar = true
         
-        let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
+        debugLog("HomePage viewDidiLoad")
+        homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
+        debugLog("HomePage DataSource setuped")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
-        homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         CardsManager.default.addViewForNotification(view: homePageDataSource)
         
         configurateRefreshControl()
@@ -78,6 +77,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        debugLog("HomePage viewDidAppear")
         homePageDataSource.isActive = true
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
@@ -134,12 +134,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     func startSpinner() {
         showSpinner()
-    }
-    
-    func needPresentPopUp(popUpView: UIViewController) {
-        DispatchQueue.toMain {
-            self.present(popUpView, animated: true, completion: nil)
-        }
     }
     
     private func requestShowSpotlight() {
@@ -272,10 +266,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     // MARK: UICollectionViewDelegate
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:

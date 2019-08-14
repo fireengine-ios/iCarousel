@@ -6,74 +6,116 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum LoginFieldError {
+    case loginIsNotValid
+    case loginIsEmpty
+    
+    case passwordIsEmpty
+    
+    case captchaIsEmpty
+}
+
 class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    private var dataStorage = LoginDataStorage()
-    private let authService = AuthenticationService()
     
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var authenticationService = AuthenticationService()
-    private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var eulaService = EulaService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
-    private let contactsService = ContactService()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var authService = AuthenticationService()
+    private lazy var contactsService = ContactService()
+    private lazy var accountService = AccountService()
+    private lazy var eulaService = EulaService()
+    
+    private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
+    private let storageVars: StorageVars
+    
+    private var accountWarningService: AccountWarningService?
+
     private var rememberMe: Bool = true
+    
     private var attempts: Int = 0
+    private var loginRetries = 0 {
+        didSet {
+            if loginRetries > 2 {
+                output?.showSupportView()
+            }
+        }
+    }
     
     private var login: String?
     private var password: String?
-    private var atachedCaptcha: CaptchaParametrAnswer?
+    
     private lazy var captchaService = CaptchaService()
+    private let cacheManager = CacheManager.shared
+    
+    private var blockedUsers: [String : Date] {
+        willSet {
+            storageVars.blockedUsers = newValue
+        }
+    }
     
     var isShowEmptyEmail = false
     
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
     
-    func prepareModels() {
-        output?.models(models: dataStorage.getModels())
+    init() {
+        let storageVars: StorageVars = factory.resolve()
+        blockedUsers = storageVars.blockedUsers
+        self.storageVars = storageVars
     }
     
-    func rememberMe(state: Bool) {
-        rememberMe = state
-    }
-    
+    //MARK: Utility Methods(private)
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
-                             errorHandler: @escaping (ErrorResponse) -> Void) {
+                             errorHandler: @escaping (LoginResponseError, String) -> Void) {
+        
+        let isCaptchaRequired = atachedCaptcha != nil
         
         if login.isEmpty {
-            output?.loginFieldIsEmpty()
+            output?.fieldError(type: .loginIsEmpty)
         }
+        
         if password.isEmpty {
-            output?.passwordFieldIsEmpty()
+            output?.fieldError(type: .passwordIsEmpty)
         }
-        if login.isEmpty || password.isEmpty {
+        
+        if let captchaAnswer = atachedCaptcha?.answer, captchaAnswer.isEmpty {
+            output?.fieldError(type: .captchaIsEmpty)
+        }
+        
+        if login.isEmpty || password.isEmpty || (isCaptchaRequired && (atachedCaptcha?.answer ?? "").isEmpty) {
+            loginRetries += 1
             return
         }
         
         if isBlocked(userName: login) {
             output?.userStillBlocked(user: login)
+            loginRetries += 1
             return
         } else if (maxAttemps <= attempts) {
             output?.allAttemtsExhausted(user: login)
+            loginRetries += 1
             return
         }
+        
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
             analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
-            output?.failLogin(message: TextConstants.loginScreenInvalidLoginError)
+            output?.fieldError(type: .loginIsNotValid)
             return
         }
+        
+        self.login = login
+        self.password = password
         
         let user = AuthenticationUser(login: login,
                                       password: password,
                                       rememberMe: true,
-            attachedCaptcha: atachedCaptcha)
+                                      attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
@@ -94,59 +136,35 @@ class LoginInteractor: LoginInteractorInput {
                 self.analyticsService.trackLoginEvent(loginType: .gsm)
             }
             
+            self.loginRetries = 0
+            
+            self.accountService.updateBrandType()
+            
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
-        }, fail: { errorResponse  in
-            errorHandler(errorResponse)
-        })
-    }
-    
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] errorResponse in
-        
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-                
-                let loginError = LoginResponseError(with: errorResponse)
-                
-                self.analyticsService.trackLoginEvent(error: loginError)
-                
-                switch loginError {
-                case .block:
-                    self.output?.failedBlockError()
-                case .needCaptcha:
-                    self.output?.needShowCaptcha()
-                case .authenticationDisabledForAccount:
-                    self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
-                case .needSignUp:
-                    self.output?.needSignUp(message: TextConstants.loginScreenNeedSignUpError)
-                case .incorrectUsernamePassword:
-                    self.attempts += 1
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
-                case .incorrectCaptcha:
-                    self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
-                case .networkError, .serverError:
-                    self.output?.failLogin(message: errorResponse.description)
-                case .unauthorized:
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
-                case .noInternetConnection:
-                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
-                case .emptyPhone:
-                    self.login = login
-                    self.password = password
-                    self.atachedCaptcha = atachedCaptcha
-                    self.output?.openEmptyPhone()
-                }
+            
+        }, fail: { [weak self] errorResponse in
+            let loginError = LoginResponseError(with: errorResponse)
+            self?.analyticsService.trackLoginEvent(error: loginError)
+            
+            if !(loginError == .needCaptcha || loginError == .noInternetConnection) {
+                self?.loginRetries += 1
             }
-        }
-    }
-    
-    func trackScreen() {
-        analyticsService.logScreen(screen: .loginScreen)
-        analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
+            
+            if loginError == .incorrectUsernamePassword {
+                self?.attempts += 1
+            }
+            
+            errorHandler(loginError, errorResponse.description)
+        }, twoFactorAuth: { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            
+            self.tokenStorage.isRememberMe = self.rememberMe
+            self.output?.showTwoFactorAuthViewController(response: response)
+        })
     }
     
     private func setContactSettingsForUser() {
@@ -159,28 +177,17 @@ class LoginInteractor: LoginInteractorInput {
         contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
     }
     
-    func blockUser(user: String) {
-        attempts = 0
-        if let blockedUsers = dataStorage.blockedUsers {
-            let blockedUsersDic = NSMutableDictionary(dictionary: blockedUsers)
-            blockedUsersDic[user] = Date()
-            dataStorage.blockedUsers = blockedUsersDic
-        } else {
-            dataStorage.blockedUsers = [user: Date()]
-        }
-    }
-    
     private func isBlocked(userName: String) -> Bool {
-        guard let blockedUsers = dataStorage.blockedUsers, let blokedDate = blockedUsers[userName] as? Date else {
+        guard let blockedDate = blockedUsers[userName] else {
             return false
         }
         
         let currentTime = Date()
-        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(blokedDate)
+        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(blockedDate)
         if timeIntervalFromBlockDate / 60 >= 60 {
-            let blockedUsersDic = NSMutableDictionary(dictionary: blockedUsers)
-            blockedUsersDic.removeObject(forKey: userName)
-            dataStorage.blockedUsers = blockedUsersDic
+            var blockedUsersDic = blockedUsers
+            blockedUsersDic.removeValue(forKey: userName)
+            blockedUsers = blockedUsersDic
             return false
         }
         return true
@@ -189,6 +196,71 @@ class LoginInteractor: LoginInteractorInput {
     private func emptyEmailCheck(for headers: [String: Any]) {
         if let warning = headers[HeaderConstant.accountWarning] as? String, warning == HeaderConstant.emptyEmail {
             self.isShowEmptyEmail = true
+        }
+    }
+    
+    private func silentLogin(token: String) {
+        authenticationService.silentLogin(token: token, success: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.accountService.updateBrandType()
+                
+                self.tokenStorage.isRememberMe = self.rememberMe
+                self.output?.succesLogin()
+            }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async { [weak self] in
+                    self?.tryToRelogin()
+                }
+        })
+    }
+    
+    func tryToRelogin() {
+        guard let login = login, let password = password else {
+            assertionFailure()
+            return
+        }
+        
+        authificate(login: login, password: password, atachedCaptcha: nil) { _, _ in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.output?.successedVerifyPhone()
+            }
+        }
+    }
+    
+    //MARK: LoginInteractorInput
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
+        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.processLoginError(loginError, errorText: errorText)
+            }
+        }
+    }
+        
+    func trackScreen() {
+        analyticsService.logScreen(screen: .loginScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
+    }
+    
+    func rememberMe(state: Bool) {
+        rememberMe = state
+    }
+    
+    func blockUser(user: String) {
+        attempts = 0
+        if blockedUsers.count == 0 {
+            blockedUsers = [user : Date()]
+        } else {
+            var blockedUsersDic = blockedUsers
+            blockedUsersDic[user] = Date()
+            blockedUsers = blockedUsersDic
         }
     }
     
@@ -205,19 +277,28 @@ class LoginInteractor: LoginInteractorInput {
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
+//    func approveEULA(eulaId: Int, etkAuth: Bool, globalPermAuth: Bool) {
+//        eulaService.eulaApprove(eulaId: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
+//            //TODO:
+//        }) { [weak self] failResponse in {
+//            //TODO:
+//            }
+//        }
+//    }
+    
     func checkEULA() {
-        eulaService.eulaCheck(success: { [weak self] succesResponce in
+        eulaService.eulaCheck(success: { [weak self] successResponse in
             DispatchQueue.main.async {
                 self?.output?.onSuccessEULA()
             }
-        }) { [weak self] failResponce in
+        }) { [weak self] failResponse in
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
-                if failResponce.description == "EULA_APPROVE_REQUIRED" {
+                if failResponse.description == "EULA_APPROVE_REQUIRED" {
                     self?.output?.onFailEULA()
                 } else {
-                    UIApplication.showErrorAlert(message: failResponce.description)
+                    UIApplication.showErrorAlert(message: failResponse.description)
                 }
             }
         }
@@ -233,61 +314,6 @@ class LoginInteractor: LoginInteractorInput {
     func eraseBlockTime(forUserName name: String) {
 //        attempts = 0
 //        dataStorage.blockDate = nil
-    }
-    
-    let accountService = AccountService()
-    
-    func getTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(tokenUpdatePhone: signUpResponce)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output?.failedUpdatePhone(errorResponse: error)
-            }
-        })
-    }
-    
-    func getResendTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(resendUpdatePhone: signUpResponce)
-            }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output?.failedResendUpdatePhone(errorResponse: error)
-                }
-        })
-    }
-    
-    func verifyPhoneNumber(token: String, code: String) {
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
-            
-            if let response = baseResponse as? ObjectRequestResponse,
-                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
-                
-                self?.silentLogin(token: silentToken)
-            } else {
-                DispatchQueue.main.async {
-                    self?.tryToRelogin()
-                }
-            }
-            
-        }) { [weak self] errorRespose in
-            DispatchQueue.main.async {
-                self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
-            }
-        }
     }
     
     func updateUserLanguage() {
@@ -328,40 +354,13 @@ class LoginInteractor: LoginInteractorInput {
 //        }
     }
     
-    private func silentLogin(token: String) {
-        authenticationService.silentLogin(token: token, success: { [weak self] in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.tokenStorage.isRememberMe = self.rememberMe
-                self.output?.successedSilentLogin()
-                self.output?.succesLogin()
-            }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async { [weak self] in
-                self?.tryToRelogin()
-            }
-        })
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
+        accountWarningService = AccountWarningService(delegate: delegate)
+        accountWarningService?.start()
     }
     
-    private func tryToRelogin() {
-        guard let login = login, let password = password else {
-            assertionFailure()
-            return
-        }
-        
-        authificate(login: login, password: password, atachedCaptcha: nil) { [weak self] errorResponse in
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-                
-                let loginError = LoginResponseError(with: errorResponse)
-                self.analyticsService.trackLoginEvent(error: loginError)
-                self.output?.successedVerifyPhone()
-            }
-        }
+    func stopUpdatePhone() {
+        accountWarningService?.stop()
     }
     
 }

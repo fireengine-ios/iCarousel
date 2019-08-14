@@ -36,8 +36,11 @@ struct AccountJSONConstants {
     static let objectCount = "objectCount"
     static let projectID = "projectId"
     
+    static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
+    static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -60,6 +63,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var projectID: String?
     var gapId: String?
     
+    var emailVerificationRemainingDays: Int?
+    
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
             return number.contains("+") ? number : "+\(code)\(number)"
@@ -74,15 +79,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         cellografId = json?[AccountJSONConstants.cellografId].string
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
-        
-        ///---changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
-        if let actualSurNaame = json?[AccountJSONConstants.surname].string,
-                !actualSurNaame.isEmpty {
-            name = (name ?? "") + " " + actualSurNaame
-        }
-        surname = ""
-        ///---
-        
+        surname = json?[AccountJSONConstants.surname].string
         username = json?[AccountJSONConstants.username].string
         dob = json?[AccountJSONConstants.birthday].string
         accountType = json?[AccountJSONConstants.accountType].string
@@ -93,18 +90,29 @@ class AccountInfoResponse: ObjectRequestResponse {
         emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
+        emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
     }
 }
 
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?
     var mobileNetworkAuthEnabled: Bool?
+    var twoFactorAuthEnabled: Bool?
     
     override func mapping() {
         turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
         mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        twoFactorAuthEnabled = json?[AccountJSONConstants.twoFactorAuthEnabled].bool
     }
     
+}
+
+enum SettingsInfoPermissionsJsonKeys {
+    static let faceImage = "faceImageRecognitionAllowed"
+    static let faceImageStatus = "faceImageRecognitionAllowedStatus"
+    static let facebook = "facebookTaggingEnabled"
+    static let facebookStatus = "facebookTaggingEnabledStatus"
+    static let instapick = "instapickAllowed"
 }
 
 final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
@@ -117,20 +125,38 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     
     private let jsonStatusOK = "OK"
     
+    override func mapping() {
+        isFaceImageAllowed = json?[SettingsInfoPermissionsJsonKeys.faceImage].bool
+        isFaceImageRecognitionAllowedStatus = json?[SettingsInfoPermissionsJsonKeys.faceImageStatus].string == jsonStatusOK ? true : false
+        isFacebookAllowed = json?[SettingsInfoPermissionsJsonKeys.facebook].bool
+        isFacebookTaggingEnabledStatus = json?[SettingsInfoPermissionsJsonKeys.facebookStatus].string == jsonStatusOK ? true : false
+        isInstapickAllowed = json?[SettingsInfoPermissionsJsonKeys.instapick].bool
+    }
+}
+
+final class SettingsPermissionsResponse: ObjectRequestResponse {
+
+    var type: PermissionType?
+    var isAllowed: Bool?
+    var isApproved: Bool?
+    var isApprovalPending: Bool?
+    
     private enum ResponseKeys {
-        static let faceImage = "faceImageRecognitionAllowed"
-        static let faceImageStatus = "faceImageRecognitionAllowedStatus"
-        static let facebook = "facebookTaggingEnabled"
-        static let facebookStatus = "facebookTaggingEnabledStatus"
-        static let instapick = "instapickAllowed"
+        static let type = "type"
+        static let isAllowed = "allowed"
+        static let isApproved = "approved"
+        static let isApprovalPending = "approvalPending"
     }
     
     override func mapping() {
-        isFaceImageAllowed = json?[ResponseKeys.faceImage].bool
-        isFaceImageRecognitionAllowedStatus = json?[ResponseKeys.faceImageStatus].string == jsonStatusOK ? true : false
-        isFacebookAllowed = json?[ResponseKeys.facebook].bool
-        isFacebookTaggingEnabledStatus = json?[ResponseKeys.facebookStatus].string == jsonStatusOK ? true : false
-        isInstapickAllowed = json?[ResponseKeys.instapick].bool
+        guard let typeString = json?[ResponseKeys.type].string else {
+            return
+        }
+        
+        type = PermissionType(rawValue: typeString)
+        isAllowed = json?[ResponseKeys.isAllowed].bool
+        isApproved = json?[ResponseKeys.isApproved].bool
+        isApprovalPending = json?[ResponseKeys.isApprovalPending].bool
     }
 }
 
@@ -391,6 +417,41 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
     }
     
+}
+
+final class FeedbackEmailResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: String?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        value = json?[ResponseKey.value].string
+    }
+}
+
+final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let remainingTimeInSeconds = "remainingTimeInSeconds"
+        static let expectedInputLength = "expectedInputLength"
+    }
+    
+    var status: String?
+    var remainingTimeInSeconds: Int?
+    var expectedInputLength: Int?
+
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
+        expectedInputLength = json?[ResponseKey.expectedInputLength].int
+    }
 }
 
 /// MAYBE WILL BE USED

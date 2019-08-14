@@ -19,3 +19,8 @@ enum ResponseResult <T> {
     case success(T)
     case failed(Error)
 }
+
+enum ErrorResult<Success, Failure> where Failure: Error {
+    case success(Success)
+    case failure(Failure)
+}

@@ -13,65 +13,47 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
 
     var output: ForgotPasswordViewOutput!
     
-    @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var subTitle: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var viewForCapcha: UIView!
-    @IBOutlet weak var capchaViewH: NSLayoutConstraint!
-    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var captchaModuleView = CaptchaViewController.initFromXib()
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var infoTitle: UILabel!
+   
+    @IBOutlet weak var emailTitle: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
     
-    private var originBottomH: CGFloat = -1
-
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+    @IBOutlet private weak var captchaView: CaptchaView!
+    
+    @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
 
     fileprivate let keyboard = Typist.shared
 
     // MARK: Life cycle
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.forgotPasswordTitle)
+            setTitle(withString: TextConstants.resetPasswordTitle)
         }
-        self.tableView?.backgroundColor = UIColor.clear
-        
-        sendPasswordButton.setTitle(TextConstants.forgotPasswordSendPassword, for: UIControlState.normal)
-        
-        
-        let nib = UINib(nibName: "inputCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
         
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
-        viewForCapcha.addSubview(captchaModuleView.view)
-        captchaModuleView.view.frame = viewForCapcha.bounds
-        capchaViewH.constant = 132
-        
-        
         output.viewIsReady()
-        
         configureKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hidenNavigationBarStyle()
+        navigationBarWithGradientStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        originBottomH = bottomSpace.constant
-        
-        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-        guard let baseCell = cell as? BaseUserInputCellView else {
-            return
-        }
-        baseCell.textInputField.becomeFirstResponder()
+        emailTextField.becomeFirstResponder()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -83,28 +65,111 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     func setupVisableSubTitle() {
+        updateSubTitleForTurkcell()
+    }
+    
+    func setupVisableTexts() {
+        setupInfoTitle()
         setupSubTitle()
+        setupEmailTitle()
+        setupEmailField()
+        setupButton()
+        setupCaptchaView()
     }
     
     private func setupSubTitle() {
-        subTitle.isHidden = false
+        subTitle.text = TextConstants.resetPasswordSubTitle
         
-        if Locale.current.languageCode == "en" || Locale.current.languageCode == "tr" {
-            subTitle.text = TextConstants.forgotPasswordSubTitle
-        } else {
-            subTitle.text = ""
-        }
+        subTitle.textColor = ColorConstants.removeConnection
         
-        subTitle.textColor = ColorConstants.whiteColor
-        if (Device.isIpad) {
-            
-            subTitle.font = UIFont.TurkcellSaturaDemFont(size: 24)
+        if Device.isIpad {
+            subTitle.font = UIFont.TurkcellSaturaRegFont(size: 24)
+            subTitle.textAlignment = .center
         } else {
-            subTitle.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            subTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
             subTitle.textAlignment = .left
         }
     }
     
+    private func updateSubTitleForTurkcell() {        
+        subTitle.text = TextConstants.forgotPasswordSubTitle
+    }
+    
+    private func setupInfoTitle() {
+        
+        infoTitle.text = TextConstants.resetPasswordInfo
+        
+        infoTitle.textColor = UIColor.black
+        if Device.isIpad {
+            infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            infoTitle.textAlignment = .center
+        } else {
+            infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 15)
+            infoTitle.textAlignment = .left
+        }
+    }
+    
+    private func setupEmailTitle() {
+        
+        emailTitle.text = TextConstants.resetPasswordEmailTitle
+        
+        emailTitle.textColor = UIColor.lrTealishTwo
+        if Device.isIpad {
+            emailTitle.font = UIFont.TurkcellSaturaDemFont(size: 24)
+            emailTitle.textAlignment = .center
+        } else {
+            emailTitle.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            emailTitle.textAlignment = .left
+        }
+    }
+    
+    private func setupEmailField() {
+        
+        var font = UIFont.TurkcellSaturaRegFont(size: 18)
+        
+        if Device.isIpad {
+            font = UIFont.TurkcellSaturaRegFont(size: 24)
+        }
+        
+        emailTextField.attributedPlaceholder = NSAttributedString(string: TextConstants.resetPasswordEmailPlaceholder,
+                                                               attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled,
+                                                                            NSAttributedString.Key.font: font])
+        
+        emailTextField.textColor = UIColor.black
+        emailTextField.font = font
+        emailTextField.delegate = self
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    private func setupButton() {
+        sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: UIControlState.normal)
+        sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
+        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+
+        updateButtonState()
+    }
+    
+    private func setupCaptchaView() {
+        captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
+        captchaView.captchaAnswerTextField.delegate = self
+        captchaView.captchaAnswerTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc private func textFieldDidChange() {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        guard !(emailTextField.text?.isEmpty ?? true),
+              !(captchaView.captchaAnswerTextField.text?.isEmpty ?? true) else {
+                sendPasswordButton.isEnabled = false
+                return
+        }
+        sendPasswordButton.isEnabled = true
+    }
+
     deinit {
         keyboard.stop()
     }
@@ -140,7 +205,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
-        bottomSpace.constant = originBottomH
         view.layoutIfNeeded()
     }
 
@@ -167,73 +231,35 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     func showCapcha() {
-        captchaModuleView.refreshCapthcha()
-        captchaModuleView.inputTextField.text = ""
-//        UIView.animate(withDuration: NumericConstants.animationDuration) {
-//            let dyTop = CGFloat(100.0)
-//            var dyBottom = CGFloat(0.0)
-//            if (self.subTitle.frame.origin.y < 164.0){
-//                dyBottom = CGFloat(164.0) - abs(self.subTitle.frame.origin.y)
-//                self.bottomSpace.constant = dyBottom
-//            }
-//            self.capchaViewH.constant = dyTop
-//            self.view.layoutIfNeeded()
-//        }
+        captchaView.updateCaptcha()
+        updateButtonState()
     }
     
     // MARK: Buttons actions 
     
     @IBAction func onSendPasswordButton() {
         endEditing()
-        let captchaUdid = captchaModuleView.currentCaptchaID
-        let captchaEntered = captchaModuleView.inputTextField.text
-        output.onSendPassword(withEmail: obtainEmail(), enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
-    }
-    
-    private func obtainEmail() -> String {
-        let mailCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! BaseUserInputCellView
         
-        return mailCell.textInputField.text ?? ""
+        let captchaUdid = captchaView.currentCaptchaUUID
+        let captchaEntered = captchaView.captchaAnswerTextField.text
+        
+        output.onSendPassword(withEmail: emailTextField.text ?? "", enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: UITextFieldDelegate
 
-extension ForgotPasswordViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88.0
-    }
-}
-
-// MARK: UITableViewDataSource
-
-extension ForgotPasswordViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 1
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
-                                                 for: indexPath) as! BaseUserInputCellView
-        cell.textDelegate = self
-        cell.titleLabel.textColor = ColorConstants.whiteColor
-        cell.titleLabel.text = TextConstants.forgotPasswordCellTitle
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.textInputField.returnKeyType = .next
-        cell.textInputField.autocorrectionType = .no
-        cell.textInputField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.whiteColor])
-        return cell
-    }
-}
-
-// MARK: ProtoInputCellProtocol
-
-extension ForgotPasswordViewController: ProtoInputCellProtocol {
-    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
-        captchaModuleView.inputTextField.becomeFirstResponder()
-        scrollToFirstResponderIfNeeded(animated: true)
-    }
-
-    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+extension ForgotPasswordViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        if emailTextField == textField {
+            captchaView.captchaAnswerTextField.becomeFirstResponder()
+            scrollToFirstResponderIfNeeded(animated: true)
+        } else {
+            onSendPasswordButton()
+        }
+        return true
     }
 }

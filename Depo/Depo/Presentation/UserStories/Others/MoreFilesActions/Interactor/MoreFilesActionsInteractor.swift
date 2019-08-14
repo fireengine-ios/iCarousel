@@ -48,26 +48,28 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareSmallSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
+        if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
+            let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareSmallSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            
+            controler.addAction(smallAction)
+            
+            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
+                MenloworksAppEvents.onShareClicked()
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareOrignalSize(sourceRect: sourceRect)
+                    }, cancel: {}, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            controler.addAction(originalAction)
         }
-        
-        controler.addAction(smallAction)
-        
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareOrignalSize(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
-        }
-        controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
@@ -134,6 +136,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     
                     MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
                     
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                              eventActions: .share,
+                                                              eventLabel: .shareViaApp(activityTypeString.knownAppName()))
+
                     do {
                         try FileManager.default.removeItem(at: directoryURL)
                     } catch {
@@ -164,6 +170,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
+        
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                 eventActions: .share,
+                                                 eventLabel: .shareViaLink)
+        
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
@@ -459,9 +470,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         if let item = item as? [Item] {
             //FIXME: transform all to BaseDataSourceItem
-            if let item = item.first,
-                item.fileType.isFaceImageAlbum ||
-                    item.fileType.isFaceImageType {
+            if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
             } else {
                 fileService.download(items: item, toPath: "",
@@ -469,8 +478,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
-            
+            output?.startAsyncOperationDisableScreen()
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
+                self?.output?.completeAsyncOperationEnableScreen()
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                            success: self?.succesAction(elementType: .download),
                                            fail: self?.failAction(elementType: .download))
@@ -479,9 +489,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func createStory(items: [BaseDataSourceItem]) {
-        sync(items: items, action: { [weak self] in
+        sync(items: items, action: {
             DispatchQueue.main.async {
-                self?.router.createStoryName(items: items)
+                guard let items = items as? [Item] else {
+                    let error = CustomErrors.text("An error has occured while images converting.")
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    return
+                }
+                
+                let router = RouterVC()
+                let controller = router.createStory(items: items)
+                router.pushViewController(viewController: controller)
             }
             }, cancel: {}, fail: { errorResponse in
                 UIApplication.showErrorAlert(message: errorResponse.description)
@@ -657,7 +675,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
-                    self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
                 } else {
                     self?.output?.operationFailed(type: elementType, message: value.description)
                 }

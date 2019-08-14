@@ -16,6 +16,8 @@ protocol SettingsRouterInput {
     
     func goToConnectedAccounts()
     
+    func goToPermissions()
+    
     func goToAutoApload()
     
     func goToPeriodicContactSync()
@@ -24,14 +26,16 @@ protocol SettingsRouterInput {
     
     func goToHelpAndSupport()
     
+    func goToTermsAndPolicy()
+    
     func goToUsageInfo()
     
     func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
     func goToActivityTimeline()
     
-    func goToPackages()
-    
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
+
     func goToPremium()
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)
@@ -42,7 +46,7 @@ protocol SettingsRouterInput {
 
     func goToConnectedToNetworkFailed()
     
-    func goTurkcellSecurity()
+    func goTurkcellSecurity(isTurkcell: Bool)
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     

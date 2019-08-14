@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewDataSourceDelegate {
+protocol BaseCollectionViewDataSourceDelegate: class {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -16,12 +16,12 @@ protocol BaseCollectionViewDataSourceDelegate {
     func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
-class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol, UICollectionViewDelegate {
+class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
     
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
-    var delegate: BaseCollectionViewDataSourceDelegate?
+    weak var delegate: BaseCollectionViewDataSourceDelegate?
     
     var viewsByType = [OperationType: [BaseView]]()
     
@@ -34,7 +34,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
-        self.collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = self
         self.delegate = delegate
         
@@ -46,71 +46,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 layout.numberOfColumns = 1
             }
         }
-        
+        let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
         collectionView.reloadData()
     }
     
-    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        if (isPopUpCell(path: indexPath)) {
-            let popUpView = popUps[indexPath.row]
-            popUpView.frame.size = CGSize(width: withWidth, height: popUpView.frame.size.height)
-            popUpView.layoutIfNeeded()
-            return popUpView.calculatedH
-        }
-        return 40
-    }
-    
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return 0.1
-        // TODO: clean project from HomeViewTopView and collectionView delegates from it
-        /// to show home buttons
-        //return HomeViewTopView.getHeight()
-    }
-    
     func isPopUpCell(path: IndexPath) -> Bool {
         return path.row < popUps.count
-    }
-    
-    //MARK UICollectionView delegate
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popUps.count
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if (self.delegate != nil) {
-            return self.delegate!.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
-        }
-        assert(false, "Unexpected element kind")
-        return UICollectionReusableView()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForController, for: indexPath)
-        guard let baseCell = cell as? CollectionViewCellForController else {
-            return cell
-        }
-        
-        baseCell.setStateToDefault()
-        baseCell.cellDelegate = self
-        let popUpView = popUps[indexPath.row]
-        baseCell.addViewOnCell(controllersView: popUpView)
-        popUpView.viewWillShow()
-        baseCell.willDisplay()
-        return baseCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let baseCell = cell as? CollectionViewCellForController else {
-            return
-        }
-        baseCell.didEndDisplay()
     }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
@@ -410,4 +354,65 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             notPermittedPopUpViewTypes.insert(operationName)
         }
     }    
+}
+//MARK UICollectionView datasource/delegate
+extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return popUps.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (self.delegate != nil) {
+            return self.delegate!.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        }
+        assert(false, "Unexpected element kind")
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForController, for: indexPath)
+        guard let baseCell = cell as? CollectionViewCellForController else {
+            return cell
+        }
+        
+        baseCell.setStateToDefault()
+        baseCell.cellDelegate = self
+        let popUpView = popUps[indexPath.row]
+        baseCell.addViewOnCell(controllersView: popUpView)
+        popUpView.viewWillShow()
+        baseCell.willDisplay()
+        return baseCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let baseCell = cell as? CollectionViewCellForController else {
+            return
+        }
+        baseCell.didEndDisplay()
+    }
+}
+
+//MARK UICollectionView Layout delegate
+extension BaseCollectionViewDataSource: CollectionViewLayoutDelegate {
+    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
+        if (isPopUpCell(path: indexPath)) {
+            let popUpView = popUps[indexPath.row]
+            popUpView.frame.size = CGSize(width: withWidth, height: popUpView.frame.size.height)
+            popUpView.layoutIfNeeded()
+            return popUpView.calculatedH
+        }
+        return 40
+    }
+    
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
+        return 0.1
+        // TODO: clean project from HomeViewTopView and collectionView delegates from it
+        /// to show home buttons
+        //return HomeViewTopView.getHeight()
+    }
 }

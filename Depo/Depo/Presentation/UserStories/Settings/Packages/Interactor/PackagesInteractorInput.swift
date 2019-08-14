@@ -26,6 +26,5 @@ protocol PackagesInteractorInput {
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 
-    func getStorageCapacity()
     func getUserAuthority()
 }

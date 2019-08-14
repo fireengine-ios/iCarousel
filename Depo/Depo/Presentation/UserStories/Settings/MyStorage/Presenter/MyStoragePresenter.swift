@@ -66,12 +66,10 @@ final class MyStoragePresenter {
 extension MyStoragePresenter: MyStorageViewOutput {
     func viewDidLoad() {
         view?.startActivityIndicator()
+        calculateProgress()
+        interactor.trackScreen()
         interactor.getAccountType()
         interactor.getUsage()
-
-        if usage != nil {
-            calculateProgress()
-        }
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -80,11 +78,15 @@ extension MyStoragePresenter: MyStorageViewOutput {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
-        if type != .apple {
+        
+        if type == .SLCM {
+            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+            router?.showCancelOfferAlert(with: cancelText)
+        } else if type == .apple {
+            router?.showCancelOfferApple()
+        } else {
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
-        } else {
-            router?.showCancelOfferApple()
         }
     }
     

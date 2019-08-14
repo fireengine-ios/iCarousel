@@ -11,6 +11,8 @@ import CoreGraphics
 
 struct NumericConstants {
     
+    static let maximumApiConnections = 10
+    
     static let vereficationCharacterLimit = 6
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
@@ -26,7 +28,7 @@ struct NumericConstants {
     static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 2
     static let iPadGreedHorizontalSpace: CGFloat = 1
-    static let numerCellInLineOnIpad: CGFloat = 8
+    static let numerCellInLineOnIpad: CGFloat = 6
     static let numerCellInDocumentLineOnIpad: CGFloat = 4
     static let maxNumberPhotosInStory: Int = 20
     static let maxNumberAudioInStory: Int = 1
@@ -75,8 +77,6 @@ struct NumericConstants {
     
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
-    
-    static let emptyEmailUserCloseLimit = 3
     
     static let logDuration: TimeInterval = 24 * 60 * 60 * 3
     static let logMaxSize: UInt64 = 5_242_880
@@ -147,10 +147,22 @@ struct NumericConstants {
     static let usageInfoCollectionViewCellsOffset: CGFloat = 0
 
     static let progressViewBackgroundColorAlpha: CGFloat = 0.25
+    
+    static let maxStringLengthForUserProfile = 255
+    
+    static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
+    static let profileStackViewShowSubtitleSpacing: CGFloat = 2
+    static let firstResponderBottomOffset: CGFloat = 50
+    
+    static let createStoryImagesCountLimit: Int = 20
+    
+    static let numberOfSelectedItemsBeforeLimits = 500
+    
+    static let spotifyImportMinShowTimeinterval = 3.0
 }
 
 struct RequestSizeConstant {
-    
     static let faceImageItemsRequestSize = 100
+    static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
     
 }

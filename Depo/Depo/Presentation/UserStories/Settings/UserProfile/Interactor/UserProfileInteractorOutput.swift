@@ -20,5 +20,5 @@ protocol UserProfileInteractorOutput: class {
     
     func showError(error: String)
     
-    func dataWasUpdate()
+    func dataWasUpdated()
 }

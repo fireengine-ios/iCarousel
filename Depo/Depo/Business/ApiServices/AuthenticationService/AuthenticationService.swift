@@ -12,6 +12,7 @@ import Alamofire
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
+typealias TwoFactorAuthResponce = (_ value: TwoFactorAuthErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -102,24 +103,32 @@ class SignUpUser: BaseRequestParametrs {
     let phone: String
     let mail: String
     let password: String
-    let eulaId: Int
+    let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
-    
+    var brandType: String {
+        #if LIFEDRIVE 
+            return "LIFEDRIVE"
+        #else
+            return "LIFEBOX"
+        #endif
+    }
+
     override var requestParametrs: Any {
         return [
             LbRequestkeys.email: mail,
             LbRequestkeys.phoneNumber: phone,
             LbRequestkeys.password: password,
             LbRequestkeys.language: Device.locale,
-            LbRequestkeys.eulaId: eulaId
+            LbRequestkeys.sendOtp: sendOtp,
+            LbRequestkeys.brandType: brandType
         ]
     }
 
     override var header: RequestHeaderParametrs {
         guard let unwrapedCaptchaID = captchaID,
             let unwrapedCaptchaAnswer = captchaAnswer else {
-              return RequestHeaders.authification()
+                return RequestHeaders.authification()
         }
         return RequestHeaders.authificationWithCaptcha(id: unwrapedCaptchaID, answer: unwrapedCaptchaAnswer)
     }
@@ -128,13 +137,22 @@ class SignUpUser: BaseRequestParametrs {
         return URL(string: RouteRequests.signUp, relativeTo: super.patch)!
     }
 
-    init(phone: String, mail: String, password: String, eulaId: Int, captchaID: String? = nil, captchaAnswer: String? = nil) {
+    init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
-        self.eulaId = eulaId
+        self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
+    }
+    
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool) {
+        self.phone = registrationUserInfo.phone
+        self.mail = registrationUserInfo.mail
+        self.password = registrationUserInfo.password
+        self.sendOtp = sentOtp
+        self.captchaID = registrationUserInfo.captchaID
+        self.captchaAnswer = registrationUserInfo.captchaAnswer
     }
 }
 
@@ -145,16 +163,10 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     
     let token: String
     let otp: String
-    let processPersonalData: Bool
-    let etkAuth: Bool?
     
     var requestParametrs: Any {
-        var dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp,
-                                   LbRequestkeys.processPersonalData : processPersonalData]
-        if let etkAuth = etkAuth {
-            dict[LbRequestkeys.etkAuth] = etkAuth
-        }
+        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+                                   LbRequestkeys.otp                 : otp]
 
         return dict
     }
@@ -242,9 +254,17 @@ struct ResendVerificationSMS: RequestParametrs {
     }
     
     let refreshToken: String
+    let eulaId: Int
+    let processPersonalData: Bool
+    let etkAuth: Bool
+    let globalPermAuth: Bool
     
     var requestParametrs: Any {
-        return [LbRequestkeys.referenceToken : refreshToken]
+        return [LbRequestkeys.referenceToken : refreshToken,
+                LbRequestkeys.eulaId : eulaId,
+                LbRequestkeys.processPersonalData : processPersonalData,
+                LbRequestkeys.etkAuth : etkAuth,
+                LbRequestkeys.globalPermAuth: globalPermAuth]
     }
     
     var patch: URL {
@@ -273,7 +293,7 @@ class AuthenticationService: BaseRequestService {
 
     // MARK: - Login
     
-    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
+    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponce?) {
         debugLog("AuthenticationService loginUser")
         
         storageVars.currentUserID = user.login
@@ -311,7 +331,28 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
+                        
+                        if let statusCode = response.response?.statusCode,
+                            statusCode >= 300, statusCode != 403,
+                            let data = response.data,
+                            let jsonString = String(data: data, encoding: .utf8) {
+                            
+                            fail?(ErrorResponse.string(jsonString))
+                            return
+                        }
+                        
+                        if let statusCode = response.response?.statusCode, statusCode == 403 {
+                            
+                            guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
+                                assertionFailure()
+                                return
+                            }
+                            twoFactorAuth?(resp)
+                            return
+                        }
+                        
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                            CacheManager.shared.actualizeCache(completion: nil)
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -342,6 +383,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -363,10 +405,9 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            CoreDataStack.default.clearDataBase()
-            FreeAppSpace.default.clear()
-            CardsManager.default.stopAllOperations()
-            CardsManager.default.clear()
+            CellImageManager.clear()
+            FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
+            FreeAppSpace.session.handleLogout()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()
@@ -374,19 +415,25 @@ class AuthenticationService: BaseRequestService {
             AuthoritySingleton.shared.clear()
             storageVars.autoSyncSet = false
             SingletonStorage.shared.accountInfo = nil
+            SingletonStorage.shared.isJustRegistered = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
 //            ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
+            CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
+            
             self.player.stop()
             self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
-            self.storageVars.emptyEmailUp = false
             
-            success?()
+            CacheManager.shared.logout {
+                WormholePoster().didLogout()
+                success?()
+            }
         }
         if async {
             DispatchQueue.main.async {
@@ -431,7 +478,7 @@ class AuthenticationService: BaseRequestService {
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService resendVerificationSMS")
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     
@@ -524,6 +571,103 @@ class AuthenticationService: BaseRequestService {
                      encoding: JSONEncoding.default)
             .responseString { [weak self] response in
                 self?.loginHandler(response, success, fail)
+        }
+    }
+    
+    func twoFactorAuthChallenge(token: String,
+                                authenticatorId: String,
+                                type: String,
+                                handler: @escaping (ResponseResult<TwoFAChallengeParametersResponse>) -> Void) {
+        debugLog("AuthenticationService twoFactorAuthChallenge")
+        
+        let params: [String: Any] = [
+            "token" : token,
+            "authenticatorId" : authenticatorId,
+            "type" : type,
+        ]
+        
+        SessionManager.customDefault
+            .request(RouteRequests.twoFactorAuthChallenge,
+                     method: .post,
+                      parameters: params,
+                     encoding: JSONEncoding.default)
+            .responseData { response in
+                
+                ///with 401 server error response.result is success but data = nil
+                if response.response?.statusCode == 401 {
+                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                    handler(.failed(error))
+                    return
+                }
+                
+                switch response.result {
+                case .success(let data):
+                    let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                    handler(.success(model))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            }
+    }
+    
+    func loginViaTwoFactorAuth(token: String,
+                               challengeType: String,
+                               otpCode: String,
+                               handler: @escaping ResponseVoid) {
+        debugLog("AuthenticationService loginViaTwoFactorAuth")
+        
+        let params: [String: Any] = [
+            "token"         : token,
+            "challengeType" : challengeType,
+            "otpCode"       : otpCode,
+        ]
+        
+        sessionManagerWithoutToken
+            .request(RouteRequests.twoFactorAuthLogin,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.default)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data: data)
+                    if let errorType = json["errorType"].string {
+                        handler(.failed(ErrorResponse.string(errorType)))
+                        
+                    } else {
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            handler(.failed(error))
+                            return
+                        }
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                            self.tokenStorage.accessToken = accessToken
+                        }
+                        
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                            self.tokenStorage.refreshToken = refreshToken
+                        }
+                        
+                        /// must be after accessToken save logic
+                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                            accountWarning == HeaderConstant.emptyMSISDN ||
+                            accountWarning == HeaderConstant.emptyEmail {
+                                handler(.failed(ErrorResponse.string(accountWarning)))
+                                return
+                        }
+                        
+                        guard self.tokenStorage.refreshToken != nil else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            handler(.failed(error))
+                            return
+                        }
+                        
+                        handler(.success(()))
+                    }
+                    
+                case .failure(let error):
+                    handler(.failed(error))
+                }
         }
     }
 }

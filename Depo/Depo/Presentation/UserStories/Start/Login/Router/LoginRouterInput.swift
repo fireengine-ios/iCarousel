@@ -14,12 +14,19 @@ protocol LoginRouterInput {
     
     func goToHomePage()
     
-    func getCapcha() -> CaptchaViewController?
-    
     func goToTermsAndServices()
     
     func goToSyncSettingsView()
     
     func goToRegistration()
 
+    func showNeedSignUp(message: String, onClose: @escaping VoidHandler)
+    
+    func openSupport()
+    
+    func openEmptyEmail(successHandler: @escaping VoidHandler)
+        
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
+    
+    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
 }

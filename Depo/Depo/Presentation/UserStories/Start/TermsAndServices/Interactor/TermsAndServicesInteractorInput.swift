@@ -13,11 +13,13 @@ protocol TermsAndServicesInteractorInput {
     var signUpSuccessResponse: SignUpSuccessResponse { get }
     var userInfo: RegistrationUserInfoModel { get }
     var cameFromLogin: Bool { get }
+    var cameFromRegistration: Bool { get }
     var etkAuth: Bool?  { get set }
-    
+    var globalPermAuth: Bool?  { get set }
     func loadTermsAndUses()
-    func signUpUser()
-    func applyEula()
     func trackScreen()
     func checkEtk()
+    func applyEula()
+    func checkGlobalPerm()
+    func checkEtkAndGlobalPermissions()
 }

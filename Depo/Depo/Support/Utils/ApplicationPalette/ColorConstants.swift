@@ -19,6 +19,7 @@ struct ColorConstants {
     static let textLightGrayColor = UIColor(red: 95 / 255, green: 95 / 255, blue: 95 / 255, alpha: 0.5)
     static let greenColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 119 / 255, alpha: 1)
     static let lightGrayColor = UIColor(red: 216 / 255, green: 216 / 255, blue: 216 / 255, alpha: 1)
+    static let profileGrayColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1)
     static let selectedCellBlueColor = UIColor(red: 80 / 255, green: 220 / 255, blue: 220 / 255, alpha: 0.2)
     static let selectedBottomBarButtonColor = UIColor(red: 255 / 255, green: 171 / 255, blue: 141 / 255, alpha: 1)
     static let fileGreedCellColor = UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
@@ -38,6 +39,7 @@ struct ColorConstants {
     static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
     static let blackForLanding = UIColor(red: 12 / 255, green: 6 / 255, blue: 42 / 255, alpha: 1)
     static let darkGrayTransperentColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
+    static let lightGray = UIColor(red: 104.0 / 255.0, green: 108.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
     
     static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
@@ -52,6 +54,24 @@ struct ColorConstants {
     static let orangeGradient = UIColor(red: 255 / 255, green: 159 / 255, blue: 8 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
     static let removeConnection = UIColor(red: 130 / 255, green: 150 / 255, blue: 161 / 255, alpha: 1.0)
     static let connectedAs = UIColor(red: 10 / 255, green: 50 / 255, blue: 71 / 255, alpha: 1.0)
+    
+    static let errorOrangeGradientStart = UIColor(red: 255 / 255, green: 163 / 255, blue:  0, alpha: 1.0)
+    static let errorOrangeGradientEnd = UIColor(red: 255 / 255, green: 98 / 255, blue: 0, alpha: 1.0)
+    
+    static let alertBlueGradientStart = UIColor(red: 82 / 255, green: 120 / 255, blue:  243 / 255, alpha: 1.0)
+    static let alertBlueGradientEnd = UIColor(red: 41 / 255, green: 201 / 255, blue: 236 / 255, alpha: 1.0)
+    
+    static let cloudyBlue = UIColor(red: 197 / 255.0, green: 200.0 / 255.0, blue: 216 / 255.0, alpha: 1.0)
+    static let blueGrey = UIColor(red: 139 / 255.0, green: 143 / 255.0, blue: 164 / 255.0, alpha: 1.0)
+    static let coolGrey = UIColor(red: 179 / 255.0, green: 181 / 255.0, blue: 191 / 255.0, alpha: 1.0)
+    static let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
+    static let lighterGray = UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
+    static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
+    static let textDisabled = UIColor.black.withAlphaComponent(0.25)
+    
+    static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
+    static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
+    static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {
@@ -104,6 +124,13 @@ extension UIColor {
         return UIColor(red: 248.0 / 255.0, green: 194.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0)
     }
     
+    class var lrBrownishGrey: UIColor {
+        return UIColor(red: 95 / 255.0, green: 95 / 255.0, blue: 95 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrLightBrownishGrey: UIColor {
+        return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
+    }
 }
 
 // Text Font
@@ -128,5 +155,9 @@ extension UIFont {
     
     static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaMed", size: size)!
+    }
+    
+    static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
+        return UIFont(name: "TurkcellSatura", size: size)!
     }
 }

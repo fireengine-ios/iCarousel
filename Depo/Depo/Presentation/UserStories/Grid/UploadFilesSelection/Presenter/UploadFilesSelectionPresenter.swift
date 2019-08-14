@@ -35,6 +35,16 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         view?.stopRefresher()
     }
     
+    func newLocalItemsReceived(newItems: [BaseDataSourceItem]) {
+        guard let uploadDataSource  = dataSource as? UploadFilesSelectionDataSource,
+            !newItems.isEmpty else {
+                asyncOperationSuccess()
+            return
+        }
+        uploadDataSource.appendNewLocalItems(newItems: newItems)
+        asyncOperationSuccess()
+    }
+    
     override func onNextButton() {
         if !dataSource.selectedItemsArray.isEmpty {
             startAsyncOperation()

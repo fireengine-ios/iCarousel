@@ -38,16 +38,19 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override var selectedItems: [BaseDataSourceItem] {
+    override func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         debugLog("AlbumDetailPresenter operationFinished")
-
-        let selectedItems = super.selectedItems
-        if selectedItems.count > 0 {
-            return selectedItems
-        } else if let interactor = interactor as? AlbumDetailInteractor, let album = interactor.album {
-            return [album]
-        } else {
-            return []
+        super.getSelectedItems { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            if selectedItems.count > 0 {
+                selectedItemsCallback(selectedItems)
+            } else if let interactor = self.interactor as? AlbumDetailInteractor, let album = interactor.album {
+                selectedItemsCallback([album])
+            } else {
+                selectedItemsCallback([])
+            }
         }
     }
     
@@ -55,16 +58,18 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         guard var barConfig = interactor.bottomBarConfig else {
                 return
         }
-        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
-        if allSelectedItemsTypes.contains(.image) {
-            let actionTypes = barConfig.elementsConfig
+        getSelectedItems { [weak self] selectedItems in
+            let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+            if allSelectedItemsTypes.contains(.image) {
+                let actionTypes = barConfig.elementsConfig
+                
+                barConfig = EditingBarConfig(elementsConfig: actionTypes,
+                                             style: barConfig.style,
+                                             tintColor: barConfig.tintColor)
+            }
             
-            barConfig = EditingBarConfig(elementsConfig: actionTypes,
-                                         style: barConfig.style,
-                                         tintColor: barConfig.tintColor)
+            self?.bottomBarPresenter?.setupTabBarWith(config: barConfig)
         }
-        
-        bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
     override func updateCoverPhotoIfNeeded() {
@@ -98,5 +103,9 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
         
         reloadData()
+    }
+    
+    override func updateThreeDotsButton() {
+        view?.setThreeDotsMenu(active: true)
     }
 }

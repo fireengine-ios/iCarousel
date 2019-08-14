@@ -1,1 +1,7 @@
-
+"NSFaceIDUsageDescription" = "Esta aplicación está diseñada para usar Face ID para aumentar tu seguridad";
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
+"NSPhotoLibraryAddUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
+"NSPhotoLibraryUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
+"NSCameraUsageDescription" = "Para tomar fotos con su cámara y hacer una copia de seguridad de ellas en la caja de vida, se necesita su permiso de acceso a la cámara";
+"NSContactsUsageDescription" = "lifebox necesita acceder y cargar sus contactos a los servidores de Lifebox para hacer una copia de seguridad y administrarlos.";

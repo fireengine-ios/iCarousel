@@ -26,12 +26,14 @@ protocol SettingsViewOutput {
     
     func goToHelpAndSupport()
     
+    func goToTermsAndPolicy()
+    
     func goToUsageInfo()
+    
+    func goToPermissions()
     //Photo related methods - below
     func onChangeUserPhoto()
-    
-    func onUpdatUserInfo(userInfo: AccountInfoResponse)
-    
+        
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController)
     func onChooseFromPhotoCamera(onViewController viewController: UIViewController)
     
@@ -39,7 +41,7 @@ protocol SettingsViewOutput {
     
     func goToActivityTimeline()
     
-    func goToPackages()
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
     
     func goToPremium()
     

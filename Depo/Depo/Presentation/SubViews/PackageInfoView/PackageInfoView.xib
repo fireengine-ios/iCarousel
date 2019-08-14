@@ -61,6 +61,7 @@
                 <constraint firstItem="F38-ML-fVZ" firstAttribute="top" secondItem="Rot-Th-4bU" secondAttribute="bottom" constant="14" id="9rS-z0-vRu"/>
                 <constraint firstAttribute="trailing" secondItem="6Kv-TS-NLI" secondAttribute="trailing" id="AuB-fj-Kpa"/>
                 <constraint firstItem="YfV-ei-ssr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="17" id="HHW-E1-kqi"/>
+                <constraint firstItem="YfV-ei-ssr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rot-Th-4bU" secondAttribute="trailing" constant="10" id="I4u-Df-XTO"/>
                 <constraint firstItem="YfV-ei-ssr" firstAttribute="centerY" secondItem="Rot-Th-4bU" secondAttribute="centerY" id="KrU-P1-E5j"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="F38-ML-fVZ" secondAttribute="bottom" id="PV0-Yl-aI4"/>
                 <constraint firstItem="A1a-gE-S8j" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UtT-1d-5E4"/>
@@ -77,9 +78,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bottomView" destination="F38-ML-fVZ" id="ZTc-LW-qG3"/>
+                <outlet property="detailLabel" destination="YfV-ei-ssr" id="RqC-VD-bx9"/>
                 <outlet property="seeDetailsLabel" destination="brS-dN-EnF" id="YvL-1o-NfA"/>
                 <outlet property="shadowView" destination="6Kv-TS-NLI" id="Taz-nh-vFb"/>
-                <outlet property="storageSizeLabel" destination="YfV-ei-ssr" id="Vmo-mm-JcE"/>
                 <outlet property="titleLabel" destination="Rot-Th-4bU" id="dGn-H6-xd4"/>
             </connections>
             <point key="canvasLocation" x="132" y="-102.54872563718142"/>

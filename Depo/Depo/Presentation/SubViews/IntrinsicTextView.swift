@@ -8,17 +8,31 @@
 
 import UIKit
 
-final class IntrinsicTextView: UITextView {
+class IntrinsicTextView: UITextView {
     
-    override var contentSize:CGSize {
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        isScrollEnabled = false
+    }
+    
+    override var contentSize: CGSize {
         didSet {
-            self.invalidateIntrinsicContentSize()
+            invalidateIntrinsicContentSize()
         }
     }
-    
-    override func invalidateIntrinsicContentSize() {
-        isScrollEnabled = false
-        super.invalidateIntrinsicContentSize()
+}
+
+final class IntrinsicEmptiableTextView: IntrinsicTextView {
+    override var intrinsicContentSize: CGSize {
+        return text.isEmpty ? .zero : super.intrinsicContentSize
     }
-    
 }

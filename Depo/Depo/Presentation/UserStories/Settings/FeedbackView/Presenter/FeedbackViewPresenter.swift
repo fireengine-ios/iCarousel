@@ -28,8 +28,8 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
         view.fail(text: text)
     }
     
-    func languageRequestSended(text: String) {
-        view.languageRequestSended(text: text)
+    func languageRequestSended(email: String, text: String) {
+        view.languageRequestSended(email: email, text: text)
     }
     
     //MARK : BasePresenter

@@ -11,6 +11,17 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     weak var view: UserProfileViewInput!
     var interactor: UserProfileInteractorInput!
     var router: UserProfileRouterInput!
+    
+    // MARK: Utility methods
+    private func getPhoneWithAddedCodeIfNeeded() -> String {
+        var phoneNumber = view.getPhoneNumber()
+        
+        if !phoneNumber.contains("+") {
+            phoneNumber = CoreTelephonyService().callingCountryCode() + phoneNumber
+        } 
+        
+        return phoneNumber
+    }
 
     // interactor out
     
@@ -30,7 +41,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.endSaving()
         view.setupEditState(false)
         if let navigationController = view.getNavigationController() {
-            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
+            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: getPhoneWithAddedCodeIfNeeded())
         }
     }
     
@@ -50,16 +61,20 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.setupEditState(true)
     }
     
-    func tapReadyButton(name: String, email: String, number: String) {
-        interactor.changeTo(name: name, email: email, number: number)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday)
     }
     
-    func dataWasUpdate() {
+    func dataWasUpdated() {
         view.setupEditState(false)
     }
     
     func isTurkcellUser() -> Bool {
         return interactor.statusTurkcellUser
+    }
+    
+    func tapChangePasswordButton() {
+        router.goToChangePassword()
     }
     
     //MARK : BasePresenter

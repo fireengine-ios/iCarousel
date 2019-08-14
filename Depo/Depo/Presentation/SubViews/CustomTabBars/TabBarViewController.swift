@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 enum FloatingButtonsType {
     case takePhoto
@@ -16,13 +17,13 @@ enum FloatingButtonsType {
     case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
+    case importFromSpotify
 }
 
 enum TabScreenIndex: Int {
     case homePageScreenIndex = 0
     case photosScreenIndex = 1
-    case videosScreenIndex = 2
-    case musicScreenIndex = 3
+    case contactsSyncScreenIndex = 3
     case documentsScreenIndex = 4
 }
 
@@ -66,13 +67,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
+    fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -235,9 +239,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showVideosScreen(_ sender: Any) {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
-        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+//        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -275,6 +279,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if topConstraint.constant >= 0 {
             topConstraint.constant = -statusBarBG.frame.size.height
             bottomConstraint.constant = bottomBGView.frame.size.height
+            debugLog("TabBarVC fullScreenOn about to layout")
             view.layoutSubviews()
         }
     }
@@ -283,6 +288,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if topConstraint.constant != 0 {
             topConstraint.constant = 0
             bottomConstraint.constant = 0
+            debugLog("TabBarVC fullScreenOff about to layout")
             view.layoutSubviews()
         }
     }
@@ -298,6 +304,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
+                debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
             }, completion: { _ in
@@ -315,6 +322,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
+                debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.tabBar.isHidden = true
@@ -356,11 +364,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         syncContactsVC.tabBarSetup = true
         
         let list = [router.homePageScreen,
-                    router.photosScreen,
-                    router.videosScreen,
+                    router.segmentedMedia(),
                     syncContactsVC,
                     router.segmentedFiles]
-        customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -456,6 +463,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
+        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "ImportFromSpotify", asLeft: true)
+        importFromSpotify.changeVisability(toHidden: true)
+        
         mainContentView.bringSubview(toFront: plussButton)
     }
     
@@ -506,6 +516,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifebox)
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
+            case .importFromSpotify:
+                buttonsArray.append(importFromSpotify)
             }
         }
         
@@ -525,6 +537,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
+        buttonsArray.append(importFromSpotify)
         return buttonsArray
     }
     
@@ -607,8 +620,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
             }
-        case .musicScreenIndex:
-            MenloworksAppEvents.onMusicOpen()
+        case .contactsSyncScreenIndex:
+            MenloworksAppEvents.onContactSyncPageOpen()
         case .documentsScreenIndex:
             MenloworksAppEvents.onDocumentsOpen()
         default:
@@ -630,6 +643,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     func frameForTabAtIndex(index: Int) -> CGRect {
+        debugLog("TabBarVC frameForTabAtIndex about to layout")
         view.layoutIfNeeded()
         
         var frames = tabBar.subviews.flatMap { view -> CGRect? in
@@ -653,25 +667,31 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
             
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
-                    lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue
+            {
                 tabbarSelectedIndex = lastPhotoVideoIndex
                 tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
             } else {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue,
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.contactsSyncScreenIndex.rawValue,
                                                                 TabScreenIndex.documentsScreenIndex.rawValue,
                                                                 TabScreenIndex.homePageScreenIndex.rawValue]
+            
+            if tabbarSelectedIndex > 2 {
+                tabbarSelectedIndex -= 1
+            }
+            
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
-            selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
                 log(for: tabScreenIndex)
             }
+
+            selectedIndex = tabbarSelectedIndex
         }
     }
 }
@@ -694,12 +714,16 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         case albumBtn:
             action = .createAlbum
         case uploadFromLifebox:
-            action = .uploadFromLifeBox
+            action = .uploadFromApp
         case uploadFromLifeboxFavorites:
-            action = .uploadFromLifeboxFavorites
+            action = .uploadFromAppFavorites
+        case importFromSpotify:
+            action = .importFromSpotify
         default:
             return
         }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
         
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
@@ -720,7 +744,16 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
             else { return }
         
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        SDWebImageManager.shared().saveImage(toCache: image, for: url)
+        
         let wrapData = WrapData(imageData: data)
+        /// usedUIImageJPEGRepresentation
+        if let wrapDataName = wrapData.name {
+            wrapData.name = wrapDataName + ".JPG"
+        }
+        
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
         let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
@@ -736,11 +769,15 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             
         }
         
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: {
+            self.statusBarHidden = false
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: {
+            self.statusBarHidden = false
+        })
     }
 }
 
@@ -770,15 +807,22 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
-            let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
+            var folderUUID = getFolderUUID()
+            
+            /// If the user is on the "Documents" screen, I pass folderUUID to avoid opening the default "AllFiles" screen.
+            if folderUUID == nil, selectedIndex == 3 {
+                folderUUID = ""
+            }
+            
+            let controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
         case .createStory:
 //            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.click)) //FE-55
-            let isFavorites = router.isOnFavoritesView()
-            router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
-            
+            let controller = router.createStory(navTitle: TextConstants.createStory)
+            router.pushViewController(viewController: controller)
+
         case .upload:
             guard !checkReadOnlyPermission() else { return }
             
@@ -792,7 +836,7 @@ extension TabBarViewController: TabBarActionHandler {
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
-        case .uploadFromLifeBox:
+        case .uploadFromApp:
             guard !checkReadOnlyPermission() else {
                 return
             }
@@ -809,7 +853,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
             
-        case .uploadFromLifeboxFavorites:
+        case .uploadFromAppFavorites:
             guard !checkReadOnlyPermission() else {
                 return
             }
@@ -825,8 +869,22 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
+        case .importFromSpotify:
+            spotifyRoutingService.connectToSpotify() 
         }
     }
+    
+//    private func connectToSpotify() {
+//        spotifyRoutingService.connectToSpotify { result in
+//            switch result {
+//            case .success(let controller):
+//                RouterVC().pushViewController(viewController: controller)
+//            case .failed(let error):
+//                //TODO: Temporary logic for Error Handling
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     private func checkReadOnlyPermission() -> Bool {
         if let currentVC = currentViewController as? AlbumDetailViewController,

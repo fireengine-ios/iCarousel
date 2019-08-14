@@ -24,9 +24,19 @@ extension UIBarButtonItem {
         self.accessibilityLabel = accessibilityLabel
 
         if let font = font {
-            self.setTitleTextAttributes([.font : font], for: .normal)
-            self.setTitleTextAttributes([.font : font], for: .highlighted)
-            self.setTitleTextAttributes([.font : font], for: .disabled)
+            /// not working setTitleTextAttributes([.font : font], for: [.normal, .highlighted])
+            setTitleTextAttributes([.font : font], for: .normal)
+            setTitleTextAttributes([.font : font], for: .highlighted)
+            setTitleTextAttributes([.font : font], for: .disabled)
+            setTitleTextAttributes([.font : font], for: .selected)
         }
     }
+    
+    /// if you use the properties for the buttons there is a bug only on ios 11 with the replacement of buttons by clicking on them
+    /// https://forums.developer.apple.com/thread/75521
+    func fixEnabledState() {
+        isEnabled = false
+        isEnabled = true
+    }
+    
 }

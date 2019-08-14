@@ -10,6 +10,7 @@ import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
     func enableAutoSync()
+    func didChangeSettingsOption(settings: AutoSyncSetting)
 }
 
 
@@ -117,14 +118,12 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             if let syncSetting = model.syncSetting {
                 autoSyncCell.setup(with: model, setting: syncSetting)
             }
-            autoSyncCell.setColors(isFromSettings: isFromSettings)
             return autoSyncCell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
             autoSyncCell.setup(with: model)
-            autoSyncCell.setColors(isFromSettings: isFromSettings)
             autoSyncCell.delegate = self
             return autoSyncCell
         }
@@ -171,6 +170,8 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
             forceDisableAutoSync()
         }
+      
+        delegate?.didChangeSettingsOption(settings: setting)
     }
     
     func shouldChangeHeight(toExpanded: Bool, cellType: AutoSyncSettingsRowType) {

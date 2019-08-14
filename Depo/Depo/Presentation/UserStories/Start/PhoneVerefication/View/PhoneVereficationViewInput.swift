@@ -21,9 +21,11 @@ protocol PhoneVereficationViewInput: class, Waiting {
     func setupPhoneLable(with number: String)
     
     func setupButtonsInitialState()
-    
-    func heighlightInfoTitle()
-    
+        
     func getNavigationController() -> UINavigationController?
+    
+    func updateEditingState() 
+        
+    func showError(_ error: String)
     
 }

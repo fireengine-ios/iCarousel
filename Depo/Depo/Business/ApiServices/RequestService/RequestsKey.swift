@@ -19,15 +19,18 @@ struct LbRequestkeys {
     static let off = "off"
     static let language = "language"
     static let eulaId = "eulaId"
+    static let sendOtp = "sendOtp"
     static let referenceToken = "referenceToken"
     static let otp = "otp"
     static let processPersonalData = "processPersonalData"
     static let token = "token"
     static let appVersion = "appVersion"
     static let osVersion = "osVersion"
+    static let brandType = "brandType"
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"
+    static let globalPermAuth = "globalPermAuth"
 }
 
 struct LbResponseKey {

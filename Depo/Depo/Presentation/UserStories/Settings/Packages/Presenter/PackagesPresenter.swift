@@ -13,6 +13,8 @@ class PackagesPresenter {
     
     var availableOffers: [SubscriptionPlan] = []
     
+    private var quotaInfo: QuotaInfoResponse?
+
     private var accountType = AccountType.all
 
     private var referenceToken = ""
@@ -20,8 +22,7 @@ class PackagesPresenter {
     private var offerToBuy: PackageModelResponse?
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
-    private var storageCapacity: Int64 = 0
-    private var storageUsage: UsageResponse?
+    private var percentage: CGFloat = 0
     
     private func refreshPage() {
         availableOffers = []
@@ -34,16 +35,18 @@ class PackagesPresenter {
         view?.startActivityIndicator()
         interactor.getAvailableOffers(with: accountType)
     }
+    
+    func tuneUpQuota(quotaInfo: QuotaInfoResponse?) {
+        if let quota = quotaInfo{
+            self.quotaInfo = quota
+        }
+    }
 }
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
     func getAccountType() -> AccountType {
         return accountType
-    }
-
-    func getStorageCapacity() -> Int64 {
-        return storageCapacity
     }
     
     func submit(promocode: String) {
@@ -57,7 +60,6 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.getAccountType()
         
         view?.startActivityIndicator()
-        interactor.getStorageCapacity()
     }
     
     func viewWillAppear() {
@@ -120,7 +122,7 @@ extension PackagesPresenter: PackagesViewOutput {
 // MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         if let offer = offerToBuy {
             interactor.getResendToken(for: offer)
@@ -130,7 +132,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        view?.display(error: ErrorResponse.string(TextConstants.promocodeBlocked))
+        optInVC.showError(TextConstants.promocodeBlocked)
     }
     
     func optInNavigationTitle() -> String {
@@ -138,7 +140,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
@@ -146,13 +148,19 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
+   
+    func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
+        self.quotaInfo = quotoInfo
+        setMemoryPercentage()
+    }
+    
     func successedPromocode() {
         MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         
         DispatchQueue.toMain {
@@ -171,9 +179,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
+        optInVC?.hiddenError()
         optInVC?.hideResendButton()
     }
     
@@ -187,36 +196,46 @@ extension PackagesPresenter: PackagesInteractorOutput {
         interactor.getAvailableOffers(with: accountType)
     }
     
-    func successed(usage: UsageResponse) {
+    func setMemoryPercentage() {
         view?.stopActivityIndicator()
-        storageUsage = usage
-        if let quotaBytes = usage.quotaBytes {
-            storageCapacity = quotaBytes
-            view?.setupStackView(with: quotaBytes)
+
+        if let used = quotaInfo?.bytesUsed, let total = quotaInfo?.bytes {
+            percentage = 100 * CGFloat(used) / CGFloat(total)
+            view?.setupStackView(with: percentage)
         }
     }
     
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
         
+        let isTurkcell = (accountType != .turkcell)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
-            guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
+            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
+                return false
+            }
             
             ///show only offers with type slcm and apple(if apple sent offer info)
             switch type {
-            case .SLCM: return true
-            case .apple: return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
-            default: return false
+            case .SLCM:
+                return isTurkcell
+                
+            case .apple:
+                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+                
+            default:
+                return false
+                
             }
         })
+        
         view?.stopActivityIndicator()
         view?.reloadData()
     }
 
     func successedGotUserAuthority() {
         view?.stopActivityIndicator()
-        view?.setupStackView(with: storageCapacity)
+        view?.setupStackView(with: percentage)
     }
     
     func failedPromocode(with errorString: String) {
@@ -224,19 +243,19 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
-            optInVC?.present(vc, animated: false, completion: nil)
+            optInVC?.startEnterCode()
+            optInVC?.showError(TextConstants.promocodeInvalid)
         }
     }
     
     func failedUsage(with error: ErrorResponse) {
-        view?.stopActivityIndicator()
-        view?.display(error: error)
+        optInVC?.stopLoading()
+        optInVC?.showError(error.description)
     }
 
     func failed(with errorMessage: String) {
@@ -265,17 +284,22 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            router.openMyStorage(storageUsage: storageUsage)
-        case .premiumUser, .standardUser, .middleUser:
-            let leavePremiumType: LeavePremiumType
-            if type == .standardUser {
-                leavePremiumType = .standard
-            } else if type == .middleUser {
-                leavePremiumType = .middle
-            } else {
-                leavePremiumType = .premium
+            let usage = UsageResponse()
+            usage.usedBytes = quotaInfo?.bytesUsed
+            usage.quotaBytes = quotaInfo?.bytes
+            router.openMyStorage(storageUsage: usage)
+        case .accountType(let accountType):
+            router.openLeavePremium(type: accountType.leavePremiumType)
+        case .myProfile:
+            guard let userInfo = SingletonStorage.shared.accountInfo else {
+                let error = CustomErrors.text("Unexpected found nil while getting user info. Refresh page may solve this problem.")
+                failed(with: error.localizedDescription)
+                return
             }
-            router.openLeavePremium(type: leavePremiumType)
+            
+            let isTurkcell = SingletonStorage.shared.isTurkcellUser
+            router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
+            break
         case .premiumBanner:
             break
         }

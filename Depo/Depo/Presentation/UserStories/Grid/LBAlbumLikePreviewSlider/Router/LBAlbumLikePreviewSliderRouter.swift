@@ -85,7 +85,7 @@ extension LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         case .things: goToThingListView(moduleOutput)
         case .places: goToPlaceListView(moduleOutput)
         case .instaPick: goToInstaPickView(moduleOutput)
-        case .album:
+        case .album, .firAlbum:
             guard let albumItem = item.albumItem else {
                 break
             }

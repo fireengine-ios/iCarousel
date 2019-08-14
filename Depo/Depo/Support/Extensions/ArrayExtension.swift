@@ -15,3 +15,23 @@ public extension Array where Element: Equatable {
         }
     }
 }
+
+public extension Array {
+    public mutating func append(_ newElement: Element?) {
+        if let element = newElement {
+            self.append(element)
+        }
+    }
+}
+
+public extension Array {
+    var hasItems: Bool {
+        return !self.isEmpty
+    }
+}
+
+extension Optional where Wrapped == Array<Any> {
+    var hasItems: Bool {
+        return !(self?.isEmpty ?? true)
+    }
+}

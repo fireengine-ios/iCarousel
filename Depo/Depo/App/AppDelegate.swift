@@ -12,9 +12,6 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
-#if DEBUG
-import netfox
-#endif
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -70,13 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
+    var watchdog: Watchdog?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        #if DEBUG
-        NFX.sharedInstance().start()
-        #endif
-        
         AppConfigurator.applicationStarted(with: launchOptions)
+        #if DEBUG
+            watchdog = Watchdog(threshold: 0.05, strictMode: false)
+        #endif
+        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        print("Documents: \(documents)")
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
@@ -86,9 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = router.vcForCurrentState()
         window?.makeKeyAndVisible()
             
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        FBSDKAppLinkUtility.fetchDeferredAppLink { url, error in
+        AppLinkUtility.fetchDeferredAppLink { url, error in
             if let url = url {
                 UIApplication.shared.openSafely(url)
             } else {
@@ -112,10 +111,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let urlHost = url.host {
             if PushNotificationService.shared.assignDeepLink(innerLink: urlHost){
                 PushNotificationService.shared.openActionScreen()
+                storageVars.deepLink = urlHost
             }
         }
         
-        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
+        if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
             return true
@@ -165,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
-            CoreDataStack.default.appendLocalMediaItems(completion: nil)
+            CacheManager.shared.actualizeCache(completion: nil)
         }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
@@ -243,15 +243,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
-        
         checkPasscodeIfNeed()
-        FBSDKAppEvents.activateApp()
+        AppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillTerminate")
-        
-        AppConfigurator.stopCurio()
         
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()
@@ -261,6 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         UserDefaults.standard.synchronize()
+        
         player.stop()
     }
     
@@ -291,7 +289,11 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
+//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+            
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -317,7 +319,7 @@ extension AppDelegate {
         debugLog("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
-        FBSDKAppEvents.logPushNotificationOpen(userInfo)
+        AppEvents.logPushNotificationOpen(userInfo)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

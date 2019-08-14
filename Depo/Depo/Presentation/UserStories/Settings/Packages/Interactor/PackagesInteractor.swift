@@ -40,11 +40,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    if accountType == .turkcell {
-                        self?.output.successed(allOffers: response)
-                    } else {
-                        self?.getInfoForAppleProducts(offers: response)
-                    }
+                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
@@ -68,25 +64,6 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.failed(with: error.localizedDescription)
                 }
         })
-    }
-
-    func getStorageCapacity() {
-        accountService.usage(success: { [weak self]  (response) in
-            if let response = response as? UsageResponse {
-                DispatchQueue.main.async {
-                    self?.output.successed(usage: response)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    let error = CustomErrors.serverError("An error occurred while getting storage info.")
-                    self?.output.failed(with: error.description)
-                }
-            }
-        }) { [weak self] errorResponse in
-            DispatchQueue.main.async {
-                self?.output.failedUsage(with: errorResponse)
-            }
-        }
     }
 
     func getUserAuthority() {
@@ -138,7 +115,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
                 
                 if let offer = offer {
-                    self?.analyticsService.trackInnerPurchase(offer)
+                    self?.analyticsService.trackPurchase(offer: offer)
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
@@ -208,7 +185,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         iapManager.purchase(product: product) { [weak self] result in
             switch result {
             case .success(let identifier):
-                self?.analyticsService.trackInAppPurchase(product: product)
+                self?.analyticsService.trackPurchase(offer: product)
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
@@ -336,6 +313,23 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             }
         }
+    }
+    
+    
+    func getQuotaInfo() {
+        
+        AccountService().quotaInfo(success: { [weak self] response in
+            
+            guard let response = response as? QuotaInfoResponse else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.output.setQuotaInfo(quotoInfo: (response))
+            }
+            }, fail: { [weak self] error in
+                assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
+        })
     }
     
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {

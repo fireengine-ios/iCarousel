@@ -29,11 +29,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func viewWillBecomeActive() {
         startAsyncOperation()
         interactor.getCellsData()
-        interactor.getUserStatus()
+        interactor.getUserInfo()
     }
     
     func cellsDataForSettings(array: [[String]]) {
-        asyncOperationSuccess()
         view.showCellsData(array: array)
     }
     
@@ -73,6 +72,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToConnectedAccounts()
     }
     
+    func goToPermissions() {
+        router.goToPermissions()
+    }
+    
     func goToAutoApload() {
         router.goToAutoApload()
     }
@@ -89,20 +92,20 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToHelpAndSupport()
     }
     
-    func goToUsageInfo() {
-        router.goToUsageInfo()
+    func goToTermsAndPolicy() {
+        router.goToTermsAndPolicy() 
     }
     
-    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
-        router.goToUserInfo(userInfo: userInfo, isTurkcellUser: interactor.isTurkcellUser)
+    func goToUsageInfo() {
+        router.goToUsageInfo()
     }
     
     func goToActivityTimeline() {
         router.goToActivityTimeline()
     }
     
-    func goToPackages() {
-        router.goToPackages()
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
+        router.goToPackagesWith(quotaInfo: quotaInfo)
     }
     
     func goToPremium() {
@@ -110,15 +113,15 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
-        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication(), needReplaceOfCurrentController: needReplaceOfCurrentController)
+        router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: inNeedOfMailVerefication, needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
     
-    func inNeedOfMailVerefication() -> Bool {
-        return interactor.isTurkcellUser && interactor.isEmptyMail
+    var inNeedOfMailVerefication: Bool {
+        return isTurkCellUser && interactor.isEmptyMail
     }
     
     var inNeedOfMail: Bool {
-        return inNeedOfMailVerefication()
+        return inNeedOfMailVerefication
     }
     
     var isTurkCellUser: Bool {
@@ -131,7 +134,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goTurkcellSecurity() {
-        inNeedOfMailVerefication() ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity()
+        inNeedOfMailVerefication ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
     }
     
     override func outputView() -> Waiting? {
@@ -196,7 +199,5 @@ extension SettingsPresenter: MailVerificationViewControllerDelegate {
         mailUpdated(mail: mail)
     }
     
-    func mailVerificationFailed() {
-        
-    }
+    func mailVerificationFailed() {}
 }

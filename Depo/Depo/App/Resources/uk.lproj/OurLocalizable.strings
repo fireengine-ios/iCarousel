@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Ви можете відкрити налаштування та скасувати підписку.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Будь ласка, текст \"Iptal LIFEBOX %@\" до 2200, щоб скасувати ваш пакет";
 "You can visit iTunes to cancel your subscription" = "Ви можете відвідати iTunes, щоб скасувати ваш пакет";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хм, не віриш, що ти робиш це! Коли ви вирішите його повторно активувати, ми будемо тут для вас :) Якщо ви наполягаєте, відправте \"STOP\" до 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Клієнти Platinum та lifeecell можуть відправляти LIFE CANCEL, інші клієнти можуть відправити LIFEBOX CANCEL до 3030, щоб скасувати їх членство";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Щоб деактивувати lifebox 50GB, надішліть SMS з текстом 50VYKL, для lifebox 500GB, будь-ласка, відправте SMS з текстом 500VYKL на номер 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Клієнти Platinum та lifeecell можуть відправляти LIFE, інші клієнти можуть надіслати LIFEBOX 50GB для lifebox 50GB, LIFEBOX 500GB для lifebox 500GB та LIFEBOX 2.5TB для lifebox 2.5TB до 3030 для початку членства";
@@ -662,7 +662,7 @@
 "please_try_again_later" = "Будь ласка, спробуйте ще пізніше";
 "Back up with Original Quality" = "Зберігайте резервні копії в оригінальній якості";
 "Remove Duplicate Contacts from Your Directory" = "Видаляйте дублікати контактів з вашого телефону";
-"Face Recognition to reach your loved one's memories" = "Видаляйте дублікати контактів з вашого телефону";
+"Face Recognition to reach your loved one's memories" = "Знаходьте найулюбленіші спогади з функцією Розпізнавання обличчь";
 "Place Recognition to beam you up to the memories" = "Повертайтеся у спогади з функцією Розпізнавання місць";
 "Object Recognition to remember with things you love" = "Пам'ятайте улюблені речі з функцією Розпізнавання об'єктів";
 "Become Premium" = "Станьте Преміум користувачем";
@@ -700,7 +700,7 @@
 "package_lifecell_cancel_text" = "Щоб відмінити підписку lifebox 50ГБ, відправте СМС з текстом 50VYKL, підписку lifebox 500ГБ - відправте СМС з текстом 500VYKL на номер 8080";
 "package_promo_cancel_text" = "Щоб надіслати запит, будь ласка, скористуйтеся меню Залишити відгук";
 "package_kktcell_cancel_text" = "Щоб відмінити підписку, клієнти Платінум клубу та абоненти lifecell можуть відправити LIFE CANCEL, інші користувачі можуть відправити LIFEBOX CANCEL на номер 3030";
-"package_moldcell_cancel_text" = "Хм, неможливо повірити, що ви це робите! Коли ви вирішите повернутися, ми будемо на вас чекати:) Якщо ви наполягаєте, відправте \"STOP\" на 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Щоб деактивувати lifebox  25ГБ, будь ласка, відправте СМС з текстом \"Stop1\", деактивувати lifebox  100ГБ – СМС з текстом \"Stop2\", деактивувати lifebox  500ГБ – СМС з текстом \"Stop3\" на номер 6767";
 "package_paycell_all_access_cancel_text" = "Ви можете відмінити підписку через www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Ви можете відмінити підписку через www.mylifebox.com";
@@ -797,12 +797,12 @@
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Не показувати це знову";
 "instapick_analyze" = "Оцінити з PhotoPick!";
-"connected_account" = "Це чудово працює з вашим об'єднаним аккаунтом!";
+"connected_account" = "Ви можете проаналізувати, які з ваших фотографій можна отримати на Instagram, використовуючи PhotoPick!";
 "instapick_description" = "Якщо ви зв'яжете ваш обліковий запис з профілем в Instagram, ми зможемо покращити сервіс, виконуючи персоналізованно кожну нову оцінку PhotoPick";
 "connected_with_instagram" = "Поєднати з Instagram";
 "connected_with_instagram_name" = "Поєднати з Instagram як";
 "continue_without_connecting" = "Продовжувати без об'єднання";
-"connected_accounts" = "Поєднані обликові записи";
+"connected_accounts" = "Поєднані облікові записи";
 "analyze_history_free_text" = "Безліміт для вас";
 
 /*InstapickUpgradePopup*/
@@ -814,7 +814,7 @@
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
-"connected_as_format" = "Поєднані обликові записи: @%@";
+"connected_as_format" = "Поєднані облікові записи: @%@";
 "instagram_remove_connection_warning_title" = "Видалення поєднання з Instagram";
 "instagram_remove_connection_warning_message" = "Ви впевнені, що хочете видалити поєднання з Instagram?\n\n";
 "instapick_selection_photos_selected" = "Обрані фото (%d)";
@@ -861,19 +861,150 @@
 "delete_duplicated_contacts" = "Видаліть дублікати контактів з вашої телефонної книги";
 "leave_middle_membership" = "Залишити підписку Стандарт+";
 "leave_middle_turkcell" = "Щоб відмінити ваш пакет, відправте будь ласка СМС на 2200 з текстом: IPTAL LIFEBOX STANDART+";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
-"feature_digicell_cancel_text" = "";
+"package_FWI_cancel_text" = "Ви можете відмінити підписку Digicel через додаток My Digicel, представника обслуговування або в магазині";
+"package_jamaica_cancel_text" = "Ви можете відмінити підписку Digicel через додаток My Digicel, представника обслуговування або в магазині";
+"feature_digicell_cancel_text" = "Як абонент Digicell ви можете продовжувати користуватися функціями Преміум підписки безкоштовно";
 "terms_and_use_etk_checkbox" = "Я бажаю отримувати від компанії Turkcell і Turkcell Group комерційні електронні повідомлення про вигідні пропозиції та послуги, згідно з положеннями Закону № 6563 та інших відповідних нормативно-правових актів, та доти інше не буде зазначене мною";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell і Turkcell Group";
 "terms_and_use_etk_link_commercial_email_messages" = "комерційні електронні повідомлення";
 "commercial_email_messages" = "ІНФОРМАЦІЯ ЩОДО ЗГОДИ НА  ОТРИМАННЯ  КОМЕРЦІЙНИХ ЕЛЕКТРОННИХ ПОВІДОМЛЕНЬ\n\nПогоджуюсь з тим, що оформлюючи підписку на додаток Lifebox, або надаючи Turkcell і Turkcell Group свої контактні дані, я даю безстрокову згоду на отримання від Turkcell і Turkcell Group, а також від компаній-партнерів, комерційних електронних повідомлень (голосових, відео, інформаційних повідомлень, надісланих в електронному вигляді та з комерційною метою за допомогою телефонів, кол-центрів, факсів, пристроїв автоматичного набору номеру, «розумних» систем звукозапису, e-mail, СМС) які будуть надсилатись мені з боку  Turkcell і Turkcell Group згідно Закону «Про регулювання електронної комерції»      № 6563 (Закон) і Положення «Про комерційні комунікації та комерційні електроні повідомлення» (Положення), для реклами та маркетингу різноманітних та нових товарів і послуг та інформування щодо загальних/особистих акційних пропозицій; навіть якщо термін дії Угоди Користувача закінчиться, доки я не скористаюсь своїм правом на відмову від отримання таких повідомлень. \n\nЗгідно Інструкції, електронні комерційні повідомлення від операторів, які підлягають дії Закону № 5809 «Про електронні комунікації», надіслані абонентам та користувачам з метою рекламування або маркетингу своєї продукції та послуг, не відносяться до вищезазначених повідомлень.  У зв’язку з цим, погоджуюсь, що згода, надана мною вище, не стосується згоди, наданою мною операторові, абонентом/користувачем якого я є, на отримання реклами щодо його продуктів та послуг. Я також погоджуюсь, що мені відомо, що згідно законодавства та Інструкції, навіть, якщо я, користуючись своїм правом на відмову від таких повідомлень, скасую згоду, надану мною у рамках цього документу, оператор, абонентом якого я є, в рамках наданої йому згоди,  буде мати повноваження надсилати мені комерційні електронні повідомлення такого типу з метою маркетингу своєї продукції та послуг, та я маю право відмовитись від таких повідомлень.";
-"NSLocationAlwaysUsageDescription" = "";
-"NSPhotoLibraryAddUsageDescription" = "";
-"NSPhotoLibraryUsageDescription" = "";
+"NSLocationAlwaysUsageDescription" = "Ваше місце розташування буде використано для синхронізації у фоновому режимі та для організації та пошуку фотографій.";
+"NSPhotoLibraryAddUsageDescription" = "Щоб показати свої фотографії та відео в програмі та створити резервну копію їх, lifebox потребує доступу до бібліотеки фотографій.";
+"NSPhotoLibraryUsageDescription" = "Щоб показати свої фотографії та відео в програмі та створити резервну копію їх, lifebox потребує доступу до бібліотеки фотографій.";
 
 /*Usage Info*/
-"package_space_details" = "";
-"package_renew_date" = "";
-"percentage_used" = "";
-"used_and_left_space" = "";
+"package_space_details" = "%1$@ / %2$@ Інтернет трафіку використано";
+"package_renew_date" = "Дата оновлення: %@";
+"percentage_used" = "%.0f%% використано";
+"used_and_left_space" = "%1$@ / %2$@ використано";
+"percentage_used_two_lines" = "%.0f%%\nвикористано";
+
+/*What is correct field meaning? Internet usage or storage usage?*/
+"my_usage_storage" = "Моє використання Інтернету";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше місце розташування буде використано для синхронізації у фоновому режимі та для організації та пошуку фотографій.";
+"name" = "Ім'я";
+"surname" = "Фамілія";
+"change password" = "Змінити пароль";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Пакети";
+"account_details" = "Деталі облікового запису";
+"my_profile" = "Мій профіль";
+"account_type" = "Тип облікового запису";
+"standard_plus" = "lifebox Стандарт+";
+"standard" = "lifebox Стандарт";
+"premium" = "lifebox Преміум";
+"old_password" = "Старий пароль";
+"new_password" = "Новий пароль";
+"repeat_password" = "Введіть пароль ще раз";
+"change_password_captcha_answer_placeholder" = "Введіть текст";
+"temporary_error_occurred_try_again_later" = "Виникла помилка. Будь ласка, спробуйте пізніше";
+"old_password_does_not_match" = "Старий пароль введено невірно";
+"new_password_and_repeated_password_does_not_match" = "Пароль введено невірно";
+"new_password_is_empty" = "Введіть новий пароль";
+"old_password_is_empty" = "Введіть старий пароль";
+"repeat_password_is_empty" = "Введіть повторно пароль";
+"this_text_is_empty" = "Ввведіть текст";
+"password_changed_successfully" = "Ваш пароль успішно змінено";
+"password_changed_successfully_relogin" = "Ваш пароль успішно змінено. Будь ласка, увійдіть з новим паролем";
+"captcha_answer_placeholder" = "Введіть текст на зображенні";
+"birthday" = "Дата народження";
+"user_profile_turkcell_gsm_alert" = "Ви не можете оновити свій номер телефону, щоб отримати докладнішу інформацію: %@";
+"user_profile_birthday_placeholder" = "ДД ММ РРРР";
+"send_link" = "Надіслати посилання";
+"reset_password" = "Скинути пароль";
+"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "Ви можете легко змінити свій пароль, натиснувши посилання , яке ми надішлемо на ваш e-mail";
+"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "Щоб скинути пароль, ми надішлемо посилання на зміну пароля на e-mail  вашого облікового запису:";
+"your_account_email" = "E-mail  вашого облікового запису";
+"enter_your_account_email" = "Введіть e-mail  вашого облікового запису";
+"enter_the_text_shown_in_the_image" = "Введіть текст на зображенні";
+"support_form_email_body" = "Будь ласка, не видаляйте інформацію. Дані будуть використовуватися для вирішення проблем:\nІм'я: %@\nФамілія: %@\nE-mail: %@\nНомер телефона: %@\nВерсія додатка: %@\nОператор: %@\nПристрій: %@\nОС пристрою: %@\nМова: %@\nСтатус мережи: %@\n";
+"profile_phone_number_title" = "Номер телефона";
+"profile_phone_number_placeholder" = "Введіть номер телефона";
+"please_enter_your_name" = "Введіть ваше ім'я";
+"enter_your_name" = "Введіть ваше ім'я";
+"please_enter_your_surname" = "Введіть вашу фамілію";
+"enter_your_surname" = "Введіть вашу фамілію";
+"enter_your_email_address" = "Введіть ваш e-mail";
+"subject" = "Тема запиту";
+"please_enter_your_subject" = "Будь ласка введіть тему запиту";
+"please_choose_subject" = "Будь ласка оберіть тему запиту";
+"your_problem" = "Ваша складність";
+"please_enter_your_problem_shortly" = "Будь ласка опишіть вашу складніть";
+"explain_your_problem_shortly" = "Поясніть коротко вашу складність";
+"please_enter_msisdn_or_email" = "Будь ласка введіть у поле ваш номер або e-mail";
+"support_form_subject_1" = "Lifebox/Я не можу увійти у додаток з моїм e-mail";
+"support_form_subject_2" = "Lifebox/Я не можу увійти у додаток з моїм номером телефона";
+"support_form_subject_3" = "Lifebox/Я не можу увійти у додаток з моїм паролем";
+"support_form_subject_4" = "Lifebox/Текст перевірки не співпадає";
+"support_form_subject_5" = "Lifebox/Складноcті з паролем Turkcell";
+"support_form_subject_6" = "Lifebox/Складність з автоматичним входом";
+"support_form_subject_7" = "Lifebox/Я не можу завантажити додаток lifebox";
+"enter_your_old_password" = "Введіть старий пароль";
+"enter_your_new_password" = "Введіть новий пароль";
+"enter_your_repeat_password" = "Введіть новий пароль ще раз";
+"user_profile_day_placeholder" = "ДД";
+"user_profile_month_placeholder" = "ММ";
+"user_profile_year_placeholder" = "РРРР";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Допомога та підтримка";
+"captcha_is_empty" = "Будь ласка введіть символи на зображенні";
+"enter_your_password" = "Введіть ваш пароль";
+"re_enter_your_password" = "Введіть ваш пароль ще раз";
+"signup_support_info" = "Якщо у вас виникли труднощі під час реєстрації, зв’яжіться з нами";
+"missing_information" = "Недостатньо інформації";
+"please_enter_your_missing_account_information" = "Будь ласка введіть інформацію про свій обліковий запис";
+"login_email_or_phone_placeholder" = "Введіть ваш e-mail або номер телефона";
+"login_password_placeholder" = "Введіть ваш пароль";
+"login_email_or_phone_error" = "Введіть ваш e-mail або номер телефона";
+"login_password_error" = "Введіть ваш пароль";
+"enter_security_code" = "Введіть ваш код безпеки";
+"enter_code_get_code_on_phone" = "Будь ласка введіть 6 цифр коду безпеки, який ми надіслали на номер: %@";
+"time_is_up_for_code" = "Час вичерпано, будь ласка запитайте новий код";
+"resend_code" = "Відправити код ще раз";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Запитання та відповіді";
+"login_username_not_valid" = "Будь ласка перевірте ім'я користувача";
+"login_support_info" = "Якщо у вас виникли труднощі під час входу, зв'яжіться з нами для підтримки";
+"terms_and_privacy_policy" = "Умови користування та політика конфіденційності";
+"Temporary error occurred. Please try again later." = "Сталася тимчасова помилка. Будь-ласка спробуйте пізніше.";
+"face_tags_description_premium" = "При включенні функції розпізнавання обличчь та зображень завантажені фото будуть сгруповані по обличчям та об'єктам. Якщо опцію визначення місцезнаходження включено, фото також будуть сгруповані згідно з інформацією про місцезнаходження. Таким чином ми зможемо автоматично створювати тематичні історії для вас.";
+"terms_of_use" = "Умови користування";
+"privacy_policy" = "Політика конфіденційності";
+"face_tags_description_standart" = "При включенні функції розпізнавання обличчь та зображень завантажені фото будуть сгруповані по обличчям та об'єктам. Якщо опцію визначення місцезнаходження включено, фото також будуть сгруповані згідно з інформацією про місцезнаходження. Таким чином ми зможемо автоматично створювати тематичні історії для вас.";
+"terms_and_use_introduction_checkbox" = "Я ознайомився та приймаю Умови користування та Політика конфіденційності";
+"privacy_policy_condition" = "Політика конфіденційності";
+"photo_pick_description" = "Зв'яжіть свій обліковий запис з обліковим записом в Instagram і ми зможемо виконувати індивідуальний аналіз для кожного PhotoPick запита.";
+
+/*Permission screen in Settings*/
+"etk_permission_title_label" = "Комерційне електронне повідомлення";
+"etk_permissiom_description" = "Цим я даю згоду на отримання комерційних повідомлень по електронній пошті, щоб отримувати інформацію про вигідні пропозиції та послуги Turkcell  та компаній Групи до тих пір, доки я не буду вимагати іншого згідно з Законом №6563 або іншим законодавством.";
+"NSCameraUsageDescription" = "Щоб фотографувати камерою та створити резервну копію їх у lifebox, потрібен дозвіл доступу до камери";
+"restore_purchases" = "Відновити покупки";
+"restore_purchases_info" = "Якщо ви хочете відновити існуючі покупки, натисніть кнопку.";
+"attributed_restore_word" = "Відновити";
+"privacy_policy_head_line" = "Політика конфіденційності";
+"create_story_photos_selected" = "%d вибрано";
+"create_story_press_and_hold" = "натисніть і утримуйте";
+"create_story_press_and_hold_description" = "%@ на зображенні, щоб змінити порядок історії.";
+"create_story_name_title" = "Ім'я історії";
+"create_story_pop_up_title" = "Ви створили історію!\n%@";
+"create_story_pop_up_message" = "Ми готуємо вашу історію. Після завершення ви можете знайти його під\n%@";
+"create_story_path_to_story" = "Фото та Відео > Мої історії";
+"You can not share empty album" = "Не можна ділитися пустим альбомом";
+"etk_permission_description" = "Цим я даю згоду на отримання комерційних повідомлень по електронній пошті, щоб отримувати інформацію про вигідні пропозиції та послуги Turkcell  та компаній Групи до тих пір, доки я не буду вимагати іншого згідно з Законом №6563 або іншим законодавством.";
+"global_permission_title_label" = "Глобальний доступ до даних";
+"global_permission_description" = "Я даю згоду на передачу моєї приватної інформації операторам, які співпрацюють з Turkcell, щоб я мав змогу використовувати вигідні послуги оператора у відношенні до lifebox.";
+"terms_and_use_etk_checkbox_header" = "Комерційне електронне повідомлення";
+"global_data_permission_agreement" = "Я даю згоду на передачу моєї приватної інформації операторам, які співпрацюють з Turkcell, щоб я мав змогу використовувати вигідні послуги оператора у відношенні до lifebox. Натисніть для детальної інформації";
+"global_data_permission_link" = "Натисніть для детальної інформації";
+"global_permission_header" = "Глобальний доступ до даних";
+"informative_description_label" = "чекаючи дозволу";
+"global_permission_screen_title" = "Глобальний доступ до даних";
+
+/*Settings page*/
+"Permissions" = "Дозволи";
+"NSContactsUsageDescription" = "lifebox потребує доступу та завантаження контактів на сервери lifebox для їх резервного копіювання та управління.";

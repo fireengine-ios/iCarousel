@@ -9,20 +9,29 @@
 enum AnalyticsEvent {
     case signUp
     case login
+
     case uploadPhoto
     case uploadVideo
     case uploadFromCamera
     case uploadMusic
     case uploadDocument
+
     case purchaseTurkcell50
+    case purchaseTurkcell100
     case purchaseTurkcell500
     case purchaseTurkcell2500
+    case purchaseTurkcellPremium
+
     case purchaseNonTurkcell50
+    case purchaseNonTurkcell100
     case purchaseNonTurkcell500
     case purchaseNonTurkcell2500
+    case purchaseNonTurkcellPremium
+
     case importDropbox
     case importFacebook
     case importInstagram
+
     case turnOnAutosync
     case contactBackup
     case freeUpSpace
@@ -33,20 +42,29 @@ enum AnalyticsEvent {
         switch self {
         case .signUp: return "ese4q4"
         case .login: return "qqnm9p"
+
         case .uploadPhoto: return "esdqth"
         case .uploadVideo: return "noawdt"
         case .uploadFromCamera: return "yx3j4p"
         case .uploadMusic: return "ba947a"
         case .uploadDocument: return "jb1jc6"
+
         case .purchaseTurkcell50: return "trie85"
+        case .purchaseTurkcell100: return "62s83p"
         case .purchaseTurkcell500: return "wdqlvk"
         case .purchaseTurkcell2500: return "7bf7gu"
+        case .purchaseTurkcellPremium: return "qexub9"
+
         case .purchaseNonTurkcell50: return "q3ivog"
+        case .purchaseNonTurkcell100: return "lbrusf"
         case .purchaseNonTurkcell500: return "x6zaly"
         case .purchaseNonTurkcell2500: return "zab8u6"
+        case .purchaseNonTurkcellPremium: return "9pyt2d"
+
         case .importDropbox: return "tdvlrq"
         case .importFacebook: return "y5dz5j"
         case .importInstagram: return "jk78lq"
+
         case .turnOnAutosync: return "kwo7m3"
         case .contactBackup: return "u440dw"
         case .freeUpSpace: return "w9vvtl"
@@ -59,20 +77,29 @@ enum AnalyticsEvent {
         switch self {
         case .signUp: return "SIGNUP"
         case .login: return "LOGIN"
+
         case .uploadPhoto: return "UPLOAD_PHOTO"
         case .uploadVideo: return "UPLOAD_VIDEO"
         case .uploadFromCamera: return "UPLOAD_FROM_CAMERA"
         case .uploadMusic: return "UPLOAD_MUSIC"
         case .uploadDocument: return "UPLOAD_DOCUMENT"
+
         case .purchaseTurkcell50: return "PURCHASE_50_GB_TURKCELL"
+        case .purchaseTurkcell100: return "PURCHASE_100_GB_TURKCELL"
         case .purchaseTurkcell500: return "PURCHASE_500_GB_TURKCELL"
         case .purchaseTurkcell2500: return "PRUCHASE_25_TB_TURKCELL"
+        case .purchaseTurkcellPremium: return "PURCHASE_PREMIUM_TURKCELL"
+
         case .purchaseNonTurkcell50: return "PURCHASE_50_GB_NONTURKCELL"
+        case .purchaseNonTurkcell100: return "PURCHASE_100_GB_NONTURKCELL"
         case .purchaseNonTurkcell500: return "PURCHASE_500_GB_NONTURKCELL"
         case .purchaseNonTurkcell2500: return "PRUCHASE_25_TB_NONTURKCELL"
+        case .purchaseNonTurkcellPremium: return "PURCHASE_PREMIUM_NONTURKCELL"
+
         case .importDropbox: return "DROPBOX_IMPORT"
         case .importFacebook: return "FACEBOOK_IMPORT"
         case .importInstagram: return "INSTAGRAM_IMPORT"
+
         case .turnOnAutosync: return "TURN_ON_AUTOSYNC"
         case .contactBackup: return "CONTACT_BACKUP"
         case .freeUpSpace: return "FREE_UP_SPACE"
@@ -104,10 +131,10 @@ enum AnalyticsAppScreens {
     case upload
     case search
     ///Create Story
-    case createStoryName
     case createStoryPhotosSelection
     case createStoryMusicSelection
     case createStoryPreview
+    case createStoryDetails
     ///Albums
     case albums
     case myStories
@@ -122,7 +149,7 @@ enum AnalyticsAppScreens {
     case activityTimeline
     case usageInfo
     case packages
-    case lifeBoxTouchIdPasscode
+    case appTouchIdPasscode
     case turkcellSecurity
     case FAQ
     case contactUS
@@ -145,6 +172,15 @@ enum AnalyticsAppScreens {
     case photoPickHistory
     case photoPickPhotoSelection
     case photoPickAnalysisDetail
+    ///PackageDetails
+    case standartAccountDetails
+    case standartPlusAccountDetails
+    case premiumAccountDetails
+    ///
+    case myStorage
+    case changePassword
+    
+    case info(FileType)
     
     var name: String {
         switch self {
@@ -196,14 +232,14 @@ enum AnalyticsAppScreens {
         case .search:
             return "Search"
         ///Create Story
-        case .createStoryName:
-            return "Create Story - Name"
         case .createStoryPhotosSelection:
             return "Create Story - Photo Selection"
         case .createStoryMusicSelection:
             return "Create Story - Music Selection"
         case .createStoryPreview:
             return "Create Story - Preview"
+        case .createStoryDetails:
+            return "Create Story - Details"
         ///Albums
         case .albums:
             return "Albums"
@@ -229,7 +265,7 @@ enum AnalyticsAppScreens {
             return "Usage Info"
         case .packages:
             return "Packages"
-        case .lifeBoxTouchIdPasscode:
+        case .appTouchIdPasscode:
             return "Passcode"
         case .turkcellSecurity:
             return "Login Settings"
@@ -251,64 +287,93 @@ enum AnalyticsAppScreens {
             return "PhotoPick Photo Selection"
         case .photoPickAnalysisDetail:
             return "PhotoPick Analysis Detail"
+        ///PackageDetails
+        case .standartAccountDetails:
+            return "Standard Details"
+        case .standartPlusAccountDetails:
+            return "Standard Plus Details"
+        case .premiumAccountDetails:
+            return "Premium Details"
+        ///
+        case .myStorage:
+            return "My Storage"
+        case .changePassword:
+            return "Change Password"
+        case .info(let fileType):
+            switch fileType {
+            case .image:
+                return "Photo_Info"
+            case .video:
+                return "Video_Info"
+            case .application:
+                return "Document_Info"
+            case .audio:
+                return "Music_Info"
+            case .photoAlbum:
+                return "Album_Info"
+            case .folder:
+                return "Folder_Info"
+            default:
+                return "Info"
+            }
         }
     }
 }
 
-enum AnalyticsPackageProductParametrs {
-    case itemName
-    case itemID
-    case price
-    case itemBrand
-    case itemCategory
-    case itemVariant
-    case index
-    case quantity
-    
-    var text: String {
-        switch self {
-        case .itemName:
-            return "AnalyticsParameterItemName"
-        case .itemID:
-            return "AnalyticsParameterItemID"
-        case .price:
-            return "AnalyticsParameterPrice"
-        case .itemBrand:
-            return "AnalyticsParameterItemBrand"
-        case .itemCategory:
-            return "AnalyticsParameterItemCategory"
-        case .itemVariant:
-            return "AnalyticsParameterItemVariant"
-        case .index:
-            return "AnalyticsParameterIndex"
-        case .quantity:
-            return "AnalyticsParameterQuantity"
-        }
-    }
-}
+//enum AnalyticsPackageProductParametrs {
+//    case itemName
+//    case itemID
+//    case price
+//    case itemBrand
+//    case itemCategory
+//    case itemVariant
+//    case index
+//    case quantity
+//
+//    var text: String {
+//        switch self {
+//        case .itemName:
+//            return "AnalyticsParameterItemName"
+//        case .itemID:
+//            return "AnalyticsParameterItemID"
+//        case .price:
+//            return "AnalyticsParameterPrice"
+//        case .itemBrand:
+//            return "AnalyticsParameterItemBrand"
+//        case .itemCategory:
+//            return "AnalyticsParameterItemCategory"
+//        case .itemVariant:
+//            return "AnalyticsParameterItemVariant"
+//        case .index:
+//            return "AnalyticsParameterIndex"
+//        case .quantity:
+//            return "AnalyticsParameterQuantity"
+//        }
+//    }
+//}
 
 enum AnalyticsPackageEcommerce {
     case items
-    case itemList
-    case transactionID
-    case tax
-    case priceValue
-    case shipping
+//    case itemList
+//    case transactionID
+//    case tax
+//    case priceValue
+//    case shipping
     
     var text: String {
         switch self {
         case .items:
             return "items"
-        case .itemList:
-            return "AnalyticsParameterItemList"
-        case .transactionID:
-            return "AnalyticsParameterTransactionID"
-        case .tax:
-            return "AnalyticsParameterTax"
-        case .priceValue:
-            return "AnalyticsParameterValue"
-        case .shipping:
-            return "AnalyticsParameterShipping"
+//        case .itemList:
+//            return "AnalyticsParameterItemList"
+//        case .transactionID:
+//            return "AnalyticsParameterTransactionID"
+//        case .tax:
+//            return "AnalyticsParameterTax"
+//        case .priceValue:
+//            return "AnalyticsParameterValue"
+//        case .shipping:
+//            return "AnalyticsParameterShipping"
         }
     }
 }
@@ -363,6 +428,7 @@ enum GAEventAction {
             }
         }
     }
+    
     case purchase
     case login
     case logout
@@ -397,7 +463,13 @@ enum GAEventAction {
     case serviceError
     case paymentErrors
     case photopickAnalysis
-    
+    case firstAutoSync
+    case settingsAutoSync
+    case captcha
+    case photopickShare
+    case contactOperation(SYNCMode)
+    case plus
+
     var text: String {
         switch self {
         case .purchase:
@@ -468,6 +540,23 @@ enum GAEventAction {
             return "Payment Errors"
         case .photopickAnalysis:
             return "Photopick Analysis"
+        case .firstAutoSync:
+            return "First Auto Sync"
+        case .settingsAutoSync:
+            return "Auto Sync"
+        case .captcha:
+            return "Captcha"
+        case .photopickShare:
+            return "Photopick Share"
+        case .contactOperation(let operation):
+            switch operation {
+            case .backup:
+                return "Contact Backup"
+            case .restore:
+                return "Contact Restore"
+            }
+        case .plus:
+            return "Plus"
         }
     }
 }
@@ -492,6 +581,7 @@ enum GAEventLabel {
             }
         }
     }
+    
     enum ShareType {
         case facebook
         case twitter
@@ -531,6 +621,37 @@ enum GAEventLabel {
         }
     }
     
+    enum CaptchaEvent {
+        case changeClick
+        case voiceClick
+        
+        var text: String {
+            switch self {
+            case .changeClick:
+                return "Change Click"
+            case .voiceClick:
+                return "Voice Click"
+            }
+        }
+    }
+    
+    enum ContactEvent {
+        case backup
+        case restore
+        case deleteDuplicates
+        
+        var text: String {
+            switch self {
+            case .backup:
+                return "Backup"
+            case .restore:
+                return "Restore"
+            case .deleteDuplicates:
+                return "Delete of Duplicate"
+            }
+        }
+    }
+    
     case empty
     
     case success
@@ -547,8 +668,6 @@ enum GAEventLabel {
     case sort(SortedRules)
     case search(String) ///searched word
     case clickOtherTurkcellServices ///This event should be sent after each login (just send after login)
-    case phoneBookBackUp
-    case phoneRestore
     //
     case importDropbox
     case importFacebook
@@ -576,8 +695,20 @@ enum GAEventLabel {
     //
     case serverError
     case paymentError(String)
-    
-    var text: String {
+    //
+    case photosNever
+    case photosWifi
+    case photosWifiLTE
+    case videosNever
+    case videosWifi
+    case videosWifiLTE
+    case captcha(CaptchaEvent)
+    case contact(ContactEvent)
+    case plusAction(TabBarViewController.Action)
+    case shareViaLink
+    case shareViaApp(String)
+
+        var text: String {
         switch self {
         case .empty:
             return ""
@@ -621,11 +752,7 @@ enum GAEventLabel {
         case .search(let searchText): ///searched word
             return searchText
         case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
-            return "lifebox"
-        case .phoneBookBackUp:
-            return "Backup"
-        case .phoneRestore:
-            return "Restore"
+            return TextConstants.NotLocalized.appName
         //
         case .importDropbox:
             return "Dropbox"
@@ -670,8 +797,69 @@ enum GAEventLabel {
             return "Server error"// \(errorCode)"
         case .paymentError(let paymentError):
             return "Definition(\(paymentError)"
+        //
+        case .photosNever:
+            return "Photos - Never"
+        case .photosWifi:
+            return "Photos - Wifi"
+        case .photosWifiLTE:
+            return "Photos - Wifi&LTE"
+        case .videosNever:
+            return "Videos - Never"
+        case .videosWifi:
+            return "Videos - Wifi"
+        case .videosWifiLTE:
+            return "Videos - Wifi&LTE"
+        case .captcha(let captchaEvent):
+            return captchaEvent.text
+        case .contact(let contantEvent):
+            return contantEvent.text
+        case .plusAction(let action):
+            switch action {
+            case .createAlbum:
+                return "Create Album"
+            case .createFolder:
+                return "New Folder"
+            case .createStory:
+                return "Create Story"
+            case .takePhoto:
+                return "Use Camera"
+            case .upload:
+                return "Upload"
+            case .uploadFromApp:
+                return "Upload from \(TextConstants.NotLocalized.appName)"
+            case .uploadFromAppFavorites:
+                return "Upload from \(TextConstants.NotLocalized.appName) Favorites"
+            case .importFromSpotify:
+                return "Import From Spotify"
+            }
+        case .shareViaLink:
+            return "Share via Link"
+        case .shareViaApp(let appName):
+            return appName
         }
     }
+    
+    static func getAutoSyncSettingEvent(autoSyncSettings: AutoSyncSetting) -> GAEventLabel {
+        switch autoSyncSettings {
+        case AutoSyncSetting(syncItemType: .photo, option: .never):
+            return .photosNever
+        case AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular):
+            return .photosWifiLTE
+        case AutoSyncSetting(syncItemType: .photo, option: .wifiOnly):
+            return .photosWifi
+        case AutoSyncSetting(syncItemType: .video, option: .never):
+            return .videosNever
+        case AutoSyncSetting(syncItemType: .video, option: .wifiAndCellular):
+            return .videosWifiLTE
+        case AutoSyncSetting(syncItemType: .video, option: .wifiOnly):
+            return .videosWifi
+        default:
+            return .empty
+        }
+        
+    }
+    
 }
 
 enum GADementionsFields {
@@ -692,6 +880,8 @@ enum GADementionsFields {
     case gsmOperatorType
     case deviceId
     case errorType
+    case autoSyncState
+    case autoSyncStatus
     
     var text: String {
         switch self {
@@ -729,6 +919,10 @@ enum GADementionsFields {
             return "deviceid"
         case .errorType:
             return "errorType"
+        case .autoSyncState:
+            return "AutoSync"
+        case .autoSyncStatus:
+            return "SyncStatus"
         }
     }
     
@@ -756,13 +950,13 @@ enum GADementionValues {
         var text: String {
             switch self {
             case .gsm:
-                return "Login with Password - GSM"
+                return "GSM no ile şifreli giriş"
             case .email:
-                return "Login with Password – Email"
+                return "Email ile giriş"
             case .rememberLogin:
-                return "Remember Me Login"
+                return "Beni hatırla ile giriş"
             case .turkcellGSM:
-                return "3G - LTE Login"
+                return "Header Enrichment (cellular) ile giriş"
             }
         }
     }
@@ -804,6 +998,7 @@ enum GADementionValues {
     
     enum signUpError {
         case invalidEmail
+        case invalidPhoneNumber
         case emailAlreadyExists
         case gsmAlreadyExists
         case invalidPassword
@@ -820,6 +1015,8 @@ enum GADementionValues {
             switch self {
             case .invalidEmail:
                 return "INVALID_EMAIL"
+            case .invalidPhoneNumber:
+                return "PHONE_NUMBER_IS_INVALID"
             case .emailAlreadyExists:
                 return "EMAIL_ALREADY_EXISTS"
             case .gsmAlreadyExists:

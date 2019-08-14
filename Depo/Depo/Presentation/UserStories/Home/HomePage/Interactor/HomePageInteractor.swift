@@ -28,10 +28,11 @@ class HomePageInteractor: HomePageInteractorInput {
     }
 
     func homePagePresented() {
-        FreeAppSpace.default.checkFreeAppSpace()
+        FreeAppSpace.session.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
+        getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
     }
@@ -59,6 +60,19 @@ class HomePageInteractor: HomePageInteractorInput {
         
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
+    }
+    
+    private func getAccountInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+            DispatchQueue.toMain {
+                self?.output.verifyEmailIfNeeded()
+            }
+        }, fail: { [weak self] error in
+            DispatchQueue.toMain {
+                self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                                                   isNeedStopRefresh: false)
+            }
+        })
     }
     
     private func getAllCardsForHomePage() {
@@ -91,7 +105,9 @@ class HomePageInteractor: HomePageInteractorInput {
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-                    self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                    DispatchQueue.toMain {
+                        self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                    }
                 }, fail: { [weak self] error in
                     self?.fillCollectionView(isReloadAll: true)
                     
@@ -132,48 +148,28 @@ class HomePageInteractor: HomePageInteractorInput {
     }
     
     func needCheckQuota() {
-        showQuotaPopUpIfNeed()
+        getQuotaInfo()
     }
     
-    func showQuotaPopUpIfNeed() {
-        let storageVars: StorageVars = factory.resolve()
-        
-        let isFirstTime = !storageVars.homePageFirstTimeLogin
-        if isFirstTime {
-            storageVars.homePageFirstTimeLogin = true
-        }
+    func getQuotaInfo() {
         AccountService().quotaInfo(success: { [weak self] response in
             DispatchQueue.toMain {
                 if let qresponce = response as? QuotaInfoResponse {
-                    guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
+                    guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else {
+                        self?.output.didObtainQuotaInfo(usagePercentage: 0)
+                        assertionFailure("quota info is missing")
+                        return
+                    }
+
                     let usagePercent = Float(usedBytes) / Float(quotaBytes)
-                    var viewForPresent: UIViewController? = nil
                     self?.trackQuota(quotaPercentage: usagePercent)
-                    if isFirstTime {
-                        if 0.8 <= usagePercent && usagePercent < 0.9 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType80)
-                        }
-                        else if 0.9 <= usagePercent && usagePercent < 1.0 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType90)
-                        }
-                        else if usagePercent >= 1.0 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType100)
-                        }
-                    } else if usagePercent >= 1.0{
-                        viewForPresent = SmallFullOfQuotaPopUp.popUp()
-                    }
                     
-                    if let popUpView = viewForPresent {
-                        UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
-//                        self?.output.needPresentPopUp(popUpView: popUpView)
-                    }
-                    
+                    self?.output.didObtainQuotaInfo(usagePercentage: usagePercent)
                 }
             }
             
-            }, fail: { error in
-                //error handling not need
-                
+        }, fail: { error in
+            //error handling not need
         })
     }
 

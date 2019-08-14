@@ -13,6 +13,6 @@ protocol VisualMusicPlayerViewOutput {
         Notify presenter that view is ready
     */
 
-    func viewIsReady(view: UIView)
+    func viewIsReady(view: UIView, alert: AlertFilesActionsSheetPresenter)
     func closeMediaPlayer()
 }

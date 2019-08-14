@@ -9,6 +9,8 @@
 import UIKit
 
 /// for embedded views from nib
+/// use file owner to setup outlets instead of view
+/// https://stackoverflow.com/a/34524346/5893286
 protocol FromNib: class {
     func setupFromNib()
 }
@@ -24,7 +26,9 @@ extension FromNib where Self: UIView {
     private func loadFromNib() -> UIView {
         let nibName = String(describing: type(of: self))
         let nib = UINib(nibName: nibName, bundle: nil)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            fatalError("check all IBOtlets")
+        }
         return view
     }
 }

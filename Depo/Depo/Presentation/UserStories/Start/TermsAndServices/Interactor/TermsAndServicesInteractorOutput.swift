@@ -11,11 +11,11 @@ import Foundation
 protocol TermsAndServicesInteractorOutput: class {
     func showLoadedTermsAndUses(eula: String)
     func failLoadTermsAndUses(errorString: String)
-    func signUpSuccessed()
     func popUpPressed()
-    func signupFailed(errorResponce: ErrorResponse)
-    func applyEulaFaild(errorResponce: ErrorResponse)
     func signupFailedCaptchaRequired()
-    func eulaApplied()
     func setupEtk(isShowEtk: Bool)
+    func setupGlobalPerm(isShowGlobalPerm: Bool)
+    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool)
+    func applyEulaFailed(errorResponse: ErrorResponse)
+    func eulaApplied()
 }

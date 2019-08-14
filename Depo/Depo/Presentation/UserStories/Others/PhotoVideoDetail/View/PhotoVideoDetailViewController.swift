@@ -79,7 +79,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-        
+    
+    private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
+        button.setImage(UIImage(named: "more"), for: .normal)
+        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -111,8 +118,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
-        
-        setupMoreButton()
         
         onStopPlay()
         rootNavController(vizible: true)
@@ -194,6 +199,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupNavigationBar() {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+        }
+
         if hideActions {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
@@ -204,16 +213,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
         }
     }
-    
-    private func setupMoreButton() {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: button)
-        
-        navigationItem.rightBarButtonItem = barButton
-    }
-    
+
     private func setupTitle() {
         guard !objects.isEmpty, selectedIndex < objects.count else {
             return
@@ -244,6 +244,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         needToScrollAfterRotation = true
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        collectionView.reloadData()
     }
     
     override func getBackgroundColor() -> UIColor {
@@ -282,6 +283,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         localPlayer?.replaceCurrentItem(with: item)
         playerController = FixedAVPlayerViewController()
         playerController?.player = localPlayer
+        ///needs to expend from everywhere
+        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
+        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
         present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player?.play()
             self?.output.videoStarted()
@@ -322,9 +326,18 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
                 return
             }
             
+            self.replaceUploaded(file)
             self.output.replaceUploaded(file)
             self.output.updateBars()
             self.setupNavigationBar()
+        }
+    }
+    
+    private func replaceUploaded(_ item: WrapData) {
+        if let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
+            //need for display local image
+            item.patchToPreview = objects[indexToChange].patchToPreview
+            objects[indexToChange] = item
         }
     }
 }
@@ -333,9 +346,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objects.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeue(cell: PhotoVideoDetailCell.self, for: indexPath)
     }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoDetailCell else { return }
         cell.delegate = self
@@ -345,13 +360,17 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
 
 extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.bounds.size
+        let cellHeight = collectionView.frame.height
+        let cellWidth = collectionView.frame.width
+        ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+        ///seems like this bug may occur on iOS 12+ when it returns negative value
+        return CGSize(width: max(cellWidth, 0), height: max(cellHeight, 0))
     }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     func tapOnCellForFullScreen() {
-        isFullScreen = !isFullScreen
+        isFullScreen.toggle()
     }
     
     func tapOnSelectedItem() {
@@ -379,7 +398,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 let option = PHVideoRequestOptions()
                 
                 output.startCreatingAVAsset()
-                
+                debugLog("about to play local video item")
                 DispatchQueue.global(qos: .default).async { [weak self] in
                     PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
                         
@@ -389,13 +408,16 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                                 return
                             }
                             let playerItem = AVPlayerItem(asset: asset)
+                            debugLog("playerItem created \(playerItem.asset.isPlayable)")
                             self?.play(item: playerItem)
                         }   
                     }
                 }
                 
             case .remoteUrl(_):
+                debugLog("about to play remote video item")
                 let playerItem = AVPlayerItem(url: url)
+                debugLog("playerItem created \(playerItem.asset.isPlayable)")
                 play(item: playerItem)
             }
         }
@@ -419,5 +441,17 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
             currentPage = objects.count - 1
         }
         selectedIndex = currentPage
+    }
+}
+
+///extension of different class( Need to expand picture-in-picture everywhere)
+extension TabBarViewController: AVPlayerViewControllerDelegate {
+
+    func playerViewController(_ playerViewController: AVPlayerViewController,
+                              restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        RouterVC().presentViewController(controller: playerViewController) {
+            playerViewController.allowsPictureInPicturePlayback = true
+            completionHandler(true)
+        }
     }
 }

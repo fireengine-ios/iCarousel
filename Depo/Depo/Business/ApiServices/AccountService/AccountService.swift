@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -154,6 +155,28 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
+
+    func updateUserBirthday(_ birthday: String, handler: @escaping ResponseVoid) {
+        debugLog("AccountService updateBirthday")
+        
+        let birthdayDigits = birthday
+            .components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
+        
+        sessionManager
+            .request(RouteRequests.Account.updateBirthday,
+                     method: .post,
+                     encoding: birthdayDigits)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
     
     func verifyPhoneNumber(parameters: VerifyPhoneNumberParameter, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService verifyPhoneNumber")
@@ -164,7 +187,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     // MARK: - User Security
     
-    func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AccountService securitySettingsInfo")
 
         let parametres = SecuritySettingsInfoParametres()
@@ -172,12 +195,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: parametres, handler: handler)
     }
     
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
-                                success: SuccessResponse?, fail: FailResponse?) {
+    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
+                                mobileNetworkAuthEnabled: Bool,
+                                twoFactorAuthEnabled: Bool,
+                                success: SuccessResponse?,
+                                fail: FailResponse?) {
         debugLog("AccountService securitySettingsChange")
         
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
+        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
+                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
+                                                              twoFactorAuth: twoFactorAuthEnabled)
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parametres, handler: handler)
     }
@@ -217,10 +244,55 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func getPermissionsAllowanceInfo(handler: @escaping (ResponseResult<[SettingsPermissionsResponse]>) -> Void) {
+        debugLog("AccountService getPermissionsAllowance")
+        
+        let url = RouteRequests.Account.Permissions.permissionsList
+        sessionManager
+            .request(url)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let jsonArray = JSON(data: data).array else {
+                        let error = CustomErrors.serverError("\(url) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    
+                    let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
+                   
+                    handler(.success(results))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func changePermissionsAllowed(type: PermissionType, isApproved: Bool, handler: @escaping (ResponseResult<Void>) -> Void) {
+        debugLog("AccountService changePermissionsAllowed")
+        
+        let url = RouteRequests.Account.Permissions.permissionsUpdate
+        let params: [[String: Any]] = [["type": type.rawValue,
+                                        "approved": isApproved]]
+        
+        let urlRequest = sessionManager.request(url, method: .post).request
+        
+        if var request = urlRequest {
+            request = try! params.encode(request, with: nil)
+            
+            sessionManager
+                .request(request)
+                .customValidate()
+                .responseVoid(handler)
+        }
+    }
+    
     func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeInstapickAllowed")
         
-        let params: [String: Any] = ["instapickAllowed": isInstapickAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.instapick: isInstapickAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -242,8 +314,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
         
-        let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
-                                     "facebookTaggingEnabled": isFacebookAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.faceImage: isFaceImageAllowed,
+                                     SettingsInfoPermissionsJsonKeys.facebook: isFacebookAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -323,4 +395,234 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    /// repeat is key word of Swift
+    func updatePassword(oldPassword: String,
+                        newPassword: String,
+                        repeatPassword: String,
+                        captchaId: String,
+                        captchaAnswer: String,
+                        handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
+        
+        debugLog("AccountService updatePassword")
+        
+        let params: Parameters = ["oldPassword": oldPassword,
+                                  "password": newPassword,
+                                  "repeatPassword": repeatPassword]
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updatePassword,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .responseString { response in
+                /// on main queue by default
+                
+                switch response.result {
+                case .success(let text):
+                    
+                    /// server logic
+                    if text.isEmpty {
+                        handler(.success(()))
+                        return
+                    }
+                    
+                    guard
+                        let data = response.data,
+                        let value = JSON(data: data)["value"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch value {
+                    case "Existing Password does not match":
+                        backendError = .invalidOldPassword
+                    case "New Password and Repeated Password does not match":
+                        backendError = .notMatchNewAndRepeatPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
+                    
+                case .failure(let error):
+                    
+                    if error.isNetworkSpecialError {
+                        handler(.failure(.special(error.description)))
+                        return
+                    }
+                    
+                    guard
+                        let data = response.data,
+                        let status = JSON(data: data)["status"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "INVALID_PASSWORD":
+                        backendError = .invalidNewPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
+                }
+        }
+    }
+    
+    func updateBrandType() {
+        
+        var params = [String: Any]()
+#if LIFEBOX
+        params["brandType"] = "LIFEBOX"
+#elseif LIFEDRIVE
+        params["brandType"] = "LIFEDRIVE"
+#endif
+        
+        sessionManager.request(RouteRequests.Account.Settings.settingsApi,
+                               method: .patch,
+                               parameters: params,
+                               encoding: JSONEncoding.prettyPrinted,
+                               headers: RequestHeaders.authification())
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let result):
+                    let resultString = String(data: result, encoding: .utf8) ?? "Error on encoding updateBrandType response"
+                    debugLog(resultString)
+                case .failure(let error):
+                    debugLog(error.localizedDescription)
+                 }
+        }
+    }
+    
+    func faqUrl(_ handler: @escaping (String) -> Void) {
+        debugLog("AccountService faqUrl")
+        
+        sessionManager
+            .request(RouteRequests.Account.getFaqUrl)
+            .customValidate()
+            .responseJSON(queue: .global()) { response in
+                
+                func errorHandler() {
+                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+                    handler(defaultFaqUrl)
+                }
+                
+                switch response.result {
+                case .success(let json):
+                    if let json = json as? [String: String], let faqUrl = json["value"] {
+                        handler(faqUrl)
+                    } else {
+                        errorHandler()
+                    }
+                case .failure(_):
+                    errorHandler()
+                }
+        }
+    }
+    
+    func feedbackEmail(_ handler: @escaping (ResponseResult<FeedbackEmailResponse>) -> Void) {
+        debugLog("AccountService feedbackEmail")
+        
+        sessionManager
+            .request(RouteRequests.feedbackEmail)
+            .customValidate()
+            .responseData(queue: .global(), completionHandler: { response in
+                switch response.result {
+                case .success(let data):
+                    let feedbackResponse = FeedbackEmailResponse(json: data, headerResponse: nil)
+                    handler(.success(feedbackResponse))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func verifyEmail(otpCode: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.verifyEmail,
+                     method: .post,
+                     parameters: ["otp" : otpCode],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "INVALID_OTP" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else if statusJSON == "EXPIRED_OTP" {
+                        errorText = TextConstants.expiredOTP
+                        
+                    } else if statusJSON == "REFERENCE_TOKEN_IS_EMPTY" {
+                        errorText = TextConstants.tokenIsMissing
+                        
+                    } else if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+                        
+                    } else if statusJSON == "INVALID_EMAIL" {
+                        errorText = TextConstants.invalidEmail
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func sendEmailVerificationCode(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.sendEmailVerificationCode,
+                     method: .post,
+                     parameters: nil,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
 }

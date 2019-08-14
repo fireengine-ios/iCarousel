@@ -7,21 +7,32 @@
 //
 import UIKit
 
-class RegistrationPresenter: BasePresenter, RegistrationModuleInput, RegistrationViewOutput, RegistrationInteractorOutput {
+class RegistrationPresenter: BasePresenter {
     
     weak var view: RegistrationViewInput!
     var interactor: RegistrationInteractorInput!
     var router: RegistrationRouterInput!
     
+    var isSupportFormPresenting: Bool = false
     
-    // MARK: - View output
+    // MARK: BasePresenter
+    override func outputView() -> Waiting? {
+        return view
+    }
+}
+
+// MARK: - RegistrationViewOutput
+extension RegistrationPresenter: RegistrationViewOutput {
     func viewIsReady() {
         interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
-        interactor.prepareModels()
     }
-
+    
+    func prepareCaptcha(_ view: CaptchaView) {
+        view.delegate = self
+    }
+    
     func nextButtonPressed() {
         view.collectInputedUserInfo()
     }
@@ -33,82 +44,55 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
                                     captchaID: captchaID, captchaAnswer: captchaAnswer)
     }
     
-    func infoButtonGotPressed(with type: UserValidationResults) {
-        showPopUp(forType: type)
+    func openSupport() {
+        isSupportFormPresenting = true
+        router.openSupport()
     }
-    // MARK: - Interactor output
+}
+
+// MARK: - RegistrationInteractorOutput
+extension RegistrationPresenter: RegistrationInteractorOutput {
     
-    func prepearedModels(models: [BaseCellModel]) {
-        view.setupInitialState(withModels: models)
-    }
-    
-    func composedGSMCCodes(models: [GSMCodeModel]) {
-        view.setupPicker(withModels: models)
-    }
-    
-    func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
-        router.termsAndServices(with: view, email: email, phoneNumber: phone)
+    func userValid(_ userInfo: RegistrationUserInfoModel) {
+        interactor.signUpUser(userInfo)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
-        var prioratizedErrorTitle = ""
-        for errorType in result {
-            switch errorType {
-            case .mailIsEmpty, .passwordIsEmpty, .phoneIsEmpty, .repasswordIsEmpty:
-                view.showInfoButton(forType: errorType)
-            case .mailNotValid:
-                prioratizedErrorTitle = TextConstants.registrationMailError
-            case .passwordNotValid:
-                if prioratizedErrorTitle == "" {
-                    prioratizedErrorTitle = TextConstants.registrationPasswordError
-                }
-            case .passwodsNotMatch:
-                if prioratizedErrorTitle == "" {
-                    prioratizedErrorTitle = TextConstants.registrationPasswordNotMatchError
-                }
-            default:
-                break
-            }
+        ///sort is needed to priorities the error(empty field is high priority error)
+        let sortedResult = result.sorted { _, rignt in
+            let mailIsEmpty = (rignt == .mailIsEmpty )
+            let phoneIsEmpty = (rignt == .phoneIsEmpty )
+            let passwordIsEmpty = (rignt == .passwordIsEmpty )
+            let repasswordIsEmpty = (rignt == .passwordIsEmpty )
+            let isNeedSwitch = mailIsEmpty || phoneIsEmpty || passwordIsEmpty || repasswordIsEmpty
+            return isNeedSwitch
         }
-        if prioratizedErrorTitle != "" {
-             view.showErrorTitle(withText: prioratizedErrorTitle)
-        }
-//        result.forEach {view.showInfoButton(forType:$0)
-//        }
         
-    }
-    
-    func signUpFailed(withResult result: String?) {
-        completeAsyncOperationEnableScreen(errorMessage: result)
-    }
-    
-    func signUpSucces(withResult result: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-        completeAsyncOperationEnableScreen()
-        router.phoneVerification(sigUpResponse: result, userInfo: userInfo)
-
-    }
-    
-    func showPopUp(forType type: UserValidationResults) {
-        let text: String
-        switch type {
-        case .mailNotValid:
-            text = TextConstants.invalidMailErrorText
-        case .passwordNotValid:
-            text = TextConstants.invalidPasswordText
-        case .phoneNotValid:
-            text = TextConstants.invalidPhoneNumberText
-        case .passwodsNotMatch:
-            text = TextConstants.invalidPasswordMatchText
-        default:
-            return
+        sortedResult.forEach { errorType in
+            view.showInfoButton(forType: errorType)
         }
-        UIApplication.showErrorAlert(message: text)
+    }
+    
+    func signUpFailed(errorResponce: ErrorResponse) {
+        completeAsyncOperationEnableScreen()
+        view.showErrorTitle(withText: errorResponce.description)
+        
+        if interactor.captchaRequred {
+            view.updateCaptcha()
+        }
+    }
+    
+    func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
+        completeAsyncOperationEnableScreen()
+        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
+                                phoneNumber: signUpUserInfo?.phone ?? "",
+                                signUpResponse: signUpResponse,
+                                userInfo: signUpUserInfo)
     }
     
     func captchaRequred(requred: Bool) {
-        interactor.requestGSMCountryCodes()
-        if requred, let captchaVC = router.getCapcha() {
-            view.setupCaptchaVC(captchaVC: captchaVC)
+        if requred {
+            view.setupCaptcha()
         }
         asyncOperationSuccess()
     }
@@ -122,9 +106,15 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         view.showErrorTitle(withText: message)
     }
     
-    // MARK: BasePresenter
+    func showSupportView() {
+        view.showSupportView()
+    }
+}
+
+extension RegistrationPresenter: CaptchaViewErrorDelegate {
     
-    override func outputView() -> Waiting? {
-        return view
+    func showCaptchaError(error: Error) {
+        
+        view.showErrorTitle(withText: error.description)
     }
 }

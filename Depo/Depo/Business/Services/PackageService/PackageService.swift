@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StoreKit
 
 final class PackageService {
     
@@ -147,22 +148,26 @@ final class PackageService {
         return offerPeriod
     }
     
-    private func getOfferPrice(for offer: Any) -> String? {
+    func getOfferPrice(for offer: Any) -> String? {
         var price: String?
         if let offer = offer as? PackageModelResponse, let priceFloat = offer.price, priceFloat > 0 {
             price = String(priceFloat)
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let priceFloat = offer.subscriptionPlanPrice, priceFloat > 0 {
             price = String(priceFloat)
+        } else if let offer = offer as? SKProduct {
+            price = offer.localizedPrice
         }
         return price
     }
     
-    private func getOfferCurrency(for offer: Any) -> String? {
+    func getOfferCurrency(for offer: Any) -> String? {
         var currency: String?
         if let offer = offer as? PackageModelResponse, let currencyString = offer.currency {
             currency = currencyString
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let currencyString = offer.subscriptionPlanCurrency {
             currency = currencyString
+        } else if let offer = offer as? SKProduct {
+            currency = offer.priceLocale.currencyCode ?? "USD"
         }
         return currency
     }
@@ -295,5 +300,51 @@ final class PackageService {
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer)
         })
+    }
+    
+    //MARK: - Analytics
+    func getPurchaseEvent(for offer: Any) -> AnalyticsEvent? {
+        var event: AnalyticsEvent?
+        
+        let isTurkcellOffer = offer is PackageModelResponse
+        if let name = getOfferName(for: offer) {
+            if isPremiumPurchase(for: offer) {
+                event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
+                
+            } else if name.contains("500") {
+                event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
+                
+            } else if name.contains("100") {
+                event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
+                
+            } else if name.contains("50") {
+                event = isTurkcellOffer ? .purchaseTurkcell50 : .purchaseNonTurkcell50
+                
+            } else if name.contains("2.5") || name.contains("2,5") {
+                event = isTurkcellOffer ? .purchaseTurkcell2500 : .purchaseNonTurkcell2500
+                
+            }
+        }
+        return event
+    }
+    
+    private func getOfferName(for offer: Any) -> String? {
+        var name: String?
+        if let offer = offer as? PackageModelResponse, let nameString = offer.name {
+            name = nameString
+        } else if let offer = offer as? SKProduct {
+            name = offer.localizedTitle.lowercased()
+        }
+        return name
+    }
+    
+    private func isPremiumPurchase(for offer: Any) -> Bool {
+        var isPremiumPurchase = false
+        if let offer = offer as? PackageModelResponse , let authorities = offer.authorities {
+            isPremiumPurchase = authorities.contains(where: { $0.authorityType == .premiumUser })
+        } else if let offer = offer as? SKProduct {
+            isPremiumPurchase = offer.isPremiumPurchase
+        }
+        return isPremiumPurchase
     }
 }

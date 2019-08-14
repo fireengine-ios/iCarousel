@@ -37,6 +37,7 @@ struct SharedConstants {
     static let currentImageDataKey = "currentImageData"
     
     static let wormholeLogout = "wormholeLogout"
+    static let wormholeDidLogout = "wormholeDidLogout"
     static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"

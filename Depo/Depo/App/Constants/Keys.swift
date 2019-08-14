@@ -9,6 +9,6 @@
 import Foundation
 
 enum Keys {
-    static let emailSavingAttemptsCounter = "EmailSavingAttemptsCounter"
     static let fakeUUID = "tsdk_unique_id"
+    static let lastRemotesPageSaved = "lastRemotesPageSaved"
 }

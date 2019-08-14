@@ -187,6 +187,10 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         analyticsService.trackPackageClick(package: packages, packageIndex: planIndex)
     }
     
+    func trackScreen() {
+        analyticsService.logScreen(screen: .myStorage)
+    }
+    
     //MARK: Converter
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
         return packageService.convertToSubscriptionPlan(offers:activeSubscriptionList, accountType:accountType)

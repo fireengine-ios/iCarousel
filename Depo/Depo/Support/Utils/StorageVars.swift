@@ -11,7 +11,6 @@ import Foundation
 protocol StorageVars: class {
     var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
-    var emptyEmailUp: Bool { get set }
     var autoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
@@ -22,6 +21,7 @@ protocol StorageVars: class {
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
     var deepLink: String? {get set}
     var interruptedSyncVideoQueueItems: [String] { get set }
+    var blockedUsers: [String : Date] { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -76,15 +76,6 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: periodicContactSyncSetKey) }
     }
     
-    /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
-    /// when user logged in but drop app at EmailEnterController (func openEmptyEmail)
-    /// used in AppConfigurator emptyEmailUpIfNeed()
-    private let emptyEmailUpKey = "emptyEmailUpKey"
-    var emptyEmailUp: Bool {
-        get { return userDefaults.bool(forKey: emptyEmailUpKey) }
-        set { userDefaults.set(newValue, forKey: emptyEmailUpKey) }
-    }
-    
     private let autoSyncSettingsKey = "autoSyncSettingsKey"
     var autoSyncSettings: [String: Any]? {
         get { return userDefaults.dictionary(forKey: autoSyncSettingsKey) }
@@ -126,5 +117,16 @@ final class UserDefaultsVars: StorageVars {
     var interruptedSyncVideoQueueItems: [String] {
         get { return userDefaults.object(forKey: interruptedSyncVideoQueueItemsKey) as? [String] ?? []}
         set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
+    }
+    
+    var currentRemotesPage: Int {
+        get { return UserDefaults.standard.integer(forKey: Keys.lastRemotesPageSaved) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.lastRemotesPageSaved) }
+    }
+    
+    private let blockedUsersKey = "BlockedUsers"
+    var blockedUsers: [String : Date] {
+        get { return userDefaults.object(forKey: blockedUsersKey) as? [String : Date] ?? [:]}
+        set { userDefaults.set(newValue, forKey: blockedUsersKey)}
     }
 }

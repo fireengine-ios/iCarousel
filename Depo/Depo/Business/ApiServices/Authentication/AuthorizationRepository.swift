@@ -102,13 +102,19 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             return
         }
         
+        if let url = request.request?.url, url.isExpired {
+            completion(false, 0.0)
+            return
+        }
+        
         #if MAIN_APP
+        ///URL is hidden because of the safety requirements
         if let url = request.request?.url?.absoluteString {
-            debugLog("401 for \(url)")
+            debugLog("401 for an URL")
         } else {
             debugLog("request.request?.url?.absoluteString is nil")
         }
-        debugLog(request.description)
+//        debugLog(request.description)
         #endif
         
         /// save request

@@ -109,12 +109,18 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
         interactor.getFeaturePacks()
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
         feature = allFeatures.first(where: { feature in
-            return feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+            var isShouldPass = feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+            if accountType == .turkcell {
+                isShouldPass = isShouldPass && feature.featureType == .appleFeature
+            }
+
+            return isShouldPass
         })
         
         guard let neededFeature = feature else {
@@ -140,14 +146,15 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
+        optInVC?.hiddenError()
         optInVC?.hideResendButton()
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
         DispatchQueue.toMain {
@@ -161,12 +168,13 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     //MARK: Fail
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            router.showPromocodInvalideAlert(for: optInVC)
+            optInVC?.startEnterCode()
+            optInVC?.showError(TextConstants.promocodeInvalid)
         }
     }
     
@@ -177,6 +185,11 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func failed(with errorMessage: String) {
         view?.stopActivityIndicator()
         router.displayError(with: errorMessage)
+    }
+    
+    func failedResendToken(with errorMessage: String) {
+        optInVC?.stopLoading()
+        optInVC?.showError(errorMessage)
     }
 
     //MARK: finish purchase
@@ -192,7 +205,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
 // MARK: - OptInControllerDelegate
 extension PremiumPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = feature else {
             self.failed(with: "Couldn't get feature offer for this authority type")
@@ -204,8 +217,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        let error = CustomErrors.text(TextConstants.promocodeBlocked)
-        router.displayError(with: error.description)
+        optInVC.showError(TextConstants.promocodeBlocked)
     }
     
     func optInNavigationTitle() -> String {
@@ -213,7 +225,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = feature else {
             self.failed(with: "Couldn't get feature offer for this authority type")

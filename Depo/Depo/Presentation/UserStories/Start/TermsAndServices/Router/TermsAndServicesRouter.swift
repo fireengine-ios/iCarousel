@@ -35,4 +35,15 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
         let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
         RouterVC().pushViewController(viewController: vc)
     }
+    
+    func goToPrivacyPolicyDescriptionController() {
+        let newViewController = PrivacyPolicyController()
+        RouterVC().pushViewController(viewController: newViewController)
+    }
+    
+    func goToGlobalDataPermissionDetails() {
+        let vc = WebViewController(urlString: RouteRequests.globalPermissionsDetails)
+        vc.title = TextConstants.termsOfUseGlobalPermScreenTitle
+        RouterVC().pushViewController(viewController: vc)
+    }
 }

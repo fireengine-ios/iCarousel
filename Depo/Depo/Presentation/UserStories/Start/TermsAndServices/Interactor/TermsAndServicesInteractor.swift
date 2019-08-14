@@ -7,7 +7,7 @@
 //
 
 class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
-
+    
     weak var output: TermsAndServicesInteractorOutput!
     private let eulaService = EulaService()
     
@@ -16,33 +16,67 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var isFromLogin = false
+    var isFromRegistration = false
     
-    var eula: Eula?
+    var eula: EULAResponse?
     
     var phoneNumber: String?
     
-    var etkAuth: Bool?
+    var etkAuth: Bool? {
+        didSet {
+            /// if etkAuth changes, i have to update dataStorage because it will be passed to the next screen where this value will be needed
+            dataStorage.signUpResponse.etkAuth = etkAuth
+        }
+    }
+    
+    var globalPermAuth: Bool? {
+        didSet {
+            dataStorage.signUpResponse.globalPermAuth = globalPermAuth
+        }
+    }
     
     func loadTermsAndUses() {
-        eulaService.eulaGet(sucess: { [weak self] eula in
-            guard let eulaR = eula as? Eula else {
-                return
+        
+        DispatchQueue.toBackground { [weak self] in
+            self?.eulaService.eulaGet { [weak self] response in
+                switch response {
+                case .success(let eulaContent):
+                    self?.eula = eulaContent
+                    self?.dataStorage.signUpResponse.eulaId = eulaContent.id
+                    DispatchQueue.toMain {
+                        self?.output.showLoadedTermsAndUses(eula: eulaContent.content ?? "")
+                    }
+                case .failed(let error):
+                    DispatchQueue.toMain {
+                        self?.output.failLoadTermsAndUses(errorString: error.localizedDescription)
+                    }
+                    assertionFailure("Failed move to Terms Description ")
+                }
             }
-            self?.eula = eulaR
-            DispatchQueue.toMain {
-                self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
+        }
+    }
+    
+    func applyEula() {
+        guard let eulaID = eula?.id else {
+            assertionFailure()
+            return
+        }
+        
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
+            DispatchQueue.main.async {
+                self?.output.eulaApplied()
             }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.toMain {
-                self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
-            }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.applyEulaFailed(errorResponse: errorResponse)
+                }
         })
     }
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
-        
+        isFromRegistration = true
         dataStorage.signUpResponse.etkAuth = etkAuth
     }
     
@@ -52,12 +86,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     var signUpSuccessResponse: SignUpSuccessResponse {
-    
+        
         return dataStorage.signUpResponse
     }
     
     var userInfo: RegistrationUserInfoModel {
-    
+        
         return dataStorage.signUpUserInfo
     }
     
@@ -65,91 +99,82 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         return isFromLogin
     }
     
-    func signUpUser() {
-        guard let sigUpInfo = SingletonStorage.shared.signUpInfo,
-            let eulaId = eula?.id
-            else { return }
-        
-        let signUpUser = SignUpUser(phone: sigUpInfo.phone,
-                                    mail: sigUpInfo.mail,
-                                    password: sigUpInfo.password,
-                                    eulaId: eulaId,
-                                    captchaID: sigUpInfo.captchaID,
-                                    captchaAnswer: sigUpInfo.captchaAnswer)
-        
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
-                guard let t = result as? SignUpSuccessResponse else {
-                    return
-                }
-                self?.dataStorage.signUpResponse = t
-                self?.dataStorage.signUpResponse.etkAuth = self?.etkAuth
-                self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
-                SingletonStorage.shared.referenceToken = t.referenceToken
-                
-                self?.analyticsService.track(event: .signUp)
-                self?.analyticsService.trackSignupEvent()
-                
-                self?.output.signUpSuccessed()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                if case ErrorResponse.error(let error) = errorResponce,
-                    let statusError = error as? ServerStatusError,
-                    let signUpError = SignupResponseError(with: statusError) {
-                    
-                    self?.analyticsService.trackSignupEvent(error: signUpError)
-                    
-                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                        self?.output.signupFailedCaptchaRequired()
-                    }
-                } else {
-                    self?.analyticsService.trackSignupEvent(error: .serverError)
-                }
-
-                self?.output.signupFailed(errorResponce: errorResponce)
-            }
-        })
+    var cameFromRegistration: Bool {
+        return isFromRegistration
     }
     
-    func applyEula() {
-        guard let eula_ = eula, let eulaID = eula_.id else {
-            return
+    func checkEtkAndGlobalPermissions() {
+        var isShowEtk = true
+        var isShowGlobalPerm = true
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        checkEtk(for: phoneNumber) { result in
+            isShowEtk = result
+            dispatchGroup.leave()
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
-            DispatchQueue.main.async {
-                self?.output.eulaApplied()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                self?.output.applyEulaFaild(errorResponce: errorResponce)
-            }
-        })
+        dispatchGroup.enter()
+        checkGlobalPerm(for: phoneNumber) { result in
+            isShowGlobalPerm = result
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.output.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
+        }
+        
     }
     
     func checkEtk() {
-        /// phoneNumber will be exists only for signup
-        checkEtk(for: phoneNumber)
+        /// phoneNumber will exist only for signup
+        checkEtk(for: phoneNumber) { [weak self] isShowEtk in
+            self?.output.setupEtk(isShowEtk: isShowEtk)
+        }
     }
     
-    private func checkEtk(for phoneNumber: String?) {
+    private func checkEtk(for phoneNumber: String?, completion: BoolHandler?) {
         eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                
                 switch result {
                 case .success(let isShowEtk):
-                    self.output.setupEtk(isShowEtk: isShowEtk)
-                    
+                    completion?(isShowEtk)
                     /// if we show etk default value must be false (user didn't check etk)
                     if isShowEtk {
                         self.etkAuth = false
                     }
                 case .failed(_):
-                    self.output.setupEtk(isShowEtk: false)
+                    completion?(false)
+                }
+            }
+        }
+    }
+    
+    func checkGlobalPerm() {
+        checkGlobalPerm(for: phoneNumber) { [weak self] isShowGlobalPerm in
+            self?.output.setupGlobalPerm(isShowGlobalPerm: isShowGlobalPerm)
+        }
+    }
+    
+    private func checkGlobalPerm(for phoneNumber: String?, completion: @escaping BoolHandler) {
+        eulaService.getGlobalPermAuth(for: phoneNumber) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                switch result {
+                case .success(let isShowGlobalPerm):
+                    completion(isShowGlobalPerm)
+                    
+                    if isShowGlobalPerm {
+                        self.globalPermAuth = false
+                    }
+                case .failed(_):
+                    completion(false)
                 }
             }
         }

@@ -16,20 +16,84 @@ final class MyStorageViewController: BaseViewController {
     
     //MARK: IBOutlet
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var storageUsageTextView: UITextView!
-    @IBOutlet weak var collectionView: ResizableCollectionView!
-    @IBOutlet private weak var storageUsageProgressView: RoundedProgressView! {
+    @IBOutlet private weak var collectionView: ResizableCollectionView!
+    
+    @IBOutlet private weak var dividerView: UIView! {
         didSet {
-            storageUsageProgressView.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
-            storageUsageProgressView.progressTintColor = UIColor.lrTealish
-            storageUsageProgressView.progress = 0
+            dividerView.backgroundColor = ColorConstants.photoCell
+        }
+    }
+
+    @IBOutlet private weak var usageLabel: UILabel! {
+        didSet {
+            usageLabel.text = ""
+            usageLabel.textColor = UIColor.lrTealish
+            usageLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }
     
-    private lazy var restoreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+    @IBOutlet private weak var packagesLabel: UILabel! {
+        didSet {
+            packagesLabel.text = TextConstants.packagesIHave
+            packagesLabel.textColor = ColorConstants.darkText
+            packagesLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        }
+    }
+    
+    @IBOutlet private weak var percentageLabel: UILabel! {
+        didSet {
+            percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, 0)
+            percentageLabel.numberOfLines = 0
+            percentageLabel.textAlignment = .center
+            percentageLabel.textColor = UIColor.lrTealish
+            percentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        }
+    }
+    
+    @IBOutlet private weak var storageUsageProgressView: CircleProgressView! {
+        didSet {
+            storageUsageProgressView.backColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            storageUsageProgressView.progressColor = UIColor.lrTealish
+            storageUsageProgressView.backWidth = 8
+            storageUsageProgressView.progressWidth = 8
+            storageUsageProgressView.layoutIfNeeded()
+            storageUsageProgressView.set(progress: 0, withAnimation: false)
+        }
+    }
+    
+    @IBOutlet private weak var restoreView: UIView!  {
+        willSet {
+            newValue.layer.masksToBounds = true
+        }
+    }
+        
+    @IBOutlet private weak var restorePurchasesButton: UIButton! {
+        didSet {
+            restorePurchasesButton.isHidden = true
+            restorePurchasesButton.isEnabled = false
+            restorePurchasesButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 11, bottom: 6, right: 11)
+            restorePurchasesButton.setTitle(TextConstants.restorePurchasesButton, for: .normal)
+            restorePurchasesButton.setTitleColor(.lrTealish, for: .normal)
+            restorePurchasesButton.titleLabel?.font = .TurkcellSaturaDemFont(size: 14)
+            restorePurchasesButton.adjustsFontSizeToFitWidth()
+            restorePurchasesButton.backgroundColor = .clear
+            restorePurchasesButton.clipsToBounds = true
+            restorePurchasesButton.layer.cornerRadius = restorePurchasesButton.bounds.height * 0.5
+            restorePurchasesButton.layer.borderColor = UIColor.lrTealish.cgColor
+            restorePurchasesButton.layer.borderWidth = 2
+        }
+    }
+    
+    @IBOutlet private weak var restoreDescriptionLabel: UILabel! {
+        didSet {
+            restoreDescriptionLabel.isHidden = true
+            restoreDescriptionLabel.attributedText = NSAttributedString.attributedText(text: TextConstants.restorePurchasesInfo, word: TextConstants.attributedRestoreWord, textFont: .TurkcellSaturaFont(size: 15), wordFont: .TurkcellSaturaDemFont(size: 15))
+            restoreDescriptionLabel.numberOfLines = 0
+        }
+    }
     
     // MARK: - View lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +101,15 @@ final class MyStorageViewController: BaseViewController {
         output.viewDidLoad()
     }
     
-    //MARK: UtilityMethods
+    // MARK: - IBActions
+    
+    @IBAction private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
+    }
+    
+    // MARK: - UtilityMethods
+    
     private func setup() {
         setTitle(withString: output.title)
 
@@ -54,27 +126,13 @@ final class MyStorageViewController: BaseViewController {
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
     func configureProgress(with full: Int64, used: Int64) {
-        storageUsageProgressView.progress = Float(used) / Float(full)
+        let usage = CGFloat(used) / CGFloat(full)
         
-        let storageString = String(format: TextConstants.usedAndLeftSpace, used.bytesString, full.bytesString)
+        storageUsageProgressView.set(progress: usage, withAnimation: true)
         
-        //TODO: - think how to change this code for RTL languages
+        percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, (usage * 100).rounded(.toNearestOrAwayFromZero))
         
-//        guard let lastWord = storageString.lastIndex(of: " ") else { return }
-//        let lastWordLocation = storageString.distance(from: storageString.startIndex,
-//                                                      to: lastWord)
-//        let lastWordLength = storageString.distance(from: lastWord,
-//                                                    to: storageString.endIndex)
-//        let range = NSRange(location: lastWordLocation, length: lastWordLength)
-        
-        let attributedString = NSMutableAttributedString(string: storageString, attributes: [
-            .font: UIFont.TurkcellSaturaBolFont(size: 20),
-            .foregroundColor: ColorConstants.textGrayColor,
-            .kern: 0.0
-            ])
-//        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaMedFont(size: 20), range: range)
-        
-        storageUsageTextView.attributedText = attributedString
+        usageLabel.text = String(format: TextConstants.packageApplePrice, used.bytesString, full.bytesString)
     }
     
     func reloadCollectionView() {
@@ -82,13 +140,10 @@ extension MyStorageViewController: MyStorageViewInput {
     }
     
     func showRestoreButton() {
-        //IF THE USER NON CELL USER
-        navigationItem.rightBarButtonItem = restoreButton
-    }
-    
-    @objc private func restorePurhases() {
-        startActivityIndicator()
-        output.restorePurchasesPressed()
+        restorePurchasesButton.isEnabled = true
+        restorePurchasesButton.isHidden = false
+        restoreDescriptionLabel.isHidden = false
+        view.layoutIfNeeded()
     }
 }
 
@@ -109,9 +164,11 @@ extension MyStorageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Device.isIpad {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, height: NumericConstants.heightForPackageCell)
+            ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+            ///seems like this bug may occur on iOS 12+ when it returns negative value
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, 0), height: NumericConstants.heightForPackageCell)
         } else {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.packageSumInset, height: NumericConstants.heightForPackageCell)
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.packageSumInset, 0), height: NumericConstants.heightForPackageCell)
         }
     }
     

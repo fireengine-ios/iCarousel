@@ -10,7 +10,16 @@ import Foundation
 
 protocol PhoneVereficationInteractorInput {
     
+    var email: String { get }
+    
+    var phoneNumber: String { get }
+    
+    var expectedInputLength: Int? { get }
+    
+    var remainingTimeInSeconds: Int { get }
+    
     func verifyCode(code: String)
+    
     func resendCode()
     
     func showPopUp(with text: String)
@@ -19,11 +28,10 @@ protocol PhoneVereficationInteractorInput {
     
     func trackScreen()
     
-    var remainingTimeInMinutes: Int { get }
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     
-    var expectedInputLength: Int? { get }
+    func updateEmptyEmail()
+
+    func stopUpdatePhone()
     
-    var phoneNumber: String { get }
-    
-    var email: String { get }
 }

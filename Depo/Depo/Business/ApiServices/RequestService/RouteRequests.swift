@@ -17,18 +17,21 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    
+
     private static var currentServerEnvironment: ServerEnvironment {
         return SettingsBundleHelper.preferredEnvironment()
     }
+    private static let applicationTarget = TextConstants.NotLocalized.appName
     
-    static var baseUrl: URL {
+    static var baseShortUrlString: String {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
-        case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
-        case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://adepo.turkcell.com.tr/"
         }
     }
+    
+    static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
@@ -57,13 +60,15 @@ struct RouteRequests {
         }
     }()
     
-    static let silentLogin: String = {
+    static let privacyPolicy: String = {
         switch currentServerEnvironment {
-        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
-        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
+        case .production: return "https://mylifebox.com/policy/?lang="
         }
     }()
+    
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -79,12 +84,15 @@ struct RouteRequests {
     static let mailVerefication = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@"
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
-    
+    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -160,6 +168,9 @@ struct RouteRequests {
     //MARK : Share
     static let share = "share/%@"
     
+    //MARK: Feedback
+    static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    
     //MARK : Faq 
     static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
 
@@ -168,19 +179,40 @@ struct RouteRequests {
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
+    // MARK: - Quick Scroll
+
+    static let quickScrollGroups = "scroll/groups"
+    static let quickScrollGroupsList = "scroll/groups/list"
+    static let quickScrollRangeList = "scroll/range/list"
+    
+    // MARK: - Spotify
+    
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let disconnect = spotifyApi +/ "disconnect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = spotifyApi +/ "playlist/track"
+    }
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
-        switch currentServerEnvironment {
-        case .preProduction:
-            return "https://adepotest.turkcell.com.tr/download/update_ios.json"
-        case .production:
-            return "https://adepo.turkcell.com.tr/download/update_ios.json"
-        case .test:
-            return "https://tcloudstb.turkcell.com.tr/download/update_ios.json"
-        }
+        #if LIFEBOX
+            let jsonName = "download/update_ios.json"
+        #elseif LIFEDRIVE
+            let jsonName = "download/update_lifedrive_ios.json"
+        #else
+            let jsonName = "unknown"
+            debugPrint("⚠️: unknown turkcell updater url")
+        #endif
+        
+        return baseShortUrlString + jsonName
     }
-    
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
@@ -198,6 +230,10 @@ struct RouteRequests {
     enum Account {
         static let accountApi = baseUrl +/ "account"
         
+        static let updatePassword = accountApi +/ "updatePassword"
+        static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
+        
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
@@ -210,6 +246,9 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
+            
+            static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionsUpdate = Account.accountApi +/ "permission/update"
         }
     }
     
@@ -226,4 +265,15 @@ struct RouteRequests {
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
+    
+    static var globalPermissionsDetails: String {
+        switch currentServerEnvironment {
+        case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+        case .test: return ""
+        }   
+    }
+    
+    static let verifyEmail = baseUrl +/ "verify/emailAddress"
+    static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
 }
