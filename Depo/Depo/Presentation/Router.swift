@@ -172,6 +172,17 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
+    func replaceTopViewControllerWithViewController(_ viewController: UIViewController, animated: Bool = true) {
+        var currentNavigationStack = navigationController?.viewControllers ?? []
+        
+        if currentNavigationStack.isEmpty {
+            pushViewController(viewController: viewController, animated: animated)
+        } else {
+            currentNavigationStack[currentNavigationStack.count - 1] = viewController
+            navigationController?.setViewControllers(currentNavigationStack, animated: true)
+        }
+    }
+    
     func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -995,13 +1006,32 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
-        return SpotifyOverwritePopup.with(importAction: importAction)
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyOverwritePopup.with(action: importAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyDeletePopup(deleteAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyDeletePopup.with(action: deleteAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyCancelImportPopup(cancelAction: @escaping VoidHandler, continueAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyCancelImportPopup.with(action: cancelAction, dismissAction: continueAction)
     }
 
     func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
         let controller = SpotifyAuthViewController()
         controller.loadWebView(with: url)
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyImportedPlaylistsController() -> UIViewController {
+        return SpotifyImportedPlaylistsViewController.initFromNib()
+    }
+    
+    func spotifyImportedTracksController(playlist: SpotifyPlaylist, delegate: SpotifyImportedTracksViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyImportedTracksViewController.initFromNib()
+        controller.playlist = playlist
         controller.delegate = delegate
         return controller
     }

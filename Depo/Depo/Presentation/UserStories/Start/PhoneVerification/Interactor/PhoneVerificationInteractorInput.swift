@@ -28,7 +28,9 @@ protocol PhoneVerificationInteractorInput {
     
     func trackScreen()
     
-    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate)
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
+    
+    func updateEmptyEmail()
 
     func stopUpdatePhone()
     

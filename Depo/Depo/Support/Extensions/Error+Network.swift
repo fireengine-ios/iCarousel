@@ -25,4 +25,8 @@ extension Error {
         
         return urlError.code
     }
+    
+    var errorCode: Int {
+        return urlErrorCode.rawValue
+    }
 }

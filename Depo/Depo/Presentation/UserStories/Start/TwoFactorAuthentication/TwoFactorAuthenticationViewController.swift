@@ -39,6 +39,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     @IBOutlet private var designer: TwoFactorAuthenticationDesigner!
     @IBOutlet private weak var reasonOfAuthLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var errorView: ErrorBannerView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private var availableChallenges: [TwoFAChallengeModel] = [] {
         didSet {
@@ -184,17 +186,30 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                 
             case .failed(let error):
                 DispatchQueue.main.async {
-                    if let serverError = error as? ServerError, serverError.code == 401 {
-                        self?.popToLogin()
-                        
-                    } else {
-                        UIApplication.showErrorAlert(message: error.description)
-
+                    if let serverError = error as? ServerError {
+                        if serverError.code == TwoFAErrorCodes.unauthorized.statusCode {
+                            self?.popToLogin()
+                        } else if serverError.code == TwoFAErrorCodes.tooManyRequests.statusCode {
+                            self?.showTooManyRequestsError(with: TextConstants.twoFATooManyRequestsErrorMessage)
+                        } else {
+                            UIApplication.showErrorAlert(message: error.description)
+                        }
                     }
                 }
             }
-                                                        
         }
+    }
+    
+    private func showTooManyRequestsError(with text: String) {
+        errorView.message = text
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.errorView.isHidden = false
+            
+            self.view.layoutIfNeeded()
+        }
+        
+        let errorViewRect = self.view.convert(errorView.frame, to: self.view)
+        scrollView.scrollRectToVisible(errorViewRect, animated: true)
     }
     
     private func popToLogin() {

@@ -194,16 +194,18 @@ struct RouteRequests {
         static let authorizeUrl = spotifyApi +/ "authorizeUrl"
         static let status = spotifyApi +/ "status"
         static let playlists = spotifyApi +/ "playlist"
-        static let tracks = spotifyApi +/ "playlist/track"
+        static let tracks = playlists +/ "track"
+        static let importedPlaylists = spotifyApi +/ "provider/playlist"
+        static let importedTracks = importedPlaylists +/ "track"
     }
     
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
         #if LIFEBOX
-            let jsonName = "update_ios.json"
+            let jsonName = "download/update_ios.json"
         #elseif LIFEDRIVE
-            let jsonName = "update_lifedrive_ios.json"
+            let jsonName = "download/update_lifedrive_ios.json"
         #else
             let jsonName = "unknown"
             debugPrint("⚠️: unknown turkcell updater url")

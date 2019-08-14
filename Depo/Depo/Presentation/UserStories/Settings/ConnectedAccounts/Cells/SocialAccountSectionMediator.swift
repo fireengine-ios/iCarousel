@@ -21,12 +21,15 @@ final class SocialAccountSectionMediator {
         self.removeConnectionCell = removeConnectionCell
     }
     
-    
     func disconnect() {
         socialConnectionCell?.disconnect()
     }
     
     func setup(with username: String?) {
         removeConnectionCell?.set(username: username)
+    }
+    
+    func setupSpotify(username: String?, jobStatus: Date?) {
+        removeConnectionCell?.setSpotify(username: username, jobStatus: jobStatus)
     }
 }

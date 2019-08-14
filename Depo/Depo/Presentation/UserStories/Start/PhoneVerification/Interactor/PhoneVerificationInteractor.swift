@@ -148,8 +148,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         })
     }
     
-    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {}
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}
     
+    func updateEmptyEmail() {}
+
     func stopUpdatePhone() {}
 
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {

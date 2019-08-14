@@ -12,11 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyOverwritePopup" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="blurBackgroundView" destination="tVk-6A-wDv" id="Oqd-cb-Drc"/>
-                <outlet property="cancelButton" destination="B6O-UB-2dh" id="Kpy-jh-tE6"/>
+                <outlet property="actionButton" destination="Tkn-j6-nY8" id="OOQ-Nx-pOJ"/>
                 <outlet property="contentView" destination="Eku-Eg-zYp" id="91a-WT-UMo"/>
-                <outlet property="importButton" destination="Tkn-j6-nY8" id="b7t-Ia-qW6"/>
-                <outlet property="messageTitle" destination="NbA-Fh-4Nz" id="IuZ-Xe-0yv"/>
+                <outlet property="dismissButton" destination="B6O-UB-2dh" id="c0U-0Q-7iq"/>
+                <outlet property="titleLabel" destination="NbA-Fh-4Nz" id="AWU-cu-RlR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="crD-dm-vdg"/>
             </connections>
         </placeholder>
@@ -25,14 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVk-6A-wDv">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FuK-b7-1Se">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <blurEffect style="dark"/>
-                </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eku-Eg-zYp">
                     <rect key="frame" x="40.5" y="240" width="294" height="187"/>
                     <subviews>
@@ -91,11 +82,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Eku-Eg-zYp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3CS-Qe-F9c"/>
-                <constraint firstAttribute="bottom" secondItem="tVk-6A-wDv" secondAttribute="bottom" id="3Zg-IY-x8z"/>
-                <constraint firstItem="tVk-6A-wDv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="96R-uu-bQm"/>
                 <constraint firstItem="Eku-Eg-zYp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QNW-KD-31b"/>
-                <constraint firstAttribute="trailing" secondItem="tVk-6A-wDv" secondAttribute="trailing" id="pb7-WJ-wZL"/>
-                <constraint firstItem="tVk-6A-wDv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yzV-oT-AjA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
