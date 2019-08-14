@@ -215,7 +215,7 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     }
     
     func importSendToBackground() {
+        router.popToSettingsViewController()
         delegates.invoke(invocation: { $0.importSendToBackground() })
-        router.popToRootViewController()
     }
 }

@@ -29,7 +29,7 @@ final class SocialAccountSectionMediator {
         removeConnectionCell?.set(username: username)
     }
     
-    func setupSpotify(username: String?, jobStatus: Date?) {
+    func setupSpotify(username: String?, jobStatus: String?) {
         removeConnectionCell?.setSpotify(username: username, jobStatus: jobStatus)
     }
 }

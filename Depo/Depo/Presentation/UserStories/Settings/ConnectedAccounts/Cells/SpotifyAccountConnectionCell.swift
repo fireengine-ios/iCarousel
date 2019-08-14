@@ -42,6 +42,12 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+        return dateFormatter
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         service.delegates.add(self)
@@ -76,15 +82,40 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         
         spotifyStatus.isConnected ? delegate?.didConnectSuccessfully(section: section) : delegate?.didDisconnectSuccessfully(section: section)
         
-        if spotifyStatus.jobStatus == .failed {
+        switch spotifyStatus.jobStatus {
+        case .unowned:
+            print("Unowned status")
+        case .pending:
+            setConnectCondition(section: section, username: spotifyStatus.userName, jobStatus: TextConstants.Spotify.Card.importing)
+        case .running:
+            setConnectCondition(section: section, username: spotifyStatus.userName, jobStatus: TextConstants.Spotify.Card.importing)
+        case .finished:
+            setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+        case .cancelled:
+            print("Cancelled status")
+        case .failed:
+            setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
         }
-
+    }
+    
+    private func setConnectCondition(section: Section, username: String?, jobStatus: String?) {
         DispatchQueue.main.async {
-            //TODO: JobStatus and lastModifyed date will handle here
-            section.mediator.setupSpotify(username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+            section.mediator.setupSpotify(username: username, jobStatus: jobStatus)
         }
     }
+    
+    private func setConnectConditionWithModifyDate(section: Section, username: String?, jobStatus: Date?) {
+        guard let jobStatus = jobStatus else {
+            return
+        }
+        let modifyedDate = dateFormatter.string(from: jobStatus)
+        DispatchQueue.main.async {
+            section.mediator.setupSpotify(username: username, jobStatus: modifyedDate)
+        }
+    }
+    
+    
 }
 
 extension SpotifyAccountConnectionCell: SocialConnectionCell {

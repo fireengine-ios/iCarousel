@@ -11,19 +11,13 @@ import UIKit
 protocol SocialRemoveConnectionCell: class {
     func setup(with section: Section?)
     func set(username: String?)
-    func setSpotify(username: String?, jobStatus: Date?)
+    func setSpotify(username: String?, jobStatus: String?)
 }
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
     
     private(set) var section: Section?
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
-        return dateFormatter
-    }()
-    
+        
     @IBOutlet weak var jobStatusLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 16)
@@ -67,14 +61,14 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         }
     }
     
-    func setSpotify(username: String?, jobStatus: Date?) {
+    func setSpotify(username: String?, jobStatus: String?) {
         hideJobStatusLabel()
         if let username = username, !username.isEmpty {
             connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
         
         if let jobStatus = jobStatus {
-            jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, dateFormatter.string(from: jobStatus))
+            jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, jobStatus)
         }
     }
     

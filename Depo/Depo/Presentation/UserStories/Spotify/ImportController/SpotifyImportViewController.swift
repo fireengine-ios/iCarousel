@@ -115,6 +115,10 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         navigationBarWithGradientStyle()
     }
     
+    @IBAction private func importInBackgroundTapped(_ sender: Any) {
+        onImportInBackground()
+    }
+    
     private func setupGradientBackground() {
         view.addSubview(gradientView)
         view.sendSubview(toBack: gradientView)
@@ -156,7 +160,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         delegate?.importDidCancel(self)
     }
     
-    @objc private func onImportInBackground() {
+    private func onImportInBackground() {
         delegate?.importSendToBackground()
     }
 }

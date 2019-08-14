@@ -187,6 +187,14 @@ class RouterVC: NSObject {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    func popToSettingsViewController() {
+        guard let controller = navigationController?.viewControllers.filter({$0 is ConnectedAccountsViewController}).first else {
+            assertionFailure()
+            return
+        }
+        navigationController?.popToViewController(controller, animated: true)
+    }
+    
     func popViewController() {
         navigationController?.popViewController(animated: true)
     }
