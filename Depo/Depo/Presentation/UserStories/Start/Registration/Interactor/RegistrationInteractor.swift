@@ -58,7 +58,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func checkCaptchaRequerement() {
-        CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
+        CaptchaSignUpRequirementService().getCaptchaRequirement { [weak self] response in
             switch response {
             case .success(let boolResult):
                 self?.captchaRequired = boolResult
@@ -72,8 +72,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
             }
         }
         ///Implementation with old request bellow
-//        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
+//        captchaService.getSignUpCaptchaRequirement(sucess: { [weak self] succesResponse in
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
 //                self?.output.captchaRequiredFailed()
 //                return
 //            }

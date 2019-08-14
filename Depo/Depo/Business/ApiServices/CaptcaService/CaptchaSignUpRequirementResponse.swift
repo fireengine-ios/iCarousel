@@ -1,5 +1,5 @@
 //
-//  CaptchaSignUpRequrementResponse.swift
+//  CaptchaSignUpRequirementResponse.swift
 //  Depo
 //
 //  Created by Aleksandr on 7/12/18.

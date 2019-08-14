@@ -50,7 +50,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 }
                 if let serverError = error as? ServerError,
                        serverError.code == TwoFAErrorCodes.tooManyRequests.statusCode {
-                        self?.output.vereficationFailed(with: error.localizedDescription)
+                        self?.output.verificationFailed(with: error.localizedDescription)
                 }
             }
         }
