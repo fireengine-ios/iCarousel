@@ -15,11 +15,4 @@ extension Error {
         }
         return false
     }
-    
-    var preconditionFailed: Bool {
-        if let afError = self as? AFError, afError.responseCode == 412 {
-            return true
-        }
-        return false
-    }
 }
