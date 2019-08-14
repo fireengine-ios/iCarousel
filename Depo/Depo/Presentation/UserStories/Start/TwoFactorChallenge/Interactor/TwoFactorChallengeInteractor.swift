@@ -48,6 +48,10 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
                 DispatchQueue.main.async {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
+                if let serverError = error as? ServerError,
+                       serverError.code == TwoFAErrorCodes.tooManyRequests.statusCode {
+                        self?.output.vereficationFailed(with: error.localizedDescription)
+                }
             }
         }
     }
@@ -67,7 +71,6 @@ final class TwoFactorChallengeInteractor: PhoneVereficationInteractor {
                 }
             }
         }
-        
     }
     
     override func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {

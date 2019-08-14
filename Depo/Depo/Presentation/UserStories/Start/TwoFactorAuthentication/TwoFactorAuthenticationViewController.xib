@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TwoFactorAuthenticationViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="designer" destination="Ebc-xL-lds" id="Abh-rv-RO8"/>
+                <outlet property="errorView" destination="xIn-C9-vNP" id="mpt-o9-N9a"/>
                 <outlet property="reasonOfAuthLabel" destination="WNf-eD-Chw" id="w46-cZ-FiH"/>
+                <outlet property="scrollView" destination="sZZ-By-E4b" id="0GX-M3-gRf"/>
                 <outlet property="tableView" destination="Yra-nx-O4M" id="5ZB-zr-QbS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -40,26 +42,37 @@
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-N2-N7N">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-C9-vNP" userLabel="Error View" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="5" width="343" height="31"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" placeholder="YES" id="SDN-wS-nNZ"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="ptf-7b-PUy"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowUnderlineLayer" value="NO"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We detected an unusual login attempt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="WNf-eD-Chw">
-                                    <rect key="frame" x="33" y="37" width="309" height="74"/>
+                                    <rect key="frame" x="33" y="37" width="309" height="82"/>
                                     <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="35"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To secure your account and login safely, we’ll send you a security code to veriy your identity." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-7j-Nxa">
-                                    <rect key="frame" x="33" y="148" width="309" height="30"/>
+                                    <rect key="frame" x="33" y="156" width="309" height="52.5"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send the security code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-RZ-630">
-                                    <rect key="frame" x="21" y="219" width="333" height="17"/>
+                                    <rect key="frame" x="21" y="249.5" width="333" height="17"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEW-bl-lO2">
-                                    <rect key="frame" x="16" y="239" width="359" height="1"/>
+                                    <rect key="frame" x="16" y="269.5" width="359" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="jhN-6Z-XVa"/>
@@ -67,7 +80,7 @@
                                     <viewLayoutGuide key="safeArea" id="4kF-SL-6Px"/>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-nx-O4M" customClass="ResizableTableView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="240" width="375" height="128"/>
+                                    <rect key="frame" x="0.0" y="270.5" width="375" height="128"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="0tB-eC-E0P"/>
@@ -75,7 +88,7 @@
                                     </connections>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-k5-CES" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="84.5" y="387" width="206" height="44"/>
+                                    <rect key="frame" x="84.5" y="417.5" width="206" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="ikw-qu-pBx"/>
                                         <constraint firstAttribute="width" constant="206" id="o93-dd-Alj"/>
@@ -91,12 +104,14 @@
                                 <constraint firstItem="m5f-k5-CES" firstAttribute="top" secondItem="Yra-nx-O4M" secondAttribute="bottom" constant="19" id="1No-lo-z6B"/>
                                 <constraint firstAttribute="trailing" secondItem="WNf-eD-Chw" secondAttribute="trailing" constant="33" id="1TB-1Q-xE5"/>
                                 <constraint firstItem="UEW-bl-lO2" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="16" id="5Yi-w4-DlT"/>
-                                <constraint firstItem="WNf-eD-Chw" firstAttribute="top" secondItem="BTt-iN-5Wh" secondAttribute="top" constant="37" id="Auy-Cy-TMF"/>
                                 <constraint firstItem="kjs-RZ-630" firstAttribute="top" secondItem="yIj-7j-Nxa" secondAttribute="bottom" constant="41" id="CNy-0e-NLt"/>
                                 <constraint firstItem="Yra-nx-O4M" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" id="EXG-9k-MYf"/>
+                                <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="xIn-C9-vNP" secondAttribute="trailing" constant="16" id="HUq-f5-mOz"/>
                                 <constraint firstItem="kjs-RZ-630" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="21" id="LP8-2q-y2n"/>
                                 <constraint firstAttribute="trailing" secondItem="yIj-7j-Nxa" secondAttribute="trailing" constant="33" id="MxY-H3-ZGx"/>
+                                <constraint firstItem="xIn-C9-vNP" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="16" id="Nfo-wT-duG"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="m5f-k5-CES" secondAttribute="bottom" constant="16" id="T7F-n8-PPi"/>
+                                <constraint firstItem="WNf-eD-Chw" firstAttribute="top" secondItem="xIn-C9-vNP" secondAttribute="bottom" constant="1" id="YIQ-Ai-lKc"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="Yra-nx-O4M" secondAttribute="trailing" id="Yys-UY-Ltm"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="UEW-bl-lO2" secondAttribute="trailing" id="b2l-Zu-7XD"/>
                                 <constraint firstItem="m5f-k5-CES" firstAttribute="centerX" secondItem="zbf-N2-N7N" secondAttribute="centerX" id="baD-xo-a7e"/>
@@ -105,6 +120,7 @@
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="kjs-RZ-630" secondAttribute="trailing" constant="21" id="gWA-RI-BKz"/>
                                 <constraint firstItem="Yra-nx-O4M" firstAttribute="top" secondItem="kjs-RZ-630" secondAttribute="bottom" constant="4" id="i2E-iZ-R93"/>
                                 <constraint firstItem="yIj-7j-Nxa" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="33" id="l4i-rc-8oH"/>
+                                <constraint firstItem="xIn-C9-vNP" firstAttribute="top" secondItem="BTt-iN-5Wh" secondAttribute="top" constant="5" id="pzm-DM-wIT"/>
                                 <constraint firstItem="WNf-eD-Chw" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="33" id="r0V-YJ-BPj"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="BTt-iN-5Wh"/>
@@ -128,10 +144,12 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sZZ-By-E4b" secondAttribute="bottom" id="u6d-Gw-8rX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="132.68365817091455"/>
         </view>
         <customObject id="Ebc-xL-lds" customClass="TwoFactorAuthenticationDesigner" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="yIj-7j-Nxa" id="GzO-o4-jJm"/>
+                <outlet property="errorView" destination="xIn-C9-vNP" id="h5x-SD-LE9"/>
                 <outlet property="reasonLabel" destination="WNf-eD-Chw" id="cGw-47-6Zj"/>
                 <outlet property="sendButton" destination="m5f-k5-CES" id="Ub7-eX-ww4"/>
                 <outlet property="setTypeOfAuthenticationLabel" destination="kjs-RZ-630" id="vFs-yi-tnD"/>

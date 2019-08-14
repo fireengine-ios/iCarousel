@@ -242,6 +242,9 @@
 		4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		4BAF259222F8475000979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
 		4BAF259322F8475100979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
+		4BE1268F2304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
+		4BE126902304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
+		4BE126912304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
 		4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
@@ -6408,6 +6411,7 @@
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
 		4B7D5AAAF94401583E438FF4 /* Pods-LifeDriveProviderUI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.appstore.xcconfig"; sourceTree = "<group>"; };
 		4BA61F6D22B7D60400D66031 /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
+		4BE1268E2304351900BFE06F /* ServerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrors.swift; sourceTree = "<group>"; };
 		4BF3A68322B23F4F0082130F /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4BF3A68C22B2690A0082130F /* PermissionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsView.xib; sourceTree = "<group>"; };
 		4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDesigner.swift; sourceTree = "<group>"; };
@@ -9777,6 +9781,14 @@
 				3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4BE126922304352E00BFE06F /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				4BE1268E2304351900BFE06F /* ServerErrors.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		4BF3A67A22B23CCE0082130F /* Permissions */ = {
@@ -14301,6 +14313,7 @@
 				CED5E81D1EF7E81D009649EB /* HardwareService */,
 				7CA6C69B1EF1811100D21EBE /* Services */,
 				CEF193EB207F400300F281BF /* Wormhole */,
+				4BE126922304352E00BFE06F /* Errors */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -19723,6 +19736,7 @@
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
+				4BE126902304351900BFE06F /* ServerErrors.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
 				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
@@ -21693,6 +21707,7 @@
 				92004B6C21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
+				4BE1268F2304351900BFE06F /* ServerErrors.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
 				98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
@@ -22498,6 +22513,7 @@
 				CE78497022A685FB00662219 /* HomeCardsService.swift in Sources */,
 				CE78497122A685FB00662219 /* FileForDownload.swift in Sources */,
 				CE78497222A685FB00662219 /* GZIP.m in Sources */,
+				4BE126912304351900BFE06F /* ServerErrors.swift in Sources */,
 				CE78497322A685FB00662219 /* SearchService.swift in Sources */,
 				CE78497422A685FB00662219 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */,

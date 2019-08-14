@@ -15,12 +15,19 @@ class ErrorBannerView: UIView {
         
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.textColor = ColorConstants.textOrange
+        newValue.lineBreakMode = .byWordWrapping
         newValue.numberOfLines = 0
         newValue.text = ""
         newValue.isOpaque = true
         
         return newValue
     }()
+    
+    @IBInspectable var shouldShowUnderlineLayer = true {
+        didSet {
+            updateUnderlineLayerVisibility()
+        }
+    }
     
     private let underlineLayer: CALayer = {
         let newValue = CALayer()
@@ -57,6 +64,7 @@ class ErrorBannerView: UIView {
                                       y: frame.size.height - underlineWidth,
                                       width: frame.width,
                                       height: underlineWidth);
+        updateUnderlineLayerVisibility()
     }
     
     private func setup() {
@@ -70,10 +78,14 @@ class ErrorBannerView: UIView {
     
     private func setupLayout() {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        messageLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+
+        messageLabel.topAnchor.constraint(equalTo: topAnchor).activate()
+        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
+        messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
+        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).activate()
+    }
+    
+    private func updateUnderlineLayerVisibility() {
+        underlineLayer.isHidden = !shouldShowUnderlineLayer
     }
 }

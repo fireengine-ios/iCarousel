@@ -52,7 +52,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             }
             return
             
-        } else  if error == "INVALID_SESSION" {
+        } else if error == "INVALID_SESSION" {
             router.popToLoginWithPopUp(title: TextConstants.errorAlert,
                                        message: TextConstants.twoFAInvalidSessionErrorMessage,
                                        image: .error, onClose: nil)
@@ -76,6 +76,9 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             
         } else if error == "INVALID_OTP_CODE" {
             errorText = TextConstants.twoFAInvalidOtpErrorMessage
+            
+        } else if error == "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE" {
+            errorText = TextConstants.twoFATooManyRequestsErrorMessage
             
         } else {
             assertionFailure("Unrecognized error")
