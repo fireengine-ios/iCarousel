@@ -122,7 +122,7 @@ struct RouteRequests {
     
     static let captcha = "captcha/%@/%@"
     
-    static let captchaRequred = "captcha/required"
+    static let captchaRequired = "captcha/required"
     
     // MARK: Search
     

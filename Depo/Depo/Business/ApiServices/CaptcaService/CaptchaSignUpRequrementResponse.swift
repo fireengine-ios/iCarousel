@@ -11,7 +11,7 @@ import SwiftyJSON
 
 final class CaptchaSignUpRequirementResponse {
     var captchaRequired = false
-    fileprivate let captchaRequredJsonKey = "captchaRequired"
+    fileprivate let captchaRequiredJsonKey = "captchaRequired"
     
 }
 
@@ -19,6 +19,6 @@ extension CaptchaSignUpRequirementResponse: Map {
     convenience init?(json: JSON) {
         self.init()
         
-        captchaRequired = json[captchaRequredJsonKey].boolValue
+        captchaRequired = json[captchaRequiredJsonKey].boolValue
     }
 }

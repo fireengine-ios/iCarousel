@@ -77,7 +77,7 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         completeAsyncOperationEnableScreen()
         view.showErrorTitle(withText: errorResponce.description)
         
-        if interactor.captchaRequred {
+        if interactor.captchaRequired {
             view.updateCaptcha()
         }
     }
@@ -90,18 +90,18 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
                                 userInfo: signUpUserInfo)
     }
     
-    func captchaRequred(requred: Bool) {
-        if requred {
+    func captchaRequired(required: Bool) {
+        if required {
             view.setupCaptcha()
         }
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed() {
+    func captchaRequiredFailed() {
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed(with message: String) {
+    func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorTitle(withText: message)
     }

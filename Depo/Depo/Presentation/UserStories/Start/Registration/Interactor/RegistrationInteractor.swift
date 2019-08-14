@@ -14,7 +14,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
     
-    var captchaRequred = false
+    var captchaRequired = false
     private var  retriesCount = 0 {
         didSet {
             if retriesCount > 2 {
@@ -36,7 +36,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                               phone: phone,
                                                               password: password,
                                                               repassword: repassword,
-                                                              captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                              captchaAnswer: captchaRequired ? captchaAnswer : nil)
         
         if validationResult.count == 0 {//== .allValid {
             
@@ -44,8 +44,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
             signUpInfo = RegistrationUserInfoModel(mail: email,
                                                    phone: code + phone,
                                                    password: password,
-                                                   captchaID: captchaRequred ? captchaID : nil,
-                                                   captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                   captchaID: captchaRequired ? captchaID : nil,
+                                                   captchaAnswer: captchaRequired ? captchaAnswer : nil)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -61,26 +61,26 @@ class RegistrationInteractor: RegistrationInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
-                self?.captchaRequred = boolResult
-                self?.output.captchaRequred(requred: boolResult)
+                self?.captchaRequired = boolResult
+                self?.output.captchaRequired(required: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
-                    self?.output.captchaRequredFailed(with: error.description)
+                    self?.output.captchaRequiredFailed(with: error.description)
                 } else {
-                    self?.output.captchaRequredFailed()
+                    self?.output.captchaRequiredFailed()
                 }
             }
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
 //            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
-//                self?.output.captchaRequredFailed()
+//                self?.output.captchaRequiredFailed()
 //                return
 //            }
-//            self?.output.captchaRequred(requred: succesResponse.captchaRequred)
+//            self?.output.captchaRequired(required: succesResponse.captchaRequired)
 //
 //        }) { [weak self] errorResponse in
-//            self?.output.captchaRequredFailed()
+//            self?.output.captchaRequiredFailed()
 //        }
     }
     
@@ -121,8 +121,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                             
                             ///only with this error type captcha required error is processing
                             if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                                self?.captchaRequred = true
-                                self?.output.captchaRequred(requred: true)
+                                self?.captchaRequired = true
+                                self?.output.captchaRequired(required: true)
                             }
                         } else if let statusError = error as? ServerStatusError,
                             let signUpError = SignupResponseError(with: statusError) {
