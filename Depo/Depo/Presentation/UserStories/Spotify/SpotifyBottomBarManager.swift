@@ -72,7 +72,7 @@ extension SpotifyBottomBarManager: SpotifyTabBarPresenterDelegate {
         case .delete:
             delegate?.onBottomBarManagerDelete()
         default:
-            break
+            assertionFailure("unknown action")
         }
     }
 }

@@ -73,13 +73,8 @@ class SpotifyObject: Equatable {
     let createdDate: Date?
     let lastModifiedDate: Date?
     let imagePath: URL?
-    
-    var monthValue: String {
-        if let date = lastModifiedDate {
-            return date.getDateInTextForCollectionViewHeader()
-        }
-        return ""
-    }
+    var monthValue = ""
+    var nameFirstLetter = ""
     
     required init?(json: JSON) {
         guard let name = json["name"].string else {
@@ -93,6 +88,11 @@ class SpotifyObject: Equatable {
         self.createdDate = json["createdDate"].date
         self.lastModifiedDate = json["lastModifiedDate"].date
         self.imagePath = json["imagePath"].url
+        
+        if let date = lastModifiedDate {
+            monthValue = date.getDateInTextForCollectionViewHeader()
+        }
+        self.nameFirstLetter = String(name.first ?? Character(""))
     }
     
     func equalTo(rhs: SpotifyObject) -> Bool {

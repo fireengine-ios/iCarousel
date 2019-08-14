@@ -114,7 +114,7 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
         if !isActive {
             selectionButton.isSelected = false
         }
-        UIView.animate(withDuration: animated ? 0.2 : 0) {
+        UIView.animate(withDuration: animated ? NumericConstants.setImageAnimationDuration : 0) {
             self.selectionButton.isHidden = !isActive
             self.imageLeftOffset.constant = isActive ? Constants.imageLeftOffset.selectionMode : Constants.imageLeftOffset.defaultMode
             self.layoutIfNeeded()

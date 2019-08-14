@@ -38,7 +38,7 @@ final class SpotifyThreeDotMenuManager {
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         types.forEach { type in
-            var action: UIAlertAction?
+            let action: UIAlertAction?
             switch type {
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { [weak self] _ in
@@ -49,6 +49,7 @@ final class SpotifyThreeDotMenuManager {
                     self?.delegate.onThreeDotsManagerDelete()
                 })
             default:
+                assertionFailure("unowned action")
                 action = nil
             }
             

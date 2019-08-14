@@ -38,7 +38,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
         }
     }
     
-    var playlist: SpotifyPlaylist!
+    var playlist: SpotifyPlaylist?
     
     // MARK: - View lifecycle
     
@@ -56,10 +56,6 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
         
         navigationBarWithGradientStyle()
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        
-        if let searchController = navigationController?.topViewController as? SearchViewController {
-            searchController.dismissController(animated: false)
-        }
     }
     
     // MARK: -
@@ -72,27 +68,34 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     }
     
     private func loadNextPage() {
+        guard let playlistId = playlist?.id else {
+            return
+        }
+        
         if isLoadingNextPage || dataSource.isPaginationDidEnd {
             return
         }
         
         isLoadingNextPage = true
         
-        spotifyService.getImportedPlaylistTracks(playlistId: playlist.id!, sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: page, size: pageSize) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            self.isLoadingNextPage = false
-            
-            switch result {
-            case .success(let tracks):
-                self.page += 1
-                self.dataSource.append(tracks)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-            }
-        }
+        spotifyService.getImportedPlaylistTracks(playlistId: playlistId,
+                                                 sortBy: sortedRule.sortingRules,
+                                                 sortOrder: sortedRule.sortOder,
+                                                 page: page, size: pageSize) { [weak self] result in
+                                                    guard let self = self else {
+                                                        return
+                                                    }
+                                                    
+                                                    self.isLoadingNextPage = false
+                                                    
+                                                    switch result {
+                                                    case .success(let tracks):
+                                                        self.page += 1
+                                                        self.dataSource.append(tracks)
+                                                    case .failed(let error):
+                                                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                    }
+                                                }
     }
     
     private func deleteSelectedTracks() {
@@ -108,6 +111,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     private func deleteItems(_ items: [SpotifyTrack]) {
         let trackIds = items.compactMap { $0.id }
         if trackIds.isEmpty {
+            assertionFailure("should not be empty")
             return
         }
         
@@ -122,10 +126,12 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
             case .success(_):
                 self.dataSource.remove(items) {
                     self.hideSpinner()
-                    self.playlist.count -= items.count
+                    self.playlist?.count -= items.count
                     self.navbarManager.playlist = self.playlist
                     self.stopSelectionState()
-                    self.delegate?.didDeleteTracks(playlist: self.playlist)
+                    if let playlist = self.playlist {
+                        self.delegate?.didDeleteTracks(playlist: playlist)
+                    }
                 }
             case .failed(let error):
                 self.hideSpinner()

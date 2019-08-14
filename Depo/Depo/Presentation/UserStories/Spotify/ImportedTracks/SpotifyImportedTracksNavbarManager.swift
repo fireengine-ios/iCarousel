@@ -16,7 +16,7 @@ final class SpotifyImportedTracksNavbarManager: SpotifyImportedPlaylistsNavbarMa
         super.init(delegate: delegate)
     }
     
-    convenience init(delegate: (SpotifyImportedPlaylistsNavbarManagerDelegate & UIViewController)?, playlist: SpotifyPlaylist) {
+    convenience init(delegate: (SpotifyImportedPlaylistsNavbarManagerDelegate & UIViewController)?, playlist: SpotifyPlaylist?) {
         self.init(delegate: delegate)
         self.playlist = playlist
     }

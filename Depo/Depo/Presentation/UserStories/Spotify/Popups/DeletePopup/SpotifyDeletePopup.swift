@@ -10,6 +10,12 @@ import UIKit
 
 final class SpotifyDeletePopup: BlurBackgroundPopup {
 
+    static func with(action: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        let controller = initFromNib()
+        controller.setup(action: action, dismissAction: dismissAction)
+        return controller
+    }
+    
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.Spotify.DeletePopup.subtitle
@@ -18,12 +24,6 @@ final class SpotifyDeletePopup: BlurBackgroundPopup {
             newValue.textColor = ColorConstants.charcoalGrey.withAlphaComponent(0.5)
             newValue.font = UIFont.TurkcellSaturaFont(size: 14)
         }
-    }
-    
-    static func with(action: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
-        let controller = initFromNib()
-        controller.setup(action: action, dismissAction: dismissAction)
-        return controller
     }
     
     override func setupTitleLabel() {

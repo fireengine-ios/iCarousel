@@ -31,6 +31,7 @@ final class SpotifySortingManager {
     
     func addBarView(to superview: UIView) {
         guard let barView = topBar.view else {
+            assertionFailure("empty bar")
             return
         }
         barView.translatesAutoresizingMaskIntoConstraints = false

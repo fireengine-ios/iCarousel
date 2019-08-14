@@ -48,10 +48,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         
         navigationBarWithGradientStyle()
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        
-        if let searchController = navigationController?.topViewController as? SearchViewController {
-            searchController.dismissController(animated: false)
-        }
     }
 
     // MARK: -
@@ -70,21 +66,24 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         
         isLoadingNextPage = true
         
-        spotifyService.getImportedPlaylists(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: page, size: pageSize) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            self.isLoadingNextPage = false
-            
-            switch result {
-            case .success(let playlists):
-                self.page += 1
-                self.dataSource.append(playlists)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-            }
-        }
+        spotifyService.getImportedPlaylists(sortBy: sortedRule.sortingRules,
+                                            sortOrder: sortedRule.sortOder,
+                                            page: page,
+                                            size: pageSize) { [weak self] result in
+                                                guard let self = self else {
+                                                    return
+                                                }
+                                                
+                                                self.isLoadingNextPage = false
+                                                
+                                                switch result {
+                                                case .success(let playlists):
+                                                    self.page += 1
+                                                    self.dataSource.append(playlists)
+                                                case .failed(let error):
+                                                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                }
+                                            }
     }
     
     private func openTracks(for playlist: SpotifyPlaylist) {
@@ -105,6 +104,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private func deleteItems(_ items: [SpotifyPlaylist]) {
         let playlistIds = items.compactMap { $0.id }
         if playlistIds.isEmpty {
+            assertionFailure("should not be empty")
             return
         }
         
