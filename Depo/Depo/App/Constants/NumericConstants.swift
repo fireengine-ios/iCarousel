@@ -164,5 +164,14 @@ struct NumericConstants {
 struct RequestSizeConstant {
     static let faceImageItemsRequestSize = 100
     static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
+}
+
+//* 2FA Error Codes
+enum TwoFAErrorCodes: Int {
+    case unauthorized = 401
+    case tooManyRequests = 429
     
+    var statusCode: Int {
+        return self.rawValue
+    }
 }
