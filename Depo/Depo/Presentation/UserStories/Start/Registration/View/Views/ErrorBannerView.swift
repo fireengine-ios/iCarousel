@@ -78,7 +78,7 @@ class ErrorBannerView: UIView {
     
     private func setupLayout() {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.pinToSuperviewEdges()
+
         messageLabel.topAnchor.constraint(equalTo: topAnchor).activate()
         messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
         messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
