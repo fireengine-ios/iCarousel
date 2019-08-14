@@ -1333,6 +1333,7 @@ struct TextConstants {
         enum Playlist {
             static let importButton = NSLocalizedString("spotify_playlist_import_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let navBarTitle = NSLocalizedString("spotify_playlist_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let navBarSelectiontTitle = NSLocalizedString("spotify_playlist_navbar_selection_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let songsCount = NSLocalizedString("spotify_playlist_songs_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let successImport = NSLocalizedString("spotify_playlist_success_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let seeImported = NSLocalizedString("spotify_playlist_see_imported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1348,6 +1349,19 @@ struct TextConstants {
             static let title = NSLocalizedString("spotify_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let importing = NSLocalizedString("spotify_card_importing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let lastUpdate = NSLocalizedString("spotify_card_last_update", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+        enum DeletePopup {
+            static let title = NSLocalizedString("spotify_delete_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let titleBoldFontText = NSLocalizedString("spotify_delete_title_bold", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let subtitle = NSLocalizedString("spotify_delete_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let deleteButton = NSLocalizedString("spotify_delete_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+        enum CancelImportPopup {
+            static let title = NSLocalizedString("spotify_cancel_import_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let titleBoldFontText = NSLocalizedString("spotify_cancel_import_title_bold", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let subtitle = NSLocalizedString("spotify_cancel_import_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let continueButton = NSLocalizedString("spotify_cancel_import_continue_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let cancelButton = NSLocalizedString("spotify_cancel_import_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
     }
     static let confirm = NSLocalizedString("confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

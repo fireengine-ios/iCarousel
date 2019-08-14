@@ -21,6 +21,6 @@ protocol BottomSelectionTabBarViewInput: class, Waiting {
     
     func unselectAll() //FORNOW
     
-    func disableItems(atIntdex indexes: [Int])
-    func enableIems(atIndex indexes: [Int])
+    func disableItems(at indexes: [Int])
+    func enableItems(at indexes: [Int])
 }

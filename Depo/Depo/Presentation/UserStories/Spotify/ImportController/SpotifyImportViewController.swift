@@ -12,7 +12,7 @@ protocol SpotifyImportControllerDelegate: class {
     func importDidComplete(_ controller: SpotifyImportViewController)
     func importDidFailed(_ controller: SpotifyImportViewController, error: Error)
     func importDidCancel(_ controller: SpotifyImportViewController)
-    func importSendToBackground()
+    func importSendToBackground(_ controller: SpotifyImportViewController)
 }
 
 final class SpotifyImportViewController: BaseViewController, NibInit {
@@ -60,6 +60,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
             newValue.layer.borderWidth = 1
             newValue.setTitle(TextConstants.Spotify.Import.importInBackground, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
+            newValue.addTarget(self, action: #selector(onImportInBackground), for: .touchUpInside)
         }
     }
     
@@ -115,10 +116,6 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         navigationBarWithGradientStyle()
     }
     
-    @IBAction private func importInBackgroundTapped(_ sender: Any) {
-        onImportInBackground()
-    }
-    
     private func setupGradientBackground() {
         view.addSubview(gradientView)
         view.sendSubview(toBack: gradientView)
@@ -127,7 +124,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     // MARK: - Action
     
     private func startImport() {
-        let ids = playlists.map { $0.id }
+        let ids = playlists.map { $0.playlistId }
         spotifyService.start(playlistIds: ids) { [weak self] result in
             guard let self = self else {
                 return
@@ -145,7 +142,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     }
     
     private func autoclose() {
-        if canAutoClose && isImportComplete {
+        if canAutoClose && isImportComplete && presentedViewController == nil {
             delegate?.importDidComplete(self)
         }
     }
@@ -157,10 +154,19 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     }
     
     @objc private func onCancel() {
-        delegate?.importDidCancel(self)
+        let router = RouterVC()
+        let popup = router.spotifyCancelImportPopup(cancelAction: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.delegate?.importDidCancel(self)
+        }, continueAction: { [weak self] in
+            self?.autoclose()
+        })
+        present(popup, animated: false)
     }
     
-    private func onImportInBackground() {
-        delegate?.importSendToBackground()
+    @objc private func onImportInBackground() {
+        delegate?.importSendToBackground(self)
     }
 }

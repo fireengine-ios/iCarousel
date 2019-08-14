@@ -187,8 +187,8 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     }
     
     func importDidFailed(_ controller: SpotifyImportViewController, error: Error) {
-        
-        guard error.urlErrorCode.rawValue != 412 else {
+        //TODO: Control correct work with real server error
+        guard error.errorCode != 412 else {
             return
         }
         
@@ -214,8 +214,9 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         }
     }
     
-    func importSendToBackground() {
-        router.popToSettingsViewController()
+    func importSendToBackground(_ controller: SpotifyImportViewController) {
         delegates.invoke(invocation: { $0.importSendToBackground() })
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true)
     }
 }

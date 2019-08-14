@@ -1064,6 +1064,7 @@
 "spotify_import_failed_error" = "Error during importing";
 "spotify_playlist_import_button" = "Import Selected";
 "spotify_playlist_navbar_title" = "Spotify Playlists";
+"spotify_playlist_navbar_selection_title" = "Select Items";
 "spotify_playlist_songs_count" = "%d songs";
 "spotify_playlist_success_import" = "Playlists successfully imported!";
 "spotify_playlist_see_imported" = "See Imported Playlists";
@@ -1075,6 +1076,15 @@
 "spotify_card_title" = "Spotify Playlists";
 "spotify_card_importing" = "Importing playlists...";
 "spotify_card_last_update" = "Last Import %@";
+"spotify_delete_title" = "Are you sure you want to delete these files and remove them from lifebox?";
+"spotify_delete_title_bold" = "delete these files";
+"spotify_delete_subtitle" = "You won't be able to access them once they are delete.";
+"spotify_delete_delete_button" = "Delete";
+"spotify_cancel_import_title" = "Are you sure you want to cancel importing playlists?";
+"spotify_cancel_import_title_bold" = "cancel importing playlists?";
+"spotify_cancel_import_subtitle" = "Lorem ipsum dolor sit praesent eget velit ligula. Quisque viverra, enim vitae posuere porttitor, urna magna euismod.";
+"spotify_cancel_import_continue_button" = "Continue Importing";
+"spotify_cancel_import_cancel_button" = "Cancel Import";
 
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
