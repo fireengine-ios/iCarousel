@@ -194,7 +194,9 @@ struct RouteRequests {
         static let authorizeUrl = spotifyApi +/ "authorizeUrl"
         static let status = spotifyApi +/ "status"
         static let playlists = spotifyApi +/ "playlist"
-        static let tracks = spotifyApi +/ "playlist/track"
+        static let tracks = playlists +/ "track"
+        static let importedPlaylists = spotifyApi +/ "provider/playlist"
+        static let importedTracks = importedPlaylists +/ "track"
     }
     
     //MARK: - Turkcell Updater
