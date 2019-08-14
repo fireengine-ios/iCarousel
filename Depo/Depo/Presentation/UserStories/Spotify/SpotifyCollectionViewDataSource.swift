@@ -123,7 +123,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if showGroups {
-            return groups[safe: section]?.1.count ?? 0
+            return groups[safe: section]?.items.count ?? 0
         }
         return showOnlySelected ? selectedItems.count : allItems.count
     }
@@ -337,7 +337,6 @@ extension SpotifyCollectionViewDataSource {
             case .date:
                 sectionKey = item.monthValue
             default:
-                sectionKey = ""
                 assertionFailure("unknown sort type")
                 return nil
             }
@@ -346,6 +345,8 @@ extension SpotifyCollectionViewDataSource {
             if let section = sections.firstIndex(where: { $0 == sectionKey }),
                let row = groups[section].items.firstIndex(where: {$0 == item }) {
                 return IndexPath(row: row, section: section)
+            } else {
+                return nil
             }
         } else if let row = allItems.firstIndex(where: { $0 == item }) {
             return IndexPath(row: row, section: 0)

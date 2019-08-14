@@ -69,6 +69,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     
     private func loadNextPage() {
         guard let playlistId = playlist?.id else {
+            assertionFailure()
             return
         }
         
