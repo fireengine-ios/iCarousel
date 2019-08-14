@@ -1061,12 +1061,14 @@
 "spotify_import_to" = "to lifebox";
 "spotify_import_description" = "You can find imported playlists under:\nAll Files > Music";
 "spotify_import_in_background" = "Import in Background";
+"spotify_import_failed_error" = "Error during importing";
 "spotify_playlist_import_button" = "Import Selected";
 "spotify_playlist_navbar_title" = "Spotify Playlists";
 "spotify_playlist_songs_count" = "%d songs";
 "spotify_playlist_success_import" = "Playlists successfully imported!";
 "spotify_playlist_see_imported" = "See Imported Playlists";
 "spotify_overwrite_message" = "This action will overwrite your previously imported playlists which have the same name.";
+"spotify_trasfering_playlist_error" = "Error transfering Spotify playlist";
 "spotify_overwrite_message_bold" = "overwrite your previously imported playlists";
 "spotify_overwrite_cancel_button" = "Cancel";
 "spotify_overwrite_import_button" = "Import";
