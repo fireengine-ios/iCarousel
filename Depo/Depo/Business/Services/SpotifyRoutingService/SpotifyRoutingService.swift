@@ -187,8 +187,8 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     }
     
     func importDidFailed(_ controller: SpotifyImportViewController, error: Error) {
-        
-        guard error.errorCode != 412 else {
+        //TODO: Control correct work with real server error
+        guard !error.preconditionFailed else {
             return
         }
         
