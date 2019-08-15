@@ -239,6 +239,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func updateSelection(cell: PhotoVideoCell) {
         cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
         updateSelectedItemsCount()
+        
+        ///fix bottom bar update scrolling freeze on dragging
+        guard !collectionView.isQuickSelecting else {
+            return
+        }
+        
+        updateBarsForSelectedObjects()
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {

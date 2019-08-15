@@ -32,7 +32,7 @@ class LoginInteractor: LoginInteractorInput {
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
     private let storageVars: StorageVars
     
-    private var updatePhoneService: UpdatePhoneService?
+    private var accountWarningService: AccountWarningService?
 
     private var rememberMe: Bool = true
     
@@ -354,13 +354,13 @@ class LoginInteractor: LoginInteractorInput {
 //        }
     }
     
-    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {
-        updatePhoneService = UpdatePhoneService(delegate: delegate)
-        updatePhoneService?.start()
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
+        accountWarningService = AccountWarningService(delegate: delegate)
+        accountWarningService?.start()
     }
     
     func stopUpdatePhone() {
-        updatePhoneService?.stop()
+        accountWarningService?.stop()
     }
     
 }

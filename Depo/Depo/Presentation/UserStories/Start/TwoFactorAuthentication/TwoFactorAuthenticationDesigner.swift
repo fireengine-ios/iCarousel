@@ -10,6 +10,12 @@ import Foundation
 
 final class TwoFactorAuthenticationDesigner: NSObject {
     
+    @IBOutlet private weak var errorView: ErrorBannerView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
     @IBOutlet private weak var reasonLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0

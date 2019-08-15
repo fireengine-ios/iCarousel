@@ -847,6 +847,7 @@
 "Instagram" = "Instagram";
 "Spotify" = "Spotify";
 "connected_as_format" = "Connected account:  @%@";
+"spotify_last_import" = "Last Import %@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
 "instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
 "instapick_selection_photos_selected" = "Photos Selected (%d)";
@@ -1027,7 +1028,6 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "Commercial Electronic Message";
-"etk_permissiom_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
 "restore_purchases" = "Restore Purchases";
 "restore_purchases_info" = "If you want to restore your existing purchases, click on the button.";
@@ -1061,18 +1061,30 @@
 "spotify_import_to" = "to lifebox";
 "spotify_import_description" = "You can find imported playlists under:\nAll Files > Music";
 "spotify_import_in_background" = "Import in Background";
+"spotify_import_failed_error" = "Error during importing";
 "spotify_playlist_import_button" = "Import Selected";
 "spotify_playlist_navbar_title" = "Spotify Playlists";
+"spotify_playlist_navbar_selection_title" = "Select Items";
 "spotify_playlist_songs_count" = "%d songs";
 "spotify_playlist_success_import" = "Playlists successfully imported!";
 "spotify_playlist_see_imported" = "See Imported Playlists";
 "spotify_overwrite_message" = "This action will overwrite your previously imported playlists which have the same name.";
+"spotify_trasfering_playlist_error" = "Error transfering Spotify playlist";
 "spotify_overwrite_message_bold" = "overwrite your previously imported playlists";
 "spotify_overwrite_cancel_button" = "Cancel";
 "spotify_overwrite_import_button" = "Import";
 "spotify_card_title" = "Spotify Playlists";
 "spotify_card_importing" = "Importing playlists...";
 "spotify_card_last_update" = "Last Import %@";
+"spotify_delete_title" = "Are you sure you want to delete these files and remove them from lifebox?";
+"spotify_delete_title_bold" = "delete these files";
+"spotify_delete_subtitle" = "You won't be able to access them once they are delete.";
+"spotify_delete_delete_button" = "Delete";
+"spotify_cancel_import_title" = "Are you sure you want to cancel importing playlists?";
+"spotify_cancel_import_title_bold" = "cancel importing playlists?";
+"spotify_cancel_import_subtitle" = "Lorem ipsum dolor sit praesent eget velit ligula. Quisque viverra, enim vitae posuere porttitor, urna magna euismod.";
+"spotify_cancel_import_continue_button" = "Continue Importing";
+"spotify_cancel_import_cancel_button" = "Cancel Import";
 
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
@@ -1094,3 +1106,6 @@
 "expired_otp" = "If there is no generated or valid OTP Code";
 "token_is_missing" = "If OTP is empty on request";
 "invalid_email" = "If account email is different with OTP Code sent";
+
+/*2FA Error Messages*/
+"two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";

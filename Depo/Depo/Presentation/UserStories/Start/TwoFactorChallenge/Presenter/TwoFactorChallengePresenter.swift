@@ -52,7 +52,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             }
             return
             
-        } else  if error == "INVALID_SESSION" {
+        } else if error == "INVALID_SESSION" {
             router.popToLoginWithPopUp(title: TextConstants.errorAlert,
                                        message: TextConstants.twoFAInvalidSessionErrorMessage,
                                        image: .error, onClose: nil)
@@ -60,6 +60,10 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             
         } else if error == HeaderConstant.emptyMSISDN {
             updateEmptyPhone()
+            return
+            
+        } else if error == HeaderConstant.emptyEmail {
+            updateEmptyEmail()
             return
             
         } else if error == "INVALID_CHALLENGE" {
@@ -73,6 +77,9 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         } else if error == "INVALID_OTP_CODE" {
             errorText = TextConstants.twoFAInvalidOtpErrorMessage
             
+        } else if error == "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE" {
+            errorText = TextConstants.twoFATooManyRequestsErrorMessage
+            
         } else {
             assertionFailure("Unrecognized error")
             errorText = "Unrecognized error"
@@ -85,9 +92,15 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
     private func updateEmptyPhone() {
         interactor.updateEmptyPhone(delegate: self)
     }
+    
+    private func updateEmptyEmail() {
+        interactor.updateEmptyEmail()
+    }
 }
 
-extension TwoFactorChallengePresenter: UpdatePhoneServiceDelegate {
+// MARK: - AccountWarningServiceDelegate
+
+extension TwoFactorChallengePresenter: AccountWarningServiceDelegate {
     func successedSilentLogin() {
         verificationSucces()
     }

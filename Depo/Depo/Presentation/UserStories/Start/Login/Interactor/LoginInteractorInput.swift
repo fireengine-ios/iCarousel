@@ -29,7 +29,7 @@ protocol LoginInteractorInput {
     
     func trackScreen()
     
-    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate)
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     
     func tryToRelogin()
     
