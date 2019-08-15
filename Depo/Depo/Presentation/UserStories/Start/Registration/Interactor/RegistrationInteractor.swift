@@ -94,7 +94,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 guard let result = response as? SignUpSuccessResponse else {
                     let error = CustomErrors.serverError("An error has occurred while register new user.")
                     let errorResponse = ErrorResponse.error(error)
-                    self?.output.signUpFailed(errorResponce: errorResponse)
+                    self?.output.signUpFailed(errorResponse: errorResponse)
                     return
                 }
                 
@@ -108,11 +108,11 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 SingletonStorage.shared.isJustRegistered = true
                 self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
             }
-            }, fail: { [weak self] errorResponce in
+            }, fail: { [weak self] errorResponse in
                 self?.retriesCount += 1
                 
                 DispatchQueue.main.async { [weak self] in
-                    switch errorResponce {
+                    switch errorResponse {
                     case .error(let error):
                         if let valueError = error as? ServerValueError,
                             let signUpError = SignupResponseError(with: valueError) {
@@ -135,7 +135,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                         
                     }
 
-                    self?.output.signUpFailed(errorResponce: errorResponce)
+                    self?.output.signUpFailed(errorResponse: errorResponse)
                 }
         })
     }

@@ -594,10 +594,10 @@ class RouterVC: NSObject {
     
     // MARK: CreateStory preview
     
-    func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+    func storyPreview(forStory story: PhotoStory, response: CreateStoryResponse) -> UIViewController {
         let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
                                                                                                    story: story,
-                                                                                                   responce: responce)
+                                                                                                   response: response)
         return controller
     }
     
@@ -844,8 +844,8 @@ class RouterVC: NSObject {
     
     // MARK: OTP
     
-    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
-        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo, phoneNumber: phoneNumber)
+    func otpView(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(response: response, userInfo: userInfo, phoneNumber: phoneNumber)
         return controller
     }
     

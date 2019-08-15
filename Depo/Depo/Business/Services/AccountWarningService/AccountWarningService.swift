@@ -82,12 +82,12 @@ extension AccountWarningService {
     
     private func getToken(for phoneNumber: String) {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
+        accountService.updateUserPhone(parameters: parameters, success: { [weak self] response in
+            guard let signUpResponse = response as? SignUpSuccessResponse else {
                 return
             }
             DispatchQueue.main.async {
-                self?.successed(token: signUpResponce)
+                self?.successed(token: signUpResponse)
             }
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
