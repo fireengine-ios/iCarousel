@@ -251,6 +251,9 @@ class RouterVC: NSObject {
             lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
+        } else {
+            assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
+            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
         }
     }
         
