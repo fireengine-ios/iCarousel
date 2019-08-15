@@ -15,7 +15,7 @@ protocol PhoneVerificationInteractorOutput: class {
     func verificationSilentSuccess()
     
     func resendCodeRequestFailed(with error: ErrorResponse)
-    func resendCodeRequestSuccesed()
+    func resendCodeRequestSucceeded()
     
     func succesLogin()
     func failLogin(message: String)

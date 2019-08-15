@@ -41,7 +41,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             switch response {
             case .success(let parameters):
                 self?.otpParams = parameters
-                self?.output.resendCodeRequestSuccesed()
+                self?.output.resendCodeRequestSucceeded()
                 
             case .failed(let error):
                 let errorResponse = ErrorResponse.error(error)

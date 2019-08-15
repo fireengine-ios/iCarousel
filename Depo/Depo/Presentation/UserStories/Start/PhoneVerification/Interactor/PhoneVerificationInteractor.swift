@@ -61,7 +61,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
                     self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
                     self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
                 }
-                self?.output.resendCodeRequestSuccesed()
+                self?.output.resendCodeRequestSucceeded()
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {

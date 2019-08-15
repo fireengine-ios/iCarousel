@@ -88,7 +88,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         view.dropTimer()
     }
     
-    func resendCodeRequestSuccesed() {
+    func resendCodeRequestSucceeded() {
         completeAsyncOperationEnableScreen()
         asyncOperationSuccess()
         view.setupButtonsInitialState()

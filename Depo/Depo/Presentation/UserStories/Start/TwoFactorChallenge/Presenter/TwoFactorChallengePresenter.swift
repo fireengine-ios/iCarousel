@@ -14,7 +14,7 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         view.setupButtonsInitialState()
         view.setupInitialState()
         configure()
-        resendCodeRequestSuccesed()
+        resendCodeRequestSucceeded()
     }
     
     override func resendButtonPressed() {
@@ -25,7 +25,7 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         interactor.resendCode()
     }
     
-    override func resendCodeRequestSuccesed() {
+    override func resendCodeRequestSucceeded() {
         view.setupButtonsInitialState()
         view.setupTimer(withRemainingTime: interactor.remainingTimeInSeconds)
         view.updateEditingState()

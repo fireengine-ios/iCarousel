@@ -85,7 +85,7 @@ class OTPViewInteractor: PhoneVerificationInteractor {
                     self?.responce = responce
                 }
                 DispatchQueue.main.async {
-                    self?.output.resendCodeRequestSuccesed()
+                    self?.output.resendCodeRequestSucceeded()
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
