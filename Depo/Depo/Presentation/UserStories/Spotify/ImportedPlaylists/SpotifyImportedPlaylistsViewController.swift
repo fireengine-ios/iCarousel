@@ -143,6 +143,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         dataSource.cancelSelection()
         navbarManager.setDefaultState()
         bottomBarManager.hide()
+        collectionView.contentInset.bottom = 0
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -150,8 +151,10 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
 
         if count == 0 {
             bottomBarManager.hide()
+            collectionView.contentInset.bottom = 0
         } else {
             bottomBarManager.show()
+            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
         }
     }
 }
