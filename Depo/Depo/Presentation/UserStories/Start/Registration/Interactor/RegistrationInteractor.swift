@@ -73,7 +73,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
 //                self?.output.captchaRequiredFailed()
 //                return
 //            }

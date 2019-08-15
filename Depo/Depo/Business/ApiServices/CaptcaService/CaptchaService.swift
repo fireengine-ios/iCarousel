@@ -56,10 +56,7 @@ final class CaptchaSignUpRequrementService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let captchaSignUp = CaptchaSignUpRequirementResponse(json: JSON(data: data)) else {
-                            handler(ResponseResult.failed(MappingError(data: data)))
-                            return
-                    }
+                    let captchaSignUp = CaptchaSignUpRequirementResponse(withJSON: JSON(data: data))
                     handler(ResponseResult.success(captchaSignUp.captchaRequired))
                 case .failure(let error):
                     
@@ -141,8 +138,8 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
 }
 
-final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
-    
+final class CaptchaSignUpRequirementResponse: ObjectRequestResponse {
+
     var data: Data?
     var captchaRequired: Bool = false
 
@@ -181,7 +178,7 @@ final class CaptchaService: BaseRequestService {
     }
     
     func getSignUpCaptchaRequrement(sucess: SuccessResponse?, fail: FailResponse?) {
-        let handler = BaseResponseHandler<CaptchaSignUpRequrementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        let handler = BaseResponseHandler<CaptchaSignUpRequirementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
         executeGetRequest(param: CaptchaSignUpRequrementParametr(), handler: handler)
     }
     

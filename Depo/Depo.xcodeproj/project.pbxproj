@@ -2812,8 +2812,6 @@
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
-		8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
-		8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
@@ -4723,7 +4721,6 @@
 		CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E43321A5B03A0084AA37 /* LeavePremiumRouter.swift */; };
 		CE784B0222A685FB00662219 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		CE784B0322A685FB00662219 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
-		CE784B0422A685FB00662219 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */; };
 		CE784B0622A685FB00662219 /* BaseFilesGreedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */; };
 		CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F56F81F1CC1CC0014870B /* ActionsMenuTableViewCell.swift */; };
@@ -7644,7 +7641,6 @@
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
-		8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSignUpRequrementResponse.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
@@ -14799,7 +14795,6 @@
 			isa = PBXGroup;
 			children = (
 				CE51A0CD1EF8F081005DCEE0 /* CaptchaService.swift */,
-				8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */,
 			);
 			path = CaptcaService;
 			sourceTree = "<group>";
@@ -20053,7 +20048,6 @@
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
 				8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */,
-				8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
@@ -21601,7 +21595,6 @@
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
-				8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
@@ -22926,7 +22919,6 @@
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				CE784B0322A685FB00662219 /* DateExtension.swift in Sources */,
-				CE784B0422A685FB00662219 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */,
 				CE784B0622A685FB00662219 /* BaseFilesGreedConfigurator.swift in Sources */,
 				CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */,
