@@ -101,7 +101,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
             case .finished:
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             case .cancelled:
-                print("Cancelled status")
+                setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             case .failed:
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
                 delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
