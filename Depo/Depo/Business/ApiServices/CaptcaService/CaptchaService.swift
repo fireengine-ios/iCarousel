@@ -38,14 +38,14 @@ struct CaptchaParametr: RequestParametrs {
     }
 }
 
-final class CaptchaSignUpRequirementService {
+final class CaptchaSignUpRequrementService {
     let sessionManager: SessionManager
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
     
-    public func getCaptchaRequirement(handler: @escaping ResponseBool) {
+    public func getCaptchaRequrement(handler: @escaping ResponseBool) {
         guard let requestURL = URL(string: RouteRequests.captchaRequired, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
@@ -75,7 +75,7 @@ final class CaptchaSignUpRequirementService {
      
 }
 
-struct CaptchaSignUpRequirementParametr: RequestParametrs {
+struct CaptchaSignUpRequrementParametr: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
@@ -141,7 +141,7 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
 }
 
-final class CaptchaSignUpRequirementResponse: ObjectRequestResponse {
+final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
     
     var data: Data?
     var captchaRequired: Bool = false
@@ -180,9 +180,9 @@ final class CaptchaService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getSignUpCaptchaRequirement(sucess: SuccessResponse?, fail: FailResponse?) {
-        let handler = BaseResponseHandler<CaptchaSignUpRequirementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
-        executeGetRequest(param: CaptchaSignUpRequirementParametr(), handler: handler)
+    func getSignUpCaptchaRequrement(sucess: SuccessResponse?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<CaptchaSignUpRequrementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        executeGetRequest(param: CaptchaSignUpRequrementParametr(), handler: handler)
     }
     
 }

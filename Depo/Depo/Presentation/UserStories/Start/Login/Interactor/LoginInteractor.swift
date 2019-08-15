@@ -330,7 +330,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func checkCaptchaRequerement() {
-        CaptchaSignUpRequirementService().getCaptchaRequirement { [weak self] response in
+        CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
                 self?.output?.captchaRequired(required: boolResult)
@@ -343,8 +343,8 @@ class LoginInteractor: LoginInteractorInput {
             }
         }
         ///Implementation with old request bellow
-//        captchaService.getSignUpCaptchaRequirement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
+//        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
 //                self?.output?.captchaRequiredFailed()
 //                return
 //            }
