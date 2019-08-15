@@ -349,6 +349,7 @@ extension VerifyEmailPopUp {
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
+                    self?.enableConfirmButtonIfNeeded()
                 }
             }
         }
