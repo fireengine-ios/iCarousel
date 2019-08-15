@@ -112,10 +112,10 @@ final class ChangeEmailPopUp: UIViewController {
         }
     }
     
+    var completion: VoidHandler?
+    
     private let keyboard = Typist()
     private let activityManager = ActivityIndicatorManager()
-    
-    weak var delegate: VerifyEmailPopUpDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,11 +188,7 @@ final class ChangeEmailPopUp: UIViewController {
         dismissKeyboard()
         
         dismiss(animated: true) { [weak self] in
-            let router = RouterVC()
-            let controller = router.verifyEmailPopUp
-            controller.isNeedSendCode = false
-            controller.delegate = self?.delegate
-            UIApplication.topController()?.present(controller, animated: true, completion: nil)
+            self?.completion?()
         }
     }
 
