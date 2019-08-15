@@ -97,9 +97,6 @@
                         <constraint firstAttribute="width" constant="172" id="rs9-2p-6MG"/>
                     </constraints>
                     <state key="normal" title="Import in Background"/>
-                    <connections>
-                        <action selector="importInBackgroundTapped:" destination="-1" eventType="touchUpInside" id="0ij-vK-tLl"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -11,19 +11,11 @@ import UIKit
 protocol SocialRemoveConnectionCell: class {
     func setup(with section: Section?)
     func set(username: String?)
-    func setSpotify(username: String?, jobStatus: String?)
 }
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
     
     private(set) var section: Section?
-        
-    @IBOutlet weak var jobStatusLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.textColor = ColorConstants.charcoalGrey
-        }
-    }
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
@@ -52,28 +44,12 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     }
     
     func set(username: String?) {
-        hideJobStatusLabel()
         guard let username = username, !username.isEmpty else {
             return
         }
         DispatchQueue.toMain {
             self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
-    }
-    
-    func setSpotify(username: String?, jobStatus: String?) {
-        hideJobStatusLabel()
-        if let username = username, !username.isEmpty {
-            connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
-        }
-        
-        if let jobStatus = jobStatus {
-            jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, jobStatus)
-        }
-    }
-    
-    private func hideJobStatusLabel() {
-        jobStatusLabel.text = ""
     }
     
     @IBAction func removeConnection(_ sender: Any) {
