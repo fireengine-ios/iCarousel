@@ -9,7 +9,7 @@
 import Foundation
 
 final class SettingsBundleHelper {
-    fileprivate struct BundleKeys {
+    private struct BundleKeys {
         static let routeEnvironment = "routeEnvironment"
         static let version = "version_preference"
         static let buildVersion = "build_preference"
@@ -19,18 +19,6 @@ final class SettingsBundleHelper {
         static let prod = "prod"
         static let preProd = "preprod"
         static let test = "test"
-    }
-    
-    static let shared = {
-        return SettingsBundleHelper()
-    }
-    
-    var observer: NSKeyValueObservation?
-    
-    //MARK: - lifecycle
-    
-    deinit {
-        observer?.invalidate()
     }
     
     //MARK: - global related activities
@@ -60,28 +48,14 @@ final class SettingsBundleHelper {
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
-    //MARK: - Instance related activities
-    
-    func startObservingForLifeTech() {
-        if SettingsBundleHelper.isLifeTechBuild {
-            startObserving()
+    func checkSwitchersStatusForLifeTech() {
+        guard SettingsBundleHelper.isLifeTechBuild else {
+            return
         }
+        
+        
     }
-    
-    private func startObserving() {
-//        return
-        observer = UserDefaults.standard.observe(\.routeServerEnvironment, changeHandler: { (userDefaults, result) in
-        debugPrint("===HERE WE GO===")
-        })
-//         UserDefaults.standard.observe(<#T##keyPath: KeyPath<UserDefaults, Value>##KeyPath<UserDefaults, Value>#>, changeHandler: <#T##(UserDefaults, NSKeyValueObservedChange<Value>) -> Void#>)
-    }
-    
+
 }
 
-extension UserDefaults {
-    @objc dynamic var routeServerEnvironment: String {
-        return string(forKey: SettingsBundleHelper.BundleKeys.routeEnvironment) ?? ""
-    }
-    
-    
-}
+
