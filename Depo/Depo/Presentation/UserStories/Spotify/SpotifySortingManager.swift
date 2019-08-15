@@ -15,17 +15,19 @@ final class SpotifySortingManager {
     
     private lazy var topBar = GridListTopBar.initFromXib()
     
-    private let gridListTopBarConfig = GridListTopBarConfig(
+    private lazy var gridListTopBarConfig = GridListTopBarConfig(
         defaultGridListViewtype: .Grid,
-        availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest],
+        availableSortTypes: sortTypes,
         defaultSortType: .TimeNewOld,
         availableFilter: false,
         showGridListButton: false
     )
     
     private weak var delegate: SpotifySortingManagerDelegate?
+    private let sortTypes: [MoreActionsConfig.SortRullesType]
     
-    required init(delegate: SpotifySortingManagerDelegate? = nil) {
+    required init(sortTypes: [MoreActionsConfig.SortRullesType], delegate: SpotifySortingManagerDelegate? = nil) {
+        self.sortTypes = sortTypes
         self.delegate = delegate
     }
     
