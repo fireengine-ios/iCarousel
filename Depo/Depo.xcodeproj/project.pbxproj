@@ -1669,7 +1669,6 @@
 		8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
 		8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
-		8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
 		8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
 		8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
@@ -2762,6 +2761,9 @@
 		8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
 		8C77F6222303F0D4003BC248 /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
+		8C77F62323042D82003BC248 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
+		8C77F62623055610003BC248 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77F62523055610003BC248 /* RouteRequests.swift */; };
+		8C77F62723055610003BC248 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77F62523055610003BC248 /* RouteRequests.swift */; };
 		8C7B9F3E2253F8970050DABE /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
 		8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
@@ -4014,7 +4016,6 @@
 		CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
-		CE78484522A685FB00662219 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		CE78484622A685FB00662219 /* StorageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A220189C6C009F6D3D /* StorageCard.swift */; };
 		CE78484722A685FB00662219 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24921F5A7B000A5A696 /* PhotoCell.swift */; };
 		CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
@@ -7569,6 +7570,7 @@
 		8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualMusicPlayerViewController.xib; sourceTree = "<group>"; };
 		8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewInput.swift; sourceTree = "<group>"; };
 		8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewOutput.swift; sourceTree = "<group>"; };
+		8C77F62523055610003BC248 /* RouteRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteRequests.swift; sourceTree = "<group>"; };
 		8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTC.bundle; sourceTree = "<group>"; };
 		8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueLabels.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
@@ -12593,6 +12595,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8C77F62423055539003BC248 /* TurkCell */ = {
+			isa = PBXGroup;
+			children = (
+				8C77F62523055610003BC248 /* RouteRequests.swift */,
+			);
+			path = TurkCell;
+			sourceTree = "<group>";
+		};
 		8C8610E522BCC07F00108958 /* LifeDrive */ = {
 			isa = PBXGroup;
 			children = (
@@ -14691,6 +14701,7 @@
 		CE51A0D11EF8F308005DCEE0 /* RequestService */ = {
 			isa = PBXGroup;
 			children = (
+				8C77F62423055539003BC248 /* TurkCell */,
 				CE51A0D21EF8F308005DCEE0 /* RequestService.swift */,
 				CEB996CE1F0770470074E264 /* RequestsKey.swift */,
 				CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */,
@@ -19266,7 +19277,6 @@
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
-				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
 				8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */,
 				4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
@@ -19388,6 +19398,7 @@
 				8C0E8D091FDEBDFF00789C91 /* HelpAndSupportRouterInput.swift in Sources */,
 				98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
 				8C8711711FDFF47000F66396 /* DarkPopUpController.swift in Sources */,
+				8C77F62623055610003BC248 /* RouteRequests.swift in Sources */,
 				8C0E8D0A1FDEBDFF00789C91 /* AutoSyncDataStorage.swift in Sources */,
 				8C0E8D0B1FDEBDFF00789C91 /* PrintInitializer.swift in Sources */,
 				8C0E8D0C1FDEBDFF00789C91 /* UserProfileInitializer.swift in Sources */,
@@ -22014,6 +22025,7 @@
 				CE78481E22A685FB00662219 /* ControlTabBarProtocol.swift in Sources */,
 				CE78481F22A685FB00662219 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				CE78482022A685FB00662219 /* UserProfileModuleInput.swift in Sources */,
+				8C77F62323042D82003BC248 /* SettingsBundleHelper.swift in Sources */,
 				CE78482122A685FB00662219 /* UIEdgeInsets+Extensions.swift in Sources */,
 				CE78482222A685FB00662219 /* MD5.swift in Sources */,
 				CE78482322A685FB00662219 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
@@ -22052,7 +22064,6 @@
 				CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */,
 				CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */,
 				CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */,
-				CE78484522A685FB00662219 /* RequestService.swift in Sources */,
 				CE78484622A685FB00662219 /* StorageCard.swift in Sources */,
 				CE78484722A685FB00662219 /* PhotoCell.swift in Sources */,
 				CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */,
@@ -22864,6 +22875,7 @@
 				CE784B6022A685FB00662219 /* TitleView.swift in Sources */,
 				CE784B6122A685FB00662219 /* SyncContactsInteractorInput.swift in Sources */,
 				CE784B6222A685FB00662219 /* SyncContactsInteractorOutput.swift in Sources */,
+				8C77F62723055610003BC248 /* RouteRequests.swift in Sources */,
 				CE784B6322A685FB00662219 /* SyncContactsInteractor.swift in Sources */,
 				CE784B6422A685FB00662219 /* PackagesInteractorInput.swift in Sources */,
 				CE784B6522A685FB00662219 /* PrintModuleConfigurator.swift in Sources */,

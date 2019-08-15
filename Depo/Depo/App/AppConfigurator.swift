@@ -35,6 +35,7 @@ final class AppConfigurator {
         logoutIfNeed()
         prepareSessionManager()
         SettingsBundleHelper.setVersionAndBuildNumber()
+        SettingsBundleHelper.shared().startObservingForLifeTech()
         configureSDWebImage()
         setupIAPObserver()
         startMenloworks(with: launchOptions)

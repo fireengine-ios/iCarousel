@@ -8,11 +8,39 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>When new Env chosen please logout</string>
+			<key>Key</key>
+			<string>infoTitle</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Logout</string>
+			<key>Key</key>
+			<string>logout</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Drop DataBase and logout</string>
+			<key>Key</key>
+			<string>dropDB</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Enviroment</string>
+			<string>Environment</string>
 			<key>Key</key>
-			<string>routeEnviroment</string>
+			<string>routeEnvironment</string>
 			<key>DefaultValue</key>
 			<string>prod</string>
 			<key>Titles</key>
