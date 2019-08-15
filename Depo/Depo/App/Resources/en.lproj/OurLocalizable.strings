@@ -1106,3 +1106,6 @@
 "expired_otp" = "If there is no generated or valid OTP Code";
 "token_is_missing" = "If OTP is empty on request";
 "invalid_email" = "If account email is different with OTP Code sent";
+
+/*2FA Error Messages*/
+"two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
