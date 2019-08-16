@@ -10,9 +10,7 @@ import UIKit
 
 final class EmailVerifiedPopUp: UIViewController {
     
-    private static let buttonHeight: CGFloat = 44
-    
-    @IBOutlet private var contentView: UIView! {
+    @IBOutlet private weak var contentView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
             newValue.backgroundColor = .white
@@ -24,13 +22,13 @@ final class EmailVerifiedPopUp: UIViewController {
         }
     }
     
-    @IBOutlet private var imageView: UIImageView! {
+    @IBOutlet private weak var imageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
         }
     }
     
-    @IBOutlet private var titleLabel: UILabel! {
+    @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.textAlignment = .center
@@ -38,10 +36,8 @@ final class EmailVerifiedPopUp: UIViewController {
         }
     }
     
-    @IBOutlet private var continueButton: UIButton! {
+    @IBOutlet private weak var continueButton: RoundedButton! {
         willSet {
-            newValue.layer.cornerRadius = EmailVerifiedPopUp.buttonHeight * 0.5
-            
             newValue.layer.borderColor = UIColor.lrTealish.cgColor
             newValue.layer.borderWidth = 1
             

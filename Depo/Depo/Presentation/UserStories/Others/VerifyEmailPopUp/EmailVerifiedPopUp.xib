@@ -40,7 +40,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ys8-FY-2t9">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ys8-FY-2t9" customClass="RoundedButton" customModule="lifebox" customModuleProvider="target">
                             <rect key="frame" x="50" y="147" width="146" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="GBW-Ky-eYM"/>
