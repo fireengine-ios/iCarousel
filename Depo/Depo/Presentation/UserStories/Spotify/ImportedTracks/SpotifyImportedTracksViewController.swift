@@ -19,7 +19,8 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     
     private lazy var dataSource = SpotifyCollectionViewDataSource<SpotifyTrack>(collectionView: collectionView, delegate: self)
     
-    private lazy var sortingManager = SpotifySortingManager(delegate: self)
+    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew]
+    private lazy var sortingManager = SpotifySortingManager(sortTypes: sortTypes, delegate: self)
     private lazy var navbarManager = SpotifyImportedTracksNavbarManager(delegate: self, playlist: playlist)
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
     private lazy var threeDotsManager = SpotifyThreeDotMenuManager(delegate: self)
@@ -31,7 +32,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     
     weak var delegate: SpotifyImportedTracksViewControllerDelegate?
     
-    private var sortedRule: SortedRules = .timeDown {
+    private var sortedRule: SortedRules = .timeUp {
         didSet {
             dataSource.sortedRule = sortedRule
             reloadData()
@@ -153,6 +154,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
         dataSource.cancelSelection()
         navbarManager.setDefaultState()
         bottomBarManager.hide()
+        collectionView.contentInset.bottom = 0
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -160,8 +162,10 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
         
         if count == 0 {
             bottomBarManager.hide()
+            collectionView.contentInset.bottom = 0
         } else {
             bottomBarManager.show()
+            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
         }
     }
 }
