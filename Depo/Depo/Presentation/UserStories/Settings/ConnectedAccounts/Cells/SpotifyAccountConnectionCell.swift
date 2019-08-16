@@ -92,8 +92,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
             
             switch spotifyStatus.jobStatus {
             case .unowned:
-                hideJobStatusLabel()
-                delegate?.didDisconnectSuccessfully(section: section)
+                setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             case .pending:
                 setConnectCondition(section: section, username: spotifyStatus.userName, jobStatus: TextConstants.Spotify.Card.importing)
             case .running:
