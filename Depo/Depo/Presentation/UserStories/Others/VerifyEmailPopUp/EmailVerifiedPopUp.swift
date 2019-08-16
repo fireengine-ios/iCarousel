@@ -57,10 +57,18 @@ final class EmailVerifiedPopUp: UIViewController {
     private var buttonTitle: String?
     private var buttonAction: VoidHandler?
     
+    private var isShown = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        open()
     }
     
     private func setup() {
@@ -71,8 +79,30 @@ final class EmailVerifiedPopUp: UIViewController {
         continueButton.setTitle(buttonTitle, for: .normal)
     }
     
+    private func open() {
+        if isShown {
+            return
+        }
+        isShown = true
+        contentView.transform = NumericConstants.scaleTransform
+        view.alpha = 0
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.view.alpha = 1
+            self.contentView.transform = .identity
+        }
+    }
+    
+    func close(completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.view.alpha = 0
+            self.contentView.transform = NumericConstants.scaleTransform
+        }) { _ in
+            self.dismiss(animated: false, completion: completion)
+        }
+    }
+    
     @IBAction private func onContinueTap() {
-        dismiss(animated: true) {
+        close {
             self.buttonAction?()
         }
     }
