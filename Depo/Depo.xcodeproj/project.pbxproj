@@ -693,6 +693,9 @@
 		8930DDB422C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		8930DDB522C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
+		8934DD6D23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
+		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
+		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3A22CA10F9007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3B22CA10FA007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
@@ -6829,6 +6832,7 @@
 		8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryViewController.swift; sourceTree = "<group>"; };
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
+		8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailVerifiedPopUp.xib; sourceTree = "<group>"; };
 		89E51D5C22CA2ECA007A7DBC /* CreateStoryPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryPopUp.swift; sourceTree = "<group>"; };
 		89E51D5D22CA2ECA007A7DBC /* CreateStoryPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPopUp.xib; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
@@ -11458,6 +11462,7 @@
 				890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */,
 				890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */,
 				8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */,
+				8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */,
 			);
 			name = VerifyEmailPopUp;
 			path = Depo/Presentation/UserStories/Others/VerifyEmailPopUp;
@@ -16850,6 +16855,7 @@
 				98C298532302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
+				8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				8C06AF6F2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C06AEE92008AD70003D8E05 /* Buyuk.png in Resources */,
@@ -17596,6 +17602,7 @@
 				98C298522302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				7C00FE1E1F5982FA0041D041 /* FeedbackViewController.xib in Resources */,
 				7CA4A167207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
+				8934DD6D23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				8C06AED42008AD70003D8E05 /* bold.png in Resources */,
 				8C06B1942008AD72003D8E05 /* undo@3x.png in Resources */,
 				8C06B0002008AD71003D8E05 /* Kucuk.png in Resources */,
@@ -18281,6 +18288,7 @@
 				CE784DD022A685FB00662219 /* ActivityTimelineViewController.xib in Resources */,
 				CE784DD122A685FB00662219 /* ok_btn_kucuk@3x.png in Resources */,
 				CE784DD222A685FB00662219 /* CollectionViewCellForAudio.xib in Resources */,
+				8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CE784DD322A685FB00662219 /* vintage.png in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,

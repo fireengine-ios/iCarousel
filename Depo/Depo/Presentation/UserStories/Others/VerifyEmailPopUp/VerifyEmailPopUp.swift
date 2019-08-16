@@ -179,6 +179,9 @@ final class VerifyEmailPopUp: UIViewController {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
         }, completion: { _ in
+            self.clearCode()
+            self.errorLabel.isHidden = true
+            
             completion?()
         })
         
