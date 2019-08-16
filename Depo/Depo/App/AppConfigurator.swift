@@ -30,7 +30,7 @@ final class AppConfigurator {
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         
         SettingsBundleHelper.setVersionAndBuildNumber()
-        SettingsBundleHelper.setCurrentRouteEnvironment()
+        SettingsBundleHelper.shared.lifeTechSetup()
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         clearTokensIfNeed()

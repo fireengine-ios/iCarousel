@@ -17,40 +17,37 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-
-    static var currentServerEnvironment: ServerEnvironment = .production
-
+    
+    static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
-    static var baseShortUrlString: String {
+    static let baseShortUrlString: String = {
         switch currentServerEnvironment {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
         case .production: return "https://adepo.turkcell.com.tr/"
         }
-    }
+    }()
     
-    static var baseUrl: URL {
-        return URL(string: "\(baseShortUrlString)api/")!
-    }
+    static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
-    static var unsecuredAuthenticationUrl: String {
+    static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
         case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
         case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
         case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
         }
-    }
+    }()
     
-    static var baseContactsUrl: URL {
+    static let baseContactsUrl: URL = {
         switch currentServerEnvironment {
         case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
         case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
         case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
         }
-    }
+    }()
     
-    static var launchCampaignDetail: URL? {
+    static let launchCampaignDetail: URL? = {
         switch currentServerEnvironment {
         case .test:
             return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
@@ -59,17 +56,17 @@ struct RouteRequests {
         case .production:
             return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
         }
-    }
+    }()
     
-    static var privacyPolicy: String {
+    static let privacyPolicy: String = {
         switch currentServerEnvironment {
         case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
         case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
         case .production: return "https://mylifebox.com/policy/?lang="
         }
-    }
+    }()
     
-    static var silentLogin: String { return RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on" }
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -85,15 +82,15 @@ struct RouteRequests {
     static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
-    static var twoFactorAuthChallenge: URL { return baseUrl +/ "auth/2fa/challenge" }
-    static var twoFactorAuthLogin: URL { return baseUrl +/ "auth/2fa/token" }
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
 
     // MARK: EULA 
-    static var eulaGet: String { return "eula/get/%@?brand=" + applicationTarget }
+    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static var eulaGetEtkAuth: URL { return baseUrl +/ "eula/getEtkAuth" }
-    static var eulaGetGlobalPermAuth: URL { return baseUrl +/ "eula/getGlobalPermAuth" }
+    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -101,22 +98,22 @@ struct RouteRequests {
     // MARK: Dropbox
     static let dropboxAuthUrl: URL = URL(string: "https://api.dropboxapi.com/1/oauth2/token_from_oauth1")!
     static let dropboxConnect = "migration/dropbox/connect?accessToken=%@"
-    static var dropboxDisconnect: URL { return baseUrl +/ "migration/dropbox/disconnect" }
+    static let dropboxDisconnect = baseUrl +/ "migration/dropbox/disconnect"
     static let dropboxStatus  = "migration/dropbox/status"
     static let dropboxStart   = "migration/dropbox/start"
     
     // MARK: - FB
     static let fbPermissions = "migration/facebook/permissions"
     static let fbConnect     = "migration/facebook/connect?accessToken=%@"
-    static var fbDisconnect: URL { return baseUrl +/ "connect/c/facebook" }
+    static let fbDisconnect  =  baseUrl +/ "connect/c/facebook"
     static let fbStatus      = "migration/facebook/status"
     static let fbStart       = "migration/facebook/start"
     static let fbStop        = "migration/facebook/stop"
     
     // MARK: - Instagram
     static let instagramConfig = "share/social/instagram/config"
-    static var instagramConnect: URL { return baseUrl +/ "share/social/instagram/connect" }
-    static var instagramDisconnect: URL { return baseUrl +/ "share/social/instagram/disconnect" }
+    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
+    static let instagramDisconnect =  baseUrl +/ "share/social/instagram/disconnect"
     static let instagramSyncStatus = "share/social/instagram/syncStatus"
     static let instagramCreateMigration = "share/social/instagram/migration/create"
     static let instagramCancelMigration = "share/social/instagram/migration/cancel"
@@ -170,7 +167,7 @@ struct RouteRequests {
     static let share = "share/%@"
     
     //MARK: Feedback
-    static var feedbackEmail: URL { return baseUrl +/ "feedback/contact-mail" }
+    static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
     
     //MARK : Faq 
     static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
@@ -189,17 +186,17 @@ struct RouteRequests {
     // MARK: - Spotify
     
     enum Spotify {
-        static var spotifyApi: URL { return baseUrl +/ "migration/spotify" }
-        static var connect: URL { return spotifyApi +/ "connect" }
-        static var disconnect: URL { return spotifyApi +/ "disconnect" }
-        static var start: URL { return spotifyApi +/ "start" }
-        static var stop: URL { return spotifyApi +/ "stop" }
-        static var authorizeUrl: URL { return spotifyApi +/ "authorizeUrl" }
-        static var status: URL { return spotifyApi +/ "status" }
-        static var playlists: URL { return spotifyApi +/ "playlist" }
-        static var tracks: URL { return playlists +/ "track" }
-        static var importedPlaylists: URL { return spotifyApi +/ "provider/playlist" }
-        static var importedTracks: URL { return importedPlaylists +/ "track" }
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let disconnect = spotifyApi +/ "disconnect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = playlists +/ "track"
+        static let importedPlaylists = spotifyApi +/ "provider/playlist"
+        static let importedTracks = importedPlaylists +/ "track"
     }
     
     //MARK: - Turkcell Updater
@@ -218,54 +215,54 @@ struct RouteRequests {
     }
     
     struct HomeCards {
-        static var all: URL { return baseUrl +/ "assistant/v1" }
+        static let all = baseUrl +/ "assistant/v1"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
     }
     
     /// upload
-    static var uploadContainer: URL { return baseUrl +/ "container/baseUrl" }
+    static let uploadContainer = baseUrl +/ "container/baseUrl"
     static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
     
-    static var updateLanguage: URL { return baseUrl +/ "account/language" }
+    static let updateLanguage = baseUrl +/ "account/language"
     
     enum Account {
-        static var accountApi: URL { return baseUrl +/ "account" }
+        static let accountApi = baseUrl +/ "account"
         
-        static var updatePassword: URL { return accountApi +/ "updatePassword" }
-        static var updateBirthday: URL { return accountApi +/ "birthday" }
-        static var getFaqUrl: URL { return accountApi +/ "faq" }
+        static let updatePassword = accountApi +/ "updatePassword"
+        static let updateBirthday = accountApi +/ "birthday"
+        static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
-            static var settingsApi: URL { return Account.accountApi +/ "setting" }/// without "s" at the end
+            static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
-            static var accessInformation: URL { return baseUrl +/ "account/setting" }
-            static var facebookTaggingEnabled: URL { return settingsApi +/ "facebookTaggingEnabled" }
+            static let accessInformation = baseUrl +/ "account/setting"
+            static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
         }
         
         enum Permissions {
-            static var authority: URL { return Account.accountApi +/ "authority" }
-            static var featurePacks: URL { return Account.accountApi +/ "feature-packs/IOS" }
-            static var availableOffers: URL { return  Account.accountApi +/ "available-offers/IOS" }
-            static var features: URL { return  baseUrl +/ "features" }
+            static let authority = Account.accountApi +/ "authority"
+            static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let availableOffers = Account.accountApi +/ "available-offers/IOS"
+            static let features = baseUrl +/ "features"
             
-            static var permissionsList: URL { return  Account.accountApi +/ "permission/list" }
-            static var permissionsUpdate: URL { return  Account.accountApi +/ "permission/update" }
+            static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionsUpdate = Account.accountApi +/ "permission/update"
         }
     }
     
     enum Instapick {
-        static var instapickApi: URL { return baseUrl +/ "instapick" }
-        static var thumbnails: URL { return instapickApi +/ "thumbnails" }
-        static var analyzesCount: URL { return instapickApi +/ "getCount" }
-        static var analyze: URL { return instapickApi +/ "analyze" }
-        static var analyzeHistory: URL { return instapickApi +/ "getAnalyzeHistory" }
-        static var analyzeDetails: URL { return instapickApi +/ "getAnalyzeDetails" }
-        static var removeAnalyzes: URL { return instapickApi +/ "deleteAnalyze" }
+        static let instapickApi = baseUrl +/ "instapick"
+        static let thumbnails = instapickApi +/ "thumbnails"
+        static let analyzesCount = instapickApi +/ "getCount"
+        static let analyze = instapickApi +/ "analyze"
+        static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
+        static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
+        static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
     }
 
-    static var launchCampaignImage: URL { return baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg" }
+    static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
     
@@ -277,6 +274,6 @@ struct RouteRequests {
         }   
     }
     
-    static var verifyEmail: URL { return  baseUrl +/ "verify/emailAddress" }
-    static var sendEmailVerificationCode: URL { return  baseUrl +/ "verify/sendVerificationEmail" }
+    static let verifyEmail = baseUrl +/ "verify/emailAddress"
+    static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
 }

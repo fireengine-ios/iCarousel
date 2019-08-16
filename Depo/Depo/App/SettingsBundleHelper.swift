@@ -8,22 +8,87 @@
 
 import Foundation
 
-final class SettingsBundleHelper {
+final class SettingsBundleHelper: NSObject {
+    
     private struct BundleKeys {
         static let routeEnvironment = "routeEnvironment"
         static let version = "version_preference"
         static let buildVersion = "build_preference"
         static let dropDB = "dropDBState"
     }
-    
-    private struct PreviouslyStoredValuesKeys {
-        static let routeEnvironment = "oldRouteEnvironment"
-    }
-    
+
     private struct EnviromentKeys {
         static let prod = "prod"
         static let preProd = "preprod"
         static let test = "test"
+    }
+    
+    static let shared = SettingsBundleHelper()
+    
+    //MARK: - lifecycle
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: BundleKeys.routeEnvironment)
+        UserDefaults.standard.removeObserver(self, forKeyPath: BundleKeys.dropDB)
+    }
+    
+    //MARK: - Instance related activities
+    
+    func lifeTechSetup() {
+        if SettingsBundleHelper.isLifeTechBuild {
+            setCurrentRouteEnvironment()
+            startObserving()
+        }
+    }
+    
+    private func setCurrentRouteEnvironment() {
+        let newEnvironment = getPreferredEnvironment()
+        RouteRequests.currentServerEnvironment = newEnvironment
+    }
+    
+    func getPreferredEnvironment() -> RouteRequests.ServerEnvironment {
+        guard let status = UserDefaults.standard.string(forKey: BundleKeys.routeEnvironment) else {
+            return RouteRequests.ServerEnvironment.production
+        }
+        switch status {
+        case EnviromentKeys.preProd:
+            return RouteRequests.ServerEnvironment.preProduction
+        case EnviromentKeys.test:
+            return RouteRequests.ServerEnvironment.test
+        default:
+            return RouteRequests.ServerEnvironment.production
+        }
+    }
+    
+    private func checkDropDBStatusChange() {
+        let currentDropDBState = UserDefaults.standard.bool(forKey: BundleKeys.dropDB)
+        if currentDropDBState {
+            MediaItemOperationsService.shared.deleteAllEnteties { _ in
+                UserDefaults.standard.set(false, forKey: BundleKeys.dropDB)
+                AppConfigurator.logout()
+            }
+        }
+    }
+    
+    //MARK: - Observer
+    
+    private func startObserving() {
+        UserDefaults.standard.addObserver(self, forKeyPath: BundleKeys.routeEnvironment, options: .new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: BundleKeys.dropDB, options: .new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch keyPath {
+        case BundleKeys.routeEnvironment:
+            setCurrentRouteEnvironment()
+            exit(EXIT_SUCCESS)
+        case BundleKeys.dropDB:
+            checkDropDBStatusChange()
+        default:
+            assertionFailure("\(keyPath ?? "nil")")
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
     }
     
     //MARK: - global related activities
@@ -37,78 +102,8 @@ final class SettingsBundleHelper {
         }
     }
     
-    static func setCurrentRouteEnvironment() {
-        let newEnvironment = preferredEnvironment()
-        RouteRequests.currentServerEnvironment = newEnvironment
-        storeNewEnviroment(state: newEnvironment)
-    }
-    
-    static func preferredEnvironment() -> RouteRequests.ServerEnvironment {
-        return getEnviromentForState(state: UserDefaults.standard.string(forKey: BundleKeys.routeEnvironment))
-    }
-    
-    private static func getPreviouslyStoredEnviroment() -> RouteRequests.ServerEnvironment {
-        return getEnviromentForState(state: UserDefaults.standard.string(forKey: PreviouslyStoredValuesKeys.routeEnvironment))
-    }
-    
-    private static func storeNewEnviroment(state: RouteRequests.ServerEnvironment) {
-        let valueToStore: String
-        switch state {
-        case .production:
-            valueToStore = EnviromentKeys.prod
-        case .preProduction:
-            valueToStore = EnviromentKeys.preProd
-        case .test:
-            valueToStore = EnviromentKeys.test
-        }
-        UserDefaults.standard.set(valueToStore, forKey: PreviouslyStoredValuesKeys.routeEnvironment)
-    }
-    
-    private static func getEnviromentForState(state: String?) -> RouteRequests.ServerEnvironment {
-        guard let unwrapedStatus = state else {
-            return RouteRequests.ServerEnvironment.production
-        }
-        switch unwrapedStatus {
-        case EnviromentKeys.preProd:
-            return RouteRequests.ServerEnvironment.preProduction
-        case EnviromentKeys.test:
-            return RouteRequests.ServerEnvironment.test
-        default:
-            return RouteRequests.ServerEnvironment.production
-        }
-    }
-    
     private static var isLifeTechBuild: Bool {
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
-    }
-    
-    static func checkLifeTechSettings() {
-        guard SettingsBundleHelper.isLifeTechBuild else {
-            return
-        }
-        checkEnvironmentChange()
-        checkDropDBStatusChange()
-    }
-    
-    private static func checkEnvironmentChange() {
-        let oldEnvironment = getPreviouslyStoredEnviroment()
-        let newEnvironment = preferredEnvironment()
-        if newEnvironment != oldEnvironment {
-            RouteRequests.currentServerEnvironment = newEnvironment
-            storeNewEnviroment(state: newEnvironment)
-            
-        }
-    }
-    
-    private static func checkDropDBStatusChange() {
-        let currentDropDBState = UserDefaults.standard.bool(forKey: BundleKeys.dropDB)
-        if currentDropDBState {
-            UserDefaults.standard.set(false, forKey: BundleKeys.dropDB)
-            MediaItemOperationsService.shared.deleteAllEnteties { _ in
-                AppConfigurator.logout()
-            }
-            return
-        }
     }
     
 }

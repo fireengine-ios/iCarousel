@@ -244,7 +244,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
-        SettingsBundleHelper.checkLifeTechSettings()
         AppEvents.activateApp()
     }
     
