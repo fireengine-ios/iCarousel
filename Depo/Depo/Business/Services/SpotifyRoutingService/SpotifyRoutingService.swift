@@ -26,6 +26,7 @@ final class SpotifyRoutingService {
     }
     private lazy var router = RouterVC()
     var delegates = MulticastDelegate<SpotifyRoutingServiceDelegate>()
+    private var importInProgress = false
     
     deinit {
         delegates.removeAll()
@@ -118,10 +119,83 @@ final class SpotifyRoutingService {
     }
     
     private func importPlaylists(_ playlists: [SpotifyPlaylist]) {
-        let controller = router.spotifyImportController(playlists: playlists, delegate: self)
+        let controller = router.spotifyImportController(delegate: self)
         let navigationController = NavigationController(rootViewController: controller)
         navigationController.navigationBar.isHidden = false
         router.presentViewController(controller: navigationController)
+
+        let ids = playlists.map { $0.playlistId }
+        importInProgress = true
+        
+        spotifyService.start(playlistIds: ids) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(_):
+                self.checkImportStatus { [weak self] in
+                    /// hide cancel popup if needed
+                    if navigationController.presentedViewController != nil {
+                        navigationController.dismiss(animated: false, completion: {
+                            navigationController.dismiss(animated: true)
+                        })
+                    } else {
+                        navigationController.dismiss(animated: true)
+                    }
+                    self?.delegates.invoke(invocation: { $0.importDidComplete() })
+                }
+            case .failed(let error):
+                self.importDidFailed(navigationController, error: error)
+            }
+        }
+    }
+    
+    private func checkImportStatus(completion: @escaping VoidHandler) {
+        guard importInProgress else {
+            return
+        }
+        
+        spotifyService.getStatus { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let status):
+                if status.jobStatus == .finished {
+                    self.importInProgress = false
+                    self.lastSpotifyStatus = status
+                
+                    completion()
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
+                        self?.checkImportStatus(completion: completion)
+                    })
+                }
+            case .failed(let error):
+                debugPrint(error.localizedDescription)
+                self.checkImportStatus(completion: completion)
+            }
+        }
+    }
+    
+    private func importDidFailed(_ controller: UIViewController, error: Error) {
+        //TODO: Control correct work with real server error
+        guard error.errorCode != 412 else {
+            return
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: TextConstants.Spotify.Playlist.transferingPlaylistError,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok,
+                                         action: { popup in
+                                            popup.close {
+                                                controller.dismiss(animated: true)
+                                            }
+                                        })
+        controller.present(popup, animated: true)
     }
 }
 
@@ -189,28 +263,8 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
 
 extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     
-    func importDidComplete(_ controller: SpotifyImportViewController) {
-        delegates.invoke(invocation: { $0.importDidComplete() })
-        updateStatus(completion: nil)
-        controller.dismiss(animated: true)
-    }
-    
-    func importDidFailed(_ controller: SpotifyImportViewController, error: Error) {
-        //TODO: Control correct work with real server error
-        guard error.errorCode != 412 else {
-            return
-        }
-        
-        let popup = PopUpController.with(title: TextConstants.errorAlert, message: TextConstants.Spotify.Playlist.transferingPlaylistError, image: .error, buttonTitle: TextConstants.ok, action: { popup in
-            popup.close {
-                controller.dismiss(animated: true)
-            }
-        })
-        
-        controller.present(popup, animated: true)
-    }
-    
     func importDidCancel(_ controller: SpotifyImportViewController) {
+        importInProgress = false
         controller.dismiss(animated: true)
         
         spotifyService.stop { result in

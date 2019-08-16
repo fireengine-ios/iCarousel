@@ -11,6 +11,14 @@ import UIKit
 final class SpotifyPlaylistViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var noTracksView: UIView!
+    @IBOutlet private weak var noTracksLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.noTracks
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        }
+    }
     
     private lazy var dataSource: SpotifyCollectionViewDataSource<SpotifyTrack> = {
         let dataSource = SpotifyCollectionViewDataSource<SpotifyTrack>(collectionView: collectionView, delegate: self)
@@ -60,6 +68,7 @@ final class SpotifyPlaylistViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+            self.noTracksView.isHidden = !self.dataSource.allItems.isEmpty
         }
     }
 }

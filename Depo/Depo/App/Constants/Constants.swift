@@ -1339,6 +1339,9 @@ struct TextConstants {
             static let successImport = NSLocalizedString("spotify_playlist_success_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let seeImported = NSLocalizedString("spotify_playlist_see_imported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let transferingPlaylistError = NSLocalizedString("spotify_trasfering_playlist_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let noPlaylists = NSLocalizedString("spotify_no_playlists", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let noImportedPlaylists = NSLocalizedString("spotify_no_imported_playlists", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let noTracks = NSLocalizedString("spotify_no_tracks", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
         enum OverwritePopup {
             static let message = NSLocalizedString("spotify_overwrite_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

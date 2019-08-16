@@ -77,6 +77,10 @@ final class SpotifyPlaylistsNavbarManager {
         delegate?.setRightBarButtonItems([doneAsBackButton], animated: true)
     }
     
+    func setSelectAll(isEnabled: Bool) {
+        selectAllButton.isEnabled = isEnabled
+    }
+    
     func changeSelectionItems(count: Int) {
         if count == 0 {
             delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)

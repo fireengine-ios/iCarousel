@@ -99,7 +99,7 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
         if let playlist = item as? SpotifyPlaylist {
             titleLabel.text = playlist.name
             subtitleLabel.text = String(format: TextConstants.Spotify.Playlist.songsCount, playlist.count)
-            arrowImageView.isHidden = isHiddenArrow || playlist.count == 0
+            arrowImageView.isHidden = isHiddenArrow
             loadImage(item: item, placeholder: UIImage(named: "playlist")!)
         } else if let track = item as? SpotifyTrack {
             titleLabel.text = track.name
