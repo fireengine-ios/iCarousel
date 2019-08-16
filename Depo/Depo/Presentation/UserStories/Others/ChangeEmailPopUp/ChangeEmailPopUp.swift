@@ -38,7 +38,7 @@ final class ChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var darkBackground: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.black.withAlphaComponent(0.33)
+            newValue.backgroundColor = ColorConstants.popUpBackground
         }
     }
     

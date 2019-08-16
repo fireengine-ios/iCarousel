@@ -10,23 +10,14 @@ import UIKit
 
 final class EmailVerifiedPopUp: UIViewController {
     
+    private static let buttonCornerRadius: CGFloat = 22 //button.frame.height / 2
+    
     private var image: PopUpImage?
     private var message: String?
     private var buttonTitle: String?
     private var buttonAction: VoidHandler?
-
-    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler?) -> EmailVerifiedPopUp {
-        let controller = EmailVerifiedPopUp()
-        
-        controller.image = image
-        controller.message = message
-        controller.buttonTitle = buttonTitle
-        controller.buttonAction  = buttonAction
-        
-        return controller
-    }
     
-    private var popUp: UIView = {
+    private let contentView: UIView = {
         let newValue = UIView(frame: .zero)
         
         newValue.layer.cornerRadius = 4
@@ -40,7 +31,7 @@ final class EmailVerifiedPopUp: UIViewController {
         return newValue
     }()
     
-    private var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let newValue = UIImageView()
         
         newValue.contentMode = .scaleAspectFit
@@ -48,7 +39,7 @@ final class EmailVerifiedPopUp: UIViewController {
         return newValue
     }()
     
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let newValue = UILabel()
         
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
@@ -58,10 +49,10 @@ final class EmailVerifiedPopUp: UIViewController {
         return newValue
     }()
     
-    private var button: UIButton = {
+    private let button: UIButton = {
         let newValue = UIButton()
         
-        newValue.layer.cornerRadius = 22 //newValue.frame.height / 2
+        newValue.layer.cornerRadius = EmailVerifiedPopUp.buttonCornerRadius
         
         newValue.layer.borderColor = UIColor.lrTealish.cgColor
         newValue.layer.borderWidth = 1
@@ -87,7 +78,7 @@ final class EmailVerifiedPopUp: UIViewController {
     }
     
     private func setupDesign() {
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.33)
+        view.backgroundColor = ColorConstants.popUpBackground
         
         imageView.image = image?.image
         titleLabel.text = message
@@ -95,41 +86,41 @@ final class EmailVerifiedPopUp: UIViewController {
     }
     
     private func setupConstraints() {
-        view.addSubview(popUp)
+        view.addSubview(contentView)
         
-        popUp.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        popUp.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
-        popUp.centerYAnchor.constraint(equalTo: view.centerYAnchor).activate()
-        popUp.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 32).activate()
+        contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).activate()
+        contentView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 32).activate()
         
-        popUp.addSubview(imageView)
+        contentView.addSubview(imageView)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.topAnchor.constraint(equalTo: popUp.topAnchor, constant: 16).activate()
-        imageView.centerXAnchor.constraint(equalTo: popUp.centerXAnchor).activate()
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).activate()
+        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).activate()
         imageView.heightAnchor.constraint(equalToConstant: 70).activate()
         imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).activate()
         
-        popUp.addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.centerXAnchor.constraint(equalTo: popUp.centerXAnchor).activate()
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).activate()
         titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16).activate()
-        titleLabel.leadingAnchor.constraint(equalTo: popUp.leadingAnchor, constant: 24).activate()
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24).activate()
         
-        popUp.addSubview(button)
+        contentView.addSubview(button)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24).activate()
         button.heightAnchor.constraint(equalToConstant: 44).activate()
         button.widthAnchor.constraint(equalToConstant: 146).activate()
-        button.leadingAnchor.constraint(greaterThanOrEqualTo: popUp.leadingAnchor, constant: 50)
-        button.bottomAnchor.constraint(equalTo: popUp.bottomAnchor, constant: -20).activate()
-        button.centerXAnchor.constraint(equalTo: popUp.centerXAnchor).activate()
+        button.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 50)
+        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).activate()
+        button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).activate()
     }
     
     @objc private func onContinueTap() {
@@ -137,4 +128,20 @@ final class EmailVerifiedPopUp: UIViewController {
             self.buttonAction?()
         }
     }
+}
+
+//MARK: - Init
+extension EmailVerifiedPopUp {
+    
+    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler?) -> EmailVerifiedPopUp {
+        let controller = EmailVerifiedPopUp()
+        
+        controller.image = image
+        controller.message = message
+        controller.buttonTitle = buttonTitle
+        controller.buttonAction  = buttonAction
+        
+        return controller
+    }
+    
 }
