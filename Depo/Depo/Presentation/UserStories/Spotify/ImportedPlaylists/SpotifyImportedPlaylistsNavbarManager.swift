@@ -61,6 +61,10 @@ class SpotifyImportedPlaylistsNavbarManager {
         }
     }
     
+    func setMoreButton(isEnabled: Bool) {
+        moreButton.isEnabled = isEnabled
+    }
+    
     // MARK: - Actions
     
     @objc private func onCancel() {

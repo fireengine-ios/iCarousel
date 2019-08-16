@@ -16,6 +16,14 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var topBarContainer: UIView!
+    @IBOutlet private weak var noTracksView: UIView!
+    @IBOutlet private weak var noTracksLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.noTracks
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        }
+    }
     
     private lazy var dataSource = SpotifyCollectionViewDataSource<SpotifyTrack>(collectionView: collectionView, delegate: self)
     
@@ -97,6 +105,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
                                                     case .failed(let error):
                                                         UIApplication.showErrorAlert(message: error.localizedDescription)
                                                     }
+                                                    self.updateEmptyView()
                                                 }
     }
     
@@ -139,7 +148,15 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
                 self.hideSpinner()
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+            self.updateEmptyView()
         }
+    }
+    
+    private func updateEmptyView() {
+        let isEmpty = dataSource.allItems.isEmpty
+        topBarContainer.isHidden = isEmpty
+        noTracksView.isHidden = !isEmpty
+        navbarManager.setMoreButton(isEnabled: !isEmpty)
     }
     
     // MARK: - Selection State

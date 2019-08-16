@@ -1070,6 +1070,9 @@
 "spotify_playlist_see_imported" = "See Imported Playlists";
 "spotify_overwrite_message" = "This action will overwrite your previously imported playlists which have the same name.";
 "spotify_trasfering_playlist_error" = "Error transfering Spotify playlist";
+"spotify_no_playlists" = "You have not any playlist to import";
+"spotify_no_imported_playlists" = "You have not any imported playlist";
+"spotify_no_tracks" = "Playlist is empty";
 "spotify_overwrite_message_bold" = "overwrite your previously imported playlists";
 "spotify_overwrite_cancel_button" = "Cancel";
 "spotify_overwrite_import_button" = "Import";

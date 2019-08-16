@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyImportedTracksViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="DME-Wb-1If" id="w32-Ri-xKJ"/>
+                <outlet property="noTracksLabel" destination="GbG-2O-wi8" id="uMZ-5j-dWt"/>
+                <outlet property="noTracksView" destination="PBj-xi-xpV" id="uZ9-Kw-Mjt"/>
                 <outlet property="topBarContainer" destination="kzw-gh-qib" id="K4r-bd-gUE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,6 +41,32 @@
                         <constraint firstAttribute="height" priority="100" id="bqG-Ae-ahU"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBj-xi-xpV">
+                    <rect key="frame" x="16" y="277.5" width="343" height="112"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageNoMusics" translatesAutoresizingMaskIntoConstraints="NO" id="Pk3-b8-PA9">
+                            <rect key="frame" x="123.5" y="0.0" width="96" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="96" id="kZy-sF-kR2"/>
+                                <constraint firstAttribute="height" constant="96" id="zdc-4f-IRk"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbG-2O-wi8">
+                            <rect key="frame" x="8" y="112" width="327" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="GbG-2O-wi8" secondAttribute="bottom" id="HBq-gF-r7V"/>
+                        <constraint firstItem="Pk3-b8-PA9" firstAttribute="top" secondItem="PBj-xi-xpV" secondAttribute="top" id="Pz1-sb-5KW"/>
+                        <constraint firstItem="GbG-2O-wi8" firstAttribute="leading" secondItem="PBj-xi-xpV" secondAttribute="leading" constant="8" id="dO5-8E-4Ld"/>
+                        <constraint firstItem="GbG-2O-wi8" firstAttribute="top" secondItem="Pk3-b8-PA9" secondAttribute="bottom" constant="16" id="e6f-wQ-qQ7"/>
+                        <constraint firstItem="Pk3-b8-PA9" firstAttribute="centerX" secondItem="PBj-xi-xpV" secondAttribute="centerX" id="ogF-6M-qha"/>
+                        <constraint firstAttribute="trailing" secondItem="GbG-2O-wi8" secondAttribute="trailing" constant="8" id="pD6-XU-ztF"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -46,11 +74,17 @@
                 <constraint firstItem="DME-Wb-1If" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PTJ-Cd-fyI"/>
                 <constraint firstItem="kzw-gh-qib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QVA-8n-6af"/>
                 <constraint firstItem="DME-Wb-1If" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="SEh-dt-JnR"/>
+                <constraint firstItem="PBj-xi-xpV" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="fkw-FS-Adt"/>
                 <constraint firstItem="DME-Wb-1If" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nMe-wG-D8q"/>
+                <constraint firstItem="PBj-xi-xpV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="o8M-m1-Ik6"/>
                 <constraint firstItem="kzw-gh-qib" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qZS-NG-0ln"/>
                 <constraint firstItem="DME-Wb-1If" firstAttribute="top" secondItem="kzw-gh-qib" secondAttribute="bottom" id="uzW-d7-5hs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PBj-xi-xpV" secondAttribute="trailing" constant="16" id="zTY-jd-5bZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="ImageNoMusics" width="96" height="72"/>
+    </resources>
 </document>

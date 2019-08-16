@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyImportedPlaylistsViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="Yjm-p6-9Ze" id="tsS-FK-gIp"/>
+                <outlet property="noPlaylistsLabel" destination="Jx8-4N-Upg" id="TVi-FY-Xg6"/>
+                <outlet property="noPlaylistsView" destination="kXI-7a-EjK" id="7rx-Xr-WX3"/>
                 <outlet property="topBarContainer" destination="1dx-7f-19m" id="zgn-qk-VEQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,18 +41,50 @@
                         <constraint firstAttribute="height" priority="100" id="1w8-ZE-23z"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXI-7a-EjK">
+                    <rect key="frame" x="16" y="277.5" width="343" height="112"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageNoMusics" translatesAutoresizingMaskIntoConstraints="NO" id="jfe-HD-Gll">
+                            <rect key="frame" x="123.5" y="0.0" width="96" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="96" id="58p-Vp-p9y"/>
+                                <constraint firstAttribute="height" constant="96" id="Vr1-ee-cp2"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx8-4N-Upg">
+                            <rect key="frame" x="8" y="112" width="327" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="jfe-HD-Gll" firstAttribute="top" secondItem="kXI-7a-EjK" secondAttribute="top" id="7K5-KX-dQC"/>
+                        <constraint firstAttribute="trailing" secondItem="Jx8-4N-Upg" secondAttribute="trailing" constant="8" id="7P1-jC-FLw"/>
+                        <constraint firstItem="jfe-HD-Gll" firstAttribute="centerX" secondItem="kXI-7a-EjK" secondAttribute="centerX" id="O3U-Zv-Xjf"/>
+                        <constraint firstItem="Jx8-4N-Upg" firstAttribute="leading" secondItem="kXI-7a-EjK" secondAttribute="leading" constant="8" id="UnK-Fm-ENH"/>
+                        <constraint firstItem="Jx8-4N-Upg" firstAttribute="top" secondItem="jfe-HD-Gll" secondAttribute="bottom" constant="16" id="ZIO-Ib-Xgg"/>
+                        <constraint firstAttribute="bottom" secondItem="Jx8-4N-Upg" secondAttribute="bottom" id="bOs-fr-HHd"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1dx-7f-19m" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5UD-6J-272"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Yjm-p6-9Ze" secondAttribute="bottom" id="9i4-I7-fO7"/>
+                <constraint firstItem="kXI-7a-EjK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="E7p-8q-oaL"/>
+                <constraint firstItem="kXI-7a-EjK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="T2l-Cp-WMX"/>
                 <constraint firstItem="Yjm-p6-9Ze" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Wu6-RV-K5l"/>
                 <constraint firstItem="Yjm-p6-9Ze" firstAttribute="top" secondItem="1dx-7f-19m" secondAttribute="bottom" id="a2I-tw-Nb9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Yjm-p6-9Ze" secondAttribute="trailing" id="b3p-Bm-5fa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1dx-7f-19m" secondAttribute="trailing" id="bul-j6-SQX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kXI-7a-EjK" secondAttribute="trailing" constant="16" id="lGa-e5-Edp"/>
                 <constraint firstItem="1dx-7f-19m" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tDK-A8-0Yr"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="ImageNoMusics" width="96" height="72"/>
+    </resources>
 </document>

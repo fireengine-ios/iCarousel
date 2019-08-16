@@ -23,7 +23,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     private let collectionView: UICollectionView
     private weak var delegate: SpotifyCollectionDataSourceDelegate?
     
-    private var allItems = [T]()
+    private(set) var allItems = [T]()
     private var groups = [SpotifyObjectGroup]()
     var sortedRule: SortedRules = .timeDown
     
