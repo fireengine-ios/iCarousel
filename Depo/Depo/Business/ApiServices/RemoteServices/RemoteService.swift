@@ -143,13 +143,13 @@ class RemoteItemsService {
             
             success(suggestionResponse.list)
             self?.remote.debugLogTransIdIfNeeded(headers: suggestionResponse.response?.allHeaderFields, method: "getSuggestion")
-        }, fail: { [weak self] errorResponce in
-            errorResponce.showInternetErrorGlobal()
+        }, fail: { [weak self] errorResponse in
+            errorResponse.showInternetErrorGlobal()
             debugLog("RemoteItemsService getSuggestion SearchService suggestion fail")
 
-            fail(errorResponce)
+            fail(errorResponse)
             
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "getSuggestion")
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "getSuggestion")
         })
     }
     
@@ -211,18 +211,18 @@ final class NextPageOperation: Operation {
                 
                 self.semaphore.signal()
             }
-        }, fail: { [weak self] errorResponce in
+        }, fail: { [weak self] errorResponse in
             
             /// temp error handling
             if UIApplication.topController() is FloatingContainerVC {
-                UIApplication.showOnTabBar(errorMessage: errorResponce.description)
+                UIApplication.showOnTabBar(errorMessage: errorResponse.description)
             } else {
-                errorResponce.showInternetErrorGlobal()
+                errorResponse.showInternetErrorGlobal()
             }
             
             self?.fail?()
             
-            self?.searchService.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "searchByField")
+            self?.searchService.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "searchByField")
 
             self?.semaphore.signal()
         })
@@ -310,12 +310,12 @@ class StoryService: RemoteItemsService {
             success?(list)
             
             self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "search")
-        }, fail: { [weak self] errorResponce in
-            errorResponce.showInternetErrorGlobal()
+        }, fail: { [weak self] errorResponse in
+            errorResponse.showInternetErrorGlobal()
             debugLog("StoryService remote searchStories fail")
             fail?()
             
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "search")
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "search")
         })
     }
 }

@@ -1,5 +1,5 @@
 //
-//  PhoneVereficationPhoneVereficationViewController.swift
+//  PhoneVerificationPhoneVerificationViewController.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
@@ -9,14 +9,14 @@
 import UIKit
 import Typist
 
-class PhoneVerificationViewController: ViewController, PhoneVereficationViewInput {
+class PhoneVerificationViewController: ViewController, PhoneVerificationViewInput {
     
     private enum Constants {
         static let timerLabelBottomOffset: CGFloat = 8
         static let timelLabelTopOffset: CGFloat = 56
     }
     
-    var output: PhoneVereficationViewOutput!
+    var output: PhoneVerificationViewOutput!
         
     @IBOutlet private weak var scrollView: UIScrollView!
     
@@ -44,7 +44,7 @@ class PhoneVerificationViewController: ViewController, PhoneVereficationViewInpu
         }
     }
     
-    var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
+    var inputTextLimit: Int = NumericConstants.verificationCharacterLimit
         
     private let keyboard = Typist()
     
@@ -166,7 +166,7 @@ class PhoneVerificationViewController: ViewController, PhoneVereficationViewInpu
         errorLabel.isHidden = true
     }
     
-    // MARK: PhoneVereficationViewInput
+    // MARK: PhoneVerificationViewInput
     func setupInitialState() {
         codeTextFields.forEach({
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -183,7 +183,7 @@ class PhoneVerificationViewController: ViewController, PhoneVereficationViewInpu
         mainTitle.textColor = .black
         mainTitle.text = TextConstants.enterSecurityCode
         infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        infoTitle.text = TextConstants.phoneVereficationInfoTitleText
+        infoTitle.text = TextConstants.phoneVerificationInfoTitleText
         timerLabel.isHidden = true
         
         infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
@@ -292,12 +292,12 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         if currentStr.count == inputTextLimit,
                 !timerLabel.isDead {
             output.currentSecurityCodeChanged(with: string)
-            output.vereficationCodeEntered()
+            output.verificationCodeEntered()
             return true
         } else if currentStr.count > inputTextLimit {
             return false
         } else {
-            output.vereficationCodeNotReady()
+            output.verificationCodeNotReady()
         }
 
         output.currentSecurityCodeChanged(with: string)

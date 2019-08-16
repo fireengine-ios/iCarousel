@@ -1,5 +1,5 @@
 //
-//  AlbumDetailResponce.swift
+//  AlbumDetailResponse.swift
 //  Depo
 //
 //  Created by Oleg on 24.08.17.

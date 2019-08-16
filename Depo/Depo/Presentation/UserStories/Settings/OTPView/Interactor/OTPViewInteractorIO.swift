@@ -13,5 +13,5 @@
 //}
 //
 //protocol OTPViewInteractorOutput: class {
-//    func configurateWithResponce(responce: SignUpSuccessResponse)
+//    func configurateWithResponse(response: SignUpSuccessResponse)
 //}

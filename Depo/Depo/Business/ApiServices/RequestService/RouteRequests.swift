@@ -79,7 +79,7 @@ struct RouteRequests {
     static let resendVerificationSMS = "verify/sendVerificationSMS"
     
     static let forgotPassword = "account/forgotPassword"
-    static let mailVerefication = "verify/sendVerificationEmail"
+    static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
     static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
@@ -122,7 +122,7 @@ struct RouteRequests {
     
     static let captcha = "captcha/%@/%@"
     
-    static let captchaRequred = "captcha/required"
+    static let captchaRequired = "captcha/required"
     
     // MARK: Search
     

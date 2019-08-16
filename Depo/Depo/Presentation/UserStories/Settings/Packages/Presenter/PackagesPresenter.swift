@@ -180,7 +180,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
         optInVC?.stopLoading()
-        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
         optInVC?.hideResendButton()

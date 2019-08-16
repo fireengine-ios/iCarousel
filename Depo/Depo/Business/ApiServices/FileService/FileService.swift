@@ -521,8 +521,8 @@ class FileService: BaseRequestService {
     func details(uuids: [String], success: ListRemoteItems?, fail: FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
-        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { responce in
-            guard let resultResponse = (responce as? SearchResponse)?.list else {
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { response in
+            guard let resultResponse = (response as? SearchResponse)?.list else {
                 let error = ErrorResponse.string("Unknown error")
                 fail?(error)
                 return
