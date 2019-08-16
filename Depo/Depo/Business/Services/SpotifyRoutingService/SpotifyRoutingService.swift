@@ -51,7 +51,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    func connectToSpotify() {
+    func connectToSpotify(isSettingCell: Bool) {
         getSpotifyStatus { [weak self] result in
             guard let self = self else {
                 return
@@ -60,8 +60,7 @@ final class SpotifyRoutingService {
             switch result {
             case .success(let status):
                 if status.isConnected {
-                    let controller = self.prepareImportPlaylistsController()
-                    self.router.pushViewController(viewController: controller)
+                    self.showPlayListsForImport()
                 } else {
                     self.prepareAuthWebPage()
                 }
@@ -81,6 +80,16 @@ final class SpotifyRoutingService {
                 handler(.failed(error))
             }
         }
+    }
+    
+    private func showImportedPlayLists() {
+        let controller = router.spotifyImportedPlaylistsController()
+        router.pushViewController(viewController: controller)
+    }
+    
+    private func showPlayListsForImport() {
+        let controller = self.prepareImportPlaylistsController()
+        self.router.pushViewController(viewController: controller)
     }
     
     private func prepareAuthWebPage() {
@@ -187,12 +196,18 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     }
     
     func importDidFailed(_ controller: SpotifyImportViewController, error: Error) {
-        let popup = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok, action: { popup in
+        //TODO: Control correct work with real server error
+        guard error.errorCode != 412 else {
+            return
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.errorAlert, message: TextConstants.Spotify.Playlist.transferingPlaylistError, image: .error, buttonTitle: TextConstants.ok, action: { popup in
             popup.close {
                 controller.dismiss(animated: true)
             }
         })
-        router.presentViewController(controller: popup)
+        
+        controller.present(popup, animated: true)
     }
     
     func importDidCancel(_ controller: SpotifyImportViewController) {
@@ -208,8 +223,9 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         }
     }
     
-    func importSendToBackground() {
+    func importSendToBackground(_ controller: SpotifyImportViewController) {
         delegates.invoke(invocation: { $0.importSendToBackground() })
-        router.popToRootViewController()
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true)
     }
 }

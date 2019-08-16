@@ -173,7 +173,7 @@ class CreateStoryMusicService: RemoteItemsService {
 }
 
 typealias CreateStorSuccess = () -> Void
-typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Void
+typealias GetPreviewStorrySyccess = (_ response: CreateStoryResponse) -> Void
 
 class CreateStoryService: BaseRequestService {
     
@@ -205,8 +205,8 @@ class CreateStoryService: BaseRequestService {
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
         debugLog("CreateStoryMusicService getPreview fail")
 
-        let handler = BaseResponseHandler<CreateStoryResponce, ObjectRequestResponse>(success: { [weak self] response in
-            if let response = response as? CreateStoryResponce {
+        let handler = BaseResponseHandler<CreateStoryResponse, ObjectRequestResponse>(success: { [weak self] response in
+            if let response = response as? CreateStoryResponse {
                 debugLog("CreateStoryMusicService getPreview success")
 
                 success(response)

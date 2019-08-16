@@ -11,7 +11,7 @@ import Foundation
 protocol TermsAndServicesRouterInput {
     func goToAutoSync()
     func goToHomePage()
-    func goToPhoneVerefication(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
+    func goToPhoneVerification(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
     func closeModule()
     func goToTurkcellAndGroupCompanies()
     func goToCommercialEmailMessages()

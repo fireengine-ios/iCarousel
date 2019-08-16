@@ -11,25 +11,11 @@ import UIKit
 protocol SocialRemoveConnectionCell: class {
     func setup(with section: Section?)
     func set(username: String?)
-    func setSpotify(username: String?, jobStatus: Date?)
 }
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
     
     private(set) var section: Section?
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
-        return dateFormatter
-    }()
-    
-    @IBOutlet weak var jobStatusLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.textColor = ColorConstants.charcoalGrey
-        }
-    }
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
@@ -58,28 +44,12 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     }
     
     func set(username: String?) {
-        hideJobStatusLabel()
         guard let username = username, !username.isEmpty else {
             return
         }
         DispatchQueue.toMain {
             self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
-    }
-    
-    func setSpotify(username: String?, jobStatus: Date?) {
-        hideJobStatusLabel()
-        if let username = username, !username.isEmpty {
-            connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
-        }
-        
-        if let jobStatus = jobStatus {
-            jobStatusLabel.text =  String(format: TextConstants.spotyfyLastImportFormat, dateFormatter.string(from: jobStatus))
-        }
-    }
-    
-    private func hideJobStatusLabel() {
-        jobStatusLabel.text = ""
     }
     
     @IBAction func removeConnection(_ sender: Any) {

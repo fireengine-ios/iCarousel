@@ -272,7 +272,7 @@ extension CreateStoryViewController: ActivityIndicator {
                                                   musicId: parameter.musicId)
             
             startActivityIndicator()
-            createStoryService.getPreview(preview: storyPreview, success: { [weak self] responce in
+            createStoryService.getPreview(preview: storyPreview, success: { [weak self] response in
                 guard let `self` = self else {
                     return
                 }
@@ -280,7 +280,7 @@ extension CreateStoryViewController: ActivityIndicator {
                 self.stopActivityIndicator()
                 
                 DispatchQueue.main.async {
-                    self.openPreview(responce: responce)
+                    self.openPreview(response: response)
                 }
                 
                 }, fail: { error in
@@ -318,7 +318,7 @@ extension CreateStoryViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    private func openPreview(responce: CreateStoryResponce) {
+    private func openPreview(response: CreateStoryResponse) {
         guard let story = story else {
             let error = CustomErrors.text("An error has occured while composing story data.")
             showError(text: error.localizedDescription)
@@ -326,7 +326,7 @@ extension CreateStoryViewController {
         }
         
         let router = RouterVC()
-        let controller = router.storyPreview(forStory: story, responce: responce)
+        let controller = router.storyPreview(forStory: story, response: response)
         
         self.navigationController?.pushViewController(controller, animated: true)
     }

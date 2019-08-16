@@ -82,7 +82,7 @@ struct RouteRequests {
     static let resendVerificationSMS = "verify/sendVerificationSMS"
     
     static let forgotPassword = "account/forgotPassword"
-    static let mailVerefication = "verify/sendVerificationEmail"
+    static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
     static var twoFactorAuthChallenge: URL { return baseUrl +/ "auth/2fa/challenge" }
@@ -125,7 +125,7 @@ struct RouteRequests {
     
     static let captcha = "captcha/%@/%@"
     
-    static let captchaRequred = "captcha/required"
+    static let captchaRequired = "captcha/required"
     
     // MARK: Search
     
@@ -197,7 +197,9 @@ struct RouteRequests {
         static var authorizeUrl: URL { return spotifyApi +/ "authorizeUrl" }
         static var status: URL { return spotifyApi +/ "status" }
         static var playlists: URL { return spotifyApi +/ "playlist" }
-        static var tracks: URL { return spotifyApi +/ "playlist/track" }
+        static var tracks: URL { return playlists +/ "track" }
+        static var importedPlaylists: URL { return spotifyApi +/ "provider/playlist" }
+        static var importedTracks: URL { return importedPlaylists +/ "track" }
     }
     
     //MARK: - Turkcell Updater

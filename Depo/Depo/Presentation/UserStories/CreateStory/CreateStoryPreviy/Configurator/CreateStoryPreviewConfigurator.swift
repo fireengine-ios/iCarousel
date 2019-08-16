@@ -10,7 +10,7 @@ import UIKit
 
 class CreateStoryPreviewModuleConfigurator {
 
- func configure(viewController: CreateStoryPreviewViewController, story: PhotoStory, responce: CreateStoryResponce) {
+ func configure(viewController: CreateStoryPreviewViewController, story: PhotoStory, response: CreateStoryResponse) {
 
         let router = CreateStoryPreviewRouter()
         router.view = viewController
@@ -21,7 +21,7 @@ class CreateStoryPreviewModuleConfigurator {
 
         let interactor = CreateStoryPreviewInteractor()
         interactor.output = presenter
-        interactor.responce = responce
+        interactor.response = response
         interactor.story = story
 
         presenter.interactor = interactor

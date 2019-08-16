@@ -516,9 +516,9 @@ class MenloworksTagsService {
     
     private func sendSubscriptionsStatus() {
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+            guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else { return }
             
-            let list = subscriptionsResponce.list.sorted(by: { sub1, sub2 -> Bool in
+            let list = subscriptionsResponse.list.sorted(by: { sub1, sub2 -> Bool in
                 guard let sub1Quota = sub1.subscriptionPlanQuota,
                     let sub2Quota = sub2.subscriptionPlanQuota else {
                         return true

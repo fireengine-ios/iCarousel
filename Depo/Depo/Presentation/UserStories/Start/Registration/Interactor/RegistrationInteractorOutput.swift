@@ -11,11 +11,11 @@ protocol RegistrationInteractorOutput: class {
     func userValid(_ userInfo: RegistrationUserInfoModel)
     func userInvalid(withResult result: [UserValidationResults])
     
-    func captchaRequred(requred: Bool)
-    func captchaRequredFailed()
-    func captchaRequredFailed(with message: String)
+    func captchaRequired(required: Bool)
+    func captchaRequiredFailed()
+    func captchaRequiredFailed(with message: String)
     
-    func signUpFailed(errorResponce: ErrorResponse)
+    func signUpFailed(errorResponse: ErrorResponse)
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)
     
     func showSupportView()

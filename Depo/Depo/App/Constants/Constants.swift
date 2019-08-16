@@ -51,10 +51,10 @@ struct TextConstants {
     static let registrationResendButtonText = NSLocalizedString("Resend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let optInNavigarionTitle = NSLocalizedString("Verify Your Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let confirmPhoneOptInNavigarionTitle = NSLocalizedString("Confirm Your Phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let phoneVereficationMainTitleText = NSLocalizedString("Verify Your Phone Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let phoneVereficationInfoTitleText = NSLocalizedString("Enter the verification code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let phoneVereficationNonValidCodeErrorText = NSLocalizedString("Verification code is invalid. \n Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let phoneVereficationResendRequestFailedErrorText = NSLocalizedString("Request failed \n Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let phoneVerificationMainTitleText = NSLocalizedString("Verify Your Phone Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let phoneVerificationInfoTitleText = NSLocalizedString("Enter the verification code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let phoneVerificationNonValidCodeErrorText = NSLocalizedString("Verification code is invalid. \n Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let phoneVerificationResendRequestFailedErrorText = NSLocalizedString("Request failed \n Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenCredentialsError = NSLocalizedString("Login denied. Please check your credentials.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenInvalidCaptchaError = NSLocalizedString("This text doesn't match. Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenInvalidLoginError = NSLocalizedString("Please enter a valid login.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1317,6 +1317,7 @@ struct TextConstants {
     static let twoFAInvalidChallengeErrorMessage = NSLocalizedString("two_fa_invalid_challenge_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let twoFATooManyAttemptsErrorMessage = NSLocalizedString("two_fa_too_many_attempts_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let twoFAInvalidOtpErrorMessage = NSLocalizedString("two_fa_invalid_Otp_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFATooManyRequestsErrorMessage = NSLocalizedString("two_fa_too_many_requests_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - Spotify
     
@@ -1328,13 +1329,16 @@ struct TextConstants {
             static let toLifebox = NSLocalizedString("spotify_import_to", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let description = NSLocalizedString("spotify_import_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let importInBackground = NSLocalizedString("spotify_import_in_background", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let lastImportFromSpotifyFailedError = NSLocalizedString("spotify_import_failed_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
         enum Playlist {
             static let importButton = NSLocalizedString("spotify_playlist_import_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let navBarTitle = NSLocalizedString("spotify_playlist_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let navBarSelectiontTitle = NSLocalizedString("spotify_playlist_navbar_selection_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let songsCount = NSLocalizedString("spotify_playlist_songs_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let successImport = NSLocalizedString("spotify_playlist_success_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let seeImported = NSLocalizedString("spotify_playlist_see_imported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let transferingPlaylistError = NSLocalizedString("spotify_trasfering_playlist_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
         enum OverwritePopup {
             static let message = NSLocalizedString("spotify_overwrite_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1346,6 +1350,19 @@ struct TextConstants {
             static let title = NSLocalizedString("spotify_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let importing = NSLocalizedString("spotify_card_importing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
             static let lastUpdate = NSLocalizedString("spotify_card_last_update", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+        enum DeletePopup {
+            static let title = NSLocalizedString("spotify_delete_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let titleBoldFontText = NSLocalizedString("spotify_delete_title_bold", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let subtitle = NSLocalizedString("spotify_delete_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let deleteButton = NSLocalizedString("spotify_delete_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+        enum CancelImportPopup {
+            static let title = NSLocalizedString("spotify_cancel_import_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let titleBoldFontText = NSLocalizedString("spotify_cancel_import_title_bold", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let subtitle = NSLocalizedString("spotify_cancel_import_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let continueButton = NSLocalizedString("spotify_cancel_import_continue_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let cancelButton = NSLocalizedString("spotify_cancel_import_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         }
     }
     static let confirm = NSLocalizedString("confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -259,7 +259,7 @@ extension ChangeEmailPopUp {
         
         let parameters = UserEmailParameters(userEmail: email)
         AccountService().updateUserEmail(parameters: parameters,
-                                         success: { [weak self] responce in
+                                         success: { [weak self] response in
                                             MenloworksEventsService.shared.onEmailChanged()
                                             
                                             SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: {_ in

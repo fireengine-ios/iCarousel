@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class OTPViewPresenter: PhoneVereficationPresenter {
+class OTPViewPresenter: PhoneVerificationPresenter {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     override func verificationSucces() {
