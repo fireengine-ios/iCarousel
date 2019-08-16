@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol SpotifyStatusViewDelegate: class {
+    
+    func onViewTap()
+    
+}
+
 final class SpotifyStatusView: UIView, NibInit {
     
     enum State {
@@ -41,8 +47,7 @@ final class SpotifyStatusView: UIView, NibInit {
     private lazy var service: SpotifyRoutingService = factory.resolve()
     private var status: SpotifyStatus?
     
-    var tapHandler: VoidHandler?
-    
+    weak var delegate: SpotifyStatusViewDelegate?
     var state: State = .empty {
         didSet {
             switch state {
@@ -56,28 +61,13 @@ final class SpotifyStatusView: UIView, NibInit {
             }
         }
     }
-    
-    deinit {
-        service.delegates.remove(self)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        service.delegates.add(self)
-        
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onTap))
-        addGestureRecognizer(recognizer)
-    }
-    
-    @objc private func onTap() {
-        tapHandler?()
-    }
-}
 
-
-extension SpotifyStatusView: SpotifyRoutingServiceDelegate {
-    func importDidComplete() { }
+    // MARK: Public methods
+    
+    func setStatus(_ status: SpotifyStatus?) {
+        self.status = status
+        processStatus()
+    }
     
     func importSendToBackground() {
         state = .inProgress
@@ -88,4 +78,26 @@ extension SpotifyStatusView: SpotifyRoutingServiceDelegate {
             state = .finished(date)
         }
     }
+    
+    // MARK: Private methods
+    
+    private func processStatus() {
+        if let status = status {
+            switch status.jobStatus {
+            case .unowned, .failed:
+                subtitleLabel.text = ""
+            case .pending, .running:
+                state = .inProgress
+            case .finished, .cancelled:
+                if let date = status.lastModifiedDate {
+                    state = .finished(date)
+                }
+            }
+        }
+    }
+
+    @IBAction private func onViewTap(_ sender: Any) {
+        delegate?.onViewTap()
+    }
+    
 }

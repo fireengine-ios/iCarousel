@@ -9,16 +9,16 @@
 import Foundation
 import SwiftyJSON
 
+enum JobStatus: String {
+    case unowned = "UNKNOWN"
+    case pending = "PENDING"
+    case running = "RUNNING"
+    case finished = "FINISHED"
+    case cancelled = "CANCELED"
+    case failed = "FAILED"
+}
+
 final class SpotifyStatus {
-    
-    enum JobStatus: String {
-        case unowned = "UNKNOWN"
-        case pending = "PENDING"
-        case running = "RUNNING"
-        case finished = "FINISHED"
-        case cancelled = "CANCELED"
-        case failed = "FAILED"
-    }
     
     let jobStatus: JobStatus
     let isConnected: Bool

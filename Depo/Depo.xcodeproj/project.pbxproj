@@ -2890,6 +2890,33 @@
 		8DCB21751F3C871600BAFE1E /* SearchViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21741F3C871600BAFE1E /* SearchViewInteractorOutput.swift */; };
 		8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
 		8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */; };
+		8E1B755723053FDE00F6EEDA /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755623053FDE00F6EEDA /* MusicViewController.swift */; };
+		8E1B7559230547A600F6EEDA /* MusicConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B7558230547A600F6EEDA /* MusicConfigurator.swift */; };
+		8E1B755B230547DA00F6EEDA /* MusicInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755A230547DA00F6EEDA /* MusicInitializer.swift */; };
+		8E26D9782306998500D08123 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9772306998500D08123 /* MusicInteractor.swift */; };
+		8E26D9792306998B00D08123 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9772306998500D08123 /* MusicInteractor.swift */; };
+		8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9772306998500D08123 /* MusicInteractor.swift */; };
+		8E26D97B2306999000D08123 /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA39230562200050D7DD /* MusicPresenter.swift */; };
+		8E26D97C2306999100D08123 /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA39230562200050D7DD /* MusicPresenter.swift */; };
+		8E26D97D2306999400D08123 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755623053FDE00F6EEDA /* MusicViewController.swift */; };
+		8E26D97E2306999500D08123 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755623053FDE00F6EEDA /* MusicViewController.swift */; };
+		8E26D97F2306999800D08123 /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
+		8E26D9802306999800D08123 /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
+		8E26D9812306999B00D08123 /* MusicConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B7558230547A600F6EEDA /* MusicConfigurator.swift */; };
+		8E26D9822306999C00D08123 /* MusicConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B7558230547A600F6EEDA /* MusicConfigurator.swift */; };
+		8E26D983230699A000D08123 /* MusicInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755A230547DA00F6EEDA /* MusicInitializer.swift */; };
+		8E26D984230699A000D08123 /* MusicInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B755A230547DA00F6EEDA /* MusicInitializer.swift */; };
+		8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */; };
+		8E26D98B230699CF00D08123 /* MusicInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */; };
+		8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */; };
+		8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D98D2306B48800D08123 /* MusicViewOutput.swift */; };
+		8E26D98F2306B48800D08123 /* MusicViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D98D2306B48800D08123 /* MusicViewOutput.swift */; };
+		8E26D9902306B48800D08123 /* MusicViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D98D2306B48800D08123 /* MusicViewOutput.swift */; };
+		8E26D9922306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
+		8E26D9932306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
+		8E26D9942306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
+		8E98CA3A230562200050D7DD /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA39230562200050D7DD /* MusicPresenter.swift */; };
+		8E98CA3C2305627E0050D7DD /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
 		9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */; };
 		92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
 		92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -7695,7 +7722,16 @@
 		8DCB21741F3C871600BAFE1E /* SearchViewInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewInteractorOutput.swift; sourceTree = "<group>"; };
 		8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeacrhViewRouter.swift; sourceTree = "<group>"; };
 		8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewRouterInput.swift; sourceTree = "<group>"; };
+		8E1B755623053FDE00F6EEDA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		8E1B7558230547A600F6EEDA /* MusicConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicConfigurator.swift; sourceTree = "<group>"; };
+		8E1B755A230547DA00F6EEDA /* MusicInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInitializer.swift; sourceTree = "<group>"; };
+		8E26D9772306998500D08123 /* MusicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractor.swift; sourceTree = "<group>"; };
+		8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractorOutput.swift; sourceTree = "<group>"; };
+		8E26D98D2306B48800D08123 /* MusicViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewOutput.swift; sourceTree = "<group>"; };
+		8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractorInput.swift; sourceTree = "<group>"; };
 		8E88FF64676BA040D2DC438A /* Pods_LifeboxFileProviderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProviderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E98CA39230562200050D7DD /* MusicPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPresenter.swift; sourceTree = "<group>"; };
+		8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewInput.swift; sourceTree = "<group>"; };
 		8EE9FA64A6455D67D3D3A7BE /* Pods-Depo_LifeTech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.release.xcconfig"; sourceTree = "<group>"; };
 		9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedPresenter.swift; sourceTree = "<group>"; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
@@ -12923,6 +12959,54 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		8E1B755323053F7000F6EEDA /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				8E26D9762306997200D08123 /* Interactor */,
+				8E98CA382305620D0050D7DD /* Presenter */,
+				8E1B755423053F9100F6EEDA /* View */,
+				8E1B755523053F9800F6EEDA /* Configurator */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		8E1B755423053F9100F6EEDA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E1B755623053FDE00F6EEDA /* MusicViewController.swift */,
+				8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */,
+				8E26D98D2306B48800D08123 /* MusicViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E1B755523053F9800F6EEDA /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				8E1B7558230547A600F6EEDA /* MusicConfigurator.swift */,
+				8E1B755A230547DA00F6EEDA /* MusicInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		8E26D9762306997200D08123 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8E26D9772306998500D08123 /* MusicInteractor.swift */,
+				8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */,
+				8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8E98CA382305620D0050D7DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8E98CA39230562200050D7DD /* MusicPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		8EE7EDC1397C8E514DAA6D58 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -14677,6 +14761,7 @@
 			isa = PBXGroup;
 			children = (
 				8C975E15220DC55000AC3502 /* Protocols */,
+				8E1B755323053F7000F6EEDA /* Music */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
 				4A56D5A4202AF467003A4624 /* FaceImageAddName */,
@@ -19325,6 +19410,7 @@
 				CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */,
 				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
 				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
+				8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */,
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
@@ -19832,6 +19918,7 @@
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
 				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
+				8E26D97D2306999400D08123 /* MusicViewController.swift in Sources */,
 				8C0E8DEF1FDEBDFF00789C91 /* PhotoStory.swift in Sources */,
 				8C0E8DF01FDEBDFF00789C91 /* IntroduceConfigurator.swift in Sources */,
 				8C0E8DF11FDEBDFF00789C91 /* PasscodeStorage.swift in Sources */,
@@ -19843,6 +19930,7 @@
 				98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
+				8E26D97F2306999800D08123 /* MusicViewInput.swift in Sources */,
 				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
@@ -19891,6 +19979,7 @@
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				8C0B919E20170E6800A5BA81 /* DuplicatedContactsInteractorInput.swift in Sources */,
 				8C0E8E0C1FDEBDFF00789C91 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				8E26D98F2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				4A13DBE621A6FE5C002C3D16 /* PremiumInfoCard.swift in Sources */,
 				8C0E8E0E1FDEBDFF00789C91 /* SmartTimerLabel.swift in Sources */,
 				B53DCDC320E3A75400400DBA /* WKWebView+Extensions.swift in Sources */,
@@ -19904,6 +19993,7 @@
 				8C0E8E161FDEBDFF00789C91 /* PhoneVereficationConfigurator.swift in Sources */,
 				8C0E8E171FDEBDFF00789C91 /* PhoneVereficationInitializer.swift in Sources */,
 				4A9F8E5420875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
+				8E26D9812306999B00D08123 /* MusicConfigurator.swift in Sources */,
 				8C0E8E181FDEBDFF00789C91 /* HelpAndSupportViewController.swift in Sources */,
 				8C0E8E191FDEBDFF00789C91 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */,
@@ -19954,6 +20044,7 @@
 				8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */,
 				8C0E8E391FDEBDFF00789C91 /* LanguageModel.swift in Sources */,
 				98792DE722FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
+				8E26D97B2306999000D08123 /* MusicPresenter.swift in Sources */,
 				8C208642228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
@@ -20108,6 +20199,7 @@
 				8C0E8EDC1FDEBDFF00789C91 /* UsageInfoViewController.swift in Sources */,
 				8C9CE3B0229DA5A8004B5C73 /* FileProviderWormholeListener.swift in Sources */,
 				B5CDB33921787FEF006CFA50 /* UpdateCheck.m in Sources */,
+				8E26D984230699A000D08123 /* MusicInitializer.swift in Sources */,
 				8C0E8EDD1FDEBDFF00789C91 /* PhotoVideoDetailViewInput.swift in Sources */,
 				8C0E8EDE1FDEBDFF00789C91 /* PhotoVideoDetailViewOutput.swift in Sources */,
 				8C0E8EDF1FDEBDFF00789C91 /* PhotoVideoDetailViewController.swift in Sources */,
@@ -20202,6 +20294,7 @@
 				B53DCE9120EF634900400DBA /* ContactUtil.m in Sources */,
 				CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */,
 				8C0E8F131FDEBDFF00789C91 /* SearchViewConfigurator.swift in Sources */,
+				8E26D98B230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				8C06AC2C2008ABB9003D8E05 /* RecentSearchesService.swift in Sources */,
 				8C0E8F141FDEBDFF00789C91 /* VisualMusicPlayerInitializer.swift in Sources */,
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
@@ -20314,6 +20407,7 @@
 				8C0E8F531FDEBDFF00789C91 /* DocumentsGreedPresenter.swift in Sources */,
 				CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */,
 				8C0E8F541FDEBDFF00789C91 /* FileInfoRouter.swift in Sources */,
+				8E26D9932306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
@@ -20873,6 +20967,7 @@
 				B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */,
 				B5C7C57F211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
 				CEAE3F941EFD4D7C00A405B2 /* SubPlussButtonView.swift in Sources */,
+				8E98CA3A230562200050D7DD /* MusicPresenter.swift in Sources */,
 				8C7786A61F3F38F0005CB432 /* VisualMusicPlayerViewController.swift in Sources */,
 				CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
 				CEC3C2451FB99AF800C3D67F /* PasscodeSettingsViewController.swift in Sources */,
@@ -21049,6 +21144,7 @@
 				8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */,
 				7CFE92FA1F601E36008A3B72 /* Mail.swift in Sources */,
 				8C65D18622C63B6F00CB1DBD /* String + Extension.swift in Sources */,
+				8E26D9782306998500D08123 /* MusicInteractor.swift in Sources */,
 				985599C523017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
 				A20CDBA8219D6C1E00CA9A67 /* PremiumHeaderView.swift in Sources */,
 				CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */,
@@ -21294,6 +21390,7 @@
 				CE51ACD11EF90853005DCEE0 /* TermsAndServicesViewOutput.swift in Sources */,
 				CE2F56191F7552A900F49DA1 /* PackagesInteractorOutput.swift in Sources */,
 				989BDE4022F47B1E001DDEB2 /* SpotifyPlaylistsViewController.swift in Sources */,
+				8E1B755B230547DA00F6EEDA /* MusicInitializer.swift in Sources */,
 				4A0AC138208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
 				CE51ACD21EF90853005DCEE0 /* TermsAndServicesViewController.swift in Sources */,
 				8C06AC0820066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */,
@@ -21323,6 +21420,7 @@
 				92A7460021B91A4F00386C37 /* PackageService.swift in Sources */,
 				CE3A3003200F4B030028C900 /* Validator.swift in Sources */,
 				8CF6A9C8207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
+				8E26D9922306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				CE51ACDA1EF90853005DCEE0 /* TermsAndServicesRouter.swift in Sources */,
 				CE51ACDB1EF90853005DCEE0 /* TermsAndServicesConfigurator.swift in Sources */,
 				CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */,
@@ -21330,6 +21428,7 @@
 				CE49E8FA2099BD71007F05A6 /* UIButton+Font.swift in Sources */,
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
+				8E98CA3C2305627E0050D7DD /* MusicViewInput.swift in Sources */,
 				CE51ACDF1EF90853005DCEE0 /* IntroduceViewController.swift in Sources */,
 				73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				CE51ACE01EF90853005DCEE0 /* IntroduceModuleInput.swift in Sources */,
@@ -21378,6 +21477,7 @@
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
+				8E1B755723053FDE00F6EEDA /* MusicViewController.swift in Sources */,
 				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
 				B53DCE8620EF634900400DBA /* SyncRecord.m in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
@@ -21404,6 +21504,7 @@
 				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
 				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
+				8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
@@ -21623,6 +21724,7 @@
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
+				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -21806,6 +21908,7 @@
 				38648D9D5A7F951F856B308B /* FileInfoViewOutput.swift in Sources */,
 				FA793D832018725400A02B46 /* PeopleServiceResponse.swift in Sources */,
 				7CA4A171207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
+				8E1B7559230547A600F6EEDA /* MusicConfigurator.swift in Sources */,
 				3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */,
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				73FE51FC22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
@@ -22149,6 +22252,7 @@
 				CE7847FB22A685FB00662219 /* DuplicatedContactsConfigurator.swift in Sources */,
 				CE7847FC22A685FB00662219 /* FileServiceResponse.swift in Sources */,
 				CE7847FF22A685FB00662219 /* UserProfilePresenter.swift in Sources */,
+				8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				CE78480022A685FB00662219 /* PasscodeSettingsPresenter.swift in Sources */,
 				CE78480122A685FB00662219 /* Bool+Init.swift in Sources */,
 				CE78480222A685FB00662219 /* Router.swift in Sources */,
@@ -22230,6 +22334,7 @@
 				CE78484922A685FB00662219 /* MulticastDelegate.swift in Sources */,
 				CE78484A22A685FB00662219 /* PopUpSwipeCell.swift in Sources */,
 				CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */,
+				8E26D9942306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */,
 				CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */,
 				CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */,
@@ -22421,6 +22526,7 @@
 				CE7848FE22A685FB00662219 /* CaptchaViewController.swift in Sources */,
 				CE7848FF22A685FB00662219 /* CollectionSortingRules.swift in Sources */,
 				CE78490022A685FB00662219 /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
+				8E26D97E2306999500D08123 /* MusicViewController.swift in Sources */,
 				CE78490122A685FB00662219 /* SegmentedController.swift in Sources */,
 				CE78490222A685FB00662219 /* RegistrationDataSource.swift in Sources */,
 				CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */,
@@ -22456,6 +22562,7 @@
 				CE78491E22A685FB00662219 /* ResponseParser.swift in Sources */,
 				CE78491F22A685FB00662219 /* MyStorageViewInput.swift in Sources */,
 				CE78492022A685FB00662219 /* String+Int.swift in Sources */,
+				8E26D9802306999800D08123 /* MusicViewInput.swift in Sources */,
 				CE78492122A685FB00662219 /* DuplicatedContactsRouterInput.swift in Sources */,
 				CE78492222A685FB00662219 /* SyncDBUtils.m in Sources */,
 				CE78492322A685FB00662219 /* CustomTabBar.swift in Sources */,
@@ -22501,6 +22608,7 @@
 				CE78494B22A685FB00662219 /* FaceImageAddNameConfigurator.swift in Sources */,
 				CE78494C22A685FB00662219 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				CE78494D22A685FB00662219 /* FaceImagePhotosRouter.swift in Sources */,
+				8E26D9822306999C00D08123 /* MusicConfigurator.swift in Sources */,
 				CE78494E22A685FB00662219 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				CE78494F22A685FB00662219 /* TokenKeychainStorage.swift in Sources */,
 				CE78495022A685FB00662219 /* PremiumViewOutput.swift in Sources */,
@@ -22675,6 +22783,7 @@
 				CE7849F522A685FB00662219 /* IntroducePresenter.swift in Sources */,
 				CE7849F622A685FB00662219 /* NumericConstants.swift in Sources */,
 				CE7849F722A685FB00662219 /* CreateStoryService.swift in Sources */,
+				8E26D983230699A000D08123 /* MusicInitializer.swift in Sources */,
 				8C1E5BE722CB8C8A008FDA02 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CE7849F822A685FB00662219 /* LeavePremiumView.swift in Sources */,
 				CE7849F922A685FB00662219 /* IntroduceInteractorInput.swift in Sources */,
@@ -22842,6 +22951,7 @@
 				CE784A9A22A685FB00662219 /* LocalAlbumConfigurator.swift in Sources */,
 				CE784A9B22A685FB00662219 /* ItemOperationManager.swift in Sources */,
 				CE784A9C22A685FB00662219 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
+				8E26D9902306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				8C1E5BD522CB8BB4008FDA02 /* AssetFileCacheManager.swift in Sources */,
 				CE784A9D22A685FB00662219 /* PeriodicContactSyncRouterInput.swift in Sources */,
 				CE784A9E22A685FB00662219 /* PredicateRules.swift in Sources */,
@@ -22926,6 +23036,7 @@
 				CE784AEA22A685FB00662219 /* SubscriptionPlan.swift in Sources */,
 				CE784AEB22A685FB00662219 /* BaseFilesGreedViewController.swift in Sources */,
 				CE784AEC22A685FB00662219 /* ImportFromDropboxInteractor.swift in Sources */,
+				8E26D97C2306999100D08123 /* MusicPresenter.swift in Sources */,
 				CE784AED22A685FB00662219 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CE784AEF22A685FB00662219 /* InstaPickSmartAlbumCell.swift in Sources */,
 				CE784AF022A685FB00662219 /* KeyboardHideManager.swift in Sources */,
@@ -23328,6 +23439,7 @@
 				CE784C6822A685FB00662219 /* FeedbackViewInteractorInput.swift in Sources */,
 				CE784C6922A685FB00662219 /* UIImage+Orientation.swift in Sources */,
 				CE784C6A22A685FB00662219 /* DuplicatedContactsViewInput.swift in Sources */,
+				8E26D9792306998B00D08123 /* MusicInteractor.swift in Sources */,
 				CE784C6B22A685FB00662219 /* FeedbackViewInteractorOutput.swift in Sources */,
 				CE784C6C22A685FB00662219 /* FeedbackViewInteractor.swift in Sources */,
 				CE784C6D22A685FB00662219 /* FeedbackViewRouterInput.swift in Sources */,

@@ -10,6 +10,7 @@ import Foundation
 
 protocol SpotifyRoutingServiceDelegate: class {
     func importDidComplete()
+    func importDidCanceled()
     func importSendToBackground()
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus)
 }
@@ -81,6 +82,11 @@ final class SpotifyRoutingService {
                 handler(.failed(error))
             }
         }
+    }
+    
+    func showImportedPlayLists() {
+        let controller = router.spotifyImportedPlaylistsController()
+        router.pushViewController(viewController: controller)
     }
     
     private func prepareAuthWebPage() {
@@ -202,6 +208,8 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     }
     
     func importDidCancel(_ controller: SpotifyImportViewController) {
+        delegates.invoke(invocation: { $0.importDidCanceled() })
+
         controller.dismiss(animated: true)
         
         spotifyService.stop { result in

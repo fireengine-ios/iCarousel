@@ -457,7 +457,7 @@ class RouterVC: NSObject {
     // MARK: Music
     
     var musics: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
+        let controller = MusicInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
