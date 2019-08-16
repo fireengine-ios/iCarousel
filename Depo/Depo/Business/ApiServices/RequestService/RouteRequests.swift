@@ -18,9 +18,8 @@ struct RouteRequests {
     
     // MARK: Environment
 
-    private static var currentServerEnvironment: ServerEnvironment {
-        return SettingsBundleHelper.preferredEnvironment()
-    }
+    static var currentServerEnvironment: ServerEnvironment = .production
+
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static var baseShortUrlString: String {

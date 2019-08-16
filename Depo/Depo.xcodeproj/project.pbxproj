@@ -2802,8 +2802,6 @@
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
 		8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
-		8C8925522252ABFC004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
-		8C8925532252ABFD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
 		8C975E13220DA24300AC3502 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
 		8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
@@ -20622,7 +20620,6 @@
 				CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */,
 				CEE3017E2049520B007E70CE /* Mapping.swift in Sources */,
 				CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */,
-				8C8925532252ABFD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
 				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
 				7C121F03208742BD00AA585F /* TokenKeychainStorage.swift in Sources */,
@@ -21935,7 +21932,6 @@
 				7C121F02208742BC00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
 				CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */,
-				8C8925522252ABFC004BE02E /* SettingsBundleHelper.swift in Sources */,
 				CE5B5E4020C291BB00D91112 /* SpringLabel.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
 				CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */,

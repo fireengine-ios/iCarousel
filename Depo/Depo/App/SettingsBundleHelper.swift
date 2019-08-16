@@ -13,6 +13,11 @@ final class SettingsBundleHelper {
         static let routeEnvironment = "routeEnvironment"
         static let version = "version_preference"
         static let buildVersion = "build_preference"
+        static let dropDB = "dropDBState"
+    }
+    
+    private struct PreviouslyStoredValuesKeys {
+        static let routeEnvironment = "oldRouteEnvironment"
     }
     
     private struct EnviromentKeys {
@@ -30,11 +35,38 @@ final class SettingsBundleHelper {
         UserDefaults.standard.set(build, forKey: BundleKeys.buildVersion)
     }
     
+    static func setCurrentRouteEnvironment() {
+        let newEnvironment = preferredEnvironment()
+        RouteRequests.currentServerEnvironment = newEnvironment
+        storeNewEnviroment(state: newEnvironment)
+    }
+    
     static func preferredEnvironment() -> RouteRequests.ServerEnvironment {
-        guard let selectedEnvironment = UserDefaults.standard.object(forKey: BundleKeys.routeEnvironment) as? String else {
+        return getEnviromentForState(state: UserDefaults.standard.string(forKey: BundleKeys.routeEnvironment))
+    }
+    
+    private static func getPreviouslyStoredEnviroment() -> RouteRequests.ServerEnvironment {
+        return getEnviromentForState(state: UserDefaults.standard.string(forKey: PreviouslyStoredValuesKeys.routeEnvironment))
+    }
+    
+    private static func storeNewEnviroment(state: RouteRequests.ServerEnvironment) {
+        let valueToStore: String
+        switch state {
+        case .production:
+            valueToStore = EnviromentKeys.prod
+        case .preProduction:
+            valueToStore = EnviromentKeys.preProd
+        case .test:
+            valueToStore = EnviromentKeys.test
+        }
+        UserDefaults.standard.set(valueToStore, forKey: PreviouslyStoredValuesKeys.routeEnvironment)
+    }
+    
+    private static func getEnviromentForState(state: String?) -> RouteRequests.ServerEnvironment {
+        guard let unwrapedStatus = state else {
             return RouteRequests.ServerEnvironment.production
         }
-        switch selectedEnvironment {
+        switch unwrapedStatus {
         case EnviromentKeys.preProd:
             return RouteRequests.ServerEnvironment.preProduction
         case EnviromentKeys.test:
@@ -48,14 +80,33 @@ final class SettingsBundleHelper {
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
-    func checkLifeTechSettings() {
+    static func checkLifeTechSettings() {
         guard SettingsBundleHelper.isLifeTechBuild else {
             return
         }
-        
-        
+        checkEnvironmentChange()
+        checkDropDBStatusChange()
     }
-
+    
+    private static func checkEnvironmentChange() {
+        let oldEnvironment = getPreviouslyStoredEnviroment()
+        let newEnvironment = preferredEnvironment()
+        if newEnvironment != oldEnvironment {
+            RouteRequests.currentServerEnvironment = newEnvironment
+            storeNewEnviroment(state: newEnvironment)
+            
+        }
+    }
+    
+    private static func checkDropDBStatusChange() {
+        let currentDropDBState = UserDefaults.standard.bool(forKey: BundleKeys.dropDB)
+        if currentDropDBState {
+            UserDefaults.standard.set(false, forKey: BundleKeys.dropDB)
+            MediaItemOperationsService.shared.deleteAllEnteties { _ in
+                AppConfigurator.logout()
+            }
+            return
+        }
+    }
+    
 }
-
-

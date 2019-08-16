@@ -29,12 +29,13 @@ final class AppConfigurator {
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         
+        SettingsBundleHelper.setVersionAndBuildNumber()
+        SettingsBundleHelper.setCurrentRouteEnvironment()
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         clearTokensIfNeed()
         logoutIfNeed()
         prepareSessionManager()
-        SettingsBundleHelper.setVersionAndBuildNumber()
         configureSDWebImage()
         setupIAPObserver()
         startMenloworks(with: launchOptions)
