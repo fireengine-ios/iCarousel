@@ -1672,7 +1672,6 @@
 		8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
 		8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
-		8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
 		8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
 		8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
@@ -2764,6 +2763,9 @@
 		8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
+		8C77F6222303F0D4003BC248 /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
+		8C77F62323042D82003BC248 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
+		8C7B9F3E2253F8970050DABE /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
 		8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C8610EC22BCC08000108958 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E622BCC07F00108958 /* Info-AppStore.plist */; };
@@ -2799,6 +2801,8 @@
 		8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
 		8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
+		8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
+		8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
 		8C975E13220DA24300AC3502 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
 		8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
@@ -2815,6 +2819,8 @@
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
+		8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
+		8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -3929,7 +3935,6 @@
 		CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
 		CE5A612F2060F8AE00793EB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		CE5B5E4020C291BB00D91112 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
-		CE5B5E4120C293B800D91112 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
 		CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CE5FE962208B1C9E0065AC7E /* UploadHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE41FB5861A00FCE6AB /* UploadHelpers.swift */; };
 		CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE963208B20400065AC7E /* FileManager+Size.swift */; };
@@ -4052,7 +4057,6 @@
 		CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
-		CE78484522A685FB00662219 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		CE78484622A685FB00662219 /* StorageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A220189C6C009F6D3D /* StorageCard.swift */; };
 		CE78484722A685FB00662219 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24921F5A7B000A5A696 /* PhotoCell.swift */; };
 		CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
@@ -5674,7 +5678,6 @@
 		CE784ECF22A685FB00662219 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
 		CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
-		CE784ED222A685FB00662219 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
 		CE784ED322A685FB00662219 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
 		CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD842008AD6F003D8E05 /* toolbar_ciz_icon.png */; };
 		CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC642008AD6F003D8E05 /* cizgi_1_selected@3x.png */; };
@@ -7608,6 +7611,7 @@
 		8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualMusicPlayerViewController.xib; sourceTree = "<group>"; };
 		8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewInput.swift; sourceTree = "<group>"; };
 		8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewOutput.swift; sourceTree = "<group>"; };
+		8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTC.bundle; sourceTree = "<group>"; };
 		8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueLabels.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
 		8C8610E622BCC07F00108958 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
@@ -7636,6 +7640,7 @@
 		8C86110922BCD46700108958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
+		8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlTabBarProtocol.swift; sourceTree = "<group>"; };
 		8C9CE3AE229DA5A8004B5C73 /* FileProviderWormholeListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProviderWormholeListener.swift; sourceTree = "<group>"; };
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
@@ -8896,6 +8901,7 @@
 				8C3930EA2100668300C1D82D /* googleAnalytics */,
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
 				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
+				8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */,
 				7C121F0A20874BCE00AA585F /* AppMigrator.swift */,
 				8C208683228D513E000BEDAD /* Watchdog.swift */,
 				CE1458CE2045734200812544 /* Alamofire+Validate.swift */,
@@ -15298,6 +15304,7 @@
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */,
 				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
 				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
@@ -16609,7 +16616,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5B5E4120C293B800D91112 /* Settings.bundle in Resources */,
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
@@ -16644,6 +16650,7 @@
 				8C06AF592008AD70003D8E05 /* daire@2x.png in Resources */,
 				890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				8C06AFC12008AD71003D8E05 /* gonder_btn.png in Resources */,
+				8C7B9F3E2253F8970050DABE /* SettingsTC.bundle in Resources */,
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
 				4A6DBE8A21A6F9260003D1B4 /* PremiumView.xib in Resources */,
@@ -18127,6 +18134,7 @@
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
 				CE784D4522A685FB00662219 /* CaptchaViewController.xib in Resources */,
 				CE784D4622A685FB00662219 /* caps2_selected@2x.png in Resources */,
+				8C77F6222303F0D4003BC248 /* SettingsTC.bundle in Resources */,
 				CE784D4722A685FB00662219 /* Orta@3x.png in Resources */,
 				CE784D4822A685FB00662219 /* checkbox@3x.png in Resources */,
 				CE784D4922A685FB00662219 /* target_secili.png in Resources */,
@@ -18540,7 +18548,6 @@
 				CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */,
 				CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */,
 				73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
-				CE784ED222A685FB00662219 /* Settings.bundle in Resources */,
 				CE784ED322A685FB00662219 /* ProgressPopUp.xib in Resources */,
 				CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */,
 				CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */,
@@ -19389,7 +19396,6 @@
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
-				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
 				8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */,
 				4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
@@ -19755,6 +19761,7 @@
 				8C0E8DCF1FDEBDFF00789C91 /* TermsAndServicesModuleInput.swift in Sources */,
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				4A0AC139208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
+				8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				8C208675228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
@@ -20096,6 +20103,7 @@
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				17589F752276336800A5DB37 /* PhoneCodeInputView.swift in Sources */,
+				8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */,
 				984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
@@ -21138,6 +21146,7 @@
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
+				8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				8C208643228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
@@ -22152,6 +22161,7 @@
 				CE78481E22A685FB00662219 /* ControlTabBarProtocol.swift in Sources */,
 				CE78481F22A685FB00662219 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				CE78482022A685FB00662219 /* UserProfileModuleInput.swift in Sources */,
+				8C77F62323042D82003BC248 /* SettingsBundleHelper.swift in Sources */,
 				CE78482122A685FB00662219 /* UIEdgeInsets+Extensions.swift in Sources */,
 				CE78482222A685FB00662219 /* MD5.swift in Sources */,
 				CE78482322A685FB00662219 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
@@ -22192,7 +22202,6 @@
 				CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */,
 				CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */,
 				CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */,
-				CE78484522A685FB00662219 /* RequestService.swift in Sources */,
 				CE78484622A685FB00662219 /* StorageCard.swift in Sources */,
 				CE78484722A685FB00662219 /* PhotoCell.swift in Sources */,
 				CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */,
@@ -22445,6 +22454,7 @@
 				CE78493022A685FB00662219 /* PackagesInitializer.swift in Sources */,
 				CE78493122A685FB00662219 /* UINavigationController+Push.swift in Sources */,
 				CE78493222A685FB00662219 /* ManageContactsInteractor.swift in Sources */,
+				8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */,
 				CE78493322A685FB00662219 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				CE78493422A685FB00662219 /* BaseMediaContent.swift in Sources */,
 				CE78493522A685FB00662219 /* AuthenticationServiceResponseError.swift in Sources */,

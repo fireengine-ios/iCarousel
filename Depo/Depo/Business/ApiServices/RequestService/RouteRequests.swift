@@ -10,7 +10,7 @@ import Foundation
 
 struct RouteRequests {
     
-    private enum ServerEnvironment {
+    enum ServerEnvironment {
         case test
         case preProduction
         case production
@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {

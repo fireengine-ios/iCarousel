@@ -31,6 +31,25 @@ final class MediaItemOperationsService {
     private var reservedAssets = AssetsCache()
     
     
+    func deleteAllEnteties(_ completion: BoolHandler?) {
+        let elementsToDelete: [(type: NSManagedObject.Type, predicate: NSPredicate?)]
+        elementsToDelete = [(MediaItemsAlbum.self, nil),
+                            (MediaItem.self, nil)]
+        
+        let group = DispatchGroup()
+        
+        for element in elementsToDelete {
+            group.enter()
+            
+            delete(type: element.type, predicate: element.predicate, mergeChanges: false) { _ in
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            completion?(true)
+        }
+    }
+    
     func deleteRemoteEntities(_ completion: BoolHandler?) {
         let remoteMediaItemsPredicate = PredicateRules().predicate(filters: [.localStatus(.nonLocal)])
         
