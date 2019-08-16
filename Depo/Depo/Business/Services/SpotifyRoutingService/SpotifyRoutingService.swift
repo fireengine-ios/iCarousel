@@ -153,11 +153,9 @@ final class SpotifyRoutingService {
     
     private func checkImportStatus(completion: @escaping VoidHandler) {
         guard importInProgress else {
-            debugPrint("checkImportStatus cancel")
             return
         }
         
-        debugPrint("checkImportStatus")
         spotifyService.getStatus { [weak self] result in
             guard let self = self else {
                 return
@@ -169,7 +167,6 @@ final class SpotifyRoutingService {
                     self.importInProgress = false
                     self.lastSpotifyStatus = status
                 
-                    debugPrint("import is complete")
                     completion()
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
