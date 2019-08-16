@@ -48,7 +48,7 @@ final class SettingsBundleHelper {
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
-    func checkSwitchersStatusForLifeTech() {
+    func checkLifeTechSettings() {
         guard SettingsBundleHelper.isLifeTechBuild else {
             return
         }
