@@ -13,6 +13,8 @@ final class WaitingForWiFiPopUp: BaseView {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var settingsButton: CircleYellowButton?
     
+    let spacing: CGFloat = 2.1
+    
     override func configurateView() {
         super.configurateView()
         
@@ -22,6 +24,8 @@ final class WaitingForWiFiPopUp: BaseView {
         titleLabel?.textColor = ColorConstants.textGrayColor
         
         settingsButton?.setTitle(TextConstants.waitingForWiFiPopUpSettingsButton, for: .normal)
+        settingsButton?.setImage(UIImage(named: "CogForButtons"), for: .normal)
+        settingsButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing)
     }
     
     @IBAction func onSettingsButton() {
