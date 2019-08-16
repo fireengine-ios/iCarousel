@@ -10,6 +10,7 @@ import Foundation
 
 protocol MusicInteractorInput: BaseFilesGreedInteractorInput {
     
+    var spotifyStatus: SpotifyStatus? { get }
     func processSpotifyStatusViewTap()
     
 }

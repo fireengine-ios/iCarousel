@@ -14,7 +14,9 @@ final class MusicPresenter: DocumentsGreedPresenter {
         super.updateNoFilesView()
         
         DispatchQueue.main.async {
-            (self.view as? MusicViewInput)?.didRefreshSpotifyStatusView(isHidden: self.needShowNoFileView(), status: nil)
+            let isHiddenSpotifyStatusView = !((self.interactor as? MusicInteractorInput)?.spotifyStatus?.isConnected == true)
+            (self.view as? MusicViewInput)?.didRefreshSpotifyStatusView(isHidden: isHiddenSpotifyStatusView,
+                                                                        status: (self.interactor as? MusicInteractorInput)?.spotifyStatus)
         }
     }
     

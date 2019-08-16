@@ -12,6 +12,8 @@ final class MusicInteractor: BaseFilesGreedInteractor {
 
     private var spotifyService: SpotifyRoutingService
     
+    var spotifyStatus: SpotifyStatus?
+    
     init(remoteItems: RemoteItemsService, spotifyService: SpotifyRoutingService) {
         self.spotifyService = spotifyService
         super.init(remoteItems: remoteItems)
@@ -32,6 +34,7 @@ final class MusicInteractor: BaseFilesGreedInteractor {
         spotifyService.getSpotifyStatus { [weak self] result in
             switch result {
             case .success(let status):
+                self?.spotifyStatus = status
                 (self?.output as? MusicInteractorOutput)?.didSpotifyStatus(status)
             case .failed(let error):
                 (self?.output as? MusicInteractorOutput)?.failedObtainSpotifyStatus()

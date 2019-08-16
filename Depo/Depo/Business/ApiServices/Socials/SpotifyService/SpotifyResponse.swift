@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-enum JobStatus: String {
+enum SpotifyJobStatus: String {
     case unowned = "UNKNOWN"
     case pending = "PENDING"
     case running = "RUNNING"
@@ -20,12 +20,12 @@ enum JobStatus: String {
 
 final class SpotifyStatus {
     
-    let jobStatus: JobStatus
+    let jobStatus: SpotifyJobStatus
     let isConnected: Bool
     let lastModifiedDate: Date?
     let userName: String?
     
-    init(jobStatus: JobStatus, isConnected: Bool, lastModifiedDate: Date?, userName: String?) {
+    init(jobStatus: SpotifyJobStatus, isConnected: Bool, lastModifiedDate: Date?, userName: String?) {
         self.jobStatus = jobStatus
         self.isConnected = isConnected
         self.lastModifiedDate = lastModifiedDate
@@ -37,7 +37,7 @@ extension SpotifyStatus {
     convenience init?(json: JSON) {
         guard
             let jobStatusString = json["jobStatus"].string,
-            let jobStatus = JobStatus(rawValue: jobStatusString),
+            let jobStatus = SpotifyJobStatus(rawValue: jobStatusString),
             let isConnected = json["connected"].bool
             else {
                 assertionFailure()
