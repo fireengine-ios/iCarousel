@@ -1,5 +1,5 @@
 //
-//  CreateStoryResponce.swift
+//  CreateStoryResponse.swift
 //  Depo_LifeTech
 //
 //  Created by Oleg on 18.10.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStoryResponce: ObjectRequestResponse {
+class CreateStoryResponse: ObjectRequestResponse {
     var storyURLString: String?
     var uuid: String?
     

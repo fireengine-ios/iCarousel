@@ -14,7 +14,7 @@ final class TwoFactorChallengeConfigurator {
                    otpParams: TwoFAChallengeParametersResponse,
                    challenge: TwoFAChallengeModel) {
         
-        let router = PhoneVereficationRouter()
+        let router = PhoneVerificationRouter()
         let presenter = TwoFactorChallengePresenter()
         
         presenter.view = viewController

@@ -55,7 +55,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: surname)
             AccountService().updateUserProfile(parameters: parameters,
-                                               success: { [weak self] responce in
+                                               success: { [weak self] response in
                 let nameIsEmpty = name.isEmpty
                 MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
                 MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
@@ -74,7 +74,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
-                                             success: { [weak self] responce in
+                                             success: { [weak self] response in
                                                 MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
                 self?.updatePhoneIfNeed(number: number, birthday: birthday)
@@ -90,9 +90,9 @@ class UserProfileInteractor: UserProfileInteractorInput {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
-                                             success: { [weak self] responce in
-                                                if let resp = responce as? SignUpSuccessResponse {
-                                                    self?.needSendOTP(responce: resp)
+                                             success: { [weak self] response in
+                                                if let resp = response as? SignUpSuccessResponse {
+                                                    self?.needSendOTP(response: resp)
                                                 } else {
                                                     self?.fail(error: TextConstants.errorUnknown)
                                                 }
@@ -132,11 +132,11 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func needSendOTP(responce: SignUpSuccessResponse) {
+    func needSendOTP(response: SignUpSuccessResponse) {
         DispatchQueue.main.async { [weak self] in
             if let info = self?.userInfo {
                 self?.output?.stopNetworkOperation()
-                self?.output?.needSendOTP(responce: responce, userInfo: info)
+                self?.output?.needSendOTP(response: response, userInfo: info)
             }
         }
     }

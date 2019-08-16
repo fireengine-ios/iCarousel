@@ -286,20 +286,20 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: error.description)
     }
     
-    func captchaRequred(requred: Bool) {
+    func captchaRequired(required: Bool) {
         asyncOperationSuccess()
 
-        if requred {
+        if required {
             captchaShowed = true
             view.showCaptcha()
         }
     }
     
-    func captchaRequredFailed() {
+    func captchaRequiredFailed() {
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed(with message: String) {
+    func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
     }

@@ -32,16 +32,16 @@ final class LeavePremiumInteractor {
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     func getActiveSubscription() {
         subscriptionsService.activeSubscriptions(success: { [weak self] response in
-            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
+            guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
                 let error = CustomErrors.serverError("An error occured while getting active subscription")
                 DispatchQueue.toMain {
                     self?.output.didErrorMessage(with: error.localizedDescription)
                 }
                 return
             }
-            SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
+            SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
             DispatchQueue.toMain {
-                self?.output.didLoadActiveSubscriptions(subscriptionsResponce.list)
+                self?.output.didLoadActiveSubscriptions(subscriptionsResponse.list)
             }
         }) { [weak self] error in
             DispatchQueue.toMain {

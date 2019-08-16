@@ -1,16 +1,16 @@
 //
-//  PhoneVereficationPhoneVereficationPresenter.swift
+//  PhoneVerificationPresenter.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, PhoneVereficationViewOutput, PhoneVereficationInteractorOutput {
+class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, PhoneVerificationViewOutput, PhoneVerificationInteractorOutput {
 
-    weak var view: PhoneVereficationViewInput!
-    var interactor: PhoneVereficationInteractorInput!
-    var router: PhoneVereficationRouterInput!
+    weak var view: PhoneVerificationViewInput!
+    var interactor: PhoneVerificationInteractorInput!
+    var router: PhoneVerificationRouterInput!
     
     var currentSecurityCode = ""
 
@@ -47,12 +47,12 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         
     }
     
-    func vereficationCodeEntered() {
+    func verificationCodeEntered() {
         startAsyncOperationDisableScreen()
         interactor.verifyCode(code: currentSecurityCode)
     }
     
-    func vereficationCodeNotReady() {
+    func verificationCodeNotReady() {
     }
     
     func verificationSucces() {
@@ -60,10 +60,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func verificationSilentSuccess() {
-        /// empty bcz PhoneVereficationPresenter reused
+        /// empty bcz PhoneVerificationPresenter reused
     }
     
-    func vereficationFailed(with error: String) {
+    func verificationFailed(with error: String) {
         completeAsyncOperationEnableScreen()
         view.updateEditingState()
         view.showError(error)
@@ -81,14 +81,14 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
             view.showError(error.description)
             
         } else {
-            view.showError(TextConstants.phoneVereficationResendRequestFailedErrorText)
+            view.showError(TextConstants.phoneVerificationResendRequestFailedErrorText)
             
         }
         
         view.dropTimer()
     }
     
-    func resendCodeRequestSuccesed() {
+    func resendCodeRequestSucceeded() {
         completeAsyncOperationEnableScreen()
         asyncOperationSuccess()
         view.setupButtonsInitialState()

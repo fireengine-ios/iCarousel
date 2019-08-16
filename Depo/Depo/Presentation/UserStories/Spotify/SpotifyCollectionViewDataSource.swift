@@ -18,7 +18,7 @@ protocol SpotifyCollectionDataSourceDelegate: class {
 
 final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    typealias SpotifyObjectGroup = (section: String, items: [T])
+    typealias SpotifyObjectGroup = (key: String, value: [T])
     
     private let collectionView: UICollectionView
     private weak var delegate: SpotifyCollectionDataSourceDelegate?
@@ -66,6 +66,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         collectionView.register(nibCell: SpotifyPlaylistCollectionViewCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         collectionView.allowsMultipleSelection = true
+        collectionView.alwaysBounceVertical = true
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 70)
@@ -123,7 +124,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if showGroups {
-            return groups[safe: section]?.items.count ?? 0
+            return groups[safe: section]?.value.count ?? 0
         }
         return showOnlySelected ? selectedItems.count : allItems.count
     }
@@ -170,7 +171,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
             return
         }
         
-        let headerText = groups[safe: indexPath.section]?.section ?? ""
+        let headerText = groups[safe: indexPath.section]?.key ?? ""
         view.setText(text: headerText)
     }
     
@@ -218,6 +219,7 @@ extension SpotifyCollectionViewDataSource {
         }
         
         if reloadCollectionView {
+            collectionView.contentOffset = .zero
             collectionView.reloadData()
         } else {
             let updates = mergeUpdate(filteredNewItems)
@@ -243,9 +245,9 @@ extension SpotifyCollectionViewDataSource {
         
         var deleteSections = IndexSet()
         if showGroups {
-            let oldSections = groups.map { $0.section }
+            let oldSections = groups.map { $0.key }
             updateGroupedItems()
-            let newSections = groups.map { $0.section }
+            let newSections = groups.map { $0.key }
             
             var indexes = [Int]()
             oldSections.enumerated().forEach { index, section in
@@ -273,7 +275,7 @@ extension SpotifyCollectionViewDataSource {
         }
         
         if showGroups {
-            groups[path.section].items[path.row] = item
+            groups[path.section].value[path.row] = item
             
             if let index = allItems.firstIndex(where: { $0 == item }) {
                 allItems[index] = item
@@ -297,7 +299,12 @@ extension SpotifyCollectionViewDataSource {
             assertionFailure("unknown sort type")
         }
         
-        groups = dict.map { SpotifyObjectGroup(section: $0.key, items: $0.value) }
+        switch sortedRule.sortOder {
+        case .asc:
+            groups = dict.sorted { $0.0 < $1.0 }
+        case .desc:
+            groups = dict.sorted { $0.0 > $1.0 }
+        }
     }
     
     private func mergeUpdate(_ newItems: [T]) -> (insertedSections: IndexSet?, insertedIndexPaths: [IndexPath]) {
@@ -312,7 +319,7 @@ extension SpotifyCollectionViewDataSource {
 
         var insertedIndexPaths = [IndexPath]()
         groups.enumerated().forEach { section, group in
-            group.items.enumerated().forEach { row, item in
+            group.value.enumerated().forEach { row, item in
                 if newItems.contains(item) {
                     insertedIndexPaths.append(IndexPath(row: row, section: section))
                 }
@@ -323,7 +330,7 @@ extension SpotifyCollectionViewDataSource {
     
     private func item(for indexPath: IndexPath) -> T? {
         if showGroups {
-            return groups[safe: indexPath.section]?.items[safe: indexPath.row]
+            return groups[safe: indexPath.section]?.value[safe: indexPath.row]
         }
         return showOnlySelected ? selectedItems[safe: indexPath.row] : allItems[safe: indexPath.row]
     }
@@ -343,7 +350,7 @@ extension SpotifyCollectionViewDataSource {
             
             let sections = groups.map { $0.0 }
             if let section = sections.firstIndex(where: { $0 == sectionKey }),
-               let row = groups[section].items.firstIndex(where: {$0 == item }) {
+               let row = groups[section].value.firstIndex(where: {$0 == item }) {
                 return IndexPath(row: row, section: section)
             } else {
                 return nil

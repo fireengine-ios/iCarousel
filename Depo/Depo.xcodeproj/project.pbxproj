@@ -428,7 +428,7 @@
 		7C0435071F4DBAAF00193C75 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */; };
 		7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
 		7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
-		7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
+		7C04350D1F4F17E800193C75 /* AlbumDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponse.swift */; };
 		7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */; };
 		7C0750F620BD83A800FD1FA2 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
 		7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
@@ -443,7 +443,7 @@
 		7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121F0A20874BCE00AA585F /* AppMigrator.swift */; };
 		7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
 		7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */; };
-		7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */; };
+		7C1EA0481F9792F1002DBAD8 /* CreateStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */; };
 		7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */; };
 		7C1F898A1F6FFE1100740177 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
 		7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseView.swift */; };
@@ -1696,7 +1696,7 @@
 		8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7491FCBE84100C23CBD /* InstagramResponses.swift */; };
 		8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED401F516736002F923A /* HelpAndSupportPresenter.swift */; };
 		8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B731EEEAE8C006532C8 /* IntroduceDataSource.swift */; };
-		8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */; };
+		8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */; };
 		8C0E8CC91FDEBDFF00789C91 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */; };
 		8C0E8CCA1FDEBDFF00789C91 /* HomePagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA71EFD4F0D00A405B2 /* HomePagePresenter.swift */; };
 		8C0E8CCB1FDEBDFF00789C91 /* SearchViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21701F3C864900BAFE1E /* SearchViewInteractor.swift */; };
@@ -1757,7 +1757,7 @@
 		8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F91F601E36008A3B72 /* Mail.swift */; };
 		8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
 		8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
-		8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
+		8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponse.swift */; };
 		8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA31EFD4F0D00A405B2 /* HomePageInteractorInput.swift */; };
 		8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FCC1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift */; };
@@ -1804,7 +1804,7 @@
 		8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
 		8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E11F3F18FA00EFDC6D /* UsageInfoInitializer.swift */; };
-		8C0E8D611FDEBDFF00789C91 /* PhoneVereficationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */; };
+		8C0E8D611FDEBDFF00789C91 /* PhoneVerificationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVerificationDataStorage.swift */; };
 		8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0097191F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift */; };
 		8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8721F348B5C002AC795 /* BottomSelectionTabBarViewController.swift */; };
 		8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */; };
@@ -1928,28 +1928,28 @@
 		8C0E8DFB1FDEBDFF00789C91 /* GridListTopBarSortingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408441F62A26000D4717A /* GridListTopBarSortingTableView.swift */; };
 		8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
 		8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA21EFD4F0D00A405B2 /* HomePageInteractor.swift */; };
-		8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */; };
+		8C0E8DFE1FDEBDFF00789C91 /* PhoneVerificationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */; };
 		8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4485081F10FE09003AF631 /* SplitIpadViewContoller.swift */; };
 		8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74A1FCBE84100C23CBD /* InstagramService.swift */; };
 		8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB432F1F8658A000789FA6 /* LocationManager.swift */; };
 		8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
 		8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B131F23931C0016CE0C /* WrapperedItemUtil.swift */; };
-		8C0E8E051FDEBDFF00789C91 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
+		8C0E8E051FDEBDFF00789C91 /* PhoneVerificationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */; };
 		8C0E8E061FDEBDFF00789C91 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
-		8C0E8E071FDEBDFF00789C91 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
-		8C0E8E081FDEBDFF00789C91 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
-		8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
+		8C0E8E071FDEBDFF00789C91 /* PhoneVerificationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */; };
+		8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */; };
+		8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVerificationInteractorInput.swift */; };
 		8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
-		8C0E8E0C1FDEBDFF00789C91 /* PhoneVereficationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */; };
+		8C0E8E0C1FDEBDFF00789C91 /* PhoneVerificationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVerificationInteractorOutput.swift */; };
 		8C0E8E0E1FDEBDFF00789C91 /* SmartTimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */; };
 		8C0E8E101FDEBDFF00789C91 /* BottomSelectionMusicTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */; };
-		8C0E8E111FDEBDFF00789C91 /* PhoneVereficationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */; };
+		8C0E8E111FDEBDFF00789C91 /* PhoneVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVerificationInteractor.swift */; };
 		8C0E8E121FDEBDFF00789C91 /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863FF1F3F30BD00EFDC6D /* RoundedProgressView.swift */; };
 		8C0E8E131FDEBDFF00789C91 /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		8C0E8E141FDEBDFF00789C91 /* PhoneVereficationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */; };
-		8C0E8E151FDEBDFF00789C91 /* PhoneVereficationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */; };
-		8C0E8E161FDEBDFF00789C91 /* PhoneVereficationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */; };
-		8C0E8E171FDEBDFF00789C91 /* PhoneVereficationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVereficationInitializer.swift */; };
+		8C0E8E141FDEBDFF00789C91 /* PhoneVerificationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */; };
+		8C0E8E151FDEBDFF00789C91 /* PhoneVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVerificationRouter.swift */; };
+		8C0E8E161FDEBDFF00789C91 /* PhoneVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVerificationConfigurator.swift */; };
+		8C0E8E171FDEBDFF00789C91 /* PhoneVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVerificationInitializer.swift */; };
 		8C0E8E181FDEBDFF00789C91 /* HelpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */; };
 		8C0E8E191FDEBDFF00789C91 /* VisualMusicPlayerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77868C1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift */; };
 		8C0E8E1A1FDEBDFF00789C91 /* ForgotPasswordViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */; };
@@ -2535,8 +2535,8 @@
 		8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26008622919AAC0063E913 /* SecurityCodeTextField.swift */; };
 		8C26009E22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */; };
 		8C26009F22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */; };
-		8C2600A32291E2320063E913 /* PhoneVereficationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVereficationScreen.xib */; };
-		8C2600A42291E2320063E913 /* PhoneVereficationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVereficationScreen.xib */; };
+		8C2600A32291E2320063E913 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
@@ -2812,8 +2812,6 @@
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
-		8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
-		8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
@@ -3893,19 +3891,19 @@
 		CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F5296568EE7BCE2BF46A4 /* IntroduceRouter.swift */; };
 		CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */; };
 		CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */; };
-		CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */; };
-		CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
+		CE51ACE91EF90853005DCEE0 /* PhoneVerificationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */; };
+		CE51ACEA1EF90853005DCEE0 /* PhoneVerificationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */; };
 		CE51ACEB1EF90853005DCEE0 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
-		CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
-		CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
-		CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
-		CE51ACEF1EF90853005DCEE0 /* PhoneVereficationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */; };
+		CE51ACEC1EF90853005DCEE0 /* PhoneVerificationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */; };
+		CE51ACED1EF90853005DCEE0 /* PhoneVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */; };
+		CE51ACEE1EF90853005DCEE0 /* PhoneVerificationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVerificationInteractorInput.swift */; };
+		CE51ACEF1EF90853005DCEE0 /* PhoneVerificationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVerificationInteractorOutput.swift */; };
 		CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */; };
-		CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */; };
-		CE51ACF21EF90853005DCEE0 /* PhoneVereficationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */; };
-		CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */; };
-		CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */; };
-		CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVereficationInitializer.swift */; };
+		CE51ACF11EF90853005DCEE0 /* PhoneVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVerificationInteractor.swift */; };
+		CE51ACF21EF90853005DCEE0 /* PhoneVerificationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */; };
+		CE51ACF31EF90853005DCEE0 /* PhoneVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVerificationRouter.swift */; };
+		CE51ACF41EF90853005DCEE0 /* PhoneVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVerificationConfigurator.swift */; };
+		CE51ACF51EF90853005DCEE0 /* PhoneVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVerificationInitializer.swift */; };
 		CE51ACF61EF90853005DCEE0 /* ForgotPasswordViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */; };
 		CE51ACF71EF90853005DCEE0 /* ForgotPasswordViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */; };
 		CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */; };
@@ -4131,7 +4129,7 @@
 		CE78486F22A685FB00662219 /* InstagramResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7491FCBE84100C23CBD /* InstagramResponses.swift */; };
 		CE78487022A685FB00662219 /* HelpAndSupportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED401F516736002F923A /* HelpAndSupportPresenter.swift */; };
 		CE78487122A685FB00662219 /* IntroduceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B731EEEAE8C006532C8 /* IntroduceDataSource.swift */; };
-		CE78487222A685FB00662219 /* CreateStoryResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */; };
+		CE78487222A685FB00662219 /* CreateStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */; };
 		CE78487322A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */; };
 		CE78487422A685FB00662219 /* PeriodicContactSyncDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F8E5720875D4300622A6C /* PeriodicContactSyncDataSource.swift */; };
 		CE78487522A685FB00662219 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */; };
@@ -4234,7 +4232,7 @@
 		CE7848DE22A685FB00662219 /* PremiumHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDBA7219D6C1E00CA9A67 /* PremiumHeaderView.swift */; };
 		CE7848DF22A685FB00662219 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
 		CE7848E022A685FB00662219 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
-		CE7848E122A685FB00662219 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
+		CE7848E122A685FB00662219 /* AlbumDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponse.swift */; };
 		CE7848E222A685FB00662219 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		CE7848E322A685FB00662219 /* HomePageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA31EFD4F0D00A405B2 /* HomePageInteractorInput.swift */; };
 		CE7848E422A685FB00662219 /* BaseCollectionViewCellWithSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FCC1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift */; };
@@ -4324,7 +4322,7 @@
 		CE78493922A685FB00662219 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
 		CE78493A22A685FB00662219 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDB9D219D60A800CA9A67 /* PremiumView.swift */; };
 		CE78493B22A685FB00662219 /* UsageInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E11F3F18FA00EFDC6D /* UsageInfoInitializer.swift */; };
-		CE78493C22A685FB00662219 /* PhoneVereficationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */; };
+		CE78493C22A685FB00662219 /* PhoneVerificationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVerificationDataStorage.swift */; };
 		CE78493D22A685FB00662219 /* FaceImagePhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */; };
 		CE78493E22A685FB00662219 /* AlertFilesActionsSheetModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0097191F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift */; };
 		CE78493F22A685FB00662219 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
@@ -4533,7 +4531,7 @@
 		CE784A1822A685FB00662219 /* GridListTopBarSortingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408441F62A26000D4717A /* GridListTopBarSortingTableView.swift */; };
 		CE784A1922A685FB00662219 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
 		CE784A1A22A685FB00662219 /* HomePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA21EFD4F0D00A405B2 /* HomePageInteractor.swift */; };
-		CE784A1B22A685FB00662219 /* PhoneVereficationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */; };
+		CE784A1B22A685FB00662219 /* PhoneVerificationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */; };
 		CE784A1C22A685FB00662219 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE6D20EF634800400DBA /* SyncRecord.m */; };
 		CE784A1D22A685FB00662219 /* SplitIpadViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4485081F10FE09003AF631 /* SplitIpadViewContoller.swift */; };
 		CE784A1E22A685FB00662219 /* InstagramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74A1FCBE84100C23CBD /* InstagramService.swift */; };
@@ -4547,20 +4545,20 @@
 		CE784A2722A685FB00662219 /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE784A2822A685FB00662219 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32621787FEF006CFA50 /* Filter.m */; };
 		CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */; };
-		CE784A2A22A685FB00662219 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
+		CE784A2A22A685FB00662219 /* PhoneVerificationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */; };
 		CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */; };
 		CE784A2D22A685FB00662219 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
-		CE784A2E22A685FB00662219 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
+		CE784A2E22A685FB00662219 /* PhoneVerificationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */; };
 		CE784A2F22A685FB00662219 /* SimpleSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F2932286EF5200C5BF9E /* SimpleSliderCell.swift */; };
 		CE784A3022A685FB00662219 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
-		CE784A3122A685FB00662219 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
+		CE784A3122A685FB00662219 /* PhoneVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */; };
 		CE784A3222A685FB00662219 /* LoginSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFD20066640003D8E05 /* LoginSettingsInteractorIO.swift */; };
 		CE784A3322A685FB00662219 /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
-		CE784A3422A685FB00662219 /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
+		CE784A3422A685FB00662219 /* PhoneVerificationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVerificationInteractorInput.swift */; };
 		CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
 		CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
-		CE784A3722A685FB00662219 /* PhoneVereficationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */; };
+		CE784A3722A685FB00662219 /* PhoneVerificationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVerificationInteractorOutput.swift */; };
 		CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B56208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift */; };
 		CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */; };
 		CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */; };
@@ -4569,21 +4567,21 @@
 		CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */; };
 		CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		CE784A4122A685FB00662219 /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
-		CE784A4222A685FB00662219 /* PhoneVereficationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */; };
+		CE784A4222A685FB00662219 /* PhoneVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVerificationInteractor.swift */; };
 		CE784A4322A685FB00662219 /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863FF1F3F30BD00EFDC6D /* RoundedProgressView.swift */; };
 		CE784A4422A685FB00662219 /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CE784A4522A685FB00662219 /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
 		CE784A4622A685FB00662219 /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		CE784A4722A685FB00662219 /* PhoneVereficationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */; };
+		CE784A4722A685FB00662219 /* PhoneVerificationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */; };
 		CE784A4822A685FB00662219 /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
-		CE784A4922A685FB00662219 /* PhoneVereficationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */; };
+		CE784A4922A685FB00662219 /* PhoneVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVerificationRouter.swift */; };
 		CE784A4A22A685FB00662219 /* FaceImageChangeCoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C37202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift */; };
 		CE784A4B22A685FB00662219 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F8E5120875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift */; };
 		CE784A4C22A685FB00662219 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
 		CE784A4D22A685FB00662219 /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		CE784A4E22A685FB00662219 /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
-		CE784A4F22A685FB00662219 /* PhoneVereficationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */; };
-		CE784A5022A685FB00662219 /* PhoneVereficationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVereficationInitializer.swift */; };
+		CE784A4F22A685FB00662219 /* PhoneVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D7B2B043E1B23B7911858D /* PhoneVerificationConfigurator.swift */; };
+		CE784A5022A685FB00662219 /* PhoneVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B39AC2DF739B3992DF594D /* PhoneVerificationInitializer.swift */; };
 		CE784A5122A685FB00662219 /* MyStoragePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6521AD18FE00582C45 /* MyStoragePresenter.swift */; };
 		CE784A5222A685FB00662219 /* HelpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */; };
 		CE784A5322A685FB00662219 /* RadialGradientableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientableView.swift */; };
@@ -4756,7 +4754,6 @@
 		CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E43321A5B03A0084AA37 /* LeavePremiumRouter.swift */; };
 		CE784B0222A685FB00662219 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		CE784B0322A685FB00662219 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
-		CE784B0422A685FB00662219 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */; };
 		CE784B0622A685FB00662219 /* BaseFilesGreedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */; };
 		CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F56F81F1CC1CC0014870B /* ActionsMenuTableViewCell.swift */; };
@@ -5896,7 +5893,7 @@
 		CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		CEBDB1E520452F6E007EE1AE /* ImageColCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */; };
 		CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56241F75531700F49DA1 /* UICollectionView+Extensions.swift */; };
-		CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */; };
+		CEC05B6A1F05399100332EBA /* PhoneVerificationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVerificationDataStorage.swift */; };
 		CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */; };
 		CEC3C2271FB9961900C3D67F /* PasscodeEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */; };
 		CEC3C22F1FB997A600C3D67F /* FromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C22E1FB997A600C3D67F /* FromNib.swift */; };
@@ -6482,7 +6479,7 @@
 		62B1E7C51276E04D7E490534 /* Pods-autosync-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		644BD485A1AAAA905F218013 /* PhotoVideoDetailModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailModuleInput.swift; sourceTree = "<group>"; };
 		6467C73E3BCBD36D9330F35B /* UserInfoSubViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractor.swift; sourceTree = "<group>"; };
-		64B39AC2DF739B3992DF594D /* PhoneVereficationInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInitializer.swift; sourceTree = "<group>"; };
+		64B39AC2DF739B3992DF594D /* PhoneVerificationInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationInitializer.swift; sourceTree = "<group>"; };
 		669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameRouter.swift; sourceTree = "<group>"; };
 		66EA238C411DE4D11DBC9837 /* LBAlbumLikePreviewSliderRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderRouter.swift; sourceTree = "<group>"; };
 		672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -6590,7 +6587,7 @@
 		78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractorInput.swift; sourceTree = "<group>"; };
 		78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractorOutput.swift; sourceTree = "<group>"; };
 		78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsRouterInput.swift; sourceTree = "<group>"; };
-		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
+		78F258EA9A743F8B1B2D574E /* PhoneVerificationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationInteractorInput.swift; sourceTree = "<group>"; };
 		78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAlbumSliderInteractor.swift; sourceTree = "<group>"; };
 		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
 		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
@@ -6626,7 +6623,7 @@
 		7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailService.swift; sourceTree = "<group>"; };
-		7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailResponce.swift; sourceTree = "<group>"; };
+		7C04350C1F4F17E800193C75 /* AlbumDetailResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailResponse.swift; sourceTree = "<group>"; };
 		7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumSelectionPresenter.swift; sourceTree = "<group>"; };
 		7C0750F520BD83A800FD1FA2 /* MaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskService.swift; sourceTree = "<group>"; };
 		7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionImageView.swift; sourceTree = "<group>"; };
@@ -6636,7 +6633,7 @@
 		7C121F0A20874BCE00AA585F /* AppMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMigrator.swift; sourceTree = "<group>"; };
 		7C18D75C1F9F461A00F8679D /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPopUpProtocol.swift; sourceTree = "<group>"; };
-		7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryResponce.swift; sourceTree = "<group>"; };
+		7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryResponse.swift; sourceTree = "<group>"; };
 		7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPopUp.swift; sourceTree = "<group>"; };
 		7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressPopUp.xib; sourceTree = "<group>"; };
 		7C1F898C1F70ECB100740177 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -6829,7 +6826,7 @@
 		7EE623CB8A3E2EBED729AD20 /* Pods-LifeDriveShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		7FBE6016E02DD1CDCE0667EC /* Pods-LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		80F1FD97D6FA54C9C0C10996 /* AlbumDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailInitializer.swift; sourceTree = "<group>"; };
-		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
+		81884BEAD2F49EAE4DC12C88 /* PhoneVerificationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationInteractorOutput.swift; sourceTree = "<group>"; };
 		82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractorInput.swift; sourceTree = "<group>"; };
 		8296DD3298BBAAAE73EEFBBA /* ActivityTimelineInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractor.swift; sourceTree = "<group>"; };
 		8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInteractorInput.swift; sourceTree = "<group>"; };
@@ -7576,7 +7573,7 @@
 		8C23F2932286EF5200C5BF9E /* SimpleSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSliderCell.swift; sourceTree = "<group>"; };
 		8C26008622919AAC0063E913 /* SecurityCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityCodeTextField.swift; sourceTree = "<group>"; };
 		8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextViewEnterView.swift; sourceTree = "<group>"; };
-		8C2600A22291E2310063E913 /* PhoneVereficationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVereficationScreen.xib; sourceTree = "<group>"; };
+		8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVerificationScreen.xib; sourceTree = "<group>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -7677,7 +7674,6 @@
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
-		8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSignUpRequrementResponse.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
@@ -7708,7 +7704,7 @@
 		8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountiesGSMCodeCompositor.swift; sourceTree = "<group>"; };
 		8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartTimerLabel.swift; sourceTree = "<group>"; };
 		8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsSyncService.swift; sourceTree = "<group>"; };
-		8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewInput.swift; sourceTree = "<group>"; };
+		8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewInput.swift; sourceTree = "<group>"; };
 		8DA76EDE6C0F51A2CCD2694D /* FeedbackViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewPresenter.swift; sourceTree = "<group>"; };
 		8DCB215E1F3C6AE600BAFE1E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8DCB21611F3C6C6500BAFE1E /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
@@ -7861,7 +7857,7 @@
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
 		98EAC9412080CBFF00AAD5B6 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
-		99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationModuleInput.swift; sourceTree = "<group>"; };
+		99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationModuleInput.swift; sourceTree = "<group>"; };
 		9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewInput.swift; sourceTree = "<group>"; };
 		9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedRouter.swift; sourceTree = "<group>"; };
 		9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorOutput.swift; sourceTree = "<group>"; };
@@ -7927,7 +7923,7 @@
 		AFAA184789614675C547B964 /* Pods-lifedrive.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.appstore.xcconfig"; sourceTree = "<group>"; };
 		B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionRouterInput.swift; sourceTree = "<group>"; };
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
-		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
+		B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountRemoveConnectionCell.swift; sourceTree = "<group>"; };
 		B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAccountRemoveConnectionCell.xib; sourceTree = "<group>"; };
@@ -8070,7 +8066,7 @@
 		BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewOutput.swift; sourceTree = "<group>"; };
 		BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInitializer.swift; sourceTree = "<group>"; };
 		BB8DE4160DD052B7FC7C3B0F /* SettingsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorInput.swift; sourceTree = "<group>"; };
-		BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationPresenter.swift; sourceTree = "<group>"; };
+		BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationPresenter.swift; sourceTree = "<group>"; };
 		BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorOutput.swift; sourceTree = "<group>"; };
 		BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuViewInput.swift; sourceTree = "<group>"; };
 		BC2C7270EA7E53BE00EEEEFC /* Pods-LifeDriveFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -8427,7 +8423,7 @@
 		CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaReg.ttf; sourceTree = "<group>"; };
 		CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomizator.swift; sourceTree = "<group>"; };
 		CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColCell.swift; sourceTree = "<group>"; };
-		CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVereficationDataStorage.swift; sourceTree = "<group>"; };
+		CEC05B691F05399100332EBA /* PhoneVerificationDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationDataStorage.swift; sourceTree = "<group>"; };
 		CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterViewController.swift; sourceTree = "<group>"; };
 		CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeEnterViewController.xib; sourceTree = "<group>"; };
 		CEC3C22E1FB997A600C3D67F /* FromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromNib.swift; sourceTree = "<group>"; };
@@ -8545,14 +8541,14 @@
 		D49886511F3EFBE200F50C95 /* ImportPhotosRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPhotosRouterInput.swift; sourceTree = "<group>"; };
 		D49886551F3EFBE200F50C95 /* ImportPhotosViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPhotosViewInput.swift; sourceTree = "<group>"; };
 		D49886561F3EFBE200F50C95 /* ImportPhotosViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPhotosViewOutput.swift; sourceTree = "<group>"; };
-		D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractor.swift; sourceTree = "<group>"; };
+		D510E6399344E81392443CFD /* PhoneVerificationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationInteractor.swift; sourceTree = "<group>"; };
 		D6249B52DD4A8E3987667D30 /* SelectFolderPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderPresenter.swift; sourceTree = "<group>"; };
 		D6F285DAEBFD29EE3A3322FE /* IntroduceModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceModuleInput.swift; sourceTree = "<group>"; };
 		D76D2FFE19D87AAD5758F830 /* Pods-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProviderUI/Pods-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewOutput.swift; sourceTree = "<group>"; };
 		D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorInput.swift; sourceTree = "<group>"; };
 		D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
-		D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationConfigurator.swift; sourceTree = "<group>"; };
+		D9D7B2B043E1B23B7911858D /* PhoneVerificationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationConfigurator.swift; sourceTree = "<group>"; };
 		DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewInput.swift; sourceTree = "<group>"; };
 		DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailPresenter.swift; sourceTree = "<group>"; };
 		DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewOutput.swift; sourceTree = "<group>"; };
@@ -8571,7 +8567,7 @@
 		E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouterInput.swift; sourceTree = "<group>"; };
 		E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNamePresenter.swift; sourceTree = "<group>"; };
 		E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorOutput.swift; sourceTree = "<group>"; };
-		EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouter.swift; sourceTree = "<group>"; };
+		EC7D2D493926257E97EAFDE0 /* PhoneVerificationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationRouter.swift; sourceTree = "<group>"; };
 		EC89FED60BDB2184F7A039E4 /* Pods-Depo_LifeTech.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.appstore.xcconfig"; sourceTree = "<group>"; };
 		ED8913479D5236DDD47EE0E6 /* UploadFilesSelectionInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractorOutput.swift; sourceTree = "<group>"; };
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
@@ -8592,7 +8588,7 @@
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F2352EC81D49D347B17A44B1 /* Pods-LifeboxFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractor.swift; sourceTree = "<group>"; };
-		F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewOutput.swift; sourceTree = "<group>"; };
+		F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewOutput.swift; sourceTree = "<group>"; };
 		F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInitializer.swift; sourceTree = "<group>"; };
 		F431A1D1626AA4CC06EFC9CA /* UploadFilesSelectionViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewOutput.swift; sourceTree = "<group>"; };
 		F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewController.swift; sourceTree = "<group>"; };
@@ -9139,8 +9135,8 @@
 		28BD3349793453521417FEE9 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */,
-				BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */,
+				99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */,
+				BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -10575,7 +10571,7 @@
 			isa = PBXGroup;
 			children = (
 				7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */,
-				7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */,
+				7C04350C1F4F17E800193C75 /* AlbumDetailResponse.swift */,
 			);
 			path = AlbumDetailService;
 			sourceTree = "<group>";
@@ -11486,9 +11482,9 @@
 			isa = PBXGroup;
 			children = (
 				CEC05B681F05397400332EBA /* Services */,
-				78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */,
-				81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */,
-				D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */,
+				78F258EA9A743F8B1B2D574E /* PhoneVerificationInteractorInput.swift */,
+				81884BEAD2F49EAE4DC12C88 /* PhoneVerificationInteractorOutput.swift */,
+				D510E6399344E81392443CFD /* PhoneVerificationInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -14286,7 +14282,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2469F41F3BF8F3008DF705 /* CreateStoryService.swift */,
-				7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */,
+				7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */,
 			);
 			path = CreateStoryService;
 			sourceTree = "<group>";
@@ -14715,7 +14711,7 @@
 				8C049C6D1EEE8E7F0086DA84 /* Login */,
 				2B39FB04635CDE7B54750A4C /* Registration */,
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
-				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
+				E3F92B477C3B581616EAD04C /* PhoneVerification */,
 				17589F6A2276336700A5DB37 /* SupportFormController */,
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
 				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
@@ -14902,7 +14898,6 @@
 			isa = PBXGroup;
 			children = (
 				CE51A0CD1EF8F081005DCEE0 /* CaptchaService.swift */,
-				8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */,
 			);
 			path = CaptcaService;
 			sourceTree = "<group>";
@@ -15433,7 +15428,7 @@
 		CEC05B681F05397400332EBA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */,
+				CEC05B691F05399100332EBA /* PhoneVerificationDataStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -15712,8 +15707,8 @@
 		D00A82528405045A46751159 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */,
-				64B39AC2DF739B3992DF594D /* PhoneVereficationInitializer.swift */,
+				D9D7B2B043E1B23B7911858D /* PhoneVerificationConfigurator.swift */,
+				64B39AC2DF739B3992DF594D /* PhoneVerificationInitializer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -15904,10 +15899,10 @@
 		DB8AB1D5D0B50391175D8FE3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C2600A22291E2310063E913 /* PhoneVereficationScreen.xib */,
+				8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */,
 				8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */,
-				8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */,
-				F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */,
+				8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */,
+				F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */,
 				D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */,
 			);
 			path = View;
@@ -15940,13 +15935,13 @@
 		E3BE2B28D97058FC6D40F1A5 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */,
-				EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */,
+				B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */,
+				EC7D2D493926257E97EAFDE0 /* PhoneVerificationRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
 		};
-		E3F92B477C3B581616EAD04C /* PhoneVerefication */ = {
+		E3F92B477C3B581616EAD04C /* PhoneVerification */ = {
 			isa = PBXGroup;
 			children = (
 				DB8AB1D5D0B50391175D8FE3 /* View */,
@@ -15955,7 +15950,7 @@
 				E3BE2B28D97058FC6D40F1A5 /* Router */,
 				D00A82528405045A46751159 /* Configurator */,
 			);
-			path = PhoneVerefication;
+			path = PhoneVerification;
 			sourceTree = "<group>";
 		};
 		E4509479EA08489CB951E618 /* Presenter */ = {
@@ -17157,7 +17152,7 @@
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
 				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				8C06AF872008AD70003D8E05 /* extraOptions@2x.png in Resources */,
-				8C2600A42291E2320063E913 /* PhoneVereficationScreen.xib in Resources */,
+				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				8C06B0092008AD71003D8E05 /* Kucuk_Selected@2x.png in Resources */,
 				8C06B0D92008AD71003D8E05 /* sample_orange@2x.png in Resources */,
@@ -17597,7 +17592,7 @@
 				8C06AF442008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0942008AD71003D8E05 /* polaroid_yeni.png in Resources */,
 				8CD7D8E9211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
-				8C2600A32291E2320063E913 /* PhoneVereficationScreen.xib in Resources */,
+				8C2600A32291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8C06B19C2008AD72003D8E05 /* yesil.png in Resources */,
 				8C06AEF22008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
@@ -19536,7 +19531,7 @@
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
-				8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponce.swift in Sources */,
+				8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponse.swift in Sources */,
 				8C0E8CC91FDEBDFF00789C91 /* UserProfileInteractor.swift in Sources */,
 				8C0E8CCA1FDEBDFF00789C91 /* HomePagePresenter.swift in Sources */,
 				8C0E8CCB1FDEBDFF00789C91 /* SearchViewInteractor.swift in Sources */,
@@ -19652,7 +19647,7 @@
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				B5CDB33B21787FEF006CFA50 /* UIAlertViewCustom.m in Sources */,
-				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */,
+				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponse.swift in Sources */,
 				B5CDB33321787FEF006CFA50 /* UpdaterController.m in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
@@ -19727,7 +19722,7 @@
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
 				8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */,
-				8C0E8D611FDEBDFF00789C91 /* PhoneVereficationDataStorage.swift in Sources */,
+				8C0E8D611FDEBDFF00789C91 /* PhoneVerificationDataStorage.swift in Sources */,
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
@@ -19954,7 +19949,7 @@
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				8C20868C228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
 				CE61D1C420468759001D01DC /* URL+Video.swift in Sources */,
-				8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */,
+				8C0E8DFE1FDEBDFF00789C91 /* PhoneVerificationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
@@ -19969,12 +19964,12 @@
 				4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C06AC1920066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
-				8C0E8E051FDEBDFF00789C91 /* PhoneVereficationViewOutput.swift in Sources */,
+				8C0E8E051FDEBDFF00789C91 /* PhoneVerificationViewOutput.swift in Sources */,
 				8C0E8E061FDEBDFF00789C91 /* PhoneVerificationViewController.swift in Sources */,
-				8C0E8E071FDEBDFF00789C91 /* PhoneVereficationModuleInput.swift in Sources */,
-				8C0E8E081FDEBDFF00789C91 /* PhoneVereficationPresenter.swift in Sources */,
+				8C0E8E071FDEBDFF00789C91 /* PhoneVerificationModuleInput.swift in Sources */,
+				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
-				8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */,
+				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
 				8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				8C0B919E20170E6800A5BA81 /* DuplicatedContactsInteractorInput.swift in Sources */,
@@ -19985,13 +19980,13 @@
 				B53DCDC320E3A75400400DBA /* WKWebView+Extensions.swift in Sources */,
 				985599C623017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
 				8C0E8E101FDEBDFF00789C91 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
-				8C0E8E111FDEBDFF00789C91 /* PhoneVereficationInteractor.swift in Sources */,
+				8C0E8E111FDEBDFF00789C91 /* PhoneVerificationInteractor.swift in Sources */,
 				8C0E8E121FDEBDFF00789C91 /* RoundedProgressView.swift in Sources */,
 				8C0E8E131FDEBDFF00789C91 /* PrintInteractor.swift in Sources */,
-				8C0E8E141FDEBDFF00789C91 /* PhoneVereficationRouterInput.swift in Sources */,
-				8C0E8E151FDEBDFF00789C91 /* PhoneVereficationRouter.swift in Sources */,
-				8C0E8E161FDEBDFF00789C91 /* PhoneVereficationConfigurator.swift in Sources */,
-				8C0E8E171FDEBDFF00789C91 /* PhoneVereficationInitializer.swift in Sources */,
+				8C0E8E141FDEBDFF00789C91 /* PhoneVerificationRouterInput.swift in Sources */,
+				8C0E8E151FDEBDFF00789C91 /* PhoneVerificationRouter.swift in Sources */,
+				8C0E8E161FDEBDFF00789C91 /* PhoneVerificationConfigurator.swift in Sources */,
+				8C0E8E171FDEBDFF00789C91 /* PhoneVerificationInitializer.swift in Sources */,
 				4A9F8E5420875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				8E26D9812306999B00D08123 /* MusicConfigurator.swift in Sources */,
 				8C0E8E181FDEBDFF00789C91 /* HelpAndSupportViewController.swift in Sources */,
@@ -20166,7 +20161,6 @@
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
 				8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */,
-				8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
@@ -21038,7 +21032,7 @@
 				CE6DE7541FCBE84100C23CBD /* InstagramResponses.swift in Sources */,
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
 				CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */,
-				7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */,
+				7C1EA0481F9792F1002DBAD8 /* CreateStoryResponse.swift in Sources */,
 				984A514421E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				4A9F8E5820875D4300622A6C /* PeriodicContactSyncDataSource.swift in Sources */,
 				7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */,
@@ -21149,7 +21143,7 @@
 				A20CDBA8219D6C1E00CA9A67 /* PremiumHeaderView.swift in Sources */,
 				CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */,
 				CE51ABFD1EF90853005DCEE0 /* LoginRouterInput.swift in Sources */,
-				7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */,
+				7C04350D1F4F17E800193C75 /* AlbumDetailResponse.swift in Sources */,
 				CE51AC041EF90853005DCEE0 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CEAE3FB31EFD4F0D00A405B2 /* HomePageInteractorInput.swift in Sources */,
 				CEAE3FD61EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
@@ -21242,7 +21236,7 @@
 				CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */,
 				A20CDB9E219D60A800CA9A67 /* PremiumView.swift in Sources */,
 				D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */,
-				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
+				CEC05B6A1F05399100332EBA /* PhoneVerificationDataStorage.swift in Sources */,
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				B557674822E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
@@ -21494,21 +21488,21 @@
 				CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */,
 				B5CDB33C21787FEF006CFA50 /* Filter.m in Sources */,
 				9216F57922493127008339F5 /* InternetDataUsageCollectionViewCell.swift in Sources */,
-				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
+				CE51ACEA1EF90853005DCEE0 /* PhoneVerificationViewOutput.swift in Sources */,
 				B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
 				CE51ACEB1EF90853005DCEE0 /* PhoneVerificationViewController.swift in Sources */,
 				8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
-				CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */,
+				CE51ACEC1EF90853005DCEE0 /* PhoneVerificationModuleInput.swift in Sources */,
 				8C23F2942286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
-				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
+				CE51ACED1EF90853005DCEE0 /* PhoneVerificationPresenter.swift in Sources */,
 				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
-				CE51ACEF1EF90853005DCEE0 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				CE51ACEF1EF90853005DCEE0 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				8C20867E228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
 				486F7B57208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
@@ -21519,22 +21513,22 @@
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				17052DEE2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				B53DCDC220E3A75400400DBA /* WKWebView+Extensions.swift in Sources */,
-				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
+				CE51ACF11EF90853005DCEE0 /* PhoneVerificationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
 				9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
-				CE51ACF21EF90853005DCEE0 /* PhoneVereficationRouterInput.swift in Sources */,
+				CE51ACF21EF90853005DCEE0 /* PhoneVerificationRouterInput.swift in Sources */,
 				B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */,
 				8C20864D228D4B2E000BEDAD /* PhotoVideoNavBarManager.swift in Sources */,
-				CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */,
+				CE51ACF31EF90853005DCEE0 /* PhoneVerificationRouter.swift in Sources */,
 				2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				4A9F8E5320875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				4BF7CF4D223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */,
 				B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */,
 				B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
-				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
-				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
+				CE51ACF41EF90853005DCEE0 /* PhoneVerificationConfigurator.swift in Sources */,
+				CE51ACF51EF90853005DCEE0 /* PhoneVerificationInitializer.swift in Sources */,
 				92004B6621AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
 				925B96D921E79BB000B39415 /* RadialGradientableView.swift in Sources */,
@@ -22376,7 +22370,7 @@
 				CE78486F22A685FB00662219 /* InstagramResponses.swift in Sources */,
 				CE78487022A685FB00662219 /* HelpAndSupportPresenter.swift in Sources */,
 				CE78487122A685FB00662219 /* IntroduceDataSource.swift in Sources */,
-				CE78487222A685FB00662219 /* CreateStoryResponce.swift in Sources */,
+				CE78487222A685FB00662219 /* CreateStoryResponse.swift in Sources */,
 				985599C723017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
 				CE78487322A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				CE78487422A685FB00662219 /* PeriodicContactSyncDataSource.swift in Sources */,
@@ -22490,7 +22484,7 @@
 				8C65D18822C63B6F00CB1DBD /* String + Extension.swift in Sources */,
 				CE7848DF22A685FB00662219 /* UIApplication+Settings.swift in Sources */,
 				CE7848E022A685FB00662219 /* LoginRouterInput.swift in Sources */,
-				CE7848E122A685FB00662219 /* AlbumDetailResponce.swift in Sources */,
+				CE7848E122A685FB00662219 /* AlbumDetailResponse.swift in Sources */,
 				CE7848E222A685FB00662219 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CE7848E322A685FB00662219 /* HomePageInteractorInput.swift in Sources */,
 				CE7848E422A685FB00662219 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
@@ -22592,7 +22586,7 @@
 				CE78493A22A685FB00662219 /* PremiumView.swift in Sources */,
 				98C298462302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				CE78493B22A685FB00662219 /* UsageInfoInitializer.swift in Sources */,
-				CE78493C22A685FB00662219 /* PhoneVereficationDataStorage.swift in Sources */,
+				CE78493C22A685FB00662219 /* PhoneVerificationDataStorage.swift in Sources */,
 				CE78493D22A685FB00662219 /* FaceImagePhotosConfigurator.swift in Sources */,
 				CE78493E22A685FB00662219 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CE78493F22A685FB00662219 /* PreventCollectionView.swift in Sources */,
@@ -22821,7 +22815,7 @@
 				CE784A1822A685FB00662219 /* GridListTopBarSortingTableView.swift in Sources */,
 				CE784A1922A685FB00662219 /* PHAssetCollection.swift in Sources */,
 				CE784A1A22A685FB00662219 /* HomePageInteractor.swift in Sources */,
-				CE784A1B22A685FB00662219 /* PhoneVereficationViewInput.swift in Sources */,
+				CE784A1B22A685FB00662219 /* PhoneVerificationViewInput.swift in Sources */,
 				8C1E5BD922CB8C02008FDA02 /* PhotoVideoPredicateManager.swift in Sources */,
 				CE784A1C22A685FB00662219 /* SyncRecord.m in Sources */,
 				CE784A1D22A685FB00662219 /* SplitIpadViewContoller.swift in Sources */,
@@ -22838,20 +22832,20 @@
 				CE784A2822A685FB00662219 /* Filter.m in Sources */,
 				CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
-				CE784A2A22A685FB00662219 /* PhoneVereficationViewOutput.swift in Sources */,
+				CE784A2A22A685FB00662219 /* PhoneVerificationViewOutput.swift in Sources */,
 				CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */,
 				CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */,
 				CE784A2D22A685FB00662219 /* AnalyticsPackageProductObject.swift in Sources */,
-				CE784A2E22A685FB00662219 /* PhoneVereficationModuleInput.swift in Sources */,
+				CE784A2E22A685FB00662219 /* PhoneVerificationModuleInput.swift in Sources */,
 				CE784A2F22A685FB00662219 /* SimpleSliderCell.swift in Sources */,
 				CE784A3022A685FB00662219 /* Alamofire+Response.swift in Sources */,
-				CE784A3122A685FB00662219 /* PhoneVereficationPresenter.swift in Sources */,
+				CE784A3122A685FB00662219 /* PhoneVerificationPresenter.swift in Sources */,
 				CE784A3222A685FB00662219 /* LoginSettingsInteractorIO.swift in Sources */,
 				CE784A3322A685FB00662219 /* InstaPickProgressPopup.swift in Sources */,
-				CE784A3422A685FB00662219 /* PhoneVereficationInteractorInput.swift in Sources */,
+				CE784A3422A685FB00662219 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */,
-				CE784A3722A685FB00662219 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				CE784A3722A685FB00662219 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
@@ -22860,21 +22854,21 @@
 				CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */,
 				CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */,
 				CE784A4122A685FB00662219 /* WKWebView+Extensions.swift in Sources */,
-				CE784A4222A685FB00662219 /* PhoneVereficationInteractor.swift in Sources */,
+				CE784A4222A685FB00662219 /* PhoneVerificationInteractor.swift in Sources */,
 				CE784A4322A685FB00662219 /* RoundedProgressView.swift in Sources */,
 				CE784A4422A685FB00662219 /* PushNotificationServiceConstants.swift in Sources */,
 				CE784A4522A685FB00662219 /* FaceImagePhotosRouterInput.swift in Sources */,
 				CE784A4622A685FB00662219 /* PrintInteractor.swift in Sources */,
-				CE784A4722A685FB00662219 /* PhoneVereficationRouterInput.swift in Sources */,
+				CE784A4722A685FB00662219 /* PhoneVerificationRouterInput.swift in Sources */,
 				CE784A4822A685FB00662219 /* VideoSyncService.swift in Sources */,
-				CE784A4922A685FB00662219 /* PhoneVereficationRouter.swift in Sources */,
+				CE784A4922A685FB00662219 /* PhoneVerificationRouter.swift in Sources */,
 				CE784A4A22A685FB00662219 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				CE784A4B22A685FB00662219 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				CE784A4C22A685FB00662219 /* DropDownTableViewCell.swift in Sources */,
 				CE784A4D22A685FB00662219 /* URL+TrimmedQuery.swift in Sources */,
 				CE784A4E22A685FB00662219 /* AugmentedRealityInitializer.swift in Sources */,
-				CE784A4F22A685FB00662219 /* PhoneVereficationConfigurator.swift in Sources */,
-				CE784A5022A685FB00662219 /* PhoneVereficationInitializer.swift in Sources */,
+				CE784A4F22A685FB00662219 /* PhoneVerificationConfigurator.swift in Sources */,
+				CE784A5022A685FB00662219 /* PhoneVerificationInitializer.swift in Sources */,
 				CE784A5122A685FB00662219 /* MyStoragePresenter.swift in Sources */,
 				CE784A5222A685FB00662219 /* HelpAndSupportViewController.swift in Sources */,
 				CE784A5322A685FB00662219 /* RadialGradientableView.swift in Sources */,
@@ -23061,7 +23055,6 @@
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				CE784B0322A685FB00662219 /* DateExtension.swift in Sources */,
-				CE784B0422A685FB00662219 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */,
 				CE784B0622A685FB00662219 /* BaseFilesGreedConfigurator.swift in Sources */,
 				CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */,
