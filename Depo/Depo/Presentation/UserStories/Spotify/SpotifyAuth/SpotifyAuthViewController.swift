@@ -34,12 +34,12 @@ final class SpotifyAuthViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSpinner()
         removeCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showSpinner()
         setupNavigation()
     }
     
