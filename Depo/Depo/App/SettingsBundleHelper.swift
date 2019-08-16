@@ -29,10 +29,12 @@ final class SettingsBundleHelper {
     //MARK: - global related activities
     
     static func setVersionAndBuildNumber() {
-        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        UserDefaults.standard.set(version, forKey: BundleKeys.version)
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-        UserDefaults.standard.set(build, forKey: BundleKeys.buildVersion)
+        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            UserDefaults.standard.set(version, forKey: BundleKeys.version)
+        }
+        if let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
+            UserDefaults.standard.set(build, forKey: BundleKeys.buildVersion)
+        }
     }
     
     static func setCurrentRouteEnvironment() {
