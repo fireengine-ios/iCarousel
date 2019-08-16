@@ -26,6 +26,15 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     }
     @IBOutlet private weak var collectionViewTopOffset: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var noPlaylistsView: UIView!
+    @IBOutlet private weak var noPlaylistsLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.noPlaylists
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        }
+    }
+    
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
@@ -104,7 +113,14 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+            self.updateEmptyView()
         }
+    }
+    
+    private func updateEmptyView() {
+        let isEmpty = dataSource.allItems.isEmpty
+        noPlaylistsView.isHidden = !isEmpty
+        navbarManager.setSelectAll(isEnabled: !isEmpty)
     }
     
     private func selectedItemsCountChange(with count: Int) {

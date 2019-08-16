@@ -158,7 +158,7 @@ struct NumericConstants {
     
     static let numberOfSelectedItemsBeforeLimits = 500
     
-    static let spotifyImportMinShowTimeinterval = 3.0
+    static let spotifyStatusUpdateTimeInterval = 1.0
 }
 
 struct RequestSizeConstant {
