@@ -197,6 +197,7 @@ extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
         view.layoutIfNeeded()
     }
     
+    func importDidCanceled(){ }
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus) { }
     func importSendToBackground() { }
 }

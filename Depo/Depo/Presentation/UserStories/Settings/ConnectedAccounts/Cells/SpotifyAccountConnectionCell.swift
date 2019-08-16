@@ -172,6 +172,10 @@ extension SpotifyAccountConnectionCell: SpotifyRoutingServiceDelegate {
         //TODO: Some logic will here
     }
     
+    func importDidCanceled() {
+        //TODO: Some logic will here
+    }
+    
     func importSendToBackground() {
         //TODO: Status will be here
     }
