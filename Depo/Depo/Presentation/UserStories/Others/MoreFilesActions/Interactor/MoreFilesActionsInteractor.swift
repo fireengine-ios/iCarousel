@@ -73,10 +73,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
+            
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
-                }, cancel: {}, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
+            }, cancel: {}, fail: { errorResponse in
+                debugLog("sync(items: \(errorResponse.description)")
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(shareViaLinkAction)
@@ -181,7 +183,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.output?.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
-                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                let activityVC = UIActivityViewController(activityItems: objectsToShare,
+                                                          applicationActivities: nil)
                 activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
                     guard
                         completed,
@@ -191,16 +194,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         return
                     }
                 
-                    MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
+                    MenloworksEventsService.shared.onShareItem(with: fileType,
+                                                               toApp: activityTypeString.knownAppName())
                 }
                 if let tempoRect = sourceRect {//if ipad
                     activityVC.popoverPresentationController?.sourceRect = tempoRect
                 }
                 
+                debugLog("presentViewController activityVC")
                 self?.router.presentViewController(controller: activityVC)
             }
             
-            }, fail: failAction(elementType: .share))
+        }, fail: failAction(elementType: .share))
     }
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
@@ -675,10 +680,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
                     if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
                         self?.output?.showOutOfSpaceAlert(failedType: elementType)
                     }
                 } else {
+                    debugLog("failAction 3 \(value.description)")
                     self?.output?.operationFailed(type: elementType, message: value.description)
                 }
             }
@@ -687,7 +695,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
-        guard let items = items as? [WrapData] else { return }
+        
+        guard let items = items as? [WrapData] else {
+            assertionFailure()
+            return
+        }
+        
         let successClosure = { [weak self] in
             debugLog("SyncToUse - Success closure")
             DispatchQueue.main.async {
@@ -714,6 +727,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     UploadService.default.cancelSyncToUseOperations()
                     cancel()
                 }
+            } else {
+                debugLog("syncItemsIfNeeded count: \(operations?.count ?? -1)")
             }
         })
         

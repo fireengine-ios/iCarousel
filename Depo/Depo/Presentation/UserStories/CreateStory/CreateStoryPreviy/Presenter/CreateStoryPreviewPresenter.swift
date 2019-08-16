@@ -104,8 +104,8 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
 
 // MARK: CreateStoryPreviewInteractorOutput
 extension CreateStoryPreviewPresenter: CreateStoryPreviewInteractorOutput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce) {
-        view?.startShowVideoFromResponce(responce: responce)
+    func startShowVideoFromResponse(response: CreateStoryResponse) {
+        view?.startShowVideoFromResponse(response: response)
     }
 }
 

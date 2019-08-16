@@ -42,6 +42,18 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         }
     }
     
+    @IBOutlet private weak var jobStatusLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14.0)
+        }
+    }
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+        return dateFormatter
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         service.delegates.add(self)
@@ -52,10 +64,11 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
-        service.connectToSpotify() 
+        service.connectToSpotify(isSettingCell: true)
     }
     
     private func setupCell() {
+        hideJobStatusLabel()
         service.getSpotifyStatus { response in
             switch response {
             case .success(let response):
@@ -74,16 +87,60 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
             return
         }
         
-        spotifyStatus.isConnected ? delegate?.didConnectSuccessfully(section: section) : delegate?.didDisconnectSuccessfully(section: section)
+        if spotifyStatus.isConnected {
+            delegate?.didConnectSuccessfully(section: section)
+            
+            switch spotifyStatus.jobStatus {
+            case .unowned:
+                hideJobStatusLabel()
+                delegate?.didDisconnectSuccessfully(section: section)
+            case .pending:
+                setConnectCondition(section: section, username: spotifyStatus.userName, jobStatus: TextConstants.Spotify.Card.importing)
+            case .running:
+                setConnectCondition(section: section, username: spotifyStatus.userName, jobStatus: TextConstants.Spotify.Card.importing)
+            case .finished:
+                setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+            case .cancelled:
+                setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+            case .failed:
+                setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+                delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
+            }
+            
+        } else {
+            hideJobStatusLabel()
+            delegate?.didDisconnectSuccessfully(section: section)
+        }
+    }
+    
+    private func setConnectCondition(section: Section, username: String?, jobStatus: String?) {
+        hideJobStatusLabel()
+        if let username = username {
+            section.mediator.setup(with: username)
+        }
         
-        if spotifyStatus.jobStatus == .failed {
-            delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
-        }
-
         DispatchQueue.main.async {
-            //TODO: JobStatus and lastModifyed date will handle here
-            section.mediator.setupSpotify(username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
+            if let jobStatus = jobStatus {
+                self.jobStatusLabel.text = jobStatus
+            }
         }
+    }
+    
+    private func setConnectConditionWithModifyDate(section: Section, username: String?, jobStatus: Date?) {
+        hideJobStatusLabel()
+        guard let jobStatus = jobStatus else {
+            return
+        }
+        
+        let modifyedDate = dateFormatter.string(from: jobStatus)
+        DispatchQueue.main.async {
+            section.mediator.setup(with: username)
+            self.jobStatusLabel.text = String(format: TextConstants.spotyfyLastImportFormat, modifyedDate)
+        }
+    }
+    
+    private func hideJobStatusLabel() {
+        jobStatusLabel.text = ""
     }
 }
 

@@ -51,7 +51,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    func connectToSpotify() {
+    func connectToSpotify(isSettingCell: Bool) {
         getSpotifyStatus { [weak self] result in
             guard let self = self else {
                 return
@@ -60,8 +60,7 @@ final class SpotifyRoutingService {
             switch result {
             case .success(let status):
                 if status.isConnected {
-                    let controller = self.prepareImportPlaylistsController()
-                    self.router.pushViewController(viewController: controller)
+                    self.showPlayListsForImport()
                 } else {
                     self.prepareAuthWebPage()
                 }
@@ -81,6 +80,16 @@ final class SpotifyRoutingService {
                 handler(.failed(error))
             }
         }
+    }
+    
+    private func showImportedPlayLists() {
+        let controller = router.spotifyImportedPlaylistsController()
+        router.pushViewController(viewController: controller)
+    }
+    
+    private func showPlayListsForImport() {
+        let controller = self.prepareImportPlaylistsController()
+        self.router.pushViewController(viewController: controller)
     }
     
     private func prepareAuthWebPage() {

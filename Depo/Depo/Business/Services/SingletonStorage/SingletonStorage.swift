@@ -26,8 +26,8 @@ class SingletonStorage {
         if let info = accountInfo, !forceReload {
             success(info)
         } else {
-            AccountService().info(success: { accountInfoResponce in
-                if let resp = accountInfoResponce as? AccountInfoResponse {
+            AccountService().info(success: { accountInfoResponse in
+                if let resp = accountInfoResponse as? AccountInfoResponse {
                     self.accountInfo = resp
                     ///remove user photo from cache on start application
                     ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
@@ -122,9 +122,9 @@ class SingletonStorage {
         }
         SubscriptionsServiceIml().activeSubscriptions(
             success: { [weak self] response in
-                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
-                self?.activeUserSubscription = subscriptionsResponce
-                success(subscriptionsResponce)
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else { return }
+                self?.activeUserSubscription = subscriptionsResponse
+                success(subscriptionsResponse)
             }, fail: { errorResponse in
                 fail(errorResponse)
         })

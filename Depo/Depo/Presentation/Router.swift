@@ -251,6 +251,9 @@ class RouterVC: NSObject {
             lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
+        } else {
+            assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
+            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
         }
     }
         
@@ -332,12 +335,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
+    func phoneVerificationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
-        let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVerificationViewController(nibName: "PhoneVereficationScreen",
+        let inicializer = PhoneVerificationModuleInitializer()
+        let controller = PhoneVerificationViewController(nibName: "PhoneVerificationScreen",
                                                          bundle: nil)
-        inicializer.phonevereficationViewController = controller
+        inicializer.phoneverificationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
         return controller
     }
@@ -594,10 +597,10 @@ class RouterVC: NSObject {
     
     // MARK: CreateStory preview
     
-    func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+    func storyPreview(forStory story: PhotoStory, response: CreateStoryResponse) -> UIViewController {
         let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
                                                                                                    story: story,
-                                                                                                   responce: responce)
+                                                                                                   response: response)
         return controller
     }
     
@@ -844,8 +847,8 @@ class RouterVC: NSObject {
     
     // MARK: OTP
     
-    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
-        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo, phoneNumber: phoneNumber)
+    func otpView(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(response: response, userInfo: userInfo, phoneNumber: phoneNumber)
         return controller
     }
     

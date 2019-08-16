@@ -16,7 +16,7 @@ protocol UserProfileInteractorOutput: class {
     
     func stopNetworkOperation()
     
-    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse)
+    func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse)
     
     func showError(error: String)
     

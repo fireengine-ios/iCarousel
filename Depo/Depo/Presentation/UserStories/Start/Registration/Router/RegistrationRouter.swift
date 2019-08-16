@@ -13,7 +13,7 @@ class RegistrationRouter: RegistrationRouterInput {
     
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         
-        let phoneVerification = router.phoneVereficationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
+        let phoneVerification = router.phoneVerificationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
         router.pushViewController(viewController: phoneVerification)
     }
     

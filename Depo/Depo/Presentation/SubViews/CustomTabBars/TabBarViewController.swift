@@ -870,21 +870,9 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
-            spotifyRoutingService.connectToSpotify() 
+            spotifyRoutingService.connectToSpotify(isSettingCell: false)
         }
     }
-    
-//    private func connectToSpotify() {
-//        spotifyRoutingService.connectToSpotify { result in
-//            switch result {
-//            case .success(let controller):
-//                RouterVC().pushViewController(viewController: controller)
-//            case .failed(let error):
-//                //TODO: Temporary logic for Error Handling
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
     
     private func checkReadOnlyPermission() -> Bool {
         if let currentVC = currentViewController as? AlbumDetailViewController,

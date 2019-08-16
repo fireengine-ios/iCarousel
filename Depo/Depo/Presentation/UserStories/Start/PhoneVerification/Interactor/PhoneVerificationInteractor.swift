@@ -1,25 +1,25 @@
 //
-//  PhoneVereficationPhoneVereficationInteractor.swift
+//  PhoneVerificationInteractor.swift
 //  Depo
 //
 //  Created by AlexanderP on 14/06/2017.
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
+class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    private let dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()    
+    private let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
     lazy var authenticationService = AuthenticationService()
     private let cacheManager = CacheManager.shared
     
-    weak var output: PhoneVereficationInteractorOutput!
+    weak var output: PhoneVerificationInteractorOutput!
     
     var attempts: Int = 0
     
-    let MaxAttemps = NumericConstants.maxVereficationAttempts
+    let MaxAttemps = NumericConstants.maxVerificationAttempts
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
@@ -61,7 +61,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                     self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
                     self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
                 }
-                self?.output.resendCodeRequestSuccesed()
+                self?.output.resendCodeRequestSucceeded()
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
@@ -95,9 +95,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
-                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                    self.output.verificationFailed(with: TextConstants.promocodeBlocked)
                 } else {
-                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
+                    self.output.verificationFailed(with: TextConstants.phoneVerificationNonValidCodeErrorText)
                 }
             }
         })

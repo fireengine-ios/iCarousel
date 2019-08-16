@@ -114,8 +114,8 @@ class CardsManager: NSObject {
     }
     
     // MARK: sending operation to registred subviews
-    func startOperatonsForCardsResponces(cardsResponces: [HomeCardResponse]) {
-        let sortedArray = cardsResponces.sorted { obj1, obj2 -> Bool in
+    func startOperatonsForCardsResponses(cardsResponses: [HomeCardResponse]) {
+        let sortedArray = cardsResponses.sorted { obj1, obj2 -> Bool in
             obj1.order < obj2.order
         }
         homeCardsObjects.removeAll()
@@ -259,9 +259,9 @@ class CardsManager: NSObject {
         }
     }
     
-    func manuallyDeleteCardsByType(type: OperationType, homeCardResponce: HomeCardResponse? = nil) {
+    func manuallyDeleteCardsByType(type: OperationType, homeCardResponse: HomeCardResponse? = nil) {
         var typeForInsert: OperationType? = nil
-        if let responce = homeCardResponce, !responce.actionable {
+        if let response = homeCardResponse, !response.actionable {
             typeForInsert = type
         }else if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
             typeForInsert = type
@@ -271,7 +271,7 @@ class CardsManager: NSObject {
             deletedCards.insert(type)
         }
         
-        stopOperationWithType(type: type, serverObject: homeCardResponce)
+        stopOperationWithType(type: type, serverObject: homeCardResponse)
     }
     
     func stopAllOperations() {

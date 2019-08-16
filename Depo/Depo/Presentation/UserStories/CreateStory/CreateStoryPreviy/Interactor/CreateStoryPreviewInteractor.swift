@@ -9,7 +9,7 @@
 class CreateStoryPreviewInteractor {
     weak var output: CreateStoryPreviewInteractorOutput?
     var story: PhotoStory?
-    var responce: CreateStoryResponce?
+    var response: CreateStoryResponse?
     var isRequestStarted = false
     private let analyticsManager: AnalyticsService = factory.resolve()
     private lazy var createStoryService = CreateStoryService(transIdLogging: true)
@@ -19,10 +19,10 @@ class CreateStoryPreviewInteractor {
 extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
     
     func viewIsReady() {
-        guard let resp = responce else {
+        guard let resp = response else {
             return
         }
-        output?.startShowVideoFromResponce(responce: resp)
+        output?.startShowVideoFromResponse(response: resp)
         analyticsManager.logScreen(screen: .createStoryPreview)
         analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }

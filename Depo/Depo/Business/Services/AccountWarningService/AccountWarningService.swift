@@ -82,12 +82,12 @@ extension AccountWarningService {
     
     private func getToken(for phoneNumber: String) {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
+        accountService.updateUserPhone(parameters: parameters, success: { [weak self] response in
+            guard let signUpResponse = response as? SignUpSuccessResponse else {
                 return
             }
             DispatchQueue.main.async {
-                self?.successed(token: signUpResponce)
+                self?.successed(token: signUpResponse)
             }
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
@@ -113,7 +113,7 @@ extension AccountWarningService {
         }, fail: { [weak self] errorRespose in
             
             DispatchQueue.main.async { [weak self] in
-                self?.failedVerifyPhone(text: TextConstants.phoneVereficationNonValidCodeErrorText)
+                self?.failedVerifyPhone(text: TextConstants.phoneVerificationNonValidCodeErrorText)
             }
         })
     }
@@ -151,7 +151,7 @@ extension AccountWarningService {
         
         if let optInController = optInController {
             optInController.stopLoading()
-            optInController.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+            optInController.setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
             optInController.startEnterCode()
             optInController.hiddenError()
             optInController.hideResendButton()

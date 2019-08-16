@@ -6,14 +6,14 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class OTPViewInteractor: PhoneVereficationInteractor {
+class OTPViewInteractor: PhoneVerificationInteractor {
     
-    var responce: SignUpSuccessResponse?
+    var response: SignUpSuccessResponse?
     var userInfo: AccountInfoResponse?
     var phoneNumberString: String?
     
     override var remainingTimeInSeconds: Int {
-        if let resp = responce {
+        if let resp = response {
             return (resp.remainingTimeInMinutes ?? 1) * 60
         }
         
@@ -26,7 +26,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override var expectedInputLength: Int? {
-        if let resp = responce {
+        if let resp = response {
             return resp.expectedInputLength ?? 1
         }
         return nil
@@ -41,11 +41,11 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override func verifyCode(code: String) {
-        if responce == nil {
+        if response == nil {
             return
         }
         
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: responce!.referenceToken ?? "")
+        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: response!.referenceToken ?? "")
         AccountService().verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
             DispatchQueue.main.async { [weak self] in
                 
@@ -68,9 +68,9 @@ class OTPViewInteractor: PhoneVereficationInteractor {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
-                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                    self.output.verificationFailed(with: TextConstants.promocodeBlocked)
                 } else {
-                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
+                    self.output.verificationFailed(with: TextConstants.phoneVerificationNonValidCodeErrorText)
                 }
             }
         }
@@ -80,12 +80,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         attempts = 0
         
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        AccountService().updateUserPhone(parameters: parameters, success: { [weak self] responce in
-                if let responce = responce as? SignUpSuccessResponse {
-                    self?.responce = responce
+        AccountService().updateUserPhone(parameters: parameters, success: { [weak self] response in
+                if let response = response as? SignUpSuccessResponse {
+                    self?.response = response
                 }
                 DispatchQueue.main.async {
-                    self?.output.resendCodeRequestSuccesed()
+                    self?.output.resendCodeRequestSucceeded()
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {

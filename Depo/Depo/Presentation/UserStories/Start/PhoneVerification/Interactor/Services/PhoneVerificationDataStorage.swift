@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class PhoneVereficationDataStorage {
+class PhoneVerificationDataStorage {
     
     var signUpResponse: SignUpSuccessResponse!
     

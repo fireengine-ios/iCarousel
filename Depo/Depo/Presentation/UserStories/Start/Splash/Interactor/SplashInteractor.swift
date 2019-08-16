@@ -159,14 +159,14 @@ class SplashInteractor: SplashInteractorInput {
     
     func checkEULA() {
         let eulaService = EulaService()
-        eulaService.eulaCheck(success: { [weak self] successResponce in
+        eulaService.eulaCheck(success: { [weak self] successResponse in
             DispatchQueue.toMain {
                 self?.output.onSuccessEULA()
             }
-        }) { [weak self] errorResponce in
+        }) { [weak self] errorResponse in
             DispatchQueue.toMain {
-                if case ErrorResponse.error(let error) = errorResponce, error.isNetworkError {
-                    UIApplication.showErrorAlert(message: errorResponce.description)
+                if case ErrorResponse.error(let error) = errorResponse, error.isNetworkError {
+                    UIApplication.showErrorAlert(message: errorResponse.description)
                 } else {
                     self?.output.onFailEULA()
                 }
