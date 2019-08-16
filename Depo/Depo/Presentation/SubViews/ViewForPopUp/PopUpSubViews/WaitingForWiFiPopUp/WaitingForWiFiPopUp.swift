@@ -10,10 +10,10 @@ import UIKit
 
 final class WaitingForWiFiPopUp: BaseView {
 
-    @IBOutlet weak var titleLabel: UILabel?
-    @IBOutlet weak var settingsButton: CircleYellowButton?
+    @IBOutlet private weak var titleLabel: UILabel?
+    @IBOutlet private weak var settingsButton: CircleYellowButton?
     
-    let spacing: CGFloat = 2.1
+    private let spacing: CGFloat = 2.1
     
     override func configurateView() {
         super.configurateView()
@@ -28,7 +28,7 @@ final class WaitingForWiFiPopUp: BaseView {
         settingsButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing)
     }
     
-    @IBAction func onSettingsButton() {
+    @IBAction private func onSettingsButton() {
         let router = RouterVC()
         router.pushViewController(viewController: router.autoUpload)
     }
