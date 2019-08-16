@@ -1102,6 +1102,7 @@
 "confirm_your_email" = "Confirm Your E-mail";
 "enter_your_email" = "enter your e-mail";
 "change_email_pop_up_top_title" = "Please enter your e-mail in order to change your account info and get your security code";
+"account_verified" = "Thank you for verifying your account!";
 
 "no_account_found" = "No account found";
 "too_many_requests" = "Too many tries within a parametric duration of time";

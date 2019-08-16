@@ -175,8 +175,28 @@ final class VerifyEmailPopUp: UIViewController {
         }
     }
     
-    private func dismissPopUp(completion: VoidHandler? = nil) {
-        dismiss(animated: true, completion: completion)
+    private func hidePopUp(completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.view.alpha = 0
+        }, completion: { _ in
+            self.clearCode()
+            self.errorLabel.isHidden = true
+            
+            completion?()
+        })
+        
+    }
+    
+    private func showPopUp() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.view.alpha = 1
+        }
+    }
+    
+    private func dismissPopUp(animated: Bool = true) {
+        dismiss(animated: animated) {
+            self.delegate?.popUpWillDismiss()
+        }
     }
     
     private func showError(text: String) {
@@ -280,18 +300,19 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     @IBAction func onChangeEmailTap(_ sender: Any) {
-        dismissPopUp { [weak self] in
+        hidePopUp { [weak self] in
             let router = RouterVC()
             let controller = router.changeEmailPopUp
-            controller.delegate = self?.delegate
+            controller.completion = { [weak self] in
+                self?.showPopUp()
+            }
+            
             UIApplication.topController()?.present(controller, animated: true, completion: nil)
         }
     }
     
     @IBAction func onLaterTap(_ sender: Any) {
-        dismissPopUp { [weak self] in
-            self?.delegate?.popUpWillDismiss()
-        }
+        dismissPopUp()
     }
     
     @IBAction func onConfirmTap(_ sender: Any) {
@@ -311,14 +332,27 @@ extension VerifyEmailPopUp {
             switch response {
             case .success(_):
                 DispatchQueue.main.async { [weak self] in
-                    self?.dismissPopUp { [weak self] in
-                        self?.delegate?.popUpWillDismiss()
+                    self?.hidePopUp {
+                        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
+                                                            message: TextConstants.accountVerified,
+                                                            buttonTitle: TextConstants.createStoryPhotosContinue) { [weak self] in
+                                                                self?.dismissPopUp(animated: false)
+                                                                
+                        }
+                        
+                        popUp.modalPresentationStyle = .overFullScreen
+                        popUp.modalTransitionStyle = .crossDissolve
+                        
+                        UIApplication.topController()?.present(popUp, animated: true, completion: nil)
                     }
+
                 }
+                
             case .failed(let error):
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
+                    self?.enableConfirmButtonIfNeeded()
                 }
             }
         }

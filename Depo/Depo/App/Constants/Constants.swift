@@ -1380,7 +1380,8 @@ struct TextConstants {
     static let confirmYourEmail = NSLocalizedString("confirm_your_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let enterYourEmail = NSLocalizedString("enter_your_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let changeEmailPopUpTopTitle = NSLocalizedString("change_email_pop_up_top_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let accountVerified = NSLocalizedString("account_verified", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let noAccountFound = NSLocalizedString("no_account_found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tooManyRequests = NSLocalizedString("too_many_requests", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidOTP = NSLocalizedString("invalid_otp", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
