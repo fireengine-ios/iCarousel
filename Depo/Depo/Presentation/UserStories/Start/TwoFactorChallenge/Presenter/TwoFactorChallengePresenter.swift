@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
+final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     private var isPhoneJustUpdated = false
     
@@ -14,7 +14,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         view.setupButtonsInitialState()
         view.setupInitialState()
         configure()
-        resendCodeRequestSuccesed()
+        resendCodeRequestSucceeded()
     }
     
     override func resendButtonPressed() {
@@ -25,7 +25,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         interactor.resendCode()
     }
     
-    override func resendCodeRequestSuccesed() {
+    override func resendCodeRequestSucceeded() {
         view.setupButtonsInitialState()
         view.setupTimer(withRemainingTime: interactor.remainingTimeInSeconds)
         view.updateEditingState()
@@ -39,7 +39,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
         router.goAutoSync()
     }
     
-    override func vereficationFailed(with error: String) {
+    override func verificationFailed(with error: String) {
         completeAsyncOperationEnableScreen()
 
         let errorText: String
@@ -52,7 +52,7 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             }
             return
             
-        } else  if error == "INVALID_SESSION" {
+        } else if error == "INVALID_SESSION" {
             router.popToLoginWithPopUp(title: TextConstants.errorAlert,
                                        message: TextConstants.twoFAInvalidSessionErrorMessage,
                                        image: .error, onClose: nil)
@@ -76,6 +76,9 @@ final class TwoFactorChallengePresenter: PhoneVereficationPresenter {
             
         } else if error == "INVALID_OTP_CODE" {
             errorText = TextConstants.twoFAInvalidOtpErrorMessage
+            
+        } else if error == "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE" {
+            errorText = TextConstants.twoFATooManyRequestsErrorMessage
             
         } else {
             assertionFailure("Unrecognized error")

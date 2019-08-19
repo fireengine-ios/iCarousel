@@ -127,10 +127,10 @@ class StorageCard: BaseView {
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
-        configurateByResponceObject()
+        configurateByResponseObject()
     }
     
-    func configurateByResponceObject() {
+    func configurateByResponseObject() {
         if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int {
             subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
         }

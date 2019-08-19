@@ -83,16 +83,16 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     func getAllOffers(with accountType: AccountType) {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
-                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
                     let error = CustomErrors.serverError("An error occured while getting active subscription")
                     DispatchQueue.toMain {
                         self?.output.failed(with: error.localizedDescription)
                     }
                     return
                 }
-                SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
+                SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
                 
-                let offersList = subscriptionsResponce.list
+                let offersList = subscriptionsResponse.list
                 if accountType != .turkcell {
                     self?.getInfoForAppleProducts(offers: offersList)
                 } else {

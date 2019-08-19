@@ -29,12 +29,13 @@ final class AppConfigurator {
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         
+        SettingsBundleHelper.setVersionAndBuildNumber()
+        SettingsBundleHelper.shared.lifeTechSetup()
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         clearTokensIfNeed()
         logoutIfNeed()
         prepareSessionManager()
-        setVersionAndBuildNumber()
         configureSDWebImage()
         setupIAPObserver()
         startMenloworks(with: launchOptions)
@@ -136,12 +137,9 @@ final class AppConfigurator {
         static let AppVersionKey = "version_preference"
     }
     
-    private static func setVersionAndBuildNumber() {
-        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        UserDefaults.standard.set(version, forKey: "version_preference")
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-        UserDefaults.standard.set(build, forKey: "build_preference")
-    }
+    
+    
+   
     
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         func setupMenloworks() {

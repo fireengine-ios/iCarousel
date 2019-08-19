@@ -9,10 +9,8 @@
 import UIKit
 
 protocol SpotifyImportControllerDelegate: class {
-    func importDidComplete(_ controller: SpotifyImportViewController)
-    func importDidFailed(_ controller: SpotifyImportViewController, error: Error)
     func importDidCancel(_ controller: SpotifyImportViewController)
-    func importSendToBackground()
+    func importSendToBackground(_ controller: SpotifyImportViewController)
 }
 
 final class SpotifyImportViewController: BaseViewController, NibInit {
@@ -60,6 +58,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
             newValue.layer.borderWidth = 1
             newValue.setTitle(TextConstants.Spotify.Import.importInBackground, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
+            newValue.addTarget(self, action: #selector(onImportInBackground), for: .touchUpInside)
         }
     }
     
@@ -80,14 +79,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         return gradientView
     }()
     
-    var playlists: [SpotifyPlaylist]!
-    
     weak var delegate: SpotifyImportControllerDelegate?
-
-    private lazy var spotifyService: SpotifyService = factory.resolve()
-    
-    private var canAutoClose = false
-    private var isImportComplete = false
     
     // MARK: - View lifecycle
     
@@ -97,17 +89,6 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         setupGradientBackground()
         navigationItem.leftBarButtonItem = cancelAsBackButton
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
-        
-        startImport()
-        
-        /// Minimum show time = spotifyImportMinShowTimeinterval
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyImportMinShowTimeinterval) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            self.canAutoClose = true
-            self.autoclose()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,41 +103,18 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
 
     // MARK: - Action
     
-    private func startImport() {
-        let ids = playlists.map { $0.id }
-        spotifyService.start(playlistIds: ids) { [weak self] result in
+    @objc private func onCancel() {
+        let router = RouterVC()
+        let popup = router.spotifyCancelImportPopup(cancelAction: { [weak self] in
             guard let self = self else {
                 return
             }
-            
-            switch result {
-            case .success(_):
-                self.isImportComplete = true
-                self.cancelAsBackButton.isEnabled = false
-                self.autoclose()
-            case .failed(let error):
-                self.delegate?.importDidFailed(self, error: error)
-            }
-        }
-    }
-    
-    private func autoclose() {
-        if canAutoClose && isImportComplete {
-            delegate?.importDidComplete(self)
-        }
-    }
-    
-    private func stopImport(completion: VoidHandler? = nil) {
-        spotifyService.stop { _ in
-            completion?()
-        }
-    }
-    
-    @objc private func onCancel() {
-        delegate?.importDidCancel(self)
+            self.delegate?.importDidCancel(self)
+        })
+        present(popup, animated: false)
     }
     
     @objc private func onImportInBackground() {
-        delegate?.importSendToBackground()
+        delegate?.importSendToBackground(self)
     }
 }

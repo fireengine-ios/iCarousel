@@ -14,7 +14,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
     
-    var captchaRequred = false
+    var captchaRequired = false
     private var  retriesCount = 0 {
         didSet {
             if retriesCount > 2 {
@@ -36,7 +36,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                               phone: phone,
                                                               password: password,
                                                               repassword: repassword,
-                                                              captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                              captchaAnswer: captchaRequired ? captchaAnswer : nil)
         
         if validationResult.count == 0 {//== .allValid {
             
@@ -44,8 +44,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
             signUpInfo = RegistrationUserInfoModel(mail: email,
                                                    phone: code + phone,
                                                    password: password,
-                                                   captchaID: captchaRequred ? captchaID : nil,
-                                                   captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                   captchaID: captchaRequired ? captchaID : nil,
+                                                   captchaAnswer: captchaRequired ? captchaAnswer : nil)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -61,26 +61,26 @@ class RegistrationInteractor: RegistrationInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
-                self?.captchaRequred = boolResult
-                self?.output.captchaRequred(requred: boolResult)
+                self?.captchaRequired = boolResult
+                self?.output.captchaRequired(required: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
-                    self?.output.captchaRequredFailed(with: error.description)
+                    self?.output.captchaRequiredFailed(with: error.description)
                 } else {
-                    self?.output.captchaRequredFailed()
+                    self?.output.captchaRequiredFailed()
                 }
             }
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
-//                self?.output.captchaRequredFailed()
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
+//                self?.output.captchaRequiredFailed()
 //                return
 //            }
-//            self?.output.captchaRequred(requred: succesResponse.captchaRequred)
+//            self?.output.captchaRequired(required: succesResponse.captchaRequired)
 //
 //        }) { [weak self] errorResponse in
-//            self?.output.captchaRequredFailed()
+//            self?.output.captchaRequiredFailed()
 //        }
     }
     
@@ -94,7 +94,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 guard let result = response as? SignUpSuccessResponse else {
                     let error = CustomErrors.serverError("An error has occurred while register new user.")
                     let errorResponse = ErrorResponse.error(error)
-                    self?.output.signUpFailed(errorResponce: errorResponse)
+                    self?.output.signUpFailed(errorResponse: errorResponse)
                     return
                 }
                 
@@ -108,11 +108,11 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 SingletonStorage.shared.isJustRegistered = true
                 self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
             }
-            }, fail: { [weak self] errorResponce in
+            }, fail: { [weak self] errorResponse in
                 self?.retriesCount += 1
                 
                 DispatchQueue.main.async { [weak self] in
-                    switch errorResponce {
+                    switch errorResponse {
                     case .error(let error):
                         if let valueError = error as? ServerValueError,
                             let signUpError = SignupResponseError(with: valueError) {
@@ -121,8 +121,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                             
                             ///only with this error type captcha required error is processing
                             if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                                self?.captchaRequred = true
-                                self?.output.captchaRequred(requred: true)
+                                self?.captchaRequired = true
+                                self?.output.captchaRequired(required: true)
                             }
                         } else if let statusError = error as? ServerStatusError,
                             let signUpError = SignupResponseError(with: statusError) {
@@ -135,7 +135,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                         
                     }
 
-                    self?.output.signUpFailed(errorResponce: errorResponce)
+                    self?.output.signUpFailed(errorResponse: errorResponse)
                 }
         })
     }

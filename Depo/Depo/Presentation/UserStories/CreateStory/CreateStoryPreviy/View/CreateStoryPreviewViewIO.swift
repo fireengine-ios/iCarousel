@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CreateStoryPreviewViewInput: class {
-    func startShowVideoFromResponce(responce: CreateStoryResponce)
+    func startShowVideoFromResponse(response: CreateStoryResponse)
     func prepareToDismiss()
 }
 

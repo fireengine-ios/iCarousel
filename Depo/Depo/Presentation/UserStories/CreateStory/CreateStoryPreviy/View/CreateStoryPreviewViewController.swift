@@ -100,8 +100,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
 // MARK: CreateStoryPreviewViewInput
 extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce) {
-        guard let urlString = responce.storyURLString else {
+    func startShowVideoFromResponse(response: CreateStoryResponse) {
+        guard let urlString = response.storyURLString else {
             return
         }
         previewURLString = urlString

@@ -354,8 +354,8 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         let accountService = AccountService()
         
         group.enter()
-        accountService.quotaInfo(success: { responce in
-            let quotaInfoResponse = responce as? QuotaInfoResponse
+        accountService.quotaInfo(success: { response in
+            let quotaInfoResponse = response as? QuotaInfoResponse
             quota = quotaInfoResponse?.bytes ?? 0
             quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
             group.leave()
@@ -380,8 +380,8 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         
         group.enter()
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            if let subscriptionsResponce = response as? ActiveSubscriptionResponse {
-                packages = subscriptionsResponce.list
+            if let subscriptionsResponse = response as? ActiveSubscriptionResponse {
+                packages = subscriptionsResponse.list
                     .compactMap { $0.subscriptionPlanDisplayName }
                     .joined(separator: ", ")
             } else {

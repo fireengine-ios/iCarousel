@@ -26,6 +26,15 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     }
     @IBOutlet private weak var collectionViewTopOffset: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var noPlaylistsView: UIView!
+    @IBOutlet private weak var noPlaylistsLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.noPlaylists
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        }
+    }
+    
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
@@ -43,6 +52,8 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         let dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = true
+        dataSource.isHeaderless = true
+        dataSource.selectionFullCell = false
         return dataSource
     }()
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)
@@ -102,7 +113,14 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+            self.updateEmptyView()
         }
+    }
+    
+    private func updateEmptyView() {
+        let isEmpty = dataSource.allItems.isEmpty
+        noPlaylistsView.isHidden = !isEmpty
+        navbarManager.setSelectAll(isEnabled: !isEmpty)
     }
     
     private func selectedItemsCountChange(with count: Int) {
@@ -123,6 +141,10 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 
 extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     
+    func canShowDetails() -> Bool {
+        return dataSource.isSelectionStateActive
+    }
+    
     func onSelect(item: SpotifyObject) {
         guard let playlist = item as? SpotifyPlaylist else {
             return
@@ -137,6 +159,8 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     func didChangeSelectionCount(newCount: Int) {
         selectedItemsCountChange(with: newCount)
     }
+    
+    func onStartSelection() { }
 }
 
 // MARK: - SpotifyPlaylistsNavbarManagerDelegate
@@ -173,6 +197,7 @@ extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
         view.layoutIfNeeded()
     }
     
+    func importDidCanceled(){ }
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus) { }
     func importSendToBackground() { }
 }

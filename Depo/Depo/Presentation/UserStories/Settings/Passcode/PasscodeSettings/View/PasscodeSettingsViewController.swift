@@ -165,7 +165,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
         }
     }
     
-    func presentMailVerefication() {
+    func presentMailVerification() {
         let mailController = MailVerificationViewController()
         mailController.actionDelegate = self
         mailController.modalPresentationStyle = .overFullScreen

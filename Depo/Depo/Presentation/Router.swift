@@ -251,6 +251,9 @@ class RouterVC: NSObject {
             lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
+        } else {
+            assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
+            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
         }
     }
         
@@ -332,12 +335,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
+    func phoneVerificationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
-        let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVerificationViewController(nibName: "PhoneVereficationScreen",
+        let inicializer = PhoneVerificationModuleInitializer()
+        let controller = PhoneVerificationViewController(nibName: "PhoneVerificationScreen",
                                                          bundle: nil)
-        inicializer.phonevereficationViewController = controller
+        inicializer.phoneverificationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
         return controller
     }
@@ -454,7 +457,7 @@ class RouterVC: NSObject {
     // MARK: Music
     
     var musics: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
+        let controller = MusicInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
@@ -594,10 +597,10 @@ class RouterVC: NSObject {
     
     // MARK: CreateStory preview
     
-    func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+    func storyPreview(forStory story: PhotoStory, response: CreateStoryResponse) -> UIViewController {
         let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
                                                                                                    story: story,
-                                                                                                   responce: responce)
+                                                                                                   response: response)
         return controller
     }
     
@@ -844,8 +847,8 @@ class RouterVC: NSObject {
     
     // MARK: OTP
     
-    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
-        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo, phoneNumber: phoneNumber)
+    func otpView(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(response: response, userInfo: userInfo, phoneNumber: phoneNumber)
         return controller
     }
     
@@ -999,20 +1002,38 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func spotifyImportController(playlists: [SpotifyPlaylist], delegate: SpotifyImportControllerDelegate?) -> UIViewController {
+    func spotifyImportController(delegate: SpotifyImportControllerDelegate?) -> UIViewController {
         let controller = SpotifyImportViewController.initFromNib()
-        controller.playlists = playlists
         controller.delegate = delegate
         return controller
     }
     
-    func spotifyOverwritePopup(importAction: @escaping VoidHandler) -> UIViewController {
-        return SpotifyOverwritePopup.with(importAction: importAction)
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyOverwritePopup.with(action: importAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyDeletePopup(deleteAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyDeletePopup.with(action: deleteAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyCancelImportPopup(cancelAction: @escaping VoidHandler, continueAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyCancelImportPopup.with(action: cancelAction, dismissAction: continueAction)
     }
 
     func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
         let controller = SpotifyAuthViewController()
         controller.loadWebView(with: url)
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyImportedPlaylistsController() -> UIViewController {
+        return SpotifyImportedPlaylistsViewController.initFromNib()
+    }
+    
+    func spotifyImportedTracksController(playlist: SpotifyPlaylist, delegate: SpotifyImportedTracksViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyImportedTracksViewController.initFromNib()
+        controller.playlist = playlist
         controller.delegate = delegate
         return controller
     }
