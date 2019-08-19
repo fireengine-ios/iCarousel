@@ -592,15 +592,8 @@ class AuthenticationService: BaseRequestService {
                       parameters: params,
                      encoding: JSONEncoding.default)
             .responseData { response in
-                
-                ///with 401 server error response.result is success but data = nil
-                if response.response?.statusCode == 401 {
-                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                    handler(.failed(error))
-                    return
-                }
-                
-                if response.response?.statusCode == 429 {
+                /// if 401 or 429 server error response.result is success but data = nil or bad format
+                if response.response?.statusCode == 401 || response.response?.statusCode == 429 {
                     let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                     handler(.failed(error))
                     return
