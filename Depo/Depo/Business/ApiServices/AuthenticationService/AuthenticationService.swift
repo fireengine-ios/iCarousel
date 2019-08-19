@@ -600,6 +600,12 @@ class AuthenticationService: BaseRequestService {
                     return
                 }
                 
+                if response.response?.statusCode == 429 {
+                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                    handler(.failed(error))
+                    return
+                }
+                
                 switch response.result {
                 case .success(let data):
                     let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
