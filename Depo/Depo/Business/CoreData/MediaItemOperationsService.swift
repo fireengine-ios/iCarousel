@@ -28,8 +28,6 @@ final class MediaItemOperationsService {
     
     var inProcessAppendingLocalFiles = false
     
-    private var reservedAssets = AssetsCache()
-    
     
     func deleteAllEnteties(_ completion: BoolHandler?) {
         let elementsToDelete: [(type: NSManagedObject.Type, predicate: NSPredicate?)]
@@ -217,45 +215,6 @@ final class MediaItemOperationsService {
     
     // MARK: - MediaItemOperations
     
-    
-    
-//    func updateSavedItems(savedItems: [MediaItem], remoteItems: [WrapData], context: NSManagedObjectContext) {
-//        guard savedItems.count > 0 else {
-//            return
-//        }
-//        context.perform { [weak self] in
-//            for savedMediaItem in savedItems {
-//                for remoteWrapedItem in remoteItems {
-//                    if savedMediaItem.trimmedLocalFileID == remoteWrapedItem.getTrimmedLocalID() {
-//                        if let unwrapedParent = remoteWrapedItem.parent {
-//                            savedMediaItem.parent = unwrapedParent
-//                        }
-//                        if let unwrapedAlbumbs = remoteWrapedItem.albums {
-//                            //LR-2356
-//                            
-//                            let albums = unwrapedAlbumbs.map({ albumUuid -> MediaItemsAlbum in
-//                                MediaItemsAlbum(uuid: albumUuid, context: context)
-//                            })
-//                            
-//                            
-//                            savedMediaItem.albums = NSOrderedSet(array: albums)
-//                        }
-//                        savedMediaItem.urlToFileValue = remoteWrapedItem.urlToFile?.absoluteString
-//                        savedMediaItem.metadata?.largeUrl = remoteWrapedItem.metaData?.largeUrl?.absoluteString
-//                        savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString
-//                        savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
-//                        savedMediaItem.favoritesValue = remoteWrapedItem.favorites
-//                        
-//                        savedMediaItem.syncStatusValue = remoteWrapedItem.syncStatus.valueForCoreDataMapping()
-//                        
-//                        break
-//                    }
-//                }
-//            }
-//            
-//            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
-//        }
-//    }
     //TODO: check the usefullness of it/or need of refactor
     func updateLocalItemSyncStatus(item: Item, newRemote: WrapData? = nil) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
@@ -568,10 +527,9 @@ final class MediaItemOperationsService {
                 return
             }
             let assetCache = LocalMediaStorage.default.assetsCache
-            let newAssets = localMediaItems.filter { assetCache.assetBy(identifier: $0.localIdentifier) == nil}
-            assetCache.append(list: newAssets)
-            self.reservedAssets.append(list: newAssets)
-            self.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
+            assetCache.append(list: localMediaItems)
+            
+            self.pushToLocalsAppendingQueue(assets: localMediaItems, completion: completion)
         }
     }
     
@@ -583,6 +541,20 @@ final class MediaItemOperationsService {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
         
     }
+    
+    
+    private let localsAppendingQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    
+    private func pushToLocalsAppendingQueue(assets: [PHAsset], completion: @escaping VoidHandler) {
+        let appendOperation = AppendLocalsOperation(assets: assets, completion: completion)
+        localsAppendingQueue.addOperation(appendOperation)
+    }
+    
     
     private func insertFromGallery(completion: VoidHandler?) {
         debugLog("insertFromGallery")
@@ -598,77 +570,14 @@ final class MediaItemOperationsService {
         inProcessAppendingLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
-        let assetsList = localMediaStorage.getAllImagesAndVideoAssets().filter { reservedAssets.assetBy(identifier: $0.localIdentifier) == nil }
-        reservedAssets.append(list: assetsList)
+        let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+        
         updateICloudStatus(for: assetsList)
-        let context = CoreDataStack.default.newChildBackgroundContext
-        listAssetIdIsNotSaved(allList: assetsList, context: context) { [weak self] notSavedAssets in
-            let start = Date()
-            
-            guard !notSavedAssets.isEmpty else {
-                self?.inProcessAppendingLocalFiles = false
-                print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
-                NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-                completion?()
-                return
-            }
-            
-            print("All local files started  \((start)) seconds")
-            self?.saveLocalMediaItemsPaged(items: notSavedAssets, context: context) { [weak self] in
-                print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
-                self?.inProcessAppendingLocalFiles = false
-                NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-                completion?()
-            }
-        }
-    }
-    
-    private func saveLocalMediaItemsPaged(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            reservedAssets.dropAll()
-            completion()
-            return
-        }
-        guard !items.isEmpty else {
-            print("LOCAL_ITEMS: no files to add")
-            completion()
-            return
-        }
         
-        #if DEBUG
-        let contextQueue = DispatchQueue.currentQueueLabelAsserted
-        #endif
-        
-        print("LOCAL_ITEMS: \(items.count) local files to add")
-        let start = Date()
-        let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
-        privateQueue.async { [weak self] in
-            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
-                context.perform { [weak self] in
-                    
-                    #if DEBUG
-                    let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
-                    assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
-                    #endif
-                    
-                    var addedObjects = [WrapData]()
-                    let assetsInfo = info.filter { $0.isValid }
-                    assetsInfo.forEach { element in
-                        autoreleasepool {
-                            let wrapedItem = WrapData(info: element)
-                            _ = MediaItem(wrapData: wrapedItem, context: context)
-                            
-                            addedObjects.append(wrapedItem)
-                        }
-                    }
-                    CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
-                        ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                        self?.reservedAssets.remove(identifiers: addedObjects.compactMap { $0.getLocalID() })
-                        print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
-                        self?.saveLocalMediaItemsPaged(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
-                    })
-                }
-            })
+        pushToLocalsAppendingQueue(assets: assetsList) { [weak self] in
+            self?.inProcessAppendingLocalFiles = false
+            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            completion?()
         }
     }
     
@@ -730,6 +639,23 @@ final class MediaItemOperationsService {
             callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
         })
     }
+    
+    
+    func notSaved(assets: [PHAsset], context: NSManagedObjectContext, callback: @escaping PhotoAssetsCallback) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback([])
+            return
+        }
+        
+        let localIdentifiers = assets.map { $0.localIdentifier }
+        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
+            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
+            let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
+            callback(notSaved)
+        })
+    }
+    
     
     func removeLocalMediaItems(with assetIdList: [String], completion: @escaping VoidHandler) {
         guard assetIdList.count > 0 else {

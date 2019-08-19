@@ -3272,6 +3272,9 @@
 		B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
 		B50B4A74220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
 		B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
+		B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
+		B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
+		B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D82216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
@@ -7942,6 +7945,7 @@
 		B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAccountRemoveConnectionCell.xib; sourceTree = "<group>"; };
 		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
+		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -14658,6 +14662,7 @@
 				8C20867A228D5012000BEDAD /* CacheManager.swift */,
 				CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */,
 				CE3AA9B21F4D6B44000157AF /* Models */,
+				B51205C82305350D007EB951 /* AppendLocalsOperation.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -19990,7 +19995,8 @@
 				8C0E8E071FDEBDFF00789C91 /* PhoneVerificationModuleInput.swift in Sources */,
 				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
-				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
+				8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */,
+				B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				8C0B919E20170E6800A5BA81 /* DuplicatedContactsInteractorInput.swift in Sources */,
@@ -21982,6 +21988,7 @@
 				C65DCBE0204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
 				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
+				B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
 				CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */,
 				CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */,
@@ -22905,6 +22912,7 @@
 				CE784A5822A685FB00662219 /* FaceImageAddNameInteractor.swift in Sources */,
 				CE784A5922A685FB00662219 /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE784A5A22A685FB00662219 /* ForgotPasswordViewController.swift in Sources */,
+				B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				CE784A5B22A685FB00662219 /* LeavePremiumHeaderView.swift in Sources */,
 				CE784A5C22A685FB00662219 /* ForgotPasswordModuleInput.swift in Sources */,
 				CE784A5D22A685FB00662219 /* EditingBarConfig.swift in Sources */,
