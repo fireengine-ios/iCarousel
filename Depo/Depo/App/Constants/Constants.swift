@@ -32,9 +32,9 @@ struct TextConstants {
         
         static let GAappName: String = {
             #if LIFEDRIVE
-            return "LIFEDRIVE"
+            return "Lifedrive"
             #else
-            return "LIFEBOX"
+            return "Lifebox"
             #endif
         }()
     }
