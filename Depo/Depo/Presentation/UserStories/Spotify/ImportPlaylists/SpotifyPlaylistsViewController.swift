@@ -130,11 +130,11 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     @IBAction private func importSelected(_ sender: UIButton) {
         if dataSource.isSelectionStateActive {
-            for item in dataSource.selectedItems where item.count == 0 {
+            if dataSource.selectedItems.contains(where: { $0.count == 0 }) {
                 UIApplication.showErrorAlert(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
-                return
+            } else {
+                delegate?.onImport(playlists: dataSource.selectedItems)
             }
-            delegate?.onImport(playlists: dataSource.selectedItems)
         } else {
             delegate?.onShowImported()
         }
