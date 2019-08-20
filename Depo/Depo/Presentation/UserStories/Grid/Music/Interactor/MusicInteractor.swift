@@ -31,7 +31,7 @@ final class MusicInteractor: BaseFilesGreedInteractor {
     }
     
     private func getSpotifyStatus() {
-        spotifyService.updateStatus { [weak self] result in
+        spotifyService.getSpotifyStatus { [weak self] result in
             switch result {
             case .success(let status):
                 self?.spotifyStatus = status
