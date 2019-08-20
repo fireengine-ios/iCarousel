@@ -77,7 +77,8 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         } else if error == "INVALID_OTP_CODE" {
             errorText = TextConstants.twoFAInvalidOtpErrorMessage
             
-        } else if error == "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE" {
+            /// Fix for backend response
+        } else if error.contains(ErrorResponseText.resendCodeExceeded)  {
             errorText = TextConstants.twoFATooManyRequestsErrorMessage
             
         } else {

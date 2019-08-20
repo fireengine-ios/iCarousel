@@ -592,9 +592,9 @@ class AuthenticationService: BaseRequestService {
                       parameters: params,
                      encoding: JSONEncoding.default)
             .responseData { response in
-                
-                ///with 401 server error response.result is success but data = nil
-                if response.response?.statusCode == 401 {
+                /// if 401 or 429 server error response.result is success but data contains error
+                if response.response?.statusCode == TwoFAErrorCodes.unauthorized.rawValue
+                    || response.response?.statusCode == TwoFAErrorCodes.tooManyRequests.rawValue {
                     let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                     handler(.failed(error))
                     return
