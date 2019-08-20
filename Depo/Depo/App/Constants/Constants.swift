@@ -29,6 +29,14 @@ struct TextConstants {
             return "LIFEBOX"
             #endif
             }()
+        
+        static let GAappName: String = {
+            #if LIFEDRIVE
+            return "Lifedrive"
+            #else
+            return "Lifebox"
+            #endif
+        }()
     }
     
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
