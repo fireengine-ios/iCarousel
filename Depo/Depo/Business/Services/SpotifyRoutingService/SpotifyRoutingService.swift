@@ -251,7 +251,7 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
     }
     
     func onShowImported() {
-        router.popViewController()
+        showImportedPlayLists() 
     }
     
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
