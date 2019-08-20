@@ -31,7 +31,7 @@ final class MusicInteractor: BaseFilesGreedInteractor {
     }
     
     private func getSpotifyStatus() {
-        spotifyService.getSpotifyStatus { [weak self] result in
+        spotifyService.updateStatus { [weak self] result in
             switch result {
             case .success(let status):
                 self?.spotifyStatus = status
@@ -46,11 +46,10 @@ final class MusicInteractor: BaseFilesGreedInteractor {
 // MARK: - SpotifyRoutingServiceDelegate
 
 extension MusicInteractor: MusicInteractorInput {
-    
+   
     func processSpotifyStatusViewTap() {
         spotifyService.showImportedPlayLists()
     }
-    
 }
 
 // MARK: - SpotifyRoutingServiceDelegate
