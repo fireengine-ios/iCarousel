@@ -46,11 +46,10 @@ final class MusicInteractor: BaseFilesGreedInteractor {
 // MARK: - SpotifyRoutingServiceDelegate
 
 extension MusicInteractor: MusicInteractorInput {
-    
+   
     func processSpotifyStatusViewTap() {
         spotifyService.showImportedPlayLists()
     }
-    
 }
 
 // MARK: - SpotifyRoutingServiceDelegate

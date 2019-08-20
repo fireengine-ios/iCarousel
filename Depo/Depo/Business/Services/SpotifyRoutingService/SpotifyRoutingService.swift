@@ -33,7 +33,7 @@ final class SpotifyRoutingService {
         delegates.removeAll()
     }
     
-    func updateStatus(completion: ResponseHandler<SpotifyStatus>?) {
+    func getSpotifyStatus(completion: ResponseHandler<SpotifyStatus>?) {
         spotifyService.getStatus { [weak self] result in
             switch result {
             case .success(let status):
@@ -45,11 +45,11 @@ final class SpotifyRoutingService {
         }
     }
     
-    func getSpotifyStatus(completion: @escaping ResponseHandler<SpotifyStatus>) {
+    func getLastSpotifyStatus(completion: @escaping ResponseHandler<SpotifyStatus>) {
         if let status = lastSpotifyStatus {
             completion(.success(status))
         } else {
-            updateStatus(completion: completion)
+            getSpotifyStatus(completion: completion)
         }
     }
     
@@ -77,7 +77,7 @@ final class SpotifyRoutingService {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
-                self?.updateStatus(completion: handler)
+                self?.getSpotifyStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
             }
@@ -206,7 +206,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     
     func spotifyAuthSuccess(with code: String) {
         spotifyService.connect(code: code) { [weak self] result in
-            self?.updateStatus { [weak self] result in
+            self?.getSpotifyStatus { [weak self] result in
                 guard let self = self else {
                     return
                 }
