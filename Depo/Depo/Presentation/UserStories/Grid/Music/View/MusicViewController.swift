@@ -53,6 +53,9 @@ final class MusicViewController: BaseFilesGreedViewController {
     }
     
     private func refreshSpotifyStatusView(isHidden: Bool) {
+        guard let collectionView = collectionView else {
+            return
+        }
         let spotifyStatusViewHeight = isHidden ? 0 : Constants.spotifyStatusViewHeight
         collectionView.contentInset = UIEdgeInsets(top: spotifyStatusViewHeight, left: 0, bottom: Constants.bottomInsetCollectionView, right: 0)
         /// To not update offset when new page is loading
