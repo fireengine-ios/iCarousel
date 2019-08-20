@@ -127,6 +127,23 @@ final class VerifyEmailPopUp: UIViewController {
         
         activityManager.delegate = self
         
+        updateEmail()
+        
+        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
+        laterButton.isHidden = !allowSkip
+        
+        codeTextFields.forEach({
+            $0.delegate = self
+            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        })
+        
+        ///don't send code if just registered(code already sent)
+        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
+            resendCode()
+        }
+    }
+    
+    private func updateEmail() {
         guard let email = SingletonStorage.shared.accountInfo?.email else {
             assertionFailure()
             return
@@ -152,19 +169,6 @@ final class VerifyEmailPopUp: UIViewController {
         }
         
         topLabel.attributedText = attributedText
-        
-        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = !allowSkip
-        
-        codeTextFields.forEach({
-            $0.delegate = self
-            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        })
-        
-        ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
-            resendCode()
-        }
     }
     
     private func enableConfirmButtonIfNeeded() {
@@ -188,6 +192,8 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     private func showPopUp() {
+        updateEmail()
+        
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
         }
