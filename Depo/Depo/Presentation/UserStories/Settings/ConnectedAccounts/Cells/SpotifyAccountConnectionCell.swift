@@ -69,7 +69,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     
     private func setupCell() {
         hideJobStatusLabel()
-        service.getSpotifyStatus { response in
+        service.updateStatus { response in
             switch response {
             case .success(let response):
                 self.isConnectHandler(spotifyStatus: response)
@@ -169,15 +169,15 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
 extension SpotifyAccountConnectionCell: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
-        //TODO: Some logic will here
+        setupCell()
     }
     
     func importDidCanceled() {
-        //TODO: Some logic will here
+        setupCell()
     }
     
     func importSendToBackground() {
-        //TODO: Status will be here
+        setupCell()
     }
     
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus) {
