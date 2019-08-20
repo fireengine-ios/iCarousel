@@ -1063,8 +1063,8 @@
 "login_settings_two_factor_auth_description" = "";
 "two_fa_invalid_session_error_message" = "";
 "two_fa_invalid_challenge_error_message" = "";
-"two_fa_too_many_attempts_error_message" = "";
-"two_fa_invalid_Otp_error_message" = "";
+"two_fa_too_many_attempts_error_message" = "3 wrong trials. Please request a new code.";
+"two_fa_invalid_Otp_error_message" = "Security code is invalid, please try again.";
 "spotify_import_navbar_title" = "Import Playlists";
 "spotify_importing" = "Importing...";
 "spotify_import_from" = "from Spotify";
