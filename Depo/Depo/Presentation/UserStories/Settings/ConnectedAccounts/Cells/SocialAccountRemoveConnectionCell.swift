@@ -29,13 +29,29 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         didSet {
             let attributes: [NSAttributedStringKey : Any] = [
                 .font               : UIFont.TurkcellSaturaBolFont(size: 16),
-                .foregroundColor    : UIColor.lrTealishTwo,
-                .underlineStyle     : NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor    : UIColor.lrTealishTwo
             ]
             
             let attributeString = NSMutableAttributedString(string: TextConstants.removeConnection,
                                                             attributes: attributes)
             removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
+            let line = UIView()
+            
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = removeConnectionButton.titleLabel?.textColor
+            removeConnectionButton.addSubview(line)
+            
+            var constraints = [NSLayoutConstraint]()
+            
+            constraints.append(NSLayoutConstraint(item: line
+                , attribute: .leading, relatedBy: .equal, toItem: removeConnectionButton, attribute: .leading, multiplier: 1, constant: 0))
+            constraints.append(NSLayoutConstraint(item: line
+                , attribute: .trailing, relatedBy: .equal, toItem: removeConnectionButton, attribute: .trailing, multiplier: 1, constant: 0))
+            constraints.append(NSLayoutConstraint(item: line
+                , attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 1))
+            constraints.append(NSLayoutConstraint(item: line
+                , attribute: .bottom, relatedBy: .equal, toItem: removeConnectionButton, attribute: .bottom, multiplier: 1, constant: -3.5))
+            removeConnectionButton.addConstraints(constraints)
         }
     }
     
