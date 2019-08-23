@@ -135,7 +135,7 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(_):
-                self.checkImportStatus { [weak self] isNeedPlaylistsClosed in
+                self.checkImportStatus { [weak self] shouldClosePlaylist in
                     /// hide cancel popup if needed
                     if navigationController.presentedViewController != nil {
                         navigationController.dismiss(animated: false, completion: {
@@ -143,7 +143,7 @@ final class SpotifyRoutingService {
                         })
                     } else {
                         /// in case of import error need to hide screen with albums for import
-                        if isNeedPlaylistsClosed {
+                        if shouldClosePlaylist {
                             self?.router.popViewController()
                         }
                         
