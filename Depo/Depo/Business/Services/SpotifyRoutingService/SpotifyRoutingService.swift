@@ -135,13 +135,18 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(_):
-                self.checkImportStatus { [weak self] in
+                self.checkImportStatus { [weak self] shouldClosePlaylist in
                     /// hide cancel popup if needed
                     if navigationController.presentedViewController != nil {
                         navigationController.dismiss(animated: false, completion: {
                             navigationController.dismiss(animated: true)
                         })
                     } else {
+                        /// in case of import error need to hide screen with albums for import
+                        if shouldClosePlaylist {
+                            self?.router.popViewController()
+                        }
+                        
                         navigationController.dismiss(animated: true)
                     }
                     self?.delegates.invoke(invocation: { $0.importDidComplete() })
@@ -152,7 +157,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    private func checkImportStatus(completion: @escaping VoidHandler) {
+    private func checkImportStatus(completion: @escaping BoolHandler) {
         guard importInProgress else {
             return
         }
@@ -164,12 +169,24 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let status):
-                if status.jobStatus == .finished {
+                switch status.jobStatus {
+                case .finished:
                     self.importInProgress = false
                     self.lastSpotifyStatus = status
-                
-                    completion()
-                } else {
+                    
+                    completion(false)
+                case .failed:
+                    let popUpController = PopUpController.with(title: TextConstants.errorAlert,
+                                                     message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError,
+                                                     image: .error,
+                                                     buttonTitle: TextConstants.ok) { controller in
+                                                        controller.close {
+                                                            completion(true)
+                                                        }
+                    }
+                    
+                    UIApplication.topController()?.present(popUpController, animated: true, completion: nil)
+                default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
                         self?.checkImportStatus(completion: completion)
                     })
