@@ -136,15 +136,50 @@ final class SpotifyRoutingService {
             switch result {
             case .success(_):
                 self.checkImportStatus { [weak self] in
-                    /// hide cancel popup if needed
-                    if navigationController.presentedViewController != nil {
-                        navigationController.dismiss(animated: false, completion: {
-                            navigationController.dismiss(animated: true)
+                    
+                    func passcodeSafeCloseImportVC() {
+                        navigationController.dismiss(animated: true, completion: {
+                            (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
                         })
-                    } else {
-                        navigationController.dismiss(animated: true)
                     }
-                    self?.delegates.invoke(invocation: { $0.importDidComplete() })
+                    
+                    func showPasscodeOrInvoke(completion: @escaping () -> Void) {
+                        
+                        if let passcodeVC = UIApplication.topController() as? PasscodeEnterViewController {
+                            /// background
+                            let currentPasscodeVCSuccess = passcodeVC.success
+                            passcodeVC.success = {
+                                currentPasscodeVCSuccess?()
+                                completion()
+                            }
+                        } else {
+                            /// foreground
+                            completion()
+                        }
+                    }
+                    
+                    showPasscodeOrInvoke {
+                        
+                        /// check for cancel popup or passcode
+                        if navigationController.presentedViewController != nil {
+                            
+                            /// dismiss cancel popup or passcode
+                            navigationController.dismiss(animated: true, completion: {
+                                
+                                /// maybe will be needed one more navigationController.dismiss.
+                                
+                                /// close spotifyImportController
+                                showPasscodeOrInvoke {
+                                    passcodeSafeCloseImportVC()
+                                }
+                            })
+                        } else {
+                            /// close spotifyImportController
+                            passcodeSafeCloseImportVC()
+                        }
+                        
+                        self?.delegates.invoke(invocation: { $0.importDidComplete() })
+                    }
                 }
             case .failed(let error):
                 self.importDidFailed(navigationController, error: error)
