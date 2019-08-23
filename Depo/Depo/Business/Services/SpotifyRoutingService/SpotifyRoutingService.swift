@@ -53,7 +53,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    func connectToSpotify(isSettingCell: Bool) {
+    func connectToSpotify(isSettingCell: Bool, completion: (() -> Void)?) {
         getSpotifyStatus { [weak self] result in
             guard let self = self else {
                 return
@@ -70,6 +70,7 @@ final class SpotifyRoutingService {
                 //completion(.failed(error))
                 debugPrint(error.localizedDescription)
             }
+            completion?()
         }
     }
     
@@ -135,9 +136,13 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(_):
-                self.checkImportStatus { [weak self] in
+                self.checkImportStatus { [weak self] shouldClosePlaylist in
                     
                     func passcodeSafeCloseImportVC() {
+                        /// in case of import error need to hide screen with albums for import
+                        if shouldClosePlaylist {
+                            self?.router.popViewController()
+                        }
                         navigationController.dismiss(animated: true, completion: {
                             (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
                         })
@@ -187,7 +192,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    private func checkImportStatus(completion: @escaping VoidHandler) {
+    private func checkImportStatus(completion: @escaping BoolHandler) {
         guard importInProgress else {
             return
         }
@@ -199,12 +204,24 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let status):
-                if status.jobStatus == .finished {
+                switch status.jobStatus {
+                case .finished:
                     self.importInProgress = false
                     self.lastSpotifyStatus = status
-                
-                    completion()
-                } else {
+                    
+                    completion(false)
+                case .failed:
+                    let popUpController = PopUpController.with(title: TextConstants.errorAlert,
+                                                     message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError,
+                                                     image: .error,
+                                                     buttonTitle: TextConstants.ok) { controller in
+                                                        controller.close {
+                                                            completion(true)
+                                                        }
+                    }
+                    
+                    UIApplication.topController()?.present(popUpController, animated: true, completion: nil)
+                default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
                         self?.checkImportStatus(completion: completion)
                     })
