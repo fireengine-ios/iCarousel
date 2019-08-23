@@ -53,7 +53,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    func connectToSpotify(isSettingCell: Bool, completion: @escaping () -> Void) {
+    func connectToSpotify(isSettingCell: Bool, completion: (() -> Void)?) {
         getSpotifyStatus { [weak self] result in
             guard let self = self else {
                 return
@@ -70,7 +70,7 @@ final class SpotifyRoutingService {
                 //completion(.failed(error))
                 debugPrint(error.localizedDescription)
             }
-            completion()
+            completion?()
         }
     }
     
