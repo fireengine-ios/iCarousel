@@ -65,9 +65,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
         connectButton.isEnabled = false
-        service.connectToSpotify(isSettingCell: true, completion: {
-            self.connectButton.isEnabled = true
-        })
+        service.connectToSpotify(isSettingCell: true, completion: nil)
+        self.connectButton.isEnabled = true
     }
     
     private func setupCell() {
