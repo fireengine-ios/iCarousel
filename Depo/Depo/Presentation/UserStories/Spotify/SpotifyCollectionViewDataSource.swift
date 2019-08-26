@@ -144,7 +144,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         cell.setSeletionMode(isSelectionStateActive, animated: false)
         cell.setup(with: item, delegate: self, isSelected: selectedItems.contains(item))
         
-        if isPaginationDidEnd {
+        if isPaginationDidEnd || showOnlySelected {
             return
         }
         

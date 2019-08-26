@@ -14,7 +14,7 @@ enum SpotifyJobStatus: String {
     case pending = "PENDING"
     case running = "RUNNING"
     case finished = "FINISHED"
-    case cancelled = "CANCELED"
+    case cancelled = "CANCELLED"
     case failed = "FAILED"
 }
 
