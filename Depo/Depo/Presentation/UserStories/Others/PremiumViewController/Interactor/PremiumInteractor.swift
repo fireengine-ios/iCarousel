@@ -249,10 +249,12 @@ extension PremiumInteractor: PremiumInteractorInput {
     func verifyOffer(_ offer: PackageModelResponse, token: String, otp: String) {
         offersService.verifyOffer(otp: otp, referenceToken: token,
                                   success: { [weak self] response in
-                                    /// delay stay for server perform request (android logic)
                                     
                                     self?.analyticsService.trackPurchase(offer: offer)
-                                    
+                                    ///there is may be only one package for becoming premium so packageIndex == 1
+                                    self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: 1)
+
+                                    /// delay stay for server perform request (android logic)»
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                         self?.output.successedVerifyOffer()
                                     }
