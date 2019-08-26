@@ -494,43 +494,43 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             fail?(.failResponse(nil))
             return
         }
-        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
-            LocalMediaStorage.default.assetsCache.append(list: [asset])
-            let wrapData = WrapData(asset: asset)
-            wrapData.copyFileData(from: item)
+        
+        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+            assertionFailure()
+            fail?(.failResponse(nil))
+            return
+        }
             
+        let mediaItemService = MediaItemOperationsService.shared
+        LocalMediaStorage.default.assetsCache.append(list: [asset])
+        
+        // call append to get the completion and to be sure that local item is saved in our db
+        mediaItemService.append(localMediaItems: [asset]) {
             let context = CoreDataStack.default.newChildBackgroundContext
-            MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS:  [item.getTrimmedLocalID()], context: context) { fetchedMediaItems in
-                let mediaItem: MediaItem
-                if let existingMediaItem = fetchedMediaItems.first {
-                    mediaItem = existingMediaItem
-                    mediaItem.trimmedLocalFileID = wrapData.getTrimmedLocalID()
-                    mediaItem.md5Value = wrapData.md5
-                } else {
-                    mediaItem = MediaItem(wrapData: wrapData, context: context)
-                    mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()
-                    mediaItem.regenerateSecondPartOfUUID()
-                    mediaItem.md5Value = item.md5
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
+                guard let savedLocalItem = items.first else {
+                    assertionFailure()
+                    fail?(.failResponse(nil))
+                    return
                 }
-                
-                mediaItem.localFileID = assetIdentifier
-                mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-                
+                // manually change some  properties
+                savedLocalItem.trimmedLocalFileID = item.getFisrtUUIDPart()
+                savedLocalItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
                 if isFilteredItem {
-                    mediaItem.isFiltered = true
+                    savedLocalItem.isFiltered = true
                 }
                 
                 var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
-                if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
+                if let unwrapedSet = savedLocalItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
                     userObjectSyncStatus = unwrapedSet
                 }
                 SingletonStorage.shared.getUniqueUserID(success: {
                     currentUserID in
                     context.perform {
-                        mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
+                        savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        MediaItemOperationsService.shared.updateRelatedRemoteItems(mediaItem: mediaItem, context: context, completion: {
-                            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
+                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {
+                            CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                                 success?()
                             })
                         })
@@ -538,9 +538,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }, fail: { error in
                     fail?(error)
                 })
-            }
+            })
         }
-        
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
