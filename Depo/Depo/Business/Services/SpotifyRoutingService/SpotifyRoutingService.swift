@@ -87,7 +87,7 @@ final class SpotifyRoutingService {
     
     func showImportedPlayLists() {
         let controller = router.spotifyImportedPlaylistsController()
-        router.pushViewController(viewController: controller)
+        router.replaceTopViewControllerWithViewController(controller)
     }
     
     private func showPlayListsForImport() {
