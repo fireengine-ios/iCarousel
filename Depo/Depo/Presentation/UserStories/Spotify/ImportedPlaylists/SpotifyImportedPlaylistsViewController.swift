@@ -165,7 +165,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
-        setMoreButtonEnable()
+        setMoreButton()
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -180,8 +180,8 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         }
     }
     
-    private func setMoreButtonEnable() {
-        if dataSource.allItems.count == 0 {
+    private func setMoreButton() {
+        if dataSource.allItems.isEmpty {
             navbarManager.setMoreButton(isEnabled: false)
         }
     }

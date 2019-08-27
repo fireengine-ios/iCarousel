@@ -242,9 +242,12 @@ class RouterVC: NSObject {
     }
     
     func popToConnectedAccountViewController() {
-        guard let controller = navigationController?.viewControllers.filter({ $0 is ConnectedAccountsViewController }).first else {
+        
+        guard let controller = navigationController?.viewControllers.first(where: { return $0 is
+            ConnectedAccountsViewController }) else {
             return
         }
+        
         navigationController?.popToViewController(controller, animated: true)
     }
     
