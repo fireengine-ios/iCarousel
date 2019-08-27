@@ -309,6 +309,8 @@
 		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		735E402B23154DB0007F13FC /* SpotifyAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */; };
+		735E402C23154DB2007F13FC /* SpotifyAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -16738,6 +16740,7 @@
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
 				984A514821E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
+				735E402B23154DB0007F13FC /* SpotifyAccountConnectionCell.xib in Resources */,
 				8C06AF732008AD70003D8E05 /* edit.png in Resources */,
 				8C06B12D2008AD72003D8E05 /* t_kucuk_selected@3x.png in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
@@ -18639,6 +18642,7 @@
 				CE784EB222A685FB00662219 /* lifebox.png in Resources */,
 				CE784EB322A685FB00662219 /* error_icon@2x.png in Resources */,
 				CE784EB422A685FB00662219 /* PackagePremiumView.xib in Resources */,
+				735E402C23154DB2007F13FC /* SpotifyAccountConnectionCell.xib in Resources */,
 				CE784EB522A685FB00662219 /* paylas_bip@3x.png in Resources */,
 				CE784EB622A685FB00662219 /* Turkcell_Satura_Regular.ttf in Resources */,
 				CE784EB722A685FB00662219 /* parlaklik_secili.png in Resources */,
@@ -19995,12 +19999,12 @@
 				8C0E8E071FDEBDFF00789C91 /* PhoneVerificationModuleInput.swift in Sources */,
 				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
-				8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */,
+				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
 				B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				8C0B919E20170E6800A5BA81 /* DuplicatedContactsInteractorInput.swift in Sources */,
-				8C0E8E0C1FDEBDFF00789C91 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				8C0E8E0C1FDEBDFF00789C91 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				8E26D98F2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				4A13DBE621A6FE5C002C3D16 /* PremiumInfoCard.swift in Sources */,
 				8C0E8E0E1FDEBDFF00789C91 /* SmartTimerLabel.swift in Sources */,
@@ -21502,7 +21506,7 @@
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
 				8E1B755723053FDE00F6EEDA /* MusicViewController.swift in Sources */,
-				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
+				CE51ACE91EF90853005DCEE0 /* PhoneVerificationViewInput.swift in Sources */,
 				B53DCE8620EF634900400DBA /* SyncRecord.m in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
 				CE6DE7551FCBE84100C23CBD /* InstagramService.swift in Sources */,
@@ -21529,7 +21533,7 @@
 				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */,
-				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
+				CE51ACEE1EF90853005DCEE0 /* PhoneVerificationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE51ACEF1EF90853005DCEE0 /* PhoneVerificationInteractorOutput.swift in Sources */,
@@ -21749,7 +21753,6 @@
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
-				8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
