@@ -113,11 +113,11 @@ final class QuickSelectCollectionView: UICollectionView {
         switch gestureRecognizer.state {
         case .began:
             if let indexPath = pointedIndexPath, let cellIsSelected = cellForItem(at: indexPath)?.isSelected {
-                isQuickSelecting = true
-                if !isQuickSelectAllowed {
-                    longPressDelegate?.didLongPress(at: pointedIndexPath)
-                }
+                isQuickSelecting = isQuickSelectAllowed
+                longPressDelegate?.didLongPress(at: pointedIndexPath)
+                
                 setItem(isSelected: !cellIsSelected, indexPath: indexPath)
+            
                 beginIndexPath = indexPath
                 selectedOriginallyIndexPaths = indexPathsForSelectedItems ?? []
                 selectionMode = cellIsSelected ? .deselecting : .selecting
@@ -125,6 +125,10 @@ final class QuickSelectCollectionView: UICollectionView {
                 selectionMode = .none
             }
         case .changed:
+            guard isQuickSelectAllowed else {
+                return
+            }
+            
             /// preventing gaps in selection
             let point = gestureRecognizer.location(in: self)
             if bounds.contains(point) {
