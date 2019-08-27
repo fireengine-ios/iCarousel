@@ -241,6 +241,13 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last
     }
     
+    func popToConnectedAccountViewController() {
+        guard let controller = navigationController?.viewControllers.filter({ $0 is ConnectedAccountsViewController }).first else {
+            return
+        }
+        navigationController?.popToViewController(controller, animated: true)
+    }
+    
     func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {

@@ -195,12 +195,9 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         }
     }
     
-    private func goToConnectedAccountViewController() {
-    
-        guard let controller = navigationController?.viewControllers.filter({ $0 is ConnectedAccountsViewController }).first else {
-            return
-        }
-         navigationController?.popToViewController(controller, animated: true)
+    private func popToConnectedAccountViewController() {
+        let router = RouterVC()
+        router.popToConnectedAccountViewController()
     }
     
     private func hideBackButton() {
@@ -253,11 +250,8 @@ extension SpotifyImportedPlaylistsViewController: SpotifySortingManagerDelegate 
 extension SpotifyImportedPlaylistsViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        if isSelectionMode {
-            stopSelectionState()
-        } else {
-            goToConnectedAccountViewController()
-        }
+        
+        isSelectionMode ? stopSelectionState() : popToConnectedAccountViewController()
     }
     
     func onMore(_ sender: UIBarButtonItem) {
