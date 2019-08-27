@@ -72,7 +72,6 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        hideJobStatusLabel()
         service.getSpotifyStatus { response in
             switch response {
             case .success(let response):
@@ -130,8 +129,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
     
     private func setConnectConditionWithModifyDate(section: Section, username: String?, jobStatus: Date?) {
-        hideJobStatusLabel()
         guard let jobStatus = jobStatus else {
+            hideJobStatusLabel()
             return
         }
         
