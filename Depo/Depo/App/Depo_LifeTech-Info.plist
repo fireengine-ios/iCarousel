@@ -121,6 +121,8 @@
 	<string></string>
 	<key>NSContactsUsageDescription</key>
 	<string>To backup your contacts to lifebox</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>To offer campaigns specific to you</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
