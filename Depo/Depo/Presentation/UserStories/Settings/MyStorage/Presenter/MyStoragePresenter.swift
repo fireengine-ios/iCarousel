@@ -40,7 +40,7 @@ final class MyStoragePresenter {
         displayableOffers = []
         
         view?.startActivityIndicator()
-        interactor.getAllOffers(with: accountType)
+        interactor.getAllOffers()
     }
     
     //MARK: - UtilityMethods
@@ -107,10 +107,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         if let accountTypeString = accountInfo.accountType {
             accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
         }
+        
         if accountType == .all {
             view?.showRestoreButton()
         }
-        interactor.getAllOffers(with: accountType)
+        
+        interactor.getAllOffers()
     }
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
