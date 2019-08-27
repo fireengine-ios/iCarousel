@@ -2811,6 +2811,8 @@
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
 		8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
+		8C8E934923155098000242E9 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
+		8C8E934A23155098000242E9 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
 		8C975E13220DA24300AC3502 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
 		8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
@@ -20094,6 +20096,7 @@
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
 				CE85CFAD225E07FC009E4D11 /* UpdatePasswordErrors.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
+				8C8E934923155098000242E9 /* SpotifyAccountConnectionCell.swift in Sources */,
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
 				FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */,
 				8C0E8E541FDEBDFF00789C91 /* ActivityTimelineSectionsBuider.swift in Sources */,
@@ -23081,6 +23084,7 @@
 				CE784AF822A685FB00662219 /* FilterPhotoCard.swift in Sources */,
 				CE784AF922A685FB00662219 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				CE784AFA22A685FB00662219 /* FaceImageItemsPresenter.swift in Sources */,
+				8C8E934A23155098000242E9 /* SpotifyAccountConnectionCell.swift in Sources */,
 				989BDE4E22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				CE784AFB22A685FB00662219 /* CheckBoxView.swift in Sources */,
 				CE784AFC22A685FB00662219 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
