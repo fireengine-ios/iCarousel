@@ -33,6 +33,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
+    private var isSelectionMode = false
     
     private var sortedRule: SortedRules = .timeUp {
         didSet {
@@ -46,7 +47,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navbarManager.setDefaultState()
+        setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()
         loadNextPage()
@@ -151,16 +152,20 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     // MARK: - Selection State
     
     private func startSelectionState() {
+        isSelectionMode = true
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
     }
     
     private func stopSelectionState() {
-        navigationItem.hidesBackButton = false
+        isSelectionMode = false
+        hideBackButton()
         dataSource.cancelSelection()
-        navbarManager.setDefaultState()
+
+        setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
+        setMoreButton()
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -172,6 +177,34 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         } else {
             bottomBarManager.show()
             collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
+        }
+    }
+    
+    private func setMoreButton() {
+        if dataSource.allItems.isEmpty {
+            navbarManager.setMoreButton(isEnabled: false)
+        }
+    }
+    
+    private func setDefaultState() {
+        if navigationController?.viewControllers.contains(where: { $0 is ConnectedAccountsViewController }) ?? false {
+            // Default state for connected accounts flow and setting back button
+            navbarManager.setDefaultStateForConnectedAccountFlow()
+        } else {
+            navbarManager.setDefaultState()
+        }
+    }
+    
+    private func popToConnectedAccountViewController() {
+        let router = RouterVC()
+        router.popToConnectedAccountViewController()
+    }
+    
+    private func hideBackButton() {
+        if navigationController?.viewControllers.contains(where: { $0 is ConnectedAccountsViewController }) ?? false {
+            navigationItem.hidesBackButton = true
+        } else {
+            navigationItem.hidesBackButton = false
         }
     }
 }
@@ -217,7 +250,8 @@ extension SpotifyImportedPlaylistsViewController: SpotifySortingManagerDelegate 
 extension SpotifyImportedPlaylistsViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        stopSelectionState()
+        
+        isSelectionMode ? stopSelectionState() : popToConnectedAccountViewController()
     }
     
     func onMore(_ sender: UIBarButtonItem) {

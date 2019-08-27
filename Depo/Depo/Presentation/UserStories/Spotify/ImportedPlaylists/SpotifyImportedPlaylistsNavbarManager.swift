@@ -32,6 +32,10 @@ class SpotifyImportedPlaylistsNavbarManager {
                                                     target: self,
                                                     action: #selector(onSearch))
     
+    private lazy var backButton = BackButtonItem { [weak self] in
+        self?.onCancel()
+    }
+    
     // MARK: -
     
     required init(delegate: (SpotifyImportedPlaylistsNavbarManagerDelegate & UIViewController)?) {
@@ -42,6 +46,13 @@ class SpotifyImportedPlaylistsNavbarManager {
         moreButton.isEnabled = true
         delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
         delegate?.setLeftBarButtonItems(nil, animated: true)
+        delegate?.setRightBarButtonItems([moreButton, searchButton], animated: true)
+    }
+    
+    func setDefaultStateForConnectedAccountFlow() {
+        moreButton.isEnabled = true
+        delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
+        delegate?.setLeftBarButtonItems([backButton], animated: true)
         delegate?.setRightBarButtonItems([moreButton, searchButton], animated: true)
     }
     
