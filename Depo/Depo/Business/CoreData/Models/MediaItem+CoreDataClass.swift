@@ -226,6 +226,16 @@ public class MediaItem: NSManagedObject {
         
         trimmedLocalFileID = localFileID
     }
+    
+    private func isThumbnailMissing() -> Bool {
+        return metadata?.smalURl == nil && metadata?.mediumUrl == nil
+    }
+    
+    func moveToMissingDatesIfNeeded() {
+        if isThumbnailMissing() {
+            sortingDate = nil
+        }
+    }
 }
 
 //MARK: - relations

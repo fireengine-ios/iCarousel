@@ -201,6 +201,7 @@ final class MediaItemOperationsService {
                     relatedRemotes.forEach {
                         $0.relatedLocal = nil
                         $0.localFileID = nil
+                        $0.moveToMissingDatesIfNeeded()
                     }
                 }
                 context.delete(object)
@@ -543,7 +544,6 @@ final class MediaItemOperationsService {
             return
         }
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
-        
     }
     
     
@@ -677,6 +677,7 @@ final class MediaItemOperationsService {
                 let relatedRemotes = mediaItems.compactMap { Array($0.relatedRemotes) as? Array<MediaItem>}.joined()
                 relatedRemotes.forEach {
                     $0.localFileID = nil
+                    $0.moveToMissingDatesIfNeeded()
                 }
                 
                 LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
