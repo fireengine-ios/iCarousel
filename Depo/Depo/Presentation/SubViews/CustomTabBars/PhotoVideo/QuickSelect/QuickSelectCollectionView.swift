@@ -34,7 +34,6 @@ final class QuickSelectCollectionView: UICollectionView {
     weak var longPressDelegate: QuickSelectCollectionViewDelegate?
     
     var isQuickSelectAllowed = false
-    private var isDelegateNotifiedAboutBegan = false
     private(set) var isQuickSelecting = false
     
     private var selectionMode: SelectionMode = .none
@@ -114,12 +113,8 @@ final class QuickSelectCollectionView: UICollectionView {
         switch gestureRecognizer.state {
         case .began:
             if let indexPath = pointedIndexPath, let cellIsSelected = cellForItem(at: indexPath)?.isSelected {
-                if !isDelegateNotifiedAboutBegan {
-                    longPressDelegate?.didLongPress(at: pointedIndexPath)
-                    isDelegateNotifiedAboutBegan = true
-                }
-                
                 isQuickSelecting = isQuickSelectAllowed
+                longPressDelegate?.didLongPress(at: pointedIndexPath)
                 
                 setItem(isSelected: !cellIsSelected, indexPath: indexPath)
             
@@ -145,7 +140,6 @@ final class QuickSelectCollectionView: UICollectionView {
         default:
             isQuickSelecting = false
             longPressDelegate?.didEndLongPress(at: pointedIndexPath)
-            isDelegateNotifiedAboutBegan = false
             shouldAutoScroll = false
             beginIndexPath = nil
             lastAffectedRange = nil
