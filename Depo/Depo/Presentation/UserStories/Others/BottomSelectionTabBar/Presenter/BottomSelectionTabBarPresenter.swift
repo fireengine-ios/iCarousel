@@ -63,32 +63,26 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                       style: config.style,
                       items: itemTupple)
     }
-    
+
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        if originalConfig.elementsConfig.contains(.sync), originalConfig.elementsConfig.contains(.download), originalConfig.elementsConfig.contains(.delete) {
+        if let downloadIndex = originalConfig.elementsConfig.index(of: .download),
+            let syncIndex = originalConfig.elementsConfig.index(of: .sync),
+            let deleteIndex = originalConfig.elementsConfig.index(of: .delete) {
             
-            let downloadIndex = originalConfig.elementsConfig.index(of: .download)
-            let syncIndex = originalConfig.elementsConfig.index(of: .sync)
-            let deleteIndex = originalConfig.elementsConfig.index(of: .delete)
-            
-            view.disableItems(atIntdex: [downloadIndex!, syncIndex!])
+            view.disableItems(at: [downloadIndex, syncIndex, deleteIndex])
 //            if items.count < 1 {
 //                view.disableItems(atIntdex: [downloadIndex!, syncIndex!])
 //                return
 //            }
             
-            items.forEach({
-                if $0.isLocalItem == true {
-                    view.enableIems(atIndex: [syncIndex!])
-                } else {
-                    view.enableIems(atIndex: [downloadIndex!])
-                }
-            })
             if items.contains(where: { $0.isLocalItem != true }) {
-                view.enableIems(atIndex: [deleteIndex!])
-            } else {
-                view.disableItems(atIntdex: [deleteIndex!])
+                view.enableItems(at: [deleteIndex, downloadIndex])
             }
+            
+            if items.contains(where: { $0.isLocalItem == true }) {
+                view.enableItems(at: [syncIndex])
+            }
+            
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  MailVereficationViewController.swift
+//  MailVerificationViewController.swift
 //  Depo_LifeTech
 //
 //  Created by Aleksandr on 11/30/17.

@@ -11,7 +11,12 @@ import UIKit
 final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabBarProtocol {
     /// analog CreateStorySelectionController with fix array of WrapData
     
-    private var selectionState = PhotoSelectionState.selecting
+    private var selectionState = PhotoSelectionState.selecting {
+        didSet {
+            limitLabel.isHidden = (selectionState == .selecting)
+        }
+    }
+    
     private let selectingLimit = NumericConstants.createStoryImagesCountLimit
     
     private var photos = [WrapData]()
@@ -57,6 +62,23 @@ final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabB
         button.isHidden = true
         button.addTarget(self, action: #selector(openStorySetup), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var limitLabel: InsetsLabel = {
+        let label = InsetsLabel()
+        label.text = String(format: TextConstants.instapickSelectionAnalyzesLeftMax, selectingLimit)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = ColorConstants.darkBlueColor
+        label.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
+        let edgeInset: CGFloat = Device.isIpad ? 90 : 15
+        label.insets = UIEdgeInsets(top: 5, left: edgeInset, bottom: 5, right: edgeInset)
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        label.isHidden = true
+        return label
     }()
     
     // MARK: - Init
@@ -119,6 +141,17 @@ final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabB
         continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
         continueButton.heightAnchor.constraint(equalToConstant: 54).activate()
         continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 206).activate()
+        
+        view.addSubview(limitLabel)
+        limitLabel.translatesAutoresizingMaskIntoConstraints = false
+        limitLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
+                                           constant: Device.isIpad ? -20 : 0).activate()
+        if Device.isIpad {
+            limitLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        } else {
+            limitLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14).activate()
+            limitLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14).activate()
+        }
     }
     
     private func updateItemSize() {

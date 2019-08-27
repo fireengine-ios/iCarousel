@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>d2.26.7</string>
+	<string>28.2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -120,7 +120,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>To backup your contacts to lifebox</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

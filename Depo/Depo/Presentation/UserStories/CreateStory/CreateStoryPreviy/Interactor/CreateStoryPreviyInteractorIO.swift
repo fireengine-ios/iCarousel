@@ -16,7 +16,7 @@ protocol CreateStoryPreviewInteractorInput: class {
 }
 
 protocol CreateStoryPreviewInteractorOutput: class {
-    func startShowVideoFromResponce(responce: CreateStoryResponce)
+    func startShowVideoFromResponse(response: CreateStoryResponse)
     func storyCreated()
     func storyCreatedWithError()
 }

@@ -8,7 +8,19 @@
 
 import UIKit
 
+protocol SpotifyStatusViewDelegate: class {
+    
+    func onViewTap()
+    
+}
+
 final class SpotifyStatusView: UIView, NibInit {
+    
+    enum State {
+        case empty
+        case inProgress
+        case finished(_ date: Date)
+    }
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -33,15 +45,59 @@ final class SpotifyStatusView: UIView, NibInit {
     }()
     
     private lazy var service: SpotifyRoutingService = factory.resolve()
+    private var status: SpotifyStatus?
     
-    func setup(with status: SpotifyStatus) {
-        if status.jobStatus == .pending || status.jobStatus == .running {
-            subtitleLabel.text = TextConstants.Spotify.Card.importing
-        } else if let date = status.lastModifiedDate {
-            let textString = dateFormatter.string(from: date)
-            subtitleLabel.text = String(format: TextConstants.Spotify.Card.lastUpdate, textString)
-        } else {
-            subtitleLabel.text = ""
+    weak var delegate: SpotifyStatusViewDelegate?
+    var state: State = .empty {
+        didSet {
+            switch state {
+            case .empty:
+                subtitleLabel.text = ""
+            case .inProgress:
+                subtitleLabel.text = TextConstants.Spotify.Card.importing
+            case .finished(let date):
+                let dateString = dateFormatter.string(from: date)
+                subtitleLabel.text = String(format: TextConstants.Spotify.Card.lastUpdate, dateString)
+            }
         }
     }
+
+    // MARK: Public methods
+    
+    func setStatus(_ status: SpotifyStatus?) {
+        self.status = status
+        processStatus()
+    }
+    
+    func importSendToBackground() {
+        state = .inProgress
+    }
+    
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) {
+        if let date = newStatus.lastModifiedDate {
+            state = .finished(date)
+        }
+    }
+    
+    // MARK: Private methods
+    
+    private func processStatus() {
+        if let status = status {
+            switch status.jobStatus {
+            case .unowned, .failed:
+                subtitleLabel.text = ""
+            case .pending, .running:
+                state = .inProgress
+            case .finished, .cancelled:
+                if let date = status.lastModifiedDate {
+                    state = .finished(date)
+                }
+            }
+        }
+    }
+
+    @IBAction private func onViewTap(_ sender: Any) {
+        delegate?.onViewTap()
+    }
+    
 }

@@ -286,20 +286,20 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: error.description)
     }
     
-    func captchaRequred(requred: Bool) {
+    func captchaRequired(required: Bool) {
         asyncOperationSuccess()
 
-        if requred {
+        if required {
             captchaShowed = true
             view.showCaptcha()
         }
     }
     
-    func captchaRequredFailed() {
+    func captchaRequiredFailed() {
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed(with message: String) {
+    func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
     }
@@ -309,6 +309,8 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 }
 
+// MARK: - CaptchaViewErrorDelegate
+
 extension LoginPresenter: CaptchaViewErrorDelegate {
     
     func showCaptchaError(error: Error) {
@@ -317,7 +319,9 @@ extension LoginPresenter: CaptchaViewErrorDelegate {
     }
 }
 
-extension LoginPresenter: UpdatePhoneServiceDelegate {
+// MARK: - AccountWarningServiceDelegate
+
+extension LoginPresenter: AccountWarningServiceDelegate {
     func successedSilentLogin() {
         succesLogin()
     }

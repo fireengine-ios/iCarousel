@@ -28,7 +28,7 @@
                         <state key="normal" image="notSelected"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djo-fS-4bR">
-                        <rect key="frame" x="50" y="0.0" width="293" height="70"/>
+                        <rect key="frame" x="50" y="0.0" width="111" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sDh-4A-jk1">
                                 <rect key="frame" x="0.0" y="13" width="44" height="44"/>
@@ -38,13 +38,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-vx-EI4">
-                                <rect key="frame" x="59" y="14" width="224" height="20.5"/>
+                                <rect key="frame" x="59" y="14" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PT-2s-u8d">
-                                <rect key="frame" x="59" y="35.5" width="224" height="20.5"/>
+                                <rect key="frame" x="59" y="35.5" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -63,11 +63,10 @@
                             <constraint firstItem="aHV-vx-EI4" firstAttribute="leading" secondItem="sDh-4A-jk1" secondAttribute="trailing" constant="15" id="s1w-ir-qID"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="pgb-mv-jpJ">
-                        <rect key="frame" x="351" y="27" width="9" height="16"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_create_story" translatesAutoresizingMaskIntoConstraints="NO" id="pgb-mv-jpJ">
+                        <rect key="frame" x="344" y="23" width="16" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="C8h-1J-TZ1"/>
-                            <constraint firstAttribute="width" constant="9" id="J8x-Ne-TsT"/>
+                            <constraint firstAttribute="width" constant="16" id="2fx-pw-19X"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcR-rh-0OZ" userLabel="line">
@@ -84,7 +83,7 @@
                 <constraint firstItem="pgb-mv-jpJ" firstAttribute="centerY" secondItem="Yva-BG-lfk" secondAttribute="centerY" id="5is-3u-hJl"/>
                 <constraint firstItem="djo-fS-4bR" firstAttribute="leading" secondItem="Yva-BG-lfk" secondAttribute="leading" constant="50" id="IUE-tP-qkH"/>
                 <constraint firstItem="djo-fS-4bR" firstAttribute="top" secondItem="Yva-BG-lfk" secondAttribute="top" id="ItU-2Q-l8j"/>
-                <constraint firstItem="pgb-mv-jpJ" firstAttribute="leading" secondItem="djo-fS-4bR" secondAttribute="trailing" constant="8" id="RoL-Ah-bMp"/>
+                <constraint firstItem="pgb-mv-jpJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="djo-fS-4bR" secondAttribute="trailing" constant="8" id="RoL-Ah-bMp"/>
                 <constraint firstAttribute="trailing" secondItem="pgb-mv-jpJ" secondAttribute="trailing" constant="15" id="SOD-70-Mzu"/>
                 <constraint firstItem="zcR-rh-0OZ" firstAttribute="leading" secondItem="djo-fS-4bR" secondAttribute="leading" id="ZcG-zI-mLs"/>
                 <constraint firstAttribute="bottom" secondItem="zcR-rh-0OZ" secondAttribute="bottom" id="eMN-x7-1Lh"/>
@@ -107,7 +106,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Arrow" width="8" height="12"/>
+        <image name="arrow_create_story" width="24" height="24"/>
         <image name="notSelected" width="24" height="24"/>
     </resources>
 </document>

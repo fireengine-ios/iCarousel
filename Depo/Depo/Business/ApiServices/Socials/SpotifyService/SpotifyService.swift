@@ -9,26 +9,20 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SpotifyService: class {
-    var delegates: MulticastDelegate<SpotifyServiceDelegate> { get }
-    
+protocol SpotifyService: class {    
     func socialStatus(success: SuccessResponse?, fail: FailResponse?)
     func connect(code: String, handler: @escaping ResponseVoid)
     func disconnect(handler: @escaping ResponseVoid)
-    func start(playlistIds: [String],  handler: @escaping ResponseVoid)
+    func start(playlistIds: [String], handler: @escaping ResponseVoid)
     func stop(handler: @escaping ResponseVoid)
     func getAuthUrl(handler: @escaping ResponseHandler<URL>)
     func getStatus(handler: @escaping ResponseHandler<SpotifyStatus>)
     func getPlaylists(page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyPlaylist]>)
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>)
-}
-
-protocol SpotifyServiceDelegate: class {
-    func importDidComplete()
-    func importDidFailed(error: Error)
-    func importDidCanceled()
-    func sendImportToBackground()
-    func spotifyStatusDidChange()
+    func getImportedPlaylists(sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyPlaylist]>)
+    func getImportedPlaylistTracks(playlistId: Int, sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>)
+    func deletePlaylists(playlistIds: [Int], handler: @escaping ResponseVoid)
+    func deletePlaylistTracks(trackIds: [Int], handler: @escaping ResponseVoid)
 }
 
 final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
@@ -39,7 +33,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     
     private let sessionManager: SessionManager
     private var importTask: DataRequest?
-    var delegates = MulticastDelegate<SpotifyServiceDelegate>()
     
     required init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
@@ -81,14 +74,12 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
                     .responseData { [weak self] response in
                         switch response.result {
                         case .success(_):
-                            self?.delegates.invoke(invocation: { $0.importDidComplete() })
                             handler(.success(()))
                         case .failure(let error):
                             //import is not cancelled
                             guard self?.importTask != nil else {
                                 return
                             }
-                            self?.delegates.invoke(invocation: { $0.importDidFailed(error: error) })
                             handler(.failed(error))
                         }
                         
@@ -99,8 +90,6 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     func stop(handler: @escaping ResponseVoid) {
         importTask?.cancel()
         importTask = nil
-        
-        delegates.invoke(invocation: { $0.importDidCanceled() })
         
         sessionManager
             .request(RouteRequests.Spotify.stop, method: .post)
@@ -155,57 +144,108 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     }
     
     func getPlaylists(page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyPlaylist]>) {
+        let path = RouteRequests.Spotify.playlists
         sessionManager
-            .request(RouteRequests.Spotify.playlists,
+            .request(path,
                      parameters: ["page": page,
                                   "size": size],
                      encoding: URLEncoding.default)
             .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
-                    guard let playlists = json.array?.compactMap({ SpotifyPlaylist(json: $0) }) else {
-                        let error = CustomErrors.serverError("\(RouteRequests.Spotify.playlists) not [SpotifyPlaylist] in response")
-                        assertionFailure(error.localizedDescription)
-                        handler(.failed(error))
-                        return
-                    }
-
-                    handler(.success(playlists))
-                case .failure(let error):
-                    let backendError = ResponseParser.getBackendError(data: response.data,
-                                                                      response: response.response)
-                    handler(.failed(backendError ?? error))
-                }
+            .responseData { [weak self] response in
+                self?.parse(response, path: path, handler: handler)
             }
     }
     
     func getPlaylistTracks(playlistId: String, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>) {
+        let path = RouteRequests.Spotify.tracks
         sessionManager
-            .request(RouteRequests.Spotify.tracks,
+            .request(path,
                      parameters: ["playlistId": playlistId,
                                   "page": page,
                                   "size": size],
                      encoding: URLEncoding.default)
             .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
-                    guard let tracks = json.array?.compactMap({ SpotifyTrack(json: $0) }) else {
-                        let error = CustomErrors.serverError("\(RouteRequests.Spotify.tracks) not [SpotifyTrack] in response")
-                        assertionFailure(error.localizedDescription)
-                        handler(.failed(error))
-                        return
-                    }
-                    
-                    handler(.success(tracks))
-                case .failure(let error):
-                    let backendError = ResponseParser.getBackendError(data: response.data,
-                                                                      response: response.response)
-                    handler(.failed(backendError ?? error))
-                }
+            .responseData { [weak self] response in
+                self?.parse(response, path: path, handler: handler)
             }
+    }
+    
+    func getImportedPlaylists(sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyPlaylist]>) {
+        let path = RouteRequests.Spotify.importedPlaylists
+        sessionManager
+            .request(path,
+                     parameters: ["sortBy": sortTypeString(from: sortBy),
+                                  "sortOrder": sortOrder.description,
+                                  "page": page,
+                                  "size": size],
+                     encoding: URLEncoding.default)
+            .customValidate()
+            .responseData { [weak self] response in
+                self?.parse(response, path: path, handler: handler)
+        }
+    }
+    
+    func getImportedPlaylistTracks(playlistId: Int, sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping ResponseHandler<[SpotifyTrack]>) {
+        let path = RouteRequests.Spotify.importedTracks
+        sessionManager
+            .request(path,
+                     parameters: ["playlistId": playlistId,
+                                  "sortBy": sortTypeString(from: sortBy),
+                                  "sortOrder": sortOrder.description,
+                                  "page": page,
+                                  "size": size],
+                     encoding: URLEncoding.default)
+            .customValidate()
+            .responseData { [weak self] response in
+                self?.parse(response, path: path, handler: handler)
+        }
+    }
+    
+    func deletePlaylists(playlistIds: [Int], handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Spotify.importedPlaylists,
+                     method: .delete,
+                     parameters: playlistIds.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
+    func deletePlaylistTracks(trackIds: [Int], handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Spotify.importedTracks,
+                     method: .delete,
+                     parameters: trackIds.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
+    // MARK: - Helper
+    
+    private func parse<T: SpotifyObject>(_ response: DataResponse<Data>, path: URL, handler: @escaping ResponseHandler<[T]>) {
+        switch response.result {
+        case .success(let data):
+            let json = JSON(data: data)[Keys.serverValue]
+            guard let playlists = json.array?.compactMap({ T(json: $0) }) else {
+                let error = CustomErrors.serverError("\(RouteRequests.Spotify.playlists) not [\(String(describing: T.self))] in response")
+                assertionFailure(error.localizedDescription)
+                handler(.failed(error))
+                return
+            }
+            
+            handler(.success(playlists))
+        case .failure(let error):
+            let backendError = ResponseParser.getBackendError(data: response.data,
+                                                              response: response.response)
+            handler(.failed(backendError ?? error))
+        }
+    }
+    
+    private func sortTypeString(from sortType: SortType) -> String {
+        if sortType == .size {
+            return "count"
+        }
+        return sortType.description
     }
 }

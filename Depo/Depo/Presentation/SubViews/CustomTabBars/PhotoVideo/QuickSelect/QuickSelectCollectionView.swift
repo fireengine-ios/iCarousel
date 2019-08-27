@@ -35,6 +35,7 @@ final class QuickSelectCollectionView: UICollectionView {
     
     var isQuickSelectAllowed = false
     private var isDelegateNotifiedAboutBegan = false
+    private(set) var isQuickSelecting = false
     
     private var selectionMode: SelectionMode = .none
     
@@ -118,6 +119,8 @@ final class QuickSelectCollectionView: UICollectionView {
                     isDelegateNotifiedAboutBegan = true
                 }
                 
+                isQuickSelecting = isQuickSelectAllowed
+                
                 setItem(isSelected: !cellIsSelected, indexPath: indexPath)
             
                 beginIndexPath = indexPath
@@ -140,6 +143,7 @@ final class QuickSelectCollectionView: UICollectionView {
                 shouldAutoScroll = false
             }
         default:
+            isQuickSelecting = false
             longPressDelegate?.didEndLongPress(at: pointedIndexPath)
             isDelegateNotifiedAboutBegan = false
             shouldAutoScroll = false

@@ -21,7 +21,6 @@ final class SocialAccountSectionMediator {
         self.removeConnectionCell = removeConnectionCell
     }
     
-    
     func disconnect() {
         socialConnectionCell?.disconnect()
     }

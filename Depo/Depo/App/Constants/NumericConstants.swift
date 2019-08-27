@@ -13,9 +13,9 @@ struct NumericConstants {
     
     static let maximumApiConnections = 10
     
-    static let vereficationCharacterLimit = 6
-    static let vereficationTimerLimit = 120//in seconds
-    static let maxVereficationAttempts = 3
+    static let verificationCharacterLimit = 6
+    static let verificationTimerLimit = 120//in seconds
+    static let maxVerificationAttempts = 3
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
@@ -157,10 +157,11 @@ struct NumericConstants {
     static let createStoryImagesCountLimit: Int = 20
     
     static let numberOfSelectedItemsBeforeLimits = 500
+    
+    static let spotifyStatusUpdateTimeInterval = 1.0
 }
 
 struct RequestSizeConstant {
     static let faceImageItemsRequestSize = 100
     static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
-    
 }

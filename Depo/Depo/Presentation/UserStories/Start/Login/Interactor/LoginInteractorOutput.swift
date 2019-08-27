@@ -29,9 +29,9 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
     
-    func captchaRequred(requred: Bool)
-    func captchaRequredFailed()
-    func captchaRequredFailed(with message: String)
+    func captchaRequired(required: Bool)
+    func captchaRequiredFailed()
+    func captchaRequiredFailed(with message: String)
     
     func showSupportView()
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)

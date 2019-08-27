@@ -10,7 +10,7 @@ import Foundation
 
 struct RouteRequests {
     
-    private enum ServerEnvironment {
+    enum ServerEnvironment {
         case test
         case preProduction
         case production
@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -79,7 +79,7 @@ struct RouteRequests {
     static let resendVerificationSMS = "verify/sendVerificationSMS"
     
     static let forgotPassword = "account/forgotPassword"
-    static let mailVerefication = "verify/sendVerificationEmail"
+    static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
     static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
@@ -122,7 +122,7 @@ struct RouteRequests {
     
     static let captcha = "captcha/%@/%@"
     
-    static let captchaRequred = "captcha/required"
+    static let captchaRequired = "captcha/required"
     
     // MARK: Search
     
@@ -194,16 +194,18 @@ struct RouteRequests {
         static let authorizeUrl = spotifyApi +/ "authorizeUrl"
         static let status = spotifyApi +/ "status"
         static let playlists = spotifyApi +/ "playlist"
-        static let tracks = spotifyApi +/ "playlist/track"
+        static let tracks = playlists +/ "track"
+        static let importedPlaylists = spotifyApi +/ "provider/playlist"
+        static let importedTracks = importedPlaylists +/ "track"
     }
     
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
         #if LIFEBOX
-            let jsonName = "update_ios.json"
+            let jsonName = "download/update_ios.json"
         #elseif LIFEDRIVE
-            let jsonName = "update_lifedrive_ios.json"
+            let jsonName = "download/update_lifedrive_ios.json"
         #else
             let jsonName = "unknown"
             debugPrint("⚠️: unknown turkcell updater url")

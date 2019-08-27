@@ -8,13 +8,11 @@
 
 import Foundation
 
-protocol SpotifyPlaylistsNavbarManagerDelegate: class {
+protocol NavbarManagerDelegate: class {
     func onCancel()
-    func onSelectAll()
-    func onDone()
 }
 
-extension SpotifyPlaylistsNavbarManagerDelegate where Self: UIViewController {
+extension NavbarManagerDelegate where Self: UIViewController {
     
     func setTitle(_ title: String) {
         navigationItem.title = title
@@ -29,6 +27,11 @@ extension SpotifyPlaylistsNavbarManagerDelegate where Self: UIViewController {
         navigationItem.rightBarButtonItems = nil
         navigationItem.setRightBarButtonItems(items, animated: animated)
     }
+}
+
+protocol SpotifyPlaylistsNavbarManagerDelegate: NavbarManagerDelegate {
+    func onSelectAll()
+    func onDone()
 }
 
 final class SpotifyPlaylistsNavbarManager {
@@ -70,8 +73,12 @@ final class SpotifyPlaylistsNavbarManager {
     
     func setSuccessImportState() {
         delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
-        delegate?.setLeftBarButtonItems([UIBarButtonItem()], animated: false)
+        delegate?.setLeftBarButtonItems(nil, animated: true)
         delegate?.setRightBarButtonItems([doneAsBackButton], animated: true)
+    }
+    
+    func setSelectAll(isEnabled: Bool) {
+        selectAllButton.isEnabled = isEnabled
     }
     
     func changeSelectionItems(count: Int) {

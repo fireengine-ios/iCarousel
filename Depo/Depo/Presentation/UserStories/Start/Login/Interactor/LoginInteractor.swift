@@ -32,7 +32,7 @@ class LoginInteractor: LoginInteractorInput {
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
     private let storageVars: StorageVars
     
-    private var updatePhoneService: UpdatePhoneService?
+    private var accountWarningService: AccountWarningService?
 
     private var rememberMe: Bool = true
     
@@ -333,34 +333,34 @@ class LoginInteractor: LoginInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
-                self?.output?.captchaRequred(requred: boolResult)
+                self?.output?.captchaRequired(required: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
-                    self?.output?.captchaRequredFailed(with: error.description)
+                    self?.output?.captchaRequiredFailed(with: error.description)
                 } else {
-                    self?.output?.captchaRequredFailed()
+                    self?.output?.captchaRequiredFailed()
                 }
             }
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
-//                self?.output?.captchaRequredFailed()
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
+//                self?.output?.captchaRequiredFailed()
 //                return
 //            }
-//            self?.output?.captchaRequred(requred: succesResponse.captchaRequred)
+//            self?.output?.captchaRequired(required: succesResponse.captchaRequired)
 //        }) { [weak self] errorResponse in
-//            self?.output?.captchaRequredFailed()
+//            self?.output?.captchaRequiredFailed()
 //        }
     }
     
-    func updateEmptyPhone(delegate: UpdatePhoneServiceDelegate) {
-        updatePhoneService = UpdatePhoneService(delegate: delegate)
-        updatePhoneService?.start()
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
+        accountWarningService = AccountWarningService(delegate: delegate)
+        accountWarningService?.start()
     }
     
     func stopUpdatePhone() {
-        updatePhoneService?.stop()
+        accountWarningService?.stop()
     }
     
 }

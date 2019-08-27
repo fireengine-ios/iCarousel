@@ -1013,3 +1013,4 @@
 
 /*Settings page*/
 "Permissions" = "İzinler";
+"NSContactsUsageDescription" = "lifebox'un rehberine erişip yedeklemesi için kontaklarını lifebox sunucularına yüklemesi gerekir.";

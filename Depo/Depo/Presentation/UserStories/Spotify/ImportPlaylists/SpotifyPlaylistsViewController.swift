@@ -26,6 +26,15 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     }
     @IBOutlet private weak var collectionViewTopOffset: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var noPlaylistsView: UIView!
+    @IBOutlet private weak var noPlaylistsLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.Spotify.Playlist.noPlaylists
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        }
+    }
+    
     @IBOutlet private weak var importButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.Spotify.Playlist.importButton, for: .normal)
@@ -43,12 +52,15 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         let dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
         dataSource.canChangeSelectionState = false
         dataSource.isSelectionStateActive = true
+        dataSource.isHeaderless = true
+        dataSource.selectionFullCell = false
         return dataSource
     }()
     private lazy var navbarManager = SpotifyPlaylistsNavbarManager(delegate: self)
     
     private lazy var router = RouterVC()
     
+    private lazy var routingService: SpotifyRoutingService = factory.resolve()
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private var page = 0
     private let pageSize = 20
@@ -59,17 +71,18 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     // MARK: - View lifecycle
     
     deinit {
-        spotifyService.delegates.remove(self)
+        routingService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         collectionView.contentInset.bottom = gradientView.bounds.height
         navbarManager.setSelectionState()
         loadNextPage()
         
-        spotifyService.delegates.add(self)
+        routingService.delegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +113,14 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+            self.updateEmptyView()
         }
+    }
+    
+    private func updateEmptyView() {
+        let isEmpty = dataSource.allItems.isEmpty
+        noPlaylistsView.isHidden = !isEmpty
+        navbarManager.setSelectAll(isEnabled: !isEmpty)
     }
     
     private func selectedItemsCountChange(with count: Int) {
@@ -121,6 +141,10 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
 
 extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     
+    func canShowDetails() -> Bool {
+        return dataSource.isSelectionStateActive
+    }
+    
     func onSelect(item: SpotifyObject) {
         guard let playlist = item as? SpotifyPlaylist else {
             return
@@ -135,6 +159,8 @@ extension SpotifyPlaylistsViewController: SpotifyCollectionDataSourceDelegate {
     func didChangeSelectionCount(newCount: Int) {
         selectedItemsCountChange(with: newCount)
     }
+    
+    func onStartSelection() { }
 }
 
 // MARK: - SpotifyPlaylistsNavbarManagerDelegate
@@ -154,9 +180,9 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
     }
 }
 
-// MARK: - SpotifyServiceDelegate
+// MARK: - SpotifyRoutingServiceDelegate
 
-extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
+extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
@@ -171,8 +197,7 @@ extension SpotifyPlaylistsViewController: SpotifyServiceDelegate {
         view.layoutIfNeeded()
     }
     
-    func sendImportToBackground() {}
-    func importDidCanceled() {}
-    func importDidFailed(error: Error) {}
-    func spotifyStatusDidChange() {}
+    func importDidCanceled(){ }
+    func spotifyStatusDidChange(_ newStatus: SpotifyStatus) { }
+    func importSendToBackground() { }
 }

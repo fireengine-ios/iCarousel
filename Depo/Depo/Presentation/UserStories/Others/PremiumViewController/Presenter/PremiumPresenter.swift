@@ -115,7 +115,12 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(allFeatures: [PackageModelResponse]) {
         feature = allFeatures.first(where: { feature in
-            return feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+            var isShouldPass = feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+            if accountType == .turkcell {
+                isShouldPass = isShouldPass && feature.featureType == .appleFeature
+            }
+
+            return isShouldPass
         })
         
         guard let neededFeature = feature else {
@@ -142,7 +147,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
         optInVC?.stopLoading()
-        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
         optInVC?.hideResendButton()

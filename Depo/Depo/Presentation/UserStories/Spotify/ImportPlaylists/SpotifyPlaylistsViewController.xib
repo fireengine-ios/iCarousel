@@ -16,6 +16,8 @@
                 <outlet property="collectionViewTopOffset" destination="sPQ-V9-DdF" id="XMW-1a-U6g"/>
                 <outlet property="gradientView" destination="zbs-pk-Dsx" id="IQk-cS-RmD"/>
                 <outlet property="importButton" destination="tSE-yc-5fn" id="fkE-V3-hWt"/>
+                <outlet property="noPlaylistsLabel" destination="EVZ-Fz-ZhT" id="bp5-aK-1Wk"/>
+                <outlet property="noPlaylistsView" destination="274-sj-MZH" id="1V5-9w-eEe"/>
                 <outlet property="successImportLabel" destination="sAZ-CD-eKw" id="Kq3-Kr-x5Z"/>
                 <outlet property="successImportView" destination="J7f-oP-229" id="gGc-Z5-nfA"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wlU-K2-uel"/>
@@ -87,11 +89,40 @@
                         <action selector="importSelected:" destination="-1" eventType="touchUpInside" id="aau-Ci-xqE"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="274-sj-MZH">
+                    <rect key="frame" x="16" y="277.5" width="343" height="112"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageNoMusics" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-zr-Yge">
+                            <rect key="frame" x="123.5" y="0.0" width="96" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="96" id="Bfv-iw-OeV"/>
+                                <constraint firstAttribute="width" constant="96" id="vEa-rC-6ZM"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVZ-Fz-ZhT">
+                            <rect key="frame" x="8" y="112" width="327" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="EVZ-Fz-ZhT" secondAttribute="trailing" constant="8" id="7LW-JQ-U7y"/>
+                        <constraint firstItem="Nj1-zr-Yge" firstAttribute="top" secondItem="274-sj-MZH" secondAttribute="top" id="ZrM-CT-LT5"/>
+                        <constraint firstItem="EVZ-Fz-ZhT" firstAttribute="leading" secondItem="274-sj-MZH" secondAttribute="leading" constant="8" id="auW-SP-c2e"/>
+                        <constraint firstAttribute="bottom" secondItem="EVZ-Fz-ZhT" secondAttribute="bottom" id="hrK-Vs-kuG"/>
+                        <constraint firstItem="Nj1-zr-Yge" firstAttribute="centerX" secondItem="274-sj-MZH" secondAttribute="centerX" id="jUo-SI-DjY"/>
+                        <constraint firstItem="EVZ-Fz-ZhT" firstAttribute="top" secondItem="Nj1-zr-Yge" secondAttribute="bottom" constant="16" id="nQp-iZ-ePW"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="tSE-yc-5fn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Bog-Fp-JLl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="274-sj-MZH" secondAttribute="trailing" constant="16" id="DBA-3Z-wEU"/>
+                <constraint firstItem="274-sj-MZH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="F4M-wQ-aOj"/>
                 <constraint firstItem="zbs-pk-Dsx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="G5H-nC-Jpb"/>
+                <constraint firstItem="274-sj-MZH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="JYV-WM-jV8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2cB-kG-ROb" secondAttribute="trailing" id="PGo-tB-Hpb"/>
                 <constraint firstItem="J7f-oP-229" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="QAw-91-bik"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zbs-pk-Dsx" secondAttribute="bottom" id="VGF-5b-hqX"/>
@@ -109,6 +140,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ImageNoMusics" width="96" height="72"/>
         <image name="import_success_back" width="375" height="155"/>
         <image name="spotify_checkmark" width="57" height="41"/>
     </resources>

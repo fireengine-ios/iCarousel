@@ -202,7 +202,7 @@ extension AnalyticsService: AnalyticsGA {
         group.notify(queue: privateQueue) { 
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
-                service: "Lifebox", developmentVersion: version,
+                service: TextConstants.NotLocalized.GAappName, developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 facialRecognition: facialRecognitionStatus,
@@ -221,17 +221,32 @@ extension AnalyticsService: AnalyticsGA {
         let analyticasItemList = "Turkcell Package"
         var itemID = ""
         var price = ""
+        
         if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
             itemID = "\(offerIDUnwraped)"
             price = "\(unwrapedPrice)"
         }
         
-        let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
-                                           transactionID: "", tax: "0",
-                                           priceValue: price, shipping: "0")
+        let product = AnalyticsPackageProductObject(itemName: offer.name ?? "",
+                                                    itemID: itemID,
+                                                    price: price,
+                                                    itemBrand: "Lifebox",
+                                                    itemCategory: "Storage",
+                                                    itemVariant: "",
+                                                    index: "\(packageIndex)",
+                                                    quantity: "1")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false) { dimentionParametrs in
+        let ecommerce = AnalyticsEcommerce(items: [product],
+                                           itemList: analyticasItemList,
+                                           transactionID: "",
+                                           tax: "0",
+                                           priceValue: price,
+                                           shipping: "0")
+        
+        prepareDimentionsParametrs(screen: nil,
+                                   downloadsMetrics: nil,
+                                   uploadsMetrics: nil,
+                                   isPaymentMethodNative: false) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
@@ -240,14 +255,30 @@ extension AnalyticsService: AnalyticsGA {
         let analyticasItemList = "In App Package"
         let itemID = product.productIdentifier
         let price = product.localizedPrice
-        let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle, itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
-                                           transactionID: "", tax: "0",
-                                           priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true) { dimentionParametrs in
+        let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle,
+                                                     itemID: itemID,
+                                                     price: price,
+                                                     itemBrand: "Lifebox",
+                                                     itemCategory: "Storage",
+                                                     itemVariant: "",
+                                                     index: "\(packageIndex)",
+                                                     quantity: "1")
+        
+        let ecommerce = AnalyticsEcommerce(items: [product],
+                                           itemList: analyticasItemList,
+                                           transactionID: "",
+                                           tax: "0",
+                                           priceValue: price,
+                                           shipping: "0")
+        
+        prepareDimentionsParametrs(screen: nil,
+                                   downloadsMetrics: nil,
+                                   uploadsMetrics: nil,
+                                   isPaymentMethodNative: true) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
+        
     }
     
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {

@@ -40,6 +40,7 @@ final class VerifyEmailPopUp: UIViewController {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.textColor = ColorConstants.textOrange
             newValue.isHidden = true
+            newValue.numberOfLines = 0
         }
     }
     
@@ -126,6 +127,23 @@ final class VerifyEmailPopUp: UIViewController {
         
         activityManager.delegate = self
         
+        updateEmail()
+        
+        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
+        laterButton.isHidden = !allowSkip
+        
+        codeTextFields.forEach({
+            $0.delegate = self
+            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        })
+        
+        ///don't send code if just registered(code already sent)
+        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
+            resendCode()
+        }
+    }
+    
+    private func updateEmail() {
         guard let email = SingletonStorage.shared.accountInfo?.email else {
             assertionFailure()
             return
@@ -151,19 +169,6 @@ final class VerifyEmailPopUp: UIViewController {
         }
         
         topLabel.attributedText = attributedText
-        
-        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = !allowSkip
-        
-        codeTextFields.forEach({
-            $0.delegate = self
-            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        })
-        
-        ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
-            resendCode()
-        }
     }
     
     private func enableConfirmButtonIfNeeded() {
@@ -174,8 +179,30 @@ final class VerifyEmailPopUp: UIViewController {
         }
     }
     
-    private func dismissPopUp(completion: VoidHandler? = nil) {
-        dismiss(animated: true, completion: completion)
+    private func hidePopUp(completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.view.alpha = 0
+        }, completion: { _ in
+            self.clearCode()
+            self.errorLabel.isHidden = true
+            
+            completion?()
+        })
+        
+    }
+    
+    private func showPopUp() {
+        updateEmail()
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.view.alpha = 1
+        }
+    }
+    
+    private func dismissPopUp(animated: Bool = true) {
+        dismiss(animated: animated) {
+            self.delegate?.popUpWillDismiss()
+        }
     }
     
     private func showError(text: String) {
@@ -256,7 +283,19 @@ final class VerifyEmailPopUp: UIViewController {
     @IBAction func startEnteringCode(_ sender: Any) {
         errorLabel.isHidden = true
         
-        firstTextField.becomeFirstResponder()
+        var isTextFieldChosen = false
+        
+        for textField in codeTextFields {
+            if let text = textField.text, text.removingWhiteSpaces().isEmpty {
+                isTextFieldChosen = true
+                textField.becomeFirstResponder()
+                break
+            }
+        }
+        
+        if !isTextFieldChosen {
+            codeTextFields.last?.becomeFirstResponder()
+        }
     }
     
     
@@ -267,29 +306,30 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     @IBAction func onChangeEmailTap(_ sender: Any) {
-        dismissPopUp { [weak self] in
+        hidePopUp { [weak self] in
             let router = RouterVC()
             let controller = router.changeEmailPopUp
-            controller.delegate = self?.delegate
+            controller.completion = { [weak self] in
+                self?.showPopUp()
+            }
+            
             UIApplication.topController()?.present(controller, animated: true, completion: nil)
         }
     }
     
     @IBAction func onLaterTap(_ sender: Any) {
-        dismissPopUp { [weak self] in
-            self?.delegate?.popUpWillDismiss()
-        }
+        dismissPopUp()
     }
     
     @IBAction func onConfirmTap(_ sender: Any) {
         hideKeyboard()
-        vereficationCodeEntered()
+        verificationCodeEntered()
     }
 }
 
 //MARK: - Interactor
 extension VerifyEmailPopUp {
-    private func vereficationCodeEntered() {
+    private func verificationCodeEntered() {
         startActivityIndicator()
         
         accountService.verifyEmail(otpCode: currentSecurityCode) { [weak self] response in
@@ -298,14 +338,27 @@ extension VerifyEmailPopUp {
             switch response {
             case .success(_):
                 DispatchQueue.main.async { [weak self] in
-                    self?.dismissPopUp { [weak self] in
-                        self?.delegate?.popUpWillDismiss()
+                    self?.hidePopUp {
+                        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
+                                                            message: TextConstants.accountVerified,
+                                                            buttonTitle: TextConstants.createStoryPhotosContinue) { [weak self] in
+                                                                self?.dismissPopUp(animated: false)
+                                                                
+                        }
+                        
+                        popUp.modalPresentationStyle = .overFullScreen
+                        popUp.modalTransitionStyle = .crossDissolve
+                        
+                        UIApplication.topController()?.present(popUp, animated: true, completion: nil)
                     }
+
                 }
+                
             case .failed(let error):
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
+                    self?.enableConfirmButtonIfNeeded()
                 }
             }
         }
@@ -340,12 +393,17 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         /// if the string is empty, then when deleting, the delegate method does not work
         textField.text = " "
+        
+        ///if reenter the code we need to remove last letter
+        if currentSecurityCode.count == inputTextLimit {
+            currentSecurityCode.removeLast()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         isRemoveLetter = string.isEmpty
         
-        if string.isEmpty, !currentSecurityCode.isEmpty {
+        if isRemoveLetter, currentSecurityCode.hasCharacters {
             currentSecurityCode.removeLast()
             
             return true
@@ -367,8 +425,10 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
             currentSecurityCode.append(contentsOf: string)
             enableConfirmButtonIfNeeded()
             return true
-        } else if currentStr.count > NumericConstants.vereficationCharacterLimit {
+            
+        } else if currentStr.count > NumericConstants.verificationCharacterLimit {
             return false
+            
         }
         
         currentSecurityCode.append(contentsOf: string)

@@ -40,8 +40,8 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             group.leave()
         })
         
-        accountService.quotaInfo(success: { responce in
-            let quotaInfoResponse = responce as? QuotaInfoResponse
+        accountService.quotaInfo(success: { response in
+            let quotaInfoResponse = response as? QuotaInfoResponse
             quota = quotaInfoResponse?.bytes ?? 0
             quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
             group.leave()
@@ -50,8 +50,8 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         })
         
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            let subscriptionsResponce = response as? ActiveSubscriptionResponse
-            if let array = subscriptionsResponce?.list {
+            let subscriptionsResponse = response as? ActiveSubscriptionResponse
+            if let array = subscriptionsResponse?.list {
                 subscriptions.append(contentsOf: array)
             }
             group.leave()

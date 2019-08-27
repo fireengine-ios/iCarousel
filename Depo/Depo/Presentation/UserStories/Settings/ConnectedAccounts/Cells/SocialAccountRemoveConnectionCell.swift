@@ -13,9 +13,8 @@ protocol SocialRemoveConnectionCell: class {
     func set(username: String?)
 }
 
-
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
-
+    
     private(set) var section: Section?
     
     @IBOutlet private weak var connectedAs: UILabel! {
@@ -52,7 +51,6 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
     }
-    
     
     @IBAction func removeConnection(_ sender: Any) {
         let localizedTexts = warningTexts()

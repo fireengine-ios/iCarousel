@@ -12,7 +12,7 @@ import Alamofire
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
-typealias TwoFactorAuthResponce = (_ value: TwoFactorAuthErrorResponse) -> Void
+typealias TwoFactorAuthResponse = (_ value: TwoFactorAuthErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -239,7 +239,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.mailVerefication, relativeTo: super.patch)!
+        return URL(string: RouteRequests.mailVerification, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -293,7 +293,7 @@ class AuthenticationService: BaseRequestService {
 
     // MARK: - Login
     
-    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponce?) {
+    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
         debugLog("AuthenticationService loginUser")
         
         storageVars.currentUserID = user.login
@@ -320,15 +320,15 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
-                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                            fail?(ErrorResponse.error(error))
-                            return
-                        }
-                        
                         /// must be after accessToken save logic
                         if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
                             fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
+                        
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
                             return
                         }
                         
@@ -592,26 +592,22 @@ class AuthenticationService: BaseRequestService {
                       parameters: params,
                      encoding: JSONEncoding.default)
             .responseData { response in
+                /// if 401 or 429 server error response.result is success but data contains error
+                if response.response?.statusCode == TwoFAErrorCodes.unauthorized.rawValue
+                    || response.response?.statusCode == TwoFAErrorCodes.tooManyRequests.rawValue {
+                    let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                    handler(.failed(error))
+                    return
+                }
+                
                 switch response.result {
                 case .success(let data):
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-                        if let errorType = json?["errorCode"] as? Int {
-                            let error = ErrorResponse.string("\(errorType)")
-                            handler(.failed(error))
-                            
-                        } else {
-                            let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
-                            handler(.success(model))
-                        }
-                    } catch {
-                        handler(.failed(error))
-                    }
-                    
+                    let model = TwoFAChallengeParametersResponse(json: data, headerResponse: nil)
+                    handler(.success(model))
                 case .failure(let error):
                     handler(.failed(error))
                 }
-        }
+            }
     }
     
     func loginViaTwoFactorAuth(token: String,
@@ -653,9 +649,10 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String,
-                            emptyPhoneFlag != HeaderConstant.emptyMSISDN {
-                                handler(.failed(ErrorResponse.string(HeaderConstant.emptyMSISDN)))
+                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                            accountWarning == HeaderConstant.emptyMSISDN ||
+                            accountWarning == HeaderConstant.emptyEmail {
+                                handler(.failed(ErrorResponse.string(accountWarning)))
                                 return
                         }
                         

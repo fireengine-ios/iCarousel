@@ -34,12 +34,12 @@ final class SpotifyAuthViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSpinner()
         removeCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showSpinner()
         setupNavigation()
     }
     
@@ -99,13 +99,14 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
             if let facebookCode = spotifyCode.index(of: "&") {
-                 spotifyCode = String(spotifyCode[..<facebookCode])
+                spotifyCode = String(spotifyCode[..<facebookCode])
             }
-
             delegate?.spotifyAuthSuccess(with: spotifyCode)
             removeCache()
-            navigationController?.popViewController(animated: true)
+            
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
         }
-        decisionHandler(.allow)
     }
 }

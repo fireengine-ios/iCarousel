@@ -50,6 +50,6 @@ class NavigationController: UINavigationController {
             }
         }
         
-        return super.popViewController(animated: true)
+        return super.popViewController(animated: animated)
     }
 }

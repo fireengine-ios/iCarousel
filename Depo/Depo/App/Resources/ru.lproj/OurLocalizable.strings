@@ -545,7 +545,7 @@
 "Animation" = "Анимация";
 "We have created an animation from your photos!" = "Мы создали анимацию из ваших фото!";
 "Save Animation" = "Сохранить";
-"Delete Duplicated" = "\nДубликаты\n";
+"Delete Duplicated" = "Дубликаты";
 "Lifebox %@ and Passcode" = "Lifebox %@ и код-пароль";
 "We make easier to manage your memories with homepage" = "Мы делаем проще управление вашими воспоминаниями на домашней странице";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Вы можете перейти к недавним действиям и рекомендациям, находясь на данной странице";
@@ -1019,3 +1019,4 @@
 
 /*Settings page*/
 "Permissions" = "Права доступа";
+"NSContactsUsageDescription" = "lifebox необходим доступ и загрузка ваших контактов на серверы lifebox для резервного копирования и управления ими.";
