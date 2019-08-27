@@ -42,7 +42,7 @@ struct AnalyticsEcommerce {
     
     var ecommerceParametrs: [String: Any] {
         return [
-            AnalyticsPackageEcommerce.items.text : items.map{$0.productParametrs},
+            AnalyticsPackageEcommerce.items.text : items.map { $0.productParametrs },
             AnalyticsParameterItemList : itemList,
             AnalyticsParameterTransactionID : transactionID,
             AnalyticsParameterTax : tax,

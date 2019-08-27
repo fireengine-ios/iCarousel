@@ -1081,6 +1081,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return uuid
     }
     
+    func getFisrtUUIDPart() -> String {
+        if uuid.contains("~") {
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
     func getLocalID() -> String {
         if isLocalItem, let localID = asset?.localIdentifier {
             return localID

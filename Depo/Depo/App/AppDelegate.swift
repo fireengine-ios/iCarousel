@@ -171,6 +171,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MenloworksAppEvents.sendProfileName()
     }
     
+    func showPasscodeIfNeedInBackground() {
+        let state = UIApplication.shared.applicationState
+        if state == .background || state == .inactive {
+            showPasscodeIfNeed()
+        }
+    }
+    
     private func showPasscodeIfNeed() {
         let topVC = UIApplication.topController()
         
