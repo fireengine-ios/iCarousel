@@ -294,12 +294,12 @@ final class PackageService {
     }
     
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
-        return offers.flatMap({ offer in
+        return offers.flatMap { offer in
             let priceString: String = getPriceInfo(for: offer, accountType: accountType)
             let name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer)
-        })
+        }
     }
     
     //MARK: - Analytics
