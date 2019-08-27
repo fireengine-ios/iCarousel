@@ -39,6 +39,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     @IBOutlet private weak var connectButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named:"dropbox_button"), for: .normal)
+            newValue.setImage(UIImage(named:"dropbox_button"), for: .disabled)
         }
     }
     
