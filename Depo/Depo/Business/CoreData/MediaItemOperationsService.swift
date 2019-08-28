@@ -201,6 +201,7 @@ final class MediaItemOperationsService {
                     relatedRemotes.forEach {
                         $0.relatedLocal = nil
                         $0.localFileID = nil
+                        $0.moveToMissingDatesIfNeeded()
                     }
                 }
                 context.delete(object)
@@ -225,6 +226,7 @@ final class MediaItemOperationsService {
             guard let `self` = self else {
                 return
             }
+            
             
             let predicateForLocalFile = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == true AND (\(#keyPath(MediaItem.localFileID)) == %@ OR \(#keyPath(MediaItem.trimmedLocalFileID)) == %@)", item.getLocalID(), item.getTrimmedLocalID())
             
@@ -260,21 +262,17 @@ final class MediaItemOperationsService {
         }
     }
     
-    func updateRelatedRemoteItems(mediaItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-        guard let uuid = mediaItem.trimmedLocalFileID, let md5 = mediaItem.md5Value else {
-            return
-        }
-
-        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false", uuid, md5)
+    func updateRelationsAfterMerge(with uuid: String, localItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+        let predicateForRemoteFiles = NSPredicate(format: "uuid = %@ AND isLocalItemValue = false", uuid)
         
         executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
-            context.performAndWait {
-                alreadySavedRemoteItems.forEach({ savedItem in
-                    savedItem.relatedLocal = mediaItem
-                    mediaItem.addToRelatedRemotes(savedItem)
-                })
-                completion()
+            alreadySavedRemoteItems.forEach {
+                if $0.relatedLocal == nil {
+                    $0.relatedLocal = localItem
+                    localItem.addToRelatedRemotes($0)
+                }
             }
+            completion()
         }
     }
     
@@ -291,6 +289,13 @@ final class MediaItemOperationsService {
                             context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "trimmedLocalFileID IN %@ AND isLocalItemValue == true", trimmedLocalIDS)
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
+    func mediaItems(by localId: String,
+                            context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
+                            mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.localFileID)) = %@ AND isLocalItemValue == true", localId)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
@@ -539,7 +544,6 @@ final class MediaItemOperationsService {
             return
         }
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
-        
     }
     
     
@@ -673,6 +677,7 @@ final class MediaItemOperationsService {
                 let relatedRemotes = mediaItems.compactMap { Array($0.relatedRemotes) as? Array<MediaItem>}.joined()
                 relatedRemotes.forEach {
                     $0.localFileID = nil
+                    $0.moveToMissingDatesIfNeeded()
                 }
                 
                 LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
