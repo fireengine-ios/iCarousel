@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
+import XPush
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -68,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var watchdog: Watchdog?
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
         #if DEBUG
@@ -307,14 +308,14 @@ extension AppDelegate {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
-        MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
-        MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
+        XPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -324,7 +325,7 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+        XPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         AppEvents.logPushNotificationOpen(userInfo)
     }
@@ -332,7 +333,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         debugLog("AppDelegate didReceive")
 
-        MPush.applicationDidReceive(notification)
+        XPush.applicationDidReceive(notification)
     }
     
     //MARK: Adjust

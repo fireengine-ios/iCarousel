@@ -39,6 +39,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     @IBOutlet private weak var connectButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named:"dropbox_button"), for: .normal)
+            newValue.setImage(UIImage(named:"dropbox_button"), for: .highlighted)
             newValue.setImage(UIImage(named:"dropbox_button"), for: .disabled)
         }
     }
@@ -106,7 +107,6 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             case .failed:
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
-                delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
             }
             
         } else {
