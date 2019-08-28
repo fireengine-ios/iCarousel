@@ -11,6 +11,7 @@ import Foundation
 final class TwoFactorChallengeRouter: PhoneVerificationRouter {
     
     override func goAutoSync() {
+        ///RouterVC's present make no effect
         UIApplication.topController()?.present(router.synchronyseScreen, animated: true, completion: nil)
     }
 }
