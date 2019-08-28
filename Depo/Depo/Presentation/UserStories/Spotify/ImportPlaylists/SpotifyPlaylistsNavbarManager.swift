@@ -68,7 +68,6 @@ final class SpotifyPlaylistsNavbarManager {
     func setSelectionState() {
         delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle)
         delegate?.setLeftBarButtonItems([cancelAsBackButton], animated: true)
-        delegate?.setRightBarButtonItems([selectAllButton], animated: true)
     }
     
     func setSuccessImportState() {
