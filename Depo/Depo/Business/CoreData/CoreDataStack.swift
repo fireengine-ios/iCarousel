@@ -37,8 +37,8 @@ final class CoreDataStack {
         let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
         
         let url: ()->(URL?) = {
+            /// Use optimized model version only if iOS >= 11
             if #available(iOS 11, *) {
-                /// Use unoptimized model version if iOS < 11
                 return omoURL ?? momURL
             } else {
                 return momURL ?? omoURL
