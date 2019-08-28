@@ -2720,6 +2720,10 @@
 		8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
 		8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
+		8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
+		8C49817523165B16007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
+		8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208662228D4B60000BEDAD /* EmptyDataView.xib */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -17268,6 +17272,7 @@
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				89E51D4622CA110B007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
 				8C06B1812008AD72003D8E05 /* turuncu@2x.png in Resources */,
+				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
 				8C06AF912008AD71003D8E05 /* filtre.png in Resources */,
 				8C06AF5F2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
 				8C06B13B2008AD72003D8E05 /* tahta_yeni.png in Resources */,
@@ -18126,6 +18131,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */,
+				8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */,
 				CE784CC422A685FB00662219 /* PremiumListView.xib in Resources */,
 				CE784CC522A685FB00662219 /* lookup_amatorka.png in Resources */,
 				CE784CC622A685FB00662219 /* success_icon.png in Resources */,
@@ -18134,6 +18141,7 @@
 				CE784CC922A685FB00662219 /* InstapickAnalysisCell.xib in Resources */,
 				CE784CCA22A685FB00662219 /* extraOptions@2x.png in Resources */,
 				CE784CCB22A685FB00662219 /* HomeViewTopView.xib in Resources */,
+				8C49817523165B16007015CF /* TermsCheckboxTextView.xib in Resources */,
 				CE784CCC22A685FB00662219 /* LoginViewController.xib in Resources */,
 				CE784CCD22A685FB00662219 /* undo.png in Resources */,
 				CE784CCE22A685FB00662219 /* tik_icon@3x.png in Resources */,
