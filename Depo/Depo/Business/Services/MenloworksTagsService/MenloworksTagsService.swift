@@ -5,7 +5,7 @@
 //  Created by Raman Harhun on 2/23/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
-
+import XPush
 class MenloworksTagsService {
     
     private let reachabilityService = ReachabilityService.shared
@@ -413,7 +413,7 @@ class MenloworksTagsService {
     }
     
     func onAutosyncPhotosStatusOff() {
-        MPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
+        XPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
     }
     
     func onAutosyncPhotosStatusOn(isWifi: Bool) {
@@ -422,7 +422,7 @@ class MenloworksTagsService {
     }
     
     func onAutosyncVideosStatusOff() {
-        MPush.hitTag(MenloworksTags.NameConstants.autosyncVideosStatus, withValue: MenloworksTags.ValueConstants.off)
+        XPush.hitTag(MenloworksTags.NameConstants.autosyncVideosStatus, withValue: MenloworksTags.ValueConstants.off)
     }
     
     func onAutosyncVideosStatusOn(isWifi: Bool) {
@@ -479,9 +479,9 @@ class MenloworksTagsService {
     
     private func hitTag(_ tag: MenloworksTag) {
         if let value = tag.value {
-            MPush.hitTag(tag.name, withValue: value)
+            XPush.hitTag(tag.name, withValue: value)
         } else {
-            MPush.hitTag(tag.name)
+            XPush.hitTag(tag.name)
         }
     }
     
@@ -544,7 +544,7 @@ class MenloworksTagsService {
                     displayName = subscription.subscriptionPlanDisplayName ?? ""
                 }
                 
-                MPush.hitTag(packageName, withValue: displayName)
+                XPush.hitTag(packageName, withValue: displayName)
             }
         }) { _ in }
     }
