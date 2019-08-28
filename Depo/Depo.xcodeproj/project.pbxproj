@@ -2718,6 +2718,10 @@
 		8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
 		8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
+		8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
+		8C49817523165B16007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
+		8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208662228D4B60000BEDAD /* EmptyDataView.xib */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -3681,8 +3685,6 @@
 		C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA76EDE6C0F51A2CCD2694D /* FeedbackViewPresenter.swift */; };
 		C31A7AB8B8824DB84111E8FB /* SplashInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */; };
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
-		C3C2356C20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
-		C3C2356D20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
 		C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
 		C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
@@ -5374,7 +5376,6 @@
 		CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D81EFBDDC700E25989 /* AdSupport.framework */; };
 		CE784CA722A685FB00662219 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		CE784CA822A685FB00662219 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
-		CE784CA922A685FB00662219 /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
 		CE784CAA22A685FB00662219 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE784CAB22A685FB00662219 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		CE784CAC22A685FB00662219 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9019CAC9FE00FD1E03 /* Security.framework */; };
@@ -6764,7 +6765,6 @@
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
 		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
-		78B2D343204A94E000D096DC /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		78B2D34A204AA5F500D096DC /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		78B2D34C204AA5F500D096DC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		78B2D34E204AA5F500D096DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -8855,7 +8855,6 @@
 				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
-				C3C2356D20B6DA1B00F3FB6D /* MPush.framework in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
@@ -8986,7 +8985,6 @@
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
-				C3C2356C20B6DA1B00F3FB6D /* MPush.framework in Frameworks */,
 				CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */,
 				B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */,
 				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
@@ -9033,7 +9031,6 @@
 				CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */,
 				CE784CA722A685FB00662219 /* Photos.framework in Frameworks */,
 				CE784CA822A685FB00662219 /* Social.framework in Frameworks */,
-				CE784CA922A685FB00662219 /* MPush.framework in Frameworks */,
 				CE784CAA22A685FB00662219 /* SystemConfiguration.framework in Frameworks */,
 				CE784CAB22A685FB00662219 /* CoreBluetooth.framework in Frameworks */,
 				CE784CAC22A685FB00662219 /* Security.framework in Frameworks */,
@@ -13133,7 +13130,6 @@
 			children = (
 				B5CDB31A21787FEF006CFA50 /* TurkcellUpdaterDSK */,
 				B53DCE6620EF634800400DBA /* ContactSyncSDK */,
-				78B2D343204A94E000D096DC /* MPush.framework */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 			);
@@ -17595,6 +17591,7 @@
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				89E51D4622CA110B007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
 				8C06B1812008AD72003D8E05 /* turuncu@2x.png in Resources */,
+				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
 				8C06AF912008AD71003D8E05 /* filtre.png in Resources */,
 				8C06AF5F2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
 				8C06B13B2008AD72003D8E05 /* tahta_yeni.png in Resources */,
@@ -18523,6 +18520,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */,
+				8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */,
 				CE784CC422A685FB00662219 /* PremiumListView.xib in Resources */,
 				CE784CC522A685FB00662219 /* lookup_amatorka.png in Resources */,
 				CE784CC622A685FB00662219 /* success_icon.png in Resources */,
@@ -18531,6 +18530,7 @@
 				CE784CC922A685FB00662219 /* InstapickAnalysisCell.xib in Resources */,
 				CE784CCA22A685FB00662219 /* extraOptions@2x.png in Resources */,
 				CE784CCB22A685FB00662219 /* HomeViewTopView.xib in Resources */,
+				8C49817523165B16007015CF /* TermsCheckboxTextView.xib in Resources */,
 				CE784CCC22A685FB00662219 /* LoginViewController.xib in Resources */,
 				CE784CCD22A685FB00662219 /* undo.png in Resources */,
 				CE784CCE22A685FB00662219 /* tik_icon@3x.png in Resources */,

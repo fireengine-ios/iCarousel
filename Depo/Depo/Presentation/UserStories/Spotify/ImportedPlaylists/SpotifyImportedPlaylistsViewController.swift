@@ -23,7 +23,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     private lazy var dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
     
-    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .Largest, .Smallest]
     private lazy var sortingManager = SpotifySortingManager(sortTypes: sortTypes, delegate: self)
     private lazy var navbarManager = SpotifyImportedPlaylistsNavbarManager(delegate: self)
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
@@ -33,7 +33,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
-    private var isSelectionMode = false
     
     private var sortedRule: SortedRules = .timeUp {
         didSet {
@@ -46,8 +45,8 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setDefaultState()
+        
+        navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()
         loadNextPage()
@@ -152,17 +151,14 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     // MARK: - Selection State
     
     private func startSelectionState() {
-        isSelectionMode = true
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
     }
     
     private func stopSelectionState() {
-        isSelectionMode = false
-        hideBackButton()
+        navigationItem.hidesBackButton = false
         dataSource.cancelSelection()
-
-        setDefaultState()
+        navbarManager.setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         setMoreButton()
@@ -183,28 +179,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private func setMoreButton() {
         if dataSource.allItems.isEmpty {
             navbarManager.setMoreButton(isEnabled: false)
-        }
-    }
-    
-    private func setDefaultState() {
-        if navigationController?.viewControllers.contains(where: { $0 is ConnectedAccountsViewController }) ?? false {
-            // Default state for connected accounts flow and setting back button
-            navbarManager.setDefaultStateForConnectedAccountFlow()
-        } else {
-            navbarManager.setDefaultState()
-        }
-    }
-    
-    private func popToConnectedAccountViewController() {
-        let router = RouterVC()
-        router.popToConnectedAccountViewController()
-    }
-    
-    private func hideBackButton() {
-        if navigationController?.viewControllers.contains(where: { $0 is ConnectedAccountsViewController }) ?? false {
-            navigationItem.hidesBackButton = true
-        } else {
-            navigationItem.hidesBackButton = false
         }
     }
 }
@@ -250,8 +224,7 @@ extension SpotifyImportedPlaylistsViewController: SpotifySortingManagerDelegate 
 extension SpotifyImportedPlaylistsViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        
-        isSelectionMode ? stopSelectionState() : popToConnectedAccountViewController()
+       stopSelectionState()
     }
     
     func onMore(_ sender: UIBarButtonItem) {

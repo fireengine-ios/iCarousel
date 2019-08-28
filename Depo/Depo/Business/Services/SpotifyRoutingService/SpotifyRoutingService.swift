@@ -87,7 +87,12 @@ final class SpotifyRoutingService {
     
     func showImportedPlayLists() {
         let controller = router.spotifyImportedPlaylistsController()
-        router.pushViewController(viewController: controller)
+        self.router.pushViewController(viewController: controller)
+    }
+    
+    func showImportedPlayListsAfterImporting() {
+        let controller = router.spotifyImportedPlaylistsController()
+        router.replaceTopViewControllerWithViewController(controller)
     }
     
     private func showPlayListsForImport() {
@@ -144,12 +149,12 @@ final class SpotifyRoutingService {
                             self?.router.popViewController()
                         }
                         navigationController.dismiss(animated: true, completion: {
+                            /// not called if there were no popup
                             (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
                         })
                     }
                     
-                    func showPasscodeOrInvoke(completion: @escaping () -> Void) {
-                        
+                    func changePasscodeSuccessCompletionOrInvoke(completion: @escaping () -> Void) {
                         if let passcodeVC = UIApplication.topController() as? PasscodeEnterViewController {
                             /// background
                             let currentPasscodeVCSuccess = passcodeVC.success
@@ -163,18 +168,16 @@ final class SpotifyRoutingService {
                         }
                     }
                     
-                    showPasscodeOrInvoke {
+                    changePasscodeSuccessCompletionOrInvoke {
                         
-                        /// check for cancel popup or passcode
+                        /// check for cancel popup or import vc
                         if navigationController.presentedViewController != nil {
                             
-                            /// dismiss cancel popup or passcode
                             navigationController.dismiss(animated: true, completion: {
+                                (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
                                 
-                                /// maybe will be needed one more navigationController.dismiss.
-                                
-                                /// close spotifyImportController
-                                showPasscodeOrInvoke {
+                                /// close spotifyImportController if need
+                                changePasscodeSuccessCompletionOrInvoke {
                                     passcodeSafeCloseImportVC()
                                 }
                             })
@@ -304,6 +307,10 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
     
     func onShowImported() {
         showImportedPlayLists() 
+    }
+    
+    func onShowImportedAfterImporting() {
+        showImportedPlayListsAfterImporting()
     }
     
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
