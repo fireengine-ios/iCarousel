@@ -157,7 +157,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     private func stopSelectionState() {
         dataSource.cancelSelection()
-
+        navigationItem.hidesBackButton = false
         navbarManager.setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
