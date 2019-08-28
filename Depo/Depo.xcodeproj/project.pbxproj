@@ -653,6 +653,9 @@
 		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		87FB97AE2008CBA0000D8E2B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FB97AF2008CBAF000D8E2B /* TitleView.xib */; };
+		890DDC572316B0D70022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
+		890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
+		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F736F22EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
 		890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
@@ -6864,6 +6867,7 @@
 		87FB97AD2008CBA0000D8E2B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		87FB97AF2008CBAF000D8E2B /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
+		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
 		890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerifyEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeEmailPopUp.xib; sourceTree = "<group>"; };
@@ -11515,6 +11519,15 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		890DDC552316B0B20022F7D2 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */,
+			);
+			name = Router;
+			path = Interactor/Router;
+			sourceTree = "<group>";
+		};
 		890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -11541,6 +11554,7 @@
 			children = (
 				892B014622DF155700BCECBC /* Configurator */,
 				892B014F22DF166800BCECBC /* Presenter */,
+				890DDC552316B0B20022F7D2 /* Router */,
 				892B015422DF16EA00BCECBC /* Interactor */,
 			);
 			path = TwoFactorChallenge;
@@ -20250,6 +20264,7 @@
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
+				890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				17589F752276336800A5DB37 /* PhoneCodeInputView.swift in Sources */,
 				8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */,
@@ -21954,6 +21969,7 @@
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				984A515A21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */,
+				890DDC572316B0D70022F7D2 /* TwoFactorChallengeRouter.swift in Sources */,
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */,
@@ -23140,6 +23156,7 @@
 				CE784B2922A685FB00662219 /* UsageInfoViewController.swift in Sources */,
 				CE784B2A22A685FB00662219 /* PhotoVideoDetailViewInput.swift in Sources */,
 				CE784B2B22A685FB00662219 /* PhotoVideoDetailViewOutput.swift in Sources */,
+				890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */,
 				CE784B2C22A685FB00662219 /* PhotoVideoDetailViewController.swift in Sources */,
 				CE784B2D22A685FB00662219 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				CE784B2E22A685FB00662219 /* PhotoVideoDetailPresenter.swift in Sources */,
