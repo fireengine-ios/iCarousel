@@ -6572,7 +6572,6 @@
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
 		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
-		78B2D343204A94E000D096DC /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		78B2D34A204AA5F500D096DC /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		78B2D34C204AA5F500D096DC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		78B2D34E204AA5F500D096DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -12903,7 +12902,6 @@
 			children = (
 				B5CDB31A21787FEF006CFA50 /* TurkcellUpdaterDSK */,
 				B53DCE6620EF634800400DBA /* ContactSyncSDK */,
-				78B2D343204A94E000D096DC /* MPush.framework */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 			);
