@@ -13,6 +13,7 @@ import Adjust
 import KeychainSwift
 import Fabric
 import Crashlytics
+import XPush
 
 final class AppConfigurator {
     
@@ -145,20 +146,20 @@ final class AppConfigurator {
         func setupMenloworks() {
             DispatchQueue.toMain {
                 #if LIFEBOX
-                MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
+                XPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
                 #elseif LIFEDRIVE
-                MPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
+                XPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
                 #endif
-                MPush.setServerURL("https://api.xtremepush.com")
+                XPush.setServerURL("https://api.xtremepush.com")
                 
                 
                 #if DEBUG
-                MPush.setSandboxModeEnabled(true)
-                MPush.setDebugModeEnabled(true)
-                MPush.setShouldShowDebugLogs(true)
+                XPush.setSandboxModeEnabled(true)
+                XPush.setDebugModeEnabled(true)
+                XPush.setShouldShowDebugLogs(true)
                 #endif
                 
-                MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
+                XPush.registerMessageResponseHandler({(_ response: XPMessageResponse) -> Void in
                     
                     let payload = response.message.payload
                     let payloadAction = payload["action"] as? String
@@ -185,9 +186,9 @@ final class AppConfigurator {
                     }
                 })
                 
-                MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+                XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
                 debugLog("AppConfigurator registerMenloworksForPushNotififcations")
-                MPush.applicationDidFinishLaunching(options: launchOptions)
+                XPush.applicationDidFinishLaunching(options: launchOptions)
                 debugLog("AppConfigurator startMenloworks")
             }
         }
