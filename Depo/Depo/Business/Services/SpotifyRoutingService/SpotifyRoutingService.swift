@@ -87,6 +87,11 @@ final class SpotifyRoutingService {
     
     func showImportedPlayLists() {
         let controller = router.spotifyImportedPlaylistsController()
+        self.router.pushViewController(viewController: controller)
+    }
+    
+    func showImportedPlayListsAfterImporting() {
+        let controller = router.spotifyImportedPlaylistsController()
         router.replaceTopViewControllerWithViewController(controller)
     }
     
@@ -304,6 +309,10 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
     
     func onShowImported() {
         showImportedPlayLists() 
+    }
+    
+    func onShowImportedAfterImporting() {
+        showImportedPlayListsAfterImporting()
     }
     
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {

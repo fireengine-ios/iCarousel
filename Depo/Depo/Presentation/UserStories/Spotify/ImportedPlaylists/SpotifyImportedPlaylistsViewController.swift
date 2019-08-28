@@ -45,7 +45,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()
@@ -156,8 +156,8 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     }
     
     private func stopSelectionState() {
-        dataSource.cancelSelection()
         navigationItem.hidesBackButton = false
+        dataSource.cancelSelection()
         navbarManager.setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
