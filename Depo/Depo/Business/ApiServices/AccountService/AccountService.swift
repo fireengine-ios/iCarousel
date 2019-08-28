@@ -231,7 +231,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         debugLog("AccountService getSettingsInfoPermissions")
         
         sessionManager
-            .request(RouteRequests.Account.Settings.accessInformation)
+            .request(RouteRequests.Account.Settings.settingsApi)
             .customValidate()
             .responseData { response in
                 switch response.result {    
@@ -295,7 +295,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.instapick: isInstapickAllowed]
         
         sessionManager
-            .request(RouteRequests.Account.Settings.accessInformation,
+            .request(RouteRequests.Account.Settings.settingsApi,
                      method: .patch,
                      parameters: params,
                      encoding: JSONEncoding.prettyPrinted)
@@ -318,7 +318,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                                      SettingsInfoPermissionsJsonKeys.facebook: isFacebookAllowed]
         
         sessionManager
-            .request(RouteRequests.Account.Settings.accessInformation,
+            .request(RouteRequests.Account.Settings.settingsApi,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.prettyPrinted)
