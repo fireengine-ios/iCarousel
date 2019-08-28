@@ -12,6 +12,7 @@ protocol SpotifyPlaylistsViewControllerDelegate: class {
     func onOpenPlaylist(_ playlist: SpotifyPlaylist)
     func onImport(playlists: [SpotifyPlaylist])
     func onShowImported()
+    func onShowImportedAfterImporting()
 }
 
 final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
@@ -132,7 +133,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
         if dataSource.isSelectionStateActive {
             delegate?.onImport(playlists: dataSource.selectedItems)
         } else {
-            delegate?.onShowImported()
+            delegate?.onShowImportedAfterImporting()
         }
     }
 }
