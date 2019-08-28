@@ -23,7 +23,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     private lazy var dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
     
-    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .Largest, .Smallest]
     private lazy var sortingManager = SpotifySortingManager(sortTypes: sortTypes, delegate: self)
     private lazy var navbarManager = SpotifyImportedPlaylistsNavbarManager(delegate: self)
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
