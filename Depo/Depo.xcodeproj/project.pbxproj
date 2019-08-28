@@ -3993,6 +3993,18 @@
 		CE61D1C420468759001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
+		CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF5230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF6230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AFB230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFD230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFF230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
+		CE634B00230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
+		CE634B01230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
@@ -8305,6 +8317,10 @@
 		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
 		CE61D1C02046873A001D01DC /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
+		CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPopUpController.swift; sourceTree = "<group>"; };
+		CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentPopUpController.xib; sourceTree = "<group>"; };
+		CE634AFA230ED69900CED18C /* PaymentTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTypeView.xib; sourceTree = "<group>"; };
+		CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeView.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
 		CE654FB220454B2500232025 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
@@ -14533,6 +14549,7 @@
 				CE40133A1FCFE4AF006F28FD /* PromoView.swift */,
 				CE2F56131F7552A900F49DA1 /* ColumnsCollectionLayout.swift */,
 				CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */,
+				CE634AF9230EAAF300CED18C /* PaymentPopUpController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -14970,6 +14987,17 @@
 				CE5921D92256446F005882CE /* PasswordView.swift */,
 			);
 			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		CE634AF9230EAAF300CED18C /* PaymentPopUpController */ = {
+			isa = PBXGroup;
+			children = (
+				CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */,
+				CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */,
+				CE634AFA230ED69900CED18C /* PaymentTypeView.xib */,
+				CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */,
+			);
+			path = PaymentPopUpController;
 			sourceTree = "<group>";
 		};
 		CE6DE7421FCBE84000C23CBD /* Socials */ = {
@@ -17245,6 +17273,7 @@
 				8C0E905F1FDEBDFF00789C91 /* PasscodeViewImp.xib in Resources */,
 				8C06AFC52008AD71003D8E05 /* gonder_btn@3x.png in Resources */,
 				8C06B0F12008AD72003D8E05 /* serbest_cizgi@3x.png in Resources */,
+				CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				8C06AF0F2008AD70003D8E05 /* checkbox@3x.png in Resources */,
 				8C06B1D72008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */,
 				8C06B1572008AD72003D8E05 /* text_selected@3x.png in Resources */,
@@ -17311,6 +17340,7 @@
 				8C06B11D2008AD72003D8E05 /* t_buyuk_selected.png in Resources */,
 				8C06B19B2008AD72003D8E05 /* vintage@3x.png in Resources */,
 				8C06B0852008AD71003D8E05 /* paylas_mail@2x.png in Resources */,
+				CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
 				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
@@ -17993,6 +18023,7 @@
 				CEAE3FD71EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				8C06B0822008AD71003D8E05 /* paylas_mail.png in Resources */,
 				8C06AEF62008AD70003D8E05 /* cancel_buton@2x.png in Resources */,
+				CE634AFB230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				8C06AECA2008AD70003D8E05 /* back_icon@2x.png in Resources */,
 				7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */,
 				8C06AFE82008AD71003D8E05 /* kare@3x.png in Resources */,
@@ -18059,6 +18090,7 @@
 				8C06B1802008AD72003D8E05 /* turuncu@2x.png in Resources */,
 				8C06B0B42008AD71003D8E05 /* rotate@3x.png in Resources */,
 				8C06AFC62008AD71003D8E05 /* header_icon.png in Resources */,
+				CE634AF6230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				A2268EC221A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
 				8C06B1422008AD72003D8E05 /* target@2x.png in Resources */,
 				8C06B19A2008AD72003D8E05 /* vintage@3x.png in Resources */,
@@ -18175,6 +18207,7 @@
 				CE784CF522A685FB00662219 /* toolbar_sekil_icon@2x.png in Resources */,
 				CE784CF622A685FB00662219 /* tahta_yeni.png in Resources */,
 				CE784CF722A685FB00662219 /* caps2.png in Resources */,
+				CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				CE784CF822A685FB00662219 /* turuncu.png in Resources */,
 				CE784CF922A685FB00662219 /* kucuk_ucgen@2x.png in Resources */,
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
@@ -18215,6 +18248,7 @@
 				CE784D1B22A685FB00662219 /* SyncContactsViewController.xib in Resources */,
 				CE784D1C22A685FB00662219 /* ok.png in Resources */,
 				CE784D1D22A685FB00662219 /* t_orta@3x.png in Resources */,
+				CE634AFD230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				CE784D1E22A685FB00662219 /* SingleThumbnailAlbumCell.xib in Resources */,
 				CE784D1F22A685FB00662219 /* LeavePremiumView.xib in Resources */,
 				CE784D2022A685FB00662219 /* frame@3x.png in Resources */,
@@ -19659,6 +19693,7 @@
 				8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				89E51D5A22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
+				CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
@@ -19995,12 +20030,12 @@
 				8C0E8E071FDEBDFF00789C91 /* PhoneVerificationModuleInput.swift in Sources */,
 				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
-				8C0E8E0A1FDEBDFF00789C91 /* PhoneVereficationInteractorInput.swift in Sources */,
+				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
 				B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				8C0B919E20170E6800A5BA81 /* DuplicatedContactsInteractorInput.swift in Sources */,
-				8C0E8E0C1FDEBDFF00789C91 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				8C0E8E0C1FDEBDFF00789C91 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				8E26D98F2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				4A13DBE621A6FE5C002C3D16 /* PremiumInfoCard.swift in Sources */,
 				8C0E8E0E1FDEBDFF00789C91 /* SmartTimerLabel.swift in Sources */,
@@ -20048,6 +20083,7 @@
 				989BDE3E22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
 				17589F7F2276336800A5DB37 /* SupportFormController.swift in Sources */,
+				CE634B00230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
@@ -20940,6 +20976,7 @@
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
 				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
+				CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
@@ -21502,7 +21539,7 @@
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
 				8E1B755723053FDE00F6EEDA /* MusicViewController.swift in Sources */,
-				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
+				CE51ACE91EF90853005DCEE0 /* PhoneVerificationViewInput.swift in Sources */,
 				B53DCE8620EF634900400DBA /* SyncRecord.m in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
 				CE6DE7551FCBE84100C23CBD /* InstagramService.swift in Sources */,
@@ -21529,7 +21566,7 @@
 				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */,
-				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
+				CE51ACEE1EF90853005DCEE0 /* PhoneVerificationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE51ACEF1EF90853005DCEE0 /* PhoneVerificationInteractorOutput.swift in Sources */,
@@ -21749,7 +21786,6 @@
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
-				8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
@@ -21916,6 +21952,7 @@
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,
 				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
+				CE634AFF230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				17589F742276336800A5DB37 /* PhoneCodeInputView.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
@@ -22952,6 +22989,7 @@
 				CE784A7C22A685FB00662219 /* RemoteService.swift in Sources */,
 				CE784A7D22A685FB00662219 /* UsageInfoConfigurator.swift in Sources */,
 				CE784A7E22A685FB00662219 /* PassthroughView.swift in Sources */,
+				CE634B01230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				CE784A7F22A685FB00662219 /* UILabel+Font.swift in Sources */,
 				CE784A8022A685FB00662219 /* ForgotPasswordRouterInput.swift in Sources */,
 				CE784A8122A685FB00662219 /* LanguageModel.swift in Sources */,
@@ -23443,6 +23481,7 @@
 				CE784C5122A685FB00662219 /* AlbumDetailRouter.swift in Sources */,
 				CE784C5222A685FB00662219 /* MenloworksTagsService.swift in Sources */,
 				CE784C5322A685FB00662219 /* AlbumDetailInitializer.swift in Sources */,
+				CE634AF5230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
