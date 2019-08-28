@@ -2,20 +2,15 @@ import UIKit
 
 //typealias PopUpButtonHandler = (_: PopUpController) -> Void
 
+// TODO: static func
+// TODO: button handlers
+
 final class PaymentPopUpController: UIViewController {
     
-//    static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil)
     static func controllerWith() -> PaymentPopUpController {
         let vc = PaymentPopUpController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
-        
-//        vc.alertTitle = title
-//        vc.alertMessage = message
-//        vc.popUpImage = image
-//        vc.firstUrl = firstUrl
-//        vc.secondUrl = secondUrl
-        
         return vc
     }
     
@@ -93,7 +88,7 @@ final class PaymentPopUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //view.backgroundColor = .clear
+        
     }
     
     // MARK: - Animation
