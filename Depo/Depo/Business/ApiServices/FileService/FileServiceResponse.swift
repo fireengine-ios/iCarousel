@@ -42,7 +42,7 @@ class FileListResponse: ObjectRequestResponse {
         }
         fileList = list.flatMap { WrapData(remote: SearchItemResponse(withJSON: $0),
                                           parendfolderUUID: parentFolderList.first?.uuid) }
-//        CoreDataStack.default.appendOnlyNewItems(items: fileList)
+//        CoreDataStack.shared.appendOnlyNewItems(items: fileList)
     }
     
 }
