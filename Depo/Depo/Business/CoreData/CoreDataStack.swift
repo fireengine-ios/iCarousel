@@ -114,7 +114,7 @@ final class CoreDataStack {
     }
     
     @available(iOS 10, *)
-    func storeDescription() -> NSPersistentStoreDescription {
+    private func storeDescription() -> NSPersistentStoreDescription {
         let description = NSPersistentStoreDescription(url: storeUrl)
         description.type = NSSQLiteStoreType
         description.shouldMigrateStoreAutomatically = true
@@ -123,7 +123,7 @@ final class CoreDataStack {
         return description
     }
     
-    func modelURL () -> URL? {
+    private func modelURL () -> URL? {
         let bundle = Bundle.main
         let versionedModelName = "\(Config.modelName) \(Config.modelVersion)"
         let subdir = "\(Config.modelName).momd"
