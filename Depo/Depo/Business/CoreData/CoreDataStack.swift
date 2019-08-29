@@ -15,6 +15,8 @@ final class CoreDataStack {
         static let modelName = "LifeBoxModel"
         static let modelVersion = "3"
         static let storeName = "DataModel"
+        
+        private init() {}
     }
     
     static let shared = CoreDataStack()
@@ -36,7 +38,7 @@ final class CoreDataStack {
         let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
         let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
         
-        let url: ()->(URL?) = {
+        let url = { () -> URL? in
             /// Use optimized model version only if iOS >= 11
             if #available(iOS 11, *) {
                 return omoURL ?? momURL
@@ -112,7 +114,7 @@ final class CoreDataStack {
             if let error = error {
                 let errorMessage = "Unable to load persistent stores: \(error)"
                 debugLog(errorMessage)
-                fatalError(errorMessage)
+                assertionFailure(errorMessage)
             }
             debugLog("persistent store loaded: \(description)")
         }
