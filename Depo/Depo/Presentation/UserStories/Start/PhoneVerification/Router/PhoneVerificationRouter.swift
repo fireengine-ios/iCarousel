@@ -7,7 +7,7 @@
 //
 
 class PhoneVerificationRouter: PhoneVerificationRouterInput {
-    private lazy var router = RouterVC()
+    lazy var router = RouterVC()
     
     private func goToSplash() {
         AuthenticationService().logout(success: { [weak self] in

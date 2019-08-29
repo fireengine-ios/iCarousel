@@ -71,7 +71,10 @@ final class AccountWarningService {
     
     func openEmptyEmail(successHandler: @escaping VoidHandler) {
         let emailEnterViewController = EmailEnterController.initFromNib()
+        
         emailEnterViewController.successHandler = successHandler
+        emailEnterViewController.isNeedToDismissController = false
+        
         let navigationController = NavigationController(rootViewController: emailEnterViewController)
         router.presentViewController(controller: navigationController)
     }
