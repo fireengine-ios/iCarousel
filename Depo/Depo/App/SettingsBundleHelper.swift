@@ -103,6 +103,10 @@ final class SettingsBundleHelper: NSObject {
     }
     
     private static var isLifeTechBuild: Bool {
+        #if DEBUG
+        return false ///no bundle setup or use - in DEBUG environment,
+        /// we can continue to use RouteRequests currentServerEnvironment
+        #endif
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
