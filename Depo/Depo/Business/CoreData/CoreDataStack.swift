@@ -31,23 +31,23 @@ final class CoreDataStack {
         return docURL.appendingPathComponent("\(Config.storeName).sqlite")
     }()
     
-    private lazy var managedObjectModel: NSManagedObjectModel = {
+    private lazy var modelURL: URL? = {
         let bundle = Bundle.main
         let versionedModelName = "\(Config.modelName) \(Config.modelVersion)"
         let subdir = "\(Config.modelName).momd"
         let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
         let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
         
-        let url = { () -> URL? in
-            /// Use optimized model version only if iOS >= 11
-            if #available(iOS 11, *) {
-                return omoURL ?? momURL
-            } else {
-                return momURL ?? omoURL
-            }
+        /// Use optimized model version only if iOS >= 11
+        if #available(iOS 11, *) {
+            return omoURL ?? momURL
+        } else {
+            return momURL ?? omoURL
         }
-
-        guard let modelURL = url() else {
+    }()
+    
+    private lazy var managedObjectModel: NSManagedObjectModel = {
+        guard let modelURL = modelURL else {
             let errorMessage = "Error loading model from bundle"
             debugLog(errorMessage)
             fatalError(errorMessage)
