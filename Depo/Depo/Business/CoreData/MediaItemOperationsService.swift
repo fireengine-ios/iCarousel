@@ -323,7 +323,9 @@ final class MediaItemOperationsService {
             do {
                 result = try context.fetch(request)
             } catch {
-                print("context.fetch failed with:", error.localizedDescription)
+                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
+                debugLog(errorMessage)
+                assertionFailure(errorMessage)
             }
             mediaItemsCallBack(result)
         }
