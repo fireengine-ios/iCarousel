@@ -2736,6 +2736,7 @@
 		8C65D18622C63B6F00CB1DBD /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65D18522C63B6F00CB1DBD /* String + Extension.swift */; };
 		8C65D18722C63B6F00CB1DBD /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65D18522C63B6F00CB1DBD /* String + Extension.swift */; };
 		8C65D18822C63B6F00CB1DBD /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65D18522C63B6F00CB1DBD /* String + Extension.swift */; };
+		8C6A1DCC2317EAEC00D792B9 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A1DCB2317EAEB00D792B9 /* container */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -5505,7 +5506,6 @@
 		CE784DF022A685FB00662219 /* sticker_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEA82008AD6F003D8E05 /* sticker_close.png */; };
 		CE784DF122A685FB00662219 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
 		CE784DF222A685FB00662219 /* sticker_resize@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEAD2008AD6F003D8E05 /* sticker_resize@3x.png */; };
-		CE784DF322A685FB00662219 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
 		CE784DF422A685FB00662219 /* GridListTopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408401F61C0E000D4717A /* GridListTopBar.xib */; };
 		CE784DF522A685FB00662219 /* Orta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACF02008AD6F003D8E05 /* Orta@2x.png */; };
 		CE784DF622A685FB00662219 /* refresh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD242008AD6F003D8E05 /* refresh@3x.png */; };
@@ -7622,6 +7622,7 @@
 		8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridListTopBarSortingTableCell.xib; sourceTree = "<group>"; };
 		8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingContainerVC.swift; sourceTree = "<group>"; };
 		8C65D18522C63B6F00CB1DBD /* String + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		8C6A1DCB2317EAEB00D792B9 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFilesFiltration.swift; sourceTree = "<group>"; };
 		8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarConfigurator.swift; sourceTree = "<group>"; };
 		8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarInitializer.swift; sourceTree = "<group>"; };
@@ -13967,6 +13968,7 @@
 		B5B6542C22A7A744000E2FA9 /* Lifedrive */ = {
 			isa = PBXGroup;
 			children = (
+				8C6A1DCB2317EAEB00D792B9 /* container */,
 				CE784F2222A68CEB00662219 /* lifedrive.plist */,
 				8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */,
 				8C3BA3B022B3D597006D901E /* LifeDrive-AppStore-Info.plist */,
@@ -18440,7 +18442,6 @@
 				CE784DF022A685FB00662219 /* sticker_close.png in Resources */,
 				CE784DF122A685FB00662219 /* SuggestionTableViewCell.xib in Resources */,
 				CE784DF222A685FB00662219 /* sticker_resize@3x.png in Resources */,
-				CE784DF322A685FB00662219 /* container in Resources */,
 				CE784DF422A685FB00662219 /* GridListTopBar.xib in Resources */,
 				CE784DF522A685FB00662219 /* Orta@2x.png in Resources */,
 				CE784DF622A685FB00662219 /* refresh@3x.png in Resources */,
@@ -18615,6 +18616,7 @@
 				CE784E9622A685FB00662219 /* kup@2x.png in Resources */,
 				CE784E9722A685FB00662219 /* Buyuk.png in Resources */,
 				CE784E9822A685FB00662219 /* extraOptions.png in Resources */,
+				8C6A1DCC2317EAEC00D792B9 /* container in Resources */,
 				CE784E9922A685FB00662219 /* WaitingForWiFiPopUp.xib in Resources */,
 				CE784E9A22A685FB00662219 /* rotation_secili@3x.png in Resources */,
 				CE784E9B22A685FB00662219 /* renk_selected@3x.png in Resources */,
