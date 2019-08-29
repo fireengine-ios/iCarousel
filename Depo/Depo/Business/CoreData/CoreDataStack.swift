@@ -31,23 +31,8 @@ final class CoreDataStack {
         return docURL.appendingPathComponent("\(Config.storeName).sqlite")
     }()
     
-    private lazy var modelURL: URL? = {
-        let bundle = Bundle.main
-        let versionedModelName = "\(Config.modelName) \(Config.modelVersion)"
-        let subdir = "\(Config.modelName).momd"
-        let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
-        let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
-        
-        /// Use optimized model version only if iOS >= 11
-        if #available(iOS 11, *) {
-            return omoURL ?? momURL
-        } else {
-            return momURL ?? omoURL
-        }
-    }()
-    
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        guard let modelURL = modelURL else {
+        guard let modelURL = modelURL() else {
             let errorMessage = "Error loading model from bundle"
             debugLog(errorMessage)
             fatalError(errorMessage)
@@ -105,11 +90,10 @@ final class CoreDataStack {
         //        return context
     }
     
-    
     @available(iOS 10, *)
     private lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Config.storeName, managedObjectModel: managedObjectModel)
-        container.persistentStoreDescriptions = [storeDescription]
+        container.persistentStoreDescriptions = [storeDescription()]
         container.loadPersistentStores { description, error in
             if let error = error {
                 let errorMessage = "Unable to load persistent stores: \(error)"
@@ -121,22 +105,36 @@ final class CoreDataStack {
         return container
     }()
     
+    init() {
+        if #available(iOS 10.0, *) {
+            mainContext.automaticallyMergesChangesFromParent = true
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
+        }
+    }
+    
     @available(iOS 10, *)
-    private lazy var storeDescription: NSPersistentStoreDescription = {
+    func storeDescription() -> NSPersistentStoreDescription {
         let description = NSPersistentStoreDescription(url: storeUrl)
         description.type = NSSQLiteStoreType
         description.shouldMigrateStoreAutomatically = true
         description.shouldInferMappingModelAutomatically = false
         
         return description
-    }()
+    }
     
-    
-    init() {
-        if #available(iOS 10.0, *) {
-            mainContext.automaticallyMergesChangesFromParent = true
+    func modelURL () -> URL? {
+        let bundle = Bundle.main
+        let versionedModelName = "\(Config.modelName) \(Config.modelVersion)"
+        let subdir = "\(Config.modelName).momd"
+        let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
+        let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
+        
+        /// Use optimized model version only if iOS >= 11
+        if #available(iOS 11, *) {
+            return omoURL ?? momURL
         } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
+            return momURL ?? omoURL
         }
     }
     
