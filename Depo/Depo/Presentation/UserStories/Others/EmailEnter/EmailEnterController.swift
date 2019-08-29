@@ -17,7 +17,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none
             
-            newValue.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
+            newValue.textField.addTarget(self, action: #selector(emailDidChange), for: .editingChanged)
         }
     }
     
@@ -50,7 +50,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         updateEmail()
     }
     
-    @objc private func emailChanged() {
+    @objc private func emailDidChange() {
         updateButtonState()
     }
     
