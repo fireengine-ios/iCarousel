@@ -417,8 +417,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 debugLog("LocalMediaStorage removeAssets PHPhotoLibrary fail")
                 fail?(.error(error))
             } else {
-                debugLog("LocalMediaStorage removeAssets PHPhotoLibrary cancelled")
-                //cancelled
+                debugLog("LocalMediaStorage removeAssets PHPhotoLibrary cancelled without error")
+                // cancelled
+                // ios 13 beta doesn't return error
                 fail?(.string(TextConstants.errorUnknown))
             }
         })
