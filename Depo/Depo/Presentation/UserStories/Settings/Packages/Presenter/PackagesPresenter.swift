@@ -294,8 +294,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        optInVC?.stopLoading()
-        optInVC?.showError(error.description)
+        if let optInVC = optInVC {
+            optInVC.stopLoading()
+            optInVC.showError(error.description)
+        } else {
+            failed(with: error.description)
+        }
     }
 
     func failed(with errorMessage: String) {
