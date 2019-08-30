@@ -54,7 +54,20 @@ extension UIApplication {
     }
     
     var statusBarView: UIView? {
-        return value(forKey: "statusBar") as? UIView
+        if #available(iOS 13, *) {
+            let tag = 31415926
+            if let statusBar = self.keyWindow?.viewWithTag(tag) {
+                return statusBar
+            }
+            
+            let newStatusBar = UIView(frame: UIApplication.shared.statusBarFrame)
+            newStatusBar.tag = tag
+            self.keyWindow?.addSubview(newStatusBar)
+            return newStatusBar
+            
+        } else {
+            return value(forKey: "statusBar") as? UIView
+        }
     }
 
 }
