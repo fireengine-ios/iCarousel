@@ -9,9 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>by.come.life.Lifebox.autosync-widget</string>
-	<key>GroupBundleId</key>
-	<string>group.come.life.Lifebox</string>
+	<string>by.come.life.Lifebox.LifeboxFileProviderUI</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,10 +20,25 @@
 	<string>20.142</string>
 	<key>CFBundleVersion</key>
 	<string>2.35</string>
-	<key>NSAppTransportSecurity</key>
+	<key>NSExtension</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<key>NSExtensionFileProviderDocumentGroup</key>
+		<string>group.come.life.Lifebox</string>
+		<key>NSExtensionFileProviderActions</key>
+		<array>
+			<dict>
+				<key>NSExtensionFileProviderActionActivationRule</key>
+				<string>TRUEPREDICATE</string>
+				<key>NSExtensionFileProviderActionIdentifier</key>
+				<string>com.mycompany.FileProviderUI.CustomAction</string>
+				<key>NSExtensionFileProviderActionName</key>
+				<string>Custom Action</string>
+			</dict>
+		</array>
+		<key>NSExtensionMainStoryboard</key>
+		<string>MainInterface</string>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.fileprovider-actionsui</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
@@ -38,12 +51,5 @@
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
 	</array>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
-	</dict>
 </dict>
 </plist>

@@ -9,9 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>by.come.life.Lifebox.autosync-widget</string>
-	<key>GroupBundleId</key>
-	<string>group.come.life.Lifebox</string>
+	<string>by.come.life.Lifebox.LifeboxFileProvider</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,28 +20,16 @@
 	<string>20.142</string>
 	<key>CFBundleVersion</key>
 	<string>2.35</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<false/>
-	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>TurkcellSaturaReg.ttf</string>
-		<string>TurkcellSaturaMedIta.ttf</string>
-		<string>TurkcellSaturaMed.ttf</string>
-		<string>TurkcellSaturaIta.ttf</string>
-		<string>TurkcellSaturaDemIta.ttf</string>
-		<string>TurkcellSaturaDem.ttf</string>
-		<string>TurkcellSaturaBol.ttf</string>
-		<string>TurkcellSaturaBolIta.ttf</string>
-	</array>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
+		<key>NSExtensionFileProviderDocumentGroup</key>
+		<string>group.come.life.Lifebox</string>
+		<key>NSExtensionFileProviderSupportsEnumeration</key>
+		<true/>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
+		<string>com.apple.fileprovider-nonui</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).FileProviderExtension</string>
 	</dict>
 </dict>
 </plist>
