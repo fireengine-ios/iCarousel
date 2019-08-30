@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>28.8</string>
+	<string>28.11</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -117,6 +117,8 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>

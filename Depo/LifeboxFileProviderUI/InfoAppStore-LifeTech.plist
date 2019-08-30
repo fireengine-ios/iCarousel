@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>by.come.life.Lifebox.LifeboxFileProviderUI</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -17,27 +17,28 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>20.142</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2.35</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>NSExtensionActivationRule</key>
+		<key>NSExtensionFileProviderDocumentGroup</key>
+		<string>group.come.life.Lifebox</string>
+		<key>NSExtensionFileProviderActions</key>
+		<array>
 			<dict>
-				<key>NSExtensionActivationSupportsFileWithMaxCount</key>
-				<integer>100</integer>
-				<key>NSExtensionActivationSupportsImageWithMaxCount</key>
-				<integer>100</integer>
-				<key>NSExtensionActivationSupportsMovieWithMaxCount</key>
-				<integer>100</integer>
+				<key>NSExtensionFileProviderActionActivationRule</key>
+				<string>TRUEPREDICATE</string>
+				<key>NSExtensionFileProviderActionIdentifier</key>
+				<string>com.mycompany.FileProviderUI.CustomAction</string>
+				<key>NSExtensionFileProviderActionName</key>
+				<string>Custom Action</string>
 			</dict>
-		</dict>
+		</array>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.share-services</string>
+		<string>com.apple.fileprovider-actionsui</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
