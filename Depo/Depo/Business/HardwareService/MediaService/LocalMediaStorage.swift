@@ -411,12 +411,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self?.passcodeStorage.systemCallOnScreen = false
             
-            if (status) {
+            if status {
                 success?()
-            } else {
+            } else if let error = error {
                 debugLog("LocalMediaStorage removeAssets PHPhotoLibrary fail")
-
-                fail?(.error(error!))
+                fail?(.error(error))
+            } else {
+                debugLog("LocalMediaStorage removeAssets PHPhotoLibrary cancelled without error")
+                // cancelled
+                // ios 13 beta doesn't return error
+                fail?(.string(TextConstants.errorUnknown))
             }
         })
     }
