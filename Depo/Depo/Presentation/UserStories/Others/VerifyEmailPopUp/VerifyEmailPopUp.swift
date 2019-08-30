@@ -397,6 +397,7 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
         ///if reenter the code we need to remove last letter
         if currentSecurityCode.count == inputTextLimit {
             currentSecurityCode.removeLast()
+            enableConfirmButtonIfNeeded()
         }
     }
     
