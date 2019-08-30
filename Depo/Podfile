@@ -121,9 +121,9 @@ post_install do |installer|
         end
     end
 
-    print "Setting the default SWIFT_VERSION to 3.0\n"
+    print "Setting the default SWIFT_VERSION to 4.0\n"
     installer.pods_project.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.0'
+        config.build_settings['SWIFT_VERSION'] = '4.0'
         config.build_settings['ENABLE_BITCODE'] = 'YES'
     end
 
