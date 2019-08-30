@@ -112,9 +112,7 @@ final class VerifyEmailPopUp: UIViewController {
     private var isRemoveLetter: Bool = false
     private var currentSecurityCode = ""
     private var inputTextLimit = 6
-    
-    var isNeedSendCode: Bool = true
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -138,7 +136,7 @@ final class VerifyEmailPopUp: UIViewController {
         })
         
         ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
+        if SingletonStorage.shared.isJustRegistered == true {
             resendCode()
         }
     }
