@@ -17,8 +17,10 @@ class SubscriptionPlan {
     let priceString: String
     let type: SubscriptionPlanType
     let model: Any
-    
-    init(name: String, photosCount: Int, videosCount: Int, songsCount: Int, docsCount: Int, priceString: String, type: SubscriptionPlanType, model: Any) {
+    let quota: Int64
+    let price: Float
+
+    init(name: String, photosCount: Int, videosCount: Int, songsCount: Int, docsCount: Int, priceString: String, type: SubscriptionPlanType, model: Any, quota: Int64, price: Float) {
         self.name = name
         self.photosCount = photosCount
         self.videosCount = videosCount
@@ -27,6 +29,8 @@ class SubscriptionPlan {
         self.priceString = priceString
         self.type = type
         self.model = model
+        self.quota = quota
+        self.price = price
     }
     
     ///FE-990 2.5TB SLCM (Turkcell) quota package cancel text

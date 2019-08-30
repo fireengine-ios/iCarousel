@@ -29,7 +29,7 @@ final class MyStoragePresenter {
     var title: String
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
-    var displayableOffers: [SubscriptionPlan] = []
+    var displayableOffers: [PackageOffer] = []
 
     init(title: String) {
         self.title = title
@@ -52,18 +52,35 @@ final class MyStoragePresenter {
     }
     
     private func displayOffers() {
-        displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
-        if let index = displayableOffers.index(where: { $0.type == .free }) {
+        let offers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
+        
+        displayableOffers = filterPackagesByQuota(offers: offers)
+        
+        if let index = displayableOffers.first?.offers.index(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
         
         view?.stopActivityIndicator()
         view?.reloadCollectionView()
     }
+    
+    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
+        return Dictionary(grouping: offers, by: { $0.quota })
+            .compactMap { dict in
+                //                if let quota = dict.key {
+                return PackageOffer(quotaNumber: dict.key, offers: dict.value)
+                //                } else {
+                //                    return nil
+                //                }
+            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
+    }
+    
+    
 }
 
 //MARK: - MyStorageViewOutput
 extension MyStoragePresenter: MyStorageViewOutput {
+    
     func viewDidLoad() {
         view?.startActivityIndicator()
         calculateProgress()

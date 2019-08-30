@@ -6,12 +6,30 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+
+class PackageOffer {
+    let quotaNumber: Int64
+    var offers: [SubscriptionPlan]
+    
+    init(quotaNumber: Int64, offers: [SubscriptionPlan]) {
+        self.quotaNumber = quotaNumber
+        self.offers = PackageOffer.sortOffersByPrice(offers: offers)
+    }
+    
+    private class func sortOffersByPrice(offers: [SubscriptionPlan]) -> [SubscriptionPlan] {
+       return offers.sorted { (first, second) -> Bool in
+            return first.price.isLess(than: second.price)
+        }
+    }
+}
+
+
 class PackagesPresenter {
     weak var view: PackagesViewInput?
     var interactor: PackagesInteractorInput!
     var router: PackagesRouterInput!
     
-    var availableOffers: [SubscriptionPlan] = []
+    var availableOffers: [PackageOffer] = []
     
     private var quotaInfo: QuotaInfoResponse?
 
@@ -45,6 +63,7 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
+    
     func getAccountType() -> AccountType {
         return accountType
     }
@@ -148,7 +167,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
-   
+  
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         self.quotaInfo = quotoInfo
         setMemoryPercentage()
@@ -206,31 +225,52 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
+
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
-        
-        let isTurkcell = (accountType != .turkcell)
+//        let isTurkcell = (accountType != .turkcell)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = offers.filter({
-            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
-                return false
+        let availableSubscriptionPlanFilterdByQuota = filterPackagesByQuota(offers: offers)
+        availableOffers = availableSubscriptionPlanFilterdByQuota
+        
+        for i in availableSubscriptionPlanFilterdByQuota {
+            print("New plan wit quota: \(i.quotaNumber)")
+            for b in i.offers {
+                print("name: \(b.name), priceFloat\(b.price), priceString: \(b.priceString)")
             }
-            
-            ///show only offers with type slcm and apple(if apple sent offer info)
-            switch type {
-            case .SLCM:
-                return isTurkcell
-                
-            case .apple:
-                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
-                
-            default:
-                return false
-                
-            }
-        })
+        }
+        
+//        availableOffers = offers.filter({
+//            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
+//                return false
+//            }
+//
+//            ///show only offers with type slcm and apple(if apple sent offer info)
+//            switch type {
+//            case .SLCM:
+//                return isTurkcell
+//
+//            case .apple:
+//                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+//
+//            default:
+//                return false
+//
+//            }
+//        })
         
         view?.stopActivityIndicator()
         view?.reloadData()
+    }
+    
+    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
+        return Dictionary(grouping: offers, by: { $0.quota })
+            .compactMap { dict in
+//                if let quota = dict.key {
+                    return PackageOffer(quotaNumber: dict.key, offers: dict.value)
+//                } else {
+//                    return nil
+//                }
+            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
 
     func successedGotUserAuthority() {

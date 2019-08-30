@@ -37,10 +37,13 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func getAvailableOffers(with accountType: AccountType) {
         accountService.availableOffers { [weak self] (result) in
+            
             switch result {
             case .success(let response):
+                
                 DispatchQueue.toMain {
-                    self?.getInfoForAppleProducts(offers: response)
+                    self?.output.successed(allOffers: response)
+//                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
                 DispatchQueue.toMain {

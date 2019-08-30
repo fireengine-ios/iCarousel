@@ -207,10 +207,10 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         let plan = output.availableOffers[indexPath.row]
         
-        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
-            MenloworksAppEvents.onSubscriptionClicked(tag)
-        }
-        output.didPressOn(plan: plan, planIndex: indexPath.row)
+//        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
+//            MenloworksAppEvents.onSubscriptionClicked(tag)
+//        }
+//        output.didPressOn(plan: plan, planIndex: indexPath.row)
     }
 }
 
