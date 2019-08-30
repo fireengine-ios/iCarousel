@@ -59,6 +59,28 @@ target 'Depo_LifeTech' do
 	core_pods
 end
 
+target 'LifeTech-LifeboxShared' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech-LifeboxFileProvider' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech-LifeboxFileProviderUI' do
+    shared_pods
+end
+
+target 'LifeTech-autosync-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'TC_Depo_LifeTech' do
+	core_pods
+end
+
 target 'LifeboxShared' do
     shared_pods
     pod 'MMWormhole', '~> 2.0.0'
@@ -75,10 +97,6 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-end
-
-target 'TC_Depo_LifeTech' do
-	core_pods
 end
 
 target 'LifeboxUnitTests' do
@@ -109,7 +127,7 @@ end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
-        if ['XCGLogger', 'netfox'].include? "#{target}"
+        if ['XCGLogger', 'SwiftyJSON'].include? "#{target}"
             print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_VERSION'] = '4.0'
