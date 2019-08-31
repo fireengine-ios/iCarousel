@@ -206,12 +206,60 @@ extension PackagesViewController: UICollectionViewDataSource {
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         let plan = output.availableOffers[indexPath.row]
+        presentPaymentPopUp(plan: plan)
         
 //        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
 //            MenloworksAppEvents.onSubscriptionClicked(tag)
 //        }
 //        output.didPressOn(plan: plan, planIndex: indexPath.row)
     }
+    
+    private func presentPaymentPopUp(plan: PackageOffer) {
+        
+        guard let name = plan.offers.first?.name, let priceLabel = plan.offers.first?.priceString else {
+            assertionFailure()
+            return
+        }
+     
+        let paymentMethods: [PaymentMethod] = plan.offers
+            .compactMap { $0.model as? PackageModelResponse }
+            .compactMap {
+                return createPaymentMethod(model: $0, offer: plan)
+        }
+        
+        
+        let paymentModel = PaymentModel.init(name: name, priceLabel: priceLabel, types: paymentMethods)
+        
+        let popup = PaymentPopUpController.controllerWith()
+        popup.paymentModel = paymentModel
+        present(popup, animated: false, completion: nil)
+    }
+    
+    private func createPaymentMethod(model: PackageModelResponse, offer: PackageOffer) -> PaymentMethod? {
+        
+        guard let name = model.name, let prise = model.price, let type = model.type?.paymentType else {
+            assertionFailure()
+            return nil
+        }
+        
+        return PaymentMethod(name: name, priceLabel: prise.description, type: type, action: { name in
+            let subscriptionPlan = self.getChoosenSubscriptionPlan(availableOffers: offer, name: name)
+            print(name)
+        })
+        
+    }
+    
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, name: String ) -> SubscriptionPlan?  {
+        
+        return availableOffers.offers.first { plan -> Bool in
+            guard let model = plan.model as? PackageModelResponse else {
+                return false
+            }
+            return model.name == name
+        }
+    }
+    
+    
 }
 
 // MARK: - ActivityIndicator

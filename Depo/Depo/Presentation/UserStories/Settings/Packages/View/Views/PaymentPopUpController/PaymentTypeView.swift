@@ -10,6 +10,7 @@ struct PaymentMethod {
     let name: String
     let priceLabel: String
     let type: PaymentType
+    let action: (_ name: String) -> Void
 }
 
 enum PaymentType {
@@ -78,5 +79,8 @@ final class PaymentTypeView: UIView, NibInit {
     
     @IBAction private func onActionButton() {
         
+        if let name = paymentMethod?.name, let paymentType = paymentMethod?.type {
+            paymentMethod?.action(name, paymentType)
+        }
     }
 }

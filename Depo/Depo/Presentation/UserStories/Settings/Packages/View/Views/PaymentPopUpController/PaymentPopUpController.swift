@@ -59,6 +59,8 @@ final class PaymentPopUpController: UIViewController {
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 48)
             newValue.text = paymentModel?.priceLabel
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     

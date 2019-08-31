@@ -73,36 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
         
-        window = UIWindow()
-        window?.makeKeyAndVisible()
-        let vc = ViewController()
-        vc.view.backgroundColor = UIColor.lightGray
-        let navVC = NavigationController(rootViewController: vc)
-        navVC.navigationBar.isTranslucent = false
-        window?.rootViewController = navVC
-        
-        
-
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let paymentModel = PaymentModel(name: "Saklama Alanı", priceLabel: "50 GB", types: [
-                PaymentMethod(name: "AppStore ile", priceLabel: "5.99 TRY/Ay", type: .appStore),
-                PaymentMethod(name: "Kredi Kartı ile", priceLabel: "6.99 TRY/Ay", type: .paycell),
-                PaymentMethod(name: "Faturama Yansıt", priceLabel: "7.99 TRY/Ay", type: .slcm),
-                PaymentMethod(name: "Faturama Yansıt", priceLabel: "7.99 TRY/Ay", type: .slcm),
-                PaymentMethod(name: "Faturama Yansıt", priceLabel: "7.99 TRY/Ay", type: .slcm),
-                PaymentMethod(name: "Faturama Yansıt", priceLabel: "7.99 TRY/Ay", type: .slcm),
-            ])
-            
-            let popup = PaymentPopUpController.controllerWith()
-            popup.paymentModel = paymentModel
-//            let popup = PopUpController.with(errorMessage: "qweqe")
-            vc.present(popup, animated: false, completion: nil)
-        }
-        
-        return true
-        return true
-        
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
         #endif
