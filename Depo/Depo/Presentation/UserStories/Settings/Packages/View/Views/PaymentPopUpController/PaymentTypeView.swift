@@ -80,7 +80,7 @@ final class PaymentTypeView: UIView, NibInit {
     @IBAction private func onActionButton() {
         
         if let name = paymentMethod?.name, let paymentType = paymentMethod?.type {
-            paymentMethod?.action(name, paymentType)
+            paymentMethod?.action(name)
         }
     }
 }

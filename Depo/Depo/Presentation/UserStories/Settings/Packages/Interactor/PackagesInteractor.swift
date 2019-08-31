@@ -42,8 +42,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             case .success(let response):
                 
                 DispatchQueue.toMain {
-                    self?.output.successed(allOffers: response)
-//                    self?.getInfoForAppleProducts(offers: response)
+                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
                 DispatchQueue.toMain {

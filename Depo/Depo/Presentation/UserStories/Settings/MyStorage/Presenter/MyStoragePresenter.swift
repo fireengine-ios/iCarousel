@@ -67,15 +67,9 @@ final class MyStoragePresenter {
     func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
         return Dictionary(grouping: offers, by: { $0.quota })
             .compactMap { dict in
-                //                if let quota = dict.key {
                 return PackageOffer(quotaNumber: dict.key, offers: dict.value)
-                //                } else {
-                //                    return nil
-                //                }
             }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
-    
-    
 }
 
 //MARK: - MyStorageViewOutput
@@ -96,12 +90,17 @@ extension MyStoragePresenter: MyStorageViewOutput {
             return
         }
         
-        if type == .SLCM {
+        switch type {
+        case .apple:
+            router?.showCancelOfferApple()
+        case .SLCM:
             let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
             router?.showCancelOfferAlert(with: cancelText)
-        } else if type == .apple {
-            router?.showCancelOfferApple()
-        } else {
+        case .paycellAllAccess:
+            print("All access")
+        case .paycellSLCM:
+            print("Paycell ")
+        default:
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
         }
