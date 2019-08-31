@@ -236,14 +236,14 @@ extension PackagesPresenter: PackagesInteractorOutput {
 
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        let availableSubscriptionPlanFilterdByQuota = filterPackagesByQuota(offers: offers)
-        availableOffers = availableSubscriptionPlanFilterdByQuota
+        availableOffers = filterPackagesByQuota(offers: offers)
         
         view?.stopActivityIndicator()
         view?.reloadData()
     }
     
     func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
+
         return Dictionary(grouping: offers, by: { $0.quota })
             .compactMap { dict in
                     return PackageOffer(quotaNumber: dict.key, offers: dict.value)

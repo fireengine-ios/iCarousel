@@ -234,7 +234,6 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     private func createPaymentMethod(model: PackageModelResponse, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
         
         guard let name = model.name, let prise = model.price, let type = model.type?.paymentType else {
-            assertionFailure()
             return nil
         }
         

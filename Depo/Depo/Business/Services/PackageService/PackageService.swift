@@ -312,52 +312,35 @@ final class PackageService {
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
         return offers.compactMap { offer in
             
-            guard let response = offer as? PackageModelResponse else {
-                return nil
-            }
-            
             let priceString: String = getPriceInfo(for: offer, accountType: accountType)
             let name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
+            let price = getPriceInFloat(offer: offer)
+            var quota = getQuota(offer: offer)
             
-            if let quota = response.quota, let price = response.price {
-                return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, quota: quota, price: price)
-            } else {
-                return nil
-            }
+            return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, quota: quota, price: price)
+        }
+    }
+    
+    private func getPriceInFloat(offer: Any) -> Float {
+        if let packageModel = offer as? PackageModelResponse, let price = packageModel.price {
+            return price
+        } else if let subscriptionPlan = offer as? SubscriptionPlanBaseResponse, let price = subscriptionPlan.subscriptionPlanPrice {
+            return price
+        } else {
+            return 0
         }
     }
     
     
-//    func convertToSubscriptionPlanNew(offers: [PackageOffer], accountType: AccountType) -> [SubscriptionPlan] {
-//
-//        let q = offers.forEach({ packageOffer in
-//
-//            let allSubscriptionPlanForQuota: [SubscriptionPlan] =  packageOffer.offers.compactMap { offer in
-//                let priceString: String = getPriceInfo(for: offer, accountType: accountType)
-//                let name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
-//
-//                return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, payOptions: nil)
-//            }
-//
-//
-//        })
-//
-//       return q
-//    }
-    
-    
-//    func convertToSubscriptionPlanWithQuota (offers: [PackageOffer], accountType: AccountType) -> [SubscriptionPlan] {
-//
-//        return offers.compactMap({ offer in
-//
-//            let priceString: String = getPriceInfo(for: offer.offers, accountType: accountType)
-//
-//            let name = getOfferQuota(for: offer.offers)?.bytesString ?? (getOfferDisplayName(for: offer.offers) ?? "")
-//
-//            return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, payOptions: nil)
-//        })
-//
-//    }
+    private func getQuota(offer: Any) -> Int64 {
+        if let packageModel = offer as? PackageModelResponse, let quota = packageModel.quota {
+            return quota
+        } else if let subscriptionPlan = offer as? SubscriptionPlanBaseResponse, let quota = subscriptionPlan.subscriptionPlanQuota {
+            return quota
+        } else {
+            return 0
+        }
+    }
     
     //MARK: - Analytics
     func getPurchaseEvent(for offer: Any) -> AnalyticsEvent? {
