@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
-        
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
         #endif
