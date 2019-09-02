@@ -879,6 +879,7 @@
 "NSLocationAlwaysUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
 "NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
 "NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek ve yedekleyebilmek için fotoğraf galerine erişim iznin gerekiyor.";
+"NSLocationWhenInUseUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ internet kullanıldı (lifebox kullanımı için)";
