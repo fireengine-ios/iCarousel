@@ -11,7 +11,7 @@ class PackagesPresenter {
     var interactor: PackagesInteractorInput!
     var router: PackagesRouterInput!
     
-    var availableOffers: [PackageOffer] = []
+    var availableOffers: [SubscriptionPlan] = []
     
     private var quotaInfo: QuotaInfoResponse?
 
@@ -45,7 +45,6 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
-    
     func getAccountType() -> AccountType {
         return accountType
     }
@@ -74,7 +73,6 @@ extension PackagesPresenter: PackagesViewOutput {
         guard let model = plan.model as? PackageModelResponse else {
             return
         }
-        
         switch model.type {
         case .SLCM?:
             let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
@@ -84,13 +82,6 @@ extension PackagesPresenter: PackagesViewOutput {
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
-        case .paycellAllAccess?:
-            view?.startActivityIndicator()
-            print("all access")
-        case .paycellSLCM?:
-            view?.startActivityIndicator()
-            print("paycellSLCM")
-            
         default:
             let error = CustomErrors.serverError("This is not buyable offer type")
             failed(with: error.localizedDescription)
@@ -157,7 +148,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
-  
+   
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         self.quotaInfo = quotoInfo
         setMemoryPercentage()
@@ -215,21 +206,31 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        
+        let isTurkcell = (accountType != .turkcell)
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = filterPackagesByQuota(offers: offers)
+        availableOffers = offers.filter({
+            guard let model = $0.model as? PackageModelResponse, let type = model.type else {
+                return false
+            }
+            
+            ///show only offers with type slcm and apple(if apple sent offer info)
+            switch type {
+            case .SLCM:
+                return isTurkcell
+                
+            case .apple:
+                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+                
+            default:
+                return false
+                
+            }
+        })
         
         view?.stopActivityIndicator()
         view?.reloadData()
-    }
-    
-    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
-
-        return Dictionary(grouping: offers, by: { $0.quota })
-            .compactMap { dict in
-                    return PackageOffer(quotaNumber: dict.key, offers: dict.value)
-            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
 
     func successedGotUserAuthority() {
