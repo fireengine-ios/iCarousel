@@ -899,6 +899,7 @@
 "NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
 "NSPhotoLibraryAddUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
 "NSPhotoLibraryUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
+"NSLocationWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ internet used (only for lifebox usage)";

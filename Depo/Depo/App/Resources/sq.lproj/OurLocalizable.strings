@@ -914,6 +914,7 @@
 "NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
 "NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
 "NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+"NSLocationWhenInUseUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
 
 /*Usage Info*/
 "package_space_details" = "% 1$@ / %2$@ internet i përdorur (vetëm për përdorim në lifebox)";
