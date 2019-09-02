@@ -235,7 +235,8 @@ struct RouteRequests {
         static let getFaqUrl = accountApi +/ "faq"
         
         enum Settings {
-            static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
+            /// without "s" at the end
+            static let settingsApi = Account.accountApi +/ "setting" 
             
             static let accessInformation = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
