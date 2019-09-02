@@ -20,5 +20,5 @@ protocol PackagesViewOutput {
 
     func configureCard(_ card: PackageInfoView)
 
-    var availableOffers: [PackageOffer] { get }
+    var availableOffers: [SubscriptionPlan] { get }
 }

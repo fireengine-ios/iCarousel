@@ -70,19 +70,13 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.cornerRadius = freeButton.bounds.height / 2
     }
     
-    func configure(with plan: PackageOffer, accountType: AccountType) {
-        
-        guard let packagePlan = plan.offers.first else {
-            assertionFailure()
-            return
-        }
-        
+    func configure(with plan: SubscriptionPlan, accountType: AccountType) {
         freeButton.isHidden = true
         upgradeButton.isHidden = true
         cancelButton.isHidden = true
         storeLabel.isHidden = true
         
-        switch packagePlan.type {
+        switch plan.type {
         case .default:
             upgradeButton.isHidden = false
         case .free:
@@ -93,15 +87,15 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         }
         
         
-        planeNameLabel.text = String(format: TextConstants.availableHeadNameTitle, packagePlan.name)
-        priceLabel.text = packagePlan.priceString
+        planeNameLabel.text = String(format: TextConstants.availableHeadNameTitle, plan.name)
+        priceLabel.text = plan.priceString
         
-        photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, packagePlan.photosCount)
-        videosCountLabel.text = String(format: TextConstants.usageInfoVideos, packagePlan.videosCount)
-        songsCountLabel.text = String(format: TextConstants.usageInfoSongs, packagePlan.songsCount)
-        docsCountLabel.text = String(format: TextConstants.usageInfoDocs, packagePlan.docsCount)
+        photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, plan.photosCount)
+        videosCountLabel.text = String(format: TextConstants.usageInfoVideos, plan.videosCount)
+        songsCountLabel.text = String(format: TextConstants.usageInfoSongs, plan.songsCount)
+        docsCountLabel.text = String(format: TextConstants.usageInfoDocs, plan.docsCount)
         
-        if let model = packagePlan.model as? SubscriptionPlanBaseResponse {
+        if let model = plan.model as? SubscriptionPlanBaseResponse {
             
             if let storageSize = model.subscriptionPlanQuota?.bytesString {
                 planeNameLabel.text = storageSize

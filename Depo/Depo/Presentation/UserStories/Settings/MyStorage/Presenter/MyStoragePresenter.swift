@@ -29,7 +29,7 @@ final class MyStoragePresenter {
     var title: String
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
-    var displayableOffers: [PackageOffer] = []
+    var displayableOffers: [SubscriptionPlan] = []
 
     init(title: String) {
         self.title = title
@@ -52,29 +52,18 @@ final class MyStoragePresenter {
     }
     
     private func displayOffers() {
-        let offers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
-        
-        displayableOffers = filterPackagesByQuota(offers: offers)
-        
-        if let index = displayableOffers.first?.offers.index(where: { $0.type == .free }) {
+        displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
+        if let index = displayableOffers.index(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
         
         view?.stopActivityIndicator()
         view?.reloadCollectionView()
     }
-    
-    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
-        return Dictionary(grouping: offers, by: { $0.quota })
-            .compactMap { dict in
-                return PackageOffer(quotaNumber: dict.key, offers: dict.value)
-            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
-    }
 }
 
 //MARK: - MyStorageViewOutput
 extension MyStoragePresenter: MyStorageViewOutput {
-    
     func viewDidLoad() {
         view?.startActivityIndicator()
         calculateProgress()
@@ -90,13 +79,12 @@ extension MyStoragePresenter: MyStorageViewOutput {
             return
         }
         
-        switch type {
-        case .apple:
-            router?.showCancelOfferApple()
-        case .SLCM:
+        if type == .SLCM {
             let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
             router?.showCancelOfferAlert(with: cancelText)
-        default:
+        } else if type == .apple {
+            router?.showCancelOfferApple()
+        } else {
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
         }
