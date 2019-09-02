@@ -40,7 +40,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     func eulaApplied() {
-        if interactor.cameFromLogin {
+        if interactor.cameFromLogin, !interactor.isLoggedIn {
             router.goToAutoSync()
         } else {
             router.goToHomePage()
