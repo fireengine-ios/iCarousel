@@ -883,6 +883,7 @@
 "NSLocationAlwaysUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
 "NSPhotoLibraryAddUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifebox إلى الوصول إلى مكتبة الصور الخاصة بك.";
 "NSPhotoLibraryUsageDescription" = "لإظهار صورك ومقاطع الفيديو الخاصة بك في التطبيق وللنسخ الاحتياطي لها ، يحتاج lifebox إلى الوصول إلى مكتبة الصور الخاصة بك.";
+"NSLocationWhenInUseUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية وللتنظيم والبحث في صورك.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ استخدام الانترنيت (لاستخدام lifebox)";

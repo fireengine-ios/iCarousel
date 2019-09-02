@@ -871,6 +871,7 @@
 "NSLocationAlwaysUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung sowie für die Organisation und Suche Ihrer Fotos verwendet.";
 "NSPhotoLibraryAddUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
 "NSPhotoLibraryUsageDescription" = "Damit Ihre Fotos und Videos in der Anwendung angezeigt und gesichert werden können, benötigt lifebox den Zugriff auf Ihre Fotobibliothek.";
+"NSLocationWhenInUseUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung sowie für die Organisation und Suche Ihrer Fotos verwendet.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ Internet verwendet (zur Verwendung der lifebox)";
