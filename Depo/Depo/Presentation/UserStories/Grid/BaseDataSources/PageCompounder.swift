@@ -38,7 +38,7 @@ final class PageCompounder {
         
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
         
-        let requestContext = CoreDataStack.default.newChildBackgroundContext
+        let requestContext = CoreDataStack.shared.newChildBackgroundContext
         
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
