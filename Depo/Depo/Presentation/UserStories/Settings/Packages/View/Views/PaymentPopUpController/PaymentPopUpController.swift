@@ -1,10 +1,5 @@
 import UIKit
 
-//typealias PopUpButtonHandler = (_: PopUpController) -> Void
-
-// TODO: static func
-// TODO: button handlers
-
 final class PaymentPopUpController: UIViewController {
     
     static func controllerWith() -> PaymentPopUpController {
@@ -85,14 +80,6 @@ final class PaymentPopUpController: UIViewController {
         vc.close()
     }
     
-    // MARK: - Setup
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-    
     // MARK: - Animation
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,16 +119,4 @@ final class PaymentPopUpController: UIViewController {
     }
 }
 
-extension UIStackView {
-    
-    /// https://stackoverflow.com/a/33929062/5893286
-    func addSubviewWith(backgroundColor: UIColor, cornerRadius: CGFloat) {
-        let backgroundView = UIView(frame: bounds)
-        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundView.backgroundColor = backgroundColor
-        insertSubview(backgroundView, at: 0)
-        
-        backgroundView.layer.cornerRadius = cornerRadius
-        backgroundView.layer.masksToBounds = true
-    }
-}
+

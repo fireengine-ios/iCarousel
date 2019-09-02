@@ -189,7 +189,8 @@ extension MyStorageViewController: UICollectionViewDelegateFlowLayout {
 extension MyStorageViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         
-        guard let packageOffer = output?.displayableOffers[indexPath.row],let planOffer = packageOffer.offers.first else {
+        guard let packageOffer = output?.displayableOffers[indexPath.row], let planOffer = packageOffer.offers.first else {
+            assertionFailure()
             return
         }
         

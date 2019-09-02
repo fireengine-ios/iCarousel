@@ -1,37 +1,5 @@
 import UIKit
 
-struct PaymentModel {
-    let name: String
-    let priceLabel: String
-    let types: [PaymentMethod]
-}
-
-struct PaymentMethod {
-    let name: String
-    let priceLabel: String
-    let type: PaymentType
-    let action: (_ name: String) -> Void
-}
-
-enum PaymentType {
-    case appStore
-    case paycell
-    case slcm
-    
-    var image: UIImage? {
-        let imageName: String
-        switch self {
-        case .appStore:
-            imageName = "payment_app_store"
-        case .paycell:
-            imageName = "payment_paycell"
-        case .slcm:
-            imageName = "payment_slcm"
-        }
-        return UIImage(named: imageName)
-    }
-}
-
 final class PaymentTypeView: UIView, NibInit {
     
     var paymentMethod: PaymentMethod? {

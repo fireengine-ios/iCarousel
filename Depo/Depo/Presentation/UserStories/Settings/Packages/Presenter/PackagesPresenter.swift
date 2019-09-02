@@ -6,24 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-
-class PackageOffer {
-    let quotaNumber: Int64
-    var offers: [SubscriptionPlan]
-    
-    init(quotaNumber: Int64, offers: [SubscriptionPlan]) {
-        self.quotaNumber = quotaNumber
-        self.offers = PackageOffer.sortOffersByPrice(offers: offers)
-    }
-    
-    private class func sortOffersByPrice(offers: [SubscriptionPlan]) -> [SubscriptionPlan] {
-       return offers.sorted { (first, second) -> Bool in
-            return first.price.isLess(than: second.price)
-        }
-    }
-}
-
-
 class PackagesPresenter {
     weak var view: PackagesViewInput?
     var interactor: PackagesInteractorInput!
