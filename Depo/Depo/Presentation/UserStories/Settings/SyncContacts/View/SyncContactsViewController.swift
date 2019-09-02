@@ -92,10 +92,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
         
-        backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        
         restoreButton.adjustsFontSizeToFitWidth()
         deleteDuplicatedButton.adjustsFontSizeToFitWidth()
         cancelButton.adjustsFontSizeToFitWidth()
