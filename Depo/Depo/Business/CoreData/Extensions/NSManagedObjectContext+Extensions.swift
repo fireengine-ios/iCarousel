@@ -81,7 +81,7 @@ extension NSManagedObjectContext {
 //        save(async: async) { [weak self] status in
 //            switch status {
 //            case .saved:
-//                let mainContext = CoreDataStack.default.mainContext
+//                let mainContext = CoreDataStack.shared.mainContext
 //                if self != mainContext, self?.parent == mainContext {
 //                    mainContext.saveAsync(completion: completion)
 //                } else {

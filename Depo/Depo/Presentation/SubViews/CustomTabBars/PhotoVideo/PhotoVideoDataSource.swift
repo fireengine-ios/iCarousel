@@ -66,7 +66,7 @@ final class PhotoVideoDataSource: NSObject {
 //        }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = CoreDataStack.default.mainContext
+        let context = CoreDataStack.shared.mainContext
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                       managedObjectContext: context,
                                                       sectionNameKeyPath: #keyPath(MediaItem.monthValue),

@@ -485,9 +485,9 @@ class FileService: BaseRequestService {
                         }
                         
                         ///For now we do not update local files by remotes
-//                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
+//                        CoreDataStack.shared.updateSavedItems(savedItems: [mediaItem],
 //                                                               remoteItems: [item],
-//                                                               context: CoreDataStack.default.newChildBackgroundContext)
+//                                                               context: CoreDataStack.shared.newChildBackgroundContext)
                         
                     } else {
                       fail?(.string("Incorrect response "))
@@ -529,7 +529,7 @@ class FileService: BaseRequestService {
             }
             
             let list = resultResponse.flatMap { WrapData(remote: $0) }
-//            CoreDataStack.default.appendOnlyNewItems(items: list)
+//            CoreDataStack.shared.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)
         self.executePostRequest(param: param, handler: handler)

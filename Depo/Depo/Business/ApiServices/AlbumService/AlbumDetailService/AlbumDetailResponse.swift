@@ -25,7 +25,7 @@ class AlbumDetailResponse: ObjectRequestResponse {
 //            let wrapedItems: [WrapData] = result.map {
 //               return WrapData(remote: $0)
 //            }
-//            CoreDataStack.default.appendOnlyNewItems(items: wrapedItems)
+//            CoreDataStack.shared.appendOnlyNewItems(items: wrapedItems)
             
         }
     }
