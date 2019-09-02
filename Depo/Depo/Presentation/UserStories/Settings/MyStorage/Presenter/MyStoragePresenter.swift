@@ -96,10 +96,6 @@ extension MyStoragePresenter: MyStorageViewOutput {
         case .SLCM:
             let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
             router?.showCancelOfferAlert(with: cancelText)
-        case .paycellAllAccess:
-            print("All access")
-        case .paycellSLCM:
-            print("Paycell ")
         default:
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
