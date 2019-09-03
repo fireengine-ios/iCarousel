@@ -64,7 +64,7 @@ final class PaymentPopUpController: UIViewController {
             newValue.textColor = ColorConstants.lightText
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            newValue.text = paymentModel?.name
+            newValue.text = "Storage"
         }
     }
     
