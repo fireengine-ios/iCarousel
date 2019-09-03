@@ -25,6 +25,17 @@ enum TwoFAChallengeType: String {
             return TextConstants.twoFactorAuthenticationEmailCell
         }
     }
+    
+    func getOTPDescription(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
+        switch self {
+        case .phone:
+            return challengeStatus == .new ?
+                TextConstants.twoFAPhoneNewOTPDescription : TextConstants.twoFAPhoneExistingOTPDescription
+        case .email:
+            return challengeStatus == .new ?
+                TextConstants.twoFAEmailNewOTPDescription : TextConstants.twoFAEmailExistingOTPDescription
+        }
+    }
 }
 
 struct TwoFAChallengeModel {

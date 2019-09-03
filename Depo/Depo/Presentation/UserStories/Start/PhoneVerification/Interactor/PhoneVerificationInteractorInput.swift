@@ -14,6 +14,8 @@ protocol PhoneVerificationInteractorInput {
     
     var phoneNumber: String { get }
     
+    var textDescription: String { get }
+    
     var expectedInputLength: Int? { get }
     
     var remainingTimeInSeconds: Int { get }
