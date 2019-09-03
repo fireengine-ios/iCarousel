@@ -75,8 +75,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        if #available(iOS 11.0, *),
-            Device.operationSystemVersionLessThen(13) {
+        if #available(iOS 11.0, *) {
             navigationBarWithGradientStyle()
         } else {
             defaultNavBarStyle()
@@ -106,7 +105,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, *),
+            Device.operationSystemVersionLessThen(13) {
             defaultNavBarStyle()
             statusBarColor = .white
         }

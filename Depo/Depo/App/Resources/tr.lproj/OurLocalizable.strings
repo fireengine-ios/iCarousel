@@ -1041,8 +1041,8 @@
 "login_settings_security_passcode_description" = "Turkcell Şifreni SIFRE yazıp 2200'a mesaj atarak alabilir ve bu butonu etkinleştirirsen, Turkcell şifreni kullanarak lifebox'a giriş yapabilirsin.";
 "login_settings_security_autologin_description" = "Bu butonu etkinleştirirsen, 3G / LTE ile internete bağlıyken otomatik olarak lifebox'a giriş yapabilirsin.";
 "login_settings_two_factor_auth_description" = "İki Faktörlü Kimlik Doğrulamayı etkinleştirirsen, giriş yapmadan önce kimliğini doğrulamanı isteyeceğiz. Doğrulama için telefon numarana veya e-posta adresine bir güvenlik kodu göndereceğiz.";
-"two_fa_invalid_session_error_message" = "Session has expired for two factor authentication.";
-"two_fa_invalid_challenge_error_message" = "Challenge has expired, please request a new code";
+"two_fa_invalid_session_error_message" = "Session has expired, please request a new code";
+"two_fa_invalid_challenge_error_message" = "Session has expired, please request a new code";
 "two_fa_too_many_attempts_error_message" = "3 kere hatalı giriş yaptın. Lütfen yeni kod talep et.";
 "two_fa_invalid_Otp_error_message" = "Güvenlik kodu geçerli değil, lütfen tekrar dene.";
 "spotify_import_navbar_title" = "Çalma listelerini taşı";
@@ -1101,11 +1101,15 @@
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Çok fazla doğrulama kodu istendi, lütfen daha sonra tekrar dene.";
 "2_factor_auth" = "İki Faktörlü Kimlik Doğrulama";
-"extra_auth_new_device_reason" = "";
-"extra_auth_account_setting_reason" = "";
-"extra_auth_account_navigation_title" = "";
-"extra_auth_account_describe_label" = "";
-"extra_auth_account_choose_type" = "";
-"extra_auth_account_phone_cell" = "";
-"extra_auth_account_email_cell" = "";
+"extra_auth_new_device_reason" = "lifebox'a farklı bir cihazdan giriş yapıyorsun.";
+"extra_auth_account_setting_reason" = "Hesabında iki faktörlü kimlik doğrulamasını etkinleştirdin.";
+"extra_auth_account_navigation_title" = "Güvenlik Kontrolü";
+"extra_auth_account_describe_label" = "Hesabını güvence altına almak ve güvenli bir şekilde giriş yapman için kimliğini doğrulayabilmek adına sana bir güvenlik kodu göndereceğiz.";
+"extra_auth_account_choose_type" = "Güvenlik kodunu buraya gönder:";
+"extra_auth_account_phone_cell" = "Telefon numarama: ";
+"extra_auth_account_email_cell" = "E-posta adresime: ";
 "NSLocationWhenInUseUsageDescription" = "Fotoğraflarının arka planda yedeklenebilmesi ve konumununa göre organize edilip aranabilmesi için konum iznine ihtiyacımız var";
+"two_fa_email_new_otp_description" = "E-posta adresine yeni bir kod gönderdik: %@";
+"two_fa_email_existing_otp_description" = "E-posta adresine güvenlik kodunu gönderdik: %@ Lütfen sana gönderdiğimiz mevcut kodu gir.";
+"two_fa_phone_new_otp_description" = "Telefonuna yeni bir kod gönderdik: %@";
+"two_fa_phone_existing_otp_description" = "Telefonuna güvenlik kodunu gönderdik: %@ Lütfen sana gönderdiğimiz mevcut kodu gir.";
