@@ -39,7 +39,7 @@ class LoginInteractor: LoginInteractorInput {
     private var attempts: Int = 0
     private var loginRetries = 0 {
         didSet {
-            if loginRetries > 2 {
+            if loginRetries >= NumericConstants.showSupportViewAttempts {
                 output?.showSupportView()
             }
         }
