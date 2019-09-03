@@ -52,6 +52,16 @@ class Device {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
     }
     
+    static var isIOS13: Bool {
+        var isIOS13 = false
+        
+        if #available(iOS 13.0, *) {
+            isIOS13 = true
+        }
+        
+        return isIOS13
+    }
+    
     /// https://stackoverflow.com/questions/46192280/detect-if-the-device-is-iphone-x
     static var isIphoneX: Bool {
         return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
