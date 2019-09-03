@@ -134,7 +134,8 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     private func openAutoSyncIfNeeded() {
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
             self?.view.hideSpinner()
-
+            
+            /// from registration
             if needToOpenAutoSync {
                 self?.router.goAutoSync()
             }
