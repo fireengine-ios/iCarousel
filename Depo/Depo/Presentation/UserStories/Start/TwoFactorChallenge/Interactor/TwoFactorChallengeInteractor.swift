@@ -34,6 +34,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         return challenge.userData
     }
     
+    override var textDescription: String {
+        guard let status = otpParams.status else {
+            return super.textDescription
+        }
+        
+        return challenge.challengeType.getOTPDescription(for: status)
+    }
+    
     override func resendCode() {
         authenticationService.twoFactorAuthChallenge(token: challenge.token,
                                                      authenticatorId: challenge.userData,

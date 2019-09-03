@@ -221,8 +221,8 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
          inputTextLimit = lenght
     }
     
-    func setupPhoneLable(with number: String) {
-        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+    func setupPhoneLable(with textDescription: String, number: String) {
+        let text = String(format: textDescription, number)
         let range = (text as NSString).range(of: number)
         let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaMedFont(size: 15),
                                                         NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor]

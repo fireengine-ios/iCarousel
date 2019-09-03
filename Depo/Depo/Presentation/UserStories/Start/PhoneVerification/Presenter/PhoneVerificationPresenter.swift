@@ -27,7 +27,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     
     func configure() {
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )
-        view.setupPhoneLable(with: interactor.phoneNumber)
+        view.setupPhoneLable(with: interactor.textDescription, number: interactor.phoneNumber)
     }
     
     func timerFinishedRunning(with isShowMessageWithDropTimer: Bool) {
@@ -134,7 +134,8 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     private func openAutoSyncIfNeeded() {
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
             self?.view.hideSpinner()
-
+            
+            /// from registration
             if needToOpenAutoSync {
                 self?.router.goAutoSync()
             }
