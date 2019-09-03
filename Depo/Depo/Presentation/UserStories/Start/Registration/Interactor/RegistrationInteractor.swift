@@ -17,7 +17,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     var captchaRequired = false
     private var retriesCount = 0 {
         didSet {
-            if retriesCount > NumericConstants.showSupportViewAttempts {
+            if retriesCount >= NumericConstants.showSupportViewAttempts {
                 showSupportView()
             }
         }
