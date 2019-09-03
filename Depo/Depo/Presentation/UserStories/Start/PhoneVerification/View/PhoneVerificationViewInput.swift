@@ -18,7 +18,7 @@ protocol PhoneVerificationViewInput: class, Waiting {
     
     func setupTextLengh(lenght: Int)
     
-    func setupPhoneLable(with number: String)
+    func setupPhoneLable(with textDescription: String, number: String)
     
     func setupButtonsInitialState()
         

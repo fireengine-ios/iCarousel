@@ -1065,6 +1065,10 @@
 "two_fa_invalid_challenge_error_message" = "Challenge has expired, please request a new code";
 "two_fa_too_many_attempts_error_message" = "3 wrong trials. Please request a new code.";
 "two_fa_invalid_Otp_error_message" = "Security code is invalid, please try again.";
+"two_fa_email_new_otp_description" = "we sent code to your email: %@";
+"two_fa_email_existing_otp_description" = "we already sent code to your email: %@";
+"two_fa_phone_new_otp_description" = "we sent code to your number: %@";
+"two_fa_phone_existing_otp_description" = "we already sent code to your number: %@";
 "spotify_import_navbar_title" = "Import Playlists";
 "spotify_importing" = "Importing...";
 "spotify_import_from" = "from Spotify";
