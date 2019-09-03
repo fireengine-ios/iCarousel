@@ -75,7 +75,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, *),
+            Device.operationSystemVersionLessThen(13) {
             navigationBarWithGradientStyle()
         } else {
             defaultNavBarStyle()
