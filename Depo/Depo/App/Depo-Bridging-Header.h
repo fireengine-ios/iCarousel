@@ -14,3 +14,4 @@
 #import "CRYConfiguration.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import "UpdaterController.h"
+#import <SpotifyiOS/SpotifyiOS.h>

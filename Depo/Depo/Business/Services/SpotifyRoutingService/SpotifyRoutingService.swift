@@ -15,8 +15,31 @@ protocol SpotifyRoutingServiceDelegate: class {
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus)
 }
 
-final class SpotifyRoutingService {
+final class SpotifyRoutingService: NSObject {
     
+    fileprivate var SpotifyClientID: String?
+    fileprivate var SpotifyRedirectURI: URL?
+    fileprivate var spotifyUrl: URL?
+    
+    private lazy var appRemote: SPTAppRemote? = {
+        if let clientID = SpotifyClientID, let redirectUrl = SpotifyRedirectURI {
+            let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
+            let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+            appRemote.delegate = self
+            return appRemote
+        }
+        return nil
+    }()
+    
+    private lazy var sessionManager: SPTSessionManager? = {
+        if let clientID = SpotifyClientID, let redirectUrl = SpotifyRedirectURI {
+            let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
+            let manager = SPTSessionManager(configuration: configuration, delegate: self)
+            return manager
+        }
+        return nil
+    }()
+
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private(set) var lastSpotifyStatus: SpotifyStatus? {
         didSet {
@@ -58,7 +81,6 @@ final class SpotifyRoutingService {
             guard let self = self else {
                 return
             }
-            
             switch result {
             case .success(let status):
                 if status.isConnected {
@@ -108,12 +130,77 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let url):
-                let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
-                self.router.pushViewController(viewController: controller)
+                self.parseSpotifyUrl(url: url)
+                self.connectToSporify()
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
         }
+    }
+    
+    private func connectToSporify() {
+        guard let remote = appRemote, let manager = sessionManager, !manager.isSpotifyAppInstalled else {
+            showSpotifyAuthWebViewController()
+            return
+        }
+        
+        remote.isConnected ? connectToSpotifyWithSDK() : showSpotifyAuthWebViewController()
+    }
+    
+    private func connectToSpotifyWithSDK() {
+                
+        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate, .userLibraryRead]
+        
+        if #available(iOS 11, *) {
+            sessionManager?.initiateSession(with: scope, options: .clientOnly)
+        } else {
+            if let controller = self.router.navigationController?.viewControllers.last {
+                sessionManager?.initiateSession(with: scope, options: .clientOnly, presenting: controller)
+            }
+        }
+    }
+    
+    private func parseSpotifyUrl(url: URL) {
+        spotifyUrl = url
+        let urlString = url.absoluteString
+        guard let startIndexForClientID = urlString.range(of: "client_id=")?.upperBound,
+              let endIndexForClientID = urlString.range(of: "&response_type")?.lowerBound,
+              let startIndexForRedirectUrl = urlString.range(of: "redirect_uri=https%3A%2F%2F")?.upperBound,
+              let endIndexForRedirectUrl = urlString.range(of: "&scope")?.lowerBound else {
+                assertionFailure()
+                return
+        }
+        let clientID = urlString[startIndexForClientID...endIndexForClientID].dropLast(1)
+        let redirectURLFromServer = urlString[startIndexForRedirectUrl...endIndexForRedirectUrl].dropLast(1)
+        let redirectURL = "akillidepo://".appending(redirectURLFromServer)
+        
+        SpotifyClientID = String(clientID)
+        SpotifyRedirectURI = URL(string: redirectURL)
+    }
+    
+    func handleRedirectUrl(url: URL) -> Bool {
+        
+        guard let appRemote = appRemote, let parameters = appRemote.authorizationParameters(from: url) else {
+            showSpotifyAuthWebViewController()
+            return false
+        }
+        
+        if let code = parameters["code"] {
+            spotifyAuthSuccess(with: code)
+        } else {
+            showSpotifyAuthWebViewController()
+            return false
+        }
+        return true
+    }
+    
+    private func showSpotifyAuthWebViewController() {
+        guard let url = spotifyUrl else {
+            assertionFailure()
+            return
+        }
+        let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
+        router.pushViewController(viewController: controller)
     }
     
     private func prepareImportPlaylistsController() -> UIViewController {
@@ -261,6 +348,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     
     func spotifyAuthSuccess(with code: String) {
         spotifyService.connect(code: code) { [weak self] result in
+            
             self?.getSpotifyStatus { [weak self] result in
                 guard let self = self else {
                     return
@@ -345,3 +433,33 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         controller.dismiss(animated: true)
     }
 }
+
+extension SpotifyRoutingService: SPTSessionManagerDelegate {
+  
+    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
+        debugPrint("didInitiateConnectionToSpotifyWithSDK")
+    }
+    
+    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
+        showSpotifyAuthWebViewController()
+        debugPrint("didFailSpotifyConnectionToSDKWithError: \(error.localizedDescription)")
+    }
+}
+
+extension SpotifyRoutingService: SPTAppRemoteDelegate {
+    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+        debugPrint("DidEstablishConnectionWithSpotifySDK")
+    }
+    
+    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
+        showSpotifyAuthWebViewController()
+        debugPrint("didFailConnectionWithSpotifySDKWithError: \(error?.localizedDescription)")
+    }
+    
+    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
+        showSpotifyAuthWebViewController()
+        debugPrint("didDisconnectWithErrorWithSpotifySDKWithError: \(error?.localizedDescription)")
+    }
+}
+
+ 
