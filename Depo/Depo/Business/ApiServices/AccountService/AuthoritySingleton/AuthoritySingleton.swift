@@ -57,8 +57,16 @@ final class AuthoritySingleton {
     var faceRecognition: Bool = false
     
     var currentAppVersion: String? {
-        get { return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey) }
+        get {
+            ///if there is more then one account for device this logic save correct logic for all users
+            let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+            return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey + userID)
+        }
+        set {
+            ///if there is more then one account for device this logic save correct logic for all users
+            let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+            UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey + userID)
+        }
     }
     
     var accountType: AccountType = .standart {
@@ -140,13 +148,15 @@ final class AuthoritySingleton {
         deleteDublicate = false
         
         accountType = .standart
+        
+        isNewAppVersion = false
     }
     
     func checkNewVersionApp() {
         if getAppVersion() != currentAppVersion {
             setLoginAlready(isLoginAlready: tokenStorage.refreshToken != nil)
+            isNewAppVersion = currentAppVersion == nil ? false : true
             currentAppVersion = getAppVersion()
-            isNewAppVersion = true
         }
     }
     
