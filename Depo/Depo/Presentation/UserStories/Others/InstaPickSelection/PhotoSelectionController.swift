@@ -35,19 +35,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private let reachabilityService = ReachabilityService.shared
     
-    private lazy var noFilesView = PhotoSelectionNoFilesView()
-    private var displayNoFilesView:Bool {
-        get {
-            return !noFilesView.isHidden
-        }
-        set {
-            if newValue {
-                noFilesView.text = dataSource.getNoFilesMessage()
-            }
-            noFilesView.isHidden = !newValue
-        }
-    }
-    
     private lazy var collectionView: UICollectionView = {
         let isIpad = Device.isIpad
         let layout = UICollectionViewFlowLayout()
@@ -69,13 +56,25 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)
         }
         
-        collectionView.backgroundView = noFilesView
-        
+        collectionView.backgroundView = emptyMessageLabel
+        emptyMessageLabel.frame = collectionView.bounds
         return collectionView
     }()
     
     private lazy var loadingMoreFooterView: CollectionSpinnerFooter? = {
         return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: photosSectionIndex)) as? CollectionSpinnerFooter
+    }()
+    
+    private let emptyMessageLabel: InsetsLabel = {
+        let label = InsetsLabel()
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = ColorConstants.textGrayColor
+        label.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        label.text = TextConstants.loading
+        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
+        return label
     }()
     
     init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate?, dataSource: PhotoSelectionDataSourceProtocol) {
@@ -177,7 +176,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                         self?.hideFooterSpinner()
                         
                         /// if we don't have any item in collection
-                        self?.displayNoFilesView = self?.photos.isEmpty ?? false
+                        if let isEmpty = self?.photos.isEmpty, isEmpty {
+                            self?.emptyMessageLabel.text = TextConstants.thereAreNoPhotos
+                        }
                     }
                 })
                 
@@ -187,7 +188,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 self.hideFooterSpinner()
                 
                 /// if we don't have any item in collection
-                self.displayNoFilesView = self.photos.isEmpty
+                if self.photos.isEmpty {
+                    self.emptyMessageLabel.text = error.description
+                }
             }
         }
     }
@@ -205,6 +208,21 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         /// just in case stop animation.
         /// don't forget to start animation if need (for pullToRefresh)
         self.loadingMoreFooterView?.stopSpinner()
+    }
+    
+    /// need cancel last request if needs pullToRequest before end
+    private func reloadData() {
+        emptyMessageLabel.text = TextConstants.loading
+        collectionView.backgroundView = emptyMessageLabel
+        
+        loadingMoreFooterView?.startSpinner()
+        photos.removeAll()
+        collectionView.reloadData()
+        isLoadingMoreFinished = false
+        dataSource.reset()
+        
+        /// call after resetting paginationPage
+        loadMore()
     }
 }
 

@@ -1209,9 +1209,6 @@ struct TextConstants {
     static let thereAreNoPhotos = NSLocalizedString("there_are_no_photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thereAreNoAlbums = NSLocalizedString("there_are_no_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let thereAreNoPhotosFavorites = NSLocalizedString("there_are_no_photos_favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let thereAreNoPhotosAll = NSLocalizedString("there_are_no_photos_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     static let facebook = NSLocalizedString("Facebook", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let dropbox = NSLocalizedString("Dropbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instagram = NSLocalizedString("Instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

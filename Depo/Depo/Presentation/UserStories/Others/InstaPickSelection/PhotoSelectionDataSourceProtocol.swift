@@ -4,7 +4,6 @@ protocol PhotoSelectionDataSourceProtocol {
     var isPaginationFinished: Bool { get }
     func reset()
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void)
-    func getNoFilesMessage() -> String?
 }
 
 final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
@@ -66,10 +65,6 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 handler(ResponseResult.failed(error))
             }
         }
-    }
-    
-    func getNoFilesMessage() -> String? {
-        return TextConstants.thereAreNoPhotosAll
     }
 }
 
@@ -135,10 +130,6 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
             }
         }
     }
-    
-    func getNoFilesMessage() -> String? {
-        return nil
-    }
 }
 
 final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
@@ -200,9 +191,5 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
                 handler(ResponseResult.failed(error))
             }
         }
-    }
-    
-    func getNoFilesMessage() -> String? {
-        return TextConstants.thereAreNoPhotosFavorites
     }
 }
