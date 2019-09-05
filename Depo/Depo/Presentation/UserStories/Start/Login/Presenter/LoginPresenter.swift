@@ -90,6 +90,11 @@ class LoginPresenter: BasePresenter {
     private func openEmptyPhone() {
         interactor.updateEmptyPhone(delegate: self)
     }
+    
+    func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
+        completeAsyncOperationEnableScreen()
+        router.showAccountStatePopUp(deletedAccountHandler: deletedAccountHandler)
+    }
 
 }
 

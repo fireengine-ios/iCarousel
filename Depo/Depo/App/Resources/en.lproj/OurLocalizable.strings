@@ -1130,3 +1130,6 @@
 "extra_auth_account_phone_cell" = "";
 "extra_auth_account_email_cell" = "";
 "NSLocationWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
+
+"account_status_title" = "Your account is active now!";
+"account_status_message" = "Your account is activated because of your login. If you want to delete your account permanently, you should not be logged in for 1 month after deleting";
