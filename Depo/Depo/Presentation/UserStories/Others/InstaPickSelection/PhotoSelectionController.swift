@@ -35,7 +35,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private let reachabilityService = ReachabilityService.shared
     
-    private lazy var noFilesView = PhotoSelectionNoFilesView()
+    private lazy var noFilesView = PhotoSelectionNoFilesView.initFromNib()
     private var displayNoFilesView:Bool {
         get {
             return !noFilesView.isHidden
