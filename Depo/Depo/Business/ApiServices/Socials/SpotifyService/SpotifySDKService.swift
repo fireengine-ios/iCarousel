@@ -69,7 +69,7 @@ final class SpotifySDKService: NSObject {
         }
         let clientID = urlString[startIndexForClientID..<endIndexForClientID]
         let redirectURLFromServer = urlString[startIndexForRedirectUrl..<endIndexForRedirectUrl]
-        let redirectURL = RouteRequests.applicationQueriesScheme.appending(redirectURLFromServer)
+        let redirectURL = SharedConstants.applicationQueriesScheme.appending(redirectURLFromServer)
         
         spotifyClientID = String(clientID)
         spotifyRedirectURI = URL(string: redirectURL)
