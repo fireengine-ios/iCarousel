@@ -6245,6 +6245,12 @@
 		CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE61FB593AF00FCE6AB /* ServerError.swift */; };
 		CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */; };
 		CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */; };
+		CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF2E123210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF31923213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
+		CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
+		CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
 		CEFFA8EF21AFC21400B34F36 /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */; };
 		CEFFA8F021AFC21400B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
 		CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
@@ -8784,6 +8790,8 @@
 		CEF69DE61FB593AF00FCE6AB /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHideManager.swift; sourceTree = "<group>"; };
+		CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionNoFilesView.swift; sourceTree = "<group>"; };
+		CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectionNoFilesView.xib; sourceTree = "<group>"; };
 		CEFC14152059609F002DE803 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedController.xib; sourceTree = "<group>"; };
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
@@ -14478,6 +14486,8 @@
 				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
 				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
 				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
+				CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */,
+				CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */,
 			);
 			path = InstaPickSelection;
 			sourceTree = "<group>";
@@ -17461,6 +17471,7 @@
 				8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */,
 				7C203556201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
 				8C06B1192008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
+				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
@@ -18362,6 +18373,7 @@
 				92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
 				73B4077622E9C0E10033D317 /* TermsCheckboxTextView.xib in Resources */,
 				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
+				CEFAF31923213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
 				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AFF22008AD71003D8E05 /* kirmizi@2x.png in Resources */,
@@ -18924,6 +18936,7 @@
 				8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CE784DD322A685FB00662219 /* vintage.png in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
+				CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
@@ -20148,6 +20161,7 @@
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C208648228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
+				CEFAF2E123210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
@@ -22542,6 +22556,7 @@
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
+				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -23255,6 +23270,7 @@
 				CE7848A722A685FB00662219 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				CE7848A822A685FB00662219 /* ManageContactsViewOutput.swift in Sources */,
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
+				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
 				CE7848AC22A685FB00662219 /* AnalyzeStatus.m in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
