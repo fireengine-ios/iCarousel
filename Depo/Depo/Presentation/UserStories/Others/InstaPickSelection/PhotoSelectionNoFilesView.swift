@@ -2,7 +2,7 @@
 //  PhotoSelectionNoFilesView.swift
 //  Depo
 //
-//  Created by User on 9/4/19.
+//  Created by Nikolay Zmachinsky on 9/4/19.
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
