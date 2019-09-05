@@ -17,29 +17,9 @@ protocol SpotifyRoutingServiceDelegate: class {
 
 final class SpotifyRoutingService: NSObject {
     
-    fileprivate var SpotifyClientID: String?
-    fileprivate var SpotifyRedirectURI: URL?
-    fileprivate var spotifyUrl: URL?
+    private var spotifyUrl: URL?
+    private lazy var spotifySDKService = SpotifySDKService(url: spotifyUrl, delegate: self)
     
-    private lazy var appRemote: SPTAppRemote? = {
-        if let clientID = SpotifyClientID, let redirectUrl = SpotifyRedirectURI {
-            let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
-            let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-            appRemote.delegate = self
-            return appRemote
-        }
-        return nil
-    }()
-    
-    private lazy var sessionManager: SPTSessionManager? = {
-        if let clientID = SpotifyClientID, let redirectUrl = SpotifyRedirectURI {
-            let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
-            let manager = SPTSessionManager(configuration: configuration, delegate: self)
-            return manager
-        }
-        return nil
-    }()
-
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private(set) var lastSpotifyStatus: SpotifyStatus? {
         didSet {
@@ -130,71 +110,19 @@ final class SpotifyRoutingService: NSObject {
             
             switch result {
             case .success(let url):
-                self.parseSpotifyUrl(url: url)
-                self.connectToSporify()
+                self.spotifyUrl = url
+                self.connectToSpotify()
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
         }
     }
     
-    private func connectToSporify() {
-        guard let remote = appRemote, let manager = sessionManager, !manager.isSpotifyAppInstalled else {
-            showSpotifyAuthWebViewController()
-            return
-        }
-        
-        remote.isConnected ? connectToSpotifyWithSDK() : showSpotifyAuthWebViewController()
+    private func connectToSpotify() {
+        spotifySDKService.connectToSporify()
     }
     
-    private func connectToSpotifyWithSDK() {
-                
-        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate, .userLibraryRead]
-        
-        if #available(iOS 11, *) {
-            sessionManager?.initiateSession(with: scope, options: .clientOnly)
-        } else {
-            if let controller = self.router.navigationController?.viewControllers.last {
-                sessionManager?.initiateSession(with: scope, options: .clientOnly, presenting: controller)
-            }
-        }
-    }
-    
-    private func parseSpotifyUrl(url: URL) {
-        spotifyUrl = url
-        let urlString = url.absoluteString
-        guard let startIndexForClientID = urlString.range(of: "client_id=")?.upperBound,
-              let endIndexForClientID = urlString.range(of: "&response_type")?.lowerBound,
-              let startIndexForRedirectUrl = urlString.range(of: "redirect_uri=https%3A%2F%2F")?.upperBound,
-              let endIndexForRedirectUrl = urlString.range(of: "&scope")?.lowerBound else {
-                assertionFailure()
-                return
-        }
-        let clientID = urlString[startIndexForClientID...endIndexForClientID].dropLast(1)
-        let redirectURLFromServer = urlString[startIndexForRedirectUrl...endIndexForRedirectUrl].dropLast(1)
-        let redirectURL = "akillidepo://".appending(redirectURLFromServer)
-        
-        SpotifyClientID = String(clientID)
-        SpotifyRedirectURI = URL(string: redirectURL)
-    }
-    
-    func handleRedirectUrl(url: URL) -> Bool {
-        
-        guard let appRemote = appRemote, let parameters = appRemote.authorizationParameters(from: url) else {
-            showSpotifyAuthWebViewController()
-            return false
-        }
-        
-        if let code = parameters["code"] {
-            spotifyAuthSuccess(with: code)
-        } else {
-            showSpotifyAuthWebViewController()
-            return false
-        }
-        return true
-    }
-    
-    private func showSpotifyAuthWebViewController() {
+    func onSpotifyAuthWebViewController() {
         guard let url = spotifyUrl else {
             assertionFailure()
             return
@@ -432,33 +360,20 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         router.navigationController?.popViewController(animated: false)
         controller.dismiss(animated: true)
     }
-}
-
-extension SpotifyRoutingService: SPTSessionManagerDelegate {
-  
-    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        debugPrint("didInitiateConnectionToSpotifyWithSDK")
-    }
     
-    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        showSpotifyAuthWebViewController()
-        debugPrint("didFailSpotifyConnectionToSDKWithError: \(error.localizedDescription)")
+    func handleRedirectUrl(url: URL) -> Bool {
+       return spotifySDKService.handleRedirectUrl(url: url)
     }
 }
 
-extension SpotifyRoutingService: SPTAppRemoteDelegate {
-    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-        debugPrint("DidEstablishConnectionWithSpotifySDK")
+extension SpotifyRoutingService: SpotifySDKServiceDelegate {
+    
+    func continueSpotifySDKConnectionWithCode(code: String) {
+        spotifyAuthSuccess(with: code)
     }
     
-    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-        showSpotifyAuthWebViewController()
-        debugPrint("didFailConnectionWithSpotifySDKWithError: \(error?.localizedDescription)")
-    }
-    
-    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        showSpotifyAuthWebViewController()
-        debugPrint("didDisconnectWithErrorWithSpotifySDKWithError: \(error?.localizedDescription)")
+    func showSpotifyAuthWebViewController() {
+        onSpotifyAuthWebViewController()
     }
 }
 

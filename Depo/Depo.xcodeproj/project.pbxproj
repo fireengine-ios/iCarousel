@@ -317,6 +317,9 @@
 		7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -6730,6 +6733,7 @@
 		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -10410,6 +10414,7 @@
 			children = (
 				73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */,
 				9864296722F834F10039811C /* SpotifyResponse.swift */,
+				733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */,
 			);
 			path = SpotifyService;
 			sourceTree = "<group>";
@@ -21076,6 +21081,7 @@
 				B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
+				733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				8C0E8F891FDEBDFF00789C91 /* ServerError.swift in Sources */,
 				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
@@ -22691,6 +22697,7 @@
 				989BDE5E22F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift in Sources */,
 				92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */,
 				8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */,
+				733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */,
 				89E51D4422CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */,
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,
@@ -24176,6 +24183,7 @@
 				CE784C5222A685FB00662219 /* MenloworksTagsService.swift in Sources */,
 				CE784C5322A685FB00662219 /* AlbumDetailInitializer.swift in Sources */,
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
+				733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
 				CE784C5722A685FB00662219 /* UIView+Utils.swift in Sources */,
