@@ -20,7 +20,27 @@ class SingletonStorage {
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
+    private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"
+    var isEmailVerificationCodeSent: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: SingletonStorage.isEmailVerificationCodeSentKey) }
+        get { return UserDefaults.standard.value(forKey: SingletonStorage.isEmailVerificationCodeSentKey) as? Bool ?? false }
+    }
+
     var isJustRegistered: Bool?
+
+    var isNeedToSentEmailVerificationCode: Bool {
+        AuthoritySingleton.shared.checkNewVersionApp()
+        
+        let isNewAppVersion = AuthoritySingleton.shared.isNewAppVersion
+        let isUserJustRegistered = (isJustRegistered == true)
+        
+        ///send code if:
+        /// - new app version
+        /// - first manual login after sign up
+        ///
+        /// such sentence is needed fo avoid code sending after sign up with fresh app installing and immediately code sending
+        return (isNewAppVersion || !isEmailVerificationCodeSent) && !isUserJustRegistered
+    }
     
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
         if let info = accountInfo, !forceReload {
