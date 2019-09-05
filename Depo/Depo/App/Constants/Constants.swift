@@ -1396,4 +1396,9 @@ struct TextConstants {
     static let expiredOTP = NSLocalizedString("expired_otp", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tokenIsMissing = NSLocalizedString("token_is_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidEmail = NSLocalizedString("invalid_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let storage = NSLocalizedString("storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let paymentTitleAppStore = NSLocalizedString("payment_title_app_store", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let paymentTitleCreditCard = NSLocalizedString("payment_title_credit_card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let paymentTitleInvoice = NSLocalizedString("payment_title_invoice", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

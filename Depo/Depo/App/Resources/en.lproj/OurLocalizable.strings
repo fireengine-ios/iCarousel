@@ -1130,3 +1130,8 @@
 "extra_auth_account_phone_cell" = "";
 "extra_auth_account_email_cell" = "";
 "NSLocationWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
+
+"storage" = "Storage";
+"payment_title_app_store" = "App Store";
+"payment_title_credit_card" = "Credit card";
+"payment_title_invoice" = "Invoice";

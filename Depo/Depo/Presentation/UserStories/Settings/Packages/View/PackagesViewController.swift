@@ -212,32 +212,40 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     
     private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
         
-        guard let name = plan.offers.first?.name, let priceLabel = plan.offers.first?.priceString else {
+        guard let name = plan.offers.first?.name else {
             assertionFailure()
             return
         }
      
-        let paymentMethods: [PaymentMethod] = plan.offers
-            .compactMap { $0.model as? PackageModelResponse }
-            .compactMap {
-                return createPaymentMethod(model: $0, offer: plan, planIndex: planIndex)
+        
+        for offer in plan.offers {
+            if let model = offer.model as? PackageModelResponse {
+                createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
+            }
         }
         
+        let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
+            if let model = offer.model as? PackageModelResponse {
+                return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
+            } else {
+                return nil
+            }
+        }
         
-        let paymentModel = PaymentModel.init(name: name, priceLabel: priceLabel, types: paymentMethods)
+        let paymentModel = PaymentModel(name: name, types: paymentMethods)
         
         let popup = PaymentPopUpController.controllerWith()
         popup.paymentModel = paymentModel
         present(popup, animated: false, completion: nil)
     }
     
-    private func createPaymentMethod(model: PackageModelResponse, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
+    private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
         
-        guard let name = model.name, let prise = model.price, let type = model.type?.paymentType else {
+        guard let name = model.name, let type = model.type?.paymentType else {
             return nil
         }
         
-        return PaymentMethod(name: name, priceLabel: prise.description, type: type, action: { name in
+        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { name in
             guard let subscriptionPlan = self.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
                 assertionFailure()
                 return

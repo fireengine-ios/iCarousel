@@ -8,7 +8,7 @@ final class PaymentTypeView: UIView, NibInit {
                 assertionFailure()
                 return
             }
-            titleLabel.text = paymentMethod.name
+            titleLabel.text = paymentMethod.type.title
             subtitleLabel.text = paymentMethod.priceLabel
             iconImageView.image = paymentMethod.type.image
         }
