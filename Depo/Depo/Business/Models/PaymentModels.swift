@@ -10,7 +10,6 @@ import Foundation
 
 struct PaymentModel {
     let name: String
-    let priceLabel: String
     let types: [PaymentMethod]
 }
 
@@ -37,5 +36,18 @@ enum PaymentType {
             imageName = "payment_slcm"
         }
         return UIImage(named: imageName)
+    }
+    
+    var title: String {
+        let title: String
+        switch self {
+        case .appStore:
+            title = TextConstants.paymentTitleAppStore
+        case .paycell:
+            title = TextConstants.paymentTitleCreditCard
+        case .slcm:
+            title = TextConstants.paymentTitleInvoice
+        }
+        return title
     }
 }

@@ -53,7 +53,7 @@ final class PaymentPopUpController: UIViewController {
             newValue.textColor = ColorConstants.darkBlueColor
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 48)
-            newValue.text = paymentModel?.priceLabel
+            newValue.text = paymentModel?.name
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -63,8 +63,8 @@ final class PaymentPopUpController: UIViewController {
         willSet {
             newValue.textColor = ColorConstants.lightText
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            newValue.text = "Storage"
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.text = TextConstants.storage
         }
     }
     

@@ -1121,3 +1121,8 @@
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
+
+"storage" = "Storage";
+"payment_title_app_store" = "App Store";
+"payment_title_credit_card" = "Credit card";
+"payment_title_invoice" = "Invoice";

@@ -212,7 +212,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     
     private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
         
-        guard let name = plan.offers.first?.name, let priceLabel = plan.offers.first?.priceString else {
+        guard let name = plan.offers.first?.name else {
             assertionFailure()
             return
         }
@@ -232,7 +232,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             }
         }
         
-        let paymentModel = PaymentModel(name: name, priceLabel: priceLabel, types: paymentMethods)
+        let paymentModel = PaymentModel(name: name, types: paymentMethods)
         
         let popup = PaymentPopUpController.controllerWith()
         popup.paymentModel = paymentModel
