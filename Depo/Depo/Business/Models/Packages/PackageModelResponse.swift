@@ -110,6 +110,19 @@ enum PackageType: String {
             return TextConstants.packageJamaicaCancelText
         }
     }
+    
+    var paymentType: PaymentType {
+        switch self {
+            case .apple:
+                return .appStore
+            case .SLCM:
+                return .slcm
+            case .paycellAllAccess:
+                return .paycell
+            default:
+                return .appStore
+        }
+    }
 }
 
 final class PackageModelResponse: Equatable {
