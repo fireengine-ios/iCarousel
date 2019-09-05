@@ -39,9 +39,13 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         }
     }
     
+    /// not called for registration. search 'needToOpenAutoSync' in PhoneVerificationPresenter for it
     func eulaApplied() {
-        if interactor.cameFromLogin, !interactor.isLoggedIn {
+        /// from login
+        if interactor.cameFromLogin {
             router.goToAutoSync()
+            
+        /// from splash
         } else {
             router.goToHomePage()
         }
