@@ -108,6 +108,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openApp() {
+        AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
             if storageVars.autoSyncSet {
