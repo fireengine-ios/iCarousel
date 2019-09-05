@@ -218,25 +218,27 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.addSubview(view)
         searchBar.sendSubview(toBack: view)
         
-        if let subviews = searchBar.subviews.first?.subviews {
-            subviews.forEach({ subview in
-                if subview is UITextField {
-                    searchTextField = subview as? UITextField
-                    searchTextField?.backgroundColor = ColorConstants.searchBarColor
-                    searchTextField?.placeholder = TextConstants.search
-                    searchTextField?.font = UIFont.TurkcellSaturaBolFont(size: 19)
-                    searchTextField?.textColor = ColorConstants.darkBlueColor
-                    searchTextField?.keyboardAppearance = .dark
-                }
-                if let button = subview as? UIButton {
-                    button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
-                    button.isEnabled = true
-                    button.adjustsFontSizeToFitWidth()
-                }
-            })
+        let firstTextField = searchBar.firstSubview(of: UITextField.self)
+        
+        if let textField = firstTextField {
+            textField.backgroundColor = ColorConstants.searchBarColor
+            textField.placeholder = TextConstants.search
+            textField.font = UIFont.TurkcellSaturaBolFont(size: 19)
+            textField.textColor = ColorConstants.darkBlueColor
+            textField.keyboardAppearance = .dark
+            searchTextField = textField
+        }
+        
+        let firstBtn = searchBar.firstSubview(of: UIButton.self)
+        
+        if let button = firstBtn {
+            button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
+            button.isEnabled = true
+            button.adjustsFontSizeToFitWidth()
         }
         
         setupNavigationBarForSelectionState(state: false)
+        
         output.viewIsReady(collectionView: collectionView)
     }
     
