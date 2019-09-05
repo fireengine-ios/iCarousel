@@ -39,8 +39,8 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="8fc-Z3-t2g"/>
             <connections>
-                <outlet property="imageView" destination="L5W-aH-LQX" id="5l6-9i-BcZ"/>
-                <outlet property="label" destination="rFU-4A-2t6" id="796-eH-S2P"/>
+                <outlet property="cameraImageView" destination="L5W-aH-LQX" id="UTU-Hr-o5S"/>
+                <outlet property="noPhotosLabel" destination="rFU-4A-2t6" id="gkX-0i-KOm"/>
             </connections>
             <point key="canvasLocation" x="44" y="125"/>
         </view>
