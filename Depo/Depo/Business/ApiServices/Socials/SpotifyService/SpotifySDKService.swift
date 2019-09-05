@@ -19,7 +19,6 @@ final class SpotifySDKService: NSObject {
     private var spotifyClientID: String?
     private var spotifyRedirectURI: URL?
     private lazy var router = RouterVC()
-    private let applicationQueriesScheme = "akillidepo://"
     
     init(url: URL?, delegate: SpotifySDKServiceDelegate) {
         super.init()
@@ -47,7 +46,7 @@ final class SpotifySDKService: NSObject {
     
     private func connectToSpotifyWithSDK() {
         
-        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate, .userLibraryRead]
+        let scope: SPTScope = [.playlistReadPrivate, .userLibraryRead]
         
         if #available(iOS 11, *) {
             sessionManager?.initiateSession(with: scope, options: .clientOnly)
@@ -70,7 +69,7 @@ final class SpotifySDKService: NSObject {
         }
         let clientID = urlString[startIndexForClientID..<endIndexForClientID]
         let redirectURLFromServer = urlString[startIndexForRedirectUrl..<endIndexForRedirectUrl]
-        let redirectURL = applicationQueriesScheme.appending(redirectURLFromServer)
+        let redirectURL = RouteRequests.applicationQueriesScheme.appending(redirectURLFromServer)
         
         spotifyClientID = String(clientID)
         spotifyRedirectURI = URL(string: redirectURL)
@@ -78,12 +77,12 @@ final class SpotifySDKService: NSObject {
     
     func handleRedirectUrl(url: URL) -> Bool {
         
-        guard let urlString = URLComponents(string: url.absoluteString) else {
+        guard let urlComponents = URLComponents(string: url.absoluteString) else {
             assertionFailure()
             return false
         }
         
-        if let code = urlString.queryItems?.first(where: { $0.name == "code"})?.value {
+        if let code = urlComponents.queryItems?.first(where: { $0.name == "code"})?.value {
              delegate?.continueSpotifySDKConnectionWithCode(code: code)
         } else {
             delegate?.showSpotifyAuthWebViewController()
@@ -94,7 +93,6 @@ final class SpotifySDKService: NSObject {
 
 extension SpotifySDKService: SPTSessionManagerDelegate {
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {

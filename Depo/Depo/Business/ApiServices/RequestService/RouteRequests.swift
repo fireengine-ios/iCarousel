@@ -20,6 +20,7 @@ struct RouteRequests {
     
     static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
+    static let applicationQueriesScheme = "akillidepo://"
     
     static let baseShortUrlString: String = {
         switch currentServerEnvironment {
