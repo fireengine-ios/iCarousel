@@ -41,4 +41,5 @@ struct SharedConstants {
     static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
+    static let applicationQueriesScheme = "akillidepo://"
 }

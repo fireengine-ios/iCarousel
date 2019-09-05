@@ -314,6 +314,12 @@
 		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -6747,6 +6753,8 @@
 		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
 		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
+		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -8923,6 +8931,7 @@
 				8C0E8FF31FDEBDFF00789C91 /* MobileCoreServices.framework in Frameworks */,
 				8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */,
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
+				7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
 				8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */,
@@ -9042,6 +9051,7 @@
 				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
 				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
+				7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
 				7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */,
@@ -9089,6 +9099,7 @@
 				CE784CAC22A685FB00662219 /* Security.framework in Frameworks */,
 				CE784CAD22A685FB00662219 /* AssetsLibrary.framework in Frameworks */,
 				CE784CAE22A685FB00662219 /* CoreLocation.framework in Frameworks */,
+				7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				CE784CAF22A685FB00662219 /* MessageUI.framework in Frameworks */,
 				CE784CB022A685FB00662219 /* CoreData.framework in Frameworks */,
 				CE784CB122A685FB00662219 /* AVKit.framework in Frameworks */,
@@ -10431,6 +10442,7 @@
 			children = (
 				73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */,
 				9864296722F834F10039811C /* SpotifyResponse.swift */,
+				733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */,
 			);
 			path = SpotifyService;
 			sourceTree = "<group>";
@@ -13197,6 +13209,7 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7329EE6F231F9AD90078396D /* SpotifyiOS.framework */,
 				B5CDB31A21787FEF006CFA50 /* TurkcellUpdaterDSK */,
 				B53DCE6620EF634800400DBA /* ContactSyncSDK */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
@@ -21122,6 +21135,7 @@
 				B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
+				733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				8C0E8F891FDEBDFF00789C91 /* ServerError.swift in Sources */,
 				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
@@ -22742,6 +22756,7 @@
 				989BDE5E22F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift in Sources */,
 				92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */,
 				8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */,
+				733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */,
 				89E51D4422CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */,
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,
@@ -24232,6 +24247,7 @@
 				CE784C5322A685FB00662219 /* AlbumDetailInitializer.swift in Sources */,
 				CE634AF5230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
+				733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
 				CE784C5722A685FB00662219 /* UIView+Utils.swift in Sources */,
@@ -24842,6 +24858,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -24899,6 +24916,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -24953,6 +24971,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -25008,6 +25027,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -25061,6 +25081,11 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25096,6 +25121,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25130,6 +25160,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25164,6 +25199,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25195,6 +25235,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25230,6 +25278,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25264,6 +25320,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25298,6 +25362,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25331,6 +25403,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25366,6 +25446,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25400,6 +25488,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25434,6 +25530,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25467,6 +25571,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25502,6 +25613,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25536,6 +25654,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25570,6 +25695,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25738,6 +25870,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25773,6 +25913,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25807,6 +25955,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25841,6 +25997,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25874,6 +26038,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25909,6 +26081,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25943,6 +26123,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxFileProvider/InfoAppStore-LifeTech.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25977,6 +26165,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26010,6 +26206,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26045,6 +26248,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26079,6 +26289,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxFileProviderUI/InfoAppStore-LifeTech.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26113,6 +26330,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26281,6 +26505,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26316,6 +26548,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26350,6 +26590,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoAppstore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26384,6 +26632,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26417,6 +26673,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26452,6 +26715,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26486,6 +26756,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoAppStore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26520,6 +26797,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26558,6 +26842,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26576,6 +26861,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26592,6 +26878,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -26616,6 +26903,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26633,6 +26921,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26648,6 +26937,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -26671,6 +26961,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26688,6 +26979,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26703,6 +26995,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AppStore;
@@ -26727,6 +27020,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26744,6 +27038,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26759,6 +27054,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Enterprise;
@@ -26779,6 +27075,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26814,6 +27118,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26848,6 +27160,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26882,6 +27202,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26920,6 +27248,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26978,6 +27307,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -27033,6 +27363,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -27089,6 +27420,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

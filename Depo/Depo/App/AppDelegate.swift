@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var spotifyService: SpotifyRoutingService = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
@@ -101,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MenloworksAppEvents.onAppLaunch()
         
+        
         return true
     }
     
@@ -119,6 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
+            return true
+        } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
         return false
