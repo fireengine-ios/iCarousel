@@ -879,6 +879,8 @@
 "account_detail_middle_description" = "You will not be able to benefit from Standard+ privileges if you cancel your membership";
 "account_detail_standart_title" = "You are using lifebox as a Standard user";
 "account_detail_standart_description" = "You can use standard features with your membership";
+"there_are_no_photos_favorites" = "You don't have any photos or videos on your Favorites list";
+"there_are_no_photos_all" = "You don't have any photos or videos";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Become Premium";
