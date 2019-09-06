@@ -136,8 +136,8 @@ final class VerifyEmailPopUp: UIViewController {
         })
         
         ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == true {
-            resendCode()
+        if SingletonStorage.shared.isNeedToSentEmailVerificationCode {
+            resendCode(isAutomaticaly: true)
         }
     }
     
@@ -362,7 +362,7 @@ extension VerifyEmailPopUp {
         }
     }
     
-    private func resendCode() {
+    private func resendCode(isAutomaticaly: Bool = false) {
         startActivityIndicator()
         
         accountService.sendEmailVerificationCode { response in
@@ -370,7 +370,11 @@ extension VerifyEmailPopUp {
             
             switch response {
             case .success(_):
-                ///no extra logic just stop spinner
+
+                if isAutomaticaly {
+                    SingletonStorage.shared.isEmailVerificationCodeSent = true
+                }
+                
                 break
             case .failed(let error):
                 

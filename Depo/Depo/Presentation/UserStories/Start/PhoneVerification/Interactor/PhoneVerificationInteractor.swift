@@ -43,6 +43,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         return dataStorage.signUpUserInfo.phone
     }
     
+    var textDescription: String {
+        return TextConstants.enterCodeToGetCodeOnPhone
+    }
+    
     var email: String {
         return dataStorage.signUpUserInfo.mail
     }

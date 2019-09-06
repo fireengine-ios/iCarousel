@@ -437,20 +437,28 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
 
 final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
     
+    enum ChallengeStatus: String {
+        case new = "SENT_NEW_CHALLENGE"
+        case existing = "USE_EXISTING_CHALLENGE"
+    }
+    
     private enum ResponseKey {
         static let status = "status"
         static let remainingTimeInSeconds = "remainingTimeInSeconds"
         static let expectedInputLength = "expectedInputLength"
     }
     
-    var status: String?
+    var status: ChallengeStatus?
     var remainingTimeInSeconds: Int?
     var expectedInputLength: Int?
 
     override func mapping() {
-        status = json?[ResponseKey.status].string
         remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
         expectedInputLength = json?[ResponseKey.expectedInputLength].int
+        
+        if let status = json?[ResponseKey.status].string?.uppercased() {
+            self.status = ChallengeStatus(rawValue: status)
+        }
     }
 }
 

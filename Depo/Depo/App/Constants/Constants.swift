@@ -1327,6 +1327,11 @@ struct TextConstants {
     static let twoFAInvalidOtpErrorMessage = NSLocalizedString("two_fa_invalid_Otp_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let twoFATooManyRequestsErrorMessage = NSLocalizedString("two_fa_too_many_requests_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let twoFAEmailNewOTPDescription = NSLocalizedString("two_fa_email_new_otp_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFAEmailExistingOTPDescription = NSLocalizedString("two_fa_email_existing_otp_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFAPhoneNewOTPDescription = NSLocalizedString("two_fa_phone_new_otp_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let twoFAPhoneExistingOTPDescription = NSLocalizedString("two_fa_phone_existing_otp_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     //MARK: - Spotify
     
     enum Spotify {
