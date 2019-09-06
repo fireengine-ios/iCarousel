@@ -14,20 +14,14 @@ extension PHAsset {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             return nil
         }
-        return PHAssetResource.assetResources(for: self).first
+        let resources = PHAssetResource.assetResources(for: self)
+        return resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
     }
     
     var originalFilename: String? {
-        if #available(iOS 13.0, *) {
-            //TODO: check again on GM or release ios 13 version
-            /* ios 13.1 beta returns:
-             - Adjustments.plist as originalFilename for the photos with enabled filter and slo-mo
-             - *.MOV for the live photos with Most Compatible format
-            */
-            return value(forKey: "filename") as? String
-        } else {
-            return resource?.originalFilename
-        }
+        let name = resource?.originalFilename
+//        print("originalName = \(name ?? "")")
+        return name
     }
     
     /// MAYBE WILL BE NEEDed
