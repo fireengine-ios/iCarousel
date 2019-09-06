@@ -102,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MenloworksAppEvents.onAppLaunch()
         
+        AnalyticsService.onAppLaunch()
         
         return true
     }

@@ -19,7 +19,6 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     

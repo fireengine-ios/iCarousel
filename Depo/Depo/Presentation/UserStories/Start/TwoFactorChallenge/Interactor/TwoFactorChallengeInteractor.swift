@@ -67,15 +67,20 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     override func verifyCode(code: String) {
         authenticationService.loginViaTwoFactorAuth(token: challenge.token,
                                                     challengeType: challenge.challengeType.rawValue,
-                                                    otpCode: code) { response in
+                                                    otpCode: code) { [weak self] response in
                                                         
             DispatchQueue.main.async {
                 switch response {
                 case .success(_):
-                    AccountService().updateBrandType()
-                    self.output.verificationSucces()
+                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        AccountService().updateBrandType()
+                        self?.output.verificationSucces()
+                        }, fail: { [weak self] error in
+                            self?.output.verificationFailed(with: error.localizedDescription)
+                    })
+
                 case .failed(let error):
-                    self.output.verificationFailed(with: error.localizedDescription)
+                    self?.output.verificationFailed(with: error.localizedDescription)
                 }
             }
         }
