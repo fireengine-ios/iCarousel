@@ -42,6 +42,23 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: navVC)
     }
     
+    func showAccountStatePopUp(deletedAccountHandler: @escaping VoidHandler) {
+        let titleFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaFont(size: 15),
+            .foregroundColor : UIColor.black,
+            .kern : 0
+        ]
+        
+        let popUp = CreateStoryPopUp.with(image: UIImage(named: "Path"),
+                                          title: TextConstants.accountStatusTitle,
+                                          titleDesign: .full(attributes: titleFullAttributes),
+                                          message: TextConstants.accountStatusMessage,
+                                          messageDesign: .full(attributes: titleFullAttributes),
+                                          buttonTitle: TextConstants.createStoryPhotosContinue,
+                                          buttonAction: deletedAccountHandler)
+        router.presentViewController(controller: popUp, animated: false)
+    }
+    
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
         let vc = TwoFactorAuthenticationViewController(response: response)
         router.pushViewController(viewController: vc)

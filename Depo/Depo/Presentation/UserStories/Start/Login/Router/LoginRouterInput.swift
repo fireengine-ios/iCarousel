@@ -29,4 +29,6 @@ protocol LoginRouterInput {
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     
     func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
+    
+    func showAccountStatePopUp(deletedAccountHandler: @escaping VoidHandler)
 }

@@ -118,32 +118,21 @@ class LoginInteractor: LoginInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
-            self.setContactSettingsForUser()
-            
-            self.emptyEmailCheck(for: headers)
-            
-            debugLog("login isRememberMe \(self.rememberMe)")
-            self.tokenStorage.isRememberMe = self.rememberMe
-            self.analyticsService.track(event: .login)
-            
-            if Validator.isValid(email: login) {
-                self.analyticsService.trackLoginEvent(loginType: .email)
-            } else {
-                self.analyticsService.trackLoginEvent(loginType: .gsm)
+            if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                let deletedAccountHandler: VoidHandler = { [weak self] in
+                    self?.processLogin(login: login, headers: headers)
+                }
+                
+                self.output?.loginDeletedAccount(deletedAccountHandler: deletedAccountHandler)
+                return
             }
             
-            self.loginRetries = 0
-            
-            self.accountService.updateBrandType()
-            
-            DispatchQueue.main.async {
-                self.output?.succesLogin()
-            }
-            
+            self.processLogin(login: login, headers: headers)
         }, fail: { [weak self] errorResponse in
             let loginError = LoginResponseError(with: errorResponse)
             self?.analyticsService.trackLoginEvent(error: loginError)
@@ -165,6 +154,30 @@ class LoginInteractor: LoginInteractorInput {
             self.tokenStorage.isRememberMe = self.rememberMe
             self.output?.showTwoFactorAuthViewController(response: response)
         })
+    }
+    
+    private func processLogin(login: String, headers: [String: Any]) {
+        self.setContactSettingsForUser()
+        
+        self.emptyEmailCheck(for: headers)
+        
+        debugLog("login isRememberMe \(self.rememberMe)")
+        self.tokenStorage.isRememberMe = self.rememberMe
+        self.analyticsService.track(event: .login)
+        
+        if Validator.isValid(email: login) {
+            self.analyticsService.trackLoginEvent(loginType: .email)
+        } else {
+            self.analyticsService.trackLoginEvent(loginType: .gsm)
+        }
+        
+        self.loginRetries = 0
+        
+        self.accountService.updateBrandType()
+        
+        DispatchQueue.main.async {
+            self.output?.succesLogin()
+        }
     }
     
     private func setContactSettingsForUser() {
