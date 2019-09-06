@@ -65,6 +65,7 @@ final class CreateStoryPopUp: UIViewController, NibInit {
     {
         let controller = CreateStoryPopUp.initFromNib()
         
+        controller.modalPresentationStyle = .overFullScreen
         controller.popUpImage = image
         controller.popUpTitle = title
         controller.titleDesign = titleDesign

@@ -56,8 +56,6 @@ class LoginRouter: LoginRouterInput {
                                           messageDesign: .full(attributes: titleFullAttributes),
                                           buttonTitle: TextConstants.createStoryPhotosContinue,
                                           buttonAction: deletedAccountHandler)
-        
-        popUp.modalPresentationStyle = .overCurrentContext
         router.presentViewController(controller: popUp, animated: false)
     }
     

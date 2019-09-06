@@ -123,7 +123,7 @@ class LoginInteractor: LoginInteractorInput {
             }
             
             if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-                accountStatus.uppercased() != ErrorResponseText.accountDeleted {
+                accountStatus.uppercased() == ErrorResponseText.accountDeleted {
                 let deletedAccountHandler: VoidHandler = { [weak self] in
                     self?.processLogin(login: login, headers: headers)
                 }
