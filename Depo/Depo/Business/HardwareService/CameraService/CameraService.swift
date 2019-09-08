@@ -73,7 +73,9 @@ class CameraService {
             }
 
             if accessGranted {
-                self.showPickerController(type: .camera, onViewController: sourceViewViewController)
+                DispatchQueue.main.async {
+                    self.showPickerController(type: .camera, onViewController: sourceViewViewController)
+                }
             } else {
                 self.showAccessAlert()
             }
