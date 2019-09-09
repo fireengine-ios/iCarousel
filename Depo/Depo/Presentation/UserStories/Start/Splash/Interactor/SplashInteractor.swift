@@ -21,6 +21,7 @@ class SplashInteractor: SplashInteractorInput {
     
     private var isTryingToLogin = false
     private var isReachabilityStarted = false
+    private var isFirstLogin = false
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -79,6 +80,7 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         
                         SingletonStorage.shared.isJustRegistered = false
+                        self?.isFirstLogin = true
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -168,7 +170,7 @@ class SplashInteractor: SplashInteractorInput {
                 if case ErrorResponse.error(let error) = errorResponse, error.isNetworkError {
                     UIApplication.showErrorAlert(message: errorResponse.description)
                 } else {
-                    self?.output.onFailEULA()
+                    self?.output.onFailEULA(isFirstLogin: self?.isFirstLogin == true)
                 }
             }
         }
