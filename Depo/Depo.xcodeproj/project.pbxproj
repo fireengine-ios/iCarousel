@@ -2564,6 +2564,8 @@
 		8C26009F22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */; };
 		8C2600A32291E2320063E913 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
 		8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C286C4A232134080061EA20 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
+		8C286C4B232134090061EA20 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
@@ -20832,6 +20834,7 @@
 				8930DDB522C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */,
 				989BDE4122F47B1E001DDEB2 /* SpotifyPlaylistsViewController.swift in Sources */,
 				4BF3A69822B38C590082130F /* PermissionsView.swift in Sources */,
+				8C286C4A232134080061EA20 /* SpotifyAccountConnectionCell.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
@@ -23827,6 +23830,7 @@
 				CE784AB622A685FB00662219 /* ColumnsCollectionLayout.swift in Sources */,
 				CE784AB722A685FB00662219 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				CE784AB822A685FB00662219 /* ServerMessageError.swift in Sources */,
+				8C286C4B232134090061EA20 /* SpotifyAccountConnectionCell.swift in Sources */,
 				CE784AB922A685FB00662219 /* Error+Alamofire.swift in Sources */,
 				CE784ABA22A685FB00662219 /* MenloworksTags.swift in Sources */,
 				CE784ABB22A685FB00662219 /* UIImage+Size.swift in Sources */,

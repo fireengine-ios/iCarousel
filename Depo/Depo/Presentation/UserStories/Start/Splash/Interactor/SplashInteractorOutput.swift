@@ -11,7 +11,7 @@ import Foundation
 protocol SplashInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func onSuccessEULA()
-    func onFailEULA()
+    func onFailEULA(isFirstLogin: Bool)
     
     func onSuccessLogin()
     func onSuccessLoginTurkcell()

@@ -12,6 +12,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     private let challenge: TwoFAChallengeModel
     private lazy var authService = AuthenticationService()
     private var accountWarningService: AccountWarningService?
+    private lazy var eulaService = EulaService()
     
     init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
         self.otpParams = otpParams
@@ -116,5 +117,32 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 }
             }
         }
+    }
+    
+    func checkEULA() {
+        eulaService.eulaCheck(success: { [weak self] successResponse in
+            DispatchQueue.main.async {
+                guard let output = self?.output as? TwoFactorChallengePresenter else {
+                    assertionFailure()
+                    return
+                }
+                output.onSuccessEULA()
+            }
+        }) { [weak self] failResponse in
+            DispatchQueue.main.async {
+                //TODO: what do we do on other errors?
+                ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
+                if failResponse.description == "EULA_APPROVE_REQUIRED" {
+                    guard let output = self?.output as? TwoFactorChallengePresenter else {
+                        assertionFailure()
+                        return
+                    }
+                    output.onFailEULA()
+                } else {
+                    UIApplication.showErrorAlert(message: failResponse.description)
+                }
+            }
+        }
+        
     }
 }
