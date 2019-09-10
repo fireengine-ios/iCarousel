@@ -525,7 +525,7 @@
 "Start adding your files" = "Dosyalarını eklemeye başla!";
 "Suggestions" = "Öneriler";
 "Recent Searches" = "Son aramalar";
-"Lifebox can sync your files automatically." = "lifebox fotoğraf ve videolarını otomatik olarak yedekleyebilir.";
+"Lifebox can sync your files automatically." = "lifebox fotoğraf ve videolarını otomatik olarak yedekleyebilir.\nFotoğraf ve videolarının arka planda yedeklenebilmesi için, lütfen lifebox konum izninin \"cihaz ayarları-lifebox-konum\" menüsü altında \"Her Zaman\" olarak ayarlandığına emin ol.";
 "Get Started" = "Başla";
 "I have read and accepted terms of use" = "Kullanım koşullarını okudum ve kabul ettim.";
 "Welcome to Lifebox!" = "lifebox’a hoş geldin!";
@@ -1042,8 +1042,8 @@
 "login_settings_security_passcode_description" = "Turkcell Şifreni SIFRE yazıp 2200'a mesaj atarak alabilir ve bu butonu etkinleştirirsen, Turkcell şifreni kullanarak lifebox'a giriş yapabilirsin.";
 "login_settings_security_autologin_description" = "Bu butonu etkinleştirirsen, 3G / LTE ile internete bağlıyken otomatik olarak lifebox'a giriş yapabilirsin.";
 "login_settings_two_factor_auth_description" = "İki Faktörlü Kimlik Doğrulamayı etkinleştirirsen, giriş yapmadan önce kimliğini doğrulamanı isteyeceğiz. Doğrulama için telefon numarana veya e-posta adresine bir güvenlik kodu göndereceğiz.";
-"two_fa_invalid_session_error_message" = "Session has expired, please request a new code";
-"two_fa_invalid_challenge_error_message" = "Session has expired, please request a new code";
+"two_fa_invalid_session_error_message" = "İki faktörlü kimlik doğrulaması için oturumun süresi doldu.";
+"two_fa_invalid_challenge_error_message" = "İki faktörlü kimlik doğrulaması için oturumun süresi doldu.";
 "two_fa_too_many_attempts_error_message" = "3 kere hatalı giriş yaptın. Lütfen yeni kod talep et.";
 "two_fa_invalid_Otp_error_message" = "Güvenlik kodu geçerli değil, lütfen tekrar dene.";
 "spotify_import_navbar_title" = "Çalma listelerini taşı";
@@ -1068,7 +1068,7 @@
 "later" = "Daha Sonra";
 "change" = "Değiştir";
 "change_email" = "E-postanı değiştir";
-"verify_email_top_title" = "Lütfen hesabını doğrulamak için %@ e-postana gönderdiğimiz %@";
+"verify_email_top_title" = "Lütfen hesabını doğrulamak için e-postana %2$@ gönderdiğimiz %1$@";
 "enter_the_security_code" = "güvenlik kodunu gir";
 "fields_are_not_matched" = "E-postalar uyuşmuyor.";
 "your_email" = "E-postan";
@@ -1114,3 +1114,12 @@
 "two_fa_email_existing_otp_description" = "E-posta adresine güvenlik kodunu gönderdik: %@ Lütfen sana gönderdiğimiz mevcut kodu gir.";
 "two_fa_phone_new_otp_description" = "Telefonuna yeni bir kod gönderdik: %@";
 "two_fa_phone_existing_otp_description" = "Telefonuna güvenlik kodunu gönderdik: %@ Lütfen sana gönderdiğimiz mevcut kodu gir.";
+"Feature" = "";
+"there_are_no_photos_favorites" = "";
+"there_are_no_photos_all" = "";
+"storage" = "";
+"payment_title_app_store" = "";
+"payment_title_credit_card" = "";
+"payment_title_invoice" = "";
+"account_status_title" = "";
+"account_status_message" = "";

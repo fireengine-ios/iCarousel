@@ -343,7 +343,8 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         delegates.invoke(invocation: { $0.importDidCanceled() })
         
         importInProgress = false
-        controller.dismiss(animated: true)
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true, completion: nil)
         
         spotifyService.stop { result in
             switch result {
