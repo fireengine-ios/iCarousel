@@ -61,7 +61,7 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getInfoForAppleProducts(offer: PackageModelResponse) {
         packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
             DispatchQueue.toMain {
-                self?.output.successedGotAppleInfo()
+                self?.output.successedGotAppleInfo(offer: offer)
             }
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
@@ -76,6 +76,10 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
         return packageService.getPriceInfo(for: offer, accountType: accountType)
+    }
+    
+    func convertToSubscriptionPlan(offer: PackageModelResponse, accountType: AccountType) -> [SubscriptionPlan]  {
+        return packageService.convertToSubscriptionPlan(offers: [offer], accountType: accountType)
     }
     
     //MARK: apple purchase

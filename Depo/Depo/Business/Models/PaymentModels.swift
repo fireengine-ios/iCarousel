@@ -10,6 +10,7 @@ import Foundation
 
 struct PaymentModel {
     let name: String
+    let subtitle: String
     let types: [PaymentMethod]
 }
 

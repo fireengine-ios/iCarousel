@@ -700,6 +700,7 @@
 "Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
+"Feature" = "Feature";
 
 /*PremiumBanner*/
 "standard_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
