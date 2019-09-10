@@ -1,3 +1,5 @@
+
+/*Vive, Guarda, Recuerda*/
 "Welcome1Info" = "Vivir, Recopilar, Recordar";
 "Welcome1SubInfo" = "Recopile sus fotos, videos y archivos en Lifebox. Acceda y recuerde cuándo y dónde se encuentre.";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Los servicios de ubicación están deshabilitados en la configuración de su dispositivo. Para usar la función de sincronización en segundo plano de Lifebox, debe habilitar los servicios de ubicación desde el menú \"Configuración - Privacidad - Servicios de ubicación\".";
@@ -17,7 +19,11 @@
 "Success" = "Éxito";
 "Apply" = "Aplicar";
 "Invalid passcode. %@ attempts left. Please try again" = "Código de acceso inválido %@ intentos restantes. Intentelo de nuevo";
+
+/*Touch ID*/
 "Touch ID" = "identifición Touch";
+
+/*Face ID*/
 "Face ID" = "ID de Cara";
 "Enable" = "Habilitar";
 "Please activate %@ from your device settings to use this feature" = "Por favor active %@ desde la configuración de su dispositivo para usar esta función";
@@ -163,6 +169,8 @@
 "Sorry, but folder name should not be empty" = "Lo sentimos, pero el nombre de la carpeta no debe quedar vacío";
 "Play List Name" = "Nombre de lista de reproducción";
 "Album Name" = "Nombre de Álbum";
+
+/*Nombre de Carpeta*/
 "Folder Name" = "Nombre de Caprte";
 "Create" = "Crear";
 "New PlayList" = "Nueva lista de reproducción";
@@ -326,11 +334,15 @@
 "Search" = "Búsqueda";
 "Warning" = "Advertencia";
 "The file isn't supported" = "El archive no está soportado";
+
+/*Tal vez después*/
 "Maybe later" = "Talves después";
 "Yes" = "Sí";
 "Nope" = "No";
 "You have already a backup. Do you want to overwrite the existing one?" = "Ya tiene una copia de seguridad. ¿Desea sobrescribir la existente?";
 "Overwrite backup?" = "¿Desea sobrescribir la copia de seguridad?";
+
+/*El código de verificación no es válido. Inténtelo de nuevo.*/
 "Verification code is invalid. Please try again." = "El código de verificación no es válido. Intentelo de nuevo.";
 "Type the text" = "Ingrese el texto que se muestra en la imagen";
 "E-MAIL" = "CORREO ELECTRÓNICO";
@@ -341,6 +353,8 @@
 "Syncing files using cellular data could incur data charges" = "El uso de datos móviles mientras se sincronizan los archivos puede causar cargos de datos";
 "Sync over data plan?" = "¿Desea realizar la sincronización con el plan de datos?";
 "Skip Auto-Sync" = "Omitir sincronización automática";
+
+/*Se está saltando la configuración de carga automática. Puede activar esto más adelante en la configuración.*/
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Se saltea la configuración de carga automática. Puede activar esto más adelante en la configuración.";
 "Skip setting Auto-Sync?" = "¿Desea omitir la configuración de carga automática?";
 "Skip for now" = "Omitir";
@@ -349,6 +363,8 @@
 "Mobile Data" = "Datos Móviles";
 "Wi-fi" = "Wi-Fi";
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox puede sincronizar sus fotos y videos automáticamente. ¿Desea habilitar la función de carga automática ahora?";
+
+/*Debe escribir su contraseña*/
 "You have to fill in a password" = "Debes escribir su contraseña";
 "You have to fill in your mail or GSM Number" = "Debe completar su dirección de correo electrónico o número de teléfono";
 "Password" = "Contraseña";
@@ -374,10 +390,14 @@
 "Verification code is invalid. \n Please try again." = "El código de verificación no es válido. \nPor favor, Inténtelo de nuevo";
 "Enter the verification code" = "Ingrese el código de verificación";
 "Verify Your Email" = "Verifique su correo electrónico";
+
+/*Verifique su número de teléfono*/
 "Verify Your Phone Number" = "Verifique su numero de telefono";
 "Verify Your Purchase" = "Verifique su compra";
 " You have to fill in a password" = "Debe escribir su contraseña";
 "Please enter valid Email" = "Por favor introduzca un correo electrónico válido";
+
+/*Tiene que escribir su correo electrónico*/
 " You have to fill in your mail" = "Tiene escribir su correo electrónico";
 "Re-Enter Password" = "Escriba la contraseña una vez más";
 "I have an account, let me log in" = "Tengo una cuenta, iniciaré sesión";
@@ -396,6 +416,8 @@
 "Photo uploaded" = "Foto cargada";
 "Please select a language option" = "Por favor seleccione una opción de idioma";
 "My Stories" = "Mis historias";
+
+/*Personas*/
 "People" = "Gente";
 "Things" = "Cosas";
 "Places" = "Lugares";
@@ -483,6 +505,8 @@
 "Photos and videos" = "Fotos y videos";
 "Favorite" = "Favorito";
 "Selected" = "Seleccionado";
+
+/*Mostrar y Ocultar*/
 "Show & Hide" = "Mostrar & Ocultar";
 "Show and Hide" = "Mostrar & Ocultar";
 "+Add a Name" = "+ Agregar un nombre";
@@ -519,7 +543,7 @@
 "Start adding your files" = "Comience a agregar sus archivos";
 "Suggestions" = "Sugerencias";
 "Recent Searches" = "Búsquedas Recientes";
-"Lifebox can sync your files automatically." = "Lifebox puede sincronizar sus archivos automáticamente.";
+"Lifebox can sync your files automatically." = "Lifebox puede sincronizar sus archivos automáticamente.\nPara habilitar la sincronización en segundo plano de sus fotos y videos, asegúrese de que su permiso de ubicación esté establecido en \"SIEMPRE\" en el menú \"configuración del dispositivo-lifebox-ubicación\".";
 "Get Started" = "Iniciar";
 "I have read and accepted terms of use" = "He leído y acepto los términos de uso";
 "Welcome to Lifebox!" = "¡Bienvenido a Lifebox!";
@@ -591,6 +615,8 @@
 "landingSubTitle0" = "¡Recopile sus fotos, videos, contactos y otros archivos en lifebox! Acceda y recuerde cuándo y dónde se encuentre.";
 "landingTitle1" = "Auto-sinc";
 "landingSubTitle1" = "Haga una copia de seguridad automática de todas sus fotos y videos y acceda a ellos desde cualquier lugar.";
+
+/*Reconocimiento facial / imagen*/
 "landingTitle2" = "Reconocimiento de cara / imagen";
 "landingSubTitle2" = "Encuentre sus momentos fácilmente con álbumes inteligentes";
 "landingTitle5" = "Historias automáticas";
@@ -600,6 +626,8 @@
 "landingTitle3" = "Sincronizar Contactos";
 "landingSubTitle3" = "Haga una copia de seguridad de sus contactos, nunca los pierda";
 "landingTitle6" = "Redes sociales";
+
+/*Transfiera todos sus archivos de redes sociales fácilmente a lifebox*/
 "landingSubTitle6" = "Transfiera todos sus archivos de meadia social fácilmente a lifebox";
 "Add GSM Number" = "Agregar el número gsm";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Los videos de más de 4 GB no pueden cargarse en lifebox";
@@ -625,6 +653,8 @@
 "moved" = "Movido";
 "renamed" = "renombrado";
 "copied" = "Copiado";
+
+/*Favorito*/
 "marked as favourite" = "Favourited";
 "Bad internet connection" = "Mala conexión de Internet";
 "download_error_unsupported_extension" = "La descarga no es compatible con este tipo de archivo";
@@ -637,6 +667,8 @@
 "Expiration Date: %@" = "Fecha de caducidad: %@";
 "Failed to get albums" = "no pudo obtener álbumes";
 "termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+
+/*Para desactivar lifebox 25GB por favor envie "Parar1", para lifebox 100GB por favor enviar "Parar2", para lifebox 500GB enviar Parar3 al número 6767*/
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Inicio de sesión denegado Por favor revise sus credenciales";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
@@ -733,6 +765,8 @@
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "Conviértete en miembro Premium para ver todo el  “%@” en tu galería y para poder desbloquear muchas más funciones.";
+
+/*Personas*/
 "face_image_face_recognition" = "Gente";
 "face_image_place_recognition" = "Lugares";
 "face_image_thing_recognition" = "Cosas";
@@ -757,6 +791,8 @@
 "no_analyses_left_message" = "No estés triste, puede comprar un paquete nuevo todavía para analizar tus fotos!";
 "no_analyses_left_button" = "Ser Premium";
 "analyze_history_empty_title" = "¿No has empezado a analizar tus fotos todavía?";
+
+/*Empiece a realizar el análisis para averiguar cuales fotos pueden obtener mas interacciones en redes sociales*/
 "analyze_history_empty_subtitle" = "Ahora empieze realizar el análisis para averiguar las cuales fotos se pueden obtener el rango más alto y compartalas en las redes sociales.";
 "analyze_history_analyze_left" = "Análisis que se han quedado.";
 "analyze_history_analyze_count" = "%1$d / %2$d";
@@ -800,7 +836,7 @@
 "connected_account" = "¡Puedes analizar cuál de tus fotos puede obtener más Me gusta en Instagram usando PhotoPick!";
 "instapick_description" = "Si te gustaria conectarse con tu cuenta de Instagram; podremos proporcionarte una experiencia mejor y personalizada realizando un análisis personalizado en cada uno de análisis de PhotoPick nuevo.";
 "connected_with_instagram" = "Conéctate con Instagram";
-"connected_with_instagram_name" = "Conéctate con Instagram  as";
+"connected_with_instagram_name" = "Conéctate con Instagram";
 "continue_without_connecting" = "Continuar sin conectar.";
 "connected_accounts" = "Las cuentas conectadas.";
 "analyze_history_free_text" = "Ilimitado para ti";
@@ -834,7 +870,9 @@
 "dropbox_remove_connection_warning_message" = "¿Estás seguro de que quieres eliminar tu conexión de Dropbox?";
 "remove_connection" = "Eliminar la conexión.";
 "you_are_connected" = "Conectado";
-"insta_pick_picture_not_found" = "La imagen no se \nha encontrada";
+
+/*La imagen no se encuentra*/
+"insta_pick_picture_not_found" = "La imagen no se encuentra";
 "phone_updated_needs_login" = "Ha actualizado su número de teléfono con éxito, inicie sesión con sus credenciales";
 "server_under_maintenance" = "En Lifebox ahora se lleva a cabo un mantenimiento, por favor intentarlo de nuevo más tarde. ";
 "unlimited_photopick_analysis" = "Derecho PhotoPick ilimitado!";
@@ -855,7 +893,11 @@
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Ser Premium.";
 "store_in_high_quality" = "Copiar tus recuerdos en la calidad alta. ";
+
+/*Puedes análizar 5 PhotoPick*/
 "5_photopick_analysis" = "Derecho de análisis de 5 PhotoPick";
+
+/*Puedes análizar +10 PhotoPick*/
 "10_photopick_analysis" = "Derecho de análisis de +10 PhotoPick";
 "data_package_for_turkcell" = "Paquete de datos adicional. ";
 "delete_duplicated_contacts" = "Eliminar los contactos repetidos en su guía telefónica.";
@@ -871,7 +913,6 @@
 "NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
 "NSPhotoLibraryAddUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
 "NSPhotoLibraryUsageDescription" = "Para mostrar sus fotos y videos en la aplicación y hacer una copia de seguridad de ellos, lifebox necesita acceso a su biblioteca de fotos.";
-"NSLocationWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
 
 /*Usage Info*/
 "package_space_details" = "Se ha utilizado %1$@ / %2$@ (para el uso lifebox)";
@@ -1007,3 +1048,111 @@
 /*Settings page*/
 "Permissions" = "Permisos";
 "NSContactsUsageDescription" = "lifebox necesita acceder y cargar sus contactos a los servidores de Lifebox para hacer una copia de seguridad y administrarlos.";
+"import_from_spotify" = "Transferir de Spotify";
+"import_from_spotify_btn" = "Transferir de Spotify";
+"import_from_spotify_title" = "Conectar a Spotify";
+"Spotify" = "Spotify";
+"spotify_remove_connection_warning_title" = "Estás a punto de eliminar la conexión de Spotify.";
+"spotify_remove_connection_warning_message" = "¿Estás seguro de que deseas eliminar la conexión de Spotify?";
+"support_form_problem_description" = "Es compatible con los idiomas Turco, Ingles y Árabe. Por favor enviarnos este comentario en uno de estos idiomas.";
+"contact_us_subject_1" = "Lifebox/ Problema de Lista";
+"contact_us_subject_2" = "Lifebox/ Problema de Foto";
+"contact_us_subject_3" = "Lifebox/ problema de Video";
+"contact_us_subject_4" = "Lifebox/ Problema de Folio";
+"contact_us_subject_5" = "Lifebox/ Problema de Colaje";
+"contact_us_subject_6" = "Lifebox/ Problema de Photopick";
+"contact_us_subject_7" = "Lifebox/ Problema de Reproducción Automática";
+"contact_us_subject_8" = "Lifebox/ Problema de Agrupación de Cara& Elemento";
+"contact_us_subject_9" = "Lifebox/Problema de Cuentas Conectadas";
+"contact_us_subject_10" = "Lifebox/ Problema de Paquete& Cuota";
+"contact_us_subject_11" = "Lifebox/ Problema de ID y Contraseña Táctil";
+"contact_us_subject_12" = "Lifebox/ Problema de Conexión, Lentitud, Congelación";
+
+/*Settings page*/
+"Permissions" = "Los permisos";
+"selected_items_limit_download" = "No puedes descargar más de d% folios.";
+"selected_items_limit_delete" = "No puedes eliminar más de d% folios.";
+"login_settings_security_passcode_description" = "Puedes obtener tu mensaje de Turkcell al enviar un mensaje a 2200 y si habilitas este botón, puedes acceder a Lifebox al utilizar la contraseña de Turkcell.";
+"login_settings_security_autologin_description" = "Si habilitas este botón, puedes acceder a Lifebox automáticamente cuando estas conectado al internet con 3G/LTE.";
+"login_settings_two_factor_auth_description" = "Si habilitas la autenticación de identidad de dos factores, le pediremos que te autentiques antes de iniciar sesión. Le enviaremos un código de seguridad a su número de teléfono o dirección de correo electrónico para su verificación.";
+"two_fa_invalid_session_error_message" = "La sesión ha sido expirada para la autenticación de identidad de dos factores.";
+"two_fa_invalid_challenge_error_message" = "La sesión ha sido expirada para la autenticación de identidad de dos factores.";
+"two_fa_too_many_attempts_error_message" = "Has entrado mal 3 veces. Por favor solicitar un nuevo código.";
+"two_fa_invalid_Otp_error_message" = "No es válido el código de seguridad, por favor reintentarlo. ";
+"spotify_import_navbar_title" = "Mover las listas de reproducción.";
+"spotify_importing" = "Se están transfiriendo las listas…";
+"spotify_import_from" = "De Spotify";
+"spotify_import_to" = "A Lifebox";
+"spotify_import_description" = "Puedes ver aquí las listas que has movido: \\n Todos Los Folios >Música";
+"spotify_import_in_background" = "Mover en el fondo posterior";
+"spotify_playlist_import_button" = "Mover los seleccionados.";
+"spotify_playlist_navbar_title" = "Las Listas de reproducción de Spotify";
+"spotify_playlist_songs_count" = "Canción d%";
+"spotify_playlist_success_import" = "¡Las listas se movieron con éxito!";
+"spotify_playlist_see_imported" = "Ver las listas movidas";
+"spotify_overwrite_message" = "Esta operación se escribirá en las listas de reproducción transferidas antes que tiene el mismo nombre.";
+"spotify_overwrite_message_bold" = "se escribirá en las listas de reproducción transferidas antes.";
+"spotify_overwrite_cancel_button" = "Cancelar";
+"spotify_overwrite_import_button" = "Mover";
+"spotify_card_title" = "Las Listas de reproducción de Spotify";
+"spotify_card_importing" = "Se están transfiriendo las listas…";
+"spotify_card_last_update" = "Ultima actualización: %@";
+"confirm" = "Aprobar";
+"later" = "Mas Tarde";
+"change" = "Cambiar";
+"change_email" = "Cambiar tu correo electrónico.";
+"verify_email_top_title" = "Por favor, %1$@ que enviamos a su correo electrónico %2$@ para verificar su cuenta:";
+"enter_the_security_code" = "Que enviamos a su correo electrónico %@";
+"fields_are_not_matched" = "No se coinciden los correos electrónicos.";
+"your_email" = "Tu correo electrónico";
+"confirm_your_email" = "Verificar tu correo electrónico";
+"enter_your_email" = "Ingresar tu correo electrónico";
+"change_email_pop_up_top_title" = "Por favor ingresar tu correo electrónico para cambiar la información de tu cuenta y el código de seguridad.";
+"no_account_found" = "No se pudo encontrar la cuenta. ";
+"too_many_requests" = "Se han hecho numerosas pruebas. Por favor volver a intentarlo más tarde";
+"invalid_otp" = "Es invalido el código de verificación. Por favor reintentarlo.";
+"expired_otp" = "No es válido el código de seguridad. Por favor reintentarlo.";
+"token_is_missing" = "No es válido el código de seguridad. Por favor reintentarlo.";
+"invalid_email" = "Has ingresado un correo electrónico incorrecto.";
+"spotify_last_import" = "Ultima actualización: %@";
+"spotify_import_failed_error" = "Ocurrió un error durante la transferencia.";
+"spotify_playlist_navbar_selection_title" = "Seleccionar";
+"spotify_trasfering_playlist_error" = "Ocurrió un error durante la transferencia.";
+"spotify_no_playlists" = "No hay lista de reproducción por transferir";
+"spotify_no_imported_playlists" = "No hay lista de reproducción.";
+"spotify_no_tracks" = "Está vacía la lista de reproducción";
+"spotify_delete_title" = "¿Está seguro de que desea eliminar estos archivos y eliminarlos de Lifebox?";
+"spotify_delete_title_bold" = "Eliminar estos folios.";
+"spotify_delete_subtitle" = "No podrás acceder después de eliminar.";
+"spotify_delete_delete_button" = "Eliminar";
+"spotify_cancel_import_title" = "¿Estás seguro de que deseas cancelar la transferencia de listas de reproducción?";
+"spotify_cancel_import_title_bold" = "Cancelar";
+"spotify_cancel_import_subtitle" = "Si cancelas la operación, las listas de reproducción que moviste en la transferencia anterior se mantendrán como están.";
+"spotify_cancel_import_continue_button" = "Continuar transferencia";
+"spotify_cancel_import_cancel_button" = "Cancelar la transferencia";
+"account_verified" = "¡Gracias por verificar tu correo electrónico!";
+
+/*2FA Error Messages*/
+"two_fa_too_many_requests_error_message" = "Se han solicitado demasiados códigos de verificación, volver a intentarlo más tarde.";
+"2_factor_auth" = "Verificación de Identidad de Dos Factores";
+"extra_auth_new_device_reason" = "Estas ingresando a Lifebox por medio de un dispositivo distinto.";
+"extra_auth_account_setting_reason" = "Has actualizado la verificación de identidad de dos factores en tu cuenta. ";
+"extra_auth_account_navigation_title" = "Control de seguridad";
+"extra_auth_account_describe_label" = "Te enviaremos un código de seguridad para asegurar su cuenta y verificarlo para iniciar sesión de forma segura";
+"extra_auth_account_choose_type" = "Enviar aquí el código de seguridad.";
+"extra_auth_account_phone_cell" = "A mi número de teléfono:";
+"extra_auth_account_email_cell" = "A mi correo electrónico:";
+"NSLocationWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización en segundo plano y para organizar y buscar sus fotos.";
+"two_fa_email_new_otp_description" = "Hemos enviado un nuevo código a tu correo electrónico: %@";
+"two_fa_email_existing_otp_description" = "Hemos enviado el código a tu correo electrónico: %@ Por favor ingresar el código existente que te hemos enviado.";
+"two_fa_phone_new_otp_description" = "Hemos enviado un nuevo código a tu teléfono: %@";
+"two_fa_phone_existing_otp_description" = "Hemos enviado el código de seguridad a tu teléfono: %@ Por favor ingresar el código existente que te hemos enviado.";
+"Feature" = "";
+"there_are_no_photos_favorites" = "";
+"there_are_no_photos_all" = "";
+"storage" = "";
+"payment_title_app_store" = "";
+"payment_title_credit_card" = "";
+"payment_title_invoice" = "";
+"account_status_title" = "";
+"account_status_message" = "";

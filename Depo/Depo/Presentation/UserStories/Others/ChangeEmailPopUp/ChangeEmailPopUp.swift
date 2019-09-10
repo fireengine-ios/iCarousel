@@ -108,6 +108,7 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.textColor = ColorConstants.textOrange
+            newValue.numberOfLines = 0
             newValue.isHidden = true
         }
     }
