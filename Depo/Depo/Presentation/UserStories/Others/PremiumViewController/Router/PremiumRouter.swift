@@ -74,4 +74,10 @@ extension PremiumRouter: PremiumRouterInput {
     func showTermsOfUse() {
         router.pushViewController(viewController: router.termsOfUseScreen)
     }
+    
+    func presentPaymentPopUp(paymentModel: PaymentModel?) {
+        let popup = PaymentPopUpController.controllerWith()
+        popup.paymentModel = paymentModel
+        RouterVC().presentViewController(controller: popup)
+    }
 }

@@ -245,8 +245,8 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             return nil
         }
         
-        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { name in
-            guard let subscriptionPlan = self.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
+        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { [weak self] name in
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
                 assertionFailure()
                 return
             }
@@ -255,7 +255,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
                 MenloworksAppEvents.onSubscriptionClicked(tag)
             }
 
-            self.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
+            self?.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
          
         })
         
