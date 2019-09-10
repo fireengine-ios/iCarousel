@@ -14,7 +14,7 @@ protocol SplashRouterInput {
    
     func navigateToOnboarding()
     
-    func navigateToTermsAndService()
+    func navigateToTermsAndService(isFirstLogin: Bool)
     
     func showNetworkError()
     

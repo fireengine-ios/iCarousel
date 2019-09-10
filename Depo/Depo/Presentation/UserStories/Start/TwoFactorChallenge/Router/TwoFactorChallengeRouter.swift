@@ -14,4 +14,9 @@ final class TwoFactorChallengeRouter: PhoneVerificationRouter {
         ///RouterVC's present make no effect
         router.defaultTopController?.present(router.synchronyseScreen, animated: true, completion: nil)
     }
+    
+    func goToTermsAndServices() {
+        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
+        router.pushViewController(viewController: temsAndServices)
+    }
 }
