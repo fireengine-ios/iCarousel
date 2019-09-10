@@ -39,6 +39,10 @@ struct TextConstants {
         }()
     }
     
+    static func digicelCancelText(for key: String) -> String {
+        return NSLocalizedString(key, tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    }
+    
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let introViewGoToLoginButtonText = NSLocalizedString("I have an account, let me log in", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

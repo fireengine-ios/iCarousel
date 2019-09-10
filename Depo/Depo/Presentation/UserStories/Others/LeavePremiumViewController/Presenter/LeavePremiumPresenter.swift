@@ -96,17 +96,29 @@ final class LeavePremiumPresenter {
         }
         
         if featureType == .allAccessFeature {
-            switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
-            case .all: return TextConstants.offersAllCancel
-            case .cyprus: return TextConstants.featureKKTCellCancelText
-            case .ukranian: return TextConstants.featureLifeCellCancelText
-            case .life: return TextConstants.featureLifeCancelText
-            case .moldovian: return TextConstants.featureMoldCellCancelText
-            case .albanian: return TextConstants.featureAlbanianCancelText
-            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
-            case .FWI: return TextConstants.featureDigicellCancelText
-            case .jamaica: return TextConstants.featureDigicellCancelText
+            // TODO: do we need check turkcell type?
+            switch accountType {
+            case .turkcell:
+                return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
+            default:
+                guard let key = feature.subscriptionPlanLanguageKey else {
+                    return TextConstants.offersAllCancel
+                }
+                return TextConstants.digicelCancelText(for: key)
             }
+            
+            /// old logic
+//            switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
+//            case .all: return TextConstants.offersAllCancel
+//            case .cyprus: return TextConstants.featureKKTCellCancelText
+//            case .ukranian: return TextConstants.featureLifeCellCancelText
+//            case .life: return TextConstants.featureLifeCancelText
+//            case .moldovian: return TextConstants.featureMoldCellCancelText
+//            case .albanian: return TextConstants.featureAlbanianCancelText
+//            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
+//            case .FWI: return TextConstants.featureDigicellCancelText
+//            case .jamaica: return TextConstants.featureDigicellCancelText
+//            }
         } else {
             return featureType.cancelText
         }

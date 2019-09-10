@@ -85,21 +85,45 @@ extension MyStoragePresenter: MyStorageViewOutput {
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
-        guard let model = plan.model as? SubscriptionPlanBaseResponse, let type =  model.subscriptionPlanType else {
+        
+        guard let model = plan.model as? SubscriptionPlanBaseResponse else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
         
-        switch type {
-        case .apple:
-            router?.showCancelOfferApple()
-        case .SLCM:
-            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
-            router?.showCancelOfferAlert(with: cancelText)
-        default:
-            let cancelText = String(format: type.cancelText, plan.name)
+        if let type = model.subscriptionPlanType {
+            switch type {
+            case .apple:
+                router?.showCancelOfferApple()
+                
+            case .SLCM:
+                let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+                router?.showCancelOfferAlert(with: cancelText)
+                
+            default:
+                let cancelText: String
+                if let key = model.subscriptionPlanLanguageKey {
+                    cancelText = TextConstants.digicelCancelText(for: key)
+                } else {
+                    // TODO: can we set "cancelText = TextConstants.offersAllCancel" ?
+                    cancelText = String(format: type.cancelText, plan.name)
+                }
+                
+                router?.showCancelOfferAlert(with: cancelText)
+            }
+            
+        } else {
+            
+            let cancelText: String
+            if let key = model.subscriptionPlanLanguageKey {
+                cancelText = TextConstants.digicelCancelText(for: key)
+            } else {
+                cancelText = TextConstants.offersAllCancel
+            }
+            
             router?.showCancelOfferAlert(with: cancelText)
         }
+        
     }
     
     func restorePurchasesPressed() {
@@ -129,12 +153,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
         self.allOffers = allOffers.filter {
-            //show only non-feature offers
+            /// show only non-feature offers
             if $0.subscriptionPlanType == nil {
                  return false
             }
             
-            //hide apple offers if apple server don't sent offer info
+            /// hide apple offers if apple server don't sent offer info
             if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
                 return false
             }
