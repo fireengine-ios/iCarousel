@@ -232,10 +232,9 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             }
         }
         
-        let paymentModel = PaymentModel(name: name, types: paymentMethods)
-        
-        let popup = PaymentPopUpController.controllerWith()
-        popup.paymentModel = paymentModel
+        let subtitle = TextConstants.storage
+        let paymentModel = PaymentModel(name: name, subtitle: subtitle, types: paymentMethods)
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
         present(popup, animated: false, completion: nil)
     }
     

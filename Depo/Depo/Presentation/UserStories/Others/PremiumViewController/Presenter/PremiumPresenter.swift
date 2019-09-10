@@ -107,8 +107,9 @@ final class PremiumPresenter {
                 return nil
             }
         }
-           
-        return PaymentModel(name: name, types: paymentMethods)
+        
+        let subtitle = TextConstants.feature
+        return PaymentModel(name: name, subtitle: subtitle, types: paymentMethods)
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {

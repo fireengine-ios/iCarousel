@@ -76,8 +76,7 @@ extension PremiumRouter: PremiumRouterInput {
     }
     
     func presentPaymentPopUp(paymentModel: PaymentModel?) {
-        let popup = PaymentPopUpController.controllerWith()
-        popup.paymentModel = paymentModel
-        RouterVC().presentViewController(controller: popup)
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
+        router.presentViewController(controller: popup)
     }
 }
