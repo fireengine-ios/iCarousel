@@ -32,9 +32,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBOutlet weak var operationButtonsStackView: UIStackView!
-    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
+    
+    @IBOutlet weak var backUpButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    @IBOutlet weak var restoreButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    @IBOutlet weak var deleteDuplicatedButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
     
     @IBOutlet weak var backupDateLabel: UILabel!
     
@@ -89,11 +90,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
-        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
-        
-        restoreButton.adjustsFontSizeToFitWidth()
-        deleteDuplicatedButton.adjustsFontSizeToFitWidth()
+        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
+      
         cancelButton.adjustsFontSizeToFitWidth()
         
         if tabBarSetup {
@@ -101,7 +100,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
         
         output.viewIsReady()
-        
         MenloworksAppEvents.onContactSyncPageOpen()
     }
     

@@ -14,6 +14,7 @@ class AdjustsFontSizeInsetsButton: UIButton {
             setNeedsDisplay()
         }
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -29,12 +30,12 @@ class AdjustsFontSizeInsetsButton: UIButton {
             assertionFailure()
             return
         }
-        /// must be at the beginning
+        /// lineBreakMode must be at the beginning!
         buttonLabel.lineBreakMode = .byClipping
 
         buttonLabel.adjustsFontSizeToFitWidth = true
         buttonLabel.numberOfLines = 0
-        buttonLabel.minimumScaleFactor = 0.1
+        buttonLabel.minimumScaleFactor = 0.5
         buttonLabel.textAlignment = .center
     }
 
@@ -84,5 +85,21 @@ final class AdjustsFontSizeInsetsRoundedDarkBlueButton: AdjustsFontSizeInsetsRou
         setBackgroundColor(ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
         setTitleColor(ColorConstants.whiteColor, for: .normal)
         setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+    }
+    
+    override func layoutSubviews() {
+        /// call before "super.layoutSubviews()".
+        /// needs for "titleLabel?.frame = UIEdgeInsetsInsetRect(bounds, insets)"
+        setInsets()
+        
+        super.layoutSubviews()
+    }
+    
+    private func setInsets() {
+        guard bounds.height > 0 else {
+            return
+        }
+        let inset = frame.height * 0.3
+        insets = UIEdgeInsets(top: 0.0, left: inset, bottom: 0.0, right: inset)
     }
 }
