@@ -94,7 +94,36 @@ class LoginPresenter: BasePresenter {
     
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
         completeAsyncOperationEnableScreen()
-        router.showAccountStatePopUp(deletedAccountHandler: deletedAccountHandler)
+
+        let image = UIImage(named: "Path")
+        let title = TextConstants.accountStatusTitle
+        
+        let titleFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaFont(size: 18),
+            .foregroundColor : UIColor.black,
+            .kern : 0
+        ]
+        
+        let message = TextConstants.accountStatusMessage
+        
+        let messageParagraphStyle = NSMutableParagraphStyle()
+        messageParagraphStyle.paragraphSpacing = 8
+        messageParagraphStyle.alignment = .center
+        
+        let messageFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaMedFont(size: 16),
+            .foregroundColor : ColorConstants.blueGrey,
+            .paragraphStyle : messageParagraphStyle,
+            .kern : 0
+        ]
+        
+        router.showAccountStatePopUp(image: .custom(image),
+                                     title: title,
+                                     titleDesign: .partly(parts: [title : titleFullAttributes]),
+                                     message: message,
+                                     messageDesign: .partly(parts: [message : messageFullAttributes]),
+                                     buttonTitle: TextConstants.ok,
+                                     buttonAction: deletedAccountHandler)
     }
 
 }

@@ -30,5 +30,11 @@ protocol LoginRouterInput {
     
     func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
     
-    func showAccountStatePopUp(deletedAccountHandler: @escaping VoidHandler)
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler)
 }
