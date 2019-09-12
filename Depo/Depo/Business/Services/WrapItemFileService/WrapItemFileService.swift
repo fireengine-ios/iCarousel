@@ -187,24 +187,28 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
         
-        guard let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty else {
-            assertionFailure()
-            fail?(ErrorResponse.string(TextConstants.errorServer))
-            return
+        let uuidsToShare: [String]
+        
+        /// photo, video, files, folders
+        if let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty {
+            
+            let remoteUUIDs = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
+            let folderUUIDs = remoteFoldersUUIDs(files: sharedItems)
+            uuidsToShare = remoteUUIDs + folderUUIDs
+            
+        /// albums
+        } else {
+            uuidsToShare = remoteItemsUUID(files: sharedFiles)
         }
         
-        let remoteUUIDs = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
-        let folderUUIDs = remoteFoldersUUIDs(files: sharedItems)
-        let uuids = remoteUUIDs + folderUUIDs
-        
-        guard !uuids.isEmpty else {
+        guard !uuidsToShare.isEmpty else {
             assertionFailure()
             fail?(ErrorResponse.string(TextConstants.errorServer))
             return
         }
         
         let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
-        let param = SharedServiceParam(filesList: uuids, isAlbum: isAlbum, sharedType: .link)
+        let param = SharedServiceParam(filesList: uuidsToShare, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
     }
     
