@@ -42,20 +42,21 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: navVC)
     }
     
-    func showAccountStatePopUp(deletedAccountHandler: @escaping VoidHandler) {
-        let titleFullAttributes: [NSAttributedStringKey : Any] = [
-            .font : UIFont.TurkcellSaturaFont(size: 15),
-            .foregroundColor : UIColor.black,
-            .kern : 0
-        ]
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler) {
         
-        let popUp = CreateStoryPopUp.with(image: UIImage(named: "Path"),
-                                          title: TextConstants.accountStatusTitle,
-                                          titleDesign: .full(attributes: titleFullAttributes),
-                                          message: TextConstants.accountStatusMessage,
-                                          messageDesign: .full(attributes: titleFullAttributes),
-                                          buttonTitle: TextConstants.createStoryPhotosContinue,
-                                          buttonAction: deletedAccountHandler)
+        let popUp = CreateStoryPopUp.with(image: image.image,
+                                          title: title,
+                                          titleDesign: titleDesign,
+                                          message: message,
+                                          messageDesign: messageDesign,
+                                          buttonTitle: buttonTitle,
+                                          buttonAction: buttonAction)
         router.presentViewController(controller: popUp, animated: false)
     }
     
