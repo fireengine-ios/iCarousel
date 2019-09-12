@@ -340,19 +340,19 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
 extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     
     func importDidCancel(_ controller: SpotifyImportViewController) {
-        delegates.invoke(invocation: { $0.importDidCanceled() })
-        
         importInProgress = false
         router.navigationController?.popViewController(animated: false)
         controller.dismiss(animated: true, completion: nil)
         
-        spotifyService.stop { result in
+        spotifyService.stop { [weak self] result in
             switch result {
             case .success(_):
                 debugPrint("Spotify import cancelled")
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
+            
+            self?.delegates.invoke(invocation: { $0.importDidCanceled() })
         }
     }
     
