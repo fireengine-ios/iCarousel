@@ -6,7 +6,7 @@
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
 
 appName = 'lifebox' // this will be the base filename of the app
-groupPath = "com/ttech/yaanimail/ios" // This will be used on artifactory
+groupPath = "com/ttech/lifebox/ios" // This will be used on artifactory
 
 // Deploy to ICT Store
 ictsContainerId = '743'
@@ -20,7 +20,7 @@ xcodeParams = [
         xcodeApp: 'Xcode.app',
         target: 'TC_Depo_LifeTech',
         workspaceFile: 'Depo/Depo',
-        versionInfoPath: 'Depo/App/Depo-Info.plist',
+        versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         schema: 'TC_Depo_LifeTech'
 ]
 
@@ -28,20 +28,12 @@ def flavors = [
     test: [
         configuration: 'Enterprise',
         developmentTeamID: 'LA4DZFY7SY',
-        ipaExportMethod: 'enterprise',
-        provisioningProfiles: [
-          [provisioningProfileAppId: 'com.turkcell.yaanimail.ent', provisioningProfileUUID: 'yaanimailent.mobileprovision'],
-          [provisioningProfileAppId: 'com.turkcell.yaanimail.ent.ShareContent', provisioningProfileUUID: 'yaanimailsharecontentent.mobileprovision']
-        ]
+        ipaExportMethod: 'enterprise'
     ],
     prod: [
         configuration: 'AppStore',
         developmentTeamID: '7YZS5NTGYH',
-        ipaExportMethod: 'app-store',
-        provisioningProfiles: [
-          [provisioningProfileAppId: 'com.turkcell.yaanimail', provisioningProfileUUID: 'yaanimail.mobileprovision'],
-          [provisioningProfileAppId: 'com.turkcell.yaanimail.ShareContent', provisioningProfileUUID: 'yaanimailsharecontentent.mobileprovision']
-        ]
+        ipaExportMethod: 'app-store'
     ]
 ]
 /***** PROJECT variables END ******/
@@ -58,6 +50,11 @@ echo "Branch Name: ${branchName}"
 
 def xcodeBuild = { flavorId ->
     def flavor = flavors[flavorId]
+    def provisionFiles = findFiles(glob: "provisioningProfiles/${flavor}/*.mobileprovision")
+    def provisioningProfiles = provisionFiles.collect { file -> [
+        provisioningProfileAppId: file.name.replace('_','.') - '.mobileprovision',
+        provisioningProfileUUID: file.name
+        ] }
     step([$class: 'XCodeBuilder', 
       target: xcodeParams.target,
       interpretTargetAsRegEx: false,
@@ -81,7 +78,7 @@ def xcodeBuild = { flavorId ->
       developmentTeamID: flavor.developmentTeamID,
       
       // Provisioning Profiles
-      provisioningProfiles: flavor.provisioningProfiles,
+      provisioningProfiles: provisioningProfiles,
       
       // Change bundle ID?
       changeBundleID: false,
@@ -142,7 +139,7 @@ pipeline {
                         def appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
                         //def declaredBuild = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' ${infoFile}"
                         //appVersion = "${declaredVersion.trim()}.${declaredBuild.trim()}"
-                        version = "${appVersion}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
+                        version = "${appVersion.trim()}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
 
                         echo "Building version: ${version}"
 
@@ -261,14 +258,21 @@ pipeline {
                 skipDefaultCheckout true
             }
             environment {
-                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
                 IOS_PASS = credentials('iosLoginPass')
-            }
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
+                TESTFLIGHT_UPLOAD = credentials('testflightUpload')
+                FASTLANE_DONT_STORE_PASSWORD = 1
+           }
             steps {
                 script {
                     xcodeBuild('prod')
-                    // sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
-                    // sh 'fastlane beta'
+                    sh "cp build/${appName}-${BUILD_ID}-prod ${appName}.ipa"
+                    sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
+                    sh """
+                        export FASTLANE_USER=${TESTFLIGHT_UPLOAD_USR}
+                        export FASTLANE_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
+                        ~/.fastlane/bin/fastlane beta
+                    """
                 }
             }
 			post {
