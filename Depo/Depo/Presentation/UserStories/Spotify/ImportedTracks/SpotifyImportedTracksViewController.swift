@@ -97,15 +97,16 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
                                                     }
                                                     
                                                     self.isLoadingNextPage = false
-                                                    
-                                                    switch result {
-                                                    case .success(let tracks):
-                                                        self.page += 1
-                                                        self.dataSource.append(tracks)
-                                                    case .failed(let error):
-                                                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                    DispatchQueue.main.async {
+                                                        switch result {
+                                                        case .success(let tracks):
+                                                            self.page += 1
+                                                            self.dataSource.append(tracks)
+                                                        case .failed(let error):
+                                                            UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                        }
+                                                        self.updateEmptyView()
                                                     }
-                                                    self.updateEmptyView()
                                                 }
     }
     

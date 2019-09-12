@@ -149,7 +149,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         }
         
         let countRow: Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-        let isLastCell = countRow - 1 == indexPath.row
+        let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 1
         
         if isLastCell {
             delegate?.needLoadNextPage()
