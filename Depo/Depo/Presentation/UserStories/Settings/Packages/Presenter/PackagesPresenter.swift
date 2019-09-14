@@ -225,7 +225,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
                 
             default:
                 return false
-                
             }
         })
         
