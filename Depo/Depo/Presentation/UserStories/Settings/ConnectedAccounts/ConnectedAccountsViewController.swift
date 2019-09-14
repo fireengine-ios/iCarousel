@@ -84,9 +84,10 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 // MARK: - SocialConnectionCellDelegate
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
-        if section.set(expanded: true) {
-            /// DispatchQueue.toMain invokes too fast
-            DispatchQueue.main.async {
+        
+        /// DispatchQueue.toMain invokes too fast
+        DispatchQueue.main.async {
+            if section.set(expanded: true) {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.insertRows(at: [indexPath], with: .fade)
@@ -95,8 +96,8 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     }
     
     func didDisconnectSuccessfully(section: Section) {
-        if section.set(expanded: false) {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            if section.set(expanded: false) {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
                                           section: section.account.rawValue)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
