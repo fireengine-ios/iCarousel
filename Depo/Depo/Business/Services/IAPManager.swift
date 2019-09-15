@@ -53,7 +53,7 @@ final class IAPManager: NSObject {
     
     func loadProducts(productIds: [String], isActivePurchases: Bool, handler: @escaping ResponseBool) {
         debugLog("IAPManager loadProductsWithProductIds")
-        self.isActivePurchases = isActivePurchases
+        setActivePurchasesState(isActivePurchases)
         offerAppleHandler = handler
         let request = SKProductsRequest(productIdentifiers: Set(productIds))
         request.delegate = self
@@ -102,6 +102,10 @@ final class IAPManager: NSObject {
         }
         
         return products.first(where: { $0.productIdentifier == productId })
+    }
+    
+    func setActivePurchasesState(_ isActivePurchases: Bool) {
+        self.isActivePurchases = isActivePurchases
     }
 }
 
