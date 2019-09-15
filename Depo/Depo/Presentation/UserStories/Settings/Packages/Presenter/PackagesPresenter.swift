@@ -65,6 +65,7 @@ extension PackagesPresenter: PackagesViewOutput {
     func viewWillAppear() {
         view?.startActivityIndicator()
         interactor.getUserAuthority()
+        interactor.refreshActivePurchasesState(false)
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -225,7 +226,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
                 
             default:
                 return false
-                
             }
         })
         

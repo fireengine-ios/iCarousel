@@ -235,9 +235,9 @@ final class PackageService {
         }
     }
     
-    func getInfoForAppleProducts(offers: [Any], success: @escaping () -> (), fail: @escaping (Error) -> ()) {
+    func getInfoForAppleProducts(offers: [Any], isActivePurchases: Bool = false, success: @escaping () -> (), fail: @escaping (Error) -> ()) {
         let appleOffers = getAppleIds(for: offers)
-        iapManager.loadProducts(productIds: appleOffers) { response in
+        iapManager.loadProducts(productIds: appleOffers, isActivePurchases: isActivePurchases) { response in
             switch response {
             case .success(_):
                 success()

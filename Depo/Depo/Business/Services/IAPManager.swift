@@ -29,7 +29,11 @@ final class IAPManager: NSObject {
     private var restoreInProgress = false
     private var purchaseInProgress = false
     
-    private var products: [SKProduct]?
+    private var isActivePurchases = false
+    
+    /// 2 arrays to separate active and inactive purchases and that they don't overwrite each other
+    private var offered: [SKProduct]?
+    private var activeProducts: [SKProduct]?
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
@@ -47,9 +51,9 @@ final class IAPManager: NSObject {
         }
     }
     
-    func loadProducts(productIds: [String], handler: @escaping ResponseBool) {
+    func loadProducts(productIds: [String], isActivePurchases: Bool, handler: @escaping ResponseBool) {
         debugLog("IAPManager loadProductsWithProductIds")
-        
+        setActivePurchasesState(isActivePurchases)
         offerAppleHandler = handler
         let request = SKProductsRequest(productIdentifiers: Set(productIds))
         request.delegate = self
@@ -92,11 +96,16 @@ final class IAPManager: NSObject {
     }
     
     func product(for productId: String) -> SKProduct? {
-        guard let products = products else {
+        let currentProducts = isActivePurchases ? activeProducts : offered
+        guard let products = currentProducts else {
             return nil
         }
         
         return products.first(where: { $0.productIdentifier == productId })
+    }
+    
+    func setActivePurchasesState(_ isActivePurchases: Bool) {
+        self.isActivePurchases = isActivePurchases
     }
 }
 
@@ -104,7 +113,11 @@ extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         debugLog("IAPManager Loaded list of products")
         
-        products = response.products
+        if isActivePurchases {
+            activeProducts = response.products
+        } else {
+            offered = response.products
+        }
         
         offerAppleHandler(.success(true))
     }
