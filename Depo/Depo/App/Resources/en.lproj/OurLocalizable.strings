@@ -547,7 +547,7 @@
 "Start adding your files" = "Start adding your files";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
-"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically.";
+"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" under your “device settings-lifebox-location” menu.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
@@ -700,6 +700,7 @@
 "Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
+"Feature" = "Feature";
 
 /*PremiumBanner*/
 "standard_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
@@ -1090,7 +1091,7 @@
 "later" = "Later";
 "change" = "Change";
 "change_email" = "Change e-mail";
-"verify_email_top_title" = "Please %@ we sent to your e-mail %@ to verify your account:";
+"verify_email_top_title" = "Please %1$@ we sent to your e-mail %2$@ to verify your account:";
 "enter_the_security_code" = "enter the security code";
 "fields_are_not_matched" = "E-mails do not match.";
 "your_email" = "Your E-mail";
@@ -1125,7 +1126,7 @@
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
 "2_factor_auth" = "Two-Factor Authentication";
 "extra_auth_new_device_reason" = "You are logging into lifebox from a different device";
-"extra_auth_account_setting_reason" = "You activated two factor authentication on your account";
+"extra_auth_account_setting_reason" = "You activated two-factor authentication on your account";
 "extra_auth_account_navigation_title" = "Security Check";
 "extra_auth_account_describe_label" = "To secure your account and login safely, we’ll send you a security code to verify your identity.";
 "extra_auth_account_choose_type" = "Send the security code:";
@@ -1141,5 +1142,12 @@
 "two_fa_email_existing_otp_description" = "We have already sent the code to your email: %@ Please enter existing code.";
 "two_fa_phone_new_otp_description" = "We have sent a code to your phone number: %@";
 "two_fa_phone_existing_otp_description" = "We have already sent the code to your phone number: %@ Please enter existing code.";
+"Feature" = "Feature";
+"there_are_no_photos_favorites" = "You don't have any photos or videos on your Favorites list";
+"there_are_no_photos_all" = "You don't have any photos or videos";
+"storage" = "Storage";
+"payment_title_app_store" = "App Store";
+"payment_title_credit_card" = "Credit card";
+"payment_title_invoice" = "Invoice";
 "account_status_title" = "Your account is active now!";
 "account_status_message" = "Your account is activated because of your login. If you want to delete your account permanently, you should not be logged in for 1 month after deleting";

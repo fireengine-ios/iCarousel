@@ -2,10 +2,11 @@ import UIKit
 
 final class PaymentPopUpController: UIViewController {
     
-    static func controllerWith() -> PaymentPopUpController {
+    static func controllerWith(_ paymentModel: PaymentModel?) -> PaymentPopUpController {
         let vc = PaymentPopUpController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
+        vc.paymentModel = paymentModel
         return vc
     }
     
@@ -64,15 +65,14 @@ final class PaymentPopUpController: UIViewController {
             newValue.textColor = ColorConstants.lightText
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
-            newValue.text = TextConstants.storage
+            newValue.text = paymentModel?.subtitle
         }
     }
     
     // MARK: - Properties
     
     
-    var paymentModel: PaymentModel?
-    
+    private var paymentModel: PaymentModel?
     private let cornerRadius: CGFloat = 8
     private var isShown = false
     
