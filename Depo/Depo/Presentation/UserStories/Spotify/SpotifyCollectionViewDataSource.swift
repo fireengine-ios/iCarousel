@@ -192,6 +192,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        collectionView.contentOffset = .zero
         return showGroups ? CGSize(width: UIScreen.main.bounds.width, height: 50) : .zero
     }
 }
