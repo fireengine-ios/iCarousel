@@ -91,34 +91,39 @@ final class LeavePremiumPresenter {
     }
     
     private var cancelText: String? {
-        guard let feature = feature, let featureType = feature.subscriptionPlanFeatureType else {
+        guard let feature = feature else {
             return nil
         }
         
+        guard let featureType = feature.subscriptionPlanFeatureType else {
+            if let key = feature.subscriptionPlanLanguageKey {
+                return TextConstants.digicelCancelText(for: key)
+            } else {
+                return TextConstants.offersAllCancel
+            }
+        }
+        
         if featureType == .allAccessFeature {
-            // TODO: do we need check turkcell type?
-            switch accountType {
-            case .turkcell:
-                return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
-            default:
-                guard let key = feature.subscriptionPlanLanguageKey else {
+            
+            guard let accountType = interactor.getAccountType(with: accountType.rawValue, offers: [feature]) else {
+                if let key = feature.subscriptionPlanLanguageKey {
+                    return TextConstants.digicelCancelText(for: key)
+                } else {
                     return TextConstants.offersAllCancel
                 }
-                return TextConstants.digicelCancelText(for: key)
             }
             
-            /// old logic
-//            switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
-//            case .all: return TextConstants.offersAllCancel
-//            case .cyprus: return TextConstants.featureKKTCellCancelText
-//            case .ukranian: return TextConstants.featureLifeCellCancelText
-//            case .life: return TextConstants.featureLifeCancelText
-//            case .moldovian: return TextConstants.featureMoldCellCancelText
-//            case .albanian: return TextConstants.featureAlbanianCancelText
-//            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
-//            case .FWI: return TextConstants.featureDigicellCancelText
-//            case .jamaica: return TextConstants.featureDigicellCancelText
-//            }
+            switch accountType {
+            case .all: return TextConstants.offersAllCancel
+            case .cyprus: return TextConstants.featureKKTCellCancelText
+            case .ukranian: return TextConstants.featureLifeCellCancelText
+            case .life: return TextConstants.featureLifeCancelText
+            case .moldovian: return TextConstants.featureMoldCellCancelText
+            case .albanian: return TextConstants.featureAlbanianCancelText
+            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
+            case .FWI: return TextConstants.featureDigicellCancelText
+            case .jamaica: return TextConstants.featureDigicellCancelText
+            }
         } else {
             return featureType.cancelText
         }

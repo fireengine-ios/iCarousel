@@ -105,7 +105,7 @@ extension MyStoragePresenter: MyStorageViewOutput {
                 if let key = model.subscriptionPlanLanguageKey {
                     cancelText = TextConstants.digicelCancelText(for: key)
                 } else {
-                    // TODO: can we set "cancelText = TextConstants.offersAllCancel" ?
+                    /// maybe needs "cancelText = TextConstants.offersAllCancel"
                     cancelText = String(format: type.cancelText, plan.name)
                 }
                 
@@ -141,7 +141,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func successed(accountInfo: AccountInfoResponse) {
         if let accountTypeString = accountInfo.accountType {
-            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
+            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
         }
         
         if accountType == .all {
@@ -166,7 +166,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             return true
         }
         
-        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers) ?? .all
         displayOffers()
     }
     

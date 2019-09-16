@@ -196,7 +196,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(accountTypeString: String) {
-        accountType = interactor.getAccountType(with: accountTypeString, offers: [])
+        accountType = interactor.getAccountType(with: accountTypeString, offers: []) ?? .all
         
         if accountType != .turkcell {
             view?.showInAppPolicy()
@@ -216,7 +216,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(allOffers: [PackageModelResponse]) {
 
-        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = filterPackagesByQuota(offers: offers)
         
