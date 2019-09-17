@@ -229,7 +229,7 @@ final class PackageService {
     }
     
     //MARK: Utility Methods(public)
-    func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType {
+    func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType? {
         if AccountType(rawValue: accountType) == .turkcell {
             return .turkcell
         } else {
@@ -247,7 +247,7 @@ final class PackageService {
                 }
             }
             
-            return .all
+            return nil
         }
     }
     

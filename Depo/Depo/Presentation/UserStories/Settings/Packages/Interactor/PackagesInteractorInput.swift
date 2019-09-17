@@ -17,7 +17,7 @@ protocol PackagesInteractorInput {
     func getAvailableOffers(with accountType: AccountType)
     func getAccountType()
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String
     
     func restorePurchases()
