@@ -321,8 +321,12 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
-                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                        let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                        accountWarning == HeaderConstant.emptyMSISDN ||
+                        accountWarning == HeaderConstant.emptyEmail ||
+                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                            sucess?(headers)
                             return
                         }
                         
@@ -613,7 +617,7 @@ class AuthenticationService: BaseRequestService {
     func loginViaTwoFactorAuth(token: String,
                                challengeType: String,
                                otpCode: String,
-                               handler: @escaping ResponseVoid) {
+                               handler: @escaping (ResponseResult<[String: Any]>) -> Void) {
         debugLog("AuthenticationService loginViaTwoFactorAuth")
         
         let params: [String: Any] = [
@@ -633,13 +637,13 @@ class AuthenticationService: BaseRequestService {
                     let json = JSON(data: data)
                     if let errorType = json["errorType"].string {
                         handler(.failed(ErrorResponse.string(errorType)))
-                        
                     } else {
                         guard let headers = response.response?.allHeaderFields as? [String: Any] else {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             handler(.failed(error))
                             return
                         }
+                        
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self.tokenStorage.accessToken = accessToken
                         }
@@ -650,9 +654,11 @@ class AuthenticationService: BaseRequestService {
                         
                         /// must be after accessToken save logic
                         if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
                             accountWarning == HeaderConstant.emptyMSISDN ||
-                            accountWarning == HeaderConstant.emptyEmail {
-                                handler(.failed(ErrorResponse.string(accountWarning)))
+                            accountWarning == HeaderConstant.emptyEmail ||
+                                accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                                handler(.success(headers))
                                 return
                         }
                         
@@ -663,7 +669,7 @@ class AuthenticationService: BaseRequestService {
                         }
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
                             CacheManager.shared.actualizeCache(completion: nil)
-                            handler(.success(()))
+                            handler(.success(headers))
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
                             handler(.failed(error))
