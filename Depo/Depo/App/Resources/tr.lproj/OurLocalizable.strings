@@ -525,7 +525,7 @@
 "Start adding your files" = "Dosyalarını eklemeye başla!";
 "Suggestions" = "Öneriler";
 "Recent Searches" = "Son aramalar";
-"Lifebox can sync your files automatically." = "lifebox fotoğraf ve videolarını otomatik olarak yedekleyebilir.\nFotoğraf ve videolarının arka planda yedeklenebilmesi için, lütfen lifebox konum izninin \"cihaz ayarları-lifebox-konum\" menüsü altında \"Her Zaman\" olarak ayarlandığına emin ol.";
+"Lifebox can sync your files automatically." = "lifebox fotoğraf ve videolarını otomatik olarak yedekleyebilir.\n\nFotoğraf ve videolarının arka planda yedeklenebilmesi için, lütfen lifebox konum izninin \"cihaz ayarları-lifebox-konum\" menüsü altında \"Her Zaman\" olarak ayarlandığına emin ol.";
 "Get Started" = "Başla";
 "I have read and accepted terms of use" = "Kullanım koşullarını okudum ve kabul ettim.";
 "Welcome to Lifebox!" = "lifebox’a hoş geldin!";
