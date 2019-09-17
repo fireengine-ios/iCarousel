@@ -190,7 +190,6 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 
     func processLoginError(_ loginError: LoginResponseError, errorText: String) {
-        
         switch loginError {
         case .block:
             failedBlockError()
