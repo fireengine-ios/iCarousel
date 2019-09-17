@@ -12,7 +12,7 @@ protocol MyStorageViewOutput {
     func didPressOn(plan: SubscriptionPlan, planIndex: Int)    
     func restorePurchasesPressed()
     
-    var displayableOffers: [PackageOffer] { get }
+    var displayableOffers: [SubscriptionPlan] { get }
     var accountType: AccountType { get }
     var title: String { get }
 }
