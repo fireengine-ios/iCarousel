@@ -196,6 +196,7 @@ extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
         collectionView.reloadData()
         collectionViewTopOffset.constant = successImportView.bounds.height
         view.layoutIfNeeded()
+        collectionView.contentOffset = .zero
     }
     
     func importDidCanceled(){ }

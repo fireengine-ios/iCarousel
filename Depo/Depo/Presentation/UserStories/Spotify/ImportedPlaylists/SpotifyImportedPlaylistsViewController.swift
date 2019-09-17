@@ -33,7 +33,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
-    private let contentInsets: CGFloat = 0
     
     private var sortedRule: SortedRules = .timeUp {
         didSet {
@@ -46,7 +45,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.contentInset = UIEdgeInsets(top: contentInsets, left: contentInsets, bottom: contentInsets, right: contentInsets)
         navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()
