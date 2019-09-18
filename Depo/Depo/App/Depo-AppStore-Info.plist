@@ -195,5 +195,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>lifebox needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 </dict>
 </plist>
