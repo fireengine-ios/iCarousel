@@ -83,7 +83,15 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         contactSyncResponse = response
-        view.success(response: response, forOperation: operation)
+        /// Delay is needed due to instant progress reset on completion
+        if view.isFullCircle {
+            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
+                self.view.success(response: response, forOperation: operation)
+            }
+        } else {
+            view.success(response: response, forOperation: operation)
+        }
+       
     }
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
