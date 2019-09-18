@@ -117,6 +117,8 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>lifebox needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
