@@ -117,6 +117,8 @@ enum PackageType: String {
                 return .appStore
             case .SLCM:
                 return .slcm
+            case .paycellSLCM:
+                return .paycell
             case .paycellAllAccess:
                 return .paycell
             default:
