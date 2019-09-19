@@ -306,7 +306,6 @@ class AuthenticationService: BaseRequestService {
                 .responseString { [weak self] response in
                     switch response.result {
                     case .success(_):
-                        
                         guard let headers = response.response?.allHeaderFields as? [String: Any] else {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
@@ -322,9 +321,11 @@ class AuthenticationService: BaseRequestService {
                         
                         /// must be after accessToken save logic
                         if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
-                        let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-                        accountWarning == HeaderConstant.emptyMSISDN ||
-                        accountWarning == HeaderConstant.emptyEmail ||
+                            accountWarning == HeaderConstant.emptyMSISDN ||
+                            accountWarning == HeaderConstant.emptyEmail {
+                            sucess?(headers)
+                            return
+                        } else if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
                             accountStatus.uppercased() == ErrorResponseText.accountDeleted {
                             sucess?(headers)
                             return
@@ -654,12 +655,14 @@ class AuthenticationService: BaseRequestService {
                         
                         /// must be after accessToken save logic
                         if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
-                            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
                             accountWarning == HeaderConstant.emptyMSISDN ||
-                            accountWarning == HeaderConstant.emptyEmail ||
-                                accountStatus.uppercased() == ErrorResponseText.accountDeleted {
-                                handler(.success(headers))
-                                return
+                            accountWarning == HeaderConstant.emptyEmail {
+                            handler(.success(headers))
+                            return
+                        } else if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                            handler(.success(headers))
+                            return
                         }
                         
                         guard self.tokenStorage.refreshToken != nil else {

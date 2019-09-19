@@ -68,11 +68,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
-    private func hasEmptyPhone(headers: [String: Any]) -> Bool {
-        guard let accountWarning = headers[HeaderConstant.emptyMSISDN] as? String else {
-            return false
-        }
-        
+    private func hasEmptyPhone(accountWarning: String) -> Bool {
         return accountWarning == HeaderConstant.emptyMSISDN
     }
     
@@ -88,18 +84,18 @@ class LoginInteractor: LoginInteractorInput {
         self.emptyEmailCheck(for: headers)
         var handler: VoidHandler?
         
-        if let emptyMSISDN = headers[HeaderConstant.emptyMSISDN] as? String {
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
             /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
-            if hasEmptyPhone(headers: headers), hasAccountDeletedStatus(headers: headers) {
-                handler = { [weak self] in
-                    errorHandler(.emptyPhone, emptyMSISDN)
+            if hasEmptyPhone(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
+                handler = {
+                    errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
                 }
             } else if self.hasAccountDeletedStatus(headers: headers) {
                 handler = { [weak self] in
                     self?.processLogin(login: login, headers: headers)
                 }
-            } else if self.hasEmptyPhone(headers: headers) {
-                errorHandler(.emptyPhone, emptyMSISDN)
+            } else if self.hasEmptyPhone(accountWarning: accountWarning) {
+                errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
                 return
             }
         } else if self.hasAccountDeletedStatus(headers: headers) {
