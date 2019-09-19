@@ -216,13 +216,6 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             assertionFailure()
             return
         }
-     
-        
-        for offer in plan.offers {
-            if let model = offer.model as? PackageModelResponse {
-                createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
-            }
-        }
         
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
