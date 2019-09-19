@@ -15,4 +15,5 @@ protocol PackagesRouterInput {
     func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
     func showSuccessPurchasedPopUp(with delegate: PackagesPresenter)
+    func showPaycellProcess(with cpcmOfferId: Int)
 }

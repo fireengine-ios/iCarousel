@@ -51,4 +51,9 @@ extension PackagesRouter: PackagesRouterInput {
         })
         router.presentViewController(controller: successPopUp)
     }
+    
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.createController(with: cpcmOfferId)
+        router.pushViewController(viewController: controller)
+    }
 }
