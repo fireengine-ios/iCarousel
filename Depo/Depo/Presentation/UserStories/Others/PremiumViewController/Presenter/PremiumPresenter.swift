@@ -113,7 +113,7 @@ final class PremiumPresenter {
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
-        guard let name = model.name, let type = model.type?.paymentType else {
+        guard let name = model.name, let type = model.featureType?.paymentType else {
             return nil
         }
         
