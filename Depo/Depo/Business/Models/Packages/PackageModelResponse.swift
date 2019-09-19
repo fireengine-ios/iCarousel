@@ -115,7 +115,7 @@ enum PackageType: String {
         switch self {
             case .apple:
                 return .appStore
-            case .SLCM :
+            case .SLCM:
                 return .slcm
             case .paycellSLCM:
                 return .paycell
