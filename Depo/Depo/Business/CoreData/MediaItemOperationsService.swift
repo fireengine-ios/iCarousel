@@ -26,7 +26,7 @@ final class MediaItemOperationsService {
     
 //    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
-    var inProcessAppendingLocalFiles = false
+    var inProcessLocalFiles = false
     
     
     func deleteAllEnteties(_ completion: BoolHandler?) {
@@ -169,20 +169,20 @@ final class MediaItemOperationsService {
         
     }
     
-    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>], completion: BoolHandler?) {
-        let context = CoreDataStack.shared.newChildBackgroundContext
-        let group = DispatchGroup()
-        
-        for fetchRequest in fetchRequests {
-            group.enter()
-            self.deleteObjects(fromFetch: fetchRequest, context:context, completion: { _ in
-                group.leave()
-            })
-        }
-        group.notify(queue: .main) {
-            completion?(true)
-        }
-    }
+//    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>], completion: BoolHandler?) {
+//        let context = CoreDataStack.shared.newChildBackgroundContext
+//        let group = DispatchGroup()
+//
+//        for fetchRequest in fetchRequests {
+//            group.enter()
+//            self.deleteObjects(fromFetch: fetchRequest, context:context, completion: { _ in
+//                group.leave()
+//            })
+//        }
+//        group.notify(queue: .main) {
+//            completion?(true)
+//        }
+//    }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, completion: BoolHandler?) {
 //        let context = CoreDataStack.shared.newChildBackgroundContext
@@ -502,7 +502,7 @@ final class MediaItemOperationsService {
     
     // MARK: - LocalMediaItems
     
-    @objc func appendLocalMediaItems(completion: VoidHandler?) {
+    @objc func processLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
         
         guard !localMediaStorage.isWaitingForPhotoPermission else {
@@ -516,7 +516,7 @@ final class MediaItemOperationsService {
                     completion?()
                 })
             case .authorized:
-                self?.insertFromGallery(completion: completion)
+                self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break
             }
@@ -562,18 +562,18 @@ final class MediaItemOperationsService {
     }
     
     
-    private func insertFromGallery(completion: VoidHandler?) {
-        debugLog("insertFromGallery")
+    private func processLocalGallery(completion: VoidHandler?) {
+        debugLog("processLocalGallery")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             completion?()
             return
         }
         
-        guard !inProcessAppendingLocalFiles else {
+        guard !inProcessLocalFiles else {
             return
         }
         
-        inProcessAppendingLocalFiles = true
+        inProcessLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
@@ -581,9 +581,11 @@ final class MediaItemOperationsService {
         updateICloudStatus(for: assetsList)
         
         pushToLocalsAppendingQueue(assets: assetsList) { [weak self] in
-            self?.inProcessAppendingLocalFiles = false
-            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-            completion?()
+            self?.removeMissingLocal(assets: assetsList) { [weak self] in
+                self?.inProcessLocalFiles = false
+                NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+                completion?()
+            }
         }
     }
     
@@ -630,23 +632,52 @@ final class MediaItemOperationsService {
         }
     }
     
-    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext,
-                                       callBack: @escaping PhotoAssetsCallback) {
+//    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext,
+//                                       callBack: @escaping PhotoAssetsCallback) {
+//        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+//            callBack([])
+//            return
+//        }
+//
+//        let localIdentifiers = allList.map { $0.localIdentifier }
+//        checkLocalFilesExistence(actualPhotoLibItemsIDs: localIdentifiers)
+//        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
+//        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
+//            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
+//            callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
+//        })
+//    }
+    
+    private func removeMissingLocal(assets: [PHAsset], completion: @escaping VoidHandler) {
+        CoreDataStack.shared.performBackgroundTask { [weak self] context in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.missingLocal(assets: assets, context: context) { [weak self] missingIDs in
+                guard let `self` = self else {
+                    return
+                }
+
+                self.removeLocalMediaItems(with: missingIDs, completion: completion)
+            }
+        }
+    }
+    
+    private func missingLocal(assets: [PHAsset], context: NSManagedObjectContext, callback: @escaping ([String]) -> ()) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            callBack([])
+            callback([])
             return
         }
         
-        let localIdentifiers = allList.map { $0.localIdentifier }
-        checkLocalFilesExistence(actualPhotoLibItemsIDs: localIdentifiers)
-        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
+        let localIdentifiers = assets.map { $0.localIdentifier }
+        let predicate = NSPredicate(format: "NOT(localFileID IN %@) AND localFileID != Nil AND isLocalItemValue == true", localIdentifiers)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
-            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
-            callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
+            let missingIDs = mediaItems.compactMap { $0.localFileID }
+            callback(missingIDs)
         })
     }
-    
-    
+
     func notSaved(assets: [PHAsset], context: NSManagedObjectContext, callback: @escaping PhotoAssetsCallback) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             callback([])
