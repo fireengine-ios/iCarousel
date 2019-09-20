@@ -155,6 +155,8 @@ extension PackagesViewController: PackagesViewInput {
                 
             })
         }
+        
+        /// we need to show popup over popup with purchase options
         RouterVC().defaultTopController?.present(vc, animated: false, completion: nil)
     }
 
