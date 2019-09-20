@@ -53,43 +53,58 @@ final class PaycellViewController: UIViewController {
     private func startPaycellProcess() {
         guard
             let offerId = offerId,
-            let paycellUrl = URL(string: String(format: RouteRequests.paycellWebUrl, offerId)),
-            let domain = paycellUrl.host,
+            let paycellUrl = URL(string: String(format: RouteRequests.paycellWebUrl, offerId))
+        else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        syncCookies(url: paycellUrl) { [weak self] in
+            let urlRequest = URLRequest(url: paycellUrl)
+            
+            DispatchQueue.main.async {
+                self?.webView.load(urlRequest)
+            }
+        }
+    }
+    
+    private func syncCookies(url: URL, completion: @escaping VoidHandler) {
+        guard
+            let domain = url.host,
             let token = tokenStorage.accessToken
         else {
             dismiss(animated: true, completion: nil)
             return
         }
         
-        let urlRequest = URLRequest(url: paycellUrl)
         let httpCookie = HTTPCookie(properties: [.name : "_at",
                                                  .value : token,
                                                  .domain : domain,
+                                                 .discard : "FALSE",
                                                  .path : "/"])!
         if #available(iOS 11.0, *) {
-            webView.configuration.websiteDataStore.httpCookieStore.setCookie(httpCookie) { [weak self] in
-                DispatchQueue.main.async {
-                    debugLog("paycell web - ios >= 11")
-                    self?.webView.load(urlRequest)
-                }
+            webView.configuration.websiteDataStore.httpCookieStore.setCookie(httpCookie) {
+                debugLog("paycell web - ios >= 11")
+                completion()
             }
         } else {
             debugLog("paycell web - ios < 11")
-            webView.load(urlRequest)
+            completion()
         }
     }
 }
 
 
 extension PaycellViewController: WKNavigationDelegate {
+
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard let currentUrl = navigationAction.request.url?.absoluteString else {
+        guard let currentUrl = navigationAction.request.url else {
             decisionHandler(.cancel)
             return
         }
 
         print(navigationAction.request)
-        
+        syncCookies(url: currentUrl, completion: {})
         decisionHandler(.allow)
     }
 }
