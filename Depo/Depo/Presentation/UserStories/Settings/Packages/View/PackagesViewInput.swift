@@ -11,6 +11,7 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func display(errorMessage: String)
     func showActivateOfferAlert(with title: String, price: String, for offer: PackageModelResponse, planIndex: Int)
     func show(promocodeError: String)
+    func showPaycellProcess(with cpcmOfferId: Int)
     func successedPromocode()
     
     func showRestoreButton()

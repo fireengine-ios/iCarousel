@@ -159,6 +159,20 @@ extension PackagesViewController: PackagesViewInput {
         /// we need to show popup over popup with purchase options
         RouterVC().defaultTopController?.present(vc, animated: false, completion: nil)
     }
+    
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.createController(with: cpcmOfferId) { [weak self] result in
+            switch result {
+            case .success(let completed):
+                if completed {
+                    //close payment popup
+                }
+            case .failure(_):
+                return
+            }
+        }
+        RouterVC().defaultTopController?.present(controller, animated: true, completion: {})
+    }
 
     func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {

@@ -11,13 +11,15 @@ import WebKit
 
 
 final class PaycellViewController: UIViewController {
+    
+    typealias ResultBoolCompletion = (Result<Bool, Error>)->()
 
     private let tokenStorage: TokenStorage = factory.resolve()
     private var offerId: Int?
+    private var completionHandler: ResultBoolCompletion?
     
     private lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
-    
         if #available(iOS 11, *) {
             //
         } else {
@@ -31,10 +33,10 @@ final class PaycellViewController: UIViewController {
     }()
     
     
-    static func createController(with cpcmOfferId: Int) -> PaycellViewController {
+    static func createController(with cpcmOfferId: Int, completion: @escaping ResultBoolCompletion) -> PaycellViewController {
         let controller = PaycellViewController()
         controller.offerId = cpcmOfferId
-        
+        controller.completionHandler = completion
         return controller
     }
     
@@ -56,6 +58,7 @@ final class PaycellViewController: UIViewController {
             let paycellUrl = URL(string: String(format: RouteRequests.paycellWebUrl, offerId))
         else {
             dismiss(animated: true, completion: nil)
+            completionHandler?(.failure(ErrorResponse.string("can't startPaycellProcess")))
             return
         }
         
@@ -70,17 +73,17 @@ final class PaycellViewController: UIViewController {
     
     private func syncCookies(url: URL, completion: @escaping VoidHandler) {
         guard
-            let domain = url.host,
-            let token = tokenStorage.accessToken
+            let token = tokenStorage.accessToken,
+            let domain = url.host
         else {
             dismiss(animated: true, completion: nil)
+            completionHandler?(.failure(ErrorResponse.string("can't syncCookies")))
             return
         }
         
         let httpCookie = HTTPCookie(properties: [.name : "_at",
                                                  .value : token,
                                                  .domain : domain,
-                                                 .discard : "FALSE",
                                                  .path : "/"])!
         if #available(iOS 11.0, *) {
             webView.configuration.websiteDataStore.httpCookieStore.setCookie(httpCookie) {
@@ -96,15 +99,5 @@ final class PaycellViewController: UIViewController {
 
 
 extension PaycellViewController: WKNavigationDelegate {
-
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard let currentUrl = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
-        }
-
-        print(navigationAction.request)
-        syncCookies(url: currentUrl, completion: {})
-        decisionHandler(.allow)
-    }
+    //TODO: check redirection here
 }

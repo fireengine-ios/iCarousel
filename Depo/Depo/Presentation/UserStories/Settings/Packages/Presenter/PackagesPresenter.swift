@@ -87,7 +87,7 @@ extension PackagesPresenter: PackagesViewOutput {
         case .paycellAllAccess?, .paycellSLCM?:
             view?.startActivityIndicator()
             if let offerId = model.cpcmOfferId {
-                router.showPaycellProcess(with: offerId)
+                view?.showPaycellProcess(with: offerId)
             }
             
         default:
