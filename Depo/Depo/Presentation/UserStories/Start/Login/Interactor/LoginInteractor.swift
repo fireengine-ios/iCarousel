@@ -68,6 +68,49 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
+    private func hasEmptyPhone(accountWarning: String) -> Bool {
+        return accountWarning == HeaderConstant.emptyMSISDN
+    }
+    
+    private func hasAccountDeletedStatus(headers: [String: Any]) -> Bool {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String else {
+            return false
+        }
+        
+        return accountStatus.uppercased() == ErrorResponseText.accountDeleted
+    }
+    
+    private func proccessLoginHeaders(headers: [String: Any], login: String, errorHandler: @escaping (LoginResponseError, String) -> Void) {
+        self.emptyEmailCheck(for: headers)
+        var handler: VoidHandler?
+        
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
+            /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
+            if hasEmptyPhone(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
+                handler = {
+                    errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                }
+            } else if self.hasAccountDeletedStatus(headers: headers) {
+                handler = { [weak self] in
+                    self?.processLogin(login: login, headers: headers)
+                }
+            } else if self.hasEmptyPhone(accountWarning: accountWarning) {
+                errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                return
+            }
+        } else if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.processLogin(login: login, headers: headers)
+            }
+        }
+        
+        if let handler = handler {
+            self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+        } else {
+            self.processLogin(login: login, headers: headers)
+        }
+    }
+    
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
@@ -121,17 +164,8 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
-            if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-                accountStatus.uppercased() == ErrorResponseText.accountDeleted {
-                let deletedAccountHandler: VoidHandler = { [weak self] in
-                    self?.processLogin(login: login, headers: headers)
-                }
-                
-                self.output?.loginDeletedAccount(deletedAccountHandler: deletedAccountHandler)
-                return
-            }
+            self.proccessLoginHeaders(headers: headers, login: login, errorHandler: errorHandler)
             
-            self.processLogin(login: login, headers: headers)
         }, fail: { [weak self] errorResponse in
             let loginError = LoginResponseError(with: errorResponse)
             self?.analyticsService.trackLoginEvent(error: loginError)
@@ -157,9 +191,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private func processLogin(login: String, headers: [String: Any]) {
         self.setContactSettingsForUser()
-        
-        self.emptyEmailCheck(for: headers)
-        
+                
         debugLog("login isRememberMe \(self.rememberMe)")
         self.tokenStorage.isRememberMe = self.rememberMe
         self.analyticsService.track(event: .login)

@@ -112,7 +112,6 @@ extension AccountWarningService {
                     self?.stop {
                         self?.delegate?.successedSilentLogin()
                     }
-                    
                 }
             }
         }, fail: { [weak self] errorRespose in

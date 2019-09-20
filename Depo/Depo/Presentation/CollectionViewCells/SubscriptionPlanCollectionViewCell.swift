@@ -115,6 +115,45 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         priceHeightConstraint.constant = 18
     }
     
+    func configure(with plan: SubscriptionPlan, accountType: AccountType) {
+        freeButton.isHidden = true
+        upgradeButton.isHidden = true
+        cancelButton.isHidden = true
+        storeLabel.isHidden = true
+        
+        switch plan.type {
+        case .default:
+            upgradeButton.isHidden = false
+        case .free:
+            priceLabel.isHidden = true
+            freeButton.isHidden = false
+        case .current:
+            cancelButton.isHidden = false
+        }
+        
+        
+        planeNameLabel.text = String(format: TextConstants.availableHeadNameTitle, plan.name)
+        priceLabel.text = plan.priceString
+        
+        photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, plan.photosCount)
+        videosCountLabel.text = String(format: TextConstants.usageInfoVideos, plan.videosCount)
+        songsCountLabel.text = String(format: TextConstants.usageInfoSongs, plan.songsCount)
+        docsCountLabel.text = String(format: TextConstants.usageInfoDocs, plan.docsCount)
+        
+        if let model = plan.model as? SubscriptionPlanBaseResponse {
+            
+            if let storageSize = model.subscriptionPlanQuota?.bytesString {
+                planeNameLabel.text = storageSize
+            }
+
+            if let renewalDate = model.nextRenewalDate {
+                let date = dateString(from: renewalDate)
+                dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
+            }
+        }
+        priceHeightConstraint.constant = 18
+    }
+    
     // MARK: - IBActions
     
     @IBAction fileprivate func actionUpgradeButtonClicked(_ sender: UIButton) {

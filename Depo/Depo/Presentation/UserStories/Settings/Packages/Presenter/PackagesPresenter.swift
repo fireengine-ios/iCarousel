@@ -214,7 +214,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-
+        /// show only non-feature offers
+        let allOffers = allOffers.filter { $0.featureType == nil }
+        
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = filterPackagesByQuota(offers: offers)
