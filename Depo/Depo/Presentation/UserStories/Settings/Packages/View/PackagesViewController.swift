@@ -143,22 +143,6 @@ extension PackagesViewController: PackagesViewInput {
     func display(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
-    
-    func showActivateOfferAlert(with title: String, price: String, for offer: PackageModelResponse, planIndex: Int) {        
-        let vc = DarkPopUpController.with(title: title, message: price, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close(animation: {
-                
-                /// close popup with purchase options
-                self?.dismiss(animated: true, completion: {
-                    self?.output.buy(offer: offer, planIndex: planIndex)
-                })
-                
-            })
-        }
-        
-        /// we need to show popup over popup with purchase options
-        RouterVC().defaultTopController?.present(vc, animated: false, completion: nil)
-    }
 
     func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {
