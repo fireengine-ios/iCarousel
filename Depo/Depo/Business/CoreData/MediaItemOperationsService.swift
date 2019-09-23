@@ -169,21 +169,6 @@ final class MediaItemOperationsService {
         
     }
     
-//    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>], completion: BoolHandler?) {
-//        let context = CoreDataStack.shared.newChildBackgroundContext
-//        let group = DispatchGroup()
-//
-//        for fetchRequest in fetchRequests {
-//            group.enter()
-//            self.deleteObjects(fromFetch: fetchRequest, context:context, completion: { _ in
-//                group.leave()
-//            })
-//        }
-//        group.notify(queue: .main) {
-//            completion?(true)
-//        }
-//    }
-    
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, completion: BoolHandler?) {
 //        let context = CoreDataStack.shared.newChildBackgroundContext
         context.perform {
@@ -631,22 +616,6 @@ final class MediaItemOperationsService {
             assetCallback(allList.filter { alredySavedIDs.contains( $0.localIdentifier ) })
         }
     }
-    
-//    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext,
-//                                       callBack: @escaping PhotoAssetsCallback) {
-//        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-//            callBack([])
-//            return
-//        }
-//
-//        let localIdentifiers = allList.map { $0.localIdentifier }
-//        checkLocalFilesExistence(actualPhotoLibItemsIDs: localIdentifiers)
-//        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
-//        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
-//            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
-//            callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
-//        })
-//    }
     
     private func removeMissingLocal(assets: [PHAsset], completion: @escaping VoidHandler) {
         CoreDataStack.shared.performBackgroundTask { [weak self] context in
