@@ -1041,4 +1041,8 @@ class RouterVC: NSObject {
         controller.delegate = delegate
         return controller
     }
+    
+    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
+        return TBMatikPhotosViewController.with(uuids: uuids)
+    }
 }

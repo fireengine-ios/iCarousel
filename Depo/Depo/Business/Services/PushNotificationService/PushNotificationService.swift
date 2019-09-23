@@ -16,22 +16,26 @@ final class PushNotificationService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var notificationAction: PushNotificationAction?
-    private var notificationActionURLString: String?
+    private var parameters: String?
     
     //MARK: -
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = launchOptions?["action"] as? String else {
+        guard let actionString = launchOptions?["action"] as? String,
+            let notificationAction = PushNotificationAction(rawValue: actionString) else {
             return false
         }
 
-        notificationAction = PushNotificationAction(rawValue: actionString)
-        
-        if notificationAction == .http {
-            notificationActionURLString = actionString
+        switch notificationAction {
+        case .http:
+            parameters = actionString
+        case .tbmatic:
+            parameters = launchOptions?["tbt_file_list"] as? String
+        default:
+            break
         }
         
-        return notificationAction != nil
+        return true
     }
     
     func assignDeepLink(innerLink: String?) -> Bool {
@@ -82,7 +86,7 @@ final class PushNotificationService {
         case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
-        case .http: openURL(notificationActionURLString)
+        case .http: openURL(parameters)
         case .login: openLogin()
         case .search: openSearch()
         case .freeUpSpace: break
@@ -92,6 +96,8 @@ final class PushNotificationService {
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
+        case .tbmatic: openTBMaticPhotos(parameters)
+            
         }
         notificationAction = nil
     }
@@ -316,5 +322,16 @@ final class PushNotificationService {
     
     private func openBecomePremium() {
         pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+    }
+    
+    private func openTBMaticPhotos(_ uuids: String?) {
+        guard let uuids = uuids?.components(separatedBy: ",") else {
+            return
+        }
+        
+        let controller = router.tbmaticPhotosContoller(uuids: uuids)
+        DispatchQueue.main.async {
+            self.router.presentViewController(controller: controller)
+        }
     }
 }

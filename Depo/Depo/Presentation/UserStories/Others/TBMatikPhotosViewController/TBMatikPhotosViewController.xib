@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TBMatikPhotosViewController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="carousel" destination="bIe-nx-Ucd" id="Ohx-x6-CzP"/>
+                <outlet property="closeButton" destination="d8W-rB-aKw" id="f45-dg-F5f"/>
+                <outlet property="pageControl" destination="yIL-73-ADG" id="1OH-ao-ujk"/>
+                <outlet property="shareButton" destination="ZDf-lG-9Th" id="U10-DB-jnC"/>
+                <outlet property="timelineButton" destination="Lge-oI-I7M" id="zZz-ee-aYp"/>
+                <outlet property="titleLabel" destination="ugr-WK-tJf" id="D2w-iT-PyI"/>
+                <outlet property="view" destination="iN0-l3-epB" id="FCp-b0-v9r"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tbmatikBackground" translatesAutoresizingMaskIntoConstraints="NO" id="zlC-hj-dcw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8W-rB-aKw">
+                    <rect key="frame" x="329" y="44" width="38" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="4wT-JY-hkC"/>
+                        <constraint firstAttribute="width" constant="38" id="PDh-qk-Qdo"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="closeButton"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugr-WK-tJf">
+                    <rect key="frame" x="30" y="82" width="315" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-nx-Ucd" customClass="iCarousel">
+                    <rect key="frame" x="0.0" y="120" width="375" height="516"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="yIL-73-ADG">
+                    <rect key="frame" x="168" y="655" width="39" height="37"/>
+                </pageControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-oI-I7M">
+                    <rect key="frame" x="14" y="711" width="169" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="aNt-u3-ErL"/>
+                    </constraints>
+                    <state key="normal" title="See Timeline"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-lG-9Th">
+                    <rect key="frame" x="192" y="711" width="169" height="44"/>
+                    <state key="normal" title="Share"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zlC-hj-dcw" secondAttribute="trailing" id="26N-Lf-zPg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ugr-WK-tJf" secondAttribute="trailing" constant="30" id="2Ky-Xo-N3m"/>
+                <constraint firstItem="ugr-WK-tJf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="3BT-m2-kl1"/>
+                <constraint firstItem="ZDf-lG-9Th" firstAttribute="top" secondItem="Lge-oI-I7M" secondAttribute="top" id="3ks-ZJ-fmh"/>
+                <constraint firstItem="zlC-hj-dcw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4wz-rc-7Yq"/>
+                <constraint firstItem="Lge-oI-I7M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="7BT-v8-Ed2"/>
+                <constraint firstItem="ZDf-lG-9Th" firstAttribute="leading" secondItem="Lge-oI-I7M" secondAttribute="trailing" constant="9" id="BSu-Iy-NU8"/>
+                <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="17" id="Evo-lQ-ryU"/>
+                <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="yIL-73-ADG" secondAttribute="bottom" constant="19" id="Fz7-Kn-BEY"/>
+                <constraint firstItem="ugr-WK-tJf" firstAttribute="top" secondItem="d8W-rB-aKw" secondAttribute="bottom" id="G3e-AN-7CO"/>
+                <constraint firstAttribute="bottom" secondItem="zlC-hj-dcw" secondAttribute="bottom" id="JA6-O8-WW6"/>
+                <constraint firstItem="ZDf-lG-9Th" firstAttribute="width" secondItem="Lge-oI-I7M" secondAttribute="width" id="MCU-jN-cCd"/>
+                <constraint firstItem="yIL-73-ADG" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="19" id="Mlf-S1-Oi9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Lge-oI-I7M" secondAttribute="bottom" constant="23" id="Pie-gS-CWx"/>
+                <constraint firstItem="Lge-oI-I7M" firstAttribute="height" secondItem="ZDf-lG-9Th" secondAttribute="height" id="TXx-rA-0Mo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="d8W-rB-aKw" secondAttribute="trailing" constant="8" id="ceW-e3-A8u"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZDf-lG-9Th" secondAttribute="trailing" constant="14" id="iSl-2O-7P4"/>
+                <constraint firstItem="zlC-hj-dcw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kdN-GA-qn7"/>
+                <constraint firstItem="bIe-nx-Ucd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mWS-ic-uQt"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bIe-nx-Ucd" secondAttribute="trailing" id="pni-yx-t4D"/>
+                <constraint firstItem="d8W-rB-aKw" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="y6I-sw-jQk"/>
+                <constraint firstItem="yIL-73-ADG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yQ7-6p-jcB"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="closeButton" width="17.666666030883789" height="17.666666030883789"/>
+        <image name="tbmatikBackground" width="375" height="667"/>
+    </resources>
+</document>

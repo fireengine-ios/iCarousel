@@ -1416,4 +1416,14 @@ struct TextConstants {
     static let paymentTitleInvoice = NSLocalizedString("payment_title_invoice", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusTitle = NSLocalizedString("account_status_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusMessage = NSLocalizedString("account_status_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    enum TBMatic {
+        enum Photos {
+            static let title = NSLocalizedString("tbmatic_photos_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let noPhotoText = NSLocalizedString("tbmatic_photos_no_photo_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let noPhotoBoldText = NSLocalizedString("tbmatic_photos_no_photo_bold_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let seeTimeline = NSLocalizedString("tbmatic_photos_see_timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+            static let share = NSLocalizedString("tbmatic_photos_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        }
+    }
 }

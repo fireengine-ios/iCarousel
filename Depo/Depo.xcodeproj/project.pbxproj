@@ -3231,6 +3231,18 @@
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
 		980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
+		980499C023336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
+		980499C123336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
+		980499C223336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
+		980499C42333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
+		980499C52333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
+		980499C62333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
+		980499C823337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
+		980499C923337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
+		980499CA23337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
+		980499CC23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
+		980499CD23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
+		980499CE23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
@@ -8061,6 +8073,10 @@
 		97604D2835EA04E60222C769 /* Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProvider/Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
+		980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosViewController.swift; sourceTree = "<group>"; };
+		980499C32333728300398AEF /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
+		980499C723337B9400398AEF /* TBMatikPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBMatikPhotoView.swift; sourceTree = "<group>"; };
+		980499CB23337BA300398AEF /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -13545,6 +13561,17 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		980499BE23336CED00398AEF /* TBMatikPhotosViewController */ = {
+			isa = PBXGroup;
+			children = (
+				980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */,
+				980499C32333728300398AEF /* TBMatikPhotosViewController.xib */,
+				980499C723337B9400398AEF /* TBMatikPhotoView.swift */,
+				980499CB23337BA300398AEF /* TBMatikPhotoView.xib */,
+			);
+			path = TBMatikPhotosViewController;
+			sourceTree = "<group>";
+		};
 		9808A05C206A88090022376D /* PushNotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -14391,6 +14418,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				980499BE23336CED00398AEF /* TBMatikPhotosViewController */,
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
 				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
 				CE00B27C2204261700A5A696 /* InstaPickSelection */,
@@ -17323,6 +17351,7 @@
 				8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
+				980499C52333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AFCD2008AD71003D8E05 /* info_icon.png in Resources */,
 				8C06AFF12008AD71003D8E05 /* kirmizi.png in Resources */,
 				8C06B0432008AD71003D8E05 /* oval_beyaz@2x.png in Resources */,
@@ -17492,6 +17521,7 @@
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
 				B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
 				8C06B1B72008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
+				980499CD23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
 				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				8C06B1292008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
@@ -18112,6 +18142,7 @@
 				B50B4A6B220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				8C06B0AE2008AD71003D8E05 /* right@3x.png in Resources */,
 				8C06B0242008AD71003D8E05 /* ok@2x.png in Resources */,
+				980499CC23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */,
 				A2EF976421EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				8C06AF6C2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
@@ -18316,6 +18347,7 @@
 				CEBBDE0D1F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C06B17A2008AD72003D8E05 /* topright@2x.png in Resources */,
 				8C06B0762008AD71003D8E05 /* paylas_kaydet.png in Resources */,
+				980499C42333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				8C06B07C2008AD71003D8E05 /* paylas_linkedin.png in Resources */,
 				8C06B0782008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
 				8C06AFF82008AD71003D8E05 /* kontrast@2x.png in Resources */,
@@ -18786,6 +18818,7 @@
 				CE784D3F22A685FB00662219 /* crop_icon.png in Resources */,
 				CE784D4022A685FB00662219 /* polaroid_yeni.png in Resources */,
 				CE784D4222A685FB00662219 /* yesil.png in Resources */,
+				980499C62333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				CE784D4322A685FB00662219 /* Buyuk_Selected@3x.png in Resources */,
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
 				CE784D4522A685FB00662219 /* CaptchaViewController.xib in Resources */,
@@ -18955,6 +18988,7 @@
 				CE784DE222A685FB00662219 /* edit.png in Resources */,
 				CE784DE322A685FB00662219 /* kup.png in Resources */,
 				CE784DE422A685FB00662219 /* TurkcellSaturaMedIta.ttf in Resources */,
+				980499CE23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				CE784DE522A685FB00662219 /* topright@2x.png in Resources */,
 				CE784DE622A685FB00662219 /* paylas_kaydet.png in Resources */,
 				CE784DE722A685FB00662219 /* paylas_linkedin.png in Resources */,
@@ -20882,6 +20916,7 @@
 				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
+				980499C123336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				8C0E8EF11FDEBDFF00789C91 /* UserInfoSubViewViewOutput.swift in Sources */,
 				CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */,
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
@@ -20952,6 +20987,7 @@
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
+				980499C923337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				A217E44721A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
@@ -21745,6 +21781,7 @@
 				CE4363411F6FC43F004724BF /* ActivitiesByDay.swift in Sources */,
 				CE4363421F6FC43F004724BF /* ActivitiesByMinutesAndType.swift in Sources */,
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
+				980499C823337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
 				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
@@ -22273,6 +22310,7 @@
 				B53DCE9420EF634900400DBA /* SyncSettings.m in Sources */,
 				7CDABD091F1E3A6300C8CC16 /* UserProfileInteractorOutput.swift in Sources */,
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
+				980499C023336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */,
 				CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */,
 				A2268EBD21A68BBC002F2611 /* LeavePremiumView.swift in Sources */,
@@ -23577,6 +23615,7 @@
 				CE7849C122A685FB00662219 /* RegistrationInitializer.swift in Sources */,
 				CE7849C222A685FB00662219 /* HelpAndSupportInteractorInput.swift in Sources */,
 				CE7849C322A685FB00662219 /* ManageContactsModels.swift in Sources */,
+				980499CA23337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				CE7849C422A685FB00662219 /* TermsAndServicesViewInput.swift in Sources */,
 				CE7849C522A685FB00662219 /* MenloworksTagsConstants.swift in Sources */,
 				CE7849C722A685FB00662219 /* WhiteButtonWithRoundedCorner.swift in Sources */,
@@ -23697,6 +23736,7 @@
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE784A3722A685FB00662219 /* PhoneVerificationInteractorOutput.swift in Sources */,
+				980499C223336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
