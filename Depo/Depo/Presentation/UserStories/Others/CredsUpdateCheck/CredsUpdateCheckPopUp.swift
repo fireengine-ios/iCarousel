@@ -160,9 +160,9 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
         authenticationService.updateInfoFeedback(isUpdated: isUpdated) { response in
             switch response {
             case .success():
-                debugLog("updateInfoFeedback - Success - \(isUpdated)")
-            case .failed(let error):
-                debugLog("updateInfoFeedback - Failure: \(error)")
+                break
+            case .failed(_):
+                break
             }
             
         }
