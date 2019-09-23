@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct AccountJSONConstants {
     
     static let mobileUploadsSpecialFolderUuid = "mobileUploadsSpecialFolderUuid"
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
+    static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -49,6 +51,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var isCropyTagAvailable: Bool?
     var isFavouriteTagAvailable: Bool?
     var cellografId: String?
+    var hasSecurityQuestionInfo: Bool?
     var name: String?
     var surname: String?
     var accountType: String?
@@ -77,6 +80,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
+        hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
         surname = json?[AccountJSONConstants.surname].string
@@ -417,6 +421,36 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
     }
     
+}
+
+final class SecretQuestionsResponse {
+    
+    private enum ResponseKey {
+        static let id = "id"
+        static let text = "text"
+    }
+    
+    var id: Int
+    var text: String
+    
+    init(id: Int, text: String) {
+        self.id = id
+        self.text = text
+    }
+}
+
+extension SecretQuestionsResponse {
+    convenience init?(json: JSON) {
+        guard
+            let id = json[ResponseKey.id].int,
+            let text = json[ResponseKey.text].string
+            else {
+                assertionFailure()
+                return nil
+        }
+        
+        self.init(id: id, text: text)
+    }
 }
 
 final class FeedbackEmailResponse: ObjectRequestResponse {

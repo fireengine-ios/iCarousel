@@ -20,6 +20,10 @@ protocol AccountServicePrl {
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
+    
+    private enum Keys {
+        static let serverValue = "value"
+    }
  
     func info(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService info")
@@ -393,6 +397,24 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
         }
+    }
+    
+    func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Account.getSecurityQuestion)
+            .customValidate()
+            .responseData(completionHandler: { response in
+
+                switch response.result {
+                    
+                case .success(let data):
+                    
+                    let questions = JSON(data)[Keys.serverValue].arrayValue.compactMap { SecretQuestionsResponse(json: $0)}
+                    handler(.success(questions))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
     }
     
     /// repeat is key word of Swift

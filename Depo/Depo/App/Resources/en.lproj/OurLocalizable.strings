@@ -374,6 +374,12 @@
 "You have to fill in a password" = "You have to fill in your password";
 "You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
 "Password" = "Password";
+"security_question" = "Security Question";
+"select_question" = "Please Select";
+"secret_answer" = "Your answer";
+"enter_secret_answer" = "Enter your answer";
+"security_question_text_field_placeholder" = "Please set security question";
+"set_sequrity_question_button" = "Set Security Question";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
 "I can't login" = "I forgot my password";

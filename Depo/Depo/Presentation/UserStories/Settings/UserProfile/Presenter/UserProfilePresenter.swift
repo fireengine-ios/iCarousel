@@ -77,6 +77,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
+    func tapChangeSecretQuestionButton() {
+        router.goToSetSecretQuestion()
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

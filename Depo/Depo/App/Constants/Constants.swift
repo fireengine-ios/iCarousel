@@ -461,6 +461,13 @@ struct TextConstants {
     static let userProfileChangePassword = NSLocalizedString("change password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileBirthday = NSLocalizedString("birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfilePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestion =  NSLocalizedString("security_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSelectQuestion =  NSLocalizedString("select_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionAnswer =  NSLocalizedString("secret_answer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionAnswerPlaseholder =  NSLocalizedString("enter_secret_answer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionLabelPlaceHolder = NSLocalizedString("security_question_text_field_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSetSecretQuestionButton = NSLocalizedString("set_sequrity_question_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let userProfileDayPlaceholder = NSLocalizedString("user_profile_day_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileMonthPlaceholder = NSLocalizedString("user_profile_month_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileYearPlaceholder = NSLocalizedString("user_profile_year_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

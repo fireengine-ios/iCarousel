@@ -20,4 +20,8 @@ class UserProfileRouter: UserProfileRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    func goToSetSecretQuestion() {
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        router.pushViewController(viewController: controller)
+    }
 }
