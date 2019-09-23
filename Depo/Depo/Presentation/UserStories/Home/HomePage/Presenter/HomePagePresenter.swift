@@ -36,6 +36,8 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             interactor.updateLocalUserDetail()
         } else {
             isFirstAppear = false
+            
+            AnalyticsService.updateUser()
         }
     }
     

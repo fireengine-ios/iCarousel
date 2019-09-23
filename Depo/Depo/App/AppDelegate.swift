@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var spotifyService: SpotifyRoutingService = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
@@ -101,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MenloworksAppEvents.onAppLaunch()
         
+        AnalyticsService.onAppLaunch()
+        
         return true
     }
     
@@ -119,6 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
+            return true
+        } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
         return false
@@ -294,11 +299,11 @@ extension AppDelegate {
         debugLog("AppDelegate didRegister notificationSettings")
         if #available(iOS 10, *) {
             ///deprecated
-            ///call appendLocalMediaItems in the AppConfigurator
+            ///call processLocalMediaItems in the AppConfigurator
             return
         }
         /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
-//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+//        MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
         LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
             
         }

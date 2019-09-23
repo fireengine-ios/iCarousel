@@ -13,7 +13,7 @@ protocol LeavePremiumInteractorInput: class {
     
     func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String
     func getAppleInfo(for offer: SubscriptionPlanBaseResponse)
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     
     func trackScreen(screenType: LeavePremiumType)
 }

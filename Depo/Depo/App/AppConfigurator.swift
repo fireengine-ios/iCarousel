@@ -197,13 +197,13 @@ final class AppConfigurator {
             let options: UNAuthorizationOptions = [.alert, .sound, .badge]
             UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
                 setupMenloworks()
-                ///call appendLocalMediaItems either here or in the AppDelegate
+                ///call processLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
                 
                 /// start photos logic after notification permission
                 ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
-//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+//                MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
                 LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
                     
                 }

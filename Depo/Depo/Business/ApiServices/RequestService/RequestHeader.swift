@@ -53,6 +53,7 @@ struct HeaderConstant {
     static let transId = "X-Trans-Id"
     
     static let silentToken = "X-Silent-Token"
+    static let accountStatus = "X-Account-Status"
 }
 
 class RequestHeaders {

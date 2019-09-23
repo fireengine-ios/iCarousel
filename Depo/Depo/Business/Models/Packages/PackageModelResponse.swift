@@ -60,6 +60,20 @@ enum FeaturePackageType: String {
             return TextConstants.featureDigicellCancelText
         }
     }
+    
+    var paymentType: PaymentType {
+        switch self {
+        case .appleFeature:
+            return .appStore
+        case .SLCMFeature:
+            return .slcm
+        case .SLCMPaycellFeature, .paycellAllAccessFeature:
+            return .paycell
+        default:
+            assertionFailure()
+            return .appStore
+        }
+    }
 }
 
 enum PackageType: String {
@@ -108,6 +122,21 @@ enum PackageType: String {
             return TextConstants.packageFWICancelText
         case .jamaica:
             return TextConstants.packageJamaicaCancelText
+        }
+    }
+    
+    var paymentType: PaymentType {
+        switch self {
+            case .apple:
+                return .appStore
+            case .SLCM:
+                return .slcm
+            case .paycellSLCM:
+                return .paycell
+            case .paycellAllAccess:
+                return .paycell
+            default:
+                return .appStore
         }
     }
 }

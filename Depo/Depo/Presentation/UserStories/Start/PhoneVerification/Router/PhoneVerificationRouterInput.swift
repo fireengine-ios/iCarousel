@@ -16,4 +16,12 @@ protocol PhoneVerificationRouterInput {
     
     //TwoFactorAuth
     func popToLoginWithPopUp(title: String?, message: String, image: PopUpImage, onClose: VoidHandler?)
+    
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler)
 }

@@ -17,6 +17,7 @@ def core_pods
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Netmera'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
@@ -24,7 +25,6 @@ def core_pods
   pod 'GoogleTagManager'
   pod 'Adjust'
   #pod 'ActiveLabel'
-
 
   #Keyboard
   pod 'Typist', '~> 1.1.0'

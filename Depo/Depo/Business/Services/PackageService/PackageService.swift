@@ -14,7 +14,7 @@ final class PackageService {
     private let iapManager = IAPManager.shared
     
     //MARK: Utility Methods(private)
-    private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
+    private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any, quota: Int64, price: Float) -> SubscriptionPlan {
         if name.contains("500") {
             return SubscriptionPlan(name: name,
                                     photosCount: 500_000,
@@ -23,7 +23,9 @@ final class PackageService {
                                     docsCount: 5_000_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("50") {
             return SubscriptionPlan(name: name,
                                     photosCount: 50_000,
@@ -32,7 +34,9 @@ final class PackageService {
                                     docsCount: 500_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("100") {
             return SubscriptionPlan(name: name,
                                     photosCount: 100_000,
@@ -41,7 +45,9 @@ final class PackageService {
                                     docsCount: 1_000_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("2.5") || name.contains("2,5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 2_560_000,
@@ -50,7 +56,9 @@ final class PackageService {
                                     docsCount: 25_600_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 5_000,
@@ -59,7 +67,9 @@ final class PackageService {
                                     docsCount: 50_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("10") {
             return SubscriptionPlan(name: name,
                                     photosCount: 10_000,
@@ -68,7 +78,9 @@ final class PackageService {
                                     docsCount: 100_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else if name.contains("20") {
             return SubscriptionPlan(name: name,
                                     photosCount: 20_000,
@@ -77,7 +89,9 @@ final class PackageService {
                                     docsCount: 200_000,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         } else {
             return SubscriptionPlan(name: name,
                                     photosCount: 0,
@@ -86,7 +100,9 @@ final class PackageService {
                                     docsCount: 0,
                                     priceString: priceString,
                                     type: type,
-                                    model: model)
+                                    model: model,
+                                    quota: quota,
+                                    price: price)
         }
     }
     
@@ -213,7 +229,7 @@ final class PackageService {
     }
     
     //MARK: Utility Methods(public)
-    func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType {
+    func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType? {
         if AccountType(rawValue: accountType) == .turkcell {
             return .turkcell
         } else {
@@ -231,7 +247,7 @@ final class PackageService {
                 }
             }
             
-            return .all
+            return nil
         }
     }
     
@@ -294,11 +310,35 @@ final class PackageService {
     }
     
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
-        return offers.flatMap { offer in
+        return offers.compactMap { offer in
+            
             let priceString: String = getPriceInfo(for: offer, accountType: accountType)
             let name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
+            let price = getPriceInFloat(offer: offer)
+            var quota = getQuota(offer: offer)
             
-            return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer)
+            return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, quota: quota, price: price)
+        }
+    }
+    
+    private func getPriceInFloat(offer: Any) -> Float {
+        if let packageModel = offer as? PackageModelResponse, let price = packageModel.price {
+            return price
+        } else if let subscriptionPlan = offer as? SubscriptionPlanBaseResponse, let price = subscriptionPlan.subscriptionPlanPrice {
+            return price
+        } else {
+            return 0
+        }
+    }
+    
+    
+    private func getQuota(offer: Any) -> Int64 {
+        if let packageModel = offer as? PackageModelResponse, let quota = packageModel.quota {
+            return quota
+        } else if let subscriptionPlan = offer as? SubscriptionPlanBaseResponse, let quota = subscriptionPlan.subscriptionPlanQuota {
+            return quota
+        } else {
+            return 0
         }
     }
     

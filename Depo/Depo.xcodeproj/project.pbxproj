@@ -314,6 +314,12 @@
 		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
+		733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -325,6 +331,15 @@
 		73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
+		73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
+		73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
+		73D723EC231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
+		73D723ED231D08CF006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
+		73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
+		73D723F0231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
+		73D723F1231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
+		73D723F2231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
 		73E41D9422DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
 		73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */; };
@@ -4199,6 +4214,18 @@
 		CE61D1C420468759001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
+		CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF5230EAAA700CED18C /* PaymentPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */; };
+		CE634AF6230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
+		CE634AFB230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFD230ED69900CED18C /* PaymentTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AFA230ED69900CED18C /* PaymentTypeView.xib */; };
+		CE634AFF230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
+		CE634B00230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
+		CE634B01230ED6A500CED18C /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
@@ -6220,6 +6247,12 @@
 		CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE61FB593AF00FCE6AB /* ServerError.swift */; };
 		CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */; };
 		CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */; };
+		CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF2E123210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */; };
+		CEFAF31923213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
+		CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
+		CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */; };
 		CEFFA8EF21AFC21400B34F36 /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */; };
 		CEFFA8F021AFC21400B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
 		CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
@@ -6728,6 +6761,8 @@
 		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
 		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
+		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -6741,6 +6776,9 @@
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
+		73D723E7231D0855006AE835 /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
+		73D723E9231D08A6006AE835 /* PackageOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOffer.swift; sourceTree = "<group>"; };
+		73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthErrorResponse.swift; sourceTree = "<group>"; };
 		73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyService.swift; sourceTree = "<group>"; };
 		73EA170022EB2C7700BAD2D3 /* SpotifyRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyRoutingService.swift; sourceTree = "<group>"; };
@@ -8530,6 +8568,10 @@
 		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
 		CE61D1C02046873A001D01DC /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
+		CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPopUpController.swift; sourceTree = "<group>"; };
+		CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentPopUpController.xib; sourceTree = "<group>"; };
+		CE634AFA230ED69900CED18C /* PaymentTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTypeView.xib; sourceTree = "<group>"; };
+		CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeView.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
 		CE654FB220454B2500232025 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
@@ -8750,6 +8792,8 @@
 		CEF69DE61FB593AF00FCE6AB /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHideManager.swift; sourceTree = "<group>"; };
+		CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionNoFilesView.swift; sourceTree = "<group>"; };
+		CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectionNoFilesView.xib; sourceTree = "<group>"; };
 		CEFC14152059609F002DE803 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedController.xib; sourceTree = "<group>"; };
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
@@ -8897,6 +8941,7 @@
 				8C0E8FF31FDEBDFF00789C91 /* MobileCoreServices.framework in Frameworks */,
 				8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */,
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
+				7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
 				8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */,
@@ -9016,6 +9061,7 @@
 				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
 				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
+				7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
 				7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */,
@@ -9063,6 +9109,7 @@
 				CE784CAC22A685FB00662219 /* Security.framework in Frameworks */,
 				CE784CAD22A685FB00662219 /* AssetsLibrary.framework in Frameworks */,
 				CE784CAE22A685FB00662219 /* CoreLocation.framework in Frameworks */,
+				7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */,
 				CE784CAF22A685FB00662219 /* MessageUI.framework in Frameworks */,
 				CE784CB022A685FB00662219 /* CoreData.framework in Frameworks */,
 				CE784CB122A685FB00662219 /* AVKit.framework in Frameworks */,
@@ -10405,6 +10452,7 @@
 			children = (
 				73EA16FB22EB26EB00BAD2D3 /* SpotifyService.swift */,
 				9864296722F834F10039811C /* SpotifyResponse.swift */,
+				733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */,
 			);
 			path = SpotifyService;
 			sourceTree = "<group>";
@@ -11070,6 +11118,8 @@
 				4BA61F6D22B7D60400D66031 /* PermissionType.swift */,
 				CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */,
 				CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */,
+				73D723E7231D0855006AE835 /* PaymentModels.swift */,
+				73D723E9231D08A6006AE835 /* PackageOffer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -13169,6 +13219,7 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7329EE6F231F9AD90078396D /* SpotifyiOS.framework */,
 				B5CDB31A21787FEF006CFA50 /* TurkcellUpdaterDSK */,
 				B53DCE6620EF634800400DBA /* ContactSyncSDK */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
@@ -14437,6 +14488,8 @@
 				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
 				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
 				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
+				CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */,
+				CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */,
 			);
 			path = InstaPickSelection;
 			sourceTree = "<group>";
@@ -14812,6 +14865,7 @@
 				CE40133A1FCFE4AF006F28FD /* PromoView.swift */,
 				CE2F56131F7552A900F49DA1 /* ColumnsCollectionLayout.swift */,
 				CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */,
+				CE634AF9230EAAF300CED18C /* PaymentPopUpController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -14925,6 +14979,7 @@
 				CE343601224B92BB00AFAABB /* Bool+Init.swift */,
 				8C65D18522C63B6F00CB1DBD /* String + Extension.swift */,
 				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
+				73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -15249,6 +15304,17 @@
 				CE5921D92256446F005882CE /* PasswordView.swift */,
 			);
 			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		CE634AF9230EAAF300CED18C /* PaymentPopUpController */ = {
+			isa = PBXGroup;
+			children = (
+				CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */,
+				CE634AF1230EAAA700CED18C /* PaymentPopUpController.swift */,
+				CE634AFA230ED69900CED18C /* PaymentTypeView.xib */,
+				CE634AFE230ED6A500CED18C /* PaymentTypeView.swift */,
+			);
+			path = PaymentPopUpController;
 			sourceTree = "<group>";
 		};
 		CE6DE7421FCBE84000C23CBD /* Socials */ = {
@@ -17407,6 +17473,7 @@
 				8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */,
 				7C203556201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
 				8C06B1192008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
+				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
@@ -17633,6 +17700,7 @@
 				8C0E905F1FDEBDFF00789C91 /* PasscodeViewImp.xib in Resources */,
 				8C06AFC52008AD71003D8E05 /* gonder_btn@3x.png in Resources */,
 				8C06B0F12008AD72003D8E05 /* serbest_cizgi@3x.png in Resources */,
+				CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				8C06AF0F2008AD70003D8E05 /* checkbox@3x.png in Resources */,
 				8C06B1D72008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */,
 				8C06B1572008AD72003D8E05 /* text_selected@3x.png in Resources */,
@@ -17700,6 +17768,7 @@
 				8C06B11D2008AD72003D8E05 /* t_buyuk_selected.png in Resources */,
 				8C06B19B2008AD72003D8E05 /* vintage@3x.png in Resources */,
 				8C06B0852008AD71003D8E05 /* paylas_mail@2x.png in Resources */,
+				CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
 				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
@@ -18306,6 +18375,7 @@
 				92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
 				73B4077622E9C0E10033D317 /* TermsCheckboxTextView.xib in Resources */,
 				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
+				CEFAF31923213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
 				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AFF22008AD71003D8E05 /* kirmizi@2x.png in Resources */,
@@ -18450,6 +18520,7 @@
 				CEAE3FD71EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				8C06B0822008AD71003D8E05 /* paylas_mail.png in Resources */,
 				8C06AEF62008AD70003D8E05 /* cancel_buton@2x.png in Resources */,
+				CE634AFB230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				8C06AECA2008AD70003D8E05 /* back_icon@2x.png in Resources */,
 				7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */,
 				8C06AFE82008AD71003D8E05 /* kare@3x.png in Resources */,
@@ -18516,6 +18587,7 @@
 				8C06B1802008AD72003D8E05 /* turuncu@2x.png in Resources */,
 				8C06B0B42008AD71003D8E05 /* rotate@3x.png in Resources */,
 				8C06AFC62008AD71003D8E05 /* header_icon.png in Resources */,
+				CE634AF6230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				A2268EC221A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
 				8C06B1422008AD72003D8E05 /* target@2x.png in Resources */,
 				8C06B19A2008AD72003D8E05 /* vintage@3x.png in Resources */,
@@ -18635,6 +18707,7 @@
 				CE784CF522A685FB00662219 /* toolbar_sekil_icon@2x.png in Resources */,
 				CE784CF622A685FB00662219 /* tahta_yeni.png in Resources */,
 				CE784CF722A685FB00662219 /* caps2.png in Resources */,
+				CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				CE784CF822A685FB00662219 /* turuncu.png in Resources */,
 				CE784CF922A685FB00662219 /* kucuk_ucgen@2x.png in Resources */,
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
@@ -18675,6 +18748,7 @@
 				CE784D1B22A685FB00662219 /* SyncContactsViewController.xib in Resources */,
 				CE784D1C22A685FB00662219 /* ok.png in Resources */,
 				CE784D1D22A685FB00662219 /* t_orta@3x.png in Resources */,
+				CE634AFD230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				CE784D1E22A685FB00662219 /* SingleThumbnailAlbumCell.xib in Resources */,
 				CE784D1F22A685FB00662219 /* LeavePremiumView.xib in Resources */,
 				CE784D2022A685FB00662219 /* frame@3x.png in Resources */,
@@ -18864,6 +18938,7 @@
 				8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CE784DD322A685FB00662219 /* vintage.png in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
+				CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
@@ -20088,6 +20163,7 @@
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C208648228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
+				CEFAF2E123210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
@@ -20207,6 +20283,7 @@
 				8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				89E51D5A22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
+				CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
@@ -20409,6 +20486,7 @@
 				CE23A0F4205FF5290048267D /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				8C0E8DBD1FDEBDFF00789C91 /* RegistrationRouterInput.swift in Sources */,
+				73D723ED231D08CF006AE835 /* PaymentModels.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
@@ -20596,6 +20674,7 @@
 				989BDE3E22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
 				17589F7F2276336800A5DB37 /* SupportFormController.swift in Sources */,
+				CE634B00230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
@@ -20782,6 +20861,7 @@
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				B56FBB2C2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
+				73D723F1231D092E006AE835 /* UIStackView+Extensions.swift in Sources */,
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */,
@@ -20955,6 +21035,7 @@
 				4A56D5C9202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				8C0E8F451FDEBDFF00789C91 /* ActionsMenuViewInput.swift in Sources */,
 				8C0E8F461FDEBDFF00789C91 /* ActionsMenuView.swift in Sources */,
+				73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
@@ -21071,6 +21152,7 @@
 				B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
+				733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				8C0E8F891FDEBDFF00789C91 /* ServerError.swift in Sources */,
 				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
@@ -21666,6 +21748,7 @@
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
 				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
+				CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
@@ -22139,6 +22222,7 @@
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
 				CE51ACD11EF90853005DCEE0 /* TermsAndServicesViewOutput.swift in Sources */,
 				CE2F56191F7552A900F49DA1 /* PackagesInteractorOutput.swift in Sources */,
+				73D723F0231D092E006AE835 /* UIStackView+Extensions.swift in Sources */,
 				989BDE4022F47B1E001DDEB2 /* SpotifyPlaylistsViewController.swift in Sources */,
 				8E1B755B230547DA00F6EEDA /* MusicInitializer.swift in Sources */,
 				4A0AC138208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
@@ -22176,6 +22260,7 @@
 				CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */,
 				CE51ACDC1EF90853005DCEE0 /* TermsAndServicesInitializer.swift in Sources */,
 				CE49E8FA2099BD71007F05A6 /* UIButton+Font.swift in Sources */,
+				73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */,
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
 				8E98CA3C2305627E0050D7DD /* MusicViewInput.swift in Sources */,
@@ -22474,6 +22559,7 @@
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
+				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -22524,6 +22610,7 @@
 				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */,
 				7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */,
 				473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */,
 				CE2F561A1F7552A900F49DA1 /* PackagesModuleInput.swift in Sources */,
@@ -22641,6 +22728,7 @@
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,
 				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
+				CE634AFF230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				17589F742276336800A5DB37 /* PhoneCodeInputView.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
@@ -22686,6 +22774,7 @@
 				989BDE5E22F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift in Sources */,
 				92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */,
 				8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */,
+				733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */,
 				89E51D4422CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */,
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,
@@ -23102,6 +23191,7 @@
 				CE78485622A685FB00662219 /* MyStorageViewOutput.swift in Sources */,
 				CE78485722A685FB00662219 /* GradientPremiumButton.swift in Sources */,
 				CE78485822A685FB00662219 /* VisualMusicPlayerModuleInput.swift in Sources */,
+				73D723EC231D08A6006AE835 /* PackageOffer.swift in Sources */,
 				CE78485922A685FB00662219 /* ButtonWithGrayCorner.swift in Sources */,
 				CE78485A22A685FB00662219 /* SubscriptionParameters.swift in Sources */,
 				CE78485B22A685FB00662219 /* ContactSyncResponse.swift in Sources */,
@@ -23183,6 +23273,7 @@
 				CE7848A722A685FB00662219 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				CE7848A822A685FB00662219 /* ManageContactsViewOutput.swift in Sources */,
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
+				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
 				CE7848AC22A685FB00662219 /* AnalyzeStatus.m in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
@@ -23439,6 +23530,7 @@
 				8C1E5BD122CB8B72008FDA02 /* MediaItemOperationsService.swift in Sources */,
 				CE78499622A685FB00662219 /* InstaPickHashtagCell.swift in Sources */,
 				CE78499822A685FB00662219 /* SearchServiceResponse.swift in Sources */,
+				73D723F2231D092E006AE835 /* UIStackView+Extensions.swift in Sources */,
 				CE78499922A685FB00662219 /* TermsOfUseViewOutput.swift in Sources */,
 				CE78499A22A685FB00662219 /* AugmentedRealityFileProvider.swift in Sources */,
 				CE78499B22A685FB00662219 /* StoriesInteractor.swift in Sources */,
@@ -23678,6 +23770,7 @@
 				CE784A7C22A685FB00662219 /* RemoteService.swift in Sources */,
 				CE784A7D22A685FB00662219 /* UsageInfoConfigurator.swift in Sources */,
 				CE784A7E22A685FB00662219 /* PassthroughView.swift in Sources */,
+				CE634B01230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				CE784A7F22A685FB00662219 /* UILabel+Font.swift in Sources */,
 				CE784A8022A685FB00662219 /* ForgotPasswordRouterInput.swift in Sources */,
 				CE784A8122A685FB00662219 /* LanguageModel.swift in Sources */,
@@ -24015,6 +24108,7 @@
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				CE784BC422A685FB00662219 /* PageForLanding.swift in Sources */,
+				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
 				CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */,
 				CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */,
@@ -24171,7 +24265,9 @@
 				CE784C5122A685FB00662219 /* AlbumDetailRouter.swift in Sources */,
 				CE784C5222A685FB00662219 /* MenloworksTagsService.swift in Sources */,
 				CE784C5322A685FB00662219 /* AlbumDetailInitializer.swift in Sources */,
+				CE634AF5230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				CE784C5422A685FB00662219 /* TextEnterController.swift in Sources */,
+				733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */,
 				CE784C5522A685FB00662219 /* TermsOfUseInteractorInput.swift in Sources */,
 				CE784C5622A685FB00662219 /* FaceImageAddNamePresenter.swift in Sources */,
 				CE784C5722A685FB00662219 /* UIView+Utils.swift in Sources */,
@@ -24782,6 +24878,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -24839,6 +24936,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -24893,6 +24991,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -24948,6 +25047,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -25001,6 +25101,11 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25036,6 +25141,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25070,6 +25180,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25104,6 +25219,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25135,6 +25255,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25170,6 +25298,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25204,6 +25340,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25238,6 +25382,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25271,6 +25423,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25306,6 +25466,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25340,6 +25508,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25374,6 +25550,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25407,6 +25591,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25442,6 +25633,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25476,6 +25674,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25510,6 +25715,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25678,6 +25890,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25713,6 +25933,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25747,6 +25975,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25781,6 +26017,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -25814,6 +26058,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25849,6 +26101,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25883,6 +26143,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxFileProvider/InfoAppStore-LifeTech.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25917,6 +26185,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25950,6 +26226,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -25985,6 +26268,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26019,6 +26309,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxFileProviderUI/InfoAppStore-LifeTech.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26053,6 +26350,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26221,6 +26525,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26256,6 +26568,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26290,6 +26610,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoAppstore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26324,6 +26652,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26357,6 +26693,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26392,6 +26735,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26426,6 +26776,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoAppStore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26460,6 +26817,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -26499,6 +26863,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26517,6 +26882,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26533,6 +26899,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -26558,6 +26925,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26575,6 +26943,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26590,6 +26959,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -26614,6 +26984,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26631,6 +27002,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26646,6 +27018,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AppStore;
@@ -26671,6 +27044,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26688,6 +27062,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks/CropySDK/Source",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -26703,6 +27078,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Depo/App/VendorsFrameworks";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Enterprise;
@@ -26723,6 +27099,14 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26758,6 +27142,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26792,6 +27184,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26826,6 +27226,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -26864,6 +27272,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26922,6 +27331,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -26977,6 +27387,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -27033,6 +27444,7 @@
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
+					"$(PROJECT_DIR)/Depo/App",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

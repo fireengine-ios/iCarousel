@@ -19,7 +19,6 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
@@ -69,6 +68,49 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
+    private func hasEmptyPhone(accountWarning: String) -> Bool {
+        return accountWarning == HeaderConstant.emptyMSISDN
+    }
+    
+    private func hasAccountDeletedStatus(headers: [String: Any]) -> Bool {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String else {
+            return false
+        }
+        
+        return accountStatus.uppercased() == ErrorResponseText.accountDeleted
+    }
+    
+    private func proccessLoginHeaders(headers: [String: Any], login: String, errorHandler: @escaping (LoginResponseError, String) -> Void) {
+        self.emptyEmailCheck(for: headers)
+        var handler: VoidHandler?
+        
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
+            /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
+            if hasEmptyPhone(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
+                handler = {
+                    errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                }
+            } else if self.hasAccountDeletedStatus(headers: headers) {
+                handler = { [weak self] in
+                    self?.processLogin(login: login, headers: headers)
+                }
+            } else if self.hasEmptyPhone(accountWarning: accountWarning) {
+                errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                return
+            }
+        } else if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.processLogin(login: login, headers: headers)
+            }
+        }
+        
+        if let handler = handler {
+            self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+        } else {
+            self.processLogin(login: login, headers: headers)
+        }
+    }
+    
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
@@ -118,31 +160,11 @@ class LoginInteractor: LoginInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
-            self.setContactSettingsForUser()
-            
-            self.emptyEmailCheck(for: headers)
-            
-            debugLog("login isRememberMe \(self.rememberMe)")
-            self.tokenStorage.isRememberMe = self.rememberMe
-            self.analyticsService.track(event: .login)
-            
-            if Validator.isValid(email: login) {
-                self.analyticsService.trackLoginEvent(loginType: .email)
-            } else {
-                self.analyticsService.trackLoginEvent(loginType: .gsm)
-            }
-            
-            self.loginRetries = 0
-            
-            self.accountService.updateBrandType()
-            
-            DispatchQueue.main.async {
-                self.output?.succesLogin()
-            }
+            self.proccessLoginHeaders(headers: headers, login: login, errorHandler: errorHandler)
             
         }, fail: { [weak self] errorResponse in
             let loginError = LoginResponseError(with: errorResponse)
@@ -165,6 +187,28 @@ class LoginInteractor: LoginInteractorInput {
             self.tokenStorage.isRememberMe = self.rememberMe
             self.output?.showTwoFactorAuthViewController(response: response)
         })
+    }
+    
+    private func processLogin(login: String, headers: [String: Any]) {
+        self.setContactSettingsForUser()
+                
+        debugLog("login isRememberMe \(self.rememberMe)")
+        self.tokenStorage.isRememberMe = self.rememberMe
+        self.analyticsService.track(event: .login)
+        
+        if Validator.isValid(email: login) {
+            self.analyticsService.trackLoginEvent(loginType: .email)
+        } else {
+            self.analyticsService.trackLoginEvent(loginType: .gsm)
+        }
+        
+        self.loginRetries = 0
+        
+        self.accountService.updateBrandType()
+        
+        DispatchQueue.main.async {
+            self.output?.succesLogin()
+        }
     }
     
     private func setContactSettingsForUser() {

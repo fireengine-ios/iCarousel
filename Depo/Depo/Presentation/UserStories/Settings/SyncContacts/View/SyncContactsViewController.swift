@@ -49,6 +49,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     var tabBarSetup = false
     
+    var isFullCircle: Bool {
+        return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
+    }
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
