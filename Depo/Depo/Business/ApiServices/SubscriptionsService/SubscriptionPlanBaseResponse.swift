@@ -53,6 +53,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         static let subscriptionPlanQuota = "quota"
         static let subscriptionPlanPeriod = "period"
         static let subscriptionPlaninAppPurchaseId = "inAppPurchaseId"
+        static let subscriptionPlanLanguageKey = "languageKey"
     }
     
     var createdDate: NSNumber?
@@ -83,6 +84,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanQuota: Int64?
     var subscriptionPlanPeriod: String?
     var subscriptionPlanInAppPurchaseId: String?
+    var subscriptionPlanLanguageKey: String?
     
     override func mapping() {
         createdDate = json?[SubscriptionConstants.createdDate].number
@@ -129,6 +131,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         subscriptionPlanQuota = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanQuota]?.int64
         subscriptionPlanPeriod = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanPeriod]?.string
         subscriptionPlanInAppPurchaseId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlaninAppPurchaseId]?.string
+        subscriptionPlanLanguageKey = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanLanguageKey]?.string
     }
 }
 

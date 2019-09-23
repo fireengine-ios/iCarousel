@@ -110,4 +110,7 @@ final class SettingsBundleHelper: NSObject {
         return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
+    var isLifeTechBundle: Bool = {
+        return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
+    }()
 }

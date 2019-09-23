@@ -50,7 +50,7 @@ final class TodayViewController: UIViewController {
     // MARK: Tap handler
     
     @objc private func openApp() {
-        if let url = URL(string: "akillidepo://") {
+        if let url = URL(string: SharedConstants.applicationQueriesScheme) {
             extensionContext?.open(url, completionHandler: nil)
         }
     }

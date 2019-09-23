@@ -64,6 +64,7 @@ final class MyStoragePresenter {
 
 //MARK: - MyStorageViewOutput
 extension MyStoragePresenter: MyStorageViewOutput {
+    
     func viewDidLoad() {
         view?.startActivityIndicator()
         calculateProgress()
@@ -74,20 +75,45 @@ extension MyStoragePresenter: MyStorageViewOutput {
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
-        guard let model = plan.model as? SubscriptionPlanBaseResponse, let type =  model.subscriptionPlanType else {
+        
+        guard let model = plan.model as? SubscriptionPlanBaseResponse else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
         
-        if type == .SLCM {
-            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
-            router?.showCancelOfferAlert(with: cancelText)
-        } else if type == .apple {
-            router?.showCancelOfferApple()
+        if let type = model.subscriptionPlanType {
+            switch type {
+            case .apple:
+                router?.showCancelOfferApple()
+                
+            case .SLCM:
+                let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+                router?.showCancelOfferAlert(with: cancelText)
+                
+            default:
+                let cancelText: String
+                if let key = model.subscriptionPlanLanguageKey {
+                    cancelText = TextConstants.digicelCancelText(for: key)
+                } else {
+                    /// maybe needs "cancelText = TextConstants.offersAllCancel"
+                    cancelText = String(format: type.cancelText, plan.name)
+                }
+                
+                router?.showCancelOfferAlert(with: cancelText)
+            }
+            
         } else {
-            let cancelText = String(format: type.cancelText, plan.name)
+            
+            let cancelText: String
+            if let key = model.subscriptionPlanLanguageKey {
+                cancelText = TextConstants.digicelCancelText(for: key)
+            } else {
+                cancelText = TextConstants.offersAllCancel
+            }
+            
             router?.showCancelOfferAlert(with: cancelText)
         }
+        
     }
     
     func restorePurchasesPressed() {
@@ -105,7 +131,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func successed(accountInfo: AccountInfoResponse) {
         if let accountTypeString = accountInfo.accountType {
-            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
+            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
         }
         
         if accountType == .all {
@@ -117,12 +143,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
         self.allOffers = allOffers.filter {
-            //show only non-feature offers
-            if $0.subscriptionPlanType == nil {
+            /// show only non-feature offers
+            if $0.subscriptionPlanFeatureType != nil {
                  return false
             }
             
-            //hide apple offers if apple server don't sent offer info
+            /// hide apple offers if apple server don't sent offer info
             if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
                 return false
             }
@@ -130,7 +156,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             return true
         }
         
-        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers) ?? .all
         displayOffers()
     }
     

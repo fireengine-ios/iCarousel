@@ -143,15 +143,6 @@ extension PackagesViewController: PackagesViewInput {
     func display(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
-    
-    func showActivateOfferAlert(with title: String, price: String, for offer: PackageModelResponse, planIndex: Int) {        
-        let vc = DarkPopUpController.with(title: title, message: price, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close(animation: {
-                self?.output.buy(offer: offer, planIndex: planIndex)
-            })
-        }
-        present(vc, animated: false, completion: nil)
-    }
 
     func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {
@@ -206,11 +197,61 @@ extension PackagesViewController: UICollectionViewDataSource {
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         let plan = output.availableOffers[indexPath.row]
+        presentPaymentPopUp(plan: plan, planIndex: indexPath.row)
         
-        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
-            MenloworksAppEvents.onSubscriptionClicked(tag)
+    }
+    
+    private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
+        
+        guard let name = plan.offers.first?.name else {
+            assertionFailure()
+            return
         }
-        output.didPressOn(plan: plan, planIndex: indexPath.row)
+        
+        let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
+            if let model = offer.model as? PackageModelResponse {
+                return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
+            } else {
+                return nil
+            }
+        }
+        
+        let subtitle = TextConstants.storage
+        let paymentModel = PaymentModel(name: name, subtitle: subtitle, types: paymentMethods)
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
+        present(popup, animated: false, completion: nil)
+    }
+    
+    private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
+        
+        guard let name = model.name, let type = model.type?.paymentType else {
+            return nil
+        }
+        
+        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { [weak self] name in
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
+                assertionFailure()
+                return
+            }
+            
+            if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
+                MenloworksAppEvents.onSubscriptionClicked(tag)
+            }
+
+            self?.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
+         
+        })
+        
+    }
+    
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, name: String ) -> SubscriptionPlan?  {
+        
+        return availableOffers.offers.first { plan -> Bool in
+            guard let model = plan.model as? PackageModelResponse else {
+                return false
+            }
+            return model.name == name
+        }
     }
 }
 

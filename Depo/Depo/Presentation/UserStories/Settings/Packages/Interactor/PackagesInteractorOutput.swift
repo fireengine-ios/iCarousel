@@ -10,7 +10,7 @@ import Foundation
 
 protocol PackagesInteractorOutput: class {
     func successed(allOffers: [PackageModelResponse])
-    
+ 
     func successed(tokenForOffer: String)
     func successed(tokenForResend: String)
     

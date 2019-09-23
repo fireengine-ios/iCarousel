@@ -42,6 +42,24 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: navVC)
     }
     
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler) {
+        
+        let popUp = CreateStoryPopUp.with(image: image.image,
+                                          title: title,
+                                          titleDesign: titleDesign,
+                                          message: message,
+                                          messageDesign: messageDesign,
+                                          buttonTitle: buttonTitle,
+                                          buttonAction: buttonAction)
+        router.presentViewController(controller: popUp, animated: false)
+    }
+    
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
         let vc = TwoFactorAuthenticationViewController(response: response)
         router.pushViewController(viewController: vc)

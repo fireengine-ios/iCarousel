@@ -68,15 +68,17 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     override func verifyCode(code: String) {
         authenticationService.loginViaTwoFactorAuth(token: challenge.token,
                                                     challengeType: challenge.challengeType.rawValue,
-                                                    otpCode: code) { response in
-                                                        
+                                                    otpCode: code) { [weak self] response in
             DispatchQueue.main.async {
                 switch response {
-                case .success(_):
-                    AccountService().updateBrandType()
-                    self.output.verificationSucces()
+                case .success(let result):
+                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        self?.proccessLoginHeaders(headers: result)
+                    }, fail: { [weak self] error in
+                        self?.output.verificationFailed(with: error.localizedDescription)
+                    })
                 case .failed(let error):
-                    self.output.verificationFailed(with: error.localizedDescription)
+                    self?.output.verificationFailed(with: error.localizedDescription)
                 }
             }
         }
@@ -99,6 +101,11 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         }
         
         accountWarningService?.openEmptyEmail(successHandler: onSuccess)
+    }
+    
+    private func verifyProcess() {
+        AccountService().updateBrandType()
+        self.output.verificationSucces()
     }
     
     func updateUserLanguage() {
@@ -139,5 +146,48 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             }
         }
         
+    }
+    
+    // MARK: - Private methods
+    
+    private func hasAccountWarning(accountWarning: String) -> Bool {
+        return accountWarning == HeaderConstant.emptyMSISDN || accountWarning == HeaderConstant.emptyEmail
+    }
+    
+    private func hasAccountDeletedStatus(headers: [String: Any]) -> Bool {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String else {
+            return false
+        }
+        
+        return accountStatus.uppercased() == ErrorResponseText.accountDeleted
+    }
+    
+    private func proccessLoginHeaders(headers: [String: Any]) {
+        var handler: VoidHandler?
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
+            /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
+            if hasAccountWarning(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
+                handler = { [weak self] in
+                    self?.output.verificationFailed(with: accountWarning)
+                }
+            } else if self.hasAccountDeletedStatus(headers: headers) {
+                handler = { [weak self] in
+                    self?.verifyProcess()
+                }
+            } else if self.hasAccountWarning(accountWarning: accountWarning) {
+                output.verificationFailed(with: accountWarning)
+                return
+            }
+        } else if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.verifyProcess()
+            }
+        }
+        
+        if let handler = handler {
+            self.output.loginDeletedAccount(deletedAccountHandler: handler)
+        } else {
+            self.verifyProcess()
+        }
     }
 }

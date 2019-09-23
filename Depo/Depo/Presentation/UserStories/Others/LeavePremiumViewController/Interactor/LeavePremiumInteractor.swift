@@ -66,7 +66,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
         })
     }
     
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     

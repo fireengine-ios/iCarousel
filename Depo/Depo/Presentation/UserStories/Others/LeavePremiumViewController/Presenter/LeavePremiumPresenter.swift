@@ -91,12 +91,29 @@ final class LeavePremiumPresenter {
     }
     
     private var cancelText: String? {
-        guard let feature = feature, let featureType = feature.subscriptionPlanFeatureType else {
+        guard let feature = feature else {
             return nil
         }
         
+        guard let featureType = feature.subscriptionPlanFeatureType else {
+            if let key = feature.subscriptionPlanLanguageKey {
+                return TextConstants.digicelCancelText(for: key)
+            } else {
+                return TextConstants.offersAllCancel
+            }
+        }
+        
         if featureType == .allAccessFeature {
-            switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
+            
+            guard let accountType = interactor.getAccountType(with: accountType.rawValue, offers: [feature]) else {
+                if let key = feature.subscriptionPlanLanguageKey {
+                    return TextConstants.digicelCancelText(for: key)
+                } else {
+                    return TextConstants.offersAllCancel
+                }
+            }
+            
+            switch accountType {
             case .all: return TextConstants.offersAllCancel
             case .cyprus: return TextConstants.featureKKTCellCancelText
             case .ukranian: return TextConstants.featureLifeCellCancelText

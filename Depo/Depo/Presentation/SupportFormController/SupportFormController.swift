@@ -264,7 +264,6 @@ final class SupportFormController: ViewController, KeyboardHandler {
             scrollToView(emailView)
             
         case .emptySubject:
-            subjectView.textField.becomeFirstResponder()
             scrollToView(subjectView)
             
         case .emptyProblem:
