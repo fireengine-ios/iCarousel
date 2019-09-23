@@ -94,6 +94,12 @@ class HomePageRouter: HomePageRouterInput {
         }
     }
     
+    func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse) {
+        let popUp = CredsUpdateCheckPopUp.with(message: message, userInfo: userInfo)
+        let navigationController = router.createRootNavigationControllerWithModalStyle(controller: popUp)
+        router.presentViewController(controller: navigationController)
+    }
+    
     func presentEmailVerificationPopUp(delegate: VerifyEmailPopUpDelegate) {
         let controller = router.verifyEmailPopUp
         controller.delegate = delegate

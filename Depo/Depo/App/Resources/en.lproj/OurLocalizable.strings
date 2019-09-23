@@ -1121,6 +1121,8 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
+"cred_update_title" = "Are you still using the same e-mail and phone number?";
+"cred_completion_message" = "Thank you for being always up-to-date!";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
