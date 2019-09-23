@@ -10,6 +10,17 @@ import UIKit
 
 final class CredsUpdateCheckPopUp: UIViewController, NibInit {
     
+    static func with(message: String, userInfo: AccountInfoResponse) -> CredsUpdateCheckPopUp {
+        let controller = CredsUpdateCheckPopUp.initFromNib()
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        controller.message = message
+        controller.userInfo = userInfo
+        
+        return controller
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var messageLabel: UILabel!
     
@@ -81,17 +92,6 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
     private var userInfo: AccountInfoResponse?
     
     private var isShown = false
-    
-    static func with(message: String, userInfo: AccountInfoResponse) -> CredsUpdateCheckPopUp {
-        let controller = CredsUpdateCheckPopUp.initFromNib()
-        
-        controller.modalTransitionStyle = .crossDissolve
-        controller.modalPresentationStyle = .overFullScreen
-        controller.message = message
-        controller.userInfo = userInfo
-        
-        return controller
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
