@@ -195,7 +195,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func credsCheckUpdateIfNeeded() {
-        if let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.isUpdateInformationRequired ?? false) {
+        if let accountInfo = SingletonStorage.shared.accountInfo, accountInfo.isUpdateInformationRequired == true {
             let email = SingletonStorage.shared.accountInfo?.email ?? ""
             let fullPhoneNumber = SingletonStorage.shared.accountInfo?.fullPhoneNumber ?? ""
             let message = "\(email)\n\(fullPhoneNumber)"
