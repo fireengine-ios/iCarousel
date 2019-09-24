@@ -50,7 +50,7 @@ echo "Branch Name: ${branchName}"
 
 def xcodeBuild = { flavorId ->
     def flavor = flavors[flavorId]
-    def provisionFiles = findFiles(glob: "provisioningProfiles/${flavor}/*.mobileprovision")
+    def provisionFiles = findFiles(glob: "provisioningProfiles/${flavor.configuration}/*.mobileprovision")
     def provisioningProfiles = provisionFiles.collect { file -> [
         provisioningProfileAppId: file.name.replace('_','.') - '.mobileprovision',
         provisioningProfileUUID: file.name
