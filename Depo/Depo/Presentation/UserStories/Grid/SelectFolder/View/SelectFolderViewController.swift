@@ -23,13 +23,14 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
         
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItems = nil
         
         configureNavBarActions(isSelecting: false)
+        
+        setTitle(withString: TextConstants.selectFolderTitle, andSubTitle: nil)
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
@@ -39,8 +40,6 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationItem.rightBarButtonItems = nil
-        
-        setTitle(withString: TextConstants.selectFolderTitle, andSubTitle: selectedFolder?.name)
         
         if (cancelSelectBlock != nil) {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,

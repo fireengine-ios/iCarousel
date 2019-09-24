@@ -102,7 +102,7 @@ class PredicateRules {
             }
 //        case .duplicates:
 //            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)", FileType.image.valueForCoreDataMapping())
-//            let serverList = MediaItemOperationsService.shared.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
+//            let serverList = MediaItemOperationsService.shared.executeRequest(predicate: server, context: CoreDataStack.shared.mainContext)
 //            let list = serverList.map { $0.md5Value }
 //            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
 //            return predicate

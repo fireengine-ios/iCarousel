@@ -2,116 +2,83 @@
 //  CoreDataStack.swift
 //  Depo
 //
-//  Created by Alexander Gurin on 7/23/17.
-//  Copyright © 2017 com.igones. All rights reserved.
+//  Created by Konstantin Studilin on 28/08/2019.
+//  Copyright © 2019 LifeTech. All rights reserved.
 //
 
 import Foundation
-import CoreData
 
-final class CoreDataStack: NSObject {
+
+final class CoreDataStack {
     
-    static let `default` = CoreDataStack()
-    
-    private static let modelName = "LifeBoxModel"
-    private static let persistentStoreName = "DataModel"
-    private static let modelVersion = "3"
-    
-    private override init() {
-        super.init()
+    private struct Config {
+        static let modelName = "LifeBoxModel"
+        static let modelVersion = "3"
+        static let storeName = "DataModel"
         
-        if #available(iOS 10.0, *) {
-            mainContext.automaticallyMergesChangesFromParent = true
-        } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
-        }
-        
-        /// for tests
-        //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
+        private init() {}
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    static let shared = CoreDataStack()
     
-    @objc func managedObjectContextDidSave(_ notification: Notification) {
-        guard let context = notification.object as? NSManagedObjectContext else {
-            assertionFailure()
-            return
-        }
-        if context != mainContext, context.parent == mainContext {
-            /// will be called on background queue
-            mainContext.saveAsync()
-        }
-    }
-    
-    @available(iOS 10.0, *)
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: CoreDataStack.modelName)
-        
-        let loadDefaultStore = {
-            container.loadPersistentStores { (storeDescription, error) in
-                debugLog("CoreData loadPersistentStores \(storeDescription)")
-                if let error = error {
-                    debugLog("CoreData loadPersistentStores error \(error)")
-                    return
-                }
-                assertionFailure()
-            }
+    private lazy var storeUrl: URL = {
+        guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            let errorMessage = "Unable to resolve document directory"
+            debugLog(errorMessage)
+            fatalError(errorMessage)
         }
         
-        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            loadDefaultStore()
-            return container
-        }
-        
-        do {
-            let url = documents.appendingPathComponent("\(CoreDataStack.persistentStoreName).sqlite")
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                           NSInferMappingModelAutomaticallyOption: false]
-            try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch let error {
-            loadDefaultStore()
-        }
-        
-        return container
+        return docURL.appendingPathComponent("\(Config.storeName).sqlite")
     }()
-
     
-    ///--- available iOS 9
-    private let persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        /// use persistentContainer for iOS 10+
-        /// can be "lazy var" but there was problem with it
-        if #available(iOS 10.0, *) {
-            return nil
+    private lazy var managedObjectModel: NSManagedObjectModel = {
+        guard let modelURL = modelURL() else {
+            let errorMessage = "Error loading model from bundle"
+            debugLog(errorMessage)
+            fatalError(errorMessage)
+        }
+        
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            let errorMessage = "Error initializing mom from: \(modelURL)"
+            debugLog(errorMessage)
+            fatalError(errorMessage)
+        }
+        return mom
+    }()
+    
+    private lazy var storeCoordinator: NSPersistentStoreCoordinator = {
+        if #available(iOS 10, *) {
+            return container.persistentStoreCoordinator
         } else {
+            let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
             do {
-                return try NSPersistentStoreCoordinator
-                    .coordinator(modelName: CoreDataStack.modelName,
-                                 persistentStoreName: CoreDataStack.persistentStoreName,
-                                 version: CoreDataStack.modelVersion)
+                let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                               NSInferMappingModelAutomaticallyOption: false]
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeUrl, options: options)
             } catch {
-                debugLog("CoreData: Unresolved error \(error)")
-                assertionFailure()
-                return nil
+                let errorMessage = "Error migrating store: \(error)"
+                debugLog(errorMessage)
+                fatalError(errorMessage)
             }
+            return  psc
         }
     }()
     
-    private lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        return managedObjectContext
+    lazy var mainContext: NSManagedObjectContext = {
+        if #available(iOS 10, *) {
+            return container.viewContext
+        } else {
+            let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            moc.persistentStoreCoordinator = storeCoordinator
+            return moc
+        }
     }()
-    ///---
-    
-    // MARK: Public methods
     
     var newChildBackgroundContext: NSManagedObjectContext {
         if #available(iOS 10.0, *) {
             /// don't set parent for newBackgroundContext(), it will crash
             /// with error "Context already has a coordinator; cannot replace"
-            return persistentContainer.newBackgroundContext()
+            return container.newBackgroundContext()
         } else {
             let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
             context.parent = mainContext
@@ -123,23 +90,72 @@ final class CoreDataStack: NSObject {
         //        return context
     }
     
-    var mainContext: NSManagedObjectContext {
+    @available(iOS 10, *)
+    private lazy var container: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: Config.storeName, managedObjectModel: managedObjectModel)
+        container.persistentStoreDescriptions = [storeDescription()]
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                let errorMessage = "Unable to load persistent stores: \(error)"
+                debugLog(errorMessage)
+                assertionFailure(errorMessage)
+            }
+            debugLog("persistent store loaded: \(description)")
+        }
+        return container
+    }()
+    
+    init() {
         if #available(iOS 10.0, *) {
-            return persistentContainer.viewContext
+            mainContext.automaticallyMergesChangesFromParent = true
         } else {
-            return managedObjectContext
+            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
         }
     }
     
-    /// for background fetch
-    //lazy var backgroundContext = newBackgroundContext
+    @available(iOS 10, *)
+    private func storeDescription() -> NSPersistentStoreDescription {
+        let description = NSPersistentStoreDescription(url: storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
+    }
+    
+    private func modelURL () -> URL? {
+        let bundle = Bundle.main
+        let versionedModelName = "\(Config.modelName) \(Config.modelVersion)"
+        let subdir = "\(Config.modelName).momd"
+        let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
+        let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
+        
+        /// Use optimized model version only if iOS >= 11
+        if #available(iOS 11, *) {
+            return omoURL ?? momURL
+        } else {
+            return momURL ?? omoURL
+        }
+    }
+    
+    @objc func managedObjectContextDidSave(_ notification: Notification) {
+        guard let context = notification.object as? NSManagedObjectContext else {
+            assertionFailure()
+            return
+        }
+        
+        if context != mainContext, context.parent == mainContext {
+            /// will be called on background queue
+            mainContext.saveAsync()
+        }
+    }
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         if #available(iOS 10.0, *) {
-            persistentContainer.performBackgroundTask(block)
+            container.performBackgroundTask(block)
         } else {
             let context = newChildBackgroundContext
-            context.perform { 
+            context.perform {
                 block(context)
             }
         }

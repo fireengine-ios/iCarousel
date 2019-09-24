@@ -15,8 +15,8 @@ final class AppendLocalsOperation: Operation {
     private var completionHandler: VoidHandler?
     private var assets = [PHAsset]()
     private let itemOperationService = MediaItemOperationsService.shared
-    private let coreDataStack = CoreDataStack.default
-    private let context = CoreDataStack.default.newChildBackgroundContext
+    private let coreDataStack = CoreDataStack.shared
+    private let context = CoreDataStack.shared.newChildBackgroundContext
     private let mediaStorage = LocalMediaStorage.default
     
     

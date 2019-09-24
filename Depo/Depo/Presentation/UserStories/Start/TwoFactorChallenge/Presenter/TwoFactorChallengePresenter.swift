@@ -35,8 +35,11 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     }
     
     override func verificationSucces() {
-        completeAsyncOperationEnableScreen()
-        router.goAutoSync()
+        guard let interactor = interactor as? TwoFactorChallengeInteractor else {
+            assertionFailure()
+            return
+        }
+        interactor.checkEULA()
     }
     
     override func verificationFailed(with error: String) {
@@ -96,6 +99,22 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     private func updateEmptyEmail() {
         interactor.updateEmptyEmail()
+    }
+    
+    func onSuccessEULA() {
+        completeAsyncOperationEnableScreen()
+        router.goAutoSync()
+    }
+    
+    func onFailEULA() {
+        completeAsyncOperationEnableScreen()
+        
+        guard let router = router as? TwoFactorChallengeRouter else {
+            assertionFailure()
+            return
+        }
+        
+        router.goToTermsAndServices()
     }
 }
 

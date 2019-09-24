@@ -19,4 +19,5 @@ protocol PremiumRouterInput: class {
     
     func openLink(with url: URL)
     func showTermsOfUse()
+    func presentPaymentPopUp(paymentModel: PaymentModel?)
 }

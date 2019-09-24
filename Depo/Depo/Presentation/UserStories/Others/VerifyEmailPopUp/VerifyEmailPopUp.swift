@@ -112,9 +112,7 @@ final class VerifyEmailPopUp: UIViewController {
     private var isRemoveLetter: Bool = false
     private var currentSecurityCode = ""
     private var inputTextLimit = 6
-    
-    var isNeedSendCode: Bool = true
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -138,8 +136,8 @@ final class VerifyEmailPopUp: UIViewController {
         })
         
         ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
-            resendCode()
+        if SingletonStorage.shared.isNeedToSentEmailVerificationCode {
+            resendCode(isAutomaticaly: true)
         }
     }
     
@@ -364,7 +362,7 @@ extension VerifyEmailPopUp {
         }
     }
     
-    private func resendCode() {
+    private func resendCode(isAutomaticaly: Bool = false) {
         startActivityIndicator()
         
         accountService.sendEmailVerificationCode { response in
@@ -372,7 +370,11 @@ extension VerifyEmailPopUp {
             
             switch response {
             case .success(_):
-                ///no extra logic just stop spinner
+
+                if isAutomaticaly {
+                    SingletonStorage.shared.isEmailVerificationCodeSent = true
+                }
+                
                 break
             case .failed(let error):
                 
@@ -397,6 +399,7 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
         ///if reenter the code we need to remove last letter
         if currentSecurityCode.count == inputTextLimit {
             currentSecurityCode.removeLast()
+            enableConfirmButtonIfNeeded()
         }
     }
     

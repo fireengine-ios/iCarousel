@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
+import XPush
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -60,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var spotifyService: SpotifyRoutingService = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
@@ -68,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var watchdog: Watchdog?
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
         #if DEBUG
@@ -100,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MenloworksAppEvents.onAppLaunch()
         
+        AnalyticsService.onAppLaunch()
+        
         return true
     }
     
@@ -118,6 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
+            return true
+        } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
         return false
@@ -293,11 +299,11 @@ extension AppDelegate {
         debugLog("AppDelegate didRegister notificationSettings")
         if #available(iOS 10, *) {
             ///deprecated
-            ///call appendLocalMediaItems in the AppConfigurator
+            ///call processLocalMediaItems in the AppConfigurator
             return
         }
         /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
-//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+//        MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
         LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
             
         }
@@ -307,14 +313,14 @@ extension AppDelegate {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
-        MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
-        MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
+        XPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -324,7 +330,7 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+        XPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         AppEvents.logPushNotificationOpen(userInfo)
     }
@@ -332,7 +338,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         debugLog("AppDelegate didReceive")
 
-        MPush.applicationDidReceive(notification)
+        XPush.applicationDidReceive(notification)
     }
     
     //MARK: Adjust

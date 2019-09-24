@@ -1,7 +1,8 @@
-"NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
-"NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
-"NSPhotoLibraryAddUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
-"NSPhotoLibraryUsageDescription" = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
-"NSCameraUsageDescription" = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";
-"NSContactsUsageDescription" = "lifebox duhet të ketë qasje dhe të ngarkojë kontaktet tuaja në serverat e kutisë së jetës për t'i kopjuar dhe menaxhuar ato.";
+NSFaceIDUsageDescription = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
+NSLocationAlwaysUsageDescription = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
+NSPhotoLibraryAddUsageDescription = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+NSPhotoLibraryUsageDescription = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
+NSCameraUsageDescription = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";
+NSContactsUsageDescription = "lifebox duhet të ketë qasje dhe të ngarkojë kontaktet tuaja në serverat e kutisë së jetës për t'i kopjuar dhe menaxhuar ato.";
+NSLocationWhenInUseUsageDescription = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";

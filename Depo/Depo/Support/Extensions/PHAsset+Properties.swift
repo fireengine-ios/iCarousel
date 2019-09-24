@@ -14,15 +14,14 @@ extension PHAsset {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             return nil
         }
-        return PHAssetResource.assetResources(for: self).first
+        let resources = PHAssetResource.assetResources(for: self)
+        return resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
     }
     
     var originalFilename: String? {
-        if #available(iOS 9.0, *) {
-            return resource?.originalFilename
-        } else {
-            return value(forKey: "filename") as? String
-        }
+        let name = resource?.originalFilename
+//        print("originalName = \(name ?? "")")
+        return name
     }
     
     /// MAYBE WILL BE NEEDed

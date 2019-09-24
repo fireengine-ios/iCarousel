@@ -22,4 +22,5 @@ protocol PhoneVerificationInteractorOutput: class {
     func didRedirectToSplash()
     
     func reachedMaxAttempts()
+    func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler)
 }

@@ -108,6 +108,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openApp() {
+        AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
             if storageVars.autoSyncSet {
@@ -167,8 +168,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
     }
     
-    func onFailEULA() {
-        router.navigateToTermsAndService()
+    func onFailEULA(isFirstLogin: Bool) {
+        router.navigateToTermsAndService(isFirstLogin: isFirstLogin)
     }
     
     func onFailGetAccountInfo(error: Error) {

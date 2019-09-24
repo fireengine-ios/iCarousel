@@ -7,6 +7,8 @@
 //
 
 protocol SyncContactsViewInput: class, ErrorPresenter {
+    var isFullCircle: Bool { get }
+    
     func setInitialState()
     func setStateWithoutBackUp()
     func setStateWithBackUp()

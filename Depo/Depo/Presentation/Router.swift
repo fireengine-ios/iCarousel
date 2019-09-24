@@ -95,6 +95,10 @@ class RouterVC: NSObject {
         return nil 
     }
     
+    var defaultTopController: UIViewController? {
+        return UIApplication.topController()
+    }
+    
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
         let navController = NavigationController(rootViewController: controller)

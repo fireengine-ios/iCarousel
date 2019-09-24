@@ -82,6 +82,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
+    func refreshActivePurchasesState(_ isActivePurchases: Bool) {
+        iapManager.setActivePurchasesState(isActivePurchases)
+    }
+    
     func getToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
@@ -167,7 +171,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     

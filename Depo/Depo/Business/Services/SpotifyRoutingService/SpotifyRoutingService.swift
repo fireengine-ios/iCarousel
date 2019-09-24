@@ -15,7 +15,10 @@ protocol SpotifyRoutingServiceDelegate: class {
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus)
 }
 
-final class SpotifyRoutingService {
+final class SpotifyRoutingService: NSObject {
+    
+    private var spotifyUrl: URL?
+    private lazy var spotifySDKService = SpotifySDKService(url: spotifyUrl, delegate: self)
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private(set) var lastSpotifyStatus: SpotifyStatus? {
@@ -58,7 +61,6 @@ final class SpotifyRoutingService {
             guard let self = self else {
                 return
             }
-            
             switch result {
             case .success(let status):
                 if status.isConnected {
@@ -87,6 +89,11 @@ final class SpotifyRoutingService {
     
     func showImportedPlayLists() {
         let controller = router.spotifyImportedPlaylistsController()
+        self.router.pushViewController(viewController: controller)
+    }
+    
+    func showImportedPlayListsAfterImporting() {
+        let controller = router.spotifyImportedPlaylistsController()
         router.replaceTopViewControllerWithViewController(controller)
     }
     
@@ -103,12 +110,25 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let url):
-                let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
-                self.router.pushViewController(viewController: controller)
+                self.spotifyUrl = url
+                self.connectToSpotify()
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
         }
+    }
+    
+    private func connectToSpotify() {
+        spotifySDKService.connectToSporify()
+    }
+    
+    func onSpotifyAuthWebViewController() {
+        guard let url = spotifyUrl else {
+            assertionFailure()
+            return
+        }
+        let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
+        router.pushViewController(viewController: controller)
     }
     
     private func prepareImportPlaylistsController() -> UIViewController {
@@ -256,6 +276,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     
     func spotifyAuthSuccess(with code: String) {
         spotifyService.connect(code: code) { [weak self] result in
+            
             self?.getSpotifyStatus { [weak self] result in
                 guard let self = self else {
                     return
@@ -304,6 +325,10 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
         showImportedPlayLists() 
     }
     
+    func onShowImportedAfterImporting() {
+        showImportedPlayListsAfterImporting()
+    }
+    
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
         let controller = router.spotifyTracksController(playlist: playlist)
         router.pushViewController(viewController: controller)
@@ -315,18 +340,19 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
 extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     
     func importDidCancel(_ controller: SpotifyImportViewController) {
-        delegates.invoke(invocation: { $0.importDidCanceled() })
-        
         importInProgress = false
-        controller.dismiss(animated: true)
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true, completion: nil)
         
-        spotifyService.stop { result in
+        spotifyService.stop { [weak self] result in
             switch result {
             case .success(_):
                 debugPrint("Spotify import cancelled")
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
+            
+            self?.delegates.invoke(invocation: { $0.importDidCanceled() })
         }
     }
     
@@ -335,4 +361,21 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         router.navigationController?.popViewController(animated: false)
         controller.dismiss(animated: true)
     }
+    
+    func handleRedirectUrl(url: URL) -> Bool {
+       return spotifySDKService.handleRedirectUrl(url: url)
+    }
 }
+
+extension SpotifyRoutingService: SpotifySDKServiceDelegate {
+    
+    func continueSpotifySDKConnectionWithCode(code: String) {
+        spotifyAuthSuccess(with: code)
+    }
+    
+    func showSpotifyAuthWebViewController() {
+        onSpotifyAuthWebViewController()
+    }
+}
+
+ 

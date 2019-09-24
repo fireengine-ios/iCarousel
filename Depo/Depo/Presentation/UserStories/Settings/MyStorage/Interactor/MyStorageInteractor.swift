@@ -21,7 +21,7 @@ final class MyStorageInteractor {
     private let packageService = PackageService()
     
     private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
-        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
+        packageService.getInfoForAppleProducts(offers: offers, isActivePurchases: true, success: { [weak self] in
             DispatchQueue.toMain {
                 self?.output.successed(allOffers: offers)
             }
@@ -76,7 +76,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         }
     }
     
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     

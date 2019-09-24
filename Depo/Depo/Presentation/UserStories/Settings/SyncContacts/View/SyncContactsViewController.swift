@@ -32,9 +32,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBOutlet weak var operationButtonsStackView: UIStackView!
-    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
+    
+    @IBOutlet weak var backUpButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    @IBOutlet weak var restoreButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    @IBOutlet weak var deleteDuplicatedButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
     
     @IBOutlet weak var backupDateLabel: UILabel!
     
@@ -47,6 +48,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     var output: SyncContactsViewOutput!
     
     var tabBarSetup = false
+    
+    var isFullCircle: Bool {
+        return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
+    }
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -89,15 +94,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
-        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
-        
-        backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        
-        restoreButton.adjustsFontSizeToFitWidth()
-        deleteDuplicatedButton.adjustsFontSizeToFitWidth()
+        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
+      
         cancelButton.adjustsFontSizeToFitWidth()
         
         if tabBarSetup {
@@ -105,7 +104,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
         
         output.viewIsReady()
-        
         MenloworksAppEvents.onContactSyncPageOpen()
     }
     

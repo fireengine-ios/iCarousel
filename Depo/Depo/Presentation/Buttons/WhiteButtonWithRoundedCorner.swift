@@ -43,6 +43,9 @@ class WhiteButtonWithRoundedCorner: InsetsButton {
     }
     
     func setCornerRadius() {
+        guard bounds.height > 0 else {
+            return
+        }
         layer.cornerRadius = bounds.height * 0.5
         
         setInsets()
