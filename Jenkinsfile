@@ -149,9 +149,9 @@ pipeline {
                         
                         STAGE_NAME = 'Build : Compile'
 
+                        // sh "gem install cocoapods-art --user-install"
+                        // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
-                        sh "gem install cocoapods-art --user-install"
-                        sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "cd Depo; pod install"
                         xcodeBuild('test')
                         sh "find build -type d -name '*.dSYM' > dsymFiles"
