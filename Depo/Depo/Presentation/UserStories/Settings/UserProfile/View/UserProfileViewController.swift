@@ -24,6 +24,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     
     @IBOutlet weak var stackView: UIStackView!
     
+    private let secretQuestionView = SetSecurityCredentialsView.initFromNib()
+    
     //MARK: Vars
     private let keyboard = Typist.shared
     
@@ -118,15 +120,16 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     private func createSecretQuestionAndPasswordViews() {
-        let secretQuestionView = SetSecurityCredentialsView.initFromNib()
-        secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: TextConstants.userProfileSetSecretQuestionButton)
-
+        
         let passwordView = SetSecurityCredentialsView.initFromNib()
         passwordView.setupView(with: .password, title: TextConstants.userProfilePassword, description: "* * * * * * * * *", buttonTitle: TextConstants.userProfileChangePassword)
-        
-        secretQuestionView.delegate = self
         passwordView.delegate = self
         stackView.insertArrangedSubview(passwordView, at: stackView.subviews.count)
+        
+        
+        
+        secretQuestionView.delegate = self
+        secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: TextConstants.userProfileSetSecretQuestionButton)
         stackView.insertArrangedSubview(secretQuestionView, at: stackView.subviews.count)
     }
     
@@ -181,6 +184,30 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         gsmDetailView.configure(with: userInfo.phoneNumber, delegate: self)
         let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
         birthdayDetailView.configure(with: birthday, delegate: self)
+        configuresecretQuestionView(userInfo: userInfo)
+    }
+    
+    private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
+        
+        guard userInfo.hasSecurityQuestionInfo != nil, let _ = userInfo.hasSecurityQuestionInfo, let questionId = userInfo.securityQuestionId else  {
+            return
+        }
+        
+        let accountService = AccountService()
+        accountService.getListOfSecretQuestions { [weak self] response in
+            switch response {
+            case .success( let questions):
+                guard let question = questions.first(where: { $0.id == questionId }) else {
+                    assertionFailure()
+                    return
+                }
+                self?.secretQuestionView.setDesriptionLabel(question: question.text)
+                
+            case .failed(let error):
+                print("error", error.localizedDescription)
+            }
+        }
+        
     }
     
     func getNavigationController() -> UINavigationController? {

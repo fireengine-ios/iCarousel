@@ -15,6 +15,7 @@ struct AccountJSONConstants {
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
     static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
+    static let securityQuestionId = "securityQuestionId"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -52,6 +53,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var isFavouriteTagAvailable: Bool?
     var cellografId: String?
     var hasSecurityQuestionInfo: Bool?
+    var securityQuestionId: Int?
     var name: String?
     var surname: String?
     var accountType: String?
@@ -81,6 +83,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
         hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
+        securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
         surname = json?[AccountJSONConstants.surname].string

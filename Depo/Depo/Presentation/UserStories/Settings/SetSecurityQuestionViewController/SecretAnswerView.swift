@@ -20,7 +20,7 @@ final class SecretAnswerView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var answerTextField: UITextField! {
+    @IBOutlet weak var answerTextField: UITextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black

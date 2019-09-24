@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.preProduction
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -234,6 +234,7 @@ struct RouteRequests {
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
         static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
+        static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         
         enum Settings {
             /// without "s" at the end

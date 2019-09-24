@@ -8,7 +8,14 @@
 
 import UIKit
 
+struct AnswerForSecretQuestion {
+    var questionId: Int?
+    var questionAnswer: String?
+}
+
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
+    
+    private let accountService = AccountService()
     
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
@@ -56,6 +63,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         return view
     }()
     
+    private lazy var answer = AnswerForSecretQuestion()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         initSetup()
@@ -69,19 +78,64 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     private func initSetup() {
         title = TextConstants.userProfileSecretQuestion
         securityQuestionView.delegate = self
+        secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
+        captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
+       
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveButton.isEnabled = false
+        
+        checkButtonStatus()
     }
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
         
+        answer.questionAnswer = secretAnswerView.answerTextField.text
+        
+        guard
+            let captchaAnswer = captchaView.captchaAnswerTextField.text,
+            let questionId = answer.questionId,
+            let securityQuestionAnswer = answer.questionAnswer
+            else {
+                assertionFailure("all fields should not be nil")
+                return
+        }
+        
+        accountService.updateSecurityQuestion(questionId: questionId,
+                                              securityQuestionAnswer: securityQuestionAnswer,
+                                              captchaId: captchaView.currentCaptchaUUID,
+                                              captchaAnswer: captchaAnswer) { result in
+                                               
+                                                switch result {
+                                                case .success:
+                                                    print("Success")
+                                                case .failed(let error):
+                                                    print("Error", error.localizedDescription, error.errorCode)
+                                                }
+        }
+    
     }
     
+    @objc private func checkButtonStatus() {
+        
+        guard let captchaText = captchaView.captchaAnswerTextField.text,
+            let answerText = secretAnswerView.answerTextField.text,
+            let _ = answer.questionId
+            else {
+                saveButton.isEnabled = false
+                return
+        }
+   
+        if captchaText.count > 0, answerText.count > 0 {
+            saveButton.isEnabled = true
+        } else {
+           saveButton.isEnabled = false
+        }
+    }
+
     private func initialViewSetup() {
-        captchaView.captchaAnswerTextField.delegate = self
         addTapGestureToHideKeyboard()
     }
 }
@@ -89,16 +143,14 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
 extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?) {
         
-        guard let question = question?.text else {
+        guard let question = question else {
             return
         }
-        self.securityQuestionView.setQuestion(question: question)
+        
+        self.answer.questionId = question.id
+        self.securityQuestionView.setQuestion(question: question.text)
+        checkButtonStatus()
     }
-}
-
-
-extension SetSecurityQuestionViewController: UITextFieldDelegate {
-    
 }
 
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {

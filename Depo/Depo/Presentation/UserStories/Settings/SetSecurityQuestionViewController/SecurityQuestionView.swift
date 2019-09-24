@@ -48,7 +48,6 @@ final class SecurityQuestionView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         setDescriptionLabelTitle()
-        
     }
     
     func setQuestion(question: String) {

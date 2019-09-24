@@ -61,6 +61,13 @@ final class SetSecurityCredentialsView: UIView, NibInit {
         }
     }
     
+    func setDesriptionLabel(question: String) {
+        DispatchQueue.toMain {
+            self.descriptionLabel.text = question
+            self.descriptionLabel.textColor = UIColor.black
+        }
+    }
+    
     @IBAction private func setButtonTapped(_ sender: UIButton) {
         
         guard let type = type else {
@@ -75,4 +82,6 @@ final class SetSecurityCredentialsView: UIView, NibInit {
             delegate?.setNewQuestionTapped()
         }
     }
+    
+    
 }

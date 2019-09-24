@@ -16,13 +16,7 @@ final class QuestionCell: UITableViewCell {
             newValue.textColor = ColorConstants.textGrayColor
         }
     }
-    
 
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     func setupLabel(question: String) {
         questionLabel.text = question
     }

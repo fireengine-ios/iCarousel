@@ -419,6 +419,27 @@ class AccountService: BaseRequestService, AccountServicePrl {
             })
     }
     
+    func updateSecurityQuestion(questionId: Int,
+                                securityQuestionAnswer: String,
+                                captchaId: String,
+                                captchaAnswer: String,
+                                handler: @escaping ResponseVoid) {
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        let params: Parameters = ["securityQuestionId": questionId,
+                                  "securityQuestionAnswer": securityQuestionAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updateSecurityQuestion,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
     /// repeat is key word of Swift
     func updatePassword(oldPassword: String,
                         newPassword: String,
