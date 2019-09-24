@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="saveButton" destination="F6E-FL-ltD" id="Kf8-kz-y7T"/>
                 <outlet property="scrollView" destination="LGY-5V-qR0" id="igs-9E-mcQ"/>
-                <outlet property="setQuestionStackView" destination="aso-Rw-Ove" id="Y1D-Wj-a5p"/>
+                <outlet property="stackView" destination="aso-Rw-Ove" id="Y1D-Wj-a5p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

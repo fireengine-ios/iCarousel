@@ -400,8 +400,10 @@ class AccountService: BaseRequestService, AccountServicePrl {
     }
     
     func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
+        let request = String(format: RouteRequests.Account.getSecurityQuestion.absoluteString, Device.supportedLocale)
+        
         sessionManager
-            .request(RouteRequests.Account.getSecurityQuestion)
+            .request(request)
             .customValidate()
             .responseData(completionHandler: { response in
 

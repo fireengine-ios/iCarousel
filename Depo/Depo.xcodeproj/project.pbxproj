@@ -10454,7 +10454,7 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		737A2E97233898670014258A /* SetSequrityQuestionViewController */ = {
+		737A2E97233898670014258A /* SetSecurityQuestionViewController */ = {
 			isa = PBXGroup;
 			children = (
 				737A2EB02338D7350014258A /* SelectQuestionViewController */,
@@ -10465,7 +10465,7 @@
 				737A2EA82338AF410014258A /* SecretAnswerView.swift */,
 				737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */,
 			);
-			path = SetSequrityQuestionViewController;
+			path = SetSecurityQuestionViewController;
 			sourceTree = "<group>";
 		};
 		737A2EB02338D7350014258A /* SelectQuestionViewController */ = {
@@ -15174,7 +15174,7 @@
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
 				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
 				CE5921CC22562357005882CE /* ChangePassword */,
-				737A2E97233898670014258A /* SetSequrityQuestionViewController */,
+				737A2E97233898670014258A /* SetSecurityQuestionViewController */,
 				CE6DE75E1FCC440300C23CBD /* OptIn */,
 				72836BFADA2D23CEF3EADB75 /* OTPView */,
 				7CC814511EF7A93E001DFCF0 /* AutoSync */,

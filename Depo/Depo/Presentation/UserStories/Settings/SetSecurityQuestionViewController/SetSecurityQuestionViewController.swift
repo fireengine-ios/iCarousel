@@ -12,10 +12,10 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
-//            newValue.setBackgroundColor(UIColor.lrTealish, for: .selected)
-//            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.titleLabel?.text = "SAVE"
+            newValue.setTitle(TextConstants.fileInfoSave, for: .normal)
         }
     }
     
@@ -25,7 +25,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
     
-    @IBOutlet private weak var setQuestionStackView: UIStackView!  {
+    @IBOutlet private weak var stackView: UIStackView!  {
         willSet {
             newValue.spacing = 18
             newValue.axis = .vertical
@@ -40,7 +40,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
 
-    
     private let securityQuestionView: SecurityQuestionView  = {
         let view = SecurityQuestionView.initFromNib()
         return view
@@ -74,7 +73,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        saveButton.isEnabled = false
     }
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
@@ -87,6 +86,17 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
 }
 
+extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegate {
+    func didSelectQuestion(question: SecretQuestionsResponse?) {
+        
+        guard let question = question?.text else {
+            return
+        }
+        self.securityQuestionView.setQuestion(question: question)
+    }
+}
+
+
 extension SetSecurityQuestionViewController: UITextFieldDelegate {
     
 }
@@ -95,6 +105,7 @@ extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
     func selectSecurityQuestionTapped() {
         
         let controller = SelectQuestionViewController.createController()
+        controller.delegate = self
         present(controller, animated: true)
     }
 }

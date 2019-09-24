@@ -50,7 +50,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
-            newValue.register(class: QuestionCell.self)
+            newValue.register(nibCell: QuestionCell.self)
             newValue.delegate = self
             newValue.dataSource = self
             newValue.tableFooterView = UIView()

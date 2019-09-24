@@ -32,6 +32,7 @@ final class SecurityQuestionView: UIView, NibInit {
             newValue.textColor = ColorConstants.textGrayColor
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.numberOfLines = 0
         }
     }
     
@@ -48,6 +49,14 @@ final class SecurityQuestionView: UIView, NibInit {
         super.awakeFromNib()
         setDescriptionLabelTitle()
         
+    }
+    
+    func setQuestion(question: String) {
+        DispatchQueue.toMain {
+            self.descriptionLabel.text = question
+            self.descriptionLabel.textColor = UIColor.black
+        
+        }
     }
     
     private func setDescriptionLabelTitle() {

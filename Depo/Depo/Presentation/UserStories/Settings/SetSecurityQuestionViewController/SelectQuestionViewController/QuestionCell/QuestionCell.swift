@@ -17,11 +17,7 @@ final class QuestionCell: UITableViewCell {
         }
     }
     
-    @IBOutlet private weak var lineView: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.lightText.withAlphaComponent(0.5)
-        }
-    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
