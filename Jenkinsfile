@@ -150,6 +150,7 @@ pipeline {
                         STAGE_NAME = 'Build : Compile'
 
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
+                        sh "pod install"
                         xcodeBuild('test')
                         sh "find build -type d -name '*.dSYM' > dsymFiles"
                         sh "zip -@ build/dsym.zip < dsymFiles"
