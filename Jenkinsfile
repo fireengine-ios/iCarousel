@@ -17,7 +17,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: 'Xcode.app',
+        xcodeApp: 'Xcode10.1.app',
         target: 'TC_Depo_LifeTech',
         workspaceFile: 'Depo/Depo',
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
