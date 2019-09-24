@@ -66,21 +66,26 @@ extension PackagesPresenter: PackagesViewOutput {
     func viewWillAppear() {
         view?.startActivityIndicator()
         interactor.getUserAuthority()
+        interactor.refreshActivePurchasesState(false)
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
-
+        router.closePaymentPopUpController(closeAction: { [weak self] in
+            self?.actionFor(plan: plan, planIndex: planIndex)
+        })
+    }
+    
+    private func actionFor(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        
         guard let model = plan.model as? PackageModelResponse else {
             return
         }
         
         switch model.type {
         case .SLCM?:
-            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
-
-            let price = interactor.getPriceInfo(for: model, accountType: accountType)
-            view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
+            buy(offer: model, planIndex: planIndex)
+            
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
@@ -89,11 +94,11 @@ extension PackagesPresenter: PackagesViewOutput {
             if let offerId = model.cpcmOfferId {
                 view?.showPaycellProcess(with: offerId)
             }
-            
+
         default:
             let error = CustomErrors.serverError("This is not buyable offer type")
             failed(with: error.localizedDescription)
-         }
+        }
     }
     
     func buy(offer: PackageModelResponse, planIndex: Int) {

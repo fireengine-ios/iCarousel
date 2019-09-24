@@ -3148,6 +3148,12 @@
 		8E26D9922306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
 		8E26D9932306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
 		8E26D9942306B49D00D08123 /* MusicInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */; };
+		8E7659842333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7659822333745900D728A5 /* CredsUpdateCheckPopUp.swift */; };
+		8E7659852333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7659822333745900D728A5 /* CredsUpdateCheckPopUp.swift */; };
+		8E7659862333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7659822333745900D728A5 /* CredsUpdateCheckPopUp.swift */; };
+		8E7659872333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7659832333745900D728A5 /* CredsUpdateCheckPopUp.xib */; };
+		8E7659882333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7659832333745900D728A5 /* CredsUpdateCheckPopUp.xib */; };
+		8E7659892333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7659832333745900D728A5 /* CredsUpdateCheckPopUp.xib */; };
 		8E98CA3A230562200050D7DD /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA39230562200050D7DD /* MusicPresenter.swift */; };
 		8E98CA3C2305627E0050D7DD /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
 		9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */; };
@@ -8005,6 +8011,8 @@
 		8E26D989230699CF00D08123 /* MusicInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractorOutput.swift; sourceTree = "<group>"; };
 		8E26D98D2306B48800D08123 /* MusicViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewOutput.swift; sourceTree = "<group>"; };
 		8E26D9912306B49D00D08123 /* MusicInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractorInput.swift; sourceTree = "<group>"; };
+		8E7659822333745900D728A5 /* CredsUpdateCheckPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredsUpdateCheckPopUp.swift; sourceTree = "<group>"; };
+		8E7659832333745900D728A5 /* CredsUpdateCheckPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CredsUpdateCheckPopUp.xib; sourceTree = "<group>"; };
 		8E88FF64676BA040D2DC438A /* Pods_LifeboxFileProviderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProviderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E98CA39230562200050D7DD /* MusicPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPresenter.swift; sourceTree = "<group>"; };
 		8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewInput.swift; sourceTree = "<group>"; };
@@ -13335,6 +13343,15 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		8E1FB4FF233366C000C8C40D /* CredsUpdateCheck */ = {
+			isa = PBXGroup;
+			children = (
+				8E7659822333745900D728A5 /* CredsUpdateCheckPopUp.swift */,
+				8E7659832333745900D728A5 /* CredsUpdateCheckPopUp.xib */,
+			);
+			path = CredsUpdateCheck;
+			sourceTree = "<group>";
+		};
 		8E26D9762306997200D08123 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -14397,6 +14414,7 @@
 			children = (
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
 				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
+				8E1FB4FF233366C000C8C40D /* CredsUpdateCheck */,
 				CE00B27C2204261700A5A696 /* InstaPickSelection */,
 				9219B18721ECA21800098021 /* InstaPickDetailViewController */,
 				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
@@ -17232,6 +17250,7 @@
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
 				4A6DBE8A21A6F9260003D1B4 /* PremiumView.xib in Resources */,
+				8E7659882333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
 				8C06B0AB2008AD71003D8E05 /* renk_selected@3x.png in Resources */,
 				920DC89B21CBABBB009777AD /* LeavePremiumViewController.xib in Resources */,
 				8C06AC292008AB9B003D8E05 /* FreeAppSpaceViewCotroller.xib in Resources */,
@@ -18371,6 +18390,7 @@
 				8C06AFAE2008AD71003D8E05 /* frekans.png in Resources */,
 				8C06AF522008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
 				A20CDBA0219D60B800CA9A67 /* PremiumView.xib in Resources */,
+				8E7659872333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
 				8C06AF422008AD70003D8E05 /* crop@3x.png in Resources */,
 				8C06AC1A20066641003D8E05 /* LoginSettingsViewController.xib in Resources */,
 				921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */,
@@ -18695,6 +18715,7 @@
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE784CE522A685FB00662219 /* oval_siyah@3x.png in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
+				8E7659892333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
 				CE784CE722A685FB00662219 /* CollectionViewSpinnerFooter.xib in Resources */,
 				CE784CE822A685FB00662219 /* sample_oldie@3x.png in Resources */,
 				CE784CE922A685FB00662219 /* paylas_bip@2x.png in Resources */,
@@ -20677,6 +20698,7 @@
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
+				8E7659852333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				989BDE3E22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
 				17589F7F2276336800A5DB37 /* SupportFormController.swift in Sources */,
@@ -22675,6 +22697,7 @@
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				4BE1268F2304351900BFE06F /* ServerErrors.swift in Sources */,
+				8E7659842333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
 				98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
@@ -23424,6 +23447,7 @@
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
 				CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */,
 				CE78492C22A685FB00662219 /* BaseUserInputCellView.swift in Sources */,
+				8E7659862333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				CE78492D22A685FB00662219 /* PremiumRouterInput.swift in Sources */,
 				989BDE6022F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift in Sources */,
 				CE78492E22A685FB00662219 /* LoginConfigurator.swift in Sources */,
@@ -26862,7 +26886,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.30.3;
+				CURRENT_PROJECT_VERSION = 30.5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -26925,7 +26949,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.30.3;
+				CURRENT_PROJECT_VERSION = 30.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -26984,7 +27008,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.30.3;
+				CURRENT_PROJECT_VERSION = 30.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27044,7 +27068,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.30.3;
+				CURRENT_PROJECT_VERSION = 30.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

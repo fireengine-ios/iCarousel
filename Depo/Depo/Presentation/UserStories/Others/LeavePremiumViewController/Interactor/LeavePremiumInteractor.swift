@@ -55,7 +55,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     }
     
     func getAppleInfo(for offer: SubscriptionPlanBaseResponse) {
-        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+        packageService.getInfoForAppleProducts(offers: [offer], isActivePurchases: true, success: { [weak self] in
             DispatchQueue.toMain {
                 self?.output.didLoadInfoFromApple()
             }

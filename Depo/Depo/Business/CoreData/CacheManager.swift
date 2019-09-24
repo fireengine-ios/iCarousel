@@ -60,7 +60,7 @@ final class CacheManager {
                         return
                     }
                     self.userDefaultsVars.currentRemotesPage = 0
-                    self.startAppendingAllLocals(completion: { [weak self] in
+                    self.startProcessingAllLocals(completion: { [weak self] in
                         guard let `self` = self,
                             !self.processingLocalItems else {
                             completion?()
@@ -75,12 +75,12 @@ final class CacheManager {
                     })
                 })
             } else {
-                guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessAppendingLocalFiles flag in MediaItemsOperationService insertFromGallery method
+                guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
                     completion?()
                     return
                 }
                 self.showPreparationCardAfterDelay()
-                self.startAppendingAllLocals(completion: { [weak self] in
+                self.startProcessingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
                     CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
@@ -178,13 +178,13 @@ final class CacheManager {
         internetConnectionBackCallback()
     }
     
-    private func startAppendingAllLocals(completion: @escaping VoidHandler) {
+    private func startProcessingAllLocals(completion: @escaping VoidHandler) {
         guard !self.processingLocalItems else {
             return
         }
         
         processingLocalItems = true
-        MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
+        MediaItemOperationsService.shared.processLocalMediaItems { [weak self] in
             self?.processingLocalItems = false
             completion()
         }

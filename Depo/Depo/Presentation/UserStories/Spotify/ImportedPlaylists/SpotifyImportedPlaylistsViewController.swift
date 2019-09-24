@@ -45,7 +45,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()

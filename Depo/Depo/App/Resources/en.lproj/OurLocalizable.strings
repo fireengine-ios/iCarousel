@@ -547,7 +547,7 @@
 "Start adding your files" = "Start adding your files";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
-"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" under your “device settings-lifebox-location” menu.";
+"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \n\nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" under your “device settings-lifebox-location” menu.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
@@ -1121,6 +1121,8 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
+"cred_update_title" = "Are you still using the same e-mail and phone number?";
+"cred_completion_message" = "Thank you for being always up-to-date!";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";

@@ -270,9 +270,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             } else {
                 navigationItem.rightBarButtonItem = nil
             }
-            navigationItem.title = ""
-            navigationItem.titleView = searchBar
-            navigationItem.leftBarButtonItem = nil
+            
+            DispatchQueue.main.async {
+                self.navigationItem.title = ""
+                self.navigationItem.titleView = self.searchBar
+                self.navigationItem.leftBarButtonItem = nil
+                self.navigationItem.titleView?.setNeedsLayout()
+                self.navigationItem.titleView?.layoutIfNeeded()
+            }
         }
     }
     

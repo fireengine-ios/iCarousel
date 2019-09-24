@@ -51,4 +51,13 @@ extension PackagesRouter: PackagesRouterInput {
         })
         router.presentViewController(controller: successPopUp)
     }
+    
+    func closePaymentPopUpController(closeAction: @escaping VoidHandler) {
+        if let paymentPopUpController = router.defaultTopController as? PaymentPopUpController {
+            paymentPopUpController.close(completion: closeAction)
+        } else {
+            assertionFailure("there is no PaymentPopUpController. check requirements or logic")
+            UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
+        }
+    }
 }

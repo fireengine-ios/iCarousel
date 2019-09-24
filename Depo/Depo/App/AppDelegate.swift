@@ -299,11 +299,11 @@ extension AppDelegate {
         debugLog("AppDelegate didRegister notificationSettings")
         if #available(iOS 10, *) {
             ///deprecated
-            ///call appendLocalMediaItems in the AppConfigurator
+            ///call processLocalMediaItems in the AppConfigurator
             return
         }
         /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
-//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+//        MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
         LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
             
         }
