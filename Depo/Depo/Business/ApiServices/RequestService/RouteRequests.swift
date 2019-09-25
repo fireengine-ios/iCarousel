@@ -233,8 +233,12 @@ struct RouteRequests {
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
+<<<<<<< HEAD
         static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
+=======
+        static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
+>>>>>>> develop
         
         enum Settings {
             /// without "s" at the end

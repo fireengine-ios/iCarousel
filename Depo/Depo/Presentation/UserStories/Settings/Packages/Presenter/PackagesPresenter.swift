@@ -66,35 +66,44 @@ extension PackagesPresenter: PackagesViewOutput {
     func viewWillAppear() {
         view?.startActivityIndicator()
         interactor.getUserAuthority()
+        interactor.refreshActivePurchasesState(false)
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
-
+        router.closePaymentPopUpController(closeAction: { [weak self] in
+            self?.actionFor(plan: plan, planIndex: planIndex)
+        })
+    }
+    
+    private func actionFor(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        
         guard let model = plan.model as? PackageModelResponse else {
             return
         }
         
         switch model.type {
         case .SLCM?:
-            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
-
-            let price = interactor.getPriceInfo(for: model, accountType: accountType)
-            view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
+            buy(offer: model, planIndex: planIndex)
+            
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
+            
         case .paycellAllAccess?:
-            view?.startActivityIndicator()
+            // TODO: uncomment
+//            view?.startActivityIndicator()
             print("all access")
+            
         case .paycellSLCM?:
-            view?.startActivityIndicator()
+            // TODO: uncomment
+//            view?.startActivityIndicator()
             print("paycellSLCM")
             
         default:
             let error = CustomErrors.serverError("This is not buyable offer type")
             failed(with: error.localizedDescription)
-         }
+        }
     }
     
     func buy(offer: PackageModelResponse, planIndex: Int) {
@@ -215,7 +224,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-
+        /// show only non-feature offers
+        let allOffers = allOffers.filter { $0.featureType == nil }
+        
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = filterPackagesByQuota(offers: offers)

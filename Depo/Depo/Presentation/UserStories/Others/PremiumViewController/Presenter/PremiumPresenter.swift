@@ -95,11 +95,6 @@ final class PremiumPresenter {
     }
     
     private func makePaymentModel(plan: PackageOffer) -> PaymentModel? {
-        guard let name = plan.offers.first?.name else {
-            assertionFailure()
-            return nil
-        }
-           
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
                 return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan)
@@ -109,11 +104,11 @@ final class PremiumPresenter {
         }
         
         let subtitle = TextConstants.feature
-        return PaymentModel(name: name, subtitle: subtitle, types: paymentMethods)
+        return PaymentModel(name: TextConstants.standardBannerTitle, subtitle: subtitle, types: paymentMethods)
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
-        guard let name = model.name, let type = model.type?.paymentType else {
+        guard let name = model.name, let type = model.featureType?.paymentType else {
             return nil
         }
         

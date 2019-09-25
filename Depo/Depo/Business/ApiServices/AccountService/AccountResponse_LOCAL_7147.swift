@@ -14,7 +14,8 @@ struct AccountJSONConstants {
     static let mobileUploadsSpecialFolderUuid = "mobileUploadsSpecialFolderUuid"
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
-    static let isUpdateInformationRequired = "isUpdateInformationRequired"
+    static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
+    static let securityQuestionId = "securityQuestionId"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -50,7 +51,6 @@ class AccountInfoResponse: ObjectRequestResponse {
     var mobileUploadsSpecialFolderUuid: String?
     var isCropyTagAvailable: Bool?
     var isFavouriteTagAvailable: Bool?
-    var isUpdateInformationRequired: Bool?
     var cellografId: String?
     var hasSecurityQuestionInfo: Bool?
     var securityQuestionId: Int?
@@ -81,7 +81,6 @@ class AccountInfoResponse: ObjectRequestResponse {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
-        isUpdateInformationRequired = json?[AccountJSONConstants.isUpdateInformationRequired].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
         hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
         securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int

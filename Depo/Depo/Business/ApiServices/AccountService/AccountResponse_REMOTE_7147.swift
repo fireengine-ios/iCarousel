@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 struct AccountJSONConstants {
     
@@ -52,8 +51,6 @@ class AccountInfoResponse: ObjectRequestResponse {
     var isFavouriteTagAvailable: Bool?
     var isUpdateInformationRequired: Bool?
     var cellografId: String?
-    var hasSecurityQuestionInfo: Bool?
-    var securityQuestionId: Int?
     var name: String?
     var surname: String?
     var accountType: String?
@@ -83,8 +80,6 @@ class AccountInfoResponse: ObjectRequestResponse {
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
         isUpdateInformationRequired = json?[AccountJSONConstants.isUpdateInformationRequired].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
-        hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
-        securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
         surname = json?[AccountJSONConstants.surname].string
@@ -425,36 +420,6 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
     }
     
-}
-
-final class SecretQuestionsResponse {
-    
-    private enum ResponseKey {
-        static let id = "id"
-        static let text = "text"
-    }
-    
-    var id: Int
-    var text: String
-    
-    init(id: Int, text: String) {
-        self.id = id
-        self.text = text
-    }
-}
-
-extension SecretQuestionsResponse {
-    convenience init?(json: JSON) {
-        guard
-            let id = json[ResponseKey.id].int,
-            let text = json[ResponseKey.text].string
-            else {
-                assertionFailure()
-                return nil
-        }
-        
-        self.init(id: id, text: text)
-    }
 }
 
 final class FeedbackEmailResponse: ObjectRequestResponse {

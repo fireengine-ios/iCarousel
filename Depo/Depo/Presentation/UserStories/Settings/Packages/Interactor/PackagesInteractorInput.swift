@@ -27,4 +27,5 @@ protocol PackagesInteractorInput {
     //func getCurrentSubscription()
 
     func getUserAuthority()
+    func refreshActivePurchasesState(_ isActivePurchases: Bool)
 }

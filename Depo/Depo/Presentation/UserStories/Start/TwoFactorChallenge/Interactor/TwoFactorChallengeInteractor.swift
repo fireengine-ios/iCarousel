@@ -150,11 +150,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     // MARK: - Private methods
     
-    private func hasAccountWarning(headers: [String: Any]) -> Bool {
-        guard let accountWarning = headers[HeaderConstant.accountWarning] as? String else {
-            return false
-        }
-        
+    private func hasAccountWarning(accountWarning: String) -> Bool {
         return accountWarning == HeaderConstant.emptyMSISDN || accountWarning == HeaderConstant.emptyEmail
     }
     
@@ -170,7 +166,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         var handler: VoidHandler?
         if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
             /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
-            if hasAccountWarning(headers: headers), hasAccountDeletedStatus(headers: headers) {
+            if hasAccountWarning(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
                 handler = { [weak self] in
                     self?.output.verificationFailed(with: accountWarning)
                 }
@@ -178,7 +174,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 handler = { [weak self] in
                     self?.verifyProcess()
                 }
-            } else if self.hasAccountWarning(headers: headers) {
+            } else if self.hasAccountWarning(accountWarning: accountWarning) {
                 output.verificationFailed(with: accountWarning)
                 return
             }
