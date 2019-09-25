@@ -225,6 +225,16 @@ public extension SynchronizedArray {
             }
         }
     }
+    
+    /// Apply a single handler to an underlying array.
+    /// Use to apply several operation to an array as one atomic operation.
+    ///
+    /// - Parameter handler: The handler with underlying array
+    func modify(_ handler: @escaping ([Element]) -> ([Element])) {
+        queue.async(flags: .barrier) {
+            self.array = handler(self.array)
+        }
+    }
 }
 
 public extension SynchronizedArray {
