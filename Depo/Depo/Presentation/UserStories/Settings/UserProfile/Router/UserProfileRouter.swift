@@ -26,5 +26,3 @@ class UserProfileRouter: UserProfileRouterInput {
         router.pushViewController(viewController: controller)
     }
 }
-
-

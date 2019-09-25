@@ -21,11 +21,12 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     var delegate: SelectQuestionViewControllerDelegate?
     
-    static func createController(questions: [SecretQuestionsResponse]) -> SelectQuestionViewController {
+    static func createController(questions: [SecretQuestionsResponse], delegate: SelectQuestionViewControllerDelegate) -> SelectQuestionViewController {
         let controller = SelectQuestionViewController()
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
         controller.questions = questions
+        controller.delegate = delegate
         return controller
     }
     

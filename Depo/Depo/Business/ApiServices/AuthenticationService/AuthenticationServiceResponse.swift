@@ -128,7 +128,6 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
 
     private func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
         
-        
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
                 

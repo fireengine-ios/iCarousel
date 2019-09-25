@@ -46,7 +46,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 self?.output.configurateUserInfo(userInfo: response)
             }
         }) { error in
-            print("Error here")
+            // This error is't handling
         }
     }
     

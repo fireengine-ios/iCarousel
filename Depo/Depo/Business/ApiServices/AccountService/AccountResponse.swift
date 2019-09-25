@@ -15,6 +15,8 @@ struct AccountJSONConstants {
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
     static let isUpdateInformationRequired = "isUpdateInformationRequired"
+    static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
+    static let securityQuestionId = "securityQuestionId"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -448,9 +450,9 @@ extension SecretQuestionsResponse {
         guard
             let id = json[ResponseKey.id].int,
             let text = json[ResponseKey.text].string
-            else {
-                assertionFailure()
-                return nil
+        else {
+            assertionFailure()
+            return nil
         }
         
         self.init(id: id, text: text)

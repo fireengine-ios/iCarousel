@@ -85,8 +85,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         securityQuestionView.delegate = self
         secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
-       
-
     }
     
     override func viewDidLoad() {
@@ -106,9 +104,9 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
             let captchaAnswer = captchaView.captchaAnswerTextField.text,
             let questionId = answer.questionId,
             let securityQuestionAnswer = answer.questionAnswer
-            else {
-                assertionFailure("all fields should not be nil")
-                return
+        else {
+            assertionFailure("all fields should not be nil")
+            return
         }
         
         accountService.updateSecurityQuestion(questionId: questionId,
@@ -146,13 +144,13 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         
         guard let captchaText = captchaView.captchaAnswerTextField.text,
             let answerText = secretAnswerView.answerTextField.text,
-            let _ = answer.questionId
-            else {
-                saveButton.isEnabled = false
-                return
+            answer.questionId != nil
+        else {
+            saveButton.isEnabled = false
+            return
         }
    
-        if captchaText.count > 0, answerText.count > 0 {
+        if captchaText.isEmpty, answerText.isEmpty {
             saveButton.isEnabled = true
         } else {
            saveButton.isEnabled = false
@@ -168,11 +166,12 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
     func didSelectQuestion(question: SecretQuestionsResponse?) {
         
         guard let question = question else {
+            assertionFailure()
             return
         }
         
-        self.answer.questionId = question.id
-        self.securityQuestionView.setQuestion(question: question.text)
+        answer.questionId = question.id
+        securityQuestionView.setQuestion(question: question.text)
         checkButtonStatus()
     }
     
@@ -187,13 +186,17 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
     func selectSecurityQuestionTapped() {
             accountService.getListOfSecretQuestions { [weak self] response in
+                guard let self = self else {
+                    assertionFailure()
+                    return
+                }
+                
                 switch response {
                 case .success( let questions):
-                    let controller = SelectQuestionViewController.createController(questions: questions)
-                    controller.delegate = self
-                    self?.present(controller, animated: true)
+                    let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
+                    self.present(controller, animated: true)
                 case .failed(let error):
-                    self?.showErrorPopUp(error: error)
+                    self.showErrorPopUp(error: error)
                 }
             }
     }

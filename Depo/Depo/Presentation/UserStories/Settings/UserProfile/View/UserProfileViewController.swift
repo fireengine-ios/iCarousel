@@ -202,10 +202,11 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                     assertionFailure()
                     return
                 }
-                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
+                self?.secretQuestionView.setupDescriptionLabel(question: question.text)
                 
-            case .failed(let error):
-                print("Error getListOfSecretQuestions", error.localizedDescription)
+            case .failed(_):
+                break
+                //This error is't handle
             }
         }
         

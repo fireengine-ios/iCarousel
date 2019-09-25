@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SetSecurityCredentialsViewDelegate {
+protocol SetSecurityCredentialsViewDelegate: class {
     func setNewQuestionTapped()
     func setNewPasswordTapped()
 }
@@ -20,7 +20,7 @@ enum CredentialType {
 
 final class SetSecurityCredentialsView: UIView, NibInit {
     
-    var delegate: SetSecurityCredentialsViewDelegate?
+    weak var delegate: SetSecurityCredentialsViewDelegate?
     private var type: CredentialType?
         
     @IBOutlet private weak var titleLabel: UILabel! {
@@ -82,6 +82,5 @@ final class SetSecurityCredentialsView: UIView, NibInit {
             delegate?.setNewQuestionTapped()
         }
     }
-    
     
 }
