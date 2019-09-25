@@ -423,7 +423,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                                 securityQuestionAnswer: String,
                                 captchaId: String,
                                 captchaAnswer: String,
-                                handler: @escaping ResponseVoid) {
+                                handler: @escaping (ErrorResult<Void, SetSecretQuestionErrors>) -> Void) {
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
@@ -437,8 +437,26 @@ class AccountService: BaseRequestService, AccountServicePrl {
                      encoding: JSONEncoding.prettyPrinted,
                      headers: headers)
             .customValidate()
-            .responseVoid(handler)
-    }
+            .response { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                    
+                    let backendError: SetSecretQuestionErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "SEQURITY_QUESTION_ID_IS_INVALID":
+                        backendError = .invalidId
+                    case "SEQURITY_QUESTION_ANSWER_IS_INVALID":
+                        backendError = .invalidAnswer
+                    default:
+                        backendError = .unknown
+                    }
+                    handler(.failure(backendError))
+                }
+            }
+        }
     
     /// repeat is key word of Swift
     func updatePassword(oldPassword: String,

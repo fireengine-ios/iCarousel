@@ -126,10 +126,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         passwordView.delegate = self
         stackView.insertArrangedSubview(passwordView, at: stackView.subviews.count)
         
-        
-        
         secretQuestionView.delegate = self
-        secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: TextConstants.userProfileSetSecretQuestionButton)
         stackView.insertArrangedSubview(secretQuestionView, at: stackView.subviews.count)
     }
     
@@ -189,10 +186,14 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     
     private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
         
-        guard userInfo.hasSecurityQuestionInfo != nil, let _ = userInfo.hasSecurityQuestionInfo, let questionId = userInfo.securityQuestionId else  {
+        guard userInfo.hasSecurityQuestionInfo != nil, let questionId = userInfo.securityQuestionId else  {
             return
         }
         
+        let buttonTitle = userInfo.hasSecurityQuestionInfo ?? false ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
+        
+        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle)
+
         let accountService = AccountService()
         accountService.getListOfSecretQuestions { [weak self] response in
             switch response {
@@ -201,10 +202,10 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                     assertionFailure()
                     return
                 }
-                self?.secretQuestionView.setDesriptionLabel(question: question.text)
+                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
                 
             case .failed(let error):
-                print("error", error.localizedDescription)
+                print("Error getListOfSecretQuestions", error.localizedDescription)
             }
         }
         

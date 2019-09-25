@@ -78,7 +78,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func tapChangeSecretQuestionButton() {
-        router.goToSetSecretQuestion()
+        router.goToSetSecretQuestion(delegate: self)
     }
     
     //MARK : BasePresenter
@@ -87,4 +87,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         return view as? Waiting
     }
     
+}
+
+extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
+    func didCloseSetSecurityQuestionViewController() {
+        interactor.updateUserInfo()
+    }
 }

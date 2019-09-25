@@ -375,6 +375,10 @@
 "You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
 "Password" = "Password";
 "security_question" = "Security Question";
+"edit_security_question" = "Edit Security Question";
+"sequrity_question_id_is_invalid" = "sequrity_question_id_is_invalid";
+"sequrity_question_answer_is_invalid" = "sequrity_question_answer_is_invalid";
+"no_security_question" = "You don't have secret question";
 "select_question" = "Please Select";
 "secret_answer" = "Your answer";
 "enter_secret_answer" = "Enter your answer";

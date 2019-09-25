@@ -13,6 +13,10 @@ struct AnswerForSecretQuestion {
     var questionAnswer: String?
 }
 
+protocol SetSecurityQuestionViewControllerDelegate {
+    func didCloseSetSecurityQuestionViewController()
+}
+
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
@@ -63,6 +67,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         return view
     }()
     
+    var delegate: SetSecurityQuestionViewControllerDelegate?
     private lazy var answer = AnswerForSecretQuestion()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -86,8 +91,11 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         checkButtonStatus()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
@@ -107,15 +115,31 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                               securityQuestionAnswer: securityQuestionAnswer,
                                               captchaId: captchaView.currentCaptchaUUID,
                                               captchaAnswer: captchaAnswer) { result in
-                                               
+                                                
                                                 switch result {
                                                 case .success:
-                                                    print("Success")
-                                                case .failed(let error):
-                                                    print("Error", error.localizedDescription, error.errorCode)
-                                                }
+                                                    self.delegate?.didCloseSetSecurityQuestionViewController()
+                                                    
+                                                case .failure(let error):
+                                                    self.handleServerErrors(error)                                                }
         }
+    }
     
+    private func handleServerErrors(_ error: SetSecretQuestionErrors) {
+        let errorText = error.localizedDescription
+        
+        switch error {
+        case .invalidCaptcha:
+            captchaView.showErrorAnimated(text: errorText)
+            captchaView.captchaAnswerTextField.becomeFirstResponder()
+        case .invalidId:
+            UIApplication.showErrorAlert(message: errorText)
+        case .invalidAnswer:
+            UIApplication.showErrorAlert(message: errorText)
+        case .unknown:
+            UIApplication.showErrorAlert(message: errorText)
+        }
+
     }
     
     @objc private func checkButtonStatus() {
@@ -151,13 +175,26 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
         self.securityQuestionView.setQuestion(question: question.text)
         checkButtonStatus()
     }
+    
+    private func showErrorPopUp(error: Error) {
+        if error.errorCode == 204 {
+            UIApplication.showErrorAlert(message: TextConstants.userProfileNoSecretQuestion)
+        }
+    }
+    
 }
 
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
     func selectSecurityQuestionTapped() {
-        
-        let controller = SelectQuestionViewController.createController()
-        controller.delegate = self
-        present(controller, animated: true)
+            accountService.getListOfSecretQuestions { [weak self] response in
+                switch response {
+                case .success( let questions):
+                    let controller = SelectQuestionViewController.createController(questions: questions)
+                    controller.delegate = self
+                    self?.present(controller, animated: true)
+                case .failed(let error):
+                    self?.showErrorPopUp(error: error)
+                }
+            }
     }
 }

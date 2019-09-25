@@ -17,19 +17,21 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     private let cornerRadius: CGFloat = 8
     private let separatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private lazy var accountService = AccountService()
-    private var questions = [SecretQuestionsResponse]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var questions = [SecretQuestionsResponse]()
     
     var delegate: SelectQuestionViewControllerDelegate?
     
-    static func createController() -> SelectQuestionViewController {
+    static func createController(questions: [SecretQuestionsResponse]) -> SelectQuestionViewController {
         let controller = SelectQuestionViewController()
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
+        controller.questions = questions
         return controller
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.reloadData()
     }
     
     @IBOutlet private var backgroundView: UIView! {
@@ -82,11 +84,6 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         open()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupData()
-    }
-    
     @IBAction private func closeButtonTapped(_ sender: UIButton) {
         close()
     }
@@ -106,17 +103,6 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
             self.contentView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: completion)
-        }
-    }
-    
-    private func setupData() {
-        accountService.getListOfSecretQuestions { [weak self] response in
-            switch response {
-            case .success( let questions):
-                self?.questions = questions
-            case .failed(let error):
-                print("error", error.localizedDescription)
-            }
         }
     }
 }
