@@ -870,6 +870,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
     }
