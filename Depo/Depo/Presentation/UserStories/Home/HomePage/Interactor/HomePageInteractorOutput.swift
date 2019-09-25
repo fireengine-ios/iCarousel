@@ -24,6 +24,8 @@ protocol HomePageInteractorOutput: class {
     func didObtainQuotaInfo(usagePercentage: Float)
     
     func verifyEmailIfNeeded()
+    
+    func credsCheckUpdateIfNeeded()
         
     func didObtainInstaPickStatus(status: InstapickAnalyzesCount)
 }

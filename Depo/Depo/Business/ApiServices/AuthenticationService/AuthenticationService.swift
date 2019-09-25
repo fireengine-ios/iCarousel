@@ -290,6 +290,7 @@ class AuthenticationService: BaseRequestService {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var authorizationSevice: AuthorizationRepository = factory.resolve()
+    private lazy var sessionManager: SessionManager = factory.resolve()
 
     // MARK: - Login
     
@@ -679,6 +680,24 @@ class AuthenticationService: BaseRequestService {
                         })
                     }
                     
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func updateInfoFeedback(isUpdated: Bool, handler: @escaping ResponseVoid) {
+        debugLog("AccountService changeFacebookTagsAllowed")
+        
+        sessionManager
+            .request(RouteRequests.Account.updateInfoFeedback,
+                     method: .post,
+                     encoding: String(isUpdated))
+            .customValidate()
+            .responseString { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
                 case .failure(let error):
                     handler(.failed(error))
                 }
