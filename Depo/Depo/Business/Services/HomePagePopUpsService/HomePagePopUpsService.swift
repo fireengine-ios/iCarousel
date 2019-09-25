@@ -12,7 +12,7 @@ final class HomePagePopUpsService {
     
     static var shared = HomePagePopUpsService()
     
-    private static let underlyingQueue = DispatchQueue(label: "HomePagePopUpsServiceQueueLabel")
+    private static let underlyingQueue = DispatchQueue(label: DispatchQueueLabels.homePagePopUpsServiceQueue)
 
     private static let popUpsOperationQueue: OperationQueue = {
         let newValue = OperationQueue()
@@ -36,8 +36,7 @@ final class HomePagePopUpsService {
             return operation
         }
         
-        print(operations.count)
-        HomePagePopUpsService.popUpsOperationQueue.addOperations(operations, waitUntilFinished: true)
+        HomePagePopUpsService.popUpsOperationQueue.addOperations(operations, waitUntilFinished: false)
     }
     
     ///

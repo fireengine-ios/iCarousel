@@ -8,6 +8,13 @@
 
 final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
     
+    private enum DispatchGroupReasons: CaseIterable {
+        case waitAccountInfoResponse
+        case waitAccountPermissionsResponse
+        case waitQuotaInfoResponse
+        case waitTillViewDidAppear
+    }
+    
     weak var view: HomePageViewInput!
     var interactor: HomePageInteractorInput!
     var router: HomePageRouterInput!
@@ -30,17 +37,18 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     private var presentPopUpsGroup: DispatchGroup?
 
     func viewIsReady() {
-        presentPopUpsGroup = DispatchGroup()
-        ///tow requests in homePagePresented
-        presentPopUpsGroup?.enter()
-        presentPopUpsGroup?.enter()
-        ///single request in needCheckQuota
-        presentPopUpsGroup?.enter()
-        ///wait for viewDidAppear
-        presentPopUpsGroup?.enter()
-
+        prepareDispatchGroup()
+        
         interactor.viewIsReady()
         interactor.needCheckQuota()
+    }
+    
+    private func prepareDispatchGroup() {
+        presentPopUpsGroup = DispatchGroup()
+        
+        DispatchGroupReasons.allCases.forEach { _ in
+            presentPopUpsGroup?.enter()
+        }
         
         presentPopUpsGroup?.notify(queue: DispatchQueue.global()) { [weak self] in
             self?.presentPopUpsGroup = nil

@@ -170,7 +170,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     }
     
     func numberOfColumns() -> Int {
-        if (Device.isIpad) {
+        if Device.isIpad {
             return 2
         }
         return 1
