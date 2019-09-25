@@ -38,6 +38,8 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return gradientView
     }()
     
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
@@ -62,17 +64,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var timelineButton: UIButton! {
+    @IBOutlet private weak var timelineButton: TimelineButton! {
         willSet {
             newValue.addTarget(self, action: #selector(seeTimeline), for: .touchUpInside)
-            newValue.setTitle(TextConstants.TBMatic.Photos.seeTimeline, for: .normal)
-            newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = .clear
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.layer.masksToBounds = true
-            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
-            newValue.layer.borderColor = UIColor.white.cgColor
-            newValue.layer.borderWidth = 1
         }
     }
     
@@ -83,6 +77,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             newValue.setTitleColor(ColorConstants.blueGreen, for: .normal)
             newValue.backgroundColor = .white
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.textAlignment = .center
             newValue.layer.masksToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
         }
@@ -90,19 +85,18 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     // MARK: - Properties
     
-    private lazy var fileService = FileService.shared
+    // manager use only for share images without showing bottom bar
+    private lazy var shareManager = TBMatikPhotosBottomBarManager(delegate: self)
     
-    private var uuids = ["13E37BED-FBF2-4EDD-B91A-95A0631CC10D~CEF7A87D-B211-4E8B-8BDE-74F1F73078BA",
-    "025EDCF9-AE5B-4423-9D88-65C6C523319F~31100ACD-1901-4223-8F32-CB89CEB55828",
-    "4F5A86F7-9B85-4408-B5B7-A80E1F7EF75A~496EE479-4363-4102-A2B7-223D7F7F0F0A",
-    "D2FACE10-A792-4AF4-8C96-6E7E1A66A48B~190AC638-2FAB-4D52-9682-8FEDE3B7575D",
-    "73B0B2CC-60CC-4DF7-9F57-A6AF75C09760~2C7482C4-679C-444C-AF9B-027D867D2E2E"]//["f1322ae6-1086-4d2e-9352-c01a174aa7e3", "1883e3d7-4025-400e-b4d7-4492d9a6d3e6", "7e18f1d2-62e0-4381-a5b4-c60c83574bac", "900f6f1e-512b-4c21-967d-feab91e75d8a"]
-    private var items = [Item?]()
-    private var images = ["http://mirpozitiva.ru/uploads/posts/2016-08/1472042485_04.jpg",
-                          "https://mirpozitiva.ru/uploads/posts/2016-08/1472043884_02.jpg",
-                          nil,
-                          //"http://mirpozitiva.ru/uploads/posts/2016-08/1472042805_21.jpg",
-                          "https://img11.postila.ru/resize?w=460&src=%2Fdata%2Fc6%2F47%2F00%2Fea%2Fc64700eae27399b150b3440083fc94c3bda75f5052ea60f7c2aff71ae5a2d7c8.png"]
+    private lazy var fileService = FileService.shared
+    private lazy var cacheManager = CacheManager.shared
+    
+    private var uuids = [String]()
+    private var items = [Item?]() {
+        didSet {
+            carousel.reloadData()
+        }
+    }
     
     private lazy var carouselItemFrameWidth: CGFloat = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
     private lazy var carouselItemFrameHeight: CGFloat = carousel.bounds.height
@@ -113,13 +107,28 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return formatter
     }()
     
+    private var currentItem: Item? {
+        return items[safe: carousel.currentItemIndex] ?? nil
+    }
+    
     // MARK: - View lifecycle
+    
+    deinit {
+        cacheManager.delegates.remove(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
         loadItems()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //need to fix crash on show bottom bar
+        shareManager.editingTabBar?.view.layoutIfNeeded()
     }
     
     override func viewDidLayoutSubviews() {
@@ -130,21 +139,28 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func configure() {
-//        view.addSubview(gradientView)
-//        view.sendSubview(toBack: gradientView)
-        
+        view.insertSubview(gradientView, aboveSubview: backgroundImageView)
+            
         pageControl.numberOfPages = uuids.count
+        setupCarousel()
         
-        setTitle(with: Date())
+        setTitle(with: nil)
+        
+        if !cacheManager.isCacheActualized {
+            cacheManager.delegates.add(self)
+            timelineButton.visibleState = .photosPreparation
+        } else {
+            timelineButton.visibleState = .disabled
+        }
+        shareButton.isEnabled = false
     }
     
     private func setupCarousel() {
         carousel.backgroundColor = .clear
         carousel.type = .custom
-        carousel.dataSource = self
         carousel.delegate = self
+        carousel.dataSource = self
         carousel.isPagingEnabled = true
-        carousel.reloadData()
     }
     
     private func loadItems() {
@@ -157,7 +173,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
                 self.items.append(items.first(where: { $0.uuid == uuid }))
             }
             
-            self.setupCarousel()
         }, fail: { errorResponse in
             UIApplication.showErrorAlert(message: errorResponse.description)
         })
@@ -180,11 +195,29 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @objc private func share() {
-        
+        shareManager.shareCurrentItem()
     }
     
     @objc private func seeTimeline() {
+        guard let item = currentItem else {
+            return
+        }
         
+        guard let tabbarController = UIApplication.shared.windows.first?.rootViewController as? TabBarViewController else {
+            return
+        }
+        
+        tabbarController.showPhotosScreen(timelineButton)
+
+        if let segmentedController = tabbarController.activeNavigationController?.viewControllers.last as? SegmentedController {
+            segmentedController.loadViewIfNeeded()
+        
+            if let photosController = segmentedController.currentController as? PhotoVideoController {
+                photosController.scrollToItem(item)
+            }
+        }
+        
+        dismiss(animated: true)
     }
 }
 
@@ -193,7 +226,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
 extension TBMatikPhotosViewController: iCarouselDataSource {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return uuids.count
+        return items.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -202,7 +235,24 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         itemView.setup(with: items[index])
         itemView.needShowShadow = index == carousel.currentItemIndex
         itemView.tag = index
+        
+        itemView.setImageHandler = { [weak self] in
+            self?.completeLoadingImage(for: itemView)
+        }
+        
         return itemView
+    }
+    
+    private func completeLoadingImage(for view: TBMatikPhotoView) {
+        guard view.tag == carousel.currentItemIndex else {
+            return
+        }
+        
+        if view.hasImage && cacheManager.isCacheActualized {
+            timelineButton.visibleState = .enabled
+        }
+        
+        shareButton.isEnabled = view.hasImage
     }
 }
 
@@ -218,12 +268,45 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         pageControl.currentPage = carousel.currentItemIndex
-        setTitle(with: items[carousel.currentItemIndex]?.creationDate)
+        if let item = currentItem {
+            setTitle(with: item.creationDate)
+        }
     
         carousel.visibleItemViews.forEach { view in
             if let itemView = view as? TBMatikPhotoView {
                 itemView.needShowShadow = itemView.tag == carousel.currentItemIndex
             }
+        }
+    }
+}
+
+// MARK: - CacheManagerDelegate
+
+extension TBMatikPhotosViewController: CacheManagerDelegate {
+    
+    func didCompleteCacheActualization() {
+        guard let itemView = carousel.itemView(at: carousel.currentItemIndex) as? TBMatikPhotoView else {
+            return
+        }
+        timelineButton.visibleState = itemView.hasImage ? .enabled : .disabled
+    }
+}
+
+extension TBMatikPhotosViewController: BaseItemInputPassingProtocol {
+    func operationFinished(withType type: ElementTypes, response: Any?) { }
+    func operationFailed(withType type: ElementTypes) { }
+    func selectModeSelected() { }
+    func selectAllModeSelected() { }
+    func deSelectAll() { }
+    func stopModeSelected() { }
+    func printSelected() { }
+    func changeCover() { }
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
+    func openInstaPick() { }
+    
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        if let item = currentItem {
+            selectedItemsCallback([item])
         }
     }
 }

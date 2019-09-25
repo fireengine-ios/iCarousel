@@ -64,6 +64,12 @@ final class TBMatikPhotoView: UIView, NibInit {
         }
     }
     
+    var hasImage: Bool {
+        return imageView.image != nil
+    }
+    
+    var setImageHandler: VoidHandler?
+    
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
@@ -74,6 +80,8 @@ final class TBMatikPhotoView: UIView, NibInit {
     }
     
     func setup(with item: Item?) {
+        imageView.image = nil
+        imageView.alpha = 0
         cellImageManager?.cancelImageLoading()
         
         if let preview = item?.patchToPreview, case let .remoteUrl(url) = preview {
@@ -114,16 +122,20 @@ final class TBMatikPhotoView: UIView, NibInit {
 
     private func setImage(_ image: UIImage?) {
         loadingIndicator.stopAnimating()
-        
+
         if let image = image {
             imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
             imageView.image = image
-            noImageBackgroundView.isHidden = true
+            
+            UIView.animate(withDuration: NumericConstants.setImageAnimationDuration) {
+                self.imageView.alpha = 1
+            }
         } else {
             noImageBackgroundView.isHidden = false
             imageView.isHidden = true
         }
         checkShadow()
+        setImageHandler?()
     }
     
     private func checkShadow() {
@@ -139,7 +151,7 @@ final class TBMatikPhotoView: UIView, NibInit {
         
         layoutIfNeeded()
         if let image = imageView.image {
-            /// calculate shadow frame around image
+            // calculate shadow frame around image
             let height: CGFloat
             if imageView.contentMode == .scaleAspectFill {
                 height = imageView.bounds.height

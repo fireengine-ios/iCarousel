@@ -3408,6 +3408,12 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
+		98E06F94233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
+		98E06F95233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
+		98E06F96233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
+		98E06F97233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
+		98E06F98233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
+		98E06F99233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -8147,6 +8153,8 @@
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
+		98E06F92233B6249006A0327 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
+		98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosBottomBarManager.swift; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -13568,6 +13576,8 @@
 				980499C32333728300398AEF /* TBMatikPhotosViewController.xib */,
 				980499C723337B9400398AEF /* TBMatikPhotoView.swift */,
 				980499CB23337BA300398AEF /* TBMatikPhotoView.xib */,
+				98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */,
+				98E06F92233B6249006A0327 /* TimelineButton.swift */,
 			);
 			path = TBMatikPhotosViewController;
 			sourceTree = "<group>";
@@ -20264,6 +20274,7 @@
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
+				98E06F95233B624D006A0327 /* TimelineButton.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
 				8C0B91A620170EA800A5BA81 /* ManageContactsViewInput.swift in Sources */,
 				4A6DBE8721A6F9140003D1B4 /* PackagePremiumView.swift in Sources */,
@@ -20473,6 +20484,7 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
+				98E06F98233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				8C0E8D9E1FDEBDFF00789C91 /* AutoSyncDataSource.swift in Sources */,
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
@@ -22203,6 +22215,7 @@
 				A2079908219F134B00AD5037 /* PremiumRouter.swift in Sources */,
 				9219B19A21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				8C208684228D513E000BEDAD /* Watchdog.swift in Sources */,
+				98E06F97233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
@@ -22904,6 +22917,7 @@
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
+				98E06F94233B624D006A0327 /* TimelineButton.swift in Sources */,
 				8C208647228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
@@ -23431,6 +23445,7 @@
 				8C1E5BE922CB8CE0008FDA02 /* NSManagedObject+Extensions.swift in Sources */,
 				CE78491422A685FB00662219 /* DuplicatedContactsInteractor.swift in Sources */,
 				CE78491522A685FB00662219 /* ConnectWithInstaView.swift in Sources */,
+				98E06F99233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE78491622A685FB00662219 /* UIViewController+NavBar.swift in Sources */,
 				CE78491722A685FB00662219 /* SwiftyJSONExtension.swift in Sources */,
 				CE78491822A685FB00662219 /* ContactDevice.m in Sources */,
@@ -23586,6 +23601,7 @@
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
 				989BDE4822F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
+				98E06F96233B624D006A0327 /* TimelineButton.swift in Sources */,
 				CE7849A722A685FB00662219 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				8C86111022BCF28100108958 /* TermsAndPolicyViewController.swift in Sources */,
 				CE7849A822A685FB00662219 /* InstaPickBigPhotoView.swift in Sources */,

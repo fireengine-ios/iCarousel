@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TBMatikPhotosViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundImageView" destination="zlC-hj-dcw" id="kbR-3L-iD4"/>
                 <outlet property="carousel" destination="bIe-nx-Ucd" id="Ohx-x6-CzP"/>
                 <outlet property="closeButton" destination="d8W-rB-aKw" id="f45-dg-F5f"/>
                 <outlet property="pageControl" destination="yIL-73-ADG" id="1OH-ao-ujk"/>
@@ -51,7 +50,7 @@
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="yIL-73-ADG">
                     <rect key="frame" x="168" y="655" width="39" height="37"/>
                 </pageControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-oI-I7M">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-oI-I7M" customClass="TimelineButton" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="14" y="711" width="169" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="aNt-u3-ErL"/>
@@ -89,10 +88,11 @@
                 <constraint firstItem="yIL-73-ADG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yQ7-6p-jcB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="138" y="140"/>
         </view>
     </objects>
     <resources>
         <image name="closeButton" width="17.666666030883789" height="17.666666030883789"/>
-        <image name="tbmatikBackground" width="375" height="667"/>
+        <image name="tbmatikBackground" width="750" height="1334"/>
     </resources>
 </document>

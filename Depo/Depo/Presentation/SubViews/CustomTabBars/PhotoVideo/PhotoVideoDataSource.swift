@@ -51,6 +51,8 @@ final class PhotoVideoDataSource: NSObject {
     private var isConverting = false
     private var isMerging = false
     
+    private var tbmatikItem: Item?
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
@@ -81,6 +83,22 @@ final class PhotoVideoDataSource: NSObject {
         self.delegate = delegate
     }
     
+    func scrollToItem(_ item: Item) {
+        if lastUpdateFetchedObjects == nil {
+            tbmatikItem = item
+        } else {
+            scroll(to: item)
+        }
+    }
+    
+    private func scroll(to item: Item) {
+        getIndexPathForObject(uuid: item.uuid) { [weak self] indexPath in
+            guard let self = self, let indexPath = indexPath else {
+                return
+            }
+            self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
+        }
+    }
     
     func getFetchedOriginalObjects(mediaItemsCallback: @escaping MediaItemsCallBack) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
@@ -162,6 +180,16 @@ final class PhotoVideoDataSource: NSObject {
                 return
             }
             
+            indexCallBack(self?.indexPath(forObject: findedObject))
+        }
+    }
+    
+    func getIndexPathForObject(uuid: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.uuid == uuid }) else {
+                indexCallBack(nil)
+                return
+            }
             indexCallBack(self?.indexPath(forObject: findedObject))
         }
     }
@@ -520,6 +548,11 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 self.convertFetchedObjects()
             } else {
                 self.mergeFetchedObjects(deletedIds: deletedIds, updatedIds: updatedIds, insertedIds: insertedIds)
+            }
+            
+            if let item = self.tbmatikItem {
+                self.scroll(to: item)
+                self.tbmatikItem = nil
             }
         }
     }
