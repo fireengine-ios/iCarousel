@@ -85,6 +85,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         securityQuestionView.delegate = self
         secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
+        addTapGestureToHideKeyboard()
     }
     
     override func viewDidLoad() {
@@ -99,6 +100,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     @IBAction private func saveButtonTapped(_ sender: Any) {
         
         answer.questionAnswer = secretAnswerView.answerTextField.text
+        captchaView.hideErrorAnimated()
+        secretAnswerView.hideErrorAnimated()
         
         guard
             let captchaAnswer = captchaView.captchaAnswerTextField.text,
@@ -117,8 +120,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                                 switch result {
                                                 case .success:
                                                 self.delegate?.didCloseSetSecurityQuestionViewController()
-                                                    self.captchaView.hideErrorAnimated()
-                                                    self.secretAnswerView.hideErrorAnimated()
+                                                    
                                                     
                                                 case .failure(let error):
                                                     self.handleServerErrors(error)                                                }
@@ -146,21 +148,17 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     
         guard let captchaText = captchaView.captchaAnswerTextField.text,
             let answerText = secretAnswerView.answerTextField.text,
-            let _ = answer.questionId
-            else {
-                self.saveButton.isEnabled = false
-                return
+            answer.questionId != nil
+        else {
+            saveButton.isEnabled = false
+            return
         }
         
-        if captchaText.isEmpty, answerText.isEmpty {
+        if captchaText.isEmpty || answerText.isEmpty {
             saveButton.isEnabled = false
         } else {
             saveButton.isEnabled = true
         }
-    }
-
-    private func initialViewSetup() {
-        addTapGestureToHideKeyboard()
     }
 }
 
