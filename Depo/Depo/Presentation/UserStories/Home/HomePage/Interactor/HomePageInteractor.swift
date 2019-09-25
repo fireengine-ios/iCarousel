@@ -66,6 +66,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
             DispatchQueue.toMain {
                 self?.output.verifyEmailIfNeeded()
+                self?.output.credsCheckUpdateIfNeeded()
             }
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
