@@ -73,7 +73,7 @@ final class PremiumPresenter {
             price = interactor.getPriceInfo(for: offer, accountType: accountType)
             description = String(format: TextConstants.useFollowingPremiumMembership, price ?? "")
         } else {
-            /// we should have at least one feature. server sent us nothing
+            /// server sent us nothing. we should have at least one feature.
             description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
             alertText = description
         }
@@ -84,7 +84,7 @@ final class PremiumPresenter {
     
     private func prepareForPurchase() {
         guard let plan = availableOffer else {
-            /// we should have availableOffer. will be nill if features is empty. server sent us nothing
+            /// server sent us nothing. we should have availableOffer. will be nil if features is empty.
             router.showNoDetailsAlert(with: alertText)
             return
         }
@@ -140,7 +140,7 @@ final class PremiumPresenter {
         switch model.featureType {
         case .SLCMFeature?:
             view.startActivityIndicator()
-            interactor.getToken(for: model)
+            buy()
             
         case .appleFeature?:
             view.startActivityIndicator()
@@ -210,16 +210,12 @@ extension PremiumPresenter: PremiumInteractorOutput {
         
         guard features.hasItems else {
             switchToTextWithoutPrice(isError: false)
+            /// maybe will be need. clear if all tests will be done by QA
+            //displayFeatureInfo()
             return
         }
         
         interactor.getInfoForAppleProducts(offers: features)
-        
-//        if neededFeature.featureType.isContained(in: paymentTypes) {
-//            interactor.getInfoForAppleProducts(offers: features)
-//        } else {
-//            displayFeatureInfo()
-//        }
     }
     
     func successed(tokenForOffer: String) {
