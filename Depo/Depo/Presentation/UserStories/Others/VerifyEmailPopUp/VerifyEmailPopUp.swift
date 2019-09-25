@@ -9,14 +9,10 @@
 import UIKit
 import Typist
 
-protocol VerifyEmailPopUpDelegate: class {
-    func popUpWillDismiss()
-}
+final class VerifyEmailPopUp: BasePopUpController {
 
-final class VerifyEmailPopUp: UIViewController {
+    //MARK: IBOutlet
 
-    @IBOutlet private weak var scrollView: UIScrollView!
-    
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
@@ -43,9 +39,6 @@ final class VerifyEmailPopUp: UIViewController {
             newValue.numberOfLines = 0
         }
     }
-    
-    @IBOutlet private weak var firstTextField: SecurityCodeTextField!
-    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
     
     @IBOutlet private weak var changeEmailButton: UIButton! {
         willSet {
@@ -89,7 +82,7 @@ final class VerifyEmailPopUp: UIViewController {
     
     @IBOutlet private weak var confirmButton: RoundedInsetsButton! {
         willSet {
-            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
+            newValue.layer.borderColor = UIColor.lrTealishTwo.withAlphaComponent(0.5).cgColor
             newValue.layer.borderWidth = 1
             
             newValue.setTitle(TextConstants.confirm, for: .normal)
@@ -102,17 +95,23 @@ final class VerifyEmailPopUp: UIViewController {
         }
     }
     
+    @IBOutlet private weak var scrollView: UIScrollView!
+    
+    @IBOutlet private weak var firstTextField: SecurityCodeTextField!
+    
+    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
+    
+    //MARK: Properties
     private let keyboard = Typist()
     private let activityManager = ActivityIndicatorManager()
 
     private lazy var accountService = AccountService()
-    
-    weak var delegate: VerifyEmailPopUpDelegate?
-    
+        
     private var isRemoveLetter: Bool = false
     private var currentSecurityCode = ""
     private var inputTextLimit = 6
-        
+    
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -127,8 +126,10 @@ final class VerifyEmailPopUp: UIViewController {
         
         updateEmail()
         
+        contentView = popUpView
+
         let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = !allowSkip
+        laterButton.isHidden = false//!allowSkip
         
         codeTextFields.forEach({
             $0.delegate = self
@@ -174,6 +175,9 @@ final class VerifyEmailPopUp: UIViewController {
         
         if confirmButton.isEnabled != isEnabled {
             confirmButton.isEnabled = isEnabled
+            
+            let alphaComponent: CGFloat = isEnabled ? 1 : 0.5
+            confirmButton.layer.borderColor = UIColor.lrTealishTwo.withAlphaComponent(alphaComponent).cgColor
         }
     }
     
@@ -198,9 +202,7 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     private func dismissPopUp(animated: Bool = true) {
-        dismiss(animated: animated) {
-            self.delegate?.popUpWillDismiss()
-        }
+        close()
     }
     
     private func showError(text: String) {
@@ -295,7 +297,6 @@ final class VerifyEmailPopUp: UIViewController {
             codeTextFields.last?.becomeFirstResponder()
         }
     }
-    
     
     @IBAction func onResendCodeTap(_ sender: Any) {
         hideKeyboard()
