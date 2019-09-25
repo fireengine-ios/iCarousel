@@ -719,6 +719,12 @@
 		8934DD6D23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
+		896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3A22CA10F9007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3B22CA10FA007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
@@ -7131,6 +7137,8 @@
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
 		8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailVerifiedPopUp.xib; sourceTree = "<group>"; };
+		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
+		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
 		89E51D5C22CA2ECA007A7DBC /* CreateStoryPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryPopUp.swift; sourceTree = "<group>"; };
 		89E51D5D22CA2ECA007A7DBC /* CreateStoryPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPopUp.xib; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
@@ -11424,6 +11432,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				897B8F372338B7170028C690 /* HomePagePopUpsService */,
 				173B144622F99F6000FAAC97 /* AccountWarningService */,
 				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
 				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
@@ -11895,6 +11904,15 @@
 				892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		897B8F372338B7170028C690 /* HomePagePopUpsService */ = {
+			isa = PBXGroup;
+			children = (
+				897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */,
+				896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */,
+			);
+			path = HomePagePopUpsService;
 			sourceTree = "<group>";
 		};
 		89E51D1B22CA0F0F007A7DBC /* Views */ = {
@@ -20080,6 +20098,7 @@
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
+				897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -20434,6 +20453,7 @@
 				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
+				896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
 				CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
@@ -22330,6 +22350,7 @@
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				B50B4A69220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
+				897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				B56FBB3A2122C9AA004F4A59 /* TermsOfUseViewInput.swift in Sources */,
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
@@ -23015,6 +23036,7 @@
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
+				896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
@@ -23183,6 +23205,7 @@
 				8C1E5BDB22CB8C09008FDA02 /* PhotoVideoCollectionViewManager.swift in Sources */,
 				73EA16FE22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
+				897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
 				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
@@ -23678,6 +23701,7 @@
 				CE784A0C22A685FB00662219 /* AnimationFlowManager.swift in Sources */,
 				CE784A0D22A685FB00662219 /* PhotoSelectionController.swift in Sources */,
 				CE784A0E22A685FB00662219 /* TransparentGradientView.swift in Sources */,
+				896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CE784A0F22A685FB00662219 /* UINavigationBarExtension.swift in Sources */,
 				CE784A1022A685FB00662219 /* UsageInfoViewOutput.swift in Sources */,
 				CE784A1122A685FB00662219 /* IntroduceInitializer.swift in Sources */,
