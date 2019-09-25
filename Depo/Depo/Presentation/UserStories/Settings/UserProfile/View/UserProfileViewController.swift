@@ -186,7 +186,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     
     private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
         
-        guard userInfo.hasSecurityQuestionInfo != nil, let questionId = userInfo.securityQuestionId else  {
+        guard userInfo.hasSecurityQuestionInfo != nil else  {
             return
         }
         
@@ -194,6 +194,10 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         
         self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle)
 
+        guard let questionId = userInfo.securityQuestionId else  {
+            return
+        }
+        
         let accountService = AccountService()
         accountService.getListOfSecretQuestions { [weak self] response in
             switch response {
@@ -202,7 +206,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                     assertionFailure()
                     return
                 }
-                self?.secretQuestionView.setupDescriptionLabel(question: question.text)
+                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
                 
             case .failed(_):
                 break

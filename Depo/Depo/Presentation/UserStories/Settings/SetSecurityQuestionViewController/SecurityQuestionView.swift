@@ -15,6 +15,21 @@ protocol SecurityQuestionViewDelegate {
 final class SecurityQuestionView: UIView, NibInit {
     
     var delegate: SecurityQuestionViewDelegate?
+   
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setDescriptionLabelTitle()
+    }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -45,21 +60,24 @@ final class SecurityQuestionView: UIView, NibInit {
     
     @IBOutlet private weak var arrowButton: UIButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setDescriptionLabelTitle()
+    private func setup() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        self.addGestureRecognizer(gesture)
     }
     
     func setQuestion(question: String) {
         DispatchQueue.toMain {
             self.descriptionLabel.text = question
             self.descriptionLabel.textColor = UIColor.black
-        
         }
     }
     
     private func setDescriptionLabelTitle() {
         descriptionLabel.text = TextConstants.userProfileSecretQuestionLabelPlaceHolder
+    }
+    
+    @objc func viewWasTapped() {
+         delegate?.selectSecurityQuestionTapped()
     }
     
     @IBAction private func arrowButtonTapped(_ sender: Any) {

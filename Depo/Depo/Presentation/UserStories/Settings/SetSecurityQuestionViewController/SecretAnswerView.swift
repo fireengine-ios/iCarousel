@@ -30,6 +30,7 @@ final class SecretAnswerView: UIView, NibInit {
             newValue.placeholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
         }
     }
+    
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange

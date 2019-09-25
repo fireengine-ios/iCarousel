@@ -116,7 +116,9 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                                 
                                                 switch result {
                                                 case .success:
-                                                    self.delegate?.didCloseSetSecurityQuestionViewController()
+                                                self.delegate?.didCloseSetSecurityQuestionViewController()
+                                                    self.captchaView.hideErrorAnimated()
+                                                    self.secretAnswerView.hideErrorAnimated()
                                                     
                                                 case .failure(let error):
                                                     self.handleServerErrors(error)                                                }
@@ -131,9 +133,9 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
-            UIApplication.showErrorAlert(message: errorText)
+            secretAnswerView.showErrorAnimated(text: errorText)
         case .invalidAnswer:
-            UIApplication.showErrorAlert(message: errorText)
+            secretAnswerView.showErrorAnimated(text: errorText)
         case .unknown:
             UIApplication.showErrorAlert(message: errorText)
         }
@@ -141,19 +143,19 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
     
     @objc private func checkButtonStatus() {
-        
+    
         guard let captchaText = captchaView.captchaAnswerTextField.text,
             let answerText = secretAnswerView.answerTextField.text,
-            answer.questionId != nil
-        else {
-            saveButton.isEnabled = false
-            return
+            let _ = answer.questionId
+            else {
+                self.saveButton.isEnabled = false
+                return
         }
-   
+        
         if captchaText.isEmpty, answerText.isEmpty {
-            saveButton.isEnabled = true
+            saveButton.isEnabled = false
         } else {
-           saveButton.isEnabled = false
+            saveButton.isEnabled = true
         }
     }
 
@@ -180,7 +182,6 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
             UIApplication.showErrorAlert(message: TextConstants.userProfileNoSecretQuestion)
         }
     }
-    
 }
 
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
