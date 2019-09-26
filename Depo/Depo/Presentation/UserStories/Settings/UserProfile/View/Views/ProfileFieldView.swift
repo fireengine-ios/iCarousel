@@ -168,12 +168,6 @@ class ProfileFieldView: UIView {
         textField.delegate = delegate
     }
     
-    func setupAsPassword() {
-        title = TextConstants.userProfilePassword
-        textField.text = "* * * * * * * * *"
-        textField.isUserInteractionEnabled = false
-    }
-    
     func setupAsTurkcellGSMIfNeeded() {
         guard SingletonStorage.shared.isTurkcellUser else {
             return

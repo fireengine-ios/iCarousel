@@ -320,6 +320,39 @@
 		733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		734D9E13233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
+		734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
+		734D9E15233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
+		737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
+		737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
+		737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
+		737A2E9D2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
+		737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
+		737A2E9F2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
+		737A2EA12338A5200014258A /* SecurityQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA02338A5200014258A /* SecurityQuestionView.swift */; };
+		737A2EA22338A5200014258A /* SecurityQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA02338A5200014258A /* SecurityQuestionView.swift */; };
+		737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA02338A5200014258A /* SecurityQuestionView.swift */; };
+		737A2EA52338A5300014258A /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
+		737A2EA62338A5300014258A /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
+		737A2EA72338A5300014258A /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
+		737A2EA92338AF410014258A /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
+		737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
+		737A2EAB2338AF410014258A /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
+		737A2EAD2338AF4B0014258A /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
+		737A2EAE2338AF4B0014258A /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
+		737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
+		737A2EBB2338E03A0014258A /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */; };
+		737A2EBC2338E03A0014258A /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */; };
+		737A2EBD2338E03A0014258A /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */; };
+		737A2EBE2338E03A0014258A /* SelectQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */; };
+		737A2EBF2338E03A0014258A /* SelectQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */; };
+		737A2EC02338E03A0014258A /* SelectQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */; };
+		737A2EC42338F44E0014258A /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EC22338F44E0014258A /* QuestionCell.swift */; };
+		737A2EC52338F44E0014258A /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EC22338F44E0014258A /* QuestionCell.swift */; };
+		737A2EC62338F44E0014258A /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EC22338F44E0014258A /* QuestionCell.swift */; };
+		737A2EC72338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
+		737A2EC82338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
+		737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
 		73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
 		73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */; };
 		73A63F8F22B394BF0062DDE5 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F8E22B394BF0062DDE5 /* PrivacyPolicyController.swift */; };
@@ -331,6 +364,12 @@
 		73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
+		73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
+		73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
+		73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
+		73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
+		73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
 		73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
 		73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
 		73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
@@ -6769,6 +6808,17 @@
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
+		734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecretQuestionErrors.swift; sourceTree = "<group>"; };
+		737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityQuestionViewController.swift; sourceTree = "<group>"; };
+		737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityQuestionViewController.xib; sourceTree = "<group>"; };
+		737A2EA02338A5200014258A /* SecurityQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityQuestionView.swift; sourceTree = "<group>"; };
+		737A2EA42338A5300014258A /* SecurityQuestionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityQuestionView.xib; sourceTree = "<group>"; };
+		737A2EA82338AF410014258A /* SecretAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretAnswerView.swift; sourceTree = "<group>"; };
+		737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecretAnswerView.xib; sourceTree = "<group>"; };
+		737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectQuestionViewController.swift; sourceTree = "<group>"; };
+		737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectQuestionViewController.xib; sourceTree = "<group>"; };
+		737A2EC22338F44E0014258A /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		737A2EC32338F44E0014258A /* QuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
 		73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuView.swift; sourceTree = "<group>"; };
 		73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyViewController.swift; sourceTree = "<group>"; };
 		73A63F6822B240310062DDE5 /* TermsAndPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndPolicyViewController.xib; sourceTree = "<group>"; };
@@ -6782,6 +6832,8 @@
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
+		73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityCredentialsView.swift; sourceTree = "<group>"; };
+		73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityCredentialsView.xib; sourceTree = "<group>"; };
 		73D723E7231D0855006AE835 /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
 		73D723E9231D08A6006AE835 /* PackageOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOffer.swift; sourceTree = "<group>"; };
 		73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -9365,6 +9417,8 @@
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
 				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
+				73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */,
+				73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -10412,6 +10466,39 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		737A2E97233898670014258A /* SetSecurityQuestionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				737A2EB02338D7350014258A /* SelectQuestionViewController */,
+				737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */,
+				737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */,
+				737A2EA02338A5200014258A /* SecurityQuestionView.swift */,
+				737A2EA42338A5300014258A /* SecurityQuestionView.xib */,
+				737A2EA82338AF410014258A /* SecretAnswerView.swift */,
+				737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */,
+			);
+			path = SetSecurityQuestionViewController;
+			sourceTree = "<group>";
+		};
+		737A2EB02338D7350014258A /* SelectQuestionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				737A2EC12338F42C0014258A /* QuestionCell */,
+				737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */,
+				737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */,
+			);
+			path = SelectQuestionViewController;
+			sourceTree = "<group>";
+		};
+		737A2EC12338F42C0014258A /* QuestionCell */ = {
+			isa = PBXGroup;
+			children = (
+				737A2EC22338F44E0014258A /* QuestionCell.swift */,
+				737A2EC32338F44E0014258A /* QuestionCell.xib */,
+			);
+			path = QuestionCell;
+			sourceTree = "<group>";
+		};
 		73A63F5D22B23AEC0062DDE5 /* TermsAndPolicy */ = {
 			isa = PBXGroup;
 			children = (
@@ -11114,6 +11201,7 @@
 				CE7466FE1FD6B35400D0885D /* ServerValueError.swift */,
 				CE6A8F1620737E230001EB54 /* ServerMessageError.swift */,
 				CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */,
+				734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */,
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
 				CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */,
 				73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */,
@@ -15109,6 +15197,7 @@
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
 				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
 				CE5921CC22562357005882CE /* ChangePassword */,
+				737A2E97233898670014258A /* SetSecurityQuestionViewController */,
 				CE6DE75E1FCC440300C23CBD /* OptIn */,
 				72836BFADA2D23CEF3EADB75 /* OTPView */,
 				7CC814511EF7A93E001DFCF0 /* AutoSync */,
@@ -17424,6 +17513,7 @@
 				CE23A0F6205FF5320048267D /* EmailEnterController.xib in Resources */,
 				8C06AEEF2008AD70003D8E05 /* Buyuk_Selected.png in Resources */,
 				8C06B12F2008AD72003D8E05 /* t_orta.png in Resources */,
+				737A2EAE2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */,
 				8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */,
 				8C06AF092008AD70003D8E05 /* check-mark@2x.png in Resources */,
@@ -17473,6 +17563,7 @@
 				8C06AFD92008AD71003D8E05 /* italic.png in Resources */,
 				8C06B0FD2008AD72003D8E05 /* share_icon@3x.png in Resources */,
 				8C0E90371FDEBDFF00789C91 /* PhotoVideoDetailViewController.xib in Resources */,
+				737A2EBF2338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
 				8C06AFA72008AD71003D8E05 /* frame@3x.png in Resources */,
 				8C06AF972008AD71003D8E05 /* filtre_selected.png in Resources */,
 				8C06AF192008AD70003D8E05 /* cizgi_1@3x.png in Resources */,
@@ -17716,6 +17807,7 @@
 				8C0E905C1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8C0E905D1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.xib in Resources */,
 				8C0E905E1FDEBDFF00789C91 /* TurkcellSaturaIta.ttf in Resources */,
+				737A2EC82338F44E0014258A /* QuestionCell.xib in Resources */,
 				8C0E905F1FDEBDFF00789C91 /* PasscodeViewImp.xib in Resources */,
 				8C06AFC52008AD71003D8E05 /* gonder_btn@3x.png in Resources */,
 				8C06B0F12008AD72003D8E05 /* serbest_cizgi@3x.png in Resources */,
@@ -17756,6 +17848,7 @@
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AEC32008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
+				73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B1672008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
 				8C20864C228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */,
 				8C0E90621FDEBDFF00789C91 /* IntroduceSubView.xib in Resources */,
@@ -17765,6 +17858,7 @@
 				8C06B0212008AD71003D8E05 /* lifebox@2x.png in Resources */,
 				8C06B17D2008AD72003D8E05 /* topright@3x.png in Resources */,
 				8C0E90641FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
+				737A2EA62338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				8C06AEF52008AD70003D8E05 /* cancel_buton.png in Resources */,
 				8C0E90651FDEBDFF00789C91 /* ForgotPasswordViewController.xib in Resources */,
 				8C0E90661FDEBDFF00789C91 /* SettingsViewController.xib in Resources */,
@@ -17801,6 +17895,7 @@
 				8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressPopUp.xib in Resources */,
 				8C06AF212008AD70003D8E05 /* cizgi_2.png in Resources */,
+				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				8C06AFA92008AD71003D8E05 /* frame_selected.png in Resources */,
 				8C06B0752008AD71003D8E05 /* paylas_fb@3x.png in Resources */,
 				8C06AF632008AD70003D8E05 /* duz_beyaz.png in Resources */,
@@ -18107,6 +18202,7 @@
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
 				8C06AF262008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
 				8C06B09A2008AD71003D8E05 /* refresh.png in Resources */,
+				737A2E9D2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				7C4F60A52019D0440033C58F /* CollageCard.xib in Resources */,
 				8C06B1042008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
 				8C06B1922008AD72003D8E05 /* undo@2x.png in Resources */,
@@ -18166,6 +18262,7 @@
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				8C06AF022008AD70003D8E05 /* caps2_selected@2x.png in Resources */,
+				737A2EAD2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				8C06B0382008AD71003D8E05 /* Orta@3x.png in Resources */,
 				8C06AF0E2008AD70003D8E05 /* checkbox@3x.png in Resources */,
 				8C06B1462008AD72003D8E05 /* target_secili.png in Resources */,
@@ -18192,6 +18289,7 @@
 				8C06B1382008AD72003D8E05 /* t_orta_selected@3x.png in Resources */,
 				7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */,
 				8C06AF142008AD70003D8E05 /* cizgi_1.png in Resources */,
+				737A2EA52338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				8C06AEBC2008AD70003D8E05 /* alt_cizgili.png in Resources */,
 				8C06AFCA2008AD71003D8E05 /* header_icon@3x.png in Resources */,
 				8C06B1602008AD72003D8E05 /* toolbar_ciz_icon@2x.png in Resources */,
@@ -18232,6 +18330,7 @@
 				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06B1B02008AD72003D8E05 /* CRYRotateImageViewController.nib in Resources */,
 				8C06AF742008AD70003D8E05 /* edit@2x.png in Resources */,
+				737A2EBE2338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
 				8C06AF4E2008AD70003D8E05 /* crop_selected@3x.png in Resources */,
 				B56FBB1C2122C23D004F4A59 /* TermsOfUseViewController.xib in Resources */,
 				8C06AF902008AD70003D8E05 /* filtre.png in Resources */,
@@ -18476,6 +18575,7 @@
 				8C06B1402008AD72003D8E05 /* target.png in Resources */,
 				8C06B0A02008AD71003D8E05 /* refreshicon.png in Resources */,
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
+				73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
 				7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
@@ -18639,6 +18739,7 @@
 				8C06B0022008AD71003D8E05 /* Kucuk@2x.png in Resources */,
 				8C06B0982008AD71003D8E05 /* polaroid_yeni@3x.png in Resources */,
 				8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */,
+				737A2EC72338F44E0014258A /* QuestionCell.xib in Resources */,
 				9219B19C21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
 				8C06AED02008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
 				98570AFC208F7558002CCEBA /* SpotlightViewController.xib in Resources */,
@@ -18889,6 +18990,7 @@
 				CE784D8E22A685FB00662219 /* duz_beyaz.png in Resources */,
 				CE784D8F22A685FB00662219 /* bottomright@3x.png in Resources */,
 				CE784D9022A685FB00662219 /* OurLocalizable.strings in Resources */,
+				737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				CE784D9122A685FB00662219 /* cizgi_2.png in Resources */,
 				CE784D9222A685FB00662219 /* polaroid_yeni@2x.png in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
@@ -18938,6 +19040,7 @@
 				CE784DBF22A685FB00662219 /* CustomScrollIndicator.xib in Resources */,
 				CE784DC022A685FB00662219 /* t_orta_selected.png in Resources */,
 				CE784DC122A685FB00662219 /* ContactBackupEmpty.xib in Resources */,
+				737A2EC02338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
 				CE784DC222A685FB00662219 /* MusicBar.xib in Resources */,
 				CE784DC322A685FB00662219 /* inputCell.xib in Resources */,
 				CE784DC422A685FB00662219 /* cizgi_3@3x.png in Resources */,
@@ -19181,6 +19284,7 @@
 				CE784EA422A685FB00662219 /* PasswordCell.xib in Resources */,
 				CE784EA522A685FB00662219 /* toolbar_crop_icon.png in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
+				737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */,
 				CE784EA722A685FB00662219 /* paylas_mail.png in Resources */,
 				CE784EA822A685FB00662219 /* cancel_buton@2x.png in Resources */,
 				CE784EA922A685FB00662219 /* back_icon@2x.png in Resources */,
@@ -19221,6 +19325,7 @@
 				CE784EC922A685FB00662219 /* paylas_akilli_depo.png in Resources */,
 				CE784ECA22A685FB00662219 /* sticker_resize.png in Resources */,
 				CE784ECB22A685FB00662219 /* status_badge@3x.png in Resources */,
+				73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				CE784ECC22A685FB00662219 /* alt_cizgili_secili.png in Resources */,
 				CE784ECD22A685FB00662219 /* OurLocalizable.strings in Resources */,
 				8C1E5BE122CB8C23008FDA02 /* PhotoVideoController.xib in Resources */,
@@ -19230,6 +19335,7 @@
 				CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */,
 				73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				CE784ED322A685FB00662219 /* ProgressPopUp.xib in Resources */,
+				737A2EA72338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */,
 				CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */,
 				CE784ED622A685FB00662219 /* cizgi_3_selected@2x.png in Resources */,
@@ -19266,6 +19372,7 @@
 				CE784EF422A685FB00662219 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				CE784EF522A685FB00662219 /* crop.png in Resources */,
 				CE784EF622A685FB00662219 /* StorageCard.xib in Resources */,
+				737A2E9F2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				CE784EF722A685FB00662219 /* InstagramAccountConnectionCell.xib in Resources */,
 				CE784EF822A685FB00662219 /* daire@3x.png in Resources */,
 				CE784EF922A685FB00662219 /* akilli_depo_beyaz@2x.png in Resources */,
@@ -20184,6 +20291,7 @@
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C208648228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
+				737A2EC52338F44E0014258A /* QuestionCell.swift in Sources */,
 				CEFAF2E123210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
@@ -20231,6 +20339,7 @@
 				8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */,
 				C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				CE23A0F3205FF5250048267D /* ErrorPresenter.swift in Sources */,
+				737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
 				8CD2B3AF1FE7B37600280547 /* VideoSyncService.swift in Sources */,
 				8C0E8CE11FDEBDFF00789C91 /* AlbumDetailService.swift in Sources */,
@@ -20282,6 +20391,7 @@
 				8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
+				734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
 				8C0E8D061FDEBDFF00789C91 /* ActivityTimelineService.swift in Sources */,
 				8C0E8D081FDEBDFF00789C91 /* SearchViewInput.swift in Sources */,
@@ -20723,6 +20833,7 @@
 				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
+				737A2EBC2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
 				CEE3B7D3225791D900B99FE7 /* CaptchaView.swift in Sources */,
 				4A0AC1422087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
@@ -20808,6 +20919,7 @@
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
+				73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
@@ -21149,6 +21261,7 @@
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
+				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
@@ -21220,6 +21333,7 @@
 				486F7B58208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				8C0E8FA01FDEBDFF00789C91 /* AlbumsInitializer.swift in Sources */,
 				CE23A0F9205FF5320048267D /* UnderlineTextField.swift in Sources */,
+				737A2EA22338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0B919D20170E6400A5BA81 /* DuplicatedContactsInteractor.swift in Sources */,
@@ -22041,6 +22155,7 @@
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
+				734D9E13233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
 				2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */,
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
@@ -22063,6 +22178,7 @@
 				7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */,
 				8CF6A9C5207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
+				737A2EA12338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */,
 				8C9CE3AF229DA5A8004B5C73 /* FileProviderWormholeListener.swift in Sources */,
 				92004B5A21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
@@ -22402,6 +22518,7 @@
 				4A56D5B8202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
 				4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
+				737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				73B4077122E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift in Sources */,
@@ -22581,10 +22698,12 @@
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
+				737A2EA92338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
+				737A2EBB2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
 				7C2F56FA1F1CC1CC0014870B /* ActionsMenuTableViewCell.swift in Sources */,
 				B5AB5B6421F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -22607,6 +22726,7 @@
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
+				73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				8C06AC1820066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
 				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
@@ -22936,6 +23056,7 @@
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
+				737A2EC42338F44E0014258A /* QuestionCell.swift in Sources */,
 				4A0AC135208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */,
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				8C208651228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
@@ -23274,6 +23395,7 @@
 				CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */,
 				CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
+				737A2EBD2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				CE78489222A685FB00662219 /* AutoSyncInteractorOutput.swift in Sources */,
 				CE78489322A685FB00662219 /* AlbumDetailService.swift in Sources */,
 				CE78489422A685FB00662219 /* RequestHeader.swift in Sources */,
@@ -23547,6 +23669,7 @@
 				CE78499022A685FB00662219 /* RegistrationViewOutput.swift in Sources */,
 				892B014E22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */,
 				CE78499122A685FB00662219 /* ConnectedAccountsDataSource.swift in Sources */,
+				737A2EC62338F44E0014258A /* QuestionCell.swift in Sources */,
 				CE78499222A685FB00662219 /* RegistrationViewController.swift in Sources */,
 				CE78499322A685FB00662219 /* AlbumCard.swift in Sources */,
 				CE78499422A685FB00662219 /* HelpAndSupportRouter.swift in Sources */,
@@ -23616,6 +23739,7 @@
 				CE7849D222A685FB00662219 /* SynchronizedArray.swift in Sources */,
 				CE7849D622A685FB00662219 /* PremiumViewController.swift in Sources */,
 				CE7849D722A685FB00662219 /* AudioSelectionCollectionViewCell.swift in Sources */,
+				737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				CE7849D822A685FB00662219 /* TermsAndServicesPresenter.swift in Sources */,
 				CE7849D922A685FB00662219 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CE7849DA22A685FB00662219 /* MyStorageInteractor.swift in Sources */,
@@ -23954,6 +24078,7 @@
 				CE784B1822A685FB00662219 /* Int64+Bytes.swift in Sources */,
 				CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
+				73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				CE784B1C22A685FB00662219 /* (null) in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,
@@ -24005,6 +24130,7 @@
 				CE784B4C22A685FB00662219 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				CE784B4D22A685FB00662219 /* UserInfoSubViewInteractor.swift in Sources */,
 				CE784B4E22A685FB00662219 /* UserInfoSubViewRouterInput.swift in Sources */,
+				737A2EAB2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CE784B4F22A685FB00662219 /* UserInfoSubViewRouter.swift in Sources */,
 				CE784B5022A685FB00662219 /* UserInfoSubViewConfigurator.swift in Sources */,
 				CE784B5122A685FB00662219 /* UserInfoSubViewInitializer.swift in Sources */,
@@ -24081,6 +24207,7 @@
 				CE784B9522A685FB00662219 /* SplashModuleInput.swift in Sources */,
 				CE784B9622A685FB00662219 /* ErrorBannerView.swift in Sources */,
 				CE784B9722A685FB00662219 /* MoreFilesActionsPresenter.swift in Sources */,
+				734D9E15233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
 				CE784B9822A685FB00662219 /* SplashPresenter.swift in Sources */,
 				CE784B9922A685FB00662219 /* GeneralFilesFiltration.swift in Sources */,
 				CE784B9A22A685FB00662219 /* SearchViewInteractorOutput.swift in Sources */,
@@ -24133,6 +24260,7 @@
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				CE784BC422A685FB00662219 /* PageForLanding.swift in Sources */,
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
+				737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
 				CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */,
 				CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */,

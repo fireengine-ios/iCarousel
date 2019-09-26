@@ -7,7 +7,7 @@
 //
 
 class UserProfileRouter: UserProfileRouterInput {
-    
+
     private let router = RouterVC()
 
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, navigationController: UINavigationController, phoneNumber: String) {
@@ -20,4 +20,9 @@ class UserProfileRouter: UserProfileRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    func goToSetSecretQuestion(delegate: SetSecurityQuestionViewControllerDelegate) {
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        controller.delegate = delegate
+        router.pushViewController(viewController: controller)
+    }
 }
