@@ -12,8 +12,7 @@ protocol HomePageInteractorOutput: class {
         
     func stopRefresh()
     
-    @discardableResult
-    func didShowPopupAboutPremium() -> Bool
+    func showPopupAboutPremiumIfNeeded()
     
     func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool)
     

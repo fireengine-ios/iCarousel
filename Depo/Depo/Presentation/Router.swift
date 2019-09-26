@@ -11,7 +11,7 @@ import UIKit
 
 class RouterVC: NSObject {
     
-    let splitContr = SplitIpadViewContoller()
+    var splitContr: SplitIpadViewContoller?
     
     var rootViewController: UIViewController? {
         guard let window = UIApplication.shared.keyWindow,
@@ -774,10 +774,14 @@ class RouterVC: NSObject {
         let leftController = settings
         let rightController = syncContacts
         
-        //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
+        splitContr = SplitIpadViewContoller()
+        splitContr?.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
-        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
+        guard let splitVC = splitContr?.getSplitVC() else {
+            return nil
+        }
+        
+        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitVC)
         return containerController
     }
     
@@ -860,15 +864,14 @@ class RouterVC: NSObject {
     
     func showFeedbackSubView() {
         SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
-            let router = RouterVC()
-            let controller = router.supportFormPrefilledController
+            let controller = self.supportFormPrefilledController
             controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
                                                   phone: userInfo.fullPhoneNumber,
                                                   email: userInfo.email)
             controller.config = config
-            router.pushViewController(viewController: controller)
+            self.pushViewController(viewController: controller)
             
         }, fail: { error in
             UIApplication.showErrorAlert(message: error.description)
