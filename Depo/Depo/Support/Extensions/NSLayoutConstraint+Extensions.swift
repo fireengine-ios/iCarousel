@@ -12,10 +12,6 @@ extension NSLayoutConstraint {
         isActive = true
     }
     
-    func deactivate() {
-        isActive = false
-    }
-    
     func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem, attribute: self.firstAttribute,
                                   relatedBy: self.relation,
