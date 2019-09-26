@@ -118,9 +118,10 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
-    uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
+    uploadsMetrics: Int?, playlistNumber: Int?, trackNumber: Int?, isConnectedSpotify: Bool?, isPaymentMethodNative: Bool?)
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
     func trackSignupEvent(error: SignupResponseError?)
+    func trackImportEvent(error: SpotifyResponseError?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -133,8 +134,9 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
-                                     uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
-        prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+                                     uploadsMetrics: Int? = nil, playlistNumber: Int? = nil, trackNumber: Int? = nil, isConnectedSpotify: Bool? = nil, isPaymentMethodNative: Bool? = nil) {
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics,
+                                   playlistNumber: playlistNumber, trackNumber: trackNumber, isConnectedSpotify: isConnectedSpotify, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
             Analytics.logEvent("screenView", parameters: parametrs)
         }
     }
@@ -142,6 +144,9 @@ extension AnalyticsService: AnalyticsGA {
     private func prepareDimentionsParametrs(screen: AnalyticsAppScreens?,
                                             downloadsMetrics: Int? = nil,
                                             uploadsMetrics: Int? = nil,
+                                            playlistNumber: Int? = nil,
+                                            trackNumber: Int? = nil,
+                                            isConnectedSpotify: Bool? = nil,
                                             isPaymentMethodNative: Bool? = nil,
                                             loginType: GADementionValues.login? = nil,
                                             errorType: String? = nil,
@@ -150,6 +155,10 @@ extension AnalyticsService: AnalyticsGA {
         let tokenStorage: TokenStorage = factory.resolve()
         let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        var connectStatus: String?
+        if let unwrapedConnectStatus = isConnectedSpotify {
+            connectStatus = unwrapedConnectStatus ? "Connect" : "Disconnect"
+        }
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
             payment = unwrapedisNativePayment ? "inApp" : "Turkcell"
@@ -210,6 +219,9 @@ extension AnalyticsService: AnalyticsGA {
                 userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
+                playlistNumber: playlistNumber,
+                trackNumber: trackNumber,
+                connectStatus: connectStatus,
                 gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
                 loginType: loginType,
                 errorType: errorType,
@@ -315,6 +327,17 @@ extension AnalyticsService: AnalyticsGA {
             let parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : GAEventAction.register.text,
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+            ]
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackImportEvent(error: SpotifyResponseError? = nil) {
+        prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : GAEventAction.connectedAccounts.text,
                 "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)

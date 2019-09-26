@@ -17,7 +17,7 @@ protocol PremiumInteractorOutput: class {
     func successed(tokenForResend: String)
     
     func successedVerifyOffer()
-    func successedGotAppleInfo(offer: PackageModelResponse)
+    func successedGotAppleInfo(offers: [PackageModelResponse])
     
     func failed(with errorMessage: String)
     func failedResendToken(with errorMessage: String)

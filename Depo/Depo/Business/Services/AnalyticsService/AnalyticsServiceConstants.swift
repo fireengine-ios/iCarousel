@@ -179,6 +179,15 @@ enum AnalyticsAppScreens {
     ///
     case myStorage
     case changePassword
+    ///
+    case spotifyImport
+    case spotifyImportPlaylistSelection
+    case spotifyImportPlaylistDetails
+    case spotifyImportProgress
+    case spotifyImportResult
+    case spotifyPlaylistDetails
+    case spotifyPlaylists
+    case spotifyAuthentification
     
     case info(FileType)
     
@@ -299,6 +308,24 @@ enum AnalyticsAppScreens {
             return "My Storage"
         case .changePassword:
             return "Change Password"
+        ///
+        case .spotifyImport:
+            return "Spotify Import"
+        case .spotifyImportPlaylistSelection:
+            return "Spotify Import Playlist Selection"
+        case .spotifyImportPlaylistDetails:
+            return "Spotify Import Playlist Details"
+        case .spotifyImportProgress:
+            return "Spotify Import Progress"
+        case .spotifyImportResult:
+            return "Sporify Import Result"
+        case .spotifyPlaylists:
+            return "Spotify Playlists"
+        case .spotifyPlaylistDetails:
+            return "Spotify Playlist Details"
+        case .spotifyAuthentification:
+            return "Spotify Authentication "
+        ///
         case .info(let fileType):
             switch fileType {
             case .image:
@@ -469,6 +496,7 @@ enum GAEventAction {
     case photopickShare
     case contactOperation(SYNCMode)
     case plus
+    case connectedAccounts
 
     var text: String {
         switch self {
@@ -557,6 +585,8 @@ enum GAEventAction {
             }
         case .plus:
             return "Plus"
+        case .connectedAccounts:
+            return "Connected Accounts"
         }
     }
 }
@@ -672,6 +702,11 @@ enum GAEventLabel {
     case importDropbox
     case importFacebook
     case importInstagram
+    case importSpotify
+    //
+    case importSpotifyPlaylist
+    case importSpotifyTrack
+    case importSpotifyResult(String)
     //
     case uploadFile(FileType)
     //
@@ -760,6 +795,15 @@ enum GAEventLabel {
             return "Facebook"
         case .importInstagram:
             return "Instagram"
+        case .importSpotify:
+            return "Import from Spotify"
+        //
+        case .importSpotifyPlaylist:
+            return "Import from Spotify Playlist"
+        case .importSpotifyTrack:
+            return "Import from Spotify Track"
+        case .importSpotifyResult(let result):
+            return "Import from Spotify \(result)"
         //
         case .uploadFile(let fileType):
             return fileType.text
@@ -878,6 +922,7 @@ enum GADementionsFields {
     case faceImageStatus
     case userPackage
     case gsmOperatorType
+    case connectStatus
     case deviceId
     case errorType
     case autoSyncState
@@ -915,6 +960,8 @@ enum GADementionsFields {
             return "userPackage"
         case .gsmOperatorType:
             return "gsmOperatorType"
+        case .connectStatus:
+            return "connectStatus"
         case .deviceId:
             return "deviceid"
         case .errorType:
@@ -931,12 +978,18 @@ enum GADementionsFields {
 enum GAMetrics {
     case countOfUpload //After uploading of all files in the upload queue finihes, send the count of uploaded files
     case countOfDownload //After downloading finishes, send the count of downloaded files
+    case playlistNumber
+    case trackNumber
     var text: String {
         switch self {
         case .countOfUpload:
             return "countOfUpload"
         case .countOfDownload:
             return "countOfDownload"
+        case .playlistNumber:
+            return "playlistNumber"
+        case .trackNumber:
+            return "trackNumber"
         }
     }
 }
@@ -1039,6 +1092,20 @@ enum GADementionValues {
                 return "CAPTCHA_REQUIRED"
             case .unauthorized:
                 return "UNAUTHORIZED"
+            }
+        }
+    }
+    
+    enum spotifyError {
+        case importError
+        case networkError
+
+        var text: String {
+            switch self {
+            case .importError:
+                return "SPOTIFY_IMPORT_ERROR"
+            case .networkError:
+                return "NETWORK_ERROR"
             }
         }
     }
