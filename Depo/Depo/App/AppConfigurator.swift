@@ -170,9 +170,8 @@ final class AppConfigurator {
                     case .click:
                         debugLog("Menlo Notif Clicked")
                         
-                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
                             PushNotificationService.shared.openActionScreen()
-                            storageVars.deepLink = payloadAction
                         }
                         
                     case .dismiss:
@@ -180,7 +179,7 @@ final class AppConfigurator {
                         
                     case .present:
                         debugLog("Menlo Notif in Foreground")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
                             PushNotificationService.shared.openActionScreen()
                         }
                     }

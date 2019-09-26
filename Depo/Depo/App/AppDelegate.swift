@@ -13,6 +13,8 @@ import SDWebImage
 import XCGLogger
 import Adjust
 import XPush
+import Netmera
+import UserNotifications
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -66,7 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -104,6 +105,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AnalyticsService.onAppLaunch()
         
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+        
         return true
     }
     
@@ -113,9 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Adjust.appWillOpen(url)
         
         if let urlHost = url.host {
-            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost){
+            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: options) {
                 PushNotificationService.shared.openActionScreen()
-                storageVars.deepLink = urlHost
             }
         }
         
@@ -175,6 +179,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
+        
+        // handle netmera push notifications
+        if let object = Netmera.recentPushObject(),
+            Device.operationSystemVersionLessThen(10),
+            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
+        {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func showPasscodeIfNeedInBackground() {
@@ -354,10 +366,9 @@ extension AppDelegate {
                 if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
                     if let host = oldURL.host {
                         debugLog("Adjust old host :\(oldURL.host)")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: host){
+                        if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
                             debugLog("Should open Action Screen")
                             PushNotificationService.shared.openActionScreen()
-                            storageVars.deepLink = host
                         }
                     }
                     debugLog("Adjust old path :\(oldURL.path)")
@@ -365,5 +376,26 @@ extension AppDelegate {
             }
         }
         return true
+    }
+}
+
+// MARK: - UNUserNotificationCenterDelegate
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard let object = Netmera.recentPushObject() else {
+            return
+        }
+        
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary) {
+            PushNotificationService.shared.openActionScreen()
+        }
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge])
     }
 }

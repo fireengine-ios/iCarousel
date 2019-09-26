@@ -99,10 +99,9 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func openLink() {
         debugLog("Open Link on Splash Presenter")
         if let deepLink = storageVars.deepLink {
-            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink){
+            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink, options: storageVars.deepLinkParameters) {
                 debugLog("Open Link after Router navigates to home")
                 PushNotificationService.shared.openActionScreen()
-                storageVars.deepLink = nil
             }
         }
     }

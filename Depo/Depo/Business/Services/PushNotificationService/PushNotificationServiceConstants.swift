@@ -50,3 +50,9 @@ enum PushNotificationAction: String {
     case tbmatic = "TBMatik"
 }
 
+enum PushNotificationParameter: String {
+    case action = "action"
+    case pushType = "push_type"
+    case tbmaticUuids = "tbt_file_list"
+}
+

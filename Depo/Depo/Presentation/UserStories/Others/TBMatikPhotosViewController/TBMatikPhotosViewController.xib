@@ -17,6 +17,7 @@
                 <outlet property="shareButton" destination="ZDf-lG-9Th" id="U10-DB-jnC"/>
                 <outlet property="timelineButton" destination="Lge-oI-I7M" id="zZz-ee-aYp"/>
                 <outlet property="titleLabel" destination="ugr-WK-tJf" id="D2w-iT-PyI"/>
+                <outlet property="topConstraint" destination="y6I-sw-jQk" id="Vgu-Y4-d4H"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FCp-b0-v9r"/>
             </connections>
         </placeholder>
@@ -38,13 +39,16 @@
                     <state key="normal" image="closeButton"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugr-WK-tJf">
-                    <rect key="frame" x="30" y="82" width="315" height="21"/>
+                    <rect key="frame" x="30" y="77" width="315" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="v6b-nR-31y"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-nx-Ucd" customClass="iCarousel">
-                    <rect key="frame" x="0.0" y="120" width="375" height="516"/>
+                    <rect key="frame" x="0.0" y="131" width="375" height="505"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="yIL-73-ADG">
@@ -71,9 +75,9 @@
                 <constraint firstItem="zlC-hj-dcw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4wz-rc-7Yq"/>
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="7BT-v8-Ed2"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="leading" secondItem="Lge-oI-I7M" secondAttribute="trailing" constant="9" id="BSu-Iy-NU8"/>
-                <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="17" id="Evo-lQ-ryU"/>
+                <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="4" id="Evo-lQ-ryU"/>
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="yIL-73-ADG" secondAttribute="bottom" constant="19" id="Fz7-Kn-BEY"/>
-                <constraint firstItem="ugr-WK-tJf" firstAttribute="top" secondItem="d8W-rB-aKw" secondAttribute="bottom" id="G3e-AN-7CO"/>
+                <constraint firstItem="ugr-WK-tJf" firstAttribute="top" secondItem="d8W-rB-aKw" secondAttribute="bottom" constant="-5" id="G3e-AN-7CO"/>
                 <constraint firstAttribute="bottom" secondItem="zlC-hj-dcw" secondAttribute="bottom" id="JA6-O8-WW6"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="width" secondItem="Lge-oI-I7M" secondAttribute="width" id="MCU-jN-cCd"/>
                 <constraint firstItem="yIL-73-ADG" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="19" id="Mlf-S1-Oi9"/>

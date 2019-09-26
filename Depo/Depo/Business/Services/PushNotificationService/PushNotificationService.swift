@@ -14,37 +14,49 @@ final class PushNotificationService {
     
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     private var notificationAction: PushNotificationAction?
-    private var parameters: String?
+    private var notificationParameters: String?
     
     //MARK: -
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = launchOptions?["action"] as? String,
+        let action = launchOptions?[PushNotificationParameter.action.rawValue] as? String ?? launchOptions?[PushNotificationParameter.pushType.rawValue] as? String
+        
+        guard let actionString = action,
             let notificationAction = PushNotificationAction(rawValue: actionString) else {
             return false
         }
 
+        parse(options: launchOptions, action: notificationAction)
+        return true
+    }
+    
+    func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
+        guard let actionString = innerLink as String?,
+            let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            return false
+        }
+        
+        parse(options: options, action: notificationAction)
+        return true
+    }
+    
+    private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
+        self.notificationAction = action
+        
         switch notificationAction {
         case .http:
-            parameters = actionString
+            notificationParameters = action.rawValue
         case .tbmatic:
-            parameters = launchOptions?["tbt_file_list"] as? String
+            notificationParameters = options?[PushNotificationParameter.tbmaticUuids.rawValue] as? String
         default:
             break
         }
         
-        return true
-    }
-    
-    func assignDeepLink(innerLink: String?) -> Bool {
-        guard let actionString = innerLink as String? else {
-            return false
-        }
-        
-        notificationAction = PushNotificationAction(rawValue: actionString)
-        return notificationAction != nil
+        storageVars.deepLink = action.rawValue
+        storageVars.deepLinkParameters = options
     }
     
     func openActionScreen() {
@@ -86,7 +98,7 @@ final class PushNotificationService {
         case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
-        case .http: openURL(parameters)
+        case .http: openURL(notificationParameters)
         case .login: openLogin()
         case .search: openSearch()
         case .freeUpSpace: break
@@ -96,10 +108,13 @@ final class PushNotificationService {
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
-        case .tbmatic: openTBMaticPhotos(parameters)
+        case .tbmatic: openTBMaticPhotos(notificationParameters)
             
         }
         notificationAction = nil
+        notificationParameters = nil
+        storageVars.deepLink = nil
+        storageVars.deepLinkParameters = nil
     }
     
     //MARK: -

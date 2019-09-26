@@ -58,6 +58,14 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         }
     }
     
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint! {
+        willSet {
+            if Device.operationSystemVersionLessThen(11) {
+                newValue.constant = 16
+            }
+        }
+    }
+    
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.addTarget(self, action: #selector(close), for: .touchUpInside)
@@ -288,7 +296,10 @@ extension TBMatikPhotosViewController: CacheManagerDelegate {
         guard let itemView = carousel.itemView(at: carousel.currentItemIndex) as? TBMatikPhotoView else {
             return
         }
-        timelineButton.visibleState = itemView.hasImage ? .enabled : .disabled
+        
+        DispatchQueue.main.async {
+            self.timelineButton.visibleState = itemView.hasImage ? .enabled : .disabled
+        }
     }
 }
 

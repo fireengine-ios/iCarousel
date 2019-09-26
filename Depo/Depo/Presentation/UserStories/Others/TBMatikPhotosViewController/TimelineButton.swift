@@ -85,18 +85,19 @@ final class TimelineButton: UIButton {
         layer.borderWidth = 1
     }
     
+    private var rotationAngle: CGFloat = 0
     private func rotate() {
         guard visibleState == .photosPreparation else {
             return
         }
         
-        var currentAngle = atan2(loadingImage.transform.b, loadingImage.transform.a)
-        if currentAngle == .pi * 2 {
-            currentAngle = 0
+        if rotationAngle == .pi * 2 {
+            rotationAngle = 0
         }
+        rotationAngle += .pi
         
         UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-            self.loadingImage.transform = CGAffineTransform(rotationAngle: currentAngle + .pi)
+            self.loadingImage.transform = CGAffineTransform(rotationAngle: self.rotationAngle)
         }, completion: { [weak self] _ in
             self?.rotate()
         })
