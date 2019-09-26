@@ -77,10 +77,20 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
+    func tapChangeSecretQuestionButton() {
+        router.goToSetSecretQuestion(delegate: self)
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
     
+}
+
+extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
+    func didCloseSetSecurityQuestionViewController() {
+        interactor.updateUserInfo()
+    }
 }

@@ -21,9 +21,10 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     @IBOutlet private weak var emailDetailView: ProfileFieldView!
     @IBOutlet private weak var gsmDetailView: ProfileFieldView!
     @IBOutlet private weak var birthdayDetailView: ProfileBirthdayFieldView!
-    @IBOutlet private weak var passwordDetailView: ProfileFieldView!
     
-    @IBOutlet private weak var changePasswordButton: UIButton!
+    @IBOutlet weak var stackView: UIStackView!
+    
+    private let secretQuestionView = SetSecurityCredentialsView.initFromNib()
     
     //MARK: Vars
     private let keyboard = Typist.shared
@@ -59,16 +60,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        automaticallyAdjustsScrollViewInsets = false
         
-        let attributedString = NSAttributedString(string: TextConstants.userProfileChangePassword,
-                                                  attributes: [
-                                                    .font : UIFont.TurkcellSaturaMedFont(size: 15),
-                                                    .foregroundColor : UIColor.lrTealish,
-                                                    .underlineStyle : NSUnderlineStyle.styleSingle.rawValue
-            ])
-    
-        changePasswordButton.setAttributedTitle(attributedString, for: .normal)
+        automaticallyAdjustsScrollViewInsets = false
         
         setupFields()
         configureKeyboard()
@@ -122,8 +115,19 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             birthdayDetailView : gsmDetailView
         
         gsmDetailView.setupAsTurkcellGSMIfNeeded()
-        passwordDetailView.setupAsPassword()
         emailDetailView.setupAsEmail()
+        createSecretQuestionAndPasswordViews()
+    }
+    
+    private func createSecretQuestionAndPasswordViews() {
+        
+        let passwordView = SetSecurityCredentialsView.initFromNib()
+        passwordView.setupView(with: .password, title: TextConstants.userProfilePassword, description: "* * * * * * * * *", buttonTitle: TextConstants.userProfileChangePassword)
+        passwordView.delegate = self
+        stackView.insertArrangedSubview(passwordView, at: stackView.subviews.count)
+        
+        secretQuestionView.delegate = self
+        stackView.insertArrangedSubview(secretQuestionView, at: stackView.subviews.count)
     }
     
     private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
@@ -177,6 +181,40 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         gsmDetailView.configure(with: userInfo.phoneNumber, delegate: self)
         let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
         birthdayDetailView.configure(with: birthday, delegate: self)
+        configuresecretQuestionView(userInfo: userInfo)
+    }
+    
+    private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
+        
+        guard userInfo.hasSecurityQuestionInfo != nil else  {
+            assertionFailure()
+            return
+        }
+        
+        let buttonTitle = userInfo.hasSecurityQuestionInfo ?? false ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
+        
+        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle)
+
+        guard let questionId = userInfo.securityQuestionId else  {
+            return
+        }
+        
+        let accountService = AccountService()
+        accountService.getListOfSecretQuestions { [weak self] response in
+            switch response {
+            case .success( let questions):
+                guard let question = questions.first(where: { $0.id == questionId }) else {
+                    assertionFailure()
+                    return
+                }
+                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
+                
+            case .failed(_):
+                break
+                //This error is't handle
+            }
+        }
+        
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -189,11 +227,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     
     func endSaving() {
         navigationItem.rightBarButtonItem?.fixEnabledState()
-    }
-    
-    //MARK: Actions
-    @IBAction private func onChangePasswordTap(_ sender: Any) {
-        output.tapChangePasswordButton()
     }
     
     @objc private func onEditButtonAction() {
@@ -302,4 +335,14 @@ extension UserProfileViewController: UITextFieldDelegate {
     }
 }
 
+extension UserProfileViewController: SetSecurityCredentialsViewDelegate {
+    
+    func setNewPasswordTapped() {
+        output.tapChangePasswordButton()
+    }
+    
+    func setNewQuestionTapped() {
+        output.tapChangeSecretQuestionButton()
+    }
+}
 

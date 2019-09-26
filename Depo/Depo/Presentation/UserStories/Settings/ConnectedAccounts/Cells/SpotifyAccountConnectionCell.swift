@@ -56,6 +56,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         return dateFormatter
     }()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         service.delegates.add(self)
@@ -66,6 +68,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
         connectButton.isEnabled = false
         service.connectToSpotify(isSettingCell: true, completion: {
             self.connectButton.isEnabled = true

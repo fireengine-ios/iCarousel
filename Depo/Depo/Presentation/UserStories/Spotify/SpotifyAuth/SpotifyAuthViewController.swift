@@ -19,6 +19,7 @@ final class SpotifyAuthViewController: BaseViewController {
     private let webView = WKWebView()
     
     weak var delegate: SpotifyAuthViewControllerDelegate?
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: -
     
@@ -41,6 +42,7 @@ final class SpotifyAuthViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigation()
+        analyticsService.logScreen(screen: .spotifyAuthentification)
     }
     
     func loadWebView(with url: URL) {

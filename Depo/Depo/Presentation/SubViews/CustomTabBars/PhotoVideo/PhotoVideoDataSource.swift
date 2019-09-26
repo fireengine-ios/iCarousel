@@ -251,10 +251,10 @@ final class PhotoVideoDataSource: NSObject {
                         return
                     }
                     
-                    items.forEach({ mediaItem in
-                        autoreleasepool {
-                            self.lastWrapedObjects.append(WrapData(mediaItem: mediaItem))
-                        }
+                    assert(self.lastWrapedObjects.isEmpty, "lastWrapedObjects must be empty")
+                    self.lastWrapedObjects.removeAll()
+                    self.lastWrapedObjects.append(items.map {
+                        WrapData(mediaItem: $0)
                     })
                     
                     self.isConverting = false
@@ -273,28 +273,30 @@ final class PhotoVideoDataSource: NSObject {
                 return
             }
             
-            let ids = updatedIds + insertedIds
             guard !updatedIds.isEmpty || !insertedIds.isEmpty || !deletedIds.isEmpty else {
                 self.finishConverting(needSorting: false)
                 return
             }
             
-            deletedIds.forEach { id in
-                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
-            }
-            
-            updatedIds.forEach { id in
-                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
-            }
-            
-            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+            let idsToLoad = updatedIds + insertedIds
+            MediaItemOperationsService.shared.mediaItemsByIDs(ids: idsToLoad) { [weak self] items in
                 guard let self = self else {
                     return
                 }
                 
-                for mediaItem in items {
-                    let wrappedObject = WrapData(mediaItem: mediaItem)
-                    self.lastWrapedObjects.append(wrappedObject)
+                let idsToRemove = deletedIds + updatedIds
+            
+                self.lastWrapedObjects.modify { array in
+                    var array = array
+                    idsToRemove.forEach { id in
+                        array.removeAll(where: { $0.coreDataObjectId == id })
+                    }
+                    // seems like self.convertFetchedObjects() maybe performing simultaniously with this code
+                    // and exactly between removing and appending items, it may append its own elements
+                    // that is why we need to perform removeAll and append as an atomic operation
+                    array += items.map { WrapData(mediaItem: $0) }
+                    
+                    return array
                 }
                 
                 self.isMerging = false
