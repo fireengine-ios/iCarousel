@@ -187,6 +187,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
         
         guard userInfo.hasSecurityQuestionInfo != nil else  {
+            assertionFailure()
             return
         }
         
