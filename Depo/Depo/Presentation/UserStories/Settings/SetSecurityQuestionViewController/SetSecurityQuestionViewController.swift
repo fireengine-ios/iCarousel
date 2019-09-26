@@ -20,6 +20,7 @@ protocol SetSecurityQuestionViewControllerDelegate {
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
+    var delegate: SetSecurityQuestionViewControllerDelegate?
     
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
@@ -67,7 +68,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         return view
     }()
     
-    var delegate: SetSecurityQuestionViewControllerDelegate?
+    
     private lazy var answer = AnswerForSecretQuestion()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -120,6 +121,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                                 switch result {
                                                 case .success:
                                                 self.delegate?.didCloseSetSecurityQuestionViewController()
+                                                self.captchaView.captchaAnswerTextField.resignFirstResponder()
+                                                self.secretAnswerView.answerTextField.resignFirstResponder()
                                                     
                                                     
                                                 case .failure(let error):
@@ -127,6 +130,20 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
     
+    func configureWith(selectedQuestion: String?, delegate: SetSecurityQuestionViewControllerDelegate) {
+           self.delegate = delegate
+           setupDescriptionLabel(selectedQuestion: selectedQuestion)
+       }
+    
+    private func setupDescriptionLabel(selectedQuestion: String?) {
+        guard let question = selectedQuestion else {
+            return
+        }
+        
+        secretAnswerView.answerTextField.text = "* * * * * * * * *"
+        securityQuestionView.setQuestion(question: question)
+    }
+       
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
         let errorText = error.localizedDescription
         
@@ -173,6 +190,7 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
         
         answer.questionId = question.id
         securityQuestionView.setQuestion(question: question.text)
+        secretAnswerView.answerTextField.text = ""
         checkButtonStatus()
     }
     

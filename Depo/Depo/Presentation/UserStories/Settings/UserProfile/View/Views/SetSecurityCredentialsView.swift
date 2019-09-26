@@ -51,7 +51,7 @@ final class SetSecurityCredentialsView: UIView, NibInit {
             self.titleLabel.text = title
             self.descriptionLabel.text = description
             
-            self.descriptionLabel.textColor = type == .password ? UIColor.black : ColorConstants.lightText.withAlphaComponent(0.5)
+            self.descriptionLabel.textColor = type == .password ? UIColor.black : ColorConstants.placeholderGrayColor
             
             let attributedString = NSAttributedString(string: buttonTitle,
                                                       attributes: [
