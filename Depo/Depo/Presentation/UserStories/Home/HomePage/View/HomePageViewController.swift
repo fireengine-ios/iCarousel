@@ -170,10 +170,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     }
     
     func numberOfColumns() -> Int {
-        if Device.isIpad {
-            return 2
-        }
-        return 1
+        return Device.isIpad ? 2 : 1
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
