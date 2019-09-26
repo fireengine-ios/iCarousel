@@ -153,7 +153,7 @@ pipeline {
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
-                        sh "cd Depo; pod install"
+                        sh "cd Depo; pod install --repo-update"
                         xcodeBuild('test')
                         sh "find build -type d -name '*.dSYM' > dsymFiles"
                         sh "zip -@ build/dsym.zip < dsymFiles"
