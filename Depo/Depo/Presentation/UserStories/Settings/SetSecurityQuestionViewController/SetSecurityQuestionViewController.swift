@@ -133,6 +133,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         switch error {
         case .invalidCaptcha:
             captchaView.showErrorAnimated(text: errorText)
+            captchaView.updateCaptcha()
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
             secretAnswerView.showErrorAnimated(text: errorText)
