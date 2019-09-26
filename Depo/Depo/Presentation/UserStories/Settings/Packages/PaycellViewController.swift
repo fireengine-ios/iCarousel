@@ -48,6 +48,8 @@ final class PaycellViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        showSpinner()
         
         startPaycellProcess()
     }
@@ -100,4 +102,8 @@ final class PaycellViewController: UIViewController {
 
 extension PaycellViewController: WKNavigationDelegate {
     //TODO: check redirection here
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        hideSpinner()
+    }
 }

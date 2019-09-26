@@ -155,7 +155,7 @@ extension PackagesViewController: PackagesViewInput {
                 return
             }
         }
-        RouterVC().defaultTopController?.present(controller, animated: true, completion: {})
+        RouterVC().pushViewController(viewController: controller)
     }
 
     func setupStackView(with percentage: CGFloat) {

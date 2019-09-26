@@ -90,7 +90,6 @@ extension PackagesPresenter: PackagesViewOutput {
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
         case .paycellAllAccess?, .paycellSLCM?:
-            view?.startActivityIndicator()
             if let offerId = model.cpcmOfferId {
                 view?.showPaycellProcess(with: offerId)
             }
