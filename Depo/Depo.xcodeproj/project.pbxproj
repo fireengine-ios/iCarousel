@@ -731,6 +731,8 @@
 		89104BC822CBA039005B3F58 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
 		89104BC922CBA06F005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
+		8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
 		8921222E2303FFA400396ED0 /* EmailVerifiedPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */; };
 		892B014822DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
 		892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
@@ -758,6 +760,13 @@
 		8934DD6D23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
+		896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896133A823390D69000083B7 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3A22CA10F9007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3B22CA10FA007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
@@ -3276,18 +3285,6 @@
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
 		980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
-		980499C023336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
-		980499C123336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
-		980499C223336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */; };
-		980499C42333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
-		980499C52333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
-		980499C62333728300398AEF /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499C32333728300398AEF /* TBMatikPhotosViewController.xib */; };
-		980499C823337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
-		980499C923337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
-		980499CA23337B9400398AEF /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980499C723337B9400398AEF /* TBMatikPhotoView.swift */; };
-		980499CC23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
-		980499CD23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
-		980499CE23337BA300398AEF /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980499CB23337BA300398AEF /* TBMatikPhotoView.xib */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
@@ -3298,6 +3295,24 @@
 		9808A05F206A88580022376D /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A05D206A88580022376D /* PushNotificationService.swift */; };
 		9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		981642FA233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FC233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FD233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		981642FE233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		98164300233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164301233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164303233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164307233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164308233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
@@ -3453,12 +3468,6 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
-		98E06F94233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
-		98E06F95233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
-		98E06F96233B624D006A0327 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F92233B6249006A0327 /* TimelineButton.swift */; };
-		98E06F97233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
-		98E06F98233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
-		98E06F99233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -7201,6 +7210,9 @@
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
 		8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailVerifiedPopUp.xib; sourceTree = "<group>"; };
+		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
+		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
+		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
 		89E51D5C22CA2ECA007A7DBC /* CreateStoryPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryPopUp.swift; sourceTree = "<group>"; };
 		89E51D5D22CA2ECA007A7DBC /* CreateStoryPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPopUp.xib; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
@@ -8139,15 +8151,17 @@
 		97604D2835EA04E60222C769 /* Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProvider/Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
-		980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosViewController.swift; sourceTree = "<group>"; };
-		980499C32333728300398AEF /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
-		980499C723337B9400398AEF /* TBMatikPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBMatikPhotoView.swift; sourceTree = "<group>"; };
-		980499CB23337BA300398AEF /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		9808A05D206A88580022376D /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
 		9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceConstants.swift; sourceTree = "<group>"; };
+		981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotoView.swift; sourceTree = "<group>"; };
+		981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosViewController.swift; sourceTree = "<group>"; };
+		981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosBottomBarManager.swift; sourceTree = "<group>"; };
+		981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
+		981642F8233CE2D30070F8B9 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
+		981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
@@ -8213,8 +8227,6 @@
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
-		98E06F92233B6249006A0327 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
-		98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosBottomBarManager.swift; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -11536,6 +11548,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				897B8F372338B7170028C690 /* HomePagePopUpsService */,
 				173B144622F99F6000FAAC97 /* AccountWarningService */,
 				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
 				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
@@ -12007,6 +12020,23 @@
 				892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		896133A623390D4F000083B7 /* BasePopUpController */ = {
+			isa = PBXGroup;
+			children = (
+				896133A723390D69000083B7 /* BasePopUpController.swift */,
+			);
+			path = BasePopUpController;
+			sourceTree = "<group>";
+		};
+		897B8F372338B7170028C690 /* HomePagePopUpsService */ = {
+			isa = PBXGroup;
+			children = (
+				897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */,
+				896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */,
+			);
+			path = HomePagePopUpsService;
 			sourceTree = "<group>";
 		};
 		89E51D1B22CA0F0F007A7DBC /* Views */ = {
@@ -13674,19 +13704,6 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		980499BE23336CED00398AEF /* TBMatikPhotosViewController */ = {
-			isa = PBXGroup;
-			children = (
-				980499BF23336D3300398AEF /* TBMatikPhotosViewController.swift */,
-				980499C32333728300398AEF /* TBMatikPhotosViewController.xib */,
-				980499C723337B9400398AEF /* TBMatikPhotoView.swift */,
-				980499CB23337BA300398AEF /* TBMatikPhotoView.xib */,
-				98E06F93233B624A006A0327 /* TBMatikPhotosBottomBarManager.swift */,
-				98E06F92233B6249006A0327 /* TimelineButton.swift */,
-			);
-			path = TBMatikPhotosViewController;
-			sourceTree = "<group>";
-		};
 		9808A05C206A88090022376D /* PushNotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -13694,6 +13711,19 @@
 				9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */,
 			);
 			path = PushNotificationService;
+			sourceTree = "<group>";
+		};
+		981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */ = {
+			isa = PBXGroup;
+			children = (
+				981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */,
+				981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */,
+				981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */,
+				981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */,
+				981642F8233CE2D30070F8B9 /* TimelineButton.swift */,
+				981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */,
+			);
+			path = TBMatikPhotosViewController;
 			sourceTree = "<group>";
 		};
 		9826DB3D207F60BC00C00238 /* CustomScrollIndicator */ = {
@@ -14533,7 +14563,8 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				980499BE23336CED00398AEF /* TBMatikPhotosViewController */,
+				981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */,
+				896133A623390D4F000083B7 /* BasePopUpController */,
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
 				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
 				8E1FB4FF233366C000C8C40D /* CredsUpdateCheck */,
@@ -17469,7 +17500,6 @@
 				8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
-				980499C52333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AFCD2008AD71003D8E05 /* info_icon.png in Resources */,
 				8C06AFF12008AD71003D8E05 /* kirmizi.png in Resources */,
 				8C06B0432008AD71003D8E05 /* oval_beyaz@2x.png in Resources */,
@@ -17625,6 +17655,7 @@
 				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
+				9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				8C06B01D2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1712008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
@@ -17641,7 +17672,6 @@
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
 				B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
 				8C06B1B72008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
-				980499CD23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
 				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				8C06B1292008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
@@ -17859,6 +17889,7 @@
 				8C06B1072008AD72003D8E05 /* slider_thumb@2x.png in Resources */,
 				8C06B1C92008AD72003D8E05 /* sticker_close@2x.png in Resources */,
 				8C06B0812008AD71003D8E05 /* paylas_linkedin@3x.png in Resources */,
+				98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AFFB2008AD71003D8E05 /* kontrast_secili.png in Resources */,
 				8C06AFE32008AD71003D8E05 /* italic_secili@3x.png in Resources */,
 				8C06AF1D2008AD70003D8E05 /* cizgi_1_selected@2x.png in Resources */,
@@ -18216,6 +18247,7 @@
 				8C06B0862008AD71003D8E05 /* paylas_mail@3x.png in Resources */,
 				8C06B16C2008AD72003D8E05 /* toolbar_sekil_icon@2x.png in Resources */,
 				8C06B13A2008AD72003D8E05 /* tahta_yeni.png in Resources */,
+				98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				8C06AEFA2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06B17E2008AD72003D8E05 /* turuncu.png in Resources */,
 				8C06B00E2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
@@ -18267,7 +18299,6 @@
 				B50B4A6B220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				8C06B0AE2008AD71003D8E05 /* right@3x.png in Resources */,
 				8C06B0242008AD71003D8E05 /* ok@2x.png in Resources */,
-				980499CC23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */,
 				A2EF976421EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				8C06AF6C2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
@@ -18329,6 +18360,7 @@
 				8C06AED62008AD70003D8E05 /* bold@2x.png in Resources */,
 				8C06B1382008AD72003D8E05 /* t_orta_selected@3x.png in Resources */,
 				7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */,
+				98164303233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AF142008AD70003D8E05 /* cizgi_1.png in Resources */,
 				737A2EA52338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				8C06AEBC2008AD70003D8E05 /* alt_cizgili.png in Resources */,
@@ -18475,7 +18507,6 @@
 				CEBBDE0D1F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C06B17A2008AD72003D8E05 /* topright@2x.png in Resources */,
 				8C06B0762008AD71003D8E05 /* paylas_kaydet.png in Resources */,
-				980499C42333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				8C06B07C2008AD71003D8E05 /* paylas_linkedin.png in Resources */,
 				8C06B0782008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
 				8C06AFF82008AD71003D8E05 /* kontrast@2x.png in Resources */,
@@ -18950,7 +18981,6 @@
 				CE784D3F22A685FB00662219 /* crop_icon.png in Resources */,
 				CE784D4022A685FB00662219 /* polaroid_yeni.png in Resources */,
 				CE784D4222A685FB00662219 /* yesil.png in Resources */,
-				980499C62333728300398AEF /* TBMatikPhotosViewController.xib in Resources */,
 				CE784D4322A685FB00662219 /* Buyuk_Selected@3x.png in Resources */,
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
 				CE784D4522A685FB00662219 /* CaptchaViewController.xib in Resources */,
@@ -19106,6 +19136,7 @@
 				CE784DD322A685FB00662219 /* vintage.png in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
 				CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
+				9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
@@ -19122,7 +19153,6 @@
 				CE784DE222A685FB00662219 /* edit.png in Resources */,
 				CE784DE322A685FB00662219 /* kup.png in Resources */,
 				CE784DE422A685FB00662219 /* TurkcellSaturaMedIta.ttf in Resources */,
-				980499CE23337BA300398AEF /* TBMatikPhotoView.xib in Resources */,
 				CE784DE522A685FB00662219 /* topright@2x.png in Resources */,
 				CE784DE622A685FB00662219 /* paylas_kaydet.png in Resources */,
 				CE784DE722A685FB00662219 /* paylas_linkedin.png in Resources */,
@@ -19340,6 +19370,7 @@
 				CE784EAF22A685FB00662219 /* caps2_selected.png in Resources */,
 				CE784EB022A685FB00662219 /* SettingsViewController.xib in Resources */,
 				CE784EB122A685FB00662219 /* underline@2x.png in Resources */,
+				98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				CE784EB222A685FB00662219 /* lifebox.png in Resources */,
 				CE784EB322A685FB00662219 /* error_icon@2x.png in Resources */,
 				CE784EB422A685FB00662219 /* PackagePremiumView.xib in Resources */,
@@ -20231,6 +20262,7 @@
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
+				897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -20260,6 +20292,7 @@
 				B56FBB2F2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				92004B6421AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				73FE51F222CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
+				98164301233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				173B144922F99F6100FAAC97 /* AccountWarningService.swift in Sources */,
@@ -20404,7 +20437,6 @@
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
-				98E06F95233B624D006A0327 /* TimelineButton.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
 				8C0B91A620170EA800A5BA81 /* ManageContactsViewInput.swift in Sources */,
 				4A6DBE8721A6F9140003D1B4 /* PackagePremiumView.swift in Sources */,
@@ -20498,6 +20530,7 @@
 				92004B6A21AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				8CDB21EA20AC0FB700739700 /* UINavigationController+Push.swift in Sources */,
 				8C0E8D301FDEBDFF00789C91 /* LocalAlbumPresenter.swift in Sources */,
+				981642FE233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */,
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
@@ -20589,6 +20622,7 @@
 				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
+				896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
 				CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
@@ -20615,7 +20649,6 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
-				98E06F98233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				8C0E8D9E1FDEBDFF00789C91 /* AutoSyncDataSource.swift in Sources */,
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
@@ -20904,11 +20937,13 @@
 				8C0E8E5D1FDEBDFF00789C91 /* UserProfileConfigurator.swift in Sources */,
 				8C0B91AA20170EB400A5BA81 /* ManageContactsModuleInput.swift in Sources */,
 				8C0E8E5E1FDEBDFF00789C91 /* LocalAlbumConfigurator.swift in Sources */,
+				8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */,
 				4AD1A81B208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
 				4A0AC13F2087371A00032CC7 /* PeriodicContactSyncInteractor.swift in Sources */,
 				8C06AC0920066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */,
 				8C0E8E621FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
+				98164307233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
@@ -21062,7 +21097,6 @@
 				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
-				980499C123336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				8C0E8EF11FDEBDFF00789C91 /* UserInfoSubViewViewOutput.swift in Sources */,
 				CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */,
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
@@ -21133,7 +21167,6 @@
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
-				980499C923337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				A217E44721A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
@@ -21221,6 +21254,7 @@
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
+				981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
 				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
@@ -21929,7 +21963,6 @@
 				CE4363411F6FC43F004724BF /* ActivitiesByDay.swift in Sources */,
 				CE4363421F6FC43F004724BF /* ActivitiesByMinutesAndType.swift in Sources */,
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
-				980499C823337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
 				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
@@ -22027,6 +22060,7 @@
 				73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				92004B5721AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
+				896133A823390D69000083B7 /* BasePopUpController.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
@@ -22353,7 +22387,6 @@
 				A2079908219F134B00AD5037 /* PremiumRouter.swift in Sources */,
 				9219B19A21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				8C208684228D513E000BEDAD /* Watchdog.swift in Sources */,
-				98E06F97233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				73A63F6922B240310062DDE5 /* TermsAndPolicyViewController.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
@@ -22461,7 +22494,6 @@
 				B53DCE9420EF634900400DBA /* SyncSettings.m in Sources */,
 				7CDABD091F1E3A6300C8CC16 /* UserProfileInteractorOutput.swift in Sources */,
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
-				980499C023336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */,
 				CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */,
 				A2268EBD21A68BBC002F2611 /* LeavePremiumView.swift in Sources */,
@@ -22497,6 +22529,7 @@
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				B50B4A69220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
+				897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				B56FBB3A2122C9AA004F4A59 /* TermsOfUseViewInput.swift in Sources */,
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
@@ -22707,6 +22740,7 @@
 				B56FBB222122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
+				981642FD233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */,
 				4A56D5CD202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
@@ -22746,6 +22780,7 @@
 				7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */,
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				A217E43421A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
+				98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
@@ -22854,6 +22889,7 @@
 				B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */,
 				B5AB5B5621F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
+				981642FA233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
 				B53DCE9020EF634900400DBA /* ContactUtil.m in Sources */,
@@ -22956,6 +22992,7 @@
 				9224936821BC14890086CB6A /* AuthorityType.swift in Sources */,
 				7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				66B07DFECFC39B41382FF00D /* FileInfoInteractorOutput.swift in Sources */,
+				98164300233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				23C013C53919B6111BA5B06C /* FileInfoInteractor.swift in Sources */,
 				8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */,
 				F87A7C545D69A5A04B6C19BF /* FileInfoRouterInput.swift in Sources */,
@@ -23060,7 +23097,6 @@
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
-				98E06F94233B624D006A0327 /* TimelineButton.swift in Sources */,
 				8C208647228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
@@ -23188,6 +23224,7 @@
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
+				896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
@@ -23356,6 +23393,7 @@
 				8C1E5BDB22CB8C09008FDA02 /* PhotoVideoCollectionViewManager.swift in Sources */,
 				73EA16FE22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
+				897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
 				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
@@ -23568,6 +23606,7 @@
 				8E26D97E2306999500D08123 /* MusicViewController.swift in Sources */,
 				CE78490122A685FB00662219 /* SegmentedController.swift in Sources */,
 				CE78490222A685FB00662219 /* RegistrationDataSource.swift in Sources */,
+				981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				CE78490422A685FB00662219 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE78490522A685FB00662219 /* PremiumInteractorInput.swift in Sources */,
@@ -23590,7 +23629,6 @@
 				8C1E5BE922CB8CE0008FDA02 /* NSManagedObject+Extensions.swift in Sources */,
 				CE78491422A685FB00662219 /* DuplicatedContactsInteractor.swift in Sources */,
 				CE78491522A685FB00662219 /* ConnectWithInstaView.swift in Sources */,
-				98E06F99233B624D006A0327 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE78491622A685FB00662219 /* UIViewController+NavBar.swift in Sources */,
 				CE78491722A685FB00662219 /* SwiftyJSONExtension.swift in Sources */,
 				CE78491822A685FB00662219 /* ContactDevice.m in Sources */,
@@ -23748,7 +23786,6 @@
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
 				989BDE4822F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
-				98E06F96233B624D006A0327 /* TimelineButton.swift in Sources */,
 				CE7849A722A685FB00662219 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				8C86111022BCF28100108958 /* TermsAndPolicyViewController.swift in Sources */,
 				CE7849A822A685FB00662219 /* InstaPickBigPhotoView.swift in Sources */,
@@ -23778,13 +23815,13 @@
 				CE7849C122A685FB00662219 /* RegistrationInitializer.swift in Sources */,
 				CE7849C222A685FB00662219 /* HelpAndSupportInteractorInput.swift in Sources */,
 				CE7849C322A685FB00662219 /* ManageContactsModels.swift in Sources */,
-				980499CA23337B9400398AEF /* TBMatikPhotoView.swift in Sources */,
 				CE7849C422A685FB00662219 /* TermsAndServicesViewInput.swift in Sources */,
 				CE7849C522A685FB00662219 /* MenloworksTagsConstants.swift in Sources */,
 				CE7849C722A685FB00662219 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				CE7849C822A685FB00662219 /* AlbumService.swift in Sources */,
 				CE7849C922A685FB00662219 /* TermsAndServicesViewOutput.swift in Sources */,
 				CE7849CA22A685FB00662219 /* PackagesInteractorOutput.swift in Sources */,
+				981642FC233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				CE7849CB22A685FB00662219 /* PeriodicContactSyncRouter.swift in Sources */,
 				CE7849CC22A685FB00662219 /* TermsAndServicesViewController.swift in Sources */,
 				CE7849CD22A685FB00662219 /* LoginSettingsConfigurator.swift in Sources */,
@@ -23857,12 +23894,14 @@
 				CE784A0C22A685FB00662219 /* AnimationFlowManager.swift in Sources */,
 				CE784A0D22A685FB00662219 /* PhotoSelectionController.swift in Sources */,
 				CE784A0E22A685FB00662219 /* TransparentGradientView.swift in Sources */,
+				896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CE784A0F22A685FB00662219 /* UINavigationBarExtension.swift in Sources */,
 				CE784A1022A685FB00662219 /* UsageInfoViewOutput.swift in Sources */,
 				CE784A1122A685FB00662219 /* IntroduceInitializer.swift in Sources */,
 				CE784A1222A685FB00662219 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE784A1322A685FB00662219 /* ImportPhotosViewOutput.swift in Sources */,
 				CE784A1422A685FB00662219 /* FaceImagePhotosInteractorInput.swift in Sources */,
+				98164308233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				CE784A1522A685FB00662219 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE784A1622A685FB00662219 /* AccountService.swift in Sources */,
 				CE784A1722A685FB00662219 /* TermsOfUseViewInput.swift in Sources */,
@@ -23900,7 +23939,6 @@
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE784A3722A685FB00662219 /* PhoneVerificationInteractorOutput.swift in Sources */,
-				980499C223336D3300398AEF /* TBMatikPhotosViewController.swift in Sources */,
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
@@ -24001,6 +24039,7 @@
 				CE784A9922A685FB00662219 /* UserProfileConfigurator.swift in Sources */,
 				CE784A9A22A685FB00662219 /* LocalAlbumConfigurator.swift in Sources */,
 				CE784A9B22A685FB00662219 /* ItemOperationManager.swift in Sources */,
+				8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */,
 				CE784A9C22A685FB00662219 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				8E26D9902306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				8C1E5BD522CB8BB4008FDA02 /* AssetFileCacheManager.swift in Sources */,
@@ -24402,6 +24441,7 @@
 				CE784C1122A685FB00662219 /* SearchDataSource.swift in Sources */,
 				CE784C1222A685FB00662219 /* ContactSyncSDK.m in Sources */,
 				CE784C1322A685FB00662219 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
+				98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE784C1422A685FB00662219 /* SelectNameRouterInput.swift in Sources */,
 				CE784C1522A685FB00662219 /* PackagesRouterInput.swift in Sources */,
 				CE784C1622A685FB00662219 /* SelectNameRouter.swift in Sources */,

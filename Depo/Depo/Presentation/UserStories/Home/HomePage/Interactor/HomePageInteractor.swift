@@ -7,7 +7,7 @@
 //
 
 
-class HomePageInteractor: HomePageInteractorInput {
+final class HomePageInteractor: HomePageInteractorInput {
 
     private enum RefreshStatus {
         case reloadAll
@@ -27,7 +27,7 @@ class HomePageInteractor: HomePageInteractorInput {
         self.output.fillCollectionView(isReloadAll: isReloadAll)
     }
 
-    func homePagePresented() {
+    func viewIsReady() {
         FreeAppSpace.session.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
@@ -66,6 +66,7 @@ class HomePageInteractor: HomePageInteractorInput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
             DispatchQueue.toMain {
                 self?.output.verifyEmailIfNeeded()
+                self?.output.credsCheckUpdateIfNeeded()
             }
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
@@ -118,7 +119,7 @@ class HomePageInteractor: HomePageInteractorInput {
                 })
                 
                 if self?.isShowPopupAboutPremium == true {
-                    self?.output.didShowPopupAboutPremium()
+                    self?.output.showPopupAboutPremiumIfNeeded()
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):
@@ -151,7 +152,7 @@ class HomePageInteractor: HomePageInteractorInput {
         getQuotaInfo()
     }
     
-    func getQuotaInfo() {
+    private func getQuotaInfo() {
         AccountService().quotaInfo(success: { [weak self] response in
             DispatchQueue.toMain {
                 if let qresponce = response as? QuotaInfoResponse {
@@ -186,7 +187,10 @@ class HomePageInteractor: HomePageInteractorInput {
         } else {
             return
         }
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .quota,
+                                            eventLabel: .quotaUsed(quotaUsed))
     }
     
 }
