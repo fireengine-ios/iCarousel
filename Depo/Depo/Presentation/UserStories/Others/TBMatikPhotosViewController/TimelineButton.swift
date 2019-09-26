@@ -22,16 +22,19 @@ final class TimelineButton: UIButton {
             switch visibleState {
             case .enabled:
                 layer.borderColor = borderColor.cgColor
-                label.alpha = 1
+                timeLineLabel.alpha = 1
                 loadingImage.isHidden = true
+                isUserInteractionEnabled = true
             case .disabled:
                 layer.borderColor = borderColor.withAlphaComponent(0.5).cgColor
-                label.alpha = 0.5
+                timeLineLabel.alpha = 0.5
                 loadingImage.isHidden = true
+                isUserInteractionEnabled = false
             case .photosPreparation:
                 layer.borderColor = borderColor.withAlphaComponent(0.5).cgColor
-                label.alpha = 0.5
+                timeLineLabel.alpha = 0.5
                 loadingImage.isHidden = false
+                isUserInteractionEnabled = false
                 rotate()
             }
         }
@@ -44,12 +47,20 @@ final class TimelineButton: UIButton {
     }
     
     private let loadingImage = UIImageView(image: UIImage(named: "timelineLoadingIcon"))
-    private let label = UILabel()
+    private let timeLineLabel = UILabel()
     private var timer: Timer?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
         setTitle(nil, for: .normal)
         setImage(nil, for: .normal)
         
@@ -70,14 +81,14 @@ final class TimelineButton: UIButton {
         loadingImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
         loadingImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
-        label.text = TextConstants.TBMatic.Photos.seeTimeline
-        label.textColor = .white
-        label.backgroundColor = .clear
-        label.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        label.lineBreakMode = .byWordWrapping
-        stackView.addArrangedSubview(label)
+        timeLineLabel.text = TextConstants.tbMaticPhotosSeeTimeline
+        timeLineLabel.textColor = .white
+        timeLineLabel.backgroundColor = .clear
+        timeLineLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        timeLineLabel.textAlignment = .center
+        timeLineLabel.numberOfLines = 2
+        timeLineLabel.lineBreakMode = .byWordWrapping
+        stackView.addArrangedSubview(timeLineLabel)
         
         layer.masksToBounds = true
         layer.cornerRadius = bounds.height * 0.5
