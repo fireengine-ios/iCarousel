@@ -273,7 +273,7 @@ final class SpotifyRoutingService: NSObject {
         controller.present(popup, animated: true)
     }
     
-    private func importAnalytics(playlists: [SpotifyPlaylist], result: ResponseResult<SpotifyStatus>?) {
+    private func importAnalytics(playlists: [SpotifyPlaylist], result: ResponseResult<SpotifyStatus>) {
         var trackCount = 0
         for playlist in playlists {
             trackCount += playlist.count
@@ -288,8 +288,6 @@ final class SpotifyRoutingService: NSObject {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
             self.analyticsService.trackImportEvent(error: .networkError)
             self.analyticsService.trackImportEvent(error: .importError)
-        case .none:
-            break
         }
     }
 }
