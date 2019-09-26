@@ -223,6 +223,7 @@ final class PhotoVideoDataSource: NSObject {
                         return
                     }
                     
+                    assert(self.lastWrapedObjects.isEmpty, "lastWrapedObjects must be empty")
                     self.lastWrapedObjects.removeAll()
                     self.lastWrapedObjects.append(items.map {
                         WrapData(mediaItem: $0)
