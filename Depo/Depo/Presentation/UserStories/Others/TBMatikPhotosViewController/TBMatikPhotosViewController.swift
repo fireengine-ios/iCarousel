@@ -87,6 +87,8 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.layer.masksToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
+            newValue.isEnabled = false
+            newValue.alpha = 0.5
         }
     }
     
@@ -150,8 +152,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             
         pageControl.numberOfPages = uuids.count
         setupCarousel()
-        
-        setTitle(with: nil)
+        updateTitle()
         
         if !cacheManager.isCacheActualized {
             cacheManager.delegates.add(self)
@@ -159,7 +160,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         } else {
             timelineButton.visibleState = .disabled
         }
-        shareButton.isEnabled = false
     }
     
     private func setupCarousel() {
@@ -185,13 +185,15 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         })
     }
     
-    private func setTitle(with date: Date?) {
+    private func updateTitle() {
         let dateString: String
-        if let date = date {
+        
+        if let date = currentItem?.creationDate {
             dateString = dateFormatter.string(from: date)
         } else {
             dateString = ""
         }
+        
         titleLabel.text = String(format: TextConstants.tbMaticPhotosTitle, dateString)
     }
     
@@ -244,22 +246,25 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         itemView.tag = index
         
         itemView.setImageHandler = { [weak self] in
-            self?.completeLoadingImage(for: itemView)
+            self?.updateButtonsState(for: itemView)
         }
         
         return itemView
     }
     
-    private func completeLoadingImage(for view: TBMatikPhotoView) {
+    private func updateButtonsState(for view: TBMatikPhotoView) {
         guard view.tag == carousel.currentItemIndex else {
             return
         }
         
-        if view.hasImage && cacheManager.isCacheActualized {
-            timelineButton.visibleState = .enabled
+        if cacheManager.isCacheActualized {
+            timelineButton.visibleState = view.hasImage ? .enabled : .disabled
+        } else {
+            timelineButton.visibleState = .photosPreparation
         }
         
         shareButton.isEnabled = view.hasImage
+        shareButton.alpha = shareButton.isEnabled ? 1 : 0.5
     }
 }
 
@@ -275,14 +280,16 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         pageControl.currentPage = carousel.currentItemIndex
-        if let item = currentItem {
-            setTitle(with: item.creationDate)
-        }
-    
+        updateTitle()
+
         carousel.visibleItemViews.forEach { view in
             if let itemView = view as? TBMatikPhotoView {
                 itemView.needShowShadow = itemView.tag == carousel.currentItemIndex
             }
+        }
+        
+        if let currentView = carousel.currentItemView as? TBMatikPhotoView {
+            updateButtonsState(for: currentView)
         }
     }
 }

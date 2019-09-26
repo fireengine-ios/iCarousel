@@ -35,7 +35,7 @@ final class TimelineButton: UIButton {
                 timeLineLabel.alpha = 0.5
                 loadingImage.isHidden = false
                 isUserInteractionEnabled = false
-                rotate()
+                startRotate()
             }
         }
     }
@@ -97,11 +97,20 @@ final class TimelineButton: UIButton {
     }
     
     private var rotationAngle: CGFloat = 0
+    private var isRotating = false
+    private func startRotate() {
+        if !isRotating {
+            rotate()
+        }
+    }
+    
     private func rotate() {
         guard visibleState == .photosPreparation else {
+            isRotating = false
             return
         }
         
+        isRotating = true
         if rotationAngle == .pi * 2 {
             rotationAngle = 0
         }
