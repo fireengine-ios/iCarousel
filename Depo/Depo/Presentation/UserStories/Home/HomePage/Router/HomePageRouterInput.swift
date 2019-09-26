@@ -28,6 +28,8 @@ protocol HomePageRouterInput {
     
     func presentEmailVerificationPopUp(delegate: VerifyEmailPopUpDelegate)
     
+    func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse)
+    
     func showError(errorMessage: String)
     
     func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?)

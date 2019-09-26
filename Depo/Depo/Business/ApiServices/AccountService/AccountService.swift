@@ -20,6 +20,10 @@ protocol AccountServicePrl {
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
+    
+    private enum Keys {
+        static let serverValue = "value"
+    }
  
     func info(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService info")
@@ -394,6 +398,65 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
         }
     }
+    
+    func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
+        let request = String(format: RouteRequests.Account.getSecurityQuestion.absoluteString, Device.supportedLocale)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData(completionHandler: { response in
+
+                switch response.result {
+                    
+                case .success(let data):
+                    
+                    let questions = JSON(data)[Keys.serverValue].arrayValue.compactMap { SecretQuestionsResponse(json: $0)}
+                    handler(.success(questions))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func updateSecurityQuestion(questionId: Int,
+                                securityQuestionAnswer: String,
+                                captchaId: String,
+                                captchaAnswer: String,
+                                handler: @escaping (ErrorResult<Void, SetSecretQuestionErrors>) -> Void) {
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        let params: Parameters = ["securityQuestionId": questionId,
+                                  "securityQuestionAnswer": securityQuestionAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updateSecurityQuestion,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .response { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                    
+                    let backendError: SetSecretQuestionErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "SEQURITY_QUESTION_ID_IS_INVALID":
+                        backendError = .invalidId
+                    case "SEQURITY_QUESTION_ANSWER_IS_INVALID":
+                        backendError = .invalidAnswer
+                    default:
+                        backendError = .unknown
+                    }
+                    handler(.failure(backendError))
+                }
+            }
+        }
     
     /// repeat is key word of Swift
     func updatePassword(oldPassword: String,

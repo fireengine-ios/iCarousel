@@ -27,7 +27,8 @@ final class PremiumPresenter {
     
     private var optInVC: OptInController?
     private var referenceToken = ""
-    private var feature: PackageModelResponse?
+    private var featureToBuy: PackageModelResponse?
+    private var features = [PackageModelResponse]()
     private var availableOffer: PackageOffer?
     
     private let paymentTypes: [FeaturePackageType] = [.SLCMFeature, .appleFeature, .paycellSLCMFeature, .allAccessPaycellFeature]
@@ -49,7 +50,7 @@ final class PremiumPresenter {
             self?.userPhone = userInfoResponse.fullPhoneNumber
             DispatchQueue.toMain {
                 self?.view.startActivityIndicator()
-                guard let offer = self?.feature else {
+                guard let offer = self?.featureToBuy else {
                     self?.failed(with: "Couldn't get feature offer for this authority type")
                     return
                 }
@@ -68,10 +69,11 @@ final class PremiumPresenter {
         var price: String?
         let description: String
         
-        if let offer = feature {
+        if let offer = features.first {
             price = interactor.getPriceInfo(for: offer, accountType: accountType)
             description = String(format: TextConstants.useFollowingPremiumMembership, price ?? "")
         } else {
+            /// server sent us nothing. we should have at least one feature.
             description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
             alertText = description
         }
@@ -81,17 +83,13 @@ final class PremiumPresenter {
     }
     
     private func prepareForPurchase() {
-        guard let offer = feature else {
+        guard let plan = availableOffer else {
+            /// server sent us nothing. we should have availableOffer. will be nil if features is empty.
             router.showNoDetailsAlert(with: alertText)
             return
         }
-        if let plan = availableOffer, let type = offer.featureType, type.isContained(in: paymentTypes) {
-            let paymentModel = makePaymentModel(plan: plan)
-            router.presentPaymentPopUp(paymentModel: paymentModel)
-        } else {
-            let price = interactor.getPriceInfo(for: offer, accountType: accountType)
-            router.showActivateOfferAlert(with: offer.displayName ?? "", text: price, delegate: self)
-        }
+        let paymentModel = makePaymentModel(plan: plan)
+        router.presentPaymentPopUp(paymentModel: paymentModel)
     }
     
     private func makePaymentModel(plan: PackageOffer) -> PaymentModel? {
@@ -117,17 +115,52 @@ final class PremiumPresenter {
                 assertionFailure()
                 return
             }
-            
-            if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
-                MenloworksAppEvents.onSubscriptionClicked(tag)
-            }
-            
-            if let packageModel = subscriptionPlan.model as? PackageModelResponse {
-                self?.view.startActivityIndicator()
-                self?.interactor.activate(offer: packageModel)
-            }
+            self?.didPressOn(plan: subscriptionPlan)
         })
+    }
+    
+    private func didPressOn(plan: SubscriptionPlan) {
+        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
+            MenloworksAppEvents.onSubscriptionClicked(tag)
+        }
         
+        router.closePaymentPopUpController(closeAction: { [weak self] in
+            self?.actionFor(plan: plan)
+        })
+    }
+    
+    private func actionFor(plan: SubscriptionPlan) {
+        guard let model = plan.model as? PackageModelResponse else {
+            assertionFailure()
+            return
+        }
+        
+        featureToBuy = model
+        
+        switch model.featureType {
+        case .SLCMFeature?:
+            view.startActivityIndicator()
+            buy()
+            
+        case .appleFeature?:
+            view.startActivityIndicator()
+            interactor.activate(offer: model)
+            
+        case .paycellAllAccessFeature?:
+            // TODO: uncomment
+            //view?.startActivityIndicator()
+            print("all access")
+            
+        case .paycellSLCMFeature?:
+            // TODO: uncomment
+            //view?.startActivityIndicator()
+            print("paycellSLCM")
+            
+        default:
+            assertionFailure("should not be another purchase options")
+            let error = CustomErrors.serverError("This is not buyable offer type")
+            failed(with: error.localizedDescription)
+        }
     }
     
     private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, name: String ) -> SubscriptionPlan?  {
@@ -139,12 +172,6 @@ final class PremiumPresenter {
         }
     }
     
-    private func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
-        return Dictionary(grouping: offers, by: { $0.quota })
-            .compactMap { dict in
-                    return PackageOffer(quotaNumber: dict.key, offers: dict.value)
-            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
-    }
 }
 
 // MARK: - PremiumViewOutput
@@ -169,25 +196,26 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        feature = allFeatures.first(where: { feature in
+        features = allFeatures.filter { feature in
             var isShouldPass = feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
             if accountType == .turkcell {
                 isShouldPass = isShouldPass && feature.featureType?.isContained(in: paymentTypes) == true
             }
-
             return isShouldPass
-        })
+        }
         
-        guard let neededFeature = feature else {
+        features = features
+            .filter { $0.featureType.isContained(in: paymentTypes) }
+            .sorted { $0.price ?? 0 < $1.price ?? 0 }
+        
+        guard features.hasItems else {
             switchToTextWithoutPrice(isError: false)
+            /// maybe will be need. clear if all tests will be done by QA
+            //displayFeatureInfo()
             return
         }
-
-        if neededFeature.featureType.isContained(in: paymentTypes) {
-            interactor.getInfoForAppleProducts(offer: neededFeature)
-        } else {
-            displayFeatureInfo()
-        }
+        
+        interactor.getInfoForAppleProducts(offers: features)
     }
     
     func successed(tokenForOffer: String) {
@@ -217,10 +245,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         }
     }
     
-    func successedGotAppleInfo(offer: PackageModelResponse) {
+    func successedGotAppleInfo(offers: [PackageModelResponse]) {
         displayFeatureInfo()
-        let offers = interactor.convertToSubscriptionPlan(offer: offer, accountType: accountType)
-        availableOffer = filterPackagesByQuota(offers: offers).first
+        let offers = interactor.convertToSubscriptionPlan(offers: offers, accountType: accountType)
+        availableOffer = PackageOffer(quotaNumber: 0, offers: offers)
     }
     
     //MARK: Fail
@@ -264,7 +292,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
         optInVC.startLoading()
         self.optInVC = optInVC
-        guard let offer = feature else {
+        guard let offer = featureToBuy else {
             self.failed(with: "Couldn't get feature offer for this authority type")
             return
         }
@@ -284,7 +312,7 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startLoading()
         self.optInVC = optInVC
-        guard let offer = feature else {
+        guard let offer = featureToBuy else {
             self.failed(with: "Couldn't get feature offer for this authority type")
             return
         }

@@ -107,7 +107,7 @@ final class EmailVerifiedPopUp: UIViewController {
 //MARK: - Init
 extension EmailVerifiedPopUp {
     
-    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler?) -> EmailVerifiedPopUp {
+    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler? = nil) -> EmailVerifiedPopUp {
         let controller = EmailVerifiedPopUp()
         
         controller.image = image

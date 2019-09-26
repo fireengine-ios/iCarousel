@@ -33,6 +33,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
     private lazy var threeDotsManager = SpotifyThreeDotMenuManager(delegate: self)
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var router = RouterVC()
     private var page = 0
     private let pageSize = 20
@@ -137,6 +138,8 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
             switch result {
             case .success(_):
                 self.dataSource.remove(items) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete, eventLabel: .importSpotifyTrack)
+                    self.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyImportPlaylistDetails, trackNumber: trackIds.count)
                     self.hideSpinner()
                     self.playlist?.count -= items.count
                     self.navbarManager.playlist = self.playlist
