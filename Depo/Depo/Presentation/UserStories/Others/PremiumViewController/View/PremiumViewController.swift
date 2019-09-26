@@ -58,6 +58,20 @@ extension PremiumViewController: PremiumViewInput {
                               isNeedPolicy: isNeedPolicy,
                               isTurkcell: output.accountType == .turkcell)
     }
+    
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.createController(with: cpcmOfferId) { [weak self] result in
+            switch result {
+            case .success(let completed):
+                if completed {
+                    //close payment popup
+                }
+            case .failure(_):
+                return
+            }
+        }
+        RouterVC().pushViewController(viewController: controller)
+    }
 }
 
 // MARK: - ActivityIndicator
