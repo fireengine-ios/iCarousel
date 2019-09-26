@@ -81,11 +81,10 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     @IBOutlet private weak var shareButton: UIButton! {
         willSet {
             newValue.addTarget(self, action: #selector(share), for: .touchUpInside)
-            newValue.setTitle(TextConstants.TBMatic.Photos.share, for: .normal)
+            newValue.setTitle(TextConstants.tbMaticPhotosShare, for: .normal)
             newValue.setTitleColor(ColorConstants.blueGreen, for: .normal)
             newValue.backgroundColor = .white
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.titleLabel?.textAlignment = .center
             newValue.layer.masksToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
         }
@@ -193,7 +192,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         } else {
             dateString = ""
         }
-        titleLabel.text = String(format: TextConstants.TBMatic.Photos.title, dateString)
+        titleLabel.text = String(format: TextConstants.tbMaticPhotosTitle, dateString)
     }
     
     // MARK: - Actions
@@ -269,7 +268,7 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
 extension TBMatikPhotosViewController: iCarouselDelegate {
 
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let spacing = 1 + Constants.itemSpacing/carousel.bounds.width
+        let spacing = 1 + Constants.itemSpacing / carousel.bounds.width
         let x = offset * spacing * carousel.itemWidth
         return CATransform3DTranslate(transform, x, 0, 0)
     }

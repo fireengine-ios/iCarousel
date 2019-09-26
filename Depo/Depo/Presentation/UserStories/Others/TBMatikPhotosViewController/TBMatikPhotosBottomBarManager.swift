@@ -24,7 +24,7 @@ final class TBMatikPhotosBottomBarManager {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
         let botvarBarVC = bottomBarVCmodule.setupModule(config: tbmatikBottomBarConfig, settablePresenter: bottomBarPresenter)

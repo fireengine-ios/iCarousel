@@ -24,14 +24,14 @@ final class TBMatikPhotoView: UIView, NibInit {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .center
             
-            let text = TextConstants.TBMatic.Photos.noPhotoText
+            let text = TextConstants.tbMaticPhotosNoPhotoText
             let attributedString = NSMutableAttributedString(string: text,
                                                              attributes: [.font: UIFont.TurkcellSaturaFont(size: 20),
                                                                           .foregroundColor: UIColor.lrBrownishGrey,
                                                                           .paragraphStyle: paragraphStyle])
             
             
-            let range = (text as NSString).range(of: TextConstants.TBMatic.Photos.noPhotoBoldText)
+            let range = (text as NSString).range(of: TextConstants.tbMaticPhotosNoPhotoBoldText)
             if range.location != NSNotFound {
                 attributedString.setAttributes([.font: UIFont.TurkcellSaturaBolFont(size: 20),
                                                 .foregroundColor: UIColor.lrBrownishGrey,
@@ -109,7 +109,7 @@ final class TBMatikPhotoView: UIView, NibInit {
             }
             
             DispatchQueue.main.async {
-                guard let image = image, let uuid = self.uuid, uuid == uniqueId else {
+                guard let image = image, self.uuid == uniqueId else {
                     self.setImage(nil)
                     return
                 }

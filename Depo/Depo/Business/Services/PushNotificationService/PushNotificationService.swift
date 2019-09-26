@@ -341,6 +341,7 @@ final class PushNotificationService {
     
     private func openTBMaticPhotos(_ uuids: String?) {
         guard let uuids = uuids?.components(separatedBy: ",") else {
+            assertionFailure()
             return
         }
         

@@ -51,7 +51,7 @@ final class PhotoVideoDataSource: NSObject {
     private var isConverting = false
     private var isMerging = false
     
-    private var tbmatikItem: Item?
+    private var tbMatikItem: Item?
     
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
@@ -85,7 +85,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func scrollToItem(_ item: Item) {
         if lastUpdateFetchedObjects == nil {
-            tbmatikItem = item
+            tbMatikItem = item
         } else {
             scroll(to: item)
         }
@@ -552,9 +552,9 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 self.mergeFetchedObjects(deletedIds: deletedIds, updatedIds: updatedIds, insertedIds: insertedIds)
             }
             
-            if let item = self.tbmatikItem {
+            if let item = self.tbMatikItem {
                 self.scroll(to: item)
-                self.tbmatikItem = nil
+                self.tbMatikItem = nil
             }
         }
     }
