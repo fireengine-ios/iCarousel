@@ -25823,7 +25823,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/Info-AppStore-LifeTech.plist";
@@ -25833,7 +25833,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = lifeBox_AutosyncWidget_appStore;
+				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -25974,7 +25974,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -25988,10 +25988,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = lifeBox_ShareD_appStore;
+				PROVISIONING_PROFILE_SPECIFIER = "Akillidepo Share Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26308,7 +26308,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26321,10 +26321,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = lifeBox_FileProviderUI_appStore;
+				PROVISIONING_PROFILE_SPECIFIER = "akilli depo IOS11 fileproviderui";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26609,7 +26609,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26626,7 +26626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "f8ce6fea-de1e-4b43-8ce6-bc6bb1a05c2b";
+				PROVISIONING_PROFILE_SPECIFIER = "akilli depo app store IOS11 files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26775,7 +26775,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26791,7 +26791,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "c4303710-c3d8-49fc-9035-e9f66d8349c8";
+				PROVISIONING_PROFILE_SPECIFIER = "akilli depo IOS11 fileproviderui";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
