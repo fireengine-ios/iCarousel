@@ -959,6 +959,21 @@
 "user_profile_day_placeholder" = "ДД";
 "user_profile_month_placeholder" = "ММ";
 "user_profile_year_placeholder" = "ГГГГ";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Помощь и поддержка";
@@ -966,6 +981,7 @@
 "enter_your_password" = "Введите пароль";
 "re_enter_your_password" = "Введите пароль еще раз";
 "signup_support_info" = "Свяжитесь с нами в случае сложности с входом в приложение";
+"signup_faq_info" = "";
 "missing_information" = "Недостаточно информации";
 "please_enter_your_missing_account_information" = "Пожалуйста, введите недостающую информацию";
 "login_email_or_phone_placeholder" = "Введите ваш e-mail  или номер телефона";
@@ -981,6 +997,7 @@
 "frequently_asked_questions" = "Вопросы и ответы";
 "login_username_not_valid" = "Пожалуйста, проверьте имя пользователя";
 "login_support_info" = "Свяжитесь с нами, если у вас возникли сложности с регистрацией";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Условия использования и политика конфиденциальности";
 "Temporary error occurred. Please try again later." = "Временная ошибка произошла. Пожалуйста, попробуйте позже.";
 "face_tags_description_premium" = "При включении функции распознавания лиц и изображений загруженные фотографии будут сгруппированы по лицам и объектам. Если опция определения местоположения включена, фотографии также будут сгруппированы в соответствии с информацией о местоположении. Таким образом мы сможем автоматически создавать тематические истории для вас.";

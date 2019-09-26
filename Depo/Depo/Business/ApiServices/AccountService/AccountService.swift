@@ -573,7 +573,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func faqUrl(_ handler: @escaping (String) -> Void) {
         debugLog("AccountService faqUrl")
         
-        sessionManager
+        SessionManager.sessionWithNoToken
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in

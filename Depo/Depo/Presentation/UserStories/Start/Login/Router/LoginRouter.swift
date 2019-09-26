@@ -92,4 +92,9 @@ class LoginRouter: LoginRouterInput {
         
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
+    
+    func goToFaqSupportPage() {
+        let faqSupport = router.helpAndSupport
+        router.pushViewController(viewController: faqSupport!)
+    }
 }

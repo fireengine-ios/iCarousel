@@ -1252,6 +1252,21 @@ Please check I have understood the intended command here*/
 "user_profile_day_placeholder" = "JJ";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "AAAA";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Foire Aux Questions";
@@ -1259,6 +1274,7 @@ Please check I have understood the intended command here*/
 "enter_your_password" = "Entrez votre mot de passe";
 "re_enter_your_password" = "Entrez de nouveau votre mot de passe";
 "signup_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
+"signup_faq_info" = "";
 "missing_information" = "Informations Manquantes";
 "please_enter_your_missing_account_information" = "Entrez vos informations de compte manquantes s’il vous plaît :";
 "login_email_or_phone_placeholder" = "Entrez votre email ou votre numéro de téléphone mobile";
@@ -1274,6 +1290,7 @@ Please check I have understood the intended command here*/
 "frequently_asked_questions" = "Questions Fréquemment Posées";
 "login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
 "login_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Conditions d'utilisation et politique de confidentialité";
 "Temporary error occurred. Please try again later." = "Une erreur temporaire s'est produite. Veuillez réessayer plus tard.";
 "face_tags_description_premium" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";

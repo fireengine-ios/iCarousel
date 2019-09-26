@@ -16,6 +16,12 @@ public extension SessionManager {
 
         return SessionManager(configuration: configuration)
     }()
+    
+    static let sessionWithNoToken: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
+        return SessionManager(configuration: configuration)
+    }()
 
     static let defaultCustomHTTPHeaders: HTTPHeaders = {
         // Accept-Encoding HTTP Header; see https://tools.ietf.org/html/rfc7230#section-4.2.3
