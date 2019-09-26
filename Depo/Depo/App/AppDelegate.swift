@@ -385,7 +385,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        debugLog("userNotificationCenter didReceive response")
         guard let object = Netmera.recentPushObject() else {
+            debugLog("userNotificationCenter Netmera push object is empty")
             return
         }
         

@@ -26,9 +26,12 @@ final class PushNotificationService {
         
         guard let actionString = action,
             let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+                debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
             return false
         }
-
+        
+        debugLog("PushNotificationService received notification with type \(actionString)")
         parse(options: launchOptions, action: notificationAction)
         return true
     }
@@ -340,8 +343,10 @@ final class PushNotificationService {
     }
     
     private func openTBMaticPhotos(_ uuids: String?) {
+        debugLog("PushNotificationService try to open TBMatic screen")
         guard let uuids = uuids?.components(separatedBy: ",") else {
             assertionFailure()
+            debugLog("PushNotificationService uuids is empty")
             return
         }
         
