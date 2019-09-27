@@ -8,20 +8,9 @@
 
 import UIKit
 
-final class CredsUpdateCheckPopUp: UIViewController, NibInit {
+final class CredsUpdateCheckPopUp: BasePopUpController {
     
-    static func with(message: String, userInfo: AccountInfoResponse) -> CredsUpdateCheckPopUp {
-        let controller = CredsUpdateCheckPopUp.initFromNib()
-        
-        controller.modalTransitionStyle = .crossDissolve
-        controller.modalPresentationStyle = .overFullScreen
-        controller.message = message
-        controller.userInfo = userInfo
-        
-        return controller
-    }
-    
-    @IBOutlet private weak var scrollView: UIScrollView!
+    //MARK: IBOutlet
     @IBOutlet private weak var messageLabel: UILabel!
     
     @IBOutlet private weak var mainLabel: UILabel! {
@@ -53,7 +42,7 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var contentView: UIView! {
+    @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
             
@@ -85,7 +74,8 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
             newValue.isOpaque = true
         }
     }
-        
+    
+    //MARK: Properties
     private let authenticationService = AuthenticationService()
     private let router = RouterVC()
     private var message: String = ""
@@ -93,19 +83,21 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
     
     private var isShown = false
     
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        contentView = popUpView
         setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        open()
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    //MARK: Utility methods
     private func setup() {
         let attributes: [NSAttributedStringKey : Any] = [
             .font : UIFont.TurkcellSaturaFont(size: 18),
@@ -119,40 +111,19 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
     private func showEmailVerifiedPopUp() {
         let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
                                             message: TextConstants.credUpdateCheckCompletionMessage,
-                                            buttonTitle: TextConstants.accessibilityClose)
+                                            buttonTitle: TextConstants.accessibilityClose,
+                                            buttonAction: dismissCompletion)
         
         popUp.modalPresentationStyle = .overFullScreen
         popUp.modalTransitionStyle = .crossDissolve
         
-        router.defaultTopController?.present(popUp, animated: true, completion: nil)
+        router.presentViewController(controller: popUp)
     }
     
     private func openUserProfile() {
         if let accountInfo = userInfo {
             let viewController = router.userProfile(userInfo: accountInfo)
             router.pushViewController(viewController: viewController)
-        }
-    }
-    
-    private func open() {
-        if isShown {
-            return
-        }
-        isShown = true
-        contentView.transform = NumericConstants.scaleTransform
-        view.alpha = 0
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.view.alpha = 1
-            self.contentView.transform = .identity
-        }
-    }
-    
-    private func close(completion: VoidHandler? = nil) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.contentView.transform = NumericConstants.scaleTransform
-        }) { _ in
-            self.dismiss(animated: false, completion: completion)
         }
     }
     
@@ -169,18 +140,31 @@ final class CredsUpdateCheckPopUp: UIViewController, NibInit {
     }
     
     //MARK: Actions
-
     @IBAction private func yesButtonPressed(_ sender: Any) {
-        close { [weak self] in
+        close(isFinalStep: false) { [weak self] in
             self?.showEmailVerifiedPopUp()
             self?.updateInfoFeedbackRequest(isUpdated: false)
         }
     }
     
     @IBAction private func updateButtonPressed(_ sender: Any) {
-        close { [weak self] in
+        close(isFinalStep: false) { [weak self] in
             self?.openUserProfile()
             self?.updateInfoFeedbackRequest(isUpdated: true)
         }
+    }
+}
+
+//MARK: - Init
+extension CredsUpdateCheckPopUp {
+    static func with(message: String, userInfo: AccountInfoResponse?) -> CredsUpdateCheckPopUp {
+        let controller = CredsUpdateCheckPopUp(nibName: nil, bundle: nil)
+        controller.userInfo = userInfo
+        controller.message = message
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
     }
 }

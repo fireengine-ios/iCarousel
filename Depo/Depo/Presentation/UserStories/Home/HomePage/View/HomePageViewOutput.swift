@@ -9,9 +9,11 @@
 protocol HomePageViewOutput {
 
     func viewIsReady()
-       
-    func homePagePresented()
     
+    func viewWillAppear()
+    
+    func viewIsReadyForPopUps()
+
     func showSettings()
     
     func showSearch(output: UIViewController?)
@@ -31,6 +33,4 @@ protocol HomePageViewOutput {
     func closedSpotlight(type: SpotlightType)
     
     func requestShowSpotlight(for types: [SpotlightType])
-    
-    func needCheckQuota()
 }
