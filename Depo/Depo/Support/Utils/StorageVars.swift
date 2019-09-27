@@ -19,7 +19,8 @@ protocol StorageVars: class {
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
-    var deepLink: String? {get set}
+    var deepLink: String? { get set }
+    var deepLinkParameters: [AnyHashable: Any]? { get set }
     var interruptedSyncVideoQueueItems: [String] { get set }
     var blockedUsers: [String : Date] { get set }
 }
@@ -111,6 +112,12 @@ final class UserDefaultsVars: StorageVars {
     var deepLink: String? {
         get { return userDefaults.object(forKey: deepLinkKey) as? String}
         set { userDefaults.set(newValue, forKey: deepLinkKey)}
+    }
+    
+    private let deepLinkParametersKey = "deepLinkParametersKey"
+    var deepLinkParameters: [AnyHashable: Any]? {
+        get { return userDefaults.object(forKey: deepLinkParametersKey) as? [AnyHashable: Any]}
+        set { userDefaults.set(newValue, forKey: deepLinkParametersKey)}
     }
     
     private let interruptedSyncVideoQueueItemsKey = "interruptedSyncVideoQueueItemsKey"

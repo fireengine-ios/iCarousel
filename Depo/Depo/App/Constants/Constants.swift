@@ -1430,4 +1430,10 @@ struct TextConstants {
     static let paymentTitleInvoice = NSLocalizedString("payment_title_invoice", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusTitle = NSLocalizedString("account_status_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusMessage = NSLocalizedString("account_status_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let tbMaticPhotosTitle = NSLocalizedString("tbmatic_photos_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosNoPhotoText = NSLocalizedString("tbmatic_photos_no_photo_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosNoPhotoBoldText = NSLocalizedString("tbmatic_photos_no_photo_bold_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosSeeTimeline = NSLocalizedString("tbmatic_photos_see_timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosShare = NSLocalizedString("tbmatic_photos_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
