@@ -76,7 +76,13 @@ class LoginRouter: LoginRouterInput {
     }
     
     func openSupport() {
-        let controller = router.supportFormController
+        let controller = SupportFormController.with(subjects: [TextConstants.supportFormSubject1,
+                                                               TextConstants.supportFormSubject2,
+                                                               TextConstants.supportFormSubject3,
+                                                               TextConstants.supportFormSubject4,
+                                                               TextConstants.supportFormSubject5,
+                                                               TextConstants.supportFormSubject6,
+                                                               TextConstants.supportFormSubject7])
         router.pushViewController(viewController: controller)
     }
     
