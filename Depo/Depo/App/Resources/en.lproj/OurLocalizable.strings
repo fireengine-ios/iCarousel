@@ -981,6 +981,9 @@
 "support_form_subject_5" = "Lifebox / Turkcell Password problem";
 "support_form_subject_6" = "Lifebox / Automatic Log-in problem";
 "support_form_subject_7" = "Lifebox / I can't download lifebox app";
+"support_form_signup_subject_1" = "Lifebox- I cannot register with my e-mail";
+"support_form_signup_subject_2" = "Lifebox- I cannot register with m phone number";
+"support_form_signup_subject_3" = "Lifebox- Password is not accepted";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
