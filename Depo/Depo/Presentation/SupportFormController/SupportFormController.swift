@@ -1,6 +1,13 @@
 import UIKit
 
 final class SupportFormController: ViewController, KeyboardHandler {
+    
+    static func with(subjects: [String]) -> SupportFormController {
+        let controller = SupportFormController()
+        controller.subjects = subjects
+        return controller
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.delaysContentTouches = false
@@ -86,13 +93,6 @@ final class SupportFormController: ViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
         newValue.textField.placeholder = TextConstants.pleaseChooseSubject
-        newValue.models = [TextConstants.supportFormSubject1,
-                           TextConstants.supportFormSubject2,
-                           TextConstants.supportFormSubject3,
-                           TextConstants.supportFormSubject4,
-                           TextConstants.supportFormSubject5,
-                           TextConstants.supportFormSubject6,
-                           TextConstants.supportFormSubject7]
         return newValue
     }()
     
@@ -103,6 +103,9 @@ final class SupportFormController: ViewController, KeyboardHandler {
         return newValue
     }()
     
+    
+    var subjects = [String]()
+    
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
@@ -110,6 +113,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        subjectView.models = subjects
         navigationBarWithGradientStyle()
 
         addTapGestureToHideKeyboard()

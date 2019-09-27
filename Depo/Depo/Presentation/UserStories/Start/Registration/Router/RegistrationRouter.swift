@@ -41,7 +41,9 @@ class RegistrationRouter: RegistrationRouterInput {
     }
     
     func openSupport() {
-        let controller = router.supportFormController
+        let controller = SupportFormController.with(subjects: [TextConstants.supportFormSignUpSubject1,
+                                                               TextConstants.supportFormSignUpSubject2,
+                                                               TextConstants.supportFormSignUpSubject3])
         router.pushViewController(viewController: controller)
     }
 }

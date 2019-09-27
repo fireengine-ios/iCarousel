@@ -961,10 +961,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var supportFormController: UIViewController {
-        return SupportFormController()
-    }
-    
     var supportFormPrefilledController: SupportFormPrefilledController {
         return SupportFormPrefilledController()
     }
