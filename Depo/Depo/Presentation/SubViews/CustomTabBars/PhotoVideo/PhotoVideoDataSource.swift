@@ -224,16 +224,17 @@ final class PhotoVideoDataSource: NSObject {
                     }
                     
                     assert(self.lastWrapedObjects.isEmpty, "lastWrapedObjects must be empty")
-                    self.lastWrapedObjects.removeAll()
-                    self.lastWrapedObjects.append(items.map {
-                        WrapData(mediaItem: $0)
-                    })
+                    let wrappedItems = items.map { WrapData(mediaItem: $0) }
+                    self.lastWrapedObjects.modify { _ in
+                        return wrappedItems
+                    }
                     
                     self.isConverting = false
                     if !self.isMerging {
                         self.finishConverting(needSorting: true)
                     }
                 }
+
             }
         }
     }
@@ -257,7 +258,7 @@ final class PhotoVideoDataSource: NSObject {
                 }
                 
                 let idsToRemove = deletedIds + updatedIds
-            
+                let wrappedItems = items.map { WrapData(mediaItem: $0) }
                 self.lastWrapedObjects.modify { array in
                     var array = array
                     idsToRemove.forEach { id in
@@ -266,7 +267,7 @@ final class PhotoVideoDataSource: NSObject {
                     // seems like self.convertFetchedObjects() maybe performing simultaniously with this code
                     // and exactly between removing and appending items, it may append its own elements
                     // that is why we need to perform removeAll and append as an atomic operation
-                    array += items.map { WrapData(mediaItem: $0) }
+                    array += wrappedItems
                     
                     return array
                 }
