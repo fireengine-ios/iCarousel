@@ -135,7 +135,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
             return
         }
         
-        secretAnswerView.answerTextField.text = "* * * * * * * * *"
+        secretAnswerView.answerTextField.quickDismissPlaceholder = "* * * * * * * * *"
+        secretAnswerView.answerTextField.placeholderColor = UIColor.black
         securityQuestionView.setQuestion(question: question)
     }
     
@@ -146,7 +147,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         captchaView.captchaAnswerTextField.text = ""
         
         secretAnswerView.answerTextField.resignFirstResponder()
-        secretAnswerView.answerTextField.text = "* * * * * * * * *"
+        secretAnswerView.answerTextField.text = ""
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
