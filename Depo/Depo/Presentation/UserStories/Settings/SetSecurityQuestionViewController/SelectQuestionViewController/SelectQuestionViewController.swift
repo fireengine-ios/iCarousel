@@ -64,7 +64,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet{
-            newValue.backgroundColor = ColorConstants.lightText.withAlphaComponent(0.5)
+            newValue.backgroundColor = ColorConstants.profileGrayColor
             newValue.isOpaque = true
         }
     }

@@ -1163,3 +1163,10 @@
 "payment_title_invoice" = "Invoice";
 "account_status_title" = "Your account is active now!";
 "account_status_message" = "Your account is activated because of your login. If you want to delete your account permanently, you should not be logged in for 1 month after deleting";
+
+//TBMatic
+"tbmatic_photos_title" = "Your TBT photos! %@";
+"tbmatic_photos_no_photo_text" = "We couldn't find any matching photos this time :(";
+"tbmatic_photos_no_photo_bold_text" = "We couldn't find";
+"tbmatic_photos_see_timeline" = "See Timeline";
+"tbmatic_photos_share" = "Share";

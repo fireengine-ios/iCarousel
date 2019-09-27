@@ -44,7 +44,7 @@ final class SecurityQuestionView: UIView, NibInit {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = ColorConstants.placeholderGrayColor
             newValue.backgroundColor = .white
             newValue.isOpaque = true
             newValue.numberOfLines = 0
@@ -53,7 +53,7 @@ final class SecurityQuestionView: UIView, NibInit {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.lightText.withAlphaComponent(0.5)
+            newValue.backgroundColor = ColorConstants.placeholderGrayColor
             newValue.isOpaque = true
         }
     }

@@ -28,6 +28,7 @@ struct ColorConstants {
     static let searchShadowColor = UIColor(red: 29 / 255, green: 29 / 255, blue: 29 / 255, alpha: 0.49)
     static let darkText = UIColor(red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
     static let lightText = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 1)
+    static let placeholderGrayColor = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 0.5)
     static let activityTimelineDraws = UIColor(red: 6 / 255, green: 44 / 255, blue: 66 / 255, alpha: 1)
     static let lightPeach = UIColor(red: 255 / 255, green: 226 / 255, blue: 198 / 255, alpha: 1)
     static let yellowButtonColor = UIColor(red: 1, green: 199 / 255, blue: 77 / 255, alpha: 1)
@@ -74,6 +75,10 @@ struct ColorConstants {
     static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
     
     static let popUpBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 0.33)
+    
+    static let tealBlue = UIColor(red: 0, green: 124 / 255.0, blue: 171 / 255.0, alpha: 1.0)
+    static let seaweed = UIColor(red: 30 / 255.0, green: 215 / 255.0, blue: 128 / 255.0, alpha: 1.0)
+    static let blueGreen = UIColor(red: 13 / 255.0, green: 164 / 255.0, blue: 152 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

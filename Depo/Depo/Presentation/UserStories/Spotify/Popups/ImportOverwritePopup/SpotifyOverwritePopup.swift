@@ -41,7 +41,6 @@ final class SpotifyOverwritePopup: BlurBackgroundPopup {
         dismissButton.setTitle(TextConstants.Spotify.OverwritePopup.cancelButton, for: .normal)
         dismissButton.setTitleColor(ColorConstants.blueColor, for: .normal)
         dismissButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        dismissButton.layer.masksToBounds = true
         dismissButton.layer.cornerRadius = dismissButton.bounds.height * 0.5
         dismissButton.layer.borderColor = ColorConstants.blueColor.cgColor
         dismissButton.layer.borderWidth = 1
@@ -52,7 +51,6 @@ final class SpotifyOverwritePopup: BlurBackgroundPopup {
         actionButton.setTitleColor(.white, for: .normal)
         actionButton.backgroundColor = ColorConstants.blueColor
         actionButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        actionButton.layer.masksToBounds = true
         actionButton.layer.cornerRadius = actionButton.bounds.height * 0.5
     }
 }

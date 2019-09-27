@@ -11,5 +11,5 @@ import Foundation
 protocol UserProfileRouterInput {
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, navigationController: UINavigationController, phoneNumber: String)
     func goToChangePassword()
-    func goToSetSecretQuestion(delegate: SetSecurityQuestionViewControllerDelegate) 
+    func goToSetSecretQuestion(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate)
 }
