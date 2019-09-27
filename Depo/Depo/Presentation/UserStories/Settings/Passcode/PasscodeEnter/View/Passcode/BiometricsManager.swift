@@ -41,6 +41,7 @@ enum BiometricsAuthenticateResult: Int {
     case notAvailable = 1
     case retryLimitReached = -1
     case cancelledByUser = -2
+    case userFallback = -3
     case cancelledBySystem = -4
     case sensorIsLocked = -8
 }
@@ -153,7 +154,7 @@ final class BiometricsManagerImp: BiometricsManager {
                 if success {
                     handler(.success)
                 } else if let error = error as NSError? {
-                    print("Fingerprint validation failed: \(error.localizedDescription). Code: error.code")
+                    print("Fingerprint validation failed: \(error.localizedDescription). Code: \(error.code)")
                     if let status = BiometricsAuthenticateResult(rawValue: error.code) {
                         handler(status)
                     } else {
