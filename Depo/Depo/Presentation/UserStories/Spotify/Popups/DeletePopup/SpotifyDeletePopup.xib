@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,7 +36,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gt4-4J-mcg">
                             <rect key="frame" x="26" y="226" width="242" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsp-dS-fZG">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsp-dS-fZG" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="118" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="118" id="APj-wB-8st"/>
@@ -46,7 +44,7 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-fc-jgj">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-fc-jgj" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="124" y="0.0" width="118" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="TBV-6T-v3f"/>
@@ -110,6 +108,7 @@
                 <constraint firstItem="0Xw-p8-Cik" firstAttribute="centerY" secondItem="G91-vT-LUF" secondAttribute="centerY" id="mTK-xi-xIQ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="GVf-dN-Q31"/>
+            <point key="canvasLocation" x="138" y="155"/>
         </view>
     </objects>
     <resources>

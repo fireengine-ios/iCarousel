@@ -19,14 +19,26 @@ class BlurBackgroundPopup: BaseViewController, NibInit {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var dismissButton: UIButton! {
+    @IBOutlet weak var dismissButton: InsetsButton! {
         willSet {
+            newValue.layer.masksToBounds = true
+            
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            
+            newValue.titleLabel?.textAlignment = .center
             newValue.addTarget(self, action: #selector(onCancel), for: .touchUpInside)
         }
     }
     
-    @IBOutlet weak var actionButton: UIButton! {
+    @IBOutlet weak var actionButton: InsetsButton! {
         willSet {
+            newValue.layer.masksToBounds = true
+            
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            
+            newValue.titleLabel?.textAlignment = .center
             newValue.addTarget(self, action: #selector(onAction), for: .touchUpInside)
         }
     }

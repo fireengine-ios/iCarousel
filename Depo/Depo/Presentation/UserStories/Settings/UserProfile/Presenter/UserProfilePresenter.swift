@@ -77,8 +77,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
-    func tapChangeSecretQuestionButton() {
-        router.goToSetSecretQuestion(delegate: self)
+    func tapChangeSecretQuestionButton(selectedQuestion: String?) {
+        router.goToSetSecretQuestion(selectedQuestion: selectedQuestion, delegate: self)
     }
     
     //MARK : BasePresenter
