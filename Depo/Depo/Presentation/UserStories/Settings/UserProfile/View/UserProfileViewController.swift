@@ -34,6 +34,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     private var email: String?
     private var number: String?
     private var birthday: String?
+    private var secretQuestion: String?
 
     private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
@@ -207,7 +208,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                     assertionFailure()
                     return
                 }
-                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
+                self?.secretQuestion = question.text
+                self?.secretQuestionView.setupDescriptionLabel(question: question.text)
                 
             case .failed(_):
                 break
@@ -342,7 +344,7 @@ extension UserProfileViewController: SetSecurityCredentialsViewDelegate {
     }
     
     func setNewQuestionTapped() {
-        output.tapChangeSecretQuestionButton()
+        output.tapChangeSecretQuestionButton(selectedQuestion: secretQuestion)
     }
 }
 
