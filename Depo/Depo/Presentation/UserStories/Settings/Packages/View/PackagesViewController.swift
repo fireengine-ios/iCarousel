@@ -147,10 +147,8 @@ extension PackagesViewController: PackagesViewInput {
     func showPaycellProcess(with cpcmOfferId: Int) {
         let controller = PaycellViewController.createController(with: cpcmOfferId) { [weak self] result in
             switch result {
-            case .success(let completed):
-                if completed {
-                    //close payment popup
-                }
+            case .success():
+                return
             case .failure(_):
                 return
             }

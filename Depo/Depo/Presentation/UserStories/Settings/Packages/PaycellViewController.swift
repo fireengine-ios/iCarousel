@@ -12,16 +12,17 @@ import WebKit
 
 final class PaycellViewController: UIViewController {
     
-    typealias ResultBoolCompletion = (Result<Bool, Error>)->()
+    typealias ResultVoidCompletion = (Result<Void, Error>)->()
 
     private let tokenStorage: TokenStorage = factory.resolve()
     private var offerId: Int?
-    private var completionHandler: ResultBoolCompletion?
+    private var completionHandler: ResultVoidCompletion?
+    private let redirectURLString = "google.com"
     
     private lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         if #available(iOS 11, *) {
-            //
+            //stay with default config
         } else {
             let controller = WKUserContentController()
             let script = WKUserScript(source: "document.cookie = '_at=\(tokenStorage.accessToken ?? "")';", injectionTime: .atDocumentStart, forMainFrameOnly: false)
@@ -33,7 +34,7 @@ final class PaycellViewController: UIViewController {
     }()
     
     
-    static func createController(with cpcmOfferId: Int, completion: @escaping ResultBoolCompletion) -> PaycellViewController {
+    static func createController(with cpcmOfferId: Int, completion: @escaping ResultVoidCompletion) -> PaycellViewController {
         let controller = PaycellViewController()
         controller.offerId = cpcmOfferId
         controller.completionHandler = completion
@@ -50,7 +51,6 @@ final class PaycellViewController: UIViewController {
         super.viewDidLoad()
 
         showSpinner()
-        
         startPaycellProcess()
     }
     
@@ -59,8 +59,7 @@ final class PaycellViewController: UIViewController {
             let offerId = offerId,
             let paycellUrl = URL(string: String(format: RouteRequests.paycellWebUrl, offerId))
         else {
-            dismiss(animated: true, completion: nil)
-            completionHandler?(.failure(ErrorResponse.string("can't start paycell process")))
+            closeScreen(error: ErrorResponse.string("can't start paycell process"))
             return
         }
         
@@ -78,8 +77,7 @@ final class PaycellViewController: UIViewController {
             let token = tokenStorage.accessToken,
             let domain = url.host
         else {
-            dismiss(animated: true, completion: nil)
-            completionHandler?(.failure(ErrorResponse.string("can't sync cookies")))
+            closeScreen(error: ErrorResponse.string("can't sync cookies"))
             return
         }
         
@@ -97,16 +95,41 @@ final class PaycellViewController: UIViewController {
             completion()
         }
     }
+    
+    private func closeScreen(error: Error?) {
+        if let error = error {
+            completionHandler?(.failure(error))
+        } else {
+            completionHandler?(.success(()))
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 
 extension PaycellViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        dismiss(animated: true, completion: nil)
+        closeScreen(error: error)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hideSpinner()
+    }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        //TODO: check if it's enough to use just the fact of redirection without url
+    }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .other {
+            if let url = navigationAction.request.url, url.absoluteString == redirectURLString {
+                decisionHandler(.cancel)
+                closeScreen(error: nil)
+                return
+            }
+        }
+        decisionHandler(.allow)
     }
 }
