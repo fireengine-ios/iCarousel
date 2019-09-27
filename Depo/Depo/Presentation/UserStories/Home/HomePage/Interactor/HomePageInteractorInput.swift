@@ -12,7 +12,7 @@ protocol HomePageInteractorInput {
     
     var homeCardsLoaded: Bool { get }
     
-    func homePagePresented()
+    func viewIsReady()
     
     func needRefresh()
     
