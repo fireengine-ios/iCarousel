@@ -26,7 +26,7 @@ final class PushNotificationService {
         
         guard let actionString = action,
             let notificationAction = PushNotificationAction(rawValue: actionString) else {
-            assertionFailure("unowned push type")
+//            assertionFailure("unowned push type")
                 debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
             return false
         }
@@ -50,9 +50,9 @@ final class PushNotificationService {
         self.notificationAction = action
         
         switch notificationAction {
-        case .http:
+        case .http?:
             notificationParameters = action.rawValue
-        case .tbmatic:
+        case .tbmatic?:
             notificationParameters = options?[PushNotificationParameter.tbmaticUuids.rawValue] as? String
         default:
             break
