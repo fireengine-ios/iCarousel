@@ -34,7 +34,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     private var email: String?
     private var number: String?
     private var birthday: String?
-    private var secretQuestion: String?
+    private var secretQuestion: SecretQuestionsResponse?
 
     private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
@@ -208,7 +208,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                     assertionFailure()
                     return
                 }
-                self?.secretQuestion = question.text
+                self?.secretQuestion = question
                 self?.secretQuestionView.setupDescriptionLabel(question: question.text)
                 
             case .failed(_):
