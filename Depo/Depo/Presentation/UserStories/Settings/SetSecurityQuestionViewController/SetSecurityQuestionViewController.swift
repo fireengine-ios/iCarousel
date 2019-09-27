@@ -120,11 +120,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                                 
                                                 switch result {
                                                 case .success:
-                                                self.delegate?.didCloseSetSecurityQuestionViewController()
-                                                self.captchaView.captchaAnswerTextField.resignFirstResponder()
-                                                self.secretAnswerView.answerTextField.resignFirstResponder()
-                                                    
-                                                    
+                                                    self.questionWasSuccessfullyUpdated()
                                                 case .failure(let error):
                                                     self.handleServerErrors(error)                                                }
         }
@@ -142,6 +138,16 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         
         secretAnswerView.answerTextField.text = "* * * * * * * * *"
         securityQuestionView.setQuestion(question: question)
+    }
+    
+    private func questionWasSuccessfullyUpdated() {
+        delegate?.didCloseSetSecurityQuestionViewController()
+        
+        captchaView.captchaAnswerTextField.resignFirstResponder()
+        captchaView.captchaAnswerTextField.text = ""
+        
+        secretAnswerView.answerTextField.resignFirstResponder()
+        secretAnswerView.answerTextField.text = "* * * * * * * * *"
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
