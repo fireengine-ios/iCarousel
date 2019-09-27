@@ -66,29 +66,21 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var closeButton: UIButton! {
-        willSet {
-            newValue.addTarget(self, action: #selector(close), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var timelineButton: TimelineButton!
     
-    @IBOutlet private weak var timelineButton: TimelineButton! {
+    @IBOutlet private weak var shareButton: RoundedInsetsButton! {
         willSet {
-            newValue.addTarget(self, action: #selector(seeTimeline), for: .touchUpInside)
-        }
-    }
-    
-    @IBOutlet private weak var shareButton: UIButton! {
-        willSet {
-            newValue.addTarget(self, action: #selector(share), for: .touchUpInside)
             newValue.setTitle(TextConstants.tbMaticPhotosShare, for: .normal)
             newValue.setTitleColor(ColorConstants.blueGreen, for: .normal)
-            newValue.backgroundColor = .white
+            newValue.setTitleColor(ColorConstants.blueGreen.withAlphaComponent(0.5), for: .disabled)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.layer.masksToBounds = true
-            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
+            
+            newValue.setBackgroundColor(UIColor.white, for: .normal)
+            newValue.setBackgroundColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
+            newValue.setBackgroundColor(UIColor.white.darker(by: 30), for: .highlighted)
+            
             newValue.isEnabled = false
-            newValue.alpha = 0.5
         }
     }
     
@@ -101,23 +93,20 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     private lazy var cacheManager = CacheManager.shared
     
     private var uuids = [String]()
-    private var items = [Item?]() {
-        didSet {
-            carousel.reloadData()
-        }
-    }
+    private var items = [String: Item]()
     
     private lazy var carouselItemFrameWidth: CGFloat = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
     private lazy var carouselItemFrameHeight: CGFloat = carousel.bounds.height
     
-    private lazy var dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMMM YYYY"
         return formatter
     }()
     
     private var currentItem: Item? {
-        return items[safe: carousel.currentItemIndex] ?? nil
+        let uuid = uuids[carousel.currentItemIndex]
+        return items[uuid]
     }
     
     // MARK: - View lifecycle
@@ -163,6 +152,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func setupCarousel() {
+        carousel.isHidden = true
         carousel.backgroundColor = .clear
         carousel.type = .custom
         carousel.delegate = self
@@ -171,16 +161,23 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func loadItems() {
+        showSpinner()
+        
         fileService.details(uuids: uuids, success: { [weak self] items in
             guard let self = self else {
                 return
             }
             
-            self.uuids.forEach { uuid in
-                self.items.append(items.first(where: { $0.uuid == uuid }))
+            items.forEach { item in
+                self.items[item.uuid] = item
             }
             
-        }, fail: { errorResponse in
+            self.carousel.reloadData()
+            self.carousel.isHidden = false
+            self.hideSpinner()
+            
+        }, fail: { [weak self] errorResponse in
+            self?.hideSpinner()
             UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
@@ -199,33 +196,22 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     // MARK: - Actions
     
-    @objc private func close() {
+    @IBAction private func onClose() {
         dismiss(animated: true)
     }
     
-    @objc private func share() {
+    @IBAction private func onShare() {
         shareManager.shareCurrentItem()
     }
     
-    @objc private func seeTimeline() {
-        guard let item = currentItem else {
+    @IBAction private func onSeeTimeline() {
+        guard let item = currentItem,
+            let tabbarController = RouterVC().tabBarController else {
+            assertionFailure()
             return
         }
         
-        guard let tabbarController = UIApplication.shared.windows.first?.rootViewController as? TabBarViewController else {
-            return
-        }
-        
-        tabbarController.showPhotosScreen(timelineButton)
-
-        if let segmentedController = tabbarController.activeNavigationController?.viewControllers.last as? SegmentedController {
-            segmentedController.loadViewIfNeeded()
-        
-            if let photosController = segmentedController.currentController as? PhotoVideoController {
-                photosController.scrollToItem(item)
-            }
-        }
-        
+        tabbarController.showPhotosScreen(scrollTo: item)        
         dismiss(animated: true)
     }
 }
@@ -235,13 +221,15 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
 extension TBMatikPhotosViewController: iCarouselDataSource {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return items.count
+        return uuids.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let itemView = view as? TBMatikPhotoView ?? TBMatikPhotoView.initFromNib()
         itemView.frame = CGRect(origin: .zero, size: CGSize(width: carouselItemFrameWidth, height: carouselItemFrameHeight))
-        itemView.setup(with: items[index])
+        
+        let uuid = uuids[index]
+        itemView.setup(with: items[uuid])
         itemView.needShowShadow = index == carousel.currentItemIndex
         itemView.tag = index
         
@@ -300,6 +288,7 @@ extension TBMatikPhotosViewController: CacheManagerDelegate {
     
     func didCompleteCacheActualization() {
         guard let itemView = carousel.itemView(at: carousel.currentItemIndex) as? TBMatikPhotoView else {
+            assertionFailure()
             return
         }
         

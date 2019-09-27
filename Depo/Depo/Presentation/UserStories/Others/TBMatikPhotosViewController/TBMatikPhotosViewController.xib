@@ -29,15 +29,6 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tbmatikBackground" translatesAutoresizingMaskIntoConstraints="NO" id="zlC-hj-dcw">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8W-rB-aKw">
-                    <rect key="frame" x="329" y="44" width="38" height="38"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="38" id="4wT-JY-hkC"/>
-                        <constraint firstAttribute="width" constant="38" id="PDh-qk-Qdo"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="closeButton"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugr-WK-tJf">
                     <rect key="frame" x="30" y="77" width="315" height="50"/>
                     <constraints>
@@ -47,6 +38,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8W-rB-aKw">
+                    <rect key="frame" x="329" y="44" width="38" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="4wT-JY-hkC"/>
+                        <constraint firstAttribute="width" constant="38" id="PDh-qk-Qdo"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="closeButton"/>
+                    <connections>
+                        <action selector="onClose" destination="-1" eventType="touchUpInside" id="7cx-9l-mEt"/>
+                    </connections>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-nx-Ucd" customClass="iCarousel">
                     <rect key="frame" x="0.0" y="131" width="375" height="505"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,10 +63,16 @@
                         <constraint firstAttribute="height" constant="44" id="aNt-u3-ErL"/>
                     </constraints>
                     <state key="normal" title="See Timeline"/>
+                    <connections>
+                        <action selector="onSeeTimeline" destination="-1" eventType="touchUpInside" id="BgX-bF-rXM"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-lG-9Th">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-lG-9Th" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="192" y="711" width="169" height="44"/>
                     <state key="normal" title="Share"/>
+                    <connections>
+                        <action selector="onShare" destination="-1" eventType="touchUpInside" id="vJo-Sq-b4l"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
