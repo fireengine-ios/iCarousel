@@ -60,7 +60,7 @@ final class PaycellViewController: UIViewController {
             let paycellUrl = URL(string: String(format: RouteRequests.paycellWebUrl, offerId))
         else {
             dismiss(animated: true, completion: nil)
-            completionHandler?(.failure(ErrorResponse.string("can't startPaycellProcess")))
+            completionHandler?(.failure(ErrorResponse.string("can't start paycell process")))
             return
         }
         
@@ -79,7 +79,7 @@ final class PaycellViewController: UIViewController {
             let domain = url.host
         else {
             dismiss(animated: true, completion: nil)
-            completionHandler?(.failure(ErrorResponse.string("can't syncCookies")))
+            completionHandler?(.failure(ErrorResponse.string("can't sync cookies")))
             return
         }
         
@@ -101,7 +101,10 @@ final class PaycellViewController: UIViewController {
 
 
 extension PaycellViewController: WKNavigationDelegate {
-    //TODO: check redirection here
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        dismiss(animated: true, completion: nil)
+    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hideSpinner()
