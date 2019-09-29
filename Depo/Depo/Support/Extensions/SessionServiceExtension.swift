@@ -17,7 +17,7 @@ public extension SessionManager {
         return SessionManager(configuration: configuration)
     }()
     
-    static let sessionWithNoToken: SessionManager = {
+    static let sessionWithoutAuth: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
         return SessionManager(configuration: configuration)

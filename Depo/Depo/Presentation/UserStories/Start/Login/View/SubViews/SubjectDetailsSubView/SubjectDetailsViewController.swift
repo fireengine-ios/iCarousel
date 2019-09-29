@@ -8,19 +8,19 @@
 
 import UIKit
 
-class SubjectDetailsViewController: UIViewController {
+final class SubjectDetailsViewController: BasePopUpController, NibInit {
     @IBOutlet private weak var detailsView: UIView!
     @IBOutlet private weak var textView: UITextView!
     
     @IBOutlet private weak var subjectLabel: UILabel! {
         willSet {
-            newValue.text = type.localizedTitle
+            newValue.text = type?.localizedTitle
             newValue.adjustsFontSizeToFitWidth = true
             newValue.minimumScaleFactor = 0.5
         }
     }
     
-    var type: SupportFormSubjectType!
+    var type: SupportFormSubjectType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,7 @@ class SubjectDetailsViewController: UIViewController {
     }
     
     private func dismissSubjectDetailsViewController() {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        close()
     }
     
     private func addTapRecognizer() {
@@ -50,17 +49,26 @@ class SubjectDetailsViewController: UIViewController {
     }
     
     private func convertHtmlToAttributedString() {
+        debugLog("Initialisation of NSMutableAttributedString failed and run into crash")
+        
         let font = UIFont.TurkcellSaturaFont(size: 15)
         
-        let htmlText = "<span style=\"color:rgba(32,33,34,0.8); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type.localizedInfoHtml)</span>"
+        let htmlText = "<span style=\"color:rgba(32,33,34,0.8); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type?.localizedInfoHtml ?? "")</span>"
         
         guard let htmlTextData = htmlText.data(using: .unicode, allowLossyConversion: false) else {
+            assertionFailure()
             return
         }
         
-        textView.attributedText = try? NSAttributedString(data: htmlTextData,
-                                                          options: [.documentType: NSAttributedString.DocumentType.html],
-                                                          documentAttributes: nil)
+        /// https://forums.developer.apple.com/thread/115405
+        
+        do {
+            textView.attributedText = try NSAttributedString(data: htmlTextData,
+                                                             options: [.documentType: NSAttributedString.DocumentType.html],
+                                                             documentAttributes: nil)
+        } catch {
+            assertionFailure()
+        }
     }
     
     @objc private func handleTapGestureRecognizer(_ sender: UITapGestureRecognizer) {
@@ -68,5 +76,13 @@ class SubjectDetailsViewController: UIViewController {
         if !detailsView.frame.contains(location) {
             dismissSubjectDetailsViewController()
         }
+    }
+    
+    static func present(with type: SupportFormSubjectType) -> SubjectDetailsViewController {
+        let controller = SubjectDetailsViewController.initFromNib()
+        controller.type = type
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overCurrentContext
+        return controller
     }
 }

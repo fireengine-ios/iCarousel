@@ -120,10 +120,12 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.isHidden = true
             newValue.delegate = self
+            newValue.picker = self.subjectPicker
+            newValue.toolBar = self.toolBarPicker
         }
     }
     
-    //MARK: - Vars
+    //MARK: Vars
     
     var output: LoginViewOutput!
     
@@ -131,10 +133,6 @@ final class LoginViewController: ViewController {
     
     private lazy var subjectPicker: UIPickerView = {
         let subjectPicker = UIPickerView()
-        subjectPicker.frame = CGRect(x: 0,
-                                     y: view.frame.height - subjectPicker.frame.height,
-                                     width: view.frame.size.width,
-                                     height: 216)
         subjectPicker.delegate = self
         subjectPicker.dataSource = self
         subjectPicker.selectedRow(inComponent: 0)
@@ -144,10 +142,6 @@ final class LoginViewController: ViewController {
     
     private lazy var toolBarPicker: UIToolbar = {
         let toolBar = UIToolbar()
-        toolBar.frame = CGRect(x: 0.0,
-                               y: subjectPicker.frame.minY - toolBar.frame.height,
-                               width: subjectPicker.frame.width,
-                               height: toolBar.frame.height)
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
         toolBar.tintColor = ColorConstants.toolBarTintColor
@@ -279,18 +273,13 @@ final class LoginViewController: ViewController {
         view.endEditing(true)
     }
     
-    @objc func handleApplyButtonClick() {
-        let subjectDetailViewController = SubjectDetailsViewController(nibName: String(describing: SubjectDetailsViewController.self), bundle: nil)
-        subjectDetailViewController.type = SupportFormSubjectType.allCases[subjectPicker.selectedRow(inComponent: 0)]
-        subjectDetailViewController.modalTransitionStyle = .crossDissolve
-        subjectDetailViewController.modalPresentationStyle = .overCurrentContext
-        navigationController?.present(subjectDetailViewController, animated: true)
+    @objc private func handleApplyButtonClick() {
+        let type = SupportFormSubjectType.allCases[subjectPicker.selectedRow(inComponent: 0)]
+        output.openSubjectDetails(type: type)
     }
     
-    @objc func handleCancelButtonClick() {
-        subjectPicker.removeFromSuperview()
-        toolBarPicker.removeFromSuperview()
-
+    @objc private func handleCancelButtonClick() {
+        bannerView.resignFirstResponder()
         scrollView.setContentOffset(.zero, animated: true)
     }
     
@@ -506,8 +495,8 @@ extension LoginViewController: SupportFormBannerViewDelegate {
         if bannerView.type == .support {
             output?.openSupport()
         } else {
-            view.addSubview(subjectPicker)
-            view.addSubview(toolBarPicker)
+            bannerView.shouldShowPicker = true
+            bannerView.becomeFirstResponder()
         }
     }
 }
@@ -521,65 +510,22 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         return SupportFormSubjectType.allCases.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        var pickerLabel = UILabel()
-        if let view = view as? UILabel {
-            pickerLabel = view
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {        
+        let pickerLabel: UILabel
+        
+        if let label = view as? UILabel {
+            pickerLabel = label
+        } else {
+            pickerLabel = UILabel()
         }
+        
         pickerLabel.adjustsFontSizeToFitWidth = true
         pickerLabel.textAlignment = .center
         let localizedText = SupportFormSubjectType.allCases[row].localizedSubject
-        pickerLabel.text = " " + localizedText + " " ///extra spaces for small screens, like 5s
+        
+        ///extra spaces for small screens, like 5s
+        pickerLabel.text = " \(localizedText) "
+        
         return pickerLabel
-    }
-}
-
-enum SupportFormSubjectType: Int, CaseIterable {
-    case subject1
-    case subject2
-    case subject3
-    case subject4
-    case subject5
-    case subject6
-    case subject7
-    
-    var localizedSubject: String {
-        switch self {
-        case .subject1: return TextConstants.supportFormSubject1
-        case .subject2: return TextConstants.supportFormSubject2
-        case .subject3: return TextConstants.supportFormSubject3
-        case .subject4: return TextConstants.supportFormSubject4
-        case .subject5: return TextConstants.supportFormSubject5
-        case .subject6: return TextConstants.supportFormSubject6
-        case .subject7: return TextConstants.supportFormSubject7
-        }
-    }
-    
-    var localizedTitle: String {
-        switch self {
-        case .subject1: return TextConstants.supportFormSubject1InfoLabel
-        case .subject2: return TextConstants.supportFormSubject2InfoLabel
-        case .subject3: return TextConstants.supportFormSubject3InfoLabel
-        case .subject4: return TextConstants.supportFormSubject4InfoLabel
-        case .subject5: return TextConstants.supportFormSubject5InfoLabel
-        case .subject6: return TextConstants.supportFormSubject6InfoLabel
-        case .subject7: return TextConstants.supportFormSubject7InfoLabel
-        }
-    }
-    
-    var localizedInfoHtml: String {
-        let infoText: String
-        
-        switch self {
-        case .subject1: infoText = TextConstants.supportFormSubject1DetailedInfoText
-        case .subject2: infoText = TextConstants.supportFormSubject2DetailedInfoText
-        case .subject3: infoText = TextConstants.supportFormSubject3DetailedInfoText
-        case .subject4: infoText = TextConstants.supportFormSubject4DetailedInfoText
-        case .subject5: infoText = TextConstants.supportFormSubject5DetailedInfoText
-        case .subject6: infoText = TextConstants.supportFormSubject6DetailedInfoText
-        case .subject7: infoText = TextConstants.supportFormSubject7DetailedInfoText
-        }
-        
-        return String(format: infoText, Device.locale)
     }
 }

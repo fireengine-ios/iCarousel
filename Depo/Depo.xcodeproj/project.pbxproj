@@ -253,9 +253,6 @@
 		4B88BB6E233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
 		4B88BB6F233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
 		4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
-		4B88BB73233A37F1001350F8 /* NSObject+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB72233A37F1001350F8 /* NSObject+Utils.swift */; };
-		4B88BB74233A37F1001350F8 /* NSObject+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB72233A37F1001350F8 /* NSObject+Utils.swift */; };
-		4B88BB75233A37F1001350F8 /* NSObject+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB72233A37F1001350F8 /* NSObject+Utils.swift */; };
 		4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
 		4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
 		4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
@@ -264,6 +261,9 @@
 		4BE1268F2304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
 		4BE126902304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
 		4BE126912304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
+		4BEC1142233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
+		4BEC1143233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
+		4BEC1144233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
 		4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
@@ -6769,9 +6769,9 @@
 		4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailsViewController.swift; sourceTree = "<group>"; };
 		4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubjectDetailsViewController.xib; sourceTree = "<group>"; };
 		4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailsDesigner.swift; sourceTree = "<group>"; };
-		4B88BB72233A37F1001350F8 /* NSObject+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Utils.swift"; sourceTree = "<group>"; };
 		4BA61F6D22B7D60400D66031 /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
 		4BE1268E2304351900BFE06F /* ServerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrors.swift; sourceTree = "<group>"; };
+		4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormSubjectType.swift; sourceTree = "<group>"; };
 		4BF3A68322B23F4F0082130F /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4BF3A68C22B2690A0082130F /* PermissionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsView.xib; sourceTree = "<group>"; };
 		4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDesigner.swift; sourceTree = "<group>"; };
@@ -12181,6 +12181,7 @@
 				8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */,
 				7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */,
 				92284599227B3E9600909FFC /* LoginViewController.swift */,
+				4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -15149,7 +15150,6 @@
 				8C65D18522C63B6F00CB1DBD /* String + Extension.swift */,
 				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
 				73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */,
-				4B88BB72233A37F1001350F8 /* NSObject+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -20352,7 +20352,6 @@
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
 				8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */,
-				4B88BB74233A37F1001350F8 /* NSObject+Utils.swift in Sources */,
 				8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */,
 				8C0E8CB31FDEBDFF00789C91 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */,
@@ -20963,6 +20962,7 @@
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
 				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
+				4BEC1143233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
@@ -23097,9 +23097,9 @@
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				4A11F55D21A58EBF00D6AADC /* PackageInfoView.swift in Sources */,
-				4B88BB73233A37F1001350F8 /* NSObject+Utils.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */,
+				4BEC1142233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				F7482D621455E6693DAF8873 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
 				07BD09833626CA46F3CE945C /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -23690,6 +23690,7 @@
 				CE78495322A685FB00662219 /* LoginInitializer.swift in Sources */,
 				CE78495422A685FB00662219 /* PremiumInteractorOutput.swift in Sources */,
 				CE78495522A685FB00662219 /* FaceImageItemsRouter.swift in Sources */,
+				4BEC1144233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				CE78495622A685FB00662219 /* Factory.swift in Sources */,
 				CE78495722A685FB00662219 /* Contact.m in Sources */,
@@ -24088,7 +24089,6 @@
 				CE784ACD22A685FB00662219 /* PushPopAnimator.swift in Sources */,
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
-				4B88BB75233A37F1001350F8 /* NSObject+Utils.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
 				CE784AD122A685FB00662219 /* AuthorizationURLs.swift in Sources */,
 				CE784AD222A685FB00662219 /* AutoUploadIsOffPopUp.swift in Sources */,

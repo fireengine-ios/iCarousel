@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubjectDetailsDesigner: NSObject {
+final class SubjectDetailsDesigner: NSObject {
     @IBOutlet private weak var mainView: UIView! {
         willSet {
             newValue.backgroundColor = UIColor.black.withAlphaComponent(0.33)

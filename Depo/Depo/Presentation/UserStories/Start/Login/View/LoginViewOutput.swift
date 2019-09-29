@@ -26,4 +26,6 @@ protocol LoginViewOutput {
     func openSupport()
     
     func openFaqSupport()
+    
+    func openSubjectDetails(type: SupportFormSubjectType)
 }

@@ -77,14 +77,15 @@ extension UIViewController {
             assertionFailure()
             return
         }
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: title,
-                                                            style: .done,
-                                                            target: target,
-                                                            action: action)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: UIFont.TurkcellSaturaDemFont(size: 18),
-                                                                   .foregroundColor: UIColor.white], for: .normal)
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        
+        let rightBarButtonItem = UIBarButtonItem.init(title: title,
+                                                      font: UIFont.TurkcellSaturaDemFont(size: 18),
+                                                      tintColor: .white,
+                                                      accessibilityLabel: nil,
+                                                      style: .done,
+                                                      target: target,
+                                                      selector: action)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     func setNavigationBackgroundColor(color: UIColor) {

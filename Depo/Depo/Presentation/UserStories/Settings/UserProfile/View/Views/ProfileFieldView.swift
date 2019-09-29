@@ -244,9 +244,8 @@ class ProfileFieldView: UIView {
     
     private func openFAQ() {
         let router = RouterVC()
-        if let controller = router.helpAndSupport {
-            router.pushViewController(viewController: controller)
-        }
+        let controller = router.helpAndSupport
+        router.pushViewController(viewController: controller)
     }
 }
 

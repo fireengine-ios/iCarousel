@@ -46,11 +46,28 @@ final class SupportFormBannerView: UIView, NibInit {
 
     weak var delegate: SupportFormBannerViewDelegate?
     
-    var type: SupportBannerViewType! {
+    var type: SupportBannerViewType? {
         didSet {
             setupGradient()
-            messageLabel.text = type.text
+            messageLabel.text = type?.text
         }
+    }
+    
+    var shouldShowPicker = false
+    
+    var picker = UIPickerView()
+    var toolBar = UIToolbar()
+    
+    override var canBecomeFirstResponder: Bool {
+        return shouldShowPicker
+    }
+    
+    override var inputView: UIView? {
+        return picker
+    }
+    
+    override var inputAccessoryView: UIView? {
+        return toolBar
     }
     
     // MARK: -
@@ -66,12 +83,13 @@ final class SupportFormBannerView: UIView, NibInit {
 
     private func setupGradient() {
         guard let gradientLayer = layer as? CAGradientLayer else {
+            assertionFailure()
             return
         }
 
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.colors = type.gradientColors
+        gradientLayer.colors = type?.gradientColors
     }
     
     // MARK: - Actions

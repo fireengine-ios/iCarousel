@@ -65,8 +65,8 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     }
     
     func goToHelpAndSupport() {
-        if let left = leftController, let controller = RouterVC().helpAndSupport {
-            configurateWithControllers(leftViewController: left, controllers: [controller])
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport])
         }
     }
     

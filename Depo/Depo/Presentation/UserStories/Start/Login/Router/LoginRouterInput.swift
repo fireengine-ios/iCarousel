@@ -39,4 +39,6 @@ protocol LoginRouterInput {
                                buttonAction: @escaping VoidHandler)
     
     func goToFaqSupportPage()
+    
+    func gotoSubjectDetailsPage(type: SupportFormSubjectType)
 }
