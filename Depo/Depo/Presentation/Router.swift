@@ -22,6 +22,10 @@ class RouterVC: NSObject {
         return rootviewController
     }
     
+    var tabBarController: TabBarViewController? {
+        return rootViewController as? TabBarViewController
+    }
+    
     func getFloatingButtonsArray() -> [FloatingButtonsType] {
         let nController = navigationController
         let viewController = nController?.viewControllers.last
@@ -69,7 +73,7 @@ class RouterVC: NSObject {
             if let navController = rootViewController as? UINavigationController {
                 return navController
             } else {
-                if let n = rootViewController as? TabBarViewController {
+                if let n = tabBarController {
                     return n.activeNavigationController
                 }
             }
@@ -83,11 +87,11 @@ class RouterVC: NSObject {
             if let n = top as? TabBarViewController {
                 return n.activeNavigationController
             }
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         } else {
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         }
@@ -145,7 +149,7 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: animated)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
     }
@@ -159,14 +163,14 @@ class RouterVC: NSObject {
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
         
     }
     
     func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = rootViewController as? TabBarViewController {
+        if let tabBarViewController = tabBarController {
             tabBarViewController.setBGColor(color: color)
         }
     }
@@ -241,6 +245,10 @@ class RouterVC: NSObject {
         if let nController = navigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
+        }
+        // for present actionSheet under modal controller
+        if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
+            return presentedController
         }
         return navigationController?.viewControllers.last
     }
@@ -953,10 +961,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var supportFormController: UIViewController {
-        return SupportFormController()
-    }
-    
     var supportFormPrefilledController: SupportFormPrefilledController {
         return SupportFormPrefilledController()
     }
@@ -1043,5 +1047,9 @@ class RouterVC: NSObject {
         controller.playlist = playlist
         controller.delegate = delegate
         return controller
+    }
+    
+    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
+        return TBMatikPhotosViewController.with(uuids: uuids)
     }
 }

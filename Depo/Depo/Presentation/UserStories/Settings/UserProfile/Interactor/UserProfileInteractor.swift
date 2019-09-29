@@ -44,6 +44,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
             }
             DispatchQueue.toMain {
                 self?.output.configurateUserInfo(userInfo: response)
+                SingletonStorage.shared.accountInfo = response
             }
         }) { error in
             // This error is't handling

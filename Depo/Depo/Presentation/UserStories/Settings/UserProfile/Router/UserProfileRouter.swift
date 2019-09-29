@@ -20,9 +20,9 @@ class UserProfileRouter: UserProfileRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    func goToSetSecretQuestion(delegate: SetSecurityQuestionViewControllerDelegate) {
+    func goToSetSecretQuestion(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate) {
         let controller = SetSecurityQuestionViewController.initFromNib()
-        controller.delegate = delegate
+        controller.configureWith(selectedQuestion: selectedQuestion, delegate: delegate)
         router.pushViewController(viewController: controller)
     }
 }
