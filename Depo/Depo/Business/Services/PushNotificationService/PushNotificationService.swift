@@ -344,13 +344,14 @@ final class PushNotificationService {
     
     private func openTBMaticPhotos(_ uuids: String?) {
         debugLog("PushNotificationService try to open TBMatic screen")
-        guard let uuids = uuids?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
+        // handle list of uuids with two variants for separators "," and ", "
+        guard let uuidsArray = uuids?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
             assertionFailure()
             debugLog("PushNotificationService uuids is empty")
             return
         }
         
-        let controller = router.tbmaticPhotosContoller(uuids: uuids)
+        let controller = router.tbmaticPhotosContoller(uuids: uuidsArray)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
