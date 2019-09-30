@@ -34,7 +34,7 @@ final class PaycellViewController: UIViewController {
     }()
     
     
-    static func createController(with cpcmOfferId: Int, completion: @escaping ResultVoidCompletion) -> PaycellViewController {
+    static func create(with cpcmOfferId: Int, completion: @escaping ResultVoidCompletion) -> PaycellViewController {
         let controller = PaycellViewController()
         controller.offerId = cpcmOfferId
         controller.completionHandler = completion
