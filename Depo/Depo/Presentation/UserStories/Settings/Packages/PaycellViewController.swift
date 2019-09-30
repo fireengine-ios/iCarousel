@@ -105,6 +105,11 @@ final class PaycellViewController: UIViewController {
         
         dismiss(animated: true, completion: nil)
     }
+    
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
 }
 
 
