@@ -10,7 +10,7 @@ import UIKit
 import Typist
 
 final class LoginViewController: ViewController {
-
+    var isPresented = false
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
@@ -120,44 +120,13 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.isHidden = true
             newValue.delegate = self
-            newValue.picker = subjectPicker
-            newValue.toolBar = toolBarPicker
+            newValue.screenType = .login
         }
     }
     
     //MARK: Vars
-    
     var output: LoginViewOutput!
-    
     private let keyboard = Typist.shared
-    
-    private lazy var subjectPicker: UIPickerView = {
-        let subjectPicker = UIPickerView()
-        subjectPicker.delegate = self
-        subjectPicker.dataSource = self
-        subjectPicker.selectedRow(inComponent: 0)
-        subjectPicker.backgroundColor = ColorConstants.subjectPickerBackgroundColor
-        return subjectPicker
-    }()
-    
-    private lazy var toolBarPicker: UIToolbar = {
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = ColorConstants.toolBarTintColor
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: TextConstants.apply, style: .plain, target: self, action: #selector(handleApplyButtonClick))
-        doneButton.tintColor = ColorConstants.buttonTintColor
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(handleCancelButtonClick))
-        cancelButton.tintColor = ColorConstants.buttonTintColor
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        toolBar.layer.zPosition = 1.0
-        return toolBar
-    }()
     
     //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -271,16 +240,6 @@ final class LoginViewController: ViewController {
     
     @objc private func stopEditing() {
         view.endEditing(true)
-    }
-    
-    @objc private func handleApplyButtonClick() {
-        let type = SupportFormSubjectType.allCases[subjectPicker.selectedRow(inComponent: 0)]
-        output.openSubjectDetails(type: type)
-    }
-    
-    @objc private func handleCancelButtonClick() {
-        bannerView.resignFirstResponder()
-        scrollView.setContentOffset(.zero, animated: true)
     }
     
     //MARK: - IBActions
@@ -490,8 +449,7 @@ extension LoginViewController: LoginViewInput {
 }
 
 extension LoginViewController: SupportFormBannerViewDelegate {
-    
-    func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
+   func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
         if bannerView.type == .support {
             output?.openSupport()
         } else {
@@ -499,33 +457,13 @@ extension LoginViewController: SupportFormBannerViewDelegate {
             bannerView.becomeFirstResponder()
         }
     }
-}
-
-extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return SupportFormSubjectType.allCases.count
+    func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol) {
+        output.openSubjectDetails(type: type)
     }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {        
-        let pickerLabel: UILabel
-        
-        if let label = view as? UILabel {
-            pickerLabel = label
-        } else {
-            pickerLabel = UILabel()
-            pickerLabel.adjustsFontSizeToFitWidth = true
-            pickerLabel.textAlignment = .center
-        }
-        
-        let localizedText = SupportFormSubjectType.allCases[row].localizedSubject
-        
-        ///extra spaces for small screens, like 5s
-        pickerLabel.text = " \(localizedText) "
-        
-        return pickerLabel
+  
+    func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView) {
+        bannerView.resignFirstResponder()
+        scrollView.setContentOffset(.zero, animated: true)
     }
 }

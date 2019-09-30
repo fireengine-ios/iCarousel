@@ -20,5 +20,7 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     
     func updateCaptcha()
     
+    func showFAQView()
+    
     func showSupportView()
 }

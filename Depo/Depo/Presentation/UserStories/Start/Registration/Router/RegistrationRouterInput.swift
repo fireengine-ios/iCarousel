@@ -18,4 +18,8 @@ protocol RegistrationRouterInput {
                           userInfo: RegistrationUserInfoModel?)
     
     func openSupport()
+    
+    func goToFaqSupportPage()
+    
+    func gotoSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 }

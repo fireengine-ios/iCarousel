@@ -40,5 +40,5 @@ protocol LoginRouterInput {
     
     func goToFaqSupportPage()
     
-    func gotoSubjectDetailsPage(type: SupportFormSubjectType)
+    func gotoSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 }

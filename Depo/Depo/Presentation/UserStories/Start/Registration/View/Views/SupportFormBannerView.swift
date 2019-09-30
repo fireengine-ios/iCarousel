@@ -35,6 +35,8 @@ enum SupportBannerViewType {
 
 protocol SupportFormBannerViewDelegate: class {
     func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView)
+    func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol)
+    func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView)
 }
 
 final class SupportFormBannerView: UIView, NibInit {
@@ -46,6 +48,8 @@ final class SupportFormBannerView: UIView, NibInit {
 
     weak var delegate: SupportFormBannerViewDelegate?
     
+    var screenType: SupportFormScreenType!
+    
     var type: SupportBannerViewType? {
         didSet {
             setupGradient()
@@ -55,19 +59,52 @@ final class SupportFormBannerView: UIView, NibInit {
     
     var shouldShowPicker = false
     
-    var picker: UIPickerView?
-    var toolBar: UIToolbar?
+    private lazy var subjectPicker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
+        picker.backgroundColor = ColorConstants.subjectPickerBackgroundColor
+        return picker
+    }()
+    
+    private lazy var toolBarPicker: UIToolbar = {
+        let toolBar = UIToolbar()
+        toolBar.isTranslucent = true
+        toolBar.tintColor = ColorConstants.toolBarTintColor
+        toolBar.sizeToFit()
+        toolBar.layer.zPosition = 1.0
+
+        let doneButton = UIBarButtonItem(title: TextConstants.apply,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(handleApplyButtonClick))
+        doneButton.tintColor = ColorConstants.buttonTintColor
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                          target: nil,
+                                          action: nil)
+        
+        let cancelButton = UIBarButtonItem(title: TextConstants.cancel,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(handleCancelButtonClick))
+        cancelButton.tintColor = ColorConstants.buttonTintColor
+
+        toolBar.items = [cancelButton, spaceButton, doneButton]
+        
+        return toolBar
+    }()
     
     override var canBecomeFirstResponder: Bool {
         return shouldShowPicker
     }
     
     override var inputView: UIView? {
-        return picker
+        return subjectPicker
     }
     
     override var inputAccessoryView: UIView? {
-        return toolBar
+        return toolBarPicker
     }
     
     // MARK: -
@@ -96,5 +133,43 @@ final class SupportFormBannerView: UIView, NibInit {
     
     @objc private func handleTapGesture(_ sender: UITapGestureRecognizer) {
         delegate?.supportFormBannerViewDidClick(self)
+    }
+    
+    @objc private func handleApplyButtonClick() {
+        let index = subjectPicker.selectedRow(inComponent: 0)
+        let subject = screenType.subjects[index]
+        delegate?.supportFormBannerView(self, didSelect: subject)
+    }
+    
+    @objc private func handleCancelButtonClick() {
+        delegate?.supportFormBannerViewDidCancel(self)
+    }
+}
+
+extension SupportFormBannerView: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return screenType.subjects.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel: UILabel
+        
+        if let label = view as? UILabel {
+            pickerLabel = label
+        } else {
+            pickerLabel = UILabel()
+            pickerLabel.adjustsFontSizeToFitWidth = true
+            pickerLabel.textAlignment = .center
+        }
+        
+        let localizedText = screenType.subjects[row].localizedSubject
+        pickerLabel.text = " \(localizedText) "
+
+        return pickerLabel
     }
 }

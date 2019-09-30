@@ -48,11 +48,20 @@ extension RegistrationPresenter: RegistrationViewOutput {
         isSupportFormPresenting = true
         router.openSupport()
     }
+    
+    func openFaqSupport() {
+        isSupportFormPresenting = true
+        router.goToFaqSupportPage()
+    }
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
+        isSupportFormPresenting = true
+        router.gotoSubjectDetailsPage(type: type)
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
-    
     func userValid(_ userInfo: RegistrationUserInfoModel) {
         interactor.signUpUser(userInfo)
     }
@@ -108,6 +117,10 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func showSupportView() {
         view.showSupportView()
+    }
+    
+    func showFAQView() {
+        view.showFAQView()
     }
 }
 
