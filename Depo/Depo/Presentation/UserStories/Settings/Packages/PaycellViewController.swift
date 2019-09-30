@@ -11,12 +11,10 @@ import WebKit
 
 
 final class PaycellViewController: UIViewController {
-    
-    typealias ResultVoidCompletion = (Result<Void, Error>)->()
 
     private let tokenStorage: TokenStorage = factory.resolve()
     private var offerId: Int?
-    private var completionHandler: ResultVoidCompletion?
+    private var completionHandler: ResponseVoid?
     private let redirectURLString = "google.com"
     
     private lazy var webView: WKWebView = {
@@ -34,7 +32,7 @@ final class PaycellViewController: UIViewController {
     }()
     
     
-    static func create(with cpcmOfferId: Int, completion: @escaping ResultVoidCompletion) -> PaycellViewController {
+    static func create(with cpcmOfferId: Int, completion: @escaping ResponseVoid) -> PaycellViewController {
         let controller = PaycellViewController()
         controller.offerId = cpcmOfferId
         controller.completionHandler = completion
@@ -98,7 +96,7 @@ final class PaycellViewController: UIViewController {
     
     private func closeScreen(error: Error?) {
         if let error = error {
-            completionHandler?(.failure(error))
+            completionHandler?(.failed(error))
         } else {
             completionHandler?(.success(()))
         }
