@@ -10,7 +10,7 @@ import UIKit
 import Typist
 
 final class LoginViewController: ViewController {
-    var isPresented = false
+
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
