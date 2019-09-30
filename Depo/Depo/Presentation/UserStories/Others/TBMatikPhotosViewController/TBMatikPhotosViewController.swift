@@ -185,7 +185,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     private func updateTitle() {
         let dateString: String
         
-        if let date = currentItem?.creationDate {
+        if let date = currentItem?.metaData?.takenDate {
             dateString = dateFormatter.string(from: date)
         } else {
             dateString = ""
