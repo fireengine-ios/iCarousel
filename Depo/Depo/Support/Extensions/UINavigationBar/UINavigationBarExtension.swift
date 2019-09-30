@@ -72,6 +72,22 @@ extension UIViewController {
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     
+    func setNavigationRightBarButton(title: String, target: AnyObject, action: Selector) {
+        guard target.responds(to: action) else {
+            assertionFailure()
+            return
+        }
+        
+        let rightBarButtonItem = UIBarButtonItem.init(title: title,
+                                                      font: UIFont.TurkcellSaturaDemFont(size: 18),
+                                                      tintColor: .white,
+                                                      accessibilityLabel: nil,
+                                                      style: .done,
+                                                      target: target,
+                                                      selector: action)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
     func setNavigationBackgroundColor(color: UIColor) {
         navBar?.backgroundColor = color
     }

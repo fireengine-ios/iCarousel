@@ -109,26 +109,57 @@ final class LoginViewController: ViewController {
             newValue.isHidden = true
         }
     }
-    
-    @IBOutlet private weak var supportView: SupportBannerView! {
-        willSet {
-            newValue.isHidden = true
-            newValue.message = TextConstants.loginSupportInfo
-        }
-    }
-    
+
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
         }
     }
     
+    @IBOutlet private weak var bannerView: SupportFormBannerView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.delegate = self
+            newValue.picker = subjectPicker
+            newValue.toolBar = toolBarPicker
+        }
+    }
+    
     //MARK: Vars
+    
     var output: LoginViewOutput!
     
     private let keyboard = Typist.shared
     
-    //MARK: Life cycle
+    private lazy var subjectPicker: UIPickerView = {
+        let subjectPicker = UIPickerView()
+        subjectPicker.delegate = self
+        subjectPicker.dataSource = self
+        subjectPicker.selectedRow(inComponent: 0)
+        subjectPicker.backgroundColor = ColorConstants.subjectPickerBackgroundColor
+        return subjectPicker
+    }()
+    
+    private lazy var toolBarPicker: UIToolbar = {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = ColorConstants.toolBarTintColor
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: TextConstants.apply, style: .plain, target: self, action: #selector(handleApplyButtonClick))
+        doneButton.tintColor = ColorConstants.buttonTintColor
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(handleCancelButtonClick))
+        cancelButton.tintColor = ColorConstants.buttonTintColor
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.layer.zPosition = 1.0
+        return toolBar
+    }()
+    
+    //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
@@ -162,7 +193,8 @@ final class LoginViewController: ViewController {
         prepareForDisappear()
     }
     
-    //MARK: Utility methods
+    //MARK: - Utility methods
+    
     private func setup() {
         setupDelegates()
         configureKeyboard()
@@ -170,8 +202,6 @@ final class LoginViewController: ViewController {
     
     private func setupDelegates() {
         output.prepareCaptcha(captchaView)
-        
-        supportView.delegate = self
         
         loginEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
@@ -204,14 +234,18 @@ final class LoginViewController: ViewController {
         navigationBarWithGradientStyle()
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
+    @objc private func handleFaqButtonTap() {
+        output.openFaqSupport()
+    }
+
     private func prepareForDisappear() {
-        ///rootViewControlller's navBar is hidden. But on push we shouldn't hide it
+        ///rootViewController's navBar is hidden. But on push we shouldn't hide it
         if !output.isPresenting {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        
         output.isPresenting = false
     }
     
@@ -239,7 +273,18 @@ final class LoginViewController: ViewController {
         view.endEditing(true)
     }
     
-    //MARK: IBActions
+    @objc private func handleApplyButtonClick() {
+        let type = SupportFormSubjectType.allCases[subjectPicker.selectedRow(inComponent: 0)]
+        output.openSubjectDetails(type: type)
+    }
+    
+    @objc private func handleCancelButtonClick() {
+        bannerView.resignFirstResponder()
+        scrollView.setContentOffset(.zero, animated: true)
+    }
+    
+    //MARK: - IBActions
+    
     @IBAction func onRememberMeTap(_ sender: UIButton) {
         sender.isSelected.toggle()
         
@@ -263,7 +308,6 @@ final class LoginViewController: ViewController {
     @IBAction func onForgotPasswordTap(_ sender: Any) {
         output.onForgotPasswordTap()
     }
-    
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -387,16 +431,18 @@ extension LoginViewController: LoginViewInput {
         captchaView.hideErrorAnimated()
     }
     
-    //MARK: Alerts processing
+    //MARK: - Alerts processing
+    
     func showSupportView() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.supportView.isHidden = false
-            
-            self.view.layoutIfNeeded()
-        }
+        bannerView.type = .support
+    }
+    
+    func showFAQView() {
+        bannerView.type = .faq
         
-        let supportViewRect = self.view.convert(supportView.frame, to: self.view)
-        scrollView.scrollRectToVisible(supportViewRect, animated: true)
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.bannerView.isHidden = false
+        }
     }
     
     func showErrorMessage(with text: String) {
@@ -407,7 +453,7 @@ extension LoginViewController: LoginViewInput {
             self.view.layoutIfNeeded()
         }
         
-        let errorViewRect = self.view.convert(errorView.frame, to: self.view)
+        let errorViewRect = view.convert(errorView.frame, to: view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
@@ -443,9 +489,43 @@ extension LoginViewController: LoginViewInput {
     }
 }
 
-// MARK: - SupportBannerViewDelegate
-extension LoginViewController: SupportBannerViewDelegate {
-    func openSupport() {
-        output?.openSupport()
+extension LoginViewController: SupportFormBannerViewDelegate {
+    
+    func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
+        if bannerView.type == .support {
+            output?.openSupport()
+        } else {
+            bannerView.shouldShowPicker = true
+            bannerView.becomeFirstResponder()
+        }
+    }
+}
+
+extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return SupportFormSubjectType.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {        
+        let pickerLabel: UILabel
+        
+        if let label = view as? UILabel {
+            pickerLabel = label
+        } else {
+            pickerLabel = UILabel()
+            pickerLabel.adjustsFontSizeToFitWidth = true
+            pickerLabel.textAlignment = .center
+        }
+        
+        let localizedText = SupportFormSubjectType.allCases[row].localizedSubject
+        
+        ///extra spaces for small screens, like 5s
+        pickerLabel.text = " \(localizedText) "
+        
+        return pickerLabel
     }
 }

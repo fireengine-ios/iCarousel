@@ -957,6 +957,21 @@
 "user_profile_day_placeholder" = "يوم";
 "user_profile_month_placeholder" = "شهر";
 "user_profile_year_placeholder" = "سنة";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "الأسئلة المتداولة";
@@ -964,6 +979,7 @@
 "enter_your_password" = "ادخل كلمة المرور الخاصة بك";
 "re_enter_your_password" = "إعادة إدخال كلمة المرور الخاصة بك";
 "signup_support_info" = "إذا كنت تواجه صعوبة في التسجيل ، اتصل بنا للحصول على الدعم.";
+"signup_faq_info" = "";
 "missing_information" = "معلومات مفقودة";
 "please_enter_your_missing_account_information" = "الرجاء إدخال معلومات حسابك المفقودة:";
 "login_email_or_phone_placeholder" = "ادخل بريدك الإلكتروني أو رقم الهاتف النقال";
@@ -979,6 +995,7 @@
 "frequently_asked_questions" = "التعليمات";
 "login_username_not_valid" = "يرجى التحقق من اسم المستخدم الخاص بك";
 "login_support_info" = "إذا كنت تواجه صعوبة أثناء تسجيل الدخول ، اتصل بنا للحصول على الدعم.";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "شروط الاستخدام وسياسة الخصوصية";
 "Temporary error occurred. Please try again later." = ".حدث خطأ مؤقت. يرجى المحاولة مرة أخرى لاحقًا";
 "face_tags_description_premium" = "عند تفعيل خاصية التعرف بالوجه والصورة, يتم تصنيف الصور وفقا للأشياء والأشخاص.في حالة كون خدمة الموقع في الوضع النشط,فيتم تصنيف الصور وفقا لمعلومات الموقع.ويمكنكم تكوين قصص بشكل تلقائي خاصة بكم اعتمادا على هذا التصنيف.";

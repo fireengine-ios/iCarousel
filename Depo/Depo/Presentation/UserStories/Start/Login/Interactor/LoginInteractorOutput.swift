@@ -34,6 +34,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func captchaRequiredFailed(with message: String)
     
     func showSupportView()
+    func showFAQView()
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     
     func successedVerifyPhone()
