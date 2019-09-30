@@ -20,6 +20,7 @@ protocol SetSecurityQuestionViewControllerDelegate {
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
+    private lazy var answer = AnswerForSecretQuestion()
     var delegate: SetSecurityQuestionViewControllerDelegate?
     
     @IBOutlet private weak var saveButton: RoundedButton! {
@@ -67,9 +68,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         view.updateCaptcha()
         return view
     }()
-    
-    
-    private lazy var answer = AnswerForSecretQuestion()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -126,17 +124,19 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
     
-    func configureWith(selectedQuestion: String?, delegate: SetSecurityQuestionViewControllerDelegate) {
-           self.delegate = delegate
-           setupDescriptionLabel(selectedQuestion: selectedQuestion)
-       }
+    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate) {
+        self.delegate = delegate
+        answer.questionId = selectedQuestion?.id
+        setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
+    }
     
     private func setupDescriptionLabel(selectedQuestion: String?) {
         guard let question = selectedQuestion else {
             return
         }
         
-        secretAnswerView.answerTextField.text = "* * * * * * * * *"
+        secretAnswerView.answerTextField.quickDismissPlaceholder = "* * * * * * * * *"
+        secretAnswerView.answerTextField.placeholderColor = UIColor.black
         securityQuestionView.setQuestion(question: question)
     }
     
@@ -147,10 +147,14 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         captchaView.captchaAnswerTextField.text = ""
         
         secretAnswerView.answerTextField.resignFirstResponder()
-        secretAnswerView.answerTextField.text = "* * * * * * * * *"
+        secretAnswerView.answerTextField.text = ""
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
+        
+        captchaView.updateCaptcha()
+        captchaView.captchaAnswerTextField.text = ""
+        
         let errorText = error.localizedDescription
         
         switch error {

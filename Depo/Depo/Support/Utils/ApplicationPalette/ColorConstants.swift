@@ -75,6 +75,10 @@ struct ColorConstants {
     static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
     
     static let popUpBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 0.33)
+    
+    static let tealBlue = UIColor(red: 0, green: 124 / 255.0, blue: 171 / 255.0, alpha: 1.0)
+    static let seaweed = UIColor(red: 30 / 255.0, green: 215 / 255.0, blue: 128 / 255.0, alpha: 1.0)
+    static let blueGreen = UIColor(red: 13 / 255.0, green: 164 / 255.0, blue: 152 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

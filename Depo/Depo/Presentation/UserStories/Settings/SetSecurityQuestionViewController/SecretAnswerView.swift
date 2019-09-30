@@ -20,14 +20,14 @@ final class SecretAnswerView: UIView, NibInit {
         }
     }
     
-    @IBOutlet weak var answerTextField: UITextField! {
+    @IBOutlet weak var answerTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.placeholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
+            newValue.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
         }
     }
     

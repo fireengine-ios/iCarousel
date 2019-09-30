@@ -106,10 +106,11 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
         
         let attributedString = NSMutableAttributedString(string: message, attributes: attributes)
         messageLabel.attributedText = attributedString
+        messageLabel.numberOfLines = 0
     }
     
     private func showEmailVerifiedPopUp() {
-        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
+        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "spotify_checkmark")),
                                             message: TextConstants.credUpdateCheckCompletionMessage,
                                             buttonTitle: TextConstants.accessibilityClose,
                                             buttonAction: dismissCompletion)

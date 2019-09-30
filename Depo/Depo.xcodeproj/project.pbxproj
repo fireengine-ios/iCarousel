@@ -3295,6 +3295,24 @@
 		9808A05F206A88580022376D /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A05D206A88580022376D /* PushNotificationService.swift */; };
 		9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		981642FA233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FC233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */; };
+		981642FD233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		981642FE233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */; };
+		98164300233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164301233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */; };
+		98164303233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */; };
+		98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164307233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164308233CE2D40070F8B9 /* TimelineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981642F8233CE2D30070F8B9 /* TimelineButton.swift */; };
+		98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
@@ -8141,6 +8159,12 @@
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		9808A05D206A88580022376D /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
 		9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceConstants.swift; sourceTree = "<group>"; };
+		981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotoView.swift; sourceTree = "<group>"; };
+		981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosViewController.swift; sourceTree = "<group>"; };
+		981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMatikPhotosBottomBarManager.swift; sourceTree = "<group>"; };
+		981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
+		981642F8233CE2D30070F8B9 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
+		981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
@@ -13693,6 +13717,19 @@
 			path = PushNotificationService;
 			sourceTree = "<group>";
 		};
+		981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */ = {
+			isa = PBXGroup;
+			children = (
+				981642F4233CE2D30070F8B9 /* TBMatikPhotoView.swift */,
+				981642F5233CE2D30070F8B9 /* TBMatikPhotosViewController.swift */,
+				981642F6233CE2D30070F8B9 /* TBMatikPhotosBottomBarManager.swift */,
+				981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */,
+				981642F8233CE2D30070F8B9 /* TimelineButton.swift */,
+				981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */,
+			);
+			path = TBMatikPhotosViewController;
+			sourceTree = "<group>";
+		};
 		9826DB3D207F60BC00C00238 /* CustomScrollIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -14530,6 +14567,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */,
 				896133A623390D4F000083B7 /* BasePopUpController */,
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
 				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
@@ -17622,6 +17660,7 @@
 				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
+				9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				8C06B01D2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1712008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
@@ -17855,6 +17894,7 @@
 				8C06B1072008AD72003D8E05 /* slider_thumb@2x.png in Resources */,
 				8C06B1C92008AD72003D8E05 /* sticker_close@2x.png in Resources */,
 				8C06B0812008AD71003D8E05 /* paylas_linkedin@3x.png in Resources */,
+				98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AFFB2008AD71003D8E05 /* kontrast_secili.png in Resources */,
 				8C06AFE32008AD71003D8E05 /* italic_secili@3x.png in Resources */,
 				8C06AF1D2008AD70003D8E05 /* cizgi_1_selected@2x.png in Resources */,
@@ -18212,6 +18252,7 @@
 				8C06B0862008AD71003D8E05 /* paylas_mail@3x.png in Resources */,
 				8C06B16C2008AD72003D8E05 /* toolbar_sekil_icon@2x.png in Resources */,
 				8C06B13A2008AD72003D8E05 /* tahta_yeni.png in Resources */,
+				98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				8C06AEFA2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06B17E2008AD72003D8E05 /* turuncu.png in Resources */,
 				8C06B00E2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
@@ -18324,6 +18365,7 @@
 				8C06AED62008AD70003D8E05 /* bold@2x.png in Resources */,
 				8C06B1382008AD72003D8E05 /* t_orta_selected@3x.png in Resources */,
 				7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */,
+				98164303233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				8C06AF142008AD70003D8E05 /* cizgi_1.png in Resources */,
 				737A2EA52338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				8C06AEBC2008AD70003D8E05 /* alt_cizgili.png in Resources */,
@@ -19099,6 +19141,7 @@
 				CE784DD322A685FB00662219 /* vintage.png in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
 				CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
+				9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
@@ -19332,6 +19375,7 @@
 				CE784EAF22A685FB00662219 /* caps2_selected.png in Resources */,
 				CE784EB022A685FB00662219 /* SettingsViewController.xib in Resources */,
 				CE784EB122A685FB00662219 /* underline@2x.png in Resources */,
+				98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				CE784EB222A685FB00662219 /* lifebox.png in Resources */,
 				CE784EB322A685FB00662219 /* error_icon@2x.png in Resources */,
 				CE784EB422A685FB00662219 /* PackagePremiumView.xib in Resources */,
@@ -20253,6 +20297,7 @@
 				B56FBB2F2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				92004B6421AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				73FE51F222CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
+				98164301233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				173B144922F99F6100FAAC97 /* AccountWarningService.swift in Sources */,
@@ -20491,6 +20536,7 @@
 				92004B6A21AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				8CDB21EA20AC0FB700739700 /* UINavigationController+Push.swift in Sources */,
 				8C0E8D301FDEBDFF00789C91 /* LocalAlbumPresenter.swift in Sources */,
+				981642FE233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */,
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
@@ -20903,6 +20949,7 @@
 				4A0AC13F2087371A00032CC7 /* PeriodicContactSyncInteractor.swift in Sources */,
 				8C06AC0920066641003D8E05 /* LoginSettingsConfigurator.swift in Sources */,
 				8C0E8E621FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
+				98164307233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
@@ -21213,6 +21260,7 @@
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
+				981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
 				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
@@ -22699,6 +22747,7 @@
 				B56FBB222122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
+				981642FD233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */,
 				4A56D5CD202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
@@ -22738,6 +22787,7 @@
 				7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */,
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				A217E43421A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
+				98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
@@ -22846,6 +22896,7 @@
 				B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */,
 				B5AB5B5621F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
+				981642FA233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
 				B53DCE9020EF634900400DBA /* ContactUtil.m in Sources */,
@@ -22948,6 +22999,7 @@
 				9224936821BC14890086CB6A /* AuthorityType.swift in Sources */,
 				7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				66B07DFECFC39B41382FF00D /* FileInfoInteractorOutput.swift in Sources */,
+				98164300233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				23C013C53919B6111BA5B06C /* FileInfoInteractor.swift in Sources */,
 				8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */,
 				F87A7C545D69A5A04B6C19BF /* FileInfoRouterInput.swift in Sources */,
@@ -23561,6 +23613,7 @@
 				8E26D97E2306999500D08123 /* MusicViewController.swift in Sources */,
 				CE78490122A685FB00662219 /* SegmentedController.swift in Sources */,
 				CE78490222A685FB00662219 /* RegistrationDataSource.swift in Sources */,
+				981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				CE78490422A685FB00662219 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE78490522A685FB00662219 /* PremiumInteractorInput.swift in Sources */,
@@ -23775,6 +23828,7 @@
 				CE7849C822A685FB00662219 /* AlbumService.swift in Sources */,
 				CE7849C922A685FB00662219 /* TermsAndServicesViewOutput.swift in Sources */,
 				CE7849CA22A685FB00662219 /* PackagesInteractorOutput.swift in Sources */,
+				981642FC233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				CE7849CB22A685FB00662219 /* PeriodicContactSyncRouter.swift in Sources */,
 				CE7849CC22A685FB00662219 /* TermsAndServicesViewController.swift in Sources */,
 				CE7849CD22A685FB00662219 /* LoginSettingsConfigurator.swift in Sources */,
@@ -23854,6 +23908,7 @@
 				CE784A1222A685FB00662219 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE784A1322A685FB00662219 /* ImportPhotosViewOutput.swift in Sources */,
 				CE784A1422A685FB00662219 /* FaceImagePhotosInteractorInput.swift in Sources */,
+				98164308233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				CE784A1522A685FB00662219 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE784A1622A685FB00662219 /* AccountService.swift in Sources */,
 				CE784A1722A685FB00662219 /* TermsOfUseViewInput.swift in Sources */,
@@ -24394,6 +24449,7 @@
 				CE784C1122A685FB00662219 /* SearchDataSource.swift in Sources */,
 				CE784C1222A685FB00662219 /* ContactSyncSDK.m in Sources */,
 				CE784C1322A685FB00662219 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
+				98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE784C1422A685FB00662219 /* SelectNameRouterInput.swift in Sources */,
 				CE784C1522A685FB00662219 /* PackagesRouterInput.swift in Sources */,
 				CE784C1622A685FB00662219 /* SelectNameRouter.swift in Sources */,
@@ -27054,7 +27110,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.9;
+				CURRENT_PROJECT_VERSION = 30.10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -27117,7 +27173,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.9;
+				CURRENT_PROJECT_VERSION = 30.10;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27176,7 +27232,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.9;
+				CURRENT_PROJECT_VERSION = 30.10;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27236,7 +27292,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.9;
+				CURRENT_PROJECT_VERSION = 30.10;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
