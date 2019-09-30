@@ -120,8 +120,6 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.isHidden = true
             newValue.delegate = self
-            newValue.picker = self.subjectPicker
-            newValue.toolBar = self.toolBarPicker
         }
     }
     
@@ -517,10 +515,10 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             pickerLabel = label
         } else {
             pickerLabel = UILabel()
+            pickerLabel.adjustsFontSizeToFitWidth = true
+            pickerLabel.textAlignment = .center
         }
         
-        pickerLabel.adjustsFontSizeToFitWidth = true
-        pickerLabel.textAlignment = .center
         let localizedText = SupportFormSubjectType.allCases[row].localizedSubject
         
         ///extra spaces for small screens, like 5s

@@ -49,8 +49,6 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
     }
     
     private func convertHtmlToAttributedString() {
-        debugLog("Initialisation of NSMutableAttributedString failed and run into crash")
-        
         let font = UIFont.TurkcellSaturaFont(size: 15)
         
         let htmlText = "<span style=\"color:rgba(32,33,34,0.8); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type?.localizedInfoHtml ?? "")</span>"
@@ -60,13 +58,16 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
             return
         }
         
-        /// https://forums.developer.apple.com/thread/115405
+        
         
         do {
             textView.attributedText = try NSAttributedString(data: htmlTextData,
                                                              options: [.documentType: NSAttributedString.DocumentType.html],
                                                              documentAttributes: nil)
         } catch {
+            debugLog("Initialisation of NSMutableAttributedString failed and run into crash")
+            /// https://forums.developer.apple.com/thread/115405
+            
             assertionFailure()
         }
     }
