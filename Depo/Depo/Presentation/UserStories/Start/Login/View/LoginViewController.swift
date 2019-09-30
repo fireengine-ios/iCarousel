@@ -120,6 +120,8 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.isHidden = true
             newValue.delegate = self
+            newValue.picker = subjectPicker
+            newValue.toolBar = toolBarPicker
         }
     }
     

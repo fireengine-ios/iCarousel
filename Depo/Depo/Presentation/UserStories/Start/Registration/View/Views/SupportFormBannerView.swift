@@ -55,8 +55,8 @@ final class SupportFormBannerView: UIView, NibInit {
     
     var shouldShowPicker = false
     
-    var picker = UIPickerView()
-    var toolBar = UIToolbar()
+    var picker: UIPickerView?
+    var toolBar: UIToolbar?
     
     override var canBecomeFirstResponder: Bool {
         return shouldShowPicker
