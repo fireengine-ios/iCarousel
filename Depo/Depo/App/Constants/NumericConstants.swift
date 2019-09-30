@@ -16,7 +16,8 @@ struct NumericConstants {
     static let verificationCharacterLimit = 6
     static let verificationTimerLimit = 120//in seconds
     static let maxVerificationAttempts = 3
-    static let showSupportViewAttempts = 10
+    static let showFAQViewAttempts = 3
+    static let showSupportViewAttempts = 6
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)

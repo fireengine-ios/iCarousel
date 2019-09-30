@@ -987,6 +987,21 @@
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "AAAA";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Preguntas Más Frecuentes";
@@ -994,6 +1009,7 @@
 "enter_your_password" = "Ingresar su contraseña";
 "re_enter_your_password" = "Reingresar su contraseña";
 "signup_support_info" = "Si tiene dificultades para registrarse, contáctenos para obtener ayuda.";
+"signup_faq_info" = "";
 "missing_information" = "Información que falta";
 "please_enter_your_missing_account_information" = "Por favor ingresar la información de su cuenta faltante:";
 "login_email_or_phone_placeholder" = "Ingresar su correo electrónico o número de teléfono móvil";
@@ -1009,6 +1025,7 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Por favor verificar su nombre de usuario";
 "login_support_info" = "Si tiene dificultades para registrarse, contáctenos para obtener ayuda.";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Condiciones de Uso y Política de Privacidad";
 "Temporary error occurred. Please try again later." = "Se ha ocurrido un error temporal. Por favor, intente de nuevo más tarde.";
 "face_tags_description_premium" = "Cuando active el Reconocimiento de Rostro e Imagen, las fotos que sube se agrupan por caras y objetos. Si la opción del servicio de ubicación está activada, las fotos también se agrupan por información de ubicación. En la base de esta agrupación, podremos crear historias automáticas para usted.";

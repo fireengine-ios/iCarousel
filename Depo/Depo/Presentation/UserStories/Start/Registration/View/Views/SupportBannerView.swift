@@ -71,7 +71,7 @@ final class SupportBannerView: UIView {
     
     private func setup() {
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = 4
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openSupport))
         self.addGestureRecognizer(tapGesture)
@@ -96,26 +96,28 @@ final class SupportBannerView: UIView {
     }
     
     private func setupLayout() {
+        translatesAutoresizingMaskIntoConstraints = false
+
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
-        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).activate()
+        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).activate()
+        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).activate()
 
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        symbolImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7).isActive = true
-        symbolImageView.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 8).isActive = true
-        symbolImageView.widthAnchor.constraint(equalTo: symbolImageView.heightAnchor, multiplier: 0.6).isActive = true
+        symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        symbolImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7).activate()
+        symbolImageView.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 8).activate()
+        symbolImageView.widthAnchor.constraint(equalTo: symbolImageView.heightAnchor, multiplier: 0.6).activate()
         
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
         
-        arrowButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        arrowButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        arrowButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
-        arrowButton.heightAnchor.constraint(equalTo: arrowButton.widthAnchor, multiplier: 2).isActive = true
-        arrowButton.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 8).isActive = true
+        arrowButton.widthAnchor.constraint(equalToConstant: 24).activate()
+        arrowButton.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        arrowButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
+        arrowButton.heightAnchor.constraint(equalTo: arrowButton.widthAnchor, multiplier: 2).activate()
+        arrowButton.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 8).activate()
     }
     
     @objc private func openSupport() {

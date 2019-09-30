@@ -241,6 +241,18 @@
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4B34A3F92334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
+		4B34A3FA2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
+		4B34A3FB2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
+		4B857860233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
+		4B857861233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
+		4B857862233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
+		4B857863233908B400F378AB /* SubjectDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */; };
+		4B857864233908B400F378AB /* SubjectDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */; };
+		4B857865233908B400F378AB /* SubjectDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */; };
+		4B88BB6E233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
+		4B88BB6F233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
+		4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */; };
 		4BA61F6E22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
 		4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA61F6D22B7D60400D66031 /* PermissionType.swift */; };
 		4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */; };
@@ -249,6 +261,9 @@
 		4BE1268F2304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
 		4BE126902304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
 		4BE126912304351900BFE06F /* ServerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1268E2304351900BFE06F /* ServerErrors.swift */; };
+		4BEC1142233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
+		4BEC1143233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
+		4BEC1144233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */; };
 		4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A68322B23F4F0082130F /* PermissionViewController.swift */; };
 		4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A68C22B2690A0082130F /* PermissionsView.xib */; };
@@ -3615,6 +3630,9 @@
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
+		B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
+		B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
@@ -6767,9 +6785,14 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormBannerView.swift; sourceTree = "<group>"; };
 		4B7D5AAAF94401583E438FF4 /* Pods-LifeDriveProviderUI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.appstore.xcconfig"; sourceTree = "<group>"; };
+		4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailsViewController.swift; sourceTree = "<group>"; };
+		4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubjectDetailsViewController.xib; sourceTree = "<group>"; };
+		4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailsDesigner.swift; sourceTree = "<group>"; };
 		4BA61F6D22B7D60400D66031 /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
 		4BE1268E2304351900BFE06F /* ServerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrors.swift; sourceTree = "<group>"; };
+		4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormSubjectType.swift; sourceTree = "<group>"; };
 		4BF3A68322B23F4F0082130F /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		4BF3A68C22B2690A0082130F /* PermissionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsView.xib; sourceTree = "<group>"; };
 		4BF3A69322B3822E0082130F /* PermissionsDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDesigner.swift; sourceTree = "<group>"; };
@@ -8347,6 +8370,7 @@
 		B54BFF48202B45490018AF82 /* autosync-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
+		B54E09D1233252D100C3AB94 /* PaycellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellViewController.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
@@ -9485,6 +9509,7 @@
 				17589F612275E33800A5DB37 /* SupportBannerView.swift */,
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
 				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
+				4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -10250,6 +10275,16 @@
 				3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4B88BB71233A36AF001350F8 /* SubjectDetailsSubView */ = {
+			isa = PBXGroup;
+			children = (
+				4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */,
+				4B85785F233908B400F378AB /* SubjectDetailsViewController.xib */,
+				4B88BB6D233A352C001350F8 /* SubjectDetailsDesigner.swift */,
+			);
+			path = SubjectDetailsSubView;
 			sourceTree = "<group>";
 		};
 		4BE126922304352E00BFE06F /* Errors */ = {
@@ -12174,6 +12209,7 @@
 				8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */,
 				7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */,
 				92284599227B3E9600909FFC /* LoginViewController.swift */,
+				4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -13333,6 +13369,7 @@
 			children = (
 				8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */,
 				8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */,
+				4B88BB71233A36AF001350F8 /* SubjectDetailsSubView */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -14981,6 +15018,7 @@
 				CE2F56071F7552A900F49DA1 /* Presenter */,
 				CE2F560A1F7552A900F49DA1 /* Router */,
 				CE2F560D1F7552A900F49DA1 /* View */,
+				B54E09D1233252D100C3AB94 /* PaycellViewController.swift */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -17422,6 +17460,7 @@
 				8C0E90021FDEBDFF00789C91 /* AppRater.bundle in Resources */,
 				8C06AFC92008AD71003D8E05 /* header_icon@2x.png in Resources */,
 				8C06AECF2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
+				4B857864233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
 				8C0E90031FDEBDFF00789C91 /* LaunchScreen.storyboard in Resources */,
 				8C06B16D2008AD72003D8E05 /* toolbar_sekil_icon@2x.png in Resources */,
 				8C0E90041FDEBDFF00789C91 /* BottomSelectionTabBarViewController.xib in Resources */,
@@ -18699,6 +18738,7 @@
 				8C06B0BE2008AD71003D8E05 /* rotation_secili@3x.png in Resources */,
 				8C06B0AA2008AD71003D8E05 /* renk_selected@3x.png in Resources */,
 				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
+				4B857863233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
 				A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0DE2008AD71003D8E05 /* sample_red@3x.png in Resources */,
 				8C06B0742008AD71003D8E05 /* paylas_fb@3x.png in Resources */,
@@ -18903,6 +18943,7 @@
 				CE784CF622A685FB00662219 /* tahta_yeni.png in Resources */,
 				CE784CF722A685FB00662219 /* caps2.png in Resources */,
 				CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
+				4B857865233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
 				CE784CF822A685FB00662219 /* turuncu.png in Resources */,
 				CE784CF922A685FB00662219 /* kucuk_ucgen@2x.png in Resources */,
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
@@ -19933,7 +19974,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388\n";
 		};
 		AC32A30CA8497D34DCCC093C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -20298,6 +20339,7 @@
 				173B144922F99F6100FAAC97 /* AccountWarningService.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
+				4B34A3FA2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
 				8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */,
 				7C4F60B1201C674A0033C58F /* MovieCard.swift in Sources */,
@@ -20322,6 +20364,7 @@
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
 				8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */,
+				B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				4A56D5B6202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
@@ -20972,6 +21015,7 @@
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
 				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
+				4BEC1143233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
@@ -20986,6 +21030,7 @@
 				8C06AC2D2008AD0C003D8E05 /* UIScrollView+Refresh.swift in Sources */,
 				8C0E8EA41FDEBDFF00789C91 /* PasscodeSettingsRouter.swift in Sources */,
 				8C0E8EA91FDEBDFF00789C91 /* FBResponses.swift in Sources */,
+				4B857861233908B400F378AB /* SubjectDetailsViewController.swift in Sources */,
 				8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */,
 				8C0E8EAE1FDEBDFF00789C91 /* BaseFilesGreedViewInput.swift in Sources */,
 				170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */,
@@ -21179,6 +21224,7 @@
 				8C0E8F1B1FDEBDFF00789C91 /* SyncContactsInitializer.swift in Sources */,
 				8C0E8F1C1FDEBDFF00789C91 /* SettingsViewInput.swift in Sources */,
 				8C0E8F1D1FDEBDFF00789C91 /* DropboxService.swift in Sources */,
+				4B88BB6F233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				4A0AC13C2087370B00032CC7 /* PeriodicContactSyncPresenter.swift in Sources */,
 				8C0E8F1E1FDEBDFF00789C91 /* BaseItemPassingProtocol.swift in Sources */,
 				8C0E8F1F1FDEBDFF00789C91 /* SettingsViewOutput.swift in Sources */,
@@ -21971,6 +22017,7 @@
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
 				CE343602224B92BB00AFAABB /* Bool+Init.swift in Sources */,
+				4B857860233908B400F378AB /* SubjectDetailsViewController.swift in Sources */,
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
 				B5C7C582211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
@@ -22160,6 +22207,7 @@
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
+				B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
@@ -22768,6 +22816,7 @@
 				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
+				4B88BB6E233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				925B59A522C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
 				B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */,
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
@@ -22783,6 +22832,7 @@
 				98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
+				4B34A3F92334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				737A2EA92338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
@@ -23108,6 +23158,7 @@
 				4A11F55D21A58EBF00D6AADC /* PackageInfoView.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */,
+				4BEC1142233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				F7482D621455E6693DAF8873 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
 				07BD09833626CA46F3CE945C /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -23356,6 +23407,7 @@
 				CE78481B22A685FB00662219 /* PasscodeEnterViewController.swift in Sources */,
 				CE78481D22A685FB00662219 /* UIImageView.swift in Sources */,
 				89E51D5522CA1126007A7DBC /* CreateStoryPreviewPresenter.swift in Sources */,
+				4B857862233908B400F378AB /* SubjectDetailsViewController.swift in Sources */,
 				CE78481E22A685FB00662219 /* ControlTabBarProtocol.swift in Sources */,
 				CE78481F22A685FB00662219 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				CE78482022A685FB00662219 /* UserProfileModuleInput.swift in Sources */,
@@ -23630,6 +23682,7 @@
 				CE78491422A685FB00662219 /* DuplicatedContactsInteractor.swift in Sources */,
 				CE78491522A685FB00662219 /* ConnectWithInstaView.swift in Sources */,
 				CE78491622A685FB00662219 /* UIViewController+NavBar.swift in Sources */,
+				4B34A3FB2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
 				CE78491722A685FB00662219 /* SwiftyJSONExtension.swift in Sources */,
 				CE78491822A685FB00662219 /* ContactDevice.m in Sources */,
 				CE78491922A685FB00662219 /* UserDefaultsForUserID.swift in Sources */,
@@ -23697,6 +23750,7 @@
 				CE78495322A685FB00662219 /* LoginInitializer.swift in Sources */,
 				CE78495422A685FB00662219 /* PremiumInteractorOutput.swift in Sources */,
 				CE78495522A685FB00662219 /* FaceImageItemsRouter.swift in Sources */,
+				4BEC1144233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				CE78495622A685FB00662219 /* Factory.swift in Sources */,
 				CE78495722A685FB00662219 /* Contact.m in Sources */,
@@ -23888,6 +23942,7 @@
 				CE784A0722A685FB00662219 /* PeriodicContactSyncViewInput.swift in Sources */,
 				8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */,
 				CE784A0822A685FB00662219 /* AlertFilesActionsSheetInteractor.swift in Sources */,
+				4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				CE784A0922A685FB00662219 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CE784A0A22A685FB00662219 /* ActivityTimelineHeader.swift in Sources */,
 				CE784A0B22A685FB00662219 /* PrintViewInput.swift in Sources */,
@@ -23995,6 +24050,7 @@
 				CE784A6C22A685FB00662219 /* Spotlight.swift in Sources */,
 				CE784A6D22A685FB00662219 /* ImportFromInstagramInteractor.swift in Sources */,
 				CE784A6E22A685FB00662219 /* ForgotPasswordInteractor.swift in Sources */,
+				B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE784A6F22A685FB00662219 /* OffersService.swift in Sources */,
 				CE784A7022A685FB00662219 /* LocalMediaStorage.swift in Sources */,
 				CE784A7122A685FB00662219 /* FaceImageChangeCoverPresenter.swift in Sources */,
@@ -26032,8 +26088,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -26175,8 +26231,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -26343,8 +26399,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -26489,7 +26545,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
-				PROVISIONING_PROFILE_SPECIFIER = "files UI dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox files UI dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26510,8 +26566,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeboxFileProviderUI.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -27102,7 +27158,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.10;
+				CURRENT_PROJECT_VERSION = 30.11;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -27161,11 +27217,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.10;
+				CURRENT_PROJECT_VERSION = 30.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27224,7 +27280,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.10;
+				CURRENT_PROJECT_VERSION = 30.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27284,7 +27340,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 30.10;
+				CURRENT_PROJECT_VERSION = 30.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

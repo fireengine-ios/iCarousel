@@ -148,6 +148,9 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         
         secretAnswerView.answerTextField.resignFirstResponder()
         secretAnswerView.answerTextField.text = ""
+        secretAnswerView.answerTextField.quickDismissPlaceholder = "* * * * * * * * *"
+        secretAnswerView.answerTextField.placeholderColor = UIColor.black
+        
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {

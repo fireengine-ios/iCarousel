@@ -144,6 +144,19 @@ extension PackagesViewController: PackagesViewInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
 
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.create(with: cpcmOfferId) { [weak self] result in
+            //TODO: possibly will be needed when paycell process in fixed
+            //            switch result {
+            //            case .success():
+            //                return
+            //            case .failure(_):
+            //                return
+            //            }
+        }
+        RouterVC().pushViewController(viewController: controller)
+    }
+
     func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()

@@ -7,7 +7,6 @@
 //
 
 class LoginRouter: LoginRouterInput {
-  
     let router = RouterVC()
     
     func goToForgotPassword() {
@@ -97,5 +96,15 @@ class LoginRouter: LoginRouterInput {
         }
         
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+    }
+    
+    func goToFaqSupportPage() {
+        let faqSupportController = router.helpAndSupport
+        router.pushViewController(viewController: faqSupportController)
+    }
+    
+    func gotoSubjectDetailsPage(type: SupportFormSubjectType) {
+        let controller = SubjectDetailsViewController.present(with: type)
+        router.presentViewController(controller: controller)
     }
 }

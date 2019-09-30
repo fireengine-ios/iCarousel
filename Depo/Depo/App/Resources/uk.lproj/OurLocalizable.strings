@@ -947,6 +947,21 @@
 "user_profile_day_placeholder" = "ДД";
 "user_profile_month_placeholder" = "ММ";
 "user_profile_year_placeholder" = "РРРР";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Допомога та підтримка";
@@ -954,6 +969,7 @@
 "enter_your_password" = "Введіть ваш пароль";
 "re_enter_your_password" = "Введіть ваш пароль ще раз";
 "signup_support_info" = "Якщо у вас виникли труднощі під час реєстрації, зв’яжіться з нами";
+"signup_faq_info" = "";
 "missing_information" = "Недостатньо інформації";
 "please_enter_your_missing_account_information" = "Будь ласка введіть інформацію про свій обліковий запис";
 "login_email_or_phone_placeholder" = "Введіть ваш e-mail або номер телефона";
@@ -969,6 +985,7 @@
 "frequently_asked_questions" = "Запитання та відповіді";
 "login_username_not_valid" = "Будь ласка перевірте ім'я користувача";
 "login_support_info" = "Якщо у вас виникли труднощі під час входу, зв'яжіться з нами для підтримки";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Умови користування та політика конфіденційності";
 "Temporary error occurred. Please try again later." = "Сталася тимчасова помилка. Будь-ласка спробуйте пізніше.";
 "face_tags_description_premium" = "При включенні функції розпізнавання обличчь та зображень завантажені фото будуть сгруповані по обличчям та об'єктам. Якщо опцію визначення місцезнаходження включено, фото також будуть сгруповані згідно з інформацією про місцезнаходження. Таким чином ми зможемо автоматично створювати тематичні історії для вас.";

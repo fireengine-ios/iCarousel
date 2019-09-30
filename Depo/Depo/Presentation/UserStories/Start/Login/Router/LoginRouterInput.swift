@@ -37,4 +37,8 @@ protocol LoginRouterInput {
                                messageDesign: DesignText,
                                buttonTitle: String,
                                buttonAction: @escaping VoidHandler)
+    
+    func goToFaqSupportPage()
+    
+    func gotoSubjectDetailsPage(type: SupportFormSubjectType)
 }
