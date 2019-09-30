@@ -344,7 +344,7 @@ final class PushNotificationService {
     
     private func openTBMaticPhotos(_ uuids: String?) {
         debugLog("PushNotificationService try to open TBMatic screen")
-        guard let uuids = uuids?.components(separatedBy: ",") else {
+        guard let uuids = uuids?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
             assertionFailure()
             debugLog("PushNotificationService uuids is empty")
             return
