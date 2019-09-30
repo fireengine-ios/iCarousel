@@ -3615,6 +3615,9 @@
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
+		B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
+		B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
@@ -8347,6 +8350,7 @@
 		B54BFF48202B45490018AF82 /* autosync-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
+		B54E09D1233252D100C3AB94 /* PaycellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellViewController.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
@@ -14981,6 +14985,7 @@
 				CE2F56071F7552A900F49DA1 /* Presenter */,
 				CE2F560A1F7552A900F49DA1 /* Router */,
 				CE2F560D1F7552A900F49DA1 /* View */,
+				B54E09D1233252D100C3AB94 /* PaycellViewController.swift */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -20322,6 +20327,7 @@
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
 				8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */,
+				B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				4A56D5B6202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
@@ -22160,6 +22166,7 @@
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
+				B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
@@ -23995,6 +24002,7 @@
 				CE784A6C22A685FB00662219 /* Spotlight.swift in Sources */,
 				CE784A6D22A685FB00662219 /* ImportFromInstagramInteractor.swift in Sources */,
 				CE784A6E22A685FB00662219 /* ForgotPasswordInteractor.swift in Sources */,
+				B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE784A6F22A685FB00662219 /* OffersService.swift in Sources */,
 				CE784A7022A685FB00662219 /* LocalMediaStorage.swift in Sources */,
 				CE784A7122A685FB00662219 /* FaceImageChangeCoverPresenter.swift in Sources */,

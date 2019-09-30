@@ -89,17 +89,11 @@ extension PackagesPresenter: PackagesViewOutput {
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
-            
-        case .paycellAllAccess?:
-            // TODO: uncomment
-//            view?.startActivityIndicator()
-            print("all access")
-            
-        case .paycellSLCM?:
-            // TODO: uncomment
-//            view?.startActivityIndicator()
-            print("paycellSLCM")
-            
+        case .paycellAllAccess?, .paycellSLCM?:
+            if let offerId = model.cpcmOfferId {
+                view?.showPaycellProcess(with: offerId)
+            }
+
         default:
             let error = CustomErrors.serverError("This is not buyable offer type")
             failed(with: error.localizedDescription)

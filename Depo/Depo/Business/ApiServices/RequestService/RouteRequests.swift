@@ -281,4 +281,6 @@ struct RouteRequests {
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+    
+    static let paycellWebUrl = baseShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=google.com"
 }
