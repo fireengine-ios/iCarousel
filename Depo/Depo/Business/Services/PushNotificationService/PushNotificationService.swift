@@ -342,16 +342,16 @@ final class PushNotificationService {
         pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
     }
     
-    private func openTBMaticPhotos(_ uuids: String?) {
+    private func openTBMaticPhotos(_ uuidsByString: String?) {
         debugLog("PushNotificationService try to open TBMatic screen")
         // handle list of uuids with two variants for separators "," and ", "
-        guard let uuidsArray = uuids?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
+        guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
             assertionFailure()
             debugLog("PushNotificationService uuids is empty")
             return
         }
         
-        let controller = router.tbmaticPhotosContoller(uuids: uuidsArray)
+        let controller = router.tbmaticPhotosContoller(uuids: uuids)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
