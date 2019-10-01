@@ -36,8 +36,6 @@
 		173B144822F99F6100FAAC97 /* AccountWarningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* AccountWarningService.swift */; };
 		173B144922F99F6100FAAC97 /* AccountWarningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* AccountWarningService.swift */; };
 		173B144A22F99F6100FAAC97 /* AccountWarningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* AccountWarningService.swift */; };
-		17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
-		17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
 		17589F672275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
 		17589F682275E33900A5DB37 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F632275E33800A5DB37 /* ErrorBannerView.swift */; };
@@ -5292,7 +5290,6 @@
 		CE784BD422A685FB00662219 /* UsageInfoViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863EF1F3F18FA00EFDC6D /* UsageInfoViewInput.swift */; };
 		CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */; };
 		CE784BD722A685FB00662219 /* DuplicatedContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */; };
-		CE784BD822A685FB00662219 /* SupportBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SupportBannerView.swift */; };
 		CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */; };
 		CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5BD202AF5F6003A4624 /* FaceImageAddNameInitializer.swift */; };
 		CE784BDC22A685FB00662219 /* UploadFilesSelectionViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */; };
@@ -6637,7 +6634,6 @@
 		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
 		17188D76C5DC2DF01A5777E4 /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		173B144722F99F6000FAAC97 /* AccountWarningService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountWarningService.swift; sourceTree = "<group>"; };
-		17589F612275E33800A5DB37 /* SupportBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBannerView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
 		17589F632275E33800A5DB37 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
 		17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhoneEnterView.swift; sourceTree = "<group>"; };
@@ -9506,7 +9502,6 @@
 		17589F602275E33800A5DB37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17589F612275E33800A5DB37 /* SupportBannerView.swift */,
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
 				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
 				4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */,
@@ -21115,7 +21110,6 @@
 				8C0E8EE11FDEBDFF00789C91 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C0E8EE31FDEBDFF00789C91 /* PhotoVideoDetailInteractorInput.swift in Sources */,
-				17589F652275E33900A5DB37 /* SupportBannerView.swift in Sources */,
 				8C0B919920170E5200A5BA81 /* DuplicatedContactsViewInput.swift in Sources */,
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
@@ -23064,7 +23058,6 @@
 				D47863FC1F3F18FA00EFDC6D /* UsageInfoViewInput.swift in Sources */,
 				78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */,
 				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
-				17589F642275E33900A5DB37 /* SupportBannerView.swift in Sources */,
 				4AD1A81A208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				4A56D5BE202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				84F590D00E5D8FE7C0F21A7E /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -24434,7 +24427,6 @@
 				CE784BD722A685FB00662219 /* DuplicatedContactsViewController.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
-				CE784BD822A685FB00662219 /* SupportBannerView.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */,
 				CE784BDC22A685FB00662219 /* UploadFilesSelectionViewInput.swift in Sources */,

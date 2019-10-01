@@ -66,7 +66,7 @@ struct ColorConstants {
     static let alertOrangeAndBlueGradientEnd = UIColor(red: 67 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1.0)
     
     static let subjectPickerBackgroundColor = UIColor(red: 208/255, green: 211/255, blue: 216/255, alpha: 1)
-    static let toolBarTintColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+    static let toolbarTintColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
     static let buttonTintColor = UIColor(red: 73/255, green: 206/255, blue: 205/255, alpha: 1)
     static let closeIconButtonColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
     
