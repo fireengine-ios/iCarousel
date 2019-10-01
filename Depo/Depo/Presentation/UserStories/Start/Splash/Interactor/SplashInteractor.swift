@@ -65,14 +65,14 @@ class SplashInteractor: SplashInteractorInput {
     
     private func loginInBackground() {
         setupReachabilityIfNeed()
-        
+        debugPrint("!!!! wifi? --\(reachabilityService.isReachableViaWiFi) token is alive? --\(tokenStorage.accessToken != nil)")
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
-            } else {
+            } else reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
@@ -105,6 +105,9 @@ class SplashInteractor: SplashInteractorInput {
                     }
                     self?.isTryingToLogin = false
                 })
+            } else {
+                output.asyncOperationSuccess()
+                failLogin()
             }
         } else {
             refreshAccessToken { [weak self] in
