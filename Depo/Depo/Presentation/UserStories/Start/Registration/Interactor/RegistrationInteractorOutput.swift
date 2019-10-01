@@ -18,5 +18,6 @@ protocol RegistrationInteractorOutput: class {
     func signUpFailed(errorResponse: ErrorResponse)
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)
     
+    func showFAQView()
     func showSupportView()
 }

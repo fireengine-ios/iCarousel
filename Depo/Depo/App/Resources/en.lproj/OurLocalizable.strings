@@ -982,14 +982,34 @@
 "support_form_subject_6" = "Lifebox / Automatic Log-in problem";
 "support_form_subject_7" = "Lifebox / I can't download lifebox app";
 "support_form_signup_subject_1" = "Lifebox- I cannot register with my e-mail";
-"support_form_signup_subject_2" = "Lifebox- I cannot register with m phone number";
+"support_form_signup_subject_2" = "Lifebox- I cannot register with my phone number";
 "support_form_signup_subject_3" = "Lifebox- Password is not accepted";
+"support_form_signup_subject_1" = "Lifebox / I cannot register with my e-mail";
+"support_form_signup_subject_2" = "Lifebox / I cannot register with m phone number";
+"support_form_signup_subject_3" = "Lifebox / Password is not accepted";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+
+
+"login_faq" = "FAQ";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
@@ -997,6 +1017,7 @@
 "enter_your_password" = "Enter your password";
 "re_enter_your_password" = "Re-enter your password";
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
+"signup_faq_info" = "Please select a topic if you need help.";
 "missing_information" = "Missing Information";
 "please_enter_your_missing_account_information" = "Please enter your missing account information:";
 "login_email_or_phone_placeholder" = "Enter your e-mail or phone number";
@@ -1012,6 +1033,7 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
+"login_faq_info" = "Please select a topic if you need help.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";

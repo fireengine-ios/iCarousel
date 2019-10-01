@@ -7,7 +7,6 @@
 //
 
 class LoginRouter: LoginRouterInput {
-  
     let router = RouterVC()
     
     func goToForgotPassword() {
@@ -76,13 +75,13 @@ class LoginRouter: LoginRouterInput {
     }
     
     func openSupport() {
-        let controller = SupportFormController.with(subjects: [TextConstants.supportFormSubject1,
-                                                               TextConstants.supportFormSubject2,
-                                                               TextConstants.supportFormSubject3,
-                                                               TextConstants.supportFormSubject4,
-                                                               TextConstants.supportFormSubject5,
-                                                               TextConstants.supportFormSubject6,
-                                                               TextConstants.supportFormSubject7])
+        let controller = SupportFormController.with(subjects: [TextConstants.onLoginSupportFormSubject1,
+                                                               TextConstants.onLoginSupportFormSubject2,
+                                                               TextConstants.onLoginSupportFormSubject3,
+                                                               TextConstants.onLoginSupportFormSubject4,
+                                                               TextConstants.onLoginSupportFormSubject5,
+                                                               TextConstants.onLoginSupportFormSubject6,
+                                                               TextConstants.onLoginSupportFormSubject7])
         router.pushViewController(viewController: controller)
     }
     
@@ -97,5 +96,15 @@ class LoginRouter: LoginRouterInput {
         }
         
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+    }
+    
+    func goToFaqSupportPage() {
+        let faqSupportController = router.helpAndSupport
+        router.pushViewController(viewController: faqSupportController)
+    }
+    
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol) {
+        let controller = SubjectDetailsViewController.present(with: type)
+        router.presentViewController(controller: controller)
     }
 }

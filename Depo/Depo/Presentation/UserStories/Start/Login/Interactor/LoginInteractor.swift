@@ -36,9 +36,12 @@ class LoginInteractor: LoginInteractorInput {
     private var rememberMe: Bool = true
     
     private var attempts: Int = 0
+    
     private var loginRetries = 0 {
         didSet {
-            if loginRetries >= NumericConstants.showSupportViewAttempts {
+            if loginRetries == NumericConstants.showFAQViewAttempts {
+                output?.showFAQView()
+            } else if loginRetries >= NumericConstants.showSupportViewAttempts {
                 output?.showSupportView()
             }
         }

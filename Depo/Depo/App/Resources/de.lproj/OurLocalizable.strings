@@ -945,6 +945,21 @@
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "JJJJ";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
@@ -952,6 +967,7 @@
 "enter_your_password" = "Geben Sie Ihr Passwort ein";
 "re_enter_your_password" = "Wiederhole die Eingabe deines Passwortes";
 "signup_support_info" = "Wenn Sie Schwierigkeiten haben, sich anzumelden, wenden Sie sich an uns, um Unterstützung zu erhalten.";
+"signup_faq_info" = "";
 "missing_information" = "Fehlende Information";
 "please_enter_your_missing_account_information" = "Bitte geben Sie Ihre fehlenden Kontodaten ein:";
 "login_email_or_phone_placeholder" = "Geben Sie Ihre E-Mail oder Handynummer ein";
@@ -967,6 +983,7 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Bitte überprüfen Sie Ihren Benutzernamen";
 "login_support_info" = "Wenn Sie Probleme beim Anmelden haben, wenden Sie sich an uns, um Unterstützung zu erhalten.";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Nutzungsbedingungen und Datenschutzerklärung";
 "Temporary error occurred. Please try again later." = "Es ist ein vorübergehender Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 "face_tags_description_premium" = "Ihre hochgeladenen Bilder werden nach Aktivierung der Gesichts- und Bilderkennungseigenschaft nach Gesichtern und Objekten gruppiert. Sollte der Standortdienst aktiviert sein, werden auch die Bilder entsprechend der Standortinformation gruppiert. Wir können für Sie angelehnt an diese Gruppierungen automatische Storys erstellen.";
