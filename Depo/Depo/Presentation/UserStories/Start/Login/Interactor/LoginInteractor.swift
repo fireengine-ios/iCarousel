@@ -151,6 +151,7 @@ class LoginInteractor: LoginInteractorInput {
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
             analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
             output?.fieldError(type: .loginIsNotValid)
+            loginRetries += 1
             return
         }
         
@@ -179,6 +180,7 @@ class LoginInteractor: LoginInteractorInput {
             
             if loginError == .incorrectUsernamePassword {
                 self?.attempts += 1
+                self?.loginRetries += 1
             }
             
             errorHandler(loginError, errorResponse.description)
