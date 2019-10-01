@@ -85,7 +85,13 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                     
                     observer.didEnumerate(newItems)
                     self.page += 1
-                    observer.finishEnumerating(upTo: page)
+                    
+                    if let data = "\(self.page)".data(using: .utf8) {
+                        let providerPage = NSFileProviderPage(data)
+                        observer.finishEnumerating(upTo: providerPage)
+                    } else {
+                        observer.finishEnumerating(upTo: nil)
+                    }
                 }
                 break
             case .failed(let error):

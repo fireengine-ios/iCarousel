@@ -146,16 +146,11 @@ final class PremiumPresenter {
             view.startActivityIndicator()
             interactor.activate(offer: model)
             
-        case .paycellAllAccessFeature?:
-            // TODO: uncomment
-            //view?.startActivityIndicator()
-            print("all access")
-            
-        case .paycellSLCMFeature?:
-            // TODO: uncomment
-            //view?.startActivityIndicator()
-            print("paycellSLCM")
-            
+        case .paycellAllAccessFeature?, .paycellSLCMFeature?:
+            if let offerId = model.cpcmOfferId {
+                view?.showPaycellProcess(with: offerId)
+            }
+
         default:
             assertionFailure("should not be another purchase options")
             let error = CustomErrors.serverError("This is not buyable offer type")

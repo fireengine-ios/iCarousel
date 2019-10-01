@@ -23,4 +23,8 @@ protocol RegistrationViewOutput {
     func captchaRequired(required: Bool)
     
     func openSupport()
+    
+    func openFaqSupport()
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
 }

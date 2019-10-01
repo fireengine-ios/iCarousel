@@ -70,6 +70,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         }
         
         collectionView.backgroundView = noFilesView
+        self.displayNoFilesView = false
         
         return collectionView
     }()
@@ -149,10 +150,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
             
             switch result {
             case .success(let newPhotos):
-                
-                /// call before "self.photos.append"
-                let isFirstPageLoaded = self.photos.isEmpty
-                
+            
                 let newItemsRange = self.photos.count ..< (self.photos.count + newPhotos.count)
                 let indexPathsForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
                 self.photos.append(contentsOf: newPhotos)
@@ -162,9 +160,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                     self?.collectionView.insertItems(at: indexPathsForNewItems)
                 }, completion: { [weak self] _ in
                     
-                    if isFirstPageLoaded, !newPhotos.isEmpty {
-                        self?.collectionView.backgroundView = nil
-                    }
+                    self?.displayNoFilesView = self?.photos.isEmpty ?? false
                     
                     /// call after "self.photos.append(contentsOf: newPhotos)"
                     /// and "self.collectionView.insertItems"
@@ -175,9 +171,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                     if let isLoadingMoreFinished = self?.dataSource.isPaginationFinished, isLoadingMoreFinished {
                         self?.isLoadingMoreFinished = true
                         self?.hideFooterSpinner()
-                        
-                        /// if we don't have any item in collection
-                        self?.displayNoFilesView = self?.photos.isEmpty ?? false
                     }
                 })
                 

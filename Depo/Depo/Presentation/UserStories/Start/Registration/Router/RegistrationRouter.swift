@@ -41,9 +41,19 @@ class RegistrationRouter: RegistrationRouterInput {
     }
     
     func openSupport() {
-        let controller = SupportFormController.with(subjects: [TextConstants.supportFormSignUpSubject1,
-                                                               TextConstants.supportFormSignUpSubject2,
-                                                               TextConstants.supportFormSignUpSubject3])
+        let controller = SupportFormController.with(subjects: [TextConstants.onSignupSupportFormSubject1,
+                                                               TextConstants.onSignupSupportFormSubject1,
+                                                               TextConstants.onSignupSupportFormSubject1])
         router.pushViewController(viewController: controller)
+    }
+    
+    func goToFaqSupportPage() {
+        let faqSupportController = router.helpAndSupport
+        router.pushViewController(viewController: faqSupportController)
+    }
+    
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol) {
+        let controller = SubjectDetailsViewController.present(with: type)
+        router.presentViewController(controller: controller)
     }
 }
