@@ -180,7 +180,7 @@ extension LoginPresenter: LoginViewOutput {
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
         isPresenting = true
-        router.gotoSubjectDetailsPage(type: type)
+        router.goToSubjectDetailsPage(type: type)
     }
 }
 

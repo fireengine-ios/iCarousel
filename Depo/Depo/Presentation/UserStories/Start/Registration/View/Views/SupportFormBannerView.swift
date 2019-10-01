@@ -48,7 +48,7 @@ final class SupportFormBannerView: UIView, NibInit {
 
     weak var delegate: SupportFormBannerViewDelegate?
     
-    var screenType: SupportFormScreenType!
+    var screenType: SupportFormScreenType = .login
     
     var type: SupportBannerViewType? {
         didSet {
@@ -67,32 +67,34 @@ final class SupportFormBannerView: UIView, NibInit {
         return picker
     }()
     
-    private lazy var toolBarPicker: UIToolbar = {
-        let toolBar = UIToolbar()
-        toolBar.isTranslucent = true
-        toolBar.tintColor = ColorConstants.toolBarTintColor
-        toolBar.sizeToFit()
-        toolBar.layer.zPosition = 1.0
+    private lazy var pickerToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.isTranslucent = true
+        toolbar.tintColor = ColorConstants.toolbarTintColor
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem.init(title: TextConstants.apply,
+                                              font: UIFont.TurkcellSaturaFont(),
+                                              tintColor: ColorConstants.buttonTintColor,
+                                              accessibilityLabel: nil,
+                                              style: .plain,
+                                              target: self,
+                                              selector: #selector(handleApplyButtonClick))
+        
+        let spaceButton = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace,
+                                               target: nil,
+                                               action: nil)
+        
+        let cancelButton = UIBarButtonItem.init(title: TextConstants.cancel,
+                                                font: UIFont.TurkcellSaturaFont(),
+                                                tintColor: ColorConstants.buttonTintColor,
+                                                accessibilityLabel: nil,
+                                                style: .plain,
+                                                target: self,
+                                                selector: #selector(handleCancelButtonClick))
 
-        let doneButton = UIBarButtonItem(title: TextConstants.apply,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(handleApplyButtonClick))
-        doneButton.tintColor = ColorConstants.buttonTintColor
-        
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                          target: nil,
-                                          action: nil)
-        
-        let cancelButton = UIBarButtonItem(title: TextConstants.cancel,
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(handleCancelButtonClick))
-        cancelButton.tintColor = ColorConstants.buttonTintColor
-
-        toolBar.items = [cancelButton, spaceButton, doneButton]
-        
-        return toolBar
+        toolbar.items = [cancelButton, spaceButton, doneButton]
+        return toolbar
     }()
     
     override var canBecomeFirstResponder: Bool {
@@ -104,7 +106,7 @@ final class SupportFormBannerView: UIView, NibInit {
     }
     
     override var inputAccessoryView: UIView? {
-        return toolBarPicker
+        return pickerToolbar
     }
     
     // MARK: -

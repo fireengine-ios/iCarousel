@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,7 +55,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-ye-wAx">
-                                                    <rect key="frame" x="12" y="10" width="269.5" height="37.5"/>
+                                                    <rect key="frame" x="12" y="10" width="294.5" height="37.5"/>
                                                     <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -87,8 +85,8 @@
                                                 <constraint firstItem="FFb-s7-WTV" firstAttribute="centerY" secondItem="rnZ-Cc-viq" secondAttribute="centerY" id="8mK-ta-6Ps"/>
                                                 <constraint firstAttribute="bottom" secondItem="GNs-Rv-VwL" secondAttribute="bottom" constant="-1" id="K5b-F6-bWh"/>
                                                 <constraint firstAttribute="bottom" secondItem="fj0-ye-wAx" secondAttribute="bottom" constant="10" id="M3M-1k-cZG"/>
+                                                <constraint firstItem="FFb-s7-WTV" firstAttribute="leading" secondItem="GNs-Rv-VwL" secondAttribute="trailing" constant="10" id="a2p-FO-WUg"/>
                                                 <constraint firstItem="GNs-Rv-VwL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fj0-ye-wAx" secondAttribute="trailing" constant="8" id="puC-bS-kyH"/>
-                                                <constraint firstItem="FFb-s7-WTV" firstAttribute="leading" secondItem="GNs-Rv-VwL" secondAttribute="trailing" constant="10" id="ut8-fY-xWp"/>
                                                 <constraint firstAttribute="trailing" secondItem="FFb-s7-WTV" secondAttribute="trailing" constant="20" id="wDf-6d-ywj"/>
                                             </constraints>
                                             <connections>

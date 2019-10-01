@@ -52,7 +52,7 @@ class RegistrationRouter: RegistrationRouterInput {
         router.pushViewController(viewController: faqSupportController)
     }
     
-    func gotoSubjectDetailsPage(type: SupportFormSubjectTypeProtocol) {
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol) {
         let controller = SubjectDetailsViewController.present(with: type)
         router.presentViewController(controller: controller)
     }

@@ -21,5 +21,5 @@ protocol RegistrationRouterInput {
     
     func goToFaqSupportPage()
     
-    func gotoSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 }

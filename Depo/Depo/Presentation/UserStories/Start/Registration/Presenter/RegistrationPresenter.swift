@@ -56,7 +56,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
         isSupportFormPresenting = true
-        router.gotoSubjectDetailsPage(type: type)
+        router.goToSubjectDetailsPage(type: type)
     }
 }
 
