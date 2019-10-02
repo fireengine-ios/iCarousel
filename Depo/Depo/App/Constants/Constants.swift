@@ -1306,8 +1306,6 @@ struct TextConstants {
     static let onLoginSupportFormSubject5DetailedInfoText = NSLocalizedString("support_form_subject_5_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onLoginSupportFormSubject6DetailedInfoText = NSLocalizedString("support_form_subject_6_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onLoginSupportFormSubject7DetailedInfoText = NSLocalizedString("support_form_subject_7_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    /// Signup
     
     static let onSignupSupportFormSubject1 = NSLocalizedString("support_form_signup_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onSignupSupportFormSubject2 = NSLocalizedString("support_form_signup_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
