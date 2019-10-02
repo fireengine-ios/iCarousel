@@ -72,7 +72,7 @@ class SplashInteractor: SplashInteractorInput {
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
-            } else reachabilityService.isReachableViaWWAN {
+            } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
