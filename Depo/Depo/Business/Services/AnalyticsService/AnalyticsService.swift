@@ -117,11 +117,12 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
-    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
-    uploadsMetrics: Int?, playlistNumber: Int?, trackNumber: Int?, isConnectedSpotify: Bool?, isPaymentMethodNative: Bool?)
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?, uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
     func trackSignupEvent(error: SignupResponseError?)
     func trackImportEvent(error: SpotifyResponseError?)
+    
+    func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -134,9 +135,11 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
-                                     uploadsMetrics: Int? = nil, playlistNumber: Int? = nil, trackNumber: Int? = nil, isConnectedSpotify: Bool? = nil, isPaymentMethodNative: Bool? = nil) {
+                                     uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
+        
         prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics,
-                                   playlistNumber: playlistNumber, trackNumber: trackNumber, isConnectedSpotify: isConnectedSpotify, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+                                   isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+                                    
             Analytics.logEvent("screenView", parameters: parametrs)
         }
     }
@@ -144,9 +147,6 @@ extension AnalyticsService: AnalyticsGA {
     private func prepareDimentionsParametrs(screen: AnalyticsAppScreens?,
                                             downloadsMetrics: Int? = nil,
                                             uploadsMetrics: Int? = nil,
-                                            playlistNumber: Int? = nil,
-                                            trackNumber: Int? = nil,
-                                            isConnectedSpotify: Bool? = nil,
                                             isPaymentMethodNative: Bool? = nil,
                                             loginType: GADementionValues.login? = nil,
                                             errorType: String? = nil,
@@ -155,10 +155,7 @@ extension AnalyticsService: AnalyticsGA {
         let tokenStorage: TokenStorage = factory.resolve()
         let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
-        var connectStatus: String?
-        if let unwrapedConnectStatus = isConnectedSpotify {
-            connectStatus = unwrapedConnectStatus ? "Connect" : "Disconnect"
-        }
+        
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
             payment = unwrapedisNativePayment ? "inApp" : "Turkcell"
@@ -219,9 +216,6 @@ extension AnalyticsService: AnalyticsGA {
                 userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
-                playlistNumber: playlistNumber,
-                trackNumber: trackNumber,
-                connectStatus: connectStatus,
                 gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
                 loginType: loginType,
                 errorType: errorType,
@@ -414,6 +408,26 @@ extension AnalyticsService: AnalyticsGA {
 //    func stopAllTimelyTracking() {
 //
 //    }
+    
+    func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?) {
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            var parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text,
+            ]
+            
+            if let trackNumber = trackNumber {
+                parametrs[GAMetrics.trackNumber.text] = trackNumber
+            }
+            
+            if let playlistNumber = playlistNumber {
+                parametrs[GAMetrics.playlistNumber.text] = playlistNumber
+            }
+            
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
 }
 
 protocol NetmeraProtocol {
