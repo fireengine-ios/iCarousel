@@ -748,7 +748,6 @@ enum GAEventLabel {
     case plusAction(TabBarViewController.Action)
     case shareViaLink
     case shareViaApp(String)
-    //
     case login
 
         var text: String {
