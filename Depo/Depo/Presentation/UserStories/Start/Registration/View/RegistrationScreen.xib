@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,7 +19,6 @@
                 <outlet property="captchaView" destination="lBm-t6-08H" id="Q30-YR-Uaa"/>
                 <outlet property="nextButton" destination="Iei-Qg-JRc" id="3dp-rD-Uub"/>
                 <outlet property="scrollView" destination="00F-PK-XuO" id="VgG-X8-VHv"/>
-                <outlet property="shadowView" destination="BCA-IW-fto" id="VCZ-ok-faP"/>
                 <outlet property="stackView" destination="P2f-Nq-OPJ" id="I51-Rv-Ewr"/>
                 <outlet property="view" destination="77B-d8-gb9" id="fGW-7p-8fS"/>
             </connections>
@@ -63,26 +60,27 @@
                                                         <constraint firstAttribute="height" constant="31" id="xMM-w2-JR1"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RS-Lk-81A">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="chevronLeft" translatesAutoresizingMaskIntoConstraints="NO" id="m2W-RU-raQ">
                                                     <rect key="frame" x="346" y="24.5" width="16" height="9"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="9" id="TPC-Xs-Xkr"/>
+                                                        <constraint firstAttribute="height" constant="9" id="aXs-0N-4tu"/>
                                                     </constraints>
-                                                    <state key="normal" image="chevronLeft"/>
-                                                </button>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="FbX-Xv-9QB" secondAttribute="bottom" constant="-1" id="6q8-6D-6K3"/>
+                                                <constraint firstItem="m2W-RU-raQ" firstAttribute="leading" secondItem="FbX-Xv-9QB" secondAttribute="trailing" constant="10" id="Aie-Au-vgj"/>
                                                 <constraint firstItem="qHl-Hl-2fT" firstAttribute="leading" secondItem="Yra-Am-sHq" secondAttribute="leading" constant="12" id="Cdf-4u-X68"/>
-                                                <constraint firstItem="1RS-Lk-81A" firstAttribute="centerY" secondItem="Yra-Am-sHq" secondAttribute="centerY" id="Deh-DZ-5qM"/>
-                                                <constraint firstItem="1RS-Lk-81A" firstAttribute="leading" secondItem="FbX-Xv-9QB" secondAttribute="trailing" constant="10" id="J93-B0-cew"/>
+                                                <constraint firstAttribute="trailing" secondItem="m2W-RU-raQ" secondAttribute="trailing" constant="20" id="QYL-yv-TyL"/>
                                                 <constraint firstItem="qHl-Hl-2fT" firstAttribute="top" secondItem="Yra-Am-sHq" secondAttribute="top" constant="10" id="cFl-cg-lf2"/>
-                                                <constraint firstAttribute="trailing" secondItem="1RS-Lk-81A" secondAttribute="trailing" constant="20" id="fZJ-e9-qGZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="qHl-Hl-2fT" secondAttribute="bottom" constant="10" id="kAh-Oi-kE8"/>
+                                                <constraint firstItem="m2W-RU-raQ" firstAttribute="centerY" secondItem="Yra-Am-sHq" secondAttribute="centerY" id="zbF-UD-TvN"/>
                                                 <constraint firstItem="FbX-Xv-9QB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qHl-Hl-2fT" secondAttribute="trailing" constant="8" id="zkM-zr-FD1"/>
                                             </constraints>
                                             <connections>
+                                                <outlet property="arrowImageView" destination="m2W-RU-raQ" id="Cqm-sS-1mX"/>
+                                                <outlet property="heightConstraint" destination="xMM-w2-JR1" id="0r7-dM-fvO"/>
                                                 <outlet property="messageLabel" destination="qHl-Hl-2fT" id="2Yr-M1-oOc"/>
                                             </connections>
                                         </view>
@@ -142,28 +140,20 @@
                         <constraint firstItem="LQn-yz-ygb" firstAttribute="top" secondItem="00F-PK-XuO" secondAttribute="top" id="ydM-tc-sZZ"/>
                     </constraints>
                 </scrollView>
-                <view hidden="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCA-IW-fto" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="BCA-IW-fto" secondAttribute="bottom" id="0yX-uh-tag"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="height" secondItem="77B-d8-gb9" secondAttribute="height" id="1dD-be-Ndk"/>
-                <constraint firstItem="BCA-IW-fto" firstAttribute="leading" secondItem="77B-d8-gb9" secondAttribute="leading" id="A0t-yf-Q2h"/>
                 <constraint firstItem="LQn-yz-ygb" firstAttribute="width" secondItem="77B-d8-gb9" secondAttribute="width" id="Bxy-pK-jLz"/>
                 <constraint firstAttribute="trailing" secondItem="00F-PK-XuO" secondAttribute="trailing" id="LLC-Cb-6v4"/>
-                <constraint firstItem="BCA-IW-fto" firstAttribute="top" secondItem="77B-d8-gb9" secondAttribute="top" id="Q8g-1e-tZx"/>
                 <constraint firstItem="LQn-yz-ygb" firstAttribute="centerX" secondItem="77B-d8-gb9" secondAttribute="centerX" id="ZTX-aa-NfM"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="width" secondItem="77B-d8-gb9" secondAttribute="width" id="ZXN-DV-c63"/>
-                <constraint firstAttribute="trailing" secondItem="BCA-IW-fto" secondAttribute="trailing" id="dEY-z8-Q5o"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="leading" secondItem="77B-d8-gb9" secondAttribute="leading" id="m6x-Vo-gbu"/>
                 <constraint firstAttribute="bottom" secondItem="00F-PK-XuO" secondAttribute="bottom" id="xVn-Fy-adN"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="top" secondItem="77B-d8-gb9" secondAttribute="top" id="yuI-Tc-4o0"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <point key="canvasLocation" x="-671.20000000000005" y="49.925037481259373"/>
+            <point key="canvasLocation" x="-672.46376811594212" y="49.553571428571423"/>
         </view>
     </objects>
     <resources>

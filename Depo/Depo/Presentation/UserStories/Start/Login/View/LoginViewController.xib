@@ -86,6 +86,8 @@
                                                 <constraint firstItem="AZt-SW-P39" firstAttribute="leading" secondItem="GNs-Rv-VwL" secondAttribute="trailing" constant="10" id="qBc-fJ-Jgv"/>
                                             </constraints>
                                             <connections>
+                                                <outlet property="arrowImageView" destination="AZt-SW-P39" id="KpP-1d-hyw"/>
+                                                <outlet property="heightConstraint" destination="bEx-Hy-elH" id="Oe8-bR-6iH"/>
                                                 <outlet property="messageLabel" destination="fj0-ye-wAx" id="VE7-tX-RXD"/>
                                             </connections>
                                         </view>
