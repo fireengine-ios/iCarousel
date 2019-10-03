@@ -111,6 +111,30 @@ def xcodeBuild = { flavorId ->
       ])
 }
 
+def publishToArtifactory = { classifier ->
+    STAGE_NAME = 'Build (test): Publish to Artifactory'
+
+    sh "find build -type d -name '*.dSYM' > dsymFiles"
+    sh "zip -@ build/dsym.zip < dsymFiles"
+
+    def outputsDir = 'build'
+    sh "ls -l ${outputsDir}/*.ipa"
+    def uploadSpec = """{
+        "files": [
+            {
+            "pattern": "${outputsDir}/*.ipa",
+            "target": "${artifactPath}/${version}/${appName}-${version}-${classifier}.ipa"
+            },
+            {
+            "pattern": "${outputsDir}/dsym.zip",
+            "target": "${artifactPath}/${version}/${appName}-${version}-${classifier}-dsym.zip"
+            }
+        ]}"""
+    def buildInfo = artifactory.upload(uploadSpec)
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}.ipa"
+    createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${appName}-${version}.ipa</a>"
+}
+
 pipeline {
     agent none
     options {
@@ -156,28 +180,7 @@ pipeline {
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install --repo-update"
                         xcodeBuild('test')
-                        sh "find build -type d -name '*.dSYM' > dsymFiles"
-                        sh "zip -@ build/dsym.zip < dsymFiles"
-                        
-                        // Publish to artifactory
-                        STAGE_NAME = 'Build : Publish to Artifactory'
-
-                        def outputsDir = 'build'
-                        sh "ls -l ${outputsDir}/*.ipa"
-                        def uploadSpec = """{
-                            "files": [
-                                {
-                                "pattern": "${outputsDir}/*.ipa",
-                                "target": "${artifactPath}/${version}/${appName}-${version}.ipa"
-                                },
-                                {
-                                "pattern": "${outputsDir}/dsym.zip",
-                                "target": "${artifactPath}/${version}/${appName}-${version}-dsym.zip"
-                               }
-							]}"""
-                        def buildInfo = artifactory.upload(uploadSpec)
-                        def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}.ipa"
-                        createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${appName}-${version}.ipa</a>"
+                        publishToArtifactory('test')
                     }
                 }
             }
@@ -271,6 +274,7 @@ pipeline {
             steps {
                 script {
                     xcodeBuild('prod')
+                    publishToArtifactory('prod')
                     sh "cp build/${appName}-${BUILD_ID}-prod ${appName}.ipa"
                     sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                     sh """
