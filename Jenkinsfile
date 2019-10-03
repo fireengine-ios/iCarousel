@@ -155,7 +155,7 @@ pipeline {
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install --repo-update"
-                        xcodeBuild('prod')
+                        xcodeBuild('test')
                         sh "find build -type d -name '*.dSYM' > dsymFiles"
                         sh "zip -@ build/dsym.zip < dsymFiles"
                         
@@ -265,7 +265,7 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
-                TESTFLIGHT_UPLOAD = credentials('testflightUpload')
+                TESTFLIGHT_UPLOAD = credentials('testflight')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
             steps {
