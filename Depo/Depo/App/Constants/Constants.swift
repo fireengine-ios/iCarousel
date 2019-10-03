@@ -124,6 +124,7 @@ struct TextConstants {
     static let loginCellTitlePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellEmailPlaceholder = NSLocalizedString( "You have to fill in your mail or GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellPasswordPlaceholder = NSLocalizedString("You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginFAQButton = NSLocalizedString("login_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let autoSyncNavigationTitle = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your files automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -461,6 +462,18 @@ struct TextConstants {
     static let userProfileChangePassword = NSLocalizedString("change password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileBirthday = NSLocalizedString("birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfilePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestion =  NSLocalizedString("security_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileEditSecretQuestion =  NSLocalizedString("edit_security_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileNoSecretQuestion =  NSLocalizedString("no_security_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionInvalidId =  NSLocalizedString("sequrity_question_id_is_invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionInvalidAnswer =  NSLocalizedString("sequrity_question_answer_is_invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let userProfileSelectQuestion =  NSLocalizedString("select_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionAnswer =  NSLocalizedString("secret_answer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionAnswerPlaseholder =  NSLocalizedString("enter_secret_answer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSecretQuestionLabelPlaceHolder = NSLocalizedString("security_question_text_field_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSetSecretQuestionButton = NSLocalizedString("set_sequrity_question_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let userProfileDayPlaceholder = NSLocalizedString("user_profile_day_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileMonthPlaceholder = NSLocalizedString("user_profile_month_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileYearPlaceholder = NSLocalizedString("user_profile_year_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1278,6 +1291,25 @@ struct TextConstants {
     static let supportFormSubject6 = NSLocalizedString("support_form_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let supportFormSubject7 = NSLocalizedString("support_form_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let supportFormSubject1InfoLabel = NSLocalizedString("support_form_subject_1_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject2InfoLabel = NSLocalizedString("support_form_subject_2_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject3InfoLabel = NSLocalizedString("support_form_subject_3_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject4InfoLabel = NSLocalizedString("support_form_subject_4_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject5InfoLabel = NSLocalizedString("support_form_subject_5_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject6InfoLabel = NSLocalizedString("support_form_subject_6_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject7InfoLabel = NSLocalizedString("support_form_subject_7_detailed_info_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let supportFormSubject1DetailedInfoText = NSLocalizedString("support_form_subject_1_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject2DetailedInfoText = NSLocalizedString("support_form_subject_2_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject3DetailedInfoText = NSLocalizedString("support_form_subject_3_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject4DetailedInfoText = NSLocalizedString("support_form_subject_4_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject5DetailedInfoText = NSLocalizedString("support_form_subject_5_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject6DetailedInfoText = NSLocalizedString("support_form_subject_6_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSubject7DetailedInfoText = NSLocalizedString("support_form_subject_7_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSignUpSubject1 = NSLocalizedString("support_form_signup_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSignUpSubject2 = NSLocalizedString("support_form_signup_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormSignUpSubject3 = NSLocalizedString("support_form_signup_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let contactUsSubject1 = NSLocalizedString("contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject2 = NSLocalizedString("contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject3 = NSLocalizedString("contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1299,6 +1331,8 @@ struct TextConstants {
     static let reenterYourPassword = NSLocalizedString("re_enter_your_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let signupSupportInfo = NSLocalizedString("signup_support_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginSupportInfo = NSLocalizedString("login_support_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupFAQInfo = NSLocalizedString("signup_faq_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginFAQInfo = NSLocalizedString("login_faq_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let missingInformation = NSLocalizedString("missing_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let pleaseEnterYourMissingAccountInformation = NSLocalizedString("please_enter_your_missing_account_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1402,6 +1436,8 @@ struct TextConstants {
     static let enterYourEmail = NSLocalizedString("enter_your_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let changeEmailPopUpTopTitle = NSLocalizedString("change_email_pop_up_top_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountVerified = NSLocalizedString("account_verified", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let credUpdateCheckTitle = NSLocalizedString("cred_update_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let credUpdateCheckCompletionMessage = NSLocalizedString("cred_completion_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let noAccountFound = NSLocalizedString("no_account_found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tooManyRequests = NSLocalizedString("too_many_requests", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1416,4 +1452,10 @@ struct TextConstants {
     static let paymentTitleInvoice = NSLocalizedString("payment_title_invoice", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusTitle = NSLocalizedString("account_status_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountStatusMessage = NSLocalizedString("account_status_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let tbMaticPhotosTitle = NSLocalizedString("tbmatic_photos_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosNoPhotoText = NSLocalizedString("tbmatic_photos_no_photo_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosNoPhotoBoldText = NSLocalizedString("tbmatic_photos_no_photo_bold_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosSeeTimeline = NSLocalizedString("tbmatic_photos_see_timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMaticPhotosShare = NSLocalizedString("tbmatic_photos_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

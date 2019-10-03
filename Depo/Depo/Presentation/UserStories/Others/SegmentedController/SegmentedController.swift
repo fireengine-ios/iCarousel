@@ -56,7 +56,7 @@ final class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    private var viewControllers: [BaseViewController] = []
+    private(set) var viewControllers: [BaseViewController] = []
     
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
@@ -105,6 +105,13 @@ final class SegmentedController: BaseViewController, NibInit {
             return
         }
         viewControllers = controllers
+    }
+    
+    func switchSegment(to index: Int) {
+        if segmentedControl.numberOfSegments > index {
+            segmentedControl.selectedSegmentIndex = index
+            segmentDidChange(segmentedControl)
+        }
     }
     
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {

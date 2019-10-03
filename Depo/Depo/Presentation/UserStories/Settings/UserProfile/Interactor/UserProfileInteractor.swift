@@ -7,6 +7,8 @@
 //
 
 class UserProfileInteractor: UserProfileInteractorInput {
+    
+    private lazy var accountService = AccountService()
 
     weak var output: UserProfileInteractorOutput!
     
@@ -32,6 +34,21 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     private func isEmailChanged(email: String) -> Bool {
         return (email != userInfo?.email)
+    }
+    
+    func updateUserInfo() {
+        accountService.info(success: {  [weak self] response in
+            guard let response = response as? AccountInfoResponse else {
+                assertionFailure()
+                return
+            }
+            DispatchQueue.toMain {
+                self?.output.configurateUserInfo(userInfo: response)
+                SingletonStorage.shared.accountInfo = response
+            }
+        }) { error in
+            // This error is't handling
+        }
     }
     
     private func isPhoneChanged(phone: String) -> Bool {

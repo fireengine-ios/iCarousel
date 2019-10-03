@@ -22,15 +22,17 @@ protocol HomePageRouterInput {
     
     func moveToCreationStory()
     
-    func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType)
-    
-    func presentSmallFullOfQuotaPopUp()
-    
-    func presentEmailVerificationPopUp(delegate: VerifyEmailPopUpDelegate)
-    
     func showError(errorMessage: String)
     
     func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?)
+    
+    func presentSmallFullOfQuotaPopUp()
 
-    func showIgnoredQuotaPopUpIfNeeded()
+    func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType)
+        
+    func presentEmailVerificationPopUp()
+    
+    func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse?)
+    
+    func presentPopUps()
 }

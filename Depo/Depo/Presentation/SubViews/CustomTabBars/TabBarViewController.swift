@@ -232,10 +232,14 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
     }
     
-    @objc func showPhotosScreen(_ sender: Any) {
+    @objc func showPhotosScreen(scrollTo item: Item? = nil) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
         selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
         lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        
+        if let item = item {
+            openPhotoPage(scrollTo: item)
+        }
     }
     
     @objc func showVideosScreen(_ sender: Any) {
@@ -256,6 +260,25 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeVisibleStatus(hidden: true)
         musicBarHeightConstraint.constant = 0
         mainContentView.layoutIfNeeded()
+    }
+    
+    private func openPhotoPage(scrollTo item: Item) {
+        if let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController {
+            segmentedController.loadViewIfNeeded()
+        
+            if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
+                // if photo page is not active
+                guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true} ) else {
+                    assertionFailure("Photo page not found")
+                    return
+                }
+                segmentedController.switchSegment(to: index)
+            }
+
+            if let photosController = segmentedController.currentController as? PhotoVideoController {
+                photosController.scrollToItem(item)
+            }
+        }
     }
     
     private func changeVisibleStatus(hidden: Bool) {
@@ -870,6 +893,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
     }

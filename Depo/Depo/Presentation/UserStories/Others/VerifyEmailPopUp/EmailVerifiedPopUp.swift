@@ -8,9 +8,10 @@
 
 import UIKit
 
-final class EmailVerifiedPopUp: UIViewController {
+final class EmailVerifiedPopUp: BasePopUpController {
     
-    @IBOutlet private weak var contentView: UIView! {
+    //MARK: IBOutlet
+    @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
             newValue.backgroundColor = .white
@@ -48,6 +49,7 @@ final class EmailVerifiedPopUp: UIViewController {
         }
     }
     
+    //MARK: Properties
     private var image: PopUpImage?
     private var message: String?
     private var buttonTitle: String?
@@ -55,59 +57,34 @@ final class EmailVerifiedPopUp: UIViewController {
     
     private var isShown = false
 
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        open()
-    }
-    
+    //MARK: Utility Method
     private func setup() {
         view.backgroundColor = ColorConstants.popUpBackground
+        
+        contentView = popUpView
         
         imageView.image = image?.image
         titleLabel.text = message
         continueButton.setTitle(buttonTitle, for: .normal)
     }
     
-    private func open() {
-        if isShown {
-            return
-        }
-        isShown = true
-        contentView.transform = NumericConstants.scaleTransform
-        view.alpha = 0
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.view.alpha = 1
-            self.contentView.transform = .identity
-        }
-    }
-    
-    func close(completion: VoidHandler? = nil) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.contentView.transform = NumericConstants.scaleTransform
-        }) { _ in
-            self.dismiss(animated: false, completion: completion)
-        }
-    }
-    
+    //MARK: IBAction
     @IBAction private func onContinueTap() {
-        close {
-            self.buttonAction?()
-        }
+        close(completion: buttonAction)
     }
 }
 
 //MARK: - Init
 extension EmailVerifiedPopUp {
     
-    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler?) -> EmailVerifiedPopUp {
+    static func with(image: PopUpImage, message: String, buttonTitle: String, buttonAction: VoidHandler? = nil) -> EmailVerifiedPopUp {
         let controller = EmailVerifiedPopUp()
         
         controller.image = image

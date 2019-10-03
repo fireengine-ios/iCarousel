@@ -13,8 +13,8 @@ protocol PremiumInteractorInput {
     func getAccountType()
     func getFeaturePacks()
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String
-    func convertToSubscriptionPlan(offer: PackageModelResponse, accountType: AccountType) -> [SubscriptionPlan]
-    func getInfoForAppleProducts(offer: PackageModelResponse)
+    func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
+    func getInfoForAppleProducts(offers: [PackageModelResponse])
     
     func activate(offer: PackageModelResponse)
     

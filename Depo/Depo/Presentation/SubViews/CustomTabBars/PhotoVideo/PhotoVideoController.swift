@@ -130,6 +130,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    func scrollToItem(_ item: Item) {
+        dataSource.scrollToItem(item)
+    }
+    
     // MARK: - Editing Mode
     
     private func startEditingMode(at indexPath: IndexPath?) {

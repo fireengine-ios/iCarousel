@@ -10,6 +10,7 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func display(error: ErrorResponse)
     func display(errorMessage: String)
     func show(promocodeError: String)
+    func showPaycellProcess(with cpcmOfferId: Int)
     func successedPromocode()
     
     func showRestoreButton()

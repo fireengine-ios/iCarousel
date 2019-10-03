@@ -63,6 +63,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private lazy var routingService: SpotifyRoutingService = factory.resolve()
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
@@ -89,6 +90,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        analyticsService.logScreen(screen: .spotifyImportPlaylistSelection)
     }
     
     // MARK: -
@@ -186,6 +188,7 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
 extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
+        analyticsService.logScreen(screen: .spotifyImportResult)
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
         importButton.isHidden = false
         

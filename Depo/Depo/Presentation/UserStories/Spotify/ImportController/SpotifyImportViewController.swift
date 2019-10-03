@@ -79,6 +79,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         return gradientView
     }()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     weak var delegate: SpotifyImportControllerDelegate?
     
     // MARK: - View lifecycle
@@ -94,6 +95,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        analyticsService.logScreen(screen: .spotifyImportProgress)
     }
     
     private func setupGradientBackground() {

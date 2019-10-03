@@ -945,6 +945,21 @@
 "user_profile_day_placeholder" = "ZZ";
 "user_profile_month_placeholder" = "LL";
 "user_profile_year_placeholder" = "AAAA";
+"support_form_subject_1_detailed_info_label" = "";
+"support_form_subject_1_detailed_info_fulltext" = "";
+"support_form_subject_2_detailed_info_label" = "";
+"support_form_subject_2_detailed_info_fulltext" = "";
+"support_form_subject_3_detailed_info_label" = "";
+"support_form_subject_3_detailed_info_fulltext" = "";
+"support_form_subject_4_detailed_info_label" = "";
+"support_form_subject_4_detailed_info_fulltext" = "";
+"support_form_subject_5_detailed_info_label" = "";
+"support_form_subject_5_detailed_info_fulltext" = "";
+"support_form_subject_6_detailed_info_label" = "";
+"support_form_subject_6_detailed_info_fulltext" = "";
+"support_form_subject_7_detailed_info_label" = "";
+"support_form_subject_7_detailed_info_fulltext" = "";
+"login_faq" = "";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
@@ -952,6 +967,7 @@
 "enter_your_password" = "Introdu Parola ta";
 "re_enter_your_password" = "Introdu din nou parola ta";
 "signup_support_info" = "Dacă întîmpini dificultăți la înregistrare, contactează-ne.";
+"signup_faq_info" = "";
 "missing_information" = "Lipsă informație";
 "please_enter_your_missing_account_information" = "Te rugăm să introduci informația ce lipsește";
 "login_email_or_phone_placeholder" = "Introdu adresa ta e-mail sau numărul mobil";
@@ -967,6 +983,7 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Te rugăm să verifici numele tău de utilizator";
 "login_support_info" = "Dacă întîmpini dificultăți la înregistrare, contactează-ne.";
+"login_faq_info" = "";
 "terms_and_privacy_policy" = "Termenii de Utilizare și Politica de Confidențialitate";
 "Temporary error occurred. Please try again later." = "A apărut o eroare temporară. Te rugăm să încerci mai târziu.";
 "face_tags_description_premium" = "Atunci când opțiunea Recunoașterea Feței&Imaginei e conectată, pozele încărcate vor fi grupate după Fețe și Obiecte identificate. Dacă opțiunea de localizare e pornită și ea, pozele vor fi grupate și după acest criteriu. Iar noi, vom avea posibilitatea să creăm pentru tine istorii automatizate, în baza grupelor create. ";

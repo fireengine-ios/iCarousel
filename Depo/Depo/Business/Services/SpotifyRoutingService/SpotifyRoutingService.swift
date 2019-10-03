@@ -29,6 +29,7 @@ final class SpotifyRoutingService: NSObject {
         }
     }
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     var delegates = MulticastDelegate<SpotifyRoutingServiceDelegate>()
     private var importInProgress = false
     
@@ -40,6 +41,7 @@ final class SpotifyRoutingService: NSObject {
         spotifyService.getStatus { [weak self] result in
             switch result {
             case .success(let status):
+                self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification, isConnectedSpotify: status.isConnected)
                 self?.lastSpotifyStatus = status
                 completion?(.success(status))
             case .failed(let error):
@@ -64,6 +66,7 @@ final class SpotifyRoutingService: NSObject {
             switch result {
             case .success(let status):
                 if status.isConnected {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                     self.showPlayListsForImport()
                 } else {
                     self.prepareAuthWebPage()
@@ -80,6 +83,7 @@ final class SpotifyRoutingService: NSObject {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                 self?.getSpotifyStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
@@ -268,6 +272,24 @@ final class SpotifyRoutingService: NSObject {
                                         })
         controller.present(popup, animated: true)
     }
+    
+    private func importAnalytics(playlists: [SpotifyPlaylist], result: ResponseResult<SpotifyStatus>) {
+        var trackCount = 0
+        for playlist in playlists {
+            trackCount += playlist.count
+        }
+        switch result {
+        case .success(_):
+            let status = GAEventLabel.success.text
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
+            self.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyImport, playlistNumber: playlists.count, trackNumber: trackCount)
+        case .failed(_):
+            let status = GAEventLabel.failure.text
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
+            self.analyticsService.trackImportEvent(error: .networkError)
+            self.analyticsService.trackImportEvent(error: .importError)
+        }
+    }
 }
 
 // MARK: - SpotifyAuthViewControllerDelegate
@@ -308,6 +330,7 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
             
             switch result {
             case .success(let status):
+                self.importAnalytics(playlists: playlists, result: result)
                 if status.lastModifiedDate == nil {
                     self.importPlaylists(playlists)
                 } else {
@@ -330,6 +353,7 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
     }
     
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
+        analyticsService.logScreen(screen: .spotifyImportPlaylistDetails)
         let controller = router.spotifyTracksController(playlist: playlist)
         router.pushViewController(viewController: controller)
     }

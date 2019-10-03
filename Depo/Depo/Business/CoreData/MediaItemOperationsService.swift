@@ -665,6 +665,7 @@ final class MediaItemOperationsService {
     
     func removeLocalMediaItems(with assetIdList: [String], completion: @escaping VoidHandler) {
         guard assetIdList.count > 0 else {
+            completion()
             return
         }
         CoreDataStack.shared.performBackgroundTask { [weak self] context in

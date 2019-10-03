@@ -233,6 +233,10 @@ struct RouteRequests {
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
+
+        static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
+        static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
+        static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         
         enum Settings {
             /// without "s" at the end
@@ -277,4 +281,6 @@ struct RouteRequests {
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+    
+    static let paycellWebUrl = baseShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=google.com"
 }

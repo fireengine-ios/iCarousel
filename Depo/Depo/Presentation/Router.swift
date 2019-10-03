@@ -11,7 +11,7 @@ import UIKit
 
 class RouterVC: NSObject {
     
-    let splitContr = SplitIpadViewContoller()
+    var splitContr: SplitIpadViewContoller?
     
     var rootViewController: UIViewController? {
         guard let window = UIApplication.shared.keyWindow,
@@ -20,6 +20,10 @@ class RouterVC: NSObject {
                 return nil
         }
         return rootviewController
+    }
+    
+    var tabBarController: TabBarViewController? {
+        return rootViewController as? TabBarViewController
     }
     
     func getFloatingButtonsArray() -> [FloatingButtonsType] {
@@ -69,7 +73,7 @@ class RouterVC: NSObject {
             if let navController = rootViewController as? UINavigationController {
                 return navController
             } else {
-                if let n = rootViewController as? TabBarViewController {
+                if let n = tabBarController {
                     return n.activeNavigationController
                 }
             }
@@ -83,11 +87,11 @@ class RouterVC: NSObject {
             if let n = top as? TabBarViewController {
                 return n.activeNavigationController
             }
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         } else {
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         }
@@ -145,7 +149,7 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: animated)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
     }
@@ -159,14 +163,14 @@ class RouterVC: NSObject {
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
         
     }
     
     func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = rootViewController as? TabBarViewController {
+        if let tabBarViewController = tabBarController {
             tabBarViewController.setBGColor(color: color)
         }
     }
@@ -241,6 +245,10 @@ class RouterVC: NSObject {
         if let nController = navigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
+        }
+        // for present actionSheet under modal controller
+        if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
+            return presentedController
         }
         return navigationController?.viewControllers.last
     }
@@ -774,16 +782,20 @@ class RouterVC: NSObject {
         let leftController = settings
         let rightController = syncContacts
         
-        //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
+        splitContr = SplitIpadViewContoller()
+        splitContr?.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
-        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
+        guard let splitVC = splitContr?.getSplitVC() else {
+            return nil
+        }
+        
+        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitVC)
         return containerController
     }
     
     // MARK: Help and support
     
-    var helpAndSupport: UIViewController? {
+    var helpAndSupport: UIViewController {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
     }
@@ -860,15 +872,14 @@ class RouterVC: NSObject {
     
     func showFeedbackSubView() {
         SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
-            let router = RouterVC()
-            let controller = router.supportFormPrefilledController
+            let controller = self.supportFormPrefilledController
             controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
                                                   phone: userInfo.fullPhoneNumber,
                                                   email: userInfo.email)
             controller.config = config
-            router.pushViewController(viewController: controller)
+            self.pushViewController(viewController: controller)
             
         }, fail: { error in
             UIApplication.showErrorAlert(message: error.description)
@@ -948,10 +959,6 @@ class RouterVC: NSObject {
         controller.configure(with: models, analyzesCount: analyzesCount, isShowTabBar: isShowTabBar)
         
         return controller
-    }
-    
-    var supportFormController: UIViewController {
-        return SupportFormController()
     }
     
     var supportFormPrefilledController: SupportFormPrefilledController {
@@ -1040,5 +1047,9 @@ class RouterVC: NSObject {
         controller.playlist = playlist
         controller.delegate = delegate
         return controller
+    }
+    
+    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
+        return TBMatikPhotosViewController.with(uuids: uuids)
     }
 }
