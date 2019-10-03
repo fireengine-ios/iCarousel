@@ -55,7 +55,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="136" y="0.0" width="130" height="44"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="130" id="WiY-dJ-Cpf"/>
+                                                <constraint firstAttribute="width" priority="750" constant="130" id="WiY-dJ-Cpf"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <connections>
@@ -76,6 +76,7 @@
                                 <constraint firstItem="r39-Jc-55m" firstAttribute="top" secondItem="l7R-5t-wQT" secondAttribute="bottom" constant="22" id="VxP-Go-tWZ"/>
                                 <constraint firstItem="r39-Jc-55m" firstAttribute="centerX" secondItem="5tU-ab-3jo" secondAttribute="centerX" id="enf-Qw-aOs"/>
                                 <constraint firstItem="yqr-1t-46Y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="28" id="kAt-fB-RbA"/>
+                                <constraint firstItem="r39-Jc-55m" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="16" id="mb2-dY-2tK"/>
                                 <constraint firstItem="l7R-5t-wQT" firstAttribute="centerX" secondItem="yqr-1t-46Y" secondAttribute="centerX" id="rvb-xx-vrB"/>
                                 <constraint firstItem="yqr-1t-46Y" firstAttribute="top" secondItem="5tU-ab-3jo" secondAttribute="top" constant="21" id="ueJ-7f-gSr"/>
                                 <constraint firstAttribute="bottom" secondItem="r39-Jc-55m" secondAttribute="bottom" constant="16" id="xMF-ec-HBY"/>
