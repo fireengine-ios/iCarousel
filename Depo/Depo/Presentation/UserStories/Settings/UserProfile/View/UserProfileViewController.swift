@@ -123,7 +123,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     private func createSecretQuestionAndPasswordViews() {
         
         let passwordView = SetSecurityCredentialsView.initFromNib()
-        passwordView.setupView(with: .password, title: TextConstants.userProfilePassword, description: "* * * * * * * * *", buttonTitle: TextConstants.userProfileChangePassword)
+        passwordView.setupView(with: .password, title: TextConstants.userProfilePassword, description: "* * * * * * * * *", buttonTitle: TextConstants.userProfileChangePassword, descriptionColorIsBlack: true)
         passwordView.delegate = self
         stackView.insertArrangedSubview(passwordView, at: stackView.subviews.count)
         
@@ -185,6 +185,17 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         configuresecretQuestionView(userInfo: userInfo)
     }
     
+    func updateSetSecretQuestionView(with secrettQuestion: SecretQuestionWithAnswer) {
+        guard let question = secrettQuestion.question else {
+            assertionFailure()
+            return
+        }
+        
+        let buttonTitle =  TextConstants.userProfileEditSecretQuestion
+        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: question, buttonTitle: buttonTitle, descriptionColorIsBlack: true)
+        
+    }
+    
     private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
         
         guard userInfo.hasSecurityQuestionInfo != nil else  {
@@ -194,7 +205,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         
         let buttonTitle = userInfo.hasSecurityQuestionInfo ?? false ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
         
-        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle)
+        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle, descriptionColorIsBlack: false)
 
         guard let questionId = userInfo.securityQuestionId else  {
             return

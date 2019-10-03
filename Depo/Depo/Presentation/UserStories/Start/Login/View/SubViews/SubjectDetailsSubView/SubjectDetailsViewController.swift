@@ -20,7 +20,7 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
         }
     }
     
-    var type: SupportFormSubjectType?
+    var type: SupportFormSubjectTypeProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,7 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
         }
     }
     
-    static func present(with type: SupportFormSubjectType) -> SubjectDetailsViewController {
+    static func present(with type: SupportFormSubjectTypeProtocol) -> SubjectDetailsViewController {
         let controller = SubjectDetailsViewController.initFromNib()
         controller.type = type
         controller.modalTransitionStyle = .crossDissolve

@@ -17,4 +17,6 @@ protocol UserProfileViewInput: class {
     func getPhoneNumber() -> String
     
     func endSaving()
+    
+    func updateSetSecretQuestionView(with secrettQuestion: SecretQuestionWithAnswer)
 }

@@ -8,19 +8,20 @@
 
 import UIKit
 
-struct AnswerForSecretQuestion {
+struct SecretQuestionWithAnswer {
     var questionId: Int?
+    var question: String?
     var questionAnswer: String?
 }
 
 protocol SetSecurityQuestionViewControllerDelegate {
-    func didCloseSetSecurityQuestionViewController()
+    func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
 
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
-    private lazy var answer = AnswerForSecretQuestion()
+    private lazy var answer = SecretQuestionWithAnswer()
     var delegate: SetSecurityQuestionViewControllerDelegate?
     
     @IBOutlet private weak var saveButton: RoundedButton! {
@@ -141,16 +142,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
     
     private func questionWasSuccessfullyUpdated() {
-        delegate?.didCloseSetSecurityQuestionViewController()
-        
-        captchaView.captchaAnswerTextField.resignFirstResponder()
-        captchaView.captchaAnswerTextField.text = ""
-        
-        secretAnswerView.answerTextField.resignFirstResponder()
-        secretAnswerView.answerTextField.text = ""
-        secretAnswerView.answerTextField.quickDismissPlaceholder = "* * * * * * * * *"
-        secretAnswerView.answerTextField.placeholderColor = UIColor.black
-        
+        delegate?.didCloseSetSecurityQuestionViewController(with: answer)
+        self.navigationController?.popViewController(animated: false)
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
@@ -202,8 +195,11 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
         }
         
         answer.questionId = question.id
+        answer.question = question.text
         securityQuestionView.setQuestion(question: question.text)
         secretAnswerView.answerTextField.text = ""
+        secretAnswerView.answerTextField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
+        secretAnswerView.answerTextField.placeholderColor = ColorConstants.placeholderGrayColor
         checkButtonStatus()
     }
     

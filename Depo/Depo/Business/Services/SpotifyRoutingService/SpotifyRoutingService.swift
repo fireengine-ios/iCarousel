@@ -41,7 +41,7 @@ final class SpotifyRoutingService: NSObject {
         spotifyService.getStatus { [weak self] result in
             switch result {
             case .success(let status):
-                self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification, isConnectedSpotify: status.isConnected)
+                self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification)
                 self?.lastSpotifyStatus = status
                 completion?(.success(status))
             case .failed(let error):
@@ -281,8 +281,11 @@ final class SpotifyRoutingService: NSObject {
         switch result {
         case .success(_):
             let status = GAEventLabel.success.text
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
-            self.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyImport, playlistNumber: playlists.count, trackNumber: trackCount)
+
+            self.analyticsService.trackSpotify(eventActions: .connectedAccounts,
+                                               eventLabel: .importSpotifyResult(status),
+                                               trackNumber: trackCount,
+                                               playlistNumber: playlists.count)
         case .failed(_):
             let status = GAEventLabel.failure.text
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
