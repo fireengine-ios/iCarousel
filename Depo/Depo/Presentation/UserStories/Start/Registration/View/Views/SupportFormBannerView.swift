@@ -41,7 +41,6 @@ protocol SupportFormBannerViewDelegate: class {
 
 final class SupportFormBannerView: UIView, NibInit {
     @IBOutlet private weak var messageLabel: UILabel!
-    @IBOutlet private weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var arrowImageView: UIImageView!
 
     override class var layerClass: AnyClass {
@@ -121,12 +120,6 @@ final class SupportFormBannerView: UIView, NibInit {
         addGestureRecognizer(tapGesture)
         
         layer.cornerRadius = 4
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        heightConstraint.constant = bounds.height - 7
     }
 
     private func setupGradient() {
