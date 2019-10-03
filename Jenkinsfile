@@ -131,8 +131,10 @@ def publishToArtifactory = { classifier ->
             }
         ]}"""
     def buildInfo = artifactory.upload(uploadSpec)
-    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}.ipa"
-    createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${appName}-${version}.ipa</a>"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}-${classifier}.ipa"
+    def dsymUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}-${classifier}-dsym.zip"
+    createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${appName}-${version}-${classifier}.ipa</a>"
+    createSummary icon:'package.png', text:"<a href=\"${dsymUrl}\">${appName}-${version}-${classifier}-dsym.zip</a>"
 }
 
 pipeline {
