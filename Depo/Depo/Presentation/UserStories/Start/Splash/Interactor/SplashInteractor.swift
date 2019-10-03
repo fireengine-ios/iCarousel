@@ -71,6 +71,11 @@ class SplashInteractor: SplashInteractorInput {
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
+            ///Additional check "if this is LTE",
+            ///because our check for wifife or LTE looks like this:
+                ///"self.reachability?.connection == .cellular && apiReachability.connection == .reachable"
+            ///There is possability that we fall through to else, only because of no longer reachable internet.
+            ///So we check second time.
             } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
