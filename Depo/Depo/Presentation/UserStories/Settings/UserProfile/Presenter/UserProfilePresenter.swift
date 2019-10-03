@@ -54,7 +54,6 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         UIApplication.showErrorAlert(message: error)
     }
     
-    
     //view out
     
     func viewIsReady() {
