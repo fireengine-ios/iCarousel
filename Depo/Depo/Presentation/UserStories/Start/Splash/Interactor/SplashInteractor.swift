@@ -106,6 +106,7 @@ class SplashInteractor: SplashInteractorInput {
                 })
             } else {
                 output.asyncOperationSuccess()
+                analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
             }
         } else {
