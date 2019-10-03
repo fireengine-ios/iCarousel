@@ -752,7 +752,6 @@ enum GAEventLabel {
     case shareViaLink
     case shareViaApp(String)
     case login
-    //
     case update
     case yes
 
@@ -894,10 +893,8 @@ enum GAEventLabel {
             return "Share via Link"
         case .shareViaApp(let appName):
             return appName
-        //
         case .login:
             return "Login"
-        //
         case .update:
             return "Update"
         case .yes:
