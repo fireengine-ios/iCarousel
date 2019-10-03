@@ -65,7 +65,6 @@ class SplashInteractor: SplashInteractorInput {
     
     private func loginInBackground() {
         setupReachabilityIfNeed()
-        debugPrint("!!!! wifi? --\(reachabilityService.isReachableViaWiFi) token is alive? --\(tokenStorage.accessToken != nil)")
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
