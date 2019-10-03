@@ -186,6 +186,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         
         if let handler = handler {
             self.output.loginDeletedAccount(deletedAccountHandler: handler)
+            
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .delete, eventLabel: .login)
         } else {
             self.verifyProcess()
         }
