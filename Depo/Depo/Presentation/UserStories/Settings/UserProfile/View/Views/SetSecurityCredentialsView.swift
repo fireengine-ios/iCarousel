@@ -44,14 +44,14 @@ final class SetSecurityCredentialsView: UIView, NibInit {
         }
     }
     
-    func setupView(with type: CredentialType, title: String, description: String, buttonTitle: String) {
+    func setupView(with type: CredentialType, title: String, description: String, buttonTitle: String, descriptionColorIsBlack: Bool) {
         
         DispatchQueue.toMain {
             self.type = type
             self.titleLabel.text = title
             self.descriptionLabel.text = description
             
-            self.descriptionLabel.textColor = type == .password ? UIColor.black : ColorConstants.placeholderGrayColor
+            self.descriptionLabel.textColor = descriptionColorIsBlack ? UIColor.black : ColorConstants.placeholderGrayColor
             
             let attributedString = NSAttributedString(string: buttonTitle,
                                                       attributes: [
