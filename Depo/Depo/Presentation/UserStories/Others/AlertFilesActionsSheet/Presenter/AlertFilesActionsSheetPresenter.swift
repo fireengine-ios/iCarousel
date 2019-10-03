@@ -439,16 +439,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             !$0.isLocalItem
                         })
                         
-                        action = UIAlertAction(title: "", style: .default, handler: nil)
-                        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
-                            let localDuplicates = items
-                            action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                                MenloworksAppEvents.onDeleteClicked()
-                                self?.interactor.deleteDeviceOriginal(items: localDuplicates)
-                            })
-                            self?.semaphore.signal()
+                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                            MenloworksAppEvents.onDeleteClicked()
+                            self.didSelectDeleteDeviceOriginal(serverObjects: serverObjects)
                         })
-                        self.semaphore.wait()
                         
                     } else {
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
@@ -483,6 +477,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 return action
             })
         }
+    }
+    
+    private func didSelectDeleteDeviceOriginal(serverObjects:[Item]) {
+        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
+            self?.interactor.deleteDeviceOriginal(items: items)
+        })
     }
     
     func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item], sender: Any?) {
