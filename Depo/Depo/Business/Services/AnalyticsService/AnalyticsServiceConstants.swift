@@ -501,6 +501,7 @@ enum GAEventAction {
     case plus
     case connectedAccounts
     case deleteAccount
+    case periodicInfoUpdate
 
     var text: String {
         switch self {
@@ -593,6 +594,8 @@ enum GAEventAction {
             return "Connected Accounts"
         case .deleteAccount:
             return "Delete Account"
+        case .periodicInfoUpdate:
+            return "Periodic Info Update"
         }
     }
 }
@@ -750,6 +753,9 @@ enum GAEventLabel {
     case shareViaApp(String)
     //
     case login
+    //
+    case update
+    case yes
 
         var text: String {
         switch self {
@@ -892,6 +898,11 @@ enum GAEventLabel {
         //
         case .login:
             return "Login"
+        //
+        case .update:
+            return "Update"
+        case .yes:
+            return "Yes"
         }
     }
     
