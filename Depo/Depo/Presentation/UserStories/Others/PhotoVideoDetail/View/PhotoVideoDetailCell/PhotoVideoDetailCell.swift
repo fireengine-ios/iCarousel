@@ -49,7 +49,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         backgroundColor = UIColor.clear
         imageScrollView.delegate = self
-        imageScrollView.imageView.delegate = self
+        imageScrollView.imageView.loadingImageViewDelegate = self
         
         if let zoomGesture = webView.doubleTapZoomGesture {
             doubleTapWebViewGesture = zoomGesture
@@ -116,7 +116,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.isHidden = false
-            imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
+            imageScrollView.imageView.loadImage(with: object)
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
             
