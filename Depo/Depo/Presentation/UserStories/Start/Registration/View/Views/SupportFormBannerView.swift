@@ -41,6 +41,7 @@ protocol SupportFormBannerViewDelegate: class {
 
 final class SupportFormBannerView: UIView, NibInit {
     @IBOutlet private weak var messageLabel: UILabel!
+    @IBOutlet private weak var arrowImageView: UIImageView!
 
     override class var layerClass: AnyClass {
         return CAGradientLayer.self
@@ -53,6 +54,7 @@ final class SupportFormBannerView: UIView, NibInit {
     var type: SupportBannerViewType? {
         didSet {
             setupGradient()
+            setupArrowImageView()
             messageLabel.text = type?.text
         }
     }
@@ -129,6 +131,14 @@ final class SupportFormBannerView: UIView, NibInit {
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.colors = type?.gradientColors
+    }
+    
+    private func setupArrowImageView() {
+        if type == .faq {
+            arrowImageView.transform = .identity
+        } else if type == .support {
+            arrowImageView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        }
     }
     
     // MARK: - Actions
