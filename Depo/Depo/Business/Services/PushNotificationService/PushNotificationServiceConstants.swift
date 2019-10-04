@@ -54,5 +54,6 @@ enum PushNotificationParameter: String {
     case action = "action"
     case pushType = "push_type"
     case tbmaticUuids = "tbt_file_list"
+    case netmeraParameters = "prms"
 }
 
