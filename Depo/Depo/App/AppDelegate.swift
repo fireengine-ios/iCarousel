@@ -386,13 +386,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         debugLog("userNotificationCenter didReceive response")
-        guard let object = Netmera.recentPushObject() else {
+        guard let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] else {
             debugLog("userNotificationCenter Netmera push object is empty")
             return
         }
         
-        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary) {
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
             PushNotificationService.shared.openActionScreen()
+        } else {
+            XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
         }
     }
     
