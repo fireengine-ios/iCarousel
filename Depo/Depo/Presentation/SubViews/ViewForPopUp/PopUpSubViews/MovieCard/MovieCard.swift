@@ -79,7 +79,7 @@ final class MovieCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        videoPreviewImageView.loadImage(with: item, isOriginalImage: true)
+        videoPreviewImageView.loadImage(with: item)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
