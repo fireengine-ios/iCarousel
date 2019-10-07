@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,11 +15,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="alertsStackView" destination="JO9-w0-uO5" id="gyK-De-OCw"/>
-                <outlet property="bannerView" destination="Yra-Am-sHq" id="xre-mk-EQH"/>
+                <outlet property="bannerView" destination="7Qf-md-ArO" id="3m9-CI-6ik"/>
                 <outlet property="captchaView" destination="lBm-t6-08H" id="Q30-YR-Uaa"/>
                 <outlet property="nextButton" destination="Iei-Qg-JRc" id="3dp-rD-Uub"/>
                 <outlet property="scrollView" destination="00F-PK-XuO" id="VgG-X8-VHv"/>
-                <outlet property="shadowView" destination="BCA-IW-fto" id="VCZ-ok-faP"/>
                 <outlet property="stackView" destination="P2f-Nq-OPJ" id="I51-Rv-Ewr"/>
                 <outlet property="view" destination="77B-d8-gb9" id="fGW-7p-8fS"/>
             </connections>
@@ -35,10 +32,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQn-yz-ygb" userLabel="Container View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="661.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JO9-w0-uO5" userLabel="Alerts Stack View">
-                                    <rect key="frame" x="16" y="0.0" width="382" height="57.5"/>
+                                    <rect key="frame" x="16" y="0.0" width="382" height="52"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ5-DB-pO9">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
@@ -47,56 +44,61 @@
                                                 <constraint firstAttribute="height" id="Xes-rH-gWf"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-Am-sHq" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Qf-md-ArO" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHl-Hl-2fT">
-                                                    <rect key="frame" x="12" y="10" width="294.5" height="37.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-pt-zlI">
+                                                    <rect key="frame" x="12" y="10" width="289.5" height="32"/>
                                                     <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="question_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="FbX-Xv-9QB">
-                                                    <rect key="frame" x="318.5" y="27.5" width="17.5" height="31"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="bAt-XL-x2l">
+                                                    <rect key="frame" x="309.5" y="6" width="26.5" height="47"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="FbX-Xv-9QB" secondAttribute="height" multiplier="31:55" id="FCp-FB-kev"/>
-                                                        <constraint firstAttribute="height" constant="31" id="xMM-w2-JR1"/>
+                                                        <constraint firstAttribute="width" secondItem="bAt-XL-x2l" secondAttribute="height" multiplier="31:55" id="cj1-uU-dgT"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RS-Lk-81A">
-                                                    <rect key="frame" x="346" y="24.5" width="16" height="9"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="chevronLeft" translatesAutoresizingMaskIntoConstraints="NO" id="uOk-WB-qNa">
+                                                    <rect key="frame" x="346" y="21.5" width="16" height="9"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="9" id="TPC-Xs-Xkr"/>
+                                                        <constraint firstAttribute="height" constant="9" id="u5I-eb-m3d"/>
                                                     </constraints>
-                                                    <state key="normal" image="chevronLeft"/>
-                                                </button>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="FbX-Xv-9QB" secondAttribute="bottom" constant="-1" id="6q8-6D-6K3"/>
-                                                <constraint firstItem="qHl-Hl-2fT" firstAttribute="leading" secondItem="Yra-Am-sHq" secondAttribute="leading" constant="12" id="Cdf-4u-X68"/>
-                                                <constraint firstItem="1RS-Lk-81A" firstAttribute="centerY" secondItem="Yra-Am-sHq" secondAttribute="centerY" id="Deh-DZ-5qM"/>
-                                                <constraint firstItem="1RS-Lk-81A" firstAttribute="leading" secondItem="FbX-Xv-9QB" secondAttribute="trailing" constant="10" id="J93-B0-cew"/>
-                                                <constraint firstItem="qHl-Hl-2fT" firstAttribute="top" secondItem="Yra-Am-sHq" secondAttribute="top" constant="10" id="cFl-cg-lf2"/>
-                                                <constraint firstAttribute="trailing" secondItem="1RS-Lk-81A" secondAttribute="trailing" constant="20" id="fZJ-e9-qGZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="qHl-Hl-2fT" secondAttribute="bottom" constant="10" id="kAh-Oi-kE8"/>
-                                                <constraint firstItem="FbX-Xv-9QB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qHl-Hl-2fT" secondAttribute="trailing" constant="8" id="zkM-zr-FD1"/>
+                                                <constraint firstItem="bAt-XL-x2l" firstAttribute="height" secondItem="7Qf-md-ArO" secondAttribute="height" multiplier="0.9" id="20v-uI-tGA"/>
+                                                <constraint firstItem="bAt-XL-x2l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u2O-pt-zlI" secondAttribute="trailing" constant="8" id="38i-bo-tn9"/>
+                                                <constraint firstItem="uOk-WB-qNa" firstAttribute="centerY" secondItem="7Qf-md-ArO" secondAttribute="centerY" id="4lR-Ve-oO4"/>
+                                                <constraint firstItem="u2O-pt-zlI" firstAttribute="leading" secondItem="7Qf-md-ArO" secondAttribute="leading" constant="12" id="B6d-7F-d07"/>
+                                                <constraint firstItem="u2O-pt-zlI" firstAttribute="top" secondItem="7Qf-md-ArO" secondAttribute="top" constant="10" id="K20-hy-BLD"/>
+                                                <constraint firstAttribute="bottom" secondItem="u2O-pt-zlI" secondAttribute="bottom" constant="10" id="VVa-Re-433"/>
+                                                <constraint firstAttribute="trailing" secondItem="uOk-WB-qNa" secondAttribute="trailing" constant="20" id="fjG-Mp-AcP"/>
+                                                <constraint firstItem="uOk-WB-qNa" firstAttribute="leading" secondItem="bAt-XL-x2l" secondAttribute="trailing" constant="10" id="h5u-V3-HpO"/>
+                                                <constraint firstAttribute="bottom" secondItem="bAt-XL-x2l" secondAttribute="bottom" constant="-1" id="wid-PS-qjg"/>
                                             </constraints>
                                             <connections>
-                                                <outlet property="messageLabel" destination="qHl-Hl-2fT" id="2Yr-M1-oOc"/>
+                                                <outlet property="arrowImageView" destination="uOk-WB-qNa" id="E24-jX-miA"/>
+                                                <outlet property="messageLabel" destination="u2O-pt-zlI" id="u0A-45-cfO"/>
                                             </connections>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="7Qf-md-ArO" secondAttribute="bottom" id="Kep-Ww-SsQ"/>
+                                        <constraint firstItem="7Qf-md-ArO" firstAttribute="leading" secondItem="JO9-w0-uO5" secondAttribute="leading" id="LPM-w0-03P"/>
+                                        <constraint firstAttribute="trailing" secondItem="7Qf-md-ArO" secondAttribute="trailing" id="mDw-57-X5q"/>
+                                    </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVV-xV-h3m">
-                                    <rect key="frame" x="0.0" y="73.5" width="414" height="400"/>
+                                    <rect key="frame" x="0.0" y="68" width="414" height="400"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="400" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-Nq-OPJ">
-                                    <rect key="frame" x="20" y="73.5" width="374" height="400"/>
+                                    <rect key="frame" x="20" y="68" width="374" height="400"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="94P-4Q-I5x">
-                                    <rect key="frame" x="20" y="497.5" width="374" height="72"/>
+                                    <rect key="frame" x="20" y="492" width="374" height="72"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="lBm-t6-08H" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
@@ -104,7 +106,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Qg-JRc" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="593.5" width="228" height="44"/>
+                                    <rect key="frame" x="93" y="588" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="hPb-59-wQd"/>
                                     </constraints>
@@ -142,28 +144,20 @@
                         <constraint firstItem="LQn-yz-ygb" firstAttribute="top" secondItem="00F-PK-XuO" secondAttribute="top" id="ydM-tc-sZZ"/>
                     </constraints>
                 </scrollView>
-                <view hidden="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCA-IW-fto" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="BCA-IW-fto" secondAttribute="bottom" id="0yX-uh-tag"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="height" secondItem="77B-d8-gb9" secondAttribute="height" id="1dD-be-Ndk"/>
-                <constraint firstItem="BCA-IW-fto" firstAttribute="leading" secondItem="77B-d8-gb9" secondAttribute="leading" id="A0t-yf-Q2h"/>
                 <constraint firstItem="LQn-yz-ygb" firstAttribute="width" secondItem="77B-d8-gb9" secondAttribute="width" id="Bxy-pK-jLz"/>
                 <constraint firstAttribute="trailing" secondItem="00F-PK-XuO" secondAttribute="trailing" id="LLC-Cb-6v4"/>
-                <constraint firstItem="BCA-IW-fto" firstAttribute="top" secondItem="77B-d8-gb9" secondAttribute="top" id="Q8g-1e-tZx"/>
                 <constraint firstItem="LQn-yz-ygb" firstAttribute="centerX" secondItem="77B-d8-gb9" secondAttribute="centerX" id="ZTX-aa-NfM"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="width" secondItem="77B-d8-gb9" secondAttribute="width" id="ZXN-DV-c63"/>
-                <constraint firstAttribute="trailing" secondItem="BCA-IW-fto" secondAttribute="trailing" id="dEY-z8-Q5o"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="leading" secondItem="77B-d8-gb9" secondAttribute="leading" id="m6x-Vo-gbu"/>
                 <constraint firstAttribute="bottom" secondItem="00F-PK-XuO" secondAttribute="bottom" id="xVn-Fy-adN"/>
                 <constraint firstItem="00F-PK-XuO" firstAttribute="top" secondItem="77B-d8-gb9" secondAttribute="top" id="yuI-Tc-4o0"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <point key="canvasLocation" x="-671.20000000000005" y="49.925037481259373"/>
+            <point key="canvasLocation" x="-672.46376811594212" y="49.553571428571423"/>
         </view>
     </objects>
     <resources>

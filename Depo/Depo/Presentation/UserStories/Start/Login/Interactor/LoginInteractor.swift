@@ -109,6 +109,8 @@ class LoginInteractor: LoginInteractorInput {
         
         if let handler = handler {
             self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+            
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .delete, eventLabel: .login)
         } else {
             self.processLogin(login: login, headers: headers)
         }

@@ -16,4 +16,6 @@ protocol UserProfileInteractorInput {
     func changeTo(name: String, surname: String, email: String, number: String, birthday: String)
     
     func updateUserInfo()
+    
+    func updateSetQuestionView(with question: SecretQuestionWithAnswer)
 }

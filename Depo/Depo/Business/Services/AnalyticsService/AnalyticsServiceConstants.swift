@@ -427,6 +427,7 @@ enum GAEventCantegory {
     case functions
     case videoAnalytics
     case errors
+    case popUp
     
     var text: String {
         switch self {
@@ -438,6 +439,8 @@ enum GAEventCantegory {
             return "Video Analytics"
         case .errors:
             return "Errors"
+        case .popUp:
+            return "POP UP"
         }
     }
 }
@@ -497,6 +500,8 @@ enum GAEventAction {
     case contactOperation(SYNCMode)
     case plus
     case connectedAccounts
+    case deleteAccount
+    case periodicInfoUpdate
 
     var text: String {
         switch self {
@@ -587,6 +592,10 @@ enum GAEventAction {
             return "Plus"
         case .connectedAccounts:
             return "Connected Accounts"
+        case .deleteAccount:
+            return "Delete Account"
+        case .periodicInfoUpdate:
+            return "Periodic Info Update"
         }
     }
 }
@@ -742,6 +751,9 @@ enum GAEventLabel {
     case plusAction(TabBarViewController.Action)
     case shareViaLink
     case shareViaApp(String)
+    case login
+    case update
+    case yes
 
         var text: String {
         switch self {
@@ -881,6 +893,12 @@ enum GAEventLabel {
             return "Share via Link"
         case .shareViaApp(let appName):
             return appName
+        case .login:
+            return "Login"
+        case .update:
+            return "Update"
+        case .yes:
+            return "Yes"
         }
     }
     

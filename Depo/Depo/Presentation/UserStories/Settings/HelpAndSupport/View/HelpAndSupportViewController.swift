@@ -16,6 +16,9 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
     private var webView: WKWebView!
     
     // MARK: Life cycle
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()

@@ -83,6 +83,8 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
     
     private var isShown = false
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +147,10 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
         close(isFinalStep: false) { [weak self] in
             self?.showEmailVerifiedPopUp()
             self?.updateInfoFeedbackRequest(isUpdated: false)
+            
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                      eventActions: .periodicInfoUpdate,
+                                                      eventLabel: .yes)
         }
     }
     
@@ -152,6 +158,10 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
         close(isFinalStep: false) { [weak self] in
             self?.openUserProfile()
             self?.updateInfoFeedbackRequest(isUpdated: true)
+            
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                      eventActions: .periodicInfoUpdate,
+                                                      eventLabel: .update)
         }
     }
 }

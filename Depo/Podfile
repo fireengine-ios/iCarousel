@@ -17,7 +17,7 @@ def core_pods
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
-  pod 'Netmera'
+#  pod 'Netmera'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
