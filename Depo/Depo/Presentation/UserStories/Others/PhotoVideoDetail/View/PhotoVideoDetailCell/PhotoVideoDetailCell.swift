@@ -74,7 +74,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             layoutIfNeeded()
             webView.frame = contentView.frame
             imageScrollView.updateZoom()
+            imageScrollView.adjustFrameToCenter()
         }
+        
     }
     
     override func prepareForReuse() {
@@ -116,10 +118,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.isHidden = false
+            imageScrollView.image = nil
             imageScrollView.imageView.loadImage(with: object)
+            imageScrollView.adjustFrameToCenter()
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
-            
         } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
             isNeedToUpdateWebView = true
             

@@ -575,16 +575,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
-        do {
-            if let image = try UIImage(data: Data(contentsOf: fileUrl)) {
-                let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
-                return request.placeholderForCreatedAsset
-            }
-            
-        } catch {
-            print(error.description)
-        }
-        return nil
+        let request = PHAssetCreationRequest.forAsset()
+        request.addResource(with: .photo, fileURL: fileUrl, options: nil)
+        return request.placeholderForCreatedAsset
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {

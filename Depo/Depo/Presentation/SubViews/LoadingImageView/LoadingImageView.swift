@@ -65,14 +65,6 @@ class LoadingImageView: UIImageView {
         activity.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
     }
     
-    override func startAnimating() {
-        activity.startAnimating()
-    }
-    
-    override func stopAnimating() {
-        activity.stopAnimating()
-    }
-    
     func checkIsNeedCancelRequest() {
         if let url = url {
             filesDataSource.cancelRequest(url: url)
@@ -100,7 +92,7 @@ class LoadingImageView: UIImageView {
             guard self?.path == object.patchToPreview else {
                 return
             }
-            
+
             self?.loadImage(data: data)
         }
     }
