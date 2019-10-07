@@ -11,6 +11,14 @@ import WebKit
 
 
 final class PaycellViewController: UIViewController {
+    
+    static func create(with cpcmOfferId: Int, completion: @escaping ResponseVoid) -> PaycellViewController {
+        let controller = PaycellViewController()
+        controller.offerId = cpcmOfferId
+        controller.completionHandler = completion
+        return controller
+    }
+    
 
     private let tokenStorage: TokenStorage = factory.resolve()
     private var offerId: Int?
@@ -37,14 +45,6 @@ final class PaycellViewController: UIViewController {
     }()
     
     private var popupWebView: WKWebView?
-    
-    
-    static func create(with cpcmOfferId: Int, completion: @escaping ResponseVoid) -> PaycellViewController {
-        let controller = PaycellViewController()
-        controller.offerId = cpcmOfferId
-        controller.completionHandler = completion
-        return controller
-    }
     
     
     override func loadView() {
@@ -120,13 +120,6 @@ final class PaycellViewController: UIViewController {
 }
 
 extension PaycellViewController: WKUIDelegate {
-    private func createWindowWebView(with configuration: WKWebViewConfiguration) -> WKWebView {
-        let newWindowView = WKWebView(frame: view.bounds, configuration: configuration)
-        newWindowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        newWindowView.navigationDelegate = self
-        newWindowView.uiDelegate = self
-        return newWindowView
-    }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newWindowView = createWindowWebView(with: configuration)
@@ -143,6 +136,14 @@ extension PaycellViewController: WKUIDelegate {
         } else {
             closeScreen(error: nil)
         }
+    }
+    
+    private func createWindowWebView(with configuration: WKWebViewConfiguration) -> WKWebView {
+        let newWindowView = WKWebView(frame: view.bounds, configuration: configuration)
+        newWindowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        newWindowView.navigationDelegate = self
+        newWindowView.uiDelegate = self
+        return newWindowView
     }
 }
 
