@@ -8,13 +8,10 @@
 
 import UIKit
 import Photos
-import SwiftyGif
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> Void
-
-typealias FileDataSorceData = (_ image: Data?) -> Void
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
@@ -390,22 +387,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.addOperation(operation)
     }
     
-    func getImageData(asset: PHAsset, data: @escaping FileDataSorceData) {
-        debugLog("LocalMediaStorage getGifImage")
-        
-        guard let photoManager = photoManager else {
-            data(nil)
-            return
-        }
-
-        let callBack: PhotoManagerOriginalCallBack = { imageData, _, _, _ in
-            DispatchQueue.main.async {
-                data(imageData)
-            }
-        }
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, callback: callBack)
-        queue.addOperation(operation)
-    }
     
     // MARK: insert remove Asset
     
@@ -575,9 +556,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
-        let request = PHAssetCreationRequest.forAsset()
-        request.addResource(with: .photo, fileURL: fileUrl, options: nil)
-        return request.placeholderForCreatedAsset
+        do {
+            if let image = try UIImage(data: Data(contentsOf: fileUrl)) {
+                let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                return request.placeholderForCreatedAsset
+            }
+            
+        } catch {
+            print(error.description)
+        }
+        return nil
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {

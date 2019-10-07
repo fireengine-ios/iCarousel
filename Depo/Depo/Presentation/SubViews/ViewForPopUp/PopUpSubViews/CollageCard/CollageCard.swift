@@ -85,7 +85,7 @@ final class CollageCard: BaseView {
     }
     
     override func viewWillShow() {
-        photoImageView.loadImage(with: item)
+        photoImageView.loadImage(with: item, isOriginalImage: true)
     }
     
     override func viewDidEndShow() {

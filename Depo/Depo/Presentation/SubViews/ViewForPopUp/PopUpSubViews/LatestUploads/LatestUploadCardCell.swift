@@ -19,6 +19,6 @@ class LatestUploadCardCell: UICollectionViewCell {
     }
     
     func setImage(image: Item) {
-        iconImageView.loadThumbnail(object: image)
+        iconImageView.loadImageForItem(object: image)
     }
 }

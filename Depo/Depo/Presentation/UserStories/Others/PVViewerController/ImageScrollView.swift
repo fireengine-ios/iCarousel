@@ -12,15 +12,12 @@ final class ImageScrollView: UIScrollView {
     
     private(set) var imageView = LoadingImageView()
     
-    //set minimum image size to be able to display activity indicator that is attached to image
-    private let minimumImageSize = CGSize(width: 40, height: 40)
-    
     var image: UIImage? {
         didSet {
             /// clear current values
             imageView.image = nil
-            imageView.frame = CGRect(origin: CGPoint.zero, size: minimumImageSize)
-            contentSize = minimumImageSize
+            imageView.frame = .zero
+            contentSize = .zero
             maximumZoomScale = 1
             minimumZoomScale = 1
             zoomScale = 1

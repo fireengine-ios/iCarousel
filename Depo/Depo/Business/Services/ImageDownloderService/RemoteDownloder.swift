@@ -54,29 +54,6 @@ class ImageDownloder {
         
     }
     
-    func getImageData(url: URL?, completeData:@escaping RemoteData) {
-        
-        guard let path = url, path.byTrimmingQuery?.absoluteString != nil else {
-            DispatchQueue.main.async {
-                completeData(nil)
-            }
-            return
-        }
-        
-        let item = SDWebImageManager.shared().loadImage(with: path, options: [], progress: nil) { _,data,_,cacheType,_,imageUrl in
-            DispatchQueue.main.async {
-                completeData(data)
-            }
-        }
-        
-        guard let downloadItem = item else {
-            return
-        }
-        
-        tokenList = tokenList + [path : downloadItem]
-        
-    }
-    
     func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
         guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
             DispatchQueue.main.async {

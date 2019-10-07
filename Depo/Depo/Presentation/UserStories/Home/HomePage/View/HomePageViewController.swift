@@ -292,7 +292,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
                            height: collectionView.frame.height - premiumCardFrame.height - verticalSpace)
             
             completion(frame)
-        case .movieCard, .albumCard, .collageCard, .filterCard, .animationCard:
+        case .movieCard, .albumCard, .collageCard, .filterCard: //.animationCard,
             cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
         }
     }

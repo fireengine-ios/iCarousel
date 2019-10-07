@@ -44,10 +44,10 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         }
         
         listViewTitle.text = album.name
-        listViewIcon.loadThumbnail(object: album.preview, smooth: true)
+        listViewIcon.loadImageForItem(object: album.preview)
         
         greedViewTitle.text = album.name
-        greedViewIcon.loadThumbnail(object: album.preview, smooth: true)
+        greedViewIcon.loadImageForItem(object: album.preview)
         
         listView.isHidden = isBigSize()
         greedView.isHidden = !isBigSize()

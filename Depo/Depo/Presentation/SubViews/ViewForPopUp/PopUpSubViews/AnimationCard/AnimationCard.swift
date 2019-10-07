@@ -49,7 +49,11 @@ class AnimationCard: BaseView {
             }
         }
     }
-        
+    
+    override func viewWillShow() {
+        photoImageView.showDownloadedGif()
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -71,7 +75,7 @@ class AnimationCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        photoImageView.loadImage(url: item.tmpDownloadUrl)
+        photoImageView.loadGifImageFromURL(url: item.tmpDownloadUrl)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

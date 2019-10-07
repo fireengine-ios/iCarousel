@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import SwiftyGif
 
 protocol LoadingImageViewDelegate: class {
     func onImageLoaded(image: UIImage?)
@@ -21,32 +20,19 @@ extension LoadingImageViewDelegate {
 
 class LoadingImageView: UIImageView {
 
-    private let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    private var url: URL?
-    private var path: PathForItem?
+    let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    var url: URL?
+    var path: PathForItem?
+    private var downloadedGifImage: UIImage?
     private var filesDataSource = FilesDataSource()
     
-    private var cornerView: UIView?
+    var cornerView: UIView?
     
-    weak var loadingImageViewDelegate: LoadingImageViewDelegate?
+    weak var delegate: LoadingImageViewDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
-        setupLayout()
-    }
-    
-    convenience init() {
-        self.init(frame: CGRect.zero)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setupLayout()
-    }
-    
-    private func setupLayout() {
         if (cornerView == nil) {
             let newCornerView = UIView()
             newCornerView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,100 +47,175 @@ class LoadingImageView: UIImageView {
         activity.hidesWhenStopped = true
         activity.translatesAutoresizingMaskIntoConstraints = false
         
-        activity.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
-        activity.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(NSLayoutConstraint(item: activity, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: activity, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        
+        NSLayoutConstraint.activate(constraints)
+        
+    }
+    
+    override func startAnimating() {
+        activity.startAnimating()
+    }
+    
+    override func stopAnimating() {
+        activity.stopAnimating()
     }
     
     func checkIsNeedCancelRequest() {
-        if let url = url {
-            filesDataSource.cancelRequest(url: url)
-        } else if let path = path {
-            filesDataSource.cancelImgeRequest(path: path)
-        }
+        if let path = path {
+            if let url = url {
+                filesDataSource.cancelRequest(url: url)
+            } else {
+                filesDataSource.cancelImgeRequest(path: path)
+            }
             
-        path = nil
-        url = nil
-        loadingImageViewDelegate?.onLoadingImageCanceled()
+            self.path = nil
+            url = nil
+            delegate?.onLoadingImageCanceled()
+        }
     }
     
-    func loadImage(with object: Item?) {
+    func loadImage(with object: Item?, isOriginalImage: Bool) {
         guard let object = object, path != object.patchToPreview else {
             return
         }
         
-        clearAll()
+        self.image = nil
         checkIsNeedCancelRequest()
-        
         path = object.patchToPreview
         activity.startAnimating()
-        
-        url = filesDataSource.getImageData(for: object) { [weak self] data in
-            guard self?.path == object.patchToPreview else {
-                return
+        url = filesDataSource.getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
+            if self?.path == object.patchToPreview {
+                self?.finishImageLoading(image)
             }
-
-            self?.loadImage(data: data)
         }
     }
     
-    func loadThumbnail(object: Item?, smooth: Bool = false) {
-        guard let object = object else {
+    func loadImageByURL(url: URL?) {
+        self.image = nil
+        if (url == nil) {
             checkIsNeedCancelRequest()
-            if !smooth {
-                clearAll()
-                activity.stopAnimating()
-            }
+            activity.stopAnimating()
             
             return
         }
         
-        loadImage(path: object.patchToPreview, smooth: smooth)
+        activity.startAnimating()
+        let path_: PathForItem = PathForItem.remoteUrl(url)
+        path = path_
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), completeImage: { [weak self] image in
+            if self?.path == path_ {
+                self?.finishImageLoading(image)
+            }
+        })
     }
     
-    func loadImage(path: PathForItem, smooth: Bool = false) {
-        checkIsNeedCancelRequest()
+    private let privateQueue = DispatchQueue.global(qos: .userInitiated)
+    
+    func loadImageForItem(object: Item?, smooth: Bool = false) {
+        if !smooth {
+            self.image = nil
+        }
+        
+        guard let object = object else {
+            checkIsNeedCancelRequest()
+            activity.stopAnimating()
+            return
+        }
         
         if !smooth {
-            clearAll()
             activity.startAnimating()
         }
-        
-        self.path = path
-        self.url = filesDataSource.getImage(patch: path) { [weak self] image in
-            guard self?.path == path else {
-                return
-            }
+        privateQueue.async { [weak self] in
+            self?.path = object.patchToPreview
             
-            self?.finishImageLoading(image, withAnimation: smooth)
-        }
-    }
-    
-    private func loadImage(data: Data?) {
-        var image:UIImage?
-        if let data = data {
-            let format = ImageFormat.get(from: data)
-            switch format {
-            case .gif:
-                image = UIImage(gifData: data)
-            default:
-                image = UIImage(data: data)
+            self?.url = self?.filesDataSource.getImage(patch: object.patchToPreview) { [weak self] image in
+                if self?.path == object.patchToPreview {
+                    self?.finishImageLoading(image, withAnimation: smooth)
+                }
             }
         }
         
-        finishImageLoading(image)
     }
     
-    func loadImage(url: URL?) {
+    func loadImageByPath(path_: PathForItem?) {
+        self.image = nil
+        
+        guard let unwrapedPath = path_ else {
+            checkIsNeedCancelRequest()
+            activity.stopAnimating()
+            return
+        }
+        
+        activity.startAnimating()
+        path = unwrapedPath
+        
+        switch unwrapedPath {
+        case .remoteUrl(let url):
+            self.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+                self?.finishImageLoading(image)
+            }
+        default:
+            finishImageLoading(nil)
+        }
+    }
+    
+    func loadGifImageFromURL(url: URL?) {
         guard let url = url else {
             return
         }
         
-        self.url = filesDataSource.getImageData(for: url) { [weak self] data in
-            guard self?.url == url else {
+        
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+
+            do {
+                let data = try Data(contentsOf: url)
+                self?.downloadedGifImage = UIImage.sd_animatedGIF(with: data)
+                DispatchQueue.main.async { [weak self] in
+                    if let `self` = self{
+                        self.image = self.downloadedGifImage
+                    }
+                }
+            } catch {
                 return
             }
+        
             
-            self?.loadImage(data: data)
+            
+            
+//            let gif = UIImage.gifImageWithURL(gifUrl: url.absoluteString)
+//            DispatchQueue.main.async { [weak self] in
+//                self?.image = gif
+//            }
+        }
+        
+        
+//        sd_cancelCurrentImageLoad()
+//        sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+//            guard let image = image, let data = UIImagePNGRepresentation(image) else {
+//                return
+//            }
+//
+//            if ImageFormat.get(from: data) != .gif {
+//                self?.image = image
+//                return
+//            }
+//
+//            guard let nsdata = data as NSData? else {
+//                return
+//            }
+//
+//            let gif = UIImage.gifImageWithData(data: nsdata)
+//            self?.image = gif
+//        }
+    }
+    
+    func showDownloadedGif() {
+        image = nil
+        if let downloadedGifImage = downloadedGifImage {
+            image = downloadedGifImage
         }
     }
     
@@ -187,36 +248,17 @@ class LoadingImageView: UIImageView {
                     with: self,
                     duration: NumericConstants.animationDuration,
                     options: .transitionCrossDissolve,
-                    animations: nil,
-                    completion: { [weak self] _ in
-                        self?.displayImage(image)
+                    animations: { [weak self] in
+//                        self?.image = image
+                    }, completion: { [weak self] _ in
+                        self?.image = image
                 })
             } else {
-                self.displayImage(image)
+                self.image = image
             }
-        }
-    }
-    
-    private func clearAll() {
-        SwiftyGifManager.defaultManager.deleteImageView(self)
-        self.clear()
-    }
-    
-    private func displayImage(_ image: UIImage?) {
-        clearAll()
-        
-        var currentFrameImage:UIImage?
-        
-        if let gifImage = image, gifImage.imageCount != nil {
-            setGifImage(gifImage)
-            startAnimatingGif()
-            currentFrameImage = currentImage
-        } else {
-            self.image = image
-            currentFrameImage = image
+            self.delegate?.onImageLoaded(image: image)
         }
         
-        self.loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
     }
 
 }

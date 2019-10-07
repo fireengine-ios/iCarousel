@@ -112,7 +112,7 @@ final class AlbumCard: BaseView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
-            previewImageView.loadImage(with: item)
+            previewImageView.loadImage(with: item, isOriginalImage: true)
         }
     }
     
