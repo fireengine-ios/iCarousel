@@ -24,10 +24,13 @@ final class PushNotificationService {
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
         let action = launchOptions?[PushNotificationParameter.action.rawValue] as? String ?? launchOptions?[PushNotificationParameter.pushType.rawValue] as? String
         
-        guard let actionString = action,
-            let notificationAction = PushNotificationAction(rawValue: actionString) else {
-//            assertionFailure("unowned push type")
-                debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
+        guard let actionString = action else {
+            return false
+        }
+        
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
             return false
         }
         
@@ -102,7 +105,9 @@ final class PushNotificationService {
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationParameters)
-        case .login: openLogin()
+        case .login:
+            openLogin()
+            clear()
         case .search: openSearch()
         case .freeUpSpace: break
         case .settings: openSettings()
@@ -112,8 +117,16 @@ final class PushNotificationService {
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
         case .tbmatic: openTBMaticPhotos(notificationParameters)
-            
         }
+        
+        if router.tabBarController != nil {
+            clear()
+        }
+    }
+    
+    private func clear() {
+        // clear if user haven't access or need screen is showed
+        // no clean for cold application start - screen showing from home page
         notificationAction = nil
         notificationParameters = nil
         storageVars.deepLink = nil

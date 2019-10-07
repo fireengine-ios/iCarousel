@@ -138,8 +138,11 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
             switch result {
             case .success(_):
                 self.dataSource.remove(items) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete, eventLabel: .importSpotifyTrack)
-                    self.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyImportPlaylistDetails, trackNumber: trackIds.count)
+
+                    self.analyticsService.trackSpotify(eventActions: .delete,
+                                                       eventLabel: .importSpotifyTrack,
+                                                       trackNumber: trackIds.count,
+                                                       playlistNumber: nil)
                     self.hideSpinner()
                     self.playlist?.count -= items.count
                     self.navbarManager.playlist = self.playlist

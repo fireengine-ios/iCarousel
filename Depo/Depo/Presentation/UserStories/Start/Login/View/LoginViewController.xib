@@ -42,7 +42,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="178" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-15-NB0">
-                                    <rect key="frame" x="16" y="0.0" width="382" height="235.5"/>
+                                    <rect key="frame" x="16" y="0.0" width="382" height="230"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCN-Fn-UUh">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
@@ -52,23 +52,22 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-Cc-viq" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-ye-wAx">
-                                                    <rect key="frame" x="12" y="10" width="294.5" height="37.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-ye-wAx">
+                                                    <rect key="frame" x="12" y="10" width="289.5" height="32"/>
                                                     <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="question_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="GNs-Rv-VwL">
-                                                    <rect key="frame" x="318.5" y="27.5" width="17.5" height="31"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="GNs-Rv-VwL">
+                                                    <rect key="frame" x="309.5" y="6" width="26.5" height="47"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="31" id="bEx-Hy-elH"/>
                                                         <constraint firstAttribute="width" secondItem="GNs-Rv-VwL" secondAttribute="height" multiplier="31:55" id="uf0-m1-vXO"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevronLeft" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-SW-P39">
-                                                    <rect key="frame" x="346" y="24.5" width="16" height="9"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="chevronLeft" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-SW-P39">
+                                                    <rect key="frame" x="346" y="21.5" width="16" height="9"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="9" id="9zW-9Q-pLq"/>
                                                     </constraints>
@@ -79,6 +78,7 @@
                                                 <constraint firstItem="fj0-ye-wAx" firstAttribute="leading" secondItem="rnZ-Cc-viq" secondAttribute="leading" constant="12" id="3RP-UY-BLe"/>
                                                 <constraint firstAttribute="trailing" secondItem="AZt-SW-P39" secondAttribute="trailing" constant="20" id="5w5-1u-kpY"/>
                                                 <constraint firstItem="fj0-ye-wAx" firstAttribute="top" secondItem="rnZ-Cc-viq" secondAttribute="top" constant="10" id="6Hj-vO-QJx"/>
+                                                <constraint firstItem="GNs-Rv-VwL" firstAttribute="height" secondItem="rnZ-Cc-viq" secondAttribute="height" multiplier="0.9" id="FPh-bS-GJC"/>
                                                 <constraint firstAttribute="bottom" secondItem="GNs-Rv-VwL" secondAttribute="bottom" constant="-1" id="K5b-F6-bWh"/>
                                                 <constraint firstAttribute="bottom" secondItem="fj0-ye-wAx" secondAttribute="bottom" constant="10" id="M3M-1k-cZG"/>
                                                 <constraint firstItem="AZt-SW-P39" firstAttribute="centerY" secondItem="rnZ-Cc-viq" secondAttribute="centerY" id="U2O-wb-aC3"/>
@@ -86,21 +86,22 @@
                                                 <constraint firstItem="AZt-SW-P39" firstAttribute="leading" secondItem="GNs-Rv-VwL" secondAttribute="trailing" constant="10" id="qBc-fJ-Jgv"/>
                                             </constraints>
                                             <connections>
+                                                <outlet property="arrowImageView" destination="AZt-SW-P39" id="KpP-1d-hyw"/>
                                                 <outlet property="messageLabel" destination="fj0-ye-wAx" id="VE7-tX-RXD"/>
                                             </connections>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="57.5" width="382" height="178"/>
+                                            <rect key="frame" x="0.0" y="52" width="382" height="178"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-SY-yH4">
-                                    <rect key="frame" x="0.0" y="251.5" width="414" height="318"/>
+                                    <rect key="frame" x="0.0" y="246" width="414" height="318"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7">
-                                    <rect key="frame" x="20" y="251.5" width="374" height="318"/>
+                                    <rect key="frame" x="20" y="246" width="374" height="318"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
@@ -140,7 +141,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="619.5" width="228" height="44"/>
+                                    <rect key="frame" x="93" y="614" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
                                     </constraints>
@@ -150,7 +151,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
-                                    <rect key="frame" x="184" y="686.5" width="46" height="30"/>
+                                    <rect key="frame" x="184" y="681" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="c4a-Kf-3Ex"/>

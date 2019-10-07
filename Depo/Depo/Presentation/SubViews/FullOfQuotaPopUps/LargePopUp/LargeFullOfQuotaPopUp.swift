@@ -80,6 +80,8 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        contentView = containerView
+        
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
     }
     

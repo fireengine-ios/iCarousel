@@ -37,13 +37,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateUserInfo() {
-        accountService.info(success: {  [weak self] response in
+        accountService.info(success: { [weak self] response in
             guard let response = response as? AccountInfoResponse else {
                 assertionFailure()
                 return
             }
             DispatchQueue.toMain {
-                self?.output.configurateUserInfo(userInfo: response)
                 SingletonStorage.shared.accountInfo = response
             }
         }) { error in
@@ -51,6 +50,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
+    func updateSetQuestionView(with question: SecretQuestionWithAnswer) {
+        output.updateSecretQuestionView(selectedQuestion: question)
+    }
+
     private func isPhoneChanged(phone: String) -> Bool {
         return (phone != userInfo?.phoneNumber)
     }
