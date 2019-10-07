@@ -129,7 +129,6 @@ extension PaycellViewController: WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-
         let newWindowView = createWindowWebView(with: configuration)
         popupWebView = newWindowView
         view.addSubview(newWindowView)
