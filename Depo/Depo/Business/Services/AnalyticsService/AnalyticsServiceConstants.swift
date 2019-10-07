@@ -945,6 +945,7 @@ enum GADementionsFields {
     case errorType
     case autoSyncState
     case autoSyncStatus
+    case spotify
     
     var text: String {
         switch self {
@@ -988,6 +989,8 @@ enum GADementionsFields {
             return "AutoSync"
         case .autoSyncStatus:
             return "SyncStatus"
+        case .spotify:
+            return "connectStatus"
         }
     }
     

@@ -30,6 +30,8 @@ struct AnalyticsDimension {
     let autoSyncState: String?
     let autoSyncStatus: String?
     
+    let isSpotifyEnabled: Bool?
+
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -75,6 +77,9 @@ struct AnalyticsDimension {
         }
         if let autoSyncStatus = autoSyncStatus {
             dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
+        }
+        if let isSpotifyEnabled = isSpotifyEnabled {
+            dimesionDictionary[GADementionsFields.spotify.text] = (isSpotifyEnabled ? "Connect" : "Disconnect") + " - Spotify"
         }
         
         return dimesionDictionary

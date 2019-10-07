@@ -189,6 +189,8 @@ extension AnalyticsService: AnalyticsGA {
         var autoSyncState: String?
         var autoSyncStatus: String?
     
+        var isSpotifyEnabled: Bool?
+
         if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
@@ -201,6 +203,28 @@ extension AnalyticsService: AnalyticsGA {
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+
+            if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
+                isSpotifyEnabled = storedIsSpotifyEnabled
+
+            } else {
+                group.enter()
+                
+                let spotifyService: SpotifyService = factory.resolve()
+                spotifyService.getStatus { response in
+                    switch response {
+                    case .success(let status):
+                        isSpotifyEnabled = status.isConnected
+                        
+                        SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+                        
+                        group.leave()
+                    case .failed(_):
+                        group.leave()
+                        
+                    }
+                }
+            }
         }
         
         
@@ -221,6 +245,7 @@ extension AnalyticsService: AnalyticsGA {
                 errorType: errorType,
                 autoSyncState: autoSyncState,
                 autoSyncStatus: autoSyncStatus).productParametrs)
+                isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
     
@@ -414,7 +439,7 @@ extension AnalyticsService: AnalyticsGA {
             var parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel.text,
+                "eventLabel" : eventLabel.text
             ]
             
             if let trackNumber = trackNumber {
