@@ -26,7 +26,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         dataStorage.signUpUserInfo = userInfo
     }
     
-    func trackScreen() {
+    func trackScreen(isTimerExpired: Bool) {
         analyticsService.logScreen(screen: .signUpOTP)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }

@@ -188,7 +188,7 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-    
+        var isTwoFactorAuthEnabled: Bool?
         var isSpotifyEnabled: Bool?
 
         if loginStatus {
@@ -203,6 +203,8 @@ extension AnalyticsService: AnalyticsGA {
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            
+            isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
 
             if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
                 isSpotifyEnabled = storedIsSpotifyEnabled
@@ -244,7 +246,8 @@ extension AnalyticsService: AnalyticsGA {
                 loginType: loginType,
                 errorType: errorType,
                 autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus).productParametrs)
+                autoSyncStatus: autoSyncStatus,
+                isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
                 isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
