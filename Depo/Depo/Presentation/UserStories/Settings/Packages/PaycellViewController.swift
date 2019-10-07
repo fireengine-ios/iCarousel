@@ -120,7 +120,7 @@ final class PaycellViewController: UIViewController {
 }
 
 extension PaycellViewController: WKUIDelegate {
-    private func createNewWindowWebView(with configuration: WKWebViewConfiguration) -> WKWebView {
+    private func createWindowWebView(with configuration: WKWebViewConfiguration) -> WKWebView {
         let newWindowView = WKWebView(frame: view.bounds, configuration: configuration)
         newWindowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         newWindowView.navigationDelegate = self
@@ -129,15 +129,21 @@ extension PaycellViewController: WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newWindowView = createNewWindowWebView(with: configuration)
-        view.addSubview(newWindowView)
+
+        let newWindowView = createWindowWebView(with: configuration)
         popupWebView = newWindowView
+        view.addSubview(newWindowView)
+        
         return popupWebView
     }
 
     func webViewDidClose(_ webView: WKWebView) {
-        webView.removeFromSuperview()
-        popupWebView = nil
+        if webView == popupWebView {
+            webView.removeFromSuperview()
+            popupWebView = nil
+        } else {
+            closeScreen(error: nil)
+        }
     }
 }
 
