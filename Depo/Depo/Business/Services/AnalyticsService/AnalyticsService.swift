@@ -244,7 +244,7 @@ extension AnalyticsService: AnalyticsGA {
                 loginType: loginType,
                 errorType: errorType,
                 autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus).productParametrs)
+                autoSyncStatus: autoSyncStatus,
                 isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
