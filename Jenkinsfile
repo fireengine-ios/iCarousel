@@ -223,7 +223,7 @@ pipeline {
                 script {
                     def ipaFile = "ictstore.ipa"
                     def manifestFile = "manifest.plist"
-                    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}.ipa"
+                    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${appName}-${version}-test.ipa"
                     def ictsBundleIdentifier = flavors['test'].bundleIdentifier
                     sh "curl -v ${ipaUrl} -o ${ipaFile}"
 
@@ -231,7 +231,7 @@ pipeline {
 
                     def ictsUpdateUrl = 'http://ictstore.turkcell.com.tr/RepositoryAdmin/rest/containers/updateFile'
                     sh "curl -v -f -i -X POST -F pList=@${manifestFile} -F ipa=@${ipaFile} ${ictsUpdateUrl}?containerId=${ictsContainerId}"
-                    sh "echo ${appName}-${version}.ipa deployed to ICT Store"
+                    sh "echo ${appName}-${version}-test.ipa deployed to ICT Store"
                 }
             }
 			post {
@@ -277,7 +277,7 @@ pipeline {
                 script {
                     xcodeBuild('prod')
                     publishToArtifactory('prod')
-                    sh "cp build/${appName}-${BUILD_ID}-prod ${appName}.ipa"
+                    sh "cp build/${appName}-${BUILD_ID}-prod.ipa ${appName}.ipa"
                     sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                     sh """
                         export FASTLANE_USER=${TESTFLIGHT_UPLOAD_USR}
