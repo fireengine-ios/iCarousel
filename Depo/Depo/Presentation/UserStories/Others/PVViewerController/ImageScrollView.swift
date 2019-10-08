@@ -78,7 +78,7 @@ final class ImageScrollView: UIScrollView {
         minimumZoomScale = 1
         zoomScale = 1
         
-        let size = image != nil ? image!.size : minimumImageSize
+        let size = image?.size ?? minimumImageSize
         imageView.frame = CGRect(origin: CGPoint.zero, size: size)
         contentSize = size
     }
