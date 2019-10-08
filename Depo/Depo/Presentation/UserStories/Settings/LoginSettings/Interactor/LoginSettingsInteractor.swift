@@ -50,6 +50,8 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
             self?.turkcellLogin = turkCellAutoLogin
             self?.twoFactorAuthEnabled = twoFactorAuthEnabled
             
+            SingletonStorage.shared.isTwoFactorAuthEnabled = twoFactorAuthEnabled
+            
             DispatchQueue.main.async {
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn,
                                                             autoLogin: turkCellAutoLogin,
@@ -81,6 +83,8 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
             self?.turkcellPassword = turkCellPasswordOn
             self?.turkcellLogin = turkCellAutoLogin
             self?.twoFactorAuthEnabled = twoFactorAuth
+                                                    
+            SingletonStorage.shared.isTwoFactorAuthEnabled = twoFactorAuth
             
             DispatchQueue.main.async {
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn,

@@ -20,7 +20,7 @@ class OTPViewInteractor: PhoneVerificationInteractor {
         return 60
     }
     
-    override func trackScreen() {
+    override func trackScreen(isTimerExpired: Bool) {
         analyticsService.logScreen(screen: .doubleOTP)
         analyticsService.trackDimentionsEveryClickGA(screen: .doubleOTP)
     }
