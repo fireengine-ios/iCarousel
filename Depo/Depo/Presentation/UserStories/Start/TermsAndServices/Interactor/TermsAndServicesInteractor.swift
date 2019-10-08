@@ -127,7 +127,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.output.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
+            self.output?.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
         }
         
     }
