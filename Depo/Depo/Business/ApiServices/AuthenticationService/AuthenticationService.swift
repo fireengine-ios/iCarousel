@@ -349,6 +349,8 @@ class AuthenticationService: BaseRequestService {
                         
                         if let statusCode = response.response?.statusCode, statusCode == 403 {
                             
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = true
+
                             guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
                                 assertionFailure()
                                 return
@@ -359,6 +361,9 @@ class AuthenticationService: BaseRequestService {
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
                             CacheManager.shared.actualizeCache(completion: nil)
+                            
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = false
+                            
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in

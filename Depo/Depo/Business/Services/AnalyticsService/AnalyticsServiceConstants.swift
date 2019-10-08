@@ -516,6 +516,7 @@ enum GAEventAction {
     case connectedAccounts
     case deleteAccount
     case periodicInfoUpdate
+    case myProfile
     case msisdn
     case email
 
@@ -612,6 +613,8 @@ enum GAEventAction {
             return "Delete Account"
         case .periodicInfoUpdate:
             return "Periodic Info Update"
+        case .myProfile:
+            return "My Profile"
         case .msisdn:
             return "msisdn"
         case .email:
@@ -774,6 +777,8 @@ enum GAEventLabel {
     case login
     case update
     case yes
+    case edit
+    case save(isSuccess: Bool)
     case send
     case confirm
     case confirmStatus(isSuccess: Bool)
@@ -923,6 +928,10 @@ enum GAEventLabel {
             return "Update"
         case .yes:
             return "Yes"
+        case .edit:
+            return "Edit"
+        case .save(isSuccess: let isSuccess):
+            return "Save " + (isSuccess ? "Success" : "Failure")
         case .send:
             return "Send"
         case .confirm:
@@ -1172,6 +1181,12 @@ enum GADementionValues {
     }
     
     enum errorType {
+        /// MyProfile
+        case emptyEmail
+        case phoneInvalidFormat
+        case emailInvalidFormat
+        case emailInUse
+        case phoneInUse
         /// Two Factor Authentification
         case invalidOTP
         case invalidSession
@@ -1180,6 +1195,21 @@ enum GADementionValues {
 
         var text: String {
             switch self {
+            case .emptyEmail:
+                return "EMPTY_E-MAIL_ERROR"
+                
+            case .phoneInvalidFormat:
+                return "PHONE_NUMBER_INVALID_FORMAT_ERROR"
+
+            case .emailInvalidFormat:
+                return "EMAIL_INVALID_FORMAT_ERROR"
+                
+            case .emailInUse:
+                return "EMAIL_IN_USE_ERROR"
+
+            case .phoneInUse:
+                return "PHONE_NUMBER_IN_USE_ERROR"
+                
             case .invalidOTP:
                 return "INVALID_OTP_CODE"
                 
