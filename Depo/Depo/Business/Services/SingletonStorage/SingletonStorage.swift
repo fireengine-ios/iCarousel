@@ -20,6 +20,7 @@ class SingletonStorage {
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
+    var isTwoFactorAuthEnabled: Bool?
     var isSpotifyEnabled: Bool?
     
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"

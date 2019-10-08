@@ -114,6 +114,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
@@ -188,7 +189,7 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-    
+        var isTwoFactorAuthEnabled: Bool?
         var isSpotifyEnabled: Bool?
 
         if loginStatus {
@@ -203,6 +204,8 @@ extension AnalyticsService: AnalyticsGA {
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            
+            isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
 
             if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
                 isSpotifyEnabled = storedIsSpotifyEnabled
@@ -245,6 +248,7 @@ extension AnalyticsService: AnalyticsGA {
                 errorType: errorType,
                 autoSyncState: autoSyncState,
                 autoSyncStatus: autoSyncStatus,
+                isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
                 isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
@@ -448,6 +452,22 @@ extension AnalyticsService: AnalyticsGA {
             
             if let playlistNumber = playlistNumber {
                 parametrs[GAMetrics.playlistNumber.text] = playlistNumber
+            }
+            
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?) {
+        prepareDimentionsParametrs(screen: nil) { dimentionParametrs in
+            var parametrs: [String: Any] = [
+                "eventCategory" : eventCategory.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text
+            ]
+            
+            if let errorType = errorType {
+                parametrs[GAMetrics.errorType.text] = errorType.text
             }
             
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
