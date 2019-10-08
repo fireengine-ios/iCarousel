@@ -10,7 +10,7 @@ import Adjust
 import FBSDKCoreKit
 import StoreKit
 import Firebase
-//import Netmera
+import Netmera
 
 protocol AnalyticsScreen {
     var analyticsScreen: AnalyticsAppScreens { get }
@@ -482,21 +482,21 @@ protocol NetmeraProtocol {
 
 extension AnalyticsService: NetmeraProtocol {
     static func updateUser() {
-//        let user = NetmeraUser()
-//        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-//
-//        Netmera.update(user)
+        let user = NetmeraUser()
+        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        
+        Netmera.update(user)
     }
     
     static func onAppLaunch() {
-//        DispatchQueue.main.async {
-//            Netmera.start()
-//            
-//            #if DEBUG
-//            Netmera.setLogLevel(.debug)
-//            #endif
-//            
-//            Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
-//        }
+        DispatchQueue.main.async {
+            Netmera.start()
+            
+            #if DEBUG
+            Netmera.setLogLevel(.debug)
+            #endif
+            
+            Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+        }
     }
 }
