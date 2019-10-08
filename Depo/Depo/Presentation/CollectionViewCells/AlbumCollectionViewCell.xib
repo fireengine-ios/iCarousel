@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -85,27 +83,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="341" height="121"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-qh-3Jq" customClass="ShadowView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="3" y="3" width="335" height="97"/>
+                                <rect key="frame" x="3" y="3" width="335" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-Wn-fos">
-                                <rect key="frame" x="3" y="3" width="335" height="97"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-Wn-fos">
+                                <rect key="frame" x="3" y="3" width="335" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LNQ-WG-hXG" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="8" y="8" width="325" height="87"/>
+                                <rect key="frame" x="5" y="5" width="331" height="82"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21n-xE-cSS">
-                                <rect key="frame" x="313" y="8" width="20" height="20"/>
+                                <rect key="frame" x="316" y="5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="OYn-1z-z0J"/>
                                     <constraint firstAttribute="height" constant="20" id="e3x-Qf-Sb7"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj8-ox-U8Q">
-                                <rect key="frame" x="8" y="100" width="325" height="21"/>
+                                <rect key="frame" x="8" y="89" width="325" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="msD-Mx-YRi"/>
+                                    <constraint firstAttribute="height" constant="32" id="msD-Mx-YRi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -114,9 +112,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" constant="-5" id="1GJ-b8-fdo"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" constant="-2" id="1GJ-b8-fdo"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" id="7Lp-Ao-Cj7"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="-5" id="AEV-mv-vLY"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="-2" id="AEV-mv-vLY"/>
                             <constraint firstItem="21n-xE-cSS" firstAttribute="trailing" secondItem="LNQ-WG-hXG" secondAttribute="trailing" id="M2s-5X-8ei"/>
                             <constraint firstItem="21n-xE-cSS" firstAttribute="top" secondItem="LNQ-WG-hXG" secondAttribute="top" id="Mst-bc-mfp"/>
                             <constraint firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="3" id="PXa-Pv-SXP"/>
@@ -124,13 +122,13 @@
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" id="TXY-ZS-Ejk"/>
                             <constraint firstAttribute="bottom" secondItem="fj8-ox-U8Q" secondAttribute="bottom" id="UzO-ea-64E"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" id="eIJ-DM-35v"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="top" constant="5" id="gVU-L5-NBP"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="top" constant="2" id="gVU-L5-NBP"/>
                             <constraint firstItem="fj8-ox-U8Q" firstAttribute="leading" secondItem="6J8-Vs-50W" secondAttribute="leading" constant="8" id="gab-wp-tec"/>
                             <constraint firstItem="fj8-ox-U8Q" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="bottom" id="oGy-SD-aEL"/>
                             <constraint firstItem="3H5-qh-3Jq" firstAttribute="leading" secondItem="6J8-Vs-50W" secondAttribute="leading" constant="3" id="pbN-5T-SPA"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="top" id="r6b-dg-Lg7"/>
                             <constraint firstItem="3H5-qh-3Jq" firstAttribute="top" secondItem="6J8-Vs-50W" secondAttribute="top" constant="3" id="rqh-pt-hA4"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" constant="5" id="xKG-6r-Wof"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" constant="2" id="xKG-6r-Wof"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -147,6 +145,7 @@
             </constraints>
             <size key="customSize" width="341" height="101"/>
             <connections>
+                <outlet property="greedImageBorderView" destination="P6F-Wn-fos" id="Hf1-al-3qn"/>
                 <outlet property="greedSelectionIcon" destination="21n-xE-cSS" id="Ct9-fb-vkG"/>
                 <outlet property="greedShadowView" destination="3H5-qh-3Jq" id="rF8-bO-6iz"/>
                 <outlet property="greedView" destination="6J8-Vs-50W" id="HQr-et-sHU"/>
