@@ -72,6 +72,8 @@ final class SmallFullOfQuotaPopUp: BasePopUpController {
     private func setupView() {
         setupButtonState()
         
+        contentView = containerView
+        
         titleLabel.text = TextConstants.fullQuotaSmallPopUpTitle
         messageLabel.text = TextConstants.fullQuotaSmallPopUpSubTitle
         checkBoxlabel.text = TextConstants.fullQuotaSmallPopUpCheckBoxText

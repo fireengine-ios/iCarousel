@@ -132,8 +132,11 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
             switch result {
             case .success(_):
                 self.dataSource.remove(items) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete, eventLabel: .importSpotifyPlaylist)
-                    self.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyPlaylists, playlistNumber: playlistIds.count)
+
+                    self.analyticsService.trackSpotify(eventActions: .delete,
+                                                       eventLabel: .importSpotifyPlaylist,
+                                                       trackNumber: nil,
+                                                       playlistNumber: playlistIds.count)
                     self.hideSpinner()
                     self.stopSelectionState()
                 }

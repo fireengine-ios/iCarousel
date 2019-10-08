@@ -22,9 +22,6 @@ struct AnalyticsDimension {
     let userPackagesNames: [String] //Pacakage names that the user owns should be sent with every page click. Pacakage names should be seperated with pipe "|"
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
-    let playlistNumber: Int?
-    let trackNumber: Int?
-    let connectStatus: String?
     let gsmOperatorType: String
     let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     let loginType: GADementionValues.login?
@@ -66,15 +63,6 @@ struct AnalyticsDimension {
         }
         if let numberOfUploads = countOfUploadMetric {
             dimesionDictionary[GAMetrics.countOfUpload.text] = "\(numberOfUploads)"
-        }
-        if let playlistNumber = playlistNumber {
-            dimesionDictionary[GAMetrics.playlistNumber.text] = "\(playlistNumber)"
-        }
-        if let trackNumber = trackNumber {
-            dimesionDictionary[GAMetrics.trackNumber.text] = "\(trackNumber)"
-        }
-        if let connectStatus = connectStatus {
-            dimesionDictionary[GADementionsFields.connectStatus.text] = "\(connectStatus) - Spotify"
         }
         if let loginType = loginType {
             dimesionDictionary[GADementionsFields.loginType.text] = loginType.text

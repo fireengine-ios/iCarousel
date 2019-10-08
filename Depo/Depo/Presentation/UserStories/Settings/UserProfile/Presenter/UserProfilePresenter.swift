@@ -37,6 +37,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         asyncOperationSuccess()
     }
     
+    func updateSecretQuestionView(selectedQuestion: SecretQuestionWithAnswer) {
+        view.updateSetSecretQuestionView(with: selectedQuestion)
+    }
+    
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
         view.endSaving()
         view.setupEditState(false)
@@ -90,7 +94,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
 }
 
 extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
-    func didCloseSetSecurityQuestionViewController() {
+    func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
+        interactor.updateSetQuestionView(with: selectedQuestion)
         interactor.updateUserInfo()
     }
 }

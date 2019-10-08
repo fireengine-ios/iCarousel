@@ -99,6 +99,8 @@ final class PopUpController: BasePopUpController {
         setupButtonState()
         setupPopUpImage()
         
+        contentView = containerView
+        
         titleLabel.text = alertTitle
         if let attributedMessage = attributedAlertMessage {
             messageLabel.attributedText = attributedMessage
