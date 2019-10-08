@@ -41,7 +41,7 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let  heightTextAlbumCell: CGFloat = 21
+    static let heightTextAlbumCell: CGFloat = 32
     static let amountInsetForStoryAlbum: CGFloat = 10
     static let amountInsetForAlbum: CGFloat = 3
     
