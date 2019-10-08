@@ -61,7 +61,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         automaticallyAdjustsScrollViewInsets = false
         
         setupFields()
