@@ -10,7 +10,7 @@ import Adjust
 import FBSDKCoreKit
 import StoreKit
 import Firebase
-//import Netmera
+import Netmera
 
 protocol AnalyticsScreen {
     var analyticsScreen: AnalyticsAppScreens { get }
@@ -114,6 +114,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
@@ -188,7 +189,9 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-    
+        var isTwoFactorAuthEnabled: Bool?
+        var isSpotifyEnabled: Bool?
+
         if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
@@ -201,6 +204,30 @@ extension AnalyticsService: AnalyticsGA {
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            
+            isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
+
+            if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
+                isSpotifyEnabled = storedIsSpotifyEnabled
+
+            } else {
+                group.enter()
+                
+                let spotifyService: SpotifyService = factory.resolve()
+                spotifyService.getStatus { response in
+                    switch response {
+                    case .success(let status):
+                        isSpotifyEnabled = status.isConnected
+                        
+                        SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+                        
+                        group.leave()
+                    case .failed(_):
+                        group.leave()
+                        
+                    }
+                }
+            }
         }
         
         
@@ -220,7 +247,9 @@ extension AnalyticsService: AnalyticsGA {
                 loginType: loginType,
                 errorType: errorType,
                 autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus).productParametrs)
+                autoSyncStatus: autoSyncStatus,
+                isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
+                isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
     
@@ -414,7 +443,7 @@ extension AnalyticsService: AnalyticsGA {
             var parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel.text,
+                "eventLabel" : eventLabel.text
             ]
             
             if let trackNumber = trackNumber {
@@ -423,6 +452,22 @@ extension AnalyticsService: AnalyticsGA {
             
             if let playlistNumber = playlistNumber {
                 parametrs[GAMetrics.playlistNumber.text] = playlistNumber
+            }
+            
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?) {
+        prepareDimentionsParametrs(screen: nil) { dimentionParametrs in
+            var parametrs: [String: Any] = [
+                "eventCategory" : eventCategory.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text
+            ]
+            
+            if let errorType = errorType {
+                parametrs[GAMetrics.errorType.text] = errorType.text
             }
             
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
@@ -437,21 +482,21 @@ protocol NetmeraProtocol {
 
 extension AnalyticsService: NetmeraProtocol {
     static func updateUser() {
-//        let user = NetmeraUser()
-//        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-//
-//        Netmera.update(user)
+        let user = NetmeraUser()
+        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        
+        Netmera.update(user)
     }
     
     static func onAppLaunch() {
-//        DispatchQueue.main.async {
-//            Netmera.start()
-//            
-//            #if DEBUG
-//            Netmera.setLogLevel(.debug)
-//            #endif
-//            
-//            Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
-//        }
+        DispatchQueue.main.async {
+            Netmera.start()
+            
+            #if DEBUG
+            Netmera.setLogLevel(.debug)
+            #endif
+            
+            Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+        }
     }
 }
