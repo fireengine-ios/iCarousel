@@ -26,6 +26,15 @@ enum TwoFAChallengeType: String {
         }
     }
     
+    var GAAction: GAEventAction {
+        switch self {
+            case .phone:
+                return .msisdn
+            case .email:
+                return .email
+        }
+    }
+    
     func getOTPDescription(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
         switch self {
         case .phone:
@@ -70,6 +79,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private lazy var activityManager = ActivityIndicatorManager()
     private lazy var authenticationService = AuthenticationService()
     private lazy var router = RouterVC()
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     //MARK: lifecycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -93,6 +104,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         setup()
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +119,10 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         setReasonDescriptionLabel()
         
         activityManager.delegate = self
+    }
+    
+    private func trackScreen() {
+        analyticsService.logScreen(screen: .securityCheck)
     }
     
     private func configureNavBarActions() {
@@ -184,6 +200,11 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private func prepareToTwoFactorChallenge(challenge: TwoFAChallengeModel) {
         startActivityIndicator()
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                            eventActions: challenge.challengeType.GAAction,
+                                            eventLabel: .send)
+        
         authenticationService.twoFactorAuthChallenge(token: challenge.token,
                                                      authenticatorId: challenge.userData,
                                                      type: challenge.challengeType.rawValue) { [weak self] response in

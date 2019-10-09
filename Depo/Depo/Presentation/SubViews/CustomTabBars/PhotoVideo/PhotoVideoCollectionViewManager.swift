@@ -196,7 +196,6 @@ final class PhotoVideoCollectionViewManager {
 // MARK: - ViewForPopUpDelegate scrolliblePopUpView.delegate
 extension PhotoVideoCollectionViewManager: ViewForPopUpDelegate {
     func onUpdateViewForPopUpH(h: CGFloat) {
-        let originalPoint = collectionView.contentOffset
         let sliderH = contentSlider.view.frame.height
         let checkBoxH = showOnlySyncItemsCheckBox.frame.height
         let calculatedH = h + sliderH + checkBoxH
@@ -212,17 +211,15 @@ extension PhotoVideoCollectionViewManager: ViewForPopUpDelegate {
             // TODO: need layoutIfNeeded?
             self.collectionView.superview?.layoutIfNeeded() 
             self.collectionView.contentInset = UIEdgeInsets(top: calculatedH, left: 0, bottom: 25, right: 0)
-        }) { [weak self] (flag) in
-            guard let `self` = self else {
+        }, completion: { [weak self] _ in
+            guard let self = self else {
                 return
             }
             
-            if originalPoint.y > 1.0{
-                self.collectionView.contentOffset = originalPoint
-            } else {
+            if self.collectionView.contentOffset.y < 1 {
                 self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
             }
-        }
+        })
         
         refresherY = -calculatedH + 30
         updateRefresher()
