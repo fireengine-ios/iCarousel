@@ -13,7 +13,7 @@ import SDWebImage
 import XCGLogger
 import Adjust
 import XPush
-//import Netmera
+import Netmera
 import UserNotifications
 
 // the global reference to logging mechanism to be available in all files
@@ -181,12 +181,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MenloworksAppEvents.sendProfileName()
         
         // handle netmera push notifications
-//        if let object = Netmera.recentPushObject(),
-//            Device.operationSystemVersionLessThen(10),
-//            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
-//        {
-//            PushNotificationService.shared.openActionScreen()
-//        }
+        if let object = Netmera.recentPushObject(),
+            Device.operationSystemVersionLessThen(10),
+            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
+        {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func showPasscodeIfNeedInBackground() {
@@ -386,16 +386,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         debugLog("userNotificationCenter didReceive response")
-//        guard let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] else {
-//            debugLog("userNotificationCenter Netmera push object is empty")
-//            return
-//        }
+        guard let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] else {
+            debugLog("userNotificationCenter Netmera push object is empty")
+            return
+        }
         
-//        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
-//            PushNotificationService.shared.openActionScreen()
-//        } else {
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
+            PushNotificationService.shared.openActionScreen()
+        } else {
             XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-//        }
+        }
     }
     
     @available(iOS 10.0, *)

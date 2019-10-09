@@ -43,6 +43,9 @@ final class SpotifyRoutingService: NSObject {
             case .success(let status):
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification)
                 self?.lastSpotifyStatus = status
+                
+                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+                
                 completion?(.success(status))
             case .failed(let error):
                 completion?(.failed(error))
@@ -226,6 +229,8 @@ final class SpotifyRoutingService: NSObject {
             
             switch result {
             case .success(let status):
+                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+
                 switch status.jobStatus {
                 case .finished:
                     self.importInProgress = false
