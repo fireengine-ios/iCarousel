@@ -51,8 +51,15 @@ class ViewController: UIViewController {
 
 extension UIViewController {
     func checkModalPresentationStyle() {
-        if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+        #if swift(>=5.0)
+            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
             modalPresentationStyle = .fullScreen
-        }
+            }
+        #else //TODO: as soon as jenkins is updated to xcode 11 - remove this if
+            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [ .pageSheet]) {
+                modalPresentationStyle = .fullScreen
+            }
+        #endif
+        
     }
 }

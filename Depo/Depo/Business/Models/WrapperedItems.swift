@@ -15,6 +15,7 @@ typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
 typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
+typealias RemoteData = (_ image: Data?) -> Void
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
