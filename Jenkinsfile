@@ -45,7 +45,7 @@ appVersion = '' // short version on apple store. Will be copied from source
 version = '' // long version on artifactory. Will contain branch name and build number for uniqueness
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'development'
+isDev = branchName == 'pre_release_v2'
 echo "Branch Name: ${branchName}"
 
 def xcodeBuild = { flavorId ->
