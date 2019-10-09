@@ -53,6 +53,7 @@ def core_pods
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 
+  pod 'SwiftyGif', '4.1.0'
 end
 
 target 'Depo_LifeTech' do
