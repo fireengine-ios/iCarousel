@@ -84,8 +84,8 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2wf-dC-X1W" secondAttribute="trailing" constant="13" id="Srw-1t-Rjt"/>
                 <constraint firstItem="OPd-Cv-pzM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="fxj-Pw-mBh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kj8-gP-Kwc" secondAttribute="trailing" id="hX9-id-LJb"/>
-                <constraint firstItem="WRL-sc-rXx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="heH-eG-LRn"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WRL-sc-rXx" secondAttribute="trailing" constant="13" id="iHU-bo-MQb"/>
+                <constraint firstItem="WRL-sc-rXx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="heH-eG-LRn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WRL-sc-rXx" secondAttribute="trailing" id="iHU-bo-MQb"/>
                 <constraint firstItem="2wf-dC-X1W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="mEP-A9-PbT"/>
                 <constraint firstItem="kj8-gP-Kwc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oBK-4l-56H"/>
                 <constraint firstItem="TNX-Tm-hVX" firstAttribute="bottom" secondItem="kj8-gP-Kwc" secondAttribute="bottom" id="q6N-Ru-tqi"/>
