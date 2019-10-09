@@ -41,5 +41,18 @@ class ViewController: UIViewController {
         } else {
             statusBarHidden = hidden
         }
-    }    
+    }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.checkModalPresentationStyle()
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+extension UIViewController {
+    func checkModalPresentationStyle() {
+        if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+            modalPresentationStyle = .fullScreen
+        }
+    }
 }

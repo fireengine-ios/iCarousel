@@ -254,6 +254,8 @@ class RouterVC: NSObject {
     }
         
     func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
+        controller.checkModalPresentationStyle()
+        
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
