@@ -48,8 +48,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
         
         backgroundColor = UIColor.clear
-        imageScrollView.delegate = self
-        imageScrollView.imageView.delegate = self
         
         if let zoomGesture = webView.doubleTapZoomGesture {
             doubleTapWebViewGesture = zoomGesture
@@ -74,7 +72,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             layoutIfNeeded()
             webView.frame = contentView.frame
             imageScrollView.updateZoom()
+            imageScrollView.adjustFrameToCenter()
         }
+        
     }
     
     override func prepareForReuse() {
@@ -102,7 +102,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
         
         playVideoButton.isHidden = true
-        imageScrollView.imageView.isHidden = true
+        imageScrollView.isHidden = true
     }
     
     func setObject(object: Item) {
@@ -115,11 +115,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = object.uuid
         
         if object.fileType == .video || object.fileType == .image {
-            imageScrollView.imageView.isHidden = false
-            imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
+            imageScrollView.isHidden = false
+            imageScrollView.imageView.loadImage(with: object)
+            imageScrollView.adjustFrameToCenter()
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
-            
         } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
             isNeedToUpdateWebView = true
             
@@ -155,18 +155,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
 extension PhotoVideoDetailCell: UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        if scrollView == imageScrollView {
-            return imageScrollView.imageView
-        } else if scrollView == webView.scrollView {
+        if scrollView == webView.scrollView {
             return webView.scrollView.subviews.first
         }
         return nil
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        if scrollView == imageScrollView {
-            imageScrollView.adjustFrameToCenter()
-        }
     }
 }
 
@@ -175,13 +167,6 @@ extension PhotoVideoDetailCell: WKNavigationDelegate {
         webView.scrollView.delegate = self
 
         self.webView = webView
-    }
-}
-
-extension PhotoVideoDetailCell: LoadingImageViewDelegate {
-    func onImageLoaded(image: UIImage?) {
-        imageScrollView.image = image
-        imageScrollView.updateZoom()
     }
 }
 

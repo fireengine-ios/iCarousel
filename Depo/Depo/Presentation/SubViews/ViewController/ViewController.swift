@@ -41,5 +41,25 @@ class ViewController: UIViewController {
         } else {
             statusBarHidden = hidden
         }
-    }    
+    }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.checkModalPresentationStyle()
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+extension UIViewController {
+    func checkModalPresentationStyle() {
+        #if swift(>=5.0)
+            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+            modalPresentationStyle = .fullScreen
+            }
+        #else //TODO: as soon as jenkins is updated to xcode 11 - remove this if
+            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [ .pageSheet]) {
+                modalPresentationStyle = .fullScreen
+            }
+        #endif
+        
+    }
 }
