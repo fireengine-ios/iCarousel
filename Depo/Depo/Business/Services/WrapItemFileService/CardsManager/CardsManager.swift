@@ -126,13 +126,7 @@ class CardsManager: NSObject {
 //        homeCardsObjects.append(q)
         
         homeCardsObjects = homeCardsObjects.filter {
-            if let type = $0.getOperationType() {
-                ///LR-5518 need remove when gif format will work corectly for all application
-                ///filtration animation cards
-                if type == .animationCard {
-                    return false
-                }
-                
+            if let type = $0.getOperationType() {                
                 return !deletedCards.contains(type)
             }
             return false

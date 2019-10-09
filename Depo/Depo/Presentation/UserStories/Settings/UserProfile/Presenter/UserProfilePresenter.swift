@@ -51,6 +51,31 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func showError(error: String) {
         view.endSaving()
+        
+        var errorType: GADementionValues.errorType?
+        switch error {
+        case TextConstants.emptyEmail:
+            errorType = .emptyEmail
+            
+        case TextConstants.notValidEmail:
+            errorType = .emailInvalidFormat
+
+        case TextConstants.errorInvalidPhone:
+            errorType = .phoneInvalidFormat
+
+        case TextConstants.errorExistEmail:
+            errorType = .emailInUse
+            
+        case TextConstants.errorExistPhone:
+            errorType = .phoneInUse
+
+        default: break
+        }
+        
+        if let errorType = errorType {
+            interactor.trackState(.save(isSuccess: false), errorType: errorType)
+        }
+        
         UIApplication.showErrorAlert(message: error)
     }
     
@@ -63,6 +88,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func tapEditButton() {
         view.setupEditState(true)
+        interactor.trackState(.edit, errorType: nil)
     }
     
     func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
@@ -71,6 +97,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func dataWasUpdated() {
         view.setupEditState(false)
+        interactor.trackState(.save(isSuccess: true), errorType: nil)
     }
     
     func isTurkcellUser() -> Bool {

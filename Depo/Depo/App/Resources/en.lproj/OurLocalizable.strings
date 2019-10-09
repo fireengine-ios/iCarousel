@@ -678,6 +678,7 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Login denied. Please check your credentials.";
 "Please enter the text below" = "Please enter the text below";
+"too_many_invalid_attempt" = "Too many requests are made, please try again later";
 "facebook_photo_tags" = "Facebook Photo Tags";
 "facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";

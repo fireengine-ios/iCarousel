@@ -11,14 +11,27 @@ import WebKit
 
 
 final class PaycellViewController: UIViewController {
+    
+    static func create(with cpcmOfferId: Int, completion: @escaping ResponseVoid) -> PaycellViewController {
+        let controller = PaycellViewController()
+        controller.offerId = cpcmOfferId
+        controller.completionHandler = completion
+        return controller
+    }
+    
 
     private let tokenStorage: TokenStorage = factory.resolve()
     private var offerId: Int?
     private var completionHandler: ResponseVoid?
-    private let redirectURLString = "google.com"
+    private let redirectHost = "google.com"
     
     private lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
+        
+        /// to handle window.open and window.close calls
+        config.preferences.javaScriptEnabled = true
+        config.preferences.javaScriptCanOpenWindowsAutomatically = true
+        
         if #available(iOS 11, *) {
             //stay with default config
         } else {
@@ -31,16 +44,11 @@ final class PaycellViewController: UIViewController {
         return WKWebView(frame: .zero, configuration: config)
     }()
     
-    
-    static func create(with cpcmOfferId: Int, completion: @escaping ResponseVoid) -> PaycellViewController {
-        let controller = PaycellViewController()
-        controller.offerId = cpcmOfferId
-        controller.completionHandler = completion
-        return controller
-    }
+    private var popupWebView: WKWebView?
     
     
     override func loadView() {
+        webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
     }
@@ -101,12 +109,41 @@ final class PaycellViewController: UIViewController {
             completionHandler?(.success(()))
         }
         
-        dismiss(animated: true, completion: nil)
+        RouterVC().popViewController()
     }
     
     deinit {
+        webView.uiDelegate = nil
         webView.navigationDelegate = nil
         webView.stopLoading()
+    }
+}
+
+extension PaycellViewController: WKUIDelegate {
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        let newWindowView = createWindowWebView(with: configuration)
+        popupWebView = newWindowView
+        view.addSubview(newWindowView)
+        
+        return popupWebView
+    }
+
+    func webViewDidClose(_ webView: WKWebView) {
+        if webView == popupWebView {
+            webView.removeFromSuperview()
+            popupWebView = nil
+        } else {
+            closeScreen(error: nil)
+        }
+    }
+    
+    private func createWindowWebView(with configuration: WKWebViewConfiguration) -> WKWebView {
+        let newWindowView = WKWebView(frame: view.bounds, configuration: configuration)
+        newWindowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        newWindowView.navigationDelegate = self
+        newWindowView.uiDelegate = self
+        return newWindowView
     }
 }
 
@@ -121,18 +158,15 @@ extension PaycellViewController: WKNavigationDelegate {
         hideSpinner()
     }
     
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        //TODO: check if it's enough to use just the fact of redirection without url
-    }
-    
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .other {
-            if let url = navigationAction.request.url, url.absoluteString == redirectURLString {
-                decisionHandler(.cancel)
-                closeScreen(error: nil)
-                return
-            }
+        
+        if let url = navigationAction.request.url, url.host == redirectHost {
+            decisionHandler(.cancel)
+            closeScreen(error: nil)
+            return
         }
+        
         decisionHandler(.allow)
     }
+    
 }

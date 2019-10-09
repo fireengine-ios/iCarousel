@@ -18,7 +18,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
-        interactor.trackScreen()
+        interactor.trackScreen(isTimerExpired: false)
         view.setupInitialState()
         configure()
         view.setupButtonsInitialState()

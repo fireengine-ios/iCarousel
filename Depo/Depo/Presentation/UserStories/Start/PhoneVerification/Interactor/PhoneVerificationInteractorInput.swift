@@ -28,7 +28,7 @@ protocol PhoneVerificationInteractorInput {
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?)
     
-    func trackScreen()
+    func trackScreen(isTimerExpired: Bool)
     
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     
