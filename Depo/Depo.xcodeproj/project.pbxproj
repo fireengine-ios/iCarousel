@@ -3584,6 +3584,12 @@
 		B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
+		B51805E8234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
+		B51805E9234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
+		B51805EA234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
+		B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D82216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
@@ -8324,6 +8330,8 @@
 		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
+		B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationModel.swift; sourceTree = "<group>"; };
+		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -14305,6 +14313,22 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		B51805EB234B69A800DC2E82 /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+				B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */,
+			);
+			path = Mappings;
+			sourceTree = "<group>";
+		};
+		B51805EC234B69B200DC2E82 /* Policies */ = {
+			isa = PBXGroup;
+			children = (
+				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
+			);
+			path = Policies;
+			sourceTree = "<group>";
+		};
 		B522E92121E8CAEC00C4958E /* InstaPickProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -14569,8 +14593,10 @@
 		B5D2883B22A5109C00051F3A /* Migration */ = {
 			isa = PBXGroup;
 			children = (
-				B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */,
-				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
+				B51805EB234B69A800DC2E82 /* Mappings */,
+				B51805EC234B69B200DC2E82 /* Policies */,
+				B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */,
+				B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -20398,6 +20424,7 @@
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
 				8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */,
+				B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */,
 				8C0E8CB31FDEBDFF00789C91 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */,
@@ -21471,6 +21498,7 @@
 				8C0E8FA61FDEBDFF00789C91 /* AlbumDetailInteractor.swift in Sources */,
 				8C0E8FA71FDEBDFF00789C91 /* PasscodeSettingsInteractor.swift in Sources */,
 				B5C9526F2316975C00C06263 /* CoreDataStack.swift in Sources */,
+				B51805E9234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
@@ -22404,6 +22432,7 @@
 				B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */,
 				7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */,
+				B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				CE51ACAD1EF90853005DCEE0 /* CoreTelephonyService.swift in Sources */,
 				CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
@@ -22694,6 +22723,7 @@
 				4A0AC1412087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
 				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
+				B51805E8234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				989BDE4622F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
@@ -23499,6 +23529,7 @@
 				CE78487122A685FB00662219 /* IntroduceDataSource.swift in Sources */,
 				CE78487222A685FB00662219 /* CreateStoryResponse.swift in Sources */,
 				985599C723017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
+				B51805EA234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				CE78487322A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				CE78487422A685FB00662219 /* PeriodicContactSyncDataSource.swift in Sources */,
 				CE78487522A685FB00662219 /* UserProfileInteractor.swift in Sources */,
@@ -24403,6 +24434,7 @@
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				CE784BC422A685FB00662219 /* PageForLanding.swift in Sources */,
+				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
 				737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
@@ -25185,7 +25217,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25242,7 +25274,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo_LifeTech copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25297,7 +25329,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25353,7 +25385,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-Enterprise-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

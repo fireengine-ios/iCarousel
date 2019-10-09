@@ -73,41 +73,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AppConfigurator.applicationStarted(with: launchOptions)
-        #if DEBUG
-            watchdog = Watchdog(threshold: 0.05, strictMode: false)
-        #endif
-        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        print("Documents: \(documents)")
         
-        ///call debugLog only if the Crashlytics is already initialized
-        debugLog("AppDelegate didFinishLaunchingWithOptions")
-        
-        let router = RouterVC()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = router.vcForCurrentState()
-        window?.makeKeyAndVisible()
+        CoreDataStack.shared.setup {
+            AppConfigurator.applicationStarted(with: launchOptions)
+            #if DEBUG
+            self.watchdog = Watchdog(threshold: 0.05, strictMode: false)
+            #endif
+            let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            print("Documents: \(documents)")
             
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-        AppLinkUtility.fetchDeferredAppLink { url, error in
-            if let url = url {
-                UIApplication.shared.openSafely(url)
-            } else {
-                debugLog("Received error while fetching deferred app link \(String(describing: error))")
+            ///call debugLog only if the Crashlytics is already initialized
+            debugLog("AppDelegate didFinishLaunchingWithOptions")
+            
+            let router = RouterVC()
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = router.vcForCurrentState()
+            self.window?.makeKeyAndVisible()
+                
+            ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+            
+            AppLinkUtility.fetchDeferredAppLink { url, error in
+                if let url = url {
+                    UIApplication.shared.openSafely(url)
+                } else {
+                    debugLog("Received error while fetching deferred app link \(String(describing: error))")
+                }
+            }
+            
+            ContactSyncSDK.doPeriodicSync()
+            self.passcodeStorage.systemCallOnScreen = false
+            
+            MenloworksAppEvents.onAppLaunch()
+            
+            AnalyticsService.onAppLaunch()
+            
+            if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().delegate = self
             }
         }
         
-        ContactSyncSDK.doPeriodicSync()
-        passcodeStorage.systemCallOnScreen = false
-        
-        MenloworksAppEvents.onAppLaunch()
-        
-        AnalyticsService.onAppLaunch()
-        
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
+//        AppConfigurator.applicationStarted(with: launchOptions)
+//        #if DEBUG
+//            watchdog = Watchdog(threshold: 0.05, strictMode: false)
+//        #endif
+//        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+//        print("Documents: \(documents)")
+//
+//        ///call debugLog only if the Crashlytics is already initialized
+//        debugLog("AppDelegate didFinishLaunchingWithOptions")
+//
+//        let router = RouterVC()
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        window?.rootViewController = router.vcForCurrentState()
+//        window?.makeKeyAndVisible()
+//
+//        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+//
+//        AppLinkUtility.fetchDeferredAppLink { url, error in
+//            if let url = url {
+//                UIApplication.shared.openSafely(url)
+//            } else {
+//                debugLog("Received error while fetching deferred app link \(String(describing: error))")
+//            }
+//        }
+//
+//        ContactSyncSDK.doPeriodicSync()
+//        passcodeStorage.systemCallOnScreen = false
+//
+//        MenloworksAppEvents.onAppLaunch()
+//
+//        AnalyticsService.onAppLaunch()
+//
+//        if #available(iOS 10.0, *) {
+//            UNUserNotificationCenter.current().delegate = self
+//        }
         
         return true
     }
