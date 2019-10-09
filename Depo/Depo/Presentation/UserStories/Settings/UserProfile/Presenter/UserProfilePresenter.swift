@@ -51,30 +51,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func showError(error: String) {
         view.endSaving()
-        
-        var errorType: GADementionValues.errorType?
-        switch error {
-        case TextConstants.emptyEmail:
-            errorType = .emptyEmail
-            
-        case TextConstants.notValidEmail:
-            errorType = .emailInvalidFormat
-
-        case TextConstants.errorInvalidPhone:
-            errorType = .phoneInvalidFormat
-
-        case TextConstants.errorExistEmail:
-            errorType = .emailInUse
-            
-        case TextConstants.errorExistPhone:
-            errorType = .phoneInUse
-
-        default: break
-        }
-        
-        if let errorType = errorType {
-            interactor.trackState(.save(isSuccess: false), errorType: errorType)
-        }
+                
+        interactor.trackState(.save(isSuccess: false), errorType: GADementionValues.errorType(with: error))
         
         UIApplication.showErrorAlert(message: error)
     }
