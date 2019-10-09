@@ -49,12 +49,26 @@ final class TBMatikCard: BaseView {
         }
     }
     
+    private lazy var imageHeight: CGFloat = imagesStackViewHeightСonstraint.constant
+    
     private let imageDownloder = ImageDownloder()
     
     /// "func set(object:" called twice.
     /// you can find comment 'seems like duplicated logic "set(object:".' in the project.
     /// if you cannot find it then drop logic for this variable.
     private var isCardSetuped = false
+    
+    private var items = [Item]()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let height = actionButton.frame.origin.y + actionButton.frame.size.height
+        if calculatedH != height {
+            calculatedH = height
+            layoutIfNeeded()
+        }
+    }
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -65,21 +79,26 @@ final class TBMatikCard: BaseView {
         
         isCardSetuped = true
         
-        guard let jsonArray = object?.details?.array else {
+        guard let jsonArray = object?.details?.array?.cutFirstItems(itemsNumber: 3) else {
             assertionFailure()
             return
         }
         
-        let urls = jsonArray
-            .cutFirstItems(itemsNumber: 3)
-            .compactMap { json in
-                json["metadata"]["Thumbnail-Large"].url
-        }
+        let items = jsonArray
+            .compactMap { SearchItemResponse(withJSON: $0) }
+            .compactMap { WrapData(remote: $0) }
+        
+        self.items = items
+        
+        let urls = items.compactMap { $0.metaData?.largeUrl }
         
         guard urls.hasItems else {
             return
         }
-        
+        setupImages(by: urls)
+    }
+    
+    private func setupImages(by urls: [URL]) {
         var images = [UIImage]()
         let group = DispatchGroup()
         
@@ -105,13 +124,9 @@ final class TBMatikCard: BaseView {
         }
     }
     
-    private lazy var imageHeight: CGFloat = imagesStackViewHeightСonstraint.constant
-    
     private func createImageView(with image: UIImage) -> UIImageView {
         let width = image.size.width
         let height = image.size.height
-//        let scaleFactor = (width > height) ? (width / height) : (height / width)
-//        let scaleFactor = (width > height) ? (height / width) : (width / height)
         let scaleFactor = width / height
         let imageViewWidth = imageHeight * scaleFactor
         
@@ -130,22 +145,16 @@ final class TBMatikCard: BaseView {
         return imageView
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let height = actionButton.frame.origin.y + actionButton.frame.size.height
-        if calculatedH != height {
-            calculatedH = height
-            layoutIfNeeded()
-        }
-    }
-    
     @IBAction private func onActionButton(_ sender: UIButton) {
-        print("qqqq")
+        guard items.hasItems else {
+            return
+        }
+        let vc = TBMatikPhotosViewController.with(items: items)
+        RouterVC().presentViewController(controller: vc)
     }
     
     @IBAction private func onCloseButton(_ sender: UIButton) {
-//        deleteCard()
+        deleteCard()
     }
 }
 

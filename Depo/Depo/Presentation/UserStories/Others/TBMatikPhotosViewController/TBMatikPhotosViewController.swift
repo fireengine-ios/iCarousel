@@ -19,6 +19,23 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return controller
     }
     
+    static func with(items: [Item]) -> TBMatikPhotosViewController {
+        
+        var itemsDict = [String: Item]()
+        for item in items {
+            itemsDict[item.uuid] = item
+        }
+        
+        let uuids = items.compactMap { $0.uuid }
+        
+        let controller = initFromNib()
+        controller.modalTransitionStyle = .coverVertical
+        controller.modalPresentationStyle = .overFullScreen
+        controller.items = itemsDict
+        controller.uuids = uuids
+        return controller
+    }
+    
     enum Constants {
         static let leftOffset: CGFloat = 32
         static let rightOffset: CGFloat = 32
@@ -105,8 +122,12 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }()
     
     private var currentItem: Item? {
-        let uuid = uuids[carousel.currentItemIndex]
-        return items[uuid]
+        if let uuid = uuids[safe: carousel.currentItemIndex] {
+            return items[uuid]
+        } else {
+            assertionFailure("uuids not setuped")
+            return nil
+        }
     }
     
     // MARK: - View lifecycle
@@ -119,7 +140,12 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         configure()
-        loadItems()
+        
+        if items.isEmpty {
+            loadItemsByUuids()
+        } else {
+            reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,7 +186,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         carousel.isPagingEnabled = true
     }
     
-    private func loadItems() {
+    private func loadItemsByUuids() {
         showSpinner()
         
         fileService.details(uuids: uuids, success: { [weak self] items in
@@ -172,14 +198,18 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
                 self.items[item.uuid] = item
             }
             
-            self.carousel.reloadData()
-            self.carousel.isHidden = false
+            self.reloadData()
             self.hideSpinner()
             
         }, fail: { [weak self] errorResponse in
             self?.hideSpinner()
             UIApplication.showErrorAlert(message: errorResponse.description)
         })
+    }
+    
+    private func reloadData() {
+        carousel.reloadData()
+        carousel.isHidden = false
     }
     
     private func updateTitle() {
