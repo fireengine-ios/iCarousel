@@ -10,11 +10,23 @@ import UIKit
 
 final class RadialGradientableView: UIView {
     
-    var isNeedGradient: Bool = true {
-        didSet {
-            guard let layer = layer as? RadialGradientableLayer else { return }
-            layer.isNeedGradient = isNeedGradient
+    var gradientColors: [CGColor] {
+        get { return viewLayer.gradientColors }
+        set { viewLayer.gradientColors = newValue }
+    }
+    
+    lazy var viewLayer: RadialGradientableLayer = {
+        if let layer = layer as? RadialGradientableLayer {
+            return layer
+        } else {
+            assertionFailure("in 'class var layerClass' must be RadialGradientableLayer")
+            return RadialGradientableLayer()
         }
+    }()
+    
+    var isNeedGradient: Bool {
+        get { return viewLayer.isNeedGradient }
+        set { viewLayer.isNeedGradient = newValue }
     }
     
     override class var layerClass: Swift.AnyClass {
