@@ -73,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        AnalyticsService.onAppLaunch()
         AppConfigurator.applicationStarted(with: launchOptions)
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
@@ -102,8 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passcodeStorage.systemCallOnScreen = false
         
         MenloworksAppEvents.onAppLaunch()
-        
-        AnalyticsService.onAppLaunch()
         
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
