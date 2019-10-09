@@ -160,7 +160,7 @@ pipeline {
                     def gitUrl = scmVars.GIT_URL.trim()
                     echo "git url: ${gitUrl}"
 
-                    stage('Compile') {
+                    stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
 
  						def infoFile = "${WORKSPACE}/${xcodeParams.versionInfoPath}"
@@ -200,7 +200,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        input ok:'Yes', message:'Deploy to ICT Store?' //, submitter: "${ictsDeployers}"
+                        if (!isDev) {
+                            input ok:'Yes', message:'Deploy to ICT Store?' //, submitter: "${ictsDeployers}"
+                        }
                         env.DEPLOY_TO = 'ICT Store'
                         echo "Deploy to ICT Store is approved. Starting the deployment..."
 
@@ -248,8 +250,15 @@ pipeline {
             steps {
                 script {
                     try {
-                        input ok:'Yes', message:'Deploy to Testflight?' //, submitter: "${testFlightDeployers}"
-                        env.DEPLOY_TO = 'Testflight'
+                        if (isDev) {
+                            input ok:'Yes', message:'Deploy to Testflight?' //, submitter: "${testFlightDeployers}"
+                            env.DEPLOY_TO = 'Testflight'
+                        } else {
+                            def parameters = [ booleanParam(name: 'Deploy to Testflight', defaultValue: false) ]
+                            approvals = input ok:'Yes', message:'Build for Appstore?', parameters: parameters //, submitter: "${testFlightDeployers}"
+                            env.DEPLOY_TO = approvals['Deploy to Testflight'] ? 'Testflight', ''
+                        }
+                        env.BUILD_TARGET = 'Appstore'
                         echo "Deploy to Testflight is approved. Starting the deployment..."
 
                     } catch(err) {
@@ -258,10 +267,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploying to Testflight') {
+        stage('Build for Appstore') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'Testflight'
+                environment name: 'BUILD_TARGET', value: 'Appstore'
             }
             agent { label agentName }
             options {
@@ -277,13 +286,16 @@ pipeline {
                 script {
                     xcodeBuild('prod')
                     publishToArtifactory('prod')
-                    sh "cp build/${appName}-${BUILD_ID}-prod.ipa ${appName}.ipa"
-                    sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
-                    sh """
-                        export FASTLANE_USER=${TESTFLIGHT_UPLOAD_USR}
-                        export FASTLANE_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-                        ~/.fastlane/bin/fastlane beta
-                    """
+                    if (env.DEPLOY_TO == 'Testflight') {
+                        stage('Deploying to Testflight') {
+                            sh "cp build/${appName}-${BUILD_ID}-prod.ipa ${appName}.ipa"
+                            sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
+                            sh """
+                                export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
+                                ~/.fastlane/bin/fastlane run upload_to_testflight skip_submission:"true" ipa:"${appName}.ipa" apple_id:"${appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
+                            """
+                        }
+                    }
                 }
             }
 			post {
