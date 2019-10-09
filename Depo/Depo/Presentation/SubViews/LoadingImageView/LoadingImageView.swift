@@ -30,6 +30,29 @@ class LoadingImageView: UIImageView {
     
     weak var loadingImageViewDelegate: LoadingImageViewDelegate?
     
+    var originalImage:UIImage? {
+        get {
+            return gifImage ?? image
+        }
+        set {
+            SwiftyGifManager.defaultManager.deleteImageView(self)
+            self.clear()
+            
+            if let gifImage = newValue, gifImage.imageCount != nil {
+                setGifImage(gifImage)
+                startAnimatingGif()
+            } else {
+                self.image = newValue
+            }
+            
+            self.loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
+        }
+    }
+    
+    var currentFrameImage:UIImage? {
+        return currentImage ?? image
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -82,8 +105,8 @@ class LoadingImageView: UIImageView {
             return
         }
         
-        clearAll()
         checkIsNeedCancelRequest()
+        originalImage = nil
         
         path = object.patchToPreview
         activity.startAnimating()
@@ -101,7 +124,7 @@ class LoadingImageView: UIImageView {
         guard let object = object else {
             checkIsNeedCancelRequest()
             if !smooth {
-                clearAll()
+                originalImage = nil
                 activity.stopAnimating()
             }
             
@@ -115,7 +138,7 @@ class LoadingImageView: UIImageView {
         checkIsNeedCancelRequest()
         
         if !smooth {
-            clearAll()
+            originalImage = nil
             activity.startAnimating()
         }
         
@@ -189,34 +212,12 @@ class LoadingImageView: UIImageView {
                     options: .transitionCrossDissolve,
                     animations: nil,
                     completion: { [weak self] _ in
-                        self?.displayImage(image)
+                        self?.originalImage = image
                 })
             } else {
-                self.displayImage(image)
+                self.originalImage = image
             }
         }
-    }
-    
-    private func clearAll() {
-        SwiftyGifManager.defaultManager.deleteImageView(self)
-        self.clear()
-    }
-    
-    private func displayImage(_ image: UIImage?) {
-        clearAll()
-        
-        var currentFrameImage:UIImage?
-        
-        if let gifImage = image, gifImage.imageCount != nil {
-            setGifImage(gifImage)
-            startAnimatingGif()
-            currentFrameImage = currentImage
-        } else {
-            self.image = image
-            currentFrameImage = image
-        }
-        
-        self.loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
     }
 
 }

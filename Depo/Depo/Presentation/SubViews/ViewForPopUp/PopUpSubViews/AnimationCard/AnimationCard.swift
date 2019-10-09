@@ -84,7 +84,7 @@ class AnimationCard: BaseView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
+        guard let image = photoImageView.originalImage else { return }
         
         let vc = PVViewerController.initFromNib()
         vc.image = image
