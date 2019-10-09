@@ -256,7 +256,7 @@ pipeline {
                         } else {
                             def parameters = [ booleanParam(name: 'Deploy to Testflight', defaultValue: false) ]
                             approvals = input ok:'Yes', message:'Build for Appstore?', parameters: parameters //, submitter: "${testFlightDeployers}"
-                            env.DEPLOY_TO = approvals['Deploy to Testflight'] ? 'Testflight', ''
+                            env.DEPLOY_TO = approvals['Deploy to Testflight'] ? 'Testflight': ''
                         }
                         env.BUILD_TARGET = 'Appstore'
                         echo "Deploy to Testflight is approved. Starting the deployment..."
