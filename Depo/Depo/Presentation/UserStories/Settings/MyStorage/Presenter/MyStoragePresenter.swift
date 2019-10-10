@@ -130,15 +130,16 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(accountInfo: AccountInfoResponse) {
-        if let accountTypeString = accountInfo.accountType {
-            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
-        }
-        
         ///https://jira.turkcell.com.tr/browse/FE-1642
         ///iOS: Packages - Adding refresh button on My Storage page for all type of users
         ///description in this task incorrent (title of this task correct)
+        
+//        if let accountTypeString = accountInfo.accountType {
+//            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
+//        }
+        
 //        if accountType == .all {
-            view?.showRestoreButton()
+        view?.showRestoreButton()
 //        }
         
         interactor.getAllOffers()
