@@ -134,7 +134,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
         }
         
-        if accountType == .all {
+        if accountType == .all || accountType == .turkcell {
             view?.showRestoreButton()
         }
         
