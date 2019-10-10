@@ -54,7 +54,6 @@ class TermsAndServicesViewController: ViewController {
     }
     
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
-    @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
 
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
     
@@ -79,11 +78,6 @@ class TermsAndServicesViewController: ViewController {
         }
 
         contenViewHeightConstraint.constant = Device.winSize.height * 0.5
-        if #available(iOS 11.0, *) {
-            topContraintIOS10.isActive = false
-        } else {
-            topContraintIOS11.isActive = false
-        }
         
         configureUI()
         setupIntroductionTextView()
@@ -213,9 +207,10 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
                 let attributedString = try NSAttributedString(data: data, options:
                     [.documentType: NSAttributedString.DocumentType.html,
                      .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                
+                // https://www.oipapio.com/question-726375
                 DispatchQueue.main.async {
-                    self?.contentView.attributedText = attributedString
+                    self?.contentView.textStorage.append(attributedString)
+                    self?.contentView.dataDetectorTypes = [.phoneNumber, .address]
                 }
             } catch {
                 assertionFailure()

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +16,6 @@
                 <outlet property="contentView" destination="WTC-UM-kQA" id="81N-TF-ger"/>
                 <outlet property="scrollView" destination="wx0-Ty-pdf" id="2cr-dt-zJE"/>
                 <outlet property="topContraintIOS10" destination="Emx-2B-mwG" id="iRg-dw-zzO"/>
-                <outlet property="topContraintIOS11" destination="eAh-up-qSK" id="HXR-Yk-wax"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
                 <outlet property="welcomeLabel" destination="9Kb-k9-w6Q" id="qY3-YU-L4x"/>
             </connections>
@@ -123,7 +120,6 @@
                 <constraint firstItem="xou-y7-pRa" firstAttribute="bottom" secondItem="wx0-Ty-pdf" secondAttribute="bottom" id="PaC-JR-4cz"/>
                 <constraint firstItem="heF-JQ-sC2" firstAttribute="height" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" constant="-64" id="Qya-ng-a8K"/>
                 <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SCg-o8-u6q"/>
-                <constraint firstItem="wx0-Ty-pdf" firstAttribute="top" secondItem="xou-y7-pRa" secondAttribute="top" id="eAh-up-qSK"/>
                 <constraint firstItem="W6m-KL-HEi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nNt-FR-FcE"/>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="ohi-3E-wHg"/>
                 <constraint firstAttribute="trailing" secondItem="wx0-Ty-pdf" secondAttribute="trailing" id="tIc-ll-iCz"/>
@@ -135,7 +131,7 @@
         </view>
     </objects>
     <resources>
-        <image name="NavigationBarBackground" width="374.39999389648438" height="63.360000610351562"/>
+        <image name="NavigationBarBackground" width="520" height="88"/>
         <image name="group-2" width="53" height="53"/>
     </resources>
 </document>

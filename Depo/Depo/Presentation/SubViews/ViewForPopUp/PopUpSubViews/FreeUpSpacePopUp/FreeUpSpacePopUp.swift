@@ -17,6 +17,21 @@ final class FreeUpSpacePopUp: BaseView {
     
     private var operation: OperationType?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupRecognizer()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupRecognizer()
+    }
+    
+    private func setupRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onFreeAppSpaceButton))
+        addGestureRecognizer(recognizer)
+    }
+    
     override func configurateView() {
         super.configurateView()
         

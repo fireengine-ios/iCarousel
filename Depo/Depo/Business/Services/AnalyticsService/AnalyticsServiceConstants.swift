@@ -192,6 +192,11 @@ enum AnalyticsAppScreens {
     case securityCheck
     case enterSecurityCode
     case enterSecurityCodeResend
+    ///EmailVerification
+    case verifyEmailPopUp
+    case changeEmailPopUp
+    ///CredsUpdateCheckPopUp
+    case periodicInfoScreen
 
     case info(FileType)
     
@@ -337,6 +342,14 @@ enum AnalyticsAppScreens {
         case .enterSecurityCodeResend:
             return "Enter Security Code - Resend Code"
         ///
+        case .verifyEmailPopUp:
+            return "Email verification - Popup"
+        case .changeEmailPopUp:
+            return "Email verification - Change Email"
+        ///
+        case .periodicInfoScreen:
+            return "Periodic Info Screen"
+        ///
         case .info(let fileType):
             switch fileType {
             case .image:
@@ -440,11 +453,12 @@ enum GAEventCantegory {
     case errors
     case popUp
     case twoFactorAuthentication
+    case emailVerification
 
     var text: String {
         switch self {
         case .enhancedEcommerce:
-            return "Enhanced E-Commerce"
+            return "Enhance Ecommerce"
         case .functions:
             return "Functions"
         case .videoAnalytics:
@@ -455,6 +469,8 @@ enum GAEventCantegory {
             return "POP UP"
         case .twoFactorAuthentication:
             return "Two Factor Authentication"
+        case .emailVerification:
+            return "E-mail verification"
         }
     }
 }
@@ -519,6 +535,8 @@ enum GAEventAction {
     case myProfile
     case msisdn
     case email
+    case otp
+    case changeEmail
 
     var text: String {
         switch self {
@@ -619,6 +637,10 @@ enum GAEventAction {
             return "msisdn"
         case .email:
             return "E-mail"
+        case .otp:
+            return "OTP-1"
+        case .changeEmail:
+            return "Email"
         }
     }
 }
@@ -783,6 +805,12 @@ enum GAEventLabel {
     case confirm
     case confirmStatus(isSuccess: Bool)
     case resendCode
+    case codeResent(isSuccessed: Bool)
+    case changeEmail
+    case emailChanged(isSuccessed: Bool)
+    case later
+    case cancel
+    case storyOrVideo
 
         var text: String {
         switch self {
@@ -940,6 +968,18 @@ enum GAEventLabel {
             return "Confirm " + (isSuccess ? "Success" : "Failure")
         case .resendCode:
             return "Resend Code"
+        case .codeResent(isSuccessed: let isSuccessed):
+            return "Resend Code " + (isSuccessed ? "Success" : "Failure")
+        case .changeEmail:
+            return "Change Email"
+        case .emailChanged(isSuccessed: let isSuccessed):
+            return "Change Email " + (isSuccessed ? "Success" : "Failure")
+        case .later:
+            return "Later"
+        case .cancel:
+            return "Cancel"
+        case .storyOrVideo:
+            return "Story / Video"
         }
     }
     
@@ -1188,11 +1228,70 @@ enum GADementionValues {
         case emailInUse
         case phoneInUse
         /// Two Factor Authentification
-        case invalidOTP
+        case invalidOTPCode
         case invalidSession
         case invalidChallenge
         case tooManyInvalidAttempts
+        /// Email Verification
+        case accountNotFound
+        case referenceTokenIsEmpty
+        case expiredOTP
+        case invalidEmail
+        case invalidOTP
+        case tooManyRequests
+        
+        init?(with stringError: String) {
+            switch stringError {
+            case TextConstants.errorInvalidPhone:
+                self = .phoneInvalidFormat
+                
+            case TextConstants.errorExistPhone:
+                self = .phoneInUse
+                
+            case TextConstants.invalidOTP:
+                self = .invalidOTP
+                
+            case "INVALID_OTP_CODE":
+                self = .invalidOTPCode
+                
+            case TextConstants.expiredOTP:
+                self = .expiredOTP
+                
+            case TextConstants.emptyEmail, HeaderConstant.emptyEmail:
+                self = .emptyEmail
+                
+            case TextConstants.invalidEmail:
+                self = .invalidEmail
+                
+            case TextConstants.errorInvalidEmail:
+                self = .emailInvalidFormat
+                
+            case TextConstants.errorExistEmail:
+                self = .emailInUse
+                
+            case "INVALID_SESSION":
+                self = .invalidSession
+                
+            case "INVALID_CHALLENGE":
+                self = .invalidChallenge
+                
+            case TextConstants.TOO_MANY_REQUESTS, "TOO_MANY_REQUESTS", TextConstants.tooManyRequests:
+                self = .tooManyRequests
+                
+            case "TOO_MANY_INVALID_ATTEMPTS", TextConstants.tooManyInvalidAttempt:
+                self = .tooManyInvalidAttempts
+                
+            case TextConstants.ACCOUNT_NOT_FOUND, TextConstants.noAccountFound:
+                self = .accountNotFound
+                
+            case TextConstants.tokenIsMissing:
+                self = .referenceTokenIsEmpty
 
+            default:
+                return nil
+            }
+        }
+        
         var text: String {
             switch self {
             case .emptyEmail:
@@ -1200,17 +1299,17 @@ enum GADementionValues {
                 
             case .phoneInvalidFormat:
                 return "PHONE_NUMBER_INVALID_FORMAT_ERROR"
-
+                
             case .emailInvalidFormat:
                 return "EMAIL_INVALID_FORMAT_ERROR"
                 
             case .emailInUse:
                 return "EMAIL_IN_USE_ERROR"
-
+                
             case .phoneInUse:
                 return "PHONE_NUMBER_IN_USE_ERROR"
                 
-            case .invalidOTP:
+            case .invalidOTPCode:
                 return "INVALID_OTP_CODE"
                 
             case .invalidSession:
@@ -1221,6 +1320,24 @@ enum GADementionValues {
                 
             case .tooManyInvalidAttempts:
                 return "TOO_MANY_INVALID_ATTEMPTS"
+                
+            case .accountNotFound:
+                return "ACCOUNT_NOT_FOUND"
+                
+            case .referenceTokenIsEmpty:
+                return "REFERENCE_TOKEN_IS_EMPTY"
+                
+            case .expiredOTP:
+                return "EXPIRED_OTP"
+                
+            case .invalidEmail:
+                return "INVALID_EMAIL"
+                
+            case .invalidOTP:
+                return "INVALID_OTP"
+                
+            case .tooManyRequests:
+                return "TOO_MANY_REQUESTS"
                 
             }
         }

@@ -102,29 +102,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 case .failed(let error):
                     let errorText = error.localizedDescription
                     self?.output.verificationFailed(with: errorText)
-                    
-                    var errorType: GADementionValues.errorType?
-                    if errorText == "INVALID_CHALLENGE" {
-                        errorType = .invalidChallenge
 
-                    } else if errorText == "TOO_MANY_INVALID_ATTEMPTS" {
-                        errorType = .tooManyInvalidAttempts
-
-                        
-                    } else if errorText == "INVALID_OTP_CODE" {
-                        errorType = .invalidOTP
-
-                    } else if errorText.contains(ErrorResponseText.resendCodeExceeded)  {
-                        errorType = .invalidSession
-
-                    }
-                    
-                    if let errorType = errorType, let action = self?.challenge.challengeType.GAAction {
+                    if let action = self?.challenge.challengeType.GAAction {
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                                   eventActions: action,
                                                                   eventLabel: .confirmStatus(isSuccess: false),
-                                                                  errorType: errorType)
+                                                                  errorType: GADementionValues.errorType(with: errorText))
                     }
+                    
                 }
                 
             }
@@ -239,7 +224,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         if let handler = handler {
             self.output.loginDeletedAccount(deletedAccountHandler: handler)
             
-            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .delete, eventLabel: .login)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .deleteAccount, eventLabel: .login)
         } else {
             self.verifyProcess()
         }
