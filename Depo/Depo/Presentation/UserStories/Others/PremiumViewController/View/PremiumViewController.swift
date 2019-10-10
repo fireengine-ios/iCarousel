@@ -64,10 +64,8 @@ extension PremiumViewController: PremiumViewInput {
             switch result {
             case .success():
                 UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
-                return
             case .failed(_):
                 UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
-                return
             }
         }
         RouterVC().pushViewController(viewController: controller)
