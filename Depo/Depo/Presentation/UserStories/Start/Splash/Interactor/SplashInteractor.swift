@@ -68,7 +68,7 @@ class SplashInteractor: SplashInteractorInput {
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
-                analyticsService.trackLoginEvent(error: .serverError)
+                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
             ///Additional check "if this is LTE",
@@ -90,7 +90,7 @@ class SplashInteractor: SplashInteractorInput {
                     }, fail: { [weak self] error in
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
-                        self?.analyticsService.trackLoginEvent(error: loginError)
+                        self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                         self?.output.asyncOperationSuccess()
                         if error.isServerUnderMaintenance {
                             self?.output.onFailGetAccountInfo(error: error)
@@ -100,7 +100,7 @@ class SplashInteractor: SplashInteractorInput {
                     })
                 }, fail: { [weak self] response in
                     let loginError = LoginResponseError(with: response)
-                    self?.analyticsService.trackLoginEvent(error: loginError)
+                    self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                     self?.output.asyncOperationSuccess()
                     if response.isServerUnderMaintenance {
                         self?.output.onFailGetAccountInfo(error: response)
@@ -111,7 +111,7 @@ class SplashInteractor: SplashInteractorInput {
                 })
             } else {
                 output.asyncOperationSuccess()
-                analyticsService.trackLoginEvent(error: .serverError)
+                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
                 failLogin()
             }
         } else {
