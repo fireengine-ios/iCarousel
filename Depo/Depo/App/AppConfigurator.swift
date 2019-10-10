@@ -21,7 +21,8 @@ final class AppConfigurator {
     static let analyticsManager: AnalyticsService = factory.resolve()
     static let storageVars: StorageVars = factory.resolve()
     static let tokenStorage: TokenStorage = factory.resolve()
-    
+    static let analyticsService: AnalyticsService = factory.resolve()
+
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
         
@@ -170,6 +171,10 @@ final class AppConfigurator {
                     case .click:
                         debugLog("Menlo Notif Clicked")
                         
+                        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                            eventActions: .notification,
+                                                            eventLabel: .notificationRead)
+                        
                         if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
                             PushNotificationService.shared.openActionScreen()
                         }
@@ -179,6 +184,11 @@ final class AppConfigurator {
                         
                     case .present:
                         debugLog("Menlo Notif in Foreground")
+                        
+                        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                            eventActions: .notification,
+                                                            eventLabel: .notificationRecieved)
+                        
                         if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
                             PushNotificationService.shared.openActionScreen()
                         }

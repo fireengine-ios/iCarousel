@@ -195,6 +195,8 @@ enum AnalyticsAppScreens {
     ///EmailVerification
     case verifyEmailPopUp
     case changeEmailPopUp
+    ///CredsUpdateCheckPopUp
+    case periodicInfoScreen
 
     case info(FileType)
     
@@ -345,6 +347,9 @@ enum AnalyticsAppScreens {
         case .changeEmailPopUp:
             return "Email verification - Change Email"
         ///
+        case .periodicInfoScreen:
+            return "Periodic Info Screen"
+        ///
         case .info(let fileType):
             switch fileType {
             case .image:
@@ -453,7 +458,7 @@ enum GAEventCantegory {
     var text: String {
         switch self {
         case .enhancedEcommerce:
-            return "Enhanced E-Commerce"
+            return "Enhance Ecommerce"
         case .functions:
             return "Functions"
         case .videoAnalytics:
@@ -805,6 +810,7 @@ enum GAEventLabel {
     case emailChanged(isSuccessed: Bool)
     case later
     case cancel
+    case storyOrVideo
 
         var text: String {
         switch self {
@@ -972,6 +978,8 @@ enum GAEventLabel {
             return "Later"
         case .cancel:
             return "Cancel"
+        case .storyOrVideo:
+            return "Story / Video"
         }
     }
     
