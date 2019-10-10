@@ -1196,3 +1196,9 @@
 "tbmatic_photos_no_photo_bold_text" = "We couldn't find";
 "tbmatic_photos_see_timeline" = "See Timeline";
 "tbmatic_photos_share" = "Share";
+
+"tbmatic_home_card_title" = "Your today’s TB";
+"tbmatic_home_card_subtitle" = "Lorem ipsum dolor sit amet.Lorem ipsum dolor!";
+"tbmatic_home_card_button_title" = "Let's see";
+"tbmatic_home_card_year_ago" = "%d year ago";
+"tbmatic_home_card_years_ago" = "%d years ago";

@@ -8,23 +8,25 @@
 
 import Foundation
 
-public extension Array where Element: Equatable {    
-    public mutating func remove(_ element: Element) {
+extension Array where Element: Equatable {
+    mutating func remove(_ element: Element) {
         for index in (0..<count).reversed() where self[index] == element {
             self.remove(at: index)
         }
     }
 }
 
-public extension Array {
-    public mutating func append(_ newElement: Element?) {
+extension Array {
+    mutating func append(_ newElement: Element?) {
         if let element = newElement {
             self.append(element)
         }
     }
-}
-
-public extension Array {
+    
+    func cutFirstItems(itemsNumber: Int) -> Self {
+        return (self.count > itemsNumber) ? Array(self[0..<itemsNumber]) : self
+    }
+    
     var hasItems: Bool {
         return !self.isEmpty
     }

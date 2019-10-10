@@ -188,7 +188,11 @@ class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDel
                     }
                     if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                         let view = getViewForOperation(operation: type)
+                        
+                        /// seems like duplicated logic "set(object:".
+                        /// needs to drop before regression tests.
                         view.set(object: object)
+                        
                         newPopUps.insert(view, at: 0)
                         setViewByType(view: view, operation: type)
                     }
