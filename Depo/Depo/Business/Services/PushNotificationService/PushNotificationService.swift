@@ -122,6 +122,8 @@ final class PushNotificationService {
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
         case .tbmatic: openTBMaticPhotos(notificationParameters)
+        case .securityQuestion: openSecurityQuestion()
+        case .permissions: openPermissions()
         }
         
         if router.tabBarController != nil {
@@ -373,5 +375,19 @@ final class PushNotificationService {
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
+    }
+    
+    private func openSecurityQuestion() {
+        debugLog("PushNotificationService try to open Security Question screen")
+
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        pushTo(controller)
+    }
+    
+    private func openPermissions() {
+        debugLog("PushNotificationService try to open Permission screen")
+
+        let controller = router.permissions
+        pushTo(controller)
     }
 }
