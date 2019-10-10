@@ -12,6 +12,8 @@ import Alamofire
 import Adjust
 import KeychainSwift
 import XPush
+import Fabric
+import Crashlytics
 
 final class AppConfigurator {
     
@@ -22,6 +24,9 @@ final class AppConfigurator {
     static let analyticsService: AnalyticsService = factory.resolve()
 
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        DispatchQueue.setupMainQueue()
+        Fabric.with([Crashlytics.self])
+        
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         
@@ -30,7 +35,6 @@ final class AppConfigurator {
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         clearTokensIfNeed()
-        logoutIfNeed()
         prepareSessionManager()
         configureSDWebImage()
         setupIAPObserver()
@@ -82,7 +86,7 @@ final class AppConfigurator {
         }
     }
     
-    private static func logoutIfNeed() {
+    static func logoutIfNeed() {
         if !tokenStorage.isRememberMe {
             debugLog("logoutIfNeed isRememberMe false")
             AuthenticationService().logout(async: false, success: nil)

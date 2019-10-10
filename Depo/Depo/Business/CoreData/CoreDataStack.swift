@@ -21,6 +21,8 @@ final class CoreDataStack {
     
     static let shared = CoreDataStack()
     
+    private(set) var isReady = false
+    
     private lazy var storeUrl: URL = {
         guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
             let errorMessage = "Unable to resolve document directory"
@@ -115,16 +117,18 @@ final class CoreDataStack {
     
     func setup(completion: @escaping VoidHandler) {
         if #available(iOS 10.0, *) {
-            container.loadPersistentStores { description, error in
+            container.loadPersistentStores { [weak self] description, error in
                 if let error = error {
                     let errorMessage = "Unable to load persistent stores: \(error)"
                     debugLog(errorMessage)
                     assertionFailure(errorMessage)
                 }
                 debugLog("persistent store loaded: \(description)")
+                self?.isReady = true
                 completion()
             }
         } else {
+            isReady = true
             completion()
         }
     }

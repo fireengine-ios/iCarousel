@@ -13,7 +13,6 @@ import SDWebImage
 import XCGLogger
 import Adjust
 import XPush
-import Fabric
 import Netmera
 import UserNotifications
 
@@ -83,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             DispatchQueue.main.async {
-                AppConfigurator.applicationStarted(with: launchOptions)
+                AppConfigurator.logoutIfNeed()
                 
                 ///call debugLog only if the Crashlytics is already initialized
                 debugLog("AppDelegate didFinishLaunchingWithOptions")
@@ -99,8 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplicationLaunchOptionsKey: Any]?) {
-        DispatchQueue.setupMainQueue()
-        Fabric.with([Crashlytics.self])
         
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
@@ -109,11 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
-
         AnalyticsService.onAppLaunch()
+        
+        AppConfigurator.applicationStarted(with: options)
+        
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.onAppLaunch()
         
@@ -126,6 +122,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 debugLog("Received error while fetching deferred app link \(String(describing: error))")
             }
         }
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
