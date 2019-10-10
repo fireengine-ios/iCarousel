@@ -18,7 +18,7 @@ final class TBMatikCard: BaseView {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = ColorConstants.whiteColor
             newValue.numberOfLines = 0
-            newValue.text = "Your today’s TB"
+            newValue.text = TextConstants.tbMatiHomeCardTitle
         }
     }
     
@@ -27,7 +27,7 @@ final class TBMatikCard: BaseView {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
             newValue.textColor = ColorConstants.whiteColor
             newValue.numberOfLines = 0
-            newValue.text = "Lorem ipsum dolor sit amet.Lorem ipsum dolor!"
+            newValue.text = TextConstants.tbMatiHomeCardSubtitle
         }
     }
     
@@ -37,7 +37,7 @@ final class TBMatikCard: BaseView {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
             newValue.numberOfLines = 0
             newValue.textColor = ColorConstants.whiteColor
-            newValue.text = "12 NOVEMBER 2018"
+            newValue.text = " "
         }
     }
     
@@ -45,7 +45,7 @@ final class TBMatikCard: BaseView {
         willSet {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
-            newValue.setTitle("Let's see", for: .normal)
+            newValue.setTitle(TextConstants.tbMatiHomeCardButtonTitle, for: .normal)
         }
     }
     
@@ -90,12 +90,30 @@ final class TBMatikCard: BaseView {
         
         self.items = items
         
+        setupDate(for: items.first)
+        
         let urls = items.compactMap { $0.metaData?.largeUrl }
         
         guard urls.hasItems else {
             return
         }
         setupImages(by: urls)
+    }
+    
+    private func setupDate(for item: Item?) {
+        guard let date = item?.metaDate else {
+            return
+        }
+
+        let interval = Calendar.current.dateComponents([.year], from: date, to: Date())
+        if let year = interval.year {
+            let yearAgoText = (year == 1) ? TextConstants.tbMatiHomeCardYearAgo : TextConstants.tbMatiHomeCardYearsAgo
+            let timePast = String(format: yearAgoText, year)
+            
+            DispatchQueue.main.async {
+                self.dateLabel.text = timePast
+            }
+        }
     }
     
     private func setupImages(by urls: [URL]) {
