@@ -15,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TBMatick_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="kj8-gP-Kwc">
-                    <rect key="frame" x="0.0" y="44" width="393" height="203.5"/>
+                    <rect key="frame" x="0.0" y="44" width="393" height="185"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TBMatick_likes" translatesAutoresizingMaskIntoConstraints="NO" id="TNX-Tm-hVX">
-                    <rect key="frame" x="228" y="44" width="157" height="203.5"/>
+                    <rect key="frame" x="228" y="44" width="157" height="185"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33y-eK-tG2" userLabel="Close Button">
                     <rect key="frame" x="360" y="44" width="33" height="33"/>
@@ -38,19 +38,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="WRL-sc-rXx">
-                    <rect key="frame" x="176.5" y="119" width="40" height="80"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="1qP-CV-j0f"/>
-                    </constraints>
+                    <rect key="frame" x="176.5" y="119" width="40" height="65.5"/>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wf-dC-X1W">
-                    <rect key="frame" x="13" y="213" width="367" height="20.5"/>
+                    <rect key="frame" x="13" y="194.5" width="367" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTq-Us-XcX">
-                    <rect key="frame" x="13" y="247.5" width="367" height="44"/>
+                    <rect key="frame" x="13" y="229" width="367" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="JlQ-tv-eez"/>
                     </constraints>
@@ -84,13 +81,14 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2wf-dC-X1W" secondAttribute="trailing" constant="13" id="Srw-1t-Rjt"/>
                 <constraint firstItem="OPd-Cv-pzM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="fxj-Pw-mBh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kj8-gP-Kwc" secondAttribute="trailing" id="hX9-id-LJb"/>
-                <constraint firstItem="WRL-sc-rXx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="heH-eG-LRn"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WRL-sc-rXx" secondAttribute="trailing" id="iHU-bo-MQb"/>
+                <constraint firstItem="WRL-sc-rXx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="2" id="heH-eG-LRn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WRL-sc-rXx" secondAttribute="trailing" constant="2" id="iHU-bo-MQb"/>
                 <constraint firstItem="2wf-dC-X1W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="mEP-A9-PbT"/>
                 <constraint firstItem="kj8-gP-Kwc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oBK-4l-56H"/>
+                <constraint firstItem="WRL-sc-rXx" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1:6" id="pcI-Ii-hbM"/>
                 <constraint firstItem="TNX-Tm-hVX" firstAttribute="bottom" secondItem="kj8-gP-Kwc" secondAttribute="bottom" id="q6N-Ru-tqi"/>
                 <constraint firstItem="TNX-Tm-hVX" firstAttribute="top" secondItem="kj8-gP-Kwc" secondAttribute="top" id="r4o-yq-cdH"/>
-                <constraint firstItem="2wf-dC-X1W" firstAttribute="top" secondItem="WRL-sc-rXx" secondAttribute="bottom" constant="14" id="rRI-vZ-sK4"/>
+                <constraint firstItem="2wf-dC-X1W" firstAttribute="top" secondItem="WRL-sc-rXx" secondAttribute="bottom" constant="10" id="rRI-vZ-sK4"/>
                 <constraint firstItem="f6u-x4-JBP" firstAttribute="top" secondItem="OPd-Cv-pzM" secondAttribute="bottom" constant="6" id="ru2-Mo-TFj"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="33y-eK-tG2" secondAttribute="trailing" id="sGd-v4-fWB"/>
                 <constraint firstItem="f6u-x4-JBP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="uRV-rS-dJS"/>
@@ -103,7 +101,6 @@
                 <outlet property="actionButton" destination="DTq-Us-XcX" id="XmV-jy-lwI"/>
                 <outlet property="dateLabel" destination="2wf-dC-X1W" id="KNk-64-woY"/>
                 <outlet property="imagesStackView" destination="WRL-sc-rXx" id="zSw-GZ-riG"/>
-                <outlet property="imagesStackViewHeightСonstraint" destination="1qP-CV-j0f" id="AdG-zW-K1u"/>
                 <outlet property="subTitleLabel" destination="f6u-x4-JBP" id="NZt-rz-Yed"/>
                 <outlet property="titleLabel" destination="OPd-Cv-pzM" id="czv-nK-Ln9"/>
             </connections>

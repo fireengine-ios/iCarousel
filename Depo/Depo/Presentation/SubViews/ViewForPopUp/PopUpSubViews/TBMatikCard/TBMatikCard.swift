@@ -2,8 +2,6 @@ import UIKit
 
 final class TBMatikCard: BaseView {
     
-    @IBOutlet private weak var imagesStackViewHeightСonstraint: NSLayoutConstraint!
-    
     @IBOutlet private weak var imagesStackView: UIStackView! {
         willSet {
             newValue.spacing = 10
@@ -49,7 +47,7 @@ final class TBMatikCard: BaseView {
         }
     }
     
-    private lazy var imageHeight: CGFloat = imagesStackViewHeightСonstraint.constant
+    private lazy var imageHeight: CGFloat = imagesStackView.bounds.height
     
     private let imageDownloder = ImageDownloder()
     
