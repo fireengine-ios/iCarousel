@@ -416,6 +416,8 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
+            self.cancellAllRequests()
+            
             CellImageManager.clear()
             FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
             FreeAppSpace.session.handleLogout()
@@ -437,7 +439,6 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             
             self.player.stop()
-            self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
             

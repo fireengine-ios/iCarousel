@@ -15,7 +15,7 @@ final class PushNotificationService {
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
     
@@ -40,8 +40,13 @@ final class PushNotificationService {
     }
     
     func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = innerLink as String?,
-            let notificationAction = PushNotificationAction(rawValue: actionString) else {
+        guard let actionString = innerLink as String? else {
+            return false
+        }
+                
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received notification with unowned type \(String(describing: actionString))")
             return false
         }
         
@@ -73,7 +78,7 @@ final class PushNotificationService {
         if tokenStorage.accessToken == nil {
             action = .login
         }
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()

@@ -404,20 +404,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         debugLog("userNotificationCenter didReceive response")
-        guard let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] else {
-            debugLog("userNotificationCenter Netmera push object is empty")
-            return
-        }
-        
-        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
-            PushNotificationService.shared.openActionScreen()
+
+        if let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] {
+            debugPrint("userNotificationCenter try to handle Netmera push object")
+            if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
+                PushNotificationService.shared.openActionScreen()
+                return
+            }
         } else {
-            XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+            debugLog("userNotificationCenter Netmera push object is empty")
         }
+
+        XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+        if #available(iOS 12.0, *) {
+            XPush.userNotificationCenter(center, openSettingsFor: notification)
+        }
     }
 }
