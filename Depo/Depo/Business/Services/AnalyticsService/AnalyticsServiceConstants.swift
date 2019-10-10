@@ -195,6 +195,8 @@ enum AnalyticsAppScreens {
     ///EmailVerification
     case verifyEmailPopUp
     case changeEmailPopUp
+    ///CredsUpdateCheckPopUp
+    case periodicInfoScreen
 
     case info(FileType)
     
@@ -344,6 +346,9 @@ enum AnalyticsAppScreens {
             return "Email verification - Popup"
         case .changeEmailPopUp:
             return "Email verification - Change Email"
+        ///
+        case .periodicInfoScreen:
+            return "Periodic Info Screen"
         ///
         case .info(let fileType):
             switch fileType {
