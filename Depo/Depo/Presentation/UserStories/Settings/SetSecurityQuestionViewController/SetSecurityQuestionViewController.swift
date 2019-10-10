@@ -125,7 +125,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
     
-    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate) {
+    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate?) {
         self.delegate = delegate
         answer.questionId = selectedQuestion?.id
         setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
