@@ -13,6 +13,9 @@ ictsContainerId = '743'
 ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stage code
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
+// Deploy to App Store
+appleId = '665036334' // Apple ID property in the App Information section in App Store Connect
+
 // Email notification
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
@@ -250,14 +253,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        if (isDev) {
-                            input ok:'Yes', message:'Deploy to Testflight?' //, submitter: "${testFlightDeployers}"
-                            env.DEPLOY_TO = 'Testflight'
-                        } else {
-                            def deployParameter = booleanParam(name: 'Deploy to Testflight', defaultValue: false)
-                            def isDeploy = input ok:'Yes', message:'Build for Appstore?', parameters: [ deployParameter ] //, submitter: "${testFlightDeployers}"
-                            env.DEPLOY_TO = isDeploy ? 'Testflight': ''
-                        }
+                        def deployParameter = booleanParam(name: 'Deploy to Testflight', defaultValue: false)
+                        def isDeploy = input ok:'Yes', message:'Build for Appstore?', parameters: [ deployParameter ] //, submitter: "${testFlightDeployers}"
+                        env.DEPLOY_TO = isDeploy ? 'Testflight': ''
                         env.BUILD_TARGET = 'Appstore'
                         echo "Deploy to Testflight is approved. Starting the deployment..."
 
@@ -288,11 +286,12 @@ pipeline {
                     publishToArtifactory('prod')
                     if (env.DEPLOY_TO == 'Testflight') {
                         stage('Deploying to Testflight') {
-                            sh "cp build/${appName}-${BUILD_ID}-prod.ipa ${appName}.ipa"
                             sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
+                            def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
+                            def ipaFile = "build/${appName}-${BUILD_ID}-prod.ipa"
                             sh """
                                 export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-                                ~/.fastlane/bin/fastlane run upload_to_testflight skip_submission:"true" ipa:"${appName}.ipa" apple_id:"${appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
+                                ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
                             """
                         }
                     }
