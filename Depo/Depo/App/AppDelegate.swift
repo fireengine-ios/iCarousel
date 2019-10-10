@@ -13,6 +13,7 @@ import SDWebImage
 import XCGLogger
 import Adjust
 import XPush
+import Fabric
 import Netmera
 import UserNotifications
 
@@ -73,23 +74,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AnalyticsService.onAppLaunch()
-        AppConfigurator.applicationStarted(with: launchOptions)
+        
+        startCoreDataSafeServices(with: application, options: launchOptions)
+        
+        CoreDataStack.shared.setup { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                AppConfigurator.applicationStarted(with: launchOptions)
+                
+                ///call debugLog only if the Crashlytics is already initialized
+                debugLog("AppDelegate didFinishLaunchingWithOptions")
+                
+                let router = RouterVC()
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window?.rootViewController = router.vcForCurrentState()
+                self.window?.makeKeyAndVisible()
+            }
+        }
+        
+        return true
+    }
+    
+    private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplicationLaunchOptionsKey: Any]?) {
+        DispatchQueue.setupMainQueue()
+        Fabric.with([Crashlytics.self])
+        
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
         #endif
+        
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
-        ///call debugLog only if the Crashlytics is already initialized
-        debugLog("AppDelegate didFinishLaunchingWithOptions")
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+
+        AnalyticsService.onAppLaunch()
+        ContactSyncSDK.doPeriodicSync()
+        MenloworksAppEvents.onAppLaunch()
         
-        let router = RouterVC()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = router.vcForCurrentState()
-        window?.makeKeyAndVisible()
-            
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        passcodeStorage.systemCallOnScreen = false
         
         AppLinkUtility.fetchDeferredAppLink { url, error in
             if let url = url {
@@ -99,16 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        ContactSyncSDK.doPeriodicSync()
-        passcodeStorage.systemCallOnScreen = false
-        
-        MenloworksAppEvents.onAppLaunch()
-        
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
-        
-        return true
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
     
     /// iOS 9+

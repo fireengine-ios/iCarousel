@@ -94,14 +94,14 @@ final class CoreDataStack {
     private lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Config.storeName, managedObjectModel: managedObjectModel)
         container.persistentStoreDescriptions = [storeDescription()]
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                let errorMessage = "Unable to load persistent stores: \(error)"
-                debugLog(errorMessage)
-                assertionFailure(errorMessage)
-            }
-            debugLog("persistent store loaded: \(description)")
-        }
+//        container.loadPersistentStores { description, error in
+//            if let error = error {
+//                let errorMessage = "Unable to load persistent stores: \(error)"
+//                debugLog(errorMessage)
+//                assertionFailure(errorMessage)
+//            }
+//            debugLog("persistent store loaded: \(description)")
+//        }
         return container
     }()
     
@@ -110,6 +110,22 @@ final class CoreDataStack {
             mainContext.automaticallyMergesChangesFromParent = true
         } else {
             NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
+        }
+    }
+    
+    func setup(completion: @escaping VoidHandler) {
+        if #available(iOS 10.0, *) {
+            container.loadPersistentStores { description, error in
+                if let error = error {
+                    let errorMessage = "Unable to load persistent stores: \(error)"
+                    debugLog(errorMessage)
+                    assertionFailure(errorMessage)
+                }
+                debugLog("persistent store loaded: \(description)")
+                completion()
+            }
+        } else {
+            completion()
         }
     }
     
