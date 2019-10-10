@@ -92,7 +92,7 @@ final class TBMatikCard: BaseView {
         
         setupDate(for: items.first)
         
-        let urls = items.compactMap { $0.metaData?.largeUrl }
+        let urls = items.compactMap { $0.metaData?.mediumUrl }
         
         guard urls.hasItems else {
             return
