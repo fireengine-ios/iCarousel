@@ -286,7 +286,6 @@ pipeline {
                     publishToArtifactory('prod')
                     if (env.DEPLOY_TO == 'Testflight') {
                         stage('Deploying to Testflight') {
-                            sh "cp  ${appName}.ipa"
                             sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                             def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
                             def ipaFile = "build/${appName}-${BUILD_ID}-prod.ipa"
