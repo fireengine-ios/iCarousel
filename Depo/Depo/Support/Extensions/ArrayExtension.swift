@@ -23,9 +23,15 @@ extension Array {
         }
     }
     
+    #if swift(>=5.0)
     func cutFirstItems(itemsNumber: Int) -> Self {
         return (self.count > itemsNumber) ? Array(self[0..<itemsNumber]) : self
     }
+    #else
+    func cutFirstItems(itemsNumber: Int) -> [Element] {
+        return (self.count > itemsNumber) ? Array(self[0..<itemsNumber]) : self
+    }
+    #endif
     
     var hasItems: Bool {
         return !self.isEmpty
