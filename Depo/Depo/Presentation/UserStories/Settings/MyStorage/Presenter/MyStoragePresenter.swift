@@ -134,9 +134,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
         }
         
-        if accountType == .all || accountType == .turkcell {
+        ///https://jira.turkcell.com.tr/browse/FE-1642
+        ///iOS: Packages - Adding refresh button on My Storage page for all type of users
+        ///description in this task incorrent (title of this task correct)
+//        if accountType == .all {
             view?.showRestoreButton()
-        }
+//        }
         
         interactor.getAllOffers()
     }
