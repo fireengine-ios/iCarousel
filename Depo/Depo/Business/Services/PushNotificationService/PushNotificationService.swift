@@ -15,7 +15,6 @@ final class PushNotificationService {
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
@@ -74,9 +73,7 @@ final class PushNotificationService {
         if tokenStorage.accessToken == nil {
             action = .login
         }
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .notification)
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()
