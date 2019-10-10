@@ -77,7 +77,8 @@ final class TBMatikCard: BaseView {
         
         isCardSetuped = true
         
-        guard let jsonArray = object?.details?.array?.cutFirstItems(itemsNumber: 3) else {
+        let requirementItemsNumber = 3
+        guard let jsonArray = object?.details?.array?.cutFirstItems(itemsNumber: requirementItemsNumber) else {
             assertionFailure()
             return
         }
@@ -171,11 +172,5 @@ final class TBMatikCard: BaseView {
     
     @IBAction private func onCloseButton(_ sender: UIButton) {
         deleteCard()
-    }
-}
-
-extension Array {
-    func cutFirstItems(itemsNumber: Int) -> Self {
-        return (self.count > itemsNumber) ? Array(self[0..<itemsNumber]) : self
     }
 }
