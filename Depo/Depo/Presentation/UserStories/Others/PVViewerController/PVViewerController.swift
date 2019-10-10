@@ -22,8 +22,7 @@ final class PVViewerController: BaseViewController, NibInit {
         view.backgroundColor = UIColor.black
         view.addGestureRecognizer(fullscreenTapGesture)
         
-        imageScrollView.delegate = self
-        imageScrollView.image = image
+        imageScrollView.imageView.originalImage = image
         
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
@@ -80,15 +79,5 @@ final class PVViewerController: BaseViewController, NibInit {
         super.viewWillTransition(to: size, with: coordinator)
         
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
-    }
-}
-
-extension PVViewerController: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageScrollView.imageView
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        imageScrollView.adjustFrameToCenter()
     }
 }

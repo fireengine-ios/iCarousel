@@ -181,7 +181,7 @@ extension UIViewController {
                                 y: 0,
                                 width: (Device.winSize.width),
                                 height: view.frame.height)
-            navBar?.subviews[0].addSubview(view)
+            navBar?.subviews.first?.addSubview(view)
         }
     }
     
