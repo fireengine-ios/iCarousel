@@ -91,6 +91,8 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
         
         contentView = popUpView
         setup()
+        
+        analyticsService.logScreen(screen: .periodicInfoScreen)
     }
     
     override func viewWillAppear(_ animated: Bool) {
