@@ -15,7 +15,7 @@ final class PushNotificationService {
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
     
@@ -73,7 +73,7 @@ final class PushNotificationService {
         if tokenStorage.accessToken == nil {
             action = .login
         }
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()

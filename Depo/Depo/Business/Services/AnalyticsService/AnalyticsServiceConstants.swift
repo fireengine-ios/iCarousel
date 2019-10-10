@@ -458,7 +458,7 @@ enum GAEventCantegory {
     var text: String {
         switch self {
         case .enhancedEcommerce:
-            return "Enhanced E-Commerce"
+            return "Enhance Ecommerce"
         case .functions:
             return "Functions"
         case .videoAnalytics:
@@ -810,6 +810,7 @@ enum GAEventLabel {
     case emailChanged(isSuccessed: Bool)
     case later
     case cancel
+    case storyOrVideo
 
         var text: String {
         switch self {
@@ -977,6 +978,8 @@ enum GAEventLabel {
             return "Later"
         case .cancel:
             return "Cancel"
+        case .storyOrVideo:
+            return "Story / Video"
         }
     }
     
