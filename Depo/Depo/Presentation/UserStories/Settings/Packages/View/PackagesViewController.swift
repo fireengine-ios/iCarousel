@@ -145,14 +145,15 @@ extension PackagesViewController: PackagesViewInput {
     }
 
     func showPaycellProcess(with cpcmOfferId: Int) {
-        let controller = PaycellViewController.create(with: cpcmOfferId) { [weak self] result in
-            //TODO: possibly will be needed when paycell process in fixed
-            //            switch result {
-            //            case .success():
-            //                return
-            //            case .failure(_):
-            //                return
-            //            }
+        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
+            switch result {
+            case .success():
+                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
+                return
+            case .failed(_):
+                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
+                return
+            }
         }
         RouterVC().pushViewController(viewController: controller)
     }
