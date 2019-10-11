@@ -213,7 +213,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                                                name: dropNotificationName,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPhotosScreen),
+                                               selector: #selector(showPhotoScreen),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
@@ -232,15 +232,23 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
     }
     
-    @objc func showPhotosScreen(scrollTo item: Item? = nil) {
+    func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
         selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
         lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
         
         if let item = item {
-            openPhotoPage(scrollTo: item)
+            scrollPhotoPage(scrollTo: item)
         }
     }
+    
+    @objc func showPhotoScreen() {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        openPhotoPage()
+    }
+    
     
     @objc func showVideosScreen(_ sender: Any) {
 //        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
@@ -262,23 +270,31 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         mainContentView.layoutIfNeeded()
     }
     
-    private func openPhotoPage(scrollTo item: Item) {
-        if let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController {
-            segmentedController.loadViewIfNeeded()
-        
-            if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
-                // if photo page is not active
-                guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true} ) else {
-                    assertionFailure("Photo page not found")
-                    return
-                }
-                segmentedController.switchSegment(to: index)
-            }
-
-            if let photosController = segmentedController.currentController as? PhotoVideoController {
+    private func scrollPhotoPage(scrollTo item: Item) {
+            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
                 photosController.scrollToItem(item)
             }
+    }
+    
+    @discardableResult
+    private func openPhotoPage() -> SegmentedController? {
+        
+        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
+            return nil
         }
+        
+        segmentedController.loadViewIfNeeded()
+        
+        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
+            // if photo page is not active
+            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
+                assertionFailure("Photo page not found")
+                return nil
+            }
+            segmentedController.switchSegment(to: index)
+        }
+        return segmentedController
+        
     }
     
     private func changeVisibleStatus(hidden: Bool) {

@@ -211,7 +211,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             return
         }
         
-        tabbarController.showPhotosScreen(scrollTo: item)        
+        tabbarController.showAndScrollPhotosScreen(scrollTo: item)        
         dismiss(animated: true)
     }
 }

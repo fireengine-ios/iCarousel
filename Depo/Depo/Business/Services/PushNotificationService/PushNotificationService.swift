@@ -178,7 +178,7 @@ final class PushNotificationService {
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
             case .photosScreenIndex:
-                tabBarVC.showPhotosScreen()
+                tabBarVC.showPhotoScreen()
             }
         }
     }
