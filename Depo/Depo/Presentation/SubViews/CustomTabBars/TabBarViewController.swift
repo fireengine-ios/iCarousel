@@ -238,7 +238,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
         
         if let item = item {
-            openPhotoPage(scrollTo: item)
+            scrollPhotoPage(scrollTo: item)
         }
     }
     
@@ -262,22 +262,28 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         mainContentView.layoutIfNeeded()
     }
     
-    private func openPhotoPage(scrollTo item: Item) {
+    private func scrollPhotoPage(scrollTo item: Item) {
+            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
+                photosController.scrollToItem(item)
+            }
+    }
+    
+    @discardableResult
+    private func openPhotoPage() -> SegmentedController? {
         if let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController {
             segmentedController.loadViewIfNeeded()
         
             if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
                 // if photo page is not active
-                guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true} ) else {
+                guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
                     assertionFailure("Photo page not found")
-                    return
+                    return nil
                 }
                 segmentedController.switchSegment(to: index)
             }
-
-            if let photosController = segmentedController.currentController as? PhotoVideoController {
-                photosController.scrollToItem(item)
-            }
+            return segmentedController
+        } else {
+            return nil
         }
     }
     
