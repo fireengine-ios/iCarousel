@@ -178,4 +178,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         view?.stopActivityIndicator()
         refreshPage()
     }
+    
+    func stopActivity() {
+        view?.stopActivityIndicator()
+    }
+    
+    func startActivity() {
+        view?.startActivityIndicator()
+    }
 }
