@@ -106,6 +106,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
+        // required subscribe to delegate before push notification SDKs init
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+        
         AnalyticsService.onAppLaunch()
         
         AppConfigurator.applicationStarted(with: options)
@@ -122,11 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 debugLog("Received error while fetching deferred app link \(String(describing: error))")
             }
         }
-        
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
-
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
