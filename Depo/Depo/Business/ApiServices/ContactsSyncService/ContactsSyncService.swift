@@ -106,16 +106,14 @@ class ContactsSyncService: BaseRequestService {
         case .RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             errorCallback?(.accessDenied, getCurrentOperationType())
         case .RESULT_ERROR_REMOTE_SERVER:
-            let requestService = APIReachabilityRequestService()
-            
-            requestService.sendPingRequest { [weak self] isReachable in
+            ReachabilityService.shared.forceCheckAPI { [weak self] isReachable in
                 guard let `self` = self else {
                     return
                 }
-                if isReachable == false {
-                    errorCallback?(.networkError, self.getCurrentOperationType())
-                } else {
+                if isReachable {
                     errorCallback?(.remoteServerError, self.getCurrentOperationType())
+                } else {
+                    errorCallback?(.networkError, self.getCurrentOperationType())
                 }
             }
         case .RESULT_ERROR_NETWORK:
