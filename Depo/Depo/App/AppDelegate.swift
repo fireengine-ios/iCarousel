@@ -76,6 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startCoreDataSafeServices(with: application, options: launchOptions)
         
+        ///call debugLog only if the Crashlytics is already initialized
+        debugLog("AppDelegate didFinishLaunchingWithOptions")
+        
+        let router = RouterVC()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = InitializingViewController()
+        self.window?.makeKeyAndVisible()
+        
         CoreDataStack.shared.setup { [weak self] in
             guard let self = self else {
                 return
@@ -84,13 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
                 
-                ///call debugLog only if the Crashlytics is already initialized
-                debugLog("AppDelegate didFinishLaunchingWithOptions")
-                
-                let router = RouterVC()
-                self.window = UIWindow(frame: UIScreen.main.bounds)
                 self.window?.rootViewController = router.vcForCurrentState()
-                self.window?.makeKeyAndVisible()
+                self.window?.isHidden = false
             }
         }
         
@@ -105,6 +108,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
+        
+        // required subscribe to delegate before push notification SDKs init
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
         
         AnalyticsService.onAppLaunch()
         
@@ -122,11 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 debugLog("Received error while fetching deferred app link \(String(describing: error))")
             }
         }
-        
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
-
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
