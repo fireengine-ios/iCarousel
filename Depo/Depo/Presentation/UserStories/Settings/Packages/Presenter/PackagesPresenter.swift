@@ -31,7 +31,6 @@ class PackagesPresenter {
         offerToBuy = nil
         offerIndex = 0
         optInVC = nil
-        
         view?.startActivityIndicator()
         interactor.getAvailableOffers(with: accountType)
     }
@@ -60,7 +59,7 @@ extension PackagesPresenter: PackagesViewOutput {
         view?.startActivityIndicator()
         interactor.getAccountType()
         
-        view?.startActivityIndicator()
+//        view?.startActivityIndicator()
     }
     
     func viewWillAppear() {
