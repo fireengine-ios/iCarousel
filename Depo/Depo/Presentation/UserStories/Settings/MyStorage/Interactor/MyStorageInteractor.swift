@@ -85,7 +85,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             success: { [weak self] response in
                 guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
                     let error = CustomErrors.serverError("An error occured while getting active subscription")
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.output.failed(with: error.localizedDescription)
                     }
                     return
@@ -97,7 +97,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 self?.getInfoForAppleProducts(offers: offersList)
 
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async  {
                     self?.output.failed(with: errorResponse)
                 }
         })
@@ -113,7 +113,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             switch result {
             case .success:
 //                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
-                self?.validateRestorePurchase(offersApple: [])
+                self?.validateRestorePurchase()
                 
             case .fail(let error):
                 DispatchQueue.main.async {
@@ -152,7 +152,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         return true
     }
     
-    private func validateRestorePurchase(offersApple: [OfferApple]) {
+    private func validateRestorePurchase() {
         guard let receipt = iapManager.receipt else {
             output.stopActivity()
             return
@@ -160,9 +160,14 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         
         //just sending reciept
         offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+            
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                DispatchQueue.main.async {
+                    self?.output.stopActivity()
+                }
                 return
             }
+        
             if !(status == .restored || status == .success) {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
                 
@@ -170,14 +175,14 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     self?.output.failed(with: ErrorResponse.string(status.description))
                 }
             } else {
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.refreshPackages()
                 }
             }
         }, fail: { [weak self] errorResponse in
             debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.failed(with: errorResponse)
             }
         })
