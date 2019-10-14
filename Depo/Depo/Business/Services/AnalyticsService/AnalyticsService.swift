@@ -339,7 +339,7 @@ extension AnalyticsService: AnalyticsGA {
             let parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : GAEventAction.login.text,
-                "eventLabel" : loginType != nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
