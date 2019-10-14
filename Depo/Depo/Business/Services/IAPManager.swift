@@ -132,6 +132,7 @@ extension IAPManager: SKProductsRequestDelegate {
         debugLog("IAPManager Failed to load list of products")
         
         offerAppleHandler(.failed(error))
+    }
     
     func requestDidFinish(_ request: SKRequest) {
         guard let request = productsRequests.first(where: { $0 == request}) else {
