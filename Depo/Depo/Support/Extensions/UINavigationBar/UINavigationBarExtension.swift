@@ -179,7 +179,7 @@ extension UIViewController {
             view.hideLogo = true
             view.frame = CGRect(x: 0,
                                 y: 0,
-                                width: (Device.winSize.width),
+                                width: Device.winSize.width,
                                 height: view.frame.height)
             navBar?.subviews.first?.addSubview(view)
         }

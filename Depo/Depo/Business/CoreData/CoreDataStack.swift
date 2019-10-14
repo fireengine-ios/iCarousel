@@ -109,7 +109,7 @@ final class CoreDataStack {
     
     init() {
         if #available(iOS 10.0, *) {
-            mainContext.automaticallyMergesChangesFromParent = true
+            // do not call anaything until store is loaded
         } else {
             NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
         }
@@ -124,6 +124,7 @@ final class CoreDataStack {
                     assertionFailure(errorMessage)
                 }
                 debugLog("persistent store loaded: \(description)")
+                self?.mainContext.automaticallyMergesChangesFromParent = true
                 self?.isReady = true
                 completion()
             }

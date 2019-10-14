@@ -131,8 +131,12 @@ final class VerifyEmailPopUp: BasePopUpController {
         
         contentView = popUpView
 
+        #if DEBUG
+        laterButton.isHidden = false
+        #else
         let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
         laterButton.isHidden = !allowSkip
+        #endif
         
         codeTextFields.forEach({
             $0.delegate = self
@@ -328,7 +332,7 @@ final class VerifyEmailPopUp: BasePopUpController {
     @IBAction func onLaterTap(_ sender: Any) {
         analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
                                             eventActions: .otp,
-                                            eventLabel: .clickPhoto)
+                                            eventLabel: .later)
         
         dismissPopUp()
     }

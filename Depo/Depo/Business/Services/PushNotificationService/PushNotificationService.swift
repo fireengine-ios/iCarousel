@@ -46,10 +46,11 @@ final class PushNotificationService {
                 
         guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
             assertionFailure("unowned push type")
-            debugLog("PushNotificationService received notification with unowned type \(String(describing: actionString))")
+            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
             return false
         }
         
+        debugLog("PushNotificationService received deepLink with type \(actionString)")
         parse(options: options, action: notificationAction)
         return true
     }
