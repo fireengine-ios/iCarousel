@@ -262,34 +262,34 @@ extension ChangeEmailPopUp {
         
         let parameters = UserEmailParameters(userEmail: email)
         AccountService().updateUserEmail(parameters: parameters, success: { [weak self] response in
-                                            MenloworksEventsService.shared.onEmailChanged()
-                                                                                        
-                                            SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: {_ in
-                                                DispatchQueue.main.async {
-                                                    self?.stopActivityIndicator()
-                                                    self?.backToVerifyEmailPopUp()
-                                                }
-                                                
-                                                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
-                                                                                          eventActions: .otp,
-                                                                                          eventLabel: .emailChanged(isSuccessed: true))
-                                                 
-                                            }, fail: { [weak self] error in
-                                                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
-                                                                                          eventActions: .otp,
-                                                                                          eventLabel: .emailChanged(isSuccessed: false),
-                                                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
-
-                                                DispatchQueue.main.async {
-                                                    self?.stopActivityIndicator()
-                                                    self?.fail(error: error.description)
-                                                }
-                                            })
+            MenloworksEventsService.shared.onEmailChanged()
+                                                        
+            SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: {_ in
+                DispatchQueue.main.async {
+                    self?.stopActivityIndicator()
+                    self?.backToVerifyEmailPopUp()
+                }
+                
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .emailChanged(isSuccessed: true))
+                 
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.stopActivityIndicator()
                     self?.fail(error: error.description)
                 }
+            })
+        }, fail: { [weak self] error in
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                      eventActions: .otp,
+                                                      eventLabel: .emailChanged(isSuccessed: false),
+                                                      errorType: GADementionValues.errorType(with: error.localizedDescription))
+            
+            DispatchQueue.main.async {
+                self?.stopActivityIndicator()
+                self?.fail(error: error.description)
+            }
         })
     }
     
