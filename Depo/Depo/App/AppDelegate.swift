@@ -101,21 +101,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplicationLaunchOptionsKey: Any]?) {
-        
+        DispatchQueue.setupMainQueue()
+    
         #if DEBUG
             watchdog = Watchdog(threshold: 0.05, strictMode: false)
         #endif
         
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
-        
-        // required subscribe to delegate before push notification SDKs init
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
-        
-        AnalyticsService.onAppLaunch()
-        
+    
+        setupPushNotifications(with: options)
         AppConfigurator.applicationStarted(with: options)
         
         ContactSyncSDK.doPeriodicSync()
@@ -132,6 +127,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
+    }
+    
+    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        // required setup order
+        // 1. XPush SDK setup
+        // 2. subscribe to notification delegate
+        // 3. Netmera SDK setup
+        
+        AppConfigurator.startXtremePush(with: launchOptions)
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+        
+        AnalyticsService.startNetmera()
     }
     
     /// iOS 9+
@@ -348,6 +358,7 @@ extension AppDelegate {
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        application.registerForRemoteNotifications()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -377,23 +388,18 @@ extension AppDelegate {
     
     //MARK: Adjust
     
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            if let url = userActivity.webpageURL {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+            Adjust.appWillOpen(url)
                 
-                Adjust.appWillOpen(url)
-                
-                if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
-                    if let host = oldURL.host {
-                        debugLog("Adjust old host :\(oldURL.host)")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
-                            debugLog("Should open Action Screen")
-                            PushNotificationService.shared.openActionScreen()
-                        }
+            if let oldURL = Adjust.convertUniversalLink(url, scheme: "akillidepo") {
+                debugLog("Adjust old path :\(oldURL.path)")
+                if let host = oldURL.host {
+                    debugLog("Adjust old host :\(host)")
+                    if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
                     }
-                    debugLog("Adjust old path :\(oldURL.path)")
                 }
             }
         }
@@ -410,9 +416,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         debugLog("userNotificationCenter didReceive response")
 
         if let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] {
-            debugPrint("userNotificationCenter try to handle Netmera push object")
+            debugLog("userNotificationCenter try to handle Netmera push object")
             if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
                 PushNotificationService.shared.openActionScreen()
+                completionHandler()
                 return
             }
         } else {
