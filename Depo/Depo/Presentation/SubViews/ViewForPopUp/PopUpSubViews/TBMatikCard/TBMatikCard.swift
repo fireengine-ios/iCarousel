@@ -97,6 +97,8 @@ final class TBMatikCard: BaseView {
             return
         }
         setupImages(by: urls)
+        
+        setupRecognizer()
     }
     
     private func setupDate(for item: Item?) {
@@ -139,6 +141,11 @@ final class TBMatikCard: BaseView {
                 .compactMap { self.createImageView(with: $0) }
                 .forEach { self.imagesStackView.addArrangedSubview($0) }
         }
+    }
+    
+    private func setupRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onActionButton))
+        addGestureRecognizer(recognizer)
     }
     
     private func createImageView(with image: UIImage) -> UIImageView {
