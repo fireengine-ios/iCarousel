@@ -372,6 +372,11 @@ final class PushNotificationService {
             return
         }
         
+        // check for cold start from push - present on home page
+        guard router.tabBarController != nil else {
+            return
+        }
+        
         let controller = router.tbmaticPhotosContoller(uuids: uuids)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
