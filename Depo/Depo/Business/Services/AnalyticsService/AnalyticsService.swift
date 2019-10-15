@@ -504,7 +504,5 @@ extension AnalyticsService: NetmeraProtocol {
         #endif
         
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
-        
-        Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
     }
 }

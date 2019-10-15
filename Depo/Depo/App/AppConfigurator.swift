@@ -198,26 +198,9 @@ final class AppConfigurator {
             }
         })
         
-        XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
         debugLog("AppConfigurator registerMenloworksForPushNotififcations")
         XPush.applicationDidFinishLaunching(options: launchOptions)
         debugLog("AppConfigurator startMenloworks")
-        
-        if #available(iOS 10, *) {
-            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
-                ///call processLocalMediaItems either here or in the AppDelegate
-                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
-                ///it depends on iOS version
-                
-                /// start photos logic after notification permission
-                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
-//                MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
-                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
-                    
-                }
-            }
-        }  
     }
     
     private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
