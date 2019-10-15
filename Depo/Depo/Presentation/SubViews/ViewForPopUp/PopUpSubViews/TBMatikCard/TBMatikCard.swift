@@ -102,18 +102,30 @@ final class TBMatikCard: BaseView {
     }
     
     private func setupDate(for item: Item?) {
-        guard let date = item?.metaDate else {
+        let currentYear = Date().getYear()
+        
+        guard
+            let photoYear = item?.metaDate.getYear(),
+            currentYear >= photoYear
+        else {
             return
         }
 
-        let interval = Calendar.current.dateComponents([.year], from: date, to: Date())
-        if let year = interval.year {
-            let yearAgoText = (year == 1) ? TextConstants.tbMatiHomeCardYearAgo : TextConstants.tbMatiHomeCardYearsAgo
-            let timePast = String(format: yearAgoText, year)
-            
-            DispatchQueue.main.async {
-                self.dateLabel.text = timePast
-            }
+        let intervar = currentYear - photoYear
+        
+        let timePast: String
+        switch intervar {
+        case 0:
+            timePast = TextConstants.tbMatiHomeCardThisYear
+        case 1:
+            timePast = String(format: TextConstants.tbMatiHomeCardYearAgo, intervar)
+        default:
+            ///all more then 1 year (no negative integers, they sorts in guard condition)
+            timePast = String(format: TextConstants.tbMatiHomeCardYearsAgo, intervar)
+        }
+
+        DispatchQueue.main.async {
+            self.dateLabel.text = timePast
         }
     }
     
