@@ -372,6 +372,10 @@ final class PushNotificationService {
             return
         }
         
+        guard router.tabBarController != nil else {
+            return
+        }
+        
         let controller = router.tbmaticPhotosContoller(uuids: uuids)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
