@@ -96,8 +96,5 @@ final class PremiumHeaderView: UIView {
     @IBAction private func onBecomePrepiumTap(_ sender: Any) {
         delegate?.onBecomePremiumTap()
     }
-    
-    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
-        return view.systemLayoutSizeFitting(targetSize)
-    }
+        
 }
