@@ -54,12 +54,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         configure()
         trackScreen()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        reloadCards()
 
         navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
