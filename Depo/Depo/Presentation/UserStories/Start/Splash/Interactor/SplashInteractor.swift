@@ -141,7 +141,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func turkcellSuccessLogin() {
 
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.turkcellGSM)
+        analyticsService.trackLoginEvent(loginType: .turkcellGSM)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
 
         DispatchQueue.toMain {
@@ -150,7 +150,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.rememberLogin)
+        analyticsService.trackLoginEvent(loginType: .rememberLogin)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()

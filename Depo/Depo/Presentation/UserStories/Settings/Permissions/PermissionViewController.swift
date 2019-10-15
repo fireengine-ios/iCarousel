@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class PermissionViewController: ViewController {
+final class PermissionViewController: ViewController, ControlTabBarProtocol {
     private let accountService = AccountService()
     
     private lazy var stackView: UIStackView = {
@@ -44,6 +44,13 @@ final class PermissionViewController: ViewController {
         setupLayout()
         
         checkPermissionState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
+        hideTabBar()
     }
     
     private func setupScreen() {

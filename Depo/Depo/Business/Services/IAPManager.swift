@@ -26,6 +26,8 @@ final class IAPManager: NSObject {
     private var offerAppleHandler: OfferAppleHandler = {_ in }
     private var purchaseHandler: PurchaseHandler = {_ in }
     
+    private var productsRequests = [SKRequest]()
+    
     private var restoreInProgress = false
     private var purchaseInProgress = false
     
@@ -52,12 +54,16 @@ final class IAPManager: NSObject {
     }
     
     func loadProducts(productIds: [String], isActivePurchases: Bool, handler: @escaping ResponseBool) {
-        debugLog("IAPManager loadProductsWithProductIds")
-        setActivePurchasesState(isActivePurchases)
-        offerAppleHandler = handler
-        let request = SKProductsRequest(productIdentifiers: Set(productIds))
-        request.delegate = self
-        request.start()
+        DispatchQueue.main.async {
+            debugLog("IAPManager loadProductsWithProductIds")
+            self.setActivePurchasesState(isActivePurchases)
+            self.offerAppleHandler = handler
+            let request = SKProductsRequest(productIdentifiers: Set(productIds))
+            
+            self.productsRequests.append(request)
+            request.delegate = self
+            request.start()
+        }
     }
     
     func purchase(product: SKProduct, handler: @escaping PurchaseHandler) {
@@ -126,6 +132,15 @@ extension IAPManager: SKProductsRequestDelegate {
         debugLog("IAPManager Failed to load list of products")
         
         offerAppleHandler(.failed(error))
+    }
+    
+    func requestDidFinish(_ request: SKRequest) {
+        guard let request = productsRequests.first(where: { $0 == request}) else {
+            assertionFailure()
+            return
+        }
+        request.delegate = nil
+        productsRequests.remove(request)
     }
 }
 

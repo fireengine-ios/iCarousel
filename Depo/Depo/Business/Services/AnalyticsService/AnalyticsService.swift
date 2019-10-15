@@ -339,7 +339,7 @@ extension AnalyticsService: AnalyticsGA {
             let parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : GAEventAction.login.text,
-                "eventLabel" : loginType != nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
@@ -477,7 +477,7 @@ extension AnalyticsService: AnalyticsGA {
 
 protocol NetmeraProtocol {
     static func updateUser()
-    static func onAppLaunch()
+    static func startNetmera()
 }
 
 extension AnalyticsService: NetmeraProtocol {
@@ -488,15 +488,21 @@ extension AnalyticsService: NetmeraProtocol {
         Netmera.update(user)
     }
     
-    static func onAppLaunch() {
-        DispatchQueue.main.async {
-            Netmera.start()
-            
-            #if DEBUG
-            Netmera.setLogLevel(.debug)
-            #endif
-            
-            Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+    static func startNetmera() {
+        debugLog("Start Netmera")
+        
+        #if DEBUG
+        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
+            assertionFailure("👉 CALL THIS FROM MAIN THREAD")
         }
+        #endif
+        
+        Netmera.start()
+        
+        #if DEBUG
+        Netmera.setLogLevel(.debug)
+        #endif
+        
+        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
     }
 }

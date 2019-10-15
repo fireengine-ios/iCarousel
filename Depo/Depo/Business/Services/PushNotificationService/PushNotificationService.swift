@@ -46,10 +46,11 @@ final class PushNotificationService {
                 
         guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
             assertionFailure("unowned push type")
-            debugLog("PushNotificationService received notification with unowned type \(String(describing: actionString))")
+            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
             return false
         }
         
+        debugLog("PushNotificationService received deepLink with type \(actionString)")
         parse(options: options, action: notificationAction)
         return true
     }
@@ -122,6 +123,8 @@ final class PushNotificationService {
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
         case .tbmatic: openTBMaticPhotos(notificationParameters)
+        case .securityQuestion: openSecurityQuestion()
+        case .permissions: openPermissions()
         }
         
         if router.tabBarController != nil {
@@ -176,7 +179,7 @@ final class PushNotificationService {
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
             case .photosScreenIndex:
-                tabBarVC.showPhotosScreen()
+                tabBarVC.showPhotoScreen()
             }
         }
     }
@@ -373,5 +376,19 @@ final class PushNotificationService {
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
+    }
+    
+    private func openSecurityQuestion() {
+        debugLog("PushNotificationService try to open Security Question screen")
+
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        pushTo(controller)
+    }
+    
+    private func openPermissions() {
+        debugLog("PushNotificationService try to open Permission screen")
+
+        let controller = router.permissions
+        pushTo(controller)
     }
 }

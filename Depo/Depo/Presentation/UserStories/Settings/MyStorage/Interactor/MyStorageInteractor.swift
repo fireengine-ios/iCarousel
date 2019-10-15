@@ -105,6 +105,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     
     func restorePurchases() {
         guard !sendReciept() else {
+            output.stopActivity()
             return
         }
         
@@ -153,6 +154,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     
     private func validateRestorePurchase(offersApple: [OfferApple]) {
         guard let receipt = iapManager.receipt else {
+            output.stopActivity()
             return
         }
         
