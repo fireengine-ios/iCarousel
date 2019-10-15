@@ -229,9 +229,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             searchTextField = textField
         }
         
-        let firstBtn = searchBar.firstSubview(of: UIButton.self)
+        let cancelButton = searchBar.firstSubview(of: UIButton.self)
         
-        if let button = firstBtn {
+        if let button = cancelButton {
             button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
             button.isEnabled = true
             button.adjustsFontSizeToFitWidth()

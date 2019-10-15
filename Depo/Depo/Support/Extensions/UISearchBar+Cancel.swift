@@ -10,12 +10,8 @@ import UIKit
 
 extension UISearchBar {
     func enableCancelButton() {
-        for view in subviews {
-            for subview in view.subviews {
-                if let button = subview as? UIButton {
-                    button.isEnabled = true
-                }
-            }
+        if let cancelButton = value(forKey: "cancelButton") as? UIButton {
+            cancelButton.isEnabled = true
         }
     }
 }
