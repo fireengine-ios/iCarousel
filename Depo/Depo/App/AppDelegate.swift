@@ -137,11 +137,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppConfigurator.startXtremePush(with: launchOptions)
         
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10, *) {
+            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+                XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+                Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
+                ///call processLocalMediaItems either here or in the AppDelegate
+                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
+                ///it depends on iOS version
+                
+                /// start photos logic after notification permission
+                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
+    //                MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
+                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+                    
+                }
+            }
             UNUserNotificationCenter.current().delegate = self
+            AnalyticsService.startNetmera()
+        } else {
+            XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+            AnalyticsService.startNetmera()
+            Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
         }
-        
-        AnalyticsService.startNetmera()
     }
     
     /// iOS 9+
@@ -358,7 +376,6 @@ extension AppDelegate {
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
-        application.registerForRemoteNotifications()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
