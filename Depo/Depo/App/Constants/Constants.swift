@@ -1474,5 +1474,6 @@ struct TextConstants {
     static let tbMatiHomeCardButtonTitle = NSLocalizedString("tbmatic_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMatiHomeCardYearAgo = NSLocalizedString("tbmatic_home_card_year_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMatiHomeCardYearsAgo = NSLocalizedString("tbmatic_home_card_years_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardThisYear = NSLocalizedString("tbmatic_home_card_this_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
 }
