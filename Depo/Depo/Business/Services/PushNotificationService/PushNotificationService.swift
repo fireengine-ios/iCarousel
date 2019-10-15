@@ -372,6 +372,7 @@ final class PushNotificationService {
             return
         }
         
+        // check for cold start from push - present on home page
         guard router.tabBarController != nil else {
             return
         }
