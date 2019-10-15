@@ -10,6 +10,9 @@ import UIKit
 
 extension UISearchBar {
     func enableCancelButton() {
+        /// firstSubview doesn't work because of UITextFieldClearButton
+        /// https://stackoverflow.com/a/54533194
+        
         if let cancelButton = value(forKey: "cancelButton") as? UIButton {
             cancelButton.isEnabled = true
         }
