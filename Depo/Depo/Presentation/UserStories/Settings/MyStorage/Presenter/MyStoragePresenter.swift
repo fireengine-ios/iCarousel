@@ -52,12 +52,12 @@ final class MyStoragePresenter {
     }
     
     private func displayOffers() {
-        view?.stopActivityIndicator()
         displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
         if let index = displayableOffers.index(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
         
+        view?.stopActivityIndicator()
         view?.reloadCollectionView()
     }
 }

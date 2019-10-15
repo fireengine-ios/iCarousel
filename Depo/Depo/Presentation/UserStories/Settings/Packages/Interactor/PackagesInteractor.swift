@@ -161,11 +161,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.successed(allOffers: offers)
             }
         }, fail: { [weak self] error in
-            DispatchQueue.main.async  {
+            DispatchQueue.toMain {
                 self?.output.failed(with: error.description)
             }
         })
