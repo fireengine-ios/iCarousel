@@ -73,23 +73,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AnalyticsService.onAppLaunch()
-        AppConfigurator.applicationStarted(with: launchOptions)
-        #if DEBUG
-            watchdog = Watchdog(threshold: 0.05, strictMode: false)
-        #endif
-        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        print("Documents: \(documents)")
+        
+        startCoreDataSafeServices(with: application, options: launchOptions)
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
         let router = RouterVC()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = router.vcForCurrentState()
-        window?.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = InitializingViewController()
+        self.window?.makeKeyAndVisible()
+        
+        CoreDataStack.shared.setup { [weak self] in
+            guard let self = self else {
+                return
+            }
             
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+            DispatchQueue.main.async {
+                AppConfigurator.logoutIfNeed()
+                
+                self.window?.rootViewController = router.vcForCurrentState()
+                self.window?.isHidden = false
+            }
+        }
+        
+        return true
+    }
+    
+    private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplicationLaunchOptionsKey: Any]?) {
+        DispatchQueue.setupMainQueue()
+    
+        #if DEBUG
+            watchdog = Watchdog(threshold: 0.05, strictMode: false)
+        #endif
+        
+        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        print("Documents: \(documents)")
+    
+        setupPushNotifications(with: options)
+        AppConfigurator.applicationStarted(with: options)
+        
+        ContactSyncSDK.doPeriodicSync()
+        MenloworksAppEvents.onAppLaunch()
+        
+        passcodeStorage.systemCallOnScreen = false
         
         AppLinkUtility.fetchDeferredAppLink { url, error in
             if let url = url {
@@ -99,16 +126,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        ContactSyncSDK.doPeriodicSync()
-        passcodeStorage.systemCallOnScreen = false
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
+    }
+    
+    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        // required setup order
+        // 1. XPush SDK setup
+        // 2. subscribe to notification delegate
+        // 3. Netmera SDK setup
         
-        MenloworksAppEvents.onAppLaunch()
+        AppConfigurator.startXtremePush(with: launchOptions)
         
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10, *) {
+            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+                XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+                Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
+                ///call processLocalMediaItems either here or in the AppDelegate
+                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
+                ///it depends on iOS version
+                
+                /// start photos logic after notification permission
+                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
+    //                MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
+                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+                    
+                }
+            }
             UNUserNotificationCenter.current().delegate = self
+            AnalyticsService.startNetmera()
+        } else {
+            XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+            AnalyticsService.startNetmera()
+            Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
         }
-        
-        return true
     }
     
     /// iOS 9+
@@ -354,23 +405,18 @@ extension AppDelegate {
     
     //MARK: Adjust
     
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            if let url = userActivity.webpageURL {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+            Adjust.appWillOpen(url)
                 
-                Adjust.appWillOpen(url)
-                
-                if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
-                    if let host = oldURL.host {
-                        debugLog("Adjust old host :\(oldURL.host)")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
-                            debugLog("Should open Action Screen")
-                            PushNotificationService.shared.openActionScreen()
-                        }
+            if let oldURL = Adjust.convertUniversalLink(url, scheme: "akillidepo") {
+                debugLog("Adjust old path :\(oldURL.path)")
+                if let host = oldURL.host {
+                    debugLog("Adjust old host :\(host)")
+                    if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
                     }
-                    debugLog("Adjust old path :\(oldURL.path)")
                 }
             }
         }
@@ -385,20 +431,30 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         debugLog("userNotificationCenter didReceive response")
-        guard let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] else {
-            debugLog("userNotificationCenter Netmera push object is empty")
-            return
-        }
-        
-        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
-            PushNotificationService.shared.openActionScreen()
+
+        if let options = Netmera.recentPushObject()?.customDictionary ?? response.notification.request.content.userInfo[PushNotificationParameter.netmeraParameters.rawValue] as? [AnyHashable: Any] {
+            debugLog("userNotificationCenter try to handle Netmera push object")
+            if PushNotificationService.shared.assignNotificationActionBy(launchOptions: options) {
+                PushNotificationService.shared.openActionScreen()
+                completionHandler()
+                return
+            }
         } else {
-            XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+            debugLog("userNotificationCenter Netmera push object is empty")
         }
+
+        XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+        if #available(iOS 12.0, *) {
+            XPush.userNotificationCenter(center, openSettingsFor: notification)
+        }
     }
 }

@@ -48,6 +48,8 @@ enum PushNotificationAction: String {
     case myStorage = "my_storage"
     case becomePremium = "become_premium"
     case tbmatic = "TBMatik"
+    case securityQuestion = "security_question"
+    case permissions = "permissions"
 }
 
 enum PushNotificationParameter: String {

@@ -20,7 +20,7 @@ appleId = '665036334' // Apple ID property in the App Information section in App
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: 'Xcode10.1.app',
+        xcodeApp: 'Xcode11.app',
         target: 'TC_Depo_LifeTech',
         workspaceFile: 'Depo/Depo',
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',

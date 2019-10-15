@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: UIViewController, ControlTabBarProtocol {
+final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -291,7 +291,7 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
         vc.image = image
         
         let nController = NavigationController(rootViewController: vc)
-        self.present(nController, animated: true, completion: nil) ///routerVC not work
+        present(nController, animated: true, completion: nil) ///routerVC not work
     }
     
     private func showErrorWith(message: String) {

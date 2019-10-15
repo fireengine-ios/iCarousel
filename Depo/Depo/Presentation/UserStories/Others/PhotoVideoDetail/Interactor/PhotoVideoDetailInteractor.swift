@@ -173,7 +173,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func trackVideoStart() {
-        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo)
+        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
         analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .everyMinuteVideo)
     }
     

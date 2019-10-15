@@ -99,7 +99,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
-        NotificationCenter.default.removeObserver(self)
     }
     
     func updateNavigationItemsState(state: Bool) {

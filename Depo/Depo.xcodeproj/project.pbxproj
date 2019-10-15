@@ -1728,12 +1728,10 @@
 		8C0E8C6D1FDEBDFF00789C91 /* PasscodeSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2331FB99AF800C3D67F /* PasscodeSettingsPresenter.swift */; };
 		8C0E8C6E1FDEBDFF00789C91 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D41F014F150028F51A /* Router.swift */; };
 		8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
-		8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7611FCD8A8000C23CBD /* CodeTextField.swift */; };
-		8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
 		8C0E8C7E1FDEBDFF00789C91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF041F7BD42100EF5FF1 /* SKProduct+Localized.swift */; };
 		8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */; };
@@ -1862,7 +1860,6 @@
 		8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4140561F0A5F6D001924E1 /* CaptchaViewController.swift */; };
 		8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
 		8C0E8D331FDEBDFF00789C91 /* PhotoVideoAlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */; };
-		8C0E8D341FDEBDFF00789C91 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
 		8C0E8D351FDEBDFF00789C91 /* BottomSelectionTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86D1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift */; };
 		8C0E8D371FDEBDFF00789C91 /* SharedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F33AE1F34881800EE37E7 /* SharedService.swift */; };
 		8C0E8D381FDEBDFF00789C91 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
@@ -2424,7 +2421,6 @@
 		8C0E900C1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE91EFD517300A405B2 /* TabBarView.xib */; };
 		8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44850A1F1351A4003AF631 /* SplashViewController.xib */; };
-		8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		8C0E90161FDEBDFF00789C91 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C0E90171FDEBDFF00789C91 /* SyncContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA21F0F81EA00B5B93D /* SyncContactsViewController.xib */; };
@@ -3384,8 +3380,6 @@
 		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
-		986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
-		986B2066207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
 		98792DCF22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
@@ -3640,6 +3634,12 @@
 		B557674C22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
 		B557674D22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
 		B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
+		B5601AD723506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
+		B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
+		B5601AD923506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
+		B5601ADB23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
+		B5601ADC23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
+		B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
@@ -4135,8 +4135,6 @@
 		CE4F6193206CE8C900B179DA /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6191206CE8C600B179DA /* ActivityIndicator.swift */; };
 		CE4F6195206D1E7B00B179DA /* AnimationFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6194206D1E7B00B179DA /* AnimationFlowManager.swift */; };
 		CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
-		CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
-		CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
 		CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */; };
 		CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
@@ -4159,7 +4157,6 @@
 		CE51ABFD1EF90853005DCEE0 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
 		CE51AC041EF90853005DCEE0 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
-		CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
 		CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
 		CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
 		CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
@@ -4258,7 +4255,6 @@
 		CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */; };
 		CE51AD3C1EF90853005DCEE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
 		CE51AD6A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */; };
-		CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		CE51AE6C1EF90853005DCEE0 /* AutoSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */; };
 		CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
@@ -4359,7 +4355,6 @@
 		CE78480222A685FB00662219 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D41F014F150028F51A /* Router.swift */; };
 		CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */; };
 		CE78480422A685FB00662219 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
-		CE78480522A685FB00662219 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
@@ -4373,7 +4368,6 @@
 		CE78481022A685FB00662219 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */; };
 		CE78481122A685FB00662219 /* TermsOfUseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB2D2122C811004F4A59 /* TermsOfUseInteractor.swift */; };
 		CE78481322A685FB00662219 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
-		CE78481422A685FB00662219 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
 		CE78481522A685FB00662219 /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		CE78481622A685FB00662219 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		CE78481722A685FB00662219 /* SKProduct+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF041F7BD42100EF5FF1 /* SKProduct+Localized.swift */; };
@@ -4597,7 +4591,6 @@
 		CE7848FF22A685FB00662219 /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
 		CE78490022A685FB00662219 /* PhotoVideoAlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */; };
 		CE78490122A685FB00662219 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
-		CE78490222A685FB00662219 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
 		CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86D1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift */; };
 		CE78490422A685FB00662219 /* FaceImageChangeCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */; };
 		CE78490522A685FB00662219 /* PremiumInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079911219F13A800AD5037 /* PremiumInteractorInput.swift */; };
@@ -5599,7 +5592,6 @@
 		CE784D1322A685FB00662219 /* bottomright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC472008AD6F003D8E05 /* bottomright@2x.png */; };
 		CE784D1422A685FB00662219 /* sample_vintage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD462008AD6F003D8E05 /* sample_vintage@3x.png */; };
 		CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
-		CE784D1622A685FB00662219 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CE784D1822A685FB00662219 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		CE784D1922A685FB00662219 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
@@ -6990,7 +6982,6 @@
 		7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceSubView.swift; sourceTree = "<group>"; };
 		7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		7C032B811EEFE465006532C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
 		7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailService.swift; sourceTree = "<group>"; };
@@ -7248,7 +7239,6 @@
 		8C00971D1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInteractorInput.swift; sourceTree = "<group>"; };
 		8C00971F1F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInteractorOutput.swift; sourceTree = "<group>"; };
 		8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsDimension.swift; sourceTree = "<group>"; };
-		8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationDataSource.swift; sourceTree = "<group>"; };
 		8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCellModel.swift; sourceTree = "<group>"; };
 		8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		8C049C601EED63BC0086DA84 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
@@ -8082,8 +8072,6 @@
 		8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBAlbumLikePreviewSliderViewController.xib; sourceTree = "<group>"; };
 		8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderDataStorage.swift; sourceTree = "<group>"; };
 		8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPhoneMailCell.swift; sourceTree = "<group>"; };
-		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
-		8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSMUInputCell.xib; sourceTree = "<group>"; };
 		8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMCodeModel.swift; sourceTree = "<group>"; };
 		8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountiesGSMCodeCompositor.swift; sourceTree = "<group>"; };
 		8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartTimerLabel.swift; sourceTree = "<group>"; };
@@ -8209,7 +8197,6 @@
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
-		986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterDataSource.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsViewController.swift; sourceTree = "<group>"; };
 		98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportedPlaylistsViewController.xib; sourceTree = "<group>"; };
@@ -8371,6 +8358,8 @@
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
 		B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectGestureRecognizer.swift; sourceTree = "<group>"; };
+		B5601AD623506348002E1D1E /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
+		B5601ADA23506388002E1D1E /* InitializingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializingViewController.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
@@ -12202,7 +12191,6 @@
 				8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */,
 				8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */,
 				8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */,
-				7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */,
 				92284599227B3E9600909FFC /* LoginViewController.swift */,
 				4BEC1141233E1BBD0020A578 /* SupportFormSubjectType.swift */,
 			);
@@ -13378,20 +13366,10 @@
 			path = BaseInputCell;
 			sourceTree = "<group>";
 		};
-		8CFA18351EEFBC2B00AF236E /* GSMInputCell */ = {
-			isa = PBXGroup;
-			children = (
-				8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */,
-				8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */,
-			);
-			path = GSMInputCell;
-			sourceTree = "<group>";
-		};
 		8CFA18361EEFBC5500AF236E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				8C0572D71EF154D0005C69DA /* Password */,
-				8CFA18351EEFBC2B00AF236E /* GSMInputCell */,
 				8CFA18341EEFBC0200AF236E /* BaseInputCell */,
 				8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */,
 			);
@@ -14397,6 +14375,15 @@
 			path = QuickSelect;
 			sourceTree = "<group>";
 		};
+		B5601AD523506300002E1D1E /* Initializing */ = {
+			isa = PBXGroup;
+			children = (
+				B5601AD623506348002E1D1E /* InitializingViewController.xib */,
+				B5601ADA23506388002E1D1E /* InitializingViewController.swift */,
+			);
+			path = Initializing;
+			sourceTree = "<group>";
+		};
 		B56FBB102122C191004F4A59 /* TermsOfUse */ = {
 			isa = PBXGroup;
 			children = (
@@ -14751,7 +14738,6 @@
 			children = (
 				CE1353382004F1530004CBBE /* TextEnterController.xib */,
 				CE1353342004F0F90004CBBE /* TextEnterController.swift */,
-				986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */,
 			);
 			path = TextEnter;
 			sourceTree = "<group>";
@@ -15269,6 +15255,7 @@
 		CE3EB30C1FC7F4D2000B70D6 /* Start */ = {
 			isa = PBXGroup;
 			children = (
+				B5601AD523506300002E1D1E /* Initializing */,
 				294AAF57B2D1D7B0D771EB44 /* Splash */,
 				E106596B4B7DAC3DE7CFA644 /* Introduce */,
 				8C049C6D1EEE8E7F0086DA84 /* Login */,
@@ -16659,7 +16646,6 @@
 				A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */,
 				2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */,
 				8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */,
-				8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -17524,7 +17510,6 @@
 				8C06B0B12008AD71003D8E05 /* rotate.png in Resources */,
 				8C06B1092008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
 				8C86111122BCF28600108958 /* TermsAndPolicyViewController.xib in Resources */,
-				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
 				4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06AF1F2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
@@ -17935,6 +17920,7 @@
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				89E51D4622CA110B007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
 				8C06B1812008AD72003D8E05 /* turuncu@2x.png in Resources */,
+				B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */,
 				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
 				8C06AF912008AD71003D8E05 /* filtre.png in Resources */,
 				8C06AF5F2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
@@ -18317,7 +18303,6 @@
 				8C06AEE42008AD70003D8E05 /* bottomright@2x.png in Resources */,
 				8C06B0E22008AD71003D8E05 /* sample_vintage@3x.png in Resources */,
 				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
-				CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */,
 				CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */,
 				CEAE3FB91EFD4F0D00A405B2 /* HomePage.xib in Resources */,
 				989BDE4922F47B1E001DDEB2 /* SpotifyAuthViewController.xib in Resources */,
@@ -18522,6 +18507,7 @@
 				7CF6BDE21F0B97050066709E /* CollectionViewCellForAudio.xib in Resources */,
 				8C06B1962008AD72003D8E05 /* vintage.png in Resources */,
 				17589F782276336800A5DB37 /* SupportFormController.xib in Resources */,
+				B5601AD723506349002E1D1E /* InitializingViewController.xib in Resources */,
 				B5AB5B6C21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				8C06B0C02008AD71003D8E05 /* sag_ok.png in Resources */,
 				8C06B1682008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
@@ -18971,7 +18957,6 @@
 				CE784D1322A685FB00662219 /* bottomright@2x.png in Resources */,
 				CE784D1422A685FB00662219 /* sample_vintage@3x.png in Resources */,
 				CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */,
-				CE784D1622A685FB00662219 /* GSMUInputCell.xib in Resources */,
 				CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */,
 				CE784D1822A685FB00662219 /* HomePage.xib in Resources */,
 				CE784D1922A685FB00662219 /* AutoSyncSettingsTableViewCell.xib in Resources */,
@@ -19418,6 +19403,7 @@
 				CE784EB922A685FB00662219 /* alt_cizgili@2x.png in Resources */,
 				CE784EBA22A685FB00662219 /* ActionsMenuView.xib in Resources */,
 				CE784EBB22A685FB00662219 /* kirmizi.png in Resources */,
+				B5601AD923506349002E1D1E /* InitializingViewController.xib in Resources */,
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
@@ -20330,7 +20316,6 @@
 				8C20867C228D5012000BEDAD /* CacheManager.swift in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
 				8C23F2952286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
-				8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */,
 				8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */,
 				8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */,
 				B56FBB2F2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
@@ -20344,7 +20329,6 @@
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				4B34A3FA2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
-				8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */,
 				7C4F60B1201C674A0033C58F /* MovieCard.swift in Sources */,
 				8C0E8C7E1FDEBDFF00789C91 /* Constants.swift in Sources */,
 				CE3E4D14201C7B6600173045 /* ImageManager.swift in Sources */,
@@ -20581,7 +20565,6 @@
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
 				8C0E8D331FDEBDFF00789C91 /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
-				8C0E8D341FDEBDFF00789C91 /* RegistrationDataSource.swift in Sources */,
 				8C0E8D351FDEBDFF00789C91 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				8C0E8D371FDEBDFF00789C91 /* SharedService.swift in Sources */,
 				8C0E8D381FDEBDFF00789C91 /* CellsConstant.swift in Sources */,
@@ -20904,6 +20887,7 @@
 				8C0E8E1A1FDEBDFF00789C91 /* ForgotPasswordViewInput.swift in Sources */,
 				486F7B54208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				8C65D18722C63B6F00CB1DBD /* String + Extension.swift in Sources */,
+				B5601ADC23506388002E1D1E /* InitializingViewController.swift in Sources */,
 				8C0E8E1B1FDEBDFF00789C91 /* ActivityTimelineTableBackView.swift in Sources */,
 				8C0B91AF20170ECC00A5BA81 /* ManageContactsModels.swift in Sources */,
 				98C298452302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
@@ -21177,7 +21161,6 @@
 				FA475ACD203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
 				8C0E8F061FDEBDFF00789C91 /* SyncContactsViewOutput.swift in Sources */,
 				4AD1A81F208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
-				986B2066207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
 				9219B19B21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */,
@@ -22023,7 +22006,6 @@
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
 				B5C7C582211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
-				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
 				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
 				CEAE3FB41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift in Sources */,
 				CE2F561B1F7552A900F49DA1 /* PackagesPresenter.swift in Sources */,
@@ -22037,7 +22019,6 @@
 				B56FBB2E2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */,
-				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
 				CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */,
 				CE37FF051F7BD42100EF5FF1 /* SKProduct+Localized.swift in Sources */,
@@ -22280,7 +22261,6 @@
 				CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */,
 				EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
 				CEFFA8F021AFC21400B34F36 /* SegmentedController.swift in Sources */,
-				CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */,
 				8C6EF87E1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */,
 				A2079912219F13A800AD5037 /* PremiumInteractorInput.swift in Sources */,
@@ -22378,7 +22358,6 @@
 				B53DCE8220EF634900400DBA /* Contact.m in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
-				986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
 				CE83A3E3206A8D6F00AC247E /* InfinityRotater.swift in Sources */,
 				8C0097141F6BDA6900FA069C /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				CEAE3FB81EFD4F0D00A405B2 /* HomePageRouterInput.swift in Sources */,
@@ -23131,6 +23110,7 @@
 				CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				54702BD5C12348C54DF56381 /* SelectNameRouterInput.swift in Sources */,
 				CE2F561D1F7552A900F49DA1 /* PackagesRouterInput.swift in Sources */,
+				B5601ADB23506388002E1D1E /* InitializingViewController.swift in Sources */,
 				B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */,
 				89E51D4C22CA1116007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				C8DE09849CB5200793B94E8A /* SelectNameConfigurator.swift in Sources */,
@@ -23384,7 +23364,6 @@
 				CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */,
 				8C1E5BE622CB8C33008FDA02 /* ScrollBarView.swift in Sources */,
 				CE78480422A685FB00662219 /* ValidationResults.swift in Sources */,
-				CE78480522A685FB00662219 /* GSMUserInputCell.swift in Sources */,
 				CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */,
 				CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */,
 				CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */,
@@ -23398,7 +23377,6 @@
 				CE78481022A685FB00662219 /* ProfilePhoneEnterView.swift in Sources */,
 				CE78481122A685FB00662219 /* TermsOfUseInteractor.swift in Sources */,
 				CE78481322A685FB00662219 /* ProfileFieldView.swift in Sources */,
-				CE78481422A685FB00662219 /* LoginDataSource.swift in Sources */,
 				CE78481522A685FB00662219 /* WaitingForWiFiPopUp.swift in Sources */,
 				CE78481622A685FB00662219 /* Constants.swift in Sources */,
 				CE78481722A685FB00662219 /* SKProduct+Localized.swift in Sources */,
@@ -23658,7 +23636,6 @@
 				CE78490022A685FB00662219 /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
 				8E26D97E2306999500D08123 /* MusicViewController.swift in Sources */,
 				CE78490122A685FB00662219 /* SegmentedController.swift in Sources */,
-				CE78490222A685FB00662219 /* RegistrationDataSource.swift in Sources */,
 				981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				CE78490422A685FB00662219 /* FaceImageChangeCoverViewController.swift in Sources */,
@@ -24558,6 +24535,7 @@
 				98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
 				CE784C4722A685FB00662219 /* ViewController.swift in Sources */,
 				CE784C4822A685FB00662219 /* AlbumDetailPresenter.swift in Sources */,
+				B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */,
 				CE784C4922A685FB00662219 /* OfferServiceResponse.swift in Sources */,
 				CE784C4A22A685FB00662219 /* UIButton+Color.swift in Sources */,
 				CE784C4B22A685FB00662219 /* GradientOrangeView.swift in Sources */,
@@ -27158,7 +27136,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 31.5;
+				CURRENT_PROJECT_VERSION = 31.13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -27221,7 +27199,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 31.5;
+				CURRENT_PROJECT_VERSION = 31.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27280,7 +27258,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 31.5;
+				CURRENT_PROJECT_VERSION = 31.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27340,7 +27318,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 31.5;
+				CURRENT_PROJECT_VERSION = 31.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

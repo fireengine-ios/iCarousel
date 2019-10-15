@@ -16,4 +16,7 @@ protocol MyStorageInteractorOutput: class {
     func failed(with error: String)
     
     func refreshPackages()
+    
+    func stopActivity()
+    func startActivity()
 }

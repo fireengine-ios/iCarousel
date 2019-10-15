@@ -18,7 +18,7 @@ protocol SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
 
-final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
+final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit, ControlTabBarProtocol {
     
     private let accountService = AccountService()
     private lazy var answer = SecretQuestionWithAnswer()
@@ -88,9 +88,12 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         addTapGestureToHideKeyboard()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         checkButtonStatus()
+        navigationBarWithGradientStyle()
+        hideTabBar()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -125,7 +128,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         }
     }
     
-    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate) {
+    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate?) {
         self.delegate = delegate
         answer.questionId = selectedQuestion?.id
         setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
