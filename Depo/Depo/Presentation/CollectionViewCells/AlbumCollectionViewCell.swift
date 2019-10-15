@@ -94,6 +94,7 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         }
         
         let border = CAGradientLayer()
+        border.name = kLayerNameGradientBorder
         border.frame = greedImageBorderView.bounds
         let colors = [ColorConstants.lightTeal, ColorConstants.apricotTwo, ColorConstants.rosePink]
         border.colors = colors.map { return $0.cgColor }
