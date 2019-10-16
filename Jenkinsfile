@@ -247,17 +247,17 @@ pipeline {
 				}
 			}
         }
-        stage('Approve Deploy to Testflight') {
+        stage('Approve Build for Appstore') {
             options { timeout(time: 24, unit: 'HOURS') }
             when { expression { ictsContainerId } }
             steps {
                 script {
                     try {
-                        def deployParameter = booleanParam(name: 'Deploy to Testflight', defaultValue: false)
-                        def isDeploy = input ok:'Yes', message:'Build for Appstore?', parameters: [ deployParameter ] //, submitter: "${testFlightDeployers}"
-                        env.DEPLOY_TO = isDeploy ? 'Testflight': ''
+                        if (!isDev) {
+                            input ok:'Yes', message:'Build for Appstore?' //, submitter: "${ictsDeployers}"
+                        }
                         env.BUILD_TARGET = 'Appstore'
-                        echo "Deploy to Testflight is approved. Starting the deployment..."
+                        echo "Build for Appstore is approved. Starting build..."
 
                     } catch(err) {
                         echo err.toString()
@@ -276,15 +276,57 @@ pipeline {
             }
             environment {
                 IOS_PASS = credentials('iosLoginPass')
+           }
+            steps {
+                script {
+                    xcodeBuild('prod')
+                    publishToArtifactory('prod')
+                }
+            }
+			post {
+				always {
+					script {
+						email.notifyStage(successRecipientList: devTeamEmails, failureRecipientList: devTeamEmails)
+					}
+				}
+			}
+        }
+        stage('Approve Deploy to Testflight') {
+            options { timeout(time: 24, unit: 'HOURS') }
+            when {
+                beforeAgent true
+                environment name: 'BUILD_TARGET', value: 'Appstore'
+            }
+            steps {
+                script {
+                    try {
+                        def isDeploy = input ok:'Yes', message:'Deploy to Testflight?' //, submitter: "${testFlightDeployers}"
+                        env.DEPLOY_TO = 'Testflight'
+                        echo "Deploy to Testflight is approved. Starting the deployment..."
+
+                    } catch(err) {
+                        echo err.toString()
+                    }
+                }
+            }
+        }
+        stage('Deploy to Testflight') {
+            when {
+                beforeAgent true
+                environment name: 'DEPLOY_TO', value: 'Testflight'
+            }
+            agent { label agentName }
+            options {
+                skipDefaultCheckout true
+            }
+            environment {
+                IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
                 TESTFLIGHT_UPLOAD = credentials('testflight')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
             steps {
                 script {
-                    xcodeBuild('prod')
-                    publishToArtifactory('prod')
-                    if (env.DEPLOY_TO == 'Testflight') {
                         stage('Deploying to Testflight') {
                             sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                             def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
@@ -294,7 +336,6 @@ pipeline {
                                 ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
                             """
                         }
-                    }
                 }
             }
 			post {
