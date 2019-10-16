@@ -32,6 +32,16 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         return frame.size.height > NumericConstants.albumCellListHeight
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        greedViewIcon.checkIsNeedCancelRequest()
+        listViewIcon.checkIsNeedCancelRequest()
+
+        greedViewIcon.image = nil
+        listViewIcon.image = nil
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
