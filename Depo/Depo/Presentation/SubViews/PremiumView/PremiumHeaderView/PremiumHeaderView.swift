@@ -96,5 +96,5 @@ final class PremiumHeaderView: UIView {
     @IBAction private func onBecomePrepiumTap(_ sender: Any) {
         delegate?.onBecomePremiumTap()
     }
-    
+        
 }

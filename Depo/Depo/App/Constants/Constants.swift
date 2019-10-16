@@ -1468,4 +1468,12 @@ struct TextConstants {
     static let tbMaticPhotosNoPhotoBoldText = NSLocalizedString("tbmatic_photos_no_photo_bold_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMaticPhotosSeeTimeline = NSLocalizedString("tbmatic_photos_see_timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMaticPhotosShare = NSLocalizedString("tbmatic_photos_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let tbMatiHomeCardTitle = NSLocalizedString("tbmatic_home_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardSubtitle = NSLocalizedString("tbmatic_home_card_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardButtonTitle = NSLocalizedString("tbmatic_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardYearAgo = NSLocalizedString("tbmatic_home_card_year_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardYearsAgo = NSLocalizedString("tbmatic_home_card_years_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tbMatiHomeCardThisYear = NSLocalizedString("tbmatic_home_card_this_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
 }

@@ -374,16 +374,6 @@
 "You have to fill in a password" = "You have to fill in your password";
 "You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
 "Password" = "Password";
-"security_question" = "Security Question";
-"edit_security_question" = "Edit Security Question";
-"sequrity_question_id_is_invalid" = "sequrity_question_id_is_invalid";
-"sequrity_question_answer_is_invalid" = "sequrity_question_answer_is_invalid";
-"no_security_question" = "You don't have secret question";
-"select_question" = "Please Select";
-"secret_answer" = "Your answer";
-"enter_secret_answer" = "Enter your answer";
-"security_question_text_field_placeholder" = "Please set security question";
-"set_sequrity_question_button" = "Set Security Question";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
 "I can't login" = "I forgot my password";
@@ -678,7 +668,6 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Login denied. Please check your credentials.";
 "Please enter the text below" = "Please enter the text below";
-"too_many_invalid_attempt" = "Too many requests are made, please try again later";
 "facebook_photo_tags" = "Facebook Photo Tags";
 "facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";
@@ -711,7 +700,6 @@
 "Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
-"Feature" = "Feature";
 
 /*PremiumBanner*/
 "standard_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
@@ -891,8 +879,6 @@
 "account_detail_middle_description" = "You will not be able to benefit from Standard+ privileges if you cancel your membership";
 "account_detail_standart_title" = "You are using lifebox as a Standard user";
 "account_detail_standart_description" = "You can use standard features with your membership";
-"there_are_no_photos_favorites" = "You don't have any photos or videos on your Favorites list";
-"there_are_no_photos_all" = "You don't have any photos or videos";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Become Premium";
@@ -913,7 +899,6 @@
 "NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
 "NSPhotoLibraryAddUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
 "NSPhotoLibraryUsageDescription" = "To show your photos&videos in the application and to back up them, lifebox needs your photo library access.";
-"NSLocationWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
 
 /*Usage Info*/
 "package_space_details" = "%1$@ / %2$@ internet used (only for lifebox usage)";
@@ -982,35 +967,12 @@
 "support_form_subject_5" = "Lifebox / Turkcell Password problem";
 "support_form_subject_6" = "Lifebox / Automatic Log-in problem";
 "support_form_subject_7" = "Lifebox / I can't download lifebox app";
-"support_form_signup_subject_1" = "Lifebox- I cannot register with my e-mail";
-"support_form_signup_subject_2" = "Lifebox- I cannot register with my phone number";
-"support_form_signup_subject_3" = "Lifebox- Password is not accepted";
-"support_form_signup_subject_1" = "Lifebox / I cannot register with my e-mail";
-"support_form_signup_subject_2" = "Lifebox / I cannot register with m phone number";
-"support_form_signup_subject_3" = "Lifebox / Password is not accepted";
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
-"support_form_subject_1_detailed_info_label" = "";
-"support_form_subject_1_detailed_info_fulltext" = "";
-"support_form_subject_2_detailed_info_label" = "";
-"support_form_subject_2_detailed_info_fulltext" = "";
-"support_form_subject_3_detailed_info_label" = "";
-"support_form_subject_3_detailed_info_fulltext" = "";
-"support_form_subject_4_detailed_info_label" = "";
-"support_form_subject_4_detailed_info_fulltext" = "";
-"support_form_subject_5_detailed_info_label" = "";
-"support_form_subject_5_detailed_info_fulltext" = "";
-"support_form_subject_6_detailed_info_label" = "";
-"support_form_subject_6_detailed_info_fulltext" = "";
-"support_form_subject_7_detailed_info_label" = "";
-"support_form_subject_7_detailed_info_fulltext" = "";
-
-
-"login_faq" = "FAQ";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";
@@ -1018,7 +980,6 @@
 "enter_your_password" = "Enter your password";
 "re_enter_your_password" = "Re-enter your password";
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
-"signup_faq_info" = "Please select a topic if you need help.";
 "missing_information" = "Missing Information";
 "please_enter_your_missing_account_information" = "Please enter your missing account information:";
 "login_email_or_phone_placeholder" = "Enter your e-mail or phone number";
@@ -1034,7 +995,6 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
-"login_faq_info" = "Please select a topic if you need help.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
@@ -1157,8 +1117,6 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
-"cred_update_title" = "Are you still using the same e-mail and phone number?";
-"cred_completion_message" = "Thank you for being always up-to-date!";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
@@ -1171,28 +1129,111 @@
 "extra_auth_account_phone_cell" = "To my phone number: ";
 "extra_auth_account_email_cell" = "To my e-mail: ";
 "NSLocationWhenInUseUsageDescription" = "Your location will be used for background syncing and for organizing & searching your photos.";
-
-"storage" = "Storage";
-"payment_title_app_store" = "App Store";
-"payment_title_credit_card" = "Credit card";
-"payment_title_invoice" = "Invoice";
 "two_fa_email_new_otp_description" = "We have sent a code to your e-mail: %@";
 "two_fa_email_existing_otp_description" = "We have already sent the code to your email: %@ Please enter existing code.";
 "two_fa_phone_new_otp_description" = "We have sent a code to your phone number: %@";
 "two_fa_phone_existing_otp_description" = "We have already sent the code to your phone number: %@ Please enter existing code.";
-"Feature" = "Feature";
+"Feature" = "Feature Package";
 "there_are_no_photos_favorites" = "You don't have any photos or videos on your Favorites list";
 "there_are_no_photos_all" = "You don't have any photos or videos";
 "storage" = "Storage";
 "payment_title_app_store" = "App Store";
 "payment_title_credit_card" = "Credit card";
-"payment_title_invoice" = "Invoice";
+"payment_title_invoice" = "Charge to Bill";
 "account_status_title" = "Your account is active now!";
 "account_status_message" = "Your account is activated because of your login. If you want to delete your account permanently, you should not be logged in for 1 month after deleting";
+"security_question" = "Security Question";
+"edit_security_question" = "Edit Security Question";
+"sequrity_question_id_is_invalid" = "Temporary error occured, please try again later";
+"sequrity_question_answer_is_invalid" = "Please enter at least 3 characters";
+"no_security_question" = "There is no security question";
+"select_question" = "Please Select";
+"secret_answer" = "Your answer";
+"enter_secret_answer" = "Enter your answer";
+"security_question_text_field_placeholder" = "Please set security question";
+"set_sequrity_question_button" = "Set Security Question";
+"support_form_signup_subject_1" = "Lifebox- I cannot register with my e-mail";
+"support_form_signup_subject_2" = "Lifebox- I cannot register with m phone number";
+"support_form_signup_subject_3" = "Lifebox- Password is not accepted";
+"cred_update_title" = "Are you still using the same e-mail and phone number?";
+"cred_completion_message" = "Thank you for being always up to date!";
 
-//TBMatic
-"tbmatic_photos_title" = "Your TBT photos! %@";
-"tbmatic_photos_no_photo_text" = "We couldn't find any matching photos this time :(";
-"tbmatic_photos_no_photo_bold_text" = "We couldn't find";
+/*TBMatic*/
+"tbmatic_photos_title" = "Your Memories!\n%@";
+"tbmatic_photos_no_photo_text" = "Your photo was deleted:(";
+"tbmatic_photos_no_photo_bold_text" = "deleted:(";
 "tbmatic_photos_see_timeline" = "See Timeline";
 "tbmatic_photos_share" = "Share";
+
+"digicel_quota_cancel_AI" = "digicel_quota_cancel_AI";
+"digicel_quota_cancel_AG" = "digicel_quota_cancel_AG";
+"digicel_quota_cancel_AW" = "digicel_quota_cancel_AW";
+"digicel_quota_cancel_BB" = "digicel_quota_cancel_BB";
+"digicel_quota_cancel_BM" = "digicel_quota_cancel_BM";
+"digicel_quota_cancel_BQ" = "digicel_quota_cancel_BQ";
+"digicel_quota_cancel_VG" = "digicel_quota_cancel_VG";
+"digicel_quota_cancel_KY" = "digicel_quota_cancel_KY";
+"digicel_quota_cancel_CW" = "digicel_quota_cancel_CW";
+"digicel_quota_cancel_DM" = "digicel_quota_cancel_DM";
+"digicel_quota_cancel_SV" = "digicel_quota_cancel_SV";
+"digicel_quota_cancel_GD" = "digicel_quota_cancel_GD";
+"digicel_quota_cancel_GY" = "digicel_quota_cancel_GY";
+"digicel_quota_cancel_HT" = "digicel_quota_cancel_HT";
+"digicel_quota_cancel_MS" = "digicel_quota_cancel_MS";
+"digicel_quota_cancel_KN" = "digicel_quota_cancel_KN";
+"digicel_quota_cancel_LC" = "digicel_quota_cancel_LC";
+"digicel_quota_cancel_VC" = "digicel_quota_cancel_VC";
+"digicel_quota_cancel_SR" = "digicel_quota_cancel_SR";
+"digicel_quota_cancel_TT" = "digicel_quota_cancel_TT";
+"digicel_quota_cancel_TC" = "digicel_quota_cancel_TC";
+"digicel_feature_cancel_AI" = "digicel_feature_cancel_AI";
+"digicel_feature_cancel_AG" = "digicel_feature_cancel_AG";
+"digicel_feature_cancel_AW" = "digicel_feature_cancel_AW";
+"digicel_feature_cancel_BB" = "digicel_feature_cancel_BB";
+"digicel_feature_cancel_BM" = "digicel_feature_cancel_BM";
+"digicel_feature_cancel_BQ" = "digicel_feature_cancel_BQ";
+"digicel_feature_cancel_VG" = "digicel_feature_cancel_VG";
+"digicel_feature_cancel_KY" = "digicel_feature_cancel_KY";
+"digicel_feature_cancel_CW" = "digicel_feature_cancel_CW";
+"digicel_feature_cancel_DM" = "digicel_feature_cancel_DM";
+"digicel_feature_cancel_SV" = "digicel_feature_cancel_SV";
+"digicel_feature_cancel_GD" = "digicel_feature_cancel_GD";
+"digicel_feature_cancel_GY" = "digicel_feature_cancel_GY";
+"digicel_feature_cancel_HT" = "digicel_feature_cancel_HT";
+"digicel_feature_cancel_MS" = "digicel_feature_cancel_MS";
+"digicel_feature_cancel_KN" = "digicel_feature_cancel_KN";
+"digicel_feature_cancel_LC" = "digicel_feature_cancel_LC";
+"digicel_feature_cancel_VC" = "digicel_feature_cancel_VC";
+"digicel_feature_cancel_SR" = "digicel_feature_cancel_SR";
+"digicel_feature_cancel_TT" = "digicel_feature_cancel_TT";
+"digicel_feature_cancel_TC" = "digicel_feature_cancel_TC";
+"support_form_subject_1_detailed_info_label" = "I can not login with my e-mail.";
+"support_form_subject_1_detailed_info_fulltext" = "<p><strong>If you are a Turkcell subscriber:</strong></p>\n<p>- If you cannot sign in by E-mail, you can access your account by entering the password you used when registering with your phone number.\n    <br />- If you don't remember your password, you can sign in by receiving a Turkcell password.\n    <br />- If you forget your Turkcell password, type SIFRE and send it to 2200 if you are a Turkcell customer, so you can get your password.\n    <br />- If you think you have entered your password and e-mail correctly, and still you can not sign in; - you can renew your password and try to sign in again through the process I forgot my password step.\n    <br />- If you receive an incorrect e-mail / phone number or password alert, you can check your account and e-mail and phone number data from your profile by using the Turkcell password that you will receive along with the e-mail or Phone Number data that you can verify. You can change your e-mail, you can't change your phone number. Each phone number remains connected to only one account.</p>\n<p><strong> if you are not a Turkcell subscriber:</strong></p>\n<p>- You cannot log in with Turkcell password.\n    <br /> - You can change your phone number from the profile page after signing in.</p>\n<p><strong> If you have not reached a solution: </strong> </p>\n<p>- If a phone number is not connected to the account and you have not accessed the account for a long time (at least 3 months), your account may be suspended.\n    <br/>- In transfer cases, the phone number is removed from the connected account and the new phone number is expected to be defined with the first entry.";
+"support_form_subject_2_detailed_info_label" = "I can't login with my phone number.";
+"support_form_subject_2_detailed_info_fulltext" = "<p><strong>If you are a Turkcell subscriber:</strong></p>\n<p>- If you cannot sign in by E-mail, you can access your account by entering the password you used when registering with your phone number.\n    <br /> - If you don't remember your password, you can sign in by receiving a Turkcell password.\n    <br /> - If you forget your Turkcell password, type SIFRE and send it to 2200 if you are a Turkcell customer, so you can get your password.<br/> - If you think you have entered your password and e-mail correctly, and still you cannot sign in; - you can renew your password and try to sign in again through the process I forgot my password step.\n    <br /> - If you receive an incorrect e-mail / phone number or password alert, you can check your account and e-mail and phone number data from your profile by using the Turkcell password that you will receive along with the e-mail or Phone Number data that you can verify. You can change your e-mail, you can't change your phone number. Each phone number remains connected to only one account.</p>\n<p><strong>if you are not a Turkcell subscriber:</strong>\n    </p>\n        <p> - You cannot log in with Turkcell password.\n            <br/> - You can change your phone number from the profile page after signing in.</p>\n<p><strong> If you have not reached a solution: </strong> </p> <p> - If a phone number is not connected to the account and you have not accessed the account for a long time (at least 3 months), your account may be suspended.<br/> - In transfer cases, the phone number is removed from the connected account and the new phone number is expected to be defined with the first entry.";
+"support_form_subject_3_detailed_info_label" = "I can't login with my password.";
+"support_form_subject_3_detailed_info_fulltext" = "<p><strong>If you are a Turkcell subscriber:</strong></p>\n<p> - If you think your phone number and e-mail are correct and you can't access with your password.\n    <br/> - Type SIFRE and send it to 2200, so you can get your Turkcell password.\n    <br/> - You can change your password from the I forgot my password option.</p>\n    <p><strong>If you are not a Turkcell subscriber:</strong></p>\n    <p>- You cannot sign in with Turkcell password.\n        <br/> - You can try signing in again by changing the password via I forgot my password option.</p>\n    <p><strong> If you have not reached a solution: </strong> </p> <p> - If a phone number is not connected to the account and you have not accessed the app for a long time (at least 3 months), your account may be suspended.<br/> - In transfer cases, the phone number is removed from the connected account and the new phone number is expected to be identified with the first entry.";
+"support_form_subject_4_detailed_info_label" = "The Security text doesn't match.";
+"support_form_subject_4_detailed_info_fulltext" = "<p>- The security text was created to prevent machine attacks to your account.\n    <br/> - You can sign in either via entering text from renew the text option, or via listening text from voice text option.</p>\n<p><strong> If you have not reached a solution: </strong></p>\n<p> - If a phone number is not connected to the account and you have not accessed the app for a long time (at least 3 months), your account may be suspended.\n    <br/> - In transfer cases, the phone number is removed from the connected account and the new phone number is expected to be identified with the first entry.";
+"support_form_subject_5_detailed_info_label" = "I can't login with my Turkcell password.";
+"support_form_subject_5_detailed_info_fulltext" = "<p><strong>If you are a Turkcell subscriber:</strong></p>\n<p> -Your Turkcell password is provided for your use in case you forget the password you created during registration.\n    <br /> - You can sign in with the password you created during registration.\n    <br />- You can sign in by renewing the password and filling in the phone number / e-mail data via the I forgot my password step.</p>\n<p><strong> If you have not reached a solution: </strong> </p><p> - If a phone number is not connected to the account and you have not accessed the app for a long time (at least 3 months), your account may be suspended.<br /> - In transfer cases, the phone number is removed from the connected account and the new phone number is automatically identified with the first entry.";
+"support_form_subject_6_detailed_info_label" = "I'm having an auto-login problem.";
+"support_form_subject_6_detailed_info_fulltext" = "<p><strong>If you can't sign in to your account with remember me:</strong></p>\n<p>- You can access after you change your password via I forgot my password option.\n    <br /> - When you sublet your line, the phone number will be disconnected from the connected account and the remember me access will be closed.\n    <br/> - We recommend that you check your connection settings.</p>\n<p><strong>If you have not reached a solution: </strong></p>\n<p>- If a phone number is not connected to the account and you have not accessed for a long time(at least 3 months), the account may be suspended.";
+"support_form_subject_7_detailed_info_label" = "I can't download the Lifebox app.";
+"support_form_subject_7_detailed_info_fulltext" = "<p>- Please make sure that your phone is a model that supports the lifebox application.<br /> - The Android app 4.4 and above is supported on Android phones/tablets.<br/> - The iOS app 9 and above is supported on iPhone/iPad devices with iOS. <br /> - We don't have support for Windows phone-based phones.<br /> - The Web application is supported on all other top browsers (Chrome, Safari, Mozilla, etc.) except Internet Explorer and on all operating systems (macOS, Windows, Linux independent).</p><p><strong>If you have not reached a solution: </strong> </p><p>- If a phone number is not connected to the account and you have not accessed the app for a long time(at least 3 months), the account may be suspended.";
+"login_faq" = "FAQ";
+"signup_faq_info" = "Please select a topic if you need help.";
+"login_faq_info" = "Please select a topic if you need help.";
+"too_many_invalid_attempt" = "Too many requests are made, please try again later";
+"signup_support_form_subject_1_detailed_info_label" = "I can't create an account with my e-mail";
+"signup_support_form_subject_1_detailed_info_fulltext" = "<p><strong>i.</strong> If you receive an e-mail error, please make sure that you type your e-mail in the correct format. Your e-mail should have an @ sign, should not have punctuation marks, should not have special characters in Turkish.</p>\n<p><strong>ii.</strong> All subsequent transactions shall require your e-mail address you used for creating your account. Therefore, you should type a valid e-mail.</p>\n<p><strong>iii.</strong> You can try creating an account with another e-mail address.</p>\n<p><strong>iv.</strong> You can contact us on our support screens after you've received three errors so we can help you.</p>";
+"signup_support_form_subject_2_detailed_info_label" = "I can't create an account with my phone number";
+"signup_support_form_subject_2_detailed_info_fulltext" = "<p><strong>i.</strong> If you receive a phone number error, you should make sure that you type your phone number in the correct format. You should pay attention to your country-region coding.</p>\n<p><strong>ii.</strong> The confirmation code will be sent to your phone for registration. Therefore, you should type a valid phone number.</p>\n<p><strong>iii.</strong> You can try creating an account with a phone number belonging to you.</p>\n<p><strong>iv.</strong> You can contact us on our support screens after you've received three errors so we can help you.</p>";
+"signup_support_form_subject_3_detailed_info_label" = "The app won't accept the password I set.";
+"signup_support_form_subject_3_detailed_info_fulltext" = "<p><strong>i.</strong> Your password must consist of non-consecutive letters and numbers.</p><p><strong>ii.</strong>Your password must consist of a minimum of 6 and a maximum of 16 characters.</p>";
+"tbmatic_home_card_title" = "Your today’s TB";
+"tbmatic_home_card_subtitle" = "Lorem ipsum dolor sit amet.Lorem ipsum dolor!";
+"tbmatic_home_card_button_title" = "Let's see";
+"tbmatic_home_card_year_ago" = "%d year ago";
+"tbmatic_home_card_years_ago" = "%d years ago";
+"tbmatic_home_card_this_year" = "In this year";
