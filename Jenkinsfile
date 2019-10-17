@@ -145,7 +145,7 @@ def publishToArtifactory = { app, classifier ->
             },
             {
             "pattern": "${outputsDir}/dsym.zip",
-            "target": "${artifactPath}/${app.version}/${app.name}-${version}-${classifier}-dsym.zip"
+            "target": "${artifactPath}/${app.version}/${app.name}-${app.version}-${classifier}-dsym.zip"
             }
         ]}"""
     def buildInfo = artifactory.upload(uploadSpec)
