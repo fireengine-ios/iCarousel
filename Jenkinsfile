@@ -159,11 +159,11 @@ def deployToIctStore = { app ->
     def artifactPath = "turkcell-development/${groupPath}/${app.name}"
     def ipaFile = "ictstore.ipa"
     def manifestFile = "manifest.plist"
-    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${app.name}-${version}-test.ipa"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${app.name}-${app.version}-test.ipa"
     def ictsBundleIdentifier = flavors['test'].bundleIdentifier
     sh "curl -v ${ipaUrl} -o ${ipaFile}"
 
-    writeFile file:manifestFile, text:"""<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"> <plist version="1.0"> <dict> <key>items</key> <array> <dict> <key>assets</key> <array> <dict> <key>kind</key> <string>software-package</string> <key>url</key> <string>http://ictstore.turkcell.com.tr/repositorystatic/files/1/${ictsContainerId}/content/${ipaFile}</string> </dict> </array> <key>metadata</key> <dict> <key>bundle-identifier</key> <string>${ictsBundleIdentifier}</string> <key>bundle-version</key> <string>${app.version}</string> <key>kind</key> <string>software</string> <key>subtitle</key> <string>adhoc</string> <key>title</key> <string>${app.name}</string> </dict> </dict> </array> </dict> </plist>"""
+    writeFile file:manifestFile, text:"""<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"> <plist version="1.0"> <dict> <key>items</key> <array> <dict> <key>assets</key> <array> <dict> <key>kind</key> <string>software-package</string> <key>url</key> <string>http://ictstore.turkcell.com.tr/repositorystatic/files/1/${app.ictsContainerId}/content/${ipaFile}</string> </dict> </array> <key>metadata</key> <dict> <key>bundle-identifier</key> <string>${app.ictsBundleIdentifier}</string> <key>bundle-version</key> <string>${app.version}</string> <key>kind</key> <string>software</string> <key>subtitle</key> <string>adhoc</string> <key>title</key> <string>${app.name}</string> </dict> </dict> </array> </dict> </plist>"""
 
     def ictsUpdateUrl = 'http://ictstore.turkcell.com.tr/RepositoryAdmin/rest/containers/updateFile'
     sh "curl -v -f -i -X POST -F pList=@${manifestFile} -F ipa=@${ipaFile} ${ictsUpdateUrl}?containerId=${app.ictsContainerId}"
@@ -234,7 +234,6 @@ pipeline {
         }
         stage('Approve Deploy to ICT Store') {
             options { timeout(time: 24, unit: 'HOURS') }
-            when { expression { ictsContainerId } }
             steps {
                 script {
                     try {
@@ -275,7 +274,6 @@ pipeline {
         }
         stage('Approve Build for Appstore') {
             options { timeout(time: 24, unit: 'HOURS') }
-            when { expression { ictsContainerId } }
             steps {
                 script {
                     try {
