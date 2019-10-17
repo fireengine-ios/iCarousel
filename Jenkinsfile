@@ -85,7 +85,7 @@ def xcodeBuild = { flavorId ->
       // Pack application, build and sign .ipa?
       buildIpa: true,
       ipaExportMethod: flavor.ipaExportMethod,
-      ipaName: "\\${BASE_NAME}-${BUILD_ID}-${flavorId}",
+      ipaName: "\${BASE_NAME}-${BUILD_ID}-${flavorId}",
       ipaOutputDirectory: '',
       ipaManifestPlistUrl: '',
       
