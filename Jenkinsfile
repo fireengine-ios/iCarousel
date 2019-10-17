@@ -16,6 +16,8 @@ apps = [ [
             appleId: '1467795722',
         ]
 ]
+derivedDir = 'lifebox'
+
 groupPath = "com/ttech/lifebox/ios" // This will be used on artifactory
 
 // Deploy to ICT Store
@@ -114,7 +116,8 @@ def xcodeBuild = { flavorId ->
       xcodeSchema: xcodeParams.schema,
       sdk: '',
       symRoot: '',
-      xcodebuildArguments: 'VALID_ARCHS="armv7 armv7s arm64" -allowProvisioningUpdates',
+      xcodebuildArguments: 'VALID_ARCHS="armv7 armv7s arm64" -allowProvisioningUpdates' +
+         " -derivedDataPath ~/ciderivedData/${derivedDir}/${branchName}/${flavorId}",
       xcodeWorkspaceFile: xcodeParams.workspaceFile,
       xcodeProjectPath: '',
       xcodeProjectFile: '',
