@@ -2497,7 +2497,6 @@
 		8C1E5BC122CB875F008FDA02 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		8C1E5BC222CB875F008FDA02 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C1E5BC322CB875F008FDA02 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		8C1E5BC422CB875F008FDA02 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8C1E5BC522CB875F008FDA02 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		8C1E5BC622CB875F008FDA02 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		8C1E5BC722CB875F008FDA02 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
@@ -3611,6 +3610,7 @@
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		B546DF75235886C300EC8572 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -21569,13 +21569,13 @@
 				8C1E5BC122CB875F008FDA02 /* WidgetService.swift in Sources */,
 				8C1E5BC222CB875F008FDA02 /* UIImage+Size.swift in Sources */,
 				8C1E5BC322CB875F008FDA02 /* AppResponsivenessService.swift in Sources */,
-				8C1E5BC422CB875F008FDA02 /* SharedConstants.swift in Sources */,
 				8C1E5BC522CB875F008FDA02 /* TodayViewController.swift in Sources */,
 				8C1E5BC622CB875F008FDA02 /* UIImage+JPEG.swift in Sources */,
 				8C1E5BC722CB875F008FDA02 /* SharedEnums.swift in Sources */,
 				8C1E5BC822CB875F008FDA02 /* L10n.swift in Sources */,
 				8C1E5BC922CB875F008FDA02 /* Constants.swift in Sources */,
 				8C1E5BCA22CB875F008FDA02 /* NumericConstants.swift in Sources */,
+				B546DF75235886C300EC8572 /* SharedConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
