@@ -7,13 +7,11 @@ agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
 apps = [ [
             name: 'lifebox',// name will be the base filename of the app
             ictsContainerId: '743', // ICT Store
-            appVersion: '', // short version on apple store. Will be copied from source
             version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect
         ], [
             name: 'lifedrive',// name will be the base filename of the app
             ictsContainerId: '966', // ICT Store
-            appVersion: '', // short version on apple store. Will be copied from source
             version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
             appleId: '1467795722',
         ]
@@ -57,7 +55,8 @@ echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${xcodeParams.versionInfoPath}"
-    app.appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
+    // short version on apple store. Will be copied from source
+    def appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
     //def declaredBuild = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' ${infoFile}"
     //appVersion = "${declaredVersion.trim()}.${declaredBuild.trim()}"
     app.version = "${appVersion.trim()}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
@@ -164,7 +163,7 @@ def deployToIctStore = { app ->
     def ictsBundleIdentifier = flavors['test'].bundleIdentifier
     sh "curl -v ${ipaUrl} -o ${ipaFile}"
 
-    writeFile file:manifestFile, text:"""<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"> <plist version="1.0"> <dict> <key>items</key> <array> <dict> <key>assets</key> <array> <dict> <key>kind</key> <string>software-package</string> <key>url</key> <string>http://ictstore.turkcell.com.tr/repositorystatic/files/1/${ictsContainerId}/content/${ipaFile}</string> </dict> </array> <key>metadata</key> <dict> <key>bundle-identifier</key> <string>${ictsBundleIdentifier}</string> <key>bundle-version</key> <string>${app.appVersion}</string> <key>kind</key> <string>software</string> <key>subtitle</key> <string>adhoc</string> <key>title</key> <string>${app.name}</string> </dict> </dict> </array> </dict> </plist>"""
+    writeFile file:manifestFile, text:"""<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"> <plist version="1.0"> <dict> <key>items</key> <array> <dict> <key>assets</key> <array> <dict> <key>kind</key> <string>software-package</string> <key>url</key> <string>http://ictstore.turkcell.com.tr/repositorystatic/files/1/${ictsContainerId}/content/${ipaFile}</string> </dict> </array> <key>metadata</key> <dict> <key>bundle-identifier</key> <string>${ictsBundleIdentifier}</string> <key>bundle-version</key> <string>${app.version}</string> <key>kind</key> <string>software</string> <key>subtitle</key> <string>adhoc</string> <key>title</key> <string>${app.name}</string> </dict> </dict> </array> </dict> </plist>"""
 
     def ictsUpdateUrl = 'http://ictstore.turkcell.com.tr/RepositoryAdmin/rest/containers/updateFile'
     sh "curl -v -f -i -X POST -F pList=@${manifestFile} -F ipa=@${ipaFile} ${ictsUpdateUrl}?containerId=${app.ictsContainerId}"
