@@ -6,11 +6,13 @@
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
 apps = [ [
             name: 'lifebox',// name will be the base filename of the app
+            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect
         ], [
             name: 'lifedrive',// name will be the base filename of the app
+            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
             version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
             appleId: '1467795722',
@@ -31,7 +33,6 @@ xcodeParams = [
         xcodeApp: 'Xcode11.app',
         target: 'TC_Depo_LifeTech lifedrive',
         workspaceFile: 'Depo/Depo',
-        versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         schema: 'TC_Depo_LifeTech'
 ]
 
@@ -56,7 +57,7 @@ isDev = branchName == 'pre_release_v2'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->
-    def infoFile = "${WORKSPACE}/${xcodeParams.versionInfoPath}"
+    def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
     // short version on apple store. Will be copied from source
     def appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
     //def declaredBuild = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' ${infoFile}"
