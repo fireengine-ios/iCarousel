@@ -537,6 +537,8 @@ enum GAEventAction {
     case email
     case otp
     case changeEmail
+    case clickQuotaPurchase
+    case clickFeaturePurchase
 
     var text: String {
         switch self {
@@ -641,6 +643,10 @@ enum GAEventAction {
             return "OTP-1"
         case .changeEmail:
             return "Email"
+        case .clickQuotaPurchase:
+            return "Click Quota Purchase"
+        case .clickFeaturePurchase:
+            return "Click Feature Purchase"
         }
     }
 }
@@ -736,6 +742,22 @@ enum GAEventLabel {
         }
     }
     
+    enum QuotaPaymentType {
+        case chargeToBill(_ quota: String)
+        case appStore(_ quota: String)
+        case creditCard(_ quota: String)
+        
+        var text: String {
+            switch self {
+            case .chargeToBill(let quota):
+                return "Charge to Bill - " + quota
+            case .appStore(let quota):
+                return "App Store - " + quota
+            case .creditCard(let quota):
+                return "Credit Card - " + quota
+            }
+        }
+    }
     case empty
     
     case success
@@ -811,6 +833,7 @@ enum GAEventLabel {
     case later
     case cancel
     case storyOrVideo
+    case paymentType(_ type: QuotaPaymentType)
 
         var text: String {
         switch self {
@@ -980,6 +1003,8 @@ enum GAEventLabel {
             return "Cancel"
         case .storyOrVideo:
             return "Story / Video"
+        case .paymentType(let type):
+            return type.text
         }
     }
     

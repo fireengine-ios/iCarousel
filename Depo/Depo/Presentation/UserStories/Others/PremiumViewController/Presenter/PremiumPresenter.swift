@@ -115,6 +115,14 @@ final class PremiumPresenter {
                 assertionFailure()
                 return
             }
+            
+            let analyticsService: AnalyticsService = factory.resolve()
+            
+            let eventLabel: GAEventLabel = .paymentType(type.quotaPaymentType(quota: "Premium"))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                eventActions: .clickFeaturePurchase,
+                                                eventLabel: eventLabel)
+            
             self?.didPressOn(plan: subscriptionPlan)
         })
     }
