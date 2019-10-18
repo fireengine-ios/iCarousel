@@ -3909,6 +3909,12 @@
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966DD2359B8A700599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
+		CE1966DE2359BA4800599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966DF2359BA4800599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
+		CE1966E02359BA4900599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966E12359BA4900599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
@@ -8531,6 +8537,8 @@
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
+		CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickCampaignCell.swift; sourceTree = "<group>"; };
+		CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickCampaignCell.xib; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE19CE00208F016600DB903E /* UIAlertController+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Action.swift"; sourceTree = "<group>"; };
 		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
@@ -15904,6 +15912,8 @@
 				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
 				9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */,
 				9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */,
+				CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */,
+				CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */,
 				9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */,
 				9216F57822493127008339F5 /* InternetDataUsageCollectionViewCell.xib */,
 			);
@@ -17465,6 +17475,7 @@
 				8C0E90041FDEBDFF00789C91 /* BottomSelectionTabBarViewController.xib in Resources */,
 				8C06B1312008AD72003D8E05 /* t_orta@2x.png in Resources */,
 				8C06AFD32008AD71003D8E05 /* ins_paylas.png in Resources */,
+				CE1966DF2359BA4800599638 /* InstapickCampaignCell.xib in Resources */,
 				7CA4A168207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AF692008AD70003D8E05 /* duz_cizgi@3x.png in Resources */,
 				8C06B0DF2008AD71003D8E05 /* sample_red@3x.png in Resources */,
@@ -18280,6 +18291,7 @@
 				8C06B0202008AD71003D8E05 /* lifebox@2x.png in Resources */,
 				B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				8C06B1AA2008AD72003D8E05 /* CRYFilterCell.nib in Resources */,
+				CE1966DD2359B8A700599638 /* InstapickCampaignCell.xib in Resources */,
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				8C06B0A62008AD71003D8E05 /* renk_selected.png in Resources */,
 				8C06B16A2008AD72003D8E05 /* toolbar_sekil_icon.png in Resources */,
@@ -18950,6 +18962,7 @@
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CE784CFB22A685FB00662219 /* CRYUserContractViewController.nib in Resources */,
 				CE784CFC22A685FB00662219 /* error_icon@3x.png in Resources */,
+				CE1966E12359BA4900599638 /* InstapickCampaignCell.xib in Resources */,
 				CE784CFD22A685FB00662219 /* paylas_diger.png in Resources */,
 				CE784CFE22A685FB00662219 /* tahta_yeni@3x.png in Resources */,
 				CE784CFF22A685FB00662219 /* paylas_twitter@3x.png in Resources */,
@@ -21063,6 +21076,7 @@
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C0E8EB91FDEBDFF00789C91 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8C0E8EBB1FDEBDFF00789C91 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
+				CE1966DE2359BA4800599638 /* InstapickCampaignCell.swift in Sources */,
 				B5CDB33121787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
 				8C0E8EBC1FDEBDFF00789C91 /* BaseFilesGreedInteractor.swift in Sources */,
 				8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */,
@@ -22362,6 +22376,7 @@
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
+				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
@@ -23472,6 +23487,7 @@
 				8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */,
 				CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */,
 				CE78485222A685FB00662219 /* AppResponsivenessService.swift in Sources */,
+				CE1966E02359BA4900599638 /* InstapickCampaignCell.swift in Sources */,
 				CE78485322A685FB00662219 /* AutoSyncViewInput.swift in Sources */,
 				989BDE3F22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				CE78485422A685FB00662219 /* VisualMusicPlayerRouter.swift in Sources */,

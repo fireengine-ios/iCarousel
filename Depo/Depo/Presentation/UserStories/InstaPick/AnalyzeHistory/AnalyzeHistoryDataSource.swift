@@ -20,11 +20,13 @@ protocol AnalyzeHistoryDataSourceDelegate: class {
 private enum AnalyzeHistoryCardType {
     case analysis
     case free
+    case campaign
     
     var cellType: UICollectionViewCell.Type {
         switch self {
         case .analysis: return InstapickAnalysisCell.self
         case .free: return InstapickFreeCell.self
+        case .campaign: return InstapickCampaignCell.self
         }
     }
     
@@ -32,6 +34,7 @@ private enum AnalyzeHistoryCardType {
         switch self {
         case .analysis: return 126
         case .free: return 95
+        case .campaign: return 138
         }
     }
 }
@@ -252,6 +255,11 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
             case .free:
                 //static card, nothing to setup
                 break
+            case .campaign:
+                if let cell = cell as? InstapickCampaignCell, let count = analysisCount {
+//                    cell.setup(with: count)
+//                    cell.delegate = self
+                }
             }
         case .photos:
             if let cell = cell as? InstapickAnalyzeHistoryPhotoCell {
