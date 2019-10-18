@@ -65,4 +65,9 @@ final class CampaingnInfoView: UIView {
         
         contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
     }
+    
+    func setup(with info: CampaignContent) {
+        titleLabel.text = info.title
+        descriptionLabel.text = info.message
+    }
 }

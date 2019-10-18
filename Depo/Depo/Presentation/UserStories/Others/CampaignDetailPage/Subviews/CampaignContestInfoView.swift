@@ -38,7 +38,7 @@ final class CampaignContestInfoView: UIView {
     
     @IBOutlet private weak var totalCountLabel: UILabel! {
         willSet {
-            newValue.text = "5"
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 21)
             newValue.textColor = ColorConstants.darkText
         }
@@ -46,14 +46,18 @@ final class CampaignContestInfoView: UIView {
     
     @IBOutlet private weak var remainingCountLabel: UILabel! {
         willSet {
-            newValue.text = "10"
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 21)
             newValue.textColor = ColorConstants.darkText
         }
     }
     
-    private func setup() {
-        
+    @IBOutlet private weak var remainingView: UIStackView!
+    
+    func setup(with info: CampaignUsage) {
+        totalCountLabel.text = "\(info.totalUsed)"
+        remainingCountLabel.text = "\(info.dailyRemaining)"
+        remainingView.isHidden = info.dailyRemaining == 0  
     }
 
 }

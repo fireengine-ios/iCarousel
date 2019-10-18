@@ -36,7 +36,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yU0-BL-ZEk">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZT-bn-AYd">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZT-bn-AYd" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="35" y="0.0" width="344" height="133"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="133" id="ggF-Xe-sr3"/>
@@ -123,6 +123,7 @@
                                     <connections>
                                         <outlet property="remainingCountLabel" destination="Grm-WY-dCD" id="jNe-9C-Ely"/>
                                         <outlet property="remainingDrawLabel" destination="t8V-gH-7FU" id="pjc-zz-muH"/>
+                                        <outlet property="remainingView" destination="4As-MP-gWC" id="xuZ-YY-DzN"/>
                                         <outlet property="stackView" destination="yFI-nP-35k" id="kVe-tj-2h0"/>
                                         <outlet property="titleLabel" destination="1fq-v3-Aj0" id="WAR-Vl-tVb"/>
                                         <outlet property="totalCountLabel" destination="2wi-n5-ZZN" id="w3x-pM-QnS"/>

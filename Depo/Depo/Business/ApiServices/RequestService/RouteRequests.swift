@@ -201,8 +201,8 @@ struct RouteRequests {
     
     // MARK: - Campaign
     
-    static let campaignApi = baseUrl +/ "campaing"
-    static let campaignPhotopick = "photopick"
+    static let campaignApi = baseUrl +/ "campaign"
+    static let campaignPhotopick = campaignApi +/ "photopick"
     
     //MARK: - Turkcell Updater
     

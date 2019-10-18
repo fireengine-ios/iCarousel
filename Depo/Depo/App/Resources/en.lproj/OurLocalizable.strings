@@ -1239,7 +1239,7 @@
 "tbmatic_home_card_this_year" = "In this year";
 
 campaign_detail_title = "Campaign Detail";
-campaign_detail_more_info_button = "For  more information turkcell.com.tr >";
+campaign_detail_more_info_button = "For more information %@ >";
 campaign_detail_contest_info_title = "My Contest Information";
 campaign_detail_contest_info_total_draw = "Total Draw";
 campaign_detail_contest_info_remaining_draw = "Remaining Draw";

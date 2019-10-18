@@ -68,4 +68,8 @@ final class CampaignIntroView: UIView {
         
         contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
     }
+    
+    func setup(with info: CampaignPhotopickStatus) {
+        
+    }
 }

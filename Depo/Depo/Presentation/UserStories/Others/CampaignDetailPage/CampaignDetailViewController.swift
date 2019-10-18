@@ -12,13 +12,13 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentStackView: UIStackView!
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: LoadingImageView!
     @IBOutlet private weak var contestInfoView: CampaignContestInfoView!
     @IBOutlet private weak var campaignIntroView: CampaignIntroView!
     @IBOutlet private weak var campaignInfoView: CampaingnInfoView!
     @IBOutlet private weak var moreInfoButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.campaignDetailMoreInfoButton, for: .normal)
+            newValue.setTitle("", for: .normal)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.titleLabel?.numberOfLines = 2
@@ -50,17 +50,16 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         }
     }
 
-    private let moreInfoUrl = URL(string: "https://www.turkcell.com.tr")
+    private var moreInfoUrl: URL?
+    private let service = CampaignServiceImpl()
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.title = TextConstants.campaignDetailTitle
-        imageView.backgroundColor = .black
         
-        scrollView.contentInset.bottom = analyzeView.frame.height
+        setupUI()
+        loadDetailsInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,21 +71,57 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     private func loadDetailsInfo() {
         showSpinner()
         
-        
+        service.getPhotopickStatus { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            self.hideSpinner()
+            
+            switch result {
+            case .success(let status):
+                self.updateUI(status: status)
+            case .failure(let errorResult):
+                switch errorResult {
+                case .empty:
+                    break
+                case .error(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            }
+        }
     }
     
-    private func updateUI() {
-        if true {
+    private func setupUI() {
+        navigationItem.title = TextConstants.campaignDetailTitle
+        imageView.backgroundColor = .black
+        contentStackView.isHidden = true
+        analyzeView.isHidden = true
+    }
+    
+    private func updateUI(status: CampaignPhotopickStatus) {
+        if status.dates.startDate.timeIntervalSinceNow > 0 && status.dates.endDate.timeIntervalSinceNow < 0 {
             analyzeView.isHidden = true
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
             scrollView.contentInset = .zero
+            campaignIntroView.setup(with: status)
         } else {
             campaignIntroView.isHidden = true
             campaignInfoView.isHidden = false
             analyzeView.isHidden = false
             scrollView.contentInset.bottom = analyzeView.frame.height
+            campaignInfoView.setup(with: status.content)
         }
+        
+        imageView.loadImage(url: status.imageUrl)
+        contestInfoView.setup(with: status.usage)
+        
+        moreInfoUrl = status.detailsUrl
+        let buttonText = String(format: TextConstants.campaignDetailMoreInfoButton, moreInfoUrl!.absoluteString)
+        moreInfoButton.setTitle(buttonText, for: .normal)
+        
+        contentStackView.isHidden = false
     }
     
     
