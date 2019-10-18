@@ -530,6 +530,10 @@ extension AnalyticsService: NetmeraProtocol {
     }
     
     static func startNetmera() {
+        #if LIFEDRIVE
+        return
+        #endif
+        
         debugLog("Start Netmera")
         
         #if DEBUG
@@ -544,6 +548,10 @@ extension AnalyticsService: NetmeraProtocol {
         Netmera.setLogLevel(.debug)
         #endif
         
+        #if APPSTORE
+        Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
+        #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+        #endif
     }
 }
