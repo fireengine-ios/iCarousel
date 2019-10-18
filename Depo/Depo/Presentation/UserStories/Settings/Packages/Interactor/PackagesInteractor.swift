@@ -307,7 +307,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         iapManager.restorePurchases { [weak self] result in
             switch result {
-            case .success(let _):
+            case .success(_):
 //                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
                 self?.validateRestorePurchase(offersApple: [])
 
@@ -337,8 +337,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
-        analyticsService.trackPackageClick(package:
-            packages, packageIndex: planIndex)
+        analyticsService.trackPackageClick(package: packages, packageIndex: planIndex)
     }
     
     private func sendReciept() -> Bool {

@@ -115,6 +115,14 @@ final class PremiumPresenter {
                 assertionFailure()
                 return
             }
+            
+            let analyticsService: AnalyticsService = factory.resolve()
+            
+            let eventLabel: GAEventLabel = .paymentType(type.quotaPaymentType(quota: "Premium"))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                eventActions: .clickFeaturePurchase,
+                                                eventLabel: eventLabel)
+            
             self?.didPressOn(plan: subscriptionPlan)
         })
     }
@@ -130,6 +138,8 @@ final class PremiumPresenter {
     }
     
     private func actionFor(plan: SubscriptionPlan) {
+        interactor.trackPackageClick(plan: plan)
+        
         guard let model = plan.model as? PackageModelResponse else {
             assertionFailure()
             return
