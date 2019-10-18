@@ -47,7 +47,7 @@ final class PaymentTypeView: UIView, NibInit {
     
     @IBAction private func onActionButton() {
         
-        if let name = paymentMethod?.name, let paymentType = paymentMethod?.type {
+        if let name = paymentMethod?.name {
             paymentMethod?.action(name)
         }
     }

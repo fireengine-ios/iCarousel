@@ -1054,4 +1054,8 @@ class RouterVC: NSObject {
     func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
         return TBMatikPhotosViewController.with(uuids: uuids)
     }
+    
+    func campaignDetailViewController() -> UIViewController {
+        return CampaignDetailViewController.initFromNib()
+    }
 }
