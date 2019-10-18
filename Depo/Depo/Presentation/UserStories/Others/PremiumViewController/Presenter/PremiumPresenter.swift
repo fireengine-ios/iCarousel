@@ -138,6 +138,8 @@ final class PremiumPresenter {
     }
     
     private func actionFor(plan: SubscriptionPlan) {
+        interactor.trackPackageClick(plan: plan)
+        
         guard let model = plan.model as? PackageModelResponse else {
             assertionFailure()
             return
