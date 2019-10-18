@@ -10,6 +10,8 @@ import Foundation
 
 protocol PremiumInteractorInput {
     
+    func trackPackageClick(plan packages: SubscriptionPlan)
+    
     func getAccountType()
     func getFeaturePacks()
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String
