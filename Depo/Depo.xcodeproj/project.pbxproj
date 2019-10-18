@@ -3636,7 +3636,6 @@
 		B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */; };
 		B5601AD723506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
 		B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
-		B5601AD923506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
 		B5601ADB23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5601ADC23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
@@ -3779,6 +3778,10 @@
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
 		B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
+		B5EC4C952359DD6300EBCB08 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */; };
+		B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */; };
+		B5EC4C982359DD6300EBCB08 /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */; };
+		B5EC4C992359DD6300EBCB08 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */; };
 		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
@@ -5587,7 +5590,6 @@
 		CE784D0822A685FB00662219 /* frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACA72008AD6F003D8E05 /* frame@2x.png */; };
 		CE784D0922A685FB00662219 /* FilterPhotoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */; };
 		CE784D0A22A685FB00662219 /* CRYSchemeCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ADB22008AD6F003D8E05 /* CRYSchemeCell.nib */; };
-		CE784D0B22A685FB00662219 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44850A1F1351A4003AF631 /* SplashViewController.xib */; };
 		CE784D0C22A685FB00662219 /* cizgi_2_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC682008AD6F003D8E05 /* cizgi_2_selected.png */; };
 		CE784D0D22A685FB00662219 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD222008AD6F003D8E05 /* refresh.png */; };
 		CE784D0E22A685FB00662219 /* CollageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60A42019D0440033C58F /* CollageCard.xib */; };
@@ -5879,7 +5881,6 @@
 		CE784E3222A685FB00662219 /* success_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD5F2008AD6F003D8E05 /* success_icon@3x.png */; };
 		CE784E3322A685FB00662219 /* cizgi_3_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC702008AD6F003D8E05 /* cizgi_3_selected@3x.png */; };
 		CE784E3422A685FB00662219 /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */; };
-		CE784E3522A685FB00662219 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B711EEE9509006532C8 /* IntroduceViewController.xib */; };
 		CE784E3622A685FB00662219 /* paylas_diger@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD0C2008AD6F003D8E05 /* paylas_diger@3x.png */; };
 		CE784E3722A685FB00662219 /* turuncu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD962008AD6F003D8E05 /* turuncu@3x.png */; };
 		CE784E3822A685FB00662219 /* sample_yellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD492008AD6F003D8E05 /* sample_yellow@3x.png */; };
@@ -5972,7 +5973,6 @@
 		CE784E9022A685FB00662219 /* sample_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD432008AD6F003D8E05 /* sample_red@2x.png */; };
 		CE784E9122A685FB00662219 /* caps2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC542008AD6F003D8E05 /* caps2@3x.png */; };
 		CE784E9222A685FB00662219 /* underline@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD992008AD6F003D8E05 /* underline@3x.png */; };
-		CE784E9322A685FB00662219 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
 		CE784E9422A685FB00662219 /* daire_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC842008AD6F003D8E05 /* daire_selected@2x.png */; };
 		CE784E9522A685FB00662219 /* parlaklik@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACFD2008AD6F003D8E05 /* parlaklik@3x.png */; };
 		CE784E9622A685FB00662219 /* kup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACDF2008AD6F003D8E05 /* kup@2x.png */; };
@@ -8445,6 +8445,10 @@
 		B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
+		B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceViewController.xib; sourceTree = "<group>"; };
+		B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
+		B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
+		B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
@@ -14494,6 +14498,7 @@
 		B5B6542C22A7A744000E2FA9 /* Lifedrive */ = {
 			isa = PBXGroup;
 			children = (
+				B5EC4C882359D8E200EBCB08 /* Presentation */,
 				8C6A1DCB2317EAEB00D792B9 /* container */,
 				CE784F2222A68CEB00662219 /* lifedrive.plist */,
 				8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */,
@@ -14569,6 +14574,73 @@
 				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
 			);
 			path = Migration;
+			sourceTree = "<group>";
+		};
+		B5EC4C882359D8E200EBCB08 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C892359D9D800EBCB08 /* UserStories */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B5EC4C892359D9D800EBCB08 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C902359DD6200EBCB08 /* Initializing */,
+				B5EC4C8A2359DD6200EBCB08 /* Introduce */,
+				B5EC4C922359DD6200EBCB08 /* Splash */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		B5EC4C8A2359DD6200EBCB08 /* Introduce */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C8B2359DD6200EBCB08 /* View */,
+			);
+			path = Introduce;
+			sourceTree = "<group>";
+		};
+		B5EC4C8B2359DD6200EBCB08 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */,
+				B5EC4C8D2359DD6200EBCB08 /* SubViews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B5EC4C8D2359DD6200EBCB08 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		B5EC4C902359DD6200EBCB08 /* Initializing */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */,
+			);
+			path = Initializing;
+			sourceTree = "<group>";
+		};
+		B5EC4C922359DD6200EBCB08 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C932359DD6200EBCB08 /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		B5EC4C932359DD6200EBCB08 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -18904,6 +18976,7 @@
 				CE784CD122A685FB00662219 /* CRYFrameCell.nib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
+				B5EC4C982359DD6300EBCB08 /* InitializingViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD522A685FB00662219 /* paylas_mail@2x.png in Resources */,
@@ -18964,7 +19037,6 @@
 				CE784D0822A685FB00662219 /* frame@2x.png in Resources */,
 				CE784D0922A685FB00662219 /* FilterPhotoCard.xib in Resources */,
 				CE784D0A22A685FB00662219 /* CRYSchemeCell.nib in Resources */,
-				CE784D0B22A685FB00662219 /* SplashViewController.xib in Resources */,
 				730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				CE784D0C22A685FB00662219 /* cizgi_2_selected.png in Resources */,
 				CE784D0D22A685FB00662219 /* refresh.png in Resources */,
@@ -19057,6 +19129,7 @@
 				CE784D6222A685FB00662219 /* alt_cizgili.png in Resources */,
 				CE784D6322A685FB00662219 /* header_icon@3x.png in Resources */,
 				CE784D6422A685FB00662219 /* toolbar_ciz_icon@2x.png in Resources */,
+				B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */,
 				98792DD422FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				CE784F1F22A6865F00662219 /* Images.xcassets in Resources */,
 				CE784D6522A685FB00662219 /* close_icon.png in Resources */,
@@ -19105,6 +19178,7 @@
 				CE784D8F22A685FB00662219 /* bottomright@3x.png in Resources */,
 				CE784D9022A685FB00662219 /* OurLocalizable.strings in Resources */,
 				737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
+				B5EC4C992359DD6300EBCB08 /* SplashViewController.xib in Resources */,
 				CE784D9122A685FB00662219 /* cizgi_2.png in Resources */,
 				CE784D9222A685FB00662219 /* polaroid_yeni@2x.png in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
@@ -19278,7 +19352,6 @@
 				CE784E3222A685FB00662219 /* success_icon@3x.png in Resources */,
 				CE784E3322A685FB00662219 /* cizgi_3_selected@3x.png in Resources */,
 				CE784E3422A685FB00662219 /* SegmentedController.xib in Resources */,
-				CE784E3522A685FB00662219 /* IntroduceViewController.xib in Resources */,
 				CE784E3622A685FB00662219 /* paylas_diger@3x.png in Resources */,
 				CE784E3722A685FB00662219 /* turuncu@3x.png in Resources */,
 				CE784E3822A685FB00662219 /* sample_yellow@3x.png in Resources */,
@@ -19377,7 +19450,6 @@
 				CE784E9022A685FB00662219 /* sample_red@2x.png in Resources */,
 				CE784E9122A685FB00662219 /* caps2@3x.png in Resources */,
 				CE784E9222A685FB00662219 /* underline@3x.png in Resources */,
-				CE784E9322A685FB00662219 /* IntroduceSubView.xib in Resources */,
 				CE784E9422A685FB00662219 /* daire_selected@2x.png in Resources */,
 				CE784E9522A685FB00662219 /* parlaklik@3x.png in Resources */,
 				CE784E9622A685FB00662219 /* kup@2x.png in Resources */,
@@ -19423,7 +19495,6 @@
 				CE784EB922A685FB00662219 /* alt_cizgili@2x.png in Resources */,
 				CE784EBA22A685FB00662219 /* ActionsMenuView.xib in Resources */,
 				CE784EBB22A685FB00662219 /* kirmizi.png in Resources */,
-				B5601AD923506349002E1D1E /* InitializingViewController.xib in Resources */,
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
@@ -19482,6 +19553,7 @@
 				CE784EEC22A685FB00662219 /* success_icon@2x.png in Resources */,
 				CE784EED22A685FB00662219 /* paylas_bip.png in Resources */,
 				CE784EEE22A685FB00662219 /* text.png in Resources */,
+				B5EC4C952359DD6300EBCB08 /* IntroduceViewController.xib in Resources */,
 				CE784EEF22A685FB00662219 /* renk_selected@2x.png in Resources */,
 				CE784EF022A685FB00662219 /* InstapickFreeCell.xib in Resources */,
 				CE784EF122A685FB00662219 /* target_secili@2x.png in Resources */,
