@@ -15,7 +15,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         //Another cases for Client Mode
         case newUser
         case experiencedUser
-        case daylyLimiReached
+        case daylyLimitReached
         case another
     }
     
@@ -84,7 +84,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         } else if dailyUsed == 0 && totalUsed > 0 {
             userStatus = .experiencedUser
         } else if dailyRemaining == 0 {
-            userStatus = .daylyLimiReached
+            userStatus = .daylyLimitReached
         } else {
             userStatus = .another
         }
@@ -97,7 +97,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
             descriptionLabel.text = TextConstants.campaignCardDescriptionLabelNewUser
         case .experiencedUser:
             descriptionLabel.text = String(format: TextConstants.campaignCardDescriptionLabelExperiencedUser, dailyLimit)
-        case .daylyLimiReached:
+        case .daylyLimitReached:
             descriptionLabel.text = TextConstants.campaignCardDescriptionLabelDaylyLimiReached
         case .another:
             descriptionLabel.text = String(format: TextConstants.campaignCardDescriptionLabelAnother, totalUsed)
@@ -120,7 +120,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         case .experiencedUser:
             // FE-1687 here
             break
-        case .daylyLimiReached:
+        case .daylyLimitReached:
             // FE-1687 here
             break
         case .another:
@@ -142,7 +142,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         case .experiencedUser:
             // FE-1682 here
             break
-        case .daylyLimiReached:
+        case .daylyLimitReached:
             // FE-1682 and FE-1683 here
             break
         case .another:
