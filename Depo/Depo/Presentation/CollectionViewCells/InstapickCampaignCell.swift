@@ -15,7 +15,7 @@ final class InstapickCampaignCell: UICollectionViewCell {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.textColor = ColorConstants.darkText
             newValue.numberOfLines = 0
-            newValue.text = TextConstants.tbMatiHomeCardTitle
+            newValue.text = TextConstants.campaignDetailContestInfoTitle
         }
     }
     
@@ -24,7 +24,7 @@ final class InstapickCampaignCell: UICollectionViewCell {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.numberOfLines = 0
-            newValue.text = TextConstants.tbMatiHomeCardTitle
+            newValue.text = TextConstants.campaignDetailContestInfoTotalDraw
         }
     }
     
@@ -42,7 +42,7 @@ final class InstapickCampaignCell: UICollectionViewCell {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.numberOfLines = 0
-            newValue.text = TextConstants.tbMatiHomeCardTitle
+            newValue.text = TextConstants.campaignDetailContestInfoRemainingDraw
         }
     }
     
@@ -59,7 +59,7 @@ final class InstapickCampaignCell: UICollectionViewCell {
         willSet {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
-            newValue.setTitle(TextConstants.tbMatiHomeCardButtonTitle, for: .normal)
+            newValue.setTitle(TextConstants.campaignDetailTitle, for: .normal)
         }
     }
     
@@ -73,12 +73,20 @@ final class InstapickCampaignCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet private weak var borderView: UIView! {
+        willSet {
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 5
+        }
+    }
+    
+    func setup(with status: CampaignPhotopickStatus) {
+        totalCountLabel.text = "\(status.usage.totalUsed)"
+        leftCountLabel.text = "\(status.usage.dailyRemaining)"
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        print("+ action")
+        // TODO: wating for FE-1682
+        print("+ TODO: wating for FE-1682")
     }
 }

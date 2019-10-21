@@ -20,6 +20,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
 
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
     private let instapickService: InstapickService = factory.resolve()
+    private let campaignService: CampaignService = CampaignServiceImpl()
     
     private let refresher = UIRefreshControl()
     private var page = 0
@@ -273,8 +274,40 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             }
 
             self.dataSource.reloadCards(with: analyzesCount)
-            success?()
+            self.loadCampaignStatisticsIfNeed(success: success)
         })
+    }
+    
+    private func loadCampaignStatisticsIfNeed(success: VoidHandler?) {
+        
+        guard SingletonStorage.shared.isTurkcellUser else {
+            success?()
+            return
+        }
+        
+        campaignService.getPhotopickStatus { [weak self] result in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            switch result {
+            case .success(let campaignPhotopickStatus):
+                if campaignPhotopickStatus.dates.isAvailable() {
+                    self.dataSource.showCampaignCard(with: campaignPhotopickStatus)
+                }
+                
+            case .failure(let errorResult):
+                switch errorResult {
+                case .empty:
+                    break
+                case .error(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            }
+            
+            success?()
+        }
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {

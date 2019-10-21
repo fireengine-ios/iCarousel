@@ -126,6 +126,11 @@ final class CampaignDates {
         self.endDate = endDate
         self.launchDate = launchDate
     }
+    
+    func isAvailable() -> Bool {
+        let now = Date()
+        return startDate <= now && now <= endDate
+    }
 }
 
 extension CampaignDates {

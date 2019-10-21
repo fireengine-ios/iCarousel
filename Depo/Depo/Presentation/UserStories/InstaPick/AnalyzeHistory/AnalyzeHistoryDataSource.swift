@@ -34,7 +34,7 @@ private enum AnalyzeHistoryCardType {
         switch self {
         case .analysis: return 126
         case .free: return 95
-        case .campaign: return 138
+        case .campaign: return 170
         }
     }
 }
@@ -84,6 +84,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private(set) var selectedItems = [InstapickAnalyze]()
     
     private(set) var analysisCount: InstapickAnalyzesCount?
+    private var campaignPhotopickStatus: CampaignPhotopickStatus?
     
     private(set) var isSelectionStateActive = false
     
@@ -108,6 +109,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         collectionView.register(nibCell: InstapickAnalysisCell.self)
         collectionView.register(nibCell: InstapickFreeCell.self)
         collectionView.register(nibCell: InstapickAnalyzeHistoryPhotoCell.self)
+        collectionView.register(nibCell: InstapickCampaignCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -122,6 +124,14 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     func reloadCards(with analysisCount: InstapickAnalyzesCount) {
         self.analysisCount = analysisCount
         cards = [analysisCount.isFree ? .free : .analysis]
+        reloadSection(.cards)
+    }
+    
+    func showCampaignCard(with campaignPhotopickStatus: CampaignPhotopickStatus) {
+        self.campaignPhotopickStatus = campaignPhotopickStatus
+        if !cards.contains(.campaign) {
+            cards.append(.campaign)
+        }
         reloadSection(.cards)
     }
     
@@ -256,9 +266,9 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
                 //static card, nothing to setup
                 break
             case .campaign:
-                if let cell = cell as? InstapickCampaignCell, let count = analysisCount {
-//                    cell.setup(with: count)
-//                    cell.delegate = self
+                if let cell = cell as? InstapickCampaignCell,
+                    let campaignPhotopickStatus = campaignPhotopickStatus {
+                    cell.setup(with: campaignPhotopickStatus)
                 }
             }
         case .photos:
@@ -321,7 +331,16 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
         ///seems like this bug may occur on iOS 12+ when it returns negative value
         switch section {
         case .cards:
-            return CGSize(width: max(collectionView.bounds.width, 0), height: cards[indexPath.item].cellHeight)
+            let cellWidth = max(collectionView.bounds.width, 0)
+            
+            /// on first creating of InstapickCampaignCell, "cellForItem == nil" so used ".cellHeight"
+            if let cell = collectionView.cellForItem(at: indexPath) as? InstapickCampaignCell {
+                /// can be cached if need, but remember to clear it on reload.
+                return cell.sizeToFit(width: cellWidth)
+            } else {
+                return CGSize(width: cellWidth, height: cards[indexPath.item].cellHeight)
+            }
+            
         case .photos:
             var width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
             width = max(width, 0)
