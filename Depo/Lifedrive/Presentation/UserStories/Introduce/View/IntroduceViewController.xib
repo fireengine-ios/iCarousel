@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="haveAccountButton" destination="STK-bc-GEv" id="2a3-aN-a84"/>
                 <outlet property="pageControll" destination="uNr-bn-y2s" id="05I-E2-oyP"/>
@@ -23,24 +21,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="VPC-FC-6z7">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecz-N0-mMq">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-QM-iGJ">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-g9-CGx">
-                                    <rect key="frame" x="137" y="36" width="46" height="45"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-g9-CGx">
+                                    <rect key="frame" x="103.5" y="36" width="113" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="B0L-Rl-80B">
                                             <variation key="widthClass=regular" constant="75"/>
                                         </constraint>
-                                        <constraint firstAttribute="width" constant="46" id="Fgo-mM-CR9">
-                                            <variation key="widthClass=regular" constant="227"/>
-                                        </constraint>
+                                        <constraint firstAttribute="width" secondItem="LEY-g9-CGx" secondAttribute="height" multiplier="113:45" id="zyh-gd-EeE"/>
                                     </constraints>
                                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                                 </imageView>
@@ -68,7 +61,7 @@
                                         <constraint firstAttribute="trailing" secondItem="j2P-V1-ajw" secondAttribute="trailing" id="tnr-AZ-94Y"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="71" y="511" width="178" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="GPS-RI-Ueo">
@@ -78,12 +71,14 @@
                                             <variation key="widthClass=regular" constant="269"/>
                                         </constraint>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </state>
                                     <connections>
                                         <action selector="onHaveAccountButton" destination="-1" eventType="touchUpInside" id="zQD-23-R0A"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="WhiteButtonWithRoundedCorner" customModule="lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="30" y="423" width="260" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="750" constant="303" id="0QQ-jr-zZ0">
@@ -93,7 +88,9 @@
                                             <variation key="widthClass=regular" constant="74"/>
                                         </constraint>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </state>
                                     <connections>
                                         <action selector="onStartUsingLifeBoxButton" destination="-1" eventType="touchUpInside" id="7FX-Mu-hBk"/>
                                     </connections>
@@ -134,10 +131,6 @@
                 <constraint firstItem="cyp-QM-iGJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="Bsw-TX-qi0"/>
                 <constraint firstItem="ecz-N0-mMq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gjg-wm-wsg"/>
                 <constraint firstItem="ecz-N0-mMq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="L9m-BY-LAL"/>
-                <constraint firstAttribute="trailing" secondItem="VPC-FC-6z7" secondAttribute="trailing" id="Qb7-Wc-jTR"/>
-                <constraint firstItem="VPC-FC-6z7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V4t-UP-Ab8"/>
-                <constraint firstAttribute="bottom" secondItem="VPC-FC-6z7" secondAttribute="bottom" id="aPu-G0-sMm"/>
-                <constraint firstItem="VPC-FC-6z7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d0I-pD-IqA"/>
                 <constraint firstAttribute="bottom" secondItem="ecz-N0-mMq" secondAttribute="bottom" id="hgJ-mN-mNo"/>
                 <constraint firstItem="cyp-QM-iGJ" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" priority="750" id="uoD-K9-BJl"/>
             </constraints>
@@ -145,8 +138,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Background" width="191" height="341"/>
-        <image name="LaunchImageLogo" width="130" height="129"/>
         <image name="Logo-Ipad" width="227" height="75"/>
+        <image name="splash_logo" width="113.5" height="141.5"/>
     </resources>
 </document>
