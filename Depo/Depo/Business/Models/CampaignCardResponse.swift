@@ -39,25 +39,40 @@ final class CampaignCardResponse {
     let messageType: MessageType
     let title: String
     let message: String
+    
     let totalUsed: Int
     let maxDailyLimit: Int
     let dailyUsed: Int
     let dailyRemaining: Int
+    
     let startDate: Date
     let endDate: Date
     let launchDate: Date
 
-    init(detailsUrl: URL, imageUrl: URL, messageType: MessageType, title: String, message: String, totalUsed: Int, dailyUsed: Int, maxDailyLimit: Int, dailyRemaining: Int, startDate: Date, endDate: Date, launchDate: Date) {
+    init(detailsUrl: URL,
+         imageUrl: URL,
+         messageType: MessageType,
+         title: String,
+         message: String,
+         totalUsed: Int,
+         dailyUsed: Int,
+         maxDailyLimit: Int,
+         dailyRemaining: Int,
+         startDate: Date,
+         endDate: Date,
+         launchDate: Date) {
         
         self.detailsUrl = detailsUrl
         self.imageUrl = imageUrl
         self.messageType = messageType
         self.title = title
         self.message = message
+        
         self.totalUsed = totalUsed
         self.maxDailyLimit = maxDailyLimit
         self.dailyUsed = dailyUsed
         self.dailyRemaining = dailyRemaining
+        
         self.startDate = startDate
         self.endDate = endDate
         self.launchDate = launchDate
