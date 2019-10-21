@@ -59,6 +59,8 @@ final class HomeCardResponse : Equatable {
             return .instaPick
         case .tbMatik:
             return .tbMatik
+        case .campaign:
+            return .campaignCard
         }
     }
 }
@@ -99,4 +101,5 @@ enum HomeCardTypes: String {
     case launchCampaign = "LAUNCH_CAMPAIGN"
     case instaPick = "INSTAGRAM_LIKE"
     case tbMatik = "TBMATIC"
+    case campaign = "CAMPAIGN"
 }
