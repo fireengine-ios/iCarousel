@@ -249,7 +249,14 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
                 MenloworksAppEvents.onSubscriptionClicked(tag)
             }
-
+            
+            let analyticsService: AnalyticsService = factory.resolve()
+            
+            let eventLabel: GAEventLabel = .paymentType(type.quotaPaymentType(quota: subscriptionPlan.name))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                eventActions: .clickQuotaPurchase,
+                                                eventLabel: eventLabel)
+            
             self?.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
          
         })
