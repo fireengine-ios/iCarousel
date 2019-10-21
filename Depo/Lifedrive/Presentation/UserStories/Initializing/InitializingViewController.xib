@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InitializingViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InitializingViewController" customModule="lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="iN0-l3-epB" id="ZDu-Za-asI"/>
             </connections>
@@ -17,28 +17,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-8H-9Wd">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="vdn-5D-Xqp">
-                    <rect key="frame" x="128.5" y="299" width="118" height="129"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="SI9-n4-Px4">
+                    <rect key="frame" x="97.5" y="210.5" width="180" height="246"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="aBL-Y5-l6n"/>
+                        <constraint firstAttribute="width" secondItem="SI9-n4-Px4" secondAttribute="height" multiplier="30:41" id="eyH-0n-6W3"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vdn-5D-Xqp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="30" id="0tO-jI-vk4"/>
-                <constraint firstAttribute="trailing" secondItem="ocK-8H-9Wd" secondAttribute="trailing" id="1la-dI-yqQ"/>
-                <constraint firstItem="ocK-8H-9Wd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NqI-G1-ywi"/>
-                <constraint firstItem="ocK-8H-9Wd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="THp-dw-lmd"/>
-                <constraint firstItem="vdn-5D-Xqp" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="65:368" id="fLr-xu-7yf"/>
-                <constraint firstAttribute="bottom" secondItem="ocK-8H-9Wd" secondAttribute="bottom" id="nje-of-qjD"/>
-                <constraint firstItem="vdn-5D-Xqp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vNF-O6-DnF"/>
+                <constraint firstItem="SI9-n4-Px4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dz7-bK-kcm"/>
+                <constraint firstItem="SI9-n4-Px4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="z0w-Zg-sGq"/>
             </constraints>
-            <point key="canvasLocation" x="25.5" y="51.5"/>
+            <point key="canvasLocation" x="24.800000000000001" y="50.824587706146929"/>
         </view>
     </objects>
     <resources>
-        <image name="Background" width="375" height="667"/>
-        <image name="LaunchImageLogo" width="130" height="129"/>
+        <image name="splash_logo" width="60" height="82"/>
     </resources>
 </document>

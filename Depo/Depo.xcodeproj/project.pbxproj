@@ -3782,6 +3782,7 @@
 		B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */; };
 		B5EC4C982359DD6300EBCB08 /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */; };
 		B5EC4C992359DD6300EBCB08 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */; };
+		B5EC4C9C2359EA9C00EBCB08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C9B2359EA9B00EBCB08 /* LaunchScreen.storyboard */; };
 		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
@@ -5549,7 +5550,6 @@
 		CE784CDE22A685FB00662219 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		CE784CDF22A685FB00662219 /* sample_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD3E2008AD6F003D8E05 /* sample_green@3x.png */; };
 		CE784CE022A685FB00662219 /* gonder_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACB62008AD6F003D8E05 /* gonder_btn@2x.png */; };
-		CE784CE122A685FB00662219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
 		CE784CE222A685FB00662219 /* share_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD512008AD6F003D8E05 /* share_icon.png */; };
 		CE784CE322A685FB00662219 /* Kucuk_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACD82008AD6F003D8E05 /* Kucuk_Selected.png */; };
 		CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF8731F348B5C002AC795 /* BottomSelectionTabBarViewController.xib */; };
@@ -8449,6 +8449,7 @@
 		B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
 		B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		B5EC4C9B2359EA9B00EBCB08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
@@ -14498,6 +14499,7 @@
 		B5B6542C22A7A744000E2FA9 /* Lifedrive */ = {
 			isa = PBXGroup;
 			children = (
+				B5EC4C9A2359EA9B00EBCB08 /* App */,
 				B5EC4C882359D8E200EBCB08 /* Presentation */,
 				8C6A1DCB2317EAEB00D792B9 /* container */,
 				CE784F2222A68CEB00662219 /* lifedrive.plist */,
@@ -14641,6 +14643,14 @@
 				B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B5EC4C9A2359EA9B00EBCB08 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B5EC4C9B2359EA9B00EBCB08 /* LaunchScreen.storyboard */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -18992,7 +19002,6 @@
 				CE784CDE22A685FB00662219 /* AppRater.bundle in Resources */,
 				CE784CDF22A685FB00662219 /* sample_green@3x.png in Resources */,
 				CE784CE022A685FB00662219 /* gonder_btn@2x.png in Resources */,
-				CE784CE122A685FB00662219 /* LaunchScreen.storyboard in Resources */,
 				CE784CE222A685FB00662219 /* share_icon.png in Resources */,
 				CE784CE322A685FB00662219 /* Kucuk_Selected.png in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
@@ -19321,6 +19330,7 @@
 				CE784E1522A685FB00662219 /* frekans.png in Resources */,
 				CE784E1622A685FB00662219 /* cropy_icon@2x.png in Resources */,
 				CE784E1722A685FB00662219 /* PremiumView.xib in Resources */,
+				B5EC4C9C2359EA9C00EBCB08 /* LaunchScreen.storyboard in Resources */,
 				CE784E1822A685FB00662219 /* crop@3x.png in Resources */,
 				CE784E1922A685FB00662219 /* LoginSettingsViewController.xib in Resources */,
 				CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */,
@@ -27634,7 +27644,7 @@
 			baseConfigurationReference = 46A596955202672C10F193CA /* Pods-lifedrive.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lifedrive/LifeDrive_LifeTech.entitlements;
@@ -27694,7 +27704,7 @@
 			baseConfigurationReference = 5990CCBE3AA09225ED819AD8 /* Pods-lifedrive.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lifedrive/LifeDrive_LifeTech.entitlements;
@@ -27751,7 +27761,7 @@
 			baseConfigurationReference = AFAA184789614675C547B964 /* Pods-lifedrive.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifedrive/LifeDrive-AppStore.entitlements";
@@ -27807,7 +27817,7 @@
 			baseConfigurationReference = E00FE251E51EBFC0964EF22A /* Pods-lifedrive.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLifedrive;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifedrive/LifeDrive-Enterprise.entitlements";
