@@ -480,6 +480,14 @@
 "Your latest uploads" = "Your latest uploads";
 "View Recent Activities" = "View Recent Activities";
 "View All Photos" = "View All Photos";
+"campaign_card_title" = "PhotoPick Campaign";
+"campaign_description_label_new_user" = "You have not participated yet";
+"campaign_description_label_experienced_user" = "You have not analyze with PhotoPick today. %d times..";
+"campaign_description_label_limit_reached" = "Your daily PhotoPick is out/expired";
+"campaign_description_label_another" = "Your total draw %d! To get more chance PP.";
+"campaign_campaign_detail_button" = "Campaign Detail";
+"analyze_photo_pic_detail_button" = "Analyze with PhotoPick";
+
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Lifebox storage is almost full!\nLet’s have a look for upgrade options!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
 "localFilesBeingProcessed" = "Processing local files.";
