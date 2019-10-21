@@ -110,7 +110,6 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             campaignInfoView.isHidden = false
             analyzeView.isHidden = false
             scrollView.contentInset.bottom = analyzeView.frame.height
-            campaignInfoView.setup(with: details)
         }
         
         imageView.loadImage(url: details.imageUrl)

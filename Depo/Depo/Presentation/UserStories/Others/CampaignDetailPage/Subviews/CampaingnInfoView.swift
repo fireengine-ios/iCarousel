@@ -52,7 +52,7 @@ final class CampaingnInfoView: UIView {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.campaignDetailInfoDescription + "\n" + TextConstants.campaignDetailInfoDescription
+            newValue.text = TextConstants.campaignDetailInfoDescription
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.numberOfLines = 0
@@ -64,10 +64,5 @@ final class CampaingnInfoView: UIView {
         super.layoutSubviews()
         
         contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
-    }
-    
-    func setup(with details: CampaignCardResponse) {
-        titleLabel.text = details.title
-        descriptionLabel.text = details.message
     }
 }
