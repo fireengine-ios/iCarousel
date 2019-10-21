@@ -29,6 +29,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
    
     private var detailUrl: URL?
     private var userStatus: UserStatus?
+    private lazy var router = RouterVC()
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -111,46 +112,29 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     }
     
     @IBAction private func analyzePhotoPickButton(_ sender: Any) {
-        switch userStatus {
-        case .backendMode:
+        if userStatus == .backendMode {
             assertionFailure()
-        case .newUser:
-            // FE-1687 here
-            break
-        case .experiencedUser:
-            // FE-1687 here
-            break
-        case .daylyLimitReached:
-            // FE-1687 here
-            break
-        case .another:
-            // FE-1687 here
-            break
-        default:
-            assertionFailure()
+        } else {
+            openPhotopickHistoryPage()
         }
     }
     
     @IBAction private func campaignDetailButton(_ sender: Any) {
-        
-        switch userStatus {
-        case .backendMode:
+        if userStatus == .backendMode {
             presentWebViewWithDetail(with: detailUrl)
-        case .newUser:
-            // FE-1682 here
-            break
-        case .experiencedUser:
-            // FE-1682 here
-            break
-        case .daylyLimitReached:
-            // FE-1682 and FE-1683 here
-            break
-        case .another:
-            // FE-1682 and FE-1683 here
-            break
-        default:
-            assertionFailure()
+        } else {
+            openCampaignDetailsPage()
         }
+    }
+    
+    private func openCampaignDetailsPage() {
+        let controller = router.campaignDetailViewController()
+        router.pushViewController(viewController: controller)
+    }
+
+    private func openPhotopickHistoryPage() {
+        let controller = router.analyzesHistoryController()
+        router.pushViewController(viewController: controller)
     }
 }
 

@@ -54,10 +54,10 @@ final class CampaignContestInfoView: UIView {
     
     @IBOutlet private weak var remainingView: UIStackView!
     
-    func setup(with info: CampaignUsage) {
-        totalCountLabel.text = "\(info.totalUsed)"
-        remainingCountLabel.text = "\(info.dailyRemaining)"
-        remainingView.isHidden = info.dailyRemaining == 0  
+    func setup(with details: CampaignCardResponse) {
+        totalCountLabel.text = "\(details.totalUsed)"
+        remainingCountLabel.text = "\(details.dailyRemaining)"
+        remainingView.isHidden = details.dailyRemaining == 0  
     }
 
 }

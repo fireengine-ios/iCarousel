@@ -3394,9 +3394,6 @@
 		98758F612359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F622359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F632359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
-		98758F652359BC4900D06952 /* CampaignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F642359BC4900D06952 /* CampaignResponse.swift */; };
-		98758F662359BC4900D06952 /* CampaignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F642359BC4900D06952 /* CampaignResponse.swift */; };
-		98758F672359BC4900D06952 /* CampaignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F642359BC4900D06952 /* CampaignResponse.swift */; };
 		98792DCF22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
@@ -8238,7 +8235,6 @@
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98758F602359BC3E00D06952 /* CampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignService.swift; sourceTree = "<group>"; };
-		98758F642359BC4900D06952 /* CampaignResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignResponse.swift; sourceTree = "<group>"; };
 		98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsViewController.swift; sourceTree = "<group>"; };
 		98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportedPlaylistsViewController.xib; sourceTree = "<group>"; };
 		98792DD522FD486F000A77E5 /* SpotifyImportedTracksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedTracksViewController.swift; sourceTree = "<group>"; };
@@ -13849,7 +13845,6 @@
 			isa = PBXGroup;
 			children = (
 				98758F602359BC3E00D06952 /* CampaignService.swift */,
-				98758F642359BC4900D06952 /* CampaignResponse.swift */,
 			);
 			path = CampaignService;
 			sourceTree = "<group>";
@@ -20401,7 +20396,6 @@
 				8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */,
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
-				98758F662359BC4900D06952 /* CampaignResponse.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
@@ -22484,7 +22478,6 @@
 				CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */,
 				CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */,
 				CE33DFFD1F021F4500706C40 /* ReachabilityService.swift in Sources */,
-				98758F652359BC4900D06952 /* CampaignResponse.swift in Sources */,
 				CE51AC8D1EF90853005DCEE0 /* AutoNextEditingRowPasser.swift in Sources */,
 				8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */,
 				CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */,
@@ -24285,7 +24278,6 @@
 				CE784AE322A685FB00662219 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				CE784AE422A685FB00662219 /* FaceImagePhotosInitializer.swift in Sources */,
 				CE784AE522A685FB00662219 /* BaseFilesGreedViewInput.swift in Sources */,
-				98758F672359BC4900D06952 /* CampaignResponse.swift in Sources */,
 				CE784AE622A685FB00662219 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE784AE722A685FB00662219 /* UpdateServerIntegration.m in Sources */,
 				CE784AE822A685FB00662219 /* BaseFilesGreedViewOutput.swift in Sources */,
