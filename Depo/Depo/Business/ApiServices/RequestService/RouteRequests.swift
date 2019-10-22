@@ -199,6 +199,11 @@ struct RouteRequests {
         static let importedTracks = importedPlaylists +/ "track"
     }
     
+    // MARK: - Campaign
+    
+    static let campaignApi = baseUrl +/ "campaign"
+    static let campaignPhotopick = campaignApi +/ "photopick"
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {

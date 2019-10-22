@@ -1490,4 +1490,15 @@ struct TextConstants {
     static let tbMatiHomeCardYearsAgo = NSLocalizedString("tbmatic_home_card_years_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMatiHomeCardThisYear = NSLocalizedString("tbmatic_home_card_this_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let campaignDetailTitle = NSLocalizedString("campaign_detail_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailMoreInfoButton = NSLocalizedString("campaign_detail_more_info_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoTitle = NSLocalizedString("campaign_detail_contest_info_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoTotalDraw = NSLocalizedString("campaign_detail_contest_info_total_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoRemainingDraw = NSLocalizedString("campaign_detail_contest_info_remaining_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroTitle = NSLocalizedString("campaign_detail_intro_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroGift = NSLocalizedString("campaign_detail_intro_gift", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroCelebration = NSLocalizedString("campaign_detail_intro_celebration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroNounCelebration = NSLocalizedString("campaign_detail_intro_noun_celebration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailInfoTitle = NSLocalizedString("campaign_detail_info_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailInfoDescription = NSLocalizedString("campaign_detail_info_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

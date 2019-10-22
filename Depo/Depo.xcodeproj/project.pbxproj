@@ -3400,6 +3400,9 @@
 		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
+		98758F612359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
+		98758F622359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
+		98758F632359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98792DCF22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
@@ -3465,6 +3468,11 @@
 		989BDE6322F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989BDE3922F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift */; };
 		98A867772080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */; };
 		98A867782080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */; };
+		98AA10412358549A00B12485 /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
+		98AA10432358597800B12485 /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
+		98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
+		98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
+		98AA104723585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
 		98B01C76206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
@@ -3503,6 +3511,12 @@
 		98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
+		98F9C56E23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
+		98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
+		98F9C57023584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
+		98F9C57223585168008C5ECF /* CampaignContestInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */; };
+		98F9C57323585168008C5ECF /* CampaignContestInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */; };
+		98F9C57423585168008C5ECF /* CampaignContestInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
 		9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
@@ -8232,6 +8246,7 @@
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
+		98758F602359BC3E00D06952 /* CampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignService.swift; sourceTree = "<group>"; };
 		98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsViewController.swift; sourceTree = "<group>"; };
 		98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportedPlaylistsViewController.xib; sourceTree = "<group>"; };
 		98792DD522FD486F000A77E5 /* SpotifyImportedTracksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedTracksViewController.swift; sourceTree = "<group>"; };
@@ -8254,6 +8269,9 @@
 		989BDE3822F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylistViewController.swift; sourceTree = "<group>"; };
 		989BDE3922F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		98AA10402358549A00B12485 /* CampaignIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignIntroView.swift; sourceTree = "<group>"; };
+		98AA10422358597800B12485 /* CampaingnInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaingnInfoView.swift; sourceTree = "<group>"; };
+		98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CampaignDetailViewController.xib; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
@@ -8271,6 +8289,8 @@
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
 		98EAC9412080CBFF00AAD5B6 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignDetailViewController.swift; sourceTree = "<group>"; };
+		98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignContestInfoView.swift; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationModuleInput.swift; sourceTree = "<group>"; };
 		9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewInput.swift; sourceTree = "<group>"; };
@@ -13844,6 +13864,14 @@
 			path = AnalyzeHistory;
 			sourceTree = "<group>";
 		};
+		98758F5F2359BC1900D06952 /* CampaignService */ = {
+			isa = PBXGroup;
+			children = (
+				98758F602359BC3E00D06952 /* CampaignService.swift */,
+			);
+			path = CampaignService;
+			sourceTree = "<group>";
+		};
 		98792DCB22FD47EF000A77E5 /* ImportedPlaylists */ = {
 			isa = PBXGroup;
 			children = (
@@ -13986,6 +14014,26 @@
 				98EAC9412080CBFF00AAD5B6 /* ContactService.swift */,
 			);
 			path = ContactService;
+			sourceTree = "<group>";
+		};
+		98F9C56C23584BA6008C5ECF /* CampaignDetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				98F9C5752358516B008C5ECF /* Subviews */,
+				98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */,
+				98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */,
+			);
+			path = CampaignDetailPage;
+			sourceTree = "<group>";
+		};
+		98F9C5752358516B008C5ECF /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */,
+				98AA10402358549A00B12485 /* CampaignIntroView.swift */,
+				98AA10422358597800B12485 /* CampaingnInfoView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		992E6B5199B59ED8492AFD33 /* Router */ = {
@@ -14642,6 +14690,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				98F9C56C23584BA6008C5ECF /* CampaignDetailPage */,
 				981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */,
 				896133A623390D4F000083B7 /* BasePopUpController */,
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
@@ -15471,6 +15520,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				98758F5F2359BC1900D06952 /* CampaignService */,
 				FA793D7A2018725300A02B46 /* PeopleService */,
 				FA793D772018725300A02B46 /* PlacesService */,
 				FA793D7D2018725400A02B46 /* ThingsService */,
@@ -17866,6 +17916,7 @@
 				8C06B06D2008AD71003D8E05 /* paylas_diger@2x.png in Resources */,
 				8C06AF3D2008AD70003D8E05 /* close_icon@3x.png in Resources */,
 				8C06B0552008AD71003D8E05 /* parlaklik_secili@2x.png in Resources */,
+				98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
 				8C06B16B2008AD72003D8E05 /* toolbar_sekil_icon.png in Resources */,
 				8C06AF172008AD70003D8E05 /* cizgi_1@2x.png in Resources */,
 				8C06B0512008AD71003D8E05 /* parlaklik@3x.png in Resources */,
@@ -18341,6 +18392,7 @@
 				8C06B13A2008AD72003D8E05 /* tahta_yeni.png in Resources */,
 				98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				8C06AEFA2008AD70003D8E05 /* caps2.png in Resources */,
+				98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
 				8C06B17E2008AD72003D8E05 /* turuncu.png in Resources */,
 				8C06B00E2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
 				73B4077222E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib in Resources */,
@@ -19355,6 +19407,7 @@
 				CE784E4622A685FB00662219 /* Orta_Selected@3x.png in Resources */,
 				CE784E4722A685FB00662219 /* SuggestionTableSectionHeader.xib in Resources */,
 				CE784E4822A685FB00662219 /* cropy_icon@3x.png in Resources */,
+				98AA104723585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
 				CE784E4922A685FB00662219 /* sample@3x.png in Resources */,
 				CE784E4A22A685FB00662219 /* LatestUpladsCard.xib in Resources */,
 				CE784E4B22A685FB00662219 /* edit_selected@2x.png in Resources */,
@@ -20653,6 +20706,7 @@
 				CE00B254220332FF00A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
+				98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
 				8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */,
 				4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
@@ -20781,6 +20835,7 @@
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
+				98758F622359BC3E00D06952 /* CampaignService.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
 				4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */,
 				B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
@@ -21604,6 +21659,7 @@
 				CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */,
 				8C0E8FD01FDEBDFF00789C91 /* OTPViewPresenter.swift in Sources */,
 				8C0E8FD11FDEBDFF00789C91 /* OTPViewModuleInput.swift in Sources */,
+				98F9C57323585168008C5ECF /* CampaignContestInfoView.swift in Sources */,
 				8C0B91C12017148E00A5BA81 /* CollectionViewHeaderWithText.swift in Sources */,
 				8C0E8FD21FDEBDFF00789C91 /* OTPViewInteractor.swift in Sources */,
 				8C0E8FD31FDEBDFF00789C91 /* OTPViewInteractorIO.swift in Sources */,
@@ -22389,6 +22445,7 @@
 				9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
+				98AA10432358597800B12485 /* CampaingnInfoView.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				73FE51F122CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
@@ -22529,6 +22586,7 @@
 				CE5A612F2060F8AE00793EB0 /* Keys.swift in Sources */,
 				8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */,
 				787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */,
+				98F9C56E23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
@@ -22642,6 +22700,7 @@
 				CE00B2512202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
+				98AA10412358549A00B12485 /* CampaignIntroView.swift in Sources */,
 				B50B4A69220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
 				897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
@@ -22979,6 +23038,7 @@
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
 				B53DCE8A20EF634900400DBA /* SyncStatus.m in Sources */,
 				7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */,
+				98758F612359BC3E00D06952 /* CampaignService.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
@@ -23352,6 +23412,7 @@
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
+				98F9C57223585168008C5ECF /* CampaignContestInfoView.swift in Sources */,
 				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
 				2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
@@ -23464,6 +23525,7 @@
 				CE78480D22A685FB00662219 /* Alamofire+Validate.swift in Sources */,
 				CE78480E22A685FB00662219 /* AnimationCard.swift in Sources */,
 				CE78480F22A685FB00662219 /* CodeTextField.swift in Sources */,
+				98758F632359BC3E00D06952 /* CampaignService.swift in Sources */,
 				CE78481022A685FB00662219 /* ProfilePhoneEnterView.swift in Sources */,
 				CE78481122A685FB00662219 /* TermsOfUseInteractor.swift in Sources */,
 				CE78481322A685FB00662219 /* ProfileFieldView.swift in Sources */,
@@ -24582,6 +24644,7 @@
 				CE784C1B22A685FB00662219 /* EmailEnterController.swift in Sources */,
 				CE784C1C22A685FB00662219 /* InstaPickSmallPhotoView.swift in Sources */,
 				8C1E5BD722CB8BC8008FDA02 /* PhotoVideoScrollBarManager.swift in Sources */,
+				98F9C57423585168008C5ECF /* CampaignContestInfoView.swift in Sources */,
 				CE784C1D22A685FB00662219 /* ServerError.swift in Sources */,
 				89E51D3E22CA10FD007A7DBC /* CreateStoryPreviewInitializer.swift in Sources */,
 				CE784C1F22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
@@ -24688,6 +24751,7 @@
 				CE784C7C22A685FB00662219 /* PremiumFeaturesView.swift in Sources */,
 				CE784C7D22A685FB00662219 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				CE784C7E22A685FB00662219 /* ActivityTimelineInteractor.swift in Sources */,
+				98F9C57023584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
 				8C1E5BDC22CB8C0D008FDA02 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				CE784C7F22A685FB00662219 /* CollageCard.swift in Sources */,
 				CE784C8022A685FB00662219 /* ActivityTimelineRouterInput.swift in Sources */,
