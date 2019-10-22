@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LandingPageViewController: UIViewController {
+final class LandingPageViewController: ViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var pageControl: UIPageControl! {
@@ -21,7 +21,8 @@ final class LandingPageViewController: UIViewController {
     
     @IBOutlet private weak var startButton: BlueButtonWithMediumWhiteText! {
         willSet {
-            newValue.setTitle(TextConstants.landingStartUsing, for: .normal)
+            newValue.setTitle(TextConstants.landingStartButton, for: .normal)
+            newValue.titleLabel?.font = UIFont.RobotoRegularFont(size: Device.isIpad ? 20 : 15)
         }
     }
 
@@ -31,12 +32,28 @@ final class LandingPageViewController: UIViewController {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var router = RouterVC()
     
+    private let isTurkcell: Bool
+    
+    init(isTurkcell: Bool) {
+        self.isTurkcell = isTurkcell
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        isTurkcell = false
+        
+        assertionFailure("called from xib")
+        super.init(coder: aDecoder)
+    }
+    
     //MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        setStatusBarHiddenForLandscapeIfNeed(true)
+        trackScreen(pageNum: 1)
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,7 +74,6 @@ final class LandingPageViewController: UIViewController {
         }, error: { [weak self] error in
             self?.hideSpinner()
         })
-
     }
     
     private func goToSyncSettingsView() {
@@ -70,18 +86,21 @@ final class LandingPageViewController: UIViewController {
     }
     
     //MARK: Actions
-    @IBAction func pageControlChangeValue(_ sender: UIPageControl) {
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
         dataSource.scroll(to: sender.currentPage)
     }
     
-    @IBAction private func onStartUsingButton() {
-//        let storageVars: StorageVars = factory.resolve()
-//        storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
+    @IBAction private func onStartButton(_ sender: UIButton) {
+        let storageVars: StorageVars = factory.resolve()
+        storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
         
-        let settings = router.onboardingScreen
-        router.setNavigationController(controller: settings)
+        if isTurkcell {
+            openAutoSyncIfNeeded()
+        } else {
+            let settings = router.onboardingScreen
+            router.setNavigationController(controller: settings)
+        }
     }
-    
 }
 
 // MARK: - LandingPageCollectionViewDataSourceDelegate
@@ -89,5 +108,6 @@ final class LandingPageViewController: UIViewController {
 extension LandingPageViewController: LandingPageCollectionViewDataSourceDelegate {
     func pageIndexDidChange(_ newIndex: Int) {
         pageControl.currentPage = newIndex
+        trackScreen(pageNum: newIndex + 1)
     }
 }

@@ -11,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingPageViewController" customModule="lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="4ke-zH-ad6" id="tKd-6w-8Al"/>
-                <outlet property="pageControl" destination="ZPv-b7-1cd" id="s18-3A-xOI"/>
+                <outlet property="pageControl" destination="ZPv-b7-1cd" id="aaY-5a-PG1"/>
                 <outlet property="startButton" destination="HhZ-SB-Vxj" id="9xl-TD-CXx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="prV-BG-Atz"/>
             </connections>
@@ -29,7 +29,7 @@
                     </constraints>
                 </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4ke-zH-ad6">
-                    <rect key="frame" x="0.0" y="114" width="414" height="579"/>
+                    <rect key="frame" x="0.0" y="114" width="414" height="592"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="evh-o0-N4v">
                         <size key="itemSize" width="50" height="50"/>
@@ -38,21 +38,26 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-b7-1cd">
-                    <rect key="frame" x="187.5" y="701" width="39" height="37"/>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-b7-1cd">
+                    <rect key="frame" x="30" y="706" width="354" height="37"/>
+                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
-                        <action selector="pageControlChangeValue:" destination="-1" eventType="valueChanged" id="e3Z-hr-nYp"/>
+                        <action selector="pageControlValueChanged:" destination="-1" eventType="valueChanged" id="0rb-s5-0j7"/>
                     </connections>
                 </pageControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-SB-Vxj" customClass="BlueButtonWithMediumWhiteText" customModule="lifedrive" customModuleProvider="target">
                     <rect key="frame" x="107" y="768" width="200" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="7vj-K1-11h"/>
-                        <constraint firstAttribute="height" constant="50" id="tmG-Yz-xcc"/>
+                        <constraint firstAttribute="width" constant="200" id="7vj-K1-11h">
+                            <variation key="heightClass=regular-widthClass=regular" constant="250"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="50" id="tmG-Yz-xcc">
+                            <variation key="heightClass=regular-widthClass=regular" constant="62"/>
+                        </constraint>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="onStartUsingButton" destination="-1" eventType="touchUpInside" id="1IP-gt-9ho"/>
+                        <action selector="onStartButton:" destination="-1" eventType="touchUpInside" id="r4L-04-scG"/>
                     </connections>
                 </button>
             </subviews>
@@ -60,14 +65,18 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4ke-zH-ad6" secondAttribute="trailing" id="1yY-ay-ZdF"/>
                 <constraint firstItem="SQ4-N5-gcI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="34s-nX-r8k"/>
+                <constraint firstItem="ZPv-b7-1cd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="EMT-f5-NwD"/>
                 <constraint firstItem="4ke-zH-ad6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="70" id="OhN-0Q-aR9"/>
-                <constraint firstItem="ZPv-b7-1cd" firstAttribute="top" secondItem="4ke-zH-ad6" secondAttribute="bottom" constant="8" id="Ps7-Nl-JfM"/>
+                <constraint firstItem="ZPv-b7-1cd" firstAttribute="top" secondItem="4ke-zH-ad6" secondAttribute="bottom" id="Ps7-Nl-JfM"/>
                 <constraint firstItem="4ke-zH-ad6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Sef-vb-3CJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZPv-b7-1cd" secondAttribute="trailing" constant="30" id="T0h-lx-94P"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HhZ-SB-Vxj" secondAttribute="bottom" constant="44" id="mLo-qh-bG2"/>
                 <constraint firstItem="HhZ-SB-Vxj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mcM-eo-aVB"/>
-                <constraint firstItem="SQ4-N5-gcI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="ose-NO-pXG"/>
+                <constraint firstItem="SQ4-N5-gcI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="ose-NO-pXG">
+                    <variation key="heightClass=regular-widthClass=regular" constant="38"/>
+                </constraint>
                 <constraint firstItem="ZPv-b7-1cd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qVo-7v-Old"/>
-                <constraint firstItem="HhZ-SB-Vxj" firstAttribute="top" secondItem="ZPv-b7-1cd" secondAttribute="bottom" constant="30" id="thP-zM-A5L"/>
+                <constraint firstItem="HhZ-SB-Vxj" firstAttribute="top" secondItem="ZPv-b7-1cd" secondAttribute="bottom" constant="25" id="thP-zM-A5L"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="144.64285714285714"/>

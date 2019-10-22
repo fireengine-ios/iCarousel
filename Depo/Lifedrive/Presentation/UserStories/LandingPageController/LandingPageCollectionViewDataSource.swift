@@ -63,10 +63,7 @@ final class LandingPageCollectionViewDataSource: NSObject {
     }
     
     func scroll(to page: Int) {
-        if page < collectionView.numberOfItems(inSection: 0) && page > 0 {
-            collectionView.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
-            currentPage = page
-        }
+        collectionView.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
     }
     
     private func item(for indexPath: IndexPath) -> LandingItem {
@@ -98,7 +95,7 @@ extension LandingPageCollectionViewDataSource: UICollectionViewDataSource {
 
 extension LandingPageCollectionViewDataSource: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        let page = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
         
         if currentPage != page {
             currentPage = page

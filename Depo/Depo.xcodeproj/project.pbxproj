@@ -3487,9 +3487,10 @@
 		98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
-		98F2D61A235EF78700255869 /* Poppins-Bold.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D616235EE80C00255869 /* Poppins-Bold.ttf */; };
-		98F2D61C235EF78700255869 /* SF-Pro-Text-Regular.otf in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D617235EE8BD00255869 /* SF-Pro-Text-Regular.otf */; };
-		98F2D61E235EFC1300255869 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F2D61D235EFC1200255869 /* Poppins-Regular.ttf */; };
+		98F01598235F0B590011085D /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */; };
+		98F01599235F0B590011085D /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01595235F0B580011085D /* Poppins-Bold.ttf */; };
+		98F0159A235F0B590011085D /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01596235F0B580011085D /* Roboto-Regular.ttf */; };
+		98F0159B235F0B590011085D /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01597235F0B590011085D /* Poppins-Regular.ttf */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
 		9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
@@ -5281,7 +5282,6 @@
 		CE784BC122A685FB00662219 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
-		CE784BC422A685FB00662219 /* PageForLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2720209C560500EF6C79 /* PageForLanding.swift */; };
 		CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */; };
 		CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */; };
 		CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */; };
@@ -5712,7 +5712,6 @@
 		CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
 		CE784D8022A685FB00662219 /* kup_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACE22008AD6F003D8E05 /* kup_selected@2x.png */; };
 		CE784D8122A685FB00662219 /* duz_cizgi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC882008AD6F003D8E05 /* duz_cizgi@2x.png */; };
-		CE784D8222A685FB00662219 /* LandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE271A209B537500EF6C79 /* LandingPageViewController.xib */; };
 		CE784D8322A685FB00662219 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
@@ -5807,7 +5806,6 @@
 		CE784DDE22A685FB00662219 /* sag_ok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD372008AD6F003D8E05 /* sag_ok@3x.png */; };
 		CE784DDF22A685FB00662219 /* check-mark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC5A2008AD6F003D8E05 /* check-mark@3x.png */; };
 		CE784DE022A685FB00662219 /* parlaklik@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACFC2008AD6F003D8E05 /* parlaklik@2x.png */; };
-		CE784DE122A685FB00662219 /* PageForLanding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE2721209C560500EF6C79 /* PageForLanding.xib */; };
 		CE784DE222A685FB00662219 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC8E2008AD6F003D8E05 /* edit.png */; };
 		CE784DE322A685FB00662219 /* kup.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACDE2008AD6F003D8E05 /* kup.png */; };
 		CE784DE422A685FB00662219 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
@@ -8255,9 +8253,10 @@
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
 		98EAC9412080CBFF00AAD5B6 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
-		98F2D616235EE80C00255869 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		98F2D617235EE8BD00255869 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
-		98F2D61D235EFC1200255869 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		98F01595235F0B580011085D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		98F01596235F0B580011085D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		98F01597235F0B590011085D /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationModuleInput.swift; sourceTree = "<group>"; };
 		9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewInput.swift; sourceTree = "<group>"; };
@@ -13980,9 +13979,10 @@
 		98F2D613235EE65D00255869 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				98F2D616235EE80C00255869 /* Poppins-Bold.ttf */,
-				98F2D61D235EFC1200255869 /* Poppins-Regular.ttf */,
-				98F2D617235EE8BD00255869 /* SF-Pro-Text-Regular.otf */,
+				98F01595235F0B580011085D /* Poppins-Bold.ttf */,
+				98F01597235F0B590011085D /* Poppins-Regular.ttf */,
+				98F01596235F0B580011085D /* Roboto-Regular.ttf */,
+				98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -19051,6 +19051,7 @@
 				CE784CE022A685FB00662219 /* gonder_btn@2x.png in Resources */,
 				CE784CE222A685FB00662219 /* share_icon.png in Resources */,
 				CE784CE322A685FB00662219 /* Kucuk_Selected.png in Resources */,
+				98F01599235F0B590011085D /* Poppins-Bold.ttf in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE784CE522A685FB00662219 /* oval_siyah@3x.png in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
@@ -19120,7 +19121,6 @@
 				CE784D2222A685FB00662219 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				CE784D2322A685FB00662219 /* right@3x.png in Resources */,
 				CE784D2422A685FB00662219 /* ok@2x.png in Resources */,
-				98F2D61E235EFC1300255869 /* Poppins-Regular.ttf in Resources */,
 				CE784D2522A685FB00662219 /* PVViewerController.xib in Resources */,
 				CE784D2622A685FB00662219 /* InstapickPopUpController.xib in Resources */,
 				CE784D2722A685FB00662219 /* duz_cizgi_selected@2x.png in Resources */,
@@ -19219,7 +19219,6 @@
 				CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */,
 				CE784D8022A685FB00662219 /* kup_selected@2x.png in Resources */,
 				CE784D8122A685FB00662219 /* duz_cizgi@2x.png in Resources */,
-				CE784D8222A685FB00662219 /* LandingPageViewController.xib in Resources */,
 				CE784D8322A685FB00662219 /* (null) in Resources */,
 				CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */,
 				CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */,
@@ -19321,12 +19320,12 @@
 				CE784DDE22A685FB00662219 /* sag_ok@3x.png in Resources */,
 				CE784DDF22A685FB00662219 /* check-mark@3x.png in Resources */,
 				CE784DE022A685FB00662219 /* parlaklik@2x.png in Resources */,
-				CE784DE122A685FB00662219 /* PageForLanding.xib in Resources */,
 				CE784DE222A685FB00662219 /* edit.png in Resources */,
 				CE784DE322A685FB00662219 /* kup.png in Resources */,
 				CE784DE422A685FB00662219 /* TurkcellSaturaMedIta.ttf in Resources */,
 				CE784DE522A685FB00662219 /* topright@2x.png in Resources */,
 				CE784DE622A685FB00662219 /* paylas_kaydet.png in Resources */,
+				98F0159B235F0B590011085D /* Poppins-Regular.ttf in Resources */,
 				CE784DE722A685FB00662219 /* paylas_linkedin.png in Resources */,
 				CE784DE822A685FB00662219 /* paylas_kaydet@2x.png in Resources */,
 				4815689422BCF2E400376DFC /* GoogleService-Info-ent.plist in Resources */,
@@ -19500,6 +19499,7 @@
 				CE784E8722A685FB00662219 /* kare_selected@2x.png in Resources */,
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
 				CE784E8922A685FB00662219 /* Kucuk_Selected@3x.png in Resources */,
+				98F0159A235F0B590011085D /* Roboto-Regular.ttf in Resources */,
 				CE784E8A22A685FB00662219 /* t_kucuk_selected@3x.png in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
 				CE784E8C22A685FB00662219 /* ManageContactsViewController.xib in Resources */,
@@ -19557,6 +19557,7 @@
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
+				98F01598235F0B590011085D /* SF-Pro-Text-Regular.otf in Resources */,
 				CE784EBE22A685FB00662219 /* daire_selected.png in Resources */,
 				481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */,
 				CE784EBF22A685FB00662219 /* paylas_kaydet@3x.png in Resources */,
@@ -23505,8 +23506,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98F2D61A235EF78700255869 /* Poppins-Bold.ttf in Sources */,
-				98F2D61C235EF78700255869 /* SF-Pro-Text-Regular.otf in Sources */,
 				CE7847F722A685FB00662219 /* ActivitiesByDay.swift in Sources */,
 				CE7847F822A685FB00662219 /* ActivitiesByMinutesAndType.swift in Sources */,
 				CE7847F922A685FB00662219 /* ActivityFileType.swift in Sources */,
@@ -24546,7 +24545,6 @@
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
-				CE784BC422A685FB00662219 /* PageForLanding.swift in Sources */,
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
 				737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,

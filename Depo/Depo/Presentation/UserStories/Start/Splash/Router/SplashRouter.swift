@@ -21,11 +21,7 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToLandingPages(isTurkCell: Bool) {
-        #if LIFEDRIVE
-        let landingVC = LandingPageViewController()
-        #else
         let landingVC = LandingPageViewController(isTurkcell: isTurkCell)
-        #endif
         router.setNavigationController(controller: landingVC)
     }
     

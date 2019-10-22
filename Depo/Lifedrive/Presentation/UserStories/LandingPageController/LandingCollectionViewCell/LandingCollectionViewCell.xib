@@ -18,38 +18,40 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaG-FS-lLL">
-                        <rect key="frame" x="8" y="270" width="359" height="36"/>
+                        <rect key="frame" x="8" y="260" width="359" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="hPd-nI-8M0"/>
+                            <constraint firstAttribute="height" constant="36" id="hPd-nI-8M0">
+                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                            </constraint>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-GW-GHd">
-                        <rect key="frame" x="35" y="322" width="305" height="65"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="65" id="i70-gh-KCJ"/>
-                        </constraints>
+                        <rect key="frame" x="35" y="312" width="305" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOR-XQ-gOu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vaG-FS-lLL" firstAttribute="top" secondItem="DOR-XQ-gOu" secondAttribute="bottom" constant="20" id="8ED-IC-lGW"/>
+                    <constraint firstItem="vaG-FS-lLL" firstAttribute="top" secondItem="DOR-XQ-gOu" secondAttribute="bottom" constant="8" id="8ED-IC-lGW"/>
                     <constraint firstItem="DOR-XQ-gOu" firstAttribute="top" secondItem="LKV-rO-ecN" secondAttribute="top" id="8Rh-8J-Hja"/>
                     <constraint firstItem="ZkD-GW-GHd" firstAttribute="top" secondItem="vaG-FS-lLL" secondAttribute="bottom" constant="16" id="BGN-AA-wuN"/>
                     <constraint firstItem="vaG-FS-lLL" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" constant="8" id="Bva-BE-6Fb"/>
                     <constraint firstAttribute="trailing" secondItem="ZkD-GW-GHd" secondAttribute="trailing" constant="35" id="K7c-Ca-htm"/>
                     <constraint firstAttribute="trailing" secondItem="vaG-FS-lLL" secondAttribute="trailing" constant="8" id="WKJ-oj-W1c"/>
-                    <constraint firstAttribute="bottom" secondItem="ZkD-GW-GHd" secondAttribute="bottom" id="el4-5T-9uX"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZkD-GW-GHd" secondAttribute="bottom" id="el4-5T-9uX"/>
                     <constraint firstAttribute="trailing" secondItem="DOR-XQ-gOu" secondAttribute="trailing" id="hTB-Gv-TrP"/>
                     <constraint firstItem="DOR-XQ-gOu" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" id="kL4-nM-af4"/>
                     <constraint firstItem="ZkD-GW-GHd" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" constant="35" id="laT-f7-z3K"/>
+                    <constraint firstAttribute="bottom" secondItem="vaG-FS-lLL" secondAttribute="bottom" constant="91" id="mnC-QE-Nr0">
+                        <variation key="heightClass=regular-widthClass=regular" constant="106"/>
+                    </constraint>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="375" height="387"/>

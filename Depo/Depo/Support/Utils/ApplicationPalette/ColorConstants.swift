@@ -194,5 +194,9 @@ extension UIFont {
     static func SFProRegularFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "SFProText-Regular", size: size)!
     }
+    
+    static func RobotoRegularFont(size: CGFloat = 9) -> UIFont {
+        return UIFont(name: "Roboto-Regular", size: size)!
+    }
     #endif
 }
