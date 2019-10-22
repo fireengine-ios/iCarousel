@@ -1245,3 +1245,15 @@
 "tbmatic_home_card_year_ago" = "%d year ago";
 "tbmatic_home_card_years_ago" = "%d years ago";
 "tbmatic_home_card_this_year" = "In this year";
+
+"campaign_detail_title" = "Campaign Detail";
+"campaign_detail_more_info_button" = "For more information %@ >";
+"campaign_detail_contest_info_title" = "My Contest Information";
+"campaign_detail_contest_info_total_draw" = "Total Draw";
+"campaign_detail_contest_info_remaining_draw" = "Remaining Draw";
+"campaign_detail_intro_title" = "Campaign Introduction";
+"campaign_detail_intro_gift" = "Lorem ipsum dolor sit amet";
+"campaign_detail_intro_celebration" = "Lorem ipsum dolor sit amet";
+"campaign_detail_intro_noun_celebration" = "Lorem ipsum dolor sit amet";
+"campaign_detail_info_title" = "Campaign Info Title";
+"campaign_detail_info_description" = "Milli Piyango contest date lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet çekilis.";

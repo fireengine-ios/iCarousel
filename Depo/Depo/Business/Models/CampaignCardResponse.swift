@@ -108,4 +108,18 @@ final class CampaignCardResponse {
     }
 }
 
+enum CampaignPhotopickError {
+    case empty
+    case error(Error)
+}
 
+extension CampaignPhotopickError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .empty:
+            return "\(RouteRequests.campaignPhotopick) not Campaign Photopick Status in response"
+        case .error(let error):
+            return error.description
+        }
+    }
+}
