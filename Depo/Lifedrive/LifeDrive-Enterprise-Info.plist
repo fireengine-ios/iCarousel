@@ -160,6 +160,9 @@
 		<string>TurkcellSaturaDem.ttf</string>
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-Bold.ttf</string>
+		<string>SF-Pro-Text-Regular.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
