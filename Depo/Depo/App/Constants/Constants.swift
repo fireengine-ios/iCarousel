@@ -346,6 +346,11 @@ struct TextConstants {
     static let campaignDetailButtonTitle = NSLocalizedString("campaign_campaign_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzePhotoPickButtonTitle = NSLocalizedString("analyze_photo_pic_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: Campaign PhotoPick
+    static let campaignViewControllerShowResultButton = NSLocalizedString("campaign_vc_result_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignViewControllerEditProfileButton = NSLocalizedString("campaign_vc_edit_profile_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignViewControllerBecomePremium = NSLocalizedString("campaign_vc_become_premium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     // MARK: Home Latest Uploads card
     static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

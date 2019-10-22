@@ -37,7 +37,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private var backgroundView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            newValue.backgroundColor = ColorConstants.backgroundViewColor
         }
     }
     

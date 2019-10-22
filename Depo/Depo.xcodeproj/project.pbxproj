@@ -336,6 +336,15 @@
 		734D9E13233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
 		734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
 		734D9E15233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */; };
+		7373EC22235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
+		7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
+		7373EC24235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
+		7373EC25235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */; };
+		7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */; };
+		7373EC27235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */; };
+		7373EC29235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
+		7373EC2A235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
+		7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
 		737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
 		737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
 		737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
@@ -6865,6 +6874,9 @@
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecretQuestionErrors.swift; sourceTree = "<group>"; };
+		7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewController.swift; sourceTree = "<group>"; };
+		7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCampaignViewController.xib; sourceTree = "<group>"; };
+		7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewControllerDesigner.swift; sourceTree = "<group>"; };
 		737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityQuestionViewController.swift; sourceTree = "<group>"; };
 		737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		737A2EA02338A5200014258A /* SecurityQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityQuestionView.swift; sourceTree = "<group>"; };
@@ -10545,6 +10557,16 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		7373EC1F235EE05C00B150BA /* InstaPickCampaign */ = {
+			isa = PBXGroup;
+			children = (
+				7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */,
+				7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */,
+				7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */,
+			);
+			path = InstaPickCampaign;
+			sourceTree = "<group>";
+		};
 		737A2E97233898670014258A /* SetSecurityQuestionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -13803,6 +13825,7 @@
 		984A511321E72A29004525F5 /* InstaPick */ = {
 			isa = PBXGroup;
 			children = (
+				7373EC1F235EE05C00B150BA /* InstaPickCampaign */,
 				984A511521E72C18004525F5 /* AnalyzeHistory */,
 			);
 			path = InstaPick;
@@ -17723,6 +17746,7 @@
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
 				9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
+				7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				8C06B01D2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1712008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
 				8C06AEC72008AD70003D8E05 /* alt_cizgili_secili@3x.png in Resources */,
@@ -18450,6 +18474,7 @@
 				8C06B0042008AD71003D8E05 /* Kucuk@3x.png in Resources */,
 				8C06AF562008AD70003D8E05 /* daire.png in Resources */,
 				CE0808A62347202E00F1944F /* TBMatikCard.xib in Resources */,
+				7373EC25235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */,
 				8C06B1B62008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
 				CE40EAD12136BEF30038ABAC /* LaunchCampaignCard.xib in Resources */,
@@ -19210,6 +19235,7 @@
 				CEFAF31B23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
+				7373EC27235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				CE784DD622A685FB00662219 /* sag_ok.png in Resources */,
 				CE784DD722A685FB00662219 /* toolbar_crop_icon@3x.png in Resources */,
 				CE784DD822A685FB00662219 /* daire_selected@3x.png in Resources */,
@@ -20656,6 +20682,7 @@
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
 				8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */,
 				8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */,
+				7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
@@ -20814,6 +20841,7 @@
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
 				CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */,
 				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
+				7373EC2A235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */,
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
@@ -22064,6 +22092,7 @@
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
 				CEAE3FB41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift in Sources */,
+				7373EC29235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				CE2F561B1F7552A900F49DA1 /* PackagesPresenter.swift in Sources */,
 				984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */,
 				CE3318E61EFCFE1800E25989 /* ApplicationPalette.swift in Sources */,
@@ -22876,6 +22905,7 @@
 				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
+				7373EC22235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				89E51D4A22CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				737A2EBB2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
@@ -23572,6 +23602,7 @@
 				892B015322DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */,
 				CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */,
+				7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				CE78488D22A685FB00662219 /* (null) in Sources */,
 				CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */,
@@ -23843,6 +23874,7 @@
 				73FE51FE22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				CE78498622A685FB00662219 /* AppRater.m in Sources */,
 				CE78498722A685FB00662219 /* RegistrationUserInfoModel.swift in Sources */,
+				7373EC24235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				CE78498822A685FB00662219 /* AutoSyncPresenter.swift in Sources */,
 				CE78498922A685FB00662219 /* HomePageViewInput.swift in Sources */,
 				CE78498A22A685FB00662219 /* IntroduceModel.swift in Sources */,

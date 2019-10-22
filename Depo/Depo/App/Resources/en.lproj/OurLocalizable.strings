@@ -487,6 +487,9 @@
 "campaign_description_label_another" = "Your total draw %d! To get more chance PP.";
 "campaign_campaign_detail_button" = "Campaign Detail";
 "analyze_photo_pic_detail_button" = "Analyze with PhotoPick";
+"campaign_vc_result_button" = "Show the  Result";
+"campaign_vc_edit_profile_button" = "Edit Profile";
+"campaign_vc_become_premium_button" = "Premium Ol";
 
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Lifebox storage is almost full!\nLet’s have a look for upgrade options!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
