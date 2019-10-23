@@ -18,7 +18,7 @@ struct PaymentMethod {
     let name: String
     let priceLabel: String
     let type: PaymentType
-    let action: (_ name: String) -> Void
+    let action: VoidHandler
 }
 
 enum PaymentType {
