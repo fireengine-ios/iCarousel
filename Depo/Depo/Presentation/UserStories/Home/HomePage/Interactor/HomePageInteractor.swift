@@ -79,10 +79,9 @@ final class HomePageInteractor: HomePageInteractorInput {
                             }
                         }
                     }, fail: {_ in
-                        debugPrint("Nothing happens")
+                        ///"Nothing happens"
                     })
             case .failure(let errorResult):
-                debugPrint("Nothing happens \(errorResult)")
                 if errorResult.isEmpty() {
                     DispatchQueue.toMain {
                         self?.output.hideGiftBox()
