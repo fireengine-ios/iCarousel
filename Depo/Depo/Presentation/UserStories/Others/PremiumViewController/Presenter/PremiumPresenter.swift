@@ -106,19 +106,20 @@ final class PremiumPresenter {
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
-        guard let name = model.name, let type = model.featureType?.paymentType else {
+        guard let name = model.name, let featureType = model.featureType else {
             return nil
         }
+        let paymentType = featureType.paymentType
         
-        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { [weak self] name in
-            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
+        return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, featureType: featureType) else {
                 assertionFailure()
                 return
             }
             
             let analyticsService: AnalyticsService = factory.resolve()
             
-            let eventLabel: GAEventLabel = .paymentType(type.quotaPaymentType(quota: "Premium"))
+            let eventLabel: GAEventLabel = .paymentType(paymentType.quotaPaymentType(quota: "Premium"))
             analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                 eventActions: .clickFeaturePurchase,
                                                 eventLabel: eventLabel)
@@ -168,12 +169,12 @@ final class PremiumPresenter {
         }
     }
     
-    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, name: String ) -> SubscriptionPlan?  {
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, featureType: FeaturePackageType ) -> SubscriptionPlan?  {
         return availableOffers.offers.first { plan -> Bool in
             guard let model = plan.model as? PackageModelResponse else {
                 return false
             }
-            return model.name == name
+            return model.featureType == featureType
         }
     }
     
