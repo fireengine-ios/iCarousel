@@ -22,5 +22,4 @@ protocol HomePageInteractorInput {
 
     func updateLocalUserDetail()
     
-    func giftCompaignDetail()
 }

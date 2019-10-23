@@ -22,7 +22,6 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var instapickService: InstapickService = factory.resolve()
     private var isShowPopupAboutPremium = true
     private let campaignService = CampaignServiceImpl()
-    private var lastPhotoPickStatus: CampaignCardResponse?
     
     
     private func fillCollectionView(isReloadAll: Bool) {
@@ -72,13 +71,9 @@ final class HomePageInteractor: HomePageInteractorInput {
         campaignService.getPhotopickDetails { [weak self] result in
             switch result {
             case .success(let status):
-                self?.lastPhotoPickStatus = status
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
-                    //should we also call card manager here?
-
                         if userInfoResponse.countryCode == "90",
                             (status.startDate...status.launchDate).contains(Date()) {
-///                    * GIFT BOX will be displayed on home page if sysdate is between startDate and launchDate which are retrived from API response
                             DispatchQueue.toMain {
                                 self?.output.showGiftBox()
                             }
@@ -226,24 +221,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                             eventActions: .quota,
                                             eventLabel: .quotaUsed(quotaUsed))
-    }
-    
-    func giftCompaignDetail() {
-        guard let campaignPhotoPickStatus = lastPhotoPickStatus else {
-            assertionFailure("This value should be saved by now")
-            return
-        }
-//        * When user clicks GIFT BOX,
-//        * https://zpl.io/bPD4Yq6 page will be displayed if sysdate is between startDate and endDate in the API response  (This page is explained in FE-1682)
-//        * https://zpl.io/25ogNBW page will be displayed if sysdate is between endDate and launchDate in the API response (This page is explained in FE-1682)
-        if (campaignPhotoPickStatus.startDate...campaignPhotoPickStatus.endDate).contains(Date()) {
-            
-        } else if (campaignPhotoPickStatus.launchDate...campaignPhotoPickStatus.endDate).contains(Date()) {
-            
-        }
-        
-        
-        
     }
     
 }

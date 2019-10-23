@@ -196,7 +196,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     }
     
     func giftButtonPressed() {
-        interactor.giftCompaignDetail()
+        router.openCampaignDetails()
     }
     
     func fillCollectionView(isReloadAll: Bool) {
