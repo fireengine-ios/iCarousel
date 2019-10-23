@@ -110,7 +110,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureNavBarActions()
+        configureNavBar()
     }
     
     //MARK: Utility methods
@@ -125,7 +125,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         analyticsService.logScreen(screen: .securityCheck)
     }
     
-    private func configureNavBarActions() {
+    private func configureNavBar() {
         setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
 
         navigationBarWithGradientStyle()

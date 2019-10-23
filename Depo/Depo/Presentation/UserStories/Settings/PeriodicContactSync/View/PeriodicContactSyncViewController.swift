@@ -35,15 +35,14 @@ final class PeriodicContactSyncViewController: ViewController {
         }
         
         activityManager.delegate = self
-        
-        configureNavBar()
-                
+                        
         output.viewIsReady(tableView: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+
+        configureNavBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,7 +52,7 @@ final class PeriodicContactSyncViewController: ViewController {
     }
     
     private func configureNavBar() {
-        navigationController?.navigationItem.title = TextConstants.backTitle
+        setTitle(withString: TextConstants.backTitle)
         navigationBarWithGradientStyle()
     }
 

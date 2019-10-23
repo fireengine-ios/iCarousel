@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     var preferredNavigationBarStyle: NavigationBarStyle {
-        return .gradient
+        return .clear
     }
     // MARK: - Helpers
     
@@ -51,12 +51,16 @@ class ViewController: UIViewController {
 
 extension UIViewController {
     func checkModalPresentationStyle() {
+        guard #available(iOS 13.0, *) else {
+            return
+        }
+        
         #if swift(>=5.0)
-            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
-            modalPresentationStyle = .fullScreen
+            if modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+                modalPresentationStyle = .fullScreen
             }
         #else //TODO: as soon as jenkins is updated to xcode 11 - remove this if
-            if #available(iOS 13.0, *), modalPresentationStyle.isContained(in: [ .pageSheet]) {
+            if modalPresentationStyle.isContained(in: [ .pageSheet]) {
                 modalPresentationStyle = .fullScreen
             }
         #endif

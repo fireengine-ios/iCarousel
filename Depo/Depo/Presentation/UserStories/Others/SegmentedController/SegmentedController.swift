@@ -76,8 +76,7 @@ final class SegmentedController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        homePageNavigationBarStyle()//without refactor
-//        navigationBarWithGradientStyle()
+
         needToShowTabBar = true
         setupSegmentedControl()
     }
