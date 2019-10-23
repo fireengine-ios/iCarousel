@@ -27,4 +27,9 @@ protocol HomePageInteractorOutput: class {
     func credsCheckUpdateIfNeeded()
         
     func didObtainInstaPickStatus(status: InstapickAnalyzesCount)
+    
+    func showGiftBox()
+    
+    func hideGiftBox()
+    
 }

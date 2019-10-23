@@ -38,6 +38,8 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         return result
     }
     
+    private var isGiftButtonEnabled = false
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +124,14 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             self?.output.showSettings()
         })
         navBarConfigurator.configure(right: [setting, search], left: [])
+        if isGiftButtonEnabled {
+            let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
+//                self?.updateNavigationItemsState(state: false)
+                self?.output.giftButtonPressed()
+            })
+            navBarConfigurator.append(rightButton: gift, leftButton: nil)
+        }
+        
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         
     }
@@ -137,6 +147,16 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     func startSpinner() {
         showSpinner()
+    }
+    
+    func showGiftBox() {
+        isGiftButtonEnabled = true
+        configureNavBarActions()
+    }
+    
+    func hideGiftBox() {
+        isGiftButtonEnabled = false
+        configureNavBarActions()
     }
     
     //MARK: Spotlight

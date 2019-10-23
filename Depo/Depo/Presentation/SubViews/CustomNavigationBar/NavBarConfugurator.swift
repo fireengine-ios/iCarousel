@@ -25,6 +25,8 @@ class NavigationBarList {
     
     let done: UIBarButtonItem
     
+    let gift: UIBarButtonItem
+
     init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                                    style: .plain,
@@ -63,6 +65,15 @@ class NavigationBarList {
         
         done.accessibilityLabel = TextConstants.accessibilityDone
         
+        gift = UIBarButtonItem(image: UIImage(),
+                                        style: .plain,
+                                        target: nil,
+                                        action: nil)
+        gift.setBackgroundImage(UIImage(named: TextConstants.giftButtonName), for: .normal, barMetrics: .default)
+        gift.setBackgroundImage(UIImage(named: TextConstants.giftButtonName)?.mask(with: .gray), for: .selected, barMetrics: .default)
+        gift.accessibilityLabel = TextConstants.accessibilityGift
+        
+        
         // upload 
         // create
         // add
@@ -96,10 +107,24 @@ class NavigationBarConfigurator {
     func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {
         self.right = right
         self.right?.forEach {
-            
-            $0.navItem.action = #selector(baseAction(sender:))
-            $0.navItem.target = self
+            setActionAndTarget(navBarAction: $0)
         }
+    }
+    
+    func append(rightButton: NavBarWithAction?, leftButton: NavBarWithAction?) {
+        if let rightButton = rightButton {
+            right?.append(rightButton)
+            setActionAndTarget(navBarAction: rightButton)
+        }
+        if let leftButton = leftButton {
+            left?.append(leftButton)
+            setActionAndTarget(navBarAction: leftButton)
+        }
+    }
+    
+    private func setActionAndTarget(navBarAction: NavBarWithAction?) {
+        navBarAction?.navItem.action = #selector(baseAction(sender:))
+        navBarAction?.navItem.target = self
     }
     
     @objc func baseAction(sender: UIBarButtonItem) {
