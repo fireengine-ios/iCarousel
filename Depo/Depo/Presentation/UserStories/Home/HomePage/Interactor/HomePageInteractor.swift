@@ -71,16 +71,12 @@ final class HomePageInteractor: HomePageInteractorInput {
         campaignService.getPhotopickDetails { [weak self] result in
             switch result {
             case .success(let status):
-                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
-                        if userInfoResponse.countryCode == "90",
-                            (status.startDate...status.launchDate).contains(Date()) {
-                            DispatchQueue.toMain {
-                                self?.output.showGiftBox()
-                            }
-                        }
-                    }, fail: {_ in
-                        ///"Nothing happens"
-                    })
+                if SingletonStorage.shared.isUserFromTurkey,
+                    (status.startDate...status.launchDate).contains(Date()) {
+                    DispatchQueue.toMain {
+                        self?.output.showGiftBox()
+                    }
+                }
             case .failure(let errorResult):
                 if errorResult.isEmpty() {
                     DispatchQueue.toMain {
