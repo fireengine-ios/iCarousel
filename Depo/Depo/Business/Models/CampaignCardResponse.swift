@@ -113,6 +113,17 @@ enum CampaignPhotopickError {
     case error(Error)
 }
 
+extension CampaignPhotopickError {
+    func isEmpty() -> Bool {
+        switch self {
+        case .empty:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 extension CampaignPhotopickError: LocalizedError {
     var errorDescription: String? {
         switch self {
