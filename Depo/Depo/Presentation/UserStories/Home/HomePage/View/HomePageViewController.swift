@@ -59,15 +59,19 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         updateNavigationItemsState(state: true)
         homePageDataSource.isViewActive = true
+        
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
-        
-        output.viewWillAppear()
-        
+                
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
+        
+        homePageNavigationBarStyle()
+        
+        output.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -152,7 +156,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             }
             
             if frame != .zero {
-                
                 let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
                     self?.output.shownSpotlight(type: type)
                     self?.output.closedSpotlight(type: type)
@@ -273,6 +276,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         case .homePageIcon:
             let frameBounds = controller.frameForTabAtIndex(index: 0)
             frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
+            frame.origin.y -= UIApplication.shared.statusBarFrame.height
             completion(frame)
             
         case .homePageGeneral:
