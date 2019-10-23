@@ -236,12 +236,14 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
         
-        guard let name = model.name, let type = model.type?.paymentType else {
+        guard let name = model.name, let packageType = model.type else {
             return nil
         }
         
-        return PaymentMethod(name: name, priceLabel: priceString, type: type, action: { [weak self] name in
-            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, name: name) else {
+        let paymentType = packageType.paymentType
+        
+        return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: packageType) else {
                 assertionFailure()
                 return
             }
@@ -252,7 +254,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             
             let analyticsService: AnalyticsService = factory.resolve()
             
-            let eventLabel: GAEventLabel = .paymentType(type.quotaPaymentType(quota: subscriptionPlan.name))
+            let eventLabel: GAEventLabel = .paymentType(paymentType.quotaPaymentType(quota: subscriptionPlan.name))
             analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                 eventActions: .clickQuotaPurchase,
                                                 eventLabel: eventLabel)
@@ -263,13 +265,13 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
         
     }
     
-    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, name: String ) -> SubscriptionPlan?  {
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageType ) -> SubscriptionPlan?  {
         
         return availableOffers.offers.first { plan -> Bool in
             guard let model = plan.model as? PackageModelResponse else {
                 return false
             }
-            return model.name == name
+            return model.type == packageType
         }
     }
 }
