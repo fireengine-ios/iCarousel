@@ -126,7 +126,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         navBarConfigurator.configure(right: [setting, search], left: [])
         if isGiftButtonEnabled {
             let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
-//                self?.updateNavigationItemsState(state: false)
                 self?.output.giftButtonPressed()
             })
             navBarConfigurator.append(rightButton: gift, leftButton: nil)
