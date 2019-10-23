@@ -15,12 +15,23 @@ extension PHAsset {
             return nil
         }
         let resources = PHAssetResource.assetResources(for: self)
-        return resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
+        
+        if let editedResource = resources.first(where: { $0.type.isContained(in: [.fullSizePhoto, .fullSizeVideo]) }) {
+            return editedResource
+        } else {
+            return resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
+        }
     }
     
     var originalFilename: String? {
-        let name = resource?.originalFilename
-//        print("originalName = \(name ?? "")")
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return nil
+        }
+        let resources = PHAssetResource.assetResources(for: self)
+        /// original resource for original filename
+        /// we show IMG_XXXX.HEIC, but will be upload edited jpg photo
+        let originalResource = resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
+        let name = originalResource?.originalFilename
         return name
     }
     
