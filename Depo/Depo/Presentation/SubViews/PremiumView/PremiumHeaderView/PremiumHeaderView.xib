@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,6 +58,7 @@
                 <constraint firstItem="TDl-wk-WqG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="30" id="1A7-7X-iZT"/>
                 <constraint firstItem="eqA-pM-aag" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Ezt-iL-xj0"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="30" id="GYD-0f-lX9"/>
+                <constraint firstItem="TDl-wk-WqG" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.85" id="JHl-7K-AVH"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.55" id="LV1-nS-HfV"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="28" id="PMq-tc-vQv"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TDl-wk-WqG" secondAttribute="trailing" priority="750" constant="30" id="TNo-zM-7FG"/>
@@ -75,11 +76,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="TNo-zM-7FG"/>
+                    <exclude reference="1A7-7X-iZT"/>
                     <exclude reference="x2v-qc-Kqj"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="TNo-zM-7FG"/>
+                    <include reference="1A7-7X-iZT"/>
+                    <exclude reference="JHl-7K-AVH"/>
                     <include reference="x2v-qc-Kqj"/>
                 </mask>
             </variation>
