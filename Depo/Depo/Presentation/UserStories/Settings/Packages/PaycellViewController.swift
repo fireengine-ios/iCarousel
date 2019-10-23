@@ -32,7 +32,7 @@ final class PaycellViewController: UIViewController {
         config.preferences.javaScriptEnabled = true
         config.preferences.javaScriptCanOpenWindowsAutomatically = true
         
-        if #available(iOS 11, *) {
+        if #available(iOS 13, *) {
             //stay with default config
         } else {
             let controller = WKUserContentController()
@@ -91,13 +91,13 @@ final class PaycellViewController: UIViewController {
                                                  .value : token,
                                                  .domain : domain,
                                                  .path : "/"])!
-        if #available(iOS 11.0, *) {
+        if #available(iOS 13.0, *) {
             webView.configuration.websiteDataStore.httpCookieStore.setCookie(httpCookie) {
-                debugLog("paycell web - ios >= 11")
+                debugLog("paycell web - ios >= 13")
                 completion()
             }
         } else {
-            debugLog("paycell web - ios < 11")
+            debugLog("paycell web - ios < 13")
             completion()
         }
     }
