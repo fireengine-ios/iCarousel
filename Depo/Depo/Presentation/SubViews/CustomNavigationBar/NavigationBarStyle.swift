@@ -9,13 +9,11 @@
 import Foundation
 
 enum NavigationBarStyle {
-    case gradient
     case black
     case clear
     
     var backgroundImage: UIImage? {
         switch self {
-        case .gradient: return UIImage(named: "NavigationBarBackground")
         case .black: return UIImage(named: "NavigatonBarBlackBacground")
         case .clear: return UIImage()
         }
