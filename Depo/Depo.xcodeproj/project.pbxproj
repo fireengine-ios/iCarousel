@@ -3415,6 +3415,10 @@
 		98792DE622FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */; };
 		98792DE722FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */; };
 		98792DE822FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */; };
+		987E2180236037F900D45AEA /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
+		987E2181236037F900D45AEA /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
+		987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
+		987E21832360380200D45AEA /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
 		989BDE3A22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE2822F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib */; };
 		989BDE3B22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE2822F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib */; };
 		989BDE3C22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE2822F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib */; };
@@ -21315,6 +21319,7 @@
 				8C20864A228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
 				8C0E8F191FDEBDFF00789C91 /* SyncContactsRouter.swift in Sources */,
 				8C0E8F1A1FDEBDFF00789C91 /* SyncContactsConfigurator.swift in Sources */,
+				987E2180236037F900D45AEA /* CampaignIntroView.swift in Sources */,
 				8C0E8F1B1FDEBDFF00789C91 /* SyncContactsInitializer.swift in Sources */,
 				8C0E8F1C1FDEBDFF00789C91 /* SettingsViewInput.swift in Sources */,
 				8C0E8F1D1FDEBDFF00789C91 /* DropboxService.swift in Sources */,
@@ -21486,6 +21491,7 @@
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
 				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
+				987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
 				8C0E8F7E1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
@@ -23960,6 +23966,7 @@
 				CE7849B522A685FB00662219 /* RegistrationRouterInput.swift in Sources */,
 				CE7849B622A685FB00662219 /* StorageVars.swift in Sources */,
 				CE7849B722A685FB00662219 /* RegistrationRouter.swift in Sources */,
+				987E2181236037F900D45AEA /* CampaignIntroView.swift in Sources */,
 				CE7849B822A685FB00662219 /* ArrayExtension.swift in Sources */,
 				CE7849B922A685FB00662219 /* SpringLabel.swift in Sources */,
 				CE7849BA22A685FB00662219 /* SocialAccountSectionMediator.swift in Sources */,
@@ -24685,6 +24692,7 @@
 				CE784C5A22A685FB00662219 /* FeedbackViewInput.swift in Sources */,
 				CE784C5B22A685FB00662219 /* FaceImageItemsInitializer.swift in Sources */,
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
+				987E21832360380200D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				CE784C5D22A685FB00662219 /* ItemSyncOperation.swift in Sources */,
 				CE784C5E22A685FB00662219 /* FeedbackViewOutput.swift in Sources */,
