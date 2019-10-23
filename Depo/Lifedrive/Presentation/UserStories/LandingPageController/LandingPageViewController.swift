@@ -11,11 +11,12 @@ import UIKit
 final class LandingPageViewController: ViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var pageControl: UIPageControl! {
+    @IBOutlet private weak var pageControl: BorderDotsPageControl! {
         willSet {
             newValue.numberOfPages = NumericConstants.langingPageCount
             newValue.currentPageIndicatorTintColor = ColorConstants.billoBlue
-            newValue.pageIndicatorTintColor = ColorConstants.lightGray
+            newValue.pageIndicatorTintColor = .clear
+            newValue.borderColor = ColorConstants.billoBlue
         }
     }
     

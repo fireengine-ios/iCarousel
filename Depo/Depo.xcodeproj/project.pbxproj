@@ -3321,6 +3321,10 @@
 		98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		98182389235F3ED00018E787 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
+		9818238B236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
+		9818238C236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
+		9818238D236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
@@ -6097,7 +6101,6 @@
 		CE784F0A22A685FB00662219 /* beyaz_cerceve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC3D2008AD6F003D8E05 /* beyaz_cerceve@2x.png */; };
 		CE784F0B22A685FB00662219 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98570AF8208F7556002CCEBA /* SpotlightViewController.xib */; };
 		CE784F0C22A685FB00662219 /* serbest_cizgi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD4D2008AD6F003D8E05 /* serbest_cizgi@3x.png */; };
-		CE784F1F22A6865F00662219 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE784F2022A6866200662219 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE784F2122A6866300662219 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE784F2322A68CEC00662219 /* lifedrive.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE784F2222A68CEB00662219 /* lifedrive.plist */; };
@@ -8180,6 +8183,7 @@
 		981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
 		981642F8233CE2D30070F8B9 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
 		981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
+		9818238A236033790018E787 /* BorderDotsPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderDotsPageControl.swift; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
@@ -11072,6 +11076,7 @@
 				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
 				8C20866D228D4C6A000BEDAD /* TextInsetsLabel.swift */,
 				170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */,
+				9818238A236033790018E787 /* BorderDotsPageControl.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -19188,7 +19193,6 @@
 				CE784D6422A685FB00662219 /* toolbar_ciz_icon@2x.png in Resources */,
 				B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */,
 				98792DD422FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
-				CE784F1F22A6865F00662219 /* Images.xcassets in Resources */,
 				CE784D6522A685FB00662219 /* close_icon.png in Resources */,
 				CE784D6622A685FB00662219 /* alt_cizgili_secili@2x.png in Resources */,
 				CE784D6722A685FB00662219 /* extraOptions@3x.png in Resources */,
@@ -19238,6 +19242,7 @@
 				CE784D9122A685FB00662219 /* cizgi_2.png in Resources */,
 				CE784D9222A685FB00662219 /* polaroid_yeni@2x.png in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
+				98182389235F3ED00018E787 /* IntroduceSubView.xib in Resources */,
 				CE784D9422A685FB00662219 /* kontrast_secili@2x.png in Resources */,
 				CE784D9522A685FB00662219 /* Buyuk@2x.png in Resources */,
 				CE784D9622A685FB00662219 /* Paylas_butnuna_basin@2x.png in Resources */,
@@ -20430,6 +20435,7 @@
 				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				8C208660228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
+				9818238C236033790018E787 /* BorderDotsPageControl.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
 				CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */,
@@ -23319,6 +23325,7 @@
 				64ADD65B7FCE7BDBF07F4FA1 /* AlbumsRouter.swift in Sources */,
 				CE2F56251F75531800F49DA1 /* UICollectionView+Extensions.swift in Sources */,
 				8C208676228D4FF1000BEDAD /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
+				9818238B236033790018E787 /* BorderDotsPageControl.swift in Sources */,
 				4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */,
 				9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */,
 				7C6945E920039F4A00152344 /* FreeAppSpaceRouter.swift in Sources */,
@@ -23698,6 +23705,7 @@
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
 				CE7848AC22A685FB00662219 /* AnalyzeStatus.m in Sources */,
+				9818238D236033790018E787 /* BorderDotsPageControl.swift in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
 				CE7848AE22A685FB00662219 /* CollectionViewCellForAudio.swift in Sources */,
 				CE7848AF22A685FB00662219 /* KeyboardLayoutConstraint.swift in Sources */,
