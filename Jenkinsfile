@@ -163,7 +163,7 @@ def deployToIctStore = { app ->
     def artifactPath = "turkcell-development/${groupPath}/${app.name}"
     def ipaFile = "ictstore.ipa"
     def manifestFile = "manifest.plist"
-    def ipaUrl = "${artifactory.url}/${artifactPath}/${version}/${app.name}-${app.version}-test.ipa"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${app.version}/${app.name}-${app.version}-test.ipa"
     def ictsBundleIdentifier = flavors['test'].bundleIdentifier
     sh "curl -v ${ipaUrl} -o ${ipaFile}"
 
