@@ -337,8 +337,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
-        analyticsService.trackPackageClick(package:
-            packages, packageIndex: planIndex)
+        analyticsService.trackPackageClick(package: packages, packageIndex: planIndex)
     }
     
     private func sendReciept() -> Bool {
