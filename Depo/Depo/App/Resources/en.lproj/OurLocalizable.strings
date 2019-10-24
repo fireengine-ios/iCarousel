@@ -637,6 +637,23 @@
 "landingSubTitle3" = "Back up your contacts, never lose them";
 "landingTitle6" = "Social media";
 "landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
+"landing_start_button" = "GET STARTED";
+"landing_billo_title_0" = "Storage Made Simple";
+"landing_billo_subtitle_0" = "Store memories and\nkeep them forever";
+"landing_billo_title_1" = "Auto Sync";
+"landing_billo_subtitle_1" = "Sync your photos and videos automatically to reach from everywhere";
+"landing_billo_title_2" = "Face / Image";
+"landing_billo_subtitle_2" = "You can easily find your memories with smart albums. Search by person object or place";
+"landing_billo_title_3" = "Contact Sync";
+"landing_billo_subtitle_3" = "Back up your contacts, never lose them!";
+"landing_billo_title_4" = "Free-Up Space";
+"landing_billo_subtitle_4" = "Free up space on your phone for new memories!";
+"landing_billo_title_5" = "Automatic Stories";
+"landing_billo_subtitle_5" = "Live your memories with our automated stories we created for you";
+"landing_billo_title_6" = "Social Media";
+"landing_billo_subtitle_6" = "Transfer all your social media archives easily to lifedrive";
+"landing_billo_title_7" = "Photo Print";
+"landing_billo_subtitle_7" = "Decorate your living space with your memories";
 "Add GSM Number" = "Add Phone Number";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
 "You have not enough memory in your device" = "You don't have enough memory on your device";
@@ -1246,6 +1263,11 @@
 "tbmatic_home_card_years_ago" = "%d years ago";
 "tbmatic_home_card_this_year" = "In this year";
 
+//introduce billo
+"billo_intro_title" = "Live, Collect, Remember";
+"billo_intro_subtitle" = "Store your photos, videos, and contacts on Billo. Access them whenever and wherever you are";
+"billo_intro_create_account_button" = "Create an Account";
+"billo_intro_login_button" = "I have an account, let me log in";
 "campaign_card_title" = "PhotoPick Campaign";
 "campaign_description_label_new_user" = "You have not participated yet";
 "campaign_description_label_experienced_user" = "You have not analyze with PhotoPick today. %d times..";
