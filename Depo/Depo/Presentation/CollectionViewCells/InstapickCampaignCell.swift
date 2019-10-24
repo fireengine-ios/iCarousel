@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstapickCampaignCell: UICollectionViewCell {
+final class InstapickCampaignCell: UICollectionViewCell, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {

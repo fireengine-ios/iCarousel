@@ -339,6 +339,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
+                        self.dataSource.showEmptyCard()
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }

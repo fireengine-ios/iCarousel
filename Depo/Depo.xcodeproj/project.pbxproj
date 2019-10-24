@@ -6322,6 +6322,10 @@
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
+		CEEFB8D92361C64500200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
+		CEEFB8DA2361C64500200A7F /* AnalyzeHistoryEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */; };
+		CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
+		CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
 		CEF00FDC227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
 		CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
@@ -8922,6 +8926,8 @@
 		CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryEmptyCell.swift; sourceTree = "<group>"; };
+		CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryEmptyCell.xib; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
 		CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterDesigner.swift; sourceTree = "<group>"; };
 		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
@@ -15985,6 +15991,8 @@
 				CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */,
 				9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */,
 				9216F57822493127008339F5 /* InternetDataUsageCollectionViewCell.xib */,
+				CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */,
+				CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -18786,6 +18794,7 @@
 				B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				8C06B1542008AD72003D8E05 /* text_selected@2x.png in Resources */,
 				8C06B0702008AD71003D8E05 /* paylas_fb.png in Resources */,
+				CEEFB8DA2361C64500200A7F /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				8C06AF4A2008AD70003D8E05 /* crop_selected.png in Resources */,
 				8C06B0E62008AD72003D8E05 /* sample_yellow@2x.png in Resources */,
 				CE5921D1225623D3005882CE /* ChangePasswordController.xib in Resources */,
@@ -20590,6 +20599,7 @@
 				8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
+				CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
@@ -22457,6 +22467,7 @@
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
+				CEEFB8D92361C64500200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				8C208643228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				A2079906219F133900AD5037 /* PremiumViewOutput.swift in Sources */,
@@ -24583,6 +24594,7 @@
 				CE784C0622A685FB00662219 /* SelectNameModuleInput.swift in Sources */,
 				CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */,
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
+				CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				CE784C0922A685FB00662219 /* BaseView.swift in Sources */,
 				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
