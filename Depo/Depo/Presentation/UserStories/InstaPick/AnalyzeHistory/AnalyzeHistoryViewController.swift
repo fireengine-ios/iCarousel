@@ -293,9 +293,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             
             switch result {
             case .success(let campaignPhotopickStatus):
-                if campaignPhotopickStatus.dates.isAvailable() {
-                    self.dataSource.showCampaignCard(with: campaignPhotopickStatus)
-                }
+//                if campaignPhotopickStatus.dates.isAvailable() {
+//                    self.dataSource.showCampaignCard(with: campaignPhotopickStatus)
+//                }
+                break
                 
             case .failure(let errorResult):
                 switch errorResult {
