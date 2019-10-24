@@ -52,6 +52,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
 
     private var moreInfoUrl: URL?
     private let service = CampaignServiceImpl()
+    private lazy var router = RouterVC()
     
     // MARK: - View lifecycle
     
@@ -71,7 +72,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     private func loadDetailsInfo() {
         showSpinner()
         
-        service.getPhotopickStatus { [weak self] result in
+        service.getPhotopickDetails { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -79,8 +80,8 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             self.hideSpinner()
             
             switch result {
-            case .success(let status):
-                self.updateUI(status: status)
+            case .success(let details):
+                self.updateUI(details: details)
             case .failure(let errorResult):
                 switch errorResult {
                 case .empty:
@@ -94,30 +95,27 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     
     private func setupUI() {
         navigationItem.title = TextConstants.campaignDetailTitle
-        imageView.backgroundColor = .black
         contentStackView.isHidden = true
         analyzeView.isHidden = true
     }
     
-    private func updateUI(status: CampaignPhotopickStatus) {
-        if status.dates.startDate.timeIntervalSinceNow > 0 && status.dates.endDate.timeIntervalSinceNow < 0 {
+    private func updateUI(details: CampaignCardResponse) {
+        if details.startDate.timeIntervalSinceNow > 0 && details.endDate.timeIntervalSinceNow < 0 {
             analyzeView.isHidden = true
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
             scrollView.contentInset = .zero
-            campaignIntroView.setup(with: status)
         } else {
             campaignIntroView.isHidden = true
             campaignInfoView.isHidden = false
             analyzeView.isHidden = false
             scrollView.contentInset.bottom = analyzeView.frame.height
-            campaignInfoView.setup(with: status.content)
         }
         
-        imageView.loadImage(url: status.imageUrl)
-        contestInfoView.setup(with: status.usage)
+        imageView.loadImage(url: details.imageUrl)
+        contestInfoView.setup(with: details)
         
-        moreInfoUrl = status.detailsUrl
+        moreInfoUrl = details.detailsUrl
         let buttonText = String(format: TextConstants.campaignDetailMoreInfoButton, moreInfoUrl!.absoluteString)
         moreInfoButton.setTitle(buttonText, for: .normal)
         
@@ -132,7 +130,8 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     }
     
     @IBAction private func onAnalyzeTapped(_ sender: UIButton) {
-        
+        let controller = router.analyzesHistoryController()
+        router.pushViewController(viewController: controller)
     }
 
 }

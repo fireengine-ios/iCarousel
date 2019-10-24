@@ -337,6 +337,15 @@ struct TextConstants {
     static let homeMovieCardViewButton = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeMovieCardSaveButton = NSLocalizedString("Save This Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: PhotoPick Campaign card
+    static let campaignCardTitle = NSLocalizedString("campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelNewUser = NSLocalizedString("campaign_description_label_new_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelExperiencedUser = NSLocalizedString("campaign_description_label_experienced_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelDaylyLimiReached = NSLocalizedString("campaign_description_label_limit_reached", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelAnother = NSLocalizedString("campaign_description_label_another", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailButtonTitle = NSLocalizedString("campaign_campaign_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzePhotoPickButtonTitle = NSLocalizedString("analyze_photo_pic_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     // MARK: Home Latest Uploads card
     static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -948,6 +957,7 @@ struct TextConstants {
     static let cogBtnImgName = "cog"
     static let searchBtnImgName = "search"
     static let deleteBtnImgName = "DeleteShareButton"
+    static let giftButtonName = "campaignButton"
     
     // MARK: - Navigation bar title names
     
@@ -965,6 +975,8 @@ struct TextConstants {
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityshowHide = NSLocalizedString("Show and Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityDone = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityGift = NSLocalizedString("AccessibilityGiftButton", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let accessibilityHome = NSLocalizedString("Home", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityPhotosVideos = NSLocalizedString("Photos and Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityMusic = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

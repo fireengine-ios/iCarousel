@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 protocol CampaignService: class {
-    func getPhotopickStatus(handler: @escaping (ErrorResult<CampaignPhotopickStatus, CampaignPhotopickError>) -> Void)
+    func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void)
 }
     
 final class CampaignServiceImpl: BaseRequestService, CampaignService {
@@ -25,7 +25,7 @@ final class CampaignServiceImpl: BaseRequestService, CampaignService {
         self.sessionManager = sessionManager
     }
     
-    func getPhotopickStatus(handler: @escaping (ErrorResult<CampaignPhotopickStatus, CampaignPhotopickError>) -> Void) {
+    func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void) {
         sessionManager
         .request(RouteRequests.campaignPhotopick)
         .customValidate()
@@ -33,12 +33,12 @@ final class CampaignServiceImpl: BaseRequestService, CampaignService {
             switch response.result {
             case .success(let data):
                 let json = JSON(data: data)[Keys.serverValue]
-                guard let status = CampaignPhotopickStatus(json: json) else {
+                guard let details = CampaignCardResponse(json: json) else {
                     handler(.failure(.empty))
                     return
                 }
                 
-                handler(.success(status))
+                handler(.success(details))
             case .failure(let error):
                 let backendError = ResponseParser.getBackendError(data: response.data,
                                                                   response: response.response)

@@ -201,6 +201,7 @@ final class LoginViewController: ViewController {
     
     private func setupNavBar() {
         navigationBarWithGradientStyle()
+        
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
