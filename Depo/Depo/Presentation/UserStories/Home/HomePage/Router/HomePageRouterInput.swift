@@ -35,4 +35,6 @@ protocol HomePageRouterInput {
     func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse?)
     
     func presentPopUps()
+    
+    func openCampaignDetails()
 }

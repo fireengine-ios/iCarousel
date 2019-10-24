@@ -371,14 +371,55 @@ extension AnalyticsService: AnalyticsGA {
         
         var analyticasItemList = "İndirimdeki Paketler"
         var itemID = ""
-        if let offer = package.model as? OfferServiceResponse, let offerID = offer.offerId {
-            itemID = "\(offerID)"
-            analyticasItemList = "Turkcell Package"
-        } else if let offer = package.model as? OfferApple, let offerID = offer.storeProductIdentifier {
-            itemID = offerID
-            analyticasItemList = "In App Package"
+        
+        let featureType: FeaturePackageType?
+        let type: PackageType?
+        
+        let slcmID: String
+        let appleID: String
+
+        if let offer = package.model as? PackageModelResponse {
+            featureType = offer.featureType
+            type = offer.type
+            
+            slcmID = offer.slcmOfferId.map { "\($0)" } ?? ""
+            appleID = offer.inAppPurchaseId ?? ""
+            
+        } else if let offer = package.model as? SubscriptionPlanBaseResponse {
+            featureType = offer.subscriptionPlanFeatureType
+            type = offer.subscriptionPlanType
+            
+            slcmID = offer.subscriptionPlanSlcmOfferId ?? ""
+            appleID = offer.subscriptionPlanInAppPurchaseId ?? ""
+        } else {
+            return
         }
-        let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        
+        if featureType == .SLCMFeature || type == .SLCM {
+            analyticasItemList = "Turkcell Package"
+            itemID = slcmID
+
+        } else if featureType == .appleFeature || type == .apple {
+            analyticasItemList = "In App Package"
+            itemID = appleID
+            
+        } else if [FeaturePackageType?]([.paycellSLCMFeature, .paycellAllAccessFeature]).contains(featureType) ||
+            [PackageType?]([.paycellSLCM, .paycellAllAccess]).contains(type) {
+            analyticasItemList = "Credit Card Package"
+            ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
+            ///Can asked leave creditCard Product Click without id
+            
+        }
+        
+        let product =  AnalyticsPackageProductObject(itemName: package.name,
+                                                     itemID: itemID,
+                                                     price: package.priceString,
+                                                     itemBrand: TextConstants.NotLocalized.GAappName,
+                                                     itemCategory: "Storage",
+                                                     itemVariant: "",
+                                                     index: "\(packageIndex)",
+                                                     quantity: "1")
+        
         let ecommerce: [String : Any] = ["items" : [product.productParametrs],
                                          AnalyticsParameterItemList : analyticasItemList]
         
@@ -489,6 +530,10 @@ extension AnalyticsService: NetmeraProtocol {
     }
     
     static func startNetmera() {
+        #if LIFEDRIVE
+        return
+        #endif
+        
         debugLog("Start Netmera")
         
         #if DEBUG
@@ -503,6 +548,10 @@ extension AnalyticsService: NetmeraProtocol {
         Netmera.setLogLevel(.debug)
         #endif
         
+        #if APPSTORE
+        Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
+        #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+        #endif
     }
 }

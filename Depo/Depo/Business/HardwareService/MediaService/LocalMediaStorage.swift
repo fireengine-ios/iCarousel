@@ -857,11 +857,25 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let dataValue = data {
+                    /// there is no PHImageFileURLKey in iOS 13.
+                    /// more solutions at https://stackoverflow.com/q/57202965/5893286
+                    ///
+                    /// parsing example of debugDescription:
+                    ///fileURL: file:///var/mobile/Media/DCIM/101APPLE/IMG_1490.HEIC
+                    ///width: 3024
+                    if #available(iOS 13, *),
+                        let filePath = asset.resource?.debugDescription.slice(from: "fileURL: ", to: "\n    width"),
+                        let fileUrl = URL(string: filePath)
+                    {
+                        assetInfo.url = fileUrl
+                    } else if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
+                        assetInfo.url = unwrapedUrl
+                    } else {
+                        assertionFailure("should not be called")
+                    }
+                    
                     if let name = asset.originalFilename {
                         assetInfo.name = name
-                    }
-                    if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
-                        assetInfo.url = unwrapedUrl
                     }
                     assetInfo.size = Int64(dataValue.count)
                     semaphore.signal()
@@ -988,10 +1002,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let dataValue = data {
-                    if let name = asset.originalFilename {
-                        assetInfo.name = name
-                    }
-                    
                     /// there is no PHImageFileURLKey in iOS 13.
                     /// more solutions at https://stackoverflow.com/q/57202965/5893286
                     ///
@@ -1008,7 +1018,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     } else {
                         assertionFailure("should not be called")
                     }
-
+                    
+                    if let name = asset.originalFilename {
+                        assetInfo.name = name
+                    }
                     assetInfo.size = Int64(dataValue.count)
                     semaphore.signal()
                 } else {

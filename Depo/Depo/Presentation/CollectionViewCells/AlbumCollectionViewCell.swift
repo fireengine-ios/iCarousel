@@ -115,7 +115,7 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         mask.path = UIBezierPath(roundedRect: border.bounds, cornerRadius: 0).cgPath
         mask.fillColor = UIColor.clear.cgColor
         mask.strokeColor = UIColor.white.cgColor
-        mask.lineWidth = 10
+        mask.lineWidth = 5
         
         border.mask = mask
 

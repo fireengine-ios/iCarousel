@@ -342,6 +342,15 @@ struct TextConstants {
     static let homeMovieCardViewButton = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeMovieCardSaveButton = NSLocalizedString("Save This Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: PhotoPick Campaign card
+    static let campaignCardTitle = NSLocalizedString("campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelNewUser = NSLocalizedString("campaign_description_label_new_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelExperiencedUser = NSLocalizedString("campaign_description_label_experienced_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelDaylyLimiReached = NSLocalizedString("campaign_description_label_limit_reached", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignCardDescriptionLabelAnother = NSLocalizedString("campaign_description_label_another", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailButtonTitle = NSLocalizedString("campaign_campaign_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzePhotoPickButtonTitle = NSLocalizedString("analyze_photo_pic_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     // MARK: Home Latest Uploads card
     static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -953,6 +962,7 @@ struct TextConstants {
     static let cogBtnImgName = "cog"
     static let searchBtnImgName = "search"
     static let deleteBtnImgName = "DeleteShareButton"
+    static let giftButtonName = "campaignButton"
     
     // MARK: - Navigation bar title names
     
@@ -970,6 +980,8 @@ struct TextConstants {
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityshowHide = NSLocalizedString("Show and Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityDone = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityGift = NSLocalizedString("AccessibilityGiftButton", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let accessibilityHome = NSLocalizedString("Home", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityPhotosVideos = NSLocalizedString("Photos and Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityMusic = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1500,4 +1512,15 @@ struct TextConstants {
     static let tbMatiHomeCardYearsAgo = NSLocalizedString("tbmatic_home_card_years_ago", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tbMatiHomeCardThisYear = NSLocalizedString("tbmatic_home_card_this_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let campaignDetailTitle = NSLocalizedString("campaign_detail_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailMoreInfoButton = NSLocalizedString("campaign_detail_more_info_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoTitle = NSLocalizedString("campaign_detail_contest_info_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoTotalDraw = NSLocalizedString("campaign_detail_contest_info_total_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailContestInfoRemainingDraw = NSLocalizedString("campaign_detail_contest_info_remaining_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroTitle = NSLocalizedString("campaign_detail_intro_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroGift = NSLocalizedString("campaign_detail_intro_gift", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroCelebration = NSLocalizedString("campaign_detail_intro_celebration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailIntroNounCelebration = NSLocalizedString("campaign_detail_intro_noun_celebration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailInfoTitle = NSLocalizedString("campaign_detail_info_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignDetailInfoDescription = NSLocalizedString("campaign_detail_info_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

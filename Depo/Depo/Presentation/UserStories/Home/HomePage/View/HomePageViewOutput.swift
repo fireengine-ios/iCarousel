@@ -33,4 +33,7 @@ protocol HomePageViewOutput {
     func closedSpotlight(type: SpotlightType)
     
     func requestShowSpotlight(for types: [SpotlightType])
+    
+    func giftButtonPressed()
+    
 }

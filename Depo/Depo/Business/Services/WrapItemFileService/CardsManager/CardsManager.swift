@@ -13,7 +13,7 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
-    case prepareQuickScroll   = "prepareQuickScroll"
+    case prepareQuickScroll         = "prepareQuickScroll"
 //    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
 //    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
@@ -37,6 +37,7 @@ enum OperationType: String {
     case premium                    = "premium"
     case instaPick                  = "instaPick"
     case tbMatik                    = "TBMATIC"
+    case campaignCard               = "CAMPAIGN"
 }
 
 typealias BlockObject = VoidHandler
@@ -392,6 +393,8 @@ class CardsManager: NSObject {
             cardView = InstaPickCard.initFromNib()
         case .tbMatik:
             cardView = TBMatikCard.initFromNib()
+        case .campaignCard:
+            cardView = CampaignCard.initFromNib()
         }
         
         /// seems like duplicated logic "set(object:".
