@@ -3938,6 +3938,12 @@
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966DD2359B8A700599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
+		CE1966DE2359BA4800599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966DF2359BA4800599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
+		CE1966E02359BA4900599638 /* InstapickCampaignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */; };
+		CE1966E12359BA4900599638 /* InstapickCampaignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
@@ -6316,6 +6322,10 @@
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
+		CEEFB8D92361C64500200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
+		CEEFB8DA2361C64500200A7F /* AnalyzeHistoryEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */; };
+		CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
+		CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
 		CEF00FDC227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
 		CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
@@ -8561,6 +8571,8 @@
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
+		CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickCampaignCell.swift; sourceTree = "<group>"; };
+		CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickCampaignCell.xib; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE19CE00208F016600DB903E /* UIAlertController+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Action.swift"; sourceTree = "<group>"; };
 		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
@@ -8914,6 +8926,8 @@
 		CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryEmptyCell.swift; sourceTree = "<group>"; };
+		CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryEmptyCell.xib; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
 		CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterDesigner.swift; sourceTree = "<group>"; };
 		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
@@ -15973,8 +15987,12 @@
 				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
 				9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */,
 				9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */,
+				CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */,
+				CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */,
 				9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */,
 				9216F57822493127008339F5 /* InternetDataUsageCollectionViewCell.xib */,
+				CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */,
+				CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -17531,6 +17549,7 @@
 				8C0E90041FDEBDFF00789C91 /* BottomSelectionTabBarViewController.xib in Resources */,
 				8C06B1312008AD72003D8E05 /* t_orta@2x.png in Resources */,
 				8C06AFD32008AD71003D8E05 /* ins_paylas.png in Resources */,
+				CE1966DF2359BA4800599638 /* InstapickCampaignCell.xib in Resources */,
 				7CA4A168207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AF692008AD70003D8E05 /* duz_cizgi@3x.png in Resources */,
 				8C06B0DF2008AD71003D8E05 /* sample_red@3x.png in Resources */,
@@ -18347,6 +18366,7 @@
 				8C06B0202008AD71003D8E05 /* lifebox@2x.png in Resources */,
 				B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				8C06B1AA2008AD72003D8E05 /* CRYFilterCell.nib in Resources */,
+				CE1966DD2359B8A700599638 /* InstapickCampaignCell.xib in Resources */,
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				8C06B0A62008AD71003D8E05 /* renk_selected.png in Resources */,
 				8C06B16A2008AD72003D8E05 /* toolbar_sekil_icon.png in Resources */,
@@ -18774,6 +18794,7 @@
 				B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				8C06B1542008AD72003D8E05 /* text_selected@2x.png in Resources */,
 				8C06B0702008AD71003D8E05 /* paylas_fb.png in Resources */,
+				CEEFB8DA2361C64500200A7F /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				8C06AF4A2008AD70003D8E05 /* crop_selected.png in Resources */,
 				8C06B0E62008AD72003D8E05 /* sample_yellow@2x.png in Resources */,
 				CE5921D1225623D3005882CE /* ChangePasswordController.xib in Resources */,
@@ -19016,6 +19037,7 @@
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CE784CFB22A685FB00662219 /* CRYUserContractViewController.nib in Resources */,
 				CE784CFC22A685FB00662219 /* error_icon@3x.png in Resources */,
+				CE1966E12359BA4900599638 /* InstapickCampaignCell.xib in Resources */,
 				CE784CFD22A685FB00662219 /* paylas_diger.png in Resources */,
 				CE784CFE22A685FB00662219 /* tahta_yeni@3x.png in Resources */,
 				CE784CFF22A685FB00662219 /* paylas_twitter@3x.png in Resources */,
@@ -20577,6 +20599,7 @@
 				8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
+				CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
@@ -21131,6 +21154,7 @@
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C0E8EB91FDEBDFF00789C91 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8C0E8EBB1FDEBDFF00789C91 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
+				CE1966DE2359BA4800599638 /* InstapickCampaignCell.swift in Sources */,
 				B5CDB33121787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
 				8C0E8EBC1FDEBDFF00789C91 /* BaseFilesGreedInteractor.swift in Sources */,
 				8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */,
@@ -22436,12 +22460,14 @@
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
+				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
+				CEEFB8D92361C64500200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				8C208643228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				A2079906219F133900AD5037 /* PremiumViewOutput.swift in Sources */,
@@ -23552,6 +23578,7 @@
 				8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */,
 				CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */,
 				CE78485222A685FB00662219 /* AppResponsivenessService.swift in Sources */,
+				CE1966E02359BA4900599638 /* InstapickCampaignCell.swift in Sources */,
 				CE78485322A685FB00662219 /* AutoSyncViewInput.swift in Sources */,
 				989BDE3F22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				CE78485422A685FB00662219 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -24567,6 +24594,7 @@
 				CE784C0622A685FB00662219 /* SelectNameModuleInput.swift in Sources */,
 				CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */,
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
+				CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				CE784C0922A685FB00662219 /* BaseView.swift in Sources */,
 				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
