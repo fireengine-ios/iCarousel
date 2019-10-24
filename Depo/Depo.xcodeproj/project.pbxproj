@@ -3321,7 +3321,6 @@
 		98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
-		98182389235F3ED00018E787 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
 		9818238B236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
 		9818238C236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
 		9818238D236033790018E787 /* BorderDotsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9818238A236033790018E787 /* BorderDotsPageControl.swift */; };
@@ -3331,6 +3330,7 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		982EA2452360840B0079DB61 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */; };
 		9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
@@ -3383,6 +3383,7 @@
 		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
+		986BF4F823607C70007D3E57 /* IntroduceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986BF4F623607C66007D3E57 /* IntroduceViewController.swift */; };
 		98758F6A235DF03800D06952 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F69235DF03800D06952 /* LandingPageViewController.swift */; };
 		98758F6C235DF05F00D06952 /* LandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98758F6B235DF05F00D06952 /* LandingPageViewController.xib */; };
 		98758F6E235DF11500D06952 /* LandingPageCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F6D235DF11500D06952 /* LandingPageCollectionViewDataSource.swift */; };
@@ -3792,7 +3793,6 @@
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
 		B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
 		B5EC4C952359DD6300EBCB08 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */; };
-		B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */; };
 		B5EC4C982359DD6300EBCB08 /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */; };
 		B5EC4C992359DD6300EBCB08 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */; };
 		B5EC4C9C2359EA9C00EBCB08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EC4C9B2359EA9B00EBCB08 /* LaunchScreen.storyboard */; };
@@ -4835,7 +4835,6 @@
 		CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49E8F92099BD71007F05A6 /* UIButton+Font.swift */; };
 		CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */; };
 		CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7014166EB1AECFEBA1E0ECD5 /* IntroduceViewOutput.swift */; };
-		CE7849EE22A685FB00662219 /* IntroduceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64007ACBE141535B47058DF /* IntroduceViewController.swift */; };
 		CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F285DAEBFD29EE3A3322FE /* IntroduceModuleInput.swift */; };
 		CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB332122C85D004F4A59 /* TermsOfUseInteractorOutput.swift */; };
 		CE7849F122A685FB00662219 /* FreeAppSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DA20039F4A00152344 /* FreeAppSpaceViewController.swift */; };
@@ -8188,6 +8187,7 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
+		982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
@@ -8212,6 +8212,7 @@
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
+		986BF4F623607C66007D3E57 /* IntroduceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceViewController.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98758F69235DF03800D06952 /* LandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
 		98758F6B235DF05F00D06952 /* LandingPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingPageViewController.xib; sourceTree = "<group>"; };
@@ -8464,7 +8465,6 @@
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceViewController.xib; sourceTree = "<group>"; };
-		B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		B5EC4C912359DD6200EBCB08 /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
 		B5EC4C942359DD6200EBCB08 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		B5EC4C9B2359EA9B00EBCB08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -13988,6 +13988,7 @@
 				98F01597235F0B590011085D /* Poppins-Regular.ttf */,
 				98F01596235F0B580011085D /* Roboto-Regular.ttf */,
 				98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */,
+				982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -14659,18 +14660,10 @@
 		B5EC4C8B2359DD6200EBCB08 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				986BF4F623607C66007D3E57 /* IntroduceViewController.swift */,
 				B5EC4C8C2359DD6200EBCB08 /* IntroduceViewController.xib */,
-				B5EC4C8D2359DD6200EBCB08 /* SubViews */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B5EC4C8D2359DD6200EBCB08 /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				B5EC4C8F2359DD6200EBCB08 /* IntroduceSubView.xib */,
-			);
-			path = SubViews;
 			sourceTree = "<group>";
 		};
 		B5EC4C902359DD6200EBCB08 /* Initializing */ = {
@@ -19191,7 +19184,6 @@
 				CE784D6222A685FB00662219 /* alt_cizgili.png in Resources */,
 				CE784D6322A685FB00662219 /* header_icon@3x.png in Resources */,
 				CE784D6422A685FB00662219 /* toolbar_ciz_icon@2x.png in Resources */,
-				B5EC4C972359DD6300EBCB08 /* IntroduceSubView.xib in Resources */,
 				98792DD422FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				CE784D6522A685FB00662219 /* close_icon.png in Resources */,
 				CE784D6622A685FB00662219 /* alt_cizgili_secili@2x.png in Resources */,
@@ -19242,7 +19234,6 @@
 				CE784D9122A685FB00662219 /* cizgi_2.png in Resources */,
 				CE784D9222A685FB00662219 /* polaroid_yeni@2x.png in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
-				98182389235F3ED00018E787 /* IntroduceSubView.xib in Resources */,
 				CE784D9422A685FB00662219 /* kontrast_secili@2x.png in Resources */,
 				CE784D9522A685FB00662219 /* Buyuk@2x.png in Resources */,
 				CE784D9622A685FB00662219 /* Paylas_butnuna_basin@2x.png in Resources */,
@@ -19464,6 +19455,7 @@
 				CE784E6122A685FB00662219 /* kucuk_ucgen.png in Resources */,
 				CE784E6222A685FB00662219 /* CollectionViewStoryReorderView.xib in Resources */,
 				CE784E6322A685FB00662219 /* focus@2x.png in Resources */,
+				982EA2452360840B0079DB61 /* SF-Pro-Text-Semibold.otf in Resources */,
 				CE784F2322A68CEC00662219 /* lifedrive.plist in Resources */,
 				CE784E6422A685FB00662219 /* info_icon.png in Resources */,
 				CE784E6522A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
@@ -23573,6 +23565,7 @@
 				CE78483022A685FB00662219 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
 				8C86111422BCF2D300108958 /* PrivacyPolicyController.swift in Sources */,
 				CE78483122A685FB00662219 /* PasscodeSettingsViewController.swift in Sources */,
+				986BF4F823607C70007D3E57 /* IntroduceViewController.swift in Sources */,
 				CE78483222A685FB00662219 /* HomePageViewOutput.swift in Sources */,
 				CE78483322A685FB00662219 /* UIScrollView+Refresh.swift in Sources */,
 				CE78483422A685FB00662219 /* ContactSyncModels.swift in Sources */,
@@ -24055,7 +24048,6 @@
 				CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */,
 				CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */,
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
-				CE7849EE22A685FB00662219 /* IntroduceViewController.swift in Sources */,
 				CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */,
 				CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */,
 				CE7849F122A685FB00662219 /* FreeAppSpaceViewController.swift in Sources */,

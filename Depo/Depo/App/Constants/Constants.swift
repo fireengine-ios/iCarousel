@@ -46,6 +46,11 @@ struct TextConstants {
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let introViewGoToLoginButtonText = NSLocalizedString("I have an account, let me log in", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let introTitle = NSLocalizedString("billo_intro_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introSubTitle = NSLocalizedString("billo_intro_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introCreateAccountButton = NSLocalizedString("billo_intro_create_account_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introLoginButton = NSLocalizedString("billo_intro_login_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let localFilesBeingProcessed = NSLocalizedString("localFilesBeingProcessed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let registrationCellTitleEmail = NSLocalizedString("E-MAIL", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -1254,3 +1254,9 @@
 "tbmatic_home_card_year_ago" = "%d year ago";
 "tbmatic_home_card_years_ago" = "%d years ago";
 "tbmatic_home_card_this_year" = "In this year";
+
+//introduce billo
+"billo_intro_title" = "Live, Collect, Remember";
+"billo_intro_subtitle" = "Store your photos, videos, and contacts on Billo. Access them whenever and wherever you are";
+"billo_intro_create_account_button" = "Create an Account";
+"billo_intro_login_button" = "I have an account, let me log in";
