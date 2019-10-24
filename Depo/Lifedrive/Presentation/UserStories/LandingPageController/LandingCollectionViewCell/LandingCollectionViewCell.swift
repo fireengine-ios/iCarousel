@@ -15,7 +15,7 @@ final class LandingCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.billoBlue
-            newValue.font = UIFont.PoppinsBoldFont(size: Device.isIpad ? 37 : 25)
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 37 : 25) //UIFont.PoppinsBoldFont(size: Device.isIpad ? 37 : 25)
             newValue.textAlignment = .center
         }
     }
@@ -23,7 +23,7 @@ final class LandingCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.removeConnection
-            newValue.font = UIFont.SFProRegularFont(size: Device.isIpad ? 20 : 15)
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: Device.isIpad ? 20 : 15) //UIFont.SFProRegularFont(size: Device.isIpad ? 20 : 15)
             newValue.textAlignment = .center
             newValue.numberOfLines = 3
             newValue.lineBreakMode = .byWordWrapping

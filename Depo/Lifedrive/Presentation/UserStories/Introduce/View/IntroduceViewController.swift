@@ -16,7 +16,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.text = TextConstants.introTitle
             newValue.textColor = ColorConstants.billoDarkBlue
-            newValue.font = UIFont.PoppinsBoldFont(size: 20)
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)//UIFont.PoppinsBoldFont(size: 20)
             newValue.textAlignment = .center
         }
     }
@@ -25,7 +25,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.text = TextConstants.introSubTitle
             newValue.textColor = ColorConstants.darkBlueColor
-            newValue.font = UIFont.SFProRegularFont(size: 15)
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)//UIFont.SFProRegularFont(size: 15)
             newValue.textAlignment = .center
             newValue.numberOfLines = 3
             newValue.lineBreakMode = .byWordWrapping
@@ -47,7 +47,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             let attributedTitle = NSAttributedString(string: TextConstants.introLoginButton,
                                                      attributes:  [.foregroundColor : ColorConstants.billoGray,
                                                                    .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
-                                                                   .font : UIFont.SFProSemiboldFont(size: 13)])
+                                                                   .font : UIFont.TurkcellSaturaMedFont(size: 13)]) //UIFont.SFProSemiboldFont(size: 13)
             newValue.setAttributedTitle(attributedTitle, for: .normal)
             newValue.isOpaque = true
         }

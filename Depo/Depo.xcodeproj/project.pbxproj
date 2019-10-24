@@ -3330,7 +3330,6 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
-		982EA2452360840B0079DB61 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */; };
 		9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
@@ -3492,10 +3491,6 @@
 		98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
-		98F01598235F0B590011085D /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */; };
-		98F01599235F0B590011085D /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01595235F0B580011085D /* Poppins-Bold.ttf */; };
-		98F0159A235F0B590011085D /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01596235F0B580011085D /* Roboto-Regular.ttf */; };
-		98F0159B235F0B590011085D /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F01597235F0B590011085D /* Poppins-Regular.ttf */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
 		9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
@@ -8187,7 +8182,6 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
-		982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
@@ -8258,10 +8252,6 @@
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
 		98EAC9412080CBFF00AAD5B6 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
-		98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
-		98F01595235F0B580011085D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		98F01596235F0B580011085D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		98F01597235F0B590011085D /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationModuleInput.swift; sourceTree = "<group>"; };
 		9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewInput.swift; sourceTree = "<group>"; };
@@ -13981,18 +13971,6 @@
 			path = ContactService;
 			sourceTree = "<group>";
 		};
-		98F2D613235EE65D00255869 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				98F01595235F0B580011085D /* Poppins-Bold.ttf */,
-				98F01597235F0B590011085D /* Poppins-Regular.ttf */,
-				98F01596235F0B580011085D /* Roboto-Regular.ttf */,
-				98F01594235F0B580011085D /* SF-Pro-Text-Regular.otf */,
-				982EA2442360840B0079DB61 /* SF-Pro-Text-Semibold.otf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		992E6B5199B59ED8492AFD33 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -14552,7 +14530,6 @@
 			children = (
 				B5EC4C9A2359EA9B00EBCB08 /* App */,
 				B5EC4C882359D8E200EBCB08 /* Presentation */,
-				98F2D613235EE65D00255869 /* Fonts */,
 				8C6A1DCB2317EAEB00D792B9 /* container */,
 				CE784F2222A68CEB00662219 /* lifedrive.plist */,
 				8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */,
@@ -19049,7 +19026,6 @@
 				CE784CE022A685FB00662219 /* gonder_btn@2x.png in Resources */,
 				CE784CE222A685FB00662219 /* share_icon.png in Resources */,
 				CE784CE322A685FB00662219 /* Kucuk_Selected.png in Resources */,
-				98F01599235F0B590011085D /* Poppins-Bold.ttf in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE784CE522A685FB00662219 /* oval_siyah@3x.png in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
@@ -19321,7 +19297,6 @@
 				CE784DE422A685FB00662219 /* TurkcellSaturaMedIta.ttf in Resources */,
 				CE784DE522A685FB00662219 /* topright@2x.png in Resources */,
 				CE784DE622A685FB00662219 /* paylas_kaydet.png in Resources */,
-				98F0159B235F0B590011085D /* Poppins-Regular.ttf in Resources */,
 				CE784DE722A685FB00662219 /* paylas_linkedin.png in Resources */,
 				CE784DE822A685FB00662219 /* paylas_kaydet@2x.png in Resources */,
 				4815689422BCF2E400376DFC /* GoogleService-Info-ent.plist in Resources */,
@@ -19455,7 +19430,6 @@
 				CE784E6122A685FB00662219 /* kucuk_ucgen.png in Resources */,
 				CE784E6222A685FB00662219 /* CollectionViewStoryReorderView.xib in Resources */,
 				CE784E6322A685FB00662219 /* focus@2x.png in Resources */,
-				982EA2452360840B0079DB61 /* SF-Pro-Text-Semibold.otf in Resources */,
 				CE784F2322A68CEC00662219 /* lifedrive.plist in Resources */,
 				CE784E6422A685FB00662219 /* info_icon.png in Resources */,
 				CE784E6522A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
@@ -19496,7 +19470,6 @@
 				CE784E8722A685FB00662219 /* kare_selected@2x.png in Resources */,
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
 				CE784E8922A685FB00662219 /* Kucuk_Selected@3x.png in Resources */,
-				98F0159A235F0B590011085D /* Roboto-Regular.ttf in Resources */,
 				CE784E8A22A685FB00662219 /* t_kucuk_selected@3x.png in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
 				CE784E8C22A685FB00662219 /* ManageContactsViewController.xib in Resources */,
@@ -19554,7 +19527,6 @@
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
 				CE784EBD22A685FB00662219 /* underline.png in Resources */,
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
-				98F01598235F0B590011085D /* SF-Pro-Text-Regular.otf in Resources */,
 				CE784EBE22A685FB00662219 /* daire_selected.png in Resources */,
 				481691AE22BB904B0087B07F /* SharedImages.xcassets in Resources */,
 				CE784EBF22A685FB00662219 /* paylas_kaydet@3x.png in Resources */,

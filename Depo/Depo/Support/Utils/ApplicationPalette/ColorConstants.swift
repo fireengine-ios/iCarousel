@@ -93,6 +93,8 @@ struct ColorConstants {
     static let rosePink = UIColor(red: 249 / 255.0, green: 140 / 255.0, blue: 148 / 255.0, alpha: 1.0)
     
     static let billoBlue = UIColor(red: 0, green: 174 / 255.0, blue: 233 / 255.0, alpha: 1.0)
+    static let billoDarkBlue = UIColor(red: 0, green: 153 / 255.0, blue: 219 / 255.0, alpha: 1.0)
+    static let billoGray = UIColor(red: 109 / 255.0, green: 109 / 255.0, blue: 109 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {
@@ -181,22 +183,4 @@ extension UIFont {
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
         return UIFont(name: "TurkcellSatura", size: size)!
     }
-    
-    #if LIFEDRIVE
-    static func PoppinsRegularFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "Poppins-Regular", size: size)!
-    }
-    
-    static func PoppinsBoldFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "Poppins-Bold", size: size)!
-    }
-    
-    static func SFProRegularFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "SFProText-Regular", size: size)!
-    }
-    
-    static func RobotoRegularFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "Roboto-Regular", size: size)!
-    }
-    #endif
 }
