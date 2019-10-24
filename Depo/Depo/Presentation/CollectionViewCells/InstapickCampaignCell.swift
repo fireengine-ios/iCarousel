@@ -80,9 +80,9 @@ final class InstapickCampaignCell: UICollectionViewCell {
         }
     }
     
-    func setup(with status: CampaignPhotopickStatus) {
-        totalCountLabel.text = "\(status.usage.totalUsed)"
-        leftCountLabel.text = "\(status.usage.dailyRemaining)"
+    func setup(with campaignCard: CampaignCardResponse) {
+        totalCountLabel.text = "\(campaignCard.totalUsed)"
+        leftCountLabel.text = "\(campaignCard.dailyRemaining)"
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {

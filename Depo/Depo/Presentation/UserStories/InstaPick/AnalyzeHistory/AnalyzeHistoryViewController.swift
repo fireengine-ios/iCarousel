@@ -285,18 +285,19 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             return
         }
         
-        campaignService.getPhotopickStatus { [weak self] result in
+        campaignService.getPhotopickDetails { [weak self] result in
             guard let self = self else {
                 success?()
                 return
             }
             
             switch result {
-            case .success(let campaignPhotopickStatus):
-//                if campaignPhotopickStatus.dates.isAvailable() {
-//                    self.dataSource.showCampaignCard(with: campaignPhotopickStatus)
-//                }
-                break
+            case .success(let campaignCard):
+                let isDateAvailable = (campaignCard.startDate...campaignCard.endDate).contains(Date())
+                
+                if SingletonStorage.shared.isUserFromTurkey, isDateAvailable {
+                    self.dataSource.showCampaignCard(with: campaignCard)
+                }
                 
             case .failure(let errorResult):
                 switch errorResult {
