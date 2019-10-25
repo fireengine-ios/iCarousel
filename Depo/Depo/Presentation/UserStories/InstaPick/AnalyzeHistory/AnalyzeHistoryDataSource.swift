@@ -20,11 +20,16 @@ protocol AnalyzeHistoryDataSourceDelegate: class {
 private enum AnalyzeHistoryCardType {
     case analysis
     case free
+    case campaign
+    case empty
     
+    /// NOTE: add "collectionView.register(nibCell:" for new cell (or will be crash)
     var cellType: UICollectionViewCell.Type {
         switch self {
         case .analysis: return InstapickAnalysisCell.self
         case .free: return InstapickFreeCell.self
+        case .campaign: return InstapickCampaignCell.self
+        case .empty: return AnalyzeHistoryEmptyCell.self
         }
     }
     
@@ -32,6 +37,8 @@ private enum AnalyzeHistoryCardType {
         switch self {
         case .analysis: return 126
         case .free: return 95
+        case .campaign: return 174
+        case .empty: return 108
         }
     }
 }
@@ -81,6 +88,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private(set) var selectedItems = [InstapickAnalyze]()
     
     private(set) var analysisCount: InstapickAnalyzesCount?
+    private var campaignCard: CampaignCardResponse?
     
     private(set) var isSelectionStateActive = false
     
@@ -102,9 +110,13 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         self.collectionView = collectionView
         
         collectionView.alwaysBounceVertical = true
+        
+        collectionView.register(nibCell: InstapickAnalyzeHistoryPhotoCell.self)
         collectionView.register(nibCell: InstapickAnalysisCell.self)
         collectionView.register(nibCell: InstapickFreeCell.self)
-        collectionView.register(nibCell: InstapickAnalyzeHistoryPhotoCell.self)
+        collectionView.register(nibCell: InstapickCampaignCell.self)
+        collectionView.register(nibCell: AnalyzeHistoryEmptyCell.self)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -119,6 +131,14 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     func reloadCards(with analysisCount: InstapickAnalyzesCount) {
         self.analysisCount = analysisCount
         cards = [analysisCount.isFree ? .free : .analysis]
+        reloadSection(.cards)
+    }
+    
+    func showCampaignCard(with campaignCard: CampaignCardResponse) {
+        self.campaignCard = campaignCard
+        if !cards.contains(.campaign) {
+            cards.append(.campaign)
+        }
         reloadSection(.cards)
     }
     
@@ -215,6 +235,13 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         selectedItems.removeAll()
         collectionView.reloadData()
     }
+    
+    func showEmptyCard() {
+        if !cards.contains(.empty) {
+            cards.append(.empty)
+        }
+        reloadSection(.cards)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -249,9 +276,14 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
                     cell.setup(with: count)
                     cell.delegate = self
                 }
-            case .free:
-                //static card, nothing to setup
+            case .free, .empty:
+                /// static card, nothing to setup
                 break
+            case .campaign:
+                if let cell = cell as? InstapickCampaignCell,
+                    let campaignCardResponse = campaignCard {
+                    cell.setup(with: campaignCardResponse)
+                }
             }
         case .photos:
             if let cell = cell as? InstapickAnalyzeHistoryPhotoCell {
@@ -313,7 +345,30 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
         ///seems like this bug may occur on iOS 12+ when it returns negative value
         switch section {
         case .cards:
-            return CGSize(width: max(collectionView.bounds.width, 0), height: cards[indexPath.item].cellHeight)
+            let cellWidth = max(collectionView.bounds.width, 0)
+            
+            switch cards[indexPath.item]  {
+            case .analysis, .free:
+                return CGSize(width: cellWidth, height: cards[indexPath.item].cellHeight)
+                
+            case .campaign:
+                /// can be added heights cache.
+                /// but will be need logic to invalidate it after campaignCard changes.
+                guard let campaignCard = campaignCard else {
+                    assertionFailure("campaignCard must exist if .campaign added")
+                    return .zero
+                }
+                let cell = InstapickCampaignCell.initFromNib()
+                cell.setup(with: campaignCard)
+                let height = cell.sizeToFit(width: cellWidth).height
+                return CGSize(width: cellWidth, height: height)
+                
+            case .empty:
+                let cell = AnalyzeHistoryEmptyCell.initFromNib()
+                let height = cell.sizeToFit(width: cellWidth).height
+                return CGSize(width: cellWidth, height: height)
+            }
+            
         case .photos:
             var width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
             width = max(width, 0)

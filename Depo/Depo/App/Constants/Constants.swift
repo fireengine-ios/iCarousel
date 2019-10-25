@@ -46,6 +46,11 @@ struct TextConstants {
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let introViewGoToLoginButtonText = NSLocalizedString("I have an account, let me log in", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let introTitle = NSLocalizedString("billo_intro_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introSubTitle = NSLocalizedString("billo_intro_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introCreateAccountButton = NSLocalizedString("billo_intro_create_account_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let introLoginButton = NSLocalizedString("billo_intro_login_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let localFilesBeingProcessed = NSLocalizedString("localFilesBeingProcessed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let registrationCellTitleEmail = NSLocalizedString("E-MAIL", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1046,6 +1051,25 @@ struct TextConstants {
     static let landingSubTitle5 = NSLocalizedString("landingSubTitle5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingTitle6 = NSLocalizedString("landingTitle6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingSubTitle6 = NSLocalizedString("landingSubTitle6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - Landing Billo
+    static let landingStartButton = NSLocalizedString("landing_start_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle0 = NSLocalizedString("landing_billo_title_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle0 = NSLocalizedString("landing_billo_subtitle_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle1 = NSLocalizedString("landing_billo_title_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle1 = NSLocalizedString("landing_billo_subtitle_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle2 = NSLocalizedString("landing_billo_title_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle2 = NSLocalizedString("landing_billo_subtitle_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle3 = NSLocalizedString("landing_billo_title_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle3 = NSLocalizedString("landing_billo_subtitle_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle4 = NSLocalizedString("landing_billo_title_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle4 = NSLocalizedString("landing_billo_subtitle_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle5 = NSLocalizedString("landing_billo_title_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle5 = NSLocalizedString("landing_billo_subtitle_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle6 = NSLocalizedString("landing_billo_title_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle6 = NSLocalizedString("landing_billo_subtitle_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloTitle7 = NSLocalizedString("landing_billo_title_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingBilloSubTitle7 = NSLocalizedString("landing_billo_subtitle_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let created = NSLocalizedString("created", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploaded = NSLocalizedString("uploaded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -91,6 +91,10 @@ struct ColorConstants {
     static let lightTeal = UIColor(red: 142 / 255.0, green: 221 / 255.0, blue: 221 / 255.0, alpha: 1.0)
     static let apricotTwo = UIColor(red: 251 / 255.0, green: 188 / 255.0, blue: 104 / 255.0, alpha: 1.0)
     static let rosePink = UIColor(red: 249 / 255.0, green: 140 / 255.0, blue: 148 / 255.0, alpha: 1.0)
+    
+    static let billoBlue = UIColor(red: 0, green: 174 / 255.0, blue: 233 / 255.0, alpha: 1.0)
+    static let billoDarkBlue = UIColor(red: 0, green: 153 / 255.0, blue: 219 / 255.0, alpha: 1.0)
+    static let billoGray = UIColor(red: 109 / 255.0, green: 109 / 255.0, blue: 109 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {
