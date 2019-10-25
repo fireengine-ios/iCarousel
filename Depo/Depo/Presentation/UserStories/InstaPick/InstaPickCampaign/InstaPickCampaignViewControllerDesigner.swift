@@ -21,7 +21,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
     
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
-           newValue.backgroundColor = ColorConstants.blueColor
+            newValue.backgroundColor = ColorConstants.blueColor
             newValue.layer.cornerRadius = cornerRadiusForContentView
             newValue.layer.masksToBounds = true
         }

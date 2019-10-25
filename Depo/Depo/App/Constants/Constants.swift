@@ -350,6 +350,14 @@ struct TextConstants {
     static let campaignViewControllerShowResultButton = NSLocalizedString("campaign_vc_result_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let campaignViewControllerEditProfileButton = NSLocalizedString("campaign_vc_edit_profile_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let campaignViewControllerBecomePremium = NSLocalizedString("campaign_vc_become_premium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignViewControllerBottomViewTitle = NSLocalizedString("campaign_vc_bottom_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignViewControllerBottomViewDescription = NSLocalizedString("campaign_vc_bottom_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewTitleWithoutPhotoPick = NSLocalizedString("campaign_vc_top_without_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewDescriptionWithoutPhotoPick = NSLocalizedString("campaign_vc_top_without_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewTitleZeroRemainin = NSLocalizedString("campaign_vc_top_title_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewTitleRemainin = NSLocalizedString("campaign_vc_top_title_non_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewDescriptionZeroRemaining = NSLocalizedString("campaign_vc_top_description_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let campaignTopViewDescriptionRemainin = NSLocalizedString("campaign_vc_top_description_non_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: Home Latest Uploads card

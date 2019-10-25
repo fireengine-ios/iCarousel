@@ -9,7 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstaPickCampaignViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="bottomViewDescriptionLabel" destination="tY4-Ke-cKD" id="fpG-Tx-iJm"/>
+                <outlet property="bottomViewImage" destination="gwi-ac-Yu2" id="dr1-hy-Ipo"/>
+                <outlet property="bottomViewTitleLabel" destination="HK8-5a-LXK" id="jr7-6T-Vxx"/>
                 <outlet property="instaPickViewControllerDesigner" destination="M3K-BN-i3Y" id="HAg-dV-LD8"/>
+                <outlet property="premiumButtonView" destination="dde-4K-Umi" id="kNe-aA-bv9"/>
+                <outlet property="scrollView" destination="BhK-3T-WSY" id="PnH-ej-wPE"/>
+                <outlet property="topViewBackgroundImage" destination="f4I-zY-brU" id="3pz-Sd-VlW"/>
+                <outlet property="topViewDescriptionLabel" destination="v6f-gE-6AG" id="MWw-fy-fus"/>
+                <outlet property="topViewTitileLabel" destination="dxd-7L-HIE" id="3ZV-kA-5R0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,16 +30,16 @@
                     <rect key="frame" x="16" y="50" width="382" height="674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpP-Bg-dFy">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="807.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="766.66666666666663"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9q-6G-Q1c">
-                                    <rect key="frame" x="13" y="18" width="356" height="302.66666666666669"/>
+                                    <rect key="frame" x="13" y="18" width="356" height="262"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camapaignPremiumBackground" translatesAutoresizingMaskIntoConstraints="NO" id="f4I-zY-brU" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="356" height="151.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="356" height="131"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i4K-fp-CsQ">
-                                            <rect key="frame" x="40" y="39.999999999999986" width="276" height="232.66666666666663"/>
+                                            <rect key="frame" x="40" y="40" width="276" height="192"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="CONGRATS ! " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-7L-HIE">
                                                     <rect key="frame" x="0.0" y="0.0" width="276" height="20.333333333333332"/>
@@ -40,18 +48,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-gE-6AG">
-                                                    <rect key="frame" x="0.0" y="30.333333333333343" width="276" height="142.33333333333334"/>
+                                                    <rect key="frame" x="0.0" y="30.33333333333335" width="276" height="101.66666666666669"/>
                                                     <string key="text">You just got the chance to participate the contest. For having more chance, tomorrow analyze with PP again. Lorem ipsum dolor sit amet.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dde-4K-Umi">
-                                                    <rect key="frame" x="0.0" y="182.66666666666669" width="276" height="50"/>
+                                                    <rect key="frame" x="0.0" y="142" width="276" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgz-pl-dnh" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
                                                             <rect key="frame" x="69" y="0.0" width="138" height="50"/>
                                                             <state key="normal" title="title"/>
+                                                            <connections>
+                                                                <action selector="becomePremiumButtonTapped:" destination="-1" eventType="touchUpInside" id="iYB-eM-Tvj"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,7 +90,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4g-cO-eES">
-                                    <rect key="frame" x="13" y="330.66666666666663" width="356" height="412.66666666666663"/>
+                                    <rect key="frame" x="13" y="290" width="356" height="412.66666666666674"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gwi-ac-Yu2" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="10" y="30" width="336" height="149.33333333333334"/>
@@ -88,16 +99,16 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-Mu-dVQ">
-                                            <rect key="frame" x="40" y="199.33333333333331" width="276" height="149.33333333333331"/>
+                                            <rect key="frame" x="40" y="199.33333333333337" width="276" height="149.33333333333337"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samsung Device lorem ipsum !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-5a-LXK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="276" height="20.333333333333332"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="276" height="27.666666666666668"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name-Surname info for millipiyango lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tY4-Ke-cKD">
-                                                    <rect key="frame" x="0.0" y="28.333333333333371" width="276" height="121"/>
+                                                    <rect key="frame" x="0.0" y="35.666666666666636" width="276" height="113.66666666666669"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -105,8 +116,11 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbY-DE-1ed" customClass="RoundedButton" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="37" y="358.66666666666669" width="282" height="44"/>
+                                            <rect key="frame" x="37" y="358.66666666666663" width="282" height="44"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="editProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="d2G-QR-ZWd"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -123,11 +137,14 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1X-wI-m0r" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="50" y="753.33333333333337" width="282" height="44"/>
+                                    <rect key="frame" x="50" y="712.66666666666663" width="282" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="eNQ-T7-oJG"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="showResultButtonTapped:" destination="-1" eventType="touchUpInside" id="yqC-xl-Lw0"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

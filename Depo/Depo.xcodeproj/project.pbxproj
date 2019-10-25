@@ -398,6 +398,9 @@
 		73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
+		73CB8E402361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
+		73CB8E412361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
+		73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
 		73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
 		73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
@@ -6916,6 +6919,7 @@
 		73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsCheckboxTextView.xib; path = Depo/Presentation/UserStories/Start/TermsAndServices/View/TermsCheckboxTextView.xib; sourceTree = SOURCE_ROOT; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
+		73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignService.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityCredentialsView.swift; sourceTree = "<group>"; };
@@ -10673,6 +10677,14 @@
 			name = TermsDescription;
 			sourceTree = "<group>";
 		};
+		73CB8E3E2361755600585625 /* InstaPickCampaignService */ = {
+			isa = PBXGroup;
+			children = (
+				73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */,
+			);
+			path = InstaPickCampaignService;
+			sourceTree = "<group>";
+		};
 		73EA16FA22EB26AB00BAD2D3 /* SpotifyService */ = {
 			isa = PBXGroup;
 			children = (
@@ -11644,6 +11656,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				73CB8E3E2361755600585625 /* InstaPickCampaignService */,
 				897B8F372338B7170028C690 /* HomePagePopUpsService */,
 				173B144622F99F6000FAAC97 /* AccountWarningService */,
 				73EA16FF22EB2BDB00BAD2D3 /* SpotifyRoutingService */,
@@ -21334,6 +21347,7 @@
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
+				73CB8E412361758A00585625 /* InstaPickCampaignService.swift in Sources */,
 				7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				A217E44721A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
@@ -23368,6 +23382,7 @@
 				9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
+				73CB8E402361758A00585625 /* InstaPickCampaignService.swift in Sources */,
 				0A2DCCF755BD78D7EE5ABDAB /* ActivityTimelineViewController.swift in Sources */,
 				FFEDDBBAD158A3ACC8251E35 /* ActivityTimelineModuleInput.swift in Sources */,
 				EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */,
@@ -24362,6 +24377,7 @@
 				CE784B1722A685FB00662219 /* SupportFormController.swift in Sources */,
 				CE784B1822A685FB00662219 /* Int64+Bytes.swift in Sources */,
 				CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */,
+				73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
 				73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
