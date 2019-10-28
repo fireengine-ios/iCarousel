@@ -36,16 +36,16 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
                                                             attributes: attributes)
             removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
             
-            let line = UIView()
-            line.backgroundColor = removeConnectionButton.titleLabel?.textColor
-            line.translatesAutoresizingMaskIntoConstraints = false
+            let lineView = UIView()
+            lineView.backgroundColor = removeConnectionButton.titleLabel?.textColor
+            lineView.translatesAutoresizingMaskIntoConstraints = false
 
-            removeConnectionButton.addSubview(line)
+            removeConnectionButton.addSubview(lineView)
             
-            line.leadingAnchor.constraint(equalTo: removeConnectionButton.leadingAnchor, constant: 1).activate()
-            line.trailingAnchor.constraint(equalTo: removeConnectionButton.trailingAnchor, constant: 1).activate()
-            line.heightAnchor.constraint(equalToConstant: 1).activate()
-            line.bottomAnchor.constraint(equalTo: removeConnectionButton.bottomAnchor, constant: -3.5).activate()
+            lineView.leadingAnchor.constraint(equalTo: removeConnectionButton.leadingAnchor, constant: 1).activate()
+            lineView.trailingAnchor.constraint(equalTo: removeConnectionButton.trailingAnchor, constant: 1).activate()
+            lineView.heightAnchor.constraint(equalToConstant: 1).activate()
+            lineView.bottomAnchor.constraint(equalTo: removeConnectionButton.bottomAnchor, constant: -3.5).activate()
         }
     }
     
