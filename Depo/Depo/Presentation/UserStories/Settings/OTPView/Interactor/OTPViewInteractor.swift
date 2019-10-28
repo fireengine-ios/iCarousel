@@ -8,9 +8,16 @@
 
 class OTPViewInteractor: PhoneVerificationInteractor {
     
-    var response: SignUpSuccessResponse?
-    var userInfo: AccountInfoResponse?
-    var phoneNumberString: String?
+    private var response: SignUpSuccessResponse?
+    private var userInfo: AccountInfoResponse?
+    private var phoneNumberString: String?
+    
+    
+    required init(userInfo: AccountInfoResponse, phoneNumber: String, response: SignUpSuccessResponse) {
+        self.response = response
+        self.userInfo = userInfo
+        self.phoneNumberString = phoneNumber
+    }
     
     override var remainingTimeInSeconds: Int {
         if let resp = response {
@@ -41,11 +48,12 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     }
     
     override func verifyCode(code: String) {
-        if response == nil {
+        guard let response = response else {
+            assertionFailure("Response doesn't exist")
             return
         }
         
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: response!.referenceToken ?? "")
+        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: response.referenceToken ?? "")
         AccountService().verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
             DispatchQueue.main.async { [weak self] in
                 
@@ -79,6 +87,16 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     override func resendCode() {
         attempts = 0
         
+        let numberUpdateIsCalled = (response != nil)
+        
+        if numberUpdateIsCalled {
+            updatePhoneNumberBeforeOTP()
+        } else {
+            confirmPhoneNumberUdpate()
+        }
+    }
+    
+    private func updatePhoneNumberBeforeOTP() {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
         AccountService().updateUserPhone(parameters: parameters, success: { [weak self] response in
                 if let response = response as? SignUpSuccessResponse {
@@ -92,6 +110,20 @@ class OTPViewInteractor: PhoneVerificationInteractor {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
         })
+    }
+    
+    /**
+     * Call if updateUserPhone is already called
+     */
+    private func confirmPhoneNumberUdpate() {
+        guard response != nil else {
+            assertionFailure("Call if updateUserPhone is already called")
+            return
+        }
+        
+        DispatchQueue.toMain {
+            self.output.resendCodeRequestSucceeded()
+        }
     }
     
     private func silentLogin(token: String) {
