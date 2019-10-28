@@ -21,8 +21,13 @@ final class CreateStoryAudioItemCell: UITableViewCell {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
         }
     }
+    
     @IBOutlet private weak var playButton: UIButton!
-    @IBOutlet private weak var selectButton: UIButton!
+    @IBOutlet private weak var selectButton: UIButton! {
+        willSet {
+            newValue.titleLabel?.adjustsFontSizeToFitWidth()
+        }
+    }
     
     private var cellIndexPathRow: Int?
     
