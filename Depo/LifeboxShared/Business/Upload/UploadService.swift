@@ -74,7 +74,7 @@ final class UploadService {
                             .customValidate()
                             .uploadProgress(closure: progressHandler)
                             .responseString { [weak self] response in
-                                self?.commonUpload(response: response, completion: completion)
+                                self?.commonUploadResponse(for: response, completion: completion)
                         }
                         dataRequestHandler?(dataRequest)
                     case .failed(let error):
@@ -120,7 +120,7 @@ final class UploadService {
                     .customValidate()
                     .uploadProgress(closure: progressHandler)
                     .responseString { [weak self] response in
-                        self?.commonUpload(response: response, completion: completion)
+                        self?.commonUploadResponse(for: response, completion: completion)
                 }
                 dataRequestHandler?(dataRequest)
             case .failed(let error):
@@ -131,7 +131,7 @@ final class UploadService {
         
     }
     
-    private func commonUpload(response: DataResponse<String>, completion: @escaping ResponseVoid) {
+    private func commonUploadResponse(for response: DataResponse<String>, completion: @escaping ResponseVoid) {
         switch response.result {
         case .success(_):
             completion(ResponseResult.success(()))
