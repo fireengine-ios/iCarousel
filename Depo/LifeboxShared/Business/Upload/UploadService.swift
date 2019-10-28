@@ -13,13 +13,13 @@ typealias DataRequestHandler = (DataRequest) -> Void
 
 final class UploadService {
     
-    let sessionManager: SessionManager
+    private let sessionManager: SessionManager
     
     init(sessionManager: SessionManager = factory.resolve()) {
         self.sessionManager = sessionManager
     }
     
-    func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
+    private func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
         return sessionManager
             .request(RouteRequests.uploadContainer)
             .customValidate()
@@ -38,7 +38,12 @@ final class UploadService {
         }
     }
     
-    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, completion: @escaping ResponseVoid) {
+    func upload(url: URL,
+                name: String,
+                contentType: String,
+                progressHandler: @escaping Request.ProgressHandler,
+                dataRequestHandler: DataRequestHandler?,
+                completion: @escaping ResponseVoid) {
         
         FilesExistManager.shared.waitFilePreparation(at: url) { [weak self] result in
             switch result {
@@ -62,35 +67,37 @@ final class UploadService {
                         }
                         
                         let uploadUrl = baseUploadUrl + "/" + UUID().uuidString
+                        let headers = self.commonHeaders(name: name, contentType: contentType, fileSize: fileSize)
                         
-                        let headers: HTTPHeaders = [
-                            HeaderConstant.XObjectMetaFavorites: "false",
-                            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
-                            HeaderConstant.Expect: "100-continue",
-                            HeaderConstant.XObjectMetaParentUuid: "",
-                            HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
-                            HeaderConstant.ContentType: contentType,
-                            HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
-                            HeaderConstant.ContentLength: String(fileSize),
-                            HeaderConstant.XObjectMetaDeviceType: Device.deviceType
-                        ]
+//                        let headers: HTTPHeaders = [
+//                            HeaderConstant.XObjectMetaFavorites: "false",
+//                            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
+//                            HeaderConstant.Expect: "100-continue",
+//                            HeaderConstant.XObjectMetaParentUuid: "",
+//                            HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
+//                            HeaderConstant.ContentType: contentType,
+//                            HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
+//                            HeaderConstant.ContentLength: String(fileSize),
+//                            HeaderConstant.XObjectMetaDeviceType: Device.deviceType
+//                        ]
                         
                         let dataRequest = self.sessionManager
                             .upload(url, to: uploadUrl, method: .put, headers: headers)
                             .customValidate()
                             .uploadProgress(closure: progressHandler)
-                            .responseString { response in
-                                switch response.result {
-                                case .success(_):
-                                    completion(ResponseResult.success(()))
-                                case .failure(let error):
-                                    if response.response?.statusCode == 413 {
-                                        let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
-                                        completion(ResponseResult.failed(errocustomError))
-                                    } else {
-                                        completion(ResponseResult.failed(error))
-                                    }
-                                }
+                            .responseString { [weak self] response in
+                                self?.commonUpload(response: response, completion: completion)
+//                                switch response.result {
+//                                case .success(_):
+//                                    completion(ResponseResult.success(()))
+//                                case .failure(let error):
+//                                    if response.response?.statusCode == 413 {
+//                                        let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
+//                                        completion(ResponseResult.failed(errocustomError))
+//                                    } else {
+//                                        completion(ResponseResult.failed(error))
+//                                    }
+//                                }
                         }
                         dataRequestHandler?(dataRequest)
                     case .failed(let error):
@@ -103,5 +110,86 @@ final class UploadService {
                 completion(ResponseResult.failed(error))
             }
         }
+    }
+    
+    func upload(data: Data,
+                name: String,
+                contentType: String,
+                progressHandler: @escaping Request.ProgressHandler,
+                dataRequestHandler: DataRequestHandler?,
+                completion: @escaping ResponseVoid)
+    {
+        let fileSize = Int64(data.count)
+        
+        guard fileSize < NumericConstants.fourGigabytes else {
+            let error = CustomErrors.text(TextConstants.syncFourGbVideo)
+            completion(ResponseResult.failed(error))
+            return
+        }
+        
+        let dataRequest = getBaseUploadUrl { [weak self] result in
+            switch result {
+            case .success(let baseUploadUrl):
+                
+                guard let `self` = self else {
+                    return
+                }
+                
+                let uploadUrl = baseUploadUrl + "/" + UUID().uuidString
+                let headers = self.commonHeaders(name: name, contentType: contentType, fileSize: fileSize)
+                
+                let dataRequest = self.sessionManager
+                    .upload(data, to: uploadUrl, method: .put, headers: headers)
+                    .customValidate()
+                    .uploadProgress(closure: progressHandler)
+                    .responseString { [weak self] response in
+                        self?.commonUpload(response: response, completion: completion)
+//                        switch response.result {
+//                        case .success(_):
+//                            completion(ResponseResult.success(()))
+//                        case .failure(let error):
+//                            if response.response?.statusCode == 413 {
+//                                let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
+//                                completion(ResponseResult.failed(errocustomError))
+//                            } else {
+//                                completion(ResponseResult.failed(error))
+//                            }
+//                        }
+                }
+                dataRequestHandler?(dataRequest)
+            case .failed(let error):
+                completion(ResponseResult.failed(error))
+            }
+        }
+        dataRequestHandler?(dataRequest)
+        
+    }
+    
+    private func commonUpload(response: DataResponse<String>, completion: @escaping ResponseVoid) {
+        switch response.result {
+        case .success(_):
+            completion(ResponseResult.success(()))
+        case .failure(let error):
+            if response.response?.statusCode == 413 {
+                let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
+                completion(ResponseResult.failed(errocustomError))
+            } else {
+                completion(ResponseResult.failed(error))
+            }
+        }
+    }
+    
+    private func commonHeaders(name: String, contentType: String, fileSize: Int64) -> HTTPHeaders {
+        return [
+            HeaderConstant.XObjectMetaFavorites: "false",
+            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
+            HeaderConstant.Expect: "100-continue",
+            HeaderConstant.XObjectMetaParentUuid: "",
+            HeaderConstant.XObjectMetaFileName: name,
+            HeaderConstant.ContentType: contentType,
+            HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
+            HeaderConstant.ContentLength: String(fileSize),
+            HeaderConstant.XObjectMetaDeviceType: Device.deviceType
+        ]
     }
 }

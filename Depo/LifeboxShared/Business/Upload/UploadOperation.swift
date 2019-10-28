@@ -13,8 +13,7 @@ final class UploadOperation: Operation {
     
     private lazy var uploadService = UploadService()
     
-    private let url: URL
-    private let contentType: String
+    private let sharedItem: SharedItem2
     private let progressHandler: Request.ProgressHandler
     private let didStartUpload: VoidHandler?
     private let complition: ResponseVoid
@@ -25,13 +24,11 @@ final class UploadOperation: Operation {
     private let attemptsMax = 5
     private var attempts = 0
     
-    init(url: URL,
-         contentType: String,
+    init(sharedItem: SharedItem2,
          progressHandler: @escaping Request.ProgressHandler,
          didStartUpload: VoidHandler?,
          complition: @escaping ResponseVoid) {
-        self.url = url
-        self.contentType = contentType
+        self.sharedItem = sharedItem
         self.progressHandler = progressHandler
         self.didStartUpload = didStartUpload
         self.complition = complition
@@ -48,11 +45,10 @@ final class UploadOperation: Operation {
     }
     
     private func upload() {
-        uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, dataRequestHandler: { [weak self] dataRequest in
-            self?.dataRequest = dataRequest
-        }, completion: { [weak self] result in
+        
+        let completion: ResponseVoid = { [weak self] result in
             
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
@@ -72,7 +68,55 @@ final class UploadOperation: Operation {
                     self.semaphore.signal()
                 }
             }
-        })
+            
+        }
+        
+        let dataRequestHandler: DataRequestHandler = { [weak self] dataRequest in
+            self?.dataRequest = dataRequest
+        }
+        
+        switch sharedItem {
+        case .url(let item):
+            uploadService.upload(url: item.url,
+                                 name: item.name,
+                                 contentType: item.contentType,
+                                 progressHandler: progressHandler,
+                                 dataRequestHandler: dataRequestHandler,
+                                 completion: completion)
+        case .data(let item):
+            uploadService.upload(data: item.data,
+                                 name: item.name,
+                                 contentType: item.contentType,
+                                 progressHandler: progressHandler,
+                                 dataRequestHandler: dataRequestHandler,
+                                 completion: completion)
+        }
+        
+//        uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, dataRequestHandler: { [weak self] dataRequest in
+//            self?.dataRequest = dataRequest
+//        }, completion: { [weak self] result in
+//
+//            guard let `self` = self else {
+//                return
+//            }
+//
+//            switch result {
+//            case .success(_):
+//                self.complition(result)
+//                self.semaphore.signal()
+//
+//            case .failed(let error):
+//                if error.isNetworkError, self.attempts < self.attemptsMax {
+//                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(self.attemptWaitSeconds)) {
+//                        self.attempts += 1
+//                        self.upload()
+//                    }
+//                } else {
+//                    self.complition(result)
+//                    self.semaphore.signal()
+//                }
+//            }
+//        })
         semaphore.wait()
     }
     

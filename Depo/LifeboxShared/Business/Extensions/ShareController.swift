@@ -47,6 +47,8 @@ extension ShareController where Self: UIViewController {
                         shareItems.append(.url(SharedImageUrl(url: url)))
                     } else if let image = item as? UIImage, let sharedImage = SharedImage(image: image) {
                         shareItems.append(.data(sharedImage))
+                    } else {
+                        assertionFailure("unknown item: \(item.debugDescription)")
                     }
                     
                     group.leave()

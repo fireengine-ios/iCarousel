@@ -28,7 +28,6 @@ enum SharedItem2 {
 }
 extension SharedItem2: Equatable {
     static func ==(lhs: SharedItem2, rhs: SharedItem2) -> Bool {
-        
         switch (lhs, rhs) {
         case (.url, .data), (.data, .url):
             return false
@@ -51,14 +50,14 @@ final class SharedImage: SharedData2 {
         self.image = image
         let baseName = UUID().uuidString
         
-        if let pngData = UIImagePNGRepresentation(image) {
-            data = pngData
-            contentType = "image/png"
-            name = "\(baseName).png"
-        } else if let jpgData = UIImageJPEGRepresentation(image, 1) {
+        if let jpgData = UIImageJPEGRepresentation(image, 1) {
             data = jpgData
             contentType = "image/jpg"
             name = "\(baseName).jpg"
+        } else if let pngData = UIImagePNGRepresentation(image) {
+            data = pngData
+            contentType = "image/png"
+            name = "\(baseName).png"
         } else {
             return nil
         }
@@ -101,6 +100,7 @@ extension SharedUrl: Equatable {
 }
 
 final class SharedImageUrl: SharedUrl {
+    
     override var image: UIImage {
         guard
             let data = try? Data(contentsOf: url),
@@ -112,7 +112,7 @@ final class SharedImageUrl: SharedUrl {
     }
     
     override var contentType: String {
-        return "video/mp4"
+        return url.imageContentType
     }
 }
 
@@ -122,7 +122,7 @@ final class SharedVideo: SharedUrl {
     }
     
     override var contentType: String {
-        return url.imageContentType
+        return "video/mp4"
     }
 }
 
