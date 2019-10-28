@@ -140,7 +140,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return result
     }
     
-    //MAKR: - View lifecycle
+    //MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +155,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
-        
         
         changeVisibleStatus(hidden: true)
         setupObserving()
