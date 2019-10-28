@@ -23,7 +23,7 @@ final class LandingPageViewController: ViewController {
     @IBOutlet private weak var startButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.landingStartButton, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: Device.isIpad ? 20 : 15)//UIFont.RobotoRegularFont(size: Device.isIpad ? 20 : 15)
+//            newValue.titleLabel?.font = UIFont.RobotoRegularFont(size: Device.isIpad ? 20 : 15)
         }
     }
 
