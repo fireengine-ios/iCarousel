@@ -37,7 +37,8 @@ final class ShareViewController: UIViewController, ShareController {
     
     private let shareConfigurator = ShareConfigurator()
     private lazy var shareWormholeListener = ShareWormholeListener()
-    private var sharedItems = [ShareData]()
+//    private var sharedItems = [ShareData]()
+    private var sharedItems = [SharedItem2]()
     private var currentUploadIndex = -1
     
     private lazy var uploadService = UploadQueueService()
@@ -141,29 +142,35 @@ final class ShareViewController: UIViewController, ShareController {
         }
     }
     
-    private func updateCurrentUI(for shareData: ShareData) {
-        DispatchQueue.global().async { [weak self] in
-            FilesExistManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
-                guard let `self` = self else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        self.currentPhotoImageView.setScreenScaledImage(shareData.image)
-                    case .failed(_):
-                        self.currentPhotoImageView.image = Images.noDocuments
+    private func updateCurrentUI(for shareData: SharedItem2) {
+        switch shareData {
+        case .url(let item):
+            self.currentNameLabel.text = item.name
+            
+            DispatchQueue.global().async { [weak self] in
+                FilesExistManager.shared.waitFilePreparation(at: item.url) { [weak self] result in
+                    guard let `self` = self else {
+                        return
                     }
-                    self.currentPhotoImageView.backgroundColor = UIColor.white
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            self.currentPhotoImageView.setScreenScaledImage(item.image)
+                        case .failed(_):
+                            self.currentPhotoImageView.image = Images.noDocuments
+                        }
+                        self.currentPhotoImageView.backgroundColor = UIColor.white
+                    }
                 }
             }
-        }
-        DispatchQueue.main.async {
-            self.currentNameLabel.text = shareData.name
+            
+        case .data(let item):
+            self.currentPhotoImageView.image = item.image
+            self.currentNameLabel.text = item.name
         }
     }
     
-    private func updateCurrentUploadInCollectionView(with shareData: ShareData) {
+    private func updateCurrentUploadInCollectionView(with shareData: SharedItem2) {
         guard let index = sharedItems.index(of: shareData) else {
             return
         }

@@ -10,10 +10,10 @@ import UIKit
 import MobileCoreServices
 
 protocol ShareController: class {
-    func getSharedItems(handler: @escaping ([ShareData]) -> Void)
+    func getSharedItems(handler: @escaping ([SharedItem2]) -> Void)
 }
 extension ShareController where Self: UIViewController {
-    func getSharedItems(handler: @escaping ([ShareData]) -> Void) {
+    func getSharedItems(handler: @escaping ([SharedItem2]) -> Void) {
         
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
@@ -33,7 +33,7 @@ extension ShareController where Self: UIViewController {
                           kUTTypeAVIMovie,
                           kUTTypeQuickTimeMovie] as [String]
         
-        var shareItems: [ShareData] = []
+        var shareItems: [SharedItem2] = []
         let group = DispatchGroup()
         
         attachmentsFor: for itemProvider in attachments {
@@ -43,11 +43,12 @@ extension ShareController where Self: UIViewController {
                 
                 group.enter()
                 itemProvider.loadItem(forTypeIdentifier: imageType, options: nil) { (item, error) in
-                    guard let path = item as? URL else {
-                        group.leave()
-                        return
+                    if let url = item as? URL {
+                        shareItems.append(.url(SharedImageUrl(url: url)))
+                    } else if let image = item as? UIImage, let sharedImage = SharedImage(image: image) {
+                        shareItems.append(.data(sharedImage))
                     }
-                    shareItems.append(ShareImage(url: path))
+                    
                     group.leave()
                 }
                 
@@ -60,7 +61,7 @@ extension ShareController where Self: UIViewController {
                         group.leave()
                         return
                     }
-                    shareItems.append(ShareData(url: path))
+                    shareItems.append(.url(SharedUrl(url: path)))
                     group.leave()
                 }
                 
@@ -76,7 +77,7 @@ extension ShareController where Self: UIViewController {
                                 group.leave()
                                 return
                             }
-                            shareItems.append(ShareVideo(url: path))
+                            shareItems.append(.url(SharedVideo(url: path)))
                             group.leave()
                         }
                         
@@ -95,7 +96,7 @@ extension ShareController where Self: UIViewController {
                             group.leave()
                             return
                         }
-                        shareItems.append(ShareData(url: path))
+                        shareItems.append(.url(SharedUrl(url: path)))
                         group.leave()
                     }
                 }

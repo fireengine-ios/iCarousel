@@ -15,7 +15,7 @@ final class ShareDataImageLoader {
     
     private let cash = NSCache<NSURL, UIImage>()
     
-    func loadImage(for imageView: UIImageView, with shareData: ShareData) {
+    func loadImage(for imageView: UIImageView, with shareData: SharedUrl2) {
         
         if let image = cash.object(forKey: shareData.url as NSURL) {
             let resizedImage = image.resizedImage(to: imageView.bounds.size.screenScaled)
@@ -28,9 +28,7 @@ final class ShareDataImageLoader {
                 
                 switch result {
                 case .success(_):
-                    guard let image = shareData.image else {
-                        return
-                    }
+                    let image = shareData.image
                     self?.cash.setObject(image, forKey: shareData.url as NSURL)
                     
                     let resizedImage = image.resizedImage(to: imageView.bounds.size.screenScaled)

@@ -16,8 +16,14 @@ final class ImageColCell: UICollectionViewCell {
         }
     }
     
-    func setup(with shareData: ShareData) {
-        ShareDataImageLoader.shared.loadImage(for: photoImageView, with: shareData)
+    func setup(with shareData: SharedItem2) {
+        switch shareData {
+        case .url(let item):
+            ShareDataImageLoader.shared.loadImage(for: photoImageView, with: item)
+            
+        case .data(let item):
+            photoImageView.image = item.image
+        }
     }
     
     func setup(isCurrentUploading: Bool) {

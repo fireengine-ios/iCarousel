@@ -8,7 +8,7 @@
 
 import Alamofire
 
-typealias ShareDataHandler = (ShareData) -> Void
+typealias ShareDataHandler = (SharedItem2) -> Void
 
 final class UploadQueueService {
     
@@ -24,7 +24,7 @@ final class UploadQueueService {
         queue.cancelAllOperations()
     }
     
-    func addShareData(_ shareDataArray: [ShareData],
+    func addShareData(_ shareDataArray: [SharedItem2],
                       progress: @escaping Request.ProgressHandler,
                       finishedUpload: ShareDataHandler? = nil,
                       didStartUpload: ShareDataHandler? = nil,
