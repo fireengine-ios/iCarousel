@@ -100,7 +100,6 @@ final class CampaignCardResponse {
             let endDate = dates[ResponseKey.endDate].date,
             let launchDate = dates[ResponseKey.launchDate].date
         else {
-            assertionFailure()
             return nil
         }
 
