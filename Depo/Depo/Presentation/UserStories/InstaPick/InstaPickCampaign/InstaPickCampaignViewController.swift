@@ -27,8 +27,8 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     
     //MARK: Bottom view
     @IBOutlet private weak var bottomViewImage: LoadingImageView!
-    @IBOutlet weak var bottomViewTitleLabel: UILabel!
-    @IBOutlet weak var bottomViewDescriptionLabel: UILabel!
+    @IBOutlet private weak var bottomViewTitleLabel: UILabel!
+    @IBOutlet private weak var bottomViewDescriptionLabel: UILabel!
     
     private var showAnimatedAgain = true
     
