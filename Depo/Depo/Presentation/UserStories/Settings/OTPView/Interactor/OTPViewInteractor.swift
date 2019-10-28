@@ -8,9 +8,16 @@
 
 class OTPViewInteractor: PhoneVerificationInteractor {
     
-    var response: SignUpSuccessResponse?
-    var userInfo: AccountInfoResponse?
-    var phoneNumberString: String?
+    private var response: SignUpSuccessResponse?
+    private var userInfo: AccountInfoResponse?
+    private var phoneNumberString: String?
+    
+    
+    required init(userInfo: AccountInfoResponse, phoneNumber: String, response: SignUpSuccessResponse) {
+        self.response = response
+        self.userInfo = userInfo
+        self.phoneNumberString = phoneNumber
+    }
     
     override var remainingTimeInSeconds: Int {
         if let resp = response {
@@ -41,11 +48,11 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     }
     
     override func verifyCode(code: String) {
-        if response == nil {
+        guard let response = response else {
             return
         }
         
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: response!.referenceToken ?? "")
+        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: response.referenceToken ?? "")
         AccountService().verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
             DispatchQueue.main.async { [weak self] in
                 
