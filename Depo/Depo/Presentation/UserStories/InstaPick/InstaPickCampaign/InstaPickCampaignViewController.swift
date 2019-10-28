@@ -119,6 +119,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     @IBAction private  func editProfileButtonTapped(_ sender: Any) {
         
         guard let userInfo = SingletonStorage.shared.accountInfo  else {
+            assertionFailure()
             return
         }
         

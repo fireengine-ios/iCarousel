@@ -60,7 +60,6 @@ final class InstaPickCampaignService {
             case .success(let analizesCountResult):
                 self?.handleAnalyzeCountForCamapaign(analizesCountResult: analizesCountResult)
             case .failed(_):
-                //MARK: Error handling here
                 self?.continueWithCommonFlow()
                 break
             }
@@ -90,7 +89,6 @@ final class InstaPickCampaignService {
                 case .success(let success):
                     completion(success)
                 case .failure(_):
-                    //MARK: Error handling here
                     completion(nil)
                 }
             }
@@ -101,7 +99,8 @@ final class InstaPickCampaignService {
         
         getCampaignStatus { [weak self] campaignCardResponse in
             guard let response = campaignCardResponse else {
-                //MARK: Error handling will be here
+                self?.continueWithCommonFlow()
+                assertionFailure()
                 return
             }
             
