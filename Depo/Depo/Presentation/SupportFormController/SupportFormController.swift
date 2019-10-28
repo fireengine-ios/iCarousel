@@ -60,7 +60,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileName
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
-        newValue.textField.placeholder = TextConstants.enterYourName
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -69,7 +69,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileSurname
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
-        newValue.textField.placeholder = TextConstants.enterYourSurname
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -79,7 +79,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         /// not set bcz of showEmptyCredentialsPopup
         //newValue.subtitleLabel.text
-        newValue.textField.placeholder = TextConstants.enterYourEmailAddress
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocorrectionType = .no
         newValue.textField.autocapitalizationType = .none
@@ -92,7 +92,15 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextPickerView()
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
-        newValue.textField.placeholder = TextConstants.pleaseChooseSubject
+
+        newValue.textField.quickDismissPlaceholder = TextConstants.pleaseChooseSubject
+        newValue.models = [TextConstants.onLoginSupportFormSubject1,
+                           TextConstants.onLoginSupportFormSubject2,
+                           TextConstants.onLoginSupportFormSubject3,
+                           TextConstants.onLoginSupportFormSubject4,
+                           TextConstants.onLoginSupportFormSubject5,
+                           TextConstants.onLoginSupportFormSubject6,
+                           TextConstants.onLoginSupportFormSubject7]
         return newValue
     }()
     

@@ -72,20 +72,25 @@ class CustomNavBarView: UIView, UISearchBarDelegate {
         let logoImageY = (frame.height - FrameConstants.logoImageSizeIPad) + FrameConstants.logoBottomOffset
         if Device.isIpad {
             logoImage.center = center
+            
             logoImage.frame.origin.y = logoImageY
             
             logoImage.frame.size = CGSize(width: FrameConstants.logoImageSizeIPad,
                                           height: FrameConstants.logoImageSizeIPad)
-            
         } else {
-            logoImage.frame.size = CGSize(width: FrameConstants.logoImageWidthIPhone,
-                                          height: FrameConstants.logoImageSizeIPad)
-            
             logoImage.frame.origin = CGPoint(x: FrameConstants.logoLeadingOffset,
                                              y: logoImageY)
             
+            #if LIFEDRIVE
+            logoImage.frame.origin.y = logoImage.frame.origin.y - (FrameConstants.logoBottomOffset * 2)
+            
+            logoImage.frame.size = CGSize(width: FrameConstants.logoImageWidthIPhone,
+                                          height: FrameConstants.logoImageSizeIPad)
+            #else
+            logoImage.frame.size = CGSize(width: FrameConstants.logoImageWidthIPhone,
+                                          height: FrameConstants.logoImageSizeIPad)
+            #endif
         }
-
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
@@ -96,8 +101,15 @@ class CustomNavBarView: UIView, UISearchBarDelegate {
 private enum FrameConstants {
     static var logoBottomOffset: CGFloat = 10
 
+    #if LIFEDRIVE
+    static var logoLeadingOffset: CGFloat = 30
+
+    static var logoImageSizeIPad: CGFloat = 24
+    static var logoImageWidthIPhone: CGFloat = 60
+    #else
     static var logoLeadingOffset: CGFloat = 16
 
     static var logoImageSizeIPad: CGFloat = 54
     static var logoImageWidthIPhone: CGFloat = 126
+    #endif
 }
