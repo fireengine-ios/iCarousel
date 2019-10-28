@@ -17302,8 +17302,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE784F1722A685FB00662219 /* Build configuration list for PBXNativeTarget "lifedrive" */;
 			buildPhases = (
-				73F8003622C0BEED00A5A0E9 /* LocalizableRename */,
 				CE7847F522A685FB00662219 /* [CP] Check Pods Manifest.lock */,
+				73F8003622C0BEED00A5A0E9 /* LocalizableRename */,
 				CE7847F622A685FB00662219 /* Sources */,
 				CE784CA422A685FB00662219 /* Frameworks */,
 				CE784CC322A685FB00662219 /* Resources */,
@@ -27840,7 +27840,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.1;
+				CURRENT_PROJECT_VERSION = 22.5.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -27901,7 +27901,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.1;
+				CURRENT_PROJECT_VERSION = 22.5.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27958,7 +27958,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.1;
+				CURRENT_PROJECT_VERSION = 22.5.2;
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28016,7 +28016,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.1;
+				CURRENT_PROJECT_VERSION = 22.5.2;
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
