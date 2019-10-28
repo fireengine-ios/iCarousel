@@ -92,31 +92,6 @@ final class UploadOperation: Operation {
                                  completion: completion)
         }
         
-//        uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, dataRequestHandler: { [weak self] dataRequest in
-//            self?.dataRequest = dataRequest
-//        }, completion: { [weak self] result in
-//
-//            guard let `self` = self else {
-//                return
-//            }
-//
-//            switch result {
-//            case .success(_):
-//                self.complition(result)
-//                self.semaphore.signal()
-//
-//            case .failed(let error):
-//                if error.isNetworkError, self.attempts < self.attemptsMax {
-//                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(self.attemptWaitSeconds)) {
-//                        self.attempts += 1
-//                        self.upload()
-//                    }
-//                } else {
-//                    self.complition(result)
-//                    self.semaphore.signal()
-//                }
-//            }
-//        })
         semaphore.wait()
     }
     
@@ -124,4 +99,5 @@ final class UploadOperation: Operation {
         super.cancel()
         dataRequest?.cancel()
     }
+    
 }

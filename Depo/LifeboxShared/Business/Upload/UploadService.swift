@@ -69,35 +69,12 @@ final class UploadService {
                         let uploadUrl = baseUploadUrl + "/" + UUID().uuidString
                         let headers = self.commonHeaders(name: name, contentType: contentType, fileSize: fileSize)
                         
-//                        let headers: HTTPHeaders = [
-//                            HeaderConstant.XObjectMetaFavorites: "false",
-//                            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
-//                            HeaderConstant.Expect: "100-continue",
-//                            HeaderConstant.XObjectMetaParentUuid: "",
-//                            HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
-//                            HeaderConstant.ContentType: contentType,
-//                            HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
-//                            HeaderConstant.ContentLength: String(fileSize),
-//                            HeaderConstant.XObjectMetaDeviceType: Device.deviceType
-//                        ]
-                        
                         let dataRequest = self.sessionManager
                             .upload(url, to: uploadUrl, method: .put, headers: headers)
                             .customValidate()
                             .uploadProgress(closure: progressHandler)
                             .responseString { [weak self] response in
                                 self?.commonUpload(response: response, completion: completion)
-//                                switch response.result {
-//                                case .success(_):
-//                                    completion(ResponseResult.success(()))
-//                                case .failure(let error):
-//                                    if response.response?.statusCode == 413 {
-//                                        let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
-//                                        completion(ResponseResult.failed(errocustomError))
-//                                    } else {
-//                                        completion(ResponseResult.failed(error))
-//                                    }
-//                                }
                         }
                         dataRequestHandler?(dataRequest)
                     case .failed(let error):
@@ -144,17 +121,6 @@ final class UploadService {
                     .uploadProgress(closure: progressHandler)
                     .responseString { [weak self] response in
                         self?.commonUpload(response: response, completion: completion)
-//                        switch response.result {
-//                        case .success(_):
-//                            completion(ResponseResult.success(()))
-//                        case .failure(let error):
-//                            if response.response?.statusCode == 413 {
-//                                let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
-//                                completion(ResponseResult.failed(errocustomError))
-//                            } else {
-//                                completion(ResponseResult.failed(error))
-//                            }
-//                        }
                 }
                 dataRequestHandler?(dataRequest)
             case .failed(let error):
@@ -192,4 +158,5 @@ final class UploadService {
             HeaderConstant.XObjectMetaDeviceType: Device.deviceType
         ]
     }
+    
 }
