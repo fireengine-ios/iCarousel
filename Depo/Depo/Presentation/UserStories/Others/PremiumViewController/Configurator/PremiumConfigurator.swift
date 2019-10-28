@@ -14,8 +14,9 @@ final class PremiumModuleConfigurator {
                    title: String,
                    headerTitle: String,
                    authority: AuthorityType? = nil,
-                   module: FaceImageItemsModuleOutput?) {
-        let router = PremiumRouter()
+                   module: FaceImageItemsModuleOutput?,
+                   viewControllerForPresentOn: UIViewController? = nil) {
+        let router = PremiumRouter(viewControllerForPresentOn: viewControllerForPresentOn)
         
         let presenter = PremiumPresenter(title: title, headerTitle: headerTitle, authority: authority, module: module)
         presenter.view = viewController

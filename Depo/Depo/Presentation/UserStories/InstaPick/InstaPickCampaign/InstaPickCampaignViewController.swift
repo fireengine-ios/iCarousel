@@ -13,10 +13,6 @@ enum InstaPickCampaignViewControllerMode {
     case withoutLeftPhotoPick
 }
 
-protocol InstaPickCampaignViewControllerDelegate {
-    func showResultButtonTapped()
-}
-
 final class InstaPickCampaignViewController: UIViewController, NibInit {
     
     @IBOutlet private var instaPickViewControllerDesigner: InstaPickCampaignViewControllerDesigner!
@@ -39,11 +35,10 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     private var controllerMode: InstaPickCampaignViewControllerMode?
     private var controllerContent: CampaignCardResponse?
     private lazy var router = RouterVC()
-    private var delegate: InstaPickCampaignViewControllerDelegate?
+    var didClosed: VoidHandler?
     
-    static func createController(controllerMode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse, delegate: InstaPickCampaignViewControllerDelegate ) -> InstaPickCampaignViewController {
+    static func createController(controllerMode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) -> InstaPickCampaignViewController {
         let controller = InstaPickCampaignViewController()
-        controller.delegate = delegate
         controller.controllerMode = controllerMode
         controller.controllerContent = data
         return controller
@@ -117,6 +112,10 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         }
     }
     
+    func closeAfterBecomPremium() {
+        close(completion: didClosed)
+    }
+    
     @IBAction private  func editProfileButtonTapped(_ sender: Any) {
         
         guard let userInfo = SingletonStorage.shared.accountInfo  else {
@@ -129,12 +128,12 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     }
     
     @IBAction private func becomePremiumButtonTapped(_ sender: Any) {
-        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, viewControllerForPresentOn: self)
+        
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction private func showResultButtonTapped(_ sender: Any) {
-        delegate?.showResultButtonTapped()
-        close()
+        close(completion: didClosed)
     }
 }

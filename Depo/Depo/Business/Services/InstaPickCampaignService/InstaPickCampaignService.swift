@@ -8,48 +8,39 @@
 
 import UIKit
 
-protocol InstaPickCampaignServiceDelegate {
-    func startActivityIndicator()
-    func stopActivityIndicator()
-    func continueWithoutCampaign()
-}
-
 final class InstaPickCampaignService {
-    
-    let delegate: InstaPickCampaignServiceDelegate
-    let parenViewController: UIViewController
-    
-    init(viewController: UIViewController, delegate: InstaPickCampaignServiceDelegate) {
-        self.parenViewController = viewController
-        self.delegate = delegate
-    }
     
     private let campaingService = CampaignServiceImpl()
     private let storageVars: StorageVars = factory.resolve()
     private let instapickService: InstapickService = factory.resolve()
     
     private var campaignResponse: CampaignCardResponse?
+    private var instaPickCampaignServiceCompletion: ((UINavigationController?) -> Void)?
+
+    func getController(completion: @escaping ((UINavigationController?) -> Void)) {
+        self.instaPickCampaignServiceCompletion = completion
+        checkCampaignParticipation()
+    }
     
-    func chekCampaignParticipation() {
-        delegate.startActivityIndicator()
+    private func checkCampaignParticipation() {
+
         guard let countryCode = SingletonStorage.shared.accountInfo?.countryCode, countryCode == "90" else {
-            delegate.continueWithoutCampaign()
-            delegate.stopActivityIndicator()
+            continueWithCommonFlow()
             return
         }
-        
+
         campaingService.getPhotopickDetails { [weak self] result in
-            
+
             guard let self = self else {
                 return
             }
-            
+
             switch result {
             case .success(let response):
                 self.campaignResponse = response
                 self.checkDateIsValidForCampaign(response: response)
             case .failure(_):
-                self.delegate.continueWithoutCampaign()
+                self.continueWithCommonFlow()
             }
         }
     }
@@ -57,22 +48,20 @@ final class InstaPickCampaignService {
     private func checkDateIsValidForCampaign(response: CampaignCardResponse) {
         let currentDate = Date()
         if response.startDate <= currentDate && currentDate <= response.endDate {
-            makeNewAnalysisWithCampaign()
+            continueWithCampaignFlow()
         } else {
-            delegate.continueWithoutCampaign()
-            delegate.stopActivityIndicator()
+            continueWithCommonFlow()
         }
     }
     
-    private func makeNewAnalysisWithCampaign() {
-        delegate.startActivityIndicator()
+    private func continueWithCampaignFlow() {
         instapickService.getAnalyzesCount { [weak self] analizesCountResult in
             switch analizesCountResult {
             case .success(let analizesCountResult):
                 self?.handleAnalyzeCountForCamapaign(analizesCountResult: analizesCountResult)
             case .failed(_):
                 //MARK: Error handling here
-                self?.delegate.stopActivityIndicator()
+                self?.continueWithCommonFlow()
                 break
             }
         }
@@ -81,12 +70,13 @@ final class InstaPickCampaignService {
     private func handleAnalyzeCountForCamapaign(analizesCountResult: InstapickAnalyzesCount) {
         switch analizesCountResult {
         case let result where result.isFree == false && result.left == 0:
-            prepareInstaPickViewControllerForPresent(with: .withoutLeftPhotoPick)
+            prepareInstaPickCampaignViewControllerForPresent(with: .withoutLeftPhotoPick)
             
         case let result where result.isFree == true || result.left > 0:
-            prepareInstaPickViewControllerForPresent(with: .withLeftPhotoPick)
+            prepareInstaPickCampaignViewControllerForPresent(with: .withLeftPhotoPick)
             
         default:
+            continueWithCommonFlow()
             assertionFailure()
         }
     }
@@ -107,12 +97,11 @@ final class InstaPickCampaignService {
         }
     }
     
-    private func prepareInstaPickViewControllerForPresent(with mode: InstaPickCampaignViewControllerMode) {
+    private func prepareInstaPickCampaignViewControllerForPresent(with mode: InstaPickCampaignViewControllerMode) {
         
         getCampaignStatus { [weak self] campaignCardResponse in
             guard let response = campaignCardResponse else {
                 //MARK: Error handling will be here
-                self?.delegate.stopActivityIndicator()
                 return
             }
             
@@ -120,44 +109,40 @@ final class InstaPickCampaignService {
             case .withLeftPhotoPick:
                 self?.handleWithoutLeftPhotoPick(mode: mode, with: response)
             case .withoutLeftPhotoPick:
-                self?.presentInstaPickController(mode: mode, with: response)
+                self?.returnInstaPickCampaignViewController(mode: mode, with: response)
             }
         }
     }
     
     private func handleWithoutLeftPhotoPick(mode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) {
         
-        delegate.stopActivityIndicator()
         switch data.dailyRemaining {
         case 0:
             let calendar =  Calendar.current
             if let date = storageVars.shownCampaignInstaPick, calendar.isDateInToday(date) {
-                delegate.continueWithoutCampaign()
+                continueWithCommonFlow()
             } else {
                 storageVars.shownCampaignInstaPick = Date()
-                presentInstaPickController(mode: mode, with: data)
+                returnInstaPickCampaignViewController(mode: mode, with: data)
             }
         case 1...:
-            presentInstaPickController(mode: mode, with: data)
+            returnInstaPickCampaignViewController(mode: mode, with: data)
         default:
+            continueWithCommonFlow()
             assertionFailure()
         }
     }
     
-    private func presentInstaPickController(mode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) {
-        delegate.stopActivityIndicator()
+    private func returnInstaPickCampaignViewController(mode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) {
         
         let router = RouterVC()
         let controller = InstaPickCampaignViewController.createController(controllerMode: mode,
-                                                                          with: data,
-                                                                          delegate: self)
+                                                                          with: data)
         let navController = router.createRootNavigationControllerWithModalStyle(controller: controller)
-        router.presentViewController(controller: navController)
+        instaPickCampaignServiceCompletion?(navController)
     }
-}
-
-extension InstaPickCampaignService: InstaPickCampaignViewControllerDelegate {
-    func showResultButtonTapped() {
-        print("Button tapped")
+    
+    private func continueWithCommonFlow() {
+        instaPickCampaignServiceCompletion?(nil)
     }
 }
