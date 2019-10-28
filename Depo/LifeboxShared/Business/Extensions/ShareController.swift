@@ -10,10 +10,10 @@ import UIKit
 import MobileCoreServices
 
 protocol ShareController: class {
-    func getSharedItems(handler: @escaping ([SharedItem2]) -> Void)
+    func getSharedItems(handler: @escaping ([SharedItemSource]) -> Void)
 }
 extension ShareController where Self: UIViewController {
-    func getSharedItems(handler: @escaping ([SharedItem2]) -> Void) {
+    func getSharedItems(handler: @escaping ([SharedItemSource]) -> Void) {
         
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
@@ -33,7 +33,7 @@ extension ShareController where Self: UIViewController {
                           kUTTypeAVIMovie,
                           kUTTypeQuickTimeMovie] as [String]
         
-        var shareItems: [SharedItem2] = []
+        var shareItems: [SharedItemSource] = []
         let group = DispatchGroup()
         
         attachmentsFor: for itemProvider in attachments {
@@ -63,7 +63,7 @@ extension ShareController where Self: UIViewController {
                         group.leave()
                         return
                     }
-                    shareItems.append(.url(SharedUrl(url: path)))
+                    shareItems.append(.url(SharedFileUrl(url: path)))
                     group.leave()
                 }
                 
@@ -98,7 +98,7 @@ extension ShareController where Self: UIViewController {
                             group.leave()
                             return
                         }
-                        shareItems.append(.url(SharedUrl(url: path)))
+                        shareItems.append(.url(SharedFileUrl(url: path)))
                         group.leave()
                     }
                 }

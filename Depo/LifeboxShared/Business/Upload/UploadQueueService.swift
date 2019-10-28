@@ -8,7 +8,7 @@
 
 import Alamofire
 
-typealias ShareDataHandler = (SharedItem2) -> Void
+typealias SharedItemHandler = (SharedItemSource) -> Void
 
 final class UploadQueueService {
     
@@ -24,16 +24,16 @@ final class UploadQueueService {
         queue.cancelAllOperations()
     }
     
-    func addShareData(_ shareDataArray: [SharedItem2],
+    func addSharedItems(_ sharedItems: [SharedItemSource],
                       progress: @escaping Request.ProgressHandler,
-                      finishedUpload: ShareDataHandler? = nil,
-                      didStartUpload: ShareDataHandler? = nil,
+                      finishedUpload: SharedItemHandler? = nil,
+                      didStartUpload: SharedItemHandler? = nil,
                       complition: @escaping ResponseVoid) {
         
-        let operations: [Operation] = shareDataArray.compactMap { shareData in
+        let operations: [Operation] = sharedItems.compactMap { sharedItem in
             
-            UploadOperation(sharedItem: shareData, progressHandler: progress, didStartUpload: {
-                didStartUpload?(shareData)
+            UploadOperation(sharedItem: sharedItem, progressHandler: progress, didStartUpload: {
+                didStartUpload?(sharedItem)
             }, complition: { [weak self] result in
                 
                 guard let `self` = self else {
@@ -48,7 +48,7 @@ final class UploadQueueService {
                     self.error = error
                     self.queue.cancelAllOperations()
                 }
-                finishedUpload?(shareData)
+                finishedUpload?(sharedItem)
             })
         }
         

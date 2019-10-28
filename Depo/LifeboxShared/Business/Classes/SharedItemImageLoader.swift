@@ -1,5 +1,5 @@
 //
-//  ShareDataImageLoader.swift
+//  SharedItemImageLoader.swift
 //  LifeboxShared
 //
 //  Created by Bondar Yaroslav on 3/14/18.
@@ -9,27 +9,27 @@
 import UIKit
 
 /// must be singleton or static cash
-final class ShareDataImageLoader {
+final class SharedItemImageLoader {
     
-    static let shared = ShareDataImageLoader()
+    static let shared = SharedItemImageLoader()
     
     private let cash = NSCache<NSURL, UIImage>()
     
-    func loadImage(for imageView: UIImageView, with shareData: SharedUrl2) {
+    func loadImage(for imageView: UIImageView, with sharedItem: SharedUrl) {
         
-        if let image = cash.object(forKey: shareData.url as NSURL) {
+        if let image = cash.object(forKey: sharedItem.url as NSURL) {
             let resizedImage = image.resizedImage(to: imageView.bounds.size.screenScaled)
             imageView.image = resizedImage
             return
         }
         
         DispatchQueue.global().async { [weak self] in
-            FilesExistManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+            FilesExistManager.shared.waitFilePreparation(at: sharedItem.url) { [weak self] result in
                 
                 switch result {
                 case .success(_):
-                    let image = shareData.image
-                    self?.cash.setObject(image, forKey: shareData.url as NSURL)
+                    let image = sharedItem.image
+                    self?.cash.setObject(image, forKey: sharedItem.url as NSURL)
                     
                     let resizedImage = image.resizedImage(to: imageView.bounds.size.screenScaled)
                     

@@ -13,7 +13,7 @@ final class UploadOperation: Operation {
     
     private lazy var uploadService = UploadService()
     
-    private let sharedItem: SharedItem2
+    private let sharedItem: SharedItemSource
     private let progressHandler: Request.ProgressHandler
     private let didStartUpload: VoidHandler?
     private let complition: ResponseVoid
@@ -24,7 +24,7 @@ final class UploadOperation: Operation {
     private let attemptsMax = 5
     private var attempts = 0
     
-    init(sharedItem: SharedItem2,
+    init(sharedItem: SharedItemSource,
          progressHandler: @escaping Request.ProgressHandler,
          didStartUpload: VoidHandler?,
          complition: @escaping ResponseVoid) {
