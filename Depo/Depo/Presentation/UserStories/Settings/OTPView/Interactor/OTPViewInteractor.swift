@@ -49,6 +49,7 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     
     override func verifyCode(code: String) {
         guard let response = response else {
+            assertionFailure("Response doesn't exist")
             return
         }
         
@@ -86,10 +87,11 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     override func resendCode() {
         attempts = 0
         
-        if response == nil {
+        let numberUpdateIsCalled = (response != nil)
+        
+        if numberUpdateIsCalled {
             updatePhoneNumberBeforeOTP()
         } else {
-            //Number is already updated
             confirmPhoneNumberUdpate()
         }
     }
@@ -110,10 +112,16 @@ class OTPViewInteractor: PhoneVerificationInteractor {
         })
     }
     
+    /**
+     * Call if updateUserPhone is already called
+     */
     private func confirmPhoneNumberUdpate() {
-        attempts = 0
+        guard response != nil else {
+            assertionFailure("Call if updateUserPhone is already called")
+            return
+        }
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.resendCodeRequestSucceeded()
         }
     }
