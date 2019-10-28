@@ -100,7 +100,6 @@ final class CampaignCardResponse {
             let endDate = dates[ResponseKey.endDate].date,
             let launchDate = dates[ResponseKey.launchDate].date
         else {
-            assertionFailure()
             return nil
         }
 
@@ -111,6 +110,17 @@ final class CampaignCardResponse {
 enum CampaignPhotopickError {
     case empty
     case error(Error)
+}
+
+extension CampaignPhotopickError {
+    func isEmpty() -> Bool {
+        switch self {
+        case .empty:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension CampaignPhotopickError: LocalizedError {

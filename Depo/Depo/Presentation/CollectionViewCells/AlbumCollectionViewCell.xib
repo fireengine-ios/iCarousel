@@ -16,10 +16,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="341" height="121"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMf-gs-8lG">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMf-gs-8lG" customClass="AlbumCellView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="341" height="121"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-XY-99n" customClass="ShadowView" customModule="lifebox" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-XY-99n">
                                 <rect key="frame" x="20" y="10" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -32,11 +32,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ohs-TV-4u6" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="25" y="15" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="BOv-Ir-3Ex"/>
-                                    <constraint firstAttribute="width" constant="70" id="Qtj-7M-2Eb"/>
-                                </constraints>
+                                <rect key="frame" x="22" y="12" width="76" height="76"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W0B-9v-EKi">
                                 <rect key="frame" x="82" y="8" width="20" height="20"/>
@@ -68,21 +64,30 @@
                             <constraint firstItem="Wlg-XY-99n" firstAttribute="top" secondItem="cMf-gs-8lG" secondAttribute="top" constant="10" id="Hxh-jb-GaA"/>
                             <constraint firstAttribute="trailing" secondItem="8oD-m8-NKh" secondAttribute="trailing" constant="7" id="Jq7-jo-Lfd"/>
                             <constraint firstItem="W0B-9v-EKi" firstAttribute="top" secondItem="Wlg-XY-99n" secondAttribute="top" constant="-2" id="JvH-xW-UD4"/>
-                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="centerY" secondItem="Wlg-XY-99n" secondAttribute="centerY" id="NIw-rh-HRg"/>
+                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="leading" secondItem="Wlg-XY-99n" secondAttribute="leading" constant="2" id="LF2-K5-Rwn"/>
                             <constraint firstItem="XP6-lP-cGY" firstAttribute="centerY" secondItem="Wlg-XY-99n" secondAttribute="centerY" id="Q5P-LU-hiv"/>
+                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="top" secondItem="Wlg-XY-99n" secondAttribute="top" constant="2" id="Tok-r5-UiY"/>
                             <constraint firstItem="Wlg-XY-99n" firstAttribute="leading" secondItem="cMf-gs-8lG" secondAttribute="leading" constant="20" id="TsU-Pb-1JQ"/>
+                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="bottom" secondItem="Wlg-XY-99n" secondAttribute="bottom" constant="-2" id="YCM-yB-eGM"/>
                             <constraint firstItem="XP6-lP-cGY" firstAttribute="width" secondItem="Wlg-XY-99n" secondAttribute="width" id="YkR-MK-fIM"/>
                             <constraint firstItem="XP6-lP-cGY" firstAttribute="height" secondItem="Wlg-XY-99n" secondAttribute="height" id="cGH-ca-ZWL"/>
-                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="centerX" secondItem="Wlg-XY-99n" secondAttribute="centerX" id="gfS-T2-vE7"/>
+                            <constraint firstItem="Ohs-TV-4u6" firstAttribute="trailing" secondItem="Wlg-XY-99n" secondAttribute="trailing" constant="-2" id="hcb-xC-NKN"/>
                             <constraint firstItem="DC5-OY-h7U" firstAttribute="leading" secondItem="Wlg-XY-99n" secondAttribute="trailing" constant="16" id="mWu-MY-Jjs"/>
                             <constraint firstAttribute="bottom" secondItem="8oD-m8-NKh" secondAttribute="bottom" id="xfX-HY-LFn"/>
                             <constraint firstItem="8oD-m8-NKh" firstAttribute="leading" secondItem="cMf-gs-8lG" secondAttribute="leading" constant="7" id="yK1-pE-7LG"/>
                         </constraints>
+                        <connections>
+                            <outlet property="imageBorderView" destination="XP6-lP-cGY" id="fMf-Jh-kRa"/>
+                            <outlet property="imageView" destination="Ohs-TV-4u6" id="vPh-Za-wBa"/>
+                            <outlet property="selectionIcon" destination="W0B-9v-EKi" id="yDS-ne-rQr"/>
+                            <outlet property="shadowView" destination="Wlg-XY-99n" id="BMf-yp-ioT"/>
+                            <outlet property="titleLabel" destination="DC5-OY-h7U" id="0lH-hX-ZsL"/>
+                        </connections>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6J8-Vs-50W">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6J8-Vs-50W" customClass="AlbumCellView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="341" height="121"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-qh-3Jq" customClass="ShadowView" customModule="lifebox" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-qh-3Jq">
                                 <rect key="frame" x="3" y="3" width="335" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -130,6 +135,13 @@
                             <constraint firstItem="3H5-qh-3Jq" firstAttribute="top" secondItem="6J8-Vs-50W" secondAttribute="top" constant="3" id="rqh-pt-hA4"/>
                             <constraint firstItem="LNQ-WG-hXG" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" constant="2" id="xKG-6r-Wof"/>
                         </constraints>
+                        <connections>
+                            <outlet property="imageBorderView" destination="P6F-Wn-fos" id="mqX-1D-1BW"/>
+                            <outlet property="imageView" destination="LNQ-WG-hXG" id="86B-Br-O1J"/>
+                            <outlet property="selectionIcon" destination="21n-xE-cSS" id="hr3-YD-OmH"/>
+                            <outlet property="shadowView" destination="3H5-qh-3Jq" id="TGo-F9-bUR"/>
+                            <outlet property="titleLabel" destination="fj8-ox-U8Q" id="fHY-ot-B7J"/>
+                        </connections>
                     </view>
                 </subviews>
             </view>
@@ -145,17 +157,8 @@
             </constraints>
             <size key="customSize" width="341" height="101"/>
             <connections>
-                <outlet property="greedImageBorderView" destination="P6F-Wn-fos" id="Hf1-al-3qn"/>
-                <outlet property="greedSelectionIcon" destination="21n-xE-cSS" id="Ct9-fb-vkG"/>
-                <outlet property="greedShadowView" destination="3H5-qh-3Jq" id="rF8-bO-6iz"/>
                 <outlet property="greedView" destination="6J8-Vs-50W" id="HQr-et-sHU"/>
-                <outlet property="greedViewIcon" destination="LNQ-WG-hXG" id="bQJ-au-lo6"/>
-                <outlet property="greedViewTitle" destination="fj8-ox-U8Q" id="x9o-Bq-eZ4"/>
-                <outlet property="listSelectionIcon" destination="W0B-9v-EKi" id="cg7-Bz-kUf"/>
-                <outlet property="listShadowView" destination="Wlg-XY-99n" id="zFh-FE-LU5"/>
                 <outlet property="listView" destination="cMf-gs-8lG" id="DQW-ac-o5T"/>
-                <outlet property="listViewIcon" destination="Ohs-TV-4u6" id="mkr-qd-Sj0"/>
-                <outlet property="listViewTitle" destination="DC5-OY-h7U" id="eiS-dh-JkA"/>
             </connections>
             <point key="canvasLocation" x="170.5" y="77.5"/>
         </collectionViewCell>

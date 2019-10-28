@@ -92,4 +92,12 @@ extension UIView {
         subviews.forEach { checkViewForType($0) }
         return viewWeAreLookingFor
     }
+    
+    func sizeToFit(width: CGFloat) -> CGSize {
+        let fittingSize = CGSize(width: width, height: UILayoutFittingCompressedSize.height)
+        return systemLayoutSizeFitting(fittingSize,
+                                       withHorizontalFittingPriority: .required,
+                                       verticalFittingPriority: .defaultLow)
+    }
+    
 }
