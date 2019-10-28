@@ -86,6 +86,15 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     override func resendCode() {
         attempts = 0
         
+        if response == nil {
+            updatePhoneNumberBeforeOTP()
+        } else {
+            //Number is already updated
+            confirmPhoneNumberUdpate()
+        }
+    }
+    
+    private func updatePhoneNumberBeforeOTP() {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
         AccountService().updateUserPhone(parameters: parameters, success: { [weak self] response in
                 if let response = response as? SignUpSuccessResponse {
@@ -99,6 +108,14 @@ class OTPViewInteractor: PhoneVerificationInteractor {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
         })
+    }
+    
+    private func confirmPhoneNumberUdpate() {
+        attempts = 0
+        
+        DispatchQueue.main.async {
+            self.output.resendCodeRequestSucceeded()
+        }
     }
     
     private func silentLogin(token: String) {
