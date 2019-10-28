@@ -295,7 +295,9 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         case .homePageIcon:
             let frameBounds = controller.frameForTabAtIndex(index: 0)
             frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
-            frame.origin.y -= UIApplication.shared.statusBarFrame.height
+            if !Device.operationSystemVersionLessThen(11) {
+                frame.origin.y -= UIApplication.shared.statusBarFrame.height
+            }
             completion(frame)
             
         case .homePageGeneral:
