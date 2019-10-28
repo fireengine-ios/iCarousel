@@ -12,6 +12,7 @@ protocol SpotifyPlaylistsViewControllerDelegate: class {
     func onOpenPlaylist(_ playlist: SpotifyPlaylist)
     func onImport(playlists: [SpotifyPlaylist])
     func onShowImported()
+    func onShowImportedAfterImporting()
 }
 
 final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
@@ -62,6 +63,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     private lazy var routingService: SpotifyRoutingService = factory.resolve()
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
@@ -88,6 +90,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        analyticsService.logScreen(screen: .spotifyImportPlaylistSelection)
     }
     
     // MARK: -
@@ -130,13 +133,9 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     @IBAction private func importSelected(_ sender: UIButton) {
         if dataSource.isSelectionStateActive {
-            if dataSource.selectedItems.contains(where: { $0.count == 0 }) {
-                UIApplication.showErrorAlert(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
-            } else {
-                delegate?.onImport(playlists: dataSource.selectedItems)
-            }
+            delegate?.onImport(playlists: dataSource.selectedItems)
         } else {
-            delegate?.onShowImported()
+            delegate?.onShowImportedAfterImporting()
         }
     }
 }
@@ -189,6 +188,7 @@ extension SpotifyPlaylistsViewController: SpotifyPlaylistsNavbarManagerDelegate 
 extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
+        analyticsService.logScreen(screen: .spotifyImportResult)
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
         importButton.isHidden = false
         
@@ -199,6 +199,7 @@ extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
         collectionView.reloadData()
         collectionViewTopOffset.constant = successImportView.bounds.height
         view.layoutIfNeeded()
+        collectionView.contentOffset = .zero
     }
     
     func importDidCanceled(){ }

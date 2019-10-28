@@ -43,6 +43,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         didSet {
             progress.font = UIFont.TurkcellSaturaRegFont(size: 14.0)
             progress.text = " "
+            progress.numberOfLines = 0
         }
     }
     

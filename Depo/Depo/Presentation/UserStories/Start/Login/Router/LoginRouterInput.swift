@@ -29,4 +29,16 @@ protocol LoginRouterInput {
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     
     func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
+    
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler)
+    
+    func goToFaqSupportPage()
+    
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 }

@@ -15,6 +15,8 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         view.setupInitialState()
         configure()
         resendCodeRequestSucceeded()
+        
+        interactor.trackScreen(isTimerExpired: false)
     }
     
     override func resendButtonPressed() {
@@ -35,8 +37,11 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     }
     
     override func verificationSucces() {
-        completeAsyncOperationEnableScreen()
-        router.goAutoSync()
+        guard let interactor = interactor as? TwoFactorChallengeInteractor else {
+            assertionFailure()
+            return
+        }
+        interactor.checkEULA()
     }
     
     override func verificationFailed(with error: String) {
@@ -89,7 +94,29 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         view.updateEditingState()
         view.showError(errorText)
     }
-
+    
+    override func timerFinishedRunning(with isShowMessageWithDropTimer: Bool) {
+        super.timerFinishedRunning(with: isShowMessageWithDropTimer)
+        
+        interactor.trackScreen(isTimerExpired: true)
+    }
+    
+    func onSuccessEULA() {
+        completeAsyncOperationEnableScreen()
+        router.goAutoSync()
+    }
+    
+    func onFailEULA() {
+        completeAsyncOperationEnableScreen()
+        
+        guard let router = router as? TwoFactorChallengeRouter else {
+            assertionFailure()
+            return
+        }
+        
+        router.goToTermsAndServices()
+    }
+    
     private func updateEmptyPhone() {
         interactor.updateEmptyPhone(delegate: self)
     }

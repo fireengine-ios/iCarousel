@@ -33,6 +33,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
     private lazy var threeDotsManager = SpotifyThreeDotMenuManager(delegate: self)
     private lazy var spotifyService: SpotifyService = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var router = RouterVC()
     private var page = 0
     private let pageSize = 20
@@ -97,15 +98,16 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
                                                     }
                                                     
                                                     self.isLoadingNextPage = false
-                                                    
-                                                    switch result {
-                                                    case .success(let tracks):
-                                                        self.page += 1
-                                                        self.dataSource.append(tracks)
-                                                    case .failed(let error):
-                                                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                    DispatchQueue.main.async {
+                                                        switch result {
+                                                        case .success(let tracks):
+                                                            self.page += 1
+                                                            self.dataSource.append(tracks)
+                                                        case .failed(let error):
+                                                            UIApplication.showErrorAlert(message: error.localizedDescription)
+                                                        }
+                                                        self.updateEmptyView()
                                                     }
-                                                    self.updateEmptyView()
                                                 }
     }
     
@@ -136,6 +138,11 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
             switch result {
             case .success(_):
                 self.dataSource.remove(items) {
+
+                    self.analyticsService.trackSpotify(eventActions: .delete,
+                                                       eventLabel: .importSpotifyTrack,
+                                                       trackNumber: trackIds.count,
+                                                       playlistNumber: nil)
                     self.hideSpinner()
                     self.playlist?.count -= items.count
                     self.navbarManager.playlist = self.playlist

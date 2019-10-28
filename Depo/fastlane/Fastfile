@@ -165,6 +165,12 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     )
   end
 
+	lane :beta_fabric_lifedrive do
+		my_gym_lifedrive
+		fabric
+		notify_about_completion
+	end
+
   #--------------- build ipa ---------------
 
   desc "Create ipa"
@@ -193,6 +199,37 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
         # ,
         # provisioningProfiles: { 
         #   "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
+        # }
+      }
+
+    )
+  end
+
+lane :my_gym_lifedrive do # |options|
+  	
+    # scheme = options[:scheme]
+
+    # if !SCHEMES.include?(scheme)
+    #   # raise("scheme can be PROD, PREPROD or TEST")
+    #   UI.user_error!("scheme can be PROD, PREPROD or TEST")
+    #   # exit
+    # end
+
+    gym(
+      # configuration: config, #"Adhoc", # Defaults to 'Release'
+      scheme: "lifedrive",
+      silent: true, # Hide all information that's not necessary while building
+      clean: false,
+      output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
+      output_name: "#{APP_NAME}.ipa",
+      # suppress_xcode_output: true,
+      #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
+      #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
+      export_options: {
+      	method: "ad-hoc"
+        # ,
+        # provisioningProfiles: { 
+        #   "#{BUNDLE_ID}" => "LifeDrive_adhoc"
         # }
       }
 

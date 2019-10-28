@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class GradientLoadingIndicator: UIView {
+final class GradientLoadingIndicator: UIView {
     let circlePathLayer = CAShapeLayer()
     var circleRadius: CGFloat {
         return bounds.width / 2

@@ -50,6 +50,7 @@ class LoginPresenter: BasePresenter {
     
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
+        AuthoritySingleton.shared.checkNewVersionApp()
         openAutoSyncIfNeeded()
     }
     
@@ -89,6 +90,40 @@ class LoginPresenter: BasePresenter {
     
     private func openEmptyPhone() {
         interactor.updateEmptyPhone(delegate: self)
+    }
+    
+    func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
+        completeAsyncOperationEnableScreen()
+
+        let image = UIImage(named: "Path")
+        let title = TextConstants.accountStatusTitle
+        
+        let titleFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaFont(size: 18),
+            .foregroundColor : UIColor.black,
+            .kern : 0
+        ]
+        
+        let message = TextConstants.accountStatusMessage
+        
+        let messageParagraphStyle = NSMutableParagraphStyle()
+        messageParagraphStyle.paragraphSpacing = 8
+        messageParagraphStyle.alignment = .center
+        
+        let messageFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaMedFont(size: 16),
+            .foregroundColor : ColorConstants.blueGrey,
+            .paragraphStyle : messageParagraphStyle,
+            .kern : 0
+        ]
+        
+        router.showAccountStatePopUp(image: .custom(image),
+                                     title: title,
+                                     titleDesign: .partly(parts: [title : titleFullAttributes]),
+                                     message: message,
+                                     messageDesign: .partly(parts: [message : messageFullAttributes]),
+                                     buttonTitle: TextConstants.ok,
+                                     buttonAction: deletedAccountHandler)
     }
 
 }
@@ -137,6 +172,16 @@ extension LoginPresenter: LoginViewOutput {
         isPresenting = true
         router.openSupport()
     }
+    
+    func openFaqSupport() {
+        isPresenting = true
+        router.goToFaqSupportPage()
+    }
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
+        isPresenting = true
+        router.goToSubjectDetailsPage(type: type)
+    }
 }
 
 //MARK: - LoginInteractorOutput
@@ -155,7 +200,6 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 
     func processLoginError(_ loginError: LoginResponseError, errorText: String) {
-        
         switch loginError {
         case .block:
             failedBlockError()
@@ -306,6 +350,10 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func showSupportView() {
         view.showSupportView()
+    }
+    
+    func showFAQView() {
+        view.showFAQView()
     }
 }
 

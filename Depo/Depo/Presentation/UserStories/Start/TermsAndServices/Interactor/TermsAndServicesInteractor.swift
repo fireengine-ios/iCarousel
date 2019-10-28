@@ -14,6 +14,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     private let dataStorage = TermsAndServicesDataStorage()
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     var isFromLogin = false
     var isFromRegistration = false
@@ -95,6 +96,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         return dataStorage.signUpUserInfo
     }
     
+    var isLoggedIn: Bool {
+        return tokenStorage.accessToken != nil
+    }
+    
     var cameFromLogin: Bool {
         return isFromLogin
     }
@@ -122,7 +127,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.output.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
+            self.output?.setupEtkAndGlobalPermissions(isShowEtk: isShowEtk, isShowGlobalPerm: isShowGlobalPerm)
         }
         
     }

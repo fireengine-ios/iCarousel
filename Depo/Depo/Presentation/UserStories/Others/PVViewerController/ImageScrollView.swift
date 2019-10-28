@@ -12,27 +12,8 @@ final class ImageScrollView: UIScrollView {
     
     private(set) var imageView = LoadingImageView()
     
-    var image: UIImage? {
-        didSet {
-            /// clear current values
-            imageView.image = nil
-            imageView.frame = .zero
-            contentSize = .zero
-            maximumZoomScale = 1
-            minimumZoomScale = 1
-            zoomScale = 1
-            
-            guard let image = image else {
-                return
-            }
-            
-            /// setup new ones
-            imageView.image = image
-            imageView.frame.origin = .zero
-            imageView.frame.size = image.size
-            contentSize = image.size
-        }
-    }
+    //set minimum image size to be able to display activity indicator that is attached to image
+    private let minimumImageSize = CGSize(width: 40, height: 40)
     
     private let maxScaleFromMinScale: CGFloat = 5.0
     private let multiplyScrollGuardFactor: CGFloat = 0.999
@@ -59,13 +40,14 @@ final class ImageScrollView: UIScrollView {
         showsHorizontalScrollIndicator = false
         bouncesZoom = true
         decelerationRate = UIScrollViewDecelerationRateFast
-        
+        delegate = self
         
         imageView.frame = bounds
 //        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
         addSubview(imageView)
         imageView.addGestureRecognizer(doubleTapGesture)
+        imageView.loadingImageViewDelegate = self
     }
     
     @objc private func doubleTapGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
@@ -91,8 +73,18 @@ final class ImageScrollView: UIScrollView {
         return zoomRect
     }
     
+    private func setupFrame(for image:UIImage?) {
+        maximumZoomScale = 1
+        minimumZoomScale = 1
+        zoomScale = 1
+        
+        let size = image?.size ?? minimumImageSize
+        imageView.frame = CGRect(origin: CGPoint.zero, size: size)
+        contentSize = size
+    }
+    
     func updateZoom() {
-        guard let image = image else {
+        guard let image = imageView.currentFrameImage else {
             return
         }
         setMaxMinZoomScales(for: image.size)
@@ -133,5 +125,22 @@ final class ImageScrollView: UIScrollView {
         }
         
         imageView.frame = frameToCenter
+    }
+}
+
+extension ImageScrollView: LoadingImageViewDelegate {
+    func onImageLoaded(image: UIImage?) {
+        setupFrame(for: image)
+        updateZoom()
+    }
+}
+
+extension ImageScrollView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        adjustFrameToCenter()
     }
 }

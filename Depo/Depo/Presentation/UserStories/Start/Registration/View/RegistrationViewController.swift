@@ -15,15 +15,15 @@ protocol RegistrationViewDelegate: class {
 }
 
 final class RegistrationViewController: ViewController {
-    
+
     //MARK: IBOutlets
-    @IBOutlet weak var shadowView: UIView! {
+    @IBOutlet private weak var shadowView: UIView! {
         willSet {
             newValue.isHidden = true
         }
     }
     
-    @IBOutlet weak var nextButton: RoundedInsetsButton! {
+    @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
@@ -32,7 +32,7 @@ final class RegistrationViewController: ViewController {
         }
     }
     
-    @IBOutlet weak var alertsStackView: UIStackView! {
+    @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
             newValue.spacing = 16
             newValue.alignment = .fill
@@ -41,7 +41,7 @@ final class RegistrationViewController: ViewController {
         }
     }
     
-    @IBOutlet weak var stackView: UIStackView! {
+    @IBOutlet private weak var stackView: UIStackView! {
         willSet {
             newValue.spacing = 16
             newValue.alignment = .fill
@@ -50,7 +50,7 @@ final class RegistrationViewController: ViewController {
         }
     }
     
-    @IBOutlet weak var captchaView: CaptchaView! {
+    @IBOutlet private weak var captchaView: CaptchaView! {
         willSet {
             ///need to hide content
             newValue.layer.masksToBounds = true
@@ -59,7 +59,7 @@ final class RegistrationViewController: ViewController {
         }
     }
     
-    @IBOutlet weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             let dismissKeyboardGuesture = UITapGestureRecognizer(target: self,
                                                                  action: #selector(stopEditing))
@@ -68,7 +68,16 @@ final class RegistrationViewController: ViewController {
         }
     }
     
+    @IBOutlet private weak var bannerView: SupportFormBannerView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.delegate = self
+            newValue.screenType = .signup
+        }
+    }
+    
     //MARK: Vars
+    
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
@@ -115,14 +124,6 @@ final class RegistrationViewController: ViewController {
         newValue.textField.enablesReturnKeyAutomatically = true
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
-        
-        return newValue
-    }()
-    
-    private let supportView: SupportBannerView = {
-        let newValue = SupportBannerView()
-        newValue.isHidden = true
-        newValue.message = TextConstants.signupSupportInfo
         
         return newValue
     }()
@@ -177,14 +178,12 @@ final class RegistrationViewController: ViewController {
         navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
+        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
     private func setupStackView() {
         prepareFields()
         
-        supportView.delegate = self
-        
-        alertsStackView.addArrangedSubview(supportView)
         alertsStackView.addArrangedSubview(errorView)
 
         stackView.addArrangedSubview(phoneEnterView)
@@ -280,6 +279,10 @@ final class RegistrationViewController: ViewController {
     @objc private func stopEditing() {
         self.view.endEditing(true)
     }
+    
+    @objc private func handleFaqButtonTap() {
+        output.openFaqSupport()
+    }
 }
 
 extension RegistrationViewController: RegistrationViewInput {
@@ -332,14 +335,15 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showSupportView() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.supportView.isHidden = false
-            
-            self.view.layoutIfNeeded()
-        }
+        bannerView.type = .support
+    }
+    
+    func showFAQView() {
+        bannerView.type = .faq
         
-        let supportRect = self.view.convert(supportView.frame, to: self.view)
-        scrollView.scrollRectToVisible(supportRect, animated: true)
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.bannerView.isHidden = false
+        }
     }
 }
 
@@ -421,9 +425,23 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - SupportBannerViewDelegate
-extension RegistrationViewController: SupportBannerViewDelegate {
-    func openSupport() {
-        output.openSupport()
+
+extension RegistrationViewController: SupportFormBannerViewDelegate {
+    func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
+        if bannerView.type == .support {
+            output?.openSupport()
+        } else {
+            bannerView.shouldShowPicker = true
+            bannerView.becomeFirstResponder()
+        }
+    }
+    
+    func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol) {
+        output.openSubjectDetails(type: type)
+    }
+    
+    func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView) {
+        bannerView.resignFirstResponder()
+        scrollView.setContentOffset(.zero, animated: true)
     }
 }

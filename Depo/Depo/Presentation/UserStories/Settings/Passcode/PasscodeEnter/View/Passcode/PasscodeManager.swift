@@ -86,7 +86,7 @@ extension PasscodeManagerImp: PasscodeManager {
         
         userCancelledBiometrics = false
         successFinishBiometrics = false
-        
+
         biometricsManager.authenticate(reason: state.title) { status in
             DispatchQueue.main.async {
                 switch status {
@@ -99,7 +99,7 @@ extension PasscodeManagerImp: PasscodeManager {
                     self.finishBiometrics = true
                     self.successFinishBiometrics = true
                     
-                case .cancelledByUser:
+                case .cancelledByUser, .userFallback:
                     self.userCancelledBiometrics = true
                     self.finishBiometrics = true
             

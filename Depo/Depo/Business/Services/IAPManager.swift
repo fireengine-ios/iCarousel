@@ -26,10 +26,16 @@ final class IAPManager: NSObject {
     private var offerAppleHandler: OfferAppleHandler = {_ in }
     private var purchaseHandler: PurchaseHandler = {_ in }
     
+    private var productsRequests = [SKRequest]()
+    
     private var restoreInProgress = false
     private var purchaseInProgress = false
     
-    private var products: [SKProduct]?
+    private var isActivePurchases = false
+    
+    /// 2 arrays to separate active and inactive purchases and that they don't overwrite each other
+    private var offered: [SKProduct]?
+    private var activeProducts: [SKProduct]?
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
@@ -47,13 +53,17 @@ final class IAPManager: NSObject {
         }
     }
     
-    func loadProducts(productIds: [String], handler: @escaping ResponseBool) {
-        debugLog("IAPManager loadProductsWithProductIds")
-        
-        offerAppleHandler = handler
-        let request = SKProductsRequest(productIdentifiers: Set(productIds))
-        request.delegate = self
-        request.start()
+    func loadProducts(productIds: [String], isActivePurchases: Bool, handler: @escaping ResponseBool) {
+        DispatchQueue.main.async {
+            debugLog("IAPManager loadProductsWithProductIds")
+            self.setActivePurchasesState(isActivePurchases)
+            self.offerAppleHandler = handler
+            let request = SKProductsRequest(productIdentifiers: Set(productIds))
+            
+            self.productsRequests.append(request)
+            request.delegate = self
+            request.start()
+        }
     }
     
     func purchase(product: SKProduct, handler: @escaping PurchaseHandler) {
@@ -92,11 +102,16 @@ final class IAPManager: NSObject {
     }
     
     func product(for productId: String) -> SKProduct? {
-        guard let products = products else {
+        let currentProducts = isActivePurchases ? activeProducts : offered
+        guard let products = currentProducts else {
             return nil
         }
         
         return products.first(where: { $0.productIdentifier == productId })
+    }
+    
+    func setActivePurchasesState(_ isActivePurchases: Bool) {
+        self.isActivePurchases = isActivePurchases
     }
 }
 
@@ -104,7 +119,11 @@ extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         debugLog("IAPManager Loaded list of products")
         
-        products = response.products
+        if isActivePurchases {
+            activeProducts = response.products
+        } else {
+            offered = response.products
+        }
         
         offerAppleHandler(.success(true))
     }
@@ -113,6 +132,15 @@ extension IAPManager: SKProductsRequestDelegate {
         debugLog("IAPManager Failed to load list of products")
         
         offerAppleHandler(.failed(error))
+    }
+    
+    func requestDidFinish(_ request: SKRequest) {
+        guard let request = productsRequests.first(where: { $0 == request}) else {
+            assertionFailure()
+            return
+        }
+        request.delegate = nil
+        productsRequests.remove(request)
     }
 }
 

@@ -162,3 +162,25 @@ enum SignupResponseError {
         }
     }
 }
+enum SpotifyResponseError {
+    case importError
+    case networkError
+
+    init?(with errorResponse: ErrorResponse) {
+        if errorResponse.description.contains("412") {
+            self = .importError
+        } else {
+            self = .networkError
+        }
+    }
+    
+    var dimensionValue: String {
+        switch self {
+        case .importError:
+            return GADementionValues.spotifyError.importError.text
+        case .networkError:
+            return GADementionValues.spotifyError.networkError.text
+        }
+    }
+    
+}

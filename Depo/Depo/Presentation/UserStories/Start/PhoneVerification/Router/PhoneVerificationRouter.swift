@@ -7,7 +7,7 @@
 //
 
 class PhoneVerificationRouter: PhoneVerificationRouterInput {
-    private lazy var router = RouterVC()
+    lazy var router = RouterVC()
     
     private func goToSplash() {
         AuthenticationService().logout(success: { [weak self] in
@@ -51,6 +51,23 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
         }
         
         router.presentViewController(controller: popUp)
+    }
+    
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler) {
+        let popUp = CreateStoryPopUp.with(image: image.image,
+                                          title: title,
+                                          titleDesign: titleDesign,
+                                          message: message,
+                                          messageDesign: messageDesign,
+                                          buttonTitle: buttonTitle,
+                                          buttonAction: buttonAction)
+        router.presentViewController(controller: popUp, animated: false)
     }
     
 }

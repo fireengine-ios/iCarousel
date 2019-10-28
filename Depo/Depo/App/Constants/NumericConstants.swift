@@ -16,6 +16,8 @@ struct NumericConstants {
     static let verificationCharacterLimit = 6
     static let verificationTimerLimit = 120//in seconds
     static let maxVerificationAttempts = 3
+    static let showFAQViewAttempts = 3
+    static let showSupportViewAttempts = 6
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
@@ -39,7 +41,7 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let  heightTextAlbumCell: CGFloat = 21
+    static let heightTextAlbumCell: CGFloat = 32
     static let amountInsetForStoryAlbum: CGFloat = 10
     static let amountInsetForAlbum: CGFloat = 3
     
@@ -159,6 +161,8 @@ struct NumericConstants {
     static let numberOfSelectedItemsBeforeLimits = 500
     
     static let spotifyStatusUpdateTimeInterval = 1.0
+    
+    static let langingPageCount = 8
 }
 
 struct RequestSizeConstant {

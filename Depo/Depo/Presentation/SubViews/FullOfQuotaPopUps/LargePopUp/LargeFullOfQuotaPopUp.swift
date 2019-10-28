@@ -8,138 +8,124 @@
 
 import UIKit
 
+//MARK: - LargeFullOfQuotaPopUpType
 enum LargeFullOfQuotaPopUpType{
     case LargeFullOfQuotaPopUpType80
     case LargeFullOfQuotaPopUpType90
     case LargeFullOfQuotaPopUpType100
 }
 
+//MARK: - LargeFullOfQuotaPopUpDelegate
 protocol LargeFullOfQuotaPopUpDelegate: class {
     func onOpenExpandTap()
 }
 
-class LargeFullOfQuotaPopUp: UIViewController {
+final class LargeFullOfQuotaPopUp: BasePopUpController {
     
+    //MARK: Properties
     weak var delegate: LargeFullOfQuotaPopUpDelegate?
-    
-    static func popUp(type: LargeFullOfQuotaPopUpType) -> LargeFullOfQuotaPopUp {
-        let controller = LargeFullOfQuotaPopUp(nibName: "LargeFullOfQuotaPopUp", bundle: nil)
-        controller.modalTransitionStyle = .crossDissolve
-        controller.modalPresentationStyle = .overFullScreen
-        controller.viewType = type
-        return controller
-    }
     
     var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
     
-    private static func textForTitle(type: LargeFullOfQuotaPopUpType) -> String {
-        switch type {
-        case .LargeFullOfQuotaPopUpType80:
-            return TextConstants.lifeboxLargePopUpTitle80
-        case .LargeFullOfQuotaPopUpType90:
-            return TextConstants.lifeboxLargePopUpTitle90
-        case .LargeFullOfQuotaPopUpType100:
-            return TextConstants.lifeboxLargePopUpTitle100
-        }
-    }
-    
-    @IBOutlet private weak var shadowView: UIView! {
-        didSet {
-            shadowView.layer.cornerRadius = 5
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowRadius = 10
-            shadowView.layer.shadowOpacity = 0.5
-            shadowView.layer.shadowOffset = .zero
-        }
-    }
-    
-    @IBOutlet private weak var bacgroundViewForImage: UIView!
-    
-    @IBOutlet private weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.textColor = ColorConstants.whiteColor
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
-        }
-    }
-    
-    @IBOutlet private weak var subTitleLabel: UILabel! {
-        didSet {
-            subTitleLabel.textColor = ColorConstants.whiteColor
-            subTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            subTitleLabel.text = TextConstants.lifeboxLargePopUpSubTitle
+    //MARK: IBOutlets
+    @IBOutlet weak var gradientView: GradientOrangeView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
         }
     }
     
     @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = 5
+        willSet {
+            newValue.layer.cornerRadius = 5
+            
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowRadius = 10
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowOffset = .zero
+        }
+    }
+    
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 28)
+        }
+    }
+    
+    @IBOutlet private weak var subTitleLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.text = TextConstants.lifeboxLargePopUpSubTitle
         }
     }
     
     @IBOutlet private weak var expandButton: BlueButtonWithWhiteText! {
-        didSet {
-            expandButton.setTitle(TextConstants.lifeboxLargePopUpExpandButtonTitle, for: .normal)
-            expandButton.adjustsFontSizeToFitWidth()
+        willSet {
+            newValue.setTitle(TextConstants.lifeboxLargePopUpExpandButtonTitle, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
     @IBOutlet private weak var skipButton: UIButton! {
-        didSet {
-            skipButton.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
-            skipButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
-            skipButton.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
-            skipButton.adjustsFontSizeToFitWidth()
+        willSet {
+            newValue.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
-    // MARK: - Animation
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        open()
+    //MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        contentView = containerView
+        
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
     }
     
-    private var isShown = false
-    private func open() {
-        if isShown {
-            return
-        }
-        isShown = true
-        shadowView.transform = NumericConstants.scaleTransform
-        containerView.transform = NumericConstants.scaleTransform
-        
-        view.alpha = 0
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.view.alpha = 1
-            self.shadowView.transform = .identity
-            self.containerView.transform = .identity
-        }
-    }
-    
-    func close(completion: VoidHandler? = nil) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.shadowView.transform = NumericConstants.scaleTransform
-            self.containerView.transform = NumericConstants.scaleTransform
-        }) { _ in
-            self.dismiss(animated: false, completion: completion)
-        }
-    }
-    
+    //MARK: Actions
     @IBAction func onSkipButton() {
         close()
     }
     
     @IBAction func onExpandButton() {
-        let viewController = RouterVC().packages
-        viewController.needToShowTabBar = false
-        delegate?.onOpenExpandTap()
-        RouterVC().getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
-            RouterVC().pushViewController(viewController: viewController)
-            self?.close()
-        })
+        close(isFinalStep: false) { [weak self] in
+            self?.delegate?.onOpenExpandTap()
+
+            let router = RouterVC()
+            let viewController = router.packages
+            viewController.needToShowTabBar = false
+            router.pushViewController(viewController: viewController)
+        }
+    }
+}
+
+//MARK: - Init
+extension LargeFullOfQuotaPopUp {
+    static func popUp(type: LargeFullOfQuotaPopUpType) -> LargeFullOfQuotaPopUp {
+        let controller = LargeFullOfQuotaPopUp(nibName: "LargeFullOfQuotaPopUp", bundle: nil)
+        
+        controller.viewType = type
+
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
     }
     
+    private static func textForTitle(type: LargeFullOfQuotaPopUpType) -> String {
+        switch type {
+        case .LargeFullOfQuotaPopUpType80:
+            return TextConstants.lifeboxLargePopUpTitle80
+            
+        case .LargeFullOfQuotaPopUpType90:
+            return TextConstants.lifeboxLargePopUpTitle90
+            
+        case .LargeFullOfQuotaPopUpType100:
+            return TextConstants.lifeboxLargePopUpTitle100
+            
+        }
+    }
 }

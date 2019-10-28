@@ -3,11 +3,23 @@ import UIKit
 final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     
     var successHandler: VoidHandler?
+    var isNeedToDismissController = true
     
     @IBOutlet private var designer: EmailEnterDesigner!
+    
     @IBOutlet private weak var infoLabel: UILabel!
-    @IBOutlet private weak var emailView: ProfileTextEnterView!
     @IBOutlet private weak var continueButton: RoundedInsetsButton!
+    
+    @IBOutlet private weak var emailView: ProfileTextEnterView! {
+        willSet {
+            newValue.textField.delegate = self
+            
+            newValue.textField.autocorrectionType = .no
+            newValue.textField.autocapitalizationType = .none
+            
+            newValue.textField.addTarget(self, action: #selector(emailDidChange), for: .editingChanged)
+        }
+    }
     
     private lazy var authService = AuthenticationService()
     
@@ -23,9 +35,9 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         super.viewDidLoad()
         
         title = TextConstants.missingInformation
+        
         emailView.becomeFirstResponder()
-        emailView.textField.delegate = self
-        emailView.textField.addTarget(self, action: #selector(emailDidChnaged), for: .editingChanged)
+        
         updateButtonState()
     }
     
@@ -38,7 +50,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         updateEmail()
     }
     
-    @objc private func emailDidChnaged() {
+    @objc private func emailDidChange() {
         updateButtonState()
     }
     
@@ -86,9 +98,13 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     
     private func closeAnimated() {
         view.endEditing(true)
-        dismiss(animated: true) {
+        
+        if isNeedToDismissController {
+            dismiss(animated: true, completion: self.successHandler)
+        } else {
             self.successHandler?()
         }
+        
     }
 }
 

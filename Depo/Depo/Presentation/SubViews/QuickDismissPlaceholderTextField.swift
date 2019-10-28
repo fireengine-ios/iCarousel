@@ -18,7 +18,7 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
         }
     }
     
-    var placeholderColor = UIColor.lightGray {
+    var placeholderColor = ColorConstants.placeholderGrayColor {
         didSet {
             changePlaceholderColor()
         }

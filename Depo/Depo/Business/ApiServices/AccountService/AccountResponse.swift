@@ -7,12 +7,16 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct AccountJSONConstants {
     
     static let mobileUploadsSpecialFolderUuid = "mobileUploadsSpecialFolderUuid"
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
+    static let isUpdateInformationRequired = "isUpdateInformationRequired"
+    static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
+    static let securityQuestionId = "securityQuestionId"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -48,7 +52,10 @@ class AccountInfoResponse: ObjectRequestResponse {
     var mobileUploadsSpecialFolderUuid: String?
     var isCropyTagAvailable: Bool?
     var isFavouriteTagAvailable: Bool?
+    var isUpdateInformationRequired: Bool?
     var cellografId: String?
+    var hasSecurityQuestionInfo: Bool?
+    var securityQuestionId: Int?
     var name: String?
     var surname: String?
     var accountType: String?
@@ -76,7 +83,10 @@ class AccountInfoResponse: ObjectRequestResponse {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
+        isUpdateInformationRequired = json?[AccountJSONConstants.isUpdateInformationRequired].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
+        hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
+        securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
         surname = json?[AccountJSONConstants.surname].string
@@ -419,6 +429,36 @@ final class FeaturesResponse: ObjectRequestResponse {
     
 }
 
+final class SecretQuestionsResponse {
+    
+    private enum ResponseKey {
+        static let id = "id"
+        static let text = "text"
+    }
+    
+    var id: Int
+    var text: String
+    
+    init(id: Int, text: String) {
+        self.id = id
+        self.text = text
+    }
+}
+
+extension SecretQuestionsResponse {
+    convenience init?(json: JSON) {
+        guard
+            let id = json[ResponseKey.id].int,
+            let text = json[ResponseKey.text].string
+        else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.init(id: id, text: text)
+    }
+}
+
 final class FeedbackEmailResponse: ObjectRequestResponse {
     
     private enum ResponseKey {
@@ -437,20 +477,28 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
 
 final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
     
+    enum ChallengeStatus: String {
+        case new = "SENT_NEW_CHALLENGE"
+        case existing = "USE_EXISTING_CHALLENGE"
+    }
+    
     private enum ResponseKey {
         static let status = "status"
         static let remainingTimeInSeconds = "remainingTimeInSeconds"
         static let expectedInputLength = "expectedInputLength"
     }
     
-    var status: String?
+    var status: ChallengeStatus?
     var remainingTimeInSeconds: Int?
     var expectedInputLength: Int?
 
     override func mapping() {
-        status = json?[ResponseKey.status].string
         remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
         expectedInputLength = json?[ResponseKey.expectedInputLength].int
+        
+        if let status = json?[ResponseKey.status].string?.uppercased() {
+            self.status = ChallengeStatus(rawValue: status)
+        }
     }
 }
 

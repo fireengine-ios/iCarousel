@@ -176,10 +176,28 @@ enum AnalyticsAppScreens {
     case standartAccountDetails
     case standartPlusAccountDetails
     case premiumAccountDetails
-    ///
+    ///MyProfile
     case myStorage
     case changePassword
-    
+    ///Spotify
+    case spotifyImport
+    case spotifyImportPlaylistSelection
+    case spotifyImportPlaylistDetails
+    case spotifyImportProgress
+    case spotifyImportResult
+    case spotifyPlaylistDetails
+    case spotifyPlaylists
+    case spotifyAuthentification
+    ///TwoFactorAuth
+    case securityCheck
+    case enterSecurityCode
+    case enterSecurityCodeResend
+    ///EmailVerification
+    case verifyEmailPopUp
+    case changeEmailPopUp
+    ///CredsUpdateCheckPopUp
+    case periodicInfoScreen
+
     case info(FileType)
     
     var name: String {
@@ -299,6 +317,39 @@ enum AnalyticsAppScreens {
             return "My Storage"
         case .changePassword:
             return "Change Password"
+        ///
+        case .spotifyImport:
+            return "Spotify Import"
+        case .spotifyImportPlaylistSelection:
+            return "Spotify Import Playlist Selection"
+        case .spotifyImportPlaylistDetails:
+            return "Spotify Import Playlist Details"
+        case .spotifyImportProgress:
+            return "Spotify Import Progress"
+        case .spotifyImportResult:
+            return "Sporify Import Result"
+        case .spotifyPlaylists:
+            return "Spotify Playlists"
+        case .spotifyPlaylistDetails:
+            return "Spotify Playlist Details"
+        case .spotifyAuthentification:
+            return "Spotify Authentication "
+        ///
+        case .securityCheck:
+            return "Security Check"
+        case .enterSecurityCode:
+            return "Enter Security Code"
+        case .enterSecurityCodeResend:
+            return "Enter Security Code - Resend Code"
+        ///
+        case .verifyEmailPopUp:
+            return "Email verification - Popup"
+        case .changeEmailPopUp:
+            return "Email verification - Change Email"
+        ///
+        case .periodicInfoScreen:
+            return "Periodic Info Screen"
+        ///
         case .info(let fileType):
             switch fileType {
             case .image:
@@ -400,17 +451,26 @@ enum GAEventCantegory {
     case functions
     case videoAnalytics
     case errors
-    
+    case popUp
+    case twoFactorAuthentication
+    case emailVerification
+
     var text: String {
         switch self {
         case .enhancedEcommerce:
-            return "Enhanced E-Commerce"
+            return "Enhance Ecommerce"
         case .functions:
             return "Functions"
         case .videoAnalytics:
             return "Video Analytics"
         case .errors:
             return "Errors"
+        case .popUp:
+            return "POP UP"
+        case .twoFactorAuthentication:
+            return "Two Factor Authentication"
+        case .emailVerification:
+            return "E-mail verification"
         }
     }
 }
@@ -469,6 +529,16 @@ enum GAEventAction {
     case photopickShare
     case contactOperation(SYNCMode)
     case plus
+    case connectedAccounts
+    case deleteAccount
+    case periodicInfoUpdate
+    case myProfile
+    case msisdn
+    case email
+    case otp
+    case changeEmail
+    case clickQuotaPurchase
+    case clickFeaturePurchase
 
     var text: String {
         switch self {
@@ -557,6 +627,26 @@ enum GAEventAction {
             }
         case .plus:
             return "Plus"
+        case .connectedAccounts:
+            return "Connected Accounts"
+        case .deleteAccount:
+            return "Delete Account"
+        case .periodicInfoUpdate:
+            return "Periodic Info Update"
+        case .myProfile:
+            return "My Profile"
+        case .msisdn:
+            return "msisdn"
+        case .email:
+            return "E-mail"
+        case .otp:
+            return "OTP-1"
+        case .changeEmail:
+            return "Email"
+        case .clickQuotaPurchase:
+            return "Click Quota Purchase"
+        case .clickFeaturePurchase:
+            return "Click Feature Purchase"
         }
     }
 }
@@ -652,6 +742,22 @@ enum GAEventLabel {
         }
     }
     
+    enum QuotaPaymentType {
+        case chargeToBill(_ quota: String)
+        case appStore(_ quota: String)
+        case creditCard(_ quota: String)
+        
+        var text: String {
+            switch self {
+            case .chargeToBill(let quota):
+                return "Charge to Bill - " + quota
+            case .appStore(let quota):
+                return "App Store - " + quota
+            case .creditCard(let quota):
+                return "Credit Card - " + quota
+            }
+        }
+    }
     case empty
     
     case success
@@ -672,6 +778,11 @@ enum GAEventLabel {
     case importDropbox
     case importFacebook
     case importInstagram
+    case importSpotify
+    //
+    case importSpotifyPlaylist
+    case importSpotifyTrack
+    case importSpotifyResult(String)
     //
     case uploadFile(FileType)
     //
@@ -707,6 +818,22 @@ enum GAEventLabel {
     case plusAction(TabBarViewController.Action)
     case shareViaLink
     case shareViaApp(String)
+    case login
+    case update
+    case yes
+    case edit
+    case save(isSuccess: Bool)
+    case send
+    case confirm
+    case confirmStatus(isSuccess: Bool)
+    case resendCode
+    case codeResent(isSuccessed: Bool)
+    case changeEmail
+    case emailChanged(isSuccessed: Bool)
+    case later
+    case cancel
+    case storyOrVideo
+    case paymentType(_ type: QuotaPaymentType)
 
         var text: String {
         switch self {
@@ -760,6 +887,15 @@ enum GAEventLabel {
             return "Facebook"
         case .importInstagram:
             return "Instagram"
+        case .importSpotify:
+            return "Import from Spotify"
+        //
+        case .importSpotifyPlaylist:
+            return "Import from Spotify Playlist"
+        case .importSpotifyTrack:
+            return "Import from Spotify Track"
+        case .importSpotifyResult(let result):
+            return "Import from Spotify \(result)"
         //
         case .uploadFile(let fileType):
             return fileType.text
@@ -837,6 +973,38 @@ enum GAEventLabel {
             return "Share via Link"
         case .shareViaApp(let appName):
             return appName
+        case .login:
+            return "Login"
+        case .update:
+            return "Update"
+        case .yes:
+            return "Yes"
+        case .edit:
+            return "Edit"
+        case .save(isSuccess: let isSuccess):
+            return "Save " + (isSuccess ? "Success" : "Failure")
+        case .send:
+            return "Send"
+        case .confirm:
+            return "Confirm"
+        case .confirmStatus(isSuccess: let isSuccess):
+            return "Confirm " + (isSuccess ? "Success" : "Failure")
+        case .resendCode:
+            return "Resend Code"
+        case .codeResent(isSuccessed: let isSuccessed):
+            return "Resend Code " + (isSuccessed ? "Success" : "Failure")
+        case .changeEmail:
+            return "Change Email"
+        case .emailChanged(isSuccessed: let isSuccessed):
+            return "Change Email " + (isSuccessed ? "Success" : "Failure")
+        case .later:
+            return "Later"
+        case .cancel:
+            return "Cancel"
+        case .storyOrVideo:
+            return "Story / Video"
+        case .paymentType(let type):
+            return type.text
         }
     }
     
@@ -878,10 +1046,13 @@ enum GADementionsFields {
     case faceImageStatus
     case userPackage
     case gsmOperatorType
+    case connectStatus
     case deviceId
     case errorType
     case autoSyncState
     case autoSyncStatus
+    case twoFactorAuth
+    case spotify
     
     var text: String {
         switch self {
@@ -915,6 +1086,8 @@ enum GADementionsFields {
             return "userPackage"
         case .gsmOperatorType:
             return "gsmOperatorType"
+        case .connectStatus:
+            return "connectStatus"
         case .deviceId:
             return "deviceid"
         case .errorType:
@@ -923,6 +1096,10 @@ enum GADementionsFields {
             return "AutoSync"
         case .autoSyncStatus:
             return "SyncStatus"
+        case .twoFactorAuth:
+            return "twoFactorAuthentication"
+        case .spotify:
+            return "connectStatus"
         }
     }
     
@@ -931,12 +1108,23 @@ enum GADementionsFields {
 enum GAMetrics {
     case countOfUpload //After uploading of all files in the upload queue finihes, send the count of uploaded files
     case countOfDownload //After downloading finishes, send the count of downloaded files
+    case playlistNumber
+    case trackNumber
+    
+    case errorType
+    
     var text: String {
         switch self {
         case .countOfUpload:
             return "countOfUpload"
         case .countOfDownload:
             return "countOfDownload"
+        case .playlistNumber:
+            return "playlistNumber"
+        case .trackNumber:
+            return "trackNumber"
+        case .errorType:
+            return "errorType"
         }
     }
 }
@@ -1039,6 +1227,143 @@ enum GADementionValues {
                 return "CAPTCHA_REQUIRED"
             case .unauthorized:
                 return "UNAUTHORIZED"
+            }
+        }
+    }
+    
+    enum spotifyError {
+        case importError
+        case networkError
+
+        var text: String {
+            switch self {
+            case .importError:
+                return "SPOTIFY_IMPORT_ERROR"
+            case .networkError:
+                return "NETWORK_ERROR"
+            }
+        }
+    }
+    
+    enum errorType {
+        /// MyProfile
+        case emptyEmail
+        case phoneInvalidFormat
+        case emailInvalidFormat
+        case emailInUse
+        case phoneInUse
+        /// Two Factor Authentification
+        case invalidOTPCode
+        case invalidSession
+        case invalidChallenge
+        case tooManyInvalidAttempts
+        /// Email Verification
+        case accountNotFound
+        case referenceTokenIsEmpty
+        case expiredOTP
+        case invalidEmail
+        case invalidOTP
+        case tooManyRequests
+        
+        init?(with stringError: String) {
+            switch stringError {
+            case TextConstants.errorInvalidPhone:
+                self = .phoneInvalidFormat
+                
+            case TextConstants.errorExistPhone:
+                self = .phoneInUse
+                
+            case TextConstants.invalidOTP:
+                self = .invalidOTP
+                
+            case "INVALID_OTP_CODE":
+                self = .invalidOTPCode
+                
+            case TextConstants.expiredOTP:
+                self = .expiredOTP
+                
+            case TextConstants.emptyEmail, HeaderConstant.emptyEmail:
+                self = .emptyEmail
+                
+            case TextConstants.invalidEmail:
+                self = .invalidEmail
+                
+            case TextConstants.errorInvalidEmail:
+                self = .emailInvalidFormat
+                
+            case TextConstants.errorExistEmail:
+                self = .emailInUse
+                
+            case "INVALID_SESSION":
+                self = .invalidSession
+                
+            case "INVALID_CHALLENGE":
+                self = .invalidChallenge
+                
+            case TextConstants.TOO_MANY_REQUESTS, "TOO_MANY_REQUESTS", TextConstants.tooManyRequests:
+                self = .tooManyRequests
+                
+            case "TOO_MANY_INVALID_ATTEMPTS", TextConstants.tooManyInvalidAttempt:
+                self = .tooManyInvalidAttempts
+                
+            case TextConstants.ACCOUNT_NOT_FOUND, TextConstants.noAccountFound:
+                self = .accountNotFound
+                
+            case TextConstants.tokenIsMissing:
+                self = .referenceTokenIsEmpty
+
+            default:
+                return nil
+            }
+        }
+        
+        var text: String {
+            switch self {
+            case .emptyEmail:
+                return "EMPTY_E-MAIL_ERROR"
+                
+            case .phoneInvalidFormat:
+                return "PHONE_NUMBER_INVALID_FORMAT_ERROR"
+                
+            case .emailInvalidFormat:
+                return "EMAIL_INVALID_FORMAT_ERROR"
+                
+            case .emailInUse:
+                return "EMAIL_IN_USE_ERROR"
+                
+            case .phoneInUse:
+                return "PHONE_NUMBER_IN_USE_ERROR"
+                
+            case .invalidOTPCode:
+                return "INVALID_OTP_CODE"
+                
+            case .invalidSession:
+                return "INVALID_SESSION"
+                
+            case .invalidChallenge:
+                return "INVALID_CHALLENGE"
+                
+            case .tooManyInvalidAttempts:
+                return "TOO_MANY_INVALID_ATTEMPTS"
+                
+            case .accountNotFound:
+                return "ACCOUNT_NOT_FOUND"
+                
+            case .referenceTokenIsEmpty:
+                return "REFERENCE_TOKEN_IS_EMPTY"
+                
+            case .expiredOTP:
+                return "EXPIRED_OTP"
+                
+            case .invalidEmail:
+                return "INVALID_EMAIL"
+                
+            case .invalidOTP:
+                return "INVALID_OTP"
+                
+            case .tooManyRequests:
+                return "TOO_MANY_REQUESTS"
+                
             }
         }
     }

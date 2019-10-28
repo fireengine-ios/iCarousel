@@ -8,49 +8,96 @@
 
 import UIKit
 
-protocol CustomNavBarViewActionDelegate: class {
-    func navBarButtonGotPressed(button: CustomNavBarButton)
-    func navBarBackButtonPressed()
-}
-
 class CustomNavBarView: UIView, UISearchBarDelegate {
     
-    static let nibName = "CustomNavBar"
+    private var logoImage: UIImageView = {
+        let newValue =  UIImageView()
+        
+        newValue.image = Device.isIpad ? UIImage(named: "group-2") : UIImage(named: "logo")
+        newValue.contentMode = .scaleToFill
+
+        return newValue
+    }()
     
-    weak var actionDelegate: CustomNavBarViewActionDelegate?
-    
-    @IBOutlet weak var logoImage: UIImageView!
-    @IBOutlet weak var bgImageView: UIImageView!
+    private var bgImageView: UIImageView = {
+        let newValue =  UIImageView()
+        
+        newValue.image = UIImage(named: "NavigationBarBackground")
+        newValue.contentMode = .scaleToFill
+        
+        return newValue
+    }()
     
     var hideLogo: Bool {
-        set {
-           logoImage.isHidden = newValue
-        }
-        get {
-            return logoImage.isHidden
-        }
+        set { logoImage.isHidden = newValue }
+        get { return logoImage.isHidden }
     }
     
-    class func getFromNib() -> CustomNavBarView? {
-        let fakeNavBar = Bundle.main.loadNibNamed(CustomNavBarView.nibName,
-                                                  owner: self,
-                                                  options: nil)?.first
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        let bar = fakeNavBar as? CustomNavBarView
-        
-        if #available(iOS 11.0, *) {
-            bar?.bgImageView.isHidden = true
-        }
-        
-        return bar
+        setup()
     }
     
-    @IBAction func backButtonAction(_ sender: Any) {
-        actionDelegate?.navBarBackButtonPressed()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        setup()
+    }
+    
+    override func removeFromSuperview() {
+        ///overriding this method without calling super
+        ///this helps to avoid bouncing of navigation
+        ///it happens on push()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setupFrames()
+    }
+    
+    private func setup() {
+        translatesAutoresizingMaskIntoConstraints = true
+        autoresizingMask = []
+        
+        addSubview(bgImageView)
+        addSubview(logoImage)
+    }
+    
+    private func setupFrames() {
+
+        bgImageView.frame = frame
+        
+        let logoImageY = (frame.height - FrameConstants.logoImageSizeIPad) + FrameConstants.logoBottomOffset
+        if Device.isIpad {
+            logoImage.center = center
+            logoImage.frame.origin.y = logoImageY
+            
+            logoImage.frame.size = CGSize(width: FrameConstants.logoImageSizeIPad,
+                                          height: FrameConstants.logoImageSizeIPad)
+            
+        } else {
+            logoImage.frame.size = CGSize(width: FrameConstants.logoImageWidthIPhone,
+                                          height: FrameConstants.logoImageSizeIPad)
+            
+            logoImage.frame.origin = CGPoint(x: FrameConstants.logoLeadingOffset,
+                                             y: logoImageY)
+            
+        }
+
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        
         return false
     }
+}
+
+private enum FrameConstants {
+    static var logoBottomOffset: CGFloat = 10
+
+    static var logoLeadingOffset: CGFloat = 16
+
+    static var logoImageSizeIPad: CGFloat = 54
+    static var logoImageWidthIPhone: CGFloat = 126
 }

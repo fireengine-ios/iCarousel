@@ -9,14 +9,10 @@
 import UIKit
 import Typist
 
-protocol VerifyEmailPopUpDelegate: class {
-    func popUpWillDismiss()
-}
+final class VerifyEmailPopUp: BasePopUpController {
 
-final class VerifyEmailPopUp: UIViewController {
+    //MARK: IBOutlet
 
-    @IBOutlet private weak var scrollView: UIScrollView!
-    
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
@@ -43,9 +39,6 @@ final class VerifyEmailPopUp: UIViewController {
             newValue.numberOfLines = 0
         }
     }
-    
-    @IBOutlet private weak var firstTextField: SecurityCodeTextField!
-    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
     
     @IBOutlet private weak var changeEmailButton: UIButton! {
         willSet {
@@ -89,7 +82,7 @@ final class VerifyEmailPopUp: UIViewController {
     
     @IBOutlet private weak var confirmButton: RoundedInsetsButton! {
         willSet {
-            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
+            newValue.layer.borderColor = UIColor.lrTealishTwo.withAlphaComponent(0.5).cgColor
             newValue.layer.borderWidth = 1
             
             newValue.setTitle(TextConstants.confirm, for: .normal)
@@ -102,23 +95,30 @@ final class VerifyEmailPopUp: UIViewController {
         }
     }
     
+    @IBOutlet private weak var scrollView: UIScrollView!
+    
+    @IBOutlet private weak var firstTextField: SecurityCodeTextField!
+    
+    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
+    
+    //MARK: Properties
     private let keyboard = Typist()
     private let activityManager = ActivityIndicatorManager()
 
     private lazy var accountService = AccountService()
-    
-    weak var delegate: VerifyEmailPopUpDelegate?
-    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     private var isRemoveLetter: Bool = false
     private var currentSecurityCode = ""
     private var inputTextLimit = 6
     
-    var isNeedSendCode: Bool = true
-    
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        
+        analyticsService.logScreen(screen: .verifyEmailPopUp)
     }
     
     //MARK: Utility methods
@@ -127,6 +127,29 @@ final class VerifyEmailPopUp: UIViewController {
         
         activityManager.delegate = self
         
+        updateEmail()
+        
+        contentView = popUpView
+
+        #if DEBUG
+        laterButton.isHidden = false
+        #else
+        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
+        laterButton.isHidden = !allowSkip
+        #endif
+        
+        codeTextFields.forEach({
+            $0.delegate = self
+            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        })
+        
+        ///don't send code if just registered(code already sent)
+        if SingletonStorage.shared.isNeedToSentEmailVerificationCode {
+            resendCode(isAutomaticaly: true)
+        }
+    }
+    
+    private func updateEmail() {
         guard let email = SingletonStorage.shared.accountInfo?.email else {
             assertionFailure()
             return
@@ -152,19 +175,6 @@ final class VerifyEmailPopUp: UIViewController {
         }
         
         topLabel.attributedText = attributedText
-        
-        let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = !allowSkip
-        
-        codeTextFields.forEach({
-            $0.delegate = self
-            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        })
-        
-        ///don't send code if just registered(code already sent)
-        if SingletonStorage.shared.isJustRegistered == false && isNeedSendCode {
-            resendCode()
-        }
     }
     
     private func enableConfirmButtonIfNeeded() {
@@ -172,6 +182,9 @@ final class VerifyEmailPopUp: UIViewController {
         
         if confirmButton.isEnabled != isEnabled {
             confirmButton.isEnabled = isEnabled
+            
+            let alphaComponent: CGFloat = isEnabled ? 1 : 0.5
+            confirmButton.layer.borderColor = UIColor.lrTealishTwo.withAlphaComponent(alphaComponent).cgColor
         }
     }
     
@@ -188,15 +201,17 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     private func showPopUp() {
+        updateEmail()
+        
+        analyticsService.logScreen(screen: .verifyEmailPopUp)
+
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
         }
     }
     
     private func dismissPopUp(animated: Bool = true) {
-        dismiss(animated: animated) {
-            self.delegate?.popUpWillDismiss()
-        }
+        close()
     }
     
     private func showError(text: String) {
@@ -292,7 +307,6 @@ final class VerifyEmailPopUp: UIViewController {
         }
     }
     
-    
     @IBAction func onResendCodeTap(_ sender: Any) {
         hideKeyboard()
         clearCode()
@@ -300,6 +314,10 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     @IBAction func onChangeEmailTap(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                            eventActions: .otp,
+                                            eventLabel: .changeEmail)
+        
         hidePopUp { [weak self] in
             let router = RouterVC()
             let controller = router.changeEmailPopUp
@@ -312,6 +330,10 @@ final class VerifyEmailPopUp: UIViewController {
     }
     
     @IBAction func onLaterTap(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                            eventActions: .otp,
+                                            eventLabel: .later)
+        
         dismissPopUp()
     }
     
@@ -331,6 +353,10 @@ extension VerifyEmailPopUp {
             
             switch response {
             case .success(_):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: true))
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.hidePopUp {
                         let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
@@ -349,6 +375,11 @@ extension VerifyEmailPopUp {
                 }
                 
             case .failed(let error):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
@@ -358,18 +389,29 @@ extension VerifyEmailPopUp {
         }
     }
     
-    private func resendCode() {
+    private func resendCode(isAutomaticaly: Bool = false) {
         startActivityIndicator()
         
-        accountService.sendEmailVerificationCode { response in
-            self.stopActivityIndicator()
+        accountService.sendEmailVerificationCode { [weak self] response in
+            self?.stopActivityIndicator()
             
             switch response {
             case .success(_):
-                ///no extra logic just stop spinner
+                if isAutomaticaly {
+                    SingletonStorage.shared.isEmailVerificationCodeSent = true
+                } else {
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                              eventActions: .otp,
+                                                              eventLabel: .codeResent(isSuccessed: true))
+                }
+                
                 break
             case .failed(let error):
-                
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .codeResent(isSuccessed: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+
                 DispatchQueue.main.async { [weak self] in
                     self?.clearCode()
                     self?.enableConfirmButtonIfNeeded()
@@ -391,6 +433,7 @@ extension VerifyEmailPopUp: UITextFieldDelegate {
         ///if reenter the code we need to remove last letter
         if currentSecurityCode.count == inputTextLimit {
             currentSecurityCode.removeLast()
+            enableConfirmButtonIfNeeded()
         }
     }
     

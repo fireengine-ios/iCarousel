@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="365" placeholderIntrinsicHeight="96.5" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Bik-Sb-QC8">
-                    <rect key="frame" x="95.5" y="48" width="234" height="96.5"/>
+                    <rect key="frame" x="95.5" y="28" width="234" height="96.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="crownPremiumIcon" translatesAutoresizingMaskIntoConstraints="NO" id="RoT-OR-WaV">
                             <rect key="frame" x="0.0" y="0.0" width="234" height="56"/>
@@ -39,7 +37,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqA-pM-aag" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="122" y="168.5" width="181" height="45"/>
+                    <rect key="frame" x="122" y="148.5" width="181" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="PgF-1Q-ewL"/>
                     </constraints>
@@ -48,8 +46,8 @@
                         <action selector="onBecomePrepiumTap:" destination="-1" eventType="touchUpInside" id="OaJ-WM-1u7"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDl-wk-WqG">
-                    <rect key="frame" x="95.5" y="237.5" width="234" height="0.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDl-wk-WqG">
+                    <rect key="frame" x="95.5" y="217.5" width="234" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -60,6 +58,7 @@
                 <constraint firstItem="TDl-wk-WqG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="30" id="1A7-7X-iZT"/>
                 <constraint firstItem="eqA-pM-aag" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Ezt-iL-xj0"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="30" id="GYD-0f-lX9"/>
+                <constraint firstItem="TDl-wk-WqG" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.85" id="JHl-7K-AVH"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.55" id="LV1-nS-HfV"/>
                 <constraint firstItem="Bik-Sb-QC8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="28" id="PMq-tc-vQv"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TDl-wk-WqG" secondAttribute="trailing" priority="750" constant="30" id="TNo-zM-7FG"/>
@@ -77,11 +76,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="TNo-zM-7FG"/>
+                    <exclude reference="1A7-7X-iZT"/>
                     <exclude reference="x2v-qc-Kqj"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="TNo-zM-7FG"/>
+                    <include reference="1A7-7X-iZT"/>
+                    <exclude reference="JHl-7K-AVH"/>
                     <include reference="x2v-qc-Kqj"/>
                 </mask>
             </variation>

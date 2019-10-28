@@ -15,6 +15,7 @@ typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
 typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
+typealias RemoteData = (_ image: Data?) -> Void
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
@@ -1076,6 +1077,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if isLocalItem, let localID = asset?.localIdentifier {
             return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
+    func getFisrtUUIDPart() -> String {
+        if uuid.contains("~") {
             return uuid.components(separatedBy: "~").first ?? uuid
         }
         return uuid

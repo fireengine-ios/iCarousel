@@ -7,6 +7,8 @@
 //
 
 class UserProfileInteractor: UserProfileInteractorInput {
+    
+    private lazy var accountService = AccountService()
 
     weak var output: UserProfileInteractorOutput!
     
@@ -24,14 +26,41 @@ class UserProfileInteractor: UserProfileInteractorInput {
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
+        
         guard let userInfo_ = userInfo else {
             return
         }
+        
         output.configurateUserInfo(userInfo: userInfo_)
     }
     
     private func isEmailChanged(email: String) -> Bool {
         return (email != userInfo?.email)
+    }
+    
+    func updateUserInfo() {
+        accountService.info(success: { [weak self] response in
+            guard let response = response as? AccountInfoResponse else {
+                assertionFailure()
+                return
+            }
+            DispatchQueue.toMain {
+                SingletonStorage.shared.accountInfo = response
+            }
+        }) { error in
+            // This error is't handling
+        }
+    }
+    
+    func updateSetQuestionView(with question: SecretQuestionWithAnswer) {
+        output.updateSecretQuestionView(selectedQuestion: question)
+    }
+
+    func trackState(_ editState: GAEventLabel, errorType: GADementionValues.errorType?) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .myProfile,
+                                            eventLabel: editState,
+                                            errorType: errorType)
     }
     
     private func isPhoneChanged(phone: String) -> Bool {
@@ -41,12 +70,18 @@ class UserProfileInteractor: UserProfileInteractorInput {
     func changeTo(name: String, surname: String, email: String, number: String, birthday: String) {
         if !Validator.isValid(email: email) {
             output.showError(error: TextConstants.errorInvalidEmail)
+
+            trackState(.save(isSuccess: false), errorType: .emailInvalidFormat)
             return
         }
+        
         if !Validator.isValid(phone: number) {
             output.showError(error: TextConstants.errorInvalidPhone)
+
+            trackState(.save(isSuccess: false), errorType: .phoneInvalidFormat)
             return
         }
+        
         updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday)
     }
     
@@ -147,9 +182,13 @@ class UserProfileInteractor: UserProfileInteractorInput {
             DispatchQueue.main.async { [weak self] in
                 self?.output.dataWasUpdated()
                 self?.output.stopNetworkOperation()
+                
+                self?.trackState(.save(isSuccess: true), errorType: nil)
             }
+            
         }, fail: { [weak self] error in
             self?.fail(error: error.localizedDescription)
+            
         })
     }
     

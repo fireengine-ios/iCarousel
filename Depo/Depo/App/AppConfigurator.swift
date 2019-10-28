@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import XPush
 import Fabric
 import Crashlytics
 
@@ -20,10 +21,9 @@ final class AppConfigurator {
     static let analyticsManager: AnalyticsService = factory.resolve()
     static let storageVars: StorageVars = factory.resolve()
     static let tokenStorage: TokenStorage = factory.resolve()
-    
+    static let analyticsService: AnalyticsService = factory.resolve()
+
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        DispatchQueue.setupMainQueue()
-        
         Fabric.with([Crashlytics.self])
         
         /// force arabic language left to right
@@ -34,11 +34,9 @@ final class AppConfigurator {
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         clearTokensIfNeed()
-        logoutIfNeed()
         prepareSessionManager()
         configureSDWebImage()
         setupIAPObserver()
-        startMenloworks(with: launchOptions)
         setupCropy()
         dropboxManager.start()
         analyticsManager.start()
@@ -86,7 +84,7 @@ final class AppConfigurator {
         }
     }
     
-    private static func logoutIfNeed() {
+    static func logoutIfNeed() {
         if !tokenStorage.isRememberMe {
             debugLog("logoutIfNeed isRememberMe false")
             AuthenticationService().logout(async: false, success: nil)
@@ -141,76 +139,68 @@ final class AppConfigurator {
     
    
     
-    private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        func setupMenloworks() {
-            DispatchQueue.toMain {
-                #if LIFEBOX
-                MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
-                #elseif LIFEDRIVE
-                MPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
-                #endif
-                MPush.setServerURL("https://api.xtremepush.com")
-                
-                
-                #if DEBUG
-                MPush.setSandboxModeEnabled(true)
-                MPush.setDebugModeEnabled(true)
-                MPush.setShouldShowDebugLogs(true)
-                #endif
-                
-                MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
-                    
-                    let payload = response.message.payload
-                    let payloadAction = payload["action"] as? String
-                    
-                    debugLog("Payload: \(payload)")
-                    switch response.action.type {
-                        
-                    case .click:
-                        debugLog("Menlo Notif Clicked")
-                        
-                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
-                            PushNotificationService.shared.openActionScreen()
-                            storageVars.deepLink = payloadAction
-                        }
-                        
-                    case .dismiss:
-                        debugLog("Menlo Notif Dismissed")
-                        
-                    case .present:
-                        debugLog("Menlo Notif in Foreground")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
-                            PushNotificationService.shared.openActionScreen()
-                        }
-                    }
-                })
-                
-                MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-                debugLog("AppConfigurator registerMenloworksForPushNotififcations")
-                MPush.applicationDidFinishLaunching(options: launchOptions)
-                debugLog("AppConfigurator startMenloworks")
-            }
-        }
+    static func startXtremePush(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         
-        if #available(iOS 10, *) {
-            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
-                setupMenloworks()
-                ///call appendLocalMediaItems either here or in the AppDelegate
-                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
-                ///it depends on iOS version
+        debugLog("Start XPush")
+        
+        #if DEBUG
+        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
+            assertionFailure("👉 CALL THIS FROM MAIN THREAD")
+        }
+        #endif
+        
+        #if LIFEBOX
+        XPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
+        #elseif LIFEDRIVE
+        XPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
+        #endif
+        XPush.setServerURL("https://api.xtremepush.com")
+        
+        
+        #if DEBUG
+        XPush.setSandboxModeEnabled(true)
+        XPush.setDebugModeEnabled(true)
+        XPush.setShouldShowDebugLogs(true)
+        #endif
+        
+        XPush.registerMessageResponseHandler({(_ response: XPMessageResponse) -> Void in
+            
+            let payload = response.message.payload
+            let payloadAction = payload["action"] as? String
+            
+            debugLog("Payload: \(payload)")
+            switch response.action.type {
                 
-                /// start photos logic after notification permission
-                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
-//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
-                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
-                    
+            case .click:
+                debugLog("Menlo Notif Clicked")
+                
+                analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                    eventActions: .notification,
+                                                    eventLabel: .notificationRead)
+                
+                if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
+                    PushNotificationService.shared.openActionScreen()
+                }
+                
+            case .dismiss:
+                debugLog("Menlo Notif Dismissed")
+                
+            case .present:
+                debugLog("Menlo Notif in Foreground")
+                
+                analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                    eventActions: .notification,
+                                                    eventLabel: .notificationRecieved)
+                
+                if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
+                    PushNotificationService.shared.openActionScreen()
                 }
             }
-        } else {
-            setupMenloworks()
-        }
+        })
         
+        debugLog("AppConfigurator registerMenloworksForPushNotififcations")
+        XPush.applicationDidFinishLaunching(options: launchOptions)
+        debugLog("AppConfigurator startMenloworks")
     }
     
     private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {

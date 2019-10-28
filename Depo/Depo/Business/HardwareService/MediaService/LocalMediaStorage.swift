@@ -8,10 +8,13 @@
 
 import UIKit
 import Photos
+import SwiftyGif
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> Void
+
+typealias FileDataSorceData = (_ image: Data?) -> Void
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
@@ -310,7 +313,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
         let array = assets.objects(at: IndexSet(0..<assets.count))
-        let context = CoreDataStack.default.newChildBackgroundContext
+        let context = CoreDataStack.shared.newChildBackgroundContext
         coreDataStack.listAssetIdAlreadySaved(allList: array, context: context) { ids in
             completion(ids.count, true)
         }
@@ -387,6 +390,22 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.addOperation(operation)
     }
     
+    func getImageData(asset: PHAsset, data: @escaping FileDataSorceData) {
+        debugLog("LocalMediaStorage getGifImage")
+        
+        guard let photoManager = photoManager else {
+            data(nil)
+            return
+        }
+
+        let callBack: PhotoManagerOriginalCallBack = { imageData, _, _, _ in
+            DispatchQueue.main.async {
+                data(imageData)
+            }
+        }
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, callback: callBack)
+        queue.addOperation(operation)
+    }
     
     // MARK: insert remove Asset
     
@@ -411,12 +430,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self?.passcodeStorage.systemCallOnScreen = false
             
-            if (status) {
+            if status {
                 success?()
-            } else {
+            } else if let error = error {
                 debugLog("LocalMediaStorage removeAssets PHPhotoLibrary fail")
-
-                fail?(.error(error!))
+                fail?(.error(error))
+            } else {
+                debugLog("LocalMediaStorage removeAssets PHPhotoLibrary cancelled without error")
+                // cancelled
+                // ios 13 beta doesn't return error
+                fail?(.string(TextConstants.errorUnknown))
             }
         })
     }
@@ -494,43 +517,43 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             fail?(.failResponse(nil))
             return
         }
-        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
-            LocalMediaStorage.default.assetsCache.append(list: [asset])
-            let wrapData = WrapData(asset: asset)
-            wrapData.copyFileData(from: item)
+        
+        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+            assertionFailure()
+            fail?(.failResponse(nil))
+            return
+        }
             
-            let context = CoreDataStack.default.newChildBackgroundContext
-            MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS:  [item.getTrimmedLocalID()], context: context) { fetchedMediaItems in
-                let mediaItem: MediaItem
-                if let existingMediaItem = fetchedMediaItems.first {
-                    mediaItem = existingMediaItem
-                    mediaItem.trimmedLocalFileID = wrapData.getTrimmedLocalID()
-                    mediaItem.md5Value = wrapData.md5
-                } else {
-                    mediaItem = MediaItem(wrapData: wrapData, context: context)
-                    mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()
-                    mediaItem.regenerateSecondPartOfUUID()
-                    mediaItem.md5Value = item.md5
+        let mediaItemService = MediaItemOperationsService.shared
+        LocalMediaStorage.default.assetsCache.append(list: [asset])
+        
+        // call append to get the completion and to be sure that local item is saved in our db
+        mediaItemService.append(localMediaItems: [asset]) {
+            let context = CoreDataStack.shared.newChildBackgroundContext
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
+                guard let savedLocalItem = items.first else {
+                    assertionFailure()
+                    fail?(.failResponse(nil))
+                    return
                 }
-                
-                mediaItem.localFileID = assetIdentifier
-                mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-                
+                // manually change some  properties
+                savedLocalItem.trimmedLocalFileID = item.getFisrtUUIDPart()
+                savedLocalItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
                 if isFilteredItem {
-                    mediaItem.isFiltered = true
+                    savedLocalItem.isFiltered = true
                 }
                 
                 var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
-                if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
+                if let unwrapedSet = savedLocalItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
                     userObjectSyncStatus = unwrapedSet
                 }
                 SingletonStorage.shared.getUniqueUserID(success: {
                     currentUserID in
                     context.perform {
-                        mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
+                        savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        MediaItemOperationsService.shared.updateRelatedRemoteItems(mediaItem: mediaItem, context: context, completion: {
-                            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
+                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {
+                            CoreDataStack.shared.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                                 success?()
                             })
                         })
@@ -538,9 +561,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }, fail: { error in
                     fail?(error)
                 })
-            }
+            })
         }
-        
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
@@ -553,16 +575,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
-        do {
-            if let image = try UIImage(data: Data(contentsOf: fileUrl)) {
-                let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
-                return request.placeholderForCreatedAsset
-            }
-            
-        } catch {
-            print(error.description)
-        }
-        return nil
+        let request = PHAssetCreationRequest.forAsset()
+        request.addResource(with: .photo, fileURL: fileUrl, options: nil)
+        return request.placeholderForCreatedAsset
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {
@@ -842,11 +857,25 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let dataValue = data {
+                    /// there is no PHImageFileURLKey in iOS 13.
+                    /// more solutions at https://stackoverflow.com/q/57202965/5893286
+                    ///
+                    /// parsing example of debugDescription:
+                    ///fileURL: file:///var/mobile/Media/DCIM/101APPLE/IMG_1490.HEIC
+                    ///width: 3024
+                    if #available(iOS 13, *),
+                        let filePath = asset.resource?.debugDescription.slice(from: "fileURL: ", to: "\n    width"),
+                        let fileUrl = URL(string: filePath)
+                    {
+                        assetInfo.url = fileUrl
+                    } else if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
+                        assetInfo.url = unwrapedUrl
+                    } else {
+                        assertionFailure("should not be called")
+                    }
+                    
                     if let name = asset.originalFilename {
                         assetInfo.name = name
-                    }
-                    if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
-                        assetInfo.url = unwrapedUrl
                     }
                     assetInfo.size = Int64(dataValue.count)
                     semaphore.signal()
@@ -973,11 +1002,25 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let dataValue = data {
+                    /// there is no PHImageFileURLKey in iOS 13.
+                    /// more solutions at https://stackoverflow.com/q/57202965/5893286
+                    ///
+                    /// parsing example of debugDescription:
+                    ///fileURL: file:///var/mobile/Media/DCIM/101APPLE/IMG_1490.HEIC
+                    ///width: 3024
+                    if #available(iOS 13, *),
+                        let filePath = asset.resource?.debugDescription.slice(from: "fileURL: ", to: "\n    width"),
+                        let fileUrl = URL(string: filePath)
+                    {
+                        assetInfo.url = fileUrl
+                    } else if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
+                        assetInfo.url = unwrapedUrl
+                    } else {
+                        assertionFailure("should not be called")
+                    }
+                    
                     if let name = asset.originalFilename {
                         assetInfo.name = name
-                    }
-                    if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
-                        assetInfo.url = unwrapedUrl
                     }
                     assetInfo.size = Int64(dataValue.count)
                     semaphore.signal()

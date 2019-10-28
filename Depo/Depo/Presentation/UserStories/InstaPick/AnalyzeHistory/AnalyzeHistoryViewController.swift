@@ -20,6 +20,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
 
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
     private let instapickService: InstapickService = factory.resolve()
+    private let campaignService: CampaignService = CampaignServiceImpl()
     
     private let refresher = UIRefreshControl()
     private var page = 0
@@ -54,12 +55,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         configure()
         trackScreen()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        reloadCards()
 
         navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
@@ -272,8 +274,42 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             }
 
             self.dataSource.reloadCards(with: analyzesCount)
-            success?()
+            self.loadCampaignStatisticsIfNeed(success: success)
         })
+    }
+    
+    private func loadCampaignStatisticsIfNeed(success: VoidHandler?) {
+        
+        guard SingletonStorage.shared.isTurkcellUser else {
+            success?()
+            return
+        }
+        
+        campaignService.getPhotopickDetails { [weak self] result in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            switch result {
+            case .success(let campaignCard):
+                let isDateAvailable = (campaignCard.startDate...campaignCard.endDate).contains(Date())
+                
+                if SingletonStorage.shared.isUserFromTurkey, isDateAvailable {
+                    self.dataSource.showCampaignCard(with: campaignCard)
+                }
+                
+            case .failure(let errorResult):
+                switch errorResult {
+                case .empty:
+                    break
+                case .error(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            }
+            
+            success?()
+        }
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
@@ -303,6 +339,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
+                        self.dataSource.showEmptyCard()
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }

@@ -27,8 +27,6 @@ extension CreateStoryPreviewRouter: CreateStoryPreviewRouterInput {
                             messageDesign: DesignText,
                             buttonTitle: String,
                             buttonAction: @escaping VoidHandler) {
-        
-        
         let popUp = CreateStoryPopUp.with(image: image.image,
                                           title: title,
                                           titleDesign: titleDesign,
@@ -36,8 +34,6 @@ extension CreateStoryPreviewRouter: CreateStoryPreviewRouterInput {
                                           messageDesign: messageDesign,
                                           buttonTitle: buttonTitle,
                                           buttonAction: buttonAction)
-        
-        popUp.modalPresentationStyle = .overFullScreen
         view?.navigationController?.present(popUp, animated: false, completion: nil)
     }
 }

@@ -21,4 +21,6 @@ protocol UserProfileInteractorOutput: class {
     func showError(error: String)
     
     func dataWasUpdated()
+    
+    func updateSecretQuestionView(selectedQuestion: SecretQuestionWithAnswer)
 }

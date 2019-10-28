@@ -14,7 +14,7 @@ enum SpotifyJobStatus: String {
     case pending = "PENDING"
     case running = "RUNNING"
     case finished = "FINISHED"
-    case cancelled = "CANCELED"
+    case cancelled = "CANCELLED"
     case failed = "FAILED"
 }
 
@@ -90,7 +90,7 @@ class SpotifyObject: Equatable {
         self.imagePath = json["imagePath"].url
         
         monthValue = lastModifiedDate?.getDateInTextForCollectionViewHeader() ?? ""
-        nameFirstLetter = String(name.first ?? Character(""))
+        nameFirstLetter = String(name.first ?? Character("")).uppercased()
     }
     
     func equalTo(rhs: SpotifyObject) -> Bool {

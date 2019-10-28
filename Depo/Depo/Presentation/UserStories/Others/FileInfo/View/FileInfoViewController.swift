@@ -86,8 +86,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
-        setTitle(withString: "")
+        navigationBarWithGradientStyleWithoutInsets()
     }
 
     private func addReturnIfNeed(string: inout String) {

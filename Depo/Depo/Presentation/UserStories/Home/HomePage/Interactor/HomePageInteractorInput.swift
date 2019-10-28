@@ -12,7 +12,7 @@ protocol HomePageInteractorInput {
     
     var homeCardsLoaded: Bool { get }
     
-    func homePagePresented()
+    func viewIsReady()
     
     func needRefresh()
     
@@ -21,4 +21,5 @@ protocol HomePageInteractorInput {
     func trackScreen()
 
     func updateLocalUserDetail()
+    
 }

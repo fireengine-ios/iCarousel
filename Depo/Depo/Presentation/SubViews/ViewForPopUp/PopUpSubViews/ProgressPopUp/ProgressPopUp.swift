@@ -16,7 +16,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView! {
-        didSet { iconImageViewForCurrentFile.delegate = self }
+        didSet { iconImageViewForCurrentFile.loadingImageViewDelegate = self }
     }
     
     var wrapItem: WrapData?
@@ -70,7 +70,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     func setImageForUploadingItem(item: WrapData) {
         if wrapItem != item {
             wrapItem = item
-            iconImageViewForCurrentFile.loadImageForItem(object: item, smooth: true)
+            iconImageViewForCurrentFile.loadThumbnail(object: item, smooth: true)
         }
     }
     

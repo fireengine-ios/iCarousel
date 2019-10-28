@@ -163,6 +163,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         player.delegates.add(self)
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
+        
+        #if LIFEDRIVE
+        plussButton.imageEdgeInsets = UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15)
+        #endif
     }
     
     override var childViewControllerForStatusBarStyle: UIViewController? {
@@ -213,7 +217,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                                                name: dropNotificationName,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPhotosScreen),
+                                               selector: #selector(showPhotoScreen),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
@@ -232,11 +236,23 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
     }
     
-    @objc func showPhotosScreen(_ sender: Any) {
+    func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
         selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
         lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        
+        if let item = item {
+            scrollPhotoPage(scrollTo: item)
+        }
     }
+    
+    @objc func showPhotoScreen() {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        openPhotoPage()
+    }
+    
     
     @objc func showVideosScreen(_ sender: Any) {
 //        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
@@ -256,6 +272,33 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeVisibleStatus(hidden: true)
         musicBarHeightConstraint.constant = 0
         mainContentView.layoutIfNeeded()
+    }
+    
+    private func scrollPhotoPage(scrollTo item: Item) {
+            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
+                photosController.scrollToItem(item)
+            }
+    }
+    
+    @discardableResult
+    private func openPhotoPage() -> SegmentedController? {
+        
+        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
+            return nil
+        }
+        
+        segmentedController.loadViewIfNeeded()
+        
+        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
+            // if photo page is not active
+            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
+                assertionFailure("Photo page not found")
+                return nil
+            }
+            segmentedController.switchSegment(to: index)
+        }
+        return segmentedController
+        
     }
     
     private func changeVisibleStatus(hidden: Bool) {
@@ -377,9 +420,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate func changeViewState(state: Bool) {
         plussButton.isSelected = state
         
+        let rotationAngle: CGFloat
+        #if LIFEDRIVE
+            rotationAngle = .pi
+        #else
+            rotationAngle = .pi / 4
+        #endif
+        
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             if state {
-                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi / 4)
+                self.plussButton.transform = CGAffineTransform(rotationAngle: rotationAngle)
             } else {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
             }
@@ -870,7 +920,8 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
-            spotifyRoutingService.connectToSpotify(isSettingCell: false)
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
+            spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
     }
     

@@ -61,7 +61,7 @@ class RemoteItemsService {
         currentPage = 0
         isFull = false
         queueOperations.cancelAllOperations()
-//        CoreDataStack.default.deleteRemoteFiles()
+//        CoreDataStack.shared.deleteRemoteFiles()
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
     }
     

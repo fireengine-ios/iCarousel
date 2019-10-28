@@ -13,6 +13,7 @@ extension UIButton {
     func adjustsFontSizeToFitWidth() {
         titleLabel?.numberOfLines = 1
         titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.baselineAdjustment = .alignCenters
         titleLabel?.lineBreakMode = .byClipping
     }
 }

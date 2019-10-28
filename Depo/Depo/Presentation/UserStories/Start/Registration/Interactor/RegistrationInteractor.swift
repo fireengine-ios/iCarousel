@@ -15,10 +15,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var captchaService = CaptchaService()
     
     var captchaRequired = false
-    private var  retriesCount = 0 {
+    private var retriesCount = 0 {
         didSet {
-            if retriesCount > 2 {
-                showSupportView()
+            if retriesCount == NumericConstants.showFAQViewAttempts {
+                output?.showFAQView()
+            } else if retriesCount >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
             }
         }
     }

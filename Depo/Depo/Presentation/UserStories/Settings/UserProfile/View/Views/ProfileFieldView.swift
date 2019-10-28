@@ -168,12 +168,6 @@ class ProfileFieldView: UIView {
         textField.delegate = delegate
     }
     
-    func setupAsPassword() {
-        title = TextConstants.userProfilePassword
-        textField.text = "* * * * * * * * *"
-        textField.isUserInteractionEnabled = false
-    }
-    
     func setupAsTurkcellGSMIfNeeded() {
         guard SingletonStorage.shared.isTurkcellUser else {
             return
@@ -250,9 +244,8 @@ class ProfileFieldView: UIView {
     
     private func openFAQ() {
         let router = RouterVC()
-        if let controller = router.helpAndSupport {
-            router.pushViewController(viewController: controller)
-        }
+        let controller = router.helpAndSupport
+        router.pushViewController(viewController: controller)
     }
 }
 

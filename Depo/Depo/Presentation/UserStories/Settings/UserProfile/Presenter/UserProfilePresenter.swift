@@ -37,6 +37,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         asyncOperationSuccess()
     }
     
+    func updateSecretQuestionView(selectedQuestion: SecretQuestionWithAnswer) {
+        view.updateSetSecretQuestionView(with: selectedQuestion)
+    }
+    
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
         view.endSaving()
         view.setupEditState(false)
@@ -47,6 +51,9 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func showError(error: String) {
         view.endSaving()
+                
+        interactor.trackState(.save(isSuccess: false), errorType: GADementionValues.errorType(with: error))
+        
         UIApplication.showErrorAlert(message: error)
     }
     
@@ -59,6 +66,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func tapEditButton() {
         view.setupEditState(true)
+        interactor.trackState(.edit, errorType: nil)
     }
     
     func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
@@ -67,6 +75,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func dataWasUpdated() {
         view.setupEditState(false)
+        interactor.trackState(.save(isSuccess: true), errorType: nil)
     }
     
     func isTurkcellUser() -> Bool {
@@ -77,10 +86,21 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
+    func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?) {
+        router.goToSetSecretQuestion(selectedQuestion: selectedQuestion, delegate: self)
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
     
+}
+
+extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
+    func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
+        interactor.updateSetQuestionView(with: selectedQuestion)
+        interactor.updateUserInfo()
+    }
 }

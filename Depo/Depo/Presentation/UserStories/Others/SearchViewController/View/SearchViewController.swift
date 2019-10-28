@@ -75,11 +75,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        if #available(iOS 11.0, *) {
-            navigationBarWithGradientStyle()
-        } else {
-            defaultNavBarStyle()
-        }
+        defaultNavBarStyle()
+
         statusBarColor = .white
         
         if let topBarVc = UIApplication.topController() as? TabBarViewController {
@@ -105,27 +102,28 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, *), Device.operationSystemVersionLessThen(13) {
             defaultNavBarStyle()
             statusBarColor = .white
         }
+        
         navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        output.viewWillDisappear()
+        searchBar.resignFirstResponder()
+
         statusBarColor = .clear
+        
         if goBack {
             if let topBarVc = UIApplication.topController() as? TabBarViewController {
                 topBarVc.statusBarStyle = .lightContent
             }
-            
-            homePageNavigationBarStyle()
         }
         
-        searchBar.resignFirstResponder()
+        output.viewWillDisappear()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -217,25 +215,27 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.addSubview(view)
         searchBar.sendSubview(toBack: view)
         
-        if let subviews = searchBar.subviews.first?.subviews {
-            subviews.forEach({ subview in
-                if subview is UITextField {
-                    searchTextField = subview as? UITextField
-                    searchTextField?.backgroundColor = ColorConstants.searchBarColor
-                    searchTextField?.placeholder = TextConstants.search
-                    searchTextField?.font = UIFont.TurkcellSaturaBolFont(size: 19)
-                    searchTextField?.textColor = ColorConstants.darkBlueColor
-                    searchTextField?.keyboardAppearance = .dark
-                }
-                if let button = subview as? UIButton {
-                    button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
-                    button.isEnabled = true
-                    button.adjustsFontSizeToFitWidth()
-                }
-            })
+        let firstTextField = searchBar.firstSubview(of: UITextField.self)
+        
+        if let textField = firstTextField {
+            textField.backgroundColor = ColorConstants.searchBarColor
+            textField.placeholder = TextConstants.search
+            textField.font = UIFont.TurkcellSaturaBolFont(size: 19)
+            textField.textColor = ColorConstants.darkBlueColor
+            textField.keyboardAppearance = .dark
+            searchTextField = textField
+        }
+        
+        let cancelButton = searchBar.firstSubview(of: UIButton.self)
+        
+        if let button = cancelButton {
+            button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
+            button.isEnabled = true
+            button.adjustsFontSizeToFitWidth()
         }
         
         setupNavigationBarForSelectionState(state: false)
+        
         output.viewIsReady(collectionView: collectionView)
     }
     
@@ -267,9 +267,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             } else {
                 navigationItem.rightBarButtonItem = nil
             }
-            navigationItem.title = ""
-            navigationItem.titleView = searchBar
-            navigationItem.leftBarButtonItem = nil
+            
+            DispatchQueue.main.async {
+                self.navigationItem.title = ""
+                self.navigationItem.titleView = self.searchBar
+                self.navigationItem.leftBarButtonItem = nil
+                self.navigationItem.titleView?.setNeedsLayout()
+                self.navigationItem.titleView?.layoutIfNeeded()
+            }
         }
     }
     

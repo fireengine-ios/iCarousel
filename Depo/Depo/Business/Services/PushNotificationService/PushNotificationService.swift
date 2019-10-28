@@ -14,33 +14,61 @@ final class PushNotificationService {
     
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    
+    private lazy var storageVars: StorageVars = factory.resolve()
+
     private var notificationAction: PushNotificationAction?
-    private var notificationActionURLString: String?
+    private var notificationParameters: String?
     
     //MARK: -
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = launchOptions?["action"] as? String else {
+        let action = launchOptions?[PushNotificationParameter.action.rawValue] as? String ?? launchOptions?[PushNotificationParameter.pushType.rawValue] as? String
+        
+        guard let actionString = action else {
             return false
         }
-
-        notificationAction = PushNotificationAction(rawValue: actionString)
         
-        if notificationAction == .http {
-            notificationActionURLString = actionString
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
+            return false
         }
         
-        return notificationAction != nil
+        debugLog("PushNotificationService received notification with type \(actionString)")
+        parse(options: launchOptions, action: notificationAction)
+        return true
     }
     
-    func assignDeepLink(innerLink: String?) -> Bool {
+    func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
         guard let actionString = innerLink as String? else {
             return false
         }
+                
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
+            return false
+        }
         
-        notificationAction = PushNotificationAction(rawValue: actionString)
-        return notificationAction != nil
+        debugLog("PushNotificationService received deepLink with type \(actionString)")
+        parse(options: options, action: notificationAction)
+        return true
+    }
+    
+    private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
+        self.notificationAction = action
+        
+        switch notificationAction {
+        case .http?:
+            notificationParameters = action.rawValue
+        case .tbmatic?:
+            notificationParameters = options?[PushNotificationParameter.tbmaticUuids.rawValue] as? String
+        default:
+            break
+        }
+        
+        storageVars.deepLink = action.rawValue
+        storageVars.deepLinkParameters = options
     }
     
     func openActionScreen() {
@@ -51,7 +79,7 @@ final class PushNotificationService {
         if tokenStorage.accessToken == nil {
             action = .login
         }
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()
@@ -82,8 +110,10 @@ final class PushNotificationService {
         case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
-        case .http: openURL(notificationActionURLString)
-        case .login: openLogin()
+        case .http: openURL(notificationParameters)
+        case .login:
+            openLogin()
+            clear()
         case .search: openSearch()
         case .freeUpSpace: break
         case .settings: openSettings()
@@ -92,8 +122,23 @@ final class PushNotificationService {
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
+        case .tbmatic: openTBMaticPhotos(notificationParameters)
+        case .securityQuestion: openSecurityQuestion()
+        case .permissions: openPermissions()
         }
+        
+        if router.tabBarController != nil {
+            clear()
+        }
+    }
+    
+    private func clear() {
+        // clear if user haven't access or need screen is showed
+        // no clean for cold application start - screen showing from home page
         notificationAction = nil
+        notificationParameters = nil
+        storageVars.deepLink = nil
+        storageVars.deepLinkParameters = nil
     }
     
     //MARK: -
@@ -134,7 +179,7 @@ final class PushNotificationService {
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
             case .photosScreenIndex:
-                tabBarVC.showPhotosScreen(self)
+                tabBarVC.showPhotoScreen()
             }
         }
     }
@@ -316,5 +361,39 @@ final class PushNotificationService {
     
     private func openBecomePremium() {
         pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+    }
+    
+    private func openTBMaticPhotos(_ uuidsByString: String?) {
+        debugLog("PushNotificationService try to open TBMatic screen")
+        // handle list of uuids with two variants for separators "," and ", "
+        guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
+            assertionFailure()
+            debugLog("PushNotificationService uuids is empty")
+            return
+        }
+        
+        // check for cold start from push - present on home page
+        guard router.tabBarController != nil else {
+            return
+        }
+        
+        let controller = router.tbmaticPhotosContoller(uuids: uuids)
+        DispatchQueue.main.async {
+            self.router.presentViewController(controller: controller)
+        }
+    }
+    
+    private func openSecurityQuestion() {
+        debugLog("PushNotificationService try to open Security Question screen")
+
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        pushTo(controller)
+    }
+    
+    private func openPermissions() {
+        debugLog("PushNotificationService try to open Permission screen")
+
+        let controller = router.permissions
+        pushTo(controller)
     }
 }

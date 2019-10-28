@@ -14,15 +14,25 @@ extension PHAsset {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             return nil
         }
-        return PHAssetResource.assetResources(for: self).first
+        let resources = PHAssetResource.assetResources(for: self)
+        
+        if let editedResource = resources.first(where: { $0.type.isContained(in: [.fullSizePhoto, .fullSizeVideo]) }) {
+            return editedResource
+        } else {
+            return resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
+        }
     }
     
     var originalFilename: String? {
-        if #available(iOS 9.0, *) {
-            return resource?.originalFilename
-        } else {
-            return value(forKey: "filename") as? String
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return nil
         }
+        let resources = PHAssetResource.assetResources(for: self)
+        /// original resource for original filename
+        /// we show IMG_XXXX.HEIC, but will be upload edited jpg photo
+        let originalResource = resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
+        let name = originalResource?.originalFilename
+        return name
     }
     
     /// MAYBE WILL BE NEEDed

@@ -32,16 +32,6 @@ extension PremiumRouter: PremiumRouterInput {
         router.presentViewController(controller: vc)
     }
     
-    func showActivateOfferAlert(with displayName: String, text: String, delegate: PremiumPresenter) {
-        self.delegate = delegate
-        let vc = DarkPopUpController.with(title: displayName, message: text, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close(animation: {
-                self?.delegate?.buy()
-            })
-        }
-        router.presentViewController(controller: vc)
-    }
-    
     func showPromocodInvalideAlert(for vc: UIViewController?) {
         let popUpController = PopUpController.with(title: TextConstants.checkPhoneAlertTitle,
                                                    message: TextConstants.promocodeInvalid,
@@ -73,5 +63,19 @@ extension PremiumRouter: PremiumRouterInput {
     
     func showTermsOfUse() {
         router.pushViewController(viewController: router.termsOfUseScreen)
+    }
+    
+    func presentPaymentPopUp(paymentModel: PaymentModel?) {
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
+        router.presentViewController(controller: popup)
+    }
+    
+    func closePaymentPopUpController(closeAction: @escaping VoidHandler) {
+        if let paymentPopUpController = router.defaultTopController as? PaymentPopUpController {
+            paymentPopUpController.close(completion: closeAction)
+        } else {
+            assertionFailure("there is no PaymentPopUpController. check requirements or logic")
+            UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
+        }
     }
 }

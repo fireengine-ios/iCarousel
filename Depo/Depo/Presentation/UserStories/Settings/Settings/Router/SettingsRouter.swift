@@ -41,7 +41,7 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func goToHelpAndSupport() {
-        router.pushViewController(viewController: router.helpAndSupport!)
+        router.pushViewController(viewController: router.helpAndSupport)
     }
     
     func goToTermsAndPolicy() {

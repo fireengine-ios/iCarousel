@@ -186,20 +186,29 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
-        guard let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty else {
-            fail?(ErrorResponse.string(TextConstants.errorServer))
-            return
+        
+        let uuidsToShare: [String]
+        
+        /// photo, video, files, folders
+        if let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty {
+            
+            let remoteUUIDs = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
+            let folderUUIDs = remoteFoldersUUIDs(files: sharedItems)
+            uuidsToShare = remoteUUIDs + folderUUIDs
+            
+        /// albums
+        } else {
+            uuidsToShare = remoteItemsUUID(files: sharedFiles)
         }
         
-        let items = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
-        
-        guard !items.isEmpty else {
+        guard !uuidsToShare.isEmpty else {
+            assertionFailure()
             fail?(ErrorResponse.string(TextConstants.errorServer))
             return
         }
         
         let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
-        let param = SharedServiceParam(filesList: items, isAlbum: isAlbum, sharedType: .link)
+        let param = SharedServiceParam(filesList: uuidsToShare, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
     }
     
@@ -248,25 +257,28 @@ class WrapItemFileService: WrapItemFileOperations {
     
     
     private func remoteWrapDataItems(files: [WrapData]) -> [WrapData] {
-        let items = files.filter { !$0.isLocalItem }
-        return items
+        return files.filter { !$0.isLocalItem }
     }
     
     private func localWrapedData(files: [WrapData]) -> [WrapData] {
-        let items = files.filter { $0.isLocalItem }
-        return items
+        return files.filter { $0.isLocalItem }
     }
     
     private func assetsForlocalItems(files: [WrapData]) -> [PHAsset]? {
-        let assets = files.flatMap { $0.asset }
-        return assets
+        return files.compactMap { $0.asset }
     }
     
     
     private func remoteItemsUUID(files: [BaseDataSourceItem]) -> [String] {
-        let items: [String] = files.filter { !$0.isLocalItem }
-            .flatMap { $0.uuid }
-        return items
+        return files
+            .filter { !$0.isLocalItem }
+            .compactMap { $0.uuid }
+    }
+    
+    private func remoteFoldersUUIDs(files: [WrapData]) -> [String] {
+        return files
+            .filter { $0.isFolder == true }
+            .compactMap { $0.uuid }
     }
     
     private func uuidsOfItemsThatHaveRemoteURL(files: [WrapData]) -> [String] {

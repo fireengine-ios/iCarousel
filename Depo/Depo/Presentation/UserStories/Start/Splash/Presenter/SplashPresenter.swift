@@ -99,15 +99,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func openLink() {
         debugLog("Open Link on Splash Presenter")
         if let deepLink = storageVars.deepLink {
-            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink){
+            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink, options: storageVars.deepLinkParameters) {
                 debugLog("Open Link after Router navigates to home")
                 PushNotificationService.shared.openActionScreen()
-                storageVars.deepLink = nil
             }
         }
     }
     
     private func openApp() {
+        AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
             if storageVars.autoSyncSet {
@@ -167,8 +167,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
     }
     
-    func onFailEULA() {
-        router.navigateToTermsAndService()
+    func onFailEULA(isFirstLogin: Bool) {
+        router.navigateToTermsAndService(isFirstLogin: isFirstLogin)
     }
     
     func onFailGetAccountInfo(error: Error) {

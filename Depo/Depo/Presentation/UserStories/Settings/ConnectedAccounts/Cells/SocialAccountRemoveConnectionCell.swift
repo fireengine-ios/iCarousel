@@ -35,23 +35,17 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             let attributeString = NSMutableAttributedString(string: TextConstants.removeConnection,
                                                             attributes: attributes)
             removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
-            let line = UIView()
             
-            line.translatesAutoresizingMaskIntoConstraints = false
+            let line = UIView()
             line.backgroundColor = removeConnectionButton.titleLabel?.textColor
+            line.translatesAutoresizingMaskIntoConstraints = false
+
             removeConnectionButton.addSubview(line)
             
-            var constraints = [NSLayoutConstraint]()
-            
-            constraints.append(NSLayoutConstraint(item: line
-                , attribute: .leading, relatedBy: .equal, toItem: removeConnectionButton, attribute: .leading, multiplier: 1, constant: 0))
-            constraints.append(NSLayoutConstraint(item: line
-                , attribute: .trailing, relatedBy: .equal, toItem: removeConnectionButton, attribute: .trailing, multiplier: 1, constant: 0))
-            constraints.append(NSLayoutConstraint(item: line
-                , attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 1))
-            constraints.append(NSLayoutConstraint(item: line
-                , attribute: .bottom, relatedBy: .equal, toItem: removeConnectionButton, attribute: .bottom, multiplier: 1, constant: -3.5))
-            removeConnectionButton.addConstraints(constraints)
+            line.leadingAnchor.constraint(equalTo: removeConnectionButton.leadingAnchor, constant: 1).activate()
+            line.trailingAnchor.constraint(equalTo: removeConnectionButton.trailingAnchor, constant: 1).activate()
+            line.heightAnchor.constraint(equalToConstant: 1).activate()
+            line.bottomAnchor.constraint(equalTo: removeConnectionButton.bottomAnchor, constant: -3.5).activate()
         }
     }
     

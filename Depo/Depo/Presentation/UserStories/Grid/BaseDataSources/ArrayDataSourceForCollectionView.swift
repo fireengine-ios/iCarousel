@@ -19,6 +19,11 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
 //        allItems.append(array.first! as [WrapData])
     }
     
+    override func dropData() {
+        super.dropData()
+        tableDataMArray.removeAll()
+    }
+    
     override internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
         guard tableDataMArray.count > indexPath.section, tableDataMArray[indexPath.section].count > indexPath.row else {
             return nil

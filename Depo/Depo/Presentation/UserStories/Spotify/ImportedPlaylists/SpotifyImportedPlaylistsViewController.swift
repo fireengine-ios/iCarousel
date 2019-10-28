@@ -23,13 +23,14 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     private lazy var dataSource = SpotifyCollectionViewDataSource<SpotifyPlaylist>(collectionView: collectionView, delegate: self)
     
-    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .Largest, .Smallest]
     private lazy var sortingManager = SpotifySortingManager(sortTypes: sortTypes, delegate: self)
     private lazy var navbarManager = SpotifyImportedPlaylistsNavbarManager(delegate: self)
     private lazy var bottomBarManager = SpotifyBottomBarManager(delegate: self)
     private lazy var threeDotsManager = SpotifyThreeDotMenuManager(delegate: self)
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var page = 0
     private let pageSize = 20
     private var isLoadingNextPage = false
@@ -45,7 +46,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navbarManager.setDefaultState()
         sortingManager.addBarView(to: topBarContainer)
         bottomBarManager.setup()
@@ -59,6 +59,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+        analyticsService.logScreen(screen: .spotifyPlaylists)
     }
 
     // MARK: -
@@ -99,6 +100,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     }
     
     private func openTracks(for playlist: SpotifyPlaylist) {
+        analyticsService.logScreen(screen: .spotifyPlaylistDetails)
         let controller = router.spotifyImportedTracksController(playlist: playlist, delegate: self)
         navigationController?.show(controller, sender: nil)
     }
@@ -130,6 +132,11 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
             switch result {
             case .success(_):
                 self.dataSource.remove(items) {
+
+                    self.analyticsService.trackSpotify(eventActions: .delete,
+                                                       eventLabel: .importSpotifyPlaylist,
+                                                       trackNumber: nil,
+                                                       playlistNumber: playlistIds.count)
                     self.hideSpinner()
                     self.stopSelectionState()
                 }
@@ -161,6 +168,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         navbarManager.setDefaultState()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
+        setMoreButton()
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -172,6 +180,12 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
         } else {
             bottomBarManager.show()
             collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
+        }
+    }
+    
+    private func setMoreButton() {
+        if dataSource.allItems.isEmpty {
+            navbarManager.setMoreButton(isEnabled: false)
         }
     }
 }
@@ -217,7 +231,7 @@ extension SpotifyImportedPlaylistsViewController: SpotifySortingManagerDelegate 
 extension SpotifyImportedPlaylistsViewController: SpotifyImportedPlaylistsNavbarManagerDelegate {
     
     func onCancel() {
-        stopSelectionState()
+       stopSelectionState()
     }
     
     func onMore(_ sender: UIBarButtonItem) {

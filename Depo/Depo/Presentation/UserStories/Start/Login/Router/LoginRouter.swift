@@ -7,7 +7,6 @@
 //
 
 class LoginRouter: LoginRouterInput {
-  
     let router = RouterVC()
     
     func goToForgotPassword() {
@@ -42,6 +41,24 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: navVC)
     }
     
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler) {
+        
+        let popUp = CreateStoryPopUp.with(image: image.image,
+                                          title: title,
+                                          titleDesign: titleDesign,
+                                          message: message,
+                                          messageDesign: messageDesign,
+                                          buttonTitle: buttonTitle,
+                                          buttonAction: buttonAction)
+        router.presentViewController(controller: popUp, animated: false)
+    }
+    
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
         let vc = TwoFactorAuthenticationViewController(response: response)
         router.pushViewController(viewController: vc)
@@ -58,7 +75,13 @@ class LoginRouter: LoginRouterInput {
     }
     
     func openSupport() {
-        let controller = router.supportFormController
+        let controller = SupportFormController.with(subjects: [TextConstants.onLoginSupportFormSubject1,
+                                                               TextConstants.onLoginSupportFormSubject2,
+                                                               TextConstants.onLoginSupportFormSubject3,
+                                                               TextConstants.onLoginSupportFormSubject4,
+                                                               TextConstants.onLoginSupportFormSubject5,
+                                                               TextConstants.onLoginSupportFormSubject6,
+                                                               TextConstants.onLoginSupportFormSubject7])
         router.pushViewController(viewController: controller)
     }
     
@@ -73,5 +96,15 @@ class LoginRouter: LoginRouterInput {
         }
         
         UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+    }
+    
+    func goToFaqSupportPage() {
+        let faqSupportController = router.helpAndSupport
+        router.pushViewController(viewController: faqSupportController)
+    }
+    
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol) {
+        let controller = SubjectDetailsViewController.present(with: type)
+        router.presentViewController(controller: controller)
     }
 }

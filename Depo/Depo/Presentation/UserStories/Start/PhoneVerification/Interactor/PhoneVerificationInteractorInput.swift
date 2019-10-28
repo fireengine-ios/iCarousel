@@ -14,6 +14,8 @@ protocol PhoneVerificationInteractorInput {
     
     var phoneNumber: String { get }
     
+    var textDescription: String { get }
+    
     var expectedInputLength: Int? { get }
     
     var remainingTimeInSeconds: Int { get }
@@ -26,7 +28,7 @@ protocol PhoneVerificationInteractorInput {
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?)
     
-    func trackScreen()
+    func trackScreen(isTimerExpired: Bool)
     
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     

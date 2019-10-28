@@ -10,6 +10,7 @@ import Adjust
 import FBSDKCoreKit
 import StoreKit
 import Firebase
+import Netmera
 
 protocol AnalyticsScreen {
     var analyticsScreen: AnalyticsAppScreens { get }
@@ -113,13 +114,16 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
-    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
-    uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?, uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
     func trackSignupEvent(error: SignupResponseError?)
+    func trackImportEvent(error: SpotifyResponseError?)
+    
+    func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -133,7 +137,10 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
                                      uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
-        prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+        
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics,
+                                   isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+                                    
             Analytics.logEvent("screenView", parameters: parametrs)
         }
     }
@@ -149,6 +156,7 @@ extension AnalyticsService: AnalyticsGA {
         let tokenStorage: TokenStorage = factory.resolve()
         let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
             payment = unwrapedisNativePayment ? "inApp" : "Turkcell"
@@ -181,7 +189,9 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-    
+        var isTwoFactorAuthEnabled: Bool?
+        var isSpotifyEnabled: Bool?
+
         if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
@@ -194,6 +204,30 @@ extension AnalyticsService: AnalyticsGA {
             let videoSetting = confirmedAutoSyncSettingsState ?
                 GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            
+            isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
+
+            if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
+                isSpotifyEnabled = storedIsSpotifyEnabled
+
+            } else {
+                group.enter()
+                
+                let spotifyService: SpotifyService = factory.resolve()
+                spotifyService.getStatus { response in
+                    switch response {
+                    case .success(let status):
+                        isSpotifyEnabled = status.isConnected
+                        
+                        SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+                        
+                        group.leave()
+                    case .failed(_):
+                        group.leave()
+                        
+                    }
+                }
+            }
         }
         
         
@@ -213,7 +247,9 @@ extension AnalyticsService: AnalyticsGA {
                 loginType: loginType,
                 errorType: errorType,
                 autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus).productParametrs)
+                autoSyncStatus: autoSyncStatus,
+                isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
+                isSpotifyEnabled: isSpotifyEnabled).productParametrs)
         }
     }
     
@@ -221,17 +257,32 @@ extension AnalyticsService: AnalyticsGA {
         let analyticasItemList = "Turkcell Package"
         var itemID = ""
         var price = ""
+        
         if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
             itemID = "\(offerIDUnwraped)"
             price = "\(unwrapedPrice)"
         }
         
-        let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
-                                           transactionID: "", tax: "0",
-                                           priceValue: price, shipping: "0")
+        let product = AnalyticsPackageProductObject(itemName: offer.name ?? "",
+                                                    itemID: itemID,
+                                                    price: price,
+                                                    itemBrand: "Lifebox",
+                                                    itemCategory: "Storage",
+                                                    itemVariant: "",
+                                                    index: "\(packageIndex)",
+                                                    quantity: "1")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false) { dimentionParametrs in
+        let ecommerce = AnalyticsEcommerce(items: [product],
+                                           itemList: analyticasItemList,
+                                           transactionID: "",
+                                           tax: "0",
+                                           priceValue: price,
+                                           shipping: "0")
+        
+        prepareDimentionsParametrs(screen: nil,
+                                   downloadsMetrics: nil,
+                                   uploadsMetrics: nil,
+                                   isPaymentMethodNative: false) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
@@ -240,14 +291,30 @@ extension AnalyticsService: AnalyticsGA {
         let analyticasItemList = "In App Package"
         let itemID = product.productIdentifier
         let price = product.localizedPrice
-        let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle, itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
-                                           transactionID: "", tax: "0",
-                                           priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true) { dimentionParametrs in
+        let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle,
+                                                     itemID: itemID,
+                                                     price: price,
+                                                     itemBrand: "Lifebox",
+                                                     itemCategory: "Storage",
+                                                     itemVariant: "",
+                                                     index: "\(packageIndex)",
+                                                     quantity: "1")
+        
+        let ecommerce = AnalyticsEcommerce(items: [product],
+                                           itemList: analyticasItemList,
+                                           transactionID: "",
+                                           tax: "0",
+                                           priceValue: price,
+                                           shipping: "0")
+        
+        prepareDimentionsParametrs(screen: nil,
+                                   downloadsMetrics: nil,
+                                   uploadsMetrics: nil,
+                                   isPaymentMethodNative: true) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
+        
     }
     
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
@@ -272,7 +339,7 @@ extension AnalyticsService: AnalyticsGA {
             let parametrs: [String: Any] = [
                 "eventCategory" : GAEventCantegory.functions.text,
                 "eventAction" : GAEventAction.login.text,
-                "eventLabel" : loginType != nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
@@ -289,18 +356,70 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
+    func trackImportEvent(error: SpotifyResponseError? = nil) {
+        prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : GAEventAction.connectedAccounts.text,
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+            ]
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
         
         var analyticasItemList = "İndirimdeki Paketler"
         var itemID = ""
-        if let offer = package.model as? OfferServiceResponse, let offerID = offer.offerId {
-            itemID = "\(offerID)"
-            analyticasItemList = "Turkcell Package"
-        } else if let offer = package.model as? OfferApple, let offerID = offer.storeProductIdentifier {
-            itemID = offerID
-            analyticasItemList = "In App Package"
+        
+        let featureType: FeaturePackageType?
+        let type: PackageType?
+        
+        let slcmID: String
+        let appleID: String
+
+        if let offer = package.model as? PackageModelResponse {
+            featureType = offer.featureType
+            type = offer.type
+            
+            slcmID = offer.slcmOfferId.map { "\($0)" } ?? ""
+            appleID = offer.inAppPurchaseId ?? ""
+            
+        } else if let offer = package.model as? SubscriptionPlanBaseResponse {
+            featureType = offer.subscriptionPlanFeatureType
+            type = offer.subscriptionPlanType
+            
+            slcmID = offer.subscriptionPlanSlcmOfferId ?? ""
+            appleID = offer.subscriptionPlanInAppPurchaseId ?? ""
+        } else {
+            return
         }
-        let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        
+        if featureType == .SLCMFeature || type == .SLCM {
+            analyticasItemList = "Turkcell Package"
+            itemID = slcmID
+
+        } else if featureType == .appleFeature || type == .apple {
+            analyticasItemList = "In App Package"
+            itemID = appleID
+            
+        } else if [FeaturePackageType?]([.paycellSLCMFeature, .paycellAllAccessFeature]).contains(featureType) ||
+            [PackageType?]([.paycellSLCM, .paycellAllAccess]).contains(type) {
+            analyticasItemList = "Credit Card Package"
+            ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
+            ///Can asked leave creditCard Product Click without id
+            
+        }
+        
+        let product =  AnalyticsPackageProductObject(itemName: package.name,
+                                                     itemID: itemID,
+                                                     price: package.priceString,
+                                                     itemBrand: TextConstants.NotLocalized.GAappName,
+                                                     itemCategory: "Storage",
+                                                     itemVariant: "",
+                                                     index: "\(packageIndex)",
+                                                     quantity: "1")
+        
         let ecommerce: [String : Any] = ["items" : [product.productParametrs],
                                          AnalyticsParameterItemList : analyticasItemList]
         
@@ -359,4 +478,80 @@ extension AnalyticsService: AnalyticsGA {
 //    func stopAllTimelyTracking() {
 //
 //    }
+    
+    func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?) {
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            var parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text
+            ]
+            
+            if let trackNumber = trackNumber {
+                parametrs[GAMetrics.trackNumber.text] = trackNumber
+            }
+            
+            if let playlistNumber = playlistNumber {
+                parametrs[GAMetrics.playlistNumber.text] = playlistNumber
+            }
+            
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?) {
+        prepareDimentionsParametrs(screen: nil) { dimentionParametrs in
+            var parametrs: [String: Any] = [
+                "eventCategory" : eventCategory.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text
+            ]
+            
+            if let errorType = errorType {
+                parametrs[GAMetrics.errorType.text] = errorType.text
+            }
+            
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+}
+
+protocol NetmeraProtocol {
+    static func updateUser()
+    static func startNetmera()
+}
+
+extension AnalyticsService: NetmeraProtocol {
+    static func updateUser() {
+        let user = NetmeraUser()
+        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        
+        Netmera.update(user)
+    }
+    
+    static func startNetmera() {
+        #if LIFEDRIVE
+        return
+        #endif
+        
+        debugLog("Start Netmera")
+        
+        #if DEBUG
+        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
+            assertionFailure("👉 CALL THIS FROM MAIN THREAD")
+        }
+        #endif
+        
+        Netmera.start()
+        
+        #if DEBUG
+        Netmera.setLogLevel(.debug)
+        #endif
+        
+        #if APPSTORE
+        Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
+        #elseif ENTERPRISE || DEBUG
+        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
+        #endif
+    }
 }

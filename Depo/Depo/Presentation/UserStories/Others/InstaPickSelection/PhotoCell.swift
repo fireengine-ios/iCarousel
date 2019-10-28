@@ -14,29 +14,23 @@ final class PhotoCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = ColorConstants.photoCell
         imageView.isOpaque = true
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = ColorConstants.photoCell
         return imageView
     }()
     
     private let selectionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let favouriteImageView: UIImageView = {
-        let rect = CGRect(x: 0, y: 0,
-                          width: Constants.favoriteImageViewSideSize,
-                          height: Constants.favoriteImageViewSideSize)
-        let imageView = UIImageView(frame: rect)
+        let imageView = UIImageView()
         imageView.isHidden = true
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "favoriteStar")
         return imageView
     }()
@@ -85,9 +79,9 @@ final class PhotoCell: UICollectionViewCell {
                                           width: Constants.selectionImageViewSideSize,
                                           height: Constants.selectionImageViewSideSize)
         favouriteImageView.frame = CGRect(x: Constants.edgeInset,
-                                         y: Constants.edgeInset,
-                                         width: Constants.favoriteImageViewSideSize,
-                                         height: Constants.favoriteImageViewSideSize)
+                                          y: Constants.edgeInset,
+                                          width: Constants.favoriteImageViewSideSize,
+                                          height: Constants.favoriteImageViewSideSize)
     }
     
     override func prepareForReuse() {

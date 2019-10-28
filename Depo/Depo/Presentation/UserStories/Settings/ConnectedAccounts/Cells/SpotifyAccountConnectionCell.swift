@@ -39,6 +39,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     @IBOutlet private weak var connectButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named:"dropbox_button"), for: .normal)
+            newValue.setImage(UIImage(named:"dropbox_button"), for: .highlighted)
+            newValue.setImage(UIImage(named:"dropbox_button"), for: .disabled)
         }
     }
     
@@ -54,6 +56,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         return dateFormatter
     }()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         service.delegates.add(self)
@@ -64,11 +68,14 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
-        service.connectToSpotify(isSettingCell: true)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
+        connectButton.isEnabled = false
+        service.connectToSpotify(isSettingCell: true, completion: {
+            self.connectButton.isEnabled = true
+        })
     }
     
     private func setupCell() {
-        hideJobStatusLabel()
         service.getSpotifyStatus { response in
             switch response {
             case .success(let response):
@@ -103,7 +110,6 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
             case .failed:
                 setConnectConditionWithModifyDate(section: section, username: spotifyStatus.userName, jobStatus: spotifyStatus.lastModifiedDate)
-                delegate?.showError(message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError)
             }
             
         } else {
@@ -126,8 +132,8 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
     
     private func setConnectConditionWithModifyDate(section: Section, username: String?, jobStatus: Date?) {
-        hideJobStatusLabel()
         guard let jobStatus = jobStatus else {
+            hideJobStatusLabel()
             return
         }
         

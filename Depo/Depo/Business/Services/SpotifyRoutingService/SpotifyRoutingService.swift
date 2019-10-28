@@ -15,7 +15,10 @@ protocol SpotifyRoutingServiceDelegate: class {
     func spotifyStatusDidChange(_ newStatus: SpotifyStatus)
 }
 
-final class SpotifyRoutingService {
+final class SpotifyRoutingService: NSObject {
+    
+    private var spotifyUrl: URL?
+    private lazy var spotifySDKService = SpotifySDKService(url: spotifyUrl, delegate: self)
     
     private lazy var spotifyService: SpotifyService = factory.resolve()
     private(set) var lastSpotifyStatus: SpotifyStatus? {
@@ -26,6 +29,7 @@ final class SpotifyRoutingService {
         }
     }
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     var delegates = MulticastDelegate<SpotifyRoutingServiceDelegate>()
     private var importInProgress = false
     
@@ -37,7 +41,11 @@ final class SpotifyRoutingService {
         spotifyService.getStatus { [weak self] result in
             switch result {
             case .success(let status):
+                self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification)
                 self?.lastSpotifyStatus = status
+                
+                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+                
                 completion?(.success(status))
             case .failed(let error):
                 completion?(.failed(error))
@@ -53,15 +61,15 @@ final class SpotifyRoutingService {
         }
     }
     
-    func connectToSpotify(isSettingCell: Bool) {
+    func connectToSpotify(isSettingCell: Bool, completion: (() -> Void)?) {
         getSpotifyStatus { [weak self] result in
             guard let self = self else {
                 return
             }
-            
             switch result {
             case .success(let status):
                 if status.isConnected {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                     self.showPlayListsForImport()
                 } else {
                     self.prepareAuthWebPage()
@@ -70,6 +78,7 @@ final class SpotifyRoutingService {
                 //completion(.failed(error))
                 debugPrint(error.localizedDescription)
             }
+            completion?()
         }
     }
     
@@ -77,6 +86,7 @@ final class SpotifyRoutingService {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                 self?.getSpotifyStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
@@ -86,7 +96,12 @@ final class SpotifyRoutingService {
     
     func showImportedPlayLists() {
         let controller = router.spotifyImportedPlaylistsController()
-        router.pushViewController(viewController: controller)
+        self.router.pushViewController(viewController: controller)
+    }
+    
+    func showImportedPlayListsAfterImporting() {
+        let controller = router.spotifyImportedPlaylistsController()
+        router.replaceTopViewControllerWithViewController(controller)
     }
     
     private func showPlayListsForImport() {
@@ -102,12 +117,25 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let url):
-                let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
-                self.router.pushViewController(viewController: controller)
+                self.spotifyUrl = url
+                self.connectToSpotify()
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
         }
+    }
+    
+    private func connectToSpotify() {
+        spotifySDKService.connectToSporify()
+    }
+    
+    func onSpotifyAuthWebViewController() {
+        guard let url = spotifyUrl else {
+            assertionFailure()
+            return
+        }
+        let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)
+        router.pushViewController(viewController: controller)
     }
     
     private func prepareImportPlaylistsController() -> UIViewController {
@@ -135,16 +163,53 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(_):
-                self.checkImportStatus { [weak self] in
-                    /// hide cancel popup if needed
-                    if navigationController.presentedViewController != nil {
-                        navigationController.dismiss(animated: false, completion: {
-                            navigationController.dismiss(animated: true)
+                self.checkImportStatus { [weak self] shouldClosePlaylist in
+                    
+                    func passcodeSafeCloseImportVC() {
+                        /// in case of import error need to hide screen with albums for import
+                        if shouldClosePlaylist {
+                            self?.router.popViewController()
+                        }
+                        navigationController.dismiss(animated: true, completion: {
+                            /// not called if there were no popup
+                            (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
                         })
-                    } else {
-                        navigationController.dismiss(animated: true)
                     }
-                    self?.delegates.invoke(invocation: { $0.importDidComplete() })
+                    
+                    func changePasscodeSuccessCompletionOrInvoke(completion: @escaping () -> Void) {
+                        if let passcodeVC = UIApplication.topController() as? PasscodeEnterViewController {
+                            /// background
+                            let currentPasscodeVCSuccess = passcodeVC.success
+                            passcodeVC.success = {
+                                currentPasscodeVCSuccess?()
+                                completion()
+                            }
+                        } else {
+                            /// foreground
+                            completion()
+                        }
+                    }
+                    
+                    changePasscodeSuccessCompletionOrInvoke {
+                        
+                        /// check for cancel popup or import vc
+                        if navigationController.presentedViewController != nil {
+                            
+                            navigationController.dismiss(animated: true, completion: {
+                                (UIApplication.shared.delegate as? AppDelegate)?.showPasscodeIfNeedInBackground()
+                                
+                                /// close spotifyImportController if need
+                                changePasscodeSuccessCompletionOrInvoke {
+                                    passcodeSafeCloseImportVC()
+                                }
+                            })
+                        } else {
+                            /// close spotifyImportController
+                            passcodeSafeCloseImportVC()
+                        }
+                        
+                        self?.delegates.invoke(invocation: { $0.importDidComplete() })
+                    }
                 }
             case .failed(let error):
                 self.importDidFailed(navigationController, error: error)
@@ -152,7 +217,7 @@ final class SpotifyRoutingService {
         }
     }
     
-    private func checkImportStatus(completion: @escaping VoidHandler) {
+    private func checkImportStatus(completion: @escaping BoolHandler) {
         guard importInProgress else {
             return
         }
@@ -164,12 +229,26 @@ final class SpotifyRoutingService {
             
             switch result {
             case .success(let status):
-                if status.jobStatus == .finished {
+                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
+
+                switch status.jobStatus {
+                case .finished:
                     self.importInProgress = false
                     self.lastSpotifyStatus = status
-                
-                    completion()
-                } else {
+                    
+                    completion(false)
+                case .failed:
+                    let popUpController = PopUpController.with(title: TextConstants.errorAlert,
+                                                     message: TextConstants.Spotify.Import.lastImportFromSpotifyFailedError,
+                                                     image: .error,
+                                                     buttonTitle: TextConstants.ok) { controller in
+                                                        controller.close {
+                                                            completion(true)
+                                                        }
+                    }
+                    
+                    UIApplication.topController()?.present(popUpController, animated: true, completion: nil)
+                default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
                         self?.checkImportStatus(completion: completion)
                     })
@@ -198,6 +277,27 @@ final class SpotifyRoutingService {
                                         })
         controller.present(popup, animated: true)
     }
+    
+    private func importAnalytics(playlists: [SpotifyPlaylist], result: ResponseResult<SpotifyStatus>) {
+        var trackCount = 0
+        for playlist in playlists {
+            trackCount += playlist.count
+        }
+        switch result {
+        case .success(_):
+            let status = GAEventLabel.success.text
+
+            self.analyticsService.trackSpotify(eventActions: .connectedAccounts,
+                                               eventLabel: .importSpotifyResult(status),
+                                               trackNumber: trackCount,
+                                               playlistNumber: playlists.count)
+        case .failed(_):
+            let status = GAEventLabel.failure.text
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotifyResult(status))
+            self.analyticsService.trackImportEvent(error: .networkError)
+            self.analyticsService.trackImportEvent(error: .importError)
+        }
+    }
 }
 
 // MARK: - SpotifyAuthViewControllerDelegate
@@ -206,6 +306,7 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     
     func spotifyAuthSuccess(with code: String) {
         spotifyService.connect(code: code) { [weak self] result in
+            
             self?.getSpotifyStatus { [weak self] result in
                 guard let self = self else {
                     return
@@ -237,6 +338,7 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
             
             switch result {
             case .success(let status):
+                self.importAnalytics(playlists: playlists, result: result)
                 if status.lastModifiedDate == nil {
                     self.importPlaylists(playlists)
                 } else {
@@ -254,7 +356,12 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
         showImportedPlayLists() 
     }
     
+    func onShowImportedAfterImporting() {
+        showImportedPlayListsAfterImporting()
+    }
+    
     func onOpenPlaylist(_ playlist: SpotifyPlaylist) {
+        analyticsService.logScreen(screen: .spotifyImportPlaylistDetails)
         let controller = router.spotifyTracksController(playlist: playlist)
         router.pushViewController(viewController: controller)
     }
@@ -265,18 +372,19 @@ extension SpotifyRoutingService: SpotifyPlaylistsViewControllerDelegate {
 extension SpotifyRoutingService: SpotifyImportControllerDelegate {
     
     func importDidCancel(_ controller: SpotifyImportViewController) {
-        delegates.invoke(invocation: { $0.importDidCanceled() })
-        
         importInProgress = false
-        controller.dismiss(animated: true)
+        router.navigationController?.popViewController(animated: false)
+        controller.dismiss(animated: true, completion: nil)
         
-        spotifyService.stop { result in
+        spotifyService.stop { [weak self] result in
             switch result {
             case .success(_):
                 debugPrint("Spotify import cancelled")
             case .failed(let error):
                 debugPrint(error.localizedDescription)
             }
+            
+            self?.delegates.invoke(invocation: { $0.importDidCanceled() })
         }
     }
     
@@ -285,4 +393,21 @@ extension SpotifyRoutingService: SpotifyImportControllerDelegate {
         router.navigationController?.popViewController(animated: false)
         controller.dismiss(animated: true)
     }
+    
+    func handleRedirectUrl(url: URL) -> Bool {
+       return spotifySDKService.handleRedirectUrl(url: url)
+    }
 }
+
+extension SpotifyRoutingService: SpotifySDKServiceDelegate {
+    
+    func continueSpotifySDKConnectionWithCode(code: String) {
+        spotifyAuthSuccess(with: code)
+    }
+    
+    func showSpotifyAuthWebViewController() {
+        onSpotifyAuthWebViewController()
+    }
+}
+
+ 

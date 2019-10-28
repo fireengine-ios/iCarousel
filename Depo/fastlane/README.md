@@ -35,6 +35,16 @@ fastlane beta_diawi
 fastlane beta_diawi_preprod
 ```
 
+### beta_diawi_prod
+```
+fastlane beta_diawi_prod
+```
+
+### build_prod_and_preprod
+```
+fastlane build_prod_and_preprod
+```
+
 ### beta_fabric
 ```
 fastlane beta_fabric
@@ -50,11 +60,21 @@ fastlane beta_fabric_preprod
 fastlane my_scan
 ```
 run tests
+### beta_fabric_lifedrive
+```
+fastlane beta_fabric_lifedrive
+```
+
 ### my_gym
 ```
 fastlane my_gym
 ```
 Create ipa
+### my_gym_lifedrive
+```
+fastlane my_gym_lifedrive
+```
+
 ### diawi
 ```
 fastlane diawi
@@ -80,6 +100,11 @@ fastlane notify_about_completion
 fastlane poeditor_download
 ```
 
+### fix_build_number
+```
+fastlane fix_build_number
+```
+
 ### switch_to_preprod
 ```
 fastlane switch_to_preprod
@@ -88,6 +113,21 @@ fastlane switch_to_preprod
 ### switch_to_prod
 ```
 fastlane switch_to_prod
+```
+
+### create_new_branch
+```
+fastlane create_new_branch
+```
+
+### increment_version
+```
+fastlane increment_version
+```
+
+### set_build_number
+```
+fastlane set_build_number
 ```
 
 ### test_get_build_number

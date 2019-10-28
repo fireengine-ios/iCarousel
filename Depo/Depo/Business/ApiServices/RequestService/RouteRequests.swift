@@ -29,6 +29,15 @@ struct RouteRequests {
         }
     }()
     
+    
+    static let paycellShortUrlString: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://mylifebox.com/"
+        }
+    }()
+    
     static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
@@ -199,6 +208,11 @@ struct RouteRequests {
         static let importedTracks = importedPlaylists +/ "track"
     }
     
+    // MARK: - Campaign
+    
+    static let campaignApi = baseUrl +/ "campaign"
+    static let campaignPhotopick = campaignApi +/ "photopick"
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
@@ -233,9 +247,14 @@ struct RouteRequests {
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
+
+        static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
+        static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
+        static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         
         enum Settings {
-            static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
+            /// without "s" at the end
+            static let settingsApi = Account.accountApi +/ "setting" 
             
             static let accessInformation = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
@@ -276,4 +295,6 @@ struct RouteRequests {
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+    
+    static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 }

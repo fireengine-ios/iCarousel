@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>27.10</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -53,8 +53,11 @@
 	<string>531658366898592</string>
 	<key>FacebookDisplayName</key>
 	<string>lifebox</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>spotify</string>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
 		<string>fbapi</string>
@@ -117,6 +120,10 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>lifebox needs to access your bluetooth permission in order to send you push messages in specific areas</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
@@ -246,5 +253,7 @@
 			</dict>
 		</dict>
 	</array>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 </dict>
 </plist>

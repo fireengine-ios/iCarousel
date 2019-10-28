@@ -11,11 +11,13 @@ end
 
 def core_pods
   shared_pods
+  pod 'Xtremepush-iOS-SDK'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Netmera'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
@@ -23,7 +25,6 @@ def core_pods
   pod 'GoogleTagManager'
   pod 'Adjust'
   #pod 'ActiveLabel'
-
 
   #Keyboard
   pod 'Typist', '~> 1.1.0'
@@ -52,9 +53,32 @@ def core_pods
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 
+  pod 'SwiftyGif', '4.1.0'
 end
 
 target 'Depo_LifeTech' do
+	core_pods
+end
+
+target 'LifeTech-LifeboxShared' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech-LifeboxFileProvider' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech-LifeboxFileProviderUI' do
+    shared_pods
+end
+
+target 'LifeTech-autosync-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'TC_Depo_LifeTech' do
 	core_pods
 end
 
@@ -74,10 +98,6 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-end
-
-target 'TC_Depo_LifeTech' do
-	core_pods
 end
 
 target 'LifeboxUnitTests' do
@@ -108,7 +128,7 @@ end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
-        if ['XCGLogger', 'netfox'].include? "#{target}"
+        if ['XCGLogger', 'SwiftyJSON'].include? "#{target}"
             print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_VERSION'] = '4.0'
@@ -120,9 +140,9 @@ post_install do |installer|
         end
     end
 
-    print "Setting the default SWIFT_VERSION to 3.0\n"
+    print "Setting the default SWIFT_VERSION to 4.0\n"
     installer.pods_project.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.0'
+        config.build_settings['SWIFT_VERSION'] = '4.0'
         config.build_settings['ENABLE_BITCODE'] = 'YES'
     end
 
