@@ -85,7 +85,7 @@ final class CreateStoryViewController: BaseViewController {
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            newValue.layer.shadowColor = ColorConstants.backgroundViewColor.cgColor
         }
     }
     

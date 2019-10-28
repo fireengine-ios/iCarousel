@@ -262,18 +262,38 @@ extension InstapickServiceImpl: InstapickService {
     // MARK: - Utility methods
     private func dismissPopup(popupToDissmiss: UIViewController, analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
         popupToDissmiss.dismiss(animated: true, completion: {
+                
+            let instaPickCampaignService = InstaPickCampaignService()
             
-            if let currentController = UIApplication.topController() {
-                let router = RouterVC()
-                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
-                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
-                                                                                      analyzesCount: analyzesCount,                            isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
-                currentController.present(instapickDetailControlller, animated: true, completion: nil)
-            } else {
-                /// nothing to show
-                assertionFailure()
+            instaPickCampaignService.getController { [weak self] navController in
+                if let navController = navController,
+                    let controller = navController.topViewController as? InstaPickCampaignViewController,
+                    let topVC = UIApplication.topController()
+                {
+                    controller.didClosed = {
+                        self?.showResultWithoutCampaign(analyzesCount: analyzesCount, analysis: analysis)
+                    }
+                    topVC.present(navController, animated: true, completion: nil)
+                } else {
+                    self?.showResultWithoutCampaign(analyzesCount: analyzesCount, analysis: analysis)
+                }
             }
         })
+    }
+    
+    private func showResultWithoutCampaign(analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
+        if let currentController = UIApplication.topController() {
+            let router = RouterVC()
+            (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
+            
+            let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
+                                                                                  analyzesCount: analyzesCount,                            isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
+            
+            currentController.present(instapickDetailControlller, animated: true, completion: nil)
+        } else {
+            /// nothing to show
+            assertionFailure()
+        }
     }
     
     private func isGridRelatedController(controller: UIViewController?) -> Bool {
