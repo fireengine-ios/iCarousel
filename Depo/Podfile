@@ -78,6 +78,11 @@ target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
 end
 
+target "LifeTech-NotificationService" do
+  pod 'Netmera'
+  pod 'iCarousel'
+end
+
 target 'TC_Depo_LifeTech' do
 	core_pods
 end
