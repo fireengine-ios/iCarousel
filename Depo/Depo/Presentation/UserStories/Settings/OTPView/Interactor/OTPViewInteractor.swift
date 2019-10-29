@@ -90,9 +90,9 @@ class OTPViewInteractor: PhoneVerificationInteractor {
         let numberUpdateIsCalled = (response != nil)
         
         if numberUpdateIsCalled {
-            updatePhoneNumberBeforeOTP()
-        } else {
             confirmPhoneNumberUdpate()
+        } else {
+            updatePhoneNumberBeforeOTP()
         }
     }
     
