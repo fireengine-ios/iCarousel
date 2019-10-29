@@ -27,7 +27,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     private var notPermittedPopUpViewTypes = Set<String>()
     
-    private var isFinishedLoading: Bool = false
+    private var isFinishedLoading = false
     
     private var popUpsOffset = 0
     private var insertPopUps = [BaseView]()
@@ -85,7 +85,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         if !isEnable {
             isPermitted = false
             
-        } else if notPermittedPopUpViewTypes.count == 0 {
+        } else if notPermittedPopUpViewTypes.isEmpty {
             
             isPermitted = true
         } else {
