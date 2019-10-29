@@ -71,7 +71,7 @@ class ErrorBannerView: UIView {
         layer.addSublayer(underlineLayer)
         addSubview(messageLabel)
         
-        messageLabel.text = message
+        messageLabel.text = ""
         
         setupLayout()
     }
