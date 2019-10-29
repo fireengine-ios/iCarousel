@@ -127,7 +127,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     }
     
     private func refreshPremiumCard() {
-        if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard,
+        if let view = popUps.first(where: { $0 is PremiumInfoCard }) as? PremiumInfoCard,
             (view.isPremium != AuthoritySingleton.shared.accountType.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
                         
             view.configurateWithType(viewType: .premium)
