@@ -17,6 +17,7 @@
                 <outlet property="alertsStackView" destination="JO9-w0-uO5" id="gyK-De-OCw"/>
                 <outlet property="bannerView" destination="7Qf-md-ArO" id="3m9-CI-6ik"/>
                 <outlet property="captchaView" destination="lBm-t6-08H" id="Q30-YR-Uaa"/>
+                <outlet property="errorView" destination="w1M-wl-mXs" id="2sT-Ta-onV"/>
                 <outlet property="nextButton" destination="Iei-Qg-JRc" id="3dp-rD-Uub"/>
                 <outlet property="scrollView" destination="00F-PK-XuO" id="VgG-X8-VHv"/>
                 <outlet property="stackView" destination="P2f-Nq-OPJ" id="I51-Rv-Ewr"/>
@@ -32,18 +33,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQn-yz-ygb" userLabel="Container View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JO9-w0-uO5" userLabel="Alerts Stack View">
-                                    <rect key="frame" x="16" y="0.0" width="382" height="52"/>
+                                    <rect key="frame" x="16" y="16" width="382" height="102"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ5-DB-pO9">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" id="Xes-rH-gWf"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Qf-md-ArO" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
                                             <subviews>
@@ -83,22 +77,21 @@
                                                 <outlet property="messageLabel" destination="u2O-pt-zlI" id="u0A-45-cfO"/>
                                             </connections>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1M-wl-mXs" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="52" width="382" height="50"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </view>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="7Qf-md-ArO" secondAttribute="bottom" id="Kep-Ww-SsQ"/>
-                                        <constraint firstItem="7Qf-md-ArO" firstAttribute="leading" secondItem="JO9-w0-uO5" secondAttribute="leading" id="LPM-w0-03P"/>
-                                        <constraint firstAttribute="trailing" secondItem="7Qf-md-ArO" secondAttribute="trailing" id="mDw-57-X5q"/>
-                                    </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVV-xV-h3m">
-                                    <rect key="frame" x="0.0" y="68" width="414" height="400"/>
+                                    <rect key="frame" x="0.0" y="134" width="414" height="400"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="400" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-Nq-OPJ">
-                                    <rect key="frame" x="20" y="68" width="374" height="400"/>
+                                    <rect key="frame" x="20" y="134" width="374" height="400"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="94P-4Q-I5x">
-                                    <rect key="frame" x="20" y="492" width="374" height="72"/>
+                                    <rect key="frame" x="20" y="558" width="374" height="72"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="lBm-t6-08H" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
@@ -106,7 +99,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Qg-JRc" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="588" width="228" height="44"/>
+                                    <rect key="frame" x="93" y="654" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="hPb-59-wQd"/>
                                     </constraints>
@@ -126,7 +119,7 @@
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="top" secondItem="P2f-Nq-OPJ" secondAttribute="bottom" constant="24" id="Kgq-3h-C0K"/>
                                 <constraint firstItem="JO9-w0-uO5" firstAttribute="leading" secondItem="LQn-yz-ygb" secondAttribute="leading" constant="16" id="Kpv-94-asx"/>
                                 <constraint firstAttribute="bottom" secondItem="Iei-Qg-JRc" secondAttribute="bottom" constant="24" id="Pcd-TK-dKr"/>
-                                <constraint firstItem="JO9-w0-uO5" firstAttribute="top" secondItem="LQn-yz-ygb" secondAttribute="top" id="Xuz-df-Jsy"/>
+                                <constraint firstItem="JO9-w0-uO5" firstAttribute="top" secondItem="LQn-yz-ygb" secondAttribute="top" constant="16" id="Xuz-df-Jsy"/>
                                 <constraint firstItem="bVV-xV-h3m" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="aLc-E9-q9Y"/>
                                 <constraint firstItem="bVV-xV-h3m" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" id="f3r-Hq-gx6"/>
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="leading" secondItem="LQn-yz-ygb" secondAttribute="leading" constant="20" id="hrY-KR-UCC"/>
