@@ -64,7 +64,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
-        
     }
     
     private func getCampaignStatus() {

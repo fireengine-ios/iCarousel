@@ -88,8 +88,6 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
                         baseView.viewDeletedBySwipe()
                     }
                 }
-                
-                self.cellDelegate?.onCellDeleted(cell: self)
             }
         }
     }
