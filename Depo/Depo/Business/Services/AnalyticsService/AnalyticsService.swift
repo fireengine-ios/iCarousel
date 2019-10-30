@@ -553,5 +553,7 @@ extension AnalyticsService: NetmeraProtocol {
         #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
         #endif
+        
+        Netmera.setAppGroupName(SharedConstants.groupIdentifier)
     }
 }
