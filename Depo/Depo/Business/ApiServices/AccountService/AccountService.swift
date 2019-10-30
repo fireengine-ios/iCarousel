@@ -550,7 +550,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
 #if LIFEBOX
         params["brandType"] = "LIFEBOX"
 #elseif LIFEDRIVE
-        params["brandType"] = "LIFEDRIVE"
+        params["brandType"] = "BILLO"
 #endif
         
         sessionManager.request(RouteRequests.Account.Settings.settingsApi,
