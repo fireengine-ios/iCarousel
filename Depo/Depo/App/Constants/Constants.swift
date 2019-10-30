@@ -24,7 +24,7 @@ struct TextConstants {
         
         static let appName: String = {
             #if LIFEDRIVE
-            return "LIFEDRIVE"
+            return "BILLO"
             #else
             return "LIFEBOX"
             #endif
