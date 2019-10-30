@@ -31,6 +31,17 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         }
     }
     
+    @IBOutlet private weak var analyzeButtonShadowView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = false
+            newValue.layer.cornerRadius = analyzeButton.layer.cornerRadius
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = CGSize(width: 0, height: 3)
+            newValue.layer.shadowPath = UIBezierPath(roundedRect: newValue.bounds, cornerRadius: analyzeButton.layer.cornerRadius).cgPath
+        }
+    }
+    
     @IBOutlet private weak var analyzeView: UIView! {
         willSet {
             let gradientView = TransparentGradientView(style: .vertical, mainColor: .white)
@@ -38,15 +49,6 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             newValue.addSubview(gradientView)
             newValue.sendSubview(toBack: gradientView)
             gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            let buttonShadowView = UIView(frame: analyzeButton.frame)
-            buttonShadowView.layer.masksToBounds = false
-            buttonShadowView.layer.cornerRadius = analyzeButton.layer.cornerRadius
-            buttonShadowView.layer.shadowOpacity = 0.5
-            buttonShadowView.layer.shadowColor = UIColor.black.cgColor
-            buttonShadowView.layer.shadowOffset = CGSize(width: 0, height: 3)
-            buttonShadowView.layer.shadowPath = UIBezierPath(roundedRect: buttonShadowView.bounds, cornerRadius: analyzeButton.layer.cornerRadius).cgPath
-            newValue.insertSubview(buttonShadowView, belowSubview: analyzeButton)
         }
     }
 
