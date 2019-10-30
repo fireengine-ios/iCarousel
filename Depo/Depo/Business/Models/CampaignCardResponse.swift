@@ -88,8 +88,6 @@ final class CampaignCardResponse {
             let detailsUrl = json[ResponseKey.detailsUrl].url,
             let imageUrl = json[ResponseKey.imageUrl].url,
             let messageType = MessageType(rawValue: content[ResponseKey.messageType].stringValue),
-            let title = content[ResponseKey.title].string,
-            let message = content[ResponseKey.message].string,
             
             let totalUsed = usage[ResponseKey.totalUsed].int,
             let maxDailyLimit = usage[ResponseKey.maxDailyLimit].int,
@@ -103,6 +101,9 @@ final class CampaignCardResponse {
             return nil
         }
 
+        let title = content[ResponseKey.title].string ?? ""
+        let message = content[ResponseKey.message].string ?? ""
+        
         self.init(detailsUrl: detailsUrl, imageUrl: imageUrl, messageType: messageType, title: title, message: message, totalUsed: totalUsed, dailyUsed: dailyUsed, maxDailyLimit: maxDailyLimit, dailyRemaining: dailyRemaining, startDate: startDate, endDate: endDate, launchDate: launchDate)
     }
 }

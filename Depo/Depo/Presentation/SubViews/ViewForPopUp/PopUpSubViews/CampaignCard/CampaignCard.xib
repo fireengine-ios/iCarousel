@@ -87,18 +87,18 @@
                                         <constraint firstAttribute="height" constant="1" id="qw7-FT-1Us"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="v1J-F9-fyS">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="v1J-F9-fyS">
                                     <rect key="frame" x="16" y="8" width="750" height="35"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqY-lp-Hif">
-                                            <rect key="frame" x="0.0" y="0.0" width="201.5" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="228.5" height="35"/>
                                             <state key="normal" title="Compaign Detail"/>
                                             <connections>
                                                 <action selector="campaignDetailButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="UG7-7L-D7o"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTj-Pw-sq4">
-                                            <rect key="frame" x="351.5" y="0.0" width="398.5" height="35"/>
+                                            <rect key="frame" x="328.5" y="0.0" width="421.5" height="35"/>
                                             <state key="normal" title="Analyze with PhotoPick"/>
                                             <connections>
                                                 <action selector="analyzePhotoPickButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="J10-e9-mCG"/>
