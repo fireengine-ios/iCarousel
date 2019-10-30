@@ -86,7 +86,8 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        // TODO: wating for FE-1682
-        print("+ TODO: wating for FE-1682")
+        let router = RouterVC()
+        let controller = router.campaignDetailViewController()
+        router.pushViewController(viewController: controller)
     }
 }
