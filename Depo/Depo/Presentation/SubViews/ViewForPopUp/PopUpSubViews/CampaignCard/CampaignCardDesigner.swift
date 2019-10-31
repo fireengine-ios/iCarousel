@@ -28,7 +28,7 @@ final class CampaignCardDesigner: NSObject {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
         }
     }
     
