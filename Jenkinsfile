@@ -62,6 +62,8 @@ def readVersion = { app ->
     def appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
     //def declaredBuild = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' ${infoFile}"
     //appVersion = "${declaredVersion.trim()}.${declaredBuild.trim()}"
+
+    // Long version on artifactory. Will contain branch name and build number for uniqueness
     app.version = "${appVersion.trim()}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
 
     echo "Building app: ${app.name} version: ${app.version}"
