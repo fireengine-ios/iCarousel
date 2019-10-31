@@ -1537,4 +1537,8 @@ struct TextConstants {
     static let campaignDetailInfoTitle = NSLocalizedString("campaign_detail_info_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let campaignDetailInfoDescription = NSLocalizedString("campaign_detail_info_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryEmptyNameError = NSLocalizedString("create_story_empty_name_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    static let photopickHistoryCampaignContestTotalDraw = NSLocalizedString("photopick_history_campaign_contest_total_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photopickHistoryCampaignRemainingDraw = NSLocalizedString("photopick_history_campaign_contest_remaining_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

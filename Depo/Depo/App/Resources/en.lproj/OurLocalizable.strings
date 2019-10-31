@@ -1300,3 +1300,6 @@
 "AccessibilityGiftButton" = "AccessibilityGiftButton";
 "AccessibilityGiftButton" = "Gift Box Button";
 "create_story_empty_name_error" = "Story name must not be empty";
+
+"photopick_history_campaign_contest_total_draw" = "Total Draw/Raffle";
+"photopick_history_campaign_contest_remaining_draw" = "Daily Draw Left";
