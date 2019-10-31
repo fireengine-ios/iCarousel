@@ -340,6 +340,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             interactor.trackClickOnPhotoOrVideo(isPhoto: false)
         } else if item.fileType == .image {
             interactor.trackClickOnPhotoOrVideo(isPhoto: true)
+        } else {
+            interactor.trackItemsSelected(item: item)
         }
         
         if item.fileType.isSupportedOpenType {

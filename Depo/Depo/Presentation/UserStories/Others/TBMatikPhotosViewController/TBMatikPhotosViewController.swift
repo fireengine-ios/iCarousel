@@ -108,6 +108,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private lazy var fileService = FileService.shared
     private lazy var cacheManager = CacheManager.shared
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var uuids = [String]()
     private var items = [String: Item]()
@@ -139,6 +140,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        track(screen: .tbmatikPhotoPage)
         configure()
         
         if items.isEmpty {
@@ -160,6 +162,11 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
         carouselItemFrameHeight = carousel.bounds.height
+    }
+    
+    private func track(screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func configure() {
@@ -231,10 +238,13 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @IBAction private func onShare() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .tbmatik(.share))
         shareManager.shareCurrentItem()
     }
     
     @IBAction private func onSeeTimeline() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.seeTimeline))
+        
         guard let item = currentItem,
             let tabbarController = RouterVC().tabBarController else {
             assertionFailure()
@@ -300,6 +310,8 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
         pageControl.currentPage = carousel.currentItemIndex
         updateTitle()
 
+        track(screen: .tbmatikSwipePhoto(carousel.currentItemIndex + 1))
+        
         carousel.visibleItemViews.forEach { view in
             if let itemView = view as? TBMatikPhotoView {
                 itemView.needShowShadow = itemView.tag == carousel.currentItemIndex

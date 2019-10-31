@@ -51,12 +51,21 @@ final class TBMatikCard: BaseView {
     
     private let imageDownloder = ImageDownloder()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     /// "func set(object:" called twice.
     /// you can find comment 'seems like duplicated logic "set(object:".' in the project.
     /// if you cannot find it then drop logic for this variable.
     private var isCardSetuped = false
     
     private var items = [Item]()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        analyticsService.logScreen(screen: .tbmatikHomePageCard)
+        analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikHomePageCard)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -182,6 +191,8 @@ final class TBMatikCard: BaseView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.letsSee))
+        
         guard items.hasItems else {
             return
         }
@@ -190,6 +201,7 @@ final class TBMatikCard: BaseView {
     }
     
     @IBAction private func onCloseButton(_ sender: UIButton) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.close))
         deleteCard()
     }
 }

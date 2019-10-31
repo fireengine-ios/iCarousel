@@ -77,5 +77,10 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
             }
         }
     }
-
+    
+    override func trackItemsSelected(item: BaseDataSourceItem) {
+        if let album = item as? AlbumItem, album.isTBMatik {
+            analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.selectAlbum))
+        }
+    }
 }
