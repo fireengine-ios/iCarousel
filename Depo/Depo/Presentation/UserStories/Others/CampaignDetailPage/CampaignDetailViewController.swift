@@ -102,16 +102,16 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     }
     
     private func updateUI(details: CampaignCardResponse) {
-        if details.startDate.timeIntervalSinceNow > 0 && details.endDate.timeIntervalSinceNow < 0 {
-            analyzeView.isHidden = true
+        if details.startDate.timeIntervalSinceNow < 0 && details.endDate.timeIntervalSinceNow > 0 {
+            analyzeView.isHidden = false
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
-            scrollView.contentInset = .zero
+            scrollView.contentInset.bottom = analyzeView.frame.height
         } else {
             campaignIntroView.isHidden = true
             campaignInfoView.isHidden = false
-            analyzeView.isHidden = false
-            scrollView.contentInset.bottom = analyzeView.frame.height
+            analyzeView.isHidden = true
+            scrollView.contentInset = .zero
         }
         
         imageView.loadImage(url: details.imageUrl)
