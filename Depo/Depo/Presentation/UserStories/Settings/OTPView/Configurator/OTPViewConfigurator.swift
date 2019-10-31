@@ -18,11 +18,8 @@ class OTPViewModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = OTPViewInteractor()
+        let interactor = OTPViewInteractor(userInfo: userInfo, phoneNumber: phoneNumber, response: response)
         interactor.output = presenter
-        interactor.response = response
-        interactor.userInfo = userInfo
-        interactor.phoneNumberString = phoneNumber
 
         presenter.interactor = interactor
         viewController.output = presenter
