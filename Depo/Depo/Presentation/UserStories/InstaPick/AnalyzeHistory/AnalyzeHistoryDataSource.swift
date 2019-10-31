@@ -131,7 +131,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     func reloadCards(with analysisCount: InstapickAnalyzesCount) {
         self.analysisCount = analysisCount
         cards = [analysisCount.isFree ? .free : .analysis]
-        reloadSection(.cards)
+        
+        if campaignCard == nil {
+            reloadSection(.cards)
+        }
     }
     
     func showCampaignCard(with campaignCard: CampaignCardResponse) {
