@@ -24,7 +24,8 @@ final class InstapickServiceImpl {
     private enum Keys {
         static let serverValue = "value"
     }
-
+    
+    private let instaPickCampaignService = InstaPickCampaignService()
     private let sessionManager: SessionManager
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     let delegates = MulticastDelegate<InstaPickServiceDelegate>()
@@ -263,9 +264,7 @@ extension InstapickServiceImpl: InstapickService {
     private func dismissPopup(popupToDissmiss: UIViewController, analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
         popupToDissmiss.dismiss(animated: true, completion: {
                 
-            let instaPickCampaignService = InstaPickCampaignService()
-            
-            instaPickCampaignService.getController { [weak self] navController in
+            self.instaPickCampaignService.getController { [weak self] navController in
                 if let navController = navController,
                     let controller = navController.topViewController as? InstaPickCampaignViewController,
                     let topVC = UIApplication.topController()
