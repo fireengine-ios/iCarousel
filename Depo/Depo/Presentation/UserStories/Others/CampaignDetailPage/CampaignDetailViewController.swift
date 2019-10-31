@@ -102,7 +102,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     }
     
     private func updateUI(details: CampaignCardResponse) {
-        if details.startDate.timeIntervalSinceNow < 0 && details.endDate.timeIntervalSinceNow > 0 {
+        if (details.startDate...details.endDate).contains(Date()) {
             analyzeView.isHidden = false
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
