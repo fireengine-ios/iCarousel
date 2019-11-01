@@ -10,6 +10,8 @@ import UIKit
 
 class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     var tableDataMArray = [[BaseDataSourceItem]]()
     
     func configurateWithArray(array: [[BaseDataSourceItem]]) {
@@ -109,6 +111,9 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             }
         }
         
+        if albums.first(where: { $0.isTBMatik }) != nil {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete, eventLabel: .tbmatik(.deleteAlbum))
+        }
     }
     
     override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {

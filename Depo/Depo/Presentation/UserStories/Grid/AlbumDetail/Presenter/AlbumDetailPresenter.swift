@@ -10,6 +10,8 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     weak var albumDetailModuleOutput: AlbumDetailModuleOutput?
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     func operationStarted(type: ElementTypes) {
         
     }
@@ -107,5 +109,13 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     override func updateThreeDotsButton() {
         view?.setThreeDotsMenu(active: true)
+    }
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        super.didDelete(items: items)
+        
+        if let album = (interactor as? AlbumDetailInteractor)?.album, album.isTBMatik {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deletePhoto))
+        }
     }
 }
