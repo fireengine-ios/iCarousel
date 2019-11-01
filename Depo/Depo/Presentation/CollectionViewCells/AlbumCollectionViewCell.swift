@@ -29,10 +29,7 @@ final class AlbumCellView: UIView {
         }
     }
     
-    private let kLayerNameGradientBorder = "GradientBorderLayer"
-    private var imageGradientBorder: CAGradientLayer? {
-        return imageBorderView.layer.sublayers?.first(where: { $0.name == kLayerNameGradientBorder }) as? CAGradientLayer
-    }
+    private var imageGradientBorderLayer: CAGradientLayer?
     
     // MARK: - Setup
     
@@ -60,7 +57,8 @@ final class AlbumCellView: UIView {
         if album.isTBMatik {
             setupGradientBorder()
         } else {
-            imageGradientBorder?.removeFromSuperlayer()
+            imageGradientBorderLayer?.removeFromSuperlayer()
+            imageGradientBorderLayer = nil
         }
     }
     
@@ -78,27 +76,26 @@ final class AlbumCellView: UIView {
     // MARK: Gradient Image Border
     
     private func setupGradientBorder() {
-        guard imageGradientBorder == nil else {
+        guard imageGradientBorderLayer == nil else {
             return
         }
         
-        let border = CAGradientLayer()
-        border.name = kLayerNameGradientBorder
-        border.frame = imageBorderView.bounds
+        let imageGradientBorderLayer = CAGradientLayer()
+        imageGradientBorderLayer.frame = imageBorderView.bounds
         let colors = [ColorConstants.lightTeal, ColorConstants.apricotTwo, ColorConstants.rosePink]
-        border.colors = colors.map { return $0.cgColor }
-        border.startPoint = .zero
-        border.endPoint = CGPoint(x: 1.0, y: 1.0)
+        imageGradientBorderLayer.colors = colors.map { return $0.cgColor }
+        imageGradientBorderLayer.startPoint = .zero
+        imageGradientBorderLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         
         let mask = CAShapeLayer()
-        mask.path = UIBezierPath(roundedRect: border.bounds, cornerRadius: 0).cgPath
+        mask.path = UIBezierPath(roundedRect: imageBorderView.bounds, cornerRadius: 0).cgPath
         mask.fillColor = UIColor.clear.cgColor
         mask.strokeColor = UIColor.white.cgColor
         mask.lineWidth = 5
         
-        border.mask = mask
+        imageGradientBorderLayer.mask = mask
 
-        imageBorderView.layer.addSublayer(border)
+        imageBorderView.layer.addSublayer(imageGradientBorderLayer)
     }
 }
 
