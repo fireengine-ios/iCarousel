@@ -140,7 +140,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        track(screen: .tbmatikPhotoPage)
         configure()
         
         if items.isEmpty {

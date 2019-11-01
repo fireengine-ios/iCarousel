@@ -200,7 +200,7 @@ enum AnalyticsAppScreens {
 
     case info(FileType)
     
-    case tbmatikPhotoPage
+    case tbmatikPushNotification
     case tbmatikHomePageCard
     case tbmatikSwipePhoto(_ page: Int)
     
@@ -374,7 +374,7 @@ enum AnalyticsAppScreens {
             
         case .tbmatikHomePageCard:
             return "Home-Page Card-TBMatik"
-        case .tbmatikPhotoPage:
+        case .tbmatikPushNotification:
             return "Push-Notification-TBMatik"
         case .tbmatikSwipePhoto(let page):
             return "TBMatik Swipe \(page)"

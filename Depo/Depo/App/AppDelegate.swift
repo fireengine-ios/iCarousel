@@ -400,7 +400,8 @@ extension AppDelegate {
         // track receiving TBMatik Push notifications
         if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
             pushType == PushNotificationAction.tbmatic.rawValue {
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
+            analyticsService.logScreen(screen: .tbmatikPushNotification)
+            analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
         }
     }
     
