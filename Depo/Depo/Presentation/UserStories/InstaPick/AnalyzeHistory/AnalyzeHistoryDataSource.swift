@@ -364,9 +364,8 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
                 
                 let cell = InstapickCampaignCell.initFromNib()
                 cell.setup(with: campaignCard)
-                /// max need to fix random number from "sizeToFit(width" (173.66 and 177.66)
+                /// "max" need to fix random number from "sizeToFit(width" (173.66 and 177.66)
                 let height = max(cell.sizeToFit(width: cellWidth).height, AnalyzeHistoryCardType.campaign.cellHeight)
-                print("+++ \(height), \(cellWidth)")
                 return CGSize(width: cellWidth, height: height)
                 
             case .empty:
