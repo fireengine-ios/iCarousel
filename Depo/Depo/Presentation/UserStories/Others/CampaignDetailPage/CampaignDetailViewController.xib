@@ -41,7 +41,7 @@
                                             <rect key="frame" x="35" y="0.0" width="344" height="133"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="lZT-bn-AYd" secondAttribute="height" multiplier="344:133" id="yUp-Ec-UBQ"/>
+                                                <constraint firstAttribute="width" secondItem="lZT-bn-AYd" secondAttribute="height" multiplier="344:133" priority="250" id="yUp-Ec-UBQ"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -342,7 +342,7 @@
                             <rect key="frame" x="104" y="35" width="206" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Kfz-L8-Xwk"/>
-                                <constraint firstAttribute="width" constant="206" id="xwd-bg-Tyh"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="206" id="xwd-bg-Tyh"/>
                             </constraints>
                             <state key="normal" title="Button"/>
                             <connections>
