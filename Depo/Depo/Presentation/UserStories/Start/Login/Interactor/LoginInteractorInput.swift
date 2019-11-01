@@ -28,6 +28,7 @@ protocol LoginInteractorInput {
     func checkCaptchaRequerement()
     
     func trackScreen()
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)
     
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     

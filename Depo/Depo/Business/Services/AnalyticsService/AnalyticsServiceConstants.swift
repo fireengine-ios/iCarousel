@@ -551,6 +551,8 @@ enum GAEventAction {
     case clickQuotaPurchase
     case clickFeaturePurchase
     case tbmatik
+    case supportLogin
+    case supportSignUp
 
     var text: String {
         switch self {
@@ -661,6 +663,10 @@ enum GAEventAction {
             return "Click Feature Purchase"
         case .tbmatik:
             return "TBMatik"
+        case .supportLogin:
+            return "Support Form - Login"
+        case .supportSignUp:
+            return "Support Form - Sign Up"
         }
     }
 }
@@ -805,6 +811,50 @@ enum GAEventLabel {
         }
     }
     
+    enum SupportFormSubjectLoginEvent {
+        case subject1
+        case subject2
+        case subject3
+        case subject4
+        case subject5
+        case subject6
+        case subject7
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            case .subject4: text += "Q4"
+            case .subject5: text += "Q5"
+            case .subject6: text += "Q6"
+            case .subject7: text += "Q7"
+            }
+            
+            return text
+        }
+    }
+    
+    enum SupportFormSubjectSignUpEvent {
+        case subject1
+        case subject2
+        case subject3
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            }
+            
+            return text
+        }
+    }
+    
     case empty
     
     case success
@@ -882,7 +932,9 @@ enum GAEventLabel {
     case storyOrVideo
     case tbmatik(_ event: TBMatikEvent)
     case paymentType(_ type: QuotaPaymentType)
-
+    case supportLoginForm(_ event: SupportFormSubjectLoginEvent, isSupportForm: Bool)
+    case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
+    
     var text: String {
         switch self {
         case .empty:
@@ -1055,6 +1107,10 @@ enum GAEventLabel {
             return type.text
         case .tbmatik(let event):
             return event.text
+        case .supportLoginForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
+        case .supportSignUpForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
         }
     }
     
