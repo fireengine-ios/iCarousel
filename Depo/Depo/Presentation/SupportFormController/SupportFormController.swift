@@ -92,15 +92,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextPickerView()
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
-
         newValue.textField.quickDismissPlaceholder = TextConstants.pleaseChooseSubject
-        newValue.models = [TextConstants.onLoginSupportFormSubject1,
-                           TextConstants.onLoginSupportFormSubject2,
-                           TextConstants.onLoginSupportFormSubject3,
-                           TextConstants.onLoginSupportFormSubject4,
-                           TextConstants.onLoginSupportFormSubject5,
-                           TextConstants.onLoginSupportFormSubject6,
-                           TextConstants.onLoginSupportFormSubject7]
         return newValue
     }()
     
