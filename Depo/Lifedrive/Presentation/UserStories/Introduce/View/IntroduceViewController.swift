@@ -46,16 +46,14 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             let font: UIFont
             if Device.isIpad {
-                font = UIFont.TurkcellSaturaMedFont(size: 27)
+                font = UIFont.TurkcellSaturaBolFont(size: 27)
             } else {
-                font = UIFont.TurkcellSaturaMedFont(size: 18)
+                font = UIFont.TurkcellSaturaBolFont(size: 18)
             }
             let attributedTitle = NSAttributedString(string: TextConstants.introCreateAccountButton,
                                                      attributes:  [.foregroundColor : ColorConstants.darkBlueColor,
-                                                                   .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                                                                   .underlineStyle : NSUnderlineStyle.styleNone.rawValue,
                                                                    .font : font])
-//            newValue.setTitle(TextConstants.introCreateAccountButton, for: .normal)
-//            newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
             newValue.setAttributedTitle(attributedTitle, for: .normal)
             newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
             newValue.layer.borderWidth = 2
