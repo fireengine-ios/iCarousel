@@ -12,6 +12,7 @@ protocol SupportFormSubjectTypeProtocol {
     var localizedSubject: String { get }
     var localizedTitle: String { get }
     var localizedInfoHtml: String { get }
+    func googleAnalyticsEventLabel(isSupportForm: Bool) -> GAEventLabel
 }
 
 enum SupportFormScreenType {
@@ -24,6 +25,15 @@ enum SupportFormScreenType {
             return SupportFormSubjectTypeLogin.allCases
         case .signup:
             return SupportFormSubjectTypeSignup.allCases
+        }
+    }
+    
+    var googleAnalyticsEventAction: GAEventAction {
+        switch self {
+        case .login:
+            return .supportLogin
+        case .signup:
+            return .supportSignUp
         }
     }
 }
@@ -76,6 +86,18 @@ private enum SupportFormSubjectTypeLogin: SupportFormSubjectTypeProtocol, CaseIt
         
         return String(format: infoText, Device.locale)
     }
+    
+    func googleAnalyticsEventLabel(isSupportForm: Bool) -> GAEventLabel {
+        switch self {
+        case .subject1: return .supportLoginForm(.subject1, isSupportForm: isSupportForm)
+        case .subject2: return .supportLoginForm(.subject2, isSupportForm: isSupportForm)
+        case .subject3: return .supportLoginForm(.subject3, isSupportForm: isSupportForm)
+        case .subject4: return .supportLoginForm(.subject4, isSupportForm: isSupportForm)
+        case .subject5: return .supportLoginForm(.subject5, isSupportForm: isSupportForm)
+        case .subject6: return .supportLoginForm(.subject6, isSupportForm: isSupportForm)
+        case .subject7: return .supportLoginForm(.subject7, isSupportForm: isSupportForm)
+        }
+    }
 }
 
 private enum SupportFormSubjectTypeSignup: SupportFormSubjectTypeProtocol, CaseIterable {
@@ -109,5 +131,13 @@ private enum SupportFormSubjectTypeSignup: SupportFormSubjectTypeProtocol, CaseI
         }
         
         return String(format: infoText, Device.locale)
+    }
+
+    func googleAnalyticsEventLabel(isSupportForm: Bool) -> GAEventLabel {
+        switch self {
+        case .subject1: return .supportSignUpForm(.subject1, isSupportForm: isSupportForm)
+        case .subject2: return .supportSignUpForm(.subject2, isSupportForm: isSupportForm)
+        case .subject3: return .supportSignUpForm(.subject3, isSupportForm: isSupportForm)
+        }
     }
 }

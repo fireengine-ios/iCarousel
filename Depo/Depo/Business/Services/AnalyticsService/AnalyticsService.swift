@@ -122,6 +122,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
     func trackSignupEvent(error: SignupResponseError?)
     func trackImportEvent(error: SpotifyResponseError?)
+    func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool)
     
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
@@ -354,6 +355,12 @@ extension AnalyticsService: AnalyticsGA {
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
+    }
+    
+    func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool) {
+        trackCustomGAEvent(eventCategory: .functions,
+                           eventActions: screenType.googleAnalyticsEventAction,
+                           eventLabel: subject.googleAnalyticsEventLabel(isSupportForm: isSupportForm))
     }
     
     func trackImportEvent(error: SpotifyResponseError? = nil) {
