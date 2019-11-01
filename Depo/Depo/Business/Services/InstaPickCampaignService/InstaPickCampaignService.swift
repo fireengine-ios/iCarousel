@@ -24,7 +24,7 @@ final class InstaPickCampaignService {
     
     private func checkCampaignParticipation() {
 
-        guard SingletonStorage.shared.isTurkcellUser else {
+        guard SingletonStorage.shared.isUserFromTurkey else {
             continueWithCommonFlow()
             return
         }
