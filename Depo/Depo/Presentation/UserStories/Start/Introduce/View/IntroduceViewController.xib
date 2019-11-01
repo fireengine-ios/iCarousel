@@ -73,7 +73,7 @@
                                             <variation key="widthClass=regular" constant="44"/>
                                         </constraint>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="178" id="Vyz-va-tIh">
-                                            <variation key="widthClass=regular" constant="269"/>
+                                            <variation key="widthClass=regular" constant="275"/>
                                         </constraint>
                                     </constraints>
                                     <state key="normal" title="Button"/>
