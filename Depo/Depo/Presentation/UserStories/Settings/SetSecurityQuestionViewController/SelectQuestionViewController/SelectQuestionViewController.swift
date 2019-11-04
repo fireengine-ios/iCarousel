@@ -17,6 +17,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     private let cornerRadius: CGFloat = 8
     private let separatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private lazy var accountService = AccountService()
+    private let analyticsService: AnalyticsService = factory.resolve()
     var questions = [SecretQuestionsResponse]()
     
     var delegate: SelectQuestionViewControllerDelegate?
@@ -28,11 +29,6 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         controller.questions = questions
         controller.delegate = delegate
         return controller
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.reloadData()
     }
     
     @IBOutlet private var backgroundView: UIView! {
@@ -78,6 +74,17 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowOffset = .zero
         }
+    }
+    
+    // MARK: - View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.reloadData()
+        
+        analyticsService.logScreen(screen: .securityQuestionSelect)
+        analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestionSelect)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +133,9 @@ extension SelectQuestionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectQuestion(question: questions[indexPath.row])
+        analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                            eventActions: .click,
+                                            eventLabel: .clickSecurityQuestion(number: indexPath.row))
         close()
     }
 }

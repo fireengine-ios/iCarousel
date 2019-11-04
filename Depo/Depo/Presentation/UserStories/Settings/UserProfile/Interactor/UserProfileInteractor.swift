@@ -63,6 +63,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
                                             errorType: errorType)
     }
     
+    func trackSetSequrityQuestion() {
+        analyticsManager.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                            eventActions: .securityQuestionClick,
+                                            eventLabel: .empty)
+    }
+    
     private func isPhoneChanged(phone: String) -> Bool {
         return (phone != userInfo?.phoneNumber)
     }
