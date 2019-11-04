@@ -1,5 +1,5 @@
 //
-//  SegmentedControllerForPhotoVideoScreen.swift
+//  PhotoVideoSegmentedController.swift
 //  Depo
 //
 //  Created by Maxim Soldatov on 11/4/19.
