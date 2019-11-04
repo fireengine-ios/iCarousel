@@ -72,7 +72,7 @@ class CustomNavBarView: UIView, UISearchBarDelegate {
         let logoImageY = (frame.height - FrameConstants.logoImageSizeIPad) + FrameConstants.logoBottomOffset
         if Device.isIpad {
             #if LIFEDRIVE
-///            There are no "true" design available right now.
+///            There is no "true" design available right now.
             #else
             logoImage.center = center
             
