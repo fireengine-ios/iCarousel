@@ -237,7 +237,7 @@ extension CacheManager: ReachabilityServiceDelegate {
 
 
 extension CacheManager: CoreDataStackDelegate {
-    func onSetupCompleted() {
+    func onCoreDataStackSetupCompleted() {
         CoreDataStack.shared.delegates.remove(self)
         actualizeCache()
     }

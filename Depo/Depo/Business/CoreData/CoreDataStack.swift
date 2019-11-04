@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CoreDataStackDelegate: class {
-    func onSetupCompleted()
+    func onCoreDataStackSetupCompleted()
 }
 
 
@@ -132,7 +132,7 @@ final class CoreDataStack {
                 debugLog("persistent store loaded: \(description)")
                 self?.mainContext.automaticallyMergesChangesFromParent = true
                 self?.isReady = true
-                self?.delegates.invoke(invocation: { $0.onSetupCompleted() })
+                self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
                 completion()
             }
         } else {
