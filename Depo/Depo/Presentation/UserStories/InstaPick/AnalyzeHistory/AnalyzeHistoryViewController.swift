@@ -70,6 +70,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
         self.dataSource.reloadCards(with: analyzesCount)
+        self.loadCampaignStatisticsIfNeed(success: nil)
     }
     
     private func trackScreen() {

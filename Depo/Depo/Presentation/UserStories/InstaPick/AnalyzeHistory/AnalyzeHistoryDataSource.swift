@@ -134,6 +134,8 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         
         if campaignCard == nil {
             reloadSection(.cards)
+        } else {
+            cards.append(.campaign)
         }
     }
     
