@@ -360,7 +360,7 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            CacheManager.shared.actualizeCache(completion: nil)
+                            CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
@@ -394,7 +394,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache(completion: nil)
+                    CacheManager.shared.actualizeCache()
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -678,7 +678,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            CacheManager.shared.actualizeCache(completion: nil)
+                            CacheManager.shared.actualizeCache()
                             handler(.success(headers))
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in

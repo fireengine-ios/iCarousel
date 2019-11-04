@@ -225,7 +225,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
-            CacheManager.shared.actualizeCache(completion: nil)
+            CacheManager.shared.actualizeCache()
         }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()

@@ -132,7 +132,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         if UIApplication.shared.applicationState == .background {
             if BackgroundTaskService.shared.appWasSuspended {
-                CacheManager.shared.actualizeCache(completion: nil)
+                CacheManager.shared.actualizeCache()
             }
             SyncServiceManager.shared.updateInBackground()
         }

@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol CoreDataStackDelegate: class {
+    func onCoreDataStackSetupCompleted()
+}
+
 
 final class CoreDataStack {
     
@@ -20,6 +24,8 @@ final class CoreDataStack {
     }
     
     static let shared = CoreDataStack()
+    
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
     
     private(set) var isReady = false
     
@@ -126,6 +132,7 @@ final class CoreDataStack {
                 debugLog("persistent store loaded: \(description)")
                 self?.mainContext.automaticallyMergesChangesFromParent = true
                 self?.isReady = true
+                self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
                 completion()
             }
         } else {
