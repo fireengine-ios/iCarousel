@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SegmentedControllerForPhotosAndVideos: SegmentedController {
+final class PhotoVideoSegmentedController: SegmentedController {
     private let instaPickCampaignService = InstaPickCampaignService()
     
     private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult) {
@@ -47,7 +47,7 @@ final class SegmentedControllerForPhotosAndVideos: SegmentedController {
     
 }
 
-extension SegmentedControllerForPhotosAndVideos: InstaPickProgressPopupDelegate {
+extension PhotoVideoSegmentedController: InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult) {
         showSpinner()
         handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
