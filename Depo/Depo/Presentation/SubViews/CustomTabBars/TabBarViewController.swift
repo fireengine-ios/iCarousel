@@ -419,12 +419,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate func changeViewState(state: Bool) {
         plussButton.isSelected = state
         
-        let rotationAngle: CGFloat
-        #if LIFEDRIVE
-            rotationAngle = .pi
-        #else
-            rotationAngle = .pi / 4
-        #endif
+        let rotationAngle: CGFloat = .pi / 4
         
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             if state {

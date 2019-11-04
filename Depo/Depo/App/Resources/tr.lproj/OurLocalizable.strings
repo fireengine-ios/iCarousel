@@ -1200,7 +1200,7 @@
 "support_form_subject_6_detailed_info_fulltext" = "<p><strong>Hesabına beni hatırla ile giriş yapamıyorsan:</strong></p><p>- Şifremi unuttum adımından, şifre yenile yaparak giriş yapabilirsin.<br />- Hattınızı devrettiğinizde telefon numarası bağlı olan hesaptan kopartılarak, beni hatırla girişi kapanacaktır.<br />- Bağlantı ayarlarınızı kontrol etmenizi öneririz.</p><p><strong>Çözüme ulaşamadıysanız:</strong></p><p>- Hesaba bir telefon numarası bağlı değilse ve uzun süredir(en az 3 aydır) girmiyorsan hesabın askıya alınmış olabilir.";
 "support_form_subject_7_detailed_info_label" = "Lifebox uygulamasını indiremiyorum";
 "support_form_subject_7_detailed_info_fulltext" = "<p>- Telefonunun lifebox uygulamasını destekleyen bir model olduğunu teyit etmelisin.<br />- Android uygulaması 4.4 ve üzeri Android telefon/tabletlerde destekleniyor.<br />- iOS uygulaması iOS 9 ve üzeri iPhone/iPad cihazlarda destekleniyor. <br />Windows phone tabanlı telefonlar için desteğimiz yok.<br />- Web uygulaması Internet Explorer dışında diğer top browserlarda (Chrome, Safari, Mozilla, vb) ve tüm işletim sistemlerinde destekleniyor (MacOS, Windows, Linux bağımsız).</p><p><strong>Çözüme ulaşamadıysanız:</strong></p><p>- Hesaba bir telefon numarası bağlı değilse ve uzun süredir(en az 3 aydır) girmiyorsan hesabın askıya alınmış olabilir.";
-"login_faq" = "FAQ";
+"login_faq" = "SSS";
 "signup_faq_info" = "Yardım için lütfen bir konu seç.";
 "login_faq_info" = "Yardım için lütfen bir konu seç.";
 "too_many_invalid_attempt" = "Çok sayıda deneme yapıldı. Lütfen daha sonra tekrar dene.";
@@ -1235,3 +1235,37 @@
 "campaign_detail_info_title" = "";
 "campaign_detail_info_description" = "";
 "AccessibilityGiftButton" = "";
+"landing_start_button" = "";
+"landing_billo_title_0" = "";
+"landing_billo_subtitle_0" = "";
+"landing_billo_title_1" = "";
+"landing_billo_subtitle_1" = "";
+"landing_billo_title_2" = "";
+"landing_billo_subtitle_2" = "";
+"landing_billo_title_3" = "";
+"landing_billo_subtitle_3" = "";
+"landing_billo_title_4" = "";
+"landing_billo_subtitle_4" = "";
+"landing_billo_title_5" = "";
+"landing_billo_subtitle_5" = "";
+"landing_billo_title_6" = "";
+"landing_billo_subtitle_6" = "";
+"landing_billo_title_7" = "";
+"landing_billo_subtitle_7" = "";
+
+/*introduce billo*/
+"billo_intro_title" = "";
+"billo_intro_subtitle" = "";
+"billo_intro_create_account_button" = "";
+"billo_intro_login_button" = "";
+"campaign_vc_result_button" = "";
+"campaign_vc_edit_profile_button" = "";
+"campaign_vc_become_premium_button" = "";
+"campaign_vc_bottom_title" = "";
+"campaign_vc_bottom_description" = "";
+"campaign_vc_top_without_title" = "";
+"campaign_vc_top_without_description" = "";
+"campaign_vc_top_title_zero" = "";
+"campaign_vc_top_description_zero" = "";
+"campaign_vc_top_title_non_zero" = "";
+"campaign_vc_top_description_non_zero" = "";

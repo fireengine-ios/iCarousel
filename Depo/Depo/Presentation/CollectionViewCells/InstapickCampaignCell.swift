@@ -24,7 +24,7 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.numberOfLines = 0
-            newValue.text = TextConstants.campaignDetailContestInfoTotalDraw
+            newValue.text = TextConstants.photopickHistoryCampaignContestTotalDraw
         }
     }
     
@@ -42,7 +42,7 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.numberOfLines = 0
-            newValue.text = TextConstants.campaignDetailContestInfoRemainingDraw
+            newValue.text = TextConstants.photopickHistoryCampaignRemainingDraw
         }
     }
     
@@ -86,7 +86,8 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        // TODO: wating for FE-1682
-        print("+ TODO: wating for FE-1682")
+        let router = RouterVC()
+        let controller = router.campaignDetailViewController()
+        router.pushViewController(viewController: controller)
     }
 }

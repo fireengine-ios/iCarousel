@@ -57,7 +57,9 @@ final class CampaignContestInfoView: UIView {
     func setup(with details: CampaignCardResponse) {
         totalCountLabel.text = "\(details.totalUsed)"
         remainingCountLabel.text = "\(details.dailyRemaining)"
-        remainingView.isHidden = details.dailyRemaining == 0  
+        
+        let isDateAvailable = (details.startDate...details.endDate).contains(Date())
+        remainingView.isHidden = !isDateAvailable
     }
 
 }

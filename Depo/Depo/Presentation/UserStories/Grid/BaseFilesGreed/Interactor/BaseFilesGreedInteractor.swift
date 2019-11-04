@@ -280,7 +280,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .newFolder)
     }
     
-    func trackItemsSelected() {
+    func trackItemsSelected(item: BaseDataSourceItem) {
         ///nothing here, need to override in create story interactor
     }
     

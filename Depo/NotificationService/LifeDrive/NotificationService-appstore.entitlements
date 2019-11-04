@@ -2,17 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>aps-environment</key>
+	<string>development</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.turkcell.akillidepo</string>
+		<string>group.com.turkcell.lifedrive</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.ent</string>
+		<string>$(AppIdentifierPrefix)by.com.life.LifeDrive</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifedrive.ent</string>
 	</array>
-	<key>aps-environment</key>
-	<string>development</string>
 </dict>
 </plist>

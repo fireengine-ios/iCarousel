@@ -289,8 +289,16 @@ extension CreateStoryViewController: ActivityIndicator {
                             return
                         }
                         
+                        let errorText: String?
+                        
+                        if error.description == "VIDEO_SLIDESHOW_NAME_MISSING" {
+                            errorText = TextConstants.createStoryEmptyNameError
+                        } else {
+                            errorText = error.errorDescription
+                        }
+                        
                         self.stopActivityIndicator()
-                        self.showError(text: error.errorDescription)
+                        self.showError(text: errorText)
                     }
             })
         }

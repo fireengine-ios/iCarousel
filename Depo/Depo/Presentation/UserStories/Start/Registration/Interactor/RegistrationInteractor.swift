@@ -30,6 +30,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpScreen)
     }
     
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
+        analyticsService.trackSupportEvent(screenType: .signup, subject: type, isSupportForm: false)
+    }
+    
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
         
         let validationResult: [UserValidationResults]

@@ -200,6 +200,10 @@ enum AnalyticsAppScreens {
 
     case info(FileType)
     
+    case tbmatikPushNotification
+    case tbmatikHomePageCard
+    case tbmatikSwipePhoto(_ page: Int)
+    
     var name: String {
         switch self {
         ///authorization
@@ -367,6 +371,13 @@ enum AnalyticsAppScreens {
             default:
                 return "Info"
             }
+            
+        case .tbmatikHomePageCard:
+            return "Home-Page Card-TBMatik"
+        case .tbmatikPushNotification:
+            return "Push-Notification-TBMatik"
+        case .tbmatikSwipePhoto(let page):
+            return "TBMatik Swipe \(page)"
         }
     }
 }
@@ -539,6 +550,9 @@ enum GAEventAction {
     case changeEmail
     case clickQuotaPurchase
     case clickFeaturePurchase
+    case tbmatik
+    case supportLogin
+    case supportSignUp
 
     var text: String {
         switch self {
@@ -647,6 +661,12 @@ enum GAEventAction {
             return "Click Quota Purchase"
         case .clickFeaturePurchase:
             return "Click Feature Purchase"
+        case .tbmatik:
+            return "TBMatik"
+        case .supportLogin:
+            return "Support Form - Login"
+        case .supportSignUp:
+            return "Support Form - Sign Up"
         }
     }
 }
@@ -758,6 +778,83 @@ enum GAEventLabel {
             }
         }
     }
+    
+    enum TBMatikEvent {
+        case notification
+        case seeTimeline
+        case share
+        case close
+        case letsSee
+        case selectAlbum
+        case deleteAlbum
+        case deletePhoto
+        
+        var text: String {
+            switch self {
+            case .notification:
+                return "Notification"
+            case .seeTimeline:
+                return "See Timeline"
+            case .share:
+                return "Each Channel"
+            case .close:
+                return "Home Page Card - Cancel"
+            case .letsSee:
+                return "Home Page Card - Lets see"
+            case .selectAlbum:
+                return "Album Click"
+            case .deleteAlbum:
+                return "Album Delete"
+            case .deletePhoto:
+                return "Photo Delete"
+            }
+        }
+    }
+    
+    enum SupportFormSubjectLoginEvent {
+        case subject1
+        case subject2
+        case subject3
+        case subject4
+        case subject5
+        case subject6
+        case subject7
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            case .subject4: text += "Q4"
+            case .subject5: text += "Q5"
+            case .subject6: text += "Q6"
+            case .subject7: text += "Q7"
+            }
+            
+            return text
+        }
+    }
+    
+    enum SupportFormSubjectSignUpEvent {
+        case subject1
+        case subject2
+        case subject3
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            }
+            
+            return text
+        }
+    }
+    
     case empty
     
     case success
@@ -833,9 +930,12 @@ enum GAEventLabel {
     case later
     case cancel
     case storyOrVideo
+    case tbmatik(_ event: TBMatikEvent)
     case paymentType(_ type: QuotaPaymentType)
-
-        var text: String {
+    case supportLoginForm(_ event: SupportFormSubjectLoginEvent, isSupportForm: Bool)
+    case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
+    
+    var text: String {
         switch self {
         case .empty:
             return ""
@@ -1005,6 +1105,12 @@ enum GAEventLabel {
             return "Story / Video"
         case .paymentType(let type):
             return type.text
+        case .tbmatik(let event):
+            return event.text
+        case .supportLoginForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
+        case .supportSignUpForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
         }
     }
     

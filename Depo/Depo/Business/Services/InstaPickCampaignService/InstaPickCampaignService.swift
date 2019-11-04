@@ -12,7 +12,7 @@ final class InstaPickCampaignService {
     
     private let campaingService = CampaignServiceImpl()
     private let storageVars: StorageVars = factory.resolve()
-    private let instapickService: InstapickService = factory.resolve()
+    private lazy var instapickService: InstapickService = factory.resolve()
     
     private var campaignResponse: CampaignCardResponse?
     private var instaPickCampaignServiceCompletion: ((UINavigationController?) -> Void)?
@@ -24,7 +24,7 @@ final class InstaPickCampaignService {
     
     private func checkCampaignParticipation() {
 
-        guard let countryCode = SingletonStorage.shared.accountInfo?.countryCode, countryCode == "90" else {
+        guard SingletonStorage.shared.isUserFromTurkey else {
             continueWithCommonFlow()
             return
         }
@@ -61,7 +61,6 @@ final class InstaPickCampaignService {
                 self?.handleAnalyzeCountForCamapaign(analizesCountResult: analizesCountResult)
             case .failed(_):
                 self?.continueWithCommonFlow()
-                break
             }
         }
     }

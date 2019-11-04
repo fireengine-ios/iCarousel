@@ -16,7 +16,12 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.text = TextConstants.introTitle
             newValue.textColor = ColorConstants.billoDarkBlue
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)//UIFont.PoppinsBoldFont(size: 20)
+            if Device.isIpad {
+                newValue.font = UIFont.TurkcellSaturaBolFont(size: 27)
+            } else {
+                newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)//UIFont.PoppinsBoldFont(size: 20)
+            }
+            
             newValue.textAlignment = .center
         }
     }
@@ -25,7 +30,12 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.text = TextConstants.introSubTitle
             newValue.textColor = ColorConstants.darkBlueColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)//UIFont.SFProRegularFont(size: 15)
+            if Device.isIpad {
+                newValue.font = UIFont.TurkcellSaturaRegFont(size: 22)
+            } else {
+                newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)//UIFont.SFProRegularFont(size: 15)
+            }
+            
             newValue.textAlignment = .center
             newValue.numberOfLines = 3
             newValue.lineBreakMode = .byWordWrapping
@@ -34,8 +44,17 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     
     @IBOutlet private weak var createAccountButton: RoundedInsetsButton! {
         willSet {
-            newValue.setTitle(TextConstants.introCreateAccountButton, for: .normal)
-            newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
+            let font: UIFont
+            if Device.isIpad {
+                font = UIFont.TurkcellSaturaBolFont(size: 27)
+            } else {
+                font = UIFont.TurkcellSaturaBolFont(size: 18)
+            }
+            let attributedTitle = NSAttributedString(string: TextConstants.introCreateAccountButton,
+                                                     attributes:  [.foregroundColor : ColorConstants.darkBlueColor,
+                                                                   .underlineStyle : NSUnderlineStyle.styleNone.rawValue,
+                                                                   .font : font])
+            newValue.setAttributedTitle(attributedTitle, for: .normal)
             newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
             newValue.layer.borderWidth = 2
             newValue.insets = UIEdgeInsets(top: 5, left: 45, bottom: 5, right: 45)
@@ -44,10 +63,16 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     
     @IBOutlet private weak var loginButton: UIButton! {
         willSet {
+            let font: UIFont
+            if Device.isIpad {
+                font = UIFont.TurkcellSaturaMedFont(size: 20)
+            } else {
+                font = UIFont.TurkcellSaturaMedFont(size: 13)
+            }
             let attributedTitle = NSAttributedString(string: TextConstants.introLoginButton,
                                                      attributes:  [.foregroundColor : ColorConstants.billoGray,
                                                                    .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
-                                                                   .font : UIFont.TurkcellSaturaMedFont(size: 13)]) //UIFont.SFProSemiboldFont(size: 13)
+                                                                   .font : font]) //UIFont.SFProSemiboldFont(size: 13)
             newValue.setAttributedTitle(attributedTitle, for: .normal)
             newValue.isOpaque = true
         }
