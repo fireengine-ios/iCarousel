@@ -350,6 +350,9 @@
 		7373EC29235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
 		7373EC2A235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
 		7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
+		737685E223704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift */; };
+		737685E323704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift */; };
+		737685E423704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift */; };
 		737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
 		737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
 		737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */; };
@@ -6942,6 +6945,7 @@
 		7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewController.swift; sourceTree = "<group>"; };
 		7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCampaignViewController.xib; sourceTree = "<group>"; };
 		7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewControllerDesigner.swift; sourceTree = "<group>"; };
+		737685E123704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControllerForPhotoVideoScreen.swift; sourceTree = "<group>"; };
 		737A2E982338989B0014258A /* SetSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityQuestionViewController.swift; sourceTree = "<group>"; };
 		737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		737A2EA02338A5200014258A /* SecurityQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityQuestionView.swift; sourceTree = "<group>"; };
@@ -16601,6 +16605,7 @@
 			children = (
 				CE3D5D6722F4793C009F4E0C /* SegmentedControl.swift */,
 				CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */,
+				737685E123704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift */,
 				CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */,
 				CE292C2F21C2419C004FC745 /* PassthroughView.swift */,
 			);
@@ -21501,6 +21506,7 @@
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
 				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
+				737685E323704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */,
 				8C0E8E791FDEBDFF00789C91 /* PrintViewController.swift in Sources */,
 				8C0E8E7C1FDEBDFF00789C91 /* GridListTopBarConfig.swift in Sources */,
 				8C0E8E7E1FDEBDFF00789C91 /* ColumnsCollectionLayout.swift in Sources */,
@@ -23440,6 +23446,7 @@
 				D73FF82F7346FCEFE69CD6B1 /* UserInfoSubViewInitializer.swift in Sources */,
 				8C7786A51F3F38F0005CB432 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CE2F56311F75549300F49DA1 /* OfferParameters.swift in Sources */,
+				737685E223704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */,
 				CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */,
 				CEF69DE51FB5861A00FCE6AB /* UploadHelpers.swift in Sources */,
 				7CDABD0D1F1E3A6300C8CC16 /* UserProfileRouterInput.swift in Sources */,
@@ -24758,6 +24765,7 @@
 				CE784B1822A685FB00662219 /* Int64+Bytes.swift in Sources */,
 				CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */,
 				73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */,
+				737685E423704BF300ED6BD6 /* SegmentedControllerForPhotoVideoScreen.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
 				73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
