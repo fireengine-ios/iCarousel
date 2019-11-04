@@ -26,7 +26,6 @@ class PackagesModuleConfigurator {
 
         let interactor = PackagesInteractor()
         interactor.output = presenter
-        interactor.getQuotaInfo()
 
         presenter.interactor = interactor
         viewController.output = presenter

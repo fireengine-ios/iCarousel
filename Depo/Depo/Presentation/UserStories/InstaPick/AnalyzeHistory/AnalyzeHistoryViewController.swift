@@ -63,7 +63,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         reloadCards()
-
+        
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
     }
@@ -280,11 +281,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func loadCampaignStatisticsIfNeed(success: VoidHandler?) {
-        
-        guard SingletonStorage.shared.isTurkcellUser else {
-            success?()
-            return
-        }
         
         campaignService.getPhotopickDetails { [weak self] result in
             guard let self = self else {

@@ -37,7 +37,7 @@ private enum AnalyzeHistoryCardType {
         switch self {
         case .analysis: return 126
         case .free: return 95
-        case .campaign: return 174
+        case .campaign: return 178
         case .empty: return 108
         }
     }
@@ -131,7 +131,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     func reloadCards(with analysisCount: InstapickAnalyzesCount) {
         self.analysisCount = analysisCount
         cards = [analysisCount.isFree ? .free : .analysis]
-        reloadSection(.cards)
+        
+        if campaignCard == nil {
+            reloadSection(.cards)
+        }
     }
     
     func showCampaignCard(with campaignCard: CampaignCardResponse) {
@@ -358,9 +361,11 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
                     assertionFailure("campaignCard must exist if .campaign added")
                     return .zero
                 }
+                
                 let cell = InstapickCampaignCell.initFromNib()
                 cell.setup(with: campaignCard)
-                let height = cell.sizeToFit(width: cellWidth).height
+                /// "max" need to fix random number from "sizeToFit(width" (173.66 and 177.66)
+                let height = max(cell.sizeToFit(width: cellWidth).height, AnalyzeHistoryCardType.campaign.cellHeight)
                 return CGSize(width: cellWidth, height: height)
                 
             case .empty:

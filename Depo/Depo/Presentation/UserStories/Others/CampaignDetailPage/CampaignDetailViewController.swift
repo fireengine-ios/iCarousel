@@ -13,6 +13,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var imageView: LoadingImageView!
+    @IBOutlet private weak var imageViewHeightConstaint: NSLayoutConstraint!
     @IBOutlet private weak var contestInfoView: CampaignContestInfoView!
     @IBOutlet private weak var campaignIntroView: CampaignIntroView!
     @IBOutlet private weak var campaignInfoView: CampaingnInfoView!
@@ -55,6 +56,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     private var moreInfoUrl: URL?
     private let service = CampaignServiceImpl()
     private lazy var router = RouterVC()
+    private var cellImageManager: CellImageManager?
     
     // MARK: - View lifecycle
     
@@ -69,6 +71,11 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateImageConstraint()
     }
     
     private func loadDetailsInfo() {
@@ -114,7 +121,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             scrollView.contentInset = .zero
         }
         
-        imageView.loadImage(url: details.imageUrl)
+        loadImage(with: details.imageUrl)
         contestInfoView.setup(with: details)
         
         moreInfoUrl = details.detailsUrl
@@ -124,6 +131,39 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         contentStackView.isHidden = false
     }
     
+    private func loadImage(with url: URL?) {
+        guard let url = url else {
+            return
+        }
+        
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            guard let self = self else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.imageView.image = image
+                self.updateImageConstraint()
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+    }
+
+    private func updateImageConstraint() {
+        let height: CGFloat
+        if let image = imageView.image {
+            height = min(view.bounds.height * 0.5, image.size.height / image.size.width * imageView.bounds.width)
+        } else {
+            // 133/344 - aspect from design
+            height = imageView.bounds.width * 133/344
+        }
+        imageViewHeightConstaint.constant = height
+        view.layoutIfNeeded()
+    }
     
     // MARK: - Actions
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,19 +23,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-g9-CGx">
-                    <rect key="frame" x="162.66666666666666" y="50" width="50" height="68"/>
+                    <rect key="frame" x="121.00000000000001" y="60" width="133.33333333333337" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="68" id="B0L-Rl-80B">
-                            <variation key="widthClass=regular" constant="75"/>
+                        <constraint firstAttribute="height" constant="100" id="B0L-Rl-80B">
+                            <variation key="widthClass=regular" constant="135"/>
                         </constraint>
-                        <constraint firstAttribute="width" secondItem="LEY-g9-CGx" secondAttribute="height" multiplier="25:34" id="zyh-gd-EeE"/>
+                        <constraint firstAttribute="width" secondItem="LEY-g9-CGx" secondAttribute="height" multiplier="4:3" id="zyh-gd-EeE"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="240" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-DS-9p5">
-                    <rect key="frame" x="0.0" y="148.00000000000003" width="375" height="397.66666666666674"/>
+                    <rect key="frame" x="0.0" y="170.00000000000003" width="375" height="365.66666666666674"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" image="IntroduceImage1" translatesAutoresizingMaskIntoConstraints="NO" id="wFf-k7-HE2">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="397.66666666666669"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" image="IntroduceImage1" translatesAutoresizingMaskIntoConstraints="NO" id="wFf-k7-HE2">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="365.66666666666669"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="Bvn-fy-Eco"/>
                                 <constraint firstAttribute="width" secondItem="wFf-k7-HE2" secondAttribute="height" multiplier="375:312" priority="250" id="e5o-c4-XPZ"/>
@@ -102,15 +102,15 @@
             <constraints>
                 <constraint firstItem="STK-bc-GEv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0co-zl-NEx"/>
                 <constraint firstItem="N29-gd-nz6" firstAttribute="top" relation="lessThanOrEqual" secondItem="K31-Jg-aUI" secondAttribute="bottom" constant="55" id="20D-TK-i2Z"/>
-                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="37d-aJ-JZI"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="STK-bc-GEv" secondAttribute="bottom" constant="20" id="4B4-Ph-Ud6"/>
+                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="37d-aJ-JZI"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="STK-bc-GEv" secondAttribute="bottom" constant="35" id="4B4-Ph-Ud6"/>
                 <constraint firstItem="hc0-kb-fgC" firstAttribute="trailing" secondItem="K31-Jg-aUI" secondAttribute="trailing" constant="30" id="4BL-aC-DjB"/>
                 <constraint firstItem="N29-gd-nz6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4MW-en-1nS"/>
-                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="749" constant="50" id="7Ad-iU-EAl"/>
+                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="749" constant="60" id="7Ad-iU-EAl"/>
                 <constraint firstItem="hc0-kb-fgC" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="N29-gd-nz6" secondAttribute="trailing" constant="30" id="94r-YC-Mvh"/>
                 <constraint firstItem="STK-bc-GEv" firstAttribute="top" secondItem="N29-gd-nz6" secondAttribute="bottom" constant="16" id="9nf-5h-PIH"/>
                 <constraint firstItem="Bbr-4v-zM9" firstAttribute="leading" secondItem="hc0-kb-fgC" secondAttribute="leading" constant="30" id="EUZ-8p-kxa"/>
-                <constraint firstItem="jG1-DS-9p5" firstAttribute="top" secondItem="LEY-g9-CGx" secondAttribute="bottom" constant="30" id="Ggm-ol-elO"/>
+                <constraint firstItem="jG1-DS-9p5" firstAttribute="top" secondItem="LEY-g9-CGx" secondAttribute="bottom" constant="10" id="Ggm-ol-elO"/>
                 <constraint firstAttribute="bottom" secondItem="STK-bc-GEv" secondAttribute="bottom" priority="749" constant="35" id="Kun-2b-EHa"/>
                 <constraint firstItem="N29-gd-nz6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="K31-Jg-aUI" secondAttribute="bottom" constant="8" id="Lad-6i-dS4"/>
                 <constraint firstItem="jG1-DS-9p5" firstAttribute="leading" secondItem="hc0-kb-fgC" secondAttribute="leading" id="LhW-ak-rkC"/>
@@ -119,7 +119,7 @@
                 <constraint firstItem="LEY-g9-CGx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yoc-1A-678"/>
                 <constraint firstItem="N29-gd-nz6" firstAttribute="top" secondItem="K31-Jg-aUI" secondAttribute="bottom" priority="749" constant="55" id="dfp-t1-HE3"/>
                 <constraint firstItem="jG1-DS-9p5" firstAttribute="trailing" secondItem="hc0-kb-fgC" secondAttribute="trailing" id="f0G-lh-dNc"/>
-                <constraint firstItem="Bbr-4v-zM9" firstAttribute="top" secondItem="jG1-DS-9p5" secondAttribute="bottom" constant="16" id="ihn-6e-hkW"/>
+                <constraint firstItem="Bbr-4v-zM9" firstAttribute="top" secondItem="jG1-DS-9p5" secondAttribute="bottom" constant="26" id="ihn-6e-hkW"/>
                 <constraint firstItem="hc0-kb-fgC" firstAttribute="trailing" secondItem="Bbr-4v-zM9" secondAttribute="trailing" constant="30" id="mDI-m3-t9R"/>
                 <constraint firstItem="K31-Jg-aUI" firstAttribute="leading" secondItem="hc0-kb-fgC" secondAttribute="leading" constant="30" id="nze-p2-sEb"/>
                 <constraint firstItem="N29-gd-nz6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hc0-kb-fgC" secondAttribute="leading" constant="30" id="oJN-2g-SYP"/>
@@ -131,6 +131,6 @@
     </objects>
     <resources>
         <image name="IntroduceImage1" width="364" height="404"/>
-        <image name="splash_logo" width="113.33333587646484" height="141.33332824707031"/>
+        <image name="splash_logo" width="720" height="600"/>
     </resources>
 </document>

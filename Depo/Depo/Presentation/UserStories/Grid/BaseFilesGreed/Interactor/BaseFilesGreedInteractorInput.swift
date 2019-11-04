@@ -38,7 +38,7 @@ protocol BaseFilesGreedInteractorInput {
     func trackClickOnPhotoOrVideo(isPhoto: Bool)
     func trackSortingChange(sortRule: SortedRules)
     func trackFolderCreated()///Maybe shift into Operation manager
-    func trackItemsSelected()///Only for create story for now
+    func trackItemsSelected(item: BaseDataSourceItem)///Only for create story for now
     
     var bottomBarConfig: EditingBarConfig? { get set }
     

@@ -662,7 +662,7 @@
 "landing_billo_title_5" = "Automatic Stories";
 "landing_billo_subtitle_5" = "Live your memories with our automated stories we created for you";
 "landing_billo_title_6" = "Social Media";
-"landing_billo_subtitle_6" = "Transfer all your social media archives easily to lifedrive";
+"landing_billo_subtitle_6" = "Transfer all your social media archives easily to billo";
 "landing_billo_title_7" = "Photo Print";
 "landing_billo_subtitle_7" = "Decorate your living space with your memories";
 "Add GSM Number" = "Add Phone Number";
@@ -1299,3 +1299,7 @@
 "campaign_detail_info_description" = "Milli Piyango contest date lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet çekilis.";
 "AccessibilityGiftButton" = "AccessibilityGiftButton";
 "AccessibilityGiftButton" = "Gift Box Button";
+"create_story_empty_name_error" = "Story name must not be empty";
+
+"photopick_history_campaign_contest_total_draw" = "Total Draw/Raffle";
+"photopick_history_campaign_contest_remaining_draw" = "Daily Draw Left";
