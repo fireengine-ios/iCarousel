@@ -27,6 +27,8 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     @IBOutlet private weak var campaignDetailButton: UIButton!
     @IBOutlet private weak var analyzeDetailButton: UIButton!
    
+    @IBOutlet private weak var buttonsView: UIView!
+    
     private var detailUrl: URL?
     private var userStatus: UserStatus?
     private lazy var router = RouterVC()
@@ -42,6 +44,16 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         }
         setupCardView(campaignCardResponse: model)
     }
+    
+    override func layoutSubviews() {
+          super.layoutSubviews()
+          
+          let height = buttonsView.frame.origin.y + buttonsView.frame.size.height
+          if calculatedH != height {
+              calculatedH = height
+              layoutIfNeeded()
+          }
+      }
     
     private func setupCardView(campaignCardResponse: CampaignCardResponse) {
         
