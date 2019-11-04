@@ -10,6 +10,8 @@
 		001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */; };
 		011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467C73E3BCBD36D9330F35B /* UserInfoSubViewInteractor.swift */; };
 		016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59360E3550649CF1052921A7 /* LBAlbumLikePreviewSliderInteractor.swift */; };
+		0302B73823701EFF0005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */; };
+		0302B73923701F000005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
 		065212E5C2E83D762D0B4492 /* PhotoVideoDetailModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BD485A1AAAA905F218013 /* PhotoVideoDetailModuleInput.swift */; };
@@ -6627,7 +6629,7 @@
 		};
 		B51FD6381FD13C93000344BD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
@@ -6637,7 +6639,7 @@
 				8C8E933B2315474A000242E9 /* LifeTech-autosync-widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		CE784F1122A685FB00662219 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -18254,6 +18256,7 @@
 				8C06AF712008AD70003D8E05 /* duz_siyah.png in Resources */,
 				9216F57C22493127008339F5 /* InternetDataUsageCollectionViewCell.xib in Resources */,
 				8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */,
+				0302B73923701F000005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				8C06AF552008AD70003D8E05 /* cropy_icon@3x.png in Resources */,
 				8C06B08D2008AD71003D8E05 /* paylas_twitter@3x.png in Resources */,
 				8C06B0492008AD71003D8E05 /* oval_siyah@2x.png in Resources */,
@@ -19810,6 +19813,7 @@
 				CE784EA822A685FB00662219 /* cancel_buton@2x.png in Resources */,
 				CE784EA922A685FB00662219 /* back_icon@2x.png in Resources */,
 				CE784EAA22A685FB00662219 /* MovieCard.xib in Resources */,
+				0302B73823701EFF0005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				CE784EAB22A685FB00662219 /* kare@3x.png in Resources */,
 				CE784EAC22A685FB00662219 /* sample_bw@2x.png in Resources */,
 				CE784EAD22A685FB00662219 /* ForgotPasswordViewController.xib in Resources */,
