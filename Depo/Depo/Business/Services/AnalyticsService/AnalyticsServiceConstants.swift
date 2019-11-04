@@ -204,6 +204,9 @@ enum AnalyticsAppScreens {
     case tbmatikHomePageCard
     case tbmatikSwipePhoto(_ page: Int)
     
+    case securityQuestion
+    case securityQuestionSelect
+    
     var name: String {
         switch self {
         ///authorization
@@ -378,6 +381,10 @@ enum AnalyticsAppScreens {
             return "Push-Notification-TBMatik"
         case .tbmatikSwipePhoto(let page):
             return "TBMatik Swipe \(page)"
+        case .securityQuestion:
+            return "Security Question"
+        case .securityQuestionSelect:
+            return "Security Question - Select"
         }
     }
 }
@@ -465,6 +472,7 @@ enum GAEventCantegory {
     case popUp
     case twoFactorAuthentication
     case emailVerification
+    case securityQuestion
 
     var text: String {
         switch self {
@@ -482,6 +490,8 @@ enum GAEventCantegory {
             return "Two Factor Authentication"
         case .emailVerification:
             return "E-mail verification"
+        case .securityQuestion:
+            return "Security Question"
         }
     }
 }
@@ -553,6 +563,8 @@ enum GAEventAction {
     case tbmatik
     case supportLogin
     case supportSignUp
+    case securityQuestionClick
+    case saveSecurityQuestion(_ number: Int)
 
     var text: String {
         switch self {
@@ -667,6 +679,10 @@ enum GAEventAction {
             return "Support Form - Login"
         case .supportSignUp:
             return "Support Form - Sign Up"
+        case .securityQuestionClick:
+            return "Set Security Question - Click"
+        case .saveSecurityQuestion(let number):
+            return "Save Q\(number)"
         }
     }
 }
@@ -934,6 +950,7 @@ enum GAEventLabel {
     case paymentType(_ type: QuotaPaymentType)
     case supportLoginForm(_ event: SupportFormSubjectLoginEvent, isSupportForm: Bool)
     case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
+    case clickSecurityQuestion(number: Int)
     
     var text: String {
         switch self {
@@ -1111,6 +1128,8 @@ enum GAEventLabel {
             return event.text(isSupportForm: isSupportForm)
         case .supportSignUpForm(let event, let isSupportForm):
             return event.text(isSupportForm: isSupportForm)
+        case .clickSecurityQuestion(let number):
+            return "Q\(number)"
         }
     }
     
@@ -1370,6 +1389,10 @@ enum GADementionValues {
         case invalidEmail
         case invalidOTP
         case tooManyRequests
+        /// Secret Question
+        case invalidCaptcha
+        case invalidId
+        case invalidAnswer
         
         init?(with stringError: String) {
             switch stringError {
@@ -1417,7 +1440,16 @@ enum GADementionValues {
                 
             case TextConstants.tokenIsMissing:
                 self = .referenceTokenIsEmpty
+                
+            case "SEQURITY_QUESTION_ANSWER_IS_INVALID":
+                self = .invalidAnswer
+                
+            case "SEQURITY_QUESTION_ID_IS_INVALID":
+                self = .invalidId
 
+            case "4001":
+                self = .invalidCaptcha
+                
             default:
                 return nil
             }
@@ -1469,6 +1501,15 @@ enum GADementionValues {
                 
             case .tooManyRequests:
                 return "TOO_MANY_REQUESTS"
+                
+            case .invalidCaptcha:
+                return "INVALID_CAPTCHA"
+                
+            case .invalidId:
+                return "SEQURITY_QUESTION_ID_IS_INVALID"
+                
+            case .invalidAnswer:
+                return "SEQURITY_QUESTION_ANSWER_IS_INVALID"
                 
             }
         }
