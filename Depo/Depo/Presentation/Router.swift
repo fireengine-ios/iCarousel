@@ -452,7 +452,7 @@ class RouterVC: NSObject {
         let photos = PhotoVideoController.initPhotoFromNib()
         let videos = PhotoVideoController.initVideoFromNib()
         
-        return SegmentedController.initWithControllers([photos, videos])
+        return PhotoVideoSegmentedController.initWithControllers([photos, videos])
     }
     
     

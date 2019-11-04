@@ -38,7 +38,7 @@ extension SegmentedChildController where Self: UIViewController {
 //    func segmentedControllerEndEditMode()
 //}
 
-final class SegmentedController: BaseViewController, NibInit {
+class SegmentedController: BaseViewController, NibInit {
     
     static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
@@ -139,6 +139,7 @@ final class SegmentedController: BaseViewController, NibInit {
         childController.didMove(toParentViewController: self)
     }
 }
+
 
 //extension SegmentedController: PhotoVideoDataSourceDelegate {
 //    func selectedModeDidChange(_ selectingMode: Bool) {

@@ -10,9 +10,9 @@ import UIKit
 
 final class InstaPickCampaignService {
     
-    private let campaingService = CampaignServiceImpl()
+    private lazy var campaingService = CampaignServiceImpl()
+    private lazy var instapickService = InstapickServiceImpl()
     private let storageVars: StorageVars = factory.resolve()
-    private lazy var instapickService: InstapickService = factory.resolve()
     
     private var campaignResponse: CampaignCardResponse?
     private var instaPickCampaignServiceCompletion: ((UINavigationController?) -> Void)?
