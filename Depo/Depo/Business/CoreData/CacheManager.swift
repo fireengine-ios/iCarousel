@@ -44,6 +44,11 @@ final class CacheManager {
     }
     
     func actualizeCache() {
+        guard CoreDataStack.shared.isReady else {
+            scheduleActualization()
+            return
+        }
+        
         isCacheActualized = false
         isProcessing = true
 
@@ -51,6 +56,7 @@ final class CacheManager {
             guard let `self` = self else {
                 return
             }
+            
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                 self.showPreparationCardAfterDelay()
                 self.startAppendingAllRemotes(completion: { [weak self] in
@@ -84,6 +90,10 @@ final class CacheManager {
                 })
             }
         }
+    }
+    
+    private func scheduleActualization() {
+        CoreDataStack.shared.delegates.add(self)
     }
     
     private func showPreparationCardAfterDelay() {
@@ -222,5 +232,13 @@ extension CacheManager: ReachabilityServiceDelegate {
         if service.isReachable {
             internetConnectionIsBackCallback?()
         }
+    }
+}
+
+
+extension CacheManager: CoreDataStackDelegate {
+    func onSetupCompleted() {
+        CoreDataStack.shared.delegates.remove(self)
+        actualizeCache()
     }
 }
