@@ -31,7 +31,7 @@ devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com
 
 xcodeParams = [
         xcodeApp: 'Xcode11.app',
-        target: 'TC_Depo_LifeTech lifedrive',
+        target: '',
         workspaceFile: 'Depo/Depo',
         schema: 'TC_Depo_LifeTech'
 ]
@@ -62,9 +62,10 @@ def readVersion = { app ->
     def appVersion = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' ${infoFile}"
     //def declaredBuild = sh returnStdout: true, script: "/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' ${infoFile}"
     //appVersion = "${declaredVersion.trim()}.${declaredBuild.trim()}"
+    app.bundleVersion = appVersion.trim()
 
     // Long version on artifactory. Will contain branch name and build number for uniqueness
-    app.version = "${appVersion.trim()}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
+    app.version = "${app.bundleVersion}.${branchName.toLowerCase().replace('/','.')}.${env.BUILD_NUMBER}"
 
     echo "Building app: ${app.name} version: ${app.version}"
 }
@@ -78,7 +79,7 @@ def xcodeBuild = { flavorId ->
         provisioningProfileUUID: "${provisionsDir}/${file.name}"
         ] }
     echo "Using provisioning profiles: ${provisioningProfiles}"
-    step([$class: 'XCodeBuilder', 
+    xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: xcodeParams.target,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
@@ -90,7 +91,8 @@ def xcodeBuild = { flavorId ->
       // Pack application, build and sign .ipa?
       buildIpa: true,
       ipaExportMethod: flavor.ipaExportMethod,
-      ipaName: "\${BASE_NAME}-${BUILD_ID}-${flavorId}",
+      //"\${BASE_NAME}-${BUILD_ID}-${flavorId}"
+      ipaName: '',
       ipaOutputDirectory: '',
       ipaManifestPlistUrl: '',
       
@@ -139,33 +141,34 @@ def publishToArtifactory = { app, classifier ->
     sh "find build -type d -name '*.dSYM' > dsymFiles"
     sh "zip -@ build/dsym.zip < dsymFiles"
 
-    def artifactPath = "turkcell-development/${groupPath}/${app.name}"
+    def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
+    def artifactName = "${app.name}-${app.version}-${classifier}"
 
     def outputsDir = 'build'
     sh "ls -l ${outputsDir}/*.ipa"
     def uploadSpec = """{
         "files": [
             {
-            "pattern": "${outputsDir}/*.ipa",
-            "target": "${artifactPath}/${app.version}/${app.name}-${app.version}-${classifier}.ipa"
+            "pattern": "${outputsDir}/${app.name}-*.ipa",
+            "target": "${artifactPath}/${artifactName}.ipa"
             },
             {
             "pattern": "${outputsDir}/dsym.zip",
-            "target": "${artifactPath}/${app.version}/${app.name}-${app.version}-${classifier}-dsym.zip"
+            "target": "${artifactPath}/${artifactName}-dsym.zip"
             }
         ]}"""
     def buildInfo = artifactory.upload(uploadSpec)
-    def ipaUrl = "${artifactory.url}/${artifactPath}/${app.version}/${app.name}-${app.version}-${classifier}.ipa"
-    def dsymUrl = "${artifactory.url}/${artifactPath}/${app.version}/${app.name}-${app.version}-${classifier}-dsym.zip"
-    createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${app.name}-${app.version}-${classifier}.ipa</a>"
-    createSummary icon:'package.png', text:"<a href=\"${dsymUrl}\">${app.name}-${app.version}-${classifier}-dsym.zip</a>"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${artifactName}.ipa"
+    def dsymUrl = "${artifactory.url}/${artifactPath}/${artifactName}-dsym.zip"
+    createSummary icon:'package.png', text:"<a href=\"${ipaUrl}\">${artifactName}.ipa</a>"
+    createSummary icon:'package.png', text:"<a href=\"${dsymUrl}\">${artifactName}-dsym.zip</a>"
 }
 
 def deployToIctStore = { app ->
-    def artifactPath = "turkcell-development/${groupPath}/${app.name}"
+    def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
     def ipaFile = "ictstore.ipa"
     def manifestFile = "manifest.plist"
-    def ipaUrl = "${artifactory.url}/${artifactPath}/${app.version}/${app.name}-${app.version}-test.ipa"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${app.name}-${app.version}-test.ipa"
     def ictsBundleIdentifier = flavors['test'].bundleIdentifier
     sh "curl -v ${ipaUrl} -o ${ipaFile}"
 
@@ -178,7 +181,7 @@ def deployToIctStore = { app ->
 
 def deployToTestflight = { app ->
     def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
-    def ipaFile = "build/${app.name}-${BUILD_ID}-prod.ipa"
+    def ipaFile = "build/${app.name}-${app.}.ipa"
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
         ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
