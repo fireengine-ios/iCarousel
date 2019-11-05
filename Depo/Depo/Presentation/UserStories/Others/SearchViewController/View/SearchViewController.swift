@@ -75,11 +75,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        if #available(iOS 11.0, *) {
-            navigationBarWithGradientStyle()
-        } else {
-            defaultNavBarStyle()
-        }
+        defaultNavBarStyle()
+
         statusBarColor = .white
         
         if let topBarVc = UIApplication.topController() as? TabBarViewController {
@@ -105,28 +102,28 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if #available(iOS 11.0, *),
-            Device.operationSystemVersionLessThen(13) {
+        if #available(iOS 11.0, *), Device.operationSystemVersionLessThen(13) {
             defaultNavBarStyle()
             statusBarColor = .white
         }
+        
         navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        output.viewWillDisappear()
+        searchBar.resignFirstResponder()
+
         statusBarColor = .clear
+        
         if goBack {
             if let topBarVc = UIApplication.topController() as? TabBarViewController {
                 topBarVc.statusBarStyle = .lightContent
             }
-            
-            homePageNavigationBarStyle()
         }
         
-        searchBar.resignFirstResponder()
+        output.viewWillDisappear()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -229,9 +226,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             searchTextField = textField
         }
         
-        let firstBtn = searchBar.firstSubview(of: UIButton.self)
+        let cancelButton = searchBar.firstSubview(of: UIButton.self)
         
-        if let button = firstBtn {
+        if let button = cancelButton {
             button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
             button.isEnabled = true
             button.adjustsFontSizeToFitWidth()

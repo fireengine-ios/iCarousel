@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -395,6 +396,13 @@ extension AppDelegate {
         XPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         AppEvents.logPushNotificationOpen(userInfo)
+        
+        // track receiving TBMatik Push notifications
+        if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
+            pushType == PushNotificationAction.tbmatic.rawValue {
+            analyticsService.logScreen(screen: .tbmatikPushNotification)
+            analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
+        }
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

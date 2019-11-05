@@ -29,6 +29,8 @@ final class AlbumCellView: UIView {
         }
     }
     
+    private var imageGradientBorderLayer: CAGradientLayer?
+    
     // MARK: - Setup
     
     func setupStyle(with displayType: BaseDataSourceDisplayingType) {
@@ -51,6 +53,13 @@ final class AlbumCellView: UIView {
         accessibilityLabel = album.name
         
         layoutIfNeeded()
+        
+        if album.isTBMatik {
+            setupGradientBorder()
+        } else {
+            imageGradientBorderLayer?.removeFromSuperlayer()
+            imageGradientBorderLayer = nil
+        }
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -62,6 +71,31 @@ final class AlbumCellView: UIView {
     func cancelImageLoading() {
         imageView.checkIsNeedCancelRequest()
         imageView.image = nil
+    }
+    
+    // MARK: Gradient Image Border
+    
+    private func setupGradientBorder() {
+        guard imageGradientBorderLayer == nil else {
+            return
+        }
+        
+        let imageGradientBorderLayer = CAGradientLayer()
+        imageGradientBorderLayer.frame = imageBorderView.bounds
+        let colors = [ColorConstants.lightTeal, ColorConstants.apricotTwo, ColorConstants.rosePink]
+        imageGradientBorderLayer.colors = colors.map { return $0.cgColor }
+        imageGradientBorderLayer.startPoint = .zero
+        imageGradientBorderLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        let mask = CAShapeLayer()
+        mask.path = UIBezierPath(roundedRect: imageBorderView.bounds, cornerRadius: 0).cgPath
+        mask.fillColor = UIColor.clear.cgColor
+        mask.strokeColor = UIColor.white.cgColor
+        mask.lineWidth = 5
+        
+        imageGradientBorderLayer.mask = mask
+
+        imageBorderView.layer.addSublayer(imageGradientBorderLayer)
     }
 }
 

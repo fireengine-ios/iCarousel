@@ -108,7 +108,7 @@ class SignUpUser: BaseRequestParametrs {
     let captchaAnswer: String?
     var brandType: String {
         #if LIFEDRIVE 
-            return "LIFEDRIVE"
+            return "BILLO"
         #else
             return "LIFEBOX"
         #endif

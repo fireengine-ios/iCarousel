@@ -143,4 +143,10 @@ final class HomePageRouter: HomePageRouterInput {
         
         popUpService.addPopUs(popUps)
     }
+    
+    func openCampaignDetails() {
+        let controller = router.campaignDetailViewController()
+        router.pushViewController(viewController: controller)
+    }
+    
 }

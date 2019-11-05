@@ -19,8 +19,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private lazy var activityManager = ActivityIndicatorManager()
 
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
-    private let instapickService: InstapickService = factory.resolve()
-    
+    private let instapickService: InstapickService = InstapickServiceImpl()
+    private let campaignService: CampaignService = CampaignServiceImpl()
+    private let instaPickCampaignService = InstaPickCampaignService()
+
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
@@ -54,19 +56,22 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         configure()
         trackScreen()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
-
+        reloadCards()
+        
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
     }
     
     func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
         self.dataSource.reloadCards(with: analyzesCount)
+        self.loadCampaignStatisticsIfNeed(success: nil)
     }
     
     private func trackScreen() {
@@ -272,8 +277,37 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             }
 
             self.dataSource.reloadCards(with: analyzesCount)
-            success?()
+            self.loadCampaignStatisticsIfNeed(success: success)
         })
+    }
+    
+    private func loadCampaignStatisticsIfNeed(success: VoidHandler?) {
+        
+        campaignService.getPhotopickDetails { [weak self] result in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            switch result {
+            case .success(let campaignCard):
+                let isDateAvailable = (campaignCard.startDate...campaignCard.endDate).contains(Date())
+                
+                if SingletonStorage.shared.isUserFromTurkey, isDateAvailable {
+                    self.dataSource.showCampaignCard(with: campaignCard)
+                }
+                
+            case .failure(let errorResult):
+                switch errorResult {
+                case .empty:
+                    break
+                case .error(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            }
+            
+            success?()
+        }
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
@@ -303,6 +337,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
+                        self.dataSource.showEmptyCard()
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }
@@ -385,7 +420,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func prepareToOpenDetails(with analyze: InstapickAnalyze) {
         startActivityIndicator()
-        
         getAnalyzesCount(success: { [weak self] analyzesCount in
             self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: analyzesCount)
         })
@@ -483,5 +517,47 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
         }
         
         dataSource.insertNewItems([insertAnalyse])
+    }
+    
+    private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult) {
+        
+        instaPickCampaignService.getController { [weak self] navController in
+            DispatchQueue.toMain {
+                if let navController = navController,
+                    let controller = navController.topViewController as? InstaPickCampaignViewController
+                {
+                    controller.didClosed = {
+                        self?.showResultWithoutCampaign(analyzesCount: analyzesResult.analyzesCount, analysis: analyzesResult.analysis)
+                    }
+                    self?.stopActivityIndicator()
+                    self?.present(navController, animated: true, completion: nil)
+                } else {
+                    self?.showResultWithoutCampaign(analyzesCount: analyzesResult.analyzesCount, analysis: analyzesResult.analysis)
+                }
+            }
+        }
+    }
+    
+    private func showResultWithoutCampaign(analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
+        updateAnalyzeCount(with: analyzesCount)
+        let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
+                                                                              analyzesCount: analyzesCount,
+                                                                              isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
+        self.stopActivityIndicator()
+        present(instapickDetailControlller, animated: true, completion: nil)
+    }
+    
+    private func isGridRelatedController(controller: UIViewController?) -> Bool {
+        guard let controller = controller else {
+            return false
+        }
+        return (controller is BaseFilesGreedViewController || controller is SegmentedController)
+    }
+}
+
+extension AnalyzeHistoryViewController: InstaPickProgressPopupDelegate {
+    func analyzeDidComplete(analyzeResult: AnalyzeResult) {
+        startActivityIndicator()
+        handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
     }
 }

@@ -278,6 +278,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        hideSpinnerIncludeNavigationBar()
+        
         MenloworksTagsService.shared.onVideoDisplayed()
         
         localPlayer?.replaceCurrentItem(with: item)
@@ -374,51 +376,58 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     }
     
     func tapOnSelectedItem() {
+        showSpinnerIncludeNavigationBar()
         let file = objects[selectedIndex]
-        
         if file.fileType == .video {
-            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-            guard let url = preUrl else {
+            self.prepareToPlayVideo(file: file)
+        }
+    }
+    
+    private func prepareToPlayVideo(file: Item) {
+        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+        guard let url = preUrl else {
+            return
+        }
+        player.pause()
+        playerController?.player = nil
+        playerController?.removeFromParentViewController()
+        playerController = nil
+        localPlayer?.pause()
+        localPlayer = nil
+        localPlayer = AVPlayer()
+        
+        switch file.patchToPreview {
+        case let .localMediaContent(local):
+            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
                 return
             }
+            let option = PHVideoRequestOptions()
             
-            player.pause()
-            playerController?.player = nil
-            playerController?.removeFromParentViewController()
-            playerController = nil
-            localPlayer?.pause()
-            localPlayer = nil
-            localPlayer = AVPlayer()
-            
-            switch file.patchToPreview {
-            case let .localMediaContent(local):
-                guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-                    return 
-                }
-                let option = PHVideoRequestOptions()
-                
-                output.startCreatingAVAsset()
-                debugLog("about to play local video item")
-                DispatchQueue.global(qos: .default).async { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-                        
-                        DispatchQueue.main.async {
-                            self?.output.stopCreatingAVAsset()
-                            guard let asset = asset else {
-                                return
-                            }
-                            let playerItem = AVPlayerItem(asset: asset)
-                            debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                            self?.play(item: playerItem)
-                        }   
+            output.startCreatingAVAsset()
+            debugLog("about to play local video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
+                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
+                    debugPrint("!!!! after local request")
+                    DispatchQueue.main.async {
+                        self?.output.stopCreatingAVAsset()
+                        guard let asset = asset else {
+                            return
+                        }
+                        let playerItem = AVPlayerItem(asset: asset)
+                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
+                        self?.play(item: playerItem)
                     }
                 }
-                
-            case .remoteUrl(_):
-                debugLog("about to play remote video item")
+            }
+            
+        case .remoteUrl(_):
+            debugLog("about to play remote video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
                 let playerItem = AVPlayerItem(url: url)
                 debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                play(item: playerItem)
+                DispatchQueue.main.async {
+                    self?.play(item: playerItem)
+                }
             }
         }
     }

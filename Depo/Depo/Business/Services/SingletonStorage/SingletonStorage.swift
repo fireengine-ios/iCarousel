@@ -75,6 +75,10 @@ class SingletonStorage {
         return accountInfo?.accountType == "TURKCELL"
     }
     
+    var isUserFromTurkey: Bool {
+        return accountInfo?.countryCode == "90"
+    }
+    
     var uniqueUserID: String {
         return accountInfo?.projectID ?? ""
     }

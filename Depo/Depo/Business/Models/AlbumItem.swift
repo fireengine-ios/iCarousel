@@ -16,9 +16,14 @@ class AlbumItem: BaseDataSourceItem {
     let audioCount: Int?
     var preview: Item?
     let readOnly: Bool?
+    var icon: String?
     
     var allContentCount: Int {
         return (imageCount ?? 0) + (videoCount ?? 0) + (audioCount ?? 0)
+    }
+    
+    var isTBMatik: Bool {
+        return icon == "TBMatik"
     }
     
     init (remote: AlbumServiceResponse, previewIconSize: PreviewIconSize = .medium) {
@@ -27,6 +32,7 @@ class AlbumItem: BaseDataSourceItem {
         videoCount = remote.videoCount
         audioCount = remote.audioCount
         readOnly = remote.readOnly
+        icon = remote.icon
         
         if let pr = remote.coverPhoto {
             preview = WrapData(remote: pr)

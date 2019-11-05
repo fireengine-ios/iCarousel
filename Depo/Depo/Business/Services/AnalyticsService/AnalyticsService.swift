@@ -122,6 +122,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
     func trackSignupEvent(error: SignupResponseError?)
     func trackImportEvent(error: SpotifyResponseError?)
+    func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool)
     
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
@@ -356,6 +357,12 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
+    func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool) {
+        trackCustomGAEvent(eventCategory: .functions,
+                           eventActions: screenType.googleAnalyticsEventAction,
+                           eventLabel: subject.googleAnalyticsEventLabel(isSupportForm: isSupportForm))
+    }
+    
     func trackImportEvent(error: SpotifyResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
             let parametrs: [String: Any] = [
@@ -553,5 +560,7 @@ extension AnalyticsService: NetmeraProtocol {
         #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
         #endif
+        
+        Netmera.setAppGroupName(SharedConstants.groupIdentifier)
     }
 }

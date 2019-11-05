@@ -295,9 +295,10 @@ extension SyncServiceManager {
     
     @objc private func onAutoSyncStatusDidChange() {
         if hasExecutingSync {
+            WidgetService.shared.notifyWidgetAbout(status: .executing)
+
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
         
@@ -314,7 +315,6 @@ extension SyncServiceManager {
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
-        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)

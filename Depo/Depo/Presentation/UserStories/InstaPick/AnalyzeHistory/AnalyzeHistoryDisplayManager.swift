@@ -31,7 +31,8 @@ final class AnalyzeHistoryDisplayManager: NSObject {
             startHereView.isHidden = true
             
         case .empty:
-            emptyView.isHidden = false
+            /// AnalyzeHistoryEmptyCell added to show empty state
+            //emptyView.isHidden = false
             newAnalysisView.isHidden = false
             startHereView.isHidden = false
             

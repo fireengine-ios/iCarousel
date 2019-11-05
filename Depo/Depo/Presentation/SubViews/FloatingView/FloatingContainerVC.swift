@@ -33,15 +33,11 @@ class FloatingContainerVC: UIViewController, UIPopoverPresentationControllerDele
     
     func setupContentView(withView contentView: UIView) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[contentView]-(0)-|",
-                                                                   options: [], metrics: nil,
-                                                                   views: ["contentView" : contentView])
-        
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[contentView]-(0)-|",
-                                                                 options: [], metrics: nil,
-                                                                 views: ["contentView" : contentView])
-        view.addConstraints(horisontalConstraints + verticalConstraints)
+
+        contentView.topAnchor.constraint(equalTo: view.safeTopAnchor).activate()
+        contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
+        contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).activate()
+        contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).activate()
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
