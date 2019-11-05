@@ -85,7 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
-        CoreDataStack.shared.setup { [weak self] in
+        let coreDataStack: CoreDataStack = factory.resolve()
+        coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
             }
