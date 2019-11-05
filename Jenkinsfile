@@ -81,7 +81,7 @@ def runXcode = { app, flavorId ->
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: app.cleanBeforeBuild,
+      cleanBeforeBuild: false,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
@@ -91,7 +91,7 @@ def runXcode = { app, flavorId ->
       buildIpa: true,
       ipaExportMethod: flavor.ipaExportMethod,
       //"\${BASE_NAME}-${BUILD_ID}-${flavorId}"
-      ipaName: '',
+      ipaName: "${app.name}-${BUILD_ID}-${flavorId}",
       ipaOutputDirectory: '',
       ipaManifestPlistUrl: '',
       
@@ -179,7 +179,7 @@ def deployToIctStore = { app ->
 
 def deployToTestflight = { app ->
     def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
-    def ipaFile = "build/${app.name}-${app.bundleVersion}.ipa"
+    def ipaFile = "build/${app.name}-${BUILD_ID}-${flavorId}.ipa"
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
         ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
