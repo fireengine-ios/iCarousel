@@ -22,9 +22,22 @@ protocol Factory: SharedFactory {
     func resolve() -> InstapickService
     func resolve() -> SpotifyService
     func resolve() -> SpotifyRoutingService
+
+    func resolve() -> CoreDataStack
 }
 
 final class FactoryMain: FactoryBase, Factory {
+    
+    private static let coreDataStack: CoreDataStack = {
+        if #available(iOS 10, *) {
+            return CoreDataStack_ios10()
+        } else {
+            return CoreDataStack_ios9()
+        }
+    }()
+    func resolve() -> CoreDataStack {
+        return FactoryMain.coreDataStack
+    }
 
     private static let mediaPlayer = MediaPlayer()
     func resolve() -> MediaPlayer {
