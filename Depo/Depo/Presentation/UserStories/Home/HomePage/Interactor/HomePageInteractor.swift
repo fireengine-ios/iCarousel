@@ -147,7 +147,9 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):
-                self?.fillCollectionView(isReloadAll: true)
+                if !error.isNetworkError {
+                    self?.fillCollectionView(isReloadAll: true)
+                }
                 
                 DispatchQueue.toMain {
                     self?.output.didObtainFailCardInfo(errorMessage: error.description,
