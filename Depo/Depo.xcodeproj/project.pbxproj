@@ -16785,9 +16785,9 @@
 			productReference = 78B2D34A204AA5F500D096DC /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */ = {
+		8C0E8C611FDEBDFF00789C91 /* lifebox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "TC_Depo_LifeTech" */;
+			buildConfigurationList = 8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "lifebox" */;
 			buildPhases = (
 				8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */,
 				8C0E8C631FDEBDFF00789C91 /* Sources */,
@@ -16807,7 +16807,7 @@
 				7A3E0C0A206273CE00F79A1C /* PBXTargetDependency */,
 				7A3E0C0D206273CE00F79A1C /* PBXTargetDependency */,
 			);
-			name = TC_Depo_LifeTech;
+			name = lifebox;
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
 			productType = "com.apple.product-type.application";
@@ -17354,7 +17354,7 @@
 				8C8E92D123154636000242E9 /* LifeTech-LifeboxFileProvider */,
 				8C8E930F2315463F000242E9 /* LifeTech-LifeboxFileProviderUI */,
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
-				8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */,
+				8C0E8C611FDEBDFF00789C91 /* lifebox */,
 				B54BFF2F202B20250018AF82 /* autosync-widget */,
 				CE58FAEE20444492007F3F54 /* LifeboxShared */,
 				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
@@ -28006,7 +28006,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "TC_Depo_LifeTech" */ = {
+		8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "lifebox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C0E907A1FDEBDFF00789C91 /* Debug */,

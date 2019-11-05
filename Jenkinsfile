@@ -31,7 +31,6 @@ devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com
 
 xcodeParams = [
         xcodeApp: 'Xcode11.app',
-        target: '',
         workspaceFile: 'Depo/Depo',
         schema: 'TC_Depo_LifeTech'
 ]
@@ -70,7 +69,7 @@ def readVersion = { app ->
     echo "Building app: ${app.name} version: ${app.version}"
 }
 
-def xcodeBuild = { flavorId ->
+def runXcode = { app, flavorId ->
     def flavor = flavors[flavorId]
     def provisionsDir = "provisioningProfiles/${flavor.configuration}"
     def provisionFiles = findFiles(glob: "${provisionsDir}/*.mobileprovision")
@@ -80,9 +79,9 @@ def xcodeBuild = { flavorId ->
         ] }
     echo "Using provisioning profiles: ${provisioningProfiles}"
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
-      target: xcodeParams.target,
+      target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: true,
+      cleanBeforeBuild: app.cleanBeforeBuild,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
@@ -213,8 +212,7 @@ pipeline {
                     stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
 
-                        readVersion(apps[0])
-                        readVersion(apps[1])
+                        apps.each readVersion
 
                         sh 'Pods/SwiftLint/swiftlint --reporter checkstyle > swiftlint-report.xml || true'
                         checkstyle defaultEncoding: '', healthy: '', pattern: 'swiftlint-report.xml', unHealthy: '',
@@ -226,9 +224,10 @@ pipeline {
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install --repo-update"
-                        xcodeBuild('test')
-                        publishToArtifactory(apps[0], 'test')
-                        publishToArtifactory(apps[1], 'test')
+                        apps.each { app ->
+                            runXcode(app, 'test')
+                            publishToArtifactory(app, 'test')
+                        }
                     }
                 }
             }
@@ -268,8 +267,7 @@ pipeline {
             }
             steps {
                 script {
-                    deployToIctStore(apps[0])
-                    deployToIctStore(apps[1])
+                    apps.each deployToIctStore
                 }
             }
 			post {
@@ -311,9 +309,10 @@ pipeline {
            }
             steps {
                 script {
-                    xcodeBuild('prod')
-                    publishToArtifactory(apps[0], 'prod')
-                    publishToArtifactory(apps[1], 'prod')
+                    apps.each { app ->
+                        runXcode(app, 'prod')
+                        publishToArtifactory(app, 'prod')
+                    }
                 }
             }
 			post {
@@ -362,8 +361,7 @@ pipeline {
                 script {
                         stage('Deploying to Testflight') {
                             sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
-                            deployToTestflight(apps[0])
-                            deployToTestflight(apps[1])
+                            apps.each deployToTestflight
                         }
                 }
             }
