@@ -93,10 +93,10 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="a7w-UJ-tHf" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="bottom" id="6Tz-je-hFR"/>
-                <constraint firstItem="znv-0S-e61" firstAttribute="bottom" secondItem="a7w-UJ-tHf" secondAttribute="bottom" id="88e-iQ-tFi"/>
+                <constraint firstAttribute="bottom" secondItem="a7w-UJ-tHf" secondAttribute="bottom" id="88e-iQ-tFi"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9wa-HG-Fvr"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="COT-s0-gxJ"/>
-                <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="znv-0S-e61" secondAttribute="bottom" id="DYb-pY-0Zn"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="DYb-pY-0Zn"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yvj-PI-e9N"/>
                 <constraint firstItem="a7w-UJ-tHf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kG4-NC-nhH"/>
                 <constraint firstAttribute="trailing" secondItem="a7w-UJ-tHf" secondAttribute="trailing" id="wAP-cW-Kg3"/>
@@ -104,7 +104,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="znv-0S-e61"/>
             <point key="canvasLocation" x="46.5" y="100.5"/>
         </view>
     </objects>
