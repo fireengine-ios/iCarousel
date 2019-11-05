@@ -129,7 +129,7 @@ class PopUpSwipeCell: UITableViewCell {
                         baseView.viewDeletedBySwipe()
                     }
                 }
-                self.cellDelegate?.onCellDeleted(cell: self)
+//                self.cellDelegate?.onCellDeleted(cell: self)
             }
         }
     }

@@ -302,6 +302,10 @@ class LoginInteractor: LoginInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
     }
     
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
+        analyticsService.trackSupportEvent(screenType: .login, subject: type, isSupportForm: false)
+    }
+    
     func rememberMe(state: Bool) {
         rememberMe = state
     }

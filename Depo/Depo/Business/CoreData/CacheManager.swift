@@ -43,15 +43,20 @@ final class CacheManager {
         reachabilityService.delegates.remove(self)
     }
     
-    func actualizeCache(completion: VoidHandler?) {
+    func actualizeCache() {
+        guard CoreDataStack.shared.isReady else {
+            scheduleActualization()
+            return
+        }
+        
         isCacheActualized = false
         isProcessing = true
 
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             guard let `self` = self else {
-                completion?()
                 return
             }
+            
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                 self.showPreparationCardAfterDelay()
                 self.startAppendingAllRemotes(completion: { [weak self] in
@@ -63,7 +68,6 @@ final class CacheManager {
                     self.startProcessingAllLocals(completion: { [weak self] in
                         guard let `self` = self,
                             !self.processingLocalItems else {
-                            completion?()
                             return
                         }
                         //FIXME: need handling if we logouted and locals still in progress
@@ -71,12 +75,10 @@ final class CacheManager {
                         self.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
                         self.delegates.invoke { $0.didCompleteCacheActualization() }
-                        completion?()
                     })
                 })
             } else {
                 guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
-                    completion?()
                     return
                 }
                 self.showPreparationCardAfterDelay()
@@ -85,10 +87,13 @@ final class CacheManager {
                     self?.isCacheActualized = true
                     CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
                     self?.delegates.invoke { $0.didCompleteCacheActualization() }
-                    completion?()
                 })
             }
         }
+    }
+    
+    private func scheduleActualization() {
+        CoreDataStack.shared.delegates.add(self)
     }
     
     private func showPreparationCardAfterDelay() {
@@ -227,5 +232,13 @@ extension CacheManager: ReachabilityServiceDelegate {
         if service.isReachable {
             internetConnectionIsBackCallback?()
         }
+    }
+}
+
+
+extension CacheManager: CoreDataStackDelegate {
+    func onCoreDataStackSetupCompleted() {
+        CoreDataStack.shared.delegates.remove(self)
+        actualizeCache()
     }
 }

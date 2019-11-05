@@ -81,7 +81,7 @@ extension UIViewController: Waiting {
     }
     
     func showSpinnerIncludeNavigationBar() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             window.addSubview(hud)
@@ -89,7 +89,7 @@ extension UIViewController: Waiting {
     }
     
     func hideSpinnerIncludeNavigationBar() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             MBProgressHUD.hideAllHUDs(for: window, animated: true)
         }

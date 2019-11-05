@@ -25,4 +25,5 @@ protocol RegistrationInteractorInput {
     func signUpUser(_ userInfo: RegistrationUserInfoModel)
     
     func trackScreen()
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)
 }

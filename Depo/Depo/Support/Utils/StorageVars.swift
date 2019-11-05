@@ -23,6 +23,7 @@ protocol StorageVars: class {
     var deepLinkParameters: [AnyHashable: Any]? { get set }
     var interruptedSyncVideoQueueItems: [String] { get set }
     var blockedUsers: [String : Date] { get set }
+    var shownCampaignInstaPick: Date? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -135,5 +136,11 @@ final class UserDefaultsVars: StorageVars {
     var blockedUsers: [String : Date] {
         get { return userDefaults.object(forKey: blockedUsersKey) as? [String : Date] ?? [:]}
         set { userDefaults.set(newValue, forKey: blockedUsersKey)}
+    }
+    
+    private let showCampaignInstaPickKey = "campaignShown"
+    var shownCampaignInstaPick: Date? {
+        get { return userDefaults.object(forKey: showCampaignInstaPickKey) as? Date}
+        set { userDefaults.set(newValue, forKey: showCampaignInstaPickKey)}
     }
 }

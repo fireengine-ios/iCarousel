@@ -140,7 +140,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return result
     }
     
-    //MAKR: - View lifecycle
+    //MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,13 +156,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
-        
         changeVisibleStatus(hidden: true)
         setupObserving()
         
         player.delegates.add(self)
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
+        
+        #if LIFEDRIVE
+        plussButton.imageEdgeInsets = UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15)
+        #endif
     }
     
     override var childViewControllerForStatusBarStyle: UIViewController? {
@@ -416,9 +419,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate func changeViewState(state: Bool) {
         plussButton.isSelected = state
         
+        let rotationAngle: CGFloat = .pi / 4
+        
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             if state {
-                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi / 4)
+                self.plussButton.transform = CGAffineTransform(rotationAngle: rotationAngle)
             } else {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
             }
