@@ -78,7 +78,7 @@ target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
 end
 
-target 'TC_Depo_LifeTech' do
+target 'lifebox' do
 	core_pods
 end
 

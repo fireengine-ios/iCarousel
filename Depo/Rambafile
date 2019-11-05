@@ -7,7 +7,7 @@ xcodeproj_path: Depo.xcodeproj
 
 ### Code generation settings section
 # The main project target name
-project_targets: [Depo_LifeTech, TC_Depo_LifeTech]
+project_targets: [Depo_LifeTech, lifebox]
 
 # The file path for new modules
 project_file_path: Depo/Presentation/UserStories
