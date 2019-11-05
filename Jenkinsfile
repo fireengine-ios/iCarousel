@@ -132,7 +132,6 @@ def xcodeBuild = { flavorId ->
       provideApplicationVersion: false,
       cfBundleShortVersionStringValue: '',
       cfBundleVersionValue: ''
-      ])
 }
 
 def publishToArtifactory = { app, classifier ->
