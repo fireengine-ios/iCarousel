@@ -75,6 +75,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    @IBOutlet private weak var backgroundImageView: UIImageView!
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -83,6 +84,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         contentView = containerView
         
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
+        setupBackgroundImageView()
     }
     
     //MARK: Actions
@@ -99,6 +101,14 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             viewController.needToShowTabBar = false
             router.pushViewController(viewController: viewController)
         }
+    }
+    
+    private func setupBackgroundImageView() {
+        #if LIFEDRIVE
+        //For Billo(Lifedrive) background image should be clear
+        #else
+        backgroundImageView.image = UIImage(named: "FullOfQuotaImage")
+        #endif
     }
 }
 
