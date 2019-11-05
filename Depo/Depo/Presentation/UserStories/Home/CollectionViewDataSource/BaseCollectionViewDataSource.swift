@@ -373,13 +373,6 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
         }
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int) {
-        guard isViewActive else {
-            return
-        }
-        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
-    }
-    
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
         guard isViewActive else {
             return
