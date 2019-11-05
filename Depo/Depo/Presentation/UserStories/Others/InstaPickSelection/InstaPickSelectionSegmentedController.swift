@@ -111,6 +111,12 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         trackScreen()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
+    }
+    
     private func trackScreen() {
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickPhotoSelection)
@@ -314,7 +320,6 @@ extension InstaPickSelectionSegmentedController {
         ]
         
         navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
         navigationBar.barStyle = .black
         navigationBar.isTranslucent = false
         navigationBar.tintColor = navigationTextColor
