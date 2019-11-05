@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstaPickCampaignViewController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomViewDescriptionLabel" destination="tY4-Ke-cKD" id="fpG-Tx-iJm"/>
+                <outlet property="bottomViewImage" destination="gwi-ac-Yu2" id="dr1-hy-Ipo"/>
+                <outlet property="bottomViewTitleLabel" destination="HK8-5a-LXK" id="jr7-6T-Vxx"/>
+                <outlet property="instaPickViewControllerDesigner" destination="M3K-BN-i3Y" id="HAg-dV-LD8"/>
+                <outlet property="premiumButtonView" destination="dde-4K-Umi" id="kNe-aA-bv9"/>
+                <outlet property="scrollView" destination="BhK-3T-WSY" id="PnH-ej-wPE"/>
+                <outlet property="topViewBackgroundImage" destination="f4I-zY-brU" id="3pz-Sd-VlW"/>
+                <outlet property="topViewDescriptionLabel" destination="v6f-gE-6AG" id="MWw-fy-fus"/>
+                <outlet property="topViewTitileLabel" destination="dxd-7L-HIE" id="3ZV-kA-5R0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhK-3T-WSY">
+                    <rect key="frame" x="16" y="50" width="382" height="674"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpP-Bg-dFy">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="766.66666666666663"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9q-6G-Q1c">
+                                    <rect key="frame" x="13" y="18" width="356" height="262"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camapaignPremiumBackground" translatesAutoresizingMaskIntoConstraints="NO" id="f4I-zY-brU" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="356" height="131"/>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i4K-fp-CsQ">
+                                            <rect key="frame" x="40" y="40" width="276" height="192"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="CONGRATS ! " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-7L-HIE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="276" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-gE-6AG">
+                                                    <rect key="frame" x="0.0" y="30.33333333333335" width="276" height="101.66666666666669"/>
+                                                    <string key="text">You just got the chance to participate the contest. For having more chance, tomorrow analyze with PP again. Lorem ipsum dolor sit amet.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dde-4K-Umi">
+                                                    <rect key="frame" x="0.0" y="142" width="276" height="50"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgz-pl-dnh" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
+                                                            <rect key="frame" x="69" y="0.0" width="138" height="50"/>
+                                                            <state key="normal" title="title"/>
+                                                            <connections>
+                                                                <action selector="becomePremiumButtonTapped:" destination="-1" eventType="touchUpInside" id="iYB-eM-Tvj"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="bgz-pl-dnh" secondAttribute="bottom" id="08d-Ot-vYn"/>
+                                                        <constraint firstItem="bgz-pl-dnh" firstAttribute="centerX" secondItem="dde-4K-Umi" secondAttribute="centerX" id="I2t-OS-j9w"/>
+                                                        <constraint firstAttribute="height" constant="30" id="WrL-IU-L0F"/>
+                                                        <constraint firstItem="bgz-pl-dnh" firstAttribute="top" secondItem="dde-4K-Umi" secondAttribute="top" id="nW5-PL-NfD"/>
+                                                        <constraint firstItem="bgz-pl-dnh" firstAttribute="width" secondItem="dde-4K-Umi" secondAttribute="width" multiplier="0.5" id="zy0-No-ns6"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="f4I-zY-brU" firstAttribute="leading" secondItem="w9q-6G-Q1c" secondAttribute="leading" id="9an-7w-xKP"/>
+                                        <constraint firstItem="f4I-zY-brU" firstAttribute="height" secondItem="w9q-6G-Q1c" secondAttribute="height" multiplier="0.5" id="Bh9-G8-N57"/>
+                                        <constraint firstItem="i4K-fp-CsQ" firstAttribute="leading" secondItem="w9q-6G-Q1c" secondAttribute="leading" constant="40" id="TZl-07-GkT"/>
+                                        <constraint firstItem="f4I-zY-brU" firstAttribute="top" secondItem="w9q-6G-Q1c" secondAttribute="top" id="YLw-IG-y2o"/>
+                                        <constraint firstItem="i4K-fp-CsQ" firstAttribute="top" secondItem="w9q-6G-Q1c" secondAttribute="top" constant="40" id="du5-eo-4Dk"/>
+                                        <constraint firstAttribute="trailing" secondItem="f4I-zY-brU" secondAttribute="trailing" id="fDe-fS-ITX"/>
+                                        <constraint firstAttribute="trailing" secondItem="i4K-fp-CsQ" secondAttribute="trailing" constant="40" id="ka6-OT-phI"/>
+                                        <constraint firstAttribute="bottom" secondItem="i4K-fp-CsQ" secondAttribute="bottom" constant="30" id="vPG-sq-NZZ"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4g-cO-eES">
+                                    <rect key="frame" x="13" y="290" width="356" height="412.66666666666674"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gwi-ac-Yu2" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="10" y="30" width="336" height="149.33333333333334"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="gwi-ac-Yu2" secondAttribute="height" multiplier="18:8" id="bUP-3k-oki"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-Mu-dVQ">
+                                            <rect key="frame" x="40" y="199.33333333333337" width="276" height="149.33333333333337"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samsung Device lorem ipsum !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-5a-LXK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="276" height="27.666666666666668"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name-Surname info for millipiyango lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tY4-Ke-cKD">
+                                                    <rect key="frame" x="0.0" y="35.666666666666636" width="276" height="113.66666666666669"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbY-DE-1ed" customClass="RoundedButton" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="37" y="358.66666666666663" width="282" height="44"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="editProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="d2G-QR-ZWd"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="gwi-ac-Yu2" secondAttribute="trailing" constant="10" id="Fl1-fs-5LH"/>
+                                        <constraint firstItem="gwi-ac-Yu2" firstAttribute="top" secondItem="D4g-cO-eES" secondAttribute="top" constant="30" id="PH7-eS-pIb"/>
+                                        <constraint firstItem="AJs-Mu-dVQ" firstAttribute="top" secondItem="gwi-ac-Yu2" secondAttribute="bottom" constant="20" id="UP6-V2-gc3"/>
+                                        <constraint firstItem="gwi-ac-Yu2" firstAttribute="leading" secondItem="D4g-cO-eES" secondAttribute="leading" constant="10" id="W6c-GL-s5c"/>
+                                        <constraint firstItem="AJs-Mu-dVQ" firstAttribute="centerX" secondItem="D4g-cO-eES" secondAttribute="centerX" id="ck1-Qf-8oa"/>
+                                        <constraint firstItem="vbY-DE-1ed" firstAttribute="centerX" secondItem="D4g-cO-eES" secondAttribute="centerX" id="eUn-r3-hHC"/>
+                                        <constraint firstAttribute="bottom" secondItem="vbY-DE-1ed" secondAttribute="bottom" constant="10" id="fbp-Su-81N"/>
+                                        <constraint firstItem="AJs-Mu-dVQ" firstAttribute="height" secondItem="gwi-ac-Yu2" secondAttribute="height" id="pn5-JK-LHU"/>
+                                        <constraint firstItem="vbY-DE-1ed" firstAttribute="top" secondItem="AJs-Mu-dVQ" secondAttribute="bottom" constant="10" id="yP3-eP-6Wo"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1X-wI-m0r" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="50" y="712.66666666666663" width="282" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="eNQ-T7-oJG"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="showResultButtonTapped:" destination="-1" eventType="touchUpInside" id="yqC-xl-Lw0"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="D4g-cO-eES" secondAttribute="trailing" constant="13" id="1CW-QT-Syd"/>
+                                <constraint firstItem="B1X-wI-m0r" firstAttribute="leading" secondItem="CpP-Bg-dFy" secondAttribute="leading" constant="50" id="8BW-Bf-dvF"/>
+                                <constraint firstItem="B1X-wI-m0r" firstAttribute="top" secondItem="D4g-cO-eES" secondAttribute="bottom" constant="10" id="DpT-Pq-Xed"/>
+                                <constraint firstItem="vbY-DE-1ed" firstAttribute="width" secondItem="B1X-wI-m0r" secondAttribute="width" id="HRI-7V-9HL"/>
+                                <constraint firstAttribute="trailing" secondItem="B1X-wI-m0r" secondAttribute="trailing" constant="50" id="JUy-Km-bdJ"/>
+                                <constraint firstAttribute="trailing" secondItem="w9q-6G-Q1c" secondAttribute="trailing" constant="13" id="Ncl-mT-rFT"/>
+                                <constraint firstItem="D4g-cO-eES" firstAttribute="leading" secondItem="CpP-Bg-dFy" secondAttribute="leading" constant="13" id="TFc-yC-4NE"/>
+                                <constraint firstItem="w9q-6G-Q1c" firstAttribute="leading" secondItem="CpP-Bg-dFy" secondAttribute="leading" constant="13" id="V1X-Xu-c6d"/>
+                                <constraint firstItem="D4g-cO-eES" firstAttribute="top" secondItem="w9q-6G-Q1c" secondAttribute="bottom" constant="10" id="Ycj-jh-Swe"/>
+                                <constraint firstItem="AJs-Mu-dVQ" firstAttribute="width" secondItem="i4K-fp-CsQ" secondAttribute="width" id="agc-bq-6jC"/>
+                                <constraint firstAttribute="bottom" secondItem="B1X-wI-m0r" secondAttribute="bottom" constant="10" id="w4c-Ik-2V3"/>
+                                <constraint firstItem="w9q-6G-Q1c" firstAttribute="top" secondItem="CpP-Bg-dFy" secondAttribute="top" constant="18" id="y0o-zP-WkZ"/>
+                                <constraint firstItem="vbY-DE-1ed" firstAttribute="height" secondItem="B1X-wI-m0r" secondAttribute="height" id="zXJ-KN-9Ai"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="CpP-Bg-dFy" secondAttribute="trailing" id="4CQ-FE-wwf"/>
+                        <constraint firstItem="CpP-Bg-dFy" firstAttribute="top" secondItem="BhK-3T-WSY" secondAttribute="top" id="74v-6F-IxZ"/>
+                        <constraint firstItem="CpP-Bg-dFy" firstAttribute="leading" secondItem="BhK-3T-WSY" secondAttribute="leading" id="I8F-EO-6lY"/>
+                        <constraint firstItem="CpP-Bg-dFy" firstAttribute="width" secondItem="BhK-3T-WSY" secondAttribute="width" id="eyR-dM-6Pf"/>
+                        <constraint firstAttribute="bottom" secondItem="CpP-Bg-dFy" secondAttribute="bottom" id="u6L-RT-zog"/>
+                        <constraint firstItem="CpP-Bg-dFy" firstAttribute="height" secondItem="BhK-3T-WSY" secondAttribute="height" priority="250" id="uvc-j8-ubq"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BhK-3T-WSY" secondAttribute="bottom" constant="50" id="04o-pA-uza"/>
+                <constraint firstItem="BhK-3T-WSY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="GFh-2L-v5j"/>
+                <constraint firstAttribute="trailing" secondItem="BhK-3T-WSY" secondAttribute="trailing" constant="16" id="W4s-FA-Izm"/>
+                <constraint firstItem="BhK-3T-WSY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="enp-b3-UqN"/>
+                <constraint firstItem="BhK-3T-WSY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="t0S-ik-Fg2"/>
+                <constraint firstItem="BhK-3T-WSY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="w12-mY-nkZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="106.79347826086958"/>
+        </view>
+        <customObject id="M3K-BN-i3Y" customClass="InstaPickCampaignViewControllerDesigner" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="i5M-Pr-FkT" id="GLO-vD-sjG"/>
+                <outlet property="bottomView" destination="D4g-cO-eES" id="Fev-IP-1eC"/>
+                <outlet property="bottomViewDescriptionLabel" destination="tY4-Ke-cKD" id="bkw-7Y-D9s"/>
+                <outlet property="bottomViewEditProfileButton" destination="vbY-DE-1ed" id="tKY-1J-hI9"/>
+                <outlet property="bottomViewTitleLabel" destination="HK8-5a-LXK" id="t00-4D-vIg"/>
+                <outlet property="contentView" destination="CpP-Bg-dFy" id="479-74-MVD"/>
+                <outlet property="scrollView" destination="BhK-3T-WSY" id="eWJ-I6-Rgs"/>
+                <outlet property="showResultButton" destination="B1X-wI-m0r" id="941-Rj-p4h"/>
+                <outlet property="topView" destination="w9q-6G-Q1c" id="RRU-Wg-Rqm"/>
+                <outlet property="topViewButtonView" destination="dde-4K-Umi" id="pF1-Pb-SWG"/>
+                <outlet property="topViewDescriptionLabel" destination="v6f-gE-6AG" id="zTF-wU-K6k"/>
+                <outlet property="topViewPremiumButton" destination="bgz-pl-dnh" id="pNe-FQ-sLM"/>
+                <outlet property="topViewTitleLabel" destination="dxd-7L-HIE" id="nhe-Ig-bC2"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="camapaignPremiumBackground" width="317" height="90"/>
+    </resources>
+</document>

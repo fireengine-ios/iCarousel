@@ -9,8 +9,32 @@
 import UIKit
 
 extension UIView {
-    func setSubviewsHidden(_ isHidden: Bool) {
-        subviews.forEach({ $0.isHidden = isHidden })
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+      if #available(iOS 13.0, *) {
+        return self.safeAreaLayoutGuide.topAnchor
+      }
+      return self.topAnchor
+    }
+
+    var safeLeadingAnchor: NSLayoutXAxisAnchor {
+      if #available(iOS 13.0, *){
+        return self.safeAreaLayoutGuide.leadingAnchor
+      }
+      return self.leadingAnchor
+    }
+
+    var safeTrailingAnchor: NSLayoutXAxisAnchor {
+      if #available(iOS 13.0, *){
+        return self.safeAreaLayoutGuide.trailingAnchor
+      }
+      return self.trailingAnchor
+    }
+
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+      if #available(iOS 13.0, *) {
+        return self.safeAreaLayoutGuide.bottomAnchor
+      }
+      return self.bottomAnchor
     }
 
     var frameOnWindow: CGRect {
@@ -18,6 +42,10 @@ extension UIView {
             return frame
         }
         return superview.convert(frame, to: window)
+    }
+    
+    func setSubviewsHidden(_ isHidden: Bool) {
+        subviews.forEach({ $0.isHidden = isHidden })
     }
     
     func pinToSuperviewEdges(offset: CGFloat = 0.0) {
@@ -63,6 +91,13 @@ extension UIView {
         }
         subviews.forEach { checkViewForType($0) }
         return viewWeAreLookingFor
+    }
+    
+    func sizeToFit(width: CGFloat) -> CGSize {
+        let fittingSize = CGSize(width: width, height: UILayoutFittingCompressedSize.height)
+        return systemLayoutSizeFitting(fittingSize,
+                                       withHorizontalFittingPriority: .required,
+                                       verticalFittingPriority: .defaultLow)
     }
     
 }

@@ -85,7 +85,7 @@ final class CreateStoryViewController: BaseViewController {
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            newValue.layer.shadowColor = ColorConstants.backgroundViewColor.cgColor
         }
     }
     
@@ -289,8 +289,16 @@ extension CreateStoryViewController: ActivityIndicator {
                             return
                         }
                         
+                        let errorText: String?
+                        
+                        if error.description == "VIDEO_SLIDESHOW_NAME_MISSING" {
+                            errorText = TextConstants.createStoryEmptyNameError
+                        } else {
+                            errorText = error.errorDescription
+                        }
+                        
                         self.stopActivityIndicator()
-                        self.showError(text: error.errorDescription)
+                        self.showError(text: errorText)
                     }
             })
         }

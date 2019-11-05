@@ -9,16 +9,25 @@
 import Foundation
 
 final class PremiumRouter {
+    
+    private let viewControllerForPresentOn: UIViewController?
     private let router = RouterVC()
-
     weak var delegate: PremiumPresenter?
+    
+    init(viewControllerForPresentOn: UIViewController?) {
+        self.viewControllerForPresentOn = viewControllerForPresentOn
+    }
 }
 
 // MARK: - PremiumRouterInput
 extension PremiumRouter: PremiumRouterInput {
 
     func goToBack() {
-        router.popViewController()
+        if  let controller = viewControllerForPresentOn as? InstaPickCampaignViewController {
+            controller.closeAfterBecomPremium()
+        } else {
+            router.popViewController()
+        }
     }
     
     func displayError(with errorMessage: String) {
@@ -67,7 +76,11 @@ extension PremiumRouter: PremiumRouterInput {
     
     func presentPaymentPopUp(paymentModel: PaymentModel?) {
         let popup = PaymentPopUpController.controllerWith(paymentModel)
-        router.presentViewController(controller: popup)
+        if let controller = viewControllerForPresentOn {
+            controller.present(popup, animated: true)
+        } else {
+            router.presentViewController(controller: popup)
+        }
     }
     
     func closePaymentPopUpController(closeAction: @escaping VoidHandler) {

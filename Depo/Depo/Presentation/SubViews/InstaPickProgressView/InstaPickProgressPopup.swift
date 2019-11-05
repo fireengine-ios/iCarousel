@@ -9,6 +9,10 @@
 import UIKit
 import SDWebImage
 
+protocol InstaPickProgressPopupDelegate {
+    func analyzeDidComplete(analyzeResult: AnalyzeResult)
+}
+
 final class InstaPickProgressPopup: ViewController, NibInit {
 
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
@@ -16,7 +20,9 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
     
-    
+    private let instapickService: InstapickService = factory.resolve()
+    var delegate: InstaPickProgressPopupDelegate?
+
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
             topCaption.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 30 : 28)
@@ -24,12 +30,14 @@ final class InstaPickProgressPopup: ViewController, NibInit {
             topCaption.adjustsFontSizeToFitWidth()
         }
     }
+    
     @IBOutlet private weak var bottomCaption: UILabel! {
         didSet {
             bottomCaption.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 18)
             bottomCaption.text = bottomCaptionText
         }
     }
+    
     @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
         didSet {
             circularLoader.backgroundColor = .clear
@@ -40,12 +48,10 @@ final class InstaPickProgressPopup: ViewController, NibInit {
             circularLoader.progressColor = ColorConstants.blueColor
         }
     }
-
     
     private var topCaptionTexts = [String]()
     private var bottomCaptionText = " "
     private var analyzingImagesUrls = [URL]()
-    
     
     private let animationStepDuration = 2.0
     private var animationStepsNumber: Int {
@@ -85,7 +91,6 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         startInfiniteAnimation()
     }
  
-
     private func setupInitialStates() {
         circularLoader.layoutIfNeeded()
         circularLoader.set(imageUrl: analyzingImagesUrls.first, animated: false)
@@ -110,7 +115,6 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         circularLoader.set(imageUrl: imageUrl, animated: true)
     }
     
-    
     private func changeTopCaption(on step: Int) {
         guard !topCaptionTexts.isEmpty else { return }
         
@@ -123,13 +127,22 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         }, completion: nil)
     }
     
-    
+    func startAnalyze(ids: [String]) {
+        instapickService.startAnalyze(ids: ids) { [weak self] analyzeResult in
+            switch analyzeResult {
+            case .success(let result):
+                self?.dismiss(animated: true, completion: {
+                    self?.delegate?.analyzeDidComplete(analyzeResult: result)
+                })
+            case .failed(let error):
+                self?.showError(error)
+            }
+        }
+    }
     
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: {
-            let instapickService: InstapickService = factory.resolve()
-            
-            instapickService.getAnalyzesCount { result in
+            self.instapickService.getAnalyzesCount { result in
                 switch result {
                 case .success(let analyzesCount):
                     let router = RouterVC()
@@ -138,10 +151,28 @@ final class InstaPickProgressPopup: ViewController, NibInit {
                     
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
-                    
                 }
             }
-
         })
+    }
+    
+    private func showError(_ error: Error) {
+        
+        let popUp = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: error.description,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok) { [weak self] controller in
+                                            controller.close { [weak self] in
+                                                self?.closeInstaPickProgressPopUp()
+                                            }
+        }
+        
+        DispatchQueue.toMain {
+            self.present(popUp, animated: false, completion: nil)
+        }
+    }
+    
+    private func closeInstaPickProgressPopUp() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

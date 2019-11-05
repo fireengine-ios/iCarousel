@@ -153,16 +153,22 @@ class EditinglBar: CustomTabBar {
                     self.frame.origin = CGPoint(x: 0, y: sourceViewSize.height - self.tabBarHeight)
                     self.nextAnimation()
                 }
-            }else {
+            } else {
                 if withAnimation {
-                    self.animateAppearance(with: self.frame.origin.y - self.originalY, completionBlock: { [weak self] in
+                    var animationFrame = self.frame.origin.y - self.originalY
+                    
+                    if #available(iOS 11.0, *) {
+                        animationFrame += UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+                    }
+                    
+                    self.animateAppearance(with: animationFrame) { [weak self] in
                         guard let `self` = self else {
                             return
                         }
                         
                         self.removeFromSuperview()
                         self.nextAnimation()
-                    })
+                    }
                 } else {
                     self.frame.origin = CGPoint(x: 0, y: self.frame.origin.y - self.originalY)
                     self.removeFromSuperview()

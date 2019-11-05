@@ -58,6 +58,7 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.trackScreen()
         
         view?.startActivityIndicator()
+        interactor.getQuotaInfo()
         interactor.getAccountType()
         
         view?.startActivityIndicator()

@@ -13,7 +13,7 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
-    case prepareQuickScroll   = "prepareQuickScroll"
+    case prepareQuickScroll         = "prepareQuickScroll"
 //    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
 //    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
@@ -34,10 +34,10 @@ enum OperationType: String {
     case animationCard              = "animation"
     
     case launchCampaign             = "launchCampaign"
-    
     case premium                    = "premium"
-    
     case instaPick                  = "instaPick"
+    case tbMatik                    = "TBMATIC"
+    case campaignCard               = "CAMPAIGN"
 }
 
 typealias BlockObject = VoidHandler
@@ -190,19 +190,20 @@ class CardsManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+        guard ReachabilityService.shared.isReachable else {
+            return
+        }
+        
         hidePopUpsByDepends(type: type)
         
         DispatchQueue.toMain {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
             for notificationView in self.foloversArray {
-                
-                if let obj = object {
-                    notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
-                } else {
-                    notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
-                }
-                
+                notificationView.setProgressForOperationWith(type: type,
+                                                             object: object,
+                                                             allOperations: allOperations,
+                                                             completedOperations: completedOperations)
             }
         }
     }
@@ -216,14 +217,17 @@ class CardsManager: NSObject {
     
     func updateAllProgressesInCardsForView(view: CardsManagerViewProtocol){
         for operation in progresForOperation.keys {
-            if let progress = progresForOperation[operation]{
+            if let progress = progresForOperation[operation] {
                 
                 if let object = progress.lastObject, let percent = progress.percentProgress {
                     view.setProgress(ratio: percent, for: operation, object: object)
                 }
                 
                 if let allOperation = progress.allOperations, let completedOperations = progress.completedOperations {
-                    view.setProgressForOperationWith(type: operation, allOperations: allOperation, completedOperations: completedOperations)
+                    view.setProgressForOperationWith(type: operation,
+                                                     object: nil,
+                                                     allOperations: allOperation,
+                                                     completedOperations: completedOperations)
                 }
             }
         }
@@ -293,6 +297,7 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .autoUploadIsOff)
         case .waitingForWiFi:
+            stopOperationWithType(type: .sync)
             stopOperationWithType(type: .autoUploadIsOff)
             stopOperationWithType(type: .prepareToAutoSync)
         case .autoUploadIsOff:
@@ -391,9 +396,16 @@ class CardsManager: NSObject {
             cardView = popUp
         case .instaPick:
             cardView = InstaPickCard.initFromNib()
+        case .tbMatik:
+            cardView = TBMatikCard.initFromNib()
+        case .campaignCard:
+            cardView = CampaignCard.initFromNib()
         }
         
+        /// seems like duplicated logic "set(object:".
+        /// needs to drop before regression tests.
         cardView.set(object: serverObject)
+        
         return cardView
     }
     

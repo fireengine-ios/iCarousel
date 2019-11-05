@@ -38,6 +38,8 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         return result
     }
     
+    private var isGiftButtonEnabled = false
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,19 +61,24 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         updateNavigationItemsState(state: true)
         homePageDataSource.isViewActive = true
+        
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
-        
-        output.viewWillAppear()
-        
+                
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
+        
+        homePageNavigationBarStyle()
+        
+        output.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         debugLog("HomePage viewDidAppear")
         homePageDataSource.isActive = true
         if homepageIsActiveAndVisible {
@@ -88,12 +95,12 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        homePageDataSource.isViewActive = false
+
         hideSpotlightIfNeeded()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        homePageDataSource.isViewActive = false
         homePageDataSource.isActive = false///Do we need pretty much same flag?
     }
     
@@ -122,6 +129,13 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             self?.output.showSettings()
         })
         navBarConfigurator.configure(right: [setting, search], left: [])
+        if isGiftButtonEnabled {
+            let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
+                self?.output.giftButtonPressed()
+            })
+            navBarConfigurator.append(rightButton: gift, leftButton: nil)
+        }
+        
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         
     }
@@ -139,6 +153,16 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         showSpinner()
     }
     
+    func showGiftBox() {
+        isGiftButtonEnabled = true
+        configureNavBarActions()
+    }
+    
+    func hideGiftBox() {
+        isGiftButtonEnabled = false
+        configureNavBarActions()
+    }
+    
     //MARK: Spotlight
     func needShowSpotlight(type: SpotlightType) {        
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
@@ -152,7 +176,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             }
             
             if frame != .zero {
-                
                 let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
                     self?.output.shownSpotlight(type: type)
                     self?.output.closedSpotlight(type: type)
@@ -273,6 +296,9 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         case .homePageIcon:
             let frameBounds = controller.frameForTabAtIndex(index: 0)
             frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
+            if !Device.operationSystemVersionLessThen(11) {
+                frame.origin.y -= UIApplication.shared.statusBarFrame.height
+            }
             completion(frame)
             
         case .homePageGeneral:

@@ -90,17 +90,16 @@ class ItemSyncServiceImpl: ItemSyncService {
         lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
-        MediaItemOperationsService.shared.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
-            guard let `self` = self else {
+        
+        MediaItemOperationsService.shared.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image) { [weak self] hasItemsToSync in
+            guard let self = self else {
                 return
             }
             
-            if self.status == .waitingForWifi {
-                self.status = hasItemsToSync ? .waitingForWifi : .stoped
+            if self.status == .waitingForWifi, !hasItemsToSync {
+                self.status = .stoped
             }
-        })
-        
-       
+        }
     }
     
     func fail() {

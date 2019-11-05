@@ -174,10 +174,9 @@ class SyncServiceManager {
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
-                let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
-                let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
-                
-                self.stop(photo: !photoServiceWaitingForWiFi, video: !videoServiceWaitingForWiFi)
+                let photoServiceWaitingForWiFi = photoOption != .never
+                let videoServiceWaitingForWiFi = videoOption != .never
+
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
@@ -296,19 +295,19 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        if hasExecutingSync {
+        if hasExecutingSync, self.reachabilityService.isReachable {
+            WidgetService.shared.notifyWidgetAbout(status: .executing)
+
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
-        
-        CardsManager.default.stopOperationWithType(type: .sync)
         
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
 //            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            CardsManager.default.stopOperationWithType(type: .sync)
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
@@ -316,14 +315,11 @@ extension SyncServiceManager {
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
-        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)
             return
         }
-        
-        CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
     }
 }
 
@@ -372,13 +368,9 @@ extension SyncServiceManager {
 
 extension SyncServiceManager: ReachabilityServiceDelegate {
     func reachabilityDidChanged(_ service: ReachabilityService) {
-        if service.isReachable {
-            debugPrint("AUTOSYNC: is reachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
-        } else {
-            debugPrint("AUTOSYNC: is unreachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
-        }
+        debugPrint("AUTOSYNC: is" + (service.isReachable ? "reachable" : "unreachable"))
+
+        self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
     }
 }
 

@@ -2,9 +2,9 @@ import UIKit
 
 final class SupportFormController: ViewController, KeyboardHandler {
     
-    static func with(subjects: [String]) -> SupportFormController {
+    static func with(screenType: SupportFormScreenType) -> SupportFormController {
         let controller = SupportFormController()
-        controller.subjects = subjects
+        controller.screenType = screenType
         return controller
     }
     
@@ -60,7 +60,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileName
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
-        newValue.textField.placeholder = TextConstants.enterYourName
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -69,7 +69,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileSurname
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
-        newValue.textField.placeholder = TextConstants.enterYourSurname
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -79,7 +79,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         /// not set bcz of showEmptyCredentialsPopup
         //newValue.subtitleLabel.text
-        newValue.textField.placeholder = TextConstants.enterYourEmailAddress
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocorrectionType = .no
         newValue.textField.autocapitalizationType = .none
@@ -92,7 +92,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextPickerView()
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
-        newValue.textField.placeholder = TextConstants.pleaseChooseSubject
+        newValue.textField.quickDismissPlaceholder = TextConstants.pleaseChooseSubject
         return newValue
     }()
     
@@ -103,8 +103,12 @@ final class SupportFormController: ViewController, KeyboardHandler {
         return newValue
     }()
     
+    private var subjects = [SupportFormSubjectTypeProtocol]()
+    private var screenType: SupportFormScreenType = .login
     
-    var subjects = [String]()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    // MARK: -
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
@@ -113,7 +117,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        subjectView.models = subjects
+        subjects = screenType.subjects
+        subjectView.models = subjects.map { $0.localizedSubject }
         navigationBarWithGradientStyle()
 
         addTapGestureToHideKeyboard()
@@ -288,7 +293,14 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let rect = scrollView.convert(view.frame, to: scrollView)
         scrollView.scrollRectToVisible(rect, animated: true)
     }
+    
+    private func trackSubjectSelection() {
+        let subject = subjects[subjectView.selectedIndex]
+        analyticsService.trackSupportEvent(screenType: screenType, subject: subject, isSupportForm: true)
+    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension SupportFormController: UITextFieldDelegate {
     
@@ -305,6 +317,7 @@ extension SupportFormController: UITextFieldDelegate {
             
         case subjectView.textField:
             subjectView.hideSubtitleAnimated()
+            trackSubjectSelection()
 
         case phoneView.numberTextField, phoneView.codeTextField:
             phoneView.hideSubtitleAnimated()
@@ -339,6 +352,7 @@ extension SupportFormController: UITextFieldDelegate {
         /// setup by responderOnNext:
         case subjectView.textField:
             problemView.textView.becomeFirstResponder()
+            trackSubjectSelection()
             
         default:
             assertionFailure()

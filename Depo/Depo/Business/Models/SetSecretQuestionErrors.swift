@@ -13,6 +13,19 @@ enum SetSecretQuestionErrors {
     case invalidId
     case invalidAnswer
     case unknown
+    
+    var gaErrorType: GADementionValues.errorType? {
+        switch self {
+        case .invalidCaptcha:
+            return .invalidCaptcha
+        case .invalidId:
+            return .invalidId
+        case .invalidAnswer:
+            return .invalidAnswer
+        default:
+            return nil
+        }
+    }
 }
 
 extension SetSecretQuestionErrors: LocalizedError {

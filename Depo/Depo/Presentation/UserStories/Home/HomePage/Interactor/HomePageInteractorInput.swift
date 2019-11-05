@@ -21,4 +21,5 @@ protocol HomePageInteractorInput {
     func trackScreen()
 
     func updateLocalUserDetail()
+    
 }

@@ -228,13 +228,6 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
-        guard isActive else {
-            return
-        }
-        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
-    }
-    
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {

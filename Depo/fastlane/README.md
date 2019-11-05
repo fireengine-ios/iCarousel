@@ -60,11 +60,21 @@ fastlane beta_fabric_preprod
 fastlane my_scan
 ```
 run tests
+### beta_fabric_lifedrive
+```
+fastlane beta_fabric_lifedrive
+```
+
 ### my_gym
 ```
 fastlane my_gym
 ```
 Create ipa
+### my_gym_lifedrive
+```
+fastlane my_gym_lifedrive
+```
+
 ### diawi
 ```
 fastlane diawi

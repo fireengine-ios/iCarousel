@@ -15,6 +15,7 @@ final class PushNotificationService {
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
@@ -364,6 +365,8 @@ final class PushNotificationService {
     }
     
     private func openTBMaticPhotos(_ uuidsByString: String?) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
+        
         debugLog("PushNotificationService try to open TBMatic screen")
         // handle list of uuids with two variants for separators "," and ", "
         guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
