@@ -334,7 +334,7 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
                 let view = getViewForOperation(operation: type)
                 
                 /// seems like duplicated logic "set(object:".
-                /// needs to drop before regression tests.
+                //TODO: drop before regression tests.
                 view.set(object: object)
                 
                 newPopUps.insert(view)
