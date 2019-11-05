@@ -25890,7 +25890,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "c262e825-0738-40c1-881e-7229850771c9";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo.mobileprovision;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -25946,7 +25946,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
-				PROVISIONING_PROFILE_SPECIFIER = "942867af-14a5-43ba-815a-e49268dea4e4";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent.mobileprovision;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -26065,7 +26065,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Today Extension";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_todayextension;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -26103,7 +26103,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent_todayextension;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_VERSION = 4.0;
@@ -26228,7 +26228,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5d7cc5f7-14fe-4c8a-9e43-c048a347027a";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Share Extension";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_shareextension;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26270,7 +26270,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Share Extension";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent_shareextension;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26396,7 +26396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "35bafd98-8822-4d89-81c8-795bd672d2b6";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_files;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26438,7 +26438,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent_files;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26561,7 +26561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fce3a81a-bf2a-453e-a622-af44ba42d465";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files UI";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_filesui;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26602,7 +26602,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files UI";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent_filesui;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27335,7 +27335,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo_pushimage.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -27367,7 +27367,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent_pushimage.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -27464,7 +27464,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive notification AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_pushimage;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -27496,7 +27496,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent_pushimage;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -27598,7 +27598,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "e63758b3-539f-4480-9ae0-a615fdd0b93d";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo_todayextension.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -27631,7 +27631,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "b3d703e9-09d3-4229-80b6-54e4f7b66df5";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent_todayextension.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_VERSION = 4.0;
@@ -27756,7 +27756,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "f8ce6fea-de1e-4b43-8ce6-bc6bb1a05c2b";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo_files.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27798,7 +27798,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
-				PROVISIONING_PROFILE_SPECIFIER = "bb00fb5f-cc6b-4dfb-b45e-3bce1f2681b8";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent_files.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27921,7 +27921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "c4303710-c3d8-49fc-9035-e9f66d8349c8";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo_filesui.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27962,7 +27962,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
-				PROVISIONING_PROFILE_SPECIFIER = "a776a9e9-e0a0-4894-8cfd-82df18336141";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent_filesui.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -28330,7 +28330,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "0ca87cb5-829c-46ab-b443-75db824cdcce";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillidepo_shareextension.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -28372,7 +28372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
-				PROVISIONING_PROFILE_SPECIFIER = "1e71f865-3483-4794-9e43-9ac33eb4a0b2";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_akillideponew_ent_shareextension.mobileprovision;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -28548,7 +28548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "616d2fc6-3345-47ba-af1b-d5a16532592e";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -28606,7 +28606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74e2ab36-33c6-41ad-a0f8-043aa32035dc";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent";
+				PROVISIONING_PROFILE_SPECIFIER = com_turkcell_lifedrive_ent;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
