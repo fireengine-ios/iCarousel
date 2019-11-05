@@ -31,8 +31,7 @@ devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com
 
 xcodeParams = [
         xcodeApp: 'Xcode11.app',
-        workspaceFile: 'Depo/Depo',
-        schema: 'TC_Depo_LifeTech'
+        workspaceFile: 'Depo/Depo'
 ]
 
 def flavors = [
@@ -81,7 +80,7 @@ def runXcode = { app, flavorId ->
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: false,
+      cleanBeforeBuild: app.cleanBeforeBuild ? true : false,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
@@ -117,7 +116,7 @@ def runXcode = { app, flavorId ->
       
       // Advanced Xcode build options
       cleanTestReports: false,
-      xcodeSchema: xcodeParams.schema,
+      xcodeSchema: app.name,
       sdk: '',
       symRoot: '',
       xcodebuildArguments: 'VALID_ARCHS="armv7 armv7s arm64" -allowProvisioningUpdates' +
@@ -223,7 +222,8 @@ pipeline {
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
-                        sh "cd Depo; pod install --repo-update"
+                        sh "cd Depo; pod install" // --repo-update occasionally
+                        app[0].cleanBeforeBuild = true
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
