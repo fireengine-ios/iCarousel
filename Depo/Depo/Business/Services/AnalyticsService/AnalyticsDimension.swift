@@ -32,6 +32,9 @@ struct AnalyticsDimension {
     
     let isTwoFactorAuthEnabled: Bool?
     let isSpotifyEnabled: Bool?
+    
+    let dailyDrawleft: Int?
+    let totalDraw: Int?
 
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -84,6 +87,12 @@ struct AnalyticsDimension {
         }
         if let isSpotifyEnabled = isSpotifyEnabled {
             dimesionDictionary[GADementionsFields.spotify.text] = (isSpotifyEnabled ? "Connect" : "Disconnect") + " - Spotify"
+        }
+        if let dailyDrawleft = dailyDrawleft {
+            dimesionDictionary[GADementionsFields.dailyDrawleft.text] = dailyDrawleft
+        }
+        if let totalDraw = totalDraw {
+            dimesionDictionary[GAMetrics.totalDraw.text] = totalDraw
         }
         
         return dimesionDictionary

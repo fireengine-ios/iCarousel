@@ -78,6 +78,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         debugLog("HomePage viewDidAppear")
         homePageDataSource.isActive = true
         if homepageIsActiveAndVisible {
@@ -94,12 +95,12 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        homePageDataSource.isViewActive = false
+
         hideSpotlightIfNeeded()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        homePageDataSource.isViewActive = false
         homePageDataSource.isActive = false///Do we need pretty much same flag?
     }
     

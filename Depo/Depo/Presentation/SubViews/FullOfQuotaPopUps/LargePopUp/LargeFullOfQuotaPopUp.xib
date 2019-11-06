@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LargeFullOfQuotaPopUp" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundImageView" destination="0UO-3v-M7N" id="qG5-Cd-dqZ"/>
                 <outlet property="containerView" destination="UjI-IO-v9x" id="VXr-FO-qxN"/>
                 <outlet property="expandButton" destination="fhD-Qc-mob" id="Haq-Wb-j2Z"/>
                 <outlet property="gradientView" destination="gwP-lA-H0d" id="SeO-uH-q6t"/>
@@ -42,7 +43,7 @@
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-lA-H0d" customClass="GradientOrangeView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="341"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FullOfQuotaImage" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-3v-M7N">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-3v-M7N">
                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="341"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUB-BS-OkE">
@@ -245,6 +246,5 @@
     </objects>
     <resources>
         <image name="CardIconLamp" width="65" height="60"/>
-        <image name="FullOfQuotaImage" width="315" height="451"/>
     </resources>
 </document>

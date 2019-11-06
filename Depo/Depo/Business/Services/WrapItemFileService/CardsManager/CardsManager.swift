@@ -190,19 +190,20 @@ class CardsManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+        guard ReachabilityService.shared.isReachable else {
+            return
+        }
+        
         hidePopUpsByDepends(type: type)
         
         DispatchQueue.toMain {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
             for notificationView in self.foloversArray {
-                
-                if let obj = object {
-                    notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
-                } else {
-                    notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
-                }
-                
+                notificationView.setProgressForOperationWith(type: type,
+                                                             object: object,
+                                                             allOperations: allOperations,
+                                                             completedOperations: completedOperations)
             }
         }
     }
@@ -216,14 +217,17 @@ class CardsManager: NSObject {
     
     func updateAllProgressesInCardsForView(view: CardsManagerViewProtocol){
         for operation in progresForOperation.keys {
-            if let progress = progresForOperation[operation]{
+            if let progress = progresForOperation[operation] {
                 
                 if let object = progress.lastObject, let percent = progress.percentProgress {
                     view.setProgress(ratio: percent, for: operation, object: object)
                 }
                 
                 if let allOperation = progress.allOperations, let completedOperations = progress.completedOperations {
-                    view.setProgressForOperationWith(type: operation, allOperations: allOperation, completedOperations: completedOperations)
+                    view.setProgressForOperationWith(type: operation,
+                                                     object: nil,
+                                                     allOperations: allOperation,
+                                                     completedOperations: completedOperations)
                 }
             }
         }
@@ -293,6 +297,7 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .autoUploadIsOff)
         case .waitingForWiFi:
+            stopOperationWithType(type: .sync)
             stopOperationWithType(type: .autoUploadIsOff)
             stopOperationWithType(type: .prepareToAutoSync)
         case .autoUploadIsOff:

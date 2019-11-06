@@ -207,6 +207,12 @@ enum AnalyticsAppScreens {
     case securityQuestion
     case securityQuestionSelect
     
+    case campaignSamsungPopupFirst
+    case campaignSamsungPopupLast
+    case campaignSamsungPopupBecomePremium
+    case campaignDetailDuring
+    case campaignDetailAfter
+    
     var name: String {
         switch self {
         ///authorization
@@ -385,6 +391,16 @@ enum AnalyticsAppScreens {
             return "Security Question"
         case .securityQuestionSelect:
             return "Security Question - Select"
+        case .campaignSamsungPopupFirst:
+            return "Campaign - Samsung POP-UP First"
+        case .campaignSamsungPopupLast:
+            return "Campaign - Samsung POP-UP Last"
+        case .campaignSamsungPopupBecomePremium:
+            return "Campaign - Samsung POP-UP Become Premium"
+        case .campaignDetailDuring:
+            return "Campaign - Detail During"
+        case .campaignDetailAfter:
+            return "Campaign - Detail After"
         }
     }
 }
@@ -473,6 +489,7 @@ enum GAEventCantegory {
     case twoFactorAuthentication
     case emailVerification
     case securityQuestion
+    case campaign
 
     var text: String {
         switch self {
@@ -492,6 +509,8 @@ enum GAEventCantegory {
             return "E-mail verification"
         case .securityQuestion:
             return "Security Question"
+        case .campaign:
+            return "Campaign"
         }
     }
 }
@@ -565,6 +584,9 @@ enum GAEventAction {
     case supportSignUp
     case securityQuestionClick
     case saveSecurityQuestion(_ number: Int)
+    case giftIcon
+    case campaignDetail
+    case analyzeWithPhotopick
 
     var text: String {
         switch self {
@@ -683,6 +705,12 @@ enum GAEventAction {
             return "Set Security Question - Click"
         case .saveSecurityQuestion(let number):
             return "Save Q\(number)"
+        case .giftIcon:
+            return "Gift icon"
+        case .campaignDetail:
+            return "Campaign Detail"
+        case .analyzeWithPhotopick:
+            return "Analyze with photopick"
         }
     }
 }
@@ -871,6 +899,26 @@ enum GAEventLabel {
         }
     }
     
+    enum CampaignEvent {
+        case neverParticipated
+        case notParticipated
+        case limitIsReached
+        case otherwise
+        
+        var text: String {
+            switch self {
+            case .neverParticipated:
+                return "Never participated"
+            case .notParticipated:
+                return "Not participated to the campaign today"
+            case .limitIsReached:
+                return "Participation limit is reached"
+            case .otherwise:
+                return "Otherwise"
+            }
+        }
+    }
+    
     case empty
     
     case success
@@ -951,6 +999,7 @@ enum GAEventLabel {
     case supportLoginForm(_ event: SupportFormSubjectLoginEvent, isSupportForm: Bool)
     case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
     case clickSecurityQuestion(number: Int)
+    case campaign(CampaignEvent)
     
     var text: String {
         switch self {
@@ -1130,6 +1179,8 @@ enum GAEventLabel {
             return event.text(isSupportForm: isSupportForm)
         case .clickSecurityQuestion(let number):
             return "Q\(number)"
+        case .campaign(let event):
+            return event.text
         }
     }
     
@@ -1178,6 +1229,7 @@ enum GADementionsFields {
     case autoSyncStatus
     case twoFactorAuth
     case spotify
+    case dailyDrawleft
     
     var text: String {
         switch self {
@@ -1225,6 +1277,8 @@ enum GADementionsFields {
             return "twoFactorAuthentication"
         case .spotify:
             return "connectStatus"
+        case .dailyDrawleft:
+            return "dailyDrawleft"
         }
     }
     
@@ -1235,6 +1289,7 @@ enum GAMetrics {
     case countOfDownload //After downloading finishes, send the count of downloaded files
     case playlistNumber
     case trackNumber
+    case totalDraw
     
     case errorType
     
@@ -1248,6 +1303,8 @@ enum GAMetrics {
             return "playlistNumber"
         case .trackNumber:
             return "trackNumber"
+        case .totalDraw:
+            return "totalDraw"
         case .errorType:
             return "errorType"
         }

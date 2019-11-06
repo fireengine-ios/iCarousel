@@ -229,6 +229,8 @@ extension InstapickServiceImpl: InstapickService {
                 self?.getAnalyzesCount { [weak self] result in
                     switch result {
                     case .success(let analyzesCount):
+                        self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: analyzesCount.left, totalDraw: analyzesCount.total)
+                        
                         /// Popup time should be at least 5 seconds, even if the request returned success earlier
                         if Date().timeIntervalSince(startAnalysisDate) > NumericConstants.instapickTimeoutForAnalyzePhotos {
                             let result = AnalyzeResult(analyzesCount: analyzesCount, analysis: analysis)
@@ -249,9 +251,9 @@ extension InstapickServiceImpl: InstapickService {
                 
             case .failed(let error):
                 eventLabel = .failure
+                self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: nil, totalDraw: nil)
                 completion(.failed(error))
             }
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
     }
 }

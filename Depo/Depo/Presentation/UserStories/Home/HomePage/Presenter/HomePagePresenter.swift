@@ -60,13 +60,13 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         spotlightManager.delegate = self
         interactor.trackScreen()
         
-        if !isFirstAppear {
-            view.startSpinner()
-            interactor.updateLocalUserDetail()
-        } else {
+        if isFirstAppear {
             isFirstAppear = false
             
             AnalyticsService.updateUser()
+        } else {
+            view.startSpinner()
+            interactor.updateLocalUserDetail()
         }
     }
     
@@ -196,6 +196,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     }
     
     func giftButtonPressed() {
+        interactor.trackGiftTapped()
         router.openCampaignDetails()
     }
     

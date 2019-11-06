@@ -37,6 +37,8 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     private lazy var router = RouterVC()
     var didClosed: VoidHandler?
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     static func createController(controllerMode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) -> InstaPickCampaignViewController {
         let controller = InstaPickCampaignViewController()
         controller.controllerMode = controllerMode
@@ -73,6 +75,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleWithoutPhotoPick
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionWithoutPhotoPick
             topViewBackgroundImage.image = UIImage(named: "camapaignPremiumBackground")
+            trackScreen(.campaignSamsungPopupBecomePremium)
         }
         
         bottomViewTitleLabel.text = TextConstants.campaignViewControllerBottomViewTitle
@@ -85,12 +88,19 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         case 0:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleZeroRemainin
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionZeroRemaining
+            trackScreen(.campaignSamsungPopupFirst)
         case 1...:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleRemainin
             topViewDescriptionLabel.text = String(format: TextConstants.campaignTopViewDescriptionRemainin, totalsUsed)
+            trackScreen(.campaignSamsungPopupLast)
         default:
             assertionFailure()
         }
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func open() {
