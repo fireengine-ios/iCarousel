@@ -223,7 +223,7 @@ pipeline {
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install" // --repo-update occasionally
-                        app[0].cleanBeforeBuild = true
+                        apps[0].cleanBeforeBuild = true
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
