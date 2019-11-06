@@ -59,6 +59,8 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
     
     override func waitForWiFi() {
+        debugLog("VideoSyncService waitForWiFi")
+
         stopAllOperations()
         super.waitForWiFi()
     }

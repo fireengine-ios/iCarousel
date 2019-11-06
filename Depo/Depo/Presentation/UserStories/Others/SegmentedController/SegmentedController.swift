@@ -98,7 +98,7 @@ class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
-    private func setup(with controllers: [UIViewController]) {
+    func setup(with controllers: [UIViewController]) {
         guard !controllers.isEmpty, let controllers = controllers as? [BaseViewController] else {
             assertionFailure()
             return
