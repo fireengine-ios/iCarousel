@@ -448,11 +448,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func segmentedMedia() -> SegmentedController {
+    func segmentedMedia() -> PhotoVideoSegmentedController {
         let photos = PhotoVideoController.initPhotoFromNib()
         let videos = PhotoVideoController.initVideoFromNib()
         
-        return PhotoVideoSegmentedController.initWithControllers([photos, videos])
+        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
     }
     
     
