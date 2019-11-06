@@ -123,7 +123,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackSignupEvent(error: SignupResponseError?)
     func trackImportEvent(error: SpotifyResponseError?)
     func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool)
-    
+    func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?)
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
@@ -152,6 +152,8 @@ extension AnalyticsService: AnalyticsGA {
                                             isPaymentMethodNative: Bool? = nil,
                                             loginType: GADementionValues.login? = nil,
                                             errorType: String? = nil,
+                                            dailyDrawleft: Int? = nil,
+                                            totalDraw: Int? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -250,7 +252,9 @@ extension AnalyticsService: AnalyticsGA {
                 autoSyncState: autoSyncState,
                 autoSyncStatus: autoSyncStatus,
                 isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
-                isSpotifyEnabled: isSpotifyEnabled).productParametrs)
+                isSpotifyEnabled: isSpotifyEnabled,
+                dailyDrawleft: dailyDrawleft,
+                totalDraw: totalDraw).productParametrs)
         }
     }
     
@@ -502,6 +506,17 @@ extension AnalyticsService: AnalyticsGA {
                 parametrs[GAMetrics.playlistNumber.text] = playlistNumber
             }
             
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?) {
+        prepareDimentionsParametrs(screen: nil, dailyDrawleft: dailyDrawleft, totalDraw: totalDraw) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : GAEventAction.photopickAnalysis.text,
+                "eventLabel" : eventLabel.text
+            ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
     }
