@@ -78,6 +78,11 @@ target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
 end
 
+target "LifeTech-NotificationService" do
+  pod 'Netmera'
+  pod 'iCarousel'
+end
+
 target 'lifebox' do
 	core_pods
 end
@@ -98,6 +103,11 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+end
+
+target "LifeboxNotificationService" do
+  pod 'Netmera'
+  pod 'iCarousel'
 end
 
 target 'LifeboxUnitTests' do
@@ -124,6 +134,11 @@ end
 
 target 'LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+end
+
+target "LifeDriveNotificationService" do
+  pod 'Netmera'
+  pod 'iCarousel'
 end
 
 post_install do |installer|

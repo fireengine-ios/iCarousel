@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifedrive</string>
+	<string>billo</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconName</key>
-	<string>AppIconLifedrive</string>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22.5</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -122,11 +122,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>To backup your contacts to lifebox</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
-    <key>NSContactsUsageDescription</key>
-    <string>To backup your contacts to lifebox</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -177,6 +175,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>UTExportedTypeDeclarations</key>

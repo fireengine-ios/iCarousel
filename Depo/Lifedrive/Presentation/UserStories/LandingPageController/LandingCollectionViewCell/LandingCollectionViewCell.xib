@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5Gt-F3-zHM" customClass="LandingCollectionViewCell" customModule="lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="387"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LKV-rO-ecN">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="387"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaG-FS-lLL">
+                        <rect key="frame" x="8" y="260" width="359" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="hPd-nI-8M0">
+                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-GW-GHd">
+                        <rect key="frame" x="35" y="312" width="305" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOR-XQ-gOu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vaG-FS-lLL" firstAttribute="top" secondItem="DOR-XQ-gOu" secondAttribute="bottom" constant="8" id="8ED-IC-lGW"/>
+                    <constraint firstItem="DOR-XQ-gOu" firstAttribute="top" secondItem="LKV-rO-ecN" secondAttribute="top" id="8Rh-8J-Hja"/>
+                    <constraint firstItem="ZkD-GW-GHd" firstAttribute="top" secondItem="vaG-FS-lLL" secondAttribute="bottom" constant="16" id="BGN-AA-wuN"/>
+                    <constraint firstItem="vaG-FS-lLL" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" constant="8" id="Bva-BE-6Fb"/>
+                    <constraint firstAttribute="trailing" secondItem="ZkD-GW-GHd" secondAttribute="trailing" constant="35" id="K7c-Ca-htm"/>
+                    <constraint firstAttribute="trailing" secondItem="vaG-FS-lLL" secondAttribute="trailing" constant="8" id="WKJ-oj-W1c"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZkD-GW-GHd" secondAttribute="bottom" id="el4-5T-9uX"/>
+                    <constraint firstAttribute="trailing" secondItem="DOR-XQ-gOu" secondAttribute="trailing" id="hTB-Gv-TrP"/>
+                    <constraint firstItem="DOR-XQ-gOu" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" id="kL4-nM-af4"/>
+                    <constraint firstItem="ZkD-GW-GHd" firstAttribute="leading" secondItem="LKV-rO-ecN" secondAttribute="leading" constant="35" id="laT-f7-z3K"/>
+                    <constraint firstAttribute="bottom" secondItem="vaG-FS-lLL" secondAttribute="bottom" constant="91" id="mnC-QE-Nr0">
+                        <variation key="heightClass=regular-widthClass=regular" constant="106"/>
+                    </constraint>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="375" height="387"/>
+            <connections>
+                <outlet property="imageView" destination="DOR-XQ-gOu" id="BEc-0Y-89d"/>
+                <outlet property="subtitleLabel" destination="ZkD-GW-GHd" id="fHT-Fp-j7Y"/>
+                <outlet property="titleLabel" destination="vaG-FS-lLL" id="v3D-DW-Fxs"/>
+            </connections>
+            <point key="canvasLocation" x="-28.260869565217394" y="92.745535714285708"/>
+        </collectionViewCell>
+    </objects>
+</document>

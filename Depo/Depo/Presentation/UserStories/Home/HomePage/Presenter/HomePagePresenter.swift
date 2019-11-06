@@ -195,6 +195,10 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         presentPopUpsGroup?.leave()
     }
     
+    func giftButtonPressed() {
+        router.openCampaignDetails()
+    }
+    
     func fillCollectionView(isReloadAll: Bool) {
         
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
@@ -236,6 +240,15 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
         }
     }
+    
+    func showGiftBox() {
+        view.showGiftBox()
+    }
+    
+    func hideGiftBox() {
+        view.hideGiftBox()
+    }
+    
 }
 
 //MARK: - SpotlightManagerDelegate

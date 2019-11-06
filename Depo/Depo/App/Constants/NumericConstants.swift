@@ -41,7 +41,7 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let  heightTextAlbumCell: CGFloat = 21
+    static let heightTextAlbumCell: CGFloat = 32
     static let amountInsetForStoryAlbum: CGFloat = 10
     static let amountInsetForAlbum: CGFloat = 3
     
@@ -161,6 +161,8 @@ struct NumericConstants {
     static let numberOfSelectedItemsBeforeLimits = 500
     
     static let spotifyStatusUpdateTimeInterval = 1.0
+    
+    static let langingPageCount = 8
 }
 
 struct RequestSizeConstant {

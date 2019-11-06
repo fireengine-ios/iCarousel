@@ -118,7 +118,7 @@ class SplashInteractor: SplashInteractorInput {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache(completion: nil)
+                    CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     self?.successLogin()

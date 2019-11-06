@@ -21,6 +21,8 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
     private var isShowPopupAboutPremium = true
+    private let campaignService = CampaignServiceImpl()
+    
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -35,6 +37,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
+        getCampaignStatus()
     }
     
     func trackScreen() {
@@ -58,8 +61,29 @@ final class HomePageInteractor: HomePageInteractorInput {
     func needRefresh() {
         homeCardsLoaded = false
         
+        getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
+    }
+    
+    private func getCampaignStatus() {
+        campaignService.getPhotopickDetails { [weak self] result in
+            switch result {
+            case .success(let status):
+                if SingletonStorage.shared.isUserFromTurkey,
+                    (status.startDate...status.launchDate).contains(Date()) {
+                    DispatchQueue.toMain {
+                        self?.output.showGiftBox()
+                    }
+                }
+            case .failure(let errorResult):
+                if errorResult.isEmpty() {
+                    DispatchQueue.toMain {
+                        self?.output.hideGiftBox()
+                    }
+                }
+            }
+        }
     }
     
     private func getAccountInfo() {

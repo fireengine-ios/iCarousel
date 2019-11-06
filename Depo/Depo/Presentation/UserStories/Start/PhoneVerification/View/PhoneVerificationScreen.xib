@@ -137,7 +137,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="93" y="242.5" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
