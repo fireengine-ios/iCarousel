@@ -80,7 +80,7 @@ def runXcode = { app, flavorId ->
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: true,
+      cleanBeforeBuild: false,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
