@@ -92,7 +92,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4g-cO-eES">
                                     <rect key="frame" x="13" y="290" width="356" height="412.66666666666674"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gwi-ac-Yu2" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gwi-ac-Yu2" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="10" y="30" width="336" height="149.33333333333334"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gwi-ac-Yu2" secondAttribute="height" multiplier="18:8" id="bUP-3k-oki"/>
