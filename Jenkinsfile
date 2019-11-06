@@ -80,7 +80,7 @@ def runXcode = { app, flavorId ->
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: app.cleanBeforeBuild ? true : false,
+      cleanBeforeBuild: true,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
@@ -223,7 +223,6 @@ pipeline {
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install" // --repo-update occasionally
-                        apps[0].cleanBeforeBuild = true
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
