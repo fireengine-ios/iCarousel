@@ -77,22 +77,27 @@ def runXcode = { app, flavorId ->
         provisioningProfileUUID: "${provisionsDir}/${file.name}"
         ] }
     echo "Using provisioning profiles: ${provisioningProfiles}"
-    xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
-      target: app.name,
+    echo "run xcode for app: " + app
+    xcodeBuild target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: false,
+      cleanBeforeBuild: true,
       allowFailingBuildResults: false,
       generateArchive: false,
-      noConsoleLog: false,
+      noConsoleLog: true,
+      logfileOutputDirectory: "${WORKSPACE}/logs",
       configuration: flavor.configuration,
       
       // Pack application, build and sign .ipa?
       buildIpa: true,
       ipaExportMethod: flavor.ipaExportMethod,
-      //"\${BASE_NAME}-${BUILD_ID}-${flavorId}"
       ipaName: "${app.name}-${BUILD_ID}-${flavorId}",
       ipaOutputDirectory: '',
       ipaManifestPlistUrl: '',
+      thinning: '',
+      appURL: '',
+      displayImageURL: '',
+      fullSizeImageURL: '',
+      assetPackManifestURL: '',
       
       // Manual signing?
       manualSigning: true,
