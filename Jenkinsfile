@@ -78,13 +78,15 @@ def runXcode = { app, flavorId ->
         ] }
     echo "Using provisioning profiles: ${provisioningProfiles}"
     echo "run xcode for app: " + app
+    sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
+
     xcodeBuild target: app.name,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: true,
-      logfileOutputDirectory: "${WORKSPACE}/logs",
+      logfileOutputDirectory: "${WORKSPACE}/${app.name}-logs",
       configuration: flavor.configuration,
       
       // Pack application, build and sign .ipa?
@@ -135,6 +137,8 @@ def runXcode = { app, flavorId ->
       provideApplicationVersion: false,
       cfBundleShortVersionStringValue: '',
       cfBundleVersionValue: ''
+
+    archiveArtifacts allowEmptyArchive: true, artifacts: "${app.name}-logs/*.log"
 }
 
 def publishToArtifactory = { app, classifier ->
@@ -363,10 +367,19 @@ pipeline {
            }
             steps {
                 script {
-                        stage('Deploying to Testflight') {
-                            sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
-                            apps.each deployToTestflight
+                    sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
+                    def failReasons = [:]
+                    apps.each { app ->
+                        try {
+                            deployToTestflight app
+
+                        } catch (Exception e) {
+                            failReasons[app.name] = e.message
                         }
+                    }
+                    if (failReasons) {
+                        error "Fail reasons: ${failReasons}"
+                    }
                 }
             }
 			post {
