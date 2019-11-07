@@ -183,7 +183,7 @@ def deployToIctStore = { app ->
 
 def deployToTestflight = { app ->
     def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
-    def ipaFile = "build/${app.name}-${BUILD_ID}-${flavorId}.ipa"
+    def ipaFile = "build/${app.name}-${BUILD_ID}-prod.ipa"
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
         ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
