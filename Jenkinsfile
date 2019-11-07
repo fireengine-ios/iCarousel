@@ -80,7 +80,7 @@ def runXcode = { app, flavorId ->
     xcodeBuild appURL: '', assetPackManifestURL: '', displayImageURL: '', fullSizeImageURL: '', logfileOutputDirectory: '', thinning: '', 
       target: app.name,
       interpretTargetAsRegEx: false,
-      cleanBeforeBuild: true,
+      cleanBeforeBuild: false,
       allowFailingBuildResults: false,
       generateArchive: false,
       noConsoleLog: false,
@@ -90,7 +90,7 @@ def runXcode = { app, flavorId ->
       buildIpa: true,
       ipaExportMethod: flavor.ipaExportMethod,
       //"\${BASE_NAME}-${BUILD_ID}-${flavorId}"
-      ipaName: '',
+      ipaName: "${app.name}-${BUILD_ID}-${flavorId}",
       ipaOutputDirectory: '',
       ipaManifestPlistUrl: '',
       
@@ -146,7 +146,7 @@ def publishToArtifactory = { app, classifier ->
     def uploadSpec = """{
         "files": [
             {
-            "pattern": "${outputsDir}/${app.name}.ipa",
+            "pattern": "${outputsDir}/${app.name}-*.ipa",
             "target": "${artifactPath}/${artifactName}.ipa"
             },
             {
@@ -223,8 +223,8 @@ pipeline {
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "cd Depo; pod install" // --repo-update occasionally
-                        runXcode(apps[0], 'test')
                         apps.each { app ->
+                            runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
                         }
                     }
@@ -308,8 +308,8 @@ pipeline {
            }
             steps {
                 script {
-                    runXcode(apps[0], 'prod')
                     apps.each { app ->
+                        runXcode(app, 'prod')
                         publishToArtifactory(app, 'prod')
                     }
                 }
