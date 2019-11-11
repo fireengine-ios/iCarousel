@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickCard: BaseView {
+final class InstaPickCard: BaseCardView {
     
     private enum InstaPick {
         enum CardType {

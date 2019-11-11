@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class CollageCard: BaseView {
+final class CollageCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {

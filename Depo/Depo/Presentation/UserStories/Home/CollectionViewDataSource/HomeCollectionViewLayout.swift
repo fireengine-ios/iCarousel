@@ -1,5 +1,5 @@
 //
-//  CollectionViewLayout.swift
+//  HomeCollectionViewLayout.swift
 //  Depo
 //
 //  Created by Oleg on 26.06.17.
@@ -14,7 +14,7 @@ protocol CollectionViewLayoutDelegate: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
 }
 
-class CollectionViewLayout: UICollectionViewLayout {
+class HomeCollectionViewLayout: UICollectionViewLayout {
     
     weak var delegate: CollectionViewLayoutDelegate?
     

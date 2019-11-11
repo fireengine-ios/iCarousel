@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ContactBackupOld: BaseView {
+class ContactBackupOld: BaseCardView {
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!

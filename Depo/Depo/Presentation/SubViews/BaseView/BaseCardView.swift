@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  BaseCardView.swift
 //  Depo_LifeTech
 //
 //  Created by Oleg on 19.09.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseView: UIView, NibInit {
+class BaseCardView: UIView, NibInit {
     
     @IBOutlet weak var whiteView: UIView?
     
@@ -25,7 +25,7 @@ class BaseView: UIView, NibInit {
     }
     
     func configurateView() {
-        whiteView?.layer.cornerRadius = BaseView.baseViewCornerRadius
+        whiteView?.layer.cornerRadius = BaseCardView.baseViewCornerRadius
         calculatedH = frame.size.height
     }
     
