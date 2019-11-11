@@ -1,5 +1,5 @@
 //
-//  BaseCollectionViewDataSource.swift
+//  HomeCollectionViewDataSource.swift
 //  Depo
 //
 //  Created by Oleg on 26.06.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewDataSourceDelegate: class {
+protocol HomeCollectionViewDataSourceDelegate: class {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -16,9 +16,9 @@ protocol BaseCollectionViewDataSourceDelegate: class {
     func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
-final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
+final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
     
-    private weak var delegate: BaseCollectionViewDataSourceDelegate?
+    private weak var delegate: HomeCollectionViewDataSourceDelegate?
 
     private var collectionView: UICollectionView!
     private var viewController: UIViewController!
@@ -42,7 +42,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     var isActive = false
     var isViewActive = false
     
-    func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
+    func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: HomeCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
         self.delegate = delegate
@@ -50,7 +50,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        if let layout = collectionView.collectionViewLayout as? CollectionViewLayout {
+        if let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout {
             if let numberOfColumns = delegate?.numberOfColumns() {
                 layout.numberOfColumns = numberOfColumns
             } else {
@@ -271,7 +271,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
 }
 
 //MARK: CardsManagerViewProtocol
-extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
+extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
@@ -436,7 +436,7 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
     }
     
     func isEqual(object: CardsManagerViewProtocol) -> Bool {
-        if let compairedView = object as? BaseCollectionViewDataSource {
+        if let compairedView = object as? HomeCollectionViewDataSource {
             return compairedView == self
         }
         
@@ -464,7 +464,7 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
 }
 
 //MARK: UICollectionView datasource/delegate
-extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
+extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return popUps.count
@@ -512,7 +512,7 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
 }
 
 //MARK UICollectionView Layout delegate
-extension BaseCollectionViewDataSource: CollectionViewLayoutDelegate {
+extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         guard let popUpView = popUps[safe: indexPath.row] else {
             return 40

@@ -583,8 +583,8 @@
 		7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */; };
 		7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E191F00E920003B004C /* CollectionViewCellForController.swift */; };
 		7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
-		7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
-		7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		7C355E611F01226B003B004C /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
+		7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */; };
 		7C379F40202C364F0050C055 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
@@ -1809,7 +1809,7 @@
 		8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */; };
 		8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */; };
 		8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C761EEE8E7F0086DA84 /* LoginModuleInput.swift */; };
-		8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
 		8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44EE1F6ABB540062C2E0 /* ActivityTimelineParameters.swift */; };
@@ -1901,7 +1901,7 @@
 		8C0E8D3A1FDEBDFF00789C91 /* ImportPhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886511F3EFBE200F50C95 /* ImportPhotosRouterInput.swift */; };
 		8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
 		8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
-		8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
+		8C0E8D3D1FDEBDFF00789C91 /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
 		8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FD41EFD500B00A405B2 /* HomeViewTopView.swift */; };
 		8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
@@ -4525,7 +4525,7 @@
 		CE78486522A685FB00662219 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */; };
 		CE78486622A685FB00662219 /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
 		CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C761EEE8E7F0086DA84 /* LoginModuleInput.swift */; };
-		CE78486822A685FB00662219 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
 		CE78486A22A685FB00662219 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		CE78486B22A685FB00662219 /* LeavePremiumViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E42D21A5B0220084AA37 /* LeavePremiumViewInput.swift */; };
@@ -4679,7 +4679,7 @@
 		CE78490B22A685FB00662219 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
 		CE78490C22A685FB00662219 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
 		CE78490D22A685FB00662219 /* MyStorageModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */; };
-		CE78490E22A685FB00662219 /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
+		CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
 		CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		CE78491022A685FB00662219 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
 		CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
@@ -7128,8 +7128,8 @@
 		7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C355E191F00E920003B004C /* CollectionViewCellForController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForController.swift; sourceTree = "<group>"; };
 		7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForController.xib; sourceTree = "<group>"; };
-		7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		7C355E621F0123E0003B004C /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseFilesGreedViewController.xib; sourceTree = "<group>"; };
 		7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		7C3A74381F04F4B800124DF5 /* BaseMediaContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMediaContent.swift; sourceTree = "<group>"; };
@@ -11411,8 +11411,8 @@
 		7C355E5F1F012239003B004C /* CollectionViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */,
-				7C355E621F0123E0003B004C /* CollectionViewLayout.swift */,
+				7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */,
+				7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */,
 			);
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
@@ -20913,7 +20913,7 @@
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
 				8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */,
 				8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
-				8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */,
+				8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */,
 				8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */,
 				8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */,
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
@@ -21085,7 +21085,7 @@
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
 				98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
-				8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */,
+				8C0E8D3D1FDEBDFF00789C91 /* HomeCollectionViewDataSource.swift in Sources */,
 				4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
@@ -22648,7 +22648,7 @@
 				7CFE92F41F5ED498008A3B72 /* FeedbackService.swift in Sources */,
 				4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */,
-				7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */,
+				7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */,
 				CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */,
 				CE3318E11EFCF9D600E25989 /* Device.swift in Sources */,
 				A217E42E21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
@@ -22815,7 +22815,7 @@
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
 				92004B5121AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
-				7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */,
+				7C355E611F01226B003B004C /* HomeCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
 				B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -24029,7 +24029,7 @@
 				CE78486522A685FB00662219 /* FeedbackService.swift in Sources */,
 				CE78486622A685FB00662219 /* FaceImageAddNameRouterInput.swift in Sources */,
 				CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */,
-				CE78486822A685FB00662219 /* CollectionViewLayout.swift in Sources */,
+				CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */,
 				CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */,
 				989BDE5A22F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				CE78486A22A685FB00662219 /* Device.swift in Sources */,
@@ -24208,7 +24208,7 @@
 				CE78490B22A685FB00662219 /* ProtoInputTextCell.swift in Sources */,
 				CE78490C22A685FB00662219 /* RemoteSearchService.swift in Sources */,
 				CE78490D22A685FB00662219 /* MyStorageModuleConfigurator.swift in Sources */,
-				CE78490E22A685FB00662219 /* BaseCollectionViewDataSource.swift in Sources */,
+				CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */,
 				CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE78491022A685FB00662219 /* SharedFactory.swift in Sources */,
 				CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */,

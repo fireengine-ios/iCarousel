@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, SearchModuleOutput {
+final class HomePageViewController: BaseViewController, HomePageViewInput, HomeCollectionViewDataSourceDelegate, SearchModuleOutput {
 
     //MARK: IBOutlet
     @IBOutlet weak var contentView: UIView!
@@ -22,7 +22,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     var navBarConfigurator = NavigationBarConfigurator()
     
-    let homePageDataSource = BaseCollectionViewDataSource()
+    let homePageDataSource = HomeCollectionViewDataSource()
     
     private var refreshControl = UIRefreshControl()
 
@@ -186,7 +186,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         }
     }
     
-    //MARK: BaseCollectionViewDataSourceDelegate
+    //MARK: HomeCollectionViewDataSourceDelegate
     func onCellHasBeenRemovedWith(controller: UIViewController) {
         
     }
@@ -258,7 +258,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
                     frame.size.height = popupView.spotlightHeight()
                     completion(frame)
                 } else {
-                    guard let layout = collectionView.collectionViewLayout as? CollectionViewLayout else {
+                    guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
                         completion(.zero)
                         return
                     }
