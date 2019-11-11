@@ -57,6 +57,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     private let service = CampaignServiceImpl()
     private lazy var router = RouterVC()
     private var cellImageManager: CellImageManager?
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: - View lifecycle
     
@@ -114,11 +115,15 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
             scrollView.contentInset.bottom = analyzeView.frame.height
+            
+            trackScreen(.campaignDetailDuring)
         } else {
             campaignIntroView.isHidden = true
             campaignInfoView.isHidden = false
             analyzeView.isHidden = true
             scrollView.contentInset = .zero
+            
+            trackScreen(.campaignDetailAfter)
         }
         
         loadImage(with: details.imageUrl)
@@ -129,6 +134,11 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         moreInfoButton.setTitle(buttonText, for: .normal)
         
         contentStackView.isHidden = false
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func loadImage(with url: URL?) {
