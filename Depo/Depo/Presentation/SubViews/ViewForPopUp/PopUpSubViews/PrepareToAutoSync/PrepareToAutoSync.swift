@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PrepareToAutoSync: BaseView {
+final class PrepareToAutoSync: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!

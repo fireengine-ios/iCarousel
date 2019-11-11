@@ -1,5 +1,5 @@
 //
-//  ProgressPopUp.swift
+//  ProgressCard.swift
 //  Depo_LifeTech
 //
 //  Created by Oleg on 18.09.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
+final class ProgressCard: BaseCardView, ProgressCardProtocol {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progress: UIProgressView!
@@ -106,7 +106,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
 
 }
 
-extension ProgressPopUp: LoadingImageViewDelegate {
+extension ProgressCard: LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {
         privateQueue.async {
             WidgetService.shared.notifyWidgetAbout(currentImage: image)

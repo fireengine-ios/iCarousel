@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol ProgressPopUpProtocol {
+protocol ProgressCardProtocol {
     func setProgress(allItems: Int?, readyItems: Int?)
     func configurateWithType(viewType: OperationType)
     func setImageForUploadingItem(item: WrapData)

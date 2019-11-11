@@ -343,9 +343,9 @@ class CardsManager: NSObject {
         return nil
     }
     
-    class func popUpViewForOperaion(type: OperationType) -> BaseView {
+    class func cardViewForOperaion(type: OperationType) -> BaseCardView {
         let serverObject = CardsManager.default.serverOperationFor(type: type)
-        let cardView: BaseView
+        let cardView: BaseCardView
         
         switch type {
         case .freeAppSpace:
@@ -357,7 +357,7 @@ class CardsManager: NSObject {
             popUp.configurateWithType(viewType: type)
             cardView = popUp
         case .download, .sync, .upload:
-            let popUp = ProgressPopUp.initFromNib()
+            let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
         case .prepareToAutoSync:

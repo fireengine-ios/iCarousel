@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LaunchCampaignCard: BaseView {
+final class LaunchCampaignCard: BaseCardView {
     
     @IBOutlet private weak var titleView: UIView! {
         willSet {

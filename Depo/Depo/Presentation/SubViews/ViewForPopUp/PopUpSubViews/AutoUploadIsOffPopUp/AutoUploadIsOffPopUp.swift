@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AutoUploadIsOffPopUp: BaseView {
+final class AutoUploadIsOffPopUp: BaseCardView {
     
     @IBOutlet weak var titleText: UILabel!
     @IBOutlet weak var settingsButton: CircleYellowButton!

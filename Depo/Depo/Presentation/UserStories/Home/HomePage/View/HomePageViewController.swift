@@ -234,12 +234,12 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
     
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.popUps.flatMap { SpotlightType(cardView: $0) })
+        cardTypes.append(contentsOf: homePageDataSource.cards.flatMap { SpotlightType(cardView: $0) })
         output.requestShowSpotlight(for: cardTypes)
     }
     
-    private func cellCoordinates<T: BaseView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
-        for (row, popupView) in homePageDataSource.popUps.enumerated() {
+    private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
+        for (row, popupView) in homePageDataSource.cards.enumerated() {
             if type(of: popupView) == cellType {
                 let indexPath = IndexPath(row: row, section: 0)
                 let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
@@ -267,7 +267,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         
                     let offset = layout.frameFor(indexPath: indexPath).origin.y
                     
-                    let isLastCell = indexPath.row == homePageDataSource.popUps.count - 1
+                    let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
                     
                     UIView.animate(withDuration: 0.1, animations: {
                         if isLastCell {
@@ -302,7 +302,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
             completion(frame)
             
         case .homePageGeneral:
-            guard let premiumCardFrame = homePageDataSource.popUps.first?.frame else {
+            guard let premiumCardFrame = homePageDataSource.cards.first?.frame else {
                 assertionFailure("premiumCard should be presented")
                 completion(.zero)
                 return

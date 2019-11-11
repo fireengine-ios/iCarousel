@@ -29,18 +29,18 @@ enum SpotlightType: Int {
         }
     }
     
-    var cellType: BaseView.Type {
+    var cellType: BaseCardView.Type {
         switch self {
         case .movieCard: return MovieCard.self
         case .albumCard: return AlbumCard.self
         case .collageCard: return CollageCard.self
         case .animationCard: return AnimationCard.self
         case .filterCard: return FilterPhotoCard.self
-        default: return BaseView.self
+        default: return BaseCardView.self
         }
     }
     
-    init?(cardView: BaseView) {
+    init?(cardView: BaseCardView) {
         if cardView is MovieCard {
             self = .movieCard
         } else if cardView is AlbumCard {

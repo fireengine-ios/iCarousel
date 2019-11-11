@@ -44,7 +44,7 @@ private enum CampaignUserStatus {
     }
 }
 
-final class CampaignCard: BaseView, ControlTabBarProtocol {
+final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     
     @IBOutlet private weak var campaignCardDesigner: CampaignCardDesigner!
     @IBOutlet private weak var titleLabel: UILabel!
