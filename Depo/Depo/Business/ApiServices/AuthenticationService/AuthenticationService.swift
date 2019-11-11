@@ -526,7 +526,6 @@ class AuthenticationService: BaseRequestService {
                 self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
                     if let accessToken = accessToken, isSuccess {
                         self?.tokenStorage.accessToken = accessToken
-                        AccountService().updateBrandType()
                         success?()
                     } else {
                         let error = ErrorResponse.string(TextConstants.errorServer)
