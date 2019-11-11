@@ -30,9 +30,9 @@ final class FactoryMain: FactoryBase, Factory {
     
     private static let coreDataStack: CoreDataStack = {
         if #available(iOS 10, *) {
-            return CoreDataStack_ios10()
+            return CoreDataStack_ios10.shared
         } else {
-            return CoreDataStack_ios9()
+            return CoreDataStack_ios9.shared
         }
     }()
     func resolve() -> CoreDataStack {

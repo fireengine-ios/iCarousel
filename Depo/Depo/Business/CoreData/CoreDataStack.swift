@@ -8,7 +8,15 @@
 
 import Foundation
 
+protocol CoreDataStackDelegate: class {
+    func onCoreDataStackSetupCompleted()
+}
+
 protocol CoreDataStack: class {
+    static var shared: CoreDataStack { get }
+    
+    var delegates: MulticastDelegate<CoreDataStackDelegate> { get }
+    
     var isReady: Bool { get }
     var mainContext: NSManagedObjectContext { get }
     var newChildBackgroundContext: NSManagedObjectContext  { get }
@@ -18,12 +26,33 @@ protocol CoreDataStack: class {
 }
 
 
+extension CoreDataStack {
+    
+    func checkReadiness() {
+        if !isReady {
+            let message = "CoreDataStack is not ready"
+            debugLog(message)
+            assertionFailure(message)
+        }
+    }
+    
+    // TODO: do we need save main context for compounder
+    func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
+                                  savedCallBack: VoidHandler?) {
+        context.save(async: !saveAndWait) { _ in
+            savedCallBack?()
+        }
+    }
+}
+
+
+
 fileprivate struct CoreDataConfig {
     static let modelName = "LifeBoxModel"
     static let modelVersion = "3"
     static let storeName = "DataModel"
     
-    static let storeUrl: URL = {
+    static var storeUrl: URL {
         guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
             let errorMessage = "Unable to resolve document directory"
             debugLog(errorMessage)
@@ -31,9 +60,9 @@ fileprivate struct CoreDataConfig {
         }
         
         return docURL.appendingPathComponent("\(CoreDataConfig.storeName).sqlite")
-    }()
+    }
     
-    static let modelURL: URL? = {
+    static var modelURL: URL? {
         let bundle = Bundle.main
         let versionedModelName = "\(CoreDataConfig.modelName) \(CoreDataConfig.modelVersion)"
         let subdir = "\(CoreDataConfig.modelName).momd"
@@ -46,15 +75,9 @@ fileprivate struct CoreDataConfig {
         } else {
             return momURL ?? omoURL
         }
-    }()
+    }
     
-    private init() {}
-}
-
-
-extension CoreDataStack {
-    
-    fileprivate static func managedObjectModel() -> NSManagedObjectModel {
+    static var managedObjectModel: NSManagedObjectModel {
         guard let modelURL = CoreDataConfig.modelURL else {
             let errorMessage = "Error loading model from bundle"
             debugLog(errorMessage)
@@ -69,20 +92,40 @@ extension CoreDataStack {
         return mom
     }
     
-    // TODO: do we need save main context for compounder
-    func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
-                                  savedCallBack: VoidHandler?) {
-        context.save(async: !saveAndWait) { _ in
-            savedCallBack?()
-        }
+    @available(iOS 10.0, *)
+    static var storeDescription: NSPersistentStoreDescription {
+        let description = NSPersistentStoreDescription(url: CoreDataConfig.storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
     }
+    
+    private init() {}
 }
 
 
+
 final class CoreDataStack_ios9: CoreDataStack {
+
+    static let shared: CoreDataStack = CoreDataStack_ios9()
     
-    private static func storeCoordinator() -> NSPersistentStoreCoordinator {
-        let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel())
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
+    
+    private(set) var isReady = false
+    
+    let mainContext: NSManagedObjectContext
+    
+    var newChildBackgroundContext: NSManagedObjectContext {
+        checkReadiness()
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.parent = mainContext
+        return context
+    }
+    
+    private let storeCoordinator: NSPersistentStoreCoordinator = {
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: CoreDataConfig.managedObjectModel)
         do {
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: false]
@@ -93,33 +136,16 @@ final class CoreDataStack_ios9: CoreDataStack {
             fatalError(errorMessage)
         }
         return  psc
-    }
-    
-    
-    private(set) var isReady = false
-    
-    let mainContext: NSManagedObjectContext = {
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.persistentStoreCoordinator = storeCoordinator()
-        return context
     }()
     
-    var newChildBackgroundContext: NSManagedObjectContext {
-        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.parent = mainContext
-        return context
-    }
     
-    
-    init() {
+    private init() {
+        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainContext.persistentStoreCoordinator = storeCoordinator
+        
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
     }
     
-    
-    func setup(completion: @escaping VoidHandler) {
-        isReady = true
-        completion()
-    }
     
     @objc func managedObjectContextDidSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else {
@@ -133,51 +159,67 @@ final class CoreDataStack_ios9: CoreDataStack {
         }
     }
     
+    func setup(completion: @escaping VoidHandler) {
+        guard !isReady else {
+            delegates.invoke { $0.onCoreDataStackSetupCompleted() }
+            completion()
+            return
+        }
+        
+        isReady = true
+        delegates.invoke { $0.onCoreDataStackSetupCompleted() }
+        completion()
+    }
+    
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        checkReadiness()
         let context = newChildBackgroundContext
         context.perform {
             block(context)
         }
     }
+    
 }
 
 
 
 @available(iOS 10, *)
 final class CoreDataStack_ios10: CoreDataStack {
-    
-    private static func storeDescription() -> NSPersistentStoreDescription {
-        let description = NSPersistentStoreDescription(url: CoreDataConfig.storeUrl)
-        description.type = NSSQLiteStoreType
-        description.shouldMigrateStoreAutomatically = true
-        description.shouldInferMappingModelAutomatically = false
-        
-        return description
-    }
-    
-
-    private(set) var isReady = false
-    
+ 
+    static let shared: CoreDataStack = CoreDataStack_ios10()
     
     private let container: NSPersistentContainer
     
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
+    
+    private(set) var isReady = false
+    
     var mainContext: NSManagedObjectContext {
+        checkReadiness()
         return container.viewContext
     }
     
     var newChildBackgroundContext: NSManagedObjectContext {
+        checkReadiness()
         /// don't set parent for newBackgroundContext(), it will crash
         /// with error "Context already has a coordinator; cannot replace"
         return container.newBackgroundContext()
     }
     
     
-    init() {
-        container = NSPersistentContainer(name: CoreDataConfig.storeName, managedObjectModel: Self.managedObjectModel())
-        container.persistentStoreDescriptions = [Self.storeDescription()]
+    private init() {
+        container = NSPersistentContainer(name: CoreDataConfig.storeName, managedObjectModel: CoreDataConfig.managedObjectModel)
+        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
     }
     
+    
     func setup(completion: @escaping VoidHandler) {
+        guard !isReady else {
+            delegates.invoke { $0.onCoreDataStackSetupCompleted() }
+            completion()
+            return
+        }
+        
         container.loadPersistentStores { [weak self] description, error in
             if let error = error {
                 let errorMessage = "Unable to load persistent stores: \(error)"
@@ -185,14 +227,16 @@ final class CoreDataStack_ios10: CoreDataStack {
                 assertionFailure(errorMessage)
             }
             debugLog("persistent store loaded: \(description)")
-            self?.mainContext.automaticallyMergesChangesFromParent = true
             self?.isReady = true
+            self?.mainContext.automaticallyMergesChangesFromParent = true
+            self?.delegates.invoke { $0.onCoreDataStackSetupCompleted() }
             completion()
         }
     }
     
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        checkReadiness()
         container.performBackgroundTask(block)
     }
 }
