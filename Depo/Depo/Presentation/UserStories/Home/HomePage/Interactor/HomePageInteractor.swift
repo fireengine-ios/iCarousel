@@ -45,6 +45,10 @@ final class HomePageInteractor: HomePageInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
     }
     
+    func trackGiftTapped() {
+        analyticsService.trackCustomGAEvent(eventCategory: .campaign, eventActions: .giftIcon, eventLabel: .empty)
+    }
+    
     private func setupAutoSyncTriggering() {
         SyncServiceManager.shared.setupAutosync()
         SyncServiceManager.shared.updateImmediately()

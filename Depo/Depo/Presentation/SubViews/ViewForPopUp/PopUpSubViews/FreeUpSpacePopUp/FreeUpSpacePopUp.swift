@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FreeUpSpacePopUp: BaseView {
+final class FreeUpSpacePopUp: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bigTitleLabel: UILabel!

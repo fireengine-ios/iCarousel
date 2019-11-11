@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class FilterPhotoCard: BaseView {
+final class FilterPhotoCard: BaseCardView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()

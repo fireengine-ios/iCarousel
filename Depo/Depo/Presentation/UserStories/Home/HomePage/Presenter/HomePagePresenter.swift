@@ -196,6 +196,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     }
     
     func giftButtonPressed() {
+        interactor.trackGiftTapped()
         router.openCampaignDetails()
     }
     

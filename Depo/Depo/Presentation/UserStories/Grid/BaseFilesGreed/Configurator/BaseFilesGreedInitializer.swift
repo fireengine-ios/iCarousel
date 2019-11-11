@@ -21,7 +21,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
-        viewController.scrollablePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        viewController.scrollablePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],

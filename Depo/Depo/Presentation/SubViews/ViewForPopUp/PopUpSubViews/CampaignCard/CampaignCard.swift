@@ -8,16 +8,43 @@
 
 import UIKit
 
-final class CampaignCard: BaseView, ControlTabBarProtocol {
+private enum CampaignUserStatus {
+    case backendMode
+    //Another cases for Client Mode
+    case newUser
+    case experiencedUser
+    case daylyLimitReached
+    case another
     
-    private enum UserStatus {
-        case backendMode
-        //Another cases for Client Mode
-        case newUser
-        case experiencedUser
-        case daylyLimitReached
-        case another
+    init(response: CampaignCardResponse) {
+        if response.totalUsed == 0 {
+            self = .newUser
+        } else if response.dailyUsed == 0 && response.totalUsed > 0 {
+            self = .experiencedUser
+        } else if response.dailyRemaining == 0 {
+            self = .daylyLimitReached
+        } else {
+            self = .another
+        }
     }
+    
+    var gaEventLabel: GAEventLabel? {
+        switch self {
+        case .newUser:
+            return .campaign(.neverParticipated)
+        case .experiencedUser:
+            return .campaign(.notParticipated)
+        case .daylyLimitReached:
+            return .campaign(.limitIsReached)
+        case .another:
+            return .campaign(.otherwise)
+        case .backendMode:
+            return nil
+        }
+    }
+}
+
+final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     
     @IBOutlet private weak var campaignCardDesigner: CampaignCardDesigner!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -26,12 +53,12 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     @IBOutlet private weak var imageView: LoadingImageView!
     @IBOutlet private weak var campaignDetailButton: UIButton!
     @IBOutlet private weak var analyzeDetailButton: UIButton!
-   
-    @IBOutlet private weak var buttonsView: UIView!
+    @IBOutlet private weak var contentStackView: UIStackView!
     
     private var detailUrl: URL?
-    private var userStatus: UserStatus?
+    private var userStatus: CampaignUserStatus?
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -48,7 +75,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     override func layoutSubviews() {
           super.layoutSubviews()
           
-          let height = buttonsView.frame.origin.y + buttonsView.frame.size.height
+          let height = contentStackView.frame.size.height
           if calculatedH != height {
               calculatedH = height
               layoutIfNeeded()
@@ -64,9 +91,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
             titleLabel.text = campaignCardResponse.title
             descriptionLabel.text = campaignCardResponse.message
         case .client:
-            setUserStausForClientMode(totalUsed: campaignCardResponse.totalUsed,
-                                      dailyUsed: campaignCardResponse.dailyUsed,
-                                      dailyRemaining: campaignCardResponse.dailyRemaining)
+            userStatus = CampaignUserStatus(response: campaignCardResponse)
             titleLabel.text = TextConstants.campaignCardTitle
             setDescriptionLabelForClientMode(dailyLimit: campaignCardResponse.maxDailyLimit,
                                              totalUsed: campaignCardResponse.totalUsed)
@@ -89,18 +114,6 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
         hideTabBar()
         let vc = WebViewController(urlString: url.absoluteString)
         RouterVC().pushViewController(viewController: vc)
-    }
-    
-    private func setUserStausForClientMode(totalUsed: Int, dailyUsed: Int, dailyRemaining: Int) {
-        if totalUsed == 0 {
-            userStatus = .newUser
-        } else if dailyUsed == 0 && totalUsed > 0 {
-            userStatus = .experiencedUser
-        } else if dailyRemaining == 0 {
-            userStatus = .daylyLimitReached
-        } else {
-            userStatus = .another
-        }
     }
     
     private func setDescriptionLabelForClientMode(dailyLimit: Int, totalUsed: Int) {
@@ -140,11 +153,23 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     }
     
     private func openCampaignDetailsPage() {
+        if let eventLabel = userStatus?.gaEventLabel {
+            analyticsService.trackCustomGAEvent(eventCategory: .campaign,
+                                                eventActions: .campaignDetail,
+                                                eventLabel: eventLabel)
+        }
+        
         let controller = router.campaignDetailViewController()
         router.pushViewController(viewController: controller)
     }
 
     private func openPhotopickHistoryPage() {
+        if let eventLabel = userStatus?.gaEventLabel {
+            analyticsService.trackCustomGAEvent(eventCategory: .campaign,
+                                                eventActions: .analyzeWithPhotopick,
+                                                eventLabel: eventLabel)
+        }
+        
         let controller = router.analyzesHistoryController()
         router.pushViewController(viewController: controller)
     }
