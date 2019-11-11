@@ -53,8 +53,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     @IBOutlet private weak var imageView: LoadingImageView!
     @IBOutlet private weak var campaignDetailButton: UIButton!
     @IBOutlet private weak var analyzeDetailButton: UIButton!
-   
-    @IBOutlet private weak var buttonsView: UIView!
+    @IBOutlet private weak var contentStackView: UIStackView!
     
     private var detailUrl: URL?
     private var userStatus: CampaignUserStatus?
@@ -76,7 +75,7 @@ final class CampaignCard: BaseView, ControlTabBarProtocol {
     override func layoutSubviews() {
           super.layoutSubviews()
           
-          let height = buttonsView.frame.origin.y + buttonsView.frame.size.height
+          let height = contentStackView.frame.size.height
           if calculatedH != height {
               calculatedH = height
               layoutIfNeeded()
