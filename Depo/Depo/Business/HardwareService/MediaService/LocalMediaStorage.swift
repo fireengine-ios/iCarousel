@@ -88,8 +88,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    private lazy var operationsService = MediaItemOperationsService.shared
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack = MediaItemOperationsService.shared
     
     private lazy var streamReaderWrite = StreamReaderWriter()
     
@@ -314,8 +313,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
         let array = assets.objects(at: IndexSet(0..<assets.count))
-        let context = coreDataStack.newChildBackgroundContext
-        operationsService.listAssetIdAlreadySaved(allList: array, context: context) { ids in
+        let context = CoreDataStack.shared.newChildBackgroundContext
+        coreDataStack.listAssetIdAlreadySaved(allList: array, context: context) { ids in
             completion(ids.count, true)
         }
     }
@@ -530,7 +529,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         // call append to get the completion and to be sure that local item is saved in our db
         mediaItemService.append(localMediaItems: [asset]) {
-            let context = self.coreDataStack.newChildBackgroundContext
+            let context = CoreDataStack.shared.newChildBackgroundContext
             mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
                 guard let savedLocalItem = items.first else {
                     assertionFailure()
@@ -554,7 +553,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
                         MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {
-                            self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
+                            CoreDataStack.shared.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                                 success?()
                             })
                         })

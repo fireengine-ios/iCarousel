@@ -17,8 +17,6 @@ class SyncServiceManager {
     
     private let reachabilityService = ReachabilityService.shared
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
-    
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -134,7 +132,7 @@ class SyncServiceManager {
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         debugPrint("AUTOSYNC: checkReachabilityAndSettings")
         
-        guard coreDataStack.isReady else {
+        guard CoreDataStack.shared.isReady else {
             return
         }
         

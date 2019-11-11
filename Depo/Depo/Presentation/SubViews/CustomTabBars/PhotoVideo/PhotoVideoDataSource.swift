@@ -17,7 +17,6 @@ protocol PhotoVideoDataSourceDelegate: class {
 
 final class PhotoVideoDataSource: NSObject {
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
     private let mergeQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoMergeQueue)
@@ -69,7 +68,7 @@ final class PhotoVideoDataSource: NSObject {
 //        }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = coreDataStack.mainContext
+        let context = CoreDataStack.shared.mainContext
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                       managedObjectContext: context,
                                                       sectionNameKeyPath: #keyPath(MediaItem.monthValue),
