@@ -21,6 +21,10 @@ protocol CoreDataStack: class {
     var mainContext: NSManagedObjectContext { get }
     var newChildBackgroundContext: NSManagedObjectContext  { get }
     
+    /**  Call before first use.
+     * Required.
+     * Since ios 10 loadPersistentStores is async and may take a long time in case of migration
+     */
     func setup(completion: @escaping VoidHandler)
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
 }
@@ -29,10 +33,11 @@ protocol CoreDataStack: class {
 extension CoreDataStack {
     
     func checkReadiness() {
-        if !isReady {
-            let message = "CoreDataStack is not ready"
+        guard isReady else {
+            let message = "Call CoreDataStack before it's ready"
             debugLog(message)
             assertionFailure(message)
+            return
         }
     }
     
@@ -147,7 +152,7 @@ final class CoreDataStack_ios9: CoreDataStack {
     }
     
     
-    @objc func managedObjectContextDidSave(_ notification: Notification) {
+    @objc private func managedObjectContextDidSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else {
             assertionFailure()
             return
@@ -190,10 +195,10 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     private let container: NSPersistentContainer
     
-    let delegates = MulticastDelegate<CoreDataStackDelegate>()
-    
     private(set) var isReady = false
     
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
+
     var mainContext: NSManagedObjectContext {
         checkReadiness()
         return container.viewContext
