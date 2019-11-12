@@ -62,6 +62,8 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         }
     }
     
+    @IBOutlet private weak var brandImageHeight: NSLayoutConstraint!
+    
     private lazy var cancelAsBackButton: UIBarButtonItem = {
         return UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
                                font: .TurkcellSaturaDemFont(size: 19.0),
@@ -90,6 +92,10 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         setupGradientBackground()
         navigationItem.leftBarButtonItem = cancelAsBackButton
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
+        
+        #if LIFEDRIVE
+        brandImageHeight.constant = 72
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {

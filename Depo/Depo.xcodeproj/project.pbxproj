@@ -553,7 +553,7 @@
 		7C1F898D1F70ECB100740177 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseCardView.swift */; };
 		7C1F89921F70FFDF00740177 /* CardsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* CardsContainerView.swift */; };
 		7C1F89951F7140AF00740177 /* SwipeableCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */; };
-		7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */; };
 		7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */; };
 		7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
@@ -2498,7 +2498,7 @@
 		8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
 		8C0E90511FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
 		8C0E90551FDEBDFF00789C91 /* CollectionViewStoryReorderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */; };
-		8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
 		8C0E905A1FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEC1BF1F332B0000BD433F /* PhotosOrderCollectionViewCell.xib */; };
 		8C0E905B1FDEBDFF00789C91 /* PackagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2F560F1F7552A900F49DA1 /* PackagesViewController.xib */; };
@@ -3758,6 +3758,9 @@
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
@@ -5995,7 +5998,7 @@
 		CE784E6A22A685FB00662219 /* refreshicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD252008AD6F003D8E05 /* refreshicon.png */; };
 		CE784E6B22A685FB00662219 /* bold_secili.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC422008AD6F003D8E05 /* bold_secili.png */; };
 		CE784E6C22A685FB00662219 /* Paylas_butnuna_basin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD072008AD6F003D8E05 /* Paylas_butnuna_basin.png */; };
-		CE784E6D22A685FB00662219 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		CE784E6D22A685FB00662219 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		CE784E6E22A685FB00662219 /* ok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACE82008AD6F003D8E05 /* ok@3x.png */; };
 		CE784E6F22A685FB00662219 /* bold_secili@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC432008AD6F003D8E05 /* bold_secili@2x.png */; };
 		CE784E7022A685FB00662219 /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
@@ -7104,7 +7107,7 @@
 		7C1F898C1F70ECB100740177 /* BaseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardView.swift; sourceTree = "<group>"; };
 		7C1F89911F70FFDF00740177 /* CardsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsContainerView.swift; sourceTree = "<group>"; };
 		7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCardCell.swift; sourceTree = "<group>"; };
-		7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpSwipeCell.xib; sourceTree = "<group>"; };
+		7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwipeableCardCell.xib; sourceTree = "<group>"; };
 		7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUploadCardCell.swift; sourceTree = "<group>"; };
 		7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestUploadCardCell.xib; sourceTree = "<group>"; };
 		7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInitializer.swift; sourceTree = "<group>"; };
@@ -8516,6 +8519,7 @@
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B57AB752237989F600467573 /* NSLocking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extension.swift"; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
@@ -11311,7 +11315,7 @@
 				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
 				CE99AC77201CB778003DD3B7 /* CardActionType.swift */,
 				7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */,
-				7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */,
+				7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */,
 			);
 			path = ViewForPopUp;
 			sourceTree = "<group>";
@@ -15525,6 +15529,7 @@
 				8C65D18522C63B6F00CB1DBD /* String + Extension.swift */,
 				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
 				73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */,
+				B57AB752237989F600467573 /* NSLocking+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -18289,7 +18294,7 @@
 				8C06B0C92008AD71003D8E05 /* sample@3x.png in Resources */,
 				8C06B0A92008AD71003D8E05 /* renk_selected@2x.png in Resources */,
 				8C06AFDD2008AD71003D8E05 /* italic@3x.png in Resources */,
-				8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */,
+				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8C06B0EF2008AD72003D8E05 /* serbest_cizgi@2x.png in Resources */,
 				8C06B1592008AD72003D8E05 /* tik_icon.png in Resources */,
 				8C06AF8F2008AD70003D8E05 /* extraOptions_selected@3x.png in Resources */,
@@ -19109,7 +19114,7 @@
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
 				73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
-				7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */,
+				7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
 				8C06AEDC2008AD70003D8E05 /* bold_secili@2x.png in Resources */,
 				7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */,
@@ -19760,7 +19765,7 @@
 				CE784E6A22A685FB00662219 /* refreshicon.png in Resources */,
 				CE784E6B22A685FB00662219 /* bold_secili.png in Resources */,
 				CE784E6C22A685FB00662219 /* Paylas_butnuna_basin.png in Resources */,
-				CE784E6D22A685FB00662219 /* PopUpSwipeCell.xib in Resources */,
+				CE784E6D22A685FB00662219 /* SwipeableCardCell.xib in Resources */,
 				CE784E6E22A685FB00662219 /* ok@3x.png in Resources */,
 				CE784E6F22A685FB00662219 /* bold_secili@2x.png in Resources */,
 				CE784E7022A685FB00662219 /* UserInfoSubViewViewController.xib in Resources */,
@@ -21759,6 +21764,7 @@
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				8C0E8F301FDEBDFF00789C91 /* SplashViewInput.swift in Sources */,
 				8C20865A228D4B2E000BEDAD /* PhotoVideoCollectionViewManager.swift in Sources */,
+				B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				8C0E8F311FDEBDFF00789C91 /* SplashViewOutput.swift in Sources */,
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
@@ -23735,6 +23741,7 @@
 				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
+				B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
@@ -24332,6 +24339,7 @@
 				CE78498022A685FB00662219 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				CE78498122A685FB00662219 /* BaseCollectionViewCell.swift in Sources */,
 				73A1834B2359CC550095719F /* CampaignCardResponse.swift in Sources */,
+				B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				89104BC722CBA025005B3F58 /* UIButton+Image.swift in Sources */,
 				CE78498222A685FB00662219 /* UserProfileInteractorInput.swift in Sources */,
 				CE78498322A685FB00662219 /* EULAService.swift in Sources */,
@@ -27990,7 +27998,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.10;
+				CURRENT_PROJECT_VERSION = 33.11;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -28053,7 +28061,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.10;
+				CURRENT_PROJECT_VERSION = 33.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28112,7 +28120,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.10;
+				CURRENT_PROJECT_VERSION = 33.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28172,7 +28180,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.10;
+				CURRENT_PROJECT_VERSION = 33.11;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
