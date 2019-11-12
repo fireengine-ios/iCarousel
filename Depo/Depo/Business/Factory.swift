@@ -28,17 +28,19 @@ protocol Factory: SharedFactory {
 
 final class FactoryMain: FactoryBase, Factory {
     
+    private static let lock = NSLock()
     private static let coreDataStack: CoreDataStack = {
-        if #available(iOS 10, *) {
-            return CoreDataStack_ios10.shared
-        } else {
-            return CoreDataStack_ios9.shared
+        lock.withCriticalSection {
+            if #available(iOS 10, *) {
+                return CoreDataStack_ios10.shared
+            } else {
+                return CoreDataStack_ios9.shared
+            }
         }
     }()
     
-    private let lock = NSLock()
     func resolve() -> CoreDataStack {
-         return lock.withCriticalSection { FactoryMain.coreDataStack }
+         return FactoryMain.coreDataStack
     }
 
     private static let mediaPlayer = MediaPlayer()
