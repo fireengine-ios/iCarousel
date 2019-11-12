@@ -165,12 +165,6 @@ final class CoreDataStack_ios9: CoreDataStack {
     }
     
     func setup(completion: @escaping VoidHandler) {
-        guard !isReady else {
-            delegates.invoke { $0.onCoreDataStackSetupCompleted() }
-            completion()
-            return
-        }
-        
         isReady = true
         delegates.invoke { $0.onCoreDataStackSetupCompleted() }
         completion()
