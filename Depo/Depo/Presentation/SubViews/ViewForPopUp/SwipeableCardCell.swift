@@ -1,5 +1,5 @@
 //
-//  PopUpSwipeCell.swift
+//  SwipeableCardCell.swift
 //  Depo_LifeTech
 //
 //  Created by Oleg on 19.09.17.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol PopUpSwipeCellDelegate {
+protocol SwipeableCardCellDelegate {
     func onCellDeleted(cell: UITableViewCell)
 }
 
-class PopUpSwipeCell: UITableViewCell {
+class SwipeableCardCell: UITableViewCell {
 
     private var startX: CGFloat = 0.0
     private var isTouch = false
     var isSwipeEnable = true
     
-    var cellDelegate: PopUpSwipeCellDelegate?
+    var cellDelegate: SwipeableCardCellDelegate?
     
     
     override func awakeFromNib() {
@@ -38,11 +38,11 @@ class PopUpSwipeCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
-        if let baseView = subView as? BaseView {
+        if let baseView = subView as? BaseCardView {
             isSwipeEnable = baseView.canSwipe
         }
         
-        subView.frame = CGRect(x: ViewForPopUp.indent, y: ViewForPopUp.indent, width: frame.size.width - 2 * ViewForPopUp.indent, height: subView.frame.size.height)
+        subView.frame = CGRect(x: CardsContainerView.indent, y: CardsContainerView.indent, width: frame.size.width - 2 * CardsContainerView.indent, height: subView.frame.size.height)
         
         if (withShadow) {
             if (contentView.layer.sublayers != nil) {
@@ -51,11 +51,11 @@ class PopUpSwipeCell: UITableViewCell {
                 }
             }
             
-            subView.layer.cornerRadius = BaseView.baseViewCornerRadius
+            subView.layer.cornerRadius = BaseCardView.baseViewCornerRadius
             subView.clipsToBounds = true
             
             let layer = CALayer()
-            layer.frame = CGRect(x: ViewForPopUp.indent, y: ViewForPopUp.indent, width: frame.size.width - 2 * ViewForPopUp.indent, height: subView.frame.size.height)
+            layer.frame = CGRect(x: CardsContainerView.indent, y: CardsContainerView.indent, width: frame.size.width - 2 * CardsContainerView.indent, height: subView.frame.size.height)
             
             layer.shadowColor = UIColor.lightGray.cgColor
             layer.shadowOpacity = 1
@@ -63,7 +63,7 @@ class PopUpSwipeCell: UITableViewCell {
             layer.shadowRadius = 3
             layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: layer.frame.size.width, height: layer.frame.size.height)).cgPath
             layer.shouldRasterize = true
-            layer.cornerRadius = BaseView.baseViewCornerRadius
+            layer.cornerRadius = BaseCardView.baseViewCornerRadius
             
             contentView.layer.addSublayer(layer)
         }
@@ -125,7 +125,7 @@ class PopUpSwipeCell: UITableViewCell {
             self.isTouch = false
             if (needDeleteCell) {
                 for view in self.contentView.subviews {
-                    if let baseView = view as? BaseView {
+                    if let baseView = view as? BaseCardView {
                         baseView.viewDeletedBySwipe()
                     }
                 }

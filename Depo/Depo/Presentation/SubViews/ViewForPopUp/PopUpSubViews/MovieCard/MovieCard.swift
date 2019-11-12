@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class MovieCard: BaseView {
+final class MovieCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {

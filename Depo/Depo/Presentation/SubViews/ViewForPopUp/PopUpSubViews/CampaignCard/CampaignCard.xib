@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -107,7 +107,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="lTj-Pw-sq4" firstAttribute="centerY" secondItem="uqY-lp-Hif" secondAttribute="centerY" id="8Km-mE-Jug"/>
                                 <constraint firstItem="uqY-lp-Hif" firstAttribute="leading" secondItem="wYr-ei-y6z" secondAttribute="leading" constant="16" id="Bec-Zw-ki7"/>
@@ -132,10 +132,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="analyzeDetailButton" destination="lTj-Pw-sq4" id="em1-cX-7OD"/>
-                <outlet property="buttonsView" destination="wYr-ei-y6z" id="NOv-C7-Giw"/>
                 <outlet property="campaignCardDesigner" destination="1sK-iv-LjP" id="ZKn-x8-Sln"/>
                 <outlet property="campaignDetailButton" destination="uqY-lp-Hif" id="dq7-le-ZXA"/>
                 <outlet property="closeButton" destination="IRm-4b-vK6" id="63B-hx-gZ5"/>
+                <outlet property="contentStackView" destination="WBy-NV-x0u" id="Oq5-52-Pbg"/>
                 <outlet property="descriptionLabel" destination="dkX-6n-aTJ" id="LfW-zB-52J"/>
                 <outlet property="imageView" destination="Tsa-hG-kok" id="Wyy-xs-EvK"/>
                 <outlet property="titleLabel" destination="yuD-Ix-VNf" id="tVh-VJ-BPz"/>

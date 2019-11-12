@@ -29,7 +29,7 @@ final class PhotoVideoCollectionViewManager {
         return sliderModuleConfigurator.lbAlbumLikeSliderVC
     }()
     
-    let scrolliblePopUpView = ViewForPopUp()
+    let scrolliblePopUpView = CardsContainerView()
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
     private weak var collectionView: UICollectionView!
@@ -116,7 +116,7 @@ final class PhotoVideoCollectionViewManager {
         scrolliblePopUpView.delegate = self
         scrolliblePopUpView.isEnable = true
         
-        scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        scrolliblePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
@@ -194,7 +194,7 @@ final class PhotoVideoCollectionViewManager {
 
 
 // MARK: - ViewForPopUpDelegate scrolliblePopUpView.delegate
-extension PhotoVideoCollectionViewManager: ViewForPopUpDelegate {
+extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
     func onUpdateViewForPopUpH(h: CGFloat) {
         let sliderH = contentSlider.view.frame.height
         let checkBoxH = showOnlySyncItemsCheckBox.frame.height

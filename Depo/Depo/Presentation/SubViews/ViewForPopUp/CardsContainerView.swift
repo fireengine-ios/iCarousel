@@ -8,14 +8,14 @@
 
 import UIKit
 
-@objc protocol ViewForPopUpDelegate {
+@objc protocol CardsContainerViewDelegate {
     func onUpdateViewForPopUpH(h: CGFloat)
 }
 
 class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, SwipeableCardCellDelegate, CardsManagerViewProtocol {
 
     var hConstraint: NSLayoutConstraint?
-    weak var delegate: ViewForPopUpDelegate?
+    weak var delegate: CardsContainerViewDelegate?
     
     var tableView: UITableView = UITableView()
     var viewsArray = [BaseCardView]()

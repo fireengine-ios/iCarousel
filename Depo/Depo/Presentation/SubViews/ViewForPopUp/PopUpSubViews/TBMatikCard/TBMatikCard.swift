@@ -1,6 +1,6 @@
 import UIKit
 
-final class TBMatikCard: BaseView {
+final class TBMatikCard: BaseCardView {
     
     @IBOutlet private weak var imagesStackView: UIStackView! {
         willSet {

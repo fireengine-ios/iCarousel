@@ -1,5 +1,5 @@
 //
-//  BaseCollectionViewDataSource.swift
+//  HomeCollectionViewDataSource.swift
 //  Depo
 //
 //  Created by Oleg on 26.06.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewDataSourceDelegate: class {
+protocol HomeCollectionViewDataSourceDelegate: class {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -16,33 +16,33 @@ protocol BaseCollectionViewDataSourceDelegate: class {
     func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
-final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
+final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
     
-    private weak var delegate: BaseCollectionViewDataSourceDelegate?
+    private weak var delegate: HomeCollectionViewDataSourceDelegate?
 
     private var collectionView: UICollectionView!
     private var viewController: UIViewController!
         
-    private var viewsByType = [OperationType: [BaseView]]()
+    private var viewsByType = [OperationType: [BaseCardView]]()
     
-    private var notPermittedPopUpViewTypes = Set<String>()
+    private var notPermittedCardsViewTypes = Set<String>()
         
     private var isRefreshing = false ///determine collectionView refresh state (batchUpdate AND reloadData)
     private var isFinishedLoading = false ///determine first collectionView filling
     private var afterRefreshHandlers = [VoidHandler?]() ///handlers happened while refreshing
 
-    private var insertPopUps = [BaseView]()
-    private var removePopUpIndexes = [Int]()
+    private var insertCards = [BaseCardView]()
+    private var removeCardsIndexes = [Int]()
     
     private var refreshCollectionViewTask: DispatchWorkItem?
     
-    var popUps = [BaseView]()
+    var cards = [BaseCardView]()
 
     var isEnable = true
     var isActive = false
     var isViewActive = false
     
-    func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
+    func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: HomeCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
         self.delegate = delegate
@@ -50,7 +50,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        if let layout = collectionView.collectionViewLayout as? CollectionViewLayout {
+        if let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout {
             if let numberOfColumns = delegate?.numberOfColumns() {
                 layout.numberOfColumns = numberOfColumns
             } else {
@@ -70,11 +70,11 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     // MARK: BaseCollectionViewCellWithSwipeDelegate
     
     func onCellDeleted(cell: UICollectionViewCell) {
-        guard let indexPath = collectionView.indexPath(for: cell), let view = popUps[safe: indexPath.row] else {
+        guard let indexPath = collectionView.indexPath(for: cell), let view = cards[safe: indexPath.row] else {
             return
         }
 
-        popUps.remove(view)
+        cards.remove(view)
         refreshCollection(remove: [indexPath.row], delay: .now())
     }
     
@@ -86,36 +86,36 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         if !isEnable {
             isPermitted = false
             
-        } else if notPermittedPopUpViewTypes.isEmpty {
+        } else if notPermittedCardsViewTypes.isEmpty {
             isPermitted = true
             
         } else {
-            isPermitted = !notPermittedPopUpViewTypes.contains(type.rawValue)
+            isPermitted = !notPermittedCardsViewTypes.contains(type.rawValue)
             
         }
         
         return isPermitted
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
+    private func checkIsNeedShowCardFor(operationType: OperationType) -> Bool {
         switch operationType {
         case .prepareToAutoSync:
             return viewsByType[.sync] == nil
         case .premium:
-            return !popUps.contains(where: { $0 is PremiumInfoCard })
+            return !cards.contains(where: { $0 is PremiumInfoCard })
         default:
             return true
         }
     }
     
-    func getViewForOperation(operation: OperationType) -> BaseView {
-        return CardsManager.popUpViewForOperaion(type: operation)
+    func getViewForOperation(operation: OperationType) -> BaseCardView {
+        return CardsManager.cardViewForOperaion(type: operation)
     }
     
-    func setViewByType(view: BaseView, operation: OperationType) {
+    func setViewByType(view: BaseCardView, operation: OperationType) {
         var array = viewsByType[operation]
         if array == nil {
-            array = [BaseView]()
+            array = [BaseCardView]()
             array?.append(view)
             viewsByType[operation] = array
             return
@@ -130,7 +130,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     }
     
     private func refreshPremiumCard() {
-        if let view = popUps.first(where: { $0 is PremiumInfoCard }) as? PremiumInfoCard,
+        if let view = cards.first(where: { $0 is PremiumInfoCard }) as? PremiumInfoCard,
             (view.isPremium != AuthoritySingleton.shared.accountType.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
             
             view.configurateWithType(viewType: .premium)
@@ -143,8 +143,8 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     ///cancelling batchUpdate on reloadData
     private func resetCollectionViewUpdate(completion: VoidHandler? = nil) {
-        self.removePopUpIndexes.removeAll()
-        self.insertPopUps.removeAll()
+        self.removeCardsIndexes.removeAll()
+        self.insertCards.removeAll()
         
         refreshCollectionViewTask?.cancel()
         refreshCollectionViewTask = nil
@@ -159,7 +159,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     }
     
     ///method with delay because stopping cards performs one by one
-    private func refreshCollection(remove: [Int] = [], insert: [BaseView] = [], delay: DispatchTime = .now() + NumericConstants.animationDuration) {
+    private func refreshCollection(remove: [Int] = [], insert: [BaseCardView] = [], delay: DispatchTime = .now() + NumericConstants.animationDuration) {
         
         ///batch update starts working only after arriving server cards
         ///if not it's works BUT cards may appear without BaseView on it
@@ -173,8 +173,8 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         
         refreshCollectionViewTask?.cancel()
                 
-        insertPopUps.append(contentsOf: insert)
-        removePopUpIndexes.append(contentsOf: remove)
+        insertCards.append(contentsOf: insert)
+        removeCardsIndexes.append(contentsOf: remove)
 
         let refreshCollectionViewTask = DispatchWorkItem { [weak self] in
             guard let self = self, !self.isRefreshing else {
@@ -188,11 +188,11 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
 
             self.isRefreshing = true
             
-            var remove = self.removePopUpIndexes
-            var insert = self.insertPopUps.compactMap { self.popUps.index(of: $0) }
+            var remove = self.removeCardsIndexes
+            var insert = self.insertCards.compactMap { self.cards.index(of: $0) }
             
-            self.removePopUpIndexes.removeAll()
-            self.insertPopUps.removeAll()
+            self.removeCardsIndexes.removeAll()
+            self.insertCards.removeAll()
 
             ///find same indexes and convert to update indexes
             let update = remove.filter { insert.contains($0) }
@@ -243,21 +243,21 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         self.refreshCollectionViewTask = refreshCollectionViewTask
     }
     
-    private func changePopUps(insert: BaseView? = nil, remove: Int? = nil) {
+    private func changeCards(insert: BaseCardView? = nil, remove: Int? = nil) {
         if let insert = insert {
-            self.popUps.append(insert)
+            self.cards.append(insert)
         }
         
         if let remove = remove {
-            let view = self.popUps.remove(at: remove)
+            let view = self.cards.remove(at: remove)
             
-            if let index = self.insertPopUps.index(of: view) {
-                self.insertPopUps.remove(at: index)
+            if let index = self.insertCards.index(of: view) {
+                self.insertCards.remove(at: index)
                 return
             }
         }
         
-        self.popUps = self.popUps.sorted(by: { view1, view2 -> Bool in
+        self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             if order1 == order2 {
@@ -271,7 +271,7 @@ final class BaseCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
 }
 
 //MARK: CardsManagerViewProtocol
-extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
+extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
@@ -282,7 +282,7 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
             return
         }
         
-        if !checkIsNeedShowPopUpFor(operationType: type) {
+        if !checkIsNeedShowCardFor(operationType: type) {
             if type == .premium {
                 ///We setup it always as first item In “this” method, the cell does not store this view and adds it as subview
                 if let view = collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.contentView.subviews.first as? PremiumInfoCard {
@@ -297,21 +297,21 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             view.layoutIfNeeded()
-            if let popUp = view as? ProgressPopUp {
-                popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+            if let card = view as? ProgressCard{
+                card.setProgress(allItems: allOperations, readyItems: completedOperations)
                 
                 if let item = object {
-                    popUp.setImageForUploadingItem(item: item)
+                    card.setImageForUploadingItem(item: item)
                 }
             }
             
             setViewByType(view: view, operation: type)
-            changePopUps(insert: view)
+            changeCards(insert: view)
         }
     }
     
     func startOperationsWith(serverObjects: [HomeCardResponse]) {
-        var newPopUps = Set<BaseView>()
+        var newCards = Set<BaseCardView>()
         
         for key in viewsByType.keys where !CardsManager.default.checkIsThisOperationStartedByDevice(operation: key) {
             viewsByType[key] = nil
@@ -327,7 +327,7 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
                     view.removeFromSuperview()
                     view.set(object: object)
                     
-                    newPopUps.insert(view)
+                    newCards.insert(view)
                 }
                 
             } else if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type), checkIsThisIsPermittedType(type: type) {
@@ -337,25 +337,25 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
                 //TODO: drop before regression tests.
                 view.set(object: object)
                 
-                newPopUps.insert(view)
+                newCards.insert(view)
                 setViewByType(view: view, operation: type)
             }
         }
         
-        for popUp in popUps where !newPopUps.contains(popUp) {
+        for card in cards where !newCards.contains(card) {
             ///tricky moment for Premiun info card
             ///popUp.cardObject?.getOperationType() - return nil
             ///BUT
             ///CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) - true
             ///don't use guard-else OR find out a way to modefy code
-            if let type = popUp.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
+            if let type = card.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                 continue
             }
             
-            newPopUps.insert(popUp)
+            newCards.insert(card)
         }
 
-        let sortedPopUps = Array(newPopUps).sorted(by: { view1, view2 -> Bool in
+        let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             if order1 == order2 {
@@ -364,8 +364,8 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
             return order1 < order2
         })
                 
-        resetCollectionViewUpdate { [sortedPopUps] in
-            self.popUps = sortedPopUps
+        resetCollectionViewUpdate { [sortedCards] in
+            self.cards = sortedCards
 
             self.collectionView.reloadData()
 
@@ -378,10 +378,10 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
             return
         }
         
-        if let popUp = viewsByType[type]?.first as? ProgressPopUp {
-            popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+        if let card = viewsByType[type]?.first as? ProgressCard {
+            card.setProgress(allItems: allOperations, readyItems: completedOperations)
             if let item = object {
-                popUp.setImageForUploadingItem(item: item)
+                card.setImageForUploadingItem(item: item)
             }
             
         } else {
@@ -390,13 +390,13 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
     }
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
-        guard isViewActive, let popUp = viewsByType[operationType]?.first as? ProgressPopUp else {
+        guard isViewActive, let card = viewsByType[operationType]?.first as? ProgressCard else {
             return
         }
         
-        popUp.setProgressBar(ratio: ratio)
+        card.setProgressBar(ratio: ratio)
         if let object = object {
-            popUp.setImageForUploadingItem(item: object)
+            card.setImageForUploadingItem(item: object)
         }
     }
     
@@ -407,8 +407,8 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
         
         self.viewsByType[type] = nil
         views.forEach { view in
-            if let index = self.popUps.index(of: view) {
-                changePopUps(remove: index)
+            if let index = self.cards.index(of: view) {
+                changeCards(remove: index)
             }
         }
     }
@@ -418,11 +418,11 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
             return
         }
         
-        var newArray = [BaseView]()
-        
+        var newArray = [BaseCardView]()
+
         views.forEach { view in
-            if let index = self.popUps.index(of: view), view.cardObject == serverObject {
-                changePopUps(remove: index)
+            if let index = self.cards.index(of: view), view.cardObject == serverObject {
+                 changeCards(remove: index)
             } else {
                 newArray.append(view)
             }
@@ -436,38 +436,38 @@ extension BaseCollectionViewDataSource: CardsManagerViewProtocol {
     }
     
     func isEqual(object: CardsManagerViewProtocol) -> Bool {
-        if let compairedView = object as? BaseCollectionViewDataSource {
+        if let compairedView = object as? HomeCollectionViewDataSource {
             return compairedView == self
         }
         
         return false
     }
 
-    func addNotPermittedPopUpViewTypes(types: [OperationType]) {
+    func addNotPermittedCardViewTypes(types: [OperationType]) {
         let array = types.map { $0.rawValue }
         for operationName in array {
-            notPermittedPopUpViewTypes.insert(operationName)
+            notPermittedCardsViewTypes.insert(operationName)
         }
     }
     
     func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
         guard
-            let instaPickCard = popUps.first(where: { $0 is InstaPickCard }) as? InstaPickCard,
+            let instaPickCard = cards.first(where: { $0 is InstaPickCard }) as? InstaPickCard,
             instaPickCard.isNeedReloadWithNew(status: analysisStatus),
-            let index = popUps.index(of: instaPickCard)
+            let index = cards.index(of: instaPickCard)
         else {
             return
         }
         
-        changePopUps(insert: instaPickCard, remove: index)
+        changeCards(insert: instaPickCard, remove: index)
     }
 }
 
 //MARK: UICollectionView datasource/delegate
-extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
+extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popUps.count
+        return cards.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -492,9 +492,9 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
         baseCell.setStateToDefault()
         baseCell.cellDelegate = self
         
-        if let popUpView = popUps[safe: indexPath.row] {
-            baseCell.addViewOnCell(controllersView: popUpView)
-            popUpView.viewWillShow()
+        if let cardUpView = cards[safe: indexPath.row] {
+            baseCell.addViewOnCell(controllersView: cardUpView)
+            cardUpView.viewWillShow()
         } else {
             assertionFailure("something went wrong! number of items in datasource and number of cells are different")
         }
@@ -512,17 +512,17 @@ extension BaseCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
 }
 
 //MARK UICollectionView Layout delegate
-extension BaseCollectionViewDataSource: CollectionViewLayoutDelegate {
+extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        guard let popUpView = popUps[safe: indexPath.row] else {
+        guard let cardView = cards[safe: indexPath.row] else {
             return 40
         }
         
-        popUpView.frame.size = CGSize(width: withWidth,
-                                      height: popUpView.frame.size.height)
-        popUpView.layoutIfNeeded()
+        cardView.frame.size = CGSize(width: withWidth,
+                                      height: cardView.frame.size.height)
+        cardView.layoutIfNeeded()
 
-        return popUpView.calculatedH
+        return cardView.calculatedH
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {

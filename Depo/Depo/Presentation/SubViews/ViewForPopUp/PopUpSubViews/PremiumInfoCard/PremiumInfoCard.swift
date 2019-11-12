@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PremiumInfoCard: BaseView {
+final class PremiumInfoCard: BaseCardView {
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
