@@ -8,49 +8,6 @@
 
 import Foundation
 
-protocol CoreDataStackDelegate: class {
-    func onCoreDataStackSetupCompleted()
-}
-
-protocol CoreDataStack: class {
-    static var shared: CoreDataStack { get }
-    
-    var delegates: MulticastDelegate<CoreDataStackDelegate> { get }
-    
-    var isReady: Bool { get }
-    var mainContext: NSManagedObjectContext { get }
-    var newChildBackgroundContext: NSManagedObjectContext  { get }
-    
-    /**  Call before first use.
-     * Required.
-     * Since ios 10 loadPersistentStores is async and may take a long time in case of migration
-     */
-    func setup(completion: @escaping VoidHandler)
-    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
-}
-
-
-extension CoreDataStack {
-    
-    func checkReadiness() {
-        guard isReady else {
-            let message = "Call CoreDataStack before it's ready"
-            debugLog(message)
-            assertionFailure(message)
-            return
-        }
-    }
-    
-    // TODO: do we need save main context for compounder
-    func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
-                                  savedCallBack: VoidHandler?) {
-        context.save(async: !saveAndWait) { _ in
-            savedCallBack?()
-        }
-    }
-}
-
-
 
 fileprivate struct CoreDataConfig {
     static let modelName = "LifeBoxModel"
@@ -110,6 +67,49 @@ fileprivate struct CoreDataConfig {
     private init() {}
 }
 
+
+
+protocol CoreDataStackDelegate: class {
+    func onCoreDataStackSetupCompleted()
+}
+
+protocol CoreDataStack: class {
+    static var shared: CoreDataStack { get }
+    
+    var delegates: MulticastDelegate<CoreDataStackDelegate> { get }
+    
+    var isReady: Bool { get }
+    var mainContext: NSManagedObjectContext { get }
+    var newChildBackgroundContext: NSManagedObjectContext  { get }
+    
+    /**  Call before first use.
+     * Required.
+     * Since ios 10 loadPersistentStores is async and may take a long time in case of migration
+     */
+    func setup(completion: @escaping VoidHandler)
+    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
+}
+
+
+extension CoreDataStack {
+    
+    func checkReadiness() {
+        guard isReady else {
+            let message = "Call CoreDataStack before it's ready"
+            debugLog(message)
+            assertionFailure(message)
+            return
+        }
+    }
+    
+    // TODO: do we need save main context for compounder
+    func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
+                                  savedCallBack: VoidHandler?) {
+        context.save(async: !saveAndWait) { _ in
+            savedCallBack?()
+        }
+    }
+}
 
 
 final class CoreDataStack_ios9: CoreDataStack {
@@ -185,7 +185,6 @@ final class CoreDataStack_ios9: CoreDataStack {
     }
     
 }
-
 
 
 @available(iOS 10, *)
