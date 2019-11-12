@@ -78,6 +78,8 @@ class SplashInteractor: SplashInteractorInput {
             ///So we check second time.
             } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
+                    AccountService().updateBrandType()
+                    
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
                     
