@@ -3758,6 +3758,9 @@
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
@@ -8516,6 +8519,7 @@
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B57AB752237989F600467573 /* NSLocking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extension.swift"; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
@@ -15525,6 +15529,7 @@
 				8C65D18522C63B6F00CB1DBD /* String + Extension.swift */,
 				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
 				73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */,
+				B57AB752237989F600467573 /* NSLocking+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -21759,6 +21764,7 @@
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				8C0E8F301FDEBDFF00789C91 /* SplashViewInput.swift in Sources */,
 				8C20865A228D4B2E000BEDAD /* PhotoVideoCollectionViewManager.swift in Sources */,
+				B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				8C0E8F311FDEBDFF00789C91 /* SplashViewOutput.swift in Sources */,
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
@@ -23735,6 +23741,7 @@
 				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
+				B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
@@ -24332,6 +24339,7 @@
 				CE78498022A685FB00662219 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				CE78498122A685FB00662219 /* BaseCollectionViewCell.swift in Sources */,
 				73A1834B2359CC550095719F /* CampaignCardResponse.swift in Sources */,
+				B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				89104BC722CBA025005B3F58 /* UIButton+Image.swift in Sources */,
 				CE78498222A685FB00662219 /* UserProfileInteractorInput.swift in Sources */,
 				CE78498322A685FB00662219 /* EULAService.swift in Sources */,
