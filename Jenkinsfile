@@ -183,7 +183,7 @@ pipeline {
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
-                        sh "cd Depo; pod install --repo-update"
+                        sh "source ~/.bash_profile; cd Depo; pod install --repo-update"
                         xcodeBuild('test')
                         publishToArtifactory('test')
                     }
