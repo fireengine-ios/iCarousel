@@ -89,7 +89,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     private lazy var operationsService = MediaItemOperationsService.shared
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     private lazy var streamReaderWrite = StreamReaderWriter()
     

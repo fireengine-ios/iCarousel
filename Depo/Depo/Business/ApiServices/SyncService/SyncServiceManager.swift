@@ -17,7 +17,7 @@ class SyncServiceManager {
     
     private let reachabilityService = ReachabilityService.shared
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()

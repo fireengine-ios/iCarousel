@@ -17,7 +17,7 @@ protocol PhotoVideoDataSourceDelegate: class {
 
 final class PhotoVideoDataSource: NSObject {
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
     private let mergeQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoMergeQueue)
