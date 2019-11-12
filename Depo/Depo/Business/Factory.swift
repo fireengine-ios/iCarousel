@@ -35,8 +35,10 @@ final class FactoryMain: FactoryBase, Factory {
             return CoreDataStack_ios9.shared
         }
     }()
+    
+    private let lock = NSLock()
     func resolve() -> CoreDataStack {
-        return FactoryMain.coreDataStack
+         return lock.withCriticalSection { FactoryMain.coreDataStack }
     }
 
     private static let mediaPlayer = MediaPlayer()
