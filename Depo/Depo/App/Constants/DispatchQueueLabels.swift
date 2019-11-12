@@ -36,5 +36,6 @@ struct DispatchQueueLabels {
     static let filesDataSourceCacheQueue = "com.lifebox.filesDataSourceCache"
     static let blurServiceQueue = "com.lifebox.blurServiceQueue"
     static let photoVideoMergeQueue = "com.lifebox.photoVideoMergeQueue"
-    static let homePagePopUpsServiceQueue = "HomePagePopUpsServiceQueueLabel"
+    static let homePagePopUpsServiceQueue = "com.lifebox.homePagePopUpsServiceQueue"
+    static let homePageCardsUpdateQueue = "com.lifebox.homePageCardsUpdateQueue"
 }
