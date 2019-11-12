@@ -68,7 +68,6 @@ class SplashInteractor: SplashInteractorInput {
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
-//                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
             ///Additional check "if this is LTE",
