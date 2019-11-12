@@ -68,7 +68,7 @@ class SplashInteractor: SplashInteractorInput {
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
-                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
+//                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
             ///Additional check "if this is LTE",
@@ -111,7 +111,7 @@ class SplashInteractor: SplashInteractorInput {
                 })
             } else {
                 output.asyncOperationSuccess()
-                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .serverError)
+                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .networkError)
                 failLogin()
             }
         } else {
@@ -122,7 +122,7 @@ class SplashInteractor: SplashInteractorInput {
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     self?.successLogin()
-                }, fail: { error in
+                }, fail: { [weak self] error in
                     /// we don't need logout here
                     /// only internet error
                     //self?.failLogin()
