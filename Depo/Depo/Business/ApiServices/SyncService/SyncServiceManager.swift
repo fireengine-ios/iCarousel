@@ -17,7 +17,7 @@ class SyncServiceManager {
     
     private let reachabilityService = ReachabilityService.shared
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -157,10 +157,10 @@ class SyncServiceManager {
             let videoOption = self.settings.videoSetting.option
             
             if self.reachabilityService.isReachable {
-                let photoEnabled = (self.reachabilityService.isReachableViaWiFi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                let photoEnabled = (self.reachabilityService.isReachableViaWiFi && photoOption != .never) ||
                     (self.reachabilityService.isReachableViaWWAN && photoOption == .wifiAndCellular)
                 
-                let videoEnabled = (self.reachabilityService.isReachableViaWiFi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                let videoEnabled = (self.reachabilityService.isReachableViaWiFi && videoOption != .never) ||
                     (self.reachabilityService.isReachableViaWWAN && videoOption == .wifiAndCellular)
                 
                 let photoServiceWaitingForWiFi = self.reachabilityService.isReachableViaWWAN && photoOption == .wifiOnly

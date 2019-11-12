@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let coreDataStack: CoreDataStack = factory.resolve()
         
         startCoreDataSafeServices(with: application, options: launchOptions)
         
@@ -85,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
-        let coreDataStack: CoreDataStack = factory.resolve()
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return

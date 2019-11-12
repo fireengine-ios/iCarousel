@@ -37,6 +37,8 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     private var refreshCollectionViewTask: DispatchWorkItem?
     
     var cards = [BaseCardView]()
+    
+    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue, qos: .userInitiated)
 
     var isEnable = true
     var isActive = false
@@ -70,12 +72,11 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     // MARK: BaseCollectionViewCellWithSwipeDelegate
     
     func onCellDeleted(cell: UICollectionViewCell) {
-        guard let indexPath = collectionView.indexPath(for: cell), let view = cards[safe: indexPath.row] else {
+        guard let indexPath = collectionView.indexPath(for: cell), indexPath.row < cards.count else {
             return
         }
 
-        cards.remove(view)
-        refreshCollection(remove: [indexPath.row], delay: .now())
+        changeCards(remove: indexPath.row, delay: .now())
     }
     
     // MARK: WrapItemOperationViewProtocol
@@ -143,31 +144,43 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     ///cancelling batchUpdate on reloadData
     private func resetCollectionViewUpdate(completion: VoidHandler? = nil) {
-        self.removeCardsIndexes.removeAll()
-        self.insertCards.removeAll()
+        guard !isRefreshing else {
+            afterRefreshHandlers.append { [weak self] in
+                self?.resetCollectionViewUpdate(completion: completion)
+            }
+            return
+        }
+        
+        isRefreshing = true
+
+        removeCardsIndexes.removeAll()
+        insertCards.removeAll()
         
         refreshCollectionViewTask?.cancel()
         refreshCollectionViewTask = nil
         
-        if isRefreshing {
-            afterRefreshHandlers.append(completion)
-        } else {
-            isRefreshing = true
+        DispatchQueue.main.async {
             completion?()
-            isRefreshing = false
+            self.isRefreshing = false
+            
+            if self.afterRefreshHandlers.hasItems {
+                let handler = self.afterRefreshHandlers.removeFirst()
+                handler?()
+            }
         }
     }
     
     ///method with delay because stopping cards performs one by one
-    private func refreshCollection(remove: [Int] = [], insert: [BaseCardView] = [], delay: DispatchTime = .now() + NumericConstants.animationDuration) {
+    private func refreshCollection(remove: [Int] = [], insert: [BaseCardView] = [], delay: DispatchTime) {
         
         ///batch update starts working only after arriving server cards
         ///if not it's works BUT cards may appear without BaseView on it
         ///isViewActive AND isActive solve some crashes on home page  appear/dismiss process
         guard isFinishedLoading, isViewActive, isActive else {
-            resetCollectionViewUpdate {
-                self.collectionView.reloadData()
+            resetCollectionViewUpdate { [weak self] in
+                self?.collectionView.reloadData()
             }
+            
             return
         }
         
@@ -182,12 +195,14 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             }
             
             guard self.isViewActive, self.isActive else {
-                self.collectionView.reloadData()
+                self.resetCollectionViewUpdate {
+                    self.collectionView.reloadData()
+                }
                 return
             }
 
             self.isRefreshing = true
-            
+
             var remove = self.removeCardsIndexes
             var insert = self.insertCards.compactMap { self.cards.index(of: $0) }
             
@@ -204,6 +219,9 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             }
             
             DispatchQueue.main.async {
+                ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: false)
+                
                 self.collectionView.performBatchUpdates({ [weak self] in
                     guard let self = self else {
                         return
@@ -228,36 +246,42 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                     
                     self.isRefreshing = false
                     
-                    for refreshHandler in self.afterRefreshHandlers {
-                        refreshHandler?()
+                    if self.afterRefreshHandlers.hasItems {
+                        let handler = self.afterRefreshHandlers.removeFirst()
+                        handler?()
                     }
-                    
-                    self.afterRefreshHandlers.removeAll()
-                                        
+
                     self.delegate?.didReloadCollectionView(self.collectionView)
                 })
             }
         }
         
-        DispatchQueue.global().asyncAfter(deadline: delay, execute: refreshCollectionViewTask)
+        cardsRefreshQueue.asyncAfter(deadline: delay, execute: refreshCollectionViewTask)
         self.refreshCollectionViewTask = refreshCollectionViewTask
     }
     
-    private func changeCards(insert: BaseCardView? = nil, remove: Int? = nil) {
+    private func changeCards(insert: BaseCardView? = nil, remove: Int? = nil, delay: DispatchTime = .now() + NumericConstants.animationDuration) {
+        guard !isRefreshing else {
+            afterRefreshHandlers.append { [weak self] in
+                self?.changeCards(insert: insert, remove: remove)
+            }
+            return
+        }
+        
         if let insert = insert {
-            self.cards.append(insert)
+            cards.append(insert)
         }
         
         if let remove = remove {
-            let view = self.cards.remove(at: remove)
+            let view = cards.remove(at: remove)
             
-            if let index = self.insertCards.index(of: view) {
-                self.insertCards.remove(at: index)
+            if let index = insertCards.index(of: view) {
+                insertCards.remove(at: index)
                 return
             }
         }
         
-        self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
+        cards = cards.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             if order1 == order2 {
@@ -266,7 +290,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             return order1 < order2
         })
         
-        self.refreshCollection(remove: [remove].compactMap { $0 }, insert: [insert].compactMap { $0 })
+        refreshCollection(remove: [remove].compactMap { $0 }, insert: [insert].compactMap { $0 }, delay: delay)
     }
 }
 
@@ -363,12 +387,16 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             }
             return order1 < order2
         })
-                
-        resetCollectionViewUpdate { [sortedCards] in
+
+        resetCollectionViewUpdate { [weak self, sortedCards] in
+            guard let self = self else {
+                return
+            }
+            
             self.cards = sortedCards
-
+            
             self.collectionView.reloadData()
-
+            
             self.isFinishedLoading = true
         }
     }
@@ -401,27 +429,27 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
     }
     
     func stopOperationWithType(type: OperationType) {
-        guard let views = self.viewsByType[type] else {
+        guard let views = viewsByType[type] else {
             return
         }
         
-        self.viewsByType[type] = nil
+        viewsByType[type] = nil
         views.forEach { view in
-            if let index = self.cards.index(of: view) {
+            if let index = cards.index(of: view) {
                 changeCards(remove: index)
             }
         }
     }
     
     func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse) {
-        guard let views = self.viewsByType[type] else {
+        guard let views = viewsByType[type] else {
             return
         }
         
         var newArray = [BaseCardView]()
 
         views.forEach { view in
-            if let index = self.cards.index(of: view), view.cardObject == serverObject {
+            if let index = cards.index(of: view), view.cardObject == serverObject {
                  changeCards(remove: index)
             } else {
                 newArray.append(view)
@@ -429,9 +457,9 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         }
         
         if newArray.isEmpty {
-            self.viewsByType[type] = nil
+            viewsByType[type] = nil
         } else {
-            self.viewsByType[type] = newArray
+            viewsByType[type] = newArray
         }
     }
     
@@ -475,7 +503,7 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let delegate = self.delegate else {
+        guard let delegate = delegate else {
             assert(false, "Unexpected element kind")
             return UICollectionReusableView()
         }
@@ -495,8 +523,13 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
         if let cardUpView = cards[safe: indexPath.row] {
             baseCell.addViewOnCell(controllersView: cardUpView)
             cardUpView.viewWillShow()
+            
         } else {
-            assertionFailure("something went wrong! number of items in datasource and number of cells are different")
+            assertionFailure("number of cells different with number of cards")
+            resetCollectionViewUpdate { [weak self] in
+                self?.collectionView.reloadData()
+            }
+            
         }
         
         baseCell.willDisplay()
@@ -507,6 +540,7 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
         guard let baseCell = cell as? CollectionViewCellForController else {
             return
         }
+        
         baseCell.didEndDisplay()
     }
 }

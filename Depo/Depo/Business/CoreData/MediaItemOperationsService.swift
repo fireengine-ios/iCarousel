@@ -22,7 +22,7 @@ final class MediaItemOperationsService {
     
     static let shared = MediaItemOperationsService()
     
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemOperationsService, attributes: .concurrent)
     

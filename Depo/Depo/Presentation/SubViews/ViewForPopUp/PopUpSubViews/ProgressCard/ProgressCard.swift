@@ -55,14 +55,14 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         let progressText = String(format: TextConstants.popUpProgress, ready, all)
         progressLabel.text = progressText
         
-        if let typeOfOperation = typeOfOperation {
+        if let typeOfOperation = typeOfOperation, ReachabilityService.shared.isReachable {
             configurateWithType(viewType: typeOfOperation)
         }
     }
     
     func setProgressBar(ratio: Float) {
         progress.progress = ratio
-        if let typeOfOperation = typeOfOperation {
+        if let typeOfOperation = typeOfOperation, ReachabilityService.shared.isReachable {
             configurateWithType(viewType: typeOfOperation)
         }
     }

@@ -22,7 +22,7 @@ final class PageCompounder {
     var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
     
     private let operationsService = MediaItemOperationsService.shared
-    private let coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     private var lastLocalPageAddedAction: AppendingLocalItemsPageAppended?
 

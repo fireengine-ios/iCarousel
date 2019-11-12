@@ -112,7 +112,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
         
         if albums.first(where: { $0.isTBMatik }) != nil {
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete, eventLabel: .tbmatik(.deleteAlbum))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deleteAlbum))
         }
     }
     
