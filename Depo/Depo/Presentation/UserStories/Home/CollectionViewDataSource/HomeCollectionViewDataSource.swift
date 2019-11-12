@@ -137,9 +137,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             view.configurateWithType(viewType: .premium)
             
             resetCollectionViewUpdate { [weak self] in
-                debugLog("----- RELOAD -----")
                 self?.collectionView.reloadData()
-                debugLog("----- RELOAD END -----")
             }
         }
     }
@@ -166,7 +164,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             self.isRefreshing = false
             
             if self.afterRefreshHandlers.hasItems {
-                debugLog("afterRefreshHandlers - \(self.afterRefreshHandlers.count)")
                 let handler = self.afterRefreshHandlers.removeFirst()
                 handler?()
             }
@@ -181,9 +178,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         ///isViewActive AND isActive solve some crashes on home page  appear/dismiss process
         guard isFinishedLoading, isViewActive, isActive else {
             resetCollectionViewUpdate { [weak self] in
-                debugLog("----- RELOAD -----")
                 self?.collectionView.reloadData()
-                debugLog("----- RELOAD END -----")
             }
             
             return
@@ -201,19 +196,12 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             
             guard self.isViewActive, self.isActive else {
                 self.resetCollectionViewUpdate {
-                    debugLog("----- RELOAD -----")
                     self.collectionView.reloadData()
-                    debugLog("----- RELOAD END -----")
                 }
                 return
             }
 
             self.isRefreshing = true
-
-            let start = Date()
-            
-            debugLog("START -----------------------------")
-            debugLog("START - " + start.getDateInFormat(format: "HH:mm:ss.SSS"))
 
             var remove = self.removeCardsIndexes
             var insert = self.insertCards.compactMap { self.cards.index(of: $0) }
@@ -230,20 +218,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                 insert.remove($0)
             }
             
-            debugLog("")
-            debugLog("remove - \(remove)")
-            debugLog("insert - \(insert)")
-            debugLog("update - \(update)")
-            debugLog("")
-            debugLog("cards - \(self.cards)")
-            debugLog("")
-            debugLog("collectionView before - \(self.collectionView.numberOfItems(inSection: 0))")
-            debugLog("")
-
             DispatchQueue.main.async {
-                
-                debugLog("FLAGS isRefreshing - \(self.isRefreshing), isViewActive - \(self.isViewActive), isActive - \(self.isActive), isFinishedLoading - \(self.isFinishedLoading)")
-                
                 ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: false)
                 
@@ -269,19 +244,12 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                         return
                     }
                     
-                    debugLog("")
-                    debugLog("collectionView after - \(self.collectionView.numberOfItems(inSection: 0))")
-                    debugLog("")
-                    
                     self.isRefreshing = false
                     
                     if self.afterRefreshHandlers.hasItems {
-                        debugLog("afterRefreshHandlers - \(self.afterRefreshHandlers.count)")
                         let handler = self.afterRefreshHandlers.removeFirst()
                         handler?()
                     }
-                    
-                    debugLog("START end - " + start.getDateInFormat(format: "HH:mm:ss.SSS"))
 
                     self.delegate?.didReloadCollectionView(self.collectionView)
                 })
@@ -424,15 +392,10 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             guard let self = self else {
                 return
             }
-            debugLog("----- RELOAD -----")
-            debugLog("cards before - \(self.cards)")
             
             self.cards = sortedCards
             
-            debugLog("cards after - \(self.cards)")
-
             self.collectionView.reloadData()
-            debugLog("----- RELOAD END -----")
             
             self.isFinishedLoading = true
         }
@@ -563,8 +526,6 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
             
         } else {
             assertionFailure("number of cells different with number of cards")
-
-            debugLog("isRefreshing - \(isRefreshing)")
             resetCollectionViewUpdate { [weak self] in
                 self?.collectionView.reloadData()
             }
