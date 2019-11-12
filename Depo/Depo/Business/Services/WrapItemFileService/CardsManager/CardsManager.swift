@@ -302,6 +302,7 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .prepareToAutoSync)
         case .autoUploadIsOff:
             stopOperationWithType(type: .prepareToAutoSync)
+            stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .sync)
         default:
             break
