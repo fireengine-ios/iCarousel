@@ -16,6 +16,7 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
             newValue.textColor = ColorConstants.darkText
             newValue.numberOfLines = 0
             newValue.text = TextConstants.campaignDetailContestInfoTitle
+            newValue.adjustsFontSizeToFitWidth = true
         }
     }
     
