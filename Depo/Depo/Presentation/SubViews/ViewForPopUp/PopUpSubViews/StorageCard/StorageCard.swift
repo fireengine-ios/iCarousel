@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StorageCard: BaseView {
+class StorageCard: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTileLabel: UILabel!

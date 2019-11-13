@@ -216,6 +216,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     private func reloadData() {
         carousel.reloadData()
         carousel.isHidden = false
+        updateTitle()
     }
     
     private func updateTitle() {

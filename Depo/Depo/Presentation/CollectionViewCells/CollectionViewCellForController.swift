@@ -15,7 +15,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             view.removeFromSuperview()
         }
         
-        if let baseView = controllersView as? BaseView {
+        if let baseView = controllersView as? BaseCardView {
             isSwipeEnable = baseView.canSwipe
         }
         
@@ -58,7 +58,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
     override func didEndDisplay() {
         super.didEndDisplay()
-        if let controllersView = self.contentView.subviews.first as? BaseView {
+        if let controllersView = self.contentView.subviews.first as? BaseCardView {
             controllersView.viewDidEndShow()
         }
     }

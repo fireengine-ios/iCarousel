@@ -58,14 +58,20 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     private lazy var router = RouterVC()
     private var cellImageManager: CellImageManager?
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private let instaPickService: InstapickService = factory.resolve()
     
     // MARK: - View lifecycle
+    
+    deinit {
+        instaPickService.delegates.remove(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        loadDetailsInfo()
+        loadDetailsInfo(needShowSpinner: true)
+        instaPickService.delegates.add(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,15 +85,19 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         updateImageConstraint()
     }
     
-    private func loadDetailsInfo() {
-        showSpinner()
+    private func loadDetailsInfo(needShowSpinner: Bool) {
+        if needShowSpinner {
+            showSpinner()
+        }
         
         service.getPhotopickDetails { [weak self] result in
             guard let self = self else {
                 return
             }
 
-            self.hideSpinner()
+            if needShowSpinner {
+                self.hideSpinner()
+            }
             
             switch result {
             case .success(let details):
@@ -186,4 +196,15 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         router.pushViewController(viewController: controller)
     }
 
+}
+
+// MARK: - InstaPickServiceDelegate
+
+extension CampaignDetailViewController: InstaPickServiceDelegate {
+    
+    func didRemoveAnalysis() {}
+    
+    func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
+        loadDetailsInfo(needShowSpinner: false)
+    }
 }

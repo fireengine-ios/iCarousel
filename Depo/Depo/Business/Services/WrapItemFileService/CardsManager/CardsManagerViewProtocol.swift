@@ -24,7 +24,7 @@ protocol CardsManagerViewProtocol {
     
     func isEqual(object: CardsManagerViewProtocol) -> Bool
     
-    func addNotPermittedPopUpViewTypes(types: [OperationType])
+    func addNotPermittedCardViewTypes(types: [OperationType])
     
     func configureInstaPick(with analysisStatus: InstapickAnalyzesCount)
     

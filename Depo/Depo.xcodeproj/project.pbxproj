@@ -546,14 +546,14 @@
 		7C121F0B20874BCE00AA585F /* AppMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121F0A20874BCE00AA585F /* AppMigrator.swift */; };
 		7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121F0A20874BCE00AA585F /* AppMigrator.swift */; };
 		7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
-		7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */; };
+		7C1CB8F61F724E54000768E8 /* ProgressCardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */; };
 		7C1EA0481F9792F1002DBAD8 /* CreateStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */; };
-		7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */; };
-		7C1F898A1F6FFE1100740177 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
-		7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseView.swift */; };
-		7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
-		7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
-		7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		7C1F89881F6FFE0300740177 /* ProgressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressCard.swift */; };
+		7C1F898A1F6FFE1100740177 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
+		7C1F898D1F70ECB100740177 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseCardView.swift */; };
+		7C1F89921F70FFDF00740177 /* CardsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* CardsContainerView.swift */; };
+		7C1F89951F7140AF00740177 /* SwipeableCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */; };
+		7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */; };
 		7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */; };
 		7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
@@ -583,8 +583,8 @@
 		7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */; };
 		7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E191F00E920003B004C /* CollectionViewCellForController.swift */; };
 		7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
-		7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
-		7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		7C355E611F01226B003B004C /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
+		7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */; };
 		7C379F40202C364F0050C055 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
@@ -1796,7 +1796,7 @@
 		8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
 		8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
 		8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
-		8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
+		8C0E8CAA1FDEBDFF00789C91 /* SwipeableCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */; };
 		8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
 		8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
 		8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786961F3F38EF005CB432 /* VisualMusicPlayerRouter.swift */; };
@@ -1809,7 +1809,7 @@
 		8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */; };
 		8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */; };
 		8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C761EEE8E7F0086DA84 /* LoginModuleInput.swift */; };
-		8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
 		8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44EE1F6ABB540062C2E0 /* ActivityTimelineParameters.swift */; };
@@ -1857,7 +1857,7 @@
 		8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */; };
 		8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74471F07927200124DF5 /* CollectionViewCellForPhoto.swift */; };
 		8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */; };
-		8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */; };
+		8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */; };
 		8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */; };
 		8C0E8D061FDEBDFF00789C91 /* ActivityTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */; };
 		8C0E8D081FDEBDFF00789C91 /* SearchViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB216D1F3C85CD00BAFE1E /* SearchViewInput.swift */; };
@@ -1881,7 +1881,7 @@
 		8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA31EFD4F0D00A405B2 /* HomePageInteractorInput.swift */; };
 		8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FCC1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift */; };
-		8C0E8D231FDEBDFF00789C91 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
+		8C0E8D231FDEBDFF00789C91 /* CardsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* CardsContainerView.swift */; };
 		8C0E8D251FDEBDFF00789C91 /* InstagramParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74B1FCBE84100C23CBD /* InstagramParametrs.swift */; };
 		8C0E8D261FDEBDFF00789C91 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24FB8A1F0B117B00C55188 /* CameraService.swift */; };
 		8C0E8D271FDEBDFF00789C91 /* HelpAndSupportConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED351F516736002F923A /* HelpAndSupportConfigurator.swift */; };
@@ -1901,7 +1901,7 @@
 		8C0E8D3A1FDEBDFF00789C91 /* ImportPhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886511F3EFBE200F50C95 /* ImportPhotosRouterInput.swift */; };
 		8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
 		8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
-		8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
+		8C0E8D3D1FDEBDFF00789C91 /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
 		8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FD41EFD500B00A405B2 /* HomeViewTopView.swift */; };
 		8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
@@ -2102,7 +2102,7 @@
 		8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */; };
 		8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */; };
 		8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233973492D247406E39E96E /* ForgotPasswordRouter.swift */; };
-		8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */; };
+		8C0E8E3F1FDEBDFF00789C91 /* ProgressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressCard.swift */; };
 		8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */; };
 		8C0E8E411FDEBDFF00789C91 /* ForgotPasswordInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */; };
 		8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
@@ -2327,7 +2327,7 @@
 		8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */; };
 		8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
-		8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseView.swift */; };
+		8C0E8F7C1FDEBDFF00789C91 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseCardView.swift */; };
 		8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9A9F41FA2279500242FDD /* ImageForDowload.swift */; };
 		8C0E8F7E1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */; };
 		8C0E8F7F1FDEBDFF00789C91 /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
@@ -2498,7 +2498,7 @@
 		8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
 		8C0E90511FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
 		8C0E90551FDEBDFF00789C91 /* CollectionViewStoryReorderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */; };
-		8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
 		8C0E905A1FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEC1BF1F332B0000BD433F /* PhotosOrderCollectionViewCell.xib */; };
 		8C0E905B1FDEBDFF00789C91 /* PackagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2F560F1F7552A900F49DA1 /* PackagesViewController.xib */; };
@@ -2516,7 +2516,7 @@
 		8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
 		8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
 		8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
-		8C0E906D1FDEBDFF00789C91 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
+		8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		8C0E906E1FDEBDFF00789C91 /* PasscodeSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C2361FB99AF800C3D67F /* PasscodeSettingsViewController.xib */; };
 		8C0E906F1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */; };
 		8C0E90711FDEBDFF00789C91 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
@@ -3758,6 +3758,9 @@
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
@@ -4496,7 +4499,7 @@
 		CE78484722A685FB00662219 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24921F5A7B000A5A696 /* PhotoCell.swift */; };
 		CE78484822A685FB00662219 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
 		CE78484922A685FB00662219 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
-		CE78484A22A685FB00662219 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
+		CE78484A22A685FB00662219 /* SwipeableCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */; };
 		CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0F1205FF4E00048267D /* ErrorPresenter.swift */; };
 		CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
@@ -4525,7 +4528,7 @@
 		CE78486522A685FB00662219 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */; };
 		CE78486622A685FB00662219 /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
 		CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C761EEE8E7F0086DA84 /* LoginModuleInput.swift */; };
-		CE78486822A685FB00662219 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
+		CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */; };
 		CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
 		CE78486A22A685FB00662219 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		CE78486B22A685FB00662219 /* LeavePremiumViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E42D21A5B0220084AA37 /* LeavePremiumViewInput.swift */; };
@@ -4603,7 +4606,7 @@
 		CE7848BB22A685FB00662219 /* LeavePremiumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E43F21A5B0A80084AA37 /* LeavePremiumInteractor.swift */; };
 		CE7848BC22A685FB00662219 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */; };
 		CE7848BD22A685FB00662219 /* TermsOfUseInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB1E2122C3D9004F4A59 /* TermsOfUseInitializer.swift */; };
-		CE7848BE22A685FB00662219 /* ProgressPopUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */; };
+		CE7848BE22A685FB00662219 /* ProgressCardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */; };
 		CE7848BF22A685FB00662219 /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */; };
 		CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		CE7848C122A685FB00662219 /* ActivityTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */; };
@@ -4640,7 +4643,7 @@
 		CE7848E222A685FB00662219 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		CE7848E322A685FB00662219 /* HomePageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA31EFD4F0D00A405B2 /* HomePageInteractorInput.swift */; };
 		CE7848E422A685FB00662219 /* BaseCollectionViewCellWithSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FCC1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift */; };
-		CE7848E522A685FB00662219 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
+		CE7848E522A685FB00662219 /* CardsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* CardsContainerView.swift */; };
 		CE7848E722A685FB00662219 /* InstagramParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74B1FCBE84100C23CBD /* InstagramParametrs.swift */; };
 		CE7848E822A685FB00662219 /* UIAlertViewCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32421787FEF006CFA50 /* UIAlertViewCustom.m */; };
 		CE7848E922A685FB00662219 /* ManageContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */; };
@@ -4679,7 +4682,7 @@
 		CE78490B22A685FB00662219 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
 		CE78490C22A685FB00662219 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
 		CE78490D22A685FB00662219 /* MyStorageModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */; };
-		CE78490E22A685FB00662219 /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
+		CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */; };
 		CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		CE78491022A685FB00662219 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
 		CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
@@ -5036,7 +5039,7 @@
 		CE784A8522A685FB00662219 /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */; };
 		CE784A8622A685FB00662219 /* PeriodicContactSyncConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC1402087372E00032CC7 /* PeriodicContactSyncConfigurator.swift */; };
 		CE784A8722A685FB00662219 /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233973492D247406E39E96E /* ForgotPasswordRouter.swift */; };
-		CE784A8822A685FB00662219 /* ProgressPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */; };
+		CE784A8822A685FB00662219 /* ProgressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89871F6FFE0300740177 /* ProgressCard.swift */; };
 		CE784A8922A685FB00662219 /* ForgotPasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */; };
 		CE784A8A22A685FB00662219 /* ForgotPasswordInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */; };
 		CE784A8B22A685FB00662219 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
@@ -5403,7 +5406,7 @@
 		CE784C0622A685FB00662219 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
-		CE784C0922A685FB00662219 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseView.swift */; };
+		CE784C0922A685FB00662219 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseCardView.swift */; };
 		CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9A9F41FA2279500242FDD /* ImageForDowload.swift */; };
 		CE784C0B22A685FB00662219 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */; };
 		CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F6D2276336700A5DB37 /* ProfileTextPickerView.swift */; };
@@ -5996,7 +5999,7 @@
 		CE784E6A22A685FB00662219 /* refreshicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD252008AD6F003D8E05 /* refreshicon.png */; };
 		CE784E6B22A685FB00662219 /* bold_secili.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC422008AD6F003D8E05 /* bold_secili.png */; };
 		CE784E6C22A685FB00662219 /* Paylas_butnuna_basin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD072008AD6F003D8E05 /* Paylas_butnuna_basin.png */; };
-		CE784E6D22A685FB00662219 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		CE784E6D22A685FB00662219 /* SwipeableCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */; };
 		CE784E6E22A685FB00662219 /* ok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACE82008AD6F003D8E05 /* ok@3x.png */; };
 		CE784E6F22A685FB00662219 /* bold_secili@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC432008AD6F003D8E05 /* bold_secili@2x.png */; };
 		CE784E7022A685FB00662219 /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
@@ -6096,7 +6099,7 @@
 		CE784ECF22A685FB00662219 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
 		CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
-		CE784ED322A685FB00662219 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
+		CE784ED322A685FB00662219 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD842008AD6F003D8E05 /* toolbar_ciz_icon.png */; };
 		CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC642008AD6F003D8E05 /* cizgi_1_selected@3x.png */; };
 		CE784ED622A685FB00662219 /* cizgi_3_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC6F2008AD6F003D8E05 /* cizgi_3_selected@2x.png */; };
@@ -7098,14 +7101,14 @@
 		7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenKeychainStorage.swift; sourceTree = "<group>"; };
 		7C121F0A20874BCE00AA585F /* AppMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMigrator.swift; sourceTree = "<group>"; };
 		7C18D75C1F9F461A00F8679D /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPopUpProtocol.swift; sourceTree = "<group>"; };
+		7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCardProtocol.swift; sourceTree = "<group>"; };
 		7C1EA0471F9792F1002DBAD8 /* CreateStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryResponse.swift; sourceTree = "<group>"; };
-		7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPopUp.swift; sourceTree = "<group>"; };
-		7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressPopUp.xib; sourceTree = "<group>"; };
-		7C1F898C1F70ECB100740177 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForPopUp.swift; sourceTree = "<group>"; };
-		7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSwipeCell.swift; sourceTree = "<group>"; };
-		7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpSwipeCell.xib; sourceTree = "<group>"; };
+		7C1F89871F6FFE0300740177 /* ProgressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCard.swift; sourceTree = "<group>"; };
+		7C1F89891F6FFE1100740177 /* ProgressCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressCard.xib; sourceTree = "<group>"; };
+		7C1F898C1F70ECB100740177 /* BaseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardView.swift; sourceTree = "<group>"; };
+		7C1F89911F70FFDF00740177 /* CardsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsContainerView.swift; sourceTree = "<group>"; };
+		7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCardCell.swift; sourceTree = "<group>"; };
+		7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwipeableCardCell.xib; sourceTree = "<group>"; };
 		7C203551201F4F8F00D84727 /* LatestUploadCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUploadCardCell.swift; sourceTree = "<group>"; };
 		7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestUploadCardCell.xib; sourceTree = "<group>"; };
 		7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInitializer.swift; sourceTree = "<group>"; };
@@ -7129,8 +7132,8 @@
 		7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C355E191F00E920003B004C /* CollectionViewCellForController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForController.swift; sourceTree = "<group>"; };
 		7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForController.xib; sourceTree = "<group>"; };
-		7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		7C355E621F0123E0003B004C /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseFilesGreedViewController.xib; sourceTree = "<group>"; };
 		7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		7C3A74381F04F4B800124DF5 /* BaseMediaContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMediaContent.swift; sourceTree = "<group>"; };
@@ -8517,6 +8520,7 @@
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B57AB752237989F600467573 /* NSLocking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extension.swift"; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
@@ -11287,20 +11291,20 @@
 			path = ShadowView;
 			sourceTree = "<group>";
 		};
-		7C1F89861F6FFC0D00740177 /* ProgressPopUp */ = {
+		7C1F89861F6FFC0D00740177 /* ProgressCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */,
-				7C1F89871F6FFE0300740177 /* ProgressPopUp.swift */,
-				7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */,
+				7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */,
+				7C1F89871F6FFE0300740177 /* ProgressCard.swift */,
+				7C1F89891F6FFE1100740177 /* ProgressCard.xib */,
 			);
-			path = ProgressPopUp;
+			path = ProgressCard;
 			sourceTree = "<group>";
 		};
 		7C1F898B1F70EC7B00740177 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
-				7C1F898C1F70ECB100740177 /* BaseView.swift */,
+				7C1F898C1F70ECB100740177 /* BaseCardView.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -11309,10 +11313,10 @@
 			isa = PBXGroup;
 			children = (
 				7CE825B81F823CAD00356AD2 /* PopUpSubViews */,
-				7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */,
+				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
 				CE99AC77201CB778003DD3B7 /* CardActionType.swift */,
-				7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */,
-				7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */,
+				7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */,
+				7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */,
 			);
 			path = ViewForPopUp;
 			sourceTree = "<group>";
@@ -11412,8 +11416,8 @@
 		7C355E5F1F012239003B004C /* CollectionViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */,
-				7C355E621F0123E0003B004C /* CollectionViewLayout.swift */,
+				7C355E601F01226B003B004C /* HomeCollectionViewDataSource.swift */,
+				7C355E621F0123E0003B004C /* HomeCollectionViewLayout.swift */,
 			);
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
@@ -12047,7 +12051,7 @@
 				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
 				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
-				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
+				7C1F89861F6FFC0D00740177 /* ProgressCard */,
 				CE4851F22018B13A006B8854 /* FilterPhotoCard */,
 				CE40EAD22136BF080038ABAC /* LaunchCampaignCard */,
 				CE0808AD234720F000F1944F /* TBMatikCard */,
@@ -15526,6 +15530,7 @@
 				8C65D18522C63B6F00CB1DBD /* String + Extension.swift */,
 				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
 				73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */,
+				B57AB752237989F600467573 /* NSLocking+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -17551,7 +17556,8 @@
 						};
 					};
 					8C0E8C611FDEBDFF00789C91 = {
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -17629,6 +17635,7 @@
 						ProvisioningStyle = Manual;
 					};
 					984B1ECC23685D7B009ACCFF = {
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 					};
 					984B1EDD23685FC8009ACCFF = {
@@ -17637,7 +17644,7 @@
 					};
 					B54BFF2F202B20250018AF82 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -17650,7 +17657,7 @@
 					};
 					CE1BE921204831CD0074BDDC = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -17663,7 +17670,7 @@
 					};
 					CE1BE92F204831CE0074BDDC = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -17700,7 +17707,7 @@
 					};
 					CE58FAEE20444492007F3F54 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -17728,7 +17735,7 @@
 					};
 					CE79E4A41F695DA200C1F151 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 5T5A6N5A76;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE51AAF51EF90853005DCEE0;
 					};
@@ -18288,7 +18295,7 @@
 				8C06B0C92008AD71003D8E05 /* sample@3x.png in Resources */,
 				8C06B0A92008AD71003D8E05 /* renk_selected@2x.png in Resources */,
 				8C06AFDD2008AD71003D8E05 /* italic@3x.png in Resources */,
-				8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */,
+				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8C06B0EF2008AD72003D8E05 /* serbest_cizgi@2x.png in Resources */,
 				8C06B1592008AD72003D8E05 /* tik_icon.png in Resources */,
 				8C06AF8F2008AD70003D8E05 /* extraOptions_selected@3x.png in Resources */,
@@ -18405,7 +18412,7 @@
 				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
 				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
 				8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */,
-				8C0E906D1FDEBDFF00789C91 /* ProgressPopUp.xib in Resources */,
+				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				8C06AF212008AD70003D8E05 /* cizgi_2.png in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				8C06AFA92008AD71003D8E05 /* frame_selected.png in Resources */,
@@ -19108,7 +19115,7 @@
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
 				73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
-				7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */,
+				7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
 				8C06AEDC2008AD70003D8E05 /* bold_secili@2x.png in Resources */,
 				7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */,
@@ -19217,7 +19224,7 @@
 				8C06AFD62008AD71003D8E05 /* ins_paylas@3x.png in Resources */,
 				7CDABD0F1F1E3A6300C8CC16 /* UserProfileViewController.xib in Resources */,
 				8C75D24A1FDD1BF700CBE1A7 /* Settings.bundle in Resources */,
-				7C1F898A1F6FFE1100740177 /* ProgressPopUp.xib in Resources */,
+				7C1F898A1F6FFE1100740177 /* ProgressCard.xib in Resources */,
 				8C06B15E2008AD72003D8E05 /* toolbar_ciz_icon.png in Resources */,
 				8C06AF1E2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
 				8C06AF342008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
@@ -19760,7 +19767,7 @@
 				CE784E6A22A685FB00662219 /* refreshicon.png in Resources */,
 				CE784E6B22A685FB00662219 /* bold_secili.png in Resources */,
 				CE784E6C22A685FB00662219 /* Paylas_butnuna_basin.png in Resources */,
-				CE784E6D22A685FB00662219 /* PopUpSwipeCell.xib in Resources */,
+				CE784E6D22A685FB00662219 /* SwipeableCardCell.xib in Resources */,
 				CE784E6E22A685FB00662219 /* ok@3x.png in Resources */,
 				CE784E6F22A685FB00662219 /* bold_secili@2x.png in Resources */,
 				CE784E7022A685FB00662219 /* UserInfoSubViewViewController.xib in Resources */,
@@ -19872,7 +19879,7 @@
 				CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */,
 				CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */,
 				73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
-				CE784ED322A685FB00662219 /* ProgressPopUp.xib in Resources */,
+				CE784ED322A685FB00662219 /* ProgressCard.xib in Resources */,
 				737A2EA72338A5300014258A /* SecurityQuestionView.xib in Resources */,
 				CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */,
 				CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */,
@@ -20892,7 +20899,7 @@
 				8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */,
 				4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
-				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
+				8C0E8CAA1FDEBDFF00789C91 /* SwipeableCardCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
 				B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
@@ -20913,7 +20920,7 @@
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
 				8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */,
 				8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
-				8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */,
+				8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */,
 				8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */,
 				8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */,
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
@@ -21004,7 +21011,7 @@
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
-				8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */,
+				8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
 				734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
@@ -21054,7 +21061,7 @@
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
 				B5CDB33F21787FEF006CFA50 /* Configuration.m in Sources */,
 				8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
-				8C0E8D231FDEBDFF00789C91 /* ViewForPopUp.swift in Sources */,
+				8C0E8D231FDEBDFF00789C91 /* CardsContainerView.swift in Sources */,
 				8C86111722BCF36A00108958 /* TermsDescriptionController.swift in Sources */,
 				8C0E8D251FDEBDFF00789C91 /* InstagramParametrs.swift in Sources */,
 				8C0E8D261FDEBDFF00789C91 /* CameraService.swift in Sources */,
@@ -21085,7 +21092,7 @@
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
 				98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
-				8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */,
+				8C0E8D3D1FDEBDFF00789C91 /* HomeCollectionViewDataSource.swift in Sources */,
 				4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
@@ -21455,7 +21462,7 @@
 				8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */,
 				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
-				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
+				8C0E8E3F1FDEBDFF00789C91 /* ProgressCard.swift in Sources */,
 				737A2EBC2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
 				CEE3B7D3225791D900B99FE7 /* CaptchaView.swift in Sources */,
@@ -21759,6 +21766,7 @@
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				8C0E8F301FDEBDFF00789C91 /* SplashViewInput.swift in Sources */,
 				8C20865A228D4B2E000BEDAD /* PhotoVideoCollectionViewManager.swift in Sources */,
+				B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				8C0E8F311FDEBDFF00789C91 /* SplashViewOutput.swift in Sources */,
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
@@ -21897,7 +21905,7 @@
 				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */,
-				8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */,
+				8C0E8F7C1FDEBDFF00789C91 /* BaseCardView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
 				8C0E8F7E1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				8C0E8F7F1FDEBDFF00789C91 /* SelectNameInteractorInput.swift in Sources */,
@@ -22616,7 +22624,7 @@
 				CE00B24A21F5A7B000A5A696 /* PhotoCell.swift in Sources */,
 				CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */,
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
-				7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */,
+				7C1F89951F7140AF00740177 /* SwipeableCardCell.swift in Sources */,
 				985599C823017ADF00A9F438 /* SpotifyThreeDotMenuManager.swift in Sources */,
 				4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
@@ -22648,7 +22656,7 @@
 				7CFE92F41F5ED498008A3B72 /* FeedbackService.swift in Sources */,
 				4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */,
-				7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */,
+				7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */,
 				CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */,
 				CE3318E11EFCF9D600E25989 /* Device.swift in Sources */,
 				A217E42E21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
@@ -22730,7 +22738,7 @@
 				A217E44021A5B0A80084AA37 /* LeavePremiumInteractor.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
-				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
+				7C1CB8F61F724E54000768E8 /* ProgressCardProtocol.swift in Sources */,
 				B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
@@ -22775,7 +22783,7 @@
 				CEAE3FB31EFD4F0D00A405B2 /* HomePageInteractorInput.swift in Sources */,
 				CEAE3FD61EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				8C208659228D4B2E000BEDAD /* PhotoVideoCollectionViewManager.swift in Sources */,
-				7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */,
+				7C1F89921F70FFDF00740177 /* CardsContainerView.swift in Sources */,
 				CE6DE7561FCBE84100C23CBD /* InstagramParametrs.swift in Sources */,
 				B5CDB33A21787FEF006CFA50 /* UIAlertViewCustom.m in Sources */,
 				7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */,
@@ -22815,7 +22823,7 @@
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
 				92004B5121AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
-				7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */,
+				7C355E611F01226B003B004C /* HomeCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
 				B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -23225,7 +23233,7 @@
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				4A0AC1412087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
-				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
+				7C1F89881F6FFE0300740177 /* ProgressCard.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				989BDE4622F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
@@ -23648,7 +23656,7 @@
 				055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */,
 				77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */,
 				CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */,
-				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
+				7C1F898D1F70ECB100740177 /* BaseCardView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				17589F762276336800A5DB37 /* ProfileTextPickerView.swift in Sources */,
@@ -23735,6 +23743,7 @@
 				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
+				B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
@@ -23994,7 +24003,7 @@
 				9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */,
 				892F45342305A72D00604DF5 /* EmailVerifiedPopUp.swift in Sources */,
 				CE78484922A685FB00662219 /* MulticastDelegate.swift in Sources */,
-				CE78484A22A685FB00662219 /* PopUpSwipeCell.swift in Sources */,
+				CE78484A22A685FB00662219 /* SwipeableCardCell.swift in Sources */,
 				CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */,
 				8E26D9942306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */,
@@ -24029,7 +24038,7 @@
 				CE78486522A685FB00662219 /* FeedbackService.swift in Sources */,
 				CE78486622A685FB00662219 /* FaceImageAddNameRouterInput.swift in Sources */,
 				CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */,
-				CE78486822A685FB00662219 /* CollectionViewLayout.swift in Sources */,
+				CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */,
 				CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */,
 				989BDE5A22F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				CE78486A22A685FB00662219 /* Device.swift in Sources */,
@@ -24118,7 +24127,7 @@
 				CE7848BB22A685FB00662219 /* LeavePremiumInteractor.swift in Sources */,
 				CE7848BC22A685FB00662219 /* LoginInteractor.swift in Sources */,
 				CE7848BD22A685FB00662219 /* TermsOfUseInitializer.swift in Sources */,
-				CE7848BE22A685FB00662219 /* ProgressPopUpProtocol.swift in Sources */,
+				CE7848BE22A685FB00662219 /* ProgressCardProtocol.swift in Sources */,
 				CE7848BF22A685FB00662219 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */,
 				CE7848C122A685FB00662219 /* ActivityTimelineService.swift in Sources */,
@@ -24159,7 +24168,7 @@
 				CE7848E222A685FB00662219 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CE7848E322A685FB00662219 /* HomePageInteractorInput.swift in Sources */,
 				CE7848E422A685FB00662219 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
-				CE7848E522A685FB00662219 /* ViewForPopUp.swift in Sources */,
+				CE7848E522A685FB00662219 /* CardsContainerView.swift in Sources */,
 				CE7848E722A685FB00662219 /* InstagramParametrs.swift in Sources */,
 				CE7848E822A685FB00662219 /* UIAlertViewCustom.m in Sources */,
 				CE7848E922A685FB00662219 /* ManageContactsConfigurator.swift in Sources */,
@@ -24207,7 +24216,7 @@
 				CE78490B22A685FB00662219 /* ProtoInputTextCell.swift in Sources */,
 				CE78490C22A685FB00662219 /* RemoteSearchService.swift in Sources */,
 				CE78490D22A685FB00662219 /* MyStorageModuleConfigurator.swift in Sources */,
-				CE78490E22A685FB00662219 /* BaseCollectionViewDataSource.swift in Sources */,
+				CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */,
 				CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE78491022A685FB00662219 /* SharedFactory.swift in Sources */,
 				CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -24331,6 +24340,7 @@
 				CE78498022A685FB00662219 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				CE78498122A685FB00662219 /* BaseCollectionViewCell.swift in Sources */,
 				73A1834B2359CC550095719F /* CampaignCardResponse.swift in Sources */,
+				B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				89104BC722CBA025005B3F58 /* UIButton+Image.swift in Sources */,
 				CE78498222A685FB00662219 /* UserProfileInteractorInput.swift in Sources */,
 				CE78498322A685FB00662219 /* EULAService.swift in Sources */,
@@ -24614,7 +24624,7 @@
 				CE784A8522A685FB00662219 /* FBParametrs.swift in Sources */,
 				CE784A8622A685FB00662219 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE784A8722A685FB00662219 /* ForgotPasswordRouter.swift in Sources */,
-				CE784A8822A685FB00662219 /* ProgressPopUp.swift in Sources */,
+				CE784A8822A685FB00662219 /* ProgressCard.swift in Sources */,
 				CE784A8922A685FB00662219 /* ForgotPasswordConfigurator.swift in Sources */,
 				CE784A8A22A685FB00662219 /* ForgotPasswordInitializer.swift in Sources */,
 				CE784A8B22A685FB00662219 /* PasscodeView.swift in Sources */,
@@ -25026,7 +25036,7 @@
 				CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */,
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
 				CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
-				CE784C0922A685FB00662219 /* BaseView.swift in Sources */,
+				CE784C0922A685FB00662219 /* BaseCardView.swift in Sources */,
 				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
@@ -25741,11 +25751,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -25762,7 +25773,7 @@
 					"LOG2FILE_NO=1",
 					"MAIN_APP=1",
 				);
-				INFOPLIST_FILE = "Depo/App/Depo_LifeTech-Info.plist";
+				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -25777,10 +25788,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
-				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox debug";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -25803,6 +25814,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -25858,6 +25870,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -25914,6 +25927,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -27258,20 +27272,20 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = NotificationService/Lifebox/NotificationService.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "NotificationService/Lifebox/NotificationService-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox notification debug";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
@@ -27303,7 +27317,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -27516,22 +27530,22 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "autosync-widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox autosync widget dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox widget debug";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -27651,12 +27665,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -27666,14 +27680,14 @@
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
+				INFOPLIST_FILE = LifeboxFileProvider/InfoAppstore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b4c90355-f149-4574-9699-754432dedc4a";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox files extension dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox files debug";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27819,12 +27833,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxFileProviderUI/LifeboxFileProviderUI.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -27833,14 +27847,14 @@
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
+				INFOPLIST_FILE = LifeboxFileProviderUI/InfoAppStore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
-				PROVISIONING_PROFILE_SPECIFIER = "files UI dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox filesUI debug";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27986,7 +28000,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.9;
+				CURRENT_PROJECT_VERSION = 33.13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -28049,7 +28063,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.9;
+				CURRENT_PROJECT_VERSION = 33.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28108,7 +28122,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.9;
+				CURRENT_PROJECT_VERSION = 33.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28168,7 +28182,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33.9;
+				CURRENT_PROJECT_VERSION = 33.13;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28225,12 +28239,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -28244,10 +28258,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b7e0199-968b-4d57-b6f3-356e454a654b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox share extension dev";
+				PROVISIONING_PROFILE_SPECIFIER = "LifeBox share debug";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -28332,7 +28346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "0ca87cb5-829c-46ab-b443-75db824cdcce";
+				PROVISIONING_PROFILE_SPECIFIER = "Akillidepo Share Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -28396,7 +28410,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.8;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -28457,7 +28471,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.8;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28514,7 +28528,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.8;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28572,7 +28586,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.8;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28626,7 +28640,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 5T5A6N5A76;
 				INFOPLIST_FILE = Depo_LifeTechUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -28652,7 +28666,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 5T5A6N5A76;
 				INFOPLIST_FILE = Depo_LifeTechUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -28676,7 +28690,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 5T5A6N5A76;
 				INFOPLIST_FILE = Depo_LifeTechUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -28700,7 +28714,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 5T5A6N5A76;
 				INFOPLIST_FILE = Depo_LifeTechUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

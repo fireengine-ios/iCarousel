@@ -21,7 +21,8 @@ final class PageCompounder {
     
     var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
     
-    private let coreData = MediaItemOperationsService.shared
+    private let operationsService = MediaItemOperationsService.shared
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     
     private var lastLocalPageAddedAction: AppendingLocalItemsPageAppended?
 
@@ -38,7 +39,7 @@ final class PageCompounder {
         
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
         
-        let requestContext = CoreDataStack.shared.newChildBackgroundContext
+        let requestContext = coreDataStack.newChildBackgroundContext
         
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
@@ -108,7 +109,7 @@ final class PageCompounder {
                             guard let `self` = self else {
                                 return
                             }
-                            if compundedPage.count < self.pageSize, self.coreData.inProcessLocalFiles {
+                            if compundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
                                 self.monitorDBLastAppendedPageFirst(lastItem: lastItem,
                                                                     pageItems: compundedPage,
                                                                     sortType: sortType,
@@ -165,7 +166,7 @@ final class PageCompounder {
                         guard let `self` = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.coreData.inProcessLocalFiles {
+                        if compoundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
                             self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
                         } else {
                             compoundedCallback(compoundedPage, leftovers)
@@ -200,7 +201,7 @@ final class PageCompounder {
                         guard let `self` = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.coreData.inProcessLocalFiles {
+                        if compoundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
                             self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
                             return
                             
@@ -233,7 +234,7 @@ final class PageCompounder {
                                                 compoundedCallback(pageItems, [])
                                                 return
                                             }
-                                            if self.coreData.inProcessLocalFiles,
+                                            if self.operationsService.inProcessLocalFiles,
                                                 compoundedPage.isEmpty {
                                                 self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                                 return
@@ -281,7 +282,7 @@ final class PageCompounder {
                     guard let `self` = self else {
                         return
                     }
-                    guard self.coreData.inProcessLocalFiles else {
+                    guard self.operationsService.inProcessLocalFiles else {
                         self.compoundItems(pageItems: pageItems,
                                            sortType: sortType,
                                            predicate: predicate,
@@ -326,7 +327,7 @@ final class PageCompounder {
                     guard let `self` = self else {
                         return
                     }
-                    guard self.coreData.inProcessLocalFiles else {
+                    guard self.operationsService.inProcessLocalFiles else {
                         self.compoundItems(pageItems: pageItems,
                                             sortType: sortType,
                                             predicate: predicate,
@@ -347,7 +348,7 @@ final class PageCompounder {
                                         guard let `self` = self else {
                                             return
                                         }
-                                        guard self.coreData.inProcessLocalFiles else {
+                                        guard self.operationsService.inProcessLocalFiles else {
                                             self.compoundItems(pageItems: pageItems,
                                                                sortType: sortType,
                                                                predicate: predicate,

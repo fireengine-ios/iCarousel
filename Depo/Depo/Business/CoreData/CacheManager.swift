@@ -21,6 +21,8 @@ final class CacheManager {
     
     static let shared = CacheManager()
     
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    
     private static let pageSize: Int = 500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
@@ -44,7 +46,7 @@ final class CacheManager {
     }
     
     func actualizeCache() {
-        guard CoreDataStack.shared.isReady else {
+        guard coreDataStack.isReady else {
             scheduleActualization()
             return
         }
@@ -93,7 +95,7 @@ final class CacheManager {
     }
     
     private func scheduleActualization() {
-        CoreDataStack.shared.delegates.add(self)
+        coreDataStack.delegates.add(self)
     }
     
     private func showPreparationCardAfterDelay() {
@@ -238,7 +240,7 @@ extension CacheManager: ReachabilityServiceDelegate {
 
 extension CacheManager: CoreDataStackDelegate {
     func onCoreDataStackSetupCompleted() {
-        CoreDataStack.shared.delegates.remove(self)
+        coreDataStack.delegates.remove(self)
         actualizeCache()
     }
 }
