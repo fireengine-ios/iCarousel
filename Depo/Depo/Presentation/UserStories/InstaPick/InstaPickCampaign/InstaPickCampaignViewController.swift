@@ -147,4 +147,8 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     @IBAction private func showResultButtonTapped(_ sender: Any) {
         close(completion: didClosed)
     }
+    
+    @IBAction  private func closeButtonTapped(_ sender: Any) {
+        close(completion: didClosed)
+    }
 }
