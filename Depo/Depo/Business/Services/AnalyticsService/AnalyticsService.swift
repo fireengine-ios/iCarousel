@@ -239,7 +239,7 @@ extension AnalyticsService: AnalyticsGA {
         group.notify(queue: privateQueue) { 
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
-                service: TextConstants.NotLocalized.GAappName, developmentVersion: version,
+                service: TextConstants.NotLocalized.appNameGA, developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 facialRecognition: facialRecognitionStatus,
@@ -425,7 +425,7 @@ extension AnalyticsService: AnalyticsGA {
         let product =  AnalyticsPackageProductObject(itemName: package.name,
                                                      itemID: itemID,
                                                      price: package.priceString,
-                                                     itemBrand: TextConstants.NotLocalized.GAappName,
+                                                     itemBrand: TextConstants.NotLocalized.appNameGA,
                                                      itemCategory: "Storage",
                                                      itemVariant: "",
                                                      index: "\(packageIndex)",

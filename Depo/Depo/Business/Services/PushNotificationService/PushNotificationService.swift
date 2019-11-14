@@ -126,6 +126,7 @@ final class PushNotificationService {
         case .tbmatic: openTBMaticPhotos(notificationParameters)
         case .securityQuestion: openSecurityQuestion()
         case .permissions: openPermissions()
+        case .photopickCampaignDetail: openCampaignDetails()
         }
         
         if router.tabBarController != nil {
@@ -397,6 +398,11 @@ final class PushNotificationService {
         debugLog("PushNotificationService try to open Permission screen")
 
         let controller = router.permissions
+        pushTo(controller)
+    }
+    
+    private func openCampaignDetails() {
+        let controller = router.campaignDetailViewController()
         pushTo(controller)
     }
 }

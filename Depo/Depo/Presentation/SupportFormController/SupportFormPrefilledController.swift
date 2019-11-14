@@ -251,11 +251,12 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
                            email,
                            subject)
                 
+                let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
                 let emailSubject: String
                 if fullPhoneNumber.isEmpty {
-                    emailSubject = subject
+                    emailSubject = subjectWithAppName
                 } else {
-                    emailSubject = "\(fullPhoneNumber) - \(subject)"
+                    emailSubject = "\(fullPhoneNumber) - \(subjectWithAppName)"
                 }
                 
                 Mail.shared().sendEmail(emailBody: emailBody,

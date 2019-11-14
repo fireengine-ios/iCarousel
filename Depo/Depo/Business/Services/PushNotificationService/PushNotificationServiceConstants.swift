@@ -50,6 +50,7 @@ enum PushNotificationAction: String {
     case tbmatic = "TBMatik"
     case securityQuestion = "security_question"
     case permissions = "permissions"
+    case photopickCampaignDetail = "photopick_campaign_detail"
 }
 
 enum PushNotificationParameter: String {
