@@ -1243,9 +1243,7 @@
 "campaign_description_label_another" = "Your total draw is %d! Analyze your photos with PhotoPick and become one of the 20 winners for Samsung Galaxy Note 10!";
 "campaign_campaign_detail_button" = "Campaign Details";
 "analyze_photo_pic_detail_button" = "Analyze with PhotoPick";
-"campaign_detail_title" = "Campaign Detail";
 "campaign_detail_more_info_button" = "For more information, please click here";
-"campaign_detail_contest_info_title" = "My Contest Information";
 "campaign_detail_title" = "Campaign Details";
 "campaign_detail_more_info_button" = "For more information %@ >";
 "campaign_detail_contest_info_title" = "My Campaign Information";
