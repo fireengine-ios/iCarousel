@@ -302,7 +302,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         var filteredTypes = types
         let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
+        if langCode != "tr" {
             filteredTypes = types.filter({ $0 != .print })
         }
         

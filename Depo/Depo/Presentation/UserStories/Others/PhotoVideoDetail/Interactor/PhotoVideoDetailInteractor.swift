@@ -117,9 +117,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
             let langCode = Device.locale
             if let deleteIndex = elementsConfig.index(of: .print),
-                langCode != "tr",
-                langCode != "en" {
+                langCode != "tr" {
                 elementsConfig.remove(at: deleteIndex)
+                
             }
             
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
