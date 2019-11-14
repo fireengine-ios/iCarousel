@@ -18,7 +18,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                          style: .blackOpaque, tintColor: nil)
             
             let langCode = Device.locale
-            if langCode != "tr", langCode != "en" {
+            if langCode != "tr" {
                 photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
                                                              style: .blackOpaque, tintColor: nil)
             }
@@ -45,7 +45,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                          style: .blackOpaque, tintColor: nil)
         
         let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
+        if langCode != "tr" {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         }
@@ -71,7 +71,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                          style: .blackOpaque, tintColor: nil)
         
         let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
+        if langCode != "tr" {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromFaceImageAlbum],
                                                              style: .blackOpaque, tintColor: nil)
         }
