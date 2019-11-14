@@ -1081,8 +1081,7 @@ struct TextConstants {
     static let landingBilloSubTitle5 = NSLocalizedString("landing_billo_subtitle_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingBilloTitle6 = NSLocalizedString("landing_billo_title_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingBilloSubTitle6 = NSLocalizedString("landing_billo_subtitle_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let landingBilloTitle7 = NSLocalizedString("landing_billo_title_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let landingBilloSubTitle7 = NSLocalizedString("landing_billo_subtitle_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     static let created = NSLocalizedString("created", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploaded = NSLocalizedString("uploaded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

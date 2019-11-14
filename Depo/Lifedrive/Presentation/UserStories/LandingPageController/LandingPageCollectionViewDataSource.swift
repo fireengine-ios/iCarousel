@@ -26,8 +26,7 @@ final class LandingPageCollectionViewDataSource: NSObject {
                           TextConstants.landingBilloTitle3,
                           TextConstants.landingBilloTitle4,
                           TextConstants.landingBilloTitle5,
-                          TextConstants.landingBilloTitle6,
-                          TextConstants.landingBilloTitle7]
+                          TextConstants.landingBilloTitle6]
     
     private let subtitles = [TextConstants.landingBilloSubTitle0,
                              TextConstants.landingBilloSubTitle1,
@@ -35,8 +34,7 @@ final class LandingPageCollectionViewDataSource: NSObject {
                              TextConstants.landingBilloSubTitle3,
                              TextConstants.landingBilloSubTitle4,
                              TextConstants.landingBilloSubTitle5,
-                             TextConstants.landingBilloSubTitle6,
-                             TextConstants.landingBilloSubTitle7]
+                             TextConstants.landingBilloSubTitle6]
     
     // MARK: - Init
     
