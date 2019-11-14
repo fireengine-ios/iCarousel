@@ -140,8 +140,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         contestInfoView.setup(with: details)
         
         moreInfoUrl = details.detailsUrl
-        let buttonText = String(format: TextConstants.campaignDetailMoreInfoButton, moreInfoUrl!.absoluteString)
-        moreInfoButton.setTitle(buttonText, for: .normal)
+        moreInfoButton.setTitle(TextConstants.campaignDetailMoreInfoButton, for: .normal)
         
         contentStackView.isHidden = false
     }
