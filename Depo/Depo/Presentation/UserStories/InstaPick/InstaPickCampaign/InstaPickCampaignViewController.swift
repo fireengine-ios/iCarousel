@@ -70,7 +70,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         case .withLeftPhotoPick:
             premiumButtonView.isHidden = true
             topViewBackgroundImage.image = UIImage(named: "campaignBackgroundImage")
-            setupTopView(dailyRemaining: content.dailyRemaining, totalsUsed: content.totalUsed)
+            setupTopView(dailyUsed: content.dailyUsed, totalsUsed: content.totalUsed)
         case .withoutLeftPhotoPick:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleWithoutPhotoPick
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionWithoutPhotoPick
@@ -83,8 +83,8 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         bottomViewImage.loadImage(url: content.imageUrl)
     }
     
-    private func setupTopView(dailyRemaining: Int, totalsUsed: Int) {
-        switch dailyRemaining {
+    private func setupTopView(dailyUsed: Int, totalsUsed: Int) {
+        switch dailyUsed {
         case 0:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleZeroRemainin
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionZeroRemaining
