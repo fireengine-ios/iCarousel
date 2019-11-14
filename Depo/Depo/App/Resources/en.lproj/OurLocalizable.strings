@@ -1245,7 +1245,6 @@
 "analyze_photo_pic_detail_button" = "Analyze with PhotoPick";
 "campaign_detail_more_info_button" = "For more information, please click here";
 "campaign_detail_title" = "Campaign Details";
-"campaign_detail_more_info_button" = "For more information %@ >";
 "campaign_detail_contest_info_title" = "My Campaign Information";
 "campaign_detail_contest_info_total_draw" = "Total Draw";
 "campaign_detail_contest_info_remaining_draw" = "Daily Draw Left";
