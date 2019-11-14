@@ -54,7 +54,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
     
     @IBOutlet private weak var topViewDescriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
             newValue.textColor = ColorConstants.textGrayColor
         }
     }
@@ -93,7 +93,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
     
     @IBOutlet private weak var bottomViewDescriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
             newValue.textColor = ColorConstants.textGrayColor
         }
     }
