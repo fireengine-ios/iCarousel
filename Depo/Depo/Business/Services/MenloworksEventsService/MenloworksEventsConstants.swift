@@ -66,4 +66,5 @@ struct MenloworksEventsConstants {
     static let profileNameEmpty = "profile_name_empty"
     static let profileNameFull = "profile_name_full"
     static let backgroundSync = "BackgroundSync"
+    static let photopickAnalyzeDone = "photopick_analyze_done"
 }
