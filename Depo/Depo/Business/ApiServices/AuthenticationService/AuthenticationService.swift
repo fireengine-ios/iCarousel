@@ -520,7 +520,7 @@ class AuthenticationService: BaseRequestService {
         debugLog("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             if self?.tokenStorage.refreshToken == nil {
-                let error = ErrorResponse.string(TextConstants.errorServer)
+                let error = ErrorResponse.error(error)
                 fail?(error)
             } else {
                 self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
@@ -528,7 +528,7 @@ class AuthenticationService: BaseRequestService {
                         self?.tokenStorage.accessToken = accessToken
                         success?()
                     } else {
-                        let error = ErrorResponse.string(TextConstants.errorServer)
+                        let error = ErrorResponse.error(error)
                         fail?(error)
                     }
                 }
