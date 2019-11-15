@@ -521,7 +521,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             subButton.translatesAutoresizingMaskIntoConstraints = false
             
             subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: mainContentView, attribute: .bottom, multiplier: 1, constant: 0)
-            subButton.bottomConstraintOrigialConstant = 0
+            subButton.bottomConstraintOriginalConstant = 0
             
             subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: mainContentView, attribute: .centerX, multiplier: 1, constant: 0)
             subButton.centerXConstraintOriginalConstant = 0
@@ -598,6 +598,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj0.centerXConstraint!.constant = 0
             obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
+        
         if count == 2 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -608,6 +609,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
             obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
         }
+        
         if count == 3 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -622,6 +624,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj2.centerXConstraint!.constant = obj0.frame.size.width
             obj2.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
+        
         if count == 4 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -631,17 +634,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj0.centerXConstraint!.constant = -obj0.frame.size.width
             obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
             
-            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.5
+            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.55
             obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
-            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.5
+            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.55
             obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj3.centerXConstraint!.constant = obj0.frame.size.width
             obj3.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
-            
-            
         }
+        
         changeButtonsAppearance(toHidden: false, withAnimation: true, forButtons: buttonsArray)
         //view.layoutIfNeeded()
     }
