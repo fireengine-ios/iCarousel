@@ -162,7 +162,7 @@ struct NumericConstants {
     
     static let spotifyStatusUpdateTimeInterval = 1.0
     
-    static let langingPageCount = 8
+    static let langingPageCount = 7
 }
 
 struct RequestSizeConstant {
