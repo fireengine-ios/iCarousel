@@ -269,4 +269,8 @@ class MenloworksEventsService {
     func onBackgroundSync() {
         mergedHit(event: MenloworksEventsConstants.backgroundSync)
     }
+    
+    func onPhotopickAnalyzeDone() {
+        mergedHit(event: MenloworksEventsConstants.photopickAnalyzeDone)
+    }
 }
