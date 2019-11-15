@@ -15,6 +15,9 @@ class MenloworksTagsService {
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    private lazy var campaignService = CampaignServiceImpl()
+    private lazy var instapickService: InstapickService = factory.resolve()
+    
     // MARK: - Event methods
     
     func onFirstLaunch() {
@@ -488,12 +491,12 @@ class MenloworksTagsService {
             return
         }
         
-        InstapickServiceImpl().getAnalyzesCount { response in
+        instapickService.getAnalyzesCount { response in
             switch response {
             case .success(let status):
                 trackStatus(status)
-            case .failed(_):
-                break
+            case .failed(let error):
+                debugLog("sendPhotopickLeftAnalysisStatus failed \(error.description)")
             }
         }
     }
@@ -509,7 +512,7 @@ class MenloworksTagsService {
             return
         }
         
-        CampaignServiceImpl().getPhotopickDetails { result in
+        campaignService.getPhotopickDetails { result in
             switch result {
             case .success(let status):
                 // These tags will only be sent between startDate and launchDate
@@ -520,8 +523,8 @@ class MenloworksTagsService {
                     let totalUsedTag = MenloworksTags.PhotopickTotalDraw(value: status.totalUsed)
                     self.hitTag(totalUsedTag)
                 }
-            case .failure(_):
-                break
+            case .failure(let error):
+                debugLog("sendCampaignPhotopickStatus failed \(error.description)")
             }
         }
     }
