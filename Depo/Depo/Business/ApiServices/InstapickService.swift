@@ -230,6 +230,11 @@ extension InstapickServiceImpl: InstapickService {
                     switch result {
                     case .success(let analyzesCount):
                         self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: analyzesCount.left, totalDraw: analyzesCount.total)
+                        MenloworksTagsService.shared.sendPhotopickAnalyzeStatus(isSuccess: true)
+                        MenloworksEventsService.shared.onPhotopickAnalyzeDone()
+                        
+                        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(analyzesCount)
+                        MenloworksTagsService.shared.sendCampaignPhotopickStatus()
                         
                         /// Popup time should be at least 5 seconds, even if the request returned success earlier
                         if Date().timeIntervalSince(startAnalysisDate) > NumericConstants.instapickTimeoutForAnalyzePhotos {
@@ -252,6 +257,7 @@ extension InstapickServiceImpl: InstapickService {
             case .failed(let error):
                 eventLabel = .failure
                 self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: nil, totalDraw: nil)
+                MenloworksTagsService.shared.sendPhotopickAnalyzeStatus(isSuccess: false)
                 completion(.failed(error))
             }
         }

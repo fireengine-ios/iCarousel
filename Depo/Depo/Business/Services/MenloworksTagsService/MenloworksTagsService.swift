@@ -130,6 +130,8 @@ class MenloworksTagsService {
             sendFacebookImportStatus()
             sendFIRStatus()
             sendSubscriptionsStatus()
+            sendPhotopickLeftAnalysisStatus(nil)
+            sendCampaignPhotopickStatus()
         }
         if let isEnabled = defaults?.object(forKey: "isEnabledKey") as? Bool {
             onTouchIDSettingsChanged(isEnabled)
@@ -473,6 +475,55 @@ class MenloworksTagsService {
     func facebookImport(isOn: Bool) {
         let tag = MenloworksTags.FacebookImportStatus(isEnabled: isOn)
         self.hitTag(tag)
+    }
+    
+    func sendPhotopickLeftAnalysisStatus(_ status: InstapickAnalyzesCount?) {
+        func trackStatus(_ status: InstapickAnalyzesCount) {
+            let tag = MenloworksTags.PhotopickLeftAnalysis(isFree: status.isFree, value: status.left)
+            hitTag(tag)
+        }
+        
+        if let status = status {
+            trackStatus(status)
+            return
+        }
+        
+        InstapickServiceImpl().getAnalyzesCount { response in
+            switch response {
+            case .success(let status):
+                trackStatus(status)
+            case .failed(_):
+                break
+            }
+        }
+    }
+    
+    func sendPhotopickAnalyzeStatus(isSuccess: Bool) {
+        let tag = MenloworksTags.PhotopickAnalyzeResult(isSuccess: isSuccess)
+        hitTag(tag)
+    }
+    
+    func sendCampaignPhotopickStatus() {
+        // These tags will only be sent for Turkish users
+        guard SingletonStorage.shared.isUserFromTurkey else {
+            return
+        }
+        
+        CampaignServiceImpl().getPhotopickDetails { result in
+            switch result {
+            case .success(let status):
+                // These tags will only be sent between startDate and launchDate
+                if (status.startDate...status.launchDate).contains(Date()) {
+                    let dailyRemainingTag = MenloworksTags.PhotopickDailyDrawLeft(value: status.dailyRemaining)
+                    self.hitTag(dailyRemainingTag)
+                    
+                    let totalUsedTag = MenloworksTags.PhotopickTotalDraw(value: status.totalUsed)
+                    self.hitTag(totalUsedTag)
+                }
+            case .failure(_):
+                break
+            }
+        }
     }
     
     // MARK: - Accessory methods

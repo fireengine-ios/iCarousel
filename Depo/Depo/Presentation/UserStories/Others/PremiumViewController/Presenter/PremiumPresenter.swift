@@ -243,6 +243,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successedVerifyOffer() {
+        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(nil)
         optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
@@ -285,6 +286,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
 
     //MARK: finish purchase
     func purchaseFinished() {
+        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(nil)
         view?.stopActivityIndicator()
         if let moduleOutput = moduleOutput {
             moduleOutput.didReloadData()
