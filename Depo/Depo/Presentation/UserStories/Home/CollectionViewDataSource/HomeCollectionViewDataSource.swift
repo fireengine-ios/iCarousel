@@ -32,7 +32,8 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     var cards = [BaseCardView]()
     
-    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue)
+    //FE-1720
+//    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue)
     
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: HomeCollectionViewDataSourceDelegate?) {
         
@@ -125,130 +126,168 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             
             view.configurateWithType(viewType: .premium)
             
-            reloadCollectionView()
+            //FE-1720
+//            reloadCollectionView()
+            collectionView.reloadData()
         }
     }
     
-    private func reloadCollectionView() {
-        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-                
-                semaphore.signal()
-            }
-            
-            semaphore.wait()
-        }
-    }
+    //FE-1720
+//    private func reloadCollectionView() {
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async { [weak self] in
+//                self?.collectionView.reloadData()
+//
+//                semaphore.signal()
+//            }
+//
+//            semaphore.wait()
+//        }
+//    }
     
     func updateCards(insert: [BaseCardView] = [], remove: [BaseCardView] = []) {
-        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
-            guard let self = self else {
-                return
+        ///remove
+        var removeIndexes = [Int]()
+        
+        var removingCards = [BaseCardView]()
+        for card in remove {
+            if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
+                removingCards.append(self.cards[index])
+                removeIndexes.append(index)
             }
-            
-            ///remove
-            var removeIndexes = [Int]()
-            
-            var removingCards = [BaseCardView]()
-            for card in remove {
-                if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
-                    removingCards.append(self.cards[index])
-                    removeIndexes.append(index)
-                }
-            }
-            
-            removeIndexes.forEach { self.cards.remove(at: $0) }
-            
-            ///insert
-            let insertedCards = insert.filter { insertingCard in
-                !self.cards.contains(insertingCard)
-            }
-            
-            self.cards.append(contentsOf: insertedCards)
-            
-            ///sort
-            self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
-                let order1 = view1.cardObject?.order ?? 0
-                let order2 = view2.cardObject?.order ?? 0
-                if order1 == order2 {
-                    return view1 is PremiumInfoCard
-                }
-                return order1 < order2
-            })
-                        
-            guard self.isViewActive else {
-                let semaphore  = DispatchSemaphore(value: 0)
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    semaphore.signal()
-                }
-                
-                semaphore.wait()
-                return
-            }
-            
-            ///get indexes
-            var insertIndexes = insert.compactMap { self.cards.firstIndex(of: $0) }
-            
-            ///find same indexes and convert to update indexes
-            let updateIndexes = removeIndexes.filter { insertIndexes.contains($0) }
-            
-            ///remove common indexes
-            updateIndexes.forEach {
-                removeIndexes.remove($0)
-                insertIndexes.remove($0)
-            }
-            
-            guard updateIndexes.hasItems || insertIndexes.hasItems || removeIndexes.hasItems else {
-                return
-            }
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            DispatchQueue.main.async {
-                self.collectionView.isUserInteractionEnabled = false
-                
-                ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
-                let rect = CGRect(origin: self.collectionView.contentOffset, size: .zero)
-                self.collectionView.scrollRectToVisible(rect, animated: true)
-                
-                self.collectionView.performBatchUpdates({ [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    if removeIndexes.hasItems {
-                        self.collectionView.deleteItems(at: removeIndexes.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                    if insertIndexes.hasItems {
-                        self.collectionView.insertItems(at: insertIndexes.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                    if updateIndexes.hasItems {
-                        self.collectionView.reloadItems(at: updateIndexes.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                }, completion: { [weak self] _ in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    self.collectionView.isUserInteractionEnabled = true
-                    
-                    self.delegate?.didReloadCollectionView(self.collectionView)
-                    
-                    semaphore.signal()
-                })
-            }
-            
-            semaphore.wait()
         }
+        
+        removeIndexes.forEach { self.cards.remove(at: $0) }
+        
+        ///insert
+        let insertedCards = insert.filter { insertingCard in
+            !self.cards.contains(insertingCard)
+        }
+        
+        self.cards.append(contentsOf: insertedCards)
+        
+        ///sort
+        self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
+            let order1 = view1.cardObject?.order ?? 0
+            let order2 = view2.cardObject?.order ?? 0
+            if order1 == order2 {
+                return view1 is PremiumInfoCard
+            }
+            return order1 < order2
+        })
+        
+        collectionView.reloadData()
     }
+
+    //FE-1720
+//    func updateCards(insert: [BaseCardView] = [], remove: [BaseCardView] = []) {
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            ///remove
+//            var removeIndexes = [Int]()
+//
+//            var removingCards = [BaseCardView]()
+//            for card in remove {
+//                if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
+//                    removingCards.append(self.cards[index])
+//                    removeIndexes.append(index)
+//                }
+//            }
+//
+//            removeIndexes.forEach { self.cards.remove(at: $0) }
+//
+//            ///insert
+//            let insertedCards = insert.filter { insertingCard in
+//                !self.cards.contains(insertingCard)
+//            }
+//
+//            self.cards.append(contentsOf: insertedCards)
+//
+//            ///sort
+//            self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
+//                let order1 = view1.cardObject?.order ?? 0
+//                let order2 = view2.cardObject?.order ?? 0
+//                if order1 == order2 {
+//                    return view1 is PremiumInfoCard
+//                }
+//                return order1 < order2
+//            })
+//
+//            guard self.isViewActive else {
+//                let semaphore  = DispatchSemaphore(value: 0)
+//
+//                DispatchQueue.main.async {
+//                    self.collectionView.reloadData()
+//                    semaphore.signal()
+//                }
+//
+//                semaphore.wait()
+//                return
+//            }
+//
+//            ///get indexes
+//            var insertIndexes = insert.compactMap { self.cards.firstIndex(of: $0) }
+//
+//            ///find same indexes and convert to update indexes
+//            let updateIndexes = removeIndexes.filter { insertIndexes.contains($0) }
+//
+//            ///remove common indexes
+//            updateIndexes.forEach {
+//                removeIndexes.remove($0)
+//                insertIndexes.remove($0)
+//            }
+//
+//            guard updateIndexes.hasItems || insertIndexes.hasItems || removeIndexes.hasItems else {
+//                return
+//            }
+//
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async {
+//                self.collectionView.isUserInteractionEnabled = false
+//
+//                ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
+//                let rect = CGRect(origin: self.collectionView.contentOffset, size: .zero)
+//                self.collectionView.scrollRectToVisible(rect, animated: true)
+//
+//                self.collectionView.performBatchUpdates({ [weak self] in
+//                    guard let self = self else {
+//                        return
+//                    }
+//
+//                    if removeIndexes.hasItems {
+//                        self.collectionView.deleteItems(at: removeIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                    if insertIndexes.hasItems {
+//                        self.collectionView.insertItems(at: insertIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                    if updateIndexes.hasItems {
+//                        self.collectionView.reloadItems(at: updateIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                }, completion: { [weak self] _ in
+//                    guard let self = self else {
+//                        return
+//                    }
+//
+//                    self.collectionView.isUserInteractionEnabled = true
+//
+//                    self.delegate?.didReloadCollectionView(self.collectionView)
+//
+//                    semaphore.signal()
+//                })
+//            }
+//
+//            semaphore.wait()
+//        }
+//    }
 }
 
 //MARK: CardsManagerViewProtocol
@@ -336,32 +375,46 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             newCards.insert(card)
         }
         
-        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
-            guard let self = self else {
-                return
+        let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
+            let order1 = view1.cardObject?.order ?? 0
+            let order2 = view2.cardObject?.order ?? 0
+            if order1 == order2 {
+                return view1 is PremiumInfoCard
             }
-            
-            let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
-                let order1 = view1.cardObject?.order ?? 0
-                let order2 = view2.cardObject?.order ?? 0
-                if order1 == order2 {
-                    return view1 is PremiumInfoCard
-                }
-                return order1 < order2
-            })
-            
-            self.cards = sortedCards
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                
-                semaphore.signal()
-            }
-            
-            semaphore.wait()
-        }
+            return order1 < order2
+        })
+        
+        cards = sortedCards
+        
+        collectionView.reloadData()
+        
+        //FE-1720
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
+//                let order1 = view1.cardObject?.order ?? 0
+//                let order2 = view2.cardObject?.order ?? 0
+//                if order1 == order2 {
+//                    return view1 is PremiumInfoCard
+//                }
+//                return order1 < order2
+//            })
+//
+//            self.cards = sortedCards
+//
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//
+//                semaphore.signal()
+//            }
+//
+//            semaphore.wait()
+//        }
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
@@ -447,7 +500,10 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             return
         }
         
-        reloadCollectionView()
+        collectionView.reloadData()
+        
+        //FE-1720
+//        reloadCollectionView()
     }
 }
 
@@ -484,9 +540,10 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
             baseCell.addViewOnCell(controllersView: cardUpView)
             cardUpView.viewWillShow()
             
-        } else {
-            reloadCollectionView()
-        }
+        } //else {
+        //FE-1720
+//            reloadCollectionView()
+//        }
         
         baseCell.willDisplay()
         return baseCell
