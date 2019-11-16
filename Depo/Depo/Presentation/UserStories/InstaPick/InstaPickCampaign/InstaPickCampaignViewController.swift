@@ -70,7 +70,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         case .withLeftPhotoPick:
             premiumButtonView.isHidden = true
             topViewBackgroundImage.image = UIImage(named: "campaignBackgroundImage")
-            setupTopView(dailyUsed: content.dailyUsed, totalsUsed: content.totalUsed)
+            setupTopView(dailyRemaining: content.dailyRemaining, dailyUsed: content.dailyUsed)
         case .withoutLeftPhotoPick:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleWithoutPhotoPick
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionWithoutPhotoPick
@@ -83,15 +83,15 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         bottomViewImage.loadImage(url: content.imageUrl)
     }
     
-    private func setupTopView(dailyUsed: Int, totalsUsed: Int) {
-        switch dailyUsed {
+    private func setupTopView(dailyRemaining: Int, dailyUsed: Int) {
+        switch dailyRemaining {
         case 0:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleZeroRemainin
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionZeroRemaining
             trackScreen(.campaignSamsungPopupFirst)
         case 1...:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleRemainin
-            topViewDescriptionLabel.text = String(format: TextConstants.campaignTopViewDescriptionRemainin, totalsUsed)
+            topViewDescriptionLabel.text = String(format: TextConstants.campaignTopViewDescriptionRemainin, dailyUsed)
             trackScreen(.campaignSamsungPopupLast)
         default:
             assertionFailure()

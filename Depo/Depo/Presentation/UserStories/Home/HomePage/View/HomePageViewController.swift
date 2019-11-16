@@ -30,10 +30,8 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
     
     private var homepageIsActiveAndVisible: Bool {
         var result = false
-        if let topController = navigationController?.topViewController {
-            if topController == self {
-                result = true
-            }
+        if let topController = navigationController?.topViewController, topController == self {
+            result = true
         }
         return result
     }
@@ -45,7 +43,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         super.viewDidLoad()
         needToShowTabBar = true
         
-        debugLog("HomePage viewDidiLoad")
+        debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         debugLog("HomePage DataSource setuped")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -63,7 +61,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         super.viewWillAppear(animated)
         
         updateNavigationItemsState(state: true)
-        homePageDataSource.isViewActive = true
         
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
                 
@@ -80,7 +77,9 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         super.viewDidAppear(animated)
         
         debugLog("HomePage viewDidAppear")
-        homePageDataSource.isActive = true
+        
+        homePageDataSource.isViewActive = true
+
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
             configureNavBarActions()
@@ -98,10 +97,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         homePageDataSource.isViewActive = false
 
         hideSpotlightIfNeeded()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        homePageDataSource.isActive = false///Do we need pretty much same flag?
     }
     
     deinit {
@@ -137,7 +132,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         }
         
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
-        
     }
     
     func cancelSearch() { }
@@ -234,7 +228,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
     
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.cards.flatMap { SpotlightType(cardView: $0) })
+        cardTypes.append(contentsOf: homePageDataSource.cards.compactMap { SpotlightType(cardView: $0) })
         output.requestShowSpotlight(for: cardTypes)
     }
     
@@ -286,6 +280,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
                 return
             }
         }
+        
         completion (.zero)
     }
     
@@ -317,8 +312,10 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
                            height: collectionView.frame.height - premiumCardFrame.height - verticalSpace)
             
             completion(frame)
+            
         case .movieCard, .albumCard, .collageCard, .filterCard, .animationCard:
             cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
+            
         }
     }
     
