@@ -523,6 +523,37 @@ class MenloworksTags {
             super.init(name: NameConstants.profileNameFull)
         }
     }
+    
+    class PhotopickLeftAnalysis: MenloworksTag {
+        init(isFree: Bool, value: Int) {
+            super.init(name: NameConstants.photopickLeftAnalysis, value: isFree ? MenloworksTags.ValueConstants.free : String(value))
+        }
+    }
+    
+    class PhotopickAnalyze: MenloworksTag {
+        init(isSuccess: Bool) {
+            super.init(name: NameConstants.photopickAnalyze, value: isSuccess ? MenloworksTags.ValueConstants.success : MenloworksTags.ValueConstants.fail)
+        }
+    }
+    
+    class PhotopickAnalyzeResult: MenloworksTag {
+        init(isSuccess: Bool) {
+            super.init(name: isSuccess ? NameConstants.photopickAnalyzeSuccess : NameConstants.photopickAnalyzeFail)
+        }
+    }
+    
+    class PhotopickDailyDrawLeft: MenloworksTag {
+        init(value: Int) {
+            super.init(name: NameConstants.photopickDailyDrawLeft, value: String(value))
+        }
+    }
+    
+    class PhotopickTotalDraw: MenloworksTag {
+        init(value: Int) {
+            super.init(name: NameConstants.photopickTotalDraw, value: String(value))
+        }
+    }
+
 }
 
 class MenloworksTag {
