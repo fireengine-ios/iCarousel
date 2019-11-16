@@ -43,7 +43,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         super.viewDidLoad()
         needToShowTabBar = true
         
-        debugLog("HomePage viewDidiLoad")
+        debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         debugLog("HomePage DataSource setuped")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)

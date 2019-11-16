@@ -9,6 +9,7 @@
 import UIKit
 
 protocol CollectionViewLayoutDelegate: UICollectionViewDelegate {
+    
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -21,7 +22,7 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
     var numberOfColumns = 1
     
     private var cache = [UICollectionViewLayoutAttributes]()
-    private var updateItems = [UICollectionViewUpdateItem]()
+    private var insertItems = [UICollectionViewUpdateItem]()
 
     private var cellPadding: CGFloat = 6.0
     private var contentHeight: CGFloat = 0.0
@@ -50,7 +51,7 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
         }
     }
 
-    override func prepare() {
+    private func updateCache() {
         cache.removeAll()
 
         if cache.isEmpty, let collectionView = collectionView, let delegate = delegate {
@@ -85,114 +86,65 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
                     .insetBy(dx: cellPadding, dy: cellPadding)
 
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                attributes.zIndex = item
                 attributes.frame = frame
                 
                 cache.append(attributes)
-
-                debugPrint("attributes \(attributes)")
 
                 contentHeight = max(contentHeight, frame.maxY)
                 yOffset[column] = yOffset[column] + height
 
                 changeColumn(&column)
             }
-
-            debugPrint("attributes ----------------------------")
         }
     }
+    
+    override func prepare() {
+        updateCache()
+    }
+    
+    override func prepare(forAnimatedBoundsChange oldBounds: CGRect) {
+        let visibleSize = CGRect(x: 0,
+                                 y: collectionView?.contentOffset.y ?? 0,
+                                 width: UIScreen.main.bounds.width,
+                                 height: collectionView?.frame.height ?? 0)
+        let context = invalidationContext(forBoundsChange: visibleSize)
+        
+        invalidateLayout(with: context)
+    }
 
-//    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
-//        self.updateItems.removeAll()
-//        self.updateItems.append(contentsOf: updateItems)
-//
-//        if !cache.isEmpty, let collectionView = collectionView, let delegate = delegate {
-//            var column = 0
-//
-//            for updateItem in updateItems {
-//                switch updateItem.updateAction {
-//                case .delete:
-//                    cache.remove(at: updateItem.indexPathBeforeUpdate?.row ?? 0)
-//
-//                case .insert, .reload:
-//                    guard let indexPath = updateItem.indexPathAfterUpdate else {
-//                        break
-//                    }
-//
-//                    let columnWidth = contentWidth / CGFloat(numberOfColumns)
-//                    cellW = columnWidth
-//
-//                    var xOffset = [CGFloat]()
-//                    for column in 0 ..< numberOfColumns {
-//                        xOffset.append(CGFloat(column) * columnWidth )
-//                    }
-//
-//                    if (column >= (numberOfColumns - 1)) {
-//                        column = 0
-//                    } else {
-//                        column = column + 1
-//                    }
-//
-//                    let yOffset = cache[safe: indexPath.row]?.frame.maxY ?? 0
-//
-//                    let width = columnWidth - cellPadding * 2
-//                    let cellHeight = delegate.collectionView(collectionView: collectionView, heightForCellAtIndexPath: indexPath, withWidth: width)
-//                    let height = cellHeight + cellPadding * 2
-//
-//                    let frame = CGRect(x: xOffset[column], y: yOffset, width: columnWidth, height: height)
-//                        .insetBy(dx: cellPadding, dy: cellPadding)
-//
-//                    let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-//
-//                    attributes.frame = frame
-//                    cache.insert(attributes, at: indexPath.row)
-//
-//                    contentHeight = max(contentHeight, frame.maxY)
-//
-//                case .move:
-//                    guard let before = updateItem.indexPathBeforeUpdate, let after = updateItem.indexPathAfterUpdate else {
-//                        break
-//                    }
-//
-//                    cache.swapAt(before.row, after.row)
-//
-//                case .none: break
-//                }
-//            }
-//        }
-//    }
+    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        super.prepare(forCollectionViewUpdates: updateItems)
+        
+        self.insertItems.removeAll()
+        self.insertItems.append(contentsOf: updateItems.filter { $0.updateAction == .insert })
+    }
+    
+    override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        updateCache()
+        
+        super.invalidateLayout(with: context)
+    }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-                
-        updateItems.forEach {
-            switch $0.updateAction {
-            case .delete:
-                guard let indexPath = $0.indexPathBeforeUpdate, itemIndexPath == indexPath else {
-                    break
-                }
-                
-                attributes?.alpha = 0
-                attributes?.transform = CGAffineTransform(scaleX: 1, y: 0)
 
-            case .insert:
-                guard let indexPath = $0.indexPathAfterUpdate, let frame = cache[safe: indexPath.row]?.frame, indexPath == itemIndexPath else {
-                    break
-                }
-                
-                attributes?.alpha = 0
-                attributes?.transform = CGAffineTransform(translationX: cellPadding, y: frame.height)
-                
-            default: break
-            }
+        if insertItems.contains(where: { $0.indexPathAfterUpdate == itemIndexPath }) {
+            attributes?.alpha = 0.0
+            attributes?.transform = CGAffineTransform(translationX: 0, y: cache[itemIndexPath.row].frame.height)
         }
-        
-        return attributes
+
+       return attributes
     }
     
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+    }
+        
     override func finalizeCollectionViewUpdates() {
         super.finalizeCollectionViewUpdates()
         
-        self.updateItems.removeAll()
+        self.insertItems.removeAll()
     }
     
     override var collectionViewContentSize: CGSize {
@@ -211,7 +163,7 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return cache.filter { $0.frame.intersects(rect) }
     }
-    
+
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cache[safe: indexPath.row]
     }
@@ -219,7 +171,9 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
         let headerH = delegate?.collectionView(collectionView: collectionView!, heightForHeaderinSection: indexPath.section)
+        
         headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH ?? 0)
+        
         return headerAttribute
     }
     

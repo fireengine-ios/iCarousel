@@ -19,10 +19,10 @@ protocol HomeCollectionViewDataSourceDelegate: class {
 final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
     
     private weak var delegate: HomeCollectionViewDataSourceDelegate?
-
+    
     private var collectionView: UICollectionView!
     private var viewController: UIViewController!
-        
+    
     private var viewsByType = [OperationType: [BaseCardView]]()
     
     private var notPermittedCardsViewTypes = Set<String>()
@@ -31,14 +31,14 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     var isViewActive = false
     
     var cards = [BaseCardView]()
-
+    
     private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue)
     
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: HomeCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
         self.delegate = delegate
-
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -56,7 +56,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
-//        collectionView.reloadData()
     }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
@@ -65,7 +64,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         guard let indexPath = collectionView.indexPath(for: cell), let view = self.cards[safe: indexPath.row] else {
             return
         }
-
+        
         updateCards(remove: [view])
     }
     
@@ -133,7 +132,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     private func reloadCollectionView() {
         cardsRefreshQueue.async(flags: .barrier) { [weak self] in
             let semaphore = DispatchSemaphore(value: 0)
-
+            
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
                 
@@ -153,10 +152,10 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             debugPrint("updateCards cards - \(self.cards)")
             debugPrint("updateCards insert - \(insert)")
             debugPrint("updateCards remove - \(remove)")
-
+            
             ///remove
             var removeIndexes = [Int]()
-
+            
             var removingCards = [BaseCardView]()
             for card in remove {
                 if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
@@ -166,12 +165,12 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             }
             
             removeIndexes.forEach { self.cards.remove(at: $0) }
-
+            
             ///insert
             let insertedCards = insert.filter { insertingCard in
                 !self.cards.contains(insertingCard)
             }
-
+            
             self.cards.append(contentsOf: insertedCards)
             
             ///sort
@@ -185,7 +184,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             })
             
             debugPrint("updateCards cards after - \(self.cards)")
-
+            
             guard self.isViewActive else {
                 let semaphore  = DispatchSemaphore(value: 0)
                 
@@ -215,14 +214,14 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             }
             
             let semaphore = DispatchSemaphore(value: 0)
-
+            
             DispatchQueue.main.async {
                 self.collectionView.isUserInteractionEnabled = false
-
+                
                 ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
                 let rect = CGRect(origin: self.collectionView.contentOffset, size: .zero)
                 self.collectionView.scrollRectToVisible(rect, animated: true)
-                                
+                
                 self.collectionView.performBatchUpdates({ [weak self] in
                     guard let self = self else {
                         return
@@ -246,7 +245,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                     }
                     
                     self.collectionView.isUserInteractionEnabled = true
-
+                    
                     self.delegate?.didReloadCollectionView(self.collectionView)
                     
                     semaphore.signal()
@@ -284,7 +283,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
-
+            
             if let card = view as? ProgressCard{
                 card.setProgress(allItems: allOperations, readyItems: completedOperations)
                 
@@ -342,7 +341,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             
             newCards.insert(card)
         }
-
+        
         cardsRefreshQueue.async(flags: .barrier) { [weak self] in
             guard let self = self else {
                 return
@@ -415,7 +414,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         }
         
         var newArray = [BaseCardView]()
-
+        
         views.forEach { view in
             if view.cardObject == serverObject {
                 updateCards(remove: [view])
@@ -438,7 +437,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         
         return false
     }
-
+    
     func addNotPermittedCardViewTypes(types: [OperationType]) {
         let array = types.map { $0.rawValue }
         for operationName in array {
@@ -516,9 +515,9 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
         }
         
         cardView.frame.size = CGSize(width: withWidth,
-                                      height: cardView.frame.size.height)
+                                     height: cardView.frame.size.height)
         cardView.layoutIfNeeded()
-
+        
         return cardView.calculatedH
     }
     
