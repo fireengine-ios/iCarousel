@@ -23,7 +23,6 @@ final class HomePageInteractor: HomePageInteractorInput {
     private var isShowPopupAboutPremium = true
     private let campaignService = CampaignServiceImpl()
     
-    
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
@@ -134,13 +133,13 @@ final class HomePageInteractor: HomePageInteractorInput {
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
                     }
                 }, fail: { [weak self] error in
-                    self?.fillCollectionView(isReloadAll: true)
-                    
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
+                        self?.fillCollectionView(isReloadAll: true)
+
                         self?.output.didObtainFailCardInfo(errorMessage: error.description,
                                                            isNeedStopRefresh: loadStatus == .reloadSingle)
                     }
@@ -151,11 +150,11 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):
-                if !error.isNetworkError {
-                    self?.fillCollectionView(isReloadAll: true)
-                }
-                
                 DispatchQueue.toMain {
+                    if !error.isNetworkError {
+                        self?.fillCollectionView(isReloadAll: true)
+                    }
+                    
                     self?.output.didObtainFailCardInfo(errorMessage: error.description,
                                                        isNeedStopRefresh: loadStatus == .reloadSingle)
                 }
