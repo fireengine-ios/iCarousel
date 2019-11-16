@@ -149,10 +149,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                 return
             }
             
-            debugPrint("updateCards cards - \(self.cards)")
-            debugPrint("updateCards insert - \(insert)")
-            debugPrint("updateCards remove - \(remove)")
-            
             ///remove
             var removeIndexes = [Int]()
             
@@ -182,9 +178,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
                 }
                 return order1 < order2
             })
-            
-            debugPrint("updateCards cards after - \(self.cards)")
-            
+                        
             guard self.isViewActive else {
                 let semaphore  = DispatchSemaphore(value: 0)
                 
