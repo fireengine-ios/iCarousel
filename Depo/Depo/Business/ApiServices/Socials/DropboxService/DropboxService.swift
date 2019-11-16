@@ -24,7 +24,11 @@ typealias DropboxLoginHandler = (DropboxManagerResult) -> Void
 final class DropboxManager {
     
     func start() {
+        #if LIFEBOX
+        DBClientsManager.setup(withAppKey: "422fptod5dlxrn8")
+        #else
         DBClientsManager.setup(withAppKey: "mij832wzxlbyeiq")
+        #endif
     }
     
     func handleRedirect(url: URL) -> Bool {
