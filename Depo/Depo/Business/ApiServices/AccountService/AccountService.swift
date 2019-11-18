@@ -534,32 +534,29 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
                     let backendError: UpdatePasswordErrors
                     
-                    switch errorResponse {
+                    guard let status = errorResponse?.status,
+                          let reason = errorResponse?.reason
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    switch (status, reason) {
                         
-                    case let response where response?.status == .invalidCaptcha:
-                        backendError = .invalidCaptcha
-                        
-                    case let response where response?.status == .invalidPassword &&
-                                            response?.reason == .resentPassword:
-                        backendError = .passwordInResentHistory
-                        
-                    case let response where response?.status == .invalidPassword &&
-                                            response?.reason == .uppercaseMissing:
-                        backendError = .uppercaseMissingInPassword
-                
-                    case let response where response?.status == .invalidPassword &&
-                                            response?.reason == .lowercaseMissing:
-                        backendError = .lowercaseMissingInPassword
-                        
-                    case let response where response?.status == .invalidPassword &&
-                                            response?.reason == .numberMissing:
-                        backendError = .numberMissingInPassword
-                        
-                    case let response where response?.status == .invalidPassword:
-                        backendError = .invalidNewPassword
-                        
-                    default:
-                       backendError = .unknown
+                        case (.invalidCaptcha, _ ):
+                            backendError = .invalidCaptcha
+                        case (.invalidPassword, .resentPassword ):
+                            backendError = .passwordInResentHistory
+                        case (.invalidPassword, .uppercaseMissing ):
+                            backendError = .uppercaseMissingInPassword
+                        case (.invalidPassword, .lowercaseMissing ):
+                            backendError = .lowercaseMissingInPassword
+                        case (.invalidPassword, .numberMissing ):
+                            backendError = .numberMissingInPassword
+                        case (.invalidPassword, _):
+                            backendError = .invalidNewPassword
+                        default:
+                            backendError = .unknown
                     }
 
                     handler(.failure(backendError))
