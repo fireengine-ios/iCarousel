@@ -16,6 +16,26 @@ struct CoreDataConfig {
     static let modelDirectoryName = modelBaseName + ".momd"
     static let storeNameShort = "DataModel"
     static let storeNameFull = storeNameShort + ".sqlite"
+    
+    static var storeUrl: URL {
+        guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            let errorMessage = "Unable to resolve document directory"
+            debugLog(errorMessage)
+            fatalError(errorMessage)
+        }
+        
+        return docURL.appendingPathComponent(storeNameFull)
+    }
+    
+    @available(iOS 10.0, *)
+    static var storeDescription: NSPersistentStoreDescription {
+        let description = NSPersistentStoreDescription(url: storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
+    }
 }
 
 struct CoreDataMigrationStep {
@@ -26,7 +46,7 @@ struct CoreDataMigrationStep {
 
 enum CoreDataVersion: Int, CaseIterable {
     case version_1 = 1
-    case version_2 // unused
+    case version_2 // skipped
     case version_3
     
     // MARK: - Accessors
@@ -72,8 +92,12 @@ class CoreDataMigrationModel {
     private lazy var successor: CoreDataMigrationModel? = {
         switch self.version {
         case .version_1:
-            // version_2 is unused
             return CoreDataMigrationModel(version: .version_3)
+            
+        case .version_2:
+            assertionFailure("version_2 is unused")
+            return nil
+            
         default:
             return nil
         }
@@ -84,15 +108,9 @@ class CoreDataMigrationModel {
     let version: CoreDataVersion
     
     
-    // MARK: - Init
-    
-    init(version: CoreDataVersion) {
-        self.version = version
-    }
-    
     // MARK: - Model
     
-    private func modelURL() -> URL? {
+   lazy var modelURL: URL? = {
         let omoURL = bundle.url(forResource: version.name, withExtension: "omo", subdirectory: CoreDataConfig.modelDirectoryName)
         let momURL = bundle.url(forResource: version.name, withExtension: "mom", subdirectory: CoreDataConfig.modelDirectoryName)
         
@@ -102,10 +120,10 @@ class CoreDataMigrationModel {
         } else {
             return momURL ?? omoURL
         }
-    }
+    }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
-           guard let modelURL = modelURL() else {
+           guard let modelURL = modelURL else {
                let errorMessage = "Error loading model from bundle"
                debugLog(errorMessage)
                fatalError(errorMessage)
@@ -118,8 +136,15 @@ class CoreDataMigrationModel {
            }
            return mom
        }()
-
     
+    
+    // MARK: - Init
+    
+    init(version: CoreDataVersion) {
+        self.version = version
+    }
+    
+ 
     // MARK: - Mapping
     
     private func mappingModelToSuccessor() -> NSMappingModel? {
@@ -127,7 +152,7 @@ class CoreDataMigrationModel {
             return nil
         }
         
-        //check if custom mapping is required or not (default)
+        //check if custom mapping is required (case:) or not (default:)
         switch version {
         case .version_1:
             guard let mapping = customMappingModel(to: nextVersion) else {

@@ -13,8 +13,7 @@ import Foundation
  
  The solution below uses an iterative approach where we migrate mutliple times through a chain of model versions.
  So, if we have 4 model versions (1, 2, 3, 4), you would need to create the following mappings 1 to 2, 2 to 3 and 3 to 4.
- Then when we create model version 5, we only need to create one additional mapping 4 to 5. This greatly reduces the work
- required when adding a new version.
+ Then when we create model version 5, we only need to create one additional mapping 4 to 5. This greatly reduces the work required when adding a new version.
  */
 
 final class CoreDataMigrator {
