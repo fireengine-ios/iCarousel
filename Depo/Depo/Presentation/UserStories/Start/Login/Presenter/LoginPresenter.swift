@@ -219,7 +219,9 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenCredentialsError)
             
         case .incorrectCaptcha:
-            failLogin(message: TextConstants.invalidCaptcha)
+            completeAsyncOperationEnableScreen()
+            view.refreshCaptcha()
+            view.captchaFieldError(TextConstants.invalidCaptcha)
             
         case .networkError:
             failLogin(message: errorText)
