@@ -332,6 +332,9 @@
 		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
+		7312E1462382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
+		7312E1472382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
+		7312E1482382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
 		7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
@@ -6941,6 +6944,7 @@
 		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
 		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
+		7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordErrorResponse.swift; sourceTree = "<group>"; };
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecretQuestionErrors.swift; sourceTree = "<group>"; };
@@ -11470,6 +11474,7 @@
 				73D723E7231D0855006AE835 /* PaymentModels.swift */,
 				73D723E9231D08A6006AE835 /* PackageOffer.swift */,
 				73A183482359CC550095719F /* CampaignCardResponse.swift */,
+				7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -21567,6 +21572,7 @@
 				8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */,
 				8C0E8EBE1FDEBDFF00789C91 /* BaseFilesGreedRouterInput.swift in Sources */,
 				8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */,
+				7312E1472382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
 				8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
 				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
@@ -22996,6 +23002,7 @@
 				8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
 				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
+				7312E1462382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
 				CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,
@@ -24962,6 +24969,7 @@
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
 				CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */,
 				CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */,
+				7312E1482382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
 				CE784BC822A685FB00662219 /* FileInfoRouterInput.swift in Sources */,
 				CE784BC922A685FB00662219 /* DocumentsGreedPresenter.swift in Sources */,
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,

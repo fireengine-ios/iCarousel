@@ -13,6 +13,11 @@ enum UpdatePasswordErrors {
     case oldPasswordIsEmpty
     case repeatPasswordIsEmpty
     case captchaAnswerIsEmpty
+    
+    case passwordInResentHistory
+    case uppercaseMissInPassword
+    case lowercaseMissInPassword
+    case numberMissInPassword
 }
 extension UpdatePasswordErrors: LocalizedError {
     var errorDescription: String? {
@@ -38,6 +43,15 @@ extension UpdatePasswordErrors: LocalizedError {
             return TextConstants.repeatPasswordIsEmpty
         case .captchaAnswerIsEmpty:
             return TextConstants.thisTextIsEmpty
+        
+        case .passwordInResentHistory:
+            return TextConstants.passwordInResentHistory
+        case .uppercaseMissInPassword:
+            return TextConstants.uppercaseMissInPassword
+        case .lowercaseMissInPassword:
+            return TextConstants.lowercaseMissInPassword
+        case .numberMissInPassword:
+            return TextConstants.numberMissInPassword
         }
     }
 }
