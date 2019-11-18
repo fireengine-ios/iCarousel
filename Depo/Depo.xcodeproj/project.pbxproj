@@ -3139,7 +3139,7 @@
 		8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
-		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CC301E722C0E757005EA404 /* billo.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* billo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -6659,7 +6659,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				0302B73C237023590005D78F /* LifeDriveNotificationService.appex in Embed App Extensions */,
-				8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */,
+				8CC301E722C0E757005EA404 /* billo.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
 				8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */,
@@ -8050,7 +8050,7 @@
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeDrive-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C3BA2DF22B3CC32006D901E /* billo.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = billo.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA33E22B3CC45006D901E /* LifeDriveShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveShared.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA37822B3CC49006D901E /* LifeDriveFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveProviderUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -9453,7 +9453,7 @@
 				78B2D34A204AA5F500D096DC /* LifeTech-NotificationService.appex */,
 				CEBA0940214BCC63007A0CE3 /* LifeboxUnitTests.xctest */,
 				CE784F1C22A685FB00662219 /* lifedrive.app */,
-				8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */,
+				8C3BA2DF22B3CC32006D901E /* billo.appex */,
 				8C3BA33E22B3CC45006D901E /* LifeDriveShared.appex */,
 				8C3BA37822B3CC49006D901E /* LifeDriveFileProvider.appex */,
 				8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */,
@@ -17198,7 +17198,7 @@
 			);
 			name = "LifeDrive-widget";
 			productName = "autosync-widget";
-			productReference = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */;
+			productReference = 8C3BA2DF22B3CC32006D901E /* billo.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		8C3BA2E122B3CC45006D901E /* LifeDriveShared */ = {
@@ -25996,7 +25996,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = billo;
 				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
 				SKIP_INSTALL = YES;
@@ -26036,7 +26036,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = billo;
 				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
 				SKIP_INSTALL = YES;
@@ -26075,7 +26075,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = billo;
 				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Today Extension";
 				SKIP_INSTALL = YES;
@@ -26114,7 +26114,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = billo;
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
