@@ -110,7 +110,7 @@ class LoginInteractor: LoginInteractorInput {
         if let handler = handler {
             self.output?.loginDeletedAccount(deletedAccountHandler: handler)
             
-            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .delete, eventLabel: .login)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .deleteAccount, eventLabel: .login)
         } else {
             self.processLogin(login: login, headers: headers)
         }
@@ -150,8 +150,10 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
+        let loginType: GADementionValues.login = Validator.isValid(phone: login) ? .gsm : .email
+        
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
-            analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
+            analyticsService.trackLoginEvent(loginType: loginType, error: .incorrectUsernamePassword)
             output?.fieldError(type: .loginIsNotValid)
             loginRetries += 1
             return
@@ -174,7 +176,7 @@ class LoginInteractor: LoginInteractorInput {
             
         }, fail: { [weak self] errorResponse in
             let loginError = LoginResponseError(with: errorResponse)
-            self?.analyticsService.trackLoginEvent(error: loginError)
+            self?.analyticsService.trackLoginEvent(loginType: loginType, error: loginError)
             
             if !(loginError == .needCaptcha || loginError == .noInternetConnection) {
                 self?.loginRetries += 1
@@ -298,6 +300,10 @@ class LoginInteractor: LoginInteractorInput {
     func trackScreen() {
         analyticsService.logScreen(screen: .loginScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
+    }
+    
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
+        analyticsService.trackSupportEvent(screenType: .login, subject: type, isSupportForm: false)
     }
     
     func rememberMe(state: Bool) {

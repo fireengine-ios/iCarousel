@@ -51,6 +51,9 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func showError(error: String) {
         view.endSaving()
+                
+        interactor.trackState(.save(isSuccess: false), errorType: GADementionValues.errorType(with: error))
+        
         UIApplication.showErrorAlert(message: error)
     }
     
@@ -63,6 +66,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func tapEditButton() {
         view.setupEditState(true)
+        interactor.trackState(.edit, errorType: nil)
     }
     
     func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
@@ -71,6 +75,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func dataWasUpdated() {
         view.setupEditState(false)
+        interactor.trackState(.save(isSuccess: true), errorType: nil)
     }
     
     func isTurkcellUser() -> Bool {
@@ -82,6 +87,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?) {
+        interactor.trackSetSequrityQuestion()
         router.goToSetSecretQuestion(selectedQuestion: selectedQuestion, delegate: self)
     }
     

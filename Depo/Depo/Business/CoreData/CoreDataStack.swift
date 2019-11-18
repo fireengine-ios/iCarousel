@@ -8,9 +8,17 @@
 
 import Foundation
 
+protocol CoreDataStackDelegate: class {
+    func onCoreDataStackSetupCompleted()
+}
+
 
 protocol CoreDataStack: class {
     static var shared: CoreDataStack { get }
+    
+    var delegates: MulticastDelegate<CoreDataStackDelegate> { get }
+    
+    var isReady: Bool { get }
     
     func setup(completion: @escaping VoidHandler)
     
@@ -45,6 +53,10 @@ extension CoreDataStack {
 final class CoreDataStack_ios9: CoreDataStack {
     static let shared: CoreDataStack = CoreDataStack_ios9()
     
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
+    
+    private(set) var isReady = false
+    
     let migrator = CoreDataMigrator()
 
     let mainContext: NSManagedObjectContext
@@ -58,9 +70,9 @@ final class CoreDataStack_ios9: CoreDataStack {
     private let storeCoordinator: NSPersistentStoreCoordinator = {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: CoreDataMigrationModel.current.managedObjectModel)
         do {
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                           NSInferMappingModelAutomaticallyOption: false]
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: CoreDataMigrationModel.current.modelURL, options: options)
+//            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+//                           NSInferMappingModelAutomaticallyOption: false]
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: CoreDataMigrationModel.current.modelURL, options: nil)
         } catch {
             let errorMessage = "Error migrating store: \(error)"
             debugLog(errorMessage)
@@ -78,16 +90,17 @@ final class CoreDataStack_ios9: CoreDataStack {
     
     func setup(completion: @escaping VoidHandler) {
         migrateStoreIfNeeded { [weak self] in
+            self?.isReady = true
+            self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
             completion()
         }
-        completion()
     }
     
     private func migrateStoreIfNeeded(completion: @escaping () -> Void) {
         let storeURL = CoreDataConfig.storeUrl
         if migrator.requiresMigration(at: storeURL) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.migrator.migrateStore(at: storeURL)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.migrator.migrateStore(at: storeURL)
                 
                 DispatchQueue.main.async {
                     completion()
@@ -125,15 +138,24 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     static let shared: CoreDataStack = CoreDataStack_ios10()
     
+    let delegates = MulticastDelegate<CoreDataStackDelegate>()
+    
+    private(set) var isReady = false
+    
     private let migrator = CoreDataMigrator()
     
     private let container: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort)
-//        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+        let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: CoreDataMigrationModel.current.managedObjectModel)
+        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
-    let mainContext: NSManagedObjectContext
+    var mainContext: NSManagedObjectContext {
+        let context = container.viewContext
+        
+        return context
+    }
     
     var newChildBackgroundContext: NSManagedObjectContext {
         /// don't set parent for newBackgroundContext(), it will crash
@@ -142,10 +164,7 @@ final class CoreDataStack_ios10: CoreDataStack {
     }
     
     
-    private init() {
-        mainContext = container.viewContext
-        mainContext.automaticallyMergesChangesFromParent = true
-    }
+    private init() {}
     
     
     func setup(completion: @escaping VoidHandler) {
@@ -155,6 +174,8 @@ final class CoreDataStack_ios10: CoreDataStack {
                     fatalError("was unable to load store \(error!)")
                 }
                 
+                self?.isReady = true
+                self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
                 completion()
             }
         }

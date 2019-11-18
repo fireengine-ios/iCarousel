@@ -29,6 +29,15 @@ struct RouteRequests {
         }
     }()
     
+    
+    static let paycellShortUrlString: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://mylifebox.com/"
+        }
+    }()
+    
     static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
     
     static let unsecuredAuthenticationUrl: String = {
@@ -199,6 +208,11 @@ struct RouteRequests {
         static let importedTracks = importedPlaylists +/ "track"
     }
     
+    // MARK: - Campaign
+    
+    static let campaignApi = baseUrl +/ "campaign"
+    static let campaignPhotopick = campaignApi +/ "photopick"
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
@@ -282,5 +296,5 @@ struct RouteRequests {
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
     
-    static let paycellWebUrl = baseShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=google.com"
+    static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 }

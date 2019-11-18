@@ -14,4 +14,7 @@ protocol HomePageViewInput: class, CurrentNavController {
         
     func needShowSpotlight(type: SpotlightType)
     
+    func showGiftBox()
+    
+    func hideGiftBox()
 }

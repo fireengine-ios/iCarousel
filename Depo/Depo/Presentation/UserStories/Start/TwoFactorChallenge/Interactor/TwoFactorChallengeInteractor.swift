@@ -14,6 +14,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     private var accountWarningService: AccountWarningService?
     private lazy var eulaService = EulaService()
     
+    private var isFirstAppear = true
+    
     init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
         self.otpParams = otpParams
         self.challenge = challenge
@@ -43,7 +45,25 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         return challenge.challengeType.getOTPDescription(for: status)
     }
     
+    override func trackScreen(isTimerExpired: Bool) {
+        let screen: AnalyticsAppScreens = isTimerExpired ? .enterSecurityCodeResend : .enterSecurityCode
+        
+        analyticsService.logScreen(screen: screen)
+        
+        if isFirstAppear {
+            analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                                eventActions: challenge.challengeType.GAAction,
+                                                eventLabel: .confirm)
+            
+            isFirstAppear = false
+        }
+    }
+    
     override func resendCode() {
+        analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                            eventActions: challenge.challengeType.GAAction,
+                                            eventLabel: .resendCode)
+        
         authenticationService.twoFactorAuthChallenge(token: challenge.token,
                                                      authenticatorId: challenge.userData,
                                                      type: challenge.challengeType.rawValue) { [weak self] response in
@@ -51,6 +71,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             case .success(let parameters):
                 self?.otpParams = parameters
                 self?.output.resendCodeRequestSucceeded()
+                
+                self?.trackScreen(isTimerExpired: false)
                 
             case .failed(let error):
                 let errorResponse = ErrorResponse.error(error)
@@ -78,10 +100,21 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                         self?.output.verificationFailed(with: error.localizedDescription)
                     })
                 case .failed(let error):
-                    self?.output.verificationFailed(with: error.localizedDescription)
+                    let errorText = error.localizedDescription
+                    self?.output.verificationFailed(with: errorText)
+
+                    if let action = self?.challenge.challengeType.GAAction {
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                                                  eventActions: action,
+                                                                  eventLabel: .confirmStatus(isSuccess: false),
+                                                                  errorType: GADementionValues.errorType(with: errorText))
+                    }
+                    
                 }
+                
             }
         }
+        
     }
     
     override func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
@@ -106,6 +139,10 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     private func verifyProcess() {
         AccountService().updateBrandType()
         self.output.verificationSucces()
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                            eventActions: challenge.challengeType.GAAction,
+                                            eventLabel: .confirmStatus(isSuccess: true))
     }
     
     func updateUserLanguage() {
@@ -187,7 +224,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         if let handler = handler {
             self.output.loginDeletedAccount(deletedAccountHandler: handler)
             
-            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .delete, eventLabel: .login)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .deleteAccount, eventLabel: .login)
         } else {
             self.verifyProcess()
         }

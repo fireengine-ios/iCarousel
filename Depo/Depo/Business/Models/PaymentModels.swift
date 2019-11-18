@@ -18,7 +18,7 @@ struct PaymentMethod {
     let name: String
     let priceLabel: String
     let type: PaymentType
-    let action: (_ name: String) -> Void
+    let action: VoidHandler
 }
 
 enum PaymentType {
@@ -50,5 +50,19 @@ enum PaymentType {
             title = TextConstants.paymentTitleInvoice
         }
         return title
+    }
+    
+    func quotaPaymentType(quota: String) -> GAEventLabel.QuotaPaymentType {
+        let type: GAEventLabel.QuotaPaymentType
+        switch self {
+        case .appStore:
+            type = .appStore(quota)
+        case .paycell:
+            type = .creditCard(quota)
+        case .slcm:
+            type = .chargeToBill(quota)
+        }
+        
+        return type
     }
 }

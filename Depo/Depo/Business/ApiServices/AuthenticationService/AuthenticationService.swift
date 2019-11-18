@@ -108,7 +108,7 @@ class SignUpUser: BaseRequestParametrs {
     let captchaAnswer: String?
     var brandType: String {
         #if LIFEDRIVE 
-            return "LIFEDRIVE"
+            return "BILLO"
         #else
             return "LIFEBOX"
         #endif
@@ -349,6 +349,8 @@ class AuthenticationService: BaseRequestService {
                         
                         if let statusCode = response.response?.statusCode, statusCode == 403 {
                             
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = true
+
                             guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
                                 assertionFailure()
                                 return
@@ -358,7 +360,10 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            CacheManager.shared.actualizeCache(completion: nil)
+                            CacheManager.shared.actualizeCache()
+                            
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = false
+                            
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -389,7 +394,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache(completion: nil)
+                    CacheManager.shared.actualizeCache()
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -411,6 +416,8 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
+            self.cancellAllRequests()
+            
             CellImageManager.clear()
             FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
             FreeAppSpace.session.handleLogout()
@@ -432,7 +439,6 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             
             self.player.stop()
-            self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
             
@@ -514,7 +520,7 @@ class AuthenticationService: BaseRequestService {
         debugLog("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             if self?.tokenStorage.refreshToken == nil {
-                let error = ErrorResponse.string(TextConstants.errorServer)
+                let error = ErrorResponse.error(error)
                 fail?(error)
             } else {
                 self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
@@ -522,7 +528,7 @@ class AuthenticationService: BaseRequestService {
                         self?.tokenStorage.accessToken = accessToken
                         success?()
                     } else {
-                        let error = ErrorResponse.string(TextConstants.errorServer)
+                        let error = ErrorResponse.error(error)
                         fail?(error)
                     }
                 }
@@ -672,7 +678,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            CacheManager.shared.actualizeCache(completion: nil)
+                            CacheManager.shared.actualizeCache()
                             handler(.success(headers))
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in

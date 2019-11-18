@@ -19,6 +19,8 @@ protocol HomePageInteractorInput {
     func needCheckQuota()
     
     func trackScreen()
+    func trackGiftTapped()
 
     func updateLocalUserDetail()
+    
 }

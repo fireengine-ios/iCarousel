@@ -128,12 +128,11 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
 
-    private let errorView: ErrorBannerView = {
-        let newValue = ErrorBannerView()
-        newValue.isHidden = true
-
-        return newValue
-    }()
+    @IBOutlet private weak var errorView: ErrorBannerView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -183,8 +182,6 @@ final class RegistrationViewController: ViewController {
     
     private func setupStackView() {
         prepareFields()
-        
-        alertsStackView.addArrangedSubview(errorView)
 
         stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(emailEnterView)
@@ -319,14 +316,13 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showErrorTitle(withText: String) {
+        errorView.message = withText
+        
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.errorView.message = withText
             self.errorView.isHidden = false
-            
-            self.view.layoutIfNeeded()
         }
         
-        let errorRect = self.view.convert(errorView.frame, to: self.view)
+        let errorRect = view.convert(errorView.frame, to: view)
         scrollView.scrollRectToVisible(errorRect, animated: true)
     }
     

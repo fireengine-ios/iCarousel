@@ -387,8 +387,8 @@ class FileService: BaseRequestService {
 
                 self.completedOperationsCount += 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
-                                                                            allOperations: self.allOperationsCount,
-                                                                            completedOperations: self.completedOperationsCount)
+                                                                 allOperations: self.allOperationsCount,
+                                                                 completedOperations: self.completedOperationsCount)
             }, fail: { [weak self] error in
                 self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER

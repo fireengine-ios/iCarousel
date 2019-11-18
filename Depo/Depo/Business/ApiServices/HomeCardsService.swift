@@ -35,7 +35,7 @@ extension HomeCardsServiceImp: HomeCardsService {
                     for (i, object) in array.enumerated() {
                         object.order = i + 1
                     }
-                    handler(ResponseResult.success(array))
+                    handler(.success(array))
                 case .failure(let error):
                     
                     debugLog("HomeCardsService all response: \(response)")
@@ -43,7 +43,7 @@ extension HomeCardsServiceImp: HomeCardsService {
                     
                     let backendError = ResponseParser.getBackendError(data: response.data,
                                                                       response: response.response)
-                    handler(ResponseResult.failed(backendError ?? error))
+                    handler(.failed(backendError ?? error))
                 }
             }
     }

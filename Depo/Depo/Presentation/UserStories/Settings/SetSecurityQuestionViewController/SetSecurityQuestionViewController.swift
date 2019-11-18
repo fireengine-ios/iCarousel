@@ -18,11 +18,13 @@ protocol SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
 
-final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
+final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit, ControlTabBarProtocol {
     
     private let accountService = AccountService()
     private lazy var answer = SecretQuestionWithAnswer()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     var delegate: SetSecurityQuestionViewControllerDelegate?
+    private var questions = [SecretQuestionsResponse]()
     
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
@@ -70,6 +72,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         return view
     }()
     
+    // MARK: - Init
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         initSetup()
@@ -90,7 +94,17 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        analyticsService.logScreen(screen: .securityQuestion)
+        analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestion)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         checkButtonStatus()
+        navigationBarWithGradientStyle()
+        hideTabBar()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -106,26 +120,39 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         guard
             let captchaAnswer = captchaView.captchaAnswerTextField.text,
             let questionId = answer.questionId,
+            let questionIndex = questions.firstIndex(where: { $0.id == questionId }),
             let securityQuestionAnswer = answer.questionAnswer
         else {
             assertionFailure("all fields should not be nil")
             return
         }
-        
+           
         accountService.updateSecurityQuestion(questionId: questionId,
                                               securityQuestionAnswer: securityQuestionAnswer,
                                               captchaId: captchaView.currentCaptchaUUID,
-                                              captchaAnswer: captchaAnswer) { result in
+                                              captchaAnswer: captchaAnswer) { [weak self] result in
+                                                
+                                                guard let self = self else {
+                                                    return
+                                                }
                                                 
                                                 switch result {
                                                 case .success:
                                                     self.questionWasSuccessfullyUpdated()
+                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
+                                                                                             eventLabel: .success)
                                                 case .failure(let error):
-                                                    self.handleServerErrors(error)                                                }
+                                                    self.handleServerErrors(error)
+                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
+                                                                                             eventLabel: .failure,
+                                                                                             errorType: error.gaErrorType)
+                                                }
         }
     }
     
-    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate) {
+    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate?) {
         self.delegate = delegate
         answer.questionId = selectedQuestion?.id
         setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
@@ -211,20 +238,21 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
 }
 
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
-    func selectSecurityQuestionTapped() {
-            accountService.getListOfSecretQuestions { [weak self] response in
-                guard let self = self else {
-                    assertionFailure()
-                    return
-                }
-                
-                switch response {
-                case .success( let questions):
-                    let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
-                    self.present(controller, animated: true)
-                case .failed(let error):
-                    self.showErrorPopUp(error: error)
-                }
+    func selectSecurityQuestionTapped() {        
+        accountService.getListOfSecretQuestions { [weak self] response in
+            guard let self = self else {
+                assertionFailure()
+                return
             }
+            
+            switch response {
+            case .success( let questions):
+                self.questions = questions
+                let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
+                self.present(controller, animated: true)
+            case .failed(let error):
+                self.showErrorPopUp(error: error)
+            }
+        }
     }
 }

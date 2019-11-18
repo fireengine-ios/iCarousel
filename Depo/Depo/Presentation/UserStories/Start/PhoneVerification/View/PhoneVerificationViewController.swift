@@ -33,13 +33,13 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     
     @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
     
-    @IBOutlet private weak var resendCodeButton: RoundedInsetsButton! {
+    @IBOutlet private weak var resendCodeButton: BlueButtonWithWhiteText! {
         willSet {
             newValue.adjustsFontSizeToFitWidth()
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
             newValue.isOpaque = true
         }
     }

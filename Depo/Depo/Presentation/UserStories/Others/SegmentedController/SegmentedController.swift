@@ -38,7 +38,7 @@ extension SegmentedChildController where Self: UIViewController {
 //    func segmentedControllerEndEditMode()
 //}
 
-final class SegmentedController: BaseViewController, NibInit {
+class SegmentedController: BaseViewController, NibInit {
     
     static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
@@ -76,8 +76,7 @@ final class SegmentedController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        homePageNavigationBarStyle()//without refactor
-//        navigationBarWithGradientStyle()
+
         needToShowTabBar = true
         setupSegmentedControl()
     }
@@ -99,7 +98,7 @@ final class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
-    private func setup(with controllers: [UIViewController]) {
+    func setup(with controllers: [UIViewController]) {
         guard !controllers.isEmpty, let controllers = controllers as? [BaseViewController] else {
             assertionFailure()
             return
@@ -140,6 +139,7 @@ final class SegmentedController: BaseViewController, NibInit {
         childController.didMove(toParentViewController: self)
     }
 }
+
 
 //extension SegmentedController: PhotoVideoDataSourceDelegate {
 //    func selectedModeDidChange(_ selectingMode: Bool) {

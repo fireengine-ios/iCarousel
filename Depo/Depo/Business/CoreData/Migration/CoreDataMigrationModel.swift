@@ -27,15 +27,15 @@ struct CoreDataConfig {
         return docURL.appendingPathComponent(storeNameFull)
     }
     
-//    @available(iOS 10.0, *)
-//    static var storeDescription: NSPersistentStoreDescription {
-//        let description = NSPersistentStoreDescription(url: storeUrl)
-//        description.type = NSSQLiteStoreType
-//        description.shouldMigrateStoreAutomatically = true
-//        description.shouldInferMappingModelAutomatically = false
-//        
-//        return description
-//    }
+    @available(iOS 10.0, *)
+    static var storeDescription: NSPersistentStoreDescription {
+        let description = NSPersistentStoreDescription(url: storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = false
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
+    }
 }
 
 struct CoreDataMigrationStep {
@@ -55,7 +55,7 @@ enum CoreDataVersion: Int, CaseIterable {
         if rawValue == 1 {
             return CoreDataConfig.modelBaseName
         } else {
-            return CoreDataConfig.modelBaseName + "\(rawValue)"
+            return CoreDataConfig.modelBaseName + " " + "\(rawValue)"
         }
     }
     

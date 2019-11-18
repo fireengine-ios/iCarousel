@@ -106,7 +106,8 @@ final class VerifyEmailPopUp: BasePopUpController {
     private let activityManager = ActivityIndicatorManager()
 
     private lazy var accountService = AccountService()
-        
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     private var isRemoveLetter: Bool = false
     private var currentSecurityCode = ""
     private var inputTextLimit = 6
@@ -116,6 +117,8 @@ final class VerifyEmailPopUp: BasePopUpController {
         super.viewDidLoad()
 
         setup()
+        
+        analyticsService.logScreen(screen: .verifyEmailPopUp)
     }
     
     //MARK: Utility methods
@@ -128,8 +131,12 @@ final class VerifyEmailPopUp: BasePopUpController {
         
         contentView = popUpView
 
+        #if DEBUG
+        laterButton.isHidden = false
+        #else
         let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = false//!allowSkip
+        laterButton.isHidden = !allowSkip
+        #endif
         
         codeTextFields.forEach({
             $0.delegate = self
@@ -196,6 +203,8 @@ final class VerifyEmailPopUp: BasePopUpController {
     private func showPopUp() {
         updateEmail()
         
+        analyticsService.logScreen(screen: .verifyEmailPopUp)
+
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
         }
@@ -305,6 +314,10 @@ final class VerifyEmailPopUp: BasePopUpController {
     }
     
     @IBAction func onChangeEmailTap(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                            eventActions: .otp,
+                                            eventLabel: .changeEmail)
+        
         hidePopUp { [weak self] in
             let router = RouterVC()
             let controller = router.changeEmailPopUp
@@ -317,6 +330,10 @@ final class VerifyEmailPopUp: BasePopUpController {
     }
     
     @IBAction func onLaterTap(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                            eventActions: .otp,
+                                            eventLabel: .later)
+        
         dismissPopUp()
     }
     
@@ -336,6 +353,10 @@ extension VerifyEmailPopUp {
             
             switch response {
             case .success(_):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: true))
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.hidePopUp {
                         let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
@@ -354,6 +375,11 @@ extension VerifyEmailPopUp {
                 }
                 
             case .failed(let error):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
@@ -366,19 +392,26 @@ extension VerifyEmailPopUp {
     private func resendCode(isAutomaticaly: Bool = false) {
         startActivityIndicator()
         
-        accountService.sendEmailVerificationCode { response in
-            self.stopActivityIndicator()
+        accountService.sendEmailVerificationCode { [weak self] response in
+            self?.stopActivityIndicator()
             
             switch response {
             case .success(_):
-
                 if isAutomaticaly {
                     SingletonStorage.shared.isEmailVerificationCodeSent = true
+                } else {
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                              eventActions: .otp,
+                                                              eventLabel: .codeResent(isSuccessed: true))
                 }
                 
                 break
             case .failed(let error):
-                
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .codeResent(isSuccessed: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+
                 DispatchQueue.main.async { [weak self] in
                     self?.clearCode()
                     self?.enableConfirmButtonIfNeeded()

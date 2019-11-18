@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, SearchModuleOutput {
+final class HomePageViewController: BaseViewController, HomePageViewInput, HomeCollectionViewDataSourceDelegate, SearchModuleOutput {
 
     //MARK: IBOutlet
     @IBOutlet weak var contentView: UIView!
@@ -22,7 +22,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     var navBarConfigurator = NavigationBarConfigurator()
     
-    let homePageDataSource = BaseCollectionViewDataSource()
+    let homePageDataSource = HomeCollectionViewDataSource()
     
     private var refreshControl = UIRefreshControl()
 
@@ -30,20 +30,20 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     private var homepageIsActiveAndVisible: Bool {
         var result = false
-        if let topController = navigationController?.topViewController {
-            if topController == self {
-                result = true
-            }
+        if let topController = navigationController?.topViewController, topController == self {
+            result = true
         }
         return result
     }
+    
+    private var isGiftButtonEnabled = false
     
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true
         
-        debugLog("HomePage viewDidiLoad")
+        debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         debugLog("HomePage DataSource setuped")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -59,21 +59,27 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         updateNavigationItemsState(state: true)
-        homePageDataSource.isViewActive = true
+        
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
-        
-        output.viewWillAppear()
-        
+                
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
+        
+        homePageNavigationBarStyle()
+        
+        output.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         debugLog("HomePage viewDidAppear")
-        homePageDataSource.isActive = true
+        
+        homePageDataSource.isViewActive = true
+
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
             configureNavBarActions()
@@ -88,18 +94,13 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        hideSpotlightIfNeeded()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
         homePageDataSource.isViewActive = false
-        homePageDataSource.isActive = false///Do we need pretty much same flag?
+
+        hideSpotlightIfNeeded()
     }
     
     deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
-        NotificationCenter.default.removeObserver(self)
     }
     
     func updateNavigationItemsState(state: Bool) {
@@ -123,8 +124,14 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             self?.output.showSettings()
         })
         navBarConfigurator.configure(right: [setting, search], left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        if isGiftButtonEnabled {
+            let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
+                self?.output.giftButtonPressed()
+            })
+            navBarConfigurator.append(rightButton: gift, leftButton: nil)
+        }
         
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
     func cancelSearch() { }
@@ -140,6 +147,16 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         showSpinner()
     }
     
+    func showGiftBox() {
+        isGiftButtonEnabled = true
+        configureNavBarActions()
+    }
+    
+    func hideGiftBox() {
+        isGiftButtonEnabled = false
+        configureNavBarActions()
+    }
+    
     //MARK: Spotlight
     func needShowSpotlight(type: SpotlightType) {        
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
@@ -153,7 +170,6 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
             }
             
             if frame != .zero {
-                
                 let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
                     self?.output.shownSpotlight(type: type)
                     self?.output.closedSpotlight(type: type)
@@ -164,7 +180,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         }
     }
     
-    //MARK: BaseCollectionViewDataSourceDelegate
+    //MARK: HomeCollectionViewDataSourceDelegate
     func onCellHasBeenRemovedWith(controller: UIViewController) {
         
     }
@@ -212,12 +228,12 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
     
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.popUps.flatMap { SpotlightType(cardView: $0) })
+        cardTypes.append(contentsOf: homePageDataSource.cards.compactMap { SpotlightType(cardView: $0) })
         output.requestShowSpotlight(for: cardTypes)
     }
     
-    private func cellCoordinates<T: BaseView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
-        for (row, popupView) in homePageDataSource.popUps.enumerated() {
+    private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
+        for (row, popupView) in homePageDataSource.cards.enumerated() {
             if type(of: popupView) == cellType {
                 let indexPath = IndexPath(row: row, section: 0)
                 let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
@@ -236,7 +252,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
                     frame.size.height = popupView.spotlightHeight()
                     completion(frame)
                 } else {
-                    guard let layout = collectionView.collectionViewLayout as? CollectionViewLayout else {
+                    guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
                         completion(.zero)
                         return
                     }
@@ -245,7 +261,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         
                     let offset = layout.frameFor(indexPath: indexPath).origin.y
                     
-                    let isLastCell = indexPath.row == homePageDataSource.popUps.count - 1
+                    let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
                     
                     UIView.animate(withDuration: 0.1, animations: {
                         if isLastCell {
@@ -264,6 +280,7 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
                 return
             }
         }
+        
         completion (.zero)
     }
     
@@ -274,10 +291,13 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
         case .homePageIcon:
             let frameBounds = controller.frameForTabAtIndex(index: 0)
             frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
+            if !Device.operationSystemVersionLessThen(11) {
+                frame.origin.y -= UIApplication.shared.statusBarFrame.height
+            }
             completion(frame)
             
         case .homePageGeneral:
-            guard let premiumCardFrame = homePageDataSource.popUps.first?.frame else {
+            guard let premiumCardFrame = homePageDataSource.cards.first?.frame else {
                 assertionFailure("premiumCard should be presented")
                 completion(.zero)
                 return
@@ -292,8 +312,10 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, BaseC
                            height: collectionView.frame.height - premiumCardFrame.height - verticalSpace)
             
             completion(frame)
-        case .movieCard, .albumCard, .collageCard, .filterCard: //.animationCard,
+            
+        case .movieCard, .albumCard, .collageCard, .filterCard, .animationCard:
             cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
+            
         }
     }
     

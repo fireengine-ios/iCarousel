@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     var preferredNavigationBarStyle: NavigationBarStyle {
-        return .gradient
+        return .clear
     }
     // MARK: - Helpers
     
@@ -41,5 +41,29 @@ class ViewController: UIViewController {
         } else {
             statusBarHidden = hidden
         }
-    }    
+    }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.checkModalPresentationStyle()
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+extension UIViewController {
+    func checkModalPresentationStyle() {
+        guard #available(iOS 13.0, *) else {
+            return
+        }
+        
+        #if swift(>=5.0)
+            if modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+                modalPresentationStyle = .fullScreen
+            }
+        #else //TODO: as soon as jenkins is updated to xcode 11 - remove this if
+            if modalPresentationStyle.isContained(in: [ .pageSheet]) {
+                modalPresentationStyle = .fullScreen
+            }
+        #endif
+        
+    }
 }

@@ -26,7 +26,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         dataStorage.signUpUserInfo = userInfo
     }
     
-    func trackScreen() {
+    func trackScreen(isTimerExpired: Bool) {
         analyticsService.logScreen(screen: .signUpOTP)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
@@ -132,7 +132,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
             
             let loginError = LoginResponseError(with: errorResponse)
             
-            self.analyticsService.trackLoginEvent(error: loginError)
+            self.analyticsService.trackLoginEvent(loginType: .rememberLogin, error: loginError)
             
             let incorrectCredentioal = true
             if (incorrectCredentioal) {

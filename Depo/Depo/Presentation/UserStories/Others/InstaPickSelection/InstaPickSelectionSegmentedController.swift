@@ -41,8 +41,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
-    private let instapickService: InstapickService = factory.resolve()
-    
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.index(of: albumsVC) {
             return index
@@ -113,6 +111,12 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         trackScreen()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
+    }
+    
     private func trackScreen() {
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickPhotoSelection)
@@ -169,27 +173,35 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         }
         
         dismiss(animated: true, completion: {
-            
-            let imagesUrls = self.selectedItems.flatMap({ $0.metadata?.mediumUrl })
-            let ids = self.selectedItems.flatMap({ $0.uuid })
-            
-            let topTexts = [TextConstants.instaPickAnalyzingText_0,
-                            TextConstants.instaPickAnalyzingText_1,
-                            TextConstants.instaPickAnalyzingText_2,
-                            TextConstants.instaPickAnalyzingText_3,
-                            TextConstants.instaPickAnalyzingText_4]
-            
-            let bottomText = TextConstants.instaPickAnalyzingBottomText
-            if let currentController = UIApplication.topController() {
-                let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
-                currentController.present(controller, animated: true, completion: nil)
-                
-                let instapickService: InstapickService = factory.resolve()
-                instapickService.startAnalyze(ids: ids, popupToDissmiss: controller)
-            }
+            self.presentInstaPickProgressPopUp()
         })
     }
     
+    private func presentInstaPickProgressPopUp() {
+        let imagesUrls = self.selectedItems.compactMap({ $0.metadata?.mediumUrl })
+        let ids = self.selectedItems.compactMap({ $0.uuid })
+        
+        let topTexts = [TextConstants.instaPickAnalyzingText_0,
+                        TextConstants.instaPickAnalyzingText_1,
+                        TextConstants.instaPickAnalyzingText_2,
+                        TextConstants.instaPickAnalyzingText_3,
+                        TextConstants.instaPickAnalyzingText_4]
+        
+        let bottomText = TextConstants.instaPickAnalyzingBottomText
+        if let currentController = UIApplication.topController() {
+            let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
+            
+            if let tabBarController = currentController as? TabBarViewController,
+               let controlerAfterDismissProgressPopUp = tabBarController.currentViewController as? InstaPickProgressPopupDelegate {
+                controller.delegate = controlerAfterDismissProgressPopUp
+                currentController.present(controller, animated: true, completion: nil)
+                controller.startAnalyze(ids: ids)
+            } else {
+                assertionFailure()
+            }
+        }
+    }
+
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {
         selectController(at: sender.selectedSegmentIndex)
     }
@@ -308,7 +320,6 @@ extension InstaPickSelectionSegmentedController {
         ]
         
         navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
         navigationBar.barStyle = .black
         navigationBar.isTranslucent = false
         navigationBar.tintColor = navigationTextColor

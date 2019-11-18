@@ -25,7 +25,8 @@ protocol PackagesInteractorInput {
     func trackPackageClick(plan: SubscriptionPlan, planIndex: Int)
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
-
+    func getQuotaInfo()
+    
     func getUserAuthority()
     func refreshActivePurchasesState(_ isActivePurchases: Bool)
 }

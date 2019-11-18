@@ -68,7 +68,6 @@ class SplashInteractor: SplashInteractorInput {
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
-                analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
             ///Additional check "if this is LTE",
@@ -78,6 +77,8 @@ class SplashInteractor: SplashInteractorInput {
             ///So we check second time.
             } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
+                    AccountService().updateBrandType()
+                    
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
                     
@@ -90,7 +91,7 @@ class SplashInteractor: SplashInteractorInput {
                     }, fail: { [weak self] error in
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
-                        self?.analyticsService.trackLoginEvent(error: loginError)
+                        self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                         self?.output.asyncOperationSuccess()
                         if error.isServerUnderMaintenance {
                             self?.output.onFailGetAccountInfo(error: error)
@@ -100,7 +101,7 @@ class SplashInteractor: SplashInteractorInput {
                     })
                 }, fail: { [weak self] response in
                     let loginError = LoginResponseError(with: response)
-                    self?.analyticsService.trackLoginEvent(error: loginError)
+                    self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                     self?.output.asyncOperationSuccess()
                     if response.isServerUnderMaintenance {
                         self?.output.onFailGetAccountInfo(error: response)
@@ -111,18 +112,18 @@ class SplashInteractor: SplashInteractorInput {
                 })
             } else {
                 output.asyncOperationSuccess()
-                analyticsService.trackLoginEvent(error: .serverError)
+                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .networkError)
                 failLogin()
             }
         } else {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache(completion: nil)
+                    CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     self?.successLogin()
-                }, fail: { error in
+                }, fail: { [weak self] error in
                     /// we don't need logout here
                     /// only internet error
                     //self?.failLogin()
@@ -141,7 +142,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func turkcellSuccessLogin() {
 
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.turkcellGSM)
+        analyticsService.trackLoginEvent(loginType: .turkcellGSM)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
 
         DispatchQueue.toMain {
@@ -150,7 +151,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.rememberLogin)
+        analyticsService.trackLoginEvent(loginType: .rememberLogin)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()

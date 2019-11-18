@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class AlbumCard: BaseView {
+final class AlbumCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -112,7 +112,7 @@ final class AlbumCard: BaseView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
-            previewImageView.loadImage(with: item, isOriginalImage: true)
+            previewImageView.loadImage(with: item)
         }
     }
     

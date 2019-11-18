@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, ViewForPopUpDelegate {
+class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, CardsContainerViewDelegate {
 
     var output: BaseFilesGreedViewOutput!
     
@@ -44,7 +44,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesTopLabel: UILabel?
     
-    var scrollablePopUpView = ViewForPopUp()
+    var scrollablePopUpView = CardsContainerView()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     

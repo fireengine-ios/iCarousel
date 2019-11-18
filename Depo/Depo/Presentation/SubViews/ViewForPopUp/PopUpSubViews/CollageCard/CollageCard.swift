@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class CollageCard: BaseView {
+final class CollageCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -85,7 +85,7 @@ final class CollageCard: BaseView {
     }
     
     override func viewWillShow() {
-        photoImageView.loadImage(with: item, isOriginalImage: true)
+        photoImageView.loadImage(with: item)
     }
     
     override func viewDidEndShow() {

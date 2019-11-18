@@ -19,6 +19,12 @@ final class PremiumInteractor {
 
 // MARK: PremiumInteractorInput
 extension PremiumInteractor: PremiumInteractorInput {
+    
+    func trackPackageClick(plan packages: SubscriptionPlan) {
+        ///there is may be only one package for becoming premium so packageIndex == 1
+        analyticsService.trackPackageClick(package: packages, packageIndex: 1)
+    }
+    
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in

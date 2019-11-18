@@ -10,6 +10,12 @@ import UIKit
 
 final class RadialGradientableLayer: CALayer {
     
+    var gradientColors: [CGColor] = InstaPickGradient.gradientColors {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     var isNeedGradient: Bool = true {
         didSet {
             setNeedsDisplay()
@@ -36,12 +42,15 @@ final class RadialGradientableLayer: CALayer {
     }
 
     override func draw(in ctx: CGContext) {
-        guard isNeedGradient else { return }
+        guard isNeedGradient else {
+            return
+        }
         ctx.saveGState()
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let gradient = CGGradient(colorsSpace: colorSpace,
-                                        colors: InstaPickGradient.gradientColors as CFArray,
-                                        locations: InstaPickGradient.locations) else {
+                                        colors: gradientColors as CFArray,
+                                        locations: InstaPickGradient.locations)
+        else {
             return
         }
         ctx.drawRadialGradient(gradient,

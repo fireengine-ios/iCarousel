@@ -14,7 +14,7 @@ final class PaymentPopUpController: UIViewController {
     
     @IBOutlet private weak var darkView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            newValue.backgroundColor = ColorConstants.backgroundViewColor
         }
     }
     

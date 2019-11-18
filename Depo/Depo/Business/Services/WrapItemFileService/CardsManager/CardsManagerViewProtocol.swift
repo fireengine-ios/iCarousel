@@ -13,9 +13,7 @@ protocol CardsManagerViewProtocol {
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?)
     
     func startOperationsWith(serverObjects: [HomeCardResponse])
-    
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int)
-    
+        
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int)
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?)
@@ -26,7 +24,7 @@ protocol CardsManagerViewProtocol {
     
     func isEqual(object: CardsManagerViewProtocol) -> Bool
     
-    func addNotPermittedPopUpViewTypes(types: [OperationType])
+    func addNotPermittedCardViewTypes(types: [OperationType])
     
     func configureInstaPick(with analysisStatus: InstapickAnalyzesCount)
     

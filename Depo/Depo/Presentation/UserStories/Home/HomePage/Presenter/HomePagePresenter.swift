@@ -60,13 +60,13 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         spotlightManager.delegate = self
         interactor.trackScreen()
         
-        if !isFirstAppear {
-            view.startSpinner()
-            interactor.updateLocalUserDetail()
-        } else {
+        if isFirstAppear {
             isFirstAppear = false
             
             AnalyticsService.updateUser()
+        } else {
+            view.startSpinner()
+            interactor.updateLocalUserDetail()
         }
     }
     
@@ -195,6 +195,11 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         presentPopUpsGroup?.leave()
     }
     
+    func giftButtonPressed() {
+        interactor.trackGiftTapped()
+        router.openCampaignDetails()
+    }
+    
     func fillCollectionView(isReloadAll: Bool) {
         
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
@@ -236,6 +241,15 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
         }
     }
+    
+    func showGiftBox() {
+        view.showGiftBox()
+    }
+    
+    func hideGiftBox() {
+        view.hideGiftBox()
+    }
+    
 }
 
 //MARK: - SpotlightManagerDelegate

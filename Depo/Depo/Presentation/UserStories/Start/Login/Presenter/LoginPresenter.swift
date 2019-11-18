@@ -179,6 +179,7 @@ extension LoginPresenter: LoginViewOutput {
     }
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
+        interactor.trackSupportSubjectEvent(type: type)
         isPresenting = true
         router.goToSubjectDetailsPage(type: type)
     }

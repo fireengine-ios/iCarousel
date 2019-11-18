@@ -176,10 +176,10 @@ enum AnalyticsAppScreens {
     case standartAccountDetails
     case standartPlusAccountDetails
     case premiumAccountDetails
-    ///
+    ///MyProfile
     case myStorage
     case changePassword
-    ///
+    ///Spotify
     case spotifyImport
     case spotifyImportPlaylistSelection
     case spotifyImportPlaylistDetails
@@ -188,8 +188,30 @@ enum AnalyticsAppScreens {
     case spotifyPlaylistDetails
     case spotifyPlaylists
     case spotifyAuthentification
-    
+    ///TwoFactorAuth
+    case securityCheck
+    case enterSecurityCode
+    case enterSecurityCodeResend
+    ///EmailVerification
+    case verifyEmailPopUp
+    case changeEmailPopUp
+    ///CredsUpdateCheckPopUp
+    case periodicInfoScreen
+
     case info(FileType)
+    
+    case tbmatikPushNotification
+    case tbmatikHomePageCard
+    case tbmatikSwipePhoto(_ page: Int)
+    
+    case securityQuestion
+    case securityQuestionSelect
+    
+    case campaignSamsungPopupFirst
+    case campaignSamsungPopupLast
+    case campaignSamsungPopupBecomePremium
+    case campaignDetailDuring
+    case campaignDetailAfter
     
     var name: String {
         switch self {
@@ -326,6 +348,21 @@ enum AnalyticsAppScreens {
         case .spotifyAuthentification:
             return "Spotify Authentication "
         ///
+        case .securityCheck:
+            return "Security Check"
+        case .enterSecurityCode:
+            return "Enter Security Code"
+        case .enterSecurityCodeResend:
+            return "Enter Security Code - Resend Code"
+        ///
+        case .verifyEmailPopUp:
+            return "Email verification - Popup"
+        case .changeEmailPopUp:
+            return "Email verification - Change Email"
+        ///
+        case .periodicInfoScreen:
+            return "Periodic Info Screen"
+        ///
         case .info(let fileType):
             switch fileType {
             case .image:
@@ -343,6 +380,27 @@ enum AnalyticsAppScreens {
             default:
                 return "Info"
             }
+            
+        case .tbmatikHomePageCard:
+            return "Home-Page Card-TBMatik"
+        case .tbmatikPushNotification:
+            return "Push-Notification-TBMatik"
+        case .tbmatikSwipePhoto(let page):
+            return "TBMatik Swipe \(page)"
+        case .securityQuestion:
+            return "Security Question"
+        case .securityQuestionSelect:
+            return "Security Question - Select"
+        case .campaignSamsungPopupFirst:
+            return "Campaign - Samsung POP-UP First"
+        case .campaignSamsungPopupLast:
+            return "Campaign - Samsung POP-UP Last"
+        case .campaignSamsungPopupBecomePremium:
+            return "Campaign - Samsung POP-UP Become Premium"
+        case .campaignDetailDuring:
+            return "Campaign - Detail During"
+        case .campaignDetailAfter:
+            return "Campaign - Detail After"
         }
     }
 }
@@ -428,11 +486,15 @@ enum GAEventCantegory {
     case videoAnalytics
     case errors
     case popUp
-    
+    case twoFactorAuthentication
+    case emailVerification
+    case securityQuestion
+    case campaign
+
     var text: String {
         switch self {
         case .enhancedEcommerce:
-            return "Enhanced E-Commerce"
+            return "Enhance Ecommerce"
         case .functions:
             return "Functions"
         case .videoAnalytics:
@@ -441,6 +503,14 @@ enum GAEventCantegory {
             return "Errors"
         case .popUp:
             return "POP UP"
+        case .twoFactorAuthentication:
+            return "Two Factor Authentication"
+        case .emailVerification:
+            return "E-mail verification"
+        case .securityQuestion:
+            return "Security Question"
+        case .campaign:
+            return "Campaign"
         }
     }
 }
@@ -502,6 +572,21 @@ enum GAEventAction {
     case connectedAccounts
     case deleteAccount
     case periodicInfoUpdate
+    case myProfile
+    case msisdn
+    case email
+    case otp
+    case changeEmail
+    case clickQuotaPurchase
+    case clickFeaturePurchase
+    case tbmatik
+    case supportLogin
+    case supportSignUp
+    case securityQuestionClick
+    case saveSecurityQuestion(_ number: Int)
+    case giftIcon
+    case campaignDetail
+    case analyzeWithPhotopick
 
     var text: String {
         switch self {
@@ -596,6 +681,36 @@ enum GAEventAction {
             return "Delete Account"
         case .periodicInfoUpdate:
             return "Periodic Info Update"
+        case .myProfile:
+            return "My Profile"
+        case .msisdn:
+            return "msisdn"
+        case .email:
+            return "E-mail"
+        case .otp:
+            return "OTP-1"
+        case .changeEmail:
+            return "Email"
+        case .clickQuotaPurchase:
+            return "Click Quota Purchase"
+        case .clickFeaturePurchase:
+            return "Click Feature Purchase"
+        case .tbmatik:
+            return "TBMatik"
+        case .supportLogin:
+            return "Support Form - Login"
+        case .supportSignUp:
+            return "Support Form - Sign Up"
+        case .securityQuestionClick:
+            return "Set Security Question - Click"
+        case .saveSecurityQuestion(let number):
+            return "Save Q\(number)"
+        case .giftIcon:
+            return "Gift icon"
+        case .campaignDetail:
+            return "Campaign Detail"
+        case .analyzeWithPhotopick:
+            return "Analyze with photopick"
         }
     }
 }
@@ -691,6 +806,119 @@ enum GAEventLabel {
         }
     }
     
+    enum QuotaPaymentType {
+        case chargeToBill(_ quota: String)
+        case appStore(_ quota: String)
+        case creditCard(_ quota: String)
+        
+        var text: String {
+            switch self {
+            case .chargeToBill(let quota):
+                return "Charge to Bill - " + quota
+            case .appStore(let quota):
+                return "App Store - " + quota
+            case .creditCard(let quota):
+                return "Credit Card - " + quota
+            }
+        }
+    }
+    
+    enum TBMatikEvent {
+        case notification
+        case seeTimeline
+        case share
+        case close
+        case letsSee
+        case selectAlbum
+        case deleteAlbum
+        case deletePhoto
+        
+        var text: String {
+            switch self {
+            case .notification:
+                return "Notification"
+            case .seeTimeline:
+                return "See Timeline"
+            case .share:
+                return "Each Channel"
+            case .close:
+                return "Home Page Card - Cancel"
+            case .letsSee:
+                return "Home Page Card - Lets see"
+            case .selectAlbum:
+                return "Album Click"
+            case .deleteAlbum:
+                return "Album Delete"
+            case .deletePhoto:
+                return "Photo Delete"
+            }
+        }
+    }
+    
+    enum SupportFormSubjectLoginEvent {
+        case subject1
+        case subject2
+        case subject3
+        case subject4
+        case subject5
+        case subject6
+        case subject7
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            case .subject4: text += "Q4"
+            case .subject5: text += "Q5"
+            case .subject6: text += "Q6"
+            case .subject7: text += "Q7"
+            }
+            
+            return text
+        }
+    }
+    
+    enum SupportFormSubjectSignUpEvent {
+        case subject1
+        case subject2
+        case subject3
+        
+        func text(isSupportForm: Bool) -> String {
+            var text = isSupportForm ? "Subject - " : ""
+            
+            switch self {
+            case .subject1: text += "Q1"
+            case .subject2: text += "Q2"
+            case .subject3: text += "Q3"
+            }
+            
+            return text
+        }
+    }
+    
+    enum CampaignEvent {
+        case neverParticipated
+        case notParticipated
+        case limitIsReached
+        case otherwise
+        
+        var text: String {
+            switch self {
+            case .neverParticipated:
+                return "Never participated"
+            case .notParticipated:
+                return "Not participated to the campaign today"
+            case .limitIsReached:
+                return "Participation limit is reached"
+            case .otherwise:
+                return "Otherwise"
+            }
+        }
+    }
+    
     case empty
     
     case success
@@ -754,8 +982,26 @@ enum GAEventLabel {
     case login
     case update
     case yes
-
-        var text: String {
+    case edit
+    case save(isSuccess: Bool)
+    case send
+    case confirm
+    case confirmStatus(isSuccess: Bool)
+    case resendCode
+    case codeResent(isSuccessed: Bool)
+    case changeEmail
+    case emailChanged(isSuccessed: Bool)
+    case later
+    case cancel
+    case storyOrVideo
+    case tbmatik(_ event: TBMatikEvent)
+    case paymentType(_ type: QuotaPaymentType)
+    case supportLoginForm(_ event: SupportFormSubjectLoginEvent, isSupportForm: Bool)
+    case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
+    case clickSecurityQuestion(number: Int)
+    case campaign(CampaignEvent)
+    
+    var text: String {
         switch self {
         case .empty:
             return ""
@@ -899,6 +1145,42 @@ enum GAEventLabel {
             return "Update"
         case .yes:
             return "Yes"
+        case .edit:
+            return "Edit"
+        case .save(isSuccess: let isSuccess):
+            return "Save " + (isSuccess ? "Success" : "Failure")
+        case .send:
+            return "Send"
+        case .confirm:
+            return "Confirm"
+        case .confirmStatus(isSuccess: let isSuccess):
+            return "Confirm " + (isSuccess ? "Success" : "Failure")
+        case .resendCode:
+            return "Resend Code"
+        case .codeResent(isSuccessed: let isSuccessed):
+            return "Resend Code " + (isSuccessed ? "Success" : "Failure")
+        case .changeEmail:
+            return "Change Email"
+        case .emailChanged(isSuccessed: let isSuccessed):
+            return "Change Email " + (isSuccessed ? "Success" : "Failure")
+        case .later:
+            return "Later"
+        case .cancel:
+            return "Cancel"
+        case .storyOrVideo:
+            return "Story / Video"
+        case .paymentType(let type):
+            return type.text
+        case .tbmatik(let event):
+            return event.text
+        case .supportLoginForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
+        case .supportSignUpForm(let event, let isSupportForm):
+            return event.text(isSupportForm: isSupportForm)
+        case .clickSecurityQuestion(let number):
+            return "Q\(number)"
+        case .campaign(let event):
+            return event.text
         }
     }
     
@@ -945,6 +1227,9 @@ enum GADementionsFields {
     case errorType
     case autoSyncState
     case autoSyncStatus
+    case twoFactorAuth
+    case spotify
+    case dailyDrawleft
     
     var text: String {
         switch self {
@@ -988,6 +1273,12 @@ enum GADementionsFields {
             return "AutoSync"
         case .autoSyncStatus:
             return "SyncStatus"
+        case .twoFactorAuth:
+            return "twoFactorAuthentication"
+        case .spotify:
+            return "connectStatus"
+        case .dailyDrawleft:
+            return "dailyDrawleft"
         }
     }
     
@@ -998,6 +1289,10 @@ enum GAMetrics {
     case countOfDownload //After downloading finishes, send the count of downloaded files
     case playlistNumber
     case trackNumber
+    case totalDraw
+    
+    case errorType
+    
     var text: String {
         switch self {
         case .countOfUpload:
@@ -1008,6 +1303,10 @@ enum GAMetrics {
             return "playlistNumber"
         case .trackNumber:
             return "trackNumber"
+        case .totalDraw:
+            return "totalDraw"
+        case .errorType:
+            return "errorType"
         }
     }
 }
@@ -1124,6 +1423,151 @@ enum GADementionValues {
                 return "SPOTIFY_IMPORT_ERROR"
             case .networkError:
                 return "NETWORK_ERROR"
+            }
+        }
+    }
+    
+    enum errorType {
+        /// MyProfile
+        case emptyEmail
+        case phoneInvalidFormat
+        case emailInvalidFormat
+        case emailInUse
+        case phoneInUse
+        /// Two Factor Authentification
+        case invalidOTPCode
+        case invalidSession
+        case invalidChallenge
+        case tooManyInvalidAttempts
+        /// Email Verification
+        case accountNotFound
+        case referenceTokenIsEmpty
+        case expiredOTP
+        case invalidEmail
+        case invalidOTP
+        case tooManyRequests
+        /// Secret Question
+        case invalidCaptcha
+        case invalidId
+        case invalidAnswer
+        
+        init?(with stringError: String) {
+            switch stringError {
+            case TextConstants.errorInvalidPhone:
+                self = .phoneInvalidFormat
+                
+            case TextConstants.errorExistPhone:
+                self = .phoneInUse
+                
+            case TextConstants.invalidOTP:
+                self = .invalidOTP
+                
+            case "INVALID_OTP_CODE":
+                self = .invalidOTPCode
+                
+            case TextConstants.expiredOTP:
+                self = .expiredOTP
+                
+            case TextConstants.emptyEmail, HeaderConstant.emptyEmail:
+                self = .emptyEmail
+                
+            case TextConstants.invalidEmail:
+                self = .invalidEmail
+                
+            case TextConstants.errorInvalidEmail:
+                self = .emailInvalidFormat
+                
+            case TextConstants.errorExistEmail:
+                self = .emailInUse
+                
+            case "INVALID_SESSION":
+                self = .invalidSession
+                
+            case "INVALID_CHALLENGE":
+                self = .invalidChallenge
+                
+            case TextConstants.TOO_MANY_REQUESTS, "TOO_MANY_REQUESTS", TextConstants.tooManyRequests:
+                self = .tooManyRequests
+                
+            case "TOO_MANY_INVALID_ATTEMPTS", TextConstants.tooManyInvalidAttempt:
+                self = .tooManyInvalidAttempts
+                
+            case TextConstants.ACCOUNT_NOT_FOUND, TextConstants.noAccountFound:
+                self = .accountNotFound
+                
+            case TextConstants.tokenIsMissing:
+                self = .referenceTokenIsEmpty
+                
+            case "SEQURITY_QUESTION_ANSWER_IS_INVALID":
+                self = .invalidAnswer
+                
+            case "SEQURITY_QUESTION_ID_IS_INVALID":
+                self = .invalidId
+
+            case "4001":
+                self = .invalidCaptcha
+                
+            default:
+                return nil
+            }
+        }
+        
+        var text: String {
+            switch self {
+            case .emptyEmail:
+                return "EMPTY_E-MAIL_ERROR"
+                
+            case .phoneInvalidFormat:
+                return "PHONE_NUMBER_INVALID_FORMAT_ERROR"
+                
+            case .emailInvalidFormat:
+                return "EMAIL_INVALID_FORMAT_ERROR"
+                
+            case .emailInUse:
+                return "EMAIL_IN_USE_ERROR"
+                
+            case .phoneInUse:
+                return "PHONE_NUMBER_IN_USE_ERROR"
+                
+            case .invalidOTPCode:
+                return "INVALID_OTP_CODE"
+                
+            case .invalidSession:
+                return "INVALID_SESSION"
+                
+            case .invalidChallenge:
+                return "INVALID_CHALLENGE"
+                
+            case .tooManyInvalidAttempts:
+                return "TOO_MANY_INVALID_ATTEMPTS"
+                
+            case .accountNotFound:
+                return "ACCOUNT_NOT_FOUND"
+                
+            case .referenceTokenIsEmpty:
+                return "REFERENCE_TOKEN_IS_EMPTY"
+                
+            case .expiredOTP:
+                return "EXPIRED_OTP"
+                
+            case .invalidEmail:
+                return "INVALID_EMAIL"
+                
+            case .invalidOTP:
+                return "INVALID_OTP"
+                
+            case .tooManyRequests:
+                return "TOO_MANY_REQUESTS"
+                
+            case .invalidCaptcha:
+                return "INVALID_CAPTCHA"
+                
+            case .invalidId:
+                return "SEQURITY_QUESTION_ID_IS_INVALID"
+                
+            case .invalidAnswer:
+                return "SEQURITY_QUESTION_ANSWER_IS_INVALID"
+                
             }
         }
     }

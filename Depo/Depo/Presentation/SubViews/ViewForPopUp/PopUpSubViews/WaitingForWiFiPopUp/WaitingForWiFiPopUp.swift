@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class WaitingForWiFiPopUp: BaseView {
+final class WaitingForWiFiPopUp: BaseCardView {
 
     @IBOutlet private weak var titleLabel: UILabel?
     @IBOutlet private weak var settingsButton: CircleYellowButton?

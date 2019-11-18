@@ -21,6 +21,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
     private var isShowPopupAboutPremium = true
+    private let campaignService = CampaignServiceImpl()
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -35,11 +36,16 @@ final class HomePageInteractor: HomePageInteractorInput {
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
+        getCampaignStatus()
     }
     
     func trackScreen() {
         analyticsService.logScreen(screen: .homePage)
         analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
+    }
+    
+    func trackGiftTapped() {
+        analyticsService.trackCustomGAEvent(eventCategory: .campaign, eventActions: .giftIcon, eventLabel: .empty)
     }
     
     private func setupAutoSyncTriggering() {
@@ -58,8 +64,29 @@ final class HomePageInteractor: HomePageInteractorInput {
     func needRefresh() {
         homeCardsLoaded = false
         
+        getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
+    }
+    
+    private func getCampaignStatus() {
+        campaignService.getPhotopickDetails { [weak self] result in
+            switch result {
+            case .success(let status):
+                if SingletonStorage.shared.isUserFromTurkey,
+                    (status.startDate...status.launchDate).contains(Date()) {
+                    DispatchQueue.toMain {
+                        self?.output.showGiftBox()
+                    }
+                }
+            case .failure(let errorResult):
+                if errorResult.isEmpty() {
+                    DispatchQueue.toMain {
+                        self?.output.hideGiftBox()
+                    }
+                }
+            }
+        }
     }
     
     private func getAccountInfo() {
@@ -106,13 +133,13 @@ final class HomePageInteractor: HomePageInteractorInput {
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
                     }
                 }, fail: { [weak self] error in
-                    self?.fillCollectionView(isReloadAll: true)
-                    
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
+                        self?.fillCollectionView(isReloadAll: true)
+
                         self?.output.didObtainFailCardInfo(errorMessage: error.description,
                                                            isNeedStopRefresh: loadStatus == .reloadSingle)
                     }
@@ -123,9 +150,11 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):
-                self?.fillCollectionView(isReloadAll: true)
-                
                 DispatchQueue.toMain {
+                    if !error.isNetworkError {
+                        self?.fillCollectionView(isReloadAll: true)
+                    }
+                    
                     self?.output.didObtainFailCardInfo(errorMessage: error.description,
                                                        isNeedStopRefresh: loadStatus == .reloadSingle)
                 }

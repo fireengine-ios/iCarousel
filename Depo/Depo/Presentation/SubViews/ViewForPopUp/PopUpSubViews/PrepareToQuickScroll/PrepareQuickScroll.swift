@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class PrepareQuickScroll: BaseView {
+final class PrepareQuickScroll: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {

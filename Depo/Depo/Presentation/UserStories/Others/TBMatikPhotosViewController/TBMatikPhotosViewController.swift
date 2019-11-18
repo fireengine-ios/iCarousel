@@ -19,6 +19,23 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return controller
     }
     
+    static func with(items: [Item]) -> TBMatikPhotosViewController {
+        
+        var itemsDict = [String: Item]()
+        for item in items {
+            itemsDict[item.uuid] = item
+        }
+        
+        let uuids = items.compactMap { $0.uuid }
+        
+        let controller = initFromNib()
+        controller.modalTransitionStyle = .coverVertical
+        controller.modalPresentationStyle = .overFullScreen
+        controller.items = itemsDict
+        controller.uuids = uuids
+        return controller
+    }
+    
     enum Constants {
         static let leftOffset: CGFloat = 32
         static let rightOffset: CGFloat = 32
@@ -91,6 +108,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private lazy var fileService = FileService.shared
     private lazy var cacheManager = CacheManager.shared
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var uuids = [String]()
     private var items = [String: Item]()
@@ -105,8 +123,12 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }()
     
     private var currentItem: Item? {
-        let uuid = uuids[carousel.currentItemIndex]
-        return items[uuid]
+        if let uuid = uuids[safe: carousel.currentItemIndex] {
+            return items[uuid]
+        } else {
+            assertionFailure("uuids not setuped")
+            return nil
+        }
     }
     
     // MARK: - View lifecycle
@@ -119,7 +141,12 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         configure()
-        loadItems()
+        
+        if items.isEmpty {
+            loadItemsByUuids()
+        } else {
+            reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,6 +161,11 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
         carouselItemFrameHeight = carousel.bounds.height
+    }
+    
+    private func track(screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func configure() {
@@ -160,7 +192,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         carousel.isPagingEnabled = true
     }
     
-    private func loadItems() {
+    private func loadItemsByUuids() {
         showSpinner()
         
         fileService.details(uuids: uuids, success: { [weak self] items in
@@ -172,14 +204,19 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
                 self.items[item.uuid] = item
             }
             
-            self.carousel.reloadData()
-            self.carousel.isHidden = false
+            self.reloadData()
             self.hideSpinner()
             
         }, fail: { [weak self] errorResponse in
             self?.hideSpinner()
             UIApplication.showErrorAlert(message: errorResponse.description)
         })
+    }
+    
+    private func reloadData() {
+        carousel.reloadData()
+        carousel.isHidden = false
+        updateTitle()
     }
     
     private func updateTitle() {
@@ -201,17 +238,20 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @IBAction private func onShare() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .tbmatik(.share))
         shareManager.shareCurrentItem()
     }
     
     @IBAction private func onSeeTimeline() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.seeTimeline))
+        
         guard let item = currentItem,
             let tabbarController = RouterVC().tabBarController else {
             assertionFailure()
             return
         }
         
-        tabbarController.showPhotosScreen(scrollTo: item)        
+        tabbarController.showAndScrollPhotosScreen(scrollTo: item)        
         dismiss(animated: true)
     }
 }
@@ -270,6 +310,8 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
         pageControl.currentPage = carousel.currentItemIndex
         updateTitle()
 
+        track(screen: .tbmatikSwipePhoto(carousel.currentItemIndex + 1))
+        
         carousel.visibleItemViews.forEach { view in
             if let itemView = view as? TBMatikPhotoView {
                 itemView.needShowShadow = itemView.tag == carousel.currentItemIndex

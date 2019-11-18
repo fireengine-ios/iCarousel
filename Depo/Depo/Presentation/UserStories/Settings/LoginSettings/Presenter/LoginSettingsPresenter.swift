@@ -36,7 +36,7 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
     
     func viewIsReady() {
         startAsyncOperation()
-        
+        interactor.trackScreen()
         interactor.requestTurkcellSecurityState()
     }
     

@@ -17,6 +17,7 @@ protocol PhotoVideoDataSourceDelegate: class {
 
 final class PhotoVideoDataSource: NSObject {
     
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
     private let mergeQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoMergeQueue)
@@ -68,7 +69,7 @@ final class PhotoVideoDataSource: NSObject {
 //        }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = CoreDataStack.shared.mainContext
+        let context = coreDataStack.mainContext
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                       managedObjectContext: context,
                                                       sectionNameKeyPath: #keyPath(MediaItem.monthValue),
@@ -93,10 +94,14 @@ final class PhotoVideoDataSource: NSObject {
     
     private func scroll(to item: Item) {
         getIndexPathForObject(uuid: item.uuid) { [weak self] indexPath in
-            guard let self = self, let indexPath = indexPath else {
+            guard let self = self else {
                 return
             }
-            self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
+            
+            self.tbMatikItem = nil
+            if let indexPath = indexPath {
+                self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+            }
         }
     }
     
@@ -527,6 +532,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         cellTopOffset = 0
         focusedIndexPath = nil
         
+        if tbMatikItem != nil {
+            return
+        }
+        
         if let indexPath = collectionView?.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
             #if DEBUG
             if !DispatchQueue.isMainQueue || !Thread.isMainThread {
@@ -555,7 +564,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             
             if let item = self.tbMatikItem {
                 self.scroll(to: item)
-                self.tbMatikItem = nil
             }
         }
     }

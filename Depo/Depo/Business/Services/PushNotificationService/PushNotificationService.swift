@@ -15,7 +15,8 @@ final class PushNotificationService {
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
     
@@ -40,11 +41,17 @@ final class PushNotificationService {
     }
     
     func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = innerLink as String?,
-            let notificationAction = PushNotificationAction(rawValue: actionString) else {
+        guard let actionString = innerLink as String? else {
+            return false
+        }
+                
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
             return false
         }
         
+        debugLog("PushNotificationService received deepLink with type \(actionString)")
         parse(options: options, action: notificationAction)
         return true
     }
@@ -73,7 +80,7 @@ final class PushNotificationService {
         if tokenStorage.accessToken == nil {
             action = .login
         }
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()
@@ -117,6 +124,9 @@ final class PushNotificationService {
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
         case .tbmatic: openTBMaticPhotos(notificationParameters)
+        case .securityQuestion: openSecurityQuestion()
+        case .permissions: openPermissions()
+        case .photopickCampaignDetail: openCampaignDetails()
         }
         
         if router.tabBarController != nil {
@@ -171,7 +181,7 @@ final class PushNotificationService {
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
             case .photosScreenIndex:
-                tabBarVC.showPhotosScreen()
+                tabBarVC.showPhotoScreen()
             }
         }
     }
@@ -356,6 +366,8 @@ final class PushNotificationService {
     }
     
     private func openTBMaticPhotos(_ uuidsByString: String?) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
+        
         debugLog("PushNotificationService try to open TBMatic screen")
         // handle list of uuids with two variants for separators "," and ", "
         guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
@@ -364,9 +376,33 @@ final class PushNotificationService {
             return
         }
         
+        // check for cold start from push - present on home page
+        guard router.tabBarController != nil else {
+            return
+        }
+        
         let controller = router.tbmaticPhotosContoller(uuids: uuids)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
+    }
+    
+    private func openSecurityQuestion() {
+        debugLog("PushNotificationService try to open Security Question screen")
+
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        pushTo(controller)
+    }
+    
+    private func openPermissions() {
+        debugLog("PushNotificationService try to open Permission screen")
+
+        let controller = router.permissions
+        pushTo(controller)
+    }
+    
+    private func openCampaignDetails() {
+        let controller = router.campaignDetailViewController()
+        pushTo(controller)
     }
 }

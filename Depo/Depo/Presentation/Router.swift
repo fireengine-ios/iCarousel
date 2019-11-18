@@ -254,6 +254,8 @@ class RouterVC: NSObject {
     }
         
     func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
+        controller.checkModalPresentationStyle()
+        
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
@@ -446,11 +448,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func segmentedMedia() -> SegmentedController {
+    func segmentedMedia() -> PhotoVideoSegmentedController {
         let photos = PhotoVideoController.initPhotoFromNib()
         let videos = PhotoVideoController.initVideoFromNib()
         
-        return SegmentedController.initWithControllers([photos, videos])
+        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
     }
     
     
@@ -929,8 +931,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module)
+    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }
     
@@ -1051,5 +1053,9 @@ class RouterVC: NSObject {
     
     func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
         return TBMatikPhotosViewController.with(uuids: uuids)
+    }
+    
+    func campaignDetailViewController() -> UIViewController {
+        return CampaignDetailViewController.initFromNib()
     }
 }
