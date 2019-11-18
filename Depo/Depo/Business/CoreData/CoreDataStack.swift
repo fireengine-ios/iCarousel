@@ -129,14 +129,11 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     private let container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort)
-        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+//        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+        return container
     }()
     
-    let mainContext: NSManagedObjectContext = {
-        let context = container.viewContext
-        context.automaticallyMergesChangesFromParent = true
-        return context
-    }()
+    let mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
         /// don't set parent for newBackgroundContext(), it will crash
@@ -145,7 +142,10 @@ final class CoreDataStack_ios10: CoreDataStack {
     }
     
     
-    private init() {}
+    private init() {
+        mainContext = container.viewContext
+        mainContext.automaticallyMergesChangesFromParent = true
+    }
     
     
     func setup(completion: @escaping VoidHandler) {

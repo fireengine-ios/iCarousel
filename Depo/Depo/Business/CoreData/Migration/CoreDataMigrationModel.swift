@@ -27,15 +27,15 @@ struct CoreDataConfig {
         return docURL.appendingPathComponent(storeNameFull)
     }
     
-    @available(iOS 10.0, *)
-    static var storeDescription: NSPersistentStoreDescription {
-        let description = NSPersistentStoreDescription(url: storeUrl)
-        description.type = NSSQLiteStoreType
-        description.shouldMigrateStoreAutomatically = true
-        description.shouldInferMappingModelAutomatically = false
-        
-        return description
-    }
+//    @available(iOS 10.0, *)
+//    static var storeDescription: NSPersistentStoreDescription {
+//        let description = NSPersistentStoreDescription(url: storeUrl)
+//        description.type = NSSQLiteStoreType
+//        description.shouldMigrateStoreAutomatically = true
+//        description.shouldInferMappingModelAutomatically = false
+//        
+//        return description
+//    }
 }
 
 struct CoreDataMigrationStep {
