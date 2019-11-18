@@ -36,6 +36,7 @@ final class CaptchaView: UIView, FromNib {
         willSet {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.numberOfLines = 0
             newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.isOpaque = true
