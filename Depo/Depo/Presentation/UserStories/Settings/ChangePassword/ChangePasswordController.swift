@@ -247,9 +247,9 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         case .invalidNewPassword,
              .newPasswordIsEmpty,
              .passwordInResentHistory,
-             .uppercaseMissInPassword,
-             .lowercaseMissInPassword,
-             .numberMissInPassword:
+             .uppercaseMissingInPassword,
+             .lowercaseMissingInPassword,
+             .numberMissingInPassword:
             showErrorColorInNewPasswordView = true
             
             /// important check to show error only once

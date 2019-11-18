@@ -545,15 +545,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         
                     case let response where response?.status == .invalidPassword &&
                                             response?.reason == .uppercaseMissing:
-                        backendError = .uppercaseMissInPassword
+                        backendError = .uppercaseMissingInPassword
                 
                     case let response where response?.status == .invalidPassword &&
                                             response?.reason == .lowercaseMissing:
-                        backendError = .lowercaseMissInPassword
+                        backendError = .lowercaseMissingInPassword
                         
                     case let response where response?.status == .invalidPassword &&
                                             response?.reason == .numberMissing:
-                        backendError = .numberMissInPassword
+                        backendError = .numberMissingInPassword
                         
                     case let response where response?.status == .invalidPassword:
                         backendError = .invalidNewPassword
