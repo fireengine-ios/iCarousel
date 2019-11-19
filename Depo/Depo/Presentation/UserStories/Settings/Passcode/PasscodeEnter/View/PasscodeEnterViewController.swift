@@ -47,9 +47,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
         
         
         ///to show correct navBar we needs to call "make up" method inside class
-        #if LIFEBOX
-        navigationBarWithGradientStyle()
-        #elseif LIFEDRIVE
+        #if MAIN_APP
         navigationBarWithGradientStyle()
         #endif
         
