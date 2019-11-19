@@ -76,6 +76,7 @@ final class ShareViewController: UIViewController, ShareController {
         
         let navVC = UINavigationController(rootViewController: vc)
         self.navVC = navVC
+        
         vc.success = {
             navVC.dismiss(animated: true, completion: nil)
         }
