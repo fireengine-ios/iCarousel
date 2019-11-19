@@ -9,13 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-enum StatusType: String {
+enum UpdatePasswordErrorStatusType: String {
     case invalidPassword = "INVALID_PASSWORD"
     case invalidCaptcha = "4001"
     case unknown = "unknown"
 }
 
-enum ReasonType: String {
+enum UpdatePasswordErrorReasonType: String {
     case resentPassword = "PASSWORD_IN_RECENT_HISTORY"
     case uppercaseMissing = "UPPERCASE_MISSING"
     case lowercaseMissing = "LOWERCASE_MISSING"
@@ -31,10 +31,10 @@ final class UpdatePasswordErrorResponse {
             static let reason = "reason"
         }
     
-    let status: StatusType
-    let reason: ReasonType
+    let status: UpdatePasswordErrorStatusType
+    let reason: UpdatePasswordErrorReasonType
 
-    init(status: StatusType, reason: ReasonType ) {
+    init(status: UpdatePasswordErrorStatusType, reason: UpdatePasswordErrorReasonType ) {
         self.status = status
         self.reason = reason
     }
@@ -43,8 +43,8 @@ final class UpdatePasswordErrorResponse {
          
         let value = json[ResponseKey.value]
         
-        let status = StatusType(rawValue: json[ResponseKey.status].stringValue) ?? .unknown
-        let reason = ReasonType(rawValue: value[ResponseKey.reason].stringValue) ?? .unknown
+        let status = UpdatePasswordErrorStatusType(rawValue: json[ResponseKey.status].stringValue) ?? .unknown
+        let reason = UpdatePasswordErrorReasonType(rawValue: value[ResponseKey.reason].stringValue) ?? .unknown
         
         self.init(status: status, reason: reason)
     }
