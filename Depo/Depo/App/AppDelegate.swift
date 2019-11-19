@@ -292,7 +292,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let navVC = NavigationController(rootViewController: vc)
-        vc.navigationBarWithGradientStyleWithoutInsets()
         
         topVC?.present(navVC, animated: false, completion: nil)
     }
