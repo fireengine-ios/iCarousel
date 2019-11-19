@@ -346,7 +346,7 @@ pipeline {
                     try {
                         def parameters = apps.collect { app -> booleanParam(name: "DEPLOY_${app.name}", defaultValue: true, description: '') }
                         parameters << choice(name: 'DEPLOY_TO', choices: 'Testflight', description: '')
-                        def approvals = input ok:'Yes', message:'Deploy?', parameters //, submitter: "${testFlightDeployers}"
+                        def approvals = input ok:'Yes', message:'Deploy?', parameters: parameters //, submitter: "${testFlightDeployers}"
                         approvals.each { key, value -> env.setProperty(key,value) }
                         echo "Approved: ${approvals}. Starting the deployment..."
 
