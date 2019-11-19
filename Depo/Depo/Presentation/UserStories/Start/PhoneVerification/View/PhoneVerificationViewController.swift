@@ -79,6 +79,11 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         if isRemoveLetter {
             let previosTag = sender.tag - 1
             if let nextResponder = codeTextFields[safe: previosTag] {
+                // For autoFill one time password
+                if previosTag <= 0 {
+                    nextResponder.text = ""
+                }
+                // End
                 nextResponder.becomeFirstResponder()
             }
         } else {
@@ -263,6 +268,11 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
 extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        // For autoFill one time password
+        if(firstSecurityCodeTextField == textField) {
+            return
+        }
+        // End
         /// if the string is empty, then when deleting, the delegate method does not work
         textField.text = " "
     }
