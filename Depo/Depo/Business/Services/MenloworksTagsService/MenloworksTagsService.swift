@@ -502,8 +502,8 @@ class MenloworksTagsService {
     }
     
     func sendPhotopickAnalyzeStatus(isSuccess: Bool) {
-        let tag = MenloworksTags.PhotopickAnalyzeResult(isSuccess: isSuccess)
-        hitTag(tag)
+        hitTag(MenloworksTags.PhotopickAnalyzeResult(isSuccess: isSuccess))
+        hitTag(MenloworksTags.PhotopickAnalyze(isSuccess: isSuccess))
     }
     
     func sendCampaignPhotopickStatus() {

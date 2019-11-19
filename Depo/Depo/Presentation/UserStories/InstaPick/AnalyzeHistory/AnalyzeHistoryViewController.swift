@@ -539,11 +539,12 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     }
     
     private func showResultWithoutCampaign(analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
+        dataSource.appendHistoryItems(analysis)
         updateAnalyzeCount(with: analyzesCount)
         let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
                                                                               analyzesCount: analyzesCount,
                                                                               isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
-        self.stopActivityIndicator()
+        stopActivityIndicator()
         present(instapickDetailControlller, animated: true, completion: nil)
     }
     

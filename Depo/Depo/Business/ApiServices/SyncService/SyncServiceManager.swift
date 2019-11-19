@@ -303,6 +303,10 @@ extension SyncServiceManager {
             return
         }
         
+        if isSyncFinished {
+            CardsManager.default.stopOperationWithType(type: .sync)
+        }
+        
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
