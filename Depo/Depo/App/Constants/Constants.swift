@@ -1312,7 +1312,10 @@ struct TextConstants {
     static let thisTextIsEmpty = NSLocalizedString("this_text_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfully = NSLocalizedString("password_changed_successfully", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfullyRelogin = NSLocalizedString("password_changed_successfully_relogin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let passwordInResentHistory = NSLocalizedString("password_in_resent_history", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uppercaseMissInPassword = NSLocalizedString("uppercase_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lowercaseMissInPassword = NSLocalizedString("lowercase_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let numberMissInPassword = NSLocalizedString("number_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let captchaAnswerPlaceholder = NSLocalizedString("captcha_answer_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profilePhoneNumberTitle = NSLocalizedString("profile_phone_number_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profilePhoneNumberPlaceholder = NSLocalizedString("profile_phone_number_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

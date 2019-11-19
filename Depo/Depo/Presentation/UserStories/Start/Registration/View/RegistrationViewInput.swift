@@ -16,6 +16,8 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     
     func showErrorTitle(withText: String)
     
+    func showCaptchaError(_ text: String)
+    
     func setupCaptcha()
     
     func updateCaptcha()

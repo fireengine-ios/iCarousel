@@ -311,7 +311,7 @@ extension RegistrationViewController: RegistrationViewInput {
         case .phoneIsEmpty:
             phoneEnterView.showTextAnimated(text: TextConstants.registrationCellPlaceholderPhone)
         case .captchaIsEmpty:
-            captchaView.showErrorAnimated()
+            showCaptchaError(TextConstants.captchaIsEmpty)
         }
     }
     
@@ -324,6 +324,10 @@ extension RegistrationViewController: RegistrationViewInput {
         
         let errorRect = view.convert(errorView.frame, to: view)
         scrollView.scrollRectToVisible(errorRect, animated: true)
+    }
+    
+    func showCaptchaError(_ text: String) {
+        captchaView.showErrorAnimated(text: text)
     }
     
     func setupCaptcha() {

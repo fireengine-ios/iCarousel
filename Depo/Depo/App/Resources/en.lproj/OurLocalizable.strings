@@ -934,6 +934,10 @@
 "this_text_is_empty" = "This text is empty";
 "password_changed_successfully" = "Your password has been changed successfully";
 "password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
+"password_in_resent_history" = "PASSWORD_IN_RECENT_HISTORY";
+"uppercase_miss_in_password" = "UPPERCASE_MISSING";
+"lowercase_miss_in_password" = "LOWERCASE_MISSING";
+"number_miss_in_password" = "NUMBER_MISSING";
 "captcha_answer_placeholder" = "Enter the text shown in the image";
 "birthday" = "Birthday";
 "user_profile_turkcell_gsm_alert" = "You cannot update your phone number, for details: %@";
