@@ -21,6 +21,8 @@ protocol AccountServicePrl {
 
 class AccountService: BaseRequestService, AccountServicePrl {
     
+    private let passwordRuleSetVersion = 1
+    
     private enum Keys {
         static let serverValue = "value"
     }
@@ -470,7 +472,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
         
         let params: Parameters = ["oldPassword": oldPassword,
                                   "password": newPassword,
-                                  "repeatPassword": repeatPassword]
+                                  "repeatPassword": repeatPassword,
+                                  "passwordRuleSetVersion": passwordRuleSetVersion]
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
@@ -520,25 +523,42 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         handler(.failure(.special(error.description)))
                         return
                     }
-                    
+                   
                     guard
-                        let data = response.data,
-                        let status = JSON(data: data)["status"].string
+                        let data = response.data
                     else {
                         handler(.failure(.unknown))
                         return
                     }
                     
+                    let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
                     let backendError: UpdatePasswordErrors
-                    switch status {
-                    case "4001":
-                        backendError = .invalidCaptcha
-                    case "INVALID_PASSWORD":
-                        backendError = .invalidNewPassword
-                    default:
-                        backendError = .unknown
+                    
+                    guard let status = errorResponse?.status,
+                          let reason = errorResponse?.reason
+                    else {
+                        handler(.failure(.unknown))
+                        return
                     }
                     
+                    switch (status, reason) {
+                        
+                        case (.invalidCaptcha, _ ):
+                            backendError = .invalidCaptcha
+                        case (.invalidPassword, .resentPassword ):
+                            backendError = .passwordInResentHistory
+                        case (.invalidPassword, .uppercaseMissing ):
+                            backendError = .uppercaseMissingInPassword
+                        case (.invalidPassword, .lowercaseMissing ):
+                            backendError = .lowercaseMissingInPassword
+                        case (.invalidPassword, .numberMissing ):
+                            backendError = .numberMissingInPassword
+                        case (.invalidPassword, _):
+                            backendError = .invalidNewPassword
+                        default:
+                            backendError = .unknown
+                    }
+
                     handler(.failure(backendError))
                 }
         }
