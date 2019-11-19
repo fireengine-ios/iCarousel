@@ -83,7 +83,7 @@ target "LifeTech-NotificationService" do
   pod 'iCarousel'
 end
 
-target 'lifebox' do
+target 'TC_Depo_LifeTech' do
 	core_pods
 end
 

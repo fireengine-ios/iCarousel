@@ -1,21 +1,24 @@
-// Jenkins Template version 1.0
+// Jenkins Template version 1.1
 
 @Library('devops-common') _
 
 /***** PROJECT variables  BEGIN ******/
+
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
 apps = [ [
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
-            version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
-            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect
+            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
+            xcodeSchema: 'TC_Depo_LifeTech',
+            xcodeTarget: 'TC_Depo_LifeTech'
         ], [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
-            version: '', // long version on artifactory. Will contain branch name and build number for uniqueness
             appleId: '1467795722',
+            //xcodeSchema: , // Defaults to app name
+            //xcodeTarget:   // Defaults to app name
         ]
 ]
 derivedDir = 'lifebox'
@@ -70,6 +73,7 @@ def readVersion = { app ->
 
 def runXcode = { app, flavorId ->
     def flavor = flavors[flavorId]
+
     def provisionsDir = "provisioningProfiles/${flavor.configuration}"
     def provisionFiles = findFiles(glob: "${provisionsDir}/*.mobileprovision")
     def provisioningProfiles = provisionFiles.collect { file -> [
@@ -80,7 +84,7 @@ def runXcode = { app, flavorId ->
     echo "run xcode for app: " + app
     sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
 
-    xcodeBuild target: app.name,
+    xcodeBuild target: app.xcodeTarget ?: app.name,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
@@ -123,7 +127,7 @@ def runXcode = { app, flavorId ->
       
       // Advanced Xcode build options
       cleanTestReports: false,
-      xcodeSchema: app.name,
+      xcodeSchema: app.xcodeSchema ?: app.name,
       sdk: '',
       symRoot: '',
       xcodebuildArguments: 'VALID_ARCHS="armv7 armv7s arm64" -allowProvisioningUpdates' +
@@ -340,9 +344,11 @@ pipeline {
             steps {
                 script {
                     try {
-                        def isDeploy = input ok:'Yes', message:'Deploy to Testflight?' //, submitter: "${testFlightDeployers}"
-                        env.DEPLOY_TO = 'Testflight'
-                        echo "Deploy to Testflight is approved. Starting the deployment..."
+                        def parameters = apps.collect { app -> booleanParam(name: "DEPLOY_${app.name}", defaultValue: true, description: '') }
+                        parameters << choice(name: 'DEPLOY_TO', choices: 'Testflight', description: '')
+                        def approvals = input ok:'Yes', message:'Deploy?', parameters //, submitter: "${testFlightDeployers}"
+                        approvals.each { key, value -> env.setProperty(key,value) }
+                        echo "Approved: ${approvals}. Starting the deployment..."
 
                     } catch(err) {
                         echo err.toString()
@@ -371,7 +377,9 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            deployToTestflight app
+                            if (env.getProperty("DEPLOY_${app.name}")) {
+                                deployToTestflight app
+                            }
 
                         } catch (Exception e) {
                             failReasons[app.name] = e.message
