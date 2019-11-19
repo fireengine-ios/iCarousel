@@ -124,7 +124,7 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         case .experiencedUser:
             descriptionLabel.text = String(format: TextConstants.campaignCardDescriptionLabelExperiencedUser, dailyLimit)
         case .daylyLimitReached:
-            descriptionLabel.text = TextConstants.campaignCardDescriptionLabelDaylyLimiReached
+            descriptionLabel.text = String(format: TextConstants.campaignCardDescriptionLabelDaylyLimiReached, totalUsed)
         case .another:
             descriptionLabel.text = String(format: TextConstants.campaignCardDescriptionLabelAnother, totalUsed)
         default:
