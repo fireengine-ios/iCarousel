@@ -19,36 +19,27 @@ protocol HomeCollectionViewDataSourceDelegate: class {
 final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
     
     private weak var delegate: HomeCollectionViewDataSourceDelegate?
-
+    
     private var collectionView: UICollectionView!
     private var viewController: UIViewController!
-        
+    
     private var viewsByType = [OperationType: [BaseCardView]]()
     
     private var notPermittedCardsViewTypes = Set<String>()
-        
-    private var isRefreshing = false ///determine collectionView refresh state (batchUpdate AND reloadData)
-    private var isFinishedLoading = false ///determine first collectionView filling
-    private var afterRefreshHandlers = [VoidHandler?]() ///handlers happened while refreshing
-
-    private var insertCards = [BaseCardView]()
-    private var removeCardsIndexes = [Int]()
     
-    private var refreshCollectionViewTask: DispatchWorkItem?
+    var isEnable = true
+    var isViewActive = false
     
     var cards = [BaseCardView]()
     
-    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue, qos: .userInitiated)
-
-    var isEnable = true
-    var isActive = false
-    var isViewActive = false
+    //FE-1720
+//    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue)
     
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: HomeCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
         self.delegate = delegate
-
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -66,17 +57,16 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
-        collectionView.reloadData()
     }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
     
     func onCellDeleted(cell: UICollectionViewCell) {
-        guard let indexPath = collectionView.indexPath(for: cell), indexPath.row < cards.count else {
+        guard let indexPath = collectionView.indexPath(for: cell), let view = self.cards[safe: indexPath.row] else {
             return
         }
-
-        changeCards(remove: indexPath.row, delay: .now())
+        
+        updateCards(remove: [view])
     }
     
     // MARK: WrapItemOperationViewProtocol
@@ -136,152 +126,50 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             
             view.configurateWithType(viewType: .premium)
             
-            resetCollectionViewUpdate { [weak self] in
-                self?.collectionView.reloadData()
-            }
+            //FE-1720
+//            reloadCollectionView()
+            collectionView.reloadData()
         }
     }
     
-    ///cancelling batchUpdate on reloadData
-    private func resetCollectionViewUpdate(completion: VoidHandler? = nil) {
-        guard !isRefreshing else {
-            afterRefreshHandlers.append { [weak self] in
-                self?.resetCollectionViewUpdate(completion: completion)
-            }
-            return
-        }
-        
-        isRefreshing = true
-
-        removeCardsIndexes.removeAll()
-        insertCards.removeAll()
-        
-        refreshCollectionViewTask?.cancel()
-        refreshCollectionViewTask = nil
-        
-        DispatchQueue.main.async {
-            completion?()
-            self.isRefreshing = false
-            
-            if self.afterRefreshHandlers.hasItems {
-                let handler = self.afterRefreshHandlers.removeFirst()
-                handler?()
-            }
-        }
-    }
+    //FE-1720
+//    private func reloadCollectionView() {
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async { [weak self] in
+//                self?.collectionView.reloadData()
+//
+//                semaphore.signal()
+//            }
+//
+//            semaphore.wait()
+//        }
+//    }
     
-    ///method with delay because stopping cards performs one by one
-    private func refreshCollection(remove: [Int] = [], insert: [BaseCardView] = [], delay: DispatchTime) {
+    func updateCards(insert: [BaseCardView] = [], remove: [BaseCardView] = []) {
+        ///remove
+        var removeIndexes = [Int]()
         
-        ///batch update starts working only after arriving server cards
-        ///if not it's works BUT cards may appear without BaseView on it
-        ///isViewActive AND isActive solve some crashes on home page  appear/dismiss process
-        guard isFinishedLoading, isViewActive, isActive else {
-            resetCollectionViewUpdate { [weak self] in
-                self?.collectionView.reloadData()
-            }
-            
-            return
-        }
-        
-        refreshCollectionViewTask?.cancel()
-                
-        insertCards.append(contentsOf: insert)
-        removeCardsIndexes.append(contentsOf: remove)
-
-        let refreshCollectionViewTask = DispatchWorkItem { [weak self] in
-            guard let self = self, !self.isRefreshing else {
-                return
-            }
-            
-            guard self.isViewActive, self.isActive else {
-                self.resetCollectionViewUpdate {
-                    self.collectionView.reloadData()
-                }
-                return
-            }
-
-            self.isRefreshing = true
-
-            var remove = self.removeCardsIndexes
-            var insert = self.insertCards.compactMap { self.cards.index(of: $0) }
-            
-            self.removeCardsIndexes.removeAll()
-            self.insertCards.removeAll()
-
-            ///find same indexes and convert to update indexes
-            let update = remove.filter { insert.contains($0) }
-            
-            ///remove common indexes
-            update.forEach {
-                remove.remove($0)
-                insert.remove($0)
-            }
-            
-            DispatchQueue.main.async {
-                ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
-                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: false)
-                
-                self.collectionView.performBatchUpdates({ [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    if !insert.isEmpty {
-                        self.collectionView.insertItems(at: insert.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                    if !remove.isEmpty {
-                        self.collectionView.deleteItems(at: remove.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                    if !update.isEmpty {
-                        self.collectionView.reloadItems(at: update.map { IndexPath(item: $0, section: 0) })
-                    }
-                    
-                }, completion: { [weak self] _ in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    self.isRefreshing = false
-                    
-                    if self.afterRefreshHandlers.hasItems {
-                        let handler = self.afterRefreshHandlers.removeFirst()
-                        handler?()
-                    }
-
-                    self.delegate?.didReloadCollectionView(self.collectionView)
-                })
+        var removingCards = [BaseCardView]()
+        for card in remove {
+            if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
+                removingCards.append(self.cards[index])
+                removeIndexes.append(index)
             }
         }
         
-        cardsRefreshQueue.asyncAfter(deadline: delay, execute: refreshCollectionViewTask)
-        self.refreshCollectionViewTask = refreshCollectionViewTask
-    }
-    
-    private func changeCards(insert: BaseCardView? = nil, remove: Int? = nil, delay: DispatchTime = .now() + NumericConstants.animationDuration) {
-        guard !isRefreshing else {
-            afterRefreshHandlers.append { [weak self] in
-                self?.changeCards(insert: insert, remove: remove)
-            }
-            return
+        removeIndexes.forEach { self.cards.remove(at: $0) }
+        
+        ///insert
+        let insertedCards = insert.filter { insertingCard in
+            !self.cards.contains(insertingCard)
         }
         
-        if let insert = insert {
-            cards.append(insert)
-        }
+        self.cards.append(contentsOf: insertedCards)
         
-        if let remove = remove {
-            let view = cards.remove(at: remove)
-            
-            if let index = insertCards.index(of: view) {
-                insertCards.remove(at: index)
-                return
-            }
-        }
-        
-        cards = cards.sorted(by: { view1, view2 -> Bool in
+        ///sort
+        self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             if order1 == order2 {
@@ -290,8 +178,116 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             return order1 < order2
         })
         
-        refreshCollection(remove: [remove].compactMap { $0 }, insert: [insert].compactMap { $0 }, delay: delay)
+        collectionView.reloadData()
     }
+
+    //FE-1720
+//    func updateCards(insert: [BaseCardView] = [], remove: [BaseCardView] = []) {
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            ///remove
+//            var removeIndexes = [Int]()
+//
+//            var removingCards = [BaseCardView]()
+//            for card in remove {
+//                if let index = self.cards.firstIndex(where: { $0 == card && !$0.isContained(in: removingCards) }) {
+//                    removingCards.append(self.cards[index])
+//                    removeIndexes.append(index)
+//                }
+//            }
+//
+//            removeIndexes.forEach { self.cards.remove(at: $0) }
+//
+//            ///insert
+//            let insertedCards = insert.filter { insertingCard in
+//                !self.cards.contains(insertingCard)
+//            }
+//
+//            self.cards.append(contentsOf: insertedCards)
+//
+//            ///sort
+//            self.cards = self.cards.sorted(by: { view1, view2 -> Bool in
+//                let order1 = view1.cardObject?.order ?? 0
+//                let order2 = view2.cardObject?.order ?? 0
+//                if order1 == order2 {
+//                    return view1 is PremiumInfoCard
+//                }
+//                return order1 < order2
+//            })
+//
+//            guard self.isViewActive else {
+//                let semaphore  = DispatchSemaphore(value: 0)
+//
+//                DispatchQueue.main.async {
+//                    self.collectionView.reloadData()
+//                    semaphore.signal()
+//                }
+//
+//                semaphore.wait()
+//                return
+//            }
+//
+//            ///get indexes
+//            var insertIndexes = insert.compactMap { self.cards.firstIndex(of: $0) }
+//
+//            ///find same indexes and convert to update indexes
+//            let updateIndexes = removeIndexes.filter { insertIndexes.contains($0) }
+//
+//            ///remove common indexes
+//            updateIndexes.forEach {
+//                removeIndexes.remove($0)
+//                insertIndexes.remove($0)
+//            }
+//
+//            guard updateIndexes.hasItems || insertIndexes.hasItems || removeIndexes.hasItems else {
+//                return
+//            }
+//
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async {
+//                self.collectionView.isUserInteractionEnabled = false
+//
+//                ///fix crash if  batch update starts performing while collectionView scrolled to the bottom
+//                let rect = CGRect(origin: self.collectionView.contentOffset, size: .zero)
+//                self.collectionView.scrollRectToVisible(rect, animated: true)
+//
+//                self.collectionView.performBatchUpdates({ [weak self] in
+//                    guard let self = self else {
+//                        return
+//                    }
+//
+//                    if removeIndexes.hasItems {
+//                        self.collectionView.deleteItems(at: removeIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                    if insertIndexes.hasItems {
+//                        self.collectionView.insertItems(at: insertIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                    if updateIndexes.hasItems {
+//                        self.collectionView.reloadItems(at: updateIndexes.map { IndexPath(item: $0, section: 0) })
+//                    }
+//
+//                }, completion: { [weak self] _ in
+//                    guard let self = self else {
+//                        return
+//                    }
+//
+//                    self.collectionView.isUserInteractionEnabled = true
+//
+//                    self.delegate?.didReloadCollectionView(self.collectionView)
+//
+//                    semaphore.signal()
+//                })
+//            }
+//
+//            semaphore.wait()
+//        }
+//    }
 }
 
 //MARK: CardsManagerViewProtocol
@@ -320,7 +316,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
-            view.layoutIfNeeded()
+            
             if let card = view as? ProgressCard{
                 card.setProgress(allItems: allOperations, readyItems: completedOperations)
                 
@@ -330,7 +326,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             }
             
             setViewByType(view: view, operation: type)
-            changeCards(insert: view)
+            updateCards(insert: [view])
         }
     }
     
@@ -348,6 +344,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             
             if let views = viewsByType[type], CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                 views.forEach { view in
+                    //FIXME: removeFromSuperview make cell become only with a shadow
                     view.removeFromSuperview()
                     view.set(object: object)
                     
@@ -367,18 +364,17 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         }
         
         for card in cards where !newCards.contains(card) {
-            ///tricky moment for Premiun info card
-            ///popUp.cardObject?.getOperationType() - return nil
-            ///BUT
-            ///CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) - true
-            ///don't use guard-else OR find out a way to modefy code
             if let type = card.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
+                if card is PremiumInfoCard {
+                    newCards.insert(card)
+                }
+                
                 continue
             }
             
             newCards.insert(card)
         }
-
+        
         let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
@@ -387,18 +383,38 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             }
             return order1 < order2
         })
-
-        resetCollectionViewUpdate { [weak self, sortedCards] in
-            guard let self = self else {
-                return
-            }
-            
-            self.cards = sortedCards
-            
-            self.collectionView.reloadData()
-            
-            self.isFinishedLoading = true
-        }
+        
+        cards = sortedCards
+        
+        collectionView.reloadData()
+        
+        //FE-1720
+//        cardsRefreshQueue.async(flags: .barrier) { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            let sortedCards = Array(newCards).sorted(by: { view1, view2 -> Bool in
+//                let order1 = view1.cardObject?.order ?? 0
+//                let order2 = view2.cardObject?.order ?? 0
+//                if order1 == order2 {
+//                    return view1 is PremiumInfoCard
+//                }
+//                return order1 < order2
+//            })
+//
+//            self.cards = sortedCards
+//
+//            let semaphore = DispatchSemaphore(value: 0)
+//
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//
+//                semaphore.signal()
+//            }
+//
+//            semaphore.wait()
+//        }
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
@@ -435,9 +451,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         
         viewsByType[type] = nil
         views.forEach { view in
-            if let index = cards.index(of: view) {
-                changeCards(remove: index)
-            }
+            updateCards(remove: [view])
         }
     }
     
@@ -447,10 +461,10 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         }
         
         var newArray = [BaseCardView]()
-
+        
         views.forEach { view in
-            if let index = cards.index(of: view), view.cardObject == serverObject {
-                 changeCards(remove: index)
+            if view.cardObject == serverObject {
+                updateCards(remove: [view])
             } else {
                 newArray.append(view)
             }
@@ -470,7 +484,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
         
         return false
     }
-
+    
     func addNotPermittedCardViewTypes(types: [OperationType]) {
         let array = types.map { $0.rawValue }
         for operationName in array {
@@ -481,13 +495,15 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
     func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
         guard
             let instaPickCard = cards.first(where: { $0 is InstaPickCard }) as? InstaPickCard,
-            instaPickCard.isNeedReloadWithNew(status: analysisStatus),
-            let index = cards.index(of: instaPickCard)
+            instaPickCard.isNeedReloadWithNew(status: analysisStatus)
         else {
             return
         }
         
-        changeCards(insert: instaPickCard, remove: index)
+        collectionView.reloadData()
+        
+        //FE-1720
+//        reloadCollectionView()
     }
 }
 
@@ -524,13 +540,10 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
             baseCell.addViewOnCell(controllersView: cardUpView)
             cardUpView.viewWillShow()
             
-        } else {
-            assertionFailure("number of cells different with number of cards")
-            resetCollectionViewUpdate { [weak self] in
-                self?.collectionView.reloadData()
-            }
-            
-        }
+        } //else {
+        //FE-1720
+//            reloadCollectionView()
+//        }
         
         baseCell.willDisplay()
         return baseCell
@@ -553,9 +566,9 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
         }
         
         cardView.frame.size = CGSize(width: withWidth,
-                                      height: cardView.frame.size.height)
+                                     height: cardView.frame.size.height)
         cardView.layoutIfNeeded()
-
+        
         return cardView.calculatedH
     }
     

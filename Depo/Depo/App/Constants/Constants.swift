@@ -22,21 +22,21 @@ struct TextConstants {
         static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         
-        static let appName: String = {
+        private static let appNameLowercased: String = {
             #if LIFEDRIVE
-            return "BILLO"
+                return "billo"
             #else
-            return "LIFEBOX"
-            #endif
-            }()
-        
-        static let GAappName: String = {
-            #if LIFEDRIVE
-            return "Lifedrive"
-            #else
-            return "Lifebox"
+                return "lifebox"
             #endif
         }()
+        private static let appNameUppercased = appNameLowercased.uppercased()
+        private static let appNameCapitalized = appNameLowercased.capitalized
+        
+        static let appName = appNameUppercased
+        static let appNameGA = appNameCapitalized
+        static let appNameMailSubject = appNameCapitalized + " / "
+        
+        private init() {}
     }
     
     static func digicelCancelText(for key: String) -> String {

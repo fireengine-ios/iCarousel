@@ -207,11 +207,12 @@ final class SupportFormController: ViewController, KeyboardHandler {
                         Device.locale,
                         ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
+            let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
             let emailSubject: String
             if phoneNumber.isEmpty {
-                emailSubject = subject
+                emailSubject = subjectWithAppName
             } else {
-                emailSubject = "\(fullPhoneNumber) - \(subject)"
+                emailSubject = "\(fullPhoneNumber) - \(subjectWithAppName)"
             }
             
             Mail.shared().sendEmail(emailBody: emailBody,
