@@ -163,6 +163,8 @@ struct NumericConstants {
     static let spotifyStatusUpdateTimeInterval = 1.0
     
     static let langingPageCount = 7
+    
+    static let passwordRuleSetVersion = 1
 }
 
 struct RequestSizeConstant {

@@ -121,7 +121,8 @@ class SignUpUser: BaseRequestParametrs {
             LbRequestkeys.password: password,
             LbRequestkeys.language: Device.locale,
             LbRequestkeys.sendOtp: sendOtp,
-            LbRequestkeys.brandType: brandType
+            LbRequestkeys.brandType: brandType,
+            LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
         ]
     }
 
@@ -470,14 +471,54 @@ class AuthenticationService: BaseRequestService {
         SessionManager.customDefault.cancellAllRequests()
     }
     
-    func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
+    func signUp(user: SignUpUser, handler: @escaping (ErrorResult<SignUpSuccessResponse, SignupResponseError>) -> Void) {
         debugLog("AuthenticationService signUp")
-        
-        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { value in
-            MenloworksAppEvents.onSignUp()
-            sucess?(value)
-        }, fail: fail)
-        executePostRequest(param: user, handler: handler)
+
+        guard let params = user.requestParametrs as? Parameters else {
+            assertionFailure("wrong signUp parameters")
+            return
+        }
+
+        let signUpUrl = RouteRequests.baseUrl +/ RouteRequests.signUp
+
+        sessionManagerWithoutToken
+            .request(signUpUrl,
+                 method: .post,
+                 parameters: params,
+                 encoding: JSONEncoding.default,
+                 headers: user.header)
+            .customValidate()
+            .response { response in
+                
+                guard let httpResponse = response.response else {
+                    handler(.failure(SignupResponseError(status: .serverError)))
+                    return
+                }
+                
+                if 200...299 ~= httpResponse.statusCode {
+                    if let error = response.error as? URLError, error.code == .networkConnectionLost {
+                        //case when we received a response with statusCode == 200 and an error "The network connection was lost."
+                        handler(.failure(SignupResponseError(status: .networkError)))
+                        return
+                    }
+                    
+                    guard let data = response.data else {
+                        handler(.failure(SignupResponseError(status: .serverError)))
+                        return
+                    }
+                    
+                    let result = SignUpSuccessResponse(withJSON: JSON(data: data))
+                    handler(.success(result))
+                } else {
+                    guard let data = response.data else {
+                        handler(.failure(SignupResponseError(status: .serverError)))
+                        return
+                    }
+                    
+                    let error = SignupResponseError(json: JSON(data: data))
+                    handler(.failure(error))
+                }
+            }
     }
     
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {

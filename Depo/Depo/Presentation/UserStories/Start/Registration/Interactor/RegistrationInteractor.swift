@@ -95,55 +95,37 @@ class RegistrationInteractor: RegistrationInteractorInput {
         ///sentOtp = false as a task requirements (FE-1055)
         let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
         
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] response in
-            DispatchQueue.main.async {
-                guard let result = response as? SignUpSuccessResponse else {
-                    let error = CustomErrors.serverError("An error has occurred while register new user.")
-                    let errorResponse = ErrorResponse.error(error)
-                    self?.output.signUpFailed(errorResponse: errorResponse)
-                    return
-                }
-                
-                self?.retriesCount = 0
+        authenticationService.signUp(user: signUpUser) { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            
+            switch response {
+            case .success(let result):
+                self.retriesCount = 0
                 
                 SingletonStorage.shared.referenceToken = result.referenceToken
                 
-                self?.analyticsService.track(event: .signUp)
-                self?.analyticsService.trackSignupEvent()
+                self.analyticsService.track(event: .signUp)
+                self.analyticsService.trackSignupEvent()
                 
                 SingletonStorage.shared.isJustRegistered = true
-                self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
-            }
-            }, fail: { [weak self] errorResponse in
-                self?.retriesCount += 1
+                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
                 
-                DispatchQueue.main.async { [weak self] in
-                    switch errorResponse {
-                    case .error(let error):
-                        if let valueError = error as? ServerValueError,
-                            let signUpError = SignupResponseError(with: valueError) {
-                            
-                            self?.analyticsService.trackSignupEvent(error: signUpError)
-                            
-                            ///only with this error type captcha required error is processing
-                            if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                                self?.captchaRequired = true
-                                self?.output.captchaRequired(required: true)
-                            }
-                        } else if let statusError = error as? ServerStatusError,
-                            let signUpError = SignupResponseError(with: statusError) {
-                            
-                            self?.analyticsService.trackSignupEvent(error: signUpError)
-                        }
-                        
-                    default:
-                        self?.analyticsService.trackSignupEvent(error: .serverError)
-                        
-                    }
-
-                    self?.output.signUpFailed(errorResponse: errorResponse)
+            case .failure(let error):
+                self.retriesCount += 1
+                
+                self.analyticsService.trackSignupEvent(error: error)
+                
+                ///only with this error type captcha required error is processing
+                if error.isCaptchaError {
+                    self.captchaRequired = true
+                    self.output.captchaRequired(required: true)
                 }
-        })
+
+                self.output.signUpFailed(errorResponse: error)
+            }
+        }
     }
     
     func showSupportView() {

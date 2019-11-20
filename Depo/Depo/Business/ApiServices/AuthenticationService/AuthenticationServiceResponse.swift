@@ -152,14 +152,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
             } else if let data = data {
                 trackServerError(httpResponse: httpResponse, error: error)
                 
-                if let value = JSON(data: data)["value"].string {
-                    let error = ServerValueError(value: value, code: httpResponse.statusCode)
-                    fail?(.error(error))
-                } else if let status = JSON(data: data)["status"].string {
-                    let error = ServerStatusError(status: status, code: httpResponse.statusCode)
-                    fail?(.error(error))
-                } else if let message = JSON(data: data)["errorMsg"].string {
-                    let error = ServerMessageError(message: message, code: httpResponse.statusCode)
+                if let error = ResponseParser.getBackendError(data: data, response: httpResponse) {
                     fail?(.error(error))
                 } else {
                     #if DEBUG

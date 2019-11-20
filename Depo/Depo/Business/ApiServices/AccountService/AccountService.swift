@@ -21,8 +21,6 @@ protocol AccountServicePrl {
 
 class AccountService: BaseRequestService, AccountServicePrl {
     
-    private let passwordRuleSetVersion = 1
-    
     private enum Keys {
         static let serverValue = "value"
     }
@@ -473,7 +471,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let params: Parameters = ["oldPassword": oldPassword,
                                   "password": newPassword,
                                   "repeatPassword": repeatPassword,
-                                  "passwordRuleSetVersion": passwordRuleSetVersion]
+                                  "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]

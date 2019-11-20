@@ -387,6 +387,15 @@
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications";
 
+"sing_up_error_password_length_is_below_limit" = "Your password should not contain less than %d characters";
+"sing_up_error_password_length_exceeded" = "Your password should not contain more than %d characters";
+"sing_up_error_sequential_characters" = "Your password should not contain more than %d sequential characters";
+"sing_up_error_same_characters" = "Your password should not contain more than %d same characters";
+"sing_up_error_uppercase_missing" = "Your password should contain uppercase character";
+"sing_up_error_lowercase_missing" = "Your password should contain lowercase character";
+"sing_up_error_number_missing" = "Your password should contain number";
+"sing_up_error_unauthorized" = "Unauthorized";
+
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Passwords do not match";
