@@ -19,7 +19,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private lazy var activityManager = ActivityIndicatorManager()
 
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
-    private let instapickService: InstapickService = InstapickServiceImpl()
+    private let instapickService: InstapickService = factory.resolve()
     private let campaignService: CampaignService = CampaignServiceImpl()
     private let instaPickCampaignService = InstaPickCampaignService()
 
@@ -539,7 +539,7 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     }
     
     private func showResultWithoutCampaign(analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
-        dataSource.appendHistoryItems(analysis)
+        
         updateAnalyzeCount(with: analyzesCount)
         let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
                                                                               analyzesCount: analyzesCount,
