@@ -77,7 +77,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         if case ErrorResponse.error(let containedError) = error {
             if let serverError = containedError as? ServerError, serverError.code == 401 {
                 router.popToLoginWithPopUp(title: TextConstants.errorAlert, message: TextConstants.twoFAInvalidSessionErrorMessage, image: .error, onClose: nil)
-            } else if let serverError = containedError as? ServerStatusError, let description = serverError.errorDescription {
+            } else if let serverError = containedError as? ServerStatusError, let description = serverError.description {
                 view.showError(description)
             } else {
                 view.showError(TextConstants.phoneVerificationResendRequestFailedErrorText)
