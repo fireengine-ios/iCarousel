@@ -17160,6 +17160,7 @@
 			buildConfigurationList = 8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "TC_Depo_LifeTech" */;
 			buildPhases = (
 				8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */,
+				0356DA7C238567A10077C4AB /* discard localization */,
 				8C0E8C631FDEBDFF00789C91 /* Sources */,
 				8C0E8FE01FDEBDFF00789C91 /* Frameworks */,
 				8C0E8FFC1FDEBDFF00789C91 /* Resources */,
@@ -19958,6 +19959,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0356DA7C238567A10077C4AB /* discard localization */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "discard localization";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/scripts/discardLocalizationChanges.sh\n";
+		};
 		09831DF01E1C951C6B3867ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
