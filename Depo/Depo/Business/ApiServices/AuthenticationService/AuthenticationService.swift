@@ -476,6 +476,7 @@ class AuthenticationService: BaseRequestService {
 
         guard let params = user.requestParametrs as? Parameters else {
             assertionFailure("wrong signUp parameters")
+            handler(.failure(SignupResponseError(status: .networkError)))
             return
         }
 
