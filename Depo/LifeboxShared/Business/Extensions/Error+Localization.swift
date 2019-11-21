@@ -13,7 +13,8 @@ extension Error {
         if isNetworkError {
             return TextConstants.errorConnectedToNetwork
         } else if notAuthorized {
-            return TextConstants.errorLogin
+            return String(format: TextConstants.errorLogin,
+            TextConstants.NotLocalized.appName)
         }
         return localizedDescription
     }
