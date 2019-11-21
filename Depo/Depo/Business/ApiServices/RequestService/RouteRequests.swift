@@ -10,6 +10,14 @@ import Foundation
 
 struct RouteRequests {
     
+    static let isBillo: Bool = {
+        #if LIFEDRIVE
+        return true
+        #else
+        return false
+        #endif
+    }()
+    
     enum ServerEnvironment {
         case test
         case preProduction
@@ -69,9 +77,15 @@ struct RouteRequests {
     
     static let privacyPolicy: String = {
         switch currentServerEnvironment {
-        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
-        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
-        case .production: return "https://mylifebox.com/policy/?lang="
+        case .test: return isBillo ? "https://dev.mylifebox.com/policy/?lang=" :
+                                     "https://adepotest.turkcell.com.tr/policy/?lang="
+            
+        case .preProduction: return isBillo ? "https://prp.mylifebox.com/policy/?lang=" :
+                                              "https://adepotest.turkcell.com.tr/policy/?lang="
+            
+        case .production: return isBillo ? "https://billostorage.com/policy/?lang=" :
+                                           "https://mylifebox.com/policy/?lang="
+                                            
         }
     }()
     
@@ -178,8 +192,19 @@ struct RouteRequests {
     //MARK: Feedback
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
     
-    //MARK : Faq 
-    static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
+    //MARK : Faq
+    static var faqContentUrl: String {
+        switch currentServerEnvironment {
+        case .production: return isBillo ? "https://billostorage.com/faq/?lang=%@)" :
+                                           "https://mylifebox.com/faq/?lang=%@"
+            
+        case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
+                                              "https://mylifebox.com/faq/?lang=%@"
+            
+        case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
+                                     "https://mylifebox.com/faq/?lang=%@"
+        }
+    }
 
     // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=32&currentPage=%d"
@@ -287,10 +312,14 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
-        case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
-        case .test: return ""
-        }   
+        case .production: return isBillo ? "https://billostorage.com/global_ops.html ?lang=\(Device.locale)" :
+                                           "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+                                            
+        case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :
+                                "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+            
+        case .test: return isBillo ? "https://dev.mylifebox.com/global_ops.html?lang=\(Device.locale)" :  ""
+        }
     }
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
