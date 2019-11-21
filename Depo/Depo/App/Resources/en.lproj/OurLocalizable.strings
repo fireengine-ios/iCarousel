@@ -594,7 +594,7 @@
 "LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
 "LifeboxLargePopUpSkipButtonTitle" = "Skip";
 "Lifebox can sync your contacts automatically." = "lifebox can sync your contacts automatically.";
-"error_login" = "You need to login to lifebox to upload files";
+"error_login" = "You need to login to %@ to upload files";
 "uploading" = "Uploading";
 "widgetBottomTitleLastSyncFormat" = "Last upload: %@";
 "widgetBottomTitleNewerSyncronized" = "Never";
