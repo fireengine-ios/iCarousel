@@ -356,6 +356,7 @@ pipeline {
                         echo "Approved: ${approvals}. Starting the deployment..."
 
                     } catch(err) {
+                        env.DEPLOY_TO = ''
                         echo err.toString()
                     }
                 }
