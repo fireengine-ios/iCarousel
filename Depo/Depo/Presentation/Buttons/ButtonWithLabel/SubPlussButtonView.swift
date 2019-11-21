@@ -18,7 +18,7 @@ class SubPlussButtonView: UIView {
     
     weak var actionDelegate: SubPlussButtonViewDelegate?
     
-    var bottomConstraintOrigialConstant: CGFloat = 0
+    var bottomConstraintOriginalConstant: CGFloat = 0
     var centerXConstraintOriginalConstant: CGFloat = 0
     
     var bottomConstraint: NSLayoutConstraint?
@@ -50,7 +50,7 @@ class SubPlussButtonView: UIView {
         button.isEnabled = !hidden
         alpha = hidden ? 0 : 1
         if hidden {
-            bottomConstraint?.constant = bottomConstraintOrigialConstant
+            bottomConstraint?.constant = bottomConstraintOriginalConstant
             centerXConstraint?.constant = centerXConstraintOriginalConstant
         }
     }

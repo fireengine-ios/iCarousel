@@ -101,6 +101,14 @@ struct TextConstants {
     static let invalidPhoneNumberText = NSLocalizedString("Please enter a valid GSM number.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidPasswordText = NSLocalizedString("Please enter your password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidPasswordMatchText = NSLocalizedString("Password fields do not match", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorPasswordLengthIsBelowLimit = NSLocalizedString("sing_up_error_password_length_is_below_limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorPasswordLengthExceeded = NSLocalizedString("sing_up_error_password_length_exceeded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorSequentialCharacters = NSLocalizedString("sing_up_error_sequential_characters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorSameCharacters = NSLocalizedString("sing_up_error_same_characters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorUppercaseMissing = NSLocalizedString("sing_up_error_uppercase_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorLowercaseMissing = NSLocalizedString("sing_up_error_lowercase_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorNumberMissing = NSLocalizedString("sing_up_error_number_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpErrorUnauthorized = NSLocalizedString("sing_up_error_unauthorized", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: -
     static let termsAndUsesTitile = NSLocalizedString("Sign Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUsesApplyButtonText = NSLocalizedString("Accept  Terms", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1081,8 +1089,7 @@ struct TextConstants {
     static let landingBilloSubTitle5 = NSLocalizedString("landing_billo_subtitle_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingBilloTitle6 = NSLocalizedString("landing_billo_title_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let landingBilloSubTitle6 = NSLocalizedString("landing_billo_subtitle_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let landingBilloTitle7 = NSLocalizedString("landing_billo_title_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let landingBilloSubTitle7 = NSLocalizedString("landing_billo_subtitle_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     static let created = NSLocalizedString("created", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploaded = NSLocalizedString("uploaded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1313,7 +1320,10 @@ struct TextConstants {
     static let thisTextIsEmpty = NSLocalizedString("this_text_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfully = NSLocalizedString("password_changed_successfully", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfullyRelogin = NSLocalizedString("password_changed_successfully_relogin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let passwordInResentHistory = NSLocalizedString("password_in_resent_history", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uppercaseMissInPassword = NSLocalizedString("uppercase_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lowercaseMissInPassword = NSLocalizedString("lowercase_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let numberMissInPassword = NSLocalizedString("number_miss_in_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let captchaAnswerPlaceholder = NSLocalizedString("captcha_answer_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profilePhoneNumberTitle = NSLocalizedString("profile_phone_number_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profilePhoneNumberPlaceholder = NSLocalizedString("profile_phone_number_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
