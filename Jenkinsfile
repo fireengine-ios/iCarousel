@@ -192,6 +192,11 @@ def deployToIctStore = { app ->
 def deployToTestflight = { app ->
     def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
     def ipaFile = "build/${app.name}-${BUILD_ID}-prod.ipa"
+    
+    def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
+    def ipaUrl = "${artifactory.url}/${artifactPath}/${app.name}-${app.version}-prod.ipa"
+    sh "curl -v ${ipaUrl} -o ${ipaFile}"
+
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
         ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
@@ -351,6 +356,7 @@ pipeline {
                         echo "Approved: ${approvals}. Starting the deployment..."
 
                     } catch(err) {
+                        env.DEPLOY_TO = ''
                         echo err.toString()
                     }
                 }
