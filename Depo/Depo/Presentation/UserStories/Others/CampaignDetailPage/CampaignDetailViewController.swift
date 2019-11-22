@@ -187,7 +187,12 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func onMoreTapped(_ sender: UIButton) {
-        UIApplication.shared.openSafely(moreInfoUrl)
+        guard let urlString = moreInfoUrl?.absoluteString else {
+            return
+        }
+        
+        let controller = WebViewController(urlString: urlString)
+        router.pushViewController(viewController: controller)
     }
     
     @IBAction private func onAnalyzeTapped(_ sender: UIButton) {
