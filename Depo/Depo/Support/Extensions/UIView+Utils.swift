@@ -94,6 +94,10 @@ extension UIView {
     }
     
     func sizeToFit(width: CGFloat) -> CGSize {
+        // need for correct calculation
+        bounds.size.width = width
+        layoutIfNeeded()
+        
         let fittingSize = CGSize(width: width, height: UILayoutFittingCompressedSize.height)
         return systemLayoutSizeFitting(fittingSize,
                                        withHorizontalFittingPriority: .required,
