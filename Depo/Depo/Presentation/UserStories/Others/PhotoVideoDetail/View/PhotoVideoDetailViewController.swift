@@ -130,7 +130,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        editingTabBar.editingBar.barStyle = .black
+        // TODO: EditingBarConfig is not working
+        editingTabBar.editingBar.barStyle = .blackOpaque
+        editingTabBar.editingBar.clipsToBounds = true
+        //editingTabBar.editingBar.layer.borderWidth = 0
+        
         statusBarColor = .black
     }
     
