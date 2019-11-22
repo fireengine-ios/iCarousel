@@ -84,16 +84,18 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        self.setupNavigationBar(editingMode: false)
+
         dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedItems in
             guard let self = self else {
                 return
             }
+            
             if !selectedItems.isEmpty {
                 self.setupNavigationBar(editingMode: true)
                 self.updateSelectedItemsCount()
                 self.updateBarsForSelectedObjects()
-            } else {
-                self.setupNavigationBar(editingMode: false)
             }
         }
         
