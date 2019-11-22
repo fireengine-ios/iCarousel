@@ -166,6 +166,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
 
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
+                } else if let vc = self?.router.createRootNavigationController(controller: controller) {
+                    self?.router.presentViewController(controller: vc)
+                } else {
+                    assertionFailure("Unexpected controller")
                 }
             }, error: { [weak self] errorResponse in
                 self?.showError(message: errorResponse.description)

@@ -82,7 +82,6 @@ class InstagramAuthViewController: ViewController {
                 case .success(_):
                     DispatchQueue.toMain {
                         self?.delegate?.instagramAuthSuccess()
-                        self?.navigationController?.popViewController(animated: true)
                     }
                 case .failed(let error):
                     self?.hideSpinner()
