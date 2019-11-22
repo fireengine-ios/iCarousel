@@ -25,7 +25,7 @@ import Foundation
 class ImportFromInstagramRouter: ImportFromInstagramRouterInput {
     func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?) {
         let router = RouterVC()
-        let controller = router.instagramAuth as! InstagramAuthViewController
+        let controller = router.instagramAuth(fromSettings: true) as! InstagramAuthViewController
         controller.configure(clientId: param.clientID!, authpath: param.authURL!)
         controller.delegate = delegate
         router.pushViewController(viewController: controller)

@@ -16,6 +16,13 @@ protocol InstagramAuthViewControllerDelegate: class {
     
 class InstagramAuthViewController: ViewController {
     
+    static func controller(fromSettings: Bool) -> InstagramAuthViewController {
+        let vc = InstagramAuthViewController()
+        vc.isFromSettings = fromSettings
+        
+        return vc
+    }
+    
     private lazy var webView = WKWebView(frame: .zero)
     
     private var clientID: String?
@@ -27,6 +34,8 @@ class InstagramAuthViewController: ViewController {
     
     private lazy var instagramService = InstagramService()
     private lazy var accountService = AccountService()
+    
+    private var isFromSettings = false
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
@@ -81,7 +90,14 @@ class InstagramAuthViewController: ViewController {
                 switch response {
                 case .success(_):
                     DispatchQueue.toMain {
-                        self?.delegate?.instagramAuthSuccess()
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        self.delegate?.instagramAuthSuccess()
+                        if self.isFromSettings {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 case .failed(let error):
                     self?.hideSpinner()
