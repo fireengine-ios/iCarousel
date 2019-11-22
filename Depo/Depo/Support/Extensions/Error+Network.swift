@@ -15,13 +15,13 @@ extension Error {
     }
     
     var isNetworkError: Bool {
-        ///This way we fix our 11 error, when we are trying to downcast self to URLError
+        ///This way we fix our 11 error(segmentation fault 11), when we are trying to downcast self to URLError
         //        return self is URLError
         return (self as NSError).domain == NSURLErrorDomain
     }
     
     var urlErrorCode: URLError.Code {
-        ///This way we fix our 11 error, when we are trying to downcast self to URLError
+        ///This way we fix our 11 error(segmentation fault 11), when we are trying to downcast self to URLError
         //        guard let urlError = self as? URLError else {
         return URLError.Code(rawValue: (self as NSError).code)
     }
