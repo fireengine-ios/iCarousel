@@ -130,7 +130,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        
+        editingTabBar.editingBar.barStyle = .black
         statusBarColor = .black
     }
     
