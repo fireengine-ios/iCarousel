@@ -17,6 +17,7 @@ final class InstapickCampaignCell: UICollectionViewCell, NibInit {
             newValue.numberOfLines = 0
             newValue.text = TextConstants.campaignDetailContestInfoTitle
             newValue.adjustsFontSizeToFitWidth = true
+            newValue.minimumScaleFactor = 0.7
         }
     }
     
