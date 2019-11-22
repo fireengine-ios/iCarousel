@@ -74,7 +74,7 @@ class CustomNavBarView: UIView, UISearchBarDelegate {
             #if LIFEDRIVE
 ///            There is no "true" design available right now.
             #else
-            logoImage.frame.origin.x = (UIScreen.main.bounds.width / 2) - (FrameConstants.logoImageSizeIPad / 2)
+            logoImage.frame.origin.x = (UIScreen.main.bounds.width * 0.5) - (FrameConstants.logoImageSizeIPad * 0.5)
             
             logoImage.frame.origin.y = logoImageY
             
