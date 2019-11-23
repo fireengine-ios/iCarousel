@@ -859,8 +859,8 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var instagramAuth: UIViewController {
-        return InstagramAuthViewController()
+    func instagramAuth(fromSettings: Bool) -> UIViewController {
+        return InstagramAuthViewController.controller(fromSettings: fromSettings)
     }
     
     // MARK: OTP
