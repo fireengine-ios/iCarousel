@@ -18,10 +18,12 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let _ = parent as? SegmentedController {
+        if parent is SegmentedController {
             homePageNavigationBarStyle()
+            
         } else {
             navigationBarWithGradientStyle()
+            
         }
         
         if mainTitle != "" {
