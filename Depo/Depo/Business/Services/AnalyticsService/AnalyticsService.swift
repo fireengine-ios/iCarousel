@@ -41,7 +41,11 @@ final class AnalyticsService {
         let environment = ADJEnvironmentProduction
         #endif
         
+        #if LIFEBOX
         let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
+        #else
+        let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
+        #endif
         Adjust.appDidLaunch(adjustConfig)
     }
     
