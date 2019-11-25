@@ -23,11 +23,10 @@ apps = [ [
 ]
 derivedDir = 'lifebox'
 
-if(apps.name='lifedrive') { 
-   developmentTeamID ='7YZS5NTGYH'
-   ... 
+if(apps.name == 'lifedrive') { 
+   developmentTeamID ='729CGH4BJD'
 } else{ 
-   developmentTeamID ='729CGH4BJD' 
+   developmentTeamID ='7YZS5NTGYH' 
 }
 
 
