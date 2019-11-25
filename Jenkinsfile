@@ -50,7 +50,7 @@ xcodeParams = [
 def flavors = [
     test: [
         configuration: 'Enterprise',
-        //developmentTeamID: 'LA4DZFY7SY',
+        developmentTeamID: 'LA4DZFY7SY',
         ipaExportMethod: 'enterprise'
     ],
     prod: [
