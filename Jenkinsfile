@@ -23,12 +23,15 @@ apps = [ [
 ]
 derivedDir = 'lifebox'
 
+def developmentTeamIDtmp
+
 if(apps.name == 'lifedrive') { 
-   developmentTeamID ='729CGH4BJD'
+   developmentTeamIDtmp ='729CGH4BJD'
 } else{ 
-   developmentTeamID ='7YZS5NTGYH' 
+   developmentTeamIDtmp ='7YZS5NTGYH' 
 }
 
+echo "developmentTeamIDtmp : ${developmentTeamIDtmp}"
 
 groupPath = "com/ttech/lifebox/ios" // This will be used on artifactory
 
@@ -47,12 +50,12 @@ xcodeParams = [
 def flavors = [
     test: [
         configuration: 'Enterprise',
-        developmentTeamID: 'LA4DZFY7SY',
+        //developmentTeamID: 'LA4DZFY7SY',
         ipaExportMethod: 'enterprise'
     ],
     prod: [
         configuration: 'AppStore',
-        developmentTeamID: ${developmentTeamID},
+        //developmentTeamID,
         ipaExportMethod: 'app-store'
     ]
 ]
@@ -117,7 +120,7 @@ def runXcode = { app, flavorId ->
       manualSigning: true,
       
       developmentTeamName: 'none (specify one below)',
-      developmentTeamID: flavor.developmentTeamID,
+      developmentTeamID: developmentTeamIDtmp,
       
       // Provisioning Profiles
       provisioningProfiles: provisioningProfiles,
