@@ -23,6 +23,14 @@ apps = [ [
 ]
 derivedDir = 'lifebox'
 
+if(apps.name='lifedrive') { 
+   developmentTeamID ='7YZS5NTGYH'
+   ... 
+} else{ 
+   developmentTeamID ='729CGH4BJD' 
+}
+
+
 groupPath = "com/ttech/lifebox/ios" // This will be used on artifactory
 
 // Deploy to ICT Store
@@ -45,10 +53,11 @@ def flavors = [
     ],
     prod: [
         configuration: 'AppStore',
-        developmentTeamID: '7YZS5NTGYH',
+        developmentTeamID: ${developmentTeamID},
         ipaExportMethod: 'app-store'
     ]
 ]
+
 /***** PROJECT variables END ******/
 
 artifactory = Artifactory.server 'turkcell-artifactory'
