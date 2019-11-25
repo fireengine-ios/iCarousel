@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import ObjectiveDropboxOfficial
+//import ObjectiveDropboxOfficial
 import Alamofire
-
+import SwiftyDropbox
 
 enum DropboxManagerResult {
     /// User is logged into Dropbox
@@ -25,30 +25,30 @@ final class DropboxManager {
     
     func start() {
         #if LIFEBOX
-        DBClientsManager.setup(withAppKey: "422fptod5dlxrn8")
+        DropboxClientsManager.setupWithAppKey("422fptod5dlxrn8")
         #else
-        DBClientsManager.setup(withAppKey: "mij832wzxlbyeiq")
+        DropboxClientsManager.setupWithAppKey("mij832wzxlbyeiq")
         #endif
     }
     
     func handleRedirect(url: URL) -> Bool {
         debugLog("DropboxManager handleRedirect")
-
-        guard let dbResult = DBClientsManager.handleRedirectURL(url) else {
+        
+        guard let authResult = DropboxClientsManager.handleRedirectURL(url) else {
             return false
         }
         
-        print(dbResult)
-        if dbResult.isSuccess() {
-            handler?(.success(token: dbResult.accessToken.accessToken))
+        switch authResult {
+        case .success(let accessToken):
+            handler?(.success(token: accessToken.accessToken))
             debugLog("DropboxManager User is logged into Dropbox.")
-        } else if dbResult.isCancel() {
+        case .cancel:
             handler?(.cancel)
             debugLog("DropboxManager Authorization flow was manually canceled by user!")
-        } else if dbResult.isError() {
-            handler?(.failed(dbResult.description()))
-            debugLog("DropboxManager Error: \(dbResult)")
-            print("Error: \(dbResult)")
+        case .error(_, let description):
+            handler?(.failed(description))
+            debugLog("DropboxManager Error: \(description)")
+            print("Error: \(description)")
         }
         
         return true
@@ -57,7 +57,7 @@ final class DropboxManager {
     private var handler: DropboxLoginHandler?
     
     private var token: String? {
-        return DBOAuthManager.shared()?.retrieveFirstAccessToken()?.accessToken
+        return DropboxOAuthManager.sharedOAuthManager.getFirstAccessToken()?.accessToken
     }
     
     func loginIfNeed(handler: @escaping DropboxLoginHandler) {
@@ -76,15 +76,15 @@ final class DropboxManager {
         guard let vc = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController else {
             return
         }
-        DBClientsManager.authorize(fromController: UIApplication.shared, controller: vc) { url in
-            UIApplication.shared.openSafely(url)
+        
+        DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: vc) { url in
+            UIApplication.shared.openURL(url)
         }
     }
     
     func logout() {
         debugLog("DropboxManager logout")
-
-        DBOAuthManager.shared()?.clearStoredAccessTokens()
+        _ = DropboxOAuthManager.sharedOAuthManager.clearStoredAccessTokens()
     }
 }
 
