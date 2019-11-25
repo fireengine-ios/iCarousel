@@ -137,7 +137,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         
         MenloworksAppEvents.onAllFilesOpen()
-        viewController.title = TextConstants.homeButtonAllFiles
         return viewController
     }
     
