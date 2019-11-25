@@ -26087,7 +26087,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -26099,10 +26099,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayextension;
 				PRODUCT_NAME = billo;
 				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Today Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -26248,7 +26248,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26262,10 +26262,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5d7cc5f7-14fe-4c8a-9e43-c048a347027a";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Share Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "billo share extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26416,7 +26416,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26430,10 +26430,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.files;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "35bafd98-8822-4d89-81c8-795bd672d2b6";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files";
+				PROVISIONING_PROFILE_SPECIFIER = "billo Files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26582,7 +26582,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26595,10 +26595,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.filesui;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fce3a81a-bf2a-453e-a622-af44ba42d465";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files UI";
+				PROVISIONING_PROFILE_SPECIFIER = "billo Files UI";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -27493,15 +27493,15 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.pushimage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive Push Image";
+				PROVISIONING_PROFILE_SPECIFIER = "billo push image";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -28550,7 +28550,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 22.5.17;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -28582,10 +28582,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "616d2fc6-3345-47ba-af1b-d5a16532592e";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store";
+				PROVISIONING_PROFILE_SPECIFIER = billo;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
