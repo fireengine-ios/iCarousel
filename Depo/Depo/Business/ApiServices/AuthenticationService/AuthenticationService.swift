@@ -471,7 +471,7 @@ class AuthenticationService: BaseRequestService {
         SessionManager.customDefault.cancellAllRequests()
     }
     
-    func signUp(user: SignUpUser, handler: @escaping (ErrorResult<SignUpSuccessResponse, SignupResponseError>) -> Void) {
+    func signUp(user: SignUpUser, handler: @escaping (ErrorResult<SignUpSuccessResponse, Error>) -> Void) {
         debugLog("AuthenticationService signUp")
 
         guard let params = user.requestParametrs as? Parameters else {
@@ -492,7 +492,7 @@ class AuthenticationService: BaseRequestService {
             .response { response in
                 
                 guard let httpResponse = response.response else {
-                    handler(.failure(SignupResponseError(status: .serverError)))
+                    handler(.failure(response.error ?? SignupResponseError(status: .serverError)))
                     return
                 }
                 
@@ -504,20 +504,18 @@ class AuthenticationService: BaseRequestService {
                     }
                     
                     guard let data = response.data else {
-                        handler(.failure(SignupResponseError(status: .serverError)))
+                        handler(.failure(response.error ?? SignupResponseError(status: .serverError)))
                         return
                     }
                     
                     let result = SignUpSuccessResponse(withJSON: JSON(data: data))
                     handler(.success(result))
-                } else {
-                    guard let data = response.data else {
-                        handler(.failure(SignupResponseError(status: .serverError)))
-                        return
-                    }
-                    
-                    let error = SignupResponseError(json: JSON(data: data))
+                } else if let data = response.data, let error = SignupResponseError(json: JSON(data: data)) {
                     handler(.failure(error))
+                } else if httpResponse.statusCode == 503 {
+                    handler(.failure(SignupResponseError(status: .serverErrorUnderMaintenance)))
+                } else {
+                    handler(.failure(SignupResponseError(status: .serverError)))
                 }
             }
     }
