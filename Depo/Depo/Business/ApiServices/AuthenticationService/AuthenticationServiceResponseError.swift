@@ -133,6 +133,7 @@ final class SignupResponseError: Map {
         case tooManyInvalidOtpAttempts
         case networkError
         case serverError
+        case serverErrorUnderMaintenance
         case incorrectCaptcha
         case captchaRequired
         case unauthorized
@@ -168,19 +169,31 @@ final class SignupResponseError: Map {
     private enum JSONKeys {
         static let value = "value"
         static let status = "status"
+        static let errorMsg = "errorMsg"
+        static let errorMessage = "errorMessage"
     }
     
-    let value: SignUpReasonError?
     let status: Status?
+    let errorReason: SignUpReasonError?
     
-    init(json: JSON) {
-        status = Status(with: json[JSONKeys.status].stringValue)
-        value = SignUpReasonError(json: json[JSONKeys.value])
+    init?(json: JSON) {
+        if let valueString = json[JSONKeys.value].string {
+            status = Status(with: valueString)
+        } else if let statusString = json[JSONKeys.status].string {
+            status = Status(with: statusString)
+        } else if let errorMsg = json[JSONKeys.errorMsg].string {
+            status = Status(with: errorMsg)
+        } else if let errorMessage = json[JSONKeys.errorMessage].string {
+            status = Status(with: errorMessage)
+        } else {
+            return nil
+        }
+        errorReason = SignUpReasonError(json: json[JSONKeys.value])
     }
     
     init(status: Status?) {
         self.status = status
-        value = nil
+        errorReason = nil
     }
 
     var isCaptchaError: Bool {
@@ -212,7 +225,7 @@ final class SignupResponseError: Map {
             return GADementionValues.signUpError.tooManyInvalidOtpAttempts.text
         case .networkError:
             return GADementionValues.signUpError.networkError.text
-        case .serverError:
+        case .serverError, .serverErrorUnderMaintenance:
             return GADementionValues.signUpError.serverError.text
         case .incorrectCaptcha:
             return GADementionValues.signUpError.incorrectCaptcha.text
@@ -238,20 +251,20 @@ extension SignupResponseError: LocalizedError {
         case .gsmAlreadyExists:
             return TextConstants.errorExistPhone
         case .invalidPassword:
-            if let value = value {
-                switch value.reason {
+            if let errorReason = errorReason {
+                switch errorReason.reason {
                 case .passwordLengthIsBelowLimit:
                     let format = TextConstants.signUpErrorPasswordLengthIsBelowLimit
-                    return String(format: format, value.minimumCharacterLimit)
+                    return String(format: format, errorReason.minimumCharacterLimit)
                 case .passwordLengthExceeded:
                     let format = TextConstants.signUpErrorPasswordLengthExceeded
-                    return String(format: format, value.maximumCharacterLimit)
+                    return String(format: format, errorReason.maximumCharacterLimit)
                 case .sequentialCharacters:
                     let format = TextConstants.signUpErrorSequentialCharacters
-                    return String(format: format, value.sequentialCharacterLimit)
+                    return String(format: format, errorReason.sequentialCharacterLimit)
                 case .sameCharacters:
                     let format = TextConstants.signUpErrorSameCharacters
-                    return String(format: format, value.sameCharacterLimit)
+                    return String(format: format, errorReason.sameCharacterLimit)
                 case .uppercaseMissing:
                     return TextConstants.signUpErrorUppercaseMissing
                 case .lowercaseMissing:
@@ -274,6 +287,8 @@ extension SignupResponseError: LocalizedError {
             return TextConstants.networkConnectionLostTextError
         case .serverError:
             return TextConstants.errorServer
+        case .serverErrorUnderMaintenance:
+            return TextConstants.errorServerUnderMaintenance
         case .incorrectCaptcha:
             return TextConstants.invalidCaptcha
         case .captchaRequired:

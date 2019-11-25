@@ -115,14 +115,21 @@ class RegistrationInteractor: RegistrationInteractorInput {
             case .failure(let error):
                 self.retriesCount += 1
                 
-                self.analyticsService.trackSignupEvent(error: error)
-                
-                ///only with this error type captcha required error is processing
-                if error.isCaptchaError {
-                    self.captchaRequired = true
-                    self.output.captchaRequired(required: true)
+                if let signUpError = error as? SignupResponseError {
+                    self.analyticsService.trackSignupEvent(error: signUpError)
+                    
+                    ///only with this error type captcha required error is processing
+                    if signUpError.isCaptchaError {
+                        self.captchaRequired = true
+                        self.output.captchaRequired(required: true)
+                    }
+                } else {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .errors,
+                                                             eventActions: .serviceError,
+                                                             eventLabel: .serverError,
+                                                             eventValue: error.description)
                 }
-
+                
                 self.output.signUpFailed(errorResponse: error)
             }
         }
