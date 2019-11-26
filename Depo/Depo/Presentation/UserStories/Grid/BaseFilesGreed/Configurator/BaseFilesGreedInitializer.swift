@@ -134,7 +134,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: [.rename]),
                                alertSheetExcludeTypes: [.print])
-        viewController.title = TextConstants.homeButtonAllFiles
+        viewController.mainTitle = TextConstants.homeButtonAllFiles
         
         MenloworksAppEvents.onAllFilesOpen()
         return viewController
