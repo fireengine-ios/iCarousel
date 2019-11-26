@@ -10,6 +10,7 @@ apps = [ [
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
+            prodTeamID: '7YZS5NTGYH',
             xcodeSchema: 'TC_Depo_LifeTech',
             xcodeTarget: 'TC_Depo_LifeTech'
         ], [
@@ -17,21 +18,12 @@ apps = [ [
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
             appleId: '1467795722',
+            prodTeamID: '729CGH4BJD',
             //xcodeSchema: , // Defaults to app name
             //xcodeTarget:   // Defaults to app name
         ]
 ]
 derivedDir = 'lifebox'
-
-def developmentTeamIDtmp
-
-if(apps.name == 'lifedrive') { 
-   developmentTeamIDtmp ='729CGH4BJD'
-} else{ 
-   developmentTeamIDtmp ='7YZS5NTGYH' 
-}
-
-echo "developmentTeamIDtmp : ${developmentTeamIDtmp}"
 
 groupPath = "com/ttech/lifebox/ios" // This will be used on artifactory
 
@@ -55,7 +47,7 @@ def flavors = [
     ],
     prod: [
         configuration: 'AppStore',
-        //developmentTeamID,
+        //developmentTeamID: use app.prodTeamID
         ipaExportMethod: 'app-store'
     ]
 ]
@@ -120,7 +112,7 @@ def runXcode = { app, flavorId ->
       manualSigning: true,
       
       developmentTeamName: 'none (specify one below)',
-      developmentTeamID: developmentTeamIDtmp,
+      developmentTeamID: flavor.developmentTeamID ?: app.prodTeamID,
       
       // Provisioning Profiles
       provisioningProfiles: provisioningProfiles,
