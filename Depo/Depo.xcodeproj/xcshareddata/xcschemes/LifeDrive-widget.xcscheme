@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-               BuildableName = "LifeDrive-widget.appex"
+               BuildableName = "billo.appex"
                BlueprintName = "LifeDrive-widget"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-            BuildableName = "LifeDrive-widget.appex"
+            BuildableName = "billo.appex"
             BlueprintName = "LifeDrive-widget"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
