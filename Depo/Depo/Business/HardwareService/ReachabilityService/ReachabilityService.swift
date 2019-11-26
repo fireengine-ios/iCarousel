@@ -27,7 +27,7 @@ final class ReachabilityService: ReachabilityProtocol {
     
     static let shared = ReachabilityService()
     
-    private lazy var reachability = Reachability()
+    private lazy var reachability = try? Reachability()
     private lazy var apiReachability = APIReachabilityService()
     
     var isReachableViaWiFi: Bool {
@@ -40,11 +40,11 @@ final class ReachabilityService: ReachabilityProtocol {
     
     var isReachable: Bool {
         ///If you just .none, then compares not with the right enum
-        return self.reachability?.connection != Reachability.Connection.none && apiReachability.connection == .reachable
+        return self.reachability?.connection != Reachability.Connection.unavailable && apiReachability.connection == .reachable
     }
     
     var status: String {
-        return self.reachability?.connection.description ?? Reachability.Connection.none.description
+        return self.reachability?.connection.description ?? Reachability.Connection.unavailable.description
     }
     
     let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
@@ -70,7 +70,7 @@ final class ReachabilityService: ReachabilityProtocol {
             if let connection = (notification.object as? Reachability)?.connection {
                 debugPrint("ReachabilityService: new connection status \(connection.description)")
             
-                if connection == .none {
+                if connection == .unavailable {
                     self.notifyDelegates()
                     return
                 }
