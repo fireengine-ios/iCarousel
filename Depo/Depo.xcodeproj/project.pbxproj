@@ -332,9 +332,6 @@
 		730A998522D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
-		7312E1462382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
-		7312E1472382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
-		7312E1482382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */; };
 		7329EE70231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE71231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
 		7329EE72231F9ADA0078396D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7329EE6F231F9AD90078396D /* SpotifyiOS.framework */; };
@@ -386,6 +383,9 @@
 		737A2EC72338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
 		737A2EC82338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
 		737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
+		739930B7238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739930B6238C01A7004306A4 /* UpdatePasswordErrorResponse.swift */; };
+		739930B8238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739930B6238C01A7004306A4 /* UpdatePasswordErrorResponse.swift */; };
+		739930B9238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739930B6238C01A7004306A4 /* UpdatePasswordErrorResponse.swift */; };
 		73A1833D235855AA0095719F /* CampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A1833C235855AA0095719F /* CampaignCard.swift */; };
 		73A1833E235855AA0095719F /* CampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A1833C235855AA0095719F /* CampaignCard.swift */; };
 		73A1833F235855AA0095719F /* CampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A1833C235855AA0095719F /* CampaignCard.swift */; };
@@ -3142,7 +3142,7 @@
 		8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
-		8CC301E722C0E757005EA404 /* billo.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* billo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -6662,7 +6662,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				0302B73C237023590005D78F /* LifeDriveNotificationService.appex in Embed App Extensions */,
-				8CC301E722C0E757005EA404 /* billo.appex in Embed App Extensions */,
+				8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
 				8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */,
@@ -6944,7 +6944,6 @@
 		730A997722D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationDesigner.swift; sourceTree = "<group>"; };
 		730A998022D740130037ABA9 /* TwoFactorAuthenticationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationCell.swift; sourceTree = "<group>"; };
 		730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoFactorAuthenticationCell.xib; sourceTree = "<group>"; };
-		7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordErrorResponse.swift; sourceTree = "<group>"; };
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
 		734D9E12233B58B600B143D4 /* SetSecretQuestionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecretQuestionErrors.swift; sourceTree = "<group>"; };
@@ -6962,6 +6961,7 @@
 		737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectQuestionViewController.xib; sourceTree = "<group>"; };
 		737A2EC22338F44E0014258A /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		737A2EC32338F44E0014258A /* QuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
+		739930B6238C01A7004306A4 /* UpdatePasswordErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordErrorResponse.swift; sourceTree = "<group>"; };
 		73A1833C235855AA0095719F /* CampaignCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCard.swift; sourceTree = "<group>"; };
 		73A18340235855BD0095719F /* CampaignCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CampaignCard.xib; sourceTree = "<group>"; };
 		73A183442359B1A10095719F /* CampaignCardDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCardDesigner.swift; sourceTree = "<group>"; };
@@ -8054,7 +8054,7 @@
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8C3BA2DF22B3CC32006D901E /* billo.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = billo.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeDrive-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA33E22B3CC45006D901E /* LifeDriveShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveShared.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA37822B3CC49006D901E /* LifeDriveFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeDriveProviderUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -9457,7 +9457,7 @@
 				78B2D34A204AA5F500D096DC /* LifeTech-NotificationService.appex */,
 				CEBA0940214BCC63007A0CE3 /* LifeboxUnitTests.xctest */,
 				CE784F1C22A685FB00662219 /* lifedrive.app */,
-				8C3BA2DF22B3CC32006D901E /* billo.appex */,
+				8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */,
 				8C3BA33E22B3CC45006D901E /* LifeDriveShared.appex */,
 				8C3BA37822B3CC49006D901E /* LifeDriveFileProvider.appex */,
 				8C3BA3A222B3CC53006D901E /* LifeDriveProviderUI.appex */,
@@ -11462,6 +11462,7 @@
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
 				CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */,
 				73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */,
+				739930B6238C01A7004306A4 /* UpdatePasswordErrorResponse.swift */,
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
@@ -11474,7 +11475,6 @@
 				73D723E7231D0855006AE835 /* PaymentModels.swift */,
 				73D723E9231D08A6006AE835 /* PackageOffer.swift */,
 				73A183482359CC550095719F /* CampaignCardResponse.swift */,
-				7312E1452382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -17204,7 +17204,7 @@
 			);
 			name = "LifeDrive-widget";
 			productName = "autosync-widget";
-			productReference = 8C3BA2DF22B3CC32006D901E /* billo.appex */;
+			productReference = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		8C3BA2E122B3CC45006D901E /* LifeDriveShared */ = {
@@ -21591,7 +21591,7 @@
 				8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */,
 				8C0E8EBE1FDEBDFF00789C91 /* BaseFilesGreedRouterInput.swift in Sources */,
 				8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */,
-				7312E1472382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
+				739930B8238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */,
 				8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
 				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
@@ -23021,7 +23021,7 @@
 				8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
 				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
-				7312E1462382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
+				739930B7238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */,
 				CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,
@@ -24988,7 +24988,7 @@
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
 				CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */,
 				CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */,
-				7312E1482382AEEE0085CFBA /* UpdatePasswordErrorResponse.swift in Sources */,
+				739930B9238C01AC004306A4 /* UpdatePasswordErrorResponse.swift in Sources */,
 				CE784BC822A685FB00662219 /* FileInfoRouterInput.swift in Sources */,
 				CE784BC922A685FB00662219 /* DocumentsGreedPresenter.swift in Sources */,
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,
@@ -26023,7 +26023,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = billo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
 				SKIP_INSTALL = YES;
@@ -26063,7 +26063,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = billo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
 				SKIP_INSTALL = YES;
@@ -26102,7 +26102,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
-				PRODUCT_NAME = billo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Today Extension";
 				SKIP_INSTALL = YES;
@@ -26141,7 +26141,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
-				PRODUCT_NAME = billo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
@@ -28023,7 +28023,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.33.19;
+				CURRENT_PROJECT_VERSION = 33.25;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -28086,7 +28086,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.33.19;
+				CURRENT_PROJECT_VERSION = 33.25;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28145,7 +28145,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.33.19;
+				CURRENT_PROJECT_VERSION = 33.25;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28205,7 +28205,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.33.19;
+				CURRENT_PROJECT_VERSION = 33.25;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28433,7 +28433,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.16;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -28494,7 +28494,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.16;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28551,7 +28551,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.16;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -28609,7 +28609,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22.5.16;
+				CURRENT_PROJECT_VERSION = 22.5.9;
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
