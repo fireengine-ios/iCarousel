@@ -17,13 +17,23 @@ class SelectNameRouter: SelectNameRouterInput {
     func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool) {
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, moduleOutput: presenter)
 
+        if
+            let tabBarVC = router.defaultTopController?.presentingViewController as? TabBarViewController,
+            let navVC = tabBarVC.activeNavigationController,
+            let homePage = navVC.topViewController as? HomePageViewController
+        {
+            homePage.isNeedShowSpotlight = false
+        }
+        
         if !isSubFolder {
             let allFilesVC = router.allFiles(moduleOutput: presenter,
                                              sortType: presenter.allFilesSortType,
                                              viewType: presenter.allFilesViewType)
             router.pushSeveralControllers([allFilesVC, folderVC])
+            
         } else {
             router.pushViewController(viewController: folderVC)
+            
         }
     }
     

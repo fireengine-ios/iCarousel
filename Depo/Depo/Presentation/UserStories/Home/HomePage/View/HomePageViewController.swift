@@ -22,6 +22,9 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
     
     var navBarConfigurator = NavigationBarConfigurator()
     
+    ///special flag for delaying spotlight present if after appearing new contorller(s) will be presented/pushed
+    var isNeedShowSpotlight = true
+    
     let homePageDataSource = HomeCollectionViewDataSource()
     
     private var refreshControl = UIRefreshControl()
@@ -87,7 +90,11 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
             navigationBarWithGradientStyle()
         }
         
-        requestShowSpotlight()
+        if isNeedShowSpotlight {
+            requestShowSpotlight()
+        } else {
+            isNeedShowSpotlight = true
+        }
         
         output.viewIsReadyForPopUps()
     }
@@ -164,19 +171,24 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         }
         
         frameForSpotlight(type: type, controller: tabBarVC) { [weak self] frame in
-            guard let navVC = tabBarVC.activeNavigationController,
-                navVC.topViewController is HomePageViewController else {
-                    return
+            guard
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is HomePageViewController,
+                frame != .zero
+            else {
+                return
             }
             
-            if frame != .zero {
-                let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
-                    self?.output.shownSpotlight(type: type)
-                    self?.output.closedSpotlight(type: type)
-                })
+            let controller = SpotlightViewController.with(rect: frame, message: type.title) { [weak self] in
+                guard let self = self else {
+                    return
+                }
                 
-                tabBarVC.present(controller, animated: true, completion: nil)
+                self.output.shownSpotlight(type: type)
+                self.output.closedSpotlight(type: type)
             }
+            
+            tabBarVC.present(controller, animated: true)
         }
     }
     
