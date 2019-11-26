@@ -12,40 +12,51 @@ import SwiftyJSON
 enum UpdatePasswordErrorStatusType: String {
     case invalidPassword = "INVALID_PASSWORD"
     case invalidCaptcha = "4001"
-    case unknown = "unknown"
 }
 
 enum UpdatePasswordErrorReasonType: String {
+    case passwordIsEmpty = "PASSWORD_FIELD_IS_EMPTY"
+    case sequentialCharacters = "SEQUENTIAL_CHARACTERS"
+    case sameCharacters = "SAME_CHARACTERS"
+    case passwordLengthExceeded = "PASSWORD_LENGTH_EXCEEDED"
+    case passwordLengthIsBelowLimit = "PASSWORD_LENGTH_IS_BELOW_LIMIT"
     case resentPassword = "PASSWORD_IN_RECENT_HISTORY"
     case uppercaseMissing = "UPPERCASE_MISSING"
     case lowercaseMissing = "LOWERCASE_MISSING"
     case numberMissing = "NUMBER_MISSING"
-    case unknown = "unknown"
 }
 
-final class UpdatePasswordErrorResponse {
+final class UpdatePasswordErrorResponse: Map {
     
-        private enum ResponseKey {
-            static let status = "status"
-            static let value = "value"
-            static let reason = "reason"
-        }
-    
-    let status: UpdatePasswordErrorStatusType
-    let reason: UpdatePasswordErrorReasonType
-
-    init(status: UpdatePasswordErrorStatusType, reason: UpdatePasswordErrorReasonType ) {
-        self.status = status
-        self.reason = reason
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+        static let reason = "reason"
+        static let sequentialCharacterLimitKey = "sequentialCharacterLimit"
+        static let sameCharacterLimit = "sameCharacterLimit"
+        static let recentHistoryLimit = "recentHistoryLimit"
+        static let minimumCharacterLimit = "minimumCharacterLimit"
+        static let maximumCharacterLimit = "maximumCharacterLimit"
     }
     
-    convenience init?(json: JSON) {
-         
+    let status: UpdatePasswordErrorStatusType?
+    let reason: UpdatePasswordErrorReasonType?
+    let sequentialCharacterLimit: Int
+    let sameCharacterLimit: Int
+    let recentHistoryLimit: Int
+    let minimumCharacterLimit: Int
+    let maximumCharacterLimit: Int
+
+    init(json: JSON) {
+        
         let value = json[ResponseKey.value]
         
-        let status = UpdatePasswordErrorStatusType(rawValue: json[ResponseKey.status].stringValue) ?? .unknown
-        let reason = UpdatePasswordErrorReasonType(rawValue: value[ResponseKey.reason].stringValue) ?? .unknown
-        
-        self.init(status: status, reason: reason)
+        status = UpdatePasswordErrorStatusType(rawValue: json[ResponseKey.status].stringValue) 
+        reason = UpdatePasswordErrorReasonType(rawValue: value[ResponseKey.reason].stringValue)
+        minimumCharacterLimit = value[ResponseKey.minimumCharacterLimit].intValue
+        maximumCharacterLimit = value[ResponseKey.maximumCharacterLimit].intValue
+        sequentialCharacterLimit = value[ResponseKey.sequentialCharacterLimitKey].intValue
+        sameCharacterLimit = value[ResponseKey.sameCharacterLimit].intValue
+        recentHistoryLimit = value[ResponseKey.recentHistoryLimit].intValue
     }
 }

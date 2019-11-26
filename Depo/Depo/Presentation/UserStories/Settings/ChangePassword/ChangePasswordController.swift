@@ -249,6 +249,11 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
              .passwordInResentHistory,
              .uppercaseMissingInPassword,
              .lowercaseMissingInPassword,
+             .passwordIsEmpty,
+             .passwordLengthIsBelowLimit,
+             .passwordLengthExceeded,
+             .passwordSequentialCaharacters,
+             .passwordSameCaharacters,
              .numberMissingInPassword:
             showErrorColorInNewPasswordView = true
             
