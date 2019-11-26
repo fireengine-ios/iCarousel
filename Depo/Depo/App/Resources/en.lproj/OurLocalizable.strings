@@ -943,11 +943,11 @@
 "this_text_is_empty" = "This text is empty";
 "password_changed_successfully" = "Your password has been changed successfully";
 "password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
-"password_in_resent_history" = " Your password cannot be same with your last %@ passwords.";
-"password_length_below_limit" = "Your password should not contain less than %@ characters";
-"password_length_exceede" = "Your password should not contain more than %@ characters";
-"password_sequential_caharacters" = "Your password should not contain more than %@ characters";
-"password_same_caharacters" = "Your password should not contain more than %@ same characters.";
+"password_in_resent_history" = " Your password cannot be same with your last %d passwords.";
+"password_length_below_limit" = "Your password should not contain less than %d characters";
+"password_length_exceede" = "Your password should not contain more than %d characters";
+"password_sequential_caharacters" = "Your password should not contain more than %d characters";
+"password_same_caharacters" = "Your password should not contain more than %d same characters.";
 "uppercase_miss_in_password" = "Your password should contain uppercase character";
 "lowercase_miss_in_password" = "Your password should contain lowercase character";
 "number_miss_in_password" = "Your password should contain number";
