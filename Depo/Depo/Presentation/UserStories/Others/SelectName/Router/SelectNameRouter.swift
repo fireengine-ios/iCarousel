@@ -23,6 +23,8 @@ class SelectNameRouter: SelectNameRouterInput {
             let homePage = navVC.topViewController as? HomePageViewController
         {
             homePage.isNeedShowSpotlight = false
+        } else {
+            assertionFailure("Сondition not match expectations, homePage's spotlight must be delayed")
         }
         
         if !isSubFolder {
