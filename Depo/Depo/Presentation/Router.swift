@@ -518,9 +518,12 @@ class RouterVC: NSObject {
     
     var allFiles: UIViewController? {
         let storage = ViewSortStorage.shared
-        return allFiles(moduleOutput: storage,
-                        sortType: storage.allFilesSortType,
-                        viewType: storage.allFilesViewType)
+        let controller = allFiles(moduleOutput: storage,
+                                  sortType: storage.allFilesSortType,
+                                  viewType: storage.allFilesViewType)
+        controller.title = TextConstants.homeButtonAllFiles
+        
+        return controller
     }
     
     var segmentedFiles: UIViewController? {
