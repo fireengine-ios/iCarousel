@@ -92,8 +92,8 @@ def runXcode = { app, flavorId ->
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
       generateArchive: false,
-      noConsoleLog: true,
-      logfileOutputDirectory: "${WORKSPACE}/${app.name}-logs",
+      noConsoleLog: false,
+      //logfileOutputDirectory: "${WORKSPACE}/${app.name}-logs",
       configuration: flavor.configuration,
       
       // Pack application, build and sign .ipa?
