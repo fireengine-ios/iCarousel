@@ -981,7 +981,7 @@
 "terms_of_use" = "Kullanıcı Sözleşmesi";
 "privacy_policy" = "Gizlilik Politikası";
 "face_tags_description_standart" = "Yüz ve Nesne Tanıma özelliğini aktiflediğinde, yüklemiş olduğun fotoğraflar yüz ve objelere göre ve konum servisi özelliği açıksa lokasyon bilgilerine göre gruplandırılabilecek ve yüklediğin içeriklere özel hikayeler oluşturulabilecektir.";
-"terms_and_use_introduction_checkbox" = "Kullanıcı Sözleşmesi ve Gizlilik Politikası'nı okudum ve onaylıyorum.";
+"terms_and_use_introduction_checkbox" = "Kullanıcı Sözleşmesi'ni okudum ve onaylıyorum.\nGizlilik Politikası";
 "privacy_policy_condition" = "Gizlilik Politikası";
 "photo_pick_description" = "Instagram hesabını bağlama özelliğini aktiflediğinde, her yeni PhotoPick sorgunda hesabına özel analiz yaparak kişiselleştirilmiş, çok daha iyi bir deneyim sunabileceğiz.";
 
@@ -1269,7 +1269,7 @@
 "campaign_vc_top_description_zero" = "Kampanyadaki günlük çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
 "campaign_vc_top_title_non_zero" = "ANALİZE DEVAM!";
 "campaign_vc_top_description_non_zero" = "Kampanya kapsamında günlük %d çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
-"create_story_empty_name_error" = "";
+"create_story_empty_name_error" = "Hikaye ismi boş";
 "photopick_history_campaign_contest_total_draw" = "Toplam Çekiliş Hakkım";
 "photopick_history_campaign_contest_remaining_draw" = "Günlük Kalan Hakkım";
 "sing_up_error_password_length_is_below_limit" = "";
