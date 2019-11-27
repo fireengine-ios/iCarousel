@@ -26101,7 +26101,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "LifeDrive-widget";
 				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
