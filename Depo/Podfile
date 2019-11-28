@@ -136,10 +136,10 @@ end
 #    pod 'MMWormhole', '~> 2.0.0'
 #end
 
-target "LifeDriveNotificationService" do
-  pod 'Netmera'
-  pod 'iCarousel'
-end
+#target "LifeDriveNotificationService" do
+#  pod 'Netmera'
+#  pod 'iCarousel'
+#end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

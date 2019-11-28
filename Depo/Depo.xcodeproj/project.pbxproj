@@ -14,7 +14,6 @@
 		0302B73923701F000005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFB8D82361C64500200A7F /* AnalyzeHistoryEmptyCell.xib */; };
 		0302B73A237023370005D78F /* LifeTech-NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 78B2D34A204AA5F500D096DC /* LifeTech-NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0302B73B2370234C0005D78F /* LifeboxNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1ED823685D7B009ACCFF /* LifeboxNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0302B73C237023590005D78F /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
 		065212E5C2E83D762D0B4492 /* PhotoVideoDetailModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BD485A1AAAA905F218013 /* PhotoVideoDetailModuleInput.swift */; };
@@ -6593,13 +6592,6 @@
 			remoteGlobalIDString = 984B1ECC23685D7B009ACCFF;
 			remoteInfo = LifeboxNotificationService;
 		};
-		984B1EEF236860D1009ACCFF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 984B1EDD23685FC8009ACCFF;
-			remoteInfo = LifeDriveNotificationService;
-		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -6653,7 +6645,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0302B73C237023590005D78F /* LifeDriveNotificationService.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
 				8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */,
@@ -17478,7 +17469,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				984B1EF0236860D1009ACCFF /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
 				8C3BA3A922B3CDC2006D901E /* PBXTargetDependency */,
 				8C3BA3A722B3CDBE006D901E /* PBXTargetDependency */,
@@ -25309,11 +25299,6 @@
 			isa = PBXTargetDependency;
 			target = 984B1ECC23685D7B009ACCFF /* LifeboxNotificationService */;
 			targetProxy = 984B1EDA23685DEF009ACCFF /* PBXContainerItemProxy */;
-		};
-		984B1EF0236860D1009ACCFF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 984B1EDD23685FC8009ACCFF /* LifeDriveNotificationService */;
-			targetProxy = 984B1EEF236860D1009ACCFF /* PBXContainerItemProxy */;
 		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
