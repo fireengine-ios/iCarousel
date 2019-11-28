@@ -22,7 +22,8 @@ protocol Factory: SharedFactory {
     func resolve() -> InstapickService
     func resolve() -> SpotifyService
     func resolve() -> SpotifyRoutingService
-
+    func resolve() -> SmartAlbumsManager
+    
     func resolve() -> CoreDataStack
 }
 
@@ -92,5 +93,10 @@ extension FactoryMain {
     private static let spotifyRoutingService = SpotifyRoutingService()
     func resolve() -> SpotifyRoutingService {
         return FactoryMain.spotifyRoutingService
+    }
+    
+    private static let smartAlbumsManager = SmartAlbumsManagerImpl()
+    func resolve() -> SmartAlbumsManager {
+        return FactoryMain.smartAlbumsManager
     }
 }

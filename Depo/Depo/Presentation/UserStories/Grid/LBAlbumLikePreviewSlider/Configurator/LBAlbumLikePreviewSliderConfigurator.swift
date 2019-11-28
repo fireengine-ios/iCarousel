@@ -39,16 +39,14 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        let interactor: LBAlbumLikePreviewSliderInteractor
+        let albumsManager: SmartAlbumsManager
         if let peopleItem = peopleItem {
-            interactor = PeopleAlbumSliderInteractor(peopleItem: peopleItem)
-            
-            let title = String(format: TextConstants.albumLikeSliderWithPerson,
-                               peopleItem.name ?? TextConstants.faceImageThisPerson)
+            albumsManager = PeopleAlbumsManager(peopleItem: peopleItem)
         } else {
-            interactor = LBAlbumLikePreviewSliderInteractor()
+            albumsManager = factory.resolve()
         }
         
+        let interactor = LBAlbumLikePreviewSliderInteractor(albumsManager: albumsManager)
         interactor.output = presenter
 
         presenter.interactor = interactor
