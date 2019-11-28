@@ -572,7 +572,7 @@
 "LifeboxLargePopUpExpandButtonTitle" = "Zgjeroni Arkivën Time";
 "LifeboxLargePopUpSkipButtonTitle" = "Anashkaloni ";
 "Lifebox can sync your contacts automatically." = "lifebox mund t'i sinkronizojë automatikisht kontaktet tuaja.";
-"error_login" = "Ju duhet të hyni në lifebox për të ngarkuar skedarët.";
+"error_login" = "Ju duhet të hyni në %@ për të ngarkuar skedarët.";
 "uploading" = "Duke u ngarkuar";
 "widgetBottomTitleLastSyncFormat" = "Ngarkimi iI fundit: %@";
 "widgetBottomTitleNewerSyncronized" = "Kurrë";
@@ -1307,3 +1307,15 @@
 "create_story_empty_name_error" = "";
 "photopick_history_campaign_contest_total_draw" = "";
 "photopick_history_campaign_contest_remaining_draw" = "";
+"sing_up_error_password_length_is_below_limit" = "";
+"sing_up_error_password_length_exceeded" = "";
+"sing_up_error_sequential_characters" = "";
+"sing_up_error_same_characters" = "";
+"sing_up_error_uppercase_missing" = "";
+"sing_up_error_lowercase_missing" = "";
+"sing_up_error_number_missing" = "";
+"sing_up_error_unauthorized" = "";
+"password_in_resent_history" = "";
+"uppercase_miss_in_password" = "";
+"lowercase_miss_in_password" = "";
+"number_miss_in_password" = "";

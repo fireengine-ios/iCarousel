@@ -495,10 +495,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                     
-                    guard
-                        let data = response.data,
-                        let value = JSON(data: data)["value"].string
-                    else {
+                    guard let data = response.data, let value = JSON(data: data)["value"].string else {
                         handler(.failure(.unknown))
                         return
                     }
@@ -522,42 +519,51 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                    
-                    guard
-                        let data = response.data
-                    else {
+                    guard let data = response.data else {
                         handler(.failure(.unknown))
                         return
                     }
                     
                     let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
-                    let backendError: UpdatePasswordErrors
                     
-                    guard let status = errorResponse?.status,
-                          let reason = errorResponse?.reason
-                    else {
-                        handler(.failure(.unknown))
-                        return
-                    }
                     
-                    switch (status, reason) {
+                    if errorResponse.status == .invalidCaptcha {
+                        handler(.failure(.invalidCaptcha))
+                    } else if errorResponse.status == .invalidPassword {
                         
-                        case (.invalidCaptcha, _ ):
-                            backendError = .invalidCaptcha
-                        case (.invalidPassword, .resentPassword ):
-                            backendError = .passwordInResentHistory
-                        case (.invalidPassword, .uppercaseMissing ):
+                        guard let reason = errorResponse.reason else {
+                            handler(.failure(.invalidNewPassword))
+                            return
+                        }
+                        
+                        let backendError: UpdatePasswordErrors
+                        
+                        switch reason {
+                        case .passwordIsEmpty:
+                            backendError = .passwordIsEmpty
+                        case .sequentialCharacters:
+                            backendError = .passwordSequentialCaharacters(limit: errorResponse.sequentialCharacterLimit)
+                        case .sameCharacters:
+                            backendError = .passwordSameCaharacters(limit: errorResponse.sameCharacterLimit)
+                        case .passwordLengthExceeded:
+                            backendError = .passwordLengthExceeded(limit: errorResponse.maximumCharacterLimit)
+                        case .passwordLengthIsBelowLimit:
+                            backendError = .passwordLengthIsBelowLimit(limit: errorResponse.minimumCharacterLimit)
+                        case .resentPassword:
+                            backendError = .passwordInResentHistory(limit: errorResponse.recentHistoryLimit)
+                        case .uppercaseMissing:
                             backendError = .uppercaseMissingInPassword
-                        case (.invalidPassword, .lowercaseMissing ):
+                        case .lowercaseMissing:
                             backendError = .lowercaseMissingInPassword
-                        case (.invalidPassword, .numberMissing ):
+                        case .numberMissing:
                             backendError = .numberMissingInPassword
-                        case (.invalidPassword, _):
-                            backendError = .invalidNewPassword
-                        default:
-                            backendError = .unknown
+                        }
+                        
+                        handler(.failure(backendError))
+                        
+                    } else {
+                       handler(.failure(.unknown))
                     }
-
-                    handler(.failure(backendError))
                 }
         }
     }

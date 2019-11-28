@@ -4,7 +4,7 @@ inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
 
 def shared_pods
-  pod 'Alamofire', '~> 4.5'
+  pod 'Alamofire', '~> 4.8.1'
   pod 'SwiftyJSON', '~>3'
   pod 'KeychainSwift', '~> 11.0'
 end
@@ -19,7 +19,7 @@ def core_pods
   pod 'FBSDKShareKit'
   pod 'Netmera'
 
-  pod 'SDWebImage'
+  pod 'SDWebImage' , '~> 4'
   pod 'GoogleConversionTracking'
   pod 'Firebase/Core'
   pod 'GoogleTagManager'
@@ -29,7 +29,7 @@ def core_pods
   #Keyboard
   pod 'Typist', '~> 1.1.0'
 
-  pod 'ObjectiveDropboxOfficial'
+  pod 'SwiftyDropbox'
 
 
   pod 'SimpleExif', :git => 'https://github.com/bonyadmitr/SimpleExif.git'
