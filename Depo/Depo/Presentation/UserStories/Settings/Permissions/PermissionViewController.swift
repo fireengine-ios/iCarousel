@@ -75,34 +75,43 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
                 return
             }
             
-            switch result {
-            case .success(let result):
-                self.setupPermissionViewFromResult(result, type: .etk)
-                self.setupPermissionViewFromResult(result, type: .globalPermission)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let result):
+                    self?.setupPermissionViewFromResult(result, type: .etk)
+                    self?.setupPermissionViewFromResult(result, type: .globalPermission)
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
             }
         }
     }
     
     private func setupPermissionViewFromResult(_ result: [SettingsPermissionsResponse], type: PermissionType) {
-        if let permission = result.first(where: { $0.type == type }),
-            permission.isAllowed == true,
-            let permissionView = viewForPermissionType(type) {
-            
-            stackView.addArrangedSubview(permissionView)
-            permissionView.turnPermissionOn(isOn: permission.isApproved ?? false,
-                                            isPendingApproval: permission.isApprovalPending ?? false)
+        guard
+            let permission = result.first(where: { $0.type == type }),
+            let isAllowed = permission.isAllowed,
+            isAllowed
+        else {
+            return
         }
+        
+        let permissionView = viewForPermissionType(type)
+        
+        let isPendingApproval = permission.isApprovalPending ?? false
+        permissionView.turnPermissionOn(isOn: isAllowed, isPendingApproval: isPendingApproval)
+        
+        stackView.addArrangedSubview(permissionView)
     }
     
-    private func viewForPermissionType(_ type: PermissionType) -> (UIView & PermissionsViewProtocol)? {
-        if type == .etk {
+    private func viewForPermissionType(_ type: PermissionType) -> (UIView & PermissionsViewProtocol) {
+        switch type {
+        case .etk:
             return etkPermissionView
-        } else if type == .globalPermission {
+            
+        case .globalPermission:
             return globalPermissionView
-        } else {
-            return nil
+            
         }
     }
     
