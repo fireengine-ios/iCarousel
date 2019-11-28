@@ -23,7 +23,7 @@
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionFileProviderDocumentGroup</key>
-		<string>group.come.life.Lifebox</string>
+		<string>group.by.com.life.LifeDrive</string>
 		<key>NSExtensionFileProviderActions</key>
 		<array>
 			<dict>
