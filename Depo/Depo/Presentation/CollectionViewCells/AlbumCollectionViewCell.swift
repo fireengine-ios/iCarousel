@@ -65,7 +65,7 @@ final class AlbumCellView: UIView {
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionIcon.isHidden = !isSelectionActive
         selectionIcon.image = UIImage(named: isSelected ? "selected" : "notSelected")
-        imageView.setBorderVisibility(visibility: isSelected)
+        imageView.set(borderIsVisible: isSelected)
     }
     
     func cancelImageLoading() {

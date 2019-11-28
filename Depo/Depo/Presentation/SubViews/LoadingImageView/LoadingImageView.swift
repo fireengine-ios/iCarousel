@@ -19,39 +19,40 @@ extension LoadingImageViewDelegate {
     func onLoadingImageCanceled() {}
 }
 
-class LoadingImageView: UIImageView {
+final class LoadingImageView: UIImageView {
 
     private let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
     private var url: URL?
     private var path: PathForItem?
-    private var filesDataSource = FilesDataSource()
+    private let filesDataSource = FilesDataSource()
     
     private var cornerView: UIView?
     
     weak var loadingImageViewDelegate: LoadingImageViewDelegate?
     
-    var originalImage:UIImage? {
+    var originalImage: UIImage? {
         get {
             return gifImage ?? image
         }
         set {
             SwiftyGifManager.defaultManager.deleteImageView(self)
-            self.clear()
+            clear()
             
             if let gifImage = newValue, gifImage.imageCount != nil {
                 setGifImage(gifImage)
                 startAnimatingGif()
             } else {
-                self.image = newValue
+                image = newValue
             }
             
-            self.loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
+            loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
         }
     }
     
     var currentFrameImage:UIImage? {
         return currentImage ?? image
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,8 +70,15 @@ class LoadingImageView: UIImageView {
         setupLayout()
     }
     
+    //MARK: - Setup
+    
     private func setupLayout() {
-        if (cornerView == nil) {
+        setupCornerView()
+        setupActivityIndicator()
+    }
+    
+    private func setupCornerView() {
+        if cornerView == nil {
             let newCornerView = UIView()
             newCornerView.translatesAutoresizingMaskIntoConstraints = false
             newCornerView.backgroundColor = UIColor.clear
@@ -78,8 +86,11 @@ class LoadingImageView: UIImageView {
             newCornerView.layer.borderWidth = 2
             cornerView = newCornerView
         }
-        
+    }
+    
+    private func setupActivityIndicator() {
         addSubview(activity)
+        
         activity.center = center
         activity.hidesWhenStopped = true
         activity.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +98,24 @@ class LoadingImageView: UIImageView {
         activity.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
         activity.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
     }
+    
+    func set(borderIsVisible: Bool) {
+           if borderIsVisible {
+               guard let cornerView = cornerView else {
+                   return
+               }
+               
+               addSubview(cornerView)
+               cornerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+               cornerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+               cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+               cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+           } else {
+               cornerView?.removeFromSuperview()
+           }
+       }
+    
+    //MARK: - Image Loading
     
     func cancelLoadRequest() {
         if let url = url {
@@ -97,6 +126,7 @@ class LoadingImageView: UIImageView {
             
         path = nil
         url = nil
+        
         loadingImageViewDelegate?.onLoadingImageCanceled()
     }
     
@@ -104,20 +134,8 @@ class LoadingImageView: UIImageView {
         guard let object = object, path != object.patchToPreview else {
             return
         }
-        
-        cancelLoadRequest()
-        originalImage = nil
-        
-        path = object.patchToPreview
-        activity.startAnimating()
-        
-        url = filesDataSource.getImageData(for: object) { [weak self] data in
-            guard self?.path == object.patchToPreview else {
-                return
-            }
 
-            self?.loadImage(data: data)
-        }
+        loadImage(path: object.patchToPreview)
     }
     
     func loadThumbnail(object: Item?, smooth: Bool = false) {
@@ -143,7 +161,7 @@ class LoadingImageView: UIImageView {
         }
         
         self.path = path
-        self.url = filesDataSource.getImage(patch: path) { [weak self] image in
+        url = filesDataSource.getImage(patch: path) { [weak self] image in
             guard self?.path == path else {
                 return
             }
@@ -153,7 +171,7 @@ class LoadingImageView: UIImageView {
     }
     
     private func loadImage(data: Data?) {
-        var image:UIImage?
+        var image: UIImage?
         if let data = data {
             let format = ImageFormat.get(from: data)
             switch format {
@@ -181,25 +199,9 @@ class LoadingImageView: UIImageView {
         }
     }
     
-    func setBorderVisibility(visibility: Bool) {
-        if (visibility) {
-            guard let cornerView = cornerView else {
-                return
-            }
-            
-            addSubview(cornerView)
-            cornerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-            cornerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-            cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        } else {
-            cornerView?.removeFromSuperview()
-        }
-    }
-    
     private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
-        self.path = nil
-        self.url = nil
+        path = nil
+        url = nil
         DispatchQueue.toMain { [weak self] in
             guard let `self` = self else {
                 return
