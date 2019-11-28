@@ -3142,7 +3142,6 @@
 		8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
-		8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -6580,13 +6579,6 @@
 			remoteGlobalIDString = 8C8E930F2315463F000242E9;
 			remoteInfo = "LifeTech-LifeboxFileProviderUI";
 		};
-		8CC301E522C0E6F8005EA404 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C3BA2BC22B3CC32006D901E;
-			remoteInfo = "LifeDrive-widget";
-		};
 		984B1EC6236857D0009ACCFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -6662,7 +6654,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				0302B73C237023590005D78F /* LifeDriveNotificationService.appex in Embed App Extensions */,
-				8CC301E722C0E757005EA404 /* LifeDrive-widget.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
 				8C3BA3AF22B3CE24006D901E /* LifeDriveProviderUI.appex in Embed App Extensions */,
@@ -17488,7 +17479,6 @@
 			);
 			dependencies = (
 				984B1EF0236860D1009ACCFF /* PBXTargetDependency */,
-				8CC301E622C0E6F8005EA404 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
 				8C3BA3A922B3CDC2006D901E /* PBXTargetDependency */,
 				8C3BA3A722B3CDBE006D901E /* PBXTargetDependency */,
@@ -25310,11 +25300,6 @@
 			target = 8C8E930F2315463F000242E9 /* LifeTech-LifeboxFileProviderUI */;
 			targetProxy = 8C8E934523154765000242E9 /* PBXContainerItemProxy */;
 		};
-		8CC301E622C0E6F8005EA404 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8C3BA2BC22B3CC32006D901E /* LifeDrive-widget */;
-			targetProxy = 8CC301E522C0E6F8005EA404 /* PBXContainerItemProxy */;
-		};
 		984B1EC7236857D0009ACCFF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 78B2D349204AA5F500D096DC /* LifeTech-NotificationService */;
@@ -26024,7 +26009,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -26064,7 +26048,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
@@ -26089,7 +26072,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -26101,10 +26084,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13a0255c-07d7-4061-bfe4-9b90ecd0eafe";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Today Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -26181,7 +26163,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8b7e0199-968b-4d57-b6f3-356e454a654b";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -26224,7 +26205,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "68880b9b-87e8-48f9-92b0-2121180b9dd0";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
@@ -26250,7 +26230,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26264,10 +26244,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5d7cc5f7-14fe-4c8a-9e43-c048a347027a";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Share Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "billo share extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26308,7 +26287,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41570e6c-9752-40a7-8567-6c487031659b";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Share Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
@@ -26349,7 +26327,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4c90355-f149-4574-9699-754432dedc4a";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -26392,7 +26369,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
@@ -26418,7 +26394,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26432,10 +26408,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.files;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35bafd98-8822-4d89-81c8-795bd672d2b6";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files";
+				PROVISIONING_PROFILE_SPECIFIER = "billo Files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26476,7 +26451,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
@@ -26516,7 +26490,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive files UI dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -26558,7 +26531,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider UI adhoc";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
@@ -26584,7 +26556,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -26597,10 +26569,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.filesui;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fce3a81a-bf2a-453e-a622-af44ba42d465";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store Files UI";
+				PROVISIONING_PROFILE_SPECIFIER = "billo Files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -26640,7 +26611,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files UI";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
@@ -27495,15 +27465,15 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.pushimage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive notification AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "billo push image";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -28552,7 +28522,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 22.5.10;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -28584,10 +28554,10 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\" $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "616d2fc6-3345-47ba-af1b-d5a16532592e";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive App Store";
+				PROVISIONING_PROFILE_SPECIFIER = billo;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

@@ -17,7 +17,7 @@ apps = [ [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
-            appleId: '1467795722',
+            appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
             //xcodeSchema: , // Defaults to app name
             //xcodeTarget:   // Defaults to app name
@@ -243,7 +243,7 @@ pipeline {
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
-                        sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod repo update; pod install" // --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')

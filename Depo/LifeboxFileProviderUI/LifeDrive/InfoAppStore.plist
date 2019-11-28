@@ -34,7 +34,7 @@
 			</dict>
 		</array>
 		<key>NSExtensionFileProviderDocumentGroup</key>
-		<string>group.com.turkcell.lifedrive</string>
+		<string>group.com.lcv.billo</string>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>

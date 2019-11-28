@@ -11,7 +11,7 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.lcv.billo</string>
+		<string>group.by.com.life.LifeDrive</string>
 	</array>
 </dict>
 </plist>
