@@ -88,7 +88,7 @@ class LoadingImageView: UIImageView {
         activity.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
     }
     
-    func checkIsNeedCancelRequest() {
+    func cancelLoadRequest() {
         if let url = url {
             filesDataSource.cancelRequest(url: url)
         } else if let path = path {
@@ -105,7 +105,7 @@ class LoadingImageView: UIImageView {
             return
         }
         
-        checkIsNeedCancelRequest()
+        cancelLoadRequest()
         originalImage = nil
         
         path = object.patchToPreview
@@ -122,7 +122,7 @@ class LoadingImageView: UIImageView {
     
     func loadThumbnail(object: Item?, smooth: Bool = false) {
         guard let object = object else {
-            checkIsNeedCancelRequest()
+            cancelLoadRequest()
             if !smooth {
                 originalImage = nil
                 activity.stopAnimating()
@@ -135,7 +135,7 @@ class LoadingImageView: UIImageView {
     }
     
     func loadImage(path: PathForItem, smooth: Bool = false) {
-        checkIsNeedCancelRequest()
+        cancelLoadRequest()
         
         if !smooth {
             originalImage = nil

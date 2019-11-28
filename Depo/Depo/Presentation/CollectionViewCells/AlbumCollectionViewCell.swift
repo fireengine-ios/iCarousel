@@ -69,7 +69,7 @@ final class AlbumCellView: UIView {
     }
     
     func cancelImageLoading() {
-        imageView.checkIsNeedCancelRequest()
+        imageView.cancelLoadRequest()
         imageView.image = nil
     }
     
