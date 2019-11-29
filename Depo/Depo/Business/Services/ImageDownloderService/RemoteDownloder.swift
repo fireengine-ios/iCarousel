@@ -77,6 +77,41 @@ class ImageDownloder {
         
     }
     
+    func getImageDataByTrimming(url: URL?, completeImage:@escaping RemoteData) {
+        guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
+            DispatchQueue.main.async {
+                completeImage(nil)
+            }
+            return
+        }
+        
+        let cachePath = trimmedUrl.absoluteString
+        
+        if let data = SDWebImageManager.shared().imageCache?.diskImageData(forKey: cachePath) {
+            DispatchQueue.main.async {
+                completeImage(data)
+            }
+            return
+        }
+        
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
+        operation.outputBlock = { [weak self] _, data in
+            guard let `self` = self, let data = data else {
+                completeImage(nil)
+                return
+            }
+            self.tokenList[trimmedUrl] = nil
+            SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
+            completeImage(data)
+        }
+        
+        tokenList = tokenList + [trimmedUrl : operation]
+        
+        DispatchQueue.toBackground {
+            operation.start()
+        }
+    }
+    
     func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
         guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
             DispatchQueue.main.async {
