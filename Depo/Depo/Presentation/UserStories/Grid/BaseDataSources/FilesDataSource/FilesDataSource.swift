@@ -85,7 +85,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             localManager.getPreviewImage(asset: local.asset, image: completeImage)
             return nil
         case let .remoteUrl(url):
-            getImageServise.getImage(patch: url, completeImage: completeImage)
+            getImageServise.getImageByTrimming(url: url, completeImage: completeImage)
             return url
         }
     }
@@ -130,7 +130,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     }
     
     func getImageData(for url: URL, completeData: @escaping RemoteData) -> URL? {
-        getImageServise.getImageData(url: url, completeData: completeData)
+        getImageServise.getImageDataByTrimming(url: url, completeImage: completeData)
         return url
     }
     
