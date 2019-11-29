@@ -42,4 +42,5 @@ struct SharedConstants {
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
     static let applicationQueriesScheme = "akillidepo://"
+    static let applicationQueriesSchemeShort = "akillidepo"
 }
