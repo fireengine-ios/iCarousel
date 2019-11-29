@@ -98,7 +98,7 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         }
         
         detailUrl = campaignCardResponse.detailsUrl
-        imageView.loadImage(url: campaignCardResponse.imageUrl)
+        imageView.loadImage(with: campaignCardResponse.imageUrl)
     }
     
     override func deleteCard() {

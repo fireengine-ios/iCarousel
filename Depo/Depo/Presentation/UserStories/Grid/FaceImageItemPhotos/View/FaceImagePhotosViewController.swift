@@ -172,7 +172,7 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     }
     
     func setHeaderImage(with path: PathForItem) {
-        headerImage.loadImage(path: path)
+        headerImage.loadImage(with: path)
     }
     
     func setupHeader(forPeopleItem item: PeopleItem?) {
