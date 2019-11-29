@@ -22,7 +22,7 @@ final class PeopleAlbumsManager: SmartAlbumsManagerImpl {
         guard let id = peopleItem.id else {
             return
         }
-        peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] albums in
+        let task = peopleService.getAlbumsForPeopleItemWithID(Int(truncatingIfNeeded: id), success: { [weak self] albums in
             guard let self = self else {
                 return
             }
@@ -38,6 +38,7 @@ final class PeopleAlbumsManager: SmartAlbumsManagerImpl {
                     self?.delegates.invoke(invocation: { $0.loadItemsFailed() })
                 }
         })
+        task.priority = URLSessionTask.highPriority
     }
     
     override func newStoryCreated() { }

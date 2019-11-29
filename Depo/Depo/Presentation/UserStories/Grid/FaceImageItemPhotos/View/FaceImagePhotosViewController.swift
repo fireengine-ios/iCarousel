@@ -108,7 +108,8 @@ import UIKit
                 albumsView.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
                 albumsView.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
+                //show slider after loading albums if needed
+                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
                 albumsHeightConstraint?.isActive = true
             }
         } else {
