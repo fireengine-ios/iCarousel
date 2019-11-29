@@ -11,7 +11,9 @@ final class PeriodicContactSyncDataStorage {
     private let storageVars: StorageVars = factory.resolve()
     private let tokenStorage: TokenStorage = factory.resolve()
     
-    var settings = PeriodicContactsSyncSettings()
+    var settings: PeriodicContactsSyncSettings {
+        return PeriodicContactsSyncSettings(with: SyncSettings.shared().periodicBackup)
+    }
     
     func save(periodicContactSyncSettings: PeriodicContactsSyncSettings) {
         let settingsToStore = periodicContactSyncSettings.asDictionary()
