@@ -144,7 +144,7 @@ final class TBMatikCard: BaseCardView {
         
         urls.forEach { url in
             group.enter()
-            imageDownloder.getImage(patch: url) { image in
+            imageDownloder.getImageByTrimming(url: url) { image in
                 guard let image = image else {
                     return
                 }
