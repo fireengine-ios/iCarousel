@@ -36,13 +36,6 @@ enum PeriodicContactsSyncOption {
             return TextConstants.autoSyncSettingsOptionMonthly
         }
     }
-    
-    var universalText: String {
-        get {
-            return String(describing: self)
-        }
-    }
-    
 }
 
 enum PeriodicContactsSyncSettingsKey {
@@ -63,13 +56,6 @@ enum PeriodicContactsSyncSettingsKey {
             return TextConstants.autoSyncSettingsOptionMonthly
         }
     }
-    
-    var universalText: String {
-        get {
-            return String(describing: self)
-        }
-    }
-    
 }
 
 final class PeriodicContactsSyncSettings {
@@ -85,10 +71,10 @@ final class PeriodicContactsSyncSettings {
     init() { }
 
     init(with dictionary: [String: Bool]) {
-        isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText] ?? false
+        isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText] ?? false
         
-        let daily = dictionary[PeriodicContactsSyncSettingsKey.daily.universalText] ?? true
-        let weekly = dictionary[PeriodicContactsSyncSettingsKey.weekly.universalText] ?? false
+        let daily = dictionary[PeriodicContactsSyncSettingsKey.daily.localizedText] ?? true
+        let weekly = dictionary[PeriodicContactsSyncSettingsKey.weekly.localizedText] ?? false
         
         //setup time setting
         
@@ -99,6 +85,22 @@ final class PeriodicContactsSyncSettings {
         } else {
             timeSetting.option = .monthly
         }
+    }
+    
+    init(with periodic: SYNCPeriodic) {
+        switch periodic {
+            case SYNCPeriodic.daily:
+                isPeriodicContactsSyncOptionEnabled = true
+                timeSetting.option = .daily
+            case SYNCPeriodic.every7:
+                isPeriodicContactsSyncOptionEnabled = true
+                timeSetting.option = .weekly
+            case SYNCPeriodic.every30:
+                isPeriodicContactsSyncOptionEnabled = true
+                timeSetting.option = .monthly
+            case .none:
+                disablePeriodicContactsSync()
+            }
     }
     
     func disablePeriodicContactsSync() {
@@ -112,9 +114,9 @@ final class PeriodicContactsSyncSettings {
     
     func asDictionary() -> [String: Bool] {
         return [PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText: isPeriodicContactsSyncOptionEnabled,
-                PeriodicContactsSyncSettingsKey.daily.universalText: (timeSetting.option == .daily),
-                PeriodicContactsSyncSettingsKey.weekly.universalText: (timeSetting.option == .weekly),
-                PeriodicContactsSyncSettingsKey.monthly.universalText: (timeSetting.option == .monthly)]
+                PeriodicContactsSyncSettingsKey.daily.localizedText: (timeSetting.option == .daily),
+                PeriodicContactsSyncSettingsKey.weekly.localizedText: (timeSetting.option == .weekly),
+                PeriodicContactsSyncSettingsKey.monthly.localizedText: (timeSetting.option == .monthly)]
     }
     
     var syncPeriodic: SYNCPeriodic {

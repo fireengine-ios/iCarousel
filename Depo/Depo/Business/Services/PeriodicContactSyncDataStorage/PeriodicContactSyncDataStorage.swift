@@ -12,25 +12,7 @@ final class PeriodicContactSyncDataStorage {
     private let tokenStorage: TokenStorage = factory.resolve()
     
     var settings: PeriodicContactsSyncSettings {
-        guard var storedSettings = storageVars.usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] as? [String: Bool] else {
-            return PeriodicContactsSyncSettings()
-        }
-        
-        switch SyncSettings.shared().periodicBackup {
-        case SYNCPeriodic.daily:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.universalText)
-        case SYNCPeriodic.every7:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.weekly.universalText)
-        case SYNCPeriodic.every30:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.monthly.universalText)
-        case .none:
-            storedSettings.updateValue(false, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.universalText)
-        }
-        return PeriodicContactsSyncSettings(with: storedSettings)
+        return PeriodicContactsSyncSettings(with: SyncSettings.shared().periodicBackup)
     }
     
     func save(periodicContactSyncSettings: PeriodicContactsSyncSettings) {
