@@ -68,7 +68,6 @@ final class PeriodicContactsSyncSettings {
     
     var isPeriodicContactsSyncOptionEnabled: Bool = false //Periodic contacts sync switcher in settings is on/off
     
-    init() { }
 
     init(with dictionary: [String: Bool]) {
         isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText] ?? false
@@ -87,8 +86,9 @@ final class PeriodicContactsSyncSettings {
         }
     }
     
-    init(with periodic: SYNCPeriodic) {
-        switch periodic {
+    init() {
+        let syncPeriodic = SyncSettings.shared().periodicBackup
+        switch syncPeriodic {
             case SYNCPeriodic.daily:
                 isPeriodicContactsSyncOptionEnabled = true
                 timeSetting.option = .daily
@@ -99,6 +99,8 @@ final class PeriodicContactsSyncSettings {
                 isPeriodicContactsSyncOptionEnabled = true
                 timeSetting.option = .monthly
             case .none:
+                disablePeriodicContactsSync()
+            default:
                 disablePeriodicContactsSync()
             }
     }
