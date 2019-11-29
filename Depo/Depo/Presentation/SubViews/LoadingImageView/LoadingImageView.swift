@@ -101,20 +101,21 @@ final class LoadingImageView: UIImageView {
     }
     
     func set(borderIsVisible: Bool) {
-           if borderIsVisible {
-               guard let cornerView = cornerView else {
-                   return
-               }
-               
-               addSubview(cornerView)
-               cornerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-               cornerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-               cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-               cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-           } else {
-               cornerView?.removeFromSuperview()
-           }
-       }
+        if borderIsVisible {
+            guard let cornerView = cornerView else {
+                assertionFailure("cornerView is nil")
+                return
+            }
+            
+            addSubview(cornerView)
+            cornerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            cornerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        } else {
+            cornerView?.removeFromSuperview()
+        }
+    }
     
     
     //MARK: - Image Loading
