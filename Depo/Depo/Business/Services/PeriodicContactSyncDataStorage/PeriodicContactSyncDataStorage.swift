@@ -18,17 +18,17 @@ final class PeriodicContactSyncDataStorage {
         
         switch SyncSettings.shared().periodicBackup {
         case SYNCPeriodic.daily:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.localizedText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.universalText)
         case SYNCPeriodic.every7:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.weekly.localizedText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.weekly.universalText)
         case SYNCPeriodic.every30:
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.monthly.localizedText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.monthly.universalText)
         case .none:
-            storedSettings.updateValue(false, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
-            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.localizedText)
+            storedSettings.updateValue(false, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText)
+            storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.universalText)
         }
         return PeriodicContactsSyncSettings(with: storedSettings)
     }

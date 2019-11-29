@@ -36,6 +36,13 @@ enum PeriodicContactsSyncOption {
             return TextConstants.autoSyncSettingsOptionMonthly
         }
     }
+    
+    var universalText: String {
+        get {
+            return String(describing: self)
+        }
+    }
+    
 }
 
 enum PeriodicContactsSyncSettingsKey {
@@ -56,6 +63,13 @@ enum PeriodicContactsSyncSettingsKey {
             return TextConstants.autoSyncSettingsOptionMonthly
         }
     }
+    
+    var universalText: String {
+        get {
+            return String(describing: self)
+        }
+    }
+    
 }
 
 final class PeriodicContactsSyncSettings {
@@ -71,10 +85,10 @@ final class PeriodicContactsSyncSettings {
     init() { }
 
     init(with dictionary: [String: Bool]) {
-        isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText] ?? false
+        isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.universalText] ?? false
         
-        let daily = dictionary[PeriodicContactsSyncSettingsKey.daily.localizedText] ?? true
-        let weekly = dictionary[PeriodicContactsSyncSettingsKey.weekly.localizedText] ?? false
+        let daily = dictionary[PeriodicContactsSyncSettingsKey.daily.universalText] ?? true
+        let weekly = dictionary[PeriodicContactsSyncSettingsKey.weekly.universalText] ?? false
         
         //setup time setting
         
@@ -98,9 +112,9 @@ final class PeriodicContactsSyncSettings {
     
     func asDictionary() -> [String: Bool] {
         return [PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText: isPeriodicContactsSyncOptionEnabled,
-                PeriodicContactsSyncSettingsKey.daily.localizedText: (timeSetting.option == .daily),
-                PeriodicContactsSyncSettingsKey.weekly.localizedText: (timeSetting.option == .weekly),
-                PeriodicContactsSyncSettingsKey.monthly.localizedText: (timeSetting.option == .monthly)]
+                PeriodicContactsSyncSettingsKey.daily.universalText: (timeSetting.option == .daily),
+                PeriodicContactsSyncSettingsKey.weekly.universalText: (timeSetting.option == .weekly),
+                PeriodicContactsSyncSettingsKey.monthly.universalText: (timeSetting.option == .monthly)]
     }
     
     var syncPeriodic: SYNCPeriodic {
