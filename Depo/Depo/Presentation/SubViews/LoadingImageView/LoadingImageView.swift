@@ -70,6 +70,7 @@ final class LoadingImageView: UIImageView {
         setupLayout()
     }
     
+    
     //MARK: - Setup
     
     private func setupLayout() {
@@ -115,6 +116,7 @@ final class LoadingImageView: UIImageView {
            }
        }
     
+    
     //MARK: - Image Loading
     
     func cancelLoadRequest() {
@@ -129,18 +131,11 @@ final class LoadingImageView: UIImageView {
         
         loadingImageViewDelegate?.onLoadingImageCanceled()
     }
-    
-    func loadImage(with object: Item?) {
-        guard let object = object, path != object.patchToPreview else {
-            return
-        }
 
-        loadImage(path: object.patchToPreview)
-    }
-    
-    func loadThumbnail(object: Item?, smooth: Bool = false) {
-        guard let object = object else {
+    func loadImage(with object: Item?, smooth: Bool = false) {
+        guard let path = object?.patchToPreview else {
             cancelLoadRequest()
+            
             if !smooth {
                 originalImage = nil
                 activity.stopAnimating()
@@ -149,10 +144,10 @@ final class LoadingImageView: UIImageView {
             return
         }
         
-        loadImage(path: object.patchToPreview, smooth: smooth)
+        loadImage(with: path, smooth: smooth)
     }
     
-    func loadImage(path: PathForItem, smooth: Bool = false) {
+    func loadImage(with path: PathForItem, smooth: Bool = false) {
         cancelLoadRequest()
         
         if !smooth {
@@ -166,11 +161,26 @@ final class LoadingImageView: UIImageView {
                 return
             }
             
-            self?.finishImageLoading(image, withAnimation: smooth)
+            self?.finishLoading(image: image, animated: smooth)
         }
     }
     
-    private func loadImage(data: Data?) {
+    func loadImage(with url: URL?, animated: Bool = false) {
+        guard let url = url else {
+            return
+        }
+        
+        self.url = filesDataSource.getImageData(for: url) { [weak self] data in
+            guard self?.url == url else {
+                return
+            }
+            
+            self?.finishLoading(data: data, animated: animated)
+        }
+    }
+    
+    
+    private func finishLoading(data: Data?, animated: Bool = false) {
         var image: UIImage?
         if let data = data {
             let format = ImageFormat.get(from: data)
@@ -182,32 +192,19 @@ final class LoadingImageView: UIImageView {
             }
         }
         
-        finishImageLoading(image)
+        finishLoading(image: image, animated: animated)
     }
     
-    func loadImage(url: URL?) {
-        guard let url = url else {
-            return
-        }
-        
-        self.url = filesDataSource.getImageData(for: url) { [weak self] data in
-            guard self?.url == url else {
-                return
-            }
-            
-            self?.loadImage(data: data)
-        }
-    }
-    
-    private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
+    private func finishLoading(image: UIImage?, animated: Bool = false) {
         path = nil
         url = nil
+        
         DispatchQueue.toMain { [weak self] in
             guard let `self` = self else {
                 return
             }
             self.activity.stopAnimating()
-            if withAnimation {
+            if animated {
                 UIView.transition(
                     with: self,
                     duration: NumericConstants.animationDuration,

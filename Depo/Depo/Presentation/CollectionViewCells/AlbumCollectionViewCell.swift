@@ -46,7 +46,7 @@ final class AlbumCellView: UIView {
     
     func setup(with album: AlbumItem) {
         titleLabel.text = album.name
-        imageView.loadThumbnail(object: album.preview, smooth: false)
+        imageView.loadImage(with: album.preview, smooth: false)
         
         isAccessibilityElement = true
         accessibilityTraits = UIAccessibilityTraitNone
