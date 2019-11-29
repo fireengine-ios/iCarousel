@@ -22,6 +22,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var instapickService: InstapickService = factory.resolve()
     private var isShowPopupAboutPremium = true
     private let campaignService = CampaignServiceImpl()
+    private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -37,6 +38,8 @@ final class HomePageInteractor: HomePageInteractorInput {
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
         getCampaignStatus()
+        
+        smartAlbumsManager.requestAllItems()
     }
     
     func trackScreen() {
