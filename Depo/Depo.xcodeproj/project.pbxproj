@@ -2885,9 +2885,7 @@
 		8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
-		8C77F6222303F0D4003BC248 /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
 		8C77F62323042D82003BC248 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
-		8C7B9F3E2253F8970050DABE /* SettingsTC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */; };
 		8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		8C8610EC22BCC08000108958 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E622BCC07F00108958 /* Info-AppStore.plist */; };
@@ -6405,6 +6403,8 @@
 		CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
 		CEFFA8F321AFC27900B34F36 /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */; };
 		CEFFA8F521B0089800B34F36 /* ViewSortStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */; };
+		CFED206C23929B5800BD141E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
+		CFED206D23929C3B00BD141E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D14779399138E013F93E85B6 /* Pods_LifeDriveNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF4454D85FDB87498EE606 /* Pods_LifeDriveNotificationService.framework */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
@@ -17822,7 +17822,6 @@
 				8C06AF592008AD70003D8E05 /* daire@2x.png in Resources */,
 				890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				8C06AFC12008AD71003D8E05 /* gonder_btn.png in Resources */,
-				8C7B9F3E2253F8970050DABE /* SettingsTC.bundle in Resources */,
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
 				4A6DBE8A21A6F9260003D1B4 /* PremiumView.xib in Resources */,
@@ -18234,6 +18233,7 @@
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
 				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				8C06AF872008AD70003D8E05 /* extraOptions@2x.png in Resources */,
+				CFED206D23929C3B00BD141E /* Settings.bundle in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				8C06B0092008AD71003D8E05 /* Kucuk_Selected@2x.png in Resources */,
@@ -19434,7 +19434,6 @@
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
 				CE784D4522A685FB00662219 /* CaptchaViewController.xib in Resources */,
 				CE784D4622A685FB00662219 /* caps2_selected@2x.png in Resources */,
-				8C77F6222303F0D4003BC248 /* SettingsTC.bundle in Resources */,
 				CE784D4722A685FB00662219 /* Orta@3x.png in Resources */,
 				CE784D4822A685FB00662219 /* checkbox@3x.png in Resources */,
 				CE784D4922A685FB00662219 /* target_secili.png in Resources */,
@@ -19704,6 +19703,7 @@
 				CE784E4622A685FB00662219 /* Orta_Selected@3x.png in Resources */,
 				CE784E4722A685FB00662219 /* SuggestionTableSectionHeader.xib in Resources */,
 				CE784E4822A685FB00662219 /* cropy_icon@3x.png in Resources */,
+				CFED206C23929B5800BD141E /* Settings.bundle in Resources */,
 				98AA104723585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
 				CE784E4922A685FB00662219 /* sample@3x.png in Resources */,
 				CE784E4A22A685FB00662219 /* LatestUpladsCard.xib in Resources */,
