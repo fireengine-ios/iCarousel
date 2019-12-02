@@ -666,7 +666,11 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             uploadedObjectID.append(uuid)
         }
         
-        uploadProgress.removeValue(forKey: uuid)
+        if uploadProgress.keys.contains(uuid) {
+            uploadProgress.removeValue(forKey: uuid)
+        } else {
+            assertionFailure()
+        }
     
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
@@ -705,7 +709,12 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     
     func cancelledUpload(file: WrapData) {
         let uuid = file.getTrimmedLocalID()
-        uploadProgress.removeValue(forKey: uuid)
+        
+        if uploadProgress.keys.contains(uuid) {
+            uploadProgress.removeValue(forKey: uuid)
+        } else {
+            assertionFailure()
+        }
         
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
