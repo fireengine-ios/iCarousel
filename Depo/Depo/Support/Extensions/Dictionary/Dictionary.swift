@@ -17,3 +17,13 @@ func + <K, V>(left: Dictionary<K, V>, right: Dictionary<K, V>) -> Dictionary<K, 
     }
     return map
 }
+
+extension Dictionary {
+    mutating func removeExistingValue(for key: Key) {
+        if keys.contains(key) {
+            self.removeValue(forKey: key)
+        } else {
+            assertionFailure()
+        }
+    }
+}
