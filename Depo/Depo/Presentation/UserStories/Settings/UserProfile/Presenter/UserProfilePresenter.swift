@@ -38,7 +38,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func updateSecretQuestionView(selectedQuestion: SecretQuestionWithAnswer) {
-        view.updateSetSecretQuestionView(with: selectedQuestion)
+        //FIXME: We need to find what holds presenter
+        view?.updateSetSecretQuestionView(with: selectedQuestion)
     }
     
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
