@@ -19,7 +19,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private lazy var activityManager = ActivityIndicatorManager()
 
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
-    private let instapickService: InstapickService = InstapickServiceImpl()
+    private let instapickService: InstapickService = factory.resolve()
     private let campaignService: CampaignService = CampaignServiceImpl()
     private let instaPickCampaignService = InstaPickCampaignService()
 
@@ -166,6 +166,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
 
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
+                } else if let vc = self?.router.createRootNavigationController(controller: controller) {
+                    self?.router.presentViewController(controller: vc)
+                } else {
+                    assertionFailure("Unexpected controller")
                 }
             }, error: { [weak self] errorResponse in
                 self?.showError(message: errorResponse.description)
@@ -539,11 +543,12 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     }
     
     private func showResultWithoutCampaign(analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
+        
         updateAnalyzeCount(with: analyzesCount)
         let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
                                                                               analyzesCount: analyzesCount,
                                                                               isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
-        self.stopActivityIndicator()
+        stopActivityIndicator()
         present(instapickDetailControlller, animated: true, completion: nil)
     }
     

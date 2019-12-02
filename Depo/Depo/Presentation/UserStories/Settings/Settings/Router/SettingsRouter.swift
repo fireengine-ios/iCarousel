@@ -88,10 +88,10 @@ class SettingsRouter: SettingsRouterInput {
     
     func openPasscode(handler: @escaping VoidHandler) {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
-        
         vc.success = {
             handler()
         }
+        
         router.pushViewController(viewController: vc)
     }
     

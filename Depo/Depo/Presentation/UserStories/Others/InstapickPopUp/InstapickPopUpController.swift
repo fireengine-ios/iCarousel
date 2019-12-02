@@ -184,7 +184,7 @@ final class InstapickPopUpController: UIViewController {
     
     private func openInstagramAuth(param: InstagramConfigResponse) {
         let router = RouterVC()
-        let controller = router.instagramAuth
+        let controller = router.instagramAuth(fromSettings: false)
         if let controller = controller as? InstagramAuthViewController {
             controller.delegate = self
             controller.configure(clientId: param.clientID!, authpath: param.authURL!)

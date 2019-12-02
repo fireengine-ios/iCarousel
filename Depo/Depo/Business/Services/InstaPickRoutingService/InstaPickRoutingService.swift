@@ -118,10 +118,10 @@ final class InstaPickRoutingService {
     }
     
     private func prepareToOpenController() {
-        if !doNotShowAgain {
-            checkInstagramAccount()
-        } else {
+        if doNotShowAgain {
             configureViewController()
+        } else {
+            checkInstagramAccount()
         }
     }
     
@@ -148,10 +148,8 @@ final class InstaPickRoutingService {
             return
         }
         
-        let router = RouterVC()
         let controller = InstaPickSelectionSegmentedController.controllerToPresent()
         successHandler(controller)
-        router.presentViewController(controller: controller)
     }
     
     private func didOpenHistoryPopUp() {

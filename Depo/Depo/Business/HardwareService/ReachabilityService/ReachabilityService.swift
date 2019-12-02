@@ -68,7 +68,7 @@ final class ReachabilityService: ReachabilityProtocol {
                 return
             }
             if let connection = (notification.object as? Reachability)?.connection {
-                debugPrint("ReachabilityService: new connection status \(connection.description)")
+                debugLog("ReachabilityService: new connection status \(connection.description)")
             
                 if connection == .none {
                     self.notifyDelegates()
@@ -89,7 +89,7 @@ final class ReachabilityService: ReachabilityProtocol {
         
         NotificationCenter.default.addObserver(forName: .apiReachabilityDidChange, object: nil, queue: .main) { [weak self] _ in
             if let connection = self?.apiReachability.connection {
-                debugPrint("ReachabilityService: new api connection status \(connection)")
+                debugLog("ReachabilityService: new api connection status \(connection)")
             }
             self?.notifyDelegates()
         }

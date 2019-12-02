@@ -156,9 +156,9 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         guard let index = sections.index(of: type) else {
             return
         }
-
-        self.collectionView.performBatchUpdates({
-            self.collectionView.reloadSections(IndexSet(arrayLiteral: index))
+        
+        collectionView.performBatchUpdates({
+            collectionView.reloadSections(IndexSet(arrayLiteral: index))
         })
     }
     

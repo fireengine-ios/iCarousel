@@ -169,6 +169,23 @@ class RouterVC: NSObject {
         
     }
     
+    func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
+        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
+        
+        var viewControllersStack = navigationController?.viewControllers ?? []
+        viewControllersStack.append(contentsOf: viewControllers)
+
+        navigationController?.setViewControllers(viewControllersStack, animated: animated)
+        viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
+
+        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
+        }
+    }
+    
     func setBackgroundColor(color: UIColor) {
         if let tabBarViewController = tabBarController {
             tabBarViewController.setBGColor(color: color)
@@ -501,9 +518,12 @@ class RouterVC: NSObject {
     
     var allFiles: UIViewController? {
         let storage = ViewSortStorage.shared
-        return allFiles(moduleOutput: storage,
-                        sortType: storage.allFilesSortType,
-                        viewType: storage.allFilesViewType)
+        let controller = allFiles(moduleOutput: storage,
+                                  sortType: storage.allFilesSortType,
+                                  viewType: storage.allFilesViewType)
+        controller.title = TextConstants.homeButtonAllFiles
+        
+        return controller
     }
     
     var segmentedFiles: UIViewController? {
@@ -859,8 +879,8 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var instagramAuth: UIViewController {
-        return InstagramAuthViewController()
+    func instagramAuth(fromSettings: Bool) -> UIViewController {
+        return InstagramAuthViewController.controller(fromSettings: fromSettings)
     }
     
     // MARK: OTP

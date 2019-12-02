@@ -17,27 +17,7 @@ class OTPViewPresenter: PhoneVerificationPresenter {
     override func verificationSilentSuccess() {
         successedVerification()
     }
-    
-    override func resendCodeRequestFailed(with error: ErrorResponse) {
-        completeAsyncOperationEnableScreen()
-        view.resendButtonShow(show: true)
-        view.updateEditingState()
-        
-        if case ErrorResponse.error(let containedError) = error {
-            if let serverError = containedError as? ServerError, serverError.code == 401 {
-                router.popToLoginWithPopUp(title: TextConstants.errorAlert, message: TextConstants.twoFAInvalidSessionErrorMessage, image: .error, onClose: nil)
-            } else if let serverError = containedError as? ServerStatusError, let description = serverError.errorDescription {
-                view.showError(description)
-            } else {
-                view.showError(TextConstants.phoneVerificationResendRequestFailedErrorText)
-            }
-        } else {
-            view.showError(TextConstants.phoneVerificationResendRequestFailedErrorText)
-        }
-        
-        view.dropTimer()
-    }
-    
+
     private func successedVerification() {
         completeAsyncOperationEnableScreen()
         view.getNavigationController()?.popViewController(animated: true)
