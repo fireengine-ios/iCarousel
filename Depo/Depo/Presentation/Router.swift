@@ -69,14 +69,15 @@ class RouterVC: NSObject {
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
-        get {
-            if let navController = rootViewController as? UINavigationController {
-                return navController
+        if let navController = rootViewController as? UINavigationController {
+            return navController
+        } else if let tabBarController = tabBarController {
+            if let navVC = tabBarController.presentedViewController as? NavigationController {
+                return navVC
             } else {
-                if let n = tabBarController {
-                    return n.activeNavigationController
-                }
+                return tabBarController.activeNavigationController
             }
+        } else {
             return nil
         }
     }
