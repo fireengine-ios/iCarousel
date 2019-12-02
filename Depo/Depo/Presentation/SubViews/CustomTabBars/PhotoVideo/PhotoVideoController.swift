@@ -666,7 +666,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             uploadedObjectID.append(uuid)
         }
         
-        uploadProgress.removeExistingValue(for: uuid)
+        uploadProgress.removeValueSafely(forKey: uuid)
     
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
@@ -706,7 +706,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     func cancelledUpload(file: WrapData) {
         let uuid = file.getTrimmedLocalID()
         
-        uploadProgress.removeExistingValue(for: uuid)
+        uploadProgress.removeValueSafely(forKey: uuid)
         
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
