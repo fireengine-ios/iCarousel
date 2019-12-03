@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileDetailController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="jTK-8x-AN9" id="OT3-ZE-b9Z"/>
+                <outlet property="stackView" destination="UHN-vi-dpd" id="UoM-zI-q0e"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTK-8x-AN9">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tfe-fw-7t3">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="102" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UHN-vi-dpd">
+                                    <rect key="frame" x="20" y="20" width="280" height="102"/>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="UHN-vi-dpd" secondAttribute="trailing" constant="20" id="UZq-d9-3D6"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UHN-vi-dpd" secondAttribute="bottom" constant="20" id="jzY-jB-T0K"/>
+                                <constraint firstItem="UHN-vi-dpd" firstAttribute="leading" secondItem="Tfe-fw-7t3" secondAttribute="leading" constant="20" id="oXq-G5-rHA"/>
+                                <constraint firstItem="UHN-vi-dpd" firstAttribute="top" secondItem="Tfe-fw-7t3" secondAttribute="top" constant="20" id="rt2-Nf-Vyv"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Tfe-fw-7t3" firstAttribute="width" secondItem="jTK-8x-AN9" secondAttribute="width" id="5tj-gf-ndR"/>
+                        <constraint firstAttribute="bottom" secondItem="Tfe-fw-7t3" secondAttribute="bottom" id="KTd-yW-oSd"/>
+                        <constraint firstItem="Tfe-fw-7t3" firstAttribute="height" secondItem="jTK-8x-AN9" secondAttribute="height" priority="250" id="bxx-8A-1dx"/>
+                        <constraint firstItem="Tfe-fw-7t3" firstAttribute="top" secondItem="jTK-8x-AN9" secondAttribute="top" id="hcM-Ww-IT9"/>
+                        <constraint firstAttribute="trailing" secondItem="Tfe-fw-7t3" secondAttribute="trailing" id="quj-6z-B7O"/>
+                        <constraint firstItem="Tfe-fw-7t3" firstAttribute="leading" secondItem="jTK-8x-AN9" secondAttribute="leading" id="r4z-Yo-KnD"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jTK-8x-AN9" secondAttribute="bottom" id="3tl-VG-Gse" customClass="KeyboardLayoutConstraint" customModule="lifebox" customModuleProvider="target"/>
+                <constraint firstItem="jTK-8x-AN9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TCr-r4-4VR"/>
+                <constraint firstAttribute="trailing" secondItem="jTK-8x-AN9" secondAttribute="trailing" id="aqo-U8-Vlc"/>
+                <constraint firstItem="jTK-8x-AN9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mmF-Ek-7is"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="101"/>
+        </view>
+    </objects>
+</document>

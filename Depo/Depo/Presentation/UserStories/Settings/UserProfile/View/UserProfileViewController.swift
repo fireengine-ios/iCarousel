@@ -9,6 +9,8 @@
 import UIKit
 import Typist
 
+
+
 final class UserProfileViewController: BaseViewController, UserProfileViewInput {
     var output: UserProfileViewOutput!
     
