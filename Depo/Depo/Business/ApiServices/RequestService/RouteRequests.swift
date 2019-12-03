@@ -258,6 +258,7 @@ struct RouteRequests {
             
             static let accessInformation = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+            static let autoSyncStatus = settingsApi +/ "autoSyncStatus"
         }
         
         enum Permissions {

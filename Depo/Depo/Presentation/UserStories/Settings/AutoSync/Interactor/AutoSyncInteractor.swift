@@ -20,7 +20,12 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         output.prepaire(syncSettings: settings)
     }
     
-    func onSave(settings: AutoSyncSettings) {
+    func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
+        ///Sending autoSyncStatus when settings changed
+        if dataStorage.settings != settings || !fromSettings {
+            sendAutoSyncStatus(syncSettings: settings)
+        }
+        
         output.onSettingSaved()
         dataStorage.save(autoSyncSettings: settings)
         SyncServiceManager.shared.update(syncSettings: settings)
@@ -44,5 +49,22 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     func trackScreen() {
         analyticsManager.logScreen(screen: .autoSyncSettings)
         analyticsManager.trackDimentionsEveryClickGA(screen: .autoSyncSettings)
+    }
+    
+    func sendAutoSyncStatus(syncSettings: AutoSyncSettings?) {
+        let settings: AutoSyncSettings = syncSettings ?? dataStorage.settings
+        
+        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        
+        /// There is no scenario both success and error for now. Just sending BE
+        AccountService().autoSyncStatus(photoStatus: photoStatus, videoStatus: videoStatus) { result in
+            switch result {
+            case .success(_):
+                print(result)
+            case .failed(let error):
+                print(error.description)
+            }
+        }
     }
 }

@@ -11,8 +11,9 @@ import Foundation
 protocol AutoSyncInteractorInput {
     func prepareCellModels()
 
-    func onSave(settings: AutoSyncSettings)
+    func onSave(settings: AutoSyncSettings, fromSettings: Bool)
     
     func checkPermissions()
     func trackScreen()
+    func sendAutoSyncStatus(syncSettings: AutoSyncSettings?)
 }

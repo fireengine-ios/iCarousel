@@ -157,6 +157,9 @@ final class AuthoritySingleton {
             setLoginAlready(isLoginAlready: tokenStorage.refreshToken != nil)
             isNewAppVersion = currentAppVersion == nil ? false : true
             currentAppVersion = getAppVersion()
+            
+            ///after app updated , sending autoSyncStatus
+            AutoSyncInteractor().sendAutoSyncStatus(syncSettings: nil)
         }
     }
     

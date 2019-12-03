@@ -36,10 +36,10 @@ enum AutoSyncItemType {
 }
 
 
-enum AutoSyncOption {
-    case wifiOnly
-    case wifiAndCellular
-    case never
+enum AutoSyncOption: String {
+    case wifiOnly        = "OVER_WIFI"
+    case wifiAndCellular = "OVER_WIFI_AND_MOBILE"
+    case never           = "NEVER"
     
     var localizedText: String {
         switch self {
@@ -54,8 +54,11 @@ enum AutoSyncOption {
 }
 
 
-final class AutoSyncSettings {
-
+final class AutoSyncSettings : Equatable {
+    static func == (lhs: AutoSyncSettings, rhs: AutoSyncSettings) -> Bool {
+        return lhs.asDictionary() == rhs.asDictionary() && lhs.isAutoSyncEnabled == rhs.isAutoSyncEnabled
+    }
+    
     private struct SettingsKeys {
         private init() {}
         
