@@ -44,8 +44,10 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        
-        if let viewController = navigationController?.viewControllers.last as? BaseViewController {
+        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
+        {
+            return viewController.parentUUID
+        } else if let viewController = navigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
         
@@ -53,7 +55,12 @@ class RouterVC: NSObject {
     }
     
     func isRootViewControllerAlbumDetail() -> Bool {
-        return navigationController?.viewControllers.last is AlbumDetailViewController
+        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
+        {
+            return viewController is AlbumDetailViewController
+        } else {
+            return navigationController?.viewControllers.last is AlbumDetailViewController
+        }
     }
     
     func isTwoFactorAuthViewControllers() -> Bool {
