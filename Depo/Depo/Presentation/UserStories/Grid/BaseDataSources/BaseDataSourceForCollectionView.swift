@@ -1742,6 +1742,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     
                 self.updateCoverPhoto()
                 
+                /// Controller will be closed and we don't need update
                 if !self.allItems.isEmpty {
                     self.collectionView?.performBatchUpdates({
                         self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
