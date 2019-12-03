@@ -129,6 +129,16 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     /// setup for Next button after numberTextField
     var responderOnNext: UIResponder?
     
+    var isEditState: Bool {
+        get {
+            return codeTextField.isUserInteractionEnabled
+        }
+        set {
+            codeTextField.isUserInteractionEnabled = newValue
+            numberTextField.isUserInteractionEnabled = newValue
+        }
+    }
+    
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".
     /// don't use it for setup with "init(frame"

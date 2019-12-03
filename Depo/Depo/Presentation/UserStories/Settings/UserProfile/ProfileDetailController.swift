@@ -10,6 +10,8 @@ import UIKit
 
 final class ProfileDetailController: ViewController, KeyboardHandler {
     
+    var output: UserProfileViewOutput!
+    
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.delaysContentTouches = false
@@ -87,10 +89,11 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         newValue.subtitleLabel.text = "This information will be used for campaigns"
         newValue.textField.quickDismissPlaceholder = "Please enter your address information"
         newValue.textField.autocorrectionType = .no
+        newValue.textField.returnKeyType = .done
         return newValue
     }()
     
-    let changePasswordButton: UIButton = {
+    lazy var changePasswordButton: UIButton = {
         let newValue = UIButton(type: .custom)
         let attributedString = NSAttributedString(string: TextConstants.userProfileChangePassword,
                                                   attributes: [
@@ -103,7 +106,7 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         return newValue
     }()
     
-    let changeSecurityQuestionButton: UIButton = {
+    lazy var changeSecurityQuestionButton: UIButton = {
         let newValue = UIButton(type: .custom)
         let attributedString = NSAttributedString(string: TextConstants.userProfileSecretQuestion,
                                                   attributes: [
@@ -116,10 +119,51 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         return newValue
     }()
     
+    private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
+                                                  font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                  tintColor: .white,
+                                                  accessibilityLabel: TextConstants.userProfileEditButton,
+                                                  style: .plain,
+                                                  target: self,
+                                                  selector: #selector(onEditButtonAction))
+    
+    private lazy var readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
+                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                   tintColor: .white,
+                                                   accessibilityLabel: TextConstants.userProfileDoneButton,
+                                                   style: .plain,
+                                                   target: self,
+                                                   selector: #selector(onReadyButtonAction))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTitle(withString: TextConstants.myProfile)
         addTapGestureToHideKeyboard()
+        setupEditState(false)
+        
+        nameView.textField.delegate = self
+        surnameView.textField.delegate = self
+        emailView.textField.delegate = self
+        phoneView.responderOnNext = birthdayDetailView
+        // TODO: responderOnNext for birthdayDetailView
+        //birthdayDetailView.textField.delegate = self
+        addressView.textField.delegate = self
+        
+        output.viewIsReady()
+    }
+    
+    func setupEditState(_ isEdit: Bool) {
+        let button = isEdit ? readyButton : editButton
+        button.fixEnabledState()
+        navigationItem.setRightBarButton(button, animated: true)
+        
+        nameView.isEditState = isEdit
+        surnameView.isEditState = isEdit
+        emailView.isEditState = isEdit
+        phoneView.isEditState = isEdit
+        birthdayDetailView.isEditState = isEdit
+        addressView.isEditState = isEdit
     }
     
     @objc private func onChangePassword() {
@@ -136,6 +180,202 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         controller.configureWith(selectedQuestion: nil, delegate: nil)
         
         router.pushViewController(viewController: controller)
+    }
+    
+    @objc private func onEditButtonAction() {
+        setupEditState(true)
+        output.tapEditButton()
+        saveFields()
+    }
+    
+    @objc private func onReadyButtonAction() {
+        updateProfile()
+    }
+    
+    private var name: String?
+    private var surname: String?
+    private var email: String?
+    private var phoneCode: String?
+    private var phoneNumber: String?
+    private var birthday: String?
+    
+    private func saveFields() {
+        name = nameView.textField.text
+        surname = surnameView.textField.text
+        email = emailView.textField.text
+        phoneCode = phoneView.codeTextField.text
+        phoneNumber = phoneView.numberTextField.text
+        birthday = birthdayDetailView.editableText
+    }
+    
+    private func updateProfile() {
+        guard
+            let name = nameView.textField.text,
+            let surname = surnameView.textField.text,
+            let email = emailView.textField.text,
+            let phoneCode = phoneView.codeTextField.text,
+            let phoneNumber = phoneView.numberTextField.text,
+            let birthday = birthdayDetailView.editableText
+        else {
+            setupEditState(false)
+            return
+        }
+        
+        let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
+        
+        readyButton.isEnabled = false
+        
+        if self.email != email {
+            guard !email.isEmpty else {
+                output.showError(error: TextConstants.emptyEmail)
+                return
+            }
+            
+            guard Validator.isValid(email: email) else {
+                output.showError(error: TextConstants.notValidEmail)
+                return
+            }
+            
+            let message = String(format: TextConstants.registrationEmailPopupMessage, email)
+            
+            let controller = PopUpController.with(
+                title: TextConstants.registrationEmailPopupTitle,
+                message: message,
+                image: .error,
+                buttonTitle: TextConstants.ok,
+                action: { [weak self] vc in
+                    vc.close { [weak self] in
+                        // TODO: address
+                        self?.output.tapReadyButton(name: name,
+                                                    surname: surname,
+                                                    email: email,
+                                                    number: fullPhoneNumber,
+                                                    birthday: birthday)
+                        self?.readyButton.fixEnabledState()
+                    }
+                })
+            
+            self.present(controller, animated: true, completion: nil)
+            
+        } else {
+            output.tapReadyButton(name: name,
+                                  surname: surname,
+                                  email: email,
+                                  number: fullPhoneNumber,
+                                  birthday: birthday)
+        }
+    }
+}
+
+
+// TODO: fill
+extension ProfileDetailController: UITextFieldDelegate  {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case nameView.textField:
+            nameView.hideSubtitleAnimated()
+
+        case surnameView.textField:
+            surnameView.hideSubtitleAnimated()
+
+        case emailView.textField:
+            emailView.hideSubtitleAnimated()
+
+        case birthdayDetailView.textField:
+            break
+
+        case phoneView.numberTextField, phoneView.codeTextField:
+            phoneView.hideSubtitleAnimated()
+            
+        case addressView.textField:
+            addressView.hideSubtitleAnimated()
+            
+        default:
+            assertionFailure()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case nameView.textField:
+            surnameView.textField.becomeFirstResponder()
+
+        case surnameView.textField:
+            emailView.textField.becomeFirstResponder()
+
+        case emailView.textField:
+            phoneView.codeTextField.becomeFirstResponder()
+
+        /// setup in view.
+        /// only for simulator.
+        case phoneView.codeTextField:
+            phoneView.numberTextField.becomeFirstResponder()
+
+        /// only for simulator.
+        /// setup by responderOnNext:
+        case phoneView.numberTextField:
+            birthdayDetailView.textField.becomeFirstResponder()
+
+        /// only for simulator.
+        /// setup by responderOnNext:
+        case birthdayDetailView.textField:
+            addressView.textField.becomeFirstResponder()
+            
+        case addressView.textField:
+            updateProfile()
+
+        default:
+            assertionFailure()
+        }
+        
+        return true
+    }
+    
+}
+
+extension ProfileDetailController: UserProfileViewInput {
+    
+    func configurateUserInfo(userInfo: AccountInfoResponse) {
+        nameView.textField.text = userInfo.name
+        surnameView.textField.text = userInfo.surname
+        emailView.textField.text = userInfo.email
+        
+        if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
+            phoneView.codeTextField.text = "+\(countryCode)"
+            
+            /// there is no countryCode in phoneNumber for turkcell accounts
+            if phoneNumber.contains(countryCode) {
+                let plusLength = 1 /// "+".count
+                let start = countryCode.count + plusLength
+                let end = phoneNumber.count
+                phoneView.numberTextField.text = phoneNumber[start..<end]
+            } else {
+                phoneView.numberTextField.text = phoneNumber
+            }
+        }
+        
+        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
+        birthdayDetailView.configure(with: birthday, delegate: self)
+        // TODO: address
+        
+    }
+    
+    func getNavigationController() -> UINavigationController? {
+        return navigationController
+    }
+    
+    func getPhoneNumber() -> String {
+        return (phoneView.codeTextField.text ?? "") + (phoneView.numberTextField.text ?? "")
+    }
+    
+    func endSaving() {
+        navigationItem.rightBarButtonItem?.fixEnabledState()
+    }
+    
+    func updateSetSecretQuestionView(with secrettQuestion: SecretQuestionWithAnswer) {
+        // TODO: delete
+        assertionFailure()
     }
     
 }

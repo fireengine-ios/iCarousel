@@ -10,7 +10,7 @@ import UIKit
 
 class UserProfileModuleConfigurator {
 
-    func configure(viewController: UserProfileViewController, userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+    func configure(viewController: ProfileDetailController, userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
 
         let router = UserProfileRouter()
 
