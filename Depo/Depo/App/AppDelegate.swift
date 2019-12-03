@@ -417,7 +417,7 @@ extension AppDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             Adjust.appWillOpen(url)
                 
-            if let oldURL = Adjust.convertUniversalLink(url, scheme: "akillidepo") {
+            if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {
                 debugLog("Adjust old path :\(oldURL.path)")
                 if let host = oldURL.host {
                     debugLog("Adjust old host :\(host)")

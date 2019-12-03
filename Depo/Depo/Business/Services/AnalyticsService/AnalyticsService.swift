@@ -250,7 +250,7 @@ extension AnalyticsService: AnalyticsGA {
                 userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
-                gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
+                gsmOperatorType: self.getGAOperatorType(),
                 loginType: loginType,
                 errorType: errorType,
                 autoSyncState: autoSyncState,
@@ -260,6 +260,16 @@ extension AnalyticsService: AnalyticsGA {
                 dailyDrawleft: dailyDrawleft,
                 totalDraw: totalDraw).productParametrs)
         }
+    }
+    
+    private func getGAOperatorType() -> String {
+        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
+            return ""
+        }
+        if accountType == "ALL_ACCESS" {
+            return "NON_TURKCELL"
+        }
+        return accountType
     }
     
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int) {

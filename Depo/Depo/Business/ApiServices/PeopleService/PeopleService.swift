@@ -111,7 +111,7 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) {
+    func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) -> URLSessionTask {
         debugLog("PeopleService getAlbumsForPeopleItemWithID")
         
         let param = PeopleAlbumsParameters(id: id)
@@ -124,7 +124,7 @@ final class PeopleService: BaseRequestService {
             }
         }, fail: fail)
         
-        executeGetRequest(param: param, handler: handler)
+        return executeGetRequest(param: param, handler: handler)
     }
     
     func searchPeople(text: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {

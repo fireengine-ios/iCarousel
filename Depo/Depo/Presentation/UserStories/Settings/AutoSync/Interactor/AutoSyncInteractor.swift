@@ -20,7 +20,20 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         output.prepaire(syncSettings: settings)
     }
     
-    func onSave(settings: AutoSyncSettings) {
+    func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
+        ///Sending autoSyncStatus when settings changed
+        if dataStorage.settings != settings || !fromSettings {
+            /// There is no scenario both success and error for now. Just sending BE
+            AccountService().autoSyncStatus(syncSettings: settings) { result in
+                switch result {
+                case .success(_):
+                    print(result)
+                case .failed(let error):
+                    print(error.description)
+                }
+            }
+        }
+        
         output.onSettingSaved()
         dataStorage.save(autoSyncSettings: settings)
         SyncServiceManager.shared.update(syncSettings: settings)
@@ -45,4 +58,5 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         analyticsManager.logScreen(screen: .autoSyncSettings)
         analyticsManager.trackDimentionsEveryClickGA(screen: .autoSyncSettings)
     }
+    
 }

@@ -80,7 +80,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         
         bottomViewTitleLabel.text = TextConstants.campaignViewControllerBottomViewTitle
         bottomViewDescriptionLabel.text = TextConstants.campaignViewControllerBottomViewDescription
-        bottomViewImage.loadImage(url: content.imageUrl)
+        bottomViewImage.loadImage(with: content.imageUrl)
     }
     
     private func setupTopView(dailyRemaining: Int, dailyUsed: Int) {

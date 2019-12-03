@@ -90,7 +90,7 @@ final class CollageCard: BaseCardView {
     
     override func viewDidEndShow() {
 //        photoImageView.image = nil
-        photoImageView.checkIsNeedCancelRequest()
+        photoImageView.cancelLoadRequest()
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

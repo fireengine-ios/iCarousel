@@ -21,6 +21,8 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private let analyticsManager: AnalyticsService = factory.resolve()
     
+    private var isNeedShowPermissions: Bool?
+
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -37,25 +39,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func getCellsData() {
-        let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
-        
-        let securityCells = [TextConstants.settingsViewCellActivityTimline,
-                             TextConstants.settingsViewCellUsageInfo,
-                             passcodeCellTitle,
-                             TextConstants.settingsViewCellLoginSettings]
-        
-        let array = [[TextConstants.settingsViewCellBeckup,
-                      TextConstants.settingsViewCellAutoUpload,
-                      TextConstants.settingsViewCellContactsSync,
-                      TextConstants.settingsViewCellFaceAndImageGrouping],
-                     [TextConstants.settingsViewCellConnectedAccounts,
-                      TextConstants.settingsViewCellPermissions],
-                     securityCells,
-                     [TextConstants.settingsViewCellHelp,
-                      TextConstants.settingsViewCellPrivacyAndTerms,
-                      TextConstants.settingsViewCellLogout]]
-        
-        self.output.cellsDataForSettings(array: array)
+        checkNeedShowPermissions()
     }
 
     func onLogout() {
@@ -112,8 +96,10 @@ class SettingsInteractor: SettingsInteractorInput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
             self?.userInfoResponse = accountInfo
             self?.getUserStatus()
-            }, fail: { [weak self] errorResponse in
-                self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
+            
+        }, fail: { [weak self] errorResponse in
+            self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
+            
         })
     }
     
@@ -131,5 +117,64 @@ class SettingsInteractor: SettingsInteractorInput {
                 }
             }
         }
+    }
+    
+    private func checkNeedShowPermissions() {
+        guard isNeedShowPermissions == nil else {
+            didRecieveDataForCells()
+            return
+        }
+        
+        output.asyncOperationStarted()
+        accountSerivese.getPermissionsAllowanceInfo { [weak self] response in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let permissions):
+                    
+                    self?.isNeedShowPermissions = permissions.contains(where: { $0.isAllowed == true })
+                    self?.didRecieveDataForCells()
+
+                case .failed(let error):
+                    self?.didRecieveDataForCells()
+                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
+                    
+                }
+                
+                self?.output.asyncOperationStoped()
+            }
+        }
+    }
+    
+    private func didRecieveDataForCells() {
+        ///accountCells
+        var accountCells = [TextConstants.settingsViewCellConnectedAccounts]
+        
+        if isNeedShowPermissions == true {
+            accountCells.append(TextConstants.settingsViewCellPermissions)
+        }
+        
+        ///securityCells
+        let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
+        let securityCells = [TextConstants.settingsViewCellActivityTimline,
+                             TextConstants.settingsViewCellUsageInfo,
+                             passcodeCellTitle,
+                             TextConstants.settingsViewCellLoginSettings]
+        
+        let array = [
+            [TextConstants.settingsViewCellBeckup,
+             TextConstants.settingsViewCellAutoUpload,
+             TextConstants.settingsViewCellContactsSync,
+             TextConstants.settingsViewCellFaceAndImageGrouping],
+            
+            accountCells,
+            
+            securityCells,
+            
+            [TextConstants.settingsViewCellHelp,
+             TextConstants.settingsViewCellPrivacyAndTerms,
+             TextConstants.settingsViewCellLogout]
+        ]
+        
+        self.output.cellsDataForSettings(array: array)
     }
 }
