@@ -17,7 +17,7 @@ protocol AccountServicePrl {
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
-    func autoSyncStatus(photoStatus: String, videoStatus: String , handler: @escaping ResponseVoid)
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -400,8 +400,13 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-    func autoSyncStatus(photoStatus: String, videoStatus: String , handler: @escaping ResponseVoid) {
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid) {
         debugLog("AccountService autoSyncStatus")
+        
+        let settings: AutoSyncSettings = syncSettings ?? AutoSyncDataStorage().settings
+        
+        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
         
         let params: Parameters  = [ "photoStatus" : photoStatus , "videoStatus" : videoStatus]
         

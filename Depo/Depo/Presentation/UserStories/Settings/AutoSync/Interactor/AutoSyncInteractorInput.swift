@@ -15,5 +15,4 @@ protocol AutoSyncInteractorInput {
     
     func checkPermissions()
     func trackScreen()
-    func sendAutoSyncStatus(syncSettings: AutoSyncSettings?)
 }

@@ -159,7 +159,14 @@ final class AuthoritySingleton {
             currentAppVersion = getAppVersion()
             
             ///after app updated , sending autoSyncStatus
-            AutoSyncInteractor().sendAutoSyncStatus(syncSettings: nil)
+            AccountService().autoSyncStatus(syncSettings: nil) { result in
+                switch result {
+                case .success(_):
+                    print(result)
+                case .failed(let error):
+                    print(error.description)
+                }
+            }
         }
     }
     
