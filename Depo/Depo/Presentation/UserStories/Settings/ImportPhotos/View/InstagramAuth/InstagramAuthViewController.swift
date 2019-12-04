@@ -131,6 +131,7 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hideSpinner()
         if isLoginStarted {
+            isLoginStarted = false
             ///server returns 500 if checkInstagramLogin immediately
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
                 self.checkInstagramLogin()
@@ -152,21 +153,34 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             return
         }
         
-        if let index = currentUrl.range(of: "%3Fcode%3D")?.upperBound {
-            var instagramAccessToken = String(currentUrl.suffix(from: index))
-            if let index = instagramAccessToken.index(of: "%") {
-                let distance = instagramAccessToken.distance(from: index, to: instagramAccessToken.endIndex)
-                instagramAccessToken.removeLast(distance)
-            } else {
-                assertionFailure("URL changed, you need find new code location (code length 238 chars)")
-            }
-            
-            self.instagramAccessToken = instagramAccessToken
+        if let token = getValue(from: currentUrl, by: "code") {
+            self.instagramAccessToken = token
             
             isLoginStarted = true
             removeCache()
         }
         
         decisionHandler(.allow)
+    }
+    
+    private func getValue(from url: String, by name: String) -> String? {
+        guard let urlComponents = URLComponents(string: url) else {
+            assertionFailure()
+            return nil
+        }
+        
+        let queryItems = urlComponents.queryItems?
+            .compactMap { getComponents(from: $0.value ?? "") }
+            .flatMap { $0 }
+        
+        return queryItems?.first(where: { $0.name == name })?.value
+    }
+    
+    private func getComponents(from url: String?) -> [URLQueryItem]? {
+        guard let url = url else {
+            return nil
+        }
+        
+        return URLComponents(string: url)?.queryItems
     }
 }
