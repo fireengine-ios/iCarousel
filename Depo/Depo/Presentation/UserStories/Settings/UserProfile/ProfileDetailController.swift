@@ -69,8 +69,6 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
     let emailView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
-        /// not set bcz of showEmptyCredentialsPopup
-        //newValue.subtitleLabel.text
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocorrectionType = .no
@@ -167,6 +165,11 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         phoneView.isEditState = isEdit
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
+        
+        
+        if addressView.textField.text == "" {
+            isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
+        }
     }
     
     @objc private func onChangePassword() {
@@ -201,6 +204,7 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
     private var phoneCode: String?
     private var phoneNumber: String?
     private var birthday: String?
+    private var address: String?
     
     private func saveFields() {
         name = nameView.textField.text
@@ -209,6 +213,7 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         phoneCode = phoneView.codeTextField.text
         phoneNumber = phoneView.numberTextField.text
         birthday = birthdayDetailView.editableText
+        address = addressView.textField.text
     }
     
     private func updateProfile() {
@@ -219,7 +224,16 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
             let phoneCode = phoneView.codeTextField.text,
             let phoneNumber = phoneView.numberTextField.text,
             let birthday = birthdayDetailView.editableText,
-            let address = addressView.textField.text
+            let address = addressView.textField.text,
+            
+            /// check for changes
+            (self.name != name ||
+            self.surname != surname ||
+            self.email != email ||
+            self.phoneCode != phoneCode ||
+            self.phoneNumber != phoneNumber ||
+            self.birthday != birthday ||
+            self.address != address)
         else {
             setupEditState(false)
             return
