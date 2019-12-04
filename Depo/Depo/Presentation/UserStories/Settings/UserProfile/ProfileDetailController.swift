@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: SetSecurityCredentialsViewDelegate
+// TODO: gray color for disabled mode
+
 final class ProfileDetailController: ViewController, KeyboardHandler {
     
     var output: UserProfileViewOutput!

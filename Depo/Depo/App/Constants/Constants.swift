@@ -1556,4 +1556,6 @@ struct TextConstants {
     
     static let photopickHistoryCampaignContestTotalDraw = NSLocalizedString("photopick_history_campaign_contest_total_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photopickHistoryCampaignRemainingDraw = NSLocalizedString("photopick_history_campaign_contest_remaining_draw", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let updateAddressError = NSLocalizedString("update_address_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
