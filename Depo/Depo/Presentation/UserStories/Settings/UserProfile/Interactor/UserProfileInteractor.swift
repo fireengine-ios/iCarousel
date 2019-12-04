@@ -39,7 +39,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateUserInfo() {
-        accountService.info(success: { [weak self] response in
+        accountService.info(success: { response in
             guard let response = response as? AccountInfoResponse else {
                 assertionFailure()
                 return
@@ -73,7 +73,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return (phone != userInfo?.phoneNumber)
     }
     
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String) {
+    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
         if !Validator.isValid(email: email) {
             output.showError(error: TextConstants.errorInvalidEmail)
 
@@ -88,10 +88,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
             return
         }
         
-        updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday)
+        updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
-    func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String) {
+    func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
         if name != userInfo?.name || surname != userInfo?.surname {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: surname)
@@ -102,32 +102,32 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
                 self?.userInfo?.name = name
                 self?.userInfo?.surname = surname
-                self?.updateEmailIfNeed(email: email, number: number, birthday: birthday)
+                                                self?.updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
-            updateEmailIfNeed(email: email, number: number, birthday: birthday)
+            updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
         }
     }
     
-    func updateEmailIfNeed(email: String, number: String, birthday: String) {
+    func updateEmailIfNeed(email: String, number: String, birthday: String, address: String) {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] response in
                                                 MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
-                self?.updatePhoneIfNeed(number: number, birthday: birthday)
+                self?.updatePhoneIfNeed(number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
-            updatePhoneIfNeed(number: number, birthday: birthday)
+            updatePhoneIfNeed(number: number, birthday: birthday, address: address)
         }
     }
     
-    func updatePhoneIfNeed(number: String, birthday: String) {
+    func updatePhoneIfNeed(number: String, birthday: String, address: String) {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
@@ -142,11 +142,11 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 self?.fail(error: error.description)
             })
         } else {
-            updateBirthdayIfNeeded(birthday)
+            updateBirthdayIfNeeded(birthday, address: address)
         }
     }
     
-    func updateBirthdayIfNeeded(_ birthday: String) {
+    func updateBirthdayIfNeeded(_ birthday: String, address: String) {
         /// Lines below are more correct but they're commented because of 400 error
         /// https://jira.turkcell.com.tr/browse/FE-1277
 ///        let oldBirthdayIsEmpty = (userInfo?.dob ?? "").isEmpty
@@ -159,12 +159,28 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
         
         if userInfo?.dob == birthday {
-            allUpdated()
+            updateAddressIfNeeded(address)
         } else {
-            AccountService().updateUserBirthday(birthday) { [weak self] response in
+            accountService.updateUserBirthday(birthday) { [weak self] response in
                 switch response {
                 case .success(_):
                     self?.userInfo?.dob = birthday
+                    self?.updateAddressIfNeeded(address)
+                case .failed(let error):
+                    self?.fail(error: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func updateAddressIfNeeded(_ address: String) {
+        if userInfo?.address == address {
+            allUpdated()
+        } else {
+            accountService.updateAddress(with: address) { [weak self] response in
+                switch response {
+                case .success(_):
+                    self?.userInfo?.address = address
                     self?.allUpdated()
                 case .failed(let error):
                     self?.fail(error: error.localizedDescription)

@@ -69,8 +69,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         interactor.trackState(.edit, errorType: nil)
     }
     
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
-        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
     func dataWasUpdated() {

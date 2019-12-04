@@ -16,7 +16,7 @@ protocol UserProfileViewOutput {
     func viewIsReady()
     
     func tapEditButton()
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String)
     func tapChangePasswordButton()
     func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?)
     

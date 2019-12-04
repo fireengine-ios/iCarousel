@@ -218,7 +218,8 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
             let email = emailView.textField.text,
             let phoneCode = phoneView.codeTextField.text,
             let phoneNumber = phoneView.numberTextField.text,
-            let birthday = birthdayDetailView.editableText
+            let birthday = birthdayDetailView.editableText,
+            let address = addressView.textField.text
         else {
             setupEditState(false)
             return
@@ -248,12 +249,12 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        // TODO: address
                         self?.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
                                                     number: fullPhoneNumber,
-                                                    birthday: birthday)
+                                                    birthday: birthday,
+                                                    address: address)
                         self?.readyButton.fixEnabledState()
                     }
                 })
@@ -265,7 +266,8 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
                                   surname: surname,
                                   email: email,
                                   number: fullPhoneNumber,
-                                  birthday: birthday)
+                                  birthday: birthday,
+                                  address: address)
         }
     }
 }
@@ -343,6 +345,7 @@ extension ProfileDetailController: UserProfileViewInput {
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
+        addressView.textField.text = userInfo.address
         
         if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
             phoneView.codeTextField.text = "+\(countryCode)"
@@ -360,8 +363,6 @@ extension ProfileDetailController: UserProfileViewInput {
         
         let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
         birthdayDetailView.configure(with: birthday, delegate: self)
-        // TODO: address
-        
     }
     
     func getNavigationController() -> UINavigationController? {

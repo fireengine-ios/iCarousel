@@ -13,7 +13,7 @@ protocol UserProfileInteractorInput {
     
     func viewIsReady()
     
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String)
+    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String)
     
     func updateUserInfo()
     

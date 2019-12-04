@@ -717,7 +717,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         sessionManager
             .request(RouteRequests.Account.updateAddress,
                  method: .post,
-                 parameters: nil,
+                 parameters: ["address": address],
                  encoding: JSONEncoding.prettyPrinted)
         .customValidate()
         .response(queue: .global(), completionHandler: { response in
