@@ -766,7 +766,7 @@
 "no_analyses_left_button" = "Premium Ol";
 "analyze_history_empty_title" = "Henüz fotoğraflarını analiz etmeye başlamadın mı?";
 "analyze_history_empty_subtitle" = "Hangi fotoğrafının daha yüksek puan alacağını öğrenmek ve sosyal medyada paylaşmak için hemen analize başla";
-"analyze_history_analyze_left" = "Analiz Hakkı";
+"analyze_history_analyze_left" = "Kalan Analiz Hakkı";
 "analyze_history_analyze_count" = "%1$d / %2$d";
 "analyze_with_instapick" = "PhotoPick ile Analiz Et!";
 "analyze_history_photos_count" = "%d Fotoğraf";
@@ -790,7 +790,7 @@
 
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "Fotoğrafın paylaşıma hazır!";
-"instaPick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"instaPick_analysis_left" = "Kalan Analiz Hakkı: %1$d / %2$d";
 "engage_with_more_hastags" = "Daha fazla #hashtag ile etkileşimini artır!";
 "copy_hashtags_to_clipboard" = "#hashtag'leri kopyala";
 "share_on_social_media" = "Paylaş!";
@@ -817,7 +817,7 @@
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
 "instapick_upgrade_popup_button" = "Güncelle";
 "instapick_upgrade_popup_no" = "Hayır";
-"instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"instapick_analysis_left" = "Kalan Analiz Hakkı: %1$d / %2$d";
 "instapick_unlimited_analysis" = "Senin için Sınırsız";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
@@ -1284,3 +1284,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";
