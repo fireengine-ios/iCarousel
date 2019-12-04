@@ -27,11 +27,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
         analyticsManager.logScreen(screen: .profileEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         
-        guard let userInfo_ = userInfo else {
+        guard let userInfo = userInfo else {
+            assertionFailure()
             return
         }
         
-        output.configurateUserInfo(userInfo: userInfo_)
+        output.configurateUserInfo(userInfo: userInfo)
     }
     
     private func isEmailChanged(email: String) -> Bool {
@@ -91,7 +92,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
-    func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+    private func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
         if name != userInfo?.name || surname != userInfo?.surname {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: surname)
@@ -111,7 +112,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func updateEmailIfNeed(email: String, number: String, birthday: String, address: String) {
+    private func updateEmailIfNeed(email: String, number: String, birthday: String, address: String) {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
@@ -127,7 +128,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func updatePhoneIfNeed(number: String, birthday: String, address: String) {
+    private func updatePhoneIfNeed(number: String, birthday: String, address: String) {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
@@ -146,7 +147,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func updateBirthdayIfNeeded(_ birthday: String, address: String) {
+    private func updateBirthdayIfNeeded(_ birthday: String, address: String) {
         /// Lines below are more correct but they're commented because of 400 error
         /// https://jira.turkcell.com.tr/browse/FE-1277
 ///        let oldBirthdayIsEmpty = (userInfo?.dob ?? "").isEmpty
@@ -189,7 +190,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func needSendOTP(response: SignUpSuccessResponse) {
+    private func needSendOTP(response: SignUpSuccessResponse) {
         DispatchQueue.main.async { [weak self] in
             if let info = self?.userInfo {
                 self?.output?.stopNetworkOperation()
@@ -198,7 +199,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func allUpdated() {
+    private func allUpdated() {
         ///need to refresh local info after change
         SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
             DispatchQueue.main.async { [weak self] in
@@ -214,7 +215,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         })
     }
     
-    func fail(error: String) {
+    private func fail(error: String) {
         DispatchQueue.main.async { [weak self] in
             self?.output.stopNetworkOperation()
             self?.output.showError(error: error)
