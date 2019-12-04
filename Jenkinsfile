@@ -385,7 +385,7 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}")) {
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
                                 deployToTestflight app
                             }
 
