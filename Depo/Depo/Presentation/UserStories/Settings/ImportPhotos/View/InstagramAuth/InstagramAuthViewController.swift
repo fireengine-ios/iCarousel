@@ -153,11 +153,15 @@ extension InstagramAuthViewController: WKNavigationDelegate {
         }
         
         if let index = currentUrl.range(of: "%3Fcode%3D")?.upperBound {
-            instagramAccessToken = String(currentUrl.suffix(from: index))
-            if let index = instagramAccessToken?.index(of: "%"),
-                let distance = instagramAccessToken?.distance(from: index, to: instagramAccessToken!.endIndex) {
-                instagramAccessToken?.removeLast(distance)
+            var instagramAccessToken = String(currentUrl.suffix(from: index))
+            if let index = instagramAccessToken.index(of: "%") {
+                let distance = instagramAccessToken.distance(from: index, to: instagramAccessToken.endIndex)
+                instagramAccessToken.removeLast(distance)
+            } else {
+                assertionFailure("URL changed, you need find new code location (code length 238 chars)")
             }
+            
+            self.instagramAccessToken = instagramAccessToken
             
             isLoginStarted = true
             removeCache()
