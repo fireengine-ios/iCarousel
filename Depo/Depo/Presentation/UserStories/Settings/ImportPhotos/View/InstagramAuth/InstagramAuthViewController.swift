@@ -152,8 +152,13 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             return
         }
         
-        if let index = currentUrl.range(of: "#access_token=")?.upperBound {
+        if let index = currentUrl.range(of: "%3Fcode%3D")?.upperBound {
             instagramAccessToken = String(currentUrl.suffix(from: index))
+            if let index = instagramAccessToken?.index(of: "%"),
+                let distance = instagramAccessToken?.distance(from: index, to: instagramAccessToken!.endIndex) {
+                instagramAccessToken?.removeLast(distance)
+            }
+            
             isLoginStarted = true
             removeCache()
         }
