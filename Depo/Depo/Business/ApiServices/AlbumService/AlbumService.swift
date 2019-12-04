@@ -10,7 +10,7 @@ import Alamofire
 
 struct AlbumsPatch {
     static let album =  "album"
-//    static let deleteAlbumss =  "/api/album"
+    static let deleteAlbums =  "album/trash"
     static let addPhotosToAlbum = "album/addFiles/%@"
     static let deletePhotosFromAlbum = "album/removeFiles/%@"
     static let renameAlbum = "album/rename/%@?newLabel=%@"
@@ -50,7 +50,7 @@ class DeleteAlbums: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: AlbumsPatch.album)
+        let path: String = String(format: AlbumsPatch.deleteAlbums)
         return URL(string: path, relativeTo: super.patch)!
     }
 }

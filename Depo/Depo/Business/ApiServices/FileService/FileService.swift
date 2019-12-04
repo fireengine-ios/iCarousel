@@ -11,7 +11,7 @@ import Foundation
 struct FilePatch {
     static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
     static let create = "filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "filesystem/delete"
+    static let delete = "filesystem/trash"
     static let rename = "filesystem/rename/%@"
     static let move =   "filesystem/move?targetFolderUuid=%@"
     static let copy =   "filesystem/copy?targetFolderUuid=%@"
