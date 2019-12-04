@@ -1742,10 +1742,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     
                 self.updateCoverPhoto()
                 
-                self.collectionView?.performBatchUpdates({
-                    self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
-                    self.collectionView?.deleteSections(recentlyDeletedSections)
-                }, completion: nil)
+                /// Controller will be closed and we don't need update
+                if self.allItems.isEmpty {
+                    self.collectionView?.reloadData()
+                } else {
+                    self.collectionView?.performBatchUpdates({
+                        self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
+                        self.collectionView?.deleteSections(recentlyDeletedSections)
+                    }, completion: nil)
+                }
             }
         }
     }
