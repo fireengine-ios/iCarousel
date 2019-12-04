@@ -16,7 +16,7 @@ apps = [ [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
-            appleId: '1467795722',
+            appleId: '1488914348',
             //xcodeSchema: , // Defaults to app name
             //xcodeTarget:   // Defaults to app name
         ]
