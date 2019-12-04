@@ -221,10 +221,12 @@ pipeline {
             steps {
                 script {
                     STAGE_NAME = 'Build : Init'
-                    //sh "git config --global credential.helper cache"
+                    
                     def scmVars = checkout scm
                     def gitUrl = scmVars.GIT_URL.trim()
                     echo "git url: ${gitUrl}"
+
+                    sh 'rm -rf build'
 
                     stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
@@ -383,7 +385,7 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}")) {
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
                                 deployToTestflight app
                             }
 
