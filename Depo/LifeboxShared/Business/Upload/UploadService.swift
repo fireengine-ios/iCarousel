@@ -51,6 +51,7 @@ final class UploadService {
                 
                 guard
                     let fileSize = FileManager.default.fileSize(at: url),
+                    fileSize > 0,
                     fileSize < NumericConstants.fourGigabytes
                 else {
                     let error = CustomErrors.text(TextConstants.syncFourGbVideo)
@@ -98,7 +99,7 @@ final class UploadService {
     {
         let fileSize = Int64(data.count)
         
-        guard fileSize < NumericConstants.fourGigabytes else {
+        guard fileSize > 0, fileSize < NumericConstants.fourGigabytes else {
             let error = CustomErrors.text(TextConstants.syncFourGbVideo)
             completion(ResponseResult.failed(error))
             return
@@ -146,10 +147,6 @@ final class UploadService {
     }
     
     private func commonHeaders(name: String, contentType: String, fileSize: Int64) -> HTTPHeaders {
-        if fileSize == 0 {
-            assertionFailure("File size is 0")
-        }
-        
         return [
             HeaderConstant.XObjectMetaFavorites: "false",
             HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
