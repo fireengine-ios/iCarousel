@@ -3772,6 +3772,12 @@
 		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B58533192397DD6000867B5B /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
+		B585331A2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
+		B585331C2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
+		B585331F2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
+		B58533212397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
+		B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
@@ -8528,6 +8534,8 @@
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57AB752237989F600467573 /* NSLocking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extension.swift"; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
+		B58533182397DD6000867B5B /* DebugAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsService.swift; sourceTree = "<group>"; };
+		B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WrapData+DebugAnalyticsExtension.swift"; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
@@ -11773,6 +11781,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B58533172397DD0900867B5B /* DebugAnalyticsService */,
 				9809317023952CAC00ECFEF8 /* SmartAlbumsManager */,
 				73CB8E3E2361755600585625 /* InstaPickCampaignService */,
 				897B8F372338B7170028C690 /* HomePagePopUpsService */,
@@ -14810,6 +14819,15 @@
 				66EA238C411DE4D11DBC9837 /* LBAlbumLikePreviewSliderRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		B58533172397DD0900867B5B /* DebugAnalyticsService */ = {
+			isa = PBXGroup;
+			children = (
+				B58533182397DD6000867B5B /* DebugAnalyticsService.swift */,
+				B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */,
+			);
+			path = DebugAnalyticsService;
 			sourceTree = "<group>";
 		};
 		B5AB5B5321F9A90C003AABB4 /* ConnectedAccounts */ = {
@@ -20107,11 +20125,11 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -20134,11 +20152,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -20261,11 +20279,11 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -20288,11 +20306,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -20374,11 +20392,11 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -20401,11 +20419,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -20635,11 +20653,11 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -20662,11 +20680,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -20807,6 +20825,7 @@
 				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				98C298402302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
 				892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
+				B585331A2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
 				B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
@@ -21988,6 +22007,7 @@
 				B56FBB1B2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */,
+				B58533212397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				8C0E8F931FDEBDFF00789C91 /* HelpAndSupportInitializer.swift in Sources */,
 				8C0E8F941FDEBDFF00789C91 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				89E51D5722CA112B007A7DBC /* CreateStoryPreviyInteractorIO.swift in Sources */,
@@ -23315,6 +23335,7 @@
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				B5AB2F0B2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
+				B58533192397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
 				9808A05E206A88580022376D /* PushNotificationService.swift in Sources */,
 				CEF00FDC227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */,
 				98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */,
@@ -23422,6 +23443,7 @@
 				B56FBB372122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
 				CEDFECA81F10C77E003D1A75 /* UIviewControlllerExtensions.swift in Sources */,
 				CEDFECB91F11D1D0003D1A75 /* Dictionary.swift in Sources */,
+				B585331F2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				D47863F31F3F18FA00EFDC6D /* UsageInfoInteractor.swift in Sources */,
 				CE4D282C207E3E6E003AE4FB /* WormholePoster.swift in Sources */,
 				873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */,
@@ -24500,6 +24522,7 @@
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
 				CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */,
 				CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */,
+				B585331C2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
 				CE7849F122A685FB00662219 /* FreeAppSpaceViewController.swift in Sources */,
 				CE7849F222A685FB00662219 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				CE7849F322A685FB00662219 /* SyncSettings.m in Sources */,
@@ -25009,6 +25032,7 @@
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,
 				CE784BCB22A685FB00662219 /* PeopleService.swift in Sources */,
 				73EA170322EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
+				B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				CE784BCC22A685FB00662219 /* UsageInfoRouter.swift in Sources */,
 				CE784BCD22A685FB00662219 /* AppConfigurator.swift in Sources */,
 				CE784BCE22A685FB00662219 /* InstaPickRoutingService.swift in Sources */,
