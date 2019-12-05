@@ -146,6 +146,10 @@ final class UploadService {
     }
     
     private func commonHeaders(name: String, contentType: String, fileSize: Int64) -> HTTPHeaders {
+        if fileSize == 0 {
+            assertionFailure("File size is 0")
+        }
+        
         return [
             HeaderConstant.XObjectMetaFavorites: "false",
             HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
