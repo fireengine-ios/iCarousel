@@ -580,7 +580,7 @@
 "widgetTopTitleInactive" = "Vetësinkronizimi është i çaktivizuar.";
 "widgetTopTitleInProgress" = "Vetësinkronizimi po vijon.";
 "error_authentication_message" = "Ju lutem, hapeni aplikacionin dhe hyni për të vazhduar.";
-"error_authentication_title" = "Hyni në lifebox";
+"error_authentication_title" = "Hyni në %@";
 "error_passcode_message" = "Aplikacioni i skedarëve nuk mund të përdoret me kod kalimi. Ju lutem, hapni lifebox-in dhe çaktivizoni kodin e kalimit për të vazhduar.";
 "error_passcode_title" = "Mbyllja e kodit të kalimit është aktivizuar.";
 "Successfully purchased" = "Blerë me sukses";
@@ -1319,3 +1319,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";
