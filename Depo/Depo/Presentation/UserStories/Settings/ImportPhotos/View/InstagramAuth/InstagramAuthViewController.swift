@@ -164,23 +164,20 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     }
     
     private func getValue(from url: String, by name: String) -> String? {
-        guard let urlComponents = URLComponents(string: url) else {
-            assertionFailure()
-            return nil
-        }
-        
-        let queryItems = urlComponents.queryItems?
-            .compactMap { getComponents(from: $0.value ?? "") }
+        let urlQueryItems = getQueryItems(from: url)
+    
+        let queryItems = urlQueryItems?
+            .compactMap { getQueryItems(from: $0.value ?? "") }
             .flatMap { $0 }
-        
+    
         return queryItems?.first(where: { $0.name == name })?.value
     }
     
-    private func getComponents(from url: String?) -> [URLQueryItem]? {
+    private func getQueryItems(from url: String?) -> [URLQueryItem]? {
         guard let url = url else {
             return nil
         }
-        
+    
         return URLComponents(string: url)?.queryItems
     }
 }
