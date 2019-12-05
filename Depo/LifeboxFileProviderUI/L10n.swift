@@ -18,7 +18,7 @@ enum L10n {
     /// Please open lifebox app and sign in to continue
     static let errorAuthenticationMessage = L10n.tr("OurLocalizable", "error_authentication_message")
     /// Sign in to lifebox
-    static let errorAuthenticationTitle = L10n.tr("OurLocalizable", "error_authentication_title")
+    static let errorAuthenticationTitle = L10n.tr("OurLocalizable", "error_authentication_title", TextConstants.NotLocalized.appNameLowercased)
     /// Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock
     static let errorPasscodeMessage = L10n.tr("OurLocalizable", "error_passcode_message")
     /// Passcode Lock is enabled

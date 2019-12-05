@@ -602,7 +602,7 @@
 "widgetTopTitleInactive" = "Auto-Sync is inactive";
 "widgetTopTitleInProgress" = "Auto-Sync is in progress";
 "error_authentication_message" = "Please open app and login to continue";
-"error_authentication_title" = "Login to lifebox";
+"error_authentication_title" = "Login to %@";
 "error_passcode_message" = "Files application can not be used with a passcode. Please open lifebox and disable passcode to continue";
 "error_passcode_title" = "Passcode lock is enabled";
 "Successfully purchased" = "Successfully purchased";
