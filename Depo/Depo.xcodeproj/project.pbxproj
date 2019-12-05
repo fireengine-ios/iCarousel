@@ -2158,7 +2158,6 @@
 		0303A8BB2397D15100907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110922BCD46700108958 /* Info.plist */; };
 		0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */; };
 		0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		0303A8BE2397D15100907F42 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
 		0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110622BCD46700108958 /* InfoAppStore.plist */; };
 		0303A8C12397D15100907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
@@ -2178,6 +2177,8 @@
 		0303A8ED2397F0B000907F42 /* LifeTech_LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0303A8F02397F0C900907F42 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
+		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05D3F110F5AEAA8A60DD01BE /* Pods_LifeTech_LifeDriveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */; };
 		05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
@@ -4979,7 +4980,6 @@
 		8C3BA38C22B3CC53006D901E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		8C3BA39022B3CC53006D901E /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */; };
 		8C3BA39122B3CC53006D901E /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		8C3BA39222B3CC53006D901E /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
 		8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		8C3BA39422B3CC53006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		8C3BA39522B3CC53006D901E /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
@@ -8914,6 +8914,7 @@
 		0303A8D02397D15100907F42 /* LifeDriveProviderUI copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveProviderUI copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveProviderUI copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303A8DE2397D15900907F42 /* LifeDriveNotificationService copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveNotificationService copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveNotificationService copy-Info.plist"; sourceTree = "<absolute>"; };
+		0309C38023992FBA0031DB5B /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		043311ABC77BBE1D80DBF183 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewInput.swift; sourceTree = "<group>"; };
@@ -15828,6 +15829,7 @@
 		8C86110322BCD46700108958 /* LifeDrive */ = {
 			isa = PBXGroup;
 			children = (
+				0309C38023992FBA0031DB5B /* images.xcassets */,
 				8C86110422BCD46700108958 /* InfoEnterprise.plist */,
 				8C86110522BCD46700108958 /* LifeboxFileProviderUI.entitlements */,
 				8C86110622BCD46700108958 /* InfoAppStore.plist */,
@@ -21047,9 +21049,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0303A8BB2397D15100907F42 /* Info.plist in Resources */,
+				0309C38123992FBA0031DB5B /* images.xcassets in Resources */,
 				0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */,
 				0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */,
-				0303A8BE2397D15100907F42 /* images.xcassets in Resources */,
 				0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */,
 				0303A8C12397D15100907F42 /* OurLocalizable.strings in Resources */,
@@ -21776,9 +21778,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C86110C22BCD46800108958 /* Info.plist in Resources */,
+				0309C38223992FBA0031DB5B /* images.xcassets in Resources */,
 				8C3BA39022B3CC53006D901E /* InfoEnterprise.plist in Resources */,
 				8C3BA39122B3CC53006D901E /* TurkcellSaturaBol.ttf in Resources */,
-				8C3BA39222B3CC53006D901E /* images.xcassets in Resources */,
 				8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
 				8C86110B22BCD46800108958 /* InfoAppStore.plist in Resources */,
 				8C3BA39422B3CC53006D901E /* OurLocalizable.strings in Resources */,
@@ -31234,6 +31236,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive files UI dev";
@@ -31275,6 +31278,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider UI adhoc";
@@ -31315,6 +31319,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo Files UI";
@@ -31355,6 +31360,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files UI";
@@ -32558,6 +32564,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Billo FilesUI - Dev";
@@ -32599,6 +32606,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive file provider UI adhoc";
@@ -32639,6 +32647,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Billo FilesUI - Dev";
@@ -32679,6 +32688,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Files UI";
@@ -33189,6 +33199,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
@@ -33231,6 +33242,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
@@ -33272,6 +33284,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
@@ -33313,6 +33326,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
@@ -33914,6 +33928,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
@@ -33956,6 +33971,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
@@ -33997,6 +34013,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
@@ -34038,6 +34055,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";

@@ -22,7 +22,7 @@ struct TextConstants {
         static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         
-        private static let appNameLowercased: String = {
+        static let appNameLowercased: String = {
             #if LIFEDRIVE
                 return "billo"
             #else
