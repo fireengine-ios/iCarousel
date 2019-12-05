@@ -17,12 +17,15 @@ final class HomePageInteractor: HomePageInteractorInput {
     weak var output: HomePageInteractorOutput!
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
-    private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
-    private var isShowPopupAboutPremium = true
-    private let campaignService = CampaignServiceImpl()
+    private lazy var accountService = AccountService()
+
     private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
+    private let campaignService = CampaignServiceImpl()
+
+    private var isShowPopupAboutPremium = true
+    private(set) var homeCardsLoaded = false
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -34,6 +37,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
+        getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
@@ -42,6 +46,20 @@ final class HomePageInteractor: HomePageInteractorInput {
         smartAlbumsManager.requestAllItems()
     }
     
+    func needRefresh() {
+        homeCardsLoaded = false
+        
+        getCampaignStatus()
+        getPremiumCardInfo(loadStatus: .reloadAll)
+        getAllCardsForHomePage()
+    }
+
+    func updateLocalUserDetail() {
+        getPremiumCardInfo(loadStatus: .reloadSingle)
+        getInstaPickInfo()
+    }
+    
+    //MARK: tracking
     func trackScreen() {
         analyticsService.logScreen(screen: .homePage)
         analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
@@ -49,6 +67,30 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func trackGiftTapped() {
         analyticsService.trackCustomGAEvent(eventCategory: .campaign, eventActions: .giftIcon, eventLabel: .empty)
+    }
+    
+    func trackQuota(quotaPercentage: Float) {
+        var quotaUsed: Int = 80
+        if 0.8 <= quotaPercentage && quotaPercentage < 0.9 {
+            quotaUsed = 80
+        } else if 0.9 <= quotaPercentage && quotaPercentage < 0.95 {
+            quotaUsed = 90
+        } else if 0.95 <= quotaPercentage && quotaPercentage < 1.0 {
+            quotaUsed = 95
+        } else if quotaPercentage >= 1.0 {
+            quotaUsed = 100
+        } else {
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .quota,
+                                            eventLabel: .quotaUsed(quotaUsed))
+    }
+    
+    //MARK: autosync triggering
+    @objc private func checkAutoSync() {
+        SyncServiceManager.shared.updateImmediately()
     }
     
     private func setupAutoSyncTriggering() {
@@ -60,18 +102,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                                                object: nil)
     }
     
-    @objc private func checkAutoSync() {
-        SyncServiceManager.shared.updateImmediately()
-    }
-    
-    func needRefresh() {
-        homeCardsLoaded = false
-        
-        getCampaignStatus()
-        getPremiumCardInfo(loadStatus: .reloadAll)
-        getAllCardsForHomePage()
-    }
-    
+    //MARK: private requests
     private func getCampaignStatus() {
         campaignService.getPhotopickDetails { [weak self] result in
             switch result {
@@ -93,15 +124,13 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     private func getAccountInfo() {
-        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
             DispatchQueue.toMain {
-                self?.output.verifyEmailIfNeeded()
-                self?.output.credsCheckUpdateIfNeeded()
+                self?.output.didObtainAccountInfo(accountInfo: accountInfo)
             }
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
-                self?.output.didObtainFailCardInfo(errorMessage: error.description,
-                                                   isNeedStopRefresh: false)
+                self?.output.didObtainAccountInfoError(with: error.description)
             }
         })
     }
@@ -116,21 +145,15 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
                     DispatchQueue.toMain {
-                        self?.output.didObtainFailCardInfo(errorMessage: error.description,
-                                                           isNeedStopRefresh: true)
+                        self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
                     }
                 }
             }
         }
     }
-
-    func updateLocalUserDetail() {
-        getPremiumCardInfo(loadStatus: .reloadSingle)
-        getInstaPickInfo()
-    }
-
+    
     private func getPremiumCardInfo(loadStatus: RefreshStatus) {
-        AccountService().permissions { [weak self] response in
+        accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
@@ -143,7 +166,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                     DispatchQueue.main.async {
                         self?.fillCollectionView(isReloadAll: true)
 
-                        self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                        self?.output.didObtainError(with: error.description,
                                                            isNeedStopRefresh: loadStatus == .reloadSingle)
                     }
                 })
@@ -158,7 +181,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                         self?.fillCollectionView(isReloadAll: true)
                     }
                     
-                    self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                    self?.output.didObtainError(with: error.description,
                                                        isNeedStopRefresh: loadStatus == .reloadSingle)
                 }
             }
@@ -173,19 +196,14 @@ final class HomePageInteractor: HomePageInteractorInput {
                 self.output.didObtainInstaPickStatus(status: response)
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self.output.didObtainFailCardInfo(errorMessage: error.description,
-                                                      isNeedStopRefresh: true)
+                    self.output.didObtainError(with: error.description, isNeedStopRefresh: true)
                 }
             }
         }
     }
     
-    func needCheckQuota() {
-        getQuotaInfo()
-    }
-    
     private func getQuotaInfo() {
-        AccountService().quotaInfo(success: { [weak self] response in
+        accountService.quotaInfo(success: { [weak self] response in
             DispatchQueue.toMain {
                 if let qresponce = response as? QuotaInfoResponse {
                     guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else {
@@ -201,28 +219,9 @@ final class HomePageInteractor: HomePageInteractorInput {
                 }
             }
             
-        }, fail: { error in
-            //error handling not need
+        }, fail: { [weak self] error in
+            self?.output.didObtainQuotaInfo(usagePercentage: 0)
+            self?.output.didObtainError(with: error.description, isNeedStopRefresh: false)
         })
     }
-
-    func trackQuota(quotaPercentage: Float) {
-        var quotaUsed: Int = 80
-        if 0.8 <= quotaPercentage && quotaPercentage < 0.9 {
-            quotaUsed = 80
-        } else if 0.9 <= quotaPercentage && quotaPercentage < 0.95 {
-            quotaUsed = 90
-        } else if 0.95 <= quotaPercentage && quotaPercentage < 1.0 {
-            quotaUsed = 95
-        } else if quotaPercentage >= 1.0 {
-            quotaUsed = 100
-        } else {
-            return
-        }
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .quota,
-                                            eventLabel: .quotaUsed(quotaUsed))
-    }
-    
 }

@@ -63,11 +63,11 @@ class SingletonStorage {
                         fail(ErrorResponse.string(TextConstants.errorServer))
                     }
                 }
-            }) { error in
+            }, fail: { error in
                 DispatchQueue.toMain {
                     fail(error)
                 }
-            }
+            })
         }
     }
     
