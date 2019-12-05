@@ -134,8 +134,8 @@ struct RouteRequests {
     static let fbStop        = "migration/facebook/stop"
     
     // MARK: - Instagram
-    static let instagramConfig = "share/social/instagram/config"
-    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
+    static let instagramConfig = "share/social/instagram/config/v2"
+    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect/v2"
     static let instagramDisconnect =  baseUrl +/ "share/social/instagram/disconnect"
     static let instagramSyncStatus = "share/social/instagram/syncStatus"
     static let instagramCreateMigration = "share/social/instagram/migration/create"

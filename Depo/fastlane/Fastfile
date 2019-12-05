@@ -217,7 +217,7 @@ lane :my_gym_lifedrive do # |options|
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: "lifedrive",
+      scheme: "LifeTech_lifedrive",
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder

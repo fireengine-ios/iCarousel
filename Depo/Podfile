@@ -132,11 +132,38 @@ target 'LifeDriveProviderUI' do
     shared_pods
 end
 
-#target 'LifeDrive-widget' do
-#    pod 'MMWormhole', '~> 2.0.0'
-#end
+target 'LifeDrive-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
 
-target "LifeDriveNotificationService" do
+target 'LifeDriveNotificationService' do
+  pod 'Netmera'
+  pod 'iCarousel'
+end
+
+target 'LifeTech_lifedrive' do
+	core_pods
+end
+
+target 'LifeTech_LifeDriveShared' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech_LifeDriveFileProvider' do
+    shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech_LifeDriveProviderUI' do
+    shared_pods
+end
+
+target 'LifeTech_LifeDrive-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'LifeTech_LifeDriveNotificationService' do
   pod 'Netmera'
   pod 'iCarousel'
 end

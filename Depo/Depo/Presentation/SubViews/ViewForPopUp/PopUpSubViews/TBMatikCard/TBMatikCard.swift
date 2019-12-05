@@ -146,6 +146,7 @@ final class TBMatikCard: BaseCardView {
             group.enter()
             imageDownloder.getImageByTrimming(url: url) { image in
                 guard let image = image else {
+                    group.leave()
                     return
                 }
                 images.append(image)

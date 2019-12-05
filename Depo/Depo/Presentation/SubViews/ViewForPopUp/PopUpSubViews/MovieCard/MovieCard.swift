@@ -79,6 +79,9 @@ final class MovieCard: BaseCardView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
+    }
+    
+    override func viewWillShow() {
         videoPreviewImageView.loadImage(with: item)
     }
     
