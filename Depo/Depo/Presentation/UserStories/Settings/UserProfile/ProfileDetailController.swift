@@ -86,9 +86,9 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
     
     let addressView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "Address"
-        newValue.subtitleLabel.text = "This information will be used for campaigns"
-        newValue.textField.quickDismissPlaceholder = "Please enter your address information"
+        newValue.titleLabel.text = TextConstants.profileDetailAddressTitle
+        newValue.subtitleLabel.text = TextConstants.profileDetailAddressSubtitle
+        newValue.textField.quickDismissPlaceholder = TextConstants.profileDetailAddressPlaceholder
         newValue.textField.autocorrectionType = .no
         newValue.textField.returnKeyType = .done
         return newValue
@@ -147,9 +147,10 @@ final class ProfileDetailController: ViewController, KeyboardHandler {
         surnameView.textField.delegate = self
         emailView.textField.delegate = self
         phoneView.responderOnNext = birthdayDetailView
+        addressView.textField.delegate = self
+        
         // TODO: responderOnNext for birthdayDetailView
         //birthdayDetailView.textField.delegate = self
-        addressView.textField.delegate = self
         
         output.viewIsReady()
     }
