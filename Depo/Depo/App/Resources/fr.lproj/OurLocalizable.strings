@@ -752,7 +752,7 @@ Full stop added*/
 "widgetTopTitleInactive" = "Auto-Synchronisation est inactif";
 "widgetTopTitleInProgress" = "Auto-Synchronisation est en cours de réalisation";
 "error_authentication_message" = "Veuillez ouvrir les applications et la connexion pour continuer";
-"error_authentication_title" = "Connectez-vous à lifebox";
+"error_authentication_title" = "Connectez-vous à %@";
 
 /*Fuzzy*/
 "error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir lifebox et désactiver le mot de passe pour continuer";

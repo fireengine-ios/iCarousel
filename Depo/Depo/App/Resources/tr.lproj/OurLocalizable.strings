@@ -580,7 +580,7 @@
 "widgetTopTitleInactive" = "Otomatik yükleme aktif değil";
 "widgetTopTitleInProgress" = "Yükleme devam ediyor...";
 "error_authentication_message" = "Devam edebilmek için lütfen uygulamayı açıp giriş yapın.";
-"error_authentication_title" = "lifebox'a giriş yapın.";
+"error_authentication_title" = "%@'a giriş yapın.";
 "error_passcode_message" = "Dosyalar uygulamasını kullanabilmek için lifebox parolasını kaldırman gerekiyor.";
 "error_passcode_title" = "lifebox parolası aktif durumda.";
 "Successfully purchased" = "Başarıyla satın alındı.";
