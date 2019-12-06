@@ -6289,12 +6289,12 @@
 		CEC3C2491FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */; };
 		CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */; };
 		CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */; };
-		CEC94E41238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* ProfileDetailController.swift */; };
-		CEC94E42238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* ProfileDetailController.swift */; };
-		CEC94E43238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* ProfileDetailController.swift */; };
-		CEC94E44238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* ProfileDetailController.xib */; };
-		CEC94E45238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* ProfileDetailController.xib */; };
-		CEC94E46238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* ProfileDetailController.xib */; };
+		CEC94E41238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E42238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E44238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
+		CEC94E45238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
+		CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
 		CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */; };
 		CECA164D2121CA1E006D96A5 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
 		CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
@@ -7253,8 +7253,6 @@
 		7CDABCFC1F1E3A6300C8CC16 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		7CDABCFE1F1E3A6300C8CC16 /* UserProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileRouter.swift; sourceTree = "<group>"; };
 		7CDABCFF1F1E3A6300C8CC16 /* UserProfileRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileRouterInput.swift; sourceTree = "<group>"; };
-		7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
-		7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
 		7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewInput.swift; sourceTree = "<group>"; };
 		7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewOutput.swift; sourceTree = "<group>"; };
 		7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileInfoViewController.xib; sourceTree = "<group>"; };
@@ -8971,8 +8969,8 @@
 		CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsInteractorIO.swift; sourceTree = "<group>"; };
 		CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouter.swift; sourceTree = "<group>"; };
 		CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouterInput.swift; sourceTree = "<group>"; };
-		CEC94E3F238FA6F4000BBB80 /* ProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailController.swift; sourceTree = "<group>"; };
-		CEC94E40238FA6F4000BBB80 /* ProfileDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailController.xib; sourceTree = "<group>"; };
+		CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
 		CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxPresenter.swift; sourceTree = "<group>"; };
 		CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageDesigner.swift; sourceTree = "<group>"; };
 		CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSortingRules.swift; sourceTree = "<group>"; };
@@ -11968,8 +11966,6 @@
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
-				CEC94E40238FA6F4000BBB80 /* ProfileDetailController.xib */,
-				CEC94E3F238FA6F4000BBB80 /* ProfileDetailController.swift */,
 				7CDABCF31F1E3A6300C8CC16 /* Configurator */,
 				7CDABCF61F1E3A6300C8CC16 /* Interactor */,
 				7CDABCFA1F1E3A6300C8CC16 /* Presenter */,
@@ -12019,11 +12015,11 @@
 		7CDABD001F1E3A6300C8CC16 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				17035BA6226D9E4100FE7362 /* Views */,
-				7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */,
-				7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */,
+				CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */,
+				CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */,
 				7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */,
 				7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */,
+				17035BA6226D9E4100FE7362 /* Views */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -18153,7 +18149,7 @@
 				C62239B0204973400043ED44 /* FaceImageChangeCoverViewController.xib in Resources */,
 				8C06B1352008AD72003D8E05 /* t_orta_selected.png in Resources */,
 				8C208668228D4B61000BEDAD /* EmptyDataView.xib in Resources */,
-				CEC94E45238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */,
+				CEC94E45238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				8C06B1332008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFEB2008AD71003D8E05 /* kare_selected.png in Resources */,
 				8C06AF6D2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
@@ -18776,7 +18772,7 @@
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
 				8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */,
-				CEC94E44238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */,
+				CEC94E44238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				7C6E2FA41F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				8C06AF402008AD70003D8E05 /* crop@2x.png in Resources */,
@@ -19336,7 +19332,7 @@
 				CE784CCF22A685FB00662219 /* cizgi_2@2x.png in Resources */,
 				CE784CD022A685FB00662219 /* filtre_selected.png in Resources */,
 				CE784CD122A685FB00662219 /* CRYFrameCell.nib in Resources */,
-				CEC94E46238FA6F4000BBB80 /* ProfileDetailController.xib in Resources */,
+				CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
@@ -21361,7 +21357,7 @@
 				9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				8E26D97F2306999800D08123 /* MusicViewInput.swift in Sources */,
-				CEC94E42238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */,
+				CEC94E42238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
@@ -23475,7 +23471,7 @@
 				98758F612359BC3E00D06952 /* CampaignService.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
-				CEC94E41238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */,
+				CEC94E41238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
 				0817E8DE5620F2988297FF52 /* UserInfoSubViewRouter.swift in Sources */,
 				1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */,
@@ -24272,7 +24268,7 @@
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE78492822A685FB00662219 /* (null) in Sources */,
-				CEC94E43238FA6F4000BBB80 /* ProfileDetailController.swift in Sources */,
+				CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				CE78492922A685FB00662219 /* DataStorage.swift in Sources */,
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
 				CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */,

@@ -12,7 +12,7 @@ class UserProfileModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName: String, userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
 //        let viewController = UserProfileViewController(nibName: nibName, bundle: nil)
-        let viewController = ProfileDetailController()
+        let viewController = UserProfileViewController()
         let configurator = UserProfileModuleConfigurator()
         configurator.configure(viewController: viewController, userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         return viewController
