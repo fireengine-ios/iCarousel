@@ -726,7 +726,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return fullInfoAboutVideoAsset(asset: asset)
         
         default:
-            let info = AssetInfo(libraryAsset: asset)
+            var info = AssetInfo(libraryAsset: asset)
             info.isValid = false
             return info
         }
