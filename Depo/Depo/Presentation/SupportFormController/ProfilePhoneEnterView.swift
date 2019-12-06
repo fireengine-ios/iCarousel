@@ -39,7 +39,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @IBOutlet public weak var codeTextField: UnderlineTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = UIColor.black
+            newValue.textColor = textFieldColor
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -94,7 +94,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = UIColor.black
+            newValue.textColor = textFieldColor
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -136,8 +136,12 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         set {
             codeTextField.isUserInteractionEnabled = newValue
             numberTextField.isUserInteractionEnabled = newValue
+            codeTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
+            numberTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
         }
     }
+    
+    private let textFieldColor = UIColor.black
     
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".

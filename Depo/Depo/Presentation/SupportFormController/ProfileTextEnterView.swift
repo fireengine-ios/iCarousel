@@ -56,8 +56,13 @@ class ProfileTextEnterView: UIView {
     private let underlineLayer = CALayer()
     
     var isEditState: Bool {
-        get { return textField.isUserInteractionEnabled }
-        set { textField.isUserInteractionEnabled = newValue }
+        get {
+            return textField.isUserInteractionEnabled
+        }
+        set {
+            textField.isUserInteractionEnabled = newValue
+            textField.textColor = newValue ? UIColor.black : ColorConstants.textDisabled
+        }
     }
         
     override init(frame: CGRect) {
