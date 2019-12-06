@@ -22,9 +22,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return isTurkcellUser
     }
     
-    var securityQuestionId: Int? {
-        return userInfo?.securityQuestionId
-    }
+    var secretQuestionsResponse: SecretQuestionsResponse?
     
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)
@@ -35,6 +33,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
             return
         }
         
+        configuresecretQuestionView(userInfo: userInfo)
         output.configurateUserInfo(userInfo: userInfo)
     }
     
@@ -219,6 +218,37 @@ class UserProfileInteractor: UserProfileInteractorInput {
             self?.output.stopNetworkOperation()
             self?.output.showError(error: error)
         }
+    }
+    
+    /// posible needs callback for slow internet
+    private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
+        
+        guard userInfo.hasSecurityQuestionInfo != nil else  {
+            assertionFailure()
+            return
+        }
+
+        guard let questionId = userInfo.securityQuestionId else {
+            /// posible assertionFailure(). needs to check
+            return
+        }
+        
+        accountService.getListOfSecretQuestions { [weak self] response in
+            switch response {
+            case .success( let questions):
+                guard let question = questions.first(where: { $0.id == questionId }) else {
+                    assertionFailure("getListOfSecretQuestions must containts questionId. error on server")
+                    return
+                }
+                
+                self?.secretQuestionsResponse = question
+                
+            case .failed(_):
+                /// This error doesn't handle
+                break
+            }
+        }
+        
     }
     
 }
