@@ -70,12 +70,13 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     func trackQuota(quotaPercentage: Float) {
-        var quotaUsed: Int = 80
-        if 0.8 <= quotaPercentage && quotaPercentage < 0.9 {
+        var quotaUsed: Int
+        
+        if (0.8..<0.9).contains(quotaPercentage) {
             quotaUsed = 80
-        } else if 0.9 <= quotaPercentage && quotaPercentage < 0.95 {
+        } else if (0.9..<0.95).contains(quotaPercentage) {
             quotaUsed = 90
-        } else if 0.95 <= quotaPercentage && quotaPercentage < 1.0 {
+        } else if (0.95..<1).contains(quotaPercentage) {
             quotaUsed = 95
         } else if quotaPercentage >= 1.0 {
             quotaUsed = 100
