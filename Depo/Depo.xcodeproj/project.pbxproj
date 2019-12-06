@@ -2178,7 +2178,6 @@
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
-		03C3FCDC239A3AA100798A9C /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05D3F110F5AEAA8A60DD01BE /* Pods_LifeTech_LifeDriveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */; };
 		05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
@@ -2227,7 +2226,6 @@
 		17589F7F2276336800A5DB37 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F712276336700A5DB37 /* SupportFormController.swift */; };
 		17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		17E9B7132251E5A300C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
-		18EE14C2AF7397A527A1954E /* Pods_LifeDrive_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01500C54CE5790F468BC39D /* Pods_LifeDrive_widget.framework */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
 		1ED9B13C12D56CE8CD6FD4BA /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
@@ -8721,13 +8719,6 @@
 			remoteGlobalIDString = 984B1EDD23685FC8009ACCFF;
 			remoteInfo = LifeDriveNotificationService;
 		};
-		03C3FCDA239A3A8700798A9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C3BA2BC22B3CC32006D901E;
-			remoteInfo = "LifeDrive-widget";
-		};
 		7A3E0C03206273CE00F79A1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -8887,7 +8878,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				03C3FCDC239A3AA100798A9C /* LifeDrive-widget.appex in Embed App Extensions */,
 				0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
@@ -9019,7 +9009,6 @@
 		2E50FCBA00A2EB5EF92BED07 /* UserInfoSubViewViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewViewInput.swift; sourceTree = "<group>"; };
 		2EDC08542508B91094154180 /* Pods-Depo_LifeTech-autosync-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; sourceTree = "<group>"; };
 		2F172D05871BAF33FBD4C89D /* Pods-LifeDriveFileProvider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.debug.xcconfig"; sourceTree = "<group>"; };
-		2F97970C36E8D0FB16C5558D /* Pods-LifeDrive-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.release.xcconfig"; sourceTree = "<group>"; };
 		2FA162F32D68FC71BB6EDF2E /* SettingsRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		30889CD8C0EE339E19DF61B6 /* ActivityTimelineInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorOutput.swift; sourceTree = "<group>"; };
 		316C7EB7F425E78BE113D777 /* Pods-LifeboxFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.release.xcconfig"; sourceTree = "<group>"; };
@@ -10630,7 +10619,6 @@
 		98EAC9412080CBFF00AAD5B6 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignDetailViewController.swift; sourceTree = "<group>"; };
 		98F9C57123585168008C5ECF /* CampaignContestInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignContestInfoView.swift; sourceTree = "<group>"; };
-		9931E1EDAD90FE949E103A2F /* Pods-LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVerificationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationModuleInput.swift; sourceTree = "<group>"; };
 		9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewInput.swift; sourceTree = "<group>"; };
@@ -10855,7 +10843,6 @@
 		BDD32A1C9ACDD7741231E880 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEA59781E373DDE771161AA4 /* Pods-LifeTech_LifeDriveShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDriveShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDriveShared/Pods-LifeTech_LifeDriveShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		BEBA8198C8A923699E4E67E5 /* Pods-LifeTech-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-NotificationService.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-NotificationService/Pods-LifeTech-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
-		C01500C54CE5790F468BC39D /* Pods_LifeDrive_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDrive_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C025086696F56A3B76A70336 /* SettingsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsModuleInput.swift; sourceTree = "<group>"; };
 		C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInitializer.swift; sourceTree = "<group>"; };
 		C09E9301A2DA06FD9EB1828D /* Pods-LifeTech_LifeDriveProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDriveProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDriveProviderUI/Pods-LifeTech_LifeDriveProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -10874,10 +10861,8 @@
 		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
 		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
 		C8BB952B985A9557512DC031 /* Pods-LifeboxShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.appstore.xcconfig"; sourceTree = "<group>"; };
-		C971727C853F258D6ECFA1B4 /* Pods-LifeDrive-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CA3578DCC250EB72513FBF71 /* SyncContactsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewOutput.swift; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
-		CBA6B46D1C80374CA4529062 /* Pods-LifeDrive-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewConfigurator.swift; sourceTree = "<group>"; };
 		CC55EC0735060540CE5E23E4 /* FileInfoRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoRouter.swift; sourceTree = "<group>"; };
@@ -11560,7 +11545,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA2CA22B3CC32006D901E /* NotificationCenter.framework in Frameworks */,
-				18EE14C2AF7397A527A1954E /* Pods_LifeDrive_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11896,7 +11880,6 @@
 				39504606EF0A35F424912DD0 /* Pods_LifeTech_LifeDriveProviderUI.framework */,
 				C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */,
 				F366418C57A9DE6BA9284C5E /* Pods_LifeTech_lifedrive.framework */,
-				C01500C54CE5790F468BC39D /* Pods_LifeDrive_widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -19536,10 +19519,6 @@
 				22B1ABDE64A678C07E027E62 /* Pods-LifeTech_lifedrive.release.xcconfig */,
 				2C08D49DCF0B32ED4A1C207E /* Pods-LifeTech_lifedrive.appstore.xcconfig */,
 				61985FCC0EFA34A322F32AB7 /* Pods-LifeTech_lifedrive.enterprise.xcconfig */,
-				CBA6B46D1C80374CA4529062 /* Pods-LifeDrive-widget.debug.xcconfig */,
-				2F97970C36E8D0FB16C5558D /* Pods-LifeDrive-widget.release.xcconfig */,
-				9931E1EDAD90FE949E103A2F /* Pods-LifeDrive-widget.appstore.xcconfig */,
-				C971727C853F258D6ECFA1B4 /* Pods-LifeDrive-widget.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -19717,7 +19696,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA2DA22B3CC32006D901E /* Build configuration list for PBXNativeTarget "LifeDrive-widget" */;
 			buildPhases = (
-				89FE7533B3B13FC58A9929EF /* [CP] Check Pods Manifest.lock */,
 				8C3BA2BE22B3CC32006D901E /* Sources */,
 				8C3BA2C922B3CC32006D901E /* Frameworks */,
 				8C3BA2CC22B3CC32006D901E /* Resources */,
@@ -20011,7 +19989,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				03C3FCDB239A3A8700798A9C /* PBXTargetDependency */,
 				0308BB8F239000FA0066F409 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
 				8C3BA3A922B3CDC2006D901E /* PBXTargetDependency */,
@@ -23694,28 +23671,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		89FE7533B3B13FC58A9929EF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LifeDrive-widget-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B4FCEE7D88C53230DA69C82 /* [CP] Check Pods Manifest.lock */ = {
@@ -30314,11 +30269,6 @@
 			target = 984B1EDD23685FC8009ACCFF /* LifeDriveNotificationService */;
 			targetProxy = 0308BB8E239000FA0066F409 /* PBXContainerItemProxy */;
 		};
-		03C3FCDB239A3A8700798A9C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8C3BA2BC22B3CC32006D901E /* LifeDrive-widget */;
-			targetProxy = 03C3FCDA239A3A8700798A9C /* PBXContainerItemProxy */;
-		};
 		7A3E0C04206273CE00F79A1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
@@ -32058,7 +32008,6 @@
 		};
 		8C3BA2DB22B3CC32006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBA6B46D1C80374CA4529062 /* Pods-LifeDrive-widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32096,7 +32045,6 @@
 		};
 		8C3BA2DC22B3CC32006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F97970C36E8D0FB16C5558D /* Pods-LifeDrive-widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32134,7 +32082,6 @@
 		};
 		8C3BA2DD22B3CC32006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9931E1EDAD90FE949E103A2F /* Pods-LifeDrive-widget.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32172,7 +32119,6 @@
 		};
 		8C3BA2DE22B3CC32006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C971727C853F258D6ECFA1B4 /* Pods-LifeDrive-widget.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
