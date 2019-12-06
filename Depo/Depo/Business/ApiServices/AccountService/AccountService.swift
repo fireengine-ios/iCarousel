@@ -754,4 +754,33 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
             })
     }
+    
+    func updateAddress(with address: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Account.updateAddress,
+                 method: .post,
+                 parameters: ["address": address],
+                 encoding: JSONEncoding.prettyPrinted)
+        .customValidate()
+        .response(queue: .global(), completionHandler: { response in
+            if response.response?.statusCode == 200 {
+                handler(.success(()))
+            } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                let errorText: String
+                
+                if status == "ACCOUNT_ADDRESS_LENGTH_IS_INVALID" {
+                    errorText = TextConstants.updateAddressError
+                } else {
+                    errorText = TextConstants.errorServer
+                }
+                
+                let error = CustomErrors.text(errorText)
+                handler(.failed(error))
+            } else {
+                let error = CustomErrors.text(TextConstants.errorServer)
+                handler(.failed(error))
+            }
+        })
+
+    }
 }

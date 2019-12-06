@@ -90,11 +90,17 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         }
     }
     
+    private let textFieldColor = UIColor.black
+    
     override var isEditState: Bool {
-        didSet {
-            textField.isUserInteractionEnabled = isEditState
-            monthTextField.isUserInteractionEnabled = isEditState
-            yearTextField.isUserInteractionEnabled = isEditState
+        willSet {
+            textField.isUserInteractionEnabled = newValue
+            monthTextField.isUserInteractionEnabled = newValue
+            yearTextField.isUserInteractionEnabled = newValue
+            
+            textField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
+            monthTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
+            yearTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
         }
     }
     
