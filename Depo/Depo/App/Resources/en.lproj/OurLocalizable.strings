@@ -1304,6 +1304,10 @@
 "uppercase_miss_in_password" = "UPPERCASE_MISSING";
 "lowercase_miss_in_password" = "LOWERCASE_MISSING";
 "number_miss_in_password" = "NUMBER_MISSING";
+"update_address_error" = "Address field cannot be smaller than 10 and greater than 1024";
+"profile_detail_address_title" = "Address";
+"profile_detail_address_subtitle" = "This information will be used for campaigns";
+"profile_detail_address_placeholder" = "Please enter your address information";
 "password_length_below_limit" = "Your password should not contain less than %d characters";
 "password_length_exceede" = "Your password should not contain more than %d characters";
 "password_sequential_caharacters" = "Your password should not contain more than %d characters";
