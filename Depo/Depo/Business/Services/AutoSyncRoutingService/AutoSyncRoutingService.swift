@@ -63,7 +63,7 @@ final class AutoSyncRoutingService {
     private func disableAutoSync() {
         let settings = dataStorage.settings
         settings.disableAutoSync()
-        dataStorage.save(autoSyncSettings: settings, fromSetting: false)
+        dataStorage.save(autoSyncSettings: settings, fromSettings: false)
         SyncServiceManager.shared.update(syncSettings: settings)
     }
     

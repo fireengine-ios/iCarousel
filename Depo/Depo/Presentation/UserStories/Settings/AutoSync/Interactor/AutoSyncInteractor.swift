@@ -22,7 +22,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     
     func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
         output.onSettingSaved()
-        dataStorage.save(autoSyncSettings: settings , fromSetting: fromSettings)
+        dataStorage.save(autoSyncSettings: settings , fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
     }
     
