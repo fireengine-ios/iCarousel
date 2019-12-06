@@ -576,7 +576,7 @@
 "widgetTopTitleInactive" = "Синхронизация не активна";
 "widgetTopTitleInProgress" = "Идёт синхронизация";
 "error_authentication_message" = "Пожалуйста, откройте приложение и зарегистрируйтесь, чтобы продолжить";
-"error_authentication_title" = "Зарегистрироваться в lifebox";
+"error_authentication_title" = "Зарегистрироваться в %@";
 "error_passcode_message" = "Files App не может быть использован с код-паролем. Пожалуйста, откройте приложение и отключите функцию код-пароля, чтобы продолжить.";
 "error_passcode_title" = "Блокировка код-пароля включена";
 "Successfully purchased" = "Успешно оплачено";
@@ -946,13 +946,13 @@
 "please_enter_your_problem_shortly" = "Пожалуйста, опишите вашу проблему";
 "explain_your_problem_shortly" = "Объясните коротко вашу проблему";
 "please_enter_msisdn_or_email" = "Пожалуйста, введите в поле номер телефона или e-mail";
-"support_form_subject_1" = "Lifebox/Я не могу войти со своим e-mail";
-"support_form_subject_2" = "Lifebox/Я не могу войти со своим номером телефона";
-"support_form_subject_3" = "Lifebox/Я не могу войти со своим паролем";
-"support_form_subject_4" = "Lifebox/Текст проверки не совпадает";
-"support_form_subject_5" = "Lifebox/Проблема с паролем Turkcell";
-"support_form_subject_6" = "Lifebox/Проблема с автоматическим входом";
-"support_form_subject_7" = "Lifebox/Я не могу загрузить приложение lifebox";
+"support_form_subject_1" = "Я не могу войти со своим e-mail";
+"support_form_subject_2" = "Я не могу войти со своим номером телефона";
+"support_form_subject_3" = "Я не могу войти со своим паролем";
+"support_form_subject_4" = "Текст проверки не совпадает";
+"support_form_subject_5" = "Проблема с паролем Turkcell";
+"support_form_subject_6" = "Проблема с автоматическим входом";
+"support_form_subject_7" = "Я не могу загрузить приложение lifebox";
 "enter_your_old_password" = "Введите старый пароль";
 "enter_your_new_password" = "Введите новый пароль";
 "enter_your_repeat_password" = "Введите новый пароль еще раз";
@@ -1138,7 +1138,7 @@
 "enter_secret_answer" = "Введите ваш ответ";
 "security_question_text_field_placeholder" = "Пожалуйста, установите секретный вопрос";
 "set_sequrity_question_button" = "Установите секретный вопрос";
-"support_form_signup_subject_1" = "Lifebox- я не могу зарегистрировать с моем e-mail";
+"support_form_signup_subject_1" = "я не могу зарегистрировать с моем e-mail";
 "support_form_signup_subject_2" = "я не могу зарегистрироваться с номером телефона";
 "support_form_signup_subject_3" = "пароль не принят";
 "cred_update_title" = "Вы все еще используете тот же адрес электронной почты и номер телефона?";
@@ -1290,3 +1290,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

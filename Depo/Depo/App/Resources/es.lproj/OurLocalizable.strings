@@ -598,7 +598,7 @@
 "widgetTopTitleInactive" = "La sincronización está inactiva";
 "widgetTopTitleInProgress" = "La sincronización está en progreso";
 "error_authentication_message" = "Abra la aplicación e inicie sesión para continuar";
-"error_authentication_title" = "Iniciar sesión en lifebox";
+"error_authentication_title" = "Iniciar sesión en %@";
 "error_passcode_message" = "La aplicación de archivos no se puede usar con un código de acceso. Abra la aplicación y desactive la contraseña para continuar";
 "error_passcode_title" = "El bloqueo del código de acceso está habilitado";
 "Successfully purchased" = "Comprado exitosamente";
@@ -1055,18 +1055,18 @@
 "spotify_remove_connection_warning_title" = "Estás a punto de eliminar la conexión de Spotify.";
 "spotify_remove_connection_warning_message" = "¿Estás seguro de que deseas eliminar la conexión de Spotify?";
 "support_form_problem_description" = "Es compatible con los idiomas Turco, Ingles y Árabe. Por favor enviarnos este comentario en uno de estos idiomas.";
-"contact_us_subject_1" = "Lifebox/ Problema de Lista";
-"contact_us_subject_2" = "Lifebox/ Problema de Foto";
-"contact_us_subject_3" = "Lifebox/ problema de Video";
-"contact_us_subject_4" = "Lifebox/ Problema de Folio";
-"contact_us_subject_5" = "Lifebox/ Problema de Colaje";
-"contact_us_subject_6" = "Lifebox/ Problema de Photopick";
-"contact_us_subject_7" = "Lifebox/ Problema de Reproducción Automática";
-"contact_us_subject_8" = "Lifebox/ Problema de Agrupación de Cara& Elemento";
-"contact_us_subject_9" = "Lifebox/Problema de Cuentas Conectadas";
-"contact_us_subject_10" = "Lifebox/ Problema de Paquete& Cuota";
-"contact_us_subject_11" = "Lifebox/ Problema de ID y Contraseña Táctil";
-"contact_us_subject_12" = "Lifebox/ Problema de Conexión, Lentitud, Congelación";
+"contact_us_subject_1" = "Problema de Lista";
+"contact_us_subject_2" = "Problema de Foto";
+"contact_us_subject_3" = "problema de Video";
+"contact_us_subject_4" = "Problema de Folio";
+"contact_us_subject_5" = "Problema de Colaje";
+"contact_us_subject_6" = "Problema de Photopick";
+"contact_us_subject_7" = "Problema de Reproducción Automática";
+"contact_us_subject_8" = "Problema de Agrupación de Cara& Elemento";
+"contact_us_subject_9" = "Problema de Cuentas Conectadas";
+"contact_us_subject_10" = "Problema de Paquete& Cuota";
+"contact_us_subject_11" = "Problema de ID y Contraseña Táctil";
+"contact_us_subject_12" = "Problema de Conexión, Lentitud, Congelación";
 
 /*Settings page*/
 "Permissions" = "Los permisos";
@@ -1318,3 +1318,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

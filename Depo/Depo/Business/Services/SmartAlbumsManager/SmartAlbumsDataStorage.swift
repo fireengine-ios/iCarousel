@@ -128,7 +128,7 @@ class SliderItem {
     }
 }
 
-class LBAlbumLikePreviewSliderDataStorage {
+final class SmartAlbumsDataStorage {
     
     var storyItems: [Item] = []
     var currentItems: [SliderItem] = []

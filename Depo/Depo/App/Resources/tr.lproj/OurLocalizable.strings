@@ -580,7 +580,7 @@
 "widgetTopTitleInactive" = "Otomatik yükleme aktif değil";
 "widgetTopTitleInProgress" = "Yükleme devam ediyor...";
 "error_authentication_message" = "Devam edebilmek için lütfen uygulamayı açıp giriş yapın.";
-"error_authentication_title" = "lifebox'a giriş yapın.";
+"error_authentication_title" = "%@'a giriş yapın.";
 "error_passcode_message" = "Dosyalar uygulamasını kullanabilmek için lifebox parolasını kaldırman gerekiyor.";
 "error_passcode_title" = "lifebox parolası aktif durumda.";
 "Successfully purchased" = "Başarıyla satın alındı.";
@@ -766,7 +766,7 @@
 "no_analyses_left_button" = "Premium Ol";
 "analyze_history_empty_title" = "Henüz fotoğraflarını analiz etmeye başlamadın mı?";
 "analyze_history_empty_subtitle" = "Hangi fotoğrafının daha yüksek puan alacağını öğrenmek ve sosyal medyada paylaşmak için hemen analize başla";
-"analyze_history_analyze_left" = "Analiz Hakkı";
+"analyze_history_analyze_left" = "Kalan Analiz Hakkı";
 "analyze_history_analyze_count" = "%1$d / %2$d";
 "analyze_with_instapick" = "PhotoPick ile Analiz Et!";
 "analyze_history_photos_count" = "%d Fotoğraf";
@@ -790,7 +790,7 @@
 
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "Fotoğrafın paylaşıma hazır!";
-"instaPick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"instaPick_analysis_left" = "Kalan Analiz Hakkı: %1$d / %2$d";
 "engage_with_more_hastags" = "Daha fazla #hashtag ile etkileşimini artır!";
 "copy_hashtags_to_clipboard" = "#hashtag'leri kopyala";
 "share_on_social_media" = "Paylaş!";
@@ -817,7 +817,7 @@
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
 "instapick_upgrade_popup_button" = "Güncelle";
 "instapick_upgrade_popup_no" = "Hayır";
-"instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"instapick_analysis_left" = "Kalan Analiz Hakkı: %1$d / %2$d";
 "instapick_unlimited_analysis" = "Senin için Sınırsız";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
@@ -981,7 +981,7 @@
 "terms_of_use" = "Kullanıcı Sözleşmesi";
 "privacy_policy" = "Gizlilik Politikası";
 "face_tags_description_standart" = "Yüz ve Nesne Tanıma özelliğini aktiflediğinde, yüklemiş olduğun fotoğraflar yüz ve objelere göre ve konum servisi özelliği açıksa lokasyon bilgilerine göre gruplandırılabilecek ve yüklediğin içeriklere özel hikayeler oluşturulabilecektir.";
-"terms_and_use_introduction_checkbox" = "Kullanıcı Sözleşmesi ve Gizlilik Politikası'nı okudum ve onaylıyorum.";
+"terms_and_use_introduction_checkbox" = "Kullanıcı Sözleşmesi'ni okudum ve onaylıyorum.\nGizlilik Politikası";
 "privacy_policy_condition" = "Gizlilik Politikası";
 "photo_pick_description" = "Instagram hesabını bağlama özelliğini aktiflediğinde, her yeni PhotoPick sorgunda hesabına özel analiz yaparak kişiselleştirilmiş, çok daha iyi bir deneyim sunabileceğiz.";
 
@@ -1235,27 +1235,29 @@
 "campaign_detail_info_title" = "Kampanya Bilgileri";
 "campaign_detail_info_description" = "Telefon kampanyamız sona erdi. Çekiliş sonuçları 20 Şubat'ta sosyal medya hesaplarımızdan açıklanacak. Toplam çekiliş hakkına yukarıdaki bilgilendirmeden ulaşabilirsin. Sonuçlar için sosyal medya hesaplarımızı takipte kal!";
 "AccessibilityGiftButton" = "";
-"landing_start_button" = "";
-"landing_billo_title_0" = "";
-"landing_billo_subtitle_0" = "";
-"landing_billo_title_1" = "";
-"landing_billo_subtitle_1" = "";
-"landing_billo_title_2" = "";
-"landing_billo_subtitle_2" = "";
-"landing_billo_title_3" = "";
-"landing_billo_subtitle_3" = "";
-"landing_billo_title_4" = "";
-"landing_billo_subtitle_4" = "";
-"landing_billo_title_5" = "";
-"landing_billo_subtitle_5" = "";
-"landing_billo_title_6" = "";
-"landing_billo_subtitle_6" = "";
+"landing_start_button" = "Başla";
+"landing_billo_title_0" = "Yaşa, Biriktir, Hatırla";
+"landing_billo_subtitle_0" = "Tüm anılarını, dosyalarını ve kontaklarını Billo'ya güvenle yedekle!";
+"landing_billo_title_1" = "Otomatik Yedekleme";
+"landing_billo_subtitle_1" = "Fotoğraf ve videoların anında lifebox'ta!";
+"landing_billo_title_2" = "Yüz ve Nesne Tanıma";
+"landing_billo_subtitle_2" = "Sana özel akıllı albümlerle anılarını kolayca bul!";
+"landing_billo_title_3" = "Kontak Yedekleme";
+"landing_billo_subtitle_3" = "Kontaklarını güvenle yedekle, dilediğin zaman eriş geri yükle";
+"landing_billo_title_4" = "Yer Aç";
+"landing_billo_subtitle_4" = "Tek dokunuşla cihazında yeni anılarına yer aç!";
+"landing_billo_title_5" = "Otomatik Hikayeler";
+"landing_billo_subtitle_5" = "Sana özel yarattığımız hikayeler, albümler ve kolajlarla anılarını tekrar yaşa!";
+"landing_billo_title_6" = "Sosyal Medya";
+"landing_billo_subtitle_6" = "Sosyal medyadaki tüm arşivini kolayca Billo'ya transfer et!";
+"landing_billo_title_7" = "Baskı Al";
+"landing_billo_subtitle_7" = "Yaşam alanını anılarınla süsle ";
 
 /*introduce billo*/
-"billo_intro_title" = "";
-"billo_intro_subtitle" = "";
-"billo_intro_create_account_button" = "";
-"billo_intro_login_button" = "";
+"billo_intro_title" = "Yaşa, Biriktir, Hatırla";
+"billo_intro_subtitle" = "Tüm anılarını, dosyalarını ve kontaklarını Billo'ya güvenle yedekle";
+"billo_intro_create_account_button" = "Yeni hesap oluştur";
+"billo_intro_login_button" = "Hesabım var, giriş yapmak istiyorum.";
 "campaign_vc_result_button" = "Sonucu Göster";
 "campaign_vc_edit_profile_button" = "Profilini Düzenle";
 "campaign_vc_become_premium_button" = "Premium Ol";
@@ -1267,7 +1269,7 @@
 "campaign_vc_top_description_zero" = "Kampanyadaki günlük çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
 "campaign_vc_top_title_non_zero" = "ANALİZE DEVAM!";
 "campaign_vc_top_description_non_zero" = "Kampanya kapsamında günlük %d çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
-"create_story_empty_name_error" = "";
+"create_story_empty_name_error" = "Hikaye ismi boş";
 "photopick_history_campaign_contest_total_draw" = "Toplam Çekiliş Hakkım";
 "photopick_history_campaign_contest_remaining_draw" = "Günlük Kalan Hakkım";
 "sing_up_error_password_length_is_below_limit" = "";
@@ -1282,3 +1284,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

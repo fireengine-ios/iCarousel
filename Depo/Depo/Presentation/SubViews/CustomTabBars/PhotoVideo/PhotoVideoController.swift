@@ -526,7 +526,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
             self?.hideSpinner()
-            if vc is InstapickPopUpController {
+            if vc is InstapickPopUpController || vc is InstaPickSelectionSegmentedController {
                 //FIXME: add router
                 let router = RouterVC()
                 let navController = router.createRootNavigationControllerWithModalStyle(controller: vc)
@@ -666,7 +666,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             uploadedObjectID.append(uuid)
         }
         
-        uploadProgress.removeValue(forKey: uuid)
+        uploadProgress.removeValueSafely(forKey: uuid)
     
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
@@ -705,7 +705,8 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     
     func cancelledUpload(file: WrapData) {
         let uuid = file.getTrimmedLocalID()
-        uploadProgress.removeValue(forKey: uuid)
+        
+        uploadProgress.removeValueSafely(forKey: uuid)
         
         DispatchQueue.toMain {
             self.getCellForFile(objectUUID: uuid) { cell in
