@@ -5,15 +5,17 @@
 /***** PROJECT variables  BEGIN ******/
 
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
-apps = [ [
-            name: 'lifebox',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
-            ictsContainerId: '743', // ICT Store
-            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
-            prodTeamID: '7YZS5NTGYH',
-            xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech'
-        ], [
+apps = [ 
+#[
+#            name: 'lifebox',// name will be the base filename of the app
+#            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
+#            ictsContainerId: '743', // ICT Store
+#            appleId: '665036334', // Apple ID property in the App Information section in #App Store Connect,
+#            prodTeamID: '7YZS5NTGYH',
+#            xcodeSchema: 'TC_Depo_LifeTech',
+#            xcodeTarget: 'TC_Depo_LifeTech'
+#        ],
+ [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
@@ -40,11 +42,11 @@ xcodeParams = [
 ]
 
 def flavors = [
-    test: [
-        configuration: 'Enterprise',
-        developmentTeamID: 'LA4DZFY7SY',
-        ipaExportMethod: 'enterprise'
-    ],
+    #test: [
+    #    configuration: 'Enterprise',
+    #    developmentTeamID: 'LA4DZFY7SY',
+    #    ipaExportMethod: 'enterprise'
+    #],
     prod: [
         configuration: 'AppStore',
         //developmentTeamID: use app.prodTeamID
