@@ -78,16 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startCoreDataSafeServices(with: application, options: launchOptions)
         
-        
-//        window = UIWindow()
-//        window?.makeKeyAndVisible()
-//        let navVC = NavigationController(rootViewController: ProfileDetailController())
-//        navVC.navigationBar.isTranslucent = false
-//        navVC.navigationBar.backgroundColor = .black
-//        navVC.navigationBar.barStyle = .black
-//        window?.rootViewController = navVC
-//        return true
-        
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         

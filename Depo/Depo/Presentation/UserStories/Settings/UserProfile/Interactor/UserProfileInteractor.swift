@@ -21,7 +21,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
     var statusTurkcellUser: Bool {
         return isTurkcellUser
     }
-
+    
+    var securityQuestionId: Int? {
+        return userInfo?.securityQuestionId
+    }
     
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)

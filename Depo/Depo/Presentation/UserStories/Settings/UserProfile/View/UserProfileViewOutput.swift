@@ -18,7 +18,7 @@ protocol UserProfileViewOutput {
     func tapEditButton()
     func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String)
     func tapChangePasswordButton()
-    func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?)
+    func tapChangeSecretQuestionButton()
     
     func isTurkcellUser() -> Bool
     

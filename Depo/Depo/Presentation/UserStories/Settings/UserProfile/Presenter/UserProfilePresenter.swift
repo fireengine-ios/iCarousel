@@ -82,9 +82,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
-    func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?) {
+    func tapChangeSecretQuestionButton() {
         interactor.trackSetSequrityQuestion()
-        router.goToSetSecretQuestion(selectedQuestion: selectedQuestion, delegate: self)
+        let q = SecretQuestionsResponse(id: interactor.securityQuestionId!, text: "qqqw")
+        router.goToSetSecretQuestion(selectedQuestion: q, delegate: self)
     }
     
     //MARK : BasePresenter

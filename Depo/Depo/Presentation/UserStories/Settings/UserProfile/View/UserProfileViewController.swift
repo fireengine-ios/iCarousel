@@ -125,6 +125,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                    target: self,
                                                    selector: #selector(onReadyButtonAction))
     
+    private var name: String?
+    private var surname: String?
+    private var email: String?
+    private var phoneCode: String?
+    private var phoneNumber: String?
+    private var birthday: String?
+    private var address: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -163,19 +171,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
     
     @objc private func onChangePassword() {
-        let router = RouterVC()
-        let controller = ChangePasswordController.initFromNib()
-        router.pushViewController(viewController: controller)
+        output.tapChangePasswordButton()
     }
     
     @objc private func onChangeSecurityQuestion() {
-        let router = RouterVC()
-        let controller = SetSecurityQuestionViewController.initFromNib()
-        
-        // TODO: ???
-        controller.configureWith(selectedQuestion: nil, delegate: nil)
-        
-        router.pushViewController(viewController: controller)
+        output.tapChangeSecretQuestionButton()
     }
     
     @objc private func onEditButtonAction() {
@@ -187,14 +187,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     @objc private func onReadyButtonAction() {
         updateProfile()
     }
-    
-    private var name: String?
-    private var surname: String?
-    private var email: String?
-    private var phoneCode: String?
-    private var phoneNumber: String?
-    private var birthday: String?
-    private var address: String?
     
     private func saveFields() {
         name = nameView.textField.text
@@ -276,8 +268,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
 }
 
-
-// TODO: fill
 extension UserProfileViewController: UITextFieldDelegate  {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
