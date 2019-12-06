@@ -24,10 +24,5 @@ class UserProfileRouter: UserProfileRouterInput {
         let controller = SetSecurityQuestionViewController.initFromNib()
         controller.configureWith(selectedQuestion: selectedQuestion, delegate: delegate)
         router.pushViewController(viewController: controller)
-        
-//        let controller = SetSecurityQuestionViewController.initFromNib()
-//        // TODO: ???
-//        controller.configureWith(selectedQuestion: nil, delegate: nil)
-//        router.pushViewController(viewController: controller)
     }
 }
