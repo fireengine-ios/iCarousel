@@ -42,11 +42,11 @@ xcodeParams = [
 ]
 
 def flavors = [
-    //test: [
-    //    configuration: 'Enterprise',
-    //    developmentTeamID: 'LA4DZFY7SY',
-    //    ipaExportMethod: 'enterprise'
-    //],
+    test: [
+        configuration: 'Enterprise',
+        developmentTeamID: 'LA4DZFY7SY',
+        ipaExportMethod: 'enterprise'
+    ],
     prod: [
         configuration: 'AppStore',
         //developmentTeamID: use app.prodTeamID
