@@ -154,19 +154,23 @@ final class AuthoritySingleton {
     
     func checkNewVersionApp() {
         if getAppVersion() != currentAppVersion {
-            setLoginAlready(isLoginAlready: tokenStorage.refreshToken != nil)
+            let isLoginAlready = tokenStorage.refreshToken == nil ? false : true
+            setLoginAlready(isLoginAlready: isLoginAlready)
             isNewAppVersion = currentAppVersion == nil ? false : true
             currentAppVersion = getAppVersion()
             
             ///after app updated , sending autoSyncStatus
-            AccountService().autoSyncStatus(syncSettings: nil) { result in
-                switch result {
-                case .success(_):
-                    print(result)
-                case .failed(let error):
-                    print(error.description)
+            if isLoginAlready && isNewAppVersion {
+                AccountService().autoSyncStatus(syncSettings: nil) { result in
+                    switch result {
+                    case .success(_):
+                        print(result)
+                    case .failed(let error):
+                        print(error.description)
+                    }
                 }
             }
+            
         }
     }
     

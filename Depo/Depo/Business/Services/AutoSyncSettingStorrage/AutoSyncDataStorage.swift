@@ -25,7 +25,20 @@ final class AutoSyncDataStorage {
     }
     
     
-    func save(autoSyncSettings: AutoSyncSettings) {
+    func save(autoSyncSettings: AutoSyncSettings, fromSetting: Bool) {
+        
+        if self.settings != autoSyncSettings || !fromSetting {
+            /// There is no scenario both success and error for now. Just sending BE
+            AccountService().autoSyncStatus(syncSettings: autoSyncSettings) { result in
+                switch result {
+                case .success(_):
+                    print(result)
+                case .failed(let error):
+                    print(error.description)
+                }
+            }
+        }
+        
         let settingsToStore = autoSyncSettings.asDictionary()
         storageVars.autoSyncSettings = settingsToStore
         
