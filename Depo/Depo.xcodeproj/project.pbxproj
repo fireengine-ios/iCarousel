@@ -412,12 +412,6 @@
 		73CB8E402361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		73CB8E412361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
-		73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
-		73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
-		73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
 		73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
 		73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
 		73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
@@ -6980,8 +6974,6 @@
 		73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignService.swift; sourceTree = "<group>"; };
 		73CC96C72A92CC1423E58491 /* Pods-LifeDriveProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
-		73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityCredentialsView.swift; sourceTree = "<group>"; };
-		73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityCredentialsView.xib; sourceTree = "<group>"; };
 		73D723E7231D0855006AE835 /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
 		73D723E9231D08A6006AE835 /* PackageOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOffer.swift; sourceTree = "<group>"; };
 		73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -9634,8 +9626,6 @@
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
 				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
-				73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */,
-				73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -18369,7 +18359,6 @@
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AEC32008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
-				73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B1672008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
 				8C20864C228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */,
 				8C0E90621FDEBDFF00789C91 /* IntroduceSubView.xib in Resources */,
@@ -19117,7 +19106,6 @@
 				8C06B1402008AD72003D8E05 /* target.png in Resources */,
 				8C06B0A02008AD71003D8E05 /* refreshicon.png in Resources */,
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
-				73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
 				7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
@@ -19873,7 +19861,6 @@
 				CE784EC922A685FB00662219 /* paylas_akilli_depo.png in Resources */,
 				CE784ECA22A685FB00662219 /* sticker_resize.png in Resources */,
 				CE784ECB22A685FB00662219 /* status_badge@3x.png in Resources */,
-				73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				CE784ECC22A685FB00662219 /* alt_cizgili_secili.png in Resources */,
 				CE784ECD22A685FB00662219 /* OurLocalizable.strings in Resources */,
 				8C1E5BE122CB8C23008FDA02 /* PhotoVideoController.xib in Resources */,
@@ -21575,7 +21562,6 @@
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
-				73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
@@ -23419,7 +23405,6 @@
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
-				73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				8C06AC1820066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
 				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
@@ -24801,7 +24786,6 @@
 				73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */,
 				737685E423704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
-				73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				CE784B1C22A685FB00662219 /* (null) in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,

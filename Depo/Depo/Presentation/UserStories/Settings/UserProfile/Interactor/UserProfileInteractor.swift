@@ -52,10 +52,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             // This error is't handling
         }
     }
-    
-    func updateSetQuestionView(with question: SecretQuestionWithAnswer) {
-        output.updateSecretQuestionView(selectedQuestion: question)
-    }
 
     func trackState(_ editState: GAEventLabel, errorType: GADementionValues.errorType?) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions,

@@ -1,7 +1,5 @@
 import UIKit
 
-// TODO: SetSecurityCredentialsViewDelegate
-
 final class UserProfileViewController: ViewController, KeyboardHandler {
     
     var output: UserProfileViewOutput!
@@ -381,11 +379,6 @@ extension UserProfileViewController: UserProfileViewInput {
     
     func endSaving() {
         navigationItem.rightBarButtonItem?.fixEnabledState()
-    }
-    
-    func updateSetSecretQuestionView(with secrettQuestion: SecretQuestionWithAnswer) {
-        // TODO: delete
-        assertionFailure()
     }
     
 }
