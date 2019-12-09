@@ -69,10 +69,17 @@ final class InstagramService: BaseRequestService {
                      method: .post,
                      encoding: instagramAccessToken)
             .customValidate()
-            .responseData { response in
+            .responseString { response in
                 switch response.result {
-                case .success(_):
-                    handler(.success(()))
+                case .success(let answer):
+                    if answer.contains("NOK") {
+                        let error = CustomErrors.text(TextConstants.instagramNotConnected)
+                        handler(.failed(error))
+                        
+                    } else if answer.contains("OK") {
+                        handler(.success(()))
+                        
+                    }
                 case .failure(let error):
                     handler(.failed(error))
                 }
