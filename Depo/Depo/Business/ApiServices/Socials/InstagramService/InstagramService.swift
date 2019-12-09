@@ -79,6 +79,10 @@ final class InstagramService: BaseRequestService {
                     } else if answer.contains("OK") {
                         handler(.success(()))
                         
+                    } else {
+                        assertionFailure("unexpected response")
+                        let error = CustomErrors.text(TextConstants.instagramNotConnected)
+                        handler(.failed(error))
                     }
                 case .failure(let error):
                     handler(.failed(error))
