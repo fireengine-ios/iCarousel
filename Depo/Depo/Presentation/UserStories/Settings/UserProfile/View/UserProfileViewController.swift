@@ -133,6 +133,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var birthday: String?
     private var address: String?
     
+    private var isTurkcellUser = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,7 +162,12 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
-        phoneView.isEditState = isEdit
+        
+        /// phoneView disabled for Turkcell user
+        if !isTurkcellUser {
+            phoneView.isEditState = isEdit
+        }
+        
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
         
@@ -221,7 +228,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             return
         }
         
-        let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
+        let sendingPhoneNumber = isTurkcellUser ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
         readyButton.isEnabled = false
         
@@ -248,7 +255,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                         self?.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
-                                                    number: fullPhoneNumber,
+                                                    number: sendingPhoneNumber,
                                                     birthday: birthday,
                                                     address: address)
                         self?.readyButton.fixEnabledState()
@@ -261,7 +268,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             output.tapReadyButton(name: name,
                                   surname: surname,
                                   email: email,
-                                  number: fullPhoneNumber,
+                                  number: sendingPhoneNumber,
                                   birthday: birthday,
                                   address: address)
         }
@@ -304,7 +311,12 @@ extension UserProfileViewController: UITextFieldDelegate  {
             emailView.textField.becomeFirstResponder()
 
         case emailView.textField:
-            phoneView.codeTextField.becomeFirstResponder()
+            /// phoneView disabled for Turkcell user
+            if isTurkcellUser {
+                birthdayDetailView.textField.becomeFirstResponder()
+            } else {
+                phoneView.codeTextField.becomeFirstResponder()
+            }
 
         /// setup in view.
         /// only for simulator.
@@ -336,6 +348,12 @@ extension UserProfileViewController: UITextFieldDelegate  {
 extension UserProfileViewController: UserProfileViewInput {
     
     func configurateUserInfo(userInfo: AccountInfoResponse) {
+        isTurkcellUser = userInfo.isTurkcellUser
+        
+        if isTurkcellUser {
+            phoneView.showTextWithoutAnimation(text: TextConstants.profileDetailErrorContactCallCenter)
+        }
+        
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
