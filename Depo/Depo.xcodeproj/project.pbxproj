@@ -94,7 +94,7 @@
 		0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
 		0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
-		0303A06F2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0303A06F2397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
@@ -881,7 +881,7 @@
 		0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* PhotoVideoSegmentedController.swift */; };
 		0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32121787FEF006CFA50 /* UpdateCheck.m */; };
-		0303A3822397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0303A3822397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
 		0303A3842397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
@@ -1900,14 +1900,14 @@
 		0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD012008AD6F003D8E05 /* paylas_akilli_depo.png */; };
 		0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEAB2008AD6F003D8E05 /* sticker_resize.png */; };
 		0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD5C2008AD6F003D8E05 /* status_badge@3x.png */; };
-		0303A7812397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		0303A7812397D0D000907F42 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC362008AD6F003D8E05 /* alt_cizgili_secili.png */; };
 		0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
 		0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD802008AD6F003D8E05 /* text_selected@3x.png */; };
 		0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
-		0303A7882397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		0303A7882397D0D000907F42 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
@@ -2178,6 +2178,7 @@
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
+		03B52C57239E6A64008C2F24 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05D3F110F5AEAA8A60DD01BE /* Pods_LifeTech_LifeDriveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */; };
@@ -5718,6 +5719,7 @@
 		9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
 		9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
+		9D631EEFA3FA29714D91890B /* Pods_LifeDrive_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900D37520EC153CE46143A00 /* Pods_LifeDrive_widget.framework */; };
 		9E4E918E6877B531674D260E /* SettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */; };
 		9FAEEE54B923C711062DB111 /* SettingsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */; };
 		A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8296DD3298BBAAAE73EEFBBA /* ActivityTimelineInteractor.swift */; };
@@ -8713,6 +8715,13 @@
 			remoteGlobalIDString = 984B1EDD23685FC8009ACCFF;
 			remoteInfo = LifeDriveNotificationService;
 		};
+		03B52C55239E6A54008C2F24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C3BA2BC22B3CC32006D901E;
+			remoteInfo = "LifeDrive-widget";
+		};
 		7A3E0C03206273CE00F79A1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -8872,6 +8881,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				03B52C57239E6A64008C2F24 /* LifeDrive-widget.appex in Embed App Extensions */,
 				0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* LifeDriveShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* LifeDriveFileProvider.appex in Embed App Extensions */,
@@ -8957,6 +8967,7 @@
 		17589F702276336700A5DB37 /* ProfilePhoneEnterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePhoneEnterView.xib; sourceTree = "<group>"; };
 		17589F712276336700A5DB37 /* SupportFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportFormController.swift; sourceTree = "<group>"; };
 		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
+		18727347BB1DC5883DFADF41 /* Pods-LifeDrive-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
@@ -9021,6 +9032,7 @@
 		35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorInput.swift; sourceTree = "<group>"; };
 		35C71D6E2FCFC8C34611820B /* FileInfoViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
 		361CEF99599CB6D50ED90150 /* LBAlbumLikePreviewSliderRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderRouterInput.swift; sourceTree = "<group>"; };
+		36347F41C4CC01801EE3961B /* Pods-LifeDrive-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.release.xcconfig"; sourceTree = "<group>"; };
 		38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		39504606EF0A35F424912DD0 /* Pods_LifeTech_LifeDriveProviderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_LifeDriveProviderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		395CAB459340BA6AD563A9CD /* Pods-LifeDriveShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveShared/Pods-LifeDriveShared.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -10446,6 +10458,7 @@
 		8EE9FA64A6455D67D3D3A7BE /* Pods-Depo_LifeTech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.release.xcconfig"; sourceTree = "<group>"; };
 		8EF80D152CF780A4F8313325 /* Pods-LifeTech-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-autosync-widget/Pods-LifeTech-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedPresenter.swift; sourceTree = "<group>"; };
+		900D37520EC153CE46143A00 /* Pods_LifeDrive_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeDrive_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
 		90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewConfigurator.swift; sourceTree = "<group>"; };
 		919F353289ABE9A2E77F3D4C /* ActivityTimelineViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewInput.swift; sourceTree = "<group>"; };
@@ -10677,6 +10690,7 @@
 		AF3A47897745CE43F5742B92 /* IntroduceInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorOutput.swift; sourceTree = "<group>"; };
 		B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionRouterInput.swift; sourceTree = "<group>"; };
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
+		B0F2B159560EC4895B61A19E /* Pods-LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVerificationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountRemoveConnectionCell.swift; sourceTree = "<group>"; };
@@ -11355,6 +11369,7 @@
 		EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoAlbumDetailInteractor.swift; sourceTree = "<group>"; };
 		EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarInteractor.swift; sourceTree = "<group>"; };
 		EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarRouter.swift; sourceTree = "<group>"; };
+		EF7F4341F6F078F59BAE4083 /* Pods-LifeDrive-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
 		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
 		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
@@ -11537,6 +11552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA2CA22B3CC32006D901E /* NotificationCenter.framework in Frameworks */,
+				9D631EEFA3FA29714D91890B /* Pods_LifeDrive_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11872,6 +11888,7 @@
 				39504606EF0A35F424912DD0 /* Pods_LifeTech_LifeDriveProviderUI.framework */,
 				C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */,
 				F366418C57A9DE6BA9284C5E /* Pods_LifeTech_lifedrive.framework */,
+				900D37520EC153CE46143A00 /* Pods_LifeDrive_widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -19509,6 +19526,10 @@
 				22B1ABDE64A678C07E027E62 /* Pods-LifeTech_lifedrive.release.xcconfig */,
 				2C08D49DCF0B32ED4A1C207E /* Pods-LifeTech_lifedrive.appstore.xcconfig */,
 				61985FCC0EFA34A322F32AB7 /* Pods-LifeTech_lifedrive.enterprise.xcconfig */,
+				18727347BB1DC5883DFADF41 /* Pods-LifeDrive-widget.debug.xcconfig */,
+				36347F41C4CC01801EE3961B /* Pods-LifeDrive-widget.release.xcconfig */,
+				B0F2B159560EC4895B61A19E /* Pods-LifeDrive-widget.appstore.xcconfig */,
+				EF7F4341F6F078F59BAE4083 /* Pods-LifeDrive-widget.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -19686,6 +19707,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C3BA2DA22B3CC32006D901E /* Build configuration list for PBXNativeTarget "LifeDrive-widget" */;
 			buildPhases = (
+				08CC9923FCC5E366F71BADE8 /* [CP] Check Pods Manifest.lock */,
 				8C3BA2BE22B3CC32006D901E /* Sources */,
 				8C3BA2C922B3CC32006D901E /* Frameworks */,
 				8C3BA2CC22B3CC32006D901E /* Resources */,
@@ -19979,6 +20001,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				03B52C56239E6A54008C2F24 /* PBXTargetDependency */,
 				0308BB8F239000FA0066F409 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
 				8C3BA3A922B3CDC2006D901E /* PBXTargetDependency */,
@@ -20881,14 +20904,14 @@
 				0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */,
 				0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */,
 				0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */,
-				0303A7812397D0D000907F42 /* (null) in Resources */,
+				0303A7812397D0D000907F42 /* BuildFile in Resources */,
 				0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */,
 				0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */,
 				0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */,
 				0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */,
 				0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */,
 				0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */,
-				0303A7882397D0D000907F42 /* (null) in Resources */,
+				0303A7882397D0D000907F42 /* BuildFile in Resources */,
 				0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */,
 				0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */,
@@ -23286,6 +23309,28 @@
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/scripts/discardLocalizationChanges.sh\n";
 		};
+		08CC9923FCC5E366F71BADE8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeDrive-widget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		09831DF01E1C951C6B3867ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -24340,7 +24385,7 @@
 				0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */,
 				0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */,
 				0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */,
-				0303A06F2397D0D000907F42 /* (null) in Sources */,
+				0303A06F2397D0D000907F42 /* BuildFile in Sources */,
 				0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */,
 				0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */,
 				0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */,
@@ -25127,7 +25172,7 @@
 				0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */,
 				0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */,
 				0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */,
-				0303A3822397D0D000907F42 /* (null) in Sources */,
+				0303A3822397D0D000907F42 /* BuildFile in Sources */,
 				0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				0303A3842397D0D000907F42 /* BuildFile in Sources */,
 				0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */,
@@ -29235,7 +29280,7 @@
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
-				CE78492822A685FB00662219 /* (null) in Sources */,
+				CE78492822A685FB00662219 /* BuildFile in Sources */,
 				CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				CE78492922A685FB00662219 /* DataStorage.swift in Sources */,
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
@@ -30252,6 +30297,11 @@
 			isa = PBXTargetDependency;
 			target = 984B1EDD23685FC8009ACCFF /* LifeDriveNotificationService */;
 			targetProxy = 0308BB8E239000FA0066F409 /* PBXContainerItemProxy */;
+		};
+		03B52C56239E6A54008C2F24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C3BA2BC22B3CC32006D901E /* LifeDrive-widget */;
+			targetProxy = 03B52C55239E6A54008C2F24 /* PBXContainerItemProxy */;
 		};
 		7A3E0C04206273CE00F79A1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -32000,6 +32050,7 @@
 		};
 		8C3BA2DB22B3CC32006D901E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18727347BB1DC5883DFADF41 /* Pods-LifeDrive-widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32038,6 +32089,7 @@
 		};
 		8C3BA2DC22B3CC32006D901E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36347F41C4CC01801EE3961B /* Pods-LifeDrive-widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32076,6 +32128,7 @@
 		};
 		8C3BA2DD22B3CC32006D901E /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0F2B159560EC4895B61A19E /* Pods-LifeDrive-widget.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -32114,6 +32167,7 @@
 		};
 		8C3BA2DE22B3CC32006D901E /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF7F4341F6F078F59BAE4083 /* Pods-LifeDrive-widget.enterprise.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;

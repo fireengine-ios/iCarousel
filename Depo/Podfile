@@ -132,9 +132,9 @@ target 'LifeDriveProviderUI' do
     shared_pods
 end
 
-#target 'LifeDrive-widget' do
-#    pod 'MMWormhole', '~> 2.0.0'
-#end
+target 'LifeDrive-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
+end
 
 target 'LifeDriveNotificationService' do
   pod 'Netmera'
