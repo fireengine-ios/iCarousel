@@ -71,7 +71,10 @@ class AnimationCard: BaseCardView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        photoImageView.loadImage(with: item.tmpDownloadUrl)
+    }
+    
+    override func viewWillShow() {
+        photoImageView.loadImage(with: item?.tmpDownloadUrl)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

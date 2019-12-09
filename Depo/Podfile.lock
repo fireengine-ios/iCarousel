@@ -128,7 +128,7 @@ DEPENDENCIES:
   - Adjust
   - Alamofire (~> 4.8.1)
   - CircleProgressBar (~> 0.32)
-  - Crashlytics (~> 3.14)
+  - Crashlytics
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -251,6 +251,6 @@ SPEC CHECKSUMS:
   Xtremepush-iOS-SDK: ea060cc63fec2797cdba0910b148481b10312fff
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: c370de708fef6735fd6d2cb03e3399b5276a60a7
+PODFILE CHECKSUM: 020c3bbf39671ced052a4c3e2ce0a450567a2e19
 
 COCOAPODS: 1.7.5

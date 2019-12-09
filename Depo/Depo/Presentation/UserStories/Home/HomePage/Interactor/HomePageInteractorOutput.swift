@@ -14,7 +14,7 @@ protocol HomePageInteractorOutput: class {
     
     func showPopupAboutPremiumIfNeeded()
     
-    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool)
+    func didObtainError(with text: String, isNeedStopRefresh: Bool)
     
     func didObtainHomeCards(_ cards: [HomeCardResponse])
     
@@ -22,10 +22,10 @@ protocol HomePageInteractorOutput: class {
     
     func didObtainQuotaInfo(usagePercentage: Float)
     
-    func verifyEmailIfNeeded()
+    func didObtainAccountInfo(accountInfo: AccountInfoResponse)
     
-    func credsCheckUpdateIfNeeded()
-        
+    func didObtainAccountInfoError(with text: String)
+
     func didObtainInstaPickStatus(status: InstapickAnalyzesCount)
     
     func showGiftBox()

@@ -140,6 +140,11 @@ fastlane-plugin-versioning required. also it needs more time that my class
 fastlane test_get_build_number_my
 ```
 
+### beta
+```
+fastlane beta
+```
+
 
 ----
 
