@@ -29,13 +29,7 @@ final class AutoSyncDataStorage {
         
         if self.settings != autoSyncSettings || !fromSettings {
             /// There is no scenario both success and error for now. Just sending BE
-            AccountService().autoSyncStatus(syncSettings: autoSyncSettings) { result in
-                switch result {
-                case .success(_):
-                    print(result)
-                case .failed(let error):
-                    print(error.description)
-                }
+            AccountService().autoSyncStatus(syncSettings: autoSyncSettings) { _ in
             }
         }
         
