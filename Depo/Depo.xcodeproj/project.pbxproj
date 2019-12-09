@@ -2179,6 +2179,7 @@
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
+		03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		05D3F110F5AEAA8A60DD01BE /* Pods_LifeTech_LifeDriveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C459C8E87C162A562E610D0D /* Pods_LifeTech_LifeDriveShared.framework */; };
 		05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */; };
@@ -6223,7 +6224,6 @@
 		CE292C2321BE5DE9004FC745 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
 		CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A745FF21B91A4F00386C37 /* PackageService.swift */; };
-		CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */; };
 		CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB420454B3900232025 /* UICollectionView+Layout.swift */; };
 		CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */; };
 		CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */; };
@@ -25452,6 +25452,7 @@
 				0303A4972397D0D000907F42 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				0303A4982397D0D000907F42 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				0303A4992397D0D000907F42 /* EmailEnterController.swift in Sources */,
+				03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */,
 				0303A49A2397D0D000907F42 /* InstaPickSmallPhotoView.swift in Sources */,
 				0303A49B2397D0D000907F42 /* PhotoVideoScrollBarManager.swift in Sources */,
 				0303A49C2397D0D000907F42 /* CampaignContestInfoView.swift in Sources */,
@@ -25833,7 +25834,6 @@
 				CE292C2321BE5DE9004FC745 /* AuthorityType.swift in Sources */,
 				CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */,
 				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
-				CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */,
 				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
 				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
 				8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */,
