@@ -33,15 +33,8 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         tableView?.backgroundColor = UIColor.clear
         tableView?.separatorStyle = .none
         
-        registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
-                             CellsIdConstants.autoSyncSettingsCellID])
-    }
-    
-    private func registerCells(with identifiers: [String]) {
-        for identifier in identifiers {
-            let nib = UINib(nibName: identifier, bundle: nil)
-            tableView?.register(nib, forCellReuseIdentifier: identifier)
-        }
+        tableView?.register(nibCell: AutoSyncSwitcherTableViewCell.self)
+        tableView?.register(nibCell: AutoSyncSettingsTableViewCell.self)
     }
     
     func showCells(from settings: AutoSyncSettings) {
@@ -111,23 +104,18 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         }
         
         if model.cellType == .headerSlider {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSwitcherCellID, for: indexPath)
-            cell.selectionStyle = .none
-            let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
-            autoSyncCell.delegate = self
+            let cell = tableView.dequeue(reusable: AutoSyncSwitcherTableViewCell.self, for: indexPath)
+            cell.delegate = self
             if let syncSetting = model.syncSetting {
-                autoSyncCell.setup(with: model, setting: syncSetting)
+                cell.setup(with: model, setting: syncSetting)
             }
-            return autoSyncCell
+            return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
-            cell.selectionStyle = .none
-            let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
-            autoSyncCell.setup(with: model)
-            autoSyncCell.delegate = self
-            return autoSyncCell
+            let cell = tableView.dequeue(reusable: AutoSyncSettingsTableViewCell.self, for: indexPath)
+            cell.setup(with: model)
+            cell.delegate = self
+            return cell
         }
-        
     }
 
     func reloadTableView() {
