@@ -12,6 +12,7 @@ import Crashlytics
 
 enum DebugAnalyticsEevnt: String {
     case zeroContentLength
+    case test
 }
 
 

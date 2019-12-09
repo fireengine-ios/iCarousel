@@ -13,7 +13,7 @@ extension WrapData {
     func toDebugAnalyticsAttributes() -> [String : Any] {
         return [
             "isImage" : fileType == .image,
-            "trimmedLocalId" : getTrimmedLocalID(),
+            "uuid" : uuid,
             "isLocal" : isLocalItem
         ]
     }
