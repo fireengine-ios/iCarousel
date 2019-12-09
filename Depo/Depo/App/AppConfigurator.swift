@@ -28,6 +28,7 @@ final class AppConfigurator {
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        UISwitch.appearance().semanticContentAttribute = .forceLeftToRight
         
         SettingsBundleHelper.setVersionAndBuildNumber()
         SettingsBundleHelper.shared.lifeTechSetup()
