@@ -7,13 +7,13 @@
 //
 
 protocol HomePageViewOutput {
-
+    
     func viewIsReady()
     
     func viewWillAppear()
     
     func viewIsReadyForPopUps()
-
+    
     func showSettings()
     
     func showSearch(output: UIViewController?)

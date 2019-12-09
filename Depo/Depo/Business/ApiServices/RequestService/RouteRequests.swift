@@ -276,6 +276,7 @@ struct RouteRequests {
         static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
+        static let updateAddress = accountApi +/ "address"
         
         enum Settings {
             /// without "s" at the end

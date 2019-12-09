@@ -94,7 +94,7 @@
 		0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
 		0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
-		0303A06F2397D0D000907F42 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
+		0303A06F2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
@@ -881,7 +881,7 @@
 		0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* PhotoVideoSegmentedController.swift */; };
 		0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32121787FEF006CFA50 /* UpdateCheck.m */; };
-		0303A3822397D0D000907F42 /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
+		0303A3822397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
 		0303A3842397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
@@ -1900,14 +1900,14 @@
 		0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD012008AD6F003D8E05 /* paylas_akilli_depo.png */; };
 		0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEAB2008AD6F003D8E05 /* sticker_resize.png */; };
 		0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD5C2008AD6F003D8E05 /* status_badge@3x.png */; };
-		0303A7812397D0D000907F42 /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
+		0303A7812397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC362008AD6F003D8E05 /* alt_cizgili_secili.png */; };
 		0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
 		0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD802008AD6F003D8E05 /* text_selected@3x.png */; };
 		0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
-		0303A7882397D0D000907F42 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
+		0303A7882397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
@@ -2576,12 +2576,6 @@
 		73CB8E402361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		73CB8E412361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
-		73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */; };
-		73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
-		73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
-		73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */; };
 		73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E7231D0855006AE835 /* PaymentModels.swift */; };
 		73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
 		73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723E9231D08A6006AE835 /* PackageOffer.swift */; };
@@ -2861,8 +2855,6 @@
 		7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCFC1F1E3A6300C8CC16 /* UserProfilePresenter.swift */; };
 		7CDABD0C1F1E3A6300C8CC16 /* UserProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCFE1F1E3A6300C8CC16 /* UserProfileRouter.swift */; };
 		7CDABD0D1F1E3A6300C8CC16 /* UserProfileRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCFF1F1E3A6300C8CC16 /* UserProfileRouterInput.swift */; };
-		7CDABD0E1F1E3A6300C8CC16 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
-		7CDABD0F1F1E3A6300C8CC16 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
 		7CDABD101F1E3A6300C8CC16 /* UserProfileViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */; };
 		7CDABD111F1E3A6300C8CC16 /* UserProfileViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */; };
 		7CDABD131F1E434100C8CC16 /* FileInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */; };
@@ -3958,7 +3950,6 @@
 		8C0E8C9B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */; };
 		8C0E8C9D1FDEBDFF00789C91 /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
 		8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
-		8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
 		8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
 		8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
@@ -4681,7 +4672,6 @@
 		8C0E90661FDEBDFF00789C91 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA41F0F8BA200B5B93D /* SettingsViewController.xib */; };
 		8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
 		8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
-		8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
 		8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		8C0E906E1FDEBDFF00789C91 /* PasscodeSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C2361FB99AF800C3D67F /* PasscodeSettingsViewController.xib */; };
 		8C0E906F1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */; };
@@ -6668,7 +6658,6 @@
 		CE78483E22A685FB00662219 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
 		CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
-		CE78484122A685FB00662219 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
 		CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
@@ -8272,7 +8261,6 @@
 		CE784ECE22A685FB00662219 /* text_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD802008AD6F003D8E05 /* text_selected@3x.png */; };
 		CE784ECF22A685FB00662219 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
-		CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
 		CE784ED322A685FB00662219 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CE784ED422A685FB00662219 /* toolbar_ciz_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD842008AD6F003D8E05 /* toolbar_ciz_icon.png */; };
 		CE784ED522A685FB00662219 /* cizgi_1_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC642008AD6F003D8E05 /* cizgi_1_selected@3x.png */; };
@@ -8467,6 +8455,12 @@
 		CEC3C2491FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */; };
 		CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */; };
 		CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */; };
+		CEC94E41238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E42238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
+		CEC94E44238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
+		CEC94E45238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
+		CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */; };
 		CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */; };
 		CECA164D2121CA1E006D96A5 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
 		CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
@@ -9221,8 +9215,6 @@
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignService.swift; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
-		73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecurityCredentialsView.swift; sourceTree = "<group>"; };
-		73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityCredentialsView.xib; sourceTree = "<group>"; };
 		73D723E7231D0855006AE835 /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
 		73D723E9231D08A6006AE835 /* PackageOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOffer.swift; sourceTree = "<group>"; };
 		73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -9494,8 +9486,6 @@
 		7CDABCFC1F1E3A6300C8CC16 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		7CDABCFE1F1E3A6300C8CC16 /* UserProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileRouter.swift; sourceTree = "<group>"; };
 		7CDABCFF1F1E3A6300C8CC16 /* UserProfileRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileRouterInput.swift; sourceTree = "<group>"; };
-		7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
-		7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
 		7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewInput.swift; sourceTree = "<group>"; };
 		7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewOutput.swift; sourceTree = "<group>"; };
 		7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileInfoViewController.xib; sourceTree = "<group>"; };
@@ -11215,6 +11205,8 @@
 		CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsInteractorIO.swift; sourceTree = "<group>"; };
 		CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouter.swift; sourceTree = "<group>"; };
 		CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouterInput.swift; sourceTree = "<group>"; };
+		CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
 		CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxPresenter.swift; sourceTree = "<group>"; };
 		CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageDesigner.swift; sourceTree = "<group>"; };
 		CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSortingRules.swift; sourceTree = "<group>"; };
@@ -11988,8 +11980,6 @@
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
 				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
-				73D10A682334EE6100FC7D6D /* SetSecurityCredentialsView.swift */,
-				73D10A6C2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -14368,11 +14358,11 @@
 		7CDABD001F1E3A6300C8CC16 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				17035BA6226D9E4100FE7362 /* Views */,
-				7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */,
-				7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */,
+				CEC94E40238FA6F4000BBB80 /* UserProfileViewController.xib */,
+				CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */,
 				7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */,
 				7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */,
+				17035BA6226D9E4100FE7362 /* Views */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -20891,14 +20881,14 @@
 				0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */,
 				0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */,
 				0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */,
-				0303A7812397D0D000907F42 /* SetSecurityCredentialsView.xib in Resources */,
+				0303A7812397D0D000907F42 /* (null) in Resources */,
 				0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */,
 				0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */,
 				0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */,
 				0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */,
 				0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */,
 				0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */,
-				0303A7882397D0D000907F42 /* UserProfileViewController.xib in Resources */,
+				0303A7882397D0D000907F42 /* (null) in Resources */,
 				0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */,
 				0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */,
@@ -21400,6 +21390,7 @@
 				C62239B0204973400043ED44 /* FaceImageChangeCoverViewController.xib in Resources */,
 				8C06B1352008AD72003D8E05 /* t_orta_selected.png in Resources */,
 				8C208668228D4B61000BEDAD /* EmptyDataView.xib in Resources */,
+				CEC94E45238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				8C06B1332008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFEB2008AD71003D8E05 /* kare_selected.png in Resources */,
 				8C06AF6D2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
@@ -21620,7 +21611,6 @@
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AEC32008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
-				73D10A6E2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B1672008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
 				8C20864C228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */,
 				8C0E90621FDEBDFF00789C91 /* IntroduceSubView.xib in Resources */,
@@ -21666,7 +21656,6 @@
 				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
 				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
 				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
-				8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				8C06AF212008AD70003D8E05 /* cizgi_2.png in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
@@ -22024,6 +22013,7 @@
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
 				8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */,
+				CEC94E44238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				7C6E2FA41F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				8C06AF402008AD70003D8E05 /* crop@2x.png in Resources */,
@@ -22368,7 +22358,6 @@
 				8C06B1402008AD72003D8E05 /* target.png in Resources */,
 				8C06B0A02008AD71003D8E05 /* refreshicon.png in Resources */,
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
-				73D10A6D2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
 				7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
@@ -22477,7 +22466,6 @@
 				8C06AF162008AD70003D8E05 /* cizgi_1@2x.png in Resources */,
 				73FE51EE22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				8C06AFD62008AD71003D8E05 /* ins_paylas@3x.png in Resources */,
-				7CDABD0F1F1E3A6300C8CC16 /* UserProfileViewController.xib in Resources */,
 				8C75D24A1FDD1BF700CBE1A7 /* Settings.bundle in Resources */,
 				7C1F898A1F6FFE1100740177 /* ProgressCard.xib in Resources */,
 				8C06B15E2008AD72003D8E05 /* toolbar_ciz_icon.png in Resources */,
@@ -22584,6 +22572,7 @@
 				CE784CCF22A685FB00662219 /* cizgi_2@2x.png in Resources */,
 				CE784CD022A685FB00662219 /* filtre_selected.png in Resources */,
 				CE784CD122A685FB00662219 /* CRYFrameCell.nib in Resources */,
+				CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
@@ -23124,14 +23113,12 @@
 				CE784EC922A685FB00662219 /* paylas_akilli_depo.png in Resources */,
 				CE784ECA22A685FB00662219 /* sticker_resize.png in Resources */,
 				CE784ECB22A685FB00662219 /* status_badge@3x.png in Resources */,
-				73D10A6F2334EE6F00FC7D6D /* SetSecurityCredentialsView.xib in Resources */,
 				CE784ECC22A685FB00662219 /* alt_cizgili_secili.png in Resources */,
 				CE784ECD22A685FB00662219 /* OurLocalizable.strings in Resources */,
 				8C1E5BE122CB8C23008FDA02 /* PhotoVideoController.xib in Resources */,
 				CE784ECE22A685FB00662219 /* text_selected@3x.png in Resources */,
 				CE784ECF22A685FB00662219 /* cizgi_1@2x.png in Resources */,
 				CE784ED022A685FB00662219 /* ins_paylas@3x.png in Resources */,
-				CE784ED122A685FB00662219 /* UserProfileViewController.xib in Resources */,
 				73FE51F022CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				CE784ED322A685FB00662219 /* ProgressCard.xib in Resources */,
 				737A2EA72338A5300014258A /* SecurityQuestionView.xib in Resources */,
@@ -24353,7 +24340,7 @@
 				0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */,
 				0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */,
 				0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */,
-				0303A06F2397D0D000907F42 /* UserProfileViewController.swift in Sources */,
+				0303A06F2397D0D000907F42 /* (null) in Sources */,
 				0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */,
 				0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */,
 				0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */,
@@ -25140,7 +25127,7 @@
 				0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */,
 				0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */,
 				0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */,
-				0303A3822397D0D000907F42 /* SetSecurityCredentialsView.swift in Sources */,
+				0303A3822397D0D000907F42 /* (null) in Sources */,
 				0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				0303A3842397D0D000907F42 /* BuildFile in Sources */,
 				0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */,
@@ -25893,7 +25880,6 @@
 				8C0E8C9D1FDEBDFF00789C91 /* SeacrhViewRouter.swift in Sources */,
 				8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */,
 				8C208650228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift in Sources */,
-				8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
@@ -26340,6 +26326,7 @@
 				9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				8E26D97F2306999800D08123 /* MusicViewInput.swift in Sources */,
+				CEC94E42238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
@@ -26558,7 +26545,6 @@
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
-				73D10A6A2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
@@ -27619,7 +27605,6 @@
 				CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */,
 				CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */,
 				92004B3A21AD0F2200582C45 /* MyStorageViewController.swift in Sources */,
-				7CDABD0E1F1E3A6300C8CC16 /* UserProfileViewController.swift in Sources */,
 				986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
 				8DCB21731F3C86D700BAFE1E /* SearchViewInteractorInput.swift in Sources */,
 				CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */,
@@ -28403,7 +28388,6 @@
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
-				73D10A692334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				8C06AC1820066641003D8E05 /* LoginSettingsViewController.swift in Sources */,
 				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
@@ -28455,6 +28439,7 @@
 				98758F612359BC3E00D06952 /* CampaignService.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
+				CEC94E41238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
 				0817E8DE5620F2988297FF52 /* UserInfoSubViewRouter.swift in Sources */,
 				1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */,
@@ -28998,7 +28983,6 @@
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
 				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
-				CE78484122A685FB00662219 /* UserProfileViewController.swift in Sources */,
 				CE78484222A685FB00662219 /* StreamReaderWriter.swift in Sources */,
 				CE78484322A685FB00662219 /* SearchViewInteractorInput.swift in Sources */,
 				CE78484422A685FB00662219 /* UITableView+Extensions.swift in Sources */,
@@ -29251,7 +29235,8 @@
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
-				CE78492822A685FB00662219 /* BuildFile in Sources */,
+				CE78492822A685FB00662219 /* (null) in Sources */,
+				CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				CE78492922A685FB00662219 /* DataStorage.swift in Sources */,
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
 				CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */,
@@ -29785,7 +29770,6 @@
 				73CB8E422361758A00585625 /* InstaPickCampaignService.swift in Sources */,
 				737685E423704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
-				73D10A6B2334EE6100FC7D6D /* SetSecurityCredentialsView.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				CE784B1C22A685FB00662219 /* BuildFile in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,
@@ -30457,7 +30441,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = b.35.0;
+				CURRENT_PROJECT_VERSION = b.35.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -30518,7 +30502,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = b.35.0;
+				CURRENT_PROJECT_VERSION = b.35.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -30575,7 +30559,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = b.35.0;
+				CURRENT_PROJECT_VERSION = b.35.1;
 				DEVELOPMENT_TEAM = 729CGH4BJD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -30633,7 +30617,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = b.35.0;
+				CURRENT_PROJECT_VERSION = b.35.1;
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -30705,6 +30689,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
@@ -30744,6 +30729,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
@@ -30782,6 +30768,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
@@ -30820,6 +30807,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
@@ -30859,6 +30847,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share dev";
@@ -30901,6 +30890,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share adhoc";
@@ -30942,6 +30932,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo share extension";
@@ -30983,6 +30974,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Share Extension";
@@ -32032,6 +32024,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Billo Today Ext - Dev";
@@ -32070,6 +32063,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget adhoc";
@@ -32107,6 +32101,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
@@ -32144,6 +32139,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
@@ -32183,6 +32179,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Billo Share Ext - Dev";
@@ -32225,6 +32222,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive share adhoc";
@@ -32266,6 +32264,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo share extension";
@@ -32307,6 +32306,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Share Extension";
@@ -34027,7 +34027,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.1;
+				CURRENT_PROJECT_VERSION = d2.35.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34090,7 +34090,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.1;
+				CURRENT_PROJECT_VERSION = d2.35.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34149,7 +34149,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.1;
+				CURRENT_PROJECT_VERSION = d2.35.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34209,7 +34209,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.1;
+				CURRENT_PROJECT_VERSION = d2.35.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -9,10 +9,10 @@
 final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
     
     private enum DispatchGroupReasons: CaseIterable {
-        case waitAccountInfoResponse
-        case waitAccountPermissionsResponse
-        case waitQuotaInfoResponse
-        case waitTillViewDidAppear
+        case waitAccountInfoResponse        ///calls didObtainAccountInfo OR didObtainAccountInfoError
+        case waitAccountPermissionsResponse ///regardless response always calls fillCollectionView
+        case waitQuotaInfoResponse          ///regardless response always calls didObtainQuotaInfo
+        case waitTillViewDidAppear          ///calls viewIsReadyForPopUps
     }
     
     weak var view: HomePageViewInput!
@@ -29,51 +29,39 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     private var loadCollectionView = false
+    private var isShowPopupQuota = false
     private var isFirstAppear = true
     
-    private var isShowPopupQuota = false
-    private var isShowPopupAboutPremium = false
-    
     private var presentPopUpsGroup: DispatchGroup?
-
+    
     func viewIsReady() {
         prepareDispatchGroup()
         
         interactor.viewIsReady()
-        interactor.needCheckQuota()
-    }
-    
-    private func prepareDispatchGroup() {
-        presentPopUpsGroup = DispatchGroup()
-        
-        DispatchGroupReasons.allCases.forEach { _ in
-            presentPopUpsGroup?.enter()
-        }
-        
-        presentPopUpsGroup?.notify(queue: DispatchQueue.global()) { [weak self] in
-            self?.presentPopUpsGroup = nil
-            self?.router.presentPopUps()
-        }
     }
     
     func viewWillAppear() {
         spotlightManager.delegate = self
-        interactor.trackScreen()
         
         if isFirstAppear {
-            isFirstAppear = false
-            
             AnalyticsService.updateUser()
         } else {
             view.startSpinner()
             interactor.updateLocalUserDetail()
         }
+        
+        interactor.trackScreen()
     }
     
     func viewIsReadyForPopUps() {
-        HomePagePopUpsService.shared.continueAfterPushIfNeeded()
         
-        presentPopUpsGroup?.leave()
+        if isFirstAppear {
+            isFirstAppear = false
+            
+            presentPopUpsGroup?.leave()
+        }
+        
+        HomePagePopUpsService.shared.continueAfterPushIfNeeded()
     }
     
     func showSettings() {
@@ -144,13 +132,12 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         }
     }
     
-    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
+    func didObtainError(with text: String, isNeedStopRefresh: Bool) {
         if isNeedStopRefresh {
-            view.stopRefresh()
+            stopRefresh()
         }
-        router.showError(errorMessage: errorMessage)
         
-        presentPopUpsGroup?.leave()
+        router.showError(errorMessage: text)
     }
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
@@ -201,15 +188,15 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     }
     
     func fillCollectionView(isReloadAll: Bool) {
-        
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
             CardsManager.default.startPremiumCard()
         }
+        
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
-        guard !cards.isEmpty else {
+        if cards.isEmpty {
             if !isReloadAll {
-                view.stopRefresh()
+                stopRefresh()
             }
             return
         }
@@ -218,28 +205,21 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             CardsManager.default.startOperatonsForCardsResponses(cardsResponses: cards)
         } else {
             //to hide spinner when refresh only premium card
-            view.stopRefresh()
-        }
-        
-        presentPopUpsGroup?.leave()
-    }
-
-    func verifyEmailIfNeeded() {
-        if let accountInfo = SingletonStorage.shared.accountInfo, !(accountInfo.emailVerified ?? false) {
-            router.presentEmailVerificationPopUp()
+            stopRefresh()
         }
         
         presentPopUpsGroup?.leave()
     }
     
-    func credsCheckUpdateIfNeeded() {
-        if let accountInfo = SingletonStorage.shared.accountInfo, accountInfo.isUpdateInformationRequired == true {
-            let email = SingletonStorage.shared.accountInfo?.email ?? ""
-            let fullPhoneNumber = SingletonStorage.shared.accountInfo?.fullPhoneNumber ?? ""
-            let message = "\(email)\n\(fullPhoneNumber)"
-            
-            router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
-        }
+    func didObtainAccountInfo(accountInfo: AccountInfoResponse) {
+        verifyEmailIfNeeded(with: accountInfo)
+        credsCheckUpdateIfNeeded(with: accountInfo)
+        
+        presentPopUpsGroup?.leave()
+    }
+    
+    func didObtainAccountInfoError(with text: String) {
+        didObtainError(with: text, isNeedStopRefresh: false)
     }
     
     func showGiftBox() {
@@ -250,6 +230,38 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         view.hideGiftBox()
     }
     
+    private func prepareDispatchGroup() {
+        presentPopUpsGroup = DispatchGroup()
+        
+        DispatchGroupReasons.allCases.forEach { _ in
+            presentPopUpsGroup?.enter()
+        }
+        
+        presentPopUpsGroup?.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.presentPopUpsGroup = nil
+            self?.router.presentPopUps()
+        }
+    }
+    
+    private func verifyEmailIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.emailVerified == false else {
+            return
+        }
+        
+        router.presentEmailVerificationPopUp()
+    }
+    
+    private func credsCheckUpdateIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.isUpdateInformationRequired == true else {
+            return
+        }
+        
+        let email = accountInfo.email ?? ""
+        let fullPhoneNumber = accountInfo.fullPhoneNumber
+        let message = "\(email)\n\(fullPhoneNumber)"
+        
+        router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
+    }
 }
 
 //MARK: - SpotlightManagerDelegate

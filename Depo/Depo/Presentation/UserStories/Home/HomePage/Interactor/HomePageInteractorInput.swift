@@ -15,9 +15,7 @@ protocol HomePageInteractorInput {
     func viewIsReady()
     
     func needRefresh()
-    
-    func needCheckQuota()
-    
+        
     func trackScreen()
     func trackGiftTapped()
 
