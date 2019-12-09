@@ -1308,6 +1308,7 @@
 "profile_detail_address_title" = "Address";
 "profile_detail_address_subtitle" = "This information will be used for campaigns";
 "profile_detail_address_placeholder" = "Please enter your address information";
+"profile_detail_error_contact_call_center" = "Contact call-center to change your number";
 "password_length_below_limit" = "Your password should not contain less than %d characters";
 "password_length_exceede" = "Your password should not contain more than %d characters";
 "password_sequential_caharacters" = "Your password should not contain more than %d characters";

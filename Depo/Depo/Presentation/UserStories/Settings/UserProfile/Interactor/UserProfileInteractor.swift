@@ -173,7 +173,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     private func updateAddressIfNeeded(_ address: String) {
-        if userInfo?.address == address {
+        if (userInfo?.address == nil && address.isEmpty) || (userInfo?.address == address) {
             allUpdated()
         } else {
             accountService.updateAddress(with: address) { [weak self] response in

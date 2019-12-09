@@ -81,6 +81,14 @@ class AccountInfoResponse: ObjectRequestResponse {
         return ""
     }
     
+    var isTurkcellUser: Bool {
+        return accountType == "TURKCELL"
+    }
+    
+    var isUserFromTurkey: Bool {
+        return countryCode == "90"
+    }
+    
     override func mapping() {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool

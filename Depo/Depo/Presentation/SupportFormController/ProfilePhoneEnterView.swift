@@ -197,4 +197,12 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         subtitleLabel.text = text
         showSubtitleAnimated()
     }
+    
+    func showTextWithoutAnimation(text: String) {
+        guard subtitleLabel.isHidden else {
+            return
+        }
+        subtitleLabel.text = text
+        subtitleLabel.isHidden = false
+    }
 }
