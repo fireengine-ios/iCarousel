@@ -1561,4 +1561,6 @@ struct TextConstants {
     static let profileDetailAddressTitle = NSLocalizedString("profile_detail_address_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profileDetailAddressSubtitle = NSLocalizedString("profile_detail_address_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profileDetailAddressPlaceholder = NSLocalizedString("profile_detail_address_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
