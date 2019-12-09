@@ -1313,3 +1313,5 @@
 "password_sequential_caharacters" = "Your password should not contain more than %d characters";
 "password_same_caharacters" = "Your password should not contain more than %d same characters.";
 "password_field_is_empty" = "Your password field cannot be empty";
+
+"temporary_error" = "temporary error, please try again";
