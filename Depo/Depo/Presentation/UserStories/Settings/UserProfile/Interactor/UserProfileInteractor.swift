@@ -251,4 +251,14 @@ class UserProfileInteractor: UserProfileInteractorInput {
         
     }
     
+    func updateSecretQuestionsResponse(with secretQuestionWithAnswer: SecretQuestionWithAnswer) {
+        guard
+            let questionId = secretQuestionWithAnswer.questionId,
+            let question = secretQuestionWithAnswer.question
+        else {
+            assertionFailure("problem with Answer: \(secretQuestionWithAnswer)")
+            return
+        }
+        secretQuestionsResponse = SecretQuestionsResponse(id: questionId, text: question)
+    }
 }
