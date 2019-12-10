@@ -99,6 +99,12 @@ class LatestUpladsCard: BaseCardView {
         collectionView.reloadData()
     }
     
+    override func viewWillShow() {
+        super.viewWillShow()
+        
+        collectionView.reloadData()
+    }
+    
     @IBAction func onViewRecentActivitiesButton() {
         let router = RouterVC()
         let controller = router.vcActivityTimeline
