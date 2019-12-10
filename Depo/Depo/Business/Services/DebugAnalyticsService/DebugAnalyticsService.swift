@@ -10,7 +10,7 @@ import Foundation
 import Crashlytics
 
 
-enum DebugAnalyticsEevnt: String {
+enum DebugAnalyticsEvent: String {
     case zeroContentLength
     case test
 }
@@ -18,7 +18,7 @@ enum DebugAnalyticsEevnt: String {
 
 final class DebugAnalyticsService {
     
-    static func log(event: DebugAnalyticsEevnt, attributes: [String : Any] = [:]) {
+    static func log(event: DebugAnalyticsEvent, attributes: [String : Any] = [:]) {
         Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
     }
 }
