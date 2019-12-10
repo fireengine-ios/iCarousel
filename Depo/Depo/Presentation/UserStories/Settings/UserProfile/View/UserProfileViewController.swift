@@ -133,7 +133,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var birthday: String?
     private var address: String?
     
-    private var isTurkcellUser = false
+    private var isShortPhoneNumber = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,15 +162,15 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
-        
-        /// phoneView disabled for Turkcell user
-        if !isTurkcellUser {
-            phoneView.isEditState = isEdit
-        }
-        
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
         
+        /// phoneView disabled for Turkcell user
+        if isShortPhoneNumber {
+            isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
+        } else {
+            phoneView.isEditState = isEdit
+        }
         
         if addressView.textField.text == "" {
             isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
@@ -228,7 +228,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             return
         }
         
-        let sendingPhoneNumber = isTurkcellUser ? phoneNumber : "\(phoneCode)\(phoneNumber)"
+        let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
         readyButton.isEnabled = false
         
@@ -312,7 +312,7 @@ extension UserProfileViewController: UITextFieldDelegate  {
 
         case emailView.textField:
             /// phoneView disabled for Turkcell user
-            if isTurkcellUser {
+            if isShortPhoneNumber {
                 birthdayDetailView.textField.becomeFirstResponder()
             } else {
                 phoneView.codeTextField.becomeFirstResponder()
@@ -348,12 +348,6 @@ extension UserProfileViewController: UITextFieldDelegate  {
 extension UserProfileViewController: UserProfileViewInput {
     
     func configurateUserInfo(userInfo: AccountInfoResponse) {
-        isTurkcellUser = userInfo.isTurkcellUser
-        
-        if isTurkcellUser {
-            phoneView.showTextWithoutAnimation(text: TextConstants.profileDetailErrorContactCallCenter)
-        }
-        
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
@@ -368,9 +362,13 @@ extension UserProfileViewController: UserProfileViewInput {
                 let start = countryCode.count + plusLength
                 let end = phoneNumber.count
                 phoneView.numberTextField.text = phoneNumber[start..<end]
+                isShortPhoneNumber = false
             } else {
                 phoneView.numberTextField.text = phoneNumber
+                isShortPhoneNumber = true
             }
+        } else {
+            assertionFailure("probles with userInfo: \(userInfo)")
         }
         
         let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
