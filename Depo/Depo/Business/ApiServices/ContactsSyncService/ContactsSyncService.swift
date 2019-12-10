@@ -297,11 +297,11 @@ class ContactsSyncService: BaseRequestService {
         updateAccessToken()
         SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
         switch RouteRequests.currentServerEnvironment {
-            case .production:
+        case .production:
             SyncSettings.shared().environment = .productionEnvironment
-            case .preProduction:
+        case .preProduction:
             SyncSettings.shared().environment = .developmentEnvironment
-            case .test:
+        case .test:
             SyncSettings.shared().environment = .testEnvironment
         }
     }
