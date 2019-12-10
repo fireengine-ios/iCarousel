@@ -16,4 +16,5 @@ protocol UserProfileInteractorInput {
     func trackState(_ editState: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackSetSequrityQuestion()
     var secretQuestionsResponse: SecretQuestionsResponse? { get }
+    func updateSecretQuestionsResponse(with secretQuestionWithAnswer: SecretQuestionWithAnswer)
 }
