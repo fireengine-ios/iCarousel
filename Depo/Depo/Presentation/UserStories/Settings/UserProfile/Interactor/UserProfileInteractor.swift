@@ -151,13 +151,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
 ///        let oldBirthdayIsEmpty = (userInfo?.dob ?? "").isEmpty
         let newBirthdayIsEmpty = birthday.trimmingCharacters(in: .whitespaces).isEmpty
         
-///        if oldBirthdayIsEmpty && newBirthdayIsEmpty {
-        if newBirthdayIsEmpty {
-            allUpdated()
-            return
-        }
-        
-        if userInfo?.dob == birthday {
+        /// if oldBirthdayIsEmpty && newBirthdayIsEmpty {
+        if newBirthdayIsEmpty || userInfo?.dob == birthday {
             updateAddressIfNeeded(address)
         } else {
             accountService.updateUserBirthday(birthday) { [weak self] response in
