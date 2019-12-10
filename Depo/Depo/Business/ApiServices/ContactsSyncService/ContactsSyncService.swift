@@ -6,13 +6,6 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-
-enum ContactsSyncServiceConstant {
-//    static let debugURL = "http://contactsync.test.valven.com/ttyapi/"
-//    static let prodURL =  "https://adepo.turkcell.com.tr/ttyapi/"
-    static let webProdURL =  "https://contactsync.turkcell.com.tr/ttyapi/"
-}
-
 typealias ContactsOperation = (ContactsResponse) -> Void
 
 class ContactsSyncService: BaseRequestService {
@@ -302,8 +295,15 @@ class ContactsSyncService: BaseRequestService {
     
     private func setup() {
         updateAccessToken()
-        SyncSettings.shared().url = ContactsSyncServiceConstant.webProdURL
-        SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
+        SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
+        switch RouteRequests.currentServerEnvironment {
+        case .production:
+            SyncSettings.shared().environment = .productionEnvironment
+        case .preProduction:
+            SyncSettings.shared().environment = .developmentEnvironment
+        case .test:
+            SyncSettings.shared().environment = .testEnvironment
+        }
     }
     
 }
