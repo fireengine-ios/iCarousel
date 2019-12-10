@@ -631,6 +631,7 @@
 "landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
 "Add GSM Number" = "Add Phone Number";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
+"Can't upload. File size is 0." = "Can't upload. File size is 0.";
 "You have not enough memory in your device" = "You don't have enough memory on your device";
 "The purchase was canceled" = "The purchase is canceled.";
 "The purchase in progress" = "The purchase is in progress.";
@@ -1308,6 +1309,7 @@
 "profile_detail_address_title" = "Address";
 "profile_detail_address_subtitle" = "This information will be used for campaigns";
 "profile_detail_address_placeholder" = "Please enter your address information";
+"profile_detail_error_contact_call_center" = "Contact call-center to change your number";
 "password_length_below_limit" = "Your password should not contain less than %d characters";
 "password_length_exceede" = "Your password should not contain more than %d characters";
 "password_sequential_caharacters" = "Your password should not contain more than %d characters";

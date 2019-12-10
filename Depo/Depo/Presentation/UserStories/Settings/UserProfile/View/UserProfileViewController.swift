@@ -133,6 +133,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var birthday: String?
     private var address: String?
     
+    private var isShortPhoneNumber = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,14 +162,17 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
-        phoneView.isEditState = isEdit
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
         
-        
-        if addressView.textField.text == "" {
-            isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
+        /// phoneView disabled for Turkcell user
+        if isShortPhoneNumber {
+            isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
+        } else {
+            phoneView.isEditState = isEdit
         }
+        
+        isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
     }
     
     @objc private func onChangePassword() {
@@ -221,7 +226,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             return
         }
         
-        let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
+        let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
         readyButton.isEnabled = false
         
@@ -248,7 +253,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                         self?.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
-                                                    number: fullPhoneNumber,
+                                                    number: sendingPhoneNumber,
                                                     birthday: birthday,
                                                     address: address)
                         self?.readyButton.fixEnabledState()
@@ -261,7 +266,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             output.tapReadyButton(name: name,
                                   surname: surname,
                                   email: email,
-                                  number: fullPhoneNumber,
+                                  number: sendingPhoneNumber,
                                   birthday: birthday,
                                   address: address)
         }
@@ -271,28 +276,29 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 extension UserProfileViewController: UITextFieldDelegate  {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        switch textField {
-        case nameView.textField:
-            nameView.hideSubtitleAnimated()
-
-        case surnameView.textField:
-            surnameView.hideSubtitleAnimated()
-
-        case emailView.textField:
-            emailView.hideSubtitleAnimated()
-
-        case birthdayDetailView.textField:
-            break
-
-        case phoneView.numberTextField, phoneView.codeTextField:
-            phoneView.hideSubtitleAnimated()
-            
-        case addressView.textField:
-            addressView.hideSubtitleAnimated()
-            
-        default:
-            assertionFailure()
-        }
+        /// this logic maybe will be need
+        //switch textField {
+        //case nameView.textField:
+        //    nameView.hideSubtitleAnimated()
+        //
+        //case surnameView.textField:
+        //    surnameView.hideSubtitleAnimated()
+        //
+        //case emailView.textField:
+        //    emailView.hideSubtitleAnimated()
+        //
+        //case birthdayDetailView.textField:
+        //    break
+        //
+        //case phoneView.numberTextField, phoneView.codeTextField:
+        //    phoneView.hideSubtitleAnimated()
+        //
+        //case addressView.textField:
+        //    addressView.hideSubtitleAnimated()
+        //
+        //default:
+        //    assertionFailure()
+        //}
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -304,7 +310,12 @@ extension UserProfileViewController: UITextFieldDelegate  {
             emailView.textField.becomeFirstResponder()
 
         case emailView.textField:
-            phoneView.codeTextField.becomeFirstResponder()
+            /// phoneView disabled for Turkcell user
+            if isShortPhoneNumber {
+                birthdayDetailView.textField.becomeFirstResponder()
+            } else {
+                phoneView.codeTextField.becomeFirstResponder()
+            }
 
         /// setup in view.
         /// only for simulator.
@@ -350,9 +361,13 @@ extension UserProfileViewController: UserProfileViewInput {
                 let start = countryCode.count + plusLength
                 let end = phoneNumber.count
                 phoneView.numberTextField.text = phoneNumber[start..<end]
+                isShortPhoneNumber = false
             } else {
                 phoneView.numberTextField.text = phoneNumber
+                isShortPhoneNumber = true
             }
+        } else {
+            assertionFailure("probles with userInfo: \(userInfo)")
         }
         
         let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")

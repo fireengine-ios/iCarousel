@@ -726,7 +726,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return fullInfoAboutVideoAsset(asset: asset)
         
         default:
-            return AssetInfo(libraryAsset: asset)
+            var info = AssetInfo(libraryAsset: asset)
+            info.isValid = false
+            return info
         }
     }
     
@@ -937,6 +939,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         assetInfo.url = urlToFile
                         if let size = try FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as? NSNumber {
                             assetInfo.size = size.int64Value
+                        } else {
+                            failCompletion()
+                            return
                         }
                         
                         if let name = asset.originalFilename {

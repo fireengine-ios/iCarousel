@@ -99,5 +99,6 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
 extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
         interactor.updateUserInfo()
+        interactor.updateSecretQuestionsResponse(with: selectedQuestion)
     }
 }

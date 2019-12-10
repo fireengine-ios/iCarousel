@@ -944,6 +944,7 @@ struct TextConstants {
     static let loginGSMNumber = NSLocalizedString("GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let syncFourGbVideo = NSLocalizedString("The videos larger than 4GB can not be uploaded to lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let syncZeroBytes = NSLocalizedString("Can't upload. File size is 0.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncNotEnoughMemory = NSLocalizedString("You have not enough memory in your device", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let cancelPurchase = NSLocalizedString("The purchase was canceled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1561,6 +1562,7 @@ struct TextConstants {
     static let profileDetailAddressTitle = NSLocalizedString("profile_detail_address_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profileDetailAddressSubtitle = NSLocalizedString("profile_detail_address_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profileDetailAddressPlaceholder = NSLocalizedString("profile_detail_address_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileDetailErrorContactCallCenter = NSLocalizedString("profile_detail_error_contact_call_center", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
