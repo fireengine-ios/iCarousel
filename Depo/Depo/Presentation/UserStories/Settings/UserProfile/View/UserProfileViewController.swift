@@ -172,9 +172,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             phoneView.isEditState = isEdit
         }
         
-        if addressView.textField.text == "" {
-            isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
-        }
+        isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
     }
     
     @objc private func onChangePassword() {
@@ -278,28 +276,29 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 extension UserProfileViewController: UITextFieldDelegate  {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        switch textField {
-        case nameView.textField:
-            nameView.hideSubtitleAnimated()
-
-        case surnameView.textField:
-            surnameView.hideSubtitleAnimated()
-
-        case emailView.textField:
-            emailView.hideSubtitleAnimated()
-
-        case birthdayDetailView.textField:
-            break
-
-        case phoneView.numberTextField, phoneView.codeTextField:
-            phoneView.hideSubtitleAnimated()
-            
-        case addressView.textField:
-            addressView.hideSubtitleAnimated()
-            
-        default:
-            assertionFailure()
-        }
+        /// this logic maybe will be need
+        //switch textField {
+        //case nameView.textField:
+        //    nameView.hideSubtitleAnimated()
+        //
+        //case surnameView.textField:
+        //    surnameView.hideSubtitleAnimated()
+        //
+        //case emailView.textField:
+        //    emailView.hideSubtitleAnimated()
+        //
+        //case birthdayDetailView.textField:
+        //    break
+        //
+        //case phoneView.numberTextField, phoneView.codeTextField:
+        //    phoneView.hideSubtitleAnimated()
+        //
+        //case addressView.textField:
+        //    addressView.hideSubtitleAnimated()
+        //
+        //default:
+        //    assertionFailure()
+        //}
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
