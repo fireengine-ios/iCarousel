@@ -352,7 +352,7 @@ extension UserProfileViewController: UserProfileViewInput {
         emailView.textField.text = userInfo.email
         addressView.textField.text = userInfo.address
         
-        let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == nil) ? TextConstants.userProfileSetSecretQuestionButton : TextConstants.userProfileEditSecretQuestion
+        let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == true) ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
         set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
         
         if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
@@ -387,6 +387,12 @@ extension UserProfileViewController: UserProfileViewInput {
     
     func endSaving() {
         navigationItem.rightBarButtonItem?.fixEnabledState()
+    }
+    
+    func securityQuestionWasSet() {
+        /// we need to update title if it was TextConstants.userProfileSetSecretQuestionButton
+        /// can be added any check for title or userInfo.
+        set(title: TextConstants.userProfileEditSecretQuestion, for: changeSecurityQuestionButton)
     }
     
 }
