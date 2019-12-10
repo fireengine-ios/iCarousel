@@ -85,12 +85,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     lazy var changePasswordButton: UIButton = {
         let newValue = UIButton(type: .custom)
-        let attributedString = NSAttributedString(string: TextConstants.userProfileChangePassword,
-                                                  attributes: [
-                                                    .font: UIFont.TurkcellSaturaDemFont(size: 18),
-                                                    .foregroundColor: UIColor.lrTealish,
-                                                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        newValue.setAttributedTitle(attributedString, for: .normal)
+        set(title: TextConstants.userProfileChangePassword, for: newValue)
         newValue.addTarget(self, action: #selector(onChangePassword), for: .touchUpInside)
         newValue.contentHorizontalAlignment = .left
         return newValue
@@ -98,12 +93,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     lazy var changeSecurityQuestionButton: UIButton = {
         let newValue = UIButton(type: .custom)
-        let attributedString = NSAttributedString(string: TextConstants.userProfileSecretQuestion,
-                                                  attributes: [
-                                                    .font: UIFont.TurkcellSaturaDemFont(size: 18),
-                                                    .foregroundColor: UIColor.lrTealish,
-                                                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        newValue.setAttributedTitle(attributedString, for: .normal)
+        set(title: TextConstants.userProfileEditSecretQuestion, for: newValue)
         newValue.addTarget(self, action: #selector(onChangeSecurityQuestion), for: .touchUpInside)
         newValue.contentHorizontalAlignment = .left
         return newValue
@@ -271,6 +261,16 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                   address: address)
         }
     }
+    
+    private func set(title: String, for button: UIButton) {
+        let attributedString = NSAttributedString(string: title,
+                                                  attributes: [
+                                                    .font: UIFont.TurkcellSaturaDemFont(size: 18),
+                                                    .foregroundColor: UIColor.lrTealish,
+                                                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        button.setAttributedTitle(attributedString, for: .normal)
+    }
+    
 }
 
 extension UserProfileViewController: UITextFieldDelegate  {
@@ -351,6 +351,9 @@ extension UserProfileViewController: UserProfileViewInput {
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
         addressView.textField.text = userInfo.address
+        
+        let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == nil) ? TextConstants.userProfileSetSecretQuestionButton : TextConstants.userProfileEditSecretQuestion
+        set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
         
         if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
             phoneView.codeTextField.text = "+\(countryCode)"
