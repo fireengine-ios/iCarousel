@@ -58,6 +58,13 @@ final class UploadService {
                     return
                 }
                 
+                guard fileSize > 0 else {
+                    assertionFailure(TextConstants.syncZeroBytes)
+                    let error = CustomErrors.text(TextConstants.syncZeroBytes)
+                    completion(ResponseResult.failed(error))
+                    return
+                }
+                
                 let dataRequest = getBaseUploadUrl { [weak self] result in
                     switch result {
                     case .success(let baseUploadUrl):
@@ -100,6 +107,13 @@ final class UploadService {
         
         guard fileSize < NumericConstants.fourGigabytes else {
             let error = CustomErrors.text(TextConstants.syncFourGbVideo)
+            completion(ResponseResult.failed(error))
+            return
+        }
+        
+        guard fileSize > 0 else {
+            assertionFailure(TextConstants.syncZeroBytes)
+            let error = CustomErrors.text(TextConstants.syncZeroBytes)
             completion(ResponseResult.failed(error))
             return
         }
