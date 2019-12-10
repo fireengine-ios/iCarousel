@@ -12,4 +12,5 @@ protocol UserProfileViewInput: class {
     func getNavigationController() -> UINavigationController?
     func getPhoneNumber() -> String
     func endSaving()
+    func securityQuestionWasSet()
 }

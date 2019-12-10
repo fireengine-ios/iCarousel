@@ -100,5 +100,6 @@ extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
         interactor.updateUserInfo()
         interactor.updateSecretQuestionsResponse(with: selectedQuestion)
+        view.securityQuestionWasSet()
     }
 }
