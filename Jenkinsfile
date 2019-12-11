@@ -5,7 +5,8 @@
 /***** PROJECT variables  BEGIN ******/
 
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
-apps = [ [
+apps = [ 
+[
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
@@ -13,7 +14,8 @@ apps = [ [
             prodTeamID: '7YZS5NTGYH',
             xcodeSchema: 'TC_Depo_LifeTech',
             xcodeTarget: 'TC_Depo_LifeTech'
-        ], [
+        ],
+ [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
@@ -224,10 +226,12 @@ pipeline {
             steps {
                 script {
                     STAGE_NAME = 'Build : Init'
-                    //sh "git config --global credential.helper cache"
+                    
                     def scmVars = checkout scm
                     def gitUrl = scmVars.GIT_URL.trim()
                     echo "git url: ${gitUrl}"
+
+                    sh 'rm -rf build'
 
                     stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
@@ -386,7 +390,7 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}")) {
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
                                 deployToTestflight app
                             }
 
