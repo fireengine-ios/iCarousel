@@ -31,7 +31,7 @@
 		0303A02D2397D0D000907F42 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		0303A02E2397D0D000907F42 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		0303A02F2397D0D000907F42 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
-		0303A0302397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A0302397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0312397D0D000907F42 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		0303A0322397D0D000907F42 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		0303A0332397D0D000907F42 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
@@ -94,7 +94,7 @@
 		0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
 		0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2983E2302AD1100C9811E /* BlurBackgroundPopup.swift */; };
-		0303A06F2397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A06F2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
 		0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
@@ -110,8 +110,8 @@
 		0303A07C2397D0D000907F42 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0F1205FF4E00048267D /* ErrorPresenter.swift */; };
 		0303A07D2397D0D000907F42 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
 		0303A07E2397D0D000907F42 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */; };
-		0303A07F2397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		0303A0802397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A07F2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0303A0802397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0812397D0D000907F42 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		0303A0822397D0D000907F42 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		0303A0832397D0D000907F42 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
@@ -180,7 +180,7 @@
 		0303A0C22397D0D000907F42 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		0303A0C32397D0D000907F42 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		0303A0C42397D0D000907F42 /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
-		0303A0C52397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A0C52397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0C62397D0D000907F42 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		0303A0C72397D0D000907F42 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		0303A0C82397D0D000907F42 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
@@ -289,7 +289,7 @@
 		0303A12F2397D0D000907F42 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
 		0303A1302397D0D000907F42 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		0303A1312397D0D000907F42 /* FilesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74431F05371B00124DF5 /* FilesDataSource.swift */; };
-		0303A1322397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A1322397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A1332397D0D000907F42 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		0303A1342397D0D000907F42 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		0303A1352397D0D000907F42 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
@@ -347,7 +347,7 @@
 		0303A1692397D0D000907F42 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		0303A16A2397D0D000907F42 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		0303A16B2397D0D000907F42 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
-		0303A16C2397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A16C2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A16D2397D0D000907F42 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		0303A16E2397D0D000907F42 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		0303A16F2397D0D000907F42 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
@@ -409,7 +409,7 @@
 		0303A1A72397D0D000907F42 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
 		0303A1A82397D0D000907F42 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */; };
 		0303A1A92397D0D000907F42 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
-		0303A1AA2397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A1AA2397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A1AB2397D0D000907F42 /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
 		0303A1AC2397D0D000907F42 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		0303A1AD2397D0D000907F42 /* AutoSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */; };
@@ -881,9 +881,9 @@
 		0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* PhotoVideoSegmentedController.swift */; };
 		0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32121787FEF006CFA50 /* UpdateCheck.m */; };
-		0303A3822397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A3822397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
-		0303A3842397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A3842397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
 		0303A3862397D0D000907F42 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		0303A3872397D0D000907F42 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
@@ -1059,7 +1059,7 @@
 		0303A4312397D0D000907F42 /* FileInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */; };
 		0303A4322397D0D000907F42 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		0303A4332397D0D000907F42 /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
-		0303A4342397D0D000907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A4342397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A4352397D0D000907F42 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		0303A4362397D0D000907F42 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		0303A4372397D0D000907F42 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -1547,7 +1547,7 @@
 		0303A61D2397D0D000907F42 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
 		0303A61E2397D0D000907F42 /* kup_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACE22008AD6F003D8E05 /* kup_selected@2x.png */; };
 		0303A61F2397D0D000907F42 /* duz_cizgi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC882008AD6F003D8E05 /* duz_cizgi@2x.png */; };
-		0303A6202397D0D000907F42 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		0303A6202397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0303A6212397D0D000907F42 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		0303A6222397D0D000907F42 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
 		0303A6232397D0D000907F42 /* CampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A18340235855BD0095719F /* CampaignCard.xib */; };
@@ -1900,14 +1900,14 @@
 		0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD012008AD6F003D8E05 /* paylas_akilli_depo.png */; };
 		0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEAB2008AD6F003D8E05 /* sticker_resize.png */; };
 		0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD5C2008AD6F003D8E05 /* status_badge@3x.png */; };
-		0303A7812397D0D000907F42 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		0303A7812397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC362008AD6F003D8E05 /* alt_cizgili_secili.png */; };
 		0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
 		0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD802008AD6F003D8E05 /* text_selected@3x.png */; };
 		0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC602008AD6F003D8E05 /* cizgi_1@2x.png */; };
 		0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC02008AD6F003D8E05 /* ins_paylas@3x.png */; };
-		0303A7882397D0D000907F42 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		0303A7882397D0D000907F42 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51EA22CF5D8700270448 /* CreateStoryAudioSelectionItemViewController.xib */; };
 		0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
@@ -2131,7 +2131,7 @@
 		0303A8902397D14900907F42 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		0303A8912397D14900907F42 /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
 		0303A8922397D14900907F42 /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
-		0303A8932397D14900907F42 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0303A8932397D14900907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A8942397D14900907F42 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		0303A8982397D14900907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		0303A8992397D14900907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FF22BCD41700108958 /* Info.plist */; };
@@ -2415,7 +2415,7 @@
 		4B34A3F92334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
 		4B34A3FA2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
 		4B34A3FB2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */; };
-		4B5A01E9CB4C68B15702A751 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		4B5A01E9CB4C68B15702A751 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		4B857860233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
 		4B857861233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
 		4B857862233908B400F378AB /* SubjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B85785E233908B400F378AB /* SubjectDetailsViewController.swift */; };
@@ -4948,7 +4948,7 @@
 		8C3BA36822B3CC49006D901E /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		8C3BA36922B3CC49006D901E /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
 		8C3BA36A22B3CC49006D901E /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
-		8C3BA36B22B3CC49006D901E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C3BA36B22B3CC49006D901E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C3BA36C22B3CC49006D901E /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		8C3BA37222B3CC49006D901E /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB3762073ADCB00C54C9B /* InfoEnterprise.plist */; };
@@ -5461,7 +5461,7 @@
 		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
 		9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
-		924C84F95ACBE2E0F487F75A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		924C84F95ACBE2E0F487F75A /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		925B59A522C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B59A422C3BF85004697F3 /* CreateStorySelectionController.swift */; };
 		925B59A622C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B59A422C3BF85004697F3 /* CreateStorySelectionController.swift */; };
 		925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */; };
@@ -5845,7 +5845,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
-		B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		B543FB0E211C847C00E009C4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B546DF75235886C300EC8572 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
@@ -6614,7 +6614,7 @@
 		CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
-		CE78480922A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78480922A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		CE78480C22A685FB00662219 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
@@ -6678,8 +6678,8 @@
 		CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0F1205FF4E00048267D /* ErrorPresenter.swift */; };
 		CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
 		CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */; };
-		CE78484F22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		CE78485022A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78484F22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78485022A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CE78485222A685FB00662219 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		CE78485322A685FB00662219 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
@@ -6736,7 +6736,7 @@
 		CE78488A22A685FB00662219 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
 		CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
-		CE78488D22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78488D22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
@@ -6832,7 +6832,7 @@
 		CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
 		CE7848F322A685FB00662219 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74431F05371B00124DF5 /* FilesDataSource.swift */; };
-		CE7848F522A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE7848F522A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
@@ -6882,7 +6882,7 @@
 		CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
-		CE78492822A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78492822A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78492922A685FB00662219 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
@@ -6937,7 +6937,7 @@
 		CE78495E22A685FB00662219 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
 		CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */; };
 		CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
-		CE78496122A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78496122A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
 		CE78496322A685FB00662219 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */; };
@@ -7351,7 +7351,7 @@
 		CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */; };
 		CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32121787FEF006CFA50 /* UpdateCheck.m */; };
 		CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
-		CE784B1C22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE784B1C22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
 		CE784B1E22A685FB00662219 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		CE784B1F22A685FB00662219 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
@@ -7510,7 +7510,7 @@
 		CE784BBD22A685FB00662219 /* FileInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */; };
 		CE784BBE22A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
-		CE784BC022A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE784BC022A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE784BC122A685FB00662219 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -7730,7 +7730,7 @@
 		CE784CA122A685FB00662219 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
 		CE784CA222A685FB00662219 /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
-		CE784CA522A685FB00662219 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		CE784CA522A685FB00662219 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D81EFBDDC700E25989 /* AdSupport.framework */; };
 		CE784CA722A685FB00662219 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		CE784CA822A685FB00662219 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
@@ -7943,7 +7943,7 @@
 		CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
 		CE784D8022A685FB00662219 /* kup_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACE22008AD6F003D8E05 /* kup_selected@2x.png */; };
 		CE784D8122A685FB00662219 /* duz_cizgi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC882008AD6F003D8E05 /* duz_cizgi@2x.png */; };
-		CE784D8322A685FB00662219 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CE784D8322A685FB00662219 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
 		CE784D8622A685FB00662219 /* CRYRotateImageViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ADB12008AD6F003D8E05 /* CRYRotateImageViewController.nib */; };
@@ -11513,7 +11513,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				924C84F95ACBE2E0F487F75A /* BuildFile in Frameworks */,
+				924C84F95ACBE2E0F487F75A /* (null) in Frameworks */,
 				971A783D6859B6D41781991D /* Pods_LifeTech_NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11628,7 +11628,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B5A01E9CB4C68B15702A751 /* BuildFile in Frameworks */,
+				4B5A01E9CB4C68B15702A751 /* (null) in Frameworks */,
 				B2B2E829715723912462D189 /* Pods_LifeboxNotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11677,7 +11677,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B543FB0E211C847C00E009C4 /* BuildFile in Frameworks */,
+				B543FB0E211C847C00E009C4 /* (null) in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -11725,7 +11725,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE784CA522A685FB00662219 /* BuildFile in Frameworks */,
+				CE784CA522A685FB00662219 /* (null) in Frameworks */,
 				CE784CA622A685FB00662219 /* AdSupport.framework in Frameworks */,
 				CE784CA722A685FB00662219 /* Photos.framework in Frameworks */,
 				CE784CA822A685FB00662219 /* Social.framework in Frameworks */,
@@ -20569,7 +20569,7 @@
 				0303A61D2397D0D000907F42 /* LatestUploadCardCell.xib in Resources */,
 				0303A61E2397D0D000907F42 /* kup_selected@2x.png in Resources */,
 				0303A61F2397D0D000907F42 /* duz_cizgi@2x.png in Resources */,
-				0303A6202397D0D000907F42 /* BuildFile in Resources */,
+				0303A6202397D0D000907F42 /* (null) in Resources */,
 				0303A6212397D0D000907F42 /* InstagramAuthViewController.xib in Resources */,
 				0303A6222397D0D000907F42 /* CollectionViewCellForFaceImage.xib in Resources */,
 				0303A6232397D0D000907F42 /* CampaignCard.xib in Resources */,
@@ -20922,14 +20922,14 @@
 				0303A77E2397D0D000907F42 /* paylas_akilli_depo.png in Resources */,
 				0303A77F2397D0D000907F42 /* sticker_resize.png in Resources */,
 				0303A7802397D0D000907F42 /* status_badge@3x.png in Resources */,
-				0303A7812397D0D000907F42 /* BuildFile in Resources */,
+				0303A7812397D0D000907F42 /* (null) in Resources */,
 				0303A7822397D0D000907F42 /* alt_cizgili_secili.png in Resources */,
 				0303A7832397D0D000907F42 /* OurLocalizable.strings in Resources */,
 				0303A7842397D0D000907F42 /* PhotoVideoController.xib in Resources */,
 				0303A7852397D0D000907F42 /* text_selected@3x.png in Resources */,
 				0303A7862397D0D000907F42 /* cizgi_1@2x.png in Resources */,
 				0303A7872397D0D000907F42 /* ins_paylas@3x.png in Resources */,
-				0303A7882397D0D000907F42 /* BuildFile in Resources */,
+				0303A7882397D0D000907F42 /* (null) in Resources */,
 				0303A7892397D0D000907F42 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				0303A78A2397D0D000907F42 /* ProgressCard.xib in Resources */,
 				0303A78B2397D0D000907F42 /* SecurityQuestionView.xib in Resources */,
@@ -22801,7 +22801,7 @@
 				CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */,
 				CE784D8022A685FB00662219 /* kup_selected@2x.png in Resources */,
 				CE784D8122A685FB00662219 /* duz_cizgi@2x.png in Resources */,
-				CE784D8322A685FB00662219 /* BuildFile in Resources */,
+				CE784D8322A685FB00662219 /* (null) in Resources */,
 				CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */,
 				CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */,
 				73A18343235855BD0095719F /* CampaignCard.xib in Resources */,
@@ -24340,7 +24340,7 @@
 				0303A02D2397D0D000907F42 /* UIButton+Properties.swift in Sources */,
 				0303A02E2397D0D000907F42 /* HomePageInteractorOutput.swift in Sources */,
 				0303A02F2397D0D000907F42 /* PackagesPresenter.swift in Sources */,
-				0303A0302397D0D000907F42 /* BuildFile in Sources */,
+				0303A0302397D0D000907F42 /* (null) in Sources */,
 				0303A0312397D0D000907F42 /* StoriesInitializer.swift in Sources */,
 				0303A0322397D0D000907F42 /* ApplicationPalette.swift in Sources */,
 				0303A0332397D0D000907F42 /* ContactBackupOld.swift in Sources */,
@@ -24403,7 +24403,7 @@
 				0303A06C2397D0D000907F42 /* FaceImageDisplayManager.swift in Sources */,
 				0303A06D2397D0D000907F42 /* MyStorageViewController.swift in Sources */,
 				0303A06E2397D0D000907F42 /* BlurBackgroundPopup.swift in Sources */,
-				0303A06F2397D0D000907F42 /* BuildFile in Sources */,
+				0303A06F2397D0D000907F42 /* (null) in Sources */,
 				0303A0702397D0D000907F42 /* StreamReaderWriter.swift in Sources */,
 				0303A0712397D0D000907F42 /* SearchViewInteractorInput.swift in Sources */,
 				0303A0722397D0D000907F42 /* UITableView+Extensions.swift in Sources */,
@@ -24419,8 +24419,8 @@
 				0303A07C2397D0D000907F42 /* ErrorPresenter.swift in Sources */,
 				0303A07D2397D0D000907F42 /* LoginPresenter.swift in Sources */,
 				0303A07E2397D0D000907F42 /* FreeAppSpaceConfigurator.swift in Sources */,
-				0303A07F2397D0D000907F42 /* BuildFile in Sources */,
-				0303A0802397D0D000907F42 /* BuildFile in Sources */,
+				0303A07F2397D0D000907F42 /* (null) in Sources */,
+				0303A0802397D0D000907F42 /* (null) in Sources */,
 				0303A0812397D0D000907F42 /* CreateStoryMusicEnterView.swift in Sources */,
 				0303A0822397D0D000907F42 /* UIColor+Adjust.swift in Sources */,
 				0303A0832397D0D000907F42 /* AppResponsivenessService.swift in Sources */,
@@ -24489,7 +24489,7 @@
 				0303A0C22397D0D000907F42 /* OperationProgressService.swift in Sources */,
 				0303A0C32397D0D000907F42 /* PhotoVideoDetailCell.swift in Sources */,
 				0303A0C42397D0D000907F42 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
-				0303A0C52397D0D000907F42 /* BuildFile in Sources */,
+				0303A0C52397D0D000907F42 /* (null) in Sources */,
 				0303A0C62397D0D000907F42 /* VisualMusicPlayerViewInput.swift in Sources */,
 				0303A0C72397D0D000907F42 /* AutoSyncModuleInput.swift in Sources */,
 				0303A0C82397D0D000907F42 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -24598,7 +24598,7 @@
 				0303A12F2397D0D000907F42 /* AutoSyncInteractor.swift in Sources */,
 				0303A1302397D0D000907F42 /* PageCompounder.swift in Sources */,
 				0303A1312397D0D000907F42 /* FilesDataSource.swift in Sources */,
-				0303A1322397D0D000907F42 /* BuildFile in Sources */,
+				0303A1322397D0D000907F42 /* (null) in Sources */,
 				0303A1332397D0D000907F42 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				0303A1342397D0D000907F42 /* UIApplication+topController.swift in Sources */,
 				0303A1352397D0D000907F42 /* VisualMusicPlayerViewOutput.swift in Sources */,
@@ -24656,7 +24656,7 @@
 				0303A1692397D0D000907F42 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				0303A16A2397D0D000907F42 /* FreeAppSpace.swift in Sources */,
 				0303A16B2397D0D000907F42 /* UploadFromLifeBoxInitializer.swift in Sources */,
-				0303A16C2397D0D000907F42 /* BuildFile in Sources */,
+				0303A16C2397D0D000907F42 /* (null) in Sources */,
 				0303A16D2397D0D000907F42 /* DataStorage.swift in Sources */,
 				0303A16E2397D0D000907F42 /* CALayer+Animation.swift in Sources */,
 				0303A16F2397D0D000907F42 /* FaceImageAddNameRouter.swift in Sources */,
@@ -24718,7 +24718,7 @@
 				0303A1A72397D0D000907F42 /* AuthenticationService.swift in Sources */,
 				0303A1A82397D0D000907F42 /* ReachabilityService.swift in Sources */,
 				0303A1A92397D0D000907F42 /* AutoNextEditingRowPasser.swift in Sources */,
-				0303A1AA2397D0D000907F42 /* BuildFile in Sources */,
+				0303A1AA2397D0D000907F42 /* (null) in Sources */,
 				0303A1AB2397D0D000907F42 /* FloatingContainerVC.swift in Sources */,
 				0303A1AC2397D0D000907F42 /* Array+Safe.swift in Sources */,
 				0303A1AD2397D0D000907F42 /* AutoSyncRouter.swift in Sources */,
@@ -25190,9 +25190,9 @@
 				0303A37F2397D0D000907F42 /* InstaPickCampaignService.swift in Sources */,
 				0303A3802397D0D000907F42 /* PhotoVideoSegmentedController.swift in Sources */,
 				0303A3812397D0D000907F42 /* UpdateCheck.m in Sources */,
-				0303A3822397D0D000907F42 /* BuildFile in Sources */,
+				0303A3822397D0D000907F42 /* (null) in Sources */,
 				0303A3832397D0D000907F42 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				0303A3842397D0D000907F42 /* BuildFile in Sources */,
+				0303A3842397D0D000907F42 /* (null) in Sources */,
 				0303A3852397D0D000907F42 /* ContactsSyncService.swift in Sources */,
 				0303A3862397D0D000907F42 /* Mapping.swift in Sources */,
 				0303A3872397D0D000907F42 /* LoginSettingsViewController.swift in Sources */,
@@ -25368,7 +25368,7 @@
 				0303A4312397D0D000907F42 /* FileInfoInteractorInput.swift in Sources */,
 				0303A4322397D0D000907F42 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				0303A4332397D0D000907F42 /* SuggestionTableSectionHeader.swift in Sources */,
-				0303A4342397D0D000907F42 /* BuildFile in Sources */,
+				0303A4342397D0D000907F42 /* (null) in Sources */,
 				0303A4352397D0D000907F42 /* PromoView.swift in Sources */,
 				0303A4362397D0D000907F42 /* InstapickAnalyze.swift in Sources */,
 				0303A4372397D0D000907F42 /* AuthorityType.swift in Sources */,
@@ -25773,7 +25773,7 @@
 				0303A8902397D14900907F42 /* ResponseResult.swift in Sources */,
 				0303A8912397D14900907F42 /* FileProviderEnumerator.swift in Sources */,
 				0303A8922397D14900907F42 /* Error+Network.swift in Sources */,
-				0303A8932397D14900907F42 /* BuildFile in Sources */,
+				0303A8932397D14900907F42 /* (null) in Sources */,
 				0303A8942397D14900907F42 /* PasscodeStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -27269,7 +27269,7 @@
 				8C3BA36822B3CC49006D901E /* ResponseResult.swift in Sources */,
 				8C3BA36922B3CC49006D901E /* FileProviderEnumerator.swift in Sources */,
 				8C3BA36A22B3CC49006D901E /* Error+Network.swift in Sources */,
-				8C3BA36B22B3CC49006D901E /* BuildFile in Sources */,
+				8C3BA36B22B3CC49006D901E /* (null) in Sources */,
 				8C3BA36C22B3CC49006D901E /* PasscodeStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -28987,7 +28987,7 @@
 				CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */,
 				CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */,
 				CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */,
-				CE78480922A685FB00662219 /* BuildFile in Sources */,
+				CE78480922A685FB00662219 /* (null) in Sources */,
 				CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */,
 				CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */,
 				CE78480C22A685FB00662219 /* ContactBackupOld.swift in Sources */,
@@ -29065,8 +29065,8 @@
 				CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */,
 				CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */,
 				CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */,
-				CE78484F22A685FB00662219 /* BuildFile in Sources */,
-				CE78485022A685FB00662219 /* BuildFile in Sources */,
+				CE78484F22A685FB00662219 /* (null) in Sources */,
+				CE78485022A685FB00662219 /* (null) in Sources */,
 				8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */,
 				CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */,
 				CE78485222A685FB00662219 /* AppResponsivenessService.swift in Sources */,
@@ -29135,7 +29135,7 @@
 				CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */,
 				CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */,
 				7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
-				CE78488D22A685FB00662219 /* BuildFile in Sources */,
+				CE78488D22A685FB00662219 /* (null) in Sources */,
 				CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */,
 				CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -29244,7 +29244,7 @@
 				CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */,
 				CE7848F322A685FB00662219 /* PageCompounder.swift in Sources */,
 				CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */,
-				CE7848F522A685FB00662219 /* BuildFile in Sources */,
+				CE7848F522A685FB00662219 /* (null) in Sources */,
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
@@ -29302,7 +29302,7 @@
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
-				CE78492822A685FB00662219 /* BuildFile in Sources */,
+				CE78492822A685FB00662219 /* (null) in Sources */,
 				CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				CE78492922A685FB00662219 /* DataStorage.swift in Sources */,
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
@@ -29365,7 +29365,7 @@
 				CE78495E22A685FB00662219 /* AuthenticationService.swift in Sources */,
 				CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */,
 				CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */,
-				CE78496122A685FB00662219 /* BuildFile in Sources */,
+				CE78496122A685FB00662219 /* (null) in Sources */,
 				CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */,
 				CE78496322A685FB00662219 /* Array+Safe.swift in Sources */,
 				CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */,
@@ -29839,7 +29839,7 @@
 				737685E423704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				CE784B1A22A685FB00662219 /* UpdateCheck.m in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				CE784B1C22A685FB00662219 /* BuildFile in Sources */,
+				CE784B1C22A685FB00662219 /* (null) in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,
 				CE784B1E22A685FB00662219 /* Mapping.swift in Sources */,
 				CE784B1F22A685FB00662219 /* LoginSettingsViewController.swift in Sources */,
@@ -30015,7 +30015,7 @@
 				CE784BBD22A685FB00662219 /* FileInfoInteractorInput.swift in Sources */,
 				CE784BBE22A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */,
-				CE784BC022A685FB00662219 /* BuildFile in Sources */,
+				CE784BC022A685FB00662219 /* (null) in Sources */,
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
@@ -34105,7 +34105,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.9;
+				CURRENT_PROJECT_VERSION = 36.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34168,7 +34168,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.9;
+				CURRENT_PROJECT_VERSION = 36.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34227,7 +34227,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.9;
+				CURRENT_PROJECT_VERSION = 36.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34287,7 +34287,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.35.9;
+				CURRENT_PROJECT_VERSION = 36.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
