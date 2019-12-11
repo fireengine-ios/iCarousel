@@ -9,12 +9,14 @@
 import Alamofire
 
 struct AlbumsPatch {
-    static let album =  "album"
-    static let deleteAlbums =  "album/trash"
+    static let album = "album"
+//    static let deleteAlbums =  "album/trash"
     static let addPhotosToAlbum = "album/addFiles/%@"
     static let deletePhotosFromAlbum = "album/removeFiles/%@"
     static let renameAlbum = "album/rename/%@?newLabel=%@"
     static let changeCoverPhoto = "album/coverPhoto/%@?coverPhotoUuid=%@"
+    
+    static let trashAlbums = "album/trash"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -50,7 +52,14 @@ class DeleteAlbums: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: AlbumsPatch.deleteAlbums)
+        let path: String = String(format: AlbumsPatch.album)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
+class TrashAlbums: DeleteAlbums {
+    override var patch: URL {
+        let path: String = String(format: AlbumsPatch.trashAlbums)
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -216,7 +225,7 @@ class PhotosAlbumService: BaseRequestService {
 
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
-            self.delete(albums: deleteAlbums, success: success, fail: fail)
+            self.trash(albums: deleteAlbums, success: success, fail: fail)
         }
     }
     
@@ -322,5 +331,23 @@ class PhotosAlbumService: BaseRequestService {
         SessionManager.customDefault
             .request(url)
             .responseObject(handler)
+    }
+    
+    func trash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService trashAlbums")
+
+        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        guard !deleteAlbums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
+        let params = TrashAlbums(albums: deleteAlbums)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            debugLog("PhotosAlbumService trashAlbums success")
+
+            success?(deleteAlbums)
+        }, fail: fail)
+        executeDeleteRequest(param: params, handler: handler)
     }
 }
