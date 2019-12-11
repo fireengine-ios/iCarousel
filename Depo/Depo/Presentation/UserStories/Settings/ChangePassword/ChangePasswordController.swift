@@ -238,12 +238,23 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         let errorText = error.localizedDescription
         
         switch error {
-        case .invalidCaptcha, .captchaAnswerIsEmpty:
+        case .invalidCaptcha,
+             .captchaAnswerIsEmpty:
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToView(captchaView)
             
-        case .invalidNewPassword, .newPasswordIsEmpty:
+        case .invalidNewPassword,
+             .newPasswordIsEmpty,
+             .passwordInResentHistory,
+             .uppercaseMissingInPassword,
+             .lowercaseMissingInPassword,
+             .passwordIsEmpty,
+             .passwordLengthIsBelowLimit,
+             .passwordLengthExceeded,
+             .passwordSequentialCaharacters,
+             .passwordSameCaharacters,
+             .numberMissingInPassword:
             showErrorColorInNewPasswordView = true
             
             /// important check to show error only once
@@ -255,12 +266,14 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             newPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(newPasswordView)
             
-        case .invalidOldPassword, .oldPasswordIsEmpty:
+        case .invalidOldPassword,
+             .oldPasswordIsEmpty:
             oldPasswordView.showTextAnimated(text: errorText)
             oldPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(oldPasswordView)
             
-        case .notMatchNewAndRepeatPassword, .repeatPasswordIsEmpty:
+        case .notMatchNewAndRepeatPassword,
+             .repeatPasswordIsEmpty:
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)

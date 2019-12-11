@@ -12,7 +12,7 @@ import SDWebImage
 
 
 final class ImageDownloadOperation: Operation, SDWebImageOperation {
-    typealias ImageDownloadOperationCallback = ((AnyObject?) -> Void)
+    typealias ImageDownloadOperationCallback = ((AnyObject?, Data?) -> Void)
     var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)
@@ -50,11 +50,12 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         }
         
         guard let trimmedURL = url?.byTrimmingQuery else {
-            outputBlock?(nil)
+            outputBlock?(nil, nil)
             return
         }
         
-        var outputImage: UIImage? = nil
+        var outputImage: UIImage?
+        var outputData: Data?
         
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
@@ -73,6 +74,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                 }
                 
                 outputImage = image
+                outputData = data
                 self.semaphore.signal()
             })
             .task
@@ -83,7 +85,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         
         defer {
             task?.cancel()
-            outputBlock?(outputImage)
+            outputBlock?(outputImage, outputData)
             semaphore.signal()
         }
     }

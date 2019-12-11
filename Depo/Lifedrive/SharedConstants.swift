@@ -13,7 +13,7 @@ struct SharedConstants {
     private init() {}
     
     #if APPSTORE
-    static let groupIdentifier = "group.com.turkcell.lifedrive"
+    static let groupIdentifier = "group.com.lcv.billo"
     
     #elseif ENTERPRISE
     static let groupIdentifier = "group.com.turkcell.lifedrive.ent"
@@ -41,5 +41,6 @@ struct SharedConstants {
     static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
-    static let applicationQueriesScheme = "akillidepo://"
+    static let applicationQueriesSchemeShort = "billo"
+    static let applicationQueriesScheme = applicationQueriesSchemeShort + "://"
 }

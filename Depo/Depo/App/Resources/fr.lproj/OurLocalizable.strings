@@ -752,7 +752,7 @@ Full stop added*/
 "widgetTopTitleInactive" = "Auto-Synchronisation est inactif";
 "widgetTopTitleInProgress" = "Auto-Synchronisation est en cours de réalisation";
 "error_authentication_message" = "Veuillez ouvrir les applications et la connexion pour continuer";
-"error_authentication_title" = "Connectez-vous à lifebox";
+"error_authentication_title" = "Connectez-vous à %@";
 
 /*Fuzzy*/
 "error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir lifebox et désactiver le mot de passe pour continuer";
@@ -1534,29 +1534,29 @@ Please check I have understood the intended command here*/
 "campaign_detail_info_title" = "Information sur la campagne";
 "campaign_detail_info_description" = "Notre campagne de téléphone est terminée. Les résultats de tirade au sort seront annoncés le 20 février à partir de nos comptes de médias sociaux. Vous pouvez accéder vos droits en total pour tirage au sort à partir des informations ci-dessus. Suivez nos comptes de médias sociaux pour voir les résultats!";
 "AccessibilityGiftButton" = "";
-"landing_start_button" = "";
-"landing_billo_title_0" = "";
-"landing_billo_subtitle_0" = "";
-"landing_billo_title_1" = "";
-"landing_billo_subtitle_1" = "";
-"landing_billo_title_2" = "";
-"landing_billo_subtitle_2" = "";
-"landing_billo_title_3" = "";
-"landing_billo_subtitle_3" = "";
-"landing_billo_title_4" = "";
-"landing_billo_subtitle_4" = "";
-"landing_billo_title_5" = "";
-"landing_billo_subtitle_5" = "";
-"landing_billo_title_6" = "";
-"landing_billo_subtitle_6" = "";
-"landing_billo_title_7" = "";
-"landing_billo_subtitle_7" = "";
+"landing_start_button" = "Commencer";
+"landing_billo_title_0" = "Vivre et garder le meilleur";
+"landing_billo_subtitle_0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans Billo! Accéder et se souvenir à tout moment et en tout lieu";
+"landing_billo_title_1" = "Synchronisation automatique";
+"landing_billo_subtitle_1" = "Vos photos et vidéos sont instantanément sur Billo!";
+"landing_billo_title_2" = "Reconnaissance du visage / image";
+"landing_billo_subtitle_2" = "Trouver facilement vos souvenirs avec des albums intelligents";
+"landing_billo_title_3" = "Synchoniser les contacts";
+"landing_billo_subtitle_3" = "Sauvegardez vos contacts, ne les perdez jamais !";
+"landing_billo_title_4" = "Faire de l’espace";
+"landing_billo_subtitle_4" = "Libérez de l'espace sur votre téléphone pour de nouveaux souvenirs !";
+"landing_billo_title_5" = "Stories automatiques";
+"landing_billo_subtitle_5" = "Rappelez-vous vos souvenirs avec des films et des collages créés automatiquement";
+"landing_billo_title_6" = "Réseaux sociaux";
+"landing_billo_subtitle_6" = "Transférer facillement toutes vos archives de réseaux sociaux vers Billo";
+"landing_billo_title_7" = "Imprimer";
+"landing_billo_subtitle_7" = "Décorez votre espace de vie avec vos souvenirs";
 
 /*introduce billo*/
-"billo_intro_title" = "";
-"billo_intro_subtitle" = "";
-"billo_intro_create_account_button" = "";
-"billo_intro_login_button" = "";
+"billo_intro_title" = "Vivre, Collecter, Se souvenir";
+"billo_intro_subtitle" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre Billo. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
+"billo_intro_create_account_button" = "Créer un Nouveau Compte";
+"billo_intro_login_button" = "Me connecter";
 "campaign_vc_result_button" = "Afficher le résultat";
 "campaign_vc_edit_profile_button" = "Modifier votre profil";
 "campaign_vc_become_premium_button" = "Je veux devenir Premium";
@@ -1583,3 +1583,8 @@ Please check I have understood the intended command here*/
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

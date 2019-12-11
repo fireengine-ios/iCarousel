@@ -537,6 +537,15 @@ final class MediaItemOperationsService {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
     }
     
+    func removeZeroBytesLocalItems(completion: @escaping BoolHandler) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == true AND \(#keyPath(MediaItem.fileSizeValue)) == 0")
+        request.predicate = predicate
+        let context = coreDataStack.newChildBackgroundContext
+        
+        deleteObjects(fromFetch: request, context: context, completion: completion)
+    }
+    
     
     private let localsAppendingQueue: OperationQueue = {
         let queue = OperationQueue()

@@ -118,7 +118,7 @@ final class AlbumCard: BaseCardView {
     
     override func viewDidEndShow() {
 //        previewImageView.image = nil
-        previewImageView.checkIsNeedCancelRequest()
+        previewImageView.cancelLoadRequest()
     }
     
     private func setupAlbumDescriptionWith(albumName: String, photosCount: Int) {

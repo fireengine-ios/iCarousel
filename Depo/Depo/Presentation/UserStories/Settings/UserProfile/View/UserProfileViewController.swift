@@ -1,41 +1,104 @@
-//
-//  UserProfileUserProfileViewController.swift
-//  Depo
-//
-//  Created by Oleg on 13/07/2017.
-//  Copyright © 2017 LifeTech. All rights reserved.
-//
-
 import UIKit
-import Typist
 
-final class UserProfileViewController: BaseViewController, UserProfileViewInput {
+final class UserProfileViewController: ViewController, KeyboardHandler {
+    
     var output: UserProfileViewOutput!
     
-    //MARK: IBOutlet
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var viewForContent: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView! {
+        willSet {
+            newValue.delaysContentTouches = false
+        }
+    }
     
-    @IBOutlet private weak var nameDetailView: ProfileFieldView!
-    @IBOutlet private weak var surnameDetailView: ProfileFieldView!
-    @IBOutlet private weak var emailDetailView: ProfileFieldView!
-    @IBOutlet private weak var gsmDetailView: ProfileFieldView!
-    @IBOutlet private weak var birthdayDetailView: ProfileBirthdayFieldView!
+    @IBOutlet private weak var stackView: UIStackView! {
+        willSet {
+            newValue.spacing = 24
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+            
+            let fullnameStackView = UIStackView(arrangedSubviews: [nameView, surnameView])
+            fullnameStackView.spacing = 20
+            fullnameStackView.axis = .horizontal
+            fullnameStackView.alignment = .fill
+            fullnameStackView.distribution = .fillEqually
+            fullnameStackView.backgroundColor = .white
+            fullnameStackView.isOpaque = true
+            
+            newValue.addArrangedSubview(fullnameStackView)
+            newValue.addArrangedSubview(emailView)
+            newValue.addArrangedSubview(phoneView)
+            newValue.addArrangedSubview(birthdayDetailView)
+            newValue.addArrangedSubview(addressView)
+            newValue.addArrangedSubview(changePasswordButton)
+            newValue.addArrangedSubview(changeSecurityQuestionButton)
+        }
+    }
     
-    @IBOutlet weak var stackView: UIStackView!
+    let nameView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = TextConstants.userProfileName
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
+        newValue.textField.autocorrectionType = .no
+        return newValue
+    }()
     
-    private let secretQuestionView = SetSecurityCredentialsView.initFromNib()
+    let surnameView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = TextConstants.userProfileSurname
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
+        newValue.textField.autocorrectionType = .no
+        return newValue
+    }()
     
-    //MARK: Vars
-    private let keyboard = Typist.shared
+    let emailView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
+        newValue.textField.keyboardType = .emailAddress
+        newValue.textField.autocorrectionType = .no
+        newValue.textField.autocapitalizationType = .none
+        return newValue
+    }()
     
-    private var name: String?
-    private var surname: String?
-    private var email: String?
-    private var number: String?
-    private var birthday: String?
-    private var secretQuestion: SecretQuestionsResponse?
-
+    let phoneView = ProfilePhoneEnterView()
+    
+    private let birthdayDetailView: ProfileBirthdayFieldView = {
+        let newValue = ProfileBirthdayFieldView()
+        newValue.title = TextConstants.userProfileBirthday
+        return newValue
+    }()
+    
+    let addressView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = TextConstants.profileDetailAddressTitle
+        newValue.subtitleLabel.text = TextConstants.profileDetailAddressSubtitle
+        newValue.textField.quickDismissPlaceholder = TextConstants.profileDetailAddressPlaceholder
+        newValue.textField.autocorrectionType = .no
+        newValue.textField.returnKeyType = .done
+        return newValue
+    }()
+    
+    lazy var changePasswordButton: UIButton = {
+        let newValue = UIButton(type: .custom)
+        set(title: TextConstants.userProfileChangePassword, for: newValue)
+        newValue.addTarget(self, action: #selector(onChangePassword), for: .touchUpInside)
+        newValue.contentHorizontalAlignment = .left
+        return newValue
+    }()
+    
+    lazy var changeSecurityQuestionButton: UIButton = {
+        let newValue = UIButton(type: .custom)
+        set(title: TextConstants.userProfileEditSecretQuestion, for: newValue)
+        newValue.addTarget(self, action: #selector(onChangeSecurityQuestion), for: .touchUpInside)
+        newValue.contentHorizontalAlignment = .left
+        return newValue
+    }()
+    
     private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
                                                   tintColor: .white,
@@ -51,226 +114,124 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                                    style: .plain,
                                                    target: self,
                                                    selector: #selector(onReadyButtonAction))
-
-    //MARK: init / deinit
-    deinit {
-        keyboard.stop()
-    }
     
-    //MARK: Life cycle
+    private var name: String?
+    private var surname: String?
+    private var email: String?
+    private var phoneCode: String?
+    private var phoneNumber: String?
+    private var birthday: String?
+    private var address: String?
+    
+    private var isShortPhoneNumber = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        automaticallyAdjustsScrollViewInsets = false
+        setTitle(withString: TextConstants.myProfile)
+        addTapGestureToHideKeyboard()
+        setupEditState(false)
         
-        setupFields()
-        configureKeyboard()
-
-        configureNavBar()
-        navigationBarWithGradientStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        nameView.textField.delegate = self
+        surnameView.textField.delegate = self
+        emailView.textField.delegate = self
+        phoneView.responderOnNext = birthdayDetailView
+        addressView.textField.delegate = self
+        
+        // TODO: responderOnNext for birthdayDetailView
+        //birthdayDetailView.textField.delegate = self
         
         output.viewIsReady()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-    }
-    
-    //MARK: Utility Methods(Private)
-    fileprivate func configureKeyboard() {
-        keyboard
-            .on(event: .willShow) { [weak self] options in
-                guard let `self` = self else {
-                    return
-                }
-                self.updateContentInsetWithKeyboardFrame(options.endFrame)
-                self.scrollToFirstResponderIfNeeded(animated: false)
-            }
-            .on(event: .willHide) { [weak self] _ in
-                guard let `self` = self else {
-                    return
-                }
-                var inset = self.scrollView.contentInset
-                inset.bottom = 0
-                
-                self.scrollView.contentInset = inset
-                self.scrollView.setContentOffset(.zero, animated: true)
-            }
-            .start()
-    }
-    
-    private func setupFields() {
-        nameDetailView.title = TextConstants.userProfileName
-        surnameDetailView.title = TextConstants.userProfileSurname
-        emailDetailView.title = TextConstants.userProfileEmailSubTitle
-        gsmDetailView.title = TextConstants.userProfileGSMNumberSubTitle
-        birthdayDetailView.title = TextConstants.userProfileBirthday
-
-        nameDetailView.responderOnNext = surnameDetailView
-        surnameDetailView.responderOnNext = emailDetailView
-        gsmDetailView.responderOnNext = birthdayDetailView
-        emailDetailView.responderOnNext = SingletonStorage.shared.isTurkcellUser ?
-            birthdayDetailView : gsmDetailView
-        
-        gsmDetailView.setupAsTurkcellGSMIfNeeded()
-        emailDetailView.setupAsEmail()
-        createSecretQuestionAndPasswordViews()
-    }
-    
-    private func createSecretQuestionAndPasswordViews() {
-        
-        let passwordView = SetSecurityCredentialsView.initFromNib()
-        passwordView.setupView(with: .password, title: TextConstants.userProfilePassword, description: "* * * * * * * * *", buttonTitle: TextConstants.userProfileChangePassword, descriptionColorIsBlack: true)
-        passwordView.delegate = self
-        stackView.insertArrangedSubview(passwordView, at: stackView.subviews.count)
-        
-        secretQuestionView.delegate = self
-        stackView.insertArrangedSubview(secretQuestionView, at: stackView.subviews.count)
-    }
-    
-    private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
-        let screenHeight = UIScreen.main.bounds.height
-        let bottomInset = keyboardFrame.height + screenHeight - keyboardFrame.maxY
-        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-        
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
-    }
-    
-    private func scrollToFirstResponderIfNeeded(animated: Bool) {
-        guard let firstResponser = view.firstResponder as? UIView else {
-            return
-        }
-        
-        let rect = scrollView.convert(firstResponser.frame, to: scrollView)
-            .offsetBy(dx: 0.0, dy: NumericConstants.firstResponderBottomOffset)
-        scrollView.scrollRectToVisible(rect, animated: animated)
-    }
-    
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.myProfile)
-    }
-    
-    private func saveFields() {
-        name = nameDetailView.editableText
-        surname = surnameDetailView.editableText
-        email = emailDetailView.editableText
-        number = gsmDetailView.editableText
-        birthday = birthdayDetailView.editableText
-    }
-
-    //MARK: Utility Methods(Public)
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
         button.fixEnabledState()
         navigationItem.setRightBarButton(button, animated: true)
         
-        nameDetailView.isEditState = isEdit
-        surnameDetailView.isEditState = isEdit
-        emailDetailView.isEditState = isEdit
-        gsmDetailView.isEditState = isEdit
+        nameView.isEditState = isEdit
+        surnameView.isEditState = isEdit
+        emailView.isEditState = isEdit
         birthdayDetailView.isEditState = isEdit
-    }
-    
-    func configurateUserInfo(userInfo: AccountInfoResponse) {
-        nameDetailView.configure(with: userInfo.name, delegate: self)
-        surnameDetailView.configure(with: userInfo.surname, delegate: self)
-        emailDetailView.configure(with: userInfo.email, delegate: self)
-        gsmDetailView.configure(with: userInfo.phoneNumber, delegate: self)
-        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
-        birthdayDetailView.configure(with: birthday, delegate: self)
-        configuresecretQuestionView(userInfo: userInfo)
-    }
-    
-    func updateSetSecretQuestionView(with secrettQuestion: SecretQuestionWithAnswer) {
-        guard let question = secrettQuestion.question else {
-            assertionFailure()
-            return
+        addressView.isEditState = isEdit
+        
+        /// phoneView disabled for Turkcell user
+        if isShortPhoneNumber {
+            isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
+        } else {
+            phoneView.isEditState = isEdit
         }
         
-        let buttonTitle =  TextConstants.userProfileEditSecretQuestion
-        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: question, buttonTitle: buttonTitle, descriptionColorIsBlack: true)
-        
+        isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
     }
     
-    private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
-        
-        guard userInfo.hasSecurityQuestionInfo != nil else  {
-            assertionFailure()
-            return
-        }
-        
-        let buttonTitle = userInfo.hasSecurityQuestionInfo ?? false ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
-        
-        self.secretQuestionView.setupView(with: .secretQuestion, title: TextConstants.userProfileSecretQuestion, description: TextConstants.userProfileSecretQuestionLabelPlaceHolder, buttonTitle: buttonTitle, descriptionColorIsBlack: false)
-
-        guard let questionId = userInfo.securityQuestionId else  {
-            return
-        }
-        
-        let accountService = AccountService()
-        accountService.getListOfSecretQuestions { [weak self] response in
-            switch response {
-            case .success( let questions):
-                guard let question = questions.first(where: { $0.id == questionId }) else {
-                    assertionFailure()
-                    return
-                }
-                self?.secretQuestion = question
-                self?.secretQuestionView.setupDescriptionLabel(question: question.text)
-                
-            case .failed(_):
-                break
-                //This error is't handle
-            }
-        }
-        
+    @objc private func onChangePassword() {
+        output.tapChangePasswordButton()
     }
     
-    func getNavigationController() -> UINavigationController? {
-        return navigationController
-    }
-    
-    func getPhoneNumber() -> String {
-        return gsmDetailView.editableText ?? ""
-    }
-    
-    func endSaving() {
-        navigationItem.rightBarButtonItem?.fixEnabledState()
+    @objc private func onChangeSecurityQuestion() {
+        output.tapChangeSecretQuestionButton()
     }
     
     @objc private func onEditButtonAction() {
-        nameDetailView.becomeFirstResponder()
+        setupEditState(true)
         output.tapEditButton()
         saveFields()
     }
     
     @objc private func onReadyButtonAction() {
-        guard name != nameDetailView.editableText ||
-            surname != surnameDetailView.editableText ||
-            email != emailDetailView.editableText ||
-            number != gsmDetailView.editableText ||
-            birthday != birthdayDetailView.editableText else {
-                setupEditState(false)
-                return
+        updateProfile()
+    }
+    
+    private func saveFields() {
+        name = nameView.textField.text
+        surname = surnameView.textField.text
+        email = emailView.textField.text
+        phoneCode = phoneView.codeTextField.text
+        phoneNumber = phoneView.numberTextField.text
+        birthday = birthdayDetailView.editableText
+        address = addressView.textField.text
+    }
+    
+    private func updateProfile() {
+        guard
+            let name = nameView.textField.text,
+            let surname = surnameView.textField.text,
+            let email = emailView.textField.text,
+            let phoneCode = phoneView.codeTextField.text,
+            let phoneNumber = phoneView.numberTextField.text,
+            let birthday = birthdayDetailView.editableText,
+            let address = addressView.textField.text,
+            
+            /// check for changes
+            (self.name != name ||
+            self.surname != surname ||
+            self.email != email ||
+            self.phoneCode != phoneCode ||
+            self.phoneNumber != phoneNumber ||
+            self.birthday != birthday ||
+            self.address != address)
+        else {
+            setupEditState(false)
+            return
         }
+        
+        let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
         readyButton.isEnabled = false
         
-        if email != emailDetailView.editableText {
-            guard let email = emailDetailView.editableText, !email.isEmpty else {
+        if self.email != email {
+            guard !email.isEmpty else {
                 output.showError(error: TextConstants.emptyEmail)
                 return
             }
             
-            guard Validator.isValid(email: emailDetailView.editableText) else {
+            guard Validator.isValid(email: email) else {
                 output.showError(error: TextConstants.notValidEmail)
                 return
             }
             
-            let message = String(format: TextConstants.registrationEmailPopupMessage, emailDetailView.editableText ?? "")
+            let message = String(format: TextConstants.registrationEmailPopupMessage, email)
             
             let controller = PopUpController.with(
                 title: TextConstants.registrationEmailPopupTitle,
@@ -279,11 +240,12 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        self?.output.tapReadyButton(name: self?.nameDetailView.editableText ?? "",
-                                                    surname: self?.surnameDetailView.editableText ?? "",
-                                                    email: self?.emailDetailView.editableText ?? "",
-                                                    number: self?.gsmDetailView.editableText ?? "",
-                                                    birthday: self?.birthdayDetailView.editableText ?? "")
+                        self?.output.tapReadyButton(name: name,
+                                                    surname: surname,
+                                                    email: email,
+                                                    number: sendingPhoneNumber,
+                                                    birthday: birthday,
+                                                    address: address)
                         self?.readyButton.fixEnabledState()
                     }
                 })
@@ -291,70 +253,146 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             self.present(controller, animated: true, completion: nil)
             
         } else {
-            output.tapReadyButton(name: nameDetailView.editableText ?? "",
-                                  surname: surnameDetailView.editableText ?? "",
-                                  email: emailDetailView.editableText ?? "",
-                                  number: gsmDetailView.editableText ?? "",
-                                  birthday: birthdayDetailView.editableText ?? "")
+            output.tapReadyButton(name: name,
+                                  surname: surname,
+                                  email: email,
+                                  number: sendingPhoneNumber,
+                                  birthday: birthday,
+                                  address: address)
         }
     }
+    
+    private func set(title: String, for button: UIButton) {
+        let attributedString = NSAttributedString(string: title,
+                                                  attributes: [
+                                                    .font: UIFont.TurkcellSaturaDemFont(size: 18),
+                                                    .foregroundColor: UIColor.lrTealish,
+                                                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        button.setAttributedTitle(attributedString, for: .normal)
+    }
+    
 }
 
-// MARK: - UITextFieldDelegate
-
-extension UserProfileViewController: UITextFieldDelegate {
+extension UserProfileViewController: UITextFieldDelegate  {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        /// this logic maybe will be need
+        //switch textField {
+        //case nameView.textField:
+        //    nameView.hideSubtitleAnimated()
+        //
+        //case surnameView.textField:
+        //    surnameView.hideSubtitleAnimated()
+        //
+        //case emailView.textField:
+        //    emailView.hideSubtitleAnimated()
+        //
+        //case birthdayDetailView.textField:
+        //    break
+        //
+        //case phoneView.numberTextField, phoneView.codeTextField:
+        //    phoneView.hideSubtitleAnimated()
+        //
+        //case addressView.textField:
+        //    addressView.hideSubtitleAnimated()
+        //
+        //default:
+        //    assertionFailure()
+        //}
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         switch textField {
-        case nameDetailView.getTextField():
-            nameDetailView.responderOnNext?.becomeFirstResponder()
-        case surnameDetailView.getTextField():
-            surnameDetailView.responderOnNext?.becomeFirstResponder()
-        case emailDetailView.getTextField():
-            emailDetailView.responderOnNext?.becomeFirstResponder()
-        case gsmDetailView.getTextField():
-            gsmDetailView.responderOnNext?.becomeFirstResponder()
-        case birthdayDetailView.getTextField():
-            ///last field
-            birthdayDetailView.resignFirstResponder()
+        case nameView.textField:
+            surnameView.textField.becomeFirstResponder()
+
+        case surnameView.textField:
+            emailView.textField.becomeFirstResponder()
+
+        case emailView.textField:
+            /// phoneView disabled for Turkcell user
+            if isShortPhoneNumber {
+                birthdayDetailView.textField.becomeFirstResponder()
+            } else {
+                phoneView.codeTextField.becomeFirstResponder()
+            }
+
+        /// setup in view.
+        /// only for simulator.
+        case phoneView.codeTextField:
+            phoneView.numberTextField.becomeFirstResponder()
+
+        /// only for simulator.
+        /// setup by responderOnNext:
+        case phoneView.numberTextField:
+            birthdayDetailView.textField.becomeFirstResponder()
+
+        /// only for simulator.
+        /// setup by responderOnNext:
+        case birthdayDetailView.textField:
+            addressView.textField.becomeFirstResponder()
+            
+        case addressView.textField:
+            updateProfile()
+
         default:
-            fatalError("Unknown responder")
+            assertionFailure()
         }
         
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if textField == emailDetailView.getTextField() {
-                textField.text = text.removingWhiteSpaces()
-            } else if textField == nameDetailView.getTextField() ||
-                textField == nameDetailView.getTextField() {
-                    textField.text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            }
-        }
-    }
+}
+
+extension UserProfileViewController: UserProfileViewInput {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == nameDetailView.getTextField() ||
-            textField == surnameDetailView.getTextField(),
-            textField.text?.count == NumericConstants.maxStringLengthForUserProfile {
-            return false
+    func configurateUserInfo(userInfo: AccountInfoResponse) {
+        nameView.textField.text = userInfo.name
+        surnameView.textField.text = userInfo.surname
+        emailView.textField.text = userInfo.email
+        addressView.textField.text = userInfo.address
+        
+        let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == true) ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
+        set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
+        
+        if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
+            phoneView.codeTextField.text = "+\(countryCode)"
+            
+            /// there is no countryCode in phoneNumber for turkcell accounts
+            if phoneNumber.contains(countryCode) {
+                let plusLength = 1 /// "+".count
+                let start = countryCode.count + plusLength
+                let end = phoneNumber.count
+                phoneView.numberTextField.text = phoneNumber[start..<end]
+                isShortPhoneNumber = false
+            } else {
+                phoneView.numberTextField.text = phoneNumber
+                isShortPhoneNumber = true
+            }
+        } else {
+            assertionFailure("probles with userInfo: \(userInfo)")
         }
         
-        return !(string == " " && textField == emailDetailView.getTextField())
-    }
-}
-
-extension UserProfileViewController: SetSecurityCredentialsViewDelegate {
-    
-    func setNewPasswordTapped() {
-        output.tapChangePasswordButton()
+        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
+        birthdayDetailView.configure(with: birthday, delegate: self)
     }
     
-    func setNewQuestionTapped() {
-        output.tapChangeSecretQuestionButton(selectedQuestion: secretQuestion)
+    func getNavigationController() -> UINavigationController? {
+        return navigationController
     }
+    
+    func getPhoneNumber() -> String {
+        return (phoneView.codeTextField.text ?? "") + (phoneView.numberTextField.text ?? "")
+    }
+    
+    func endSaving() {
+        navigationItem.rightBarButtonItem?.fixEnabledState()
+    }
+    
+    func securityQuestionWasSet() {
+        /// we need to update title if it was TextConstants.userProfileSetSecretQuestionButton
+        /// can be added any check for title or userInfo.
+        set(title: TextConstants.userProfileEditSecretQuestion, for: changeSecurityQuestionButton)
+    }
+    
 }
-

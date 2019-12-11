@@ -15,7 +15,7 @@ protocol RegistrationInteractorOutput: class {
     func captchaRequiredFailed()
     func captchaRequiredFailed(with message: String)
     
-    func signUpFailed(errorResponse: ErrorResponse)
+    func signUpFailed(errorResponse: Error)
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)
     
     func showFAQView()

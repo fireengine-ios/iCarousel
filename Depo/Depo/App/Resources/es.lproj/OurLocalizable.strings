@@ -598,7 +598,7 @@
 "widgetTopTitleInactive" = "La sincronización está inactiva";
 "widgetTopTitleInProgress" = "La sincronización está en progreso";
 "error_authentication_message" = "Abra la aplicación e inicie sesión para continuar";
-"error_authentication_title" = "Iniciar sesión en lifebox";
+"error_authentication_title" = "Iniciar sesión en %@";
 "error_passcode_message" = "La aplicación de archivos no se puede usar con un código de acceso. Abra la aplicación y desactive la contraseña para continuar";
 "error_passcode_title" = "El bloqueo del código de acceso está habilitado";
 "Successfully purchased" = "Comprado exitosamente";
@@ -1318,3 +1318,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

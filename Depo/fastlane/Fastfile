@@ -217,7 +217,7 @@ lane :my_gym_lifedrive do # |options|
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: "lifedrive",
+      scheme: "LifeTech_lifedrive",
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
@@ -420,6 +420,14 @@ lane :my_gym_lifedrive do # |options|
 
     build_number = Fastlane::VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "new version: #{build_number}"
+  end
+
+  lane :beta do
+    # upload to Testflight
+    upload_to_testflight(
+      ipa: "lifebox.ipa",
+      skip_waiting_for_build_processing: true
+    )
   end
   
 # end

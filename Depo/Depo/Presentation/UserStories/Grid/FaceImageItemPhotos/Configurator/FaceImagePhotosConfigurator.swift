@@ -50,7 +50,7 @@ final class FaceImagePhotosConfigurator {
                                                style: .default, tintColor: nil)
         
         let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
+        if langCode != "tr" {
             bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromFaceImageAlbum],
                                                    style: .default, tintColor: nil)
         }

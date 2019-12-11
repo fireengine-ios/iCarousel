@@ -70,7 +70,7 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
     func setImageForUploadingItem(item: WrapData) {
         if wrapItem != item {
             wrapItem = item
-            iconImageViewForCurrentFile.loadThumbnail(object: item, smooth: true)
+            iconImageViewForCurrentFile.loadImage(with: item, smooth: true)
         }
     }
     
