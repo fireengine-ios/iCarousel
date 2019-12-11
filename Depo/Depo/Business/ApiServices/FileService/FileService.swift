@@ -11,7 +11,7 @@ import Foundation
 struct FilePatch {
     static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
     static let create = "filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "filesystem/trash"
+    static let delete = "filesystem/delete"
     static let rename = "filesystem/rename/%@"
     static let move =   "filesystem/move?targetFolderUuid=%@"
     static let copy =   "filesystem/copy?targetFolderUuid=%@"
@@ -19,6 +19,8 @@ struct FilePatch {
     static let detail =  "filesystem/detail/%@"
     
     static let metaData = "filesystem/metadata"
+    
+    static let trash = "filesystem/trash"
 }
 
 
@@ -77,6 +79,12 @@ class DeleteFiles: BaseRequestParametrs {
     
     init(items: [String]) {
         self.items = items
+    }
+}
+
+class TrashFiles: DeleteFiles {
+    override var patch: URL {
+        return URL(string: FilePatch.trash, relativeTo: super.patch)!
     }
 }
 
@@ -287,6 +295,17 @@ class FileService: BaseRequestService {
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
+    func trash(files: TrashFiles, success: FileOperation?, fail: FailResponse?) {
+        debugLog("FileService deleteFiles: \(files.items.joined(separator: ", "))")
+
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            debugLog("FileService delete success")
+
+            success?()
+        }, fail: fail)
+        executeDeleteRequest(param: files, handler: handler)
+    }
+
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         

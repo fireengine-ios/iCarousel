@@ -68,11 +68,8 @@ class WrapItemFileService: WrapItemFileOperations {
             return
         }
         
-        let param = DeleteFiles(items: removeItems)
-        remoteFileService.delete(deleteFiles: param,
-                                 success: successOperation,
-                                 fail: failOperation)
-        
+        let files = TrashFiles(items: removeItems)
+        remoteFileService.trash(files: files, success: successOperation, fail: failOperation)
     }
     
     func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
