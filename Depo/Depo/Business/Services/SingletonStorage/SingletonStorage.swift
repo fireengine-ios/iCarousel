@@ -63,20 +63,20 @@ class SingletonStorage {
                         fail(ErrorResponse.string(TextConstants.errorServer))
                     }
                 }
-            }) { error in
+            }, fail: { error in
                 DispatchQueue.toMain {
                     fail(error)
                 }
-            }
+            })
         }
     }
     
     var isTurkcellUser: Bool {
-        return accountInfo?.accountType == "TURKCELL"
+        return accountInfo?.isTurkcellUser ?? false
     }
     
     var isUserFromTurkey: Bool {
-        return accountInfo?.countryCode == "90"
+        return accountInfo?.isUserFromTurkey ?? false
     }
     
     var uniqueUserID: String {

@@ -9,9 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.turkcell.lifedrive.todayextension</string>
-	<key>GroupBundleId</key>
-	<string>group.com.turkcell.lifedrive</string>
+	<string>com.lcv.billo.todayext</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,10 +20,19 @@
 	<string>20.142</string>
 	<key>CFBundleVersion</key>
 	<string>2.35</string>
+	<key>GroupBundleId</key>
+	<string>group.com.lcv.billo</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
+	</dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>MainInterface</string>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widget-extension</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
@@ -38,12 +45,5 @@
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
 	</array>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
-	</dict>
 </dict>
 </plist>

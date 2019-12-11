@@ -574,7 +574,7 @@
 "widgetTopTitleInactive" = "Автосинхронізацію вімкнено";
 "widgetTopTitleInProgress" = "Автосинхронізація триває";
 "error_authentication_message" = "Будь ласка, відкрийте програму та увійдіть, щоб продовжити";
-"error_authentication_title" = "Увійдіть до lifebox";
+"error_authentication_title" = "Увійдіть до %@";
 "error_passcode_message" = "Додаток для файлів не може використовуватися з паролем. Будь ласка, відкрийте lifebox та вимкніть код доступу, щоб продовжити";
 "error_passcode_title" = "Пароль заблоковано";
 "Successfully purchased" = "Успішно придбано";
@@ -1278,3 +1278,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

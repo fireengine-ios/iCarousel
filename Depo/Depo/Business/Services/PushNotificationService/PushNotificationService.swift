@@ -77,7 +77,8 @@ final class PushNotificationService {
             return
         }
         
-        if tokenStorage.accessToken == nil {
+        let isLoggedIn = tokenStorage.accessToken != nil
+        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
                 
@@ -127,6 +128,12 @@ final class PushNotificationService {
         case .securityQuestion: openSecurityQuestion()
         case .permissions: openPermissions()
         case .photopickCampaignDetail: openCampaignDetails()
+        case .supportFormSignup, .supportFormLogin:
+            if isLoggedIn {
+                openContactUs()
+            } else { 
+                openSupport(type: action == .supportFormSignup ? .signup : .login)
+            }
         }
         
         if router.tabBarController != nil {
@@ -403,6 +410,11 @@ final class PushNotificationService {
     
     private func openCampaignDetails() {
         let controller = router.campaignDetailViewController()
+        pushTo(controller)
+    }
+    
+    private func openSupport(type: SupportFormScreenType) {
+        let controller = SupportFormController.with(screenType: type)
         pushTo(controller)
     }
 }

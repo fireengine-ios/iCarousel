@@ -574,7 +574,7 @@
 "widgetTopTitleInactive" = "Sincronizarea automată este inactivă";
 "widgetTopTitleInProgress" = "Sincronizarea automată e în proces";
 "error_authentication_message" = "Pentru a continua, deschide aplicația și conectează-te";
-"error_authentication_title" = "Conectează-te în lifebox";
+"error_authentication_title" = "Conectează-te în %@";
 "error_passcode_message" = "Fișierele nu pot fi utilizate cu parolă. Pentru a continua, deschide aplicația lifebox și dezactivează codul de acces.";
 "error_passcode_title" = "Blocarea cu codului de acces este activată";
 "Successfully purchased" = "Achiziție reușită";
@@ -1276,3 +1276,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

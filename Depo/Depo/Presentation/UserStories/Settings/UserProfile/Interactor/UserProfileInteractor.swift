@@ -21,17 +21,20 @@ class UserProfileInteractor: UserProfileInteractorInput {
     var statusTurkcellUser: Bool {
         return isTurkcellUser
     }
-
+    
+    var secretQuestionsResponse: SecretQuestionsResponse?
     
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         
-        guard let userInfo_ = userInfo else {
+        guard let userInfo = userInfo else {
+            assertionFailure()
             return
         }
         
-        output.configurateUserInfo(userInfo: userInfo_)
+        configuresecretQuestionView(userInfo: userInfo)
+        output.configurateUserInfo(userInfo: userInfo)
     }
     
     private func isEmailChanged(email: String) -> Bool {
@@ -39,7 +42,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateUserInfo() {
-        accountService.info(success: { [weak self] response in
+        accountService.info(success: { response in
             guard let response = response as? AccountInfoResponse else {
                 assertionFailure()
                 return
@@ -50,10 +53,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }) { error in
             // This error is't handling
         }
-    }
-    
-    func updateSetQuestionView(with question: SecretQuestionWithAnswer) {
-        output.updateSecretQuestionView(selectedQuestion: question)
     }
 
     func trackState(_ editState: GAEventLabel, errorType: GADementionValues.errorType?) {
@@ -73,7 +72,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return (phone != userInfo?.phoneNumber)
     }
     
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String) {
+    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
         if !Validator.isValid(email: email) {
             output.showError(error: TextConstants.errorInvalidEmail)
 
@@ -88,10 +87,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
             return
         }
         
-        updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday)
+        updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
-    func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String) {
+    private func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
         if name != userInfo?.name || surname != userInfo?.surname {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: surname)
@@ -102,32 +101,32 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
                 self?.userInfo?.name = name
                 self?.userInfo?.surname = surname
-                self?.updateEmailIfNeed(email: email, number: number, birthday: birthday)
+                                                self?.updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
-            updateEmailIfNeed(email: email, number: number, birthday: birthday)
+            updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
         }
     }
     
-    func updateEmailIfNeed(email: String, number: String, birthday: String) {
+    private func updateEmailIfNeed(email: String, number: String, birthday: String, address: String) {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] response in
                                                 MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
-                self?.updatePhoneIfNeed(number: number, birthday: birthday)
+                self?.updatePhoneIfNeed(number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
-            updatePhoneIfNeed(number: number, birthday: birthday)
+            updatePhoneIfNeed(number: number, birthday: birthday, address: address)
         }
     }
     
-    func updatePhoneIfNeed(number: String, birthday: String) {
+    private func updatePhoneIfNeed(number: String, birthday: String, address: String) {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
@@ -142,29 +141,40 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 self?.fail(error: error.description)
             })
         } else {
-            updateBirthdayIfNeeded(birthday)
+            updateBirthdayIfNeeded(birthday, address: address)
         }
     }
     
-    func updateBirthdayIfNeeded(_ birthday: String) {
+    private func updateBirthdayIfNeeded(_ birthday: String, address: String) {
         /// Lines below are more correct but they're commented because of 400 error
         /// https://jira.turkcell.com.tr/browse/FE-1277
 ///        let oldBirthdayIsEmpty = (userInfo?.dob ?? "").isEmpty
         let newBirthdayIsEmpty = birthday.trimmingCharacters(in: .whitespaces).isEmpty
         
-///        if oldBirthdayIsEmpty && newBirthdayIsEmpty {
-        if newBirthdayIsEmpty {
-            allUpdated()
-            return
-        }
-        
-        if userInfo?.dob == birthday {
-            allUpdated()
+        /// if oldBirthdayIsEmpty && newBirthdayIsEmpty {
+        if newBirthdayIsEmpty || userInfo?.dob == birthday {
+            updateAddressIfNeeded(address)
         } else {
-            AccountService().updateUserBirthday(birthday) { [weak self] response in
+            accountService.updateUserBirthday(birthday) { [weak self] response in
                 switch response {
                 case .success(_):
                     self?.userInfo?.dob = birthday
+                    self?.updateAddressIfNeeded(address)
+                case .failed(let error):
+                    self?.fail(error: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func updateAddressIfNeeded(_ address: String) {
+        if (userInfo?.address == nil && address.isEmpty) || (userInfo?.address == address) {
+            allUpdated()
+        } else {
+            accountService.updateAddress(with: address) { [weak self] response in
+                switch response {
+                case .success(_):
+                    self?.userInfo?.address = address
                     self?.allUpdated()
                 case .failed(let error):
                     self?.fail(error: error.localizedDescription)
@@ -173,7 +183,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func needSendOTP(response: SignUpSuccessResponse) {
+    private func needSendOTP(response: SignUpSuccessResponse) {
         DispatchQueue.main.async { [weak self] in
             if let info = self?.userInfo {
                 self?.output?.stopNetworkOperation()
@@ -182,7 +192,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
-    func allUpdated() {
+    private func allUpdated() {
         ///need to refresh local info after change
         SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
             DispatchQueue.main.async { [weak self] in
@@ -198,11 +208,52 @@ class UserProfileInteractor: UserProfileInteractorInput {
         })
     }
     
-    func fail(error: String) {
+    private func fail(error: String) {
         DispatchQueue.main.async { [weak self] in
             self?.output.stopNetworkOperation()
             self?.output.showError(error: error)
         }
     }
     
+    /// posible needs callback for slow internet
+    private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
+        
+        guard userInfo.hasSecurityQuestionInfo != nil else  {
+            assertionFailure()
+            return
+        }
+
+        guard let questionId = userInfo.securityQuestionId else {
+            /// posible assertionFailure(). needs to check
+            return
+        }
+        
+        accountService.getListOfSecretQuestions { [weak self] response in
+            switch response {
+            case .success( let questions):
+                guard let question = questions.first(where: { $0.id == questionId }) else {
+                    assertionFailure("getListOfSecretQuestions must containts questionId. error on server")
+                    return
+                }
+                
+                self?.secretQuestionsResponse = question
+                
+            case .failed(_):
+                /// This error doesn't handle
+                break
+            }
+        }
+        
+    }
+    
+    func updateSecretQuestionsResponse(with secretQuestionWithAnswer: SecretQuestionWithAnswer) {
+        guard
+            let questionId = secretQuestionWithAnswer.questionId,
+            let question = secretQuestionWithAnswer.question
+        else {
+            assertionFailure("problem with Answer: \(secretQuestionWithAnswer)")
+            return
+        }
+        secretQuestionsResponse = SecretQuestionsResponse(id: questionId, text: question)
+    }
 }

@@ -526,7 +526,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
             self?.hideSpinner()
-            if vc is InstapickPopUpController {
+            if vc is InstapickPopUpController || vc is InstaPickSelectionSegmentedController {
                 //FIXME: add router
                 let router = RouterVC()
                 let navController = router.createRootNavigationControllerWithModalStyle(controller: vc)

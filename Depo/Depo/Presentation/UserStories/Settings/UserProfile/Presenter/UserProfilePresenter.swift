@@ -37,10 +37,6 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         asyncOperationSuccess()
     }
     
-    func updateSecretQuestionView(selectedQuestion: SecretQuestionWithAnswer) {
-        view.updateSetSecretQuestionView(with: selectedQuestion)
-    }
-    
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
         view.endSaving()
         view.setupEditState(false)
@@ -69,8 +65,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         interactor.trackState(.edit, errorType: nil)
     }
     
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
-        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
     func dataWasUpdated() {
@@ -86,9 +82,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
-    func tapChangeSecretQuestionButton(selectedQuestion: SecretQuestionsResponse?) {
+    func tapChangeSecretQuestionButton() {
         interactor.trackSetSequrityQuestion()
-        router.goToSetSecretQuestion(selectedQuestion: selectedQuestion, delegate: self)
+        router.goToSetSecretQuestion(selectedQuestion: interactor.secretQuestionsResponse,
+                                     delegate: self)
     }
     
     //MARK : BasePresenter
@@ -101,7 +98,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
 
 extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
-        interactor.updateSetQuestionView(with: selectedQuestion)
         interactor.updateUserInfo()
+        interactor.updateSecretQuestionsResponse(with: selectedQuestion)
+        view.securityQuestionWasSet()
     }
 }

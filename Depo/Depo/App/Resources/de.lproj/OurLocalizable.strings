@@ -574,7 +574,7 @@
 "widgetTopTitleInactive" = "Die Synchronisation ist inaktiv";
 "widgetTopTitleInProgress" = "Die Synchronisierung wird gerade ausgeführt";
 "error_authentication_message" = "Bitte öffnen Sie die App und melden Sie sich an, um fortzufahren";
-"error_authentication_title" = "Einloggen in die lifebox";
+"error_authentication_title" = "Einloggen in die %@";
 "error_passcode_message" = "Die Files-App kann nicht mit einem Passcode verwendet werden. Bitte öffnen Sie die lifebox und deaktivieren Sie den Passcode, um fortzufahren";
 "error_passcode_title" = "Die Passwortsperre ist aktiviert";
 "Successfully purchased" = "Erfolgreich gekauft";
@@ -1276,3 +1276,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

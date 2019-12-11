@@ -107,10 +107,10 @@ final class SettingsBundleHelper: NSObject {
         return false ///no bundle setup or use - in DEBUG environment,
         /// we can continue to use RouteRequests currentServerEnvironment
         #endif
-        return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
+        return true//((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
     }
     
-    var isLifeTechBundle: Bool = {
-        return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
-    }()
+//    var isLifeTechBundle: Bool = {
+//        return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
+//    }()
 }
