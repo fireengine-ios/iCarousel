@@ -146,16 +146,13 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
-        
         captchaView.updateCaptcha()
         captchaView.captchaAnswerTextField.text = ""
-        
         let errorText = error.localizedDescription
         
         switch error {
         case .invalidCaptcha:
             captchaView.showErrorAnimated(text: errorText)
-            captchaView.updateCaptcha()
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
             secretAnswerView.showErrorAnimated(text: errorText)
