@@ -35,6 +35,7 @@ enum ElementTypes {
     case removeFromFaceImageAlbum
     case print
     case changeCoverPhoto
+    case hide
     //upload?
     case photos
     case iCloudDrive
@@ -76,6 +77,7 @@ class EditinglBar: CustomTabBar {
         static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
         static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
+        static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
     }
     
     private let tabBarHeight: CGFloat = 49

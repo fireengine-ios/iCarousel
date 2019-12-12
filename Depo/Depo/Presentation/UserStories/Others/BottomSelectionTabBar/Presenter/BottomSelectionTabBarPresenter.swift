@@ -26,6 +26,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         var itemTupple: [(String, String, String)] = []
         for type in config.elementsConfig {
             switch type {
+            case .hide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.hide)
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .deleteFaceImage:
@@ -125,6 +127,19 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             let type = types[index]
             
             switch type {
+            case .hide:
+                //TODO: will be another task to implement analytics calls
+//                MenloworksAppEvents.onDeleteClicked()
+                
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    //TODO: FE-1869
+//                    self.interactor.delete(item: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
                 
@@ -348,6 +363,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
                         self.interactor.delete(item: currentItems)
+                    })
+                case .hide:
+                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                        //TODO: will be another task to implement analytics calls
+//                        MenloworksAppEvents.onDeleteClicked()
+                        //TODO: FE-1869 
+//                        self.interactor.delete(item: currentItems)
                     })
                 case .deleteFaceImage:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in

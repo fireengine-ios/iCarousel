@@ -630,6 +630,7 @@ struct TextConstants {
     static let music = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let documents = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarDeleteLabel = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarHideLabel = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveAlbumLabel = NSLocalizedString("Remove Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveLabel = NSLocalizedString("Remove From Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarAddToAlbumLabel = NSLocalizedString("Add To Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -725,6 +726,7 @@ struct TextConstants {
     static let actionSheetDelete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetShareSmallSize = NSLocalizedString("Small Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareOriginalSize = NSLocalizedString("Original Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1434,6 +1436,7 @@ struct TextConstants {
     
     static let downloadLimitAllert = NSLocalizedString("selected_items_limit_download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteLimitAllert = NSLocalizedString("selected_items_limit_delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideLimitAllert = NSLocalizedString("selected_items_limit_hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginSettingsSecurityPasscodeDescription = NSLocalizedString("login_settings_security_passcode_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginSettingsSecurityAutologinDescription = NSLocalizedString("login_settings_security_autologin_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginSettingsTwoFactorAuthDescription = NSLocalizedString("login_settings_two_factor_auth_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

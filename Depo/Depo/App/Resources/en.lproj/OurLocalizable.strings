@@ -130,6 +130,7 @@
 "Edit" = "Edit";
 "Share" = "Share";
 "Wait for a Wi-Fi Connection" = "Waiting for a Wi-Fi connection";
+"Hide" = "Hide";
 
 /*I cant understand*/
 "Auto Sync Preparation" = "Auto Sync Preparation";
@@ -1059,6 +1060,7 @@
 "Permissions" = "Permissions";
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
+"selected_items_limit_hide" = "You cannot hide more than %d files";
 "login_settings_security_passcode_description" = "You can receive your Turkcell Password by texting SIFRE to 2200 and if you enable this button, you can login to lifebox using this password.";
 "login_settings_security_autologin_description" = "If you enable this button, you can auto-login to lifebox while connected to internet with 3G/LTE.";
 "login_settings_two_factor_auth_description" = "If you enable Two-Factor Authentication, you will be asked to verify your identity before login. We will send a security code to your phone number or e-mail for verification. This will allow you to login your account more securely.";
