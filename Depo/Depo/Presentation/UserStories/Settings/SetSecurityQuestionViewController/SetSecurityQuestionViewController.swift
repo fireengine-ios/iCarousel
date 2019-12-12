@@ -17,7 +17,7 @@ struct SecretQuestionWithAnswer {
 protocol SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
-// FIXME: https://adepo.turkcell.com.tr/api/captcha/IMAGE called twice on Save button
+
 final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit, ControlTabBarProtocol {
     
     private let accountService = AccountService()
