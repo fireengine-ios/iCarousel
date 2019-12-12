@@ -651,6 +651,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 case .delete:
                     text = TextConstants.popUpDeleteComplete
                     MenloworksAppEvents.onFileDeleted()
+                case .hide:
+                    //TODO: FE-1869 change to custom popup
+                    text = TextConstants.popUpHideComplete
                 default:
                     return
                 }

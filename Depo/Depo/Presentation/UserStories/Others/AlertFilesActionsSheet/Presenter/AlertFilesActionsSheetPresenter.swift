@@ -298,6 +298,21 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .hide:
+                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                        //TODO: will be another task to implement analytics calls
+//                        MenloworksAppEvents.onDeleteClicked()
+                        
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            //TODO: FE-1869 
+//                            self.interactor.delete(item: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
+                    })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
