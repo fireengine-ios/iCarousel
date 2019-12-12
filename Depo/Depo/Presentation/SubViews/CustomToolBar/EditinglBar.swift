@@ -200,9 +200,12 @@ class EditinglBar: CustomTabBar {
         let items = names.map { item -> CustomTabBarItem in
             var image = UIImage(named: item.imageName)
             
-            ///red 'delete' icon
-            if item.imageName == PreDetermendTypes.delete.0 {
+            ///red 'delete' and 'hide' icon
+            switch item.imageName {
+            case PreDetermendTypes.delete.0,
+                 PreDetermendTypes.hide.0:
                 image = image?.withRenderingMode(.alwaysOriginal)
+            default: break
             }
             
             return CustomTabBarItem(title: item.title,

@@ -67,24 +67,32 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        if let downloadIndex = originalConfig.elementsConfig.index(of: .download),
-            let syncIndex = originalConfig.elementsConfig.index(of: .sync),
-            let deleteIndex = originalConfig.elementsConfig.index(of: .delete) {
-            
-            view.disableItems(at: [downloadIndex, syncIndex, deleteIndex])
-//            if items.count < 1 {
-//                view.disableItems(atIntdex: [downloadIndex!, syncIndex!])
-//                return
-//            }
-            
-            if items.contains(where: { $0.isLocalItem != true }) {
-                view.enableItems(at: [deleteIndex, downloadIndex])
-            }
-            
-            if items.contains(where: { $0.isLocalItem == true }) {
-                view.enableItems(at: [syncIndex])
-            }
-            
+        let downloadIndex = originalConfig.elementsConfig.index(of: .download)
+        let syncIndex = originalConfig.elementsConfig.index(of: .sync)
+        let deleteIndex = originalConfig.elementsConfig.index(of: .delete)
+        let hideIndex = originalConfig.elementsConfig.index(of: .hide)
+        
+        let validIndexes = [downloadIndex, syncIndex, hideIndex, deleteIndex].compactMap { $0 }
+        
+        guard !validIndexes.isEmpty else {
+            return
+        }
+        
+        view.disableItems(at: validIndexes)
+        
+        guard !items.isEmpty else {
+            return
+        }
+        
+        let hasLocal = items.contains(where: { $0.isLocalItem == true })
+        let hasRemote = items.contains(where: { $0.isLocalItem != true })
+        
+        if hasRemote {
+            view.enableItems(at: [deleteIndex, downloadIndex, hideIndex].compactMap { $0 })
+        }
+        
+        if hasLocal {
+            view.enableItems(at: [syncIndex].compactMap { $0 })
         }
     }
     
