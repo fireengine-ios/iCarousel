@@ -150,7 +150,7 @@
 "Operation is complete" = "Operation completed";
 "Download is complete" = "Download completed";
 "Deleting is complete" = "Deleting completed";
-"photos_hide_success_message" = "Photos are hidden successfully";
+"photos_hide_success_message" = "Items are hidden successfully";
 "Downloading files" = "Downloading files";
 "Uploading files over" = "Uploading files over %@";
 "Syncing files over" = "Syncing files with %@";
