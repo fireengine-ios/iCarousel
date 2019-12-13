@@ -5,6 +5,8 @@
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted";
+"confirmation_popup_title_hide" = "Hide Selected";
+"confirmation_popup_message_hide" = "The selected files will be hidden lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
