@@ -220,6 +220,10 @@ final class OptInController: ViewController, NibInit {
         if isRemoveLetter {
             let previosTag = sender.tag - 1
             if let nextResponder = codeTextFields[safe: previosTag] {
+                /// For autoFill one time password
+                if previosTag <= 0 {
+                    nextResponder.text = ""
+                }
                 nextResponder.becomeFirstResponder()
             }
         } else {
@@ -258,6 +262,11 @@ extension OptInController: SmartTimerLabelDelegate {
 extension OptInController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        /// For autoFill one time password
+        if firstSecurityCodeTextField == textField {
+            return
+        }
+        
         /// if the string is empty, then when deleting, the delegate method does not work
         textField.text = " "
     }
