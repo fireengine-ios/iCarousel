@@ -224,7 +224,7 @@ class PhotosAlbumService: BaseRequestService {
             debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
-            fileService.delete(deleteFiles: items, success: nil, fail: nil)
+            fileService.moveToTrash(files: items, success: nil, fail: nil)
             self.trash(albums: deleteAlbums, success: success, fail: fail)
         }
     }

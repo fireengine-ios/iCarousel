@@ -82,9 +82,20 @@ class DeleteFiles: BaseRequestParametrs {
     }
 }
 
-class TrashFiles: DeleteFiles {
+class MoveToTrashFiles: BaseRequestParametrs {
+   
+    let items: [String]
+    
+    override var requestParametrs: Any {
+        return items
+    }
+    
     override var patch: URL {
         return URL(string: FilePatch.trash, relativeTo: super.patch)!
+    }
+    
+    init(items: [String]) {
+        self.items = items
     }
 }
 
@@ -295,7 +306,7 @@ class FileService: BaseRequestService {
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
-    func trash(files: TrashFiles, success: FileOperation?, fail: FailResponse?) {
+    func moveToTrash(files: MoveToTrashFiles, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService deleteFiles: \(files.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in

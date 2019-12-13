@@ -291,9 +291,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
-            self?.fileService.delete(deleteFiles: items,
-                                     success: self?.succesAction(elementType: .delete),
-                                     fail: self?.failAction(elementType: .delete))
+            self?.fileService.moveToTrash(files: items,
+                                          success: self?.succesAction(elementType: .delete),
+                                          fail: self?.failAction(elementType: .delete))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
