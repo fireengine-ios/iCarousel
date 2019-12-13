@@ -141,8 +141,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    //TODO: FE-1869
-//                    self.interactor.delete(item: selectedItems)
+                    self.interactor.hide(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
@@ -376,8 +375,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
                         //TODO: will be another task to implement analytics calls
 //                        MenloworksAppEvents.onDeleteClicked()
-                        //TODO: FE-1869 
-//                        self.interactor.delete(item: currentItems)
+                        self.interactor.hide(items: currentItems)
                     })
                 case .deleteFaceImage:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in

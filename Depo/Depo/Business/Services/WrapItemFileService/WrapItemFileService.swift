@@ -94,6 +94,10 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
+    func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+ 
+    }
+    
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         
         let removeItems = remoteItemsUUID(files: items)

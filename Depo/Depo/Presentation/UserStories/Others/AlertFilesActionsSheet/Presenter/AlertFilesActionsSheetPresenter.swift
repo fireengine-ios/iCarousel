@@ -305,8 +305,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
-                            //TODO: FE-1869 
-//                            self.interactor.delete(item: currentItems)
+                            self.interactor.hide(items: currentItems)
                             self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)

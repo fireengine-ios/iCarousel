@@ -257,6 +257,34 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func hide(items: [BaseDataSourceItem]) {
+        guard let items = items as? [Item] else {
+            assertionFailure("Unexpected type of items")
+            return
+        }
+        
+        RouterVC().showSpiner()
+        let okHandler: VoidHandler = { [weak self] in
+            self?.output?.operationStarted(type: .hide)
+            //TODO: self?.player.remove(listItems: items) do we need it?
+            self?.fileService.hide(items: items,
+                                   success: self?.succesAction(elementType: .hide),
+                                   fail: self?.failAction(elementType: .hide))
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.hideItemsWarningTitle,
+                                              message: TextConstants.hideItemsWarningMessage,
+                                              image: .hide,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+        router.hideSpiner()
+    }
+    
     func completelyDelete(albums: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
             guard let albums = albums as? [AlbumItem] else { return }

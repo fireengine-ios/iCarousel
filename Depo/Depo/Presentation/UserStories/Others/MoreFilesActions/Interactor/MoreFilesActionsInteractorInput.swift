@@ -18,6 +18,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func delete(item: [BaseDataSourceItem])
     
+    func hide(items: [BaseDataSourceItem])
+    
     func completelyDelete(albums: [BaseDataSourceItem])
     
     func move(item: [BaseDataSourceItem], toPath: String)
