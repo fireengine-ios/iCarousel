@@ -160,6 +160,7 @@ struct RouteRequests {
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumHide = baseUrl +/ "album/hide"
     
     // MARK: My Streams
     
