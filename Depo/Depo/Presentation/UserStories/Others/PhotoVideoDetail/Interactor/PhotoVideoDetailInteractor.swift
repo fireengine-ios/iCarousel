@@ -110,9 +110,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                     elementsConfig.append(.print)
                 }
                 
-                if selectedItem.fileType == .image, !elementsConfig.contains(.smash), selectedItem.name?.split(separator: ".").last != "gif" {
-                                  elementsConfig.append(.smash)
-                              }
+                if selectedItem.fileType == .image, !elementsConfig.contains(.smash), selectedItem.uploadContentType//selectedItem.name?.split(separator: ".").last != "gif"
+                {
+                    elementsConfig.append(.smash)
+                }
                 
                 elementsConfig.append(.delete)
                 
