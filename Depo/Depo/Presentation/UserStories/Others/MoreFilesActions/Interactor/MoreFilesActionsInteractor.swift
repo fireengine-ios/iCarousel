@@ -263,13 +263,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to hide them")
+            return
+        }
+        
         RouterVC().showSpiner()
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .hide)
-            //TODO: self?.player.remove(listItems: items) do we need it?
-            self?.fileService.hide(items: items,
-                                   success: self?.succesAction(elementType: .hide),
-                                   fail: self?.failAction(elementType: .hide))
+            self?.player.remove(listItems: remoteItems)
+            self?.fileService.hide(items: remoteItems, success: self?.succesAction(elementType: .hide), fail: self?.failAction(elementType: .hide))
         }
         
         let controller = PopUpController.with(title: TextConstants.hideItemsWarningTitle,
