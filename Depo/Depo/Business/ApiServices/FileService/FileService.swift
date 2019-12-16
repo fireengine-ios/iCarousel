@@ -734,4 +734,20 @@ final class HiddenService {
             .task
     }
     
+    // TODO: check for files and albums
+    /// from doc: UUID of file(s) and/or folder(s) to recover them.
+    func recoverItemsByUuids(_ uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoverItems")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.recover,
+                     method: .post,
+                     parameters: uuids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
 }

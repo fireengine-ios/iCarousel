@@ -328,6 +328,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let hide = filesystemBase + "hide"
+        static let recover = filesystemBase + "recover"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
