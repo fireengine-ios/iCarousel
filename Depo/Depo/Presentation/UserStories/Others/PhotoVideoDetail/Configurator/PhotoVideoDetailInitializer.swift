@@ -14,7 +14,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         var photoVideoBottomBarConfig = EditingBarConfig.init(elementsConfig: [], style: .blackOpaque, tintColor: nil)
         
         if !selectedItem.isLocalItem {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print],
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print,],
                                                          style: .blackOpaque, tintColor: nil)
             
             let langCode = Device.locale
@@ -22,6 +22,9 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                 photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
                                                              style: .blackOpaque, tintColor: nil)
             }
+//            if selectedItem.fileType == .image, selectedItem.name?.split(separator: ".").last != "gif" {
+//                photoVideoBottomBarConfig.elementsConfig.append( .smash)
+//            }
         } else {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .sync, .info],
                                                          style: .blackOpaque, tintColor: nil)

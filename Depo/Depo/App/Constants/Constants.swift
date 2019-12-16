@@ -631,6 +631,7 @@ struct TextConstants {
     static let documents = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarDeleteLabel = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarHideLabel = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarSmashLabel = NSLocalizedString("Smash", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveAlbumLabel = NSLocalizedString("Remove Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveLabel = NSLocalizedString("Remove From Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarAddToAlbumLabel = NSLocalizedString("Add To Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

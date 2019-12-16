@@ -36,6 +36,7 @@ enum ElementTypes {
     case print
     case changeCoverPhoto
     case hide
+    case smash
     //upload?
     case photos
     case iCloudDrive
@@ -78,6 +79,7 @@ class EditinglBar: CustomTabBar {
         static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
+        static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
     }
     
     private let tabBarHeight: CGFloat = 49
