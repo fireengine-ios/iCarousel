@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccessfullHidePopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzR-sv-Dv2">
+                    <rect key="frame" x="153.5" y="389" width="461" height="246"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GJE-Bt-crh">
+                            <rect key="frame" x="210" y="44" width="41" height="41"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="41" id="H4N-hm-Omu"/>
+                                <constraint firstAttribute="width" secondItem="GJE-Bt-crh" secondAttribute="height" multiplier="1:1" id="yCb-cM-gwt"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100 Images are added successfully" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7dY-CE-vqh">
+                            <rect key="frame" x="8" y="92.5" width="445" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98G-JW-2LV">
+                            <rect key="frame" x="8" y="114" width="445" height="29"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="Hidden photos &gt;">
+                                <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-EM-lnA">
+                            <rect key="frame" x="86.5" y="143" width="288" height="63"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="6CC-EM-lnA" secondAttribute="height" multiplier="187:57" id="kjG-eb-ffK"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="98G-JW-2LV" firstAttribute="leading" secondItem="dzR-sv-Dv2" secondAttribute="leading" constant="8" id="1Q9-tq-R2h"/>
+                        <constraint firstAttribute="trailing" secondItem="98G-JW-2LV" secondAttribute="trailing" constant="8" id="2dN-Iu-dxO"/>
+                        <constraint firstAttribute="height" constant="246" id="6xX-dk-zdL"/>
+                        <constraint firstAttribute="width" secondItem="6CC-EM-lnA" secondAttribute="width" multiplier="8:5" id="I2R-xb-LHB"/>
+                        <constraint firstItem="6CC-EM-lnA" firstAttribute="centerX" secondItem="dzR-sv-Dv2" secondAttribute="centerX" id="KFQ-QP-J6o"/>
+                        <constraint firstItem="98G-JW-2LV" firstAttribute="top" secondItem="7dY-CE-vqh" secondAttribute="bottom" id="OgH-D3-L4H"/>
+                        <constraint firstItem="GJE-Bt-crh" firstAttribute="centerX" secondItem="dzR-sv-Dv2" secondAttribute="centerX" id="UX0-b6-X2I"/>
+                        <constraint firstAttribute="trailing" secondItem="7dY-CE-vqh" secondAttribute="trailing" constant="8" id="V6T-5G-MXB"/>
+                        <constraint firstItem="98G-JW-2LV" firstAttribute="centerX" secondItem="dzR-sv-Dv2" secondAttribute="centerX" id="aVb-hA-mY8"/>
+                        <constraint firstAttribute="bottom" secondItem="6CC-EM-lnA" secondAttribute="bottom" priority="750" constant="40" id="abu-8r-U0m"/>
+                        <constraint firstItem="7dY-CE-vqh" firstAttribute="leading" secondItem="dzR-sv-Dv2" secondAttribute="leading" constant="8" id="bwt-8N-BKT"/>
+                        <constraint firstItem="7dY-CE-vqh" firstAttribute="centerX" secondItem="dzR-sv-Dv2" secondAttribute="centerX" id="fPk-f8-SnH"/>
+                        <constraint firstItem="6CC-EM-lnA" firstAttribute="top" secondItem="98G-JW-2LV" secondAttribute="bottom" id="jK0-x7-SNv"/>
+                        <constraint firstItem="GJE-Bt-crh" firstAttribute="top" secondItem="dzR-sv-Dv2" secondAttribute="top" constant="44" id="kGD-1P-OZb"/>
+                        <constraint firstItem="7dY-CE-vqh" firstAttribute="top" secondItem="GJE-Bt-crh" secondAttribute="bottom" constant="13" id="kcj-T2-rgX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="dzR-sv-Dv2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="3:5" id="BL9-pD-Xqq"/>
+                <constraint firstItem="dzR-sv-Dv2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="L5e-ET-sZn"/>
+                <constraint firstItem="dzR-sv-Dv2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="4:5" id="Qie-jL-aSz"/>
+                <constraint firstItem="dzR-sv-Dv2" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Vio-MU-aq2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="BL9-pD-Xqq"/>
+                    <exclude reference="Qie-jL-aSz"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="Qie-jL-aSz"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="BL9-pD-Xqq"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="138.40000000000001" y="136.28185907046478"/>
+        </view>
+    </objects>
+</document>
