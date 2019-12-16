@@ -639,6 +639,7 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
 
 import Alamofire
 
+// TODO: create file HiddenService if need
 final class HiddenService {
     
     func hiddenList(sortBy: SortType,
