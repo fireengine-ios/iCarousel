@@ -548,6 +548,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         case uploaded = "UPLOADED"
         case transcoding = "TRANSCODING"
         case transcodingFailed = "TRANSCODING_FAILED"
+        case trashed = "TRASHED"
+        case deleted = "DELETED"
+        case hidden = "HIDDEN"
         case unknown = "UNKNOWN"
         
         init(string: String?) {
