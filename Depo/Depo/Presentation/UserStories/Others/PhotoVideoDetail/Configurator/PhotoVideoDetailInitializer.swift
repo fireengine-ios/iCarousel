@@ -14,7 +14,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         var photoVideoBottomBarConfig = EditingBarConfig.init(elementsConfig: [], style: .blackOpaque, tintColor: nil)
         
         if !selectedItem.isLocalItem {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print,],
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print],
                                                          style: .blackOpaque, tintColor: nil)
             
             let langCode = Device.locale
