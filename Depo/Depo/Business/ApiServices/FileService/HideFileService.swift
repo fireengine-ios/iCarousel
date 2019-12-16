@@ -16,23 +16,35 @@ final class HideFileService {
     private lazy var sessionManager: SessionManager = factory.resolve()
     
     
-    func hide(items: [WrapData], handler: @escaping ResponseVoid) {
+    func hideItems(with uuids: [String], successAction: FileOperationSucces?, failAction: FailResponse?) {
+        guard
+            let request = sessionManager.request(RouteRequests.FileSystem.hide,
+                                                 method: .delete,
+                                                 parameters: [:],
+                                                 encoding: JSONEncoding.prettyPrinted).request
+        else {
+            failAction?(ErrorResponse.string(TextConstants.errorUnknown))
+            assertionFailure("Can't create the request")
+            return
+        }
         
-        let request = sessionManager.request(RouteRequests.FileSystem.hide,
-                               method: .delete,
-                               parameters: [:],
-                               encoding: JSONEncoding.prettyPrinted)
-        
-        sessionManager
-            .request(request)
+        do {
+            let encodedRequest = try uuids.encode(request, with: nil)
+            
+            sessionManager
+            .request(encodedRequest)
             .customValidate()
             .responseData(completionHandler: { response in
                 switch response.result {
-                case .success(let data):
-                    handler(.success(()))
+                case .success(_):
+                    successAction?()
                 case .failure(let error):
-                    handler(.failed(error))
+                    failAction?(ErrorResponse.error(error))
                 }
             })
+        } catch {
+            failAction?(ErrorResponse.error(error))
+            assertionFailure(error.description)
+        }
     }
 }
