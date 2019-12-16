@@ -109,11 +109,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 if !elementsConfig.contains(.print) {
                     elementsConfig.append(.print)
                 }
-                elementsConfig.append(.delete)
                 
                 if selectedItem.fileType == .image, !elementsConfig.contains(.smash), selectedItem.name?.split(separator: ".").last != "gif" {
-                    elementsConfig.append(.smash)
-                }
+                                  elementsConfig.append(.smash)
+                              }
+                
+                elementsConfig.append(.delete)
+                
                 
             } else if let syncIndex = elementsConfig.index(of: .download) {
                 elementsConfig[syncIndex] = .sync
