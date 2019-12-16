@@ -22,9 +22,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                 photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
                                                              style: .blackOpaque, tintColor: nil)
             }
-//            if selectedItem.fileType == .image, selectedItem.name?.split(separator: ".").last != "gif" {
-//                photoVideoBottomBarConfig.elementsConfig.append( .smash)
-//            }
+
         } else {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .sync, .info],
                                                          style: .blackOpaque, tintColor: nil)

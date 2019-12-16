@@ -113,8 +113,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 
                 if selectedItem.fileType == .image, !elementsConfig.contains(.smash), selectedItem.name?.split(separator: ".").last != "gif" {
                     elementsConfig.append(.smash)
-//                                    barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.smash], style: .black, tintColor: nil)
-                //                    photoVideoBottomBarConfig.elementsConfig.append( .smash)
                 }
                 
             } else if let syncIndex = elementsConfig.index(of: .download) {
