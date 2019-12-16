@@ -16,9 +16,26 @@ protocol AlbumsSliderCellDelegate: class {
 
 final class AlbumsSliderCell: UICollectionViewCell {
 
+    static let height: CGFloat = 198
+    
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var emptyLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.textColor = .lrBrownishGrey
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+        }
+    }
+    
+    @IBOutlet private weak var emptyLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.numberOfLines = 2
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.textColor = .lrBrownishGrey
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 24)
+        }
+    }
  
     weak var delegate: AlbumsSliderCellDelegate?
     
@@ -33,11 +50,12 @@ final class AlbumsSliderCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .lightGray
+        backgroundColor = .lrSkinTone
     }
     
     func setup(title: String, emptyText: String) {
-        
+        titleLabel.text = title
+        emptyLabel.text = emptyText
     }
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {

@@ -313,9 +313,9 @@ extension HiddenPhotosDataSource {
     }
     
     private func appendInLastSection(newItem: Item) -> InsertItemResult {
-        let section = allItems.count
+        let section = allItems.count - 1
         let item = allItems[section].count
-        let indexPath = IndexPath(item: item, section: section)
+        let indexPath = IndexPath(item: item, section: section + 1)
         allItems[section].append(newItem)
         return (indexPath, nil)
     }
@@ -385,6 +385,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
             }
             
             cell.delegate = self
+            cell.setup(title: TextConstants.hiddenBinAlbumSliderTitle, emptyText: TextConstants.hiddenBinAlbumSliderEmpty)
             return
         }
         
@@ -402,8 +403,8 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
             return
         }
 
-        let countRow = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section - 1)
-        let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 2
+        let countRow = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
+        let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 1
 
         if isLastCell {
             delegate?.needLoadNextPhotoPage()
@@ -457,7 +458,7 @@ extension HiddenPhotosDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.contentSize.width, height: 198)
+            return CGSize(width: collectionView.contentSize.width, height: AlbumsSliderCell.height)
         }
         return photoCellSize
     }

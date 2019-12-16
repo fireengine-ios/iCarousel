@@ -1570,4 +1570,8 @@ struct TextConstants {
     static let profileDetailErrorContactCallCenter = NSLocalizedString("profile_detail_error_contact_call_center", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let hiddenBinAlbumSliderTitle = NSLocalizedString("hidden_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hiddenBinAlbumSliderEmpty = NSLocalizedString("hidden_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hiddenBinEmpty = NSLocalizedString("hidden_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

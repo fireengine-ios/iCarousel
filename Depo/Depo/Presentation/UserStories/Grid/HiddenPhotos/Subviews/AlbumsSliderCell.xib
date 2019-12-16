@@ -17,8 +17,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdO-4I-POP">
+                        <rect key="frame" x="10" y="0.0" width="394" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-ye-utE">
+                        <rect key="frame" x="30" y="52" width="354" height="126"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qbz-tR-o2i">
-                        <rect key="frame" x="30" y="44" width="354" height="110"/>
+                        <rect key="frame" x="10" y="44" width="394" height="110"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="110" id="Jv3-RC-dyT"/>
@@ -32,15 +44,25 @@
                     </collectionView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="wdO-4I-POP" secondAttribute="trailing" constant="10" id="E2O-PN-9G2"/>
+                    <constraint firstItem="wdO-4I-POP" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="10" id="OJ3-ji-sL0"/>
+                    <constraint firstItem="CSA-ye-utE" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="30" id="XFq-8d-ZEi"/>
+                    <constraint firstAttribute="trailing" secondItem="CSA-ye-utE" secondAttribute="trailing" constant="30" id="XdY-9d-Apy"/>
                     <constraint firstAttribute="bottom" secondItem="qbz-tR-o2i" secondAttribute="bottom" constant="44" id="ZPz-Cy-eNA"/>
-                    <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="30" id="c4f-cU-ofI"/>
-                    <constraint firstItem="qbz-tR-o2i" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="30" id="dlZ-7y-8tc"/>
+                    <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="10" id="c4f-cU-ofI"/>
+                    <constraint firstItem="qbz-tR-o2i" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="10" id="dlZ-7y-8tc"/>
                     <constraint firstItem="qbz-tR-o2i" firstAttribute="top" secondItem="pt6-Hs-1PA" secondAttribute="top" constant="44" id="pdD-vu-ck1"/>
+                    <constraint firstAttribute="bottom" secondItem="CSA-ye-utE" secondAttribute="bottom" constant="20" symbolic="YES" id="tVY-d6-n32"/>
+                    <constraint firstItem="qbz-tR-o2i" firstAttribute="top" secondItem="wdO-4I-POP" secondAttribute="bottom" id="tfY-Gt-eL6"/>
+                    <constraint firstItem="CSA-ye-utE" firstAttribute="top" secondItem="wdO-4I-POP" secondAttribute="bottom" constant="8" symbolic="YES" id="uKs-Td-LdN"/>
+                    <constraint firstItem="wdO-4I-POP" firstAttribute="top" secondItem="pt6-Hs-1PA" secondAttribute="top" id="yUp-p6-XAo"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="414" height="244"/>
             <connections>
                 <outlet property="collectionView" destination="qbz-tR-o2i" id="YPL-Kh-mJy"/>
+                <outlet property="emptyLabel" destination="CSA-ye-utE" id="xFv-2Z-5a2"/>
+                <outlet property="titleLabel" destination="wdO-4I-POP" id="DUF-Ve-tzl"/>
             </connections>
             <point key="canvasLocation" x="44.927536231884062" y="104.46428571428571"/>
         </collectionViewCell>

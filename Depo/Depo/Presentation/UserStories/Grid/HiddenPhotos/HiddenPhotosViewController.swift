@@ -12,6 +12,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
+    private let emptyView = HiddenPhotosEmptyView.initFromNib()
     
     private lazy var dataSource = HiddenPhotosDataSource(collectionView: collectionView, delegate: self)
     private lazy var sortingManager = HiddenPhotosSortingManager(delegate: self)
@@ -29,6 +30,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         
         sortingManager.addBarView(to: sortPanelContainer)
         setupRefreshControl()
+        setupEmptyView()
         bottomBarManager.setup()
         
         reloadData()
@@ -49,13 +51,24 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         collectionView.refreshControl = refreshControl
     }
     
+    private func setupEmptyView() {
+        collectionView.backgroundView = emptyView
+        emptyView.topOffset = AlbumsSliderCell.height
+        emptyView.isHidden = true
+    }
+    
     @objc private func reloadData() {
         showSpinner()
         
         dataSource.reset()
         dataLoader.reloadData { [weak self] in
-            self?.collectionView.refreshControl?.endRefreshing()
-            self?.hideSpinner()
+            guard let self = self else {
+                return
+            }
+            
+            self.collectionView.refreshControl?.endRefreshing()
+            self.hideSpinner()
+            self.emptyView.isHidden = !self.dataSource.isEmpty
         }
     }
 }
