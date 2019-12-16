@@ -8,48 +8,62 @@
 
 import UIKit
 
-protocol AlbumsSliderViewDelegate: class {
-    func didSelect(item: SliderItem)
+protocol AlbumsSliderCellDelegate: class {
+    func didSelect(item: BaseDataSourceItem)
     func didChangeSelectionCount(_ count: Int)
+    func needLoadNextAlbumPage()
 }
 
-final class AlbumsSliderView: UIView, NibInit {
+final class AlbumsSliderCell: UICollectionViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var emptyLabel: UILabel!
  
-    weak var delegate: AlbumsSliderViewDelegate?
+    weak var delegate: AlbumsSliderCellDelegate?
     
     private lazy var dataSource = AlbumsSliderDataSource(collectionView: collectionView, delegate: self)
  
-    var selectedItems: [SliderItem] {
+    var selectedItems: [BaseDataSourceItem] {
         return dataSource.selectedItems
     }
     
     //MARK: - 
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = .lightGray
+    }
+    
     func setup(title: String, emptyText: String) {
         
     }
-    
-    func setItems(_ newItems: [SliderItem]) {
-        dataSource.setItems(newItems)
-    }
-    
-    func appendItems(_ newItems: [SliderItem]) {
+
+    func appendItems(_ newItems: [BaseDataSourceItem]) {
         dataSource.appendItems(newItems)
     }
 }
 
+//MARK: - Selection State
+
+extension AlbumsSliderCell {
+    
+}
+
+
 //MARK: - AlbumsSliderDataSourceDelegate
 
-extension AlbumsSliderView: AlbumsSliderDataSourceDelegate {
-    func didSelect(item: SliderItem) {
+extension AlbumsSliderCell: AlbumsSliderDataSourceDelegate {
+    func didSelect(item: BaseDataSourceItem) {
         delegate?.didSelect(item: item)
     }
     
     func didChangeSelectionCount(_ count: Int) {
         delegate?.didChangeSelectionCount(count)
+    }
+    
+    func needLoadNextPage() {
+        delegate?.needLoadNextAlbumPage()
     }
 }

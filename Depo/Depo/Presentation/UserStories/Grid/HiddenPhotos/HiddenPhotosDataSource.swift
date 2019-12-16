@@ -9,8 +9,10 @@
 import Foundation
 
 protocol HiddenPhotosDataSourceDelegate: class {
-    func needLoadNextPage()
-    func didSelect(item: Item)
+    func needLoadNextPhotoPage()
+    func needLoadNextAlbumPage()
+    func didSelectPhoto(item: Item)
+    func didSelectAlbum(item: BaseDataSourceItem)
     func onStartSelection()
 }
 
@@ -27,8 +29,8 @@ final class HiddenPhotosDataSource: NSObject {
     private let collectionView: UICollectionView
     private weak var delegate: HiddenPhotosDataSourceDelegate?
     
-    private var allItems = [[Item]]()
-    private var selectedItems = [Item]()
+    private(set) var allItems = [[Item]]()
+    private(set) var selectedItems = [Item]()
     
     private var showGroups: Bool {
         return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .sizeZA, .timeUp, .timeDown])
@@ -49,6 +51,12 @@ final class HiddenPhotosDataSource: NSObject {
         return result
     }
     
+    private lazy var photoCellSize: CGSize = {
+        let viewWidth = UIScreen.main.bounds.width
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        return CGSize(width: itemWidth, height: itemWidth)
+    }()
+    
     //MARK: - Init
     
     required init(collectionView: UICollectionView, delegate: HiddenPhotosDataSourceDelegate?) {
@@ -66,14 +74,12 @@ final class HiddenPhotosDataSource: NSObject {
         collectionView.dataSource = self
         collectionView.register(nibCell: CollectionViewCellForPhoto.self)
         collectionView.register(nibCell: CollectionViewCellForVideo.self)
+        collectionView.register(nibCell: AlbumsSliderCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let viewWidth = UIScreen.main.bounds.width
-            let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-            layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
             layout.minimumInteritemSpacing = padding
             layout.minimumLineSpacing = padding
         }
@@ -83,6 +89,14 @@ final class HiddenPhotosDataSource: NSObject {
 //MARK: - Public methods
 
 extension HiddenPhotosDataSource {
+    
+    func appendAlbum(items: [BaseDataSourceItem]) {
+        guard let albumSlider = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? AlbumsSliderCell else {
+            return
+        }
+        albumSlider.appendItems(items)
+    }
+    
     func append(items: [Item]) {
         if items.isEmpty {
             isPaginationDidEnd = true
@@ -179,10 +193,10 @@ extension HiddenPhotosDataSource {
 extension HiddenPhotosDataSource {
     
     private func item(for indexPath: IndexPath) -> Item? {
-        guard allItems.count > indexPath.section, allItems[indexPath.section].count > indexPath.row else {
+        guard allItems.count > indexPath.section - 1, allItems[indexPath.section - 1].count > indexPath.row else {
             return nil
         }
-        return allItems[safe: indexPath.section]?[safe: indexPath.row]
+        return allItems[safe: indexPath.section - 1]?[safe: indexPath.row]
     }
     
     private func headerText(for item: Item) -> String {
@@ -197,7 +211,7 @@ extension HiddenPhotosDataSource {
     }
     
     private func headerText(indexPath: IndexPath) -> String {
-        guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
+        guard let itemsInSection = allItems[safe: indexPath.section - 1], let item = itemsInSection.first else {
             return ""
         }
         return headerText(for: item)
@@ -299,7 +313,7 @@ extension HiddenPhotosDataSource {
     }
     
     private func appendInLastSection(newItem: Item) -> InsertItemResult {
-        let section = allItems.count - 1
+        let section = allItems.count
         let item = allItems[section].count
         let indexPath = IndexPath(item: item, section: section)
         allItems[section].append(newItem)
@@ -307,7 +321,7 @@ extension HiddenPhotosDataSource {
     }
     
     private func appendSection(with newItem: Item) -> InsertItemResult {
-        let section = allItems.count
+        let section = allItems.count + 1
         let indexPath = IndexPath(item: 0, section: section)
         allItems.append([newItem])
         return (indexPath, section)
@@ -326,19 +340,27 @@ extension HiddenPhotosDataSource {
 extension HiddenPhotosDataSource: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return allItems.count
+        return allItems.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       guard section < allItems.count else {
+        if section == 0 {
+            return 1
+        }
+        
+        guard section - 1 < allItems.count else {
             return 0
         }
-        return allItems[section].count
+        return allItems[section - 1].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            return collectionView.dequeue(cell: AlbumsSliderCell.self, for: indexPath)
+        }
+
         guard let item = item(for: indexPath) else {
-            assertionFailure("failed return cell")
+//            assertionFailure("failed return cell")
             return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
         }
         
@@ -357,9 +379,18 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            guard let cell = cell as? AlbumsSliderCell else {
+                return
+            }
+            
+            cell.delegate = self
+            return
+        }
+        
         guard let cell = cell as? CollectionViewCellDataProtocol,
             let item = item(for: indexPath) else {
-            assertionFailure("failed setup cell")
+//            assertionFailure("failed setup cell")
             return
         }
         
@@ -371,11 +402,11 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
             return
         }
 
-        let countRow = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-        let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 1
+        let countRow = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section - 1)
+        let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 2
 
         if isLastCell {
-            delegate?.needLoadNextPage()
+            delegate?.needLoadNextPhotoPage()
         }
     }
     
@@ -399,8 +430,14 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
 
 extension HiddenPhotosDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section > 0 else {
+            return
+        }
+        
         if isSelectionStateActive {
             
+        } else if let item = item(for: indexPath) {
+            delegate?.didSelectPhoto(item: item)
         }
     }
 }
@@ -410,12 +447,19 @@ extension HiddenPhotosDataSource: UICollectionViewDelegate {
 extension HiddenPhotosDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return showGroups ? 50 : 0
+        return showGroups && section > 0 ? 50 : 0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let height: CGFloat = showGroups ? 50 : 0
+        let height: CGFloat = showGroups && section > 0 ? 50 : 0
         return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize(width: collectionView.contentSize.width, height: 198)
+        }
+        return photoCellSize
     }
 }
 
@@ -431,5 +475,21 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
         if !isSelectionStateActive, let indexPath = collectionView.indexPath(for: cell) {
             startSelection(indexPath: indexPath)
         }
+    }
+}
+
+//MARK: - AlbumsSliderViewDelegate
+
+extension HiddenPhotosDataSource: AlbumsSliderCellDelegate {
+    func didSelect(item: BaseDataSourceItem) {
+        delegate?.didSelectAlbum(item: item)
+    }
+    
+    func didChangeSelectionCount(_ count: Int) {
+        
+    }
+    
+    func needLoadNextAlbumPage() {
+        delegate?.needLoadNextAlbumPage()
     }
 }

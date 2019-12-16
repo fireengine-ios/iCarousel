@@ -9,8 +9,9 @@
 import Foundation
 
 protocol AlbumsSliderDataSourceDelegate: class {
-    func didSelect(item: SliderItem)
+    func didSelect(item: BaseDataSourceItem)
     func didChangeSelectionCount(_ count: Int)
+    func needLoadNextPage()
 }
 
 final class AlbumsSliderDataSource: NSObject {
@@ -18,14 +19,15 @@ final class AlbumsSliderDataSource: NSObject {
     private let collectionView: UICollectionView
     private weak var delegate: AlbumsSliderDataSourceDelegate?
     
-    private var items = [SliderItem]()
-    private(set) var selectedItems = [SliderItem]() {
+    private var items = [BaseDataSourceItem]()
+    private(set) var selectedItems = [BaseDataSourceItem]() {
         didSet {
             delegate?.didChangeSelectionCount(selectedItems.count)
         }
     }
     
-    var isSelectionMode = false
+    private(set) var isSelectionMode = false
+    private var isPaginationDidEnd = false
     
     //MARK: - Init
     
@@ -55,20 +57,24 @@ final class AlbumsSliderDataSource: NSObject {
     }
     
     //MARK: - Shared methods
-    
-    func setItems(_ newItems: [SliderItem]) {
-        items = newItems
-        collectionView.reloadData()
-    }
-    
-    func appendItems(_ newItems: [SliderItem]) {
-        let startIndex = items.count
-        let endIndex = startIndex + newItems.count - 1
-        
-        items.append(contentsOf: newItems)
-        
-        let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
-        collectionView.insertItems(at: indexPaths)
+
+    func appendItems(_ newItems: [BaseDataSourceItem]) {
+        if newItems.isEmpty {
+            isPaginationDidEnd = true
+        }
+
+        if items.isEmpty {
+            items = newItems
+            collectionView.reloadData()
+        } else {
+            let startIndex = items.count
+            let endIndex = startIndex + newItems.count - 1
+           
+            items.append(contentsOf: newItems)
+           
+            let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+            collectionView.insertItems(at: indexPaths)
+        }
     }
 }
 
@@ -88,7 +94,17 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
         guard let cell = cell as? SingleThumbnailAlbumCell else {
             return
         }        
-        cell.setup(withItem: items[indexPath.item])
+//        cell.setup(withItem: items[indexPath.item])
+        
+        if isPaginationDidEnd {
+            return
+        }
+        
+        let countRow = self.collectionView(collectionView, numberOfItemsInSection: 0)
+
+        if indexPath.row == countRow - 1 {
+            delegate?.needLoadNextPage()
+        }
     }
 }
 

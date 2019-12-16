@@ -8,32 +8,26 @@
 
 import Foundation
 
-import Alamofire
-import SwiftyJSON
-
 protocol HiddenPhotosDataLoaderDelegate: class {
     func didLoadPhoto(items: [Item])
-    func didLoadAlbum(items: [AlbumItem])
+    func didLoadAlbum(items: [BaseDataSourceItem])
 }
 
 final class HiddenPhotosDataLoader {
     
-    private enum AlbumsOrder {
-        case people
+    private enum AlbumsOrder: Int {
+        case people = 0
         case things
         case places
         case albums
     }
     
+    private let photoPageSize = 50
     private let albumPageSize = 50
     
     private weak var delegate: HiddenPhotosDataLoaderDelegate?
     
-    private lazy var fileService = FileService.shared
-    private lazy var albumService = AlbumService(requestSize: 100)
-    private lazy var peopleService = PeopleService()
-    private lazy var thingsService = ThingsService()
-    private lazy var placesService = PlacesService()
+    private lazy var hiddenService = HiddenService()
     
     private var photoPage = 0
     private var currentAlbumsPage = 0
@@ -56,11 +50,11 @@ final class HiddenPhotosDataLoader {
     
     //MARK: - Public methods
     
-    func reloadData() {
+    func reloadData(completion: @escaping VoidHandler) {
         photoPage = 0
         photoTask?.cancel()
         photoTask = nil
-        loadPhotos()
+        loadPhotos(completion: completion)
         
         currentAlbumsPage = 0
         albumsTask?.cancel()
@@ -74,7 +68,7 @@ final class HiddenPhotosDataLoader {
         }
         
         photoPage += 1
-        loadPhotos()
+        loadPhotos(completion: nil)
     }
     
     func loadNextAlbumsPage() {
@@ -88,61 +82,94 @@ final class HiddenPhotosDataLoader {
     
     //MARK: - Private methods
     
-    private func loadPhotos() {
-        hiddenList(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: photoPage, size: 20) { [weak self] result in
-            self?.photoTask = nil
+    private func loadPhotos(completion: VoidHandler?) {
+        photoTask = hiddenService.hiddenList(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: photoPage, size: photoPageSize) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.photoTask = nil
             
             switch result {
             case .success(let response):
-                self?.delegate?.didLoadPhoto(items: response.fileList)
+                self.delegate?.didLoadPhoto(items: response.fileList)
+            case .failed(let error):
+                debugPrint(error.description)
+            }
+            
+            completion?()
+        }
+    }
+    
+    private func loadAlbums() {
+        loadCurrentTypeAlbums { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let array):
+                if array.count < self.albumPageSize, let newAlbumType = AlbumsOrder(rawValue: self.currentLoadingAlbumType.rawValue + 1) {
+                    self.currentLoadingAlbumType = newAlbumType
+                    self.currentAlbumsPage = 0
+                }
+                self.delegate?.didLoadAlbum(items: array)
             case .failed(let error):
                 debugPrint(error.description)
             }
         }
     }
     
-    private func loadAlbums() {
+    private func loadCurrentTypeAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
         switch currentLoadingAlbumType {
         case .people:
-            loadPeopleAlbums()
+            loadPeopleAlbums(handler: handler)
         case .things:
-            loadThingsAlbums()
+            loadThingsAlbums(handler: handler)
         case .places:
-            loadPlacesAlbums()
+            loadPlacesAlbums(handler: handler)
         case .albums:
-            loadCustomAlbums()
+            loadCustomAlbums(handler: handler)
         }
     }
     
-    private func loadPeopleAlbums() {
-        
+    private func loadPeopleAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
+        albumsTask = hiddenService.getHiddenPeoplePage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+            switch result {
+            case .success(let response):
+                let array = response.list.map { Item(peopleItemResponse: $0) }
+                handler(.success(array))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        })
     }
     
-    private func loadThingsAlbums() {
-        
+    private func loadThingsAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
+        albumsTask = hiddenService.getHiddenThingsPage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+            switch result {
+            case .success(let response):
+                let array = response.list.map { Item(thingsItemResponse: $0) }
+                handler(.success(array))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        })
     }
     
-    private func loadPlacesAlbums() {
-        
+    private func loadPlacesAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
+        albumsTask = hiddenService.getHiddenPlacesPage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+            switch result {
+            case .success(let response):
+                let array = response.list.map { Item(placesItemResponse: $0) }
+                handler(.success(array))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        })
     }
     
-    private func loadCustomAlbums() {
-        
-    }
-    
-    private func hiddenList(sortBy: SortType, sortOrder: SortOrder, page: Int,size: Int, handler: @escaping (ResponseResult<FileListResponse>) -> Void) {//-> URLSessionTask {
-//        let url = RouteRequests.baseUrl +/ "filesystem/hidden?sortBy=\(sortBy.description)&sortOrder=\(sortOrder.description)&page=\(page)&size=\(size)&category=photos_and_videos"
-        
-        let hiddenList = RouteRequests.baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
-            
-        let url = String(format: hiddenList, sortBy.description, sortOrder.description, page.description, size.description)
-        
-        debugPrint(url)
-        
-        SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
+    private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
+
     }
 }

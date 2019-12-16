@@ -39,7 +39,7 @@ enum MyStreamType: Int {
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
         case .firAlbum: return #imageLiteral(resourceName: "places")
-        case .hidden: return #imageLiteral(resourceName: "places")
+        case .hidden: return UIImage(named: "hidden")!
         default: return UIImage()
         }
     }

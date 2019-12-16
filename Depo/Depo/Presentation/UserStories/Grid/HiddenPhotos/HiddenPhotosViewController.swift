@@ -46,18 +46,17 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        if #available(iOS 10.0, *) {
-            collectionView.refreshControl = refreshControl
-        } else {
-            // Fallback on earlier versions
-        }
+        collectionView.refreshControl = refreshControl
     }
     
     @objc private func reloadData() {
         showSpinner()
         
         dataSource.reset()
-        dataLoader.reloadData()
+        dataLoader.reloadData { [weak self] in
+            self?.collectionView.refreshControl?.endRefreshing()
+            self?.hideSpinner()
+        }
     }
 }
 
@@ -98,12 +97,20 @@ extension HiddenPhotosViewController {
 //MARK: - HiddenPhotosDataSourceDelegate
 
 extension HiddenPhotosViewController: HiddenPhotosDataSourceDelegate {
-    
-    func needLoadNextPage() {
+        
+    func needLoadNextPhotoPage() {
         dataLoader.loadNextPhotoPage()
     }
     
-    func didSelect(item: Item) {
+    func needLoadNextAlbumPage() {
+        dataLoader.loadNextAlbumsPage()
+    }
+    
+    func didSelectPhoto(item: Item) {
+        showDetails(item: item)
+    }
+    
+    func didSelectAlbum(item: BaseDataSourceItem) {
         
     }
     
@@ -129,8 +136,8 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
         dataSource.append(items: items)
     }
     
-    func didLoadAlbum(items: [AlbumItem]) {
-        
+    func didLoadAlbum(items: [BaseDataSourceItem]) {
+        dataSource.appendAlbum(items: items)
     }
 }
 
@@ -158,8 +165,7 @@ extension HiddenPhotosViewController: HiddenPhotosNavbarManagerDelegate {
     }
     
     func onSearch() {
-        let controller = router.searchView(navigationController: navigationController)
-        router.pushViewController(viewController: controller)
+        openSearch()
     }
 }
 
@@ -176,5 +182,20 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
     
     func onThreeDotsManagerDelete() {
         
+    }
+}
+
+//MARK: - Routing
+
+extension HiddenPhotosViewController {
+    private func showDetails(item: Item) {
+        let controller = router.filesDetailViewController(fileObject: item, items: dataSource.allItems.flatMap { $0 })
+        let navController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: navController)
+    }
+    
+    private func openSearch() {
+        let controller = router.searchView(navigationController: navigationController)
+        router.pushViewController(viewController: controller)
     }
 }
