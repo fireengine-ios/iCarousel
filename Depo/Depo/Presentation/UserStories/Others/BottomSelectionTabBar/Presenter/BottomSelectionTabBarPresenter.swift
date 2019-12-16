@@ -152,13 +152,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 }
             case .smash:
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                                if selectedItems.count <= allowedNumberLimit {
-                                    self.basePassingPresenter?.stopModeSelected()
-                                } else {
-                                     //TODO: FE-1866
-                                    //correct action should be added here
-                                    UIApplication.showErrorAlert(message: TextConstants.errorAlert)
-                                }
+                if selectedItems.count <= allowedNumberLimit {
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    //TODO: FE-1866
+                    //correct action should be added here
+                    UIApplication.showErrorAlert(message: TextConstants.errorAlert)
+                }
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
                 
