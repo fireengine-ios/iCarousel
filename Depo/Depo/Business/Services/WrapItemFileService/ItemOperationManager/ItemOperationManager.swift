@@ -61,6 +61,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishUploadFiles()
     
+    func didHide(items: [WrapData])
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -112,6 +113,7 @@ extension ItemOperationManagerViewProtocol {
     
     func finishUploadFiles() {}
     
+    func didHide(items: [WrapData]) {}
 }
 
 
@@ -374,4 +376,11 @@ class ItemOperationManager: NSObject {
     }
 
     
+    func didHide(items: [WrapData]) {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.didHide(items: items)
+            }
+        }
+    }
 }
