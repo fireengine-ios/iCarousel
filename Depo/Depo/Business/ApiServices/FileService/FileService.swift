@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class CreatesFolder: BaseRequestParametrs {
     
     let folderName: String
@@ -634,4 +633,31 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
 //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }
+}
+
+
+
+import Alamofire
+
+final class HiddenService {
+    
+    func hiddenList(sortBy: SortType,
+                    sortOrder: SortOrder,
+                    page: Int,
+                    size: Int,
+                    handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+        
+        let url = String(format: RouteRequests.FileSystem.hiddenList,
+                         sortBy.description, sortOrder.description,
+                         page.description, size.description)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    
 }
