@@ -15,6 +15,7 @@ enum MyStreamType: Int {
     case albums
     case album
     case firAlbum
+    case hidden
     
     var title: String {
         switch self {
@@ -24,6 +25,7 @@ enum MyStreamType: Int {
         case .people: return TextConstants.myStreamPeopleTitle
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle
+        case .hidden: return TextConstants.smartAlbumHidden
         default: return ""
         }
     }
@@ -37,6 +39,7 @@ enum MyStreamType: Int {
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
         case .firAlbum: return #imageLiteral(resourceName: "places")
+        case .hidden: return #imageLiteral(resourceName: "places")
         default: return UIImage()
         }
     }
@@ -52,7 +55,7 @@ enum MyStreamType: Int {
     
     func isMyStreamSliderType() -> Bool {
         switch self {
-        case .albums, .story, .people, .things, .places, .instaPick:
+        case .albums, .story, .people, .things, .places, .instaPick, .hidden:
             return true
         case .album, .firAlbum:
             return false
@@ -125,6 +128,12 @@ class SliderItem {
     
     private func setType(_ type: MyStreamType?) {
         self.type = type
+    }
+}
+
+extension SliderItem: Equatable {
+    static func == (lhs: SliderItem, rhs: SliderItem) -> Bool {
+        return lhs.type == rhs.type && lhs.albumItem == rhs.albumItem
     }
 }
 
