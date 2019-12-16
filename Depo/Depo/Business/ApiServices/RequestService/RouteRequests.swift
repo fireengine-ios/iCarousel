@@ -160,12 +160,15 @@ struct RouteRequests {
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumHide = baseUrl +/ "album/hide"
     
     // MARK: My Streams
     
+    // FIXME: pass paramaerts as request paramerts
     static let people = "person/"
     static let peopleThumbnails = "person/thumbnails"
     static let peoplePage = "person/page?pageSize=%d&pageNumber=%d"
+    static let peoplePageHidden = peoplePage + "&status=HIDDEN"
     static let peopleAlbum = "album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
     static let peopleAlbums = "person/relatedAlbums/%d"
     static let personVisibility = "person/visibility/"
@@ -177,12 +180,14 @@ struct RouteRequests {
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
     static let thingsPage = "object/page?pageSize=%d&pageNumber=%d"
+    static let thingsPageHidden = thingsPage + "&status=HIDDEN"
     static let thingsAlbum = "album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
     static let thingsDeletePhotos = "object/photo/%d"
 //    static let thingsDeletePhoto = "object/photo/%d/%d"
     static let places = "location/"
     static let placesThumbnails = "location/thumbnails"
     static let placesPage = "location/page?pageSize=%d&pageNumber=%d"
+    static let placesPageHidden = placesPage + "&status=HIDDEN"
     static let placesAlbum = "album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
 //    static let placesDeletePhotos = "location/%d"
     
@@ -306,6 +311,24 @@ struct RouteRequests {
         static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
         static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
         static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
+    }
+    
+    enum FileSystem {
+        static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
+        
+        static let filesystemBase = "filesystem/"
+        
+        static let create = filesystemBase + "createFolder?parentFolderUuid=%@"
+        static let delete = filesystemBase + "delete"
+        static let rename = filesystemBase + "rename/%@"
+        static let move = filesystemBase + "move?targetFolderUuid=%@"
+        static let copy = filesystemBase + "copy?targetFolderUuid=%@"
+        static let details = filesystemBase + "details?minified=true"
+        static let detail = filesystemBase + "detail/%@"
+        static let metaData = filesystemBase + "metadata"
+        static let hide = filesystemBase + "hide"
+        static let recover = filesystemBase + "recover"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

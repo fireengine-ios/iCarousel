@@ -8,20 +8,6 @@
 
 import Foundation
 
-struct FilePatch {
-    static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-    static let create = "filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "filesystem/delete"
-    static let rename = "filesystem/rename/%@"
-    static let move =   "filesystem/move?targetFolderUuid=%@"
-    static let copy =   "filesystem/copy?targetFolderUuid=%@"
-    static let details = "filesystem/details?minified=true"
-    static let detail =  "filesystem/detail/%@"
-    
-    static let metaData = "filesystem/metadata"
-}
-
-
 class CreatesFolder: BaseRequestParametrs {
     
     let folderName: String
@@ -40,7 +26,7 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.create, rootFolderName )
+        let path: String = String(format: RouteRequests.FileSystem.create, rootFolderName )
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -72,7 +58,7 @@ class DeleteFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.delete, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.delete, relativeTo: super.patch)!
     }
     
     init(items: [String]) {
@@ -90,7 +76,7 @@ class MoveFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.move, path)
+        let str = String(format: RouteRequests.FileSystem.move, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -110,7 +96,7 @@ class CopyFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.copy, path)
+        let str = String(format: RouteRequests.FileSystem.copy, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -135,7 +121,7 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.rename, uuid)
+        let path: String = String(format: RouteRequests.FileSystem.rename, uuid)
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -157,7 +143,7 @@ class MetaDataFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.metaData, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.metaData, relativeTo: super.patch)!
     }
     
     init(items: [String], addToFavourit: Bool) {
@@ -175,7 +161,7 @@ class FileDetail: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.detail, uuid)
+        let str = String(format: RouteRequests.FileSystem.detail, uuid)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -193,7 +179,7 @@ class FileDetails: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.details, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.details, relativeTo: super.patch)!
     }
     
     init(uuids: [String] ) {
@@ -222,7 +208,7 @@ class FileList: BaseRequestParametrs {
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format: FilePatch.fileList, rootDir,
+        let path: String = String(format: RouteRequests.FileSystem.fileList, rootDir,
                                   sortBy.description, sortOrder.description,
                                   page.description, size.description, folder)
         
@@ -647,4 +633,122 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
 //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }
+}
+
+
+
+import Alamofire
+
+// TODO: create file HiddenService if need
+final class HiddenService {
+    
+    func hiddenList(sortBy: SortType,
+                    sortOrder: SortOrder,
+                    page: Int,
+                    size: Int,
+                    handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+        debugLog("hiddenList")
+        
+        let url = String(format: RouteRequests.FileSystem.hiddenList,
+                         sortBy.description, sortOrder.description,
+                         page.description, size.description)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    func getHiddenPlacesPage(pageSize: Int,
+                             pageNumber: Int,
+                             handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("getHiddenPlacesPage")
+        
+        let url = String(format: RouteRequests.placesPageHidden, pageSize, pageNumber)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .responseObject(handler)
+            .task
+    }
+    
+    func getHiddenPeoplePage(pageSize: Int,
+                             pageNumber: Int,
+                             handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("getHiddenPeoplePage")
+        
+        let url = String(format: RouteRequests.peoplePageHidden, pageSize, pageNumber)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .responseObject(handler)
+            .task
+    }
+    
+    func getHiddenThingsPage(pageSize: Int,
+                             pageNumber: Int,
+                             handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("getHiddenThingsPage")
+        
+        let url = String(format: RouteRequests.thingsPageHidden, pageSize, pageNumber)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .responseObject(handler)
+            .task
+    }
+    
+    
+    
+    func hideItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideItems")
+        let itemsIds = items.compactMap { $0.uuid }
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.hide,
+                     method: .delete,
+                     parameters: itemsIds.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
+    func hideAlbums(_ albums: [AlbumServiceResponse], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideAlbums")
+        let albumIds = albums.compactMap { $0.uuid }
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.albumHide,
+                     method: .delete,
+                     parameters: albumIds.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
+    // TODO: check for files and albums
+    /// from doc: UUID of file(s) and/or folder(s) to recover them.
+    func recoverItemsByUuids(_ uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoverItems")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.recover,
+                     method: .post,
+                     parameters: uuids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
 }
