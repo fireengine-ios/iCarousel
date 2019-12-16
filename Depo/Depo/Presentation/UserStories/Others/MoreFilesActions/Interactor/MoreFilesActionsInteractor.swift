@@ -291,9 +291,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
-            self?.fileService.delete(deleteFiles: items,
-                                     success: self?.succesAction(elementType: .delete),
-                                     fail: self?.failAction(elementType: .delete))
+            self?.fileService.moveToTrash(files: items,
+                                          success: self?.succesAction(elementType: .delete),
+                                          fail: self?.failAction(elementType: .delete))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
@@ -313,7 +313,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             
-            self?.albumService.delete(albums: albumbs, success: { [weak self] deletedAlbums in
+            self?.albumService.trash(albums: albumbs, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)

@@ -23,8 +23,8 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     private let accountService = AccountService()
     private lazy var answer = SecretQuestionWithAnswer()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    var delegate: SetSecurityQuestionViewControllerDelegate?
     private var questions = [SecretQuestionsResponse]()
+    var delegate: SetSecurityQuestionViewControllerDelegate?
     
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
@@ -112,49 +112,21 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
-        
+        showSpinnerIncludeNavigationBar()
         answer.questionAnswer = secretAnswerView.answerTextField.text
         captchaView.hideErrorAnimated()
         secretAnswerView.hideErrorAnimated()
         
-        guard
-            let captchaAnswer = captchaView.captchaAnswerTextField.text,
-            let questionId = answer.questionId,
-            let questionIndex = questions.firstIndex(where: { $0.id == questionId }),
-            let securityQuestionAnswer = answer.questionAnswer
-        else {
-            assertionFailure("all fields should not be nil")
-            return
-        }
-           
-        accountService.updateSecurityQuestion(questionId: questionId,
-                                              securityQuestionAnswer: securityQuestionAnswer,
-                                              captchaId: captchaView.currentCaptchaUUID,
-                                              captchaAnswer: captchaAnswer) { [weak self] result in
-                                                
-                                                guard let self = self else {
-                                                    return
-                                                }
-                                                
-                                                switch result {
-                                                case .success:
-                                                    self.questionWasSuccessfullyUpdated()
-                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
-                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
-                                                                                             eventLabel: .success)
-                                                case .failure(let error):
-                                                    self.handleServerErrors(error)
-                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
-                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
-                                                                                             eventLabel: .failure,
-                                                                                             errorType: error.gaErrorType)
-                                                }
+        getQuestions { [weak self] questions in
+            self?.updateSecurityQuestion(questions: questions)
         }
     }
     
-    func configureWith(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate?) {
+    func configureWith(selectedQuestion: SecretQuestionsResponse?,
+                       delegate: SetSecurityQuestionViewControllerDelegate?) {
         self.delegate = delegate
         answer.questionId = selectedQuestion?.id
+        answer.question = selectedQuestion?.text
         setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
     }
     
@@ -174,16 +146,13 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
     }
        
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
-        
         captchaView.updateCaptcha()
         captchaView.captchaAnswerTextField.text = ""
-        
         let errorText = error.localizedDescription
         
         switch error {
         case .invalidCaptcha:
             captchaView.showErrorAnimated(text: errorText)
-            captchaView.updateCaptcha()
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
             secretAnswerView.showErrorAnimated(text: errorText)
@@ -211,8 +180,73 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
             saveButton.isEnabled = true
         }
     }
+    
+    private func getQuestions(handler: @escaping ([SecretQuestionsResponse]) -> Void) {
+        /// can be added lock for synchronization if there will be several requests
+        
+        if questions.hasItems {
+            handler(questions)
+            
+        } else {
+            accountService.getListOfSecretQuestions { [weak self] response in
+                guard let self = self else {
+                    return
+                }
+                
+                switch response {
+                case .success(let questions):
+                    self.questions = questions
+                    handler(questions)
+                case .failed(let error):
+                    self.showErrorPopUp(error: error)
+                    self.hideSpinnerIncludeNavigationBar()
+                }
+            }
+        }
+
+    }
+    
+    private func updateSecurityQuestion(questions: ([SecretQuestionsResponse])) {
+        
+        guard
+            let captchaAnswer = captchaView.captchaAnswerTextField.text,
+            let questionId = answer.questionId,
+            let questionIndex = questions.firstIndex(where: { $0.id == questionId }),
+            let securityQuestionAnswer = answer.questionAnswer
+        else {
+            assertionFailure("all fields should not be nil")
+            hideSpinnerIncludeNavigationBar()
+            return
+        }
+           
+        accountService.updateSecurityQuestion(questionId: questionId,
+                                              securityQuestionAnswer: securityQuestionAnswer,
+                                              captchaId: captchaView.currentCaptchaUUID,
+                                              captchaAnswer: captchaAnswer) { [weak self] result in
+                                                
+                                                guard let self = self else {
+                                                    return
+                                                }
+                                                self.hideSpinnerIncludeNavigationBar()
+                                                
+                                                switch result {
+                                                case .success:
+                                                    self.questionWasSuccessfullyUpdated()
+                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
+                                                                                             eventLabel: .success)
+                                                case .failure(let error):
+                                                    self.handleServerErrors(error)
+                                                    self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
+                                                                                             eventActions: .saveSecurityQuestion(questionIndex + 1),
+                                                                                             eventLabel: .failure,
+                                                                                             errorType: error.gaErrorType)
+                                                }
+        }
+    }
 }
 
+// MARK: - SelectQuestionViewControllerDelegate
 extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?) {
         
@@ -237,22 +271,18 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
     }
 }
 
+// MARK: - SecurityQuestionViewDelegate
 extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
-    func selectSecurityQuestionTapped() {        
-        accountService.getListOfSecretQuestions { [weak self] response in
+    
+    func selectSecurityQuestionTapped() {
+        
+        getQuestions { [weak self] questions in
             guard let self = self else {
-                assertionFailure()
                 return
             }
-            
-            switch response {
-            case .success( let questions):
-                self.questions = questions
-                let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
-                self.present(controller, animated: true)
-            case .failed(let error):
-                self.showErrorPopUp(error: error)
-            }
+            let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
+            self.present(controller, animated: true)
         }
     }
+    
 }
