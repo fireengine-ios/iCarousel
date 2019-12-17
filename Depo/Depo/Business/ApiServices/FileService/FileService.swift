@@ -665,11 +665,11 @@ final class HiddenService {
                       sortOrder: SortOrder,
                       page: Int,
                       size: Int,
-                      handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+                      handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenAlbums")
         
         let url = String(format: RouteRequests.albumListHidden,
-                         SearchContentType.content_type.description,
+                         SearchContentType.album.description,
                          page.description, size.description,
                          sortBy.description, sortOrder.description)
         
@@ -730,6 +730,7 @@ final class HiddenService {
         return SessionManager
             .customDefault
             .request(url)
+            .customValidate()
             .responseObject(handler)
             .task
     }
@@ -744,6 +745,7 @@ final class HiddenService {
         return SessionManager
             .customDefault
             .request(url)
+            .customValidate()
             .responseObject(handler)
             .task
     }
@@ -758,6 +760,7 @@ final class HiddenService {
         return SessionManager
             .customDefault
             .request(url)
+            .customValidate()
             .responseObject(handler)
             .task
     }
