@@ -96,12 +96,23 @@
                         <constraint firstItem="hiP-nw-zIq" firstAttribute="centerX" secondItem="0pY-kk-cXx" secondAttribute="centerX" id="rFM-cP-l7v"/>
                         <constraint firstItem="aa1-cn-keG" firstAttribute="centerX" secondItem="0pY-kk-cXx" secondAttribute="centerX" id="xON-XQ-RLm"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="4Xq-aG-UUQ"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="4Xq-aG-UUQ"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0pY-kk-cXx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="64Z-KK-W1B"/>
                 <constraint firstItem="0pY-kk-cXx" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="85:100" id="7jm-bh-D7x"/>
+                <constraint firstItem="0pY-kk-cXx" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="2:7" id="TSL-qJ-Rwa"/>
                 <constraint firstItem="0pY-kk-cXx" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="65:100" id="iCN-uU-FUd"/>
                 <constraint firstItem="0pY-kk-cXx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kHn-Ic-q1a"/>
             </constraints>
@@ -109,11 +120,13 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="7jm-bh-D7x"/>
+                    <exclude reference="TSL-qJ-Rwa"/>
                     <exclude reference="iCN-uU-FUd"/>
                 </mask>
             </variation>
             <variation key="widthClass=regular">
                 <mask key="constraints">
+                    <include reference="TSL-qJ-Rwa"/>
                     <include reference="iCN-uU-FUd"/>
                 </mask>
             </variation>
