@@ -714,6 +714,8 @@ struct TextConstants {
     static let waitingForWiFiPopUpSettingsButton = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let prepareToAutoSunc = NSLocalizedString("Auto Sync Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let prepareQuickScroll = NSLocalizedString("Quick Scroll Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessPopupMessage = NSLocalizedString("hide_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessPopupButtonTitle = NSLocalizedString("hide_success_popup_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -675,24 +675,33 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                
-                let text: String
-                switch elementType {
-                case .download:
-                    text = TextConstants.popUpDownloadComplete
-                case .delete:
-                    text = TextConstants.popUpDeleteComplete
-                    MenloworksAppEvents.onFileDeleted()
-                case .hide:
-                    //TODO: FE-1869 change to custom popup
-                    text = TextConstants.popUpHideComplete
-                default:
-                    return
-                }
-                UIApplication.showSuccessAlert(message: text)
+                self?.showSuccessPopup(for: elementType)
             }
         }
         return success
+    }
+    
+    private func showSuccessPopup(for elementType: ElementTypes) {
+        guard elementType != .hide else {
+            let vc = SuccessfullHidePopUp.with { popup in
+                //TODO: FE-1873 show hidden bin here
+                popup.close()
+            }
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            return
+        }
+        
+        let text: String
+        switch elementType {
+        case .download:
+            text = TextConstants.popUpDownloadComplete
+        case .delete:
+            text = TextConstants.popUpDeleteComplete
+            MenloworksAppEvents.onFileDeleted()
+        default:
+            return
+        }
+        UIApplication.showSuccessAlert(message: text)
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {

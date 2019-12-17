@@ -683,6 +683,8 @@
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
 "Quick Scroll Preparation" = "Preparing your photos and videos";
+"hide_success_popup_message" = "Items are hidden successfully";
+"hide_success_popup_button_title" = "Hidden items >";
 
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
