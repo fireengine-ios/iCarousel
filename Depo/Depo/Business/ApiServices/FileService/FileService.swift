@@ -689,6 +689,65 @@ final class HiddenService {
             .task
     }
     
+    func hiddenAlbums(sortBy: SortType,
+                      sortOrder: SortOrder,
+                      page: Int,
+                      size: Int,
+                      handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+        debugLog("hiddenAlbums")
+        
+        let url = String(format: RouteRequests.albumListHidden,
+                         SearchContentType.content_type.description,
+                         page.description, size.description,
+                         sortBy.description, sortOrder.description)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    func hiddenPlacesAlbumDetail(id: Int, handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("hiddenPlacesAlbumDetail")
+        
+        let url = String(format: RouteRequests.placesAlbumHidden, id)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    func hiddenPeopleAlbumDetail(id: Int, handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("hiddenPeopleAlbumDetail")
+        
+        let url = String(format: RouteRequests.peopleAlbumHidden, id)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    func hiddenThingsAlbumDetail(id: Int, handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("hiddenThingsAlbumDetail")
+        
+        let url = String(format: RouteRequests.thingsAlbumHidden, id)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
     func getHiddenPlacesPage(pageSize: Int,
                              pageNumber: Int,
                              handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
@@ -731,8 +790,6 @@ final class HiddenService {
             .task
     }
     
-    
-    
     func hideItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideItems")
         let itemsIds = items.compactMap { $0.uuid }
@@ -766,7 +823,7 @@ final class HiddenService {
     // TODO: check for files and albums
     /// from doc: UUID of file(s) and/or folder(s) to recover them.
     func recoverItemsByUuids(_ uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverItems")
+        debugLog("recoverItemsByUuids")
         
         return SessionManager
             .customDefault
