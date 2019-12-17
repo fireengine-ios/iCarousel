@@ -19,14 +19,14 @@ final class AlbumsSliderDataSource: NSObject {
     private let collectionView: UICollectionView
     private weak var delegate: AlbumsSliderDataSourceDelegate?
     
-    private var items = [BaseDataSourceItem]()
+    private(set) var items = [BaseDataSourceItem]()
     private(set) var selectedItems = [BaseDataSourceItem]() {
         didSet {
             delegate?.didChangeSelectionCount(selectedItems.count)
         }
     }
     
-    private(set) var isSelectionMode = false
+    private(set) var isSelectionActive = false
     private var isPaginationDidEnd = false
     
     //MARK: - Init
@@ -41,16 +41,15 @@ final class AlbumsSliderDataSource: NSObject {
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = UIColor.lrSkinTone
+        collectionView.backgroundColor = .lrSkinTone
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(nibCell: SingleThumbnailAlbumCell.self)
+        collectionView.register(nibCell: AlbumCell.self)
         collectionView.allowsMultipleSelection = true
-        collectionView.alwaysBounceVertical = true
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: 90, height: 110)
+            layout.itemSize = CGSize(width: 90, height: 130)
             layout.minimumInteritemSpacing = 10
             layout.minimumLineSpacing = 0
         }
@@ -76,6 +75,12 @@ final class AlbumsSliderDataSource: NSObject {
             collectionView.insertItems(at: indexPaths)
         }
     }
+    
+    func reset() {
+        items.removeAll()
+        selectedItems.removeAll()
+        isPaginationDidEnd = false
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -87,14 +92,17 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeue(cell: SingleThumbnailAlbumCell.self, for: indexPath)
+        return collectionView.dequeue(cell: AlbumCell.self, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? SingleThumbnailAlbumCell else {
+        guard let cell = cell as? AlbumCell else {
             return
-        }        
-//        cell.setup(withItem: items[indexPath.item])
+        }
+        
+        let item = items[indexPath.row]
+        cell.setup(with: item)
+        cell.setSelection(isSelectionActive: isSelectionActive, isSelected: selectedItems.contains(item))
         
         if isPaginationDidEnd {
             return
@@ -113,23 +121,18 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
 extension AlbumsSliderDataSource: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedItem = items[indexPath.item]
+        let item = items[indexPath.item]
         
-        if isSelectionMode {
-            if !selectedItems.contains(selectedItem) {
-                selectedItems.append(selectedItem)
+        if isSelectionActive {
+            if selectedItems.contains(item) {
+                selectedItems.remove(item)
+            } else {
+                selectedItems.append(item)
             }
+            collectionView.reloadItems(at: [indexPath])
         } else {
-            delegate?.didSelect(item: selectedItem)
+            delegate?.didSelect(item: item)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard isSelectionMode else {
-            return
-        }
-        
-        let deSelectedItem = items[indexPath.item]
-        selectedItems.remove(deSelectedItem)
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
 }

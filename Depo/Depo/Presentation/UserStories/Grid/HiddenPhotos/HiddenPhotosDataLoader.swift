@@ -170,6 +170,14 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-
+        albumsTask = hiddenService.hiddenAlbums(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: currentAlbumsPage, size: albumPageSize, handler: { result in
+            switch result {
+            case .success(let response):
+                let array = response.list.map { AlbumItem(remote: $0) }
+                handler(.success(array))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        })
     }
 }

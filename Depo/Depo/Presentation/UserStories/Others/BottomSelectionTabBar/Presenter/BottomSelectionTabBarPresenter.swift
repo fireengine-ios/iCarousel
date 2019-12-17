@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .unhide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .deleteFaceImage:
@@ -148,6 +150,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .unhide:
+                //TODO: need to setup
+                self.basePassingPresenter?.stopModeSelected()
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
                 

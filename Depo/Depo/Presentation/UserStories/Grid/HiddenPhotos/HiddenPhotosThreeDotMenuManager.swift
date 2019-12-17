@@ -9,8 +9,7 @@
 import Foundation
 
 protocol HiddenPhotosThreeDotMenuManagerDelegate: class {
-    //TODO: Maybe need to change hide to unhide
-    func onThreeDotsManagerHide()
+    func onThreeDotsManagerUnhide()
     func onThreeDotsManagerSelect()
     func onThreeDotsManagerDelete()
 }
@@ -25,8 +24,7 @@ final class HiddenPhotosThreeDotMenuManager {
     
     func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
         if isSelectingMode {
-            //TODO: Maybe need to change hide to unhide
-            showAlertSheet(with: [.hide, .delete], sender: sender)
+            showAlertSheet(with: [.unhide, .delete], sender: sender)
         } else {
             showAlertSheet(with: [.select], sender: sender)
         }
@@ -43,10 +41,9 @@ final class HiddenPhotosThreeDotMenuManager {
         types.forEach { type in
             let action: UIAlertAction?
             switch type {
-                //TODO: Maybe need to change hide to unhide
-            case .hide:
-                action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerSelect()
+            case .unhide:
+                action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default, handler: { [weak self] _ in
+                    self?.delegate.onThreeDotsManagerUnhide()
                 })
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { [weak self] _ in

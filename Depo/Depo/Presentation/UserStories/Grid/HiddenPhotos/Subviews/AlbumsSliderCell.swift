@@ -60,6 +60,11 @@ final class AlbumsSliderCell: UICollectionViewCell {
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {
         dataSource.appendItems(newItems)
+        emptyLabel.isHidden = !dataSource.items.isEmpty
+    }
+    
+    func reset() {
+        dataSource.reset()
     }
 }
 

@@ -28,6 +28,9 @@ final class HiddenPhotosDataSource: NSObject {
     
     private let collectionView: UICollectionView
     private weak var delegate: HiddenPhotosDataSourceDelegate?
+    private var albumSlider: AlbumsSliderCell? {
+        return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? AlbumsSliderCell
+    }
     
     private(set) var allItems = [[Item]]()
     private(set) var selectedItems = [Item]()
@@ -91,10 +94,7 @@ final class HiddenPhotosDataSource: NSObject {
 extension HiddenPhotosDataSource {
     
     func appendAlbum(items: [BaseDataSourceItem]) {
-        guard let albumSlider = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? AlbumsSliderCell else {
-            return
-        }
-        albumSlider.appendItems(items)
+        albumSlider?.appendItems(items)
     }
     
     func append(items: [Item]) {
@@ -156,7 +156,9 @@ extension HiddenPhotosDataSource {
     
     func reset() {
         allItems.removeAll()
+        selectedItems.removeAll()
         isPaginationDidEnd = false
+        albumSlider?.reset()
     }
     
     func startSelection(indexPath: IndexPath? = nil) {

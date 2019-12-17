@@ -30,12 +30,12 @@ private final class HiddenPhotosBottomTabBarPresenter: BottomSelectionTabBarPres
 
 protocol HiddenPhotosBottomBarManagerDelegate: class {
     func onBottomBarDelete()
-    func onBottomBarHide() //TODO: Maybe need to change hide to unhide
+    func onBottomBarUnhide()
 }
 
 final class HiddenPhotosBottomBarManager {
-    //TODO: Maybe need to change hide to unhide
-    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.hide, .delete],
+
+    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.unhide, .delete],
                                                           style: .blackOpaque,
                                                           tintColor: nil)
     
@@ -70,9 +70,8 @@ extension HiddenPhotosBottomBarManager: HiddenPhotosTabBarPresenterDelegate {
     
     func bottomBarSelectedItem(_ item: ElementTypes) {
         switch item {
-            //TODO: Maybe need to change hide to unhide
-        case .hide:
-            delegate?.onBottomBarHide()
+        case .unhide:
+            delegate?.onBottomBarUnhide()
         case .delete:
             delegate?.onBottomBarDelete()
         default:

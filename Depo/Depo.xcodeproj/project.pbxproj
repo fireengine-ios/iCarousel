@@ -5718,6 +5718,14 @@
 		98A86D8823A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
 		98A86D8923A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
 		98A86D8A23A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
+		98A86D8C23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
+		98A86D8D23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
+		98A86D8E23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
+		98A86D8F23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
+		98A86D9123A8BD4F00438225 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D9023A8BD4F00438225 /* AlbumCell.swift */; };
+		98A86D9223A8BD4F00438225 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D9023A8BD4F00438225 /* AlbumCell.swift */; };
+		98A86D9323A8BD4F00438225 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D9023A8BD4F00438225 /* AlbumCell.swift */; };
+		98A86D9423A8BD4F00438225 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D9023A8BD4F00438225 /* AlbumCell.swift */; };
 		98AA10412358549A00B12485 /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
 		98AA10432358597800B12485 /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
 		98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
@@ -10671,6 +10679,8 @@
 		98A86D7B23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosThreeDotMenuManager.swift; sourceTree = "<group>"; };
 		98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HiddenPhotosEmptyView.xib; sourceTree = "<group>"; };
 		98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosEmptyView.swift; sourceTree = "<group>"; };
+		98A86D8B23A8BD3600438225 /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
+		98A86D9023A8BD4F00438225 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		98AA10402358549A00B12485 /* CampaignIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignIntroView.swift; sourceTree = "<group>"; };
 		98AA10422358597800B12485 /* CampaingnInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaingnInfoView.swift; sourceTree = "<group>"; };
 		98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CampaignDetailViewController.xib; sourceTree = "<group>"; };
@@ -16675,6 +16685,8 @@
 				98A86D5923A239B900438225 /* AlbumsSliderDataSource.swift */,
 				98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */,
 				98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */,
+				98A86D8B23A8BD3600438225 /* AlbumCell.xib */,
+				98A86D9023A8BD4F00438225 /* AlbumCell.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -20651,6 +20663,7 @@
 				0303A6102397D0D000907F42 /* CRYShareViewController.nib in Resources */,
 				0303A6112397D0D000907F42 /* LaunchCampaignCard.xib in Resources */,
 				0303A6122397D0D000907F42 /* SplashViewController.xib in Resources */,
+				98A86D8E23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				0303A6132397D0D000907F42 /* info_icon@2x.png in Resources */,
 				0303A6142397D0D000907F42 /* paylas_whatsapp.png in Resources */,
 				0303A6152397D0D000907F42 /* toolbar_undo_icon@3x.png in Resources */,
@@ -21382,6 +21395,7 @@
 				8C06AFBB2008AD71003D8E05 /* geri.png in Resources */,
 				989BDE5C22F47B1E001DDEB2 /* SpotifyPlaylistViewController.xib in Resources */,
 				8C0B91C22017149600A5BA81 /* CollectionViewHeaderWithText.xib in Resources */,
+				98A86D8D23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				8C06AF3B2008AD70003D8E05 /* close_icon@2x.png in Resources */,
 				8C0E901F1FDEBDFF00789C91 /* PrintViewController.xib in Resources */,
 				8C06AFF92008AD71003D8E05 /* kontrast@2x.png in Resources */,
@@ -22183,6 +22197,7 @@
 				8C06B19C2008AD72003D8E05 /* yesil.png in Resources */,
 				8C06AEF22008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
+				98A86D8C23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				8C06AF022008AD70003D8E05 /* caps2_selected@2x.png in Resources */,
 				737A2EAD2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
@@ -23218,6 +23233,7 @@
 				CE784EA522A685FB00662219 /* toolbar_crop_icon.png in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */,
+				98A86D8F23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				CE784EA722A685FB00662219 /* paylas_mail.png in Resources */,
 				CE784EA822A685FB00662219 /* cancel_buton@2x.png in Resources */,
 				CE784EA922A685FB00662219 /* back_icon@2x.png in Resources */,
@@ -25472,6 +25488,7 @@
 				0303A4282397D0D000907F42 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				0303A4292397D0D000907F42 /* FileInfoViewController.swift in Sources */,
 				0303A42A2397D0D000907F42 /* FileInfoModuleInput.swift in Sources */,
+				98A86D9323A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				0303A42B2397D0D000907F42 /* InsetsButton.swift in Sources */,
 				0303A42C2397D0D000907F42 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				0303A42D2397D0D000907F42 /* InstapickAnalysisCell.swift in Sources */,
@@ -25961,6 +25978,7 @@
 				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				8C208660228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
+				98A86D9223A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
 				CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */,
@@ -28044,6 +28062,7 @@
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
 				A207990A219F135900AD5037 /* PremiumRouterInput.swift in Sources */,
 				CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */,
+				98A86D9123A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
@@ -30149,6 +30168,7 @@
 				CE784BB522A685FB00662219 /* PeopleServiceResponse.swift in Sources */,
 				CE7040B222EB193300124073 /* SupportFormPrefilledController.swift in Sources */,
 				CE784BB622A685FB00662219 /* SmallFullOfQuotaPopUp.swift in Sources */,
+				98A86D9423A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CE784BB722A685FB00662219 /* FileInfoViewController.swift in Sources */,
 				CE784BB822A685FB00662219 /* FileInfoModuleInput.swift in Sources */,
 				CE784BB922A685FB00662219 /* InsetsButton.swift in Sources */,

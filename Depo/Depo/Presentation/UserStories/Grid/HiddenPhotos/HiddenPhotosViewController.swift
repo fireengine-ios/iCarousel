@@ -161,7 +161,7 @@ extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
         
     }
     
-    func onBottomBarHide() {
+    func onBottomBarUnhide() {
         
     }
 }
@@ -185,7 +185,7 @@ extension HiddenPhotosViewController: HiddenPhotosNavbarManagerDelegate {
 //MARK: - HiddenPhotosThreeDotMenuManagerDelegate
 
 extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
-    func onThreeDotsManagerHide() {
+    func onThreeDotsManagerUnhide() {
         
     }
     

@@ -313,6 +313,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .unhide:
+                    //TODO: need to setup
+                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default, handler: { _ in
+                        self.basePassingPresenter?.stopModeSelected()
+                    })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
