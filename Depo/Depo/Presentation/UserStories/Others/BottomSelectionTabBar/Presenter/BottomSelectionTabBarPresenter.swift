@@ -391,7 +391,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 //                        self.interactor.delete(item: currentItems)
                     })
                 case .smash:
-                    assertionFailure("please implement this function")
+                    //Currently there is no task for smash from action sheet.
+                    assertionFailure("In order to use smash please implement this function")
                     action = UIAlertAction()
                     
                 case .deleteFaceImage:

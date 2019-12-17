@@ -122,9 +122,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         var actions = [ElementTypes]()
         
         switch object.fileType {
-        case .audio, .video:
+        case .audio:
             actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
-        case .image:
+        case .image, .video:
             actions = interactor.setupedMoreMenuConfig + [.hide]
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
