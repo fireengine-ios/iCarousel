@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .smash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .deleteFaceImage:
@@ -147,6 +149,15 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 } else {
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
+                }
+            case .smash:
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    //TODO: FE-1866
+                    //correct action should be added here
+                    UIApplication.showErrorAlert(message: TextConstants.errorAlert)
                 }
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
@@ -379,6 +390,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         //TODO: FE-1869 
 //                        self.interactor.delete(item: currentItems)
                     })
+                case .smash:
+                    //Currently there is no task for smash from action sheet.
+                    assertionFailure("In order to use smash please implement this function")
+                    action = UIAlertAction()
+                    
                 case .deleteFaceImage:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()

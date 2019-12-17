@@ -313,6 +313,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .smash:
+                    assertionFailure("please implement this function first")
+                    action = UIAlertAction()
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
