@@ -22,6 +22,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                 photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
                                                              style: .blackOpaque, tintColor: nil)
             }
+
         } else {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .sync, .info],
                                                          style: .blackOpaque, tintColor: nil)

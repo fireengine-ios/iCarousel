@@ -352,11 +352,11 @@ class ItemOperationManager: NSObject {
     }
     
     func syncFinished() {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             for view in self.views {
                 view.syncFinished()
             }
-        }
+//        }
     }
     
     func newStoryCreated() {
