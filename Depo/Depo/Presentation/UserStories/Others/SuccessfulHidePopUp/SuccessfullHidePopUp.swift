@@ -100,11 +100,11 @@ final class SuccessfullHidePopUp: BasePopUpController {
     
     //MARK: IBActions
     
-    @IBAction func closePopUp(_ sender: UIButton) {
+    @IBAction private func closePopUp(_ sender: UIButton) {
         close()
     }
     
-    @IBAction func handleAction(_ sender: UIButton) {
+    @IBAction private func handleAction(_ sender: UIButton) {
         actionHandler(self)
     }
 }
