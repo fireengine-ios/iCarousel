@@ -16680,13 +16680,13 @@
 		98A86D5423A238C200438225 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				98A86D8B23A8BD3600438225 /* AlbumCell.xib */,
+				98A86D9023A8BD4F00438225 /* AlbumCell.swift */,
 				98A86D5D23A2415D00438225 /* AlbumsSliderCell.xib */,
 				98A86D5523A238E700438225 /* AlbumsSliderCell.swift */,
 				98A86D5923A239B900438225 /* AlbumsSliderDataSource.swift */,
 				98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */,
 				98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */,
-				98A86D8B23A8BD3600438225 /* AlbumCell.xib */,
-				98A86D9023A8BD4F00438225 /* AlbumCell.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";

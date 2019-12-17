@@ -11,6 +11,7 @@ import Foundation
 protocol HiddenPhotosDataLoaderDelegate: class {
     func didLoadPhoto(items: [Item])
     func didLoadAlbum(items: [BaseDataSourceItem])
+    func didFinishLoadAlbums()
 }
 
 final class HiddenPhotosDataLoader {
@@ -56,6 +57,7 @@ final class HiddenPhotosDataLoader {
         photoTask = nil
         loadPhotos(completion: completion)
         
+        currentLoadingAlbumType = .people
         currentAlbumsPage = 0
         albumsTask?.cancel()
         albumsTask = nil
@@ -107,6 +109,8 @@ final class HiddenPhotosDataLoader {
                 return
             }
             
+            self.albumsTask = nil
+            
             switch result {
             case .success(let array):
                 if array.count < self.albumPageSize, let newAlbumType = AlbumsOrder(rawValue: self.currentLoadingAlbumType.rawValue + 1) {
@@ -114,6 +118,16 @@ final class HiddenPhotosDataLoader {
                     self.currentAlbumsPage = 0
                 }
                 self.delegate?.didLoadAlbum(items: array)
+                
+                if self.currentLoadingAlbumType == .albums {
+                    if array.isEmpty {
+                        //finish loading albums
+                        self.delegate?.didFinishLoadAlbums()
+                    }
+                } else if array.count < 4 {
+                    //autoload next page
+                    self.loadAlbums()
+                }
             case .failed(let error):
                 debugPrint(error.description)
             }
@@ -134,10 +148,12 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadPeopleAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.getHiddenPeoplePage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+        debugPrint("loadPeopleAlbums")
+        albumsTask = hiddenService.hiddenPeoplePage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { Item(peopleItemResponse: $0) }
+                debugPrint("loadPeopleAlbums - \(array.count)")
                 handler(.success(array))
             case .failed(let error):
                 handler(.failed(error))
@@ -146,10 +162,12 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadThingsAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.getHiddenThingsPage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+        debugPrint("loadThingsAlbums")
+        albumsTask = hiddenService.hiddenThingsPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { Item(thingsItemResponse: $0) }
+                debugPrint("loadThingsAlbums - \(array.count)")
                 handler(.success(array))
             case .failed(let error):
                 handler(.failed(error))
@@ -158,10 +176,12 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadPlacesAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.getHiddenPlacesPage(pageSize: albumPageSize, pageNumber: currentAlbumsPage, handler: { result in
+        debugPrint("loadPlacesAlbums")
+        albumsTask = hiddenService.hiddenPlacesPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { Item(placesItemResponse: $0) }
+                debugPrint("loadPlacesAlbums - \(array.count)")
                 handler(.success(array))
             case .failed(let error):
                 handler(.failed(error))
@@ -170,10 +190,16 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenAlbums(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: currentAlbumsPage, size: albumPageSize, handler: { result in
+        debugPrint("loadCustomAlbums")
+        albumsTask = hiddenService.hiddenAlbums(sortBy: sortedRule.sortingRules,
+                                                sortOrder: sortedRule.sortOder,
+                                                page: currentAlbumsPage,
+                                                size: albumPageSize,
+                                                handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { AlbumItem(remote: $0) }
+                debugPrint("loadCustomAlbums - \(array.count)")
                 handler(.success(array))
             case .failed(let error):
                 handler(.failed(error))

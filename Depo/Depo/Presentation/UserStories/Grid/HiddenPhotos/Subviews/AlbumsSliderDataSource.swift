@@ -12,6 +12,7 @@ protocol AlbumsSliderDataSourceDelegate: class {
     func didSelect(item: BaseDataSourceItem)
     func didChangeSelectionCount(_ count: Int)
     func needLoadNextPage()
+    func onStartSelection()
 }
 
 final class AlbumsSliderDataSource: NSObject {
@@ -27,7 +28,7 @@ final class AlbumsSliderDataSource: NSObject {
     }
     
     private(set) var isSelectionActive = false
-    private var isPaginationDidEnd = false
+    var isPaginationDidEnd = false
     
     //MARK: - Init
     
@@ -49,7 +50,7 @@ final class AlbumsSliderDataSource: NSObject {
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: 90, height: 130)
+            layout.itemSize = CGSize(width: 100, height: 140)
             layout.minimumInteritemSpacing = 10
             layout.minimumLineSpacing = 0
         }
@@ -59,7 +60,7 @@ final class AlbumsSliderDataSource: NSObject {
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {
         if newItems.isEmpty {
-            isPaginationDidEnd = true
+            return
         }
 
         if items.isEmpty {
@@ -80,6 +81,25 @@ final class AlbumsSliderDataSource: NSObject {
         items.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
+    }
+}
+
+extension AlbumsSliderDataSource {
+    func startSelection(indexPath: IndexPath? = nil) {
+        isSelectionActive = true
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        
+        if let indexPath = indexPath {
+            delegate?.onStartSelection()
+            selectedItems.append(items[indexPath.row])
+            collectionView.reloadItems(at: [indexPath])
+        }
+    }
+    
+    func cancelSelection() {
+        isSelectionActive = false
+        selectedItems.removeAll()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 }
 
@@ -134,5 +154,18 @@ extension AlbumsSliderDataSource: UICollectionViewDelegate {
             delegate?.didSelect(item: item)
         }
         collectionView.deselectItem(at: indexPath, animated: false)
+    }
+}
+
+extension AlbumsSliderDataSource: LBCellsDelegate {
+    
+    func canLongPress() -> Bool {
+        return true
+    }
+    
+    func onLongPress(cell: UICollectionViewCell) {
+        if !isSelectionActive {
+            startSelection(indexPath: collectionView.indexPath(for: cell))
+        }
     }
 }

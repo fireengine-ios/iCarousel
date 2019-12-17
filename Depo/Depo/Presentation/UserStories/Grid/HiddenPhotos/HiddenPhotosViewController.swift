@@ -130,6 +130,10 @@ extension HiddenPhotosViewController: HiddenPhotosDataSourceDelegate {
     func onStartSelection() {
         startSelectionState()
     }
+    
+    func didChangeSelectedItems(count: Int) {
+        updateBarsForSelectedObjects(count: count)
+    }
 }
 
 //MARK: - HiddenPhotosSortingManagerDelegate
@@ -151,6 +155,10 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     
     func didLoadAlbum(items: [BaseDataSourceItem]) {
         dataSource.appendAlbum(items: items)
+    }
+    
+    func didFinishLoadAlbums() {
+        dataSource.finishLoadAlbums()
     }
 }
 

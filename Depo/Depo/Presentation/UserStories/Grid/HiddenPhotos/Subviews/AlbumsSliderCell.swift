@@ -10,13 +10,14 @@ import UIKit
 
 protocol AlbumsSliderCellDelegate: class {
     func didSelect(item: BaseDataSourceItem)
-    func didChangeSelectionCount(_ count: Int)
+    func didChangeSelectionAlbumsCount(_ count: Int)
     func needLoadNextAlbumPage()
+    func onStartSelection()
 }
 
 final class AlbumsSliderCell: UICollectionViewCell {
 
-    static let height: CGFloat = 198
+    static let height: CGFloat = 200
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var titleLabel: UILabel! {
@@ -66,14 +67,24 @@ final class AlbumsSliderCell: UICollectionViewCell {
     func reset() {
         dataSource.reset()
     }
+    
+    func finishLoadAlbums() {
+        dataSource.isPaginationDidEnd = true
+    }
 }
 
 //MARK: - Selection State
 
 extension AlbumsSliderCell {
-    
-}
 
+    func startSelection() {
+        dataSource.startSelection()
+    }
+    
+    func stopSelection() {
+        dataSource.cancelSelection()
+    }
+}
 
 //MARK: - AlbumsSliderDataSourceDelegate
 
@@ -83,10 +94,14 @@ extension AlbumsSliderCell: AlbumsSliderDataSourceDelegate {
     }
     
     func didChangeSelectionCount(_ count: Int) {
-        delegate?.didChangeSelectionCount(count)
+        delegate?.didChangeSelectionAlbumsCount(count)
     }
     
     func needLoadNextPage() {
         delegate?.needLoadNextAlbumPage()
+    }
+    
+    func onStartSelection() {
+        delegate?.onStartSelection()
     }
 }

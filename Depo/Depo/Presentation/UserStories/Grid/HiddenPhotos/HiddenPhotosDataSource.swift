@@ -14,6 +14,7 @@ protocol HiddenPhotosDataSourceDelegate: class {
     func didSelectPhoto(item: Item)
     func didSelectAlbum(item: BaseDataSourceItem)
     func onStartSelection()
+    func didChangeSelectedItems(count: Int)
 }
 
 final class HiddenPhotosDataSource: NSObject {
@@ -97,6 +98,10 @@ extension HiddenPhotosDataSource {
         albumSlider?.appendItems(items)
     }
     
+    func finishLoadAlbums() {
+        albumSlider?.finishLoadAlbums()
+    }
+    
     func append(items: [Item]) {
         if items.isEmpty {
             isPaginationDidEnd = true
@@ -163,29 +168,29 @@ extension HiddenPhotosDataSource {
     
     func startSelection(indexPath: IndexPath? = nil) {
         isSelectionStateActive = true
-        updateVisibleCells(isSelectionStateActive)
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         
         delegate?.onStartSelection()
         
         if let indexPath = indexPath, let item = item(for: indexPath) {
             selectedItems.append(item)
             collectionView.reloadItems(at: [indexPath])
+            updateSelectionCount()
         }
     }
     
     func cancelSelection() {
         isSelectionStateActive = false
         selectedItems.removeAll()
-        updateVisibleCells(isSelectionStateActive)
+        albumSlider?.stopSelection()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
     
-    private func updateVisibleCells(_ isSelectionStateActive: Bool? = nil, animated: Bool = true) {
-        if let isSelectionStateActive = isSelectionStateActive {
-            collectionView.visibleCells.compactMap { $0 as? CollectionViewCellDataProtocol }.forEach {
-                $0.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
-            }
+    private func updateSelectionCount() {
+        if let selectedAlbumsCount = albumSlider?.selectedItems.count {
+            delegate?.didChangeSelectedItems(count: selectedItems.count + selectedAlbumsCount)
         } else {
-            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+            delegate?.didChangeSelectedItems(count: selectedItems.count)
         }
     }
 }
@@ -433,13 +438,19 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
 
 extension HiddenPhotosDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section > 0 else {
+        guard indexPath.section > 0, let item = item(for: indexPath) else {
             return
         }
         
         if isSelectionStateActive {
-            
-        } else if let item = item(for: indexPath) {
+            if selectedItems.contains(item) {
+                selectedItems.remove(item)
+            } else {
+                selectedItems.append(item)
+            }
+            collectionView.reloadItems(at: [indexPath])
+            updateSelectionCount()
+        } else  {
             delegate?.didSelectPhoto(item: item)
         }
     }
@@ -475,24 +486,30 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
     }
     
     func onLongPress(cell: UICollectionViewCell) {
-        if !isSelectionStateActive, let indexPath = collectionView.indexPath(for: cell) {
-            startSelection(indexPath: indexPath)
+        if !isSelectionStateActive {
+            startSelection(indexPath: collectionView.indexPath(for: cell))
+            albumSlider?.startSelection()
         }
     }
 }
 
-//MARK: - AlbumsSliderViewDelegate
+//MARK: - AlbumsSliderCellDelegate
 
 extension HiddenPhotosDataSource: AlbumsSliderCellDelegate {
+    
     func didSelect(item: BaseDataSourceItem) {
         delegate?.didSelectAlbum(item: item)
     }
     
-    func didChangeSelectionCount(_ count: Int) {
-        
+    func didChangeSelectionAlbumsCount(_ count: Int) {
+        updateSelectionCount()
     }
     
     func needLoadNextAlbumPage() {
         delegate?.needLoadNextAlbumPage()
+    }
+    
+    func onStartSelection() {
+        startSelection()
     }
 }

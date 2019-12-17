@@ -162,6 +162,7 @@ struct RouteRequests {
     static let albumListHidden = baseUrl.absoluteString + albumList + "&status=HIDDEN"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let albumHide = baseUrl +/ "album/hide"
+    static let albumRecover = baseUrl +/ "album/recover"
     
     // MARK: My Streams
     
@@ -332,7 +333,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let hide = filesystemBase + "hide"
-        static let recover = filesystemBase + "recover"
+        static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         static let trash = filesystemBase + "trash"
     }
 
