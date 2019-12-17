@@ -123,9 +123,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         switch object.fileType {
         case .audio:
-            actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
+            actions = ActionSheetPredetermendConfigs.audioDetailActions
         case .image, .video:
-            actions = interactor.setupedMoreMenuConfig + [.hide]
+            actions = interactor.setupedMoreMenuConfig
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
         default:
