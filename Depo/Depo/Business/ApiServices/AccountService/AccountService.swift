@@ -639,18 +639,17 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func faqUrl(_ handler: @escaping (String) -> Void) {
         debugLog("AccountService faqUrl")
         
-        func errorHandler() {
+        func defaultURLCallback() {
             let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
             handler(defaultFaqUrl)
         }
         
         let tokenStorage: TokenStorage = factory.resolve()
-        guard let _ = tokenStorage.accessToken else {
-            errorHandler()
+        guard tokenStorage.accessToken != nil else {
+            defaultURLCallback()
             return
         }
         
-//      used to be  sessionWithoutAuth
         SessionManager.customDefault
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
@@ -660,10 +659,10 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     if let json = json as? [String: String], let faqUrl = json["value"] {
                         handler(faqUrl)
                     } else {
-                        errorHandler()
+                        defaultURLCallback()
                     }
                 case .failure(_):
-                    errorHandler()
+                    defaultURLCallback()
                 }
         }
     }
