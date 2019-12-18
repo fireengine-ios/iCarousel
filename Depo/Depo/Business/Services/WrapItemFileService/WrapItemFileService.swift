@@ -346,7 +346,7 @@ class WrapItemFileService: WrapItemFileOperations {
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status == .active })
+            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {

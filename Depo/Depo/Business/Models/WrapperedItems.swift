@@ -504,6 +504,57 @@ enum SyncWrapperedStatus {
     }
 }
 
+
+enum ItemStatus: String {
+    case unknown = "UNKNOWN"
+    case uploaded = "UPLOADED"
+    case transcoding = "TRANSCODING"
+    case transcodingFailed = "TRANSCODING_FAILED"
+    case active = "ACTIVE"
+    case trashed = "TRASHED"
+    case deleted = "DELETED"
+    case hidden = "HIDDEN"
+    
+    init(string: String?) {
+        if let statusString = string, let status = ItemStatus(rawValue: statusString) {
+            self = status
+        } else {
+            self = .unknown
+        }
+    }
+    
+    init(value: Int16) {
+        switch value {
+        case 1: self = .uploaded
+        case 2: self = .transcoding
+        case 3: self = .transcodingFailed
+        case 4: self = .active
+        case 5: self = .trashed
+        case 6: self = .deleted
+        case 7: self = .hidden
+        default: self = .unknown
+        }
+    }
+    
+    func valueForCoreDataMapping() -> Int16 {
+        switch self {
+        case .unknown: return 0
+        case .uploaded: return 1
+        case .transcoding: return 2
+        case .transcodingFailed: return 3
+        case .active: return 4
+        case .trashed: return 5
+        case .deleted: return 6
+        case .hidden: return 7
+        }
+    }
+    
+    var isTranscoded: Bool {
+        return isContained(in: [.active, .hidden, .trashed])
+    }
+}
+
+
 protocol  Wrappered {
     
     var id: Int64? { get }
@@ -543,41 +594,7 @@ protocol  Wrappered {
 
 class WrapData: BaseDataSourceItem, Wrappered {
     
-    enum Status: String {
-        case unknown = "UNKNOWN"
-        case uploaded = "UPLOADED"
-        case transcoding = "TRANSCODING"
-        case transcodingFailed = "TRANSCODING_FAILED"
-        case active = "ACTIVE"
-        case trashed = "TRASHED"
-        case deleted = "DELETED"
-        case hidden = "HIDDEN"
-        
-        init(string: String?) {
-            if let statusString = string, let status = Status(rawValue: statusString) {
-                self = status
-            } else {
-                self = .unknown
-            }
-        }
-        
-        func valueForCoreDataMapping() -> Int16 {
-            switch self {
-            case .unknown: return 0
-            case .uploaded: return 1
-            case .transcoding: return 2
-            case .transcodingFailed: return 3
-            case .active: return 4
-            case .trashed: return 5
-            case .deleted: return 6
-            case .hidden: return 7
-            }
-        }
-        
-        var isTranscoded: Bool {
-            return isContained(in: [.active, .hidden, .trashed])
-        }
-    }
+    
     
     var coreDataObjectId: NSManagedObjectID?
     
@@ -597,7 +614,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
 
     var metaData: BaseMetaData?
     
-    var status: Status
+    var status: ItemStatus
     
     var localFileUrl: URL?
     
@@ -822,7 +839,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? 0
-        status = Status(string: remote.status)
+        status = ItemStatus(string: remote.status)
         
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
@@ -888,7 +905,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let fileUUID = searchResponse[SearchJsonKey.uuid].string ?? ""
         fileSize = searchResponse[SearchJsonKey.bytes].int64 ?? 0
         patchToPreview = .remoteUrl(URL(string: ""))///????
-        status = Status(string:searchResponse[SearchJsonKey.status].string)
+        status = ItemStatus(string:searchResponse[SearchJsonKey.status].string)
         metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
         favorites = metaData?.favourite ?? false
         super.init(uuid: fileUUID)
@@ -975,7 +992,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        status = mediaItem.isTranscoded ? .active : .unknown
+        status = ItemStatus(value: mediaItem.status)
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
@@ -1073,6 +1090,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
         tmpDownloadUrl = item.tmpDownloadUrl
+        status = item.status
         metaData?.copy(metaData: item.metaData)
     }
     
@@ -1152,6 +1170,7 @@ extension WrapData {
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
             tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            status == wrapData.status &&
             metaData == wrapData.metaData
     }
 

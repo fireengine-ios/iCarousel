@@ -186,6 +186,7 @@ public class MediaItem: NSManagedObject {
         self.albums = NSOrderedSet(array: albums ?? [])
         
         isTranscoded = item.status.isTranscoded
+        status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
     }
     
