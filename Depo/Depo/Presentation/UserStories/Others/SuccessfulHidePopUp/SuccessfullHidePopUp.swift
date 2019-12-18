@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias SelfReturningHandler<T> = (_: T) -> Void
-
 
 final class SuccessfullHidePopUp: BasePopUpController {
     
@@ -39,13 +37,13 @@ final class SuccessfullHidePopUp: BasePopUpController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.cornerRadius = 5
+        willSet {
+            newValue.layer.cornerRadius = 5
             
-            containerView.layer.shadowColor = UIColor.black.cgColor
-            containerView.layer.shadowRadius = 10
-            containerView.layer.shadowOpacity = 0.5
-            containerView.layer.shadowOffset = .zero
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowRadius = 10
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowOffset = .zero
         }
     }
     
@@ -53,17 +51,17 @@ final class SuccessfullHidePopUp: BasePopUpController {
     @IBOutlet private weak var topIcon: UIImageView!
     
     @IBOutlet private weak var messageLabel: UILabel! {
-        didSet {
-            messageLabel.textColor = ColorConstants.darkBlueColor
-            messageLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        willSet {
+            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }
     
     @IBOutlet private weak var actionButton: UIButton! {
-        didSet {
-            actionButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            actionButton.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-            actionButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
+        willSet {
+            newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
         }
     }
     
