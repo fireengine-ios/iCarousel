@@ -2175,6 +2175,8 @@
 		0303A8EB2397F0B000907F42 /* LifeTech_LifeDriveFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8A22397D14900907F42 /* LifeTech_LifeDriveFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0303A8EC2397F0B000907F42 /* LifeTech_LifeDriveProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8CF2397D15100907F42 /* LifeTech_LifeDriveProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0303A8ED2397F0B000907F42 /* LifeTech_LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		030480DD23AA0771006DC316 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
+		030480DE23AA0782006DC316 /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
@@ -24957,6 +24959,7 @@
 				0303A2962397D0D000907F42 /* MyStorageRouterInput.swift in Sources */,
 				0303A2972397D0D000907F42 /* SmartTimerLabel.swift in Sources */,
 				0303A2982397D0D000907F42 /* LoginSettingsPresenter.swift in Sources */,
+				030480DE23AA0782006DC316 /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				0303A2992397D0D000907F42 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				0303A29A2397D0D000907F42 /* ManageContactsViewController.swift in Sources */,
 				0303A29B2397D0D000907F42 /* ProfileBirthdayFieldView.swift in Sources */,
@@ -25384,6 +25387,7 @@
 				0303A4412397D0D000907F42 /* SpotifyRoutingService.swift in Sources */,
 				0303A4422397D0D000907F42 /* UsageInfoRouter.swift in Sources */,
 				0303A4432397D0D000907F42 /* AppConfigurator.swift in Sources */,
+				030480DD23AA0771006DC316 /* DebugAnalyticsService.swift in Sources */,
 				0303A4442397D0D000907F42 /* InstaPickRoutingService.swift in Sources */,
 				0303A4452397D0D000907F42 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				0303A4462397D0D000907F42 /* BackButton.swift in Sources */,
