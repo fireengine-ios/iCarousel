@@ -649,11 +649,11 @@ class AccountService: BaseRequestService, AccountServicePrl {
             defaultURLCallback()
             return
         }
+        
         SessionManager.customDefault
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in
-                
                 switch response.result {
                 case .success(let json):
                     if let json = json as? [String: String], let faqUrl = json["value"] {
