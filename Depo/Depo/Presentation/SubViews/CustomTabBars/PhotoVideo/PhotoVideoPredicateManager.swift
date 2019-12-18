@@ -13,6 +13,10 @@ final class PhotoVideoPredicateManager {
     private var filtrationPredicate: NSPredicate?
     private var duplicationPredicate: NSPredicate?
     
+    private lazy var hiddenPredicate: NSPredicate = {
+        return NSPredicate(format: "(\(#keyPath(MediaItem.relatedRemotes)).@count = 0  || SUBQUERY(\(#keyPath(MediaItem.relatedRemotes)), $x, $x.\(#keyPath(MediaItem.status)) != \(ItemStatus.hidden.valueForCoreDataMapping())).@count != 0)")
+    }()
+    
     private var lastCompoundedPredicate: NSPredicate?
     
     func getMainCompoundedPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {
@@ -25,8 +29,12 @@ final class PhotoVideoPredicateManager {
         let filtrationPredicateTmp = getFiltrationPredicate(isPhotos: isPhotos)
         
         getDuplicationPredicate(isPhotos: isPhotos) { [weak self] createdDuplicationPredicate in
-            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate])
-            self?.lastCompoundedPredicate = compoundedPredicate
+            guard let self = self else {
+                assertionFailure("Unexpected PhotoVideoPredicateManager == nil")
+                return
+            }
+            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate, self.hiddenPredicate])
+            self.lastCompoundedPredicate = compoundedPredicate
             
             createdPredicateCallback(compoundedPredicate)
             
