@@ -805,13 +805,6 @@ final class HiddenService {
         return hideItemsByUuids(ids, handler: handler)
     }
     
-    func hideAlbums(_ albums: [AlbumItem],
-                    handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideAlbums AlbumItem")
-        let ids = albums.compactMap { $0.uuid }
-        return hideItemsByUuids(ids, handler: handler)
-    }
-    
     private func hideAlbumByUuids(_ uuids: [String],
                                   handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideAlbumByUuids")
@@ -854,6 +847,13 @@ final class HiddenService {
     }
     
     func recoverAlbums(_ albums: [AlbumServiceResponse],
+                       handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoverAlbums")
+        let ids = albums.compactMap { $0.uuid }
+        return recoverAlbumsByUuids(ids, handler: handler)
+    }
+    
+    func recoverAlbums(_ albums: [AlbumItem],
                        handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums")
         let ids = albums.compactMap { $0.uuid }
