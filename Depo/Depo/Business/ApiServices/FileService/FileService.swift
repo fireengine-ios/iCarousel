@@ -642,6 +642,8 @@ import Alamofire
 // TODO: create file HiddenService if need
 final class HiddenService {
     
+    // MARK: - All
+    
     func hiddenList(sortBy: SortType,
                     sortOrder: SortOrder,
                     page: Int,
@@ -680,6 +682,8 @@ final class HiddenService {
             .responseObject(handler)
             .task
     }
+    
+    // MARK: - SmartAlbum Detail
     
     func hiddenPlacesAlbumDetail(id: Int,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
@@ -722,6 +726,8 @@ final class HiddenService {
             .responseObject(handler)
             .task
     }
+    
+    // MARK: - SmartAlbum All
     
     func hiddenPlacesPage(page: Int,
                           size: Int,
@@ -768,16 +774,24 @@ final class HiddenService {
             .task
     }
     
+    // MARK: - Hide
+    
     func hideItems(_ items: [WrapData],
                    handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideItems")
-        let itemsIds = items.compactMap { $0.uuid }
+        let ids = items.compactMap { $0.uuid }
+        return hideItemsByUuids(ids, handler: handler)
+    }
+    
+    private func hideItemsByUuids(_ uuids: [String],
+                                  handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideItemsByUuids")
         
         return SessionManager
             .customDefault
             .request(RouteRequests.FileSystem.hide,
                      method: .delete,
-                     parameters: itemsIds.asParameters(),
+                     parameters: uuids.asParameters(),
                      encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
@@ -787,23 +801,38 @@ final class HiddenService {
     func hideAlbums(_ albums: [AlbumServiceResponse],
                     handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideAlbums")
-        let albumIds = albums.compactMap { $0.uuid }
+        let ids = albums.compactMap { $0.uuid }
+        return hideItemsByUuids(ids, handler: handler)
+    }
+    
+    private func hideAlbumByUuids(_ uuids: [String],
+                                  handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideAlbumByUuids")
         
         return SessionManager
             .customDefault
             .request(RouteRequests.albumHide,
                      method: .delete,
-                     parameters: albumIds.asParameters(),
+                     parameters: uuids.asParameters(),
                      encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
             .task
     }
     
+    // MARK: - Recover
+    
+    func recoverItems(_ items: [WrapData],
+                      handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoverItems")
+        let ids = items.compactMap { $0.uuid }
+        return recoverItemsByUuids(ids, handler: handler)
+    }
+    
     /// from doc: UUID of file(s) and/or folder(s) to recover them.
     /// NOT for albums
-    func recoverItemsByUuids(_ uuids: [String],
-                             handler: @escaping ResponseVoid) -> URLSessionTask? {
+    private func recoverItemsByUuids(_ uuids: [String],
+                                     handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverItemsByUuids")
         
         return SessionManager
@@ -818,15 +847,21 @@ final class HiddenService {
     }
     
     func recoverAlbums(_ albums: [AlbumServiceResponse],
-                             handler: @escaping ResponseVoid) -> URLSessionTask? {
+                       handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums")
-        let albumIds = albums.compactMap { $0.uuid }
+        let ids = albums.compactMap { $0.uuid }
+        return recoverAlbumsByUuids(ids, handler: handler)
+    }
+    
+    private func recoverAlbumsByUuids(_ uuids: [String],
+                                      handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoverAlbumsByUuids")
         
         return SessionManager
             .customDefault
             .request(RouteRequests.albumRecover,
                      method: .post,
-                     parameters: albumIds.asParameters(),
+                     parameters: uuids.asParameters(),
                      encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
