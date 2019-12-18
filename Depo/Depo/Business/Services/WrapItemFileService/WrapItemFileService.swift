@@ -121,7 +121,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            MediaItemOperationsService.shared.deleteItems(items, completion: {
+            MediaItemOperationsService.shared.hide(items, completion: {
                 success?()
                 ItemOperationManager.default.didHide(items: items)
             })
