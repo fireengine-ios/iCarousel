@@ -127,13 +127,20 @@ class WrapItemFileService: WrapItemFileOperations {
             })
         }
         
-        let remoteItemsUUIDs = remoteItemsUUID(files: items)
-        guard !remoteItemsUUIDs.isEmpty else {
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
             wrappedSuccessOperation()
             return
         }
         
-        hideFileService.hideItems(with: remoteItemsUUIDs, successAction: wrappedSuccessOperation, failAction: fail)
+        hideFileService.hideItems(remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
     }
     
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {

@@ -15,36 +15,24 @@ final class HideFileService {
     
     private lazy var sessionManager: SessionManager = factory.resolve()
     
+    @discardableResult
+    func hideItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideItems")
+        let ids = items.compactMap { $0.uuid }
+        return hideItemsByUuids(ids, handler: handler)
+    }
     
-    func hideItems(with uuids: [String], successAction: FileOperationSucces?, failAction: FailResponse?) {
-        guard
-            let request = sessionManager.request(RouteRequests.FileSystem.hide,
-                                                 method: .delete,
-                                                 parameters: [:],
-                                                 encoding: JSONEncoding.prettyPrinted).request
-        else {
-            failAction?(ErrorResponse.string(TextConstants.errorUnknown))
-            assertionFailure("Can't create the request")
-            return
-        }
+    private func hideItemsByUuids(_ uuids: [String],
+                                  handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideItemsByUuids")
         
-        do {
-            let encodedRequest = try uuids.encode(request, with: nil)
-            
-            sessionManager
-            .request(encodedRequest)
+        return sessionManager
+            .request(RouteRequests.FileSystem.hide,
+                     method: .delete,
+                     parameters: uuids.asParameters(),
+                     encoding: ArrayEncoding())
             .customValidate()
-            .responseData(completionHandler: { response in
-                switch response.result {
-                case .success(_):
-                    successAction?()
-                case .failure(let error):
-                    failAction?(ErrorResponse.error(error))
-                }
-            })
-        } catch {
-            failAction?(ErrorResponse.error(error))
-            assertionFailure(error.description)
-        }
+            .responseVoid(handler)
+            .task
     }
 }
