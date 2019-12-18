@@ -9,7 +9,7 @@
 import UIKit
 
 
-final class SuccessfullHidePopUp: BasePopUpController {
+final class SuccessfullHidePopUp: BasePopUpController, NibInit {
     
     static func with(action: SelfReturningHandler<SuccessfullHidePopUp>?) -> SuccessfullHidePopUp {
         let vc = customizedController()
@@ -22,7 +22,7 @@ final class SuccessfullHidePopUp: BasePopUpController {
     }
     
     private static func customizedController() -> SuccessfullHidePopUp {
-        let vc = SuccessfullHidePopUp(nibName: "SuccessfullHidePopUp", bundle: nil)
+        let vc = SuccessfullHidePopUp.initFromNib()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         
