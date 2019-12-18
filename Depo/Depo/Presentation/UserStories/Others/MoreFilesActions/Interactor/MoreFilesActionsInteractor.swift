@@ -269,9 +269,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        RouterVC().showSpiner()
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .hide)
+            //TODO: FE-1902
             self?.player.remove(listItems: remoteItems)
             self?.fileService.hide(items: remoteItems, success: self?.succesAction(elementType: .hide), fail: self?.failAction(elementType: .hide))
         }
@@ -286,7 +286,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
         
         router.presentViewController(controller: controller)
-        router.hideSpiner()
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {
