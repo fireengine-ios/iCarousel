@@ -307,6 +307,23 @@ struct RouteRequests {
         static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
         static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
     }
+    
+    enum FileSystem {
+        static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        
+        static let filesystemBase = "filesystem/"
+        
+        static let create = filesystemBase + "createFolder?parentFolderUuid=%@"
+        static let delete = filesystemBase + "delete"
+        static let rename = filesystemBase + "rename/%@"
+        static let move = filesystemBase + "move?targetFolderUuid=%@"
+        static let copy = filesystemBase + "copy?targetFolderUuid=%@"
+        static let details = filesystemBase + "details?minified=true"
+        static let detail = filesystemBase + "detail/%@"
+        static let metaData = filesystemBase + "metadata"
+        static let trash = filesystemBase + "trash"
+        static let hide = baseUrl +/ (filesystemBase + "hide")
+    }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     

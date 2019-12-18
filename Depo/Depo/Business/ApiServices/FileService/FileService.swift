@@ -8,21 +8,6 @@
 
 import Foundation
 
-struct FilePatch {
-    static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-    static let create = "filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "filesystem/delete"
-    static let rename = "filesystem/rename/%@"
-    static let move =   "filesystem/move?targetFolderUuid=%@"
-    static let copy =   "filesystem/copy?targetFolderUuid=%@"
-    static let details = "filesystem/details?minified=true"
-    static let detail =  "filesystem/detail/%@"
-    
-    static let metaData = "filesystem/metadata"
-    
-    static let trash = "filesystem/trash"
-}
-
 
 class CreatesFolder: BaseRequestParametrs {
     
@@ -42,7 +27,7 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.create, rootFolderName )
+        let path: String = String(format: RouteRequests.FileSystem.create, rootFolderName )
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -74,7 +59,7 @@ class DeleteFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.delete, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.delete, relativeTo: super.patch)!
     }
     
     init(items: [String]) {
@@ -91,7 +76,7 @@ class MoveToTrashFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.trash, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.trash, relativeTo: super.patch)!
     }
     
     init(items: [String]) {
@@ -109,7 +94,7 @@ class MoveFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.move, path)
+        let str = String(format: RouteRequests.FileSystem.move, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -129,7 +114,7 @@ class CopyFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.copy, path)
+        let str = String(format: RouteRequests.FileSystem.copy, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -154,7 +139,7 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.rename, uuid)
+        let path: String = String(format: RouteRequests.FileSystem.rename, uuid)
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -176,7 +161,7 @@ class MetaDataFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.metaData, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.metaData, relativeTo: super.patch)!
     }
     
     init(items: [String], addToFavourit: Bool) {
@@ -194,7 +179,7 @@ class FileDetail: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.detail, uuid)
+        let str = String(format: RouteRequests.FileSystem.detail, uuid)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -212,7 +197,7 @@ class FileDetails: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.details, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.details, relativeTo: super.patch)!
     }
     
     init(uuids: [String] ) {
@@ -241,7 +226,7 @@ class FileList: BaseRequestParametrs {
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format: FilePatch.fileList, rootDir,
+        let path: String = String(format: RouteRequests.FileSystem.fileList, rootDir,
                                   sortBy.description, sortOrder.description,
                                   page.description, size.description, folder)
         
