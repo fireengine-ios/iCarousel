@@ -645,7 +645,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
         
         let tokenStorage: TokenStorage = factory.resolve()
-        guard let _ = tokenStorage.accessToken else {
+        guard tokenStorage.accessToken != nil else {
             defaultURLCallback()
             return
         }
