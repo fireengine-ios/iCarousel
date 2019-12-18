@@ -159,14 +159,20 @@ struct RouteRequests {
     // MARK: Album
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumListHidden = baseUrl.absoluteString + albumList + "&status=HIDDEN"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumHide = baseUrl +/ "album/hide"
+    static let albumRecover = baseUrl +/ "album/recover"
     
     // MARK: My Streams
     
+    // FIXME: pass paramaerts as request paramerts
     static let people = "person/"
     static let peopleThumbnails = "person/thumbnails"
     static let peoplePage = "person/page?pageSize=%d&pageNumber=%d"
+    static let peoplePageHidden = baseUrl.absoluteString + peoplePage + "&status=HIDDEN"
     static let peopleAlbum = "album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
+    static let peopleAlbumHidden = baseUrl.absoluteString + peopleAlbum + "&status=HIDDEN"
     static let peopleAlbums = "person/relatedAlbums/%d"
     static let personVisibility = "person/visibility/"
     static let peopleSearch = "person/label/%@"
@@ -177,13 +183,17 @@ struct RouteRequests {
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
     static let thingsPage = "object/page?pageSize=%d&pageNumber=%d"
+    static let thingsPageHidden = baseUrl.absoluteString + thingsPage + "&status=HIDDEN"
     static let thingsAlbum = "album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
+    static let thingsAlbumHidden = baseUrl.absoluteString + thingsAlbum + "&status=HIDDEN"
     static let thingsDeletePhotos = "object/photo/%d"
 //    static let thingsDeletePhoto = "object/photo/%d/%d"
     static let places = "location/"
     static let placesThumbnails = "location/thumbnails"
     static let placesPage = "location/page?pageSize=%d&pageNumber=%d"
+    static let placesPageHidden = baseUrl.absoluteString + placesPage + "&status=HIDDEN"
     static let placesAlbum = "album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
+    static let placesAlbumHidden = baseUrl.absoluteString + placesAlbum + "&status=HIDDEN"
 //    static let placesDeletePhotos = "location/%d"
     
     //MARK : Share
@@ -310,6 +320,7 @@ struct RouteRequests {
     
     enum FileSystem {
         static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
         
         static let filesystemBase = "filesystem/"
         
@@ -323,6 +334,7 @@ struct RouteRequests {
         static let metaData = filesystemBase + "metadata"
         static let trash = filesystemBase + "trash"
         static let hide = baseUrl +/ (filesystemBase + "hide")
+        static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
