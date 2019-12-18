@@ -37,10 +37,9 @@ extension Alamofire.DataRequest {
             }
         }
     }
-    
-    @discardableResult
+
     func responseVoid(_ handler: @escaping ResponseHandler<Void>) -> Self {
-        responseString { response in
+        return responseString { response in
             switch response.result {
             case .success(_):
                 handler(ResponseResult.success(()))
