@@ -639,25 +639,30 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func faqUrl(_ handler: @escaping (String) -> Void) {
         debugLog("AccountService faqUrl")
         
-        SessionManager.sessionWithoutAuth
+        func defaultURLCallback() {
+            let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+            handler(defaultFaqUrl)
+        }
+        
+        let tokenStorage: TokenStorage = factory.resolve()
+        guard tokenStorage.accessToken != nil else {
+            defaultURLCallback()
+            return
+        }
+        
+        SessionManager.customDefault
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in
-                
-                func errorHandler() {
-                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-                    handler(defaultFaqUrl)
-                }
-                
                 switch response.result {
                 case .success(let json):
                     if let json = json as? [String: String], let faqUrl = json["value"] {
                         handler(faqUrl)
                     } else {
-                        errorHandler()
+                        defaultURLCallback()
                     }
                 case .failure(_):
-                    errorHandler()
+                    defaultURLCallback()
                 }
         }
     }
