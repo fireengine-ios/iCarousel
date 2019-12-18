@@ -257,6 +257,37 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func hide(items: [BaseDataSourceItem]) {
+        guard let items = items as? [Item] else {
+            assertionFailure("Unexpected type of items")
+            return
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to hide them")
+            return
+        }
+        
+        let okHandler: VoidHandler = { [weak self] in
+            self?.output?.operationStarted(type: .hide)
+            //TODO: FE-1902
+            self?.player.remove(listItems: remoteItems)
+            self?.fileService.hide(items: remoteItems, success: self?.succesAction(elementType: .hide), fail: self?.failAction(elementType: .hide))
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.hideItemsWarningTitle,
+                                              message: TextConstants.hideItemsWarningMessage,
+                                              image: .hide,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+    }
+    
     func completelyDelete(albums: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
             guard let albums = albums as? [AlbumItem] else { return }
@@ -291,9 +322,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
-            self?.fileService.delete(deleteFiles: items,
-                                     success: self?.succesAction(elementType: .delete),
-                                     fail: self?.failAction(elementType: .delete))
+            self?.fileService.moveToTrash(files: items,
+                                          success: self?.succesAction(elementType: .delete),
+                                          fail: self?.failAction(elementType: .delete))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
@@ -313,7 +344,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             
-            self?.albumService.delete(albums: albumbs, success: { [weak self] deletedAlbums in
+            self?.albumService.trash(albums: albumbs, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
@@ -643,24 +674,33 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                
-                let text: String
-                switch elementType {
-                case .download:
-                    text = TextConstants.popUpDownloadComplete
-                case .delete:
-                    text = TextConstants.popUpDeleteComplete
-                    MenloworksAppEvents.onFileDeleted()
-                case .hide:
-                    //TODO: FE-1869 change to custom popup
-                    text = TextConstants.popUpHideComplete
-                default:
-                    return
-                }
-                UIApplication.showSuccessAlert(message: text)
+                self?.showSuccessPopup(for: elementType)
             }
         }
         return success
+    }
+    
+    private func showSuccessPopup(for elementType: ElementTypes) {
+        guard elementType != .hide else {
+            let vc = SuccessfullHidePopUp.with { popup in
+                //TODO: FE-1873 show hidden bin here
+                popup.close()
+            }
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            return
+        }
+        
+        let text: String
+        switch elementType {
+        case .download:
+            text = TextConstants.popUpDownloadComplete
+        case .delete:
+            text = TextConstants.popUpDeleteComplete
+            MenloworksAppEvents.onFileDeleted()
+        default:
+            return
+        }
+        UIApplication.showSuccessAlert(message: text)
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {

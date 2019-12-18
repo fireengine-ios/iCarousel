@@ -44,6 +44,8 @@ class WrapItemFileService: WrapItemFileOperations {
     
     let uploadService = UploadService.default
     
+    private let hideFileService = HideFileService()
+    
     
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         remoteFileService.createsFolder(createFolder: createFolder, success: success, fail: fail)
@@ -72,7 +74,30 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.delete(deleteFiles: param,
                                  success: successOperation,
                                  fail: failOperation)
+    }
+    
+    func moveToTrash(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
+        let successOperation: FileOperationSucces = {
+            //TODO: - Need change status to TRASHED
+            MediaItemOperationsService.shared.deleteItems(files, completion: {
+                success?()
+                ItemOperationManager.default.deleteItems(items: files)
+            })
+        }
+        
+        let failOperation: FailResponse = {  value in
+            fail?(value)
+        }
+        
+        let removeItems = remoteItemsUUID(files: files)
+        if removeItems.isEmpty {
+            successOperation()
+            return
+        }
+        
+        let files = MoveToTrashFiles(items: removeItems)
+        remoteFileService.moveToTrash(files: files, success: successOperation, fail: failOperation)
     }
     
     func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
@@ -91,6 +116,30 @@ class WrapItemFileService: WrapItemFileOperations {
             
         } else {
             success?()
+        }
+    }
+    
+    func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteItems(items, completion: {
+                success?()
+                ItemOperationManager.default.didHide(items: items)
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hideFileService.hideItems(remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
         }
     }
     
