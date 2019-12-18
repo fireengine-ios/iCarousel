@@ -544,14 +544,14 @@ protocol  Wrappered {
 class WrapData: BaseDataSourceItem, Wrappered {
     
     enum Status: String {
-        case active = "ACTIVE"
+        case unknown = "UNKNOWN"
         case uploaded = "UPLOADED"
         case transcoding = "TRANSCODING"
         case transcodingFailed = "TRANSCODING_FAILED"
+        case active = "ACTIVE"
         case trashed = "TRASHED"
         case deleted = "DELETED"
         case hidden = "HIDDEN"
-        case unknown = "UNKNOWN"
         
         init(string: String?) {
             if let statusString = string, let status = Status(rawValue: statusString) {
@@ -559,6 +559,23 @@ class WrapData: BaseDataSourceItem, Wrappered {
             } else {
                 self = .unknown
             }
+        }
+        
+        func valueForCoreDataMapping() -> Int16 {
+            switch self {
+            case .unknown: return 0
+            case .uploaded: return 1
+            case .transcoding: return 2
+            case .transcodingFailed: return 3
+            case .active: return 4
+            case .trashed: return 5
+            case .deleted: return 6
+            case .hidden: return 7
+            }
+        }
+        
+        var isTranscoded: Bool {
+            return isContained(in: [.active, .hidden, .trashed])
         }
     }
     
