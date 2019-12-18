@@ -145,21 +145,22 @@ final class HiddenPhotosDataLoader {
     //MARK: - Unhide methods
     
     func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        let uuids = items.map { $0.uuid }
-        guard !uuids.isEmpty else {
-            return
-        }
-        
-        _ = hiddenService.recoverItemsByUuids(uuids, handler: handler)
+        _ = hiddenService.recoverItems(items, handler: handler)
     }
     
     func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
-        let uuids = items.map { $0.uuid }
-        guard !uuids.isEmpty else {
-            return
+        getAlbumItems(items: items) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let albums):
+                _ = self.hiddenService.recoverAlbums(albums, handler: handler)
+            case .failed(let error):
+                handler(.failed(error))
+            }
         }
-        
-        _ = hiddenService.recoverAlbumsByUuids(uuids, handler: handler)
     }
     
     //MARK: - Delete methods
@@ -239,24 +240,21 @@ final class HiddenPhotosDataLoader {
         }
         
         if item is PeopleItem {
-            _ = hiddenService.hiddenPeopleAlbumDetail(id: id, handler: handler)
+            _ = hiddenService.hiddenPeopleAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is PlacesItem {
-            _ = hiddenService.hiddenPlacesAlbumDetail(id: id, handler: handler)
+            _ = hiddenService.hiddenPlacesAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is ThingsItem {
-            _ = hiddenService.hiddenThingsAlbumDetail(id: id, handler: handler)
+            _ = hiddenService.hiddenThingsAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         }
     }
     
-    private func getAlbumUuids(items: [BaseDataSourceItem], handler: @escaping ResponseArrayHandler<String>) {
-        var uuids = [String]()
-        
-        let albums = items.filter { $0 is AlbumItem }
-        uuids.append(contentsOf: albums.map { $0.uuid })
+    private func getAlbumItems(items: [BaseDataSourceItem], handler: @escaping ResponseArrayHandler<AlbumItem>) {
+        var albums = items.filter { $0 is AlbumItem }
         
         let peopleItems = items.filter { $0 is PeopleItem }
         let placesItems = items.filter { $0 is PlacesItem }
         let thingsItems = items.filter { $0 is ThingsItem }
         
-        //TODO: get uuids for FIR albums
+        //TODO: get albums for FIR albums
     }
 }
