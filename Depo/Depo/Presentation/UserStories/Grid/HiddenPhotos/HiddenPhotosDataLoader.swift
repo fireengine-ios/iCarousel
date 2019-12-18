@@ -149,17 +149,8 @@ final class HiddenPhotosDataLoader {
     }
     
     func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
-        getAlbumItems(items: items) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            switch result {
-            case .success(let albums):
-                _ = self.hiddenService.recoverAlbums(albums, handler: handler)
-            case .failed(let error):
-                handler(.failed(error))
-            }
+        getAlbumItems(items: items) { [weak self] albums in
+            _ = self?.hiddenService.recoverAlbums(albums, handler: handler)
         }
     }
     
@@ -248,13 +239,36 @@ final class HiddenPhotosDataLoader {
         }
     }
     
-    private func getAlbumItems(items: [BaseDataSourceItem], handler: @escaping ResponseArrayHandler<AlbumItem>) {
-        var albums = items.filter { $0 is AlbumItem }
+    private func getAlbumItems(items: [BaseDataSourceItem], handler: @escaping ([AlbumItem]) -> Void) {
+        var albums = items.compactMap { $0 as? AlbumItem }
         
-        let peopleItems = items.filter { $0 is PeopleItem }
-        let placesItems = items.filter { $0 is PlacesItem }
-        let thingsItems = items.filter { $0 is ThingsItem }
+        let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
+        let firItems = items.filter { ($0 as? Item)?.fileType.isContained(in: types) == true } as! [Item]
         
-        //TODO: get albums for FIR albums
+        if firItems.isEmpty {
+            handler(albums)
+            return
+        }
+        
+        //TODO: Need to refactoring after change API for send array of ids
+        let group = DispatchGroup()
+        firItems.forEach { item in
+            group.enter()
+            
+            getAlbum(item: item) { result in
+                switch result {
+                case .success(let response):
+                    let albumItems = response.list.map { AlbumItem(remote: $0) }
+                    albums.append(contentsOf: albumItems)
+                case .failed:
+                    break
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            handler(albums)
+        }
     }
 }
