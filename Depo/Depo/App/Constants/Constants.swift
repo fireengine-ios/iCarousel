@@ -1577,4 +1577,5 @@ struct TextConstants {
     static let hiddenBinAlbumSliderEmpty = NSLocalizedString("hidden_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinEmpty = NSLocalizedString("hidden_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinNavBarTitle = NSLocalizedString("hidden_bin_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhidePopupText = NSLocalizedString("unhide_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

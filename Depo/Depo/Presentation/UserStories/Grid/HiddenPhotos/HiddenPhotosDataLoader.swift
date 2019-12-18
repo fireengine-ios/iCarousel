@@ -142,6 +142,28 @@ final class HiddenPhotosDataLoader {
         }
     }
     
+    //MARK: - Unhide methods
+    
+    func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
+        let uuids = items.map { $0.uuid }
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        _ = hiddenService.recoverItemsByUuids(uuids, handler: handler)
+    }
+    
+    func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
+        let uuids = items.map { $0.uuid }
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        _ = hiddenService.recoverAlbumsByUuids(uuids, handler: handler)
+    }
+    
+    //MARK: - Delete methods
+    
     //MARK: - Private methods
     
     private func loadCurrentTypeAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
@@ -223,5 +245,18 @@ final class HiddenPhotosDataLoader {
         } else if item is ThingsItem {
             _ = hiddenService.hiddenThingsAlbumDetail(id: id, handler: handler)
         }
+    }
+    
+    private func getAlbumUuids(items: [BaseDataSourceItem], handler: @escaping ResponseArrayHandler<String>) {
+        var uuids = [String]()
+        
+        let albums = items.filter { $0 is AlbumItem }
+        uuids.append(contentsOf: albums.map { $0.uuid })
+        
+        let peopleItems = items.filter { $0 is PeopleItem }
+        let placesItems = items.filter { $0 is PlacesItem }
+        let thingsItems = items.filter { $0 is ThingsItem }
+        
+        //TODO: get uuids for FIR albums
     }
 }

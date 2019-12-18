@@ -167,11 +167,11 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
     func onBottomBarDelete() {
-        deleteSelectedItems()
+        showDeletePopup()
     }
     
     func onBottomBarUnhide() {
-        unhideSelectedItems()
+        showUnhidePopup()
     }
 }
 
@@ -200,11 +200,11 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerUnhide() {
-        unhideSelectedItems()
+        showUnhidePopup()
     }
     
     func onThreeDotsManagerDelete() {
-        deleteSelectedItems()
+        showDeletePopup()
     }
 }
 
@@ -260,11 +260,47 @@ extension HiddenPhotosViewController {
 
 extension HiddenPhotosViewController {
     
+    private func showDeletePopup() {
+        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                         message: TextConstants.deleteFilesText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: { vc in
+                                            vc.close { [weak self] in
+                                                self?.deleteSelectedItems()
+                                            }
+                                        })
+        
+        router.presentViewController(controller: popup)
+    }
+    
+    private func showUnhidePopup() {
+        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
+                                         message: TextConstants.unhidePopupText,
+                                         image: .unhide,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: { vc in
+                                            vc.close { [weak self] in
+                                                self?.unhideSelectedItems()
+                                            }
+                                         })
+        
+        router.presentViewController(controller: popup)
+    }
+    
     private func deleteSelectedItems() {
         let selectedItems = dataSource.allSelectedItems
+        let albums = selectedItems.albums
+        let photos = selectedItems.photos
+
     }
     
     private func unhideSelectedItems() {
         let selectedItems = dataSource.allSelectedItems
+        let albums = selectedItems.albums
+        let photos = selectedItems.photos
+
     }
 }

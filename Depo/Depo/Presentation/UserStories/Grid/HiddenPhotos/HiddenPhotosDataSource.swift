@@ -181,6 +181,10 @@ extension HiddenPhotosDataSource {
             collectionView.reloadItems(at: [indexPath])
             updateSelectionCount()
         }
+        
+        if albumSlider?.isSelectionActive == false {
+            albumSlider?.startSelection()
+        }
     }
     
     func cancelSelection() {
