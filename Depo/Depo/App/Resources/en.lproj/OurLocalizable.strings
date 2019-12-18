@@ -1326,3 +1326,4 @@
 "hidden_bin_album_slider_title" = "My Hidden Albums";
 "hidden_bin_album_slider_empty" = "There is no deleted album yet.";
 "hidden_bin_empty" = "There is no deleted item yet.";
+"hidden_bin_navbar_title" = "Hidden";

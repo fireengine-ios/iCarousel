@@ -40,25 +40,21 @@ final class HiddenPhotosNavbarManager {
     
     func setDefaultState(sortType type: SortedRules) {
         moreButton.isEnabled = true
-        delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarTitle, andSubTitle: type.descriptionForTitle)
+        delegate?.setTitle(withString: TextConstants.hiddenBinNavBarTitle, andSubTitle: type.descriptionForTitle)
         delegate?.setLeftBarButtonItems(nil, animated: true)
         delegate?.setRightBarButtonItems([moreButton, searchButton], animated: true)
     }
     
     func setSelectionState() {
         moreButton.isEnabled = false
-        delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarSelectiontTitle)
+        delegate?.setTitle(withString: "0 \(TextConstants.accessibilitySelected)")
         delegate?.setLeftBarButtonItems([cancelButton], animated: true)
         delegate?.setRightBarButtonItems([moreButton], animated: true)
     }
     
     func changeSelectionItems(count: Int) {
         moreButton.isEnabled = count > 0
-        if count == 0 {
-            delegate?.setTitle(withString: TextConstants.Spotify.Playlist.navBarSelectiontTitle)
-        } else {
-            delegate?.setTitle(withString: "\(count) \(TextConstants.accessibilitySelected)")
-        }
+        delegate?.setTitle(withString: "\(count) \(TextConstants.accessibilitySelected)")
     }
     
     func setMoreButton(isEnabled: Bool) {

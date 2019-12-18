@@ -32,6 +32,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         setupRefreshControl()
         setupEmptyView()
         bottomBarManager.setup()
+        navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         
         reloadData()
     }
@@ -124,7 +125,7 @@ extension HiddenPhotosViewController: HiddenPhotosDataSourceDelegate {
     }
     
     func didSelectAlbum(item: BaseDataSourceItem) {
-        
+        showAlbumDetails(item: item)
     }
     
     func onStartSelection() {
@@ -166,11 +167,11 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
     func onBottomBarDelete() {
-        
+        deleteSelectedItems()
     }
     
     func onBottomBarUnhide() {
-        
+        unhideSelectedItems()
     }
 }
 
@@ -193,16 +194,17 @@ extension HiddenPhotosViewController: HiddenPhotosNavbarManagerDelegate {
 //MARK: - HiddenPhotosThreeDotMenuManagerDelegate
 
 extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
-    func onThreeDotsManagerUnhide() {
-        
-    }
     
     func onThreeDotsManagerSelect() {
-        
+        dataSource.startSelection()
+    }
+    
+    func onThreeDotsManagerUnhide() {
+        unhideSelectedItems()
     }
     
     func onThreeDotsManagerDelete() {
-        
+        deleteSelectedItems()
     }
 }
 
@@ -218,5 +220,51 @@ extension HiddenPhotosViewController {
     private func openSearch() {
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
+    }
+    
+    private func showAlbumDetails(item: BaseDataSourceItem) {
+        if let album = item as? AlbumItem {
+            openAlbum(item: album)
+        } else if let firItem = item as? Item, firItem.fileType.isContained(in: [.faceImage(.people), .faceImage(.places), .faceImage(.things)]) {
+            openFIRAlbum(item: firItem)
+        }
+    }
+    
+    private func openAlbum(item: AlbumItem) {
+        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        router.pushViewController(viewController: controller)
+    }
+    
+    private func openFIRAlbum(item: Item) {
+        showSpinner()
+        
+        dataLoader.getAlbumDetails(item: item) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
+            
+            switch result {
+            case .success(let album):
+                let vc = self.router.imageFacePhotosController(album: album, item: item, moduleOutput: nil)
+                self.router.pushViewController(viewController: vc)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+}
+
+//MARK: - Items processing
+
+extension HiddenPhotosViewController {
+    
+    private func deleteSelectedItems() {
+        let selectedItems = dataSource.allSelectedItems
+    }
+    
+    private func unhideSelectedItems() {
+        let selectedItems = dataSource.allSelectedItems
     }
 }

@@ -709,7 +709,7 @@ final class HiddenService {
             .task
     }
     
-    func hiddenPlacesAlbumDetail(id: Int,
+    func hiddenPlacesAlbumDetail(id: Int64,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPlacesAlbumDetail")
         
@@ -723,7 +723,7 @@ final class HiddenService {
             .task
     }
     
-    func hiddenPeopleAlbumDetail(id: Int,
+    func hiddenPeopleAlbumDetail(id: Int64,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPeopleAlbumDetail")
         
@@ -737,7 +737,7 @@ final class HiddenService {
             .task
     }
     
-    func hiddenThingsAlbumDetail(id: Int,
+    func hiddenThingsAlbumDetail(id: Int64,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenThingsAlbumDetail")
         

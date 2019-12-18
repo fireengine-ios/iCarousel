@@ -34,7 +34,7 @@ final class HiddenPhotosDataSource: NSObject {
     }
     
     private(set) var allItems = [[Item]]()
-    private(set) var selectedItems = [Item]()
+    private var selectedItems = [Item]()
     
     private var showGroups: Bool {
         return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .sizeZA, .timeUp, .timeDown])
@@ -60,6 +60,10 @@ final class HiddenPhotosDataSource: NSObject {
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         return CGSize(width: itemWidth, height: itemWidth)
     }()
+    
+    var allSelectedItems: (photos: [Item], albums: [BaseDataSourceItem]) {
+        return (selectedItems, albumSlider?.selectedItems ?? [])
+    }
     
     //MARK: - Init
     
@@ -168,7 +172,7 @@ extension HiddenPhotosDataSource {
     
     func startSelection(indexPath: IndexPath? = nil) {
         isSelectionStateActive = true
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateVisibleCells()
         
         delegate?.onStartSelection()
         
@@ -183,7 +187,13 @@ extension HiddenPhotosDataSource {
         isSelectionStateActive = false
         selectedItems.removeAll()
         albumSlider?.stopSelection()
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateVisibleCells()
+    }
+    
+    private func updateVisibleCells() {
+        collectionView.visibleCells.compactMap { $0 as? CollectionViewCellDataProtocol }.forEach {
+            $0.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
+        }
     }
     
     private func updateSelectionCount() {

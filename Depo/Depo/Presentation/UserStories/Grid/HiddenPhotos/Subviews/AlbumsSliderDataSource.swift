@@ -87,7 +87,7 @@ final class AlbumsSliderDataSource: NSObject {
 extension AlbumsSliderDataSource {
     func startSelection(indexPath: IndexPath? = nil) {
         isSelectionActive = true
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateVisibleCells()
         
         if let indexPath = indexPath {
             delegate?.onStartSelection()
@@ -99,7 +99,13 @@ extension AlbumsSliderDataSource {
     func cancelSelection() {
         isSelectionActive = false
         selectedItems.removeAll()
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateVisibleCells()
+    }
+    
+    private func updateVisibleCells() {
+        collectionView.visibleCells.compactMap { $0 as? AlbumCell }.forEach {
+            $0.setSelection(isSelectionActive: isSelectionActive, isSelected: false)
+        }
     }
 }
 
@@ -123,6 +129,7 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
         let item = items[indexPath.row]
         cell.setup(with: item)
         cell.setSelection(isSelectionActive: isSelectionActive, isSelected: selectedItems.contains(item))
+        cell.delegate = self
         
         if isPaginationDidEnd {
             return
