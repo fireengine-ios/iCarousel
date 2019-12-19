@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .unhide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
             case .smash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .delete:
@@ -149,6 +151,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .unhide:
+                //TODO: need to setup
+                self.basePassingPresenter?.stopModeSelected()
             case .smash:
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {

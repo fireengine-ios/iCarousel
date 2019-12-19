@@ -631,6 +631,7 @@ struct TextConstants {
     static let documents = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarDeleteLabel = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarHideLabel = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarUnhideLabel = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarSmashLabel = NSLocalizedString("Smash", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveAlbumLabel = NSLocalizedString("Remove Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarRemoveLabel = NSLocalizedString("Remove From Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -678,6 +679,7 @@ struct TextConstants {
     static let myStreamThingsTitle = NSLocalizedString("Things", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myStreamPlacesTitle = NSLocalizedString("Places", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myStreamInstaPickTitle = NSLocalizedString("InstaPick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smartAlbumHidden = NSLocalizedString("smart_album_hidden", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Feedback View
     static let feedbackMailTextFormat = NSLocalizedString("Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -731,6 +733,7 @@ struct TextConstants {
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetUnhide = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetShareSmallSize = NSLocalizedString("Small Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareOriginalSize = NSLocalizedString("Original Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1583,4 +1586,10 @@ struct TextConstants {
     static let carouselViewSecondPageTitle = NSLocalizedString("carousel_view_second_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let carouselViewThirdPageText = NSLocalizedString("carousel_view_third_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let carouselViewThirdPageTitle = NSLocalizedString("carousel_view_third_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let hiddenBinAlbumSliderTitle = NSLocalizedString("hidden_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hiddenBinAlbumSliderEmpty = NSLocalizedString("hidden_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hiddenBinEmpty = NSLocalizedString("hidden_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hiddenBinNavBarTitle = NSLocalizedString("hidden_bin_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhidePopupText = NSLocalizedString("unhide_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

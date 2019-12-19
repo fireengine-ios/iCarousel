@@ -312,6 +312,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .unhide:
+                    assertionFailure("please implement this function first")
+                    action = UIAlertAction()
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()

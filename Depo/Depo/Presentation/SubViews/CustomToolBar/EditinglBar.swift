@@ -36,6 +36,7 @@ enum ElementTypes {
     case print
     case changeCoverPhoto
     case hide
+    case unhide
     case smash
     //upload?
     case photos
@@ -79,6 +80,7 @@ class EditinglBar: CustomTabBar {
         static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
+        static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
         static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
     }
     
@@ -205,7 +207,8 @@ class EditinglBar: CustomTabBar {
             ///red 'delete' and 'hide' icon
             switch item.imageName {
             case PreDetermendTypes.delete.0,
-                 PreDetermendTypes.hide.0:
+                 PreDetermendTypes.hide.0,
+                 PreDetermendTypes.unhide.0:
                 image = image?.withRenderingMode(.alwaysOriginal)
             default: break
             }

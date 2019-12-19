@@ -340,6 +340,7 @@
 "All Files" = "All Files";
 "Choose" = "Choose";
 "Hide" = "Hide";
+"Unhide" = "Unhide";
 "Show" = "Show";
 "No results found for your query." = "No results found for your query.";
 "SUGGESTIONS" = "SUGGESTIONS";
@@ -432,6 +433,7 @@
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
+"smart_album_hidden" = "Hidden";
 
 /*???*/
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
@@ -1333,3 +1335,8 @@
 "carousel_view_second_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 2";
 "carousel_view_third_page_title" = "Merge your photos. Lorem ipsum! 3";
 "carousel_view_third_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 3";
+"hidden_bin_album_slider_title" = "My Hidden Albums";
+"hidden_bin_album_slider_empty" = "There is no deleted album yet.";
+"hidden_bin_empty" = "There is no deleted item yet.";
+"hidden_bin_navbar_title" = "Hidden";
+"unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";

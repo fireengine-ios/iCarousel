@@ -43,6 +43,13 @@ extension String {
     var hasCharacters: Bool {
         return !self.isEmpty
     }
+    
+    var firstLetter: String {
+        if let character = first {
+            return String(describing: character).uppercased()
+        }
+        return ""
+    }
 }
 
 extension Optional where Wrapped == String {
