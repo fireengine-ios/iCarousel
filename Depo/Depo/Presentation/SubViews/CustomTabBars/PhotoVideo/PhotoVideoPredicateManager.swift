@@ -14,7 +14,9 @@ final class PhotoVideoPredicateManager {
     private var duplicationPredicate: NSPredicate?
     
     private lazy var hiddenPredicate: NSPredicate = {
-        return NSPredicate(format: "(\(#keyPath(MediaItem.relatedRemotes)).@count = 0  || SUBQUERY(\(#keyPath(MediaItem.relatedRemotes)), $x, $x.\(#keyPath(MediaItem.status)) != \(ItemStatus.hidden.valueForCoreDataMapping())).@count != 0)")
+        //(remote && not hidden) || (local && has remotes && has at least one not hidden remote)
+        let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
+        return NSPredicate(format: "(isLocalItemValue = false AND status != %ui) OR (isLocalItemValue = true AND (relatedRemotes.@count = 0 OR (relatedRemotes.@count != 0 AND SUBQUERY(relatedRemotes, $x, $x.status != %ui).@count != 0)))", hiddenStatusValue, hiddenStatusValue)
     }()
     
     private var lastCompoundedPredicate: NSPredicate?
