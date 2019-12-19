@@ -68,7 +68,7 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
         
         let firstLaunch = currentItems.isEmpty
                 
-        currentItems = []
+        currentItems = [SliderItem(withThumbnails: [], type: .hidden)]
     
         let group = DispatchGroup()
 
@@ -79,9 +79,9 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
             }
                     
             if firstLaunch {
-                self.currentItems = [SliderItem(withThumbnails: [], type: .instaPick),
-                                     SliderItem(withThumbnails: [], type: .albums),
-                                     SliderItem(withThumbnails: [], type: .story)]
+                self.currentItems.append(contentsOf: [SliderItem(withThumbnails: [], type: .instaPick),
+                                                      SliderItem(withThumbnails: [], type: .albums),
+                                                      SliderItem(withThumbnails: [], type: .story)])
 
                 if result {
                     self.currentItems.append(contentsOf: [SliderItem(withThumbnails: [], type: .people),

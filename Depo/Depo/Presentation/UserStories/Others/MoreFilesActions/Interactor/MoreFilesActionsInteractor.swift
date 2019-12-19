@@ -682,9 +682,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private func showSuccessPopup(for elementType: ElementTypes) {
         guard elementType != .hide else {
-            let vc = SuccessfullHidePopUp.with { popup in
-                //TODO: FE-1873 show hidden bin here
+            let vc = SuccessfullHidePopUp.with { [weak self] popup in
                 popup.close()
+                guard let self = self else {
+                    return
+                }
+                let controller = self.router.hiddenPhotosViewController()
+                self.router.pushViewController(viewController: controller)
             }
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
             return

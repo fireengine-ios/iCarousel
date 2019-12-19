@@ -67,6 +67,10 @@ class LBAlbumLikePreviewSliderRouter {
 //        }
     }
     
+    private func goToHiddenView() {
+        let controller = router.hiddenPhotosViewController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
 }
 
 // MARK: - LBAlbumLikePreviewSliderRouterInput
@@ -90,6 +94,7 @@ extension LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
                 break
             }
             goToAlbumDetailView(album: albumItem)
+        case .hidden: goToHiddenView()
         }
     }
     
