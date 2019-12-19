@@ -1575,4 +1575,12 @@ struct TextConstants {
     static let profileDetailErrorContactCallCenter = NSLocalizedString("profile_detail_error_contact_call_center", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: -Carousel Pager Header
+    static let carouselViewFirstPageText = NSLocalizedString("carousel_view_first_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let carouselViewFirstPageTitle = NSLocalizedString("carousel_view_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let carouselViewSecondPageText = NSLocalizedString("carousel_view_second_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let carouselViewSecondPageTitle = NSLocalizedString("carousel_view_second_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let carouselViewThirdPageText = NSLocalizedString("carousel_view_third_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let carouselViewThirdPageTitle = NSLocalizedString("carousel_view_third_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
