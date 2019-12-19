@@ -197,7 +197,8 @@ extension HideFunctionalityService {
 
 extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openHiddenAlbum() {
-        //TODO: open hidden album
+        let controller = router.hiddenPhotosViewController()
+        router.pushViewController(viewController: controller)
     }
 
     func openPeopleAlbumIfPossible() {
