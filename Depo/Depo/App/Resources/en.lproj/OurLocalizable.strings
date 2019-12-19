@@ -1340,3 +1340,6 @@
 "hidden_bin_empty" = "There is no deleted item yet.";
 "hidden_bin_navbar_title" = "Hidden";
 "unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
+
+/*divorce card*/
+"divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
