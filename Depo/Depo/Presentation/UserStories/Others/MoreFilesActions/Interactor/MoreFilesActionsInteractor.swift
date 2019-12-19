@@ -22,6 +22,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let placesService = PlacesService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
+    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideFunctionalityService()
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -268,24 +270,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-        
-        let okHandler: VoidHandler = { [weak self] in
-            self?.output?.operationStarted(type: .hide)
-            //TODO: FE-1902
-            self?.player.remove(listItems: remoteItems)
-            self?.fileService.hide(items: remoteItems, success: self?.succesAction(elementType: .hide), fail: self?.failAction(elementType: .hide))
-        }
-        
-        let controller = PopUpController.with(title: TextConstants.hideItemsWarningTitle,
-                                              message: TextConstants.hideItemsWarningMessage,
-                                              image: .hide,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
-        
-        router.presentViewController(controller: controller)
+
+        hideFunctionalityService.startHideOperation(for: remoteItems,
+                                                    success: self.succesAction(elementType: .hide),
+                                                    fail: self.failAction(elementType: .hide))
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {
@@ -681,15 +669,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func showSuccessPopup(for elementType: ElementTypes) {
-        guard elementType != .hide else {
-            let vc = SuccessfullHidePopUp.with { popup in
-                //TODO: FE-1873 show hidden bin here
-                popup.close()
-            }
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
-            return
-        }
-        
         let text: String
         switch elementType {
         case .download:

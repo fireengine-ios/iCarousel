@@ -159,8 +159,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
         case .hide:
-            //TODO: FE-1865
-            return
+            interactor.deleteSelectedItem(type: type)
         default:
             break
         }

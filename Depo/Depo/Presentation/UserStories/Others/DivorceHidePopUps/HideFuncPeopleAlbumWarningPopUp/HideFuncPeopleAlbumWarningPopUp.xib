@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HideFuncPeopleAlbumWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="Syj-de-Zzd" id="6lH-oB-5nP"/>
+                <outlet property="closeButton" destination="hZd-03-AMT" id="PNx-EF-ang"/>
+                <outlet property="descriptionLabel" destination="nUN-RV-ccM" id="Iok-OY-dQJ"/>
+                <outlet property="functionButton" destination="g4D-WC-vRG" id="BYn-GQ-pUA"/>
+                <outlet property="popUpView" destination="Av7-kJ-lk4" id="LNp-ad-uRd"/>
+                <outlet property="premiumButton" destination="ET5-LN-lx3" id="rg7-bf-W4x"/>
+                <outlet property="titleLabel" destination="uH5-9S-mjb" id="Tnu-pp-5U6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-de-Zzd">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rdl-x0-UHo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Av7-kJ-lk4">
+                    <rect key="frame" x="24" y="119" width="272" height="330"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZA-9r-kf9">
+                            <rect key="frame" x="0.0" y="0.0" width="272" height="330"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdM-V8-bpk">
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="330"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="oFg-sE-yrg">
+                                            <rect key="frame" x="38" y="60" width="196" height="230"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uH5-9S-mjb">
+                                                    <rect key="frame" x="73" y="0.0" width="50" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUN-RV-ccM">
+                                                    <rect key="frame" x="73" y="64" width="50" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET5-LN-lx3" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="128" width="196" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="HWo-1t-9JZ"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="nuP-bc-w4G"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="onPremiumTap:" destination="-1" eventType="touchUpInside" id="9j0-Mw-4aO"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-WC-vRG" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="186" width="196" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="0ag-TK-0S9"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="fXS-pa-zaR"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="onFunctionTap:" destination="-1" eventType="touchUpInside" id="K3O-3i-XNc"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="oFg-sE-yrg" firstAttribute="top" secondItem="XdM-V8-bpk" secondAttribute="top" constant="60" id="Wbb-hO-PyP"/>
+                                        <constraint firstItem="oFg-sE-yrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XdM-V8-bpk" secondAttribute="leading" constant="24" id="aLk-qr-lam"/>
+                                        <constraint firstAttribute="bottom" secondItem="oFg-sE-yrg" secondAttribute="bottom" constant="40" id="jVd-j3-Gjf"/>
+                                        <constraint firstItem="oFg-sE-yrg" firstAttribute="centerX" secondItem="XdM-V8-bpk" secondAttribute="centerX" id="ljj-8H-aFn"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="XdM-V8-bpk" secondAttribute="trailing" id="0Q2-GM-mFz"/>
+                                <constraint firstItem="XdM-V8-bpk" firstAttribute="top" secondItem="RZA-9r-kf9" secondAttribute="top" priority="750" id="HbB-GV-Xc7"/>
+                                <constraint firstItem="XdM-V8-bpk" firstAttribute="leading" secondItem="RZA-9r-kf9" secondAttribute="leading" id="Lx9-r3-8kl"/>
+                                <constraint firstAttribute="bottom" secondItem="XdM-V8-bpk" secondAttribute="bottom" id="vdh-KY-niW"/>
+                            </constraints>
+                        </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-03-AMT">
+                            <rect key="frame" x="228" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="ip7-U9-iSW"/>
+                                <constraint firstAttribute="width" secondItem="hZd-03-AMT" secondAttribute="height" multiplier="1:1" id="mX4-IC-aTA"/>
+                            </constraints>
+                            <connections>
+                                <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="LxK-3q-aFI"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="hZd-03-AMT" secondAttribute="trailing" id="Cez-OP-80K"/>
+                        <constraint firstAttribute="width" priority="750" constant="360" id="Hic-21-iDi"/>
+                        <constraint firstAttribute="trailing" secondItem="RZA-9r-kf9" secondAttribute="trailing" id="Ncf-rq-GFn"/>
+                        <constraint firstAttribute="bottom" secondItem="RZA-9r-kf9" secondAttribute="bottom" id="Vn9-Mx-Pu8"/>
+                        <constraint firstItem="XdM-V8-bpk" firstAttribute="width" secondItem="Av7-kJ-lk4" secondAttribute="width" id="cvF-Bx-Rdj"/>
+                        <constraint firstItem="hZd-03-AMT" firstAttribute="top" secondItem="Av7-kJ-lk4" secondAttribute="top" id="f2K-wc-8XN"/>
+                        <constraint firstItem="XdM-V8-bpk" firstAttribute="height" secondItem="Av7-kJ-lk4" secondAttribute="height" priority="250" id="oJf-gu-Anf"/>
+                        <constraint firstItem="RZA-9r-kf9" firstAttribute="leading" secondItem="Av7-kJ-lk4" secondAttribute="leading" id="oOJ-Mg-43x"/>
+                        <constraint firstItem="RZA-9r-kf9" firstAttribute="top" secondItem="Av7-kJ-lk4" secondAttribute="top" id="szU-DD-raY"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Av7-kJ-lk4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0w8-GV-nrw"/>
+                <constraint firstItem="Av7-kJ-lk4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Blp-x8-KrC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Syj-de-Zzd" secondAttribute="trailing" id="HPq-hA-vxe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Syj-de-Zzd" secondAttribute="bottom" id="IKD-nZ-3hp"/>
+                <constraint firstItem="Av7-kJ-lk4" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="P1B-VC-Nvb"/>
+                <constraint firstItem="Syj-de-Zzd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QeM-75-1nz"/>
+                <constraint firstItem="Av7-kJ-lk4" firstAttribute="height" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.8" id="Uq9-56-RfR"/>
+                <constraint firstItem="Syj-de-Zzd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="e8K-cY-cOg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="140" y="117.39130434782609"/>
+        </view>
+    </objects>
+</document>

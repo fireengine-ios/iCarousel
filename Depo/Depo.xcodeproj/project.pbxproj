@@ -2956,6 +2956,9 @@
 		892B015822DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */; };
 		892F45332305A72C00604DF5 /* EmailVerifiedPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */; };
 		892F45342305A72D00604DF5 /* EmailVerifiedPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */; };
+		892FDC5B23A9214200D788C1 /* HideFunctionalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDC5A23A9214200D788C1 /* HideFunctionalityService.swift */; };
+		892FDC5C23A9214200D788C1 /* HideFunctionalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDC5A23A9214200D788C1 /* HideFunctionalityService.swift */; };
+		892FDC5D23A9214200D788C1 /* HideFunctionalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDC5A23A9214200D788C1 /* HideFunctionalityService.swift */; };
 		8930DDAD22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
 		8930DDAE22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
 		8930DDAF22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */; };
@@ -2977,6 +2980,22 @@
 		897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		89CC89F323AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */; };
+		89CC89F423AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */; };
+		89CC89F523AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */; };
+		89CC89F623AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */; };
+		89CC89F723AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */; };
+		89CC89F823AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */; };
+		89CC89F923AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */; };
+		89CC89FA23AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */; };
+		89DAB3DA23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */; };
+		89DAB3DB23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */; };
+		89DAB3DC23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */; };
+		89DAB3DD23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */; };
+		89DAB3DE23AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */; };
+		89DAB3DF23AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */; };
+		89DAB3E023AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */; };
+		89DAB3E123AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */; };
 		89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3A22CA10F9007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
 		89E51D3B22CA10FA007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E89B1F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift */; };
@@ -9591,6 +9610,7 @@
 		892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInitializer.swift; sourceTree = "<group>"; };
 		892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengePresenter.swift; sourceTree = "<group>"; };
 		892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInteractor.swift; sourceTree = "<group>"; };
+		892FDC5A23A9214200D788C1 /* HideFunctionalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideFunctionalityService.swift; sourceTree = "<group>"; };
 		8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryViewController.swift; sourceTree = "<group>"; };
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
@@ -9598,6 +9618,10 @@
 		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
 		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
 		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
+		89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideFuncPeopleAlbumWarningPopUp.swift; sourceTree = "<group>"; };
+		89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HideFuncPeopleAlbumWarningPopUp.xib; sourceTree = "<group>"; };
+		89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HideFuncCompletionPopUp.xib; sourceTree = "<group>"; };
+		89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideFuncCompletionPopUp.swift; sourceTree = "<group>"; };
 		89E51D5C22CA2ECA007A7DBC /* CreateStoryPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryPopUp.swift; sourceTree = "<group>"; };
 		89E51D5D22CA2ECA007A7DBC /* CreateStoryPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPopUp.xib; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
@@ -14156,6 +14180,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				892FDC5923A920FF00D788C1 /* HideFunctionalityService */,
 				B58533172397DD0900867B5B /* DebugAnalyticsService */,
 				9809317023952CAC00ECFEF8 /* SmartAlbumsManager */,
 				73CB8E3E2361755600585625 /* InstaPickCampaignService */,
@@ -14635,6 +14660,14 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		892FDC5923A920FF00D788C1 /* HideFunctionalityService */ = {
+			isa = PBXGroup;
+			children = (
+				892FDC5A23A9214200D788C1 /* HideFunctionalityService.swift */,
+			);
+			path = HideFunctionalityService;
+			sourceTree = "<group>";
+		};
 		896133A623390D4F000083B7 /* BasePopUpController */ = {
 			isa = PBXGroup;
 			children = (
@@ -14650,6 +14683,25 @@
 				896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */,
 			);
 			path = HomePagePopUpsService;
+			sourceTree = "<group>";
+		};
+		89CC89F023AA12D5003C58BB /* HideFuncPeopleAlbumWarningPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				89CC89F123AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift */,
+				89CC89F223AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib */,
+			);
+			path = HideFuncPeopleAlbumWarningPopUp;
+			sourceTree = "<group>";
+		};
+		89CCBEAE23A78C3500E95704 /* DivorceHidePopUps */ = {
+			isa = PBXGroup;
+			children = (
+				89CC89F023AA12D5003C58BB /* HideFuncPeopleAlbumWarningPopUp */,
+				89DAB3D923AB513700D4337D /* HideFuncCompletionPopUp.swift */,
+				89DAB3D823AB513600D4337D /* HideFuncCompletionPopUp.xib */,
+			);
+			path = DivorceHidePopUps;
 			sourceTree = "<group>";
 		};
 		89E51D1B22CA0F0F007A7DBC /* Views */ = {
@@ -17347,6 +17399,7 @@
 			isa = PBXGroup;
 			children = (
 				B537FEE823A768D900D28B68 /* SuccessfulHidePopUp */,
+				89CCBEAE23A78C3500E95704 /* DivorceHidePopUps */,
 				98F9C56C23584BA6008C5ECF /* CampaignDetailPage */,
 				981642F3233CE2D30070F8B9 /* TBMatikPhotosViewController */,
 				896133A623390D4F000083B7 /* BasePopUpController */,
@@ -20654,6 +20707,7 @@
 				0303A6552397D0D000907F42 /* t_buyuk@3x.png in Resources */,
 				0303A6562397D0D000907F42 /* cizgi_2@3x.png in Resources */,
 				0303A6572397D0D000907F42 /* PasscodeEnterViewController.xib in Resources */,
+				89DAB3DC23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */,
 				0303A6582397D0D000907F42 /* crop_selected@2x.png in Resources */,
 				0303A6592397D0D000907F42 /* gonder_btn.png in Resources */,
 				0303A65A2397D0D000907F42 /* CollectionViewCellForVideo.xib in Resources */,
@@ -20917,6 +20971,7 @@
 				0303A75C2397D0D000907F42 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				0303A75D2397D0D000907F42 /* kare@3x.png in Resources */,
 				0303A75E2397D0D000907F42 /* sample_bw@2x.png in Resources */,
+				89CC89F923AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */,
 				0303A75F2397D0D000907F42 /* ForgotPasswordViewController.xib in Resources */,
 				0303A7602397D0D000907F42 /* cropy_icon.png in Resources */,
 				0303A7612397D0D000907F42 /* caps2_selected.png in Resources */,
@@ -21383,6 +21438,7 @@
 				8C06B1C12008AD72003D8E05 /* lookup_miss_etikate.png in Resources */,
 				8C06B1B32008AD72003D8E05 /* CRYSchemeCell.nib in Resources */,
 				A2268EC621A68C2A002F2611 /* LeavePremiumView.xib in Resources */,
+				89DAB3DB23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */,
 				8C06B0672008AD71003D8E05 /* Paylas_butnuna_basin@2x.png in Resources */,
 				8C06AF7B2008AD70003D8E05 /* edit_selected@2x.png in Resources */,
 				8C0E90361FDEBDFF00789C91 /* inputCell.xib in Resources */,
@@ -21646,6 +21702,7 @@
 				CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				8C06AF0F2008AD70003D8E05 /* checkbox@3x.png in Resources */,
 				8C06B1D72008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */,
+				89CC89F823AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */,
 				8C06B1572008AD72003D8E05 /* text_selected@3x.png in Resources */,
 				8C06B1B52008AD72003D8E05 /* CRYShareImageViewController.nib in Resources */,
 				8C06B1072008AD72003D8E05 /* slider_thumb@2x.png in Resources */,
@@ -22325,6 +22382,7 @@
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
 				B5AB5B6621F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
+				89CC89F723AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */,
 				8C06AF6A2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
 				8C06B1522008AD72003D8E05 /* text_selected.png in Resources */,
 				8C06AFD82008AD71003D8E05 /* italic.png in Resources */,
@@ -22514,6 +22572,7 @@
 				8C06B1D62008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */,
 				8C06B0522008AD71003D8E05 /* parlaklik_secili.png in Resources */,
 				4A9F8E5520875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
+				89DAB3DA23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */,
 				8C06AEBE2008AD70003D8E05 /* alt_cizgili@2x.png in Resources */,
 				7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */,
 				8C06AFF02008AD71003D8E05 /* kirmizi.png in Resources */,
@@ -22830,6 +22889,7 @@
 				CE784D7C22A685FB00662219 /* extraOptions_selected@2x.png in Resources */,
 				CE784D7D22A685FB00662219 /* ActivityTimelineHeader.xib in Resources */,
 				CE784D7E22A685FB00662219 /* InstaPickProgressPopup.xib in Resources */,
+				89CC89FA23AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.xib in Resources */,
 				CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */,
 				CE784D8022A685FB00662219 /* kup_selected@2x.png in Resources */,
 				CE784D8122A685FB00662219 /* duz_cizgi@2x.png in Resources */,
@@ -23043,6 +23103,7 @@
 				CE784E4822A685FB00662219 /* cropy_icon@3x.png in Resources */,
 				CFED206C23929B5800BD141E /* Settings.bundle in Resources */,
 				98AA104723585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
+				89DAB3DD23AB513700D4337D /* HideFuncCompletionPopUp.xib in Resources */,
 				CE784E4922A685FB00662219 /* sample@3x.png in Resources */,
 				CE784E4A22A685FB00662219 /* LatestUpladsCard.xib in Resources */,
 				CE784E4B22A685FB00662219 /* edit_selected@2x.png in Resources */,
@@ -24640,6 +24701,7 @@
 				0303A1382397D0D000907F42 /* ManageContactsRouterInput.swift in Sources */,
 				0303A1392397D0D000907F42 /* DuplicatedContactTableViewCell.swift in Sources */,
 				0303A13A2397D0D000907F42 /* FaceImagePhotosInteractor.swift in Sources */,
+				89DAB3E023AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */,
 				0303A13B2397D0D000907F42 /* LocalAlbumPresenter.swift in Sources */,
 				0303A13C2397D0D000907F42 /* CaptchaViewController.swift in Sources */,
 				0303A13D2397D0D000907F42 /* CollectionSortingRules.swift in Sources */,
@@ -24970,6 +25032,7 @@
 				0303A2802397D0D000907F42 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				0303A2812397D0D000907F42 /* ImageDownloadOperation.swift in Sources */,
 				0303A2822397D0D000907F42 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
+				89CC89F523AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */,
 				0303A2832397D0D000907F42 /* UIAlertController+Action.swift in Sources */,
 				0303A2842397D0D000907F42 /* Filter.m in Sources */,
 				0303A2852397D0D000907F42 /* InternetDataUsageCollectionViewCell.swift in Sources */,
@@ -25478,6 +25541,7 @@
 				0303A47A2397D0D000907F42 /* PrintViewOutput.swift in Sources */,
 				0303A47B2397D0D000907F42 /* UIBarButtonItem+Extensions.swift in Sources */,
 				0303A47C2397D0D000907F42 /* PackagesViewInput.swift in Sources */,
+				892FDC5D23A9214200D788C1 /* HideFunctionalityService.swift in Sources */,
 				0303A47D2397D0D000907F42 /* SelectNameViewOutput.swift in Sources */,
 				0303A47E2397D0D000907F42 /* SelectNameViewController.swift in Sources */,
 				0303A47F2397D0D000907F42 /* SelectNameModuleInput.swift in Sources */,
@@ -26804,6 +26868,7 @@
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
+				89DAB3DF23AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */,
 				B53DCE9120EF634900400DBA /* ContactUtil.m in Sources */,
 				CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */,
 				8C0E8F131FDEBDFF00789C91 /* SearchViewConfigurator.swift in Sources */,
@@ -26822,6 +26887,7 @@
 				8C0E8F181FDEBDFF00789C91 /* MoreFilesActionsModuleInput.swift in Sources */,
 				8C20864A228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
 				8C0E8F191FDEBDFF00789C91 /* SyncContactsRouter.swift in Sources */,
+				89CC89F423AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */,
 				8C0E8F1A1FDEBDFF00789C91 /* SyncContactsConfigurator.swift in Sources */,
 				987E2180236037F900D45AEA /* CampaignIntroView.swift in Sources */,
 				8C0E8F1B1FDEBDFF00789C91 /* SyncContactsInitializer.swift in Sources */,
@@ -27100,6 +27166,7 @@
 				8C0E8FB21FDEBDFF00789C91 /* FeedbackViewModuleInput.swift in Sources */,
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
+				892FDC5C23A9214200D788C1 /* HideFunctionalityService.swift in Sources */,
 				FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */,
 				FA793D8B201872E600A02B46 /* PeopleService.swift in Sources */,
@@ -27845,6 +27912,7 @@
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
 				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
+				89CC89F323AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */,
 				4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				892B015122DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
@@ -28306,6 +28374,7 @@
 				7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */,
 				2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C6EF8841F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift in Sources */,
+				892FDC5B23A9214200D788C1 /* HideFunctionalityService.swift in Sources */,
 				7CA4A176207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				98C878262074E1C100374177 /* NavigationController.swift in Sources */,
 				CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */,
@@ -28414,6 +28483,7 @@
 				7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
+				89DAB3DE23AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */,
 				4A0AC1502087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift in Sources */,
 				7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */,
 				4ADE0887202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
@@ -29134,6 +29204,7 @@
 				CE78486422A685FB00662219 /* ActivityIndicatorManager.swift in Sources */,
 				CE78486522A685FB00662219 /* FeedbackService.swift in Sources */,
 				CE78486622A685FB00662219 /* FaceImageAddNameRouterInput.swift in Sources */,
+				89CC89F623AA1308003C58BB /* HideFuncPeopleAlbumWarningPopUp.swift in Sources */,
 				CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */,
 				CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */,
 				CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */,
@@ -29243,6 +29314,7 @@
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
+				89DAB3E123AB513700D4337D /* HideFuncCompletionPopUp.swift in Sources */,
 				CE7848D222A685FB00662219 /* LoginSettingsRouter.swift in Sources */,
 				CE7848D322A685FB00662219 /* PopUpController.swift in Sources */,
 				89E51D5922CA112E007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
