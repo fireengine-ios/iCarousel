@@ -199,7 +199,7 @@ final class HideFuncCompletionPopUp: BasePopUpController {
 
         switch mode {
         case .showOpenSmartAlbumButton:
-            let title = isSingleImage ? TextConstants.hideSuccessPopupMessage : TextConstants.hideSuccessedAlertWithPeopleAlbumTitle
+            let title = isSingleImage ? TextConstants.hideSuccessedAlertWithPeopleAlbumTitle : TextConstants.hideSuccessPopupMessage
             titleLabel.text = title
             titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
             titleLabel.textColor = UIColor.lrLightBrownishGrey
@@ -207,7 +207,7 @@ final class HideFuncCompletionPopUp: BasePopUpController {
             bottomButtonParentView.isHidden = true
 
         case .showBottomCloseButton:
-            let title = isSingleImage ? TextConstants.hideSuccessPopupMessage : TextConstants.hideSuccessedAlertTitle
+            let title = isSingleImage ? TextConstants.hideSuccessedAlertTitle : TextConstants.hideSuccessPopupMessage
             titleLabel.text = title
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
             titleLabel.textColor = ColorConstants.darkBlueColor
