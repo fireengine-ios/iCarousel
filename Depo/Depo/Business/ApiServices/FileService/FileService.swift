@@ -865,7 +865,15 @@ final class HiddenService {
                       handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverItems")
         let ids = items.compactMap { $0.uuid }
-        return recoverItemsByUuids(ids, handler: handler)
+        return recoverItemsByUuids(ids) { result in
+            switch result {
+            case .success(_):
+                ItemOperationManager.default.didUnhide(items: items)
+                handler(.success(()))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        }
     }
     
     /// from doc: UUID of file(s) and/or folder(s) to recover them.
@@ -895,10 +903,20 @@ final class HiddenService {
     
     @discardableResult
     func recoverAlbums(_ albums: [AlbumItem],
+                       firItems: [Item],
                        handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums AlbumItem")
         let ids = albums.compactMap { $0.uuid }
-        return recoverAlbumsByUuids(ids, handler: handler)
+        return recoverAlbumsByUuids(ids) { result in
+            switch result {
+            case .success(_):
+                ItemOperationManager.default.didUnhide(albums: albums)
+                ItemOperationManager.default.didUnhide(items: firItems)
+                handler(.success(()))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        }
     }
     
     private func recoverAlbumsByUuids(_ uuids: [String],
