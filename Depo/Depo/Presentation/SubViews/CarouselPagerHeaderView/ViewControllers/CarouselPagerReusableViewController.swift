@@ -68,14 +68,14 @@ final class CarouselPagerReusableViewController: UICollectionReusableView, UIScr
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x
-        let page = x / scrollView.frame.size.width
+        let page = x / scrollView.frame.width
         pageControl.currentPage = Int(page)
     }
     
     @objc func valueChanged() {
         let page = pageControl.currentPage
-        let x = CGFloat(page) * scrollView.frame.size.width
-        let rect = CGRect(x: x, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        let x = CGFloat(page) * scrollView.frame.width
+        let rect = CGRect(x: x, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
         scrollView.scrollRectToVisible(rect, animated: true)
     }
     
