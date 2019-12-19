@@ -38,6 +38,7 @@ enum OperationType: String {
     case instaPick                  = "instaPick"
     case tbMatik                    = "TBMATIC"
     case campaignCard               = "CAMPAIGN"
+    case divorce                    = "DIVORCE"
 }
 
 typealias BlockObject = VoidHandler
@@ -401,6 +402,8 @@ class CardsManager: NSObject {
             cardView = TBMatikCard.initFromNib()
         case .campaignCard:
             cardView = CampaignCard.initFromNib()
+        case .divorce:
+            cardView = DivorceCard.initFromNib()
         }
         
         /// seems like duplicated logic "set(object:".
