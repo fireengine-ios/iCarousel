@@ -79,7 +79,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private func hiddenSuccessfully() {
         success?()
-        
+
         showSuccessPopUp()
     }
 
@@ -90,9 +90,12 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private func preparePeopleAlbumOpenning() {
         let group = DispatchGroup()
+        let requiredPreparations = [getPermissions, getFaceImageGroupingStatus]
 
-        group.enter()
-        group.enter()
+        requiredPreparations.forEach {
+            group.enter()
+            $0()
+        }
 
         group.notify(queue: DispatchQueue.main) { [weak self] in
             self?.peopleAlbumRequestsGroup = nil
@@ -101,11 +104,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         }
 
         peopleAlbumRequestsGroup = group
-
-        getPermissions()
-        getFaceImageGroupingStatus()
     }
-    
+
     private func didObtainPeopleAlbumInfo() {
         guard let permissions = permissions, let faceImageGrouping = faceImageGrouping else {
             return
@@ -133,7 +133,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         let controller = HideFuncPeopleAlbumWarningPopUp(mode: mode, delegate: self)
         router.presentViewController(controller: controller, animated: false)
     }
-    
+
     private func openPeopleAlbum() {
         let router = RouterVC()
         let controller = router.peopleListController()
