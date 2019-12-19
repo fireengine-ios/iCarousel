@@ -506,14 +506,14 @@ enum SyncWrapperedStatus {
 
 
 enum ItemStatus: String {
-    case unknown = "UNKNOWN"
+    case active = "ACTIVE"
     case uploaded = "UPLOADED"
     case transcoding = "TRANSCODING"
     case transcodingFailed = "TRANSCODING_FAILED"
-    case active = "ACTIVE"
     case trashed = "TRASHED"
     case deleted = "DELETED"
     case hidden = "HIDDEN"
+    case unknown = "UNKNOWN"
     
     init(string: String?) {
         if let statusString = string, let status = ItemStatus(rawValue: statusString) {
@@ -525,27 +525,27 @@ enum ItemStatus: String {
     
     init(value: Int16) {
         switch value {
+        case 0: self = .active
         case 1: self = .uploaded
         case 2: self = .transcoding
         case 3: self = .transcodingFailed
-        case 4: self = .active
-        case 5: self = .trashed
-        case 6: self = .deleted
-        case 7: self = .hidden
+        case 4: self = .trashed
+        case 5: self = .deleted
+        case 6: self = .hidden
         default: self = .unknown
         }
     }
     
     func valueForCoreDataMapping() -> Int16 {
         switch self {
-        case .unknown: return 0
+        case .active: return 0
         case .uploaded: return 1
         case .transcoding: return 2
         case .transcodingFailed: return 3
-        case .active: return 4
-        case .trashed: return 5
-        case .deleted: return 6
-        case .hidden: return 7
+        case .trashed: return 4
+        case .deleted: return 5
+        case .hidden: return 6
+        case .unknown: return 7
         }
     }
     
