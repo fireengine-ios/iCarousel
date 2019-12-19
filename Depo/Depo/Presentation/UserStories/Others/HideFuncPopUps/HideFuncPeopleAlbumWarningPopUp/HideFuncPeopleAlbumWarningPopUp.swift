@@ -74,9 +74,8 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
             newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.backgroundColor = UIColor.lrTealishTwo
-            
+
             newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.titleLabel?.numberOfLines = 1
         }
     }
 

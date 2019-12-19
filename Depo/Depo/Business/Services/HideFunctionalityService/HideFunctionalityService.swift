@@ -203,7 +203,7 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
     }
-    
+
     func openPremium() {
         let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
         router.pushViewController(viewController: controller)
