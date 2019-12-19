@@ -1325,3 +1325,11 @@
 "password_field_is_empty" = "Your password field cannot be empty";
 
 "temporary_error" = "temporary error, please try again";
+
+/*carousel pager*/
+"carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
+"carousel_view_first_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 1";
+"carousel_view_second_page_title" ="Merge your photos. Lorem ipsum! 2";
+"carousel_view_second_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 2";
+"carousel_view_third_page_title" = "Merge your photos. Lorem ipsum! 3";
+"carousel_view_third_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 3";

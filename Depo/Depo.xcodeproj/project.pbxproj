@@ -5794,6 +5794,26 @@
 		A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
 		A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
 		A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
+		A705E3C423A21698005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
+		A705E3C523A21698005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
+		A705E3C623A217C1005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
+		A705E3C723A217E1005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
+		A705E3D723A22F42005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
+		A705E3D823A22F43005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
+		A705E3D923A22F47005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
+		A705E3DA23A22F48005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
+		A74ADA4B23A38344007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
+		A74ADA4C23A38360007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
+		A74ADA4D23A38361007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
+		A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
+		A74ADA6523A3E3AA007DD192 /* CarouselPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */; };
+		A74ADA6623A3E3C7007DD192 /* CarouselPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */; };
+		A74ADA6723A3E3C8007DD192 /* CarouselPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */; };
+		A74ADA6823A3E3C9007DD192 /* CarouselPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */; };
+		A74ADA7823A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */; };
+		A74ADA7923A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */; };
+		A74ADA7A23A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */; };
+		A74ADA7B23A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */; };
 		A8F0A4767B5D5821DD4D8083 /* FeedbackViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */; };
 		AA2C01B7784D705B52F99502 /* Pods_LifeDriveNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF4454D85FDB87498EE606 /* Pods_LifeDriveNotificationService.framework */; };
 		AAADE05BB4633A42298A897A /* SettingsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */; };
@@ -10696,6 +10716,11 @@
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
 		A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A4A4A9F285CF79F4800E7BAD /* ActivityTimelineRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouterInput.swift; sourceTree = "<group>"; };
+		A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPagerReusableViewController.swift; sourceTree = "<group>"; };
+		A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselPagerReusableViewController.xib; sourceTree = "<group>"; };
+		A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageModel.swift; sourceTree = "<group>"; };
+		A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageView.swift; sourceTree = "<group>"; };
+		A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPagerDataSource.swift; sourceTree = "<group>"; };
 		A7B1B7B35486CF4F7EA97FCD /* Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		A8475E5C4A1D5588B035E2B5 /* Pods-LifeDriveFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.release.xcconfig"; sourceTree = "<group>"; };
 		A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorOutput.swift; sourceTree = "<group>"; };
@@ -13584,6 +13609,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A705E3C123A21638005E8274 /* CarouselPagerHeaderView */,
 				9845489422FBFF4000D7F29C /* SpotifyStatusView */,
 				8C26008522919AAC0063E913 /* SecurityCodeTextField */,
 				9219B18E21ECA7FA00098021 /* InstaPickPhotoView */,
@@ -16964,6 +16990,42 @@
 				F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		A705E3C123A21638005E8274 /* CarouselPagerHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				A74ADA7C23A9F200007DD192 /* ViewControllers */,
+				A74ADA6F23A74F4E007DD192 /* Views */,
+				A74ADA4F23A38381007DD192 /* Models */,
+			);
+			path = CarouselPagerHeaderView;
+			sourceTree = "<group>";
+		};
+		A74ADA4F23A38381007DD192 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */,
+				A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A74ADA6F23A74F4E007DD192 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A74ADA7C23A9F200007DD192 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */,
+				A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		A981DAC5F519E2A31F7DC6B4 /* Albums */ = {
@@ -20635,6 +20697,7 @@
 				0303A6422397D0D000907F42 /* undo@3x.png in Resources */,
 				0303A6432397D0D000907F42 /* Kucuk.png in Resources */,
 				0303A6442397D0D000907F42 /* t_buyuk.png in Resources */,
+				A705E3D923A22F47005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
 				0303A6452397D0D000907F42 /* italic_secili@2x.png in Resources */,
 				0303A6462397D0D000907F42 /* t_orta.png in Resources */,
 				0303A6472397D0D000907F42 /* refreshicon@3x.png in Resources */,
@@ -21122,6 +21185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A705E3C723A217E1005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
@@ -22165,6 +22229,7 @@
 				CE0808A62347202E00F1944F /* TBMatikCard.xib in Resources */,
 				7373EC25235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */,
+				A705E3C523A21698005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
 				8C06B1B62008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
 				CE40EAD12136BEF30038ABAC /* LaunchCampaignCard.xib in Resources */,
 				8C06AFCE2008AD71003D8E05 /* info_icon@2x.png in Resources */,
@@ -23257,6 +23322,7 @@
 				CE784F0A22A685FB00662219 /* beyaz_cerceve@2x.png in Resources */,
 				CE784F0B22A685FB00662219 /* SpotlightViewController.xib in Resources */,
 				CE784F0C22A685FB00662219 /* serbest_cizgi@3x.png in Resources */,
+				A705E3DA23A22F48005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -25009,6 +25075,7 @@
 				0303A2A62397D0D000907F42 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				0303A2A72397D0D000907F42 /* DropDownTableViewCell.swift in Sources */,
 				0303A2A82397D0D000907F42 /* URL+TrimmedQuery.swift in Sources */,
+				A705E3D723A22F42005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				0303A2A92397D0D000907F42 /* AugmentedRealityInitializer.swift in Sources */,
 				0303A2AA2397D0D000907F42 /* PhoneVerificationConfigurator.swift in Sources */,
 				0303A2AB2397D0D000907F42 /* PhoneVerificationInitializer.swift in Sources */,
@@ -25137,6 +25204,7 @@
 				0303A3262397D0D000907F42 /* UnderlineTextField.swift in Sources */,
 				0303A3272397D0D000907F42 /* CollectionViewCellForVideo.swift in Sources */,
 				0303A3282397D0D000907F42 /* BottomSelectionTabBarDataStorage.swift in Sources */,
+				A74ADA6723A3E3C8007DD192 /* CarouselPageView.swift in Sources */,
 				0303A3292397D0D000907F42 /* PhotoVideoController.swift in Sources */,
 				0303A32A2397D0D000907F42 /* FreeAppSpacePresenter.swift in Sources */,
 				0303A32B2397D0D000907F42 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
@@ -25434,6 +25502,7 @@
 				0303A44E2397D0D000907F42 /* SpotifyResponse.swift in Sources */,
 				0303A44F2397D0D000907F42 /* ProfileTextViewEnterView.swift in Sources */,
 				0303A4502397D0D000907F42 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
+				A74ADA4D23A38361007DD192 /* CarouselPageModel.swift in Sources */,
 				0303A4512397D0D000907F42 /* FaceImageAddNameInitializer.swift in Sources */,
 				0303A4522397D0D000907F42 /* UploadFilesSelectionViewInput.swift in Sources */,
 				0303A4532397D0D000907F42 /* UploadFilesSelectionViewOutput.swift in Sources */,
@@ -25658,6 +25727,7 @@
 				0303A52D2397D0D000907F42 /* TokenStorage.swift in Sources */,
 				0303A52E2397D0D000907F42 /* OptInController.swift in Sources */,
 				0303A52F2397D0D000907F42 /* iOSDevCenters+GIF.swift in Sources */,
+				A74ADA7A23A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				0303A5302397D0D000907F42 /* DuplicatedContactsModuleOutput.swift in Sources */,
 				0303A5312397D0D000907F42 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
@@ -25859,6 +25929,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A705E3C623A217C1005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				B537FEEC23A7694D00D28B68 /* SuccessfullHidePopUp.swift in Sources */,
 				CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -26052,6 +26123,7 @@
 				CE23A0F3205FF5250048267D /* ErrorPresenter.swift in Sources */,
 				737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
+				A74ADA6623A3E3C7007DD192 /* CarouselPageView.swift in Sources */,
 				8CD2B3AF1FE7B37600280547 /* VideoSyncService.swift in Sources */,
 				8C0E8CE11FDEBDFF00789C91 /* AlbumDetailService.swift in Sources */,
 				8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */,
@@ -26749,6 +26821,7 @@
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
 				CE23A0FB205FF5AF0048267D /* Images.swift in Sources */,
 				8C0E8EF31FDEBDFF00789C91 /* UserInfoSubViewViewController.swift in Sources */,
+				A74ADA7923A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				8C0E8EF41FDEBDFF00789C91 /* UserInfoSubViewModuleInput.swift in Sources */,
 				8C0E8EF51FDEBDFF00789C91 /* MoreFilesActionsInteractor.swift in Sources */,
 				8C0E8EF61FDEBDFF00789C91 /* BaseDataSourceItem.swift in Sources */,
@@ -27116,6 +27189,7 @@
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
+				A74ADA4C23A38360007DD192 /* CarouselPageModel.swift in Sources */,
 				9809317F23952D8200ECFEF8 /* UpdatePasswordErrorResponse.swift in Sources */,
 				8C0E8FBC1FDEBDFF00789C91 /* FeedbackViewConfigurator.swift in Sources */,
 				8C0E8FBD1FDEBDFF00789C91 /* FeedbackViewInitializer.swift in Sources */,
@@ -28030,6 +28104,7 @@
 				A217E44921A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */,
 				7CDABD111F1E3A6300C8CC16 /* UserProfileViewOutput.swift in Sources */,
 				CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */,
+				A705E3C423A21698005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				89E51D5E22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				D47863F41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift in Sources */,
 				B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */,
@@ -28091,6 +28166,7 @@
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
+				A74ADA4B23A38344007DD192 /* CarouselPageModel.swift in Sources */,
 				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
 				CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */,
@@ -28401,6 +28477,7 @@
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				7C6945E320039F4A00152344 /* FreeAppSpacePresenter.swift in Sources */,
+				A74ADA6523A3E3AA007DD192 /* CarouselPageView.swift in Sources */,
 				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				8C23F28E2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */,
@@ -28577,6 +28654,7 @@
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
 				981642FA233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
+				A74ADA7823A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
 				B53DCE9020EF634900400DBA /* ContactUtil.m in Sources */,
 				92004B6C21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
@@ -29663,6 +29741,7 @@
 				CE784A4A22A685FB00662219 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				CE784A4B22A685FB00662219 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				CE784A4C22A685FB00662219 /* DropDownTableViewCell.swift in Sources */,
+				A705E3D823A22F43005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				CE784A4D22A685FB00662219 /* URL+TrimmedQuery.swift in Sources */,
 				CE784A4E22A685FB00662219 /* AugmentedRealityInitializer.swift in Sources */,
 				CE784A4F22A685FB00662219 /* PhoneVerificationConfigurator.swift in Sources */,
@@ -29791,6 +29870,7 @@
 				CE784AC122A685FB00662219 /* DropDownView.swift in Sources */,
 				CE784AC222A685FB00662219 /* UnderlineTextField.swift in Sources */,
 				CE784AC322A685FB00662219 /* CollectionViewCellForVideo.swift in Sources */,
+				A74ADA6823A3E3C9007DD192 /* CarouselPageView.swift in Sources */,
 				CE784AC422A685FB00662219 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				8C1E5BD222CB8B81008FDA02 /* PhotoVideoController.swift in Sources */,
 				CE784AC622A685FB00662219 /* FreeAppSpacePresenter.swift in Sources */,
@@ -30087,6 +30167,7 @@
 				CE784BD722A685FB00662219 /* DuplicatedContactsViewController.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
+				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */,
 				CE784BDC22A685FB00662219 /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -30311,6 +30392,7 @@
 				CE784C9F22A685FB00662219 /* TokenStorage.swift in Sources */,
 				CE784CA022A685FB00662219 /* OptInController.swift in Sources */,
 				CE784CA122A685FB00662219 /* iOSDevCenters+GIF.swift in Sources */,
+				A74ADA7B23A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				CE784CA222A685FB00662219 /* DuplicatedContactsModuleOutput.swift in Sources */,
 				CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
