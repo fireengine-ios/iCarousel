@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CarouselPagerReusableViewController: UICollectionReusableView, UIScrollViewDelegate {
+final class CarouselPagerReusableViewController: UICollectionReusableView, UIScrollViewDelegate {
     
     private var carouselPageModels = [CarouselPageModel]()
     var maxHeight : CGFloat = 0

@@ -43,19 +43,20 @@ final class CarouselPageView : UIView {
     private func setupUI() {
         
         addSubview(titleLabel)
-        [
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo:trailingAnchor),
-            ].forEach { $0.activate() }
+        NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalTo: topAnchor),
+                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo:trailingAnchor),
+        ])
         
         addSubview(textLabel)
-        [
-            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textLabel.trailingAnchor.constraint(equalTo:trailingAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            ].forEach { $0.activate() }
+        NSLayoutConstraint.activate([
+                textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+                textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                textLabel.trailingAnchor.constraint(equalTo:trailingAnchor),
+                textLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            ])
+        
     }
     
     func setModel(model: CarouselPageModel) {
