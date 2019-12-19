@@ -144,6 +144,12 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationBarWithGradientStyle()
+    }
+    
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
         button.fixEnabledState()

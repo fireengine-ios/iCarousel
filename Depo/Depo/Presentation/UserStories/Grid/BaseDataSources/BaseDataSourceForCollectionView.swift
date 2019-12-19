@@ -762,6 +762,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
+        let headerCarousel = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader,
+                              bundle: nil)
+        collectionView?.register(headerCarousel,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader)
+        
     }
     
     func registerFooters() {
