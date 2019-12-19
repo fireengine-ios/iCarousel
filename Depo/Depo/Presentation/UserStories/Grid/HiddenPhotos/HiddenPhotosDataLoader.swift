@@ -27,6 +27,7 @@ final class HiddenPhotosDataLoader {
     
     private let photoPageSize = 50
     private let albumPageSize = 50
+    private let albumsCountBeforeNextPage = 4
     
     private weak var delegate: HiddenPhotosDataLoaderDelegate?
     
@@ -117,7 +118,7 @@ final class HiddenPhotosDataLoader {
                         //finish loading albums
                         self.delegate?.didFinishLoadAlbums()
                     }
-                } else if array.count < 4 {
+                } else if array.count < self.albumsCountBeforeNextPage {
                     //autoload next page
                     self.loadNextAlbumsPage()
                 }
