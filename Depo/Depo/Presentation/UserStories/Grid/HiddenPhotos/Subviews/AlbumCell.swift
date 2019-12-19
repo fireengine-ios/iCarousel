@@ -19,7 +19,12 @@ final class AlbumCell: BaseCollectionViewCell {
         }
     }
     
-    @IBOutlet private weak var thumbnail: LoadingImageView!
+    @IBOutlet private weak var thumbnail: LoadingImageView! {
+        willSet {
+            newValue.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
+        }
+    }
+    
     @IBOutlet private weak var selectionIcon: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -34,7 +39,6 @@ final class AlbumCell: BaseCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = .lrSkinTone
-        thumbnail.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
     }
     
     override func prepareForReuse() {

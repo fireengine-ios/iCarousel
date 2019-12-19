@@ -45,19 +45,13 @@ final class HiddenPhotosDataSource: NSObject {
     private var isPaginationDidEnd = false
     
     var isEmpty: Bool {
-        var result = true
-        allItems.forEach { items in
-            if !items.isEmpty {
-                result = false
-                return
-            }
-        }
-        return result
+        return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
     private lazy var photoCellSize: CGSize = {
         let viewWidth = UIScreen.main.bounds.width
-        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        let paddingWidth = (columns - 1) * padding
+        let itemWidth = floor((viewWidth - paddingWidth) / columns)
         return CGSize(width: itemWidth, height: itemWidth)
     }()
     
@@ -168,6 +162,7 @@ extension HiddenPhotosDataSource {
         selectedItems.removeAll()
         isPaginationDidEnd = false
         albumSlider?.reset()
+        collectionView.reloadData()
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
@@ -225,14 +220,16 @@ extension HiddenPhotosDataSource {
         case .timeUp, .timeDown:
             return item.creationDate?.getDateInTextForCollectionViewHeader() ?? ""
         case .lettersAZ, .lettersZA:
-            return firstLetter(of: item.name)
+            return item.name?.firstLetter ?? ""
         default:
+            assertionFailure()
             return ""
         }
     }
     
     private func headerText(indexPath: IndexPath) -> String {
         guard let itemsInSection = allItems[safe: indexPath.section - 1], let item = itemsInSection.first else {
+            assertionFailure()
             return ""
         }
         return headerText(for: item)
@@ -314,8 +311,8 @@ extension HiddenPhotosDataSource {
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) -> InsertItemResult {
-        let lastItemFirstLetter = firstLetter(of: lastItem.name)
-        let newItemFirstLetter = firstLetter(of: newItem.name)
+        let lastItemFirstLetter = lastItem.name?.firstLetter ?? ""
+        let newItemFirstLetter = newItem.name?.firstLetter ?? ""
         
         if !lastItemFirstLetter.isEmpty, !newItemFirstLetter.isEmpty,
             lastItemFirstLetter == newItemFirstLetter,
@@ -334,6 +331,11 @@ extension HiddenPhotosDataSource {
     }
     
     private func appendInLastSection(newItem: Item) -> InsertItemResult {
+        guard !allItems.isEmpty else {
+            assertionFailure()
+            return (nil, nil)
+        }
+        
         let section = allItems.count - 1
         let item = allItems[section].count
         let indexPath = IndexPath(item: item, section: section + 1)
@@ -346,13 +348,6 @@ extension HiddenPhotosDataSource {
         let indexPath = IndexPath(item: 0, section: section)
         allItems.append([newItem])
         return (indexPath, section)
-    }
-    
-    private func firstLetter(of string: String?) -> String {
-        if let character = string?.first {
-            return String(describing: character).uppercased()
-        }
-        return ""
     }
 }
 
@@ -381,7 +376,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         }
 
         guard let item = item(for: indexPath) else {
-//            assertionFailure("failed return cell")
+            assertionFailure("failed return cell")
             return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
         }
         
@@ -412,7 +407,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         
         guard let cell = cell as? CollectionViewCellDataProtocol,
             let item = item(for: indexPath) else {
-//            assertionFailure("failed setup cell")
+            assertionFailure("failed setup cell")
             return
         }
         

@@ -12,6 +12,8 @@ protocol HiddenPhotosDataLoaderDelegate: class {
     func didLoadPhoto(items: [Item])
     func didLoadAlbum(items: [BaseDataSourceItem])
     func didFinishLoadAlbums()
+    func failedLoadPhotoPage(error: Error)
+    func failedLoadAlbumPage(error: Error)
 }
 
 final class HiddenPhotosDataLoader {
@@ -81,7 +83,7 @@ final class HiddenPhotosDataLoader {
                 self.photoPage += 1
                 self.delegate?.didLoadPhoto(items: response.fileList)
             case .failed(let error):
-                debugPrint(error.description)
+                self.delegate?.failedLoadPhotoPage(error: error)
             }
             
             completion?()
@@ -120,7 +122,7 @@ final class HiddenPhotosDataLoader {
                     self.loadNextAlbumsPage()
                 }
             case .failed(let error):
-                debugPrint(error.description)
+                self.delegate?.failedLoadAlbumPage(error: error)
             }
         }
     }
@@ -145,12 +147,12 @@ final class HiddenPhotosDataLoader {
     //MARK: - Unhide methods
     
     func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        _ = hiddenService.recoverItems(items, handler: handler)
+        hiddenService.recoverItems(items, handler: handler)
     }
     
     func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
         getAlbumItems(items: items) { [weak self] albums in
-            _ = self?.hiddenService.recoverAlbums(albums, handler: handler)
+            self?.hiddenService.recoverAlbums(albums, handler: handler)
         }
     }
     
@@ -231,11 +233,11 @@ final class HiddenPhotosDataLoader {
         }
         
         if item is PeopleItem {
-            _ = hiddenService.hiddenPeopleAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.hiddenPeopleAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is PlacesItem {
-            _ = hiddenService.hiddenPlacesAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.hiddenPlacesAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is ThingsItem {
-            _ = hiddenService.hiddenThingsAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.hiddenThingsAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         }
     }
     
@@ -243,9 +245,15 @@ final class HiddenPhotosDataLoader {
         var albums = items.compactMap { $0 as? AlbumItem }
         
         let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
-        let firItems = items.filter { ($0 as? Item)?.fileType.isContained(in: types) == true } as! [Item]
         
-        if firItems.isEmpty {
+        let firItems = items.compactMap { baseItem -> Item? in
+            if let item = baseItem as? Item, item.fileType.isContained(in: types) {
+                return item
+            }
+            return nil
+        }
+        
+        guard firItems.isEmpty else {
             handler(albums)
             return
         }

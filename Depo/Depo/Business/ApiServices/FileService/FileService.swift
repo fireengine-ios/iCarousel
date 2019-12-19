@@ -672,6 +672,7 @@ final class HiddenService {
     
     // MARK: - All
     
+    @discardableResult
     func hiddenList(sortBy: SortType,
                     sortOrder: SortOrder,
                     page: Int,
@@ -691,6 +692,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hiddenAlbums(sortBy: SortType,
                       sortOrder: SortOrder,
                       page: Int,
@@ -713,6 +715,7 @@ final class HiddenService {
     
     // MARK: - SmartAlbum Detail
     
+    @discardableResult
     func hiddenPlacesAlbumDetail(id: Int,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPlacesAlbumDetail")
@@ -727,6 +730,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hiddenPeopleAlbumDetail(id: Int,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPeopleAlbumDetail")
@@ -741,6 +745,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hiddenThingsAlbumDetail(id: Int,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenThingsAlbumDetail")
@@ -757,6 +762,7 @@ final class HiddenService {
     
     // MARK: - SmartAlbum All
     
+    @discardableResult
     func hiddenPlacesPage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
@@ -772,6 +778,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hiddenPeoplePage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
@@ -787,6 +794,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hiddenThingsPage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
@@ -804,6 +812,7 @@ final class HiddenService {
     
     // MARK: - Hide
     
+    @discardableResult
     func hideItems(_ items: [WrapData],
                    handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideItems")
@@ -826,6 +835,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func hideAlbums(_ albums: [AlbumServiceResponse],
                     handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideAlbums")
@@ -850,6 +860,7 @@ final class HiddenService {
     
     // MARK: - Recover
     
+    @discardableResult
     func recoverItems(_ items: [WrapData],
                       handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverItems")
@@ -874,6 +885,7 @@ final class HiddenService {
             .task
     }
     
+    @discardableResult
     func recoverAlbums(_ albums: [AlbumServiceResponse],
                        handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums AlbumServiceResponse")
@@ -881,6 +893,7 @@ final class HiddenService {
         return recoverAlbumsByUuids(ids, handler: handler)
     }
     
+    @discardableResult
     func recoverAlbums(_ albums: [AlbumItem],
                        handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums AlbumItem")

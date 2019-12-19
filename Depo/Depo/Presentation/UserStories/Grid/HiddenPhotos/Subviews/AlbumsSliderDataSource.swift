@@ -81,6 +81,7 @@ final class AlbumsSliderDataSource: NSObject {
         items.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
+        collectionView.reloadData()
     }
 }
 
@@ -123,6 +124,7 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? AlbumCell else {
+            assertionFailure()
             return
         }
         

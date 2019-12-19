@@ -161,6 +161,14 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     func didFinishLoadAlbums() {
         dataSource.finishLoadAlbums()
     }
+    
+    func failedLoadPhotoPage(error: Error) {
+        UIApplication.showErrorAlert(message: error.description)
+    }
+    
+    func failedLoadAlbumPage(error: Error) {
+        UIApplication.showErrorAlert(message: error.description)
+    }
 }
 
 //MARK: - HiddenPhotosBottomBarManagerDelegate
