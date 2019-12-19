@@ -45,7 +45,7 @@ final class HideFuncCompletionPopUp: BasePopUpController {
     @IBOutlet private weak var statusImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
-            newValue.image = UIImage(named: "successImage")
+            newValue.image = PopUpImage.hide.image
         }
     }
 
