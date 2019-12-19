@@ -71,7 +71,10 @@ final class DivorceCard: BaseCardView {
     }
     @IBAction private func playButtonTap(_ sender: Any) {
         
-        guard let videoUrl = videoUrl else { return }
+        guard let videoUrl = videoUrl else {
+            assertionFailure()
+            return
+        }
         
         let player = AVPlayer(url: videoUrl)
         
