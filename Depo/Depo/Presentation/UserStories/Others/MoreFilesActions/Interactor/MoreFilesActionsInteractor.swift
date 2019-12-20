@@ -344,7 +344,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             
-            self?.albumService.trash(albums: albumbs, success: { [weak self] deletedAlbums in
+            self?.albumService.moveToTrash(albums: albumbs, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)

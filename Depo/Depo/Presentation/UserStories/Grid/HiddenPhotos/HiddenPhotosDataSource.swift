@@ -21,6 +21,7 @@ final class HiddenPhotosDataSource: NSObject {
     
     private typealias InsertItemResult = (indexPath: IndexPath?, section: Int?)
     private typealias ChangesItemResult = (indexPaths: [IndexPath], sections: IndexSet)
+    typealias SelectedItems = (photos: [Item], albums: [BaseDataSourceItem])
     
     private let padding: CGFloat = 1
     private let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
@@ -55,7 +56,7 @@ final class HiddenPhotosDataSource: NSObject {
         return CGSize(width: itemWidth, height: itemWidth)
     }()
     
-    var allSelectedItems: (photos: [Item], albums: [BaseDataSourceItem]) {
+    var allSelectedItems: SelectedItems {
         return (selectedItems, albumSlider?.selectedItems ?? [])
     }
     
@@ -155,6 +156,14 @@ extension HiddenPhotosDataSource {
                 }
             }
         }
+        
+        let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
+        let firItems = items.filter { $0.fileType.isContained(in: types) }
+        removeSlider(items: firItems)
+    }
+    
+    func removeSlider(items: [BaseDataSourceItem]) {
+        albumSlider?.removeItems(items)
     }
     
     func reset() {
