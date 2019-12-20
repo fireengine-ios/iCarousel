@@ -288,14 +288,14 @@ extension HiddenPhotosDataSource {
             var newSectionArray = [Item]()
             for (item, object) in array.enumerated() {
                 if idsForRemove.contains(object.uuid) {
-                    deletedIndexPaths.append(IndexPath(item: item, section: section))
+                    deletedIndexPaths.append(IndexPath(item: item, section: section + 1))
                 } else {
                     newSectionArray.append(object)
                 }
             }
             
             if newSectionArray.isEmpty {
-                deletedSections.insert(section)
+                deletedSections.insert(section + 1)
             } else {
                 newArray.append(newSectionArray)
             }
