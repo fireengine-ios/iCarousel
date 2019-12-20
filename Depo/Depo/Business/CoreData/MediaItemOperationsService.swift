@@ -969,7 +969,7 @@ final class MediaItemOperationsService {
     //MARK: - Hide
     func hide(_ items: [WrapData], completion: @escaping VoidHandler) {
         coreDataStack.performBackgroundTask { [weak self] context in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
