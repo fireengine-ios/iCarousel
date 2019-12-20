@@ -903,7 +903,6 @@ final class HiddenService {
     
     @discardableResult
     func recoverAlbums(_ albums: [AlbumItem],
-                       firItems: [Item],
                        handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverAlbums AlbumItem")
         let ids = albums.compactMap { $0.uuid }
@@ -911,7 +910,6 @@ final class HiddenService {
             switch result {
             case .success(_):
                 ItemOperationManager.default.didUnhide(albums: albums)
-                ItemOperationManager.default.didUnhide(items: firItems)
                 handler(.success(()))
             case .failed(let error):
                 handler(.failed(error))
@@ -933,5 +931,158 @@ final class HiddenService {
             .responseVoid(handler)
             .task
     }
+ 
+    //MARK: - Smart Albums Recovery
     
+    @discardableResult
+    func recoveryPeople(items: [PeopleItem],
+                        handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoveryPeopleItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.peopleRecovery,
+                     method: .post,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.didUnhide(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
+    
+    @discardableResult
+    func recoveryPlaces(items: [PlacesItem],
+                        handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoveryPlacesItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.placesRecovery,
+                     method: .post,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.didUnhide(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
+    
+    @discardableResult
+    func recoveryThings(items: [ThingsItem],
+                        handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("recoveryThingsItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.thingsRecovery,
+                     method: .post,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.didUnhide(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
+    
+    //MARK: - Smart Albums Trash
+    
+    @discardableResult
+    func moveToTrashPeople(items: [PeopleItem],
+                           handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("moveToTrashPeopleItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.peopleTrash,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.moveToTrash(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
+    
+    @discardableResult
+    func moveToTrashPlaces(items: [PlacesItem],
+                           handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("moveToTrashPlacesItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.placesTrash,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.moveToTrash(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
+    
+    @discardableResult
+    func moveToTrashThings(items: [ThingsItem],
+                           handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("moveToTrashThingsItems")
+        
+        let ids = items.compactMap { $0.id }
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.thingsTrash,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid { result in
+                switch result {
+                case .success(_):
+                    ItemOperationManager.default.moveToTrash(items: items)
+                    handler(.success(()))
+                case .failed(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
 }

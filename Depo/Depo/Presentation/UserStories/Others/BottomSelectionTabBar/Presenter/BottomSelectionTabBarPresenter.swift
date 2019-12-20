@@ -60,6 +60,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
             case .removeAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
+            case .moveToTrash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             default:
                 break
             }

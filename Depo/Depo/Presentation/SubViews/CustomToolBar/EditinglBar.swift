@@ -20,6 +20,7 @@ enum ElementTypes {
     case undetermend
     case rename
     case removeAlbum
+    case moveToTrash
     
     //used only in alert sheet:
     //photos:

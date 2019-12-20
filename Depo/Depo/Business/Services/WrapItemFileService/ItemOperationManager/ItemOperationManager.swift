@@ -66,6 +66,10 @@ protocol ItemOperationManagerViewProtocol: class {
     func didUnhide(items: [WrapData])
     
     func didUnhide(albums: [AlbumItem])
+    
+    func moveToTrash(items: [Item])
+    
+    func moveToTrash(albums: [AlbumItem])
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -122,6 +126,10 @@ extension ItemOperationManagerViewProtocol {
     func didUnhide(items: [WrapData]) {}
     
     func didUnhide(albums: [AlbumItem]) {}
+    
+    func moveToTrash(items: [Item]) {}
+    
+    func moveToTrash(albums: [AlbumItem]) {}
 }
 
 
@@ -252,7 +260,7 @@ class ItemOperationManager: NSObject {
     }
     
     func deleteItems(items: [Item]) {
-        if items.count == 0 {
+        if items.isEmpty {
             return
         }
         
@@ -264,7 +272,7 @@ class ItemOperationManager: NSObject {
     }
     
     func deleteStories(items: [Item]) {
-        if items.count == 0 {
+        if items.isEmpty {
             return
         }
         
@@ -404,6 +412,30 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views {
                 view.didUnhide(albums: albums)
+            }
+        }
+    }
+    
+    func moveToTrash(items: [Item]) {
+        if items.isEmpty {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.moveToTrash(items: items)
+            }
+        }
+    }
+    
+    func moveToTrash(albums: [AlbumItem]) {
+        if albums.isEmpty {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.moveToTrash(albums: albums)
             }
         }
     }

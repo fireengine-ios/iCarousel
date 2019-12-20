@@ -179,7 +179,7 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 //MARK: - HiddenPhotosBottomBarManagerDelegate
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
-    func onBottomBarDelete() {
+    func onBottomBarMoveToTrash() {
         showDeletePopup()
     }
     
@@ -216,7 +216,7 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
         showUnhidePopup()
     }
     
-    func onThreeDotsManagerDelete() {
+    func onThreeDotsManagerMoveToTrash() {
         showDeletePopup()
     }
 }
@@ -382,11 +382,11 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
         dataSource.removeSlider(items: albums)
     }
     
-    func deleteItems(items: [Item]) {
+    func moveToTrash(items: [Item]) {
         dataSource.remove(items: items)
     }
     
-    func albumsDeleted(albums: [AlbumItem]) {
+    func moveToTrash(albums: [AlbumItem]) {
         dataSource.removeSlider(items: albums)
     }
 }
