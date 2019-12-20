@@ -5854,14 +5854,6 @@
 		A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
 		A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
 		A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
-		A74ADA3A23A2ABBF007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
-		A74ADA3C23A2ABFF007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
-		A74ADA3D23A2AC3B007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
-		A74ADA3E23A2AC3F007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
-		A74ADA3F23A2AC40007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
-		A74ADA4023A2AC43007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
-		A74ADA4123A2AC44007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
-		A74ADA4223A2AC45007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
 		A705E3C423A21698005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
 		A705E3C523A21698005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
 		A705E3C623A217C1005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
@@ -5870,6 +5862,14 @@
 		A705E3D823A22F43005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
 		A705E3D923A22F47005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
 		A705E3DA23A22F48005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
+		A74ADA3A23A2ABBF007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
+		A74ADA3C23A2ABFF007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
+		A74ADA3D23A2AC3B007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
+		A74ADA3E23A2AC3F007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
+		A74ADA3F23A2AC40007DD192 /* DivorceCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */; };
+		A74ADA4023A2AC43007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
+		A74ADA4123A2AC44007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
+		A74ADA4223A2AC45007DD192 /* DivorceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */; };
 		A74ADA4B23A38344007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
 		A74ADA4C23A38360007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
 		A74ADA4D23A38361007DD192 /* CarouselPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */; };
@@ -10807,10 +10807,10 @@
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
 		A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A4A4A9F285CF79F4800E7BAD /* ActivityTimelineRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouterInput.swift; sourceTree = "<group>"; };
-		A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivorceCard.swift; sourceTree = "<group>"; };
-		A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DivorceCard.xib; sourceTree = "<group>"; };
 		A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPagerReusableViewController.swift; sourceTree = "<group>"; };
 		A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselPagerReusableViewController.xib; sourceTree = "<group>"; };
+		A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivorceCard.swift; sourceTree = "<group>"; };
+		A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DivorceCard.xib; sourceTree = "<group>"; };
 		A74ADA4A23A38344007DD192 /* CarouselPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageModel.swift; sourceTree = "<group>"; };
 		A74ADA6423A3E3AA007DD192 /* CarouselPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageView.swift; sourceTree = "<group>"; };
 		A74ADA7723A9F0FD007DD192 /* CarouselPagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPagerDataSource.swift; sourceTree = "<group>"; };
@@ -17118,15 +17118,6 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		A7E34DED23A2A3B300BED4B3 /* DivorceCard */ = {
-			isa = PBXGroup;
-			children = (
-				A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */,
-				A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */,
-			);
-			path = DivorceCard;
-			sourceTree = "<group>";
-		};
 		A705E3C123A21638005E8274 /* CarouselPagerHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -17161,6 +17152,15 @@
 				A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A7E34DED23A2A3B300BED4B3 /* DivorceCard */ = {
+			isa = PBXGroup;
+			children = (
+				A74ADA3B23A2ABFF007DD192 /* DivorceCard.xib */,
+				A74ADA3923A2ABBF007DD192 /* DivorceCard.swift */,
+			);
+			path = DivorceCard;
 			sourceTree = "<group>";
 		};
 		A981DAC5F519E2A31F7DC6B4 /* Albums */ = {
@@ -34444,7 +34444,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34507,7 +34507,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34566,7 +34566,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34626,7 +34626,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
