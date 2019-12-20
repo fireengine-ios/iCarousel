@@ -6,6 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+
 typealias PredicateCallback = (_ predicate: NSPredicate) -> Void
 
 final class PhotoVideoPredicateManager {
@@ -14,9 +15,19 @@ final class PhotoVideoPredicateManager {
     private var duplicationPredicate: NSPredicate?
     
     private lazy var hiddenPredicate: NSPredicate = {
-        //(remote && not hidden) || (local && has remotes && has at least one not hidden remote)
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
-        return NSPredicate(format: "(isLocalItemValue = false AND status != %ui) OR (isLocalItemValue = true AND (relatedRemotes.@count = 0 OR (relatedRemotes.@count != 0 AND SUBQUERY(relatedRemotes, $x, $x.status != %ui).@count != 0)))", hiddenStatusValue, hiddenStatusValue)
+        
+        let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+        let relatedRemotes = #keyPath(MediaItem.relatedRemotes)
+        let status = #keyPath(MediaItem.status)
+        
+        let remoteUnhidden = NSPredicate(format:"(\(isLocalItemValue) = false AND \(status) != %ui)", hiddenStatusValue)
+        let relatedRemotesAreEmpty = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count = 0)")
+        let relatedRemotesHasUnhidden = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count != 0 AND SUBQUERY(\(relatedRemotes), $x, $x.\(status) != %ui).@count != 0)")
+ 
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [remoteUnhidden,
+                                                                  relatedRemotesAreEmpty,
+                                                                  relatedRemotesHasUnhidden])
     }()
     
     private var lastCompoundedPredicate: NSPredicate?
