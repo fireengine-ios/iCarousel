@@ -45,6 +45,8 @@ final class HiddenPhotosDataSource: NSObject {
     private(set) var isSelectionStateActive = false
     private var isPaginationDidEnd = false
     
+    private let filesDataSource = FilesDataSource()
+    
     var isEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
@@ -423,7 +425,9 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
         cell.configureWithWrapper(wrappedObj: item)
         cell.setDelegateObject(delegateObject: self)
-
+        (cell as? CollectionViewCellForPhoto)?.filesDataSource = filesDataSource
+        (cell as? CollectionViewCellForPhoto)?.loadImage(item: item, indexPath: indexPath)
+        
         if isPaginationDidEnd {
             return
         }
