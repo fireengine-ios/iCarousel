@@ -939,7 +939,8 @@ final class HiddenService {
                         handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoveryPeopleItems")
         
-        let ids = items.compactMap { $0.id }
+        let recoveryItems = items.filter { $0.id != nil }
+        let ids = recoveryItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.peopleRecovery,
@@ -950,7 +951,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.didUnhide(items: items)
+                    ItemOperationManager.default.didUnhide(items: recoveryItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))
@@ -964,7 +965,8 @@ final class HiddenService {
                         handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoveryPlacesItems")
         
-        let ids = items.compactMap { $0.id }
+        let recoveryItems = items.filter { $0.id != nil }
+        let ids = recoveryItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.placesRecovery,
@@ -975,7 +977,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.didUnhide(items: items)
+                    ItemOperationManager.default.didUnhide(items: recoveryItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))
@@ -989,7 +991,8 @@ final class HiddenService {
                         handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoveryThingsItems")
         
-        let ids = items.compactMap { $0.id }
+        let recoveryItems = items.filter { $0.id != nil }
+        let ids = recoveryItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.thingsRecovery,
@@ -1000,7 +1003,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.didUnhide(items: items)
+                    ItemOperationManager.default.didUnhide(items: recoveryItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))
@@ -1016,7 +1019,8 @@ final class HiddenService {
                            handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("moveToTrashPeopleItems")
         
-        let ids = items.compactMap { $0.id }
+        let trashedItems = items.filter { $0.id != nil }
+        let ids = trashedItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.peopleTrash,
@@ -1027,7 +1031,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.moveToTrash(items: items)
+                    ItemOperationManager.default.moveToTrash(items: trashedItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))
@@ -1041,7 +1045,8 @@ final class HiddenService {
                            handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("moveToTrashPlacesItems")
         
-        let ids = items.compactMap { $0.id }
+        let trashedItems = items.filter { $0.id != nil }
+        let ids = trashedItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.placesTrash,
@@ -1052,7 +1057,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.moveToTrash(items: items)
+                    ItemOperationManager.default.moveToTrash(items: trashedItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))
@@ -1066,7 +1071,8 @@ final class HiddenService {
                            handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("moveToTrashThingsItems")
         
-        let ids = items.compactMap { $0.id }
+        let trashedItems = items.filter { $0.id != nil }
+        let ids = trashedItems.map { $0.id }
         return SessionManager
             .customDefault
             .request(RouteRequests.thingsTrash,
@@ -1077,7 +1083,7 @@ final class HiddenService {
             .responseVoid { result in
                 switch result {
                 case .success(_):
-                    ItemOperationManager.default.moveToTrash(items: items)
+                    ItemOperationManager.default.moveToTrash(items: trashedItems)
                     handler(.success(()))
                 case .failed(let error):
                     handler(.failed(error))

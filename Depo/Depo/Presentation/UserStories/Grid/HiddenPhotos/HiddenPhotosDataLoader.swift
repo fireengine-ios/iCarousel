@@ -149,22 +149,26 @@ final class HiddenPhotosDataLoader {
     
     func unhide(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
         let group = DispatchGroup()
-        group.enter()
-        group.enter()
         
         var unhideError: Error? = nil
-        unhidePhotos(items: selectedItems.photos) { result in
-            if case let .failed(error) = result {
-                unhideError = error
+        if !selectedItems.photos.isEmpty {
+            group.enter()
+            unhidePhotos(items: selectedItems.photos) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
             }
-            group.leave()
         }
         
-        unhideAlbums(items: selectedItems.albums) { result in
-            if case let .failed(error) = result {
-                unhideError = error
+        if !selectedItems.albums.isEmpty {
+            group.enter()
+            unhideAlbums(items: selectedItems.albums) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
             }
-            group.leave()
         }
         
         group.notify(queue: .main) {
@@ -178,22 +182,26 @@ final class HiddenPhotosDataLoader {
     
     func moveToTrash(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
         let group = DispatchGroup()
-        group.enter()
-        group.enter()
-        
+
         var deleteError: Error? = nil
-        moveToTrashPhotos(items: selectedItems.photos) { result in
-            if case let .failed(error) = result {
-                deleteError = error
+        if !selectedItems.photos.isEmpty {
+            group.enter()
+            moveToTrashPhotos(items: selectedItems.photos) { result in
+                if case let .failed(error) = result {
+                    deleteError = error
+                }
+                group.leave()
             }
-            group.leave()
         }
         
-        moveToTrashAlbums(items: selectedItems.albums) { result in
-            if case let .failed(error) = result {
-                deleteError = error
+        if !selectedItems.albums.isEmpty {
+            group.enter()
+            moveToTrashAlbums(items: selectedItems.albums) { result in
+                if case let .failed(error) = result {
+                    deleteError = error
+                }
+                group.leave()
             }
-            group.leave()
         }
         
         group.notify(queue: .main) {
