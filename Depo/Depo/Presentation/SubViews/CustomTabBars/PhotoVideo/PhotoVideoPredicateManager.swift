@@ -6,12 +6,29 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+
 typealias PredicateCallback = (_ predicate: NSPredicate) -> Void
 
 final class PhotoVideoPredicateManager {
     
     private var filtrationPredicate: NSPredicate?
     private var duplicationPredicate: NSPredicate?
+    
+    private lazy var hiddenPredicate: NSPredicate = {
+        let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
+        
+        let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+        let relatedRemotes = #keyPath(MediaItem.relatedRemotes)
+        let status = #keyPath(MediaItem.status)
+        
+        let remoteUnhidden = NSPredicate(format:"(\(isLocalItemValue) = false AND \(status) != %ui)", hiddenStatusValue)
+        let relatedRemotesAreEmpty = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count = 0)")
+        let relatedRemotesHasUnhidden = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count != 0 AND SUBQUERY(\(relatedRemotes), $x, $x.\(status) != %ui).@count != 0)")
+ 
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [remoteUnhidden,
+                                                                  relatedRemotesAreEmpty,
+                                                                  relatedRemotesHasUnhidden])
+    }()
     
     private var lastCompoundedPredicate: NSPredicate?
     
@@ -25,8 +42,12 @@ final class PhotoVideoPredicateManager {
         let filtrationPredicateTmp = getFiltrationPredicate(isPhotos: isPhotos)
         
         getDuplicationPredicate(isPhotos: isPhotos) { [weak self] createdDuplicationPredicate in
-            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate])
-            self?.lastCompoundedPredicate = compoundedPredicate
+            guard let self = self else {
+                assertionFailure("Unexpected PhotoVideoPredicateManager == nil")
+                return
+            }
+            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate, self.hiddenPredicate])
+            self.lastCompoundedPredicate = compoundedPredicate
             
             createdPredicateCallback(compoundedPredicate)
             

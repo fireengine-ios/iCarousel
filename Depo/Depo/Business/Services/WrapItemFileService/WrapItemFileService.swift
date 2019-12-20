@@ -121,7 +121,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            MediaItemOperationsService.shared.deleteItems(items, completion: {
+            MediaItemOperationsService.shared.hide(items, completion: {
                 success?()
                 ItemOperationManager.default.didHide(items: items)
             })
@@ -346,7 +346,7 @@ class WrapItemFileService: WrapItemFileOperations {
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status == .active })
+            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {

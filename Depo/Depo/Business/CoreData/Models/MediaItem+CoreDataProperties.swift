@@ -45,6 +45,7 @@ extension MediaItem {
     @NSManaged public var session: Session?
     @NSManaged public var isTranscoded: Bool
     @NSManaged public var hasMissingDateRemotes: Bool
+    @NSManaged public var status: Int16
 }
 
 
