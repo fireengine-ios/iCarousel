@@ -141,9 +141,9 @@ final class LoginViewController: ViewController {
         output.viewIsReady()
         
         #if DEBUG
-        loginEnterView.textField.text = "mavokij291@4tmail.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
+        loginEnterView.textField.text = "+375447394882"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
 
-        passwordEnterView.textField.text = "qwerty"// "zxcvbn"//".FsddQ646"
+        passwordEnterView.textField.text = "qazwsx"//"qwerty"// "zxcvbn"//".FsddQ646"
         #endif
     }
     
