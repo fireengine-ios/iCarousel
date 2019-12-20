@@ -8,11 +8,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HideFuncPeopleAlbumWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSSmartAlbumWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
-                <outlet property="blurView" destination="Syj-de-Zzd" id="6lH-oB-5nP"/>
                 <outlet property="closeButton" destination="hZd-03-AMT" id="PNx-EF-ang"/>
+                <outlet property="darkView" destination="vIp-rb-4FA" id="uEW-Mr-tap"/>
                 <outlet property="descriptionLabel" destination="nUN-RV-ccM" id="Iok-OY-dQJ"/>
+                <outlet property="doNotShowAgainButton" destination="V6o-AA-fsO" id="YdR-3r-zS6"/>
+                <outlet property="doNotShowAgainLabel" destination="ZSg-6K-nsc" id="kE6-3h-Use"/>
+                <outlet property="doNotShowAgainStackView" destination="CgU-wW-STP" id="9VN-72-yLM"/>
                 <outlet property="functionButton" destination="g4D-WC-vRG" id="BYn-GQ-pUA"/>
                 <outlet property="popUpView" destination="Av7-kJ-lk4" id="LNp-ad-uRd"/>
                 <outlet property="premiumButton" destination="ET5-LN-lx3" id="rg7-bf-W4x"/>
@@ -25,26 +28,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-de-Zzd">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-rb-4FA">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rdl-x0-UHo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <blurEffect style="regular"/>
-                </visualEffectView>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Av7-kJ-lk4">
-                    <rect key="frame" x="24" y="119" width="272" height="330"/>
+                    <rect key="frame" x="24" y="103" width="272" height="362"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZA-9r-kf9">
-                            <rect key="frame" x="0.0" y="0.0" width="272" height="330"/>
+                            <rect key="frame" x="0.0" y="0.0" width="272" height="362"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdM-V8-bpk">
-                                    <rect key="frame" x="0.0" y="0.0" width="272" height="330"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="362"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="oFg-sE-yrg">
-                                            <rect key="frame" x="38" y="60" width="196" height="230"/>
+                                            <rect key="frame" x="38" y="60" width="196" height="262"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uH5-9S-mjb">
                                                     <rect key="frame" x="73" y="0.0" width="50" height="50"/>
@@ -58,8 +56,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-wW-STP">
+                                                    <rect key="frame" x="57" y="128" width="82" height="18"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6o-AA-fsO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="18" id="2dw-uX-pZd"/>
+                                                                <constraint firstAttribute="width" secondItem="V6o-AA-fsO" secondAttribute="height" multiplier="1:1" id="nME-ax-KJB"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="onDoNotShowAgainTap:" destination="-1" eventType="touchUpInside" id="l4D-bj-x4U"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSg-6K-nsc">
+                                                            <rect key="frame" x="32" y="0.0" width="50" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET5-LN-lx3" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="128" width="196" height="44"/>
+                                                    <rect key="frame" x="0.0" y="160" width="196" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="HWo-1t-9JZ"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="nuP-bc-w4G"/>
@@ -69,7 +88,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-WC-vRG" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="186" width="196" height="44"/>
+                                                    <rect key="frame" x="0.0" y="218" width="196" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="0ag-TK-0S9"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="fXS-pa-zaR"/>
@@ -126,12 +145,12 @@
             <constraints>
                 <constraint firstItem="Av7-kJ-lk4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0w8-GV-nrw"/>
                 <constraint firstItem="Av7-kJ-lk4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Blp-x8-KrC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Syj-de-Zzd" secondAttribute="trailing" id="HPq-hA-vxe"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Syj-de-Zzd" secondAttribute="bottom" id="IKD-nZ-3hp"/>
+                <constraint firstAttribute="trailing" secondItem="vIp-rb-4FA" secondAttribute="trailing" id="C5T-7r-FbO"/>
                 <constraint firstItem="Av7-kJ-lk4" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="P1B-VC-Nvb"/>
-                <constraint firstItem="Syj-de-Zzd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QeM-75-1nz"/>
+                <constraint firstItem="vIp-rb-4FA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PRC-rm-fOq"/>
                 <constraint firstItem="Av7-kJ-lk4" firstAttribute="height" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.8" id="Uq9-56-RfR"/>
-                <constraint firstItem="Syj-de-Zzd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="e8K-cY-cOg"/>
+                <constraint firstAttribute="bottom" secondItem="vIp-rb-4FA" secondAttribute="bottom" id="iwT-6c-0aO"/>
+                <constraint firstItem="vIp-rb-4FA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tko-Av-ZKv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140" y="117.39130434782609"/>

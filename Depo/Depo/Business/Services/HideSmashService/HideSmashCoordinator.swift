@@ -1,5 +1,5 @@
 //
-//  HideFunctionalityService.swift
+//  HideSmashCoordinator.swift
 //  Depo
 //
 //  Created by Raman Harhun on 12/17/19.
@@ -19,14 +19,22 @@ protocol HideFuncRoutingProtocol: class {
 }
 
 protocol HideFuncServiceProtocol {
+    func startSmashOperation(for item: Item, success: @escaping FileOperation, fail: @escaping FailResponse)
     func startHideOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
 final class HideFunctionalityService: HideFuncServiceProtocol {
 
-    //MARK: Properties
+    enum Operation {
+        case hide
+        case smash
+    }
 
-    private var items: [Item] = []
+    //MARK: Properties
+    
+    private var operation: Operation = .hide
+
+    private var items = [Item]()
     
     private var success: FileOperation?
     private var fail: FailResponse?
@@ -37,6 +45,9 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     private lazy var fileService = WrapItemFileService()
     private lazy var player: MediaPlayer = factory.resolve()
     
+    private lazy var completionPopUpFactory = HSCompletionPopUpsFactory()
+    private lazy var albumWarningPopUpsFactory = SmartAlbumWarningPopUpsFactory()
+
     private let router = RouterVC()
     
     private var peopleAlbumRequestsGroup: DispatchGroup?
@@ -63,16 +74,49 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     //MARK: Utility Methods (Public)
 
+    func startSmashOperation(for item: Item, success: @escaping FileOperation, fail: @escaping FailResponse) {
+        self.items = [item]
+        self.success = success
+        self.fail = fail
+
+        operation = .smash
+
+        startSmashPhoto()
+    }
+
     func startHideOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse) {
         self.items = items
         self.success = success
         self.fail = fail
-        
+
+        operation = .hide
+
         showConfirmationPopUp()
     }
 
     //MARK: Utility Methods (Private)
 
+    // Smash
+    private func startSmashPhoto() {
+        //Smash functionality now developed yet
+
+        //...
+        //smashing photo
+        //0%
+        //20%
+        //40%
+        //60%
+        //80%
+        //100%
+        //Photo smashed
+        //...
+
+        success?()
+        
+        showSuccessPopUp()
+    }
+
+    // Hide
     private func showConfirmationPopUp() {
         router.presentViewController(controller: confirmationPopUp)
     }
@@ -83,9 +127,12 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         showSuccessPopUp()
     }
 
+    // Common
     private func showSuccessPopUp() {
-        let controller = HideFuncCompletionPopUp(photosCount: items.count, delegate: self)
-        router.presentViewController(controller: controller, animated: false)
+        let state = getCompletionState()
+        let controller = completionPopUpFactory.getPopUp(for: state, itemsCount: items.count, delegate: self)
+
+        presentPopUp(controller: controller)
     }
 
     private func preparePeopleAlbumOpenning() {
@@ -107,30 +154,21 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     }
 
     private func didObtainPeopleAlbumInfo() {
-        guard let permissions = permissions, let faceImageGrouping = faceImageGrouping else {
-            return
-        }
-
-        switch permissions {
-        case let permissions where permissions.hasPermissionFor(.faceRecognition) && faceImageGrouping.isFaceImageAllowed == true:
+        if permissions?.hasPermissionFor(.faceRecognition) == true, faceImageGrouping?.isFaceImageAllowed == true {
             openPeopleAlbum()
 
-        case let permissions where permissions.hasPermissionFor(.faceRecognition) && faceImageGrouping.isFaceImageAllowed == false:
-            openPeopleAlbumWarningPopUp(mode: .faceImageGroupingDisabled)
+        } else if let controller = albumWarningPopUpsFactory.getPopUp(permissions: permissions,
+                                                                      faceImageGrouping: faceImageGrouping,
+                                                                      delegate: self) {
+            presentPopUp(controller: controller)
 
-        case let permissions where !permissions.hasPermissionFor(.faceRecognition) && faceImageGrouping.isFaceImageAllowed == true:
-            openPeopleAlbumWarningPopUp(mode: .notPremiumUser)
+        } else {
+            assertionFailure("could't create pop up with recieved permissions and faceImageGrouping responses")
 
-        case let permissions where !permissions.hasPermissionFor(.faceRecognition) && faceImageGrouping.isFaceImageAllowed == false:
-            openPeopleAlbumWarningPopUp(mode: .bothDisabled)
-
-        default:
-            assertionFailure("Logic issue, please check permissions and faceImageGrouping responses")
         }
     }
 
-    private func openPeopleAlbumWarningPopUp(mode: HideFuncPeopleAlbumWarningPopUp.Mode) {
-        let controller = HideFuncPeopleAlbumWarningPopUp(mode: mode, delegate: self)
+    private func presentPopUp(controller: UIViewController) {
         router.presentViewController(controller: controller, animated: false)
     }
 
@@ -139,6 +177,25 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         let controller = router.peopleListController()
 
         router.pushViewController(viewController: controller)
+    }
+}
+
+    //MARK: - Converter
+
+extension HideFunctionalityService {
+    private func getCompletionState() -> HSCompletionPopUpsFactory.State {
+        let state: HSCompletionPopUpsFactory.State
+
+        switch operation {
+        case .hide:
+            state = .hideCompleted
+
+        case .smash:
+            state = .smashCompleted
+
+        }
+        
+        return state
     }
 }
 
@@ -193,7 +250,7 @@ extension HideFunctionalityService {
 
 }
 
-//MARK: - HideFuncRoutingProtoc´ol
+//MARK: - HideFuncRoutingProtocol
 
 extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openHiddenAlbum() {

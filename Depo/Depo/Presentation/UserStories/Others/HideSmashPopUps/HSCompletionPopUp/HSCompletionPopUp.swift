@@ -1,5 +1,5 @@
 //
-//  HideFuncCompletionPopUp.swift
+//  HSCompletionPopUp.swift
 //  Depo
 //
 //  Created by Raman Harhun on 12/16/19.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-final class HideFuncCompletionPopUp: BasePopUpController {
+final class HSCompletionPopUp: BasePopUpController {
 
     enum Mode {
         case showOpenSmartAlbumButton
         case showBottomCloseButton
+        case smash
     }
 
     //MARK: IBOutlets
@@ -28,10 +29,9 @@ final class HideFuncCompletionPopUp: BasePopUpController {
         }
     }
 
-    @IBOutlet private weak var blurView: UIVisualEffectView! {
+    @IBOutlet private weak var darkView: UIView! {
         willSet {
-            newValue.alpha = 0.9
-            newValue.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            newValue.backgroundColor = ColorConstants.backgroundViewColor
         }
     }
 
@@ -56,7 +56,7 @@ final class HideFuncCompletionPopUp: BasePopUpController {
         }
     }
 
-    @IBOutlet private weak var openAlbumButton: UIButton! {
+    @IBOutlet private weak var openHiddenAlbumButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.hideSuccessPopupButtonTitle, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 14)
@@ -122,15 +122,15 @@ final class HideFuncCompletionPopUp: BasePopUpController {
         willSet {
             newValue.setTitle(TextConstants.hideSuccessedAlertViewPeopleAlbum, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.backgroundColor = UIColor.lrTealishTwo
         }
     }
 
-    //MARL: bottomButtonParentView
+    //MARK: bottomButtonParentView
 
     @IBOutlet private weak var bottomButtonParentView: UIView!
-    
+
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
             newValue.backgroundColor = UIColor.lrTealish
@@ -145,10 +145,14 @@ final class HideFuncCompletionPopUp: BasePopUpController {
         }
     }
 
+    //MARK: hiddenAlbumParentView
+
+    @IBOutlet private weak var hiddenAlbumParentView: UIStackView!
+
     //MARK: Properties
 
     private let photosCount: Int
-    private var mode: Mode = .showOpenSmartAlbumButton
+    private let mode: Mode
 
     private weak var delegate: HideFuncRoutingProtocol?
 
@@ -156,9 +160,10 @@ final class HideFuncCompletionPopUp: BasePopUpController {
 
     //MARK: Init
 
-    init(photosCount: Int, delegate: HideFuncRoutingProtocol) {
+    init(mode: Mode, photosCount: Int, delegate: HideFuncRoutingProtocol) {
         self.photosCount = photosCount
         self.delegate = delegate
+        self.mode = mode
 
         super.init(nibName: nil, bundle: nil)
 
@@ -169,6 +174,8 @@ final class HideFuncCompletionPopUp: BasePopUpController {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         self.photosCount = 0
+        self.mode = .showOpenSmartAlbumButton
+        
         super.init(coder: coder)
     }
 
@@ -176,10 +183,6 @@ final class HideFuncCompletionPopUp: BasePopUpController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox {
-            mode = .showBottomCloseButton
-        }
 
         contentView = popUpView
 
@@ -214,6 +217,17 @@ final class HideFuncCompletionPopUp: BasePopUpController {
 
             smartAlbumsAdditionsParentView.isHidden = true
             closeButton.isHidden = true
+        case .smash:
+            hiddenAlbumParentView.arrangedSubviews.forEach { $0.isHidden = true }
+            bottomButtonParentView.isHidden = true
+
+            titleLabel.text = "Saved successfully!"
+            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            titleLabel.textColor = UIColor.lrLightBrownishGrey
+            
+            smartAlbumTitleLabel.text = "What would you like to do?"
+            smartAlbumTitleLabel.textColor = ColorConstants.darkBlueColor
+            smartAlbumDescriptionLabel.text = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin."
         }
 
         previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
@@ -244,8 +258,19 @@ final class HideFuncCompletionPopUp: BasePopUpController {
 
 }
 
-extension HideFuncCompletionPopUp {
+extension HSCompletionPopUp {
     private func setHiddenStatus(_ isHidden: Bool) {
-        storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox = isHidden
+        switch mode {
+        case .showBottomCloseButton:
+            assertionFailure("this is kind of magic, do not show button should be hidden")
+
+        case .showOpenSmartAlbumButton:
+            storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox = isHidden
+
+        case .smash:
+            storageVars.smashPhotoPopUpCheckBox = isHidden
+
+        }
+
     }
 }

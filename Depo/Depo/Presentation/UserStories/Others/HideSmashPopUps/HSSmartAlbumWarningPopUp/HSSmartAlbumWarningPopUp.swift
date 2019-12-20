@@ -1,5 +1,5 @@
 //
-//  HideFuncPeopleAlbumWarningPopUp.swift
+//  HSSmartAlbumWarningPopUp.swift
 //  Depo
 //
 //  Created by Raman Harhun on 12/18/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
+final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     enum Mode {
         case faceImageGroupingDisabled
@@ -28,10 +28,9 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
         }
     }
 
-    @IBOutlet private weak var blurView: UIVisualEffectView! {
+    @IBOutlet private weak var darkView: UIView! {
         willSet {
-            newValue.alpha = 0.9
-            newValue.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            newValue.backgroundColor = ColorConstants.backgroundViewColor
         }
     }
 
@@ -60,6 +59,30 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
         }
     }
 
+    //MARK: Do Not Show Again UI
+
+    @IBOutlet private weak var doNotShowAgainStackView: UIStackView!
+    
+    @IBOutlet private weak var doNotShowAgainLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.hideSuccessedAlertDoNotShowAgain
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.textColor = UIColor.lrBrownishGrey
+        }
+    }
+
+    @IBOutlet private weak var doNotShowAgainButton: UIButton! {
+        willSet {
+            newValue.adjustsImageWhenHighlighted = false
+
+            let normalCheckbox = UIImage(named: "checkBoxNotSelected")
+            newValue.setImage(normalCheckbox, for: .normal)
+
+            let selectedCheckbox = UIImage(named: "checkbox_active")
+            newValue.setImage(selectedCheckbox, for: .selected)
+        }
+    }
+
     @IBOutlet private weak var premiumButton: GradientPremiumButton! {
         willSet {
             newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
@@ -75,10 +98,12 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.backgroundColor = UIColor.lrTealishTwo
 
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 18)
         }
     }
 
+    private lazy var storageVars: StorageVars = factory.resolve()
+    
     private let mode: Mode
     private weak var delegate: HideFuncRoutingProtocol?
 
@@ -124,6 +149,7 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
             descriptionLabel.text = TextConstants.peopleAlbumWarningAlertMessage3
             functionButton.setTitle(TextConstants.peopleAlbumWarningAlertButton3, for: .normal)
             premiumButton.isHidden = true
+            doNotShowAgainStackView.isHidden = true
 
         }
     }
@@ -144,4 +170,14 @@ final class HideFuncPeopleAlbumWarningPopUp: BasePopUpController {
         }
     }
 
+    @IBAction func onDoNotShowAgainTap(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        setHiddenStatus(sender.isSelected)
+    }
+}
+
+extension HSSmartAlbumWarningPopUp {
+    private func setHiddenStatus(_ isHidden: Bool) {
+        storageVars.smartAlbumWarningPopUpCheckBox = isHidden
+    }
 }

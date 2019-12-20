@@ -8,16 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HideFuncCompletionPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSCompletionPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
-                <outlet property="blurView" destination="hhM-KN-Jx7" id="Fhq-fe-MP2"/>
                 <outlet property="bottomButtonParentView" destination="W1u-O1-5qb" id="Yu5-kW-PTB"/>
                 <outlet property="closeButton" destination="qJI-ss-qUl" id="38l-cE-3ky"/>
+                <outlet property="darkView" destination="IZG-1R-Gut" id="gvP-rg-mup"/>
                 <outlet property="doNotShowAgainButton" destination="dCl-OT-1FN" id="NLp-zm-fk0"/>
                 <outlet property="doNotShowAgainLabel" destination="Kem-hz-slW" id="7zj-BK-Kub"/>
                 <outlet property="gradientView" destination="yxX-xX-V1K" id="xzV-lI-vQ6"/>
+                <outlet property="hiddenAlbumParentView" destination="8P3-DQ-vmo" id="V6E-K1-Wtn"/>
                 <outlet property="okButton" destination="xcu-Qi-CWC" id="cdW-ax-hQn"/>
-                <outlet property="openAlbumButton" destination="mq3-Km-uo5" id="nTT-e5-CC0"/>
+                <outlet property="openHiddenAlbumButton" destination="mq3-Km-uo5" id="SIc-vU-5uf"/>
                 <outlet property="popUpView" destination="j3R-gQ-4MI" id="Xi2-bf-pAg"/>
                 <outlet property="previewAlbumsImageView" destination="S0q-hd-9sQ" id="8Sv-iW-lzo"/>
                 <outlet property="separatorView" destination="lOy-Ql-dzV" id="1DG-wd-yoO"/>
@@ -35,7 +36,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhM-KN-Jx7" customClass="UIVisualEffectView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZG-1R-Gut">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -46,7 +47,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="272" height="454"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xq8-TG-cXt">
-                                    <rect key="frame" x="0.0" y="0.0" width="272" height="536"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="500"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e3s-H4-YeM">
                                             <rect key="frame" x="115.5" y="32" width="41" height="41"/>
@@ -61,33 +62,54 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq3-Km-uo5">
-                                            <rect key="frame" x="121" y="97" width="30" height="30"/>
-                                            <connections>
-                                                <action selector="onOpenHiddenAlbumTap:" destination="-1" eventType="touchUpInside" id="Yi6-Ea-fyM"/>
-                                            </connections>
-                                        </button>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PMq-Eg-jgd">
-                                            <rect key="frame" x="36" y="143" width="200" height="60"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8P3-DQ-vmo">
+                                            <rect key="frame" x="36" y="95" width="200" height="72"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-hd-9sQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq3-Km-uo5">
+                                                    <rect key="frame" x="85" y="0.0" width="30" height="0.0"/>
+                                                    <connections>
+                                                        <action selector="onOpenHiddenAlbumTap:" destination="-1" eventType="touchUpInside" id="Yi6-Ea-fyM"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnb-Sl-ArN">
+                                                    <rect key="frame" x="0.0" y="12" width="200" height="60"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PMq-Eg-jgd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-hd-9sQ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="S0q-hd-9sQ" secondAttribute="height" multiplier="1:1" priority="750" id="EC7-9v-OVU"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="PMq-Eg-jgd" secondAttribute="height" multiplier="50:15" id="B8p-4l-e5S"/>
+                                                                <constraint firstAttribute="height" constant="60" id="pIh-i5-WsI"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxX-xX-V1K" customClass="TransparentGradientView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="S0q-hd-9sQ" secondAttribute="height" multiplier="1:1" priority="750" id="EC7-9v-OVU"/>
+                                                        <constraint firstItem="PMq-Eg-jgd" firstAttribute="centerX" secondItem="dnb-Sl-ArN" secondAttribute="centerX" id="Gcv-ge-1bE"/>
+                                                        <constraint firstAttribute="width" secondItem="dnb-Sl-ArN" secondAttribute="height" multiplier="10:3" id="Mvj-NX-XAi"/>
+                                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="leading" secondItem="PMq-Eg-jgd" secondAttribute="leading" id="N11-Nh-OM2"/>
+                                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="bottom" secondItem="PMq-Eg-jgd" secondAttribute="bottom" id="UXj-Yx-3VY"/>
+                                                        <constraint firstAttribute="height" constant="60" id="d5k-5a-YQZ"/>
+                                                        <constraint firstItem="PMq-Eg-jgd" firstAttribute="centerY" secondItem="dnb-Sl-ArN" secondAttribute="centerY" id="dfy-CI-aZx"/>
+                                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="trailing" secondItem="PMq-Eg-jgd" secondAttribute="trailing" id="fZS-C0-igS"/>
+                                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="top" secondItem="PMq-Eg-jgd" secondAttribute="top" id="pDV-wD-mbh"/>
                                                     </constraints>
-                                                </imageView>
+                                                </view>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="PMq-Eg-jgd" secondAttribute="height" multiplier="50:15" id="B8p-4l-e5S"/>
-                                                <constraint firstAttribute="height" constant="60" id="pIh-i5-WsI"/>
-                                            </constraints>
                                         </stackView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxX-xX-V1K" customClass="TransparentGradientView" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                                            <rect key="frame" x="36" y="143" width="200" height="60"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5lU-jA-MDb">
-                                            <rect key="frame" x="0.0" y="203" width="272" height="333"/>
+                                            <rect key="frame" x="0.0" y="167" width="272" height="333"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gA-V7-tSZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="272" height="262"/>
@@ -188,25 +210,18 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="PMq-Eg-jgd" firstAttribute="top" secondItem="mq3-Km-uo5" secondAttribute="bottom" constant="16" id="6yy-zO-WeZ"/>
-                                        <constraint firstItem="mq3-Km-uo5" firstAttribute="top" secondItem="kLQ-2Z-7O7" secondAttribute="bottom" constant="8" id="8ia-k2-WBY"/>
-                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="centerX" secondItem="PMq-Eg-jgd" secondAttribute="centerX" id="9S1-eG-NbR"/>
                                         <constraint firstItem="kLQ-2Z-7O7" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="CUU-Dg-J0l"/>
-                                        <constraint firstItem="PMq-Eg-jgd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xq8-TG-cXt" secondAttribute="leading" constant="16" id="DBM-Pl-6Iu"/>
-                                        <constraint firstItem="mq3-Km-uo5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xq8-TG-cXt" secondAttribute="leading" constant="16" id="EZN-BC-N3w"/>
                                         <constraint firstItem="5lU-jA-MDb" firstAttribute="leading" secondItem="xq8-TG-cXt" secondAttribute="leading" id="F22-be-YBf"/>
                                         <constraint firstItem="kLQ-2Z-7O7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xq8-TG-cXt" secondAttribute="leading" constant="24" id="J5C-jy-lgm"/>
-                                        <constraint firstItem="PMq-Eg-jgd" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="JFL-Pa-90O"/>
                                         <constraint firstItem="e3s-H4-YeM" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="O4B-kc-JXX"/>
                                         <constraint firstItem="5lU-jA-MDb" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="Rxp-YM-ixH"/>
+                                        <constraint firstItem="8P3-DQ-vmo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xq8-TG-cXt" secondAttribute="leading" constant="16" id="SPG-CP-e8g"/>
                                         <constraint firstItem="kLQ-2Z-7O7" firstAttribute="top" secondItem="e3s-H4-YeM" secondAttribute="bottom" constant="16" id="Wty-3c-J2c"/>
                                         <constraint firstAttribute="bottom" secondItem="5lU-jA-MDb" secondAttribute="bottom" id="X3U-jv-iJB"/>
-                                        <constraint firstItem="5lU-jA-MDb" firstAttribute="top" secondItem="PMq-Eg-jgd" secondAttribute="bottom" id="bP4-cJ-svu"/>
-                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="top" secondItem="PMq-Eg-jgd" secondAttribute="top" id="g3a-Xq-miW"/>
-                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="leading" secondItem="PMq-Eg-jgd" secondAttribute="leading" id="isy-7X-Bi8"/>
-                                        <constraint firstItem="mq3-Km-uo5" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="ofi-gz-vdm"/>
-                                        <constraint firstItem="yxX-xX-V1K" firstAttribute="centerY" secondItem="PMq-Eg-jgd" secondAttribute="centerY" id="oyy-Xy-qQc"/>
+                                        <constraint firstItem="8P3-DQ-vmo" firstAttribute="top" secondItem="kLQ-2Z-7O7" secondAttribute="bottom" constant="6" id="r2Z-cj-e2b"/>
+                                        <constraint firstItem="5lU-jA-MDb" firstAttribute="top" secondItem="8P3-DQ-vmo" secondAttribute="bottom" id="rzv-fT-KhT"/>
                                         <constraint firstItem="e3s-H4-YeM" firstAttribute="top" secondItem="xq8-TG-cXt" secondAttribute="top" constant="32" id="vc9-IB-2HE"/>
+                                        <constraint firstItem="8P3-DQ-vmo" firstAttribute="centerX" secondItem="xq8-TG-cXt" secondAttribute="centerX" id="y1N-1e-g2r"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -244,14 +259,14 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="B5L-7u-dAh" firstAttribute="bottom" secondItem="hhM-KN-Jx7" secondAttribute="bottom" id="5vM-bX-BYc"/>
+                <constraint firstAttribute="bottom" secondItem="IZG-1R-Gut" secondAttribute="bottom" id="HkT-5c-wGi"/>
                 <constraint firstItem="j3R-gQ-4MI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B5L-7u-dAh" secondAttribute="leading" constant="24" id="JSI-LN-4Sq"/>
+                <constraint firstAttribute="trailing" secondItem="IZG-1R-Gut" secondAttribute="trailing" id="LMd-5L-Kjz"/>
                 <constraint firstItem="j3R-gQ-4MI" firstAttribute="height" relation="lessThanOrEqual" secondItem="BTH-sc-E3U" secondAttribute="height" multiplier="0.8" id="N1q-mh-G3d"/>
                 <constraint firstItem="j3R-gQ-4MI" firstAttribute="centerY" secondItem="B5L-7u-dAh" secondAttribute="centerY" id="OvA-mJ-6KL"/>
                 <constraint firstItem="j3R-gQ-4MI" firstAttribute="centerX" secondItem="B5L-7u-dAh" secondAttribute="centerX" id="Srb-Nf-ZfP"/>
-                <constraint firstItem="hhM-KN-Jx7" firstAttribute="top" secondItem="B5L-7u-dAh" secondAttribute="top" id="TFG-rL-IUF"/>
-                <constraint firstItem="hhM-KN-Jx7" firstAttribute="leading" secondItem="B5L-7u-dAh" secondAttribute="leading" id="qal-fZ-J9E"/>
-                <constraint firstItem="B5L-7u-dAh" firstAttribute="trailing" secondItem="hhM-KN-Jx7" secondAttribute="trailing" id="th1-yt-9dZ"/>
+                <constraint firstItem="IZG-1R-Gut" firstAttribute="leading" secondItem="BTH-sc-E3U" secondAttribute="leading" id="jru-tE-O0S"/>
+                <constraint firstItem="IZG-1R-Gut" firstAttribute="top" secondItem="BTH-sc-E3U" secondAttribute="top" id="m0f-s8-Kib"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="B5L-7u-dAh"/>
             <point key="canvasLocation" x="493" y="580"/>
