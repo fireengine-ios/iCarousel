@@ -57,7 +57,18 @@ class DeleteAlbums: BaseRequestParametrs {
     }
 }
 
-class TrashAlbums: DeleteAlbums {
+class MoveToTrashAlbums: BaseRequestParametrs {
+    let albums: [AlbumItem]
+       
+    init (albums: [AlbumItem]) {
+       self.albums = albums
+    }
+
+    override var requestParametrs: Any {
+       let albumsUUIDS = albums.map { $0.uuid }
+       return albumsUUIDS
+    }
+    
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.trashAlbums)
         return URL(string: path, relativeTo: super.patch)!
@@ -225,7 +236,7 @@ class PhotosAlbumService: BaseRequestService {
 
             let fileService = WrapItemFileService()
             fileService.moveToTrash(files: items, success: nil, fail: nil)
-            self.trash(albums: deleteAlbums, success: success, fail: fail)
+            self.moveToTrash(albums: deleteAlbums, success: success, fail: fail)
         }
     }
     
@@ -333,20 +344,20 @@ class PhotosAlbumService: BaseRequestService {
             .responseObject(handler)
     }
     
-    func trash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        debugLog("PhotosAlbumService trashAlbums")
+    func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService moveToTrashAlbums")
 
-        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
-        guard !deleteAlbums.isEmpty else {
+        let moveToTrashAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        guard !moveToTrashAlbums.isEmpty else {
             fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
             return
         }
         
-        let params = TrashAlbums(albums: deleteAlbums)
+        let params = MoveToTrashAlbums(albums: moveToTrashAlbums)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             debugLog("PhotosAlbumService trashAlbums success")
 
-            success?(deleteAlbums)
+            success?(moveToTrashAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
     }

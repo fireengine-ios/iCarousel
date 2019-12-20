@@ -32,6 +32,8 @@ final class HiddenPhotosDataLoader {
     private weak var delegate: HiddenPhotosDataLoaderDelegate?
     
     private lazy var hiddenService = HiddenService()
+    private lazy var fileService = WrapItemFileService()
+    private lazy var albumService = PhotosAlbumService()
     
     private var photoPage = 0
     private var currentAlbumsPage = 0
@@ -145,19 +147,71 @@ final class HiddenPhotosDataLoader {
         }
     }
     
-    //MARK: - Unhide methods
-    
-    func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        hiddenService.recoverItems(items, handler: handler)
-    }
-    
-    func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
-        getAlbumItems(items: items) { [weak self] albums in
-            self?.hiddenService.recoverAlbums(albums, handler: handler)
+    func unhide(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        let group = DispatchGroup()
+        
+        var unhideError: Error? = nil
+        if !selectedItems.photos.isEmpty {
+            group.enter()
+            unhidePhotos(items: selectedItems.photos) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !selectedItems.albums.isEmpty {
+            group.enter()
+            unhideAlbums(items: selectedItems.albums) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            if let error = unhideError {
+                handler(.failed(error))
+            } else {
+                handler(.success(()))
+            }
         }
     }
     
-    //MARK: - Delete methods
+    func moveToTrash(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        let group = DispatchGroup()
+
+        var deleteError: Error? = nil
+        if !selectedItems.photos.isEmpty {
+            group.enter()
+            moveToTrashPhotos(items: selectedItems.photos) { result in
+                if case let .failed(error) = result {
+                    deleteError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !selectedItems.albums.isEmpty {
+            group.enter()
+            moveToTrashAlbums(items: selectedItems.albums) { result in
+                if case let .failed(error) = result {
+                    deleteError = error
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            if let error = deleteError {
+                handler(.failed(error))
+            } else {
+                handler(.success(()))
+            }
+        }
+    }
     
     //MARK: - Private methods
     
@@ -242,7 +296,7 @@ final class HiddenPhotosDataLoader {
         }
     }
     
-    private func getAlbumItems(items: [BaseDataSourceItem], handler: @escaping ([AlbumItem]) -> Void) {
+    private func getAlbumItems(items: [BaseDataSourceItem], handler: @escaping (_ albums: [AlbumItem], _ firItems: [Item]) -> Void) {
         var albums = items.compactMap { $0 as? AlbumItem }
         
         let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
@@ -255,7 +309,7 @@ final class HiddenPhotosDataLoader {
         }
         
         guard firItems.isEmpty else {
-            handler(albums)
+            handler(albums, firItems)
             return
         }
         
@@ -277,7 +331,166 @@ final class HiddenPhotosDataLoader {
         }
         
         group.notify(queue: .main) {
-            handler(albums)
+            handler(albums, firItems)
+        }
+    }
+    
+    //MARK: - Unhide methods
+    
+    private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
+        hiddenService.recoverItems(items, handler: handler)
+    }
+    
+    private func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
+        var peopleItems = [PeopleItem]()
+        var placesItems = [PlacesItem]()
+        var thingsItems = [ThingsItem]()
+        var albumItems = [AlbumItem]()
+        
+        items.forEach {
+            if let peopleItem = $0 as? PeopleItem {
+                peopleItems.append(peopleItem)
+            } else if let placeItem = $0 as? PlacesItem {
+                placesItems.append(placeItem)
+            } else if let thingItem = $0 as? ThingsItem {
+                thingsItems.append(thingItem)
+            } else if let albumItem = $0 as? AlbumItem {
+                albumItems.append(albumItem)
+            }
+        }
+    
+        let group = DispatchGroup()
+        
+        var unhideError: Error? = nil
+        
+        if !peopleItems.isEmpty {
+            group.enter()
+            hiddenService.recoveryPeople(items: peopleItems) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !placesItems.isEmpty {
+            group.enter()
+            hiddenService.recoveryPlaces(items: placesItems) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !thingsItems.isEmpty {
+            group.enter()
+            hiddenService.recoveryThings(items: thingsItems) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !albumItems.isEmpty {
+            group.enter()
+            hiddenService.recoverAlbums(albumItems) { result in
+                if case let .failed(error) = result {
+                    unhideError = error
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            if let error = unhideError {
+                handler(.failed(error))
+            } else {
+                handler(.success(()))
+            }
+        }
+    }
+    
+    //MARK: - Move to trash methods
+
+    private func moveToTrashPhotos(items: [Item], handler: @escaping ResponseVoid) {
+        fileService.moveToTrash(files: items, success: {
+            handler(.success(()))
+        }, fail: { errorResponse in
+            handler(.failed(errorResponse))
+        })
+    }
+    
+    private func moveToTrashAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
+        var peopleItems = [PeopleItem]()
+        var placesItems = [PlacesItem]()
+        var thingsItems = [ThingsItem]()
+        var albumItems = [AlbumItem]()
+        
+        items.forEach {
+            if let peopleItem = $0 as? PeopleItem {
+                peopleItems.append(peopleItem)
+            } else if let placeItem = $0 as? PlacesItem {
+                placesItems.append(placeItem)
+            } else if let thingItem = $0 as? ThingsItem {
+                thingsItems.append(thingItem)
+            } else if let albumItem = $0 as? AlbumItem {
+                albumItems.append(albumItem)
+            }
+        }
+    
+        let group = DispatchGroup()
+        
+        var trashError: Error? = nil
+        
+        if !peopleItems.isEmpty {
+            group.enter()
+            hiddenService.moveToTrashPeople(items: peopleItems) { result in
+                if case let .failed(error) = result {
+                    trashError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !placesItems.isEmpty {
+            group.enter()
+            hiddenService.moveToTrashPlaces(items: placesItems) { result in
+                if case let .failed(error) = result {
+                    trashError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !thingsItems.isEmpty {
+            group.enter()
+            hiddenService.moveToTrashThings(items: thingsItems) { result in
+                if case let .failed(error) = result {
+                    trashError = error
+                }
+                group.leave()
+            }
+        }
+        
+        if !albumItems.isEmpty {
+            group.enter()
+            albumService.moveToTrash(albums: albumItems, success: { trashedAlbums in
+                ItemOperationManager.default.moveToTrash(albums: trashedAlbums)
+                group.leave()
+            }, fail: { errorResponse in
+                trashError = errorResponse
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main) {
+            if let error = trashError {
+                handler(.failed(error))
+            } else {
+                handler(.success(()))
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 
 fileprivate struct CoreDataConfig {
     static let modelName = "LifeBoxModel"
-    static let modelVersion = "3"
+    static let modelVersion = "4"
     static let storeName = "DataModel"
     
     static var storeUrl: URL {

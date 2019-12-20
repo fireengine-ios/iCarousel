@@ -6140,6 +6140,14 @@
 		B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */; };
 		B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
 		B5D2883E22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
+		B5DCFC1823AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
+		B5DCFC1923AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
+		B5DCFC1A23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
+		B5DCFC1B23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
+		B5DCFC1D23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
+		B5DCFC1E23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
+		B5DCFC1F23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
+		B5DCFC2023AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -10985,6 +10993,8 @@
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
 		B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
 		B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
+		B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_3_4.swift; sourceTree = "<group>"; };
+		B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -17562,6 +17572,8 @@
 			children = (
 				B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */,
 				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
+				B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */,
+				B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -24871,6 +24883,7 @@
 				0303A10F2397D0D000907F42 /* PeriodicContactSyncInitializer.swift in Sources */,
 				0303A1102397D0D000907F42 /* IntroduceDataStorage.swift in Sources */,
 				0303A1112397D0D000907F42 /* SpotifyPlaylistsViewController.swift in Sources */,
+				B5DCFC1F23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				0303A1122397D0D000907F42 /* AccountType.swift in Sources */,
 				0303A1132397D0D000907F42 /* ThingsService.swift in Sources */,
 				0303A1142397D0D000907F42 /* InfoButtonCellProtocol.swift in Sources */,
@@ -25776,6 +25789,7 @@
 				0303A4862397D0D000907F42 /* PermissionsView.swift in Sources */,
 				0303A4872397D0D000907F42 /* ProfileTextPickerView.swift in Sources */,
 				0303A4882397D0D000907F42 /* SelectNameInteractorInput.swift in Sources */,
+				B5DCFC1A23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				0303A4892397D0D000907F42 /* ImageScrollView.swift in Sources */,
 				0303A48A2397D0D000907F42 /* TermsDescriptionController.swift in Sources */,
 				0303A48B2397D0D000907F42 /* SelectNameInteractorOutput.swift in Sources */,
@@ -26419,6 +26433,7 @@
 				4A0AC1452087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */,
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
+				B5DCFC1E23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
 				8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				89E51D5A22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
@@ -27446,6 +27461,7 @@
 				8C0E8FC91FDEBDFF00789C91 /* ActivityTimelineConfigurator.swift in Sources */,
 				8C0E8FCA1FDEBDFF00789C91 /* ActivityTimelineInitializer.swift in Sources */,
 				8C0E8FCB1FDEBDFF00789C91 /* PasscodeManager.swift in Sources */,
+				B5DCFC1923AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				8C0E8FCC1FDEBDFF00789C91 /* UploadParametrs.swift in Sources */,
 				8C0E8FCD1FDEBDFF00789C91 /* ImportFromDropboxPresenter.swift in Sources */,
 				CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */,
@@ -28065,6 +28081,7 @@
 				CE8F44EF1F6ABB540062C2E0 /* ActivityTimelineParameters.swift in Sources */,
 				98792DD722FD486F000A77E5 /* SpotifyImportedTracksViewController.swift in Sources */,
 				7CEEC1C01F332B0000BD433F /* PhotosOrderCollectionViewCell.swift in Sources */,
+				B5DCFC1D23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				4AC68933202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				CE6DE7541FCBE84100C23CBD /* InstagramResponses.swift in Sources */,
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
@@ -28173,6 +28190,7 @@
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
 				8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
+				B5DCFC1823AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				4A0AC1442087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CE51ABF91EF90853005DCEE0 /* IntroduceDataStorage.swift in Sources */,
 				CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */,
@@ -29349,6 +29367,7 @@
 				CE7847FF22A685FB00662219 /* UserProfilePresenter.swift in Sources */,
 				8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				CE78480022A685FB00662219 /* PasscodeSettingsPresenter.swift in Sources */,
+				B5DCFC1B23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				CE78480122A685FB00662219 /* Bool+Init.swift in Sources */,
 				CE78480222A685FB00662219 /* Router.swift in Sources */,
 				CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */,
@@ -29362,6 +29381,7 @@
 				CE78480922A685FB00662219 /* (null) in Sources */,
 				CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */,
 				CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */,
+				B5DCFC2023AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE78480C22A685FB00662219 /* ContactBackupOld.swift in Sources */,
 				CE78480D22A685FB00662219 /* Alamofire+Validate.swift in Sources */,
 				CE78480E22A685FB00662219 /* AnimationCard.swift in Sources */,
@@ -34496,7 +34516,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34559,7 +34579,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34618,7 +34638,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34678,7 +34698,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.36.1;
+				CURRENT_PROJECT_VERSION = d2.36.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

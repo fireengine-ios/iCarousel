@@ -77,6 +77,30 @@ final class AlbumsSliderDataSource: NSObject {
         }
     }
     
+    func removeItems(_ deletedItems: [BaseDataSourceItem]) {
+        if deletedItems.isEmpty {
+            return
+        }
+        
+        var deletedIndexPaths = [IndexPath]()
+        let albumUuids = deletedItems.compactMap { ($0 as? AlbumItem)?.uuid }
+        let firItemsIds = deletedItems.compactMap { ($0 as? Item)?.id }
+        
+        for (item, object) in items.enumerated() {
+            if object is AlbumItem, albumUuids.contains(object.uuid) {
+                deletedIndexPaths.append(IndexPath(item: item, section: 0))
+            } else if let id = (object as? Item)?.id, firItemsIds.contains(id) {
+                deletedIndexPaths.append(IndexPath(item: item, section: 0))
+            }
+        }
+        
+        deletedIndexPaths.forEach { items.remove(at: $0.item) }
+        
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: deletedIndexPaths)
+        }, completion: nil)
+    }
+    
     func reset() {
         items.removeAll()
         selectedItems.removeAll()

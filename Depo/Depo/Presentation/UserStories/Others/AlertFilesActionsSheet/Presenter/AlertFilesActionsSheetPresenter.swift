@@ -298,6 +298,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .moveToTrash:
+                    assertionFailure("please implement this function first")
+                    action = UIAlertAction()
                 case .hide:
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
                         //TODO: will be another task to implement analytics calls

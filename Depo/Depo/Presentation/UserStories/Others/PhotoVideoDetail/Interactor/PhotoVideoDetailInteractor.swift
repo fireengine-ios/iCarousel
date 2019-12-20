@@ -145,15 +145,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
         array.remove(at: selectedIndex)
         
-        if (selectedIndex >= array.count) {
+        if selectedIndex >= array.count {
             selectedIndex = array.count - 1
         }
         
-        if type == .delete {
+        
+        switch type {
+        case .delete:
             ItemOperationManager.default.deleteItems(items: [removedObject])
-        }
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
-            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+        case .hide:
+            ItemOperationManager.default.didHide(items: [removedObject])
+        case .removeFromAlbum, .removeFromFaceImageAlbum:
+             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+        default:
+            break
         }
         
         if array.isEmpty {
