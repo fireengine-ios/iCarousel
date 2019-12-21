@@ -1581,7 +1581,35 @@ struct TextConstants {
     static let profileDetailErrorContactCallCenter = NSLocalizedString("profile_detail_error_contact_call_center", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let hideSinglePhotoCompletionAlertMessage = NSLocalizedString("hide_single_photo_completion_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let peopleAlbumWarningAlertTitle1 = NSLocalizedString("people_album_warning_alert_title_not_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertTitle2 = NSLocalizedString("people_album_warning_alert_title_not_premium_and_image_grouping_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertTitle3 = NSLocalizedString("people_album_warning_alert_title_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let peopleAlbumWarningAlertMessage1 = NSLocalizedString("people_album_warning_message_not_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertMessage2 = NSLocalizedString("people_album_warning_message_not_premium_and_image_grouping_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertMessage3 = NSLocalizedString("people_album_warning_message_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let peopleAlbumWarningAlertButton1 = NSLocalizedString("people_album_warning_button_not_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertButton2 = NSLocalizedString("people_album_warning_button_not_premium_and_image_grouping_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let peopleAlbumWarningAlertButton3 = NSLocalizedString("people_album_warning_button_premium_and_no_image_grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let hideSuccessedAlertPeopleAlbumTitle = NSLocalizedString("hide_successed_alert_people_album_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessedAlertPeopleAlbumDescription = NSLocalizedString("hide_successed_alert_people_album_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessedAlertDoNotShowAgain = NSLocalizedString("hide_successed_alert_do_not_show_this_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessedAlertViewPeopleAlbum = NSLocalizedString("hide_successed_alert_view_people_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessedAlertWithPeopleAlbumTitle = NSLocalizedString("hide_successed_alert_with_people_album_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSuccessedAlertTitle = NSLocalizedString("hide_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let smashSuccessedAlertTitle = NSLocalizedString("smash_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedAlertSecondTitle = NSLocalizedString("smash_successed_alert_second_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedAlertDescription = NSLocalizedString("smash_successed_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let smashSuccessedSimpleAlertTitle = NSLocalizedString("smash_successed_simple_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedSimpleAlertDescription = NSLocalizedString("smash_successed_simple_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     //MARK: -Carousel Pager Header
     static let carouselViewFirstPageText = NSLocalizedString("carousel_view_first_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let carouselViewFirstPageTitle = NSLocalizedString("carousel_view_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
