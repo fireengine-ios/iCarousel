@@ -109,7 +109,7 @@ extension HiddenPhotosDataSource {
         }
         
         if allItems.isEmpty {
-            allItems.append(items)
+            allItems = [items]
             collectionView.reloadData()
         } else {
             dispatchQueue.async { [weak self] in

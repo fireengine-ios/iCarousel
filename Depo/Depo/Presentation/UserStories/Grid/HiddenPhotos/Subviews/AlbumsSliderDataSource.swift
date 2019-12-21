@@ -47,8 +47,8 @@ final class AlbumsSliderDataSource: NSObject {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: 100, height: 140)
-            layout.minimumInteritemSpacing = 10
-            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 16
         }
     }
     
