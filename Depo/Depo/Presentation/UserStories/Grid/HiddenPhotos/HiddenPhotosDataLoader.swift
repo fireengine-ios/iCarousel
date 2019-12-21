@@ -107,20 +107,22 @@ final class HiddenPhotosDataLoader {
             
             switch result {
             case .success(let array):
+                self.delegate?.didLoadAlbum(items: array)
+                                
+                if array.isEmpty, self.currentLoadingAlbumType == .albums {
+                    //finish loading albums
+                    self.delegate?.didFinishLoadAlbums()
+                    return
+                }
+                
                 if array.count < self.albumPageSize, let newAlbumType = AlbumsOrder(rawValue: self.currentLoadingAlbumType.rawValue + 1) {
                     self.currentLoadingAlbumType = newAlbumType
                     self.currentAlbumsPage = 0
                 } else {
                     self.currentAlbumsPage += 1
                 }
-                self.delegate?.didLoadAlbum(items: array)
                 
-                if self.currentLoadingAlbumType == .albums {
-                    if array.isEmpty {
-                        //finish loading albums
-                        self.delegate?.didFinishLoadAlbums()
-                    }
-                } else if array.count < self.albumsCountBeforeNextPage {
+                if array.count < self.albumsCountBeforeNextPage {
                     //autoload next page
                     self.loadNextAlbumsPage()
                 }
