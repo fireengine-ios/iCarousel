@@ -21,11 +21,7 @@ final class AlbumsSliderDataSource: NSObject {
     private weak var delegate: AlbumsSliderDataSourceDelegate?
     
     private(set) var items = [BaseDataSourceItem]()
-    private(set) var selectedItems = [BaseDataSourceItem]() {
-        didSet {
-            delegate?.didChangeSelectionCount(selectedItems.count)
-        }
-    }
+    private(set) var selectedItems = [BaseDataSourceItem]()
     
     private(set) var isSelectionActive = false
     var isPaginationDidEnd = false
@@ -118,6 +114,7 @@ extension AlbumsSliderDataSource {
             delegate?.onStartSelection()
             selectedItems.append(items[indexPath.row])
             collectionView.reloadItems(at: [indexPath])
+            delegate?.didChangeSelectionCount(selectedItems.count)
         }
     }
     
@@ -183,6 +180,7 @@ extension AlbumsSliderDataSource: UICollectionViewDelegate {
                 selectedItems.append(item)
             }
             collectionView.reloadItems(at: [indexPath])
+            delegate?.didChangeSelectionCount(selectedItems.count)
         } else {
             delegate?.didSelect(item: item)
         }

@@ -288,14 +288,14 @@ extension HiddenPhotosDataSource {
             var newSectionArray = [Item]()
             for (item, object) in array.enumerated() {
                 if idsForRemove.contains(object.uuid) {
-                    deletedIndexPaths.append(IndexPath(item: item, section: section))
+                    deletedIndexPaths.append(IndexPath(item: item, section: section + 1))
                 } else {
                     newSectionArray.append(object)
                 }
             }
             
             if newSectionArray.isEmpty {
-                deletedSections.insert(section)
+                deletedSections.insert(section + 1)
             } else {
                 newArray.append(newSectionArray)
             }
@@ -402,6 +402,9 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section == 0 {
+            return UICollectionReusableView()
+        }
         return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
     }
     
@@ -448,7 +451,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
             view.layer.zPosition = 0
         }
-        guard let view = view as? CollectionViewSimpleHeaderWithText else {
+        guard indexPath.section > 0, let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
 

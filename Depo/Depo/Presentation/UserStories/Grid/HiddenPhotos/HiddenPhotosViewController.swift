@@ -149,6 +149,7 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
         dataSource.sortedRule = rule
         dataLoader.sortedRule = rule
         reloadData()
+        navbarManager.setDefaultState(sortType: rule)
     }
 }
 
