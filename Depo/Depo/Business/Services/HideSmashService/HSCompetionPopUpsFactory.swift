@@ -41,7 +41,7 @@ final class HSCompletionPopUpsFactory {
 
         default:
             assertionFailure("Attack on a matrix")
-            return UIViewController()
+            return PopUpController.with(errorMessage: TextConstants.errorUnknown)
         }
     }
 
