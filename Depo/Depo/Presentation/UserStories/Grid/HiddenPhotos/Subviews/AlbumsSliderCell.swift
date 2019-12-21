@@ -65,7 +65,6 @@ final class AlbumsSliderCell: UICollectionViewCell {
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {
         dataSource.appendItems(newItems)
-        emptyLabel.isHidden = !dataSource.items.isEmpty
     }
     
     func removeItems(_ items: [BaseDataSourceItem]) {
@@ -78,6 +77,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     
     func finishLoadAlbums() {
         dataSource.isPaginationDidEnd = true
+        emptyLabel.isHidden = !dataSource.items.isEmpty
     }
 }
 
