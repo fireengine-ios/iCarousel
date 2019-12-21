@@ -30,12 +30,14 @@ final class CoreDataMigrator {
     
     // MARK: - Migration
     
-    func migrateStore(at storeURL: URL) {
-        migrateStore(from: storeURL, to: storeURL, targetVersion: CoreDataMigrationModel.current)
+    func migrateStoreIfNeeded(at storeURL: URL) {
+        if requiresMigration(at: storeURL) {
+            migrateStore(from: storeURL, to: storeURL, targetVersion: CoreDataMigrationModel.current)
+        }
     }
     
     func migrateStore(from sourceURL: URL, to targetURL: URL, targetVersion: CoreDataMigrationModel) {
-        guard let sourceMigrationModel = CoreDataMigrationSourceModel(storeURL: sourceURL as URL) else {
+        guard let sourceMigrationModel = CoreDataMigrationSourceModel(storeURL: sourceURL) else {
             fatalError("unknown store version at URL \(sourceURL)")
         }
         
