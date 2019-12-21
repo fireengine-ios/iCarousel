@@ -11,7 +11,7 @@ import Foundation
 protocol HiddenPhotosThreeDotMenuManagerDelegate: class {
     func onThreeDotsManagerUnhide()
     func onThreeDotsManagerSelect()
-    func onThreeDotsManagerDelete()
+    func onThreeDotsManagerMoveToTrash()
 }
 
 final class HiddenPhotosThreeDotMenuManager {
@@ -24,7 +24,7 @@ final class HiddenPhotosThreeDotMenuManager {
     
     func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
         if isSelectingMode {
-            showAlertSheet(with: [.unhide, .delete], sender: sender)
+            showAlertSheet(with: [.unhide, .moveToTrash], sender: sender)
         } else {
             showAlertSheet(with: [.select], sender: sender)
         }
@@ -49,9 +49,9 @@ final class HiddenPhotosThreeDotMenuManager {
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { [weak self] _ in
                     self?.delegate.onThreeDotsManagerSelect()
                 })
-            case .delete:
+            case .moveToTrash:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerDelete()
+                    self?.delegate.onThreeDotsManagerMoveToTrash()
                 })
             default:
                 assertionFailure("unowned action")

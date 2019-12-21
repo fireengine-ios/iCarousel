@@ -21,6 +21,7 @@ final class HiddenPhotosDataSource: NSObject {
     
     private typealias InsertItemResult = (indexPath: IndexPath?, section: Int?)
     private typealias ChangesItemResult = (indexPaths: [IndexPath], sections: IndexSet)
+    typealias SelectedItems = (photos: [Item], albums: [BaseDataSourceItem])
     
     private let padding: CGFloat = 1
     private let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
@@ -44,6 +45,8 @@ final class HiddenPhotosDataSource: NSObject {
     private(set) var isSelectionStateActive = false
     private var isPaginationDidEnd = false
     
+    private let filesDataSource = FilesDataSource()
+    
     var isEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
@@ -55,7 +58,7 @@ final class HiddenPhotosDataSource: NSObject {
         return CGSize(width: itemWidth, height: itemWidth)
     }()
     
-    var allSelectedItems: (photos: [Item], albums: [BaseDataSourceItem]) {
+    var allSelectedItems: SelectedItems {
         return (selectedItems, albumSlider?.selectedItems ?? [])
     }
     
@@ -155,6 +158,14 @@ extension HiddenPhotosDataSource {
                 }
             }
         }
+        
+        let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
+        let firItems = items.filter { $0.fileType.isContained(in: types) }
+        removeSlider(items: firItems)
+    }
+    
+    func removeSlider(items: [BaseDataSourceItem]) {
+        albumSlider?.removeItems(items)
     }
     
     func reset() {
@@ -277,14 +288,14 @@ extension HiddenPhotosDataSource {
             var newSectionArray = [Item]()
             for (item, object) in array.enumerated() {
                 if idsForRemove.contains(object.uuid) {
-                    deletedIndexPaths.append(IndexPath(item: item, section: section))
+                    deletedIndexPaths.append(IndexPath(item: item, section: section + 1))
                 } else {
                     newSectionArray.append(object)
                 }
             }
             
             if newSectionArray.isEmpty {
-                deletedSections.insert(section)
+                deletedSections.insert(section + 1)
             } else {
                 newArray.append(newSectionArray)
             }
@@ -391,6 +402,9 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section == 0 {
+            return UICollectionReusableView()
+        }
         return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
     }
     
@@ -414,7 +428,9 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
         cell.configureWithWrapper(wrappedObj: item)
         cell.setDelegateObject(delegateObject: self)
-
+        (cell as? CollectionViewCellForPhoto)?.filesDataSource = filesDataSource
+        (cell as? CollectionViewCellForPhoto)?.loadImage(item: item, indexPath: indexPath)
+        
         if isPaginationDidEnd {
             return
         }
@@ -435,7 +451,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
             view.layer.zPosition = 0
         }
-        guard let view = view as? CollectionViewSimpleHeaderWithText else {
+        guard indexPath.section > 0, let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
 

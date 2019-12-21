@@ -20,6 +20,12 @@ final class TransparentGradientView: UIView {
         }
     }
     
+    var isFlipedColors = false  {
+        didSet {
+            setup()
+        }
+    }
+    
     enum TransparentGradientStyle {
         case vertical
         case horizontal
@@ -61,10 +67,21 @@ final class TransparentGradientView: UIView {
         setupStyle()
         
         let anyNotClearColor = UIColor.white
-        gradientMask.colors = [UIColor.clear.cgColor, anyNotClearColor, anyNotClearColor.cgColor]
         
-        /// 0 - 0.1 is 10% of view will be UIColor.clear
-        gradientMask.locations = [NSNumber(value: 0), NSNumber(value: 0.1), NSNumber(value: 1)]
+        let colors: [Any]
+        let locations: [NSNumber]
+        
+        if isFlipedColors {
+            colors = [anyNotClearColor.cgColor, anyNotClearColor, UIColor.clear.cgColor]
+            locations = [NSNumber(value: 0), NSNumber(value: 0.9), NSNumber(value: 1)]
+        } else {
+            colors = [UIColor.clear.cgColor, anyNotClearColor, anyNotClearColor.cgColor]
+            locations = [NSNumber(value: 0), NSNumber(value: 0.1), NSNumber(value: 1)]
+        }
+        
+        gradientMask.colors = colors
+        gradientMask.locations = locations
+
         layer.mask = gradientMask
     }
     

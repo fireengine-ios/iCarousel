@@ -23,7 +23,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = .lrBrownishGrey
+            newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
         }
     }
@@ -33,7 +33,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
             newValue.text = ""
             newValue.numberOfLines = 2
             newValue.lineBreakMode = .byWordWrapping
-            newValue.textColor = .lrBrownishGrey
+            newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 24)
         }
     }
@@ -66,6 +66,10 @@ final class AlbumsSliderCell: UICollectionViewCell {
     func appendItems(_ newItems: [BaseDataSourceItem]) {
         dataSource.appendItems(newItems)
         emptyLabel.isHidden = !dataSource.items.isEmpty
+    }
+    
+    func removeItems(_ items: [BaseDataSourceItem]) {
+        dataSource.removeItems(items)
     }
     
     func reset() {

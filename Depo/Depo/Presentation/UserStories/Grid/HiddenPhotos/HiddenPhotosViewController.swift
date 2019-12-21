@@ -25,9 +25,14 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     //MARK: - View lifecycle
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
         setupRefreshControl()
         setupEmptyView()
@@ -144,6 +149,7 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
         dataSource.sortedRule = rule
         dataLoader.sortedRule = rule
         reloadData()
+        navbarManager.setDefaultState(sortType: rule)
     }
 }
 
@@ -174,7 +180,7 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 //MARK: - HiddenPhotosBottomBarManagerDelegate
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
-    func onBottomBarDelete() {
+    func onBottomBarMoveToTrash() {
         showDeletePopup()
     }
     
@@ -211,7 +217,7 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
         showUnhidePopup()
     }
     
-    func onThreeDotsManagerDelete() {
+    func onThreeDotsManagerMoveToTrash() {
         showDeletePopup()
     }
 }
@@ -270,7 +276,7 @@ extension HiddenPhotosViewController {
     
     private func showDeletePopup() {
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: TextConstants.deleteFilesText,
+                                         message: TextConstants.deletePopupText,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
@@ -280,7 +286,9 @@ extension HiddenPhotosViewController {
                                             }
                                         })
         
-        router.presentViewController(controller: popup)
+        router.presentViewController(controller: popup,
+                                     animated: false,
+                                     completion: nil)
     }
     
     private func showUnhidePopup() {
@@ -295,20 +303,91 @@ extension HiddenPhotosViewController {
                                             }
                                          })
         
-        router.presentViewController(controller: popup)
+        router.presentViewController(controller: popup,
+                                     animated: false,
+                                     completion: nil)
+    }
+    
+    private func showDeleteSuccessPopup() {
+        let popup = PopUpController.with(title: TextConstants.deletePopupSuccessTitle,
+                                         message: TextConstants.deletePopupSuccessText,
+                                         image: .success,
+                                         buttonTitle: TextConstants.ok)
+        
+        router.presentViewController(controller: popup,
+                                     animated: false,
+                                     completion: nil)
+    }
+    
+    private func showUnhideSuccessPopup() {
+        let popup = PopUpController.with(title: TextConstants.unhidePopupSuccessTitle,
+                                         message: TextConstants.unhidePopupSuccessText,
+                                         image: .success,
+                                         buttonTitle: TextConstants.ok)
+        
+        router.presentViewController(controller: popup,
+                                     animated: false,
+                                     completion: nil)
     }
     
     private func deleteSelectedItems() {
+        showSpinner()
+        
         let selectedItems = dataSource.allSelectedItems
-        let albums = selectedItems.albums
-        let photos = selectedItems.photos
-
+        stopSelectionState()
+        
+        dataLoader.moveToTrash(selectedItems: selectedItems) { [weak self] result in
+            self?.hideSpinner()
+            
+            switch result {
+            case .success(_):
+                self?.showDeleteSuccessPopup()
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
     
     private func unhideSelectedItems() {
+        showSpinner()
+        
         let selectedItems = dataSource.allSelectedItems
-        let albums = selectedItems.albums
-        let photos = selectedItems.photos
+        stopSelectionState()
+        
+        dataLoader.unhide(selectedItems: selectedItems) { [weak self] result in
+            self?.hideSpinner()
+            
+            switch result {
+            case .success(_):
+                self?.showUnhideSuccessPopup()
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+}
 
+//MARK: - ItemOperationManagerViewProtocol
+
+extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return object === self
+    }
+    
+    func didUnhide(items: [WrapData]) {
+        dataSource.remove(items: items)
+    }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        dataSource.removeSlider(items: albums)
+    }
+    
+    func moveToTrash(items: [Item]) {
+        dataSource.remove(items: items)
+    }
+    
+    func moveToTrash(albums: [AlbumItem]) {
+        dataSource.removeSlider(items: albums)
     }
 }
