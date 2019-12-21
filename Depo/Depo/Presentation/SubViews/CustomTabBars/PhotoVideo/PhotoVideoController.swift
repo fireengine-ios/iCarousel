@@ -783,6 +783,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     func didHide(items: [WrapData]) {
         stopEditingMode()
     }
+    
+    func didUnhide(items: [WrapData]) {
+        stopEditingMode()
+    }
 }
 
 extension PhotoVideoController {

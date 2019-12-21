@@ -97,6 +97,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
             
             if !selectedItem.isLocalItem {
+                
+                if elementsConfig.contains(.unhide) && elementsConfig.contains(.delete) {
+                    return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+                }
+                
                 elementsConfig.insert(.edit, at: 2)
                 
                 if let syncIndex = elementsConfig.index(of: .sync) {
@@ -155,6 +160,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             ItemOperationManager.default.deleteItems(items: [removedObject])
         case .hide:
             ItemOperationManager.default.didHide(items: [removedObject])
+        case .unhide:
+            ItemOperationManager.default.didUnhide(items: [removedObject])
         case .removeFromAlbum, .removeFromFaceImageAlbum:
              ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
         default:

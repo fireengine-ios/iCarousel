@@ -46,6 +46,8 @@ class WrapItemFileService: WrapItemFileOperations {
     
     private let hideFileService = HideFileService()
     
+    private let hiddenService = HiddenService()
+    
     
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         remoteFileService.createsFolder(createFolder: createFolder, success: success, fail: fail)
@@ -134,6 +136,30 @@ class WrapItemFileService: WrapItemFileOperations {
         }
         
         hideFileService.hideItems(remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func unhide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.unhide(items, completion: {
+                success?()
+                ItemOperationManager.default.didUnhide(items: items)
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.recoverItems(remoteItems) { response in
             switch response {
             case .success(()):
                 wrappedSuccessOperation()

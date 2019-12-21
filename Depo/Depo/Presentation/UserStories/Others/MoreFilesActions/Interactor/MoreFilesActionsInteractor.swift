@@ -276,6 +276,38 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                     fail: self.failAction(elementType: .hide))
     }
     
+    func unhide(items: [BaseDataSourceItem]) {
+        guard let items = items as? [Item] else {
+            assertionFailure("Unexpected type of items")
+            return
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to unhide them")
+            return
+        }
+        
+        
+        let okHandler: VoidHandler = { [weak self] in
+            self?.output?.operationStarted(type: .unhide)
+            
+            self?.player.remove(listItems: remoteItems)
+            self?.fileService.unhide(items: remoteItems, success: self?.succesAction(elementType: .unhide), fail: self?.failAction(elementType: .unhide))
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetUnhide,
+                                              message: TextConstants.unhidePopupText,
+                                              image: .unhide,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+    }
+    
     func completelyDelete(albums: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
             guard let albums = albums as? [AlbumItem] else { return }
@@ -676,6 +708,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         case .delete:
             text = TextConstants.popUpDeleteComplete
             MenloworksAppEvents.onFileDeleted()
+        case .unhide:
+            text = TextConstants.unhidePopupSuccessText
         default:
             return
         }
