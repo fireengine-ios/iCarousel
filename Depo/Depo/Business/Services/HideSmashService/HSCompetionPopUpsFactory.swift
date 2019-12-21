@@ -31,8 +31,8 @@ final class HSCompletionPopUpsFactory {
             return HSCompletionPopUp(mode: .showOpenSmartAlbumButton, photosCount: itemsCount, delegate: delegate)
 
         case .smashCompleted where isDoNotShowAgainButtonPressed(for: state):
-            return PopUpController.with(title: "Smashed",
-                                        message: "Successed",
+            return PopUpController.with(title: TextConstants.smashSuccessedSimpleAlertTitle,
+                                        message: TextConstants.smashSuccessedSimpleAlertDescription,
                                         image: .success,
                                         buttonTitle: TextConstants.ok)
 

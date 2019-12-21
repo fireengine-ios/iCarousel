@@ -217,17 +217,18 @@ final class HSCompletionPopUp: BasePopUpController {
 
             smartAlbumsAdditionsParentView.isHidden = true
             closeButton.isHidden = true
+
         case .smash:
             hiddenAlbumParentView.arrangedSubviews.forEach { $0.isHidden = true }
             bottomButtonParentView.isHidden = true
 
-            titleLabel.text = "Saved successfully!"
+            titleLabel.text = TextConstants.smashSuccessedAlertTitle
             titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
             titleLabel.textColor = UIColor.lrLightBrownishGrey
-            
-            smartAlbumTitleLabel.text = "What would you like to do?"
+
+            smartAlbumTitleLabel.text = TextConstants.smashSuccessedAlertSecondTitle
             smartAlbumTitleLabel.textColor = ColorConstants.darkBlueColor
-            smartAlbumDescriptionLabel.text = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin."
+            smartAlbumDescriptionLabel.text = TextConstants.smashSuccessedAlertDescription
         }
 
         previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")

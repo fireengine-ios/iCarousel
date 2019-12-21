@@ -1348,6 +1348,14 @@
 "hide_successed_alert_people_album_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 "hide_successed_alert_do_not_show_this_message" = "Don’t show this message.";
 "hide_successed_alert_view_people_album" = "View People Album";
+
+"smash_successed_alert_title" = "Saved successfully!";
+"smash_successed_alert_second_title" = "What would you like to do?";
+"smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+
+"smash_successed_simple_alert_title" = "Saved successfully!";
+"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+
 /*carousel pager*/
 "carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
 "carousel_view_first_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 1";

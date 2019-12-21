@@ -1603,6 +1603,13 @@ struct TextConstants {
     static let hideSuccessedAlertWithPeopleAlbumTitle = NSLocalizedString("hide_successed_alert_with_people_album_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideSuccessedAlertTitle = NSLocalizedString("hide_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let smashSuccessedAlertTitle = NSLocalizedString("smash_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedAlertSecondTitle = NSLocalizedString("smash_successed_alert_second_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedAlertDescription = NSLocalizedString("smash_successed_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let smashSuccessedSimpleAlertTitle = NSLocalizedString("smash_successed_simple_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashSuccessedSimpleAlertDescription = NSLocalizedString("smash_successed_simple_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     //MARK: -Carousel Pager Header
     static let carouselViewFirstPageText = NSLocalizedString("carousel_view_first_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let carouselViewFirstPageTitle = NSLocalizedString("carousel_view_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
