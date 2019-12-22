@@ -38,10 +38,10 @@ final class HiddenPhotosDataSource: NSObject {
     private var selectedItems = [Item]()
     
     private var showGroups: Bool {
-        return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .sizeZA, .timeUp, .timeDown])
+        return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .timeUp, .timeDown])
     }
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules = .timeUp
     private(set) var isSelectionStateActive = false
     private var isPaginationDidEnd = false
     
