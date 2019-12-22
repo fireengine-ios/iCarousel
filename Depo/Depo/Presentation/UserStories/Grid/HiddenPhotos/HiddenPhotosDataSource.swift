@@ -134,7 +134,7 @@ extension HiddenPhotosDataSource {
         }
     }
     
-    func remove(items: [Item]) {
+    func remove(items: [Item], completion: @escaping VoidHandler) {
         dispatchQueue.async { [weak self] in
             guard let self = self else {
                 return
@@ -154,7 +154,9 @@ extension HiddenPhotosDataSource {
                         if !deleteResult.sections.isEmpty {
                             self.collectionView.deleteSections(deleteResult.sections)
                         }
-                    }, completion: nil)
+                    }, completion: {_ in
+                        completion()
+                    })
                 }
             }
         }
@@ -162,6 +164,7 @@ extension HiddenPhotosDataSource {
         let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
         let firItems = items.filter { $0.fileType.isContained(in: types) }
         removeSlider(items: firItems)
+        completion()
     }
     
     func removeSlider(items: [BaseDataSourceItem]) {

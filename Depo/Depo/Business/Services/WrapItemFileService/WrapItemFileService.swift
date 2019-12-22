@@ -82,7 +82,9 @@ class WrapItemFileService: WrapItemFileOperations {
             //TODO: - Need change status to TRASHED
             MediaItemOperationsService.shared.deleteItems(files, completion: {
                 success?()
+                //TODO: - Need to replace deleteItems with moveToTrash for delegates
                 ItemOperationManager.default.deleteItems(items: files)
+                ItemOperationManager.default.moveToTrash(items: files)
             })
         }
         
