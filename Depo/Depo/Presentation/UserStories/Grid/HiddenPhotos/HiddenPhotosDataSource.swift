@@ -103,33 +103,30 @@ extension HiddenPhotosDataSource {
         albumSlider?.finishLoadAlbums()
     }
     
-    func append(items: [Item]) {
+    func append(items: [Item], completion: @escaping VoidHandler) {
         if items.isEmpty {
             isPaginationDidEnd = true
         }
         
-        if allItems.isEmpty {
-            allItems = [items]
-            collectionView.reloadData()
-        } else {
-            dispatchQueue.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                let insertResult = self.insert(newItems: items)
-                guard !insertResult.indexPaths.isEmpty else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.collectionView.performBatchUpdates({
-                        if !insertResult.sections.isEmpty {
-                            self.collectionView.insertSections(insertResult.sections)
-                        }
-                        self.collectionView.insertItems(at: insertResult.indexPaths)
-                    }, completion: nil)
-                }
+        dispatchQueue.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let insertResult = self.insert(newItems: items)
+            guard !insertResult.indexPaths.isEmpty else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.performBatchUpdates({
+                    if !insertResult.sections.isEmpty {
+                        self.collectionView.insertSections(insertResult.sections)
+                    }
+                    self.collectionView.insertItems(at: insertResult.indexPaths)
+                }, completion: { _ in
+                    completion()
+                })
             }
         }
     }
@@ -255,8 +252,9 @@ extension HiddenPhotosDataSource {
         
         for item in newItems {
             autoreleasepool {
-                if let lastItem = allItems.last?.last {
-                    let insertResult: InsertItemResult?
+                let insertResult: InsertItemResult?
+                if !allItems.isEmpty,
+                    let lastItem = allItems.last?.last {
                     switch sortedRule {
                     case .timeUp, .timeDown:
                         insertResult = addByDate(lastItem: lastItem, newItem: item)
@@ -267,14 +265,16 @@ extension HiddenPhotosDataSource {
                     default:
                         insertResult = nil
                     }
-                    
-                    if let indexPath = insertResult?.indexPath {
-                        insertedIndexPaths.append(indexPath)
-                    }
-                    
-                    if let section = insertResult?.section {
-                        insertedSections.insert(section)
-                    }
+                } else {
+                    insertResult = appendSection(with: item)
+                }
+                
+                if let indexPath = insertResult?.indexPath {
+                    insertedIndexPaths.append(indexPath)
+                }
+                
+                if let section = insertResult?.section {
+                    insertedSections.insert(section)
                 }
             }
         }

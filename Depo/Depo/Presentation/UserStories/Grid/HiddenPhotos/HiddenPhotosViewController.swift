@@ -74,7 +74,6 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
             
             self.collectionView.refreshControl?.endRefreshing()
             self.hideSpinner()
-            self.checkEmptyView()
             self.setMoreButton()
         }
     }
@@ -162,7 +161,9 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     func didLoadPhoto(items: [Item]) {
-        dataSource.append(items: items)
+        dataSource.append(items: items) { [weak self] in
+            self?.checkEmptyView()
+        }
     }
     
     func didLoadAlbum(items: [BaseDataSourceItem]) {
