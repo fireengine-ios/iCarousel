@@ -75,8 +75,12 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
             
             self.collectionView.refreshControl?.endRefreshing()
             self.hideSpinner()
-            self.emptyView.isHidden = !self.dataSource.isEmpty
+            self.setMoreButton()
         }
+    }
+    
+    private func checkEmptyView() {
+        emptyView.isHidden = !dataSource.isEmpty
     }
 }
 
@@ -158,7 +162,9 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     func didLoadPhoto(items: [Item]) {
-        dataSource.append(items: items)
+        dataSource.append(items: items) { [weak self] in
+            self?.checkEmptyView()
+        }
     }
     
     func didLoadAlbum(items: [BaseDataSourceItem]) {
@@ -377,7 +383,7 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didUnhide(items: [WrapData]) {
-        dataSource.remove(items: items)
+        remove(items: items)
     }
     
     func didUnhide(albums: [AlbumItem]) {
@@ -385,10 +391,16 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func moveToTrash(items: [Item]) {
-        dataSource.remove(items: items)
+        remove(items: items)
     }
     
     func moveToTrash(albums: [AlbumItem]) {
         dataSource.removeSlider(items: albums)
+    }
+    
+    private func remove(items: [Item]) {
+        dataSource.remove(items: items) { [weak self] in
+            self?.checkEmptyView()
+        }
     }
 }
