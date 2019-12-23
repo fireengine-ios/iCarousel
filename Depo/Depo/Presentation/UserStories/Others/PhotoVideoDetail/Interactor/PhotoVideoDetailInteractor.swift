@@ -156,14 +156,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
         
         switch type {
-        case .delete:
-            ItemOperationManager.default.deleteItems(items: [removedObject])
-        case .hide:
-            ItemOperationManager.default.didHide(items: [removedObject])
-        case .unhide:
-            ItemOperationManager.default.didUnhide(items: [removedObject])
+        case .hide, .unhide, .delete:
+            ///its already being called from different place, we dont need to call
+            break
         case .removeFromAlbum, .removeFromFaceImageAlbum:
-             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
         default:
             break
         }
