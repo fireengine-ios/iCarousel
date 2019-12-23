@@ -16,6 +16,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?)
     
+    func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
+    
     func delete(item: [BaseDataSourceItem])
     
     func hide(items: [BaseDataSourceItem])
