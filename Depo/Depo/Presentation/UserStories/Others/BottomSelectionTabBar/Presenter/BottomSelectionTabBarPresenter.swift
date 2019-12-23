@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .unhide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
             case .smash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .delete:
@@ -58,6 +60,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
             case .removeAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
+            case .moveToTrash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             default:
                 break
             }
@@ -149,6 +153,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .unhide:
+                //TODO: need to setup
+                self.basePassingPresenter?.stopModeSelected()
             case .smash:
                 
                 RouterVC().getViewControllerForPresent()?.showSpinner()

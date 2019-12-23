@@ -408,7 +408,8 @@ final class MediaItemOperationsService {
                     }
                 }
 
-                deletedItems.append(contentsOf: allSavedItems)
+                let notHidden = allSavedItems.filter { !$0.status.isContained(in: [.hidden]) }
+                deletedItems.append(contentsOf: notHidden)
                 
                 group.enter()
                 
@@ -960,6 +961,32 @@ final class MediaItemOperationsService {
                 let filteredItems = wrapData.filter { !existedUUIDS.contains($0.uuid) }
                 print("--- filtered \(wrapData.count - filteredItems.count) existed uuids")
                 completion(filteredItems)
+            }
+        }
+    }
+    
+    
+    //MARK: - Hide
+    func hide(_ items: [WrapData], completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                return
+            }
+            
+            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+            let uuid = #keyPath(MediaItem.uuid)
+            
+            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
+            
+            self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
+                guard let self = self else {
+                    assertionFailure("Unexpected MediaItemOperationsService == nil")
+                    return
+                }
+                mediaItems.forEach { $0.status = ItemStatus.hidden.valueForCoreDataMapping() }
+                self.coreDataStack.saveDataForContext(context: context) {
+                    completion()
+                }
             }
         }
     }

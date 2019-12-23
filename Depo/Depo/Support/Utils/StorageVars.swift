@@ -25,6 +25,9 @@ protocol StorageVars: class {
     var blockedUsers: [String : Date] { get set }
     var shownCampaignInstaPickWithDaysLeft: Date? { get set }
     var shownCampaignInstaPickWithoutDaysLeft: Date? { get set }
+    var hiddenPhotoInPeopleAlbumPopUpCheckBox: Bool { get set }
+    var smashPhotoPopUpCheckBox: Bool { get set }
+    var smartAlbumWarningPopUpCheckBox: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -149,5 +152,23 @@ final class UserDefaultsVars: StorageVars {
     var shownCampaignInstaPickWithoutDaysLeft: Date? {
         get { return userDefaults.object(forKey: showCampaignInstaPickWithoutDaysLeftKey) as? Date }
         set { userDefaults.set(newValue, forKey: showCampaignInstaPickWithoutDaysLeftKey) }
+    }
+    
+    private let hiddenPhotoInPeopleAlbumPopUpCheckBoxKey = "hiddenPhotoInPeopleAlbumPopUpCheckBox"
+    var hiddenPhotoInPeopleAlbumPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: hiddenPhotoInPeopleAlbumPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: hiddenPhotoInPeopleAlbumPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let smashPhotoPopUpCheckBoxKey = "smashPhotoPopUpCheckBox"
+    var smashPhotoPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: smashPhotoPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: smashPhotoPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let smartAlbumWarningPopUpCheckBoxKey = "smartAlbumWarningPopUpCheckBox"
+    var smartAlbumWarningPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
     }
 }

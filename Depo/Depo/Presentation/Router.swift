@@ -1086,4 +1086,8 @@ class RouterVC: NSObject {
     func campaignDetailViewController() -> UIViewController {
         return CampaignDetailViewController.initFromNib()
     }
+
+    func hiddenPhotosViewController() -> UIViewController {
+        return HiddenPhotosViewController.initFromNib()
+    }
 }

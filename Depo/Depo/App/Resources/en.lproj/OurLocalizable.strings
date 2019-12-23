@@ -341,6 +341,7 @@
 "All Files" = "All Files";
 "Choose" = "Choose";
 "Hide" = "Hide";
+"Unhide" = "Unhide";
 "Show" = "Show";
 "No results found for your query." = "No results found for your query.";
 "SUGGESTIONS" = "SUGGESTIONS";
@@ -433,6 +434,7 @@
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
+"smart_album_hidden" = "Hidden";
 
 /*???*/
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
@@ -1327,6 +1329,34 @@
 
 "temporary_error" = "temporary error, please try again";
 
+"hide_single_photo_completion_alert_message" = "You will not see this photo lorem ipsum dolor sit amet. You can unhide it back lorem ipsum dolor…";
+
+"people_album_warning_alert_title_not_premium_and_no_image_grouping" = "İşlenmiş fotoğrafını bulamadık!";
+"people_album_warning_alert_title_not_premium_and_image_grouping_on" = "İstediğin kişileri bulamadın mı?";
+"people_album_warning_alert_title_premium_and_no_image_grouping" = "There is no proccessed picture!";
+
+"people_album_warning_message_not_premium_and_no_image_grouping" = "Kişilerinin fotğraflarını gizleyebilmek için Yüz/Nesne Gruplama özelliğini açık tutmalısın. Daha fazla kişi ve objeyi gruplandırmak için Premium Paket’i keşfet.";
+"people_album_warning_message_not_premium_and_image_grouping_on" = "Premium paketle sınırsız Yüz ve Nesne Gruplama yaparak istediğin kişinin fotoğrafları için toplu işlem yapabilirsin. ";
+"people_album_warning_message_premium_and_no_image_grouping" = "Kişilerinin fotğraflarını gizleyebilmek için Yüz Nesne Gruplama özelliğini açık tutmayı unutma.";
+
+"people_album_warning_button_not_premium_and_no_image_grouping" = "Yüz Gruplamayı Aç";
+"people_album_warning_button_not_premium_and_image_grouping_on" = "Mevcut kişilerle devam et";
+"people_album_warning_button_premium_and_no_image_grouping" = "F/I Activate";
+
+"hide_successed_alert_title" = "The picture is hidden successfully";
+"hide_successed_alert_with_people_album_title" = "The picture is hidden now! ";
+"hide_successed_alert_people_album_title" = "Hide pictures of a person !";
+"hide_successed_alert_people_album_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+"hide_successed_alert_do_not_show_this_message" = "Don’t show this message.";
+"hide_successed_alert_view_people_album" = "View People Album";
+
+"smash_successed_alert_title" = "Saved successfully!";
+"smash_successed_alert_second_title" = "What would you like to do?";
+"smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+
+"smash_successed_simple_alert_title" = "Saved successfully!";
+"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+
 /*carousel pager*/
 "carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
 "carousel_view_first_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 1";
@@ -1334,3 +1364,11 @@
 "carousel_view_second_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 2";
 "carousel_view_third_page_title" = "Merge your photos. Lorem ipsum! 3";
 "carousel_view_third_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 3";
+"hidden_bin_album_slider_title" = "My Hidden Albums";
+"hidden_bin_album_slider_empty" = "There is no deleted album yet.";
+"hidden_bin_empty" = "There is no deleted item yet.";
+"hidden_bin_navbar_title" = "Hidden";
+"unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
+
+/*divorce card*/
+"divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
