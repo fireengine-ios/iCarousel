@@ -154,8 +154,15 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     UIApplication.showErrorAlert(message: text)
                 }
             case .unhide:
-                //TODO: need to setup
-                self.basePassingPresenter?.stopModeSelected()
+                //TODO: will be another task to implement analytics calls
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.unhide(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .smash:
                 
                 RouterVC().getViewControllerForPresent()?.showSpinner()

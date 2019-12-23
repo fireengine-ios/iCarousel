@@ -39,7 +39,7 @@ final class HiddenPhotosDataLoader {
     private var currentAlbumsPage = 0
     private var currentLoadingAlbumType: AlbumsOrder = .people
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules = .timeUp
     
     private var photoTask: URLSessionTask?
     private var albumsTask: URLSessionTask?
@@ -267,8 +267,8 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenAlbums(sortBy: sortedRule.sortingRules,
-                                                sortOrder: sortedRule.sortOder,
+        albumsTask = hiddenService.hiddenAlbums(sortBy: .date,//sortedRule.sortingRules,
+                                                sortOrder: .desc,//sortedRule.sortOder,
                                                 page: currentAlbumsPage,
                                                 size: albumPageSize,
                                                 handler: { result in

@@ -73,7 +73,7 @@ final class AlbumsSliderDataSource: NSObject {
         }
     }
     
-    func removeItems(_ deletedItems: [BaseDataSourceItem]) {
+    func removeItems(_ deletedItems: [BaseDataSourceItem], completion: @escaping VoidHandler) {
         if deletedItems.isEmpty {
             return
         }
@@ -94,7 +94,9 @@ final class AlbumsSliderDataSource: NSObject {
         
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: deletedIndexPaths)
-        }, completion: nil)
+        }, completion: { _ in
+            completion()
+        })
     }
     
     func reset() {

@@ -990,4 +990,26 @@ final class MediaItemOperationsService {
             }
         }
     }
+    
+    //MARK: - Unhide
+    func unhide(_ items: [WrapData], completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                return
+            }
+            
+            let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == false AND \(#keyPath(MediaItem.uuid)) IN %@", items.compactMap { $0.uuid })
+            
+            self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
+                guard let self = self else {
+                    assertionFailure("Unexpected MediaItemOperationsService == nil")
+                    return
+                }
+                mediaItems.forEach { $0.status = ItemStatus.active.valueForCoreDataMapping() }
+                self.coreDataStack.saveDataForContext(context: context) {
+                    completion()
+                }
+            }
+        }
+    }
 }
