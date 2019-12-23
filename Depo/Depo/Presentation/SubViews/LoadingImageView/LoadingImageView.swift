@@ -133,7 +133,7 @@ final class LoadingImageView: UIImageView {
         loadingImageViewDelegate?.onLoadingImageCanceled()
     }
 
-    ///For detail view only, we need to get original file Data in order to show gif.
+    ///For detail view only, we need to get file Data in order to check/show gif.
     func loadImage(with object: Item?, smooth: Bool = false) {
         guard let object = object, path != object.patchToPreview else {
             cancelLoadRequest()
@@ -146,7 +146,6 @@ final class LoadingImageView: UIImageView {
         }
         
         path = object.patchToPreview
-//        activity.startAnimating()
         
         loadImageData(object: object, smooth: smooth)
     }
@@ -156,46 +155,12 @@ final class LoadingImageView: UIImageView {
             originalImage = nil
             activity.startAnimating()
         }
-        
-        //TODO: check object type beforehand, so we have no need to download original data for non gif
-        
+
         url = filesDataSource.getImageData(item: object) { [weak self] imageData in
             self?.finishLoading(data: imageData)
                 
         }
-//        url = filesDataSource.getImageData(for: object) { [weak self] data in
-//
-//                   guard self?.path == object.patchToPreview else {
-//
-//                       return
-//
-//                   }
-//
-//
-//
-//                   self?.loadImage(data: data)
-//
-//               }
-        
-        
-        
     }
-    //----
-    
-//    private func loadImage(data: Data?) {
-//        var image:UIImage?
-//        if let data = data {
-//            let format = ImageFormat.get(from: data)
-//            switch format {
-//            case .gif:
-//                image = UIImage(gifData: data)
-//            default:
-//                image = UIImage(data: data)
-//            }
-//    finishImageLoading(image)
-//    }
-    
-    //-----------------------------
     
     func loadImage(with path: PathForItem, smooth: Bool = false) {
         cancelLoadRequest()
