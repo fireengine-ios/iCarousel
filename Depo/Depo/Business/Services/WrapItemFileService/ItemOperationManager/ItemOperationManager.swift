@@ -136,7 +136,7 @@ extension ItemOperationManagerViewProtocol {
 class ItemOperationManager: NSObject {
     
     static let `default` = ItemOperationManager()
-    private var views =  MulticastDelegate<ItemOperationManagerViewProtocol>()
+    private var views = MulticastDelegate<ItemOperationManagerViewProtocol>()
     
     private var currentUploadingObject: WrapData?
     private var currentUploadProgress: Float = 0
