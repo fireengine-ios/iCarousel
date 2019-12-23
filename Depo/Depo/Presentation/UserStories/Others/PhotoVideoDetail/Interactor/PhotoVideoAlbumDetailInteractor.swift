@@ -21,7 +21,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig, style: .black, tintColor: nil)
             }
             
-            if barConfig.elementsConfig.contains(.smash), (selectedItem.fileType == .video || selectedItem.name?.isNameExtensionGif() == true) {
+            if barConfig.elementsConfig.contains(.smash), (selectedItem.fileType == .video || selectedItem.name?.isPathExtensionGif() == true) {
                 var newConfigElements = barConfig.elementsConfig
                 newConfigElements.remove(.smash)
                 barConfig = EditingBarConfig(elementsConfig: newConfigElements, style: .black, tintColor: nil)
