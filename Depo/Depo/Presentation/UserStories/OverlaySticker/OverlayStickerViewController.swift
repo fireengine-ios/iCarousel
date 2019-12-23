@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 final class OverlayStickerViewController: ViewController {
     
@@ -19,8 +20,9 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private weak var gifButton: UIButton!
     @IBOutlet private weak var stickerButton: UIButton!
     @IBOutlet private var OverlayStickerViewControllerDesigner: OverlayStickerViewControllerDesigner!
-    
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
+    
+    private let uploadService = UploadService()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -57,6 +59,8 @@ final class OverlayStickerViewController: ViewController {
                 self.gifButton.tintColor = UIColor.gray
                 self.gifButton.setTitleColor(UIColor.gray, for: .normal)
                 stickersCollectionView.reloadData()
+            case .video:
+                break
             }
         }
     }
@@ -89,17 +93,48 @@ final class OverlayStickerViewController: ViewController {
     }
     
     @objc func applyIconTapped(sender: UIButton) {
-        self.showSpinner()
+        
+        
         overlayingStickerImageView.getResult(resultName: imageName ?? "pictureWitImage") { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.hideSpinner()
-            case .failure(let error):
-                self?.hideSpinner()
-                UIApplication.showErrorAlert(message: error.description)
+            
+            let popUp = PopUpController.with(title: TextConstants.save, message: TextConstants.smashPopUpMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, firstUrl: nil, secondUrl: nil, firstAction: { popup in
+                popup.close()
+            }) { popup in
+                popup.close()
+                self?.showFullscreenHUD(with: nil, and: {})
+                self?.saveResult(result: result)
             }
+             UIApplication.topController()?.present(popUp, animated: true, completion: nil)
         }
     }
+    
+    private func saveResult(result: CreateOverlayStickersResult) {
+        
+        switch result {
+        case .success(let result):
+            switch result.type {
+            case .gif: break
+            case .image:
+                self.saveImageToLibrary(url: result.url) { isSavedInLibrary in
+                }
+                self.uploadImage(contentURL: result.url, completion: { (isUploaded) in
+                    self.hideSpinnerIncludeNavigationBar()
+                })
+            case .video:
+                
+                self.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
+                }
+                self.uploadVideo(contentURL: result.url, completion: { (isUploaded) in
+                    self.hideSpinnerIncludeNavigationBar()
+                })
+            }
+            
+        case .failure(let error):
+            self.hideSpinnerIncludeNavigationBar()
+            UIApplication.showErrorAlert(message: error.description)
+        }
+    }
+    
     
     @objc func closeIconTapped(sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -113,11 +148,80 @@ final class OverlayStickerViewController: ViewController {
         overlayingStickerImageView.image = selectedImage
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         title = TextConstants.smashScreenTitle
         navigationBarWithGradientStyle()
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = applyButton
+    }
+    
+    
+    
+    private func uploadVideo(contentURL: URL, completion: @escaping (Bool) -> Void) {
+        guard let videoData = try? Data(contentsOf: contentURL) else {
+            completion(false)
+            return
+        }
+        
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let item = WrapData(videoData: videoData)
+        item.patchToPreview = PathForItem.remoteUrl(url)
+        
+        uploadService.uploadFileList(items: [item],
+                                     uploadType: .syncToUse,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: {
+                                        completion(true) },
+                                     fail: { errorResponce in
+                                        completion(false) },
+                                     returnedUploadOperation: {_ in })
+    }
+    
+    private func uploadImage(contentURL: URL, completion: @escaping (Bool) -> Void) {
+        
+        guard let imageData = try? Data(contentsOf: contentURL) else {
+            completion(false)
+            return
+        }
+        
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let item = WrapData(imageData: imageData)
+        item.patchToPreview = PathForItem.remoteUrl(url)
+        
+        uploadService.uploadFileList(items: [item],
+                                     uploadType: .syncToUse,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: {
+                                        completion(true) },
+                                     fail: { errorResponce in
+                                        completion(false) },
+                                     returnedUploadOperation: {_ in })
+    }
+    
+    private func saveVideoToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+        }) { saved, error in
+            if saved {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    private func saveImageToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: url)
+        }) { saved, error in
+            if saved {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
 }
 
@@ -128,7 +232,6 @@ extension OverlayStickerViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         return collectionView.dequeue(cell: StickerCollectionViewCell.self, for: indexPath)
     }
 }

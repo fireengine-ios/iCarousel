@@ -87,9 +87,8 @@ final class OverlayAnimationService {
             if frameCount > 1 {
                 self.generateGif(photos: frames, filename: "\(resultName)", duration: self.duration) { result in
                     switch result {
-                    case let .success(url):
-                        
-                        guard let data = try? Data(contentsOf: url) else {
+                    case let .success(successResult):
+                        guard let data = try? Data(contentsOf: successResult.url) else {
                             completion(.failure(.unknown))
                             return
                         }
@@ -97,8 +96,7 @@ final class OverlayAnimationService {
                         let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
                         
                         GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
-                            self.saveVideo(url: tempUrl)
-                            completion(.success(true))
+                            completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
                         })
                         
                     case let .failure(error):
@@ -115,7 +113,7 @@ final class OverlayAnimationService {
                 let url = self.saveImage(image: image, fileName: resultName)
                 
                 if let url = url {
-                    completion(.success(true))
+                    completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .image)))
                 } else {
                     completion(.failure(.unknown))
                 }
@@ -211,7 +209,7 @@ final class OverlayAnimationService {
         return image
     }
     
-    private func generateGif(photos: [UIImage], filename: String, duration: TimeInterval, completion: @escaping (OverlayStickerUrlResult) -> ()) {
+    private func generateGif(photos: [UIImage], filename: String, duration: TimeInterval, completion: @escaping (CreateOverlayStickersResult) -> ()) {
         
         let photoFrameDuration = duration / Double(photos.count)
         
@@ -230,7 +228,7 @@ final class OverlayAnimationService {
         
         if encoder.encode(toFile: path) {
             let url = URL(fileURLWithPath: path)
-            completion(.success(url))
+            completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .gif)))
         } else {
             completion(.failure(.unknown))
         }
@@ -242,17 +240,5 @@ final class OverlayAnimationService {
             image.draw(in: CGRect(origin: CGPoint.zero, size: targetSize))
         }
         return image
-    }
-    
-    
-    private func saveVideo(url: URL) {
-        
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-        }) { saved, error in
-            if saved {
-                
-            }
-        }
     }
 }

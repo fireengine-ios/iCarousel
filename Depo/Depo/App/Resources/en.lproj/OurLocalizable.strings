@@ -75,6 +75,7 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "smash_screen_title" = "Smash effect";
+"smash_popup_message" = "This edited photo will be saved as a new photo in your device gallery";
 "You can open settings and cancel subscption." = "You can visit iTunes to cancel your package.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";

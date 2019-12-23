@@ -650,6 +650,7 @@ struct TextConstants {
 
     //MARK: Smash Screen
     static let smashScreenTitle = NSLocalizedString("smash_screen_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashPopUpMessage = NSLocalizedString("smash_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Select Name
     static let selectNameTitleFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

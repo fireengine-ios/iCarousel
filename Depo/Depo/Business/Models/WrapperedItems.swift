@@ -594,8 +594,6 @@ protocol  Wrappered {
 
 class WrapData: BaseDataSourceItem, Wrappered {
     
-    
-    
     var coreDataObjectId: NSManagedObjectID?
     
     var id: Int64?
@@ -982,6 +980,23 @@ class WrapData: BaseDataSourceItem, Wrappered {
 
         let creationDate = Date()
         super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
+    }
+    
+    init(videoData: Data) {
+        fileData = videoData
+        fileSize = Int64(videoData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+//        duration = "0.02"
+
+        let creationDate = Date()
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: true)
         
         if let fileName = name {
             md5 = "\(fileName)\(fileSize)"

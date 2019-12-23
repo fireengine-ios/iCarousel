@@ -12,10 +12,15 @@ import YYImage
 enum AttachedEntityType {
     case gif
     case image
+    case video
 }
 
-typealias CreateOverlayStickersResult = Result<Bool, CreateOverlayStickerError>
-typealias OverlayStickerUrlResult = Result<URL, CreateOverlayStickerError>
+struct CreateOverlayStickersSuccessResult {
+    let url: URL
+    let type: AttachedEntityType
+}
+
+typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
 
 final class OverlayStickerImageView: UIImageView {
     
@@ -73,11 +78,13 @@ final class OverlayStickerImageView: UIImageView {
     func getResult(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
         
         if subviews.contains(where: { $0 is YYAnimatedImageView}) {
-            self.subviews.forEach({ $0.removeFromSuperview()})
+            self.subviews.forEach({ $0.isHidden = true})
             
             guard let img = UIImage.imageWithView(view: self) else {
                 return completion(.failure(.unknown))
             }
+            
+            self.subviews.forEach({ $0.isHidden = false})
             
             overlayAnimationService.getResult(attachments: attachments, resultName: resultName, image: img, completion: completion)
             
@@ -88,7 +95,7 @@ final class OverlayStickerImageView: UIImageView {
                 completion(.failure(.unknown))
                 return
             }
-            
+
             saveImage(image: sticker, fileName: resultName, completion: completion)
         }
     }
@@ -113,22 +120,11 @@ final class OverlayStickerImageView: UIImageView {
                 return
             }
             try data.write(to: path)
-            savePhoto(url: path)
-            completion(.success(true))
+            completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
         } catch {
             completion(.failure(.unknown))
         }
     }
-    
-    private func savePhoto(url: URL) {
-           PHPhotoLibrary.shared().performChanges({
-               PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: url)
-           }) { saved, error in
-               if saved {
-                   print("All saved")
-               }
-           }
-       }
     
     private func createGifAttachment(url: URL) {
         setupTrasBinFrame()
