@@ -291,8 +291,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .unhide)
-            
-            self?.player.remove(listItems: remoteItems)
+            ///In case there gonna be be hidden audio files
+            ///self?.player.remove(listItems: remoteItems)
             self?.fileService.unhide(items: remoteItems, success: self?.succesAction(elementType: .unhide), fail: self?.failAction(elementType: .unhide))
         }
         

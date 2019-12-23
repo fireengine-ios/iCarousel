@@ -998,10 +998,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-            let uuid = #keyPath(MediaItem.uuid)
-            
-            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
+            let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == false AND \(#keyPath(MediaItem.uuid)) IN %@", items.compactMap { $0.uuid })
             
             self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
                 guard let self = self else {

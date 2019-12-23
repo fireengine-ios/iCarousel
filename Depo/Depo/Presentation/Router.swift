@@ -725,24 +725,31 @@ class RouterVC: NSObject {
     
     // MARK: Hidden View Controllers
     
-    func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+    func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
         let controller = PhotoVideoDetailModuleInitializer.initializeHiddenAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                                selectedItem: fileObject,
                                                                                                allItems: items,
                                                                                                albumUUID: albumUUID,
                                                                                                albumItem: albumItem)
-        let c = controller as! PhotoVideoDetailViewController
+        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
+            assertionFailure()
+            return nil
+        }
+        
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+        return photoVideoDetailViewController
     }
     
-    func filesDetailHiddenViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+    func filesDetailHiddenViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController? {
         let controller = PhotoVideoDetailModuleInitializer.initializeHiddenViewController(with: "PhotoVideoDetailViewController",
                                                                                           selectedItem: fileObject,
                                                                                           allItems: items)
-        let c = controller as! PhotoVideoDetailViewController
+        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
+            assertionFailure()
+            return nil
+        }
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+        return photoVideoDetailViewController
     }
     
     // MARK: Albums list
