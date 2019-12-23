@@ -20,9 +20,11 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             } else {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig, style: .black, tintColor: nil)
             }
-            if barConfig.elementsConfig.contains(.smash), (selectedItem.fileType == .video || selectedItem.name?.split(separator: ".").last?.lowercased() == "gif")  {
-                    var newConfig = barConfig.elementsConfig
-                newConfig.remove(.smash)
+            
+            if barConfig.elementsConfig.contains(.smash), (selectedItem.fileType == .video || selectedItem.name?.isNameExtensionGif() == true) {
+                var newConfigElements = barConfig.elementsConfig
+                newConfigElements.remove(.smash)
+                barConfig = EditingBarConfig(elementsConfig: newConfigElements, style: .black, tintColor: nil)
             }
             
             return barConfig

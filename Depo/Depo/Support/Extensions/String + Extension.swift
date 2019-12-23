@@ -57,3 +57,20 @@ extension Optional where Wrapped == String {
         return !(self?.isEmpty ?? true)
     }
 }
+
+//MARK: - file NAME extension related
+
+extension String {
+    
+    func getFileNameExtension() -> String? {
+        guard let fileNameExtensionSlice = self.split(separator: ".").last else {
+            return nil
+        }
+        return String(fileNameExtensionSlice)
+    }
+    
+    func isNameExtensionGif() -> Bool {
+        return getFileNameExtension()?.lowercased() == "gif"
+    }
+    
+}
