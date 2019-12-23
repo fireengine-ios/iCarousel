@@ -51,32 +51,25 @@ final class CoreDataStack_ios10: CoreDataStack {
     private(set) var isReady = false
     
     private let migrator = CoreDataMigrator()
-    
-    private var container: NSPersistentContainer?
-//    private let container: NSPersistentContainer = {
-//        let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: CoreDataMigrationModel.current.managedObjectModel)
-//        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
-//        container.viewContext.automaticallyMergesChangesFromParent = true
-//        return container
-//    }()
+
+    lazy var container: NSPersistentContainer = {
+        let model = NSManagedObjectModel.managedObjectModel(forName: CoreDataConfig.modelBaseName, directory: CoreDataConfig.modelDirectoryName)
+        
+        let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: model)
+        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        return container
+    }()
     
     var mainContext: NSManagedObjectContext {
-        guard let container = container else {
-            DebugAnalyticsService.log(event: .coreDataError)
-            fatalError()
-        }
-        
         let context = container.viewContext
         
         return context
     }
     
     var newChildBackgroundContext: NSManagedObjectContext {
-        guard let container = container else {
-            DebugAnalyticsService.log(event: .coreDataError)
-            fatalError()
-        }
-        
         /// don't set parent for newBackgroundContext(), it will crash
         /// with error "Context already has a coordinator; cannot replace"
         return container.newBackgroundContext()
@@ -87,8 +80,8 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     
     func setup(completion: @escaping VoidHandler) {
-        migrateStoreIfNeeded { [weak self] in
-            self?.container?.loadPersistentStores { description, error in
+        migrateIfNeeded { [weak self] in
+            self?.container.loadPersistentStores { description, error in
                 guard error == nil else {
                     fatalError("unable to load store \(error!)")
                 }
@@ -103,9 +96,9 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     // MARK: - Loading
     
-    private func migrateStoreIfNeeded(completion: @escaping VoidHandler) {
+    private func migrateIfNeeded(completion: @escaping VoidHandler) {
         DispatchQueue.toBackground { [weak self] in
-            self?.migrator.migrateStoreIfNeeded(at: CoreDataConfig.storeUrl)
+            self?.migrator.migrateStoreIfNeeded(at: CoreDataConfig.storeUrl, toVersion: .latest)
             DispatchQueue.toMain {
                 completion()
             }
@@ -113,6 +106,6 @@ final class CoreDataStack_ios10: CoreDataStack {
     }
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        container?.performBackgroundTask(block)
+        container.performBackgroundTask(block)
     }
 }

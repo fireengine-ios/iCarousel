@@ -5930,13 +5930,26 @@
 		B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
-		B51805E8234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
-		B51805E9234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
-		B51805EA234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */; };
 		B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
+		B52BAC5723AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5C23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5E23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5F23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6223AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6323AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6423AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6723AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D82216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
 		B5390D83216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
@@ -6058,6 +6071,10 @@
 		B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */; };
 		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B571FC8C23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8D23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8E23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
 		B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B577AE2022D4B8F600D074BA /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
@@ -10873,11 +10890,14 @@
 		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
-		B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationModel.swift; sourceTree = "<group>"; };
 		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConfig.swift; sourceTree = "<group>"; };
+		B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationStep.swift; sourceTree = "<group>"; };
+		B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
+		B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
 		B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
@@ -10949,6 +10969,7 @@
 		B56FBB392122C9AA004F4A59 /* TermsOfUseViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewInput.swift; sourceTree = "<group>"; };
 		B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewOutput.swift; sourceTree = "<group>"; };
 		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
+		B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersion.swift; sourceTree = "<group>"; };
 		B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstaPickProgressPopup.xib; sourceTree = "<group>"; };
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
@@ -15779,6 +15800,7 @@
 				8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */,
 				8C208672228D4FF1000BEDAD /* NSPersistentStoreCoordinator+Extensions.swift */,
 				8C208673228D4FF1000BEDAD /* NSManagedObject+Extensions.swift */,
+				B52BAC6523AE1FFD0051E21D /* NSManagedObjectModel */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -17327,6 +17349,15 @@
 			path = InstaPickProgressView;
 			sourceTree = "<group>";
 		};
+		B52BAC6523AE1FFD0051E21D /* NSManagedObjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */,
+				B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */,
+			);
+			path = NSManagedObjectModel;
+			sourceTree = "<group>";
+		};
 		B5390D7D2165F4F500A02002 /* QuickScrollImageLoader */ = {
 			isa = PBXGroup;
 			children = (
@@ -17602,8 +17633,10 @@
 			children = (
 				B51805EB234B69A800DC2E82 /* Mappings */,
 				B51805EC234B69B200DC2E82 /* Policies */,
-				B51805E7234B690400DC2E82 /* CoreDataMigrationModel.swift */,
 				B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */,
+				B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */,
+				B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */,
+				B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -25231,6 +25264,7 @@
 				0303A2462397D0D000907F42 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				0303A2472397D0D000907F42 /* SyncSettings.m in Sources */,
 				0303A2482397D0D000907F42 /* UserProfileInteractorOutput.swift in Sources */,
+				B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				0303A2492397D0D000907F42 /* IntroducePresenter.swift in Sources */,
 				0303A24A2397D0D000907F42 /* NumericConstants.swift in Sources */,
 				B56921F723ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */,
@@ -25333,6 +25367,7 @@
 				0303A2A82397D0D000907F42 /* URL+TrimmedQuery.swift in Sources */,
 				A705E3D723A22F42005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				0303A2A92397D0D000907F42 /* AugmentedRealityInitializer.swift in Sources */,
+				B571FC8E23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				0303A2AA2397D0D000907F42 /* PhoneVerificationConfigurator.swift in Sources */,
 				0303A2AB2397D0D000907F42 /* PhoneVerificationInitializer.swift in Sources */,
 				0303A2AC2397D0D000907F42 /* MyStoragePresenter.swift in Sources */,
@@ -25626,6 +25661,7 @@
 				0303A3C92397D0D000907F42 /* SyncContactsInteractorInput.swift in Sources */,
 				0303A3CA2397D0D000907F42 /* SyncContactsInteractorOutput.swift in Sources */,
 				0303A3CB2397D0D000907F42 /* SyncContactsInteractor.swift in Sources */,
+				B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				0303A3CC2397D0D000907F42 /* PackagesInteractorInput.swift in Sources */,
 				0303A3CD2397D0D000907F42 /* PrintModuleConfigurator.swift in Sources */,
 				0303A3CE2397D0D000907F42 /* SyncContactsRouterInput.swift in Sources */,
@@ -25803,6 +25839,7 @@
 				0303A4752397D0D000907F42 /* FreeUpSpacePopUp.swift in Sources */,
 				0303A4762397D0D000907F42 /* VisualMusicPlayerInteractor.swift in Sources */,
 				0303A4772397D0D000907F42 /* BaseFilesGreedModuleOutput.swift in Sources */,
+				B52BAC5E23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				0303A4782397D0D000907F42 /* SelectNameViewInput.swift in Sources */,
 				0303A4792397D0D000907F42 /* AccountParameters.swift in Sources */,
 				0303A47A2397D0D000907F42 /* PrintViewOutput.swift in Sources */,
@@ -25865,6 +25902,7 @@
 				0303A4B02397D0D000907F42 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				0303A4B12397D0D000907F42 /* PrepareQuickScroll.swift in Sources */,
 				0303A4B22397D0D000907F42 /* SmartAlbumsDataStorage.swift in Sources */,
+				B52BAC6323AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				0303A4B32397D0D000907F42 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
 				0303A4B42397D0D000907F42 /* MoreFilesActionsInteractorInput.swift in Sources */,
 				0303A4B52397D0D000907F42 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
@@ -26529,6 +26567,7 @@
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
+				B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
 				B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */,
@@ -26633,6 +26672,7 @@
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				8C0E8DA11FDEBDFF00789C91 /* AutoSyncPresenter.swift in Sources */,
+				B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				8C0E8DA31FDEBDFF00789C91 /* HomePageViewInput.swift in Sources */,
 				A217E43E21A5B09C0084AA37 /* LeavePremiumPresenter.swift in Sources */,
 				8C0E8DA41FDEBDFF00789C91 /* IntroduceModel.swift in Sources */,
@@ -26692,6 +26732,7 @@
 				8C0E8DC51FDEBDFF00789C91 /* RegistrationInitializer.swift in Sources */,
 				8C0B91A420170E9900A5BA81 /* ManageContactsViewController.swift in Sources */,
 				8C20867F228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
+				B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				8C0E8DC61FDEBDFF00789C91 /* HelpAndSupportInteractorInput.swift in Sources */,
 				8C8711701FDFF35800F66396 /* OperationProgressService.swift in Sources */,
 				892B015222DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
@@ -27082,6 +27123,7 @@
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
+				B571FC8D23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				8C0E8EEC1FDEBDFF00789C91 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				8C0E8EED1FDEBDFF00789C91 /* PhotoVideoDetailRouter.swift in Sources */,
 				8C0E8EEE1FDEBDFF00789C91 /* PhotoVideoDetailConfigurator.swift in Sources */,
@@ -27320,6 +27362,7 @@
 				CE343600224B5C6C00AFAABB /* FullscreenTextController.swift in Sources */,
 				8C0E8F6B1FDEBDFF00789C91 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
+				B52BAC6223AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				B5CDB34121787FEF006CFA50 /* Message.m in Sources */,
 				8C0E8F6D1FDEBDFF00789C91 /* UploadFilesSelectionInitializer.swift in Sources */,
 				8CD2B3B01FE7B3BA00280547 /* UIColor+Adjust.swift in Sources */,
@@ -27437,7 +27480,6 @@
 				8C0E8FA61FDEBDFF00789C91 /* AlbumDetailInteractor.swift in Sources */,
 				8C0E8FA71FDEBDFF00789C91 /* PasscodeSettingsInteractor.swift in Sources */,
 				B5C9526F2316975C00C06263 /* CoreDataStack.swift in Sources */,
-				B51805E9234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
@@ -28329,6 +28371,7 @@
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
 				B56921F123ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */,
+				B571FC8C23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */,
 				CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */,
 				A20CDB9E219D60A800CA9A67 /* PremiumView.swift in Sources */,
@@ -28351,6 +28394,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
@@ -28417,6 +28461,7 @@
 				CE51ACBA1EF90853005DCEE0 /* IntroduceModel.swift in Sources */,
 				8C0332972115F42D00E75EBC /* AnalyticsDimension.swift in Sources */,
 				8C6EF87F1F348B5C002AC795 /* BottomSelectionTabBarRouter.swift in Sources */,
+				B52BAC5723AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				CE51ACBF1EF90853005DCEE0 /* PasswordCell.swift in Sources */,
 				A2079916219F13CB00AD5037 /* PremiumInitializer.swift in Sources */,
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
@@ -28701,7 +28746,6 @@
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				4A0AC1412087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
-				B51805E8234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				7C1F89881F6FFE0300740177 /* ProgressCard.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				989BDE4622F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
@@ -29096,6 +29140,7 @@
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
+				B52BAC5C23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */,
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
@@ -29154,6 +29199,7 @@
 				89E51D4C22CA1116007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				C8DE09849CB5200793B94E8A /* SelectNameConfigurator.swift in Sources */,
 				F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */,
+				B52BAC6723AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */,
@@ -29534,7 +29580,6 @@
 				CE78487022A685FB00662219 /* HelpAndSupportPresenter.swift in Sources */,
 				CE78487222A685FB00662219 /* CreateStoryResponse.swift in Sources */,
 				985599C723017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
-				B51805EA234B690400DC2E82 /* CoreDataMigrationModel.swift in Sources */,
 				CE78487322A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				CE78487422A685FB00662219 /* PeriodicContactSyncDataSource.swift in Sources */,
 				CE78487522A685FB00662219 /* UserProfileInteractor.swift in Sources */,
@@ -29618,6 +29663,7 @@
 				CE7848BF22A685FB00662219 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */,
 				CE7848C122A685FB00662219 /* ActivityTimelineService.swift in Sources */,
+				B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
 				CE7848C422A685FB00662219 /* HelpAndSupportRouterInput.swift in Sources */,
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
@@ -29630,6 +29676,7 @@
 				CE7848CC22A685FB00662219 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE7848CD22A685FB00662219 /* MappingError.swift in Sources */,
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
+				B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
 				89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
@@ -29939,6 +29986,7 @@
 				CE7849DE22A685FB00662219 /* TermsAndServicesDataStorage.swift in Sources */,
 				CE7849DF22A685FB00662219 /* ProfilePasswordEnterView.swift in Sources */,
 				CE7849E022A685FB00662219 /* TermsAndServicesRouterInput.swift in Sources */,
+				B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				CE7849E122A685FB00662219 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CE7849E222A685FB00662219 /* RingView.swift in Sources */,
 				CE7849E322A685FB00662219 /* WebViewController.swift in Sources */,
@@ -30339,6 +30387,7 @@
 				CE784B5122A685FB00662219 /* UserInfoSubViewInitializer.swift in Sources */,
 				CE784B5222A685FB00662219 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CE784B5322A685FB00662219 /* OfferParameters.swift in Sources */,
+				B52BAC5F23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				CE784B5422A685FB00662219 /* BasePresentor.swift in Sources */,
 				CE784B5522A685FB00662219 /* UploadHelpers.swift in Sources */,
 				CE784B5622A685FB00662219 /* UserProfileRouterInput.swift in Sources */,
@@ -30423,6 +30472,7 @@
 				CE784B9C22A685FB00662219 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
 				CE784B9E22A685FB00662219 /* LoginSettingsRouterInput.swift in Sources */,
+				B52BAC6423AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
 				CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */,
 				CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */,
