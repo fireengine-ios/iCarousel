@@ -93,5 +93,44 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         return viewController
     }
+    
+    class func initializeHiddenAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+                                                         style: .default, tintColor: nil)
+        
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+                                                        style: .default, tintColor: nil)
+        
+        let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        let configurator = PhotoVideoDetailModuleConfigurator()
+        configurator.configureModuleFromHiddenAlbumForViewInput(viewInput: viewController,
+                                                                photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                                                                documentsBottomBarConfig: documentsBottomBarConfig,
+                                                                selecetedItem: selectedItem,
+                                                                allItems: allItems,
+                                                                albumUUID: albumUUID,
+                                                                albumItem: albumItem,
+                                                                hideActions: hideActions)
+        
+        return viewController
+    }
+    
+    class func initializeHiddenViewController(with nibName: String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+                                                         style: .blackOpaque, tintColor: nil)
+        
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+                                                        style: .blackOpaque, tintColor: nil)
+        
+        let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        let configurator = PhotoVideoDetailModuleConfigurator()
+        configurator.configureModuleForHiddenViewInput(viewInput: viewController,
+                                                       photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                                                       documentsBottomBarConfig: documentsBottomBarConfig,
+                                                       selecetedItem: selectedItem,
+                                                       allItems: allItems,
+                                                       hideActions: hideActions)
+        return viewController
+    }
 
 }

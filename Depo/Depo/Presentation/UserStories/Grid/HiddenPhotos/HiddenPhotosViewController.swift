@@ -233,8 +233,8 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
 
 extension HiddenPhotosViewController {
     private func showDetails(item: Item) {
-        let controller = router.filesDetailViewController(fileObject: item, items: dataSource.allItems.flatMap { $0 })
-        let navController = NavigationController(rootViewController: controller)
+        guard let hiddenViewController = router.filesDetailHiddenViewController(fileObject: item, items: dataSource.allItems.flatMap { $0 }) else { return }
+        let navController = NavigationController(rootViewController: hiddenViewController)
         router.presentViewController(controller: navController)
     }
     
