@@ -993,7 +993,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(nil)
         status = .unknown
         tmpDownloadUrl = nil
-//        duration = "0.02"
 
         let creationDate = Date()
         super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: true)
