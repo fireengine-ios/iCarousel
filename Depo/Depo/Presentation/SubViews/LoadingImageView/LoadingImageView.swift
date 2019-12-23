@@ -133,7 +133,6 @@ final class LoadingImageView: UIImageView {
         loadingImageViewDelegate?.onLoadingImageCanceled()
     }
 
-    ///For detail view only, we need to get file Data in order to check/show gif.
     func loadImage(with object: Item?, smooth: Bool = false) {
         guard let object = object, path != object.patchToPreview else {
             cancelLoadRequest()
@@ -180,7 +179,7 @@ final class LoadingImageView: UIImageView {
         }
     }
     
-    func loadImage(with url: URL?, animated: Bool = false) {
+    func loadImageData(with url: URL?, animated: Bool = false) {
         guard let url = url else {
             return
         }
