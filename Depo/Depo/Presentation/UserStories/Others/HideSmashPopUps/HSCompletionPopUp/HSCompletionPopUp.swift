@@ -14,6 +14,7 @@ final class HSCompletionPopUp: BasePopUpController {
         case showOpenSmartAlbumButton
         case showBottomCloseButton
         case smash
+        case hiddenPhotosOnly
     }
 
     //MARK: IBOutlets
@@ -229,6 +230,14 @@ final class HSCompletionPopUp: BasePopUpController {
             smartAlbumTitleLabel.text = TextConstants.smashSuccessedAlertSecondTitle
             smartAlbumTitleLabel.textColor = ColorConstants.darkBlueColor
             smartAlbumDescriptionLabel.text = TextConstants.smashSuccessedAlertDescription
+            
+        case .hiddenPhotosOnly:
+            titleLabel.text = TextConstants.hideSuccessPopupMessage
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.textColor = ColorConstants.darkBlueColor
+            
+            smartAlbumsAdditionsParentView.isHidden = true
+            closeButton.isHidden = true
         }
 
         previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
@@ -262,7 +271,7 @@ final class HSCompletionPopUp: BasePopUpController {
 extension HSCompletionPopUp {
     private func setHiddenStatus(_ isHidden: Bool) {
         switch mode {
-        case .showBottomCloseButton:
+        case .showBottomCloseButton, .hiddenPhotosOnly:
             assertionFailure("this is kind of magic, do not show button should be hidden")
 
         case .showOpenSmartAlbumButton:
@@ -270,7 +279,6 @@ extension HSCompletionPopUp {
 
         case .smash:
             storageVars.smashPhotoPopUpCheckBox = isHidden
-
         }
 
     }

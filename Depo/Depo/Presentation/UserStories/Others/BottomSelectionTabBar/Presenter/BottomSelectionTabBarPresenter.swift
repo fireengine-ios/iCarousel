@@ -147,7 +147,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.hide(items: selectedItems)
+                    self.interactor.simpleHide(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
