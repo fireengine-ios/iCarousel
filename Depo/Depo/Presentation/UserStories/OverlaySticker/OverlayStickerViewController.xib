@@ -126,7 +126,7 @@
         <customObject id="FLw-K0-GdC" customClass="OverlayStickerViewControllerDesigner" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="stickersCollectionView" destination="nq6-ZB-8bJ" id="6UT-9x-Xgr"/>
-                <outlet property="undoBUttonView" destination="hWd-zU-E06" id="xjp-Qu-b11"/>
+                <outlet property="undoButtonView" destination="hWd-zU-E06" id="xjp-Qu-b11"/>
             </connections>
         </customObject>
     </objects>

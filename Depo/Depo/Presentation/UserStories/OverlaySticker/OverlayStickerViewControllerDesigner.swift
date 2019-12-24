@@ -23,7 +23,7 @@ final class OverlayStickerViewControllerDesigner: NSObject {
         }
     }
     
-    @IBOutlet private weak var undoBUttonView: UIView! {
+    @IBOutlet private weak var undoButtonView: UIView! {
         willSet {
             newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
             newValue.layer.borderWidth = 1

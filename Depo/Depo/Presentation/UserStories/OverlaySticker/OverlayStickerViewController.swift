@@ -9,6 +9,8 @@
 import UIKit
 import Photos
 
+//Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
+
 final class OverlayStickerViewController: ViewController {
     
     private struct Attachment {
@@ -19,7 +21,6 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private weak var overlayingStickerImageView: OverlayStickerImageView!
     @IBOutlet private weak var gifButton: UIButton!
     @IBOutlet private weak var stickerButton: UIButton!
-    @IBOutlet private var overlayStickerViewControllerDesigner: OverlayStickerViewControllerDesigner!
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
     private let uploadService = UploadService()
