@@ -21,12 +21,14 @@ protocol HideFuncRoutingProtocol: class {
 protocol HideFuncServiceProtocol {
     func startSmashOperation(for item: Item, success: @escaping FileOperation, fail: @escaping FailResponse)
     func startHideOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse)
+    func startHideSimpleOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
 final class HideFunctionalityService: HideFuncServiceProtocol {
 
     enum Operation {
         case hide
+        case hideSimple
         case smash
     }
 
@@ -90,6 +92,16 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         self.fail = fail
 
         operation = .hide
+
+        showConfirmationPopUp()
+    }
+    
+    func startHideSimpleOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse) {
+        self.items = items
+        self.success = success
+        self.fail = fail
+
+        operation = .hideSimple
 
         showConfirmationPopUp()
     }
@@ -189,10 +201,12 @@ extension HideFunctionalityService {
         switch operation {
         case .hide:
             state = .hideCompleted
-
+            
         case .smash:
             state = .smashCompleted
-
+            
+        case .hideSimple:
+            state = .hideSimpleCompleted
         }
         
         return state
