@@ -21,7 +21,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
+    private lazy var hiddenService = HiddenService()
+
     private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideFunctionalityService()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -277,35 +278,151 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func unhide(items: [BaseDataSourceItem]) {
-        guard let items = items as? [Item] else {
-            assertionFailure("Unexpected type of items")
-            return
-        }
-        
         let remoteItems = items.filter { !$0.isLocalItem }
         guard !remoteItems.isEmpty else {
-            assertionFailure("Locals only must not be passed to unhide them")
+            assertionFailure("Locals only must not be passed to hide them")
             return
         }
         
-        
-        let okHandler: VoidHandler = { [weak self] in
-            self?.output?.operationStarted(type: .unhide)
-            ///In case there gonna be be hidden audio files
-            ///self?.player.remove(listItems: remoteItems)
-            self?.fileService.unhide(items: remoteItems, success: self?.succesAction(elementType: .unhide), fail: self?.failAction(elementType: .unhide))
+        let okHandler: PopUpButtonHandler = { vc in
+            vc.close { [weak self] in
+                self?.unhideItems(remoteItems)
+            }
         }
         
-        let controller = PopUpController.with(title: TextConstants.actionSheetUnhide,
-                                              message: TextConstants.unhidePopupText,
-                                              image: .unhide,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
+        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
+                                         message: TextConstants.unhidePopupText,
+                                         image: .unhide,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: okHandler)
         
-        router.presentViewController(controller: controller)
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    private func unhideItems(_ items: [BaseDataSourceItem]) {
+        output?.startAsyncOperationDisableScreen()
+        
+        var peopleItems = [PeopleItem]()
+        var placesItems = [PlacesItem]()
+        var thingsItems = [ThingsItem]()
+        var albumItems = [AlbumItem]()
+        var photosVideos = [Item]()
+
+        items.forEach {
+            if let peopleItem = $0 as? PeopleItem {
+                peopleItems.append(peopleItem)
+            } else if let placeItem = $0 as? PlacesItem {
+                placesItems.append(placeItem)
+            } else if let thingItem = $0 as? ThingsItem {
+                thingsItems.append(thingItem)
+            } else if let albumItem = $0 as? AlbumItem {
+                albumItems.append(albumItem)
+            } else if let item = $0 as? Item {
+                photosVideos.append(item)
+            }
+        }
+        
+        let group = DispatchGroup()
+        var error: Error?
+        
+        let success: FileOperation = {
+            group.leave()
+        }
+        
+        let fail: (Error) -> Void = { failError in
+            group.leave()
+            
+            error = failError
+        }
+        
+        if !photosVideos.isEmpty {
+            group.enter()
+            unhideSelectedItems(photosVideos, success: success, fail: fail)
+        }
+        
+        if !albumItems.isEmpty {
+            group.enter()
+            uphideAlbums(albumItems, success: success, fail: fail)
+        }
+        
+        if !placesItems.isEmpty {
+            group.enter()
+            uphideFIPAlbums(placesItems, success: success, fail: fail)
+        }
+        
+        if !thingsItems.isEmpty {
+            group.enter()
+            uphideFIPAlbums(thingsItems, success: success, fail: fail)
+        }
+        
+        if !peopleItems.isEmpty {
+            group.enter()
+            uphideFIPAlbums(peopleItems, success: success, fail: fail)
+        }
+        
+        group.notify(queue: DispatchQueue.main) { [weak self] in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.output?.completeAsyncOperationEnableScreen()
+                    let errorResponse = ErrorResponse.error(error)
+                    self?.failAction(elementType: .unhide)(errorResponse)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.output?.completeAsyncOperationEnableScreen()
+                    self?.succesAction(elementType: .unhide)()
+                }
+            }
+        }
+    }
+    
+    private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        hiddenService.recoverItems(items) { response in
+            switch response {
+            case .success(_):
+                success()
+                
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    private func uphideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        hiddenService.recoverAlbums(items) { response in
+            switch response {
+            case .success(_):
+                success()
+                
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    //FIP - Faces-Items-Places
+    private func uphideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        let responseHandler: ResponseVoid = { response in
+            switch response {
+            case .success(_):
+                success()
+                
+            case .failed(let error):
+                fail(error)
+            }
+        }
+        
+        if let items = items as? [PeopleItem] {
+            hiddenService.recoveryPeople(items: items, handler: responseHandler)
+
+        } else if let items = items as? [ThingsItem] {
+            hiddenService.recoverItems(items, handler: responseHandler)
+
+        } else if let items = items as? [PlacesItem] {
+            hiddenService.recoveryPlaces(items: items, handler: responseHandler)
+
+        }
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {

@@ -252,7 +252,7 @@ extension HiddenPhotosViewController {
     }
     
     private func openAlbum(item: AlbumItem) {
-        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        let controller = router.hiddenAlbumDetailController(album: item, type: .List, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
     

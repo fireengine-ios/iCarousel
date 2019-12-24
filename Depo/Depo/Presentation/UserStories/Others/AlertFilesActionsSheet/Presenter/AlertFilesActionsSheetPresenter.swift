@@ -53,7 +53,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         presentedBy sender: Any?,
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
-        constractSpecifiedActions(with: types, for: items) {[weak self] (actions) in
+        constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes) {[weak self] (actions) in
             DispatchQueue.main.async { [weak self] in
                 self?.presentAlertSheet(with: actions, presentedBy: sender)
             }
@@ -316,8 +316,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         }
                     })
                 case .unhide:
-                    assertionFailure("please implement this function first")
-                    action = UIAlertAction()
+                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
+                        self?.interactor.unhide(items: selectedItems)
+                    }
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()

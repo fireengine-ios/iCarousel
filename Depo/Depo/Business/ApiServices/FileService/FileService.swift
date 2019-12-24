@@ -867,7 +867,7 @@ final class HiddenService {
         let ids = items.compactMap { $0.uuid }
         return recoverItemsByUuids(ids) { result in
             switch result {
-            case .success(_):    
+            case .success(_):
                 handler(.success(()))
             case .failed(let error):
                 handler(.failed(error))
