@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OverlayStickerViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
-                <outlet property="OverlayStickerViewControllerDesigner" destination="FLw-K0-GdC" id="skP-Zv-FKc"/>
                 <outlet property="gifButton" destination="mOp-qy-1rx" id="lZm-hB-dWJ"/>
                 <outlet property="overlayingStickerImageView" destination="dv4-cf-xPu" id="ZKI-am-050"/>
                 <outlet property="stickerButton" destination="A13-iK-v4f" id="AV2-xC-388"/>
