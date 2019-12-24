@@ -144,6 +144,11 @@ final class LoadingImageView: UIImageView {
             return
         }
         
+        guard path != object.patchToPreview else {
+            return
+        }
+        
+        cancelLoadRequest()
         path = object.patchToPreview
         
         loadImageData(object: object, smooth: smooth)
