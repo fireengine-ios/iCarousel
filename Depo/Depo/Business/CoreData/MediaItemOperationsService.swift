@@ -997,13 +997,18 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == false AND \(#keyPath(MediaItem.uuid)) IN %@", items.compactMap { $0.uuid })
+            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+            let uuid = #keyPath(MediaItem.uuid)
+            
+            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
             
             self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
                 guard let self = self else {
                     assertionFailure("Unexpected MediaItemOperationsService == nil")
                     return
                 }
+                
+                /// TODO: maybe we need to change status value to the related status value from recover response??
                 mediaItems.forEach { $0.status = ItemStatus.active.valueForCoreDataMapping() }
                 self.coreDataStack.saveDataForContext(context: context) {
                     completion()
