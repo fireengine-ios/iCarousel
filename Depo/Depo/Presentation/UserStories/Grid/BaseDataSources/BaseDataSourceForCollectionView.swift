@@ -1647,18 +1647,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didHide(items: [WrapData]) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.delegate?.needReloadData()
-        }
-    }
-    
-    func didUnhide(items: [WrapData]) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.delegate?.needReloadData()
-        }
-    }
-    
     private func idsToRemove(for items: [Item]) -> [String] {
         guard let unwrapedFilters = self.originalFilters, !self.showOnlyRemotes(filters: unwrapedFilters) else {
             return items.map{

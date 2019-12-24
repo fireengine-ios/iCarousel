@@ -408,8 +408,7 @@ final class MediaItemOperationsService {
                     }
                 }
 
-                let notHidden = allSavedItems.filter { !$0.status.isContained(in: [.hidden]) }
-                deletedItems.append(contentsOf: notHidden)
+                deletedItems.append(contentsOf: allSavedItems)
                 
                 group.enter()
                 
