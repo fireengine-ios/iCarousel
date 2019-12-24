@@ -42,12 +42,12 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
-        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .removeFromAlbum],
+        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .smash, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         
         let langCode = Device.locale
         if langCode != "tr" {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromAlbum],
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .smash, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         }
         
@@ -68,12 +68,12 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
-        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .edit, .removeFromFaceImageAlbum],
+        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .edit, .smash, .removeFromFaceImageAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         
         let langCode = Device.locale
         if langCode != "tr" {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromFaceImageAlbum],
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .smash, .removeFromFaceImageAlbum],
                                                              style: .blackOpaque, tintColor: nil)
         }
 
