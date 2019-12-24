@@ -868,6 +868,7 @@ final class HiddenService {
         return recoverItemsByUuids(ids) { result in
             switch result {
             case .success(_):
+                ItemOperationManager.default.didUnhide(items: items)
                 handler(.success(()))
             case .failed(let error):
                 handler(.failed(error))
