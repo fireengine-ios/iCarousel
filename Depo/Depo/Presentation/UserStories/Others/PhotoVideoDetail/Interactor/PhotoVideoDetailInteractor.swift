@@ -168,7 +168,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 self.output.goBack()
                 
                 ///it is also to dismiss popup
-                if(type == .hide) {
+                if type == .hide {
                     self.output.goBack()
                 }
                 
