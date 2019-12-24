@@ -30,10 +30,10 @@ final class OverlayAnimationService {
     private let duration:TimeInterval = 2
     private var numberOfFrames = 25
     
-    func getResult(attachments: [UIImageView],
-                    resultName: String,
-                         image: UIImage,
-                    completion: @escaping (CreateOverlayStickersResult) -> ()) {
+    func combine(attachments: [UIImageView],
+                  resultName: String,
+               originalImage: UIImage,
+                  completion: @escaping (CreateOverlayStickersResult) -> ()) {
         
         guard !attachments.isEmpty else {
             completion(.failure(.emptyAttachment))
@@ -80,7 +80,7 @@ final class OverlayAnimationService {
             
             let frameCount = attach.contains(where: { $0.images.count > 1}) ? self.numberOfFrames : 1
             
-            let frames = self.renderFrames(bgImage:image, attacments: attach, canvasSize: image.size, framesCount: frameCount)
+            let frames = self.renderFrames(bgImage:originalImage, attacments: attach, canvasSize: originalImage.size, framesCount: frameCount)
 
             if frameCount > 1 {
                 self.generateGif(photos: frames, filename: "\(resultName)", duration: self.duration) { result in

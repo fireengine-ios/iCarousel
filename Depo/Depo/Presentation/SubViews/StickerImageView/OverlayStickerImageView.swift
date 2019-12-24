@@ -86,7 +86,7 @@ final class OverlayStickerImageView: UIImageView {
             
             self.subviews.forEach({ $0.isHidden = false})
             
-            overlayAnimationService.getResult(attachments: attachments, resultName: resultName, image: img, completion: completion)
+            overlayAnimationService.combine(attachments: attachments, resultName: resultName, originalImage: img, completion: completion)
             
             attachments.removeAll()
         } else {
