@@ -99,7 +99,7 @@ final class OverlayStickerViewController: ViewController {
         
         showFullscreenHUD(with: nil, and: {})
         
-        overlayingStickerImageView.getResult(resultName: imageName ?? UUID().uuidString) { [weak self] result in
+        overlayingStickerImageView.overlayStickers(resultName: imageName ?? UUID().uuidString) { [weak self] result in
             
             let popUp = PopUpController.with(title: TextConstants.save, message: TextConstants.smashPopUpMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, firstUrl: nil, secondUrl: nil, firstAction: { popup in
                 popup.close()

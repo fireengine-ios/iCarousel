@@ -75,7 +75,7 @@ final class OverlayStickerImageView: UIImageView {
         subview.removeFromSuperview()
     }
     
-    func getResult(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
+    func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
         
         if subviews.contains(where: { $0 is YYAnimatedImageView}) {
             self.subviews.forEach({ $0.isHidden = true})
