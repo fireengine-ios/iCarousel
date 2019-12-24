@@ -97,6 +97,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
             
             if !selectedItem.isLocalItem {
+                
+                if elementsConfig.contains(.unhide) && elementsConfig.contains(.delete) {
+                    return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+                }
+                
                 elementsConfig.insert(.edit, at: 2)
                 
                 if let syncIndex = elementsConfig.index(of: .sync) {
@@ -110,7 +115,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                     elementsConfig.append(.print)
                 }
                 
-                if selectedItem.fileType == .image, !elementsConfig.contains(.smash), selectedItem.name?.split(separator: ".").last != "gif"
+                if selectedItem.fileType == .image, !elementsConfig.contains(.smash),
+                    selectedItem.name?.isPathExtensionGif() == false
                 {
                     elementsConfig.append(.smash)
                 }
@@ -151,12 +157,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
         
         switch type {
-        case .delete:
-            ItemOperationManager.default.deleteItems(items: [removedObject])
-        case .hide:
-            ItemOperationManager.default.didHide(items: [removedObject])
+        case .hide, .unhide, .delete:
+            ///its already being called from different place, we dont need to call
+            break
         case .removeFromAlbum, .removeFromFaceImageAlbum:
-             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
         default:
             break
         }

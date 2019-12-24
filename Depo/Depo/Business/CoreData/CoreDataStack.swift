@@ -16,9 +16,7 @@ fileprivate struct CoreDataConfig {
     
     static var storeUrl: URL {
         guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            let errorMessage = "Unable to resolve document directory"
-            debugLog(errorMessage)
-            fatalError(errorMessage)
+            fatalLog("Unable to resolve document directory")
         }
         
         return docURL.appendingPathComponent("\(CoreDataConfig.storeName).sqlite")
@@ -41,15 +39,11 @@ fileprivate struct CoreDataConfig {
     
     static var managedObjectModel: NSManagedObjectModel {
         guard let modelURL = CoreDataConfig.modelURL else {
-            let errorMessage = "Error loading model from bundle"
-            debugLog(errorMessage)
-            fatalError(errorMessage)
+            fatalLog("Error loading model from bundle")
         }
         
         guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
-            let errorMessage = "Error initializing mom from: \(modelURL)"
-            debugLog(errorMessage)
-            fatalError(errorMessage)
+            fatalLog("Error initializing mom from: \(modelURL)")
         }
         return mom
     }
@@ -136,9 +130,7 @@ final class CoreDataStack_ios9: CoreDataStack {
                            NSInferMappingModelAutomaticallyOption: false]
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: CoreDataConfig.storeUrl, options: options)
         } catch {
-            let errorMessage = "Error migrating store: \(error)"
-            debugLog(errorMessage)
-            fatalError(errorMessage)
+            fatalLog("Error migrating store: \(error)")
         }
         return  psc
     }()

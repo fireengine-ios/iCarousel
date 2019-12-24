@@ -57,3 +57,20 @@ extension Optional where Wrapped == String {
         return !(self?.isEmpty ?? true)
     }
 }
+
+//MARK: - path extension related
+
+extension String {
+    
+    func getPathExtension() -> String? {
+        guard let fileNameExtensionSlice = self.split(separator: ".").last else {
+            return nil
+        }
+        return String(fileNameExtensionSlice)
+    }
+    
+    func isPathExtensionGif() -> Bool {
+        return getPathExtension()?.lowercased() == "gif"
+    }
+    
+}

@@ -90,7 +90,9 @@ final class AlbumsSliderDataSource: NSObject {
             }
         }
         
-        deletedIndexPaths.forEach { items.remove(at: $0.item) }
+        deletedIndexPaths
+            .sorted(by: { $0.item > $1.item })
+            .forEach { items.remove(at: $0.item) }
         
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: deletedIndexPaths)

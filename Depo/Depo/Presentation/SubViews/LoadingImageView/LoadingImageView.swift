@@ -134,18 +134,36 @@ final class LoadingImageView: UIImageView {
     }
 
     func loadImage(with object: Item?, smooth: Bool = false) {
-        guard let path = object?.patchToPreview else {
+        guard let object = object else {
             cancelLoadRequest()
             
             if !smooth {
                 originalImage = nil
                 activity.stopAnimating()
             }
-            
             return
         }
         
-        loadImage(with: path, smooth: smooth)
+        guard path != object.patchToPreview else {
+            return
+        }
+        
+        cancelLoadRequest()
+        path = object.patchToPreview
+        
+        loadImageData(object: object, smooth: smooth)
+    }
+    
+    private func loadImageData(object: Item, smooth: Bool = false) {
+        if !smooth {
+            originalImage = nil
+            activity.startAnimating()
+        }
+
+        url = filesDataSource.getImageData(item: object) { [weak self] imageData in
+            self?.finishLoading(data: imageData)
+                
+        }
     }
     
     func loadImage(with path: PathForItem, smooth: Bool = false) {
@@ -166,7 +184,7 @@ final class LoadingImageView: UIImageView {
         }
     }
     
-    func loadImage(with url: URL?, animated: Bool = false) {
+    func loadImageData(with url: URL?, animated: Bool = false) {
         guard let url = url else {
             return
         }

@@ -154,17 +154,21 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     UIApplication.showErrorAlert(message: text)
                 }
             case .unhide:
-                //TODO: need to setup
-                self.basePassingPresenter?.stopModeSelected()
-            case .smash:
+                //TODO: will be another task to implement analytics calls
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.unhide(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
-                    //TODO: FE-1866
-                    //correct action should be added here
-                    UIApplication.showErrorAlert(message: TextConstants.errorAlert)
+                    let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
                 }
+            case .smash:
+                RouterVC().getViewControllerForPresent()?.showSpinner()
+                self.interactor.smash(item: selectedItems) {
+                    RouterVC().getViewControllerForPresent()?.hideSpinner()
+                }
+                self.basePassingPresenter?.stopModeSelected()
             case .delete:
                 MenloworksAppEvents.onDeleteClicked()
                 

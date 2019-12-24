@@ -408,8 +408,7 @@ final class MediaItemOperationsService {
                     }
                 }
 
-                let notHidden = allSavedItems.filter { !$0.status.isContained(in: [.hidden]) }
-                deletedItems.append(contentsOf: notHidden)
+                deletedItems.append(contentsOf: allSavedItems)
                 
                 group.enter()
                 
@@ -984,6 +983,33 @@ final class MediaItemOperationsService {
                     return
                 }
                 mediaItems.forEach { $0.status = ItemStatus.hidden.valueForCoreDataMapping() }
+                self.coreDataStack.saveDataForContext(context: context) {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    //MARK: - Unhide
+    func unhide(_ items: [WrapData], completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                return
+            }
+            
+            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+            let uuid = #keyPath(MediaItem.uuid)
+            
+            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
+            
+            self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
+                guard let self = self else {
+                    assertionFailure("Unexpected MediaItemOperationsService == nil")
+                    return
+                }
+                
+                /// TODO: maybe we need to change status value to the related status value from recover response??
+                mediaItems.forEach { $0.status = ItemStatus.active.valueForCoreDataMapping() }
                 self.coreDataStack.saveDataForContext(context: context) {
                     completion()
                 }

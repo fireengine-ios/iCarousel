@@ -16,6 +16,18 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func operationFinished(withType type: ElementTypes, response: Any?) {
         debugLog("AlbumDetailPresenter operationFinished")
 
@@ -117,5 +129,34 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         if let album = (interactor as? AlbumDetailInteractor)?.album, album.isTBMatik {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deletePhoto))
         }
+    }
+}
+
+extension AlbumDetailPresenter: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        guard
+            let presenter = object as? AlbumDetailPresenter,
+            let view = presenter.view as? AlbumDetailViewController,
+            let albumId = view.album?.uuid,
+
+            let selfView = self.view as? AlbumDetailViewController,
+            let selfAlbumId = selfView.album?.uuid
+        else {
+            return false
+        }
+        
+        return albumId == selfAlbumId
+    }
+    
+    func didUnhide(items: [WrapData]) {
+        dataSource.deleteItems(items: items)
+    }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        guard let router = self.router as? AlbumDetailRouter else {
+            return
+        }
+        
+        router.back()
     }
 }
