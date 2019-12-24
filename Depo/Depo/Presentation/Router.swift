@@ -773,6 +773,11 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func hiddenAlbumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+        let controller = AlbumDetailModuleInitializer.initializeHiddenAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
+        return controller
+    }
+    
     // MARK: Stories list
     
     func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
