@@ -252,6 +252,30 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
+        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+            return
+        }
+        ImageDownloder().getImage(patch: url) { [weak self] image in
+            guard
+                let `self` = self,
+                let image = image
+            else {
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                completion?()
+                return
+            }
+            
+            let controller = OverlayStickerViewController()
+            controller.selectedImage = image
+            controller.imageName = item.name
+            let navVC = NavigationController(rootViewController: controller)
+            
+            completion?()
+            self.router.presentViewController(controller: navVC)
+        }
+    }
+    
     func delete(item: [BaseDataSourceItem]) {
         if let items = item as? [Item] {
             deleteItems(items: items.filter({ !$0.isLocalItem }))
