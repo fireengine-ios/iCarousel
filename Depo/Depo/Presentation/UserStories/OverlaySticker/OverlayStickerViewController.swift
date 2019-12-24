@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-//Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
+///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
 
 final class OverlayStickerViewController: ViewController {
     
