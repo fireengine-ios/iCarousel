@@ -183,7 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
         /// need to check for PopUpController to dismiss it automaticaly for last photo in PhotoVideoDetail
-        if let presentedViewController = presentedViewController as? PopUpController {
+        if let presentedViewController = presentedViewController as? BasePopUpController {
             presentedViewController.close { [weak self] in
                 self?.dismiss(animated: true)
             }
