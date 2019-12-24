@@ -40,8 +40,6 @@ final class OverlayAnimationService {
             return
         }
         
-        let newImage = resizeImage(targetSize: image.size, image: image)
-        
         var attach = [Attachment]()
         
         attachments.forEach({ item in
@@ -68,12 +66,12 @@ final class OverlayAnimationService {
                 }
             }
             
-            let img = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
+            let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
             
             let attachment = Attachment(origin: origin, size: CGSize(width: item.bounds.width,
                                                                     height: item.bounds.width),
                                                                   rotation: rotation,
-                                                                    images: img)
+                                                                    images: frames)
             
             attach.append(attachment)
         })
@@ -82,26 +80,21 @@ final class OverlayAnimationService {
             
             let frameCount = attach.contains(where: { $0.images.count > 1}) ? self.numberOfFrames : 1
             
-            let frames = self.renderFrames(bgImage:newImage, attacments: attach, canvasSize: newImage.size, framesCount: frameCount)
+            let frames = self.renderFrames(bgImage:image, attacments: attach, canvasSize: image.size, framesCount: frameCount)
 
             if frameCount > 1 {
                 self.generateGif(photos: frames, filename: "\(resultName)", duration: self.duration) { result in
-                    switch result {
-                    case let .success(successResult):
-                        guard let data = try? Data(contentsOf: successResult.url) else {
-                            completion(.failure(.unknown))
-                            return
-                        }
-                        
-                        let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
-                        
-                        GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
-                            completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
-                        })
-                        
-                    case let .failure(error):
-                        completion(.failure(error))
+                    
+                    guard let data = result else {
+                        completion(.failure(.unknown))
+                        return
                     }
+                    
+                    let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
+                    
+                    GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
+                        completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
+                    })
                  }
             } else {
 
@@ -164,19 +157,13 @@ final class OverlayAnimationService {
             try data.write(to: path)
             return path
         } catch {
-            print(error.localizedDescription)
             return nil
         }
     }
     
     private func renderFrames(bgImage:UIImage, attacments: [Attachment], canvasSize:CGSize, framesCount: Int) -> [UIImage] {
         
-        var images = [UIImage]()
-        
-        for _ in (0...framesCount - 1) {
-            let image = renderFrame(bgImage: bgImage, canvasSize: canvasSize, newImage: nil, rect: nil, newImageSize: nil, rotation: nil)
-            images.append(image)
-        }
+        var images = Array.init(repeating: bgImage, count: framesCount)
         
         for attach in attacments {
             var newImage = [UIImage]()
@@ -199,7 +186,7 @@ final class OverlayAnimationService {
             bgImage.draw(in: CGRect(origin: CGPoint.zero, size: canvasSize))
             
             if let newImage = newImage, let rect = rect, let newSize = newImageSize, let rotation = rotation {
-                
+//                context.cgContext.concatenate(newImage.)
                 context.cgContext.translateBy(x: rect.x, y: rect.y)
                 context.cgContext.rotate(by: rotation)
                 
@@ -209,12 +196,12 @@ final class OverlayAnimationService {
         return image
     }
     
-    private func generateGif(photos: [UIImage], filename: String, duration: TimeInterval, completion: @escaping (CreateOverlayStickersResult) -> ()) {
+    private func generateGif(photos: [UIImage], filename: String, duration: TimeInterval, completion: @escaping (Data?) -> ()) {
         
         let photoFrameDuration = duration / Double(photos.count)
         
         guard let encoder = YYImageEncoder(type: .GIF) else {
-            completion(.failure(.special))
+            completion(nil)
             return
         }
         encoder.loopCount = 0
@@ -223,22 +210,10 @@ final class OverlayAnimationService {
             encoder.add(photo, duration: photoFrameDuration)
         })
         
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let path = documentsDirectoryPath.appending("/\(filename)")
-        
-        if encoder.encode(toFile: path) {
-            let url = URL(fileURLWithPath: path)
-            completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .gif)))
+        if let data = encoder.encode() {
+            completion(data)
         } else {
-            completion(.failure(.unknown))
+            completion(nil)
         }
-    }
-    
-    func resizeImage(targetSize: CGSize, image: UIImage) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let image = renderer.image { ctx in
-            image.draw(in: CGRect(origin: CGPoint.zero, size: targetSize))
-        }
-        return image
     }
 }

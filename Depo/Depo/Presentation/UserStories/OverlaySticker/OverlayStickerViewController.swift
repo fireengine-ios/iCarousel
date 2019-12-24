@@ -27,14 +27,14 @@ final class OverlayStickerViewController: ViewController {
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
         button.setImage(UIImage(named: "applyIcon"), for: .normal)
-        button.addTarget(self, action: #selector(applyIconTapped(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(applyIconTapped), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
         button.setImage(UIImage(named: "removeCircle"), for: .normal)
-        button.addTarget(self, action: #selector(closeIconTapped(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(closeIconTapped), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
@@ -52,12 +52,14 @@ final class OverlayStickerViewController: ViewController {
                 self.gifButton.setTitleColor(UIColor.yellow, for: .normal)
                 self.stickerButton.tintColor = UIColor.gray
                 self.stickerButton.setTitleColor(UIColor.gray, for: .normal)
+                //TODO: Logic for updating collection view after changing selectedAttachmentType
                 stickersCollectionView.reloadData()
             case .image:
                 self.stickerButton.tintColor = UIColor.yellow
                 self.stickerButton.setTitleColor(UIColor.yellow, for: .normal)
                 self.gifButton.tintColor = UIColor.gray
                 self.gifButton.setTitleColor(UIColor.gray, for: .normal)
+                //TODO: Logic for updating collection view after changing selectedAttachmentType
                 stickersCollectionView.reloadData()
             case .video:
                 break
@@ -76,6 +78,7 @@ final class OverlayStickerViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        // TODO: Temporary logic for trial mode
         addPictures()
         addGifs()
     }
@@ -92,10 +95,11 @@ final class OverlayStickerViewController: ViewController {
         overlayingStickerImageView.removeLast()
     }
     
-    @objc func applyIconTapped(sender: UIButton) {
+    @objc func applyIconTapped() {
         
+        showFullscreenHUD(with: nil, and: {})
         
-        overlayingStickerImageView.getResult(resultName: imageName ?? "pictureWitImage") { [weak self] result in
+        overlayingStickerImageView.getResult(resultName: imageName ?? UUID().uuidString) { [weak self] result in
             
             let popUp = PopUpController.with(title: TextConstants.save, message: TextConstants.smashPopUpMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, firstUrl: nil, secondUrl: nil, firstAction: { popup in
                 popup.close()
@@ -104,7 +108,8 @@ final class OverlayStickerViewController: ViewController {
                 self?.showFullscreenHUD(with: nil, and: {})
                 self?.saveResult(result: result)
             }
-             UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+            self?.hideSpinnerIncludeNavigationBar()
+            UIApplication.topController()?.present(popUp, animated: true, completion: nil)
         }
     }
     
@@ -115,10 +120,13 @@ final class OverlayStickerViewController: ViewController {
             switch result.type {
             case .gif: break
             case .image:
+                
+                //TODO: Different logic for saving result
                 self.saveImageToLibrary(url: result.url) { isSavedInLibrary in
                 }
                 self.uploadImage(contentURL: result.url, completion: { (isUploaded) in
                     self.hideSpinnerIncludeNavigationBar()
+                    self.closeIconTapped()
                 })
             case .video:
                 
@@ -126,6 +134,7 @@ final class OverlayStickerViewController: ViewController {
                 }
                 self.uploadVideo(contentURL: result.url, completion: { (isUploaded) in
                     self.hideSpinnerIncludeNavigationBar()
+                    self.closeIconTapped()
                 })
             }
             
@@ -135,8 +144,7 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    
-    @objc func closeIconTapped(sender: UIButton) {
+    @objc func closeIconTapped() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -155,9 +163,8 @@ final class OverlayStickerViewController: ViewController {
         navigationItem.rightBarButtonItem = applyButton
     }
     
-    
-    
     private func uploadVideo(contentURL: URL, completion: @escaping (Bool) -> Void) {
+        
         guard let videoData = try? Data(contentsOf: contentURL) else {
             completion(false)
             return
@@ -235,7 +242,6 @@ extension OverlayStickerViewController: UICollectionViewDataSource {
         return collectionView.dequeue(cell: StickerCollectionViewCell.self, for: indexPath)
     }
 }
-
 
 extension OverlayStickerViewController: UICollectionViewDelegate {
     

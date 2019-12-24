@@ -134,7 +134,6 @@ final class OverlayStickerImageView: UIImageView {
         }
         
         let imageView = YYAnimatedImageView(image: image)
-        imageView.frame.size = stickerSize
         imageView.center = self.center
         self.addSubview(imageView)
         
@@ -151,7 +150,6 @@ final class OverlayStickerImageView: UIImageView {
         }
         
         let imageView = UIImageView(image: image)
-        imageView.frame.size = stickerSize
         imageView.center = self.center
         
         self.addSubview(imageView)
