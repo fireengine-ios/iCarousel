@@ -19,7 +19,7 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private weak var overlayingStickerImageView: OverlayStickerImageView!
     @IBOutlet private weak var gifButton: UIButton!
     @IBOutlet private weak var stickerButton: UIButton!
-    @IBOutlet private var OverlayStickerViewControllerDesigner: OverlayStickerViewControllerDesigner!
+    @IBOutlet private var overlayStickerViewControllerDesigner: OverlayStickerViewControllerDesigner!
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
     private let uploadService = UploadService()
@@ -115,37 +115,46 @@ final class OverlayStickerViewController: ViewController {
     
     private func saveResult(result: CreateOverlayStickersResult) {
         
-        switch result {
-        case .success(let result):
-            switch result.type {
-            case .gif: break
-            case .image:
-                
-                //TODO: Different logic for saving result
-                self.saveImageToLibrary(url: result.url) { isSavedInLibrary in
-                }
-                self.uploadImage(contentURL: result.url, completion: { (isUploaded) in
-                    self.hideSpinnerIncludeNavigationBar()
-                    self.closeIconTapped()
-                })
-            case .video:
-                
-                self.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
-                }
-                self.uploadVideo(contentURL: result.url, completion: { (isUploaded) in
-                    self.hideSpinnerIncludeNavigationBar()
-                    self.closeIconTapped()
-                })
-            }
+        checkLibraryAccessStatus { [weak self] libraryIsAvailable in
             
-        case .failure(let error):
-            self.hideSpinnerIncludeNavigationBar()
-            UIApplication.showErrorAlert(message: error.description)
+            if libraryIsAvailable == true {
+                
+                switch result {
+                case .success(let result):
+                    switch result.type {
+                    case .gif: break
+                    case .image:
+                        //TODO: Different logic for saving result
+                        self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
+                        }
+                        self?.uploadImage(contentURL: result.url, completion: { isUploaded in
+                            self?.hideSpinnerIncludeNavigationBar()
+                            self?.closeIconTapped()
+                        })
+        
+                    case .video:
+                        self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in }
+                        self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
+                            self?.hideSpinnerIncludeNavigationBar()
+                            self?.closeIconTapped()
+                        })
+                    }
+                    
+                case .failure(let error):
+                    self?.hideSpinnerIncludeNavigationBar()
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            } else {
+                //Show popup about getting access to photo library
+                self?.hideSpinnerIncludeNavigationBar()
+            }
         }
     }
     
     @objc func closeIconTapped() {
-        dismiss(animated: true, completion: nil)
+        DispatchQueue.toMain {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     private func setupImage() {
@@ -220,6 +229,7 @@ final class OverlayStickerViewController: ViewController {
     }
     
     private func saveImageToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
+        
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: url)
         }) { saved, error in
@@ -228,6 +238,20 @@ final class OverlayStickerViewController: ViewController {
             } else {
                 completion(false)
             }
+        }
+    }
+    
+    private func checkLibraryAccessStatus(completion: @escaping (Bool) -> Void) {
+        if PHPhotoLibrary.authorizationStatus() == .authorized {
+            completion(true)
+        } else {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if status == .authorized {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            })
         }
     }
 }
@@ -252,7 +276,7 @@ extension OverlayStickerViewController: UICollectionViewDelegate {
         
         let image = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].image : pictureAttachment[indexPath.row].image
         
-        cell.setupImgeViewImage(previewImage: image)
+        cell.setupImageView(previewImage: image)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

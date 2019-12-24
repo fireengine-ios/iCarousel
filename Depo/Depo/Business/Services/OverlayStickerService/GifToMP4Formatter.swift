@@ -11,7 +11,7 @@ import AVFoundation
 
 final class GIF2MP4 {
     
-    private(set) var gif: GIF
+    private let gif: GIF
     private var outputURL: URL?
     private(set) var videoWriter: AVAssetWriter?
     private(set) var videoWriterInput: AVAssetWriterInput?
@@ -23,7 +23,9 @@ final class GIF2MP4 {
     }
     
     init?(data : Data) {
-        guard let gif = GIF(data: data) else { return nil }
+        guard let gif = GIF(data: data) else {
+            return nil
+        }
         self.gif = gif
     }
     
@@ -63,7 +65,7 @@ final class GIF2MP4 {
         videoWriter.startSession(atSourceTime: kCMTimeZero)
     }
     
-    func convertAndExport(to url :URL , completion: @escaping () -> Void ) {
+    func convertAndExport(to url: URL , completion: @escaping () -> Void ) {
         outputURL = url
         prepare()
         
@@ -75,15 +77,13 @@ final class GIF2MP4 {
         var delay = 0.0 - gif.frameDurations[0]
         let queue = DispatchQueue(label: "mediaInputQueue")
         videoWriterInput.requestMediaDataWhenReady(on: queue) {
-            var isFinished = true
-            
+    
             guard let framesCount = self.gif.frames?.count else {
                 return
             }
 
             while index < framesCount {
                 if videoWriterInput.isReadyForMoreMediaData == false {
-                    isFinished = false
                     break
                 }
                 
@@ -100,15 +100,11 @@ final class GIF2MP4 {
                 }
             }
             
-            if isFinished {
-                videoWriterInput.markAsFinished()
-                videoWriter.finishWriting() {
-                    DispatchQueue.main.async {
-                        completion()
-                    }
+            videoWriterInput.markAsFinished()
+            videoWriter.finishWriting() {
+                DispatchQueue.main.async {
+                    completion()
                 }
-            } else {
-                // Fall through. The closure will be called again when the writer is ready.
             }
         }
     }
@@ -234,12 +230,12 @@ final class GIF {
     }
 
     private func getGIFFrameDuration(imgSource: CGImageSource, index: Int) -> TimeInterval {
-        guard let frameProperties = CGImageSourceCopyPropertiesAtIndex(imgSource, index, nil) as? NSDictionary,
+        guard
+            let frameProperties = CGImageSourceCopyPropertiesAtIndex(imgSource, index, nil) as? NSDictionary,
             let gifProperties = frameProperties[kCGImagePropertyGIFDictionary] as? NSDictionary,
             let unclampedDelay = gifProperties[kCGImagePropertyGIFUnclampedDelayTime] as? TimeInterval
-            else {
-                return 0.02
-                
+        else {
+            return 0.02
         }
 
         var frameDuration = TimeInterval(0)

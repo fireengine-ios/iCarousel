@@ -20,7 +20,7 @@ final class StickerCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupImgeViewImage(previewImage: UIImage) {
+    func setupImageView(previewImage: UIImage) {
         self.previewImage.image = previewImage
     }
 }

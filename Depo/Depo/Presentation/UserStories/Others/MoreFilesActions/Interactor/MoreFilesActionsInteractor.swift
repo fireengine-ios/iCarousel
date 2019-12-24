@@ -259,10 +259,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             guard
                 let `self` = self,
                 let image = image
-                else {
-                    UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                    completion?()
-                    return
+            else {
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                completion?()
+                return
             }
             
             let controller = OverlayStickerViewController()
