@@ -163,15 +163,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
         if array.isEmpty {
             /// added asyncAfter 1 sec to wait PopUpController about success deleting
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { 
                 self.output.goBack()
-                
-                ///it is also to dismiss popup
-                if type == .hide {
-                    self.output.goBack()
-                }
-                
             }
         } else {
             output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
