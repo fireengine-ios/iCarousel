@@ -201,6 +201,8 @@ extension AlbumsSliderDataSource: LBCellsDelegate {
     func onLongPress(cell: UICollectionViewCell) {
         if !isSelectionActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
+        } else if let indexPath = collectionView.indexPath(for: cell) {
+            collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
 }
