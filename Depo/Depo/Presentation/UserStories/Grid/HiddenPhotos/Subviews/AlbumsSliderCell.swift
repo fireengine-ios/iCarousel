@@ -50,6 +50,10 @@ final class AlbumsSliderCell: UICollectionViewCell {
         return dataSource.isSelectionActive
     }
     
+    var isEmpty: Bool {
+        return dataSource.items.isEmpty
+    }
+    
     //MARK: - 
     
     override func awakeFromNib() {

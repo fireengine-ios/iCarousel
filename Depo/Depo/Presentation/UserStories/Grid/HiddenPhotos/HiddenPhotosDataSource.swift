@@ -48,7 +48,9 @@ final class HiddenPhotosDataSource: NSObject {
     private let filesDataSource = FilesDataSource()
     
     var isEmpty: Bool {
-        return allItems.first(where: { !$0.isEmpty }) == nil
+        let photosEmpty = allItems.first(where: { !$0.isEmpty }) == nil
+        let albumsEmpty = albumSlider?.isEmpty ?? true
+        return photosEmpty && albumsEmpty
     }
     
     private lazy var photoCellSize: CGSize = {
@@ -517,6 +519,8 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
         if !isSelectionStateActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
             albumSlider?.startSelection()
+        } else if let indexPath = collectionView.indexPath(for: cell) {
+            collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
 }
