@@ -152,6 +152,10 @@ extension AlbumDetailPresenter: ItemOperationManagerViewProtocol {
         view.disableRefresh()
     }
     
+    func didHide(items: [WrapData]) {
+        dataSource.deleteItems(items: items)
+    }
+    
     func didUnhide(items: [WrapData]) {
         view.disableRefresh()
         dataSource.deleteItems(items: items)

@@ -16,7 +16,7 @@ final class HiddenPhotosEmptyView: UIView, NibInit {
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 24)
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
         }
     }
     

@@ -282,7 +282,12 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
     }
 
     func openFaceImageGrouping() {
-        let controller = router.faceImage
-        router.pushViewController(viewController: controller)
+        if faceImageGrouping?.isFaceImageAllowed == true {
+            openPeopleAlbum()
+        } else {
+            let controller = router.faceImage
+            router.pushViewController(viewController: controller)
+        }
     }
+    
 }
