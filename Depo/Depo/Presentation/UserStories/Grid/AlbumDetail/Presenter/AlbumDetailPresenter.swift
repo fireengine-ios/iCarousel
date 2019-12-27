@@ -148,7 +148,12 @@ extension AlbumDetailPresenter: ItemOperationManagerViewProtocol {
         return albumId == selfAlbumId
     }
     
+    func moveToTrash(items: [Item]) {
+        view.disableRefresh()
+    }
+    
     func didUnhide(items: [WrapData]) {
+        view.disableRefresh()
         dataSource.deleteItems(items: items)
     }
     
