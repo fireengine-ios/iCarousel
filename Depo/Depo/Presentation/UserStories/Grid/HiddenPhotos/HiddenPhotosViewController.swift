@@ -54,7 +54,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = ColorConstants.whiteColor
-        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(onBeginRefreshing), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     
@@ -64,10 +64,14 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         emptyView.isHidden = true
     }
     
-    @objc private func reloadData() {
+    @objc private func onBeginRefreshing() {
+        reloadData()
+    }
+    
+    private func reloadData(resetSlider: Bool = true) {
         showSpinner()
         
-        dataSource.reset()
+        dataSource.reset(resetSlider: resetSlider)
         dataLoader.reloadData { [weak self] in
             guard let self = self else {
                 return
@@ -388,7 +392,9 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didUnhide(albums: [AlbumItem]) {
-        dataSource.removeSlider(items: albums)
+        dataSource.removeSlider(items: albums) { [weak self] in
+            self?.reloadData(resetSlider: false)
+        }
     }
     
     func moveToTrash(items: [Item]) {

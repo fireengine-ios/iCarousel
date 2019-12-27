@@ -63,10 +63,17 @@ final class AlbumsSliderDataSource: NSObject {
             items = newItems
             collectionView.reloadData()
         } else {
+            let insertItems = newItems.filter { !items.contains($0) }
+            
+            if insertItems.isEmpty {
+                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+                return
+            }
+            
             let startIndex = items.count
-            let endIndex = startIndex + newItems.count - 1
+            let endIndex = startIndex + insertItems.count - 1
            
-            items.append(contentsOf: newItems)
+            items.append(contentsOf: insertItems)
            
             let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
             collectionView.insertItems(at: indexPaths)

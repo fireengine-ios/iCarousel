@@ -71,9 +71,10 @@ final class AlbumsSliderCell: UICollectionViewCell {
         dataSource.appendItems(newItems)
     }
     
-    func removeItems(_ items: [BaseDataSourceItem]) {
+    func removeItems(_ items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
         dataSource.removeItems(items) { [weak self] in
             self?.checkEmptyLabel()
+            completion?()
         }
     }
     
