@@ -61,6 +61,7 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     //MARK: Do Not Show Again UI
 
+    /// seems like it can be removed in future
     @IBOutlet private weak var doNotShowAgainStackView: UIStackView!
     
     @IBOutlet private weak var doNotShowAgainLabel: UILabel! {
@@ -138,11 +139,13 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
             titleLabel.text = TextConstants.peopleAlbumWarningAlertTitle1
             descriptionLabel.text = TextConstants.peopleAlbumWarningAlertMessage1
             functionButton.setTitle(TextConstants.peopleAlbumWarningAlertButton1, for: .normal)
+            doNotShowAgainStackView.isHidden = true
 
         case .notPremiumUser:
             titleLabel.text = TextConstants.peopleAlbumWarningAlertTitle2
             descriptionLabel.text = TextConstants.peopleAlbumWarningAlertMessage2
             functionButton.setTitle(TextConstants.peopleAlbumWarningAlertButton2, for: .normal)
+            doNotShowAgainStackView.isHidden = true
 
         case .faceImageGroupingDisabled:
             titleLabel.text = TextConstants.peopleAlbumWarningAlertTitle3
