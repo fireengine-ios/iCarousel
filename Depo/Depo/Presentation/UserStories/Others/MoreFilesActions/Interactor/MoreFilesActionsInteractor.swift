@@ -419,15 +419,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        hiddenService.recoverItems(items) { response in
-            switch response {
-            case .success(_):
-                success()
-                
-            case .failed(let error):
-                fail(error)
-            }
-        }
+        fileService.unhide(items: items, success: success, fail: fail)
     }
     
     private func uphideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {

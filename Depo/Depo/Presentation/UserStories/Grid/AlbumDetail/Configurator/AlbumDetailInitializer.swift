@@ -84,7 +84,7 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: allowedHideFunctions, style: .default, tintColor: nil)
         
-        let presenter = AlbumDetailPresenter()
+        let presenter = HiddenAlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))

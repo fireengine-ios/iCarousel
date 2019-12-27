@@ -44,6 +44,10 @@ protocol BaseFilesGreedViewInput: class {
     
     func requestStopped()
     
+    func disableRefresh()
+    
+    func enableRefresh()
+    
     //MARK: ScrollIndicator
     
     func changeScrollIndicatorTitle(with text: String)
@@ -51,4 +55,5 @@ protocol BaseFilesGreedViewInput: class {
     func startScrollCollectionView()
     
     func endScrollCollectionView()
+    
 }
