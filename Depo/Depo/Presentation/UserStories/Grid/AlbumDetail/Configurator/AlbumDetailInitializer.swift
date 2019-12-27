@@ -24,14 +24,9 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
-                                               style: .default, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .delete],
+                                                      style: .default, tintColor: nil)
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromAlbum],
-                                               style: .default, tintColor: nil)
-        }
         
         let presenter = AlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
@@ -54,11 +49,18 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: false
         )
         
+        var selectionModeTypes: [ElementTypes] = [.createStory, .addToFavorites, .print, .removeFromAlbum ]
+        
+        let langCode = Device.locale
+        if langCode != "tr" {
+            selectionModeTypes = [.createStory, .addToFavorites, .removeFromAlbum ]
+        }
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],
-                                                                                     selectionModeTypes: [.createStory, .delete]),
+                                                                                     selectionModeTypes: selectionModeTypes),
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = album.name ?? ""
