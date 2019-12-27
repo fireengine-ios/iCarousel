@@ -148,24 +148,8 @@ extension AlbumDetailPresenter: ItemOperationManagerViewProtocol {
         return albumId == selfAlbumId
     }
     
-    func moveToTrash(items: [Item]) {
-        view.disableRefresh()
-    }
-    
     func didHide(items: [WrapData]) {
         dataSource.deleteItems(items: items)
     }
-    
-    func didUnhide(items: [WrapData]) {
-        view.disableRefresh()
-        dataSource.deleteItems(items: items)
-    }
-    
-    func didUnhide(albums: [AlbumItem]) {
-        guard let router = self.router as? AlbumDetailRouter else {
-            return
-        }
-        
-        router.back()
-    }
+
 }
