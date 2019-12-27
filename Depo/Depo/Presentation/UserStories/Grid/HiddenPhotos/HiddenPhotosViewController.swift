@@ -54,7 +54,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = ColorConstants.whiteColor
-        refreshControl.addTarget(self, action: #selector(onBeginRefreshing), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     
@@ -64,7 +64,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         emptyView.isHidden = true
     }
     
-    @objc private func onBeginRefreshing() {
+    @objc private func onRefresh() {
         reloadData()
     }
     
