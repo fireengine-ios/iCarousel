@@ -22,7 +22,7 @@ final class FaceImagePhotosConfigurator {
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .deleteFaceImage])
+                                                                   selectionModeTypes: [.createStory, .print, .removeFromFaceImageAlbum])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -46,12 +46,12 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromFaceImageAlbum],
+        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
                                                style: .default, tintColor: nil)
         
         let langCode = Device.locale
         if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromFaceImageAlbum],
+            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
                                                    style: .default, tintColor: nil)
         }
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
