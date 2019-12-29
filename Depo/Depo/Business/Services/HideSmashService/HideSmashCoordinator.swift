@@ -185,10 +185,14 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     }
 
     private func openPeopleAlbum() {
-        let router = RouterVC()
-        let controller = router.peopleListController()
-
-        router.pushViewController(viewController: controller)
+        
+        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            let controller = self.router.peopleListController()
+            self.router.pushViewController(viewController: controller)
+        })
     }
 }
 
@@ -282,19 +286,32 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
     }
-
+    
     func openPremium() {
-        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
-        router.pushViewController(viewController: controller)
+        
+        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+            self.router.pushViewController(viewController: controller)
+        })
     }
-
+    
     func openFaceImageGrouping() {
-        if faceImageGrouping?.isFaceImageAllowed == true {
-            openPeopleAlbum()
-        } else {
-            let controller = router.faceImage
-            router.pushViewController(viewController: controller)
-        }
+        
+        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            if self.faceImageGrouping?.isFaceImageAllowed == true {
+                self.openPeopleAlbum()
+            } else {
+                let controller = self.router.faceImage
+                self.router.pushViewController(viewController: controller)
+            }
+        })
     }
     
 }
