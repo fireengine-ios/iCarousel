@@ -1761,6 +1761,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func didHide(items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
         if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return

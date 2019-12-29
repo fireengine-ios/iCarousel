@@ -20,9 +20,16 @@ final class FaceImagePhotosConfigurator {
         router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
+    
+        var selectionModeTypes: [ElementTypes] = [.createStory, .print, .removeFromFaceImageAlbum]
+        
+        let langCode = Device.locale
+        if langCode != "tr" {
+            selectionModeTypes = [.createStory, .removeFromFaceImageAlbum]
+        }
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .print, .removeFromFaceImageAlbum])
+                                                                   selectionModeTypes: selectionModeTypes)
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -46,14 +53,10 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
                                                style: .default, tintColor: nil)
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
-                                                   style: .default, tintColor: nil)
-        }
+        
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
