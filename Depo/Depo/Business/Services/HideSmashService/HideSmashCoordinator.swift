@@ -268,8 +268,15 @@ extension HideFunctionalityService {
 
 extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openHiddenAlbum() {
-        let controller = router.hiddenPhotosViewController()
-        router.pushViewController(viewController: controller)
+        
+        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            let controller = self.router.hiddenPhotosViewController()
+            self.router.pushViewController(viewController: controller)
+        })
+        
     }
 
     func openPeopleAlbumIfPossible() {
