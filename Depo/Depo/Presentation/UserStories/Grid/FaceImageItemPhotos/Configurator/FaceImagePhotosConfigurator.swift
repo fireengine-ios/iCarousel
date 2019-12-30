@@ -22,8 +22,8 @@ final class FaceImagePhotosConfigurator {
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
         
         var types: [ElementTypes] = [.select, .changeCoverPhoto]
-        if item.fileType.isFaceImageType {
-            switch item.status {
+        if item.fileType.isFaceImageType, let status = album.preview?.status {
+            switch status {
             case .hidden:
                 types.append(contentsOf: [.unhide, .completelyMoveToTrash])
             case .trashed:

@@ -11,7 +11,7 @@ import UIKit
 
 protocol FaceImagePhotosViewInput: class {
     func setHeaderImage(with path: PathForItem)
-    func setupHeader(with item: Item)
+    func setupHeader(with item: Item, album: AlbumItem?)
     func reloadName(_ name: String)
     func hiddenSlider(isHidden: Bool)
     func dismiss()
