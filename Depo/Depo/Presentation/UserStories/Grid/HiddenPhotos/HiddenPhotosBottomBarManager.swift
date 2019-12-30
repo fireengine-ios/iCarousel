@@ -56,8 +56,7 @@ final class HiddenPhotosBottomBarManager {
     }
     
     func show() {
-        let router = RouterVC()
-        bottomBarPresenter.show(animated: true, onView: router.defaultTopController?.view )
+        bottomBarPresenter.show(animated: true, onView: nil)
     }
     
     func hide() {

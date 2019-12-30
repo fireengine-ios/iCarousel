@@ -1371,8 +1371,8 @@
 "carousel_view_third_page_title" = "Merge your photos. Lorem ipsum! 3";
 "carousel_view_third_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 3";
 "hidden_bin_album_slider_title" = "My Hidden Albums";
-"hidden_bin_album_slider_empty" = "There is no deleted album yet.";
-"hidden_bin_empty" = "There is no deleted item yet.";
+"hidden_bin_album_slider_empty" = "There is no hidden album yet.";
+"hidden_bin_empty" = "There is no hidden item yet.";
 "hidden_bin_navbar_title" = "Hidden";
 "unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
 

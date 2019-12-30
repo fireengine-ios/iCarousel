@@ -8,6 +8,7 @@
 
 import UIKit
 import YYImage
+import ImageIO
 
 enum AttachedEntityType {
     case gif
@@ -76,28 +77,25 @@ final class OverlayStickerImageView: UIImageView {
     }
     
     func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
-        
-        if subviews.contains(where: { $0 is YYAnimatedImageView}) {
-            self.subviews.forEach({ $0.isHidden = true})
+            if self.subviews.contains(where: { $0 is YYAnimatedImageView}) {
+                self.subviews.forEach({ $0.isHidden = true})
+                
+                guard let img = UIImage.imageWithView(view: self) else {
+                    return completion(.failure(.unknown))
+                }
+                self.subviews.forEach({ $0.isHidden = false})
+                
+                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img, completion: completion)
             
-            guard let img = UIImage.imageWithView(view: self) else {
-                return completion(.failure(.unknown))
+            } else {
+                
+                guard let sticker = UIImage.imageWithView(view: self) else {
+                    completion(.failure(.unknown))
+                    return
+                }
+                
+                self.saveImage(image: sticker, fileName: resultName, completion: completion)
             }
-            
-            self.subviews.forEach({ $0.isHidden = false})
-            
-            overlayAnimationService.combine(attachments: attachments, resultName: resultName, originalImage: img, completion: completion)
-            
-            attachments.removeAll()
-        } else {
-            
-            guard let sticker = UIImage.imageWithView(view: self) else {
-                completion(.failure(.unknown))
-                return
-            }
-
-            saveImage(image: sticker, fileName: resultName, completion: completion)
-        }
     }
     
     private func saveImage(image: UIImage, fileName: String, completion: (CreateOverlayStickersResult) -> ()) {
@@ -132,6 +130,7 @@ final class OverlayStickerImageView: UIImageView {
             assertionFailure()
             return
         }
+
         
         let imageView = YYAnimatedImageView(image: image)
         imageView.center = self.center
@@ -192,10 +191,6 @@ final class OverlayStickerImageView: UIImageView {
             
             
             selectedSticker.center = CGPoint(x: startPosition.x + translation.x, y: startPosition.y + translation.y)
-            
-            //            if self.contentClippingRect.contains(CGPoint(x: startPosition.x + translation.x, y: startPosition.y + translation.y)) {
-            //
-            //            }
             
         case .ended, .cancelled, .failed, .possible:
             

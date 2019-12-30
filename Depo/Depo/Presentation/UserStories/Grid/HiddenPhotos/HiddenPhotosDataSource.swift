@@ -166,15 +166,17 @@ extension HiddenPhotosDataSource {
         completion()
     }
     
-    func removeSlider(items: [BaseDataSourceItem]) {
-        albumSlider?.removeItems(items)
+    func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
+        albumSlider?.removeItems(items, completion: completion)
     }
     
-    func reset() {
+    func reset(resetSlider: Bool) {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
-        albumSlider?.reset()
+        if resetSlider {
+            albumSlider?.reset()
+        }
         collectionView.reloadData()
     }
     
@@ -252,7 +254,10 @@ extension HiddenPhotosDataSource {
         var insertedIndexPaths = [IndexPath]()
         var insertedSections = IndexSet()
         
-        for item in newItems {
+        let allMedia = allItems.flatMap { $0 }
+        let insertItems = newItems.filter { !allMedia.contains($0) }
+        
+        for item in insertItems {
             autoreleasepool {
                 let insertResult: InsertItemResult?
                 if !allItems.isEmpty,

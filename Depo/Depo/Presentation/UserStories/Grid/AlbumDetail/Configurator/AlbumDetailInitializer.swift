@@ -24,14 +24,9 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
-                                               style: .default, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .delete],
+                                                      style: .default, tintColor: nil)
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromAlbum],
-                                               style: .default, tintColor: nil)
-        }
         
         let presenter = AlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
@@ -54,11 +49,21 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: false
         )
         
+        let selectionModeTypes: [ElementTypes]
+        
+        let langCode = Device.locale
+        if langCode != "tr" {
+            selectionModeTypes = [.createStory, .removeFromAlbum ]
+        } else {
+            selectionModeTypes = [.createStory, .print, .removeFromAlbum ]
+        }
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
+
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .select],
-                                                                                     selectionModeTypes: [.createStory, .delete]),
+                                                                                     selectionModeTypes: selectionModeTypes),
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = album.name ?? ""
@@ -82,7 +87,7 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: allowedHideFunctions, style: .default, tintColor: nil)
         
-        let presenter = AlbumDetailPresenter()
+        let presenter = HiddenAlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))

@@ -28,15 +28,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWd-zU-E06">
                             <rect key="frame" x="349" y="0.0" width="65" height="65"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcq-mP-Wv0">
-                                    <rect key="frame" x="9.5" y="17.5" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcq-mP-Wv0">
+                                    <rect key="frame" x="21.5" y="21.5" width="22" height="22"/>
+                                    <state key="normal" image="undo"/>
                                     <connections>
                                         <action selector="undoButtonTapped:" destination="-1" eventType="touchUpInside" id="gKy-0M-9qu"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="hWd-zU-E06" secondAttribute="height" multiplier="1:1" id="BRF-oa-z1V"/>
                                 <constraint firstItem="gcq-mP-Wv0" firstAttribute="centerX" secondItem="hWd-zU-E06" secondAttribute="centerX" id="JTF-CX-oom"/>
@@ -132,5 +132,6 @@
     <resources>
         <image name="gif" width="28" height="30"/>
         <image name="sticker" width="32" height="32"/>
+        <image name="undo" width="22" height="22"/>
     </resources>
 </document>
