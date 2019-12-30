@@ -340,7 +340,11 @@ final class HiddenPhotosDataLoader {
     //MARK: - Unhide methods
     
     private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        hiddenService.recoverItems(items, handler: handler)
+        fileService.unhide(items: items, success: {
+            handler(.success(()))
+        }) { error in
+            handler(.failed(error))
+        }
     }
     
     private func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {

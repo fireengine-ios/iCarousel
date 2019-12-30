@@ -134,7 +134,7 @@ final class LoadingImageView: UIImageView {
     }
 
     func loadImage(with object: Item?, smooth: Bool = false) {
-        guard let object = object, path != object.patchToPreview else {
+        guard let object = object else {
             cancelLoadRequest()
             
             if !smooth {
@@ -144,6 +144,11 @@ final class LoadingImageView: UIImageView {
             return
         }
         
+        guard path != object.patchToPreview else {
+            return
+        }
+        
+        cancelLoadRequest()
         path = object.patchToPreview
         
         loadImageData(object: object, smooth: smooth)

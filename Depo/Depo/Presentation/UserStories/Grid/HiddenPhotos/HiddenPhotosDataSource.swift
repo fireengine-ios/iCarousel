@@ -48,7 +48,9 @@ final class HiddenPhotosDataSource: NSObject {
     private let filesDataSource = FilesDataSource()
     
     var isEmpty: Bool {
-        return allItems.first(where: { !$0.isEmpty }) == nil
+        let photosEmpty = allItems.first(where: { !$0.isEmpty }) == nil
+        let albumsEmpty = albumSlider?.isEmpty ?? true
+        return photosEmpty && albumsEmpty
     }
     
     private lazy var photoCellSize: CGSize = {
@@ -164,15 +166,17 @@ extension HiddenPhotosDataSource {
         completion()
     }
     
-    func removeSlider(items: [BaseDataSourceItem]) {
-        albumSlider?.removeItems(items)
+    func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
+        albumSlider?.removeItems(items, completion: completion)
     }
     
-    func reset() {
+    func reset(resetSlider: Bool) {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
-        albumSlider?.reset()
+        if resetSlider {
+            albumSlider?.reset()
+        }
         collectionView.reloadData()
     }
     
@@ -250,7 +254,10 @@ extension HiddenPhotosDataSource {
         var insertedIndexPaths = [IndexPath]()
         var insertedSections = IndexSet()
         
-        for item in newItems {
+        let allMedia = allItems.flatMap { $0 }
+        let insertItems = newItems.filter { !allMedia.contains($0) }
+        
+        for item in insertItems {
             autoreleasepool {
                 let insertResult: InsertItemResult?
                 if !allItems.isEmpty,
@@ -517,6 +524,8 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
         if !isSelectionStateActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
             albumSlider?.startSelection()
+        } else if let indexPath = collectionView.indexPath(for: cell) {
+            collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
 }
