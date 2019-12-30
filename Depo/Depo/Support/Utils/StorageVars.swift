@@ -141,13 +141,13 @@ final class UserDefaultsVars: StorageVars {
     
     private let showCampaignInstaPickWithDaysLeftKey = "campaignShown"
     var shownCampaignInstaPickWithDaysLeft: Date? {
-        get { return userDefaults.object(forKey: showCampaignInstaPickWithDaysLeftKey) as? Date }
-        set { userDefaults.set(newValue, forKey: showCampaignInstaPickWithDaysLeftKey) }
+        get { return userDefaults.object(forKey: showCampaignInstaPickWithDaysLeftKey + SingletonStorage.shared.uniqueUserID) as? Date }
+        set { userDefaults.set(newValue, forKey: showCampaignInstaPickWithDaysLeftKey + SingletonStorage.shared.uniqueUserID) }
     }
     
     private let showCampaignInstaPickWithoutDaysLeftKey = "campaignShownWithoutDaysLeft"
     var shownCampaignInstaPickWithoutDaysLeft: Date? {
-        get { return userDefaults.object(forKey: showCampaignInstaPickWithoutDaysLeftKey) as? Date }
-        set { userDefaults.set(newValue, forKey: showCampaignInstaPickWithoutDaysLeftKey) }
+        get { return userDefaults.object(forKey: showCampaignInstaPickWithoutDaysLeftKey + SingletonStorage.shared.uniqueUserID) as? Date }
+        set { userDefaults.set(newValue, forKey: showCampaignInstaPickWithoutDaysLeftKey + SingletonStorage.shared.uniqueUserID) }
     }
 }
