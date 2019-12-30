@@ -139,8 +139,14 @@ final class GIF2MP4 {
 
         let data = CVPixelBufferGetBaseAddress(pixelBuffer)
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-        guard let context = CGContext(data: data, width: Int(size.width), height: Int(size.height),
-                                      bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue), let CGimage = image.cgImage
+        guard let context = CGContext(data: data,
+                                      width: Int(size.width),
+                                      height: Int(size.height),
+                                      bitsPerComponent: 8,
+                                      bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                      space: rgbColorSpace,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue),
+                                      let CGimage = image.cgImage
         else {
                 assertionFailure()
                 return nil
@@ -189,7 +195,7 @@ final class GIF {
         guard let imgSource = CGImageSourceCreateWithData(data as CFData, nil), let imgType = CGImageSourceGetType(imgSource) , UTTypeConformsTo(imgType, kUTTypeGIF) else {
             return nil
         }
-        self.imageSource = imgSource
+        self.imageSource =  imgSource
         
         guard let picSource = self.imageSource  else {
             assertionFailure()

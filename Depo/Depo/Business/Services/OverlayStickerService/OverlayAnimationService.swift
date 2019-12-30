@@ -16,18 +16,18 @@ final class OverlayAnimationService {
         
         var origin: CGPoint
         var size: CGSize
-        var rotation: CGFloat
         var images: [UIImage]
+        var transform: CGAffineTransform
         
-        init(origin: CGPoint, size: CGSize, rotation: CGFloat, images: [UIImage] ) {
+        init(origin: CGPoint, size: CGSize, images: [UIImage], transform: CGAffineTransform) {
             self.origin = origin
             self.size = size
-            self.rotation = rotation
             self.images = images
+            self.transform = transform
         }
     }
     
-    private let duration:TimeInterval = 2
+    private let duration:TimeInterval = 2.5
     private var numberOfFrames = 25
     
     func combine(attachments: [UIImageView],
@@ -44,22 +44,24 @@ final class OverlayAnimationService {
         
         attachments.forEach({ item in
             
-            let rotation = atan2(item.transform.b, item.transform.a)
-
-            let x = item.frame.origin.x
-            let y = item.frame.origin.y
+            let transform = item.transform
+    
+            let x = item.center.x
+            let y = item.center.y
             let origin = CGPoint(x: x , y: y)
-        
+            
             var images = [UIImage]()
             
-            if let newItem = item.image as? YYImage {
-                for index in 0 ..< newItem.animatedImageFrameCount() {
-                    guard let image = newItem.animatedImageFrame(at: index) else {
-                        completion(.failure(.unknown))
-                        return
-                    }
-                    images.append(image)
+        
+            if let newItem =  item.image as? YYImage {
+                
+                guard let data = newItem.animatedImageData, let img = UIImage.gifImageWithData(data: data as NSData), let imgs = img.images else {
+                    assertionFailure()
+                    return
                 }
+
+                images.append(contentsOf: imgs)
+                
             } else {
                 if let newItem = item.image {
                     images.append(newItem)
@@ -68,15 +70,16 @@ final class OverlayAnimationService {
             
             let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
             
-            let attachment = Attachment(origin: origin, size: CGSize(width: item.bounds.width,
-                                                                    height: item.bounds.width),
-                                                                  rotation: rotation,
-                                                                    images: frames)
+            let attachment = Attachment(origin: origin,
+                                          size: CGSize(width: item.bounds.width,
+                                        height: item.bounds.width),
+                                        images: frames,
+                                     transform: transform)
             
             attach.append(attachment)
         })
         
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .userInitiated).async {
             
             let frameCount = attach.contains(where: { $0.images.count > 1}) ? self.numberOfFrames : 1
             
@@ -166,30 +169,36 @@ final class OverlayAnimationService {
         var images = Array.init(repeating: bgImage, count: framesCount)
         
         for attach in attacments {
-            var newImage = [UIImage]()
-            for (index, image) in images.enumerated() {
+            autoreleasepool {
                 
-                let indeX = attach.images.count == 1 ? attach.images.startIndex : index
-                let img = renderFrame(bgImage: image, canvasSize: canvasSize, newImage: attach.images[indeX], rect: attach.origin, newImageSize: attach.size, rotation: attach.rotation)
-                newImage.append(img)
+                var newImage = [UIImage]()
+                
+                for (index, image) in images.enumerated() {
+                    
+                    autoreleasepool {
+                        let indeX = attach.images.count == 1 ? attach.images.startIndex : index
+                        let img = renderFrame(bgImage: image, canvasSize: canvasSize, newImage: attach.images[indeX], rect: attach.origin, newImageSize: attach.size, transform: attach.transform)
+                        newImage.append(img)
+                    }
+                }
+                images = newImage
             }
-            images = newImage
         }
         return images
     }
     
-    private func renderFrame(bgImage: UIImage, canvasSize: CGSize, newImage: UIImage?, rect: CGPoint?, newImageSize: CGSize?, rotation: CGFloat?) -> UIImage {
+    private func renderFrame(bgImage: UIImage, canvasSize: CGSize, newImage: UIImage?, rect: CGPoint?, newImageSize: CGSize?, transform: CGAffineTransform) -> UIImage {
         
         let renderer = UIGraphicsImageRenderer(size: canvasSize)
+        
         let image = renderer.image(actions: { context in
-            
             bgImage.draw(in: CGRect(origin: CGPoint.zero, size: canvasSize))
             
-            if let newImage = newImage, let rect = rect, let newSize = newImageSize, let rotation = rotation {
-//                context.cgContext.concatenate(newImage.)
+            if let newImage = newImage, let rect = rect, let newSize = newImageSize {
                 context.cgContext.translateBy(x: rect.x, y: rect.y)
-                context.cgContext.rotate(by: rotation)
-                
+                context.cgContext.concatenate(transform)
+                context.cgContext.translateBy(x: -newSize.width * 0.5,
+                                              y: -newSize.height * 0.5)
                 newImage.draw(in: CGRect(origin: CGPoint.zero, size: newSize))
             }
         })
@@ -204,12 +213,21 @@ final class OverlayAnimationService {
             completion(nil)
             return
         }
+        
         encoder.loopCount = 0
 
         photos.forEach({ photo in
+            autoreleasepool {
             encoder.add(photo, duration: photoFrameDuration)
+            }
         })
         
+        photos.forEach({ photo in
+            autoreleasepool {
+            encoder.add(photo, duration: photoFrameDuration)
+            }
+        })
+    
         if let data = encoder.encode() {
             completion(data)
         } else {
