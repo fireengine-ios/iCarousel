@@ -220,15 +220,11 @@ final class OverlayAnimationService {
         encoder.loopCount = 0
         
         photos.forEach({ photo in
-            autoreleasepool {
-                encoder.add(photo, duration: photoFrameDuration)
-            }
+            encoder.add(photo, duration: photoFrameDuration)
         })
         
         photos.forEach({ photo in
-            autoreleasepool {
-                encoder.add(photo, duration: photoFrameDuration)
-            }
+            encoder.add(photo, duration: photoFrameDuration)
         })
         
         if let data = encoder.encode() {
