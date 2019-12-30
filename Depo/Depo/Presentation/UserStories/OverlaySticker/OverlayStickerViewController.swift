@@ -39,8 +39,10 @@ final class OverlayStickerViewController: ViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private lazy var defaultName = UUID().uuidString
     var selectedImage: UIImage?
     var imageName: String?
+    
     
     private var pictureAttachment = [Attachment]()
     private var gifAttachment = [Attachment]()
@@ -102,7 +104,7 @@ final class OverlayStickerViewController: ViewController {
   
         DispatchQueue.main.async { [weak self] in
             
-            self?.overlayingStickerImageView.overlayStickers(resultName: self?.imageName ?? UUID().uuidString) { [weak self] result in
+            self?.overlayingStickerImageView.overlayStickers(resultName: self?.imageName ?? defaultName) { [weak self] result in
                 self?.hideSpinnerIncludeNavigationBar()
                 let popUp = PopUpController.with(title: TextConstants.save,
                                                  message: TextConstants.smashPopUpMessage,
@@ -115,7 +117,6 @@ final class OverlayStickerViewController: ViewController {
                                                  secondAction: { popup in
                                                     popup.close()
                                                     self?.showFullscreenHUD(with: nil, and: {})
-                                                    
                                                     
                                                     self?.saveResult(result: result)
                 })

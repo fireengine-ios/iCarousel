@@ -51,11 +51,14 @@ final class OverlayAnimationService {
             let origin = CGPoint(x: x , y: y)
             
             var images = [UIImage]()
-            
         
             if let newItem =  item.image as? YYImage {
                 
-                guard let data = newItem.animatedImageData, let img = UIImage.gifImageWithData(data: data as NSData), let imgs = img.images else {
+                guard
+                    let data = newItem.animatedImageData,
+                    let gifImage = UIImage.gifImageWithData(data: data as NSData),
+                    let imgs = gifImage.images
+                else {
                     assertionFailure()
                     return
                 }
@@ -215,19 +218,19 @@ final class OverlayAnimationService {
         }
         
         encoder.loopCount = 0
-
+        
         photos.forEach({ photo in
             autoreleasepool {
-            encoder.add(photo, duration: photoFrameDuration)
+                encoder.add(photo, duration: photoFrameDuration)
             }
         })
         
         photos.forEach({ photo in
             autoreleasepool {
-            encoder.add(photo, duration: photoFrameDuration)
+                encoder.add(photo, duration: photoFrameDuration)
             }
         })
-    
+        
         if let data = encoder.encode() {
             completion(data)
         } else {
