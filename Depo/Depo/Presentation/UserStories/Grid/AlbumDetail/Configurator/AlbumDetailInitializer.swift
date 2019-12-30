@@ -57,7 +57,7 @@ class AlbumDetailModuleInitializer: NSObject {
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),
                                topBarConfig: gridListTopBarConfig)
         

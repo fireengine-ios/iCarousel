@@ -7,6 +7,9 @@
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted";
 "confirmation_popup_title_hide" = "Hide Selected";
 "confirmation_popup_message_hide" = "The selected files will be hidden lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
+"confirmation_popup_message_hide_albums" = "Hide Selected Albums";
+"confirmation_popup_title_hide_single_album" = "Hide Album";
+"confirmation_popup_message_hide_single_album" = "You will not see this album...";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
@@ -690,6 +693,8 @@
 "Quick Scroll Preparation" = "Preparing your photos and videos";
 "hide_success_popup_message" = "Items are hidden successfully";
 "hide_success_popup_button_title" = "Hidden items >";
+"hide_single_album_success_popup_message" = "Album is hidden successfully";
+"hide_albums_success_popup_message" = "Selected albums are hidden successfully";
 
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";

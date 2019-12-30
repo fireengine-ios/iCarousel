@@ -285,20 +285,23 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func hide(items: [BaseDataSourceItem]) {
-        guard let items = items as? [Item] else {
-            assertionFailure("Unexpected type of items")
-            return
-        }
-        
         let remoteItems = items.filter { !$0.isLocalItem }
         guard !remoteItems.isEmpty else {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-
-        hideFunctionalityService.startHideOperation(for: remoteItems,
-                                                    success: self.succesAction(elementType: .hide),
-                                                    fail: self.failAction(elementType: .hide))
+        
+        if let albumItems = items as? [AlbumItem] {
+            hideFunctionalityService.startHideAlbumsOperation(for: albumItems,
+                                                              success: self.succesAction(elementType: .hide),
+                                                              fail: self.failAction(elementType: .hide))
+        } else if let items = remoteItems as? [Item] {
+            hideFunctionalityService.startHideOperation(for: items,
+                                                        success: self.succesAction(elementType: .hide),
+                                                        fail: self.failAction(elementType: .hide))
+        } else {
+            assertionFailure("Unexpected type of items")
+        }
     }
     
     func simpleHide(items: [BaseDataSourceItem]) {
@@ -493,6 +496,35 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
         
         router.presentViewController(controller: controller)
+    }
+    
+    func completelyMoveToTrash(albums: [BaseDataSourceItem]) {
+        let okHandler: VoidHandler = { [weak self] in
+                guard let albums = albums as? [AlbumItem] else { return }
+                self?.output?.operationStarted(type: .completelyMoveToTrash)
+                let albumService = PhotosAlbumService()
+                albumService.completelyMoveToTrash(albums: albums, success: { [weak self] deletedAlbums in
+                    DispatchQueue.main.async {
+                        self?.output?.operationFinished(type: .completelyMoveToTrash)
+                        ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+                    }
+                    }, fail: { [weak self] errorRespone in
+                        DispatchQueue.main.async {
+                            self?.output?.operationFailed(type: .completelyMoveToTrash, message: errorRespone.description)
+                        }
+                })
+            }
+            
+            let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                                  message: TextConstants.deleteAlbums,
+                                                  image: .delete,
+                                                  firstButtonTitle: TextConstants.cancel,
+                                                  secondButtonTitle: TextConstants.ok,
+                                                  secondAction: { vc in
+                                                    vc.close(completion: okHandler)
+            })
+            
+            router.presentViewController(controller: controller)
     }
     
     private func deleteItems(items: [Item]) {

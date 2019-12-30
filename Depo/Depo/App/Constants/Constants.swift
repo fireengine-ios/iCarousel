@@ -726,7 +726,9 @@ struct TextConstants {
     static let prepareQuickScroll = NSLocalizedString("Quick Scroll Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideSuccessPopupMessage = NSLocalizedString("hide_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideSuccessPopupButtonTitle = NSLocalizedString("hide_success_popup_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let hideSingleAlbumSuccessPopupMessage = NSLocalizedString("hide_single_album_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideAlbumsSuccessPopupMessage = NSLocalizedString("hide_albums_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     // MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -957,6 +959,9 @@ struct TextConstants {
     
     static let hideItemsWarningTitle = NSLocalizedString("confirmation_popup_title_hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideItemsWarningMessage = NSLocalizedString("confirmation_popup_message_hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideAlbumsWarningMessage = NSLocalizedString("confirmation_popup_message_hide_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSingleAlbumWarnigTitle = NSLocalizedString("confirmation_popup_title_hide_single_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSingleAlbumWarnigMessage = NSLocalizedString("confirmation_popup_message_hide_single_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginAddGSM = NSLocalizedString("Add GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

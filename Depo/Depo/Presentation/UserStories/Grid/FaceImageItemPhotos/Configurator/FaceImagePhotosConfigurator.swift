@@ -21,7 +21,19 @@ final class FaceImagePhotosConfigurator {
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
         
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
+        var types: [ElementTypes] = [.select, .changeCoverPhoto]
+        if item.fileType.isFaceImageType {
+            switch item.status {
+            case .hidden:
+                types.append(contentsOf: [.unhide, .completelyMoveToTrash])
+            case .trashed:
+                types.append(contentsOf: [.hide, .completelyDeleteAlbums])
+            default:
+                types.append(contentsOf: [.hide, .completelyMoveToTrash])
+            }
+        }
+        
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: types,
                                                                    selectionModeTypes: [.createStory, .deleteFaceImage])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()

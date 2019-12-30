@@ -20,6 +20,7 @@ import UIKit
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
+    private var hideButton: UIButton!
     
     // MARK: - UIViewController lifecycle
     
@@ -61,6 +62,12 @@ import UIKit
         }
     }
     
+    @objc func hideAlbum() {
+        if let output = output as? FaceImagePhotosViewOutput {
+            output.hideAlbum()
+        }
+    }
+    
     private func configureTitleNavigationBar() {
         if mainTitle.isEmpty {
             mainTitle = TextConstants.faceImageAddName
@@ -71,7 +78,7 @@ import UIKit
 
     // MARK: - Header View Methods
     
-    private func setupHeaderViewWith(peopleItem: PeopleItem?) {
+    private func setupHeaderView(with item: Item) {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(headerView)
         headerView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
@@ -99,7 +106,24 @@ import UIKit
         countPhotosLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         countPhotosLabel.bottomAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: -16).isActive = true
 
-        if let peopleItem = peopleItem {
+        let frame = CGRect(origin: .zero, size: CGSize(width: 35, height: 35))
+        hideButton = UIButton(frame: frame)
+        hideButton.layer.shadowColor = UIColor.black.cgColor
+        hideButton.layer.shadowOpacity = 0.5
+        hideButton.layer.shadowOffset = .zero
+        hideButton.layer.shadowRadius = 5
+        hideButton.layer.shadowPath = UIBezierPath(rect: frame).cgPath
+        hideButton.setImage(UIImage(named: "hiddenAlbum"), for: .normal)
+        headerView.addSubview(hideButton)
+        hideButton.translatesAutoresizingMaskIntoConstraints = false
+        headerView.bottomAnchor.constraint(equalTo: hideButton.bottomAnchor, constant: 25).isActive = true
+        headerView.rightAnchor.constraint(equalTo: hideButton.rightAnchor, constant: 14).isActive = true
+        hideButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        hideButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        hideButton.addTarget(self, action: #selector(hideAlbum), for: .touchUpInside)
+        hideButton.isHidden = item.status == .hidden
+        
+        if let peopleItem = item as? PeopleItem {
             createAlbumsSliderWith(peopleItem: peopleItem)
             if let albumsView = albumsSlider?.view {
                 albumsView.translatesAutoresizingMaskIntoConstraints = false
@@ -181,8 +205,8 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         headerImage.loadImage(with: path)
     }
     
-    func setupHeader(forPeopleItem item: PeopleItem?) {
-        setupHeaderViewWith(peopleItem: item)
+    func setupHeader(with item: Item) {
+        setupHeaderView(with: item)
     }
     
     func dismiss() {

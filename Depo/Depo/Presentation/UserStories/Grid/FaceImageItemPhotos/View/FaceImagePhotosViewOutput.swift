@@ -9,4 +9,5 @@
 protocol FaceImagePhotosViewOutput {
     func openAddName()
     func faceImageType() -> FaceImageType?
+    func hideAlbum()
 }

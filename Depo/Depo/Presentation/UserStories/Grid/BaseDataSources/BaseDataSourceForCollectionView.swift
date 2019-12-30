@@ -1955,6 +1955,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
     }
+    
+    func didHide(items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didHide(albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
 }
 
 

@@ -235,8 +235,26 @@ class PhotosAlbumService: BaseRequestService {
             debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
+            fileService.delete(deleteFiles: items, success: nil, fail: nil)
+            self.delete(albums: deleteAlbums, success: success, fail: fail)
+        }
+    }
+    
+    func completelyMoveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService completelyDelete")
+        
+        let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
+        guard !moveToTrashAlbums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
+        loadAllItemsFrom(albums: moveToTrashAlbums) { items in
+            debugLog("PhotosAlbumService loadAllItemsFrom")
+
+            let fileService = WrapItemFileService()
             fileService.moveToTrash(files: items, success: nil, fail: nil)
-            self.moveToTrash(albums: deleteAlbums, success: success, fail: fail)
+            self.moveToTrash(albums: moveToTrashAlbums, success: success, fail: fail)
         }
     }
     
@@ -347,7 +365,7 @@ class PhotosAlbumService: BaseRequestService {
     func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService moveToTrashAlbums")
 
-        let moveToTrashAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
         guard !moveToTrashAlbums.isEmpty else {
             fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
             return

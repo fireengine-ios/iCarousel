@@ -843,6 +843,22 @@ final class HiddenService {
         return hideItemsByUuids(ids, handler: handler)
     }
     
+    @discardableResult
+    func hideAlbums(_ albums: [AlbumItem],
+                    handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("hideAlbums")
+        let ids = albums.compactMap { $0.uuid }
+        return hideItemsByUuids(ids) { result in
+            switch result {
+            case .success(_):
+                ItemOperationManager.default.didHide(albums: albums)
+                handler(.success(()))
+            case .failed(let error):
+                handler(.failed(error))
+            }
+        }
+    }
+    
     private func hideAlbumByUuids(_ uuids: [String],
                                   handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("hideAlbumByUuids")

@@ -21,6 +21,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         self.item = item
         self.isSearchItem = isSearchItem
         super.init()
+        dataSource = FaceImagePhotosDataSource(sortingRules: sortedRule)
     }
     
     override func viewIsReady(collectionView: UICollectionView) {
@@ -28,6 +29,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         
         if let interactor = interactor as? FaceImagePhotosInteractor {
             dataSource.parentUUID = interactor.album?.uuid
+            (dataSource as? FaceImagePhotosDataSource)?.album = interactor.album
         }
         loadItem()
     }
@@ -97,8 +99,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             return
         }
         
-        view.setupHeader(forPeopleItem: item as? PeopleItem)
-        
+        view.setupHeader(with: item)
+            
         if let path = coverPhoto?.patchToPreview {
             view.setHeaderImage(with: path)
         }
@@ -118,6 +120,15 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func didDelete(items: [BaseDataSourceItem]) {
+        //hide or delete fir album
+        if let album = items.first as? AlbumItem,
+           let interactor = interactor as? FaceImagePhotosInteractor,
+           album == interactor.album {
+            faceImageItemsModuleOutput?.delete(item: item)
+            (view as? FaceImagePhotosViewInput)?.dismiss()
+            return
+        }
+        
         if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
             if let view = view as? FaceImagePhotosViewInput {
@@ -129,6 +140,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             }
         }
     }
+    
+    
 }
 
 // MARK: FaceImageChangeCoverModuleOutput
@@ -150,6 +163,12 @@ extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
     func openAddName() {
         if let router = router as? FaceImagePhotosRouter {
             router.openAddName(item, moduleOutput: self, isSearchItem: isSearchItem)
+        }
+    }
+    
+    func hideAlbum() {
+        if let interactor = interactor as? FaceImagePhotosInteractor {
+            interactor.hideAlbum()
         }
     }
     

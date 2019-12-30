@@ -37,8 +37,8 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
             debugLog("AlbumDetailPresenter operationFinished type == removeFromAlbum")
 
             //onReloadData()
-        case .completelyDeleteAlbums:
-            debugLog("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
+        case .completelyMoveToTrash:
+            debugLog("AlbumDetailPresenter operationFinished type == completelyMoveToTrash")
 
             router.back()
             albumDetailModuleOutput?.onAlbumDeleted()
