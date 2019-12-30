@@ -104,7 +104,11 @@ final class OverlayStickerViewController: ViewController {
   
         DispatchQueue.main.async { [weak self] in
             
-            self?.overlayingStickerImageView.overlayStickers(resultName: self?.imageName ?? defaultName) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
                 self?.hideSpinnerIncludeNavigationBar()
                 let popUp = PopUpController.with(title: TextConstants.save,
                                                  message: TextConstants.smashPopUpMessage,
