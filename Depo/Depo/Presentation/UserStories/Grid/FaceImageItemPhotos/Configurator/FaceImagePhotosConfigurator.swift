@@ -21,8 +21,17 @@ final class FaceImagePhotosConfigurator {
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
         
+        let selectionModeTypes: [ElementTypes]
+        
+        let langCode = Device.locale
+        if langCode != "tr" {
+            selectionModeTypes = [.createStory, .removeFromFaceImageAlbum]
+        } else {
+            selectionModeTypes = [.createStory, .print, .removeFromFaceImageAlbum]
+        }
+        
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .deleteFaceImage])
+                                                                   selectionModeTypes: selectionModeTypes)
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -46,14 +55,10 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromFaceImageAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
                                                style: .default, tintColor: nil)
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromFaceImageAlbum],
-                                                   style: .default, tintColor: nil)
-        }
+        
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
