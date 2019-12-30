@@ -186,10 +186,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private func openPeopleAlbum() {
         
-        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+        router.navigationController?.dismiss(animated: true, completion: {
+        
             let controller = self.router.peopleListController()
             self.router.pushViewController(viewController: controller)
         })
@@ -273,10 +271,8 @@ extension HideFunctionalityService {
 extension HideFunctionalityService: HideFuncRoutingProtocol {
     func openHiddenAlbum() {
         
-        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+        router.navigationController?.dismiss(animated: true, completion: {
+            
             let controller = self.router.hiddenPhotosViewController()
             self.router.pushViewController(viewController: controller)
         })
@@ -289,10 +285,7 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
     
     func openPremium() {
         
-        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+        router.navigationController?.dismiss(animated: true, completion: {
             let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
             self.router.pushViewController(viewController: controller)
         })
@@ -300,10 +293,7 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
     
     func openFaceImageGrouping() {
         
-        router.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+        router.navigationController?.dismiss(animated: true, completion: {
             
             if self.faceImageGrouping?.isFaceImageAllowed == true {
                 self.openPeopleAlbum()
