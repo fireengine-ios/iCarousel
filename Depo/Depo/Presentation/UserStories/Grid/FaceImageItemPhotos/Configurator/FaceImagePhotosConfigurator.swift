@@ -20,12 +20,14 @@ final class FaceImagePhotosConfigurator {
         router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
-    
-        var selectionModeTypes: [ElementTypes] = [.createStory, .print, .removeFromFaceImageAlbum]
+        
+        let selectionModeTypes: [ElementTypes]
         
         let langCode = Device.locale
         if langCode != "tr" {
             selectionModeTypes = [.createStory, .removeFromFaceImageAlbum]
+        } else {
+            selectionModeTypes = [.createStory, .print, .removeFromFaceImageAlbum]
         }
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
