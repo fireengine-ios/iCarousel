@@ -39,8 +39,10 @@ final class OverlayStickerViewController: ViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private lazy var defaultName = UUID().uuidString
     var selectedImage: UIImage?
     var imageName: String?
+    
     
     private var pictureAttachment = [Attachment]()
     private var gifAttachment = [Attachment]()
@@ -96,22 +98,37 @@ final class OverlayStickerViewController: ViewController {
         overlayingStickerImageView.removeLast()
     }
     
-    @objc func applyIconTapped() {
+    @objc private func applyIconTapped() {
         
         showFullscreenHUD(with: nil, and: {})
-        
-        overlayingStickerImageView.overlayStickers(resultName: imageName ?? UUID().uuidString) { [weak self] result in
+  
+        DispatchQueue.main.async { [weak self] in
             
-            let popUp = PopUpController.with(title: TextConstants.save, message: TextConstants.smashPopUpMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, firstUrl: nil, secondUrl: nil, firstAction: { popup in
-                popup.close()
-            }) { popup in
-                popup.close()
-                self?.showFullscreenHUD(with: nil, and: {})
-                self?.saveResult(result: result)
+            guard let self = self else {
+                return
             }
-            self?.hideSpinnerIncludeNavigationBar()
-            UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+            
+            self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
+                self?.hideSpinnerIncludeNavigationBar()
+                let popUp = PopUpController.with(title: TextConstants.save,
+                                                 message: TextConstants.smashPopUpMessage,
+                                                 image: .error,
+                                                 firstButtonTitle: TextConstants.cancel,
+                                                 secondButtonTitle: TextConstants.ok,
+                                                 firstUrl: nil,
+                                                 secondUrl: nil,
+                                                 firstAction: { popup in popup.close() },
+                                                 secondAction: { popup in
+                                                    popup.close()
+                                                    self?.showFullscreenHUD(with: nil, and: {})
+                                                    
+                                                    self?.saveResult(result: result)
+                })
+                self?.hideSpinnerIncludeNavigationBar()
+                UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+            }
         }
+
     }
     
     private func saveResult(result: CreateOverlayStickersResult) {
@@ -127,15 +144,20 @@ final class OverlayStickerViewController: ViewController {
                     case .image:
                         //TODO: Different logic for saving result
                         self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
+                            print("Saved in library")
                         }
                         self?.uploadImage(contentURL: result.url, completion: { isUploaded in
+                            print("uploaded")
                             self?.hideSpinnerIncludeNavigationBar()
                             self?.closeIconTapped()
                         })
         
                     case .video:
-                        self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in }
+                        self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
+                            print("Saved in library")
+                        }
                         self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
+                            print("uploaded")
                             self?.hideSpinnerIncludeNavigationBar()
                             self?.closeIconTapped()
                         })
