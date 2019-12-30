@@ -87,6 +87,22 @@ final class PeriodicContactsSyncSettings {
         }
     }
     
+    init(with syncPeriodic: SYNCPeriodic) {
+        switch syncPeriodic {
+        case .daily:
+            isPeriodicContactsSyncOptionEnabled = true
+            timeSetting.option = .daily
+        case .every7:
+            isPeriodicContactsSyncOptionEnabled = true
+            timeSetting.option = .weekly
+        case .every30:
+            isPeriodicContactsSyncOptionEnabled = true
+            timeSetting.option = .monthly
+        case .none:
+            disablePeriodicContactsSync()
+        }
+    }
+    
     func disablePeriodicContactsSync() {
         isPeriodicContactsSyncOptionEnabled = false
         timeSetting.option = .daily

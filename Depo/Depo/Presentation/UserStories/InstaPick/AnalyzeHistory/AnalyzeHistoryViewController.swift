@@ -524,7 +524,6 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     }
     
     private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult) {
-        
         instaPickCampaignService.getController { [weak self] navController in
             DispatchQueue.toMain {
                 if let navController = navController,

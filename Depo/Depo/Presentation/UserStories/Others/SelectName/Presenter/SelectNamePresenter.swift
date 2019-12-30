@@ -39,10 +39,10 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     }
     
     func onNextButton(name: String) {
-        if name.trimmingCharacters(in: CharacterSet.whitespaces).count > 0 {
-            interactor.onNextButton(name: name)
+        if name.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
+            operationFailedWithError(errorMessage: getTextForEmptyTextFieldAllert())
         } else {
-            UIApplication.showErrorAlert(message: getTextForEmptyTextFieldAllert())
+            interactor.onNextButton(name: name)
         }
     }
     

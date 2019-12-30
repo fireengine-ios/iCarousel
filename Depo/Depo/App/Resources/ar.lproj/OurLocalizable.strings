@@ -586,7 +586,7 @@
 "widgetTopTitleInactive" = "المزامنة التلقائية غير نشطة";
 "widgetTopTitleInProgress" = "المزامنة الآلية قيد التقدم";
 "error_authentication_message" = "يرجى فتح التطبيق وتسجيل الدخول للمتابعة";
-"error_authentication_title" = "تسجيل الدخول";
+"error_authentication_title" = "تسجيل الدخول إلى ٪@";
 "error_passcode_message" = "الرجاء فتح lifebox وتعطيل رمز المرور للمتابعة";
 "error_passcode_title" = "تم تمكين قفل رمز المرور";
 "Successfully purchased" = "تم الشراء بنجاح";
@@ -1288,3 +1288,8 @@
 "uppercase_miss_in_password" = "";
 "lowercase_miss_in_password" = "";
 "number_miss_in_password" = "";
+"password_length_below_limit" = "";
+"password_length_exceede" = "";
+"password_sequential_caharacters" = "";
+"password_same_caharacters" = "";
+"password_field_is_empty" = "";

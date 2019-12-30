@@ -19,39 +19,40 @@ extension LoadingImageViewDelegate {
     func onLoadingImageCanceled() {}
 }
 
-class LoadingImageView: UIImageView {
+final class LoadingImageView: UIImageView {
 
     private let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
     private var url: URL?
     private var path: PathForItem?
-    private var filesDataSource = FilesDataSource()
+    private let filesDataSource = FilesDataSource()
     
     private var cornerView: UIView?
     
     weak var loadingImageViewDelegate: LoadingImageViewDelegate?
     
-    var originalImage:UIImage? {
+    var originalImage: UIImage? {
         get {
             return gifImage ?? image
         }
         set {
             SwiftyGifManager.defaultManager.deleteImageView(self)
-            self.clear()
+            clear()
             
             if let gifImage = newValue, gifImage.imageCount != nil {
                 setGifImage(gifImage)
                 startAnimatingGif()
             } else {
-                self.image = newValue
+                image = newValue
             }
             
-            self.loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
+            loadingImageViewDelegate?.onImageLoaded(image: currentFrameImage)
         }
     }
     
     var currentFrameImage:UIImage? {
         return currentImage ?? image
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,8 +70,16 @@ class LoadingImageView: UIImageView {
         setupLayout()
     }
     
+    
+    //MARK: - Setup
+    
     private func setupLayout() {
-        if (cornerView == nil) {
+        setupCornerView()
+        setupActivityIndicator()
+    }
+    
+    private func setupCornerView() {
+        if cornerView == nil {
             let newCornerView = UIView()
             newCornerView.translatesAutoresizingMaskIntoConstraints = false
             newCornerView.backgroundColor = UIColor.clear
@@ -78,8 +87,11 @@ class LoadingImageView: UIImageView {
             newCornerView.layer.borderWidth = 2
             cornerView = newCornerView
         }
-        
+    }
+    
+    private func setupActivityIndicator() {
         addSubview(activity)
+        
         activity.center = center
         activity.hidesWhenStopped = true
         activity.translatesAutoresizingMaskIntoConstraints = false
@@ -88,102 +100,10 @@ class LoadingImageView: UIImageView {
         activity.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
     }
     
-    func checkIsNeedCancelRequest() {
-        if let url = url {
-            filesDataSource.cancelRequest(url: url)
-        } else if let path = path {
-            filesDataSource.cancelImgeRequest(path: path)
-        }
-            
-        path = nil
-        url = nil
-        loadingImageViewDelegate?.onLoadingImageCanceled()
-    }
-    
-    func loadImage(with object: Item?) {
-        guard let object = object, path != object.patchToPreview else {
-            return
-        }
-        
-        checkIsNeedCancelRequest()
-        originalImage = nil
-        
-        path = object.patchToPreview
-        activity.startAnimating()
-        
-        url = filesDataSource.getImageData(for: object) { [weak self] data in
-            guard self?.path == object.patchToPreview else {
-                return
-            }
-
-            self?.loadImage(data: data)
-        }
-    }
-    
-    func loadThumbnail(object: Item?, smooth: Bool = false) {
-        guard let object = object else {
-            checkIsNeedCancelRequest()
-            if !smooth {
-                originalImage = nil
-                activity.stopAnimating()
-            }
-            
-            return
-        }
-        
-        loadImage(path: object.patchToPreview, smooth: smooth)
-    }
-    
-    func loadImage(path: PathForItem, smooth: Bool = false) {
-        checkIsNeedCancelRequest()
-        
-        if !smooth {
-            originalImage = nil
-            activity.startAnimating()
-        }
-        
-        self.path = path
-        self.url = filesDataSource.getImage(patch: path) { [weak self] image in
-            guard self?.path == path else {
-                return
-            }
-            
-            self?.finishImageLoading(image, withAnimation: smooth)
-        }
-    }
-    
-    private func loadImage(data: Data?) {
-        var image:UIImage?
-        if let data = data {
-            let format = ImageFormat.get(from: data)
-            switch format {
-            case .gif:
-                image = UIImage(gifData: data)
-            default:
-                image = UIImage(data: data)
-            }
-        }
-        
-        finishImageLoading(image)
-    }
-    
-    func loadImage(url: URL?) {
-        guard let url = url else {
-            return
-        }
-        
-        self.url = filesDataSource.getImageData(for: url) { [weak self] data in
-            guard self?.url == url else {
-                return
-            }
-            
-            self?.loadImage(data: data)
-        }
-    }
-    
-    func setBorderVisibility(visibility: Bool) {
-        if (visibility) {
+    func set(borderIsVisible: Bool) {
+        if borderIsVisible {
             guard let cornerView = cornerView else {
+                assertionFailure("cornerView is nil")
                 return
             }
             
@@ -197,15 +117,113 @@ class LoadingImageView: UIImageView {
         }
     }
     
-    private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
-        self.path = nil
-        self.url = nil
+    
+    //MARK: - Image Loading
+    
+    func cancelLoadRequest() {
+        if let url = url {
+            filesDataSource.cancelRequest(url: url)
+        } else if let path = path {
+            filesDataSource.cancelImgeRequest(path: path)
+        }
+            
+        path = nil
+        url = nil
+        
+        loadingImageViewDelegate?.onLoadingImageCanceled()
+    }
+
+    func loadImage(with object: Item?, smooth: Bool = false) {
+        guard let object = object else {
+            cancelLoadRequest()
+            
+            if !smooth {
+                originalImage = nil
+                activity.stopAnimating()
+            }
+            return
+        }
+        
+        guard path != object.patchToPreview else {
+            return
+        }
+        
+        cancelLoadRequest()
+        path = object.patchToPreview
+        
+        loadImageData(object: object, smooth: smooth)
+    }
+    
+    private func loadImageData(object: Item, smooth: Bool = false) {
+        if !smooth {
+            originalImage = nil
+            activity.startAnimating()
+        }
+
+        url = filesDataSource.getImageData(item: object) { [weak self] imageData in
+            self?.finishLoading(data: imageData)
+                
+        }
+    }
+    
+    func loadImage(with path: PathForItem, smooth: Bool = false) {
+        cancelLoadRequest()
+        
+        if !smooth {
+            originalImage = nil
+            activity.startAnimating()
+        }
+        
+        self.path = path
+        url = filesDataSource.getImage(patch: path) { [weak self] image in
+            guard self?.path == path else {
+                return
+            }
+            
+            self?.finishLoading(image: image, animated: smooth)
+        }
+    }
+    
+    func loadImageData(with url: URL?, animated: Bool = false) {
+        guard let url = url else {
+            return
+        }
+        
+        self.url = filesDataSource.getImageData(for: url) { [weak self] data in
+            guard self?.url == url else {
+                return
+            }
+            
+            self?.finishLoading(data: data, animated: animated)
+        }
+    }
+    
+    
+    private func finishLoading(data: Data?, animated: Bool = false) {
+        var image: UIImage?
+        if let data = data {
+            let format = ImageFormat.get(from: data)
+            switch format {
+            case .gif:
+                image = UIImage(gifData: data)
+            default:
+                image = UIImage(data: data)
+            }
+        }
+        
+        finishLoading(image: image, animated: animated)
+    }
+    
+    private func finishLoading(image: UIImage?, animated: Bool = false) {
+        path = nil
+        url = nil
+        
         DispatchQueue.toMain { [weak self] in
             guard let `self` = self else {
                 return
             }
             self.activity.stopAnimating()
-            if withAnimation {
+            if animated {
                 UIView.transition(
                     with: self,
                     duration: NumericConstants.animationDuration,

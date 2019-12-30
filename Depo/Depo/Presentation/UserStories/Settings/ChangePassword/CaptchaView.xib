@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,20 +77,19 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0fs-JI-gHt">
-                            <rect key="frame" x="0.0" y="68" width="358" height="72"/>
+                            <rect key="frame" x="0.0" y="72" width="358" height="68"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gik-gC-tNq">
-                                    <rect key="frame" x="0.0" y="0.0" width="358" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="358" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="25l-fN-bcD" customClass="QuickDismissPlaceholderTextField" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="38" width="358" height="34"/>
+                                    <rect key="frame" x="0.0" y="34" width="358" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="34" id="qWy-9n-9ir"/>
                                     </constraints>
-                                    <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -108,7 +105,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="0fs-JI-gHt" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="bottom" id="4Uc-j4-xeq"/>
+                        <constraint firstItem="0fs-JI-gHt" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="bottom" constant="4" id="4Uc-j4-xeq"/>
                         <constraint firstAttribute="bottom" secondItem="0fs-JI-gHt" secondAttribute="bottom" constant="4" id="7Te-ci-mZp"/>
                         <constraint firstItem="3h7-gb-EgQ" firstAttribute="leading" secondItem="Jt2-sq-4mO" secondAttribute="leading" id="CFt-Ct-sWW"/>
                         <constraint firstAttribute="trailing" secondItem="6WV-XE-0Ht" secondAttribute="trailing" id="E9m-sg-tjl"/>

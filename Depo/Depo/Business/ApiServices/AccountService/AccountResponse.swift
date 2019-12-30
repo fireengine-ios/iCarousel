@@ -41,6 +41,7 @@ struct AccountJSONConstants {
     static let projectID = "projectId"
     
     static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    static let address = "address"
     
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
@@ -69,6 +70,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     var gapId: String?
+    var address: String?
     
     var emailVerificationRemainingDays: Int?
     
@@ -77,6 +79,14 @@ class AccountInfoResponse: ObjectRequestResponse {
             return number.contains("+") ? number : "+\(code)\(number)"
         }
         return ""
+    }
+    
+    var isTurkcellUser: Bool {
+        return accountType == "TURKCELL"
+    }
+    
+    var isUserFromTurkey: Bool {
+        return countryCode == "90"
     }
     
     override func mapping() {
@@ -101,6 +111,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
+        address = json?[AccountJSONConstants.address].string
     }
 }
 

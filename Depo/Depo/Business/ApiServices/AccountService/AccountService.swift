@@ -17,6 +17,7 @@ protocol AccountServicePrl {
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -399,6 +400,47 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid) {
+        debugLog("AccountService autoSyncStatus")
+        
+        let settings: AutoSyncSettings = syncSettings ?? AutoSyncDataStorage().settings
+        
+        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        
+        let params: Parameters  = [ "photoStatus" : photoStatus , "videoStatus" : videoStatus]
+        
+        sessionManager
+            .request(RouteRequests.Account.Settings.autoSyncStatus,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted
+        )
+            .customValidate()
+            .response { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+                    } else if statusJSON == "EMPTY_REQUEST" {
+                        errorText = "EMPTY_REQUEST" ///Should add localized text?
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+        }
+        
+    }
+    
     func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
         let request = String(format: RouteRequests.Account.getSecurityQuestion.absoluteString, Device.supportedLocale)
         
@@ -470,7 +512,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
         
         let params: Parameters = ["oldPassword": oldPassword,
                                   "password": newPassword,
-                                  "repeatPassword": repeatPassword]
+                                  "repeatPassword": repeatPassword,
+                                  "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
@@ -494,10 +537,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                     
-                    guard
-                        let data = response.data,
-                        let value = JSON(data: data)["value"].string
-                    else {
+                    guard let data = response.data, let value = JSON(data: data)["value"].string else {
                         handler(.failure(.unknown))
                         return
                     }
@@ -520,26 +560,52 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         handler(.failure(.special(error.description)))
                         return
                     }
-                    
-                    guard
-                        let data = response.data,
-                        let status = JSON(data: data)["status"].string
-                    else {
+                   
+                    guard let data = response.data else {
                         handler(.failure(.unknown))
                         return
                     }
                     
-                    let backendError: UpdatePasswordErrors
-                    switch status {
-                    case "4001":
-                        backendError = .invalidCaptcha
-                    case "INVALID_PASSWORD":
-                        backendError = .invalidNewPassword
-                    default:
-                        backendError = .unknown
-                    }
+                    let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
                     
-                    handler(.failure(backendError))
+                    
+                    if errorResponse.status == .invalidCaptcha {
+                        handler(.failure(.invalidCaptcha))
+                    } else if errorResponse.status == .invalidPassword {
+                        
+                        guard let reason = errorResponse.reason else {
+                            handler(.failure(.invalidNewPassword))
+                            return
+                        }
+                        
+                        let backendError: UpdatePasswordErrors
+                        
+                        switch reason {
+                        case .passwordIsEmpty:
+                            backendError = .passwordIsEmpty
+                        case .sequentialCharacters:
+                            backendError = .passwordSequentialCaharacters(limit: errorResponse.sequentialCharacterLimit)
+                        case .sameCharacters:
+                            backendError = .passwordSameCaharacters(limit: errorResponse.sameCharacterLimit)
+                        case .passwordLengthExceeded:
+                            backendError = .passwordLengthExceeded(limit: errorResponse.maximumCharacterLimit)
+                        case .passwordLengthIsBelowLimit:
+                            backendError = .passwordLengthIsBelowLimit(limit: errorResponse.minimumCharacterLimit)
+                        case .resentPassword:
+                            backendError = .passwordInResentHistory(limit: errorResponse.recentHistoryLimit)
+                        case .uppercaseMissing:
+                            backendError = .uppercaseMissingInPassword
+                        case .lowercaseMissing:
+                            backendError = .lowercaseMissingInPassword
+                        case .numberMissing:
+                            backendError = .numberMissingInPassword
+                        }
+                        
+                        handler(.failure(backendError))
+                        
+                    } else {
+                       handler(.failure(.unknown))
+                    }
                 }
         }
     }
@@ -573,25 +639,30 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func faqUrl(_ handler: @escaping (String) -> Void) {
         debugLog("AccountService faqUrl")
         
-        SessionManager.sessionWithoutAuth
+        func defaultURLCallback() {
+            let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+            handler(defaultFaqUrl)
+        }
+        
+        let tokenStorage: TokenStorage = factory.resolve()
+        guard tokenStorage.accessToken != nil else {
+            defaultURLCallback()
+            return
+        }
+        
+        SessionManager.customDefault
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in
-                
-                func errorHandler() {
-                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-                    handler(defaultFaqUrl)
-                }
-                
                 switch response.result {
                 case .success(let json):
                     if let json = json as? [String: String], let faqUrl = json["value"] {
                         handler(faqUrl)
                     } else {
-                        errorHandler()
+                        defaultURLCallback()
                     }
                 case .failure(_):
-                    errorHandler()
+                    defaultURLCallback()
                 }
         }
     }
@@ -687,5 +758,34 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
             })
+    }
+    
+    func updateAddress(with address: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Account.updateAddress,
+                 method: .post,
+                 parameters: ["address": address],
+                 encoding: JSONEncoding.prettyPrinted)
+        .customValidate()
+        .response(queue: .global(), completionHandler: { response in
+            if response.response?.statusCode == 200 {
+                handler(.success(()))
+            } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                let errorText: String
+                
+                if status == "ACCOUNT_ADDRESS_LENGTH_IS_INVALID" {
+                    errorText = TextConstants.updateAddressError
+                } else {
+                    errorText = TextConstants.errorServer
+                }
+                
+                let error = CustomErrors.text(errorText)
+                handler(.failed(error))
+            } else {
+                let error = CustomErrors.text(TextConstants.errorServer)
+                handler(.failed(error))
+            }
+        })
+
     }
 }

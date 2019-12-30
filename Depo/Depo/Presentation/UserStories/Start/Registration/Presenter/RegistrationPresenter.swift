@@ -83,9 +83,14 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
     }
     
-    func signUpFailed(errorResponse: ErrorResponse) {
+    func signUpFailed(errorResponse: Error) {
         completeAsyncOperationEnableScreen()
-        view.showErrorTitle(withText: errorResponse.description)
+        
+        if (errorResponse as? SignupResponseError)?.isCaptchaError == true {
+            view.showCaptchaError(TextConstants.loginScreenInvalidCaptchaError)
+        } else {
+            view.showErrorTitle(withText: errorResponse.description)
+        }
         
         if interactor.captchaRequired {
             view.updateCaptcha()

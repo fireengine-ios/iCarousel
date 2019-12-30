@@ -24,10 +24,11 @@ final class AppConfigurator {
     static let analyticsService: AnalyticsService = factory.resolve()
 
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self, Answers.self])
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        UISwitch.appearance().semanticContentAttribute = .forceLeftToRight
         
         SettingsBundleHelper.setVersionAndBuildNumber()
         SettingsBundleHelper.shared.lifeTechSetup()

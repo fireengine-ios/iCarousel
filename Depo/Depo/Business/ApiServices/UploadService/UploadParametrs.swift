@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 
 class UploadBaseURL: BaseRequestParametrs {
     override var requestParametrs: Any {
@@ -84,6 +85,14 @@ class Upload: UploadRequestParametrs {
     
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
+        
+        if item.fileSize == 0 {
+            let attributes = item.toDebugAnalyticsAttributes()
+            DebugAnalyticsService.log(event: .zeroContentLength, attributes: attributes)
+            let errorMessage = "File size is 0. Check Answers event."
+            debugLog(errorMessage)
+            assertionFailure(errorMessage)
+        }
         
         header = header + [
             HeaderConstant.ContentType           : item.uploadContentType,

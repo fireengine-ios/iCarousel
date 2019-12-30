@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifedrive</string>
+	<string>billo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -26,6 +26,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>v9.5_paging</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TurkcellSaturaReg.ttf</string>
+		<string>TurkcellSaturaMedIta.ttf</string>
+		<string>TurkcellSaturaMed.ttf</string>
+		<string>TurkcellSaturaIta.ttf</string>
+		<string>TurkcellSaturaDemIta.ttf</string>
+		<string>TurkcellSaturaDem.ttf</string>
+		<string>TurkcellSaturaBol.ttf</string>
+		<string>TurkcellSaturaBolIta.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

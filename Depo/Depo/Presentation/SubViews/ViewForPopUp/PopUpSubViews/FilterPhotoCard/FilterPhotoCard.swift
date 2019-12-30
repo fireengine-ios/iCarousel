@@ -100,7 +100,7 @@ final class FilterPhotoCard: BaseCardView {
     
     override func viewDidEndShow() {
 //        photoImageView.image = nil
-        photoImageView.checkIsNeedCancelRequest()
+        photoImageView.cancelLoadRequest()
     }
 
     

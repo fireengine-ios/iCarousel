@@ -42,7 +42,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings)
+        interactor.onSave(settings: settings, fromSettings: fromSettings)
     }
     
     func onSettingSaved() {

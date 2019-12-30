@@ -5,18 +5,22 @@
 /***** PROJECT variables  BEGIN ******/
 
 agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
-apps = [ [
+apps = [ 
+[
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
+            prodTeamID: '7YZS5NTGYH',
             xcodeSchema: 'TC_Depo_LifeTech',
             xcodeTarget: 'TC_Depo_LifeTech'
-        ], [
+        ],
+ [
             name: 'lifedrive',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
+            //prodTeamID: '729CGH4BJD',
             //xcodeSchema: , // Defaults to app name
             //xcodeTarget:   // Defaults to app name
         ]
@@ -45,16 +49,17 @@ def flavors = [
     ],
     prod: [
         configuration: 'AppStore',
-        developmentTeamID: '7YZS5NTGYH',
+        //developmentTeamID: use app.prodTeamID
         ipaExportMethod: 'app-store'
     ]
 ]
+
 /***** PROJECT variables END ******/
 
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'pre_release_v2'
+isDev = branchName == 'special_billo'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->
@@ -89,8 +94,8 @@ def runXcode = { app, flavorId ->
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
       generateArchive: false,
-      noConsoleLog: true,
-      logfileOutputDirectory: "${WORKSPACE}/${app.name}-logs",
+      noConsoleLog: false,
+      //logfileOutputDirectory: "${WORKSPACE}/${app.name}-logs",
       configuration: flavor.configuration,
       
       // Pack application, build and sign .ipa?
@@ -109,7 +114,7 @@ def runXcode = { app, flavorId ->
       manualSigning: true,
       
       developmentTeamName: 'none (specify one below)',
-      developmentTeamID: flavor.developmentTeamID,
+      developmentTeamID: flavor.developmentTeamID ?: app.prodTeamID,
       
       // Provisioning Profiles
       provisioningProfiles: provisioningProfiles,

@@ -95,7 +95,6 @@ final class InstaPickCampaignService {
     }
     
     private func prepareInstaPickCampaignViewControllerForPresent(with mode: InstaPickCampaignViewControllerMode) {
-        
         getCampaignStatus { [weak self] campaignCardResponse in
             guard let response = campaignCardResponse else {
                 self?.continueWithCommonFlow()
@@ -117,14 +116,20 @@ final class InstaPickCampaignService {
         switch data.dailyRemaining {
         case 0:
             let calendar =  Calendar.current
-            if let date = storageVars.shownCampaignInstaPick, calendar.isDateInToday(date) {
+            if let date = storageVars.shownCampaignInstaPickWithoutDaysLeft, calendar.isDateInToday(date) {
                 continueWithCommonFlow()
             } else {
-                storageVars.shownCampaignInstaPick = Date()
+                storageVars.shownCampaignInstaPickWithoutDaysLeft = Date()
                 returnInstaPickCampaignViewController(mode: mode, with: data)
             }
         case 1...:
-            returnInstaPickCampaignViewController(mode: mode, with: data)
+            let calendar =  Calendar.current
+            if let date = storageVars.shownCampaignInstaPickWithDaysLeft, calendar.isDateInToday(date) {
+                continueWithCommonFlow()
+            } else {
+                storageVars.shownCampaignInstaPickWithDaysLeft = Date()
+                returnInstaPickCampaignViewController(mode: mode, with: data)
+            }
         default:
             continueWithCommonFlow()
             assertionFailure()
