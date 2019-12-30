@@ -17,7 +17,6 @@ final class CampaingnInfoView: UIView {
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowOffset = .zero
-            newValue.layer.shadowPath = UIBezierPath(rect: newValue.bounds).cgPath
         }
     }
     @IBOutlet private weak var roundShadowView: UIView! {
