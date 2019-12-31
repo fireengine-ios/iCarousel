@@ -387,22 +387,22 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if !albumItems.isEmpty {
             group.enter()
-            uphideAlbums(albumItems, success: success, fail: fail)
+            unhideAlbums(albumItems, success: success, fail: fail)
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(placesItems, success: success, fail: fail)
+            unhideFIPAlbums(placesItems, success: success, fail: fail)
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(thingsItems, success: success, fail: fail)
+            unhideFIPAlbums(thingsItems, success: success, fail: fail)
         }
         
         if !peopleItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(peopleItems, success: success, fail: fail)
+            unhideFIPAlbums(peopleItems, success: success, fail: fail)
         }
         
         group.notify(queue: DispatchQueue.main) { [weak self] in
@@ -425,7 +425,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         fileService.unhide(items: items, success: success, fail: fail)
     }
     
-    private func uphideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+    private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         hiddenService.recoverAlbums(items) { response in
             switch response {
             case .success(_):
@@ -438,7 +438,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     //FIP - Faces-Items-Places
-    private func uphideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+    private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         let responseHandler: ResponseVoid = { response in
             switch response {
             case .success(_):
@@ -453,7 +453,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             hiddenService.recoveryPeople(items: items, handler: responseHandler)
 
         } else if let items = items as? [ThingsItem] {
-            hiddenService.recoverItems(items, handler: responseHandler)
+            hiddenService.recoveryThings(items: items, handler: responseHandler)
 
         } else if let items = items as? [PlacesItem] {
             hiddenService.recoveryPlaces(items: items, handler: responseHandler)
