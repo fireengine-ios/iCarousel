@@ -9,6 +9,7 @@
 import ImageIO
 import YYImage
 import Photos
+import MobileCoreServices
 
 final class OverlayAnimationService {
     
@@ -43,65 +44,74 @@ final class OverlayAnimationService {
         var attach = [Attachment]()
         
         attachments.forEach({ item in
-            
-            let transform = item.transform
-    
-            let x = item.center.x
-            let y = item.center.y
-            let origin = CGPoint(x: x , y: y)
-            
-            var images = [UIImage]()
-        
-            if let newItem =  item.image as? YYImage {
+            autoreleasepool{
+                let transform = item.transform
                 
-                guard
-                    let data = newItem.animatedImageData,
-                    let gifImage = UIImage.gifImageWithData(data: data as NSData),
-                    let imgs = gifImage.images
-                else {
-                    assertionFailure()
-                    return
-                }
-
-                images.append(contentsOf: imgs)
+                let x = item.center.x
+                let y = item.center.y
+                let origin = CGPoint(x: x , y: y)
                 
-            } else {
-                if let newItem = item.image {
-                    images.append(newItem)
+                var images = [UIImage]()
+                
+                if let newItem =  item.image as? YYImage {
+                    
+                    guard
+                        let data = newItem.animatedImageData,
+                        let gifImage = UIImage.gifImageWithData(data: data as NSData),
+                        let imgs = gifImage.images
+                        else {
+                            assertionFailure()
+                            return
+                    }
+                    
+                    images.append(contentsOf: imgs)
+                    
+                } else {
+                    if let newItem = item.image {
+                        images.append(newItem)
+                    }
                 }
+                
+                let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
+                
+                
+                let attachment = Attachment(origin: origin,
+                                            size: CGSize(width: item.bounds.width,
+                                                         height: item.bounds.width),
+                                            images: frames,
+                                            transform: transform)
+                
+                attach.append(attachment)
             }
-            
-            let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
-            
-            let attachment = Attachment(origin: origin,
-                                          size: CGSize(width: item.bounds.width,
-                                        height: item.bounds.width),
-                                        images: frames,
-                                     transform: transform)
-            
-            attach.append(attachment)
         })
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global().async {
             
             let frameCount = attach.contains(where: { $0.images.count > 1}) ? self.numberOfFrames : 1
             
             let frames = self.renderFrames(bgImage:originalImage, attacments: attach, canvasSize: originalImage.size, framesCount: frameCount)
 
             if frameCount > 1 {
-                self.generateGif(photos: frames, filename: "\(resultName)", duration: self.duration) { result in
-                    
-                    guard let data = result else {
-                        completion(.failure(.unknown))
+                
+                self.generateGifWithURLreturn(from: frames) { url in
+                    guard let url = url else {
+                        assertionFailure()
                         return
                     }
-                    
-                    let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
-                    
-                    GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
+
+                    do {
+                        let data =  try Data(contentsOf: url)
+                        
+                        let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
+                        
+                        GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
                         completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
-                    })
-                 }
+                        })
+                    } catch let error{
+                        completion(.failure(.unknown))
+                    }
+                }
+                
             } else {
 
                 guard let image = frames.first else {
@@ -132,7 +142,7 @@ final class OverlayAnimationService {
         var index = 1
         
         while images.count != numberOfFrames {
-        
+            
             images.remove(at: index)
             index += 2
             if images.count - 1 < index {
@@ -208,29 +218,61 @@ final class OverlayAnimationService {
         return image
     }
     
-    private func generateGif(photos: [UIImage], filename: String, duration: TimeInterval, completion: @escaping (Data?) -> ()) {
+    func generateGifWithURLreturn(from images: [UIImage], completion: (URL?) -> ()) {
+           let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]  as CFDictionary
+           let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 0]] as CFDictionary
+           
+           let documentsDirectoryURL: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+           let fileURL: URL? = documentsDirectoryURL?.appendingPathComponent("animated.gif")
+           
+           if let url = fileURL as CFURL? {
+               if let destination = CGImageDestinationCreateWithURL(url, kUTTypeGIF, images.count, nil) {
+                   CGImageDestinationSetProperties(destination, fileProperties)
+                   for image in images {
+                       autoreleasepool {
+                           if let cgImage = image.cgImage {
+                               CGImageDestinationAddImage(destination, cgImage, frameProperties)
+                           }
+                       }
+                   }
+                   
+                   for image in images {
+                       autoreleasepool {
+                           if let cgImage = image.cgImage {
+                               CGImageDestinationAddImage(destination, cgImage, frameProperties)
+                           }
+                       }
+                   }
+                   
+                   if CGImageDestinationFinalize(destination) {
+                       completion(fileURL)
+                   }
+               }
+           }
+       }
+    
+    private func generateGifWithDataReturn(photos: [UIImage], completion: @escaping (Data?) -> ()) {
+
+        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 2]]  as CFDictionary
+        let frameProperties = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 0]] as CFDictionary
         
-        let photoFrameDuration = duration / Double(photos.count)
-        
-        guard let encoder = YYImageEncoder(type: .GIF) else {
-            completion(nil)
-            return
-        }
-        
-        encoder.loopCount = 0
-        
-        photos.forEach({ photo in
-            encoder.add(photo, duration: photoFrameDuration)
-        })
-        
-        photos.forEach({ photo in
-            encoder.add(photo, duration: photoFrameDuration)
-        })
-        
-        if let data = encoder.encode() {
-            completion(data)
-        } else {
-            completion(nil)
+        let data = NSMutableData()
+    
+        if let destination = CGImageDestinationCreateWithData(data, kUTTypeGIF, photos.count, nil) {
+            CGImageDestinationSetProperties(destination, fileProperties)
+            for image in photos {
+                autoreleasepool{
+                    if let cgImage = image.cgImage {
+                        CGImageDestinationAddImage(destination, cgImage, frameProperties)
+                    }
+                }
+            }
+            
+            if CGImageDestinationFinalize(destination) {
+                let data = data as Data
+                completion(data)
+            }
         }
     }
 }
+

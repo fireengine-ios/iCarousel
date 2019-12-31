@@ -77,16 +77,21 @@ final class OverlayStickerImageView: UIImageView {
     }
     
     func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
+            stopAnimateStickers()
+        
             if self.subviews.contains(where: { $0 is YYAnimatedImageView}) {
                 self.subviews.forEach({ $0.isHidden = true})
                 
                 guard let img = UIImage.imageWithView(view: self) else {
                     return completion(.failure(.unknown))
                 }
+                
                 self.subviews.forEach({ $0.isHidden = false})
                 
-                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img, completion: completion)
-            
+                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img) { [weak self] createStickerResult in
+                    completion(createStickerResult)
+                    self?.restartAnimateStickers()
+                }
             } else {
                 
                 guard let sticker = UIImage.imageWithView(view: self) else {
@@ -95,6 +100,7 @@ final class OverlayStickerImageView: UIImageView {
                 }
                 
                 self.saveImage(image: sticker, fileName: resultName, completion: completion)
+                restartAnimateStickers()
             }
     }
     
@@ -226,8 +232,6 @@ final class OverlayStickerImageView: UIImageView {
             return
         }
         
-        let maxStickerSide = getMaxStickerSide()
-        
         switch pinch.state {
             
         case .began:
@@ -241,11 +245,7 @@ final class OverlayStickerImageView: UIImageView {
             let ratio = selectedViewSize.width / selectedViewSize.height
             let height = selectedViewSize.height * pinch.scale
             
-            if height >= maxStickerSide && isRaisedMovement(previousPosition: selectedViewSize.height, newPosition: height){
-                subview.bounds.size = CGSize(width: maxStickerSide, height: maxStickerSide)
-            } else {
-                subview.bounds.size = CGSize(width: height * ratio, height: height)
-            }
+            subview.bounds.size = CGSize(width: height * ratio, height: height)
             
         case .ended, .possible, .cancelled, .failed:
             self.selectedSticker = nil

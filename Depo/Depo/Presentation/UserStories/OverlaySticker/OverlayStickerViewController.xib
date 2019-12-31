@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oel-Ep-yNV">
-                    <rect key="frame" x="0.0" y="787" width="414" height="65"/>
+                    <rect key="frame" x="0.0" y="797" width="414" height="65"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWd-zU-E06">
                             <rect key="frame" x="349" y="0.0" width="65" height="65"/>
@@ -92,7 +92,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nq6-ZB-8bJ">
-                    <rect key="frame" x="0.0" y="722" width="414" height="65"/>
+                    <rect key="frame" x="0.0" y="732" width="414" height="65"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wPB-K3-M1W">
                         <size key="itemSize" width="50" height="50"/>
@@ -102,7 +102,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dv4-cf-xPu" customClass="OverlayStickerImageView" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="414" height="678"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="688"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.019607843137254902" green="0.098039215686274508" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,7 +117,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nq6-ZB-8bJ" secondAttribute="trailing" id="cxI-mK-Ik0"/>
                 <constraint firstItem="oel-Ep-yNV" firstAttribute="top" secondItem="nq6-ZB-8bJ" secondAttribute="bottom" id="dDv-aC-97C"/>
                 <constraint firstItem="nq6-ZB-8bJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jPL-4e-TT1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oel-Ep-yNV" secondAttribute="bottom" constant="10" id="jTB-NU-P4o"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oel-Ep-yNV" secondAttribute="bottom" id="jTB-NU-P4o"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="86.383928571428569"/>

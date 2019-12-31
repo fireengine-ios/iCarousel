@@ -76,6 +76,7 @@ final class GIF2MP4 {
         var index = 0
         var delay = 0.0 - gif.frameDurations[0]
         let queue = DispatchQueue(label: "mediaInputQueue")
+        
         videoWriterInput.requestMediaDataWhenReady(on: queue) {
     
             guard let framesCount = self.gif.frames?.count else {
@@ -87,15 +88,18 @@ final class GIF2MP4 {
                     break
                 }
                 
+                autoreleasepool{
+                    
                 if let cgImage = self.gif.getFrame(at: index) {
-                    let frameDuration = self.gif.frameDurations[index]
-                    delay += Double(frameDuration)
-                    let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
-                    let result = self.addImage(image: UIImage(cgImage: cgImage), withPresentationTime: presentationTime)
-                    if result == false {
-                        assertionFailure()
-                    } else {
-                        index += 1
+                        let frameDuration = self.gif.frameDurations[index]
+                        delay += Double(frameDuration)
+                        let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
+                        let result = self.addImage(image: UIImage(cgImage: cgImage), withPresentationTime: presentationTime)
+                        if result == false {
+                            assertionFailure()
+                        } else {
+                            index += 1
+                        }
                     }
                 }
             }
@@ -140,12 +144,12 @@ final class GIF2MP4 {
         let data = CVPixelBufferGetBaseAddress(pixelBuffer)
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
         guard let context = CGContext(data: data,
-                                      width: Int(size.width),
-                                      height: Int(size.height),
-                                      bitsPerComponent: 8,
-                                      bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
-                                      space: rgbColorSpace,
-                                      bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue),
+                                     width: Int(size.width),
+                                    height: Int(size.height),
+                          bitsPerComponent: 8,
+                               bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                     space: rgbColorSpace,
+                                bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue),
                                       let CGimage = image.cgImage
         else {
                 assertionFailure()
@@ -197,6 +201,7 @@ final class GIF {
         }
         self.imageSource =  imgSource
         
+        
         guard let picSource = self.imageSource  else {
             assertionFailure()
             return
@@ -206,12 +211,14 @@ final class GIF {
         let imgCount = CGImageSourceGetCount(picSource)
         frames = [CGImage?](repeating: nil, count: imgCount)
         for i in 0..<imgCount {
-            let delay = getGIFFrameDuration(imgSource: picSource, index: i)
-            frameDurations.append(delay)
-            duration += delay
-
-            getFrameQueue.async { [weak self] in
-                self?.frames?[i] = CGImageSourceCreateImageAtIndex(picSource, i, nil)
+            autoreleasepool{
+                let delay = getGIFFrameDuration(imgSource: picSource, index: i)
+                frameDurations.append(delay)
+                duration += delay
+                
+                getFrameQueue.async { [weak self] in
+                    self?.frames?[i] = CGImageSourceCreateImageAtIndex(picSource, i, nil)
+                }
             }
         }
     }
