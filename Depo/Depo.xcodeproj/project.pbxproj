@@ -2175,6 +2175,10 @@
 		0303A8EB2397F0B000907F42 /* LifeTech_LifeDriveFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8A22397D14900907F42 /* LifeTech_LifeDriveFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0303A8EC2397F0B000907F42 /* LifeTech_LifeDriveProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8CF2397D15100907F42 /* LifeTech_LifeDriveProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0303A8ED2397F0B000907F42 /* LifeTech_LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0303ED8923BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */; };
+		0303ED8A23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */; };
+		0303ED8B23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */; };
+		0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */; };
 		030480DD23AA0771006DC316 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
 		030480DE23AA0782006DC316 /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
 		03056AC123BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
@@ -2188,10 +2192,10 @@
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
-		030D294123B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */; };
-		030D294223B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */; };
-		030D294323B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */; };
-		030D294423B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */; };
+		030D294123B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */; };
+		030D294223B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */; };
+		030D294323B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */; };
+		030D294423B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */; };
 		03B52C57239E6A64008C2F24 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
@@ -9119,11 +9123,12 @@
 		0303A8D02397D15100907F42 /* LifeDriveProviderUI copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveProviderUI copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveProviderUI copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303A8DE2397D15900907F42 /* LifeDriveNotificationService copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveNotificationService copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveNotificationService copy-Info.plist"; sourceTree = "<absolute>"; };
+		0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedAlbumDetailPresenter.swift; sourceTree = "<group>"; };
 		030480DC23AA0475006DC316 /* LifeBoxModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		03056AC023BA23C000F6D57A /* NetmeraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraService.swift; sourceTree = "<group>"; };
 		03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraLoginEvent.swift; sourceTree = "<group>"; };
 		0309C38023992FBA0031DB5B /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
-		030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenAlbumDetailPresenter.swift; sourceTree = "<group>"; };
+		030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedHiddenAlbumDetailPresenter.swift; sourceTree = "<group>"; };
 		03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		043311ABC77BBE1D80DBF183 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewInput.swift; sourceTree = "<group>"; };
@@ -12379,7 +12384,8 @@
 			isa = PBXGroup;
 			children = (
 				DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */,
-				030D294023B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift */,
+				0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */,
+				030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -25526,6 +25532,7 @@
 				0303A2AA2397D0D000907F42 /* PhoneVerificationConfigurator.swift in Sources */,
 				0303A2AB2397D0D000907F42 /* PhoneVerificationInitializer.swift in Sources */,
 				0303A2AC2397D0D000907F42 /* MyStoragePresenter.swift in Sources */,
+				0303ED8B23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				0303A2AD2397D0D000907F42 /* HelpAndSupportViewController.swift in Sources */,
 				0303A2AE2397D0D000907F42 /* RadialGradientableView.swift in Sources */,
 				0303A2AF2397D0D000907F42 /* VisualMusicPlayerConfigurator.swift in Sources */,
@@ -26011,7 +26018,7 @@
 				0303A4832397D0D000907F42 /* BaseCardView.swift in Sources */,
 				0303A4842397D0D000907F42 /* TwoFactorChallengeConfigurator.swift in Sources */,
 				0303A4852397D0D000907F42 /* ImageForDowload.swift in Sources */,
-				030D294323B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */,
+				030D294323B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */,
 				0303A4862397D0D000907F42 /* PermissionsView.swift in Sources */,
 				0303A4872397D0D000907F42 /* ProfileTextPickerView.swift in Sources */,
 				0303A4882397D0D000907F42 /* SelectNameInteractorInput.swift in Sources */,
@@ -27061,6 +27068,7 @@
 				8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				0303ED8A23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
@@ -27494,7 +27502,7 @@
 				B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
-				030D294223B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */,
+				030D294223B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */,
 				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
 				8C0E8F5E1FDEBDFF00789C91 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				8C0E8F5F1FDEBDFF00789C91 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -28527,7 +28535,7 @@
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
-				030D294123B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */,
+				030D294123B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
 				984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
@@ -29436,6 +29444,7 @@
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
+				0303ED8923BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
@@ -30065,6 +30074,7 @@
 				CE78498C22A685FB00662219 /* BottomSelectionTabBarRouter.swift in Sources */,
 				CE78498D22A685FB00662219 /* PasswordCell.swift in Sources */,
 				CE78498E22A685FB00662219 /* PremiumInitializer.swift in Sources */,
+				0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CE78498F22A685FB00662219 /* RegistrationViewInput.swift in Sources */,
 				CE78499022A685FB00662219 /* RegistrationViewOutput.swift in Sources */,
 				892B014E22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */,
@@ -30219,7 +30229,7 @@
 				CE784A1622A685FB00662219 /* AccountService.swift in Sources */,
 				CE784A1722A685FB00662219 /* TermsOfUseViewInput.swift in Sources */,
 				CE784A1822A685FB00662219 /* GridListTopBarSortingTableView.swift in Sources */,
-				030D294423B648F0006D9A02 /* HiddenAlbumDetailPresenter.swift in Sources */,
+				030D294423B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift in Sources */,
 				CE784A1922A685FB00662219 /* PHAssetCollection.swift in Sources */,
 				CE784A1A22A685FB00662219 /* HomePageInteractor.swift in Sources */,
 				CE784A1B22A685FB00662219 /* PhoneVerificationViewInput.swift in Sources */,
