@@ -952,6 +952,9 @@ struct TextConstants {
     
     static let deleteFilesText = NSLocalizedString("Deleting these files will remove them from cloud. You won't be able to access them once deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAlbums = NSLocalizedString("Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let moveToTrashAlbums = NSLocalizedString("move_to_trash_albums_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let moveToTrashAlbumsSuccess = NSLocalizedString("move_to_trash_albums_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let removeAlbums = NSLocalizedString("Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeFromAlbum = NSLocalizedString("This file will be removed only from your album. You can access this file from Photos tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

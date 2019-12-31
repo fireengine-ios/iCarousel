@@ -492,31 +492,37 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func completelyMoveToTrash(albums: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
-                guard let albums = albums as? [AlbumItem] else { return }
-                self?.output?.operationStarted(type: .completelyMoveToTrash)
-                let albumService = PhotosAlbumService()
-                albumService.completelyMoveToTrash(albums: albums, success: { [weak self] deletedAlbums in
+            guard let albums = albums as? [AlbumItem] else { return }
+            self?.output?.operationStarted(type: .completelyMoveToTrash)
+            let albumService = PhotosAlbumService()
+            albumService.completelyMoveToTrash(albums: albums, success: { [weak self] deletedAlbums in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .completelyMoveToTrash)
+                    ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+                    
+                    let controller = PopUpController.with(title: TextConstants.success,
+                                                          message: TextConstants.moveToTrashAlbumsSuccess,
+                                                          image: .success,
+                                                          buttonTitle: TextConstants.ok)
+                    self?.router.presentViewController(controller: controller)
+                }
+                }, fail: { [weak self] errorRespone in
                     DispatchQueue.main.async {
-                        self?.output?.operationFinished(type: .completelyMoveToTrash)
-                        ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+                        self?.output?.operationFailed(type: .completelyMoveToTrash, message: errorRespone.description)
                     }
-                    }, fail: { [weak self] errorRespone in
-                        DispatchQueue.main.async {
-                            self?.output?.operationFailed(type: .completelyMoveToTrash, message: errorRespone.description)
-                        }
-                })
-            }
-            
-            let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                                  message: TextConstants.deleteAlbums,
-                                                  image: .delete,
-                                                  firstButtonTitle: TextConstants.cancel,
-                                                  secondButtonTitle: TextConstants.ok,
-                                                  secondAction: { vc in
-                                                    vc.close(completion: okHandler)
             })
+        }
             
-            router.presentViewController(controller: controller)
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.moveToTrashAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
     }
     
     private func deleteItems(items: [Item]) {

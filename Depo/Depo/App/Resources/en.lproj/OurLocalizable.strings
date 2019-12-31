@@ -4,6 +4,8 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?";
+"move_to_trash_albums_message" = "You will not see this album...";
+"move_to_trash_albums_success_message" = "Album is sent to trash bin successfully";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted";
 "confirmation_popup_title_hide" = "Hide Selected";
 "confirmation_popup_message_hide" = "The selected files will be hidden lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
