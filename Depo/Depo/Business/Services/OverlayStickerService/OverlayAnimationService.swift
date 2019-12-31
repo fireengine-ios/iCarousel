@@ -44,42 +44,42 @@ final class OverlayAnimationService {
         var attach = [Attachment]()
         
         attachments.forEach({ item in
-            
-            let transform = item.transform
-    
-            let x = item.center.x
-            let y = item.center.y
-            let origin = CGPoint(x: x , y: y)
-            
-            var images = [UIImage]()
-        
-            if let newItem =  item.image as? YYImage {
-                
-                guard
-                    let data = newItem.animatedImageData,
-                    let gifImage = UIImage.gifImageWithData(data: data as NSData),
-                    let imgs = gifImage.images
-                else {
-                    assertionFailure()
-                    return
-                }
-
-                images.append(contentsOf: imgs)
-                
-            } else {
-                if let newItem = item.image {
-                    images.append(newItem)
-                }
-            }
-            
-            let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
-            
             autoreleasepool{
+                let transform = item.transform
+                
+                let x = item.center.x
+                let y = item.center.y
+                let origin = CGPoint(x: x , y: y)
+                
+                var images = [UIImage]()
+                
+                if let newItem =  item.image as? YYImage {
+                    
+                    guard
+                        let data = newItem.animatedImageData,
+                        let gifImage = UIImage.gifImageWithData(data: data as NSData),
+                        let imgs = gifImage.images
+                        else {
+                            assertionFailure()
+                            return
+                    }
+                    
+                    images.append(contentsOf: imgs)
+                    
+                } else {
+                    if let newItem = item.image {
+                        images.append(newItem)
+                    }
+                }
+                
+                let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
+                
+                
                 let attachment = Attachment(origin: origin,
-                                              size: CGSize(width: item.bounds.width,
+                                            size: CGSize(width: item.bounds.width,
                                                          height: item.bounds.width),
                                             images: frames,
-                                         transform: transform)
+                                            transform: transform)
                 
                 attach.append(attachment)
             }
