@@ -49,11 +49,13 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: false
         )
         
-        var selectionModeTypes: [ElementTypes] = [.createStory, .addToFavorites, .print, .removeFromAlbum ]
+        let selectionModeTypes: [ElementTypes]
         
         let langCode = Device.locale
         if langCode != "tr" {
-            selectionModeTypes = [.createStory, .addToFavorites, .removeFromAlbum ]
+            selectionModeTypes = [.createStory, .removeFromAlbum ]
+        } else {
+            selectionModeTypes = [.createStory, .print, .removeFromAlbum ]
         }
         
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
