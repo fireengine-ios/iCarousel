@@ -100,6 +100,11 @@ final class OverlayStickerViewController: ViewController {
     
     @objc private func applyIconTapped() {
         
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            showAccessAlert()
+            return
+        }
+        
         showFullscreenHUD(with: nil, and: {})
   
         DispatchQueue.main.async { [weak self] in
@@ -129,6 +134,23 @@ final class OverlayStickerViewController: ViewController {
             }
         }
 
+    }
+    
+    private func showAccessAlert() {
+        debugLog("CameraService showAccessAlert")
+        DispatchQueue.main.async {
+            let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                                  message: TextConstants.cameraAccessAlertText,
+                                                  image: .none,
+                                                  firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                                  secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                                  secondAction: { vc in
+                                                    vc.close {
+                                                        UIApplication.shared.openSettings()
+                                                    }
+            })
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
     }
     
     private func saveResult(result: CreateOverlayStickersResult) {
