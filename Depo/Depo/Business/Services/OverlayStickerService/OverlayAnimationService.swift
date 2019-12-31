@@ -93,7 +93,7 @@ final class OverlayAnimationService {
 
             if frameCount > 1 {
                 
-                self.generateGifWithURLreturn(from: frames) { (url) in
+                self.generateGifWithURLreturn(from: frames) { url in
                     guard let url = url else {
                         assertionFailure()
                         return

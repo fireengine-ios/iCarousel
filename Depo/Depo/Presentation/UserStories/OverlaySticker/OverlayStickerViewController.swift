@@ -41,6 +41,7 @@ final class OverlayStickerViewController: ViewController {
     
     var selectedImage: UIImage?
     var imageName: String?
+    private lazy var defaultName = UUID().uuidString
     
     private var pictureAttachment = [Attachment]()
     private var gifAttachment = [Attachment]()
@@ -102,8 +103,12 @@ final class OverlayStickerViewController: ViewController {
         
   
         DispatchQueue.main.async { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
 
-            self?.overlayingStickerImageView.overlayStickers(resultName: self?.imageName ?? UUID().uuidString) { [weak self] result in
+            self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
                 self?.hideSpinnerIncludeNavigationBar()
                 
                 let popUp = PopUpController.with(title: TextConstants.save,
