@@ -30,9 +30,7 @@ final class HiddenPhotosDataSource: NSObject {
     
     private let collectionView: UICollectionView
     private weak var delegate: HiddenPhotosDataSourceDelegate?
-    private var albumSlider: AlbumsSliderCell? {
-        return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? AlbumsSliderCell
-    }
+    private var albumSlider: AlbumsSliderCell?
     
     private(set) var allItems = [[Item]]()
     private var selectedItems = [Item]()
@@ -422,6 +420,10 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         if indexPath.section == 0 {
             guard let cell = cell as? AlbumsSliderCell else {
                 return
+            }
+            
+            if albumSlider == nil {
+                albumSlider = cell
             }
             
             cell.delegate = self
