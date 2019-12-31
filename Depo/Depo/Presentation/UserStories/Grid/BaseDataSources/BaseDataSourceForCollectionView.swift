@@ -1761,10 +1761,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didHide(items: [WrapData]) {
-        deleteItems(items: items)
-    }
-    
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
         if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return
@@ -1958,6 +1954,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 item.childCount = childCount - Int64(count)
             }
         }
+    }
+    
+    func didHide(items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didHide(albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
     }
 }
 

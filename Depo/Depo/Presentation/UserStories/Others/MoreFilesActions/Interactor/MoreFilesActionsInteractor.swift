@@ -285,20 +285,23 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func hide(items: [BaseDataSourceItem]) {
-        guard let items = items as? [Item] else {
-            assertionFailure("Unexpected type of items")
-            return
-        }
-        
         let remoteItems = items.filter { !$0.isLocalItem }
         guard !remoteItems.isEmpty else {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-
-        hideFunctionalityService.startHideOperation(for: remoteItems,
-                                                    success: self.succesAction(elementType: .hide),
-                                                    fail: self.failAction(elementType: .hide))
+        
+        if let albumItems = items as? [AlbumItem] {
+            hideFunctionalityService.startHideAlbumsOperation(for: albumItems,
+                                                              success: self.succesAction(elementType: .hide),
+                                                              fail: self.failAction(elementType: .hide))
+        } else if let items = remoteItems as? [Item] {
+            hideFunctionalityService.startHideOperation(for: items,
+                                                        success: self.succesAction(elementType: .hide),
+                                                        fail: self.failAction(elementType: .hide))
+        } else {
+            assertionFailure("Unexpected type of items")
+        }
     }
     
     func simpleHide(items: [BaseDataSourceItem]) {
@@ -384,22 +387,22 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if !albumItems.isEmpty {
             group.enter()
-            uphideAlbums(albumItems, success: success, fail: fail)
+            unhideAlbums(albumItems, success: success, fail: fail)
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(placesItems, success: success, fail: fail)
+            unhideFIPAlbums(placesItems, success: success, fail: fail)
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(thingsItems, success: success, fail: fail)
+            unhideFIPAlbums(thingsItems, success: success, fail: fail)
         }
         
         if !peopleItems.isEmpty {
             group.enter()
-            uphideFIPAlbums(peopleItems, success: success, fail: fail)
+            unhideFIPAlbums(peopleItems, success: success, fail: fail)
         }
         
         group.notify(queue: DispatchQueue.main) { [weak self] in
@@ -422,7 +425,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         fileService.unhide(items: items, success: success, fail: fail)
     }
     
-    private func uphideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+    private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         hiddenService.recoverAlbums(items) { response in
             switch response {
             case .success(_):
@@ -435,7 +438,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     //FIP - Faces-Items-Places
-    private func uphideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+    private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         let responseHandler: ResponseVoid = { response in
             switch response {
             case .success(_):
@@ -450,7 +453,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             hiddenService.recoveryPeople(items: items, handler: responseHandler)
 
         } else if let items = items as? [ThingsItem] {
-            hiddenService.recoverItems(items, handler: responseHandler)
+            hiddenService.recoveryThings(items: items, handler: responseHandler)
 
         } else if let items = items as? [PlacesItem] {
             hiddenService.recoveryPlaces(items: items, handler: responseHandler)
@@ -477,6 +480,41 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
                                               message: TextConstants.deleteAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+    }
+    
+    func completelyMoveToTrash(albums: [BaseDataSourceItem]) {
+        let okHandler: VoidHandler = { [weak self] in
+            guard let albums = albums as? [AlbumItem] else { return }
+            self?.output?.operationStarted(type: .completelyMoveToTrash)
+            let albumService = PhotosAlbumService()
+            albumService.completelyMoveToTrash(albums: albums, success: { [weak self] deletedAlbums in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .completelyMoveToTrash)
+                    ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+                    
+                    let controller = PopUpController.with(title: TextConstants.success,
+                                                          message: TextConstants.moveToTrashAlbumsSuccess,
+                                                          image: .success,
+                                                          buttonTitle: TextConstants.ok)
+                    self?.router.presentViewController(controller: controller)
+                }
+                }, fail: { [weak self] errorRespone in
+                    DispatchQueue.main.async {
+                        self?.output?.operationFailed(type: .completelyMoveToTrash, message: errorRespone.description)
+                    }
+            })
+        }
+            
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.moveToTrashAlbums,
                                               image: .delete,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,

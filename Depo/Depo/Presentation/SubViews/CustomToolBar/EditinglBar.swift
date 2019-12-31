@@ -37,6 +37,7 @@ enum ElementTypes {
     case print
     case changeCoverPhoto
     case hide
+    case hideAlbums
     case unhide
     case smash
     //upload?
@@ -57,6 +58,7 @@ enum ElementTypes {
     case makeAlbumCover
     case albumDetails
     case completelyDeleteAlbums
+    case completelyMoveToTrash
     //instaPick
     case instaPick
 }

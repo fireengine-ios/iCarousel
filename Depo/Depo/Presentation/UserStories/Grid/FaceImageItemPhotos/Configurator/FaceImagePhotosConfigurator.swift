@@ -20,6 +20,18 @@ final class FaceImagePhotosConfigurator {
         router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
+
+        var initialTypes: [ElementTypes] = [.select, .changeCoverPhoto]
+        if item.fileType.isFaceImageType, let status = album.preview?.status {
+            switch status {
+            case .hidden:
+                initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
+            case .trashed:
+                initialTypes.append(contentsOf: [.hide, .completelyDeleteAlbums])
+            default:
+                initialTypes.append(contentsOf: [.hide, .completelyMoveToTrash])
+            }
+        }
         
         let selectionModeTypes: [ElementTypes]
         
@@ -30,9 +42,9 @@ final class FaceImagePhotosConfigurator {
             selectionModeTypes = [.createStory, .print, .removeFromFaceImageAlbum]
         }
         
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: initialTypes,
                                                                    selectionModeTypes: selectionModeTypes)
-        
+
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
         presenter.alertSheetModule = alertModulePresenter

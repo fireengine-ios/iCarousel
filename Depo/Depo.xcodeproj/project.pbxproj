@@ -5698,6 +5698,10 @@
 		98758F612359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F622359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F632359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
+		9877FABA23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
+		9877FABB23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
+		9877FABC23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
+		9877FABD23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
 		98792DCF22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
 		98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */; };
@@ -10811,6 +10815,7 @@
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98758F602359BC3E00D06952 /* CampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignService.swift; sourceTree = "<group>"; };
+		9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosDataSource.swift; sourceTree = "<group>"; };
 		98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsViewController.swift; sourceTree = "<group>"; };
 		98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportedPlaylistsViewController.xib; sourceTree = "<group>"; };
 		98792DD522FD486F000A77E5 /* SpotifyImportedTracksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedTracksViewController.swift; sourceTree = "<group>"; };
@@ -13773,6 +13778,7 @@
 			children = (
 				78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */,
 				4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */,
+				9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -25542,6 +25548,7 @@
 				0303A2D02397D0D000907F42 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				0303A2D12397D0D000907F42 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				0303A2D22397D0D000907F42 /* CustomCheckBox.swift in Sources */,
+				9877FABC23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				0303A2D32397D0D000907F42 /* NavigationController.swift in Sources */,
 				0303A2D42397D0D000907F42 /* ActivityTimelineServiceResponse.swift in Sources */,
 				0303A2D52397D0D000907F42 /* ImportFromInstagramPresenter.swift in Sources */,
@@ -27241,6 +27248,7 @@
 				8C0E8EE11FDEBDFF00789C91 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C0E8EE31FDEBDFF00789C91 /* PhotoVideoDetailInteractorInput.swift in Sources */,
+				9877FABB23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				8C0B919920170E5200A5BA81 /* DuplicatedContactsViewInput.swift in Sources */,
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
@@ -28888,6 +28896,7 @@
 				7C1F89881F6FFE0300740177 /* ProgressCard.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				989BDE4622F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
+				9877FABA23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
 				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
 				CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */,
@@ -30328,6 +30337,7 @@
 				CE784A9322A685FB00662219 /* ActivityTimelineSectionsBuider.swift in Sources */,
 				CE784A9522A685FB00662219 /* InstaPickPhotoView.swift in Sources */,
 				CE784A9622A685FB00662219 /* CircleProgressView.swift in Sources */,
+				9877FABD23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				CE784A9822A685FB00662219 /* PasscodeState.swift in Sources */,
 				CE784A9922A685FB00662219 /* UserProfileConfigurator.swift in Sources */,
 				CE784A9A22A685FB00662219 /* LocalAlbumConfigurator.swift in Sources */,

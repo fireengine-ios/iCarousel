@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSCompletionPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="bottomButtonParentView" destination="W1u-O1-5qb" id="Yu5-kW-PTB"/>
+                <outlet property="bottomOffset" destination="X3U-jv-iJB" id="IAU-QA-2kl"/>
                 <outlet property="closeButton" destination="qJI-ss-qUl" id="38l-cE-3ky"/>
                 <outlet property="darkView" destination="IZG-1R-Gut" id="gvP-rg-mup"/>
                 <outlet property="doNotShowAgainButton" destination="dCl-OT-1FN" id="NLp-zm-fk0"/>
