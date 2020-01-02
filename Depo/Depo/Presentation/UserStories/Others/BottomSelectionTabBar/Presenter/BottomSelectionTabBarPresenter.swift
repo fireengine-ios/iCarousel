@@ -28,10 +28,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .hideAlbums:
+                itemTupple.append(EditinglBar.PreDetermendTypes.hideAlbums)
             case .unhide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
             case .smash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.smash)
+            case .completelyMoveToTrash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.completelyMoveToTrash)
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .deleteFaceImage:
@@ -153,6 +157,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .hideAlbums:
+                //TODO: will be another task to implement analytics calls
+                //MenloworksAppEvents.onDeleteClicked()
+                
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.simpleAlbumHide(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .unhide:
                 //TODO: will be another task to implement analytics calls
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -175,6 +191,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.delete(item: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .completelyMoveToTrash:
+                //TODO: will be another task to implement analytics calls
+                //MenloworksAppEvents.onDeleteClicked()
+                
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.completelyMoveToTrash(albums: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)

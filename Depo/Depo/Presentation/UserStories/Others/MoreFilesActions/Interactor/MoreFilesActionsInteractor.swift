@@ -321,6 +321,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                           fail: self.failAction(elementType: .hide))
     }
     
+    func simpleAlbumHide(items: [BaseDataSourceItem]) {
+           guard let items = items as? [AlbumItem] else {
+               assertionFailure("Unexpected type of items")
+               return
+           }
+           
+           let remoteItems = items.filter { !$0.isLocalItem }
+           guard !remoteItems.isEmpty else {
+               assertionFailure("Locals only must not be passed to hide them")
+               return
+           }
+           
+        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems, success: self.succesAction(elementType: .hideAlbums), fail: self.failAction(elementType: .hideAlbums))
+    }
+    
     func unhide(items: [BaseDataSourceItem]) {
         let remoteItems = items.filter { !$0.isLocalItem }
         guard !remoteItems.isEmpty else {
