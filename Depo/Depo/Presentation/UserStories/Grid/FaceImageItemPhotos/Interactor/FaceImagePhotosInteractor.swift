@@ -136,10 +136,12 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
     func loadItem(_ item: BaseDataSourceItem) {
         guard let item = item as? Item, let id = item.id else { return }
         
+        let isHidden = album?.preview?.status == .hidden
+        
         if item is PeopleItem {
             output.startAsyncOperation()
             
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+            peopleService.getPeopleAlbum(id: Int(id), isHidden: isHidden, success: { [weak self] album in
                 if let output = self?.output as? FaceImagePhotosInteractorOutput,
                     let count = album.imageCount{
                     output.didCountImage(count)
@@ -152,7 +154,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         } else if item is ThingsItem {
             output.startAsyncOperation()
             
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
+            thingsService.getThingsAlbum(id: Int(id), isHidden: isHidden, success: { [weak self] album in
                 if let output = self?.output as? FaceImagePhotosInteractorOutput,
                     let count = album.imageCount{
                     output.didCountImage(count)
@@ -165,7 +167,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         } else if item is PlacesItem {
             output.startAsyncOperation()
             
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
+            placesService.getPlacesAlbum(id: Int(id), isHidden: isHidden, success: { [weak self] album in
                 if let output = self?.output as? FaceImagePhotosInteractorOutput,
                     let count = album.imageCount{
                     output.didCountImage(count)
@@ -183,8 +185,9 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         
         if item is PeopleItem {
             output.startAsyncOperation()
-            
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+        
+            let isHidden = album?.preview?.status == .hidden
+            peopleService.getPeopleAlbum(id: Int(id), isHidden: isHidden, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 self?.remoteItems = FaceImageDetailService(albumUUID: albumItem.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
                 if let output = self?.output as? FaceImagePhotosInteractorOutput {

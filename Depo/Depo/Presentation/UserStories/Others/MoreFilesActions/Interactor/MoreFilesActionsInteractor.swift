@@ -981,7 +981,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func downloadFaceImageAlbum(item: Item) {
         if item.fileType == .faceImage(.people),
             let id = item.id {
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+            peopleService.getPeopleAlbum(id: Int(id), isHidden: false, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
                     self?.fileService.download(itemsByAlbums: itemsByAlbums,
@@ -993,7 +993,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             })
         } else if item.fileType == .faceImageAlbum(.things),
             let id = item.id {
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
+            thingsService.getThingsAlbum(id: Int(id), isHidden: false, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
@@ -1006,7 +1006,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             })
         } else if item.fileType == .faceImage(.places),
             let id = item.id {
-            placesService.getPlacesAlbum(id: Int(id), success: { [ weak self] album in
+            placesService.getPlacesAlbum(id: Int(id), isHidden: false, success: { [ weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
