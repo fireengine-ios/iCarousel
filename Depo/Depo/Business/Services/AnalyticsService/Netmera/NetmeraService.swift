@@ -6,6 +6,10 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
+enum NetmeraEvents {
+    
+}
+
 class NetmeraService {
     
     
