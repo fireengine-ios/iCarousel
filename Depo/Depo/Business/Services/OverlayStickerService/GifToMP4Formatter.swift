@@ -181,7 +181,7 @@ import MobileCoreServices
 final class GIF {
 
     private let frameDelayThreshold = 0.02
-    private(set) var duration = 0.0
+    private(set) var duration = 0.02
     private(set) var imageSource: CGImageSource?
     private(set) var frames: [CGImage?]?
     private(set) lazy var frameDurations = [TimeInterval]()
