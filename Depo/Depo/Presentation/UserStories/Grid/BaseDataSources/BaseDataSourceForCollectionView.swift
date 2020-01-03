@@ -1963,6 +1963,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func didHide(albums: [AlbumItem]) {
         albumsDeleted(albums: albums)
     }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        
+    }
 }
 
 

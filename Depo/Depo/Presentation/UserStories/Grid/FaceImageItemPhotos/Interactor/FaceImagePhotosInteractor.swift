@@ -206,6 +206,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
             return
         }
         
+        output.startAsyncOperation()
         hideService.startHideAlbumsOperation(for: [album], success: { [weak self] in
             self?.output.asyncOperationSuccess()
         }, fail: { [weak self] errorResponse in

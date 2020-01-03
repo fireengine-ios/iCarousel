@@ -46,9 +46,12 @@ final class HiddenPhotosDataSource: NSObject {
     private let filesDataSource = FilesDataSource()
     
     var isEmpty: Bool {
-        let photosEmpty = allItems.first(where: { !$0.isEmpty }) == nil
         let albumsEmpty = albumSlider?.isEmpty ?? true
-        return photosEmpty && albumsEmpty
+        return photosIsEmpty && albumsEmpty
+    }
+    
+    private var photosIsEmpty: Bool {
+        return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
     private lazy var photoCellSize: CGSize = {
@@ -113,20 +116,25 @@ extension HiddenPhotosDataSource {
                 return
             }
             
+            let isEmpty = self.photosIsEmpty
             let insertResult = self.insert(newItems: items)
             guard !insertResult.indexPaths.isEmpty else {
                 return
             }
             
             DispatchQueue.main.async {
-                self.collectionView.performBatchUpdates({
-                    if !insertResult.sections.isEmpty {
-                        self.collectionView.insertSections(insertResult.sections)
-                    }
-                    self.collectionView.insertItems(at: insertResult.indexPaths)
-                }, completion: { _ in
-                    completion()
-                })
+                if isEmpty {
+                    self.collectionView.reloadData()
+                } else {
+                    self.collectionView.performBatchUpdates({
+                        if !insertResult.sections.isEmpty {
+                            self.collectionView.insertSections(insertResult.sections)
+                        }
+                        self.collectionView.insertItems(at: insertResult.indexPaths)
+                    }, completion: { _ in
+                        completion()
+                    })
+                }
             }
         }
     }
@@ -157,11 +165,6 @@ extension HiddenPhotosDataSource {
                 }
             }
         }
-        
-        let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
-        let firItems = items.filter { $0.fileType.isContained(in: types) }
-        removeSlider(items: firItems)
-        completion()
     }
     
     func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
