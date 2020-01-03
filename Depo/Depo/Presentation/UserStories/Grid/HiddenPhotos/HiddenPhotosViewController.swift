@@ -273,7 +273,7 @@ extension HiddenPhotosViewController {
             
             switch result {
             case .success(let album):
-                let vc = self.router.imageFacePhotosController(album: album, item: item, moduleOutput: nil)
+                let vc = self.router.imageFacePhotosController(album: album, item: item, moduleOutput: self)
                 self.router.pushViewController(viewController: vc)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -392,9 +392,7 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didUnhide(albums: [AlbumItem]) {
-        dataSource.removeSlider(items: albums) { [weak self] in
-            self?.reloadData(resetSlider: false)
-        }
+        remove(albums: albums)
     }
     
     func moveToTrash(items: [Item]) {
@@ -406,8 +404,32 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
-        dataSource.remove(items: items) { [weak self] in
-            self?.checkEmptyView()
+        let firItems = items.filter { $0.fileType.isFaceImageType }
+        if firItems.isEmpty {
+            dataSource.remove(items: items) { [weak self] in
+                self?.checkEmptyView()
+            }
+        } else {
+            // unhide|delete FIR albums
+            remove(albums: firItems)
         }
+    }
+    
+    private func remove(albums: [BaseDataSourceItem]) {
+        dataSource.removeSlider(items: albums) { [weak self] in
+            self?.reloadData(resetSlider: false)
+        }
+    }
+}
+
+//MARK: - FaceImageItemsModuleOutput
+
+extension HiddenPhotosViewController: FaceImageItemsModuleOutput {
+    
+    func didChangeName(item: WrapData) {}
+    func didReloadData() {}
+    
+    func delete(item: Item) {
+        remove(items: [item])
     }
 }

@@ -28,4 +28,8 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
     override func albumsDeleted(albums: [AlbumItem]) {
         delegate?.didDelete(items: albums)
     }
+    
+    override func didUnhide(albums: [AlbumItem]) {
+        delegate?.didDelete(items: albums)
+    }
 }
