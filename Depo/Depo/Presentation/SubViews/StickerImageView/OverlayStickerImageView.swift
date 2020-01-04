@@ -13,12 +13,16 @@ import ImageIO
 enum AttachedEntityType {
     case gif
     case image
+}
+
+enum CreateOverlayResultType {
+    case image
     case video
 }
 
 struct CreateOverlayStickersSuccessResult {
     let url: URL
-    let type: AttachedEntityType
+    let type: CreateOverlayResultType
 }
 
 typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>

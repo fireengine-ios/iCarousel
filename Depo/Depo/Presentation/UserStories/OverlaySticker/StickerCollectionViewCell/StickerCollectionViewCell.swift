@@ -8,10 +8,11 @@
 
 import UIKit
 import YYImage
+import SDWebImage
 
 final class StickerCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var previewImage: UIImageView! {
+    @IBOutlet private weak var previewImageView: UIImageView! {
         willSet {
             newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
             newValue.layer.borderWidth = 1
@@ -20,7 +21,13 @@ final class StickerCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupImageView(previewImage: UIImage) {
-        self.previewImage.image = previewImage
+    func setup(with object: SmashStickerResponse) {
+        previewImageView.image = nil
+        previewImageView.sd_cancelCurrentImageLoad()
+        previewImageView.sd_setImage(with: object.thumbnailPath, completed: nil)
     }
+    
+//    func setupImageView(previewImage: UIImage) {
+//        self.previewImageView.image = previewImage
+//    }
 }

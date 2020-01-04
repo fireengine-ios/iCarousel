@@ -24,6 +24,7 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
     private let uploadService = UploadService()
+    private let stickerService: SmashService = SmashServiceImpl()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -43,8 +44,10 @@ final class OverlayStickerViewController: ViewController {
     var imageName: String?
     private lazy var defaultName = UUID().uuidString
     
-    private var pictureAttachment = [Attachment]()
-    private var gifAttachment = [Attachment]()
+//    private var pictureAttachment = [Attachment]()
+//    private var gifAttachment = [Attachment]()
+    private var pictureAttachment = [SmashStickerResponse]()
+    private var gifAttachment = [SmashStickerResponse]()
     
     private var selectedAttachmentType: AttachedEntityType = .gif {
         willSet {
@@ -63,8 +66,6 @@ final class OverlayStickerViewController: ViewController {
                 self.gifButton.setTitleColor(UIColor.gray, for: .normal)
                 //TODO: Logic for updating collection view after changing selectedAttachmentType
                 stickersCollectionView.reloadData()
-            case .video:
-                break
             }
         }
     }
@@ -75,14 +76,49 @@ final class OverlayStickerViewController: ViewController {
         setupImage()
         stickersCollectionView.delegate = self
         stickersCollectionView.dataSource = self
+        
+        stickerService.getGIFStickers(page: 0, size: 20){ (response) in
+            
+            
+            switch response {
+                
+            case .success(let array):
+                self.gifAttachment.append(contentsOf: array)
+                DispatchQueue.toMain {
+                    self.stickersCollectionView.reloadData()
+                }
+                
+            case .failed(_):
+                break
+            }
+            
+        }
+        
+        
+        stickerService.getImageStickers(page: 0, size: 20){ (response) in
+            
+            
+            switch response {
+                
+            case .success(let array):
+                self.pictureAttachment.append(contentsOf: array)
+                DispatchQueue.toMain {
+                    self.stickersCollectionView.reloadData()
+                }
+                
+            case .failed(_):
+                break
+            }
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
         // TODO: Temporary logic for trial mode
-        addPictures()
-        addGifs()
+//        addPictures()
+//        addGifs()
     }
     
     @IBAction private func gifButtonTapped(_ sender: Any) {
@@ -162,7 +198,6 @@ final class OverlayStickerViewController: ViewController {
                 switch result {
                 case .success(let result):
                     switch result.type {
-                    case .gif: break
                     case .image:
                         //TODO: Different logic for saving result
                         self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
@@ -314,55 +349,56 @@ extension OverlayStickerViewController: UICollectionViewDataSource {
 
 extension OverlayStickerViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? StickerCollectionViewCell else {
-            return
+    
+        func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            guard let cell = cell as? StickerCollectionViewCell else {
+                return
+            }
+            
+            let object = selectedAttachmentType == .gif ? gifAttachment[indexPath.row] : pictureAttachment[indexPath.row]
+            
+            cell.setup(with: object)
         }
         
-        let image = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].image : pictureAttachment[indexPath.row].image
-        
-        cell.setupImageView(previewImage: image)
-    }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let url = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].url : pictureAttachment[indexPath.row].url
+        let url = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].path : pictureAttachment[indexPath.row].path
         
         overlayingStickerImageView.addAttachment(url: url, attachmentType: selectedAttachmentType)
     }
 }
 
 //Temporary extension for trial period
-extension OverlayStickerViewController {
-    
-    func addPictures() {
-        guard let url = Bundle.main.url(forResource: "picture", withExtension: "png"), let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) else {
-                   assertionFailure()
-                   return
-        }
-        
-        let attacment = Attachment(image: image, url: url)
-        pictureAttachment = Array.init(repeating: attacment, count: 15)
-    }
-    
-    func addGifs() {
-        let examples = ["burn", "drone", "el", "kedi", "uyku"]
-        examples.forEach({ createGifArray(name: $0) })
-    }
-    
-    func createGifArray(name: String) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "gif"), let imageData = try? Data(contentsOf: url), let gif = GIF(data: imageData), let numberOfFrames = gif.frames  else {
-            assertionFailure()
-            return
-        }
-        
-        let middleIndex = numberOfFrames.count / 2
-        guard let cgImage = gif.getFrame(at: middleIndex) else {
-            assertionFailure()
-            return
-        }
-        let image = UIImage(cgImage: cgImage)
-        let attacment = Attachment(image: image, url: url)
-        gifAttachment.append(attacment)
-    }
-}
+//extension OverlayStickerViewController {
+//    
+//    func addPictures() {
+//        guard let url = Bundle.main.url(forResource: "picture", withExtension: "png"), let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) else {
+//                   assertionFailure()
+//                   return
+//        }
+//        
+//        let attacment = Attachment(image: image, url: url)
+//        pictureAttachment = Array.init(repeating: attacment, count: 15)
+//    }
+//    
+//    func addGifs() {
+//        let examples = ["burn", "drone", "el", "kedi", "uyku"]
+//        examples.forEach({ createGifArray(name: $0) })
+//    }
+//    
+//    func createGifArray(name: String) {
+//        guard let url = Bundle.main.url(forResource: name, withExtension: "gif"), let imageData = try? Data(contentsOf: url), let gif = GIF(data: imageData), let numberOfFrames = gif.frames  else {
+//            assertionFailure()
+//            return
+//        }
+//        
+//        let middleIndex = numberOfFrames.count / 2
+//        guard let cgImage = gif.getFrame(at: middleIndex) else {
+//            assertionFailure()
+//            return
+//        }
+//        let image = UIImage(cgImage: cgImage)
+//        let attacment = Attachment(image: image, url: url)
+//        gifAttachment.append(attacment)
+//    }
+//}

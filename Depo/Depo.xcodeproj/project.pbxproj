@@ -2651,6 +2651,18 @@
 		73B4077622E9C0E10033D317 /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
 		73B4077722E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
 		73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */; };
+		73B623D623BF5CB600839C47 /* SmashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623D523BF5CB500839C47 /* SmashService.swift */; };
+		73B623D723BF5CB700839C47 /* SmashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623D523BF5CB500839C47 /* SmashService.swift */; };
+		73B623D823BF5CB700839C47 /* SmashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623D523BF5CB500839C47 /* SmashService.swift */; };
+		73B623D923BF5CB700839C47 /* SmashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623D523BF5CB500839C47 /* SmashService.swift */; };
+		73B623DB23BF625D00839C47 /* SmashStickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */; };
+		73B623DC23BF625D00839C47 /* SmashStickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */; };
+		73B623DD23BF625D00839C47 /* SmashStickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */; };
+		73B623DE23BF625D00839C47 /* SmashStickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */; };
+		73B623E023C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */; };
+		73B623E123C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */; };
+		73B623E223C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */; };
+		73B623E323C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */; };
 		73C0440022B3BDFD005DE312 /* TermsDescriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */; };
 		73C0440222B3CB44005DE312 /* EULAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0440122B3CB44005DE312 /* EULAResponse.swift */; };
 		73CB8E402361758A00585625 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
@@ -9454,6 +9466,9 @@
 		73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyAccountConnectionCell.xib; sourceTree = "<group>"; };
 		73B4077322E9C0E00033D317 /* TermsCheckboxTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsCheckboxTextView.swift; path = Depo/Presentation/UserStories/Start/TermsAndServices/View/TermsCheckboxTextView.swift; sourceTree = SOURCE_ROOT; };
 		73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsCheckboxTextView.xib; path = Depo/Presentation/UserStories/Start/TermsAndServices/View/TermsCheckboxTextView.xib; sourceTree = SOURCE_ROOT; };
+		73B623D523BF5CB500839C47 /* SmashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashService.swift; sourceTree = "<group>"; };
+		73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashStickerResponse.swift; sourceTree = "<group>"; };
+		73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerViewControllerDataSource.swift; sourceTree = "<group>"; };
 		73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsDescriptionController.swift; path = PrivacyPolicyDescription/TermsDescriptionController.swift; sourceTree = "<group>"; };
 		73C0440122B3CB44005DE312 /* EULAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAResponse.swift; sourceTree = "<group>"; };
 		73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignService.swift; sourceTree = "<group>"; };
@@ -13376,6 +13391,7 @@
 				735766F723AF85BB008589E9 /* Temp */,
 				735766CB23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift */,
 				7378053323ABC130001D57BD /* OverlayStickerViewController.swift */,
+				73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */,
 				7378053423ABC130001D57BD /* OverlayStickerViewController.xib */,
 				735766EC23AE1B48008589E9 /* StickerCollectionViewCell */,
 			);
@@ -13466,6 +13482,14 @@
 				73C043FF22B3BDFD005DE312 /* TermsDescriptionController.swift */,
 			);
 			name = TermsDescription;
+			sourceTree = "<group>";
+		};
+		73B623D423BF5C8900839C47 /* SmashService */ = {
+			isa = PBXGroup;
+			children = (
+				73B623D523BF5CB500839C47 /* SmashService.swift */,
+			);
+			path = SmashService;
 			sourceTree = "<group>";
 		};
 		73CB8E3E2361755600585625 /* InstaPickCampaignService */ = {
@@ -14157,6 +14181,7 @@
 				73D723E9231D08A6006AE835 /* PackageOffer.swift */,
 				73A183482359CC550095719F /* CampaignCardResponse.swift */,
 				9809317D23952D8200ECFEF8 /* UpdatePasswordErrorResponse.swift */,
+				73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -18585,6 +18610,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				73B623D423BF5C8900839C47 /* SmashService */,
 				98758F5F2359BC1900D06952 /* CampaignService */,
 				FA793D7A2018725300A02B46 /* PeopleService */,
 				FA793D772018725300A02B46 /* PlacesService */,
@@ -24853,6 +24879,7 @@
 				0303A02B2397D0D000907F42 /* ScrollBarView.swift in Sources */,
 				0303A02C2397D0D000907F42 /* ValidationResults.swift in Sources */,
 				0303A02D2397D0D000907F42 /* UIButton+Properties.swift in Sources */,
+				73B623E223C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				0303A02E2397D0D000907F42 /* HomePageInteractorOutput.swift in Sources */,
 				0303A02F2397D0D000907F42 /* PackagesPresenter.swift in Sources */,
 				0303A0302397D0D000907F42 /* (null) in Sources */,
@@ -24960,6 +24987,7 @@
 				0303A0952397D0D000907F42 /* ContactBackupEmpty.swift in Sources */,
 				0303A0962397D0D000907F42 /* KeyboardHandler.swift in Sources */,
 				0303A0972397D0D000907F42 /* LoginRouter.swift in Sources */,
+				73B623DD23BF625D00839C47 /* SmashStickerResponse.swift in Sources */,
 				0303A0982397D0D000907F42 /* ActivityIndicatorManager.swift in Sources */,
 				0303A0992397D0D000907F42 /* FeedbackService.swift in Sources */,
 				0303A09A2397D0D000907F42 /* FaceImageAddNameRouterInput.swift in Sources */,
@@ -26025,6 +26053,7 @@
 				0303A49E2397D0D000907F42 /* CreateStoryPreviewInitializer.swift in Sources */,
 				0303A49F2397D0D000907F42 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				0303A4A02397D0D000907F42 /* UploadFilesSelectionDataSource.swift in Sources */,
+				73B623D823BF5CB700839C47 /* SmashService.swift in Sources */,
 				0303A4A12397D0D000907F42 /* GridListTopBarSortingTableCell.swift in Sources */,
 				0303A4A22397D0D000907F42 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				0303A4A32397D0D000907F42 /* DropboxStatusValue.swift in Sources */,
@@ -26642,6 +26671,7 @@
 				8C0E8D141FDEBDFF00789C91 /* ErrorResponse.swift in Sources */,
 				4A0AC1452087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */,
+				73B623E123C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
 				B5DCFC1E23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
@@ -27070,6 +27100,7 @@
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
 				8C0E8E351FDEBDFF00789C91 /* RequestsKey.swift in Sources */,
 				8C0E8E361FDEBDFF00789C91 /* RemoteService.swift in Sources */,
+				73B623D723BF5CB700839C47 /* SmashService.swift in Sources */,
 				8C0E8E371FDEBDFF00789C91 /* UsageInfoConfigurator.swift in Sources */,
 				8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */,
 				8C0E8E391FDEBDFF00789C91 /* LanguageModel.swift in Sources */,
@@ -27433,6 +27464,7 @@
 				89E51D4B22CA1115007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				8C0E8F441FDEBDFF00789C91 /* SplashInitializer.swift in Sources */,
 				A217E43521A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
+				73B623DC23BF625D00839C47 /* SmashStickerResponse.swift in Sources */,
 				4A56D5C9202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				8C0E8F451FDEBDFF00789C91 /* ActionsMenuViewInput.swift in Sources */,
 				8C0E8F461FDEBDFF00789C91 /* ActionsMenuView.swift in Sources */,
@@ -28337,6 +28369,7 @@
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
+				73B623E023C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
@@ -29319,6 +29352,7 @@
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
+				73B623D623BF5CB600839C47 /* SmashService.swift in Sources */,
 				8734DA0D1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift in Sources */,
 				08ACDB1ED67EACE17FB518FA /* SelectNameViewInput.swift in Sources */,
 				CE2F55FE1F7551CD00F49DA1 /* AccountParameters.swift in Sources */,
@@ -29440,6 +29474,7 @@
 				78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */,
 				7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */,
 				6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */,
+				73B623DB23BF625D00839C47 /* SmashStickerResponse.swift in Sources */,
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,
 				78D9BA482007E82800F2233F /* DuplicatedContactsViewInput.swift in Sources */,
 				A0903BC815026822773731DE /* FeedbackViewInteractorOutput.swift in Sources */,
@@ -29594,6 +29629,7 @@
 				CE7847FA22A685FB00662219 /* ActivityType.swift in Sources */,
 				CE7847FB22A685FB00662219 /* DuplicatedContactsConfigurator.swift in Sources */,
 				CE7847FC22A685FB00662219 /* FileServiceResponse.swift in Sources */,
+				73B623DE23BF625D00839C47 /* SmashStickerResponse.swift in Sources */,
 				CE7847FF22A685FB00662219 /* UserProfilePresenter.swift in Sources */,
 				8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				CE78480022A685FB00662219 /* PasscodeSettingsPresenter.swift in Sources */,
@@ -29782,6 +29818,7 @@
 				CE7848A022A685FB00662219 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				CE7848A122A685FB00662219 /* FaceImageChangeCoverRouter.swift in Sources */,
 				CE7848A222A685FB00662219 /* AutoSyncModel.swift in Sources */,
+				73B623D923BF5CB700839C47 /* SmashService.swift in Sources */,
 				CE7848A322A685FB00662219 /* UIApplication+OpenURL.swift in Sources */,
 				CE7848A422A685FB00662219 /* Images.swift in Sources */,
 				CE7848A522A685FB00662219 /* MediaPlayer.swift in Sources */,
@@ -30402,6 +30439,7 @@
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
+				73B623E323C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				CE784AD122A685FB00662219 /* AuthorizationURLs.swift in Sources */,
 				CE784AD222A685FB00662219 /* AutoUploadIsOffPopUp.swift in Sources */,
 				CE784AD322A685FB00662219 /* CardsManager.swift in Sources */,
