@@ -15,10 +15,6 @@ enum StickerType: String {
     case image = "SMASH_STICKER"
 }
 
-//enum SmashStickerContentType {
-//
-//}
-
 final class SmashStickerResponse {
     
     private enum ResponseKey {

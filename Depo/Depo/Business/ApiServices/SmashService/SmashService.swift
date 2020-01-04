@@ -27,10 +27,9 @@ final class SmashServiceImpl: BaseRequestService, SmashService {
         sessionManager
             .request(RouteRequests.smashAnimation,
                      parameters: ["type" : type.rawValue,
-                              "language" : "\(Device.locale)",
+                              "language" : Device.locale,
                                   "page" : page,
-                                  "size" : size],
-                                 encoding: URLEncoding.default)
+                                  "size" : size])
             .customValidate()
             .responseData { response in
                 

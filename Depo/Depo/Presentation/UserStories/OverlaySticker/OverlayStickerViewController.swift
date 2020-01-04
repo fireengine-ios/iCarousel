@@ -67,9 +67,7 @@ final class OverlayStickerViewController: ViewController {
 
                 imageCollectionViewOffset = stickersCollectionView.contentOffset
                 stickersCollectionView.reloadData()
-//                stickersCollectionView.performBatchUpdates(nil, completion: { _ in
-//                    self.stickersCollectionView.contentOffset = self.gifCollectionViewOffset
-//                })
+
                 stickersCollectionView.layoutIfNeeded()
                 DispatchQueue.main.async {
                      self.stickersCollectionView.contentOffset = self.gifCollectionViewOffset
@@ -81,19 +79,16 @@ final class OverlayStickerViewController: ViewController {
                 self.gifButton.setTitleColor(UIColor.gray, for: .normal)
 
                 gifCollectionViewOffset = stickersCollectionView.contentOffset
+                
                 if imageAttachment.isEmpty {
                     loadNext()
-                } else {
                     
+                } else {
                     stickersCollectionView.reloadData()
-//                    stickersCollectionView.performBatchUpdates(nil, completion: {  _ in
-//                        self.stickersCollectionView.contentOffset = self.imageCollectionViewOffset
-//                    })
                     stickersCollectionView.layoutIfNeeded()
                     DispatchQueue.main.async {
                         self.stickersCollectionView.contentOffset = self.imageCollectionViewOffset
                     }
-
                 }
             }
         }

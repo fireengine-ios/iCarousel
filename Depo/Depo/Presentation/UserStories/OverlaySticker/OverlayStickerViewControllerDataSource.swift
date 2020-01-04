@@ -8,6 +8,8 @@
 
 import UIKit
 
+//TODO: Refactor
+
 //final class OverlayStickerViewControllerDataSource: NSObject, UICollectionViewDataSource {
 //    
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -26,8 +26,4 @@ final class StickerCollectionViewCell: UICollectionViewCell {
         previewImageView.sd_cancelCurrentImageLoad()
         previewImageView.sd_setImage(with: object.thumbnailPath, completed: nil)
     }
-    
-//    func setupImageView(previewImage: UIImage) {
-//        self.previewImageView.image = previewImage
-//    }
 }
