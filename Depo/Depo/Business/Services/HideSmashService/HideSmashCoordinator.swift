@@ -277,6 +277,20 @@ extension HideFunctionalityService {
     }
     
     private func hideAlbums() {
+        
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.hide(self.albums, completion: { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.hiddenSuccessfully()
+                }
+                
+            })
+        }
+        
         hiddenService.hideAlbums(albums) { [weak self] result in
             guard let self = self else {
                 return
@@ -284,7 +298,7 @@ extension HideFunctionalityService {
             
             switch result {
             case .success(_):
-                self.hiddenSuccessfully()
+                wrappedSuccessOperation()
             case .failed(let error):
                 self.fail?(.error(error))
             }

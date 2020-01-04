@@ -21,7 +21,7 @@ class AlbumsModuleInitializer: NSObject {
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .removeAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .hideAlbums, .completelyMoveToTrash],
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()
@@ -48,7 +48,7 @@ class AlbumsModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: router,
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: [.completelyMoveToTrash]),
+                                                                                     selectionModeTypes: [.removeAlbum]),
                                topBarConfig: gridListTopBarConfig)
         
         interactor.originalFilters = [.fileType(.photoAlbum)]

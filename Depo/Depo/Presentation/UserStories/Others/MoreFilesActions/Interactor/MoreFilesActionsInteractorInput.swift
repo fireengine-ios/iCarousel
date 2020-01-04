@@ -22,6 +22,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func hide(items: [BaseDataSourceItem])
     
+    func hideAlbums(items: [BaseDataSourceItem])
+    
     func simpleHide(items: [BaseDataSourceItem])
     
     func unhide(items: [BaseDataSourceItem])
