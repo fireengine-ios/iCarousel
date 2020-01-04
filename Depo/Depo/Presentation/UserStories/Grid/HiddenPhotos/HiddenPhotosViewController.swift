@@ -83,7 +83,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     }
     
     private func checkEmptyView() {
-        emptyView.isHidden = !dataSource.isEmpty
+        emptyView.isHidden = !dataSource.photosIsEmpty
     }
 }
 

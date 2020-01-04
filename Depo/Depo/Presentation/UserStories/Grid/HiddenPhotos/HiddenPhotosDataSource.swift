@@ -50,7 +50,7 @@ final class HiddenPhotosDataSource: NSObject {
         return photosIsEmpty && albumsEmpty
     }
     
-    private var photosIsEmpty: Bool {
+    var photosIsEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
@@ -119,12 +119,16 @@ extension HiddenPhotosDataSource {
             let isEmpty = self.photosIsEmpty
             let insertResult = self.insert(newItems: items)
             guard !insertResult.indexPaths.isEmpty else {
+                DispatchQueue.main.async {
+                    completion()
+                }
                 return
             }
             
             DispatchQueue.main.async {
                 if isEmpty {
                     self.collectionView.reloadData()
+                    completion()
                 } else {
                     self.collectionView.performBatchUpdates({
                         if !insertResult.sections.isEmpty {
@@ -147,12 +151,16 @@ extension HiddenPhotosDataSource {
             
             let deleteResult = self.delete(items: items)
             guard !deleteResult.indexPaths.isEmpty else {
+                DispatchQueue.main.async {
+                    completion()
+                }
                 return
             }
 
             DispatchQueue.main.async {
-                if self.allItems.isEmpty {
+                if self.photosIsEmpty {
                     self.collectionView.reloadData()
+                    completion()
                 } else {
                     self.collectionView.performBatchUpdates({
                         self.collectionView.deleteItems(at: deleteResult.indexPaths)
@@ -175,10 +183,11 @@ extension HiddenPhotosDataSource {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
+        collectionView.reloadData()
         if resetSlider {
             albumSlider?.reset()
+            collectionView.reloadSections(IndexSet(integer: 0))
         }
-        collectionView.reloadData()
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
