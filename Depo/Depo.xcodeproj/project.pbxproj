@@ -2536,34 +2536,6 @@
 		735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735766E323AE1B34008589E9 /* StickerCollectionViewCell.xib */; };
 		735766EA23AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735766E323AE1B34008589E9 /* StickerCollectionViewCell.xib */; };
 		735766EB23AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735766E323AE1B34008589E9 /* StickerCollectionViewCell.xib */; };
-		735766FF23AF85D0008589E9 /* kedi.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F823AF85CC008589E9 /* kedi.gif */; };
-		7357670023AF85D0008589E9 /* kedi.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F823AF85CC008589E9 /* kedi.gif */; };
-		7357670123AF85D0008589E9 /* kedi.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F823AF85CC008589E9 /* kedi.gif */; };
-		7357670223AF85D0008589E9 /* kedi.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F823AF85CC008589E9 /* kedi.gif */; };
-		7357670323AF85D0008589E9 /* drone.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F923AF85CD008589E9 /* drone.gif */; };
-		7357670423AF85D0008589E9 /* drone.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F923AF85CD008589E9 /* drone.gif */; };
-		7357670523AF85D0008589E9 /* drone.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F923AF85CD008589E9 /* drone.gif */; };
-		7357670623AF85D0008589E9 /* drone.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766F923AF85CD008589E9 /* drone.gif */; };
-		7357670723AF85D0008589E9 /* uyku.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FA23AF85CD008589E9 /* uyku.gif */; };
-		7357670823AF85D0008589E9 /* uyku.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FA23AF85CD008589E9 /* uyku.gif */; };
-		7357670923AF85D0008589E9 /* uyku.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FA23AF85CD008589E9 /* uyku.gif */; };
-		7357670A23AF85D0008589E9 /* uyku.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FA23AF85CD008589E9 /* uyku.gif */; };
-		7357670B23AF85D0008589E9 /* drone.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FB23AF85CE008589E9 /* drone.png */; };
-		7357670C23AF85D0008589E9 /* drone.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FB23AF85CE008589E9 /* drone.png */; };
-		7357670D23AF85D0008589E9 /* drone.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FB23AF85CE008589E9 /* drone.png */; };
-		7357670E23AF85D0008589E9 /* drone.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FB23AF85CE008589E9 /* drone.png */; };
-		7357670F23AF85D0008589E9 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FC23AF85CE008589E9 /* picture.png */; };
-		7357671023AF85D0008589E9 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FC23AF85CE008589E9 /* picture.png */; };
-		7357671123AF85D0008589E9 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FC23AF85CE008589E9 /* picture.png */; };
-		7357671223AF85D0008589E9 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 735766FC23AF85CE008589E9 /* picture.png */; };
-		7357671323AF85D0008589E9 /* el.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FD23AF85CF008589E9 /* el.gif */; };
-		7357671423AF85D0008589E9 /* el.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FD23AF85CF008589E9 /* el.gif */; };
-		7357671523AF85D0008589E9 /* el.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FD23AF85CF008589E9 /* el.gif */; };
-		7357671623AF85D0008589E9 /* el.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FD23AF85CF008589E9 /* el.gif */; };
-		7357671723AF85D0008589E9 /* burn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FE23AF85D0008589E9 /* burn.gif */; };
-		7357671823AF85D0008589E9 /* burn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FE23AF85D0008589E9 /* burn.gif */; };
-		7357671923AF85D0008589E9 /* burn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FE23AF85D0008589E9 /* burn.gif */; };
-		7357671A23AF85D0008589E9 /* burn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 735766FE23AF85D0008589E9 /* burn.gif */; };
 		7373EC22235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
 		7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
 		7373EC24235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */; };
@@ -9426,13 +9398,6 @@
 		735766CB23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerViewControllerDesigner.swift; sourceTree = "<group>"; };
 		735766E223AE1B34008589E9 /* StickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		735766E323AE1B34008589E9 /* StickerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StickerCollectionViewCell.xib; sourceTree = "<group>"; };
-		735766F823AF85CC008589E9 /* kedi.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = kedi.gif; sourceTree = "<group>"; };
-		735766F923AF85CD008589E9 /* drone.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = drone.gif; sourceTree = "<group>"; };
-		735766FA23AF85CD008589E9 /* uyku.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = uyku.gif; sourceTree = "<group>"; };
-		735766FB23AF85CE008589E9 /* drone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drone.png; sourceTree = "<group>"; };
-		735766FC23AF85CE008589E9 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
-		735766FD23AF85CF008589E9 /* el.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = el.gif; sourceTree = "<group>"; };
-		735766FE23AF85D0008589E9 /* burn.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = burn.gif; sourceTree = "<group>"; };
 		7373EC20235EE0F100B150BA /* InstaPickCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewController.swift; sourceTree = "<group>"; };
 		7373EC21235EE0F100B150BA /* InstaPickCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCampaignViewController.xib; sourceTree = "<group>"; };
 		7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCampaignViewControllerDesigner.swift; sourceTree = "<group>"; };
@@ -13334,20 +13299,6 @@
 			path = StickerCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		735766F723AF85BB008589E9 /* Temp */ = {
-			isa = PBXGroup;
-			children = (
-				735766FE23AF85D0008589E9 /* burn.gif */,
-				735766F923AF85CD008589E9 /* drone.gif */,
-				735766FB23AF85CE008589E9 /* drone.png */,
-				735766FD23AF85CF008589E9 /* el.gif */,
-				735766F823AF85CC008589E9 /* kedi.gif */,
-				735766FC23AF85CE008589E9 /* picture.png */,
-				735766FA23AF85CD008589E9 /* uyku.gif */,
-			);
-			path = Temp;
-			sourceTree = "<group>";
-		};
 		736085110D7EF2A078645693 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -13388,7 +13339,6 @@
 		7378053223ABC0E7001D57BD /* OverlaySticker */ = {
 			isa = PBXGroup;
 			children = (
-				735766F723AF85BB008589E9 /* Temp */,
 				735766CB23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift */,
 				7378053323ABC130001D57BD /* OverlayStickerViewController.swift */,
 				73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */,
@@ -20887,7 +20837,6 @@
 				0303A58D2397D0D000907F42 /* PaymentPopUpController.xib in Resources */,
 				0303A58E2397D0D000907F42 /* SubjectDetailsViewController.xib in Resources */,
 				0303A58F2397D0D000907F42 /* turuncu.png in Resources */,
-				7357670D23AF85D0008589E9 /* drone.png in Resources */,
 				0303A5902397D0D000907F42 /* kucuk_ucgen@2x.png in Resources */,
 				0303A5912397D0D000907F42 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				98A86D6523A2417800438225 /* HiddenPhotosViewController.xib in Resources */,
@@ -20949,12 +20898,10 @@
 				0303A5C92397D0D000907F42 /* FaceImageViewController.xib in Resources */,
 				0303A5CA2397D0D000907F42 /* oval_beyaz@2x.png in Resources */,
 				0303A5CB2397D0D000907F42 /* FreeAppSpaceViewCotroller.xib in Resources */,
-				7357670123AF85D0008589E9 /* kedi.gif in Resources */,
 				0303A5CC2397D0D000907F42 /* paylas_whatsapp@3x.png in Resources */,
 				0303A5CD2397D0D000907F42 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				0303A5CE2397D0D000907F42 /* ok_selected@3x.png in Resources */,
 				0303A5CF2397D0D000907F42 /* oval_beyaz.png in Resources */,
-				7357671923AF85D0008589E9 /* burn.gif in Resources */,
 				0303A5D02397D0D000907F42 /* text@2x.png in Resources */,
 				0303A5D12397D0D000907F42 /* cancel_buton.png in Resources */,
 				0303A5D22397D0D000907F42 /* SpotifyPlaylistsViewController.xib in Resources */,
@@ -21006,7 +20953,6 @@
 				0303A5FF2397D0D000907F42 /* toolbar_ciz_icon@2x.png in Resources */,
 				0303A6002397D0D000907F42 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				0303A6012397D0D000907F42 /* close_icon.png in Resources */,
-				7357670523AF85D0008589E9 /* drone.gif in Resources */,
 				0303A6022397D0D000907F42 /* alt_cizgili_secili@2x.png in Resources */,
 				0303A6032397D0D000907F42 /* extraOptions@3x.png in Resources */,
 				0303A6042397D0D000907F42 /* italic@3x.png in Resources */,
@@ -21234,7 +21180,6 @@
 				0303A6DD2397D0D000907F42 /* turuncu@3x.png in Resources */,
 				0303A6DE2397D0D000907F42 /* sample_yellow@3x.png in Resources */,
 				0303A6DF2397D0D000907F42 /* PopUpController.xib in Resources */,
-				7357670923AF85D0008589E9 /* uyku.gif in Resources */,
 				0303A6E02397D0D000907F42 /* sag_ok@2x.png in Resources */,
 				0303A6E12397D0D000907F42 /* duz_siyah.png in Resources */,
 				0303A6E22397D0D000907F42 /* kontrast_secili@3x.png in Resources */,
@@ -21337,7 +21282,6 @@
 				0303A7422397D0D000907F42 /* daire_selected@2x.png in Resources */,
 				0303A7432397D0D000907F42 /* parlaklik@3x.png in Resources */,
 				0303A7442397D0D000907F42 /* kup@2x.png in Resources */,
-				7357671123AF85D0008589E9 /* picture.png in Resources */,
 				0303A7452397D0D000907F42 /* Buyuk.png in Resources */,
 				0303A7462397D0D000907F42 /* extraOptions.png in Resources */,
 				0303A7472397D0D000907F42 /* container in Resources */,
@@ -21427,7 +21371,6 @@
 				0303A79A2397D0D000907F42 /* oval_beyaz@3x.png in Resources */,
 				0303A79B2397D0D000907F42 /* topright@3x.png in Resources */,
 				0303A79C2397D0D000907F42 /* bottomleft@3x.png in Resources */,
-				7357671523AF85D0008589E9 /* el.gif in Resources */,
 				0303A79D2397D0D000907F42 /* sticker_close@2x.png in Resources */,
 				0303A79E2397D0D000907F42 /* PasscodeSettingsViewController.xib in Resources */,
 				0303A79F2397D0D000907F42 /* Orta_Selected.png in Resources */,
@@ -21632,7 +21575,6 @@
 				8C06AECF2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
 				4B857864233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
 				8C0E90031FDEBDFF00789C91 /* LaunchScreen.storyboard in Resources */,
-				7357670C23AF85D0008589E9 /* drone.png in Resources */,
 				8C06B16D2008AD72003D8E05 /* toolbar_sekil_icon@2x.png in Resources */,
 				8C0E90041FDEBDFF00789C91 /* BottomSelectionTabBarViewController.xib in Resources */,
 				8C06B1312008AD72003D8E05 /* t_orta@2x.png in Resources */,
@@ -21694,12 +21636,10 @@
 				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0692008AD71003D8E05 /* Paylas_butnuna_basin@3x.png in Resources */,
-				7357670023AF85D0008589E9 /* kedi.gif in Resources */,
 				8C06B0292008AD71003D8E05 /* ok_btn_kucuk.png in Resources */,
 				8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */,
 				8C06AFA52008AD71003D8E05 /* frame@2x.png in Resources */,
 				B5AB2F092204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */,
-				7357671823AF85D0008589E9 /* burn.gif in Resources */,
 				8C06B04D2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06B0B12008AD71003D8E05 /* rotate.png in Resources */,
 				8C06B1092008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
@@ -21751,7 +21691,6 @@
 				8C06B0952008AD71003D8E05 /* polaroid_yeni.png in Resources */,
 				8C0E901C1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
-				7357670423AF85D0008589E9 /* drone.gif in Resources */,
 				8C06AF392008AD70003D8E05 /* close_icon.png in Resources */,
 				8C0E901E1FDEBDFF00789C91 /* MailVerificationViewController.xib in Resources */,
 				8C06B1492008AD72003D8E05 /* target_secili@2x.png in Resources */,
@@ -21978,7 +21917,6 @@
 				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
 				A2268EC321A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
-				7357670823AF85D0008589E9 /* uyku.gif in Resources */,
 				8C06B19F2008AD72003D8E05 /* yesil@2x.png in Resources */,
 				8C06B08F2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
@@ -22081,7 +22019,6 @@
 				8C06B0252008AD71003D8E05 /* ok@2x.png in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
 				8C06AF052008AD70003D8E05 /* caps2_selected@3x.png in Resources */,
-				7357671023AF85D0008589E9 /* picture.png in Resources */,
 				A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */,
 				8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */,
 				4A13DBE721A6FE6D002C3D16 /* PremiumInfoCard.xib in Resources */,
@@ -22171,7 +22108,6 @@
 				8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */,
 				B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				989BDE5322F47B1E001DDEB2 /* SpotifyPlaylistCollectionViewCell.xib in Resources */,
-				7357671423AF85D0008589E9 /* el.gif in Resources */,
 				8C06B00B2008AD71003D8E05 /* Kucuk_Selected@3x.png in Resources */,
 				8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */,
 				8C06AF0D2008AD70003D8E05 /* checkbox@2x.png in Resources */,
@@ -22511,7 +22447,6 @@
 				8C06B1082008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
 				8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */,
 				8C06B1442008AD72003D8E05 /* target@3x.png in Resources */,
-				7357670323AF85D0008589E9 /* drone.gif in Resources */,
 				CEAE3FF31EFD517300A405B2 /* TabBarView.xib in Resources */,
 				8C06B0F42008AD72003D8E05 /* serbest_cizgi_selected@2x.png in Resources */,
 				9216F57B22493127008339F5 /* InternetDataUsageCollectionViewCell.xib in Resources */,
@@ -22655,7 +22590,6 @@
 				7CEE271D209B537500EF6C79 /* LandingPageViewController.xib in Resources */,
 				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
 				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
-				7357670F23AF85D0008589E9 /* picture.png in Resources */,
 				8C06B1B02008AD72003D8E05 /* CRYRotateImageViewController.nib in Resources */,
 				8C06AF742008AD70003D8E05 /* edit@2x.png in Resources */,
 				737A2EBE2338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
@@ -22810,7 +22744,6 @@
 				8C06B0182008AD71003D8E05 /* kup_selected.png in Resources */,
 				CE8F44FE1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib in Resources */,
 				8C06AF6E2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
-				7357670B23AF85D0008589E9 /* drone.png in Resources */,
 				8C06AF082008AD70003D8E05 /* check-mark@2x.png in Resources */,
 				8C06AFAE2008AD71003D8E05 /* frekans.png in Resources */,
 				8C06AF522008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
@@ -22881,7 +22814,6 @@
 				8C06B1662008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
 				890F737822EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				CEBBDE091F01E69B00CDF527 /* TurkcellSaturaDem.ttf in Resources */,
-				735766FF23AF85D0008589E9 /* kedi.gif in Resources */,
 				8C06B0E02008AD71003D8E05 /* sample_vintage@2x.png in Resources */,
 				8C06B16E2008AD72003D8E05 /* toolbar_sekil_icon@3x.png in Resources */,
 				8C06AF2C2008AD70003D8E05 /* cizgi_3.png in Resources */,
@@ -22909,7 +22841,6 @@
 				8C06AEDA2008AD70003D8E05 /* bold_secili.png in Resources */,
 				8C06B0642008AD71003D8E05 /* Paylas_butnuna_basin.png in Resources */,
 				7C1F89961F7140AF00740177 /* SwipeableCardCell.xib in Resources */,
-				7357671323AF85D0008589E9 /* el.gif in Resources */,
 				8C06B0262008AD71003D8E05 /* ok@3x.png in Resources */,
 				8C06AEDC2008AD70003D8E05 /* bold_secili@2x.png in Resources */,
 				7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */,
@@ -22980,13 +22911,11 @@
 				8C06AFE82008AD71003D8E05 /* kare@3x.png in Resources */,
 				8C06B0CA2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
 				CE51AFD11EF90853005DCEE0 /* ForgotPasswordViewController.xib in Resources */,
-				7357670723AF85D0008589E9 /* uyku.gif in Resources */,
 				8C06AF502008AD70003D8E05 /* cropy_icon.png in Resources */,
 				8C06AF002008AD70003D8E05 /* caps2_selected.png in Resources */,
 				7C634FA51F0F8BA200B5B93D /* SettingsViewController.xib in Resources */,
 				8C06B1862008AD72003D8E05 /* underline@2x.png in Resources */,
 				8C06B01E2008AD71003D8E05 /* lifebox.png in Resources */,
-				7357671723AF85D0008589E9 /* burn.gif in Resources */,
 				8C06AF802008AD70003D8E05 /* error_icon@2x.png in Resources */,
 				4A26E66E21A6E7F00033B797 /* PackagePremiumView.xib in Resources */,
 				8C06B0622008AD71003D8E05 /* paylas_bip@3x.png in Resources */,
@@ -23205,7 +23134,6 @@
 				CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */,
 				CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */,
 				CE784D1822A685FB00662219 /* HomePage.xib in Resources */,
-				7357670623AF85D0008589E9 /* drone.gif in Resources */,
 				CE784D1922A685FB00662219 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE784D1A22A685FB00662219 /* TermsAndServicesScreen.xib in Resources */,
 				CE784D1B22A685FB00662219 /* SyncContactsViewController.xib in Resources */,
@@ -23351,14 +23279,12 @@
 				CE784D9F22A685FB00662219 /* alt_cizgili@3x.png in Resources */,
 				CE784DA022A685FB00662219 /* FeedbackViewController.xib in Resources */,
 				CE784DA122A685FB00662219 /* LargeFullOfQuotaPopUp.xib in Resources */,
-				7357670223AF85D0008589E9 /* kedi.gif in Resources */,
 				CE784DA222A685FB00662219 /* bold.png in Resources */,
 				CE784DA322A685FB00662219 /* undo@3x.png in Resources */,
 				CE784DA422A685FB00662219 /* Kucuk.png in Resources */,
 				CE784DA522A685FB00662219 /* t_buyuk.png in Resources */,
 				CE784DA622A685FB00662219 /* italic_secili@2x.png in Resources */,
 				CE784DA722A685FB00662219 /* t_orta.png in Resources */,
-				7357671A23AF85D0008589E9 /* burn.gif in Resources */,
 				CE784DA822A685FB00662219 /* refreshicon@3x.png in Resources */,
 				CE784DA922A685FB00662219 /* ActivityTimelineTableBackView.xib in Resources */,
 				CE784DAA22A685FB00662219 /* caps2@2x.png in Resources */,
@@ -23636,14 +23562,12 @@
 				CE784EA522A685FB00662219 /* toolbar_crop_icon.png in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */,
-				7357670A23AF85D0008589E9 /* uyku.gif in Resources */,
 				98A86D8F23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				CE784EA722A685FB00662219 /* paylas_mail.png in Resources */,
 				CE784EA822A685FB00662219 /* cancel_buton@2x.png in Resources */,
 				CE784EA922A685FB00662219 /* back_icon@2x.png in Resources */,
 				CE784EAA22A685FB00662219 /* MovieCard.xib in Resources */,
 				0302B73823701EFF0005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */,
-				7357671223AF85D0008589E9 /* picture.png in Resources */,
 				CE784EAB22A685FB00662219 /* kare@3x.png in Resources */,
 				CE784EAC22A685FB00662219 /* sample_bw@2x.png in Resources */,
 				CE784EAD22A685FB00662219 /* ForgotPasswordViewController.xib in Resources */,
@@ -23745,11 +23669,9 @@
 				CE784F0522A685FB00662219 /* slider_thumb.png in Resources */,
 				CE784F0622A685FB00662219 /* Kucuk@2x.png in Resources */,
 				8C86111222BCF28900108958 /* TermsAndPolicyViewController.xib in Resources */,
-				7357670E23AF85D0008589E9 /* drone.png in Resources */,
 				CE784F0722A685FB00662219 /* polaroid_yeni@3x.png in Resources */,
 				CE784F0822A685FB00662219 /* VisualMusicPlayerViewController.xib in Resources */,
 				CE784F0922A685FB00662219 /* InstaPickHashtagCell.xib in Resources */,
-				7357671623AF85D0008589E9 /* el.gif in Resources */,
 				CE784F0A22A685FB00662219 /* beyaz_cerceve@2x.png in Resources */,
 				CE784F0B22A685FB00662219 /* SpotlightViewController.xib in Resources */,
 				CE784F0C22A685FB00662219 /* serbest_cizgi@3x.png in Resources */,
