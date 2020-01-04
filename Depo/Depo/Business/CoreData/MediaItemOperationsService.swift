@@ -990,6 +990,36 @@ final class MediaItemOperationsService {
         }
     }
     
+    func hide(_ albums: [AlbumItem], completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                return
+            }
+            
+            let albumUUID = #keyPath(MediaItemsAlbum.uuid)
+            
+            let predicate = NSPredicate(format: "\(albumUUID) IN %@", albums.compactMap { $0.uuid })
+            let request = NSFetchRequest<MediaItemsAlbum>(entityName: MediaItemsAlbum.Identifier)
+            request.predicate = predicate
+            
+            do {
+                let savedHiddenAlbums: [MediaItemsAlbum] = try context.fetch(request)
+                savedHiddenAlbums.forEach {
+                    guard let items = $0.items as? Set<MediaItem> else {
+                        return
+                    }
+                    items.forEach { $0.status = ItemStatus.hidden.valueForCoreDataMapping() }
+                }
+                self.coreDataStack.saveDataForContext(context: context) {
+                    completion()
+                }
+            } catch {
+                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
+                assertionFailure(errorMessage)
+            }
+        }
+    }
+    
     //MARK: - Unhide
     func unhide(_ items: [WrapData], completion: @escaping VoidHandler) {
         coreDataStack.performBackgroundTask { [weak self] context in

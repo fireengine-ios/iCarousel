@@ -24,10 +24,10 @@ final class PlacesService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPlacesAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPlacesAlbum(id: Int, isHidden: Bool, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         debugLog("PlacesService getPlacesAlbumWithID")
         
-        let param = PlacesAlbumParameters(id: id)
+        let param = PlacesAlbumParameters(id: id, isHidden: isHidden)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
@@ -91,14 +91,17 @@ final class PlacesParameters: BaseRequestParametrs {
 }
 
 final class PlacesAlbumParameters: BaseRequestParametrs {
-    let id: Int
+    private let id: Int
+    private let isHidden: Bool
     
-    init(id: Int) {
+    init(id: Int, isHidden: Bool) {
         self.id = id
+        self.isHidden = isHidden
     }
     
     override var patch: URL {
-        let searchWithParam = String(format: RouteRequests.placesAlbum, id)
+        let path = isHidden ? RouteRequests.placesAlbumHidden : RouteRequests.placesAlbum
+        let searchWithParam = String(format: path, id)
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

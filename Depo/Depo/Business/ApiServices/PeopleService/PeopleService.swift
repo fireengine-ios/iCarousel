@@ -95,10 +95,10 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPeopleAlbum(id: Int, isHidden: Bool, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         debugLog("PeopleService getPeopleAlbumWithID")
         
-        let param = PeopleAlbumParameters(id: id)
+        let param = PeopleAlbumParameters(id: id, isHidden: isHidden)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
@@ -231,13 +231,16 @@ final class PeopleParameters: BaseRequestParametrs {
 
 final class PeopleAlbumParameters: BaseRequestParametrs {
     private let id: Int
+    private let isHidden: Bool
     
-    init(id: Int) {
+    init(id: Int, isHidden: Bool) {
         self.id = id
+        self.isHidden = isHidden
     }
     
     override var patch: URL {
-        let searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+        let path = isHidden ? RouteRequests.peopleAlbumHidden: RouteRequests.peopleAlbum
+        let searchWithParam = String(format: path, id)
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
