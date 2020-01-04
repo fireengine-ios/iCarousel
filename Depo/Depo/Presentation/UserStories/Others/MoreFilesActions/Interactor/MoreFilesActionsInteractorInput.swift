@@ -22,7 +22,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func hide(items: [BaseDataSourceItem])
     
-    func simpleAlbumHide(items: [BaseDataSourceItem])
+    func hideAlbums(items: [BaseDataSourceItem])
     
     func simpleHide(items: [BaseDataSourceItem])
     

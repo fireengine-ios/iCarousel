@@ -321,7 +321,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                           fail: self.failAction(elementType: .hide))
     }
     
-    func simpleAlbumHide(items: [BaseDataSourceItem]) {
+    func hideAlbums(items: [BaseDataSourceItem]) {
            guard let items = items as? [AlbumItem] else {
                assertionFailure("Unexpected type of items")
                return
