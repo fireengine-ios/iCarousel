@@ -50,9 +50,9 @@ final class OverlayStickerViewController: ViewController {
     private var gifPage = 0
     private var imagePage = 0
     private var isPaginating = false
+    private var gifCollectionViewOffset: CGPoint = .zero
+    private var imageCollectionViewOffset: CGPoint = .zero
     
-//    private var pictureAttachment = [Attachment]()
-//    private var gifAttachment = [Attachment]()
     private var imageAttachment = [SmashStickerResponse]()
     private var gifAttachment = [SmashStickerResponse]()
     
@@ -64,18 +64,36 @@ final class OverlayStickerViewController: ViewController {
                 self.gifButton.setTitleColor(UIColor.yellow, for: .normal)
                 self.stickerButton.tintColor = UIColor.gray
                 self.stickerButton.setTitleColor(UIColor.gray, for: .normal)
-                //TODO: Logic for updating collection view after changing selectedAttachmentType
+
+                imageCollectionViewOffset = stickersCollectionView.contentOffset
                 stickersCollectionView.reloadData()
+//                stickersCollectionView.performBatchUpdates(nil, completion: { _ in
+//                    self.stickersCollectionView.contentOffset = self.gifCollectionViewOffset
+//                })
+                stickersCollectionView.layoutIfNeeded()
+                DispatchQueue.main.async {
+                     self.stickersCollectionView.contentOffset = self.gifCollectionViewOffset
+                }
             case .image:
                 self.stickerButton.tintColor = UIColor.yellow
                 self.stickerButton.setTitleColor(UIColor.yellow, for: .normal)
                 self.gifButton.tintColor = UIColor.gray
                 self.gifButton.setTitleColor(UIColor.gray, for: .normal)
-                //TODO: Logic for updating collection view after changing selectedAttachmentType
+
+                gifCollectionViewOffset = stickersCollectionView.contentOffset
                 if imageAttachment.isEmpty {
                     loadNext()
                 } else {
+                    
                     stickersCollectionView.reloadData()
+//                    stickersCollectionView.performBatchUpdates(nil, completion: {  _ in
+//                        self.stickersCollectionView.contentOffset = self.imageCollectionViewOffset
+//                    })
+                    stickersCollectionView.layoutIfNeeded()
+                    DispatchQueue.main.async {
+                        self.stickersCollectionView.contentOffset = self.imageCollectionViewOffset
+                    }
+
                 }
             }
         }
@@ -114,9 +132,9 @@ final class OverlayStickerViewController: ViewController {
             return
         }
         
-        showFullscreenHUD(with: nil, and: {})
+//        showFullscreenHUD(with: nil, and: {})
+        showSpinnerIncludeNavigationBar()
         
-  
         DispatchQueue.main.async { [weak self] in
             
             guard let self = self else {
@@ -136,7 +154,7 @@ final class OverlayStickerViewController: ViewController {
                                                  firstAction: { popup in popup.close() },
                                                  secondAction: { popup in
                                                     popup.close()
-                                                    self?.showFullscreenHUD(with: nil, and: {})
+                                                    self?.showSpinnerIncludeNavigationBar()
                                                     self?.saveResult(result: result)
                 })
                 self?.hideSpinnerIncludeNavigationBar()
@@ -320,9 +338,6 @@ final class OverlayStickerViewController: ViewController {
                 return
             }
             
-            
-            
-            
             switch result {
                 
             case .success(let tuple):
@@ -388,10 +403,12 @@ extension OverlayStickerViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        showSpinner()
         let url = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].path : imageAttachment[indexPath.row].path
         
-        overlayingStickerImageView.addAttachment(url: url, attachmentType: selectedAttachmentType)
+        overlayingStickerImageView.addAttachment(url: url, attachmentType: selectedAttachmentType, completion: { [weak self] in
+            self?.hideSpinner()
+        })
     }
 }
 
