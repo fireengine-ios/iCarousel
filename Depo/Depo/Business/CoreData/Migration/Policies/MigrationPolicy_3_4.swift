@@ -10,8 +10,7 @@ import Foundation
 
 
 class MediaItemMigrationPolicy_3_4: NSEntityMigrationPolicy {
-    @objc func status(_ isTranscoded: Bool) -> Int16 {
-        let status: ItemStatus = isTranscoded ? .active : .unknown
-        return status.valueForCoreDataMapping()
+    @objc func status() -> Int16 {
+        return ItemStatus.active.valueForCoreDataMapping()
     }
 }
