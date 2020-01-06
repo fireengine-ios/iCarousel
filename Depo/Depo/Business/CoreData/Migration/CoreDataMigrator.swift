@@ -25,7 +25,7 @@ final class CoreDataMigrator {
             return false
         }
 
-        return version.isCompatibleWithStoreMetadata(metadata)
+        return !version.isCompatibleWithStoreMetadata(metadata)
     }
     
     // MARK: - Migration
