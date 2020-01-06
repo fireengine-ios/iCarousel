@@ -974,7 +974,7 @@
 "privacy_policy" = "Politica de Confidențialitate";
 "face_tags_description_standart" = "Atunci când opțiunea Recunoașterea Feței&Imaginei e conectată, pozele încărcate vor fi grupate după Fețe și Obiecte identificate. Dacă opțiunea de localizare e pornită și ea, pozele vor fi grupate și după acest criteriu. Iar noi, vom avea posibilitatea să creăm pentru tine istorii automatizate, în baza grupelor create. ";
 "terms_and_use_introduction_checkbox" = "Am citit și am acceptat Termenii de utilizare.\nFaceți clic pentru detalii despre politica de confidențialitate.";
-"privacy_policy_condition" = "Politica de Confidențialitate";
+"privacy_policy_condition" = "politica de confidențialitate";
 "photo_pick_description" = "Dacă activezi butonul și te conectezi la contul tău Instagram, vom avea posibilitatea să-ți oferim o mai bună experiență prin anliza personalizată pentru fiecare PhotoPick";
 
 /*Permission screen in Settings*/
@@ -1274,7 +1274,7 @@
 "sing_up_error_unauthorized" = "Parola dvs. nu poate fi goală";
 "password_in_resent_history" = "Parola dvs. nu poate fi aceeași cu ultimele %d parole";
 "uppercase_miss_in_password" = "Parola dvs. ar trebui să conțină cel puțin un caracter cu majusculă";
-"lowercase_miss_in_password" = "Parola dvs. trebuie să conțină cel puțin un caracter minuscul \n";
+"lowercase_miss_in_password" = "Parola dvs. trebuie să conțină cel puțin un caracter minuscul";
 "number_miss_in_password" = "Parola dvs. trebuie să conțină cel puțin o cifră \n";
 "password_length_below_limit" = "Parola dvs. nu poate conține mai puțin de %d caractere";
 "password_length_exceede" = "Parola dvs. nu poate conține mai mult de %d caractere";
@@ -1288,44 +1288,44 @@
 "profile_detail_address_placeholder" = "Vă rugăm să introduceți informațiile despre adresa dvs.";
 "profile_detail_error_contact_call_center" = "Contactați centrul de apel pentru a vă schimba numărul";
 "temporary_error" = "A apărut o eroare temporară, încercați din nou";
-"move_to_trash_albums_message" = "";
-"move_to_trash_albums_success_message" = "";
-"confirmation_popup_title_hide" = "";
+"move_to_trash_albums_message" = "Nu veți vedea acest album ...";
+"move_to_trash_albums_success_message" = "Albumul este trimis la coșul de gunoi cu succes";
+"confirmation_popup_title_hide" = "Ascundeți selectat";
 "confirmation_popup_message_hide" = "";
-"confirmation_popup_message_hide_albums" = "";
-"confirmation_popup_title_hide_single_album" = "";
-"confirmation_popup_message_hide_single_album" = "";
-"smash_screen_title" = "";
-"smash_popup_message" = "";
-"Smash" = "";
-"photos_hide_success_message" = "";
-"Unhide" = "";
-"smart_album_hidden" = "";
-"hide_success_popup_message" = "";
-"hide_success_popup_button_title" = "";
-"hide_single_album_success_popup_message" = "";
-"hide_albums_success_popup_message" = "";
-"selected_items_limit_hide" = "";
+"confirmation_popup_message_hide_albums" = "Ascundeți albumele selectate";
+"confirmation_popup_title_hide_single_album" = "Ascundeți albumul";
+"confirmation_popup_message_hide_single_album" = "Nu veți vedea acest album ...";
+"smash_screen_title" = "Efect de lovitură ";
+"smash_popup_message" = "Această fotografie editată va fi salvată ca fotografie nouă în galeria dispozitivului";
+"Smash" = "Lovitură";
+"photos_hide_success_message" = "Articolele sunt ascunse cu succes";
+"Unhide" = "Afișați";
+"smart_album_hidden" = "Ascuns";
+"hide_success_popup_message" = "Articolele sunt ascunse cu succes";
+"hide_success_popup_button_title" = "Articole ascunse>";
+"hide_single_album_success_popup_message" = "Albumul este ascuns cu succes";
+"hide_albums_success_popup_message" = "Albumele selectate sunt ascunse cu succes";
+"selected_items_limit_hide" = "Nu puteți ascunde mai mult de %d fișiere";
 "hide_single_photo_completion_alert_message" = "";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "";
-"people_album_warning_alert_title_premium_and_no_image_grouping" = "";
+"people_album_warning_alert_title_premium_and_no_image_grouping" = "Nu există o imagine procesată!";
 "people_album_warning_message_not_premium_and_no_image_grouping" = "";
 "people_album_warning_message_not_premium_and_image_grouping_on" = "";
 "people_album_warning_message_premium_and_no_image_grouping" = "";
 "people_album_warning_button_not_premium_and_no_image_grouping" = "";
 "people_album_warning_button_not_premium_and_image_grouping_on" = "";
 "people_album_warning_button_premium_and_no_image_grouping" = "";
-"hide_successed_alert_title" = "";
-"hide_successed_alert_with_people_album_title" = "";
-"hide_successed_alert_people_album_title" = "";
+"hide_successed_alert_title" = "Imaginea este ascunsă cu succes";
+"hide_successed_alert_with_people_album_title" = "Poza este ascunsă acum!";
+"hide_successed_alert_people_album_title" = "Ascundeți imagini cu o persoană!";
 "hide_successed_alert_people_album_description" = "";
-"hide_successed_alert_do_not_show_this_message" = "";
-"hide_successed_alert_view_people_album" = "";
-"smash_successed_alert_title" = "";
-"smash_successed_alert_second_title" = "";
+"hide_successed_alert_do_not_show_this_message" = "Nu afișați acest mesaj.";
+"hide_successed_alert_view_people_album" = "Vizualizați albumul de persoane";
+"smash_successed_alert_title" = "Salvat cu succes!";
+"smash_successed_alert_second_title" = "Ce ai vrea sa faci?";
 "smash_successed_alert_description" = "";
-"smash_successed_simple_alert_title" = "";
+"smash_successed_simple_alert_title" = "Salvat cu succes!";
 "smash_successed_simple_alert_description" = "";
 
 /*carousel pager*/
@@ -1335,10 +1335,10 @@
 "carousel_view_second_page_text" = "";
 "carousel_view_third_page_title" = "";
 "carousel_view_third_page_text" = "";
-"hidden_bin_album_slider_title" = "";
-"hidden_bin_album_slider_empty" = "";
-"hidden_bin_empty" = "";
-"hidden_bin_navbar_title" = "";
+"hidden_bin_album_slider_title" = "Albumele mele ascunse";
+"hidden_bin_album_slider_empty" = "Nu există încă un album ascuns.";
+"hidden_bin_empty" = "Nu există încă niciun articol ascuns";
+"hidden_bin_navbar_title" = "Ascuns";
 "unhide_popup_text" = "";
 
 /*divorce card*/
