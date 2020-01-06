@@ -52,7 +52,8 @@ final class CoreDataStack_ios10: CoreDataStack {
     private let migrator = CoreDataMigrator()
 
     lazy var container: NSPersistentContainer = {
-        let model = NSManagedObjectModel.managedObjectModel(forName: CoreDataConfig.modelBaseName, directory: CoreDataConfig.modelDirectoryName)
+        let modelName = CoreDataMigrationVersion.latest.name
+        let model = NSManagedObjectModel.managedObjectModel(forName: modelName, directory: CoreDataConfig.modelDirectoryName)
         
         let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: model)
         container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
