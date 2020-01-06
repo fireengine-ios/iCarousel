@@ -723,6 +723,35 @@ class RouterVC: NSObject {
         return c
     }
     
+    // MARK: Hidden View Controllers
+    
+    func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
+        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                               selectedItem: fileObject,
+                                                                                               allItems: items,
+                                                                                               albumUUID: albumUUID,
+                                                                                               albumItem: albumItem)
+        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return photoVideoDetailViewController
+    }
+    
+    func filesDetailHiddenViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController? {
+        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenViewController(with: "PhotoVideoDetailViewController",
+                                                                                          selectedItem: fileObject,
+                                                                                          allItems: items)
+        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
+            assertionFailure()
+            return nil
+        }
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return photoVideoDetailViewController
+    }
+    
     // MARK: Albums list
     
     func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
@@ -741,6 +770,11 @@ class RouterVC: NSObject {
     
     func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
+        return controller
+    }
+    
+    func hiddenAlbumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+        let controller = AlbumDetailModuleInitializer.initializeHiddenAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     

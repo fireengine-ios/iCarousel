@@ -20,10 +20,31 @@ final class FaceImagePhotosConfigurator {
         router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
+
+        var initialTypes: [ElementTypes] = [.select, .changeCoverPhoto]
+        if item.fileType.isFaceImageType, let status = album.preview?.status {
+            switch status {
+            case .hidden:
+                initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
+            case .trashed:
+                initialTypes.append(contentsOf: [.hide, .completelyDeleteAlbums])
+            default:
+                initialTypes.append(contentsOf: [.hide, .completelyMoveToTrash])
+            }
+        }
         
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .deleteFaceImage])
+        let selectionModeTypes: [ElementTypes]
         
+        let langCode = Device.locale
+        if langCode != "tr" {
+            selectionModeTypes = [.createStory, .removeFromFaceImageAlbum]
+        } else {
+            selectionModeTypes = [.createStory, .print, .removeFromFaceImageAlbum]
+        }
+        
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: initialTypes,
+                                                                   selectionModeTypes: selectionModeTypes)
+
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
         presenter.alertSheetModule = alertModulePresenter
@@ -46,14 +67,10 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromFaceImageAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
                                                style: .default, tintColor: nil)
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromFaceImageAlbum],
-                                                   style: .default, tintColor: nil)
-        }
+        
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC

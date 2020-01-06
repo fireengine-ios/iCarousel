@@ -63,6 +63,43 @@ class PhotoVideoDetailModuleConfigurator {
         }
     }
     
+    func configureModuleFromHiddenAlbumForViewInput<UIViewController>(viewInput: UIViewController,
+                                                                      photoVideoBottomBarConfig: EditingBarConfig,
+                                                                      documentsBottomBarConfig: EditingBarConfig,
+                                                                      selecetedItem: Item,
+                                                                      allItems: [Item],
+                                                                      albumUUID: String,
+                                                                      albumItem: Item? = nil,
+                                                                      hideActions: Bool = false) {
+        if let viewController = viewInput as? PhotoVideoDetailViewController {
+            viewController.hideTreeDotButton = true
+            
+            let interactor = PhotoVideoAlbumDetailInteractor()
+            interactor.albumUUID = albumUUID
+            configure(viewController: viewController,
+                      photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                      documentsBottomBarConfig: documentsBottomBarConfig,
+                      interactor: interactor,
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.hiddenDetailActions,
+                      selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem, hideActions: hideActions)
+        }
+    }
+    
+    func configureModuleForHiddenViewInput<UIViewController>(viewInput: UIViewController,
+                                                             photoVideoBottomBarConfig: EditingBarConfig,
+                                                             documentsBottomBarConfig: EditingBarConfig,
+                                                             selecetedItem: Item,
+                                                             allItems: [Item],
+                                                             hideActions: Bool = false) {
+        if let viewController = viewInput as? PhotoVideoDetailViewController {
+            viewController.hideTreeDotButton = true
+            
+            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, alertSheetExcludeTypes: [.unhide,.delete],
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.hiddenDetailActions,
+                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions)
+        }
+    }
+    
     private func configure(viewController: PhotoVideoDetailViewController,
                            photoVideoBottomBarConfig: EditingBarConfig,
                            documentsBottomBarConfig: EditingBarConfig,

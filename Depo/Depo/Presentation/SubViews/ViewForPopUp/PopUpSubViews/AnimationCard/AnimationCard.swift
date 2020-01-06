@@ -74,7 +74,7 @@ class AnimationCard: BaseCardView {
     }
     
     override func viewWillShow() {
-        photoImageView.loadImage(with: item?.tmpDownloadUrl)
+        photoImageView.loadImageData(with: item?.tmpDownloadUrl)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

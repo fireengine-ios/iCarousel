@@ -16,11 +16,21 @@ protocol MoreFilesActionsInteractorInput {
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?)
     
+    func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
+    
     func delete(item: [BaseDataSourceItem])
     
     func hide(items: [BaseDataSourceItem])
     
+    func hideAlbums(items: [BaseDataSourceItem])
+    
+    func simpleHide(items: [BaseDataSourceItem])
+    
+    func unhide(items: [BaseDataSourceItem])
+    
     func completelyDelete(albums: [BaseDataSourceItem])
+    
+    func completelyMoveToTrash(albums: [BaseDataSourceItem])
     
     func move(item: [BaseDataSourceItem], toPath: String)
     

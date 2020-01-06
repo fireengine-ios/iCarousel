@@ -647,6 +647,10 @@ struct TextConstants {
     static let tabBarMoveLabel = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarShareLabel = NSLocalizedString("Share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarInfoLabel = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    //MARK: Smash Screen
+    static let smashScreenTitle = NSLocalizedString("smash_screen_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let smashPopUpMessage = NSLocalizedString("smash_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Select Name
     static let selectNameTitleFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -722,7 +726,9 @@ struct TextConstants {
     static let prepareQuickScroll = NSLocalizedString("Quick Scroll Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideSuccessPopupMessage = NSLocalizedString("hide_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideSuccessPopupButtonTitle = NSLocalizedString("hide_success_popup_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let hideSingleAlbumSuccessPopupMessage = NSLocalizedString("hide_single_album_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideAlbumsSuccessPopupMessage = NSLocalizedString("hide_albums_success_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     // MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -946,6 +952,9 @@ struct TextConstants {
     
     static let deleteFilesText = NSLocalizedString("Deleting these files will remove them from cloud. You won't be able to access them once deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAlbums = NSLocalizedString("Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let moveToTrashAlbums = NSLocalizedString("move_to_trash_albums_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let moveToTrashAlbumsSuccess = NSLocalizedString("move_to_trash_albums_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let removeAlbums = NSLocalizedString("Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeFromAlbum = NSLocalizedString("This file will be removed only from your album. You can access this file from Photos tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -953,6 +962,9 @@ struct TextConstants {
     
     static let hideItemsWarningTitle = NSLocalizedString("confirmation_popup_title_hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hideItemsWarningMessage = NSLocalizedString("confirmation_popup_message_hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideAlbumsWarningMessage = NSLocalizedString("confirmation_popup_message_hide_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSingleAlbumWarnigTitle = NSLocalizedString("confirmation_popup_title_hide_single_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let hideSingleAlbumWarnigMessage = NSLocalizedString("confirmation_popup_message_hide_single_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginAddGSM = NSLocalizedString("Add GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

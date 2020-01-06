@@ -53,7 +53,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         presentedBy sender: Any?,
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
-        constractSpecifiedActions(with: types, for: items) {[weak self] (actions) in
+        constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes) {[weak self] (actions) in
             DispatchQueue.main.async { [weak self] in
                 self?.presentAlertSheet(with: actions, presentedBy: sender)
             }
@@ -72,7 +72,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
         
         if item.fileType == .photoAlbum {
-            let types: [ElementTypes] = [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails]
+            let types: [ElementTypes] = [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails]
             let album = AlbumItem(uuid: item.uuid,
                                   name: item.name,
                                   creationDate: item.creationDate,
@@ -315,9 +315,24 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
+                case .hideAlbums:
+                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                        //TODO: will be another task to implement analytics calls
+//                        MenloworksAppEvents.onDeleteClicked()
+                        
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            self.interactor.hide(items: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
+                    })
                 case .unhide:
-                    assertionFailure("please implement this function first")
-                    action = UIAlertAction()
+                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
+                        self?.interactor.unhide(items: selectedItems)
+                    }
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()
@@ -451,6 +466,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
                         self.interactor.completelyDelete(albums: currentItems)
+                    })
+                case .completelyMoveToTrash:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                        MenloworksAppEvents.onDeleteClicked()
+                        self.interactor.completelyMoveToTrash(albums: currentItems)
                     })
                 case .removeAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in

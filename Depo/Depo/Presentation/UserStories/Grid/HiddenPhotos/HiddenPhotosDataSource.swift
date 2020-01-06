@@ -30,24 +30,27 @@ final class HiddenPhotosDataSource: NSObject {
     
     private let collectionView: UICollectionView
     private weak var delegate: HiddenPhotosDataSourceDelegate?
-    private var albumSlider: AlbumsSliderCell? {
-        return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? AlbumsSliderCell
-    }
+    private var albumSlider: AlbumsSliderCell?
     
     private(set) var allItems = [[Item]]()
     private var selectedItems = [Item]()
     
     private var showGroups: Bool {
-        return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .sizeZA, .timeUp, .timeDown])
+        return sortedRule.isContained(in: [.lettersAZ, .lettersZA, .timeUp, .timeDown])
     }
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules = .timeUp
     private(set) var isSelectionStateActive = false
     private var isPaginationDidEnd = false
     
     private let filesDataSource = FilesDataSource()
     
     var isEmpty: Bool {
+        let albumsEmpty = albumSlider?.isEmpty ?? true
+        return photosIsEmpty && albumsEmpty
+    }
+    
+    var photosIsEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
@@ -103,38 +106,44 @@ extension HiddenPhotosDataSource {
         albumSlider?.finishLoadAlbums()
     }
     
-    func append(items: [Item]) {
+    func append(items: [Item], completion: @escaping VoidHandler) {
         if items.isEmpty {
             isPaginationDidEnd = true
         }
         
-        if allItems.isEmpty {
-            allItems.append(items)
-            collectionView.reloadData()
-        } else {
-            dispatchQueue.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                let insertResult = self.insert(newItems: items)
-                guard !insertResult.indexPaths.isEmpty else {
-                    return
-                }
-                
+        dispatchQueue.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let isEmpty = self.photosIsEmpty
+            let insertResult = self.insert(newItems: items)
+            guard !insertResult.indexPaths.isEmpty else {
                 DispatchQueue.main.async {
+                    completion()
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if isEmpty {
+                    self.collectionView.reloadData()
+                    completion()
+                } else {
                     self.collectionView.performBatchUpdates({
                         if !insertResult.sections.isEmpty {
                             self.collectionView.insertSections(insertResult.sections)
                         }
                         self.collectionView.insertItems(at: insertResult.indexPaths)
-                    }, completion: nil)
+                    }, completion: { _ in
+                        completion()
+                    })
                 }
             }
         }
     }
     
-    func remove(items: [Item]) {
+    func remove(items: [Item], completion: @escaping VoidHandler) {
         dispatchQueue.async { [weak self] in
             guard let self = self else {
                 return
@@ -142,38 +151,43 @@ extension HiddenPhotosDataSource {
             
             let deleteResult = self.delete(items: items)
             guard !deleteResult.indexPaths.isEmpty else {
+                DispatchQueue.main.async {
+                    completion()
+                }
                 return
             }
 
             DispatchQueue.main.async {
-                if self.allItems.isEmpty {
+                if self.photosIsEmpty {
                     self.collectionView.reloadData()
+                    completion()
                 } else {
                     self.collectionView.performBatchUpdates({
                         self.collectionView.deleteItems(at: deleteResult.indexPaths)
                         if !deleteResult.sections.isEmpty {
                             self.collectionView.deleteSections(deleteResult.sections)
                         }
-                    }, completion: nil)
+                    }, completion: {_ in
+                        completion()
+                    })
                 }
             }
         }
-        
-        let types: [FileType] = [.faceImage(.people), .faceImage(.places), .faceImage(.things)]
-        let firItems = items.filter { $0.fileType.isContained(in: types) }
-        removeSlider(items: firItems)
     }
     
-    func removeSlider(items: [BaseDataSourceItem]) {
-        albumSlider?.removeItems(items)
+    func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
+        albumSlider?.removeItems(items, completion: completion)
     }
     
-    func reset() {
+    func reset(resetSlider: Bool) {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
-        albumSlider?.reset()
         collectionView.reloadData()
+        if resetSlider {
+            albumSlider?.reset()
+            collectionView.reloadSections(IndexSet(integer: 0))
+        }
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
@@ -250,10 +264,14 @@ extension HiddenPhotosDataSource {
         var insertedIndexPaths = [IndexPath]()
         var insertedSections = IndexSet()
         
-        for item in newItems {
+        let allMedia = allItems.flatMap { $0 }
+        let insertItems = newItems.filter { !allMedia.contains($0) }
+        
+        for item in insertItems {
             autoreleasepool {
-                if let lastItem = allItems.last?.last {
-                    let insertResult: InsertItemResult?
+                let insertResult: InsertItemResult?
+                if !allItems.isEmpty,
+                    let lastItem = allItems.last?.last {
                     switch sortedRule {
                     case .timeUp, .timeDown:
                         insertResult = addByDate(lastItem: lastItem, newItem: item)
@@ -264,14 +282,16 @@ extension HiddenPhotosDataSource {
                     default:
                         insertResult = nil
                     }
-                    
-                    if let indexPath = insertResult?.indexPath {
-                        insertedIndexPaths.append(indexPath)
-                    }
-                    
-                    if let section = insertResult?.section {
-                        insertedSections.insert(section)
-                    }
+                } else {
+                    insertResult = appendSection(with: item)
+                }
+                
+                if let indexPath = insertResult?.indexPath {
+                    insertedIndexPaths.append(indexPath)
+                }
+                
+                if let section = insertResult?.section {
+                    insertedSections.insert(section)
                 }
             }
         }
@@ -414,6 +434,10 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
                 return
             }
             
+            if albumSlider == nil {
+                albumSlider = cell
+            }
+            
             cell.delegate = self
             cell.setup(title: TextConstants.hiddenBinAlbumSliderTitle, emptyText: TextConstants.hiddenBinAlbumSliderEmpty)
             return
@@ -514,6 +538,8 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
         if !isSelectionStateActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
             albumSlider?.startSelection()
+        } else if let indexPath = collectionView.indexPath(for: cell) {
+            collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
 }

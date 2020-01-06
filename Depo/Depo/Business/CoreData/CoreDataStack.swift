@@ -8,6 +8,64 @@
 
 import Foundation
 
+<<<<<<< HEAD
+=======
+
+fileprivate struct CoreDataConfig {
+    static let modelName = "LifeBoxModel"
+    static let modelVersion = "4"
+    static let storeName = "DataModel"
+    
+    static var storeUrl: URL {
+        guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            fatalLog("Unable to resolve document directory")
+        }
+        
+        return docURL.appendingPathComponent("\(CoreDataConfig.storeName).sqlite")
+    }
+    
+    static var modelURL: URL? {
+        let bundle = Bundle.main
+        let versionedModelName = "\(CoreDataConfig.modelName) \(CoreDataConfig.modelVersion)"
+        let subdir = "\(CoreDataConfig.modelName).momd"
+        let omoURL = bundle.url(forResource: versionedModelName, withExtension: "omo", subdirectory: subdir)
+        let momURL = bundle.url(forResource: versionedModelName, withExtension: "mom", subdirectory: subdir)
+        
+        /// Use optimized model version only if iOS >= 11
+        if #available(iOS 11, *) {
+            return omoURL ?? momURL
+        } else {
+            return momURL ?? omoURL
+        }
+    }
+    
+    static var managedObjectModel: NSManagedObjectModel {
+        guard let modelURL = CoreDataConfig.modelURL else {
+            fatalLog("Error loading model from bundle")
+        }
+        
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalLog("Error initializing mom from: \(modelURL)")
+        }
+        return mom
+    }
+    
+    @available(iOS 10.0, *)
+    static var storeDescription: NSPersistentStoreDescription {
+        let description = NSPersistentStoreDescription(url: CoreDataConfig.storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
+    }
+    
+    private init() {}
+}
+
+
+
+>>>>>>> develop_v2
 protocol CoreDataStackDelegate: class {
     func onCoreDataStackSetupCompleted()
 }
@@ -38,7 +96,6 @@ extension CoreDataStack {
         }
     }
 }
-
 
 
 @available(iOS 10, *)

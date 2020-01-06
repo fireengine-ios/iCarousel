@@ -51,7 +51,7 @@ final class DivorceCard: BaseCardView {
         if let videoUrl = cardObject?.details?["videoUrl"].url,
             let videoPreviewImageUrl = cardObject?.details?["thumbnail"].url {
             
-            videoPreviewImageView.loadImage(with: videoPreviewImageUrl)
+            videoPreviewImageView.loadImageData(with: videoPreviewImageUrl)
             self.videoUrl = videoUrl
             
         }

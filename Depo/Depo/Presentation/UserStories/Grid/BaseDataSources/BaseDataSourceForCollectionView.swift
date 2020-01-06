@@ -1846,6 +1846,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func didHide(items: [AlbumItem]) {
+        
+    }
+    
     func startUploadFilesToAlbum(files: [WrapData]) {
         guard let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) else {
@@ -1954,6 +1958,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 item.childCount = childCount - Int64(count)
             }
         }
+    }
+    
+    func didHide(items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didHide(albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        
     }
 }
 

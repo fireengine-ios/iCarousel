@@ -39,7 +39,7 @@ final class HiddenPhotosDataLoader {
     private var currentAlbumsPage = 0
     private var currentLoadingAlbumType: AlbumsOrder = .people
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules = .timeUp
     
     private var photoTask: URLSessionTask?
     private var albumsTask: URLSessionTask?
@@ -107,20 +107,22 @@ final class HiddenPhotosDataLoader {
             
             switch result {
             case .success(let array):
+                self.delegate?.didLoadAlbum(items: array)
+                                
+                if array.isEmpty, self.currentLoadingAlbumType == .albums {
+                    //finish loading albums
+                    self.delegate?.didFinishLoadAlbums()
+                    return
+                }
+                
                 if array.count < self.albumPageSize, let newAlbumType = AlbumsOrder(rawValue: self.currentLoadingAlbumType.rawValue + 1) {
                     self.currentLoadingAlbumType = newAlbumType
                     self.currentAlbumsPage = 0
                 } else {
                     self.currentAlbumsPage += 1
                 }
-                self.delegate?.didLoadAlbum(items: array)
                 
-                if self.currentLoadingAlbumType == .albums {
-                    if array.isEmpty {
-                        //finish loading albums
-                        self.delegate?.didFinishLoadAlbums()
-                    }
-                } else if array.count < self.albumsCountBeforeNextPage {
+                if array.count < self.albumsCountBeforeNextPage {
                     //autoload next page
                     self.loadNextAlbumsPage()
                 }
@@ -265,8 +267,8 @@ final class HiddenPhotosDataLoader {
     }
     
     private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenAlbums(sortBy: sortedRule.sortingRules,
-                                                sortOrder: sortedRule.sortOder,
+        albumsTask = hiddenService.hiddenAlbums(sortBy: .date,//sortedRule.sortingRules,
+                                                sortOrder: .desc,//sortedRule.sortOder,
                                                 page: currentAlbumsPage,
                                                 size: albumPageSize,
                                                 handler: { result in
@@ -338,7 +340,11 @@ final class HiddenPhotosDataLoader {
     //MARK: - Unhide methods
     
     private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        hiddenService.recoverItems(items, handler: handler)
+        fileService.unhide(items: items, success: {
+            handler(.success(()))
+        }) { error in
+            handler(.failed(error))
+        }
     }
     
     private func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {

@@ -143,6 +143,11 @@ class SearchByFieldParameters: BaseRequestParametrs, Equatable {
         let mimifidedStr = String(format: "&minified=%@", mini)
         searchWithParam = searchWithParam.appending(mimifidedStr)
         
+        if fieldValue.isContained(in: [.document, .favorite, .audio]) {
+            let notHiddenParameter = "&showHidden=false"
+            searchWithParam = searchWithParam.appending(notHiddenParameter)
+        }
+        
         return URL(string: searchWithParam, relativeTo: super.patch)!
     }
 }

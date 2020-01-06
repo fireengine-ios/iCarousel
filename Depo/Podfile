@@ -20,6 +20,7 @@ def core_pods
   pod 'Netmera'
 
   pod 'SDWebImage' , '~> 4'
+  pod 'YYImage'
   pod 'GoogleConversionTracking'
   pod 'Firebase/Core'
   pod 'GoogleTagManager'

@@ -14,6 +14,8 @@ final class HSCompletionPopUp: BasePopUpController {
         case showOpenSmartAlbumButton
         case showBottomCloseButton
         case smash
+        case hiddenPhotosOnly
+        case hiddenAlbums
     }
 
     //MARK: IBOutlets
@@ -129,6 +131,8 @@ final class HSCompletionPopUp: BasePopUpController {
 
     //MARK: bottomButtonParentView
 
+    @IBOutlet private weak var bottomOffset: NSLayoutConstraint!
+    
     @IBOutlet private weak var bottomButtonParentView: UIView!
 
     @IBOutlet private weak var separatorView: UIView! {
@@ -229,6 +233,25 @@ final class HSCompletionPopUp: BasePopUpController {
             smartAlbumTitleLabel.text = TextConstants.smashSuccessedAlertSecondTitle
             smartAlbumTitleLabel.textColor = ColorConstants.darkBlueColor
             smartAlbumDescriptionLabel.text = TextConstants.smashSuccessedAlertDescription
+            
+        case .hiddenPhotosOnly:
+            titleLabel.text = TextConstants.hideSuccessPopupMessage
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.textColor = ColorConstants.darkBlueColor
+            
+            smartAlbumsAdditionsParentView.isHidden = true
+            closeButton.isHidden = true
+            
+        case .hiddenAlbums:
+            let title = isSingleImage ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.hideAlbumsSuccessPopupMessage
+            titleLabel.text = title
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.textColor = ColorConstants.darkBlueColor
+            
+            smartAlbumsAdditionsParentView.isHidden = true
+            bottomButtonParentView.isHidden = true
+            closeButton.isHidden = false
+            bottomOffset.constant = 39
         }
 
         previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
@@ -262,7 +285,7 @@ final class HSCompletionPopUp: BasePopUpController {
 extension HSCompletionPopUp {
     private func setHiddenStatus(_ isHidden: Bool) {
         switch mode {
-        case .showBottomCloseButton:
+        case .showBottomCloseButton, .hiddenPhotosOnly, .hiddenAlbums:
             assertionFailure("this is kind of magic, do not show button should be hidden")
 
         case .showOpenSmartAlbumButton:
@@ -270,7 +293,6 @@ extension HSCompletionPopUp {
 
         case .smash:
             storageVars.smashPhotoPopUpCheckBox = isHidden
-
         }
 
     }

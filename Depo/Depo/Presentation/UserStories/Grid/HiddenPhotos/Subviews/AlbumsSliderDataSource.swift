@@ -47,8 +47,8 @@ final class AlbumsSliderDataSource: NSObject {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: 100, height: 140)
-            layout.minimumInteritemSpacing = 10
-            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 16
         }
     }
     
@@ -63,17 +63,24 @@ final class AlbumsSliderDataSource: NSObject {
             items = newItems
             collectionView.reloadData()
         } else {
+            let insertItems = newItems.filter { !items.contains($0) }
+            
+            if insertItems.isEmpty {
+                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+                return
+            }
+            
             let startIndex = items.count
-            let endIndex = startIndex + newItems.count - 1
+            let endIndex = startIndex + insertItems.count - 1
            
-            items.append(contentsOf: newItems)
+            items.append(contentsOf: insertItems)
            
             let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
             collectionView.insertItems(at: indexPaths)
         }
     }
     
-    func removeItems(_ deletedItems: [BaseDataSourceItem]) {
+    func removeItems(_ deletedItems: [BaseDataSourceItem], completion: @escaping VoidHandler) {
         if deletedItems.isEmpty {
             return
         }
@@ -90,11 +97,15 @@ final class AlbumsSliderDataSource: NSObject {
             }
         }
         
-        deletedIndexPaths.forEach { items.remove(at: $0.item) }
+        deletedIndexPaths
+            .sorted(by: { $0.item > $1.item })
+            .forEach { items.remove(at: $0.item) }
         
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: deletedIndexPaths)
-        }, completion: nil)
+        }, completion: { _ in
+            completion()
+        })
     }
     
     func reset() {
@@ -197,6 +208,8 @@ extension AlbumsSliderDataSource: LBCellsDelegate {
     func onLongPress(cell: UICollectionViewCell) {
         if !isSelectionActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
+        } else if let indexPath = collectionView.indexPath(for: cell) {
+            collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
 }

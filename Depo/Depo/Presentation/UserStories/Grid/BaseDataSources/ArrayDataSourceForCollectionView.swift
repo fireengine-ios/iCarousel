@@ -116,6 +116,10 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+    override func didHide(items: [AlbumItem]) {
+        albumsDeleted(albums: items)
+    }
+    
     override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         guard let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) else {
