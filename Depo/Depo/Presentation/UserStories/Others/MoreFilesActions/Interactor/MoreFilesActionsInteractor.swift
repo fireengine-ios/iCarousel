@@ -292,16 +292,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         if let albumItems = items as? [AlbumItem] {
-            hideFunctionalityService.startHideAlbumsOperation(for: albumItems, success: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                _ = self.succesAction(elementType: .hideAlbums)
-                self.output?.operationFinished(type: .hideAlbums)
-                
-                }, fail: self.failAction(elementType: .hideAlbums))
-            
+            hideAlbums(items: albumItems)
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
                                                         success: self.succesAction(elementType: .hide),
