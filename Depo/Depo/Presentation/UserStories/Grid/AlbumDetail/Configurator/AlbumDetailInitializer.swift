@@ -62,7 +62,7 @@ class AlbumDetailModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
 
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .hideAlbums, .select],
                                                                                      selectionModeTypes: selectionModeTypes),
                                topBarConfig: gridListTopBarConfig)
         
