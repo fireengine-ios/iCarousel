@@ -49,7 +49,7 @@ final class CoreDataMigrator {
             do {
                 try manager.migrateStore(from: currentURL, sourceType: NSSQLiteStoreType, options: nil, with: migrationStep.mappingModel, toDestinationURL: tempDirectoryURL, destinationType: NSSQLiteStoreType, destinationOptions: nil)
             } catch let error {
-                fatalDebug("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
+                fatalLog("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
             }
             
             if currentURL != storeURL {
@@ -72,7 +72,7 @@ final class CoreDataMigrator {
             let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL),
             let sourceVersion = CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata)
         else {
-            fatalDebug("unknown store version at URL \(storeURL)")
+            fatalLog("unknown store version at URL \(storeURL)")
         }
         
         return migrationSteps(fromSourceVersion: sourceVersion, toDestinationVersion: destinationVersion)
@@ -105,7 +105,7 @@ final class CoreDataMigrator {
             let store = persistentStoreCoordinator.addPersistentStore(at: storeURL, options: options)
             try persistentStoreCoordinator.remove(store)
         } catch let error {
-            fatalDebug("failed to force WAL checkpointing, error: \(error)")
+            fatalLog("failed to force WAL checkpointing, error: \(error)")
         }
     }
 }

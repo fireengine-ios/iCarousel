@@ -17,7 +17,7 @@ struct CoreDataConfig {
     
     static var storeUrl: URL {
         guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            fatalDebug("Unable to resolve document directory")
+            fatalLog("Unable to resolve document directory")
         }
         
         return docURL.appendingPathComponent(storeNameFull)

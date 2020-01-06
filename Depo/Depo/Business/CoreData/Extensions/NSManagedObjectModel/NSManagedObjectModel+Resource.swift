@@ -26,11 +26,11 @@ extension NSManagedObjectModel {
         }
         
         guard let modelURL = url else {
-            fatalDebug("unable to find model in bundle")
+            fatalLog("unable to find model in bundle")
         }
         
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalDebug("unable to load model in bundle")
+            fatalLog("unable to load model in bundle")
         }
         
         return model
