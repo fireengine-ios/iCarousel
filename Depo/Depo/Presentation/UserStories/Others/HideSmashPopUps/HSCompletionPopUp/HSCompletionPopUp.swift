@@ -161,6 +161,7 @@ final class HSCompletionPopUp: BasePopUpController {
     private weak var delegate: HideFuncRoutingProtocol?
 
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var router = RouterVC()
 
     //MARK: Init
 
@@ -261,7 +262,14 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
         close {
-            self.delegate?.openHiddenAlbum()
+            if let delegate = self.delegate {
+                delegate.openHiddenAlbum()
+            } else {
+                self.router.navigationController?.dismiss(animated: true, completion: {
+                    let controller = self.router.hiddenPhotosViewController()
+                    self.router.pushViewController(viewController: controller)
+                })
+            }
         }
     }
 
