@@ -15,8 +15,7 @@ enum CoreDataMigrationVersion: Int, CaseIterable {
     
     static var latest: CoreDataMigrationVersion {
         guard let last = allCases.last else {
-            //no way to be here
-            fatalError("add at least one CoreDataVersion case")
+            fatalLog("add at least one CoreDataVersion case")
         }
         
         return last

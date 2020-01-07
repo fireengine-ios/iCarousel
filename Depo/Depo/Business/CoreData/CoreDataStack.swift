@@ -50,13 +50,22 @@ final class CoreDataStack_ios10: CoreDataStack {
     private(set) var isReady = false
     
     private let migrator = CoreDataMigrator()
+    
+    private lazy var storeDescription: NSPersistentStoreDescription = {
+        let description = NSPersistentStoreDescription(url: CoreDataConfig.storeUrl)
+        description.type = NSSQLiteStoreType
+        description.shouldMigrateStoreAutomatically = false
+        description.shouldInferMappingModelAutomatically = false
+        
+        return description
+    }()
 
-    lazy var container: NSPersistentContainer = {
+    private lazy var container: NSPersistentContainer = {
         let modelName = CoreDataMigrationVersion.latest.name
-        let model = NSManagedObjectModel.managedObjectModel(forName: modelName, directory: CoreDataConfig.modelDirectoryName)
+        let model = NSManagedObjectModel.with(name: modelName, directory: CoreDataConfig.modelDirectoryName)
         
         let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: model)
-        container.persistentStoreDescriptions = [CoreDataConfig.storeDescription]
+        container.persistentStoreDescriptions = [storeDescription]
         
         container.viewContext.automaticallyMergesChangesFromParent = true
         
@@ -83,7 +92,7 @@ final class CoreDataStack_ios10: CoreDataStack {
         migrateIfNeeded { [weak self] in
             self?.container.loadPersistentStores { description, error in
                 guard error == nil else {
-                    fatalError("unable to load store \(error!)")
+                    fatalLog("unable to load store \(error!)")
                 }
                 
                 self?.isReady = true

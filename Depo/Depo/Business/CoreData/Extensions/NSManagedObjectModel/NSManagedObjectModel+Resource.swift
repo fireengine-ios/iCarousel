@@ -12,7 +12,7 @@ import CoreData
 
 extension NSManagedObjectModel {
     
-    static func managedObjectModel(forName name: String, directory: String) -> NSManagedObjectModel {
+    static func with(name: String, directory: String) -> NSManagedObjectModel {
         let bundle = Bundle.main
         let omoURL = bundle.url(forResource: name, withExtension: "omo", subdirectory: directory)
         let momURL = bundle.url(forResource: name, withExtension: "mom", subdirectory: directory)

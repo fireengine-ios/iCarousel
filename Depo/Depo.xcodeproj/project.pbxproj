@@ -6081,10 +6081,6 @@
 		B56921F223ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
 		B56921F323ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
 		B56921F423ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
-		B56921F523ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */; };
-		B56921F623ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */; };
-		B56921F723ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */; };
-		B56921F823ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */; };
 		B56921FB23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
 		B56921FC23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
 		B56921FD23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
@@ -11022,7 +11018,6 @@
 		B5601ADA23506388002E1D1E /* InitializingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializingViewController.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
-		B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_3_4.swift; sourceTree = "<group>"; };
 		B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
 		B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
@@ -17461,7 +17456,6 @@
 			isa = PBXGroup;
 			children = (
 				B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */,
-				B56921F023ACECD700E255C4 /* MigrationPolicy_3_4.swift */,
 			);
 			path = Policies;
 			sourceTree = "<group>";
@@ -25421,7 +25415,6 @@
 				B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				0303A2492397D0D000907F42 /* IntroducePresenter.swift in Sources */,
 				0303A24A2397D0D000907F42 /* NumericConstants.swift in Sources */,
-				B56921F723ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */,
 				0303A24B2397D0D000907F42 /* CreateStoryService.swift in Sources */,
 				0303A24C2397D0D000907F42 /* MusicInitializer.swift in Sources */,
 				0303A24D2397D0D000907F42 /* NSManagedObjectContext+Extensions.swift in Sources */,
@@ -26629,7 +26622,6 @@
 				C62239B8204976F20043ED44 /* FaceImagePhotosViewInput.swift in Sources */,
 				8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */,
 				B56FBB202122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
-				B56921F623ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */,
 				8C0E8CFC1FDEBDFF00789C91 /* ResizableCollectionView.swift in Sources */,
 				8C0E8CFD1FDEBDFF00789C91 /* HomePageRouter.swift in Sources */,
 				C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */,
@@ -28983,7 +28975,6 @@
 				9849B5B621FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				735766E423AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
-				B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				989BDE4C22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
@@ -29447,7 +29438,6 @@
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
 				737A2EC42338F44E0014258A /* QuestionCell.swift in Sources */,
-				B56921F523ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */,
 				4A0AC135208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */,
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				8C208651228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
@@ -30204,7 +30194,6 @@
 				CE7849F222A685FB00662219 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				CE7849F322A685FB00662219 /* SyncSettings.m in Sources */,
 				CE7849F422A685FB00662219 /* UserProfileInteractorOutput.swift in Sources */,
-				B56921F823ACECD700E255C4 /* MigrationPolicy_3_4.swift in Sources */,
 				CE7849F522A685FB00662219 /* IntroducePresenter.swift in Sources */,
 				CE7849F622A685FB00662219 /* NumericConstants.swift in Sources */,
 				CE7849F722A685FB00662219 /* CreateStoryService.swift in Sources */,

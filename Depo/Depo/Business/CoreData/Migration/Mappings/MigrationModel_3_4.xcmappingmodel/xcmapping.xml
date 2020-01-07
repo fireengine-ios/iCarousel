@@ -220,15 +220,15 @@ cBIAAYagrxEGawAHAAgAFwAzADQANQBFAEYARwBIAEkASgBlAGYAZwBtAG4AegCQAJEAkgCTAJQAlQCW
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z145"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z140">
-        <attribute name="migrationpolicyclassname" type="string">lifebox.MediaItemMigrationPolicy_3_4</attribute>
+        <attribute name="migrationpolicyclassname" type="string"></attribute>
         <attribute name="sourcename" type="string">MediaItem</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">1</attribute>
         <attribute name="destinationname" type="string">MediaItem</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z117"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z168 z144 z154 z113 z160 z146 z102 z114 z107 z120 z143 z147 z134 z127 z124 z103 z123 z165 z105 z162 z130 z108 z126 z155"></relationship>
-        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z142 z128 z159 z137 z161 z109"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z114 z130 z146 z160 z102 z143 z123 z124 z168 z120 z154 z165 z155 z147 z127 z105 z134 z144 z162 z108 z113 z103 z126 z107"></relationship>
+        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z137 z142 z128 z159 z161 z109"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z141">
         <attribute name="name" type="string">userID</attribute>
@@ -302,9 +302,6 @@ cBIAAYagrxEGawAHAAgAFwAzADQANQBFAEYARwBIAEkASgBlAGYAZwBtAG4AegCQAJEAkgCTAJQAlQCW
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z140"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z155">
-        <attribute name="valueexpressiondata" type="binary">YnBsaXN0MDDUAQIDBAUGLC1YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKkH
-CBMUGRoiJilVJG51bGzVCQoLDA0ODxAREllOU09wZXJhbmReTlNTZWxlY3Rvck5hbWVfEBBOU0V4cHJlc3Npb25UeXBlW05TQXJndW1lbnRzViRjbGFzc4ADgAIQBIAGgAhWc3RhdHVz0xULDRYXGFpOU1ZhcmlhYmxlgAQQAoAFXGVudGl0eVBvbGljedIbHB0eWiRjbGFzc25hbWVYJGNsYXNzZXNfEBROU1ZhcmlhYmxlRXhwcmVzc2lvbqMfICFfEBROU1ZhcmlhYmxlRXhwcmVzc2lvblxOU0V4cHJlc3Npb25YTlNPYmplY3TSIw0kJVpOUy5vYmplY3RzoIAH0hscJyhXTlNBcnJheaInIdIbHCorXxAUTlNGdW5jdGlvbkV4cHJlc3Npb26jKiAhXxAPTlNLZXllZEFyY2hpdmVy0S4vVHJvb3SAAQAIABEAGgAjAC0AMgA3AEEARwBSAFwAawB+AIoAkQCTAJUAlwCZAJsAogCpALQAtgC4ALoAxwDMANcA4AD3APsBEgEfASgBLQE4ATkBOwFAAUgBSwFQAWcBawF9AYABhQAAAAAAAAIBAAAAAAAAADAAAAAAAAAAAAAAAAAAAAGH
-</attribute>
         <attribute name="name" type="string">status</attribute>
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z140"></relationship>
     </object>

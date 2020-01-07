@@ -11,9 +11,7 @@ import Foundation
 /**
  Responsible for handling Core Data model migrations.
  
- The solution below uses an iterative approach where we migrate mutliple times through a chain of model versions.
- So, if we have 4 model versions (1, 2, 3, 4), you would need to create the following mappings 1 to 2, 2 to 3 and 3 to 4.
- Then when we create model version 5, we only need to create one additional mapping 4 to 5. This greatly reduces the work required when adding a new version.
+ If we've created model version n, we only need to create one additional mapping n-1 to n.
  */
 
 final class CoreDataMigrator {
@@ -36,7 +34,7 @@ final class CoreDataMigrator {
         }
     }
     
-    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
+    private func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
         forceWALCheckpointingForStore(at: storeURL)
         
         var currentURL = storeURL
@@ -117,7 +115,7 @@ private extension CoreDataMigrationVersion {
     
     static func compatibleVersionForStoreMetadata(_ metadata: [String : Any]) -> CoreDataMigrationVersion? {
         let compatibleVersion = CoreDataMigrationVersion.allCases.first {
-            let model = NSManagedObjectModel.managedObjectModel(forName: $0.name, directory: CoreDataConfig.modelDirectoryName)
+            let model = NSManagedObjectModel.with(name: $0.name, directory: CoreDataConfig.modelDirectoryName)
             
             return model.isConfiguration(withName: nil, compatibleWithStoreMetadata: metadata)
         }

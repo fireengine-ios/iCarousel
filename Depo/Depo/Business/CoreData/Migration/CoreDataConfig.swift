@@ -22,13 +22,4 @@ struct CoreDataConfig {
         
         return docURL.appendingPathComponent(storeNameFull)
     }
-    
-    static var storeDescription: NSPersistentStoreDescription {
-        let description = NSPersistentStoreDescription(url: storeUrl)
-        description.type = NSSQLiteStoreType
-        description.shouldMigrateStoreAutomatically = false
-        description.shouldInferMappingModelAutomatically = false
-        
-        return description
-    }
 }
