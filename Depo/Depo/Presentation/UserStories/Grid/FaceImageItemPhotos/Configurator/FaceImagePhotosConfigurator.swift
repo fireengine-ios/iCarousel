@@ -25,6 +25,7 @@ final class FaceImagePhotosConfigurator {
         if item.fileType.isFaceImageType, let status = album.preview?.status {
             switch status {
             case .hidden:
+                initialTypes.remove(.changeCoverPhoto)
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
             case .trashed:
                 initialTypes.append(contentsOf: [.hide, .completelyDeleteAlbums])
