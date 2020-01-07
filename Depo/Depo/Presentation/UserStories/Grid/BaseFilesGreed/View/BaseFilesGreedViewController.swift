@@ -69,6 +69,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     private var isRefreshAllowed = true
     
+    var isHiddenAlbum: Bool = false
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {

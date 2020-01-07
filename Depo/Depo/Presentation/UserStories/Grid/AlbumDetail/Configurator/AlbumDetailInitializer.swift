@@ -76,6 +76,8 @@ class AlbumDetailModuleInitializer: NSObject {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
         
+        viewController.isHiddenAlbum = true
+        
         viewController.needToShowTabBar = false
         
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
