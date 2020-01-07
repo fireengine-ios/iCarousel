@@ -35,6 +35,9 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
 
             router.back()
             albumDetailModuleOutput?.onAlbumRemoved()
+        case .hideAlbums:
+            debugLog("AlbumDetailPresenter operationFinished type == hideAlbums")
+            router.back()
         default:
             return
         }

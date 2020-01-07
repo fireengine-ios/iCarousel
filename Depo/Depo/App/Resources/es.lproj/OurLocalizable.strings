@@ -1016,7 +1016,7 @@
 "privacy_policy" = "Política de Privacidad";
 "face_tags_description_standart" = "Cuando active el Reconocimiento de Rostro e Imagen, las fotos que sube se agrupan por caras y objetos. Si la opción del servicio de ubicación está activada, las fotos también se agrupan por información de ubicación. En la base de esta agrupación, podremos crear historias automáticas para usted.";
 "terms_and_use_introduction_checkbox" = "He leído y apruebo el Contrato de Usuario. \nPuedes hacer clic para los detalles de la Política de Privacidad.";
-"privacy_policy_condition" = "Política de privacidad";
+"privacy_policy_condition" = "Política de Privacidad";
 "photo_pick_description" = "Si activa el botón y conecta su cuenta de Instagram, podemos brindarle una experiencia avanzada y personalizada al realizar análisis privados en cada nuevo análisis de PhotoPick.";
 
 /*Permission screen in Settings*/

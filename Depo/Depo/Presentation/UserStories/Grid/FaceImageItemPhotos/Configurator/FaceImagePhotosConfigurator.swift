@@ -21,15 +21,15 @@ final class FaceImagePhotosConfigurator {
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
 
-        var initialTypes: [ElementTypes] = [.select, .changeCoverPhoto]
+        var initialTypes: [ElementTypes] = [.select]
         if item.fileType.isFaceImageType, let status = album.preview?.status {
             switch status {
             case .hidden:
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
             case .trashed:
-                initialTypes.append(contentsOf: [.hide, .completelyDeleteAlbums])
+                initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyDeleteAlbums])
             default:
-                initialTypes.append(contentsOf: [.hide, .completelyMoveToTrash])
+                initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyMoveToTrash])
             }
         }
         

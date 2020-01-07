@@ -206,11 +206,11 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
             return
         }
         
-        output.startAsyncOperation()
+        output.startAsyncOperationDisableScreen()
         hideService.startHideAlbumsOperation(for: [album], success: { [weak self] in
-            self?.output.asyncOperationSuccess()
+            self?.output.completeAsyncOperationEnableScreen()
         }, fail: { [weak self] errorResponse in
-            self?.output.asyncOperationFail(errorMessage: errorResponse.description)
+            self?.output.completeAsyncOperationEnableScreen(errorMessage: errorResponse.description)
         })
     }
 }
