@@ -32,11 +32,7 @@ final class FactoryMain: FactoryBase, Factory {
     private static let lock = NSLock()
     private static let coreDataStack: CoreDataStack = {
         lock.withCriticalSection {
-//            if #available(iOS 10, *) {
-                return CoreDataStack_ios10.shared
-//            } else {
-//                return CoreDataStack_ios9.shared
-//            }
+            return CoreDataStack_ios10.shared
         }
     }()
     
