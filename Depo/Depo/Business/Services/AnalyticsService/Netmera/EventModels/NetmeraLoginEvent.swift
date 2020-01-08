@@ -7,27 +7,32 @@
 //
 
 import Netmera
+
 extension NetmeraEvents {
+    
     final class NetmeraLoginEvent: NetmeraEvent {
         
         private let kLoginKey = "rvw"
         
-        @objc var status: String = ""
-        @objc var loginType: String = ""
+        @objc var status = ""
+        @objc var loginType = ""
 
-//        init(status: String, loginType: String) {
-//            super.init()
-//            
-//        }
+        convenience init(status: String, loginType: String) {
+            self.init()
+            self.status = status
+            self.loginType = loginType
+        }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return[
+            return [
                 "ea" : #keyPath(status),//NSStringFromSelector(#selector(getter: self.status)),
                 "eb" : #keyPath(loginType),//NSStringFromSelector(#selector(getter: self.loginType)),
             ]
         }
+        
         override var eventKey : String {
             return kLoginKey
         }
     }
+    
 }
