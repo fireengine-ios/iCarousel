@@ -44,6 +44,9 @@ final class HiddenPhotosDataLoader {
     private var photoTask: URLSessionTask?
     private var albumsTask: URLSessionTask?
     
+    private var photosIsFinishLoad = false
+    private var albumsIsFinishLoad = false
+    
     //MARK: - Init
     
     required init(delegate: HiddenPhotosDataLoaderDelegate?) {
@@ -60,17 +63,19 @@ final class HiddenPhotosDataLoader {
         photoPage = 0
         photoTask?.cancel()
         photoTask = nil
+        photosIsFinishLoad = false
         loadNextPhotoPage(completion: completion)
         
         currentLoadingAlbumType = .people
         currentAlbumsPage = 0
         albumsTask?.cancel()
         albumsTask = nil
+        albumsIsFinishLoad = false
         loadNextAlbumsPage()
     }
 
     func loadNextPhotoPage(completion: VoidHandler? = nil) {
-        guard photoTask == nil else {
+        guard photoTask == nil, !photosIsFinishLoad else {
             return
         }
         
@@ -85,6 +90,10 @@ final class HiddenPhotosDataLoader {
             case .success(let response):
                 self.photoPage += 1
                 self.delegate?.didLoadPhoto(items: response.fileList)
+                
+                if response.fileList.isEmpty {
+                    self.photosIsFinishLoad = true
+                }
             case .failed(let error):
                 self.delegate?.failedLoadPhotoPage(error: error)
             }
@@ -94,7 +103,7 @@ final class HiddenPhotosDataLoader {
     }
     
     func loadNextAlbumsPage() {
-        guard albumsTask == nil else {
+        guard albumsTask == nil, !albumsIsFinishLoad else {
             return
         }
         
@@ -107,10 +116,9 @@ final class HiddenPhotosDataLoader {
             
             switch result {
             case .success(let array):
-                self.delegate?.didLoadAlbum(items: array)
-                                
                 if array.isEmpty, self.currentLoadingAlbumType == .albums {
                     //finish loading albums
+                    self.albumsIsFinishLoad = true
                     self.delegate?.didFinishLoadAlbums()
                     return
                 }
@@ -122,10 +130,8 @@ final class HiddenPhotosDataLoader {
                     self.currentAlbumsPage += 1
                 }
                 
-                if array.count < self.albumsCountBeforeNextPage {
-                    //autoload next page
-                    self.loadNextAlbumsPage()
-                }
+                self.delegate?.didLoadAlbum(items: array)
+                
             case .failed(let error):
                 self.delegate?.failedLoadAlbumPage(error: error)
             }
