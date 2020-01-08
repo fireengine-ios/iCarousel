@@ -249,6 +249,9 @@ struct RouteRequests {
         static let importedTracks = importedPlaylists +/ "track"
     }
     
+    // MARK: - Smash
+    
+    static let smashAnimation = baseUrl +/ "external/file/list"
     // MARK: - Campaign
     
     static let campaignApi = baseUrl +/ "campaign"

@@ -15,6 +15,7 @@ final class HSCompletionPopUp: BasePopUpController {
         case showBottomCloseButton
         case smash
         case hiddenPhotosOnly
+        case hiddenAlbums
     }
 
     //MARK: IBOutlets
@@ -130,6 +131,8 @@ final class HSCompletionPopUp: BasePopUpController {
 
     //MARK: bottomButtonParentView
 
+    @IBOutlet private weak var bottomOffset: NSLayoutConstraint!
+    
     @IBOutlet private weak var bottomButtonParentView: UIView!
 
     @IBOutlet private weak var separatorView: UIView! {
@@ -158,6 +161,7 @@ final class HSCompletionPopUp: BasePopUpController {
     private weak var delegate: HideFuncRoutingProtocol?
 
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var router = RouterVC()
 
     //MARK: Init
 
@@ -238,6 +242,17 @@ final class HSCompletionPopUp: BasePopUpController {
             
             smartAlbumsAdditionsParentView.isHidden = true
             closeButton.isHidden = true
+            
+        case .hiddenAlbums:
+            let title = isSingleImage ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.hideAlbumsSuccessPopupMessage
+            titleLabel.text = title
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.textColor = ColorConstants.darkBlueColor
+            
+            smartAlbumsAdditionsParentView.isHidden = true
+            bottomButtonParentView.isHidden = true
+            closeButton.isHidden = false
+            bottomOffset.constant = 39
         }
 
         previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
@@ -247,7 +262,23 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
         close {
-            self.delegate?.openHiddenAlbum()
+            if let delegate = self.delegate {
+                delegate.openHiddenAlbum()
+            } else {
+                self.openHiddenBin()
+            }
+        }
+    }
+    
+    private func openHiddenBin() {
+        if #available(iOS 13, *) {
+            self.router.navigationController?.dismiss(animated: true, completion: {
+                let controller = self.router.hiddenPhotosViewController()
+                self.router.pushViewController(viewController: controller)
+            })
+        } else {
+            let controller = router.hiddenPhotosViewController()
+            router.pushViewController(viewController: controller)
         }
     }
 
@@ -271,7 +302,7 @@ final class HSCompletionPopUp: BasePopUpController {
 extension HSCompletionPopUp {
     private func setHiddenStatus(_ isHidden: Bool) {
         switch mode {
-        case .showBottomCloseButton, .hiddenPhotosOnly:
+        case .showBottomCloseButton, .hiddenPhotosOnly, .hiddenAlbums:
             assertionFailure("this is kind of magic, do not show button should be hidden")
 
         case .showOpenSmartAlbumButton:

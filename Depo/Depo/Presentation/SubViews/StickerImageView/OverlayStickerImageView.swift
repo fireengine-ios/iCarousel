@@ -13,12 +13,16 @@ import ImageIO
 enum AttachedEntityType {
     case gif
     case image
+}
+
+enum CreateOverlayResultType {
+    case image
     case video
 }
 
 struct CreateOverlayStickersSuccessResult {
     let url: URL
-    let type: AttachedEntityType
+    let type: CreateOverlayResultType
 }
 
 typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
@@ -39,6 +43,7 @@ final class OverlayStickerImageView: UIImageView {
     
     private let stickerSize = CGSize(width: 50, height: 50)
     private lazy var overlayAnimationService = OverlayAnimationService()
+    private let downloader = ImageDownloder()
     
     private let trashBinLayer: CALayer = {
         let trashBinLayer = CALayer()
@@ -62,9 +67,9 @@ final class OverlayStickerImageView: UIImageView {
         self.backgroundColor = .black
     }
     
-    func addAttachment(url: URL, attachmentType: AttachedEntityType) {
+    func addAttachment(url: URL, attachmentType: AttachedEntityType, completion: @escaping VoidHandler) {
         stopAnimateStickers()
-        attachmentType == .gif ? createGifAttachment(url: url) : createStickerAttachment(url: url)
+        attachmentType == .gif ? createGifAttachment(url: url, completion: completion) : createImageAttachment(url: url, completion: completion)
     }
     
     func removeLast() {
@@ -77,16 +82,21 @@ final class OverlayStickerImageView: UIImageView {
     }
     
     func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
+            stopAnimateStickers()
+        
             if self.subviews.contains(where: { $0 is YYAnimatedImageView}) {
                 self.subviews.forEach({ $0.isHidden = true})
                 
                 guard let img = UIImage.imageWithView(view: self) else {
                     return completion(.failure(.unknown))
                 }
+                
                 self.subviews.forEach({ $0.isHidden = false})
                 
-                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img, completion: completion)
-            
+                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img) { [weak self] createStickerResult in
+                    completion(createStickerResult)
+                    self?.restartAnimateStickers()
+                }
             } else {
                 
                 guard let sticker = UIImage.imageWithView(view: self) else {
@@ -95,6 +105,7 @@ final class OverlayStickerImageView: UIImageView {
                 }
                 
                 self.saveImage(image: sticker, fileName: resultName, completion: completion)
+                restartAnimateStickers()
             }
     }
     
@@ -124,36 +135,54 @@ final class OverlayStickerImageView: UIImageView {
         }
     }
     
-    private func createGifAttachment(url: URL) {
+    private func createGifAttachment(url: URL, completion: @escaping VoidHandler) {
         setupTrasBinFrame()
-        guard let imageData = try? Data(contentsOf: url), let image = YYImage(data: imageData) else {
-            assertionFailure()
-            return
+        
+        downloader.getImageData(url: url) { [weak self] data in
+            
+            guard
+                let self = self,
+                let imageData = data,
+                let image = YYImage(data: imageData)
+            else {
+                return
+            }
+            
+            DispatchQueue.toMain {
+                
+                let imageView = YYAnimatedImageView(image: image)
+                imageView.center = self.center
+                self.addSubview(imageView)
+                self.attachments.append(imageView)
+                self.restartAnimateStickers()
+                completion()
+            }
         }
-
-        
-        let imageView = YYAnimatedImageView(image: image)
-        imageView.center = self.center
-        self.addSubview(imageView)
-        
-        attachments.append(imageView)
-        restartAnimateStickers()
     }
     
-    private func createStickerAttachment(url: URL) {
+    private func createImageAttachment(url: URL, completion: @escaping VoidHandler) {
         setupTrasBinFrame()
-        
-        guard let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) else {
-            assertionFailure()
-            return
+    
+        downloader.getImageData(url: url) { [weak self] data in
+            
+            guard
+                let self = self,
+                let imageData = data,
+                let image = UIImage(data: imageData)
+            else {
+                return
+            }
+            
+            DispatchQueue.toMain {
+                let imageView = UIImageView(image: image)
+                imageView.center = self.center
+                
+                self.addSubview(imageView)
+                self.attachments.append(imageView)
+                self.restartAnimateStickers()
+                completion()
+            }
         }
-        
-        let imageView = UIImageView(image: image)
-        imageView.center = self.center
-        
-        self.addSubview(imageView)
-        attachments.append(imageView)
-        restartAnimateStickers()
     }
     
     func setupTrasBinFrame() {
@@ -226,8 +255,6 @@ final class OverlayStickerImageView: UIImageView {
             return
         }
         
-        let maxStickerSide = getMaxStickerSide()
-        
         switch pinch.state {
             
         case .began:
@@ -241,11 +268,7 @@ final class OverlayStickerImageView: UIImageView {
             let ratio = selectedViewSize.width / selectedViewSize.height
             let height = selectedViewSize.height * pinch.scale
             
-            if height >= maxStickerSide && isRaisedMovement(previousPosition: selectedViewSize.height, newPosition: height){
-                subview.bounds.size = CGSize(width: maxStickerSide, height: maxStickerSide)
-            } else {
-                subview.bounds.size = CGSize(width: height * ratio, height: height)
-            }
+            subview.bounds.size = CGSize(width: height * ratio, height: height)
             
         case .ended, .possible, .cancelled, .failed:
             self.selectedSticker = nil

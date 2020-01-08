@@ -13,6 +13,7 @@ final class HSCompletionPopUpsFactory {
 
     enum State {
         case hideCompleted
+        case hideAlbumsCompleted
         case smashCompleted
         case hideSimpleCompleted
     }
@@ -31,6 +32,9 @@ final class HSCompletionPopUpsFactory {
             } else {
                 return HSCompletionPopUp(mode: .showOpenSmartAlbumButton, photosCount: itemsCount, delegate: delegate)
             }
+            
+        case .hideAlbumsCompleted:
+            return HSCompletionPopUp(mode: .hiddenAlbums, photosCount: itemsCount, delegate: delegate)
             
         case .smashCompleted:
             if isDoNotShowAgainButtonPressed(for: state) {
@@ -58,7 +62,7 @@ final class HSCompletionPopUpsFactory {
         case .smashCompleted:
             isDoNotShowAgainButtonPressed = storageVars.smashPhotoPopUpCheckBox
             
-        case .hideSimpleCompleted:
+        case .hideSimpleCompleted, .hideAlbumsCompleted:
             assertionFailure("there is no button for this type of popup")
             return false
         }

@@ -61,7 +61,8 @@ class AlbumDetailModuleInitializer: NSObject {
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],
+
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .hideAlbums, .select],
                                                                                      selectionModeTypes: selectionModeTypes),
                                topBarConfig: gridListTopBarConfig)
         
@@ -74,6 +75,8 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
+        
+        viewController.isHiddenAlbum = true
         
         viewController.needToShowTabBar = false
         

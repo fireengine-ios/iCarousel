@@ -22,11 +22,15 @@ protocol MoreFilesActionsInteractorInput {
     
     func hide(items: [BaseDataSourceItem])
     
+    func hideAlbums(items: [BaseDataSourceItem])
+    
     func simpleHide(items: [BaseDataSourceItem])
     
     func unhide(items: [BaseDataSourceItem])
     
     func completelyDelete(albums: [BaseDataSourceItem])
+    
+    func completelyMoveToTrash(albums: [BaseDataSourceItem])
     
     func move(item: [BaseDataSourceItem], toPath: String)
     
