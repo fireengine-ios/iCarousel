@@ -262,11 +262,7 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
         close {
-            if let delegate = self.delegate {
-                delegate.openHiddenAlbum()
-            } else {
-                self.openHiddenBin()
-            }
+            self.openHiddenBin()
         }
     }
     

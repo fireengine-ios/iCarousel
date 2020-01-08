@@ -14,7 +14,6 @@ protocol HideFuncRoutingProtocol: class {
     func openFaceImageGrouping()
 
     //HideFuncCompletionPopUp
-    func openHiddenAlbum()
     func openPeopleAlbumIfPossible()
 }
 
@@ -342,15 +341,6 @@ extension HideFunctionalityService {
 //MARK: - HideFuncRoutingProtocol
 
 extension HideFunctionalityService: HideFuncRoutingProtocol {
-    func openHiddenAlbum() {
-        
-        router.navigationController?.dismiss(animated: true, completion: {
-            
-            let controller = self.router.hiddenPhotosViewController()
-            self.router.pushViewController(viewController: controller)
-        })
-        
-    }
 
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
