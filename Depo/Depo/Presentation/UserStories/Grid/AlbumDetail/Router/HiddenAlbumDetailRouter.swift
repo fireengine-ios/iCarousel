@@ -17,14 +17,17 @@ final class HiddenAlbumDetailRouter: AlbumDetailRouter {
         sortType: MoreActionsConfig.SortRullesType,
         moduleOutput: BaseFilesGreedModuleOutput?
     ) {
-
+        
+        let isComparableFileType = ![FileType.photoAlbum, FileType.musicPlayList].contains(selectedItem.fileType)
+        guard
+            isComparableFileType,
+            let wrappered = selectedItem as? Item,
+            let wrapperedArray = sameTypeItems as? [Item]
+        else {
+            return
+        }
+        
         let router = RouterVC()
-        
-        if (selectedItem.fileType == .photoAlbum) { return }
-        if (selectedItem.fileType == .musicPlayList) { return }
-        
-        guard let wrappered = selectedItem as? Item else { return }
-        guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
         switch selectedItem.fileType {
             case .folder:
@@ -33,7 +36,7 @@ final class HiddenAlbumDetailRouter: AlbumDetailRouter {
             case .audio:
                 player.play(list: [wrappered], startAt: 0)
             default:
-                let albumUUID = RouterVC().getParentUUID()
+                let albumUUID = router.getParentUUID()
                 let controller = router.filesDetailHiddenAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: wrappered)
                 guard let viewController = controller else {
                     assertionFailure()
@@ -41,7 +44,7 @@ final class HiddenAlbumDetailRouter: AlbumDetailRouter {
                 }
                 
                 let nController = NavigationController(rootViewController: viewController)
-                RouterVC().presentViewController(controller: nController)
+                router.presentViewController(controller: nController)
         }
     }
 }
