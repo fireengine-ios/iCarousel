@@ -113,7 +113,7 @@ class AlbumDetailModuleInitializer: NSObject {
         presenter.alertSheetExcludeTypes = [.addToFavorites]
 
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
-                               bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
+                               bottomBarConfig: bottomBarConfig, router: HiddenAlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: allowedHideFunctions,
                                                                                      selectionModeTypes: allowedHideFunctions),
