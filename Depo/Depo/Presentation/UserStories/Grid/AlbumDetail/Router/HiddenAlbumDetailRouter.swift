@@ -18,7 +18,7 @@ final class HiddenAlbumDetailRouter: AlbumDetailRouter {
         moduleOutput: BaseFilesGreedModuleOutput?
     ) {
         
-        let isComparableFileType = ![FileType.photoAlbum, FileType.musicPlayList].contains(selectedItem.fileType)
+        let isComparableFileType = !selectedItem.fileType.isContained(in: [.musicPlayList, .photoAlbum])
         guard
             isComparableFileType,
             let wrappered = selectedItem as? Item,
