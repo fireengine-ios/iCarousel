@@ -56,6 +56,9 @@ final class AlbumsSliderDataSource: NSObject {
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {
         if newItems.isEmpty {
+            if !isPaginationDidEnd {
+                delegate?.needLoadNextPage()
+            }
             return
         }
 
@@ -76,7 +79,12 @@ final class AlbumsSliderDataSource: NSObject {
             items.append(contentsOf: insertItems)
            
             let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
-            collectionView.insertItems(at: indexPaths)
+            
+            collectionView.performBatchUpdates({
+                collectionView.insertItems(at: indexPaths)
+            }, completion: { [weak self] _ in
+                self?.checkLoadNextPage(for: self?.collectionView.indexPathsForVisibleItems.sorted().last)
+            })  
         }
     }
     
@@ -165,12 +173,15 @@ extension AlbumsSliderDataSource: UICollectionViewDataSource {
         cell.setSelection(isSelectionActive: isSelectionActive, isSelected: selectedItems.contains(item))
         cell.delegate = self
         
-        if isPaginationDidEnd {
+        checkLoadNextPage(for: indexPath)
+    }
+    
+    private func checkLoadNextPage(for indexPath: IndexPath?) {
+        guard !isPaginationDidEnd, let indexPath = indexPath else {
             return
         }
         
         let countRow = self.collectionView(collectionView, numberOfItemsInSection: 0)
-
         if indexPath.row == countRow - 1 {
             delegate?.needLoadNextPage()
         }
