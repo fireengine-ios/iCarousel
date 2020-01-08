@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BaseAsyncOperationInteractorOutput {
+protocol BaseAsyncOperationInteractorOutput: class {
     
     func outputView() -> Waiting?
     
