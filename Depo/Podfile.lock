@@ -201,7 +201,6 @@ SPEC REPOS:
     - XCGLogger
     - Xtremepush-iOS-SDK
     - XYPieChart
-  trunk:
     - YYImage
 
 EXTERNAL SOURCES:

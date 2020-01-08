@@ -5990,7 +5990,26 @@
 		B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
 		B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51205C82305350D007EB951 /* AppendLocalsOperation.swift */; };
+		B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
+		B52BAC5723AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
+		B52BAC5C23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5E23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC5F23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */; };
+		B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6223AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6323AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6423AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */; };
+		B52BAC6723AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
+		B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D82216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
 		B5390D83216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
@@ -6058,6 +6077,18 @@
 		B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
+		B56921F123ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
+		B56921F223ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
+		B56921F323ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
+		B56921F423ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */; };
+		B56921FB23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
+		B56921FC23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
+		B56921FD23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
+		B56921FE23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */; };
+		B56921FF23ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
+		B569220023ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
+		B569220123ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
+		B569220223ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -6096,6 +6127,10 @@
 		B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */; };
 		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B571FC8C23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8D23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8E23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
+		B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */; };
 		B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B577AE2022D4B8F600D074BA /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
@@ -6196,18 +6231,6 @@
 		B5CDB34121787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
 		B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
-		B5D2883822A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */; };
-		B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */; };
-		B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
-		B5D2883E22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */; };
-		B5DCFC1823AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
-		B5DCFC1923AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
-		B5DCFC1A23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
-		B5DCFC1B23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */; };
-		B5DCFC1D23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
-		B5DCFC1E23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
-		B5DCFC1F23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
-		B5DCFC2023AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -10938,9 +10961,14 @@
 		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
+		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConfig.swift; sourceTree = "<group>"; };
+		B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationStep.swift; sourceTree = "<group>"; };
+		B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
+		B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
 		B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
@@ -10989,6 +11017,9 @@
 		B5601AD623506348002E1D1E /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
 		B5601ADA23506388002E1D1E /* InitializingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializingViewController.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
+		B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
+		B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
+		B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -11008,6 +11039,7 @@
 		B56FBB392122C9AA004F4A59 /* TermsOfUseViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewInput.swift; sourceTree = "<group>"; };
 		B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewOutput.swift; sourceTree = "<group>"; };
 		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
+		B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersion.swift; sourceTree = "<group>"; };
 		B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstaPickProgressPopup.xib; sourceTree = "<group>"; };
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
@@ -11066,10 +11098,6 @@
 		B5CDB32E21787FEF006CFA50 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
 		B5CDB32F21787FEF006CFA50 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
-		B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
-		B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
-		B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_3_4.swift; sourceTree = "<group>"; };
-		B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -15895,6 +15923,7 @@
 				8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */,
 				8C208672228D4FF1000BEDAD /* NSPersistentStoreCoordinator+Extensions.swift */,
 				8C208673228D4FF1000BEDAD /* NSManagedObject+Extensions.swift */,
+				B52BAC6523AE1FFD0051E21D /* NSManagedObjectModel */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -17414,6 +17443,23 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		B51805EB234B69A800DC2E82 /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+				B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */,
+				B56921F923ACEDA300E255C4 /* MigrationModel_3_4.xcmappingmodel */,
+			);
+			path = Mappings;
+			sourceTree = "<group>";
+		};
+		B51805EC234B69B200DC2E82 /* Policies */ = {
+			isa = PBXGroup;
+			children = (
+				B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */,
+			);
+			path = Policies;
+			sourceTree = "<group>";
+		};
 		B522E92121E8CAEC00C4958E /* InstaPickProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -17423,6 +17469,15 @@
 				B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */,
 			);
 			path = InstaPickProgressView;
+			sourceTree = "<group>";
+		};
+		B52BAC6523AE1FFD0051E21D /* NSManagedObjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */,
+				B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */,
+			);
+			path = NSManagedObjectModel;
 			sourceTree = "<group>";
 		};
 		B5390D7D2165F4F500A02002 /* QuickScrollImageLoader */ = {
@@ -17698,10 +17753,12 @@
 		B5D2883B22A5109C00051F3A /* Migration */ = {
 			isa = PBXGroup;
 			children = (
-				B5D2883722A509B500051F3A /* MigrationModel_1_3.xcmappingmodel */,
-				B5D2883C22A510B300051F3A /* MigrationPolicy_1_3.swift */,
-				B5DCFC1723AA43E200482607 /* MigrationPolicy_3_4.swift */,
-				B5DCFC1C23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel */,
+				B51805EB234B69A800DC2E82 /* Mappings */,
+				B51805EC234B69B200DC2E82 /* Policies */,
+				B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */,
+				B571FC8B23AE1B3800398B48 /* CoreDataMigrationVersion.swift */,
+				B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */,
+				B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -25034,7 +25091,6 @@
 				0303A10F2397D0D000907F42 /* PeriodicContactSyncInitializer.swift in Sources */,
 				0303A1102397D0D000907F42 /* IntroduceDataStorage.swift in Sources */,
 				0303A1112397D0D000907F42 /* SpotifyPlaylistsViewController.swift in Sources */,
-				B5DCFC1F23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				0303A1122397D0D000907F42 /* AccountType.swift in Sources */,
 				0303A1132397D0D000907F42 /* ThingsService.swift in Sources */,
 				0303A1142397D0D000907F42 /* InfoButtonCellProtocol.swift in Sources */,
@@ -25160,6 +25216,7 @@
 				0303A1882397D0D000907F42 /* BottomSelectionTabBarViewController.swift in Sources */,
 				0303A1892397D0D000907F42 /* InstagramAccountConnectionCell.swift in Sources */,
 				0303A18A2397D0D000907F42 /* BaseDataSourceForCollectionView.swift in Sources */,
+				B56921F323ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */,
 				0303A18B2397D0D000907F42 /* AutoSyncViewController.swift in Sources */,
 				0303A18C2397D0D000907F42 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				0303A18D2397D0D000907F42 /* PackagesConfigurator.swift in Sources */,
@@ -25355,6 +25412,7 @@
 				0303A2462397D0D000907F42 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				0303A2472397D0D000907F42 /* SyncSettings.m in Sources */,
 				0303A2482397D0D000907F42 /* UserProfileInteractorOutput.swift in Sources */,
+				B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				0303A2492397D0D000907F42 /* IntroducePresenter.swift in Sources */,
 				0303A24A2397D0D000907F42 /* NumericConstants.swift in Sources */,
 				0303A24B2397D0D000907F42 /* CreateStoryService.swift in Sources */,
@@ -25456,6 +25514,7 @@
 				0303A2A82397D0D000907F42 /* URL+TrimmedQuery.swift in Sources */,
 				A705E3D723A22F42005E8274 /* CarouselPagerReusableViewController.swift in Sources */,
 				0303A2A92397D0D000907F42 /* AugmentedRealityInitializer.swift in Sources */,
+				B571FC8E23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				0303A2AA2397D0D000907F42 /* PhoneVerificationConfigurator.swift in Sources */,
 				0303A2AB2397D0D000907F42 /* PhoneVerificationInitializer.swift in Sources */,
 				0303A2AC2397D0D000907F42 /* MyStoragePresenter.swift in Sources */,
@@ -25752,12 +25811,14 @@
 				0303A3C92397D0D000907F42 /* SyncContactsInteractorInput.swift in Sources */,
 				0303A3CA2397D0D000907F42 /* SyncContactsInteractorOutput.swift in Sources */,
 				0303A3CB2397D0D000907F42 /* SyncContactsInteractor.swift in Sources */,
+				B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				0303A3CC2397D0D000907F42 /* PackagesInteractorInput.swift in Sources */,
 				0303A3CD2397D0D000907F42 /* PrintModuleConfigurator.swift in Sources */,
 				0303A3CE2397D0D000907F42 /* SyncContactsRouterInput.swift in Sources */,
 				0303A3CF2397D0D000907F42 /* ConnectedAccountsViewController.swift in Sources */,
 				0303A3D02397D0D000907F42 /* SearchViewConfigurator.swift in Sources */,
 				0303A3D12397D0D000907F42 /* VisualMusicPlayerInitializer.swift in Sources */,
+				B56921FD23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				0303A3D22397D0D000907F42 /* PermissionsDesigner.swift in Sources */,
 				0303A3D32397D0D000907F42 /* HelpAndSupportViewInput.swift in Sources */,
 				0303A3D42397D0D000907F42 /* ContactUtil.m in Sources */,
@@ -25930,6 +25991,7 @@
 				0303A4752397D0D000907F42 /* FreeUpSpacePopUp.swift in Sources */,
 				0303A4762397D0D000907F42 /* VisualMusicPlayerInteractor.swift in Sources */,
 				0303A4772397D0D000907F42 /* BaseFilesGreedModuleOutput.swift in Sources */,
+				B52BAC5E23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				0303A4782397D0D000907F42 /* SelectNameViewInput.swift in Sources */,
 				0303A4792397D0D000907F42 /* AccountParameters.swift in Sources */,
 				0303A47A2397D0D000907F42 /* PrintViewOutput.swift in Sources */,
@@ -25949,9 +26011,9 @@
 				0303A4862397D0D000907F42 /* PermissionsView.swift in Sources */,
 				0303A4872397D0D000907F42 /* ProfileTextPickerView.swift in Sources */,
 				0303A4882397D0D000907F42 /* SelectNameInteractorInput.swift in Sources */,
-				B5DCFC1A23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				0303A4892397D0D000907F42 /* ImageScrollView.swift in Sources */,
 				0303A48A2397D0D000907F42 /* TermsDescriptionController.swift in Sources */,
+				B569220123ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				0303A48B2397D0D000907F42 /* SelectNameInteractorOutput.swift in Sources */,
 				0303A48C2397D0D000907F42 /* SelectNameInteractor.swift in Sources */,
 				0303A48D2397D0D000907F42 /* SearchDataSource.swift in Sources */,
@@ -25994,6 +26056,7 @@
 				0303A4B02397D0D000907F42 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				0303A4B12397D0D000907F42 /* PrepareQuickScroll.swift in Sources */,
 				0303A4B22397D0D000907F42 /* SmartAlbumsDataStorage.swift in Sources */,
+				B52BAC6323AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				0303A4B32397D0D000907F42 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
 				0303A4B42397D0D000907F42 /* MoreFilesActionsInteractorInput.swift in Sources */,
 				0303A4B52397D0D000907F42 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
@@ -26331,7 +26394,6 @@
 				B585331A2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
-				B5D2883922A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */,
 				98A86D4A23A2200100438225 /* HiddenPhotosViewController.swift in Sources */,
@@ -26461,6 +26523,7 @@
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
 				8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */,
+				B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */,
 				8C0E8CB31FDEBDFF00789C91 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */,
@@ -26529,7 +26592,6 @@
 				7CA4A172207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				8C0E8CE71FDEBDFF00789C91 /* LoginViewOutput.swift in Sources */,
 				B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */,
-				B5D2883E22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */,
 				8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */,
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
 				B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */,
@@ -26595,7 +26657,6 @@
 				CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */,
 				73B623E123C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
-				B5DCFC1E23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
 				8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				89E51D5A22CA112F007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
@@ -26660,6 +26721,7 @@
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
+				B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
 				B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */,
@@ -26732,6 +26794,7 @@
 				8C0E8D831FDEBDFF00789C91 /* HomePageConfigurator.swift in Sources */,
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
 				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
+				B56921F223ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
@@ -26764,6 +26827,7 @@
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				8C0E8DA11FDEBDFF00789C91 /* AutoSyncPresenter.swift in Sources */,
+				B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				8C0E8DA31FDEBDFF00789C91 /* HomePageViewInput.swift in Sources */,
 				A217E43E21A5B09C0084AA37 /* LeavePremiumPresenter.swift in Sources */,
 				8C0E8DA41FDEBDFF00789C91 /* IntroduceModel.swift in Sources */,
@@ -26802,6 +26866,7 @@
 				8C0E8DB81FDEBDFF00789C91 /* GradientLoadingIndicator.swift in Sources */,
 				8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */,
 				8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */,
+				B569220023ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C0E8DBA1FDEBDFF00789C91 /* AuthenticationServiceResponse.swift in Sources */,
 				8C0E8DBB1FDEBDFF00789C91 /* RegistrationInteractor.swift in Sources */,
@@ -26822,6 +26887,7 @@
 				8C0E8DC51FDEBDFF00789C91 /* RegistrationInitializer.swift in Sources */,
 				8C0B91A420170E9900A5BA81 /* ManageContactsViewController.swift in Sources */,
 				8C20867F228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
+				B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				8C0E8DC61FDEBDFF00789C91 /* HelpAndSupportInteractorInput.swift in Sources */,
 				8C8711701FDFF35800F66396 /* OperationProgressService.swift in Sources */,
 				892B015222DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
@@ -27218,6 +27284,7 @@
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
+				B571FC8D23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				8C0E8EEC1FDEBDFF00789C91 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				8C0E8EED1FDEBDFF00789C91 /* PhotoVideoDetailRouter.swift in Sources */,
 				8C0E8EEE1FDEBDFF00789C91 /* PhotoVideoDetailConfigurator.swift in Sources */,
@@ -27460,6 +27527,7 @@
 				CE343600224B5C6C00AFAABB /* FullscreenTextController.swift in Sources */,
 				8C0E8F6B1FDEBDFF00789C91 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
+				B52BAC6223AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				B5CDB34121787FEF006CFA50 /* Message.m in Sources */,
 				8C0E8F6D1FDEBDFF00789C91 /* UploadFilesSelectionInitializer.swift in Sources */,
 				8CD2B3B01FE7B3BA00280547 /* UIColor+Adjust.swift in Sources */,
@@ -27635,7 +27703,6 @@
 				8C0E8FC91FDEBDFF00789C91 /* ActivityTimelineConfigurator.swift in Sources */,
 				8C0E8FCA1FDEBDFF00789C91 /* ActivityTimelineInitializer.swift in Sources */,
 				8C0E8FCB1FDEBDFF00789C91 /* PasscodeManager.swift in Sources */,
-				B5DCFC1923AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				8C0E8FCC1FDEBDFF00789C91 /* UploadParametrs.swift in Sources */,
 				8C0E8FCD1FDEBDFF00789C91 /* ImportFromDropboxPresenter.swift in Sources */,
 				CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */,
@@ -27645,6 +27712,7 @@
 				8C0B91C12017148E00A5BA81 /* CollectionViewHeaderWithText.swift in Sources */,
 				8C0E8FD21FDEBDFF00789C91 /* OTPViewInteractor.swift in Sources */,
 				8C0E8FD31FDEBDFF00789C91 /* OTPViewInteractorIO.swift in Sources */,
+				B56921FC23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0E8FD41FDEBDFF00789C91 /* OTPViewRouter.swift in Sources */,
 				7AFAB3732073AA8F00C54C9B /* FaceImageItemsViewInput.swift in Sources */,
 				A74ADA4023A2AC43007DD192 /* DivorceCard.swift in Sources */,
@@ -28256,7 +28324,6 @@
 				CE8F44EF1F6ABB540062C2E0 /* ActivityTimelineParameters.swift in Sources */,
 				98792DD722FD486F000A77E5 /* SpotifyImportedTracksViewController.swift in Sources */,
 				7CEEC1C01F332B0000BD433F /* PhotosOrderCollectionViewCell.swift in Sources */,
-				B5DCFC1D23AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				4AC68933202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				CE6DE7541FCBE84100C23CBD /* InstagramResponses.swift in Sources */,
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
@@ -28366,7 +28433,6 @@
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
 				8C4780A3228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
-				B5DCFC1823AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				4A0AC1442087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CE51ABF91EF90853005DCEE0 /* IntroduceDataStorage.swift in Sources */,
 				CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */,
@@ -28473,6 +28539,8 @@
 				98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
+				B56921F123ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */,
+				B571FC8C23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */,
 				CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */,
 				A20CDB9E219D60A800CA9A67 /* PremiumView.swift in Sources */,
@@ -28495,6 +28563,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				735766CC23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
@@ -28547,6 +28616,7 @@
 				B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */,
 				7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */,
+				B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				CE51ACAD1EF90853005DCEE0 /* CoreTelephonyService.swift in Sources */,
 				CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
@@ -28561,6 +28631,7 @@
 				CE51ACBA1EF90853005DCEE0 /* IntroduceModel.swift in Sources */,
 				8C0332972115F42D00E75EBC /* AnalyticsDimension.swift in Sources */,
 				8C6EF87F1F348B5C002AC795 /* BottomSelectionTabBarRouter.swift in Sources */,
+				B52BAC5723AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				CE51ACBF1EF90853005DCEE0 /* PasswordCell.swift in Sources */,
 				A2079916219F13CB00AD5037 /* PremiumInitializer.swift in Sources */,
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
@@ -28904,7 +28975,6 @@
 				9849B5B621FF49400059F9A9 /* InstapickFreeCell.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				735766E423AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
-				B5D2883D22A510B300051F3A /* MigrationPolicy_1_3.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				989BDE4C22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
@@ -29057,6 +29127,7 @@
 				DD99F320480D3A98D286DB95 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */,
 				5A3FFF1FDAD804A4043F9E5F /* PhotoVideoDetailConfigurator.swift in Sources */,
+				B56921FF23ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				A217E44621A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
 				DC071DDDCA7525DF55B43B69 /* PhotoVideoDetailInitializer.swift in Sources */,
 				B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */,
@@ -29245,6 +29316,7 @@
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
+				B52BAC5C23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */,
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
@@ -29304,6 +29376,7 @@
 				89E51D4C22CA1116007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				C8DE09849CB5200793B94E8A /* SelectNameConfigurator.swift in Sources */,
 				F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */,
+				B52BAC6723AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */,
@@ -29311,7 +29384,6 @@
 				CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */,
 				89E51D3C22CA10FC007A7DBC /* CreateStoryPreviewInitializer.swift in Sources */,
 				D94776BCD48BA8014675541C /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
-				B5D2883822A509B500051F3A /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				8C208681228D5118000BEDAD /* Double+Extensions.swift in Sources */,
 				8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */,
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,
@@ -29449,6 +29521,7 @@
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */,
+				B56921FB23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
 				896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
@@ -29555,7 +29628,6 @@
 				CE7847FF22A685FB00662219 /* UserProfilePresenter.swift in Sources */,
 				8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				CE78480022A685FB00662219 /* PasscodeSettingsPresenter.swift in Sources */,
-				B5DCFC1B23AA43E200482607 /* MigrationPolicy_3_4.swift in Sources */,
 				CE78480122A685FB00662219 /* Bool+Init.swift in Sources */,
 				CE78480222A685FB00662219 /* Router.swift in Sources */,
 				CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */,
@@ -29569,7 +29641,6 @@
 				CE78480922A685FB00662219 /* (null) in Sources */,
 				CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */,
 				CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */,
-				B5DCFC2023AA449C00482607 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE78480C22A685FB00662219 /* ContactBackupOld.swift in Sources */,
 				CE78480D22A685FB00662219 /* Alamofire+Validate.swift in Sources */,
 				CE78480E22A685FB00662219 /* AnimationCard.swift in Sources */,
@@ -29774,6 +29845,7 @@
 				CE7848BF22A685FB00662219 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */,
 				CE7848C122A685FB00662219 /* ActivityTimelineService.swift in Sources */,
+				B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
 				CE7848C422A685FB00662219 /* HelpAndSupportRouterInput.swift in Sources */,
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
@@ -29786,6 +29858,7 @@
 				CE7848CC22A685FB00662219 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE7848CD22A685FB00662219 /* MappingError.swift in Sources */,
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
+				B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
 				89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
@@ -29923,6 +29996,7 @@
 				CE78493E22A685FB00662219 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CE78493F22A685FB00662219 /* PreventCollectionView.swift in Sources */,
 				CE78494022A685FB00662219 /* BottomSelectionTabBarViewController.swift in Sources */,
+				B56921F423ACECD700E255C4 /* MigrationPolicy_1_3.swift in Sources */,
 				CE78494122A685FB00662219 /* InstagramAccountConnectionCell.swift in Sources */,
 				CE78494222A685FB00662219 /* BaseDataSourceForCollectionView.swift in Sources */,
 				CE78494322A685FB00662219 /* AutoSyncViewController.swift in Sources */,
@@ -30097,6 +30171,7 @@
 				CE7849DE22A685FB00662219 /* TermsAndServicesDataStorage.swift in Sources */,
 				CE7849DF22A685FB00662219 /* ProfilePasswordEnterView.swift in Sources */,
 				CE7849E022A685FB00662219 /* TermsAndServicesRouterInput.swift in Sources */,
+				B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				CE7849E122A685FB00662219 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CE7849E222A685FB00662219 /* RingView.swift in Sources */,
 				CE7849E322A685FB00662219 /* WebViewController.swift in Sources */,
@@ -30501,6 +30576,7 @@
 				CE784B5122A685FB00662219 /* UserInfoSubViewInitializer.swift in Sources */,
 				CE784B5222A685FB00662219 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CE784B5322A685FB00662219 /* OfferParameters.swift in Sources */,
+				B52BAC5F23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				CE784B5422A685FB00662219 /* BasePresentor.swift in Sources */,
 				CE784B5522A685FB00662219 /* UploadHelpers.swift in Sources */,
 				CE784B5622A685FB00662219 /* UserProfileRouterInput.swift in Sources */,
@@ -30521,6 +30597,7 @@
 				CE784B6522A685FB00662219 /* PrintModuleConfigurator.swift in Sources */,
 				CE784B6622A685FB00662219 /* SyncContactsRouterInput.swift in Sources */,
 				CE784B6722A685FB00662219 /* ConnectedAccountsViewController.swift in Sources */,
+				B56921FE23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE784B6822A685FB00662219 /* SearchViewConfigurator.swift in Sources */,
 				CE784B6922A685FB00662219 /* VisualMusicPlayerInitializer.swift in Sources */,
 				8C86111B22BCFDEF00108958 /* PermissionsDesigner.swift in Sources */,
@@ -30584,6 +30661,7 @@
 				CE784B9C22A685FB00662219 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
 				CE784B9E22A685FB00662219 /* LoginSettingsRouterInput.swift in Sources */,
+				B52BAC6423AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
 				CE784BA122A685FB00662219 /* SplashInteractor.swift in Sources */,
 				CE784BA222A685FB00662219 /* MailVerificationViewController.swift in Sources */,
@@ -30626,6 +30704,7 @@
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
+				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
 				737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
@@ -30709,6 +30788,7 @@
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
 				CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */,
 				CE784C0D22A685FB00662219 /* SelectNameInteractorInput.swift in Sources */,
+				B569220223ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CE784C0E22A685FB00662219 /* ImageScrollView.swift in Sources */,
 				8C86111822BCF36C00108958 /* TermsDescriptionController.swift in Sources */,
 				CE784C0F22A685FB00662219 /* SelectNameInteractorOutput.swift in Sources */,

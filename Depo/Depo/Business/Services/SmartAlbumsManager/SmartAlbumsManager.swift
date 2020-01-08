@@ -328,8 +328,34 @@ extension SmartAlbumsManagerImpl: ItemOperationManagerViewProtocol {
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         requestAllItems()
     }
+    
+    func didHide(albums: [AlbumItem]) {
+        requestAllItems()
+    }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        requestAllItems()
+    }
+    
+    func moveToTrash(albums: [AlbumItem]) {
+        requestAllItems()
+    }
+    
+    func moveToTrash(items: [Item]) {
+        reloadFIRAlbumsIfNeeded(items: items)
+    }
+    
+    func deleteItems(items: [Item]) {
+        reloadFIRAlbumsIfNeeded(items: items)
+    }
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return object === self
+    }
+    
+    private func reloadFIRAlbumsIfNeeded(items: [Item]) {
+        if items.first(where: { $0.fileType.isFaceImageType }) != nil {
+            reload(types: [.people, .places, .things])
+        }
     }
 }

@@ -12,6 +12,7 @@ import Crashlytics
 
 enum DebugAnalyticsEvent: String {
     case zeroContentLength
+    case coreDataError
     case test
 }
 
