@@ -24,10 +24,10 @@ final class PlacesService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPlacesAlbum(id: Int, isHidden: Bool, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPlacesAlbum(id: Int, status: ItemStatus, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         debugLog("PlacesService getPlacesAlbumWithID")
         
-        let param = PlacesAlbumParameters(id: id, isHidden: isHidden)
+        let param = PlacesAlbumParameters(id: id, status: status)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
@@ -92,16 +92,20 @@ final class PlacesParameters: BaseRequestParametrs {
 
 final class PlacesAlbumParameters: BaseRequestParametrs {
     private let id: Int
-    private let isHidden: Bool
+    private let status: ItemStatus
     
-    init(id: Int, isHidden: Bool) {
+    init(id: Int, status: ItemStatus) {
         self.id = id
-        self.isHidden = isHidden
+        self.status = status
     }
     
     override var patch: URL {
-        let path = isHidden ? RouteRequests.placesAlbumHidden : RouteRequests.placesAlbum
-        let searchWithParam = String(format: path, id)
+        let searchWithParam: String
+        if status.isContained(in: [.hidden, .trashed]) {
+            searchWithParam = String(format: RouteRequests.peopleAlbumWithStatus, id, status.rawValue)
+        } else {
+            searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+        }
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

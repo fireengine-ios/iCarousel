@@ -161,13 +161,13 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     }
 
     @IBAction func onPremiumTap(_ sender: Any) {
-        close {
+        close(isFinalStep: false) {
             self.delegate?.openPremium()
         }
     }
 
     @IBAction func onFunctionTap(_ sender: Any) {
-        close {
+        close(isFinalStep: false) {
             self.delegate?.openFaceImageGrouping()
         }
     }

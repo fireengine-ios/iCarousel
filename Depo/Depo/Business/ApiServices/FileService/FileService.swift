@@ -693,6 +693,29 @@ final class HiddenService {
     }
     
     @discardableResult
+    func trashedList(folderUUID: String = "",
+                     sortBy: SortType,
+                     sortOrder: SortOrder,
+                     page: Int,
+                     size: Int,
+                     folderOnly: Bool,
+                     handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedList")
+        
+        let url = String(format: RouteRequests.FileSystem.fileListWithStatus, folderUUID,
+                         sortBy.description, sortOrder.description,
+                         page.description, size.description,
+                         folderOnly, ItemStatus.trashed.rawValue)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
     func hiddenAlbums(sortBy: SortType,
                       sortOrder: SortOrder,
                       page: Int,
@@ -700,10 +723,29 @@ final class HiddenService {
                       handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenAlbums")
         
-        let url = String(format: RouteRequests.albumListHidden,
+        return albumsWithStatus(.hidden, sortBy: sortBy, sortOrder: sortOrder, page: page, size: size, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedAlbums(sortBy: SortType,
+                       sortOrder: SortOrder,
+                       page: Int,
+                       size: Int,
+                       handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedAlbums")
+        
+        return albumsWithStatus(.trashed, sortBy: sortBy, sortOrder: sortOrder, page: page, size: size, handler: handler)
+    }
+    
+    private func albumsWithStatus(_ status: ItemStatus, sortBy: SortType,
+                        sortOrder: SortOrder,
+                        page: Int,
+                        size: Int,
+                        handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.albumListWithStatus,
                          SearchContentType.album.description,
                          page.description, size.description,
-                         sortBy.description, sortOrder.description)
+                         sortBy.description, sortOrder.description, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -720,7 +762,20 @@ final class HiddenService {
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPlacesAlbumDetail")
         
-        let url = String(format: RouteRequests.placesAlbumHidden, id)
+        return placesAlbumDetailWithStatus(status: .hidden, id: id, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedPlacesAlbumDetail(id: Int,
+                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedPlacesAlbumDetail")
+        
+        return placesAlbumDetailWithStatus(status: .trashed, id: id, handler: handler)
+    }
+    
+    private func placesAlbumDetailWithStatus(status: ItemStatus, id: Int,
+                                         handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.placesAlbumWithStatus, id, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -735,7 +790,20 @@ final class HiddenService {
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenPeopleAlbumDetail")
         
-        let url = String(format: RouteRequests.peopleAlbumHidden, id)
+        return peopleAlbumDetailWithStatus(status: .hidden, id: id, handler: handler)
+    }
+    
+    
+    @discardableResult
+    func trashedPeopleAlbumDetail(id: Int,
+                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedPeopleAlbumDetail")
+        
+        return peopleAlbumDetailWithStatus(status: .trashed, id: id, handler: handler)
+    }
+    
+    private func peopleAlbumDetailWithStatus(status: ItemStatus, id: Int, handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.peopleAlbumWithStatus, id, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -745,12 +813,26 @@ final class HiddenService {
             .task
     }
     
+    
     @discardableResult
     func hiddenThingsAlbumDetail(id: Int,
                                  handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
         debugLog("hiddenThingsAlbumDetail")
         
-        let url = String(format: RouteRequests.thingsAlbumHidden, id)
+        return thingsAlbumDetailWithStatus(status: .hidden, id: id, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedThingsAlbumDetail(id: Int,
+                                 handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedThingsAlbumDetail")
+        
+        return thingsAlbumDetailWithStatus(status: .trashed, id: id, handler: handler)
+    }
+    
+    private func thingsAlbumDetailWithStatus(status: ItemStatus, id: Int,
+                                          handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.thingsAlbumWithStatus, id, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -766,9 +848,24 @@ final class HiddenService {
     func hiddenPlacesPage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenPlacesPage")
+        debugLog("hiddenPlacesPage")
         
-        let url = String(format: RouteRequests.placesPageHidden, size, page)
+        return placesPageWithStatus(status: .hidden, page: page, size: size, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedPlacesPage(page: Int,
+                           size: Int,
+                           handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedPlacesPage")
+        
+        return placesPageWithStatus(status: .trashed, page: page, size: size, handler: handler)
+    }
+    
+    private func placesPageWithStatus(status: ItemStatus, page: Int,
+                              size: Int,
+                              handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.placesPageWithStatus, size, page, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -782,9 +879,24 @@ final class HiddenService {
     func hiddenPeoplePage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenPeoplePage")
+        debugLog("hiddenPeoplePage")
         
-        let url = String(format: RouteRequests.peoplePageHidden, size, page)
+        return hiddenPeoplePageWithStatus(status: .hidden, page: page, size: size, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedPeoplePage(page: Int,
+                           size: Int,
+                           handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedPeoplePage")
+        
+        return hiddenPeoplePageWithStatus(status: .trashed, page: page, size: size, handler: handler)
+    }
+    
+    private func hiddenPeoplePageWithStatus(status: ItemStatus, page: Int,
+                                            size: Int,
+                                            handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.peoplePageWithStatus, size, page, status.rawValue)
         
         return SessionManager
             .customDefault
@@ -798,9 +910,24 @@ final class HiddenService {
     func hiddenThingsPage(page: Int,
                           size: Int,
                           handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenThingsPage")
+        debugLog("hiddenThingsPage")
         
-        let url = String(format: RouteRequests.thingsPageHidden, size, page)
+        return thingsPageWithStatus(status: .hidden, page: page, size: size, handler: handler)
+    }
+    
+    @discardableResult
+    func trashedThingsPage(page: Int,
+                           size: Int,
+                           handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
+        debugLog("trashedThingsPage")
+        
+        return thingsPageWithStatus(status: .trashed, page: page, size: size, handler: handler)
+    }
+    
+    private func thingsPageWithStatus(status: ItemStatus, page: Int,
+                                      size: Int,
+                                      handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
+        let url = String(format: RouteRequests.thingsPageWithStatus, size, page, status.rawValue)
         
         return SessionManager
             .customDefault
