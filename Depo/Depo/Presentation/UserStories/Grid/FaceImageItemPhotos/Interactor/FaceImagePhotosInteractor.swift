@@ -17,6 +17,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     private lazy var hideService: HideFuncServiceProtocol = HideSmashCoordinator()
     
     var album: AlbumItem?
+    var status: ItemStatus = .active
     
     override func viewIsReady() {
         if let output = output as? FaceImagePhotosInteractorOutput,
@@ -136,8 +137,6 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
     func loadItem(_ item: BaseDataSourceItem) {
         guard let item = item as? Item, let id = item.id else { return }
         
-        let status = album?.preview?.status ?? .unknown
-        
         if item is PeopleItem {
             output.startAsyncOperation()
             
@@ -186,7 +185,6 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         if item is PeopleItem {
             output.startAsyncOperation()
         
-            let status = album?.preview?.status ?? .unknown
             peopleService.getPeopleAlbum(id: Int(id), status: status, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 self?.remoteItems = FaceImageDetailService(albumUUID: albumItem.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
