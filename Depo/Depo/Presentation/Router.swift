@@ -830,10 +830,11 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
+                                                                         status: status,
                                                                          moduleOutput: moduleOutput,
                                                                          isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController

@@ -285,7 +285,7 @@ extension HiddenPhotosViewController {
             
             switch result {
             case .success(let album):
-                let vc = self.router.imageFacePhotosController(album: album, item: item, moduleOutput: self)
+                let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: self)
                 self.router.pushViewController(viewController: vc)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
