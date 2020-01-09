@@ -23,7 +23,11 @@ protocol HideFuncServiceProtocol {
     func startHideAlbumsOperation(for albums: [AlbumItem], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
-final class HideFunctionalityService: HideFuncServiceProtocol {
+protocol SmashServiceProtocol {
+    func smashSuccessed()
+}
+
+final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol {
 
     enum Operation {
         case hide
@@ -49,8 +53,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     }
 
     //MARK: Properties
-    
-    private var operation: Operation = .smash
+
+    private var operation: Operation!
 
     private var items = [Item]()
     private var albums = [AlbumItem]()
@@ -58,19 +62,19 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private var success: FileOperation?
     private var fail: FailResponse?
-    
+
     private var permissions: PermissionsResponse?
     private var faceImageGrouping: SettingsInfoPermissionsResponse?
-    
+
     private lazy var fileService = WrapItemFileService()
     private lazy var hiddenService = HiddenService()
     private lazy var player: MediaPlayer = factory.resolve()
-    
+
     private lazy var completionPopUpFactory = HSCompletionPopUpsFactory()
     private lazy var albumWarningPopUpsFactory = SmartAlbumWarningPopUpsFactory()
 
     private let router = RouterVC()
-    
+
     private var peopleAlbumRequestsGroup: DispatchGroup?
 
     //MARK: PopUp
@@ -109,7 +113,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
         showConfirmationPopUp()
     }
-    
+
     func startHideSimpleOperation(for items: [Item],
                                   output: BaseAsyncOperationInteractorOutput?,
                                   success: @escaping FileOperation,
@@ -124,7 +128,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
         showConfirmationPopUp()
     }
-    
+
     func startHideAlbumsOperation(for albums: [AlbumItem],
                                   output: BaseAsyncOperationInteractorOutput?,
                                   success: @escaping FileOperation,
@@ -138,6 +142,11 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         operation = .hideAlbums
 
         showConfirmationPopUp()
+    }
+
+    func smashSuccessed() {
+        operation = .smash
+        showSuccessPopUp()
     }
 
     //MARK: Utility Methods (Private)
@@ -196,9 +205,6 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     }
 
     private func presentPopUp(controller: BasePopUpController) {
-        ///if operation started without HideFuncServiceProtocol this mean smash operation
-        ///that's why smash operation is default operation
-        ///dismissCompletion is required because HideFunctionalityService is contained in OverlayStickerViewController
         if operation == .smash {
             controller.dismissCompletion = { [weak self] in
                 let presentedController = self?.router.defaultTopController as? OverlayStickerViewController
@@ -210,9 +216,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
     }
 
     private func openPeopleAlbum() {
-        
         router.navigationController?.dismiss(animated: true, completion: {
-        
+
             let controller = self.router.peopleListController()
             self.router.pushViewController(viewController: controller)
         })
@@ -221,32 +226,32 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     //MARK: - Converter
 
-extension HideFunctionalityService {
+extension HideSmashCoordinator {
     private func getCompletionState() -> HSCompletionPopUpsFactory.State {
         let state: HSCompletionPopUpsFactory.State
 
-        switch operation {
+        switch operation! {
         case .hide:
             state = .hideCompleted
-            
+
         case .smash:
             state = .smashCompleted
-            
+
         case .hideSimple:
             state = .hideSimpleCompleted
-            
+
         case .hideAlbums:
             state = .hideAlbumsCompleted
         }
-        
+
         return state
     }
 }
 
 //MARK: - Interactor
 
-extension HideFunctionalityService {
-    
+extension HideSmashCoordinator {
+
     private func hideItems() {
         output?.startAsyncOperationDisableScreen()
 
@@ -256,7 +261,7 @@ extension HideFunctionalityService {
             hidePhotos()
         }
     }
-    
+
     private func hidePhotos() {
         player.remove(listItems: items)
         fileService.hide(items: items, success: { [weak self] in
@@ -270,27 +275,24 @@ extension HideFunctionalityService {
 
         })
     }
-    
+
     private func hideAlbums() {
-        
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.hide(self.albums, completion: { [weak self] in
                 guard let self = self else {
                     return
                 }
-                
+
                 DispatchQueue.main.async {
                     self.hiddenSuccessfully()
                 }
-                
             })
         }
-        
+
         hiddenService.hideAlbums(albums) { [weak self] result in
             guard let self = self else {
                 return
             }
-            
             switch result {
             case .success(_):
                 wrappedSuccessOperation()
@@ -331,29 +333,26 @@ extension HideFunctionalityService {
             self?.peopleAlbumRequestsGroup?.leave()
         }
     }
-
 }
 
 //MARK: - HideFuncRoutingProtocol
 
-extension HideFunctionalityService: HideFuncRoutingProtocol {
+extension HideSmashCoordinator: HideFuncRoutingProtocol {
 
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
     }
-    
+
     func openPremium() {
-        
         router.navigationController?.dismiss(animated: true, completion: {
             let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
             self.router.pushViewController(viewController: controller)
         })
     }
-    
+
     func openFaceImageGrouping() {
-        
         router.navigationController?.dismiss(animated: true, completion: {
-            
+
             if self.faceImageGrouping?.isFaceImageAllowed == true {
                 self.openPeopleAlbum()
             } else {
@@ -362,5 +361,4 @@ extension HideFunctionalityService: HideFuncRoutingProtocol {
             }
         })
     }
-    
 }

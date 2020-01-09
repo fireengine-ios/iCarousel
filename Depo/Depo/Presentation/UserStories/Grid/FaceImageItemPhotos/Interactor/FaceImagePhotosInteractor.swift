@@ -14,7 +14,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var hideService = HideFunctionalityService()
+    private lazy var hideService: HideFuncServiceProtocol = HideSmashCoordinator()
     
     var album: AlbumItem?
     
