@@ -13,7 +13,8 @@ final class PhotoService {
                                                    sortOrder: .desc,
                                                    page: page,
                                                    size: size,
-                                                   minified: false)
+                                                   minified: false,
+                                                   hidden: false)
         
         requestTask = searchService.searchByField(param: requestParam, success: { response  in
             

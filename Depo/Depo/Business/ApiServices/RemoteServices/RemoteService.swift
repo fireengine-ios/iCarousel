@@ -61,8 +61,33 @@ class RemoteItemsService {
         currentPage = 0
         isFull = false
         queueOperations.cancelAllOperations()
-//        CoreDataStack.shared.deleteRemoteFiles()
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
+    }
+    
+    func reloadUnhiddenItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("RemoteItemsService reloadUnhiddenItems")
+
+        currentPage = 0
+        isFull = false
+        queueOperations.cancelAllOperations()
+        nextUnhiddenItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
+    }
+    
+    func nextUnhiddenItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("RemoteItemsService nextUnhiddenItems")
+        if let unwrapedFieldValue = newFieldValue {
+            fieldValue = unwrapedFieldValue
+        }
+        
+        let serchParam = SearchByFieldParameters(fieldName: contentType,
+                                                 fieldValue: fieldValue,
+                                                 sortBy: sortBy,
+                                                 sortOrder: sortOrder,
+                                                 page: currentPage,
+                                                 size: requestSize,
+                                                 hidden: false)
+        
+        nextItems(with: serchParam, success: success, fail: fail)
     }
     
     func nextItems(fileType: FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems? ) {
@@ -83,7 +108,8 @@ class RemoteItemsService {
                                                  sortBy: sortBy,
                                                  sortOrder: sortOrder,
                                                  page: currentPage,
-                                                 size: requestSize)
+                                                 size: requestSize,
+                                                 hidden: true)
         
         nextItems(with: serchParam, success: success, fail: fail)
     }
