@@ -20,6 +20,7 @@ final class MusicInitializer {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.importFromSpotify])
         viewController.scrollablePopUpView.isEnable = false
+        viewController.segmentImage = .music
         
         let configurator = MusicConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],

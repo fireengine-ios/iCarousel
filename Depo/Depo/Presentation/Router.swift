@@ -534,13 +534,19 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var trashBin: UIViewController? {
+        let controller = trashBinController()
+        controller.segmentImage = .trashBin
+        return controller
+    }
+    
     var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites]
-        return SegmentedController.initWithControllers(controllers)
+        let controllers = [allFiles, documents, musics, favorites, trashBin]
+        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
     
@@ -1123,5 +1129,9 @@ class RouterVC: NSObject {
 
     func hiddenPhotosViewController() -> UIViewController {
         return HiddenPhotosViewController.initFromNib()
+    }
+    
+    func trashBinController() -> TrashBinViewController {
+        return TrashBinViewController.initFromNib()
     }
 }
