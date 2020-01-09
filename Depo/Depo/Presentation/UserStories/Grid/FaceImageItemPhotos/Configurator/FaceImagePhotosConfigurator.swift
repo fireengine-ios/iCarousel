@@ -21,6 +21,7 @@ final class FaceImagePhotosConfigurator {
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
 
+        var elementsConfig: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .deleteFaceImage]
         var initialTypes: [ElementTypes] = [.select]
         if item.fileType.isFaceImageType, let status = album.preview?.status {
             switch status {
@@ -28,6 +29,7 @@ final class FaceImagePhotosConfigurator {
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
                 ///to remove 3 dots from selection mode if it is hidden album
                 viewController.isHiddenAlbum = true
+                elementsConfig = [.unhide, .deleteFaceImage]
             case .trashed:
                 initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyDeleteAlbums])
             default:
@@ -69,7 +71,7 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default, tintColor: nil)
         
         
