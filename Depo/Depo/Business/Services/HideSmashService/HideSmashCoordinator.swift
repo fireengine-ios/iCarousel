@@ -54,7 +54,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private var items = [Item]()
     private var albums = [AlbumItem]()
-    
+    private weak var output: BaseAsyncOperationInteractorOutput?
+
     private var success: FileOperation?
     private var fail: FailResponse?
     
@@ -100,6 +101,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
                             fail: @escaping FailResponse)
     {
         self.items = items
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -114,6 +116,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
                                   fail: @escaping FailResponse)
     {
         self.items = items
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -128,6 +131,7 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
                                   fail: @escaping FailResponse)
     {
         self.albums = albums
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -244,6 +248,8 @@ extension HideFunctionalityService {
 extension HideFunctionalityService {
     
     private func hideItems() {
+        output?.startAsyncOperationDisableScreen()
+
         if operation == .hideAlbums {
             hideAlbums()
         } else {
