@@ -5862,6 +5862,30 @@
 		98E4B9F223C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
 		98E4B9F323C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
 		98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F623C71EEC003A4631 /* TrashBinSortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */; };
+		98E4B9F723C71EEF003A4631 /* TrashBinSortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */; };
+		98E4B9F823C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */; };
+		98E4B9F923C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */; };
+		98E4B9FB23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */; };
+		98E4B9FC23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */; };
+		98E4B9FD23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */; };
+		98E4B9FE23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */; };
+		98E4BA0023C72181003A4631 /* TrashBinInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */; };
+		98E4BA0123C72181003A4631 /* TrashBinInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */; };
+		98E4BA0223C72181003A4631 /* TrashBinInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */; };
+		98E4BA0323C72181003A4631 /* TrashBinInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */; };
+		98E4BA0523C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */; };
+		98E4BA0623C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */; };
+		98E4BA0723C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */; };
+		98E4BA0823C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */; };
+		98E4BA0A23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */; };
+		98E4BA0B23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */; };
+		98E4BA0C23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */; };
+		98E4BA0D23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */; };
+		98E4BA0F23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */; };
+		98E4BA1023C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */; };
+		98E4BA1123C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */; };
+		98E4BA1223C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -10887,6 +10911,12 @@
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
 		98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinViewController.swift; sourceTree = "<group>"; };
 		98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashBinViewController.xib; sourceTree = "<group>"; };
+		98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinSortingManager.swift; sourceTree = "<group>"; };
+		98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinDataSource.swift; sourceTree = "<group>"; };
+		98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinInteractor.swift; sourceTree = "<group>"; };
+		98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinBottomBarManager.swift; sourceTree = "<group>"; };
+		98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinNavbarManager.swift; sourceTree = "<group>"; };
+		98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinThreeDotMenuManager.swift; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -17035,6 +17065,12 @@
 			children = (
 				98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */,
 				98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */,
+				98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */,
+				98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */,
+				98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */,
+				98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */,
+				98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */,
+				98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */,
 			);
 			path = TrashBin;
 			sourceTree = "<group>";
@@ -25028,6 +25064,7 @@
 				0303A0B32397D0D000907F42 /* ImportPhotosInteractorInput.swift in Sources */,
 				0303A0B42397D0D000907F42 /* AlbumSelectionPresenter.swift in Sources */,
 				0303A0B52397D0D000907F42 /* PrintInteractorOutput.swift in Sources */,
+				98E4B9FD23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */,
 				0303A0B62397D0D000907F42 /* IntroduceViewController.swift in Sources */,
 				0303A0B72397D0D000907F42 /* PermissionType.swift in Sources */,
 				0303A0B82397D0D000907F42 /* MoreActionsConfig.swift in Sources */,
@@ -25052,6 +25089,7 @@
 				0303A0CA2397D0D000907F42 /* AutoSyncInteractorOutput.swift in Sources */,
 				0303A0CB2397D0D000907F42 /* AlbumDetailService.swift in Sources */,
 				0303A0CC2397D0D000907F42 /* RequestHeader.swift in Sources */,
+				98E4BA0C23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */,
 				0303A0CD2397D0D000907F42 /* HomePageViewController.swift in Sources */,
 				0303A0CE2397D0D000907F42 /* ThingsServiceResponse.swift in Sources */,
 				0303A0CF2397D0D000907F42 /* InstapickAnalyzesCount.swift in Sources */,
@@ -25287,6 +25325,7 @@
 				0303A1AE2397D0D000907F42 /* FaceImageDesigner.swift in Sources */,
 				0303A1AF2397D0D000907F42 /* KeychainSwift+Optional.swift in Sources */,
 				0303A1B02397D0D000907F42 /* HomePageConfigurator.swift in Sources */,
+				98E4B9F823C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */,
 				0303A1B12397D0D000907F42 /* FaceImagePhotosPresenter.swift in Sources */,
 				0303A1B22397D0D000907F42 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				0303A1B32397D0D000907F42 /* AutoSyncConfigurator.swift in Sources */,
@@ -25727,6 +25766,7 @@
 				0303A3582397D0D000907F42 /* UIImage+Color.swift in Sources */,
 				0303A3592397D0D000907F42 /* InstapickService.swift in Sources */,
 				0303A35A2397D0D000907F42 /* BaseFilesGreedInteractorInput.swift in Sources */,
+				98E4BA0223C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				0303A35B2397D0D000907F42 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				0303A35C2397D0D000907F42 /* UploadOperation.swift in Sources */,
 				0303A35D2397D0D000907F42 /* FilterPhotoCard.swift in Sources */,
@@ -25739,6 +25779,7 @@
 				89DA5D0423ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				0303A3642397D0D000907F42 /* BaseFilesGreedInteractor.swift in Sources */,
 				0303A3652397D0D000907F42 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
+				98E4BA1123C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				0303A3662397D0D000907F42 /* DuplicatedContactsPresenter.swift in Sources */,
 				0303A3672397D0D000907F42 /* CardsManagerViewProtocol.swift in Sources */,
 				0303A3682397D0D000907F42 /* BaseFilesGreedRouterInput.swift in Sources */,
@@ -25852,6 +25893,7 @@
 				B56921FD23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				0303A3D22397D0D000907F42 /* PermissionsDesigner.swift in Sources */,
 				0303A3D32397D0D000907F42 /* HelpAndSupportViewInput.swift in Sources */,
+				98E4BA0723C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				0303A3D42397D0D000907F42 /* ContactUtil.m in Sources */,
 				0303A3D52397D0D000907F42 /* Watchdog.swift in Sources */,
 				0303A3D62397D0D000907F42 /* MyStorageInteractorOutput.swift in Sources */,
@@ -26710,6 +26752,7 @@
 				B5CDB33B21787FEF006CFA50 /* UIAlertViewCustom.m in Sources */,
 				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponse.swift in Sources */,
 				B5CDB33321787FEF006CFA50 /* UpdaterController.m in Sources */,
+				98E4BA1023C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
@@ -27089,6 +27132,7 @@
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				73EA16FD22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
+				98E4BA0123C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				98A86D5B23A239B900438225 /* AlbumsSliderDataSource.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
@@ -27237,6 +27281,7 @@
 				8C0E8EB71FDEBDFF00789C91 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C0E8EB91FDEBDFF00789C91 /* VisualMusicPlayerInteractorInput.swift in Sources */,
+				98E4B9F723C71EEF003A4631 /* TrashBinSortingManager.swift in Sources */,
 				8C0E8EBB1FDEBDFF00789C91 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				CE1966DE2359BA4800599638 /* InstapickCampaignCell.swift in Sources */,
 				B5CDB33121787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
@@ -27264,6 +27309,7 @@
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
+				98E4BA0623C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				9216F57A22493127008339F5 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
@@ -27449,6 +27495,7 @@
 				B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */,
 				8C0E8F311FDEBDFF00789C91 /* SplashViewOutput.swift in Sources */,
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
+				98E4B9FC23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
 				8C0E8F341FDEBDFF00789C91 /* SplashModuleInput.swift in Sources */,
 				925B96D821E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
@@ -27717,6 +27764,7 @@
 				9809317F23952D8200ECFEF8 /* UpdatePasswordErrorResponse.swift in Sources */,
 				8C0E8FBC1FDEBDFF00789C91 /* FeedbackViewConfigurator.swift in Sources */,
 				8C0E8FBD1FDEBDFF00789C91 /* FeedbackViewInitializer.swift in Sources */,
+				98E4BA0B23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */,
 				8C0E8FBE1FDEBDFF00789C91 /* ActivityTimelineViewInput.swift in Sources */,
 				8C0E8FBF1FDEBDFF00789C91 /* ActivityTimelineViewOutput.swift in Sources */,
 				CED4B0272017505300D06CA9 /* MappingError.swift in Sources */,
@@ -28440,6 +28488,7 @@
 				B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
+				98E4BA0523C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
 				8DCB216E1F3C85CD00BAFE1E /* SearchViewInput.swift in Sources */,
 				CE95ED551F516736002F923A /* HelpAndSupportRouterInput.swift in Sources */,
@@ -28524,6 +28573,7 @@
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
 				92004B5121AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
+				98E4B9F623C71EEC003A4631 /* TrashBinSortingManager.swift in Sources */,
 				7C355E611F01226B003B004C /* HomeCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
@@ -29091,6 +29141,7 @@
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
 				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,
 				7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */,
+				98E4B9FB23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */,
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				A217E43421A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
 				98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
@@ -29174,6 +29225,7 @@
 				39BB6C52DD43D91D15C41982 /* UserInfoSubViewModuleInput.swift in Sources */,
 				8C0097101F6BDA2B00FA069C /* MoreFilesActionsInteractor.swift in Sources */,
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
+				98E4BA0F23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
 				B53DCE8A20EF634900400DBA /* SyncStatus.m in Sources */,
@@ -29399,6 +29451,7 @@
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				17589F762276336800A5DB37 /* ProfileTextPickerView.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,
+				98E4BA0A23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */,
 				CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */,
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
@@ -29498,6 +29551,7 @@
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
 				C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */,
+				98E4BA0023C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				78D9BA382007E7F100F2233F /* DuplicatedContactsInteractorOutput.swift in Sources */,
 				7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */,
 				73A183452359B1A10095719F /* CampaignCardDesigner.swift in Sources */,
@@ -29901,6 +29955,7 @@
 				CE7848D222A685FB00662219 /* LoginSettingsRouter.swift in Sources */,
 				CE7848D322A685FB00662219 /* PopUpController.swift in Sources */,
 				89E51D5922CA112E007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
+				98E4BA0323C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				CE7848D422A685FB00662219 /* ErrorResponse.swift in Sources */,
 				CE7848D522A685FB00662219 /* AutoSyncSettingsModel.swift in Sources */,
 				CE7848D622A685FB00662219 /* ButtonWithCorner.swift in Sources */,
@@ -30047,6 +30102,7 @@
 				8E26D9822306999C00D08123 /* MusicConfigurator.swift in Sources */,
 				CE78494E22A685FB00662219 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				CE78494F22A685FB00662219 /* TokenKeychainStorage.swift in Sources */,
+				98E4B9F923C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */,
 				98A86D7A23A76F1800438225 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CE78495022A685FB00662219 /* PremiumViewOutput.swift in Sources */,
 				CE78495122A685FB00662219 /* DuplicatedContactsInitializer.swift in Sources */,
@@ -30337,6 +30393,7 @@
 				CE784A5122A685FB00662219 /* MyStoragePresenter.swift in Sources */,
 				CE784A5222A685FB00662219 /* HelpAndSupportViewController.swift in Sources */,
 				CE784A5322A685FB00662219 /* RadialGradientableView.swift in Sources */,
+				98E4BA1223C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				CE784A5422A685FB00662219 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE784A5522A685FB00662219 /* ForgotPasswordViewInput.swift in Sources */,
 				CE784A5622A685FB00662219 /* ActivityTimelineTableBackView.swift in Sources */,
@@ -30507,6 +30564,7 @@
 				8E26D97C2306999100D08123 /* MusicPresenter.swift in Sources */,
 				CE784AED22A685FB00662219 /* BaseFilesGreedModuleInput.swift in Sources */,
 				17CD85B523ACDA40004CFF7E /* HSCompetionPopUpsFactory.swift in Sources */,
+				98E4BA0D23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */,
 				CE784AEF22A685FB00662219 /* InstaPickSmartAlbumCell.swift in Sources */,
 				CE784AF022A685FB00662219 /* KeyboardHideManager.swift in Sources */,
 				CE784AF122A685FB00662219 /* BaseFilesGreedPresenter.swift in Sources */,
@@ -30568,6 +30626,7 @@
 				CE784B2522A685FB00662219 /* BasicCollectionMultiFileCell.swift in Sources */,
 				CE784B2622A685FB00662219 /* WrapItemFileService.swift in Sources */,
 				CE784B2822A685FB00662219 /* TermsOfUsePresenter.swift in Sources */,
+				98E4BA0823C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				CE784B2922A685FB00662219 /* UsageInfoViewController.swift in Sources */,
 				CE784B2A22A685FB00662219 /* PhotoVideoDetailViewInput.swift in Sources */,
 				CE784B2B22A685FB00662219 /* PhotoVideoDetailViewOutput.swift in Sources */,
@@ -30837,6 +30896,7 @@
 				98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE784C1422A685FB00662219 /* SelectNameRouterInput.swift in Sources */,
 				CE784C1522A685FB00662219 /* PackagesRouterInput.swift in Sources */,
+				98E4B9FE23C71F6C003A4631 /* TrashBinDataSource.swift in Sources */,
 				CE784C1622A685FB00662219 /* SelectNameRouter.swift in Sources */,
 				89E51D4D22CA1116007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				CE784C1722A685FB00662219 /* SelectNameConfigurator.swift in Sources */,

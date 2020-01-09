@@ -10,16 +10,46 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrashBinViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="iN0-l3-epB" id="kRI-UZ-YS3"/>
+                <outlet property="collectionView" destination="xTR-q8-L7x" id="cMb-Nv-k0k"/>
+                <outlet property="sortPanelContainer" destination="JTJ-D6-NuD" id="oKm-Kz-hLq"/>
+                <outlet property="view" destination="fXz-TC-OPr" id="2f9-qs-6CN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="fXz-TC-OPr">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTJ-D6-NuD">
+                    <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Oij-WM-XaE"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xTR-q8-L7x">
+                    <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YHD-yH-pdZ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="135"/>
+            <constraints>
+                <constraint firstItem="wSL-CD-iq8" firstAttribute="trailing" secondItem="JTJ-D6-NuD" secondAttribute="trailing" id="5v3-wZ-zPh"/>
+                <constraint firstItem="JTJ-D6-NuD" firstAttribute="leading" secondItem="wSL-CD-iq8" secondAttribute="leading" id="9ef-RY-KXU"/>
+                <constraint firstItem="wSL-CD-iq8" firstAttribute="trailing" secondItem="xTR-q8-L7x" secondAttribute="trailing" id="Hqa-Lz-yyT"/>
+                <constraint firstItem="JTJ-D6-NuD" firstAttribute="top" secondItem="wSL-CD-iq8" secondAttribute="top" id="PJu-t4-iCF"/>
+                <constraint firstItem="wSL-CD-iq8" firstAttribute="bottom" secondItem="xTR-q8-L7x" secondAttribute="bottom" id="TgJ-z5-hv2"/>
+                <constraint firstItem="xTR-q8-L7x" firstAttribute="leading" secondItem="wSL-CD-iq8" secondAttribute="leading" id="ibL-Eq-Zvn"/>
+                <constraint firstItem="xTR-q8-L7x" firstAttribute="top" secondItem="JTJ-D6-NuD" secondAttribute="bottom" constant="8" symbolic="YES" id="uoU-BL-qkP"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="wSL-CD-iq8"/>
+            <point key="canvasLocation" x="139" y="134"/>
         </view>
     </objects>
 </document>
