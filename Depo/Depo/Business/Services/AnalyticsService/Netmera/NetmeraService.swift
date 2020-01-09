@@ -7,7 +7,10 @@
 //
 
 enum NetmeraEvents {
-    
+    enum Actions {
+    }
+    enum Screens {
+    }
 }
 
 class NetmeraService {

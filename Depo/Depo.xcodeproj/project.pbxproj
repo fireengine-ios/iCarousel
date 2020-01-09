@@ -2185,21 +2185,9 @@
 		03056AC223BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
 		03056AC323BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
 		03056AC423BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
-		03056AC623BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */; };
-		03056AC723BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */; };
-		03056AC823BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */; };
-		03056AC923BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */; };
 		0308BB90239001130066F409 /* LifeDriveNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 984B1EE923685FC8009ACCFF /* LifeDriveNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0309C38123992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
 		0309C38223992FBA0031DB5B /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0309C38023992FBA0031DB5B /* images.xcassets */; };
-		0309EB6423C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */; };
-		0309EB6523C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */; };
-		0309EB6623C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */; };
-		0309EB6723C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */; };
-		0309EB6923C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */; };
-		0309EB6A23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */; };
-		0309EB6B23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */; };
-		0309EB6C23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */; };
 		0309EB6E23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6D23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift */; };
 		0309EB6F23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6D23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift */; };
 		0309EB7023C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309EB6D23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift */; };
@@ -2356,6 +2344,58 @@
 		0334574823C6196100FB6386 /* NetmeraDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574623C6196100FB6386 /* NetmeraDownloadEvent.swift */; };
 		0334574923C6196100FB6386 /* NetmeraDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574623C6196100FB6386 /* NetmeraDownloadEvent.swift */; };
 		0334574A23C6196100FB6386 /* NetmeraDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574623C6196100FB6386 /* NetmeraDownloadEvent.swift */; };
+		0334574D23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */; };
+		0334574E23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */; };
+		0334574F23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */; };
+		0334575023C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */; };
+		0334575223C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */; };
+		0334575323C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */; };
+		0334575423C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */; };
+		0334575523C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */; };
+		0334575723C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */; };
+		0334575823C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */; };
+		0334575923C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */; };
+		0334575A23C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */; };
+		0334575C23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */; };
+		0334575D23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */; };
+		0334575E23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */; };
+		0334575F23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */; };
+		0334576123C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */; };
+		0334576223C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */; };
+		0334576323C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */; };
+		0334576423C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */; };
+		0334576623C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */; };
+		0334576723C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */; };
+		0334576823C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */; };
+		0334576923C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */; };
+		0334576B23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */; };
+		0334576C23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */; };
+		0334576D23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */; };
+		0334576E23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */; };
+		0334577023C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */; };
+		0334577123C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */; };
+		0334577223C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */; };
+		0334577323C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */; };
+		0334577523C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */; };
+		0334577623C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */; };
+		0334577723C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */; };
+		0334577823C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */; };
+		0334577A23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */; };
+		0334577B23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */; };
+		0334577C23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */; };
+		0334577D23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */; };
+		0334577F23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */; };
+		0334578023C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */; };
+		0334578123C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */; };
+		0334578223C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */; };
+		0334578523C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */; };
+		0334578623C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */; };
+		0334578723C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */; };
+		0334578823C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */; };
+		0334578A23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */; };
+		0334578B23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */; };
+		0334578C23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */; };
+		0334578D23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */; };
 		03B52C57239E6A64008C2F24 /* LifeDrive-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C3BA2DF22B3CC32006D901E /* LifeDrive-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
 		055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
@@ -9297,10 +9337,7 @@
 		0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedAlbumDetailPresenter.swift; sourceTree = "<group>"; };
 		030480DC23AA0475006DC316 /* LifeBoxModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		03056AC023BA23C000F6D57A /* NetmeraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraService.swift; sourceTree = "<group>"; };
-		03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraLoginEvent.swift; sourceTree = "<group>"; };
 		0309C38023992FBA0031DB5B /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
-		0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraSignUpEvent.swift; sourceTree = "<group>"; };
-		0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraImportEvent.swift; sourceTree = "<group>"; };
 		0309EB6D23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraContactBackUpScreenEvent.swift; sourceTree = "<group>"; };
 		0309EB7223C5C74800D6AA62 /* NetmeraPhotoPickAnalysisDetailScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraPhotoPickAnalysisDetailScreenEvent.swift; sourceTree = "<group>"; };
 		0309EB7723C5C7E500D6AA62 /* NetmeraAutoSyncScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraAutoSyncScreenEvent.swift; sourceTree = "<group>"; };
@@ -9340,6 +9377,19 @@
 		0334573C23C617E800FB6386 /* NetmeraImportPhotosScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraImportPhotosScreenEvent.swift; sourceTree = "<group>"; };
 		0334574123C618B400FB6386 /* NetmeraContactsSyncScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraContactsSyncScreenEvent.swift; sourceTree = "<group>"; };
 		0334574623C6196100FB6386 /* NetmeraDownloadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraDownloadEvent.swift; sourceTree = "<group>"; };
+		0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraScreenEventTemplate.swift; sourceTree = "<group>"; };
+		0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraScreenEvents.swift; sourceTree = "<group>"; };
+		0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraFaceImageGroupingScreenEvent.swift; sourceTree = "<group>"; };
+		0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraAllFilesScreenEvent.swift; sourceTree = "<group>"; };
+		0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraConnectedAccountsScreenEvent.swift; sourceTree = "<group>"; };
+		0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraFreeupspaceEvent.swift; sourceTree = "<group>"; };
+		0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraWelcomePage3Event.swift; sourceTree = "<group>"; };
+		0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraPackageClickEvent.swift; sourceTree = "<group>"; };
+		0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraPhotosScreenEvent.swift; sourceTree = "<group>"; };
+		0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraSettingsScreenEvent.swift; sourceTree = "<group>"; };
+		0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraPhotoPickHistoryScreenEvent.swift; sourceTree = "<group>"; };
+		0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraActionEvents.swift; sourceTree = "<group>"; };
+		0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraDeleteEvent.swift; sourceTree = "<group>"; };
 		03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		043311ABC77BBE1D80DBF183 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewInput.swift; sourceTree = "<group>"; };
@@ -12265,9 +12315,8 @@
 		03056ABF23BA238700F6D57A /* EventModels */ = {
 			isa = PBXGroup;
 			children = (
-				03056AC523BA24C100F6D57A /* NetmeraLoginEvent.swift */,
-				0309EB6323C5BD6100D6AA62 /* NetmeraSignUpEvent.swift */,
-				0309EB6823C5BE8C00D6AA62 /* NetmeraImportEvent.swift */,
+				0334578323C7258800FB6386 /* Actions */,
+				0334574B23C712F900FB6386 /* Screens */,
 				0309EB6D23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift */,
 				0309EB7223C5C74800D6AA62 /* NetmeraPhotoPickAnalysisDetailScreenEvent.swift */,
 				0309EB7723C5C7E500D6AA62 /* NetmeraAutoSyncScreenEvent.swift */,
@@ -12306,8 +12355,35 @@
 				0334573C23C617E800FB6386 /* NetmeraImportPhotosScreenEvent.swift */,
 				0334574123C618B400FB6386 /* NetmeraContactsSyncScreenEvent.swift */,
 				0334574623C6196100FB6386 /* NetmeraDownloadEvent.swift */,
+				0334575623C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift */,
+				0334575B23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift */,
+				0334576023C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift */,
+				0334576523C7215300FB6386 /* NetmeraFreeupspaceEvent.swift */,
+				0334576A23C7224000FB6386 /* NetmeraWelcomePage3Event.swift */,
+				0334576F23C7228300FB6386 /* NetmeraPackageClickEvent.swift */,
+				0334577423C724C400FB6386 /* NetmeraPhotosScreenEvent.swift */,
+				0334577923C7250300FB6386 /* NetmeraSettingsScreenEvent.swift */,
+				0334577E23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift */,
+				0334578923C7261900FB6386 /* NetmeraDeleteEvent.swift */,
 			);
 			path = EventModels;
+			sourceTree = "<group>";
+		};
+		0334574B23C712F900FB6386 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				0334574C23C7134700FB6386 /* NetmeraScreenEventTemplate.swift */,
+				0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		0334578323C7258800FB6386 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */,
+			);
+			path = Actions;
 			sourceTree = "<group>";
 		};
 		051E1DEA19CAC2F900FD1E03 = {
@@ -25135,7 +25211,6 @@
 				0303A0332397D0D000907F42 /* ContactBackupOld.swift in Sources */,
 				0303A0342397D0D000907F42 /* Alamofire+Validate.swift in Sources */,
 				0303A0352397D0D000907F42 /* AnimationCard.swift in Sources */,
-				0309EB6B23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */,
 				0303A0362397D0D000907F42 /* CodeTextField.swift in Sources */,
 				0303A0372397D0D000907F42 /* BorderDotsPageControl.swift in Sources */,
 				0303A0382397D0D000907F42 /* CampaignService.swift in Sources */,
@@ -25188,6 +25263,7 @@
 				0303A0622397D0D000907F42 /* PhotoSyncService.swift in Sources */,
 				0303A0632397D0D000907F42 /* CollectionViewCellDataProtocol.swift in Sources */,
 				0303A0642397D0D000907F42 /* HomePageInitializer.swift in Sources */,
+				0334576823C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */,
 				0303A0652397D0D000907F42 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				0303A0662397D0D000907F42 /* SeacrhViewRouter.swift in Sources */,
 				0303A0672397D0D000907F42 /* AutoSyncRoutingService.swift in Sources */,
@@ -25265,6 +25341,7 @@
 				0303A0AC2397D0D000907F42 /* LeavePremiumInitializer.swift in Sources */,
 				0303A0AD2397D0D000907F42 /* DispatchQueue+Main.swift in Sources */,
 				0303A0AE2397D0D000907F42 /* VerifyEmailPopUp.swift in Sources */,
+				0334575E23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */,
 				0303A0AF2397D0D000907F42 /* PlacesServiceResponse.swift in Sources */,
 				0303A0B02397D0D000907F42 /* ActivityIndicator.swift in Sources */,
 				0303A0B12397D0D000907F42 /* SearchViewInteractor.swift in Sources */,
@@ -25392,6 +25469,7 @@
 				0303A1262397D0D000907F42 /* CameraService.swift in Sources */,
 				0303A1272397D0D000907F42 /* PermissionViewController.swift in Sources */,
 				0303A1282397D0D000907F42 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
+				0334578C23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */,
 				0303A1292397D0D000907F42 /* TermsOfUseRouterInput.swift in Sources */,
 				0303A12A2397D0D000907F42 /* QuickScrollService.swift in Sources */,
 				0303A12B2397D0D000907F42 /* QuickSelectCollectionView.swift in Sources */,
@@ -25420,6 +25498,7 @@
 				0303A13F2397D0D000907F42 /* MusicViewController.swift in Sources */,
 				0303A1402397D0D000907F42 /* SegmentedController.swift in Sources */,
 				0303A1412397D0D000907F42 /* TBMatikPhotosViewController.swift in Sources */,
+				0334577C23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */,
 				0303A1422397D0D000907F42 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				0303A1432397D0D000907F42 /* FaceImageChangeCoverViewController.swift in Sources */,
 				0303A1442397D0D000907F42 /* PremiumInteractorInput.swift in Sources */,
@@ -25505,7 +25584,6 @@
 				0303A18C2397D0D000907F42 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				0303A18D2397D0D000907F42 /* PackagesConfigurator.swift in Sources */,
 				0303A18E2397D0D000907F42 /* EmptyContainerNavVC.swift in Sources */,
-				03056AC823BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */,
 				0303A18F2397D0D000907F42 /* PasscodeViewImp.swift in Sources */,
 				0303A1902397D0D000907F42 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				0303A1912397D0D000907F42 /* FaceImageAddNameConfigurator.swift in Sources */,
@@ -25556,11 +25634,13 @@
 				0303A1BB2397D0D000907F42 /* PackagePremiumView.swift in Sources */,
 				0303A1BC2397D0D000907F42 /* AutoSyncInteractorInput.swift in Sources */,
 				0303A1BD2397D0D000907F42 /* CustomNavBarButton.swift in Sources */,
+				0334574F23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				0303A1BE2397D0D000907F42 /* LeavePremiumConfigurator.swift in Sources */,
 				0303A1BF2397D0D000907F42 /* UserProfileViewOutput.swift in Sources */,
 				0303A1C02397D0D000907F42 /* UploadResponse.swift in Sources */,
 				0303A1C12397D0D000907F42 /* CreateStoryPopUp.swift in Sources */,
 				0303A1C22397D0D000907F42 /* UsageInfoInteractorInput.swift in Sources */,
+				0334576323C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */,
 				0303A1C32397D0D000907F42 /* SharedEnums.swift in Sources */,
 				0303A1C42397D0D000907F42 /* ResponseResult.swift in Sources */,
 				0303A1C52397D0D000907F42 /* TBMatikCard.swift in Sources */,
@@ -25613,6 +25693,7 @@
 				0303A1F22397D0D000907F42 /* InstaPickDetailViewController.swift in Sources */,
 				0303A1F32397D0D000907F42 /* TermsCheckboxTextView.swift in Sources */,
 				0303A1F42397D0D000907F42 /* DuplicatedContactsInteractorInput.swift in Sources */,
+				0334576D23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */,
 				0303A1F52397D0D000907F42 /* RegistrationInteractorInput.swift in Sources */,
 				0303A1F62397D0D000907F42 /* CollectionViewHeaderWithText.swift in Sources */,
 				0303A1F72397D0D000907F42 /* CreateStoryPreviewModuleInput.swift in Sources */,
@@ -26010,6 +26091,7 @@
 				0303A3662397D0D000907F42 /* DuplicatedContactsPresenter.swift in Sources */,
 				0303A3672397D0D000907F42 /* CardsManagerViewProtocol.swift in Sources */,
 				0303A3682397D0D000907F42 /* BaseFilesGreedRouterInput.swift in Sources */,
+				0334578123C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */,
 				0303A3692397D0D000907F42 /* LeavePremiumRouter.swift in Sources */,
 				0303A36A2397D0D000907F42 /* CircleButton.swift in Sources */,
 				0303A36B2397D0D000907F42 /* DateExtension.swift in Sources */,
@@ -26101,6 +26183,7 @@
 				0303A3BE2397D0D000907F42 /* UserProfileRouterInput.swift in Sources */,
 				0303A3BF2397D0D000907F42 /* SyncContactsViewInput.swift in Sources */,
 				0303A3C02397D0D000907F42 /* SyncContactsViewOutput.swift in Sources */,
+				0334577723C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */,
 				0303A3C12397D0D000907F42 /* SyncContactsViewController.swift in Sources */,
 				0303A3C22397D0D000907F42 /* FBService.swift in Sources */,
 				0303A3C32397D0D000907F42 /* PasscodeSettingsInitializer.swift in Sources */,
@@ -26237,6 +26320,7 @@
 				0303A43D2397D0D000907F42 /* FileInfoRouterInput.swift in Sources */,
 				0303A43E2397D0D000907F42 /* DocumentsGreedPresenter.swift in Sources */,
 				0303A43F2397D0D000907F42 /* FileInfoRouter.swift in Sources */,
+				0334578723C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */,
 				0303A4402397D0D000907F42 /* PeopleService.swift in Sources */,
 				0303A4412397D0D000907F42 /* SpotifyRoutingService.swift in Sources */,
 				0303A4422397D0D000907F42 /* UsageInfoRouter.swift in Sources */,
@@ -26285,6 +26369,7 @@
 				0303A46A2397D0D000907F42 /* UploadFilesSelectionRouter.swift in Sources */,
 				0303A46B2397D0D000907F42 /* BackButtonActions.swift in Sources */,
 				0303A46C2397D0D000907F42 /* UploadFilesSelectionInitializer.swift in Sources */,
+				0334575423C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				0303A46D2397D0D000907F42 /* PremiumViewInput.swift in Sources */,
 				0303A46E2397D0D000907F42 /* SelectFolderViewController.swift in Sources */,
 				0303A46F2397D0D000907F42 /* SelectFolderPresenter.swift in Sources */,
@@ -26341,6 +26426,7 @@
 				0303A49B2397D0D000907F42 /* PhotoVideoScrollBarManager.swift in Sources */,
 				0303A49C2397D0D000907F42 /* CampaignContestInfoView.swift in Sources */,
 				0303A49D2397D0D000907F42 /* ServerError.swift in Sources */,
+				0334575923C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */,
 				0303A49E2397D0D000907F42 /* CreateStoryPreviewInitializer.swift in Sources */,
 				0334572123C613E700FB6386 /* NetmeraFreeUpSpaceScreenEvent.swift in Sources */,
 				0303A49F2397D0D000907F42 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
@@ -26371,10 +26457,10 @@
 				0303A4B62397D0D000907F42 /* URL+Video.swift in Sources */,
 				0303A4B72397D0D000907F42 /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				0303A4B82397D0D000907F42 /* PremiumService.swift in Sources */,
-				0309EB6623C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */,
 				0303A4B92397D0D000907F42 /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				0303A4BA2397D0D000907F42 /* PackagesInteractor.swift in Sources */,
 				0303A4BB2397D0D000907F42 /* AlbumSelectionViewController.swift in Sources */,
+				0334577223C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */,
 				0303A4BC2397D0D000907F42 /* SyncedBlock.swift in Sources */,
 				0303A4BD2397D0D000907F42 /* TermsOfUseViewController.swift in Sources */,
 				0303A4BE2397D0D000907F42 /* CreateStoryPreviewViewController.swift in Sources */,
@@ -26759,6 +26845,7 @@
 				17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				C62239B2204973830043ED44 /* ItemSyncOperation.swift in Sources */,
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
+				0334575D23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */,
 				8C20867C228D5012000BEDAD /* CacheManager.swift in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
 				8C23F2952286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
@@ -26858,6 +26945,7 @@
 				8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */,
 				8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */,
 				8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */,
+				0334575323C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
 				4A9F8E5920875D4300622A6C /* PeriodicContactSyncDataSource.swift in Sources */,
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
@@ -26922,6 +27010,7 @@
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
 				8C0B91A620170EA800A5BA81 /* ManageContactsViewInput.swift in Sources */,
 				4A6DBE8721A6F9140003D1B4 /* PackagePremiumView.swift in Sources */,
+				0334578023C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */,
 				9809317523952CAC00ECFEF8 /* SmartAlbumsDataStorage.swift in Sources */,
 				8C0E8CEE1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				B53DCE8520EF634900400DBA /* AnalyzeStatus.m in Sources */,
@@ -26961,6 +27050,7 @@
 				8C0E8D081FDEBDFF00789C91 /* SearchViewInput.swift in Sources */,
 				8C0E8D091FDEBDFF00789C91 /* HelpAndSupportRouterInput.swift in Sources */,
 				98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
+				0334576223C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */,
 				8C8711711FDFF47000F66396 /* DarkPopUpController.swift in Sources */,
 				8C0E8D0A1FDEBDFF00789C91 /* AutoSyncDataStorage.swift in Sources */,
 				8C0E8D0B1FDEBDFF00789C91 /* PrintInitializer.swift in Sources */,
@@ -27327,6 +27417,7 @@
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
 				7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */,
+				0334577623C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */,
 				8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */,
 				8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				B5CDB33D21787FEF006CFA50 /* Filter.m in Sources */,
@@ -27397,6 +27488,7 @@
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
+				0334578B23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */,
 				8E7659852333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				9809317B23952CAC00ECFEF8 /* PeopleAlbumsManager.swift in Sources */,
 				989BDE3E22F47B1E001DDEB2 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
@@ -27424,6 +27516,7 @@
 				7378052A23AB9EF7001D57BD /* GifToMP4Formatter.swift in Sources */,
 				98792DE722FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
 				8E26D97B2306999000D08123 /* MusicPresenter.swift in Sources */,
+				0334576C23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */,
 				8C208642228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
@@ -27546,6 +27639,7 @@
 				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8C0E8EC11FDEBDFF00789C91 /* BaseFilesGreedRouter.swift in Sources */,
 				89DA5D0323ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
+				0334577B23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */,
 				8C0E8EC21FDEBDFF00789C91 /* BaseFilesGreedConfigurator.swift in Sources */,
 				4A56D5B9202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
 				8C06AC2A2008AB9F003D8E05 /* FreeAppSpaceInteractor.swift in Sources */,
@@ -27568,8 +27662,8 @@
 				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB382122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
+				0334577123C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				03056AC723BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */,
 				8C0B91912013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
 				4AC68934202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
@@ -27592,7 +27686,6 @@
 				8C0E8EDC1FDEBDFF00789C91 /* UsageInfoViewController.swift in Sources */,
 				8C9CE3B0229DA5A8004B5C73 /* FileProviderWormholeListener.swift in Sources */,
 				B5CDB33921787FEF006CFA50 /* UpdateCheck.m in Sources */,
-				0309EB6523C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */,
 				8E26D984230699A000D08123 /* MusicInitializer.swift in Sources */,
 				8C0E8EDD1FDEBDFF00789C91 /* PhotoVideoDetailViewInput.swift in Sources */,
 				8C0E8EDE1FDEBDFF00789C91 /* PhotoVideoDetailViewOutput.swift in Sources */,
@@ -27702,6 +27795,7 @@
 				8E26D98B230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				8C06AC2C2008ABB9003D8E05 /* RecentSearchesService.swift in Sources */,
 				8C0E8F141FDEBDFF00789C91 /* VisualMusicPlayerInitializer.swift in Sources */,
+				0334575823C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */,
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
@@ -27743,6 +27837,7 @@
 				8C0B91A920170EB000A5BA81 /* ManageContactsRouter.swift in Sources */,
 				8C0E8F2B1FDEBDFF00789C91 /* SettingsRouterInput.swift in Sources */,
 				8C0E8F2C1FDEBDFF00789C91 /* SettingsRouter.swift in Sources */,
+				0334578623C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */,
 				4BA61F6F22B7D60400D66031 /* PermissionType.swift in Sources */,
 				92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				8C0E8F2D1FDEBDFF00789C91 /* SettingsConfigurator.swift in Sources */,
@@ -27780,8 +27875,8 @@
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
 				8C20864E228D4B2E000BEDAD /* PhotoVideoNavBarManager.swift in Sources */,
+				0334574E23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				8C0E8F3F1FDEBDFF00789C91 /* SplashRouter.swift in Sources */,
-				0309EB6A23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */,
 				7378053623ABC130001D57BD /* OverlayStickerViewController.swift in Sources */,
 				0309EB9C23C5CB2500D6AA62 /* NetmeraFirstAutoSyncScreenEvent.swift in Sources */,
 				8CD2B3A91FE7B21C00280547 /* BaseFilesGreedModuleOutput.swift in Sources */,
@@ -27992,6 +28087,7 @@
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				0309EB6F23C5C64A00D6AA62 /* NetmeraContactBackUpScreenEvent.swift in Sources */,
 				0309EB9723C5CAD900D6AA62 /* NetmeraPlacesScreenEvent.swift in Sources */,
+				0334576723C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
 				B557674D22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
@@ -28707,6 +28803,7 @@
 				4ADE087E202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */,
 				98A86D7C23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
+				0334575223C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
 				CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */,
@@ -28919,6 +29016,7 @@
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
+				0334576123C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
@@ -28945,6 +29043,7 @@
 				8C0097141F6BDA6900FA069C /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				CEAE3FB81EFD4F0D00A405B2 /* HomePageRouterInput.swift in Sources */,
 				CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */,
+				0334574D23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */,
 				CE33DFFD1F021F4500706C40 /* ReachabilityService.swift in Sources */,
 				CE51AC8D1EF90853005DCEE0 /* AutoNextEditingRowPasser.swift in Sources */,
@@ -28972,7 +29071,6 @@
 				89E51D5E22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				D47863F41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift in Sources */,
 				B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */,
-				03056AC623BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */,
 				7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */,
 				B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
@@ -29012,6 +29110,7 @@
 				CE7040AE22EB180D00124073 /* SupportFormPrefilledController.swift in Sources */,
 				A20B356D21B823D000A5E4F2 /* FaceImageItemsDataSource.swift in Sources */,
 				CE51ACC71EF90853005DCEE0 /* RegistrationModuleInput.swift in Sources */,
+				0334578A23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */,
 				4A02B7FE21A0550F00635694 /* PremiumInfoCard.swift in Sources */,
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,
 				9219B18A21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
@@ -29137,6 +29236,7 @@
 				4A0AC1472087375B00032CC7 /* PeriodicContactSyncViewInput.swift in Sources */,
 				4812D8EA22B25942007089BA /* SelectNameModuleOutput.swift in Sources */,
 				8C00971C1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift in Sources */,
+				0334576B23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */,
 				78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
 				0309EB9623C5CAD900D6AA62 /* NetmeraPlacesScreenEvent.swift in Sources */,
@@ -29185,6 +29285,7 @@
 				CE51ACEC1EF90853005DCEE0 /* PhoneVerificationModuleInput.swift in Sources */,
 				8C23F2942286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
+				0334576623C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */,
 				CE51ACED1EF90853005DCEE0 /* PhoneVerificationPresenter.swift in Sources */,
 				8C06AC0E20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
@@ -29211,7 +29312,6 @@
 				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
 				CE51ACF21EF90853005DCEE0 /* PhoneVerificationRouterInput.swift in Sources */,
-				0309EB6423C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */,
 				B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */,
 				8C20864D228D4B2E000BEDAD /* PhotoVideoNavBarManager.swift in Sources */,
 				CE51ACF31EF90853005DCEE0 /* PhoneVerificationRouter.swift in Sources */,
@@ -29422,7 +29522,7 @@
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				4B88BB6E233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				925B59A522C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
-				0309EB6923C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */,
+				0334577A23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */,
 				B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */,
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
@@ -29442,6 +29542,7 @@
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				737A2EA92338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CEFAF2E023210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
+				0334575723C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */,
 				8E26D98A230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				7373EC22235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
@@ -29449,6 +29550,7 @@
 				737A2EBB2338E03A0014258A /* SelectQuestionViewController.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
 				7C2F56FA1F1CC1CC0014870B /* ActionsMenuTableViewCell.swift in Sources */,
+				0334577523C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */,
 				B5AB5B6421F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8BC2414816C90E31214FFA9E /* BaseFilesGreedInitializer.swift in Sources */,
 				8DCB216C1F3C858A00BAFE1E /* SearchViewPresenter.swift in Sources */,
@@ -29601,6 +29703,7 @@
 				890F736F22EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				89E51D3922CA10F8007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */,
 				17CD85B223ACDA40004CFF7E /* HSCompetionPopUpsFactory.swift in Sources */,
+				0334577F23C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */,
 				0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */,
 				09492544A332F13F0C2E09B1 /* SettingsRouter.swift in Sources */,
 				9E4E918E6877B531674D260E /* SettingsConfigurator.swift in Sources */,
@@ -29730,6 +29833,7 @@
 				8C208657228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
+				0334575C23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
 				73B623D623BF5CB600839C47 /* SmashService.swift in Sources */,
@@ -29901,6 +30005,7 @@
 				FA793D812018725400A02B46 /* PlacesService.swift in Sources */,
 				4A56D5AF202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
 				8518B9D1741BF6B4470BCD73 /* OTPViewPresenter.swift in Sources */,
+				0334578523C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */,
 				4AAF28B720205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
 				9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */,
@@ -29916,6 +30021,7 @@
 				B56921FB23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
 				896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
+				0334577023C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				0309EBBE23C5CDF100D6AA62 /* NetmeraEulaScreenEvent.swift in Sources */,
 				4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
@@ -30047,6 +30153,7 @@
 				CE78481322A685FB00662219 /* ProfileFieldView.swift in Sources */,
 				CE78481522A685FB00662219 /* WaitingForWiFiPopUp.swift in Sources */,
 				CE78481622A685FB00662219 /* Constants.swift in Sources */,
+				0334576E23C7224000FB6386 /* NetmeraWelcomePage3Event.swift in Sources */,
 				CE78481722A685FB00662219 /* SKProduct+Localized.swift in Sources */,
 				CE78481822A685FB00662219 /* CardActionType.swift in Sources */,
 				CE78481922A685FB00662219 /* PasscodeSettingsInteractorIO.swift in Sources */,
@@ -30159,6 +30266,7 @@
 				985599C723017ADF00A9F438 /* SpotifyBottomBarManager.swift in Sources */,
 				CE78487322A685FB00662219 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				CE78487422A685FB00662219 /* PeriodicContactSyncDataSource.swift in Sources */,
+				0334577323C7228300FB6386 /* NetmeraPackageClickEvent.swift in Sources */,
 				CE78487522A685FB00662219 /* UserProfileInteractor.swift in Sources */,
 				CE78487622A685FB00662219 /* HomePagePresenter.swift in Sources */,
 				CE78487722A685FB00662219 /* LeavePremiumInitializer.swift in Sources */,
@@ -30296,6 +30404,7 @@
 				7378052123AB9D19001D57BD /* CreateOverlayStickerError.swift in Sources */,
 				CE7848ED22A685FB00662219 /* CameraService.swift in Sources */,
 				8C86111A22BCFDEB00108958 /* PermissionViewController.swift in Sources */,
+				0334577D23C7250300FB6386 /* NetmeraSettingsScreenEvent.swift in Sources */,
 				0334570F23C612E000FB6386 /* NetmeraActivitiyTimelineScreenEvent.swift in Sources */,
 				98792DE822FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
 				CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */,
@@ -30327,6 +30436,7 @@
 				981642FF233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				CE78490322A685FB00662219 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				CE78490422A685FB00662219 /* FaceImageChangeCoverViewController.swift in Sources */,
+				0334578D23C7261900FB6386 /* NetmeraDeleteEvent.swift in Sources */,
 				CE78490522A685FB00662219 /* PremiumInteractorInput.swift in Sources */,
 				CE78490622A685FB00662219 /* SharedService.swift in Sources */,
 				8C1E5BE822CB8CD4008FDA02 /* SecurityCodeTextField.swift in Sources */,
@@ -30446,6 +30556,7 @@
 				CE78496522A685FB00662219 /* FaceImageDesigner.swift in Sources */,
 				CE78496622A685FB00662219 /* KeychainSwift+Optional.swift in Sources */,
 				CE78496722A685FB00662219 /* HomePageConfigurator.swift in Sources */,
+				0334575023C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				CE78496822A685FB00662219 /* FaceImagePhotosPresenter.swift in Sources */,
 				CE78496B22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				CE78496C22A685FB00662219 /* AutoSyncConfigurator.swift in Sources */,
@@ -30519,7 +30630,6 @@
 				CE7849A422A685FB00662219 /* CollectionViewHeaderWithText.swift in Sources */,
 				89E51D5122CA1121007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
-				0309EB6C23C5BE8C00D6AA62 /* NetmeraImportEvent.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
 				989BDE4822F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				CE7849A722A685FB00662219 /* ArrayDataSourceForCollectionView.swift in Sources */,
@@ -30694,6 +30804,7 @@
 				CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */,
 				CE784A4122A685FB00662219 /* WKWebView+Extensions.swift in Sources */,
 				CE784A4222A685FB00662219 /* PhoneVerificationInteractor.swift in Sources */,
+				0334575A23C71FC100FB6386 /* NetmeraFaceImageGroupingScreenEvent.swift in Sources */,
 				CE784A4322A685FB00662219 /* RoundedProgressView.swift in Sources */,
 				CE784A4422A685FB00662219 /* PushNotificationServiceConstants.swift in Sources */,
 				CE784A4522A685FB00662219 /* FaceImagePhotosRouterInput.swift in Sources */,
@@ -30786,7 +30897,6 @@
 				CE784A9222A685FB00662219 /* OfferApple.swift in Sources */,
 				CE784A9322A685FB00662219 /* ActivityTimelineSectionsBuider.swift in Sources */,
 				CE784A9522A685FB00662219 /* InstaPickPhotoView.swift in Sources */,
-				03056AC923BA24C100F6D57A /* NetmeraLoginEvent.swift in Sources */,
 				CE784A9622A685FB00662219 /* CircleProgressView.swift in Sources */,
 				9877FABD23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				CE784A9822A685FB00662219 /* PasscodeState.swift in Sources */,
@@ -30872,11 +30982,13 @@
 				0309EB7B23C5C7E500D6AA62 /* NetmeraAutoSyncScreenEvent.swift in Sources */,
 				923DF5D922C4AD5B00DF29EB /* CreateStorySelectionController.swift in Sources */,
 				CE784ADF22A685FB00662219 /* PasscodeSettingsRouter.swift in Sources */,
+				0334577823C724C400FB6386 /* NetmeraPhotosScreenEvent.swift in Sources */,
 				CE784AE022A685FB00662219 /* PackageModelResponse.swift in Sources */,
 				CE784AE122A685FB00662219 /* MovieCard.swift in Sources */,
 				CE784AE222A685FB00662219 /* FBResponses.swift in Sources */,
 				CE784AE322A685FB00662219 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				CE784AE422A685FB00662219 /* FaceImagePhotosInitializer.swift in Sources */,
+				0334575523C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				CE784AE522A685FB00662219 /* BaseFilesGreedViewInput.swift in Sources */,
 				CE784AE622A685FB00662219 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE784AE722A685FB00662219 /* UpdateServerIntegration.m in Sources */,
@@ -31024,6 +31136,7 @@
 				B56921FE23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CE784B6822A685FB00662219 /* SearchViewConfigurator.swift in Sources */,
 				CE784B6922A685FB00662219 /* VisualMusicPlayerInitializer.swift in Sources */,
+				0334575F23C7206600FB6386 /* NetmeraAllFilesScreenEvent.swift in Sources */,
 				8C86111B22BCFDEF00108958 /* PermissionsDesigner.swift in Sources */,
 				CE784B6A22A685FB00662219 /* HelpAndSupportViewInput.swift in Sources */,
 				CE784B6B22A685FB00662219 /* ContactUtil.m in Sources */,
@@ -31037,6 +31150,7 @@
 				9853CD4B2361BDD600E19BF7 /* LandingCollectionViewCell.swift in Sources */,
 				CE784B7122A685FB00662219 /* AnalyticsServiceConstants.swift in Sources */,
 				CE784B7222A685FB00662219 /* FaceImagePhotosViewController.swift in Sources */,
+				0334576423C7209D00FB6386 /* NetmeraConnectedAccountsScreenEvent.swift in Sources */,
 				CE784B7322A685FB00662219 /* SyncContactsRouter.swift in Sources */,
 				CE784B7422A685FB00662219 /* SyncContactsConfigurator.swift in Sources */,
 				CE784B7522A685FB00662219 /* ManageContactsViewInput.swift in Sources */,
@@ -31194,7 +31308,6 @@
 				CE784BF822A685FB00662219 /* Message.m in Sources */,
 				CE784BF922A685FB00662219 /* AlbumCollectionViewCell.swift in Sources */,
 				CE784BFA22A685FB00662219 /* MyStorageInteractorInput.swift in Sources */,
-				0309EB6723C5BD6100D6AA62 /* NetmeraSignUpEvent.swift in Sources */,
 				CE784BFB22A685FB00662219 /* SelectFolderInitializer.swift in Sources */,
 				CE784BFC22A685FB00662219 /* FreeUpSpacePopUp.swift in Sources */,
 				CE784BFD22A685FB00662219 /* VisualMusicPlayerInteractor.swift in Sources */,
@@ -31222,6 +31335,7 @@
 				8C86111822BCF36C00108958 /* TermsDescriptionController.swift in Sources */,
 				0334573623C616FB00FB6386 /* NetmeraWelcomePage2Event.swift in Sources */,
 				CE784C0F22A685FB00662219 /* SelectNameInteractorOutput.swift in Sources */,
+				0334576923C7215300FB6386 /* NetmeraFreeupspaceEvent.swift in Sources */,
 				CE784C1022A685FB00662219 /* SelectNameInteractor.swift in Sources */,
 				CE784C1122A685FB00662219 /* SearchDataSource.swift in Sources */,
 				CE784C1222A685FB00662219 /* ContactSyncSDK.m in Sources */,
@@ -31266,6 +31380,7 @@
 				CE784C3022A685FB00662219 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
 				CE784C3122A685FB00662219 /* MoreFilesActionsInteractorInput.swift in Sources */,
 				CE784C3222A685FB00662219 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
+				0334578223C7254300FB6386 /* NetmeraPhotoPickHistoryScreenEvent.swift in Sources */,
 				CE784C3322A685FB00662219 /* URL+Video.swift in Sources */,
 				8C1E5BE522CB8C2E008FDA02 /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				CE784C3422A685FB00662219 /* PremiumService.swift in Sources */,
@@ -31370,6 +31485,7 @@
 				CE784C8922A685FB00662219 /* SyncDB.m in Sources */,
 				CE784C8A22A685FB00662219 /* PasscodeManager.swift in Sources */,
 				CE784C8B22A685FB00662219 /* UploadParametrs.swift in Sources */,
+				0334578823C725AC00FB6386 /* NetmeraActionEvents.swift in Sources */,
 				0309EBAD23C5CC1B00D6AA62 /* NetmeraEditEvent.swift in Sources */,
 				CE784C8C22A685FB00662219 /* ImportFromDropboxPresenter.swift in Sources */,
 				CE784C8D22A685FB00662219 /* PlacesService.swift in Sources */,
