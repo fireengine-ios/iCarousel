@@ -82,6 +82,70 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class NetmeraContactBackUpScreenEvent: NetmeraEvent {
+        
+        private let kContactBackUpScreenKey = "dmi"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kContactBackUpScreenKey
+        }
+    }
+    
+    final class NetmeraEmailVerificationEvent: NetmeraEvent {
+        
+        private let kEmailVerificationKey = "axi"
+        
+        @objc var action = ""
+        
+        convenience init(action: String) {
+            self.init()
+            self.action = action
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kEmailVerificationKey
+        }
+    }
+    
+    final class NetmeraPackageChannelClickEvent: NetmeraEvent {
+        
+        private let kPackageChannelClickKey = "tvm"
+        
+        @objc var type = ""
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea": #keyPath(type)
+            ]
+        }
+        
+        override var eventKey : String {
+            return kPackageChannelClickKey
+        }
+    }
+    
+    final class NetmeraPhotoPickPhotoSelectionScreenEvent: NetmeraEvent {
+        
+        private let kPhotoPickPhotoSelectionScreenKey = "wtj"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kPhotoPickPhotoSelectionScreenKey
+        }
+    }
     
     
     

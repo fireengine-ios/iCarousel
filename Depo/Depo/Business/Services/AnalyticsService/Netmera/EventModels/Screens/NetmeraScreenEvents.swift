@@ -10,8 +10,75 @@ import Netmera
 
 extension NetmeraEvents.Screens {
     
+    final class NetmeraPhotoPickAnalysisDetailScreenEvent: NetmeraEvent {
+        
+        private let kPhotoPickAnalysisDetailScreenKey = "hup"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kPhotoPickAnalysisDetailScreenKey
+        }
+    }
+    
+    final class NetmeraAutoSyncScreenEvent: NetmeraEvent {
+        
+        private let kAutoSyncScreenKey = "mwv"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kAutoSyncScreenKey
+        }
+    }
+    
+    final class NetmeraPackagesScreenEvent: NetmeraEvent {
+        
+        private let kPackagesScreenKey = "wss"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kPackagesScreenKey
+        }
+    }
 
-
+    final class NetmeraStoriesScreenEvent: NetmeraEvent {
+         
+         private let kStoriesScreenKey = "pvg"
+         
+         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+             return [:]
+         }
+         
+         override var eventKey : String {
+             return kStoriesScreenKey
+         }
+     }
+    
+    final class NetmeraPlacesScreenEvent: NetmeraEvent {
+        
+        private let kPlacesScreenKey = "ots"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kPlacesScreenKey
+        }
+    }
+    
+    
+    
+    
+    
 
     
     

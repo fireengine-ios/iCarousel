@@ -10,17 +10,6 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraContactBackUpScreenEvent: NetmeraEvent {
-        
-        private let kContactBackUpScreenKey = "dmi"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kContactBackUpScreenKey
-        }
-    }
+    
     
 }

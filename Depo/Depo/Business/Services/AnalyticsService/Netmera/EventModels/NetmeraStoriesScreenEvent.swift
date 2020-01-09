@@ -10,17 +10,6 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraStoriesScreenEvent: NetmeraEvent {
-        
-        private let kStoriesScreenKey = "pvg"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kStoriesScreenKey
-        }
-    }
+ 
     
 }

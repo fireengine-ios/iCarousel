@@ -10,17 +10,5 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraPlacesScreenEvent: NetmeraEvent {
-        
-        private let kPlacesScreenKey = "ots"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kPlacesScreenKey
-        }
-    }
-    
+
 }

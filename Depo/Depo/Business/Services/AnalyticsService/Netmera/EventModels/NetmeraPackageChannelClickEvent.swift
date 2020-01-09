@@ -10,21 +10,5 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraPackageChannelClickEvent: NetmeraEvent {
-        
-        private let kPackageChannelClickKey = "tvm"
-        
-        @objc var type = ""
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [
-                "ea": #keyPath(type)
-            ]
-        }
-        
-        override var eventKey : String {
-            return kPackageChannelClickKey
-        }
-    }
     
 }

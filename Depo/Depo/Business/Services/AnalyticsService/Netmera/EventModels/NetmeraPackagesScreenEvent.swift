@@ -10,17 +10,6 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraPackagesScreenEvent: NetmeraEvent {
-        
-        private let kPackagesScreenKey = "wss"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kPackagesScreenKey
-        }
-    }
+
     
 }

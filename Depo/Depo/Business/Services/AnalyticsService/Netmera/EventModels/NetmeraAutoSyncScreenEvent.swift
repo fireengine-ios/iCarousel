@@ -10,17 +10,5 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraAutoSyncScreenEvent: NetmeraEvent {
-        
-        private let kAutoSyncScreenKey = "mwv"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kAutoSyncScreenKey
-        }
-    }
-    
+   
 }

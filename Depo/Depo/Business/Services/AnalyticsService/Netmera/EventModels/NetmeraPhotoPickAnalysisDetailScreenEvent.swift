@@ -10,17 +10,6 @@ import Netmera
 
 extension NetmeraEvents {
     
-    final class NetmeraPhotoPickAnalysisDetailScreenEvent: NetmeraEvent {
-        
-        private let kPhotoPickAnalysisDetailScreenKey = "hup"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kPhotoPickAnalysisDetailScreenKey
-        }
-    }
+
     
 }
