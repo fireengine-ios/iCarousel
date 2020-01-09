@@ -5854,6 +5854,14 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
+		98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9EF23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9F123C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F223C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F323C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -10877,6 +10885,8 @@
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
+		98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinViewController.swift; sourceTree = "<group>"; };
+		98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashBinViewController.xib; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -17020,6 +17030,15 @@
 			path = CancelImportPopup;
 			sourceTree = "<group>";
 		};
+		98E4B9EA23C6FEF3003A4631 /* TrashBin */ = {
+			isa = PBXGroup;
+			children = (
+				98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */,
+				98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */,
+			);
+			path = TrashBin;
+			sourceTree = "<group>";
+		};
 		98EAC9402080CBFF00AAD5B6 /* ContactService */ = {
 			isa = PBXGroup;
 			children = (
@@ -18543,6 +18562,7 @@
 				48E148CC62B54EFD8E872CF0 /* LBAlbumLikePreviewSlider */,
 				CE2976D11FD58E1F00350F3A /* LocalAlbums */,
 				98A86D4723A21FBF00438225 /* HiddenPhotos */,
+				98E4B9EA23C6FEF3003A4631 /* TrashBin */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -20975,6 +20995,7 @@
 				0303A5D72397D0D000907F42 /* slider_thumb@2x.png in Resources */,
 				0303A5D82397D0D000907F42 /* CaptchaView.xib in Resources */,
 				0303A5D92397D0D000907F42 /* MailVerificationViewController.xib in Resources */,
+				98E4B9F323C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				0303A5DA2397D0D000907F42 /* LandingPageViewController.xib in Resources */,
 				0303A5DB2397D0D000907F42 /* crop_icon.png in Resources */,
 				0303A5DC2397D0D000907F42 /* polaroid_yeni.png in Resources */,
@@ -21713,6 +21734,7 @@
 				8C06B1852008AD72003D8E05 /* underline.png in Resources */,
 				8C06B0112008AD71003D8E05 /* kucuk_ucgen@3x.png in Resources */,
 				8C06B0792008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
+				98E4B9F223C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
@@ -23015,6 +23037,7 @@
 				7C1F898A1F6FFE1100740177 /* ProgressCard.xib in Resources */,
 				8C06B15E2008AD72003D8E05 /* toolbar_ciz_icon.png in Resources */,
 				8C06AF1E2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
+				98E4B9F123C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				8C06AF342008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B03C2008AD71003D8E05 /* Orta_Selected@2x.png in Resources */,
 				17589F7C2276336800A5DB37 /* ProfilePhoneEnterView.xib in Resources */,
@@ -23585,6 +23608,7 @@
 				CE784E7F22A685FB00662219 /* sample_yellow@2x.png in Resources */,
 				CE784E8022A685FB00662219 /* ChangePasswordController.xib in Resources */,
 				CE784E8122A685FB00662219 /* serbest_cizgi.png in Resources */,
+				98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				CE784E8322A685FB00662219 /* target_secili@3x.png in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
@@ -25396,6 +25420,7 @@
 				0303A2312397D0D000907F42 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				0303A2322397D0D000907F42 /* TermsAndServicesDataStorage.swift in Sources */,
 				0303A2332397D0D000907F42 /* ProfilePasswordEnterView.swift in Sources */,
+				98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				0303A2342397D0D000907F42 /* TermsAndServicesRouterInput.swift in Sources */,
 				0303A2352397D0D000907F42 /* AnalyzeHistoryDesigner.swift in Sources */,
 				0303A2362397D0D000907F42 /* RingView.swift in Sources */,
@@ -26416,6 +26441,7 @@
 				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				8C208660228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
+				98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				98A86D9223A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
@@ -28571,6 +28597,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
@@ -30041,6 +30068,7 @@
 				CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */,
 				CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */,
 				CE78496122A685FB00662219 /* (null) in Sources */,
+				98E4B9EF23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */,
 				CE78496322A685FB00662219 /* Array+Safe.swift in Sources */,
 				CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */,
@@ -34806,7 +34834,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34869,7 +34897,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34928,7 +34956,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34988,7 +35016,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

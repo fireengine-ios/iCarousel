@@ -295,6 +295,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             hideAlbums(items: albumItems)
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
+                                                        output: self.output,
                                                         success: self.succesAction(elementType: .hide),
                                                         fail: self.failAction(elementType: .hide))
         } else {
@@ -315,6 +316,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         hideFunctionalityService.startHideSimpleOperation(for: remoteItems,
+                                                          output: self.output,
                                                           success: self.succesAction(elementType: .hide),
                                                           fail: self.failAction(elementType: .hide))
     }
@@ -331,7 +333,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                return
            }
            
-        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems, success: self.succesAction(elementType: .hideAlbums), fail: self.failAction(elementType: .hideAlbums))
+        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
+                                                          output: self.output,
+                                                          success: self.succesAction(elementType: .hideAlbums),
+                                                          fail: self.failAction(elementType: .hideAlbums))
     }
     
     func unhide(items: [BaseDataSourceItem]) {

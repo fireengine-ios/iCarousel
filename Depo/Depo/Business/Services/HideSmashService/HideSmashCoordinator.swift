@@ -18,10 +18,10 @@ protocol HideFuncRoutingProtocol: class {
 }
 
 protocol HideFuncServiceProtocol {
-    func startSmashOperation(for item: Item, success: @escaping FileOperation, fail: @escaping FailResponse)
-    func startHideOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse)
-    func startHideSimpleOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse)
-    func startHideAlbumsOperation(for albums: [AlbumItem], success: @escaping FileOperation, fail: @escaping FailResponse)
+    func startSmashOperation(for item: Item, output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
+    func startHideOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
+    func startHideSimpleOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
+    func startHideAlbumsOperation(for albums: [AlbumItem], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
 final class HideFunctionalityService: HideFuncServiceProtocol {
@@ -55,7 +55,8 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     private var items = [Item]()
     private var albums = [AlbumItem]()
-    
+    private weak var output: BaseAsyncOperationInteractorOutput?
+
     private var success: FileOperation?
     private var fail: FailResponse?
     
@@ -96,8 +97,9 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
 
     //MARK: Utility Methods (Public)
 
-    func startSmashOperation(for item: Item, success: @escaping FileOperation, fail: @escaping FailResponse) {
+    func startSmashOperation(for item: Item, output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse) {
         self.items = [item]
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -106,8 +108,9 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         startSmashPhoto()
     }
 
-    func startHideOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse) {
+    func startHideOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse) {
         self.items = items
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -116,8 +119,9 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         showConfirmationPopUp()
     }
     
-    func startHideSimpleOperation(for items: [Item], success: @escaping FileOperation, fail: @escaping FailResponse) {
+    func startHideSimpleOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse) {
         self.items = items
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -126,8 +130,9 @@ final class HideFunctionalityService: HideFuncServiceProtocol {
         showConfirmationPopUp()
     }
     
-    func startHideAlbumsOperation(for albums: [AlbumItem], success: @escaping FileOperation, fail: @escaping FailResponse) {
+    func startHideAlbumsOperation(for albums: [AlbumItem], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse) {
         self.albums = albums
+        self.output = output
         self.success = success
         self.fail = fail
 
@@ -254,6 +259,8 @@ extension HideFunctionalityService {
 extension HideFunctionalityService {
     
     private func hideItems() {
+        output?.startAsyncOperationDisableScreen()
+
         if operation == .hideAlbums {
             hideAlbums()
         } else {

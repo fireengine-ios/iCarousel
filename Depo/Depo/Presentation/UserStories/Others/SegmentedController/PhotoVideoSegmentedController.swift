@@ -14,7 +14,7 @@ final class PhotoVideoSegmentedController: SegmentedController {
     
     static func initPhotoVideoSegmentedControllerWith(_ controllers: [UIViewController]) -> PhotoVideoSegmentedController {
         let controller = PhotoVideoSegmentedController(nibName: "SegmentedController", bundle: nil)
-        controller.setup(with: controllers)
+        controller.setup(with: controllers, alignment: .center)
         return controller
     }
     

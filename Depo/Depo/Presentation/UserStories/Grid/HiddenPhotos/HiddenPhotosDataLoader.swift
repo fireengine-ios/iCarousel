@@ -60,12 +60,19 @@ final class HiddenPhotosDataLoader {
     //MARK: - Public methods
     
     func reloadData(completion: @escaping VoidHandler) {
+        reloadPhotos(completion: completion)
+        reloadAlbums()
+    }
+    
+    func reloadPhotos(completion: @escaping VoidHandler) {
         photoPage = 0
         photoTask?.cancel()
         photoTask = nil
         photosIsFinishLoad = false
         loadNextPhotoPage(completion: completion)
-        
+    }
+    
+    func reloadAlbums() {
         currentLoadingAlbumType = .people
         currentAlbumsPage = 0
         albumsTask?.cancel()

@@ -88,6 +88,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
         viewController.scrollablePopUpView.isEnable = false
+        viewController.segmentImage = .documents
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -145,6 +147,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifeboxFavorites, .createAStory])
         viewController.isFavorites = true
+        viewController.segmentImage = .favorites
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
