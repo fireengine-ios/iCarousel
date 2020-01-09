@@ -224,6 +224,8 @@ final class HSCompletionPopUp: BasePopUpController {
             closeButton.isHidden = true
 
         case .smash:
+            statusImageView.image = PopUpImage.success.image
+            
             hiddenAlbumParentView.arrangedSubviews.forEach { $0.isHidden = true }
             bottomButtonParentView.isHidden = true
 
@@ -261,7 +263,7 @@ final class HSCompletionPopUp: BasePopUpController {
     //MARK: IBAction
 
     @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
-        close {
+        close(isFinalStep: false) {
             self.openHiddenBin()
         }
     }
@@ -279,7 +281,7 @@ final class HSCompletionPopUp: BasePopUpController {
     }
 
     @IBAction private func onOpenPeopleAlbumTap(_ sender: Any) {
-        close {
+        close(isFinalStep: false) {
             self.delegate?.openPeopleAlbumIfPossible()
         }
     }

@@ -207,7 +207,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         }
         
         output.startAsyncOperationDisableScreen()
-        hideService.startHideAlbumsOperation(for: [album], success: { [weak self] in
+        hideService.startHideAlbumsOperation(for: [album], output: output, success: { [weak self] in
             self?.output.completeAsyncOperationEnableScreen()
         }, fail: { [weak self] errorResponse in
             self?.output.completeAsyncOperationEnableScreen(errorMessage: errorResponse.description)

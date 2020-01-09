@@ -25,6 +25,8 @@ final class OverlayStickerViewController: ViewController {
     
     private let uploadService = UploadService()
     private let stickerService: SmashService = SmashServiceImpl()
+    private lazy var popUpFactory = HSCompletionPopUpsFactory()
+    private lazy var popUpFlowService = HideFunctionalityService()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -176,6 +178,15 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
+    private func showCompletionPopUp() {
+        let popUp = popUpFactory.getPopUp(for: .smashCompleted, itemsCount: 1, delegate: popUpFlowService)
+        popUp.dismissCompletion = { [weak self] in
+            self?.closeIconTapped()
+        }
+
+        UIApplication.topController()?.present(popUp, animated: false, completion: nil)
+    }
+    
     private func saveResult(result: CreateOverlayStickersResult) {
         
         checkLibraryAccessStatus { [weak self] libraryIsAvailable in
@@ -192,8 +203,10 @@ final class OverlayStickerViewController: ViewController {
                         }
                         self?.uploadImage(contentURL: result.url, completion: { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.showCompletionPopUp()
+                            }
                         })
         
                     case .video:
@@ -202,8 +215,10 @@ final class OverlayStickerViewController: ViewController {
                         }
                         self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.showCompletionPopUp()
+                            }
                         })
                     }
                     
@@ -406,4 +421,3 @@ extension OverlayStickerViewController: UICollectionViewDelegate {
         })
     }
 }
-
