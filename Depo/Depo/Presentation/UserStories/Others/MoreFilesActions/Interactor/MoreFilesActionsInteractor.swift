@@ -23,7 +23,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var hiddenService = HiddenService()
 
-    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideFunctionalityService()
+    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
