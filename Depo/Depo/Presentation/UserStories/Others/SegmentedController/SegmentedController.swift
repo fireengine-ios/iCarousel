@@ -62,9 +62,6 @@ class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    @IBOutlet private var lefttAnchor: NSLayoutConstraint!
-    @IBOutlet private var rightAnchor: NSLayoutConstraint!
-    
     private(set) var viewControllers = [BaseViewController]()
     private var alignment: Alignment = .center
     
