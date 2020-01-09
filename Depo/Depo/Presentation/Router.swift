@@ -723,6 +723,16 @@ class RouterVC: NSObject {
         return c
     }
     
+    func filesDetailHiddenFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID,
+                                                                                         albumItem: albumItem)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return controller
+    }
+    
     // MARK: Hidden View Controllers
     
     func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
