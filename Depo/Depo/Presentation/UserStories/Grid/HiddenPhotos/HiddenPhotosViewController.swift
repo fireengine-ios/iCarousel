@@ -68,10 +68,9 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         reloadData()
     }
     
-    private func reloadData(resetSlider: Bool = true) {
+    private func reloadData() {
         showSpinner()
-        
-        dataSource.reset(resetSlider: resetSlider)
+        dataSource.reset()
         dataLoader.reloadData { [weak self] in
             guard let self = self else {
                 return
@@ -80,6 +79,19 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
             self.collectionView.refreshControl?.endRefreshing()
             self.hideSpinner()
         }
+    }
+    
+    private func reloadPhotos() {
+        showSpinner()
+        dataSource.photosReset()
+        dataLoader.reloadPhotos { [weak self] in
+            self?.hideSpinner()
+        }
+    }
+    
+    private func reloadAlbums() {
+        dataSource.albumSliderReset()
+        dataLoader.reloadAlbums()
     }
     
     private func checkEmptyView() {
@@ -156,7 +168,7 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
     func sortingRuleChanged(rule: SortedRules) {
         dataSource.sortedRule = rule
         dataLoader.sortedRule = rule
-        reloadData()
+        reloadPhotos()
         navbarManager.setDefaultState(sortType: rule)
     }
 }
@@ -406,6 +418,7 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     private func remove(items: [Item]) {
         let firItems = items.filter { $0.fileType.isFaceImageType }
         if firItems.isEmpty {
+            reloadAlbums()
             dataSource.remove(items: items) { [weak self] in
                 self?.checkEmptyView()
             }
@@ -417,7 +430,7 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     
     private func remove(albums: [BaseDataSourceItem]) {
         dataSource.removeSlider(items: albums) { [weak self] in
-            self?.reloadData(resetSlider: false)
+            self?.reloadPhotos()
         }
     }
 }

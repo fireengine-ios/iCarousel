@@ -179,15 +179,21 @@ extension HiddenPhotosDataSource {
         albumSlider?.removeItems(items, completion: completion)
     }
     
-    func reset(resetSlider: Bool) {
+    func reset() {
+        photosReset()
+        albumSliderReset()
+        collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    
+    func photosReset() {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
         collectionView.reloadData()
-        if resetSlider {
-            albumSlider?.reset()
-            collectionView.reloadSections(IndexSet(integer: 0))
-        }
+    }
+    
+    func albumSliderReset() {
+        albumSlider?.reset()    
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
