@@ -29,7 +29,7 @@ final class FaceImagePhotosConfigurator {
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
                 ///to remove 3 dots from selection mode if it is hidden album
                 viewController.isHiddenAlbum = true
-                elementsConfig = [.unhide, .deleteFaceImage]
+                elementsConfig = [.unhideAlbumItems, .deleteFaceImage]
             case .trashed:
                 initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyDeleteAlbums])
             default:
