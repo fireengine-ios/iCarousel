@@ -262,7 +262,6 @@ final class TrashBinInteractor {
             return
         }
         
-        //TODO: Need to refactoring after change API for send array of ids
         let group = DispatchGroup()
         firItems.forEach { item in
             group.enter()

@@ -61,10 +61,6 @@ final class TrashBinDataSource: NSObject {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
-    private lazy var sliderCellSize: CGSize = {
-        return CGSize(width: collectionView.contentSize.width, height: AlbumsSliderCell.height)
-    }()
-    
     private lazy var cellGridSize: CGSize = {
         let viewWidth = UIScreen.main.bounds.width
         let paddingWidth = columnPadding * 2 - (columns - 1) * columnPadding
@@ -73,7 +69,7 @@ final class TrashBinDataSource: NSObject {
     }()
     
     private lazy var cellListSize: CGSize = {
-        return CGSize(width: collectionView.contentSize.width, height: 65)
+        return CGSize(width: UIScreen.main.bounds.width, height: 65)
     }()
     
     var allSelectedItems: SelectedItems {
@@ -205,7 +201,6 @@ extension TrashBinDataSource {
     func reset() {
         itemsReset()
         albumSliderReset()
-        collectionView.reloadSections(IndexSet(integer: 0))
     }
     
     func itemsReset() {
@@ -481,6 +476,7 @@ extension TrashBinDataSource: UICollectionViewDataSource {
             
             if albumSlider == nil {
                 albumSlider = cell
+                albumSlider?.reset()
             }
             
             cell.delegate = self
@@ -560,12 +556,12 @@ extension TrashBinDataSource: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let height: CGFloat = showGroups && section > 0 ? 50 : 0
-        return CGSize(width: collectionView.contentSize.width, height: height)
+        return CGSize(width: collectionView.bounds.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.contentSize.width, height: AlbumsSliderCell.height)
+            return CGSize(width: collectionView.bounds.width, height: AlbumsSliderCell.height)
         } else if viewType == .Grid {
             return cellGridSize
         } else {
