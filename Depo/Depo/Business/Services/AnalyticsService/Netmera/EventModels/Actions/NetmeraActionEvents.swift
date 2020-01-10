@@ -16,7 +16,7 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         @objc var loginType = ""
-
+        
         convenience init(status: String, loginType: String) {
             self.init()
             self.status = status
@@ -40,7 +40,7 @@ extension NetmeraEvents.Actions {
         private let kSignupKey = "ylx"
         
         @objc var status = ""
-
+        
         convenience init(status: String) {
             self.init()
             self.status = status
@@ -147,13 +147,191 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class NetmeraEditEvent: NetmeraEvent {
+        
+        private let kEditKey = "nsg"
+        
+        @objc var status = ""
+        
+        convenience init(status: String) {
+            self.init()
+            self.status = status
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kEditKey
+        }
+    }
     
+    final class NetmeraShareEvent: NetmeraEvent {
+        
+        private let kShareKey = "bkv"
+        
+        @objc var method = ""
+        @objc var channelType = ""
+        
+        convenience init(method: String, channelType: String) {
+            self.init()
+            self.method = method
+            self.channelType = channelType
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(method),
+                "eb" : #keyPath(channelType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kShareKey
+        }
+    }
     
+    final class NetmeraCreateStoryEvent: NetmeraEvent {
+        
+        private let kCreateStoryKey = "wed"
+        
+        @objc var status = ""
+        
+        convenience init(status: String) {
+            self.init()
+            self.status = status
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kCreateStoryKey
+        }
+    }
     
+    final class NetmeraFirstAutosyncEvent: NetmeraEvent {
+        
+        private let kFirstAutosyncKey = "ekh"
+        
+        @objc var syncSetting = ""
+        @objc var photos = ""
+        @objc var videos = ""
+        
+        convenience init(syncSetting: String, photos: String, videos: String) {
+            self.init()
+            self.syncSetting = syncSetting
+            self.photos = photos
+            self.videos = videos
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ee" : #keyPath(syncSetting),
+                "ea" : #keyPath(photos),
+                "eb" : #keyPath(videos),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kFirstAutosyncKey
+        }
+    }
     
+    final class NetmeraDownloadEvent: NetmeraEvent {
+        
+        private let kDownloadKey = "wgb"
+        
+        @objc var type = ""
+        @objc var count: Int = 0
+        
+        convenience init(type: String, count: Int) {
+            self.init()
+            self.type = type
+            self.count = count
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(type),
+                "ec" : #keyPath(count),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kDownloadKey
+        }
+    }
     
+    final class NetmeraFreeupspaceEvent: NetmeraEvent {
+        
+        private let kFreeupspaceKey: String = "kxj"
+        
+        @objc var count: Int = 0
+        
+        convenience init(count: Int) {
+            self.init()
+            self.count = count
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return ["ec" : #keyPath(count)]
+        }
+        
+        override var eventKey : String {
+            return kFreeupspaceKey
+        }
+    }
     
+    final class NetmeraPackageClickEvent: NetmeraEvent {
+        
+        private let kPackageClickKey = "hzp"
+        
+        @objc var packageName = ""
+        
+        convenience init(packageName: String) {
+            self.init()
+            self.packageName = packageName
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ee" : #keyPath(packageName),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kPackageClickKey
+        }
+    }
     
+    final class NetmeraDeleteEvent: NetmeraEvent {
+        
+        private let kDeleteKey = "trb"
+        
+        @objc var status = ""
+        
+        convenience init(status: String) {
+            self.init()
+            self.status = status
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kDeleteKey
+        }
+    }
     
     final class AppPermission: NetmeraEvent {
         
@@ -184,26 +362,26 @@ extension NetmeraEvents.Actions {
     }
     
     final class StandardUserFIRGroupingON: NetmeraEvent {
-
+        
         private let kStandardUserFIGroupingONKey = "hjz"
-
+        
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [:]
         }
-
+        
         override var eventKey : String {
             return kStandardUserFIGroupingONKey
         }
     }
     
     final class StandardUserFIGroupingOFF: NetmeraEvent {
-
+        
         private let kStandardUserFIGroupingOFFKey = "qml"
-
+        
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [:]
         }
-
+        
         override var eventKey : String {
             return kStandardUserFIGroupingOFFKey
         }
@@ -214,7 +392,7 @@ extension NetmeraEvents.Actions {
         private let kTwoFactorAuthenticationKey = "cqh"
         
         @objc var action = ""
-
+        
         convenience init(action: String) {
             self.init()
             self.action = action
@@ -237,7 +415,7 @@ extension NetmeraEvents.Actions {
         
         @objc var uploadType = ""
         @objc var fileType = ""
-
+        
         convenience init(uploadType: String, fileType: String) {
             self.init()
             self.uploadType = uploadType
@@ -261,7 +439,7 @@ extension NetmeraEvents.Actions {
         private let kPackagePurchaseKey = "zfz"
         
         @objc var status = ""
-
+        
         convenience init(status: String) {
             self.init()
             self.status = status
@@ -285,7 +463,7 @@ extension NetmeraEvents.Actions {
         @objc var videos = ""
         @objc var autosyncSetting = ""
         @objc var photos = ""
-
+        
         convenience init(videos: String, autosyncSetting: String, photos: String) {
             self.init()
             self.videos = videos
@@ -311,7 +489,7 @@ extension NetmeraEvents.Actions {
         private let kFaceImageGroupingKey = "jxo"
         
         @objc var action = ""
-
+        
         convenience init(action: String) {
             self.init()
             self.action = action
