@@ -82,7 +82,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraContactBackUpScreenEvent: NetmeraEvent {
+    final class ContactBackUpScreen: NetmeraEvent {
         
         private let kContactBackUpScreenKey = "dmi"
         
@@ -95,7 +95,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraEmailVerificationEvent: NetmeraEvent {
+    final class EmailVerification: NetmeraEvent {
         
         private let kEmailVerificationKey = "axi"
         
@@ -117,7 +117,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraPackageChannelClickEvent: NetmeraEvent {
+    final class PackageChannelClick: NetmeraEvent {
         
         private let kPackageChannelClickKey = "tvm"
         
@@ -134,7 +134,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraPhotoPickPhotoSelectionScreenEvent: NetmeraEvent {
+    final class PhotoPickPhotoSelectionScreen: NetmeraEvent {
         
         private let kPhotoPickPhotoSelectionScreenKey = "wtj"
         
@@ -147,7 +147,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraEditEvent: NetmeraEvent {
+    final class Edit: NetmeraEvent {
         
         private let kEditKey = "nsg"
         
@@ -169,7 +169,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraShareEvent: NetmeraEvent {
+    final class Share: NetmeraEvent {
         
         private let kShareKey = "bkv"
         
@@ -194,7 +194,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraCreateStoryEvent: NetmeraEvent {
+    final class CreateStory: NetmeraEvent {
         
         private let kCreateStoryKey = "wed"
         
@@ -216,7 +216,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraFirstAutosyncEvent: NetmeraEvent {
+    final class FirstAutosync: NetmeraEvent {
         
         private let kFirstAutosyncKey = "ekh"
         
@@ -244,7 +244,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraDownloadEvent: NetmeraEvent {
+    final class Download: NetmeraEvent {
         
         private let kDownloadKey = "wgb"
         
@@ -269,7 +269,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraFreeupspaceEvent: NetmeraEvent {
+    final class FreeUpSpace: NetmeraEvent {
         
         private let kFreeupspaceKey: String = "kxj"
         
@@ -289,7 +289,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraPackageClickEvent: NetmeraEvent {
+    final class PackageClick: NetmeraEvent {
         
         private let kPackageClickKey = "hzp"
         
@@ -311,7 +311,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NetmeraDeleteEvent: NetmeraEvent {
+    final class Delete: NetmeraEvent {
         
         private let kDeleteKey = "trb"
         
@@ -580,15 +580,21 @@ extension NetmeraEvents.Actions {
         private let kTrashKey = "wtp"
         
         @objc var status = ""
+        @objc var type = ""
+        @objc var count: Int = 0
         
-        convenience init(status: String) {
+        convenience init(status: String, type: String, count: Int) {
             self.init()
             self.status = status
+            self.type = type
+            self.count = count
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea" : #keyPath(status),
+                "eb" : #keyPath(type),
+                "ec" : #keyPath(count),
             ]
         }
         

@@ -10,7 +10,7 @@ import Netmera
 
 extension NetmeraEvents.Screens {
     
-    final class NetmeraPhotoPickAnalysisDetailScreenEvent: NetmeraEvent {
+    final class PhotoPickAnalysisDetailScreen: NetmeraEvent {
         
         private let kPhotoPickAnalysisDetailScreenKey = "hup"
         
@@ -23,7 +23,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraAutoSyncScreenEvent: NetmeraEvent {
+    final class AutoSyncScreen: NetmeraEvent {
         
         private let kAutoSyncScreenKey = "mwv"
         
@@ -36,7 +36,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraPackagesScreenEvent: NetmeraEvent {
+    final class PackagesScreen: NetmeraEvent {
         
         private let kPackagesScreenKey = "wss"
         
@@ -49,7 +49,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraStoriesScreenEvent: NetmeraEvent {
+    final class StoriesScreen: NetmeraEvent {
         
         private let kStoriesScreenKey = "pvg"
         
@@ -62,7 +62,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraPlacesScreenEvent: NetmeraEvent {
+    final class PlacesScreen: NetmeraEvent {
         
         private let kPlacesScreenKey = "ots"
         
@@ -75,7 +75,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraFirstAutoSyncScreenEvent: NetmeraEvent {
+    final class FirstAutoSyncScreen: NetmeraEvent {
         
         private let kFirstAutoSyncScreenKey = "mpu"
         
@@ -88,7 +88,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraFavoritesScreenEvent: NetmeraEvent {
+    final class FavoritesScreen: NetmeraEvent {
         
         private let kFavoritesScreenKey = "pnx"
         
@@ -101,7 +101,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage4Event: NetmeraEvent {
+    final class WelcomePage4: NetmeraEvent {
         
         private let kWelcomePage4Key = "rbs"
         
@@ -114,7 +114,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage1Event: NetmeraEvent {
+    final class WelcomePage1: NetmeraEvent {
         
         private let kWelcomePage1Key = "wly"
         
@@ -127,7 +127,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraForgetPasswordScreenEvent: NetmeraEvent {
+    final class ForgetPasswordScreen: NetmeraEvent {
         
         private let kForgetPasswordScreenKey = "sdx"
         
@@ -140,7 +140,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage7Event: NetmeraEvent {
+    final class WelcomePage7: NetmeraEvent {
         
         private let kWelcomePage7Key = "vbt"
         
@@ -153,7 +153,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraEulaScreenEvent: NetmeraEvent {
+    final class EulaScreen: NetmeraEvent {
         
         private let kEulaScreenKey = "keg"
         
@@ -166,7 +166,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraAlbumsScreenEvent: NetmeraEvent {
+    final class AlbumsScreen: NetmeraEvent {
         
         private let kAlbumsScreenKey = "uqm"
         
@@ -179,7 +179,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraFAQScreenEvent: NetmeraEvent {
+    final class FAQScreen: NetmeraEvent {
         
         private let kFAQScreenKey = "nsv"
         
@@ -192,7 +192,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraDeleteDuplicateScreenEvent: NetmeraEvent {
+    final class DeleteDuplicateScreen: NetmeraEvent {
         
         private let kDeleteDuplicateScreenKey = "lxb"
         
@@ -205,7 +205,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraCreateStoryPreviewScreenEvent: NetmeraEvent {
+    final class CreateStoryPreviewScreen: NetmeraEvent {
         
         private let kCreateStoryPreviewScreenKey = "rcl"
         
@@ -218,7 +218,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraMusicScreenEvent: NetmeraEvent {
+    final class MusicScreen: NetmeraEvent {
         
         private let kMusicScreenKey = "ark"
         
@@ -231,7 +231,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraActivitiyTimelineScreenEvent: NetmeraEvent {
+    final class ActivitiyTimelineScreen: NetmeraEvent {
         
         private let kActivitiyTimelineScreenKey = "ijd"
         
@@ -244,7 +244,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraOTPSignupScreenEvent: NetmeraEvent {
+    final class OTPSignupScreen: NetmeraEvent {
         
         private let kOTPSignupScreenKey = "zkx"
         
@@ -257,7 +257,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraContactUsScreenEvent: NetmeraEvent {
+    final class ContactUsScreen: NetmeraEvent {
         
         private let kContactUsScreenKey = "dpv"
         
@@ -270,7 +270,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraLoginSettingsScreenEvent: NetmeraEvent {
+    final class LoginSettingsScreen: NetmeraEvent {
         
         private let kLoginSettingsScreenKey = "bdr"
         
@@ -296,7 +296,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraFreeUpSpaceScreenEvent: NetmeraEvent {
+    final class FreeUpSpaceScreen: NetmeraEvent {
         
         private let kFreeUpSpaceScreenKey = "fmb"
         
@@ -309,7 +309,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage6Event: NetmeraEvent {
+    final class WelcomePage6: NetmeraEvent {
         
         private let kWelcomePage6Key = "xxz"
         
@@ -322,7 +322,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraSignupScreenEvent: NetmeraEvent {
+    final class SignupScreen: NetmeraEvent {
         
         private let kSignupScreenKey = "xyf"
         
@@ -335,7 +335,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage2Event: NetmeraEvent {
+    final class WelcomePage2: NetmeraEvent {
         
         private let kWelcomePage2Key = "koi"
         
@@ -348,7 +348,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraCreateStoryNameScreenEvent: NetmeraEvent {
+    final class CreateStoryNameScreen: NetmeraEvent {
         
         private let kCreateStoryNameScreenKey = "dqt"
         
@@ -361,7 +361,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraImportPhotosScreenEvent: NetmeraEvent {
+    final class ImportPhotosScreen: NetmeraEvent {
         
         private let kImportPhotosScreenKey = "qsq"
         
@@ -374,7 +374,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraContactsSyncScreenEvent: NetmeraEvent {
+    final class ContactsSyncScreen: NetmeraEvent {
         
         private let kContactsSyncScreenKey = "lil"
         
@@ -387,7 +387,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraFaceImageGroupingScreenEvent: NetmeraEvent {
+    final class FaceImageGroupingScreen: NetmeraEvent {
         
         private let kFaceImageGroupingScreenKey = "nmu"
         
@@ -400,7 +400,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraAllFilesScreenEvent: NetmeraEvent {
+    final class AllFilesScreen: NetmeraEvent {
         
         private let kAllFilesScreenKey = "xqq"
         
@@ -413,7 +413,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraConnectedAccountsScreenEvent: NetmeraEvent {
+    final class ConnectedAccountsScreen: NetmeraEvent {
         
         private let kConnectedAccountsScreenKey = "liu"
         
@@ -426,7 +426,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraWelcomePage3Event: NetmeraEvent {
+    final class WelcomePage3: NetmeraEvent {
         
         private let kWelcomePage3Key = "wow"
         
@@ -439,7 +439,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraPhotosScreenEvent: NetmeraEvent {
+    final class PhotosScreen: NetmeraEvent {
         
         private let kPhotosScreenKey = "kxn"
         
@@ -452,7 +452,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraSettingsScreenEvent: NetmeraEvent {
+    final class SettingsScreen: NetmeraEvent {
         
         private let kSettingsScreenKey = "tiu"
         
@@ -465,7 +465,7 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NetmeraPhotoPickHistoryScreenEvent: NetmeraEvent {
+    final class PhotoPickHistoryScreen: NetmeraEvent {
         
         private let kPhotoPickHistoryScreenKey = "dzx"
         
