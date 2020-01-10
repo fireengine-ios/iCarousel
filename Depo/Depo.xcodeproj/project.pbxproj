@@ -2181,6 +2181,10 @@
 		0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */; };
 		030480DD23AA0771006DC316 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
 		030480DE23AA0782006DC316 /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
+		0304CA4823C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */; };
+		0304CA4923C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */; };
+		0304CA4A23C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */; };
+		0304CA4B23C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */; };
 		03056AC123BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
 		03056AC223BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
 		03056AC323BA23C000F6D57A /* NetmeraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03056AC023BA23C000F6D57A /* NetmeraService.swift */; };
@@ -9144,6 +9148,7 @@
 		0303A8DE2397D15900907F42 /* LifeDriveNotificationService copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveNotificationService copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveNotificationService copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303ED8823BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedAlbumDetailPresenter.swift; sourceTree = "<group>"; };
 		030480DC23AA0475006DC316 /* LifeBoxModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 4.xcdatamodel"; sourceTree = "<group>"; };
+		0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraEventValues.swift; sourceTree = "<group>"; };
 		03056AC023BA23C000F6D57A /* NetmeraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraService.swift; sourceTree = "<group>"; };
 		0309C38023992FBA0031DB5B /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		030D294023B648F0006D9A02 /* SubscribedHiddenAlbumDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedHiddenAlbumDetailPresenter.swift; sourceTree = "<group>"; };
@@ -12067,6 +12072,7 @@
 			isa = PBXGroup;
 			children = (
 				03056AC023BA23C000F6D57A /* NetmeraService.swift */,
+				0304CA4723C8968E00CB1A6B /* NetmeraEventValues.swift */,
 				03056ABF23BA238700F6D57A /* EventModels */,
 			);
 			path = Netmera;
@@ -24923,6 +24929,7 @@
 				0303A0332397D0D000907F42 /* ContactBackupOld.swift in Sources */,
 				0303A0342397D0D000907F42 /* Alamofire+Validate.swift in Sources */,
 				0303A0352397D0D000907F42 /* AnimationCard.swift in Sources */,
+				0304CA4A23C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */,
 				0303A0362397D0D000907F42 /* CodeTextField.swift in Sources */,
 				0303A0372397D0D000907F42 /* BorderDotsPageControl.swift in Sources */,
 				0303A0382397D0D000907F42 /* CampaignService.swift in Sources */,
@@ -27647,6 +27654,7 @@
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				CE0808AB234720D900F1944F /* TBMatikCard.swift in Sources */,
 				733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */,
+				0304CA4923C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				8C0E8F891FDEBDFF00789C91 /* ServerError.swift in Sources */,
 				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
@@ -29590,6 +29598,7 @@
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */,
 				B56921FB23ACEDA400E255C4 /* MigrationModel_3_4.xcmappingmodel in Sources */,
+				0304CA4823C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
 				896133A32338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
@@ -30939,6 +30948,7 @@
 				CE784C4E22A685FB00662219 /* AlbumDetailRouterInput.swift in Sources */,
 				CE784C4F22A685FB00662219 /* PeriodicContactSyncViewController.swift in Sources */,
 				CE784C5022A685FB00662219 /* PackagesRouter.swift in Sources */,
+				0304CA4B23C8968E00CB1A6B /* NetmeraEventValues.swift in Sources */,
 				CE784C5122A685FB00662219 /* AlbumDetailRouter.swift in Sources */,
 				CE784C5222A685FB00662219 /* MenloworksTagsService.swift in Sources */,
 				CE784C5322A685FB00662219 /* AlbumDetailInitializer.swift in Sources */,
