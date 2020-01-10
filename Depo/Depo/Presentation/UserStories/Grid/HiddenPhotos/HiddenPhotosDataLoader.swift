@@ -363,9 +363,9 @@ final class HiddenPhotosDataLoader {
     private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
         fileService.unhide(items: items, success: {
             handler(.success(()))
-        }) { error in
+        }, fail: { error in
             handler(.failed(error))
-        }
+        })
     }
     
     private func recoverAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
@@ -394,40 +394,40 @@ final class HiddenPhotosDataLoader {
             group.enter()
             fileService.unhidePeople(items: peopleItems, success: {
                 group.leave()
-            }) { error in
+            }, fail: { error in
                 unhideError = error
                 group.leave()
-            }
+            })
         }
         
         if !placesItems.isEmpty {
             group.enter()
             fileService.unhidePlaces(items: placesItems, success: {
                 group.leave()
-            }) { error in
+            }, fail: { error in
                 unhideError = error
                 group.leave()
-            }
+            })
         }
         
         if !thingsItems.isEmpty {
             group.enter()
             fileService.unhideThings(items: thingsItems, success: {
                 group.leave()
-            }) { error in
+            }, fail: { error in
                 unhideError = error
                 group.leave()
-            }
+            })
         }
         
         if !albumItems.isEmpty {
             group.enter()
             fileService.unhideAlbums(albumItems, success: {
                 group.leave()
-            }) { error in
+            }, fail: { error in
                 unhideError = error
                 group.leave()
-            }
+            })
         }
         
         group.notify(queue: .main) {
