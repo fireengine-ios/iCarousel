@@ -219,6 +219,10 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
         }
     }
     
+    func didMoveToTrashItems(_ items: [Item]) {
+        deleteItems(items: items)
+    }
+    
     func deleteItems(items: [Item]) {
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {

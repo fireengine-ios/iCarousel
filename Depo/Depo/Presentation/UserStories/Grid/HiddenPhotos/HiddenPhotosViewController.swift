@@ -399,19 +399,19 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
         return object === self
     }
     
-    func didUnhide(items: [WrapData]) {
+    func didUnhideItems(_ items: [WrapData]) {
         remove(items: items)
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
         remove(albums: albums)
     }
     
-    func moveToTrash(items: [Item]) {
+    func didMoveToTrashItems(_ items: [Item]) {
         remove(items: items)
     }
     
-    func moveToTrash(albums: [AlbumItem]) {
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         dataSource.removeSlider(items: albums)
     }
     
