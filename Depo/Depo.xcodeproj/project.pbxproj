@@ -5609,6 +5609,10 @@
 		98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
 		9816430B233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */; };
+		981691A823C860C7005A768E /* TrashBinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981691A723C860C7005A768E /* TrashBinRouter.swift */; };
+		981691A923C860C7005A768E /* TrashBinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981691A723C860C7005A768E /* TrashBinRouter.swift */; };
+		981691AA23C860C7005A768E /* TrashBinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981691A723C860C7005A768E /* TrashBinRouter.swift */; };
+		981691AB23C860C7005A768E /* TrashBinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981691A723C860C7005A768E /* TrashBinRouter.swift */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
@@ -5803,14 +5807,14 @@
 		98A86D7D23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D7B23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift */; };
 		98A86D7E23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D7B23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift */; };
 		98A86D7F23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D7B23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift */; };
-		98A86D8223A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */; };
-		98A86D8323A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */; };
-		98A86D8423A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */; };
-		98A86D8523A7C87F00438225 /* HiddenPhotosEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */; };
-		98A86D8723A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
-		98A86D8823A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
-		98A86D8923A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
-		98A86D8A23A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */; };
+		98A86D8223A7C87E00438225 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* EmptyView.xib */; };
+		98A86D8323A7C87E00438225 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* EmptyView.xib */; };
+		98A86D8423A7C87E00438225 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* EmptyView.xib */; };
+		98A86D8523A7C87F00438225 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8123A7C87D00438225 /* EmptyView.xib */; };
+		98A86D8723A7C8BC00438225 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* EmptyView.swift */; };
+		98A86D8823A7C8BC00438225 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* EmptyView.swift */; };
+		98A86D8923A7C8BC00438225 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* EmptyView.swift */; };
+		98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A86D8623A7C8BC00438225 /* EmptyView.swift */; };
 		98A86D8C23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
 		98A86D8D23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
 		98A86D8E23A8BD3600438225 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A86D8B23A8BD3600438225 /* AlbumCell.xib */; };
@@ -10804,6 +10808,7 @@
 		981642F7233CE2D30070F8B9 /* TBMatikPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotosViewController.xib; sourceTree = "<group>"; };
 		981642F8233CE2D30070F8B9 /* TimelineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineButton.swift; sourceTree = "<group>"; };
 		981642F9233CE2D30070F8B9 /* TBMatikPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBMatikPhotoView.xib; sourceTree = "<group>"; };
+		981691A723C860C7005A768E /* TrashBinRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinRouter.swift; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
@@ -10889,8 +10894,8 @@
 		98A86D7123A76D0400438225 /* HiddenPhotosBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosBottomBarManager.swift; sourceTree = "<group>"; };
 		98A86D7623A76F1800438225 /* HiddenPhotosNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosNavbarManager.swift; sourceTree = "<group>"; };
 		98A86D7B23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosThreeDotMenuManager.swift; sourceTree = "<group>"; };
-		98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HiddenPhotosEmptyView.xib; sourceTree = "<group>"; };
-		98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenPhotosEmptyView.swift; sourceTree = "<group>"; };
+		98A86D8123A7C87D00438225 /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		98A86D8623A7C8BC00438225 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		98A86D8B23A8BD3600438225 /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
 		98A86D9023A8BD4F00438225 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		98AA10402358549A00B12485 /* CampaignIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignIntroView.swift; sourceTree = "<group>"; };
@@ -13926,6 +13931,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				981691A523C76FA2005A768E /* EmptyView */,
 				7378051723AB96E7001D57BD /* StickerImageView */,
 				A705E3C123A21638005E8274 /* CarouselPagerHeaderView */,
 				9845489422FBFF4000D7F29C /* SpotifyStatusView */,
@@ -16727,6 +16733,15 @@
 			path = TBMatikPhotosViewController;
 			sourceTree = "<group>";
 		};
+		981691A523C76FA2005A768E /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				98A86D8123A7C87D00438225 /* EmptyView.xib */,
+				98A86D8623A7C8BC00438225 /* EmptyView.swift */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
 		9826DB3D207F60BC00C00238 /* CustomScrollIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -17014,8 +17029,6 @@
 				98A86D5D23A2415D00438225 /* AlbumsSliderCell.xib */,
 				98A86D5523A238E700438225 /* AlbumsSliderCell.swift */,
 				98A86D5923A239B900438225 /* AlbumsSliderDataSource.swift */,
-				98A86D8123A7C87D00438225 /* HiddenPhotosEmptyView.xib */,
-				98A86D8623A7C8BC00438225 /* HiddenPhotosEmptyView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -17068,6 +17081,7 @@
 				98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */,
 				98E4B9FA23C71F6C003A4631 /* TrashBinDataSource.swift */,
 				98E4B9FF23C72181003A4631 /* TrashBinInteractor.swift */,
+				981691A723C860C7005A768E /* TrashBinRouter.swift */,
 				98E4BA0423C722E8003A4631 /* TrashBinBottomBarManager.swift */,
 				98E4BA0923C722FD003A4631 /* TrashBinNavbarManager.swift */,
 				98E4BA0E23C7230D003A4631 /* TrashBinThreeDotMenuManager.swift */,
@@ -21535,7 +21549,7 @@
 				0303A7C62397D0D000907F42 /* beyaz_cerceve@2x.png in Resources */,
 				0303A7C72397D0D000907F42 /* SpotlightViewController.xib in Resources */,
 				0303A7C82397D0D000907F42 /* serbest_cizgi@3x.png in Resources */,
-				98A86D8423A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */,
+				98A86D8423A7C87E00438225 /* EmptyView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -22274,7 +22288,7 @@
 				8C06AFB72008AD71003D8E05 /* frekans_secili@2x.png in Resources */,
 				8C06B1B12008AD72003D8E05 /* CRYRotateImageViewController.nib in Resources */,
 				4A9F8E4F2087546500622A6C /* PeriodicContactSyncViewController.xib in Resources */,
-				98A86D8323A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */,
+				98A86D8323A7C87E00438225 /* EmptyView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -22705,7 +22719,7 @@
 				CE8F44F31F6AC1660062C2E0 /* ActivityTimelineHeader.xib in Resources */,
 				B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
 				7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
-				98A86D8223A7C87E00438225 /* HiddenPhotosEmptyView.xib in Resources */,
+				98A86D8223A7C87E00438225 /* EmptyView.xib in Resources */,
 				8C06B01A2008AD71003D8E05 /* kup_selected@2x.png in Resources */,
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
 				7CEE271D209B537500EF6C79 /* LandingPageViewController.xib in Resources */,
@@ -23715,7 +23729,7 @@
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
 				CE784EBE22A685FB00662219 /* daire_selected.png in Resources */,
 				CE784EBF22A685FB00662219 /* paylas_kaydet@3x.png in Resources */,
-				98A86D8523A7C87F00438225 /* HiddenPhotosEmptyView.xib in Resources */,
+				98A86D8523A7C87F00438225 /* EmptyView.xib in Resources */,
 				CE784EC022A685FB00662219 /* duz_cizgi.png in Resources */,
 				CE784EC122A685FB00662219 /* UsageInfoViewController.xib in Resources */,
 				CE784EC222A685FB00662219 /* filtre@2x.png in Resources */,
@@ -25731,6 +25745,7 @@
 				0303A3352397D0D000907F42 /* AutoUploadIsOffPopUp.swift in Sources */,
 				0303A3362397D0D000907F42 /* CardsManager.swift in Sources */,
 				0303A3372397D0D000907F42 /* BytesType.swift in Sources */,
+				981691AA23C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				0303A3382397D0D000907F42 /* PeriodicContactSyncInteractorInput.swift in Sources */,
 				0303A3392397D0D000907F42 /* PrepareToAutoSync.swift in Sources */,
 				0303A33A2397D0D000907F42 /* FaceImagePhotosViewOutput.swift in Sources */,
@@ -25786,7 +25801,7 @@
 				0303A3692397D0D000907F42 /* LeavePremiumRouter.swift in Sources */,
 				0303A36A2397D0D000907F42 /* CircleButton.swift in Sources */,
 				0303A36B2397D0D000907F42 /* DateExtension.swift in Sources */,
-				98A86D8923A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */,
+				98A86D8923A7C8BC00438225 /* EmptyView.swift in Sources */,
 				0303A36C2397D0D000907F42 /* BaseFilesGreedRouter.swift in Sources */,
 				0303A36D2397D0D000907F42 /* BaseFilesGreedConfigurator.swift in Sources */,
 				0303A36E2397D0D000907F42 /* ActionsMenuTableViewCell.swift in Sources */,
@@ -26823,6 +26838,7 @@
 				8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */,
 				8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */,
 				7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
+				981691A923C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
@@ -27090,7 +27106,7 @@
 				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
-				98A86D8823A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */,
+				98A86D8823A7C8BC00438225 /* EmptyView.swift in Sources */,
 				B51205CA2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				8C0E8E0B1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				989BDE5922F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
@@ -29147,7 +29163,7 @@
 				98164306233CE2D40070F8B9 /* TimelineButton.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				73EA16FC22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
-				98A86D8723A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */,
+				98A86D8723A7C8BC00438225 /* EmptyView.swift in Sources */,
 				4B34A3F92334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,
 				737A2EA92338AF410014258A /* SecretAnswerView.swift in Sources */,
@@ -29562,6 +29578,7 @@
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,
 				78D9BA482007E82800F2233F /* DuplicatedContactsViewInput.swift in Sources */,
 				A0903BC815026822773731DE /* FeedbackViewInteractorOutput.swift in Sources */,
+				981691A823C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				A8F0A4767B5D5821DD4D8083 /* FeedbackViewInteractor.swift in Sources */,
 				1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */,
 				2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */,
@@ -30295,6 +30312,7 @@
 				CE7849F822A685FB00662219 /* LeavePremiumView.swift in Sources */,
 				B5C952702316975C00C06263 /* CoreDataStack.swift in Sources */,
 				CE7849F922A685FB00662219 /* IntroduceInteractorInput.swift in Sources */,
+				981691AB23C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				CE7849FA22A685FB00662219 /* AlbumServiceResponse.swift in Sources */,
 				CE7849FB22A685FB00662219 /* IntroduceInteractorOutput.swift in Sources */,
 				CE7849FC22A685FB00662219 /* IntroduceInteractor.swift in Sources */,
@@ -30587,7 +30605,7 @@
 				CE784AFF22A685FB00662219 /* CardsManagerViewProtocol.swift in Sources */,
 				CE784B0022A685FB00662219 /* BaseFilesGreedRouterInput.swift in Sources */,
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
-				98A86D8A23A7C8BC00438225 /* HiddenPhotosEmptyView.swift in Sources */,
+				98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				CE784B0322A685FB00662219 /* DateExtension.swift in Sources */,
 				CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */,

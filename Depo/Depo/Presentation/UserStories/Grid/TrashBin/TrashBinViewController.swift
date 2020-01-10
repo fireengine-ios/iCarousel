@@ -8,31 +8,31 @@
 
 import UIKit
 
-final class TrashBinViewController: BaseViewController, NibInit {
+final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildController {
 
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private let emptyView = HiddenPhotosEmptyView.initFromNib()
+    private let emptyView = EmptyView.view(with: .trashBin)
     
     private lazy var dataSource = TrashBinDataSource(collectionView: collectionView, delegate: self)
     private lazy var sortingManager = TrashBinSortingManager(delegate: self)
     private lazy var interactor = TrashBinInteractor(delegate: self)
+    private lazy var router = TrashBinRouter()
     private lazy var bottomBarManager = TrashBinBottomBarManager(delegate: self)
     private lazy var navbarManager = TrashBinNavbarManager(delegate: self)
     private lazy var threeDotsManager = TrashBinThreeDotMenuManager(delegate: self)
     
-    private lazy var router = RouterVC()
-    
     //MARK: - View lifecycle
     
     deinit {
-//        ItemOperationManager.default.stopUpdateView(view: self)
+        ItemOperationManager.default.stopUpdateView(view: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        ItemOperationManager.default.startUpdateView(view: self)
+        needToShowTabBar = true
+        ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
         setupRefreshControl()
         setupEmptyView()
@@ -45,7 +45,8 @@ final class TrashBinViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        homePageNavigationBarStyle()
+        navbarManager.setupNavBarButtons(animated: false)
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
@@ -70,7 +71,7 @@ final class TrashBinViewController: BaseViewController, NibInit {
     
     private func reloadData() {
         showSpinner()
-//        dataSource.reset()
+        dataSource.reset()
         interactor.reloadData { [weak self] in
             guard let self = self else {
                 return
@@ -83,19 +84,19 @@ final class TrashBinViewController: BaseViewController, NibInit {
     
     private func reloadItems() {
         showSpinner()
-//        dataSource.photosReset()
+        dataSource.itemsReset()
         interactor.reloadItems { [weak self] in
             self?.hideSpinner()
         }
     }
     
     private func reloadAlbums() {
-//        dataSource.albumSliderReset()
+        dataSource.albumSliderReset()
         interactor.reloadAlbums()
     }
     
     private func checkEmptyView() {
-        emptyView.isHidden = !dataSource.photosIsEmpty
+        emptyView.isHidden = !dataSource.itemsIsEmpty
     }
 
 }
@@ -110,7 +111,7 @@ extension TrashBinViewController {
     
     private func stopSelectionState() {
         navigationItem.hidesBackButton = false
-//        dataSource.cancelSelection()
+        dataSource.cancelSelection()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
@@ -146,11 +147,12 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
     }
     
     func didSelect(item: Item) {
-//        showDetails(item: item)
+        let sameTypeItems = dataSource.getSameTypeItems(for: item)
+        router.openSelected(item: item, sameTypeItems: sameTypeItems)
     }
     
     func didSelect(album: BaseDataSourceItem) {
-//        showAlbumDetails(item: item)
+        showAlbumDetails(item: album)
     }
     
     func onStartSelection() {
@@ -177,7 +179,7 @@ extension TrashBinViewController: TrashBinSortingManagerDelegate {
     }
 }
 
-//MARK: - HiddenPhotosDataLoaderDelegate
+//MARK: - TrashBinDataLoaderDelegate
 
 extension TrashBinViewController: TrashBinInteractorDelegate {    
     func didLoad(items: [Item]) {
@@ -205,7 +207,7 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
     }
 }
 
-//MARK: - HiddenPhotosBottomBarManagerDelegate
+//MARK: - TrashBinBottomBarManagerDelegate
 
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
@@ -229,7 +231,7 @@ extension TrashBinViewController: TrashBinNavbarManagerDelegate {
     }
     
     func onSearch() {
-//        openSearch()
+        router.openSearch(controller: self)
     }
 }
 
@@ -238,7 +240,7 @@ extension TrashBinViewController: TrashBinNavbarManagerDelegate {
 extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     
     func onThreeDotsManagerSelect() {
-//        dataSource.startSelection()
+        dataSource.startSelection()
     }
     
     func onThreeDotsManagerRestore() {
@@ -247,5 +249,92 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     
     func onThreeDotsManagerDelete() {
 //        showDeletePopup()
+    }
+}
+
+//MARK: - Routing
+
+extension TrashBinViewController {
+    private func showAlbumDetails(item: BaseDataSourceItem) {
+        if let album = item as? AlbumItem {
+            router.openAlbum(item: album)
+        } else if let firItem = item as? Item, firItem.fileType.isFaceImageType {
+            openFIRAlbum(item: firItem)
+        }
+    }
+    
+    private func openFIRAlbum(item: Item) {
+        showSpinner()
+        
+        interactor.getAlbumDetails(item: item) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
+            
+            switch result {
+            case .success(let album):
+                self.router.openFIRAlbum(album: album, item: item, moduleOutput: self)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+}
+
+//MARK: - ItemOperationManagerViewProtocol
+
+extension TrashBinViewController: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return object === self
+    }
+    
+    func didUnhide(items: [WrapData]) {
+        remove(items: items)
+    }
+    
+    func didUnhide(albums: [AlbumItem]) {
+        remove(albums: albums)
+    }
+    
+    func moveToTrash(items: [Item]) {
+        remove(items: items)
+    }
+    
+    func moveToTrash(albums: [AlbumItem]) {
+        dataSource.removeSlider(items: albums)
+    }
+    
+    private func remove(items: [Item]) {
+        let firItems = items.filter { $0.fileType.isFaceImageType }
+        if firItems.isEmpty {
+            reloadAlbums()
+            dataSource.remove(items: items) { [weak self] in
+                self?.checkEmptyView()
+            }
+        } else {
+            // unhide|delete FIR albums
+            remove(albums: firItems)
+        }
+    }
+    
+    private func remove(albums: [BaseDataSourceItem]) {
+        dataSource.removeSlider(items: albums) { [weak self] in
+            self?.reloadItems()
+        }
+    }
+}
+
+//MARK: - FaceImageItemsModuleOutput
+
+extension TrashBinViewController: FaceImageItemsModuleOutput {
+    
+    func didChangeName(item: WrapData) {}
+    func didReloadData() {}
+    
+    func delete(item: Item) {
+        remove(items: [item])
     }
 }

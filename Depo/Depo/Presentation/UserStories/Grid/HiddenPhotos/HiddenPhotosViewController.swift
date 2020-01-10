@@ -12,7 +12,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private let emptyView = HiddenPhotosEmptyView.initFromNib()
+    private let emptyView = EmptyView.view(with: .hiddenBin)
     
     private lazy var dataSource = HiddenPhotosDataSource(collectionView: collectionView, delegate: self)
     private lazy var sortingManager = HiddenPhotosSortingManager(delegate: self)
@@ -263,7 +263,7 @@ extension HiddenPhotosViewController {
     private func showAlbumDetails(item: BaseDataSourceItem) {
         if let album = item as? AlbumItem {
             openAlbum(item: album)
-        } else if let firItem = item as? Item, firItem.fileType.isContained(in: [.faceImage(.people), .faceImage(.places), .faceImage(.things)]) {
+        } else if let firItem = item as? Item, firItem.fileType.isFaceImageType {
             openFIRAlbum(item: firItem)
         }
     }

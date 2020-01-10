@@ -31,7 +31,7 @@ final class HiddenAlbumDetailRouter: AlbumDetailRouter {
         
         switch selectedItem.fileType {
             case .folder:
-                let controller = router.filesFromFolder(folder: wrappered, type: type, sortType: sortType, moduleOutput: moduleOutput)
+                let controller = router.filesFromFolder(folder: wrappered, type: type, sortType: sortType, status: .hidden, moduleOutput: moduleOutput)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             case .audio:
                 player.play(list: [wrappered], startAt: 0)

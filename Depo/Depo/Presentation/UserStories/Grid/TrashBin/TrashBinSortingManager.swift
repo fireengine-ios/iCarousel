@@ -18,7 +18,7 @@ final class TrashBinSortingManager {
     private lazy var topBar = GridListTopBar.initFromXib()
         
     private lazy var gridListTopBarConfig = GridListTopBarConfig(
-        defaultGridListViewtype: .Grid,
+        defaultGridListViewtype: .List,
         availableSortTypes: sortTypes,
         defaultSortType: .TimeNewOld,
         availableFilter: false,

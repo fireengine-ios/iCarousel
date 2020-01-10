@@ -10,6 +10,7 @@ import Foundation
 
 protocol SegmentedChildController: class {
     func setTitle(_ title: String)
+    func setTitle(withString title: String, andSubTitle subTitle: String?)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
 }
@@ -23,6 +24,10 @@ extension SegmentedChildController where Self: UIViewController {
         parentVC?.navigationItem.title = title
     }
 
+    func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
+        parentVC?.setTitle(withString: title, andSubTitle: subTitle)
+    }
+    
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         parentVC?.navigationItem.leftBarButtonItems = nil
         parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)

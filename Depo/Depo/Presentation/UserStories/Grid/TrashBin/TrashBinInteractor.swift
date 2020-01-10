@@ -86,7 +86,7 @@ final class TrashBinInteractor {
             return
         }
         
-        itemsTask = hiddenService.hiddenList(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: itemsPage, size: itemsPageSize) { [weak self] result in
+        itemsTask = hiddenService.trashedList(sortBy: sortedRule.sortingRules, sortOrder: sortedRule.sortOder, page: itemsPage, size: itemsPageSize, folderOnly: false, handler: {  [weak self] result in
             guard let self = self else {
                 return
             }
@@ -106,7 +106,7 @@ final class TrashBinInteractor {
             }
             
             completion?()
-        }
+        })
     }
 
     func loadNextAlbumsPage() {
@@ -178,7 +178,7 @@ final class TrashBinInteractor {
     }
     
     private func loadPeopleAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenPeoplePage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
+        albumsTask = hiddenService.trashedPeoplePage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { PeopleItem(response: $0) }
@@ -190,7 +190,7 @@ final class TrashBinInteractor {
     }
     
     private func loadThingsAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenThingsPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
+        albumsTask = hiddenService.trashedThingsPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { ThingsItem(response: $0) }
@@ -202,7 +202,7 @@ final class TrashBinInteractor {
     }
     
     private func loadPlacesAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenPlacesPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
+        albumsTask = hiddenService.trashedPlacesPage(page: currentAlbumsPage, size: albumPageSize, handler: { result in
             switch result {
             case .success(let response):
                 let array = response.list.map { PlacesItem(response: $0) }
@@ -214,7 +214,7 @@ final class TrashBinInteractor {
     }
     
     private func loadCustomAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
-        albumsTask = hiddenService.hiddenAlbums(sortBy: .date,//sortedRule.sortingRules,
+        albumsTask = hiddenService.trashedAlbums(sortBy: .date,//sortedRule.sortingRules,
                                                 sortOrder: .desc,//sortedRule.sortOder,
                                                 page: currentAlbumsPage,
                                                 size: albumPageSize,
@@ -237,11 +237,11 @@ final class TrashBinInteractor {
         }
         
         if item is PeopleItem {
-            hiddenService.hiddenPeopleAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.trashedPeopleAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is PlacesItem {
-            hiddenService.hiddenPlacesAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.trashedPlacesAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         } else if item is ThingsItem {
-            hiddenService.hiddenThingsAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
+            hiddenService.trashedThingsAlbumDetail(id: Int(truncatingIfNeeded: id), handler: handler)
         }
     }
     

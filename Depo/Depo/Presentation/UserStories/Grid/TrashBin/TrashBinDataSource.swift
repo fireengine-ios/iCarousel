@@ -23,8 +23,9 @@ final class TrashBinDataSource: NSObject {
     private typealias ChangesItemResult = (indexPaths: [IndexPath], sections: IndexSet)
     typealias SelectedItems = (items: [Item], albums: [BaseDataSourceItem])
     
-    private let padding: CGFloat = 1
-    private let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
+    private let linePadding = Device.isIpad ? NumericConstants.iPadGreedHorizontalSpace : NumericConstants.iPhoneGreedHorizontalSpace
+    private let columnPadding = Device.isIpad ? NumericConstants.iPadGreedInset : NumericConstants.iPhoneGreedInset
+    private let columns = Device.isIpad ? NumericConstants.numerCellInDocumentLineOnIpad : NumericConstants.numerCellInDocumentLineOnIphone
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
@@ -40,7 +41,7 @@ final class TrashBinDataSource: NSObject {
     }
     
     var sortedRule: SortedRules = .timeUp
-    var viewType: MoreActionsConfig.ViewType = .Grid {
+    var viewType: MoreActionsConfig.ViewType = .List {
         didSet {
             collectionView.reloadData()
         }
@@ -53,10 +54,10 @@ final class TrashBinDataSource: NSObject {
     
     var isEmpty: Bool {
         let albumsEmpty = albumSlider?.isEmpty ?? true
-        return photosIsEmpty && albumsEmpty
+        return itemsIsEmpty && albumsEmpty
     }
     
-    var photosIsEmpty: Bool {
+    var itemsIsEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
@@ -66,7 +67,7 @@ final class TrashBinDataSource: NSObject {
     
     private lazy var cellGridSize: CGSize = {
         let viewWidth = UIScreen.main.bounds.width
-        let paddingWidth = (columns - 1) * padding
+        let paddingWidth = columnPadding * 2 - (columns - 1) * columnPadding
         let itemWidth = floor((viewWidth - paddingWidth) / columns)
         return CGSize(width: itemWidth, height: itemWidth)
     }()
@@ -100,23 +101,17 @@ final class TrashBinDataSource: NSObject {
         collectionView.alwaysBounceVertical = true
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.minimumInteritemSpacing = padding
-            layout.minimumLineSpacing = padding
+            layout.minimumInteritemSpacing = columnPadding
+            layout.minimumLineSpacing = linePadding
         }
     }
     
     private func registerCells() {
         let registreList = [AlbumsSliderCell.self,
                             CollectionViewCellForPhoto.self,
-                            CollectionViewCellForStoryPhoto.self,
                             CollectionViewCellForVideo.self,
                             CollectionViewCellForAudio.self,
-                            AudioSelectionCollectionViewCell.self,
-                            BasicCollectionMultiFileCell.self,
-                            PhotosOrderCollectionViewCell.self,
-                            FolderSelectionCollectionViewCell.self,
-                            AlbumCollectionViewCell.self,
-                            LocalAlbumCollectionViewCell.self]
+                            BasicCollectionMultiFileCell.self]
         
         registreList.forEach { collectionView.register(nibCell: $0) }
     }
@@ -144,7 +139,7 @@ extension TrashBinDataSource {
                 return
             }
             
-            let isEmpty = self.photosIsEmpty
+            let isEmpty = self.itemsIsEmpty
             let insertResult = self.insert(newItems: items)
             guard !insertResult.indexPaths.isEmpty else {
                 DispatchQueue.main.async {
@@ -186,7 +181,7 @@ extension TrashBinDataSource {
             }
 
             DispatchQueue.main.async {
-                if self.photosIsEmpty {
+                if self.itemsIsEmpty {
                     self.collectionView.reloadData()
                     completion()
                 } else {
@@ -208,12 +203,12 @@ extension TrashBinDataSource {
     }
     
     func reset() {
-        photosReset()
+        itemsReset()
         albumSliderReset()
         collectionView.reloadSections(IndexSet(integer: 0))
     }
     
-    func photosReset() {
+    func itemsReset() {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
@@ -246,6 +241,16 @@ extension TrashBinDataSource {
         selectedItems.removeAll()
         albumSlider?.stopSelection()
         updateVisibleCells()
+    }
+    
+    func getSameTypeItems(for item: Item) -> [Item] {
+        let items = allItems.flatMap { $0 }
+        if item.fileType.isDocument {
+            return items.filter { $0.fileType.isDocument }
+        } else if item.fileType == .video || item.fileType == .image {
+            return items.filter { $0.fileType == .video || $0.fileType == .image }
+        }
+        return items.filter { $0.fileType == item.fileType }
     }
     
     private func updateVisibleCells() {
@@ -456,10 +461,6 @@ extension TrashBinDataSource: UICollectionViewDataSource {
              return collectionView.dequeue(cell: CollectionViewCellForVideo.self, for: indexPath)
         case .audio:
             return collectionView.dequeue(cell: CollectionViewCellForAudio.self, for: indexPath)
-        case .folder:
-            return collectionView.dequeue(cell: FolderSelectionCollectionViewCell.self, for: indexPath)
-        case .photoAlbum:
-            return collectionView.dequeue(cell: AlbumCollectionViewCell.self, for: indexPath)
         default:
              return collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
         }
@@ -483,7 +484,7 @@ extension TrashBinDataSource: UICollectionViewDataSource {
             }
             
             cell.delegate = self
-            cell.setup(title: TextConstants.hiddenBinAlbumSliderTitle, emptyText: TextConstants.hiddenBinAlbumSliderEmpty)
+            cell.setup(title: TextConstants.trashBinAlbumSliderTitle, emptyText: TextConstants.trashBinAlbumSliderEmpty)
             return
         }
         
@@ -493,8 +494,8 @@ extension TrashBinDataSource: UICollectionViewDataSource {
             return
         }
         
-        cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
         cell.configureWithWrapper(wrappedObj: item)
+        cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
         cell.setDelegateObject(delegateObject: self)
         (cell as? CollectionViewCellForPhoto)?.filesDataSource = filesDataSource
         (cell as? CollectionViewCellForPhoto)?.loadImage(item: item, indexPath: indexPath)
