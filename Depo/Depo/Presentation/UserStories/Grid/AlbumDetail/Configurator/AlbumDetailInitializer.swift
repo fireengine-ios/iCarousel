@@ -85,7 +85,7 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let allowedHideFunctions: [ElementTypes] = [.unhide, .delete]
+        let allowedHideFunctions: [ElementTypes] = [.unhideAlbumItems, .delete]
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: allowedHideFunctions, style: .default, tintColor: nil)
         
@@ -111,12 +111,14 @@ class AlbumDetailModuleInitializer: NSObject {
         )
         
         presenter.alertSheetExcludeTypes = [.addToFavorites]
-
+        
+        let alertFilesActionsTypes: [ElementTypes] = [.unhide, .delete]
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
-                               bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
+                               bottomBarConfig: bottomBarConfig, router: HiddenAlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: allowedHideFunctions,
-                                                                                     selectionModeTypes: allowedHideFunctions),
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
+                                                                                     selectionModeTypes: alertFilesActionsTypes),
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = album.name ?? ""

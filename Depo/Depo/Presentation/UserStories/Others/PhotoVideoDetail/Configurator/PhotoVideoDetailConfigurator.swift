@@ -63,6 +63,28 @@ class PhotoVideoDetailModuleConfigurator {
         }
     }
     
+    func configureModuleFromHiddenFaceImageAlbumForViewInput<UIViewController>(viewInput: UIViewController,
+                                                                photoVideoBottomBarConfig: EditingBarConfig,
+                                                                documentsBottomBarConfig: EditingBarConfig,
+                                                                selecetedItem: Item,
+                                                                allItems: [Item],
+                                                                albumUUID: String,
+                                                                albumItem: Item? = nil,
+                                                                hideActions: Bool = false) {
+        if let viewController = viewInput as? PhotoVideoDetailViewController {
+            viewController.hideTreeDotButton = true
+            
+            let interactor = PhotoVideoAlbumDetailInteractor()
+            interactor.albumUUID = albumUUID
+            configure(viewController: viewController,
+                      photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                      documentsBottomBarConfig: documentsBottomBarConfig,
+                      interactor: interactor,
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.hiddenDetailActions,
+                      selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem, hideActions: hideActions)
+        }
+    }
+    
     func configureModuleFromHiddenAlbumForViewInput<UIViewController>(viewInput: UIViewController,
                                                                       photoVideoBottomBarConfig: EditingBarConfig,
                                                                       documentsBottomBarConfig: EditingBarConfig,

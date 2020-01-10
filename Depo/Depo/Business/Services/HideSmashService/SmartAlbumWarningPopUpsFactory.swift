@@ -10,7 +10,7 @@ import Foundation
 
 final class SmartAlbumWarningPopUpsFactory {
 
-    func getPopUp(permissions: PermissionsResponse?, faceImageGrouping: SettingsInfoPermissionsResponse?, delegate: HideFuncRoutingProtocol) ->  UIViewController? {
+    func getPopUp(permissions: PermissionsResponse?, faceImageGrouping: SettingsInfoPermissionsResponse?, delegate: HideFuncRoutingProtocol) ->  BasePopUpController? {
         guard let permissions = permissions, let faceImageGrouping = faceImageGrouping else {
             assertionFailure("Logic issue, please check permissions and faceImageGrouping responses")
             return nil
@@ -19,7 +19,7 @@ final class SmartAlbumWarningPopUpsFactory {
         return makePopUp(permissions: permissions, faceImageGrouping: faceImageGrouping, delegate: delegate)
     }
 
-    private func makePopUp(permissions: PermissionsResponse, faceImageGrouping: SettingsInfoPermissionsResponse, delegate: HideFuncRoutingProtocol) -> UIViewController? {
+    private func makePopUp(permissions: PermissionsResponse, faceImageGrouping: SettingsInfoPermissionsResponse, delegate: HideFuncRoutingProtocol) -> BasePopUpController? {
 
         let mode: HSSmartAlbumWarningPopUp.Mode
 

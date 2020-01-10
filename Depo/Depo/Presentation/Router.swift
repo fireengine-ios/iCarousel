@@ -534,13 +534,19 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var trashBin: UIViewController? {
+        let controller = trashBinController()
+        controller.segmentImage = .trashBin
+        return controller
+    }
+    
     var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites]
-        return SegmentedController.initWithControllers(controllers)
+        let controllers = [allFiles, documents, musics, favorites, trashBin]
+        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
     
@@ -723,6 +729,16 @@ class RouterVC: NSObject {
         return c
     }
     
+    func filesDetailHiddenFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID,
+                                                                                         albumItem: albumItem)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return controller
+    }
+    
     // MARK: Hidden View Controllers
     
     func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
@@ -814,10 +830,11 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
+                                                                         status: status,
                                                                          moduleOutput: moduleOutput,
                                                                          isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController
@@ -1123,5 +1140,9 @@ class RouterVC: NSObject {
 
     func hiddenPhotosViewController() -> UIViewController {
         return HiddenPhotosViewController.initFromNib()
+    }
+    
+    func trashBinController() -> TrashBinViewController {
+        return TrashBinViewController.initFromNib()
     }
 }

@@ -23,7 +23,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var hiddenService = HiddenService()
 
-    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideFunctionalityService()
+    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -295,6 +295,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             hideAlbums(items: albumItems)
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
+                                                        output: self.output,
                                                         success: self.succesAction(elementType: .hide),
                                                         fail: self.failAction(elementType: .hide))
         } else {
@@ -315,6 +316,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         hideFunctionalityService.startHideSimpleOperation(for: remoteItems,
+                                                          output: self.output,
                                                           success: self.succesAction(elementType: .hide),
                                                           fail: self.failAction(elementType: .hide))
     }
@@ -331,7 +333,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                return
            }
            
-        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems, success: self.succesAction(elementType: .hideAlbums), fail: self.failAction(elementType: .hideAlbums))
+        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
+                                                          output: self.output,
+                                                          success: self.succesAction(elementType: .hideAlbums),
+                                                          fail: self.failAction(elementType: .hideAlbums))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -357,7 +362,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
-    private func unhideItems(_ items: [BaseDataSourceItem]) {
+    private func unhideItems(_ items: [BaseDataSourceItem], isAlbumItems: Bool = false) {
         output?.startAsyncOperationDisableScreen()
         
         var peopleItems = [PeopleItem]()
@@ -428,10 +433,37 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             } else {
                 DispatchQueue.main.async {
                     self?.output?.completeAsyncOperationEnableScreen()
-                    self?.succesAction(elementType: .unhide)()
+                    
+                    isAlbumItems ? self?.succesAction(elementType: .unhideAlbumItems)()
+                        : self?.succesAction(elementType: .unhide)()
+                    
                 }
             }
         }
+    }
+    
+    func unhideAlbumItems(items: [BaseDataSourceItem]) {
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to hide them")
+            return
+        }
+        
+        let okHandler: PopUpButtonHandler = { vc in
+            vc.close { [weak self] in
+                self?.unhideItems(items, isAlbumItems: true)
+            }
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
+                                         message: TextConstants.unhidePopupText,
+                                         image: .unhide,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+        
     }
     
     private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
@@ -452,24 +484,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     //FIP - Faces-Items-Places
     private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        let responseHandler: ResponseVoid = { response in
-            switch response {
-            case .success(_):
-                success()
-                
-            case .failed(let error):
-                fail(error)
-            }
-        }
-        
         if let items = items as? [PeopleItem] {
-            hiddenService.recoveryPeople(items: items, handler: responseHandler)
+            fileService.unhidePeople(items: items, success: success, fail: fail)
 
         } else if let items = items as? [ThingsItem] {
-            hiddenService.recoveryThings(items: items, handler: responseHandler)
+            fileService.unhideThings(items: items, success: success, fail: fail)
 
         } else if let items = items as? [PlacesItem] {
-            hiddenService.recoveryPlaces(items: items, handler: responseHandler)
+            fileService.unhidePlaces(items: items, success: success, fail: fail)
 
         }
     }
@@ -895,7 +917,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
+                
+                if elementType == .unhideAlbumItems {
+                    self?.router.defaultTopController?.dismiss(animated: true, completion: {
+                        self?.router.popViewController()
+                        self?.showSuccessPopup(for: elementType)
+                    })
+                } else {
+                    self?.showSuccessPopup(for: elementType)
+                }
+                
+                
             }
         }
         return success
@@ -910,6 +942,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             text = TextConstants.popUpDeleteComplete
             MenloworksAppEvents.onFileDeleted()
         case .unhide:
+            text = TextConstants.unhidePopupSuccessText
+        case .unhideAlbumItems:
             text = TextConstants.unhidePopupSuccessText
         default:
             return
@@ -994,7 +1028,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func downloadFaceImageAlbum(item: Item) {
         if item.fileType == .faceImage(.people),
             let id = item.id {
-            peopleService.getPeopleAlbum(id: Int(id), isHidden: false, success: { [weak self] album in
+            peopleService.getPeopleAlbum(id: Int(id), status: .active, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
                     self?.fileService.download(itemsByAlbums: itemsByAlbums,
@@ -1006,7 +1040,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             })
         } else if item.fileType == .faceImageAlbum(.things),
             let id = item.id {
-            thingsService.getThingsAlbum(id: Int(id), isHidden: false, success: { [weak self] album in
+            thingsService.getThingsAlbum(id: Int(id), status: .active, success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
@@ -1019,7 +1053,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             })
         } else if item.fileType == .faceImage(.places),
             let id = item.id {
-            placesService.getPlacesAlbum(id: Int(id), isHidden: false, success: { [ weak self] album in
+            placesService.getPlacesAlbum(id: Int(id), status: .active, success: { [ weak self] album in
                 let albumItem = AlbumItem(remote: album)
                 
                 self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in

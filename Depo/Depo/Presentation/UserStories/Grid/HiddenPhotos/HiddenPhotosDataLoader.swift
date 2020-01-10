@@ -44,6 +44,9 @@ final class HiddenPhotosDataLoader {
     private var photoTask: URLSessionTask?
     private var albumsTask: URLSessionTask?
     
+    private var photosIsFinishLoad = false
+    private var albumsIsFinishLoad = false
+    
     //MARK: - Init
     
     required init(delegate: HiddenPhotosDataLoaderDelegate?) {
@@ -57,20 +60,29 @@ final class HiddenPhotosDataLoader {
     //MARK: - Public methods
     
     func reloadData(completion: @escaping VoidHandler) {
+        reloadPhotos(completion: completion)
+        reloadAlbums()
+    }
+    
+    func reloadPhotos(completion: @escaping VoidHandler) {
         photoPage = 0
         photoTask?.cancel()
         photoTask = nil
+        photosIsFinishLoad = false
         loadNextPhotoPage(completion: completion)
-        
+    }
+    
+    func reloadAlbums() {
         currentLoadingAlbumType = .people
         currentAlbumsPage = 0
         albumsTask?.cancel()
         albumsTask = nil
+        albumsIsFinishLoad = false
         loadNextAlbumsPage()
     }
 
     func loadNextPhotoPage(completion: VoidHandler? = nil) {
-        guard photoTask == nil else {
+        guard photoTask == nil, !photosIsFinishLoad else {
             return
         }
         
@@ -85,6 +97,10 @@ final class HiddenPhotosDataLoader {
             case .success(let response):
                 self.photoPage += 1
                 self.delegate?.didLoadPhoto(items: response.fileList)
+                
+                if response.fileList.isEmpty {
+                    self.photosIsFinishLoad = true
+                }
             case .failed(let error):
                 self.delegate?.failedLoadPhotoPage(error: error)
             }
@@ -94,7 +110,7 @@ final class HiddenPhotosDataLoader {
     }
     
     func loadNextAlbumsPage() {
-        guard albumsTask == nil else {
+        guard albumsTask == nil, !albumsIsFinishLoad else {
             return
         }
         
@@ -107,10 +123,9 @@ final class HiddenPhotosDataLoader {
             
             switch result {
             case .success(let array):
-                self.delegate?.didLoadAlbum(items: array)
-                                
                 if array.isEmpty, self.currentLoadingAlbumType == .albums {
                     //finish loading albums
+                    self.albumsIsFinishLoad = true
                     self.delegate?.didFinishLoadAlbums()
                     return
                 }
@@ -122,10 +137,8 @@ final class HiddenPhotosDataLoader {
                     self.currentAlbumsPage += 1
                 }
                 
-                if array.count < self.albumsCountBeforeNextPage {
-                    //autoload next page
-                    self.loadNextAlbumsPage()
-                }
+                self.delegate?.didLoadAlbum(items: array)
+                
             case .failed(let error):
                 self.delegate?.failedLoadAlbumPage(error: error)
             }
@@ -150,6 +163,14 @@ final class HiddenPhotosDataLoader {
     }
     
     func unhide(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        recover(selectedItems: selectedItems, handler: handler)
+    }
+    
+    func putBack(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        recover(selectedItems: selectedItems, handler: handler)
+    }
+    
+    private func recover(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
         let group = DispatchGroup()
         
         var unhideError: Error? = nil
@@ -165,7 +186,7 @@ final class HiddenPhotosDataLoader {
         
         if !selectedItems.albums.isEmpty {
             group.enter()
-            unhideAlbums(items: selectedItems.albums) { result in
+            recoverAlbums(items: selectedItems.albums) { result in
                 if case let .failed(error) = result {
                     unhideError = error
                 }
@@ -342,12 +363,12 @@ final class HiddenPhotosDataLoader {
     private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
         fileService.unhide(items: items, success: {
             handler(.success(()))
-        }) { error in
+        }, fail: { error in
             handler(.failed(error))
-        }
+        })
     }
     
-    private func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
+    private func recoverAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()
         var thingsItems = [ThingsItem]()
@@ -371,42 +392,42 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
-            hiddenService.recoveryPeople(items: peopleItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhidePeople(items: peopleItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                unhideError = error
+                group.leave()
+            })
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            hiddenService.recoveryPlaces(items: placesItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhidePlaces(items: placesItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                unhideError = error
+                group.leave()
+            })
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            hiddenService.recoveryThings(items: thingsItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhideThings(items: thingsItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                unhideError = error
+                group.leave()
+            })
         }
         
         if !albumItems.isEmpty {
             group.enter()
-            hiddenService.recoverAlbums(albumItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhideAlbums(albumItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                unhideError = error
+                group.leave()
+            })
         }
         
         group.notify(queue: .main) {
@@ -452,38 +473,38 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashPeople(items: peopleItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashPeople(items: peopleItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashPlaces(items: placesItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashPlaces(items: placesItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashThings(items: thingsItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashThings(items: thingsItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !albumItems.isEmpty {
             group.enter()
             albumService.moveToTrash(albums: albumItems, success: { trashedAlbums in
-                ItemOperationManager.default.moveToTrash(albums: trashedAlbums)
+                ItemOperationManager.default.didMoveToTrashAlbums(albumItems)
                 group.leave()
             }, fail: { errorResponse in
                 trashError = errorResponse

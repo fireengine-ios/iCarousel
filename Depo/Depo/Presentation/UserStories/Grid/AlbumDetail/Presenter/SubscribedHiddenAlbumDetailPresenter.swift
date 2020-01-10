@@ -40,16 +40,16 @@ extension SubscribedHiddenAlbumDetailPresenter: ItemOperationManagerViewProtocol
         return albumId == selfAlbumId
     }
     
-    func moveToTrash(items: [Item]) {
+    func didMoveToTrashItems(_ items: [Item]) {
         view.disableRefresh()
     }
     
-    func didUnhide(items: [WrapData]) {
+    func didUnhideItems(_ items: [WrapData]) {
         view.disableRefresh()
         dataSource.deleteItems(items: items)
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
         guard let router = self.router as? AlbumDetailRouter else {
             return
         }

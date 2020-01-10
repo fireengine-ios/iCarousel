@@ -13,6 +13,7 @@ class BaseViewController: ViewController {
     var needToShowTabBar: Bool = false
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
+    var segmentImage: SegmentedImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()

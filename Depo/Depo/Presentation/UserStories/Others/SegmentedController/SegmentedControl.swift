@@ -9,6 +9,26 @@
 import Foundation
 import UIKit
 
+enum SegmentedImage {
+    case documents
+    case favorites
+    case music
+    case trashBin
+    
+    var image: UIImage? {
+        switch self {
+        case .documents:
+            return UIImage(named: "segment_documents")
+        case .favorites:
+            return UIImage(named: "segment_favorites")
+        case .music:
+            return UIImage(named: "segment_music")
+        case .trashBin:
+            return UIImage(named: "segment_trash")
+        }
+    }
+}
+
 final class SegmentedControl: UISegmentedControl {
     
     override func layoutSubviews() {

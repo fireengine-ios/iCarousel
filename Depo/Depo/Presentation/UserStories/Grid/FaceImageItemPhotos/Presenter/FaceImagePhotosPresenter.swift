@@ -99,8 +99,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             return
         }
         
-        let album = (interactor as? FaceImagePhotosInteractor)?.album
-        view.setupHeader(with: item, album: album)
+        let status = (interactor as? FaceImagePhotosInteractor)?.status
+        view.setupHeader(with: item, status: status)
             
         if let path = coverPhoto?.patchToPreview {
             view.setHeaderImage(with: path)

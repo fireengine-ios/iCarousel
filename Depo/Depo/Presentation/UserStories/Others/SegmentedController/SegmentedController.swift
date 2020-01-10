@@ -40,14 +40,20 @@ extension SegmentedChildController where Self: UIViewController {
 
 class SegmentedController: BaseViewController, NibInit {
     
-    static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
+    enum Alignment {
+        case center
+        case adjustToWidth
+    }
+    
+    static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
-        controller.setup(with: controllers)
+        controller.setup(with: controllers, alignment: alignment)
         return controller
     }
     
     @IBOutlet private weak var containerView: UIView!
     
+    @IBOutlet private weak var segmentedControlContainer: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor
@@ -56,7 +62,8 @@ class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    private(set) var viewControllers: [BaseViewController] = []
+    private(set) var viewControllers = [BaseViewController]()
+    private var alignment: Alignment = .center
     
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
@@ -79,6 +86,7 @@ class SegmentedController: BaseViewController, NibInit {
 
         needToShowTabBar = true
         setupSegmentedControl()
+        setupAlignment()
     }
     
     private func setupSegmentedControl() {
@@ -90,7 +98,11 @@ class SegmentedController: BaseViewController, NibInit {
         }
         
         for (index, controller) in viewControllers.enumerated() {
-            segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            if let image = controller.segmentImage?.image {
+                segmentedControl.insertSegment(with: image, at: index, animated: false)
+            } else {
+                segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            }
         }
         
         /// selectedSegmentIndex == -1 after removeAllSegments
@@ -98,12 +110,24 @@ class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
-    func setup(with controllers: [UIViewController]) {
+    func setup(with controllers: [UIViewController], alignment: Alignment) {
         guard !controllers.isEmpty, let controllers = controllers as? [BaseViewController] else {
             assertionFailure()
             return
         }
         viewControllers = controllers
+        self.alignment = alignment
+    }
+    
+    private func setupAlignment() {
+        switch alignment {
+        case .center:
+            segmentedControl.leadingAnchor.constraint(greaterThanOrEqualTo: segmentedControlContainer.leadingAnchor, constant: 16).activate()
+            segmentedControlContainer.trailingAnchor.constraint(greaterThanOrEqualTo: segmentedControl.trailingAnchor, constant: 16).activate()
+        case .adjustToWidth:
+            segmentedControl.leadingAnchor.constraint(equalTo: segmentedControlContainer.leadingAnchor, constant: 16).activate()
+            segmentedControlContainer.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor, constant: 16).activate()
+        }
     }
     
     func switchSegment(to index: Int) {

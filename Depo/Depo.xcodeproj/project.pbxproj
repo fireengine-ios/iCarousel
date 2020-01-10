@@ -3040,6 +3040,10 @@
 		897B8F392338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		89A0E49123C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */; };
+		89A0E49223C5CAA300F6869B /* HiddenAlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */; };
+		89A0E49323C5CAA400F6869B /* HiddenAlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */; };
+		89A0E49423C5CAA500F6869B /* HiddenAlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */; };
 		89CC89F323AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F523AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
@@ -5850,6 +5854,14 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
+		98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9EF23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
+		98E4B9F123C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F223C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F323C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
+		98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -6057,10 +6069,6 @@
 		B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
-		B54EDC5023A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5123A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5223A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5323A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
@@ -6156,6 +6164,10 @@
 		B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
+		B592448E23C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592448F23C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592449023C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592449123C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -9812,6 +9824,7 @@
 		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
 		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
 		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
+		89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenAlbumDetailRouter.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumWarningPopUpsFactory.swift; sourceTree = "<group>"; };
@@ -10872,6 +10885,8 @@
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
+		98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinViewController.swift; sourceTree = "<group>"; };
+		98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashBinViewController.xib; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -11009,7 +11024,6 @@
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B54E09D1233252D100C3AB94 /* PaycellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellViewController.swift; sourceTree = "<group>"; };
-		B54EDC4F23A37782005FE0C1 /* HideFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideFileService.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
@@ -11049,6 +11063,7 @@
 		B58533182397DD6000867B5B /* DebugAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsService.swift; sourceTree = "<group>"; };
 		B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WrapData+DebugAnalyticsExtension.swift"; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
+		B592448D23C86BA70066CA57 /* HiddenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenService.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -17015,6 +17030,15 @@
 			path = CancelImportPopup;
 			sourceTree = "<group>";
 		};
+		98E4B9EA23C6FEF3003A4631 /* TrashBin */ = {
+			isa = PBXGroup;
+			children = (
+				98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */,
+				98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */,
+			);
+			path = TrashBin;
+			sourceTree = "<group>";
+		};
 		98EAC9402080CBFF00AAD5B6 /* ContactService */ = {
 			isa = PBXGroup;
 			children = (
@@ -18538,6 +18562,7 @@
 				48E148CC62B54EFD8E872CF0 /* LBAlbumLikePreviewSlider */,
 				CE2976D11FD58E1F00350F3A /* LocalAlbums */,
 				98A86D4723A21FBF00438225 /* HiddenPhotos */,
+				98E4B9EA23C6FEF3003A4631 /* TrashBin */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -18950,7 +18975,7 @@
 			children = (
 				CEADDA9B1F23480D001DDA8A /* FileService.swift */,
 				CEADDA9C1F23480D001DDA8A /* FileServiceResponse.swift */,
-				B54EDC4F23A37782005FE0C1 /* HideFileService.swift */,
+				B592448D23C86BA70066CA57 /* HiddenService.swift */,
 			);
 			path = FileService;
 			sourceTree = "<group>";
@@ -19532,6 +19557,7 @@
 			children = (
 				4DE4791A4280C1ADF5C180FB /* AlbumDetailRouterInput.swift */,
 				282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */,
+				89A0E49023C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -20969,6 +20995,7 @@
 				0303A5D72397D0D000907F42 /* slider_thumb@2x.png in Resources */,
 				0303A5D82397D0D000907F42 /* CaptchaView.xib in Resources */,
 				0303A5D92397D0D000907F42 /* MailVerificationViewController.xib in Resources */,
+				98E4B9F323C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				0303A5DA2397D0D000907F42 /* LandingPageViewController.xib in Resources */,
 				0303A5DB2397D0D000907F42 /* crop_icon.png in Resources */,
 				0303A5DC2397D0D000907F42 /* polaroid_yeni.png in Resources */,
@@ -21707,6 +21734,7 @@
 				8C06B1852008AD72003D8E05 /* underline.png in Resources */,
 				8C06B0112008AD71003D8E05 /* kucuk_ucgen@3x.png in Resources */,
 				8C06B0792008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
+				98E4B9F223C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
@@ -23009,6 +23037,7 @@
 				7C1F898A1F6FFE1100740177 /* ProgressCard.xib in Resources */,
 				8C06B15E2008AD72003D8E05 /* toolbar_ciz_icon.png in Resources */,
 				8C06AF1E2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
+				98E4B9F123C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				8C06AF342008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B03C2008AD71003D8E05 /* Orta_Selected@2x.png in Resources */,
 				17589F7C2276336800A5DB37 /* ProfilePhoneEnterView.xib in Resources */,
@@ -23579,6 +23608,7 @@
 				CE784E7F22A685FB00662219 /* sample_yellow@2x.png in Resources */,
 				CE784E8022A685FB00662219 /* ChangePasswordController.xib in Resources */,
 				CE784E8122A685FB00662219 /* serbest_cizgi.png in Resources */,
+				98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				CE784E8322A685FB00662219 /* target_secili@3x.png in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
@@ -25390,12 +25420,14 @@
 				0303A2312397D0D000907F42 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				0303A2322397D0D000907F42 /* TermsAndServicesDataStorage.swift in Sources */,
 				0303A2332397D0D000907F42 /* ProfilePasswordEnterView.swift in Sources */,
+				98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				0303A2342397D0D000907F42 /* TermsAndServicesRouterInput.swift in Sources */,
 				0303A2352397D0D000907F42 /* AnalyzeHistoryDesigner.swift in Sources */,
 				0303A2362397D0D000907F42 /* RingView.swift in Sources */,
 				0303A2372397D0D000907F42 /* WebViewController.swift in Sources */,
 				0303A2382397D0D000907F42 /* PackageService.swift in Sources */,
 				0303A2392397D0D000907F42 /* LifeBoxModel.xcdatamodeld in Sources */,
+				B592449023C86BA70066CA57 /* HiddenService.swift in Sources */,
 				0303A23A2397D0D000907F42 /* Validator.swift in Sources */,
 				0303A23B2397D0D000907F42 /* AssetsCache.swift in Sources */,
 				0303A23C2397D0D000907F42 /* TermsAndServicesRouter.swift in Sources */,
@@ -25405,7 +25437,6 @@
 				0303A2402397D0D000907F42 /* UIButton+Font.swift in Sources */,
 				0303A2412397D0D000907F42 /* IntroduceViewInput.swift in Sources */,
 				0303A2422397D0D000907F42 /* IntroduceViewOutput.swift in Sources */,
-				B54EDC5223A37782005FE0C1 /* HideFileService.swift in Sources */,
 				0303A2432397D0D000907F42 /* IntroduceModuleInput.swift in Sources */,
 				0303A2442397D0D000907F42 /* TermsOfUseInteractorOutput.swift in Sources */,
 				0303A2452397D0D000907F42 /* FreeAppSpaceViewController.swift in Sources */,
@@ -26031,6 +26062,7 @@
 				0303A4992397D0D000907F42 /* EmailEnterController.swift in Sources */,
 				03C3FCDE239A796800798A9C /* UserProfileViewController.swift in Sources */,
 				0303A49A2397D0D000907F42 /* InstaPickSmallPhotoView.swift in Sources */,
+				89A0E49323C5CAA400F6869B /* HiddenAlbumDetailRouter.swift in Sources */,
 				0303A49B2397D0D000907F42 /* PhotoVideoScrollBarManager.swift in Sources */,
 				0303A49C2397D0D000907F42 /* CampaignContestInfoView.swift in Sources */,
 				0303A49D2397D0D000907F42 /* ServerError.swift in Sources */,
@@ -26409,6 +26441,7 @@
 				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				8C208660228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift in Sources */,
+				98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				98A86D9223A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
@@ -26421,6 +26454,7 @@
 				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
 				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
 				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
+				B592448F23C86BA70066CA57 /* HiddenService.swift in Sources */,
 				8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */,
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
@@ -26846,7 +26880,6 @@
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
-				B54EDC5123A37782005FE0C1 /* HideFileService.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
 				98758F622359BC3E00D06952 /* CampaignService.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
@@ -27251,6 +27284,7 @@
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
+				89A0E49223C5CAA300F6869B /* HiddenAlbumDetailRouter.swift in Sources */,
 				92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */,
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
@@ -28563,6 +28597,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				CE1966DC2359B8A700599638 /* InstapickCampaignCell.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				B52BAC6123AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
@@ -28740,6 +28775,7 @@
 				CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */,
 				CE51ACDC1EF90853005DCEE0 /* TermsAndServicesInitializer.swift in Sources */,
 				CE49E8FA2099BD71007F05A6 /* UIButton+Font.swift in Sources */,
+				B592448E23C86BA70066CA57 /* HiddenService.swift in Sources */,
 				73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */,
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
@@ -28776,6 +28812,7 @@
 				8C00971C1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
+				89A0E49123C5C8EF00F6869B /* HiddenAlbumDetailRouter.swift in Sources */,
 				EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */,
 				CE4F6195206D1E7B00B179DA /* AnimationFlowManager.swift in Sources */,
 				CE00B24821F5A79400A5A696 /* PhotoSelectionController.swift in Sources */,
@@ -28866,7 +28903,6 @@
 				4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
-				B54EDC5023A37782005FE0C1 /* HideFileService.swift in Sources */,
 				A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				73B4077122E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift in Sources */,
@@ -30032,6 +30068,7 @@
 				CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */,
 				CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */,
 				CE78496122A685FB00662219 /* (null) in Sources */,
+				98E4B9EF23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */,
 				CE78496322A685FB00662219 /* Array+Safe.swift in Sources */,
 				CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */,
@@ -30186,7 +30223,6 @@
 				CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */,
 				CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */,
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
-				B54EDC5323A37782005FE0C1 /* HideFileService.swift in Sources */,
 				CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */,
 				CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */,
 				B585331C2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
@@ -30585,6 +30621,7 @@
 				CE784B5922A685FB00662219 /* SyncContactsViewController.swift in Sources */,
 				CE784B5A22A685FB00662219 /* FBService.swift in Sources */,
 				CE784B5B22A685FB00662219 /* PasscodeSettingsInitializer.swift in Sources */,
+				B592449123C86BA70066CA57 /* HiddenService.swift in Sources */,
 				CE784B5C22A685FB00662219 /* SyncContactsModuleInput.swift in Sources */,
 				CE784B5D22A685FB00662219 /* SyncContactsPresenter.swift in Sources */,
 				CE784B5E22A685FB00662219 /* UserProfileViewInput.swift in Sources */,
@@ -30715,6 +30752,7 @@
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,
 				CE784BCB22A685FB00662219 /* PeopleService.swift in Sources */,
 				73EA170322EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
+				89A0E49423C5CAA500F6869B /* HiddenAlbumDetailRouter.swift in Sources */,
 				B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				CE784BCC22A685FB00662219 /* UsageInfoRouter.swift in Sources */,
 				CE784BCD22A685FB00662219 /* AppConfigurator.swift in Sources */,
@@ -34796,7 +34834,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -34859,7 +34897,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34918,7 +34956,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34978,7 +35016,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.37.11;
+				CURRENT_PROJECT_VERSION = d2.38.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
