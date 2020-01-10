@@ -729,6 +729,16 @@ class RouterVC: NSObject {
         return c
     }
     
+    func filesDetailHiddenFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID,
+                                                                                         albumItem: albumItem)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return controller
+    }
+    
     // MARK: Hidden View Controllers
     
     func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
@@ -820,10 +830,11 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
+                                                                         status: status,
                                                                          moduleOutput: moduleOutput,
                                                                          isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController

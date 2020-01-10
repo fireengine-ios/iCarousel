@@ -20,7 +20,14 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
         let albumUUID = router.getParentUUID()
-        let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
+        let controller: UIViewController
+        
+        if wrappered.status == .hidden {
+            controller = router.filesDetailHiddenFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
+        } else {
+            controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
+        }
+            
         let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }

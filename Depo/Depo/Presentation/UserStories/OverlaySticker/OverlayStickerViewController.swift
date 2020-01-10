@@ -25,7 +25,9 @@ final class OverlayStickerViewController: ViewController {
     
     private let uploadService = UploadService()
     private let stickerService: SmashService = SmashServiceImpl()
-    
+
+    private lazy var smashCoordinator: SmashServiceProtocol = HideSmashCoordinator()
+
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
         button.setImage(UIImage(named: "applyIcon"), for: .normal)
@@ -175,7 +177,11 @@ final class OverlayStickerViewController: ViewController {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
     }
-    
+
+    private func showCompletionPopUp() {
+        smashCoordinator.smashSuccessed()
+    }
+
     private func saveResult(result: CreateOverlayStickersResult) {
         
         checkLibraryAccessStatus { [weak self] libraryIsAvailable in
@@ -192,8 +198,10 @@ final class OverlayStickerViewController: ViewController {
                         }
                         self?.uploadImage(contentURL: result.url, completion: { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.showCompletionPopUp()
+                            }
                         })
         
                     case .video:
@@ -202,8 +210,10 @@ final class OverlayStickerViewController: ViewController {
                         }
                         self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.showCompletionPopUp()
+                            }
                         })
                     }
                     
@@ -406,4 +416,3 @@ extension OverlayStickerViewController: UICollectionViewDelegate {
         })
     }
 }
-

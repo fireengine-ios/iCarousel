@@ -78,7 +78,7 @@ import UIKit
 
     // MARK: - Header View Methods
     
-    private func setupHeaderView(with item: Item, album: AlbumItem?) {
+    private func setupHeaderView(with item: Item, status: ItemStatus?) {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(headerView)
         headerView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
@@ -138,7 +138,7 @@ import UIKit
         hideButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         hideButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         hideButton.addTarget(self, action: #selector(hideAlbum), for: .touchUpInside)
-        hideButton.isHidden = album?.preview?.status == .hidden
+        hideButton.isHidden = status == .hidden
     }
     
     private func createAlbumsSliderWith(peopleItem: PeopleItem) {
@@ -205,8 +205,8 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         headerImage.loadImage(with: path)
     }
     
-    func setupHeader(with item: Item, album: AlbumItem?) {
-        setupHeaderView(with: item, album: album)
+    func setupHeader(with item: Item, status: ItemStatus?) {
+        setupHeaderView(with: item, status: status)
     }
     
     func dismiss() {

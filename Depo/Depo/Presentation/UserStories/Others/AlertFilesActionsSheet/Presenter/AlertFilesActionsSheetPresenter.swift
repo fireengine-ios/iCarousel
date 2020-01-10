@@ -333,6 +333,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
                         self?.interactor.unhide(items: selectedItems)
                     }
+                case .unhideAlbumItems:
+                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
+                        self?.interactor.unhideAlbumItems(items: selectedItems)
+                    }
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()
