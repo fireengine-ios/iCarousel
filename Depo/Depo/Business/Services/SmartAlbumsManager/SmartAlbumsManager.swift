@@ -329,19 +329,19 @@ extension SmartAlbumsManagerImpl: ItemOperationManagerViewProtocol {
         requestAllItems()
     }
     
-    func didHide(albums: [AlbumItem]) {
+    func didHideAlbums(_ albums: [AlbumItem]) {
         requestAllItems()
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
         requestAllItems()
     }
     
-    func moveToTrash(albums: [AlbumItem]) {
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         requestAllItems()
     }
     
-    func moveToTrash(items: [Item]) {
+    func didMoveToTrashItems(_ items: [Item]) {
         reloadFIRAlbumsIfNeeded(items: items)
     }
     

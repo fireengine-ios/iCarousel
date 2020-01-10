@@ -1960,15 +1960,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didHide(items: [WrapData]) {
-        deleteItems(items: items)
-    }
-    
-    func didHide(albums: [AlbumItem]) {
+    func didHideAlbums(_ albums: [AlbumItem]) {
         albumsDeleted(albums: albums)
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func didHideItems(_ items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
         
     }
 }

@@ -504,7 +504,7 @@ final class HiddenPhotosDataLoader {
         if !albumItems.isEmpty {
             group.enter()
             albumService.moveToTrash(albums: albumItems, success: { trashedAlbums in
-                ItemOperationManager.default.moveToTrash(albums: trashedAlbums)
+                ItemOperationManager.default.didMoveToTrashAlbums(albumItems)
                 group.leave()
             }, fail: { errorResponse in
                 trashError = errorResponse
