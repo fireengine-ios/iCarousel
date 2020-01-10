@@ -457,24 +457,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     //FIP - Faces-Items-Places
     private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        let responseHandler: ResponseVoid = { response in
-            switch response {
-            case .success(_):
-                success()
-                
-            case .failed(let error):
-                fail(error)
-            }
-        }
-        
         if let items = items as? [PeopleItem] {
-            hiddenService.recoveryPeople(items: items, handler: responseHandler)
+            fileService.unhidePeople(items: items, success: success, fail: fail)
 
         } else if let items = items as? [ThingsItem] {
-            hiddenService.recoveryThings(items: items, handler: responseHandler)
+            fileService.unhideThings(items: items, success: success, fail: fail)
 
         } else if let items = items as? [PlacesItem] {
-            hiddenService.recoveryPlaces(items: items, handler: responseHandler)
+            fileService.unhidePlaces(items: items, success: success, fail: fail)
 
         }
     }

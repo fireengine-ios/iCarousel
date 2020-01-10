@@ -163,6 +163,14 @@ final class HiddenPhotosDataLoader {
     }
     
     func unhide(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        recover(selectedItems: selectedItems, handler: handler)
+    }
+    
+    func putBack(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
+        recover(selectedItems: selectedItems, handler: handler)
+    }
+    
+    private func recover(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
         let group = DispatchGroup()
         
         var unhideError: Error? = nil
@@ -178,7 +186,7 @@ final class HiddenPhotosDataLoader {
         
         if !selectedItems.albums.isEmpty {
             group.enter()
-            unhideAlbums(items: selectedItems.albums) { result in
+            recoverAlbums(items: selectedItems.albums) { result in
                 if case let .failed(error) = result {
                     unhideError = error
                 }
@@ -360,7 +368,7 @@ final class HiddenPhotosDataLoader {
         }
     }
     
-    private func unhideAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
+    private func recoverAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()
         var thingsItems = [ThingsItem]()
@@ -384,40 +392,40 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
-            hiddenService.recoveryPeople(items: peopleItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhidePeople(items: peopleItems, success: {
+                group.leave()
+            }) { error in
+                unhideError = error
                 group.leave()
             }
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            hiddenService.recoveryPlaces(items: placesItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhidePlaces(items: placesItems, success: {
+                group.leave()
+            }) { error in
+                unhideError = error
                 group.leave()
             }
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            hiddenService.recoveryThings(items: thingsItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhideThings(items: thingsItems, success: {
+                group.leave()
+            }) { error in
+                unhideError = error
                 group.leave()
             }
         }
         
         if !albumItems.isEmpty {
             group.enter()
-            hiddenService.recoverAlbums(albumItems) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
+            fileService.unhideAlbums(albumItems, success: {
+                group.leave()
+            }) { error in
+                unhideError = error
                 group.leave()
             }
         }
@@ -465,32 +473,32 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashPeople(items: peopleItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashPeople(items: peopleItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !placesItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashPlaces(items: placesItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashPlaces(items: placesItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !thingsItems.isEmpty {
             group.enter()
-            hiddenService.moveToTrashThings(items: thingsItems) { result in
-                if case let .failed(error) = result {
-                    trashError = error
-                }
+            fileService.moveToTrashThings(items: thingsItems, success: {
                 group.leave()
-            }
+            }, fail: { error in
+                trashError = error
+                group.leave()
+            })
         }
         
         if !albumItems.isEmpty {

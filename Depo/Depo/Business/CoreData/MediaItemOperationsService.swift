@@ -1021,7 +1021,7 @@ final class MediaItemOperationsService {
     }
     
     //MARK: - Unhide
-    func unhide(_ items: [WrapData], completion: @escaping VoidHandler) {
+    func recover(_ items: [WrapData], completion: @escaping VoidHandler) {
         coreDataStack.performBackgroundTask { [weak self] context in
             guard let self = self else {
                 return
