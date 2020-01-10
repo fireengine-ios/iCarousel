@@ -14,7 +14,7 @@ final class FaceImagePhotosConfigurator {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
+    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
@@ -23,7 +23,7 @@ final class FaceImagePhotosConfigurator {
 
         var elementsConfig: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .deleteFaceImage]
         var initialTypes: [ElementTypes] = [.select]
-        if item.fileType.isFaceImageType, let status = album.preview?.status {
+        if item.fileType.isFaceImageType {
             switch status {
             case .hidden:
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
@@ -67,6 +67,7 @@ final class FaceImagePhotosConfigurator {
         interactor.output = presenter
         interactor.album = album
         interactor.alertSheetConfig = alertSheetConfig
+        interactor.status = status
         
         presenter.interactor = interactor
         viewController.output = presenter
