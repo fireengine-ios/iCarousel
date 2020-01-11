@@ -361,41 +361,74 @@ enum NetmeraEventValues {
     }
     
     enum ButtonName {
-        
+        case freeUpSpace
+        case deleteDuplicate
+        case spotifyImport
+        case instagramImport
+        case facebookImport
+        case dropboxImport
+        case print
+        case uploadFromPlus
+        case share
+        case download
+        case edit
+        case delete
+        case addToAlbum
+        case addToFavorites
+        case removeFromFavorites
+        case info
+        case hide
+        case unhide
+        case restore
+        case hiddenBin
+        case trashBin
+   
+        var text: String {
+            switch self {
+            case .freeUpSpace:
+                return "Freeupspace"
+            case .deleteDuplicate:
+                return "Delete Duplicate"
+            case .spotifyImport:
+                return "Spotify Import"
+            case .instagramImport:
+                return "Instagram Import"
+            case .facebookImport:
+                return "Facebook Import"
+            case .dropboxImport:
+                return "Dropbox Import"
+            case .print:
+                return "Print"
+            case .uploadFromPlus:
+                return "Upload"
+            case .share:
+                return "Share"
+            case .download:
+                return "Download"
+            case .edit:
+                return "Edit"
+            case .delete:
+                return "Delete"
+            case .addToAlbum:
+                return "AddToAlbum"
+            case .addToFavorites:
+                return "AddToFavorites"
+            case .removeFromFavorites:
+                return "RemoveFromFavorites"
+            case .info:
+                return "Info"
+            case .hide:
+                return "Hide"
+            case .unhide:
+                return "Unhide"
+            case .restore:
+                return "Restore"
+            case .hiddenBin:
+                return "Hidden bin"
+            case .trashBin:
+                return "Trash bin"
+            }
+        }
     }
-//      ButtonName
-//    Freeupspace
-//    Delete Duplicate
-//    Spotify Import
-//    Instagram Import
-//    Facebook Import
-//    Dropbox Import
-//    Print
-//    Upload (+ button)
-//    Share
-//    Download
-//    Edit
-//    Delete
-//    AddToAlbum
-//    AddToFavorites
-//    RemoveFromFavorites
-//    Info
-//    Hide
-//    Unhide
-//    Restore
-//    Hidden bin
-//    Trash bin
-
-    
-    
-    
-    
-    
-//    var text: String {
-//        switch self {
-//        case <#pattern#>:
-//            return ""
-//        }
-//    }
 
 }

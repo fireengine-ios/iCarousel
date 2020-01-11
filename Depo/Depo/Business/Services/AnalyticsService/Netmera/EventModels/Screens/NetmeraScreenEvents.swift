@@ -10,6 +10,19 @@ import Netmera
 
 extension NetmeraEvents.Screens {
     
+    final class ContactBackUpScreen: NetmeraEvent {
+        
+        private let kContactBackUpScreenKey = "dmi"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kContactBackUpScreenKey
+        }
+    }
+    
     final class PhotoPickAnalysisDetailScreen: NetmeraEvent {
         
         private let kPhotoPickAnalysisDetailScreenKey = "hup"
@@ -33,6 +46,19 @@ extension NetmeraEvents.Screens {
         
         override var eventKey : String {
             return kAutoSyncScreenKey
+        }
+    }
+    
+    final class EmailVerification: NetmeraEvent {
+        
+        private let kEmailVerificationKey = "axi"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kEmailVerificationKey
         }
     }
     
@@ -777,6 +803,98 @@ extension NetmeraEvents.Screens {
         }
     }
     
+    final class SmashPreview: NetmeraEvent {
+        
+        private let kSmashPreviewKey = "yqb"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kSmashPreviewKey
+        }
+    }
+    
+    final class TrashBinScreen: NetmeraEvent {
+        
+        private let kTrashBinScreenKey = "vco"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kTrashBinScreenKey
+        }
+    }
+    
+    final class HiddenBinScreen: NetmeraEvent {
+        
+        private let kHiddenBinScreenKey = "wgd"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kHiddenBinScreenKey
+        }
+    }
+    
+    final class SmashConfirmPopUp: NetmeraEvent {
+        
+        private let kSmashConfirmPopUpKey = "txu"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kSmashConfirmPopUpKey
+        }
+    }
+    
+    final class UnhideConfirmPopUp: NetmeraEvent {
+        
+        private let kUnhideConfirmPopUpKey = "gfe"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kUnhideConfirmPopUpKey
+        }
+    }
+    
+    final class HideConfirmPopUp: NetmeraEvent {
+        
+        private let kHideConfirmPopUpKey = "bsa"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kHideConfirmPopUpKey
+        }
+    }
+    
+    final class SaveSmashSuccessfullyPopUp: NetmeraEvent {
+        
+        private let kSaveSmashSuccessfullyPopUpKey: String = "eyd"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kSaveSmashSuccessfullyPopUpKey
+        }
+    }
+//    not found:
+//    SaveHiddenSuccessfullyPopUp
 }
 
 

@@ -603,4 +603,42 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class NonStandardUserFIGroupingOFF: NetmeraEvent {
+         
+         private let kNonStandardUserFIGroupingOFFKey = "you"
+         
+         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+             return [:]
+         }
+         
+         override var eventKey : String {
+             return kNonStandardUserFIGroupingOFFKey
+         }
+     }
+    
+    final class Photopick: NetmeraEvent {
+        
+        private let kPhotopickKey = "tnm"
+        
+        @objc var leftAnalysis = ""
+        @objc var status = ""
+        
+        convenience init(leftAnalysis: String, status: String) {
+            self.init()
+            self.leftAnalysis = leftAnalysis
+            self.status = status
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(leftAnalysis),
+                "eb" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kPhotopickKey
+        }
+    }
+    
 }
