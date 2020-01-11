@@ -11,18 +11,18 @@ import SwiftyJSON
 
 protocol SmashService: class {
     
-    func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<([SmashStickerResponse], StickerType)>) -> Void)
+    func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<(stickers: [SmashStickerResponse], type: StickerType)>) -> Void)
 }
 
 final class SmashServiceImpl: BaseRequestService, SmashService {
-    
+
     private let sessionManager: SessionManager
     
     required init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
     
-    func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<([SmashStickerResponse], StickerType)>) -> Void) {
+    func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<(stickers: [SmashStickerResponse], type: StickerType)>) -> Void) {
         
         sessionManager
             .request(RouteRequests.smashAnimation,
