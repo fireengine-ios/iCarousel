@@ -63,7 +63,7 @@ final class TrashBinDataSource: NSObject {
     
     private lazy var cellGridSize: CGSize = {
         let viewWidth = UIScreen.main.bounds.width
-        let paddingWidth = columnPadding * 2 - (columns - 1) * columnPadding
+        let paddingWidth = (columns + 1) * columnPadding
         let itemWidth = floor((viewWidth - paddingWidth) / columns)
         return CGSize(width: itemWidth, height: itemWidth)
     }()
@@ -104,9 +104,6 @@ final class TrashBinDataSource: NSObject {
     
     private func registerCells() {
         let registreList = [AlbumsSliderCell.self,
-                            CollectionViewCellForPhoto.self,
-                            CollectionViewCellForVideo.self,
-                            CollectionViewCellForAudio.self,
                             BasicCollectionMultiFileCell.self]
         
         registreList.forEach { collectionView.register(nibCell: $0) }
@@ -249,7 +246,7 @@ extension TrashBinDataSource {
     }
     
     private func updateVisibleCells() {
-        collectionView.visibleCells.compactMap { $0 as? CollectionViewCellDataProtocol }.forEach {
+        collectionView.visibleCells.compactMap { $0 as? BasicCollectionMultiFileCell }.forEach {
             $0.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
         }
     }
@@ -434,26 +431,8 @@ extension TrashBinDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             return collectionView.dequeue(cell: AlbumsSliderCell.self, for: indexPath)
-        }
-
-        guard let item = item(for: indexPath) else {
-            assertionFailure("failed return cell")
-            return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
-        }
-        
-        if viewType == .List {
+        } else {
             return collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
-        }
-        
-        switch item.fileType {
-        case .image:
-             return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
-        case .video:
-             return collectionView.dequeue(cell: CollectionViewCellForVideo.self, for: indexPath)
-        case .audio:
-            return collectionView.dequeue(cell: CollectionViewCellForAudio.self, for: indexPath)
-        default:
-             return collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
         }
     }
     
@@ -480,17 +459,18 @@ extension TrashBinDataSource: UICollectionViewDataSource {
             return
         }
         
-        guard let cell = cell as? CollectionViewCellDataProtocol,
+        guard let cell = cell as? BasicCollectionMultiFileCell,
             let item = item(for: indexPath) else {
             assertionFailure("failed setup cell")
             return
         }
         
-        cell.configureWithWrapper(wrappedObj: item)
+        cell.updating()
         cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
+        cell.configureWithWrapper(wrappedObj: item)
         cell.setDelegateObject(delegateObject: self)
-        (cell as? CollectionViewCellForPhoto)?.filesDataSource = filesDataSource
-        (cell as? CollectionViewCellForPhoto)?.loadImage(item: item, indexPath: indexPath)
+        cell.filesDataSource = filesDataSource
+        cell.loadImage(item: item, indexPath: indexPath)
         
         if isPaginationDidEnd {
             return

@@ -45,7 +45,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        homePageNavigationBarStyle()
+        if dataSource.isSelectionStateActive {
+            navigationBarWithGradientStyle()
+        } else {
+            homePageNavigationBarStyle()
+        }
         navbarManager.setupNavBarButtons(animated: false)
         
         //need to fix crash on show bottom bar
@@ -112,12 +116,14 @@ extension TrashBinViewController {
     private func startSelectionState() {
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
+        navigationBarWithGradientStyle()
     }
     
     private func stopSelectionState() {
         navigationItem.hidesBackButton = false
         dataSource.cancelSelection()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
+        homePageNavigationBarStyle()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         setMoreButton()

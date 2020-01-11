@@ -53,7 +53,7 @@ final class TrashBinNavbarManager {
     func setDefaultState(sortType type: SortedRules) {
         state = .default
         moreButton.isEnabled = true
-        delegate?.setTitle(withString: TextConstants.hiddenBinNavBarTitle, andSubTitle: type.descriptionForTitle)
+        delegate?.setTitle("")
     }
     
     func setSelectionState() {
