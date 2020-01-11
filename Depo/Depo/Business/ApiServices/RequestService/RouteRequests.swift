@@ -181,6 +181,7 @@ struct RouteRequests {
     static let peopleDeletePhotos = "person/photo/delete/%d"
     static let peopleRecovery = baseUrl.absoluteString + people + "recover"
     static let peopleTrash = baseUrl.absoluteString + people + "trash"
+    static let peopleDelete = baseUrl.absoluteString + people + "delete"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
@@ -191,6 +192,7 @@ struct RouteRequests {
     static let thingsDeletePhotos = "object/photo/%d"
     static let thingsRecovery = baseUrl.absoluteString + things + "recover"
     static let thingsTrash = baseUrl.absoluteString + things + "trash"
+    static let thingsDelete = baseUrl.absoluteString + things + "delete"
 //    static let thingsDeletePhoto = "object/photo/%d/%d"
     static let places = "location/"
     static let placesThumbnails = "location/thumbnails"
@@ -200,6 +202,7 @@ struct RouteRequests {
     static let placesAlbumWithStatus = baseUrl.absoluteString + placesAlbum + "&status=%@"
     static let placesRecovery = baseUrl.absoluteString + places + "recover"
     static let placesTrash = baseUrl.absoluteString + places + "trash"
+    static let placesDelete = baseUrl.absoluteString + places + "delete"
 //    static let placesDeletePhotos = "location/%d"
     
     //MARK : Share

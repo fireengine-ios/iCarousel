@@ -61,17 +61,29 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishUploadFiles()
     
-    func didHide(items: [WrapData])
+    func didHideItems(_ items: [WrapData])
+    func didHideAlbums(_ albums: [AlbumItem])
+    func didHidePeople(items: [PeopleItem])
+    func didHidePlaces(items: [PlacesItem])
+    func didHideThings(items: [ThingsItem])
     
-    func didHide(albums: [AlbumItem])
+    func didUnhideItems(_ items: [WrapData])
+    func didUnhideAlbums(_ albums: [AlbumItem])
+    func didUnhidePeople(items: [PeopleItem])
+    func didUnhidePlaces(items: [PlacesItem])
+    func didUnhideThings(items: [ThingsItem])
     
-    func didUnhide(items: [WrapData])
+    func didMoveToTrashItems(_ items: [Item])
+    func didMoveToTrashAlbums(_ albums: [AlbumItem])
+    func didMoveToTrashPeople(items: [PeopleItem])
+    func didMoveToTrashPlaces(items: [PlacesItem])
+    func didMoveToTrashThings(items: [ThingsItem])
     
-    func didUnhide(albums: [AlbumItem])
-    
-    func moveToTrash(items: [Item])
-    
-    func moveToTrash(albums: [AlbumItem])
+    func putBackFromTrashItems(_ items: [Item])
+    func putBackFromTrashAlbums(_ albums: [AlbumItem])
+    func putBackFromTrashPeople(items: [PeopleItem])
+    func putBackFromTrashPlaces(items: [PlacesItem])
+    func putBackFromTrashThings(items: [ThingsItem])
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -123,17 +135,29 @@ extension ItemOperationManagerViewProtocol {
     
     func finishUploadFiles() {}
     
-    func didHide(items: [WrapData]) {}
+    func didHideItems(_ items: [WrapData]) {}
+    func didHideAlbums(_ albums: [AlbumItem]) {}
+    func didHidePeople(items: [PeopleItem]) {}
+    func didHidePlaces(items: [PlacesItem]) {}
+    func didHideThings(items: [ThingsItem]) {}
     
-    func didHide(albums: [AlbumItem]) {}
+    func didUnhideItems(_ items: [WrapData]) {}
+    func didUnhideAlbums(_ albums: [AlbumItem]) {}
+    func didUnhidePeople(items: [PeopleItem]) {}
+    func didUnhidePlaces(items: [PlacesItem]) {}
+    func didUnhideThings(items: [ThingsItem]) {}
     
-    func didUnhide(items: [WrapData]) {}
+    func didMoveToTrashItems(_ items: [Item]) {}
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {}
+    func didMoveToTrashPeople(items: [PeopleItem]) {}
+    func didMoveToTrashPlaces(items: [PlacesItem]) {}
+    func didMoveToTrashThings(items: [ThingsItem]) {}
     
-    func didUnhide(albums: [AlbumItem]) {}
-    
-    func moveToTrash(items: [Item]) {}
-    
-    func moveToTrash(albums: [AlbumItem]) {}
+    func putBackFromTrashItems(_ items: [Item]) {}
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {}
+    func putBackFromTrashPeople(items: [PeopleItem]) {}
+    func putBackFromTrashPlaces(items: [PlacesItem]) {}
+    func putBackFromTrashThings(items: [ThingsItem]) {}
 }
 
 
@@ -343,48 +367,123 @@ class ItemOperationManager: NSObject {
         }
     }
 
-    
-    func didHide(items: [WrapData]) {
+    func didHideItems(_ items: [WrapData]) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.didHide(items: items) }
+            self.views.invoke { $0.didHideItems(items) }
         }
     }
     
-    func didHide(albums: [AlbumItem]) {
+    func didHideAlbums(_ albums: [AlbumItem]) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.didHide(albums: albums) }
-        }
-    }
-
-    func didUnhide(items: [WrapData]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhide(items: items) }
+            self.views.invoke { $0.didHideAlbums(albums) }
         }
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func didHidePeople(items: [PeopleItem]) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhide(albums: albums) }
+            self.views.invoke { $0.didHidePeople(items: items) }
         }
     }
     
-    func moveToTrash(items: [Item]) {
-        if items.isEmpty {
-            return
-        }
-        
+    func didHidePlaces(items: [PlacesItem]) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.moveToTrash(items: items) }
+            self.views.invoke { $0.didHidePlaces(items: items) }
         }
     }
     
-    func moveToTrash(albums: [AlbumItem]) {
-        if albums.isEmpty {
-            return
-        }
-        
+    func didHideThings(items: [ThingsItem]) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.moveToTrash(albums: albums) }
+            self.views.invoke { $0.didHideThings(items: items) }
+        }
+    }
+       
+    func didUnhideItems(_ items: [WrapData]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didUnhideItems(items) }
+        }
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didUnhideAlbums(albums) }
+        }
+    }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didUnhidePeople(items: items) }
+        }
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didUnhidePlaces(items: items) }
+        }
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didUnhideThings(items: items) }
+        }
+    }
+       
+    func didMoveToTrashItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashItems(items) }
+        }
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashAlbums(albums) }
+        }
+    }
+    
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashPeople(items: items) }
+        }
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashPlaces(items: items) }
+        }
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashThings(items: items) }
+        }
+    }
+       
+    func putBackFromTrashItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.putBackFromTrashItems(items) }
+        }
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.putBackFromTrashAlbums(albums) }
+        }
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.putBackFromTrashPeople(items: items) }
+        }
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.putBackFromTrashPlaces(items: items) }
+        }
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.putBackFromTrashThings(items: items) }
         }
     }
 }

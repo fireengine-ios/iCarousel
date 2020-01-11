@@ -362,7 +362,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
-    private func unhideItems(_ items: [BaseDataSourceItem]) {
+    private func unhideItems(_ items: [BaseDataSourceItem], isAlbumItems: Bool = false) {
         output?.startAsyncOperationDisableScreen()
         
         var peopleItems = [PeopleItem]()
@@ -433,10 +433,37 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             } else {
                 DispatchQueue.main.async {
                     self?.output?.completeAsyncOperationEnableScreen()
-                    self?.succesAction(elementType: .unhide)()
+                    
+                    isAlbumItems ? self?.succesAction(elementType: .unhideAlbumItems)()
+                        : self?.succesAction(elementType: .unhide)()
+                    
                 }
             }
         }
+    }
+    
+    func unhideAlbumItems(items: [BaseDataSourceItem]) {
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to hide them")
+            return
+        }
+        
+        let okHandler: PopUpButtonHandler = { vc in
+            vc.close { [weak self] in
+                self?.unhideItems(items, isAlbumItems: true)
+            }
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
+                                         message: TextConstants.unhidePopupText,
+                                         image: .unhide,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+        
     }
     
     private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
@@ -457,24 +484,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     //FIP - Faces-Items-Places
     private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        let responseHandler: ResponseVoid = { response in
-            switch response {
-            case .success(_):
-                success()
-                
-            case .failed(let error):
-                fail(error)
-            }
-        }
-        
         if let items = items as? [PeopleItem] {
-            hiddenService.recoveryPeople(items: items, handler: responseHandler)
+            fileService.unhidePeople(items: items, success: success, fail: fail)
 
         } else if let items = items as? [ThingsItem] {
-            hiddenService.recoveryThings(items: items, handler: responseHandler)
+            fileService.unhideThings(items: items, success: success, fail: fail)
 
         } else if let items = items as? [PlacesItem] {
-            hiddenService.recoveryPlaces(items: items, handler: responseHandler)
+            fileService.unhidePlaces(items: items, success: success, fail: fail)
 
         }
     }
@@ -900,7 +917,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
+                
+                if elementType == .unhideAlbumItems {
+                    self?.router.defaultTopController?.dismiss(animated: true, completion: {
+                        self?.router.popViewController()
+                        self?.showSuccessPopup(for: elementType)
+                    })
+                } else {
+                    self?.showSuccessPopup(for: elementType)
+                }
+                
+                
             }
         }
         return success
@@ -915,6 +942,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             text = TextConstants.popUpDeleteComplete
             MenloworksAppEvents.onFileDeleted()
         case .unhide:
+            text = TextConstants.unhidePopupSuccessText
+        case .unhideAlbumItems:
             text = TextConstants.unhidePopupSuccessText
         default:
             return

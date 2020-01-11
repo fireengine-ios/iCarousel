@@ -6097,10 +6097,6 @@
 		B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
-		B54EDC5023A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5123A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5223A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
-		B54EDC5323A37782005FE0C1 /* HideFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EDC4F23A37782005FE0C1 /* HideFileService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
@@ -6196,6 +6192,10 @@
 		B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
+		B592448E23C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592448F23C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592449023C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B592449123C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -11059,7 +11059,6 @@
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B54E09D1233252D100C3AB94 /* PaycellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellViewController.swift; sourceTree = "<group>"; };
-		B54EDC4F23A37782005FE0C1 /* HideFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideFileService.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectCollectionView.swift; sourceTree = "<group>"; };
@@ -11099,6 +11098,7 @@
 		B58533182397DD6000867B5B /* DebugAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsService.swift; sourceTree = "<group>"; };
 		B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WrapData+DebugAnalyticsExtension.swift"; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
+		B592448D23C86BA70066CA57 /* HiddenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenService.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -19025,7 +19025,7 @@
 			children = (
 				CEADDA9B1F23480D001DDA8A /* FileService.swift */,
 				CEADDA9C1F23480D001DDA8A /* FileServiceResponse.swift */,
-				B54EDC4F23A37782005FE0C1 /* HideFileService.swift */,
+				B592448D23C86BA70066CA57 /* HiddenService.swift */,
 			);
 			path = FileService;
 			sourceTree = "<group>";
@@ -25480,6 +25480,7 @@
 				0303A2372397D0D000907F42 /* WebViewController.swift in Sources */,
 				0303A2382397D0D000907F42 /* PackageService.swift in Sources */,
 				0303A2392397D0D000907F42 /* LifeBoxModel.xcdatamodeld in Sources */,
+				B592449023C86BA70066CA57 /* HiddenService.swift in Sources */,
 				0303A23A2397D0D000907F42 /* Validator.swift in Sources */,
 				0303A23B2397D0D000907F42 /* AssetsCache.swift in Sources */,
 				0303A23C2397D0D000907F42 /* TermsAndServicesRouter.swift in Sources */,
@@ -25489,7 +25490,6 @@
 				0303A2402397D0D000907F42 /* UIButton+Font.swift in Sources */,
 				0303A2412397D0D000907F42 /* IntroduceViewInput.swift in Sources */,
 				0303A2422397D0D000907F42 /* IntroduceViewOutput.swift in Sources */,
-				B54EDC5223A37782005FE0C1 /* HideFileService.swift in Sources */,
 				0303A2432397D0D000907F42 /* IntroduceModuleInput.swift in Sources */,
 				0303A2442397D0D000907F42 /* TermsOfUseInteractorOutput.swift in Sources */,
 				0303A2452397D0D000907F42 /* FreeAppSpaceViewController.swift in Sources */,
@@ -26511,6 +26511,7 @@
 				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
 				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
 				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
+				B592448F23C86BA70066CA57 /* HiddenService.swift in Sources */,
 				8E26D97A2306998D00D08123 /* MusicInteractor.swift in Sources */,
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
@@ -26938,7 +26939,6 @@
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
-				B54EDC5123A37782005FE0C1 /* HideFileService.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
 				98758F622359BC3E00D06952 /* CampaignService.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
@@ -28841,6 +28841,7 @@
 				CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */,
 				CE51ACDC1EF90853005DCEE0 /* TermsAndServicesInitializer.swift in Sources */,
 				CE49E8FA2099BD71007F05A6 /* UIButton+Font.swift in Sources */,
+				B592448E23C86BA70066CA57 /* HiddenService.swift in Sources */,
 				73D723E8231D0855006AE835 /* PaymentModels.swift in Sources */,
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
@@ -28968,7 +28969,6 @@
 				4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
-				B54EDC5023A37782005FE0C1 /* HideFileService.swift in Sources */,
 				A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				73B4077122E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift in Sources */,
@@ -30296,7 +30296,6 @@
 				CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */,
 				CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */,
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
-				B54EDC5323A37782005FE0C1 /* HideFileService.swift in Sources */,
 				CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */,
 				CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */,
 				B585331C2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
@@ -30699,6 +30698,7 @@
 				CE784B5922A685FB00662219 /* SyncContactsViewController.swift in Sources */,
 				CE784B5A22A685FB00662219 /* FBService.swift in Sources */,
 				CE784B5B22A685FB00662219 /* PasscodeSettingsInitializer.swift in Sources */,
+				B592449123C86BA70066CA57 /* HiddenService.swift in Sources */,
 				CE784B5C22A685FB00662219 /* SyncContactsModuleInput.swift in Sources */,
 				CE784B5D22A685FB00662219 /* SyncContactsPresenter.swift in Sources */,
 				CE784B5E22A685FB00662219 /* UserProfileViewInput.swift in Sources */,

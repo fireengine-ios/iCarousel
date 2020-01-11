@@ -96,10 +96,10 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     
     class func initializeHiddenFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
         
-        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhideAlbumItems, .delete],
                                                          style: .blackOpaque, tintColor: nil)
 
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhideAlbumItems, .delete],
                                                         style: .blackOpaque, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
@@ -117,10 +117,10 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeHiddenAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
-        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.unhideAlbumItems, .delete],
                                                          style: .default, tintColor: nil)
         
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhide, .delete],
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.unhideAlbumItems, .delete],
                                                         style: .default, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
