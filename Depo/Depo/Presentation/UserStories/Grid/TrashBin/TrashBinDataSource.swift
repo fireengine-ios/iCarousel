@@ -15,13 +15,13 @@ protocol TrashBinDataSourceDelegate: class {
     func didSelect(album: BaseDataSourceItem)
     func onStartSelection()
     func didChangeSelectedItems(count: Int)
+    func onMoreButtonTapped(sender: Any, item: Item)
 }
 
 final class TrashBinDataSource: NSObject {
     
     private typealias InsertItemResult = (indexPath: IndexPath?, section: Int?)
     private typealias ChangesItemResult = (indexPaths: [IndexPath], sections: IndexSet)
-    typealias SelectedItems = (items: [Item], albums: [BaseDataSourceItem])
     
     private let linePadding = Device.isIpad ? NumericConstants.iPadGreedHorizontalSpace : NumericConstants.iPhoneGreedHorizontalSpace
     private let columnPadding = Device.isIpad ? NumericConstants.iPadGreedInset : NumericConstants.iPhoneGreedInset
@@ -72,8 +72,8 @@ final class TrashBinDataSource: NSObject {
         return CGSize(width: UIScreen.main.bounds.width, height: 65)
     }()
     
-    var allSelectedItems: SelectedItems {
-        return (selectedItems, albumSlider?.selectedItems ?? [])
+    var allSelectedItems: [BaseDataSourceItem] {
+        return selectedItems + (albumSlider?.selectedItems ?? [])
     }
     
     //MARK: - Init
@@ -136,7 +136,7 @@ extension TrashBinDataSource {
             }
             
             let isEmpty = self.itemsIsEmpty
-            let insertResult = self.insert(newItems: items)
+            let insertResult = self.append(newItems: items)
             guard !insertResult.indexPaths.isEmpty else {
                 DispatchQueue.main.async {
                     completion()
@@ -255,11 +255,7 @@ extension TrashBinDataSource {
     }
     
     private func updateSelectionCount() {
-        if let selectedAlbumsCount = albumSlider?.selectedItems.count {
-            delegate?.didChangeSelectedItems(count: selectedItems.count + selectedAlbumsCount)
-        } else {
-            delegate?.didChangeSelectedItems(count: selectedItems.count)
-        }
+        delegate?.didChangeSelectedItems(count: allSelectedItems.count)
     }
 }
 
@@ -294,7 +290,7 @@ extension TrashBinDataSource {
         return headerText(for: item)
     }
     
-    private func insert(newItems: [Item]) -> ChangesItemResult {
+    private func append(newItems: [Item]) -> ChangesItemResult {
         var insertedIndexPaths = [IndexPath]()
         var insertedSections = IndexSet()
         
@@ -304,7 +300,7 @@ extension TrashBinDataSource {
         for item in insertItems {
             autoreleasepool {
                 let insertResult: InsertItemResult?
-                if !allItems.isEmpty,
+                if !itemsIsEmpty,
                     let lastItem = allItems.last?.last {
                     switch sortedRule {
                     case .timeUp, .timeDown:
@@ -368,7 +364,7 @@ extension TrashBinDataSource {
         
         if lastItemdDate.getYear() == newItemDate.getYear(),
             lastItemdDate.getMonth() == newItemDate.getMonth(),
-            !allItems.isEmpty {
+            !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         } else {
             return appendSection(with: newItem)
@@ -381,7 +377,7 @@ extension TrashBinDataSource {
         
         if !lastItemFirstLetter.isEmpty, !newItemFirstLetter.isEmpty,
             lastItemFirstLetter == newItemFirstLetter,
-            !allItems.isEmpty {
+            !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         } else {
             return appendSection(with: newItem)
@@ -389,14 +385,14 @@ extension TrashBinDataSource {
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) -> InsertItemResult {
-        if !allItems.isEmpty {
+        if !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         }
         return (nil, nil)
     }
     
     private func appendInLastSection(newItem: Item) -> InsertItemResult {
-        guard !allItems.isEmpty else {
+        guard !itemsIsEmpty else {
             assertionFailure()
             return (nil, nil)
         }
@@ -572,7 +568,7 @@ extension TrashBinDataSource: UICollectionViewDelegateFlowLayout {
 
 //MARK: - LBCellsDelegate
 
-extension TrashBinDataSource: LBCellsDelegate {
+extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
     
     func canLongPress() -> Bool {
         return true
@@ -584,6 +580,12 @@ extension TrashBinDataSource: LBCellsDelegate {
             albumSlider?.startSelection()
         } else if let indexPath = collectionView.indexPath(for: cell) {
             collectionView(self.collectionView, didSelectItemAt: indexPath)
+        }
+    }
+    
+    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
+        if let item = itemModel {
+            delegate?.onMoreButtonTapped(sender: sender, item: item)
         }
     }
 }

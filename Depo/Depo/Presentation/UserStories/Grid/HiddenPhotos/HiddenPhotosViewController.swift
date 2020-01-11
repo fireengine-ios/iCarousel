@@ -407,24 +407,42 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
         remove(albums: albums)
     }
     
+    func didUnhidePeople(items: [PeopleItem]) {
+        remove(albums: items)
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        remove(albums: items)
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        remove(albums: items)
+    }
+    
     func didMoveToTrashItems(_ items: [Item]) {
         remove(items: items)
     }
     
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        remove(albums: items)
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        remove(albums: items)
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        remove(albums: items)
+    }
+    
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        dataSource.removeSlider(items: albums)
+        remove(albums: albums)
     }
     
     private func remove(items: [Item]) {
-        let firItems = items.filter { $0.fileType.isFaceImageType }
-        if firItems.isEmpty {
-            reloadAlbums()
-            dataSource.remove(items: items) { [weak self] in
-                self?.checkEmptyView()
-            }
-        } else {
-            // unhide|delete FIR albums
-            remove(albums: firItems)
+        reloadAlbums()
+        dataSource.remove(items: items) { [weak self] in
+            self?.checkEmptyView()
         }
     }
     

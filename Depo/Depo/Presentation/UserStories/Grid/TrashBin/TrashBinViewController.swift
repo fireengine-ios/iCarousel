@@ -39,7 +39,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         
-        reloadData()
+        reloadData(needShowSpinner: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,11 +66,14 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     }
     
     @objc private func onRefresh() {
-        reloadData()
+        reloadData(needShowSpinner: true)
     }
     
-    private func reloadData() {
-        showSpinner()
+    private func reloadData(needShowSpinner: Bool) {
+        if needShowSpinner {
+            showSpinner()
+        }
+        
         dataSource.reset()
         interactor.reloadData { [weak self] in
             guard let self = self else {
@@ -82,8 +85,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         }
     }
     
-    private func reloadItems() {
-        showSpinner()
+    private func reloadItems(needShowSpinner: Bool) {
+        if needShowSpinner {
+            showSpinner()
+        }
+        
         dataSource.itemsReset()
         interactor.reloadItems { [weak self] in
             self?.hideSpinner()
@@ -98,7 +104,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.itemsIsEmpty
     }
-
 }
 
 // MARK: - Selection State Methods
@@ -162,6 +167,10 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
     func didChangeSelectedItems(count: Int) {
         updateBarsForSelectedObjects(count: count)
     }
+    
+    func onMoreButtonTapped(sender: Any, item: Item) {
+        threeDotsManager.showActions(item: item, sender: sender)
+    }
 }
 
 //MARK: - TrashBinSortingManagerDelegate
@@ -170,7 +179,7 @@ extension TrashBinViewController: TrashBinSortingManagerDelegate {
     func sortingRuleChanged(rule: SortedRules) {
         dataSource.sortedRule = rule
         interactor.sortedRule = rule
-        reloadItems()
+        reloadItems(needShowSpinner: true)
         navbarManager.setDefaultState(sortType: rule)
     }
     
@@ -211,11 +220,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
-//        showDeletePopup()
+        let selectedItems = dataSource.allSelectedItems
+        //TODO: - Start delete
     }
     
     func onBottomBarRestore() {
-//        showUnhidePopup()
+        let selectedItems = dataSource.allSelectedItems
+        //TODO: - Start restore
     }
 }
 
@@ -243,12 +254,24 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         dataSource.startSelection()
     }
     
-    func onThreeDotsManagerRestore() {
-//        showUnhidePopup()
+    func onThreeDotsManagerRestore(item: Item?) {
+        let selectedItems: [BaseDataSourceItem]
+        if let item = item {
+            selectedItems = [item]
+        } else {
+            selectedItems = dataSource.allSelectedItems
+        }
+        //TODO: - Start restore
     }
     
-    func onThreeDotsManagerDelete() {
-//        showDeletePopup()
+    func onThreeDotsManagerDelete(item: Item?) {
+        let selectedItems: [BaseDataSourceItem]
+        if let item = item {
+            selectedItems = [item]
+        } else {
+            selectedItems = dataSource.allSelectedItems
+        }
+        //TODO: - Start delete
     }
 }
 
@@ -291,38 +314,56 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         return object === self
     }
     
-    func didUnhide(items: [WrapData]) {
+    func putBackFromTrashItems(_ items: [Item]) {
         remove(items: items)
     }
     
-    func didUnhide(albums: [AlbumItem]) {
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
         remove(albums: albums)
     }
     
-    func moveToTrash(items: [Item]) {
+    func putBackFromTrashPeople(items: [PeopleItem]) {
         remove(items: items)
     }
     
-    func moveToTrash(albums: [AlbumItem]) {
-        dataSource.removeSlider(items: albums)
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        remove(items: items)
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        remove(items: items)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        reloadData(needShowSpinner: false)
+    }
+    
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        reloadData(needShowSpinner: false)
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        reloadData(needShowSpinner: false)
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        reloadData(needShowSpinner: false)
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        reloadData(needShowSpinner: false)
     }
     
     private func remove(items: [Item]) {
-        let firItems = items.filter { $0.fileType.isFaceImageType }
-        if firItems.isEmpty {
-            reloadAlbums()
-            dataSource.remove(items: items) { [weak self] in
-                self?.checkEmptyView()
-            }
-        } else {
-            // unhide|delete FIR albums
-            remove(albums: firItems)
+        reloadAlbums()
+        dataSource.remove(items: items) { [weak self] in
+            self?.checkEmptyView()
         }
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
         dataSource.removeSlider(items: albums) { [weak self] in
-            self?.reloadItems()
+            self?.reloadItems(needShowSpinner: false)
         }
     }
 }
