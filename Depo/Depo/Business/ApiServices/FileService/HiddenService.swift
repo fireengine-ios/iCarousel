@@ -40,13 +40,13 @@ final class HiddenService {
                      size: Int,
                      folderOnly: Bool,
                      handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
-    debugLog("trashedList")
-    
-    let folder = folderOnly ? "true": "false"
-    let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.trashedList, folderUUID,
-                     sortBy.description, sortOrder.description,
-                     page.description, size.description, folder)
+        debugLog("trashedList")
         
+        let folder = folderOnly ? "true" : "false"
+        let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.trashedList, folderUUID,
+                         sortBy.description, sortOrder.description,
+                         page.description, size.description, folder)
+
         return SessionManager
             .customDefault
             .request(url)

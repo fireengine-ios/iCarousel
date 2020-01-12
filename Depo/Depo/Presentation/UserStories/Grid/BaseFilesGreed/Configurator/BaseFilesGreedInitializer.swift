@@ -191,7 +191,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
-        let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status))
+
+        let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
+        let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder
         viewController.parentUUID = folder.uuid
         

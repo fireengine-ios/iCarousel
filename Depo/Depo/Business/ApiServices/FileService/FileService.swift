@@ -228,7 +228,8 @@ class FileList: BaseRequestParametrs {
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
         let path: String
-        if status.isContained(in: [.hidden, .trashed]) {
+        
+        if status == .trashed {
             path = String(format: RouteRequests.FileSystem.trashedList, rootDir,
                           sortBy.description, sortOrder.description,
                           page.description, size.description, folder)
