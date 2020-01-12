@@ -122,6 +122,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var phoneNumber: String?
     private var birthday: String?
     private var address: String?
+    private var isTurkcellUser = false
     
     private var isShortPhoneNumber = false
     
@@ -144,6 +145,12 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationBarWithGradientStyle()
+    }
+    
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
         button.fixEnabledState()
@@ -156,7 +163,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         addressView.isEditState = isEdit
         
         /// phoneView disabled for Turkcell user
-        if isShortPhoneNumber {
+        if isTurkcellUser {
             isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
         } else {
             phoneView.isEditState = isEdit
@@ -311,7 +318,7 @@ extension UserProfileViewController: UITextFieldDelegate  {
 
         case emailView.textField:
             /// phoneView disabled for Turkcell user
-            if isShortPhoneNumber {
+            if isTurkcellUser {
                 birthdayDetailView.textField.becomeFirstResponder()
             } else {
                 phoneView.codeTextField.becomeFirstResponder()
@@ -351,6 +358,7 @@ extension UserProfileViewController: UserProfileViewInput {
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
         addressView.textField.text = userInfo.address
+        isTurkcellUser = userInfo.isTurkcellUser
         
         let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == true) ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
         set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
