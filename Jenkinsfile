@@ -12,8 +12,8 @@ apps = [
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '7YZS5NTGYH',
-            xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech'
+            xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle'
         ],
  [
             name: 'lifedrive',// name will be the base filename of the app
