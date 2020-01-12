@@ -205,14 +205,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
     }
 
     private func presentPopUp(controller: BasePopUpController) {
-        if operation == .smash {
-            controller.dismissCompletion = { [weak self] in
-                let presentedController = self?.router.defaultTopController as? OverlayStickerViewController
-                presentedController?.dismiss(animated: true)
-            }
-        }
-
-        router.defaultTopController?.present(controller, animated: false)
+        router.presentViewController(controller: controller, animated: false)
     }
 
     private func openPeopleAlbum() {

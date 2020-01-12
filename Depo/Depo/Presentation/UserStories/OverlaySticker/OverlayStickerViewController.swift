@@ -21,7 +21,6 @@ final class OverlayStickerViewController: ViewController {
     
     private let uploadService = UploadService()
     private let stickerService: SmashService = SmashServiceImpl()
-    private lazy var smashCoordinator: SmashServiceProtocol = HideSmashCoordinator()
 
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -41,6 +40,8 @@ final class OverlayStickerViewController: ViewController {
     
     var selectedImage: UIImage?
     var imageName: String?
+    var smashCoordinator: SmashServiceProtocol?
+
     private lazy var defaultName = UUID().uuidString
     
     override func viewDidLoad() {
@@ -150,7 +151,7 @@ final class OverlayStickerViewController: ViewController {
     }
 
     private func showCompletionPopUp() {
-        smashCoordinator.smashSuccessed()
+        smashCoordinator?.smashSuccessed()
     }
 
     private func saveResult(result: CreateOverlayStickersResult) {
@@ -167,25 +168,29 @@ final class OverlayStickerViewController: ViewController {
                         self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
                             print("Saved in library")
                         }
-                        self?.uploadImage(contentURL: result.url, completion: { isUploaded in
+                        self?.uploadImage(contentURL: result.url) { isUploaded in
                             print("uploaded")
                             DispatchQueue.main.async {
                                 self?.hideSpinnerIncludeNavigationBar()
-                                self?.showCompletionPopUp()
+                                self?.closeIconTapped { [weak self] in
+                                    self?.showCompletionPopUp()
+                                }
                             }
-                        })
+                        }
         
                     case .video:
                         self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
                             print("Saved in library")
                         }
-                        self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
+                        self?.uploadVideo(contentURL: result.url) { isUploaded in
                             print("uploaded")
                             DispatchQueue.main.async {
                                 self?.hideSpinnerIncludeNavigationBar()
-                                self?.showCompletionPopUp()
+                                self?.closeIconTapped { [weak self] in
+                                    self?.showCompletionPopUp()
+                                }
                             }
-                        })
+                        }
                     }
                     
                 case .failure(let error):
@@ -199,9 +204,9 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    @objc func closeIconTapped() {
+    @objc func closeIconTapped(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: completion)
         }
     }
     
