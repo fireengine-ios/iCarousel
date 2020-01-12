@@ -481,6 +481,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func restore(items: [BaseDataSourceItem]) {
+        //TODO: Need to implement
+    }
+    
     //FIP - Faces-Items-Places
     private func unhideFIPAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         if let items = items as? [PeopleItem] {

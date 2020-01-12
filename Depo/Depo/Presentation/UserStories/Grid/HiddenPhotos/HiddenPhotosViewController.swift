@@ -12,7 +12,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private let emptyView = HiddenPhotosEmptyView.initFromNib()
+    private let emptyView = EmptyView.view(with: .hiddenBin)
     
     private lazy var dataSource = HiddenPhotosDataSource(collectionView: collectionView, delegate: self)
     private lazy var sortingManager = HiddenPhotosSortingManager(delegate: self)
@@ -250,8 +250,9 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
 
 extension HiddenPhotosViewController {
     private func showDetails(item: Item) {
-        guard let hiddenViewController = router.filesDetailHiddenViewController(fileObject: item, items: dataSource.allItems.flatMap { $0 }) else { return }
-        let navController = NavigationController(rootViewController: hiddenViewController)
+        let items = dataSource.allItems.flatMap { $0 }
+        let controller = router.filesDetailViewController(fileObject: item, items: items, status: .hidden)
+        let navController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: navController)
     }
     
@@ -263,13 +264,13 @@ extension HiddenPhotosViewController {
     private func showAlbumDetails(item: BaseDataSourceItem) {
         if let album = item as? AlbumItem {
             openAlbum(item: album)
-        } else if let firItem = item as? Item, firItem.fileType.isContained(in: [.faceImage(.people), .faceImage(.places), .faceImage(.things)]) {
+        } else if let firItem = item as? Item, firItem.fileType.isFaceImageType {
             openFIRAlbum(item: firItem)
         }
     }
     
     private func openAlbum(item: AlbumItem) {
-        let controller = router.hiddenAlbumDetailController(album: item, type: .List, moduleOutput: nil)
+        let controller = router.albumDetailController(album: item, type: .List, status: .hidden, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
     
@@ -407,24 +408,42 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
         remove(albums: albums)
     }
     
+    func didUnhidePeople(items: [PeopleItem]) {
+        remove(albums: items)
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        remove(albums: items)
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        remove(albums: items)
+    }
+    
     func didMoveToTrashItems(_ items: [Item]) {
         remove(items: items)
     }
     
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        remove(albums: items)
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        remove(albums: items)
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        remove(albums: items)
+    }
+    
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        dataSource.removeSlider(items: albums)
+        remove(albums: albums)
     }
     
     private func remove(items: [Item]) {
-        let firItems = items.filter { $0.fileType.isFaceImageType }
-        if firItems.isEmpty {
-            reloadAlbums()
-            dataSource.remove(items: items) { [weak self] in
-                self?.checkEmptyView()
-            }
-        } else {
-            // unhide|delete FIR albums
-            remove(albums: firItems)
+        reloadAlbums()
+        dataSource.remove(items: items) { [weak self] in
+            self?.checkEmptyView()
         }
     }
     

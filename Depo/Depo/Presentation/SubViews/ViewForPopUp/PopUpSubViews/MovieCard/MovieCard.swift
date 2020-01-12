@@ -95,7 +95,7 @@ final class MovieCard: BaseCardView {
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
-        showPhotoVideoDetail(hideActions: true)
+        showPhotoVideoDetail(status: .hidden)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -103,7 +103,7 @@ final class MovieCard: BaseCardView {
         case .save:
             saveImage()
         case .display:
-            showPhotoVideoDetail(hideActions: false)
+            showPhotoVideoDetail(status: .active)
         }
     }
     
@@ -126,13 +126,13 @@ final class MovieCard: BaseCardView {
         }
     }
     
-    private func showPhotoVideoDetail(hideActions: Bool) {
+    private func showPhotoVideoDetail(status: ItemStatus) {
         debugLog("movie card open video")
         guard let item = item else {
             return
         }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: status)
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)

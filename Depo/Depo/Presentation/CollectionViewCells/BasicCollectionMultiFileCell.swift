@@ -71,6 +71,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let leftSpaceSmallCell: CGFloat = 14
     
     var itemModel: Item?
+    var filesDataSource: FilesDataSource?
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
 
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
@@ -97,14 +100,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         self.bigContentImageView.sd_cancelCurrentImageLoad()
         self.smallContentImageView.sd_cancelCurrentImageLoad()
-    }
-    
-    override func setImage(with url: URL) {
-        if let imageView = isBigSize() ? bigContentImageView : smallContentImageView {
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
-                self?.setImage(image: image, animated: true)
-            }
-        }
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
@@ -349,5 +344,51 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             return false
         }
     }
+
     
+    func loadImage(item: Item, indexPath: IndexPath) {
+        switch item.patchToPreview {
+        case .localMediaContent(let local):
+            setAssetId(local.asset.localIdentifier)
+            filesDataSource?.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] image, path in
+                guard let self = self else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    if self.getAssetId() == local.asset.localIdentifier, let image = image {
+                        self.setImage(image: image, animated:  false)
+                    } else {
+                        self.setPlaceholderImage(fileType: item.fileType)
+                    }
+                }
+            })
+            
+        case .remoteUrl(let url) :
+            if let url = url {
+                setImage(with: url)
+            } else {
+                setPlaceholderImage(fileType: item.fileType)
+            }
+        }
+    }
+    
+    override func setImage(with url: URL) {
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            DispatchQueue.main.async {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                self?.setImage(image: image, animated: false)
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        
+        isAlreadyConfigured = true
+    }
 }

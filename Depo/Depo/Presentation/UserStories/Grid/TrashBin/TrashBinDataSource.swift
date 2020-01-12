@@ -1,35 +1,36 @@
 //
-//  HiddenPhotosDataSource.swift
+//  TrashBinDataSource.swift
 //  Depo
 //
-//  Created by Andrei Novikau on 12/12/19.
-//  Copyright © 2019 LifeTech. All rights reserved.
+//  Created by Andrei Novikau on 1/9/20.
+//  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol HiddenPhotosDataSourceDelegate: class {
-    func needLoadNextPhotoPage()
+protocol TrashBinDataSourceDelegate: class {
+    func needLoadNextItemsPage()
     func needLoadNextAlbumPage()
-    func didSelectPhoto(item: Item)
-    func didSelectAlbum(item: BaseDataSourceItem)
+    func didSelect(item: Item)
+    func didSelect(album: BaseDataSourceItem)
     func onStartSelection()
     func didChangeSelectedItems(count: Int)
+    func onMoreButtonTapped(sender: Any, item: Item)
 }
 
-final class HiddenPhotosDataSource: NSObject {
+final class TrashBinDataSource: NSObject {
     
     private typealias InsertItemResult = (indexPath: IndexPath?, section: Int?)
     private typealias ChangesItemResult = (indexPaths: [IndexPath], sections: IndexSet)
-    typealias SelectedItems = (photos: [Item], albums: [BaseDataSourceItem])
     
-    private let padding: CGFloat = 1
-    private let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
+    private let linePadding = Device.isIpad ? NumericConstants.iPadGreedHorizontalSpace : NumericConstants.iPhoneGreedHorizontalSpace
+    private let columnPadding = Device.isIpad ? NumericConstants.iPadGreedInset : NumericConstants.iPhoneGreedInset
+    private let columns = Device.isIpad ? NumericConstants.numerCellInDocumentLineOnIpad : NumericConstants.numerCellInDocumentLineOnIphone
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
     private let collectionView: UICollectionView
-    private weak var delegate: HiddenPhotosDataSourceDelegate?
+    private weak var delegate: TrashBinDataSourceDelegate?
     private var albumSlider: AlbumsSliderCell?
     
     private(set) var allItems = [[Item]]()
@@ -40,6 +41,12 @@ final class HiddenPhotosDataSource: NSObject {
     }
     
     var sortedRule: SortedRules = .timeUp
+    var viewType: MoreActionsConfig.ViewType = .List {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     private(set) var isSelectionStateActive = false
     private var isPaginationDidEnd = false
     
@@ -47,31 +54,31 @@ final class HiddenPhotosDataSource: NSObject {
     
     var isEmpty: Bool {
         let albumsEmpty = albumSlider?.isEmpty ?? true
-        return photosIsEmpty && albumsEmpty
+        return itemsIsEmpty && albumsEmpty
     }
     
-    var photosIsEmpty: Bool {
+    var itemsIsEmpty: Bool {
         return allItems.first(where: { !$0.isEmpty }) == nil
     }
     
-    private lazy var photoCellSize: CGSize = {
+    private lazy var cellGridSize: CGSize = {
         let viewWidth = UIScreen.main.bounds.width
-        let paddingWidth = (columns - 1) * padding
+        let paddingWidth = (columns + 1) * columnPadding
         let itemWidth = floor((viewWidth - paddingWidth) / columns)
         return CGSize(width: itemWidth, height: itemWidth)
     }()
     
-    private lazy var sliderCellSize: CGSize = {
-        return CGSize(width: UIScreen.main.bounds.width, height: AlbumsSliderCell.height)
+    private lazy var cellListSize: CGSize = {
+        return CGSize(width: UIScreen.main.bounds.width, height: 65)
     }()
     
-    var allSelectedItems: SelectedItems {
-        return (selectedItems, albumSlider?.selectedItems ?? [])
+    var allSelectedItems: [BaseDataSourceItem] {
+        return selectedItems + (albumSlider?.selectedItems ?? [])
     }
     
     //MARK: - Init
     
-    required init(collectionView: UICollectionView, delegate: HiddenPhotosDataSourceDelegate?) {
+    required init(collectionView: UICollectionView, delegate: TrashBinDataSourceDelegate?) {
         self.collectionView = collectionView
         self.delegate = delegate
         
@@ -84,26 +91,31 @@ final class HiddenPhotosDataSource: NSObject {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(nibCell: CollectionViewCellForPhoto.self)
-        collectionView.register(nibCell: CollectionViewCellForVideo.self)
-        collectionView.register(nibCell: AlbumsSliderCell.self)
+        registerCells()
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.minimumInteritemSpacing = padding
-            layout.minimumLineSpacing = padding
+            layout.minimumInteritemSpacing = columnPadding
+            layout.minimumLineSpacing = linePadding
         }
+    }
+    
+    private func registerCells() {
+        let registreList = [AlbumsSliderCell.self,
+                            BasicCollectionMultiFileCell.self]
+        
+        registreList.forEach { collectionView.register(nibCell: $0) }
     }
 }
 
 //MARK: - Public methods
 
-extension HiddenPhotosDataSource {
+extension TrashBinDataSource {
     
-    func appendAlbum(items: [BaseDataSourceItem]) {
-        albumSlider?.appendItems(items)
+    func append(albums: [BaseDataSourceItem]) {
+        albumSlider?.appendItems(albums)
     }
     
     func finishLoadAlbums() {
@@ -120,8 +132,8 @@ extension HiddenPhotosDataSource {
                 return
             }
             
-            let isEmpty = self.photosIsEmpty
-            let insertResult = self.insert(newItems: items)
+            let isEmpty = self.itemsIsEmpty
+            let insertResult = self.append(newItems: items)
             guard !insertResult.indexPaths.isEmpty else {
                 DispatchQueue.main.async {
                     completion()
@@ -162,7 +174,7 @@ extension HiddenPhotosDataSource {
             }
 
             DispatchQueue.main.async {
-                if self.photosIsEmpty {
+                if self.itemsIsEmpty {
                     self.collectionView.reloadData()
                     completion()
                 } else {
@@ -184,11 +196,11 @@ extension HiddenPhotosDataSource {
     }
     
     func reset() {
-        photosReset()
+        itemsReset()
         albumSliderReset()
     }
     
-    func photosReset() {
+    func itemsReset() {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
@@ -196,7 +208,7 @@ extension HiddenPhotosDataSource {
     }
     
     func albumSliderReset() {
-        albumSlider?.reset()    
+        albumSlider?.reset()
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
@@ -223,24 +235,30 @@ extension HiddenPhotosDataSource {
         updateVisibleCells()
     }
     
+    func getSameTypeItems(for item: Item) -> [Item] {
+        let items = allItems.flatMap { $0 }
+        if item.fileType.isDocument {
+            return items.filter { $0.fileType.isDocument }
+        } else if item.fileType == .video || item.fileType == .image {
+            return items.filter { $0.fileType == .video || $0.fileType == .image }
+        }
+        return items.filter { $0.fileType == item.fileType }
+    }
+    
     private func updateVisibleCells() {
-        collectionView.visibleCells.compactMap { $0 as? CollectionViewCellDataProtocol }.forEach {
+        collectionView.visibleCells.compactMap { $0 as? BasicCollectionMultiFileCell }.forEach {
             $0.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
         }
     }
     
     private func updateSelectionCount() {
-        if let selectedAlbumsCount = albumSlider?.selectedItems.count {
-            delegate?.didChangeSelectedItems(count: selectedItems.count + selectedAlbumsCount)
-        } else {
-            delegate?.didChangeSelectedItems(count: selectedItems.count)
-        }
+        delegate?.didChangeSelectedItems(count: allSelectedItems.count)
     }
 }
 
 //MARK: - Data processing
 
-extension HiddenPhotosDataSource {
+extension TrashBinDataSource {
     
     private func item(for indexPath: IndexPath) -> Item? {
         guard allItems.count > indexPath.section - 1, allItems[indexPath.section - 1].count > indexPath.row else {
@@ -269,7 +287,7 @@ extension HiddenPhotosDataSource {
         return headerText(for: item)
     }
     
-    private func insert(newItems: [Item]) -> ChangesItemResult {
+    private func append(newItems: [Item]) -> ChangesItemResult {
         var insertedIndexPaths = [IndexPath]()
         var insertedSections = IndexSet()
         
@@ -279,7 +297,7 @@ extension HiddenPhotosDataSource {
         for item in insertItems {
             autoreleasepool {
                 let insertResult: InsertItemResult?
-                if !allItems.isEmpty,
+                if !itemsIsEmpty,
                     let lastItem = allItems.last?.last {
                     switch sortedRule {
                     case .timeUp, .timeDown:
@@ -343,7 +361,7 @@ extension HiddenPhotosDataSource {
         
         if lastItemdDate.getYear() == newItemDate.getYear(),
             lastItemdDate.getMonth() == newItemDate.getMonth(),
-            !allItems.isEmpty {
+            !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         } else {
             return appendSection(with: newItem)
@@ -356,7 +374,7 @@ extension HiddenPhotosDataSource {
         
         if !lastItemFirstLetter.isEmpty, !newItemFirstLetter.isEmpty,
             lastItemFirstLetter == newItemFirstLetter,
-            !allItems.isEmpty {
+            !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         } else {
             return appendSection(with: newItem)
@@ -364,14 +382,14 @@ extension HiddenPhotosDataSource {
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) -> InsertItemResult {
-        if !allItems.isEmpty {
+        if !itemsIsEmpty {
             return appendInLastSection(newItem: newItem)
         }
         return (nil, nil)
     }
     
     private func appendInLastSection(newItem: Item) -> InsertItemResult {
-        guard !allItems.isEmpty else {
+        guard !itemsIsEmpty else {
             assertionFailure()
             return (nil, nil)
         }
@@ -393,7 +411,7 @@ extension HiddenPhotosDataSource {
 
 //MARK: - UICollectionViewDataSource
 
-extension HiddenPhotosDataSource: UICollectionViewDataSource {
+extension TrashBinDataSource: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return allItems.count + 1
@@ -413,20 +431,8 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             return collectionView.dequeue(cell: AlbumsSliderCell.self, for: indexPath)
-        }
-
-        guard let item = item(for: indexPath) else {
-            assertionFailure("failed return cell")
-            return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
-        }
-        
-        switch item.fileType {
-        case .image:
-             return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
-        case .video:
-             return collectionView.dequeue(cell: CollectionViewCellForVideo.self, for: indexPath)
-        default:
-             return collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
+        } else {
+            return collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
         }
     }
     
@@ -449,21 +455,22 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
             }
             
             cell.delegate = self
-            cell.setup(title: TextConstants.hiddenBinAlbumSliderTitle, emptyText: TextConstants.hiddenBinAlbumSliderEmpty)
+            cell.setup(title: TextConstants.trashBinAlbumSliderTitle, emptyText: TextConstants.trashBinAlbumSliderEmpty)
             return
         }
         
-        guard let cell = cell as? CollectionViewCellDataProtocol,
+        guard let cell = cell as? BasicCollectionMultiFileCell,
             let item = item(for: indexPath) else {
             assertionFailure("failed setup cell")
             return
         }
         
+        cell.updating()
         cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: selectedItems.contains(item))
         cell.configureWithWrapper(wrappedObj: item)
         cell.setDelegateObject(delegateObject: self)
-        (cell as? CollectionViewCellForPhoto)?.filesDataSource = filesDataSource
-        (cell as? CollectionViewCellForPhoto)?.loadImage(item: item, indexPath: indexPath)
+        cell.filesDataSource = filesDataSource
+        cell.loadImage(item: item, indexPath: indexPath)
         
         if isPaginationDidEnd {
             return
@@ -473,7 +480,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
         let isLastCell = countRow - 1 == indexPath.row && indexPath.section == collectionView.numberOfSections - 1
 
         if isLastCell {
-            delegate?.needLoadNextPhotoPage()
+            delegate?.needLoadNextItemsPage()
         }
     }
     
@@ -495,7 +502,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
 
 //MARK: - UICollectionViewDelegate
 
-extension HiddenPhotosDataSource: UICollectionViewDelegate {
+extension TrashBinDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section > 0, let item = item(for: indexPath) else {
             return
@@ -510,14 +517,14 @@ extension HiddenPhotosDataSource: UICollectionViewDelegate {
             collectionView.reloadItems(at: [indexPath])
             updateSelectionCount()
         } else  {
-            delegate?.didSelectPhoto(item: item)
+            delegate?.didSelect(item: item)
         }
     }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
  
-extension HiddenPhotosDataSource: UICollectionViewDelegateFlowLayout {
+extension TrashBinDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         return showGroups && section > 0 ? 50 : 0
@@ -531,14 +538,17 @@ extension HiddenPhotosDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
             return CGSize(width: collectionView.bounds.width, height: AlbumsSliderCell.height)
+        } else if viewType == .Grid {
+            return cellGridSize
+        } else {
+            return cellListSize
         }
-        return photoCellSize
     }
 }
 
 //MARK: - LBCellsDelegate
 
-extension HiddenPhotosDataSource: LBCellsDelegate {
+extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
     
     func canLongPress() -> Bool {
         return true
@@ -552,14 +562,20 @@ extension HiddenPhotosDataSource: LBCellsDelegate {
             collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
     }
+    
+    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
+        if let item = itemModel {
+            delegate?.onMoreButtonTapped(sender: sender, item: item)
+        }
+    }
 }
 
 //MARK: - AlbumsSliderCellDelegate
 
-extension HiddenPhotosDataSource: AlbumsSliderCellDelegate {
+extension TrashBinDataSource: AlbumsSliderCellDelegate {
     
     func didSelect(item: BaseDataSourceItem) {
-        delegate?.didSelectAlbum(item: item)
+        delegate?.didSelect(album: item)
     }
     
     func didChangeSelectionAlbumsCount(_ count: Int) {

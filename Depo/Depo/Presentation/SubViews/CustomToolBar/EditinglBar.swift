@@ -21,7 +21,7 @@ enum ElementTypes {
     case rename
     case removeAlbum
     case moveToTrash
-    
+    case restore
     //used only in alert sheet:
     //photos:
     case createStory

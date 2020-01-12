@@ -574,11 +574,12 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
                                                                                                  folder: folder,
                                                                                                  type: type,
                                                                                                  sortType: sortType,
+                                                                                                 status: status,
                                                                                                  moduleOutput: moduleOutput,
                                                                                                  alertSheetExcludeTypes: alertSheetExcludeTypes)
 
@@ -699,75 +700,39 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+    func filesDetailViewController(fileObject: WrapData, items: [WrapData], status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
                                                                                     selectedItem: fileObject,
-                                                                                    allItems: items)
+                                                                                    allItems: items,
+                                                                                    status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
                                                                                          allItems: items,
-                                                                                         albumUUID: albumUUID)
+                                                                                         albumUUID: albumUUID,
+                                                                                         status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
                                                                                          allItems: items,
                                                                                          albumUUID: albumUUID,
-                                                                                         albumItem: albumItem)
+                                                                                         albumItem: albumItem,
+                                                                                         status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
-    
-    func filesDetailHiddenFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         albumItem: albumItem)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return controller
-    }
-    
-    // MARK: Hidden View Controllers
-    
-    func filesDetailHiddenAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController? {
-        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                               selectedItem: fileObject,
-                                                                                               allItems: items,
-                                                                                               albumUUID: albumUUID,
-                                                                                               albumItem: albumItem)
-        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
-            assertionFailure()
-            return nil
-        }
-        
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return photoVideoDetailViewController
-    }
-    
-    func filesDetailHiddenViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController? {
-        let controller = PhotoVideoDetailModuleInitializer.initializeHiddenViewController(with: "PhotoVideoDetailViewController",
-                                                                                          selectedItem: fileObject,
-                                                                                          allItems: items)
-        guard let photoVideoDetailViewController = controller as? PhotoVideoDetailViewController else {
-            assertionFailure()
-            return nil
-        }
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return photoVideoDetailViewController
-    }
-    
+
     // MARK: Albums list
     
     func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
@@ -784,13 +749,8 @@ class RouterVC: NSObject {
     
     // MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
-        return controller
-    }
-    
-    func hiddenAlbumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
-        let controller = AlbumDetailModuleInitializer.initializeHiddenAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, status: status, moduleOutput: moduleOutput)
         return controller
     }
     

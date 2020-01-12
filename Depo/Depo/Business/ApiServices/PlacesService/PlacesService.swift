@@ -102,9 +102,9 @@ final class PlacesAlbumParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam: String
         if status.isContained(in: [.hidden, .trashed]) {
-            searchWithParam = String(format: RouteRequests.peopleAlbumWithStatus, id, status.rawValue)
+            searchWithParam = String(format: RouteRequests.placesAlbumWithStatus, id, status.rawValue)
         } else {
-            searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+            searchWithParam = String(format: RouteRequests.placesAlbum, id)
         }
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }

@@ -22,7 +22,7 @@ extension SegmentedChildController where Self: UIViewController {
     func setTitle(_ title: String) {
         parentVC?.navigationItem.title = title
     }
-
+    
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         parentVC?.navigationItem.leftBarButtonItems = nil
         parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)

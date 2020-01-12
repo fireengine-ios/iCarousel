@@ -213,22 +213,32 @@ class FileList: BaseRequestParametrs {
     let rootDir: String
     let page: Int
     let size: Int
+    let status: ItemStatus
     
-    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false) {
+    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false, status: ItemStatus) {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
         self.rootDir = rootDir
         self.page = page
         self.size = size
         self.folderOnly = folderOnly
+        self.status = status
     }
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format: RouteRequests.FileSystem.fileList, rootDir,
-                                  sortBy.description, sortOrder.description,
-                                  page.description, size.description, folder)
+        let path: String
         
+        if status == .trashed {
+            path = String(format: RouteRequests.FileSystem.trashedList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        } else {
+            path = String(format: RouteRequests.FileSystem.fileList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        }
+
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -564,7 +574,7 @@ class FileService: BaseRequestService {
     private let size = 100
     
     func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
-                   folderOnly: Bool = false, remoteServicePage: Int,
+                   folderOnly: Bool = false, remoteServicePage: Int, status: ItemStatus,
                    success: ListRemoteItems?, fail: FailRemoteItems?) {
         page = remoteServicePage
         let requestParam = FileList(rootDir: rootFolder,
@@ -572,7 +582,8 @@ class FileService: BaseRequestService {
                                     sortOrder: sortOrder,
                                     page: page,
                                     size: size,
-                                    folderOnly: folderOnly)
+                                    folderOnly: folderOnly,
+                                    status: status)
         let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { response in
             guard let resultResponse = (response as? FileListResponse)?.fileList else {
                 fail?()

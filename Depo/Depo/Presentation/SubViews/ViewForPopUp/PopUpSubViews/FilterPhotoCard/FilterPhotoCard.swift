@@ -201,7 +201,10 @@ final class FilterPhotoCard: BaseCardView {
         DispatchQueue.global().async {
             let item = WrapData(asset: asset)
             
-            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                        selectedItem: item,
+                                                                                        allItems: [item],
+                                                                                        status: .active)
             controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             let nController = NavigationController(rootViewController: controller)
             DispatchQueue.main.async {

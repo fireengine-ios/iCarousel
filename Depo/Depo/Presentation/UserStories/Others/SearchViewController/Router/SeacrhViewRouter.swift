@@ -22,13 +22,13 @@ class SeacrhViewRouter: SearchViewRouterInput {
         case .photoAlbum, .musicPlayList:
             return
         case .folder:
-            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, moduleOutput: nil)
+            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, status: .active, moduleOutput: nil)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             let player: MediaPlayer = factory.resolve()
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
+            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray, status: .active)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
         }
@@ -69,7 +69,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
     }
     
     func openAlbum(item: AlbumItem) {
-        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        let controller = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
 }

@@ -25,7 +25,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private var localPlayer: AVPlayer?
     private var playerController: FixedAVPlayerViewController?
     
-    var hideActions = false
+    var status: ItemStatus = .active
     var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
@@ -127,7 +127,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
         
-        if hideActions {
+        if status.isContained(in: [.hidden, .trashed]) {
             editingTabBar.view.isHidden = true
         }
         
@@ -212,7 +212,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem = threeDotsBarButtonItem
         }
 
-        if hideActions {
+        if status.isContained(in: [.hidden, .trashed]) {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
             guard !objects.isEmpty, selectedIndex < objects.count else {

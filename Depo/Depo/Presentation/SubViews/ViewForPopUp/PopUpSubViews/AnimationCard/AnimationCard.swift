@@ -136,7 +136,7 @@ class AnimationCard: BaseCardView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: .active)
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         let nController = UINavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
