@@ -210,24 +210,28 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     private func getQuotaInfo() {
         accountService.quotaInfo(success: { [weak self] response in
-            DispatchQueue.toMain {
-                if let qresponce = response as? QuotaInfoResponse {
-                    guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else {
-                        self?.output.didObtainQuotaInfo(usagePercentage: 0)
-                        assertionFailure("quota info is missing")
-                        return
-                    }
-
-                    let usagePercent = Float(usedBytes) / Float(quotaBytes)
-                    self?.trackQuota(quotaPercentage: usagePercent)
-                    
-                    self?.output.didObtainQuotaInfo(usagePercentage: usagePercent)
+            DispatchQueue.main.async {
+                guard
+                    let qresponse = response as? QuotaInfoResponse,
+                    let quotaBytes = qresponse.bytes,
+                    let usedBytes = qresponse.bytesUsed
+                else {
+                    self?.output.didObtainQuotaInfo(usagePercentage: 0)
+                    assertionFailure("quota info is missing")
+                    return
                 }
+                
+                let usagePercent = Float(usedBytes) / Float(quotaBytes)
+                self?.trackQuota(quotaPercentage: usagePercent)
+                
+                self?.output.didObtainQuotaInfo(usagePercentage: usagePercent)
             }
             
         }, fail: { [weak self] error in
-            self?.output.didObtainQuotaInfo(usagePercentage: 0)
-            self?.output.didObtainError(with: error.description, isNeedStopRefresh: false)
+            DispatchQueue.main.async {
+                self?.output.didObtainQuotaInfo(usagePercentage: 0)
+                self?.output.didObtainError(with: error.description, isNeedStopRefresh: false)
+            }
         })
     }
 }

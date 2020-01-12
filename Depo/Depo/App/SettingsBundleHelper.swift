@@ -35,7 +35,7 @@ final class SettingsBundleHelper: NSObject {
     //MARK: - Instance related activities
     
     func lifeTechSetup() {
-        if SettingsBundleHelper.isLifeTechBuild {
+        if SettingsBundleHelper.isDebugBundleEnabled {
             setCurrentRouteEnvironment()
             startObserving()
         }
@@ -102,15 +102,10 @@ final class SettingsBundleHelper: NSObject {
         }
     }
     
-    private static var isLifeTechBuild: Bool {
-        #if DEBUG
-        return false ///no bundle setup or use - in DEBUG environment,
-        /// we can continue to use RouteRequests currentServerEnvironment
+    private static var isDebugBundleEnabled: Bool {
+        #if DEBUG_BUNDLE_ENABLED
+        return true
         #endif
-        return true//((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
+        return false
     }
-    
-//    var isLifeTechBundle: Bool = {
-//        return ((Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String) == "by.come.life.Lifebox")
-//    }()
 }
