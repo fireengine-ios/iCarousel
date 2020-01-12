@@ -35,8 +35,7 @@ protocol TrashBinBottomBarManagerDelegate: class {
 
 final class TrashBinBottomBarManager {
 
-    //TODO: change to restore
-    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.delete, .moveToTrash],
+    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.restore, .delete],
                                                           style: .blackOpaque,
                                                           tintColor: nil)
     
@@ -71,7 +70,7 @@ extension TrashBinBottomBarManager: TrashBinTabBarPresenterDelegate {
     
     func bottomBarSelectedItem(_ item: ElementTypes) {
         switch item {
-        case .unhide: //TODO: change to restore
+        case .restore:
             delegate?.onBottomBarRestore()
         case .delete:
             delegate?.onBottomBarDelete()

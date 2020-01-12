@@ -24,16 +24,14 @@ final class TrashBinThreeDotMenuManager {
     
     func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
         if isSelectingMode {
-            //TODO: - chande to [.putToBack, .delete]
-            showAlertSheet(with: [.unhide, .delete], item: nil, sender: sender)
+            showAlertSheet(with: [.restore, .delete], item: nil, sender: sender)
         } else {
             showAlertSheet(with: [.select], item: nil, sender: sender)
         }
     }
     
     func showActions(item: Item, sender: Any) {
-        //TODO: - chande to [.putToBack, .delete]
-        showAlertSheet(with: [.unhide, .delete], item: item, sender: sender)
+        showAlertSheet(with: [.restore, .delete], item: item, sender: sender)
     }
 
     private func showAlertSheet(with types: [ElementTypes], item: Item?, sender: Any) {
@@ -47,8 +45,8 @@ final class TrashBinThreeDotMenuManager {
         types.forEach { type in
             let action: UIAlertAction?
             switch type {
-            case .unhide: //TODO: change to restore
-                action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default, handler: { [weak self] _ in
+            case .restore:
+                action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { [weak self] _ in
                     self?.delegate.onThreeDotsManagerRestore(item: item)
                 })
             case .select:
