@@ -14,7 +14,7 @@ final class TrashBinRouter {
     private lazy var player: MediaPlayer = factory.resolve()
     
     func openAlbum(item: AlbumItem) {
-        let controller = router.hiddenAlbumDetailController(album: item, type: .List, moduleOutput: nil)
+        let controller = router.albumDetailController(album: item, type: .List, status: .trashed, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
     
@@ -37,7 +37,7 @@ final class TrashBinRouter {
             router.presentViewController(controller: controller)
             
         default:
-            let controller = router.filesDetailViewController(fileObject: item, items: sameTypeItems)
+            let controller = router.filesDetailViewController(fileObject: item, items: sameTypeItems, status: .trashed)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
         }

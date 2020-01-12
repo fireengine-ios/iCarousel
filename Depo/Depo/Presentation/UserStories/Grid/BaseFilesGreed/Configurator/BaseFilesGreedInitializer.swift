@@ -181,6 +181,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
+        viewController.status = status
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)

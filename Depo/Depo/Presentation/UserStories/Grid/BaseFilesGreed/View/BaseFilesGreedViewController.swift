@@ -69,7 +69,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     private var isRefreshAllowed = true
     
-    var isHiddenAlbum: Bool = false
+    var status: ItemStatus = .active
     
     // MARK: Life cycle
     
