@@ -12931,17 +12931,11 @@
 		021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewViewController.swift; sourceTree = "<group>"; };
 		023504848539E3C241742408 /* LBAlbumLikePreviewSliderModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderModuleInput.swift; sourceTree = "<group>"; };
 		0303A7D72397D0D000907F42 /* LifeTech_lifedrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTech_lifedrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A7D82397D0D000907F42 /* lifedrive copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "lifedrive copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/lifedrive copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A7FD2397D0E900907F42 /* LifeTech_LifeDrive-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech_LifeDrive-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A7FE2397D0EA00907F42 /* LifeDrive-widget copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDrive-widget copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDrive-widget copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8622397D12100907F42 /* LifeTech_LifeDriveShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveShared.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A8632397D12100907F42 /* LifeDriveShared copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveShared copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveShared copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8A22397D14900907F42 /* LifeTech_LifeDriveFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A8A32397D14A00907F42 /* LifeDriveFileProvider copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveFileProvider copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveFileProvider copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8CF2397D15100907F42 /* LifeTech_LifeDriveProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveProviderUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A8D02397D15100907F42 /* LifeDriveProviderUI copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveProviderUI copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveProviderUI copy-Info.plist"; sourceTree = "<absolute>"; };
 		0303A8DD2397D15800907F42 /* LifeTech_LifeDriveNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_LifeDriveNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A8DE2397D15900907F42 /* LifeDriveNotificationService copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeDriveNotificationService copy-Info.plist"; path = "/Users/alex-mac/stash/stash/lifebox-ios-new/Depo/LifeDriveNotificationService copy-Info.plist"; sourceTree = "<absolute>"; };
 		0309C38023992FBA0031DB5B /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewInput.swift; sourceTree = "<group>"; };
@@ -15336,9 +15330,7 @@
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
 		CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSortStorage.swift; sourceTree = "<group>"; };
 		CF8B6B2E23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC_Depo_LifeTech_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF8B6B2F23CBC9D70021B021 /* TC_Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TC_Depo_LifeTech copy-Info.plist"; path = "/Users/pestriakovaleksandr/repo/stash/lifebox-ios-new/Depo/TC_Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
 		CF8B72F823CBCA280021B021 /* lifedrive_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifedrive_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF8B72F923CBCA280021B021 /* lifedrive copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "lifedrive copy-Info.plist"; path = "/Users/pestriakovaleksandr/repo/stash/lifebox-ios-new/Depo/lifedrive copy-Info.plist"; sourceTree = "<absolute>"; };
 		CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
@@ -15900,14 +15892,6 @@
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
-				0303A7D82397D0D000907F42 /* lifedrive copy-Info.plist */,
-				0303A7FE2397D0EA00907F42 /* LifeDrive-widget copy-Info.plist */,
-				0303A8632397D12100907F42 /* LifeDriveShared copy-Info.plist */,
-				0303A8A32397D14A00907F42 /* LifeDriveFileProvider copy-Info.plist */,
-				0303A8D02397D15100907F42 /* LifeDriveProviderUI copy-Info.plist */,
-				0303A8DE2397D15900907F42 /* LifeDriveNotificationService copy-Info.plist */,
-				CF8B6B2F23CBC9D70021B021 /* TC_Depo_LifeTech copy-Info.plist */,
-				CF8B72F923CBCA280021B021 /* lifedrive copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
