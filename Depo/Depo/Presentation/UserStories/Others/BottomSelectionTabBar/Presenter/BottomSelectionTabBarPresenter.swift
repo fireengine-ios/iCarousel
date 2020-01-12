@@ -32,6 +32,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.hideAlbums)
             case .unhide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
+            case .unhideAlbumItems:
+                itemTupple.append(EditinglBar.PreDetermendTypes.unhideAlbumItems)
             case .smash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .completelyMoveToTrash:
@@ -174,6 +176,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.unhide(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .unhideAlbumItems:
+                //TODO: will be another task to implement analytics calls
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.unhideAlbumItems(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
@@ -431,7 +443,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     //Currently there is no task for smash from action sheet.
                     assertionFailure("In order to use smash please implement this function")
                     action = UIAlertAction()
-                    
+                case .restore:
+                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
+                        self.interactor.restore(items: currentItems)
+                    })
                 case .deleteFaceImage:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()

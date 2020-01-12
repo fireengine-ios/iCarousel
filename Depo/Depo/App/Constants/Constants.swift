@@ -743,6 +743,7 @@ struct TextConstants {
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetUnhide = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetRestore = NSLocalizedString("Restore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetShareSmallSize = NSLocalizedString("Small Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareOriginalSize = NSLocalizedString("Original Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1640,4 +1641,7 @@ struct TextConstants {
     static let unhidePopupSuccessText = NSLocalizedString("unhide_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupSuccessTitle = NSLocalizedString("delete_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupSuccessText = NSLocalizedString("delete_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let trashBinAlbumSliderTitle = NSLocalizedString("trash_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinAlbumSliderEmpty = NSLocalizedString("trash_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

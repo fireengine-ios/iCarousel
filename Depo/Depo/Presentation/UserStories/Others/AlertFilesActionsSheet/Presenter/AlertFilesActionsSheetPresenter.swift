@@ -333,9 +333,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
                         self?.interactor.unhide(items: selectedItems)
                     }
+                case .unhideAlbumItems:
+                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
+                        self?.interactor.unhideAlbumItems(items: selectedItems)
+                    }
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()
+                case .restore:
+                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { [weak self] _ in
+                        self?.interactor.restore(items: selectedItems)
+                    })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")

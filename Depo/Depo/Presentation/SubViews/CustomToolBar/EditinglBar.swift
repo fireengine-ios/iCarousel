@@ -21,7 +21,7 @@ enum ElementTypes {
     case rename
     case removeAlbum
     case moveToTrash
-    
+    case restore
     //used only in alert sheet:
     //photos:
     case createStory
@@ -39,6 +39,7 @@ enum ElementTypes {
     case hide
     case hideAlbums
     case unhide
+    case unhideAlbumItems
     case smash
     //upload?
     case photos
@@ -85,6 +86,7 @@ class EditinglBar: CustomTabBar {
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
         static let hideAlbums = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
         static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
+        static let unhideAlbumItems = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
         static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
         static let completelyMoveToTrash = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
     }

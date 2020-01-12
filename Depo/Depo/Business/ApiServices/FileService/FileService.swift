@@ -213,22 +213,32 @@ class FileList: BaseRequestParametrs {
     let rootDir: String
     let page: Int
     let size: Int
+    let status: ItemStatus
     
-    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false) {
+    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false, status: ItemStatus) {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
         self.rootDir = rootDir
         self.page = page
         self.size = size
         self.folderOnly = folderOnly
+        self.status = status
     }
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format: RouteRequests.FileSystem.fileList, rootDir,
-                                  sortBy.description, sortOrder.description,
-                                  page.description, size.description, folder)
+        let path: String
         
+        if status == .trashed {
+            path = String(format: RouteRequests.FileSystem.trashedList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        } else {
+            path = String(format: RouteRequests.FileSystem.fileList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        }
+
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -564,7 +574,7 @@ class FileService: BaseRequestService {
     private let size = 100
     
     func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
-                   folderOnly: Bool = false, remoteServicePage: Int,
+                   folderOnly: Bool = false, remoteServicePage: Int, status: ItemStatus,
                    success: ListRemoteItems?, fail: FailRemoteItems?) {
         page = remoteServicePage
         let requestParam = FileList(rootDir: rootFolder,
@@ -572,7 +582,8 @@ class FileService: BaseRequestService {
                                     sortOrder: sortOrder,
                                     page: page,
                                     size: size,
-                                    folderOnly: folderOnly)
+                                    folderOnly: folderOnly,
+                                    status: status)
         let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { response in
             guard let resultResponse = (response as? FileListResponse)?.fileList else {
                 fail?()
@@ -660,381 +671,5 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
 //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
-    }
-}
-
-
-
-import Alamofire
-
-// TODO: create file HiddenService if need
-final class HiddenService {
-    
-    // MARK: - All
-    
-    @discardableResult
-    func hiddenList(sortBy: SortType,
-                    sortOrder: SortOrder,
-                    page: Int,
-                    size: Int,
-                    handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
-        debugLog("hiddenList")
-        
-        let url = String(format: RouteRequests.FileSystem.hiddenList,
-                         sortBy.description, sortOrder.description,
-                         page.description, size.description)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hiddenAlbums(sortBy: SortType,
-                      sortOrder: SortOrder,
-                      page: Int,
-                      size: Int,
-                      handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
-        debugLog("hiddenAlbums")
-        
-        let url = String(format: RouteRequests.albumListHidden,
-                         SearchContentType.album.description,
-                         page.description, size.description,
-                         sortBy.description, sortOrder.description)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    // MARK: - SmartAlbum Detail
-    
-    @discardableResult
-    func hiddenPlacesAlbumDetail(id: Int,
-                                 handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
-        debugLog("hiddenPlacesAlbumDetail")
-        
-        let url = String(format: RouteRequests.placesAlbumHidden, id)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hiddenPeopleAlbumDetail(id: Int,
-                                 handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
-        debugLog("hiddenPeopleAlbumDetail")
-        
-        let url = String(format: RouteRequests.peopleAlbumHidden, id)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hiddenThingsAlbumDetail(id: Int,
-                                 handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
-        debugLog("hiddenThingsAlbumDetail")
-        
-        let url = String(format: RouteRequests.thingsAlbumHidden, id)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    // MARK: - SmartAlbum All
-    
-    @discardableResult
-    func hiddenPlacesPage(page: Int,
-                          size: Int,
-                          handler: @escaping (ResponseResult<PlacesPageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenPlacesPage")
-        
-        let url = String(format: RouteRequests.placesPageHidden, size, page)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hiddenPeoplePage(page: Int,
-                          size: Int,
-                          handler: @escaping (ResponseResult<PeoplePageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenPeoplePage")
-        
-        let url = String(format: RouteRequests.peoplePageHidden, size, page)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hiddenThingsPage(page: Int,
-                          size: Int,
-                          handler: @escaping (ResponseResult<ThingsPageResponse>) -> Void) -> URLSessionTask? {
-        debugLog("getHiddenThingsPage")
-        
-        let url = String(format: RouteRequests.thingsPageHidden, size, page)
-        
-        return SessionManager
-            .customDefault
-            .request(url)
-            .customValidate()
-            .responseObject(handler)
-            .task
-    }
-    
-    // MARK: - Hide
-    
-    @discardableResult
-    func hideItems(_ items: [WrapData],
-                   handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideItems")
-        let ids = items.compactMap { $0.uuid }
-        return hideItemsByUuids(ids, handler: handler)
-    }
-    
-    private func hideItemsByUuids(_ uuids: [String],
-                                  handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideItemsByUuids")
-        
-        return SessionManager
-            .customDefault
-            .request(RouteRequests.FileSystem.hide,
-                     method: .delete,
-                     parameters: uuids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid(handler)
-            .task
-    }
-    
-    @discardableResult
-    func hideAlbums(_ albums: [AlbumServiceResponse],
-                    handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideAlbums")
-        let ids = albums.compactMap { $0.uuid }
-        return hideItemsByUuids(ids, handler: handler)
-    }
-    
-    @discardableResult
-    func hideAlbums(_ albums: [AlbumItem],
-                    handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideAlbums")
-        let ids = albums.compactMap { $0.uuid }
-        return hideAlbumByUuids(ids) { result in
-            switch result {
-            case .success(_):
-                ItemOperationManager.default.didHide(albums: albums)
-                handler(.success(()))
-            case .failed(let error):
-                handler(.failed(error))
-            }
-        }
-    }
-    
-    private func hideAlbumByUuids(_ uuids: [String],
-                                  handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("hideAlbumByUuids")
-        
-        return SessionManager
-            .customDefault
-            .request(RouteRequests.albumHide,
-                     method: .delete,
-                     parameters: uuids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid(handler)
-            .task
-    }
-    
-    // MARK: - Recover
-    
-    @discardableResult
-    func recoverItems(_ items: [WrapData],
-                      handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverItems")
-        let ids = items.compactMap { $0.uuid }
-        return recoverItemsByUuids(ids) { result in
-            switch result {
-            case .success(_):
-                handler(.success(()))
-            case .failed(let error):
-                handler(.failed(error))
-            }
-        }
-    }
-    
-    /// from doc: UUID of file(s) and/or folder(s) to recover them.
-    /// NOT for albums
-    private func recoverItemsByUuids(_ uuids: [String],
-                                     handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverItemsByUuids")
-        
-        return SessionManager
-            .customDefault
-            .request(RouteRequests.FileSystem.recover,
-                     method: .post,
-                     parameters: uuids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid(handler)
-            .task
-    }
-    
-    @discardableResult
-    func recoverAlbums(_ albums: [AlbumServiceResponse],
-                       handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverAlbums AlbumServiceResponse")
-        let ids = albums.compactMap { $0.uuid }
-        return recoverAlbumsByUuids(ids, handler: handler)
-    }
-    
-    @discardableResult
-    func recoverAlbums(_ albums: [AlbumItem],
-                       handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverAlbums AlbumItem")
-        let ids = albums.compactMap { $0.uuid }
-        return recoverAlbumsByUuids(ids) { result in
-            switch result {
-            case .success(_):
-                ItemOperationManager.default.didUnhide(albums: albums)
-                handler(.success(()))
-            case .failed(let error):
-                handler(.failed(error))
-            }
-        }
-    }
-    
-    private func recoverAlbumsByUuids(_ uuids: [String],
-                                      handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverAlbumsByUuids")
-        
-        return SessionManager
-            .customDefault
-            .request(RouteRequests.albumRecover,
-                     method: .post,
-                     parameters: uuids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid(handler)
-            .task
-    }
- 
-    //MARK: - Smart Albums Recovery
-    
-    @discardableResult
-    func recoveryPeople(items: [PeopleItem],
-                        handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoveryPeopleItems")
-        return recoverySmartAlbum(items: items, path: RouteRequests.peopleRecovery, handler: handler)
-    }
-    
-    @discardableResult
-    func recoveryPlaces(items: [PlacesItem],
-                        handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoveryPlacesItems")
-        return recoverySmartAlbum(items: items, path: RouteRequests.placesRecovery, handler: handler)
-    }
-    
-    @discardableResult
-    func recoveryThings(items: [ThingsItem],
-                        handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoveryThingsItems")
-        return recoverySmartAlbum(items: items, path: RouteRequests.thingsRecovery, handler: handler)
-    }
-    
-    private func recoverySmartAlbum(items: [Item], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        let recoveryItems = items.filter { $0.id != nil }
-        let ids = items.compactMap { $0.id }
-        
-        return SessionManager
-            .customDefault
-            .request(path,
-                     method: .post,
-                     parameters: ids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid { result in
-                switch result {
-                case .success(_):
-                    ItemOperationManager.default.didUnhide(items: recoveryItems)
-                    handler(.success(()))
-                case .failed(let error):
-                    handler(.failed(error))
-                }
-            }
-            .task
-    }
-    
-    //MARK: - Smart Albums Trash
-    
-    @discardableResult
-    func moveToTrashPeople(items: [PeopleItem],
-                           handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("moveToTrashPeopleItems")
-        return moveToTrashSmartAlbum(items: items, path: RouteRequests.peopleTrash, handler: handler)
-    }
-    
-    @discardableResult
-    func moveToTrashPlaces(items: [PlacesItem],
-                           handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("moveToTrashPlacesItems")
-        return moveToTrashSmartAlbum(items: items, path: RouteRequests.placesTrash, handler: handler)
-    }
-    
-    @discardableResult
-    func moveToTrashThings(items: [ThingsItem],
-                           handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("moveToTrashThingsItems")
-        return moveToTrashSmartAlbum(items: items, path: RouteRequests.thingsTrash, handler: handler)
-    }
-    
-    private func moveToTrashSmartAlbum(items: [Item], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        let trashedItems = items.filter { $0.id != nil }
-        let ids = trashedItems.map { $0.id }
-        return SessionManager
-            .customDefault
-            .request(path,
-                     method: .delete,
-                     parameters: ids.asParameters(),
-                     encoding: ArrayEncoding())
-            .customValidate()
-            .responseVoid { result in
-                switch result {
-                case .success(_):
-                    ItemOperationManager.default.moveToTrash(items: trashedItems)
-                    handler(.success(()))
-                case .failed(let error):
-                    handler(.failed(error))
-                }
-            }
-            .task
     }
 }

@@ -14,26 +14,27 @@ final class FaceImagePhotosConfigurator {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
+    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
 
+        var elementsConfig: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .deleteFaceImage]
         var initialTypes: [ElementTypes] = [.select]
-        if item.fileType.isFaceImageType, let status = album.preview?.status {
+        if item.fileType.isFaceImageType {
             switch status {
             case .hidden:
                 initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
-                ///to remove 3 dots from selection mode if it is hidden album
-                viewController.isHiddenAlbum = true
+                elementsConfig = [.unhideAlbumItems, .deleteFaceImage]
             case .trashed:
-                initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyDeleteAlbums])
+                initialTypes.append(contentsOf: [.restore, .completelyDeleteAlbums])
             default:
                 initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyMoveToTrash])
             }
         }
+        viewController.status = status
         
         let selectionModeTypes: [ElementTypes]
         
@@ -65,11 +66,12 @@ final class FaceImagePhotosConfigurator {
         interactor.output = presenter
         interactor.album = album
         interactor.alertSheetConfig = alertSheetConfig
+        interactor.status = status
         
         presenter.interactor = interactor
         viewController.output = presenter
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .hide, .deleteFaceImage],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default, tintColor: nil)
         
         

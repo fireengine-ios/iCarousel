@@ -27,6 +27,10 @@ struct CreateOverlayStickersSuccessResult {
 
 typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
 
+protocol OverlayStickerImageViewdelegate {
+    func makeTopAndBottomBarsIsHidden(isHidden: Bool)
+}
+
 final class OverlayStickerImageView: UIImageView {
     
     private var attachments: [UIImageView] = []
@@ -40,6 +44,7 @@ final class OverlayStickerImageView: UIImageView {
     private var startSizeSelectedView: CGSize?
     private var startRotatePosition: CGFloat?
     private var selectedSticker: UIImageView?
+    var stickersDelegate: OverlayStickerImageViewdelegate?
     
     private let stickerSize = CGSize(width: 50, height: 50)
     private lazy var overlayAnimationService = OverlayAnimationService()
@@ -305,11 +310,13 @@ final class OverlayStickerImageView: UIImageView {
     
     private func hideTrashBin() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.stickersDelegate?.makeTopAndBottomBarsIsHidden(isHidden: false)
             self.trashBinLayer.isHidden = true
         }
     }
     
     private func showTrashBin() {
+        stickersDelegate?.makeTopAndBottomBarsIsHidden(isHidden: true)
         trashBinLayer.isHidden = false
     }
     

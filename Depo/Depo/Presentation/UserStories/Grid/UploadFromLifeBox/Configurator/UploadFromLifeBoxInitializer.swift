@@ -47,7 +47,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         var fileService: RemoteItemsService
         
         if !outputFolderUUID.isEmpty {
-            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
+            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID, status: .active)
         } else {
             fileService = AllFilesService(requestSize: 100)
         }
@@ -87,7 +87,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
             fileService = PhotoAndVideoService(requestSize: 100)
             presenter = UploadFromLifeBoxPhotosPresenter()
         } else if !outputFolderUUID.isEmpty {
-            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
+            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID, status: .active)
             presenter = UploadFromLifeBoxAllFilesPresenter()
         } else {
             fileService = AllFilesService(requestSize: 100)

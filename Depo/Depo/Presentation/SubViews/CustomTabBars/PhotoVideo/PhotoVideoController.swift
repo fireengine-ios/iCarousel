@@ -249,7 +249,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 DispatchQueue.toMain {
                     self?.hideSpinner()
                     let router = RouterVC()
-                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
+                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items, status: .active)
                     let nController = NavigationController(rootViewController: controller)
                     router.presentViewController(controller: nController)
                     self?.canShowDetail = true
@@ -780,15 +780,19 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         stopEditingMode()
     }
     
-    func didHide(items: [WrapData]) {
+    func didMoveToTrashItems(_ items: [Item]) {
         stopEditingMode()
     }
     
-    func didHide(items: [AlbumItem]) {
+    func didHideItems(_ items: [WrapData]) {
         stopEditingMode()
     }
     
-    func didUnhide(items: [WrapData]) {
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        stopEditingMode()
+    }
+ 
+    func didUnhideItems(_ items: [WrapData]) {
         stopEditingMode()
     }
 }

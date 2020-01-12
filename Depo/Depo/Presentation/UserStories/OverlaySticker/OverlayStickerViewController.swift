@@ -10,22 +10,18 @@ import UIKit
 import Photos
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
-
 final class OverlayStickerViewController: ViewController {
-    
-    private struct Attachment {
-        let image: UIImage
-        let url: URL
-    }
-    
+
     @IBOutlet private weak var overlayingStickerImageView: OverlayStickerImageView!
     @IBOutlet private weak var gifButton: UIButton!
     @IBOutlet private weak var stickerButton: UIButton!
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
+    @IBOutlet private weak var stickersView: UIView!
+    @IBOutlet private var overlayStickerViewControllerDataSource: OverlayStickerViewControllerDataSource!
     
     private let uploadService = UploadService()
     private let stickerService: SmashService = SmashServiceImpl()
-    
+
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
         button.setImage(UIImage(named: "applyIcon"), for: .normal)
@@ -40,67 +36,24 @@ final class OverlayStickerViewController: ViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private var isFullScreen = false
+    
     var selectedImage: UIImage?
     var imageName: String?
+    var smashCoordinator: SmashServiceProtocol?
+
     private lazy var defaultName = UUID().uuidString
-    
-    private let paginationPageSize = 20
-    private var isGifPaginatingFinished = false
-    private var isImagePaginatingFinished = false
-    private var gifPage = 0
-    private var imagePage = 0
-    private var isPaginating = false
-    private var gifCollectionViewOffset: CGPoint = .zero
-    private var imageCollectionViewOffset: CGPoint = .zero
-    
-    private var imageAttachment = [SmashStickerResponse]()
-    private var gifAttachment = [SmashStickerResponse]()
-    
-    private var selectedAttachmentType: AttachedEntityType = .gif {
-        didSet {
-            switch selectedAttachmentType {
-            case .gif:
-                self.gifButton.tintColor = UIColor.yellow
-                self.gifButton.setTitleColor(UIColor.yellow, for: .normal)
-                self.stickerButton.tintColor = UIColor.gray
-                self.stickerButton.setTitleColor(UIColor.gray, for: .normal)
-
-                imageCollectionViewOffset = stickersCollectionView.contentOffset
-                stickersCollectionView.reloadData()
-
-                stickersCollectionView.layoutIfNeeded()
-                DispatchQueue.main.async {
-                     self.stickersCollectionView.contentOffset = self.gifCollectionViewOffset
-                }
-            case .image:
-                self.stickerButton.tintColor = UIColor.yellow
-                self.stickerButton.setTitleColor(UIColor.yellow, for: .normal)
-                self.gifButton.tintColor = UIColor.gray
-                self.gifButton.setTitleColor(UIColor.gray, for: .normal)
-
-                gifCollectionViewOffset = stickersCollectionView.contentOffset
-                
-                if imageAttachment.isEmpty {
-                    loadNext()
-                    
-                } else {
-                    stickersCollectionView.reloadData()
-                    stickersCollectionView.layoutIfNeeded()
-                    DispatchQueue.main.async {
-                        self.stickersCollectionView.contentOffset = self.imageCollectionViewOffset
-                    }
-                }
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedAttachmentType = .gif
+        selectStickerType(type: .gif)
         setupImage()
-        stickersCollectionView.delegate = self
-        stickersCollectionView.dataSource = self
-        loadNext()
+        statusBarColor = .black
+        overlayingStickerImageView.stickersDelegate = self
+        overlayStickerViewControllerDataSource.delegate = self
+        overlayStickerViewControllerDataSource.setStateForSelectedType(type: .gif)
+
+        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,11 +62,11 @@ final class OverlayStickerViewController: ViewController {
     }
     
     @IBAction private func gifButtonTapped(_ sender: Any) {
-        selectedAttachmentType = .gif
+        selectStickerType(type: .gif)
     }
     
-    @IBAction private func stickerButton(_ sender: Any) {
-        selectedAttachmentType = .image
+    @IBAction private func imageButton(_ sender: Any) {
+        selectStickerType(type: .image)
     }
     
     @IBAction private func undoButtonTapped(_ sender: Any) {
@@ -126,8 +79,7 @@ final class OverlayStickerViewController: ViewController {
             showAccessAlert()
             return
         }
-        
-//        showFullscreenHUD(with: nil, and: {})
+
         showSpinnerIncludeNavigationBar()
         
         DispatchQueue.main.async { [weak self] in
@@ -156,7 +108,29 @@ final class OverlayStickerViewController: ViewController {
                 UIApplication.topController()?.present(popUp, animated: true, completion: nil)
             }
         }
-
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
+        overlayingStickerImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func selectStickerType(type: AttachedEntityType) {
+        
+        overlayStickerViewControllerDataSource.setStateForSelectedType(type: type)
+        
+        switch type {
+        case .gif:
+            gifButton.tintColor = UIColor.yellow
+            gifButton.setTitleColor(UIColor.yellow, for: .normal)
+            stickerButton.tintColor = UIColor.gray
+            stickerButton.setTitleColor(UIColor.gray, for: .normal)
+        case .image:
+            stickerButton.tintColor = UIColor.yellow
+            stickerButton.setTitleColor(UIColor.yellow, for: .normal)
+            gifButton.tintColor = UIColor.gray
+            gifButton.setTitleColor(UIColor.gray, for: .normal)
+        }
     }
     
     private func showAccessAlert() {
@@ -175,7 +149,11 @@ final class OverlayStickerViewController: ViewController {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
     }
-    
+
+    private func showCompletionPopUp() {
+        smashCoordinator?.smashSuccessed()
+    }
+
     private func saveResult(result: CreateOverlayStickersResult) {
         
         checkLibraryAccessStatus { [weak self] libraryIsAvailable in
@@ -190,21 +168,29 @@ final class OverlayStickerViewController: ViewController {
                         self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
                             print("Saved in library")
                         }
-                        self?.uploadImage(contentURL: result.url, completion: { isUploaded in
+                        self?.uploadImage(contentURL: result.url) { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
-                        })
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.closeIconTapped { [weak self] in
+                                    self?.showCompletionPopUp()
+                                }
+                            }
+                        }
         
                     case .video:
                         self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
                             print("Saved in library")
                         }
-                        self?.uploadVideo(contentURL: result.url, completion: { isUploaded in
+                        self?.uploadVideo(contentURL: result.url) { isUploaded in
                             print("uploaded")
-                            self?.hideSpinnerIncludeNavigationBar()
-                            self?.closeIconTapped()
-                        })
+                            DispatchQueue.main.async {
+                                self?.hideSpinnerIncludeNavigationBar()
+                                self?.closeIconTapped { [weak self] in
+                                    self?.showCompletionPopUp()
+                                }
+                            }
+                        }
                     }
                     
                 case .failure(let error):
@@ -218,9 +204,9 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    @objc func closeIconTapped() {
+    @objc func closeIconTapped(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: completion)
         }
     }
     
@@ -237,6 +223,8 @@ final class OverlayStickerViewController: ViewController {
         navigationBarWithGradientStyle()
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = applyButton
+        navigationController?.navigationController?.navigationBar.isTranslucent = false
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     private func uploadVideo(contentURL: URL, completion: @escaping (Bool) -> Void) {
@@ -295,6 +283,16 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
+    private func makeTopAndBottomBarsIsHidden(hide: Bool) {
+        navigationController?.setNavigationBarHidden(hide, animated: false)
+        stickersView.isHidden = hide
+    }
+    
+    @objc private func actionFullscreenTapGesture() {
+        isFullScreen = !isFullScreen
+        makeTopAndBottomBarsIsHidden(hide: isFullScreen)
+    }
+    
     private func saveImageToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
         
         PHPhotoLibrary.shared().performChanges({
@@ -321,89 +319,24 @@ final class OverlayStickerViewController: ViewController {
             })
         }
     }
-    
-    private func loadNext() {
-        
-        let selectedType: StickerType = selectedAttachmentType == .gif ? .gif : .image
-        let selectedPage = selectedAttachmentType == .gif ? gifPage : imagePage
-        
-        stickerService.getStickers(type: selectedType, page: selectedPage, size: paginationPageSize){ [weak self] result in
-            
-            guard let self = self else {
-                return
-            }
-            
-            switch result {
-                
-            case .success(let tuple):
-                let array = tuple.0
-                let type = tuple.1
-                
-                let isPaginatingFinished = (array.count < self.paginationPageSize)
-                
-                switch type {
-                case .gif:
-                    self.gifAttachment.append(contentsOf: array)
-                    self.gifPage += 1
-                    self.isGifPaginatingFinished = isPaginatingFinished
-                case .image:
-                    self.imageAttachment.append(contentsOf: array)
-                    self.imagePage += 1
-                    self.isImagePaginatingFinished = isPaginatingFinished
-                }
-                
-                DispatchQueue.toMain {
-                    self.stickersCollectionView.reloadData()
-                }
-                
-            case .failed(_):
-                break
-            }
-            
-            self.isPaginating = false
-        }
-    }
 }
 
-extension OverlayStickerViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedAttachmentType == .gif ? gifAttachment.count : imageAttachment.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeue(cell: StickerCollectionViewCell.self, for: indexPath)
-    }
-}
-
-extension OverlayStickerViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? StickerCollectionViewCell else {
+extension OverlayStickerViewController: OverlayStickerImageViewdelegate {
+    func makeTopAndBottomBarsIsHidden(isHidden: Bool) {
+        guard !isFullScreen else {
             return
         }
-        
-        let object = selectedAttachmentType == .gif ? gifAttachment[indexPath.row] : imageAttachment[indexPath.row]
-        
-        cell.setup(with: object)
-        
-        let attachmentCount = selectedAttachmentType == .gif ? gifAttachment.count : imageAttachment.count
-        let isLastCell = (attachmentCount - 1 == indexPath.row)
-        let isPaginatingFinished = selectedAttachmentType == .gif ? isGifPaginatingFinished : isImagePaginatingFinished
-        
-        if isLastCell && !isPaginating && !isPaginatingFinished {
-            isPaginating = true
-            loadNext()
-        }
+        makeTopAndBottomBarsIsHidden(hide: isHidden)
     }
+}
+
+extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showSpinner()
-        let url = selectedAttachmentType == .gif ? gifAttachment[indexPath.row].path : imageAttachment[indexPath.row].path
+    func didSelectItemWithUrl(url: URL, attachmentType: AttachedEntityType) {
         
-        overlayingStickerImageView.addAttachment(url: url, attachmentType: selectedAttachmentType, completion: { [weak self] in
+        showSpinner()
+        overlayingStickerImageView.addAttachment(url: url, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
     }
 }
-

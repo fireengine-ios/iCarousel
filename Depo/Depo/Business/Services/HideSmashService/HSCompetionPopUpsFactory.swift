@@ -14,17 +14,17 @@ final class HSCompletionPopUpsFactory {
     enum State {
         case hideCompleted
         case hideAlbumsCompleted
-        case smashCompleted
         case hideSimpleCompleted
+        case smashCompleted
     }
 
     private var storageVars: StorageVars = factory.resolve()
 
-    func getPopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) ->  UIViewController {
+    func getPopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) ->  BasePopUpController {
         return makePopUp(for: state, itemsCount: itemsCount, delegate: delegate)
     }
 
-    private func makePopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) -> UIViewController {
+    private func makePopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) -> BasePopUpController {
         switch state {
         case .hideCompleted:
             if isDoNotShowAgainButtonPressed(for: state) {

@@ -39,7 +39,7 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
         return albumId == selfAlbumId
     }
     
-    func didHide(items: [WrapData]) {
+    func didHideItems(_ items: [WrapData]) {
         dataSource.deleteItems(items: items)
     }
 

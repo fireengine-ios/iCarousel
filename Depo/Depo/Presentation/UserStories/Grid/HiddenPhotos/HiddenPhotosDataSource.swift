@@ -61,6 +61,10 @@ final class HiddenPhotosDataSource: NSObject {
         return CGSize(width: itemWidth, height: itemWidth)
     }()
     
+    private lazy var sliderCellSize: CGSize = {
+        return CGSize(width: UIScreen.main.bounds.width, height: AlbumsSliderCell.height)
+    }()
+    
     var allSelectedItems: SelectedItems {
         return (selectedItems, albumSlider?.selectedItems ?? [])
     }
@@ -179,15 +183,20 @@ extension HiddenPhotosDataSource {
         albumSlider?.removeItems(items, completion: completion)
     }
     
-    func reset(resetSlider: Bool) {
+    func reset() {
+        photosReset()
+        albumSliderReset()
+    }
+    
+    func photosReset() {
         allItems.removeAll()
         selectedItems.removeAll()
         isPaginationDidEnd = false
         collectionView.reloadData()
-        if resetSlider {
-            albumSlider?.reset()
-            collectionView.reloadSections(IndexSet(integer: 0))
-        }
+    }
+    
+    func albumSliderReset() {
+        albumSlider?.reset()    
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
@@ -436,6 +445,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
             
             if albumSlider == nil {
                 albumSlider = cell
+                albumSlider?.reset()
             }
             
             cell.delegate = self
@@ -515,12 +525,12 @@ extension HiddenPhotosDataSource: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let height: CGFloat = showGroups && section > 0 ? 50 : 0
-        return CGSize(width: collectionView.contentSize.width, height: height)
+        return CGSize(width: collectionView.bounds.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.contentSize.width, height: AlbumsSliderCell.height)
+            return CGSize(width: collectionView.bounds.width, height: AlbumsSliderCell.height)
         }
         return photoCellSize
     }

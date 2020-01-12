@@ -8,7 +8,7 @@
 
 final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
     
-    private enum DispatchGroupReasons: CaseIterable {
+    private enum DispatchGroupReason: CaseIterable {
         case waitAccountInfoResponse        ///calls didObtainAccountInfo OR didObtainAccountInfoError
         case waitAccountPermissionsResponse ///regardless response always calls fillCollectionView
         case waitQuotaInfoResponse          ///regardless response always calls didObtainQuotaInfo
@@ -33,6 +33,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     private var isFirstAppear = true
     
     private var presentPopUpsGroup: DispatchGroup?
+    private var dispatchGroupReasons = [DispatchGroupReason]()
     
     func viewIsReady() {
         prepareDispatchGroup()
@@ -58,7 +59,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
         if isFirstAppear {
             isFirstAppear = false
             
-            presentPopUpsGroup?.leave()
+            decreaseDispatchGroupValue(for: .waitTillViewDidAppear)
         }
         
         HomePagePopUpsService.shared.continueAfterPushIfNeeded()
@@ -179,7 +180,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             router.presentSmallFullOfQuotaPopUp()
         }
         
-        presentPopUpsGroup?.leave()
+        decreaseDispatchGroupValue(for: .waitQuotaInfoResponse)
     }
     
     func giftButtonPressed() {
@@ -208,14 +209,14 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             stopRefresh()
         }
         
-        presentPopUpsGroup?.leave()
+        decreaseDispatchGroupValue(for: .waitAccountPermissionsResponse)
     }
     
     func didObtainAccountInfo(accountInfo: AccountInfoResponse) {
         verifyEmailIfNeeded(with: accountInfo)
         credsCheckUpdateIfNeeded(with: accountInfo)
         
-        presentPopUpsGroup?.leave()
+        decreaseDispatchGroupValue(for: .waitAccountInfoResponse)
     }
     
     func didObtainAccountInfoError(with text: String) {
@@ -233,7 +234,8 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     private func prepareDispatchGroup() {
         presentPopUpsGroup = DispatchGroup()
         
-        DispatchGroupReasons.allCases.forEach { _ in
+        dispatchGroupReasons = DispatchGroupReason.allCases
+        dispatchGroupReasons.forEach { _ in
             presentPopUpsGroup?.enter()
         }
         
@@ -241,6 +243,15 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             self?.presentPopUpsGroup = nil
             self?.router.presentPopUps()
         }
+    }
+    
+    private func decreaseDispatchGroupValue(for reason: DispatchGroupReason) {
+        guard let index = dispatchGroupReasons.firstIndex(of: reason) else {
+            return
+        }
+        
+        dispatchGroupReasons.remove(at: index)
+        presentPopUpsGroup?.leave()
     }
     
     private func verifyEmailIfNeeded(with accountInfo: AccountInfoResponse) {

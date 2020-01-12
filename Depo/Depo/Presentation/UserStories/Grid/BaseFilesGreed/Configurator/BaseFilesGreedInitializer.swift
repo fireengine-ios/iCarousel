@@ -88,6 +88,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
         viewController.scrollablePopUpView.isEnable = false
+        viewController.segmentImage = .documents
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -145,6 +147,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifeboxFavorites, .createAStory])
         viewController.isFavorites = true
+        viewController.segmentImage = .favorites
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -171,12 +175,14 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
+        viewController.status = status
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -185,7 +191,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
-        let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
+
+        let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
+        let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder
         viewController.parentUUID = folder.uuid
         

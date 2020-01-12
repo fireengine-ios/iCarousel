@@ -153,7 +153,7 @@ final class AlbumCard: BaseCardView {
     private func showAlbum() {
         guard let albumItem = albumItem else { return }
         let router = RouterVC()
-        let albumVC = router.albumDetailController(album: albumItem, type: .List, moduleOutput: nil)
+        let albumVC = router.albumDetailController(album: albumItem, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: albumVC)
     }
     

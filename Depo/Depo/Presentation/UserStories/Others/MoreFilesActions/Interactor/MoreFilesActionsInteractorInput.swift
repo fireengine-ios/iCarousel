@@ -28,6 +28,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func unhide(items: [BaseDataSourceItem])
     
+    func unhideAlbumItems(items: [BaseDataSourceItem])
+    
     func completelyDelete(albums: [BaseDataSourceItem])
     
     func completelyMoveToTrash(albums: [BaseDataSourceItem])
@@ -38,6 +40,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func download(item: [BaseDataSourceItem])
     
+    func restore(items: [BaseDataSourceItem])
     
     // MARK: Actions Sheet
     
