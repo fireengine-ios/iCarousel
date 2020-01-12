@@ -22,7 +22,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
         case .photoAlbum, .musicPlayList:
             return
         case .folder:
-            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, moduleOutput: nil)
+            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, status: .active, moduleOutput: nil)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             let player: MediaPlayer = factory.resolve()

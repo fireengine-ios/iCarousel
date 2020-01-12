@@ -175,7 +175,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
@@ -189,7 +189,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
-        let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
+        
+        let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
+        let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder
         viewController.parentUUID = folder.uuid
         

@@ -360,10 +360,10 @@ class FolderService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        debugLog("FilesFromFolderService nextItems")
+        debugLog("FolderService nextItems")
 
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
-                              folderOnly: foldersOnly, remoteServicePage: currentPage,
+                              folderOnly: foldersOnly, remoteServicePage: currentPage, status: .active,
                               success: success, fail: fail)
         currentPage += 1
     }
@@ -373,16 +373,20 @@ class FilesFromFolderService: RemoteItemsService {
     
     let rootFolder: String
     let fileService = FileService.shared
+    let status: ItemStatus
     
-    init(requestSize: Int, rootFolder: String = "") {
+    init(requestSize: Int, rootFolder: String = "", status: ItemStatus) {
         self.rootFolder = rootFolder
+        self.status = status
         super.init(requestSize: requestSize, fieldValue: .document)
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        debugLog("AllFilesService nextItems")
+        debugLog("FilesFromFolderService nextItems")
 
-        fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
+        fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
+                              remoteServicePage: currentPage, status: status,
+                              success: success, fail: fail)
         currentPage += 1
     }
 }
@@ -396,7 +400,9 @@ class AllFilesService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
+        debugLog("AllFilesService nextItems")
+        
+        fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, status: .active, success: success, fail: fail)
         currentPage += 1
     }
 }

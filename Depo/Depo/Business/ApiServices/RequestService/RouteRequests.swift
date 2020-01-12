@@ -332,7 +332,7 @@ struct RouteRequests {
     
     enum FileSystem {
         static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-        static let fileListWithStatus = fileList + "&status=%@"
+        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
         static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
         
         static let filesystemBase = "filesystem/"
