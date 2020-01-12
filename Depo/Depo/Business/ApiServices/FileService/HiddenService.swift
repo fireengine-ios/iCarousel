@@ -43,10 +43,9 @@ final class HiddenService {
     debugLog("trashedList")
     
     let folder = folderOnly ? "true": "false"
-    let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.fileListWithStatus, folderUUID,
+    let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.trashedList, folderUUID,
                      sortBy.description, sortOrder.description,
-                     page.description, size.description,
-                     folder, ItemStatus.trashed.rawValue)
+                     page.description, size.description, folder)
         
         return SessionManager
             .customDefault

@@ -229,10 +229,9 @@ class FileList: BaseRequestParametrs {
         let folder = folderOnly ? "true": "false"
         let path: String
         if status.isContained(in: [.hidden, .trashed]) {
-            path = String(format: RouteRequests.FileSystem.fileListWithStatus, rootDir,
+            path = String(format: RouteRequests.FileSystem.trashedList, rootDir,
                           sortBy.description, sortOrder.description,
-                          page.description, size.description,
-                          folder, status.rawValue)
+                          page.description, size.description, folder)
         } else {
             path = String(format: RouteRequests.FileSystem.fileList, rootDir,
                           sortBy.description, sortOrder.description,
