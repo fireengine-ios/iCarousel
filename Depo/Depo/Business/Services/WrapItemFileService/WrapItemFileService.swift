@@ -374,6 +374,56 @@ class WrapItemFileService: WrapItemFileOperations {
 
 //MARK: - Trash
 extension WrapItemFileService {
+    
+    //MARK: - Delete Items
+    
+    func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteItems(items, completion: {
+                success?()
+                ItemOperationManager.default.deleteItems(items: items)
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.delete(items: remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deleteAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.albumsDeleted(albums: albums)
+        }
+        
+        let deletingAlbums = albums.filter { $0.readOnly == false }
+        guard !deletingAlbums.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.deleteAlbums(deletingAlbums) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    
     //MARK: - Smart Albums Trash
     
     @discardableResult
