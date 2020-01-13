@@ -99,7 +99,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
             guard let self = self else {
                 return
             }
-            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUp(status: .success))
             switch response {
             case .success(let result):
                 self.retriesCount = 0
@@ -113,6 +113,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
                 
             case .failure(let error):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUp(status: .failure))
                 self.retriesCount += 1
                 
                 if let signUpError = error as? SignupResponseError {

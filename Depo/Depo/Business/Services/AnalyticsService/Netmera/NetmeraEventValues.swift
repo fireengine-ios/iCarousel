@@ -8,7 +8,7 @@
 
 enum NetmeraEventValues {
     
-    enum Status {
+    enum GeneralStatus {
         case success
         case failure
 

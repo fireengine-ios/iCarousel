@@ -41,9 +41,9 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         
-        convenience init(status: String) {
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.status = status
+            self.status = status.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
