@@ -121,16 +121,24 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         //let currentItem = interactor.allItems[interactor.currentItemIndex]
         var actions = [ElementTypes]()
         
-        switch object.fileType {
-        case .audio:
-            actions = ActionSheetPredetermendConfigs.audioDetailActions
-        case .image, .video:
-            actions = interactor.setupedMoreMenuConfig
-        case .allDocs:
-            actions = ActionSheetPredetermendConfigs.documetsDetailActions
+        switch view.status {
+        case .hidden:
+            actions = ActionSheetPredetermendConfigs.hiddenDetailActions
+        case .trashed:
+            actions = ActionSheetPredetermendConfigs.trashedDetailActions
         default:
-            break
+            switch object.fileType {
+            case .audio:
+                actions = ActionSheetPredetermendConfigs.audioDetailActions
+            case .image, .video:
+                actions = interactor.setupedMoreMenuConfig
+            case .allDocs:
+                actions = ActionSheetPredetermendConfigs.documetsDetailActions
+            default:
+                break
+            }
         }
+        
         alertSheetModule?.showAlertSheet(with: actions,
                                          items: [object],
                                          presentedBy: sender,

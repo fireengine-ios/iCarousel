@@ -62,6 +62,54 @@ enum ElementTypes {
     case completelyMoveToTrash
     //instaPick
     case instaPick
+    
+    static func elementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
+        var result: [ElementTypes]
+        
+        switch status {
+        case .hidden:
+            result = [.unhide, .moveToTrash]
+        case .trashed:
+            result = [.restore, .delete]
+        default:
+            if item.isLocalItem {
+                result = [.share, .sync, .info]
+            } else {
+                switch item.fileType {
+                case .image, .video:
+                    result = [.share, .download]
+                    
+                    if item.fileType == .image {
+                        if Device.isTurkishLocale {
+                            result.append(.print)
+                        }
+                        
+                        result.append(.edit)
+
+                        if item.name?.isPathExtensionGif() == false {
+                            result.append(.smash)
+                        }
+                    }
+
+                default:
+                    result = [.share, .download, .moveToTrash]
+                }
+                
+                if item.fileType.isContained(in: [.video, .image]) {
+                    switch viewType {
+                    case .details:
+                        result.append(.moveToTrash)
+                    case .insideAlbum:
+                        result.append(.removeFromAlbum)
+                    case .insideFIRAlbum:
+                        result.append(.removeFromFaceImageAlbum)
+                    }
+                }
+            }
+        }
+        
+        return result
+    }
 }
 
 typealias AnimationBlock = () -> Void

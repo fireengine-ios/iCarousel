@@ -11,4 +11,5 @@ enum ActionSheetPredetermendConfigs {
     static let audioDetailActions: [ElementTypes] = [.info, .addToAlbum]
     static let documetsDetailActions: [ElementTypes] = []
     static let hiddenDetailActions: [ElementTypes] = []
+    static let trashedDetailActions: [ElementTypes] = [.info]
 }
