@@ -22,6 +22,7 @@ class BaseFilesGreedModuleConfigurator {
                    alertSheetExcludeTypes: [ElementTypes]? = nil) {
         
         let router = BaseFilesGreedRouter()
+        router.view = viewController
         
         var presenter: BaseFilesGreedPresenter?
         if remoteServices is PhotoAndVideoService {
@@ -94,6 +95,7 @@ class BaseFilesGreedModuleConfigurator {
     func configure(viewController: BaseFilesGreedViewController, folder: Item, remoteServices: RemoteItemsService) {
         
         let router = BaseFilesGreedRouter()
+        router.view = viewController
         
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
         
