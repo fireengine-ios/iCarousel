@@ -520,4 +520,71 @@ final class HiddenService {
             .responseVoid(handler)
             .task
     }
+    
+    //MARK: - Delete
+    
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("deleteItems")
+        let uuids = items.compactMap { $0.uuid }
+        return deleteItemsBy(uuids: uuids, handler: handler)
+    }
+    
+    @discardableResult
+    func deleteAlbums(_ albums: [AlbumItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("deleteAlbums")
+        let uuids = albums.compactMap { $0.uuid }
+        return deleteItemsBy(uuids: uuids, handler: handler)
+    }
+    
+    private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let path = RouteRequests.FileSystem.delete
+        return SessionManager
+        .customDefault
+        .request(path,
+                 method: .delete,
+                 parameters: uuids.asParameters(),
+                 encoding: ArrayEncoding())
+        .customValidate()
+        .responseVoid(handler)
+        .task
+    }
+    
+    @discardableResult
+    func deletePeople(items: [PeopleItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("deletePeople")
+        let path = RouteRequests.peopleDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+    
+    @discardableResult
+    func deletePlaces(items: [PlacesItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("deletePlaces")
+        let path = RouteRequests.placesDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+    
+    @discardableResult
+    func deleteThings(items: [ThingsItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        debugLog("deleteThings")
+        let path = RouteRequests.thingsDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+
+    private func deleteSmartAlbums(albums: [Item], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let ids = albums.compactMap { $0.id }
+        return deleteItemsBy(ids: ids, path: path, handler: handler)
+    }
+    
+    private func deleteItemsBy(ids: [Int64], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return SessionManager
+        .customDefault
+        .request(path,
+                 method: .delete,
+                 parameters: ids.asParameters(),
+                 encoding: ArrayEncoding())
+        .customValidate()
+        .responseVoid(handler)
+        .task
+    }
 }
