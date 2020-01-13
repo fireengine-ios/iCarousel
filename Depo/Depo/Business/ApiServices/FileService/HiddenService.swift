@@ -33,7 +33,7 @@ final class HiddenService {
     }
     
     @discardableResult
-    func trashedList(folderUUID: String = "",
+    func trashedList(folderUUID: String = "ROOT_FOLDER",
                      sortBy: SortType,
                      sortOrder: SortOrder,
                      page: Int,
@@ -46,7 +46,7 @@ final class HiddenService {
         let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.trashedList, folderUUID,
                          sortBy.description, sortOrder.description,
                          page.description, size.description, folder)
-        
+
         return SessionManager
             .customDefault
             .request(url)

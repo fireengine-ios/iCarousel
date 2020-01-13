@@ -36,7 +36,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let controller = router.filesFromFolder(folder: wrapperedItem,
                                                     type: type,
                                                     sortType: sortType,
-                                                    status: .active,
+                                                    status: view.status,
                                                     moduleOutput: moduleOutput,
                                                     alertSheetExcludeTypes: presenter.alertSheetExcludeTypes)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
@@ -48,7 +48,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.presentViewController(controller: controller)
             
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
+            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray, status: view.status)
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
         }

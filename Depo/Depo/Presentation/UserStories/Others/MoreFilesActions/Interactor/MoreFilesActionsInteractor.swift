@@ -24,7 +24,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var hiddenService = HiddenService()
 
     private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
-    
+    private lazy var smashService: SmashServiceProtocol = HideSmashCoordinator()
+
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -257,10 +258,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard
-                let `self` = self,
-                let image = image
-            else {
+            guard let self = self, let image = image else {
                 UIApplication.showErrorAlert(message: TextConstants.errorServer)
                 completion?()
                 return
@@ -269,6 +267,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let controller = OverlayStickerViewController()
             controller.selectedImage = image
             controller.imageName = item.name
+            controller.smashCoordinator = self.smashService
             let navVC = NavigationController(rootViewController: controller)
             
             completion?()
@@ -480,6 +479,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 fail(error)
             }
         }
+    }
+    
+    func restore(items: [BaseDataSourceItem]) {
+        //TODO: Need to implement
     }
     
     //FIP - Faces-Items-Places

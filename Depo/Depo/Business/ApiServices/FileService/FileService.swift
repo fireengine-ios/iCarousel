@@ -238,7 +238,7 @@ class FileList: BaseRequestParametrs {
                           sortBy.description, sortOrder.description,
                           page.description, size.description, folder)
         }
-        
+
         return URL(string: path, relativeTo: super.patch)!
     }
 }

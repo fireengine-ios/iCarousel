@@ -40,7 +40,7 @@ class SelectNameRouter: SelectNameRouterInput {
     }
     
     func moveToAlbumPage(presenter: SelectNamePresenter, item: AlbumItem) {
-        let albumVC = router.albumDetailController(album: item, type: .List, moduleOutput: presenter)
+        let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: presenter)
         router.pushViewController(viewController: albumVC)
     }
 }

@@ -24,13 +24,13 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
         
         switch selectedItem.fileType {
             case .folder:
-                let controller = router.filesFromFolder(folder: wrappered, type: type, sortType: sortType, status: .active, moduleOutput: moduleOutput)
+                let controller = router.filesFromFolder(folder: wrappered, type: type, sortType: sortType, status: view.status, moduleOutput: moduleOutput)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             case .audio:
                 player.play(list: [wrappered], startAt: 0)
             default:
                 let albumUUID = RouterVC().getParentUUID()
-                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
+                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, status: view.status)
                 let nController = NavigationController(rootViewController: controller)
                 RouterVC().presentViewController(controller: nController)
         }

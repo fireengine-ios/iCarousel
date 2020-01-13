@@ -181,6 +181,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
+        viewController.status = status
+        
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -189,7 +191,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
-        
+
         let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
         let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder

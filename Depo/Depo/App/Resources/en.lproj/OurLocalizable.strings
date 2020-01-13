@@ -348,6 +348,7 @@
 "Choose" = "Choose";
 "Hide" = "Hide";
 "Unhide" = "Unhide";
+"Restore" = "Restore";
 "Show" = "Show";
 "No results found for your query." = "No results found for your query.";
 "SUGGESTIONS" = "SUGGESTIONS";
@@ -1421,6 +1422,9 @@
 "hidden_bin_empty" = "There is no hidden item yet.";
 "hidden_bin_navbar_title" = "Hidden";
 "unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
+
+"trash_bin_album_slider_title" = "My Deleted Albums";
+"trash_bin_album_slider_empty" = "There is no deleted album yet.";
 
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";

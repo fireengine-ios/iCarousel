@@ -205,22 +205,22 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
     }
 
     private func presentPopUp(controller: BasePopUpController) {
-        if operation == .smash {
-            controller.dismissCompletion = { [weak self] in
-                let presentedController = self?.router.defaultTopController as? OverlayStickerViewController
-                presentedController?.dismiss(animated: true)
-            }
+        router.presentViewController(controller: controller, animated: false)
+    }
+    
+    private func push(controller: UIViewController) {
+        let present = {
+            self.router.pushViewController(viewController: controller)
         }
-
-        router.defaultTopController?.present(controller, animated: false)
+        if operation == .smash {
+            present()
+        } else {
+            router.navigationController?.dismiss(animated: true, completion: present)
+        }
     }
 
     private func openPeopleAlbum() {
-        router.navigationController?.dismiss(animated: true, completion: {
-
-            let controller = self.router.peopleListController()
-            self.router.pushViewController(viewController: controller)
-        })
+        push(controller: self.router.peopleListController())
     }
 }
 
@@ -344,21 +344,16 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
     }
 
     func openPremium() {
-        router.navigationController?.dismiss(animated: true, completion: {
-            let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
-            self.router.pushViewController(viewController: controller)
-        })
+        let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        push(controller: controller)
     }
 
     func openFaceImageGrouping() {
-        router.navigationController?.dismiss(animated: true, completion: {
-
-            if self.faceImageGrouping?.isFaceImageAllowed == true {
-                self.openPeopleAlbum()
-            } else {
-                let controller = self.router.faceImage
-                self.router.pushViewController(viewController: controller)
-            }
-        })
+        if self.faceImageGrouping?.isFaceImageAllowed == true {
+            self.openPeopleAlbum()
+        } else {
+            let controller = self.router.faceImage
+            push(controller: controller)
+        }
     }
 }

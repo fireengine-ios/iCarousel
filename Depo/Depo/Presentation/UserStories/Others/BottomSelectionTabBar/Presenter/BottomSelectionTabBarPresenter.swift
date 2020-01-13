@@ -443,7 +443,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     //Currently there is no task for smash from action sheet.
                     assertionFailure("In order to use smash please implement this function")
                     action = UIAlertAction()
-                    
+                case .restore:
+                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
+                        self.interactor.restore(items: currentItems)
+                    })
                 case .deleteFaceImage:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
