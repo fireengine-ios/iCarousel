@@ -1425,6 +1425,7 @@
 
 "trash_bin_album_slider_title" = "My Deleted Albums";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
+"trash_bin_empty" = "There is no deleted item yet.";
 
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
