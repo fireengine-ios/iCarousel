@@ -127,10 +127,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
         
-        if status.isContained(in: [.hidden, .trashed]) {
-            editingTabBar.view.isHidden = true
-        }
-        
         if hideTreeDotButton {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
@@ -212,7 +208,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem = threeDotsBarButtonItem
         }
 
-        if status.isContained(in: [.hidden, .trashed]) {
+        if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
             guard !objects.isEmpty, selectedIndex < objects.count else {
