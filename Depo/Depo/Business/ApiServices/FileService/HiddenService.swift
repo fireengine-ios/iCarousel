@@ -520,4 +520,52 @@ final class HiddenService {
             .responseVoid(handler)
             .task
     }
+    
+    //MARK: - Delete
+    
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let path = RouteRequests.FileSystem.delete
+        let ids = items.map { $0.id }
+        return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
+    @discardableResult
+    func deletePeople(items: [PeopleItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let path = RouteRequests.peopleDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+    
+    @discardableResult
+    func deletePlaces(items: [PlacesItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let path = RouteRequests.placesDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+    
+    @discardableResult
+    func deleteThings(items: [ThingsItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let path = RouteRequests.thingsDelete
+        return deleteSmartAlbums(albums: items, path: path, handler: handler)
+    }
+    
+    private func deleteSmartAlbums(albums: [Item], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let ids = albums.map { $0.id }
+        return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
 }

@@ -540,6 +540,22 @@ extension WrapItemFileService {
         }
     }
     
+    func deletePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deletePeople(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     
     //MARK: Places
     
@@ -575,6 +591,22 @@ extension WrapItemFileService {
         }
     }
     
+    func deletePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deletePlaces(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     //MARK: Things
     
     func unhideThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
@@ -600,6 +632,22 @@ extension WrapItemFileService {
         }
         
         hiddenService.putBackThings(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deleteThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deleteThings(items: items) { result in
             switch result {
             case .success(_):
                 wrappedSuccessOperation()
