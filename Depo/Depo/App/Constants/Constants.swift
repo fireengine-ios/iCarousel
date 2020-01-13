@@ -36,6 +36,8 @@ struct TextConstants {
         static let appNameGA = appNameCapitalized
         static let appNameMailSubject = appNameCapitalized + " / "
         
+        static let dataProtectedAndDeviceLocked = "Data is protected and device is locked"
+        
         private init() {}
     }
     

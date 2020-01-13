@@ -23,6 +23,13 @@ extension NSManagedObjectContext {
             completion?(.hasNoChanges)
             return
         }
+        
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            rollback()
+            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
+            return
+        }
+        
         /// weak ???
         perform { [weak self] in
             do {
@@ -40,6 +47,13 @@ extension NSManagedObjectContext {
             completion?(.hasNoChanges)
             return
         }
+        
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            rollback()
+            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
+            return
+        }
+        
         /// weak ???
         performAndWait {
             do {
@@ -56,6 +70,12 @@ extension NSManagedObjectContext {
     func save(async: Bool, completion: CoreDataSaveStatusHandler? = nil) {
         guard hasChanges else {
             completion?(.hasNoChanges)
+            return
+        }
+        
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            rollback()
+            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }
 
