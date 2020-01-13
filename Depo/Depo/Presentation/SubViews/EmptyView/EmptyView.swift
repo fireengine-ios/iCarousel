@@ -26,7 +26,7 @@ final class EmptyView: UIView, NibInit {
             case .hiddenBin:
                 return TextConstants.hiddenBinEmpty
             case .trashBin:
-                return TextConstants.hiddenBinEmpty
+                return TextConstants.trashBinEmpty
             }
         }
         
@@ -35,7 +35,7 @@ final class EmptyView: UIView, NibInit {
             case .hiddenBin:
                 return UIImage(named: "hidden_big")
             case .trashBin:
-                return UIImage(named: "trash")
+                return UIImage(named: "trash_big")
             }
         }
     }
