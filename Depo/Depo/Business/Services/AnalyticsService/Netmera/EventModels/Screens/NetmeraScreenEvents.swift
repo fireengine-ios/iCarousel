@@ -10,17 +10,19 @@ import Netmera
 
 extension NetmeraEvents.Screens {
     
-    final class ContactBackUpScreen: NetmeraEvent {
+    final class ContactBackUpScreen: NetmeraScreenEventTemplate {
         
-        private let kContactBackUpScreenKey = "dmi"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
+        override var key: String {
+            return "dmi"
         }
         
-        override var eventKey : String {
-            return kContactBackUpScreenKey
-        }
+//        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+//            return [:]
+//        }
+//        
+//        override var eventKey : String {
+//            return kContactBackUpScreenKey
+//        }
     }
     
     final class PhotoPickAnalysisDetailScreen: NetmeraEvent {
