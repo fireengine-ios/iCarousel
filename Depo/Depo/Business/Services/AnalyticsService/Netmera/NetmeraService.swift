@@ -10,6 +10,7 @@ import Netmera
 
 enum NetmeraEvents {
     enum Actions {
+        //TODO: add cases for each events and inside reponsable extension add method that returns it.
     }
     enum Screens {
     }

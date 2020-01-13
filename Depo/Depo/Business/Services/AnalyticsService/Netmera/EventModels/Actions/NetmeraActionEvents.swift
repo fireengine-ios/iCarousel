@@ -9,7 +9,7 @@
 import Netmera
 
 extension NetmeraEvents.Actions {
-    
+
     final class Login: NetmeraEvent {
         
         private let kLoginKey = "rvw"
@@ -17,10 +17,10 @@ extension NetmeraEvents.Actions {
         @objc var status = ""
         @objc var loginType = ""
         
-        convenience init(status: String, loginType: String) {
+        convenience init(status: NetmeraEventValues.GeneralStatus, loginType: NetmeraEventValues.LoginType) {
             self.init()
-            self.status = status
-            self.loginType = loginType
+            self.status = status.text
+            self.loginType = loginType.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -224,11 +224,40 @@ extension NetmeraEvents.Actions {
         @objc var photos = ""
         @objc var videos = ""
         
-        convenience init(syncSetting: String, photos: String, videos: String) {
+        convenience init(autosyncSettings: AutoSyncSettings) {
+            
+            let state = autosyncSettings.isAutoSyncOptionEnabled ? NetmeraEventValues.OnOffSettings.on : NetmeraEventValues.OnOffSettings.off
+            
+            let photoOption: NetmeraEventValues.AutoSyncState
+            let videoOption: NetmeraEventValues.AutoSyncState
+            
+            switch autosyncSettings.photoSetting.option {
+            case .never:
+                photoOption = NetmeraEventValues.AutoSyncState.never
+            case .wifiAndCellular:
+                photoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
+            case .wifiOnly:
+                photoOption = NetmeraEventValues.AutoSyncState.wifi
+            }
+            
+            switch autosyncSettings.videoSetting.option {
+            case .never:
+                videoOption = NetmeraEventValues.AutoSyncState.never
+            case .wifiAndCellular:
+                videoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
+            case .wifiOnly:
+                videoOption = NetmeraEventValues.AutoSyncState.wifi
+            }
+            
+            self.init(videos: videoOption, autosyncSetting: state, photos: photoOption)
+            
+        }
+        
+        convenience init(videos: NetmeraEventValues.AutoSyncState, autosyncSetting: NetmeraEventValues.OnOffSettings, photos:  NetmeraEventValues.AutoSyncState) {
             self.init()
-            self.syncSetting = syncSetting
-            self.photos = photos
-            self.videos = videos
+            self.syncSetting = autosyncSetting.text
+            self.photos = photos.text
+            self.videos = videos.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -464,11 +493,40 @@ extension NetmeraEvents.Actions {
         @objc var autosyncSetting = ""
         @objc var photos = ""
         
-        convenience init(videos: String, autosyncSetting: String, photos: String) {
+        convenience init(autosyncSettings: AutoSyncSettings) {
+            
+            let state = autosyncSettings.isAutoSyncOptionEnabled ? NetmeraEventValues.OnOffSettings.on : NetmeraEventValues.OnOffSettings.off
+            
+            let photoOption: NetmeraEventValues.AutoSyncState
+            let videoOption: NetmeraEventValues.AutoSyncState
+            
+            switch autosyncSettings.photoSetting.option {
+            case .never:
+                photoOption = NetmeraEventValues.AutoSyncState.never
+            case .wifiAndCellular:
+                photoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
+            case .wifiOnly:
+                photoOption = NetmeraEventValues.AutoSyncState.wifi
+            }
+            
+            switch autosyncSettings.videoSetting.option {
+            case .never:
+                videoOption = NetmeraEventValues.AutoSyncState.never
+            case .wifiAndCellular:
+                videoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
+            case .wifiOnly:
+                videoOption = NetmeraEventValues.AutoSyncState.wifi
+            }
+            
+            self.init(videos: videoOption, autosyncSetting: state, photos: photoOption)
+            
+        }
+        
+        convenience init(videos: NetmeraEventValues.AutoSyncState, autosyncSetting: NetmeraEventValues.OnOffSettings, photos:  NetmeraEventValues.AutoSyncState) {
             self.init()
-            self.videos = videos
-            self.autosyncSetting = autosyncSetting
-            self.photos = photos
+            self.videos = videos.text
+            self.autosyncSetting = autosyncSetting.text
+            self.photos = photos.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {

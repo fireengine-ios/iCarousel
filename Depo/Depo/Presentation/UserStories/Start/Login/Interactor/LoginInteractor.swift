@@ -91,6 +91,7 @@ class LoginInteractor: LoginInteractorInput {
             /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
             if hasEmptyPhone(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
                 handler = {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
                     errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
                 }
             } else if self.hasAccountDeletedStatus(headers: headers) {
@@ -98,6 +99,7 @@ class LoginInteractor: LoginInteractorInput {
                     self?.processLogin(login: login, headers: headers)
                 }
             } else if self.hasEmptyPhone(accountWarning: accountWarning) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
                 errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
                 return
             }
@@ -178,6 +180,13 @@ class LoginInteractor: LoginInteractorInput {
             let loginError = LoginResponseError(with: errorResponse)
             self?.analyticsService.trackLoginEvent(loginType: loginType, error: loginError)
             
+            if Validator.isValid(email: login) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
+            } else if Validator.isValid(phone: login) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .phone))
+            }
+            
+            
             if !(loginError == .needCaptcha || loginError == .noInternetConnection) {
                 self?.loginRetries += 1
             }
@@ -188,6 +197,7 @@ class LoginInteractor: LoginInteractorInput {
             }
             
             errorHandler(loginError, errorResponse.description)
+            
         }, twoFactorAuth: { [weak self] response in
             guard let self = self else {
                 return
@@ -207,8 +217,10 @@ class LoginInteractor: LoginInteractorInput {
         
         if Validator.isValid(email: login) {
             self.analyticsService.trackLoginEvent(loginType: .email)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .email))
         } else {
             self.analyticsService.trackLoginEvent(loginType: .gsm)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .phone))
         }
         
         self.loginRetries = 0

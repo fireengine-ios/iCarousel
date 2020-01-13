@@ -94,6 +94,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             DispatchQueue.main.async {
                 switch response {
                 case .success(let result):
+                    //TODO: NETMERA how do we log login here?
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         self?.proccessLoginHeaders(headers: result)
                     }, fail: { [weak self] error in

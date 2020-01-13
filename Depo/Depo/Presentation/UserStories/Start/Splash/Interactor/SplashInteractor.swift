@@ -86,9 +86,11 @@ class SplashInteractor: SplashInteractorInput {
                         
                         SingletonStorage.shared.isJustRegistered = false
                         self?.isFirstLogin = true
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
@@ -100,6 +102,7 @@ class SplashInteractor: SplashInteractorInput {
                         }
                     })
                 }, fail: { [weak self] response in
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                     self?.output.asyncOperationSuccess()
@@ -112,6 +115,7 @@ class SplashInteractor: SplashInteractorInput {
                 })
             } else {
                 output.asyncOperationSuccess()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                 analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .networkError)
                 failLogin()
             }
@@ -122,8 +126,10 @@ class SplashInteractor: SplashInteractorInput {
                     CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
                     self?.successLogin()
                 }, fail: { [weak self] error in
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here
                     /// only internet error
                     //self?.failLogin()
