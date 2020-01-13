@@ -154,7 +154,7 @@ def publishToArtifactory = { app, classifier ->
     STAGE_NAME = 'Build (test): Publish to Artifactory'
     
     sh "find build -type d -name '*.dSYM' > dsymFiles"
-    sh "zip -@ build/dsym.zip < dsymFiles"
+    sh "zip -r  -@ build/dsym.zip < dsymFiles"
 
     def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
     def artifactName = "${app.name}-${app.version}-${classifier}"
