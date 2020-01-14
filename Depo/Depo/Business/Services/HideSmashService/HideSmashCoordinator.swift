@@ -24,6 +24,7 @@ protocol HideFuncServiceProtocol {
 }
 
 protocol SmashServiceProtocol {
+    func smashConfirmPopUp(completion: @escaping VoidHandler)
     func smashSuccessed()
 }
 
@@ -148,7 +149,26 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         operation = .smash
         showSuccessPopUp()
     }
-
+    
+    func smashConfirmPopUp(completion: @escaping () -> Void) {
+        operation = .smash
+        let popUp = PopUpController.with(title: TextConstants.save,
+                                         message: TextConstants.smashPopUpMessage,
+                                         image: .error,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstUrl: nil,
+                                         secondUrl: nil,
+                                         firstAction: { popup in popup.close() },
+                                         secondAction: { popup in
+                                            popup.close()
+                                            completion()
+        })
+        
+        UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+        
+    }
+    
     //MARK: Utility Methods (Private)
 
     // Hide
