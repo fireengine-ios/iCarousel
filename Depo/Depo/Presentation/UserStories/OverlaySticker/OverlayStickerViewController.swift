@@ -172,7 +172,7 @@ final class OverlayStickerViewController: ViewController {
                             print("uploaded")
                             DispatchQueue.main.async {
                                 self?.hideSpinnerIncludeNavigationBar()
-                                self?.closeIconTapped { [weak self] in
+                                self?.close { [weak self] in
                                     self?.showCompletionPopUp()
                                 }
                             }
@@ -186,7 +186,7 @@ final class OverlayStickerViewController: ViewController {
                             print("uploaded")
                             DispatchQueue.main.async {
                                 self?.hideSpinnerIncludeNavigationBar()
-                                self?.closeIconTapped { [weak self] in
+                                self?.close { [weak self] in
                                     self?.showCompletionPopUp()
                                 }
                             }
@@ -204,7 +204,11 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    @objc func closeIconTapped(completion: VoidHandler? = nil) {
+    @objc private func closeIconTapped() {
+        close()
+    }
+    
+    @objc private func close(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
             self.dismiss(animated: true, completion: completion)
         }
