@@ -192,11 +192,7 @@ final class PushNotificationService {
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
             
-                guard let segmentIndex = segmentIndex else {
-                    return
-                }
-                
-                if let segmentedController = tabBarVC.currentViewController as? SegmentedController {
+                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
                     segmentedController.loadViewIfNeeded()
                     segmentedController.switchSegment(to: segmentIndex)
                 }
