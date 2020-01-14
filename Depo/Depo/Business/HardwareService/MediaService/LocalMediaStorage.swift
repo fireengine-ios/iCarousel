@@ -446,10 +446,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     /*
-     * if album = nil put to camera rool
+     * if album = nil the item will be saved to camera roll
      * 
      */
-    func appendToAlboum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData? = nil, success: FileOperation?, fail: FailResponse?) {
+    func appendToAlbum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData? = nil, success: FileOperation?, fail: FailResponse?) {
         debugLog("LocalMediaStorage appendToAlboum")
 
         guard photoLibraryIsAvailible() else {

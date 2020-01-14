@@ -494,7 +494,7 @@ class FileService: BaseRequestService {
                                 removeDestinationFile()
                                 success?()
                             } else {
-                                LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
+                                LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
                                                                          type: type,
                                                                          album: downloadParam.albumName,
                                                                          item: downloadParam.item,
