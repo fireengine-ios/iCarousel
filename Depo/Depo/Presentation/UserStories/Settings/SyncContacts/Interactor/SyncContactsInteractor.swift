@@ -115,7 +115,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: opertionType)
             }
         }, finishCallback: { [weak self] result, opertionType in
-            
+            self?.trackNetmera(operationType: type, status: .success)
             self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                       eventActions: .contactOperation(type),
                                                       eventLabel: .success)
@@ -127,7 +127,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
             }
         }, errorCallback: { [weak self] errorType, opertionType in
-            
+            self?.trackNetmera(operationType: type, status: .failure)
             self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                       eventActions: .contactOperation(type),
                                                       eventLabel: .failure)
@@ -137,6 +137,16 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showError(errorType: errorType)
             }
         })
+    }
+    
+    private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
+        switch operationType {
+        case .backup:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, staus: status))
+        case .restore:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
+        }
+
     }
     
     func getUserStatus() {
@@ -192,6 +202,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func deleteDuplicated() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, staus: .success))
         analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
         analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
         contactsSyncService.deleteDuplicates()

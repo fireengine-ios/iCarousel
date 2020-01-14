@@ -19,6 +19,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         if isDeleteRequestRunning {
             return
         }
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FreeUpSpace(count: selectedItems.count))
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
         checkAndDelete(items: selectedItems)

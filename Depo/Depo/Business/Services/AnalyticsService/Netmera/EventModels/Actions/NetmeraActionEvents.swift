@@ -64,6 +64,21 @@ extension NetmeraEvents.Actions {
         @objc var channelType = ""
         @objc var status = ""
         
+        convenience init(status: NetmeraEventValues.OnOffSettings, socialType: Section.SocialAccount) {
+            let socialChannel: NetmeraEventValues.ImportChannelType
+            switch socialType {
+            case .dropbox:
+                socialChannel = .dropbox
+            case .facebook:
+                socialChannel = .facebook
+            case .instagram:
+                socialChannel = .instagram
+            case .spotify:
+                socialChannel = .spotify
+            }
+            self.init(status: status.text, channelType: socialChannel.text)
+        }
+        
         convenience init(status: String, channelType: String) {
             self.init()
             self.status = status
@@ -79,19 +94,6 @@ extension NetmeraEvents.Actions {
         
         override var eventKey : String {
             return kImportKey
-        }
-    }
-    
-    final class ContactBackUpScreen: NetmeraEvent {
-        
-        private let kContactBackUpScreenKey = "dmi"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kContactBackUpScreenKey
         }
     }
     
@@ -445,10 +447,42 @@ extension NetmeraEvents.Actions {
         @objc var uploadType = ""
         @objc var fileType = ""
         
-        convenience init(uploadType: String, fileType: String) {
+        convenience init(uploadType: UploadType, fileType: FileType) {
+            let appopriateFileType: NetmeraEventValues.UploadFileType
+            switch fileType {
+            case .image:
+                appopriateFileType = .photo
+            case .video:
+                appopriateFileType = .video
+            case .audio:
+                appopriateFileType = .music
+            case .allDocs:
+                appopriateFileType = .document
+            default:
+                appopriateFileType = .photo
+            }
+            
+            let appopriateUploadType: NetmeraEventValues.UploadType
+            
+            switch uploadType {
+            case .autoSync:
+                if UIApplication.shared.applicationState == .background {
+                    appopriateUploadType = .background
+                } else {
+                    appopriateUploadType = .autosync
+                }
+            case .fromHomePage, .syncToUse, .other:
+                appopriateUploadType = .manual
+                
+            }
+            
+            self.init(uploadType: appopriateUploadType, fileType: appopriateFileType)
+        }
+        
+        convenience init(uploadType: NetmeraEventValues.UploadType, fileType: NetmeraEventValues.UploadFileType) {
             self.init()
-            self.uploadType = uploadType
-            self.fileType = fileType
+            self.uploadType = uploadType.text
+            self.fileType = fileType.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -548,9 +582,9 @@ extension NetmeraEvents.Actions {
         
         @objc var action = ""
         
-        convenience init(action: String) {
+        convenience init(action: NetmeraEventValues.OnOffSettings) {
             self.init()
-            self.action = action
+            self.action = action.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -614,6 +648,10 @@ extension NetmeraEvents.Actions {
         
         @objc var action = ""
         @objc var status = ""
+        
+        convenience init(actionType: NetmeraEventValues.ContactBackupType, staus: NetmeraEventValues.GeneralStatus) {
+            self.init(action: actionType.text, status: staus.text)
+        }
         
         convenience init(action: String, status: String) {
             self.init()
@@ -681,10 +719,10 @@ extension NetmeraEvents.Actions {
         @objc var leftAnalysis = ""
         @objc var status = ""
         
-        convenience init(leftAnalysis: String, status: String) {
+        convenience init(leftAnalysis: String, status: NetmeraEventValues.GeneralStatus) {
             self.init()
             self.leftAnalysis = leftAnalysis
-            self.status = status
+            self.status = status.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {

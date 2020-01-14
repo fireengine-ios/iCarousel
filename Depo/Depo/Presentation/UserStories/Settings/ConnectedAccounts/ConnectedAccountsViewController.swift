@@ -84,7 +84,7 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 // MARK: - SocialConnectionCellDelegate
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
-        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: section.account))
         /// DispatchQueue.toMain invokes too fast
         DispatchQueue.main.async {
             if section.set(expanded: true) {
@@ -96,6 +96,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     }
     
     func didDisconnectSuccessfully(section: Section) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: section.account))
         DispatchQueue.main.async {
             if section.set(expanded: false) {
                 let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,

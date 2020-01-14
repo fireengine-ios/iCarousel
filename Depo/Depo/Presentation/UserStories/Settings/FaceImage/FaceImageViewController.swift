@@ -82,8 +82,10 @@ final class FaceImageViewController: ViewController, NibInit {
         
         MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)
         if isAllowed {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .on))
             MenloworksEventsService.shared.onFaceImageRecognitionOn()
         } else {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .off))
             MenloworksEventsService.shared.onFaceImageRecognitionOff()
         }
     }
