@@ -228,7 +228,7 @@ final class OverlayStickerViewController: ViewController {
     private func uploadVideo(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
         
         guard let videoData = try? Data(contentsOf: contentURL) else {
-            completion(.failed(ErrorResponse.string("Wrong video data")))
+            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongVideoData)))
             return
         }
         
@@ -250,7 +250,7 @@ final class OverlayStickerViewController: ViewController {
     private func uploadImage(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
         
         guard let imageData = try? Data(contentsOf: contentURL) else {
-            completion(.failed(ErrorResponse.string("Wrong image data")))
+            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongImageData)))
             return
         }
         
