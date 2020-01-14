@@ -10,12 +10,17 @@ import Foundation
 
 final class OverlayStickerViewControllerDesigner: NSObject {
     
+    @IBOutlet private  weak var stickersView: UIView! {
+        willSet {
+            newValue.addBorder(side: .bottom, thickness: 1, color: ColorConstants.stickerBorderColor)
+            newValue.addBorder(side: .top, thickness: 1, color: ColorConstants.stickerBorderColor)
+        }
+    }
+    
     @IBOutlet private weak var stickersCollectionView: UICollectionView! {
         willSet {
-            newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
-            newValue.layer.borderWidth = 1
             newValue.backgroundColor = .clear
-            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 5)
+            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 15)
             newValue.register(nibCell: StickerCollectionViewCell.self)
             if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
@@ -25,8 +30,9 @@ final class OverlayStickerViewControllerDesigner: NSObject {
     
     @IBOutlet private weak var undoButtonView: UIView! {
         willSet {
-            newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
-            newValue.layer.borderWidth = 1
+            newValue.addBorder(side: .left, thickness: 1, color: ColorConstants.stickerBorderColor)
+            newValue.addBorder(side: .bottom, thickness: 1, color: ColorConstants.stickerBorderColor)
+
             newValue.backgroundColor = .clear
         }
     }
