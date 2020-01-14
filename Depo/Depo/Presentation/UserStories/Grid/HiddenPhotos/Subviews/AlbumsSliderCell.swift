@@ -79,6 +79,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     }
     
     func reset() {
+        emptyLabel.isHidden = true
         dataSource.reset()
     }
     

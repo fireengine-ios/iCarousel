@@ -26,7 +26,7 @@ final class FaceImagePhotosConfigurator {
         if item.fileType.isFaceImageType {
             switch status {
             case .hidden:
-                initialTypes.append(contentsOf: [.unhide, .completelyMoveToTrash])
+                initialTypes.append(contentsOf: [.unhideAlbumItems, .completelyMoveToTrash])
                 elementsConfig = [.unhideAlbumItems, .deleteFaceImage]
             case .trashed:
                 initialTypes.append(contentsOf: [.restore, .completelyDeleteAlbums])
