@@ -53,6 +53,8 @@ enum PushNotificationAction: String {
     case photopickCampaignDetail = "photopick_campaign_detail"
     case supportFormLogin = "support_form_login"
     case supportFormSignup = "support_form_signup"
+    case trashBin = "trash_bin"
+    case hiddenBin = "hidden_bin"
 }
 
 enum PushNotificationParameter: String {
