@@ -134,7 +134,11 @@ final class PushNotificationService {
             } else { 
                 openSupport(type: action == .supportFormSignup ? .signup : .login)
             }
+        case .trashBin:
+            openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+        case .hiddenBin: openHiddenBin()
         }
+        
         
         if router.tabBarController != nil {
             clear()
@@ -166,7 +170,7 @@ final class PushNotificationService {
         }
     }
     
-    private func openTabBarItem(index: TabScreenIndex) {
+    private func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
@@ -187,6 +191,16 @@ final class PushNotificationService {
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue - 1
+            
+                guard let segmentIndex = segmentIndex else {
+                    return
+                }
+                
+                if let segmentedController = tabBarVC.currentViewController as? SegmentedController {
+                    segmentedController.loadViewIfNeeded()
+                    segmentedController.switchSegment(to: segmentIndex)
+                }
+                
             case .photosScreenIndex:
                 tabBarVC.showPhotoScreen()
             }
@@ -415,6 +429,11 @@ final class PushNotificationService {
     
     private func openSupport(type: SupportFormScreenType) {
         let controller = SupportFormController.with(screenType: type)
+        pushTo(controller)
+    }
+    
+    private func openHiddenBin() {
+        let controller = router.hiddenPhotosViewController()
         pushTo(controller)
     }
 }

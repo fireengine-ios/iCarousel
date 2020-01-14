@@ -27,6 +27,14 @@ enum TabScreenIndex: Int {
     case documentsScreenIndex = 4
 }
 
+enum DocumentsScreenSegmentIndex: Int {
+    case allFiles = 0
+    case documents = 1
+    case music = 2
+    case favorites = 3
+    case trashBin = 4
+}
+
 final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
