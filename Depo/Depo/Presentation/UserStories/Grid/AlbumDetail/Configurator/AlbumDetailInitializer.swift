@@ -46,7 +46,7 @@ class AlbumDetailModuleInitializer: NSObject {
         interactor.album = album
         
         // FIXME: need to change folder property to uuid in base class
-        let item = Item(imageData: Data()) /// some empty item to pass uuid
+        let item = Item(imageData: Data(), isLocal: true) /// some empty item to pass uuid
         item.uuid = album.uuid
         interactor.folder = item
         

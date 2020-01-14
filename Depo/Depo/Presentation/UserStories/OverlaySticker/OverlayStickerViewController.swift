@@ -239,7 +239,7 @@ final class OverlayStickerViewController: ViewController {
         }
         
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(videoData: videoData)
+        let item = WrapData(videoData: videoData, isLocal: false)
         item.patchToPreview = PathForItem.remoteUrl(url)
         
         uploadService.uploadFileList(items: [item],
@@ -261,7 +261,7 @@ final class OverlayStickerViewController: ViewController {
         }
         
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(imageData: imageData)
+        let item = WrapData(imageData: imageData, isLocal: false)
         item.patchToPreview = PathForItem.remoteUrl(url)
         
         uploadService.uploadFileList(items: [item],
