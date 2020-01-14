@@ -970,7 +970,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init(imageData: Data) {
+    init(imageData: Data, isLocal: Bool) {
         fileData = imageData
         fileSize = Int64(imageData.count)
         favorites = false
@@ -979,14 +979,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = nil
 
         let creationDate = Date()
-        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: isLocal)
         
         if let fileName = name {
             md5 = "\(fileName)\(fileSize)"
         }
     }
    //TODO: Temporary logic
-    init(videoData: Data) {
+    init(videoData: Data, isLocal: Bool) {
         fileData = videoData
         fileSize = Int64(videoData.count)
         favorites = false
@@ -995,7 +995,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = nil
 
         let creationDate = Date()
-        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: isLocal)
         
         if let fileName = name {
             md5 = "\(fileName)\(fileSize)"
