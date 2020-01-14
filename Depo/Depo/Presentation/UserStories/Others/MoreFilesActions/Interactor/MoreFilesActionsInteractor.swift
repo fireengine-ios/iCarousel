@@ -470,15 +470,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        hiddenService.recoverAlbums(items) { response in
-            switch response {
-            case .success(_):
-                success()
-                
-            case .failed(let error):
-                fail(error)
-            }
-        }
+        fileService.unhideAlbums(items, success: success, fail: fail)
     }
     
     func restore(items: [BaseDataSourceItem]) {
@@ -920,17 +912,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                
-                if elementType == .unhideAlbumItems {
-                    self?.router.defaultTopController?.dismiss(animated: true, completion: {
-                        self?.router.popViewController()
-                        self?.showSuccessPopup(for: elementType)
-                    })
-                } else {
-                    self?.showSuccessPopup(for: elementType)
-                }
-                
-                
+                self?.showSuccessPopup(for: elementType)
             }
         }
         return success
