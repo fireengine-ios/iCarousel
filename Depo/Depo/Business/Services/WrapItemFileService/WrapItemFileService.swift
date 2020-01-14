@@ -145,6 +145,23 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
+    func hide(albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.hide(albums, completion: {
+                success?()
+                ItemOperationManager.default.didHideAlbums(albums)
+            })
+        }
+        
+        hiddenService.hideAlbums(albums) { response in
+            switch response {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
     
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         

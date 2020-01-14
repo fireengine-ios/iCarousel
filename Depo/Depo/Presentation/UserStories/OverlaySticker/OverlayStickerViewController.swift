@@ -48,6 +48,8 @@ final class OverlayStickerViewController: ViewController {
         super.viewDidLoad()
         selectStickerType(type: .gif)
         setupImage()
+        
+        self.view.backgroundColor = .black
         statusBarColor = .black
         overlayingStickerImageView.stickersDelegate = self
         overlayStickerViewControllerDataSource.delegate = self
@@ -79,33 +81,13 @@ final class OverlayStickerViewController: ViewController {
             showAccessAlert()
             return
         }
-
+        
         showSpinnerIncludeNavigationBar()
         
-        DispatchQueue.main.async { [weak self] in
-            
-            guard let self = self else {
-                return
-            }
-
+        smashCoordinator?.smashConfirmPopUp {
+            self.showSpinnerIncludeNavigationBar()
             self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
-                self?.hideSpinnerIncludeNavigationBar()
-                
-                let popUp = PopUpController.with(title: TextConstants.save,
-                                                 message: TextConstants.smashPopUpMessage,
-                                                 image: .error,
-                                                 firstButtonTitle: TextConstants.cancel,
-                                                 secondButtonTitle: TextConstants.ok,
-                                                 firstUrl: nil,
-                                                 secondUrl: nil,
-                                                 firstAction: { popup in popup.close() },
-                                                 secondAction: { popup in
-                                                    popup.close()
-                                                    self?.showSpinnerIncludeNavigationBar()
-                                                    self?.saveResult(result: result)
-                })
-                self?.hideSpinnerIncludeNavigationBar()
-                UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+                self?.saveResult(result: result)
             }
         }
     }

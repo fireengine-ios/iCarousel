@@ -156,6 +156,10 @@ final class OverlayStickerImageView: UIImageView {
             DispatchQueue.toMain {
                 
                 let imageView = YYAnimatedImageView(image: image)
+            
+                imageView.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.4,
+                                              height: UIScreen.main.bounds.width * 0.4)
+                
                 imageView.center = self.center
                 self.addSubview(imageView)
                 self.attachments.append(imageView)
@@ -181,6 +185,8 @@ final class OverlayStickerImageView: UIImageView {
             DispatchQueue.toMain {
                 let imageView = UIImageView(image: image)
                 imageView.center = self.center
+                imageView.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.4,
+                                              height: UIScreen.main.bounds.width * 0.4)
                 
                 self.addSubview(imageView)
                 self.attachments.append(imageView)

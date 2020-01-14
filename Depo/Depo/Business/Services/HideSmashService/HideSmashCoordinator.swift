@@ -24,6 +24,7 @@ protocol HideFuncServiceProtocol {
 }
 
 protocol SmashServiceProtocol {
+    func smashConfirmPopUp(completion: @escaping VoidHandler)
     func smashSuccessed()
 }
 
@@ -148,7 +149,26 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         operation = .smash
         showSuccessPopUp()
     }
-
+    
+    func smashConfirmPopUp(completion: @escaping () -> Void) {
+        operation = .smash
+        let popUp = PopUpController.with(title: TextConstants.save,
+                                         message: TextConstants.smashPopUpMessage,
+                                         image: .error,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstUrl: nil,
+                                         secondUrl: nil,
+                                         firstAction: { popup in popup.close() },
+                                         secondAction: { popup in
+                                            popup.close()
+                                            completion()
+        })
+        
+        UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+        
+    }
+    
     //MARK: Utility Methods (Private)
 
     // Hide
@@ -277,29 +297,16 @@ extension HideSmashCoordinator {
     }
 
     private func hideAlbums() {
-        let wrappedSuccessOperation: FileOperationSucces = {
-            MediaItemOperationsService.shared.hide(self.albums, completion: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    self.hiddenSuccessfully()
-                }
-            })
-        }
-
-        hiddenService.hideAlbums(albums) { [weak self] result in
-            guard let self = self else {
-                return
+        fileService.hide(albums: albums, success: { [weak self] in
+            DispatchQueue.main.async {
+                self?.hiddenSuccessfully()
             }
-            switch result {
-            case .success(_):
-                wrappedSuccessOperation()
-            case .failed(let error):
-                self.fail?(.error(error))
-            }
-        }
+
+        }, fail: { [weak self] error in
+            let errorResponse = ErrorResponse.error(error)
+            self?.fail?(errorResponse)
+
+        })
     }
 
     private func getPermissions() {
