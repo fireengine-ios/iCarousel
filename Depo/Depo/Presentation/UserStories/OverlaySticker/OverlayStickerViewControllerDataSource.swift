@@ -24,6 +24,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
     
+    private let downloader = ImageDownloder()
     
     private let paginationPageSize = 20
     private var isPaginating = false
@@ -125,6 +126,24 @@ final class OverlayStickerViewControllerDataSource: NSObject {
             selectedAttachmentType = .image
         }
     }
+    
+    private func downloadGifForCell(cell: StickerCollectionViewCell, url: URL) {
+    
+        downloader.getImageData(url: url) { data in
+            DispatchQueue.global().async {
+                guard
+                    let imageData = data,
+                    let image = OptimazingGifService().optimazeImage(data: imageData, otimazeFor: .cell)
+                    else {
+                        return
+                }
+                
+                DispatchQueue.toMain {
+                    cell.setupGif(image: image)
+                }
+            }
+        }
+    }
 }
 
 extension OverlayStickerViewControllerDataSource: UICollectionViewDataSource {
@@ -147,7 +166,11 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
         }
 
         let object = currentState.source[indexPath.row]
-        cell.setup(with: object)
+        cell.setup(with: object, type: selectedAttachmentType)
+        
+        if selectedAttachmentType == .gif {
+            downloadGifForCell(cell: cell, url: object.path)
+        }
         
         let attachmentCount = currentState.source.count
         let isLastCell = (attachmentCount - 1 == indexPath.row)
@@ -160,8 +183,9 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                
-        let url = currentState.source[indexPath.row].path
-        delegate?.didSelectItemWithUrl(url: url, attachmentType: selectedAttachmentType)
+        if !currentState.source.isEmpty {
+            let url = currentState.source[indexPath.row].path
+            delegate?.didSelectItemWithUrl(url: url, attachmentType: selectedAttachmentType)
+        }
     }
 }
