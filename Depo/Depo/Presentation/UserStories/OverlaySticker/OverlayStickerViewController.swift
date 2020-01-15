@@ -146,37 +146,49 @@ final class OverlayStickerViewController: ViewController {
             
             if libraryIsAvailable == true {
                 
+                let commonCompletionHandler = { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.hideSpinnerIncludeNavigationBar()
+                        self?.close { [weak self] in
+                            self?.showCompletionPopUp()
+                        }
+                    }
+                }
+                
                 switch result {
                 case .success(let result):
                     switch result.type {
                     case .image:
-                        //TODO: Different logic for saving result
-                        self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
-                            print("Saved in library")
-                        }
-                        self?.uploadImage(contentURL: result.url) { isUploaded in
-                            print("uploaded")
-                            DispatchQueue.main.async {
-                                self?.hideSpinnerIncludeNavigationBar()
-                                self?.close { [weak self] in
-                                    self?.showCompletionPopUp()
+                        self?.uploadImage(contentURL: result.url, completion: { response in
+                            print("Uploaded")
+                            
+                            switch response {
+                            case .success(let item):
+                                self?.saveImageToLibrary(url: result.url, remoteItem: item) { _ in
+                                    print("Saved in library")
+                                    
+                                    commonCompletionHandler()
                                 }
+                            case .failed(let _):
+                                commonCompletionHandler()
                             }
-                        }
+                        })
         
                     case .video:
-                        self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
-                            print("Saved in library")
-                        }
-                        self?.uploadVideo(contentURL: result.url) { isUploaded in
-                            print("uploaded")
-                            DispatchQueue.main.async {
-                                self?.hideSpinnerIncludeNavigationBar()
-                                self?.close { [weak self] in
-                                    self?.showCompletionPopUp()
+                        self?.uploadVideo(contentURL: result.url, completion: { response in
+                            print("Uploaded")
+                            
+                            switch response {
+                            case .success(let item):
+                                self?.saveVideoToLibrary(url: result.url, remoteItem: item) { _ in
+                                    print("Saved in library")
+                                    
+                                    commonCompletionHandler()
                                 }
+                            case .failed(let _):
+                                commonCompletionHandler()
                             }
-                        }
+                        })
                     }
                     
                 case .failure(let error):
@@ -216,15 +228,15 @@ final class OverlayStickerViewController: ViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    private func uploadVideo(contentURL: URL, completion: @escaping (Bool) -> Void) {
+    private func uploadVideo(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
         
         guard let videoData = try? Data(contentsOf: contentURL) else {
-            completion(false)
+            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongVideoData)))
             return
         }
         
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(videoData: videoData)
+        let item = WrapData(videoData: videoData, isLocal: false)
         item.patchToPreview = PathForItem.remoteUrl(url)
         
         uploadService.uploadFileList(items: [item],
@@ -232,21 +244,21 @@ final class OverlayStickerViewController: ViewController {
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: {
-                                        completion(true) },
+                                        completion(.success(item)) },
                                      fail: { errorResponce in
-                                        completion(false) },
+                                        completion(.failed(errorResponce)) },
                                      returnedUploadOperation: {_ in })
     }
     
-    private func uploadImage(contentURL: URL, completion: @escaping (Bool) -> Void) {
+    private func uploadImage(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
         
         guard let imageData = try? Data(contentsOf: contentURL) else {
-            completion(false)
+            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongImageData)))
             return
         }
         
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(imageData: imageData)
+        let item = WrapData(imageData: imageData, isLocal: false)
         item.patchToPreview = PathForItem.remoteUrl(url)
         
         uploadService.uploadFileList(items: [item],
@@ -254,22 +266,18 @@ final class OverlayStickerViewController: ViewController {
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: {
-                                        completion(true) },
+                                        completion(.success(item)) },
                                      fail: { errorResponce in
-                                        completion(false) },
+                                        completion(.failed(errorResponce)) },
                                      returnedUploadOperation: {_ in })
     }
     
-    private func saveVideoToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-        }) { saved, error in
-            if saved {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
+    private func saveVideoToLibrary(url: URL, remoteItem: WrapData, completion: @escaping BoolHandler) {
+        LocalMediaStorage.default.appendToAlbum(fileUrl: url, type: .video, album: nil, item: remoteItem, success: {
+            completion(true)
+        }, fail: { _ in
+            completion(false)
+        })
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {        
@@ -284,20 +292,15 @@ final class OverlayStickerViewController: ViewController {
         makeTopAndBottomBarsIsHidden(hide: isFullScreen)
     }
     
-    private func saveImageToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
-        
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: url)
-        }) { saved, error in
-            if saved {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
+    private func saveImageToLibrary(url: URL, remoteItem: WrapData, completion: @escaping BoolHandler) {
+        LocalMediaStorage.default.appendToAlbum(fileUrl: url, type: .image, album: nil, item: remoteItem, success: {
+            completion(true)
+        }, fail: { _ in
+            completion(false)
+        })
     }
     
-    private func checkLibraryAccessStatus(completion: @escaping (Bool) -> Void) {
+    private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
         if PHPhotoLibrary.authorizationStatus() == .authorized {
             completion(true)
         } else {

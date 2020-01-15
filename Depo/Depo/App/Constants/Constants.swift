@@ -21,6 +21,8 @@ struct TextConstants {
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
+        static let wrongVideoData = "Wrong video data"
+        static let wrongImageData = "Wrong image data"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE
