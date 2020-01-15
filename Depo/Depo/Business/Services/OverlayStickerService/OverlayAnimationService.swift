@@ -53,8 +53,8 @@ final class OverlayAnimationService {
                 
                 var images = [UIImage]()
                 
-                if let _ =  item.image?.isGIF() {
-                    
+                if item.image?.isGIF() == true {
+            
                     guard
                         let imgs = item.image?.images
                     else {
