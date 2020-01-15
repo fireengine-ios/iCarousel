@@ -20,6 +20,7 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private var overlayStickerViewControllerDataSource: OverlayStickerViewControllerDataSource!
     
     private let uploadService = UploadService()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private let stickerService: SmashService = SmashServiceImpl()
 
     private lazy var applyButton: UIBarButtonItem = {
@@ -153,39 +154,16 @@ final class OverlayStickerViewController: ViewController {
                 
                 switch result {
                 case .success(let result):
-                    switch result.type {
-                    case .image:
-                        self?.uploadImage(contentURL: result.url, completion: { response in
-                            print("Uploaded")
-                            
-                            switch response {
-                            case .success(let item):
-                                self?.saveImageToLibrary(url: result.url, remoteItem: item) { _ in
-                                    print("Saved in library")
-                                    
-                                    commonCompletionHandler()
-                                }
-                            case .failed(let _):
+                    self?.saveLocalyItem(url: result.url, type: result.type, completion: { [weak self] saveResult in
+                        switch saveResult {
+                        case .success(let localItem):
+                            self?.uploadItem(item: localItem, completion: { uploadResult in
                                 commonCompletionHandler()
-                            }
-                        })
-        
-                    case .video:
-                        self?.uploadVideo(contentURL: result.url, completion: { response in
-                            print("Uploaded")
-                            
-                            switch response {
-                            case .success(let item):
-                                self?.saveVideoToLibrary(url: result.url, remoteItem: item) { _ in
-                                    print("Saved in library")
-                                    
-                                    commonCompletionHandler()
-                                }
-                            case .failed(let _):
-                                commonCompletionHandler()
-                            }
-                        })
-                    }
+                            })
+                        case .failed(_):
+                            commonCompletionHandler()
+                        }
+                    })
                     
                 case .failure(let error):
                     self?.hideSpinnerIncludeNavigationBar()
@@ -225,58 +203,6 @@ final class OverlayStickerViewController: ViewController {
         self.extendedLayoutIncludesOpaqueBars = true
     }
     
-    private func uploadVideo(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
-        
-        guard let videoData = try? Data(contentsOf: contentURL) else {
-            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongVideoData)))
-            return
-        }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(videoData: videoData, isLocal: false)
-        item.patchToPreview = PathForItem.remoteUrl(url)
-        
-        uploadService.uploadFileList(items: [item],
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        completion(.success(item)) },
-                                     fail: { errorResponce in
-                                        completion(.failed(errorResponce)) },
-                                     returnedUploadOperation: {_ in })
-    }
-    
-    private func uploadImage(contentURL: URL, completion: @escaping ResponseHandler<WrapData>) {
-        
-        guard let imageData = try? Data(contentsOf: contentURL) else {
-            completion(.failed(ErrorResponse.string(TextConstants.NotLocalized.wrongImageData)))
-            return
-        }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(imageData: imageData, isLocal: false)
-        item.patchToPreview = PathForItem.remoteUrl(url)
-        
-        uploadService.uploadFileList(items: [item],
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        completion(.success(item)) },
-                                     fail: { errorResponce in
-                                        completion(.failed(errorResponce)) },
-                                     returnedUploadOperation: {_ in })
-    }
-    
-    private func saveVideoToLibrary(url: URL, remoteItem: WrapData, completion: @escaping BoolHandler) {
-        LocalMediaStorage.default.appendToAlbum(fileUrl: url, type: .video, album: nil, item: remoteItem, success: {
-            completion(true)
-        }, fail: { _ in
-            completion(false)
-        })
-    }
-    
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
         navigationController?.setNavigationBarHidden(hide, animated: false)
         stickersView.isHidden = hide
@@ -286,15 +212,7 @@ final class OverlayStickerViewController: ViewController {
         isFullScreen = !isFullScreen
         makeTopAndBottomBarsIsHidden(hide: isFullScreen)
     }
-    
-    private func saveImageToLibrary(url: URL, remoteItem: WrapData, completion: @escaping BoolHandler) {
-        LocalMediaStorage.default.appendToAlbum(fileUrl: url, type: .image, album: nil, item: remoteItem, success: {
-            completion(true)
-        }, fail: { _ in
-            completion(false)
-        })
-    }
-    
+
     private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
         if PHPhotoLibrary.authorizationStatus() == .authorized {
             completion(true)
@@ -327,5 +245,65 @@ extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDe
         overlayingStickerImageView.addAttachment(url: url, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
+    }
+}
+
+
+//MARK: - Saving
+
+extension OverlayStickerViewController {
+    private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+        uploadService.uploadFileList(items: [item],
+                                     uploadType: .syncToUse,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: {
+                                        completion(.success(item)) },
+                                     fail: { errorResponce in
+                                        completion(.failed(errorResponce)) },
+                                     returnedUploadOperation: {_ in })
+    }
+
+    private func saveLocalyItem(url: URL, type: CreateOverlayResultType, completion: @escaping ResponseHandler<WrapData>) {
+        LocalMediaStorage.default.saveToGallery(fileUrl: url, type: type.toPHMediaType) { [weak self] result in
+            switch result {
+            case .success(let placeholder):
+                guard
+                    let assetIdentifier = placeholder?.localIdentifier,
+                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject
+                else {
+                    assertionFailure()
+                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                self?.saveToDB(asset: asset, completion: completion)
+                
+            case .failed(_):
+                completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+            }
+        }
+    }
+    
+    private func saveToDB(asset: PHAsset, completion: @escaping ResponseHandler<WrapData>) {
+        let mediaItemService = MediaItemOperationsService.shared
+        LocalMediaStorage.default.assetsCache.append(list: [asset])
+        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let context = self.coreDataStack.newChildBackgroundContext
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
+                guard let savedLocalItem = items.first else {
+                    assertionFailure()
+                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                let wrapData = WrapData(mediaItem: savedLocalItem, asset: asset)
+                completion(.success(wrapData))
+            })
+        }
     }
 }
