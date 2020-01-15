@@ -53,21 +53,21 @@ final class OverlayAnimationService {
                 
                 var images = [UIImage]()
                 
-                guard let attacableImage = item.image else {
+                guard let attachableImage = item.image else {
                     assertionFailure()
                     return
                 }
                 
-                if attacableImage.isGIF() {
+                if attachableImage.isGIF() {
                     
-                    guard let imgs = attacableImage.images else {
+                    guard let imgs = attachableImage.images else {
                         assertionFailure()
                         return
                     }
                     
                     images.append(contentsOf: imgs)
                 } else {
-                    images.append(attacableImage)
+                    images.append(attachableImage)
                 }
                 
                 let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
