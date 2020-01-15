@@ -1388,3 +1388,9 @@
 "trash_bin_album_slider_title" = "";
 "trash_bin_album_slider_empty" = "";
 "trash_bin_empty" = "";
+"delete_confirmation_popup_title" = "";
+"delete_confirmation_popup_text" = "";
+"delete_popup_success_text" = "";
+"restore_confirmation_popup_title" = "";
+"restore_confirmation_popup_text" = "";
+"restore_popup_success_text" = "";
