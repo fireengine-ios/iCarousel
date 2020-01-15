@@ -1429,3 +1429,11 @@
 
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
+
+"delete_confirmation_popup_title" = "Delete permanently";
+"delete_confirmation_popup_text" = "Are you sure?";
+"delete_popup_success_text" = "Deleted permanently";
+
+"restore_confirmation_popup_title" = "Delete permanently";
+"restore_confirmation_popup_text" = "Are you sure?";
+"restore_popup_success_text" = "Deleted permanently";

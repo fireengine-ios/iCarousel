@@ -35,9 +35,9 @@ protocol HiddenPhotosBottomBarManagerDelegate: class {
 
 final class HiddenPhotosBottomBarManager {
 
-    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.unhide, .moveToTrash],
-                                                          style: .blackOpaque,
-                                                          tintColor: nil)
+    private let bottomBarConfig = EditingBarConfig(elementsConfig: ElementTypes.hiddenState,
+                                                   style: .blackOpaque,
+                                                   tintColor: nil)
     
     var editingTabBar: BottomSelectionTabBarViewController?
     private let bottomBarPresenter = HiddenPhotosBottomTabBarPresenter()

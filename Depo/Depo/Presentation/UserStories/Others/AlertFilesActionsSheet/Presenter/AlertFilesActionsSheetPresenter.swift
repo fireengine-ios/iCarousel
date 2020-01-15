@@ -72,7 +72,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
         
         if item.fileType == .photoAlbum {
-            let types: [ElementTypes] = [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails]
+            let types: [ElementTypes] = [.shareAlbum, .download, .moveToTrash, .removeAlbum, .albumDetails]
             let album = AlbumItem(uuid: item.uuid,
                                   name: item.name,
                                   creationDate: item.creationDate,
@@ -98,7 +98,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             var types: [ElementTypes] = [.info, .share, .move]
             
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-            types.append(.delete)
+            types.append(.moveToTrash)
             
             if item.fileType == .image || item.fileType == .video {
                 types.append(.download)
@@ -141,7 +141,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 //This on for player
                 actionTypes = [.musicDetails, .addToPlaylist]//, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append(.delete)
+                actionTypes.append(.moveToTrash)
                 
             case .folder:
                 break
@@ -151,7 +151,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 if !item.isLocalItem {
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                 }
             case .video:
                 actionTypes = [.move]
@@ -170,12 +170,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .rar, .zip:
                     actionTypes = [.copy, .move]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 case .doc, .pdf, .txt, .ppt, .xls, .html:
                     actionTypes = [.move, .copy, .documentDetails]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 default:
                     break
@@ -285,40 +285,24 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             UIApplication.showErrorAlert(message: text)
                         }
                     })
-                case .delete:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
+                case .moveToTrash:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
+                        //TODO: will be another task to implement analytics calls
+                        //                        MenloworksAppEvents.onDeleteClicked()
                         
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.delete(item: currentItems)
+                        if selectedItems.count <= allowedNumberLimit {
+                            self.interactor.moveToTrash(item: selectedItems)
                             self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
                         }
-                    })
-                case .moveToTrash:
-                    assertionFailure("please implement this function first")
-                    action = UIAlertAction()
+                    }
                 case .hide:
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
                         //TODO: will be another task to implement analytics calls
-//                        MenloworksAppEvents.onDeleteClicked()
-                        
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.hide(items: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
-                        } else {
-                            let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    })
-                case .hideAlbums:
-                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
-                        //TODO: will be another task to implement analytics calls
-//                        MenloworksAppEvents.onDeleteClicked()
+                        //                        MenloworksAppEvents.onDeleteClicked()
                         
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
@@ -332,10 +316,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .unhide:
                     action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
                         self?.interactor.unhide(items: selectedItems)
-                    }
-                case .unhideAlbumItems:
-                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
-                        self?.interactor.unhideAlbumItems(items: selectedItems)
                     }
                 case .smash:
                     assertionFailure("please implement this function first")
@@ -446,7 +426,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in
                         self.interactor.documentDetails(items: currentItems)
                     })
-                    
                 case .select:
                     action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                         self.basePassingPresenter?.selectModeSelected()
@@ -470,19 +449,22 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetRename, style: .default, handler: { _ in
                         self.interactor.info(item: currentItems, isRenameMode: true)
                     })
-                case .completelyDeleteAlbums:
+                case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.completelyDelete(albums: currentItems)
-                    })
-                case .completelyMoveToTrash:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.completelyMoveToTrash(albums: currentItems)
+                        
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            self.interactor.moveToTrash(item: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
                     })
                 case .removeAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
-                        self.interactor.delete(item: currentItems)
+                        self.interactor.moveToTrash(item: currentItems)
                     })
                 case .deleteDeviceOriginal:
                     if let itemsArray = items as? [Item] {
@@ -513,12 +495,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                         self.basePassingPresenter?.stopModeSelected()
                         self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
-                    })
-                case .deleteFaceImage:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
                     })
                 case .instaPick:
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
@@ -613,7 +589,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             if sourceController.navigationController?.navigationBar.isTranslucent == true {
                 var frame = rightButtonBox
                 frame.origin.y = 44
-               newSourceRect = frame
+                newSourceRect = frame
             } else {
                 newSourceRect = rightButtonBox
             }

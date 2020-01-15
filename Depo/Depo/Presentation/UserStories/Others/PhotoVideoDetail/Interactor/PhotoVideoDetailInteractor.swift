@@ -77,7 +77,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         let selectedItem = array[selectedIndex]
-        let elementsConfig = ElementTypes.elementsConfig(for: selectedItem, status: status, viewType: viewType)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
         return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
     }
     
