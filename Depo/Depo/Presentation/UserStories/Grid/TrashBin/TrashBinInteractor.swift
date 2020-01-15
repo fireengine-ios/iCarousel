@@ -16,7 +16,7 @@ protocol TrashBinInteractorDelegate: class {
     func failedLoadAlbumPage(error: Error)
 }
 
-final class TrashBinInteractor {
+final class TrashBinInteractor: MoreFilesActionsInteractor {
 
     private enum AlbumsOrder: Int {
         case people = 0

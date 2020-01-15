@@ -19,7 +19,7 @@ class StoriesInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()
@@ -46,7 +46,7 @@ class StoriesInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: router,
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: [.addToAlbum]),
+                                                                                     selectionModeTypes: [.addToAlbum] + ElementTypes.activeState),
                                topBarConfig: gridListTopBarConfig)
         
         interactor.originalFilters = [.fileType(.photoAlbum)]

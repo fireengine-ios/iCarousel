@@ -18,36 +18,18 @@ final class FaceImagePhotosConfigurator {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
-        
-        let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
 
-        var elementsConfig: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .deleteFaceImage]
-        var initialTypes: [ElementTypes] = [.select]
-        if item.fileType.isFaceImageType {
-            switch status {
-            case .hidden:
-                initialTypes.append(contentsOf: [.unhideAlbumItems, .completelyMoveToTrash])
-                elementsConfig = [.unhideAlbumItems, .deleteFaceImage]
-            case .trashed:
-                initialTypes.append(contentsOf: [.restore, .completelyDeleteAlbums])
-            default:
-                initialTypes.append(contentsOf: [.changeCoverPhoto, .hide, .completelyMoveToTrash])
-            }
-        }
+        viewController.mainTitle = item.name ?? ""
         viewController.status = status
         
-        let selectionModeTypes: [ElementTypes]
+        let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
+        presenter.view = viewController
+        presenter.router = router
+        presenter.faceImageItemsModuleOutput = moduleOutput
+        presenter.needShowEmptyMetaItems = true
+        presenter.item = item
+        presenter.coverPhoto = album.preview
         
-        let langCode = Device.locale
-        if langCode != "tr" {
-            selectionModeTypes = [.createStory, .removeFromFaceImageAlbum]
-        } else {
-            selectionModeTypes = [.createStory, .print, .removeFromFaceImageAlbum]
-        }
-        
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: initialTypes,
-                                                                   selectionModeTypes: selectionModeTypes)
-
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
         presenter.alertSheetModule = alertModulePresenter
@@ -55,38 +37,33 @@ final class FaceImagePhotosConfigurator {
         
         //presenter.topBarConfig = alertSheetConfig
         
-        presenter.view = viewController
-        presenter.router = router
-        presenter.faceImageItemsModuleOutput = moduleOutput
-        presenter.needShowEmptyMetaItems = true
-        
-        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
-        
+        let remoteServices = FaceImageDetailService(albumUUID: album.uuid,
+                                                    requestSize: RequestSizeConstant.faceImageItemsRequestSize)
         let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
+        
         interactor.output = presenter
         interactor.album = album
-        interactor.alertSheetConfig = alertSheetConfig
         interactor.status = status
         
+        let initialTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .actionSheet)
+        let selectionModeTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .selectionMode)
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: initialTypes,
+                                                                   selectionModeTypes: selectionModeTypes)
+        
+        interactor.alertSheetConfig = alertSheetConfig
         presenter.interactor = interactor
         viewController.output = presenter
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
-                                               style: .default, tintColor: nil)
-        
-        
+        let elementsConfig = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .bottomBar)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .default, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
-        viewController.editingTabBar = botvarBarVC
+        let bottomBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig,
+                                                        settablePresenter: BottomSelectionTabBarPresenter())
+        
+        viewController.editingTabBar = bottomBarVC
+        interactor.bottomBarOriginalConfig = bottomBarConfig
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter
-        
-        interactor.bottomBarOriginalConfig = bottomBarConfig
-        
-        viewController.mainTitle = item.name ?? ""
-        
-        presenter.item = item
-        presenter.coverPhoto = album.preview
         
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .List,

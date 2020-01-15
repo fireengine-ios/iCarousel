@@ -14,7 +14,7 @@ class VisualMusicPlayerModuleInitializer: NSObject {
         let viewController = VisualMusicPlayerViewController(nibName: nibName, bundle: nil)
         let configurator = VisualMusicPlayerModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .moveToTrash],
                                                style: .blackOpaque, tintColor: nil)
         
         configurator.configure(viewController: viewController, bottomBarConfig: bottomBarConfig)

@@ -7,12 +7,10 @@
 //
 
 enum ElementTypes {
-    
     case share
     case info//one for alert one for tab
     case edit
     case delete
-    case deleteFaceImage
     case deleteDeviceOriginal
     case move
     case sync
@@ -22,6 +20,7 @@ enum ElementTypes {
     case removeAlbum
     case moveToTrash
     case restore
+    
     //used only in alert sheet:
     //photos:
     case createStory
@@ -37,9 +36,7 @@ enum ElementTypes {
     case print
     case changeCoverPhoto
     case hide
-    case hideAlbums
     case unhide
-    case unhideAlbumItems
     case smash
     //upload?
     case photos
@@ -58,19 +55,21 @@ enum ElementTypes {
     case shareAlbum
     case makeAlbumCover
     case albumDetails
-    case completelyDeleteAlbums
-    case completelyMoveToTrash
     //instaPick
     case instaPick
     
-    static func elementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
+    static var trashState: [ElementTypes] = [.restore, .delete]
+    static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
+    static var activeState: [ElementTypes] = [.hide, .moveToTrash]
+
+    static func detailsElementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
         var result: [ElementTypes]
         
         switch status {
         case .hidden:
-            result = [.unhide, .moveToTrash]
+            result = ElementTypes.hiddenState
         case .trashed:
-            result = [.restore, .delete]
+            result = ElementTypes.trashState
         default:
             if item.isLocalItem {
                 result = [.share, .sync, .info]
@@ -110,9 +109,92 @@ enum ElementTypes {
         
         return result
     }
+    
+    static func albumElementsConfig(for status: ItemStatus, viewType: UniversalViewType) -> [ElementTypes] {
+        var result: [ElementTypes]
+
+        switch status {
+        case .hidden:
+            result = ElementTypes.hiddenState
+            
+        case .trashed:
+            result = ElementTypes.trashState
+            
+        default:
+            switch viewType {
+            case .bottomBar:
+                result = [.share, .download, .addToAlbum]  + ElementTypes.activeState
+                
+            case .actionSheet:
+                result = [.select, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
+                
+            case .selectionMode:
+                result = [.createStory]
+                if Device.isTurkishLocale {
+                    result.append(.print)
+                }
+                result.append(.removeFromAlbum)
+            }
+        }
+        
+        return result
+    }
+    
+    static func faceImagePhotosElementsConfig(for item: Item, status: ItemStatus, viewType: UniversalViewType) -> [ElementTypes] {
+        var result: [ElementTypes]
+
+        switch viewType {
+        case .bottomBar:
+            switch status {
+            case .hidden:
+                result = ElementTypes.hiddenState
+                
+            case .trashed:
+                result = ElementTypes.trashState
+                
+            default:
+                result = [.share, .download, .addToAlbum] + ElementTypes.activeState
+            }
+            
+        case .actionSheet:
+            result = [.select]
+
+            if item.fileType.isFaceImageType {
+                switch status {
+                case .hidden:
+                    result.append(contentsOf: ElementTypes.hiddenState)
+                    
+                case .trashed:
+                    result.append(contentsOf: ElementTypes.trashState)
+                    
+                default:
+                    result.append(contentsOf: [.changeCoverPhoto] + ElementTypes.activeState)
+                }
+            }
+            
+        case .selectionMode:
+            switch status {
+            case .hidden:
+                result = ElementTypes.hiddenState
+                
+            case .trashed:
+                result = ElementTypes.trashState
+                
+            default:
+                result = [.createStory]
+                if Device.isTurkishLocale {
+                    result.append(.print)
+                }
+                result.append(.removeFromFaceImageAlbum)
+            }
+        }
+        
+        return result
+    }
 }
 
 typealias AnimationBlock = () -> Void
+typealias PreDetermendType = (String, String, String)
 
 class EditinglBar: CustomTabBar {
     
@@ -122,7 +204,6 @@ class EditinglBar: CustomTabBar {
         static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel, "")
         static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
         static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
-        static let deleteFaceImage = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
         static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel, "")
         static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel, "")
         static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel, "")
@@ -132,11 +213,9 @@ class EditinglBar: CustomTabBar {
         static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
-        static let hideAlbums = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
         static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
-        static let unhideAlbumItems = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
         static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
-        static let completelyMoveToTrash = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
+        static let restore = ("RestoreButtonIcon", "Restore", "")
     }
     
     private let tabBarHeight: CGFloat = 49
@@ -149,7 +228,11 @@ class EditinglBar: CustomTabBar {
     // MARK: -
     
     class func getFromXib() -> EditinglBar? {
-        guard let view = UINib(nibName: "EditinglBar", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? EditinglBar else {
+        guard
+            let view = UINib(nibName: "EditinglBar", bundle: nil)
+                .instantiate(withOwner: nil, options: nil)
+                .first as? EditinglBar
+        else {
             return nil
         }
         view.config()
@@ -259,13 +342,12 @@ class EditinglBar: CustomTabBar {
         let items = names.map { item -> CustomTabBarItem in
             var image = UIImage(named: item.imageName)
             
-            ///red 'delete' and 'hide' icon
+            ///red 'delete', 'hide', 'unhide', 'restore' icons
             switch item.imageName {
             case PreDetermendTypes.delete.0,
-                 PreDetermendTypes.hideAlbums.0,
                  PreDetermendTypes.hide.0,
-                 PreDetermendTypes.completelyMoveToTrash.0,
-                 PreDetermendTypes.unhide.0:
+                 PreDetermendTypes.unhide.0,
+                 PreDetermendTypes.restore.0:
                 image = image?.withRenderingMode(.alwaysOriginal)
             default: break
             }

@@ -27,7 +27,6 @@ protocol  WrapItemFileOperations {
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?)
     
-    
     // MARK: favourits
     
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
@@ -83,7 +82,6 @@ class WrapItemFileService: WrapItemFileOperations {
             MediaItemOperationsService.shared.deleteItems(files, completion: {
                 success?()
                 //TODO: - Need to replace deleteItems with moveToTrash for delegates
-                ItemOperationManager.default.deleteItems(items: files)
                 ItemOperationManager.default.didMoveToTrashItems(files)
             })
         }
@@ -386,8 +384,6 @@ class WrapItemFileService: WrapItemFileOperations {
         }, fail: fail)
     }
 }
-
-
 
 //MARK: - Trash
 extension WrapItemFileService {

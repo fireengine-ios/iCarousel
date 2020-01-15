@@ -240,7 +240,7 @@ class PhotosAlbumService: BaseRequestService {
         }
     }
     
-    func completelyMoveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+    func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService completelyDelete")
         
         let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
@@ -254,7 +254,7 @@ class PhotosAlbumService: BaseRequestService {
 
             let fileService = WrapItemFileService()
             fileService.moveToTrash(files: items, success: nil, fail: nil)
-            self.moveToTrash(albums: moveToTrashAlbums, success: success, fail: fail)
+            self.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
         }
     }
     
@@ -362,7 +362,7 @@ class PhotosAlbumService: BaseRequestService {
             .responseObject(handler)
     }
     
-    func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+    private func moveToTrashAlbums(_ albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService moveToTrashAlbums")
 
         let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }

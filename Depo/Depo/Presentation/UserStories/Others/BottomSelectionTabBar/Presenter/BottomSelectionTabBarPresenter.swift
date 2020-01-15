@@ -23,24 +23,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple: [(String, String, String)] = []
+        var itemTupple = [PreDetermendType]()
         for type in config.elementsConfig {
             switch type {
             case .hide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.hide)
-            case .hideAlbums:
-                itemTupple.append(EditinglBar.PreDetermendTypes.hideAlbums)
             case .unhide:
                 itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
-            case .unhideAlbumItems:
-                itemTupple.append(EditinglBar.PreDetermendTypes.unhideAlbumItems)
             case .smash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.smash)
-            case .completelyMoveToTrash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.completelyMoveToTrash)
             case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .deleteFaceImage:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
@@ -68,14 +60,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
             case .moveToTrash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
+            case .restore:
+                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
             default:
                 break
             }
         }
 
-        view.setupBar(tintColor: config.tintColor,
-                      style: config.style,
-                      items: itemTupple)
+        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
@@ -153,19 +145,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.simpleHide(items: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
-                } else {
-                    let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
-            case .hideAlbums:
-                //TODO: will be another task to implement analytics calls
-                //MenloworksAppEvents.onDeleteClicked()
-                
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.hideAlbums(items: selectedItems)
+                    self.interactor.hide(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
@@ -181,49 +161,23 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-            case .unhideAlbumItems:
-                //TODO: will be another task to implement analytics calls
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.unhideAlbumItems(items: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
-                } else {
-                    let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
             case .smash:
                 RouterVC().getViewControllerForPresent()?.showSpinner()
                 self.interactor.smash(item: selectedItems) {
                     RouterVC().getViewControllerForPresent()?.hideSpinner()
                 }
                 self.basePassingPresenter?.stopModeSelected()
-            case .delete:
+            case .moveToTrash:
                 MenloworksAppEvents.onDeleteClicked()
                 
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(item: selectedItems)
+                    self.interactor.moveToTrash(item: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-            case .completelyMoveToTrash:
-                //TODO: will be another task to implement analytics calls
-                //MenloworksAppEvents.onDeleteClicked()
-                
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.completelyMoveToTrash(albums: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
-                } else {
-                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
-            case .deleteFaceImage:
-                MenloworksAppEvents.onDeleteClicked()
-                self.interactor.delete(item: selectedItems)
-                self.basePassingPresenter?.stopModeSelected()
             case .download:
                 MenloworksAppEvents.onDownloadClicked()
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -283,7 +237,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 MenloworksAppEvents.onPrintClicked()
                 self.router.showPrint(items: selectedItems)
             case .removeAlbum:
-                self.interactor.delete(item: selectedItems)
+                self.interactor.moveToTrash(item: selectedItems)
             default:
                 break
             }
@@ -321,7 +275,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             return
         }
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.delete)
+        types.append(.moveToTrash)
         
         constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
             self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
@@ -337,7 +291,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 //This on for player
                 actionTypes = [.musicDetails, .addToPlaylist]//, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append(.delete)
+                actionTypes.append(.moveToTrash)
                 
             case .folder:
                 break
@@ -363,12 +317,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .rar, .zip:
                     actionTypes = [.copy, .move]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 case .doc, .pdf, .txt, .ppt, .xls, .html:
                     actionTypes = [.move, .copy, .documentDetails]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 default:
                     break
@@ -390,13 +344,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             filteredTypes = types.filter({ $0 != .print })
         }
         
-        basePassingPresenter?.getSelectedItems { [weak self] selectedIntems in
+        basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             guard let self = self else {
                 return
             }
             var tempoItems = items
             if tempoItems == nil {
-                guard let wrappedArray = selectedIntems as? [Item] else {
+                guard let wrappedArray = selectedItems as? [Item] else {
                     actionsCallback([])
                     return
                 }
@@ -407,6 +361,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 actionsCallback([])
                 return
             }
+            
             actionsCallback(filteredTypes.map {
                 var action: UIAlertAction
                 switch $0 {
@@ -431,7 +386,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
+                        self.interactor.moveToTrash(item: currentItems)
                     })
                 case .hide:
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
@@ -446,11 +401,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
                         self.interactor.restore(items: currentItems)
-                    })
-                case .deleteFaceImage:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
                     })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

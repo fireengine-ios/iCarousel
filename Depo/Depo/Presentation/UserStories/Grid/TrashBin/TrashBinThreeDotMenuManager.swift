@@ -24,14 +24,14 @@ final class TrashBinThreeDotMenuManager {
     
     func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
         if isSelectingMode {
-            showAlertSheet(with: [.restore, .delete], item: nil, sender: sender)
+            showAlertSheet(with: ElementTypes.trashState, item: nil, sender: sender)
         } else {
             showAlertSheet(with: [.select], item: nil, sender: sender)
         }
     }
     
     func showActions(item: Item, sender: Any) {
-        showAlertSheet(with: [.restore, .delete], item: item, sender: sender)
+        showAlertSheet(with: ElementTypes.trashState, item: item, sender: sender)
     }
 
     private func showAlertSheet(with types: [ElementTypes], item: Item?, sender: Any) {

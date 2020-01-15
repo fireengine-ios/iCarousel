@@ -35,7 +35,7 @@ protocol TrashBinBottomBarManagerDelegate: class {
 
 final class TrashBinBottomBarManager {
 
-    private let bottomBarConfig = EditingBarConfig(elementsConfig:  [.restore, .delete],
+    private let bottomBarConfig = EditingBarConfig(elementsConfig:  ElementTypes.trashState,
                                                           style: .blackOpaque,
                                                           tintColor: nil)
     
