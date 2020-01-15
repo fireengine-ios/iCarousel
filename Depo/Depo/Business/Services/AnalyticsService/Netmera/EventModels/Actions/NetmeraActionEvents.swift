@@ -719,9 +719,9 @@ extension NetmeraEvents.Actions {
         @objc var leftAnalysis = ""
         @objc var status = ""
         
-        convenience init(leftAnalysis: String, status: NetmeraEventValues.GeneralStatus) {
+        convenience init(leftAnalysis: NetmeraEventValues.PhotopickUserAnalysisLeft, status: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.leftAnalysis = leftAnalysis
+            self.leftAnalysis = leftAnalysis.text
             self.status = status.text
         }
         

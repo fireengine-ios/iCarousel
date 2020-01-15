@@ -147,6 +147,23 @@ enum NetmeraEventValues {
         }
     }
     
+    enum PhotopickUserAnalysisLeft {
+        case premium
+        case regular(analysisLeft: Int?)
+        
+        var text: String {
+            switch self {
+            case .premium:
+                return "Free"
+            case .regular(let analysisLeft):
+                guard let analysisLeft = analysisLeft else {
+                    return "null"
+                }
+                return "\(analysisLeft)"
+            }
+        }
+    }
+    
     enum DownloadType {
         case music
         case document

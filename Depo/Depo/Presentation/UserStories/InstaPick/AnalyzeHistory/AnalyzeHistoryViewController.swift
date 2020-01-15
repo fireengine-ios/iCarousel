@@ -563,5 +563,25 @@ extension AnalyzeHistoryViewController: InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult) {
         startActivityIndicator()
         handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
+        
+        let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
+        if analyzeResult.analyzesCount.isFree {
+            analysisLeftUserDependent = .premium
+        } else {
+            analysisLeftUserDependent = .regular(analysisLeft: analyzeResult.analyzesCount.left)
+        }
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Photopick(leftAnalysis: analysisLeftUserDependent, status: .success))
+    }
+    
+    func analyzeDidFail() {
+        
+        let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
+        if dataSource.analysisCount?.isFree == true {
+            analysisLeftUserDependent = .premium
+        } else {
+            analysisLeftUserDependent = .regular(analysisLeft: dataSource.analysisCount?.left)
+        }
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Photopick(leftAnalysis: analysisLeftUserDependent, status: .failure))
     }
 }
