@@ -65,11 +65,13 @@ final class GIF2MP4 {
         videoWriter.startSession(atSourceTime: kCMTimeZero)
     }
     
-    func convertAndExport(to url: URL , completion: @escaping () -> Void ) {
-        outputURL = url
+    func convertAndExport(fileName: String , completion: @escaping (URL?) -> Void ) {
+        
+        outputURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(fileName).mp4")
         prepare()
         
         guard let videoWriterInput = videoWriterInput, let videoWriter = videoWriter else {
+            completion(nil)
             return
         }
 
@@ -80,6 +82,7 @@ final class GIF2MP4 {
         videoWriterInput.requestMediaDataWhenReady(on: queue) {
     
             guard let framesCount = self.gif.frames?.count else {
+                completion(nil)
                 return
             }
 
@@ -107,7 +110,11 @@ final class GIF2MP4 {
             videoWriterInput.markAsFinished()
             videoWriter.finishWriting() {
                 DispatchQueue.main.async {
-                    completion()
+                    guard let url = self.outputURL else {
+                        completion(nil)
+                        return
+                    }
+                    completion(url)
                 }
             }
         }

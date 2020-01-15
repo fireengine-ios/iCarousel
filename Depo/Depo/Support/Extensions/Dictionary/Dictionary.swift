@@ -22,8 +22,6 @@ extension Dictionary {
     mutating func removeValueSafely(forKey key: Key) {
         if keys.contains(key), self[key] != nil {
             removeValue(forKey: key)
-        } else {
-            assertionFailure()
-        }
+        } 
     }
 }
