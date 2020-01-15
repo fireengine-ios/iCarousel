@@ -1343,3 +1343,6 @@
 
 /*divorce card*/
 "divorce_card_title" = "";
+"trash_bin_album_slider_title" = "";
+"trash_bin_album_slider_empty" = "";
+"trash_bin_empty" = "";

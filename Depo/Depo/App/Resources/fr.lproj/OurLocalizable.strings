@@ -1,30 +1,30 @@
 "Welcome1Info" = "Vivre et garder le meilleur";
 
 /*Suggested: "Collect your photos, videos and files on lifebox! Access  whenever you like, wherever you are".*/
-"Welcome1SubInfo" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre lifebox. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
+"Welcome1SubInfo" = "Sauvegardez vos souvenirs, vos contacts et vos fichiers en toute sécurité dans Billo. Accédez à votre contenu partout et tout le temps. ";
 
 /*Suggested: "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under "Settings - Privacy - Location Services" menu."*/
-"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de lifebox, vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
+"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de Billo, vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
 
 /*Suggested: "This file will be removed only from the album. You can access this file from the Photos tab"*/
 "This file will be removed only from your album. You can access this file from Photos tab" = "Ce fichier sera uniquement supprimé de votre album. Vous pouvez accéder à ce fichier à partir de l'onglet Photos.";
 
 /*Suggested: "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?"*/
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à la suppression ?";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de Billo. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à sa suppression ?";
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
 /*Fuzzy*/
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "La suppression de ce fichier est définitive.Une fois supprimé vous ne pourrez plus y accéder depuis Lifebox. Êtes-vous sûr de vouloir procéder à la suppression ?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La suppression de ces fichiers est définitive.Une fois supprimés vous ne pourrez plus y accéder depuis Lifebox.";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "La suppression de ce fichier est définitive.Une fois supprimé vous ne pourrez plus y accéder depuis Billo. Êtes-vous sûr de vouloir procéder à sa suppression ?";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La suppression de ces fichiers est définitive.Une fois supprimés vous ne pourrez plus y accéder depuis Billo.";
 "Purchase" = "Achat";
-"Packages" = "Offre de stockage";
+"Packages" = "Offres";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
 "Verification code is invalid.\nPlease try again" = "Le code de vérification est invalide. Veuillez essayer de nouveau.";
-"Your package is successfully defined" = "Votre offre de stockage a été activée avec succès.";
-"Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre de stockage.";
-"This package activation code is invalid" = "Ce code d’activation pour l'offre de stockage est invalide.";
-"Enter your promo code" = "Entrer le code d’activation de votre offre de stockage.";
-"Lifebox campaign" = "Campagne de lifebox";
+"Your package is successfully defined" = "Votre offre a été activée avec succès.";
+"Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre.";
+"This package activation code is invalid" = "Ce code d’activation d'offre est invalide.";
+"Enter your promo code" = "Entrer le code d’activation de votre offre.";
+"Lifebox campaign" = "Campagne de Billo";
 "Success" = "Succès";
 "Apply" = "Appliquer";
 "Invalid passcode. %@ attempts left. Please try again" = "Mot de passe invalide. %@ tentatives réalisées. Veuillez essayer de nouveau.";
@@ -32,66 +32,66 @@
 "Face ID" = "Face ID";
 "Enable" = "Activer";
 "Please activate %@ from your device settings to use this feature" = "Veuillez activer %@ depuis les paramètres de votre appareil afin de bénéficier de cette fonctionnalité.";
-"To enter passcode" = "Entrer le mot de passe de lifebox.";
-"Set a Passcode" = "Définir un mot de passe de lifebox.";
+"To enter passcode" = "Entrer le mot de passe Billo.";
+"Set a Passcode" = "Définir un mot de passe Billo.";
 "Passcodes don't match, please try again" = "Les mots de passe ne correspondent pas, veuillez essayer de nouveau.";
 "You successfully set your passcode" = "Votre mot de passe a été correctement créé.";
 "Passcode is changed successfully" = "Votre mot de passe a été correctement modifié.";
-"Please repeate your new lifebox passcode" = "Veuillez saisir à nouveau votre nouveau mot de passe de lifebox.";
-"Please enter your lifebox passcode" = "Veuillez saisir votre mot de passe de lifebox.";
-"lifebox Passcode" = "Mot de passe de lifebox";
+"Please repeate your new lifebox passcode" = "Veuillez saisir à nouveau votre nouveau mot de passe Billo.";
+"Please enter your lifebox passcode" = "Veuillez saisir votre mot de passe Billo\n.";
+"lifebox Passcode" = "Mot de passe Billo";
 "Change Passcode" = "Changer le mot de passe";
 "Passcode" = "Mot de passe";
-"The package activation code is not active" = "Le code d’activation de cette offre de stockage n’est pas actif.";
+"The package activation code is not active" = "Le code d’activation de cette offre n’est pas actif.";
 
 /*Suggested: "This campaign's package activation code can only be used once. You have already activated it"*/
 "You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it" = "Ce code d'activation a déjà été utilisé, vous ne pouvez pas l'utiliser une seconde fois.";
 
 /*What does this mean?*/
-"This package activation code definition time has not yet begun" = "Ce Code d’activation d'offre de stockage n’a pas encore engagé";
-"This package activation code has not been activated  yet" = "Ce Code d’activation d'offre de stockage n’est pas encore activé";
+"This package activation code definition time has not yet begun" = "Ce code d’activation d'offre n’a pas encore débuté.";
+"This package activation code has not been activated  yet" = "Ce code d’activation d'offre n’est pas encore activé.";
 
 /*Suggested: "This package activation code has been used before, please try a different code"*/
-"This package activation code has been used before, please try different code" = "Ce Code d’activation d'offre de stockage a été utilisé auparavant, veuillez essayer un différent code";
-"Package activation process is in progress" = "Processus d’activation de l'offre de stockage est en progression.";
+"This package activation code has been used before, please try different code" = "Ce code d’activation d'offre a déjà été utilisé, veuillez essayer un autre code.";
+"Package activation process is in progress" = "Le processus d’activation de l'offre est en cours.";
 
 /*Suggested: "This package activation code has been activated by a different user"
 
 Note: Please check I have understood the intended command here.*/
-"This package activation code is defined for different user" = "Ce Code d’activation d'offre de stockage est activé par des différents utilisateurs.";
-"This package activation code has expired" = "Ce Code d’activation d'offre de stockage a expiré.";
+"This package activation code is defined for different user" = "Ce code d’activation d'offre est activé pour plusieurs utilisateurs.";
+"This package activation code has expired" = "Ce code d’activation d'offre a expiré.";
 "Account cannot be found" = "Ce compte est introuvable.";
 "Nothing to download" = "Rien à télécharger";
-"Can't get access to file system" = "Impossible d'accéder au ficher système";
+"Can't get access to file system" = "Impossible d'accéder au fichier ";
 "Server error" = "Erreur de serveur";
 "Unknown error" = "Erreur inconnue";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "Trop de tentatives de vérification OTP ont été effectuées. Veuillez essayer de nouveau.";
 
 /*Suggested: "The Password is too short. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters."*/
-"The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "Le mot de passe est trop court. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
+"The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "Le mot de passe est trop court. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de 6 caractères minimum à 16 caractères maximum.";
 
 /*Suggested: "The Password is too long. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters."*/
-"The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "Le mot de passe est trop long. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
+"The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "Le mot de passe est trop long. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de 6 caractères minimum à 16 caractères maximum.";
 
 /*Suggested: "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters"*/
-"It is not allowed that the password consists of all the same characters." = "Votre mot de passe est composé de lettres ou de chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 au maximum 16 caractères.";
+"It is not allowed that the password consists of all the same characters." = "Votre mot de passe est composé de lettres ou de chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de 6 caractères minimum à 16 caractères maximum.";
 
 /*Suggested: "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters"*/
 "It is not allowed that the password consists of consecutive characters." = "Votre mot de passe est composé de lettres ou de chiffres consécutifs. Veuillez définir un mot de passe comprenant des lettres et des chiffres non consécutifs de minimum 6 caractères minimum à 16 caractères maximum.";
 "Password is invalid" = "Le mot de passe est erroné.";
 "Phone number is in an invalid format." = "Le format du numéro de téléphone est incorrect.";
-"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "L'adresse mail donnée est déjà utilisée par un autre utilisateur  et la connexion sera autorisée après la validation de l'adresse mail.";
+"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "L'adresse mail donnée est déjà utilisée par un autre utilisateur. La connexion sera autorisée après la validation de l'adresse mail.";
 
 /*Suggested: "This e-mail address is already registered. Please try a different e-mail address"*/
-"This e-mail address is already registered. Please enter another e-mail address." = "Cette adresse mail est déjà enregistrée. Veuillez essayer une différente adresse mail.";
-"E-mail address is in an invalid format." = "Cette adresse mail est dans un format invalide.";
+"This e-mail address is already registered. Please enter another e-mail address." = "Cette adresse mail est déjà enregistrée. Veuillez essayer une autre adresse mail.";
+"E-mail address is in an invalid format." = "Le format de votre adresse mail est invalide.";
 "Specifies that the phone number parameter is sent  blank." = "Le champ du numéro de téléphone est vide";
 "Indicates that the password parameter is sent blank." = "Le champ du mot de passe est vide";
 "Indicates that the e-mail parameter is sent blank." = "Le champ de l'adresse mail est vide";
 
 /*Suggested: "Enter the verification code
 sent to your phone number %@"*/
-"Enter the verification code\nsent to your number %@" = "Entrer le code de vérification envoyé sur votre numéro de téléphone %@";
+"Enter the verification code\nsent to your number %@" = "Veuillez entrer le code de vérification envoyé sur votre numéro de téléphone %@";
 "Resend" = "Renvoyer";
 "Next" = "Suivant";
 "%.2f %@ / month" = "%.2f %@ / mois";
@@ -100,52 +100,52 @@ sent to your phone number %@"*/
 "Buy" = "Acheter";
 "Cancel" = "Annuler";
 "Info" = "Info";
-"You can open settings and cancel subscption." = "Vous pouvez depuis iTunes annuler votre souscription.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler offre de stockage, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL LIFEBOX %@\"";
-"You can visit iTunes to cancel your subscription" = "Vous pouvez visiter iTunes pour annuler votre paquet";
+"You can open settings and cancel subscption." = "Vous pouvez annuler votre offre depuis iTunes.";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler votre offre, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL BILLO %@\"";
+"You can visit iTunes to cancel your subscription" = "Rendez-vous sur iTunes pour annuler votre offre.";
 
 /*Suggested: "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send “STOP” to 2"*/
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, incroyable que vous faites ça! Lorsque vous décidez de la réactiver, nous serons là pour vous :)  Si vous insistez, envoyer ‘‘STOP’’ à 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Humm, incroyable que vous fassiez ça ! Quand vous souhaiterez la réactiver, nous serons là pour vous :)  sinon envoyez 2 par SMS au 10010 pour 100Go de pack désactivation ou au 50030 pour 500Go";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE CANCEL, les autres clients peuvent envoyer LIFEBOX CANCEL au 3030 pour annuler leur droits d’adhésion";
-"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080";
-"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE, les autres clients peuvent envoyer LIFEBOX 50GB pour l'offre de stockage 50GB,  LIFEBOX 500GB pour l'offre de stockage lifebox 500GB et LIFEBOX 2.5TB pour l'offre de stockage lifebox 2.5 TB au 3030 pour activer leurs droits d’adhésion";
-"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Prix spéciaux pour les souscripteurs lifecell! Envoyer un SMS avec la mention 50VKL pour activer lifebox 50GB pour 24,99UAH/30 jours, envoyer un SMS avec la mention 500VKL pour activer lifebox 500 GB pour 52,99UAH/30 jours, au numéro 8080";
+"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver BILLO 50GB envoyez par SMS 50VYKL au 8080, pour désactiver BILLO 500GB envoyez par SMS 500VYKL au 8080";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Pour activer vos droits, clients Platinium & lifecell envoyez LIFE au 3030, pour les autres, envoyez LIFEBOX 50GB pour l'offre 50GB,  LIFEBOX 500GB pour l'offre lifebox 500GB et LIFEBOX 2.5TB pour l'offre lifebox 2.5 TB au 3030.";
+"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Offres spéciales clients lifecell! Envoyez 50VKL par SMS au 8080 et profitez de 50GB pour 24,99UAH/30 jour, envoyez 500VKL pour 500 GB pour 52,99UAH/30 jours.";
 "%ld docs" = "%ld documents";
-"Quota info" = "Informations d'utilisation";
+"Quota info" = "Quota";
 "%@ of %@ has remained" = "%1$@ de %2$@ s’est maintenu";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld titres";
 "%ld videos" = "%ld vidéos";
 "%ld photos" = "%ld photos";
-"Failed" = "Échoué";
+"Failed" = "Échec";
 "Refreshing..." = "Réactualiser…";
-"Release to refresh" = "Lâchez afin de réactualiser";
-"My Activity Timeline" = "Calendrier des Activités";
+"Release to refresh" = "Lâchez pour actualiser";
+"My Activity Timeline" = "Activités Récentes";
 "file(s)" = "Fichier (s)";
-"My Stream" = "Albums Intelligents";
+"My Stream" = "Mes Albums";
 
 /*Suggested: "%d items deleted from your device to free up storage on your device."*/
-"You have free space for %d more items." = "%d éléments supprimés de votre appareil pour y libérer de l'espace de stockage.";
+"You have free space for %d more items." = "%d éléments supprimés de votre appareil pour libérer de l'espace de stockage.";
 "Delete" = "Supprimer";
 "Some photos will also be deleted from an album." = "Certaines photos seront également supprimées d'un album.";
-"Allow lifebox to delete %d photos?" = "Autorisez-vous lifebox à supprimer %d photos?";
+"Allow lifebox to delete %d photos?" = "Autorisez-vous Billo à supprimer %d photos?";
 
 /*Suggested: "here are %d duplicated photos on your device and lifebox. Clear some space by selecting the photos that you want to delete."*/
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos reproduits sont disponibles à la fois dans votre appareil et dans votre lifebox. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
-"Download to Camera Roll" = "Télécharger dans la Galerie de l'appareil";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos sont disponibles à la fois dans votre appareil et dans Billo. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
+"Download to Camera Roll" = "Télécharger dans Galerie";
 "Share Album" = "Partager l’Album";
 "Album Details" = "Détails de l’Album";
 
 /*In what cases is that sentence used ?*/
-"Make album covers" = "Faire la pochette de disque";
-"Music Dteails" = "Détails de la Musique";
+"Make album covers" = "Créer la pochette du disque";
+"Music Dteails" = "Détails Musique";
 "Document Details" = "Détails du Document";
-"Rename" = "Changer le nom";
+"Rename" = "Renommer";
 "Select All" = "Tout sélectionner";
 "Select" = "Sélectionner";
 "More" = "Plus";
-"lifebox" = "Lifebox";
-"iCloud Drive" = "Lecteur iCloud";
+"lifebox" = "Billo";
+"iCloud Drive" = "iCloud Drive";
 "Photos" = "Photos";
 "Choose From Library" = "Sélectionner à partir de la bibliothèque";
 "Take Photo" = "Utiliser l'appareil photo";
@@ -156,7 +156,7 @@ sent to your phone number %@"*/
 "Remove" = "Supprimer";
 "Add to Favorites" = "Ajouter aux favoris";
 "Copy" = "Copier";
-"Create a Story" = "Créer un Article";
+"Create a Story" = "Créer une Story";
 "Share Via Link" = "Partager le lien";
 "Original Size" = "Taille originale";
 "Small Size" = "Format réduit";
@@ -166,14 +166,14 @@ sent to your phone number %@"*/
 "Edit" = "Éditer";
 "Share" = "Partager";
 "Wait for a Wi-Fi Connection" = "Attente d’une connexion Wi-Fi";
-"Auto Sync Preparation" = "Préparation de la Synchronisation Automatique";
+"Auto Sync Preparation" = "Préparation à la Sync. Auto.";
 
 /*Could please detail the case when this is used ?*/
 "Sync with data plan" = "Synchroniser en utilisant les données mobiles";
-"Waiting for Wi-Fi connection to auto-sync" = "Attente d’une connexion Wi-Fi pour la synchronisation automatique";
+"Waiting for Wi-Fi connection to auto-sync" = "Attente d’une connexion Wi-Fi pour la Sync. Auto. ";
 
 /*Suggested: "Auto sync is off. Go to settings to auto sync."*/
-"Auto Upload is off.\nGo to setting to auto sync." = "La synchronisation automatique est désactivé.\nAller dans paramétrage afin d'activer la synchronisation automatique\n";
+"Auto Upload is off.\nGo to setting to auto sync." = "La synchronisation automatique est désactivée.\nAller dans paramétrages afin de l'activer.\n";
 "LTE" = "LTE";
 "4G" = "Données Mobile";
 "3G" = "Données Mobile";
@@ -183,27 +183,27 @@ sent to your phone number %@"*/
 "Your device memory is almost full" = "L'espace de stockage de votre appareil est presque plein";
 
 /*Suggested: "There are some duplicated items on your device and lifebox"*/
-"There are some duplicated items both in your device and lifebox" = "Certains éléments existent en double dans votre appareil et votre lifebox";
+"There are some duplicated items both in your device and lifebox" = "Il existe des doublons dans votre appareil et Billo.";
 "Operation is complete" = "Fin de l’opération";
-"Download is complete" = "Fin de téléchargement";
+"Download is complete" = "Fin du téléchargement";
 "Deleting is complete" = "Suppression terminée";
 "Downloading files" = "Téléchargement de fichiers";
-"Uploading files over" = "Téléchargement de fichiers sur %@";
-"Syncing files over" = "Synchroniser les fichiers avec %@";
+"Uploading files over" = "Téléchargement de fichiers  %@";
+"Syncing files over" = "Synchroniser les fichiers  %@";
 "(%ld of %ld)" = "(%ld de %ld)";
-"You need to specify your language preference so that we can serve you better." = "Vous devez choisir votre langue de préférence afin que nous puissions mieux vous servir.";
-"Please type your message" = "Veuillez taper votre message";
+"You need to specify your language preference so that we can serve you better." = "Afin que nous puissions mieux vous servir, veuillez choisir votre langue.";
+"Please type your message" = "Ecrivez votre message";
 "Error" = "Erreur";
-"Please configurate email client" = "Veuillez configurer votre adresse mail";
+"Please configurate email client" = "Configurez votre adresse mail";
 "DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
 "Send" = "Envoyer";
-"%@ about Lifebox" = "%@ à propos de Lifebox";
+"%@ about Lifebox" = "%@ à propos de Billo";
 "Complaint" = "Réclamation";
 "Suggestion" = "Suggestion";
-"Feedback Form" = "Pour toutes suggestions ou réclamations, veuillez nous contacter:";
-"Thanks for leaving a comment!" = "Veuillez nous contacter";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre vorre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'explotation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage uilisé: %lld\nOffres: %@";
-"Upload Photos" = "Télécharger des Photos";
+"Feedback Form" = "Pour toute suggestion ou réclamation, contactez-nous:";
+"Thanks for leaving a comment!" = "Contactez-nous";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nOffres: %@";
+"Upload Photos" = "Télécharger des photos";
 "Add" = "Ajouter";
 "Albums" = "Albums";
 "Sorry, but play list name should not be empty" = "Désolé, le nom de la playlist ne doit pas être vide";
@@ -211,7 +211,7 @@ sent to your phone number %@"*/
 "Sorry, but folder name should not be empty" = "Désolé, le nom du dossier ne doit pas être vide";
 "Play List Name" = "Nom de la playlist";
 "Album Name" = "Nom de l’Album";
-"Folder Name" = "Nom de Dossier";
+"Folder Name" = "Nom du Dossier";
 "Create" = "Créer";
 "New PlayList" = "Nouvelle playlist";
 "New Album" = "Nouvel Album";
@@ -221,7 +221,7 @@ sent to your phone number %@"*/
 /*In what case is that used for?
 Is it "Use "this" to be the album cover?*/
 /*Fuzzy*/
-"Make album cover" = "Utiliser comme la pochette de l'album";
+"Make album cover" = "Utiliser comme pochette de l'album";
 "Add To Album" = "Ajouter à l’Album";
 "Remove From Album" = "Supprimer de l’Album";
 "Remove Album" = "Supprimer l’Album";
@@ -231,40 +231,40 @@ Is it "Use "this" to be the album cover?*/
 "Home" = "Accueil";
 "Choose a destination folder" = "Choisir un dossier de destination";
 "Ok" = "Ok";
-"Need to select folder" = "Vous devez sélectionner un dossier";
+"Need to select folder" = "Sélectionnez un dossier";
 "Back" = "Précédent";
 
 /*Suggested: "Upload from lifebox failed"*/
-"Fail while uploading from LifeBox" = "Le téléchargement depuis Lifebox a échoué";
-"Sorry, but photos not selected" = "Désolé, les photos n'ont pas été correctement sélectionnées";
-"Upload from lifebox" = "Télécharger depuis lifebox";
+"Fail while uploading from LifeBox" = "Le téléchargement depuis Billo a échoué";
+"Sorry, but photos not selected" = "Les photos n'ont pas été sélectionnées";
+"Upload from lifebox" = "Télécharger depuis Billo";
 "Upload failed" = "Le téléchargement a échoué";
-"Upload was successful" = "Téléchargé avec succès";
+"Upload was successful" = "Téléchargement réussi";
 "Nothing to upload" = "Rien à télécharger";
 "Items Selected" = "Éléments Sélectionnés";
 "Item Selected" = "Élément Sélectionné";
 "Upload" = "Télécharger";
-"You can change the sequence " = "Vous pouvez changer la séquence des photos";
+"You can change the sequence " = "Vous pouvez modifier l'ordre des photos";
 "Save" = "Sauvegarder";
 "Add Music" = "Ajouter de la musique";
 
 /*Suggested: "Please choose music for your story"*/
 "Sorry, but story audio should not be empty" = "Veuillez choisir une musique pour votre story";
 "Add music" = "Ajouter de la musique";
-"You did not choose music for your story" = "Vous n’avez pas choisi une musique pour votre story";
+"You did not choose music for your story" = "Vous n’avez pas choisi de musique pour votre story";
 
 /*Suggested: "Failed while adding to album"*/
-"Fail while adding to album" = "Impossible d'ajouter à l'album";
+"Fail while adding to album" = "Echec de l'ajout à l'album";
 "Story not created" = "La story n'a pas pu être créée";
 
 /*What does story stand for?*/
-"Story created" = "Nous sommes en train de préparer votre story. Une fois terminé, vous pouvez y accéder à partir de Album de vidéos.";
+"Story created" = "Nous préparons votre story. Une fois terminée, vous pourrez la trouver dans Mes stories.";
 "Sorry, but story photos should not be empty" = "Veuillez choisir au moins une photo";
 "Please choose %d files at most" = "Veuillez choisir au maximum %d photos";
 "Continue" = "Continuer";
 
 /*story tbc*/
-"Sorry, but story name should not be empty" = "Veuillez donner un nom pour votre storie";
+"Sorry, but story name should not be empty" = "Veuillez donner un nom à votre story";
 "SAVE" = "Sauvegarder";
 "Name" = "Nom";
 "Create a Name" = "Créer un Nom";
@@ -273,19 +273,19 @@ Is it "Use "this" to be the album cover?*/
 "Restore" = "Rétablir";
 "Back-Up" = "Sauvegarde";
 "Your last back up was a few seconds ago." = "Votre dernière sauvegarde remonte à quelques secondes.";
-"You never backed up your contacts" = "Vous n'avez pas encore sauvegardé vos contacts dans votre lifebox.";
+"You never backed up your contacts" = "Vous n'avez pas encore sauvegardé vos contacts dans Billo.";
 
 /*Suggested: "You can backup your contacts to lifebox. You can easily manage your contact list from any device and from anywhere."*/
-"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Vous pouvez sauvegarder vos contacts sur lifebox. Vous pouvez facilement gérer votre liste de contacts à tous moments depuis n'importe quel  appareil";
-"Backed up %d Contacts" = "Vous avez %d contacts dans votre sauvegarde Lifebox.";
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Sauvegarder vos contacts dans Billo. Vous pouvez gérer votre liste de contacts à tout moment depuis n'importe quel appareil.";
+"Backed up %d Contacts" = "Vous avez %d contacts sauvegardés dans Billo.";
 "Removed" = "Supprimé";
 "Updated" = "Mis à jour";
 "New Contact" = "Nouveau Contact";
 "Back Up My Contacts" = "Sauvegarder Mes Contacts";
 
 /*Fuzzy*/
-"UPGRADE" = "MISE À NIVEAU";
-"Album Info" = "Informations sur l’Album";
+"UPGRADE" = "DETAILS";
+"Album Info" = "Infos de l’Album";
 "Title" = "Titre";
 "Artist" = "Artiste";
 "Album" = "Album";
@@ -296,7 +296,7 @@ Is it "Use "this" to be the album cover?*/
 "Date modified" = "Date de modification";
 "Duration" = "Durée";
 "File size" = "Taille de fichier";
-"Items" = "Articles";
+"Items" = "Objets";
 "Folder size" = "Taille du dossier";
 "File Info" = "Informations sur le Fichier";
 "File Name" = "Nom du Fichier";
@@ -306,9 +306,9 @@ Is it "Use "this" to be the album cover?*/
 "We promise, we won’t sent you spam." = "Promis, nous ne vous enverrons pas de spams.";
 
 /*Suggesteed: "I’d like to occasionally hear about lifebox news and promotions"*/
-"I’d like hear about news and promotions about lifebox occasionally." = "J'aimerais recevoir des informations sur l'actualité de lifebox et être informées des offres promotionnelles disponibles.";
-"GSM Number" = "Numéro de Téléphone";
-"E-Mail" = "Adresse mail";
+"I’d like hear about news and promotions about lifebox occasionally." = "J'aimerais recevoir des informations sur l'actualité de Billo et recevoir les offres promotionnelles disponibles.";
+"GSM Number" = "Numéro de téléphone";
+"E-Mail" = "Adresse email";
 "Name and Surname" = "Nom et Prénom";
 "Your Profile" = "Profil";
 "Import From Cropy" = "Importer depuis Cropy";
@@ -320,31 +320,31 @@ Is it "Use "this" to be the album cover?*/
 "Auto-login" = "Ouverture automatique de session";
 "Logout" = "Fermeture de session";
 "Help & Support" = "Foire Aux Questions";
-"Lifebox Touch ID and Passcode" = "Lifebox Touch ID et mot de passe";
-"Usage Info and Packages" = "Détails d'informatons";
+"Lifebox Touch ID and Passcode" = "Billo Touch ID et mot de passe";
+"Usage Info and Packages" = "Détails des usages";
 "Recently Deleted Files" = "Fichiers Récemment Supprimés";
 "Auto Sync" = "Synchronisation automatique";
 "Back-up my contacts" = "Sauvegarder Mes Contacts";
 "Leave feedback" = "Contactez-nous";
 "Upload Photo" = "Télécharger les Photos";
-"Back to Lifebox" = "Retour à lifebox";
+"Back to Lifebox" = "Retour à Billo";
 "Start adding your documents" = "Commencer à ajouter vos documents";
-"You don’t have any documents on your Lifebox yet." = "Vous n’avez encore aucun documents dans votre lifebox";
-"Start adding your music" = "Commencez à ajouter votre musique";
-"You don’t have any music on your Lifebox yet." = "Vous n’avez encore aucune musique dans votre lifebox";
+"You don’t have any documents on your Lifebox yet." = "Vous n’avez encore aucun documents dans Billo.";
+"Start adding your music" = "Commencez à ajouter votre musique.";
+"You don’t have any music on your Lifebox yet." = "Vous n’avez pas encore de musique dans Billo.";
 "info" = "Info";
-"Enable photo permissions in settings" = "Activer les autorisations des photos dans les paramètres";
+"Enable photo permissions in settings" = "Activer les autorisations photo dans les paramètres";
 "Start adding your photos" = "Commencer à ajouter vos photos";
 
 /*Suggested: "You don’t have any photos or videos in your lifebox yet."*/
-"You don’t have anything on your photo roll." = "Vous n'avez encore aucune photo ou vidéo dans votre lifebox.";
-"View All Pictures" = "Voir Toutes les Photos";
-"View All My Stream" = "Voir Tout Mon Flux";
+"You don’t have anything on your photo roll." = "Vous n'avez encore aucune photo ou vidéo dans Billo.";
+"View All Pictures" = "Voir toutes les photos";
+"View All My Stream" = "Voir mon flux";
 "%d Photos" = "%d Photos";
 "You’ve uploaded %@ two days ago!" = "Vous avez téléchargé %@ il y a deux jours!";
-"Expand My Storage" = "Mettre à Niveau Mon Offre de Stockage";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez %85 de votre quota de lifebox! C’est le moment de mettre à niveau votre stockage.";
-"Your storage is almost full!" = "Le stockage de votre appareil est presque plein!";
+"Expand My Storage" = "Mettre à niveau mon offre";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez 85% de votre quota Billo! C’est le moment de mettre à niveau votre espace.";
+"Your storage is almost full!" = "L'espace de votre appareil est presque plein!";
 "Change filter" = "Filtre";
 "Save this photo" = "Sauvegarder";
 "You can apply this filter and my more to your other picures as well" = "Vous pouvez également appliquer d'autres filtres pour vos photos";
@@ -353,43 +353,43 @@ Is it "Use "this" to be the album cover?*/
 
 /*Suggested: "You don’t have a profile picture, let’s upload a nice photo!"*/
 "You don’t have a profile picture, let’s upload a pretty photo!" = "Vous n’avez pas de photo de profil, ajoutons une jolie photo!";
-"Your profile looks empty" = "Votre profil a l'air vide";
+"Your profile looks empty" = "Votre profil n'est pas complet";
 "Sync with Data Plan Now" = "Synchroniser avec les données mobile maintenant";
 "Waiting for Wi-Fi to auto sync 14 items" = "En attente de la synchronisation automatique via Wi-Fi 14 éléments";
 "No" = "Non";
-"Access to Gallery is denied. Please change it from the settings menu of the device" = "L'accès à la galerie est refusé. Veuillez effectuer votre modification depuis le menu des paramètres de l'appareil.";
+"Access to Gallery is denied. Please change it from the settings menu of the device" = "L'accès à la galerie est refusé. Veuillez effectuer une modification depuis le menu des paramètres de l'appareil.";
 "Caution!" = "Attention!";
-"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Vous pouvez accéder à tout ce qui concerne Lifebox depuis la page d'accueil. Commencez à utiliser votre lifebox avec nos suggestions. Vous pouvez balayer les cartes que vous n’aimez pas.";
+"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Vous pouvez accéder à tout Billo depuis la page d'accueil. Commencez à l'utiliser avec nos suggestions. Vous pouvez changer ce que vous n'aimez pas.";
 "Welcome! Let’s get you started!" = "Bienvenue ! Commençons !";
 "Videos" = "Vidéos";
 "Folder" = "Dossier";
 "Docs" = "Documents";
 "Video" = "Film";
-"Sorted by Size" = "Classé par Ordre de Taille";
-"Sorted by Time" = "Classé par Ordre de Date";
-"Alphabetically Sorted" = "Classé Alphabétiquement";
-"Smallest" = "Plus Petit";
-"Largest" = "Plus Grand";
+"Sorted by Size" = "Classé par taille";
+"Sorted by Time" = "Classé par date";
+"Alphabetically Sorted" = "Classé par ordre alphabétique";
+"Smallest" = "Plus petit";
+"Largest" = "Plus grand";
 "Size" = "Taille";
-"Newest" = "Plus Récent";
-"Oldest" = "Plus Ancien";
+"Newest" = "Plus récent";
+"Oldest" = "Plus ancien";
 "Name (Z-A)" = "Nom (Z-A)";
 "Name (A-Z)" = "Nom (A-Z)";
 "Grid" = "Grille";
 "List" = "Liste";
-"Selection Type" = "Type de Sélection";
-"File Type" = "Type de Fichier";
-"Sort Type" = "Type de Tri";
-"View Type" = "Type d’Affichage";
-"Sync Type" = "Type de Synchronisation";
-"searchIcon" = "Icône de Recherche";
-"DeleteShareButton" = "Supprimer le Bouton de Partage";
-"search" = "recherche";
+"Selection Type" = "Type de sélection";
+"File Type" = "Type de fichier";
+"Sort Type" = "Tri";
+"View Type" = "Type d’affichage";
+"Sync Type" = "Type de synchronisation";
+"searchIcon" = "Icône de recherche";
+"DeleteShareButton" = "Supprimer le bouton de partage";
+"search" = "Recherche";
 
 /*What is the context ? in what cases is that used for?*/
 /*Fuzzy*/
 "cog" = "Denture";
-"more" = "plus";
+"more" = "Plus";
 "Create album" = "Créer un album";
 "Sync Contacts" = "Synchoniser les contacts";
 "Favorites" = "Favoris";
@@ -401,82 +401,82 @@ Is it "Use "this" to be the album cover?*/
 "SUGGESTIONS" = "SUGGESTIONS";
 "RECENT SEARCHES" = "RECHERCHES RÉCENTES";
 "Search" = "Recherche";
-"Warning" = "Avertissement";
+"Warning" = "Attention";
 "The file isn't supported" = "Le fichier n'est pas supporté";
 "Maybe later" = "Peut-être plus tard";
 "Yes" = "Oui";
 "Nope" = "Non";
-"You have already a backup. Do you want to overwrite the existing one?" = "Vous avez déjà une sauvegarde,voulez-vous remplacer la sauvegarde exisante?";
+"You have already a backup. Do you want to overwrite the existing one?" = "Vous avez déjà une sauvegarde,voulez-vous remplacer la sauvegarde existante?";
 "Overwrite backup?" = "Remplacer la sauvegarde existante?";
 "Verification code is invalid. Please try again." = "Le code de vérification est incorrect. Veuillez essayer à nouveau.";
-"Type the text" = "Saisissez le texte affiché dans l'image";
-"E-MAIL" = "Adresse mail";
+"Type the text" = "Saisissez le texte affiché dans l'image.";
+"E-MAIL" = "Adresse email";
 "Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
 "Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
-"Turn-on Sync" = "Activer la Synchronisation";
-"Syncing files using cellular data could incur data charges" = "L'utilisation du réseau mobile pour la synchronisation de fichiers peut entraîner des frais de transmission de données";
+"Turn-on Sync" = "Activer la synchronisation";
+"Syncing files using cellular data could incur data charges" = "L'utilisation du réseau mobile pour la synchronisation de fichiers peut entraîner des coûts de transmission de données.";
 
 /*Please explain context*/
 /*Fuzzy*/
 "Sync over data plan?" = "Synchroniser avec les données mobiles?";
-"Skip Auto-Sync" = "Ignorer la Synchronisation Automatique";
+"Skip Auto-Sync" = "Ignorer la synchronisation automatique";
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Vous ignorez les paramètres de téléchargement automatique. Vous pouvez les activer plus tard dans vos paramètres.";
 "Skip setting Auto-Sync?" = "Voulez-vous ignorer les paramètres de téléchargement automatique?";
 "Skip for now" = "Ignorer";
-"Let’s start using Lifebox" = "Commençons à utiliser lifebox";
-"Select the items to sync with mobile data." = "Sélectionnez les éléments à synchroniser avec les données mobiles";
+"Let’s start using Lifebox" = "Commençons à utiliser Billo.";
+"Select the items to sync with mobile data." = "Sélectionnez les éléments à synchroniser avec les données mobiles.";
 "Mobile Data" = "Données Mobiles";
 "Wi-fi" = "Wi-Fi";
 
 /*Suggested: "lifebox can sync your photos and videos automatically. Would you like to enable the auto upload feature now?"*/
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox peut synchroniser automatiquement vos photos et vidéos. Souhaitez-vous activer la fonctionnalité de téléchargement automatique maintenant?";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Billo peut synchroniser automatiquement vos photos et vidéos. Souhaitez-vous activer la fonctionnalité de téléchargement automatique maintenant?";
 "You have to fill in a password" = "Vous devez renseigner votre mot de passe.";
 
 /*Suggested: "Fill in your e-mail or Phone Number"*/
-"You have to fill in your mail or GSM Number" = "Saisissez votre adresse mail ou votre numéro de mobile";
-"Password" = "Mot de Passe";
-"E-Mail or GSM Number" = "Adresse mail ou Numéro de mobile";
+"You have to fill in your mail or GSM Number" = "Saisissez votre adresse email ou votre numéro de mobile.";
+"Password" = "Mot de passe";
+"E-Mail or GSM Number" = "Adresse email ou numéro de mobile";
 "Remember my credentials" = "Se souvenir de mon mot de passe";
 "I can't login" = "J’ai oublié mon mot de passe";
-"Register to lifebox and get a 5 GB of storage for free!" = "Inscrivez-vous à lifebox et bénéfiicez de 5 Gigas de stockage offerts!";
+"Register to lifebox and get a 5 GB of storage for free!" = "Inscrivez-vous à Billoet bénéfiicez de 5 Gigas de stockage offerts!";
 "Login" = "Me connecter";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
-"Accept  Terms" = "J'ai lu et accepté les conditions d'utilisation";
+"Accept  Terms" = "J'ai lu et accepte les conditions d'utilisation.";
 "Password fields do not match" = "Les mots de passe ne correspondent pas";
 "Please enter your password" = "Veuillez entrer votre mot de passe.";
 "Please enter a valid GSM number." = "Veuillez entrer un numéro de mobile valide.";
-"Please enter a valid email address." = "Veuillez entrer une adresse mail valide.";
-"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Vous êtes en train de finaliser le processus avec l'adresse mail %@ . Nous allons utiliser cette adresse pour les opérations de mot de passe et l'envoi de notification.";
-"E-mail Usage Information" = "Informations sur l'utilisation de l'adresse mail";
+"Please enter a valid email address." = "Veuillez entrer une adresse email valide.";
+"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Vous êtes en train de finaliser le processus avec l'adresse email %@ . Nous utiliserons cet email pour la gestion de votre mot de passe et l'envoi de notifications.";
+"E-mail Usage Information" = "Information sur l'utilisation de l'adresse email";
 "Password fields do not match." = "Les mots de passe ne correspondent pas";
-"Please check the e-mail address." = "Veuillez vérifier l'adresse mail.";
+"Please check the e-mail address." = "Veuillez vérifier l'adresse email.";
 
 /*Suggested: "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters."*/
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Veuillez choisir un mot de passe comprenant des lettres et des chiffres non consécutifs, entre 6 et 16 caractères. ";
-"Please check the GSM number" = "Veuillez vérifier votre numéro de mobile";
+"Please check the GSM number" = "Veuillez vérifier votre numéro de mobile.";
 "Login denied. Please check your credentials." = "Connexion impossible. Veuillez vérifier vos identifiants/mots de passe.";
-"Request failed \n Please try again" = "La Requête a échouée.\nVeuillez essayer de nouveau";
+"Request failed \n Please try again" = "La Requête a échouée.\nVeuillez essayer de nouveau.";
 "Verification code is invalid. \n Please try again." = "Le code de vérification est incorrect. Veuillez essayer à nouveau.";
-"Enter the verification code" = "Entrer le code de vérification";
-"Verify Your Email" = "Vérifier votre adresse mail";
-"Verify Your Phone Number" = "Vérifier votre numéro de mobile";
+"Enter the verification code" = "Entrer le code de vérification.";
+"Verify Your Email" = "Vérifier votre adresse email.";
+"Verify Your Phone Number" = "Vérifier votre numéro de mobile.";
 
 /*is it for a double checking to confirm the cart?
 If yes please use : veuillez confirmer votre achat*/
-"Verify Your Purchase" = "Vérifier votre achat";
-" You have to fill in a password" = "Vous devez entrer votre mot de passe";
-"Please enter valid Email" = "Veuillez entrer une adresse mail valide";
-" You have to fill in your mail" = "Vous devez entrer votre adresse mail";
-"Re-Enter Password" = "Entrer de nouveau le Mot de Passe";
-"I have an account, let me log in" = "J’ai déjà un compte, je souhaite me connecter";
-"Start using Lifebox now!" = "Créer un Nouveau Compte";
+"Verify Your Purchase" = "Vérifier votre achat.";
+" You have to fill in a password" = "Vous devez entrer votre mot de passe.";
+"Please enter valid Email" = "Veuillez entrer une adresse email valide.";
+" You have to fill in your mail" = "Vous devez entrer votre adresse email.";
+"Re-Enter Password" = "Entrer de nouveau le mot de passe.";
+"I have an account, let me log in" = "J’ai déjà un compte, je souhaite me connecter.";
+"Start using Lifebox now!" = "Créer un nouveau compte.";
 "E-mail field is invalid" = "Le champ adresse mail est incorrect";
-"Delete Device Original" = "Supprimer l'appareil d'origine";
-"Please check your internet connection is active and Mobile Data is ON." = "Veuillez vérifier que votre connexion internet et que les donnés mobiles sont activées.";
+"Delete Device Original" = "Supprimer l'appareil d'origine.";
+"Please check your internet connection is active and Mobile Data is ON." = "Veuillez vérifier votre connexion internet et que les donnés mobiles sont activées.";
 "cancelled" = "annulé";
 "The network connection was lost." = "La connexion réseau a été perdue.";
-"ServiceError" = "Erreur de Service";
+"ServiceError" = "Erreur de service";
 
 /*Suggested: "Too many verification code requests for this phone number. Please try again later"*/
 "Too many verification code requested for this msisdn. Please try again later" = "Trop de codes de vérification demandés pour ce numéro de mobile. Veuillez réessayer plus tard.";
@@ -484,7 +484,7 @@ If yes please use : veuillez confirmer votre achat*/
 /*Suggested: "This Phone Number is already registered. Please enter another Phone Number"
 
 Note: English is correct. GSM may be confusing to the customer*/
-"This GSM Number is already registered. Please enter another GSM Number." = "Ce numéro de mobile est déjà enregistré. Veuillez entrer un autre numéro de mobile..";
+"This GSM Number is already registered. Please enter another GSM Number." = "Ce numéro de mobile est déjà enregistré. Veuillez entrer un autre numéro de mobile.";
 "Albums with %@" = "Albums avec %@";
 "Deselect All" = "Tout décocher";
 "Change cover photo" = "Changer la photo de couverture";
@@ -497,35 +497,35 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Musics" = "Musiques";
 "Your Uploads" = "Vos Téléchargements";
 "Create a story" = "Créer une story";
-"Please Choose 20 files at most" = "Veuillez choisir 20 photos au maximum";
+"Please Choose 20 files at most" = "Veuillez choisir 20 photos maximum";
 "You need to enable access to Contacts to continue" = "Vous devez autoriser l’accès aux Contacts pour continuer";
 "Cancel BackUp" = "Annuler la Sauvegarde";
 "Clear BackUp" = "Effacer la Sauvegarde";
 
 /*Suggested: "There are %d duplicated contacts in your device's contact list"*/
-"There are %d duplicated contacts." = "Il ya %d contacts en doublon dans votre répertoire";
+"There are %d duplicated contacts." = "Il ya %d contacts en doublon dans votre répertoire.";
 "Are you sure you want to delete?" = "Êtes-vous sûr de vouloir supprimer?";
 
 /*Suggested: "These duplicated contacts will be removed from the contact list on your device"*/
-"This duplicated contacts will be deleted from your contacts." = "Ces doublons seront supprimés de la liste de contacts de votre appareil";
-"%%%d Restored…" = "%%%d Restauré";
+"This duplicated contacts will be deleted from your contacts." = "Ces doublons seront supprimés de la liste de contacts de votre appareil.";
+"%%%d Restored…" = "%%%d Restauré...";
 "%%%d Analyzed…" = "%%%d Analysé…";
 "%%%d Backed up…" = "%%%d Sauvegardé…";
 "Restored %d Contacts" = "%d Contacts Rétablis";
-"%d Duplicated Contacts Deleted" = "%d Contact(s) en doublon supprimé(s) de la liste de contacts de votre appareil";
-"You have %d numbers on your contacts backup." = "Vous avez %d contacts dans votre lifebox";
-"This contact will be deleted from your contacts." = "Ce contact sera supprimé de vos contacts";
+"%d Duplicated Contacts Deleted" = "%d Contact(s) en doublon supprimé(s) de la liste de contacts de votre appareil.";
+"You have %d numbers on your contacts backup." = "Vous avez %d contacts dans Billo.";
+"This contact will be deleted from your contacts." = "Ce contact sera supprimé de vos contacts.";
 "Upgrade" = "Mise à jour";
 "Creation date" = "Date de création";
 "Folder Info" = "Informations sur le dossier";
-"Face image grouping" = "Groupe de portraits";
-"Face & Image Grouping" = "Groupe de portraits et de visages";
+"Face image grouping" = "Regroupement de portraits";
+"Face & Image Grouping" = "Regroupement de portrait et d'image";
 "Turkcell Password" = "Mot de Passe de Turkcell";
 "Login Settings" = "Paramètres de connexion";
 "Folder is Empty" = "Le dossier est vide";
 "Folder Items" = "Rubriques : %d";
-"Contact Backup" = "Sauvegarde de Contact";
-"Your last contact update was %@ months ago!" = "Votre dernière mise à niveau a été réalisée il y a  %@  mois";
+"Contact Backup" = "Sauvegarde de contacts";
+"Your last contact update was %@ months ago!" = "Votre dernière mise à niveau a été réalisée il y a  %@  mois !";
 
 /*Suggested:"It has been %@ months since you last updated your contacts. Update now to never lose any of your contacts"*/
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Vous avez mis à jour vos contacts pour la dernière fois il y a %@ mois. \nMettez-le à jour maintenant pour ne perdre aucun de vos contacts.";
@@ -534,43 +534,43 @@ Note: English is correct. GSM may be confusing to the customer*/
 "Backup" = "Sauvegarder";
 "Last update:" = "Dernière mise à jour :";
 "Your storage is empty!" = "Votre espace de stockage est vide !";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "Vous utilisez %d%% de votre quota de lifebox! C’est le moment d'augmenter l'espace de stockage.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Vous utilisez %d%% de votre quota Billo ! Augmenter votre espace de stockage.";
 
 /*Suggested: "You don't have any files in your lifebox, yet. Start uploading your memories to lifebox!"*/
-"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Vous n'avez encore aucun fichier dans votre lifebox. Commencez à télécharger vos souvenirs sur lifebox!";
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Vous n'avez encore aucun fichier dans Billo. Commencez à télécharger vos souvenirs !";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Vous utilisez %d%% de la capacité de votre appareil. C’est le moment de libérer de l’espace.";
-"Upload Files" = "Télécharger des Fichiers";
-"Free Up Space" = "Libérer de l’Espace";
-"Collage" = "Collage";
-"We have created a collage from your photos!" = "Nous avons créé un collage pour vous!";
-"Save Collage" = "Sauvegarder le Collage";
-"View" = "Affichage";
-"Album Card" = "Carte d’Albums";
+"Upload Files" = "Télécharger des fichiers";
+"Free Up Space" = "Libérer de l’espace";
+"Collage" = "Création";
+"We have created a collage from your photos!" = "Nous avons fait une création pour vous !";
+"Save Collage" = "Sauvegarder la création";
+"View" = "Afficher";
+"Album Card" = "Carte d’album";
 "We have created an album for you." = "Nous avons créé un album pour vous.";
-"Save Album" = "Sauvegarder Album";
+"Save Album" = "Sauvegarder l'album";
 "Movie" = "Film";
-"Did you like this story that we created for you?" = "Avez-vous aimé cette Story que nous avons créée pour vous?";
-"Save This Story" = "Sauvegarder Cette Story";
-"Latest Uploads" = "Derniers Téléchargements";
+"Did you like this story that we created for you?" = "Avez-vous aimé la Story que nous avons créée ?";
+"Save This Story" = "Sauvegarder cette Story";
+"Latest Uploads" = "Derniers téléchargements";
 "Your latest uploads" = "Vos derniers téléchargements";
-"View Recent Activities" = "Voir les Activités Récentes";
-"View All Photos" = "Voir Toutes les Photos";
-"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "L'espace de stockage de Lifebox est presque plein!                              \nJetons un coup d'œil aux options de stockage disponibles.";
+"View Recent Activities" = "Voir les activités récentes";
+"View All Photos" = "Voir toutes les photos";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "L'espace de stockage Billo est presque plein !                              \nJetons un coup d'œil aux options de stockage disponibles.";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Une erreur s'est produite lors de l'accès à vos photos.\nVeuiller vérifier vos paramètres.";
 "localFilesBeingProcessed" = "Traitement des fichiers locaux.";
 
 /*Suggested: "Warning: You have already activated the passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating login with the Turkcell password feature."*/
-"TurkcellSecurityPasscodeWarningText" = "Avertissement: Vous avez déjà activé la fonction mot de passe / Touch ID. Nous vous recommandons de ne pas activer l’ouverture cession avec la fonction de mot de passe Turkcell pour conserver vos fichiers dans lifebox en toute sécurité avec les fonctionnalités de mot de passe / Touch ID.";
+"TurkcellSecurityPasscodeWarningText" = "Avertissement: Vous avez déjà activé la fonction mot de passe / Touch ID. Nous vous recommandons de ne pas activer l’ouverture cession avec la fonction de mot de passe Turkcell pour conserver vos fichiers dans Billo en toute sécurité avec les fonctionnalités de mot de passe / Touch ID.";
 
 /*Suggested: "Warning: You have already activated the passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating the autologin 3G/LTE feature."*/
-"TurkcellSecurityAutologinText" = "Avertissement: Vous avez déjà activé la fonction mot de passe / Touch ID. Nous vous recommandons de ne pas activer l’ouverture cession automatique avec la fonction 3G/LTE pour conserver vos fichiers dans lifebox en toute sécurité avec les fonctionnalités de mot de passe / Touch ID.";
-"PasscodeActivationWhileTurkcellActivated" = "L’ouverture automatique de session Lifebox avec 3G / LTE a été désactivée pour que vous puissiez utiliser les fonctions de code confidentiel et de Touch Id Lifebox en toute sécurité. Vous pouvez réactiver les paramètres de l’ouverture automatique de session à tout moment.";
+"TurkcellSecurityAutologinText" = "Avertissement: Vous avez déjà activé la fonction mot de passe / Touch ID. Nous vous recommandons de ne pas activer l’ouverture cession automatique avec la fonction 3G/LTE pour conserver vos fichiers dans Billo en toute sécurité avec les fonctionnalités de mot de passe / Touch ID.";
+"PasscodeActivationWhileTurkcellActivated" = "L’ouverture automatique de session Billo avec 3G / LTE a été désactivée pour que vous puissiez utiliser les fonctions de code confidentiel et de Touch Id Billo en toute sécurité. Vous pouvez réactiver les paramètres d'ouverture automatique de session à tout moment.";
 
 /*Fuzzy*/
-"Error Handling Under Constraction" = "Traitement des Erreurs en Construction";
-"This e-mail address is not registered. Please try again" = "Cette adresse mail n’est pas enregistrée. Veuillez essayer de nouveau";
-"Account not found for email" = "Aucun compte correspond à cette adresse mail n'a été trouvé";
-"This text doesn't match. Please try again" = "Ce texte ne correspond pas. Veuillez essayer de nouveau";
+"Error Handling Under Constraction" = "Gestion des erreurs en construction";
+"This e-mail address is not registered. Please try again" = "Cette adresse email n’est pas enregistrée. Veuillez essayer de nouveau.";
+"Account not found for email" = "Aucun compte ne correspond à cette adresse email.";
+"This text doesn't match. Please try again" = "Ce texte ne correspond pas. Veuillez essayer de nouveau.";
 
 /*Suggested: "An error occurred!"*/
 "An error is occurred!" = "Une erreur est survenue!";
@@ -581,10 +581,10 @@ Note: English is correct. GSM may be confusing to the customer*/
 "If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Si vous êtes déjà abonné à Turkcell, vous pouvez obtenir votre mot de passe en envoyant un SMS gratuit avec la mention SIFRE au numéro 2200.";
 
 /*Suggested: "Your password was sent to your e-mail address"*/
-"Your password is sent to your e-mail address" = "Votre mot de passe est envoyé à votre adresse mail.";
-"Please enter a valid email adress" = "Veuillez saisir une adresse mail valide.";
+"Your password is sent to your e-mail address" = "Votre mot de passe vous a été envoyé par email.";
+"Please enter a valid email adress" = "Veuillez saisir une adresse email valide.";
 "Please type the text" = "Veuillez taper le texte";
-"You have performed too many attempts. Please try again later." = "Vous avez réalisé trop de tentatives. Le compte est bloqué, essayez de nouveau plus tard.";
+"You have performed too many attempts. Please try again later." = "Vous avez réalisé trop de tentatives. Le compte est bloqué, essayer de nouveau, plus tard.";
 
 /*La connection internet semble être interrompue.*/
 /*Fuzzy*/
@@ -592,23 +592,23 @@ Note: English is correct. GSM may be confusing to the customer*/
 
 /*Turkcell?*/
 /*Fuzzy*/
-"Authentication with Turkcell Password is disabled for the account" = "Vous ne pouvez pas ouvrir la session de lifebox avec votre mot de passe Turkcell car vous avez désactivé l’ouverture de cession avec la fonction de mot de passe Turkcell. Veuillez essayer ouvrir la cession avec votre mot de passe de lifebox.";
+"Authentication with Turkcell Password is disabled for the account" = "Vous ne pouvez pas ouvrir la session Billoavec votre mot de passe Turkcell car vous avez désactivé l’ouverture de cession avec la fonction de mot de passe Turkcell. Veuillez essayer d'ouvrir la cession avec votre mot de passe Billo.";
 
 /*Suggested: "You don't have a lifebox account. Please signup before using the application"*/
-"You don't have any lifebox account. Please signup before using the application" = "Vous n'avez pas de compte lifebox. Veuillez créer un compte.";
+"You don't have any lifebox account. Please signup before using the application" = "Vous n'avez pas de compte Billo. Veuillez créer un compte.";
 "This text doesn't match. Please try again." = "Ce texte ne correspond pas. Veuillez essayer de nouveau.";
-"Email field is invalid" = "Le champ adresse mail est incorrect";
+"Email field is invalid" = "Le champ adresse email est incorrect.";
 
 /*Suggested: "You have to fill in your phone number"
 
 English is correct. GSM may be confusing to the customer*/
-" You have to fill in GSM number" = "Vous devez remplir le numéro de mobile";
-"E-mail is already exist" = "Cette adresse mail existe déjà";
+" You have to fill in GSM number" = "Vous devez compléter le numéro de mobile.";
+"E-mail is already exist" = "Cette adresse email existe déjà.";
 
 /*Suggested: "Please enter your Phone number"
 
 English is correct. GSM may be confusing to the customer*/
-"Please enter your GSM number" = "Veuillez entrer votre numéro de mobile";
+"Please enter your GSM number" = "Veuillez entrer votre numéro de mobile.";
 
 /*Suggested: "Phone Number"
 
@@ -622,15 +622,15 @@ English is correct. GSM may be confusing to the customer*/
 "Show & Hide" = "Afficher & Masquer";
 "Show and Hide" = "Afficher & Masquer";
 "+Add a Name" = "+ Ajouter un Nom";
-"+Add Name" = "+ Ajouter un Nom";
-"Are these the same person" = "S'agit-il des mêmes personnes ?";
+"+Add Name" = "+ Ajouter Nom";
+"Are these the same person" = "S'agit-il de la même personne ?";
 "this person" = "cette personne";
 "They will be merged together" = "Ces éléments seront fusionnés";
 "Not selected" = "Non sélectionné";
-"E-mail is empty" = "Le champ adresse mail est vide";
+"E-mail is empty" = "Le champ adresse email est vide";
 
 /*What does that refer to?*/
-"Filter Card" = "Carte de Filtre";
+"Filter Card" = "Filtre";
 "photos" = "photos";
 "Destination folder can not be the same folder" = "Le dossier de destination ne peut pas être le même dossier";
 "Google Play Store" = "Google Play Store";
@@ -641,32 +641,32 @@ English is correct. GSM may be confusing to the customer*/
 /*Fuzzy*/
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achat invalide. L'AppStore ne vérifie pas l'achat pour les paramètres donnés.";
 "A temporary error has occurred due to technical reasons." = "Une erreur temporaire est survenue pour des raisons techniques.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents de lifebox avec la même ID Apple ou Google peut entraîner cette situation.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de Billo. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
 
 /*Fuzzy*/
 "Shows that a response operation is done for the given receipt." = "Cela montre qu’une opération de réponse est effectuée pour le reçu donné.";
 "Auto Upload is off." = "Le téléchargement automatique est désactivé";
 "Photos and videos waiting to be synced" = "Photos et vidéos en attente de synchronisation";
-"Wi-Fi and Cellular" = "Wi-Fi et Données mobiles";
-"Video album is automatically created, therefore cannot be deleted" = "L'album de vidéos est créé automatiquement et ne peut donc pas être supprimé.";
+"Wi-Fi and Cellular" = "Wi-Fi et données mobiles";
+"Video album is automatically created, therefore cannot be deleted" = "L'album vidéo est créé automatiquement et ne peut pas être supprimé.";
 "You cannot upload any video to auto generated video album" = "Vous ne pouvez télécharger aucune vidéo dans un album vidéo généré automatiquement.";
 
 /*Suggested: "You don't have any files"*/
 "You have no any files" = "Vous n'avez aucun fichier";
-"You don’t have any albums on your Lifebox yet." = "Vous n'avez encore aucun album sur votre lifebox.";
+"You don’t have any albums on your Lifebox yet." = "Vous n'avez encore aucun album dans Billo.";
 "Start creating albums" = "Commencez à créer des albums";
 
 /*Suggested: "You don’t have any stories on your lifebox yet."*/
-"You don’t have any stories  on your Lifebox yet." = "Vous n'avez encore aucune story sur votre lifebox.";
+"You don’t have any stories  on your Lifebox yet." = "Vous n'avez encore aucune story dans Billo.";
 "Start creating stories" = "Commencez à créer des stories";
 "Help and Support" = "Aide";
 "Album is Empty" = "L'album est vide";
 
 /*Suggested: "You don’t have any files on your lifebox yet."*/
-"You don’t have any files on your Lifebox yet." = "Vous n'avez encore aucun fichier sur votre lifebox.";
+"You don’t have any files on your Lifebox yet." = "Vous n'avez encore aucun fichier dans Billo.";
 
 /*Suggested: "You don’t have any favorited files on your lifebox yet."*/
-"You don’t have any favorited files on your Lifebox yet." = "Vous n'avez encore aucun fichier favori sur votre lifebox.";
+"You don’t have any favorited files on your Lifebox yet." = "Vous n'avez encore aucun fichier favori dans Billo.";
 "Start adding your files" = "Commencez à ajouter des fichiers";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recherches Récentes";
@@ -674,27 +674,27 @@ English is correct. GSM may be confusing to the customer*/
 /*Suggested: "lifebox can sync your files, photos and videos automatically."
 
 Comma added*/
-"Lifebox can sync your files automatically." = "Lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation d'emplacement est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-location\".";
+"Lifebox can sync your files automatically." = "Billo peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation de géolocalisation est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-Billo-géolocalisation\".";
 "Get Started" = "Commencer";
-"I have read and accepted terms of use" = "J'ai lu et accepté les conditions d'utilisation";
-"Welcome to Lifebox!" = "Bienvenue sur lifebox!";
-"You need to confirm the User Agreement to continue." = "Vous devez confirmer le Contrat d’Utilisation pour continuer.";
+"I have read and accepted terms of use" = "J'ai lu et accepte les conditions d'utilisation";
+"Welcome to Lifebox!" = "Bienvenue dans Billo !";
+"You need to confirm the User Agreement to continue." = "Vous devez accepter le contrat d’utilisation pour continuer.";
 "PhotosAndViedos" = "Photos et Vidéos";
 "Are these the same person?" = "S'agit-il de la même personne ?";
-"We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé aucune personne dans votre lifebox.";
-"Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter puis vérifiez les albums créés s'il vous plaît.";
+"We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé personne dans Billo.";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter avant de vérifier les albums créés.";
 "Never" = "Jamais";
 "Approve" = "Approuver";
-"infomationEmptyEmail" = "Avoir un e-mail associé à votre compte est l’un des moyens les plus simples et les plus fiables pour assurer la sécurité de votre compte. Veuillez ajouter une adresse e-mail.";
-"E-Mail Entry" = "Saisissez une adresse e-mail";
+"infomationEmptyEmail" = "Avoir un email associé à votre compte est l’un des moyens les plus simples et les plus fiables pour assurer la sécurité de votre compte. Veuillez ajouter une adresse email.";
+"E-Mail Entry" = "Saisir une adresse email";
 "Importing files" = "Fichiers en cours de téléchargement (%@%%)";
-"Dropbox authorisation error" = "Erreur d'authentification de Dropbox";
+"Dropbox authorisation error" = "Erreur d'autorisation de Dropbox";
 "dropboxLastUpdatedFile" = "Dernière mise à jour du fichier le %@ - %d";
 "dropboxLastUpdatedFiles" = "Dernière mise à niveau des fichiers le %@ - %d";
 
 /*What does this mean?*/
 /*Fuzzy*/
-"PackagesPolicyHeader" = "Nature de l'abonnement auto-renouvelable de l'achat in-app:";
+"PackagesPolicyHeader" = "Abonnement auto-renouvelable pour l'achat in-app:";
 
 /*Suggested: "Subsriptions are renewed on a monthly basis
 Payment will be charged to iTunes Account at confirmation of purchase 
@@ -706,87 +706,87 @@ Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
 Terms of Use:"
 
 Full stop added*/
-"PackagesPolicyText" = "Les abonnements sont renouvelables mensuellement. \nLe paiement sera facturé sur le compte iTunes lors de la confirmation de l'achat.                                                             L'abonnement se renouvelle automatiquement au moins 24 heures avant la fin de la période en cours sauf si le renouvellement automatique est désactivé. \nLe compte sera débité pour renouvellement dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués dans l'écran in-app.\nLes abonnements peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en accédant aux \"Paramètres du Compte\" de l'utilisateur après l'achat.\nLa période d'essai gratuite inutuilisée, sera perdue lorsque l'utilisateur prendra un abonnement payant.\n Politique de Confidentialité: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik Terms of Use:";
+"PackagesPolicyText" = "Les abonnements sont renouvelables mensuellement. \nLe paiement sera facturé sur le compte iTunes lors de la confirmation de l'achat.                                                            \nL'abonnement se renouvelle automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours.\nEn cas de renouvellement, le compte sera débité dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués dans l'app.\nLes abonnements peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en accédant aux \"Paramètres du Compte\" de l'utilisateur après l'achat.\nLa période d'essai gratuite inutilisée, sera perdue lorsque l'utilisateur prendra un abonnement payant.\n Politique de Confidentialité: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik Terms of Use:";
 "Missing Dates" = "Dates manquantes";
-"You have successfully registered, please log in with your credentials" = "Vous avez crée votre compte avec succès, veuillez vous connecter avec vos identifiants.";
+"You have successfully registered, please log in with your credentials" = "Vous avez créé votre compte avec succès, connectez-vous avec vos identifiants.";
 "Animation" = "Animation";
 
 /*Suggested: "We have created an animation from your photos!"*/
-"We have created an animation from your photos!" = "Nous avons créé une animation à partir de vos photos!";
-"Save Animation" = "Sauvegarder l'Animation";
+"We have created an animation from your photos!" = "Nous avons créé une animation à partir de vos photos !";
+"Save Animation" = "Sauvegarder l'animation";
 
 /*Suggested: "Delete Duplicate"*/
 "Delete Duplicated" = "Supprimer les doublons";
-"Lifebox %@ and Passcode" = "Lifebox %@ et Mot de Passe";
+"Lifebox %@ and Passcode" = "Billo %@ et mot de passe";
 
 /*Suggested: "We make it easier to manage your memories with homepage"*/
 /*Fuzzy*/
-"We make easier to manage your memories with homepage" = "Gérez vos souvenirs très facilement depuis la page d’accueil.";
+"We make easier to manage your memories with homepage" = "Gérez vos souvenirs facilement depuis la page d’accueil.";
 
 /*Suggested: "You can reach your recent activities and suggestions of items that may be special to you from this page"*/
-"You can reach your recent activites and suggestions that are special for you from this page" = "Vous pouvez accéder à vos activités récentes et aux proposions personnalisées à partir de cette page";
+"You can reach your recent activites and suggestions that are special for you from this page" = "Accédez à vos activités récentes et aux suggestions personnalisées à partir de cette page.";
 "Discover your first story" = "Découvrez votre première story";
 "Discover your first album" = "Découvrez votre premier album";
-"Discover your first collage" = "Découvrez votre premier collage";
+"Discover your first collage" = "Découvrez votre première création";
 "Discover your first animation" = "Découvrez votre première animation";
 "Discover your first filtered photo" = "Découvrez votre première photo filtrée";
-"You have reached your lifebox memory limit" = "Vous avez atteint la capacité de stockage maximale de votre lifebox";
+"You have reached your lifebox memory limit" = "Vous avez atteint la capacité de stockage maximale de Billo";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Une erreur s'est produite lors de l'accès à vos contacts.";
-"Manage Contacts" = "Gérer les Contacts de lifebox";
+"Manage Contacts" = "Gérer les contacts de Billo";
 "Import fearture is totally free of charge and does not affect your internet package" = "La fonctionnalité d'importation est totalement gratuite et n'est pas décomptée de votre quota internet (data)";
 "Your last backup was on %@" = "Votre dernière sauvegarde était le %@";
-"Contacts Sync" = "Synchronisation des Contacts";
+"Contacts Sync" = "Synchronisation des contacts";
 "Sort By" = "Classer par taille";
-"LifeboxLargePopUpTitle100" = "L'espace de stockage de votre lifbox est plein.";
-"LifeboxLargePopUpTitle90" = "Vous utilisez 90% de la capacité de stockage de votre lifebox";
-"LifeboxLargePopUpTitle80" = "Vous utilisez 80% de la capacité de stockage de votre lifebox";
-"LifeboxLargePopUpSubTitle" = "Veuillez jeter un coup d’oeil sur les options d'ajout d'espace de stockage de votre lifebox.";
-"LifeboxLargePopUpExpandButtonTitle" = "Augmenter mon espace de stockage";
+"LifeboxLargePopUpTitle100" = "Votre espace de stockage Billo est plein.";
+"LifeboxLargePopUpTitle90" = "Vous utilisez 90% de la capacité de stockage de Billo.";
+"LifeboxLargePopUpTitle80" = "Vous utilisez 80% de la capacité de stockage de Billo.";
+"LifeboxLargePopUpSubTitle" = "Découvrez les options de capacité de stockage de Billo.";
+"LifeboxLargePopUpExpandButtonTitle" = "Augmenter ma capacité de stockage.";
 "LifeboxLargePopUpSkipButtonTitle" = "Passer";
-"Lifebox can sync your contacts automatically." = "Lifebox peut synchroniser vos contacts automatiquement.";
-"error_login" = "Vous devez ouvrir la session de %@ pour télécharger des fichiers";
+"Lifebox can sync your contacts automatically." = "Billo peut synchroniser vos contacts automatiquement.";
+"error_login" = "Vous devez ouvrir la session de %@ pour télécharger des fichiers.";
 "uploading" = "Téléchargement";
 "widgetBottomTitleLastSyncFormat" = "Dernier téléchargement : %@";
 "widgetBottomTitleNewerSyncronized" = "Jamais";
-"widgetTopTitleFinished" = "Auto-Synchronisation est terminée";
-"widgetTopTitleInactive" = "Auto-Synchronisation est inactif";
-"widgetTopTitleInProgress" = "Auto-Synchronisation est en cours de réalisation";
+"widgetTopTitleFinished" = "Auto-sync. terminée";
+"widgetTopTitleInactive" = "Auto-sync. inactif";
+"widgetTopTitleInProgress" = "Auto-sync. en cours";
 "error_authentication_message" = "Veuillez ouvrir les applications et la connexion pour continuer";
-"error_authentication_title" = "Connectez-vous à %@";
+"error_authentication_title" = "Connexion à %@";
 
 /*Fuzzy*/
-"error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir lifebox et désactiver le mot de passe pour continuer";
+"error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir Billo et désactiver le mot de passe pour continuer.";
 "error_passcode_title" = "Le code de verouillage du mot de passe est activé";
 "Successfully purchased" = "Acheté avec succès";
-"Cancel Analyzing" = "Annuler l’Analyse";
-"Delete all" = "Supprimer Tout";
+"Cancel Analyzing" = "Annuler l’analyse";
+"Delete all" = "Tout supprimer";
 "Keep" = "Garder";
 "Duplicated Contacts" = "Contacts en doublon";
 "Free" = "Libre";
 "%d%% Backed up…" = "%d%%  Sauvegardé...";
-"%d%% Restored…" = "%d%%  Réstauré...";
+"%d%% Restored…" = "%d%%  Restauré...";
 "%d%% Analyzed…" = "%d%% Analysé...";
 "START USING" = "Commencer";
 "landingTitle0" = "Vivre, Collecter, Se souvenir";
-"landingSubTitle0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans lifebox! Accéder et se souvenir à tout moment et en tout lieu";
-"landingTitle1" = "Auto-synchronisation";
+"landingSubTitle0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans Billo ! Accéder et se souvenir à tout moment et partout.";
+"landingTitle1" = "Auto-sync";
 "landingSubTitle1" = "Sauvegarder toutes vos photos et vidéos automatiquement et accédez-y de partout.";
 "landingTitle2" = "Reconnaissance du visage / image";
-"landingSubTitle2" = "Trouver facilement vos souvenirs avec des albums intelligents";
+"landingSubTitle2" = "Trouver facilement vos souvenirs avec vos albums";
 "landingTitle5" = "Stories automatiques";
-"landingSubTitle5" = "Rappelez-vous vos souvenirs avec des films et des collages créés automatiquement";
+"landingSubTitle5" = "Rappelez-vous vos souvenirs avec des films et des créations créées automatiquement";
 "landingTitle4" = "Libérer de l’espace";
-"landingSubTitle4" = "Libérez de l'espace sur votre appareil en un clic";
-"landingTitle3" = "Contact -synchronisation";
+"landingSubTitle4" = "Libérer de l'espace sur votre appareil en un clic";
+"landingTitle3" = "Contact-sync";
 "landingSubTitle3" = "Sauvegardez vos contacts, ne les perdez jamais";
 "landingTitle6" = "Réseaux sociaux";
-"landingSubTitle6" = "Transférer facillement toutes vos archives de réseaux sociaux vers lifebox";
+"landingSubTitle6" = "Transférer facillement toutes vos archives de réseaux sociaux vers Billo";
 
 /*Suggested: "Add Phone Number"*/
 "Add GSM Number" = "Ajouter un numéro de mobile";
 
 /*Suggested: "Videos larger than 4GB can not be uploaded to lifebox"*/
-"The videos larger than 4GB can not be uploaded to lifebox" = "Les vidéos de plus de 4GB ne peuvent pas être téléchargées sur lifebox";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Les vidéos de plus de 4Go ne peuvent pas être téléchargées sur Billo";
 
 /*Suggested: "You don't have enough memory on your device"*/
 "You have not enough memory in your device" = "Vous n'avez pas assez d'espace de stockage sur votre appareil";
@@ -800,19 +800,19 @@ Full stop added*/
 "Monthly" = "Mensuelle";
 
 /*Suggested: "Contact backup failed as you have more contacts than the maximum allowed."*/
-"Up to 5000 contacts can be backed up." = "La sauvegarde de contacs a échoué car vous avez plus de contacts que la limite autorisée";
-"LifeboxSmallPopUpTitle" = "L'espace de stockage de votre Lifebox est presque atteint !";
-"LifeboxSmallPopUpSubTitle" = "Jetons un coup d’oeil sur les options d'augmentation de votre espace de stockage !";
+"Up to 5000 contacts can be backed up." = "La sauvegarde de contacts a échoué car vous avez plus de contacts que la limite autorisée";
+"LifeboxSmallPopUpTitle" = "L'espace de stockage de Billo est presque atteint !";
+"LifeboxSmallPopUpSubTitle" = "Découvrez les options d'augmentation de votre espace de stockage !";
 "LifeboxSmallPopUpCheckBoxTex" = "Ne plus afficher";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "MISE À NIVEAU";
 
 /*What does this mean?*/
-"has_remained_lifebox_usage" = "\"%@ de %@ est resté (seulement pour l'utilisation de lifebox)";
+"has_remained_lifebox_usage" = "\"%@ de %@ est resté (seulement pour l'utilisation de Billo)";
 "Renewal Date: %@" = "Date de renouvellement: %@";
 "created" = "Créé";
 "uploaded" = "Téléchargé";
-"updated" = "Mise à Niveau";
+"updated" = "Mis à niveau";
 "deleted" = "Supprimé";
 "moved" = "Déplacé";
 "renamed" = "Renommé";
@@ -821,47 +821,47 @@ Full stop added*/
 "Bad internet connection" = "La connexion internet est de mauvaise qualité";
 "download_error_unsupported_extension" = "Impossible de télécharger ce type de fichier";
 "Show only synced items" = "Afficher uniquement les éléments synchronisés";
-"Your lifebox storage is almost full!" = "L'espace de stockage de votre Lifebox est presque atteint !";
+"Your lifebox storage is almost full!" = "L'espace de stockage de Billo est presque atteint !";
 "This edited photo will be saved as a new photo in your device gallery" = "Cette photo modifiée sera enregistrée comme une nouvelle photo dans la galerie de votre appareil.";
-"We couldn’t find any place on your Lifebox yet." = "Nous n'avons pas encore trouvé de place dans votre lifebox.";
-"*Average figure. Total number of documents depends on the size of each document." = "*Nombre moyen. Le nombre total de documents dépend de la taille de chaque document.";
-"We couldn’t find anything on your Lifebox yet." = "Nous n'avons encore rien trouvé dans votre lifebox.";
-"Expiration Date: %@" = "Date d’Expiration: %@";
+"We couldn’t find any place on your Lifebox yet." = "Nous n'avons pas encore trouvé de place dans Billo.";
+"*Average figure. Total number of documents depends on the size of each document." = "*Taille moyenne. Le nombre total de documents dépend de la taille de chaque document.";
+"We couldn’t find anything on your Lifebox yet." = "Nous n'avons encore rien trouvé dans Billo.";
+"Expiration Date: %@" = "Date d’expiration: %@";
 "Failed to get albums" = "Impossible d'accéder aux albums";
 
 /*Fuzzy*/
-"termsAndUseEtkCheckboxText" = "Conditions d'utilisation, etc. Contenu de la case à cocher";
-"offersCancelLife" = "Pour désactiver lifebox 25 GB veuillez envoyer un SMS avec la mention “Stop1”,  pour désactiver lifebox 100 GB veuillez envoyer un SMS avec la mention “Stop2”, pour désactiver lifebox 500 GB veuillez envoyer un SMS avec la mention “Stop3” au numéro 6767";
+"termsAndUseEtkCheckboxText" = "Conditions d'utilisation, etc. Case à cocher";
+"offersCancelLife" = "Pour désactiver Billo 25 Go envoyer “Stop1”,  pour désactiver Billo 100 Go envoyer “Stop2”, pour désactiver Billo 500 Go envoyer “Stop3” au 6767.";
 "Please enter a valid login." = "Connexion impossible. Veuillez vérifier vos informations d’identification et réessayer.";
 "Please enter the text below" = "Veuillez entrer la mention suivante";
-"facebook_photo_tags" = "Tags de Photo Facebook";
+"facebook_photo_tags" = "Tags de photo Facebook";
 
 /*Suggested: "You will import your Facebook tags to lifebox when you enable this option"*/
-"facebook_tags_on" = "Vous pourrez importer vos tags Facebook dans lifebox lorsque vous activerez cette option";
-"facebook_tags_off" = "Vous pourrez désactiver vos tags Facebook dans lifebox lorsque vous activerez cette option";
+"facebook_tags_on" = "Vous pourrez importer vos tags Facebook dans Billo lorsque vous activerez cette option";
+"facebook_tags_off" = "Vous pourrez désactiver vos tags Facebook dans Billo lorsque vous activerez cette option";
 "facebook_tags_import" = "Veuillez autoriser l'option \"Importer depuis Facebook\" pour utiliser la fonctionnalité \"Transfert de Tag Facebook\"";
 
 /*Fuzzy*/
-"TermsOfUseLinkText" = "Taper  İci";
+"TermsOfUseLinkText" = "Cliquer ici";
 "launch_campaign_card_detail" = "Détails";
 "launch_campaign_card_title" = "Campagne Prague";
-"launch_campaign_card_message" = "Prague vous attend! Commencer à explorer Lifebox dès maintenant et faites partie des 10 couples chanceux";
-"%d same contacts" = "%d même contact(s)";
+"launch_campaign_card_message" = "Prague vous attend ! Commencez à explorer Billo dès maintenant et faites partie des 10 couples chanceux";
+"%d same contacts" = "%d même(s) contact(s)";
 "Quick Scroll Preparation" = "Préparer vos photos et vidéos";
 
 /*PremiumView*/
-"delete_duplicated_title" = "Pour supprimer tous les contacts en doublons de votre téléphone et débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
-"face_recognition_title" = "Pour voir tous les visages de votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
-"places_title" = "Pour voir tous les lieux de votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
-"things_title" = "Pour voir tout ce qui se trouve dans votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
-"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Utilisez les avantages suivants liés à l'adhésion Premium avec seulement %@ supplémentaire pour votre offre";
+"delete_duplicated_title" = "Pour supprimer tous les contacts en doublons de votre téléphone et débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
+"face_recognition_title" = "Pour voir tous les visages de votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
+"places_title" = "Pour voir tous les lieux de votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
+"things_title" = "Pour voir tout ce qui se trouve dans votre galerie et débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Utilisez les avantages suivants liés à l'adhésion Premium avec seulement %@ supplémentaire à votre offre";
 "month" = "Mois";
 "no_details_message" = "Nous traitons votre demande. Nous vous informerons lorsque ce sera terminé.";
 "please_try_again_later" = "Veuillez réessayer plus tard.";
 
 /*Suggested: "Back up in Original Quality"*/
-"Back up with Original Quality" = "Sauvegarder avec la Qualité d’Origine.";
-"Remove Duplicate Contacts from Your Directory" = "Supprimer les Contacts en doublon de votre Annuaire Téléphonique";
+"Back up with Original Quality" = "Sauvegarder avec la qualité d’origine.";
+"Remove Duplicate Contacts from Your Directory" = "Supprimer les contacts en doublon de votre répertoire";
 
 /*Suggested: "Face Recognition can help to reach your loved one's memories quickly"
 
@@ -876,26 +876,26 @@ Please check I have understood the intended command here*/
 /*Suggested: "Object Recognition helps you group the things you love"
 
 Please check I have understood the intended command here*/
-"Object Recognition to remember with things you love" = "Reconnaissance des objets pour se souvenir des choses que vous aimez";
+"Object Recognition to remember with things you love" = "Reconnaissance des objets pour vous souvenir des choses que vous aimez";
 "Become Premium" = "Devenir Premium";
 
 /*Suggested: "Become a Premium Member!"*/
-"Become Premium Member!" = "Devenir Membre de Premium";
-"leave_premium_membership" = "Quitter l’Adhésion de Premium";
-"Standard User" = "lifebox Standard";
-"Premium User" = "lifebox Premium";
-"lifebox Premium" = "lifebox Premium";
+"Become Premium Member!" = "Devenir Membre Premium !";
+"leave_premium_membership" = "Quitter l’adhésion Premium";
+"Standard User" = "Billo  Standard";
+"Premium User" = "Billo Premium";
+"lifebox Premium" = "Billo Premium";
 
 /*Suggested: "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!"*/
 "Delete Duplicated Contacts For PremiumTitle" = "Pour supprimer tous les contacts en doublon de l'annuaire téléphonique et pour débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
 
 /*PremiumBanner*/
-"standard_banner_message" = "Découvrir nos fonctionnalités Premium qui vous apportent une meilleure expérience de stockage virtuel !";
+"standard_banner_message" = "Découvrir nos fonctionnalités Premium, elles vous apporteront une meilleure expérience cloud !";
 
 /*Suggested: "Discover our Premium features and see how they improve your cloud storage experience!"*/
-"premium_banner_message" = "Découvrir maintenant les fonctionnalités Premium qui vous apportent une meilleure expérience de stockage virtuel !";
-"standard_banner_title" = "lifebox Premium";
-"premium_banner_title" = "Bienvenue sur lifebox Premium !";
+"premium_banner_message" = "Découvrir nos fonctionnalités Premium, elles vous apporteront une meilleure expérience cloud !";
+"standard_banner_title" = "Billo Premium";
+"premium_banner_title" = "Bienvenue sur Billo Premium !";
 "back_up_short" = "Sauvegardez avec la qualité d'origine";
 "remove_duplicate_short" = "Supprimer les contacts en doublon de votre répertoire";
 
@@ -903,57 +903,57 @@ Please check I have understood the intended command here*/
 
 Please check I have understood the intended command here*/
 "places_recognition_short" = "Reconnaissance de lieux pour vous téléporter dans vos souvenirs";
-"face_recognition_short" = "Reconnaissance faciale pour retrouver les souvenirs de votre bien-aimé";
+"face_recognition_short" = "Reconnaissance faciale pour retrouver les souvenirs de vos bien-aimés";
 
 /*Suggested: "Object Recognition helps you group the things you love"*/
-"object_recognition_short" = "Reconnaissance des objets pour se souvenir des choses que vous aimez";
-"lorem_ipsum_non_turkcell" = "Veuillez ne pas traduire cela";
-"lorem_ipsum_turkcell" = "Veuillez ne pas traduire cela";
+"object_recognition_short" = "Reconnaissance des objets pour vous souvenir des choses que vous aimez";
+"lorem_ipsum_non_turkcell" = "";
+"lorem_ipsum_turkcell" = "";
 
 /*Package*/
 "package_period_day" = "Jour";
 "package_period_week" = "Semaine";
 "package_period_month" = "Mois";
-"package_period_year" = "An";
+"package_period_year" = "Année";
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
-"package_apple_cancel_text" = "Pour annuler votre abonnement, veuillez utiliser le menu iTunes & App Store de votre appareil.";
-"package_slcm_cancel_text" = "Pour annuler votre abonnement, veuillez envoyer un SMS à 2200 avec la mention: \"IPTAL LIFEBOX %@\"";
-"package_google_cancel_text" = "Pour annuler votre abonnemement, veuillez utiliser Google Play Store";
+"package_apple_cancel_text" = "Pour annuler votre offre, veuillez utiliser le menu iTunes & App Store de votre appareil.";
+"package_slcm_cancel_text" = "Pour annuler votre offre, envoyer \"IPTAL LIFEBOX %@\" au 2200 ";
+"package_google_cancel_text" = "Pour annuler votre offre, veuillez utiliser Google Play Store";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it'
 
 Please check I have understood the intended command here*/
 /*Fuzzy*/
-"package_free_of_charge_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question.";
-"package_lifecell_cancel_text" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080.";
+"package_free_of_charge_cancel_text" = "Pour toute question, \"Contactez-nous\" .";
+"package_lifecell_cancel_text" = "Pour désactiver Billo 50Go envoyer 50VYKL, pour désactiver Billo 500Go envoyer  500VYKL au 8080.";
 
 /*Suggested: "Please use the Contact Us menu to inform us to process your request"*/
-"package_promo_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question.";
+"package_promo_cancel_text" = "Pour toute question, \"Contactez-nous\" .";
 "package_kktcell_cancel_text" = "Les clients Platinum et LifeCell peuvent envoyer LIFE CANCEL, les autres clients peuvent envoyer LIFEBOX CANCEL au 3030 pour annuler leur adhésion.";
 
 /*Suggested: "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send “STOP” to 2"*/
-"package_moldcell_cancel_text" = "Oh, je ne peux pas croire que vous nous quittiez!\nQuand vous déciderez de revenir, nous serons heureux de vous accueillir à nouveau!\nSi vous voulez vraiment nous quitter, envoyez «STOP» au \n10010 pour résilier votre abonnement à l'offre 100 GB, au \n50030 pour résilier votre abonnement à l'offre 500 GB";
-"package_life_cancel_text" = "Pour désactiver lifebox 25GB veuillez envoyer un SMS avec la mention “Stop1”,  pour désactiver lifebox 100GB veuillez envoyer un SMS avec la mention “Stop2\", pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention “Stop3\", au numéro 6767";
-"package_paycell_all_access_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
-"package_paycell_slcm_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
-"package_slcm_paycell_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
+"package_moldcell_cancel_text" = "Humm, incroyable que vous fassiez ça ! Quand vous souhaiterez la réactiver, nous serons là pour vous :)  sinon envoyez 2 par SMS au 10010 pour 100Go de pack désactivation ou au 50030 pour 500Go";
+"package_life_cancel_text" = "Pour désactiver lifebox 25Go veuillez envoyer “Stop1”,  pour désactiver Billo 100Go veuillez envoyer “Stop2\", pour désactiver Billo 500Go veuillez envoyer “Stop3\" au 6767";
+"package_paycell_all_access_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
+"package_paycell_slcm_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
+"package_slcm_paycell_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 Please check I have understood the intended command here*/
 /*Fuzzy*/
-"package_default_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question";
+"package_default_cancel_text" = "pour toute question : \"contactez-nous\"";
 
 /*Leave Premium*/
-"leave_premium_premium_description" = "Vous pouvez utiliser toutes les fonctionnalités avancées de lifebox avec votre adhésion Premium.";
-"leave_premium_cancel_description" = "Vous ne pourrez plus bénéficier des privilèges Premium si vous annulez votre adhésion";
-"feature_apple_cancel_text" = "Pour annuler votre offre, veuillez utiliser le menu iTunes & App Store depuis votre appareil";
-"feature_slcm_cancel_text" = "Pour annuler votre offre, veuillez envoyer un SMS à 2200 avec la mention: “IPTAL LIFEBOX PREMIUM”";
-"feature_google_cancel_text" = "Pour annuler votre offre, veuillez utiliser Google Play Store";
+"leave_premium_premium_description" = "Avec votre adhésion Premium, vous pouvez utiliser toutes les fonctionnalités avancées de Billo.";
+"leave_premium_cancel_description" = "Vous ne pourrez plus bénéficier des privilèges Premium si vous annulez votre adhésion.";
+"feature_apple_cancel_text" = "Pour annuler votre offre, veuillez utiliser le menu iTunes & App Store depuis votre appareil.";
+"feature_slcm_cancel_text" = "Pour annuler votre offre, veuillez envoyer “IPTAL LIFEBOX PREMIUM” au 2200.";
+"feature_google_cancel_text" = "Pour annuler votre offre, veuillez utiliser Google Play Store.";
 
 /*Fuzzy*/
-"feature_free_of_charge_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question";
+"feature_free_of_charge_cancel_text" = "Veuillez utiliser le menu \"Contactez-nous\" pour toute question.";
 
 /*Lifecell or Digicel?*/
 "feature_lifecell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium puisque vous êtes un utilisateur de lifecell";
@@ -964,56 +964,56 @@ Please check I have understood the intended command here*/
 "feature_promo_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question";
 
 /*Lifecell?*/
-"feature_kktcell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium puisque vous êtes un utilisateur de lifecell-KKTC";
+"feature_kktcell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium en tant qu'utilisateur lifecell-KKTC";
 
 /*Lifecell?*/
-"feature_moldcell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium puisque vous êtes un utilisateur de Moldcell";
-"feature_life_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium puisque vous êtes un utilisateur de life:)";
-"feature_paycell_all_access_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
-"feature_paycell_slcm_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
-"feature_slcm_paycell_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
-"feature_all_access_paycell_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
+"feature_moldcell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium en tant qu'utilisateur de Moldcell";
+"feature_life_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium en tant qu'utilisateur Life :)";
+"feature_paycell_all_access_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.mylifebox.com";
+"feature_paycell_slcm_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.mylifebox.com";
+"feature_slcm_paycell_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.mylifebox.com";
+"feature_all_access_paycell_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.mylifebox.com";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 Please check I have understood the intended command here*/
-"feature_default_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question";
+"feature_default_cancel_text" = "Veuillez utiliser le menu \"Contactez-nous\" pour toute question";
 
 /*PackageInfoView*/
-"my_storage" = "Mon Stockage";
-"see_details" = "Voir les Détails";
-"face_image_description" = "Vous bénéficiez d'un compte standard, 100 photos de votre album seront traitées. 3 personnes, objets ou lieux seront reconnus automatiquement dans vos albums intelligents.";
-"face_image_upgrade" = "Passez à lifebox Premium pour utiliser cette fonctionnalité sans aucune limitation.";
+"my_storage" = "Mon stockage";
+"see_details" = "Voir les détails";
+"face_image_description" = "Vous bénéficiez d'un compte standard, 100 photos de votre album seront traitées. 3 personnes, objets ou lieux seront reconnus automatiquement dans vos Smart albums.";
+"face_image_upgrade" = "Passez à Billo Premium pour utiliser cette fonctionnalité sans aucune limitation.";
 
 /*FaceImagePremiumFooterView*/
-"face_image_footer_view_message" = "Pour voir tous les% @ de votre galerie et pour débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
+"face_image_footer_view_message" = "Pour voir tous les% @ de votre galerie et pour débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
 "face_image_face_recognition" = "Personnes";
 "face_image_place_recognition" = "Lieux";
 "face_image_thing_recognition" = "Objets";
 
 /*PackageViewController*/
-"package_cancel_button" = "Annuler votre abonnement";
-"my_storage_usage" = "%1$@ de %2$@ est resté";
+"package_cancel_button" = "Annuler votre offre";
+"my_storage_usage" = "%1$@ de %2$@ restent";
 "package_section_title" = "Augmentez votre stockage";
 "available_head_name_title" = "+ %@";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"home_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
+"home_page_pop_up" = "Souhaitez-vous devenir un membre Premium afin de conserver vos souvenirs avec leur qualité d'origine et accéder à toutes les fonctionnalités Premium ?";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"sync_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
-"ok_for_upgrade" = "Oui, passer à une offre premium";
+"sync_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium ?";
+"ok_for_upgrade" = "Oui, passer à une offre Premium";
 "no_for_upgrade" = "Non merci";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
-"NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre lifebox";
+"uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium ?";
+"NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre Billo.";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
@@ -1026,21 +1026,21 @@ Please check I have understood the intended command here*/
 
 Please check I have understood the intended command here*/
 /*Fuzzy*/
-"no_analyses_left_title" = "Vous n’avez plus le droit d'analyse";
-"no_analyses_left_message" = "Ne soyez pas tristes ! Vous pouvez acheter de nouvelles options afin de pouvoir analyser à nouveau vos photos!";
+"no_analyses_left_title" = "Plus d'analyse";
+"no_analyses_left_message" = "Ne soyez pas triste ! Vous pouvez acheter de nouvelles options afin de pouvoir analyser à nouveau vos photos !";
 "no_analyses_left_button" = "Je souhaite passer à la version Premium";
 
 /*Suggested: "Have you started analyzing your photos yet?"*/
-"analyze_history_empty_title" = "Vous n'avez pas encore commencé à analyser vos photos?";
-"analyze_history_empty_subtitle" = "Commencez immédiatement à analyser vos photos pour savoir quelle photo obtient le meilleur score et partagez les sur les réseaux sociaux";
+"analyze_history_empty_title" = "Vous n'avez pas encore commencé à analyser vos photos ?";
+"analyze_history_empty_subtitle" = "Commencez immédiatement à analyser vos photos pour savoir quelle photo obtient le meilleur score et partagez les sur les réseaux sociaux.";
 
 /*Suggested: "Analysis Left"*/
-"analyze_history_analyze_left" = "Analyses restantes";
+"analyze_history_analyze_left" = "Analyse restante";
 "analyze_history_analyze_count" = "%1$d / %2$d";
-"analyze_with_instapick" = "Analyser avec PhotoPick!";
+"analyze_with_instapick" = "Analyser avec PhotoPick !";
 "analyze_history_photos_count" = "%d photos";
 "analyze_history_start_here" = "Commencer maintenant";
-"analyze_confirm_delete_title" = "Êtes-vous sûr de vouloir supprimer?";
+"analyze_confirm_delete_title" = "Êtes-vous sûr de vouloir supprimer ?";
 "analyze_confirm_delete_text" = "Les éléments que vous avez sélectionnés seront supprimés de l'historique d'analyse.";
 "analyze_confirm_delete_yes" = "Oui";
 "analyze_confirm_delete_no" = "Non";
@@ -1050,24 +1050,24 @@ Please check I have understood the intended command here*/
 
 /*InstaPickCard*/
 "used_before_title_label" = "Plus de « j’aime » avec PhotoPick !";
-"no_used_before_title_label" = "Analyser avec PhotoPick!";
-"no_analysis_title_label" = "Plus de PhotoPick!";
+"no_used_before_title_label" = "Analyser avec PhotoPick !";
+"no_analysis_title_label" = "Plus de PhotoPick !";
 
 /*Suggested: "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more PhotoPick analysis waiting for your photos😉"*/
-"used_before_detail_label" = "Découvrez laquelle de vos photos obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». Vous avez du crédit Photopick ..utilisez le 😉";
-"no_used_before_detail_label" = "Découvrez laquelle de vos photos obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». Vous n'avez pas encore essayé?";
+"used_before_detail_label" = "Découvrez quelle photo obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». Vous avez du crédit PhotoPick ..utilisez le 😉";
+"no_used_before_detail_label" = "Découvrez quelle photo obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». Vous n'avez pas encore essayé ?";
 
 /*Suggested: "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase a new package for more PhotoPick😉"*/
-"no_analysis_detail_label" = "Découvrez laquelle de vos photos obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». N'oubliez pas d'acheter du crédit Photopick 😉";
+"no_analysis_detail_label" = "Découvrez quelle photo obtiendra le plus de points, analysez-la avec PhotoPick pour générer le plus de « j’aime ». N'oubliez pas d'acheter du crédit PhotoPick 😉";
 "instapick_button_has_analysis" = "Commençons !";
 
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "Votre photo est prête à être partagée !";
 "instaPick_analysis_left" = "Droit d’analyse : %1$d / %2$d";
-"engage_with_more_hastags" = "Augmentez vos interactions avec plus de #hashtag (mot-dièse) !";
-"copy_hashtags_to_clipboard" = "Copier  les #hashtags (mot-dièse)";
+"engage_with_more_hastags" = "Augmentez vos interactions avec plus de #hashtag !";
+"copy_hashtags_to_clipboard" = "Copier  les #hashtags";
 "share_on_social_media" = "Partager !";
-"picked" = "FAVORI !";
+"picked" = "PREFERE !";
 "insta_pick_analyzing_bottom" = "Profitez de votre temps libre pendant que nous analysons vos photos ! 😊";
 
 /*Suggested: "We are looking for the photo that will get the most likes."*/
@@ -1075,7 +1075,7 @@ Please check I have understood the intended command here*/
 "insta_pick_analyzing_1" = "Vous avez choisi de superbes photos !";
 "insta_pick_analyzing_2" = "Quel plaisir de partager avec vos amis les moments que vous aimez !";
 "insta_pick_analyzing_3" = "La vie est belle quand elle est pleine de bons moments !";
-"insta_pick_analyzing_4" = "Vous avez un super album photo !";
+"insta_pick_analyzing_4" = "Vous avez un superbe album photo !";
 
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Ne plus afficher";
@@ -1083,12 +1083,12 @@ Please check I have understood the intended command here*/
 "connected_account" = "PhotoPick vous permet d'analyser lesquelles de vos photos peuvent obtenir davantage de mentions \"J'aime\" sur Instagram.";
 
 /*Suggested: "If you choose to connect with your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick."*/
-"instapick_description" = "Si vous choisissez d'ajouter votre compte Instagram, nous pourrons fournir une expérience personnalisée bien meilleure en effectuant une analyse personnalisée, à chaque nouvelle interrogation PhotoPick.";
+"instapick_description" = "Si vous choisissez d'ajouter votre compte Instagram, nous pourrons fournir une expérience personnalisée bien meilleure en effectuant une analyse personnalisée avec PhotoPick.";
 "connected_with_instagram" = "Connecter mon compte Instagram à Photopick";
 "connected_with_instagram_name" = "Connecter avec Instagram en tant que";
 "continue_without_connecting" = "Continuer sans connecter Photopick à Instagram";
 "connected_accounts" = "Comptes liés";
-"analyze_history_free_text" = "Accès illimité";
+"analyze_history_free_text" = "Accès illimité !";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Vous devez mettre à jour votre application pour pouvoir acheter une offre PhotoPick";
@@ -1105,7 +1105,7 @@ Please check I have understood the intended command here*/
 "instagram_remove_connection_warning_title" = "Vous êtes sur le point de supprimer votre compte Instagram de votre compte PhotoPick";
 "instagram_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre compte Instagram de votre compte PhotoPick ?";
 "instapick_selection_photos_selected" = "Photo sélectionnée (%d)";
-"instapick_selection_analyzes_left" = "Il ne vous reste que % d analyses";
+"instapick_selection_analyzes_left" = "Il ne vous reste que % d'analyses";
 "loading" = "Téléchargement en cours…";
 "there_are_no_photos" = "Il n’y a aucune photo";
 "there_are_no_albums" = "Il n’y a aucun album";
@@ -1122,52 +1122,52 @@ Please check I have understood the intended command here*/
 "instapick_unsupported_file_type" = "Les photos que vous avez sélectionnées sont dans un format non pris en charge. Vous pouvez continuer à utiliser PhotoPick en choisissant d'autres photos.";
 
 /*Suggested: "There is currently maintenance ongoing on lifebox, please try again later."*/
-"work_will_introduced" = "Lifebox est en maintenance. Veuillez réessayer ultérieurement.";
-"facebook_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Facebook de votre compte lifebox.";
-"dropbox_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Dropbox de votre compte lifebox.";
-"facebook_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Facebook de votre compte lifebox?";
-"dropbox_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Dropbox de votre compte lifebox?";
-"remove_connection" = "Supprimer le lien";
-"you_are_connected" = "Vos comptes ont été associés.";
+"work_will_introduced" = "Billo est en maintenance. Veuillez réessayer ultérieurement.";
+"facebook_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Facebook de votre compte Billo.";
+"dropbox_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Dropbox de votre compte Billo.";
+"facebook_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Facebook de votre compte Billo ?";
+"dropbox_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Dropbox de votre compte Billo ?";
+"remove_connection" = "Supprimer la connexion";
+"you_are_connected" = "Vous êtes connecté";
 "insta_pick_picture_not_found" = "Aucune photo trouvée";
 "phone_updated_needs_login" = "Vous avez mis à jour votre numéro de téléphone avec succès. Veuillez-vous connecter avec votre nom d'utilisateur et votre mot de passe.";
 
 /*Suggested:"There is currently maintenance ongoing on lifebox, please try again later."*/
-"server_under_maintenance" = "Lifebox est en maintenance. Veuillez réessayer ultérieurement.";
+"server_under_maintenance" = "Billo est en maintenance. Veuillez réessayer ultérieurement.";
 "unlimited_photopick_analysis" = "Analyse PhotoPick illimité";
 
 /*Fuzzy*/
-"data_advantage_short" = "Paquet de données supplémentaire";
+"data_advantage_short" = "Quota supplémentaire";
 
 /*Fuzzy*/
-"additional_data_advantage" = "Paquet de données supplémentaire";
+"additional_data_advantage" = "Quota supplémentaire";
 "connection_problem_occured" = "Erreur de connexion. Veuillez réessayer plus tard.";
 "turkcell_purchase_popup_title" = "%@";
-"mid_user" = "lifebox Standard+";
-"instapick_no_available_units_left" = "Vous n'avez plus de crédits d'analyse Photopick";
-"middle_user" = "lifebox Standard+";
-"lifebox_middle" = "lifebox Standard+";
-"lifebox_standart" = "lifebox Standard";
-"account_detail_middle_title" = "Vous pouvez utiliser toutes les fonctionnalités avancées de lifebox avec votre abonnement standard +.";
-"account_detail_middle_description" = "Vous ne pourrez plus bénéficier des fonctionnalités Standard + si vous résiliez votre abonnement.";
-"account_detail_standart_title" = "Vous utilisez lifebox avec un compte utilisateur standard.";
-"account_detail_standart_description" = "Avec Lifebox Standard, vous pouvez utiliser les fonctionnalités suivantes";
+"mid_user" = "Billo Standard+";
+"instapick_no_available_units_left" = "Plus d'analyse possible";
+"middle_user" = "Billo Standard+";
+"lifebox_middle" = "Billo Standard+";
+"lifebox_standart" = "Billo Standard";
+"account_detail_middle_title" = "Vous pouvez utiliser toutes les fonctionnalités avancées de Billo avec votre offre Standard +.";
+"account_detail_middle_description" = "Vous ne pourrez plus bénéficier des fonctionnalités Standard + si vous résiliez votre offre.";
+"account_detail_standart_title" = "Vous utilisez Billo avec un compte utilisateur Standard.";
+"account_detail_standart_description" = "Avec Billo Standard, vous pouvez utiliser les fonctionnalités suivantes";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Je veux devenir Premium";
 "store_in_high_quality" = "Sauvegardez vos souvenirs en Haute Qualité.";
-"5_photopick_analysis" = "5 crédits d’analyse PhotoPick";
-"10_photopick_analysis" = "+10 crédits d’analyse PhotoPick";
+"5_photopick_analysis" = "5 analyses PhotoPick";
+"10_photopick_analysis" = "+10 analyses PhotoPick";
 
 /*Fuzzy*/
-"data_package_for_turkcell" = "Options de données supplémentaires";
+"data_package_for_turkcell" = "Quota supplémentaire";
 "delete_duplicated_contacts" = "Supprimer les contacts en doublon dans votre répertoire";
-"leave_middle_membership" = "Mettre fin à l’abonnement Standard+";
-"leave_middle_turkcell" = "Pour annuler votre option, veuillez envoyer un SMS au 2200 avec le texte : ANNULE LIFEBOX STANDARD+";
-"package_FWI_cancel_text" = "Vous pouvez annuler ou gérer votre abonnement Digicel depuis l'application My Digicel, le service clientèle ou en magasin.";
-"package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre abonnement Digicel depuis l'application My Digicel, le service clientèle ou en magasin.";
-"feature_digicell_cancel_text" = "Étant donné que vous êtes un utilisateur de Digicel, vous pouvez continuer à utiliser les fonctionnalités Premium gratuitement.";
-"terms_and_use_etk_checkbox" = "J' aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
+"leave_middle_membership" = "Mettre fin à l'offre Standard+";
+"leave_middle_turkcell" = "Pour annuler votre option, veuillez envoyer ANNULE LIFEBOX STANDARD+ au 2200";
+"package_FWI_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, le service clients ou en magasin.";
+"package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, le service clients ou en magasin.";
+"feature_digicell_cancel_text" = "Comme vous êtes chez Digicel, vous pouvez continuer à utiliser les fonctionnalités Premium gratuitement.";
+"terms_and_use_etk_checkbox" = "J'aimerais recevoir des messages commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
 "terms_and_use_etk_link_commercial_email_messages" = "messages électroniques commerciaux";
 
@@ -1175,9 +1175,9 @@ Please check I have understood the intended command here*/
 "commercial_email_messages" = "INFORMATIONS SUR L’AUTORISATION DES MESSAGES ELECTRONIQUES COMMERCIAUX\n\nJ'accepte et donne mon approbation à Turkcell et les sociétés du groupe pour l' envoi de messages électroniques commerciaux (les messageries contenant des données, audio et des vidéos réalisés électroniquement pour but commercial en utilisant les moyens de service telles que le téléphone, les centres d’appel, le fax, les machines d’appels automatiques, les systèmes d’enregistreur vocal intelligent, le courrier électronique, le service de messagerie SMS)  en utilisant mes informations de contact que j’ai donnés lors de l’ abonnement à l’application lifebox ou qui se trouvent auprès de Turkcell et des sociétés du groupe, afin de promouvoir la promotion et la commercialisation de divers produits et services nouveaux liés aux sociétés Turkcell et du groupe et / ou aux sociétés avec lesquelles ils coopèrent ainsi que pour faire savoir les avantages généraux et spéciaux dans le cadre de la Loi n° 6563 sur la réglementation du commerce électronique (« Loi ») et le règlement relatif aux communications commerciales et aux messages électroniques commerciaux (« Règlement ») jusqu'à ce que j’utilise mon droit de refuser, même si le contrat d'utilisateur est expiré.  \n\nSelon le règlement, les envois des messages électroniques commerciaux aux  abonnés et utilisateurs par les opérateurs relevant de la loi sur les communications électroniques no 5809, qui sont exclusivement pour promouvoir leurs propres biens et services, pour commercialiser ou pour promouvoir leur entreprise, sont exemptés. Par conséquent, je conviens par la présente que le consentement, que j'ai donné ci-dessus, est indépendant et en dehors du consentement que j'ai donné à l'exploitant auquel je suis abonné/utilisateur dans le cadre de la publicité de ses produits et services et que cet opérateur a le droit d'envoyer des messages électroniques commerciaux à des fins telles que la publicité, la commercialisation de ses propres produits et services, même si je révoque le consentement donné en vertu de ce document en exerçant mon droit de refuser de tels messages conformément à la Loi et au Règlement et que je suis conscient de mon droit de refuser les messages électroniques commerciaux de mon opérateur.";
 
 /*No french translation suggestion provided.*/
-"NSLocationAlwaysUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
-"NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
-"NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
+"NSLocationAlwaysUsageDescription" = "Votre géolocalisation sera utilisée pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
+"NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, Billo a besoin d'accéder à votre bibliothèque de photos.";
+"NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, Billo a besoin d'accéder à votre bibliothèque de photos.";
 
 /*Usage Info*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
@@ -1185,8 +1185,8 @@ Please check I have understood the intended command here*/
 "percentage_used" = "%.0f%% utilisé";
 "used_and_left_space" = "%1$@ / %2$@ utilisé\n";
 "percentage_used_two_lines" = "%.0f%%\nutilisé";
-"my_usage_storage" = "Mon utilisation de data";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
+"my_usage_storage" = "Ma consommation Internet ";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre géolocalisation sera utilisée pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
 "name" = "Nom";
 "surname" = "Prénom";
 "change password" = "Changer le mot de passe";
@@ -1194,16 +1194,16 @@ Please check I have understood the intended command here*/
 
 /*Packages*/
 "packages_i_have" = "Mon offre";
-"account_details" = "Détails de mon compte";
-"my_profile" = "Mon compte";
+"account_details" = "Mon compte";
+"my_profile" = "Mon profil";
 "account_type" = "Type de compte";
-"standard_plus" = "lifebox Standard+";
-"standard" = "lifebox Standard";
-"premium" = "lifebox Premium";
+"standard_plus" = "Billo Standard+";
+"standard" = "Billo Standard";
+"premium" = "Billo Premium";
 "old_password" = "Ancien mot de passe";
 "new_password" = "Nouveau mot de passe";
 "repeat_password" = "Confirmer le mot de passe";
-"change_password_captcha_answer_placeholder" = "Tapez le texte";
+"change_password_captcha_answer_placeholder" = "Tapez le texte ici";
 "temporary_error_occurred_try_again_later" = "Une erreur temporaire s'est produite, veuillez réessayer ultérieurement.";
 "old_password_does_not_match" = "L'ancien mot de passe est mal saisi";
 "new_password_and_repeated_password_does_not_match" = "Ces mots de passe ne correspondent pas";
@@ -1214,30 +1214,30 @@ Please check I have understood the intended command here*/
 "password_changed_successfully" = "Votre mot de passe a été changé avec succès";
 "password_changed_successfully_relogin" = "Vous avez changé votre mot de passe avec succès. Veuillez vous reconnecter avec votre nouveau mot de passe.";
 "captcha_answer_placeholder" = "Entrez le texte affiché dans l'image";
-"birthday" = "Anniversaire";
+"birthday" = "Date de naissance";
 "user_profile_turkcell_gsm_alert" = "Vous ne pouvez pas mettre à jour votre numéro de téléphone, pour plus de détails: %@";
 "user_profile_birthday_placeholder" = "JJ MM AAAA";
-"send_link" = "Envoyer le Lien";
-"reset_password" = "Réinitialiser Le Mot De Passe";
-"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "Vous pouvez facilement réinitialiser votre mot de passe en cliquant sur le lien de réinitialisation de mot de passe que nous enverrons à votre adresse mail.";
+"send_link" = "Envoyer le lien";
+"reset_password" = "Réinitialiser le mot de passe";
+"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "Vous pouvez facilement réinitialiser votre mot de passe en cliquant sur le lien de réinitialisation de mot de passe que nous enverrons à votre adresse email.";
 "to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "Pour réinitialiser le mot de passe de votre compte, nous enverrons un lien de réinitialisation de mot de passe à votre adresse mail.";
-"your_account_email" = "Votre compte courriel électronique";
-"enter_your_account_email" = "Entrez votre compte e-mail";
+"your_account_email" = "Votre compte email";
+"enter_your_account_email" = "Entrez votre email";
 "enter_the_text_shown_in_the_image" = "Entrez le texte affiché dans l'image";
-"support_form_email_body" = "Ne pas supprimer s’il vous plaît.\nL'information sera utilisée pour résoudre le problème.\nNom : %@ \nPrénom : %@ \nEmail : %@ \nN° de mobile : %@ \nVersion de l'Application : %@\nOpérateur : %@\nDispositif : %@\nDispositif du Système d’Exploitation : %@\nLangage : %@\nÉtat du Réseau : %@";
+"support_form_email_body" = "Ne pas supprimer.\nL'information sera utilisée pour résoudre le problème.\nNom : %@ \nPrénom : %@ \nEmail : %@ \nN° de mobile : %@ \nVersion de l'Application : %@\nOpérateur : %@\nDispositif : %@\nDispositif du Système d’Exploitation : %@\nLangage : %@\nÉtat du Réseau : %@";
 "profile_phone_number_title" = "Numéro de Téléphone";
 "profile_phone_number_placeholder" = "Entrer votre numéro de téléphone mobile";
-"please_enter_your_name" = "Entrer votre nom s’il vous plaît";
+"please_enter_your_name" = "Entrer votre nom s'il vous plaît";
 "enter_your_name" = "Entrer votre nom";
 "please_enter_your_surname" = "Entrer votre prénom s’il vous plaît";
-"enter_your_surname" = "Entrer votre prénom s’il vous plaît";
+"enter_your_surname" = "Entrer votre prénom";
 "enter_your_email_address" = "Entrer votre adresse email";
-"subject" = "Objet";
-"please_enter_your_subject" = "Entrer votre objet s’il vous plaît";
-"please_choose_subject" = "Sélectionner un objet s’il vous plaît";
+"subject" = "Sujet";
+"please_enter_your_subject" = "Entrer votre sujet s’il vous plaît";
+"please_choose_subject" = "Sélectionner un sujet s’il vous plaît";
 "your_problem" = "Votre problème";
-"please_enter_your_problem_shortly" = "Expliquez votre problème courtement s’il vous plaît";
-"explain_your_problem_shortly" = "Expliquer votre problème courtement";
+"please_enter_your_problem_shortly" = "Expliquez votre problème brièvement s’il vous plaît";
+"explain_your_problem_shortly" = "Expliquer votre problème brièvement";
 "please_enter_msisdn_or_email" = "Entrer votre numéro de téléphone ou email s’il vous plaît";
 "support_form_subject_1" = "Je ne peux pas me connecter avec mon email";
 "support_form_subject_2" = "Je ne peux pas me connecter avec mon numéro de téléphone";
@@ -1245,7 +1245,7 @@ Please check I have understood the intended command here*/
 "support_form_subject_4" = "Le texte de sécurité ne correspond pas";
 "support_form_subject_5" = "Problème de mot de passe Turkcell";
 "support_form_subject_6" = "Problème de connexion automatique";
-"support_form_subject_7" = "Je n'arrive pas à télécharger l'application Lifebox";
+"support_form_subject_7" = "Je n'arrive pas à télécharger l'application Billo";
 "enter_your_old_password" = "Entrez votre ancien mot de passe";
 "enter_your_new_password" = "Entrez votre nouveau mot de passe";
 "enter_your_repeat_password" = "Ressaisissez votre nouveau mot de passe";
@@ -1259,35 +1259,35 @@ Please check I have understood the intended command here*/
 "enter_your_password" = "Entrez votre mot de passe";
 "re_enter_your_password" = "Entrez de nouveau votre mot de passe";
 "signup_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
-"missing_information" = "Informations Manquantes";
+"missing_information" = "Informations manquantes";
 "please_enter_your_missing_account_information" = "Entrez vos informations de compte manquantes s’il vous plaît :";
 "login_email_or_phone_placeholder" = "Entrez votre email ou votre numéro de téléphone mobile";
 "login_password_placeholder" = "Entrez votre mot de passe";
-"login_email_or_phone_error" = "Il vous suffit de remplir votre email ou votre numéro de téléphone";
-"login_password_error" = "Il vous suffit de remplir votre mot de passe";
+"login_email_or_phone_error" = "Entrer votre email ou votre numéro de téléphone";
+"login_password_error" = "Entrer votre mot de passe";
 "enter_security_code" = "Entrer le code de sécurité";
-"enter_code_get_code_on_phone" = "Entrer s’il vous plaît le code de sécurité à 6 chiffres que nous avons envoyés à ce numéro de téléphone : %@";
+"enter_code_get_code_on_phone" = "Entrer le code de sécurité à 6 chiffres que nous avons envoyé à ce numéro de téléphone : %@";
 "time_is_up_for_code" = "Le temps est écoulé, veuillez demander un nouveau code.";
 "resend_code" = "Renvoyer le code";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
-"frequently_asked_questions" = "Questions Fréquemment Posées";
+"frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Veuillez vérifier votre nom d’utilisateur";
 "login_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
 "terms_and_privacy_policy" = "Conditions d'utilisation et politique de confidentialité";
 "Temporary error occurred. Please try again later." = "Une erreur temporaire s'est produite. Veuillez réessayer plus tard.";
-"face_tags_description_premium" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";
+"face_tags_description_premium" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce regroupement.";
 "terms_of_use" = "Conditions d'utilisation";
 "privacy_policy" = "Politique de confidentialité";
-"face_tags_description_standart" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce groupe.";
+"face_tags_description_standart" = "Lorsque vous activez la fonction de reconnaissance des visages et des images, les photos que vous avez téléchargées seront regroupées en fonction des visages et des objets. Si l'option de service de localisation est activée, les photos seront également regroupées en fonction des informations de localisation. Nous serons en mesure de créer des stories automatisées pour vous en fonction de ce regroupement.";
 "terms_and_use_introduction_checkbox" = "J'ai lu et j'accepte le contrat d'utilisation. Vous pouvez cliquer pour les détails de Politique de confidentialité";
 "privacy_policy_condition" = "Politique de confidentialité";
 "photo_pick_description" = "Si vous activez le bouton et connectez votre compte Instagram, nous pourrons offrir une expérience personnalisée et améliorée en effectuant une analyse personnalisée à chaque nouvelle analyse PhotoPick.";
 
 /*Permission screen in Settings*/
-"etk_permission_title_label" = "Message électronique commercial";
-"etk_permissiom_description" = "J'aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
-"NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox, une autorisation d'accès de votre appareil photo est nécessaire.";
+"etk_permission_title_label" = "Email commercial";
+"etk_permissiom_description" = "J'aimerais recevoir des emails commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
+"NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur Billo, une autorisation d'accès de votre appareil photo est nécessaire.";
 "restore_purchases" = "Restaurer les achats.";
 "restore_purchases_info" = "Si vous souhaitez restaurer vos achats existants, cliquez sur le bouton.";
 "attributed_restore_word" = "Restaurer";
@@ -1296,133 +1296,133 @@ Please check I have understood the intended command here*/
 "create_story_press_and_hold" = "Appuyez et maintenez";
 "create_story_press_and_hold_description" = "%@ sur l'image pour réorganiser l'ordre de votre story.";
 "create_story_name_title" = "Nom de la story";
-"create_story_pop_up_title" = "Vous avez créé une story!\n %@.";
-"create_story_pop_up_message" = "Nous préparons votre story. Une fois terminé, vous pouvez la trouver sous\n%@";
+"create_story_pop_up_title" = "Vous avez créé une story !\n %@";
+"create_story_pop_up_message" = "Nous préparons votre story. Une fois terminée, vous pourrez la trouver sous\n%@";
 "create_story_path_to_story" = "Photos et Vidéos> Mes Stories";
 "You can not share empty album" = "Vous ne pouvez pas partager un album vide";
 "etk_permission_description" = "Je consens par la présente à recevoir des emails commerciaux afin d’être informé des produits et services avantageux de Turkcell et d'autres sociétés du groupe, à moins que et jusqu’à ce que je n’exige d’autre chose, conformément à la loi n ° 6563 et aux autres lois applicables.";
 "global_permission_title_label" = "Permission de données globale";
 "global_permission_description" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaires de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox.";
-"terms_and_use_etk_checkbox_header" = "Message électronique commercial";
+"terms_and_use_etk_checkbox_header" = "Newsletter";
 "global_data_permission_agreement" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaire de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox. Cliquez pour plus de détails.";
-"global_data_permission_link" = "Cliquez pour plus de détails";
+"global_data_permission_link" = "Cliquez-ici pour plus de détails";
 "global_permission_header" = "Autorisation globale de données";
 "informative_description_label" = "En attente de permission";
 "global_permission_screen_title" = "Autorisation globale de données";
 
 /*Settings page*/
 "Permissions" = "Autorisations";
-"NSContactsUsageDescription" = "lifebox doit pouvoir accéder à vos contacts et les télécharger sur des serveurs lifebox pour les sauvegarder et les gérer.";
-"import_from_spotify" = "Déplacer de Spotify";
-"import_from_spotify_btn" = "Déplacer de Spotify";
+"NSContactsUsageDescription" = "Billo doit pouvoir accéder à vos contacts et les télécharger sur des serveurs Billo pour les sauvegarder et les gérer.";
+"import_from_spotify" = "Importer de Spotify";
+"import_from_spotify_btn" = "Importer de Spotify";
 "import_from_spotify_title" = "Connectez-vous à Spotify";
 "Spotify" = "Spotify";
-"spotify_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Spotify.";
-"spotify_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer Spotify?";
+"spotify_remove_connection_warning_title" = "Vous êtes sur le point de supprimer la connexion Spotify.";
+"spotify_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer la connexion Spotify ?";
 "support_form_problem_description" = "Nous soutenons les langues turque, anglaise et arabe. S'il vous plaît envoyez-nous votre commentaire dans l'une de ces langues.";
-"contact_us_subject_1" = "Problème de Contacts";
-"contact_us_subject_2" = "Problème de Photo";
-"contact_us_subject_3" = "Problème de Vidéo";
-"contact_us_subject_4" = "Problème de Fichier";
-"contact_us_subject_5" = "Problème de Collage";
+"contact_us_subject_1" = "Problème de contacts";
+"contact_us_subject_2" = "Problème de photos";
+"contact_us_subject_3" = "Problème de vidéos";
+"contact_us_subject_4" = "Problème de fichiers";
+"contact_us_subject_5" = "Problème de création";
 "contact_us_subject_6" = "Problème de Photopick";
-"contact_us_subject_7" = "Problème de Sauvegarde Automatique";
+"contact_us_subject_7" = "Problème de sauvegarde automatique";
 "contact_us_subject_8" = "Problème de regroupement de visages et d'objets";
-"contact_us_subject_9" = "Problème de Comptes Connectés";
-"contact_us_subject_10" = "Problème d'emballage et de quota";
-"contact_us_subject_11" = "Problème d'identification tactile et de mot de passe";
-"contact_us_subject_12" = "Problème de connexion, lenteur, congélation";
+"contact_us_subject_9" = "Problème de connexion de comptes";
+"contact_us_subject_10" = "Problème d'offres et de stockage";
+"contact_us_subject_11" = "Problème d'ID et de mot de passe";
+"contact_us_subject_12" = "Problème de connexion, lenteur, blocage";
 
 /*Settings page*/
-"Permissions" = "Permis";
+"Permissions" = "Permissions";
 "selected_items_limit_download" = "Vous ne pouvez pas télécharger plus de %d fichiers.";
 "selected_items_limit_delete" = "Vous ne pouvez pas supprimer plus de %d fichiers.";
-"login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en saisissant SIFRE et en envoyant un message à 2200. Si vous activez ce bouton, vous pouvez vous connecter à Lifebox à l'aide du mot de passe Turkcell.";
-"login_settings_security_autologin_description" = "Si vous activez ce bouton, vous pouvez vous connecter automatiquement à Lifebox lorsque vous êtes connecté à Internet avec 3G / LTE.";
-"login_settings_two_factor_auth_description" = "Si vous activez la validation d'identité à deux facteurs, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse e-mail pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
-"two_fa_invalid_session_error_message" = "Session expirée pour une authentification à deux facteurs.";
-"two_fa_invalid_challenge_error_message" = "Session expirée pour une authentification à deux facteurs.";
+"login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en envoyant SIFRE au 2200. Si vous activez ce bouton, vous pouvez vous connecter à Billo à l'aide du mot de passe Turkcell.";
+"login_settings_security_autologin_description" = "Si vous activez ce bouton, vous pouvez vous connecter automatiquement à Billo lorsque vous êtes connecté à Internet avec la 3G / LTE.";
+"login_settings_two_factor_auth_description" = "Si vous activez la validation de double authentification, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse email pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
+"two_fa_invalid_session_error_message" = "Session expirée pour une double authentification.";
+"two_fa_invalid_challenge_error_message" = "Session expirée pour une double authentification.";
 "two_fa_too_many_attempts_error_message" = "Vous vous êtes mal connecté 3 fois. Veuillez demander un nouveau code.";
 "two_fa_invalid_Otp_error_message" = "Le code de sécurité n'est pas valide, veuillez réessayer.";
 "spotify_import_navbar_title" = "Déplacer les playlists";
-"spotify_importing" = "Déplacement de listes ...";
+"spotify_importing" = "Importation...";
 "spotify_import_from" = "de Spotify";
-"spotify_import_to" = "à Lifebox";
-"spotify_import_description" = "Vous pouvez voir les listes que vous avez déplacées ici: \\ n Tous les fichiers> Musique";
-"spotify_import_in_background" = "Déplacer en arrière-plan";
-"spotify_playlist_import_button" = "Déplacer la sélection";
-"spotify_playlist_navbar_title" = "Listes de lecture Spotify";
+"spotify_import_to" = "à Billo";
+"spotify_import_description" = "Vous pouvez voir les playlists que vous avez importé ici : \\ n Tous les fichiers> Musique";
+"spotify_import_in_background" = "Importer en arrière-plan";
+"spotify_playlist_import_button" = "Import sélectionné ";
+"spotify_playlist_navbar_title" = "Playlists Spotify";
 "spotify_playlist_songs_count" = "%d chansons";
 "spotify_playlist_success_import" = "Les listes ont été déplacées avec succès!";
 "spotify_playlist_see_imported" = "Voir les listes déplacées";
 "spotify_overwrite_message" = "Cela écrasera les listes de lecture précédemment importées portant le même nom.";
 "spotify_overwrite_message_bold" = "écrase toutes les listes de lecture transférées précédemment.";
 "spotify_overwrite_cancel_button" = "Annulation";
-"spotify_overwrite_import_button" = "Déplacez";
+"spotify_overwrite_import_button" = "Déplacer";
 "spotify_card_title" = "Listes de lecture Spotify";
-"spotify_card_importing" = "Déplacement de listes ...";
-"spotify_card_last_update" = "Dernière mise à jour: %@";
-"confirm" = "Confirmez";
+"spotify_card_importing" = "Importation des playlists...";
+"spotify_card_last_update" = "Dernière importation : %@";
+"confirm" = "Confirmer";
 "later" = "Ensuite";
-"change" = "Changez";
-"change_email" = "Changez votre e-mail";
-"verify_email_top_title" = "S'il vous plaît %2$@ que nous avons envoyé à l'adresse e-mail pour vérifier votre compte%1$@";
+"change" = "Modifier";
+"change_email" = "Modifier votre email";
+"verify_email_top_title" = "%1$@ que nous avons envoyé à l'adresse e-mail pour vérifier votre compte%2$@";
 "enter_the_security_code" = "Entrez le code de sécurité";
-"fields_are_not_matched" = "Les e-mails ne correspondent pas.";
-"your_email" = "Votre E-mail";
+"fields_are_not_matched" = "Les emails ne correspondent pas";
+"your_email" = "Votre email";
 "confirm_your_email" = "Vérifier l'adresse email";
 "enter_your_email" = "Entrez votre email";
 "change_email_pop_up_top_title" = "Pour modifier les informations du compte et obtenir le code de sécurité, veuillez entrez votre email.";
 "no_account_found" = "Compte non trouvé";
-"too_many_requests" = "De nombreux essais ont été conduits. Veuillez réessayer plus tard.";
-"invalid_otp" = "Le code de vérification est invalide. Veuillez réessayer.";
-"expired_otp" = "Le code de sécurité n'est pas valide, veuillez réessayer.";
-"token_is_missing" = "Le code de sécurité n'est pas valide, veuillez réessayer.";
+"too_many_requests" = "Trop d'essais. Veuillez réessayer plus tard.";
+"invalid_otp" = "Code de sécurité invalide.";
+"expired_otp" = "Le code de sécurité a expiré.";
+"token_is_missing" = "Le code de sécurité est invalide.";
 "invalid_email" = "Vous avez entré une adresse email incorrecte.";
 "spotify_last_import" = "Dernière mise à jour: %@";
 "spotify_import_failed_error" = "Erreur lors du transfert.";
-"spotify_playlist_navbar_selection_title" = "Sélectionnez";
-"spotify_trasfering_playlist_error" = "Erreur lors du transfert.";
-"spotify_no_playlists" = "Aucune liste de lecture à transférer";
-"spotify_no_imported_playlists" = "Il n'y a pas de votre playlist.";
+"spotify_playlist_navbar_selection_title" = "Sélectionner";
+"spotify_trasfering_playlist_error" = "Erreur lors de l'import Spotify.";
+"spotify_no_playlists" = "Aucune playlist à importer";
+"spotify_no_imported_playlists" = "Vous n'avez pas de playlist importée.";
 "spotify_no_tracks" = "La playlist est vide";
-"spotify_delete_title" = "Êtes-vous sûr de vouloir supprimer ces fichiers et de les supprimer de lifebox?";
+"spotify_delete_title" = "Êtes-vous sûr de vouloir supprimer ces fichiers et de les supprimer de Billo ?";
 "spotify_delete_title_bold" = "Supprimer ces fichiers";
 "spotify_delete_subtitle" = "Une fois supprimé, vous ne pourrez plus y accéder.";
-"spotify_delete_delete_button" = "Supprimez";
-"spotify_cancel_import_title" = "Voulez-vous vraiment annuler le transfert des listes de lecture?";
-"spotify_cancel_import_title_bold" = "Annuler";
-"spotify_cancel_import_subtitle" = "Si vous annulez, les listes de lecture que vous avez déplacées lors du transfert précédent seront conservées telles quelles.";
+"spotify_delete_delete_button" = "Supprimer";
+"spotify_cancel_import_title" = "Voulez-vous vraiment annuler le transfert des playlists?";
+"spotify_cancel_import_title_bold" = "Annuler le transfert";
+"spotify_cancel_import_subtitle" = "Si vous annulez, les playlists que vous avez importées précédemment seront conservées.";
 "spotify_cancel_import_continue_button" = "Continuer le transfert";
 "spotify_cancel_import_cancel_button" = "Annuler le transfert";
-"account_verified" = "Merci d'avoir vérifié votre email!";
+"account_verified" = "Merci d'avoir vérifié votre email !";
 
 /*2FA Error Messages*/
-"two_fa_too_many_requests_error_message" = "Trop de codes de vérification demandés, veuillez réessayer ultérieurement.";
-"2_factor_auth" = "Authentification à deux facteurs";
-"extra_auth_new_device_reason" = "Vous vous connectez à Lifebox à partir d'un autre appareil.";
-"extra_auth_account_setting_reason" = "Vous avez activé l'authentification à deux facteurs dans votre compte.";
+"two_fa_too_many_requests_error_message" = "Trop de codes de vérification ont été demandés, veuillez réessayer ultérieurement.";
+"2_factor_auth" = "Double authentification";
+"extra_auth_new_device_reason" = "Vous vous connectez à Billo à partir d'un autre appareil.";
+"extra_auth_account_setting_reason" = "Vous avez activé la double authentification de votre compte.";
 "extra_auth_account_navigation_title" = "Contrôle de sécurité";
-"extra_auth_account_describe_label" = "Nous vous enverrons un code de sécurité pour sécuriser votre compte et vous authentifier pour vous connecter en toute sécurité.";
-"extra_auth_account_choose_type" = "Envoyez le code de sécurité ici:";
-"extra_auth_account_phone_cell" = "Vers mon numéro de téléphone:";
-"extra_auth_account_email_cell" = "À mon adresse e-mail:";
-"NSLocationWhenInUseUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
+"extra_auth_account_describe_label" = "Pour sécuriser votre compte et vous authentifier nous vous enverrons un code de sécurité.";
+"extra_auth_account_choose_type" = "Envoyer le code de sécurité :";
+"extra_auth_account_phone_cell" = "Vers mon numéro de téléphone :";
+"extra_auth_account_email_cell" = "À mon adresse e-mail :";
+"NSLocationWhenInUseUsageDescription" = "Votre géolocalisation sera utilisée pour la synchronisation et pour organiser et rechercher vos photos.";
 "two_fa_email_new_otp_description" = "Nous avons envoyé un nouveau code à l'adresse e-mail:%@";
-"two_fa_email_existing_otp_description" = "Nous avons envoyé le code de sécurité à l'adresse e-mail:%@ Veuillez saisir le code actuel que nous vous avons envoyé.";
+"two_fa_email_existing_otp_description" = "Nous avons envoyé le code de sécurité à l'adresse e-mail:%@ Veuillez saisir ce code.";
 "two_fa_phone_new_otp_description" = "Nous avons envoyé un nouveau code sur votre téléphone:%@";
-"two_fa_phone_existing_otp_description" = "Nous avons envoyé le code de sécurité sur votre téléphone:%@ Veuillez saisir le code actuel que nous vous avons envoyé.";
-"Feature" = "Paquet Supplémentaire";
+"two_fa_phone_existing_otp_description" = "Nous avons envoyé le code de sécurité sur votre téléphone:%@ Veuillez saisir ce code.";
+"Feature" = "Caractéristiques de l'offre";
 "there_are_no_photos_favorites" = "Aucune photo ou vidéo dans l'album Favoris pour le moment.";
-"there_are_no_photos_all" = "Aucune photo ou vidéo.";
-"storage" = "Zone de Stockage";
-"payment_title_app_store" = "Avec App Store";
-"payment_title_credit_card" = "Avec carte de crédit";
-"payment_title_invoice" = "Refléter à ma facture";
-"account_status_title" = "Votre compte a été réactivé!";
-"account_status_message" = "Votre compte a été réactivé car vous vous êtes connecté dans les 30 jours suivant sa suppression. Si vous souhaitez le supprimer définitivement, vous ne devez pas vous connecter 30 jours après la suppression du compte.";
-"security_question" = "Question de Sécurité";
-"edit_security_question" = "Actualisez votre question de sécurité";
+"there_are_no_photos_all" = "Aucune photo ou vidéo";
+"storage" = "Stockage";
+"payment_title_app_store" = "App Store";
+"payment_title_credit_card" = "Carte de crédit";
+"payment_title_invoice" = "Ajouter à la facture";
+"account_status_title" = "Votre compte a été activé !";
+"account_status_message" = "Votre login reste actif. Si vous souhaitez le supprimer définitivement, vous devez ne pas vous connecter durant 1 mois après sa suppression.";
+"security_question" = "Question de sécurité";
+"edit_security_question" = "Editez votre question de sécurité";
 "sequrity_question_id_is_invalid" = "Une erreur temporaire s'est produite, veuillez réessayer plus tard.";
 "sequrity_question_answer_is_invalid" = "Veuillez entrer au moins 3 caractères";
 "no_security_question" = "Question de sécurité non définie";
@@ -1431,16 +1431,16 @@ Please check I have understood the intended command here*/
 "enter_secret_answer" = "Entrez votre réponse";
 "security_question_text_field_placeholder" = "Veuillez définir votre question de sécurité";
 "set_sequrity_question_button" = "Définissez votre question de sécurité";
-"support_form_signup_subject_1" = "Je ne parviens pas me connecter avec mon  E-mail";
+"support_form_signup_subject_1" = "Je ne parviens pas me connecter avec mon email";
 "support_form_signup_subject_2" = "Je ne parviens pas me connecter avec mon numéro de téléphone";
 "support_form_signup_subject_3" = "Mon mot de passe n'est pas accepté.";
-"cred_update_title" = "Votre adresse e-mail et votre numéro de téléphone sont-ils toujours les mêmes?";
-"cred_completion_message" = "Merci de garder vos informations à jour!";
+"cred_update_title" = "Votre adresse email et votre numéro de téléphone sont-ils toujours les mêmes ?";
+"cred_completion_message" = "Merci de garder vos informations à jour !";
 
 /*TBMatic*/
 "tbmatic_photos_title" = "Vos souvenirs \n%@";
 "tbmatic_photos_no_photo_text" = "Cette photo a été supprimée :(";
-"tbmatic_photos_no_photo_bold_text" = "A été supprimé :(";
+"tbmatic_photos_no_photo_bold_text" = "Supprimé :(";
 "tbmatic_photos_see_timeline" = "Accédez à vos photos";
 "tbmatic_photos_share" = "Partager";
 "digicel_quota_cancel_AI" = "digicel_quota_cancel_AI";
@@ -1486,133 +1486,133 @@ Please check I have understood the intended command here*/
 "digicel_feature_cancel_TT" = "digicel_feature_cancel_TT";
 "digicel_feature_cancel_TC" = "digicel_feature_cancel_TC";
 "support_form_subject_1_detailed_info_label" = "Je ne parviens pas à me connecter par e-mail";
-"support_form_subject_1_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </ strong> </ p> <p> - Si vous ne parvenez pas à vous connecter par E-mail, vous pouvez accéder à votre compte en saisissant le mot de passe que vous avez utilisé pour vous inscrire avec votre numéro de téléphone. <br />- Si vous ne vous souvenez plus de votre mot de passe, vous pouvez vous connecter en obtenant le mot de passe Turkcell. <br/> - Si vous oubliez votre mot de passe Turkcell, vous pouvez le recevoir en écrivant SIFRE et envoyant à 2200 si vous êtes un client Turkcell. <br/> - Si vous pensez avoir saisi votre mot de passe correctement par E-mail et vous ne parvenez toujours pas vous connecter. - Vous pouvez actualiser votre mot de passe et essayer de vous reconnecter avec le processus \"J'ai oublié mon mot de passe\".<br/> - Si vous recevez un avertissement comme quoi votre E-mail / numéro de téléphone ou mot de passe est incorrect; Vous pouvez contrôler vos données de courrier électronique et de numéro de téléphone à partir de votre profil en accédant à votre compte à l'aide du mot de passe Turkcell que vous recevrez avec des données de courrier électronique ou de numéro de téléphone que vous pourrez confirmer. Vous pouvez changer votre email mais pas votre numéro de téléphone. Chaque numéro de téléphone reste associé à un seul compte. </p><p><strong>Si tu n'es pas de Turkcell:</strong></p><p>- Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Après avoir vous connecté, vous pouvez modifier votre numéro de téléphone sur la page de profil. </p> <p> <strong> Si vous ne parvenez pas à trouver la solution: </ strong> </ p> <p> -Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br /> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié avec la première entrée.";
+"support_form_subject_1_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </ strong> </ p> <p> - Si vous ne parvenez pas à vous connecter par email, vous pouvez accéder à votre compte en saisissant le mot de passe que vous avez utilisé pour vous inscrire avec votre numéro de téléphone. <br />- Si vous ne vous souvenez plus de votre mot de passe, vous pouvez vous connecter en obtenant le mot de passe Turkcell. <br/> - Si vous oubliez votre mot de passe Turkcell, vous pouvez le recevoir en envoyant SIFRE au 2200 si vous êtes un client Turkcell. <br/> - Si vous pensez avoir saisi votre mot de passe correctement ainsi que votre email et que vous ne parvenez toujours pas vous connecter,  Vous pouvez actualiser votre mot de passe et essayer de vous reconnecter en cliquant sur \"J'ai oublié mon mot de passe\".<br/> - Si vous recevez un avertissement comme quoi votre email / numéro de téléphone ou mot de passe est incorrect; Vous pouvez contrôler vos données d'email et de numéro de téléphone à partir de votre profil en accédant à votre compte à l'aide du mot de passe Turkcell que vous recevrez avec des données de courrier électronique ou de numéro de téléphone que vous pourrez confirmer. Vous pouvez changer votre email mais pas votre numéro de téléphone. Chaque numéro de téléphone reste associé à un seul compte. </p><p><strong>Si tu n'es pas de Turkcell:</strong></p><p>- Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Après connexion, vous pouvez modifier votre numéro de téléphone sur la page de profil. </p> <p> <strong> Si vous ne parvenez pas à trouver la solution: </ strong> </ p> <p> -Si aucun numéro de téléphone n'est associé à votre compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br /> - En cas de transfert, le numéro de téléphone est retiré du compte associé et il faut attendre qu'un nouveau numéro de téléphone soit identifié lors de la première connexion.";
 "support_form_subject_2_detailed_info_label" = "Je ne parviens pas me connecter avec mon numéro de téléphone";
-"support_form_subject_2_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </ strong> </p> <p> - Si vous ne parvenez pas à vous connecter par votre numéro de  téléphone, vous pouvez accéder au compte en saisissant le mot de passe que vous avez utilisé pour vous inscrire avec votre E-mail. <br/>- Si vous ne vous souvenez plus de votre mot de passe, vous pouvez vous connecter en obtenant le mot de passe Turkcell. <br /> - Si vous oubliez votre mot de passe Turkcell, vous pouvez le recevoir en écrivant SIFRE et envoyant à 2200 si vous êtes un client Turkcell. <br /> - Si vous pensez avoir saisi votre mot de passe correctement par votre numéro de téléphone  et vous ne parvenez toujours pas vous connecter. - Vous pouvez actualiser votre mot de passe et essayer de vous reconnecter avec le processus \"J'ai oublié mon mot de passe\". <br/> - Si vous recevez un avertissement comme quoi votre adresse E-mail / numéro de téléphone ou mot de passe est incorrect; Vous pouvez contrôler vos données de courrier électronique et de numéro de téléphone à partir de votre profil en accédant à votre compte à l'aide du mot de passe Turkcell que vous recevrez avec des données de courrier électronique ou de numéro de téléphone que vous pourrez confirmer. Vous pouvez changer votre email mais pas votre numéro de téléphone. Chaque numéro de téléphone reste associé à un seul compte. </p><p><strong> Si tu n'es pas de Turkcell:</strong></p><p>- Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Après avoir vous connecté, vous pouvez modifier votre numéro de téléphone sur la page de profil. </p><p>&nbsp;<strong>Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié avec la première entrée.";
+"support_form_subject_2_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </ strong> </p> <p> - Si vous ne parvenez pas à vous connecter avec votre numéro de  téléphone, vous pouvez accéder au compte en saisissant le mot de passe que vous avez utilisé pour vous inscrire avec votre email. <br/>- Si vous ne vous souvenez plus de votre mot de passe, vous pouvez vous connecter en obtenant le mot de passe Turkcell. <br /> - Si vous oubliez votre mot de passe Turkcell, vous pouvez le recevoir en envoyant SIFRE au 2200 si vous êtes un client Turkcell. <br /> - Si vous pensez avoir saisi votre mot de passe et votre numéro de téléphone correctement et que vous ne parvenez toujours pas vous connecter. - Vous pouvez actualiser votre mot de passe et essayer de vous reconnecter en cliquant sur \"J'ai oublié mon mot de passe\". <br/> - Si vous recevez un avertissement comme quoi votre adresse email / numéro de téléphone ou mot de passe est incorrect ; vous pouvez contrôler votre email et numéro de téléphone à partir de votre profil en accédant à votre compte à l'aide du mot de passe Turkcell que vous recevrez par email ou sur votre téléphone et que vous pourrez confirmer. Vous pouvez changer votre email mais pas votre numéro de téléphone. Chaque numéro de téléphone reste associé à un seul compte. </p><p><strong> Si vous n'êtes pas de Turkcell:</strong></p><p>- Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Après connexion, vous pouvez modifier votre numéro de téléphone sur la page de profil. </p><p>&nbsp;<strong>Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas de transfert, le numéro de téléphone est retiré du compte associé et il faut attendre qu'un nouveau numéro de téléphone soit identifié lors de la première connexion.";
 "support_form_subject_3_detailed_info_label" = "Je ne parviens pas me connecter avec mon mot de passe";
-"support_form_subject_3_detailed_info_fulltext" = "<p><strong> Si vous êtes de Turkcell: </ strong> </p><p> - Si vous pensez que votre numéro de téléphone et votre adresse e-mail sont corrects et que vous ne parvenez pas vous connecter avec votre mot de passe. <br /> - si vous écrivez  SIFRE et envoyez-le à 2200, vous pouvez obtenir votre mot de passe Turkcell. <br/> - Vous pouvez changer votre mot de passe par la démarche \"J'ai oublié mon mot de passe\". </p><p><strong> Si vous n'êtes pas de Turkcell: </strong></p><p> - Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Vous pouvez ressayer de vous connecter en changeant le mot de passe par la démarche \"J'ai oublié mon mot de passe\". </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié avec la première entrée.";
+"support_form_subject_3_detailed_info_fulltext" = "<p><strong> Si vous êtes de Turkcell: </ strong> </p><p> - Si vous pensez que votre numéro de téléphone et votre adresse email sont corrects et que vous ne parvenez pas vous connecter avec votre mot de passe. <br /> - envoyez SIFRE au 2200, vous pourrez obtenir votre mot de passe Turkcell. <br/> - Vous pouvez changer votre mot de passe en cliquant sur \"J'ai oublié mon mot de passe\". </p><p><strong> Si vous n'êtes pas de Turkcell: </strong></p><p> - Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Vous pouvez réessayer de vous connecter en changeant le mot de passe en cliquant sur \"J'ai oublié mon mot de passe\". </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas de transfert, le numéro de téléphone est retiré du compte associé et il faut attendre qu'un nouveau numéro de téléphone soit identifié lors de la première connexion.";
 "support_form_subject_4_detailed_info_label" = "Le texte de sécurité ne correspond pas";
-"support_form_subject_4_detailed_info_fulltext" = "<p> - Le texte de sécurité est conçu pour empêcher les attaques de machine pouvant être effectuées sur le compte. <br/> - Vous pouvez essayer de saisir le nouveau texte en répétant le texte ou vous pouvez vous connecter en écoutant  le texte audible. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié automatiquement avec la première entrée.";
+"support_form_subject_4_detailed_info_fulltext" = "<p> - Le texte de sécurité est conçu pour empêcher les attaques de machine pouvant être effectuées sur le compte. <br/> - Vous pouvez essayer de saisir le nouveau texte en répétant le texte ou vous pouvez vous connecter en écoutant le texte. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas de transfert, le numéro de téléphone est retiré du compte associé et il faut attendre qu'un nouveau numéro de téléphone soit identifié à la première connexion.";
 "support_form_subject_5_detailed_info_label" = "Je ne parviens pas me connecter avec mon mot de passe Turkcell";
-"support_form_subject_5_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </strong></p><p> -Le mot de passe Turkcell est fourni pour être utilisé au cas où vous oublieriez le mot de passe que vous avez créé lors de l’inscription. <br/> - Vous pouvez vous connecter avec le mot de passe que vous avez créé lors de votre inscription. <br/> - Vous pouvez vous connecter à partir d'écoulement de \"j'ai oublié mot de passe\" en saisissant les données de votre numéro de téléphone /  E-mail. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié avec la première entrée.";
+"support_form_subject_5_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </strong></p><p> -Le mot de passe Turkcell est fourni pour être utilisé au cas où vous oublieriez le mot de passe que vous avez créé lors de l’inscription. <br/> - Vous pouvez vous connecter avec le mot de passe que vous avez créé lors de votre inscription. <br/> - Vous pouvez vous connecter en cliquant sur \"j'ai oublié mot de passe\" et en saisissant les données de votre numéro de téléphone /  E-mail. </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si aucun numéro de téléphone n'est pas associé au compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br/> - En cas de transfert, le numéro de téléphone est retiré du compte associé et il faut attendre qu'un nouveau numéro de téléphone soit identifié lors de la première connexion.";
 "support_form_subject_6_detailed_info_label" = "J'ai des problèmes de connexion automatique";
-"support_form_subject_6_detailed_info_fulltext" = "<p><strong> Si vous ne parvenez pas à vous connecter à votre compte avec \"souvient moi\":</ strong> </ p> <p> - Depuis la démarche \"J'ai oublié mon mot de passe\", vous pouvez vous connecter en renouvelant votre mot de passe. <br/> - Lorsque vous transférez votre ligne, le numéro de téléphone sera retiré du compte associé et l'entrée de souvient-moi sera fermée. <br/> - Nous vous recommandons de vérifier vos paramètres de connexion. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
-"support_form_subject_7_detailed_info_label" = "Je n'arrive pas à télécharger l'application Lifebox";
-"support_form_subject_7_detailed_info_fulltext" = "<p> - Vous devez confirmer que votre téléphone est un modèle compatible avec l'application lifebox. <br/> - L'application Android 4.4 et versions ultérieures est prise en charge sur les téléphones / tablettes Android. <br/> - L'application iOS est prise en charge sur les iPhone / iPad sur iOS 9 et les versions ultérieures. <br /> Nous ne prenons pas en charge les téléphones basés sur Windows phone. <br/> - L'application Web est prise en charge par tous les principaux navigateurs (Chrome, Safari, Mozilla, etc.) et tous les systèmes d'exploitation (MacOS, Windows, Linux indépendant), à l'exception d'Internet Explorer. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
+"support_form_subject_6_detailed_info_fulltext" = "<p><strong> Si vous ne parvenez pas à vous connecter à votre compte avec \"se souvenir de moi\":</ strong> </ p> <p> - Depuis \"J'ai oublié mon mot de passe\", vous pouvez vous connecter en renouvelant votre mot de passe. <br/> - Lorsque vous transférez votre ligne, le numéro de téléphone sera retiré du compte associé et \"se souvenir de moi\" ne sera plus accessible. <br/> - Nous vous recommandons de vérifier vos paramètres de connexion. </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vousne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
+"support_form_subject_7_detailed_info_label" = "Je n'arrive pas à télécharger l'application Billo";
+"support_form_subject_7_detailed_info_fulltext" = "<p> - Vous devez confirmer que votre téléphone est un modèle compatible avec l'application Billo. <br/> - L'application Android 4.4 et versions ultérieures sont prises en charge sur les téléphones / tablettes Android. <br/> - L'application iOS est prise en charge sur les iPhone / iPad sur iOS 9 et les versions ultérieures. <br /> Nous ne prenons pas en charge les téléphones basés sur Windows phone. <br/> - L'application Web est prise en charge par tous les principaux navigateurs (Chrome, Safari, Mozilla, etc.) et tous les systèmes d'exploitation (MacOS, Windows, Linux indépendant), à l'exception d'Internet Explorer. </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
 "login_faq" = "FAQ";
 "signup_faq_info" = "Veuillez sélectionner un sujet pour obtenir de l'aide.";
 "login_faq_info" = "Veuillez sélectionner un sujet pour obtenir de l'aide.";
 "too_many_invalid_attempt" = "Vous avez fait plusieurs tentatives. Veuillez réessayer plus tard.";
-"signup_support_form_subject_1_detailed_info_label" = "Je ne parviens pas m’inscrire avec mon  E-mail";
-"signup_support_form_subject_1_detailed_info_fulltext" = "<p><strong>i.</ strong> Si vous recevez une erreur de E-mail, vous devez vous assurer que vous avez écrit votre mot de passe dans le format correct. Votre e-mail ne doit pas contenir le signe @, aucun signe de ponctuation, aucun caractère spécial en turc. </p><p><strong>ii.</strong> Vous aurez besoin de votre adresse e-mail pour vous inscrire à toutes les opérations futures. Par conséquent, vous devez écrire un e-mail valide. </p><p><strong>iii.</strong> Vous pouvez essayer de vous inscrire avec une autre adresse e-mail de vous. </p><p><strong>iv.</strong> Pour que nous puissions vous aider, vous pouvez nous contacter via nos écrans de support après trois avertissements d'erreurs reçus. </p>";
+"signup_support_form_subject_1_detailed_info_label" = "Je ne parviens pas m’inscrire avec mon email";
+"signup_support_form_subject_1_detailed_info_fulltext" = "<p><strong>i.</ strong> Si vous recevez une erreur d'email, vous devez vous assurer que vous avez écrit votre email dans le bon format . Votre email doit contenir le signe @, aucun signe de ponctuation, aucun caractère spécial. </p><p><strong>ii.</strong> Vous aurez besoin de votre adresse email pour vous inscrire à toutes les opérations futures. Par conséquent, vous devez écrire un email valide. </p><p><strong>iii.</strong> Vous pouvez essayer de vous inscrire avec une autre adresse email. </p><p><strong>iv.</strong> Pour que nous puissions vous aider, vous pouvez nous contacter via nos écrans de support après trois avertissements d'erreurs reçus. </p>";
 "signup_support_form_subject_2_detailed_info_label" = "Je ne parviens pas m’inscrire avec mon numéro de téléphone";
-"signup_support_form_subject_2_detailed_info_fulltext" = "<p><strong>i.</ strong> Si vous recevez une erreur de numéro de téléphone, vous devez vous assurer que vous avez écrit votre numéro de téléphone dans le format correct. Faites attention aux codes pays-régions. </p><p><strong>ii.</strong> Un code de confirmation sera envoyé à votre téléphone pour inscription. Par conséquent, vous devez saisir un numéro de téléphone valide. </p><p><strong>iii.</strong> Vous pouvez essayer de vous inscrire avec un numéro de téléphone qui vous appartient. </p><p><strong>iv.</strong> Pour que nous puissions vous aider, vous pouvez nous contacter via nos écrans de support après trois avertissement d'erreurs reçus. </p>";
+"signup_support_form_subject_2_detailed_info_fulltext" = "<p><strong>i.</ strong> Si vous recevez une erreur de numéro de téléphone, vous devez vous assurer que vous avez écrit votre numéro de téléphone dans le format correct. Faites attention aux codes pays-régions. </p><p><strong>ii.</strong> Un code de confirmation sera envoyé sur votre téléphone pour l'inscription. Par conséquent, vous devez saisir un numéro de téléphone valide. </p><p><strong>iii.</strong> Inscrivez-vous avec un numéro de téléphone qui vous appartient. </p><p><strong>iv.</strong> Pour que nous puissions vous aider, vous pouvez nous contacter via nos écrans de support après trois avertissement d'erreurs reçus. </p>";
 "signup_support_form_subject_3_detailed_info_label" = "N'accepte pas le mot de passe que j'ai défini";
 "signup_support_form_subject_3_detailed_info_fulltext" = "<p><strong>i.</strong> Votre mot de passe doit être composé de lettres et de chiffres non consécutifs. </p><p><strong>ii.</strong> Votre mot de passe doit comporter minimum 6 et maximum 16 caractères. </p>";
 "tbmatic_home_card_title" = "Flânez dans le passé!";
-"tbmatic_home_card_subtitle" = "Découvrez les souvenirs que vous avez collectés dans votre lifebox!";
-"tbmatic_home_card_button_title" = "Voyons voir!";
+"tbmatic_home_card_subtitle" = "Découvrez les souvenirs que vous avez collectés dans votre Billo !";
+"tbmatic_home_card_button_title" = "Voyons voir !";
 "tbmatic_home_card_year_ago" = "Il y a %d  d’année";
 "tbmatic_home_card_years_ago" = "Il y a %d  d’année";
 "tbmatic_home_card_this_year" = "Cette année";
-"campaign_card_title" = "Campagne de téléphone PhotoPick";
-"campaign_description_label_new_user" = "Pourquoi ne pas gagner le premier droit de tirage au sort pour le Samsung Galaxy Note 10? Analysez vos photos avec PhotoPick et courez la chance de devenir l’une des 20 personnes à gagner un Note 10!";
-"campaign_description_label_experienced_user" = "Vous n'avez pas encore commencé à gagner les droits de tirage au sort de ce jour. Analysez vos photos avec PhotoPick et augmentez vos chances de gagner le Galaxy Note 10. Votre droit en total pour le tirage au sort: %d";
-"campaign_description_label_limit_reached" = "Vous avez épuisé vos 10 droits de tirage au sort  par jour. Demain, refaites une PhotoPick, augmentez votre droit de tirage au sort.  Votre droit en total pour le tirage au sort: %d";
-"campaign_description_label_another" = "Votre droit de tirage au sort total est  %d ! Analysez vos photos avec PhotoPick et augmentez vos droits de tirage au sort et courez la chance de devenir l’une des 20 personnes à gagner un Note 10!";
+"campaign_card_title" = "Campagne PhotoPick";
+"campaign_description_label_new_user" = "Vous n'avez pas encore participé à la campagne. Commencez à analyser vos photos avec PhotoPick et tentez votre chance pour être l'un des 20 gagnants d'un Note 10 !";
+"campaign_description_label_experienced_user" = "Vous n'avez pas joué aujourd'hui. Analysez vos photos avec PhotoPick et multipliez vos chance. Votre total de participation : %d";
+"campaign_description_label_limit_reached" = "Vous avez épuisé vos droits de participation au tirage au sort d'aujourd'hui. Continuez d'analyser demain ! Votre total de participation : %d ";
+"campaign_description_label_another" = "Votre droit de tirage au sort total est  %d ! Analysez vos photos avec PhotoPick et augmentez vos droits de tirage au sort et augmentez vos chances de devenir l’une des 20 personnes à gagner un Note 10 !";
 "campaign_campaign_detail_button" = "Détails de la campagne";
-"analyze_photo_pic_detail_button" = "Analysez avec PhotoPick!";
+"analyze_photo_pic_detail_button" = "Analyser avec PhotoPick !";
 "campaign_detail_title" = "Détails de la campagne";
 "campaign_detail_more_info_button" = "Cliquez ici pour plus d'informations";
 "campaign_detail_contest_info_title" = "Mes informations sur la campagne";
-"campaign_detail_contest_info_total_draw" = "Mes droits en total pour tirage au sort";
-"campaign_detail_contest_info_remaining_draw" = "Mes droits quotidiens restant";
+"campaign_detail_contest_info_total_draw" = "Mes droits de participation pour le tirage au sort";
+"campaign_detail_contest_info_remaining_draw" = "Mes droits restants du jour";
 "campaign_detail_intro_title" = "Information sur la campagne";
 "campaign_detail_intro_gift" = "Évaluez vos photos avec PhotoPick";
-"campaign_detail_intro_celebration" = "Augmentez vos droits de tirage au sort avec chaque PhotoPick";
-"campaign_detail_intro_noun_celebration" = "Courez la chance à gagner 20 Samsung Galaxy Note 10!";
+"campaign_detail_intro_celebration" = "Augmentez vos chances de tirage au sort avec chaque PhotoPick";
+"campaign_detail_intro_noun_celebration" = "Devenez l'un des 20 gagnants d'un Samsung Galaxy Note 10 !";
 "campaign_detail_info_title" = "Information sur la campagne";
 "campaign_detail_info_description" = "Notre campagne de téléphone est terminée. Les résultats de tirade au sort seront annoncés le 20 février à partir de nos comptes de médias sociaux. Vous pouvez accéder vos droits en total pour tirage au sort à partir des informations ci-dessus. Suivez nos comptes de médias sociaux pour voir les résultats!";
-"AccessibilityGiftButton" = "";
+"AccessibilityGiftButton" = "Bouton coffret cadeau";
 "landing_start_button" = "Commencer";
-"landing_billo_title_0" = "Vivre et garder le meilleur";
-"landing_billo_subtitle_0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans Billo! Accéder et se souvenir à tout moment et en tout lieu";
+"landing_billo_title_0" = "Stocker en toute simplicité";
+"landing_billo_subtitle_0" = "Ranger et garder vos souvenirs pour toujours ";
 "landing_billo_title_1" = "Synchronisation automatique";
-"landing_billo_subtitle_1" = "Vos photos et vidéos sont instantanément sur Billo!";
+"landing_billo_subtitle_1" = "Automatiser la synchronisation de vos photos et vidéos et accédez-y de partout !";
 "landing_billo_title_2" = "Reconnaissance du visage / image";
-"landing_billo_subtitle_2" = "Trouver facilement vos souvenirs avec des albums intelligents!";
+"landing_billo_subtitle_2" = "Trouver facilement vos souvenirs avec des albums intelligents! Recherchez par personne, objet ou lieu.";
 "landing_billo_title_3" = "Synchoniser les contacts";
-"landing_billo_subtitle_3" = "Sauvegardez vos contacts, ne les perdez jamais!";
-"landing_billo_title_4" = "Faire de l’espace";
-"landing_billo_subtitle_4" = "Libérez de l'espace sur votre téléphone pour de nouveaux souvenirs!";
+"landing_billo_subtitle_3" = "Sauvegardez vos contacts, ne les perdez jamais !";
+"landing_billo_title_4" = "Libérer de l'espace";
+"landing_billo_subtitle_4" = "Libérez de l'espace sur votre téléphone pour de nouveaux souvenirs !";
 "landing_billo_title_5" = "Stories automatiques";
-"landing_billo_subtitle_5" = "Rappelez-vous vos souvenirs avec des films et des collages créés automatiquement!";
+"landing_billo_subtitle_5" = "Vivez vos souvenirs avec des stories automatisées créées pour vous";
 "landing_billo_title_6" = "Réseaux sociaux";
 "landing_billo_subtitle_6" = "Transférer facillement toutes vos archives de réseaux sociaux vers Billo!";
 "landing_billo_title_7" = "Imprimer";
-"landing_billo_subtitle_7" = "Décorez votre espace de vie avec vos souvenirs!";
+"landing_billo_subtitle_7" = "Décorez votre vie avec vos souvenirs !";
 
 /*introduce billo*/
 "billo_intro_title" = "Vivre, Collecter, Se souvenir";
-"billo_intro_subtitle" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans votre Billo. Accédez à votre contenu à tous moments depuis n’importe quel appareil.";
-"billo_intro_create_account_button" = "Créer un Nouveau Compte";
-"billo_intro_login_button" = "Me connecter";
+"billo_intro_subtitle" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans Billo. Accédez à votre contenu à tout moment depuis n’importe quel appareil.";
+"billo_intro_create_account_button" = "Créer un compte";
+"billo_intro_login_button" = "J'ai un compte, me connecter";
 "campaign_vc_result_button" = "Afficher le résultat";
 "campaign_vc_edit_profile_button" = "Modifier votre profil";
 "campaign_vc_become_premium_button" = "Je veux devenir Premium";
-"campaign_vc_bottom_title" = "Campagne de téléphone PhotoPick";
-"campaign_vc_bottom_description" = "Toutes les informations de votre profil doivent être complètes pour pouvoir participer à la campagne et être évaluées au sein de tirage au sort. Vous pouvez mettre à jour vos informations en cliquant sur le bouton Modifier le profil.";
-"campaign_vc_top_without_title" = "VOUS N’AVEZ PLUS DE DROIT :(";
-"campaign_vc_top_without_description" = "Votre droit d’analyse PhotoPick est épuisé. Vous pouvez avoir un nombre illimité de droit de PhotoPick en étant Premium. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10!";
-"campaign_vc_top_title_zero" = "VOTRE LIMITE JOURNALIÈRE EST COMPLÈTE!";
-"campaign_vc_top_description_zero" = "Vous avez épuisé votre droit de tirage au sort quotidien dans la campagne. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10!";
-"campaign_vc_top_title_non_zero" = "CONTINUER L'ANALYSE!";
-"campaign_vc_top_description_non_zero" = "Vous avez épuisé votre droit de tirage au sort quotidien %d dans la campagne. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10!";
-"create_story_empty_name_error" = "Nom de l'histoire ne pas rempli";
-"photopick_history_campaign_contest_total_draw" = "Mes droits en total pour tirage au sort";
-"photopick_history_campaign_contest_remaining_draw" = "Mes droits quotidiens restant";
+"campaign_vc_bottom_title" = "Campagne PhotoPick";
+"campaign_vc_bottom_description" = "Toutes les informations de votre profil doivent être complètes pour pouvoir participer à la campagne et au tirage au sort. Vous pouvez mettre à jour vos informations en cliquant sur le bouton Modifier le profil.";
+"campaign_vc_top_without_title" = "OUPS DESOLE :(";
+"campaign_vc_top_without_description" = "Votre droit d’analyse PhotoPick est épuisé. Vous pouvez avoir un nombre illimité de PhotoPick en passant Premium. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10!";
+"campaign_vc_top_title_zero" = "VOTRE LIMITE QUOTIDIENNE EST ATTEINTE !";
+"campaign_vc_top_description_zero" = "Vous avez épuisé votre droit de participation au tirage au sort quotidien. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10 !";
+"campaign_vc_top_title_non_zero" = "CONTINUER L'ANALYSE !";
+"campaign_vc_top_description_non_zero" = "Vous avez épuisé votre droit de participation au tirage au sort quotidien %d dans la campagne. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10 !";
+"create_story_empty_name_error" = "Le nom de la Story ne peut pas être vide";
+"photopick_history_campaign_contest_total_draw" = "Mes droits pour le tirage au sort";
+"photopick_history_campaign_contest_remaining_draw" = "Mes droits restants du jour";
 "sing_up_error_password_length_is_below_limit" = "Votre mot de passe ne peut pas contenir moins de %d caractères";
 "sing_up_error_password_length_exceeded" = "Votre mot de passe ne peut pas contenir plus de %d caractères";
-"sing_up_error_sequential_characters" = "Votre mot de passe ne peut pas contenir plus de %d caractères consécutifs";
-"sing_up_error_same_characters" = "Votre mot de passe ne peut pas contenir plus de %d mêmes caractères";
-"sing_up_error_uppercase_missing" = "Votre mot de passe doit contenir au moins une lettre majuscule";
-"sing_up_error_lowercase_missing" = "Votre mot de passe doit contenir au moins une lettre minuscule";
-"sing_up_error_number_missing" = "Votre mot de passe doit contenir au moins un chiffre";
-"sing_up_error_unauthorized" = "Votre champ de mot de passe ne peut pas être blanc";
-"password_in_resent_history" = "Votre mot de passe ne peut pas être le même que votre dernier mot de passe %d";
-"uppercase_miss_in_password" = "Votre mot de passe doit contenir au moins une lettre majuscule";
-"lowercase_miss_in_password" = "Votre mot de passe doit contenir au moins une lettre minuscule";
-"number_miss_in_password" = "Votre mot de passe doit contenir au moins un chiffre";
-"password_length_below_limit" = "Votre mot de passe ne peut pas contenir moins de %d caractères";
-"password_length_exceede" = "Votre mot de passe ne peut pas contenir plus de %d caractères";
-"password_sequential_caharacters" = "Votre mot de passe ne peut pas contenir plus de %d caractères consécutifs";
-"password_same_caharacters" = "Votre mot de passe ne peut pas contenir plus de %d mêmes caractères";
-"password_field_is_empty" = "Votre champ de mot de passe ne peut pas être blanc";
+"sing_up_error_sequential_characters" = "Votre mot de passe ne peut pas contenir plus de %d caractères consécutifs.";
+"sing_up_error_same_characters" = "Votre mot de passe ne peut pas contenir plus de %d de caractères identiques.";
+"sing_up_error_uppercase_missing" = "Votre mot de passe doit contenir au moins une lettre majuscule.";
+"sing_up_error_lowercase_missing" = "Votre mot de passe doit contenir au moins une lettre minuscule.";
+"sing_up_error_number_missing" = "Votre mot de passe doit contenir au moins un chiffre.";
+"sing_up_error_unauthorized" = "Votre champ de mot de passe ne peut pas être vide.";
+"password_in_resent_history" = "Votre mot de passe ne peut pas être identique à votre dernier mot de passe %d.";
+"uppercase_miss_in_password" = "Votre mot de passe doit contenir au moins une lettre majuscule.";
+"lowercase_miss_in_password" = "Votre mot de passe doit contenir au moins une lettre minuscule.";
+"number_miss_in_password" = "Votre mot de passe doit contenir au moins un chiffre.";
+"password_length_below_limit" = "Votre mot de passe ne peut pas contenir moins de %d caractères.";
+"password_length_exceede" = "Votre mot de passe ne peut pas contenir plus de %d caractères.";
+"password_sequential_caharacters" = "Votre mot de passe ne peut pas contenir plus de %d caractères consécutifs.";
+"password_same_caharacters" = "Votre mot de passe ne peut pas contenir plus de %d de caractères identiques.";
+"password_field_is_empty" = "Votre champ de mot de passe ne peut pas être vide.";
 "Can't upload. File size is 0." = "Taille du fichier 0 Ko, impossible de télécharger.";
 "update_address_error" = "Le champ d'adresse ne peut pas contenir moins de 10 caractères ni plus de 1024 caractères.";
 "profile_detail_address_title" = "Adresse";
-"profile_detail_address_subtitle" = "Ce champ est utilisé pour les campagnes de tirage au sort pour cadeau et les informations de facturation.";
-"profile_detail_address_placeholder" = "Veuillez entrer vos informations d'adresse";
+"profile_detail_address_subtitle" = "Ce champ est utilisé pour les campagnes de tirage au sort et les informations de facturation.";
+"profile_detail_address_placeholder" = "Veuillez entrer votre adresse";
 "profile_detail_error_contact_call_center" = "Veuillez contacter le centre d'appels pour changer votre numéro";
 "temporary_error" = "Une erreur temporaire s'est produite, veuillez réessayer";
-"move_to_trash_albums_message" = "";
-"move_to_trash_albums_success_message" = "";
-"confirmation_popup_title_hide" = "";
-"confirmation_popup_message_hide" = "";
-"confirmation_popup_message_hide_albums" = "";
-"confirmation_popup_title_hide_single_album" = "";
-"confirmation_popup_message_hide_single_album" = "";
-"smash_screen_title" = "";
-"smash_popup_message" = "";
-"Smash" = "";
-"photos_hide_success_message" = "";
-"Unhide" = "";
-"smart_album_hidden" = "";
-"hide_success_popup_message" = "";
-"hide_success_popup_button_title" = "";
-"hide_single_album_success_popup_message" = "";
-"hide_albums_success_popup_message" = "";
-"selected_items_limit_hide" = "";
+"move_to_trash_albums_message" = "Vous ne verrez pas cet album...";
+"move_to_trash_albums_success_message" = "Album supprimé avec succès.";
+"confirmation_popup_title_hide" = "Sélection masquée";
+"confirmation_popup_message_hide" = "Les fichiers sélectionnés seront cachés.";
+"confirmation_popup_message_hide_albums" = "Sélection des albums masquée";
+"confirmation_popup_title_hide_single_album" = "Album masqué";
+"confirmation_popup_message_hide_single_album" = "Vous ne verrez pas cet album...";
+"smash_screen_title" = "effet de Smash";
+"smash_popup_message" = "La photo éditée sera sauvegardée en tant que nouvelle photo dans la bibliothèque de votre appareil.";
+"Smash" = "Smash";
+"photos_hide_success_message" = "Elements masqués avec succès.";
+"Unhide" = "Afficher";
+"smart_album_hidden" = "Masqué";
+"hide_success_popup_message" = "Les éléments ont été masqués avec succès";
+"hide_success_popup_button_title" = "Eléments masqués";
+"hide_single_album_success_popup_message" = "Album masqué avec succès";
+"hide_albums_success_popup_message" = "Les albums sélectionnés ont été masqués avec succès.";
+"selected_items_limit_hide" = "Vous ne pouvez pas masqué plus de %d de fichiers.";
 "hide_single_photo_completion_alert_message" = "";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "";
@@ -1622,31 +1622,34 @@ Please check I have understood the intended command here*/
 "people_album_warning_message_premium_and_no_image_grouping" = "";
 "people_album_warning_button_not_premium_and_no_image_grouping" = "";
 "people_album_warning_button_not_premium_and_image_grouping_on" = "";
-"people_album_warning_button_premium_and_no_image_grouping" = "";
-"hide_successed_alert_title" = "";
-"hide_successed_alert_with_people_album_title" = "";
-"hide_successed_alert_people_album_title" = "";
+"people_album_warning_button_premium_and_no_image_grouping" = "F/I Activer";
+"hide_successed_alert_title" = "L'image a bien été masquée";
+"hide_successed_alert_with_people_album_title" = "L'image est maintenant masquée !";
+"hide_successed_alert_people_album_title" = "Cacher les photos de quelqu'un !";
 "hide_successed_alert_people_album_description" = "";
-"hide_successed_alert_do_not_show_this_message" = "";
-"hide_successed_alert_view_people_album" = "";
-"smash_successed_alert_title" = "";
-"smash_successed_alert_second_title" = "";
+"hide_successed_alert_do_not_show_this_message" = "Ne pas montrer ce message.";
+"hide_successed_alert_view_people_album" = "Voir l'album des personnes.";
+"smash_successed_alert_title" = "Enregistré !";
+"smash_successed_alert_second_title" = "Que souhaitez-vous faire ?";
 "smash_successed_alert_description" = "";
-"smash_successed_simple_alert_title" = "";
+"smash_successed_simple_alert_title" = "Sauvegardé !";
 "smash_successed_simple_alert_description" = "";
 
 /*carousel pager*/
-"carousel_view_first_page_title" = "";
+"carousel_view_first_page_title" = "Rassembler vos photos.";
 "carousel_view_first_page_text" = "";
-"carousel_view_second_page_title" = "";
+"carousel_view_second_page_title" = "Rassembler vos photos.";
 "carousel_view_second_page_text" = "";
 "carousel_view_third_page_title" = "";
 "carousel_view_third_page_text" = "";
-"hidden_bin_album_slider_title" = "";
-"hidden_bin_album_slider_empty" = "";
-"hidden_bin_empty" = "";
-"hidden_bin_navbar_title" = "";
+"hidden_bin_album_slider_title" = "Mes albums cachés";
+"hidden_bin_album_slider_empty" = "Il n'y a pas d'album caché";
+"hidden_bin_empty" = "Il n'y a pas d'objet caché";
+"hidden_bin_navbar_title" = "Caché";
 "unhide_popup_text" = "";
 
 /*divorce card*/
-"divorce_card_title" = "";
+"divorce_card_title" = "XX Effect lorem ipsum ! Découvrez de nouvelles options !";
+"trash_bin_album_slider_title" = "";
+"trash_bin_album_slider_empty" = "";
+"trash_bin_empty" = "";

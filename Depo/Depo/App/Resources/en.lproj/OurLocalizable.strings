@@ -4,14 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?";
-"move_to_trash_albums_message" = "You will not see this album...";
-"move_to_trash_albums_success_message" = "Album is sent to trash bin successfully";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from lifebox. You won't be able to access them once deleted";
-"confirmation_popup_title_hide" = "Hide Selected";
-"confirmation_popup_message_hide" = "The selected files will be hidden lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
-"confirmation_popup_message_hide_albums" = "Hide Selected Albums";
-"confirmation_popup_title_hide_single_album" = "Hide Album";
-"confirmation_popup_message_hide_single_album" = "You will not see this album...";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
@@ -79,8 +72,6 @@
 "Buy" = "Purchase";
 "Cancel" = "Cancel";
 "Info" = "Info";
-"smash_screen_title" = "Smash effect";
-"smash_popup_message" = "This edited photo will be saved as a new photo in your device gallery";
 "You can open settings and cancel subscption." = "You can visit iTunes to cancel your package.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";
@@ -139,8 +130,6 @@
 "Edit" = "Edit";
 "Share" = "Share";
 "Wait for a Wi-Fi Connection" = "Waiting for a Wi-Fi connection";
-"Hide" = "Hide";
-"Smash" = "Smash";
 
 /*I cant understand*/
 "Auto Sync Preparation" = "Auto Sync Preparation";
@@ -160,7 +149,6 @@
 "Operation is complete" = "Operation completed";
 "Download is complete" = "Download completed";
 "Deleting is complete" = "Deleting completed";
-"photos_hide_success_message" = "Items are hidden successfully";
 "Downloading files" = "Downloading files";
 "Uploading files over" = "Uploading files over %@";
 "Syncing files over" = "Syncing files with %@";
@@ -344,11 +332,9 @@
 "Create album" = "Create album";
 "Sync Contacts" = "Contact Sync";
 "Favorites" = "Favorites";
-"All Files" = "All";
+"All Files" = "All Files";
 "Choose" = "Choose";
 "Hide" = "Hide";
-"Unhide" = "Unhide";
-"Restore" = "Restore";
 "Show" = "Show";
 "No results found for your query." = "No results found for your query.";
 "SUGGESTIONS" = "SUGGESTIONS";
@@ -441,7 +427,6 @@
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
-"smart_album_hidden" = "Hidden";
 
 /*???*/
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
@@ -693,10 +678,6 @@
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
 "Quick Scroll Preparation" = "Preparing your photos and videos";
-"hide_success_popup_message" = "Items are hidden successfully";
-"hide_success_popup_button_title" = "Hidden items >";
-"hide_single_album_success_popup_message" = "Album is hidden successfully";
-"hide_albums_success_popup_message" = "Selected albums are hidden successfully";
 
 /*PremiumView*/
 "delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
@@ -1077,7 +1058,6 @@
 "Permissions" = "Permissions";
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
-"selected_items_limit_hide" = "You cannot hide more than %d files";
 "login_settings_security_passcode_description" = "You can receive your Turkcell Password by texting SIFRE to 2200 and if you enable this button, you can login to lifebox using this password.";
 "login_settings_security_autologin_description" = "If you enable this button, you can auto-login to lifebox while connected to internet with 3G/LTE.";
 "login_settings_two_factor_auth_description" = "If you enable Two-Factor Authentication, you will be asked to verify your identity before login. We will send a security code to your phone number or e-mail for verification. This will allow you to login your account more securely.";
@@ -1344,7 +1324,7 @@
 "confirmation_popup_title_hide_single_album" = "Hide Album";
 "confirmation_popup_message_hide_single_album" = "You will not see this album...";
 "smash_screen_title" = "Smash effect";
-"smash_popup_message" = "This edited photo will be saved as a new photo in your device gallery";
+"smash_popup_message" = "This edited item will be uploaded to lifebox and saved to device gallery as a new item";
 "Smash" = "Smash";
 "photos_hide_success_message" = "Items are hidden successfully";
 "Unhide" = "Unhide";
@@ -1374,42 +1354,8 @@
 "smash_successed_alert_second_title" = "What would you like to do?";
 "smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 "smash_successed_simple_alert_title" = "Saved successfully!";
-"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+"smash_successed_simple_alert_description" = "Kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 
-"temporary_error" = "temporary error, please try again";
-
-"hide_single_photo_completion_alert_message" = "You will not see this photo lorem ipsum dolor sit amet. You can unhide it back lorem ipsum dolor…";
-
-"people_album_warning_alert_title_not_premium_and_no_image_grouping" = "İşlenmiş fotoğrafını bulamadık!";
-"people_album_warning_alert_title_not_premium_and_image_grouping_on" = "İstediğin kişileri bulamadın mı?";
-"people_album_warning_alert_title_premium_and_no_image_grouping" = "There is no proccessed picture!";
-
-"people_album_warning_message_not_premium_and_no_image_grouping" = "Kişilerinin fotğraflarını gizleyebilmek için Yüz/Nesne Gruplama özelliğini açık tutmalısın. Daha fazla kişi ve objeyi gruplandırmak için Premium Paket’i keşfet.";
-"people_album_warning_message_not_premium_and_image_grouping_on" = "Premium paketle sınırsız Yüz ve Nesne Gruplama yaparak istediğin kişinin fotoğrafları için toplu işlem yapabilirsin. ";
-"people_album_warning_message_premium_and_no_image_grouping" = "Kişilerinin fotğraflarını gizleyebilmek için Yüz Nesne Gruplama özelliğini açık tutmayı unutma.";
-
-"people_album_warning_button_not_premium_and_no_image_grouping" = "Yüz Gruplamayı Aç";
-"people_album_warning_button_not_premium_and_image_grouping_on" = "Mevcut kişilerle devam et";
-"people_album_warning_button_premium_and_no_image_grouping" = "F/I Activate";
-
-"hide_successed_alert_title" = "The picture is hidden successfully";
-"hide_successed_alert_with_people_album_title" = "The picture is hidden now! ";
-"hide_successed_alert_people_album_title" = "Hide pictures of a person !";
-"hide_successed_alert_people_album_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
-"hide_successed_alert_do_not_show_this_message" = "Don’t show this message.";
-"hide_successed_alert_view_people_album" = "View People Album";
-
-"smash_successed_alert_title" = "Saved successfully!";
-"smash_successed_alert_second_title" = "What would you like to do?";
-"smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
-
-"smash_successed_simple_alert_title" = "Saved successfully!";
-"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
-
-/*carousel pager*/
-"carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
-"carousel_view_first_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 1";
-"carousel_view_second_page_title" ="Merge your photos. Lorem ipsum! 2";
 /*carousel pager*/
 "carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
 "carousel_view_first_page_text" = "Toplu işlem yapabilmek için lorem ipsum dolor sit amet. Lorem ispum dolor sit amet. Fotoğraflarını birleştirmelisin. 1";
@@ -1423,9 +1369,8 @@
 "hidden_bin_navbar_title" = "Hidden";
 "unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
 
+/*divorce card*/
+"divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
 "trash_bin_album_slider_title" = "My Deleted Albums";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
-
-/*divorce card*/
-"divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
