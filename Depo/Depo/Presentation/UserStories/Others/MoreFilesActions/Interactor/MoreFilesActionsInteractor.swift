@@ -238,6 +238,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
                 else {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                     UIApplication.showErrorAlert(message: TextConstants.errorServer)
                     complition?()
                     return
@@ -750,7 +751,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             showAccessAlert()
             return
         }
+        
         if let item = item as? [Item] {
+            
+            if let firstItem = item.first {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
+            }
+            
             //FIXME: transform all to BaseDataSourceItem
             if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
@@ -760,6 +767,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: .album, count: albums.count))
             output?.startAsyncOperationDisableScreen()
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
                 self?.output?.completeAsyncOperationEnableScreen()
@@ -1098,6 +1106,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
         MenloworksTagsService.shared.editedPhotoSaved()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }

@@ -155,9 +155,9 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         
-        convenience init(status: String) {
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.status = status
+            self.status = status.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -202,9 +202,9 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         
-        convenience init(status: String) {
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.status = status
+            self.status = status.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -282,9 +282,29 @@ extension NetmeraEvents.Actions {
         @objc var type = ""
         @objc var count: Int = 0
         
-        convenience init(type: String, count: Int) {
+        convenience init(type: FileType, count: Int) {
+            let accaptableType: NetmeraEventValues.DownloadType
+            switch type {
+            case .image, .faceImage(_):
+                accaptableType = .photo
+            case .video:
+                accaptableType = .video
+            case .allDocs:
+                accaptableType = .document
+            case .audio:
+                accaptableType = .music
+            case .photoAlbum, .faceImageAlbum(_):
+                accaptableType = .album
+            default:
+                accaptableType = .photo
+            }
+            self.init(type: accaptableType, count: count)
+            
+        }
+        
+        convenience init(type: NetmeraEventValues.DownloadType, count: Int) {
             self.init()
-            self.type = type
+            self.type = type.text
             self.count = count
         }
         
