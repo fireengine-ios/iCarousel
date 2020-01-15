@@ -355,8 +355,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.putBackItems(remoteItems)
         }
         
-        let controller = PopUpController.with(title: "Restore",
-                                              message: TextConstants.deleteFilesText,
+        let controller = PopUpController.with(title: TextConstants.restoreConfirmationPopupTitle,
+                                              message: TextConstants.restoreConfirmationPopupText,
                                               image: .restore,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,
@@ -666,8 +666,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
-        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: TextConstants.deletePopupText,
+        let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
+                                         message: TextConstants.deleteConfirmationPopupText,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
@@ -705,10 +705,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         case .unhide:
             text = TextConstants.unhidePopupSuccessText
         case .delete:
-            text = "Delete Permanently"
+            text = TextConstants.deletePopupSuccessText
             MenloworksAppEvents.onFileDeleted()
         case .restore:
-            text = "Restored Successfully"
+            text = TextConstants.restorePopupSuccessText
         default:
             return
         }
