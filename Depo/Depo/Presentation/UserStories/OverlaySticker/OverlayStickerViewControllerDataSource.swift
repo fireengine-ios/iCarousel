@@ -23,7 +23,6 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
-    
     private let downloader = ImageDownloder()
     
     private let paginationPageSize = 20
