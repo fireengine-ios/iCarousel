@@ -99,12 +99,15 @@ final class OverlayAnimationService {
                     do {
                         let data =  try Data(contentsOf: url)
                         
-                        let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
-                        
-                        GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
-                        completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
+                        GIF2MP4(data: data)?.convertAndExport(fileName: resultName, completion: { url in
+                            
+                            guard let url = url else {
+                                completion(.failure(.unknown))
+                                return
+                            }
+                            completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .video)))
                         })
-                    } catch let error{
+                    } catch {
                         completion(.failure(.unknown))
                     }
                 }
@@ -129,21 +132,31 @@ final class OverlayAnimationService {
     
     private func cutToNumberOfFrames (attachment: [UIImage], numberOfFrames: Int) -> [UIImage] {
         
-        if attachment.count == 1  {
+        if attachment.count == 1 && attachment.count == numberOfFrames  {
             return attachment
-        } else if attachment.count <= numberOfFrames {
-            self.numberOfFrames = attachment.count
         }
         
         var images = attachment
-        var index = 1
         
-        while images.count != numberOfFrames {
-            
-            images.remove(at: index)
-            index += 2
-            if images.count - 1 < index {
-                index = 1
+        if attachment.count > numberOfFrames {
+            var index = 1
+            while images.count != numberOfFrames {
+                images.remove(at: index)
+                index += 2
+                if images.count - 1 < index {
+                    index = 1
+                }
+            }
+        } else {
+            //If frames in animation < 3
+            var index = 0
+            let countOfIndexes = images.count - 1
+            while images.count != numberOfFrames {
+                images.append(images[index])
+                index += 1
+                if index > countOfIndexes {
+                    index = 0
+                }
             }
         }
         return images

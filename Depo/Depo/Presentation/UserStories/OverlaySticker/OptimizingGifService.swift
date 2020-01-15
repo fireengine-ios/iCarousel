@@ -97,7 +97,7 @@ final class OptimizingGifService {
     
     private func cutToNumberOfFrames (attachment: [(image: CGImage, duration: TimeInterval)], cutFramesPercent: Double) -> [(image: CGImage, duration: TimeInterval)] {
         
-        if attachment.count == 1  {
+        if attachment.count < 25  {
             return attachment
         }
         
