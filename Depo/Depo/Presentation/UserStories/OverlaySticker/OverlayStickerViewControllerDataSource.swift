@@ -133,9 +133,9 @@ final class OverlayStickerViewControllerDataSource: NSObject {
             DispatchQueue.global().async {
                 guard
                     let imageData = data,
-                    let image = OptimazingGifService().optimazeImage(data: imageData, otimazeFor: .cell)
-                    else {
-                        return
+                    let image = OptimizingGifService().optimizeImage(data: imageData, otimazeFor: .cell)
+                else {
+                    return
                 }
                 
                 DispatchQueue.toMain {

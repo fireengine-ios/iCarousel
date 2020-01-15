@@ -1,5 +1,5 @@
 //
-//  OptimazingGifService.swift
+//  OptimizingGifService.swift
 //  Depo
 //
 //  Created by Maxim Soldatov on 1/14/20.
@@ -13,9 +13,9 @@ enum OptimizationType {
     case sticker
 }
 
-final class OptimazingGifService {
+final class OptimizingGifService {
         
-    func optimazeImage(data: Data, otimazeFor: OptimizationType) -> UIImage? {
+    func optimizeImage(data: Data, otimazeFor: OptimizationType) -> UIImage? {
         
         let percentOfFrames = otimazeFor == .sticker ? 20.0 : 80.0
         let size = otimazeFor == .sticker ? CGSize(width: 300, height: 300) : CGSize(width: 50, height: 50)
