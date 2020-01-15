@@ -56,7 +56,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .delete]) {
+        if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .moveToTrash]) {
             if let interactor = interactor as? FaceImagePhotosInteractorInput {
                 interactor.loadItem(item)
             }

@@ -20,6 +20,7 @@ final class OverlayStickerViewController: ViewController {
     @IBOutlet private var overlayStickerViewControllerDataSource: OverlayStickerViewControllerDataSource!
     
     private let uploadService = UploadService()
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private let stickerService: SmashService = SmashServiceImpl()
 
     private lazy var applyButton: UIBarButtonItem = {
@@ -48,6 +49,9 @@ final class OverlayStickerViewController: ViewController {
         super.viewDidLoad()
         selectStickerType(type: .gif)
         setupImage()
+        navigationController?.navigationBar.isHidden = true
+        
+        self.view.backgroundColor = .black
         statusBarColor = .black
         overlayingStickerImageView.stickersDelegate = self
         overlayStickerViewControllerDataSource.delegate = self
@@ -80,32 +84,15 @@ final class OverlayStickerViewController: ViewController {
             return
         }
 
-        showSpinnerIncludeNavigationBar()
-        
-        DispatchQueue.main.async { [weak self] in
+        smashCoordinator?.smashConfirmPopUp { [weak self] in
             
             guard let self = self else {
                 return
             }
-
+            
+            self.showSpinnerIncludeNavigationBar()
             self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
-                self?.hideSpinnerIncludeNavigationBar()
-                
-                let popUp = PopUpController.with(title: TextConstants.save,
-                                                 message: TextConstants.smashPopUpMessage,
-                                                 image: .error,
-                                                 firstButtonTitle: TextConstants.cancel,
-                                                 secondButtonTitle: TextConstants.ok,
-                                                 firstUrl: nil,
-                                                 secondUrl: nil,
-                                                 firstAction: { popup in popup.close() },
-                                                 secondAction: { popup in
-                                                    popup.close()
-                                                    self?.showSpinnerIncludeNavigationBar()
-                                                    self?.saveResult(result: result)
-                })
-                self?.hideSpinnerIncludeNavigationBar()
-                UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+                self?.saveResult(result: result)
             }
         }
     }
@@ -160,38 +147,27 @@ final class OverlayStickerViewController: ViewController {
             
             if libraryIsAvailable == true {
                 
-                switch result {
-                case .success(let result):
-                    switch result.type {
-                    case .image:
-                        //TODO: Different logic for saving result
-                        self?.saveImageToLibrary(url: result.url) { isSavedInLibrary in
-                            print("Saved in library")
-                        }
-                        self?.uploadImage(contentURL: result.url) { isUploaded in
-                            print("uploaded")
-                            DispatchQueue.main.async {
-                                self?.hideSpinnerIncludeNavigationBar()
-                                self?.closeIconTapped { [weak self] in
-                                    self?.showCompletionPopUp()
-                                }
-                            }
-                        }
-        
-                    case .video:
-                        self?.saveVideoToLibrary(url: result.url) { isSavedInLibrary in
-                            print("Saved in library")
-                        }
-                        self?.uploadVideo(contentURL: result.url) { isUploaded in
-                            print("uploaded")
-                            DispatchQueue.main.async {
-                                self?.hideSpinnerIncludeNavigationBar()
-                                self?.closeIconTapped { [weak self] in
-                                    self?.showCompletionPopUp()
-                                }
-                            }
+                let commonCompletionHandler = { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.hideSpinnerIncludeNavigationBar()
+                        self?.close { [weak self] in
+                            self?.showCompletionPopUp()
                         }
                     }
+                }
+                
+                switch result {
+                case .success(let result):
+                    self?.saveLocalyItem(url: result.url, type: result.type, completion: { [weak self] saveResult in
+                        switch saveResult {
+                        case .success(let localItem):
+                            self?.uploadItem(item: localItem, completion: { uploadResult in
+                                commonCompletionHandler()
+                            })
+                        case .failed(_):
+                            commonCompletionHandler()
+                        }
+                    })
                     
                 case .failure(let error):
                     self?.hideSpinnerIncludeNavigationBar()
@@ -204,7 +180,11 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    @objc func closeIconTapped(completion: VoidHandler? = nil) {
+    @objc private func closeIconTapped() {
+        close()
+    }
+    
+    @objc private func close(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
             self.dismiss(animated: true, completion: completion)
         }
@@ -223,64 +203,7 @@ final class OverlayStickerViewController: ViewController {
         navigationBarWithGradientStyle()
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = applyButton
-        navigationController?.navigationController?.navigationBar.isTranslucent = false
-        self.extendedLayoutIncludesOpaqueBars = true
-    }
-    
-    private func uploadVideo(contentURL: URL, completion: @escaping (Bool) -> Void) {
-        
-        guard let videoData = try? Data(contentsOf: contentURL) else {
-            completion(false)
-            return
-        }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(videoData: videoData)
-        item.patchToPreview = PathForItem.remoteUrl(url)
-        
-        uploadService.uploadFileList(items: [item],
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        completion(true) },
-                                     fail: { errorResponce in
-                                        completion(false) },
-                                     returnedUploadOperation: {_ in })
-    }
-    
-    private func uploadImage(contentURL: URL, completion: @escaping (Bool) -> Void) {
-        
-        guard let imageData = try? Data(contentsOf: contentURL) else {
-            completion(false)
-            return
-        }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let item = WrapData(imageData: imageData)
-        item.patchToPreview = PathForItem.remoteUrl(url)
-        
-        uploadService.uploadFileList(items: [item],
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        completion(true) },
-                                     fail: { errorResponce in
-                                        completion(false) },
-                                     returnedUploadOperation: {_ in })
-    }
-    
-    private func saveVideoToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-        }) { saved, error in
-            if saved {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
+        navigationController?.navigationBar.isHidden = false
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
@@ -292,21 +215,8 @@ final class OverlayStickerViewController: ViewController {
         isFullScreen = !isFullScreen
         makeTopAndBottomBarsIsHidden(hide: isFullScreen)
     }
-    
-    private func saveImageToLibrary(url: URL, completion: @escaping (Bool) -> ()) {
-        
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: url)
-        }) { saved, error in
-            if saved {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    private func checkLibraryAccessStatus(completion: @escaping (Bool) -> Void) {
+
+    private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
         if PHPhotoLibrary.authorizationStatus() == .authorized {
             completion(true)
         } else {
@@ -338,5 +248,65 @@ extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDe
         overlayingStickerImageView.addAttachment(url: url, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
+    }
+}
+
+
+//MARK: - Saving
+
+extension OverlayStickerViewController {
+    private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+        uploadService.uploadFileList(items: [item],
+                                     uploadType: .syncToUse,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: {
+                                        completion(.success(item)) },
+                                     fail: { errorResponce in
+                                        completion(.failed(errorResponce)) },
+                                     returnedUploadOperation: {_ in })
+    }
+
+    private func saveLocalyItem(url: URL, type: CreateOverlayResultType, completion: @escaping ResponseHandler<WrapData>) {
+        LocalMediaStorage.default.saveToGallery(fileUrl: url, type: type.toPHMediaType) { [weak self] result in
+            switch result {
+            case .success(let placeholder):
+                guard
+                    let assetIdentifier = placeholder?.localIdentifier,
+                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject
+                else {
+                    assertionFailure()
+                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                self?.saveToDB(asset: asset, completion: completion)
+                
+            case .failed(_):
+                completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+            }
+        }
+    }
+    
+    private func saveToDB(asset: PHAsset, completion: @escaping ResponseHandler<WrapData>) {
+        let mediaItemService = MediaItemOperationsService.shared
+        LocalMediaStorage.default.assetsCache.append(list: [asset])
+        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let context = self.coreDataStack.newChildBackgroundContext
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
+                guard let savedLocalItem = items.first else {
+                    assertionFailure()
+                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                let wrapData = WrapData(mediaItem: savedLocalItem, asset: asset)
+                completion(.success(wrapData))
+            })
+        }
     }
 }

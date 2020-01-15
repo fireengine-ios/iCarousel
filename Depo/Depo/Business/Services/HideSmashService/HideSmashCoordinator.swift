@@ -19,11 +19,11 @@ protocol HideFuncRoutingProtocol: class {
 
 protocol HideFuncServiceProtocol {
     func startHideOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
-    func startHideSimpleOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
     func startHideAlbumsOperation(for albums: [AlbumItem], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
 protocol SmashServiceProtocol {
+    func smashConfirmPopUp(completion: @escaping VoidHandler)
     func smashSuccessed()
 }
 
@@ -31,7 +31,6 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
 
     enum Operation {
         case hide
-        case hideSimple
         case hideAlbums
         case smash
         
@@ -44,7 +43,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
  
         func confirmationMessage(itemsCount: Int) -> String {
             switch self {
-            case .hide, .hideSimple, .smash:
+            case .hide, .smash:
                 return itemsCount > 1 ? TextConstants.hideItemsWarningMessage : TextConstants.hideSinglePhotoCompletionAlertMessage
             case .hideAlbums:
                 return itemsCount > 1 ? TextConstants.hideAlbumsWarningMessage : TextConstants.hideSingleAlbumWarnigMessage
@@ -114,21 +113,6 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         showConfirmationPopUp()
     }
 
-    func startHideSimpleOperation(for items: [Item],
-                                  output: BaseAsyncOperationInteractorOutput?,
-                                  success: @escaping FileOperation,
-                                  fail: @escaping FailResponse)
-    {
-        self.items = items
-        self.output = output
-        self.success = success
-        self.fail = fail
-
-        operation = .hideSimple
-
-        showConfirmationPopUp()
-    }
-
     func startHideAlbumsOperation(for albums: [AlbumItem],
                                   output: BaseAsyncOperationInteractorOutput?,
                                   success: @escaping FileOperation,
@@ -148,7 +132,26 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         operation = .smash
         showSuccessPopUp()
     }
-
+    
+    func smashConfirmPopUp(completion: @escaping () -> Void) {
+        operation = .smash
+        let popUp = PopUpController.with(title: TextConstants.save,
+                                         message: TextConstants.smashPopUpMessage,
+                                         image: .error,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstUrl: nil,
+                                         secondUrl: nil,
+                                         firstAction: { popup in popup.close() },
+                                         secondAction: { popup in
+                                            popup.close()
+                                            completion()
+        })
+        
+        UIApplication.topController()?.present(popUp, animated: true, completion: nil)
+        
+    }
+    
     //MARK: Utility Methods (Private)
 
     // Hide
@@ -237,9 +240,6 @@ extension HideSmashCoordinator {
         case .smash:
             state = .smashCompleted
 
-        case .hideSimple:
-            state = .hideSimpleCompleted
-
         case .hideAlbums:
             state = .hideAlbumsCompleted
         }
@@ -277,29 +277,16 @@ extension HideSmashCoordinator {
     }
 
     private func hideAlbums() {
-        let wrappedSuccessOperation: FileOperationSucces = {
-            MediaItemOperationsService.shared.hide(self.albums, completion: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    self.hiddenSuccessfully()
-                }
-            })
-        }
-
-        hiddenService.hideAlbums(albums) { [weak self] result in
-            guard let self = self else {
-                return
+        fileService.hide(albums: albums, success: { [weak self] in
+            DispatchQueue.main.async {
+                self?.hiddenSuccessfully()
             }
-            switch result {
-            case .success(_):
-                wrappedSuccessOperation()
-            case .failed(let error):
-                self.fail?(.error(error))
-            }
-        }
+
+        }, fail: { [weak self] error in
+            let errorResponse = ErrorResponse.error(error)
+            self?.fail?(errorResponse)
+
+        })
     }
 
     private func getPermissions() {

@@ -15,7 +15,7 @@ final class FaceImageChangeCoverConfigurator {
         let presenter = FaceImageChangeCoverPresenter(sortedRule: .timeUp)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                   selectionModeTypes: [.createStory, .addToFavorites, .delete])
+                                                                   selectionModeTypes: [.createStory, .addToFavorites, .moveToTrash])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()

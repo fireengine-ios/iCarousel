@@ -39,6 +39,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         
+        interactor.output = self
+        
         reloadData(needShowSpinner: true)
     }
 
@@ -107,6 +109,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.itemsIsEmpty
+    }
+    
+    private func disableSelection() {
+        bottomBarManager.hide()
+        dataSource.cancelSelection()
     }
 }
 
@@ -227,12 +234,14 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         let selectedItems = dataSource.allSelectedItems
-        //TODO: - Start delete
+        disableSelection()
+        interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
         let selectedItems = dataSource.allSelectedItems
-        //TODO: - Start restore
+        disableSelection()
+        interactor.restore(items: selectedItems)
     }
 }
 
@@ -267,7 +276,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         } else {
             selectedItems = dataSource.allSelectedItems
         }
-        //TODO: - Start restore
+        
+        disableSelection()
+        interactor.restore(items: selectedItems)
     }
     
     func onThreeDotsManagerDelete(item: Item?) {
@@ -277,7 +288,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         } else {
             selectedItems = dataSource.allSelectedItems
         }
-        //TODO: - Start delete
+        
+        disableSelection()
+        interactor.delete(items: selectedItems)
     }
 }
 
@@ -360,6 +373,18 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         reloadData(needShowSpinner: false)
     }
     
+    func deleteItems(items: [Item]) {
+        remove(items: items)
+    }
+    
+    func deleteStories(items: [Item]) {
+        remove(items: items)
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]) {
+        remove(albums: albums)
+    }
+    
     private func remove(items: [Item]) {
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
@@ -383,5 +408,56 @@ extension TrashBinViewController: FaceImageItemsModuleOutput {
     
     func delete(item: Item) {
         remove(items: [item])
+    }
+}
+
+//MARK: - MoreFilesActionsInteractorOutput
+
+extension TrashBinViewController: MoreFilesActionsInteractorOutput {
+    
+    func outputView() -> Waiting? {
+        return self
+    }
+    
+    func asyncOperationSuccess() {
+        outputView()?.hideSpinner()
+    }
+    
+    func startAsyncOperation() {
+        outputView()?.showSpinner()
+    }
+    
+    func asyncOperationFail(errorMessage: String?) {
+        asyncOperationSuccess()
+        showMessage(errorMessage: errorMessage)
+    }
+    
+    func operationFinished(type: ElementTypes) {
+        asyncOperationSuccess()
+    }
+    
+    func operationFailed(type: ElementTypes, message: String) {
+        asyncOperationSuccess()
+        if type.isContained(in: ElementTypes.trashState) {
+            showMessage(errorMessage: message)
+        }
+    }
+    
+    func operationStarted(type: ElementTypes) {
+        startAsyncOperation()
+    }
+    
+    func showWrongFolderPopup() { }
+    func dismiss(animated: Bool) { }
+    func startAsyncOperationDisableScreen() { }
+    func completeAsyncOperationEnableScreen() { }
+    func startCancelableAsync(cancel: @escaping VoidHandler) { }
+    func completeAsyncOperationEnableScreen(errorMessage: String?) { }
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) { }
+    
+    private func showMessage(errorMessage: String?) {
+        if let message = errorMessage {
+            UIApplication.showErrorAlert(message: message)
+        }
     }
 }

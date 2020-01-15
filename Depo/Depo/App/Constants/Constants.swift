@@ -21,6 +21,8 @@ struct TextConstants {
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
+        static let wrongVideoData = "Wrong video data"
+        static let wrongImageData = "Wrong image data"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE
@@ -35,6 +37,8 @@ struct TextConstants {
         static let appName = appNameUppercased
         static let appNameGA = appNameCapitalized
         static let appNameMailSubject = appNameCapitalized + " / "
+        
+        static let dataProtectedAndDeviceLocked = "Data is protected and device is locked"
         
         private init() {}
     }
@@ -1639,9 +1643,19 @@ struct TextConstants {
     static let deletePopupText = NSLocalizedString("delete_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhidePopupSuccessTitle = NSLocalizedString("unhide_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhidePopupSuccessText = NSLocalizedString("unhide_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let deletePopupSuccessTitle = NSLocalizedString("delete_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteFromHiddenBinPopupSuccessTitle = NSLocalizedString("delete_from_hidden_bin_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteFromHiddenBinPopupSuccessText = NSLocalizedString("delete_from_hidden_bin_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteConfirmationPopupTitle = NSLocalizedString("delete_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteConfirmationPopupText = NSLocalizedString("delete_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupSuccessText = NSLocalizedString("delete_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let restoreConfirmationPopupTitle = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreConfirmationPopupText = NSLocalizedString("restore_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restorePopupSuccessText = NSLocalizedString("restore_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let trashBinAlbumSliderTitle = NSLocalizedString("trash_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinAlbumSliderEmpty = NSLocalizedString("trash_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmpty = NSLocalizedString("trash_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

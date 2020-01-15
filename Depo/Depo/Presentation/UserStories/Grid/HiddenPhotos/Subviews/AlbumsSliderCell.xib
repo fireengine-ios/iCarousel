@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdO-4I-POP">
-                        <rect key="frame" x="10" y="0.0" width="394" height="40"/>
+                        <rect key="frame" x="15" y="0.0" width="384" height="40"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qbz-tR-o2i">
-                        <rect key="frame" x="10" y="40" width="394" height="140"/>
+                        <rect key="frame" x="15" y="40" width="384" height="140"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="140" id="Jv3-RC-dyT"/>
@@ -44,13 +44,13 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="wdO-4I-POP" secondAttribute="trailing" constant="10" id="E2O-PN-9G2"/>
-                    <constraint firstItem="wdO-4I-POP" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="10" id="OJ3-ji-sL0"/>
+                    <constraint firstAttribute="trailing" secondItem="wdO-4I-POP" secondAttribute="trailing" constant="15" id="E2O-PN-9G2"/>
+                    <constraint firstItem="wdO-4I-POP" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="15" id="OJ3-ji-sL0"/>
                     <constraint firstItem="CSA-ye-utE" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="30" id="XFq-8d-ZEi"/>
                     <constraint firstAttribute="trailing" secondItem="CSA-ye-utE" secondAttribute="trailing" constant="30" id="XdY-9d-Apy"/>
                     <constraint firstAttribute="bottom" secondItem="qbz-tR-o2i" secondAttribute="bottom" id="ZPz-Cy-eNA"/>
-                    <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="10" id="c4f-cU-ofI"/>
-                    <constraint firstItem="qbz-tR-o2i" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="10" id="dlZ-7y-8tc"/>
+                    <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="15" id="c4f-cU-ofI"/>
+                    <constraint firstItem="qbz-tR-o2i" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="15" id="dlZ-7y-8tc"/>
                     <constraint firstItem="qbz-tR-o2i" firstAttribute="top" secondItem="pt6-Hs-1PA" secondAttribute="top" constant="40" id="pdD-vu-ck1"/>
                     <constraint firstAttribute="bottom" secondItem="CSA-ye-utE" secondAttribute="bottom" constant="20" symbolic="YES" id="tVY-d6-n32"/>
                     <constraint firstItem="qbz-tR-o2i" firstAttribute="top" secondItem="wdO-4I-POP" secondAttribute="bottom" id="tfY-Gt-eL6"/>

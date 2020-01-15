@@ -27,6 +27,14 @@ enum TabScreenIndex: Int {
     case documentsScreenIndex = 4
 }
 
+enum DocumentsScreenSegmentIndex: Int {
+    case allFiles = 0
+    case documents = 1
+    case music = 2
+    case favorites = 3
+    case trashBin = 4
+}
+
 final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
@@ -793,7 +801,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         SDWebImageManager.shared().saveImage(toCache: image, for: url)
         
-        let wrapData = WrapData(imageData: data)
+        let wrapData = WrapData(imageData: data, isLocal: true)
         /// usedUIImageJPEGRepresentation
         if let wrapDataName = wrapData.name {
             wrapData.name = wrapDataName + ".JPG"

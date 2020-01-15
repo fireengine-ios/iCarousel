@@ -27,7 +27,6 @@ protocol  WrapItemFileOperations {
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?)
     
-    
     // MARK: favourits
     
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
@@ -83,7 +82,6 @@ class WrapItemFileService: WrapItemFileOperations {
             MediaItemOperationsService.shared.deleteItems(files, completion: {
                 success?()
                 //TODO: - Need to replace deleteItems with moveToTrash for delegates
-                ItemOperationManager.default.deleteItems(items: files)
                 ItemOperationManager.default.didMoveToTrashItems(files)
             })
         }
@@ -145,6 +143,23 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
+    func hide(albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.hide(albums, completion: {
+                success?()
+                ItemOperationManager.default.didHideAlbums(albums)
+            })
+        }
+        
+        hiddenService.hideAlbums(albums) { response in
+            switch response {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
     
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         
@@ -370,10 +385,58 @@ class WrapItemFileService: WrapItemFileOperations {
     }
 }
 
-
-
 //MARK: - Trash
 extension WrapItemFileService {
+    
+    //MARK: - Delete Items
+    
+    func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteItems(items, completion: {
+                success?()
+                ItemOperationManager.default.deleteItems(items: items)
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.delete(items: remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deleteAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.albumsDeleted(albums: albums)
+        }
+        
+        let deletingAlbums = albums.filter { $0.readOnly == false }
+        guard !deletingAlbums.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.deleteAlbums(deletingAlbums) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    
     //MARK: - Smart Albums Trash
     
     @discardableResult
@@ -540,6 +603,22 @@ extension WrapItemFileService {
         }
     }
     
+    func deletePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deletePeople(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     
     //MARK: Places
     
@@ -575,6 +654,22 @@ extension WrapItemFileService {
         }
     }
     
+    func deletePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deletePlaces(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     //MARK: Things
     
     func unhideThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
@@ -600,6 +695,22 @@ extension WrapItemFileService {
         }
         
         hiddenService.putBackThings(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deleteThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            success?()
+            ItemOperationManager.default.deleteItems(items: items)
+        }
+        
+        hiddenService.deleteThings(items: items) { result in
             switch result {
             case .success(_):
                 wrappedSuccessOperation()

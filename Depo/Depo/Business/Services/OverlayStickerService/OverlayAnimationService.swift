@@ -53,27 +53,24 @@ final class OverlayAnimationService {
                 
                 var images = [UIImage]()
                 
-                if let newItem =  item.image as? YYImage {
+                guard let attachableImage = item.image else {
+                    assertionFailure()
+                    return
+                }
+                
+                if attachableImage.isGIF() {
                     
-                    guard
-                        let data = newItem.animatedImageData,
-                        let gifImage = UIImage.gifImageWithData(data: data as NSData),
-                        let imgs = gifImage.images
-                        else {
-                            assertionFailure()
-                            return
+                    guard let imgs = attachableImage.images else {
+                        assertionFailure()
+                        return
                     }
                     
                     images.append(contentsOf: imgs)
-                    
                 } else {
-                    if let newItem = item.image {
-                        images.append(newItem)
-                    }
+                    images.append(attachableImage)
                 }
                 
                 let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
-                
                 
                 let attachment = Attachment(origin: origin,
                                             size: CGSize(width: item.bounds.width,
@@ -102,12 +99,15 @@ final class OverlayAnimationService {
                     do {
                         let data =  try Data(contentsOf: url)
                         
-                        let tempUrl = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(resultName).mp4")
-                        
-                        GIF2MP4(data: data)?.convertAndExport(to: tempUrl, completion: {
-                        completion(.success(CreateOverlayStickersSuccessResult(url: tempUrl, type: .video)))
+                        GIF2MP4(data: data)?.convertAndExport(fileName: resultName, completion: { url in
+                            
+                            guard let url = url else {
+                                completion(.failure(.unknown))
+                                return
+                            }
+                            completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .video)))
                         })
-                    } catch let error{
+                    } catch {
                         completion(.failure(.unknown))
                     }
                 }
@@ -132,21 +132,31 @@ final class OverlayAnimationService {
     
     private func cutToNumberOfFrames (attachment: [UIImage], numberOfFrames: Int) -> [UIImage] {
         
-        if attachment.count == 1  {
+        if attachment.count == 1 && attachment.count == numberOfFrames  {
             return attachment
-        } else if attachment.count <= numberOfFrames {
-            self.numberOfFrames = attachment.count
         }
         
         var images = attachment
-        var index = 1
         
-        while images.count != numberOfFrames {
-            
-            images.remove(at: index)
-            index += 2
-            if images.count - 1 < index {
-                index = 1
+        if attachment.count > numberOfFrames {
+            var index = 1
+            while images.count != numberOfFrames {
+                images.remove(at: index)
+                index += 2
+                if images.count - 1 < index {
+                    index = 1
+                }
+            }
+        } else {
+            //If frames in animation < 3
+            var index = 0
+            let countOfIndexes = images.count - 1
+            while images.count != numberOfFrames {
+                images.append(images[index])
+                index += 1
+                if index > countOfIndexes {
+                    index = 0
+                }
             }
         }
         return images
@@ -249,30 +259,6 @@ final class OverlayAnimationService {
                 if CGImageDestinationFinalize(destination) {
                     completion(fileURL)
                 }
-            }
-        }
-    }
-    
-    private func generateGifWithDataReturn(photos: [UIImage], completion: @escaping (Data?) -> ()) {
-
-        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0 ]]  as CFDictionary
-        let frameProperties = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 0]] as CFDictionary
-        
-        let data = NSMutableData()
-    
-        if let destination = CGImageDestinationCreateWithData(data, kUTTypeGIF, photos.count, nil) {
-            CGImageDestinationSetProperties(destination, fileProperties)
-            for image in photos {
-                autoreleasepool{
-                    if let cgImage = image.cgImage {
-                        CGImageDestinationAddImage(destination, cgImage, frameProperties)
-                    }
-                }
-            }
-            
-            if CGImageDestinationFinalize(destination) {
-                let data = data as Data
-                completion(data)
             }
         }
     }
