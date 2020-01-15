@@ -758,9 +758,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: false)
         dismissBottomBar(animated: true)
         view.stopSelection()
-        if type.isContained(in: [.removeAlbum, .moveToTrash]) {
-            dismissBottomBar(animated: true)
-        }
     }
     
     func operationFailed(withType type: ElementTypes) {
