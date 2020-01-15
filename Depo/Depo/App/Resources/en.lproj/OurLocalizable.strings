@@ -1430,6 +1430,9 @@
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
 
+"delete_from_hidden_bin_popup_success_title" = "Delete";
+"delete_from_hidden_bin_popup_success_text" = "Are you sure?";
+
 "delete_confirmation_popup_title" = "Delete permanently";
 "delete_confirmation_popup_text" = "Are you sure?";
 "delete_popup_success_text" = "Deleted permanently";

@@ -334,8 +334,8 @@ extension HiddenPhotosViewController {
     }
     
     private func showDeleteSuccessPopup() {
-        let popup = PopUpController.with(title: TextConstants.deletePopupSuccessTitle,
-                                         message: TextConstants.deletePopupSuccessText,
+        let popup = PopUpController.with(title: TextConstants.deleteFromHiddenBinPopupSuccessTitle,
+                                         message: TextConstants.deleteFromHiddenBinPopupSuccessText,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         
