@@ -24,7 +24,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.scrollablePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: .List,
@@ -63,7 +63,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.importFromSpotify])
         viewController.scrollablePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
@@ -91,7 +91,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.segmentImage = .documents
         
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
@@ -118,7 +118,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
@@ -150,7 +150,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.segmentImage = .favorites
         
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
@@ -184,7 +184,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.status = status
         
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
 
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()

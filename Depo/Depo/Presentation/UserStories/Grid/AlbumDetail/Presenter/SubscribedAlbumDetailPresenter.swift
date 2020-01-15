@@ -43,4 +43,11 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
         dataSource.deleteItems(items: items)
     }
 
+    func didUnhideItems(_ items: [WrapData]) {
+        guard let router = router as? AlbumDetailRouter else {
+            return
+        }
+        
+        router.back()
+    }
 }

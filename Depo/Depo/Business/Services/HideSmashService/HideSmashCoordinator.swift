@@ -19,7 +19,6 @@ protocol HideFuncRoutingProtocol: class {
 
 protocol HideFuncServiceProtocol {
     func startHideOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
-    func startHideSimpleOperation(for items: [Item], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
     func startHideAlbumsOperation(for albums: [AlbumItem], output: BaseAsyncOperationInteractorOutput?, success: @escaping FileOperation, fail: @escaping FailResponse)
 }
 
@@ -32,7 +31,6 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
 
     enum Operation {
         case hide
-        case hideSimple
         case hideAlbums
         case smash
         
@@ -45,7 +43,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
  
         func confirmationMessage(itemsCount: Int) -> String {
             switch self {
-            case .hide, .hideSimple, .smash:
+            case .hide, .smash:
                 return itemsCount > 1 ? TextConstants.hideItemsWarningMessage : TextConstants.hideSinglePhotoCompletionAlertMessage
             case .hideAlbums:
                 return itemsCount > 1 ? TextConstants.hideAlbumsWarningMessage : TextConstants.hideSingleAlbumWarnigMessage
@@ -111,21 +109,6 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         self.fail = fail
 
         operation = .hide
-
-        showConfirmationPopUp()
-    }
-
-    func startHideSimpleOperation(for items: [Item],
-                                  output: BaseAsyncOperationInteractorOutput?,
-                                  success: @escaping FileOperation,
-                                  fail: @escaping FailResponse)
-    {
-        self.items = items
-        self.output = output
-        self.success = success
-        self.fail = fail
-
-        operation = .hideSimple
 
         showConfirmationPopUp()
     }
@@ -256,9 +239,6 @@ extension HideSmashCoordinator {
 
         case .smash:
             state = .smashCompleted
-
-        case .hideSimple:
-            state = .hideSimpleCompleted
 
         case .hideAlbums:
             state = .hideAlbumsCompleted

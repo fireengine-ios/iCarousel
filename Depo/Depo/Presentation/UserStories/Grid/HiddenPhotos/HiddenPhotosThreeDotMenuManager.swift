@@ -24,7 +24,7 @@ final class HiddenPhotosThreeDotMenuManager {
     
     func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
         if isSelectingMode {
-            showAlertSheet(with: [.unhide, .moveToTrash], sender: sender)
+            showAlertSheet(with: ElementTypes.hiddenState, sender: sender)
         } else {
             showAlertSheet(with: [.select], sender: sender)
         }

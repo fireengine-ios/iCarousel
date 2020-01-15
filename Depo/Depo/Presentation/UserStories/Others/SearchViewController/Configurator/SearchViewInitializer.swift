@@ -26,7 +26,7 @@ class SearchViewInitializer {
             showGridListButton: true
         )
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         configurator.configure(viewController: viewController,
