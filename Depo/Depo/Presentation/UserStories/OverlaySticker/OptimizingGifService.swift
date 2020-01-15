@@ -15,10 +15,10 @@ enum OptimizationType {
 
 final class OptimizingGifService {
         
-    func optimizeImage(data: Data, otimazeFor: OptimizationType) -> UIImage? {
+    func optimizeImage(data: Data, optimizeFor: OptimizationType) -> UIImage? {
         
-        let percentOfFrames = otimazeFor == .sticker ? 20.0 : 80.0
-        let size = otimazeFor == .sticker ? CGSize(width: 300, height: 300) : CGSize(width: 50, height: 50)
+        let percentOfFrames = optimizeFor == .sticker ? 20.0 : 80.0
+        let size = optimizeFor == .sticker ? CGSize(width: 300, height: 300) : CGSize(width: 50, height: 50)
         
         guard let source: CGImageSource = CGImageSourceCreateWithData(data as CFData, nil), CGImageSourceGetCount(source) > 1 else {
             return UIImage(data: data)

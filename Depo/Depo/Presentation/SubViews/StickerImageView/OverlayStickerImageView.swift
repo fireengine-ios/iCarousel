@@ -152,7 +152,7 @@ final class OverlayStickerImageView: UIImageView {
                 return
             }
 
-            let img = OptimizingGifService().optimizeImage(data: imageData, otimazeFor: .sticker)
+            let img = OptimizingGifService().optimizeImage(data: imageData, optimizeFor: .sticker)
             
             DispatchQueue.toMain {
                 
