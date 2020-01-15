@@ -538,7 +538,7 @@ final class HiddenService {
     }
     
     private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
-        let path = RouteRequests.FileSystem.delete
+        let path = RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.delete
         return SessionManager
         .customDefault
         .request(path,

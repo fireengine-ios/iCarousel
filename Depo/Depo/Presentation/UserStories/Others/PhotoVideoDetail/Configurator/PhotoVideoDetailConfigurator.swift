@@ -18,7 +18,7 @@ class PhotoVideoDetailModuleConfigurator {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             configure(viewController: viewController,
                       bottomBarConfig: bottomBarConfig,
-                      alertSheetExcludeTypes: [.delete],
+                      alertSheetExcludeTypes: [.moveToTrash],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
                       selecetedItem: selecetedItem,
                       allItems: allItems, status: status, viewType: .details)
@@ -38,7 +38,7 @@ class PhotoVideoDetailModuleConfigurator {
             configure(viewController: viewController,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
-                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete],
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
                       status: status, viewType: .insideAlbum)
         }
@@ -57,7 +57,7 @@ class PhotoVideoDetailModuleConfigurator {
             configure(viewController: viewController,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
-                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.deleteFaceImage],
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
                       status: status, viewType: .insideFIRAlbum)
         }

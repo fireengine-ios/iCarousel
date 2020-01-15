@@ -127,7 +127,6 @@ class BaseFilesGreedModuleConfigurator {
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-            
             let botvarBarVC = bottomBarVCmodule.setupModule(config: barConfig, settablePresenter: BottomSelectionTabBarPresenter())
             
             viewController.editingTabBar = botvarBarVC

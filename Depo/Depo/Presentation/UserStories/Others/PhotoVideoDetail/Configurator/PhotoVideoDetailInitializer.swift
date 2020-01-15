@@ -17,7 +17,7 @@ enum DetailViewType {
 class PhotoVideoDetailModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName: String, selectedItem: Item, allItems: [Item], status: ItemStatus) -> UIViewController {
-        let elementsConfig = ElementTypes.elementsConfig(for: selectedItem, status: status, viewType: .details)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .details)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)
@@ -33,7 +33,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> UIViewController {
-        let elementsConfig = ElementTypes.elementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)
@@ -51,7 +51,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
-        let elementsConfig = ElementTypes.elementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)

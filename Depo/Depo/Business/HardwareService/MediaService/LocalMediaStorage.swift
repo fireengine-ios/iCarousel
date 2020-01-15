@@ -451,9 +451,27 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
      */
     func appendToAlbum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData? = nil, success: FileOperation?, fail: FailResponse?) {
         debugLog("LocalMediaStorage appendToAlboum")
+        
+        saveToGallery(fileUrl: fileUrl, type: type) { [weak self] response in
+            switch response {
+            case .success(let placeholder):
+                if let album = album, let assetPlaceholder = placeholder {
+                    self?.add(asset: assetPlaceholder.localIdentifier, to: album)
+                    success?()
+                } else if let item = item, let assetIdentifier = placeholder?.localIdentifier {
+                    self?.merge(asset: assetIdentifier, with: item, success: success, fail: fail)
+                }
+            case .failed(let error):
+                fail?(.error(error))
+            }
+        }
+    }
+    
+    func saveToGallery(fileUrl: URL, type: PHAssetMediaType, handler: @escaping ResponseHandler<PHObjectPlaceholder?>) {
+        debugLog("LocalMediaStorage saveToGallery")
 
         guard photoLibraryIsAvailible() else {
-            fail?(.failResponse(nil))
+            handler(.failed(ErrorResponse.string("Photo libraryr is unavailable")))
             return
         }
         
@@ -468,24 +486,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
                     assetPlaceholder = request?.placeholderForCreatedAsset
                 default:
-                fail?(.string("Only for photo & Video"))
+                    handler(.failed(ErrorResponse.string("Only for photo & Video")))
             }
             
         }, completionHandler: { [weak self] status, error in
             self?.passcodeStorage.systemCallOnScreen = false
             
-            if status {
-                if let album = album, let assetPlaceholder = assetPlaceholder {
-                    self?.add(asset: assetPlaceholder.localIdentifier, to: album)
-                    success?()
-                } else if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    self?.merge(asset: assetIdentifier, with: item, success: success, fail: fail)
-                }
-            } else {
-                fail?(.error(error!))
+            if let error = error {
+                handler(.failed(ErrorResponse.error(error)))
+                return
             }
+            
+            handler(.success(assetPlaceholder))
         })
-
     }
     
     var addAssetToCollectionQueue: OperationQueue = {

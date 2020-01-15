@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum UniversalViewType {
+    case bottomBar
+    case actionSheet
+    case selectionMode
+}
+
 class AlbumDetailModuleInitializer: NSObject {
     
     static var baseSortTypes: [MoreActionsConfig.SortRullesType] {
@@ -23,21 +29,11 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
-        
-        let configurator = BaseFilesGreedModuleConfigurator()
-        let elementsConfig: [ElementTypes]
-        
-        switch status {
-        case .hidden:
-            elementsConfig = [.unhideAlbumItems, .moveToTrash]
-        case .trashed:
-            elementsConfig = [.restore, .delete]
-        default:
-            elementsConfig = [.share, .download, .addToAlbum, .hide, .moveToTrash]
-        }
-        
-        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
-                                                      style: .default, tintColor: nil)
+        viewController.mainTitle = album.name ?? ""
+        viewController.parentUUID = album.uuid
+
+        let elementsConfig = ElementTypes.albumElementsConfig(for: status, viewType: .bottomBar)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .default, tintColor: nil)
         
         let presenter = SubscribedAlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
@@ -50,8 +46,6 @@ class AlbumDetailModuleInitializer: NSObject {
         item.uuid = album.uuid
         interactor.folder = item
         
-        viewController.parentUUID = album.uuid
-        
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: type,
             availableSortTypes: baseSortTypes,
@@ -59,29 +53,13 @@ class AlbumDetailModuleInitializer: NSObject {
             availableFilter: false,
             showGridListButton: false
         )
-        
-        let alertFilesActionsTypes: [ElementTypes]
-        let selectionModeTypes: [ElementTypes]
-        
-        switch status {
-        case .hidden:
-            alertFilesActionsTypes = [.unhide, .moveToTrash]
-            selectionModeTypes = [.unhide, .moveToTrash]
-        case .trashed:
-            alertFilesActionsTypes = [.restore, .delete]
-            selectionModeTypes = [.restore, .delete]
-        default:
-            if Device.isTurkishLocale {
-                selectionModeTypes = [.createStory, .print, .removeFromAlbum]
-            } else {
-                selectionModeTypes = [.createStory, .removeFromAlbum]
-            }
-            alertFilesActionsTypes = [.shareAlbum, .download, .completelyMoveToTrash, .removeAlbum, .albumDetails, .hideAlbums, .select]
-        }
-        
+
+        let alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheet)
+        let selectionModeTypes = ElementTypes.albumElementsConfig(for: status, viewType: .selectionMode)
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
                                                                    selectionModeTypes: selectionModeTypes)
         
+        let configurator = BaseFilesGreedModuleConfigurator()
         configurator.configure(viewController: viewController,
                                fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig,
@@ -90,9 +68,6 @@ class AlbumDetailModuleInitializer: NSObject {
                                interactor: interactor,
                                alertSheetConfig: alertSheetConfig,
                                topBarConfig: gridListTopBarConfig)
-        
-        viewController.mainTitle = album.name ?? ""
-        
         return viewController
     }
 }

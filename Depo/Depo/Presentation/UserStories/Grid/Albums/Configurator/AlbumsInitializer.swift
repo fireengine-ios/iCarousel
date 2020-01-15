@@ -21,7 +21,7 @@ class AlbumsModuleInitializer: NSObject {
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .hideAlbums, .completelyMoveToTrash],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download] + ElementTypes.activeState,
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()

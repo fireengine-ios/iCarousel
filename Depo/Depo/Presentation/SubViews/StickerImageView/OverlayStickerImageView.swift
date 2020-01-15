@@ -18,6 +18,15 @@ enum AttachedEntityType {
 enum CreateOverlayResultType {
     case image
     case video
+    
+    var toPHMediaType: PHAssetMediaType {
+        switch self {
+        case .image:
+            return .image
+        case .video:
+            return .video
+        }
+    }
 }
 
 struct CreateOverlayStickersSuccessResult {

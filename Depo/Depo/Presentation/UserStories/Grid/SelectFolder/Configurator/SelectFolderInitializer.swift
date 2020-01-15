@@ -15,7 +15,7 @@ class SelectFolderModuleInitializer: NSObject {
         let viewController = SelectFolderViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         let presentor = SelectFolderPresenter()
