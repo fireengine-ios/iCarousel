@@ -53,27 +53,24 @@ final class OverlayAnimationService {
                 
                 var images = [UIImage]()
                 
-                if let newItem =  item.image as? YYImage {
+                guard let attachableImage = item.image else {
+                    assertionFailure()
+                    return
+                }
+                
+                if attachableImage.isGIF() {
                     
-                    guard
-                        let data = newItem.animatedImageData,
-                        let gifImage = UIImage.gifImageWithData(data: data as NSData),
-                        let imgs = gifImage.images
-                        else {
-                            assertionFailure()
-                            return
+                    guard let imgs = attachableImage.images else {
+                        assertionFailure()
+                        return
                     }
                     
                     images.append(contentsOf: imgs)
-                    
                 } else {
-                    if let newItem = item.image {
-                        images.append(newItem)
-                    }
+                    images.append(attachableImage)
                 }
                 
                 let frames = cutToNumberOfFrames(attachment: images, numberOfFrames: numberOfFrames)
-                
                 
                 let attachment = Attachment(origin: origin,
                                             size: CGSize(width: item.bounds.width,
@@ -249,30 +246,6 @@ final class OverlayAnimationService {
                 if CGImageDestinationFinalize(destination) {
                     completion(fileURL)
                 }
-            }
-        }
-    }
-    
-    private func generateGifWithDataReturn(photos: [UIImage], completion: @escaping (Data?) -> ()) {
-
-        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0 ]]  as CFDictionary
-        let frameProperties = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 0]] as CFDictionary
-        
-        let data = NSMutableData()
-    
-        if let destination = CGImageDestinationCreateWithData(data, kUTTypeGIF, photos.count, nil) {
-            CGImageDestinationSetProperties(destination, fileProperties)
-            for image in photos {
-                autoreleasepool{
-                    if let cgImage = image.cgImage {
-                        CGImageDestinationAddImage(destination, cgImage, frameProperties)
-                    }
-                }
-            }
-            
-            if CGImageDestinationFinalize(destination) {
-                let data = data as Data
-                completion(data)
             }
         }
     }

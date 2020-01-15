@@ -49,6 +49,7 @@ final class OverlayStickerViewController: ViewController {
         super.viewDidLoad()
         selectStickerType(type: .gif)
         setupImage()
+        navigationController?.navigationBar.isHidden = true
         
         self.view.backgroundColor = .black
         statusBarColor = .black
@@ -82,10 +83,13 @@ final class OverlayStickerViewController: ViewController {
             showAccessAlert()
             return
         }
-        
-        showSpinnerIncludeNavigationBar()
-        
-        smashCoordinator?.smashConfirmPopUp {
+
+        smashCoordinator?.smashConfirmPopUp { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
+            
             self.showSpinnerIncludeNavigationBar()
             self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
                 self?.saveResult(result: result)
@@ -199,8 +203,7 @@ final class OverlayStickerViewController: ViewController {
         navigationBarWithGradientStyle()
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = applyButton
-        navigationController?.navigationController?.navigationBar.isTranslucent = false
-        self.extendedLayoutIncludesOpaqueBars = true
+        navigationController?.navigationBar.isHidden = false
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {

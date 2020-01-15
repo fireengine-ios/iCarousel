@@ -156,15 +156,16 @@ final class OverlayStickerImageView: UIImageView {
             
             guard
                 let self = self,
-                let imageData = data,
-                let image = YYImage(data: imageData)
+                let imageData = data
             else {
                 return
             }
+
+            let img = OptimizingGifService().optimizeImage(data: imageData, optimizeFor: .sticker)
             
             DispatchQueue.toMain {
                 
-                let imageView = YYAnimatedImageView(image: image)
+                let imageView = YYAnimatedImageView(image: img)
             
                 imageView.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.4,
                                               height: UIScreen.main.bounds.width * 0.4)
@@ -193,9 +194,10 @@ final class OverlayStickerImageView: UIImageView {
             
             DispatchQueue.toMain {
                 let imageView = UIImageView(image: image)
-                imageView.center = self.center
+                
                 imageView.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.4,
                                               height: UIScreen.main.bounds.width * 0.4)
+                imageView.center = self.center
                 
                 self.addSubview(imageView)
                 self.attachments.append(imageView)
@@ -366,19 +368,6 @@ final class OverlayStickerImageView: UIImageView {
         addGestureRecognizer(rotationGesture)
     }
     
-    private func isRaisedMovement(previousPosition: CGFloat, newPosition: CGFloat) -> Bool {
-        return previousPosition > newPosition ? false : true
-    }
-    
-    private func getMaxStickerSide() -> CGFloat {
-        if self.frame.width > self.frame.height {
-            return self.frame.height / 2
-        } else if self.frame.width < self.frame.height  {
-            return self.frame.width / 2
-        } else {
-            return self.frame.height / 2
-        }
-    }
 }
 
 extension OverlayStickerImageView: UIGestureRecognizerDelegate {
