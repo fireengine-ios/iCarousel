@@ -236,7 +236,6 @@ final class OverlayStickerViewController: ViewController {
             self.navigationController?.navigationBar.isHidden = hide
             self.stickersView.isHidden = hide
         }
-        
     }
     
     @objc private func actionFullscreenTapGesture() {
