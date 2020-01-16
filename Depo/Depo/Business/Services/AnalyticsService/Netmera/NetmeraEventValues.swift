@@ -78,7 +78,7 @@ enum NetmeraEventValues {
         var text: String {
             switch self {
             case .verified:
-                return "Verified""
+                return "Verified"
             case .notVerified:
                 return "NotVerified"
             }

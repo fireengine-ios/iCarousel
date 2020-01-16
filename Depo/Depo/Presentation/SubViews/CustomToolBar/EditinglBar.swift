@@ -191,6 +191,32 @@ enum ElementTypes {
         
         return result
     }
+    
+    static func filesInFolderElementsConfig(for status: ItemStatus, viewType: UniversalViewType) -> [ElementTypes] {
+        var result: [ElementTypes]
+
+        switch status {
+        case .hidden:
+            result = ElementTypes.hiddenState
+        case .trashed:
+            if viewType == .actionSheet {
+                result = [.info] + ElementTypes.trashState
+            } else {
+                result = ElementTypes.trashState
+            }
+        default:
+            switch viewType {
+            case .bottomBar:
+                result = [.share, .move, .moveToTrash]
+            case .actionSheet:
+                result = [.select]
+            case .selectionMode:
+                result = [.rename]
+            }
+        }
+
+        return result
+    }
 }
 
 typealias AnimationBlock = () -> Void

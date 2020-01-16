@@ -292,7 +292,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if selectedItems.count <= allowedNumberLimit {
-                            self.interactor.moveToTrash(item: selectedItems)
+                            self.interactor.moveToTrash(item: currentItems)
                             self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
@@ -315,14 +315,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .unhide:
                     action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
-                        self?.interactor.unhide(items: selectedItems)
+                        self?.interactor.unhide(items: currentItems)
                     }
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { [weak self] _ in
-                        self?.interactor.restore(items: selectedItems)
+                        self?.interactor.restore(items: currentItems)
                     })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

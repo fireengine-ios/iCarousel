@@ -476,7 +476,7 @@ class FileService: BaseRequestService {
                         try FileManager.default.moveItem(at: location, to: destination)
                     } catch {
                         
-                        fail?(.string("Downoad move file error"))
+                        fail?(.string("Download move file error"))
                         return
                     }
                     

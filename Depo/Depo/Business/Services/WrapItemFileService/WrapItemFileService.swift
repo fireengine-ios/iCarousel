@@ -78,10 +78,8 @@ class WrapItemFileService: WrapItemFileOperations {
     func moveToTrash(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
         let successOperation: FileOperationSucces = {
-            //TODO: - Need change status to TRASHED
             MediaItemOperationsService.shared.deleteItems(files, completion: {
                 success?()
-                //TODO: - Need to replace deleteItems with moveToTrash for delegates
                 ItemOperationManager.default.didMoveToTrashItems(files)
             })
         }

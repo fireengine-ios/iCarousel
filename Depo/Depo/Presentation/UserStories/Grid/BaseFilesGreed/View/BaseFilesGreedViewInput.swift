@@ -8,6 +8,8 @@
 
 protocol BaseFilesGreedViewInput: class {
 
+    var status: ItemStatus { get set }
+    
     func setupInitialState()
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary()

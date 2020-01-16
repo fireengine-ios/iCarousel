@@ -140,6 +140,21 @@ final class OverlayStickerViewController: ViewController {
     private func showCompletionPopUp() {
         smashCoordinator?.smashSuccessed()
     }
+    
+    
+    private func showPhotoVideoPreview(item: WrapData?) {
+        guard let item = item else {
+            return
+        }
+
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
+        
+        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        let nController = NavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
+        
+        showCompletionPopUp()
+    }
 
     private func saveResult(result: CreateOverlayStickersResult) {
         
@@ -147,11 +162,15 @@ final class OverlayStickerViewController: ViewController {
             
             if libraryIsAvailable == true {
                 
-                let commonCompletionHandler = { [weak self] in
+                let commonCompletionHandler: (_ remoteItem: WrapData?)->() = { [weak self] remoteItem in
                     DispatchQueue.main.async {
                         self?.hideSpinnerIncludeNavigationBar()
                         self?.close { [weak self] in
-                            self?.showCompletionPopUp()
+                            if let itemToShow = remoteItem {
+                                RouterVC().navigationController?.dismiss(animated: false, completion: {
+                                    self?.showPhotoVideoPreview(item: itemToShow)
+                                })
+                            }
                         }
                     }
                 }
@@ -162,10 +181,16 @@ final class OverlayStickerViewController: ViewController {
                         switch saveResult {
                         case .success(let localItem):
                             self?.uploadItem(item: localItem, completion: { uploadResult in
-                                commonCompletionHandler()
+                                switch uploadResult {
+                                case .success(let remote):
+                                    remote?.patchToPreview = localItem.patchToPreview
+                                    commonCompletionHandler(remote)
+                                case .failed(_):
+                                    commonCompletionHandler(nil)
+                                }
                             })
                         case .failed(_):
-                            commonCompletionHandler()
+                            commonCompletionHandler(nil)
                         }
                     })
                     
@@ -186,7 +211,7 @@ final class OverlayStickerViewController: ViewController {
     
     @objc private func close(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
-            self.dismiss(animated: true, completion: completion)
+            self.dismiss(animated: false, completion: completion)
         }
     }
     
@@ -207,8 +232,11 @@ final class OverlayStickerViewController: ViewController {
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
-        navigationController?.setNavigationBarHidden(hide, animated: false)
-        stickersView.isHidden = hide
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.navigationController?.navigationBar.isHidden = hide
+            self.stickersView.isHidden = hide
+        }
+        
     }
     
     @objc private func actionFullscreenTapGesture() {
@@ -255,16 +283,19 @@ extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDe
 //MARK: - Saving
 
 extension OverlayStickerViewController {
-    private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+    private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData?>) {
+        var uploadOperation: UploadOperation?
         uploadService.uploadFileList(items: [item],
                                      uploadType: .syncToUse,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: {
-                                        completion(.success(item)) },
+                                        completion(.success(uploadOperation?.outputItem)) },
                                      fail: { errorResponce in
                                         completion(.failed(errorResponce)) },
-                                     returnedUploadOperation: {_ in })
+                                     returnedUploadOperation: { operations in
+                                        uploadOperation = operations?.first
+        })
     }
 
     private func saveLocalyItem(url: URL, type: CreateOverlayResultType, completion: @escaping ResponseHandler<WrapData>) {
