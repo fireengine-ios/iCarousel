@@ -18,6 +18,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
+        interactor.trackScreen()
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
             self?.showPasscodeIfNeed()
         }

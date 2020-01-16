@@ -310,6 +310,7 @@ class LoginInteractor: LoginInteractorInput {
     }
         
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.LoginScreen())
         analyticsService.logScreen(screen: .loginScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
     }

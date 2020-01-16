@@ -25,6 +25,40 @@ extension NetmeraEvents.Screens {
 //        }
     }
     
+    final class WelcomePage: NetmeraScreenEventTemplate {
+        
+        private var welomePageKey = ""
+        
+        override var key: String {
+            return welomePageKey
+        }
+        
+        convenience init(pageNum: Int) {
+            
+            self.init()
+            
+            switch pageNum {
+            case 1:
+                self.welomePageKey = "wly"
+            case 2:
+                self.welomePageKey = "koi"
+            case 3:
+                self.welomePageKey = "wow"
+            case 4:
+                self.welomePageKey = "rbs"
+            case 5:
+                self.welomePageKey = "ujh"
+            case 6:
+                self.welomePageKey = "xxz"
+            case 7:
+                self.welomePageKey = "vbt"
+            default:
+                break
+            }
+
+        }
+    }
+    
     final class PhotoPickAnalysisDetailScreen: NetmeraEvent {
         
         private let kPhotoPickAnalysisDetailScreenKey = "hup"

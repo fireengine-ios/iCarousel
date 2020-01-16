@@ -40,6 +40,10 @@ class SplashInteractor: SplashInteractorInput {
         reachabilityService.delegates.add(self)
     }
     
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SplashPageScreen())
+    }
+    
     func startLoginInBackground() {
         if isTryingToLogin {
             return

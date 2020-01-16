@@ -26,6 +26,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SignupScreen())
         analyticsService.logScreen(screen: .signUpScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpScreen)
     }

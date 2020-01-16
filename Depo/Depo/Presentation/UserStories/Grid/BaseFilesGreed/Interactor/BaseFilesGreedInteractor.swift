@@ -236,9 +236,11 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 case .video:
                     trackPhotoOrVideo(photo: false)
                 case .audio:
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.MusicScreen())
                     analyticsManager.logScreen(screen: .music)
                     analyticsManager.trackDimentionsEveryClickGA(screen: .music)
                 case .allDocs:
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DocumentsScreen())
                     analyticsManager.logScreen(screen: .documents)
                     analyticsManager.trackDimentionsEveryClickGA(screen: .documents)
                 default:
@@ -246,12 +248,14 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             case .favoriteStatus(let favoriteStatus):
                 if favoriteStatus == .favorites {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FavoritesScreen())
                     analyticsManager.logScreen(screen: .favorites)
                     analyticsManager.trackDimentionsEveryClickGA(screen: .favorites)
                 }
             case .localStatus(let localStatus):
                 if localStatus == .nonLocal,
                     remoteItems is AllFilesService {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.AllFilesScreen())
                     analyticsManager.logScreen(screen: .allFiles)
                     analyticsManager.trackDimentionsEveryClickGA(screen: .allFiles)
                 }
@@ -271,6 +275,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     private func trackPhotoOrVideo(photo: Bool) {
         if remoteItems is PhotoAndVideoService {
+            AnalyticsService.sendNetmeraEvent(event: photo ? NetmeraEvents.Screens.PhotosScreen() : NetmeraEvents.Screens.VideosScreen())
             analyticsManager.logScreen(screen: photo ? .photos : .videos)
             analyticsManager.trackDimentionsEveryClickGA(screen: photo ? .photos : .videos)
         }
