@@ -178,6 +178,20 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .delete:
+                MenloworksAppEvents.onDeleteClicked()
+                
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.delete(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .restore:
+                self.interactor.restore(items: selectedItems)
+                self.basePassingPresenter?.stopModeSelected()
             case .download:
                 MenloworksAppEvents.onDownloadClicked()
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits

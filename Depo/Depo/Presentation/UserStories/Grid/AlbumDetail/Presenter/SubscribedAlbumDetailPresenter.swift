@@ -20,6 +20,15 @@ final class SubscribedAlbumDetailPresenter: AlbumDetailPresenter {
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
+    override func didDelete(items: [BaseDataSourceItem]) {
+        super.didDelete(items: items)
+    
+        //return to albums list if this album is empty
+        if dataSource.allObjectIsEmpty() {
+            albumDetailModuleOutput?.onAlbumDeleted()
+            back()
+        }
+    }
 }
 
 //MARK: - ItemOperationManagerViewProtocol related
@@ -44,10 +53,34 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        guard let router = router as? AlbumDetailRouter else {
-            return
-        }
-        
-        router.back()
+        dataSource.deleteItems(items: items)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        dataSource.deleteItems(items: items)
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        dataSource.deleteItems(items: items)
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        back()
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
+        back()
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        back()
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        back()
+    }
+    
+    private func back() {
+        (router as? AlbumDetailRouter)?.back()
     }
 }

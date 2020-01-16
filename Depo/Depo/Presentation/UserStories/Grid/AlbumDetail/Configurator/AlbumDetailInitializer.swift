@@ -37,6 +37,7 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let presenter = SubscribedAlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
+        presenter.albumDetailModuleOutput = moduleOutput as? AlbumDetailModuleOutput
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album

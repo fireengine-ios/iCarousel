@@ -278,8 +278,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func moveToTrash(item: [BaseDataSourceItem]) {
         if let items = item as? [Item] {
             moveToTrashItems(items: items.filter({ !$0.isLocalItem }))
-        } else if let albumbs = item as? [AlbumItem] {
-            moveToTrashAlbumbs(albumbs: albumbs)
+        } else if let albums = item as? [AlbumItem] {
+            moveToTrashAlbums(albums: albums)
         }
     }
     
@@ -1030,14 +1030,14 @@ extension MoreFilesActionsInteractor {
         router.hideSpiner()
     }
     
-    private func moveToTrashAlbumbs(albumbs: [AlbumItem]) {
+    private func moveToTrashAlbums(albums: [AlbumItem]) {
         let okHandler: VoidHandler = { [weak self] in
-            self?.output?.operationStarted(type: .removeFromAlbum)
+            self?.output?.operationStarted(type: .moveToTrash)
             
-            self?.albumService.moveToTrash(albums: albumbs, success: { [weak self] deletedAlbums in
+            self?.albumService.moveToTrash(albums: albums, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
-                    self?.output?.operationFinished(type: .removeAlbum)
-                    ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+                    self?.output?.operationFinished(type: .moveToTrash)
+                    ItemOperationManager.default.didMoveToTrashAlbums(albums)
                     
                     let controller = PopUpController.with(title: TextConstants.success,
                                                           message: TextConstants.moveToTrashAlbumsSuccess,
