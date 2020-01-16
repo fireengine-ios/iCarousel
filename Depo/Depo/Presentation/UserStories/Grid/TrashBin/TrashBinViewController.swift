@@ -38,6 +38,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         setupEmptyView()
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
+        floatingButtonsArray.append(contentsOf: [.upload])
         
         interactor.output = self
         
