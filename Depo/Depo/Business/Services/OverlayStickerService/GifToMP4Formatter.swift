@@ -61,7 +61,6 @@ final class GIF2MP4 {
         videoWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: avOutputSettings)
         
         do {
-            
             if fileManager.fileExists(atPath: outputURL.path) {
                  try fileManager.removeItem(atPath: outputURL.path)
             }
