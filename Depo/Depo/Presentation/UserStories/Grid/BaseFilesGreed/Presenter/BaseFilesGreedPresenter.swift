@@ -806,6 +806,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return interactor.getFolder()
     }
     
+    func getStatus() -> ItemStatus {
+        return view.status
+    }
+    
     func getSortTypeString() -> String {
         return self.sortedRule.descriptionForTitle
     }

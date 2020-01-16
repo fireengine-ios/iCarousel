@@ -24,6 +24,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getFolder() -> Item?
     
+    func getStatus() -> ItemStatus
+    
     func onLongPressInCell()
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int)
@@ -925,7 +927,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return selectedItemsArray.map{$0}
+        if isSelectionStateActive {
+            return selectedItemsArray.map{$0}
+        }
+        
+        if let folder = delegate?.getFolder() {
+            return [folder]
+        }
+        
+        return []
     }
     
     
@@ -1964,16 +1974,47 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         albumsDeleted(albums: albums)
     }
     
+    func didUnhideItems(_ items: [WrapData]) {
+        if delegate?.getStatus() == .hidden {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
+    }
+    
     func didUnhideAlbums(_ albums: [AlbumItem]) {
         
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
         
     }
     
+    func didMoveToTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            needInsertItems(items)
+        } else {
+            deleteItems(items: items)
+        }
+    }
+    
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         
+    }
+    
+    private func needInsertItems(_ items: [Item]) {
+        //Maybe need merge in the future
+        DispatchQueue.main.async {
+            self.delegate?.needReloadData()
+        }
     }
 }
 

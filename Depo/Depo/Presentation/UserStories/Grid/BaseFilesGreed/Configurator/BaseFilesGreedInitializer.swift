@@ -184,7 +184,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.status = status
         
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
+        let elementsConfig = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .bottomBar)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default, tintColor: nil)
 
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
@@ -209,11 +210,15 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         
+        let alertFilesActionsTypes = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .actionSheet)
+        let selectionModeTypes = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .selectionMode)
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
+                                                                   selectionModeTypes: selectionModeTypes)
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid), .localStatus(.nonLocal), .fileType(.folder)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                               selectionModeTypes: [.rename]),
+                               alertSheetConfig: alertSheetConfig,
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = folder.name ?? ""
