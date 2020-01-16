@@ -11,33 +11,41 @@ import AVFoundation
 
 final class GIF2MP4 {
     
-    private let gif: GIF
     private var outputURL: URL?
     private(set) var videoWriter: AVAssetWriter?
     private(set) var videoWriterInput: AVAssetWriterInput?
     private(set) var pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor?
     
+    private var images = [CGImage]()
+    
     var videoSize : CGSize {
         //The size of the video must be a multiple of 16
-        return CGSize(width: floor(gif.size.width / 16) * 16, height: floor(gif.size.height / 16) * 16)
+        guard let image = images.first else {
+            return .zero
+        }
+        
+        let width = Double(image.width)
+        let height = Double(image.height)
+        
+        return CGSize(width: floor(width / 16) * 16, height: floor(height / 16) * 16)
     }
     
-    init?(data : Data) {
-        guard let gif = GIF(data: data) else {
-            return nil
-        }
-        self.gif = gif
+    init?(images: [UIImage]) {
+        images.forEach({
+            self.images.append($0.cgImage)
+        })
+        self.images.append(contentsOf: self.images)
     }
     
     private func prepare() {
+        
+        let fileManager = FileManager.init()
         
         guard let outputURL = outputURL else {
             assertionFailure()
             return
         }
         
-        try? FileManager.default.removeItem(at: outputURL)
-
         let avOutputSettings: [String: Any] = [
             AVVideoCodecKey: AVVideoCodecH264,
             AVVideoWidthKey: NSNumber(value: Float(videoSize.width)),
@@ -50,8 +58,20 @@ final class GIF2MP4 {
             kCVPixelBufferHeightKey as String: NSNumber(value: Float(videoSize.height))
         ]
         
-        videoWriter = try? AVAssetWriter(outputURL: outputURL, fileType: AVFileType.mp4)
         videoWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: avOutputSettings)
+        
+        do {
+            
+            if fileManager.fileExists(atPath: outputURL.path) {
+                 try fileManager.removeItem(atPath: outputURL.path)
+            }
+            
+            videoWriter = try AVAssetWriter(outputURL: outputURL, fileType: AVFileType.mp4)
+            
+        } catch let error {
+            print(error.localizedDescription)
+            assertionFailure()
+        }
         
         guard let videoWriter = videoWriter, let videoWriterInput = videoWriterInput else {
             assertionFailure()
@@ -76,33 +96,25 @@ final class GIF2MP4 {
         }
 
         var index = 0
-        var delay = 0.0 - gif.frameDurations[0]
+        var delay = 0.0
         let queue = DispatchQueue(label: "mediaInputQueue")
         
         videoWriterInput.requestMediaDataWhenReady(on: queue) {
     
-            guard let framesCount = self.gif.frames?.count else {
-                completion(nil)
-                return
-            }
-
-            while index < framesCount {
+            while index < self.images.count {
                 if videoWriterInput.isReadyForMoreMediaData == false {
                     break
                 }
                 
                 autoreleasepool{
-                    
-                if let cgImage = self.gif.getFrame(at: index) {
-                        let frameDuration = self.gif.frameDurations[index]
-                        delay += Double(frameDuration)
-                        let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
-                        let result = self.addImage(image: UIImage(cgImage: cgImage), withPresentationTime: presentationTime)
-                        if result == false {
-                            assertionFailure()
-                        } else {
-                            index += 1
-                        }
+                    delay += 0.1
+                    let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
+    
+                    let result = self.addImage(image: UIImage(cgImage: self.images[index]), withPresentationTime: presentationTime)
+                    if result == false {
+                        assertionFailure()
+                    } else {
+                        index += 1
                     }
                 }
             }
@@ -168,7 +180,6 @@ final class GIF2MP4 {
         let horizontalRatio = size.width / image.size.width
         let verticalRatio = size.height / image.size.height
         let aspectRatio = max(horizontalRatio, verticalRatio) // ScaleAspectFill
-        //let aspectRatio = min(horizontalRatio, verticalRatio) // ScaleAspectFit
         let newSize = CGSize(width: image.size.width * aspectRatio, height: image.size.height * aspectRatio)
 
         let x = newSize.width < size.width ? (size.width - newSize.width) / 2 : -(newSize.width-size.width)/2
@@ -178,101 +189,5 @@ final class GIF2MP4 {
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
 
         return pixelBuffer
-    }
-}
-
-
-import ImageIO
-import MobileCoreServices
-
-final class GIF {
-
-    private let frameDelayThreshold = 0.02
-    private(set) var duration = 0.02
-    private(set) var imageSource: CGImageSource?
-    private(set) var frames: [CGImage?]?
-    private(set) lazy var frameDurations = [TimeInterval]()
-    
-    var size : CGSize {
-        guard let frames = frames, let photo = frames.first, let cgImage = photo else {
-            return .zero
-        }
-        return CGSize(width: cgImage.width, height: cgImage.height)
-    }
-    private lazy var getFrameQueue: DispatchQueue = DispatchQueue(label: "gif.frame.queue", qos: .userInteractive)
-
-
-    init?(data: Data) {
-        guard let imgSource = CGImageSourceCreateWithData(data as CFData, nil), let imgType = CGImageSourceGetType(imgSource) , UTTypeConformsTo(imgType, kUTTypeGIF) else {
-            return nil
-        }
-        self.imageSource =  imgSource
-        
-        
-        guard let picSource = self.imageSource  else {
-            assertionFailure()
-            return
-        }
-        
-        
-        let imgCount = CGImageSourceGetCount(picSource)
-        frames = [CGImage?](repeating: nil, count: imgCount)
-        for i in 0..<imgCount {
-            autoreleasepool{
-                let delay = getGIFFrameDuration(imgSource: picSource, index: i)
-                frameDurations.append(delay)
-                duration += delay
-                
-                getFrameQueue.async { [weak self] in
-                    self?.frames?[i] = CGImageSourceCreateImageAtIndex(picSource, i, nil)
-                }
-            }
-        }
-    }
-
-    func getFrame(at index: Int) -> CGImage? {
-        
-        guard let picSource = self.imageSource  else {
-            assertionFailure()
-            return nil
-        }
-        
-        if index >= CGImageSourceGetCount(picSource) {
-            return nil
-        }
-        if let frame = frames?[index] {
-            return frame
-        } else {
-            let frame = CGImageSourceCreateImageAtIndex(picSource, index, nil)
-            frames?[index] = frame
-            return frame
-        }
-    }
-
-    private func getGIFFrameDuration(imgSource: CGImageSource, index: Int) -> TimeInterval {
-        guard
-            let frameProperties = CGImageSourceCopyPropertiesAtIndex(imgSource, index, nil) as? NSDictionary,
-            let gifProperties = frameProperties[kCGImagePropertyGIFDictionary] as? NSDictionary,
-            let unclampedDelay = gifProperties[kCGImagePropertyGIFUnclampedDelayTime] as? TimeInterval
-        else {
-            return 0.02
-        }
-
-        var frameDuration = TimeInterval(0)
-
-        if unclampedDelay < 0 {
-            frameDuration = gifProperties[kCGImagePropertyGIFDelayTime] as? TimeInterval ?? 0.0
-        } else {
-            frameDuration = unclampedDelay
-        }
-
-        /* Implement as Browsers do: Supports frame delays as low as 0.02 s, with anything below that being rounded up to 0.10 s.
-         http://nullsleep.tumblr.com/post/16524517190/animated-gif-minimum-frame-delay-browser-compatibility */
-
-        if (frameDuration < frameDelayThreshold - .ulpOfOne) {
-            frameDuration = 0.1;
-        }
-
-        return frameDuration
     }
 }
