@@ -207,8 +207,11 @@ final class OverlayStickerViewController: ViewController {
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
-        navigationController?.setNavigationBarHidden(hide, animated: false)
-        stickersView.isHidden = hide
+        UIView.animate(withDuration: 0.3) {
+            self.navigationController?.navigationBar.isHidden = hide
+            self.stickersView.isHidden = hide
+        }
+        
     }
     
     @objc private func actionFullscreenTapGesture() {
