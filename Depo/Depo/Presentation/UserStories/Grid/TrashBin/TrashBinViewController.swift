@@ -333,25 +333,7 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         return object === self
     }
     
-    func putBackFromTrashItems(_ items: [Item]) {
-        remove(items: items)
-    }
-    
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
-    }
-    
-    func putBackFromTrashPeople(items: [PeopleItem]) {
-        remove(items: items)
-    }
-    
-    func putBackFromTrashPlaces(items: [PlacesItem]) {
-        remove(items: items)
-    }
-    
-    func putBackFromTrashThings(items: [ThingsItem]) {
-        remove(items: items)
-    }
+    //MARK: Move to trash events
     
     func didMoveToTrashItems(_ items: [Item]) {
         reloadData(needShowSpinner: false)
@@ -372,6 +354,30 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         reloadData(needShowSpinner: false)
     }
+    
+    //MARK: Restore events
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        remove(items: items)
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        remove(albums: albums)
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        remove(items: items)
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        remove(items: items)
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        remove(items: items)
+    }
+    
+    //MARK: Delete events
     
     func deleteItems(items: [Item]) {
         remove(items: items)

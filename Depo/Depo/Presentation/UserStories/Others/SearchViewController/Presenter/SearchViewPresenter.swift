@@ -158,6 +158,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
+    func getStatus() -> ItemStatus {
+        return .active
+    }
+    
     func onItemSelected(item: BaseDataSourceItem) {
         // 
     }
