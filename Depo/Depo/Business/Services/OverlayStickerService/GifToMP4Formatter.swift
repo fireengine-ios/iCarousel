@@ -101,19 +101,17 @@ final class GIF2MP4 {
         videoWriterInput.requestMediaDataWhenReady(on: queue) {
     
             while index < self.images.count {
-                if videoWriterInput.isReadyForMoreMediaData == false {
-                    break
-                }
                 
-                autoreleasepool{
-                    delay += 0.1
-                    let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
-    
-                    let result = self.addImage(image: UIImage(cgImage: self.images[index]), withPresentationTime: presentationTime)
-                    if result == false {
-                        assertionFailure()
-                    } else {
-                        index += 1
+                if videoWriterInput.isReadyForMoreMediaData == true {
+                    autoreleasepool{
+                        delay += 0.1
+                        let presentationTime = CMTime(seconds: delay, preferredTimescale: 600)
+                        let result = self.addImage(image: UIImage(cgImage: self.images[index]), withPresentationTime: presentationTime)
+                        if result == false {
+                            assertionFailure()
+                        } else {
+                            index += 1
+                        }
                     }
                 }
             }
