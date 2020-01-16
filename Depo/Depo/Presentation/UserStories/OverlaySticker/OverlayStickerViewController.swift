@@ -207,7 +207,7 @@ final class OverlayStickerViewController: ViewController {
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.navigationController?.navigationBar.isHidden = hide
             self.stickersView.isHidden = hide
         }
