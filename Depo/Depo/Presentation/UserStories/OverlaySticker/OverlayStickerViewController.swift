@@ -45,6 +45,8 @@ final class OverlayStickerViewController: ViewController {
 
     private lazy var defaultName = UUID().uuidString
     
+    private var item: WrapData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selectStickerType(type: .gif)
@@ -140,6 +142,48 @@ final class OverlayStickerViewController: ViewController {
     private func showCompletionPopUp() {
         smashCoordinator?.smashSuccessed()
     }
+    
+    
+    private func showPhotoVideoPreview() {
+        guard let item = item else { return }
+        
+        MediaItemOperationsService.shared.getRemotesMediaItems(trimmedLocalIds: [item.getTrimmedLocalID()], context: coreDataStack.newChildBackgroundContext) { [weak self] mediaItems in
+            DispatchQueue.toMain { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                let remoteItem = WrapData(mediaItem:mediaItems.first!)
+                
+                let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                            selectedItem: remoteItem,
+                                                                                            allItems: [remoteItem,item],
+                                                                                            status: remoteItem.status)
+                controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+                let nController = NavigationController(rootViewController: controller)
+                RouterVC().presentViewController(controller: nController)
+                
+                self.showCompletionPopUp()
+            }
+        }
+        
+       /* MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: [item]) {  [weak self] test in
+            DispatchQueue.main.async {
+                let smashedItem = test.first!
+                
+                let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                            selectedItem: smashedItem,
+                                                                                            allItems: [smashedItem,item],
+                                                                                            status: .uploaded)
+                controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+                let nController = NavigationController(rootViewController: controller)
+                RouterVC().presentViewController(controller: nController)
+                self?.showCompletionPopUp()
+            }
+        }*/
+    }
+
+
 
     private func saveResult(result: CreateOverlayStickersResult) {
         
@@ -151,7 +195,10 @@ final class OverlayStickerViewController: ViewController {
                     DispatchQueue.main.async {
                         self?.hideSpinnerIncludeNavigationBar()
                         self?.close { [weak self] in
-                            self?.showCompletionPopUp()
+                            RouterVC().navigationController?.dismiss(animated: false, completion: {
+                                self?.showPhotoVideoPreview()
+                            })
+
                         }
                     }
                 }
@@ -162,6 +209,7 @@ final class OverlayStickerViewController: ViewController {
                         switch saveResult {
                         case .success(let localItem):
                             self?.uploadItem(item: localItem, completion: { uploadResult in
+                                self?.item = localItem
                                 commonCompletionHandler()
                             })
                         case .failed(_):
@@ -186,7 +234,7 @@ final class OverlayStickerViewController: ViewController {
     
     @objc private func close(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
-            self.dismiss(animated: true, completion: completion)
+            self.dismiss(animated: false, completion: completion)
         }
     }
     
