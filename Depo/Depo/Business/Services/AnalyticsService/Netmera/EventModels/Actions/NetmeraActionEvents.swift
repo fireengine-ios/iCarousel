@@ -103,9 +103,9 @@ extension NetmeraEvents.Actions {
         
         @objc var action = ""
         
-        convenience init(action: String) {
+        convenience init(action: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.action = action
+            self.action = action.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -289,7 +289,10 @@ extension NetmeraEvents.Actions {
                 accaptableType = .photo
             case .video:
                 accaptableType = .video
-            case .allDocs:
+            case .application(.doc), .application(.txt),
+                 .application(.html), .application(.xls),
+                 .application(.pdf), .application(.ppt),
+                 .application(.usdz), .allDocs:
                 accaptableType = .document
             case .audio:
                 accaptableType = .music
@@ -444,9 +447,9 @@ extension NetmeraEvents.Actions {
         
         @objc var action = ""
         
-        convenience init(action: String) {
+        convenience init(action: NetmeraEventValues.OnOffSettings) {
             self.init()
-            self.action = action
+            self.action = action.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -470,13 +473,16 @@ extension NetmeraEvents.Actions {
         convenience init(uploadType: UploadType, fileType: FileType) {
             let appopriateFileType: NetmeraEventValues.UploadFileType
             switch fileType {
-            case .image:
+            case .image, .faceImage(_):
                 appopriateFileType = .photo
             case .video:
                 appopriateFileType = .video
             case .audio:
                 appopriateFileType = .music
-            case .allDocs:
+            case .application(.doc), .application(.txt),
+                 .application(.html), .application(.xls),
+                 .application(.pdf), .application(.ppt),
+                 .application(.usdz), .allDocs:
                 appopriateFileType = .document
             default:
                 appopriateFileType = .photo
@@ -646,9 +652,9 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         
-        convenience init(status: String) {
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
             self.init()
-            self.status = status
+            self.status = status.text
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -698,6 +704,40 @@ extension NetmeraEvents.Actions {
         @objc var status = ""
         @objc var type = ""
         @objc var count: Int = 0
+        
+        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
+            guard typeCountTupple.1 > 0 else {
+                assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
+                return nil
+            }
+            
+            let accaptableType: NetmeraEventValues.TrashType
+            switch typeCountTupple.0 {
+            case .image, .faceImage(_):
+                accaptableType = .photo
+            case .video:
+                accaptableType = .video
+            case .application(.doc), .application(.txt),
+                 .application(.html), .application(.xls),
+                 .application(.pdf), .application(.ppt),
+                 .application(.usdz), .allDocs:
+                accaptableType = .document
+            case .audio:
+                accaptableType = .music
+            case .photoAlbum:
+                accaptableType = .album
+            case .faceImageAlbum(.people):
+                accaptableType = .person
+            case .faceImageAlbum(.things):
+                accaptableType = .thing
+            case .faceImageAlbum(.places):
+                accaptableType = .place
+            default:
+                accaptableType = .photo
+            }
+            
+            self.init(status: status.text, type: accaptableType.text, count: typeCountTupple.1)
+        }
         
         convenience init(status: String, type: String, count: Int) {
             self.init()

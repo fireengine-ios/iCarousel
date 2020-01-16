@@ -576,6 +576,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
             }
             }, cancel: {}, fail: { errorResponse in
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
                 UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
@@ -703,6 +704,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         return success
     }
     
+    func successItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+        let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: elementType)
+                self?.showSuccessPopup(for: elementType)
+            }
+        }
+        return success
+    }
+    
     private func showSuccessPopup(for elementType: ElementTypes) {
         let text: String
         switch elementType {
@@ -738,6 +751,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    private func trackNetmeraSuccessEvent(elementType: ElementTypes, successStatus: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
+        //TODO: change other parts of actions tracking to this method
+        switch elementType {
+        case .moveToTrash:
+            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
+                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Trash(status: successStatus, typeCountTupple: typeToCountTupple) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        default:
+            break
+        }
+    }
+    
     func failAction(elementType: ElementTypes) -> FailResponse {
         
         let failResponse: FailResponse  = { [weak self] value in
@@ -756,6 +784,27 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         return failResponse
     }
+    
+    func failItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
+        
+        let failResponse: FailResponse  = { [weak self] value in
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
+                } else {
+                    debugLog("failAction 3 \(value.description)")
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
+            }
+        }
+        return failResponse
+    }
+
     
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         
@@ -1016,14 +1065,14 @@ extension MoreFilesActionsInteractor {
         guard !items.isEmpty else {
             return
         }
-        
+//        elementType: .moveToTrash, relatedItems: items
         RouterVC().showSpiner()
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .moveToTrash)
             self?.player.remove(listItems: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.succesAction(elementType: .moveToTrash),
-                                          fail: self?.failAction(elementType: .moveToTrash))
+                                          success: self?.successItmesAction(elementType: .moveToTrash, relatedItems: items),
+                                          fail: self?.failItmesAction(elementType: .moveToTrash, relatedItems: items))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
@@ -1044,6 +1093,7 @@ extension MoreFilesActionsInteractor {
             self?.output?.operationStarted(type: .removeFromAlbum)
             
             self?.albumService.moveToTrash(albums: albumbs, success: { [weak self] deletedAlbums in
+                self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
@@ -1055,6 +1105,7 @@ extension MoreFilesActionsInteractor {
                     self?.router.presentViewController(controller: controller)
                 }
                 }, fail: { [weak self] errorRespone in
+                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .failure, items: albumbs)
                     DispatchQueue.main.async {
                         self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
                     }
