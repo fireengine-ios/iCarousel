@@ -28,7 +28,6 @@ final class OverlayAnimationService {
         }
     }
     
-    private let duration:TimeInterval = 2.5
     private var numberOfFrames = 25
     
     func combine(attachments: [UIImageView],
@@ -89,29 +88,15 @@ final class OverlayAnimationService {
             let frames = self.renderFrames(bgImage:originalImage, attacments: attach, canvasSize: originalImage.size, framesCount: frameCount)
 
             if frameCount > 1 {
-                
-                self.generateGifWithURLreturn(from: frames) { url in
+        
+                GIF2MP4(images: frames)?.convertAndExport(fileName: resultName, completion: { url in
                     guard let url = url else {
-                        assertionFailure()
+                        completion(.failure(.unknown))
                         return
                     }
-
-                    do {
-                        let data =  try Data(contentsOf: url)
-                        
-                        GIF2MP4(data: data)?.convertAndExport(fileName: resultName, completion: { url in
-                            
-                            guard let url = url else {
-                                completion(.failure(.unknown))
-                                return
-                            }
-                            completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .video)))
-                        })
-                    } catch {
-                        completion(.failure(.unknown))
-                    }
-                }
-                
+                    completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .video)))
+                })
+            
             } else {
 
                 guard let image = frames.first else {
@@ -226,41 +211,6 @@ final class OverlayAnimationService {
             }
         })
         return image
-    }
-    
-    func generateGifWithURLreturn(from images: [UIImage], completion: (URL?) -> ()) {
-        let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]  as CFDictionary
-        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 0]] as CFDictionary
-        
-        let documentsDirectoryURL: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        
-        let name = UUID().uuidString
-        let fileURL: URL? = documentsDirectoryURL?.appendingPathComponent("\(name).gif")
-        
-        if let url = fileURL as CFURL? {
-            if let destination = CGImageDestinationCreateWithURL(url, kUTTypeGIF, images.count, nil) {
-                CGImageDestinationSetProperties(destination, fileProperties)
-                for image in images {
-                    autoreleasepool {
-                        if let cgImage = image.cgImage {
-                            CGImageDestinationAddImage(destination, cgImage, frameProperties)
-                        }
-                    }
-                }
-                
-                for image in images {
-                    autoreleasepool {
-                        if let cgImage = image.cgImage {
-                            CGImageDestinationAddImage(destination, cgImage, frameProperties)
-                        }
-                    }
-                }
-                
-                if CGImageDestinationFinalize(destination) {
-                    completion(fileURL)
-                }
-            }
-        }
     }
 }
 
