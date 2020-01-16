@@ -292,6 +292,13 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         disableSelection()
         interactor.delete(items: selectedItems)
     }
+    
+    func onThreeDotsManagerInfo(item: Item?) {
+        guard let item = item else {
+            return
+        }
+        router.openInfo(item: item)
+    }
 }
 
 //MARK: - Routing

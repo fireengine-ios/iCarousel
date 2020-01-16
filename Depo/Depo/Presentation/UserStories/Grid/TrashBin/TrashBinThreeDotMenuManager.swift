@@ -12,6 +12,7 @@ protocol TrashBinThreeDotMenuManagerDelegate: class {
     func onThreeDotsManagerSelect()
     func onThreeDotsManagerRestore(item: Item?)
     func onThreeDotsManagerDelete(item: Item?)
+    func onThreeDotsManagerInfo(item: Item?)
 }
 
 final class TrashBinThreeDotMenuManager {
@@ -31,7 +32,8 @@ final class TrashBinThreeDotMenuManager {
     }
     
     func showActions(item: Item, sender: Any) {
-        showAlertSheet(with: ElementTypes.trashState, item: item, sender: sender)
+        let types = ElementTypes.filesInFolderElementsConfig(for: .trashed, viewType: .actionSheet)
+        showAlertSheet(with: types, item: item, sender: sender)
     }
 
     private func showAlertSheet(with types: [ElementTypes], item: Item?, sender: Any) {
@@ -56,6 +58,10 @@ final class TrashBinThreeDotMenuManager {
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { [weak self] _ in
                     self?.delegate.onThreeDotsManagerDelete(item: item)
+                })
+            case .info:
+                action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { [weak self] _ in
+                    self?.delegate.onThreeDotsManagerInfo(item: item)
                 })
             default:
                 assertionFailure("unowned action")
