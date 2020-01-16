@@ -306,56 +306,98 @@ extension SmartAlbumsManagerImpl: InstaPickServiceDelegate {
 extension SmartAlbumsManagerImpl: ItemOperationManagerViewProtocol {
     
     func newAlbumCreated() {
-        requestAllItems()
+        reload(types: [.albums])
     }
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         requestAllItems()
     }
     
-    func albumsDeleted(albums: [AlbumItem]) {
-        requestAllItems()
-    }
-    
     func deleteStories(items: [Item]) {
-        requestAllItems()
+        reload(types: [.story])
     }
     
     func filesAddedToAlbum() {
-        requestAllItems()
+        reload(types: [.albums])
     }
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         requestAllItems()
     }
     
+    //MARK: - Hide events
+    
     func didHideAlbums(_ albums: [AlbumItem]) {
-        requestAllItems()
+        reload(types: [.albums])
     }
+    
+    func didHidePeople(items: [PeopleItem]) {
+        reload(types: [.people])
+    }
+    
+    func didHidePlaces(items: [PlacesItem]) {
+        reload(types: [.places])
+    }
+    
+    func didHideThings(items: [ThingsItem]) {
+        reload(types: [.things])
+    }
+    
+    //MARK: - Unhide events
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        requestAllItems()
+        reload(types: [.albums])
     }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        reload(types: [.people])
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        reload(types: [.places])
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        reload(types: [.things])
+    }
+    
+    //MARK: - Recovery events
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        reload(types: [.albums])
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        reload(types: [.people])
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        reload(types: [.places])
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        reload(types: [.things])
+    }
+    
+    //MARK: Move to trash events
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        requestAllItems()
+        reload(types: [.albums])
     }
     
-    func didMoveToTrashItems(_ items: [Item]) {
-        reloadFIRAlbumsIfNeeded(items: items)
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        reload(types: [.people])
     }
     
-    func deleteItems(items: [Item]) {
-        reloadFIRAlbumsIfNeeded(items: items)
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        reload(types: [.places])
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        reload(types: [.things])
     }
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return object === self
-    }
-    
-    private func reloadFIRAlbumsIfNeeded(items: [Item]) {
-        if items.first(where: { $0.fileType.isFaceImageType }) != nil {
-            reload(types: [.people, .places, .things])
-        }
     }
 }
