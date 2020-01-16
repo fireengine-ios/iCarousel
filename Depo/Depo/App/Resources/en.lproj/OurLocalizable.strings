@@ -1384,6 +1384,6 @@
 "delete_confirmation_popup_title" = "Delete permanently";
 "delete_confirmation_popup_text" = "Are you sure?";
 "delete_popup_success_text" = "Deleted permanently";
-"restore_confirmation_popup_title" = "Delete permanently";
-"restore_confirmation_popup_text" = "Are you sure?";
+"restore_confirmation_popup_title" = "Restore";
+"restore_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
 "restore_popup_success_text" = "Deleted permanently";
