@@ -39,7 +39,7 @@ final class GIF2MP4 {
     
     private func prepare() {
         
-        let fileManager = FileManager.init()
+        let fileManager = FileManager.default
         
         guard let outputURL = outputURL else {
             assertionFailure()
