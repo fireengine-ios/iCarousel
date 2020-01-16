@@ -19,26 +19,147 @@ enum NetmeraEvents {
 final class NetmeraService {
  
     static func updateUser() {
-        let user = NetmeraCustomUser()
-        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        
+        let tokenStorage: TokenStorage = factory.resolve()
+        let loginStatus = tokenStorage.accessToken != nil
+        
+        
+        let deviceUsedStorage = Int(1 - Device.getFreeDiskSpaceInPercent)
+        
+        if loginStatus {
+            
+            let group = DispatchGroup()
+            
+            let autoSyncStorageSettings = AutoSyncDataStorage().settings
+            let instapickService: InstapickService = factory.resolve()
+            let accountService = AccountService()
+            
+            group.enter()
+            var nemeraAnalysisLeft = ""
+            instapickService.getAnalyzesCount { analyzeResult in
+                switch analyzeResult {
+                case .success(let analysisCount):
+                    nemeraAnalysisLeft = analysisCount.isFree ? NetmeraEventValues.PhotopickUserAnalysisLeft.premium.text : NetmeraEventValues.PhotopickUserAnalysisLeft.regular(analysisLeft: analysisCount.left).text
+                case .failed(_):
+                    nemeraAnalysisLeft = "Null"
+                }
+                group.leave()
+            }
 
-//        user.dictionaryValueWithClassInfo()
-//        NetmeraUser *user = [[NetmeraUser alloc] init];
+            var lifeboxStorage: Int = 0
+            group.enter()
+            accountService.usage(
+                success: { response in
+                    guard let usage = response as? UsageResponse else {
+                        return
+                    }
+                    lifeboxStorage = Int(usage.totalUsage ?? 0)
+                    
+                    group.leave()
+                }, fail: { errorResponse in
+
+                    group.leave()
+            })
+            
+
+            var firGrouping = ""
+            group.enter()
+            SingletonStorage.shared.getFaceImageSettingsStatus(success: { isEnabled in
+                firGrouping = isEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+                group.leave()
+            }, fail: { _ in
+                firGrouping = "Null"
+                group.leave()
+            })
+            
+            var accountType = "Null"
+            if let unwrapedAccountType = SingletonStorage.shared.accountInfo?.accountType {
+                accountType = unwrapedAccountType
+///                 Standard/Standard+/Premium
+            }
+            
+            let isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled ?? false
+            let twoFactorNetmeraStatus = isTwoFactorAuthEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+            
+            
+            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
+            let autoSyncState = confirmedAutoSyncSettingsState ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+            
+            let netmeraAutoSyncStatusPhoto: String
+            let netmeraAutoSyncStatusVideo: String
+            if confirmedAutoSyncSettingsState {
+                netmeraAutoSyncStatusPhoto = NetmeraEventValues.AutoSyncState.getState(autosyncSettings: autoSyncStorageSettings.photoSetting).text
+                netmeraAutoSyncStatusVideo = NetmeraEventValues.AutoSyncState.getState(autosyncSettings: autoSyncStorageSettings.videoSetting).text
+            } else {
+                netmeraAutoSyncStatusPhoto = "Null"
+                netmeraAutoSyncStatusVideo = "Null"
+            }
+                
+            
+            group.enter()
+            var activeSubscriptionNames = [String]()
+            SingletonStorage.shared.getActiveSubscriptionsList(success: { response in
+                activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
+                    return ($0.subscriptionPlanName ?? "") + "|"
+                }
+                group.leave()
+            }, fail: { errorResponse in
+                group.leave()
+            })
+            
+            //TODO: Check if this is correct
+            let verifiedEmail = SingletonStorage.shared.isEmailVerificationCodeSent ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+            
+
+            
+            group.notify(queue: DispatchQueue.global()) {
+                let user = NetmeraCustomUser(deviceStorage: deviceUsedStorage,
+                                             photopickLeftAnalysis: nemeraAnalysisLeft,
+                                             lifeboxStorage: lifeboxStorage,
+                                             faceImageGrouping: firGrouping,
+                                             accountType: accountType,
+                                             twoFactorAuthentication: twoFactorNetmeraStatus,
+                                             autosync: autoSyncState,
+                                             emailVerification: verifiedEmail,
+                                             autosyncPhotos: netmeraAutoSyncStatusPhoto,
+                                             autosyncVideos: netmeraAutoSyncStatusVideo,
+                                             packages: activeSubscriptionNames,
+                                             autoLogin: "Null",
+                                             turkcellPassword: "Null")
+                
+                user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+                Netmera.update(user)
+            }
+            
+
+        } else {
+            let user = NetmeraCustomUser(deviceStorage: deviceUsedStorage, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
+                twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
+                autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
+                autoLogin: "Null", turkcellPassword: "Null")
+            user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+            Netmera.update(user)
+        }
+
+        
+        
 //        }}{{  user.autosync = @"On";
 //        autosyncPhotos: Never/Wifi/Wifi_LTE
 //        autosyncVideos: Never/Wifi/Wifi_LTE
+        
+        //        lifeboxStorage:{used_percentage_value} : Settings/Account Detail/ My Storage
+        
+        //        twoFactorAuthentication: On/Off
+        
+        //        emailVerification: Verified/NotVerified
+        
+        
+        
 //        deviceStorage:{used_percentage_value} : It shows how many storage used on the device.
-//        lifeboxStorage:{used_percentage_value} : Settings/Account Detail/ My Storage
 //        faceImageGrouping: On/Off
 //        photopickLeftAnalysis:{count_of_left_analysis} : If user is premium, the value should be 'Free'.
 //        accountType: Standard/Standard+/Premium : Settings/Account Detail/ Account Type
-//        twoFactorAuthentication: On/Off
-//        emailVerification: Verified/NotVerified
-//
 
-        
-        
-        Netmera.update(user)
     }
     
     static func startNetmera() {
@@ -60,8 +181,11 @@ final class NetmeraService {
         Netmera.setLogLevel(.debug)
         #endif
         
+        //FIXME: REMOVE  "|| RELEASE" part
         #if APPSTORE
         Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
+        #elseif  RELEASE
+        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1PwON_uN9F4h_7_vf0s3AwgwwqNTCnPZ_Bg")
         #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
         #endif

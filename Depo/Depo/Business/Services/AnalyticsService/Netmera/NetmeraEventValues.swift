@@ -57,8 +57,34 @@ enum NetmeraEventValues {
                 return "Wifi_LTE"
             }
         }
+        
+        static func getState(autosyncSettings: AutoSyncSetting) -> AutoSyncState {
+            switch autosyncSettings.option {
+            case .never:
+                return .never
+            case .wifiOnly:
+                return .wifi
+            case .wifiAndCellular:
+                return .wifi_LTE
+            }
+            
+        }
     }
     
+    enum EmailVerification {
+        case verified
+        case notVerified
+        
+        var text: String {
+            switch self {
+            case .verified:
+                return "Verified""
+            case .notVerified:
+                return "NotVerified"
+            }
+        }
+    }
+
     enum OnOffSettings: String {
         case on
         case off
@@ -448,4 +474,21 @@ enum NetmeraEventValues {
         }
     }
 
+    enum AccountType {
+        case standart
+        case standartPlus
+        case premium
+        
+        var text: String {
+            switch self {
+            case .standart:
+                return " Standard"
+            case .standartPlus:
+                return "Standard+"
+            case .premium:
+                return "Premium"
+            }
+        }
+    }
+    
 }

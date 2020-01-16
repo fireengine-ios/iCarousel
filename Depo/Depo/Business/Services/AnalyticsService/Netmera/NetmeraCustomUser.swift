@@ -15,7 +15,6 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var lifeboxStorage: Int = 0
     @objc var faceImageGrouping = ""
     @objc var accountType = ""
-    @objc var storage = ""
     @objc var twoFactorAuthentication = ""
     @objc var autosync = ""
     @objc var emailVerification = ""
@@ -27,7 +26,7 @@ final class NetmeraCustomUser: NetmeraUser {
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: NetmeraEventValues.PhotopickUserAnalysisLeft,
                      lifeboxStorage: Int, faceImageGrouping: NetmeraEventValues.OnOffSettings,
-                     accountType: String, storage: String, twoFactorAuthentication: NetmeraEventValues.OnOffSettings,
+                     accountType: String, twoFactorAuthentication: NetmeraEventValues.OnOffSettings,
                      autosync: NetmeraEventValues.OnOffSettings, emailVerification: NetmeraEventValues.OnOffSettings,
                      autosyncPhotos: NetmeraEventValues.AutoSyncState, autosyncVideos: NetmeraEventValues.AutoSyncState,
                      packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
@@ -38,7 +37,6 @@ final class NetmeraCustomUser: NetmeraUser {
         self.lifeboxStorage = lifeboxStorage
         self.faceImageGrouping = faceImageGrouping.text
         self.accountType = accountType
-        self.storage = storage
         self.twoFactorAuthentication = twoFactorAuthentication.text
         self.autosync = autosync.text
         self.emailVerification = emailVerification.text
@@ -48,6 +46,29 @@ final class NetmeraCustomUser: NetmeraUser {
         self.autoLogin = autoLogin.text
         self.turkcellPassword = turkcellPassword.text
     }
+    
+    convenience init(deviceStorage: Int, photopickLeftAnalysis: String,
+                     lifeboxStorage: Int, faceImageGrouping: String,
+                     accountType: String, twoFactorAuthentication: String,
+                     autosync: String, emailVerification: String,
+                     autosyncPhotos: String, autosyncVideos: String,
+                     packages: [String], autoLogin: String,
+                     turkcellPassword: String) {
+        self.init()
+        self.deviceStorage = deviceStorage
+        self.photopickLeftAnalysis = photopickLeftAnalysis
+        self.lifeboxStorage = lifeboxStorage
+        self.faceImageGrouping = faceImageGrouping
+        self.accountType = accountType
+        self.twoFactorAuthentication = twoFactorAuthentication
+        self.autosync = autosync
+        self.emailVerification = emailVerification
+        self.autosyncPhotos = autosyncPhotos
+        self.autosyncVideos = autosyncVideos
+        self.packages = packages
+        self.autoLogin = autoLogin
+        self.turkcellPassword = turkcellPassword
+    }
 
     override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
         return[
@@ -56,7 +77,6 @@ final class NetmeraCustomUser: NetmeraUser {
             "pea" : #keyPath(lifeboxStorage),
             "pcb" : #keyPath(faceImageGrouping),
             "pdc" : #keyPath(accountType),
-            "pca" : #keyPath(storage),
             "pdb" : #keyPath(twoFactorAuthentication),
             "pcd" : #keyPath(autosync),
             "pde" : #keyPath(emailVerification),
