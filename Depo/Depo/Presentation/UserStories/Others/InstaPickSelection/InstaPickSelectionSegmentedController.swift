@@ -118,6 +118,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     }
     
     private func trackScreen() {
+//        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoP())
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickPhotoSelection)
         analyticsService.trackDimentionsEveryClickGA(screen: .photoPickPhotoSelection)

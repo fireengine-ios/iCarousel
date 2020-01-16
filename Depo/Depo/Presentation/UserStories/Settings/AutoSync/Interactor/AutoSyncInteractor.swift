@@ -20,6 +20,10 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         output.prepaire(syncSettings: settings)
     }
     
+    func trackScreen(fromSettings: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
+    }
+    
     func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Actions.Autosync(autosyncSettings: settings) : NetmeraEvents.Actions.FirstAutosync(autosyncSettings: settings))
         output.onSettingSaved()

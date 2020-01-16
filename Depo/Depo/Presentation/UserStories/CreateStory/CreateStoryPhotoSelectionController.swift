@@ -100,6 +100,7 @@ final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabB
 
         setupNavigation()
         setupLayout()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPhotoSelectionScreen())
         analyticsService.logScreen(screen: .createStoryPhotosSelection)
     }
     

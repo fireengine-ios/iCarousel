@@ -31,6 +31,7 @@ class PackagesInteractor {
 extension PackagesInteractor: PackagesInteractorInput {
 
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PackagesScreen())
         analyticsService.logScreen(screen: .packages)
         analyticsService.trackDimentionsEveryClickGA(screen: .packages)
     }

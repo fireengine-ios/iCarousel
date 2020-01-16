@@ -25,6 +25,7 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PasscodeScreen())
         analyticsManager.logScreen(screen: .appTouchIdPasscode)
         analyticsManager.trackDimentionsEveryClickGA(screen: .appTouchIdPasscode)
     }

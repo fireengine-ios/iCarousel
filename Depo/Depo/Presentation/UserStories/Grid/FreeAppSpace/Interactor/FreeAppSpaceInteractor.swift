@@ -143,6 +143,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FreeUpSpaceScreen())
         analyticsManager.logScreen(screen: .freeAppSpace)
         analyticsManager.trackDimentionsEveryClickGA(screen: .freeAppSpace)
     }

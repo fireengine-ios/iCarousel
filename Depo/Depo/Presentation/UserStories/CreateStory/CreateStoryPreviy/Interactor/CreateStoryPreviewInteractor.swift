@@ -23,6 +23,8 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
             return
         }
         output?.startShowVideoFromResponse(response: resp)
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPreviewScreen())
         analyticsManager.logScreen(screen: .createStoryPreview)
         analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }

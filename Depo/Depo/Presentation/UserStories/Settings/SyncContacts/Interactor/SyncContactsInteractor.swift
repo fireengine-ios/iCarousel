@@ -44,6 +44,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             switch operationType {
             case .backup:
                 MenloworksAppEvents.onContactUploaded()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
                 self.analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
@@ -106,6 +107,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     func performOperation(forType type: SYNCMode) {
         if type == .backup {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
             analyticsService.logScreen(screen: .contactSyncBackUp)
             analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
         }
@@ -203,6 +205,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func deleteDuplicated() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, staus: .success))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
         analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
         analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
         contactsSyncService.deleteDuplicates()

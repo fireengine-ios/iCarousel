@@ -45,6 +45,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.AlbumsScreen())
         analyticsManager.logScreen(screen: .albums)
         analyticsManager.trackDimentionsEveryClickGA(screen: .albums)
     }
