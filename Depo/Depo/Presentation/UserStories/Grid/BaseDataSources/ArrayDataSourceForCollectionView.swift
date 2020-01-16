@@ -116,10 +116,6 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
-    override func didHide(items: [AlbumItem]) {
-        albumsDeleted(albums: items)
-    }
-    
     override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         guard let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) else {
@@ -138,4 +134,19 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+    override func didHideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didUnhideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
 }
