@@ -1164,8 +1164,8 @@ Please check I have understood the intended command here*/
 "delete_duplicated_contacts" = "Supprimer les contacts en doublon dans votre répertoire";
 "leave_middle_membership" = "Mettre fin à l'offre Standard+";
 "leave_middle_turkcell" = "Pour annuler votre option, veuillez envoyer ANNULE LIFEBOX STANDARD+ au 2200";
-"package_FWI_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, le service clients ou en magasin.";
-"package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, le service clients ou en magasin.";
+"package_FWI_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, au service clients ou en agence. ";
+"package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre offre Digicel depuis l'application My Digicel, au service clients ou en agence. ";
 "feature_digicell_cancel_text" = "Comme vous êtes chez Digicel, vous pouvez continuer à utiliser les fonctionnalités Premium gratuitement.";
 "terms_and_use_etk_checkbox" = "J'aimerais recevoir des messages commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
@@ -1339,9 +1339,9 @@ Please check I have understood the intended command here*/
 "selected_items_limit_delete" = "Vous ne pouvez pas supprimer plus de %d fichiers.";
 "login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en envoyant SIFRE au 2200. Si vous activez ce bouton, vous pouvez vous connecter à Billo à l'aide du mot de passe Turkcell.";
 "login_settings_security_autologin_description" = "Si vous activez ce bouton, vous pouvez vous connecter automatiquement à Billo lorsque vous êtes connecté à Internet avec la 3G / LTE.";
-"login_settings_two_factor_auth_description" = "Si vous activez la validation de double authentification, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse email pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
-"two_fa_invalid_session_error_message" = "Session expirée pour une double authentification.";
-"two_fa_invalid_challenge_error_message" = "Session expirée pour une double authentification.";
+"login_settings_two_factor_auth_description" = "Si vous activez la validation de l'authentification à deux facteurs, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse email pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
+"two_fa_invalid_session_error_message" = "Session expirée pour une authentification à deux facteurs.";
+"two_fa_invalid_challenge_error_message" = "Session expirée pour une authentification à deux facteurs.";
 "two_fa_too_many_attempts_error_message" = "Vous vous êtes mal connecté 3 fois. Veuillez demander un nouveau code.";
 "two_fa_invalid_Otp_error_message" = "Le code de sécurité n'est pas valide, veuillez réessayer.";
 "spotify_import_navbar_title" = "Déplacer les playlists";
@@ -1399,9 +1399,9 @@ Please check I have understood the intended command here*/
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Trop de codes de vérification ont été demandés, veuillez réessayer ultérieurement.";
-"2_factor_auth" = "Double authentification";
+"2_factor_auth" = "authentification à deux facteurs";
 "extra_auth_new_device_reason" = "Vous vous connectez à Billo à partir d'un autre appareil.";
-"extra_auth_account_setting_reason" = "Vous avez activé la double authentification de votre compte.";
+"extra_auth_account_setting_reason" = "Vous avez activé l'authentification à deux facteurs de votre compte.";
 "extra_auth_account_navigation_title" = "Contrôle de sécurité";
 "extra_auth_account_describe_label" = "Pour sécuriser votre compte et vous authentifier nous vous enverrons un code de sécurité.";
 "extra_auth_account_choose_type" = "Envoyer le code de sécurité :";
@@ -1659,3 +1659,5 @@ Please check I have understood the intended command here*/
 "restore_confirmation_popup_title" = "";
 "restore_confirmation_popup_text" = "";
 "restore_popup_success_text" = "";
+"delete_from_hidden_bin_popup_success_title" = "";
+"delete_from_hidden_bin_popup_success_text" = "";
