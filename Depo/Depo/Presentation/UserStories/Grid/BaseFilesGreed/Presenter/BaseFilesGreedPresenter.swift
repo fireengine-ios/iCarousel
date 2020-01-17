@@ -806,6 +806,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return interactor.getFolder()
     }
     
+    func getParent() -> BaseDataSourceItem? {
+        return interactor.getParent()
+    }
+    
     func getStatus() -> ItemStatus {
         return view.status
     }

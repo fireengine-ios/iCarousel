@@ -12,15 +12,6 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
     
     var album: AlbumItem?
     
-    override func getSelectedItems() -> [BaseDataSourceItem] {
-        if isSelectionStateActive {
-            return super.getSelectedItems()
-        } else if let album = album {
-            return [album]
-        }
-        return []
-    }
-    
     override func didHideAlbums(_ albums: [AlbumItem]) {
         delegate?.didDelete(items: albums)
     }

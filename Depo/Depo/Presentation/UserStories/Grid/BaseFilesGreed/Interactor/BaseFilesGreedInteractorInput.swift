@@ -34,6 +34,8 @@ protocol BaseFilesGreedInteractorInput {
     
     func getFolder() -> Item?
     
+    func getParent() -> BaseDataSourceItem?
+    
     func trackScreen()
     func trackClickOnPhotoOrVideo(isPhoto: Bool)
     func trackSortingChange(sortRule: SortedRules)

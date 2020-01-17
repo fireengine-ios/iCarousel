@@ -14,6 +14,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var folder: Item?
     
+    var parent: BaseDataSourceItem?
+    
     var originalFilters: [GeneralFilesFiltrationType]?
     
     var bottomBarOriginalConfig: EditingBarConfig?
@@ -221,6 +223,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     func getFolder() -> Item? {
         return folder
+    }
+    
+    func getParent() -> BaseDataSourceItem? {
+        return parent
     }
     
     func trackScreen() {

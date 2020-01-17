@@ -370,15 +370,15 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     //MARK: Delete events
