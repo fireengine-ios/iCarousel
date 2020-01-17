@@ -39,7 +39,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         floatingButtonsArray.append(contentsOf: [.upload])
-        
+    
         interactor.output = self
         
         reloadData(needShowSpinner: true)
@@ -134,7 +134,7 @@ extension TrashBinViewController {
         homePageNavigationBarStyle()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
-        setMoreButton()
+        updateMoreButton()
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -149,8 +149,8 @@ extension TrashBinViewController {
         }
     }
     
-    private func setMoreButton() {
-        navbarManager.setMoreButton(isEnabled: !dataSource.isEmpty)
+    private func updateMoreButton() {
+        navbarManager.updateMoreButton(hasItems: !dataSource.isEmpty)
     }
 }
 
@@ -208,13 +208,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
     func didLoad(items: [Item]) {
         dataSource.append(items: items) { [weak self] in
             self?.checkEmptyView()
-            self?.setMoreButton()
+            self?.updateMoreButton()
         }
     }
     
     func didLoad(albums: [BaseDataSourceItem]) {
         dataSource.append(albums: albums)
-        setMoreButton()
+        updateMoreButton()
     }
     
     func didFinishLoadAlbums() {
