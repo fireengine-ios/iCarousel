@@ -59,6 +59,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopSelectionState()
+    }
+    
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = ColorConstants.whiteColor
@@ -110,11 +115,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.itemsIsEmpty
-    }
-    
-    private func disableSelection() {
-        bottomBarManager.hide()
-        dataSource.cancelSelection()
     }
 }
 
@@ -235,13 +235,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
+        stopSelectionState()
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
+        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
 }
@@ -278,7 +278,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
+        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
     
@@ -290,7 +290,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
+        stopSelectionState()
         interactor.delete(items: selectedItems)
     }
     
