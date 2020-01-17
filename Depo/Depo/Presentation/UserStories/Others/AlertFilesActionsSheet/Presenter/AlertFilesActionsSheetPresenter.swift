@@ -61,11 +61,21 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
     }
     
-    func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
+    func showSpecifiedAlertSheet(with item: BaseDataSourceItem, status: ItemStatus, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
         let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
             
         })
         headerAction.isEnabled = false
+        
+        if status == .trashed {
+            let types = [.info] + ElementTypes.trashState
+            constractActions(with: types, for: [item]) { [weak self] actions in
+                DispatchQueue.main.async { [weak self] in
+                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
+                }
+            }
+            return
+        }
         
         guard let item = item as? Item else {
             return
