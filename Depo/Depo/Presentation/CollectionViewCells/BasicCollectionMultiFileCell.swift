@@ -233,9 +233,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
                 setSelectionSmallSelectionImageView(false, isHidden: true)
             } else {
-                self.bigSelectionView.alpha = 0
+                bigSelectionView.alpha = 0
                 bgColor = ColorConstants.whiteColor
                 if !smallContentImageView.configured {
+                    smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                     smallCellSelectionView.isHidden = !isSelected
                     smallContentImageView.isHidden = isSelected
                 }
@@ -252,6 +253,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                     })
                 }
             } else {
+                if !smallContentImageView.configured {
+                    smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
+                }
                 bgColor = ColorConstants.whiteColor
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
