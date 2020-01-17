@@ -12,12 +12,6 @@ class NetmeraScreenEventTemplate: NetmeraEvent {
     
     private(set) var key: String = ""
     
-//    convenience init(screenEventKey: String) {
-//        self.init()
-//        self.key = screenEventKey
-//    }
-    
-    
     override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
         return [:]
     }

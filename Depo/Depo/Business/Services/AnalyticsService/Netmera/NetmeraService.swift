@@ -24,7 +24,7 @@ final class NetmeraService {
         let loginStatus = tokenStorage.accessToken != nil
         
         
-        let deviceUsedStorage = Int(1 - Device.getFreeDiskSpaceInPercent)
+        let deviceUsedStorage = Int((1 - Device.getFreeDiskSpaceInPercent)*100)
         
         if loginStatus {
             

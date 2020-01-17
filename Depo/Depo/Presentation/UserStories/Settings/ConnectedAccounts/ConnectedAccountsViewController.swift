@@ -63,6 +63,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     }
     
     private func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ImportPhotosScreen())
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ConnectedAccountsScreen())
         analyticsService.logScreen(screen: .connectedAccounts)
         analyticsService.trackDimentionsEveryClickGA(screen: .connectedAccounts)
