@@ -38,12 +38,9 @@ enum AnalyticsEvent {
     case setPasscode
     case createStory
     
-    private var isBillo: Bool {
-        return RouteRequests.isBillo
-    }
     
     var token: String {
-        if isBillo {
+        #if LIFEDRIVE
             switch self {
             case .signUp: return "vq33ql"
             case .login: return "6p1zes"
@@ -76,7 +73,7 @@ enum AnalyticsEvent {
             case .setPasscode: return "kj4blr"
             case .createStory: return "x35cgx"
             }
-        } else {
+        #else
             switch self {
             case .signUp: return "ese4q4"
             case .login: return "qqnm9p"
@@ -109,7 +106,7 @@ enum AnalyticsEvent {
             case .setPasscode: return "ojquhk"
             case .createStory: return "afp233"
             }
-        }
+        #endif
     }
         
     var facebookEventName: String {
