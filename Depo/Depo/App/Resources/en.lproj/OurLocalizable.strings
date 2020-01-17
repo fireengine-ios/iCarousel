@@ -1379,6 +1379,6 @@
 "delete_popup_success_text" = "Deleted permanently";
 "restore_confirmation_popup_title" = "Restore";
 "restore_confirmation_popup_text" = "Are you sure?";
-"restore_popup_success_text" = "Deleted permanently";
+"restore_popup_success_text" = "Restored";
 "delete_from_hidden_bin_popup_success_title" = "Delete";
 "delete_from_hidden_bin_popup_success_text" = "Are you sure?";
