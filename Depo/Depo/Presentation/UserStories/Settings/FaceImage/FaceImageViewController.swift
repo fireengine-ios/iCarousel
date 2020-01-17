@@ -30,7 +30,7 @@ final class FaceImageViewController: ViewController, NibInit {
         navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
-        analyticsManager.trackScreen(self)        
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +60,11 @@ final class FaceImageViewController: ViewController, NibInit {
         
     }
     // MARK: - functions
+    
+    private func trackScreen() {
+        analyticsManager.trackScreen(self)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FaceImageGroupingScreen())
+    }
     
     private func updateFacebookImportIfNeed() {
         if displayManager.configuration == .facebookImportOff {

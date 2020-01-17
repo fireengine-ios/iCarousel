@@ -929,6 +929,21 @@ extension NetmeraEvents.Screens {
             return kSaveSmashSuccessfullyPopUpKey
         }
     }
+    
+    
+    final class PhotoPickPhotoSelectionScreen: NetmeraEvent {
+        
+        private let kPhotoPickPhotoSelectionScreenKey = "wtj"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [:]
+        }
+        
+        override var eventKey : String {
+            return kPhotoPickPhotoSelectionScreenKey
+        }
+    }
+    
 //    not found:
 //    SaveHiddenSuccessfullyPopUp
 }

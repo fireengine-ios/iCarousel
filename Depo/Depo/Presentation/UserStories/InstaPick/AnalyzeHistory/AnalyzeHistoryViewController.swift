@@ -75,6 +75,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoPickHistoryScreen())
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickHistory)
         analyticsService.trackDimentionsEveryClickGA(screen: .photoPickHistory)

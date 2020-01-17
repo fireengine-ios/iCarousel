@@ -136,19 +136,6 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class PhotoPickPhotoSelectionScreen: NetmeraEvent {
-        
-        private let kPhotoPickPhotoSelectionScreenKey = "wtj"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kPhotoPickPhotoSelectionScreenKey
-        }
-    }
-    
     final class Edit: NetmeraEvent {
         
         private let kEditKey = "nsg"

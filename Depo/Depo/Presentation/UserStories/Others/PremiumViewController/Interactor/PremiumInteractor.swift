@@ -20,6 +20,10 @@ final class PremiumInteractor {
 // MARK: PremiumInteractorInput
 extension PremiumInteractor: PremiumInteractorInput {
     
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.BecomePremiumScreen())
+    }
+    
     func trackPackageClick(plan packages: SubscriptionPlan) {
         ///there is may be only one package for becoming premium so packageIndex == 1
         analyticsService.trackPackageClick(package: packages, packageIndex: 1)
