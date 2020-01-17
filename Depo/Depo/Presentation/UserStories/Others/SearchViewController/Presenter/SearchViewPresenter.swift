@@ -278,6 +278,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.moreActionItem = item
         
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: .active,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)

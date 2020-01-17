@@ -546,6 +546,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugLog("BaseFilesGreedPresenter onMoreActions")
 
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: view.status,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)
