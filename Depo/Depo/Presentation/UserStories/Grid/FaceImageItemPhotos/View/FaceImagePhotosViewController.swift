@@ -138,7 +138,7 @@ import UIKit
         hideButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         hideButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         hideButton.addTarget(self, action: #selector(hideAlbum), for: .touchUpInside)
-        hideButton.isHidden = status == .hidden
+        hideButton.isHidden = status != .active
     }
     
     private func createAlbumsSliderWith(peopleItem: PeopleItem) {

@@ -38,6 +38,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         setupEmptyView()
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
+        floatingButtonsArray.append(contentsOf: [.upload])
         
         interactor.output = self
         
@@ -56,6 +57,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopSelectionState()
     }
     
     private func setupRefreshControl() {
@@ -109,11 +115,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.itemsIsEmpty
-    }
-    
-    private func disableSelection() {
-        bottomBarManager.hide()
-        dataSource.cancelSelection()
     }
 }
 
@@ -234,13 +235,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
+        stopSelectionState()
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
+        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
 }
@@ -277,7 +278,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
+        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
     
@@ -289,8 +290,15 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
+        stopSelectionState()
         interactor.delete(items: selectedItems)
+    }
+    
+    func onThreeDotsManagerInfo(item: Item?) {
+        guard let item = item else {
+            return
+        }
+        router.openInfo(item: item)
     }
 }
 

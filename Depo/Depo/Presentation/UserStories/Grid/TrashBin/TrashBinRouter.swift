@@ -47,4 +47,14 @@ final class TrashBinRouter {
         let controller = router.searchView(navigationController: controller?.navigationController, output: nil)
         router.pushViewController(viewController: controller)
     }
+    
+    func openInfo(item: Item) {
+        guard let controller = router.fileInfo as? FileInfoViewController else {
+            return
+        }
+        
+        controller.loadViewIfNeeded()
+        controller.setObject(object: item)
+        router.pushViewController(viewController: controller)
+    }
 }
