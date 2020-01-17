@@ -158,6 +158,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
+    func getParent() -> BaseDataSourceItem? {
+        return getFolder()
+    }
+    
     func getStatus() -> ItemStatus {
         return .active
     }

@@ -24,6 +24,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getFolder() -> Item?
     
+    func getParent() -> BaseDataSourceItem?
+    
     func getStatus() -> ItemStatus
     
     func onLongPressInCell()
@@ -931,8 +933,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return selectedItemsArray.map{$0}
         }
         
-        if let folder = delegate?.getFolder() {
-            return [folder]
+        if let parent = delegate?.getParent() {
+            return [parent]
         }
         
         return []

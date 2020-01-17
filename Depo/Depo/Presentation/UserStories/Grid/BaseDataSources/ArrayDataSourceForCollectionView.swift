@@ -63,15 +63,22 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func getSelectedItems() -> [BaseDataSourceItem] {
-        var resultArray = [BaseDataSourceItem]()
-        for array in tableDataMArray {
-            for object in array {
-                if (selectedItemsArray.contains(object)) {
-                    resultArray.append(object)
+        if isSelectionStateActive {
+            var resultArray = [BaseDataSourceItem]()
+            for array in tableDataMArray {
+                for object in array {
+                    if (selectedItemsArray.contains(object)) {
+                        resultArray.append(object)
+                    }
                 }
             }
+            return resultArray
         }
-        return resultArray
+        
+        if let parent = delegate?.getParent() {
+            return [parent]
+        }
+        return []
     }
     
     override func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {

@@ -196,6 +196,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
         let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder
+        interactor.parent = folder
         viewController.parentUUID = folder.uuid
         
         if let output = moduleOutput {

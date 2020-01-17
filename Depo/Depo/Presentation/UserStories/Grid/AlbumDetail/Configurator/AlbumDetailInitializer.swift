@@ -46,6 +46,7 @@ class AlbumDetailModuleInitializer: NSObject {
         let item = Item(imageData: Data(), isLocal: true) /// some empty item to pass uuid
         item.uuid = album.uuid
         interactor.folder = item
+        interactor.parent = album
         
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: type,

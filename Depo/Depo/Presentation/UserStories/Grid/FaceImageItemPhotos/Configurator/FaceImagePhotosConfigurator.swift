@@ -44,6 +44,7 @@ final class FaceImagePhotosConfigurator {
         interactor.output = presenter
         interactor.album = album
         interactor.status = status
+        interactor.parent = album
         
         let initialTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .actionSheet)
         let selectionModeTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .selectionMode)
