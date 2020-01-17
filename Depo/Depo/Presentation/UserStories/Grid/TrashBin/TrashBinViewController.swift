@@ -235,13 +235,11 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         let selectedItems = dataSource.allSelectedItems
-        stopSelectionState()
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
         let selectedItems = dataSource.allSelectedItems
-        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
 }
@@ -278,7 +276,6 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        stopSelectionState()
         interactor.restore(items: selectedItems)
     }
     
@@ -290,7 +287,6 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        stopSelectionState()
         interactor.delete(items: selectedItems)
     }
     
@@ -400,6 +396,7 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
+        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -407,6 +404,7 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
+        stopSelectionState()
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadItems(needShowSpinner: false)
         }

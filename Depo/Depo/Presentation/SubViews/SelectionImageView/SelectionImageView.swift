@@ -27,21 +27,16 @@ class SelectionImageView: UIImageView {
     
     func setSelection(selection: Bool, showSelectonBorder: Bool) {
         isSelected = selection
-        self.showSelectionBorder = showSelectonBorder
-        if (!configured) {
-            self.cornerView.alpha = 0
+        showSelectionBorder = showSelectonBorder
+        
+        guard configured else {
+            cornerView.alpha = 0
             return
         }
         
-        if (showSelectonBorder) {
-            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                self.cornerView.alpha = selection ? 1 : 0
-            })
-        } else {
-            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                self.cornerView.alpha = 0
-            })
-        }
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.cornerView.alpha = showSelectonBorder && selection ? 1 : 0
+        })
     }
     
     func setImage(image: UIImage?) {
