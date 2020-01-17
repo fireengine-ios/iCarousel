@@ -103,11 +103,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
-        guard let wrappered = wrappedObj as? Item else {
-            return
-        }
-        
-        if (isAlreadyConfigured) {
+        guard let wrappered = wrappedObj as? Item, !isAlreadyConfigured else {
             return
         }
         
