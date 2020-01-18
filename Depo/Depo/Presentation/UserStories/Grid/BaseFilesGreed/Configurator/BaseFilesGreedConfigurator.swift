@@ -106,6 +106,7 @@ class BaseFilesGreedModuleConfigurator {
         let interactor = BaseFilesGreedInteractor(remoteItems: remoteServices)
         interactor.output = presenter
         interactor.folder = folder
+        interactor.parent = folder
         
         presenter.interactor = interactor
         viewController.output = presenter

@@ -39,7 +39,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
         floatingButtonsArray.append(contentsOf: [.upload])
-        
+    
         interactor.output = self
         
         reloadData(needShowSpinner: true)
@@ -57,6 +57,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopSelectionState()
     }
     
     private func setupRefreshControl() {
@@ -111,11 +116,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.itemsIsEmpty
     }
-    
-    private func disableSelection() {
-        bottomBarManager.hide()
-        dataSource.cancelSelection()
-    }
 }
 
 // MARK: - Selection State Methods
@@ -134,7 +134,7 @@ extension TrashBinViewController {
         homePageNavigationBarStyle()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
-        setMoreButton()
+        updateMoreButton()
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -149,8 +149,8 @@ extension TrashBinViewController {
         }
     }
     
-    private func setMoreButton() {
-        navbarManager.setMoreButton(isEnabled: !dataSource.isEmpty)
+    private func updateMoreButton() {
+        navbarManager.updateMoreButton(hasItems: !dataSource.isEmpty)
     }
 }
 
@@ -208,13 +208,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
     func didLoad(items: [Item]) {
         dataSource.append(items: items) { [weak self] in
             self?.checkEmptyView()
-            self?.setMoreButton()
+            self?.updateMoreButton()
         }
     }
     
     func didLoad(albums: [BaseDataSourceItem]) {
         dataSource.append(albums: albums)
-        setMoreButton()
+        updateMoreButton()
     }
     
     func didFinishLoadAlbums() {
@@ -235,13 +235,11 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
         let selectedItems = dataSource.allSelectedItems
-        disableSelection()
         interactor.restore(items: selectedItems)
     }
 }
@@ -278,7 +276,6 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
         interactor.restore(items: selectedItems)
     }
     
@@ -290,7 +287,6 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        disableSelection()
         interactor.delete(items: selectedItems)
     }
     
@@ -374,15 +370,15 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        remove(items: items)
+        remove(albums: items)
     }
     
     //MARK: Delete events
@@ -400,6 +396,7 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
+        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -407,6 +404,7 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
+        stopSelectionState()
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadItems(needShowSpinner: false)
         }

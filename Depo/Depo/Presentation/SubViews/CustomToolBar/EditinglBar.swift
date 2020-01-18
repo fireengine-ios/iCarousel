@@ -200,7 +200,7 @@ enum ElementTypes {
             result = ElementTypes.hiddenState
         case .trashed:
             if viewType == .actionSheet {
-                result = [.info] + ElementTypes.trashState
+                result = [.select] + ElementTypes.trashState
             } else {
                 result = ElementTypes.trashState
             }

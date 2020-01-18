@@ -546,6 +546,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugLog("BaseFilesGreedPresenter onMoreActions")
 
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: view.status,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)
@@ -804,6 +805,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func getFolder() -> Item? {
         return interactor.getFolder()
+    }
+    
+    func getParent() -> BaseDataSourceItem? {
+        return interactor.getParent()
     }
     
     func getStatus() -> ItemStatus {

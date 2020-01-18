@@ -212,14 +212,9 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
     }
     
     private func push(controller: UIViewController) {
-        let present = {
+        router.navigationController?.dismiss(animated: true, completion: {
             self.router.pushViewController(viewController: controller)
-        }
-        if operation == .smash {
-            present()
-        } else {
-            router.navigationController?.dismiss(animated: true, completion: present)
-        }
+        })
     }
 
     private func openPeopleAlbum() {

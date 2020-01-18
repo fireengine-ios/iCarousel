@@ -63,12 +63,15 @@ final class TrashBinNavbarManager {
     }
     
     func changeSelectionItems(count: Int) {
-        moreButton.isEnabled = count > 0
         delegate?.setTitle("\(count) \(TextConstants.accessibilitySelected)")
     }
     
-    func setMoreButton(isEnabled: Bool) {
-        moreButton.isEnabled = isEnabled
+    func updateMoreButton(hasItems: Bool) {
+        guard state == .default else {
+            return
+        }
+        
+        moreButton.isEnabled = hasItems
     }
     
     func setupNavBarButtons(animated: Bool) {
