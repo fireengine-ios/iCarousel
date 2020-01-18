@@ -10,7 +10,7 @@ final class FileInfoInteractor {
     
     weak var output: FileInfoInteractorOutput!
     
-    var item: BaseDataSourceItem?
+    var item: BaseDataSourceItem!
     private lazy var albumService = PhotosAlbumService()
 
 }
@@ -19,20 +19,14 @@ final class FileInfoInteractor {
 
 extension FileInfoInteractor: FileInfoInteractorInput {
     
-    func setObject(object: BaseDataSourceItem) {
-        item = object
-    }
-    
     func viewIsReady() {
-        if let item = item {
-            output.setObject(object: item)
-            AnalyticsService().logScreen(screen: .info(item.fileType))
-        }
+        output.setObject(object: item)
+        AnalyticsService().logScreen(screen: .info(item.fileType))
     }
     
     func onRename(newName: String) {
         guard !newName.isEmpty else {
-            if let name = item?.name {
+            if let name = item.name {
                 output.cancelSave(use: name)
             } else {
                 output.updated()
@@ -45,10 +39,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: { [weak self] in
                 DispatchQueue.main.async {
+                    self?.item.name = newName
                     self?.output.updated()
-                    if let file = self?.item {
-                        file.name = newName
-                    }
                 }
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {
@@ -61,10 +53,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
             PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: { [weak self] in
                 DispatchQueue.main.async {
+                    self?.item.name = newName
                     self?.output.updated()
-                    if let file = self?.item {
-                        file.name = newName
-                    }
                 }
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {

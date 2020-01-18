@@ -191,6 +191,15 @@ extension TrashBinDataSource {
         }
     }
     
+    func updateItem(_ item: Item) {
+        guard let indexPath = indexPath(for: item) else {
+            return
+        }
+        
+        allItems[indexPath.section - 1][indexPath.row] = item
+        collectionView.reloadItems(at: [indexPath])
+    }
+    
     func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
         albumSlider?.removeItems(items, completion: completion)
     }
@@ -265,6 +274,15 @@ extension TrashBinDataSource {
             return nil
         }
         return allItems[safe: indexPath.section - 1]?[safe: indexPath.row]
+    }
+    
+    private func indexPath(for item: Item) -> IndexPath? {
+        for (section, items) in allItems.enumerated() {
+            if let row = items.firstIndex(where: { $0.uuid == item.uuid }) {
+                return IndexPath(row: row, section: section + 1)
+            }
+        }
+        return nil
     }
     
     private func headerText(for item: Item) -> String {

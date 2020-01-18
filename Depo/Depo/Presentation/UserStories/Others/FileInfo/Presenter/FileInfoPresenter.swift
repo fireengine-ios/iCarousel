@@ -12,6 +12,8 @@ final class FileInfoPresenter: BasePresenter {
     var interactor: FileInfoInteractorInput!
     var router: FileInfoRouterInput!
     
+    var fileInfoModuleOutput: FileInfoModuleOutput?
+    
     // MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -53,6 +55,7 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     }
     
     func updated() {
+        fileInfoModuleOutput?.didRenameItem(interactor.item)
         asyncOperationSuccess()
         view.goBack()
     }

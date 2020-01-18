@@ -296,7 +296,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         guard let item = item else {
             return
         }
-        router.openInfo(item: item)
+        router.openInfo(item: item, delegate: self)
     }
 }
 
@@ -473,5 +473,14 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+}
+
+extension TrashBinViewController: FileInfoModuleOutput {
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item else {
+            return
+        }
+        dataSource.updateItem(item)
     }
 }
