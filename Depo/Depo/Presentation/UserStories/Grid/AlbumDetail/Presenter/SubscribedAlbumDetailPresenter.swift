@@ -26,7 +26,7 @@ final class SubscribedAlbumDetailPresenter: AlbumDetailPresenter {
         //return to albums list if this album is empty
         if dataSource.allObjectIsEmpty() {
             albumDetailModuleOutput?.onAlbumDeleted()
-            back()
+            router.back()
         }
     }
 }
@@ -53,34 +53,34 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        dataSource.deleteItems(items: items)
+        router.back()
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
-        dataSource.deleteItems(items: items)
+        if view.status == .hidden {
+            router.back()
+        } else {
+            dataSource.deleteItems(items: items)
+        }
     }
     
     func putBackFromTrashItems(_ items: [Item]) {
-        dataSource.deleteItems(items: items)
+        router.back()
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {
-        back()
+        router.back()
     }
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        back()
+        router.back()
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        back()
+        router.back()
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        back()
-    }
-    
-    private func back() {
-        (router as? AlbumDetailRouter)?.back()
+        router.back()
     }
 }

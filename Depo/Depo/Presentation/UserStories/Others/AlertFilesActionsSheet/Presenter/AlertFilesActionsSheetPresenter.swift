@@ -465,7 +465,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
-                            self.interactor.moveToTrash(item: currentItems)
+                            self.interactor.delete(items: currentItems)
                             self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
