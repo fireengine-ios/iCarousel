@@ -48,6 +48,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func didDelete(items: [BaseDataSourceItem])
     
+    func didDeleteParent()
+    
     func onItemSelectedActiveState(item: BaseDataSourceItem)
     
     func didChangeTopHeader(text: String)
@@ -78,6 +80,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func updateCoverPhotoIfNeeded() { }
     
     func didDelete(items: [BaseDataSourceItem]) { }
+    
+    func didDeleteParent() {}
     
     func didChangeTopHeader(text: String) { }
     
@@ -1712,6 +1716,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
+        //check delete parent Item (hide|delete|moveToTrash|restore)
+        if let firstItem = items.first, let parent = delegate?.getParent(), firstItem == parent {
+            delegate?.didDeleteParent()
+            return
+        }
+        
         dispatchQueue.async { [weak self] in
             guard let `self` = self, !items.isEmpty else {
                 return

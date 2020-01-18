@@ -6,11 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-final class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
-    
-    func back() {
-        view.navigationController?.popViewController(animated: true)
-    }
+final class AlbumDetailRouter: BaseFilesGreedRouter {
     
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         

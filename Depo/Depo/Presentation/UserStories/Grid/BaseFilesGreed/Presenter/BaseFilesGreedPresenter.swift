@@ -412,6 +412,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
     }
     
+    func didDeleteParent() {
+        router.back()
+    }
+    
     func updateCoverPhotoIfNeeded() { }
     
     func didChangeTopHeader(text: String) {
