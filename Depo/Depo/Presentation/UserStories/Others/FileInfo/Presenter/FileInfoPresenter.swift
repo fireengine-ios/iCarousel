@@ -55,7 +55,9 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     }
     
     func updated() {
-        fileInfoModuleOutput?.didRenameItem(interactor.item)
+        if let item = interactor.item {
+            fileInfoModuleOutput?.didRenameItem(item)
+        }
         asyncOperationSuccess()
         view.goBack()
     }

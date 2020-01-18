@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FileInfoInteractorInput {
-    var item: BaseDataSourceItem! { get set }
+    var item: BaseDataSourceItem? { get set }
     func viewIsReady()
     func onRename(newName: String)
     func getAlbum(for item: BaseDataSourceItem)
