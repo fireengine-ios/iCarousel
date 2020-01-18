@@ -12,7 +12,8 @@ import Foundation
 final class HSCompletionPopUpsFactory {
 
     enum State {
-        case hideCompleted
+        case bottomBarHideCompleted
+        case actionSheetHideCompleted
         case hideAlbumsCompleted
         case smashCompleted
     }
@@ -25,11 +26,16 @@ final class HSCompletionPopUpsFactory {
 
     private func makePopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) -> BasePopUpController {
         switch state {
-        case .hideCompleted:
+        case .bottomBarHideCompleted:
+            return HSCompletionPopUp(mode: .showBottomCloseButton, photosCount: itemsCount, delegate: delegate)
+            
+        case .actionSheetHideCompleted:
             if isDoNotShowAgainButtonPressed(for: state) {
                 return HSCompletionPopUp(mode: .showBottomCloseButton, photosCount: itemsCount, delegate: delegate)
+                
             } else {
                 return HSCompletionPopUp(mode: .showOpenSmartAlbumButton, photosCount: itemsCount, delegate: delegate)
+                
             }
             
         case .hideAlbumsCompleted:
@@ -52,13 +58,13 @@ final class HSCompletionPopUpsFactory {
         let isDoNotShowAgainButtonPressed: Bool
         
         switch state {
-        case .hideCompleted:
+        case .actionSheetHideCompleted:
             isDoNotShowAgainButtonPressed = storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox
             
         case .smashCompleted:
             isDoNotShowAgainButtonPressed = storageVars.smashPhotoPopUpCheckBox
             
-        case .hideAlbumsCompleted:
+        case .hideAlbumsCompleted, .bottomBarHideCompleted:
             assertionFailure("there is no button for this type of popup")
             return false
         }
