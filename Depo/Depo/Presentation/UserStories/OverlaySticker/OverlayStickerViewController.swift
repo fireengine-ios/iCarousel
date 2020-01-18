@@ -21,6 +21,7 @@ final class OverlayStickerViewController: ViewController {
     
     private let uploadService = UploadService()
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let stickerService: SmashService = SmashServiceImpl()
 
     private lazy var applyButton: UIBarButtonItem = {
@@ -84,12 +85,16 @@ final class OverlayStickerViewController: ViewController {
             return
         }
 
-        smashCoordinator?.smashConfirmPopUp { [weak self] in
+        smashCoordinator?.smashConfirmPopUp { [weak self] isConfirmed in
             
             guard let self = self else {
                 return
             }
             
+            self.analyticsService.logScreen(screen: .smashConfirmPopUp)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
+        
             self.showSpinnerIncludeNavigationBar()
             self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
                 self?.saveResult(result: result)
@@ -138,9 +143,9 @@ final class OverlayStickerViewController: ViewController {
     }
 
     private func showCompletionPopUp() {
+        analyticsService.logScreen(screen: .saveSmashSuccessfullyPopUp)
         smashCoordinator?.smashSuccessed()
     }
-    
     
     private func showPhotoVideoPreview(item: WrapData?) {
         guard let item = item else {
@@ -168,6 +173,7 @@ final class OverlayStickerViewController: ViewController {
                         self?.close { [weak self] in
                             if let itemToShow = remoteItem {
                                 RouterVC().navigationController?.dismiss(animated: false, completion: {
+                                    self?.analyticsService.logScreen(screen: .smashPreview)
                                     self?.showPhotoVideoPreview(item: itemToShow)
                                 })
                             }
@@ -269,10 +275,10 @@ extension OverlayStickerViewController: OverlayStickerImageViewdelegate {
 
 extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDelegate {
     
-    func didSelectItemWithUrl(url: URL, attachmentType: AttachedEntityType) {
+    func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {
         
         showSpinner()
-        overlayingStickerImageView.addAttachment(url: url, attachmentType: attachmentType, completion: { [weak self] in
+        overlayingStickerImageView.addAttachment(item: item, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
     }

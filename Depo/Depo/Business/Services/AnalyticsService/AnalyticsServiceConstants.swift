@@ -213,6 +213,14 @@ enum AnalyticsAppScreens {
     case campaignDetailDuring
     case campaignDetailAfter
     
+    //Smash
+    case smashConfirmPopUp
+    case saveSmashSuccessfullyPopUp
+    case nonStandardUserWithFIGroupingOffPopUp
+    case standardUserWithFIGroupingOffPopUp
+    case standardUserWithFIGroupingOnPopUp
+    case smashPreview
+    
     var name: String {
         switch self {
         ///authorization
@@ -401,6 +409,18 @@ enum AnalyticsAppScreens {
             return "Campaign - Detail During"
         case .campaignDetailAfter:
             return "Campaign - Detail After"
+        case .smashConfirmPopUp:
+            return "Smash Confirm Pop up"
+        case .saveSmashSuccessfullyPopUp:
+            return "Save Smash Successfully Pop up"
+        case .nonStandardUserWithFIGroupingOffPopUp:
+            return "NonStandard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOffPopUp:
+            return "Standard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOnPopUp:
+            return "Standard User With F/I Grouping ON Pop Up"
+        case .smashPreview:
+            return "Smash Preview"
         }
     }
 }
@@ -587,6 +607,11 @@ enum GAEventAction {
     case giftIcon
     case campaignDetail
     case analyzeWithPhotopick
+    case smash
+    case smashConfirmPopUp
+    case smashSuccessPopUp
+    case smashFIGroupingOff
+    
 
     var text: String {
         switch self {
@@ -711,6 +736,14 @@ enum GAEventAction {
             return "Campaign Detail"
         case .analyzeWithPhotopick:
             return "Analyze with photopick"
+        case .smash:
+            return "Smash"
+        case .smashConfirmPopUp:
+            return "Smash Confirm Pop up"
+        case .smashSuccessPopUp:
+            return "Save Smash Successfully Pop Up"
+        case .smashFIGroupingOff:
+            return "Standard User With F/I Grouping OFF Pop Up"
         }
     }
 }
@@ -1000,6 +1033,12 @@ enum GAEventLabel {
     case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
     case clickSecurityQuestion(number: Int)
     case campaign(CampaignEvent)
+    case ok
+    case viewPeopleAlbum
+    case enableFIGrouping
+    case becomePremium
+    case proceedWithExistingPeople
+    
     
     var text: String {
         switch self {
@@ -1181,6 +1220,16 @@ enum GAEventLabel {
             return "Q\(number)"
         case .campaign(let event):
             return event.text
+        case .ok:
+            return "OK"
+        case .viewPeopleAlbum:
+            return "View People Album"
+        case .enableFIGrouping:
+            return "Enable F/I Grouping"
+        case .becomePremium:
+            return "Become Premium"
+        case .proceedWithExistingPeople:
+            return "Proceed With Existing People"
         }
     }
     

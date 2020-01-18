@@ -273,6 +273,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             completion?()
             self.router.presentViewController(controller: navVC)
+            self.trackEvent(elementType: .smash)
         }
     }
     
@@ -838,6 +839,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         switch elementType {
         case .print:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        case .smash:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash)
         default:
             break
         }
