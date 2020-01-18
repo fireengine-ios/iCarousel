@@ -118,7 +118,7 @@ enum ElementTypes {
             result = ElementTypes.hiddenState
             
         case .trashed:
-            result = ElementTypes.trashState
+            result = [.select] + ElementTypes.trashState
             
         default:
             switch viewType {
