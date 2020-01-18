@@ -10,23 +10,25 @@ import UIKit
 
 class FileInfoModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, item: BaseDataSourceItem, moduleOutput: FileInfoModuleOutput?) {
 
         if let viewController = viewInput as? FileInfoViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, item: item, moduleOutput: moduleOutput)
         }
     }
 
-    private func configure(viewController: FileInfoViewController) {
+    private func configure(viewController: FileInfoViewController, item: BaseDataSourceItem, moduleOutput: FileInfoModuleOutput?) {
 
         let router = FileInfoRouter()
 
         let presenter = FileInfoPresenter()
         presenter.view = viewController
         presenter.router = router
+        presenter.fileInfoModuleOutput = moduleOutput
 
         let interactor = FileInfoInteractor()
         interactor.output = presenter
+        interactor.item = item
 
         presenter.interactor = interactor
         viewController.output = presenter

@@ -30,7 +30,7 @@ final class TrashBinSortingManager {
     
     var isActive = true {
         didSet {
-            topBar.view.isUserInteractionEnabled = isActive
+            topBar.view.isHidden = !isActive
         }
     }
     

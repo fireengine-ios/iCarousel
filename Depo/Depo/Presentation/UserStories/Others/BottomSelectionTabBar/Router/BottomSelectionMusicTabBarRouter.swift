@@ -11,13 +11,9 @@ import UIKit
 class BottomSelectionMusicTabBarRouter: BottomSelectionTabBarRouter {
 
     override func onInfo(object: Item) {
-        guard let fileInfo = RouterVC().fileInfo as? FileInfoViewController else {
-            return
-        }
-        
-        let topVC = UIApplication.topController()
-        topVC?.navigationController?.pushViewController(fileInfo, animated: true)
-        fileInfo.interactor.setObject(object: object)
+        let router = RouterVC()
+        let fileInfo = router.fileInfo(item: object)
+        router.pushOnPresentedView(viewController: fileInfo)
     }
     
     override func showSelectFolder(selectFolder: SelectFolderViewController) {
