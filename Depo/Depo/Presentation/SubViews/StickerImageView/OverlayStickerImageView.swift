@@ -42,7 +42,17 @@ protocol OverlayStickerImageViewdelegate {
 
 final class OverlayStickerImageView: UIImageView {
     
-    private var attachments: [UIImageView] = []
+    private final class Attachment {
+        let item: SmashStickerResponse
+        let imageView: UIImageView
+        
+        init(item: SmashStickerResponse, imageView: UIImageView) {
+            self.item = item
+            self.imageView = imageView
+        }
+    }
+    
+    private var attachments: [Attachment] = []
     private var mainSticker: UIImageView?
     
     private let panGesture = UIPanGestureRecognizer()
@@ -81,9 +91,8 @@ final class OverlayStickerImageView: UIImageView {
         self.backgroundColor = .black
     }
     
-    func addAttachment(url: URL, attachmentType: AttachedEntityType, completion: @escaping VoidHandler) {
-        stopAnimateStickers()
-        attachmentType == .gif ? createGifAttachment(url: url, completion: completion) : createImageAttachment(url: url, completion: completion)
+    func addAttachment(item: SmashStickerResponse, attachmentType: AttachedEntityType, completion: @escaping VoidHandler) {
+        attachmentType == .gif ? createGifAttachment(item: item, completion: completion) : createImageAttachment(item: item, completion: completion)
     }
     
     func removeLast() {
@@ -92,11 +101,10 @@ final class OverlayStickerImageView: UIImageView {
         }
         
         let subview = attachments.removeLast()
-        subview.removeFromSuperview()
+        subview.imageView.removeFromSuperview()
     }
     
     func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
-            stopAnimateStickers()
         
             if self.subviews.contains(where: { $0 is YYAnimatedImageView}) {
                 self.subviews.forEach({ $0.isHidden = true})
@@ -107,9 +115,10 @@ final class OverlayStickerImageView: UIImageView {
                 
                 self.subviews.forEach({ $0.isHidden = false})
                 
-                self.overlayAnimationService.combine(attachments: self.attachments, resultName: resultName, originalImage: img) { [weak self] createStickerResult in
+                let attachment = self.attachments.map({ $0.imageView})
+                
+                self.overlayAnimationService.combine(attachments: attachment, resultName: resultName, originalImage: img) { createStickerResult in
                     completion(createStickerResult)
-                    self?.restartAnimateStickers()
                 }
             } else {
                 
@@ -119,7 +128,6 @@ final class OverlayStickerImageView: UIImageView {
                 }
                 
                 self.saveImage(image: sticker, fileName: resultName, completion: completion)
-                restartAnimateStickers()
             }
     }
     
@@ -149,10 +157,10 @@ final class OverlayStickerImageView: UIImageView {
         }
     }
     
-    private func createGifAttachment(url: URL, completion: @escaping VoidHandler) {
+    private func createGifAttachment(item: SmashStickerResponse, completion: @escaping VoidHandler) {
         setupTrasBinFrame()
         
-        downloader.getImageData(url: url) { [weak self] data in
+        downloader.getImageData(url: item.path) { [weak self] data in
             
             guard
                 let self = self,
@@ -172,17 +180,17 @@ final class OverlayStickerImageView: UIImageView {
                 
                 imageView.center = self.center
                 self.addSubview(imageView)
-                self.attachments.append(imageView)
-                self.restartAnimateStickers()
+                let attachment = Attachment(item: item, imageView: imageView)
+                self.attachments.append(attachment)
                 completion()
             }
         }
     }
     
-    private func createImageAttachment(url: URL, completion: @escaping VoidHandler) {
+    private func createImageAttachment(item: SmashStickerResponse, completion: @escaping VoidHandler) {
         setupTrasBinFrame()
     
-        downloader.getImageData(url: url) { [weak self] data in
+        downloader.getImageData(url: item.path) { [weak self] data in
             
             guard
                 let self = self,
@@ -200,8 +208,8 @@ final class OverlayStickerImageView: UIImageView {
                 imageView.center = self.center
                 
                 self.addSubview(imageView)
-                self.attachments.append(imageView)
-                self.restartAnimateStickers()
+                let attachment = Attachment(item: item, imageView: imageView)
+                self.attachments.append(attachment)
                 completion()
             }
         }
@@ -337,23 +345,6 @@ final class OverlayStickerImageView: UIImageView {
         trashBinLayer.isHidden = false
     }
     
-    private func restartAnimateStickers() {
-        attachments.forEach({ item in
-            if let newItem = item as? YYAnimatedImageView {
-                newItem.currentAnimatedImageIndex = 0
-                newItem.startAnimating()
-            }
-        })
-    }
-    
-    private func stopAnimateStickers() {
-        attachments.forEach({ item in
-            if let newItem = item as? YYAnimatedImageView {
-                newItem.stopAnimating()
-            }
-        })
-    }
-    
     private func setupGestureRecognizers() {
         panGesture.addTarget(self, action: #selector(self.handlePan(_:)))
         panGesture.delegate = self
@@ -368,6 +359,26 @@ final class OverlayStickerImageView: UIImageView {
         addGestureRecognizer(rotationGesture)
     }
     
+    func getAttachmentInfoForAnalytics() -> String {
+        
+        var message = ""
+        let items = attachments.map{ $0.item }
+        let keys = Set(items)
+    
+        keys.forEach({ key in
+            var msg = ""
+            let items = items.filter({ $0 == key })
+            msg.append("\(items.count)")
+            if key.type == .gif {
+                msg.append("G")
+            } else{
+                msg.append("S")
+            }
+            msg.append("\(key.id)|")
+            message.append(msg)
+        })
+        return message
+    }
 }
 
 extension OverlayStickerImageView: UIGestureRecognizerDelegate {

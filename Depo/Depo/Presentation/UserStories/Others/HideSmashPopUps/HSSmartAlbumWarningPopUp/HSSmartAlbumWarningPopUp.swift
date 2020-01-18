@@ -19,7 +19,6 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
-
             newValue.layer.shadowRadius = 5
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowColor = UIColor.black.cgColor
@@ -128,7 +127,6 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
         super.viewDidLoad()
 
         contentView = popUpView
-
         configureAppearance()
     }
 
@@ -157,17 +155,20 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     }
 
     @IBAction func onCloseTap(_ sender: Any) {
+        self.delegate?.popUPClosed()
         close()
     }
 
     @IBAction func onPremiumTap(_ sender: Any) {
         close(isFinalStep: false) {
+            self.delegate?.becomePremium()
             self.delegate?.openPremium()
         }
     }
 
     @IBAction func onFunctionTap(_ sender: Any) {
         close(isFinalStep: false) {
+            self.delegate?.proceedWithExistingPeople()
             self.delegate?.openFaceImageGrouping()
         }
     }

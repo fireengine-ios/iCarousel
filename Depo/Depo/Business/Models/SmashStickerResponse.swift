@@ -15,8 +15,8 @@ enum StickerType: String {
     case image = "SMASH_STICKER"
 }
 
-final class SmashStickerResponse {
-    
+final class SmashStickerResponse: Hashable {
+        
     private enum ResponseKey {
         static let id = "id"
         static let fileName = "fileName"
@@ -33,7 +33,10 @@ final class SmashStickerResponse {
     let type: StickerType
     let contentType: String
     
-    
+    var hashValue: Int {
+        return path.hashValue
+    }
+
     init(id: Int,
          fileName: String,
          path: URL,
@@ -69,5 +72,10 @@ final class SmashStickerResponse {
                   type: type,
                   contentType: contentType)
     }
+    
+    static func == (lhs: SmashStickerResponse, rhs: SmashStickerResponse) -> Bool {
+        return lhs.id == rhs.id && lhs.type == rhs.type && lhs.path == rhs.path
+    }
+    
 }
 

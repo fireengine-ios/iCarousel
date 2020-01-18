@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OverlayStickerViewControllerDataSourceDelegate {
-    func didSelectItemWithUrl(url: URL, attachmentType: AttachedEntityType)
+    func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType)
 }
 
 final class OverlayStickerViewControllerDataSource: NSObject {
@@ -183,8 +183,8 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !currentState.source.isEmpty {
-            let url = currentState.source[indexPath.row].path
-            delegate?.didSelectItemWithUrl(url: url, attachmentType: selectedAttachmentType)
+            let item = currentState.source[indexPath.row]
+            delegate?.didSelectItem(item: item, attachmentType: selectedAttachmentType)
         }
     }
 }
