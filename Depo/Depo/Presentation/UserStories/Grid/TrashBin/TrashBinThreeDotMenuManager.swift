@@ -32,7 +32,7 @@ final class TrashBinThreeDotMenuManager {
     }
     
     func showActions(item: Item, sender: Any) {
-        let types = ElementTypes.filesInFolderElementsConfig(for: .trashed, viewType: .actionSheet)
+        let types = [.info] + ElementTypes.trashState
         showAlertSheet(with: types, item: item, sender: sender)
     }
 

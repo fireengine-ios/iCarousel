@@ -230,7 +230,7 @@ extension HideSmashCoordinator {
 
         switch operation! {
         case .hide:
-            state = .hideCompleted
+            state = (output is AlertFilesActionsSheetPresenter) ? .actionSheetHideCompleted : .bottomBarHideCompleted
 
         case .smash:
             state = .smashCompleted

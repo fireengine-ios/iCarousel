@@ -24,6 +24,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getFolder() -> Item?
     
+    func getParent() -> BaseDataSourceItem?
+    
     func getStatus() -> ItemStatus
     
     func onLongPressInCell()
@@ -46,6 +48,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func didDelete(items: [BaseDataSourceItem])
     
+    func didDeleteParent()
+    
     func onItemSelectedActiveState(item: BaseDataSourceItem)
     
     func didChangeTopHeader(text: String)
@@ -61,6 +65,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
+    
+    func needToBack()
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -77,6 +83,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     
     func didDelete(items: [BaseDataSourceItem]) { }
     
+    func didDeleteParent() {}
+    
     func didChangeTopHeader(text: String) { }
     
     func scrollViewDidScroll(scrollView: UIScrollView) { }
@@ -88,6 +96,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
+    
+    func needToBack() { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -931,8 +941,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return selectedItemsArray.map{$0}
         }
         
-        if let folder = delegate?.getFolder() {
-            return [folder]
+        if let parent = delegate?.getParent() {
+            return [parent]
         }
         
         return []
@@ -1710,6 +1720,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
+        //check delete parent Item (hide|delete|moveToTrash|restore)
+        if let firstItem = items.first, let parent = delegate?.getParent(), firstItem == parent {
+            delegate?.didDeleteParent()
+            return
+        }
+        
+        //back if restore|delete items in trash bin folders
+        if delegate?.getStatus() == .trashed {
+            delegate?.needToBack()
+            return
+        }
+        
         dispatchQueue.async { [weak self] in
             guard let `self` = self, !items.isEmpty else {
                 return
