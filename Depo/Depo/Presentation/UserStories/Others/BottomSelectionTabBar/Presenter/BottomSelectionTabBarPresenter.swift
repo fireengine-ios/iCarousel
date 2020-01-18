@@ -400,7 +400,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.moveToTrash(item: currentItems)
+                        self.interactor.delete(items: currentItems)
                     })
                 case .hide:
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
