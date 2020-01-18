@@ -53,15 +53,19 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        dataSource.deleteItems(items: items)
+        router.back()
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
-        dataSource.deleteItems(items: items)
+        if view.status == .hidden {
+            router.back()
+        } else {
+            dataSource.deleteItems(items: items)
+        }
     }
     
     func putBackFromTrashItems(_ items: [Item]) {
-        dataSource.deleteItems(items: items)
+        router.back()
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {

@@ -416,6 +416,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.back()
     }
     
+    func needToBack() {
+        router.back()
+    }
+    
     func updateCoverPhotoIfNeeded() { }
     
     func didChangeTopHeader(text: String) {

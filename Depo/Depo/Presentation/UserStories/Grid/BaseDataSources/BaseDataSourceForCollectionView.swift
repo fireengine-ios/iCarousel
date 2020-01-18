@@ -65,6 +65,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
+    
+    func needToBack()
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -94,6 +96,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
+    
+    func needToBack() { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -1719,6 +1723,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         //check delete parent Item (hide|delete|moveToTrash|restore)
         if let firstItem = items.first, let parent = delegate?.getParent(), firstItem == parent {
             delegate?.didDeleteParent()
+            return
+        }
+        
+        //back if restore|delete items in trash bin folders
+        if delegate?.getStatus() == .trashed {
+            delegate?.needToBack()
             return
         }
         
