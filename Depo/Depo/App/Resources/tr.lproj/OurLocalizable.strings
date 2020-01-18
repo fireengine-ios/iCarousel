@@ -1362,3 +1362,6 @@
 "restore_popup_success_text" = "";
 "delete_from_hidden_bin_popup_success_title" = "";
 "delete_from_hidden_bin_popup_success_text" = "";
+"unhide_popup_success_title" = "";
+"unhide_popup_success_text" = "";
+"delete_popup_text" = "";
