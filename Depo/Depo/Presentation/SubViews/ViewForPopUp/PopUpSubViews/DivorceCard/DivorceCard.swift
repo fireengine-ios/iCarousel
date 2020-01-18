@@ -17,6 +17,7 @@ final class DivorceCard: BaseCardView {
     @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var dividerLineView: UIView!
     @IBOutlet private weak var videoPreviewImageView: LoadingImageView!
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var videoUrl: URL?
     
@@ -76,6 +77,8 @@ final class DivorceCard: BaseCardView {
             return
         }
         
+        analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .divorceButtonVideo)
+        
         let player = AVPlayer(url: videoUrl)
         
         let playerController = FixedAVPlayerViewController()
@@ -87,6 +90,5 @@ final class DivorceCard: BaseCardView {
         RouterVC().presentViewController(controller: nController, animated: true) {
             player.play()
         }
-        
     }
 }

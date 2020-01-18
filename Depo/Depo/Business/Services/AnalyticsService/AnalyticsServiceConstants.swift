@@ -1037,8 +1037,8 @@ enum GAEventLabel {
     case viewPeopleAlbum
     case enableFIGrouping
     case becomePremium
-    case proceedWithExistingPeople
-    
+    case proceedWithExistingPeople    
+    case divorceButtonVideo
     
     var text: String {
         switch self {
@@ -1230,6 +1230,8 @@ enum GAEventLabel {
             return "Become Premium"
         case .proceedWithExistingPeople:
             return "Proceed With Existing People"
+        case .divorceButtonVideo:
+            return "Divorce Button Video"
         }
     }
     
