@@ -28,6 +28,12 @@ final class TrashBinSortingManager {
     private weak var delegate: TrashBinSortingManagerDelegate?
     private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     
+    var isActive = true {
+        didSet {
+            topBar.view.isUserInteractionEnabled = isActive
+        }
+    }
+    
     required init(delegate: TrashBinSortingManagerDelegate?) {
         self.delegate = delegate
     }

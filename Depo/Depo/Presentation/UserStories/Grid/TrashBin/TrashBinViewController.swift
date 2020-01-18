@@ -125,6 +125,7 @@ extension TrashBinViewController {
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
         navigationBarWithGradientStyle()
+        sortingManager.isActive = false
     }
     
     private func stopSelectionState() {
@@ -135,6 +136,7 @@ extension TrashBinViewController {
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         updateMoreButton()
+        sortingManager.isActive = true
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
