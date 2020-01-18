@@ -966,12 +966,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            if !isObjctSelected(object: object) {
-                onSelectObject(object: object)
-            }
-            
             if !isSelectionStateActive {
+                isSelectionStateActive = true
+                
+                if !isObjctSelected(object: object) {
+                    onSelectObject(object: object)
+                }
+                
                 forwardDelegate.onLongPressInCell()
+            } else if !isObjctSelected(object: object) {
+                onSelectObject(object: object)
             }
         }
     }
