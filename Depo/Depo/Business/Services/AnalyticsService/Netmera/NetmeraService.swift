@@ -73,9 +73,13 @@ final class NetmeraService {
             })
             
             var accountType = "Null"
-            if let unwrapedAccountType = SingletonStorage.shared.accountInfo?.accountType {
-                accountType = unwrapedAccountType
-///                 Standard/Standard+/Premium
+            switch AuthoritySingleton.shared.accountType {
+            case .standart:
+                accountType = NetmeraEventValues.AccountType.standart.text
+            case .middle:
+                accountType = NetmeraEventValues.AccountType.standartPlus.text
+            case .premium:
+                accountType = NetmeraEventValues.AccountType.premium.text
             }
             
             let isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled ?? false
@@ -91,8 +95,8 @@ final class NetmeraService {
                 netmeraAutoSyncStatusPhoto = NetmeraEventValues.AutoSyncState.getState(autosyncSettings: autoSyncStorageSettings.photoSetting).text
                 netmeraAutoSyncStatusVideo = NetmeraEventValues.AutoSyncState.getState(autosyncSettings: autoSyncStorageSettings.videoSetting).text
             } else {
-                netmeraAutoSyncStatusPhoto = "Null"
-                netmeraAutoSyncStatusVideo = "Null"
+                netmeraAutoSyncStatusPhoto = NetmeraEventValues.AutoSyncState.never.text
+                netmeraAutoSyncStatusVideo = NetmeraEventValues.AutoSyncState.never.text
             }
                 
             

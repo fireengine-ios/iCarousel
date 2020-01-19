@@ -110,8 +110,6 @@ final class UploadOperation: Operation {
             return
         }
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Upload(uploadType: uploadType ?? .other, fileType: inputItem.fileType))
-        
         requestObject = baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self,
                 let baseurlResponse = baseurlResponse,

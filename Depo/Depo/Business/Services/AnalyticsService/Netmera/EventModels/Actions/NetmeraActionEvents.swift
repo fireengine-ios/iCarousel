@@ -87,8 +87,8 @@ extension NetmeraEvents.Actions {
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return[
-                "ea" : #keyPath(status),
-                "eb" : #keyPath(channelType),
+                "eb" : #keyPath(status),
+                "ea" : #keyPath(channelType),
             ]
         }
         
@@ -457,23 +457,29 @@ extension NetmeraEvents.Actions {
         @objc var uploadType = ""
         @objc var fileType = ""
         
-        convenience init(uploadType: UploadType, fileType: FileType) {
-            let appopriateFileType: NetmeraEventValues.UploadFileType
-            switch fileType {
-            case .image, .faceImage(_):
-                appopriateFileType = .photo
-            case .video:
-                appopriateFileType = .video
-            case .audio:
-                appopriateFileType = .music
-            case .application(.doc), .application(.txt),
-                 .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
-                 .application(.usdz), .allDocs:
-                appopriateFileType = .document
-            default:
-                appopriateFileType = .photo
+        convenience init(uploadType: UploadType, fileTypes: [FileType]) {
+            
+            var acceptableType = ""
+            fileTypes.forEach {
+                let appopriateFileType: NetmeraEventValues.UploadFileType
+                switch $0 {
+                case .image, .faceImage(_):
+                    appopriateFileType = .photo
+                case .video:
+                    appopriateFileType = .video
+                case .audio:
+                    appopriateFileType = .music
+                case .application(.doc), .application(.txt),
+                     .application(.html), .application(.xls),
+                     .application(.pdf), .application(.ppt),
+                     .application(.usdz), .allDocs:
+                    appopriateFileType = .document
+                default:
+                    appopriateFileType = .photo
+                }
+                acceptableType += "/\(appopriateFileType.text)"
             }
+            
             
             let appopriateUploadType: NetmeraEventValues.UploadType
             
@@ -489,13 +495,13 @@ extension NetmeraEvents.Actions {
                 
             }
             
-            self.init(uploadType: appopriateUploadType, fileType: appopriateFileType)
+            self.init(uploadType: appopriateUploadType, fileTypeStr: acceptableType)
         }
         
-        convenience init(uploadType: NetmeraEventValues.UploadType, fileType: NetmeraEventValues.UploadFileType) {
+        convenience init(uploadType: NetmeraEventValues.UploadType, fileTypeStr: String) {
             self.init()
             self.uploadType = uploadType.text
-            self.fileType = fileType.text
+            self.fileType = fileTypeStr
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
