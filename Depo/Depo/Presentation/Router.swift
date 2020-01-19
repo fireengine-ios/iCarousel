@@ -597,8 +597,10 @@ class RouterVC: NSObject {
     
     // MARK: File info
     
-    var fileInfo: UIViewController? {
-        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController")
+    func fileInfo(item: BaseDataSourceItem, moduleOutput: FileInfoModuleOutput? = nil) -> UIViewController {
+        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController",
+                                                                                item: item,
+                                                                                moduleOutput: moduleOutput)
         return viewController
     }
     

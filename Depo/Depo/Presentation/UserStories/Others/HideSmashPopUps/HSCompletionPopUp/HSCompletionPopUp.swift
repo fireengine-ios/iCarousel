@@ -161,6 +161,8 @@ final class HSCompletionPopUp: BasePopUpController {
 
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
 
     //MARK: Init
 
@@ -272,12 +274,14 @@ final class HSCompletionPopUp: BasePopUpController {
     }
 
     @IBAction private func onOpenPeopleAlbumTap(_ sender: Any) {
+        trackSmashEvents(isCanseled: false)
         close(isFinalStep: false) {
             self.delegate?.openPeopleAlbumIfPossible()
         }
     }
 
     @IBAction private func onCloseTap(_ sender: Any) {
+        trackSmashEvents(isCanseled: true)
         close()
     }
 
@@ -286,6 +290,12 @@ final class HSCompletionPopUp: BasePopUpController {
         setHiddenStatus(sender.isSelected)
     }
 
+    
+    private func trackSmashEvents(isCanseled: Bool) {
+        if mode == .smash {
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashSuccessPopUp, eventLabel: isCanseled ? .cancel : .viewPeopleAlbum)
+        }
+    }
 }
 
 extension HSCompletionPopUp {

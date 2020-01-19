@@ -215,12 +215,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
         self.output?.operationFinished(type: .info)
         
-        if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
-            infoController.interactor.setObject(object: object)
-            router.pushOnPresentedView(viewController: infoController)
-            if isRenameMode {
-                infoController.startRenaming()
-            }
+        guard let item = item.first, let infoController = router.fileInfo(item: item) as? FileInfoViewController else {
+            return
+        }
+        
+        router.pushOnPresentedView(viewController: infoController)
+        if isRenameMode {
+            infoController.startRenaming()
         }
     }
     
@@ -273,6 +274,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             completion?()
             self.router.presentViewController(controller: navVC)
+            self.trackEvent(elementType: .smash)
         }
     }
     
@@ -637,10 +639,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func albumDetails(items: [BaseDataSourceItem]) {
-        let albumDetailVC = router.fileInfo as? FileInfoViewController
-        albumDetailVC?.needToShowTabBar = false
-        albumDetailVC?.interactor.setObject(object: items.first!)
-        router.pushViewController(viewController: albumDetailVC!)
+        guard let album = items.first, let albumDetailVC = router.fileInfo(item: album) as? FileInfoViewController else {
+            return
+        }
+        
+        albumDetailVC.needToShowTabBar = false
+        router.pushViewController(viewController: albumDetailVC)
     }
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem]) {
@@ -892,6 +896,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         switch elementType {
         case .print:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        case .smash:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash)
         default:
             break
         }

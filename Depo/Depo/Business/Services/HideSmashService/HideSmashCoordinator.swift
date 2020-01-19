@@ -15,6 +15,16 @@ protocol HideFuncRoutingProtocol: class {
 
     //HideFuncCompletionPopUp
     func openPeopleAlbumIfPossible()
+    //Track events
+    func popUPClosed()
+    func becomePremium()
+    func proceedWithExistingPeople()
+}
+
+extension HideFuncRoutingProtocol {
+    func popUPClosed() {}
+    func becomePremium() {}
+    func proceedWithExistingPeople() {}
 }
 
 protocol HideFuncServiceProtocol {
@@ -23,7 +33,7 @@ protocol HideFuncServiceProtocol {
 }
 
 protocol SmashServiceProtocol {
-    func smashConfirmPopUp(completion: @escaping VoidHandler)
+    func smashConfirmPopUp(completion: @escaping BoolHandler)
     func smashSuccessed()
 }
 
@@ -71,6 +81,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
 
     private lazy var completionPopUpFactory = HSCompletionPopUpsFactory()
     private lazy var albumWarningPopUpsFactory = SmartAlbumWarningPopUpsFactory()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     private let router = RouterVC()
 
@@ -133,7 +144,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
         showSuccessPopUp()
     }
     
-    func smashConfirmPopUp(completion: @escaping () -> Void) {
+    func smashConfirmPopUp(completion: @escaping (Bool) -> Void) {
         operation = .smash
         let popUp = PopUpController.with(title: TextConstants.save,
                                          message: TextConstants.smashPopUpMessage,
@@ -142,10 +153,12 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
                                          secondButtonTitle: TextConstants.ok,
                                          firstUrl: nil,
                                          secondUrl: nil,
-                                         firstAction: { popup in popup.close() },
+                                         firstAction: { popup in
+                                            completion(false)
+                                            popup.close() },
                                          secondAction: { popup in
                                             popup.close()
-                                            completion()
+                                            completion(true)
         })
         
         UIApplication.topController()?.present(popUp, animated: true, completion: nil)
@@ -326,16 +339,69 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
     }
 
     func openPremium() {
+        trackSmashEvents(event: .becomePremium)
         let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
         push(controller: controller)
     }
 
     func openFaceImageGrouping() {
+        trackSmashEvents(event: .enable)
         if self.faceImageGrouping?.isFaceImageAllowed == true {
             self.openPeopleAlbum()
+            analyticsService.logScreen(screen: .standardUserWithFIGroupingOnPopUp)
         } else {
+            if AuthoritySingleton.shared.accountType.isPremium {
+                analyticsService.logScreen(screen: .nonStandardUserWithFIGroupingOffPopUp)
+            } else {
+                analyticsService.logScreen(screen: .standardUserWithFIGroupingOffPopUp)
+            }
+            
             let controller = self.router.faceImage
             push(controller: controller)
+        }
+    }
+    
+    func popUPClosed() {
+        trackSmashEvents(event: .cancel)
+    }
+    
+    func becomePremium() {
+        trackSmashEvents(event: .becomePremium)
+    }
+    
+    func proceedWithExistingPeople() {
+        trackSmashEvents(event: .proceedWithExistingPeople)
+    }
+}
+
+extension HideSmashCoordinator {
+    
+    private enum TracSmashEventsOnPeopleAlbumPopUp {
+        case enable
+        case becomePremium
+        case cancel
+        case proceedWithExistingPeople
+    }
+    
+    private func trackSmashEvents(event: TracSmashEventsOnPeopleAlbumPopUp) {
+        
+        if operation == .smash {
+            
+            var event: GAEventLabel {
+                switch event {
+                case .enable:
+                    return GAEventLabel.enableFIGrouping
+                case .becomePremium:
+                    return GAEventLabel.becomePremium
+                case .proceedWithExistingPeople:
+                    return GAEventLabel.proceedWithExistingPeople
+                case .cancel:
+                    return GAEventLabel.cancel
+                }
+            }
+
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashFIGroupingOff, eventLabel: event)
+            
         }
     }
 }
