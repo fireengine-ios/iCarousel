@@ -12,8 +12,8 @@ apps = [
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '7YZS5NTGYH',
-            xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech'
+            xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle'
         ],
  [
             name: 'lifedrive',// name will be the base filename of the app
@@ -21,8 +21,8 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
-            //xcodeSchema: , // Defaults to app name
-            //xcodeTarget:   // Defaults to app name
+            xcodeSchema: 'lifedrive_Bundle', // Defaults to app name
+            xcodeTarget: 'lifedrive_Bundle'  // Defaults to app name
         ]
 ]
 derivedDir = 'lifebox'
@@ -154,7 +154,7 @@ def publishToArtifactory = { app, classifier ->
     STAGE_NAME = 'Build (test): Publish to Artifactory'
     
     sh "find build -type d -name '*.dSYM' > dsymFiles"
-    sh "zip -@ build/dsym.zip < dsymFiles"
+    sh "zip -r -@ build/dsym.zip < dsymFiles"
 
     def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
     def artifactName = "${app.name}-${app.version}-${classifier}"
