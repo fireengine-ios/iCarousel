@@ -99,7 +99,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func shareSmallSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.compactMap { FileForDownload(forMediumURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect)
+            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .smallSize)
         }
         
     }
@@ -107,11 +107,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect)
+            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
         }
     }
     
-    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?) {
+    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?, shareType: NetmeraEventValues.ShareMethodType) {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
         downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
@@ -142,6 +142,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     
                     MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
                     
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: shareType, channelType: activityTypeString.knownAppName()))
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                               eventActions: .share,
                                                               eventLabel: .shareViaApp(activityTypeString.knownAppName()))
@@ -197,6 +198,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     else {
                         return
                     }
+                    
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
                 
                     MenloworksEventsService.shared.onShareItem(with: fileType,
                                                                toApp: activityTypeString.knownAppName())

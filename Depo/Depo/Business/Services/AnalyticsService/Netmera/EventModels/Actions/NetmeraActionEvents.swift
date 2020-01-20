@@ -165,6 +165,11 @@ extension NetmeraEvents.Actions {
         @objc var method = ""
         @objc var channelType = ""
         
+        convenience init(method: NetmeraEventValues.ShareMethodType, channelType: String) {
+            
+            self.init(method: method.text, channelType: channelType)
+        }
+        
         convenience init(method: String, channelType: String) {
             self.init()
             self.method = method
