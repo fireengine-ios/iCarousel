@@ -220,6 +220,21 @@ enum ElementTypes {
 
         return result
     }
+    
+    static func muisicPlayerElementConfig(for status: ItemStatus, item: Item) -> [ElementTypes] {
+        var result: [ElementTypes]
+
+        switch status {
+        case .hidden:
+            result = ElementTypes.hiddenState
+        case .trashed:
+            result = [.info] + ElementTypes.trashState
+        default:
+            result = item.favorites ? [.removeFromFavorites] : [.addToFavorites]
+        }
+
+        return result
+    }
 }
 
 typealias AnimationBlock = () -> Void

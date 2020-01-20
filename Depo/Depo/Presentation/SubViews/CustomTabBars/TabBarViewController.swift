@@ -268,6 +268,13 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showMusicBar(_ sender: Any) {
+        if let segmentedController = customNavigationControllers[selectedIndex].viewControllers.first as? SegmentedController,
+            segmentedController.currentController is TrashBinViewController {
+            musicBar.status = .trashed
+        } else {
+            musicBar.status = .active
+        }
+
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
         

@@ -1093,6 +1093,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        player.remove(listItems: items)
         fileService.delete(items: items, success: success, fail: fail)
     }
     
@@ -1140,6 +1141,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        player.remove(listItems: items)
         fileService.putBack(items: items, success: success, fail: fail)
     }
     

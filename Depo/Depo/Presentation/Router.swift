@@ -549,6 +549,12 @@ class RouterVC: NSObject {
         return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
+    // MARK: Music Player
+    
+    func musicPlayer(status: ItemStatus) -> UIViewController {
+        return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
+    }
+    
     
     // MARK: All Files
     
