@@ -1097,7 +1097,11 @@ extension MoreFilesActionsInteractor {
     }
     
     private func deleteAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        fileService.deleteAlbums(items, success: success, fail: fail)
+        albumService.completelyDelete(albums: items, success: { _ in
+            success()
+        }, fail: { errorResponse in
+            fail(errorResponse)
+        })
     }
     
     private func deleteFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
