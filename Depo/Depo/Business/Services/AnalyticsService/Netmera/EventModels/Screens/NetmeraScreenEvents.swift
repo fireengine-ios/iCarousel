@@ -16,13 +16,6 @@ extension NetmeraEvents.Screens {
             return "dmi"
         }
         
-//        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-//            return [:]
-//        }
-//        
-//        override var eventKey : String {
-//            return kContactBackUpScreenKey
-//        }
     }
     
     final class WelcomePage: NetmeraScreenEventTemplate {
@@ -761,17 +754,12 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class NativeSharefromGalleryScreen: NetmeraEvent {
+    final class NativeSharefromGalleryScreen:NetmeraScreenEventTemplate {
         
-        private let kNativeSharefromGalleryScreenKey = "yex"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
+        override var key: String {
+            return "yex"
         }
         
-        override var eventKey : String {
-            return kNativeSharefromGalleryScreenKey
-        }
     }
     
     final class HomePageScreen: NetmeraEvent {

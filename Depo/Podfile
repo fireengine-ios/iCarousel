@@ -63,6 +63,7 @@ end
 
 target 'LifeTech-LifeboxShared' do
     shared_pods
+    pod 'Netmera'
     pod 'MMWormhole', '~> 2.0.0'
 end
 
@@ -90,6 +91,7 @@ end
 
 target 'LifeboxShared' do
     shared_pods
+    pod 'Netmera'
     pod 'MMWormhole', '~> 2.0.0'
 end
 
@@ -121,6 +123,7 @@ end
 
 target 'LifeDriveShared' do
     shared_pods
+    pod 'Netmera'
     pod 'MMWormhole', '~> 2.0.0'
 end
 
@@ -148,6 +151,7 @@ end
 
 target 'LifeTech_LifeDriveShared' do
     shared_pods
+    pod 'Netmera'
     pod 'MMWormhole', '~> 2.0.0'
 end
 
