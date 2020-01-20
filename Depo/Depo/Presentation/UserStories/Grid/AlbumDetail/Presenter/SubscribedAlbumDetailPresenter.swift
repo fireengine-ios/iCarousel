@@ -14,9 +14,7 @@ final class SubscribedAlbumDetailPresenter: AlbumDetailPresenter {
         ItemOperationManager.default.startUpdateView(view: self)
     }
     
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-
+    deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
@@ -26,7 +24,6 @@ final class SubscribedAlbumDetailPresenter: AlbumDetailPresenter {
         //return to albums list if this album is empty
         if dataSource.allObjectIsEmpty() {
             albumDetailModuleOutput?.onAlbumDeleted()
-            router.back()
         }
     }
 }
@@ -53,19 +50,35 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        router.back()
+        backToOriginController()
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
         if view.status == .hidden {
-            router.back()
+            backToOriginController()
         } else {
             dataSource.deleteItems(items: items)
         }
     }
     
-    func putBackFromTrashItems(_ items: [Item]) {
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         router.back()
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        backToOriginController()
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {
@@ -76,11 +89,30 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
         router.back()
     }
     
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
         router.back()
     }
     
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        router.back()
+    func deleteItems(items: [Item]) {
+        backToOriginController()
+    }
+    
+    private func backToOriginController() {
+        guard let controller = getBackController() else {
+            return
+        }
+        router.back(to: controller)
+    }
+    
+    private func getBackController() -> UIViewController? {
+        let navVC = (view as? UIViewController)?.navigationController
+        let destinationIndex = navVC?.viewControllers.firstIndex(where: {
+            ($0 is HiddenPhotosViewController) || ($0 is SegmentedController)
+        })
+        guard let index = destinationIndex, let destination = navVC?.viewControllers[safe: index] else {
+            return nil
+        }
+        
+        return destination
     }
 }
