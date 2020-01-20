@@ -103,8 +103,15 @@ final class NetmeraService {
                 group.leave()
             })
             
-            //TODO: Check if this is correct
-            let verifiedEmail = SingletonStorage.shared.isEmailVerificationCodeSent ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+            
+            
+            let verifiedEmailStatus: String
+            if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
+                verifiedEmailStatus = isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+            } else {
+                verifiedEmailStatus = "Null"
+            }
+            
             
 
             
@@ -116,7 +123,7 @@ final class NetmeraService {
                                              accountType: accountType,
                                              twoFactorAuthentication: twoFactorNetmeraStatus,
                                              autosync: autoSyncState,
-                                             emailVerification: verifiedEmail,
+                                             emailVerification: verifiedEmailStatus,
                                              autosyncPhotos: netmeraAutoSyncStatusPhoto,
                                              autosyncVideos: netmeraAutoSyncStatusVideo,
                                              packages: activeSubscriptionNames,
@@ -137,11 +144,7 @@ final class NetmeraService {
             Netmera.update(user)
         }
 
-        
-        
-//        }}{{  user.autosync = @"On";
-//        autosyncPhotos: Never/Wifi/Wifi_LTE
-//        autosyncVideos: Never/Wifi/Wifi_LTE
+    
         
         //        lifeboxStorage:{used_percentage_value} : Settings/Account Detail/ My Storage
         
