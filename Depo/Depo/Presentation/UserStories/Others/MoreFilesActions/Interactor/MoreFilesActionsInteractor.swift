@@ -688,71 +688,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
-    func succesAction(elementType: ElementTypes) -> FileOperation {
-        let success: FileOperation = { [weak self] in
-            self?.trackSuccessEvent(elementType: elementType)
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
-            }
-        }
-        return success
-    }
-    
-    private func showSuccessPopup(for elementType: ElementTypes) {
-        let text: String
-        switch elementType {
-        case .download:
-            text = TextConstants.popUpDownloadComplete
-        case .moveToTrash:
-            text = TextConstants.popUpDeleteComplete
-        case .unhide:
-            text = TextConstants.unhidePopupSuccessText
-        case .delete:
-            text = TextConstants.deletePopupSuccessText
-            MenloworksAppEvents.onFileDeleted()
-        case .restore:
-            text = TextConstants.restorePopupSuccessText
-        default:
-            return
-        }
-        UIApplication.showSuccessAlert(message: text)
-    }
-    
-    private func trackSuccessEvent(elementType: ElementTypes) {
-        switch elementType {
-        case .addToFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
-        case .removeFromFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
-        case .delete, .deleteDeviceOriginal:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
-        case .print:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
-        default:
-            break
-        }
-    }
-    
-    func failAction(elementType: ElementTypes) -> FailResponse {
-        
-        let failResponse: FailResponse  = { [weak self] value in
-            DispatchQueue.toMain {
-                if value.isOutOfSpaceError {
-                    debugLog("failAction 1 isOutOfSpaceError")
-                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-                        debugLog("failAction 2 showOutOfSpaceAlert")
-                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-                    }
-                } else {
-                    debugLog("failAction 3 \(value.description)")
-                    self?.output?.operationFailed(type: elementType, message: value.description)
-                }
-            }
-        }
-        return failResponse
-    }
-    
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         
         guard let items = items as? [WrapData] else {
@@ -870,6 +805,84 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
 }
 
+//MARK: - Actions
+
+extension MoreFilesActionsInteractor {
+    
+    func succesAction(elementType: ElementTypes) -> FileOperation {
+        let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: elementType)
+                self?.showSuccessPopup(for: elementType)
+            }
+        }
+        return success
+    }
+    
+    func failAction(elementType: ElementTypes) -> FailResponse {
+        
+        let failResponse: FailResponse  = { [weak self] value in
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
+                } else {
+                    debugLog("failAction 3 \(value.description)")
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
+            }
+        }
+        return failResponse
+    }
+    
+    private func trackSuccessEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .addToFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
+        case .removeFromFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
+        case .delete, .deleteDeviceOriginal:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
+        }
+    }
+    
+    private func showSuccessPopup(for elementType: ElementTypes) {
+        let text: String
+        switch elementType {
+        case .download:
+            text = TextConstants.popUpDownloadComplete
+        case .moveToTrash:
+            text = TextConstants.popUpDeleteComplete
+        case .unhide:
+            text = TextConstants.unhidePopupSuccessText
+        case .delete:
+            text = TextConstants.deletePopupSuccessText
+            MenloworksAppEvents.onFileDeleted()
+        case .restore:
+            text = TextConstants.restorePopupSuccessText
+        default:
+            return
+        }
+        
+        var delay: Double = 0
+        if elementType.isContained(in: [.unhide, .moveToTrash, .restore, .delete]) {
+            delay = 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            UIApplication.showSuccessAlert(message: text)
+        }
+    }
+}
+
 //MARK: - Divorce
 extension MoreFilesActionsInteractor {
     typealias DivorceItemsOperation = (
@@ -953,7 +966,6 @@ extension MoreFilesActionsInteractor {
         
         group.notify(queue: DispatchQueue.main) { [weak self] in
             self?.output?.completeAsyncOperationEnableScreen()
-
             if let error = error {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failAction(elementType: type)(errorResponse)
