@@ -92,7 +92,10 @@ final class UploadService: BaseRequestService {
             PremiumService.shared.showPopupForNewUserIfNeeded()
             
             let uploadedTypesToCount = NetmeraService.getItemsTypeToCount(items: items)
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Upload(uploadType: uploadType, fileTypes: uploadedTypesToCount.map{ $0.0 }))
+            uploadedTypesToCount.forEach {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Upload(uploadType: uploadType, fileTypes: $0.0))
+            }
+            
             
             let filteredItems = self.filter(items: items)
             self.trackAnalyticsFor(items: filteredItems, isFromCamera: isFromCamera)

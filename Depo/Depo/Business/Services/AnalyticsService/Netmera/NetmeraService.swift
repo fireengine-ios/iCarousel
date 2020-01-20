@@ -42,10 +42,15 @@ final class NetmeraService {
             group.enter()
             accountService.usage(
                 success: { response in
-                    guard let usage = response as? UsageResponse else {
-                        return
+                    guard let usage = response as? UsageResponse,
+                        let quotaBytes = usage.quotaBytes,
+                        let usedBytes = usage.usedBytes else {
+                            group.leave()
+                            return
                     }
-                    lifeboxStorage = Int(usage.totalUsage ?? 0)
+                    
+                    let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
+                    lifeboxStorage = Int(usagePercentage * 100)
                     
                     group.leave()
                 }, fail: { errorResponse in
@@ -131,7 +136,9 @@ final class NetmeraService {
                                              turkcellPassword: "Null")
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-                Netmera.update(user)
+                DispatchQueue.toMain {
+                    Netmera.update(user)
+                }
             }
             
 
@@ -141,7 +148,9 @@ final class NetmeraService {
                 autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
                 autoLogin: "Null", turkcellPassword: "Null")
             user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-            Netmera.update(user)
+            DispatchQueue.toMain {
+                Netmera.update(user)
+            }
         }
 
     

@@ -462,29 +462,24 @@ extension NetmeraEvents.Actions {
         @objc var uploadType = ""
         @objc var fileType = ""
         
-        convenience init(uploadType: UploadType, fileTypes: [FileType]) {
+        convenience init(uploadType: UploadType, fileTypes: FileType) {
             
-            var acceptableType = ""
-            fileTypes.forEach {
-                let appopriateFileType: NetmeraEventValues.UploadFileType
-                switch $0 {
-                case .image, .faceImage(_):
-                    appopriateFileType = .photo
-                case .video:
-                    appopriateFileType = .video
-                case .audio:
-                    appopriateFileType = .music
-                case .application(.doc), .application(.txt),
-                     .application(.html), .application(.xls),
-                     .application(.pdf), .application(.ppt),
-                     .application(.usdz), .allDocs:
-                    appopriateFileType = .document
-                default:
-                    appopriateFileType = .photo
-                }
-                acceptableType += "/\(appopriateFileType.text)"
+            let appopriateFileType: NetmeraEventValues.UploadFileType
+            switch fileTypes {
+            case .image, .faceImage(_):
+                appopriateFileType = .photo
+            case .video:
+                appopriateFileType = .video
+            case .audio:
+                appopriateFileType = .music
+            case .application(.doc), .application(.txt),
+                 .application(.html), .application(.xls),
+                 .application(.pdf), .application(.ppt),
+                 .application(.usdz), .allDocs:
+                appopriateFileType = .document
+            default:
+                appopriateFileType = .photo
             }
-            
             
             let appopriateUploadType: NetmeraEventValues.UploadType
             
@@ -497,10 +492,9 @@ extension NetmeraEvents.Actions {
                 }
             case .fromHomePage, .syncToUse, .other:
                 appopriateUploadType = .manual
-                
             }
             
-            self.init(uploadType: appopriateUploadType, fileTypeStr: acceptableType)
+            self.init(uploadType: appopriateUploadType, fileTypeStr: appopriateFileType.text)
         }
         
         convenience init(uploadType: NetmeraEventValues.UploadType, fileTypeStr: String) {
