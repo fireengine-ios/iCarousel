@@ -700,119 +700,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
-    func succesAction(elementType: ElementTypes) -> FileOperation {
-        let success: FileOperation = { [weak self] in
-            self?.trackSuccessEvent(elementType: elementType)
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
-            }
-        }
-        return success
-    }
-    
-    func successItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
-        let success: FileOperation = { [weak self] in
-            self?.trackSuccessEvent(elementType: elementType)
-            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
-            }
-        }
-        return success
-    }
-    
-    private func showSuccessPopup(for elementType: ElementTypes) {
-        let text: String
-        switch elementType {
-        case .download:
-            text = TextConstants.popUpDownloadComplete
-        case .moveToTrash:
-            text = TextConstants.popUpDeleteComplete
-        case .unhide:
-            text = TextConstants.unhidePopupSuccessText
-        case .delete:
-            text = TextConstants.deletePopupSuccessText
-            MenloworksAppEvents.onFileDeleted()
-        case .restore:
-            text = TextConstants.restorePopupSuccessText
-        default:
-            return
-        }
-        UIApplication.showSuccessAlert(message: text)
-    }
-    
-    private func trackSuccessEvent(elementType: ElementTypes) {
-        switch elementType {
-        case .addToFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
-        case .removeFromFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
-        case .delete, .deleteDeviceOriginal:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
-        case .print:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
-        default:
-            break
-        }
-    }
-    
-    private func trackNetmeraSuccessEvent(elementType: ElementTypes, successStatus: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
-        //TODO: change other parts of actions tracking to this method
-        switch elementType {
-        case .moveToTrash:
-            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
-                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Trash(status: successStatus, typeCountTupple: typeToCountTupple) else {
-                    return
-                }
-                AnalyticsService.sendNetmeraEvent(event: event)
-            }
-        default:
-            break
-        }
-    }
-    
-    func failAction(elementType: ElementTypes) -> FailResponse {
-        
-        let failResponse: FailResponse  = { [weak self] value in
-            DispatchQueue.toMain {
-                if value.isOutOfSpaceError {
-                    debugLog("failAction 1 isOutOfSpaceError")
-                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-                        debugLog("failAction 2 showOutOfSpaceAlert")
-                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-                    }
-                } else {
-                    debugLog("failAction 3 \(value.description)")
-                    self?.output?.operationFailed(type: elementType, message: value.description)
-                }
-            }
-        }
-        return failResponse
-    }
-    
-    func failItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
-        
-        let failResponse: FailResponse  = { [weak self] value in
-            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
-            DispatchQueue.toMain {
-                if value.isOutOfSpaceError {
-                    debugLog("failAction 1 isOutOfSpaceError")
-                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-                        debugLog("failAction 2 showOutOfSpaceAlert")
-                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-                    }
-                } else {
-                    debugLog("failAction 3 \(value.description)")
-                    self?.output?.operationFailed(type: elementType, message: value.description)
-                }
-            }
-        }
-        return failResponse
-    }
-
-    
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         
         guard let items = items as? [WrapData] else {
@@ -931,6 +818,123 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
 }
 
+//MARK: - Actions
+
+extension MoreFilesActionsInteractor {
+    
+   func succesAction(elementType: ElementTypes) -> FileOperation {
+        let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: elementType)
+                self?.showSuccessPopup(for: elementType)
+            }
+        }
+        return success
+    }
+    
+    func successItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+        let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: elementType)
+                self?.showSuccessPopup(for: elementType)
+            }
+        }
+        return success
+    }
+    
+    private func showSuccessPopup(for elementType: ElementTypes) {
+        let text: String
+        switch elementType {
+        case .download:
+            text = TextConstants.popUpDownloadComplete
+        case .moveToTrash:
+            text = TextConstants.popUpDeleteComplete
+        case .unhide:
+            text = TextConstants.unhidePopupSuccessText
+        case .delete:
+            text = TextConstants.deletePopupSuccessText
+            MenloworksAppEvents.onFileDeleted()
+        case .restore:
+            text = TextConstants.restorePopupSuccessText
+        default:
+            return
+        }
+        UIApplication.showSuccessAlert(message: text)
+    }
+    
+    private func trackSuccessEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .addToFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
+        case .removeFromFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
+        case .delete, .deleteDeviceOriginal:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
+        }
+    }
+    
+    private func trackNetmeraSuccessEvent(elementType: ElementTypes, successStatus: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
+        //TODO: change other parts of actions tracking to this method
+        switch elementType {
+        case .moveToTrash:
+            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
+                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Trash(status: successStatus, typeCountTupple: typeToCountTupple) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        default:
+            break
+        }
+    }
+    
+    func failAction(elementType: ElementTypes) -> FailResponse {
+        
+        let failResponse: FailResponse  = { [weak self] value in
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
+                } else {
+                    debugLog("failAction 3 \(value.description)")
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
+            }
+        }
+        return failResponse
+    }
+    
+    func failItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
+        
+        let failResponse: FailResponse  = { [weak self] value in
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
+                } else {
+                    debugLog("failAction 3 \(value.description)")
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
+            }
+        }
+        return failResponse
+    }
+}
+
 //MARK: - Divorce
 extension MoreFilesActionsInteractor {
     typealias DivorceItemsOperation = (
@@ -1014,7 +1018,6 @@ extension MoreFilesActionsInteractor {
         
         group.notify(queue: DispatchQueue.main) { [weak self] in
             self?.output?.completeAsyncOperationEnableScreen()
-
             if let error = error {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failAction(elementType: type)(errorResponse)
@@ -1157,6 +1160,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        player.remove(listItems: items)
         fileService.delete(items: items, success: success, fail: fail)
     }
     
@@ -1204,6 +1208,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        player.remove(listItems: items)
         fileService.putBack(items: items, success: success, fail: fail)
     }
     

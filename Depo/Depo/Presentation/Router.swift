@@ -224,8 +224,53 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
-    func popToViewController(_ vc: UIViewController) {
-        navigationController?.popToViewController(vc, animated: true)
+    func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {
+        
+        func getNavigation(from navigation: UINavigationController?) -> UINavigationController? {
+            var navigationVC: UINavigationController?
+            
+            if let navVC = navigation, navVC.viewControllers.contains(vc) {
+                navigationVC = navVC
+                
+            } else if let presentingVC = navigation?.presentingViewController {
+                var navController: UINavigationController? = nil
+                
+                if let navVC = presentingVC as? UINavigationController {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let navVC = presentingVC.navigationController  {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let tabBar = presentingVC as? TabBarViewController {
+                    navController = getNavigation(from: tabBar.currentViewController?.navigationController)
+                    
+                } else {
+                    return navController
+                }
+                
+                if navController?.viewControllers.contains(vc) == true {
+                    navigationVC = navController
+                }
+            }
+            
+            return navigationVC
+        }
+        
+        if let navigation = getNavigation(from: navigationController) {
+            let pop = {
+                navigation.popToViewController(vc, animated: true)
+            }
+            
+            if let presentedVC = navigation.presentedViewController {
+                presentedVC.dismiss(animated: true) {
+                    pop()
+                }
+            } else {
+                pop()
+            }
+        } else {
+            assertionFailure("didn't found comfortable UINavigationController")
+        }
     }
     
     func popCreateStory() {
@@ -547,6 +592,12 @@ class RouterVC: NSObject {
         }
         let controllers = [allFiles, documents, musics, favorites, trashBin]
         return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+    }
+    
+    // MARK: Music Player
+    
+    func musicPlayer(status: ItemStatus) -> UIViewController {
+        return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
     }
     
     

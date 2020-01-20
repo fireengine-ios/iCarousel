@@ -54,8 +54,8 @@ class WrapItemFileService: WrapItemFileOperations {
         
         let successOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.deleteItems(deleteFiles, completion: {
-                success?()
                 ItemOperationManager.default.deleteItems(items: deleteFiles)
+                success?()
             })
         }
         
@@ -79,8 +79,8 @@ class WrapItemFileService: WrapItemFileOperations {
         
         let successOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.deleteItems(files, completion: {
-                success?()
                 ItemOperationManager.default.didMoveToTrashItems(files)
+                success?()
             })
         }
         
@@ -120,8 +120,8 @@ class WrapItemFileService: WrapItemFileOperations {
     func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.hide(items, completion: {
-                success?()
                 ItemOperationManager.default.didHideItems(items)
+                success?()
             })
         }
         
@@ -144,8 +144,8 @@ class WrapItemFileService: WrapItemFileOperations {
     func hide(albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.hide(albums, completion: {
-                success?()
                 ItemOperationManager.default.didHideAlbums(albums)
+                success?()
             })
         }
         
@@ -391,8 +391,8 @@ extension WrapItemFileService {
     func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.deleteItems(items, completion: {
-                success?()
                 ItemOperationManager.default.deleteItems(items: items)
+                success?()
             })
         }
         
@@ -412,7 +412,6 @@ extension WrapItemFileService {
         }
     }
     
-    
     //MARK: - Smart Albums Trash
     
     @discardableResult
@@ -422,8 +421,8 @@ extension WrapItemFileService {
         return hiddenService.moveToTrashPeople(items: items){ response in
             switch response {
             case .success(()):
-                success?()
                 ItemOperationManager.default.didMoveToTrashPeople(items: items)
+                success?()
             case .failed(let error):
                 fail?(ErrorResponse.error(error))
             }
@@ -437,8 +436,8 @@ extension WrapItemFileService {
         return hiddenService.moveToTrashPlaces(items: items){ response in
             switch response {
             case .success(()):
-                success?()
                 ItemOperationManager.default.didMoveToTrashPlaces(items: items)
+                success?()
             case .failed(let error):
                 fail?(ErrorResponse.error(error))
             }
@@ -451,8 +450,8 @@ extension WrapItemFileService {
         return hiddenService.moveToTrashThings(items: items) { response in
             switch response {
             case .success(()):
-                success?()
                 ItemOperationManager.default.didMoveToTrashThings(items: items)
+                success?()
             case .failed(let error):
                 fail?(ErrorResponse.error(error))
             }
@@ -469,8 +468,8 @@ extension WrapItemFileService {
     func unhide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.recover(items, completion: {
-                success?()
                 ItemOperationManager.default.didUnhideItems(items)
+                success?()
             })
         }
         
@@ -480,8 +479,8 @@ extension WrapItemFileService {
     func putBack(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.recover(items, completion: {
-                success?()
                 ItemOperationManager.default.putBackFromTrashItems(items)
+                success?()
             })
         }
         
@@ -508,8 +507,8 @@ extension WrapItemFileService {
     //MARK: [AlbumItem]
     func unhideAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.didUnhideAlbums(albums)
+            success?()
         }
         
         recoverAlbums(albums, success: wrappedSuccessOperation, fail: fail)
@@ -517,8 +516,8 @@ extension WrapItemFileService {
     
     func putBackAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.putBackFromTrashAlbums(albums)
+            success?()
         }
         
         recoverAlbums(albums, success: wrappedSuccessOperation, fail: fail)
@@ -549,8 +548,8 @@ extension WrapItemFileService {
     
     func unhidePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.didUnhidePeople(items: items)
+            success?()
         }
         
         hiddenService.unhidePeople(items: items) { result in
@@ -565,8 +564,8 @@ extension WrapItemFileService {
     
     func putBackPeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.putBackFromTrashPeople(items: items)
+            success?()
         }
         
         hiddenService.putBackPeople(items: items) { result in
@@ -581,8 +580,8 @@ extension WrapItemFileService {
     
     func deletePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.deleteItems(items: items)
+            success?()
         }
         
         hiddenService.deletePeople(items: items) { result in
@@ -600,8 +599,8 @@ extension WrapItemFileService {
     
     func unhidePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.didUnhidePlaces(items: items)
+            success?()
         }
         
         hiddenService.unhidePlaces(items: items) { result in
@@ -616,8 +615,8 @@ extension WrapItemFileService {
     
     func putBackPlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.putBackFromTrashPlaces(items: items)
+            success?()
         }
         
         hiddenService.putBackPlaces(items: items) { result in
@@ -632,8 +631,8 @@ extension WrapItemFileService {
     
     func deletePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.deleteItems(items: items)
+            success?()
         }
         
         hiddenService.deletePlaces(items: items) { result in
@@ -650,8 +649,8 @@ extension WrapItemFileService {
     
     func unhideThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.didUnhideThings(items: items)
+            success?()
         }
         
         hiddenService.unhideThings(items: items) { result in
@@ -666,8 +665,8 @@ extension WrapItemFileService {
     
     func putBackThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.putBackFromTrashThings(items: items)
+            success?()
         }
         
         hiddenService.putBackThings(items: items) { result in
@@ -682,8 +681,8 @@ extension WrapItemFileService {
     
     func deleteThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
             ItemOperationManager.default.deleteItems(items: items)
+            success?()
         }
         
         hiddenService.deleteThings(items: items) { result in

@@ -122,10 +122,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
-    func showSpecifiedMusicAlertSheet(with item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
-        var types: [ElementTypes] = []
-        
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
+    func showSpecifiedMusicAlertSheet(with item: WrapData, status: ItemStatus, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        let types = ElementTypes.muisicPlayerElementConfig(for: status, item: item)
         
         constractActions(with: types, for: [item]) { [weak self] actions in
             DispatchQueue.main.async { [weak self] in

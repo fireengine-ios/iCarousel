@@ -10,14 +10,10 @@ import UIKit
 
 class VisualMusicPlayerModuleInitializer: NSObject {
     
-    class func initializeVisualMusicPlayerController(with nibName: String) -> UIViewController {
+    class func initializeVisualMusicPlayerController(with nibName: String, status: ItemStatus) -> UIViewController {
         let viewController = VisualMusicPlayerViewController(nibName: nibName, bundle: nil)
         let configurator = VisualMusicPlayerModuleConfigurator()
-        
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .moveToTrash],
-                                               style: .blackOpaque, tintColor: nil)
-        
-        configurator.configure(viewController: viewController, bottomBarConfig: bottomBarConfig)
+        configurator.configure(viewController: viewController, status: status)
         
         return viewController
     }

@@ -10,8 +10,7 @@ import UIKit
 
 class VisualMusicPlayerModuleConfigurator {
     
-    func configure(viewController: VisualMusicPlayerViewController, bottomBarConfig: EditingBarConfig) {
-
+    func configure(viewController: VisualMusicPlayerViewController, status: ItemStatus) {
         let router = VisualMusicPlayerRouter()
         router.view = viewController
 
@@ -31,6 +30,7 @@ class VisualMusicPlayerModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        viewController.status = status
     }
 
 }

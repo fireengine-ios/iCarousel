@@ -46,6 +46,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         }
     }
     
+    var status: ItemStatus = .active
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -139,7 +141,11 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
 
     @IBAction func actionMoreButton(_ sender: UIButton) {
         guard let item = player.currentItem else { return }
-        alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
+        alert.showSpecifiedMusicAlertSheet(with: item,
+                                           status: status,
+                                           presentedBy: sender,
+                                           onSourceView: nil,
+                                           viewController: self)
     }
     @IBAction func actionShuffleButton(_ sender: UIButton) {
         player.togglePlayMode()
@@ -168,6 +174,9 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
     }
     func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {
         carouselView.reloadData()
+        if player.list.isEmpty {
+            self.dismiss(animated: true)
+        }
     }
     func closeMediaPlayer() {
         output.closeMediaPlayer()
