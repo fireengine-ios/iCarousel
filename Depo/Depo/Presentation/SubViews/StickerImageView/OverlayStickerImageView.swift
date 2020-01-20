@@ -68,6 +68,8 @@ final class OverlayStickerImageView: UIImageView {
     private let stickerSize = CGSize(width: 50, height: 50)
     private lazy var overlayAnimationService = OverlayAnimationService()
     private let downloader = ImageDownloder()
+    private lazy var impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
+    private var isImpactOccurred: Bool =  false
     
     private let trashBinLayer: CALayer = {
         let trashBinLayer = CALayer()
@@ -251,8 +253,19 @@ final class OverlayStickerImageView: UIImageView {
             
             selectedSticker.center = CGPoint(x: startPosition.x + translation.x, y: startPosition.y + translation.y)
             
-        case .ended, .cancelled, .failed, .possible:
+            if trashBinLayer.frame.contains(selectedSticker.center) {
+                
+                trashBinLayer.bounds.size = CGSize(width: stickerSize.width * 1.5, height: stickerSize.width * 1.5)
+                
+                if !isImpactOccurred { impactFeedbackgenerator.impactOccurred() }
+                isImpactOccurred = true
+            } else {
+               isImpactOccurred = false
+               setupTrasBinFrame()
+            }
             
+        case .ended, .cancelled, .failed, .possible:
+            isImpactOccurred = false
             guard let selectedSticker = selectedSticker, selectedSticker != mainSticker else {
                 hideTrashBin()
                 return
