@@ -50,18 +50,12 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        guard let controller = getBackController() else {
-            return
-        }
-        router.back(to: controller)
+        backToOriginController()
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
         if view.status == .hidden {
-            guard let controller = getBackController() else {
-                return
-            }
-            router.back(to: controller)
+            backToOriginController()
         } else {
             dataSource.deleteItems(items: items)
         }
@@ -72,31 +66,19 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
     
     func putBackFromTrashItems(_ items: [Item]) {
-        guard let controller = getBackController() else {
-            return
-        }
-        router.back(to: controller)
+        backToOriginController()
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        guard let controller = getBackController() else {
-            return
-        }
-        router.back(to: controller)
+        backToOriginController()
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        guard let controller = getBackController() else {
-            return
-        }
-        router.back(to: controller)
+        backToOriginController()
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        guard let controller = getBackController() else {
-            return
-        }
-        router.back(to: controller)
+        backToOriginController()
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {
@@ -112,6 +94,10 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
     
     func deleteItems(items: [Item]) {
+        backToOriginController()
+    }
+    
+    private func backToOriginController() {
         guard let controller = getBackController() else {
             return
         }
