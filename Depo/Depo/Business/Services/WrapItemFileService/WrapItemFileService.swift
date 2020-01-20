@@ -412,28 +412,6 @@ extension WrapItemFileService {
         }
     }
     
-    func deleteAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
-        let wrappedSuccessOperation: FileOperationSucces = {
-            success?()
-            ItemOperationManager.default.albumsDeleted(albums: albums)
-        }
-        
-        let deletingAlbums = albums.filter { $0.readOnly == false }
-        guard !deletingAlbums.isEmpty else {
-            wrappedSuccessOperation()
-            return
-        }
-        
-        hiddenService.deleteAlbums(deletingAlbums) { response in
-            switch response {
-            case .success(()):
-                wrappedSuccessOperation()
-            case .failed(let error):
-                fail?(ErrorResponse.error(error))
-            }
-        }
-    }
-    
     
     //MARK: - Smart Albums Trash
     

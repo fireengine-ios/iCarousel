@@ -231,12 +231,17 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
+            success?(deletedAlbums)
+            ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+        }
+        
         loadAllItemsFrom(albums: deleteAlbums) { items in
             debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
-            self.delete(albums: deleteAlbums, success: success, fail: fail)
+            self.delete(albums: deleteAlbums, success: wrappedSuccess, fail: fail)
         }
     }
     

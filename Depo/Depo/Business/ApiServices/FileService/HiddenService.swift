@@ -530,13 +530,6 @@ final class HiddenService {
         return deleteItemsBy(uuids: uuids, handler: handler)
     }
     
-    @discardableResult
-    func deleteAlbums(_ albums: [AlbumItem], handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("deleteAlbums")
-        let uuids = albums.compactMap { $0.uuid }
-        return deleteItemsBy(uuids: uuids, handler: handler)
-    }
-    
     private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
         let path = RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.delete
         return SessionManager
