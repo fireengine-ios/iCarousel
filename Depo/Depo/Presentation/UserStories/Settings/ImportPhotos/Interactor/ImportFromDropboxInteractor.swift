@@ -50,6 +50,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         dbService.disconnectDropbox { [weak self] response in
             switch response {
             case .success(_):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .dropbox))
                 self?.output?.disconnectionSuccess()  
             case .failed(let error):
                 self?.output?.disconnectionFailure(errorMessage: error.description)
@@ -70,7 +71,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         dbService.requestStatus(success: { [weak self] response in
             if let dropboxStatus = response as? DropboxStatusObject {
                 self?.output?.statusSuccess(status: dropboxStatus)
-                
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .dropbox))
                 if dropboxStatus.connected ?? false {
                     self?.requestStart()
                 } else {

@@ -71,6 +71,7 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
         connectButton.isEnabled = false
         service.connectToSpotify(isSettingCell: true, completion: {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .spotify))
             self.connectButton.isEnabled = true
         })
     }
@@ -158,6 +159,7 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     
     func disconnect() {
         service.disconnectFromSpotify { [weak self] result in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .spotify))
             guard let section = self?.section else {
                 assertionFailure()
                 return
