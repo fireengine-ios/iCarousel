@@ -262,6 +262,38 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         return obj.item == self.item
     }
     
+    func didMoveToTrashItems(_ items: [Item]) {
+        backToOriginController()
+    }
+    
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        backToOriginController()
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        backToOriginController()
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        backToOriginController()
+    }
+    
+    func didUnhideItems(_ items: [WrapData]) {
+        backToOriginController()
+    }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        backToOriginController()
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        backToOriginController()
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        backToOriginController()
+    }
+    
     func putBackFromTrashItems(_ items: [Item]) {
         backToOriginController()
     }
