@@ -301,8 +301,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
                                                         output: self.output,
-                                                        success: self.succesAction(elementType: .hide),
-                                                        fail: self.failAction(elementType: .hide))
+                                                        success: self.successItmesAction(elementType: .hide, relatedItems: items),
+                                                        fail: self.failItmesAction(elementType: .hide, relatedItems: items))
         } else {
             assertionFailure("Unexpected type of items")
         }
@@ -322,8 +322,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
            
         hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
                                                           output: self.output,
-                                                          success: self.succesAction(elementType: .hide),
-                                                          fail: self.failAction(elementType: .hide))
+                                                          success: self.successItmesAction(elementType: .hide, relatedItems: items),
+                                                          fail: self.failItmesAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -886,6 +886,20 @@ extension MoreFilesActionsInteractor {
         case .moveToTrash:
             NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
                 guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Trash(status: successStatus, typeCountTupple: typeToCountTupple) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .hide:
+            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
+                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Hide(status: successStatus, typeCountTupple: typeToCountTupple) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .unhide:
+            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
+                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Unhide(status: successStatus, typeCountTupple: typeToCountTupple) else {
                     return
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)

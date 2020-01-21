@@ -125,6 +125,19 @@ extension NetmeraEvents.Actions {
         
         @objc var type = ""
         
+        convenience init(channelType: PaymentType) {
+            self.init()
+            switch channelType {
+            case .appStore:
+                self.type = NetmeraEventValues.PackageChannelType.inAppStorePurchase.text
+            case .paycell:
+                self.type = NetmeraEventValues.PackageChannelType.creditCard.text
+            case .slcm:
+                self.type = NetmeraEventValues.PackageChannelType.chargeToBill.text
+            }
+            
+        }
+        
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea": #keyPath(type)
@@ -521,6 +534,10 @@ extension NetmeraEvents.Actions {
         
         @objc var status = ""
         
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init(status: status.text)
+        }
+        
         convenience init(status: String) {
             self.init()
             self.status = status
@@ -786,6 +803,143 @@ extension NetmeraEvents.Actions {
         
         override var eventKey : String {
             return kPhotopickKey
+        }
+    }
+    
+    
+
+    class SmashSave: NetmeraEvent {
+        
+        private let kSmashKey = "tal"
+        
+        @objc var stickerId = [String]()
+        @objc var action = ""
+        @objc var gifId = [String]()
+
+        convenience init(action: NetmeraEventValues.SmashAction, stickerId: [String], gifId: [String]) {
+            self.init()
+            self.stickerId = stickerId
+            self.gifId = gifId
+            self.action = action.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ee" : #keyPath(stickerId),
+                "ea" : #keyPath(action),
+                "eb" : #keyPath(gifId),
+            ]
+        }
+        override var eventKey : String {
+            return kSmashKey
+        }
+    }
+    
+    
+
+    class Unhide: NetmeraEvent {
+        
+        private let kUnhideKey = "eew"
+        
+        @objc var status = ""
+        @objc var type = ""
+        @objc var count: Int = 0
+
+        convenience init(status: NetmeraEventValues.GeneralStatus, type: NetmeraEventValues.HideUnhideObjectType, count: Int) {
+            self.init()
+            self.status = status.text
+            self.type = type.text
+            self.count = count
+        }
+        
+        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
+            guard typeCountTupple.1 > 0 else {
+                assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
+                return nil
+            }
+            let accaptableType: NetmeraEventValues.HideUnhideObjectType
+            switch typeCountTupple.0 {
+            case .image, .faceImage(_):
+                accaptableType = .photo
+            case .video:
+                accaptableType = .video
+            case .photoAlbum:
+                accaptableType = .album
+            case .faceImageAlbum(.people):
+                accaptableType = .person
+            case .faceImageAlbum(.things):
+                accaptableType = .thing
+            case .faceImageAlbum(.places):
+                accaptableType = .place
+            default:
+                accaptableType = .photo
+            }
+            
+            self.init(status: status, type: accaptableType, count: typeCountTupple.1)
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+                "eb" : #keyPath(type),
+                "ec" : #keyPath(count),
+            ]
+        }
+        override var eventKey : String {
+            return kUnhideKey
+        }
+    }
+
+    class Hide: NetmeraEvent {
+        
+        let kHideKey = "tfe"
+        
+        @objc var status = ""
+        @objc var type = ""
+        @objc var count: Int = 0
+
+        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
+            guard typeCountTupple.1 > 0 else {
+                assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
+                return nil
+            }
+            let accaptableType: NetmeraEventValues.HideUnhideObjectType
+            switch typeCountTupple.0 {
+            case .image, .faceImage(_):
+                accaptableType = .photo
+            case .video:
+                accaptableType = .video
+            case .photoAlbum:
+                accaptableType = .album
+            case .faceImageAlbum(.people):
+                accaptableType = .person
+            case .faceImageAlbum(.things):
+                accaptableType = .thing
+            case .faceImageAlbum(.places):
+                accaptableType = .place
+            default:
+                accaptableType = .photo
+            }
+            
+            self.init(status: status, type: accaptableType, count: typeCountTupple.1)
+        }
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus, type: NetmeraEventValues.HideUnhideObjectType, count: Int) {
+            self.init()
+            self.status = status.text
+            self.type = type.text
+            self.count = count
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+                "eb" : #keyPath(type),
+                "ec" : #keyPath(count),
+            ]
+        }
+        override var eventKey : String {
+            return kHideKey
         }
     }
     

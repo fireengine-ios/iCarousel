@@ -97,7 +97,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                         self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                     }
                     return
-                }            
+                }
+                
                 DispatchQueue.toMain {
                     self?.output.successed(tokenForOffer: token)
                 }
@@ -124,6 +125,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -131,7 +133,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -194,16 +197,19 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }

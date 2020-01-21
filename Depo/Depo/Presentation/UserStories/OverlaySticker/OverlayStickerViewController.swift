@@ -95,6 +95,9 @@ final class OverlayStickerViewController: ViewController {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
             self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
         
+            let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
+            
             self.showSpinnerIncludeNavigationBar()
             self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
                 self?.saveResult(result: result)
@@ -212,6 +215,8 @@ final class OverlayStickerViewController: ViewController {
     }
     
     @objc private func closeIconTapped() {
+        let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))   
         close()
     }
     
