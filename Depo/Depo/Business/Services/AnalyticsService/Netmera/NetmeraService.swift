@@ -43,7 +43,7 @@ final class NetmeraService {
             accountService.usage(
                 success: { response in
                     guard let usage = response as? UsageResponse,
-                        let quotaBytes = usage.quotaBytes,
+                        let quotaBytes = usage.quotaBytes, quotaBytes != 0,
                         let usedBytes = usage.usedBytes else {
                             group.leave()
                             return
@@ -59,13 +59,12 @@ final class NetmeraService {
             })
             
 
-            var firGrouping = ""
+            var firGrouping = "Null"
             group.enter()
             SingletonStorage.shared.getFaceImageSettingsStatus(success: { isEnabled in
                 firGrouping = isEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
                 group.leave()
             }, fail: { _ in
-                firGrouping = "Null"
                 group.leave()
             })
             
