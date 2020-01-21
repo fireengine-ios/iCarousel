@@ -881,6 +881,10 @@ extension MoreFilesActionsInteractor {
             UIApplication.showSuccessAlert(message: text)
         }
     }
+    
+    private func removeItemsFromPlayer(items: [Item]) {
+        player.remove(listItems: items)
+    }
 }
 
 //MARK: - Divorce
@@ -1029,7 +1033,7 @@ extension MoreFilesActionsInteractor {
         RouterVC().showSpiner()
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .moveToTrash)
-            self?.player.remove(listItems: items)
+            self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
                                           success: self?.succesAction(elementType: .moveToTrash),
                                           fail: self?.failAction(elementType: .moveToTrash))
@@ -1104,9 +1108,11 @@ extension MoreFilesActionsInteractor {
             })
     }
     
-    private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        player.remove(listItems: items)
-        fileService.delete(items: items, success: success, fail: fail)
+    private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) { 
+        fileService.delete(items: items, success: { [weak self] in
+            self?.removeItemsFromPlayer(items: items)
+            success()
+        }, fail: fail)
     }
     
     private func deleteAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
@@ -1153,8 +1159,10 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        player.remove(listItems: items)
-        fileService.putBack(items: items, success: success, fail: fail)
+        fileService.putBack(items: items, success: { [weak self] in
+            self?.removeItemsFromPlayer(items: items)
+            success()
+        }, fail: fail)
     }
     
     private func putBackAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
