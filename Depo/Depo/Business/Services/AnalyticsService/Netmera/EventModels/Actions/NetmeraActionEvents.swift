@@ -639,6 +639,10 @@ extension NetmeraEvents.Actions {
         
         @objc var buttonName = ""
         
+        convenience init(buttonName: NetmeraEventValues.ButtonName) {
+            self.init(buttonName: buttonName.text)
+        }
+        
         convenience init(buttonName: String) {
             self.init()
             self.buttonName = buttonName
