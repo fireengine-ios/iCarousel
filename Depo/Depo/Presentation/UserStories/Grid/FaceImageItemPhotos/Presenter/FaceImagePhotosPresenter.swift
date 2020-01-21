@@ -22,6 +22,12 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         self.isSearchItem = isSearchItem
         super.init()
         dataSource = FaceImagePhotosDataSource(sortingRules: sortedRule)
+        
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
     }
     
     override func viewIsReady(collectionView: UICollectionView) {
@@ -245,4 +251,53 @@ extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
         reloadData()
     }
     
+}
+
+extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        guard let obj = object as? FaceImagePhotosPresenter else {
+            return false
+        }
+        
+        return obj.item == self.item
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        backToOriginController()
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        backToOriginController()
+    }
+    
+    func deleteItems(items: [Item]) {
+        backToOriginController()
+    }
+    
+    private func backToOriginController() {
+        guard let controller = getBackController() else {
+            return
+        }
+        router.back(to: controller)
+    }
+    
+    private func getBackController() -> UIViewController? {
+        let navVC = (view as? UIViewController)?.navigationController
+        let destinationIndex = navVC?.viewControllers.firstIndex(where: {
+            ($0 is HiddenPhotosViewController) || ($0 is SegmentedController)
+        })
+        guard let index = destinationIndex, let destination = navVC?.viewControllers[safe: index] else {
+            return nil
+        }
+        
+        return destination
+    }
 }
