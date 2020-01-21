@@ -92,7 +92,7 @@ final class OverlayStickerViewController: ViewController {
             }
             
             self.analyticsService.logScreen(screen: .smashConfirmPopUp)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smashSave, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
             self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
         
             self.showSpinnerIncludeNavigationBar()

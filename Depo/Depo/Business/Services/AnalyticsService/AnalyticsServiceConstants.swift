@@ -644,6 +644,7 @@ enum GAEventAction {
     case campaignDetail
     case analyzeWithPhotopick
     case smash
+    case smashSave
     case smashConfirmPopUp
     case smashSuccessPopUp
     case smashFIGroupingOff
@@ -780,6 +781,8 @@ enum GAEventAction {
             return "Save Smash Successfully Pop Up"
         case .smashFIGroupingOff:
             return "Standard User With F/I Grouping OFF Pop Up"
+        case .smashSave:
+            return "Smash Save"
         }
     }
 }

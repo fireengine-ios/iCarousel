@@ -387,7 +387,9 @@ final class OverlayStickerImageView: UIImageView {
             } else{
                 msg.append("S")
             }
-            msg.append("\(key.id)|")
+            if items.count > 1 {
+                msg.append("\(key.id)|")
+            }
             message.append(msg)
         })
         return message
