@@ -220,7 +220,7 @@ pipeline {
             options { timeout(time: 4, unit: 'HOURS') }
             agent { label agentName }
             environment {
-                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 IOS_PASS = credentials('iosLoginPass')
             }
             steps {
@@ -380,7 +380,7 @@ pipeline {
             }
             environment {
                 IOS_PASS = credentials('iosLoginPass')
-                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 TESTFLIGHT_UPLOAD = credentials('testflight')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
