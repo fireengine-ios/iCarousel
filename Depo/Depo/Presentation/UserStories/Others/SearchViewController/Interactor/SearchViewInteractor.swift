@@ -211,7 +211,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
         
         switch type {
         case .people:
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] albumResponse in
+            peopleService.getPeopleAlbum(id: Int(id), status: .active, success: { [weak self] albumResponse in
                 
                 let peopleItemResponse = PeopleItemResponse()
                 peopleItemResponse.id = id
@@ -228,7 +228,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     }
             })
         case .thing:
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] albumResponse in
+            thingsService.getThingsAlbum(id: Int(id), status: .active, success: { [weak self] albumResponse in
                 
                 let thingItemResponse = ThingsItemResponse()
                 thingItemResponse.id = id
@@ -244,7 +244,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     }
             })
         case .place:
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] albumResponse in
+            placesService.getPlacesAlbum(id: Int(id), status: .active, success: { [weak self] albumResponse in
                 
                 let placeItemResponse = PlacesItemResponse()
                 placeItemResponse.id = id

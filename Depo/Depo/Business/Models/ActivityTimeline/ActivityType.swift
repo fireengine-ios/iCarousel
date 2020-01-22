@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+//TODO: check if we should add hide/unhide, trash/restore activities
 enum ActivityType: String {
     case welcome = "WELCOME"
     case added = "ADDED"

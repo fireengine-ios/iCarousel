@@ -118,9 +118,10 @@ class SearchByFieldParameters: BaseRequestParametrs, Equatable {
     let page: Int
     let size: Int
     let minified: Bool
+    let hidden: Bool
     
     init(fieldName: SearchContentType = .content_type, fieldValue: FieldValue, sortBy: SortType, sortOrder: SortOrder, page: Int,
-         size: Int, minified: Bool = false) {
+         size: Int, minified: Bool = false, hidden: Bool = true) {
         self.fieldName = fieldName
         self.fieldValue = fieldValue
         self.sortBy = sortBy
@@ -128,6 +129,7 @@ class SearchByFieldParameters: BaseRequestParametrs, Equatable {
         self.page = page
         self.size = size
         self.minified = minified
+        self.hidden = hidden
     }
     
     override var patch: URL {
@@ -142,6 +144,11 @@ class SearchByFieldParameters: BaseRequestParametrs, Equatable {
         let mini = minified ? "true": "false"
         let mimifidedStr = String(format: "&minified=%@", mini)
         searchWithParam = searchWithParam.appending(mimifidedStr)
+        
+        if fieldValue.isContained(in: [.document, .favorite, .audio]) || !hidden {
+            let notHiddenParameter = "&showHidden=false"
+            searchWithParam = searchWithParam.appending(notHiddenParameter)
+        }
         
         return URL(string: searchWithParam, relativeTo: super.patch)!
     }

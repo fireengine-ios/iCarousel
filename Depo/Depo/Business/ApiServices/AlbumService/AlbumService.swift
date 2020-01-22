@@ -9,12 +9,14 @@
 import Alamofire
 
 struct AlbumsPatch {
-    static let album =  "album"
-//    static let deleteAlbumss =  "/api/album"
+    static let album = "album"
+//    static let deleteAlbums =  "album/trash"
     static let addPhotosToAlbum = "album/addFiles/%@"
     static let deletePhotosFromAlbum = "album/removeFiles/%@"
     static let renameAlbum = "album/rename/%@?newLabel=%@"
     static let changeCoverPhoto = "album/coverPhoto/%@?coverPhotoUuid=%@"
+    
+    static let trashAlbums = "album/trash"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -51,6 +53,24 @@ class DeleteAlbums: BaseRequestParametrs {
     
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.album)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
+class MoveToTrashAlbums: BaseRequestParametrs {
+    let albums: [AlbumItem]
+       
+    init (albums: [AlbumItem]) {
+       self.albums = albums
+    }
+
+    override var requestParametrs: Any {
+       let albumsUUIDS = albums.map { $0.uuid }
+       return albumsUUIDS
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: AlbumsPatch.trashAlbums)
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -211,12 +231,35 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
+            success?(deletedAlbums)
+            ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+        }
+        
         loadAllItemsFrom(albums: deleteAlbums) { items in
             debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
-            self.delete(albums: deleteAlbums, success: success, fail: fail)
+            self.delete(albums: deleteAlbums, success: wrappedSuccess, fail: fail)
+        }
+    }
+    
+    func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService completelyDelete")
+        
+        let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
+        guard !moveToTrashAlbums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
+        loadAllItemsFrom(albums: moveToTrashAlbums) { items in
+            debugLog("PhotosAlbumService loadAllItemsFrom")
+
+            let fileService = WrapItemFileService()
+            fileService.moveToTrash(files: items, success: nil, fail: nil)
+            self.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
         }
     }
     
@@ -322,5 +365,23 @@ class PhotosAlbumService: BaseRequestService {
         SessionManager.customDefault
             .request(url)
             .responseObject(handler)
+    }
+    
+    private func moveToTrashAlbums(_ albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService moveToTrashAlbums")
+
+        let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
+        guard !moveToTrashAlbums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
+        let params = MoveToTrashAlbums(albums: moveToTrashAlbums)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            debugLog("PhotosAlbumService trashAlbums success")
+
+            success?(moveToTrashAlbums)
+        }, fail: fail)
+        executeDeleteRequest(param: params, handler: handler)
     }
 }

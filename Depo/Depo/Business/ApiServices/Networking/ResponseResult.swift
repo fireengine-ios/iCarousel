@@ -14,6 +14,7 @@ typealias ResponseVoid = (ResponseResult<Void>) -> Void
 typealias ResponseBool = (ResponseResult<Bool>) -> Void
 typealias ResponseHandler<T> = (ResponseResult<T>) -> Void
 typealias ResponseArrayHandler<T> = (ResponseResult<[T]>) -> Void
+typealias SelfReturningHandler<T> = (T) -> Void
 
 enum ResponseResult <T> {
     case success(T)

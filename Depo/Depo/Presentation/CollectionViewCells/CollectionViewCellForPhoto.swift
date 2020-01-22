@@ -31,7 +31,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     private var cellImageManager: CellImageManager?
     private var uuid: String?
-    
+    var filesDataSource: FilesDataSource?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -216,5 +216,31 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     deinit {
         cancelImageLoading()
     }
-
+    
+    func loadImage(item: Item, indexPath: IndexPath) {
+        switch item.patchToPreview {
+        case .localMediaContent(let local):
+            setAssetId(local.asset.localIdentifier)
+            filesDataSource?.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] image, path in
+                guard let self = self else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    if self.getAssetId() == local.asset.localIdentifier, let image = image {
+                        self.setImage(image: image, animated:  false)
+                    } else {
+                        self.setPlaceholderImage(fileType: item.fileType)
+                    }
+                }
+            })
+            
+        case .remoteUrl(let url) :
+            if let url = url {
+                setImage(with: url)
+            } else {
+                setPlaceholderImage(fileType: item.fileType)
+            }
+        }
+    }
 }

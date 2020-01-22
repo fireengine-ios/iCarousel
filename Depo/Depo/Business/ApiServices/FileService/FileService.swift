@@ -8,20 +8,6 @@
 
 import Foundation
 
-struct FilePatch {
-    static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-    static let create = "filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "filesystem/delete"
-    static let rename = "filesystem/rename/%@"
-    static let move =   "filesystem/move?targetFolderUuid=%@"
-    static let copy =   "filesystem/copy?targetFolderUuid=%@"
-    static let details = "filesystem/details?minified=true"
-    static let detail =  "filesystem/detail/%@"
-    
-    static let metaData = "filesystem/metadata"
-}
-
-
 class CreatesFolder: BaseRequestParametrs {
     
     let folderName: String
@@ -40,7 +26,7 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.create, rootFolderName )
+        let path: String = String(format: RouteRequests.FileSystem.create, rootFolderName )
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -72,7 +58,24 @@ class DeleteFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.delete, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.delete, relativeTo: super.patch)!
+    }
+    
+    init(items: [String]) {
+        self.items = items
+    }
+}
+
+class MoveToTrashFiles: BaseRequestParametrs {
+   
+    let items: [String]
+    
+    override var requestParametrs: Any {
+        return items
+    }
+    
+    override var patch: URL {
+        return URL(string: RouteRequests.FileSystem.trash, relativeTo: super.patch)!
     }
     
     init(items: [String]) {
@@ -90,7 +93,7 @@ class MoveFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.move, path)
+        let str = String(format: RouteRequests.FileSystem.move, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -110,7 +113,7 @@ class CopyFiles: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.copy, path)
+        let str = String(format: RouteRequests.FileSystem.copy, path)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -135,7 +138,7 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: FilePatch.rename, uuid)
+        let path: String = String(format: RouteRequests.FileSystem.rename, uuid)
         return URL(string: path, relativeTo: super.patch)!
     }
     
@@ -157,7 +160,7 @@ class MetaDataFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.metaData, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.metaData, relativeTo: super.patch)!
     }
     
     init(items: [String], addToFavourit: Bool) {
@@ -175,7 +178,7 @@ class FileDetail: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: FilePatch.detail, uuid)
+        let str = String(format: RouteRequests.FileSystem.detail, uuid)
         return URL(string: str, relativeTo: super.patch)!
     }
     
@@ -193,7 +196,7 @@ class FileDetails: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.details, relativeTo: super.patch)!
+        return URL(string: RouteRequests.FileSystem.details, relativeTo: super.patch)!
     }
     
     init(uuids: [String] ) {
@@ -210,22 +213,32 @@ class FileList: BaseRequestParametrs {
     let rootDir: String
     let page: Int
     let size: Int
+    let status: ItemStatus
     
-    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false) {
+    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false, status: ItemStatus) {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
         self.rootDir = rootDir
         self.page = page
         self.size = size
         self.folderOnly = folderOnly
+        self.status = status
     }
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format: FilePatch.fileList, rootDir,
-                                  sortBy.description, sortOrder.description,
-                                  page.description, size.description, folder)
+        let path: String
         
+        if status == .trashed {
+            path = String(format: RouteRequests.FileSystem.trashedList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        } else {
+            path = String(format: RouteRequests.FileSystem.fileList, rootDir,
+                          sortBy.description, sortOrder.description,
+                          page.description, size.description, folder)
+        }
+
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -287,6 +300,17 @@ class FileService: BaseRequestService {
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
+    func moveToTrash(files: MoveToTrashFiles, success: FileOperation?, fail: FailResponse?) {
+        debugLog("FileService deleteFiles: \(files.items.joined(separator: ", "))")
+
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            debugLog("FileService delete success")
+
+            success?()
+        }, fail: fail)
+        executeDeleteRequest(param: files, handler: handler)
+    }
+
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         
@@ -452,7 +476,7 @@ class FileService: BaseRequestService {
                         try FileManager.default.moveItem(at: location, to: destination)
                     } catch {
                         
-                        fail?(.string("Downoad move file error"))
+                        fail?(.string("Download move file error"))
                         return
                     }
                     
@@ -470,7 +494,7 @@ class FileService: BaseRequestService {
                                 removeDestinationFile()
                                 success?()
                             } else {
-                                LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
+                                LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
                                                                          type: type,
                                                                          album: downloadParam.albumName,
                                                                          item: downloadParam.item,
@@ -550,7 +574,7 @@ class FileService: BaseRequestService {
     private let size = 100
     
     func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
-                   folderOnly: Bool = false, remoteServicePage: Int,
+                   folderOnly: Bool = false, remoteServicePage: Int, status: ItemStatus,
                    success: ListRemoteItems?, fail: FailRemoteItems?) {
         page = remoteServicePage
         let requestParam = FileList(rootDir: rootFolder,
@@ -558,7 +582,8 @@ class FileService: BaseRequestService {
                                     sortOrder: sortOrder,
                                     page: page,
                                     size: size,
-                                    folderOnly: folderOnly)
+                                    folderOnly: folderOnly,
+                                    status: status)
         let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { response in
             guard let resultResponse = (response as? FileListResponse)?.fileList else {
                 fail?()

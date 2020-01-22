@@ -179,6 +179,10 @@ class Device {
         return String(preferedLanguage[..<String.Index(encodedOffset: 2)])
     }
     
+    static var isTurkishLocale: Bool {
+        return locale == "tr"
+    }
+    
     static var supportedLocale: String {
         let locale = Device.locale
         if supportedLanguages.contains(locale) {

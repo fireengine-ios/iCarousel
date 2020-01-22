@@ -26,8 +26,24 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     var isPhoto = true
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    
+    private lazy var progressQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoUploadProgress, attributes: .concurrent)
+    private var uploadProgressValues = [String: Float]()
+    private var uploadProgress: [String: Float] {
+        get {
+            var result = [String: Float]()
+            progressQueue.sync { result = uploadProgressValues }
+            return result
+        }
+        
+        set {
+            progressQueue.async(flags: .barrier) { [weak self] in
+                self?.uploadProgressValues = newValue
+            }
+        }
+    }
+    
     private var uploadedObjectID = [String]()
-    private var uploadProgress = [String: Float]()
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
@@ -233,7 +249,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 DispatchQueue.toMain {
                     self?.hideSpinner()
                     let router = RouterVC()
-                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
+                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items, status: .active)
                     let nController = NavigationController(rootViewController: controller)
                     router.presentViewController(controller: nController)
                     self?.canShowDetail = true
@@ -761,6 +777,22 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func deleteItems(items: [Item]) {
+        stopEditingMode()
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        stopEditingMode()
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        stopEditingMode()
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        stopEditingMode()
+    }
+ 
+    func didUnhideItems(_ items: [WrapData]) {
         stopEditingMode()
     }
 }

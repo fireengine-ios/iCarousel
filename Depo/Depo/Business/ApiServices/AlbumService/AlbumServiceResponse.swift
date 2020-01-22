@@ -52,7 +52,7 @@ final class AlbumServiceResponse: ObjectRequestResponse, Map {
     }
 }
 
-class AlbumResponse: ObjectRequestResponse {
+final class AlbumResponse: ObjectRequestResponse, Map {
     
     var list: Array<AlbumServiceResponse> = []
     

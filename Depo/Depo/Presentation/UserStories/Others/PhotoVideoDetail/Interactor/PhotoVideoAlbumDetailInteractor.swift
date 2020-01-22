@@ -10,24 +10,6 @@ import UIKit
 
 class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
     
-    override func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
-        let selectedItem = array[selectedIndex]
-        switch selectedItem.fileType {
-        case .image, .video:
-            var barConfig = photoVideoBottomBarConfig!
-            if selectedItem.isLocalItem {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
-            } else {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig, style: .black, tintColor: nil)
-            }
-            return barConfig
-        case .application:
-            return documentsBottomBarConfig
-        default:
-            return photoVideoBottomBarConfig
-        }
-    }
-    
     override func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item] {

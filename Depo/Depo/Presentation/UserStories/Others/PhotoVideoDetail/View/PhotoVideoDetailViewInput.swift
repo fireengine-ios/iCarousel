@@ -8,6 +8,8 @@
 
 protocol PhotoVideoDetailViewInput: class {
     
+    var status: ItemStatus { get set }
+    
     func setupInitialState()
     
     func onShowSelectedItem(at index: Int, from items: [Item])

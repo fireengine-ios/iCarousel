@@ -25,7 +25,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private var localPlayer: AVPlayer?
     private var playerController: FixedAVPlayerViewController?
     
-    var hideActions = false
+    var status: ItemStatus = .active
+    var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
     
@@ -126,8 +127,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
         
-        if hideActions {
-            editingTabBar.view.isHidden = true
+        if hideTreeDotButton {
+            navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
         
         // TODO: EditingBarConfig is not working
@@ -178,7 +179,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
         /// need to check for PopUpController to dismiss it automaticaly for last photo in PhotoVideoDetail
-        if let presentedViewController = presentedViewController as? PopUpController {
+        if let presentedViewController = presentedViewController as? BasePopUpController {
             presentedViewController.close { [weak self] in
                 self?.dismiss(animated: true)
             }
@@ -203,11 +204,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        if navigationItem.rightBarButtonItem == nil {
+        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
             navigationItem.rightBarButtonItem = threeDotsBarButtonItem
         }
 
-        if hideActions {
+        if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
             guard !objects.isEmpty, selectedIndex < objects.count else {

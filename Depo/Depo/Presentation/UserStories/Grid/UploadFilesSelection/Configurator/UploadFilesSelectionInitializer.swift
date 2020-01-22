@@ -14,7 +14,7 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         let viewController = UploadFilesSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         configurator.configure(viewController: viewController,

@@ -24,6 +24,10 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getFolder() -> Item?
     
+    func getParent() -> BaseDataSourceItem?
+    
+    func getStatus() -> ItemStatus
+    
     func onLongPressInCell()
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int)
@@ -44,6 +48,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func didDelete(items: [BaseDataSourceItem])
     
+    func didDeleteParent()
+    
     func onItemSelectedActiveState(item: BaseDataSourceItem)
     
     func didChangeTopHeader(text: String)
@@ -59,6 +65,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
+    
+    func needToBack()
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -75,6 +83,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     
     func didDelete(items: [BaseDataSourceItem]) { }
     
+    func didDeleteParent() {}
+    
     func didChangeTopHeader(text: String) { }
     
     func scrollViewDidScroll(scrollView: UIScrollView) { }
@@ -86,6 +96,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
+    
+    func needToBack() { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -762,6 +774,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
+        let headerCarousel = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader,
+                              bundle: nil)
+        collectionView?.register(headerCarousel,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader)
+        
     }
     
     func registerFooters() {
@@ -919,7 +937,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return selectedItemsArray.map{$0}
+        if isSelectionStateActive {
+            return selectedItemsArray.map{$0}
+        }
+        
+        if let parent = delegate?.getParent() {
+            return [parent]
+        }
+        
+        return []
     }
     
     
@@ -940,12 +966,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            if !isObjctSelected(object: object) {
-                onSelectObject(object: object)
-            }
-            
             if !isSelectionStateActive {
+                isSelectionStateActive = true
+                
+                if !isObjctSelected(object: object) {
+                    onSelectObject(object: object)
+                }
+                
                 forwardDelegate.onLongPressInCell()
+            } else if !isObjctSelected(object: object) {
+                onSelectObject(object: object)
             }
         }
     }
@@ -1694,6 +1724,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
+        //check delete parent Item (hide|delete|moveToTrash|restore)
+        if let firstItem = items.first, let parent = delegate?.getParent(), firstItem == parent {
+            delegate?.didDeleteParent()
+            return
+        }
+        
+        //back if restore|delete items in trash bin folders
+        if delegate?.getStatus() == .trashed {
+            delegate?.needToBack()
+            return
+        }
+        
         dispatchQueue.async { [weak self] in
             guard let `self` = self, !items.isEmpty else {
                 return
@@ -1947,6 +1989,57 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             } else {
                 item.childCount = childCount - Int64(count)
             }
+        }
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    func didUnhideItems(_ items: [WrapData]) {
+        if delegate?.getStatus() == .hidden {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
+        
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            needInsertItems(items)
+        } else {
+            deleteItems(items: items)
+        }
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        
+    }
+    
+    private func needInsertItems(_ items: [Item]) {
+        //Maybe need merge in the future
+        DispatchQueue.main.async {
+            self.delegate?.needReloadData()
         }
     }
 }

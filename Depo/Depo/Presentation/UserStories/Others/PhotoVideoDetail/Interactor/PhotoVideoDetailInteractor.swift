@@ -14,10 +14,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var albumUUID: String?
     
+    var status: ItemStatus = .active
+    var viewType: DetailViewType = .details
+    
     var selectedIndex = 0
     
-    var photoVideoBottomBarConfig: EditingBarConfig!
-    var documentsBottomBarConfig: EditingBarConfig!
+    var bottomBarConfig: EditingBarConfig!
     
     var moreMenuConfig = [ElementTypes]()
     
@@ -75,60 +77,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         let selectedItem = array[selectedIndex]
-        switch selectedItem.fileType {
-        case .image, .video:
-            var elementsConfig = photoVideoBottomBarConfig.elementsConfig
-            if .video == selectedItem.fileType || selectedItem.isLocalItem {
-                if let editIndex = elementsConfig.index(of: .edit) {
-                    elementsConfig.remove(at: editIndex)
-                }
-                if let printIndex = elementsConfig.index(of: .print) {
-                    elementsConfig.remove(at: printIndex)
-                }
-                if !elementsConfig.contains(.info) {
-                    elementsConfig.append(.info)
-                }
-            }
-            
-            if .video == selectedItem.fileType && !selectedItem.isLocalItem {
-                if let deleteIndex = elementsConfig.index(of: .info) {
-                    elementsConfig.remove(at: deleteIndex)
-                }
-            }
-            
-            if !selectedItem.isLocalItem {
-                elementsConfig.insert(.edit, at: 2)
-                
-                if let syncIndex = elementsConfig.index(of: .sync) {
-                    elementsConfig[syncIndex] = .download
-                }
-                
-                if let infoIndex = elementsConfig.index(of: .info) {
-                    elementsConfig.remove(at: infoIndex)
-                }
-                if !elementsConfig.contains(.print) {
-                    elementsConfig.append(.print)
-                }
-                elementsConfig.append(.delete)
-                
-            } else if let syncIndex = elementsConfig.index(of: .download) {
-                elementsConfig[syncIndex] = .sync
-            }
-            
-            let langCode = Device.locale
-            if let deleteIndex = elementsConfig.index(of: .print),
-                langCode != "tr" {
-                elementsConfig.remove(at: deleteIndex)
-                
-            }
-            
-            return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
-        case .application:
-            return documentsBottomBarConfig
-        default:
-            return photoVideoBottomBarConfig
-        }
-        
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
+        return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
     }
     
     func deleteSelectedItem(type: ElementTypes) {
@@ -138,21 +88,25 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
         array.remove(at: selectedIndex)
         
-        if (selectedIndex >= array.count) {
+        if selectedIndex >= array.count {
             selectedIndex = array.count - 1
         }
         
-        if type == .delete {
-            ItemOperationManager.default.deleteItems(items: [removedObject])
-        }
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
+        
+        switch type {
+        case .hide, .unhide, .delete:
+            ///its already being called from different place, we dont need to call
+            break
+        case .removeFromAlbum, .removeFromFaceImageAlbum:
             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+        default:
+            break
         }
         
         if array.isEmpty {
             /// added asyncAfter 1 sec to wait PopUpController about success deleting
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { 
-                self.output.goBack()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.output.goBack()
             }
         } else {
             output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)

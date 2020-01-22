@@ -18,6 +18,8 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var heightDescriptionLabel: CGFloat = 0
     var heightTitleLabel: CGFloat = 0
     var accountType: AccountType = .all
+    var carouselViewHeight : CGFloat = 0
+    var sumHeightMarginsForHeader : CGFloat = 0
     
     weak var premiumDelegate: FaceImageItemsDataSourceDelegate?
     
@@ -28,6 +30,12 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if AuthoritySingleton.shared.faceRecognition {
+            if faceImageType == .people && kind == UICollectionElementKindSectionHeader {
+                let carouselView = collectionView.dequeue(supplementaryView: CarouselPagerReusableViewController.self, kind: kind, for: indexPath)
+                carouselView.maxHeight = carouselViewHeight
+                carouselView.layoutIfNeeded()
+                return carouselView
+            }
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
@@ -48,6 +56,13 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             
             return CGSize(width: UIScreen.main.bounds.width, height: height)
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if AuthoritySingleton.shared.faceRecognition && faceImageType == .people {
+            return CGSize(width: UIScreen.main.bounds.width, height: carouselViewHeight + sumHeightMarginsForHeader)
+        }
+        return CGSize.zero
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

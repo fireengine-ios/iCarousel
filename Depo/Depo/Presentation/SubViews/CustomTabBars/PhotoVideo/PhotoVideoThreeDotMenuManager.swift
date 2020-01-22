@@ -47,29 +47,31 @@ final class PhotoVideoThreeDotMenuManager {
         
         /// locals only
         if remoteItems.isEmpty {
-            actionTypes = [.createStory]
+            actionTypes = [.createStory, .addToAlbum]
             completion(actionTypes)
             
             /// local and remotes or remotes only
         } else {
-            actionTypes = [.createStory, .print, .deleteDeviceOriginal]
+            actionTypes = [.createStory]
             
             /// add .addToFavorites if need
-            let thereIsNoFavorite = remoteItems.first(where: { !$0.favorites }) != nil
-            if thereIsNoFavorite {
+            let hasUnfavorite = remoteItems.first(where: { !$0.favorites }) != nil
+            if hasUnfavorite {
                 actionTypes.append(.addToFavorites)
             }
             
             /// add .removeFromFavorites if need
-            let thereIsFavorite = remoteItems.first(where: { $0.favorites }) != nil
-            if thereIsFavorite {
+            let hasFavorite = remoteItems.first(where: { $0.favorites }) != nil
+            if hasFavorite {
                 actionTypes.append(.removeFromFavorites)
             }
             
+            actionTypes.append(contentsOf: [.addToAlbum, .print])
+            
             /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
-                if duplicates.isEmpty, let deleteDeviceOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                    actionTypes.remove(at: deleteDeviceOriginalIndex)
+                if !duplicates.isEmpty {
+                    actionTypes.append(.deleteDeviceOriginal)
                 }
                 completion(actionTypes)
             }
@@ -97,6 +99,8 @@ final class PhotoVideoThreeDotMenuManager {
         if thereIsFavorite {
             actionTypes.append(.removeFromFavorites)
         }
+        
+        actionTypes.append(.addToAlbum)
         
         /// remove .deleteDeviceOriginal if need
         MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
