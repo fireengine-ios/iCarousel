@@ -228,7 +228,7 @@ pipeline {
             options { timeout(time: 4, unit: 'HOURS') }
             agent { label agentName }
             environment {
-                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 IOS_PASS = credentials('iosLoginPass')
             }
             steps {
@@ -238,8 +238,8 @@ pipeline {
                     def scmVars = checkout scm
                     def gitUrl = scmVars.GIT_URL.trim()
                     echo "git url: ${gitUrl}"
-
                     sh 'rm -rf build'
+                    sh " rm -rf ~/ciderivedData/${derivedDir}"
 
                     stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
@@ -388,7 +388,7 @@ pipeline {
             }
             environment {
                 IOS_PASS = credentials('iosLoginPass')
-                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t DAV"
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 TESTFLIGHT_UPLOAD = credentials('testflight')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
