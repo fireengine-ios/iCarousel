@@ -17,6 +17,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     
     var isSearchItem: Bool
     
+    private var isDismissing = false
+    
     init(item: Item, isSearchItem: Bool) {
         self.item = item
         self.isSearchItem = isSearchItem
@@ -138,9 +140,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         
         if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
-            if let view = view as? FaceImagePhotosViewInput {
-                view.dismiss()
-            }
+            backToOriginController()
         } else {
             if let interactor = interactor as? FaceImagePhotosInteractorInput {
                 interactor.loadItem(item)
@@ -315,15 +315,17 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     }
     
     private func backToOriginController() {
-        guard let controller = getBackController() else {
+        guard let controller = getBackController(), !isDismissing else {
             return
         }
+        
+        isDismissing = true
         router.back(to: controller)
     }
     
     private func getBackController() -> UIViewController? {
         let navVC = (view as? UIViewController)?.navigationController
-        let destinationIndex = navVC?.viewControllers.firstIndex(where: {
+        let destinationIndex = navVC?.viewControllers.lastIndex(where: {
             ($0 is HiddenPhotosViewController) || ($0 is SegmentedController)
         })
         guard let index = destinationIndex, let destination = navVC?.viewControllers[safe: index] else {
