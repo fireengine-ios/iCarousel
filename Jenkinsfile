@@ -23,8 +23,8 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
-	    xcodeSchema: // Defaults to app name
-            xcodeTarget: // Defaults to app name
+	    //xcodeSchema: // Defaults to app name
+            //xcodeTarget: // Defaults to app name
             //xcodeSchema: 'lifedrive_Bundle', 
             //xcodeTarget: 'lifedrive_Bundle'  
         ]
