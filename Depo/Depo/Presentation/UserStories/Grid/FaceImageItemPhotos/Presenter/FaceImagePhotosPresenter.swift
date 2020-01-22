@@ -323,7 +323,7 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     
     private func getBackController() -> UIViewController? {
         let navVC = (view as? UIViewController)?.navigationController
-        let destinationIndex = navVC?.viewControllers.firstIndex(where: {
+        let destinationIndex = navVC?.viewControllers.lastIndex(where: {
             ($0 is HiddenPhotosViewController) || ($0 is SegmentedController)
         })
         guard let index = destinationIndex, let destination = navVC?.viewControllers[safe: index] else {
