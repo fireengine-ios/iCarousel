@@ -230,8 +230,8 @@ pipeline {
                     def scmVars = checkout scm
                     def gitUrl = scmVars.GIT_URL.trim()
                     echo "git url: ${gitUrl}"
-
                     sh 'rm -rf build'
+                    sh " rm -rf ~/ciderivedData/${derivedDir}"
 
                     stage('Build for Enterprise') {
                         STAGE_NAME = 'Pre-Build Checks'
