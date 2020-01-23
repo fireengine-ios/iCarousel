@@ -18,9 +18,26 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
-        TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
+        TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
+            guard shouldProceed else {
+                self?.showUpdateIsRequiredPopup()
+                return
+            }
+            
             self?.showPasscodeIfNeed()
         }
+    }
+    
+    private func showUpdateIsRequiredPopup() {
+        let popup = PopUpController.with(title: TextConstants.turkcellUpdateRequiredTitle, message: TextConstants.turkcellUpdateRequiredMessage, image: .error, buttonTitle: TextConstants.ok) { popup in
+            debugLog("required app killing")
+            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                exit(EXIT_SUCCESS)
+            })
+        }
+        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        return
     }
     
     private func showLandingPagesIfNeeded() {
