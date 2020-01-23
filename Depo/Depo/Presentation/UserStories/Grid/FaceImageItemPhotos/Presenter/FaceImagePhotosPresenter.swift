@@ -71,8 +71,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         } else if type == .changeCoverPhoto {
             outputView()?.hideSpinner()
 
-            if let view = view as? FaceImagePhotosViewController,
-                let item = response as? Item {
+            if let view = view as? FaceImagePhotosViewController, let item = response as? Item {
                 view.setHeaderImage(with: item.patchToPreview)
             }
         }
@@ -130,11 +129,13 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     
     override func didDelete(items: [BaseDataSourceItem]) {
         //hide or delete fir album
-        if let album = items.first as? AlbumItem,
-           let interactor = interactor as? FaceImagePhotosInteractor,
-           album == interactor.album {
+        if
+            let album = items.first as? AlbumItem,
+            let interactor = interactor as? FaceImagePhotosInteractor,
+            album == interactor.album
+        {
             faceImageItemsModuleOutput?.delete(item: item)
-            (view as? FaceImagePhotosViewInput)?.dismiss()
+            goBack()
             return
         }
         
@@ -312,6 +313,15 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     
     func deleteItems(items: [Item]) {
         backToOriginController()
+    }
+    
+    func goBack() {
+        guard !isDismissing else {
+            return
+        }
+        
+        isDismissing = true
+        router.back()
     }
     
     private func backToOriginController() {
