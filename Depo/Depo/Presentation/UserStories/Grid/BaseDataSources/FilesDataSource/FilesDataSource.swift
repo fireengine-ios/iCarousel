@@ -114,17 +114,14 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     }
     
     func getImageData(item: Item, completeData: @escaping RemoteData) -> URL? {
-
         switch item.patchToPreview {
             
         case let .localMediaContent(local):
-            
             localManager.getImageData(asset: local.asset, data: completeData)
             
         case let .remoteUrl(url):
-            
             let loadUrl = item.metaData?.largeUrl != nil ? item.metaData!.largeUrl : url
-            getImageServise.getImageData(url: loadUrl, completeData: completeData)
+            getImageServise.getImageDataByTrimming(url: loadUrl, completeImage: completeData)
             return loadUrl
             
         }
