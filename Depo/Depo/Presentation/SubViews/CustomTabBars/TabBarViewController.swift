@@ -772,6 +772,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .createStory
         case uploadBtn:
             action = .upload
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .uploadFromPlus))
         case albumBtn:
             action = .createAlbum
         case uploadFromLifebox:
@@ -780,6 +781,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromAppFavorites
         case importFromSpotify:
             action = .importFromSpotify
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .spotifyImport))
         default:
             return
         }

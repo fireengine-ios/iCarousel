@@ -205,10 +205,12 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
     func onBottomBarMoveToTrash() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
         showDeletePopup()
     }
     
     func onBottomBarUnhide() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .unhide))
         showUnhidePopup()
     }
 }
@@ -238,10 +240,12 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerUnhide() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .unhide))
         showUnhidePopup()
     }
     
     func onThreeDotsManagerMoveToTrash() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
         showDeletePopup()
     }
 }
