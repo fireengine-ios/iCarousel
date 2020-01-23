@@ -884,22 +884,25 @@ extension MoreFilesActionsInteractor {
         //TODO: change other parts of actions tracking to this method
         switch elementType {
         case .moveToTrash:
-            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
-                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Trash(status: successStatus, typeCountTupple: typeToCountTupple) else {
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Trash(status: successStatus, type: $0, count: count) else {
                     return
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
         case .hide:
-            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
-                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Hide(status: successStatus, typeCountTupple: typeToCountTupple) else {
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Hide(status: successStatus, type: $0, count: count) else {
                     return
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
         case .unhide:
-            NetmeraService.getItemsTypeToCount(items: items).forEach { typeToCountTupple in
-                guard typeToCountTupple.1 > 0, let event = NetmeraEvents.Actions.Unhide(status: successStatus, typeCountTupple: typeToCountTupple) else {
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Unhide(status: successStatus, type: $0, count: count) else {
                     return
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)

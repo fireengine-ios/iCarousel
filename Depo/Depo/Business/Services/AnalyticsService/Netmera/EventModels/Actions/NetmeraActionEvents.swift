@@ -718,38 +718,38 @@ extension NetmeraEvents.Actions {
         @objc var type = ""
         @objc var count: Int = 0
         
-        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
-            guard typeCountTupple.1 > 0 else {
+        convenience init?(status: NetmeraEventValues.GeneralStatus, type: FileType, count: Int) {
+            guard count > 0 else {
                 assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
                 return nil
             }
             
-            let accaptableType: NetmeraEventValues.TrashType
-            switch typeCountTupple.0 {
+            let acceptableType: NetmeraEventValues.TrashType
+            switch type {
             case .image, .faceImage(_):
-                accaptableType = .photo
+                acceptableType = .photo
             case .video:
-                accaptableType = .video
+                acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
                  .application(.pdf), .application(.ppt),
                  .application(.usdz), .allDocs:
-                accaptableType = .document
+                acceptableType = .document
             case .audio:
-                accaptableType = .music
+                acceptableType = .music
             case .photoAlbum:
-                accaptableType = .album
+                acceptableType = .album
             case .faceImageAlbum(.people):
-                accaptableType = .person
+                acceptableType = .person
             case .faceImageAlbum(.things):
-                accaptableType = .thing
+                acceptableType = .thing
             case .faceImageAlbum(.places):
-                accaptableType = .place
+                acceptableType = .place
             default:
-                accaptableType = .photo
+                acceptableType = .photo
             }
             
-            self.init(status: status.text, type: accaptableType.text, count: typeCountTupple.1)
+            self.init(status: status.text, type: acceptableType.text, count: count)
         }
         
         convenience init(status: String, type: String, count: Int) {
@@ -856,30 +856,30 @@ extension NetmeraEvents.Actions {
             self.count = count
         }
         
-        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
-            guard typeCountTupple.1 > 0 else {
+        convenience init?(status: NetmeraEventValues.GeneralStatus, type: FileType, count: Int) {
+        guard count > 0 else {
                 assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
                 return nil
             }
-            let accaptableType: NetmeraEventValues.HideUnhideObjectType
-            switch typeCountTupple.0 {
+            let acceptableType: NetmeraEventValues.HideUnhideObjectType
+            switch type {
             case .image, .faceImage(_):
-                accaptableType = .photo
+                acceptableType = .photo
             case .video:
-                accaptableType = .video
+                acceptableType = .video
             case .photoAlbum:
-                accaptableType = .album
+                acceptableType = .album
             case .faceImageAlbum(.people):
-                accaptableType = .person
+                acceptableType = .person
             case .faceImageAlbum(.things):
-                accaptableType = .thing
+                acceptableType = .thing
             case .faceImageAlbum(.places):
-                accaptableType = .place
+                acceptableType = .place
             default:
-                accaptableType = .photo
+                acceptableType = .photo
             }
             
-            self.init(status: status, type: accaptableType, count: typeCountTupple.1)
+            self.init(status: status, type: acceptableType, count: count)
         }
 
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -902,30 +902,30 @@ extension NetmeraEvents.Actions {
         @objc var type = ""
         @objc var count: Int = 0
 
-        convenience init?(status: NetmeraEventValues.GeneralStatus, typeCountTupple: NetmeraService.ItemTypeToCountTupple) {
-            guard typeCountTupple.1 > 0 else {
+        convenience init?(status: NetmeraEventValues.GeneralStatus, type: FileType, count: Int) {
+            guard count > 0 else {
                 assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
                 return nil
             }
-            let accaptableType: NetmeraEventValues.HideUnhideObjectType
-            switch typeCountTupple.0 {
+            let acceptableType: NetmeraEventValues.HideUnhideObjectType
+            switch type {
             case .image, .faceImage(_):
-                accaptableType = .photo
+                acceptableType = .photo
             case .video:
-                accaptableType = .video
+                acceptableType = .video
             case .photoAlbum:
-                accaptableType = .album
+                acceptableType = .album
             case .faceImageAlbum(.people):
-                accaptableType = .person
+                acceptableType = .person
             case .faceImageAlbum(.things):
-                accaptableType = .thing
+                acceptableType = .thing
             case .faceImageAlbum(.places):
-                accaptableType = .place
+                acceptableType = .place
             default:
-                accaptableType = .photo
+                acceptableType = .photo
             }
             
-            self.init(status: status, type: accaptableType, count: typeCountTupple.1)
+            self.init(status: status, type: acceptableType, count: count)
         }
         
         convenience init(status: NetmeraEventValues.GeneralStatus, type: NetmeraEventValues.HideUnhideObjectType, count: Int) {
