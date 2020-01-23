@@ -38,7 +38,19 @@ path_list = ['./Depo/App/Resources/en.lproj/OurLocalizable.strings',
              './Depo/App/Resources/ru.lproj/OurLocalizable.strings',
              './Depo/App/Resources/sq.lproj/OurLocalizable.strings',
              './Depo/App/Resources/tr.lproj/OurLocalizable.strings',
-             './Depo/App/Resources/uk.lproj/OurLocalizable.strings']
+             './Depo/App/Resources/uk.lproj/OurLocalizable.strings',
+             
+             './Depo/App/Resources/en.lproj/InfoPlist.strings',
+             './Depo/App/Resources/ar.lproj/InfoPlist.strings',
+             './Depo/App/Resources/de.lproj/InfoPlist.strings',
+             './Depo/App/Resources/es.lproj/InfoPlist.strings',
+             './Depo/App/Resources/fr.lproj/InfoPlist.strings',
+             './Depo/App/Resources/ro.lproj/InfoPlist.strings',
+             './Depo/App/Resources/ru.lproj/InfoPlist.strings',
+             './Depo/App/Resources/sq.lproj/InfoPlist.strings',
+             './Depo/App/Resources/tr.lproj/InfoPlist.strings',
+             './Depo/App/Resources/uk.lproj/InfoPlist.strings'
+             ]
 
 
 def change_product_name_for_localize_string(path_to_file):
