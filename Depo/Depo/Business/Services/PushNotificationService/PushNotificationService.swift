@@ -429,6 +429,7 @@ final class PushNotificationService {
     }
     
     private func openHiddenBin() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hiddenBin))
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
     }

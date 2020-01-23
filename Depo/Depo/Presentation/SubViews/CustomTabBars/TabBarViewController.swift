@@ -772,7 +772,6 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .createStory
         case uploadBtn:
             action = .upload
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .uploadFromPlus))
         case albumBtn:
             action = .createAlbum
         case uploadFromLifebox:
@@ -781,7 +780,6 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromAppFavorites
         case importFromSpotify:
             action = .importFromSpotify
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .spotifyImport))
         default:
             return
         }
@@ -887,6 +885,7 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: controller)
 
         case .upload:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
             
             let controller = router.uploadPhotos()
@@ -933,6 +932,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .spotifyImport))
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }

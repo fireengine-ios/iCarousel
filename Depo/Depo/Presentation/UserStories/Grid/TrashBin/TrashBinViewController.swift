@@ -48,6 +48,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .trashBin))
+        
         if dataSource.isSelectionStateActive {
             navigationBarWithGradientStyle()
         } else {

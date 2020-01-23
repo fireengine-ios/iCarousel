@@ -65,8 +65,6 @@ class SegmentedController: BaseViewController, NibInit {
     private(set) var viewControllers = [BaseViewController]()
     private var alignment: Alignment = .center
     
-    private var isHiddenBinFromPushNotif: Bool = false
-    
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
     }
@@ -133,9 +131,8 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     func switchSegment(to index: Int) {
-        if segmentedControl.numberOfSegments > index {
+        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
             segmentedControl.selectedSegmentIndex = index
-            isHiddenBinFromPushNotif = true
             segmentDidChange(segmentedControl)
         }
     }
@@ -154,11 +151,6 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     private func setupSelectedController(_ controller: BaseViewController) {
-        ///isHiddenBinFromPushNotif is for not to log event if user comes from push notification
-        if controller is TrashBinViewController && !isHiddenBinFromPushNotif {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .trashBin))
-        }
-        isHiddenBinFromPushNotif = false
         add(childController: controller)
         floatingButtonsArray = controller.floatingButtonsArray
     }
