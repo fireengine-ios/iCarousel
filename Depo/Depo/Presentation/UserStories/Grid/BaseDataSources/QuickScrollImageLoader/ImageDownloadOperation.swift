@@ -68,7 +68,10 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                     return
                 }
                 
-                guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                guard
+                    let data = dataResponse.value,
+                    let image = self.formattedImage(data: data)
+                else {
                     self.semaphore.signal()
                     return
                 }
@@ -88,5 +91,20 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             outputBlock?(outputImage, outputData)
             semaphore.signal()
         }
+    }
+    
+    private func formattedImage(data: Data?) -> UIImage? {
+        var image: UIImage?
+        if let data = data {
+            let format = ImageFormat.get(from: data)
+            switch format {
+            case .gif:
+                image = UIImage(gifData: data)
+            default:
+                image = UIImage(data: data)
+            }
+        }
+        
+        return image
     }
 }

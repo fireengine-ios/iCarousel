@@ -148,10 +148,7 @@ final class LoadingImageView: UIImageView {
             return
         }
         
-        cancelLoadRequest()
-        path = object.patchToPreview
-        
-        loadImageData(object: object, smooth: smooth)
+        loadImage(with: object.patchToPreview)
     }
     
     private func loadImageData(object: Item, smooth: Bool = false) {
