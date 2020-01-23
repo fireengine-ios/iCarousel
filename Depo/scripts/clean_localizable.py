@@ -39,7 +39,6 @@ path_list = ['./Depo/App/Resources/en.lproj/OurLocalizable.strings',
              './Depo/App/Resources/sq.lproj/OurLocalizable.strings',
              './Depo/App/Resources/tr.lproj/OurLocalizable.strings',
              './Depo/App/Resources/uk.lproj/OurLocalizable.strings',
-             
              './Depo/App/Resources/en.lproj/InfoPlist.strings',
              './Depo/App/Resources/ar.lproj/InfoPlist.strings',
              './Depo/App/Resources/de.lproj/InfoPlist.strings',
@@ -64,13 +63,13 @@ def change_product_name_for_localize_string(path_to_file):
         
         if '=' in line:
             
-            key, value = line.split('" = "')
+            key, value = line.split(' = "')
             
             if key not in exception_list:
                 value = value.replace('lifebox', 'billo')
                 value = value.replace('Lifebox', 'Billo')
                 value = value.replace('LIFEBOX', 'BILLO')
-                line = ' = '.join([ key+'"' , '"'+value])
+                line = ' = '.join([ key , '"'+value])
 
         new_data.append(line)
 
