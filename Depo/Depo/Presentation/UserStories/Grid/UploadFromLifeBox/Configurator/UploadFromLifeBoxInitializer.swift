@@ -33,7 +33,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesForFolderViewController(with nibName: String, destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules) -> UIViewController {
+    class func initializeFilesForFolderViewController(with nibName: String, destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules, type: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
         viewController.parentUUID = destinationFolderUUID
         //viewController.needShowTabBar = true
@@ -44,6 +44,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         
         let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxAllFilesPresenter()
         presenter.sortedRule = sortRule
+        presenter.type = type
         var fileService: RemoteItemsService
         
         if !outputFolderUUID.isEmpty {

@@ -209,10 +209,6 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         setupHeaderView(with: item, status: status)
     }
     
-    func dismiss() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     func hiddenSlider(isHidden: Bool) {
         guard let albumsView = albumsSlider?.view else {
             return
