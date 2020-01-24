@@ -339,8 +339,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
+        let message = isAlbums(items) ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
+
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
-                                         message: TextConstants.unhidePopupText,
+                                         message: message,
                                          image: .unhide,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
@@ -361,8 +363,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.putBackItems(remoteItems)
         }
         
+        let message: String
+        if isAlbums(items) {
+            message = TextConstants.restoreAlbumsConfirmationPopupText
+        } else if items.allSatisfy({ $0.fileType == .folder }) {
+            message = TextConstants.restoreFoldersConfirmationPopupText
+        } else {
+            message = TextConstants.restoreItemsConfirmationPopupText
+        }
+        
         let controller = PopUpController.with(title: TextConstants.restoreConfirmationPopupTitle,
-                                              message: TextConstants.restoreConfirmationPopupText,
+                                              message: message,
                                               image: .restore,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,
@@ -672,7 +683,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                     }
             })
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        } 
+        }
     }
     
     func delete(items: [BaseDataSourceItem]) {
@@ -682,8 +693,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
+        let message: String
+        if isAlbums(items) {
+            message = TextConstants.deleteAlbumsConfirmationPopupText
+        } else if items.allSatisfy({ $0.fileType == .folder }) {
+            message = TextConstants.deleteFoldersConfirmationPopupText
+        } else {
+            message = TextConstants.deleteItemsConfirmationPopupText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
-                                         message: TextConstants.deleteConfirmationPopupText,
+                                         message: message,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
@@ -1122,40 +1142,55 @@ extension MoreFilesActionsInteractor {
     }
     
     private func moveToTrashAlbums(albums: [AlbumItem]) {
-        let okHandler: VoidHandler = { [weak self] in
-            self?.output?.operationStarted(type: .moveToTrash)
-            
-            self?.albumService.moveToTrash(albums: albums, success: { [weak self] deletedAlbums in
-                self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
-
-                DispatchQueue.main.async {
-                    self?.output?.operationFinished(type: .moveToTrash)
-                    ItemOperationManager.default.didMoveToTrashAlbums(albums)
-                    
-                    let controller = PopUpController.with(title: TextConstants.success,
-                                                          message: TextConstants.moveToTrashAlbumsSuccess,
-                                                          image: .success,
-                                                          buttonTitle: TextConstants.ok)
-                    self?.router.presentViewController(controller: controller)
-                }
-                }, fail: { [weak self] errorRespone in
-                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .failure, items: albums)
-                    DispatchQueue.main.async {
-                        self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
-                    }
-            })
+        let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
+        guard !moveToTrashAlbums.isEmpty else {
+            self.output?.operationFailed(type: .moveToTrash, message: TextConstants.removeReadOnlyAlbumError)
+            return
         }
-        //TextConstants.actionSheetDelete
-        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                              message: TextConstants.removeAlbums,
-                                              image: .delete,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
         
-        router.presentViewController(controller: controller)
+        router.showSpiner()
+        albumService.loadAllItemsFrom(albums: moveToTrashAlbums) { [weak self] items in
+            let okHandler: VoidHandler = { [weak self] in
+                self?.output?.operationStarted(type: .moveToTrash)
+                self?.albumService.moveToTrash(albums: moveToTrashAlbums, albumItems: items, success: { [weak self] deletedAlbums in
+                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
+                    
+                    DispatchQueue.main.async {
+                        self?.output?.operationFinished(type: .moveToTrash)
+                        ItemOperationManager.default.didMoveToTrashAlbums(moveToTrashAlbums)
+                        
+                        let controller = PopUpController.with(title: TextConstants.success,
+                                                              message: TextConstants.moveToTrashAlbumsSuccess,
+                                                              image: .success,
+                                                              buttonTitle: TextConstants.ok)
+                        self?.router.presentViewController(controller: controller)
+                    }
+                    }, fail: { [weak self] errorRespone in
+                        self?.trackNetmeraSuccessEvent(elementType: .moveToTrash,
+                                                       successStatus: .failure,
+                                                       items: moveToTrashAlbums)
+                        DispatchQueue.main.async {
+                            self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
+                        }
+                })
+            }
+            
+            let isHiddenAlbums = (items.first?.status == .hidden)
+            let message = isHiddenAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.removeAlbums
+            let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                                  message: message,
+                                                  image: .delete,
+                                                  firstButtonTitle: TextConstants.cancel,
+                                                  secondButtonTitle: TextConstants.ok,
+                                                  secondAction: { vc in
+                                                    vc.close(completion: okHandler)
+            })
+            
+            DispatchQueue.main.async {
+                self?.router.hideSpiner()
+                self?.router.presentViewController(controller: controller)
+            }
+        }
     }
 }
 
@@ -1252,5 +1287,14 @@ extension MoreFilesActionsInteractor {
             fileService.putBackPlaces(items: items, success: success, fail: fail)
 
         }
+    }
+}
+
+extension MoreFilesActionsInteractor {
+    private func isAlbums(_ items: [Any]) -> Bool {
+        return items is [PlacesItem] ||
+            items is [PeopleItem] ||
+            items is [ThingsItem] ||
+            items is [AlbumItem]
     }
 }
