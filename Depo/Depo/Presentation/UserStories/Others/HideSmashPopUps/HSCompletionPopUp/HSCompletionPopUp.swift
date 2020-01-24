@@ -262,7 +262,6 @@ final class HSCompletionPopUp: BasePopUpController {
     }
     
     private func openHiddenBin() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hiddenBin))
         if #available(iOS 13, *) {
             self.router.navigationController?.dismiss(animated: true, completion: {
                 let controller = self.router.hiddenPhotosViewController()

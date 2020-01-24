@@ -48,7 +48,6 @@ class LBAlbumLikePreviewSliderRouter {
     }
     
     private func goToHiddenView() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hiddenBin))
         let controller = router.hiddenPhotosViewController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }

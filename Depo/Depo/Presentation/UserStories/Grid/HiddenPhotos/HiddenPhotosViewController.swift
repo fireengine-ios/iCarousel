@@ -45,6 +45,8 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hiddenBin))
+        
         navigationBarWithGradientStyle()
         
         //need to fix crash on show bottom bar
