@@ -375,19 +375,22 @@ final class OverlayStickerImageView: UIImageView {
     func getAttachmentInfoForAnalytics() -> String {
         
         var message = ""
-        let items = attachments.map{ $0.item }
-        let keys = Set(items)
+        let attach = attachments.map{ $0.item }
+        let keys = Set(attach)
     
         keys.forEach({ key in
             var msg = ""
-            let items = items.filter({ $0 == key })
+            let items = attach.filter({ $0 == key })
             msg.append("\(items.count)")
             if key.type == .gif {
                 msg.append("G")
             } else{
                 msg.append("S")
             }
-            msg.append("\(key.id)|")
+            msg.append("\(key.id)")
+            if attach.count > 1 {
+                msg.append("|")
+            }
             message.append(msg)
         })
         return message

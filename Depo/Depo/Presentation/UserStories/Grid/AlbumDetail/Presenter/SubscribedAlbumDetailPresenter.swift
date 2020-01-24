@@ -105,14 +105,15 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
     
     private func getBackController() -> UIViewController? {
-        let navVC = (view as? UIViewController)?.navigationController
-        let destinationIndex = navVC?.viewControllers.firstIndex(where: {
-            ($0 is HiddenPhotosViewController) || ($0 is SegmentedController)
-        })
-        guard let index = destinationIndex, let destination = navVC?.viewControllers[safe: index] else {
+        guard let navVC = (view as? UIViewController)?.navigationController else {
             return nil
         }
         
-        return destination
+        if let hiddenBin = navVC.viewControllers.first(where: { $0 is HiddenPhotosViewController }) {
+            return hiddenBin
+        } else if let segmentedController = navVC.viewControllers.first(where: { $0 is SegmentedController }) {
+            return segmentedController
+        }
+        return nil
     }
 }
