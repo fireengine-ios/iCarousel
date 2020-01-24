@@ -342,11 +342,17 @@ final class OverlayStickerImageView: UIImageView {
                 msg.append("S")
             }
             msg.append("\(key.id)")
-            if attach.count > 1 {
+            
+            if keys.count > 1 {
                 msg.append("|")
             }
             message.append(msg)
         })
+        
+        if message.last == "|" {
+            message.removeLast()
+        }
+        
         return message
     }
     

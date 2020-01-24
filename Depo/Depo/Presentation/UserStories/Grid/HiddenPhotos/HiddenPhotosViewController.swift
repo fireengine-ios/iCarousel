@@ -22,6 +22,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private lazy var threeDotsManager = HiddenPhotosThreeDotMenuManager(delegate: self)
     
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //MARK: - View lifecycle
     
@@ -31,6 +32,9 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        analyticsService.logScreen(screen: .hiddenBin)
+        analyticsService.trackDimentionsEveryClickGA(screen: .hiddenBin)
         
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)

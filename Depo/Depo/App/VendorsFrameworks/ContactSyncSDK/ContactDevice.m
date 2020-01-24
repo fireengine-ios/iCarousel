@@ -8,10 +8,11 @@
 #import "ContactDevice.h"
 #import "ContactUtil.h"
 #import <AddressBook/ABPerson.h>
+#import "SyncSettings.h"
 
 @implementation ContactDevice
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber *)contactId
 {
     return nil;
 }
@@ -28,10 +29,7 @@
 
 - (NSString*)deviceKey
 {
-    NSString *value = self.value;
-    if ([self isKindOfClass:[ContactPhone class]]){
-        value = [ContactUtil clearMsisdn:self.value];
-    }
+    NSString *value = self.valueForCompare;
     return value;
 }
 
@@ -70,7 +68,7 @@
 {
     static int prime = 31;
     unsigned long result = 1;
-    result = prime * result + ((_value == nil) ? 0 : [[self deviceKey] hash]);
+    result = prime * result + ((_value == nil) ? 0 : [[self valueForCompare] hash]);
 //    result = prime * result + ((_type == 0) ? 0 : _type);
     return result;
 }
@@ -90,7 +88,7 @@
         }
     } else if (SYNC_IS_NULL(other.value)){
         return NO;
-    } else if (![[self deviceKey] isEqualToString:[other deviceKey]]){
+    } else if (![[self valueForCompare] isEqualToString:[other valueForCompare]]){
         return NO;
     }
 //    if (_type != other.type){
@@ -99,15 +97,30 @@
     return YES;
 }
 
+- (NSString *)valueForCompare {
+    return nil;
+}
+
+- (nonnull id)copyWithZone:(nullable NSZone *)zone {
+    ContactDevice *copy = [[ContactDevice allocWithZone: zone] init];
+    [copy setRemoteId: self.remoteId];
+    [copy setValue: self.value];
+    [copy setDeleted: self.deleted];
+    [copy setContactId: self.contactId];
+    [copy setType: self.type];
+    return copy;
+}
+
 @end
 
 @implementation  ContactPhone
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber*)contactId
 {
     self = [super init];
     if (self){
         self.value = value;
+        self.contactId = contactId;
         if ([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
             self.type = CDEVICE_HOME;
         } else if ([type isEqualToString:(__bridge NSString*)kABPersonPhoneMobileLabel]){
@@ -187,15 +200,70 @@
     return [dict copy];
 }
 
+- (NSString*) getCompareValue:(BOOL)save{
+    NSString *val = self.value;
+    if (!SYNC_STRING_IS_NULL_OR_EMPTY(val)){
+        val = [val stringByReplacingOccurrencesOfString:@" " withString:@""];
+        val = [val stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        val = [val stringByReplacingOccurrencesOfString:@")" withString:@""];
+        val = [val stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        
+        if (save){
+            if ([val hasPrefix:@"+"]){
+                val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"" options:0 range:[val rangeOfString:@"+"]];
+            }
+        }else{
+            if ([val hasPrefix:@"0"]){
+                val = [val stringByReplacingOccurrencesOfString:@"0" withString:@"" options:0 range:[val rangeOfString:@"0"]];
+            }
+            if (!SYNC_STRING_IS_NULL_OR_EMPTY([SyncSettings shared].countryCode)){
+                if ([val hasPrefix:@"+"]){
+                    val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"" options:0 range:[val rangeOfString:@"+"]];
+                }
+                if ([val hasPrefix:[SyncSettings shared].countryCode]){
+                    val = [val stringByReplacingOccurrencesOfString:[SyncSettings shared].countryCode withString:@"" options:0 range:[val rangeOfString:[SyncSettings shared].countryCode]];
+                }
+            }
+            
+        }
+    }
+    
+    return val;
+}
+
+- (NSString *)valueForCompare{
+    NSString* val = self.value;
+    if (val != nil) {
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^0-9]" options:NSRegularExpressionCaseInsensitive error:&error];
+        val = [regex stringByReplacingMatchesInString:val options:0 range:NSMakeRange(0, [val length]) withTemplate:@""];
+        if ([val length] >= 11) {
+            val = [val substringWithRange:NSMakeRange([val length] - 11, [val length])];
+        }
+    }
+    return val;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ContactPhone *copy = [[ContactPhone allocWithZone: zone] init];
+    [copy setRemoteId: self.remoteId];
+    [copy setValue: self.value];
+    [copy setDeleted: self.deleted];
+    [copy setContactId: self.contactId];
+    [copy setType: self.type];
+    return copy;
+}
+
 @end
 
 @implementation ContactEmail
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber*)contactId
 {
     self = [super init];
     if (self){
         self.value = value;
+        self.contactId = contactId;
         if ([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
             self.type = CDEVICE_HOME;
         } else if ([type isEqualToString:(__bridge NSString*)kABWorkLabel])
@@ -258,6 +326,24 @@
         }
     }
     return [dict copy];
+}
+
+- (NSString *)valueForCompare {
+    NSString* val = self.value;
+    if (val != nil) {
+        val = [val stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
+    return val;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ContactEmail *copy = [[ContactEmail allocWithZone: zone] init];
+    [copy setRemoteId: self.remoteId];
+    [copy setValue: self.value];
+    [copy setDeleted: self.deleted];
+    [copy setContactId: self.contactId];
+    [copy setType: self.type];
+    return copy;
 }
 
 @end
