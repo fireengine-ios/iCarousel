@@ -375,10 +375,48 @@ extension NetmeraEvents.Actions {
         private let kDeleteKey = "trb"
         
         @objc var status = ""
+        @objc var type = ""
+        @objc var count: Int = 0
+
+        convenience init?(status: NetmeraEventValues.GeneralStatus, type: FileType, count: Int) {
+            guard count > 0 else {
+                assertionFailure("please add additional check before calling init, otherwise we will send a lot of nills")
+                return nil
+            }
+            
+            let acceptableType: NetmeraEventValues.TrashType
+            switch type {
+            case .image, .faceImage(_):
+                acceptableType = .photo
+            case .video:
+                acceptableType = .video
+            case .application(.doc), .application(.txt),
+                 .application(.html), .application(.xls),
+                 .application(.pdf), .application(.ppt),
+                 .application(.usdz), .allDocs:
+                acceptableType = .document
+            case .audio:
+                acceptableType = .music
+            case .photoAlbum:
+                acceptableType = .album
+            case .faceImageAlbum(.people):
+                acceptableType = .person
+            case .faceImageAlbum(.things):
+                acceptableType = .thing
+            case .faceImageAlbum(.places):
+                acceptableType = .place
+            default:
+                acceptableType = .photo
+            }
+            
+            self.init(status: status.text, type: acceptableType.text, count: count)
+        }
         
-        convenience init(status: String) {
+        convenience init(status: String, type: String, count: Int) {
             self.init()
             self.status = status
+            self.type = type
+            self.count = count
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
