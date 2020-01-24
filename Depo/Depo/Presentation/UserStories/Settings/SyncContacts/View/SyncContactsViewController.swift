@@ -146,19 +146,22 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     func setInitialState() {
         debugLog("SyncContactsViewController setInitialState")
-//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         operationButtonsStackView.isHidden = true
         manageContactsButton.isHidden = true
         
         //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
         viewForInformationAfterBackUp.isHidden = true
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
     }
     
     func setStateWithoutBackUp() {
         debugLog("SyncContactsViewController setStateWithoutBackUp")
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
 //        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         restoreButton.isHidden = true
@@ -173,6 +176,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         debugLog("SyncContactsViewController setStateWithBackUp")
         gradientLoaderIndicator.resetProgress()
         titleLabel.attributedText = titleLabelAttributedTextBeforeBackup
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment these lines
 //        viewForInformationAfterBackUp.setSubviewsHidden(false)
         cancelButton.isHidden = true
         restoreButton.isHidden = false
@@ -185,7 +191,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     func setOperationState(operationType: SyncOperationType) {
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         operationButtonsStackView.isHidden = true
         backupDateLabel.isHidden = true
         manageContactsButton.isHidden = true
