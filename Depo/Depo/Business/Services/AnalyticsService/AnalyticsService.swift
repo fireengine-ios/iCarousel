@@ -117,10 +117,10 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
-    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
+    func trackEventTimely(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?, uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
     func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
@@ -129,7 +129,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackSupportEvent(screenType: SupportFormScreenType, subject: SupportFormSubjectTypeProtocol, isSupportForm: Bool)
     func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?)
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: String)
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -137,7 +137,7 @@ extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
         prepareDimentionsParametrs(screen: screen, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            Analytics.logEvent("screenView", parameters: dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.screen.key, parameters: dimentionParametrs)
         }
     }
     
@@ -147,7 +147,7 @@ extension AnalyticsService: AnalyticsGA {
         prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics,
                                    isPaymentMethodNative: isPaymentMethodNative) { parametrs in
                                     
-            Analytics.logEvent("screenView", parameters: parametrs)
+            Analytics.logEvent(GACustomEventsType.screen.key, parameters: parametrs)
         }
     }
     
@@ -159,6 +159,7 @@ extension AnalyticsService: AnalyticsGA {
                                             errorType: String? = nil,
                                             dailyDrawleft: Int? = nil,
                                             totalDraw: Int? = nil,
+                                            itemsOperationCount: GADementionValues.ItemsOperationCount? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -259,7 +260,8 @@ extension AnalyticsService: AnalyticsGA {
                 isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
                 isSpotifyEnabled: isSpotifyEnabled,
                 dailyDrawleft: dailyDrawleft,
-                totalDraw: totalDraw).productParametrs)
+                totalDraw: totalDraw,
+                itemsOperationCount: itemsOperationCount).productParametrs)
         }
     }
     
@@ -303,7 +305,7 @@ extension AnalyticsService: AnalyticsGA {
                                    downloadsMetrics: nil,
                                    uploadsMetrics: nil,
                                    isPaymentMethodNative: false) { dimentionParametrs in
-            Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.purchase.key, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
     
@@ -332,59 +334,55 @@ extension AnalyticsService: AnalyticsGA {
                                    downloadsMetrics: nil,
                                    uploadsMetrics: nil,
                                    isPaymentMethodNative: true) { dimentionParametrs in
-            Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.purchase.key, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
         
     }
     
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
         let eventTempoValue = eventValue ?? ""
 ///       might be needed in the future
 //        if let unwrapedEventValue = eventValue {
 //            eventTempoValue = "\(unwrapedEventValue)"
 //        }
         prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : eventCategory.text,
-                "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel.text,
-                "eventValue" : eventTempoValue
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: eventCategory,
+                                            action: eventActions,
+                                            label: eventLabel,
+                                            value: eventTempoValue)
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: String) {
-        
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String) {
+
         prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : eventCategory.text,
-                "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: eventCategory,
+                                            action: eventActions,
+                                            label: .custom(eventLabel))
+
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
     func trackLoginEvent(loginType: GADementionValues.login? = nil, error: LoginResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, loginType: loginType, errorType: error?.dimensionValue) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : GAEventCantegory.functions.text,
-                "eventAction" : GAEventAction.login.text,
-                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: .functions,
+                                            action: .login,
+                                            label: .result(error))
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
     func trackSignupEvent(error: SignupResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : GAEventCantegory.functions.text,
-                "eventAction" : GAEventAction.register.text,
-                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: .functions,
+                                            action: .register,
+                                            label: .result(error))
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
@@ -396,12 +394,11 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackImportEvent(error: SpotifyResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : GAEventCantegory.functions.text,
-                "eventAction" : GAEventAction.connectedAccounts.text,
-                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: .functions,
+                                            action: .connectedAccounts,
+                                            label: .result(error))
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
@@ -462,11 +459,11 @@ extension AnalyticsService: AnalyticsGA {
                                          AnalyticsParameterItemList : analyticasItemList]
         
         prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce + dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.selectContent.key, parameters: ecommerce + dimentionParametrs)
         } 
     }
     
-    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Double = 60.0) {
+    func trackEventTimely(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Double = 60.0) {
         ///every minute by default
         if innerTimer != nil {
             stopTimelyTracking()
@@ -487,10 +484,10 @@ extension AnalyticsService: AnalyticsGA {
     @objc func timerStep(_ timer: Timer) {
         privateQueue.async { [weak self] in
             guard
-                let `self` = self,
+                let self = self,
                 timer.isValid,
                 let unwrapedUserInfo = timer.userInfo as? [String: Any],
-                let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
+                let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCategory,
                 let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,
                 let eventLabel = unwrapedUserInfo[GACustomEventKeys.label.key] as? GAEventLabel
                 else {
@@ -519,11 +516,9 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?) {
         prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            var parametrs: [String: Any] = [
-                "eventCategory" : GAEventCantegory.functions.text,
-                "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel.text
-            ]
+            var parametrs = self.parameters(category: .functions,
+                                            action: eventActions,
+                                            label: eventLabel)
             
             if let trackNumber = trackNumber {
                 parametrs[GAMetrics.trackNumber.text] = trackNumber
@@ -533,35 +528,108 @@ extension AnalyticsService: AnalyticsGA {
                 parametrs[GAMetrics.playlistNumber.text] = playlistNumber
             }
             
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
     func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?) {
         prepareDimentionsParametrs(screen: nil, dailyDrawleft: dailyDrawleft, totalDraw: totalDraw) { dimentionParametrs in
-            let parametrs: [String: Any] = [
-                "eventCategory" : GAEventCantegory.functions.text,
-                "eventAction" : GAEventAction.photopickAnalysis.text,
-                "eventLabel" : eventLabel.text
-            ]
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            let parametrs = self.parameters(category: .functions,
+                                            action: .photopickAnalysis,
+                                            label: eventLabel)
+
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?) {
+    func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?) {
         prepareDimentionsParametrs(screen: nil) { dimentionParametrs in
-            var parametrs: [String: Any] = [
-                "eventCategory" : eventCategory.text,
-                "eventAction" : eventActions.text,
-                "eventLabel" : eventLabel.text
-            ]
+            var parametrs = self.parameters(category: eventCategory,
+                                            action: eventActions,
+                                            label: eventLabel)
             
             if let errorType = errorType {
                 parametrs[GAMetrics.errorType.text] = errorType.text
             }
             
-            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
+    }
+    
+    func trackFileOperationGAEvent(operationType: GAOperationType, items: [Item]) {
+        var set = Set(items)
+        operationType.checkingTypes.forEach { type in
+            let typeItems = getItems(for: type, in: set)
+            if !typeItems.isEmpty {
+                trackFileOperationGAEvent(operationType: operationType,
+                                          itemsType: type,
+                                          itemsCount: typeItems.count)
+                set.subtract(typeItems)
+            }
+        }
+    }
+    
+    private func getItems(for type: GAEventLabel.FileType, in set: Set<Item>) -> Set<Item> {
+        let items: Set<Item>
+        switch type {
+        case .folder:
+            items = set.filter { $0.isFolder == true }
+        case .document:
+            items = set.filter { $0.fileType.isDocument }
+        case .music:
+            items = set.filter { $0.fileType == .audio }
+        case .photo:
+            items = set.filter { $0.fileType == .image }
+        case .video:
+            items = set.filter { $0.fileType == .video && $0.metaData?.isVideoSlideshow == false}
+        case .story:
+            items = set.filter { $0.fileType == .video && $0.metaData?.isVideoSlideshow == true }
+        default:
+            items = []
+        }
+        return items
+    }
+    
+    func trackFileOperationGAEvent(operationType: GAOperationType, itemsType: GAEventLabel.FileType, itemsCount: Int) {
+        let itemsOperation = GADementionValues.ItemsOperationCount(count: itemsCount, operationType: operationType)
+        prepareDimentionsParametrs(screen: nil, itemsOperationCount: itemsOperation) { dimentionParameters in
+            let parameters = self.parameters(category: .functions,
+                                             action: .fileOperation(operationType),
+                                             label: .fileTypeOperation(itemsType))
+
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parameters + dimentionParameters)
+        }
+    }
+    
+    func trackFileOperationPopupGAEvent(operationType: GAOperationType, label: GAEventLabel) {
+        prepareDimentionsParametrs(screen: nil) { dimentionParameters in
+            let popupParameters = self.parameters(category: .popUp,
+                                                  action: .fileOperationPopup(operationType),
+                                                  label: label)
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: popupParameters + dimentionParameters)
+        }
+    }
+    
+    //MARK: - Helpers
+    
+    private func parameters(category: GAEventCategory?, action: GAEventAction?, label: GAEventLabel?, value: String? = nil) -> [String: Any] {
+        var result = [String: Any]()
+        
+        if let category = category {
+            result[GACustomEventKeys.category.key] = category.text
+        }
+        if let action = action {
+            result[GACustomEventKeys.action.key] = action.text
+        }
+        if let label = label {
+            result[GACustomEventKeys.label.key] = label.text
+        }
+        if let value = value {
+            result[GACustomEventKeys.value.key] = value
+        }
+
+        return result
     }
 }
 
