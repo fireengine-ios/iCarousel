@@ -199,6 +199,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SearchScreen())
         analyticsManager.logScreen(screen: .search)
         analyticsManager.trackDimentionsEveryClickGA(screen: .search)
     }

@@ -285,6 +285,7 @@ final class SpotifyRoutingService: NSObject {
         }
         switch result {
         case .success(_):
+            
             let status = GAEventLabel.success.text
 
             self.analyticsService.trackSpotify(eventActions: .connectedAccounts,

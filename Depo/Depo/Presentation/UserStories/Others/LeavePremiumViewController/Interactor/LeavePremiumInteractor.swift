@@ -78,6 +78,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
         case .middle:
             screenTypeGA = .standartPlusAccountDetails
         case .premium:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PremiumDetailsScreen())
             screenTypeGA = .premiumAccountDetails
         }
         analyticsService.logScreen(screen: screenTypeGA)

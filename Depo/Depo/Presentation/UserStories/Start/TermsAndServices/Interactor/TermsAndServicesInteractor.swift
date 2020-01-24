@@ -82,6 +82,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.EulaScreen())
         analyticsService.logScreen(screen: .termsAndServices)
         analyticsService.trackDimentionsEveryClickGA(screen: .termsAndServices)
     }

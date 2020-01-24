@@ -89,7 +89,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        self.trackPhotoVideoScreen(isPhoto: isPhoto)
+        
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
@@ -229,13 +231,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func showDetail(at indexPath: IndexPath) {
-        // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         guard canShowDetail else {
             return
         }
         
         canShowDetail = false
-        trackClickOnPhotoOrVideo(isPhoto: true)
+        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
             self?.dataSource.getObject(at: indexPath) { [weak self] object in
@@ -272,6 +273,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
+    }
+    
+    private func trackPhotoVideoScreen(isPhoto: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: isPhoto ? NetmeraEvents.Screens.PhotosScreen() : NetmeraEvents.Screens.VideosScreen())
+        analyticsManager.logScreen(screen: isPhoto ? .photos : .videos)
+        analyticsManager.trackDimentionsEveryClickGA(screen: isPhoto ? .photos : .videos)
     }
     
     private func showSearchScreen() {

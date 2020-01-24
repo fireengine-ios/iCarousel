@@ -27,6 +27,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     func trackScreen(isTimerExpired: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPSignupScreen())
         analyticsService.logScreen(screen: .signUpOTP)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }

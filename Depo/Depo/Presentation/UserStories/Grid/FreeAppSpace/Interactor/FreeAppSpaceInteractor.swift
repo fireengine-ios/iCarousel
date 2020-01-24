@@ -19,6 +19,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         if isDeleteRequestRunning {
             return
         }
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FreeUpSpace(count: selectedItems.count))
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
         checkAndDelete(items: selectedItems)
@@ -142,6 +143,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FreeUpSpaceScreen())
         analyticsManager.logScreen(screen: .freeAppSpace)
         analyticsManager.trackDimentionsEveryClickGA(screen: .freeAppSpace)
     }

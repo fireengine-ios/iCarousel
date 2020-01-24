@@ -395,6 +395,25 @@ final class OverlayStickerImageView: UIImageView {
         })
         return message
     }
+    
+    func getAttachmentGifStickersIDs() -> (gifsIDs: [String], stickersIDs: [String]) {
+        
+        let items = attachments.map{ $0.item }
+        let keys = Set(items)
+        var appliedGifsIds = [String]()
+        var appliedStickersIDs = [String]()
+        
+        keys.forEach { key in
+            if key.type == .gif {
+                appliedGifsIds.append("\(key.id)")
+            } else {
+                appliedStickersIDs.append("\(key.id)")
+            }
+        }
+        
+        return (gifsIDs: appliedGifsIds, stickersIDs: appliedGifsIds)
+        
+    }
 }
 
 extension OverlayStickerImageView: UIGestureRecognizerDelegate {
