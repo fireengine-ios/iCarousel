@@ -166,11 +166,15 @@ final class LoadingImageView: UIImageView {
             return
         }
         
+        cancelLoadRequest()
+
         if !smooth {
             originalImage = nil
             activity.startAnimating()
         }
-
+        
+        self.path = object.patchToPreview
+        
         url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
             self?.finishLoading(data: data, animated: smooth)
         })
