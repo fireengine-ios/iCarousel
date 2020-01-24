@@ -5934,6 +5934,10 @@
 		B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57D854023D9EFBE0057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
+		B57D854123D9EFC00057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
+		B57D854223D9EFC10057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
+		B57D854323D9EFC20057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B58533192397DD6000867B5B /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
@@ -25147,6 +25151,7 @@
 				0303A7C32397D0D000907F42 /* polaroid_yeni@3x.png in Resources */,
 				0303A7C42397D0D000907F42 /* VisualMusicPlayerViewController.xib in Resources */,
 				0303A7C52397D0D000907F42 /* InstaPickHashtagCell.xib in Resources */,
+				B57D854123D9EFC00057B5D6 /* Localizable.strings in Resources */,
 				0303A7C62397D0D000907F42 /* beyaz_cerceve@2x.png in Resources */,
 				0303A7C72397D0D000907F42 /* SpotlightViewController.xib in Resources */,
 				0303A7C82397D0D000907F42 /* serbest_cizgi@3x.png in Resources */,
@@ -26140,6 +26145,7 @@
 				73FE51FF22CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */,
 				8C06B0602008AD71003D8E05 /* paylas_bip@2x.png in Resources */,
 				8C06B0342008AD71003D8E05 /* Orta.png in Resources */,
+				B57D854023D9EFBE0057B5D6 /* Localizable.strings in Resources */,
 				CE51AD6A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
 				8C06B0202008AD71003D8E05 /* lifebox@2x.png in Resources */,
@@ -27339,6 +27345,7 @@
 				CE784EE322A685FB00662219 /* sticker_close@2x.png in Resources */,
 				CE784EE422A685FB00662219 /* PasscodeSettingsViewController.xib in Resources */,
 				CE784EE522A685FB00662219 /* Orta_Selected.png in Resources */,
+				B57D854223D9EFC10057B5D6 /* Localizable.strings in Resources */,
 				CE784EE622A685FB00662219 /* turuncu@2x.png in Resources */,
 				CE784EE722A685FB00662219 /* rotate@3x.png in Resources */,
 				CE784EE822A685FB00662219 /* header_icon.png in Resources */,
@@ -28626,6 +28633,7 @@
 				CF8B72BD23CBCA280021B021 /* sticker_close@2x.png in Resources */,
 				CF8B72BE23CBCA280021B021 /* PasscodeSettingsViewController.xib in Resources */,
 				CF8B72BF23CBCA280021B021 /* Orta_Selected.png in Resources */,
+				B57D854323D9EFC20057B5D6 /* Localizable.strings in Resources */,
 				CF8B72C023CBCA280021B021 /* turuncu@2x.png in Resources */,
 				CF8B72C123CBCA280021B021 /* rotate@3x.png in Resources */,
 				CF8B72C223CBCA280021B021 /* header_icon.png in Resources */,
