@@ -27,7 +27,7 @@
 "You successfully set your passcode" = "You successfully set your passcode";
 "Passcode is changed successfully" = "Passcode is changed successfully";
 "Please repeate your new lifebox passcode" = "Please re-enter your new lifebox passcode";
-"Please enter your lifebox passcode" = "Please enter your lifebox passcode";
+"Please enter your lifebox passcode" = "Please enter your passcode";
 "lifebox Passcode" = "lifebox Passcode";
 "Change Passcode" = "Change Passcode";
 "Passcode" = "Passcode";
@@ -1324,7 +1324,7 @@
 "confirmation_popup_title_hide_single_album" = "Hide Album";
 "confirmation_popup_message_hide_single_album" = "You will not see this album...";
 "smash_screen_title" = "Smash effect";
-"smash_popup_message" = "This edited photo will be saved as a new photo in your device gallery";
+"smash_popup_message" = "This edited item will be uploaded to lifebox and saved to device gallery as a new item";
 "Smash" = "Smash";
 "photos_hide_success_message" = "Items are hidden successfully";
 "Unhide" = "Unhide";
@@ -1354,7 +1354,7 @@
 "smash_successed_alert_second_title" = "What would you like to do?";
 "smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 "smash_successed_simple_alert_title" = "Saved successfully!";
-"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+"smash_successed_simple_alert_description" = "Kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 
 /*carousel pager*/
 "carousel_view_first_page_title" = "Merge your photos. Lorem ipsum! 1";
@@ -1385,5 +1385,3 @@
 "unhide_popup_success_title" = "Unhide Successful";
 "unhide_popup_success_text" = " This items is back in your gallery";
 "delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
-"turkcell_updater_update_required_title" = "Update required";
-"turkcell_updater_update_required_message" = "Application will be closed";
