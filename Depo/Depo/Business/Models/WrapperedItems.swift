@@ -106,7 +106,7 @@ enum ApplicationType: String {
 //    }
 }
 
-enum FileType: Equatable {
+enum FileType: Hashable, Equatable {
     case unknown
     case image
     case video

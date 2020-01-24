@@ -105,6 +105,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
     }
     
     @IBAction func importSwitchValueChanged(_ sender: UISwitch) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .facebookImport))
         if sender.isOn {
             presenter.startImport()
         } else {

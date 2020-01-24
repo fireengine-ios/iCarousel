@@ -99,6 +99,7 @@ extension LoginSettingsInteractor: LoginSettingsInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.LoginSettingsScreen())
         analyticsManager.logScreen(screen: .turkcellSecurity)
         analyticsManager.trackDimentionsEveryClickGA(screen: .turkcellSecurity)
     }

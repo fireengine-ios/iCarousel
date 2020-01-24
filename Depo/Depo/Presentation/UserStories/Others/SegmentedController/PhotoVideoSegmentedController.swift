@@ -42,6 +42,7 @@ final class PhotoVideoSegmentedController: SegmentedController {
                                                                               analyzesCount: analyzesCount,
                                                                               isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
         hideSpinner()
+        
         present(instapickDetailControlller, animated: true, completion: nil)
     }
        
@@ -57,5 +58,25 @@ extension PhotoVideoSegmentedController: InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult) {
         showSpinner()
         handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
+        
+        let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
+        if analyzeResult.analyzesCount.isFree {
+            analysisLeftUserDependent = .premium
+        } else {
+            analysisLeftUserDependent = .regular(analysisLeft: analyzeResult.analyzesCount.left)
+        }
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Photopick(leftAnalysis: analysisLeftUserDependent, status: .success))
+    }
+    
+    func analyzeDidFail() {
+        
+        let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
+        if AuthoritySingleton.shared.accountType.isPremium {
+            analysisLeftUserDependent = .premium
+        } else {
+            analysisLeftUserDependent = .regular(analysisLeft: nil)
+        }
+              
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Photopick(leftAnalysis: analysisLeftUserDependent, status: .failure))
     }
 }

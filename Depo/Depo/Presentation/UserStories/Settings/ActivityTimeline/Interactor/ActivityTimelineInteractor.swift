@@ -28,6 +28,7 @@ extension ActivityTimelineInteractor: ActivityTimelineInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ActivitiyTimelineScreen())
         analyticsManager.logScreen(screen: .activityTimeline)
         analyticsManager.trackDimentionsEveryClickGA(screen: .activityTimeline)
     }

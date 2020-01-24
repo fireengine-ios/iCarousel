@@ -61,6 +61,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     //MARK: tracking
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HomePageScreen())
         analyticsService.logScreen(screen: .homePage)
         analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
     }

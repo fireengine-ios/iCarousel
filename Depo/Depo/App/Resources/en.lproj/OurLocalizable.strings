@@ -1385,3 +1385,5 @@
 "unhide_popup_success_title" = "Unhide Successful";
 "unhide_popup_success_text" = " This items is back in your gallery";
 "delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"turkcell_updater_update_required_title" = "Update required";
+"turkcell_updater_update_required_message" = "Application will be closed";

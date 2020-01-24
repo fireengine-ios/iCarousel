@@ -57,7 +57,7 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
                 DispatchQueue.toMain {
                     self?.output?.disconnectionSuccess()
                 }
-                
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .facebook))
                 self?.stopImport()
                 
             case .failed(let error):
@@ -110,6 +110,7 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     private func startImport() {
         fbService.requestStart(success: { [weak self] _ in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .facebook))
             DispatchQueue.main.async {
                 self?.output?.startImportSuccess()
             }
@@ -122,6 +123,7 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     private func stopImport() {
         fbService.requestStop(success: { [weak self] _ in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .facebook))
             DispatchQueue.main.async {
                 MenloworksTagsService.shared.facebookImport(isOn: false)
                 self?.output?.stopImportSuccess()

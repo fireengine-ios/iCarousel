@@ -87,6 +87,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactUsScreen())
         analyticsManager.logScreen(screen: .contactUS)
         analyticsManager.trackDimentionsEveryClickGA(screen: .contactUS)
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .feedbackForm, eventLabel: .feedbackOpen)

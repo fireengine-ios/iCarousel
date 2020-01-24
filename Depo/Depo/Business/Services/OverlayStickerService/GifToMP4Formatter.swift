@@ -30,13 +30,6 @@ final class GIF2MP4 {
         return CGSize(width: floor(width / 16) * 16, height: floor(height / 16) * 16)
     }
     
-    init?(images: [UIImage]) {
-        images.forEach({
-            self.images.append($0.cgImage)
-        })
-        self.images.append(contentsOf: self.images)
-    }
-    
     private func prepare() {
         
         let fileManager = FileManager.default
@@ -84,8 +77,14 @@ final class GIF2MP4 {
         videoWriter.startSession(atSourceTime: kCMTimeZero)
     }
     
-    func convertAndExport(fileName: String , completion: @escaping (URL?) -> Void ) {
+    func convertAndExport(images: [UIImage], fileName: String , completion: @escaping (URL?) -> Void ) {
         
+        images.forEach({
+             self.images.append($0.cgImage)
+        })
+        
+        self.images.append(contentsOf: self.images)
+    
         outputURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(fileName).mp4")
         prepare()
         
@@ -98,7 +97,11 @@ final class GIF2MP4 {
         var delay = 0.0
         let queue = DispatchQueue(label: "mediaInputQueue")
         
-        videoWriterInput.requestMediaDataWhenReady(on: queue) {
+        videoWriterInput.requestMediaDataWhenReady(on: queue) { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
     
             while index < self.images.count {
                 
