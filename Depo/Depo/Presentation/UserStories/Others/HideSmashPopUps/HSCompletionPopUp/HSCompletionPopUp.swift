@@ -274,14 +274,14 @@ final class HSCompletionPopUp: BasePopUpController {
     }
 
     @IBAction private func onOpenPeopleAlbumTap(_ sender: Any) {
-        trackSmashEvents(isCanseled: false)
+        trackOpenPeopleAlbumEvent(isCanceled: false)
         close(isFinalStep: false) {
             self.delegate?.openPeopleAlbumIfPossible()
         }
     }
 
     @IBAction private func onCloseTap(_ sender: Any) {
-        trackSmashEvents(isCanseled: true)
+        trackOpenPeopleAlbumEvent(isCanceled: true)
         close()
     }
 
@@ -291,10 +291,20 @@ final class HSCompletionPopUp: BasePopUpController {
     }
 
     
-    private func trackSmashEvents(isCanseled: Bool) {
-        if mode == .smash {
-            analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashSuccessPopUp, eventLabel: isCanseled ? .cancel : .viewPeopleAlbum)
+    private func trackOpenPeopleAlbumEvent(isCanceled: Bool) {
+        switch mode {
+        case .smash:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .smashSuccessPopUp,
+                                                eventLabel: isCanceled ? .cancel : .viewPeopleAlbum)
+        case .hiddenAlbums:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .saveHiddenSuccessPopup,
+                                                eventLabel: isCanceled ? .cancel : .viewPeopleAlbum)
+        default:
+            break
         }
+        
     }
 }
 
