@@ -11,8 +11,9 @@ import Foundation
 
 final class TurkcellUpdaterService {
     
-    func startUpdater(controller: UIViewController?, completion: @escaping VoidHandler) {
+    func startUpdater(controller: UIViewController?, completion: @escaping BoolHandler) {
         UpdaterController.sharedInstance()?.checkUpdateURL(RouteRequests.updaterUrl(), preferredLanguageForTitles: nil, parentViewController: controller, completionHandler: { action in
+            var shouldProceed = true
             debugLog("UpdaterController: \(action)")
             switch action {
             case .none:
@@ -24,6 +25,7 @@ final class TurkcellUpdaterService {
                 
             case .updateChosen:
                 /// OK or Install
+                shouldProceed = false
                 print("UpdaterController: updateChosen")
                 
             case .updateCheckCompleted:
@@ -31,7 +33,7 @@ final class TurkcellUpdaterService {
                 print("UpdaterController: updateCheckCompleted")
             }
             
-            completion()
+            completion(shouldProceed)
         })
     }
     

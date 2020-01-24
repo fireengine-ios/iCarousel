@@ -63,6 +63,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     }
     
     private func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ImportPhotosScreen())
+//        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ConnectedAccountsScreen())
         analyticsService.logScreen(screen: .connectedAccounts)
         analyticsService.trackDimentionsEveryClickGA(screen: .connectedAccounts)
     }
@@ -84,7 +86,6 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 // MARK: - SocialConnectionCellDelegate
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
-        
         /// DispatchQueue.toMain invokes too fast
         DispatchQueue.main.async {
             if section.set(expanded: true) {

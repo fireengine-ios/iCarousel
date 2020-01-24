@@ -14,4 +14,5 @@ protocol SplashInteractorInput {
     var isPasscodeEmpty: Bool { get }
     func checkEmptyEmail()
     func updateUserLanguage()
+    func trackScreen()
 }

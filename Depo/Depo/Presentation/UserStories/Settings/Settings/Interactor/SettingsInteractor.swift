@@ -82,11 +82,13 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SettingsScreen())
         analyticsManager.logScreen(screen: .settings)
         analyticsManager.trackDimentionsEveryClickGA(screen: .settings)
     }
     
     func trackPhotoEdit() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ProfileEditScreen())
         analyticsManager.logScreen(screen: .settingsPhotoEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .settingsPhotoEdit)
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
