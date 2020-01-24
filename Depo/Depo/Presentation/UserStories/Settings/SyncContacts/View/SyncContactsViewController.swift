@@ -138,6 +138,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBAction func onDeleteDuplicatedTapped(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .deleteDuplicate))
         output.startOperation(operationType: .analyze)
     }
     
