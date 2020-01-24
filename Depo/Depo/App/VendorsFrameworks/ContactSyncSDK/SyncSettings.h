@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SyncConstants.h"
-#import "SyncStatus.h"
 
 typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
     SYNCDevelopmentEnvironment,
@@ -75,6 +74,12 @@ typedef NS_ENUM(NSUInteger, SYNCType) {
  * Backup periodically. Period is defined by this parameter
  */
 @property (nonatomic) SYNCPeriodic periodicBackup;
+
+@property NSString* countryCode;
+
+@property NSInteger bulk;
+
+@property (nonatomic) NSString* DEPO_URL;
 
 @property (nonatomic, copy) void (^callback)(id data);
 
