@@ -36,7 +36,7 @@ struct CreateOverlayStickersSuccessResult {
 
 typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
 
-protocol OverlayStickerImageViewdelegate {
+protocol OverlayStickerImageViewdelegate: class {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
 }
 
@@ -63,10 +63,9 @@ final class OverlayStickerImageView: UIImageView {
     private var startSizeSelectedView: CGSize?
     private var startRotatePosition: CGFloat?
     private var selectedSticker: UIImageView?
-    var stickersDelegate: OverlayStickerImageViewdelegate?
+    weak var stickersDelegate: OverlayStickerImageViewdelegate?
     
     private let stickerSize = CGSize(width: 50, height: 50)
-    private lazy var overlayAnimationService = OverlayAnimationService()
     private let downloader = ImageDownloder()
     private lazy var impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
     private var isImpactOccurred: Bool =  false
@@ -81,16 +80,18 @@ final class OverlayStickerImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupGestureRecognizers()
-        isUserInteractionEnabled = true
-        self.backgroundColor = .black
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private func setupView() {
         setupGestureRecognizers()
         isUserInteractionEnabled = true
-        self.backgroundColor = .black
+        backgroundColor = .black
     }
     
     func addAttachment(item: SmashStickerResponse, attachmentType: AttachedEntityType, completion: @escaping VoidHandler) {
@@ -106,57 +107,17 @@ final class OverlayStickerImageView: UIImageView {
         subview.imageView.removeFromSuperview()
     }
     
-    func overlayStickers(resultName: String, completion: @escaping (CreateOverlayStickersResult) -> () ) {
+    func getCondition() -> (originalImage: UIImage, attachments: [UIImageView])? {
         
-            if self.subviews.contains(where: { $0 is YYAnimatedImageView}) {
-                self.subviews.forEach({ $0.isHidden = true})
-                
-                guard let img = UIImage.imageWithView(view: self) else {
-                    return completion(.failure(.unknown))
-                }
-                
-                self.subviews.forEach({ $0.isHidden = false})
-                
-                let attachment = self.attachments.map({ $0.imageView})
-                
-                self.overlayAnimationService.combine(attachments: attachment, resultName: resultName, originalImage: img) { createStickerResult in
-                    completion(createStickerResult)
-                }
-            } else {
-                
-                guard let sticker = UIImage.imageWithView(view: self) else {
-                    completion(.failure(.unknown))
-                    return
-                }
-                
-                self.saveImage(image: sticker, fileName: resultName, completion: completion)
-            }
-    }
-    
-    private func saveImage(image: UIImage, fileName: String, completion: (CreateOverlayStickersResult) -> ()) {
-        guard let data = image.jpeg(.highest) ?? UIImagePNGRepresentation(image)  else {
-            completion(.failure(.unknown))
-            return
+        subviews.forEach({ $0.isHidden = true})
+
+        guard let img = UIImage.imageWithView(view: self) else {
+            return nil
         }
         
-        let format = ImageFormat.get(from: data) == .jpg ? ".jpg" : ".png"
-        
-        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
-            completion(.failure(.unknown))
-            return
-        }
-        
-        do {
-            guard let path = directory.appendingPathComponent(fileName + format) else {
-                assertionFailure()
-                completion(.failure(.unknown))
-                return
-            }
-            try data.write(to: path)
-            completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
-        } catch {
-            completion(.failure(.unknown))
-        }
+        subviews.forEach { $0.isHidden = false }
+        let attachment = attachments.map { $0.imageView }
+        return (img, attachment)
     }
     
     private func createGifAttachment(item: SmashStickerResponse, completion: @escaping VoidHandler) {
@@ -164,10 +125,7 @@ final class OverlayStickerImageView: UIImageView {
         
         downloader.getImageData(url: item.path) { [weak self] data in
             
-            guard
-                let self = self,
-                let imageData = data
-            else {
+            guard let self = self, let imageData = data else {
                 return
             }
 
@@ -194,11 +152,7 @@ final class OverlayStickerImageView: UIImageView {
     
         downloader.getImageData(url: item.path) { [weak self] data in
             
-            guard
-                let self = self,
-                let imageData = data,
-                let image = UIImage(data: imageData)
-            else {
+            guard let self = self, let imageData = data, let image = UIImage(data: imageData) else {
                 return
             }
             

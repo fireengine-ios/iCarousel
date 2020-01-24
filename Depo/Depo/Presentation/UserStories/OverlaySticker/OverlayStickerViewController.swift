@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import YYImage
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
 final class OverlayStickerViewController: ViewController {
@@ -22,8 +23,9 @@ final class OverlayStickerViewController: ViewController {
     private let uploadService = UploadService()
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private let stickerService: SmashService = SmashServiceImpl()
-
+    private let stickerService = SmashServiceImpl()
+    private lazy var overlayAnimationService = OverlayAnimationService()
+    
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
         button.setImage(UIImage(named: "applyIcon"), for: .normal)
@@ -52,7 +54,7 @@ final class OverlayStickerViewController: ViewController {
         setupImage()
         navigationController?.navigationBar.isHidden = true
         
-        self.view.backgroundColor = .black
+        view.backgroundColor = .black
         statusBarColor = .black
         overlayingStickerImageView.stickersDelegate = self
         overlayStickerViewControllerDataSource.delegate = self
@@ -99,8 +101,16 @@ final class OverlayStickerViewController: ViewController {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
             
             self.showSpinnerIncludeNavigationBar()
-            self.overlayingStickerImageView.overlayStickers(resultName: self.imageName ?? self.defaultName) { [weak self] result in
-                self?.saveResult(result: result)
+            
+            guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
+                assertionFailure()
+                return
+            }
+            
+            self.overlayStickers(resultName: self.imageName ?? self.defaultName,
+                                 originalImage: originalImage,
+                                 attachments: attachments) { [weak self] result in
+                                    self?.saveResult(result: result)
             }
         }
     }
@@ -150,11 +160,8 @@ final class OverlayStickerViewController: ViewController {
         smashCoordinator?.smashSuccessed()
     }
     
-    private func showPhotoVideoPreview(item: WrapData?) {
-        guard let item = item else {
-            return
-        }
-
+    private func showPhotoVideoPreview(item: WrapData) {
+        
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
         
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -175,10 +182,8 @@ final class OverlayStickerViewController: ViewController {
                         self?.hideSpinnerIncludeNavigationBar()
                         self?.close { [weak self] in
                             if let itemToShow = remoteItem {
-                                RouterVC().navigationController?.dismiss(animated: false, completion: {
-                                    self?.analyticsService.logScreen(screen: .smashPreview)
-                                    self?.showPhotoVideoPreview(item: itemToShow)
-                                })
+                                self?.showPhotoVideoPreview(item: itemToShow)
+                                self?.analyticsService.logScreen(screen: .smashPreview)
                             }
                         }
                     }
@@ -348,6 +353,50 @@ extension OverlayStickerViewController {
                 let wrapData = WrapData(mediaItem: savedLocalItem, asset: asset)
                 completion(.success(wrapData))
             })
+        }
+    }
+}
+
+extension OverlayStickerViewController {
+    
+    private func overlayStickers(resultName: String, originalImage: UIImage, attachments: [UIImageView], completion: @escaping (CreateOverlayStickersResult) -> ()) {
+        
+        if attachments.contains(where: { $0 is YYAnimatedImageView}) {
+        overlayAnimationService.combine(attachments: attachments, resultName: resultName, originalImage: originalImage, completion: completion)
+            
+        } else {
+            
+            guard let image = UIImage.imageWithView(view: overlayingStickerImageView) else {
+                completion(.failure(.unknown))
+                return
+            }
+            saveImage(image: image, fileName: resultName, completion: completion)
+        }
+    }
+    
+    private func saveImage(image: UIImage, fileName: String, completion: (CreateOverlayStickersResult) -> ()) {
+        guard let data = image.jpeg(.highest) ?? UIImagePNGRepresentation(image) else {
+            completion(.failure(.unknown))
+            return
+        }
+        
+        let format = ImageFormat.get(from: data) == .jpg ? ".jpg" : ".png"
+        
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            completion(.failure(.unknown))
+            return
+        }
+        
+        do {
+            guard let path = directory.appendingPathComponent(fileName + format) else {
+                assertionFailure()
+                completion(.failure(.unknown))
+                return
+            }
+            try data.write(to: path)
+            completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
+        } catch {
+            completion(.failure(.unknown))
         }
     }
 }
