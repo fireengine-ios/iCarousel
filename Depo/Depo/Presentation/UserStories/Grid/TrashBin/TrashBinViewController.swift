@@ -48,7 +48,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .trashBin))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .trashBin))
         
         if dataSource.isSelectionStateActive {
             navigationBarWithGradientStyle()
@@ -238,13 +238,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .restore))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems = dataSource.allSelectedItems
         interactor.restore(items: selectedItems)
     }
@@ -275,7 +275,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerRestore(item: Item?) {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .restore))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems: [BaseDataSourceItem]
         if let item = item {
             selectedItems = [item]
@@ -287,7 +287,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerDelete(item: Item?) {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems: [BaseDataSourceItem]
         if let item = item {
             selectedItems = [item]
@@ -299,7 +299,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerInfo(item: Item?) {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .info))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
         guard let item = item else {
             return
         }

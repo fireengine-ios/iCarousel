@@ -58,7 +58,7 @@ final class FreeUpSpacePopUp: BaseCardView {
     }
     
     @IBAction func onFreeAppSpaceButton() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .freeUpSpace))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
         RouterVC().showFreeAppSpace()
     }
     

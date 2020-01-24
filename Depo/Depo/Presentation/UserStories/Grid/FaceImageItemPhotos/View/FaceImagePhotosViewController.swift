@@ -64,7 +64,7 @@ import UIKit
     
     @objc func hideAlbum() {
         if let output = output as? FaceImagePhotosViewOutput {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hide))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
             output.hideAlbum()
         }
     }

@@ -633,9 +633,9 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class ButonClick: NetmeraEvent {
+    final class ButtonClick: NetmeraEvent {
         
-        private let kButonClickKey = "jpj"
+        private let kButtonClickKey = "jpj"
         
         @objc var buttonName = ""
         
@@ -655,7 +655,7 @@ extension NetmeraEvents.Actions {
         }
         
         override var eventKey : String {
-            return kButonClickKey
+            return kButtonClickKey
         }
     }
     

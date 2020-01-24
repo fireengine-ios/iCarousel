@@ -45,7 +45,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .hiddenBin))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hiddenBin))
         
         navigationBarWithGradientStyle()
         
@@ -207,12 +207,12 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
     func onBottomBarMoveToTrash() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         showDeletePopup()
     }
     
     func onBottomBarUnhide() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .unhide))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
         showUnhidePopup()
     }
 }
@@ -242,12 +242,12 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerUnhide() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .unhide))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
         showUnhidePopup()
     }
     
     func onThreeDotsManagerMoveToTrash() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButonClick(buttonName: .delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         showDeletePopup()
     }
 }
