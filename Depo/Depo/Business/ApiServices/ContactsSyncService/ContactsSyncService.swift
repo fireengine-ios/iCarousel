@@ -27,6 +27,7 @@ class ContactsSyncService: BaseRequestService {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
+        SyncSettings.shared().bulk = NumericConstants.contactSyncBulk
         
         SyncSettings.shared().callback = { [weak self] response in
             self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
@@ -129,16 +130,16 @@ class ContactsSyncService: BaseRequestService {
         case .backup:
             return ContactSync.SyncResponse(responseType: .backup,
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnServer as! Int,
-                                           newContactsNumber: SyncStatus.shared().createdContactsSent.count,
-                                           duplicatesNumber: SyncStatus.shared().updatedContactsSent.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnServer.count,
+                                           newContactsNumber: SyncStatus.shared().createdOnServer,
+                                           duplicatesNumber: SyncStatus.shared().updatedOnServer,
+                                           deletedNumber: SyncStatus.shared().deletedOnServer,
                                            date: Date())
         case .restore:
             return ContactSync.SyncResponse(responseType: .restore,
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnClient as! Int,
-                                           newContactsNumber: SyncStatus.shared().createdContactsReceived.count,
-                                           duplicatesNumber: SyncStatus.shared().updatedContactsReceived.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnDevice.count,
+                                           newContactsNumber: SyncStatus.shared().createdOnServer,
+                                           duplicatesNumber: SyncStatus.shared().updatedOnServer,
+                                           deletedNumber: SyncStatus.shared().deletedOnServer,
                                            date: nil)
             
         }
