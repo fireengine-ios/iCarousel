@@ -134,6 +134,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     }
     
     @IBAction func importSwitchValueChanged(_ sender: UISwitch) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .instagramImport))
         if sender.isOn {
             presenter.startInstagram()
         } else {

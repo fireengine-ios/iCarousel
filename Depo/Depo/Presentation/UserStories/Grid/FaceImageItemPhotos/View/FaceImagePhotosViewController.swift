@@ -64,6 +64,7 @@ import UIKit
     
     @objc func hideAlbum() {
         if let output = output as? FaceImagePhotosViewOutput {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
             output.hideAlbum()
         }
     }
@@ -207,10 +208,6 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     
     func setupHeader(with item: Item, status: ItemStatus?) {
         setupHeaderView(with: item, status: status)
-    }
-    
-    func dismiss() {
-        navigationController?.popViewController(animated: true)
     }
     
     func hiddenSlider(isHidden: Bool) {

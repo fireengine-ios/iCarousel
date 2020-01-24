@@ -186,6 +186,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
 
     // Hide
     private func showConfirmationPopUp() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HideConfirmPopUp())
         router.presentViewController(controller: confirmationPopUp)
     }
 

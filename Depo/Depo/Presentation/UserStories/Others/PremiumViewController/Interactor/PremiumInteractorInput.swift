@@ -24,4 +24,6 @@ protocol PremiumInteractorInput {
     func getResendToken(for offer: PackageModelResponse)
     
     func verifyOffer(_ offer: PackageModelResponse, token: String, otp: String)
+    
+    func trackScreen()
 }

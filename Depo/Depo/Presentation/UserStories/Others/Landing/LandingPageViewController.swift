@@ -121,6 +121,7 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     }
     
     private func trackScreen(pageNum: Int) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsService.logScreen(screen: .welcomePage(pageNum))
     }
     

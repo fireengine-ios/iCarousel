@@ -633,44 +633,23 @@ extension AnalyticsService: AnalyticsGA {
     }
 }
 
+//MARK: - Netmera
 protocol NetmeraProtocol {
-    static func updateUser()
-    static func startNetmera()
+   static func updateUser()
+   static func startNetmera()
+   static func sendNetmeraEvent(event: NetmeraEvent)
 }
 
 extension AnalyticsService: NetmeraProtocol {
     static func updateUser() {
-        let user = NetmeraUser()
-        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-        
-        Netmera.update(user)
+        NetmeraService.updateUser()
     }
     
     static func startNetmera() {
-        #if LIFEDRIVE
-        return
-        #endif
-        
-        debugLog("Start Netmera")
-        
-        #if DEBUG
-        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
-            assertionFailure("👉 CALL THIS FROM MAIN THREAD")
-        }
-        #endif
-        
-        Netmera.start()
-        
-        #if DEBUG
-        Netmera.setLogLevel(.debug)
-        #endif
-        
-        #if APPSTORE
-        Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
-        #elseif ENTERPRISE || DEBUG
-        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
-        #endif
-        
-        Netmera.setAppGroupName(SharedConstants.groupIdentifier)
+        NetmeraService.startNetmera()
+    }
+    
+    static func sendNetmeraEvent(event: NetmeraEvent) {
+        NetmeraService.sendEvent(event: event)
     }
 }

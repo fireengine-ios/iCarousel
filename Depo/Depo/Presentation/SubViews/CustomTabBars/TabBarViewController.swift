@@ -885,6 +885,7 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: controller)
 
         case .upload:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
             
             let controller = router.uploadPhotos()
@@ -905,7 +906,10 @@ extension TabBarViewController: TabBarActionHandler {
             
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder,
+                                                      soorceUUID: "",
+                                                      sortRule: currentVC.getCurrentSortRule(),
+                                                      type: .List)
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
@@ -931,6 +935,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }

@@ -101,6 +101,7 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
             }
             
         case .twoFactorAuth:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.TwoFactorAuthentication(action: isOn ? .on : .off))
             updateStatuses()
         }
     }

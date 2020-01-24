@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Netmera
 
 /// example of types in Info.plist
 //
@@ -45,6 +46,7 @@ final class ShareViewController: UIViewController, ShareController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        trackScreen()
         setupSharedItems()
         shareConfigurator.setup()
     }
@@ -54,6 +56,10 @@ final class ShareViewController: UIViewController, ShareController {
         setupPasscodeIfNeed()
     }
 
+    private func trackScreen() {
+        Netmera.send(NetmeraEvents.Screens.NativeSharefromGalleryScreen())
+    }
+    
     private func setupPasscodeIfNeed() {
         if shareConfigurator.isNeedToShowPasscode {
             shareWormholeListener.listenLogout { [weak self] in

@@ -36,14 +36,17 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
 
     override func trackScreen() {
         if remoteItems is PeopleItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PeopleScreen())
             analyticsManager.logScreen(screen: .peopleFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .peopleFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionFace)
         } else if remoteItems is ThingsItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ThingsScreen())
             analyticsManager.logScreen(screen: .thingsFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .thingsFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionObject)
         } else if remoteItems is PlacesItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PlacesScreen())
             analyticsManager.logScreen(screen: .placesFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .placesFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionPlace)
