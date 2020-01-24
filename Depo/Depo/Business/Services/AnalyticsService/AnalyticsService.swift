@@ -575,9 +575,9 @@ extension AnalyticsService: AnalyticsGA {
         case .photo:
             items = set.filter { $0.fileType == .image }
         case .video:
-            items = set.filter { $0.fileType == .video }
+            items = set.filter { $0.fileType == .video && $0.metaData?.isVideoSlideshow == false}
         case .story:
-            items = set.filter { $0.fileType == .video && $0.metaData?.videoSlideshow == true }
+            items = set.filter { $0.fileType == .video && $0.metaData?.isVideoSlideshow == true }
         default:
             return
         }
@@ -586,8 +586,8 @@ extension AnalyticsService: AnalyticsGA {
             trackFileOperationGAEvent(operationType: operationType,
                                       itemsType: type,
                                       itemsCount: items.count)
+            set.subtract(items)
         }
-        set.subtract(items)
     }
     
     func trackFileOperationGAEvent(operationType: GAOperationType, itemsType: GAEventLabel.FileType, itemsCount: Int) {
