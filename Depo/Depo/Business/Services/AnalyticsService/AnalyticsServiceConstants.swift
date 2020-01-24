@@ -1073,6 +1073,7 @@ enum GAEventLabel {
     
     case success
     case failure
+    case result(Error?)
     case feedbackOpen
     case feedbackSend
     case download(FileType)
@@ -1168,6 +1169,8 @@ enum GAEventLabel {
             return "Success"
         case .failure:
             return "Failure"
+        case .result(let error):
+            return error == nil ? "Success" : "Failure"
         case .feedbackOpen:
             return "Open"
         case .feedbackSend:

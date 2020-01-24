@@ -370,7 +370,7 @@ extension AnalyticsService: AnalyticsGA {
         prepareDimentionsParametrs(screen: nil, loginType: loginType, errorType: error?.dimensionValue) { dimentionParametrs in
             let parametrs = self.parameters(category: .functions,
                                             action: .login,
-                                            label: error == nil ? .success : .failure)
+                                            label: .result(error))
             
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
@@ -380,7 +380,7 @@ extension AnalyticsService: AnalyticsGA {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
             let parametrs = self.parameters(category: .functions,
                                             action: .register,
-                                            label: error == nil ? .success : .failure)
+                                            label: .result(error))
             
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
@@ -396,7 +396,7 @@ extension AnalyticsService: AnalyticsGA {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
             let parametrs = self.parameters(category: .functions,
                                             action: .connectedAccounts,
-                                            label: error == nil ? .success : .failure)
+                                            label: .result(error))
             
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
@@ -558,12 +558,18 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackFileOperationGAEvent(operationType: GAOperationType, items: [Item]) {
         var set = Set(items)
-        operationType.checkingTypes.forEach {
-            subtractingItemsAndTrackGAEvent(operationType: operationType, type: $0, set: &set)
+        operationType.checkingTypes.forEach { type in
+            let typeItems = getItems(for: type, in: set)
+            if !typeItems.isEmpty {
+                trackFileOperationGAEvent(operationType: operationType,
+                                          itemsType: type,
+                                          itemsCount: typeItems.count)
+                set.subtract(typeItems)
+            }
         }
     }
     
-    private func subtractingItemsAndTrackGAEvent(operationType: GAOperationType, type: GAEventLabel.FileType, set: inout Set<Item>) {
+    private func getItems(for type: GAEventLabel.FileType, in set: Set<Item>) -> Set<Item> {
         let items: Set<Item>
         switch type {
         case .folder:
@@ -579,15 +585,9 @@ extension AnalyticsService: AnalyticsGA {
         case .story:
             items = set.filter { $0.fileType == .video && $0.metaData?.isVideoSlideshow == true }
         default:
-            return
+            items = []
         }
-
-        if !items.isEmpty {
-            trackFileOperationGAEvent(operationType: operationType,
-                                      itemsType: type,
-                                      itemsCount: items.count)
-            set.subtract(items)
-        }
+        return items
     }
     
     func trackFileOperationGAEvent(operationType: GAOperationType, itemsType: GAEventLabel.FileType, itemsCount: Int) {
